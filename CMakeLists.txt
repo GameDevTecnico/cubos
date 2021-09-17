@@ -15,10 +15,23 @@ add_library(cubos ${CUBOS_SOURCE} ${CUBOS_INCLUDE})
 target_include_directories(cubos PUBLIC ${CUBOS_INCLUDE})
 
 # Dependencies
-find_package(glfw3 REQUIRED)
-find_package(glm REQUIRED)
-add_library(glad "lib/glad/src/glad.c")
-target_include_directories(glad PUBLIC "lib/glad/include")
+if(GLFW_USE_SUBMODULE)
+    set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+    set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+    set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    add_subdirectory(lib/glfw)
+else()
+    find_package(glfw3 REQUIRED)
+endif()
+
+if(GLM_USE_SUBMODULE)
+    add_subdirectory(lib/glm)
+else()
+    find_package(glm REQUIRED)
+endif()
+
+add_subdirectory(lib/glad)
+
 target_link_libraries(cubos glfw glm glad ${CMAKE_DL_LIBS})
 
 # Enable CTest and CPack
