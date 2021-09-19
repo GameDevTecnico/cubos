@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(cubos VERSION 0.1.0)
 
-option(GLFW_USE_SUBMODULE ON "Compile GLFW from source?")
-option(GLM_USE_SUBMODULE ON "Compile GLM from source?")
+option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
+option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 
 set(CUBOS_SOURCE
     "src/main.cpp"
