@@ -3,6 +3,7 @@ project(cubos VERSION 0.1.0)
 
 option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
+option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
 
 set(CUBOS_SOURCE
     "src/main.cpp"
@@ -30,9 +31,15 @@ else()
     find_package(glm REQUIRED)
 endif()
 
+if (YAMLCPP_USE_SUBMODULE)
+    add_subdirectory(lib/yaml-cpp)
+else()
+    find_package(yaml-cpp REQUIRED)
+endif()
+
 add_subdirectory(lib/glad)
 
-target_link_libraries(cubos glfw glm glad ${CMAKE_DL_LIBS})
+target_link_libraries(cubos glfw glm glad yaml-cpp ${CMAKE_DL_LIBS})
 
 # Enable CTest and CPack
 include(CTest)
