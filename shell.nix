@@ -6,5 +6,6 @@
     gcc
     glfw
     glm
+    libyamlcpp
   ];
 }
