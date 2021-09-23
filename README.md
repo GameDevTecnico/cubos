@@ -33,7 +33,7 @@ This way, you can easily get the latest version and even contribute to the proje
 Here's how you download the code through *git*:
 
 1. Open up your terminal and navigate to the directory where you want **CUBOS.** to be saved.
-2. Run the following command (*--recursive* is required so it clones the submodules that **CUBOS.** requires as well):
+2. Run the following command (*--recursive* is required so it clones the submodules that **CUBOS.** requires as well.):
 
 ``` git clone --recursive https://github.com/GameDevTecnico/cubos.git ``` 
 
@@ -88,7 +88,17 @@ To do so, open *Visual Studio Installer* and select **Modify** on the version of
 
 #### Terminal
 
-Coming soon.
+1. Install *[CMake](https://cmake.org/install/)* on your terminal.
+2. Open your terminal and navigate to the *cubos* directory.
+3. Run the following commands:
+
+```cmake -H. -Bbuild```
+
+```cmake --build build```
+
+Also, you can use versions of the required libraries that are installed on your computer already, outside the repository. This makes the compiling process faster. Just don't use the ```--recursive``` flag when cloning the repository, and install the dependencies yourself. Then instead of the commands above, run the following: 
+
+```cmake -H. -Bbuild -DGLFW_USE_SUBMODULE=OFF -DGLM_USE_SUBMODULE=OFF -DYAMLCPP_USE_SUBMODULE=OFF```
 
 ## Who is making this engine
 
