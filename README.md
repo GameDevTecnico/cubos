@@ -3,7 +3,7 @@
 <p align="center">
   <!-- if we ever get a site, we can put the link here-->
   <!-- <a href="https://godotengine.org"> -->
-    <img src="Images/CubosLogo.png" alt="cubos. Engine logo">
+    <img src="images/CubosLogo.png" alt="cubos. Engine logo">
   <!-- </a> -->
 </p>
 
@@ -48,10 +48,10 @@ To compile those files into a working program, you have many options:
 To do so, open *Visual Studio Installer* and select **Modify** on the version of VS you plan on using. On the left panel, make sure that the *Desktop development with C++* workload is checked. On the right, under *Desktop development with C++*, make sure *C++ CMake Tools for Windows* is checked. Then click **Modify** at the bottom and let the installation complete.
 
 <p align="center">
-    <img src="Images/VisualStudioInstaller1.png" alt="Select modify on the version of *Visual Studio* you have installed in *Visual Studio Installer*">
+    <img src="images/VisualStudioInstaller1.png" alt="Select modify on the version of *Visual Studio* you have installed in *Visual Studio Installer*">
 </p>
 <p align="center">
-    <img src="Images/VisualStudioInstaller2.png" alt="Make sure the right workloads and packages are selected">
+    <img src="images/VisualStudioInstaller2.png" alt="Make sure the right workloads and packages are selected">
 </p>
 
 2. Open *Visual Studio* and select the ```Open local folder``` option, and then choose the repository directory. 
@@ -59,7 +59,7 @@ To do so, open *Visual Studio Installer* and select **Modify** on the version of
 4. In the Project Solution window on the right, click on the icon right to the home button (when hovered it says ```Switch between solutions and available views```).
 
 <p align="center">
-    <img src="Images/VSChangeView.png" alt="```Switch between solutions and available views``` button">
+    <img src="images/VSChangeView.png" alt="```Switch between solutions and available views``` button">
 </p>
 
 5. Select ```CMake Targets View``` and then under ```cubos Project``` right-click ```cubos (static library)``` and select **Build**.
@@ -71,19 +71,19 @@ To do so, open *Visual Studio Installer* and select **Modify** on the version of
 3. On the ```Would you like to configure project 'cubos'?``` prompt thrown by *CMake Tools*, press **Yes**
 
 <p align="center">
-    <img src="Images/CMakeToolsPrompt.png" alt="```Would you like to configure project 'cubos'?``` prompt">
+    <img src="images/CMakeToolsPrompt.png" alt="```Would you like to configure project 'cubos'?``` prompt">
 </p>
 
 4. Then pick a kit for **CUBOS.** This is your preferred compiler.
 
 <p align="center">
-    <img src="Images/CMakeKitPrompt.png" alt="Kit prompt">
+    <img src="images/CMakeKitPrompt.png" alt="Kit prompt">
 </p>
 
 5. Finally, on the bar at the bottom, press **Build**. The first time it compiles will take longer.
 
 <p align="center">
-    <img src="Images/VSCodeBuild.png" alt="Build Button">
+    <img src="images/VSCodeBuild.png" alt="Build Button">
 </p>
 
 #### Terminal
