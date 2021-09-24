@@ -5,8 +5,8 @@
 
 namespace cubos::gl
 {
-    // TODO: Add documentation
-
+    /// Render device implementation using OpenGL
+    /// @see RenderDevice
     class OGLRenderDevice : public RenderDevice
     {
     public:
