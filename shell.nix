@@ -7,5 +7,6 @@
     glfw
     glm
     libyamlcpp
+    clang-tools
   ];
 }
