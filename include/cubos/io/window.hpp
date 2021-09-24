@@ -3,6 +3,11 @@
 
 #include <glm/glm.hpp>
 
+namespace cubos::gl
+{
+    class RenderDevice;
+}
+
 namespace cubos::io
 {
     // TODO: Format documentation (which style?)
@@ -13,14 +18,17 @@ namespace cubos::io
         Window(); // TODO: pass settings here?
         ~Window();
 
+
         void pollEvents() const;
         void swapBuffers() const;
 
+        const gl::RenderDevice& getRenderDevice() const;
         glm::ivec2 getFramebufferSize() const;
         bool shouldClose() const;
 
     private:
-        void* handle;
+        gl::RenderDevice* renderDevice; 
+        void *handle;
     };
 } // namespace cubos::io
 
