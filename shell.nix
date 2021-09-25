@@ -7,6 +7,7 @@
     glfw
     glm
     libyamlcpp
+    spdlog
     clang-tools
   ];
 }
