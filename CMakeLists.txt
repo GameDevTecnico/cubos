@@ -17,6 +17,7 @@ set(CUBOS_INCLUDE
 
 add_library(cubos ${CUBOS_SOURCE} ${CUBOS_INCLUDE})
 target_include_directories(cubos PUBLIC ${CUBOS_INCLUDE})
+set_property(TARGET cubos PROPERTY CXX_STANDARD 20)
 
 # Dependencies
 if(GLFW_USE_SUBMODULE)
@@ -60,5 +61,5 @@ include(CPack)
 
 # Add the samples subdirectory
 if (BUILD_SAMPLES)
-add_subdirectory(samples)
+    add_subdirectory(samples)
 endif()
