@@ -4,6 +4,9 @@ project(cubos VERSION 0.1.0)
 option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
+option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
+
+option(BUILD_SAMPLES "Build samples" OFF)
 
 set(CUBOS_SOURCE
     "src/main.cpp"
@@ -37,9 +40,15 @@ else()
     find_package(yaml-cpp REQUIRED)
 endif()
 
+if (SPDLOG_USE_SUBMODULE)
+    add_subdirectory(lib/spdlog)
+else()
+    find_package(spdlog REQUIRED)
+endif()
+
 add_subdirectory(lib/glad)
 
-target_link_libraries(cubos glfw glm glad yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos glfw glm glad yaml-cpp spdlog ${CMAKE_DL_LIBS})
 
 # Enable CTest and CPack
 include(CTest)
@@ -48,3 +57,8 @@ enable_testing()
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
+
+# Add the samples subdirectory
+if (BUILD_SAMPLES)
+add_subdirectory(samples)
+endif()
