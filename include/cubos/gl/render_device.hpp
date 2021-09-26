@@ -51,7 +51,7 @@ namespace cubos::gl
 
     using ShaderStage = std::shared_ptr<impl::ShaderStage>;
     using ShaderPipeline = std::shared_ptr<impl::ShaderPipeline>;
-    using ShaderBindingPoint = impl::ShaderBindingPoint *;
+    using ShaderBindingPoint = impl::ShaderBindingPoint*;
 
     /// Render device properties that can be queried at runtime
     /// @see RenderDevice::getProperty()
@@ -315,7 +315,7 @@ namespace cubos::gl
     /// 1D texture description
     struct Texture1DDesc
     {
-        const void *data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial texture data
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial texture data
         size_t mipLevelCount = 1;                       /// Number of mip levels
         size_t width;                                   /// Texture size
         Usage usage;                                    /// Texture usage mode
@@ -325,7 +325,7 @@ namespace cubos::gl
     /// 2D texture description
     struct Texture2DDesc
     {
-        const void *data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial texture data
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial texture data
         size_t mipLevelCount = 1;                       /// Number of mip levels
         size_t width, height;                           /// Texture size
         Usage usage;                                    /// Texture usage mode
@@ -335,7 +335,7 @@ namespace cubos::gl
     /// 3D texture description
     struct Texture3DDesc
     {
-        const void *data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial texture data
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial texture data
         size_t mipLevelCount = 1;                       /// Number of mip levels
         size_t width, height, depth;                    /// Texture size
         Usage usage;                                    /// Texture usage mode
@@ -355,7 +355,7 @@ namespace cubos::gl
     /// Constant buffer structure
     struct ConstantBufferStructure
     {
-        size_t size; /// Size of the buffer in bytes
+        size_t size;         /// Size of the buffer in bytes
         size_t elementCount; /// Number of elements
         ConstantBufferElement elements[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT];
     };
@@ -363,7 +363,7 @@ namespace cubos::gl
     /// Vertex element description
     struct VertexElement
     {
-        const char *name = nullptr; /// Element name
+        const char* name = nullptr; /// Element name
         Type type = Type::Float;    /// Element type
         size_t size;                /// Number of components in the vertex element (1, 2, 3 or 4)
 
@@ -392,58 +392,58 @@ namespace cubos::gl
     public:
         RenderDevice() = default;
         virtual ~RenderDevice() = default;
-        RenderDevice(const RenderDevice &) = delete;
+        RenderDevice(const RenderDevice&) = delete;
 
         /// Creates a new framebuffer
         /// @return Framebuffer handle, or nullptr if the creation failed
-        virtual Framebuffer createFramebuffer(const FramebufferDesc &desc) = 0;
+        virtual Framebuffer createFramebuffer(const FramebufferDesc& desc) = 0;
 
         /// Sets the current framebuffer
         virtual void setFramebuffer(Framebuffer fb) = 0;
 
         /// Creates a new rasterizer state
         /// @return Rasterizer state handle, or nullptr if the creation failed
-        virtual RasterState createRasterState(const RasterStateDesc &desc) = 0;
+        virtual RasterState createRasterState(const RasterStateDesc& desc) = 0;
 
         /// Sets the current rasterizer state
         virtual void setRasterState(RasterState rs) = 0;
 
         /// Creates a new depth stencil state
         /// @return Depth stencil state handle, or nullptr if the creation failed
-        virtual DepthStencilState createRasterState(const DepthStencilStateDesc &desc) = 0;
+        virtual DepthStencilState createRasterState(const DepthStencilStateDesc& desc) = 0;
 
         /// Sets the current depth stencil state
         virtual void setDepthStencilState(DepthStencilState dss) = 0;
 
         /// Creates a new blend state
         /// @return Blend state handle, or nullptr if the creation failed
-        virtual BlendState createBlendState(const BlendDesc &desc) = 0;
+        virtual BlendState createBlendState(const BlendDesc& desc) = 0;
 
         /// Sets the current blend state
         virtual void setBlendState(BlendState bs) = 0;
 
         /// Creates a new texture sampler
         /// @return Sampler handle, or nullptr if the creation failed
-        virtual Sampler createSampler(const SamplerDesc &desc) = 0;
+        virtual Sampler createSampler(const SamplerDesc& desc) = 0;
 
         /// Creates a new 1D texture
         /// @return Texture handle, or nullptr if the creation failed
-        virtual Texture1D createTexture1D(const Texture1DDesc &desc) = 0;
+        virtual Texture1D createTexture1D(const Texture1DDesc& desc) = 0;
 
         /// Creates a new 2D texture
         /// @return Texture handle, or nullptr if the creation failed
-        virtual Texture2D createTexture2D(const Texture2DDesc &desc) = 0;
+        virtual Texture2D createTexture2D(const Texture2DDesc& desc) = 0;
 
         /// Creates a new 3D texture
         /// @return Texture handle, or nullptr if the creation failed
-        virtual Texture3D createTexture3D(const Texture3DDesc &desc) = 0;
+        virtual Texture3D createTexture3D(const Texture3DDesc& desc) = 0;
 
         /// Creates a new constant buffer
         /// @param size Size in bytes
         /// @param data Initial data, can be nullptr
         /// @param usage The usage which the buffer will have
         /// @return Constant buffer handle, or nullptr if the creation failed
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void *data, Usage usage);
+        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage);
 
         /// Creates a new index buffer
         /// @param size Size in bytes
@@ -451,7 +451,7 @@ namespace cubos::gl
         /// @param format Index format
         /// @param usage The usage which the buffer will have
         /// @return Index buffer handle, or nullptr if the creation failed
-        virtual IndexBuffer createIndexBuffer(size_t size, const void *data, IndexFormat format, Usage usage);
+        virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage);
 
         /// Sets the current index buffer
         virtual void setIndexBuffer(IndexBuffer ib) = 0;
@@ -461,18 +461,18 @@ namespace cubos::gl
         /// @param data Initial data, can be nullptr
         /// @param usage The usage which the buffer will have
         /// @return Vertex buffer handle, or nullptr if the creation failed
-        virtual VertexBuffer createVertexBuffer(size_t size, const void *data, Usage usage);
+        virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage);
 
         /// Creates a new vertex array
         /// @return Vertex array handle, or nullptr if the creation failed
-        virtual VertexArray createVertexArray(const VertexArrayDesc &desc);
+        virtual VertexArray createVertexArray(const VertexArrayDesc& desc);
 
         /// Sets the current vertex array
         virtual void setVertexArray(VertexArray va) = 0;
 
         /// Creates a new shader stage from GLSL source code
         /// @return Shader stage handle, or nullptr if the creation failed
-        virtual ShaderStage createShaderStage(Stage stage, const char *src) = 0;
+        virtual ShaderStage createShaderStage(Stage stage, const char* src) = 0;
 
         /// Creates a new pipeline from a vertex and pixel shaders
         /// @param vs Vertex shader stage
@@ -573,7 +573,7 @@ namespace cubos::gl
             /// @param width Width of the section which will be updated
             /// @param data Pointer to the new data
             /// @param level Mip level to update
-            virtual void update(size_t x, size_t width, const void *data, size_t level = 0) = 0;
+            virtual void update(size_t x, size_t width, const void* data, size_t level = 0) = 0;
 
             /// Generates mipmaps on this texture
             virtual void generateMipmaps() = 0;
@@ -593,7 +593,7 @@ namespace cubos::gl
             /// @param height Height of the section which will be updated
             /// @param data Pointer to the new data
             /// @param level Mip level to update
-            virtual void update(size_t x, size_t y, size_t width, size_t height, const void *data,
+            virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data,
                                 size_t level = 0) = 0;
 
             /// Generates mipmaps on this texture
@@ -617,7 +617,7 @@ namespace cubos::gl
             /// @param data Pointer to the new data
             /// @param level Mip level to update
             virtual void update(size_t x, size_t y, size_t z, size_t width, size_t height, size_t depth,
-                                const void *data, size_t level = 0) = 0;
+                                const void* data, size_t level = 0) = 0;
 
             /// Generates mipmaps on this texture
             virtual void generateMipmaps() = 0;
@@ -632,7 +632,7 @@ namespace cubos::gl
         public:
             /// Maps the constant buffer to a region in memory
             /// @return Pointer to the memory region
-            virtual void *map() = 0;
+            virtual void* map() = 0;
 
             /// Unmaps the constant buffer, updating it with data written to the mapped region
             virtual void unmap() = 0;
@@ -647,7 +647,7 @@ namespace cubos::gl
         public:
             /// Maps the index buffer to a region in memory
             /// @return Pointer to the memory region
-            virtual void *map() = 0;
+            virtual void* map() = 0;
 
             /// Unmaps the index buffer, updating it with data written to the mapped region
             virtual void unmap() = 0;
@@ -662,7 +662,7 @@ namespace cubos::gl
         public:
             /// Maps the vertex buffer to a region in memory
             /// @return Pointer to the memory region
-            virtual void *map() = 0;
+            virtual void* map() = 0;
 
             /// Unmaps the vertex buffer, updating it with data written to the mapped region
             virtual void unmap() = 0;
@@ -691,7 +691,7 @@ namespace cubos::gl
         public:
             /// Gets a binding point from its name
             /// @return Returns the binding point, or nullptr if no binding point is found
-            virtual gl::ShaderBindingPoint getBindingPoint(const char *name) = 0;
+            virtual gl::ShaderBindingPoint getBindingPoint(const char* name) = 0;
 
         protected:
             ShaderPipeline() = default;
@@ -704,7 +704,7 @@ namespace cubos::gl
             /// Gets the constant buffer structure of this binding point
             /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done
             /// @return False if the query failed, otherwise true
-            virtual bool queryConstantBufferStructure(ConstantBufferStructure *structure) = 0;
+            virtual bool queryConstantBufferStructure(ConstantBufferStructure* structure) = 0;
 
             /// Binds a constant buffer to the binding point
             /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done
