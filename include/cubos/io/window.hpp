@@ -22,7 +22,7 @@ namespace cubos::io
         void pollEvents() const;
         void swapBuffers() const;
 
-        const gl::RenderDevice& getRenderDevice() const;
+        gl::RenderDevice& getRenderDevice() const;
         glm::ivec2 getFramebufferSize() const;
         bool shouldClose() const;
 
