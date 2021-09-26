@@ -237,7 +237,7 @@ namespace cubos::gl
         NegativeY = 3,
         PositiveZ = 4,
         NegativeZ = 5,
-    }
+    };
 
     /// Framebuffer description
     struct FramebufferDesc
@@ -258,7 +258,7 @@ namespace cubos::gl
                 {
                     Texture2D handle; /// Texture handle
                 } texture;
-            }
+            };
         } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT];
 
         uint32_t targetCount = 1; /// Number of render targets
@@ -453,7 +453,7 @@ namespace cubos::gl
 
         /// Creates a new blend state
         /// @return Blend state handle, or nullptr if the creation failed
-        virtual BlendState createBlendState(const BlendDesc& desc) = 0;
+        virtual BlendState createBlendState(const BlendStateDesc& desc) = 0;
 
         /// Sets the current blend state
         virtual void setBlendState(BlendState bs) = 0;
@@ -483,7 +483,7 @@ namespace cubos::gl
         /// @param data Initial data, can be nullptr
         /// @param usage The usage which the buffer will have
         /// @return Constant buffer handle, or nullptr if the creation failed
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage);
+        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) = 0;
 
         /// Creates a new index buffer
         /// @param size Size in bytes
@@ -491,7 +491,7 @@ namespace cubos::gl
         /// @param format Index format
         /// @param usage The usage which the buffer will have
         /// @return Index buffer handle, or nullptr if the creation failed
-        virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage);
+        virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage) = 0;
 
         /// Sets the current index buffer
         virtual void setIndexBuffer(IndexBuffer ib) = 0;
@@ -501,11 +501,11 @@ namespace cubos::gl
         /// @param data Initial data, can be nullptr
         /// @param usage The usage which the buffer will have
         /// @return Vertex buffer handle, or nullptr if the creation failed
-        virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage);
+        virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage) = 0;
 
         /// Creates a new vertex array
         /// @return Vertex array handle, or nullptr if the creation failed
-        virtual VertexArray createVertexArray(const VertexArrayDesc& desc);
+        virtual VertexArray createVertexArray(const VertexArrayDesc& desc) = 0;
 
         /// Sets the current vertex array
         virtual void setVertexArray(VertexArray va) = 0;
@@ -514,14 +514,14 @@ namespace cubos::gl
         /// @return Shader stage handle, or nullptr if the creation failed
         virtual ShaderStage createShaderStage(Stage stage, const char* src) = 0;
 
-        /// Creates a new pipeline from a vertex and pixel shaders
+        /// Creates a new shader pipeline from a vertex and pixel shaders
         /// @param vs Vertex shader stage
         /// @param ps Pixel shader stage
-        /// @return Pipeline handle, or nullptr if the creation failed
+        /// @return Shader pipeline handle, or nullptr if the creation failed
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) = 0;
 
-        /// Sets the current pipeline used for rendering
-        virtual void setPipeline(Pipeline pipeline) = 0;
+        /// Sets the current shader pipeline used for rendering
+        virtual void setShaderPipeline(ShaderPipeline pipeline) = 0;
 
         /// Clears the color buffer bit on the current framebuffer to a specific color
         virtual void clearColor(float r, float g, float b, float a) = 0;
