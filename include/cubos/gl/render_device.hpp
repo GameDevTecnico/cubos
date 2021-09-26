@@ -23,6 +23,7 @@ namespace cubos::gl
         class Texture1D;
         class Texture2D;
         class Texture3D;
+        class CubeMap;
 
         class ConstantBuffer;
         class IndexBuffer;
@@ -43,6 +44,7 @@ namespace cubos::gl
     using Texture1D = std::shared_ptr<impl::Texture1D>;
     using Texture2D = std::shared_ptr<impl::Texture2D>;
     using Texture3D = std::shared_ptr<impl::Texture3D>;
+    using CubeMap = std::shared_ptr<impl::CubeMap>;
 
     using ConstantBuffer = std::shared_ptr<impl::ConstantBuffer>;
     using IndexBuffer = std::shared_ptr<impl::IndexBuffer>;
@@ -226,13 +228,37 @@ namespace cubos::gl
         Pixel,
     };
 
+    // Cube map face
+    enum class CubeFace
+    {
+        PositiveX = 0,
+        NegativeX = 1,
+        PositiveY = 2,
+        NegativeY = 3,
+        PositiveZ = 4,
+        NegativeZ = 5,
+    }
+
     /// Framebuffer description
     struct FramebufferDesc
     {
         struct
         {
-            uint32_t mipLevel = 0; /// Mip level of the texture which will be set as a render target
-            Texture2D texture;     /// Texture handle
+            bool isCubeMap = false; /// Is this target a cube map face?
+            uint32_t mipLevel = 0;  /// Mip level of the texture which will be set as a render target
+
+            union {
+                struct
+                {
+                    CubeMap handle; /// Cube map handle
+                    CubeFace face;  /// Cube map face which will be used as target
+                } cubeMap;
+
+                struct
+                {
+                    Texture2D handle; /// Texture handle
+                } texture;
+            }
         } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT];
 
         uint32_t targetCount = 1; /// Number of render targets
@@ -342,6 +368,16 @@ namespace cubos::gl
         TextureFormat format;                           /// Texture format
     };
 
+    /// Cube map description
+    struct CubeMapDesc
+    {
+        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial cube map data, indexed using CubeFace
+        size_t mipLevelCount = 1;                          /// Number of mip levels
+        size_t width, height;                              /// Texture size
+        Usage usage;                                       /// Texture usage mode
+        TextureFormat format;                              /// Texture format
+    };
+
     /// Constant buffer element
     struct ConstantBufferElement
     {
@@ -437,6 +473,10 @@ namespace cubos::gl
         /// Creates a new 3D texture
         /// @return Texture handle, or nullptr if the creation failed
         virtual Texture3D createTexture3D(const Texture3DDesc& desc) = 0;
+
+        /// Creates a new cube map
+        /// @return Cube map handle, or nullptr if the creation failed
+        virtual CubeMap createCubeMap(const CubeMapDesc& desc) = 0;
 
         /// Creates a new constant buffer
         /// @param size Size in bytes
@@ -701,14 +741,9 @@ namespace cubos::gl
         class ShaderBindingPoint
         {
         public:
-            /// Gets the constant buffer structure of this binding point
-            /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done
-            /// @return False if the query failed, otherwise true
-            virtual bool queryConstantBufferStructure(ConstantBufferStructure* structure) = 0;
-
-            /// Binds a constant buffer to the binding point
-            /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done
-            virtual void bind(gl::ConstantBuffer cb) = 0;
+            /// Binds a sampler to the binding point
+            /// If this binding point doesn't support a sampler, an error is logged and nothing is done
+            virtual void bind(gl::Sampler sampler) = 0;
 
             /// Binds a 1D texture to the binding point
             /// If this binding point doesn't support a 1D texture, an error is logged and nothing is done
@@ -722,9 +757,18 @@ namespace cubos::gl
             /// If this binding point doesn't support a 3D texture, an error is logged and nothing is done
             virtual void bind(gl::Texture3D tex) = 0;
 
-            /// Binds a sampler to the binding point
-            /// If this binding point doesn't support a sampler, an error is logged and nothing is done
-            virtual void bind(gl::Sampler sampler) = 0;
+            /// Binds a cube map to the binding point
+            /// If this binding point doesn't support a cube map, an error is logged and nothing is done
+            virtual void bind(gl::CubeMap cubeMap) = 0;
+
+            /// Binds a constant buffer to the binding point
+            /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done
+            virtual void bind(gl::ConstantBuffer cb) = 0;
+
+            /// Gets the constant buffer structure of this binding point
+            /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done
+            /// @return False if the query failed, otherwise true
+            virtual bool queryConstantBufferStructure(ConstantBufferStructure* structure) = 0;
 
         protected:
             ShaderBindingPoint() = default;
