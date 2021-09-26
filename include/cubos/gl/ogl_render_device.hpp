@@ -45,7 +45,7 @@ namespace cubos::gl
         virtual int getProperty(Property prop) override;
 
     private:
-        int currentIndexType;
+        int currentIndexFormat;
     };
 } // namespace cubos::gl
 
