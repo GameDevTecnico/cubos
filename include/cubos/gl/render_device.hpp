@@ -415,7 +415,6 @@ namespace cubos::gl
     struct VertexArrayDesc
     {
         size_t elementCount = 0;                                         /// Number of vertex elements
-        size_t bufferCount = 0;                                          /// Number of vertex buffers
         VertexElement elements[CUBOS_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT]; /// Vertex elements
         VertexBuffer buffers[CUBOS_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];    /// Vertex buffers
         ShaderPipeline shaderPipeline;                                   /// Shader pipeline used with the vertex array
@@ -744,6 +743,11 @@ namespace cubos::gl
 
         class ShaderStage
         {
+        public:
+            /// Gets the shader stage type
+            /// @see Stage
+            virtual Stage getType() = 0;
+
         protected:
             ShaderStage() = default;
             virtual ~ShaderStage() = default;
@@ -754,6 +758,7 @@ namespace cubos::gl
         public:
             /// Gets a binding point from its name
             /// @return Returns the binding point, or nullptr if no binding point is found
+            /// @see ShaderBindingPoint
             virtual gl::ShaderBindingPoint getBindingPoint(const char* name) = 0;
 
         protected:
