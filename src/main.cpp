@@ -14,6 +14,7 @@ int main(void)
     while (!window.shouldClose())
     {
         renderDevice.clearColor(0.894f, 0.592f, 0.141f, 0.0f);
+
         window.swapBuffers();
         window.pollEvents();
     }

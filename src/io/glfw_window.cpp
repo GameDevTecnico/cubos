@@ -40,7 +40,7 @@ void Window::swapBuffers() const
     glfwSwapBuffers((GLFWwindow *)this->handle);
 }
 
-const gl::RenderDevice &Window::getRenderDevice() const
+gl::RenderDevice &Window::getRenderDevice() const
 {
     return *this->renderDevice;
 }
