@@ -667,6 +667,29 @@ namespace cubos::gl
             virtual ~Texture3D() = default;
         };
 
+        class CubeMap
+        {
+        public:
+            /// Updates a cube map's face with new data, which must have the same format used when the cube map was
+            /// created
+            /// @param x Destination X coordinate
+            /// @param y Destination Y coordinate
+            /// @param width Width of the section which will be updated
+            /// @param height Height of the section which will be updated
+            /// @param data Pointer to the new data
+            /// @param face Face to update
+            /// @param level Mip level to update
+            virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data, CubeFace face,
+                                size_t level = 0) = 0;
+
+            /// Generates mipmaps on this cube map
+            virtual void generateMipmaps() = 0;
+
+        protected:
+            CubeMap() = default;
+            virtual ~CubeMap() = default;
+        };
+
         class ConstantBuffer
         {
         public:
