@@ -4,6 +4,9 @@
 
 #include <GLFW/glfw3.h>
 
+#include <cubos/gl/ogl_render_device.hpp>
+
+using namespace cubos;
 using namespace cubos::io;
 
 Window::Window()
@@ -15,10 +18,14 @@ Window::Window()
     this->handle = glfwCreateWindow(800, 600, "Cubos", nullptr, nullptr);
     if (!this->handle)
         ; // TODO: Log critical error and abort
+    // Create OpenGL render device
+    glfwMakeContextCurrent((GLFWwindow *)this->handle);
+    this->renderDevice = new gl::OGLRenderDevice();
 }
 
 Window::~Window()
 {
+    delete this->renderDevice;
     glfwTerminate();
 }
 
@@ -30,6 +37,11 @@ void Window::pollEvents() const
 void Window::swapBuffers() const
 {
     glfwSwapBuffers((GLFWwindow *)this->handle);
+}
+
+gl::RenderDevice &Window::getRenderDevice() const
+{
+    return *this->renderDevice;
 }
 
 glm::ivec2 Window::getFramebufferSize() const
