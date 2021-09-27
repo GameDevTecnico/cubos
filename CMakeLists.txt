@@ -10,13 +10,15 @@ option(BUILD_SAMPLES "Build samples" OFF)
 
 set(CUBOS_SOURCE
     "src/main.cpp"
+    "src/log.cpp"
 )
 
 set(CUBOS_INCLUDE
+    "include/cubos/log.hpp"
 )
 
 add_library(cubos ${CUBOS_SOURCE} ${CUBOS_INCLUDE})
-target_include_directories(cubos PUBLIC ${CUBOS_INCLUDE})
+target_include_directories(cubos PUBLIC include)
 set_property(TARGET cubos PROPERTY CXX_STANDARD 20)
 
 # Dependencies
