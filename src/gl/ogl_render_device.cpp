@@ -9,6 +9,8 @@
 
 #include <cstdlib>
 #include <cassert>
+#include <list>
+#include <string>
 
 using namespace cubos::gl;
 
@@ -105,17 +107,28 @@ public:
 
 class OGLConstantBuffer : public impl::ConstantBuffer
 {
+public:
+    OGLConstantBuffer(GLuint id) : id(id)
+    {
+    }
+
+    virtual ~OGLConstantBuffer() override
+    {
+        glDeleteBuffers(1, &this->id);
+    }
+
     virtual void* map() override
     {
-        return nullptr; // TODO
+        glBindBuffer(GL_UNIFORM_BUFFER, this->id);
+        return glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
     }
 
     virtual void unmap() override
     {
-        // TODO
+        glUnmapBuffer(GL_UNIFORM_BUFFER);
     }
 
-    // TODO
+    GLuint id;
 };
 
 class OGLIndexBuffer : public impl::IndexBuffer
@@ -133,7 +146,7 @@ public:
     virtual void* map() override
     {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id);
-        return glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id);
+        return glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
     virtual void unmap() override
@@ -160,7 +173,7 @@ public:
     virtual void* map() override
     {
         glBindBuffer(GL_ARRAY_BUFFER, this->id);
-        return glMapBuffer(GL_ARRAY_BUFFER, this->id);
+        return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
     virtual void unmap() override
@@ -210,30 +223,21 @@ public:
     GLuint shader;
 };
 
-class OGLShaderPipeline : public impl::ShaderPipeline
-{
-public:
-    OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program) : vs(vs), ps(ps), program(program)
-    {
-    }
-
-    virtual ~OGLShaderPipeline() override
-    {
-        glDeleteProgram(this->program);
-    }
-
-    virtual ShaderBindingPoint getBindingPoint(const char* name) override
-    {
-        return nullptr; // TODO
-    }
-
-    ShaderStage vs, ps;
-    GLuint program;
-};
-
 class OGLShaderBindingPoint : public impl::ShaderBindingPoint
 {
 public:
+    enum class Type
+    {
+        UniformBlock,
+        Sampler1D,
+        Sampler2D,
+        Sampler3D,
+    };
+
+    OGLShaderBindingPoint(const char* name, int loc, Type type) : name(name), loc(loc), type(type)
+    {
+    }
+
     virtual void bind(Sampler sampler) override
     {
         // TODO
@@ -261,7 +265,8 @@ public:
 
     virtual void bind(ConstantBuffer cb) override
     {
-        // TODO
+        assert(this->type == Type::UniformBlock);
+        glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
     }
 
     virtual bool queryConstantBufferStructure(ConstantBufferStructure* structure) override
@@ -269,7 +274,48 @@ public:
         return false; // TODO
     }
 
-    // TODO
+    std::string name;
+    int loc;
+    Type type;
+};
+
+class OGLShaderPipeline : public impl::ShaderPipeline
+{
+public:
+    OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program) : vs(vs), ps(ps), program(program)
+    {
+    }
+
+    virtual ~OGLShaderPipeline() override
+    {
+        glDeleteProgram(this->program);
+    }
+
+    virtual ShaderBindingPoint getBindingPoint(const char* name) override
+    {
+        // Search for already existing binding point
+        for (auto& bp : this->bps)
+            if (bp.name == name)
+                return &bp;
+
+        // No existing binding point was found, it must be created first
+        // Search for uniform block binding
+        auto loc = glGetUniformBlockIndex(this->program, name);
+        if (loc != GL_INVALID_INDEX)
+        {
+            glUniformBlockBinding(this->program, loc, loc);
+            bps.emplace_back(name, loc, OGLShaderBindingPoint::Type::UniformBlock);
+            return &bps.back();
+        }
+
+        // TODO: add samplers
+
+        return nullptr;
+    }
+
+    ShaderStage vs, ps;
+    GLuint program;
+    std::list<OGLShaderBindingPoint> bps;
 };
 
 OGLRenderDevice::OGLRenderDevice()
@@ -350,7 +396,37 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage)
 {
-    return nullptr; // TODO
+    // Validate arguments
+    if (usage == Usage::Static && data == nullptr)
+        abort();
+
+    GLenum glUsage;
+    if (usage == Usage::Default)
+        glUsage = GL_STATIC_DRAW;
+    else if (usage == Usage::Static)
+        glUsage = GL_STATIC_DRAW;
+    else if (usage == Usage::Dynamic)
+        glUsage = GL_DYNAMIC_DRAW;
+    else
+        abort(); // Invalid enum value
+
+    // Initialize buffer
+    GLuint id;
+    glGenBuffers(1, &id);
+    glBindBuffer(GL_UNIFORM_BUFFER, id);
+    glBufferData(GL_UNIFORM_BUFFER, size, data, glUsage);
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteBuffers(1, &id);
+
+        // TODO: log error
+        return nullptr;
+    }
+
+    return std::make_shared<OGLConstantBuffer>(id);
 }
 
 IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage)
@@ -376,7 +452,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
         glFormat = GL_UNSIGNED_INT;
     else
         abort(); // Invalid enum value
-    
+
     // Initialize buffer
     GLuint id;
     glGenBuffers(1, &id);

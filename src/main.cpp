@@ -1,6 +1,8 @@
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
 
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <cstdio>
 
 using namespace cubos;
@@ -16,12 +18,17 @@ int main(void)
         in vec2 position;
         in vec3 color;
 
+        uniform MVP
+        {
+            mat4 mvp;
+        };
+
         out vec3 fragColor;
 
         void main()
         {
             fragColor = color;
-            gl_Position = vec4(position, 0.0f, 1.0f);
+            gl_Position = mvp * vec4(position, 0.0f, 1.0f);
         }
     )");
 
@@ -40,20 +47,20 @@ int main(void)
     auto pp = renderDevice.createShaderPipeline(vs, ps);
 
     float verts[] = {
-        -0.5f, -0.5f,     1.0f, 0.0f, 0.0f,
-        -0.5f, +0.5f,     0.0f, 1.0f, 0.0f,
-        +0.5f, +0.5f,     0.0f, 0.0f, 1.0f,
-        +0.5f, -0.5f,     1.0f, 1.0f, 1.0f,
+        -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, -0.5f, +0.5f, 0.0f, 1.0f, 0.0f,
+        +0.5f, +0.5f, 0.0f, 0.0f, 1.0f, +0.5f, -0.5f, 1.0f, 1.0f, 1.0f,
     };
 
     auto vb = renderDevice.createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
 
     unsigned int indices[] = {
-        0, 1, 2,
-        2, 3, 0,
+        0, 1, 2, 2, 3, 0,
     };
 
     auto ib = renderDevice.createIndexBuffer(sizeof(indices), indices, gl::IndexFormat::UInt, gl::Usage::Static);
+
+    auto cb = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+    auto cbBP = pp->getBindingPoint("MVP");
 
     gl::VertexArrayDesc vaDesc;
     vaDesc.elementCount = 2;
@@ -73,6 +80,8 @@ int main(void)
     vaDesc.shaderPipeline = pp;
     auto va = renderDevice.createVertexArray(vaDesc);
 
+    float t = 0.0f;
+
     while (!window.shouldClose())
     {
         auto sz = window.getFramebufferSize();
@@ -83,10 +92,19 @@ int main(void)
         renderDevice.setShaderPipeline(pp);
         renderDevice.setVertexArray(va);
         renderDevice.setIndexBuffer(ib);
+
+        auto& mvp = *(glm::mat4*)cb->map();
+        mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
+              glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f}) *
+              glm::rotate(glm::mat4(1.0f), t, glm::vec3{ 0.0f, 1.0f, 0.0f });
+        cb->unmap();
+        cbBP->bind(cb);
         renderDevice.drawTrianglesIndexed(0, 6);
 
         window.swapBuffers();
         window.pollEvents();
+
+        t += 0.01f;
     }
 
     return 0;
