@@ -1,8 +1,11 @@
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
 
+#include <cubos/log.hpp>
+
 int main(void)
 {
+    cubos::initializeLogger();
     auto window = cubos::io::Window();
     auto& renderDevice = window.getRenderDevice();
 

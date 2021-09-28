@@ -9,16 +9,22 @@ if(WITH_GLFW)
 endif()
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
+option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
+
+option(BUILD_SAMPLES "Build samples" OFF)
 
 set(CUBOS_SOURCE
     "src/main.cpp"
-
+    "src/log.cpp"
+    
     "src/io/glfw_window.cpp"
 
     "src/gl/ogl_render_device.cpp"
 )
 
 set(CUBOS_INCLUDE
+    "include/cubos/log.hpp"
+
     "include/cubos/io/window.hpp"
 
     "include/cubos/gl/render_device.hpp"
@@ -27,8 +33,16 @@ set(CUBOS_INCLUDE
 
 add_library(cubos ${CUBOS_SOURCE} ${CUBOS_INCLUDE})
 target_include_directories(cubos PUBLIC "include")
+set_property(TARGET cubos PROPERTY CXX_STANDARD 20)
 
 # Dependencies
+
+if(WITH_OPENGL)
+    add_subdirectory(lib/glad)
+    target_link_libraries(cubos glad)
+    target_compile_definitions(cubos PRIVATE WITH_OPENGL)
+endif()
+
 if(WITH_GLFW)
     if(GLFW_USE_SUBMODULE)
         set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
@@ -55,13 +69,13 @@ else()
     find_package(yaml-cpp REQUIRED)
 endif()
 
-if(WITH_OPENGL)
-    add_subdirectory(lib/glad)
-    target_link_libraries(cubos glad)
-    target_compile_definitions(cubos PRIVATE WITH_OPENGL)
+if (SPDLOG_USE_SUBMODULE)
+    add_subdirectory(lib/spdlog)
+else()
+    find_package(spdlog REQUIRED)
 endif()
 
-target_link_libraries(cubos glm glad yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos glm glad yaml-cpp spdlog ${CMAKE_DL_LIBS})
 
 # Enable CTest and CPack
 include(CTest)
@@ -70,3 +84,8 @@ enable_testing()
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
+
+# Add the samples subdirectory
+if (BUILD_SAMPLES)
+    add_subdirectory(samples)
+endif()
