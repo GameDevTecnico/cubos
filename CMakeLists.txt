@@ -14,7 +14,7 @@ option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
 option(BUILD_SAMPLES "Build samples" OFF)
 
 set(CUBOS_SOURCE
-    "src/main.cpp"
+    "src/entry.cpp"
     "src/log.cpp"
     
     "src/io/glfw_window.cpp"
