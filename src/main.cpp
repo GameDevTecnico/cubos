@@ -16,18 +16,18 @@ int main(void)
         #version 330 core
 
         in vec2 position;
-        in vec3 color;
+        in vec2 uv;
+
+        out vec2 fragUV;
 
         uniform MVP
         {
             mat4 mvp;
         };
 
-        out vec3 fragColor;
-
         void main()
         {
-            fragColor = color;
+            fragUV = uv;
             gl_Position = mvp * vec4(position, 0.0f, 1.0f);
         }
     )");
@@ -35,20 +35,22 @@ int main(void)
     auto ps = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
         #version 330 core
 
-        in vec3 fragColor;
+        in vec2 fragUV;
         out vec4 color;
+
+        uniform sampler2D colorTexture;
 
         void main()
         {
-            color = vec4(fragColor, 1.0f);
+            color = vec4(texture(colorTexture, fragUV).rgb, 1.0f);
         }
     )");
 
     auto pp = renderDevice.createShaderPipeline(vs, ps);
 
     float verts[] = {
-        -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, -0.5f, +0.5f, 0.0f, 1.0f, 0.0f,
-        +0.5f, +0.5f, 0.0f, 0.0f, 1.0f, +0.5f, -0.5f, 1.0f, 1.0f, 1.0f,
+        -0.5f, -0.5f, 0.0f, 0.0f, -0.5f, +0.5f, 0.0f, 1.0f,
+        +0.5f, +0.5f, 1.0f, 1.0f, +0.5f, -0.5f, 1.0f, 0.0f,
     };
 
     auto vb = renderDevice.createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
@@ -62,6 +64,20 @@ int main(void)
     auto cb = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
     auto cbBP = pp->getBindingPoint("MVP");
 
+
+    float textureData[] = {
+        0.0f, 0.0f, 0.0f,   1.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,   0.0f, 0.0f, 1.0f,
+    };
+
+    gl::Texture2DDesc textureDesc;
+    textureDesc.data[0] = textureData;
+    textureDesc.format = gl::TextureFormat::RGB32Float;
+    textureDesc.width = 2;
+    textureDesc.height = 2;
+    auto texture = renderDevice.createTexture2D(textureDesc);
+    auto textureBP = pp->getBindingPoint("colorTexture");
+
     gl::VertexArrayDesc vaDesc;
     vaDesc.elementCount = 2;
     vaDesc.elements[0].name = "position";
@@ -69,13 +85,13 @@ int main(void)
     vaDesc.elements[0].size = 2;
     vaDesc.elements[0].buffer.index = 0;
     vaDesc.elements[0].buffer.offset = 0;
-    vaDesc.elements[0].buffer.stride = 5 * sizeof(float);
-    vaDesc.elements[1].name = "color";
+    vaDesc.elements[0].buffer.stride = 4 * sizeof(float);
+    vaDesc.elements[1].name = "uv";
     vaDesc.elements[1].type = gl::Type::Float;
-    vaDesc.elements[1].size = 3;
+    vaDesc.elements[1].size = 2;
     vaDesc.elements[1].buffer.index = 0;
     vaDesc.elements[1].buffer.offset = 2 * sizeof(float);
-    vaDesc.elements[1].buffer.stride = 5 * sizeof(float);
+    vaDesc.elements[1].buffer.stride = 4 * sizeof(float);
     vaDesc.buffers[0] = vb;
     vaDesc.shaderPipeline = pp;
     auto va = renderDevice.createVertexArray(vaDesc);
@@ -99,6 +115,7 @@ int main(void)
               glm::rotate(glm::mat4(1.0f), t, glm::vec3{ 0.0f, 1.0f, 0.0f });
         cb->unmap();
         cbBP->bind(cb);
+        textureBP->bind(texture);
         renderDevice.drawTrianglesIndexed(0, 6);
 
         window.swapBuffers();

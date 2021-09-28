@@ -14,6 +14,180 @@
 
 using namespace cubos::gl;
 
+static bool textureFormatToParams(TextureFormat texFormat, GLenum& internalFormat, GLenum& format, GLenum& type)
+{
+    switch (texFormat)
+    {
+    case TextureFormat::R8UNorm:
+        internalFormat = GL_R8;
+        format = GL_R;
+        type = GL_UNSIGNED_BYTE;
+        break;
+    case TextureFormat::R8SNorm:
+        internalFormat = GL_R8_SNORM;
+        format = GL_R;
+        type = GL_BYTE;
+        break;
+    case TextureFormat::R8UInt:
+        internalFormat = GL_R8UI;
+        format = GL_RED_INTEGER;
+        type = GL_UNSIGNED_BYTE;
+        break;
+    case TextureFormat::R8SInt:
+        internalFormat = GL_R8I;
+        format = GL_RED_INTEGER;
+        type = GL_BYTE;
+        break;
+    case TextureFormat::RG8UNorm:
+        internalFormat = GL_RG8;
+        format = GL_RG;
+        type = GL_UNSIGNED_BYTE;
+        break;
+    case TextureFormat::RG8SNorm:
+        internalFormat = GL_RG8_SNORM;
+        format = GL_RG;
+        type = GL_BYTE;
+        break;
+    case TextureFormat::RG8UInt:
+        internalFormat = GL_RG8UI;
+        format = GL_RG_INTEGER;
+        type = GL_UNSIGNED_BYTE;
+        break;
+    case TextureFormat::RG8SInt:
+        internalFormat = GL_RG8I;
+        format = GL_RG_INTEGER;
+        type = GL_BYTE;
+        break;
+    case TextureFormat::RGBA8UNorm:
+        internalFormat = GL_RGBA8;
+        format = GL_RGBA;
+        type = GL_UNSIGNED_BYTE;
+        break;
+    case TextureFormat::RGBA8SNorm:
+        internalFormat = GL_RGBA8_SNORM;
+        format = GL_RGBA;
+        type = GL_BYTE;
+        break;
+    case TextureFormat::RGBA8UInt:
+        internalFormat = GL_RGBA8UI;
+        format = GL_RGBA_INTEGER;
+        type = GL_UNSIGNED_BYTE;
+        break;
+    case TextureFormat::RGBA8SInt:
+        internalFormat = GL_RGBA8I;
+        format = GL_RGBA_INTEGER;
+        type = GL_BYTE;
+        break;
+    case TextureFormat::R16UNorm:
+        internalFormat = GL_R16;
+        format = GL_R;
+        type = GL_UNSIGNED_SHORT;
+        break;
+    case TextureFormat::R16SNorm:
+        internalFormat = GL_R16_SNORM;
+        format = GL_R;
+        type = GL_SHORT;
+        break;
+    case TextureFormat::R16UInt:
+        internalFormat = GL_R16UI;
+        format = GL_RED_INTEGER;
+        type = GL_UNSIGNED_SHORT;
+        break;
+    case TextureFormat::R16SInt:
+        internalFormat = GL_R16I;
+        format = GL_RED_INTEGER;
+        type = GL_SHORT;
+        break;
+    case TextureFormat::RG16UNorm:
+        internalFormat = GL_RG16;
+        format = GL_RG;
+        type = GL_UNSIGNED_SHORT;
+        break;
+    case TextureFormat::RG16SNorm:
+        internalFormat = GL_RG16_SNORM;
+        format = GL_RG;
+        type = GL_SHORT;
+        break;
+    case TextureFormat::RG16UInt:
+        internalFormat = GL_RG16UI;
+        format = GL_RG_INTEGER;
+        type = GL_UNSIGNED_SHORT;
+        break;
+    case TextureFormat::RG16SInt:
+        internalFormat = GL_RG16I;
+        format = GL_RG_INTEGER;
+        type = GL_SHORT;
+        break;
+    case TextureFormat::RGBA16UNorm:
+        internalFormat = GL_RGBA16;
+        format = GL_RGBA;
+        type = GL_UNSIGNED_SHORT;
+        break;
+    case TextureFormat::RGBA16SNorm:
+        internalFormat = GL_RGBA16_SNORM;
+        format = GL_RGBA;
+        type = GL_SHORT;
+        break;
+    case TextureFormat::RGBA16UInt:
+        internalFormat = GL_RGBA16UI;
+        format = GL_RGBA_INTEGER;
+        type = GL_UNSIGNED_SHORT;
+        break;
+    case TextureFormat::RGBA16SInt:
+        internalFormat = GL_RGBA16I;
+        format = GL_RGBA_INTEGER;
+        type = GL_SHORT;
+        break;
+
+    case TextureFormat::R32Float:
+        internalFormat = GL_R32F;
+        format = GL_R;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::RG32Float:
+        internalFormat = GL_RG32F;
+        format = GL_RG;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::RGB32Float:
+        internalFormat = GL_RGB32F;
+        format = GL_RGB;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::RGBA32Float:
+        internalFormat = GL_RGBA32F;
+        format = GL_RGBA;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::Depth16:
+        internalFormat = GL_DEPTH_COMPONENT16;
+        format = GL_DEPTH_COMPONENT16;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::Depth32:
+        internalFormat = GL_DEPTH_COMPONENT32F;
+        format = GL_DEPTH_COMPONENT32F;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::Depth24Stencil8:
+        internalFormat = GL_DEPTH24_STENCIL8;
+        format = GL_DEPTH24_STENCIL8;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::Depth32Stencil8:
+        internalFormat = GL_DEPTH32F_STENCIL8;
+        format = GL_DEPTH32F_STENCIL8;
+        type = GL_FLOAT;
+        break;
+
+    default:
+        // TODO: log error
+        return false;
+    }
+
+    return true;
+}
+
 class OGLFramebuffer : public impl::Framebuffer
 {
     // TODO
@@ -42,67 +216,153 @@ class OGLSampler : public impl::Sampler
 class OGLTexture1D : public impl::Texture1D
 {
 public:
+    OGLTexture1D(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : id(id), internalFormat(internalFormat), format(format), type(type)
+    {
+    }
+
+    virtual ~OGLTexture1D() override
+    {
+        glDeleteTextures(1, &this->id);
+    }
+
     virtual void update(size_t x, size_t width, const void* data, size_t level) override
     {
-        // TODO
+        glBindTexture(GL_TEXTURE_1D, this->id);
+        glTexSubImage1D(GL_TEXTURE_1D, level, x, width, this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
     {
-        // TODO
+        glBindTexture(GL_TEXTURE_1D, this->id);
+        glGenerateMipmap(GL_TEXTURE_1D);
     }
 
-    // TODO
+    GLuint id;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 };
 
 class OGLTexture2D : public impl::Texture2D
 {
 public:
+    OGLTexture2D(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : id(id), internalFormat(internalFormat), format(format), type(type)
+    {
+    }
+
+    virtual ~OGLTexture2D() override
+    {
+        glDeleteTextures(1, &this->id);
+    }
+
     virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data, size_t level) override
     {
-        // TODO
+        glBindTexture(GL_TEXTURE_2D, this->id);
+        glTexSubImage2D(GL_TEXTURE_2D, level, x, y, width, height, this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
     {
-        // TODO
+        glBindTexture(GL_TEXTURE_2D, this->id);
+        glGenerateMipmap(GL_TEXTURE_2D);
     }
 
-    // TODO
+    GLuint id;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 };
 
 class OGLTexture3D : public impl::Texture3D
 {
 public:
+    OGLTexture3D(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : id(id), internalFormat(internalFormat), format(format), type(type)
+    {
+    }
+
+    virtual ~OGLTexture3D() override
+    {
+        glDeleteTextures(1, &this->id);
+    }
+
     virtual void update(size_t x, size_t y, size_t z, size_t width, size_t height, size_t depth, const void* data,
                         size_t level) override
     {
-        // TODO
+        glBindTexture(GL_TEXTURE_3D, this->id);
+        glTexSubImage3D(GL_TEXTURE_3D, level, x, y, z, width, height, depth, this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
     {
-        // TODO
+        glBindTexture(GL_TEXTURE_3D, this->id);
+        glGenerateMipmap(GL_TEXTURE_3D);
     }
 
-    // TODO
+    GLuint id;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 };
 
 class OGLCubeMap : public impl::CubeMap
 {
 public:
+    OGLCubeMap(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : id(id), internalFormat(internalFormat), format(format), type(type)
+    {
+    }
+
+    virtual ~OGLCubeMap() override
+    {
+        glDeleteTextures(1, &this->id);
+    }
+
     virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data, CubeFace face,
                         size_t level) override
     {
-        // TODO
+        GLenum glFace;
+
+        switch (face)
+        {
+        case CubeFace::PositiveX:
+            glFace = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+            break;
+        case CubeFace::NegativeX:
+            glFace = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
+            break;
+        case CubeFace::PositiveY:
+            glFace = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
+            break;
+        case CubeFace::NegativeY:
+            glFace = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y;
+            break;
+        case CubeFace::PositiveZ:
+            glFace = GL_TEXTURE_CUBE_MAP_POSITIVE_Z;
+            break;
+        case CubeFace::NegativeZ:
+            glFace = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
+            break;
+        default:
+            abort();
+        }
+
+        glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
+        glTexSubImage2D(glFace, level, x, y, width, height, this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
     {
-        // TODO
+        glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
+        glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
     }
 
-    // TODO
+    GLuint id;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 };
 
 class OGLConstantBuffer : public impl::ConstantBuffer
@@ -226,15 +486,7 @@ public:
 class OGLShaderBindingPoint : public impl::ShaderBindingPoint
 {
 public:
-    enum class Type
-    {
-        UniformBlock,
-        Sampler1D,
-        Sampler2D,
-        Sampler3D,
-    };
-
-    OGLShaderBindingPoint(const char* name, int loc, Type type) : name(name), loc(loc), type(type)
+    OGLShaderBindingPoint(const char* name, int loc) : name(name), loc(loc)
     {
     }
 
@@ -245,28 +497,50 @@ public:
 
     virtual void bind(Texture1D tex) override
     {
-        // TODO
+        glActiveTexture(GL_TEXTURE0 + this->loc);
+        if (tex)
+            glBindTexture(GL_TEXTURE_1D, std::static_pointer_cast<OGLTexture1D>(tex)->id);
+        else
+            glBindTexture(GL_TEXTURE_1D, 0);
+        glUniform1i(this->loc, this->loc);
     }
 
     virtual void bind(Texture2D tex) override
     {
-        // TODO
+        glActiveTexture(GL_TEXTURE0 + this->loc);
+        if (tex)
+            glBindTexture(GL_TEXTURE_2D, std::static_pointer_cast<OGLTexture2D>(tex)->id);
+        else
+            glBindTexture(GL_TEXTURE_2D, 0);
+        glUniform1i(this->loc, this->loc);
     }
 
     virtual void bind(Texture3D tex) override
     {
-        // TODO
+        glActiveTexture(GL_TEXTURE0 + this->loc);
+        if (tex)
+            glBindTexture(GL_TEXTURE_3D, std::static_pointer_cast<OGLTexture3D>(tex)->id);
+        else
+            glBindTexture(GL_TEXTURE_3D, 0);
+        glUniform1i(this->loc, this->loc);
     }
 
     virtual void bind(CubeMap cubeMap) override
     {
-        // TODO
+        glActiveTexture(GL_TEXTURE0 + this->loc);
+        if (cubeMap)
+            glBindTexture(GL_TEXTURE_CUBE_MAP, std::static_pointer_cast<OGLCubeMap>(cubeMap)->id);
+        else
+            glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+        glUniform1i(this->loc, this->loc);
     }
 
     virtual void bind(ConstantBuffer cb) override
     {
-        assert(this->type == Type::UniformBlock);
-        glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+        if (cb)
+            glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+        else
+            glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
     }
 
     virtual bool queryConstantBufferStructure(ConstantBufferStructure* structure) override
@@ -276,7 +550,6 @@ public:
 
     std::string name;
     int loc;
-    Type type;
 };
 
 class OGLShaderPipeline : public impl::ShaderPipeline
@@ -304,11 +577,16 @@ public:
         if (loc != GL_INVALID_INDEX)
         {
             glUniformBlockBinding(this->program, loc, loc);
-            bps.emplace_back(name, loc, OGLShaderBindingPoint::Type::UniformBlock);
+            bps.emplace_back(name, loc);
             return &bps.back();
         }
 
-        // TODO: add samplers
+        loc = glGetUniformLocation(this->program, name);
+        if (loc != -1)
+        {
+            bps.emplace_back(name, loc);
+            return &bps.back();
+        }
 
         return nullptr;
     }
@@ -376,22 +654,153 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
 
 Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
 {
-    return nullptr; // TODO
+    if (desc.format == TextureFormat::Depth16 || desc.format == TextureFormat::Depth32 ||
+        desc.format == TextureFormat::Depth24Stencil8 || desc.format == TextureFormat::Depth32Stencil8)
+        return nullptr; // TODO: log error (1D textures cannot be depth/stencil textures)
+
+    GLenum internalFormat, format, type;
+
+    if (!textureFormatToParams(desc.format, internalFormat, format, type))
+        return nullptr;
+
+    // Initialize texture
+    GLuint id;
+    glGenTextures(1, &id);
+    glBindTexture(GL_TEXTURE_1D, id);
+    for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+        glTexImage1D(GL_TEXTURE_1D, i, internalFormat, desc.width / div, 0, format, type, desc.data[i]);
+    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_1D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteTextures(1, &id);
+
+        // TODO: log error
+        return nullptr;
+    }
+
+    return std::make_shared<OGLTexture1D>(id, internalFormat, format, type);
 }
 
 Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
 {
-    return nullptr; // TODO
+    GLenum internalFormat, format, type;
+
+    if (!textureFormatToParams(desc.format, internalFormat, format, type))
+        return nullptr;
+
+    // Initialize texture
+    GLuint id;
+    glGenTextures(1, &id);
+    glBindTexture(GL_TEXTURE_2D, id);
+    for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+        glTexImage2D(GL_TEXTURE_2D, i, internalFormat, desc.width / div, desc.height / div, 0, format, type,
+                     desc.data[i]);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteTextures(1, &id);
+
+        // TODO: log error
+        return nullptr;
+    }
+
+    return std::make_shared<OGLTexture2D>(id, internalFormat, format, type);
 }
 
 Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
 {
-    return nullptr; // TODO
+    if (desc.format == TextureFormat::Depth16 || desc.format == TextureFormat::Depth32 ||
+        desc.format == TextureFormat::Depth24Stencil8 || desc.format == TextureFormat::Depth32Stencil8)
+        return nullptr; // TODO: log error (3D textures cannot be depth/stencil textures)
+
+    GLenum internalFormat, format, type;
+
+    if (!textureFormatToParams(desc.format, internalFormat, format, type))
+        return nullptr;
+
+    // Initialize texture
+    GLuint id;
+    glGenTextures(1, &id);
+    glBindTexture(GL_TEXTURE_3D, id);
+    for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+        glTexImage3D(GL_TEXTURE_3D, i, internalFormat, desc.width / div, desc.height / div, desc.depth / div, 0, format,
+                     type, desc.data[i]);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_3D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteTextures(1, &id);
+
+        // TODO: log error
+        return nullptr;
+    }
+
+    return std::make_shared<OGLTexture3D>(id, internalFormat, format, type);
 }
 
 CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 {
-    return nullptr; // TODO
+    GLenum internalFormat, format, type;
+
+    if (!textureFormatToParams(desc.format, internalFormat, format, type))
+        return nullptr;
+
+    // Initialize texture
+    GLuint id;
+    glGenTextures(1, &id);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, id);
+    for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+    {
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, i, internalFormat, desc.width / div, desc.height / div, 0, format,
+                     type, desc.data[static_cast<int>(CubeFace::PositiveX)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, i, internalFormat, desc.width / div, desc.height / div, 0, format,
+                     type, desc.data[static_cast<int>(CubeFace::NegativeX)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, i, internalFormat, desc.width / div, desc.height / div, 0, format,
+                     type, desc.data[static_cast<int>(CubeFace::PositiveY)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, i, internalFormat, desc.width / div, desc.height / div, 0, format,
+                     type, desc.data[static_cast<int>(CubeFace::NegativeY)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, i, internalFormat, desc.width / div, desc.height / div, 0, format,
+                     type, desc.data[static_cast<int>(CubeFace::PositiveZ)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, i, internalFormat, desc.width / div, desc.height / div, 0, format,
+                     type, desc.data[static_cast<int>(CubeFace::NegativeZ)][i]);         
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameterf(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteTextures(1, &id);
+
+        // TODO: log error
+        return nullptr;
+    }
+
+    return std::make_shared<OGLCubeMap>(id, internalFormat, format, type);
 }
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage)
