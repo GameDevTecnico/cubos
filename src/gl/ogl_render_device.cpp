@@ -3,6 +3,7 @@
 #ifdef WITH_OPENGL
 
 #include <glad/glad.h>
+
 #ifdef WITH_GLFW
 #include <GLFW/glfw3.h>
 #endif

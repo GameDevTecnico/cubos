@@ -9,6 +9,7 @@ using namespace cubos;
 
 int main(void)
 {
+    initializeLogger();
     auto window = io::Window();
     auto& renderDevice = window.getRenderDevice();
 

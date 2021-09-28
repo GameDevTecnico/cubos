@@ -102,9 +102,11 @@ Also, you can use versions of the required libraries that are installed on your 
 
 ## Who is making this engine
 
-We are  [Gamedev Técnico](https://www.instagram.com/gamedevtecnico/), a student group from [Instituto Superior Técnico](https://tecnico.ulisboa.pt/en/) who loves to make games. Our goal is  to build a game engine from the ground up. 
+We are  [Gamedev Técnico](https://www.instagram.com/gamedevtecnico/), a student group from [Instituto Superior Técnico](https://tecnico.ulisboa.pt/en/) who makes games. Our goal is to build a game engine from the ground up. 
 
 Find us at:
+
+[Twitter](https://twitter.com/GameDevTecnico)
 
 [Facebook](https://www.facebook.com/Game-Dev-T%C3%A9cnico-107405047487324/)
 
