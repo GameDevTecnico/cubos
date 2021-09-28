@@ -1,3 +1,4 @@
+#include <cubos/log.hpp>
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
 
