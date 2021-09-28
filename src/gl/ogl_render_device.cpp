@@ -212,23 +212,73 @@ static void addressToGL(AddressMode mode, GLenum& address)
     }
 }
 
+// Converts a cube face to a GL face
+static void cubeFaceToGL(CubeFace cubeFace, GLenum& face)
+{
+    switch (cubeFace)
+    {
+    case CubeFace::PositiveX:
+        face = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+        break;
+    case CubeFace::NegativeX:
+        face = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
+        break;
+    case CubeFace::PositiveY:
+        face = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
+        break;
+    case CubeFace::NegativeY:
+        face = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y;
+        break;
+    case CubeFace::PositiveZ:
+        face = GL_TEXTURE_CUBE_MAP_POSITIVE_Z;
+        break;
+    case CubeFace::NegativeZ:
+        face = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
+        break;
+    default:
+        abort(); // Invalid enum
+    }
+}
+
 class OGLFramebuffer : public impl::Framebuffer
 {
-    // TODO
+public:
+    OGLFramebuffer(GLuint id) : id(id)
+    {
+    }
+
+    virtual ~OGLFramebuffer() override
+    {
+        glDeleteFramebuffers(1, &this->id);
+    }
+
+    GLuint id;
 };
 
 class OGLRasterState : public impl::RasterState
 {
+public:
+    OGLRasterState() = default;
+    virtual ~OGLRasterState() = default;
+
     // TODO
 };
 
 class OGLDepthStencilState : public impl::DepthStencilState
 {
+public:
+    OGLDepthStencilState() = default;
+    virtual ~OGLDepthStencilState() = default;
+
     // TODO
 };
 
 class OGLBlendState : public impl::BlendState
 {
+public:
+    OGLBlendState() = default;
+    virtual ~OGLBlendState() = default;
+
     // TODO
 };
 
@@ -358,30 +408,7 @@ public:
                         size_t level) override
     {
         GLenum glFace;
-
-        switch (face)
-        {
-        case CubeFace::PositiveX:
-            glFace = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-            break;
-        case CubeFace::NegativeX:
-            glFace = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
-            break;
-        case CubeFace::PositiveY:
-            glFace = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
-            break;
-        case CubeFace::NegativeY:
-            glFace = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y;
-            break;
-        case CubeFace::PositiveZ:
-            glFace = GL_TEXTURE_CUBE_MAP_POSITIVE_Z;
-            break;
-        case CubeFace::NegativeZ:
-            glFace = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
-            break;
-        default:
-            abort();
-        }
+        cubeFaceToGL(face, glFace);
 
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
         glTexSubImage2D(glFace, level, x, y, width, height, this->format, this->type, data);
@@ -652,12 +679,89 @@ OGLRenderDevice::OGLRenderDevice()
 
 Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
 {
-    return nullptr; // TODO
+    // Validate arguments
+    if (desc.targetCount == 0)
+    {
+        logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer must have at least one render target");
+        return nullptr;
+    }
+    else if (desc.targetCount > CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT)
+    {
+        logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer can only have at most {} render targets",
+                 CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT);
+        return nullptr;
+    }
+
+    for (int i = 0; i < desc.targetCount; ++i)
+        if (desc.targets[i].isCubeMap && desc.targets[i].cubeMap.handle == nullptr ||
+            !desc.targets[i].isCubeMap && desc.targets[i].texture.handle == nullptr)
+        {
+            logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+            return nullptr;
+        }
+
+    // Initialize framebuffer
+    GLuint id;
+    glGenFramebuffers(1, &id);
+    glBindFramebuffer(GL_FRAMEBUFFER, id);
+
+    // Attach targets
+    for (int i = 0; i < desc.targetCount; ++i)
+        if (desc.targets[i].isCubeMap)
+        {
+            GLenum face;
+            cubeFaceToGL(desc.targets[i].cubeMap.face, face);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, face,
+                                   std::static_pointer_cast<OGLTexture2D>(desc.targets[i].texture.handle)->id, 0);
+        }
+        else
+        {
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, GL_TEXTURE_2D,
+                                   std::static_pointer_cast<OGLTexture2D>(desc.targets[i].texture.handle)->id, 0);
+        }
+
+    // Attach depth stencil texture
+    if (desc.depthStencil)
+    {
+        auto ds = std::static_pointer_cast<OGLTexture2D>(desc.depthStencil);
+        if (ds->format == GL_DEPTH_COMPONENT16 || ds->format == GL_DEPTH_COMPONENT32F)
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+        else if (ds->format == GL_DEPTH24_STENCIL8 || ds->format == GL_DEPTH32F_STENCIL8)
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+        else
+        {
+            glDeleteFramebuffers(1, &id);
+            logError("OGLRenderDevice::createFramebuffer() failed: invalid depth stencil texture format");
+            return nullptr;
+        }
+    }
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteFramebuffers(1, &id);
+        logError("OGLRenderDevice::createFramebuffer() failed: OpenGL error {}", glErr);
+        return nullptr;
+    }
+
+    // Check if the framebuffer is complete
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    {
+        glDeleteFramebuffers(1, &id);
+        logError("OGLRenderDevice::createFramebuffer(): glCheckFramebufferStatus didn't return GL_FRAMEBUFFER_COMPLETE");
+        return nullptr;
+    }
+
+    return std::make_shared<OGLFramebuffer>(id);
 }
 
 void OGLRenderDevice::setFramebuffer(Framebuffer fb)
 {
-    // TODO
+    if (fb)
+        glBindFramebuffer(GL_FRAMEBUFFER, std::static_pointer_cast<OGLFramebuffer>(fb)->id);
+    else
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 RasterState OGLRenderDevice::createRasterState(const RasterStateDesc& desc)
@@ -1072,7 +1176,8 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
         if (loc == -1)
         {
             glDeleteVertexArrays(1, &id);
-            logError("OGLRenderDevice::createVertexArray() failed: couldn't find vertex element with name '{}'", desc.elements[i].name);
+            logError("OGLRenderDevice::createVertexArray() failed: couldn't find vertex element with name '{}'",
+                     desc.elements[i].name);
             return nullptr;
         }
 
