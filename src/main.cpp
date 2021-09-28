@@ -49,8 +49,7 @@ int main(void)
     auto pp = renderDevice.createShaderPipeline(vs, ps);
 
     float verts[] = {
-        -0.5f, -0.5f, 0.0f, 0.0f, -0.5f, +0.5f, 0.0f, 1.0f,
-        +0.5f, +0.5f, 1.0f, 1.0f, +0.5f, -0.5f, 1.0f, 0.0f,
+        -0.5f, -0.5f, 0.0f, 0.0f, -0.5f, +0.5f, 0.0f, 1.0f, +0.5f, +0.5f, 1.0f, 1.0f, +0.5f, -0.5f, 1.0f, 0.0f,
     };
 
     auto vb = renderDevice.createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
@@ -64,10 +63,8 @@ int main(void)
     auto cb = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
     auto cbBP = pp->getBindingPoint("MVP");
 
-
     float textureData[] = {
-        0.0f, 0.0f, 0.0f,   1.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,   0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
     };
 
     gl::Texture2DDesc textureDesc;
@@ -77,6 +74,13 @@ int main(void)
     textureDesc.height = 2;
     auto texture = renderDevice.createTexture2D(textureDesc);
     auto textureBP = pp->getBindingPoint("colorTexture");
+
+    gl::SamplerDesc samplerDesc;
+    samplerDesc.minFilter = gl::TextureFilter::Linear;
+    samplerDesc.magFilter = gl::TextureFilter::Linear;
+    samplerDesc.addressU = gl::AddressMode::Mirror;
+    samplerDesc.addressV = gl::AddressMode::Mirror;
+    auto sampler = renderDevice.createSampler(samplerDesc);
 
     gl::VertexArrayDesc vaDesc;
     vaDesc.elementCount = 2;
@@ -112,10 +116,11 @@ int main(void)
         auto& mvp = *(glm::mat4*)cb->map();
         mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
               glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f}) *
-              glm::rotate(glm::mat4(1.0f), t, glm::vec3{ 0.0f, 1.0f, 0.0f });
+              glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
         cb->unmap();
         cbBP->bind(cb);
         textureBP->bind(texture);
+        textureBP->bind(sampler);
         renderDevice.drawTrianglesIndexed(0, 6);
 
         window.swapBuffers();
