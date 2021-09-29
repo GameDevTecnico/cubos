@@ -102,6 +102,10 @@ int main(void)
     vaDesc.shaderPipeline = pp;
     auto va = renderDevice.createVertexArray(vaDesc);
 
+    gl::RasterStateDesc rsDesc;
+    rsDesc.rasterMode = gl::RasterMode::Wireframe;
+    auto rs = renderDevice.createRasterState(rsDesc);
+
     float t = 0.0f;
 
     while (!window.shouldClose())
@@ -115,14 +119,32 @@ int main(void)
         renderDevice.setVertexArray(va);
         renderDevice.setIndexBuffer(ib);
 
-        auto& mvp = *(glm::mat4*)cb->map();
-        mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
-              glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f}) *
-              glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
-        cb->unmap();
-        cbBP->bind(cb);
         textureBP->bind(texture);
         textureBP->bind(sampler);
+        cbBP->bind(cb);
+
+        {
+            auto& mvp = *(glm::mat4*)cb->map();
+            mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
+                  glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f}) *
+                  glm::translate(glm::mat4(1.0f), glm::vec3{-2.0f, 0.0f, 0.0f}) *
+                  glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
+            cb->unmap();
+        }
+
+        renderDevice.setRasterState(nullptr);
+        renderDevice.drawTrianglesIndexed(0, 6);
+
+        {
+            auto& mvp = *(glm::mat4*)cb->map();
+            mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
+                  glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f}) *
+                  glm::translate(glm::mat4(1.0f), glm::vec3{2.0f, 0.0f, 0.0f}) *
+                  glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
+            cb->unmap();
+        }
+
+        renderDevice.setRasterState(rs);
         renderDevice.drawTrianglesIndexed(0, 6);
 
         window.swapBuffers();

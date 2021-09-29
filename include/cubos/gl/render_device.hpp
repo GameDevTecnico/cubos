@@ -269,6 +269,7 @@ namespace cubos::gl
     struct RasterStateDesc
     {
         bool cullEnabled = false;                 /// Is face culling enabled?
+        Face cullFace = Face::Back;               /// Face that will be culled
         Winding frontFace = Winding::CCW;         /// Front face winding
         RasterMode rasterMode = RasterMode::Fill; /// Rasterizer mode
     };
@@ -445,7 +446,7 @@ namespace cubos::gl
 
         /// Creates a new depth stencil state
         /// @return Depth stencil state handle, or nullptr if the creation failed
-        virtual DepthStencilState createRasterState(const DepthStencilStateDesc& desc) = 0;
+        virtual DepthStencilState createDepthStencilState(const DepthStencilStateDesc& desc) = 0;
 
         /// Sets the current depth stencil state
         virtual void setDepthStencilState(DepthStencilState dss) = 0;
