@@ -212,24 +212,286 @@ static void addressToGL(AddressMode mode, GLenum& address)
     }
 }
 
+// Converts a cube face to a GL face
+static void cubeFaceToGL(CubeFace cubeFace, GLenum& face)
+{
+    switch (cubeFace)
+    {
+    case CubeFace::PositiveX:
+        face = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+        break;
+    case CubeFace::NegativeX:
+        face = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
+        break;
+    case CubeFace::PositiveY:
+        face = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
+        break;
+    case CubeFace::NegativeY:
+        face = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y;
+        break;
+    case CubeFace::PositiveZ:
+        face = GL_TEXTURE_CUBE_MAP_POSITIVE_Z;
+        break;
+    case CubeFace::NegativeZ:
+        face = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
+        break;
+    default:
+        abort(); // Invalid enum
+    }
+}
+
+// Converts a face to a GL face
+static void faceToGL(Face face, GLenum& glFace)
+{
+    switch (face)
+    {
+    case Face::Front:
+        glFace = GL_FRONT;
+        break;
+    case Face::Back:
+        glFace = GL_BACK;
+        break;
+    case Face::FrontAndBack:
+        glFace = GL_FRONT_AND_BACK;
+        break;
+    default:
+        abort(); // Invalid enum
+    }
+}
+
+// Converts a winding to a GL winding
+static void windingToGL(Winding winding, GLenum& glWinding)
+{
+    switch (winding)
+    {
+    case Winding::CW:
+        glWinding = GL_CW;
+        break;
+    case Winding::CCW:
+        glWinding = GL_CCW;
+        break;
+    default:
+        abort(); // Invalid enum
+    }
+}
+
+// Converts a raster mode to the GL equivalent
+static void rasterModeToGL(RasterMode rasterMode, GLenum& polygonMode)
+{
+    switch (rasterMode)
+    {
+    case RasterMode::Fill:
+        polygonMode = GL_FILL;
+        break;
+    case RasterMode::Wireframe:
+        polygonMode = GL_LINE;
+        break;
+    default:
+        abort(); // Invalid enum
+    }
+}
+
+// Converts a comparison function to the GL equivalent
+static void compareToGL(Compare compare, GLenum& glCompare)
+{
+    switch (compare)
+    {
+    case Compare::Never:
+        glCompare = GL_NEVER;
+        break;
+    case Compare::Less:
+        glCompare = GL_LESS;
+        break;
+    case Compare::LEqual:
+        glCompare = GL_LEQUAL;
+        break;
+    case Compare::Greater:
+        glCompare = GL_GREATER;
+        break;
+    case Compare::GEqual:
+        glCompare = GL_GEQUAL;
+        break;
+    case Compare::Equal:
+        glCompare = GL_EQUAL;
+        break;
+    case Compare::NEqual:
+        glCompare = GL_NOTEQUAL;
+        break;
+    case Compare::Always:
+        glCompare = GL_ALWAYS;
+        break;
+    default:
+        abort(); // Invalid enum
+    }
+}
+
+// Converts a stencil action to the GL equivalent
+static void stencilActionToGL(StencilAction action, GLenum& glAction)
+{
+    switch (action)
+    {
+    case StencilAction::Keep:
+        glAction = GL_NEVER;
+        break;
+    case StencilAction::Zero:
+        glAction = GL_ZERO;
+        break;
+    case StencilAction::Replace:
+        glAction = GL_REPLACE;
+        break;
+    case StencilAction::Increment:
+        glAction = GL_INCR;
+        break;
+    case StencilAction::IncrementWrap:
+        glAction = GL_INCR_WRAP;
+        break;
+    case StencilAction::Decrement:
+        glAction = GL_DECR;
+        break;
+    case StencilAction::DecrementWrap:
+        glAction = GL_DECR_WRAP;
+        break;
+    case StencilAction::Invert:
+        glAction = GL_INVERT;
+        break;
+    default:
+        abort(); // Invalid enum
+    }
+}
+
+// Converts a blend factor to the GL equivalent
+static void blendFactorToGL(BlendFactor blendFactor, GLenum& glBlendFactor)
+{
+    switch (blendFactor)
+    {
+    case BlendFactor::Zero:
+        glBlendFactor = GL_ZERO;
+        break;
+    case BlendFactor::One:
+        glBlendFactor = GL_ONE;
+        break;
+    case BlendFactor::SrcColor:
+        glBlendFactor = GL_SRC_COLOR;
+        break;
+    case BlendFactor::InvSrcColor:
+        glBlendFactor = GL_ONE_MINUS_SRC_COLOR;
+        break;
+    case BlendFactor::DstColor:
+        glBlendFactor = GL_DST_COLOR;
+        break;
+    case BlendFactor::InvDstColor:
+        glBlendFactor = GL_ONE_MINUS_DST_COLOR;
+        break;
+    case BlendFactor::SrcAlpha:
+        glBlendFactor = GL_SRC_ALPHA;
+        break;
+    case BlendFactor::InvSrcAlpha:
+        glBlendFactor = GL_ONE_MINUS_SRC_ALPHA;
+        break;
+    case BlendFactor::DstAlpha:
+        glBlendFactor = GL_DST_ALPHA;
+        break;
+    case BlendFactor::InvDstAlpha:
+        glBlendFactor = GL_ONE_MINUS_DST_ALPHA;
+        break;
+    default:
+        abort(); // Invalid enum
+    }
+}
+
+// Converts a blend operation to the GL equivalent
+static void blendOpToGL(BlendOp blendOp, GLenum& glBlendOp)
+{
+    switch (blendOp)
+    {
+    case BlendOp::Add:
+        glBlendOp = GL_FUNC_ADD;
+        break;
+    case BlendOp::Substract:
+        glBlendOp = GL_FUNC_SUBTRACT;
+        break;
+    case BlendOp::RevSubstract:
+        glBlendOp = GL_FUNC_REVERSE_SUBTRACT;
+        break;
+    case BlendOp::Max:
+        glBlendOp = GL_MAX;
+        break;
+    case BlendOp::Min:
+        glBlendOp = GL_MIN;
+        break;
+    default:
+        abort(); // Invalid enum
+    }
+}
+
 class OGLFramebuffer : public impl::Framebuffer
 {
-    // TODO
+public:
+    OGLFramebuffer(GLuint id) : id(id)
+    {
+    }
+
+    virtual ~OGLFramebuffer() override
+    {
+        glDeleteFramebuffers(1, &this->id);
+    }
+
+    GLuint id;
 };
 
 class OGLRasterState : public impl::RasterState
 {
-    // TODO
+public:
+    OGLRasterState() = default;
+    virtual ~OGLRasterState() = default;
+
+    GLboolean cullEnabled;
+    GLenum frontFace;
+    GLenum cullFace;
+    GLenum polygonMode;
 };
 
 class OGLDepthStencilState : public impl::DepthStencilState
 {
-    // TODO
+public:
+    OGLDepthStencilState() = default;
+    virtual ~OGLDepthStencilState() = default;
+
+    GLboolean depthEnabled;
+    GLboolean depthWriteEnabled;
+    GLfloat depthNear;
+    GLfloat depthFar;
+    GLenum depthFunc;
+
+    GLuint stencilRef;
+    GLboolean stencilEnabled;
+    GLuint stencilReadMask;
+    GLuint stencilWriteMask;
+
+    GLenum frontStencilFunc;
+    GLenum frontFaceStencilFail;
+    GLenum frontFaceStencilPass;
+    GLenum frontFaceDepthFail;
+
+    GLenum backStencilFunc;
+    GLenum backFaceStencilFail;
+    GLenum backFaceStencilPass;
+    GLenum backFaceDepthFail;
 };
 
 class OGLBlendState : public impl::BlendState
 {
-    // TODO
+public:
+    OGLBlendState() = default;
+    virtual ~OGLBlendState() = default;
+
+    GLboolean blendEnabled;
+    GLenum srcFactor;
+    GLenum dstFactor;
+    GLenum blendOp;
+    GLenum srcAlphaFactor;
+    GLenum dstAlphaFactor;
+    GLenum alphaBlendOp;
 };
 
 class OGLSampler : public impl::Sampler
@@ -358,30 +620,7 @@ public:
                         size_t level) override
     {
         GLenum glFace;
-
-        switch (face)
-        {
-        case CubeFace::PositiveX:
-            glFace = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-            break;
-        case CubeFace::NegativeX:
-            glFace = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
-            break;
-        case CubeFace::PositiveY:
-            glFace = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
-            break;
-        case CubeFace::NegativeY:
-            glFace = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y;
-            break;
-        case CubeFace::PositiveZ:
-            glFace = GL_TEXTURE_CUBE_MAP_POSITIVE_Z;
-            break;
-        case CubeFace::NegativeZ:
-            glFace = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
-            break;
-        default:
-            abort();
-        }
+        cubeFaceToGL(face, glFace);
 
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
         glTexSubImage2D(glFace, level, x, y, width, height, this->format, this->type, data);
@@ -637,57 +876,218 @@ OGLRenderDevice::OGLRenderDevice()
 {
 #ifdef WITH_GLFW
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        logCritical("OGLRenderDevice::OGLRenderDevice() failed: OpenGL loader failed");
-        abort();
-    }
 #else
     if (!gladLoadGL())
+#endif
     {
         logCritical("OGLRenderDevice::OGLRenderDevice() failed: OpenGL loader failed");
         abort();
     }
-#endif
+
+    // Create default states
+    this->defaultRS = this->createRasterState({});
+    this->defaultDSS = this->createDepthStencilState({});
+    this->defaultBS = this->createBlendState({});
 }
 
 Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
 {
-    return nullptr; // TODO
+    // Validate arguments
+    if (desc.targetCount == 0)
+    {
+        logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer must have at least one render target");
+        return nullptr;
+    }
+    else if (desc.targetCount > CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT)
+    {
+        logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer can only have at most {} render targets",
+                 CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT);
+        return nullptr;
+    }
+
+    for (int i = 0; i < desc.targetCount; ++i)
+        if (desc.targets[i].isCubeMap && desc.targets[i].cubeMap.handle == nullptr ||
+            !desc.targets[i].isCubeMap && desc.targets[i].texture.handle == nullptr)
+        {
+            logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+            return nullptr;
+        }
+
+    // Initialize framebuffer
+    GLuint id;
+    glGenFramebuffers(1, &id);
+    glBindFramebuffer(GL_FRAMEBUFFER, id);
+
+    // Attach targets
+    for (int i = 0; i < desc.targetCount; ++i)
+        if (desc.targets[i].isCubeMap)
+        {
+            GLenum face;
+            cubeFaceToGL(desc.targets[i].cubeMap.face, face);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, face,
+                                   std::static_pointer_cast<OGLTexture2D>(desc.targets[i].texture.handle)->id, 0);
+        }
+        else
+        {
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, GL_TEXTURE_2D,
+                                   std::static_pointer_cast<OGLTexture2D>(desc.targets[i].texture.handle)->id, 0);
+        }
+
+    // Attach depth stencil texture
+    if (desc.depthStencil)
+    {
+        auto ds = std::static_pointer_cast<OGLTexture2D>(desc.depthStencil);
+        if (ds->format == GL_DEPTH_COMPONENT16 || ds->format == GL_DEPTH_COMPONENT32F)
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+        else if (ds->format == GL_DEPTH24_STENCIL8 || ds->format == GL_DEPTH32F_STENCIL8)
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+        else
+        {
+            glDeleteFramebuffers(1, &id);
+            logError("OGLRenderDevice::createFramebuffer() failed: invalid depth stencil texture format");
+            return nullptr;
+        }
+    }
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteFramebuffers(1, &id);
+        logError("OGLRenderDevice::createFramebuffer() failed: OpenGL error {}", glErr);
+        return nullptr;
+    }
+
+    // Check if the framebuffer is complete
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    {
+        glDeleteFramebuffers(1, &id);
+        logError(
+            "OGLRenderDevice::createFramebuffer(): glCheckFramebufferStatus didn't return GL_FRAMEBUFFER_COMPLETE");
+        return nullptr;
+    }
+
+    return std::make_shared<OGLFramebuffer>(id);
 }
 
 void OGLRenderDevice::setFramebuffer(Framebuffer fb)
 {
-    // TODO
+    if (fb)
+        glBindFramebuffer(GL_FRAMEBUFFER, std::static_pointer_cast<OGLFramebuffer>(fb)->id);
+    else
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 RasterState OGLRenderDevice::createRasterState(const RasterStateDesc& desc)
 {
-    return nullptr; // TODO
+    auto rs = std::make_shared<OGLRasterState>();
+    rs->cullEnabled = desc.cullEnabled;
+    faceToGL(desc.cullFace, rs->cullFace);
+    windingToGL(desc.frontFace, rs->frontFace);
+    rasterModeToGL(desc.rasterMode, rs->polygonMode);
+    return rs;
 }
 
-void OGLRenderDevice::setRasterState(RasterState rs)
+void OGLRenderDevice::setRasterState(RasterState _rs)
 {
-    // TODO
+    auto rs = std::static_pointer_cast<OGLRasterState>(_rs ? _rs : this->defaultRS);
+
+    if (!rs->cullEnabled)
+        glDisable(GL_CULL_FACE);
+    else
+    {
+        glEnable(GL_CULL_FACE);
+        glCullFace(rs->cullFace);
+    }
+
+    glFrontFace(rs->frontFace);
+    glPolygonMode(GL_FRONT_AND_BACK, rs->polygonMode);
 }
 
-DepthStencilState OGLRenderDevice::createRasterState(const DepthStencilStateDesc& desc)
+DepthStencilState OGLRenderDevice::createDepthStencilState(const DepthStencilStateDesc& desc)
 {
-    return nullptr; // TODO
+    auto dss = std::make_shared<OGLDepthStencilState>();
+
+    dss->depthEnabled = desc.depth.enabled;
+    dss->depthWriteEnabled = desc.depth.writeEnabled;
+    dss->depthNear = desc.depth.near;
+    dss->depthFar = desc.depth.far;
+    compareToGL(desc.depth.compare, dss->depthFunc);
+
+    dss->stencilEnabled = desc.stencil.enabled;
+    dss->stencilRef = desc.stencil.ref;
+    dss->stencilReadMask = desc.stencil.readMask;
+    dss->stencilWriteMask = desc.stencil.writeMask;
+
+    compareToGL(desc.stencil.frontFace.compare, dss->frontStencilFunc);
+    stencilActionToGL(desc.stencil.frontFace.fail, dss->frontFaceStencilFail);
+    stencilActionToGL(desc.stencil.frontFace.pass, dss->frontFaceStencilPass);
+    stencilActionToGL(desc.stencil.frontFace.depthFail, dss->frontFaceDepthFail);
+
+    compareToGL(desc.stencil.backFace.compare, dss->backStencilFunc);
+    stencilActionToGL(desc.stencil.backFace.fail, dss->backFaceStencilFail);
+    stencilActionToGL(desc.stencil.backFace.pass, dss->backFaceStencilPass);
+    stencilActionToGL(desc.stencil.backFace.depthFail, dss->backFaceDepthFail);
+
+    return dss;
 }
 
-void OGLRenderDevice::setDepthStencilState(DepthStencilState dss)
+void OGLRenderDevice::setDepthStencilState(DepthStencilState _dss)
 {
-    // TODO
+    auto dss = std::static_pointer_cast<OGLDepthStencilState>(_dss ? _dss : this->defaultDSS);
+
+    if (!dss->depthEnabled)
+        glDisable(GL_DEPTH_TEST);
+    else
+    {
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(dss->depthFunc);
+        glDepthMask(dss->depthWriteEnabled);
+        glDepthRange(dss->depthNear, dss->depthFar);
+    }
+
+    if (!dss->stencilEnabled)
+        glDisable(GL_STENCIL_TEST);
+    else
+    {
+        glEnable(GL_STENCIL_TEST);
+
+        glStencilFuncSeparate(GL_FRONT, dss->frontStencilFunc, dss->stencilRef, dss->stencilReadMask);
+        glStencilMaskSeparate(GL_FRONT, dss->stencilWriteMask);
+        glStencilOpSeparate(GL_FRONT, dss->frontFaceStencilFail, dss->frontFaceDepthFail, dss->frontFaceStencilPass);
+        glStencilFuncSeparate(GL_BACK, dss->backStencilFunc, dss->stencilRef, dss->stencilReadMask);
+        glStencilMaskSeparate(GL_BACK, dss->stencilWriteMask);
+        glStencilOpSeparate(GL_BACK, dss->backFaceStencilFail, dss->backFaceDepthFail, dss->backFaceStencilPass);
+    }
 }
 
 BlendState OGLRenderDevice::createBlendState(const BlendStateDesc& desc)
 {
-    return nullptr; // TODO
+    auto bs = std::make_shared<OGLBlendState>();
+
+    bs->blendEnabled = desc.blendEnabled;
+    blendFactorToGL(desc.alpha.src, bs->srcAlphaFactor);
+    blendFactorToGL(desc.alpha.dst, bs->dstAlphaFactor);
+    blendOpToGL(desc.alpha.op, bs->alphaBlendOp);
+    blendFactorToGL(desc.color.src, bs->srcFactor);
+    blendFactorToGL(desc.color.dst, bs->dstFactor);
+    blendOpToGL(desc.color.op, bs->blendOp);
+
+    return bs;
 }
 
-void OGLRenderDevice::setBlendState(BlendState bs)
+void OGLRenderDevice::setBlendState(BlendState _bs)
 {
-    // TODO
+    auto bs = std::static_pointer_cast<OGLBlendState>(_bs ? _bs : this->defaultBS);
+
+    if (!bs->blendEnabled)
+        glDisable(GL_BLEND);
+    else
+    {
+        glEnable(GL_BLEND);
+        glBlendFuncSeparate(bs->srcFactor, bs->dstFactor, bs->srcAlphaFactor, bs->dstAlphaFactor);
+        glBlendEquationSeparate(bs->blendOp, bs->alphaBlendOp);
+    }
 }
 
 Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
@@ -1072,7 +1472,8 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
         if (loc == -1)
         {
             glDeleteVertexArrays(1, &id);
-            logError("OGLRenderDevice::createVertexArray() failed: couldn't find vertex element with name '{}'", desc.elements[i].name);
+            logError("OGLRenderDevice::createVertexArray() failed: couldn't find vertex element with name '{}'",
+                     desc.elements[i].name);
             return nullptr;
         }
 

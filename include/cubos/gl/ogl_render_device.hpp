@@ -16,7 +16,7 @@ namespace cubos::gl
         virtual void setFramebuffer(Framebuffer fb) override;
         virtual RasterState createRasterState(const RasterStateDesc& desc) override;
         virtual void setRasterState(RasterState rs) override;
-        virtual DepthStencilState createRasterState(const DepthStencilStateDesc& desc) override;
+        virtual DepthStencilState createDepthStencilState(const DepthStencilStateDesc& desc) override;
         virtual void setDepthStencilState(DepthStencilState dss) override;
         virtual BlendState createBlendState(const BlendStateDesc& desc) override;
         virtual void setBlendState(BlendState bs) override;
@@ -46,6 +46,10 @@ namespace cubos::gl
 
     private:
         int currentIndexFormat;
+
+        RasterState defaultRS;
+        DepthStencilState defaultDSS;
+        BlendState defaultBS;
     };
 } // namespace cubos::gl
 
