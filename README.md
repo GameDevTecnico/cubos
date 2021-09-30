@@ -104,6 +104,15 @@ Also, you can use versions of the required libraries that are installed on your 
 
 ```cmake -H. -Bbuild -DGLFW_USE_SUBMODULE=OFF -DGLM_USE_SUBMODULE=OFF -DYAMLCPP_USE_SUBMODULE=OFF```
 
+### Testing
+
+We use GoogleTest for unit testing the engine source.
+All tests should be inside *tests* directory.
+
+CMakeLists.txt builds a test executable that can be run using ctest:
+
+```cd build && ctest ```
+
 ## Who is making this engine
 
 We are  [Gamedev Técnico](https://www.instagram.com/gamedevtecnico/), a student group from [Instituto Superior Técnico](https://tecnico.ulisboa.pt/en/) who makes games. Our goal is to build a game engine from the ground up. 
