@@ -19,7 +19,6 @@ set(CUBOS_SOURCE
     "src/log.cpp"
     
     "src/io/glfw_window.cpp"
-
     "src/gl/ogl_render_device.cpp"
 )
 
