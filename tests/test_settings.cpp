@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
 #include <cubos/settings.hpp>
 
-TEST(CUBOS_SETTINGS_SINGLETON_TESTS, GET_SAME_INSTACE)
+TEST(Cubos_Settings_Singleton_Tests, Get_Same_Instance)
 {
-    cubos::Settings * settings1 = cubos::Settings::GetInstance();
-    cubos::Settings * settings2 = cubos::Settings::GetInstance();
+    cubos::Settings* settings1 = cubos::Settings::GetInstance();
+    cubos::Settings* settings2 = cubos::Settings::GetInstance();
 
     EXPECT_EQ(settings1, settings2);
 }
@@ -15,42 +15,46 @@ const std::string correct_value = "right";
 const std::string incorrect_value = "wrong";
 const std::string default_value = "default";
 
-TEST(CUBOS_SETTINGS_SETTERS_AND_GETTERS_TESTS, GET_STRING_WHEN_SETTING_WAS_ADDED)
+TEST(Cubos_Settings_Setters_and_Getters_Tests, Get_String_When_Setting_Was_Added)
 {
-    cubos::Settings * settings = cubos::Settings::GetInstance();
-    settings->set(key1, correct_value);
+    cubos::Settings* settings = cubos::Settings::GetInstance();
+    settings->clear();
+    settings->setString(key1, correct_value);
 
-    const std::string& returnedValue = settings->get(key1, "");
+    const std::string& returnedValue = settings->getString(key1, "");
 
     EXPECT_EQ(returnedValue, correct_value);
 }
 
-TEST(CUBOS_SETTINGS_SETTERS_AND_GETTERS_TESTS, GET_DEFAULT_STRING_WHEN_SETTING_WAS_NOT_ADDED)
+TEST(Cubos_Settings_Setters_and_Getters_Tests, Get_Default_String_When_Setting_Was_Not_Added)
 {
-    cubos::Settings * settings = cubos::Settings::GetInstance();
+    cubos::Settings* settings = cubos::Settings::GetInstance();
+    settings->clear();
 
-    const std::string& returned_value = settings->get(key1, default_value);
+    const std::string& returned_value = settings->getString(key1, default_value);
 
-    EXPECT_EQ(returned_value,default_value);
+    EXPECT_EQ(returned_value, default_value);
 }
 
-TEST(CUBOS_SETTINGS_SETTERS_AND_GETTERS_TESTS, GET_LAST_STRING_AFTER_MULTIPLE_SETS_WITH_SAME_KEY)
+TEST(Cubos_Settings_Setters_and_Getters_Tests, Get_Last_String_After_Multiple_Sets_With_Same_Key)
 {
-    cubos::Settings * settings = cubos::Settings::GetInstance();
-    settings->set(key1, incorrect_value);
-    settings->set(key1, correct_value);
+    cubos::Settings* settings = cubos::Settings::GetInstance();
+    settings->clear();
+    settings->setString(key1, incorrect_value);
+    settings->setString(key1, correct_value);
 
-    const std::string& returned_value = settings->get(key1, default_value);
+    const std::string& returned_value = settings->getString(key1, default_value);
 
-    EXPECT_EQ(returned_value,correct_value);
+    EXPECT_EQ(returned_value, correct_value);
 }
 
-TEST(CUBOS_SETTINGS_SETTERS_AND_GETTERS_TESTS, GET_DEFAULT_STRING_WITH_WRONG_KEY)
+TEST(Cubos_Settings_Setters_and_Getters_Tests, Get_Default_String_With_Wrong_Key)
 {
-    cubos::Settings * settings = cubos::Settings::GetInstance();
-    settings->set(key1, incorrect_value);
+    cubos::Settings* settings = cubos::Settings::GetInstance();
+    settings->clear();
+    settings->setString(key1, incorrect_value);
 
-    const std::string& returned_value = settings->get(key2, default_value);
+    const std::string& returned_value = settings->getString(key2, default_value);
 
     EXPECT_EQ(returned_value, default_value);
 }

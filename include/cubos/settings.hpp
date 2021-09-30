@@ -1,8 +1,8 @@
 #ifndef CUBOS_SETTINGS_HPP
 #define CUBOS_SETTINGS_HPP
+#include <memory>
 #include <string>
-#include <map>
-#include <any>
+#include <unordered_map>
 
 namespace cubos
 {
@@ -10,7 +10,9 @@ namespace cubos
     class Settings
     {
     protected:
-        Settings();
+        Settings()
+        {
+        }
         static Settings* _instance;
 
     public:
@@ -18,14 +20,18 @@ namespace cubos
         void operator=(const Settings&) = delete;
         static Settings* GetInstance();
 
-        template <typename T> void set(const std::string& key, T value);
-        template <typename T> T get(const std::string& key, T defaultValue);
+        void clear();
+
+        void setString(const std::string& key, const std::string& value);
+        std::string getString(const std::string& key, const std::string& defaultValue);
 
     private:
-        std::map<std::string, std::any> _values;
+        std::unordered_map<std::string, std::string> _values;
     };
 
 } // namespace cubos
+
+cubos::Settings* cubos::Settings::_instance = nullptr;
 
 cubos::Settings* cubos::Settings::GetInstance()
 {
@@ -36,4 +42,22 @@ cubos::Settings* cubos::Settings::GetInstance()
     return _instance;
 }
 
-#endif
+void cubos::Settings::clear()
+{
+    _values.clear();
+}
+
+void cubos::Settings::setString(const std::string& key, const std::string& value)
+{
+    _values[key] = value;
+}
+
+std::string cubos::Settings::getString(const std::string& key, const std::string& defaultValue)
+{
+    if (_values.count(key) == 0)
+        return defaultValue;
+
+    return _values[key];
+}
+
+#endif // CUBOS_SETTINGS_HPP
