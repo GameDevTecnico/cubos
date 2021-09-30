@@ -11,16 +11,19 @@
 
 **CUBOS. is a simple, but powerful engine for PC, where everything is made out of voxels.**
 
-It's a 3D game engine that is perfect for beginners, but also powerful tool in the hands of experienced developers.
+**IMPORTANT NOTE:** **CUBOS.** is a work in progress still in its very early stages. This description matches our hopes for the engine, not its current state.
+
+**CUBOS.** is a 3D game engine that is perfect for beginners, but also a powerful tool in the hands of experienced developers.
 Its vast render distances and the destructibility it allows set it apart from other engines.
-Written in C++, built with *OpenGL*, it's a high-performance engine.
+Written in *C++*, built with *OpenGL*, it's a high-performance engine.
 
 ## Getting the engine
 
 ### Executables
 
-Official binaries for **CUBOS.** can be found
-on the [releases](https://github.com/GameDevTecnico/cubos/releases) page.
+There are no releases of **CUBOS.** so far. We will update this section once we release official binaries.
+<!--Official binaries for **CUBOS.** can be found
+on the [releases](https://github.com/GameDevTecnico/cubos/releases) page.-->
 
 ### Compiling from the source code
 
@@ -37,12 +40,13 @@ Here's how you download the code through *git*:
 
 ``` git clone --recursive https://github.com/GameDevTecnico/cubos.git ``` 
 
-
 Let it download all the files and complete the operation, and you're done. The entirety of **CUBOS.** is now on that directory.
 
 To compile those files into a working program, you have many options:
 
-#### Visual Studio
+#### Compiling
+
+##### Visual Studio
 
 1. Make sure that both the *Desktop development with C++* workload and the optional *C++ CMake Tools for Windows* package is installed with your version of *Visual Studio*. 
 To do so, open *Visual Studio Installer* and select **Modify** on the version of VS you plan on using. On the left panel, make sure that the *Desktop development with C++* workload is checked. On the right, under *Desktop development with C++*, make sure *C++ CMake Tools for Windows* is checked. Then click **Modify** at the bottom and let the installation complete.
@@ -64,7 +68,7 @@ To do so, open *Visual Studio Installer* and select **Modify** on the version of
 
 5. Select ```CMake Targets View``` and then under ```cubos Project``` right-click ```cubos (static library)``` and select **Build**.
 
-#### Visual Studio Code
+##### Visual Studio Code
 
 1. Install *Microsoft's* *[CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)* extension for *Visual Studio Code*.
 2. Open the repository folder in *Visual Studio Code*. It will automatically scan your project.
@@ -86,7 +90,7 @@ To do so, open *Visual Studio Installer* and select **Modify** on the version of
     <img src="images/VSCodeBuild.png" alt="Build Button">
 </p>
 
-#### Terminal
+##### Terminal
 
 1. Install *[CMake](https://cmake.org/install/)* on your terminal.
 2. Open your terminal and navigate to the *cubos* directory.
@@ -99,6 +103,15 @@ To do so, open *Visual Studio Installer* and select **Modify** on the version of
 Also, you can use versions of the required libraries that are installed on your computer already, outside the repository. This makes the compiling process faster. Just don't use the ```--recursive``` flag when cloning the repository, and install the dependencies yourself. Then instead of the commands above, run the following: 
 
 ```cmake -H. -Bbuild -DGLFW_USE_SUBMODULE=OFF -DGLM_USE_SUBMODULE=OFF -DYAMLCPP_USE_SUBMODULE=OFF```
+
+### Testing
+
+We use GoogleTest for unit testing the engine source.
+All tests should be inside *tests* directory.
+
+CMakeLists.txt builds a test executable that can be run using ctest:
+
+```cd build && ctest ```
 
 ## Who is making this engine
 
