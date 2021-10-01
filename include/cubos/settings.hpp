@@ -18,15 +18,15 @@ namespace cubos
     public:
         Settings(Settings& settings) = delete;
         void operator=(const Settings&) = delete;
-        static Settings* GetInstance();
-
-        void clear();
-
-        void setString(const std::string& key, const std::string& value);
-        std::string getString(const std::string& key, const std::string& defaultValue);
+        
+        static void clear();
+        static void setString(const std::string& key, const std::string& value);
+        static std::string getString(const std::string& key, const std::string& defaultValue);
 
     private:
         std::unordered_map<std::string, std::string> _values;
+        static Settings* GetInstance();
+
     };
 
 } // namespace cubos

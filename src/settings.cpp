@@ -13,18 +13,21 @@ cubos::Settings* cubos::Settings::GetInstance()
 
 void cubos::Settings::clear()
 {
-    _values.clear();
+    cubos::Settings* settings = Settings::GetInstance();
+    settings->_values.clear();
 }
 
 void cubos::Settings::setString(const std::string& key, const std::string& value)
 {
-    _values[key] = value;
+    cubos::Settings* settings = Settings::GetInstance();
+    settings->_values[key] = value;
 }
 
 std::string cubos::Settings::getString(const std::string& key, const std::string& defaultValue)
 {
-    if (_values.count(key) == 0)
+    cubos::Settings* settings = Settings::GetInstance();
+    if (settings->_values.count(key) == 0)
         return defaultValue;
 
-    return _values[key];
+    return settings->_values[key];
 }
