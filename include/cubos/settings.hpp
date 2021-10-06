@@ -47,7 +47,7 @@ namespace cubos
 
     private:
         std::unordered_map<std::string, std::string> _values;
-        static Settings* GetInstance();
+        static Settings* getInstance();
     };
 
 } // namespace cubos
