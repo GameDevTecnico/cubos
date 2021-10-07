@@ -10,9 +10,7 @@ namespace cubos
     class Settings
     {
     protected:
-        Settings()
-        {
-        }
+        Settings() = default;
         static Settings* _instance;
 
     public:
