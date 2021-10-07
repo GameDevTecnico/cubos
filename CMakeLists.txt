@@ -17,7 +17,6 @@ option(BUILD_SAMPLES "Build samples" OFF)
 set(CUBOS_SOURCE
     "src/entry.cpp"
     "src/log.cpp"
-
     "src/settings.cpp"
 
     "src/io/glfw_window.cpp"
@@ -26,7 +25,6 @@ set(CUBOS_SOURCE
 
 set(CUBOS_INCLUDE
     "include/cubos/log.hpp"
-
     "include/cubos/settings.hpp"
     
     "include/cubos/io/window.hpp"
