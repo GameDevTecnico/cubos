@@ -15,13 +15,13 @@ Settings* Settings::getInstance()
 
 void Settings::clear()
 {
-    cubos::Settings* settings = Settings::getInstance();
+    auto settings = Settings::getInstance();
     settings->_values.clear();
 }
 
 void Settings::setString(const std::string& key, const std::string& value)
 {
-    cubos::Settings* settings = Settings::getInstance();
+    auto settings = Settings::getInstance();
     settings->_values[key] = value;
 }
 
