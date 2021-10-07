@@ -9,7 +9,7 @@ namespace cubos
 
     class Settings
     {
-    protected:
+    private:
         Settings() = default;
         static Settings* _instance;
 
@@ -19,7 +19,7 @@ namespace cubos
 
         /// Clears all the settings
         static void clear();
-        
+
         /// Defines a new string setting.
         /// If the setting already exists, overrides its value with the new value.
         /// @param key the setting's key
