@@ -9,10 +9,6 @@ namespace cubos
 
     class Settings
     {
-    private:
-        Settings() = default;
-        static Settings* _instance;
-
     public:
         Settings(Settings& settings) = delete;
         void operator=(const Settings&) = delete;
@@ -34,7 +30,9 @@ namespace cubos
         static std::string getString(const std::string& key, const std::string& defaultValue);
 
     private:
-        std::unordered_map<std::string, std::string> _values;
+        Settings() = default;
+        static Settings* instance;
+        std::unordered_map<std::string, std::string> values;
         static Settings* getInstance();
     };
 

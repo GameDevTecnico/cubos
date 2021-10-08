@@ -2,34 +2,34 @@
 
 using namespace cubos;
 
-Settings* Settings::_instance = nullptr;
+Settings* Settings::instance = nullptr;
 
 Settings* Settings::getInstance()
 {
-    if (_instance == nullptr)
+    if (instance == nullptr)
     {
-        _instance = new Settings();
+        instance = new Settings();
     }
-    return _instance;
+    return instance;
 }
 
 void Settings::clear()
 {
     auto settings = Settings::getInstance();
-    settings->_values.clear();
+    settings->values.clear();
 }
 
 void Settings::setString(const std::string& key, const std::string& value)
 {
     auto settings = Settings::getInstance();
-    settings->_values[key] = value;
+    settings->values[key] = value;
 }
 
 std::string Settings::getString(const std::string& key, const std::string& defaultValue)
 {
     auto settings = Settings::getInstance();
-    if (settings->_values.count(key) == 0)
+    if (settings->values.count(key) == 0)
         return defaultValue;
 
-    return settings->_values[key];
+    return settings->values[key];
 }
