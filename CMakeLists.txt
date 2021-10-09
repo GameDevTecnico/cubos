@@ -118,3 +118,15 @@ gtest_discover_tests(cubos_tests)
 if (BUILD_SAMPLES)
     add_subdirectory(samples)
 endif()
+
+# Doxygen documentation
+find_package(Doxygen COMPONENTS dot)
+
+if (Doxygen_FOUND)
+    set(DOXYGEN_SHOW_NAMESPACES NO)
+    doxygen_add_docs(
+        doxygen
+        "include"
+        COMMENT "Generate documentation"
+    )
+endif()
