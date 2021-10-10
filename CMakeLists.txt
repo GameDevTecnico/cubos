@@ -64,6 +64,7 @@ else()
 endif()
 
 if(YAMLCPP_USE_SUBMODULE)
+    set(YAML_CPP_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
     add_subdirectory(lib/yaml-cpp)
 else()
     find_package(yaml-cpp REQUIRED)
