@@ -14,6 +14,8 @@ option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
 
 option(BUILD_SAMPLES "Build samples" OFF)
 option(BUILD_ENGINE_TESTS "Build cubos tests?" OFF)
+message( "# Building Samples: " ${BUILD_SAMPLES})
+message( "# Building Tests: " ${BUILD_ENGINE_TESTS})
 
 set(CUBOS_SOURCE
     "src/entry.cpp"
@@ -75,8 +77,6 @@ if(YAMLCPP_USE_SUBMODULE)
 else()
     find_package(yaml-cpp REQUIRED)
 endif()
-
-
 
 if (GOOGLETEST_USE_SUBMODULE)
     if(WIN32)
