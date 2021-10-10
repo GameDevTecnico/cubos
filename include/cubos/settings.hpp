@@ -31,7 +31,6 @@ namespace cubos
 
     private:
         Settings() = default;
-        static Settings* instance;
         std::unordered_map<std::string, std::string> values;
         static Settings* getInstance();
     };

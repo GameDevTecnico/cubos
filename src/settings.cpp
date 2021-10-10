@@ -2,10 +2,10 @@
 
 using namespace cubos;
 
-Settings* Settings::instance = nullptr;
-
 Settings* Settings::getInstance()
 {
+    static Settings* instance = nullptr;
+
     if (instance == nullptr)
     {
         instance = new Settings();
