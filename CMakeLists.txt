@@ -13,6 +13,7 @@ option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
 option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
 
 option(BUILD_SAMPLES "Build samples" OFF)
+option(BUILD_ENGINE_TESTS "Build cubos tests?" OFF)
 
 set(CUBOS_SOURCE
     "src/entry.cpp"
@@ -30,6 +31,11 @@ set(CUBOS_INCLUDE
     "include/cubos/gl/render_device.hpp"
     "include/cubos/gl/ogl_render_device.hpp"
 )
+
+# Remove Entrypoint when builing tests
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS) 
+    list(REMOVE_ITEM CUBOS_SOURCE "src/entry.cpp")
+endif()
 
 add_library(cubos ${CUBOS_SOURCE} ${CUBOS_INCLUDE})
 target_include_directories(cubos PUBLIC "include")
@@ -89,31 +95,18 @@ endif()
 
 target_link_libraries(cubos glm glad yaml-cpp spdlog ${CMAKE_DL_LIBS})
 
-# Enable CTest and CPack
-include(CTest)
-enable_testing()
+# Add the tests subdirectory
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS) 
+    include(CTest)
+    enable_testing()
 
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+    set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+    set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+    include(CPack)
 
-# Enable Google Test
-set(CUBOS_TESTS_SOURCE
-    "tests/test_example.cpp"
-)
-
-add_executable(
-    cubos_tests
-    ${CUBOS_TESTS_SOURCE}
-)
-
-target_link_libraries(
-    cubos_tests
-    gtest_main
-)
-
-include(googletest)
-gtest_discover_tests(cubos_tests)
+    include(googletest)
+    add_subdirectory(tests)
+endif()
 
 # Add the samples subdirectory
 if (BUILD_SAMPLES)
