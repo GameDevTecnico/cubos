@@ -6,7 +6,7 @@ add_executable(cubos_tests ${CUBOS_TESTS_SOURCE})
 
 target_link_libraries(
     cubos_tests 
-    cubos
+    cubos_lib
     gtest_main
 )
 

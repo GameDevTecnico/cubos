@@ -18,7 +18,6 @@ message( "# Building Samples: " ${BUILD_SAMPLES})
 message( "# Building Tests: " ${BUILD_ENGINE_TESTS})
 
 set(CUBOS_SOURCE
-    "src/entry.cpp"
     "src/log.cpp"
     
     "src/io/glfw_window.cpp"
@@ -34,21 +33,20 @@ set(CUBOS_INCLUDE
     "include/cubos/gl/ogl_render_device.hpp"
 )
 
-# Remove Entrypoint when builing tests
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS) 
-    list(REMOVE_ITEM CUBOS_SOURCE "src/entry.cpp")
-endif()
+set(CUBOS_ENTRYPOINT
+    "src/entry.cpp"
+)
 
-add_library(cubos ${CUBOS_SOURCE} ${CUBOS_INCLUDE})
-target_include_directories(cubos PUBLIC "include")
-set_property(TARGET cubos PROPERTY CXX_STANDARD 20)
+# Create Cubos Library
+add_library(cubos_lib ${CUBOS_SOURCE} ${CUBOS_INCLUDE})
+target_include_directories(cubos_lib PUBLIC "include")
+set_property(TARGET cubos_lib PROPERTY CXX_STANDARD 20)
 
 # Dependencies
-
 if(WITH_OPENGL)
     add_subdirectory(lib/glad)
-    target_link_libraries(cubos glad)
-    target_compile_definitions(cubos PRIVATE WITH_OPENGL)
+    target_link_libraries(cubos_lib glad)
+    target_compile_definitions(cubos_lib PRIVATE WITH_OPENGL)
 endif()
 
 if(WITH_GLFW)
@@ -61,8 +59,8 @@ if(WITH_GLFW)
         find_package(glfw3 REQUIRED)
     endif()
 
-    target_link_libraries(cubos glfw)
-    target_compile_definitions(cubos PRIVATE WITH_GLFW)
+    target_link_libraries(cubos_lib glfw)
+    target_compile_definitions(cubos_lib PRIVATE WITH_GLFW)
 endif()
 
 if(GLM_USE_SUBMODULE)
@@ -93,9 +91,9 @@ else()
     find_package(spdlog REQUIRED)
 endif()
 
-target_link_libraries(cubos glm glad yaml-cpp spdlog ${CMAKE_DL_LIBS})
+target_link_libraries(cubos_lib glm glad yaml-cpp spdlog ${CMAKE_DL_LIBS})
 
-# Add the tests subdirectory
+# Add the tests for cubos_lib
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS) 
     include(CTest)
     enable_testing()
@@ -104,11 +102,16 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS)
     set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
     include(CPack)
 
-    include(googletest)
+    include(GoogleTest)
     add_subdirectory(tests)
 endif()
 
-# Add the samples subdirectory
+# Create cubos library
+add_library(cubos ${CUBOS_ENTRYPOINT})
+target_link_libraries(cubos cubos_lib)
+set_property(TARGET cubos PROPERTY CXX_STANDARD 20)
+
+# Add samples
 if (BUILD_SAMPLES)
     add_subdirectory(samples)
 endif()
