@@ -1,5 +1,5 @@
 set(CUBOS_TESTS_SOURCE
-    "test_example.cpp"
+    "test_settings.cpp"
 )
 
 add_executable(cubos_tests ${CUBOS_TESTS_SOURCE})

@@ -19,14 +19,16 @@ message( "# Building Tests: " ${BUILD_ENGINE_TESTS})
 
 set(CUBOS_SOURCE
     "src/log.cpp"
-    
+    "src/settings.cpp"
+
     "src/io/glfw_window.cpp"
     "src/gl/ogl_render_device.cpp"
 )
 
 set(CUBOS_INCLUDE
     "include/cubos/log.hpp"
-
+    "include/cubos/settings.hpp"
+    
     "include/cubos/io/window.hpp"
 
     "include/cubos/gl/render_device.hpp"
