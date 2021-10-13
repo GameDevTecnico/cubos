@@ -2,12 +2,12 @@ set(CUBOS_TESTS_SOURCE
     "test_settings.cpp"
 )
 
-add_executable(cubos_tests ${CUBOS_TESTS_SOURCE})
+add_executable(cubos-core-tests ${CUBOS_TESTS_SOURCE})
 
 target_link_libraries(
-    cubos_tests 
-    cubos_lib
+    cubos-core-tests 
+    cubos-core
     gtest_main
 )
 
-gtest_add_tests(TARGET cubos_tests)
+gtest_add_tests(TARGET cubos-core-tests)
