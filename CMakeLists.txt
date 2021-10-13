@@ -17,14 +17,16 @@ option(BUILD_SAMPLES "Build samples" OFF)
 set(CUBOS_SOURCE
     "src/entry.cpp"
     "src/log.cpp"
-    
+    "src/settings.cpp"
+
     "src/io/glfw_window.cpp"
     "src/gl/ogl_render_device.cpp"
 )
 
 set(CUBOS_INCLUDE
     "include/cubos/log.hpp"
-
+    "include/cubos/settings.hpp"
+    
     "include/cubos/io/window.hpp"
 
     "include/cubos/gl/render_device.hpp"
@@ -98,7 +100,7 @@ include(CPack)
 
 # Enable Google Test
 set(CUBOS_TESTS_SOURCE
-    "tests/test_example.cpp"
+    "tests/test_settings.cpp"
 )
 
 add_executable(
@@ -108,6 +110,7 @@ add_executable(
 
 target_link_libraries(
     cubos_tests
+    cubos
     gtest_main
 )
 
