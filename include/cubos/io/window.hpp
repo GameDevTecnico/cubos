@@ -10,20 +10,26 @@ namespace cubos::gl
 
 namespace cubos::io
 {
-    // TODO: Format documentation (which style?)
-    // Wrapper around a window object, handles input events and creates the render device
+    /// Wrapper around a window object, handles input events and creates the render device
     class Window
     {
     public:
         Window(); // TODO: pass settings here?
         ~Window();
 
-
+        /// Polls window events, firing the events
         void pollEvents() const;
+
+        /// Swaps the window buffers
         void swapBuffers() const;
 
+        /// Returns the window render device
         gl::RenderDevice& getRenderDevice() const;
+        
+        /// Return the window framebuffer size in pixels
         glm::ivec2 getFramebufferSize() const;
+
+        /// Should the window close?
         bool shouldClose() const;
 
     private:

@@ -117,3 +117,20 @@ set_property(TARGET cubos-engine PROPERTY CXX_STANDARD 20)
 if (BUILD_SAMPLES)
     add_subdirectory(samples)
 endif()
+
+# Doxygen documentation
+find_package(Doxygen COMPONENTS dot)
+
+if (Doxygen_FOUND)
+    set(DOXYGEN_SHOW_NAMESPACES NO)
+    set(DOXYGEN_GENERATE_TREEVIEW YES)
+    set(DOXYGEN_HTML_EXTRA_FILES docs/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js)
+    set(DOXYGEN_HTML_EXTRA_STYLESHEET docs/doxygen-awesome-css/doxygen-awesome.css)
+    set(DOXYGEN_HTML_HEADER docs/header.html)
+    set(DOXYGEN_HTML_FOOTER docs/footer.html)
+    doxygen_add_docs(
+        doxygen
+        "include"
+        COMMENT "Generate documentation"
+    )
+endif()
