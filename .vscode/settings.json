@@ -65,5 +65,8 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp"
+    },
+    "cmake.configureSettings": {
+        "BUILD_SAMPLES": "YES"
     }
 }
