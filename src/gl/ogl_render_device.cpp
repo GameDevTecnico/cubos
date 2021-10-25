@@ -1,13 +1,10 @@
 #include <cubos/gl/ogl_render_device.hpp>
 #include <cubos/log.hpp>
 
-#ifdef WITH_OPENGL
-
+#ifndef GLAD_LOADED
+#define GLAD_LOADED
 #include <glad/glad.h>
-
-#ifdef WITH_GLFW
-#include <GLFW/glfw3.h>
-#endif
+#endif // GLAD_LOADED
 
 #include <cstdlib>
 #include <cassert>
@@ -874,16 +871,6 @@ public:
 
 OGLRenderDevice::OGLRenderDevice()
 {
-#ifdef WITH_GLFW
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-#else
-    if (!gladLoadGL())
-#endif
-    {
-        logCritical("OGLRenderDevice::OGLRenderDevice() failed: OpenGL loader failed");
-        abort();
-    }
-
     // Create default states
     this->defaultRS = this->createRasterState({});
     this->defaultDSS = this->createDepthStencilState({});
@@ -1714,5 +1701,3 @@ int OGLRenderDevice::getProperty(Property prop)
         return -1;
     }
 }
-
-#endif // WITH_OPENGL
