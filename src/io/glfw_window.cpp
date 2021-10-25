@@ -13,7 +13,13 @@ Window::Window()
 {
     if (!glfwInit())
         ; // TODO: Log critical error and abort
-
+    
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
     // TODO: Read settings and set the correct window size, title and mode (fullscreen, ...)
     this->handle = glfwCreateWindow(800, 600, "Cubos", nullptr, nullptr);
     if (!this->handle)

@@ -73,17 +73,17 @@ namespace cubos::gl
     /// Data type
     enum class Type
     {
-        Byte,    /// 8 bits signed integer
-        Short,   /// 16 bits signed integer
-        Int,     /// 32 bits signed integer
-        UByte,   /// 8 bits unsigned integer
-        UShort,  /// 16 bits unsigned integer
-        UInt,    /// 32 bits unsigned integer
-        NByte,   /// Normalized 8 bits signed integer
-        NShort,  /// Normalized 16 bits signed integer
-        NUByte,  /// Normalized 8 bits unsigned integer
-        NUShort, /// Normalized 16 bits unsigned integer
-        Float    /// 32 bits floating point
+        Byte,    ///< 8 bits signed integer
+        Short,   ///< 16 bits signed integer
+        Int,     ///< 32 bits signed integer
+        UByte,   ///< 8 bits unsigned integer
+        UShort,  ///< 16 bits unsigned integer
+        UInt,    ///< 32 bits unsigned integer
+        NByte,   ///< Normalized 8 bits signed integer
+        NShort,  ///< Normalized 16 bits signed integer
+        NUByte,  ///< Normalized 8 bits unsigned integer
+        NUShort, ///< Normalized 16 bits unsigned integer
+        Float    ///< 32 bits floating point
     };
 
     /// Index format
@@ -96,39 +96,39 @@ namespace cubos::gl
     /// Texture format
     enum class TextureFormat
     {
-        R8SNorm,     /// 1 channel 8 bits normalized signed integer
-        R16SNorm,    /// 1 channel 16 bits normalized signed integer
-        RG8SNorm,    /// 2 channel 8 bits normalized signed integer
-        RG16SNorm,   /// 2 channel 16 bits normalized signed integer
-        RGBA8SNorm,  /// 4 channel 8 bits normalized signed integer
-        RGBA16SNorm, /// 4 channel 16 bits normalized signed integer
-        R8UNorm,     /// 1 channel 8 bits normalized unsigned integer
-        R16UNorm,    /// 1 channel 16 bits normalized unsigned integer
-        RG8UNorm,    /// 2 channel 8 bits normalized unsigned integer
-        RG16UNorm,   /// 2 channel 16 bits normalized unsigned integer
-        RGBA8UNorm,  /// 4 channel 8 bits normalized unsigned integer
-        RGBA16UNorm, /// 4 channel 16 bits normalized unsigned integer
-        R8SInt,      /// 1 channel 8 bits signed integer
-        R16SInt,     /// 1 channel 16 bits signed integer
-        RG8SInt,     /// 2 channel 8 bits signed integer
-        RG16SInt,    /// 2 channel 16 bits signed integer
-        RGBA8SInt,   /// 4 channel 8 bits signed integer
-        RGBA16SInt,  /// 4 channel 16 bits signed integer
-        R8UInt,      /// 1 channel 8 bits unsigned integer
-        R16UInt,     /// 1 channel 16 bits unsigned integer
-        RG8UInt,     /// 2 channel 8 bits unsigned integer
-        RG16UInt,    /// 2 channel 16 bits unsigned integer
-        RGBA8UInt,   /// 4 channel 8 bits unsigned integer
-        RGBA16UInt,  /// 4 channel 16 bits unsigned integer
-        R32Float,    /// 1 channel 32 bits floating point
-        RG32Float,   /// 2 channel 32 bits floating point
-        RGB32Float,  /// 3 channel 32 bits floating point
-        RGBA32Float, /// 4 channel 32 bits floating point
+        R8SNorm,     ///< 1 channel 8 bits normalized signed integer
+        R16SNorm,    ///< 1 channel 16 bits normalized signed integer
+        RG8SNorm,    ///< 2 channel 8 bits normalized signed integer
+        RG16SNorm,   ///< 2 channel 16 bits normalized signed integer
+        RGBA8SNorm,  ///< 4 channel 8 bits normalized signed integer
+        RGBA16SNorm, ///< 4 channel 16 bits normalized signed integer
+        R8UNorm,     ///< 1 channel 8 bits normalized unsigned integer
+        R16UNorm,    ///< 1 channel 16 bits normalized unsigned integer
+        RG8UNorm,    ///< 2 channel 8 bits normalized unsigned integer
+        RG16UNorm,   ///< 2 channel 16 bits normalized unsigned integer
+        RGBA8UNorm,  ///< 4 channel 8 bits normalized unsigned integer
+        RGBA16UNorm, ///< 4 channel 16 bits normalized unsigned integer
+        R8SInt,      ///< 1 channel 8 bits signed integer
+        R16SInt,     ///< 1 channel 16 bits signed integer
+        RG8SInt,     ///< 2 channel 8 bits signed integer
+        RG16SInt,    ///< 2 channel 16 bits signed integer
+        RGBA8SInt,   ///< 4 channel 8 bits signed integer
+        RGBA16SInt,  ///< 4 channel 16 bits signed integer
+        R8UInt,      ///< 1 channel 8 bits unsigned integer
+        R16UInt,     ///< 1 channel 16 bits unsigned integer
+        RG8UInt,     ///< 2 channel 8 bits unsigned integer
+        RG16UInt,    ///< 2 channel 16 bits unsigned integer
+        RGBA8UInt,   ///< 4 channel 8 bits unsigned integer
+        RGBA16UInt,  ///< 4 channel 16 bits unsigned integer
+        R32Float,    ///< 1 channel 32 bits floating point
+        RG32Float,   ///< 2 channel 32 bits floating point
+        RGB32Float,  ///< 3 channel 32 bits floating point
+        RGBA32Float, ///< 4 channel 32 bits floating point
 
-        Depth16,         /// 16 depth bits
-        Depth32,         /// 32 depth bits
-        Depth24Stencil8, /// 24 depth bits and 8 stencil bits
-        Depth32Stencil8, /// 32 depth bits and 8 stencil bits
+        Depth16,         ///< 16 depth bits
+        Depth32,         ///< 32 depth bits
+        Depth24Stencil8, ///< 24 depth bits and 8 stencil bits
+        Depth32Stencil8, ///< 32 depth bits and 8 stencil bits
     };
 
     /// Texture address mode
@@ -151,8 +151,8 @@ namespace cubos::gl
     /// Triangle winding mode
     enum class Winding
     {
-        CW, /// Clockwise
-        CCW /// Counterclockwise
+        CW, ///< Clockwise
+        CCW ///< Counterclockwise
     };
 
     /// Specifies a face
@@ -244,181 +244,194 @@ namespace cubos::gl
     {
         struct
         {
-            bool isCubeMap = false; /// Is this target a cube map face?
-            uint32_t mipLevel = 0;  /// Mip level of the texture which will be set as a render target
+            bool isCubeMap = false; ///< Is this target a cube map face?
+            uint32_t mipLevel = 0;  ///< Mip level of the texture which will be set as a render target
 
             union {
                 struct
                 {
-                    CubeMap handle; /// Cube map handle
-                    CubeFace face;  /// Cube map face which will be used as target
-                } cubeMap;
+                    CubeMap handle; ///< Cube map handle
+                    CubeFace face;  ///< Cube map face which will be used as target
+                } cubeMap;          ///< If the target is a cube map, this handle is used
 
                 struct
                 {
-                    Texture2D handle; /// Texture handle
-                } texture;
+                    Texture2D handle; ///< Texture handle
+                } texture;            ///< If the target isn't a cube map, this handle is used
             };
-        } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT];
+        } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets
 
-        uint32_t targetCount = 1; /// Number of render targets
-        Texture2D depthStencil;   /// Optional depth stencil texture
+        uint32_t targetCount = 1; ///< Number of render targets
+        Texture2D depthStencil;   ///< Optional depth stencil texture
     };
 
     /// Rasterizer state description
     struct RasterStateDesc
     {
-        bool cullEnabled = false;                 /// Is face culling enabled?
-        Face cullFace = Face::Back;               /// Face that will be culled
-        Winding frontFace = Winding::CCW;         /// Front face winding
-        RasterMode rasterMode = RasterMode::Fill; /// Rasterizer mode
+        bool cullEnabled = false;                 ///< Is face culling enabled?
+        Face cullFace = Face::Back;               ///< Face that will be culled
+        Winding frontFace = Winding::CCW;         ///< Front face winding
+        RasterMode rasterMode = RasterMode::Fill; ///< Rasterizer mode
     };
 
     /// Depth stencil state description
     struct DepthStencilStateDesc
     {
-        struct
+        /// Depth state description
+        struct Depth
         {
-            bool enabled = false;            /// Enable depth checks?
-            bool writeEnabled = false;       /// Write to depth?
-            float near = 0.0f;               /// Depth near value
-            float far = 1.0f;                /// Depth far value
-            Compare compare = Compare::Less; /// Depth comparison function
-        } depth;
+            bool enabled = false;            ///< Enable depth checks?
+            bool writeEnabled = false;       ///< Write to depth?
+            float near = 0.0f;               ///< Depth near value
+            float far = 1.0f;                ///< Depth far value
+            Compare compare = Compare::Less; ///< Depth comparison function
+        };
 
-        struct
+        /// Stencil state description
+        struct Stencil
         {
-            bool enabled = false;     /// Is stencil enabled?
-            uint32_t ref = 0;         /// Stencil ref value used on stencil comparison functions
-            uint8_t readMask = 0xFF;  /// Stencil read mask
-            uint8_t writeMask = 0xFF; /// Stencil write mask
-
-            struct
+            /// Stencil face description
+            struct Face
             {
-                Compare compare = Compare::Always;             /// Stencil comparison function
-                StencilAction fail = StencilAction::Keep;      /// Stencil comparison fail action
-                StencilAction pass = StencilAction::Keep;      /// Stencil comparison pass action
-                StencilAction depthFail = StencilAction::Keep; /// Stencil depth comparison fail action
-            } backFace, frontFace;
-        } stencil;
+                Compare compare = Compare::Always;             ///< Stencil comparison function
+                StencilAction fail = StencilAction::Keep;      ///< Stencil comparison fail action
+                StencilAction pass = StencilAction::Keep;      ///< Stencil comparison pass action
+                StencilAction depthFail = StencilAction::Keep; ///< Stencil depth comparison fail action
+            };
+
+            bool enabled = false;     ///< Is stencil enabled?
+            uint32_t ref = 0;         ///< Stencil ref value used on stencil comparison functions
+            uint8_t readMask = 0xFF;  ///< Stencil read mask
+            uint8_t writeMask = 0xFF; ///< Stencil write mask
+
+            Face backFace;  ///< Stencil back face options
+            Face frontFace; ///< Stencil front face options
+        };
+
+        Depth depth;     ///< Depth state options
+        Stencil stencil; ///< Depth stencil options
     };
 
     /// Blend state description
     struct BlendStateDesc
     {
-        bool blendEnabled = false; /// Enable blending?
+        bool blendEnabled = false; ///< Enable blending?
 
         struct
         {
-            BlendFactor src = BlendFactor::SrcAlpha;    /// Color blend source factor
-            BlendFactor dst = BlendFactor::InvSrcAlpha; /// Color blend destination factor
-            BlendOp op = BlendOp::Add;                  /// Color blend operation
-        } color;
+            BlendFactor src = BlendFactor::SrcAlpha;    ///< Color blend source factor
+            BlendFactor dst = BlendFactor::InvSrcAlpha; ///< Color blend destination factor
+            BlendOp op = BlendOp::Add;                  ///< Color blend operation
+        } color;                                        ///< Color blend state
 
         struct
         {
-            BlendFactor src = BlendFactor::One;  /// Alpha blend source factor
-            BlendFactor dst = BlendFactor::Zero; /// Alpha blend destination factor
-            BlendOp op = BlendOp::Add;           /// Alpha blend operation
-        } alpha;
+            BlendFactor src = BlendFactor::One;  ///< Alpha blend source factor
+            BlendFactor dst = BlendFactor::Zero; ///< Alpha blend destination factor
+            BlendOp op = BlendOp::Add;           ///< Alpha blend operation
+        } alpha;                                 ///< Alpha blend state
     };
 
     /// Sampler description
     struct SamplerDesc
     {
-        float borderColor[4] = {0.0f}; /// Border color applied when the address mode is AddressMode::Border
+        float borderColor[4] = {0.0f}; ///< Border color applied when the address mode is AddressMode::Border
 
-        TextureFilter minFilter = TextureFilter::Nearest; /// Minifying filter
-        TextureFilter magFilter = TextureFilter::Nearest; /// Magnifying filter
-        TextureFilter mipmapFilter = TextureFilter::None; /// Set to None to disable mipmapping
+        TextureFilter minFilter = TextureFilter::Nearest; ///< Minifying filter
+        TextureFilter magFilter = TextureFilter::Nearest; ///< Magnifying filter
+        TextureFilter mipmapFilter = TextureFilter::None; ///< Set to None to disable mipmapping
 
-        AddressMode addressU = AddressMode::Clamp; /// Texture adress mode on coordinate U
-        AddressMode addressV = AddressMode::Clamp; /// Texture adress mode on coordinate V
-        AddressMode addressW = AddressMode::Clamp; /// Texture adress mode on coordinate W
+        AddressMode addressU = AddressMode::Clamp; ///< Texture adress mode on coordinate U
+        AddressMode addressV = AddressMode::Clamp; ///< Texture adress mode on coordinate V
+        AddressMode addressW = AddressMode::Clamp; ///< Texture adress mode on coordinate W
 
-        size_t maxAnisotropy = 1; /// Max anisotropy for filtering. Limited to Property::MaxAnisotropy
+        size_t maxAnisotropy = 1; ///< Max anisotropy for filtering. Limited to Property::MaxAnisotropy
     };
 
     /// 1D texture description
     struct Texture1DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial texture data
-        size_t mipLevelCount = 1;                       /// Number of mip levels
-        size_t width;                                   /// Texture size
-        Usage usage;                                    /// Texture usage mode
-        TextureFormat format;                           /// Texture format
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data
+        size_t mipLevelCount = 1;                       ///< Number of mip levels
+        size_t width;                                   ///< Texture width
+        Usage usage;                                    ///< Texture usage mode
+        TextureFormat format;                           ///< Texture format
     };
 
     /// 2D texture description
     struct Texture2DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial texture data
-        size_t mipLevelCount = 1;                       /// Number of mip levels
-        size_t width, height;                           /// Texture size
-        Usage usage;                                    /// Texture usage mode
-        TextureFormat format;                           /// Texture format
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data
+        size_t mipLevelCount = 1;                       ///< Number of mip levels
+        size_t width;                                   ///< Texture width
+        size_t height;                                  ///< Texture height
+        Usage usage;                                    ///< Texture usage mode
+        TextureFormat format;                           ///< Texture format
     };
 
     /// 3D texture description
     struct Texture3DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial texture data
-        size_t mipLevelCount = 1;                       /// Number of mip levels
-        size_t width, height, depth;                    /// Texture size
-        Usage usage;                                    /// Texture usage mode
-        TextureFormat format;                           /// Texture format
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data
+        size_t mipLevelCount = 1;                       ///< Number of mip levels
+        size_t width;                                   ///< Texture width
+        size_t height;                                  ///< Texture height
+        size_t depth;                                   ///< Texture depth
+        Usage usage;                                    ///< Texture usage mode
+        TextureFormat format;                           ///< Texture format
     };
 
     /// Cube map description
     struct CubeMapDesc
     {
-        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT]; /// Optional initial cube map data, indexed using CubeFace
-        size_t mipLevelCount = 1;                          /// Number of mip levels
-        size_t width, height;                              /// Texture size
-        Usage usage;                                       /// Texture usage mode
-        TextureFormat format;                              /// Texture format
+        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial cube map data, indexed using CubeFace
+        size_t mipLevelCount = 1;                          ///< Number of mip levels
+        size_t width;                                      ///< Cube map face width
+        size_t height;                                     ///< Cube map face height
+        Usage usage;                                       ///< Texture usage mode
+        TextureFormat format;                              ///< Texture format
     };
 
     /// Constant buffer element
     struct ConstantBufferElement
     {
-        char name[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE]; // Element name
+        char name[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE]; ///< Element name
 
-        size_t offset; /// Offset of the element in the buffer
-        size_t size;   /// Number of values in the element if it is an array. If it isn't, this is set to 1
-        size_t stride; /// Stride between each element in the array, if the element is an array
+        size_t offset; ///< Offset of the element in the buffer
+        size_t size;   ///< Number of values in the element if it is an array. If it isn't, this is set to 1
+        size_t stride; ///< Stride between each element in the array, if the element is an array
     };
 
     /// Constant buffer structure
     struct ConstantBufferStructure
     {
-        size_t size;         /// Size of the buffer in bytes
-        size_t elementCount; /// Number of elements
-        ConstantBufferElement elements[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT];
+        size_t size;                                                                ///< Size of the buffer in bytes
+        size_t elementCount;                                                        ///< Number of elements
+        ConstantBufferElement elements[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT]; ///< Constant buffer elements
     };
 
     /// Vertex element description
     struct VertexElement
     {
-        const char* name = nullptr; /// Element name
-        Type type = Type::Float;    /// Element type
-        size_t size;                /// Number of components in the vertex element (1, 2, 3 or 4)
+        const char* name = nullptr; ///< Element name
+        Type type = Type::Float;    ///< Element type
+        size_t size;                ///< Number of components in the vertex element (1, 2, 3 or 4)
 
         struct
         {
-            size_t stride = 0; /// Stride between each element in memory
-            size_t offset = 0; /// Offset of the first element in the buffer
-            size_t index = 0;  /// Index of the vertex buffer where the element is stored
-        } buffer;
+            size_t stride = 0; ///< Stride between each element in memory
+            size_t offset = 0; ///< Offset of the first element in the buffer
+            size_t index = 0;  ///< Index of the vertex buffer where the element is stored
+        } buffer;              ///< Vertex buffer description
     };
 
     /// Vertex array description
     struct VertexArrayDesc
     {
-        size_t elementCount = 0;                                         /// Number of vertex elements
-        VertexElement elements[CUBOS_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT]; /// Vertex elements
-        VertexBuffer buffers[CUBOS_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];    /// Vertex buffers
-        ShaderPipeline shaderPipeline;                                   /// Shader pipeline used with the vertex array
+        size_t elementCount = 0;                                         ///< Number of vertex elements
+        VertexElement elements[CUBOS_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT]; ///< Vertex elements
+        VertexBuffer buffers[CUBOS_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];    ///< Vertex buffers
+        ShaderPipeline shaderPipeline;                                   ///< Shader pipeline used with the vertex array
     };
 
     /// Abstract render device type, used to wrap low-level rendering APIs such as OpenGL
@@ -570,6 +583,7 @@ namespace cubos::gl
     /// implementations
     namespace impl
     {
+        /// Abstract framebuffer, should not be used directly
         class Framebuffer
         {
         protected:
@@ -577,6 +591,7 @@ namespace cubos::gl
             virtual ~Framebuffer() = default;
         };
 
+        /// Abstract rasterizer state, should not be used directly
         class RasterState
         {
         protected:
@@ -584,6 +599,7 @@ namespace cubos::gl
             virtual ~RasterState() = default;
         };
 
+        /// Abstract depth stencil state, should not be used directly
         class DepthStencilState
         {
         protected:
@@ -591,6 +607,7 @@ namespace cubos::gl
             virtual ~DepthStencilState() = default;
         };
 
+        /// Abstract blend state, should not be used directly
         class BlendState
         {
         protected:
@@ -598,6 +615,7 @@ namespace cubos::gl
             virtual ~BlendState() = default;
         };
 
+        /// Abstract sampler, should not be used directly
         class Sampler
         {
         protected:
@@ -605,6 +623,7 @@ namespace cubos::gl
             virtual ~Sampler() = default;
         };
 
+        /// Abstract 1D texture, should not be used directly
         class Texture1D
         {
         public:
@@ -623,6 +642,7 @@ namespace cubos::gl
             virtual ~Texture1D() = default;
         };
 
+        /// Abstract 2D texture, should not be used directly
         class Texture2D
         {
         public:
@@ -644,6 +664,7 @@ namespace cubos::gl
             virtual ~Texture2D() = default;
         };
 
+        /// Abstract 3D texture, should not be used directly
         class Texture3D
         {
         public:
@@ -667,6 +688,7 @@ namespace cubos::gl
             virtual ~Texture3D() = default;
         };
 
+        /// Abstract cube map, should not be used directly
         class CubeMap
         {
         public:
@@ -690,6 +712,7 @@ namespace cubos::gl
             virtual ~CubeMap() = default;
         };
 
+        /// Abstract constant buffer, should not be used directly
         class ConstantBuffer
         {
         public:
@@ -705,6 +728,7 @@ namespace cubos::gl
             virtual ~ConstantBuffer() = default;
         };
 
+        /// Abstract index buffer, should not be used directly
         class IndexBuffer
         {
         public:
@@ -720,6 +744,7 @@ namespace cubos::gl
             virtual ~IndexBuffer() = default;
         };
 
+        /// Abstract vertex buffer, should not be used directly
         class VertexBuffer
         {
         public:
@@ -735,6 +760,7 @@ namespace cubos::gl
             virtual ~VertexBuffer() = default;
         };
 
+        /// Abstract vertex array, should not be used directly
         class VertexArray
         {
         protected:
@@ -742,6 +768,7 @@ namespace cubos::gl
             virtual ~VertexArray() = default;
         };
 
+        /// Abstract shader stage, should not be used directly
         class ShaderStage
         {
         public:
@@ -754,6 +781,7 @@ namespace cubos::gl
             virtual ~ShaderStage() = default;
         };
 
+        /// Abstract shader pipeline, should not be used directly
         class ShaderPipeline
         {
         public:
@@ -767,6 +795,7 @@ namespace cubos::gl
             virtual ~ShaderPipeline() = default;
         };
 
+        /// Abstract shader binding point, should not be used directly
         class ShaderBindingPoint
         {
         public:
