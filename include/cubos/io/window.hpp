@@ -14,6 +14,9 @@ namespace cubos::io
     class Window
     {
     public:
+        Window() = default;
+        virtual ~Window() = default;
+
         /// Polls window events, firing the events
         virtual void pollEvents() const = 0;
 
@@ -21,18 +24,13 @@ namespace cubos::io
         virtual void swapBuffers() const = 0;
 
         /// Returns the window render device
-        gl::RenderDevice& getRenderDevice() const;
+        virtual gl::RenderDevice& getRenderDevice() const = 0;
 
         /// Return the window framebuffer size in pixels
         virtual glm::ivec2 getFramebufferSize() const = 0;
 
         /// Should the window close?
         virtual bool shouldClose() const = 0;
-
-    protected:
-        gl::RenderDevice* renderDevice;
-        void initRenderDevice();
-        void destroyRenderDevice();
     };
 } // namespace cubos::io
 
