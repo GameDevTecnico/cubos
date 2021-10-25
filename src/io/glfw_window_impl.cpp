@@ -11,7 +11,6 @@
 
 using namespace cubos;
 using namespace cubos::io;
-using namespace cubos::io::glfw;
 
 GLFWWindowImpl::GLFWWindowImpl()
 {

@@ -7,7 +7,7 @@
 
 #include <cubos/io/window.hpp>
 
-namespace cubos::io::glfw
+namespace cubos::io
 {
     /// Wrapper around a window object, handles input events and creates the render device
     class GLFWWindowImpl : public cubos::io::Window

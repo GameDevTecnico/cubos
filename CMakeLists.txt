@@ -22,7 +22,7 @@ set(CUBOS_SOURCE
     "src/settings.cpp"
 
     "src/io/window.cpp"
-    "src/io/glfw/glfw_window_impl.cpp"
+    "src/io/glfw_window_impl.cpp"
     "src/gl/ogl_render_device.cpp"
 )
 
@@ -31,7 +31,7 @@ set(CUBOS_INCLUDE
     "include/cubos/settings.hpp"
     
     "include/cubos/io/window.hpp"
-    "include/cubos/io/glfw/glfw_window_impl.hpp"
+    "include/cubos/io/glfw_window_impl.hpp"
 
     "include/cubos/gl/render_device.hpp"
     "include/cubos/gl/ogl_render_device.hpp"
