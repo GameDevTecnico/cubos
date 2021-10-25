@@ -1,5 +1,6 @@
 #include <cubos/log.hpp>
 #include <cubos/io/window.hpp>
+#include <cubos/io/glfw/glfw_window_impl.hpp>
 #include <cubos/gl/render_device.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -11,8 +12,8 @@ using namespace cubos;
 int main(void)
 {
     initializeLogger();
-    auto window = io::Window();
-    auto& renderDevice = window.getRenderDevice();
+    io::Window* window = new io::glfw::GLFWWindowImpl();
+    auto& renderDevice = window->getRenderDevice();
 
     auto vs = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
         #version 330 core
@@ -108,9 +109,9 @@ int main(void)
 
     float t = 0.0f;
 
-    while (!window.shouldClose())
+    while (!window->shouldClose())
     {
-        auto sz = window.getFramebufferSize();
+        auto sz = window->getFramebufferSize();
         renderDevice.setViewport(0, 0, sz.x, sz.y);
 
         renderDevice.clearColor(0.894f, 0.592f, 0.141f, 0.0f);
@@ -147,8 +148,8 @@ int main(void)
         renderDevice.setRasterState(rs);
         renderDevice.drawTrianglesIndexed(0, 6);
 
-        window.swapBuffers();
-        window.pollEvents();
+        window->swapBuffers();
+        window->pollEvents();
 
         t += 0.01f;
     }
