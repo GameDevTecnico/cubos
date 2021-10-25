@@ -5,22 +5,26 @@
 #define GLFW_INCLUDE_NONE
 #include <glfw/glfw3.h>
 
+#include <cubos/gl/ogl_render_device.hpp>
 #include <cubos/io/window.hpp>
 
 namespace cubos::io
 {
     /// Wrapper around a window object, handles input events and creates the render device
-    class GLFWWindowImpl : public cubos::io::Window
+    class GLFWWindow : public cubos::io::Window
     {
     public:
-        GLFWWindowImpl(); // TODO: pass settings here?
-        ~GLFWWindowImpl();
+        GLFWWindow(); // TODO: pass settings here?
+        virtual ~GLFWWindow() override;
 
         /// Polls window events, firing the events
         virtual void pollEvents() const override;
 
         /// Swaps the window buffers
         virtual void swapBuffers() const override;
+
+        /// Returns the window render device
+        virtual gl::RenderDevice& getRenderDevice() const override;
 
         /// Return the window framebuffer size in pixels
         virtual glm::ivec2 getFramebufferSize() const override;
@@ -30,6 +34,7 @@ namespace cubos::io
 
     private:
         GLFWwindow* handle;
+        gl::OGLRenderDevice* renderDevice;
     };
 } // namespace cubos::io
 

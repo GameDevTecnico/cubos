@@ -1,4 +1,4 @@
-#include <cubos/io/glfw_window_impl.hpp>
+#include <cubos/io/glfw_window.hpp>
 
 #include <cubos/gl/ogl_render_device.hpp>
 
@@ -12,7 +12,7 @@
 using namespace cubos;
 using namespace cubos::io;
 
-GLFWWindowImpl::GLFWWindowImpl()
+GLFWWindow::GLFWWindow()
 {
     if (!glfwInit())
     {
@@ -32,39 +32,43 @@ GLFWWindowImpl::GLFWWindowImpl()
         ; // TODO: Log critical error and abort
 
     // Create OpenGL render device
-    glfwMakeContextCurrent((GLFWwindow*)this->handle);
+    glfwMakeContextCurrent(this->handle);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         logCritical("GLFWWindowImpl::GLFWWindowImpl() failed: OpenGL loader failed");
         abort();
     }
-    initRenderDevice();
+    this->renderDevice = new gl::OGLRenderDevice();
 }
 
-GLFWWindowImpl::~GLFWWindowImpl()
+GLFWWindow::~GLFWWindow()
 {
-    destroyRenderDevice();
+    delete this->renderDevice;
     glfwTerminate();
 }
 
-void GLFWWindowImpl::pollEvents() const
+void GLFWWindow::pollEvents() const
 {
     glfwPollEvents();
 }
 
-void GLFWWindowImpl::swapBuffers() const
+void GLFWWindow::swapBuffers() const
 {
-    glfwSwapBuffers((GLFWwindow*)this->handle);
+    glfwSwapBuffers(this->handle);
 }
 
-glm::ivec2 GLFWWindowImpl::getFramebufferSize() const
+gl::RenderDevice& GLFWWindow::getRenderDevice() const {
+    return *this->renderDevice;
+}
+
+glm::ivec2 GLFWWindow::getFramebufferSize() const
 {
     int width, height;
-    glfwGetFramebufferSize((GLFWwindow*)this->handle, &width, &height);
+    glfwGetFramebufferSize(this->handle, &width, &height);
     return {width, height};
 }
 
-bool GLFWWindowImpl::shouldClose() const
+bool GLFWWindow::shouldClose() const
 {
-    return glfwWindowShouldClose((GLFWwindow*)this->handle);
+    return glfwWindowShouldClose(this->handle);
 }
