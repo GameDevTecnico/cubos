@@ -1,6 +1,6 @@
 #include <cubos/log.hpp>
 #include <cubos/io/window.hpp>
-#include <cubos/io/glfw/glfw_window_impl.hpp>
+#include <cubos/io/glfw_window_impl.hpp>
 #include <cubos/gl/render_device.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -12,7 +12,7 @@ using namespace cubos;
 int main(void)
 {
     initializeLogger();
-    io::Window* window = new io::glfw::GLFWWindowImpl();
+    io::Window* window = new io::GLFWWindowImpl();
     auto& renderDevice = window->getRenderDevice();
 
     auto vs = renderDevice.createShaderStage(gl::Stage::Vertex, R"(

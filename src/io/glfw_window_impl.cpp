@@ -1,4 +1,4 @@
-#include <cubos/io/glfw/glfw_window_impl.hpp>
+#include <cubos/io/glfw_window_impl.hpp>
 
 #include <cubos/gl/ogl_render_device.hpp>
 

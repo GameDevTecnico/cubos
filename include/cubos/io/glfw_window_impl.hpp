@@ -17,20 +17,20 @@ namespace cubos::io
         ~GLFWWindowImpl();
 
         /// Polls window events, firing the events
-        void pollEvents() const;
+        virtual void pollEvents() const override;
 
         /// Swaps the window buffers
-        void swapBuffers() const;
+        virtual void swapBuffers() const override;
 
         /// Return the window framebuffer size in pixels
-        glm::ivec2 getFramebufferSize() const;
+        virtual glm::ivec2 getFramebufferSize() const override;
 
         /// Should the window close?
-        bool shouldClose() const;
+        virtual bool shouldClose() const override;
 
     private:
         GLFWwindow* handle;
     };
-} // namespace cubos::io::glfw
+} // namespace cubos::io
 
 #endif // CUBOS_IO_GLFW_WINDOW_IMPL_HPP
