@@ -9,5 +9,7 @@
     libyamlcpp
     spdlog
     clang-tools
+    doxygen
+    graphviz
   ];
 }

@@ -68,5 +68,8 @@
         "any": "cpp",
         "forward_list": "cpp",
         "unordered_set": "cpp"
+    },
+    "cmake.configureSettings": {
+        "BUILD_SAMPLES": "YES"
     }
 }
