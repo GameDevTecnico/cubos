@@ -12,6 +12,46 @@
 using namespace cubos;
 using namespace cubos::io;
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    if (action == GLFW_PRESS)
+    {
+        handler->keyboardKeyDown.fire(key);
+    }
+    else if (action == GLFW_RELEASE)
+    {
+        handler->keyboardKeyUp.fire(key);
+    }
+}
+
+void mouse_position_callback(GLFWwindow* window, double xPos, double yPos)
+{
+    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    handler->mousePosition.fire(glm::ivec2(xPos, yPos));
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+    {
+        handler->mouseRightClickDown.fire();
+    }
+    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+    {
+        handler->mouseRightClickUp.fire();
+    }
+    else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+    {
+        handler->mouseLeftClickDown.fire();
+    }
+    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+    {
+        handler->mouseLeftClickUp.fire();
+    }
+}
+
 GLFWWindow::GLFWWindow()
 {
     if (!glfwInit())
@@ -39,6 +79,10 @@ GLFWWindow::GLFWWindow()
         abort();
     }
     this->renderDevice = new gl::OGLRenderDevice();
+    glfwSetWindowUserPointer(this->handle, (void*)this);
+    glfwSetKeyCallback(this->handle, key_callback);
+    glfwSetCursorPosCallback(this->handle, mouse_position_callback);
+    glfwSetMouseButtonCallback(this->handle, mouse_button_callback);
 }
 
 GLFWWindow::~GLFWWindow()
@@ -57,7 +101,8 @@ void GLFWWindow::swapBuffers() const
     glfwSwapBuffers(this->handle);
 }
 
-gl::RenderDevice& GLFWWindow::getRenderDevice() const {
+gl::RenderDevice& GLFWWindow::getRenderDevice() const
+{
     return *this->renderDevice;
 }
 
