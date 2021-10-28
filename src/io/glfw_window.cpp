@@ -12,7 +12,7 @@
 using namespace cubos;
 using namespace cubos::io;
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void static keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     if (action == GLFW_PRESS)
@@ -25,13 +25,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 }
 
-void mouse_position_callback(GLFWwindow* window, double xPos, double yPos)
+void static mousePositionCallback(GLFWwindow* window, double xPos, double yPos)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->mousePosition.fire(glm::ivec2(xPos, yPos));
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+void static mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
@@ -80,9 +80,9 @@ GLFWWindow::GLFWWindow()
     }
     this->renderDevice = new gl::OGLRenderDevice();
     glfwSetWindowUserPointer(this->handle, (void*)this);
-    glfwSetKeyCallback(this->handle, key_callback);
-    glfwSetCursorPosCallback(this->handle, mouse_position_callback);
-    glfwSetMouseButtonCallback(this->handle, mouse_button_callback);
+    glfwSetKeyCallback(this->handle, keyCallback);
+    glfwSetCursorPosCallback(this->handle, mousePositionCallback);
+    glfwSetMouseButtonCallback(this->handle, mouseButtonCallback);
 }
 
 GLFWWindow::~GLFWWindow()
