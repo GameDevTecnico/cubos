@@ -41,23 +41,22 @@ namespace cubos::io
         virtual bool shouldClose() const = 0;
 
         /// Invoked when a keyboard key is pressed
-        /// Returns GLFW key input
+        /// Invoked with a GLFW key input
         Event<int> onKeyDown;
 
         /// Invoked when a keyboard key is released
-        /// Returns GLFW key input
+        /// Invoked with a GLFW key input
         Event<int> onKeyUp;
 
         /// Invoked when the cursor is moved
-        /// Returns vector with x and y positions of the cursor
+        /// Invoked with a vector with x and y positions of the cursor
         Event<glm::ivec2> onMouseMoved;
 
-        /// Invoked when the mouse right click is released
-        /// Returns nothing
+        /// Invoked when a mouse button is released
+        /// Invoked with a MouseSide
         Event<MouseSide> onMouseUp;
 
-        /// Invoked when the mouse right click is pressed
-        /// Returns nothing
+        /// Invoked when a mouse button is pressed
         Event<MouseSide> onMouseDown;
     };
 } // namespace cubos::io
