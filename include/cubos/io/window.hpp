@@ -12,6 +12,12 @@ namespace cubos::gl
 
 namespace cubos::io
 {
+    enum class MouseSide
+    {
+        Left,
+        Right
+    };
+
     /// Wrapper around a window object, handles input events and creates the render device
     class Window
     {
@@ -36,31 +42,23 @@ namespace cubos::io
 
         /// Invoked when a keyboard key is pressed
         /// Returns GLFW key input
-        Event<int> keyboardKeyDown;
+        Event<int> onKeyDown;
 
         /// Invoked when a keyboard key is released
         /// Returns GLFW key input
-        Event<int> keyboardKeyUp;
+        Event<int> onKeyUp;
 
         /// Invoked when the cursor is moved
         /// Returns vector with x and y positions of the cursor
-        Event<glm::ivec2> mousePosition;
+        Event<glm::ivec2> onMouseMoved;
 
         /// Invoked when the mouse right click is released
         /// Returns nothing
-        Event<> mouseRightClickUp;
+        Event<MouseSide> onMouseUp;
 
         /// Invoked when the mouse right click is pressed
         /// Returns nothing
-        Event<> mouseRightClickDown;
-
-        /// Invoked when the mouse left click is released
-        /// Returns nothing
-        Event<> mouseLeftClickUp;
-
-        /// Invoked when the mouse left click is pressed
-        /// Returns nothing
-        Event<> mouseLeftClickDown;
+        Event<MouseSide> onMouseDown;
     };
 } // namespace cubos::io
 

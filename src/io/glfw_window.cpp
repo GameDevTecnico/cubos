@@ -17,38 +17,36 @@ void static keyCallback(GLFWwindow* window, int key, int scancode, int action, i
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     if (action == GLFW_PRESS)
     {
-        handler->keyboardKeyDown.fire(key);
+        handler->onKeyDown.fire(key);
     }
     else if (action == GLFW_RELEASE)
     {
-        handler->keyboardKeyUp.fire(key);
+        handler->onKeyUp.fire(key);
     }
 }
 
 void static mousePositionCallback(GLFWwindow* window, double xPos, double yPos)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
-    handler->mousePosition.fire(glm::ivec2(xPos, yPos));
+    handler->onMouseMoved.fire(glm::ivec2(xPos, yPos));
 }
 
 void static mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
-    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+    if (button == GLFW_MOUSE_BUTTON_RIGHT)
     {
-        handler->mouseRightClickDown.fire();
+        if (action == GLFW_PRESS)
+            handler->onMouseDown.fire(MouseSide::Right);
+        else /// with GLFW_RELEASE)
+            handler->onMouseUp.fire(MouseSide::Right);
     }
-    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+    else if (button == GLFW_MOUSE_BUTTON_LEFT)
     {
-        handler->mouseRightClickUp.fire();
-    }
-    else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-    {
-        handler->mouseLeftClickDown.fire();
-    }
-    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
-    {
-        handler->mouseLeftClickUp.fire();
+        if (action == GLFW_PRESS)
+            handler->onMouseDown.fire(MouseSide::Left);
+        else /// with GLFW_RELEASE
+            handler->onMouseUp.fire(MouseSide::Left);
     }
 }
 
