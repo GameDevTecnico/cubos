@@ -13,10 +13,13 @@ namespace cubos::gl
 
 namespace cubos::io
 {
-    enum class MouseSide
+    enum class MouseButton
     {
         Left,
-        Right
+        Right,
+        Middle,
+        Extra1,
+        Extra2,
     };
 
     /// Wrapper around a window object, handles input events and creates the render device
@@ -54,12 +57,12 @@ namespace cubos::io
         Event<glm::ivec2> onMouseMoved;
 
         /// Invoked when a mouse button is released
-        /// Invoked with a MouseSide
-        Event<MouseSide> onMouseUp;
+        /// Invoked with a MouseButton
+        Event<MouseButton> onMouseUp;
 
         /// Invoked when a mouse button is pressed
-        /// Invoked with a MouseSide
-        Event<MouseSide> onMouseDown;
+        /// Invoked with a MouseButton
+        Event<MouseButton> onMouseDown;
     };
 } // namespace cubos::io
 

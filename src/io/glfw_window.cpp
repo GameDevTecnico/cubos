@@ -40,16 +40,16 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
     if (button == GLFW_MOUSE_BUTTON_RIGHT)
     {
         if (action == GLFW_PRESS)
-            handler->onMouseDown.fire(MouseSide::Right);
+            handler->onMouseDown.fire(MouseButton::Right);
         else /// with GLFW_RELEASE)
-            handler->onMouseUp.fire(MouseSide::Right);
+            handler->onMouseUp.fire(MouseButton::Right);
     }
     else if (button == GLFW_MOUSE_BUTTON_LEFT)
     {
         if (action == GLFW_PRESS)
-            handler->onMouseDown.fire(MouseSide::Left);
+            handler->onMouseDown.fire(MouseButton::Left);
         else /// with GLFW_RELEASE
-            handler->onMouseUp.fire(MouseSide::Left);
+            handler->onMouseUp.fire(MouseButton::Left);
     }
 }
 
