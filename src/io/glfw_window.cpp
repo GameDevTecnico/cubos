@@ -12,26 +12,29 @@
 using namespace cubos;
 using namespace cubos::io;
 
-void static keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+CubosKey glfwToCubosKey(int key);
+
+static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    CubosKey cubosKey = glfwToCubosKey(key);
     if (action == GLFW_PRESS)
     {
-        handler->onKeyDown.fire(key);
+        handler->onKeyDown.fire(cubosKey);
     }
     else if (action == GLFW_RELEASE)
     {
-        handler->onKeyUp.fire(key);
+        handler->onKeyUp.fire(cubosKey);
     }
 }
 
-void static mousePositionCallback(GLFWwindow* window, double xPos, double yPos)
+static void mousePositionCallback(GLFWwindow* window, double xPos, double yPos)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->onMouseMoved.fire(glm::ivec2(xPos, yPos));
 }
 
-void static mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     if (button == GLFW_MOUSE_BUTTON_RIGHT)
@@ -114,4 +117,114 @@ glm::ivec2 GLFWWindow::getFramebufferSize() const
 bool GLFWWindow::shouldClose() const
 {
     return glfwWindowShouldClose(this->handle);
+}
+
+CubosKey glfwToCubosKey(int key)
+{
+#define MAP_KEY(glfw, cubos)                                                                                           \
+    case GLFW_KEY_##glfw:                                                                                              \
+        return CubosKey::cubos;
+    switch (key)
+    {
+        MAP_KEY(A, A)
+        MAP_KEY(B, B)
+        MAP_KEY(C, C)
+        MAP_KEY(D, D)
+        MAP_KEY(E, E)
+        MAP_KEY(F, F)
+        MAP_KEY(G, G)
+        MAP_KEY(H, H)
+        MAP_KEY(I, I)
+        MAP_KEY(J, J)
+        MAP_KEY(K, K)
+        MAP_KEY(L, L)
+        MAP_KEY(M, M)
+        MAP_KEY(N, N)
+        MAP_KEY(O, O)
+        MAP_KEY(P, P)
+        MAP_KEY(Q, Q)
+        MAP_KEY(R, R)
+        MAP_KEY(S, S)
+        MAP_KEY(T, T)
+        MAP_KEY(U, U)
+        MAP_KEY(V, V)
+        MAP_KEY(W, W)
+        MAP_KEY(X, X)
+        MAP_KEY(Y, Y)
+        MAP_KEY(Z, Z)
+        MAP_KEY(0, Num0)
+        MAP_KEY(1, Num1)
+        MAP_KEY(2, Num2)
+        MAP_KEY(3, Num3)
+        MAP_KEY(4, Num4)
+        MAP_KEY(5, Num5)
+        MAP_KEY(6, Num6)
+        MAP_KEY(7, Num7)
+        MAP_KEY(8, Num8)
+        MAP_KEY(9, Num9)
+        MAP_KEY(ESCAPE, Escape)
+        MAP_KEY(LEFT_CONTROL, LControl)
+        MAP_KEY(LEFT_SHIFT, LShift)
+        MAP_KEY(LEFT_ALT, LAlt)
+        // MAP_KEY(LEFT_SYSTEM, LSystem)
+        MAP_KEY(RIGHT_CONTROL, RControl)
+        MAP_KEY(RIGHT_SHIFT, RShift)
+        MAP_KEY(RIGHT_ALT, RAlt)
+        // MAP_KEY(RIGHT_SYSTEM, RSystem)
+        MAP_KEY(MENU, Menu)
+        MAP_KEY(LEFT_BRACKET, LBracket)
+        MAP_KEY(RIGHT_BRACKET, RBracket)
+        MAP_KEY(SEMICOLON, SemiColon)
+        MAP_KEY(COMMA, Comma)
+        MAP_KEY(PERIOD, Period)
+        MAP_KEY(APOSTROPHE, Quote)
+        MAP_KEY(SLASH, Slash)
+        MAP_KEY(BACKSLASH, BackSlash)
+        // MAP_KEY(TILDE, Tilde)
+        MAP_KEY(EQUAL, Equal)
+        MAP_KEY(MINUS, Dash)
+        MAP_KEY(SPACE, Space)
+        // MAP_KEY(RETURN, Return)
+        MAP_KEY(BACKSPACE, BackSpace)
+        MAP_KEY(TAB, Tab)
+        MAP_KEY(PAGE_UP, PageUp)
+        MAP_KEY(PAGE_DOWN, PageDown)
+        MAP_KEY(END, End)
+        MAP_KEY(HOME, Home)
+        MAP_KEY(INSERT, Insert)
+        MAP_KEY(DELETE, Delete)
+        MAP_KEY(KP_ADD, Add)
+        MAP_KEY(KP_SUBTRACT, Subtract)
+        MAP_KEY(KP_MULTIPLY, Multiply)
+        MAP_KEY(KP_DIVIDE, Divide)
+        MAP_KEY(LEFT, Left)
+        MAP_KEY(RIGHT, Right)
+        MAP_KEY(UP, Up)
+        MAP_KEY(DOWN, Down)
+        MAP_KEY(KP_0, Numpad0)
+        MAP_KEY(KP_1, Numpad1)
+        MAP_KEY(KP_2, Numpad2)
+        MAP_KEY(KP_3, Numpad3)
+        MAP_KEY(KP_4, Numpad4)
+        MAP_KEY(KP_5, Numpad5)
+        MAP_KEY(KP_6, Numpad6)
+        MAP_KEY(KP_7, Numpad7)
+        MAP_KEY(KP_8, Numpad8)
+        MAP_KEY(KP_9, Numpad9)
+        MAP_KEY(F1, F1)
+        MAP_KEY(F2, F2)
+        MAP_KEY(F3, F3)
+        MAP_KEY(F4, F4)
+        MAP_KEY(F5, F5)
+        MAP_KEY(F6, F6)
+        MAP_KEY(F7, F7)
+        MAP_KEY(F8, F8)
+        MAP_KEY(F9, F9)
+        MAP_KEY(F10, F10)
+        MAP_KEY(F11, F11)
+        MAP_KEY(F12, F12)
+        MAP_KEY(PAUSE, Pause)
+    default:
+        return CubosKey::Invalid;
+    }
 }
