@@ -202,7 +202,7 @@ static void addressToGL(AddressMode mode, GLenum& address)
         address = GL_MIRRORED_REPEAT;
         break;
     case AddressMode::Clamp:
-        address = GL_CLAMP;
+        address = GL_CLAMP_TO_EDGE;
         break;
     case AddressMode::Border:
         address = GL_CLAMP_TO_BORDER;
