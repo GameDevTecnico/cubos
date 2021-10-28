@@ -14,8 +14,8 @@ option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
 
-message( "# Building core samples: " ${BUILD_SAMPLES})
-message( "# Building core tests: " ${BUILD_ENGINE_TESTS})
+message( "# Building core samples: " ${BUILD_CORE_SAMPLES})
+message( "# Building core tests: " ${BUILD_CORE_TESTS})
 
 # Set core source files
 
@@ -100,7 +100,7 @@ target_link_libraries(cubos-core PRIVATE glad yaml-cpp)
 
 # Add core tests
 
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS) 
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_CORE_TESTS) 
     include(CTest)
     enable_testing()
 
@@ -109,7 +109,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS)
 endif()
 
 # Add core samples
-if (BUILD_SAMPLES)
+if (BUILD_CORE_SAMPLES)
     add_subdirectory(samples)
 endif()
 
