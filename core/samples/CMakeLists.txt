@@ -1,5 +1,21 @@
 # core/samples/CMakeLists.txt
 # Core samples build configuration
 
-add_executable(render-device render_device.cpp)
-target_link_libraries(render-device cubos-core)
+# Set sample source files
+set(CORE_SAMPLES_SOURCES
+    "render_device.cpp"
+)
+
+# For each sample file, create a target named after the file but without the
+# file extension
+foreach(file ${CORE_SAMPLES_SOURCES})
+    # Remove file extension
+    string(REGEX MATCH "^(.*)\\.[^.]*$" _ ${file})
+    set(target "sample." ${CMAKE_MATCH_1})
+    # Replace every _ with -
+    string(REPLACE "_" "-" target ${target})
+
+    # Add sample target
+    add_executable(${target} ${file})
+    target_link_libraries(${target} cubos-core)
+endforeach()
