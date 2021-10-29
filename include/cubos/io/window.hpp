@@ -2,7 +2,7 @@
 #define CUBOS_IO_WINDOW_HPP
 
 #include <cubos/event.hpp>
-#include <cubos/io/cubos_key.hpp>
+#include <cubos/io/keyboard.hpp>
 
 #include <glm/glm.hpp>
 
@@ -45,12 +45,12 @@ namespace cubos::io
         virtual bool shouldClose() const = 0;
 
         /// Invoked when a keyboard key is pressed
-        /// Invoked with a CubosKey
-        Event<CubosKey> onKeyDown;
+        /// Invoked with a Keyboard
+        Event<Keyboard> onKeyDown;
 
         /// Invoked when a keyboard key is released
-        /// Invoked with a CubosKey
-        Event<CubosKey> onKeyUp;
+        /// Invoked with a Keyboard
+        Event<Keyboard> onKeyUp;
 
         /// Invoked when the cursor is moved
         /// Invoked with a vector with x and y positions of the cursor

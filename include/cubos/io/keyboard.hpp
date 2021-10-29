@@ -1,6 +1,6 @@
 namespace cubos::io
 {
-    enum class CubosKey
+    enum class Keyboard
     {
         Invalid = -1,
 

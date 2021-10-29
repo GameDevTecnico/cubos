@@ -12,12 +12,12 @@
 using namespace cubos;
 using namespace cubos::io;
 
-CubosKey glfwToCubosKey(int key);
+Keyboard glfwToCubosKey(int key);
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
-    CubosKey cubosKey = glfwToCubosKey(key);
+    Keyboard cubosKey = glfwToCubosKey(key);
     if (action == GLFW_PRESS)
     {
         handler->onKeyDown.fire(cubosKey);
@@ -119,11 +119,11 @@ bool GLFWWindow::shouldClose() const
     return glfwWindowShouldClose(this->handle);
 }
 
-CubosKey glfwToCubosKey(int key)
+Keyboard glfwToCubosKey(int key)
 {
 #define MAP_KEY(glfw, cubos)                                                                                           \
     case GLFW_KEY_##glfw:                                                                                              \
-        return CubosKey::cubos;
+        return Keyboard::cubos;
     switch (key)
     {
         MAP_KEY(A, A)
@@ -166,11 +166,11 @@ CubosKey glfwToCubosKey(int key)
         MAP_KEY(LEFT_CONTROL, LControl)
         MAP_KEY(LEFT_SHIFT, LShift)
         MAP_KEY(LEFT_ALT, LAlt)
-        // MAP_KEY(LEFT_SYSTEM, LSystem)
+        MAP_KEY(LEFT_SUPER, LSystem)
         MAP_KEY(RIGHT_CONTROL, RControl)
         MAP_KEY(RIGHT_SHIFT, RShift)
         MAP_KEY(RIGHT_ALT, RAlt)
-        // MAP_KEY(RIGHT_SYSTEM, RSystem)
+        MAP_KEY(RIGHT_SUPER, RSystem)
         MAP_KEY(MENU, Menu)
         MAP_KEY(LEFT_BRACKET, LBracket)
         MAP_KEY(RIGHT_BRACKET, RBracket)
@@ -180,11 +180,10 @@ CubosKey glfwToCubosKey(int key)
         MAP_KEY(APOSTROPHE, Quote)
         MAP_KEY(SLASH, Slash)
         MAP_KEY(BACKSLASH, BackSlash)
-        // MAP_KEY(TILDE, Tilde)
         MAP_KEY(EQUAL, Equal)
         MAP_KEY(MINUS, Dash)
         MAP_KEY(SPACE, Space)
-        // MAP_KEY(RETURN, Return)
+        MAP_KEY(ENTER, Return)
         MAP_KEY(BACKSPACE, BackSpace)
         MAP_KEY(TAB, Tab)
         MAP_KEY(PAGE_UP, PageUp)
@@ -225,6 +224,6 @@ CubosKey glfwToCubosKey(int key)
         MAP_KEY(F12, F12)
         MAP_KEY(PAUSE, Pause)
     default:
-        return CubosKey::Invalid;
+        return Keyboard::Invalid;
     }
 }
