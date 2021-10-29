@@ -57,6 +57,10 @@ namespace cubos::io
         /// Invoked with a vector with x and y positions of the cursor
         Event<glm::ivec2> onMouseMoved;
 
+        /// Invked when the mouse scroll is moved
+        /// Invoked with a vector with x and y offsets
+        Event<glm::ivec2> onMouseScroll;
+
         /// Invoked when a mouse button is released
         /// Invoked with a MouseButton
         Event<MouseButton> onMouseUp;

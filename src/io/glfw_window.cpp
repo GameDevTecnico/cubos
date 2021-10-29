@@ -45,6 +45,12 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
         handler->onMouseUp.fire(cubosButton);
 }
 
+static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    handler->onMouseScroll.fire(glm::ivec2(xoffset, yoffset));
+}
+
 GLFWWindow::GLFWWindow()
 {
     if (!glfwInit())
@@ -76,6 +82,7 @@ GLFWWindow::GLFWWindow()
     glfwSetKeyCallback(this->handle, keyCallback);
     glfwSetCursorPosCallback(this->handle, mousePositionCallback);
     glfwSetMouseButtonCallback(this->handle, mouseButtonCallback);
+    glfwSetScrollCallback(this->handle, scrollCallback);
 }
 
 GLFWWindow::~GLFWWindow()
