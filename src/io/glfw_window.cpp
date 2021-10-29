@@ -12,6 +12,7 @@
 using namespace cubos;
 using namespace cubos::io;
 
+MouseButton glfwToCubosMouseButton(int button);
 Keyboard glfwToCubosKey(int key);
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -37,20 +38,11 @@ static void mousePositionCallback(GLFWwindow* window, double xPos, double yPos)
 static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
-    if (button == GLFW_MOUSE_BUTTON_RIGHT)
-    {
-        if (action == GLFW_PRESS)
-            handler->onMouseDown.fire(MouseButton::Right);
-        else /// with GLFW_RELEASE)
-            handler->onMouseUp.fire(MouseButton::Right);
-    }
-    else if (button == GLFW_MOUSE_BUTTON_LEFT)
-    {
-        if (action == GLFW_PRESS)
-            handler->onMouseDown.fire(MouseButton::Left);
-        else /// with GLFW_RELEASE
-            handler->onMouseUp.fire(MouseButton::Left);
-    }
+    MouseButton cubosButton = glfwToCubosMouseButton(button);
+    if (action == GLFW_PRESS)
+        handler->onMouseDown.fire(cubosButton);
+    else // with GLFW_RELEASE
+        handler->onMouseUp.fire(cubosButton);
 }
 
 GLFWWindow::GLFWWindow()
@@ -117,6 +109,23 @@ glm::ivec2 GLFWWindow::getFramebufferSize() const
 bool GLFWWindow::shouldClose() const
 {
     return glfwWindowShouldClose(this->handle);
+}
+
+MouseButton glfwToCubosMouseButton(int button)
+{
+#define MAP_BUTTON(glfw, cubos)                                                                                        \
+    case GLFW_MOUSE_BUTTON_##glfw:                                                                                     \
+        return MouseButton::cubos;
+    switch (button)
+    {
+        MAP_BUTTON(LEFT, Left)
+        MAP_BUTTON(RIGHT, Right)
+        MAP_BUTTON(MIDDLE, Middle)
+        // Not sure what the mapping in GLFW is for the Exta1 and Extra2 buttons
+    default:
+        return MouseButton::Invalid;
+    }
+#undef MAP_BUTTON
 }
 
 Keyboard glfwToCubosKey(int key)
@@ -226,4 +235,5 @@ Keyboard glfwToCubosKey(int key)
     default:
         return Keyboard::Invalid;
     }
+#undef MAP_KEY
 }

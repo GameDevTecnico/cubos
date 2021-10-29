@@ -20,6 +20,7 @@ namespace cubos::io
         Middle,
         Extra1,
         Extra2,
+        Invalid = -1,
     };
 
     /// Wrapper around a window object, handles input events and creates the render device
