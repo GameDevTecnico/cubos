@@ -47,11 +47,11 @@ namespace cubos::io
 
         /// Invoked when a keyboard key is pressed
         /// Invoked with a Keyboard
-        Event<Keyboard> onKeyDown;
+        Event<Key> onKeyDown;
 
         /// Invoked when a keyboard key is released
         /// Invoked with a Keyboard
-        Event<Keyboard> onKeyUp;
+        Event<Key> onKeyUp;
 
         /// Invoked when the cursor is moved
         /// Invoked with a vector with x and y positions of the cursor

@@ -1,6 +1,10 @@
+#ifndef CUBOS_IO_KEYBOARD_HPP
+#define CUBOS_IO_KEYBOARD_HPP
+
 namespace cubos::io
 {
-    enum class Keyboard
+    /// Key key codes enum
+    enum class Key
     {
         Invalid = -1,
 
@@ -106,3 +110,5 @@ namespace cubos::io
         Count
     };
 } // namespace cubos::io
+
+#endif // CUBOS_IO_KEYBOARD_HPP

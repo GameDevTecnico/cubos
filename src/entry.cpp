@@ -153,6 +153,6 @@ int main(void)
 
         t += 0.01f;
     }
-
+    window->~Window();
     return 0;
 }

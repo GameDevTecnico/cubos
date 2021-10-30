@@ -13,12 +13,12 @@ using namespace cubos;
 using namespace cubos::io;
 
 static MouseButton glfwToCubosMouseButton(int button);
-static Keyboard glfwToCubosKey(int key);
+static Key glfwToCubosKey(int key);
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
-    Keyboard cubosKey = glfwToCubosKey(key);
+    Key cubosKey = glfwToCubosKey(key);
     if (action == GLFW_PRESS)
     {
         handler->onKeyDown.fire(cubosKey);
@@ -143,11 +143,11 @@ static MouseButton glfwToCubosMouseButton(int button)
 #undef MAP_BUTTON
 }
 
-static Keyboard glfwToCubosKey(int key)
+static Key glfwToCubosKey(int key)
 {
 #define MAP_KEY(glfw, cubos)                                                                                           \
     case GLFW_KEY_##glfw:                                                                                              \
-        return Keyboard::cubos;
+        return Key::cubos;
     switch (key)
     {
         MAP_KEY(A, A)
@@ -248,7 +248,7 @@ static Keyboard glfwToCubosKey(int key)
         MAP_KEY(F12, F12)
         MAP_KEY(PAUSE, Pause)
     default:
-        return Keyboard::Invalid;
+        return Key::Invalid;
     }
 #undef MAP_KEY
 }
