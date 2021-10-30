@@ -11,7 +11,7 @@ var NAVTREEINDEX0 =
 "classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc":[0,0,0,2,2],
 "classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec":[0,0,0,2,3],
 "classcubos_1_1Settings.html":[0,0,0,3],
-"classcubos_1_1Settings.html#a5dba890d7c4d18f09e45fb1b0abf3887":[0,0,0,3,0],
+"classcubos_1_1Settings.html#a98bf2f604f948e3b8efbb5ff8c6be206":[0,0,0,3,0],
 "classcubos_1_1Settings.html#adc767c26c234eee79bd5d704db18f6c3":[0,0,0,3,1],
 "classcubos_1_1gl_1_1OGLRenderDevice.html":[0,0,0,0,7],
 "classcubos_1_1gl_1_1OGLRenderDevice.html#a028b7ee3c6be5107802c5d60e4d4b494":[0,0,0,0,7,26],

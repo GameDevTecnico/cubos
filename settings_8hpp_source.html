@@ -98,11 +98,10 @@ $(document).ready(function(){initNavTree('settings_8hpp_source.html',''); initRe
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>cubos</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classcubos_1_1Settings.html">   10</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1Settings.html">Settings</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="code" href="classcubos_1_1Settings.html">Settings</a>(<a class="code" href="classcubos_1_1Settings.html">Settings</a>&amp; settings) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="code" href="classcubos_1_1Settings.html">Settings</a>(<a class="code" href="classcubos_1_1Settings.html">Settings</a>&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="classcubos_1_1Settings.html">Settings</a>&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Settings.html#a0cb3f94bdbee29eb019c7c7bc11b4327">clear</a>();</div>
@@ -126,7 +125,7 @@ $(document).ready(function(){initNavTree('settings_8hpp_source.html',''); initRe
 <div class="ttc" id="aclasscubos_1_1Settings_html_aeb53baa082f936b22f675b93b36cdc98"><div class="ttname"><a href="classcubos_1_1Settings.html#aeb53baa082f936b22f675b93b36cdc98">cubos::Settings::getString</a></div><div class="ttdeci">static std::string getString(const std::string &amp;key, const std::string &amp;defaultValue)</div></div>
 <div class="ttc" id="aclasscubos_1_1Settings_html_a0cb3f94bdbee29eb019c7c7bc11b4327"><div class="ttname"><a href="classcubos_1_1Settings.html#a0cb3f94bdbee29eb019c7c7bc11b4327">cubos::Settings::clear</a></div><div class="ttdeci">static void clear()</div><div class="ttdoc">Clears all the settings.</div></div>
 <div class="ttc" id="aclasscubos_1_1Settings_html_a3332b40ff250522db428deea1da3d121"><div class="ttname"><a href="classcubos_1_1Settings.html#a3332b40ff250522db428deea1da3d121">cubos::Settings::setString</a></div><div class="ttdeci">static void setString(const std::string &amp;key, const std::string &amp;value)</div></div>
-<div class="ttc" id="aclasscubos_1_1Settings_html"><div class="ttname"><a href="classcubos_1_1Settings.html">cubos::Settings</a></div><div class="ttdef"><b>Definition:</b> settings.hpp:10</div></div>
+<div class="ttc" id="aclasscubos_1_1Settings_html"><div class="ttname"><a href="classcubos_1_1Settings.html">cubos::Settings</a></div><div class="ttdoc">Singleton used to manage settings.</div><div class="ttdef"><b>Definition:</b> settings.hpp:10</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

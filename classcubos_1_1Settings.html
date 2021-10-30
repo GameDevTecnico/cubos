@@ -94,12 +94,17 @@ $(document).ready(function(){initNavTree('classcubos_1_1Settings.html',''); init
 <div class="title">cubos::Settings Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Singleton used to manage settings.  
+ <a href="classcubos_1_1Settings.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="settings_8hpp_source.html">settings.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5dba890d7c4d18f09e45fb1b0abf3887"><td class="memItemLeft" align="right" valign="top"><a id="a5dba890d7c4d18f09e45fb1b0abf3887"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Settings</b> (<a class="el" href="classcubos_1_1Settings.html">Settings</a> &amp;settings)=delete</td></tr>
-<tr class="separator:a5dba890d7c4d18f09e45fb1b0abf3887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98bf2f604f948e3b8efbb5ff8c6be206"><td class="memItemLeft" align="right" valign="top"><a id="a98bf2f604f948e3b8efbb5ff8c6be206"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Settings</b> (<a class="el" href="classcubos_1_1Settings.html">Settings</a> &amp;)=delete</td></tr>
+<tr class="separator:a98bf2f604f948e3b8efbb5ff8c6be206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc767c26c234eee79bd5d704db18f6c3"><td class="memItemLeft" align="right" valign="top"><a id="adc767c26c234eee79bd5d704db18f6c3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classcubos_1_1Settings.html">Settings</a> &amp;)=delete</td></tr>
 <tr class="separator:adc767c26c234eee79bd5d704db18f6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,7 +120,9 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <tr class="memitem:aeb53baa082f936b22f675b93b36cdc98"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1Settings.html#aeb53baa082f936b22f675b93b36cdc98">getString</a> (const std::string &amp;key, const std::string &amp;defaultValue)</td></tr>
 <tr class="separator:aeb53baa082f936b22f675b93b36cdc98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Singleton used to manage settings. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aeb53baa082f936b22f675b93b36cdc98"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb53baa082f936b22f675b93b36cdc98">&#9670;&nbsp;</a></span>getString()</h2>
 
@@ -151,12 +158,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </div><div class="memdoc">
 <p>Retrieves the string settings with a specific key. If no setting exists with such key, returns the default value. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">key</td><td>the setting's key </td></tr>
-    <tr><td class="paramname">defaultValue</td><td>the value returned when not setting with the provided key exists </td></tr>
+    <tr><td class="paramname">key</td><td>The setting's key. </td></tr>
+    <tr><td class="paramname">defaultValue</td><td>The value returned when not setting with the provided key exists. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>std::string the setting's value </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The setting's value. </dd></dl>
 
 </div>
 </div>
@@ -195,8 +202,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </div><div class="memdoc">
 <p>Defines a new string setting. If the setting already exists, overrides its value with the new value. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">key</td><td>the setting's key </td></tr>
-    <tr><td class="paramname">value</td><td>the setting's value </td></tr>
+    <tr><td class="paramname">key</td><td>The setting's key. </td></tr>
+    <tr><td class="paramname">value</td><td>The setting's value. </td></tr>
   </table>
   </dd>
 </dl>

@@ -121,14 +121,14 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename... TArgs&gt;<br />
 class cubos::Event&lt; TArgs &gt;</h3>
 
-<p>Class used to easily implement the observer pattern Example usage: </p><pre class="fragment">Event&lt;const char*&gt; event;
+<p>Class used to easily implement the observer pattern. Example usage: </p><pre class="fragment">Event&lt;const char*&gt; event;
 event.registerCallback([](const char* msg) =&gt; {
     std::cout &lt;&lt; msg &lt;&lt; std::endl;
 });
 event.fire("Hello!"); // Prints "Hello!"
 </pre><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">TArgs</td><td>The argument types of the callback functions </td></tr>
+    <tr><td class="paramname">TArgs</td><td>The argument types of the callback functions. </td></tr>
   </table>
   </dd>
 </dl>
@@ -150,9 +150,9 @@ template&lt;typename... TArgs&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Fires the event, calling all the callbacks with the passed arguments </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Fires the event, calling all the callbacks with the passed arguments. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">args</td><td><a class="el" href="classcubos_1_1Event.html">Event</a> arguments </td></tr>
+    <tr><td class="paramname">args</td><td><a class="el" href="classcubos_1_1Event.html">Event</a> arguments. </td></tr>
   </table>
   </dd>
 </dl>
@@ -176,14 +176,14 @@ template&lt;typename... TArgs&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Registers a new callback </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Registers a new callback. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">callback</td><td>The callback called when the event is fired </td></tr>
+    <tr><td class="paramname">callback</td><td>The callback called when the event is fired. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The callback ID, used for unregistering the callback later on </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">unregisterCallback</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The callback ID, used for unregistering the callback later on. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">unregisterCallback</a>. </dd></dl>
 
 </div>
 </div>
@@ -204,13 +204,13 @@ template&lt;typename... TArgs&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Unregisters a callback </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Unregisters a callback. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td>The ID returned when the callback was registered </td></tr>
+    <tr><td class="paramname">id</td><td>The ID returned when the callback was registered. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec">registerCallback</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec">registerCallback</a>. </dd></dl>
 
 </div>
 </div>
