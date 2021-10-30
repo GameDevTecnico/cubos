@@ -42,7 +42,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"structcubos_1_1gl_1_1Texture2DDesc.html#acb079d648b989b7aad88f69d89d344ea"
+"structcubos_1_1gl_1_1Texture1DDesc.html#a39941485e3652fba53d58c36e04bbe62"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

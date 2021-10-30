@@ -20,6 +20,7 @@ var annotated_dup =
         [ "VertexElement", "structcubos_1_1gl_1_1VertexElement.html", "structcubos_1_1gl_1_1VertexElement" ]
       ] ],
       [ "io", null, [
+        [ "GLFWWindow", "classcubos_1_1io_1_1GLFWWindow.html", "classcubos_1_1io_1_1GLFWWindow" ],
         [ "Window", "classcubos_1_1io_1_1Window.html", "classcubos_1_1io_1_1Window" ]
       ] ],
       [ "Settings", "classcubos_1_1Settings.html", "classcubos_1_1Settings" ]

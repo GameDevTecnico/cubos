@@ -1,10 +1,10 @@
 var classcubos_1_1io_1_1Window =
 [
-    [ "Window", "classcubos_1_1io_1_1Window.html#a651b33108510bb6ca472b18f3a6eaf93", null ],
-    [ "~Window", "classcubos_1_1io_1_1Window.html#ac2e739caf5a4c193b3ff7923215045f1", null ],
-    [ "getFramebufferSize", "classcubos_1_1io_1_1Window.html#aa19a756d48823cf986e68f8e1461a93e", null ],
-    [ "getRenderDevice", "classcubos_1_1io_1_1Window.html#a754848fc44bf9d8b6faa12f2b07809b8", null ],
-    [ "pollEvents", "classcubos_1_1io_1_1Window.html#ab554657c1c0a06a44ad98937228633f0", null ],
-    [ "shouldClose", "classcubos_1_1io_1_1Window.html#a2369ad8f407fce2b6c155924177e30c0", null ],
-    [ "swapBuffers", "classcubos_1_1io_1_1Window.html#aa77c9ba000012dbcbd49c6bcba0976cc", null ]
+    [ "Window", "classcubos_1_1io_1_1Window.html#a26df8d7e5e7755e449d78a4e366c60b2", null ],
+    [ "~Window", "classcubos_1_1io_1_1Window.html#acc7585f2f8dc9e85d72b7881da66dab4", null ],
+    [ "getFramebufferSize", "classcubos_1_1io_1_1Window.html#a6f2d428cd378c89135de425512bc8662", null ],
+    [ "getRenderDevice", "classcubos_1_1io_1_1Window.html#aee255c7e06bfdb1d400b3eeda520ff2a", null ],
+    [ "pollEvents", "classcubos_1_1io_1_1Window.html#ac957d7bdea4629f07d0387144a36e5ba", null ],
+    [ "shouldClose", "classcubos_1_1io_1_1Window.html#aa708bdf84d7c26194fdf7d24bdda2768", null ],
+    [ "swapBuffers", "classcubos_1_1io_1_1Window.html#ad61a110ed77b78bd724f798b2aa954b1", null ]
 ];

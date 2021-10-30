@@ -36,5 +36,7 @@ var hierarchy =
     [ "cubos::gl::VertexArrayDesc", "structcubos_1_1gl_1_1VertexArrayDesc.html", null ],
     [ "cubos::gl::impl::VertexBuffer", "classcubos_1_1gl_1_1impl_1_1VertexBuffer.html", null ],
     [ "cubos::gl::VertexElement", "structcubos_1_1gl_1_1VertexElement.html", null ],
-    [ "cubos::io::Window", "classcubos_1_1io_1_1Window.html", null ]
+    [ "cubos::io::Window", "classcubos_1_1io_1_1Window.html", [
+      [ "cubos::io::GLFWWindow", "classcubos_1_1io_1_1GLFWWindow.html", null ]
+    ] ]
 ];
