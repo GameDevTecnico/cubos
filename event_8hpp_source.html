@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('event_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">fire</a>(TArgs... args) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::mutex mutex;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">mutable</span> std::mutex mutex;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        std::vector&lt;Callback&gt; callbacks;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
@@ -146,10 +146,10 @@ $(document).ready(function(){initNavTree('event_8hpp_source.html',''); initResiz
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1Event_html_a2b4556a77e14a625fadb5f43a8c9b3a9"><div class="ttname"><a href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">cubos::Event::unregisterCallback</a></div><div class="ttdeci">void unregisterCallback(ID id)</div><div class="ttdef"><b>Definition:</b> event.hpp:54</div></div>
 <div class="ttc" id="aclasscubos_1_1Event_html"><div class="ttname"><a href="classcubos_1_1Event.html">cubos::Event</a></div><div class="ttdef"><b>Definition:</b> event.hpp:20</div></div>
-<div class="ttc" id="aclasscubos_1_1Event_html_a03bd8bf0216ef6a8f7ec88788772284e"><div class="ttname"><a href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">cubos::Event::ID</a></div><div class="ttdeci">size_t ID</div><div class="ttdoc">Callback identifier.</div><div class="ttdef"><b>Definition:</b> event.hpp:24</div></div>
+<div class="ttc" id="aclasscubos_1_1Event_html_a03bd8bf0216ef6a8f7ec88788772284e"><div class="ttname"><a href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">cubos::Event&lt; MouseButton &gt;::ID</a></div><div class="ttdeci">size_t ID</div><div class="ttdoc">Callback identifier.</div><div class="ttdef"><b>Definition:</b> event.hpp:24</div></div>
 <div class="ttc" id="aclasscubos_1_1Event_html_a77f19d0edf6e754e8b13687f138c6ebc"><div class="ttname"><a href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">cubos::Event::fire</a></div><div class="ttdeci">void fire(TArgs... args) const</div><div class="ttdef"><b>Definition:</b> event.hpp:61</div></div>
 <div class="ttc" id="aclasscubos_1_1Event_html_afbf4a62eeac097e1c43a0c0cf1d40aec"><div class="ttname"><a href="classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec">cubos::Event::registerCallback</a></div><div class="ttdeci">ID registerCallback(Callback callback)</div><div class="ttdef"><b>Definition:</b> event.hpp:47</div></div>
-<div class="ttc" id="aclasscubos_1_1Event_html_a3d5bdb17bf64983c2e1c59a356fe5928"><div class="ttname"><a href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">cubos::Event::Callback</a></div><div class="ttdeci">std::function&lt; void(TArgs...)&gt; Callback</div><div class="ttdoc">Callback type.</div><div class="ttdef"><b>Definition:</b> event.hpp:23</div></div>
+<div class="ttc" id="aclasscubos_1_1Event_html_a3d5bdb17bf64983c2e1c59a356fe5928"><div class="ttname"><a href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">cubos::Event&lt; MouseButton &gt;::Callback</a></div><div class="ttdeci">std::function&lt; void(TArgs...)&gt; Callback</div><div class="ttdoc">Callback type.</div><div class="ttdef"><b>Definition:</b> event.hpp:23</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

@@ -11,6 +11,9 @@ var hierarchy =
     [ "cubos::gl::impl::DepthStencilState", "classcubos_1_1gl_1_1impl_1_1DepthStencilState.html", null ],
     [ "cubos::gl::DepthStencilStateDesc", "structcubos_1_1gl_1_1DepthStencilStateDesc.html", null ],
     [ "cubos::Event< TArgs >", "classcubos_1_1Event.html", null ],
+    [ "cubos::Event< glm::ivec2 >", "classcubos_1_1Event.html", null ],
+    [ "cubos::Event< Key >", "classcubos_1_1Event.html", null ],
+    [ "cubos::Event< MouseButton >", "classcubos_1_1Event.html", null ],
     [ "cubos::gl::DepthStencilStateDesc::Stencil::Face", "structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil_1_1Face.html", null ],
     [ "cubos::gl::impl::Framebuffer", "classcubos_1_1gl_1_1impl_1_1Framebuffer.html", null ],
     [ "cubos::gl::FramebufferDesc", "structcubos_1_1gl_1_1FramebufferDesc.html", null ],
@@ -37,7 +40,5 @@ var hierarchy =
     [ "cubos::gl::VertexArrayDesc", "structcubos_1_1gl_1_1VertexArrayDesc.html", null ],
     [ "cubos::gl::impl::VertexBuffer", "classcubos_1_1gl_1_1impl_1_1VertexBuffer.html", null ],
     [ "cubos::gl::VertexElement", "structcubos_1_1gl_1_1VertexElement.html", null ],
-    [ "cubos::io::Window", "classcubos_1_1io_1_1Window.html", [
-      [ "cubos::io::GLFWWindow", "classcubos_1_1io_1_1GLFWWindow.html", null ]
-    ] ]
+    [ "cubos::io::Window", "classcubos_1_1io_1_1Window.html", null ]
 ];

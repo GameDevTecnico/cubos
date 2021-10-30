@@ -1,0 +1,6 @@
+<map id="cubos::io::Window" name="cubos::io::Window">
+<area shape="rect" id="node1" title="Wrapper around a window object, handles input events and creates the render device." alt="" coords="224,139,364,165"/>
+<area shape="rect" id="node2" href="$classcubos_1_1Event.html" title=" " alt="" coords="5,5,159,47"/>
+<area shape="rect" id="node3" href="$classcubos_1_1Event.html" title=" " alt="" coords="183,13,405,39"/>
+<area shape="rect" id="node4" href="$classcubos_1_1Event.html" title=" " alt="" coords="429,13,588,39"/>
+</map>

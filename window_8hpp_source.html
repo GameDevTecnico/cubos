@@ -93,43 +93,82 @@ $(document).ready(function(){initNavTree('window_8hpp_source.html',''); initResi
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_IO_WINDOW_HPP</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_IO_WINDOW_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>cubos::gl</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">class </span>RenderDevice;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>cubos::io</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Window.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1io_1_1Window.html">Window</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="classcubos_1_1io_1_1Window.html">Window</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classcubos_1_1io_1_1Window.html">Window</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1Window.html#ac957d7bdea4629f07d0387144a36e5ba">pollEvents</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1Window.html#ad61a110ed77b78bd724f798b2aa954b1">swapBuffers</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classcubos_1_1gl_1_1RenderDevice.html">gl::RenderDevice</a>&amp; <a class="code" href="classcubos_1_1io_1_1Window.html#aee255c7e06bfdb1d400b3eeda520ff2a">getRenderDevice</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">virtual</span> glm::ivec2 <a class="code" href="classcubos_1_1io_1_1Window.html#a6f2d428cd378c89135de425512bc8662">getFramebufferSize</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1io_1_1Window.html#aa708bdf84d7c26194fdf7d24bdda2768">shouldClose</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;} <span class="comment">// namespace cubos::io</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif // CUBOS_IO_WINDOW_HPP</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/event.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/io/keyboard.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>cubos::gl</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">class </span>RenderDevice;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>cubos::io</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">enum class</span> MouseButton</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        Invalid = -1, </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        Left,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        Right,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        Middle,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        Extra1,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        Extra2,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    };</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Window.html">   29</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1io_1_1Window.html">Window</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classcubos_1_1io_1_1Window.html">Window</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classcubos_1_1io_1_1Window.html">Window</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">static</span> <a class="code" href="classcubos_1_1io_1_1Window.html">Window</a>* <a class="code" href="classcubos_1_1io_1_1Window.html#a274063e6dc2ada19e4131002e9590999">create</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1Window.html#ac957d7bdea4629f07d0387144a36e5ba">pollEvents</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1Window.html#ad61a110ed77b78bd724f798b2aa954b1">swapBuffers</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classcubos_1_1gl_1_1RenderDevice.html">gl::RenderDevice</a>&amp; <a class="code" href="classcubos_1_1io_1_1Window.html#aee255c7e06bfdb1d400b3eeda520ff2a">getRenderDevice</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">virtual</span> glm::ivec2 <a class="code" href="classcubos_1_1io_1_1Window.html#a6f2d428cd378c89135de425512bc8662">getFramebufferSize</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1io_1_1Window.html#aa708bdf84d7c26194fdf7d24bdda2768">shouldClose</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Window.html#a091ba5d73d3bfabbbc3e6edd67e226a7">   55</a></span>&#160;        <a class="code" href="classcubos_1_1Event.html">Event&lt;Key&gt;</a> <a class="code" href="classcubos_1_1io_1_1Window.html#a091ba5d73d3bfabbbc3e6edd67e226a7">onKeyDown</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Window.html#abc394dcb01e9fa161e0697d7be454e71">   58</a></span>&#160;        <a class="code" href="classcubos_1_1Event.html">Event&lt;Key&gt;</a> <a class="code" href="classcubos_1_1io_1_1Window.html#abc394dcb01e9fa161e0697d7be454e71">onKeyUp</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Window.html#a053710a1ba6d5da3436cfe1f476741e4">   61</a></span>&#160;        <a class="code" href="classcubos_1_1Event.html">Event&lt;glm::ivec2&gt;</a> <a class="code" href="classcubos_1_1io_1_1Window.html#a053710a1ba6d5da3436cfe1f476741e4">onMouseMoved</a>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Window.html#aed6cc5407920342c9eb9874288fe412b">   64</a></span>&#160;        <a class="code" href="classcubos_1_1Event.html">Event&lt;glm::ivec2&gt;</a> <a class="code" href="classcubos_1_1io_1_1Window.html#aed6cc5407920342c9eb9874288fe412b">onMouseScroll</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Window.html#ac50e5049a17b92baf713c38843b23625">   67</a></span>&#160;        <a class="code" href="classcubos_1_1Event.html">Event&lt;MouseButton&gt;</a> <a class="code" href="classcubos_1_1io_1_1Window.html#ac50e5049a17b92baf713c38843b23625">onMouseUp</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Window.html#a33c4607acf663c09cc4e3504f069416a">   70</a></span>&#160;        <a class="code" href="classcubos_1_1Event.html">Event&lt;MouseButton&gt;</a> <a class="code" href="classcubos_1_1io_1_1Window.html#a33c4607acf663c09cc4e3504f069416a">onMouseDown</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Window.html#ac363690e93b2827fa48814f83ac554f3">   73</a></span>&#160;        <a class="code" href="classcubos_1_1Event.html">Event&lt;glm::ivec2&gt;</a> <a class="code" href="classcubos_1_1io_1_1Window.html#ac363690e93b2827fa48814f83ac554f3">onFramebufferResize</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    };</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;} <span class="comment">// namespace cubos::io</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif // CUBOS_IO_WINDOW_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_a053710a1ba6d5da3436cfe1f476741e4"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#a053710a1ba6d5da3436cfe1f476741e4">cubos::io::Window::onMouseMoved</a></div><div class="ttdeci">Event&lt; glm::ivec2 &gt; onMouseMoved</div><div class="ttdoc">Invoked with the cursor position when the cursor is moved.</div><div class="ttdef"><b>Definition:</b> window.hpp:61</div></div>
+<div class="ttc" id="aclasscubos_1_1Event_html"><div class="ttname"><a href="classcubos_1_1Event.html">cubos::Event&lt; Key &gt;</a></div></div>
 <div class="ttc" id="aclasscubos_1_1io_1_1Window_html_ac957d7bdea4629f07d0387144a36e5ba"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#ac957d7bdea4629f07d0387144a36e5ba">cubos::io::Window::pollEvents</a></div><div class="ttdeci">virtual void pollEvents() const =0</div><div class="ttdoc">Polls window events, firing the events.</div></div>
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_a091ba5d73d3bfabbbc3e6edd67e226a7"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#a091ba5d73d3bfabbbc3e6edd67e226a7">cubos::io::Window::onKeyDown</a></div><div class="ttdeci">Event&lt; Key &gt; onKeyDown</div><div class="ttdoc">Invoked with a key code, when a keyboard key is pressed.</div><div class="ttdef"><b>Definition:</b> window.hpp:55</div></div>
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_ac50e5049a17b92baf713c38843b23625"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#ac50e5049a17b92baf713c38843b23625">cubos::io::Window::onMouseUp</a></div><div class="ttdeci">Event&lt; MouseButton &gt; onMouseUp</div><div class="ttdoc">Invoked with a button code when a mouse button is released.</div><div class="ttdef"><b>Definition:</b> window.hpp:67</div></div>
 <div class="ttc" id="aclasscubos_1_1io_1_1Window_html_aa708bdf84d7c26194fdf7d24bdda2768"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#aa708bdf84d7c26194fdf7d24bdda2768">cubos::io::Window::shouldClose</a></div><div class="ttdeci">virtual bool shouldClose() const =0</div><div class="ttdoc">Should the window close?</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Window_html"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html">cubos::io::Window</a></div><div class="ttdoc">Wrapper around a window object, handles input events and creates the render device.</div><div class="ttdef"><b>Definition:</b> window.hpp:14</div></div>
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_aed6cc5407920342c9eb9874288fe412b"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#aed6cc5407920342c9eb9874288fe412b">cubos::io::Window::onMouseScroll</a></div><div class="ttdeci">Event&lt; glm::ivec2 &gt; onMouseScroll</div><div class="ttdoc">Invoked with the scroll offset, when the mouse wheel is scrolled.</div><div class="ttdef"><b>Definition:</b> window.hpp:64</div></div>
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_a274063e6dc2ada19e4131002e9590999"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#a274063e6dc2ada19e4131002e9590999">cubos::io::Window::create</a></div><div class="ttdeci">static Window * create()</div></div>
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_abc394dcb01e9fa161e0697d7be454e71"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#abc394dcb01e9fa161e0697d7be454e71">cubos::io::Window::onKeyUp</a></div><div class="ttdeci">Event&lt; Key &gt; onKeyUp</div><div class="ttdoc">Invoked with a key code, when a keyboard key is released.</div><div class="ttdef"><b>Definition:</b> window.hpp:58</div></div>
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html">cubos::io::Window</a></div><div class="ttdoc">Wrapper around a window object, handles input events and creates the render device.</div><div class="ttdef"><b>Definition:</b> window.hpp:29</div></div>
 <div class="ttc" id="aclasscubos_1_1io_1_1Window_html_aee255c7e06bfdb1d400b3eeda520ff2a"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#aee255c7e06bfdb1d400b3eeda520ff2a">cubos::io::Window::getRenderDevice</a></div><div class="ttdeci">virtual gl::RenderDevice &amp; getRenderDevice() const =0</div><div class="ttdoc">Returns the window render device.</div></div>
 <div class="ttc" id="aclasscubos_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1gl_1_1RenderDevice.html">cubos::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:439</div></div>
 <div class="ttc" id="aclasscubos_1_1io_1_1Window_html_ad61a110ed77b78bd724f798b2aa954b1"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#ad61a110ed77b78bd724f798b2aa954b1">cubos::io::Window::swapBuffers</a></div><div class="ttdeci">virtual void swapBuffers() const =0</div><div class="ttdoc">Swaps the window buffers.</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_a6f2d428cd378c89135de425512bc8662"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#a6f2d428cd378c89135de425512bc8662">cubos::io::Window::getFramebufferSize</a></div><div class="ttdeci">virtual glm::ivec2 getFramebufferSize() const =0</div><div class="ttdoc">Return the window framebuffer size in pixels.</div></div>
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_ac363690e93b2827fa48814f83ac554f3"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#ac363690e93b2827fa48814f83ac554f3">cubos::io::Window::onFramebufferResize</a></div><div class="ttdeci">Event&lt; glm::ivec2 &gt; onFramebufferResize</div><div class="ttdoc">Invoked with the new framebuffer size when it changes size.</div><div class="ttdef"><b>Definition:</b> window.hpp:73</div></div>
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_a33c4607acf663c09cc4e3504f069416a"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#a33c4607acf663c09cc4e3504f069416a">cubos::io::Window::onMouseDown</a></div><div class="ttdeci">Event&lt; MouseButton &gt; onMouseDown</div><div class="ttdoc">Invoked with a button code when a mouse button is pressed.</div><div class="ttdef"><b>Definition:</b> window.hpp:70</div></div>
+<div class="ttc" id="aclasscubos_1_1io_1_1Window_html_a6f2d428cd378c89135de425512bc8662"><div class="ttname"><a href="classcubos_1_1io_1_1Window.html#a6f2d428cd378c89135de425512bc8662">cubos::io::Window::getFramebufferSize</a></div><div class="ttdeci">virtual glm::ivec2 getFramebufferSize() const =0</div><div class="ttdoc">Returns the window framebuffer size in pixels.</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

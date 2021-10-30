@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"structcubos_1_1gl_1_1SamplerDesc.html#a2ccb38ea9f232f9c718a4a4df4254883":[0,0,0,0,10,1],
 "structcubos_1_1gl_1_1SamplerDesc.html#a53ac3184ea845ac0cc6d9662eb1e5668":[0,0,0,0,10,7],
 "structcubos_1_1gl_1_1SamplerDesc.html#a56b2bfe761652ab96e32b5ef42600b8b":[0,0,0,0,10,2],
 "structcubos_1_1gl_1_1SamplerDesc.html#a5d7d5e9c966131997454d43896d95ea9":[0,0,0,0,10,4],
