@@ -1,10 +1,7 @@
 #include <cubos/gl/ogl_render_device.hpp>
 #include <cubos/log.hpp>
 
-#ifndef GLAD_LOADED
-#define GLAD_LOADED
 #include <glad/glad.h>
-#endif // GLAD_LOADED
 
 #include <cstdlib>
 #include <cassert>

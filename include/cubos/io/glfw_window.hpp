@@ -2,10 +2,14 @@
 #define CUBOS_IO_GLFW_WINDOW_IMPL_HPP
 
 #include <glm/glm.hpp>
+
+#ifdef WITH_GLFW
 #define GLFW_INCLUDE_NONE
 #include <glfw/glfw3.h>
 
 #include <cubos/gl/ogl_render_device.hpp>
+#endif
+
 #include <cubos/io/window.hpp>
 
 namespace cubos::io
@@ -33,8 +37,10 @@ namespace cubos::io
         virtual bool shouldClose() const override;
 
     private:
+#ifdef WITH_GLFW
         GLFWwindow* handle;
         gl::OGLRenderDevice* renderDevice;
+#endif
     };
 } // namespace cubos::io
 

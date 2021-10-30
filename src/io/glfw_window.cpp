@@ -4,16 +4,14 @@
 
 #include <cubos/log.hpp>
 
-#ifndef GLAD_LOADED
-#define GLAD_LOADED
 #include <glad/glad.h>
-#endif // GLAD_LOADED
 
 using namespace cubos;
 using namespace cubos::io;
 
 GLFWWindow::GLFWWindow()
 {
+#ifdef WITH_GLFW
     if (!glfwInit())
     {
         logCritical("OGLRenderDevice::OGLRenderDevice() failed: glfwInit() failed");
@@ -35,40 +33,75 @@ GLFWWindow::GLFWWindow()
     glfwMakeContextCurrent(this->handle);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        logCritical("GLFWWindowImpl::GLFWWindowImpl() failed: OpenGL loader failed");
+        logCritical("GLFWWindow::GLFWWindow() failed: OpenGL loader failed");
         abort();
     }
     this->renderDevice = new gl::OGLRenderDevice();
+#else
+    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
+    abort();
+#endif // WITH_GLFW
 }
 
 GLFWWindow::~GLFWWindow()
 {
+#ifdef WITH_GLFW
     delete this->renderDevice;
     glfwTerminate();
+#else
+    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
+    abort();
+#endif
 }
 
 void GLFWWindow::pollEvents() const
 {
+#ifdef WITH_GLFW
     glfwPollEvents();
+#else
+    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
+    abort();
+#endif
 }
 
 void GLFWWindow::swapBuffers() const
 {
+#ifdef WITH_GLFW
     glfwSwapBuffers(this->handle);
+#else
+    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
+    abort();
+#endif
 }
 
-gl::RenderDevice& GLFWWindow::getRenderDevice() const {
+gl::RenderDevice& GLFWWindow::getRenderDevice() const
+{
+#ifdef WITH_GLFW
     return *this->renderDevice;
+#else
+    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
+    abort();
+#endif
 }
 
 glm::ivec2 GLFWWindow::getFramebufferSize() const
 {
+#ifdef WITH_GLFW
     int width, height;
     glfwGetFramebufferSize(this->handle, &width, &height);
     return {width, height};
+#else
+    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
+    abort();
+#endif
 }
 
 bool GLFWWindow::shouldClose() const
 {
+#ifdef WITH_GLFW
     return glfwWindowShouldClose(this->handle);
+#else
+    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
+    abort();
+#endif
 }
