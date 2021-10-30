@@ -39,7 +39,10 @@ GLFWWindow::GLFWWindow()
     // TODO: Read settings and set the correct window size, title and mode (fullscreen, ...)
     this->handle = glfwCreateWindow(800, 600, "Cubos", nullptr, nullptr);
     if (!this->handle)
-        ; // TODO: Log critical error and abort
+    {
+        logCritical("OGLRenderDevice::OGLRenderDevice() failed: glfwCreateWindow() failed");
+        abort();
+    }
 
     // Create OpenGL render device
     glfwMakeContextCurrent(this->handle);

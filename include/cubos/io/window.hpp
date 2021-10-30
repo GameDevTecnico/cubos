@@ -32,6 +32,10 @@ namespace cubos::io
         Window() = default;
         virtual ~Window() = default;
 
+        /// Create a window
+        /// @return New window, or nullptr if creation failed
+        static Window* create();
+
         /// Polls window events, firing the events
         virtual void pollEvents() const = 0;
 
