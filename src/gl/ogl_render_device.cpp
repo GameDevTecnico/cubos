@@ -859,7 +859,8 @@ public:
             GLenum glErr = glGetError();
             if (glErr != 0)
             {
-                logError("OGLShaderPipeline::getBindingPoint() failed: glUniformBlockBinding caused OpenGL error {}", glErr);
+                logError("OGLShaderPipeline::getBindingPoint() failed: glUniformBlockBinding caused OpenGL error {}",
+                         glErr);
                 return nullptr;
             }
 
