@@ -1,5 +1,5 @@
-#ifndef CUBOS_IO_GLFW_WINDOW_IMPL_HPP
-#define CUBOS_IO_GLFW_WINDOW_IMPL_HPP
+#ifndef CUBOS_IO_GLFW_WINDOW_HPP
+#define CUBOS_IO_GLFW_WINDOW_HPP
 
 #include <glm/glm.hpp>
 
@@ -44,4 +44,4 @@ namespace cubos::io
     };
 } // namespace cubos::io
 
-#endif // CUBOS_IO_GLFW_WINDOW_IMPL_HPP
+#endif // CUBOS_IO_GLFW_WINDOW_HPP
