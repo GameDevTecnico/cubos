@@ -849,6 +849,14 @@ public:
                 return &bp;
 
         // No existing binding point was found, it must be created first
+
+        auto loc = glGetUniformLocation(this->program, name);
+        if (loc != -1)
+        {
+            bps.emplace_back(name, loc);
+            return &bps.back();
+        }
+
         // Search for uniform block binding
         auto index = glGetUniformBlockIndex(this->program, name);
         if (index != GL_INVALID_INDEX)
@@ -865,13 +873,6 @@ public:
             }
 
             this->uboCount += 1;
-            bps.emplace_back(name, loc);
-            return &bps.back();
-        }
-
-        auto loc = glGetUniformLocation(this->program, name);
-        if (loc != -1)
-        {
             bps.emplace_back(name, loc);
             return &bps.back();
         }
