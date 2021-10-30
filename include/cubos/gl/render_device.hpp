@@ -55,14 +55,14 @@ namespace cubos::gl
     using ShaderPipeline = std::shared_ptr<impl::ShaderPipeline>;
     using ShaderBindingPoint = impl::ShaderBindingPoint*;
 
-    /// Render device properties that can be queried at runtime
-    /// @see RenderDevice::getProperty()
+    /// Render device properties that can be queried at runtime.
+    /// @see RenderDevice::getProperty().
     enum class Property
     {
         MaxAnisotropy
     };
 
-    /// Usage mode for buffers and textures
+    /// Usage mode for buffers and textures.
     enum class Usage
     {
         Default,
@@ -70,68 +70,68 @@ namespace cubos::gl
         Static,
     };
 
-    /// Data type
+    /// Data type.
     enum class Type
     {
-        Byte,    ///< 8 bits signed integer
-        Short,   ///< 16 bits signed integer
-        Int,     ///< 32 bits signed integer
-        UByte,   ///< 8 bits unsigned integer
-        UShort,  ///< 16 bits unsigned integer
-        UInt,    ///< 32 bits unsigned integer
-        NByte,   ///< Normalized 8 bits signed integer
-        NShort,  ///< Normalized 16 bits signed integer
-        NUByte,  ///< Normalized 8 bits unsigned integer
-        NUShort, ///< Normalized 16 bits unsigned integer
-        Float    ///< 32 bits floating point
+        Byte,    ///< 8 bits signed integer.
+        Short,   ///< 16 bits signed integer.
+        Int,     ///< 32 bits signed integer.
+        UByte,   ///< 8 bits unsigned integer.
+        UShort,  ///< 16 bits unsigned integer.
+        UInt,    ///< 32 bits unsigned integer.
+        NByte,   ///< Normalized 8 bits signed integer.
+        NShort,  ///< Normalized 16 bits signed integer.
+        NUByte,  ///< Normalized 8 bits unsigned integer.
+        NUShort, ///< Normalized 16 bits unsigned integer.
+        Float    ///< 32 bits floating point.
     };
 
-    /// Index format
+    /// Index format.
     enum class IndexFormat
     {
-        UShort, // 16 bits unsigned integer
-        UInt,   // 32 bits unsigned integer
+        UShort, // 16 bits unsigned integer.
+        UInt,   // 32 bits unsigned integer.
     };
 
-    /// Texture format
+    /// Texture format.
     enum class TextureFormat
     {
-        R8SNorm,     ///< 1 channel 8 bits normalized signed integer
-        R16SNorm,    ///< 1 channel 16 bits normalized signed integer
-        RG8SNorm,    ///< 2 channel 8 bits normalized signed integer
-        RG16SNorm,   ///< 2 channel 16 bits normalized signed integer
-        RGBA8SNorm,  ///< 4 channel 8 bits normalized signed integer
-        RGBA16SNorm, ///< 4 channel 16 bits normalized signed integer
-        R8UNorm,     ///< 1 channel 8 bits normalized unsigned integer
-        R16UNorm,    ///< 1 channel 16 bits normalized unsigned integer
-        RG8UNorm,    ///< 2 channel 8 bits normalized unsigned integer
-        RG16UNorm,   ///< 2 channel 16 bits normalized unsigned integer
-        RGBA8UNorm,  ///< 4 channel 8 bits normalized unsigned integer
-        RGBA16UNorm, ///< 4 channel 16 bits normalized unsigned integer
-        R8SInt,      ///< 1 channel 8 bits signed integer
-        R16SInt,     ///< 1 channel 16 bits signed integer
-        RG8SInt,     ///< 2 channel 8 bits signed integer
-        RG16SInt,    ///< 2 channel 16 bits signed integer
-        RGBA8SInt,   ///< 4 channel 8 bits signed integer
-        RGBA16SInt,  ///< 4 channel 16 bits signed integer
-        R8UInt,      ///< 1 channel 8 bits unsigned integer
-        R16UInt,     ///< 1 channel 16 bits unsigned integer
-        RG8UInt,     ///< 2 channel 8 bits unsigned integer
-        RG16UInt,    ///< 2 channel 16 bits unsigned integer
-        RGBA8UInt,   ///< 4 channel 8 bits unsigned integer
-        RGBA16UInt,  ///< 4 channel 16 bits unsigned integer
-        R32Float,    ///< 1 channel 32 bits floating point
-        RG32Float,   ///< 2 channel 32 bits floating point
-        RGB32Float,  ///< 3 channel 32 bits floating point
-        RGBA32Float, ///< 4 channel 32 bits floating point
+        R8SNorm,     ///< 1 channel 8 bits normalized signed integer.
+        R16SNorm,    ///< 1 channel 16 bits normalized signed integer.
+        RG8SNorm,    ///< 2 channel 8 bits normalized signed integer.
+        RG16SNorm,   ///< 2 channel 16 bits normalized signed integer.
+        RGBA8SNorm,  ///< 4 channel 8 bits normalized signed integer.
+        RGBA16SNorm, ///< 4 channel 16 bits normalized signed integer.
+        R8UNorm,     ///< 1 channel 8 bits normalized unsigned integer.
+        R16UNorm,    ///< 1 channel 16 bits normalized unsigned integer.
+        RG8UNorm,    ///< 2 channel 8 bits normalized unsigned integer.
+        RG16UNorm,   ///< 2 channel 16 bits normalized unsigned integer.
+        RGBA8UNorm,  ///< 4 channel 8 bits normalized unsigned integer.
+        RGBA16UNorm, ///< 4 channel 16 bits normalized unsigned integer.
+        R8SInt,      ///< 1 channel 8 bits signed integer.
+        R16SInt,     ///< 1 channel 16 bits signed integer.
+        RG8SInt,     ///< 2 channel 8 bits signed integer.
+        RG16SInt,    ///< 2 channel 16 bits signed integer.
+        RGBA8SInt,   ///< 4 channel 8 bits signed integer.
+        RGBA16SInt,  ///< 4 channel 16 bits signed integer.
+        R8UInt,      ///< 1 channel 8 bits unsigned integer.
+        R16UInt,     ///< 1 channel 16 bits unsigned integer.
+        RG8UInt,     ///< 2 channel 8 bits unsigned integer.
+        RG16UInt,    ///< 2 channel 16 bits unsigned integer.
+        RGBA8UInt,   ///< 4 channel 8 bits unsigned integer.
+        RGBA16UInt,  ///< 4 channel 16 bits unsigned integer.
+        R32Float,    ///< 1 channel 32 bits floating point.
+        RG32Float,   ///< 2 channel 32 bits floating point.
+        RGB32Float,  ///< 3 channel 32 bits floating point.
+        RGBA32Float, ///< 4 channel 32 bits floating point.
 
-        Depth16,         ///< 16 depth bits
-        Depth32,         ///< 32 depth bits
-        Depth24Stencil8, ///< 24 depth bits and 8 stencil bits
-        Depth32Stencil8, ///< 32 depth bits and 8 stencil bits
+        Depth16,         ///< 16 depth bits.
+        Depth32,         ///< 32 depth bits.
+        Depth24Stencil8, ///< 24 depth bits and 8 stencil bits.
+        Depth32Stencil8, ///< 32 depth bits and 8 stencil bits.
     };
 
-    /// Texture address mode
+    /// Texture address mode.
     enum class AddressMode
     {
         Repeat,
@@ -140,7 +140,7 @@ namespace cubos::gl
         Border,
     };
 
-    /// Texture filter type
+    /// Texture filter type.
     enum class TextureFilter
     {
         None,
@@ -148,14 +148,14 @@ namespace cubos::gl
         Linear,
     };
 
-    /// Triangle winding mode
+    /// Triangle winding mode.
     enum class Winding
     {
-        CW, ///< Clockwise
-        CCW ///< Counterclockwise
+        CW, ///< Clockwise.
+        CCW ///< Counterclockwise.
     };
 
-    /// Specifies a face
+    /// Specifies a face.
     enum class Face
     {
         Front,
@@ -163,14 +163,14 @@ namespace cubos::gl
         FrontAndBack,
     };
 
-    /// Rasterizer mode
+    /// Rasterizer mode.
     enum class RasterMode
     {
         Wireframe,
         Fill,
     };
 
-    /// Comparison function
+    /// Comparison function.
     enum class Compare
     {
         Never,
@@ -183,7 +183,7 @@ namespace cubos::gl
         Always,
     };
 
-    /// Stencil action
+    /// Stencil action.
     enum class StencilAction
     {
         Zero,
@@ -196,7 +196,7 @@ namespace cubos::gl
         Invert,
     };
 
-    /// Blend factor
+    /// Blend factor.
     enum class BlendFactor
     {
         Zero,
@@ -211,7 +211,7 @@ namespace cubos::gl
         InvDstAlpha,
     };
 
-    /// Blend operation
+    /// Blend operation.
     enum class BlendOp
     {
         Add,
@@ -221,14 +221,14 @@ namespace cubos::gl
         Max,
     };
 
-    /// Shader stage type
+    /// Shader stage type.
     enum class Stage
     {
         Vertex,
         Pixel,
     };
 
-    // Cube map face
+    // Cube map face.
     enum class CubeFace
     {
         PositiveX = 0,
@@ -239,203 +239,203 @@ namespace cubos::gl
         NegativeZ = 5,
     };
 
-    /// Framebuffer description
+    /// Framebuffer description.
     struct FramebufferDesc
     {
         struct
         {
             bool isCubeMap = false; ///< Is this target a cube map face?
-            uint32_t mipLevel = 0;  ///< Mip level of the texture which will be set as a render target
+            uint32_t mipLevel = 0;  ///< Mip level of the texture which will be set as a render target.
 
             union {
                 struct
                 {
-                    CubeMap handle; ///< Cube map handle
-                    CubeFace face;  ///< Cube map face which will be used as target
-                } cubeMap;          ///< If the target is a cube map, this handle is used
+                    CubeMap handle; ///< Cube map handle.
+                    CubeFace face;  ///< Cube map face which will be used as target.
+                } cubeMap;          ///< If the target is a cube map, this handle is used.
 
                 struct
                 {
-                    Texture2D handle; ///< Texture handle
-                } texture;            ///< If the target isn't a cube map, this handle is used
+                    Texture2D handle; ///< Texture handle.
+                } texture;            ///< If the target isn't a cube map, this handle is used.
             };
-        } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets
+        } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
-        uint32_t targetCount = 1; ///< Number of render targets
-        Texture2D depthStencil;   ///< Optional depth stencil texture
+        uint32_t targetCount = 1; ///< Number of render targets.
+        Texture2D depthStencil;   ///< Optional depth stencil texture.
     };
 
-    /// Rasterizer state description
+    /// Rasterizer state description.
     struct RasterStateDesc
     {
         bool cullEnabled = false;                 ///< Is face culling enabled?
-        Face cullFace = Face::Back;               ///< Face that will be culled
-        Winding frontFace = Winding::CCW;         ///< Front face winding
-        RasterMode rasterMode = RasterMode::Fill; ///< Rasterizer mode
+        Face cullFace = Face::Back;               ///< Face that will be culled.
+        Winding frontFace = Winding::CCW;         ///< Front face winding.
+        RasterMode rasterMode = RasterMode::Fill; ///< Rasterizer mode.
     };
 
-    /// Depth stencil state description
+    /// Depth stencil state description.
     struct DepthStencilStateDesc
     {
-        /// Depth state description
+        /// Depth state description.
         struct Depth
         {
             bool enabled = false;            ///< Enable depth checks?
             bool writeEnabled = false;       ///< Write to depth?
-            float near = 0.0f;               ///< Depth near value
-            float far = 1.0f;                ///< Depth far value
-            Compare compare = Compare::Less; ///< Depth comparison function
+            float near = 0.0f;               ///< Depth near value.
+            float far = 1.0f;                ///< Depth far value.
+            Compare compare = Compare::Less; ///< Depth comparison function.
         };
 
-        /// Stencil state description
+        /// Stencil state description.
         struct Stencil
         {
-            /// Stencil face description
+            /// Stencil face description.
             struct Face
             {
-                Compare compare = Compare::Always;             ///< Stencil comparison function
-                StencilAction fail = StencilAction::Keep;      ///< Stencil comparison fail action
-                StencilAction pass = StencilAction::Keep;      ///< Stencil comparison pass action
-                StencilAction depthFail = StencilAction::Keep; ///< Stencil depth comparison fail action
+                Compare compare = Compare::Always;             ///< Stencil comparison function.
+                StencilAction fail = StencilAction::Keep;      ///< Stencil comparison fail action.
+                StencilAction pass = StencilAction::Keep;      ///< Stencil comparison pass action.
+                StencilAction depthFail = StencilAction::Keep; ///< Stencil depth comparison fail action.
             };
 
             bool enabled = false;     ///< Is stencil enabled?
-            uint32_t ref = 0;         ///< Stencil ref value used on stencil comparison functions
-            uint8_t readMask = 0xFF;  ///< Stencil read mask
-            uint8_t writeMask = 0xFF; ///< Stencil write mask
+            uint32_t ref = 0;         ///< Stencil ref value used on stencil comparison functions.
+            uint8_t readMask = 0xFF;  ///< Stencil read mask.
+            uint8_t writeMask = 0xFF; ///< Stencil write mask.
 
-            Face backFace;  ///< Stencil back face options
-            Face frontFace; ///< Stencil front face options
+            Face backFace;  ///< Stencil back face options.
+            Face frontFace; ///< Stencil front face options.
         };
 
-        Depth depth;     ///< Depth state options
-        Stencil stencil; ///< Depth stencil options
+        Depth depth;     ///< Depth state options.
+        Stencil stencil; ///< Depth stencil options.
     };
 
-    /// Blend state description
+    /// Blend state description.
     struct BlendStateDesc
     {
         bool blendEnabled = false; ///< Enable blending?
 
         struct
         {
-            BlendFactor src = BlendFactor::SrcAlpha;    ///< Color blend source factor
-            BlendFactor dst = BlendFactor::InvSrcAlpha; ///< Color blend destination factor
-            BlendOp op = BlendOp::Add;                  ///< Color blend operation
-        } color;                                        ///< Color blend state
+            BlendFactor src = BlendFactor::SrcAlpha;    ///< Color blend source factor.
+            BlendFactor dst = BlendFactor::InvSrcAlpha; ///< Color blend destination factor.
+            BlendOp op = BlendOp::Add;                  ///< Color blend operation.
+        } color;                                        ///< Color blend state.
 
         struct
         {
-            BlendFactor src = BlendFactor::One;  ///< Alpha blend source factor
-            BlendFactor dst = BlendFactor::Zero; ///< Alpha blend destination factor
-            BlendOp op = BlendOp::Add;           ///< Alpha blend operation
-        } alpha;                                 ///< Alpha blend state
+            BlendFactor src = BlendFactor::One;  ///< Alpha blend source factor.
+            BlendFactor dst = BlendFactor::Zero; ///< Alpha blend destination factor.
+            BlendOp op = BlendOp::Add;           ///< Alpha blend operation.
+        } alpha;                                 ///< Alpha blend state.
     };
 
-    /// Sampler description
+    /// Sampler description.
     struct SamplerDesc
     {
-        float borderColor[4] = {0.0f}; ///< Border color applied when the address mode is AddressMode::Border
+        float borderColor[4] = {0.0f}; ///< Border color applied when the address mode is AddressMode::Border.
 
-        TextureFilter minFilter = TextureFilter::Nearest; ///< Minifying filter
-        TextureFilter magFilter = TextureFilter::Nearest; ///< Magnifying filter
-        TextureFilter mipmapFilter = TextureFilter::None; ///< Set to None to disable mipmapping
+        TextureFilter minFilter = TextureFilter::Nearest; ///< Minifying filter.
+        TextureFilter magFilter = TextureFilter::Nearest; ///< Magnifying filter.
+        TextureFilter mipmapFilter = TextureFilter::None; ///< Set to None to disable mipmapping.
 
-        AddressMode addressU = AddressMode::Clamp; ///< Texture adress mode on coordinate U
-        AddressMode addressV = AddressMode::Clamp; ///< Texture adress mode on coordinate V
-        AddressMode addressW = AddressMode::Clamp; ///< Texture adress mode on coordinate W
+        AddressMode addressU = AddressMode::Clamp; ///< Texture adress mode on coordinate U.
+        AddressMode addressV = AddressMode::Clamp; ///< Texture adress mode on coordinate V.
+        AddressMode addressW = AddressMode::Clamp; ///< Texture adress mode on coordinate W.
 
-        size_t maxAnisotropy = 1; ///< Max anisotropy for filtering. Limited to Property::MaxAnisotropy
+        size_t maxAnisotropy = 1; ///< Max anisotropy for filtering. Limited to Property::MaxAnisotropy.
     };
 
-    /// 1D texture description
+    /// 1D texture description.
     struct Texture1DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data
-        size_t mipLevelCount = 1;                       ///< Number of mip levels
-        size_t width;                                   ///< Texture width
-        Usage usage;                                    ///< Texture usage mode
-        TextureFormat format;                           ///< Texture format
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                       ///< Number of mip levels.
+        size_t width;                                   ///< Texture width.
+        Usage usage;                                    ///< Texture usage mode.
+        TextureFormat format;                           ///< Texture format.
     };
 
-    /// 2D texture description
+    /// 2D texture description.
     struct Texture2DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data
-        size_t mipLevelCount = 1;                       ///< Number of mip levels
-        size_t width;                                   ///< Texture width
-        size_t height;                                  ///< Texture height
-        Usage usage;                                    ///< Texture usage mode
-        TextureFormat format;                           ///< Texture format
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                       ///< Number of mip levels.
+        size_t width;                                   ///< Texture width.
+        size_t height;                                  ///< Texture height.
+        Usage usage;                                    ///< Texture usage mode.
+        TextureFormat format;                           ///< Texture format.
     };
 
-    /// 3D texture description
+    /// 3D texture description.
     struct Texture3DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data
-        size_t mipLevelCount = 1;                       ///< Number of mip levels
-        size_t width;                                   ///< Texture width
-        size_t height;                                  ///< Texture height
-        size_t depth;                                   ///< Texture depth
-        Usage usage;                                    ///< Texture usage mode
-        TextureFormat format;                           ///< Texture format
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                       ///< Number of mip levels.
+        size_t width;                                   ///< Texture width.
+        size_t height;                                  ///< Texture height.
+        size_t depth;                                   ///< Texture depth.
+        Usage usage;                                    ///< Texture usage mode.
+        TextureFormat format;                           ///< Texture format.
     };
 
-    /// Cube map description
+    /// Cube map description.
     struct CubeMapDesc
     {
-        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial cube map data, indexed using CubeFace
-        size_t mipLevelCount = 1;                          ///< Number of mip levels
-        size_t width;                                      ///< Cube map face width
-        size_t height;                                     ///< Cube map face height
-        Usage usage;                                       ///< Texture usage mode
-        TextureFormat format;                              ///< Texture format
+        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial cube map data, indexed using CubeFace.
+        size_t mipLevelCount = 1;                          ///< Number of mip levels.
+        size_t width;                                      ///< Cube map face width.
+        size_t height;                                     ///< Cube map face height.
+        Usage usage;                                       ///< Texture usage mode.
+        TextureFormat format;                              ///< Texture format.
     };
 
-    /// Constant buffer element
+    /// Constant buffer element.
     struct ConstantBufferElement
     {
-        char name[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE]; ///< Element name
+        char name[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE]; ///< Element name.
 
-        size_t offset; ///< Offset of the element in the buffer
-        size_t size;   ///< Number of values in the element if it is an array. If it isn't, this is set to 1
-        size_t stride; ///< Stride between each element in the array, if the element is an array
+        size_t offset; ///< Offset of the element in the buffer.
+        size_t size;   ///< Number of values in the element if it is an array. If it isn't, this is set to 1.
+        size_t stride; ///< Stride between each element in the array, if the element is an array.
     };
 
-    /// Constant buffer structure
+    /// Constant buffer structure.
     struct ConstantBufferStructure
     {
-        size_t size;                                                                ///< Size of the buffer in bytes
-        size_t elementCount;                                                        ///< Number of elements
-        ConstantBufferElement elements[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT]; ///< Constant buffer elements
+        size_t size;                                                                ///< Size of the buffer in bytes.
+        size_t elementCount;                                                        ///< Number of elements.
+        ConstantBufferElement elements[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT]; ///< Constant buffer elements.
     };
 
-    /// Vertex element description
+    /// Vertex element description.
     struct VertexElement
     {
-        const char* name = nullptr; ///< Element name
-        Type type = Type::Float;    ///< Element type
-        size_t size;                ///< Number of components in the vertex element (1, 2, 3 or 4)
+        const char* name = nullptr; ///< Element name.
+        Type type = Type::Float;    ///< Element type.
+        size_t size;                ///< Number of components in the vertex element (1, 2, 3 or 4).
 
         struct
         {
-            size_t stride = 0; ///< Stride between each element in memory
-            size_t offset = 0; ///< Offset of the first element in the buffer
-            size_t index = 0;  ///< Index of the vertex buffer where the element is stored
-        } buffer;              ///< Vertex buffer description
+            size_t stride = 0; ///< Stride between each element in memory.
+            size_t offset = 0; ///< Offset of the first element in the buffer.
+            size_t index = 0;  ///< Index of the vertex buffer where the element is stored.
+        } buffer;              ///< Vertex buffer description.
     };
 
-    /// Vertex array description
+    /// Vertex array description.
     struct VertexArrayDesc
     {
-        size_t elementCount = 0;                                         ///< Number of vertex elements
-        VertexElement elements[CUBOS_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT]; ///< Vertex elements
-        VertexBuffer buffers[CUBOS_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];    ///< Vertex buffers
-        ShaderPipeline shaderPipeline;                                   ///< Shader pipeline used with the vertex array
+        size_t elementCount = 0;                                         ///< Number of vertex elements.
+        VertexElement elements[CUBOS_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT]; ///< Vertex elements.
+        VertexBuffer buffers[CUBOS_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];    ///< Vertex buffers.
+        ShaderPipeline shaderPipeline; ///< Shader pipeline used with the vertex array.
     };
 
-    /// Abstract render device type, used to wrap low-level rendering APIs such as OpenGL
-    /// @see io::Window, gl::OGLRenderDevice
+    /// Abstract render device type, used to wrap low-level rendering APIs such as OpenGL.
+    /// @see io::Window, gl::OGLRenderDevice.
     class RenderDevice
     {
     public:
@@ -443,147 +443,147 @@ namespace cubos::gl
         virtual ~RenderDevice() = default;
         RenderDevice(const RenderDevice&) = delete;
 
-        /// Creates a new framebuffer
-        /// @return Framebuffer handle, or nullptr if the creation failed
+        /// Creates a new framebuffer.
+        /// @return Framebuffer handle, or nullptr if the creation failed.
         virtual Framebuffer createFramebuffer(const FramebufferDesc& desc) = 0;
 
-        /// Sets the current framebuffer
+        /// Sets the current framebuffer.
         virtual void setFramebuffer(Framebuffer fb) = 0;
 
-        /// Creates a new rasterizer state
-        /// @return Rasterizer state handle, or nullptr if the creation failed
+        /// Creates a new rasterizer state.
+        /// @return Rasterizer state handle, or nullptr if the creation failed.
         virtual RasterState createRasterState(const RasterStateDesc& desc) = 0;
 
-        /// Sets the current rasterizer state
+        /// Sets the current rasterizer state.
         virtual void setRasterState(RasterState rs) = 0;
 
-        /// Creates a new depth stencil state
-        /// @return Depth stencil state handle, or nullptr if the creation failed
+        /// Creates a new depth stencil state.
+        /// @return Depth stencil state handle, or nullptr if the creation failed.
         virtual DepthStencilState createDepthStencilState(const DepthStencilStateDesc& desc) = 0;
 
-        /// Sets the current depth stencil state
+        /// Sets the current depth stencil state.
         virtual void setDepthStencilState(DepthStencilState dss) = 0;
 
-        /// Creates a new blend state
-        /// @return Blend state handle, or nullptr if the creation failed
+        /// Creates a new blend state.
+        /// @return Blend state handle, or nullptr if the creation failed.
         virtual BlendState createBlendState(const BlendStateDesc& desc) = 0;
 
-        /// Sets the current blend state
+        /// Sets the current blend state.
         virtual void setBlendState(BlendState bs) = 0;
 
-        /// Creates a new texture sampler
-        /// @return Sampler handle, or nullptr if the creation failed
+        /// Creates a new texture sampler.
+        /// @return Sampler handle, or nullptr if the creation failed.
         virtual Sampler createSampler(const SamplerDesc& desc) = 0;
 
-        /// Creates a new 1D texture
-        /// @return Texture handle, or nullptr if the creation failed
+        /// Creates a new 1D texture.
+        /// @return Texture handle, or nullptr if the creation failed.
         virtual Texture1D createTexture1D(const Texture1DDesc& desc) = 0;
 
-        /// Creates a new 2D texture
-        /// @return Texture handle, or nullptr if the creation failed
+        /// Creates a new 2D texture.
+        /// @return Texture handle, or nullptr if the creation failed.
         virtual Texture2D createTexture2D(const Texture2DDesc& desc) = 0;
 
-        /// Creates a new 3D texture
-        /// @return Texture handle, or nullptr if the creation failed
+        /// Creates a new 3D texture.
+        /// @return Texture handle, or nullptr if the creation failed.
         virtual Texture3D createTexture3D(const Texture3DDesc& desc) = 0;
 
-        /// Creates a new cube map
-        /// @return Cube map handle, or nullptr if the creation failed
+        /// Creates a new cube map.
+        /// @return Cube map handle, or nullptr if the creation failed.
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) = 0;
 
-        /// Creates a new constant buffer
-        /// @param size Size in bytes
-        /// @param data Initial data, can be nullptr
-        /// @param usage The usage which the buffer will have
-        /// @return Constant buffer handle, or nullptr if the creation failed
+        /// Creates a new constant buffer.
+        /// @param size Size in bytes.
+        /// @param data Initial data, can be nullptr.
+        /// @param usage The usage which the buffer will have.
+        /// @return Constant buffer handle, or nullptr if the creation failed.
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) = 0;
 
-        /// Creates a new index buffer
-        /// @param size Size in bytes
-        /// @param data Initial data, can be nullptr
-        /// @param format Index format
-        /// @param usage The usage which the buffer will have
-        /// @return Index buffer handle, or nullptr if the creation failed
+        /// Creates a new index buffer.
+        /// @param size Size in bytes.
+        /// @param data Initial data, can be nullptr.
+        /// @param format Index format.
+        /// @param usage The usage which the buffer will have.
+        /// @return Index buffer handle, or nullptr if the creation failed.
         virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage) = 0;
 
-        /// Sets the current index buffer
+        /// Sets the current index buffer.
         virtual void setIndexBuffer(IndexBuffer ib) = 0;
 
-        /// Creates a new vertex buffer
-        /// @param size Size in bytes
-        /// @param data Initial data, can be nullptr
-        /// @param usage The usage which the buffer will have
-        /// @return Vertex buffer handle, or nullptr if the creation failed
+        /// Creates a new vertex buffer.
+        /// @param size Size in bytes.
+        /// @param data Initial data, can be nullptr.
+        /// @param usage The usage which the buffer will have.
+        /// @return Vertex buffer handle, or nullptr if the creation failed.
         virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage) = 0;
 
-        /// Creates a new vertex array
-        /// @return Vertex array handle, or nullptr if the creation failed
+        /// Creates a new vertex array.
+        /// @return Vertex array handle, or nullptr if the creation failed.
         virtual VertexArray createVertexArray(const VertexArrayDesc& desc) = 0;
 
-        /// Sets the current vertex array
+        /// Sets the current vertex array.
         virtual void setVertexArray(VertexArray va) = 0;
 
-        /// Creates a new shader stage from GLSL source code
-        /// @return Shader stage handle, or nullptr if the creation failed
+        /// Creates a new shader stage from GLSL source code.
+        /// @return Shader stage handle, or nullptr if the creation failed.
         virtual ShaderStage createShaderStage(Stage stage, const char* src) = 0;
 
-        /// Creates a new shader pipeline from a vertex and pixel shaders
-        /// @param vs Vertex shader stage
-        /// @param ps Pixel shader stage
-        /// @return Shader pipeline handle, or nullptr if the creation failed
+        /// Creates a new shader pipeline from a vertex and pixel shaders.
+        /// @param vs Vertex shader stage.
+        /// @param ps Pixel shader stage.
+        /// @return Shader pipeline handle, or nullptr if the creation failed.
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) = 0;
 
-        /// Sets the current shader pipeline used for rendering
+        /// Sets the current shader pipeline used for rendering.
         virtual void setShaderPipeline(ShaderPipeline pipeline) = 0;
 
-        /// Clears the color buffer bit on the current framebuffer to a specific color
+        /// Clears the color buffer bit on the current framebuffer to a specific color.
         virtual void clearColor(float r, float g, float b, float a) = 0;
 
-        /// Clears the depth buffer bit on the current framebuffer to a specific value
+        /// Clears the depth buffer bit on the current framebuffer to a specific value.
         virtual void clearDepth(float depth) = 0;
 
-        /// Clears the stencil buffer bit on the current framebuffer to a specific value
+        /// Clears the stencil buffer bit on the current framebuffer to a specific value.
         virtual void clearStencil(int stencil) = 0;
 
-        /// Draws tringles
-        /// @param offset Index of the first vertex to be drawn
-        /// @param count Number of vertices that will be drawn
+        /// Draws tringles.
+        /// @param offset Index of the first vertex to be drawn.
+        /// @param count Number of vertices that will be drawn.
         virtual void drawTriangles(size_t offset, size_t count) = 0;
 
-        /// Draws tringles with an index buffer
-        /// @param offset Index of the first indice to be drawn
-        /// @param count Number of indices that will be drawn
+        /// Draws tringles with an index buffer.
+        /// @param offset Index of the first indice to be drawn.
+        /// @param count Number of indices that will be drawn.
         virtual void drawTrianglesIndexed(size_t offset, size_t count) = 0;
 
-        /// Draws tringles multiple times
-        /// @param offset Index of the first vertex to be drawn
-        /// @param count Number of vertices that will be drawn
-        /// @param instanceCount Number of instances drawn
+        /// Draws tringles multiple times.
+        /// @param offset Index of the first vertex to be drawn.
+        /// @param count Number of vertices that will be drawn.
+        /// @param instanceCount Number of instances drawn.
         virtual void drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount) = 0;
 
-        /// Draws tringles multiple times with an index buffer
-        /// @param offset Index of the first indice to be drawn
-        /// @param count Number of indices that will be drawn
-        /// @param instanceCount Number of instances drawn
+        /// Draws tringles multiple times with an index buffer.
+        /// @param offset Index of the first indice to be drawn.
+        /// @param count Number of indices that will be drawn.
+        /// @param instanceCount Number of instances drawn.
         virtual void drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount) = 0;
 
-        /// Sets the current viewport
-        /// @param x Bottom left viewport corner X coordinate
-        /// @param y Bottom left viewport corner Y coordinate
-        /// @param w Viewport width
-        /// @param h Viewport height
+        /// Sets the current viewport.
+        /// @param x Bottom left viewport corner X coordinate.
+        /// @param y Bottom left viewport corner Y coordinate.
+        /// @param w Viewport width.
+        /// @param h Viewport height.
         virtual void setViewport(int x, int y, int w, int h) = 0;
 
-        /// Gets a runtime property of the render device
-        /// @param prop Property name
+        /// Gets a runtime property of the render device.
+        /// @param prop Property name.
         virtual int getProperty(Property prop) = 0;
     };
 
     /// Abstract gl types are defined inside this namespace, they should be used (derived) only in render device
-    /// implementations
+    /// implementations.
     namespace impl
     {
-        /// Abstract framebuffer, should not be used directly
+        /// Abstract framebuffer, should not be used directly.
         class Framebuffer
         {
         protected:
@@ -591,7 +591,7 @@ namespace cubos::gl
             virtual ~Framebuffer() = default;
         };
 
-        /// Abstract rasterizer state, should not be used directly
+        /// Abstract rasterizer state, should not be used directly.
         class RasterState
         {
         protected:
@@ -599,7 +599,7 @@ namespace cubos::gl
             virtual ~RasterState() = default;
         };
 
-        /// Abstract depth stencil state, should not be used directly
+        /// Abstract depth stencil state, should not be used directly.
         class DepthStencilState
         {
         protected:
@@ -607,7 +607,7 @@ namespace cubos::gl
             virtual ~DepthStencilState() = default;
         };
 
-        /// Abstract blend state, should not be used directly
+        /// Abstract blend state, should not be used directly.
         class BlendState
         {
         protected:
@@ -615,7 +615,7 @@ namespace cubos::gl
             virtual ~BlendState() = default;
         };
 
-        /// Abstract sampler, should not be used directly
+        /// Abstract sampler, should not be used directly.
         class Sampler
         {
         protected:
@@ -623,18 +623,18 @@ namespace cubos::gl
             virtual ~Sampler() = default;
         };
 
-        /// Abstract 1D texture, should not be used directly
+        /// Abstract 1D texture, should not be used directly.
         class Texture1D
         {
         public:
-            /// Updates the texture with new data, which must have the same format used when the texture was created
-            /// @param x Destination X coordinate
-            /// @param width Width of the section which will be updated
-            /// @param data Pointer to the new data
-            /// @param level Mip level to update
+            /// Updates the texture with new data, which must have the same format used when the texture was created.
+            /// @param x Destination X coordinate.
+            /// @param width Width of the section which will be updated.
+            /// @param data Pointer to the new data.
+            /// @param level Mip level to update.
             virtual void update(size_t x, size_t width, const void* data, size_t level = 0) = 0;
 
-            /// Generates mipmaps on this texture
+            /// Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;
 
         protected:
@@ -642,21 +642,21 @@ namespace cubos::gl
             virtual ~Texture1D() = default;
         };
 
-        /// Abstract 2D texture, should not be used directly
+        /// Abstract 2D texture, should not be used directly.
         class Texture2D
         {
         public:
-            /// Updates the texture with new data, which must have the same format used when the texture was created
-            /// @param x Destination X coordinate
-            /// @param y Destination Y coordinate
-            /// @param width Width of the section which will be updated
-            /// @param height Height of the section which will be updated
-            /// @param data Pointer to the new data
-            /// @param level Mip level to update
+            /// Updates the texture with new data, which must have the same format used when the texture was created.
+            /// @param x Destination X coordinate.
+            /// @param y Destination Y coordinate.
+            /// @param width Width of the section which will be updated.
+            /// @param height Height of the section which will be updated.
+            /// @param data Pointer to the new data.
+            /// @param level Mip level to update.
             virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data,
                                 size_t level = 0) = 0;
 
-            /// Generates mipmaps on this texture
+            /// Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;
 
         protected:
@@ -664,23 +664,23 @@ namespace cubos::gl
             virtual ~Texture2D() = default;
         };
 
-        /// Abstract 3D texture, should not be used directly
+        /// Abstract 3D texture, should not be used directly.
         class Texture3D
         {
         public:
-            /// Updates the texture with new data, which must have the same format used when the texture was created
-            /// @param x Destination X coordinate
-            /// @param y Destination Y coordinate
-            /// @param z Destination Z coordinate
-            /// @param width Width of the section which will be updated
-            /// @param height Height of the section which will be updated
-            /// @param depth Depth of the section which will be updated
-            /// @param data Pointer to the new data
-            /// @param level Mip level to update
+            /// Updates the texture with new data, which must have the same format used when the texture was created.
+            /// @param x Destination X coordinate.
+            /// @param y Destination Y coordinate.
+            /// @param z Destination Z coordinate.
+            /// @param width Width of the section which will be updated.
+            /// @param height Height of the section which will be updated.
+            /// @param depth Depth of the section which will be updated.
+            /// @param data Pointer to the new data.
+            /// @param level Mip level to update.
             virtual void update(size_t x, size_t y, size_t z, size_t width, size_t height, size_t depth,
                                 const void* data, size_t level = 0) = 0;
 
-            /// Generates mipmaps on this texture
+            /// Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;
 
         protected:
@@ -688,23 +688,23 @@ namespace cubos::gl
             virtual ~Texture3D() = default;
         };
 
-        /// Abstract cube map, should not be used directly
+        /// Abstract cube map, should not be used directly.
         class CubeMap
         {
         public:
             /// Updates a cube map's face with new data, which must have the same format used when the cube map was
-            /// created
-            /// @param x Destination X coordinate
-            /// @param y Destination Y coordinate
-            /// @param width Width of the section which will be updated
-            /// @param height Height of the section which will be updated
-            /// @param data Pointer to the new data
-            /// @param face Face to update
-            /// @param level Mip level to update
+            /// created.
+            /// @param x Destination X coordinate.
+            /// @param y Destination Y coordinate.
+            /// @param width Width of the section which will be updated.
+            /// @param height Height of the section which will be updated.
+            /// @param data Pointer to the new data.
+            /// @param face Face to update.
+            /// @param level Mip level to update.
             virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data, CubeFace face,
                                 size_t level = 0) = 0;
 
-            /// Generates mipmaps on this cube map
+            /// Generates mipmaps on this cube map.
             virtual void generateMipmaps() = 0;
 
         protected:
@@ -712,15 +712,15 @@ namespace cubos::gl
             virtual ~CubeMap() = default;
         };
 
-        /// Abstract constant buffer, should not be used directly
+        /// Abstract constant buffer, should not be used directly.
         class ConstantBuffer
         {
         public:
-            /// Maps the constant buffer to a region in memory
-            /// @return Pointer to the memory region
+            /// Maps the constant buffer to a region in memory.
+            /// @return Pointer to the memory region.
             virtual void* map() = 0;
 
-            /// Unmaps the constant buffer, updating it with data written to the mapped region
+            /// Unmaps the constant buffer, updating it with data written to the mapped region.
             virtual void unmap() = 0;
 
         protected:
@@ -728,15 +728,15 @@ namespace cubos::gl
             virtual ~ConstantBuffer() = default;
         };
 
-        /// Abstract index buffer, should not be used directly
+        /// Abstract index buffer, should not be used directly.
         class IndexBuffer
         {
         public:
-            /// Maps the index buffer to a region in memory
-            /// @return Pointer to the memory region
+            /// Maps the index buffer to a region in memory.
+            /// @return Pointer to the memory region.
             virtual void* map() = 0;
 
-            /// Unmaps the index buffer, updating it with data written to the mapped region
+            /// Unmaps the index buffer, updating it with data written to the mapped region.
             virtual void unmap() = 0;
 
         protected:
@@ -744,15 +744,15 @@ namespace cubos::gl
             virtual ~IndexBuffer() = default;
         };
 
-        /// Abstract vertex buffer, should not be used directly
+        /// Abstract vertex buffer, should not be used directly.
         class VertexBuffer
         {
         public:
-            /// Maps the vertex buffer to a region in memory
-            /// @return Pointer to the memory region
+            /// Maps the vertex buffer to a region in memory.
+            /// @return Pointer to the memory region.
             virtual void* map() = 0;
 
-            /// Unmaps the vertex buffer, updating it with data written to the mapped region
+            /// Unmaps the vertex buffer, updating it with data written to the mapped region.
             virtual void unmap() = 0;
 
         protected:
@@ -760,7 +760,7 @@ namespace cubos::gl
             virtual ~VertexBuffer() = default;
         };
 
-        /// Abstract vertex array, should not be used directly
+        /// Abstract vertex array, should not be used directly.
         class VertexArray
         {
         protected:
@@ -768,12 +768,12 @@ namespace cubos::gl
             virtual ~VertexArray() = default;
         };
 
-        /// Abstract shader stage, should not be used directly
+        /// Abstract shader stage, should not be used directly.
         class ShaderStage
         {
         public:
-            /// Gets the shader stage type
-            /// @see Stage
+            /// Gets the shader stage type.
+            /// @see Stage.
             virtual Stage getType() = 0;
 
         protected:
@@ -781,13 +781,13 @@ namespace cubos::gl
             virtual ~ShaderStage() = default;
         };
 
-        /// Abstract shader pipeline, should not be used directly
+        /// Abstract shader pipeline, should not be used directly.
         class ShaderPipeline
         {
         public:
-            /// Gets a binding point from its name
-            /// @return Returns the binding point, or nullptr if no binding point is found
-            /// @see ShaderBindingPoint
+            /// Gets a binding point from its name.
+            /// @return Returns the binding point, or nullptr if no binding point is found.
+            /// @see ShaderBindingPoint.
             virtual gl::ShaderBindingPoint getBindingPoint(const char* name) = 0;
 
         protected:
@@ -795,37 +795,37 @@ namespace cubos::gl
             virtual ~ShaderPipeline() = default;
         };
 
-        /// Abstract shader binding point, should not be used directly
+        /// Abstract shader binding point, should not be used directly.
         class ShaderBindingPoint
         {
         public:
-            /// Binds a sampler to the binding point
-            /// If this binding point doesn't support a sampler, an error is logged and nothing is done
+            /// Binds a sampler to the binding point.
+            /// If this binding point doesn't support a sampler, an error is logged and nothing is done.
             virtual void bind(gl::Sampler sampler) = 0;
 
-            /// Binds a 1D texture to the binding point
-            /// If this binding point doesn't support a 1D texture, an error is logged and nothing is done
+            /// Binds a 1D texture to the binding point.
+            /// If this binding point doesn't support a 1D texture, an error is logged and nothing is done.
             virtual void bind(gl::Texture1D tex) = 0;
 
-            /// Binds a 2D texture to the binding point
-            /// If this binding point doesn't support a 2D texture, an error is logged and nothing is done
+            /// Binds a 2D texture to the binding point.
+            /// If this binding point doesn't support a 2D texture, an error is logged and nothing is done.
             virtual void bind(gl::Texture2D tex) = 0;
 
-            /// Binds a 3D texture to the binding point
-            /// If this binding point doesn't support a 3D texture, an error is logged and nothing is done
+            /// Binds a 3D texture to the binding point.
+            /// If this binding point doesn't support a 3D texture, an error is logged and nothing is done.
             virtual void bind(gl::Texture3D tex) = 0;
 
-            /// Binds a cube map to the binding point
-            /// If this binding point doesn't support a cube map, an error is logged and nothing is done
+            /// Binds a cube map to the binding point.
+            /// If this binding point doesn't support a cube map, an error is logged and nothing is done.
             virtual void bind(gl::CubeMap cubeMap) = 0;
 
-            /// Binds a constant buffer to the binding point
-            /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done
+            /// Binds a constant buffer to the binding point.
+            /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done.
             virtual void bind(gl::ConstantBuffer cb) = 0;
 
-            /// Gets the constant buffer structure of this binding point
-            /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done
-            /// @return False if the query failed, otherwise true
+            /// Gets the constant buffer structure of this binding point.
+            /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done.
+            /// @return False if the query failed, otherwise true.
             virtual bool queryConstantBufferStructure(ConstantBufferStructure* structure) = 0;
 
         protected:
