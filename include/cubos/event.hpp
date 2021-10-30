@@ -7,7 +7,7 @@
 
 namespace cubos
 {
-    /// Class used to easily implement the observer pattern
+    /// Class used to easily implement the observer pattern.
     /// Example usage:
     ///
     ///     Event<const char*> event;
@@ -16,26 +16,26 @@ namespace cubos
     ///     });
     ///     event.fire("Hello!"); // Prints "Hello!"
     ///
-    /// @tparam TArgs The argument types of the callback functions
+    /// @tparam TArgs The argument types of the callback functions.
     template <typename... TArgs> class Event
     {
     public:
-        using Callback = std::function<void(TArgs...)>; ///< Callback type
-        using ID = size_t;                              ///< Callback identifier
+        using Callback = std::function<void(TArgs...)>; ///< Callback type.
+        using ID = size_t;                              ///< Callback identifier.
 
-        /// Registers a new callback
-        /// @param callback The callback called when the event is fired
-        /// @return The callback ID, used for unregistering the callback later on
-        /// @see unregisterCallback
+        /// Registers a new callback.
+        /// @param callback The callback called when the event is fired.
+        /// @return The callback ID, used for unregistering the callback later on.
+        /// @see unregisterCallback.
         ID registerCallback(Callback callback);
 
-        /// Unregisters a callback
-        /// @param id The ID returned when the callback was registered
-        /// @see registerCallback
+        /// Unregisters a callback.
+        /// @param id The ID returned when the callback was registered.
+        /// @see registerCallback.
         void unregisterCallback(ID id);
 
-        /// Fires the event, calling all the callbacks with the passed arguments
-        /// @param args Event arguments
+        /// Fires the event, calling all the callbacks with the passed arguments.
+        /// @param args Event arguments.
         void fire(TArgs... args) const;
 
     private:

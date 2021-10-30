@@ -3,7 +3,7 @@
 
 namespace cubos::io
 {
-    /// Key key codes enum
+    /// Keyboard key codes enum.
     enum class Key
     {
         Invalid = -1,
