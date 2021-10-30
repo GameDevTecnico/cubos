@@ -5,7 +5,7 @@
 
 #ifdef WITH_GLFW
 #define GLFW_INCLUDE_NONE
-#include <glfw/glfw3.h>
+#include <GLFW/glfw3.h>
 
 #include <cubos/gl/ogl_render_device.hpp>
 #endif
