@@ -30,6 +30,7 @@ set(CUBOS_INCLUDE
     "include/cubos/settings.hpp"
     
     "include/cubos/io/window.hpp"
+    "include/cubos/io/glfw_window.hpp"
 
     "include/cubos/gl/render_device.hpp"
     "include/cubos/gl/ogl_render_device.hpp"
