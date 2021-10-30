@@ -46,11 +46,11 @@ namespace cubos::io
         virtual bool shouldClose() const = 0;
 
         /// Invoked when a keyboard key is pressed
-        /// Invoked with a Keyboard
+        /// Invoked with a Key code
         Event<Key> onKeyDown;
 
         /// Invoked when a keyboard key is released
-        /// Invoked with a Keyboard
+        /// Invoked with a Key code
         Event<Key> onKeyUp;
 
         /// Invoked when the cursor is moved
