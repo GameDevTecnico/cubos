@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['oglrenderdevice_153',['OGLRenderDevice',['../classcubos_1_1gl_1_1OGLRenderDevice.html',1,'cubos::gl']]]
+  ['indexbuffer_159',['IndexBuffer',['../classcubos_1_1gl_1_1impl_1_1IndexBuffer.html',1,'cubos::gl::impl']]]
 ];

@@ -10,6 +10,7 @@ var hierarchy =
     [ "cubos::gl::DepthStencilStateDesc::Depth", "structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Depth.html", null ],
     [ "cubos::gl::impl::DepthStencilState", "classcubos_1_1gl_1_1impl_1_1DepthStencilState.html", null ],
     [ "cubos::gl::DepthStencilStateDesc", "structcubos_1_1gl_1_1DepthStencilStateDesc.html", null ],
+    [ "cubos::Event< TArgs >", "classcubos_1_1Event.html", null ],
     [ "cubos::gl::DepthStencilStateDesc::Stencil::Face", "structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil_1_1Face.html", null ],
     [ "cubos::gl::impl::Framebuffer", "classcubos_1_1gl_1_1impl_1_1Framebuffer.html", null ],
     [ "cubos::gl::FramebufferDesc", "structcubos_1_1gl_1_1FramebufferDesc.html", null ],

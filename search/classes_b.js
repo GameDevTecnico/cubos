@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['window_174',['Window',['../classcubos_1_1io_1_1Window.html',1,'cubos::io']]]
+  ['vertexarray_177',['VertexArray',['../classcubos_1_1gl_1_1impl_1_1VertexArray.html',1,'cubos::gl::impl']]],
+  ['vertexarraydesc_178',['VertexArrayDesc',['../structcubos_1_1gl_1_1VertexArrayDesc.html',1,'cubos::gl']]],
+  ['vertexbuffer_179',['VertexBuffer',['../classcubos_1_1gl_1_1impl_1_1VertexBuffer.html',1,'cubos::gl::impl']]],
+  ['vertexelement_180',['VertexElement',['../structcubos_1_1gl_1_1VertexElement.html',1,'cubos::gl']]]
 ];

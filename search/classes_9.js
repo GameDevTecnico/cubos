@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['texture1d_164',['Texture1D',['../classcubos_1_1gl_1_1impl_1_1Texture1D.html',1,'cubos::gl::impl']]],
-  ['texture1ddesc_165',['Texture1DDesc',['../structcubos_1_1gl_1_1Texture1DDesc.html',1,'cubos::gl']]],
-  ['texture2d_166',['Texture2D',['../classcubos_1_1gl_1_1impl_1_1Texture2D.html',1,'cubos::gl::impl']]],
-  ['texture2ddesc_167',['Texture2DDesc',['../structcubos_1_1gl_1_1Texture2DDesc.html',1,'cubos::gl']]],
-  ['texture3d_168',['Texture3D',['../classcubos_1_1gl_1_1impl_1_1Texture3D.html',1,'cubos::gl::impl']]],
-  ['texture3ddesc_169',['Texture3DDesc',['../structcubos_1_1gl_1_1Texture3DDesc.html',1,'cubos::gl']]]
+  ['sampler_164',['Sampler',['../classcubos_1_1gl_1_1impl_1_1Sampler.html',1,'cubos::gl::impl']]],
+  ['samplerdesc_165',['SamplerDesc',['../structcubos_1_1gl_1_1SamplerDesc.html',1,'cubos::gl']]],
+  ['settings_166',['Settings',['../classcubos_1_1Settings.html',1,'cubos']]],
+  ['shaderbindingpoint_167',['ShaderBindingPoint',['../classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html',1,'cubos::gl::impl']]],
+  ['shaderpipeline_168',['ShaderPipeline',['../classcubos_1_1gl_1_1impl_1_1ShaderPipeline.html',1,'cubos::gl::impl']]],
+  ['shaderstage_169',['ShaderStage',['../classcubos_1_1gl_1_1impl_1_1ShaderStage.html',1,'cubos::gl::impl']]],
+  ['stencil_170',['Stencil',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html',1,'cubos::gl::DepthStencilStateDesc']]]
 ];

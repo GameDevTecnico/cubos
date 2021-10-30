@@ -1,5 +1,13 @@
 var NAVTREEINDEX1 =
 {
+"structcubos_1_1gl_1_1SamplerDesc.html#a2ccb38ea9f232f9c718a4a4df4254883":[0,0,0,0,10,1],
+"structcubos_1_1gl_1_1SamplerDesc.html#a53ac3184ea845ac0cc6d9662eb1e5668":[0,0,0,0,10,7],
+"structcubos_1_1gl_1_1SamplerDesc.html#a56b2bfe761652ab96e32b5ef42600b8b":[0,0,0,0,10,2],
+"structcubos_1_1gl_1_1SamplerDesc.html#a5d7d5e9c966131997454d43896d95ea9":[0,0,0,0,10,4],
+"structcubos_1_1gl_1_1SamplerDesc.html#a8ae0970805390a32da97422bce69cd4c":[0,0,0,0,10,6],
+"structcubos_1_1gl_1_1SamplerDesc.html#aab28b86c79286564e953f9699e4e3b92":[0,0,0,0,10,5],
+"structcubos_1_1gl_1_1SamplerDesc.html#ab3852f1b4bdba6d8539d80e32e0c7070":[0,0,0,0,10,0],
+"structcubos_1_1gl_1_1Texture1DDesc.html":[0,0,0,0,11],
 "structcubos_1_1gl_1_1Texture1DDesc.html#a39941485e3652fba53d58c36e04bbe62":[0,0,0,0,11,0],
 "structcubos_1_1gl_1_1Texture1DDesc.html#a9cbb7f35ab152e465ea92ce5a404c061":[0,0,0,0,11,4],
 "structcubos_1_1gl_1_1Texture1DDesc.html#aa8395ab8dce059ca61f53b1e6b8aa95d":[0,0,0,0,11,2],

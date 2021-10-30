@@ -23,6 +23,7 @@ var annotated_dup =
         [ "GLFWWindow", "classcubos_1_1io_1_1GLFWWindow.html", "classcubos_1_1io_1_1GLFWWindow" ],
         [ "Window", "classcubos_1_1io_1_1Window.html", "classcubos_1_1io_1_1Window" ]
       ] ],
+      [ "Event", "classcubos_1_1Event.html", "classcubos_1_1Event" ],
       [ "Settings", "classcubos_1_1Settings.html", "classcubos_1_1Settings" ]
     ] ]
 ];

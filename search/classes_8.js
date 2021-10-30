@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['sampler_157',['Sampler',['../classcubos_1_1gl_1_1impl_1_1Sampler.html',1,'cubos::gl::impl']]],
-  ['samplerdesc_158',['SamplerDesc',['../structcubos_1_1gl_1_1SamplerDesc.html',1,'cubos::gl']]],
-  ['settings_159',['Settings',['../classcubos_1_1Settings.html',1,'cubos']]],
-  ['shaderbindingpoint_160',['ShaderBindingPoint',['../classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html',1,'cubos::gl::impl']]],
-  ['shaderpipeline_161',['ShaderPipeline',['../classcubos_1_1gl_1_1impl_1_1ShaderPipeline.html',1,'cubos::gl::impl']]],
-  ['shaderstage_162',['ShaderStage',['../classcubos_1_1gl_1_1impl_1_1ShaderStage.html',1,'cubos::gl::impl']]],
-  ['stencil_163',['Stencil',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html',1,'cubos::gl::DepthStencilStateDesc']]]
+  ['rasterstate_161',['RasterState',['../classcubos_1_1gl_1_1impl_1_1RasterState.html',1,'cubos::gl::impl']]],
+  ['rasterstatedesc_162',['RasterStateDesc',['../structcubos_1_1gl_1_1RasterStateDesc.html',1,'cubos::gl']]],
+  ['renderdevice_163',['RenderDevice',['../classcubos_1_1gl_1_1RenderDevice.html',1,'cubos::gl']]]
 ];
