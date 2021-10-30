@@ -1,6 +1,9 @@
 #ifndef CUBOS_IO_WINDOW_HPP
 #define CUBOS_IO_WINDOW_HPP
 
+#include <cubos/event.hpp>
+#include <cubos/io/keyboard.hpp>
+
 #include <glm/glm.hpp>
 
 namespace cubos::gl
@@ -10,12 +13,28 @@ namespace cubos::gl
 
 namespace cubos::io
 {
+    /// Mouse button codes.
+    enum class MouseButton
+    {
+        Invalid = -1, ///< Used for unknown mouse buttons
+
+        Left,
+        Right,
+        Middle,
+        Extra1,
+        Extra2,
+    };
+
     /// Wrapper around a window object, handles input events and creates the render device
     class Window
     {
     public:
         Window() = default;
         virtual ~Window() = default;
+
+        /// Create a window
+        /// @return New window, or nullptr if creation failed
+        static Window* create();
 
         /// Polls window events, firing the events
         virtual void pollEvents() const = 0;
@@ -26,11 +45,32 @@ namespace cubos::io
         /// Returns the window render device
         virtual gl::RenderDevice& getRenderDevice() const = 0;
 
-        /// Return the window framebuffer size in pixels
+        /// Returns the window framebuffer size in pixels
         virtual glm::ivec2 getFramebufferSize() const = 0;
 
         /// Should the window close?
         virtual bool shouldClose() const = 0;
+
+        /// Invoked with a key code, when a keyboard key is pressed
+        Event<Key> onKeyDown;
+
+        /// Invoked with a key code, when a keyboard key is released
+        Event<Key> onKeyUp;
+
+        /// Invoked with the cursor position when the cursor is moved
+        Event<glm::ivec2> onMouseMoved;
+
+        /// Invoked with the scroll offset, when the mouse wheel is scrolled
+        Event<glm::ivec2> onMouseScroll;
+
+        /// Invoked with a button code when a mouse button is released
+        Event<MouseButton> onMouseUp;
+
+        /// Invoked with a button code when a mouse button is pressed
+        Event<MouseButton> onMouseDown;
+
+        /// Invoked with the new framebuffer size when it changes size
+        Event<glm::ivec2> onFramebufferResize;
     };
 } // namespace cubos::io
 

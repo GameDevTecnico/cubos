@@ -18,31 +18,34 @@ message( "# Building Samples: " ${BUILD_SAMPLES})
 message( "# Building Tests: " ${BUILD_ENGINE_TESTS})
 
 set(CUBOS_SOURCE
-    "src/log.cpp"
-    "src/settings.cpp"
+    "src/cubos/log.cpp"
+    "src/cubos/settings.cpp"
 
-    "src/io/glfw_window.cpp"
-    "src/gl/ogl_render_device.cpp"
+    "src/cubos/io/window.cpp"
+    "src/cubos/io/glfw_window.hpp"
+    "src/cubos/io/glfw_window.cpp"
+    
+    "src/cubos/gl/ogl_render_device.cpp"
 )
 
 set(CUBOS_INCLUDE
     "include/cubos/log.hpp"
     "include/cubos/settings.hpp"
     
+    "include/cubos/io/keyboard.hpp"
     "include/cubos/io/window.hpp"
-    "include/cubos/io/glfw_window.hpp"
 
     "include/cubos/gl/render_device.hpp"
     "include/cubos/gl/ogl_render_device.hpp"
 )
 
 set(CUBOS_ENTRYPOINT
-    "src/entry.cpp"
+    "src/cubos/entry.cpp"
 )
 
 # Create Cubos Library
 add_library(cubos-core ${CUBOS_SOURCE} ${CUBOS_INCLUDE})
-target_include_directories(cubos-core PUBLIC "include")
+target_include_directories(cubos-core PUBLIC "include" PRIVATE "src")
 set_property(TARGET cubos-core PROPERTY CXX_STANDARD 20)
 
 # Dependencies

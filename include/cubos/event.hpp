@@ -39,7 +39,7 @@ namespace cubos
         void fire(TArgs... args) const;
 
     private:
-        std::mutex mutex;
+        mutable std::mutex mutex;
         std::vector<Callback> callbacks;
     };
 
