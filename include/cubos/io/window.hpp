@@ -13,14 +13,16 @@ namespace cubos::gl
 
 namespace cubos::io
 {
+    /// Mouse button codes.
     enum class MouseButton
     {
+        Invalid = -1, ///< Used for unknown mouse buttons
+
         Left,
         Right,
         Middle,
         Extra1,
         Extra2,
-        Invalid = -1,
     };
 
     /// Wrapper around a window object, handles input events and creates the render device
@@ -39,38 +41,31 @@ namespace cubos::io
         /// Returns the window render device
         virtual gl::RenderDevice& getRenderDevice() const = 0;
 
-        /// Return the window framebuffer size in pixels
+        /// Returns the window framebuffer size in pixels
         virtual glm::ivec2 getFramebufferSize() const = 0;
 
         /// Should the window close?
         virtual bool shouldClose() const = 0;
 
-        /// Invoked when a keyboard key is pressed
-        /// Invoked with a Key code
+        /// Invoked with a key code, when a keyboard key is pressed
         Event<Key> onKeyDown;
 
-        /// Invoked when a keyboard key is released
-        /// Invoked with a Key code
+        /// Invoked with a key code, when a keyboard key is released
         Event<Key> onKeyUp;
 
-        /// Invoked when the cursor is moved
-        /// Invoked with a vector with x and y positions of the cursor
+        /// Invoked with the cursor position when the cursor is moved
         Event<glm::ivec2> onMouseMoved;
 
-        /// Invked when the mouse scroll is moved
-        /// Invoked with a vector with x and y offsets
+        /// Invoked with the scroll offset, when the mouse wheel is scrolled
         Event<glm::ivec2> onMouseScroll;
 
-        /// Invoked when a mouse button is released
-        /// Invoked with a MouseButton
+        /// Invoked with a button code when a mouse button is released
         Event<MouseButton> onMouseUp;
 
-        /// Invoked when a mouse button is pressed
-        /// Invoked with a MouseButton
+        /// Invoked with a button code when a mouse button is pressed
         Event<MouseButton> onMouseDown;
 
-        /// Invoked when the framebuffer changes size
-        /// Invoked with a vector with the new width and height of the framebuffer
+        /// Invoked with the new framebuffer size when it changes size
         Event<glm::ivec2> onFramebufferResize;
     };
 } // namespace cubos::io

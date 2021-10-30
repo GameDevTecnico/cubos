@@ -153,6 +153,8 @@ int main(void)
 
         t += 0.01f;
     }
+
     delete window;
+    
     return 0;
 }

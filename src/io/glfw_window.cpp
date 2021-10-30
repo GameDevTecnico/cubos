@@ -4,16 +4,129 @@
 
 #include <cubos/log.hpp>
 
-#ifndef GLAD_LOADED
-#define GLAD_LOADED
 #include <glad/glad.h>
-#endif // GLAD_LOADED
 
 using namespace cubos;
 using namespace cubos::io;
 
+#ifdef WITH_GLFW
+
+static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+static void mousePositionCallback(GLFWwindow* window, double xPos, double yPos);
+static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
+static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 static MouseButton glfwToCubosMouseButton(int button);
 static Key glfwToCubosKey(int key);
+
+#endif // WITH_GLFW
+
+GLFWWindow::GLFWWindow()
+{
+#ifdef WITH_GLFW
+    if (!glfwInit())
+    {
+        logCritical("OGLRenderDevice::OGLRenderDevice() failed: glfwInit() failed");
+        abort();
+    }
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif // __APPLE__
+    // TODO: Read settings and set the correct window size, title and mode (fullscreen, ...)
+    this->handle = glfwCreateWindow(800, 600, "Cubos", nullptr, nullptr);
+    if (!this->handle)
+        ; // TODO: Log critical error and abort
+
+    // Create OpenGL render device
+    glfwMakeContextCurrent(this->handle);
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        logCritical("GLFWWindowImpl::GLFWWindowImpl() failed: OpenGL loader failed");
+        abort();
+    }
+    this->renderDevice = new gl::OGLRenderDevice();
+
+    // Set input callbacks
+    glfwSetWindowUserPointer(this->handle, (void*)this);
+    glfwSetKeyCallback(this->handle, keyCallback);
+    glfwSetCursorPosCallback(this->handle, mousePositionCallback);
+    glfwSetMouseButtonCallback(this->handle, mouseButtonCallback);
+    glfwSetScrollCallback(this->handle, scrollCallback);
+    glfwSetFramebufferSizeCallback(this->handle, framebufferSizeCallback);
+#else
+    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+GLFWWindow::~GLFWWindow()
+{
+#ifdef WITH_GLFW
+    delete this->renderDevice;
+    glfwTerminate();
+#else
+    logCritical("GLFWWindow::~GLFWWindow() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+void GLFWWindow::pollEvents() const
+{
+#ifdef WITH_GLFW
+    glfwPollEvents();
+#else
+    logCritical("GLFWWindow::pollEvents() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+void GLFWWindow::swapBuffers() const
+{
+#ifdef WITH_GLFW
+    glfwSwapBuffers(this->handle);
+#else
+    logCritical("GLFWWindow::swapBuffers() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+gl::RenderDevice& GLFWWindow::getRenderDevice() const
+{
+#ifdef WITH_GLFW
+    return *this->renderDevice;
+#else
+    logCritical("GLFWWindow::getRenderDevice() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+glm::ivec2 GLFWWindow::getFramebufferSize() const
+{
+#ifdef WITH_GLFW
+    int width, height;
+    glfwGetFramebufferSize(this->handle, &width, &height);
+    return {width, height};
+#else
+    logCritical("GLFWWindow::getFramebufferSize() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+bool GLFWWindow::shouldClose() const
+{
+#ifdef WITH_GLFW
+    return glfwWindowShouldClose(this->handle);
+#else
+    logCritical("GLFWWindow::shouldClose() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+#ifdef WITH_GLFW
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -55,74 +168,6 @@ static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->onFramebufferResize.fire(glm::ivec2(width, height));
-}
-
-GLFWWindow::GLFWWindow()
-{
-    if (!glfwInit())
-    {
-        logCritical("OGLRenderDevice::OGLRenderDevice() failed: glfwInit() failed");
-        abort();
-    }
-
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-    // TODO: Read settings and set the correct window size, title and mode (fullscreen, ...)
-    this->handle = glfwCreateWindow(800, 600, "Cubos", nullptr, nullptr);
-    if (!this->handle)
-        ; // TODO: Log critical error and abort
-
-    // Create OpenGL render device
-    glfwMakeContextCurrent(this->handle);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        logCritical("GLFWWindowImpl::GLFWWindowImpl() failed: OpenGL loader failed");
-        abort();
-    }
-    this->renderDevice = new gl::OGLRenderDevice();
-    glfwSetWindowUserPointer(this->handle, (void*)this);
-    glfwSetKeyCallback(this->handle, keyCallback);
-    glfwSetCursorPosCallback(this->handle, mousePositionCallback);
-    glfwSetMouseButtonCallback(this->handle, mouseButtonCallback);
-    glfwSetScrollCallback(this->handle, scrollCallback);
-    glfwSetFramebufferSizeCallback(this->handle, framebufferSizeCallback);
-}
-
-GLFWWindow::~GLFWWindow()
-{
-    delete this->renderDevice;
-    glfwTerminate();
-}
-
-void GLFWWindow::pollEvents() const
-{
-    glfwPollEvents();
-}
-
-void GLFWWindow::swapBuffers() const
-{
-    glfwSwapBuffers(this->handle);
-}
-
-gl::RenderDevice& GLFWWindow::getRenderDevice() const
-{
-    return *this->renderDevice;
-}
-
-glm::ivec2 GLFWWindow::getFramebufferSize() const
-{
-    int width, height;
-    glfwGetFramebufferSize(this->handle, &width, &height);
-    return {width, height};
-}
-
-bool GLFWWindow::shouldClose() const
-{
-    return glfwWindowShouldClose(this->handle);
 }
 
 static MouseButton glfwToCubosMouseButton(int button)
@@ -252,3 +297,5 @@ static Key glfwToCubosKey(int key)
     }
 #undef MAP_KEY
 }
+
+#endif // WITH_GLFW

@@ -1,10 +1,7 @@
 #include <cubos/gl/ogl_render_device.hpp>
 #include <cubos/log.hpp>
 
-#ifndef GLAD_LOADED
-#define GLAD_LOADED
 #include <glad/glad.h>
-#endif // GLAD_LOADED
 
 #include <cstdlib>
 #include <cassert>
@@ -199,7 +196,7 @@ static void addressToGL(AddressMode mode, GLenum& address)
         address = GL_MIRRORED_REPEAT;
         break;
     case AddressMode::Clamp:
-        address = GL_CLAMP;
+        address = GL_CLAMP_TO_EDGE;
         break;
     case AddressMode::Border:
         address = GL_CLAMP_TO_BORDER;
@@ -830,6 +827,7 @@ class OGLShaderPipeline : public impl::ShaderPipeline
 public:
     OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program) : vs(vs), ps(ps), program(program)
     {
+        this->uboCount = 0;
     }
 
     virtual ~OGLShaderPipeline() override
@@ -845,18 +843,30 @@ public:
                 return &bp;
 
         // No existing binding point was found, it must be created first
-        // Search for uniform block binding
-        auto loc = glGetUniformBlockIndex(this->program, name);
-        if (loc != GL_INVALID_INDEX)
+
+        auto loc = glGetUniformLocation(this->program, name);
+        if (loc != -1)
         {
-            glUniformBlockBinding(this->program, loc, loc);
             bps.emplace_back(name, loc);
             return &bps.back();
         }
 
-        loc = glGetUniformLocation(this->program, name);
-        if (loc != -1)
+        // Search for uniform block binding
+        auto index = glGetUniformBlockIndex(this->program, name);
+        if (index != GL_INVALID_INDEX)
         {
+            auto loc = this->uboCount;
+            glUniformBlockBinding(this->program, index, loc);
+
+            GLenum glErr = glGetError();
+            if (glErr != 0)
+            {
+                logError("OGLShaderPipeline::getBindingPoint() failed: glUniformBlockBinding caused OpenGL error {}",
+                         glErr);
+                return nullptr;
+            }
+
+            this->uboCount += 1;
             bps.emplace_back(name, loc);
             return &bps.back();
         }
@@ -867,6 +877,9 @@ public:
     ShaderStage vs, ps;
     GLuint program;
     std::list<OGLShaderBindingPoint> bps;
+
+private:
+    int uboCount;
 };
 
 OGLRenderDevice::OGLRenderDevice()
