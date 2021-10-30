@@ -21,7 +21,7 @@ namespace cubos
     {
     public:
         using Callback = std::function<void(TArgs...)>; ///< Callback type
-        using ID = size_t;                              /// Callback identifier
+        using ID = size_t;                              ///< Callback identifier
 
         /// Registers a new callback
         /// @param callback The callback called when the event is fired
