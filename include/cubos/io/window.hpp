@@ -68,6 +68,10 @@ namespace cubos::io
         /// Invoked when a mouse button is pressed
         /// Invoked with a MouseButton
         Event<MouseButton> onMouseDown;
+
+        /// Invoked when the framebuffer changes size
+        /// Invoked with a vector with the new width and height of the framebuffer
+        Event<glm::ivec2> onFramebufferResize;
     };
 } // namespace cubos::io
 

@@ -12,8 +12,8 @@
 using namespace cubos;
 using namespace cubos::io;
 
-MouseButton glfwToCubosMouseButton(int button);
-Keyboard glfwToCubosKey(int key);
+static MouseButton glfwToCubosMouseButton(int button);
+static Keyboard glfwToCubosKey(int key);
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -51,6 +51,12 @@ static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
     handler->onMouseScroll.fire(glm::ivec2(xoffset, yoffset));
 }
 
+static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    handler->onFramebufferResize.fire(glm::ivec2(width, height));
+}
+
 GLFWWindow::GLFWWindow()
 {
     if (!glfwInit())
@@ -83,6 +89,7 @@ GLFWWindow::GLFWWindow()
     glfwSetCursorPosCallback(this->handle, mousePositionCallback);
     glfwSetMouseButtonCallback(this->handle, mouseButtonCallback);
     glfwSetScrollCallback(this->handle, scrollCallback);
+    glfwSetFramebufferSizeCallback(this->handle, framebufferSizeCallback);
 }
 
 GLFWWindow::~GLFWWindow()
@@ -118,7 +125,7 @@ bool GLFWWindow::shouldClose() const
     return glfwWindowShouldClose(this->handle);
 }
 
-MouseButton glfwToCubosMouseButton(int button)
+static MouseButton glfwToCubosMouseButton(int button)
 {
 #define MAP_BUTTON(glfw, cubos)                                                                                        \
     case GLFW_MOUSE_BUTTON_##glfw:                                                                                     \
@@ -128,14 +135,15 @@ MouseButton glfwToCubosMouseButton(int button)
         MAP_BUTTON(LEFT, Left)
         MAP_BUTTON(RIGHT, Right)
         MAP_BUTTON(MIDDLE, Middle)
-        // Not sure what the mapping in GLFW is for the Exta1 and Extra2 buttons
+        MAP_BUTTON(4, Extra1)
+        MAP_BUTTON(5, Extra2)
     default:
         return MouseButton::Invalid;
     }
 #undef MAP_BUTTON
 }
 
-Keyboard glfwToCubosKey(int key)
+static Keyboard glfwToCubosKey(int key)
 {
 #define MAP_KEY(glfw, cubos)                                                                                           \
     case GLFW_KEY_##glfw:                                                                                              \
