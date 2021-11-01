@@ -1,6 +1,0 @@
-<map id="cubos::gl::DepthStencilStateDesc" name="cubos::gl::DepthStencilStateDesc">
-<area shape="rect" id="node1" title="Depth stencil state description." alt="" coords="64,228,301,255"/>
-<area shape="rect" id="node2" href="$structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Depth.html" title="Depth state description." alt="" coords="5,124,211,165"/>
-<area shape="rect" id="node3" href="$structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html" title="Stencil state description." alt="" coords="235,124,440,165"/>
-<area shape="rect" id="node4" href="$structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil_1_1Face.html" title="Stencil face description." alt="" coords="235,5,440,47"/>
-</map>
