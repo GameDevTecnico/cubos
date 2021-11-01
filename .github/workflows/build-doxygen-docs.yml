@@ -27,7 +27,7 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target doxygen
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target core-doxygen
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
