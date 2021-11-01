@@ -1,17 +1,17 @@
-[submodule "lib/glfw"]
-	path = lib/glfw
+[submodule "core/lib/glfw"]
+	path = core/lib/glfw
 	url = https://github.com/glfw/glfw.git
-[submodule "lib/glm"]
-	path = lib/glm
+[submodule "core/lib/glm"]
+	path = core/lib/glm
 	url = https://github.com/g-truc/glm.git
-[submodule "lib/yaml-cpp"]
-	path = lib/yaml-cpp
+[submodule "core/lib/yaml-cpp"]
+	path = core/lib/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp/
-[submodule "lib/googletest"]
-	path = lib/googletest
+[submodule "core/lib/googletest"]
+	path = core/lib/googletest
 	url = https://github.com/google/googletest.git
-[submodule "lib/spdlog"]
-	path = lib/spdlog
+[submodule "core/lib/spdlog"]
+	path = core/lib/spdlog
 	url = https://github.com/gabime/spdlog
 [submodule "docs/doxygen-awesome-css"]
 	path = docs/doxygen-awesome-css
