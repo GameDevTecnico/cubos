@@ -25,6 +25,7 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/io/glfw_window.cpp"
 
+    "src/cubos/gl/ogl_render_device.hpp"
     "src/cubos/gl/ogl_render_device.cpp"
 )
 
@@ -35,7 +36,6 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/io/window.hpp"
 
     "include/cubos/gl/render_device.hpp"
-    "include/cubos/gl/ogl_render_device.hpp"
 )
 
 
