@@ -18,4 +18,5 @@ foreach(file ${CORE_SAMPLES_SOURCES})
     # Add sample target
     add_executable(${target} ${file})
     target_link_libraries(${target} cubos-core)
+    set_property(TARGET ${target} PROPERTY CXX_STANDARD 20)
 endforeach()
