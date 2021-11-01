@@ -23,6 +23,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/log.cpp"
     "src/cubos/settings.cpp"
 
+    "src/cubos/io/window.cpp"
+    "src/cubos/io/glfw_window.hpp"
     "src/cubos/io/glfw_window.cpp"
 
     "src/cubos/gl/ogl_render_device.hpp"

@@ -7,15 +7,16 @@ using namespace cubos;
 int main(void)
 {
     initializeLogger();
-    auto window = io::Window();
-    auto& renderDevice = window.getRenderDevice();
+    auto window = io::Window::create();
+    auto& renderDevice = window->getRenderDevice();
 
-    while (!window.shouldClose())
+    while (!window->shouldClose())
     {
         renderDevice.clearColor(0.0, 0.0, 0.0, 0.0f);
-        window.swapBuffers();
-        window.pollEvents();
+        window->swapBuffers();
+        window->pollEvents();
     }
 
+    delete window;
     return 0;
 }

@@ -1,13 +1,7 @@
 #include <cubos/gl/ogl_render_device.hpp>
 #include <cubos/log.hpp>
 
-#ifdef WITH_OPENGL
-
 #include <glad/glad.h>
-
-#ifdef WITH_GLFW
-#include <GLFW/glfw3.h>
-#endif
 
 #include <cstdlib>
 #include <cassert>
@@ -833,6 +827,7 @@ class OGLShaderPipeline : public impl::ShaderPipeline
 public:
     OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program) : vs(vs), ps(ps), program(program)
     {
+        this->uboCount = 0;
     }
 
     virtual ~OGLShaderPipeline() override
@@ -848,18 +843,30 @@ public:
                 return &bp;
 
         // No existing binding point was found, it must be created first
-        // Search for uniform block binding
-        auto loc = glGetUniformBlockIndex(this->program, name);
-        if (loc != GL_INVALID_INDEX)
+
+        auto loc = glGetUniformLocation(this->program, name);
+        if (loc != -1)
         {
-            glUniformBlockBinding(this->program, loc, loc);
             bps.emplace_back(name, loc);
             return &bps.back();
         }
 
-        loc = glGetUniformLocation(this->program, name);
-        if (loc != -1)
+        // Search for uniform block binding
+        auto index = glGetUniformBlockIndex(this->program, name);
+        if (index != GL_INVALID_INDEX)
         {
+            auto loc = this->uboCount;
+            glUniformBlockBinding(this->program, index, loc);
+
+            GLenum glErr = glGetError();
+            if (glErr != 0)
+            {
+                logError("OGLShaderPipeline::getBindingPoint() failed: glUniformBlockBinding caused OpenGL error {}",
+                         glErr);
+                return nullptr;
+            }
+
+            this->uboCount += 1;
             bps.emplace_back(name, loc);
             return &bps.back();
         }
@@ -870,20 +877,13 @@ public:
     ShaderStage vs, ps;
     GLuint program;
     std::list<OGLShaderBindingPoint> bps;
+
+private:
+    int uboCount;
 };
 
 OGLRenderDevice::OGLRenderDevice()
 {
-#ifdef WITH_GLFW
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-#else
-    if (!gladLoadGL())
-#endif
-    {
-        logCritical("OGLRenderDevice::OGLRenderDevice() failed: OpenGL loader failed");
-        abort();
-    }
-
     // Create default states
     this->defaultRS = this->createRasterState({});
     this->defaultDSS = this->createDepthStencilState({});
@@ -1714,5 +1714,3 @@ int OGLRenderDevice::getProperty(Property prop)
         return -1;
     }
 }
-
-#endif // WITH_OPENGL
