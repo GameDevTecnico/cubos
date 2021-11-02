@@ -11,7 +11,8 @@ namespace cubos::memory
     class Deserializer
     {
     public:
-        /// Destructor.
+        /// @param stream The stream to deserialize from.
+        Deserializer(Stream& stream);
         virtual ~Deserializer() = default;
 
         /// Deserializes a signed 8 bit integer.
@@ -63,7 +64,7 @@ namespace cubos::memory
         /// @param size The size of the buffer.
         virtual void read(char* str, size_t size) = 0;
 
-    private:
+    protected:
         /// Indicates that a object is currently being deserialized.
         virtual void beginObject() = 0;
 
@@ -83,6 +84,12 @@ namespace cubos::memory
 
         /// Indicates that a dictionary is no longer being deserialized.
         virtual void endDictionary() = 0;
+
+        Stream& stream; ///< Stream used by the deserializer.
+
+    private:
+        Deserializer(const Deserializer&) = delete;
+        Deserializer& operator=(const Deserializer&) = delete;
     };
 } // namespace cubos::memory
 
