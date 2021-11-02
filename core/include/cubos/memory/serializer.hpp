@@ -69,10 +69,7 @@ namespace cubos::memory
         /// @param name The name of the value (optional).
         virtual void write(const char* str, const char* name = nullptr) = 0;
 
-    private:
-        Serializer(const Serializer&) = delete;
-        Serializer& operator=(const Serializer&) = delete;
-
+    protected:
         /// Indicates that a object is currently being serialized.
         /// @param name The name of the object (optional).
         virtual void beginObject(const char* name = nullptr) = 0;
@@ -81,18 +78,24 @@ namespace cubos::memory
         virtual void endObject() = 0;
 
         /// Indicates that a array is currently being serialized.
+        /// @param length The length of the array.
         /// @param name The name of the array (optional).
-        virtual void beginArray(const char* name = nullptr) = 0;
+        virtual void beginArray(size_t length, const char* name = nullptr) = 0;
 
         /// Indicates that a array is no longer being serialized.
         virtual void endArray() = 0;
 
         /// Indicates that a dictionary is currently being serialized.
+        /// @param length The length of the dictionary.
         /// @param name The name of the dictionary (optional).
-        virtual void beginDictionary(const char* name = nullptr) = 0;
+        virtual void beginDictionary(size_t length, const char* name = nullptr) = 0;
 
         /// Indicates that a dictionary is no longer being serialized.
         virtual void endDictionary() = 0;
+
+    private:
+        Serializer(const Serializer&) = delete;
+        Serializer& operator=(const Serializer&) = delete;
     };
 } // namespace cubos::memory
 
