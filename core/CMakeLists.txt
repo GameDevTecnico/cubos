@@ -26,6 +26,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/memory/stream.cpp"
     "src/cubos/memory/std_stream.cpp"
     "src/cubos/memory/buffer_stream.cpp"
+    "src/cubos/memory/serializer.cpp"
+    "src/cubos/memory/deserializer.cpp"
 
     "src/cubos/io/window.cpp"
     "src/cubos/io/glfw_window.hpp"
@@ -44,6 +46,10 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/memory/std_stream.hpp"
     "include/cubos/memory/buffer_stream.hpp"
     
+    "include/cubos/memory/stream.hpp"
+    "include/cubos/memory/serializer.hpp"
+    "include/cubos/memory/deserializer.hpp"
+
     "include/cubos/io/window.hpp"
 
     "include/cubos/gl/debug.hpp"

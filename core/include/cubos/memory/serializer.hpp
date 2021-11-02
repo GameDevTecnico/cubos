@@ -11,14 +11,15 @@ namespace cubos::memory
     class Serializer
     {
     public:
-        Serializer() = default;
+        /// @param stream The stream to serialize to.
+        Serializer(Stream& stream);
         virtual ~Serializer() = default;
 
         /// Serializes a signed 8 bit integer.
         /// @param value The value to serialize.
         /// @param name The name of the value (optional).
         virtual void write(int8_t value, const char* name = nullptr) = 0;
-        
+
         /// Serializes an signed 16 bit integer.
         /// @param value The value to serialize.
         /// @param name The name of the value (optional).
@@ -92,6 +93,8 @@ namespace cubos::memory
 
         /// Indicates that a dictionary is no longer being serialized.
         virtual void endDictionary() = 0;
+
+        Stream& stream; ///< Stream used by the serializer.
 
     private:
         Serializer(const Serializer&) = delete;
