@@ -4,6 +4,7 @@
 # Set test sources
 set(CUBOS_TESTS_SOURCE
     "test_settings.cpp"
+    "test_buffer_stream.cpp"
 )
 
 # Add tests target
