@@ -24,6 +24,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/settings.cpp"
 
     "src/cubos/memory/stream.cpp"
+    "src/cubos/memory/std_stream.cpp"
 
     "src/cubos/io/window.cpp"
     "src/cubos/io/glfw_window.hpp"
@@ -38,6 +39,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/settings.hpp"
 
     "include/cubos/memory/stream.hpp"
+    "include/cubos/memory/std_stream.hpp"
     
     "include/cubos/io/window.hpp"
 
