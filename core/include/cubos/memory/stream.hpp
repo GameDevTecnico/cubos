@@ -44,7 +44,7 @@ namespace cubos::memory
         /// Seeks to a position in the stream.
         /// @param offset The offset to seek to.
         /// @param origin The origin of the offset.
-        virtual void seek(size_t offset, SeekOrigin origin) = 0;
+        virtual void seek(int64_t offset, SeekOrigin origin) = 0;
 
         /// Checks if the stream still has content to read.
         /// @return True if the stream has no more content to read, false otherwise.
@@ -57,6 +57,10 @@ namespace cubos::memory
         /// Gets one byte from the stream.
         /// @return The byte read.
         char get();
+
+        /// Puts one byte into the stream.
+        /// @param c The byte to put.
+        void put(char c);
 
         /// Prints a 8 bit signed integer to the stream.
         /// @param value The value to print.
