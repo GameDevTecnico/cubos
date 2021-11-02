@@ -1,7 +1,7 @@
 #ifndef CUBOS_MEMORY_STREAM_HPP
 #define CUBOS_MEMORY_STREAM_HPP
 
-#include <cstdint>
+#include <cstddef>
 
 namespace cubos::memory
 {
