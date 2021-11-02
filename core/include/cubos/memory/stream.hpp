@@ -50,6 +50,14 @@ namespace cubos::memory
         /// @return True if the stream has no more content to read, false otherwise.
         virtual bool eof() const = 0;
 
+        /// Peeks one byte from the stream.
+        /// @return The byte peeked.
+        virtual char peek() const = 0;
+
+        /// Gets one byte from the stream.
+        /// @return The byte read.
+        char get();
+
         /// Prints a 8 bit signed integer to the stream.
         /// @param value The value to print.
         /// @param base The base to use.
@@ -93,12 +101,12 @@ namespace cubos::memory
         /// Prints a float to the stream.
         /// @param value The value to print.
         /// @param decimalPlaces The number of decimal places to print.
-        void print(float value, size_t decimalPlaces = 6);
+        void print(float value, size_t decimalPlaces = 4);
 
         /// Prints a double to the stream.
         /// @param value The value to print.
         /// @param decimalPlaces The number of decimal places to print.
-        void print(double value, size_t decimalPlaces = 6);
+        void print(double value, size_t decimalPlaces = 4);
 
         /// Prints a string to the stream.
         /// @param str The value to print.
