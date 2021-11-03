@@ -446,3 +446,78 @@ void Stream::parse(double& value)
 
     value = negative ? -v : v;
 }
+
+void Stream::readUntil(std::string& str, const char* terminator)
+{
+    if (terminator == nullptr)
+        terminator = "";
+    str = "";
+
+    size_t terminatorI = 0;
+    char c;
+
+    while (!this->eof() && this->peek() != '\0')
+    {
+        c = this->get();
+
+        if (c == terminator[terminatorI])
+        {
+            ++terminatorI;
+            if (terminator[terminatorI] == '\0')
+                break;
+        }
+        else
+        {
+            if (terminatorI > 0)
+                str.insert(str.end(), terminator, terminator + terminatorI);
+            str += c;
+            terminatorI = 0;
+        }
+    }
+}
+
+size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
+{
+    if (terminator == nullptr)
+        terminator == "";
+
+    size_t terminatorI = 0, position = 0;
+    char c;
+
+    while (!this->eof() && this->peek() != '\0' && position < size)
+    {
+        c = this->get();
+
+        if (c == terminator[terminatorI])
+        {
+            ++terminatorI;
+            if (terminator[terminatorI] == '\0')
+                break;
+        }
+        else if (terminatorI > 0)
+        {
+            if (position + terminatorI < size)
+            {
+                memcpy(buffer + position, terminator, terminatorI);
+                position += terminatorI;
+            }
+            else
+            {
+                memcpy(buffer + position, terminator, size - position);
+                position = size;
+            }
+
+            terminatorI = 0;
+        }
+        else
+            buffer[position++] = c;
+    }
+
+    return position;
+}
+
+void Stream::ignore(size_t size)
+{
+    for (size_t i = 0; i < size; ++i)
+        this->get();
+}

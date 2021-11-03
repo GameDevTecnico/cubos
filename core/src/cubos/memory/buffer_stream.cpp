@@ -27,7 +27,7 @@ size_t BufferStream::read(void* data, size_t size)
     size_t bytesRemaining = this->size - this->position;
     if (size > bytesRemaining)
         size = bytesRemaining;
-    memcpy(data, this->buffer + this->position, size);
+    memcpy(data, static_cast<char*>(this->buffer) + this->position, size);
     this->position += size;
     return size;
 }
@@ -40,7 +40,7 @@ size_t BufferStream::write(const void* data, size_t size)
     size_t bytesRemaining = this->size - this->position;
     if (size > bytesRemaining)
         size = bytesRemaining;
-    memcpy(this->buffer + this->position, data, size);
+    memcpy(static_cast<char*>(this->buffer) + this->position, data, size);
     this->position += size;
     return size;
 }
@@ -87,5 +87,5 @@ char BufferStream::peek() const
 {
     if (this->position == this->size)
         return '\0';
-    return *(char*)(this->buffer + this->position);
+    return ((char*)this->buffer)[this->position];
 }
