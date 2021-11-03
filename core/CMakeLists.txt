@@ -20,6 +20,7 @@ message( "# Building core tests: " ${BUILD_CORE_TESTS})
 # Set core source files
 
 set(CUBOS_CORE_SOURCE
+    "src/cubos/debug_render.cpp"
     "src/cubos/log.cpp"
     "src/cubos/settings.cpp"
 
@@ -32,6 +33,7 @@ set(CUBOS_CORE_SOURCE
 )
 
 set(CUBOS_CORE_INCLUDE
+    "include/cubos/debug_render.hpp"
     "include/cubos/log.hpp"
     "include/cubos/settings.hpp"
     
