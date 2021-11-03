@@ -2,6 +2,7 @@
 #include <cubos/memory/buffer_stream.hpp>
 
 #include <random>
+#include <string>
 
 TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Integers)
 {
@@ -69,4 +70,32 @@ TEST(Cubos_Memory_Buffer_Stream, Print_String)
     stream.seek(0, SeekOrigin::Begin);
     stream.print(str, 4);
     EXPECT_EQ(strncmp(str, buf, 4), 0);
+}
+
+TEST(Cubos_Memory_Buffer_Stream, Print_Formatted_String)
+{
+    using namespace cubos::memory;
+
+    char buf[256];
+    auto stream = BufferStream(buf, sizeof(buf));
+
+    stream.printf("Escaped \\{}, non-escaped {}", 1, 2, 3);
+    stream.put('\0');
+    EXPECT_STREQ("Escaped {}, non-escaped 1", buf);
+}
+
+TEST(Cubos_Memory_Buffer_Stream, Read_Until)
+{
+    using namespace cubos::memory;
+
+    const char* str = "testbananastr\ning\nsdaad";
+    auto stream = BufferStream(str, strlen(str));
+
+    std::string result;
+    stream.readUntil(result, "banana");
+    EXPECT_STREQ(result.c_str(), "test");
+    stream.readUntil(result, "\n");
+    EXPECT_STREQ(result.c_str(), "str");
+    stream.readUntil(result, nullptr);
+    EXPECT_STREQ(result.c_str(), "ing\nsdaad");
 }

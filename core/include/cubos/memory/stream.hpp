@@ -125,6 +125,19 @@ namespace cubos::memory
         /// @param str The value to print.
         void print(const std::string& str);
 
+        /// Prints a formatted string the stream.
+        /// Example usage:
+        ///
+        ///     stream.printf("Hello, {}!\n", "world");
+        ///     stream.printf("{} + {} = {}\n", 1, 2, 3);
+        ///     stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
+        ///
+        /// @tparam T Type of the first argument.
+        /// @tparam TArgs The types of the remaining arguments.
+        /// @param arg First argument to print.
+        /// @param args The arguments to print.
+        template <typename T, typename... TArgs> void printf(const char* fmt, T arg, TArgs... args);
+
         /// Parses a 8 bit signed integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
@@ -172,7 +185,58 @@ namespace cubos::memory
         /// Parses a double from the stream.
         /// @param value Parsed value.
         void parse(double& value);
+
+        /// Reads a string from the stream until the terminator (or '\0') is found.
+        /// @param str The string to read.
+        /// @param terminator The terminator to use.
+        void readUntil(std::string& str, const char* terminator);
+
+        /// Reads from the stream until the terminator (or '\0') is found.
+        /// @param buffer The buffer to read into.
+        /// @param size The size of the buffer.
+        /// @param terminator The terminator to use.
+        /// @return The number of bytes read.
+        size_t readUntil(char* buffer, size_t size, const char* terminator);
+
+        /// Ignores a number of bytes from the stream.
+        /// @param size The number of bytes to ignore.
+        void ignore(size_t size);
+
+    private:
+        /// Formatted print recursion tail function.
+        /// @param fmt The remainder format string.
+        void printf(const char* fmt);
     };
+
+    // Implementation
+
+    template <typename T, typename... TArgs> void Stream::printf(const char* fmt, T arg, TArgs... args)
+    {
+        for (;; ++fmt)
+        {
+            if (fmt[0] == '\0')
+                break;
+            else if (fmt[0] == '\\')
+            {
+                fmt += 1;
+                this->put(fmt[0]);
+            }
+            else if (fmt[0] == '{' && fmt[1] == '}')
+            {
+                this->print(arg);
+                this->printf(fmt + 2, args...);
+                return;
+            }
+            else
+                this->put(fmt[0]);
+        }
+    }
+
+    inline void Stream::printf(const char* fmt)
+    {
+        this->print(fmt);
+    }
+
 } // namespace cubos::memory
 
 #endif // CUBOS_MEMORY_STREAM_HPP
