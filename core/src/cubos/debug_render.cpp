@@ -377,7 +377,7 @@ static void initSphere()
     objSphere.va = debugRenderDevice->createVertexArray(vaDesc);
 }
 
-void debug::init(io::Window* window)
+void Debug::init(io::Window* window)
 {
     debugWindow = window;
     debugRenderDevice = &debugWindow->getRenderDevice();
@@ -429,31 +429,31 @@ void debug::init(io::Window* window)
     WireframeRasterState = debugRenderDevice->createRasterState(rsDesc);
 }
 
-void debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
+void Debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
 {
     requests.push_back(
         DebugDrawRequest{objCube, FillRasterState, glm::translate(center) * glm::scale(size), time, color});
 }
 
-void debug::drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
+void Debug::drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
 {
     requests.push_back(
         DebugDrawRequest{objCube, WireframeRasterState, glm::translate(center) * glm::scale(size), time, color});
 }
 
-void debug::drawSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
+void Debug::drawSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
 {
     requests.push_back(DebugDrawRequest{objSphere, FillRasterState,
                                         glm::translate(center) * glm::scale(glm::vec3(radius)), time, color});
 }
 
-void debug::drawWireSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
+void Debug::drawWireSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
 {
     requests.push_back(DebugDrawRequest{objSphere, WireframeRasterState,
                                         glm::translate(center) * glm::scale(glm::vec3(radius)), time, color});
 }
 
-void debug::flush(glm::mat4 vp, double deltaT)
+void Debug::flush(glm::mat4 vp, double deltaT)
 {
     debugRenderDevice->setShaderPipeline(pipeline);
     auto sz = debugWindow->getFramebufferSize();

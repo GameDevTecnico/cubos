@@ -6,7 +6,7 @@
 
 namespace cubos
 {
-    class debug
+    class Debug
     {
     public:
         static void init(cubos::io::Window* window);

@@ -9,9 +9,9 @@ using namespace cubos;
 void debugTest(io::Key key)
 {
     if (key == io::Key::C)
-        debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
+        Debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
     else if (key == io::Key::S)
-        debug::drawWireSphere(glm::vec3(0, 0, 0), 1, 1);
+        Debug::drawWireSphere(glm::vec3(0, 0, 0), 1, 1);
 }
 
 int main(void)
@@ -19,7 +19,7 @@ int main(void)
     initializeLogger();
     auto* window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
-    debug::init(window);
+    Debug::init(window);
 
     window->onKeyDown.registerCallback(debugTest);
 
@@ -39,7 +39,7 @@ int main(void)
         auto vp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
                   glm::lookAt(glm::vec3{4.0f, 3.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f});
 
-        debug::flush(vp, deltaT);
+        Debug::flush(vp, deltaT);
         window->swapBuffers();
         window->pollEvents();
     }
