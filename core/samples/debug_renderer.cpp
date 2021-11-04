@@ -8,7 +8,10 @@ using namespace cubos;
 
 void debugTest(io::Key key)
 {
-    debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
+    if (key == io::Key::C)
+        debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
+    else if (key == io::Key::S)
+        debug::drawWireSphere(glm::vec3(0, 0, 0), 1, 1);
 }
 
 int main(void)
