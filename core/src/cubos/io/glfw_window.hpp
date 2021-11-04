@@ -36,6 +36,9 @@ namespace cubos::io
         /// Should the window close?
         virtual bool shouldClose() const override;
 
+        /// Current time since the window was created.
+        virtual double getTime() const override;
+
     private:
 #ifdef WITH_GLFW
         GLFWwindow* handle;

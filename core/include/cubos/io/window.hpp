@@ -52,6 +52,9 @@ namespace cubos::io
         /// Should the window close?
         virtual bool shouldClose() const = 0;
 
+        /// Current time since the window was created.
+        virtual double getTime() const = 0;
+
         /// Invoked with a key code, when a keyboard key is pressed.
         Event<Key> onKeyDown;
 

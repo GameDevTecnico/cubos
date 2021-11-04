@@ -9,12 +9,12 @@ namespace cubos
     class debug
     {
     public:
-        static void init(cubos::io::Window *window);
-        static void drawCube(glm::mat4 vp, glm::vec3 center, glm::vec3 size, float time);
-        static void drawWireCube(glm::mat4 vp, glm::vec3 center, glm::vec3 size, float time);
-        static void drawSphere(glm::mat4 vp, glm::vec3 center, float radius, float time);
-        static void drawWireSphere(glm::mat4 vp, glm::vec3 center, float radius, float time);
-        static void flush(float deltaT);
+        static void init(cubos::io::Window* window);
+        static void drawCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color = glm::vec3(1));
+        static void drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color = glm::vec3(1));
+        static void drawSphere(glm::vec3 center, float radius, float time, glm::vec3 color = glm::vec3(1));
+        static void drawWireSphere(glm::vec3 center, float radius, float time, glm::vec3 color = glm::vec3(1));
+        static void flush(glm::mat4 vp, double deltaT);
     };
 } // namespace cubos
 

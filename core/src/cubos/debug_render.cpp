@@ -12,7 +12,7 @@ using namespace cubos::gl;
 
 static RenderDevice* debugRenderDevice;
 static ConstantBuffer mvpBuffer;
-static ShaderBindingPoint mvpBindingPoint;
+static ShaderBindingPoint mvpBindingPoint, colorBindingPoint;
 static ShaderPipeline pipeline;
 static io::Window* debugWindow;
 
@@ -22,6 +22,7 @@ struct DebugDrawObject
 {
     VertexArray va;
     IndexBuffer ib;
+    int numIndices;
 };
 
 static DebugDrawObject objCube, objSphere;
@@ -31,24 +32,35 @@ struct DebugDrawRequest
     DebugDrawObject obj;
     RasterState rasterState;
     glm::mat4 modelMatrix;
-    float timeLeft;
+    double timeLeft;
+    glm::vec3 color;
 };
 
 static std::list<DebugDrawRequest> requests;
 
 static void initCube()
 {
-    float verts[] = {
-        0.5f,  0.5f, 0.5f, 0.5f,  0.5f, -0.5f, 0.5f,  -0.5f, 0.5f, 0.5f,  -0.5f, -0.5f,
-        -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, -0.5f,
-    };
+    float verts[] = {// front
+                     -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0,
+                     // back
+                     -1.0, -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0};
 
     auto vb = debugRenderDevice->createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
 
-    unsigned int indices[] = {
-        0, 1, 2, 2, 3, 0,
-    };
+    unsigned int indices[] = {// front
+                              0, 1, 2, 2, 3, 0,
+                              // right
+                              1, 5, 6, 6, 2, 1,
+                              // back
+                              7, 6, 5, 5, 4, 7,
+                              // left
+                              4, 0, 3, 3, 7, 4,
+                              // bottom
+                              4, 5, 1, 1, 0, 4,
+                              // top
+                              3, 2, 6, 6, 7, 3};
 
+    objCube.numIndices = sizeof(indices) / sizeof(unsigned int);
     objCube.ib =
         debugRenderDevice->createIndexBuffer(sizeof(indices), indices, gl::IndexFormat::UInt, gl::Usage::Static);
 
@@ -91,11 +103,11 @@ void debug::init(io::Window* window)
 
             out vec4 color;
 
-            uniform vec3 color;
+            uniform vec3 objColor;
 
             void main()
             {
-                color = vec4(color, 1.0f);
+                color = vec4(objColor, 1.0f);
             }
         )");
 
@@ -105,6 +117,7 @@ void debug::init(io::Window* window)
 
     mvpBuffer = debugRenderDevice->createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
     mvpBindingPoint = pipeline->getBindingPoint("MVP");
+    colorBindingPoint = pipeline->getBindingPoint("objColor");
 
     RasterStateDesc rsDesc;
 
@@ -115,27 +128,31 @@ void debug::init(io::Window* window)
     WireframeRasterState = debugRenderDevice->createRasterState(rsDesc);
 }
 
-void debug::drawCube(glm::mat4 vp, glm::vec3 center, glm::vec3 size, float time)
+void debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
 {
-    requests.push_back(DebugDrawRequest{objCube, FillRasterState, glm::scale(size), time});
+    requests.push_back(
+        DebugDrawRequest{objCube, FillRasterState, glm::translate(center) * glm::scale(size), time, color});
 }
 
-void debug::drawWireCube(glm::mat4 vp, glm::vec3 center, glm::vec3 size, float time)
+void debug::drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
 {
-    requests.push_back(DebugDrawRequest{objCube, WireframeRasterState, glm::scale(size), time});
+    requests.push_back(
+        DebugDrawRequest{objCube, WireframeRasterState, glm::translate(center) * glm::scale(size), time, color});
 }
 
-void debug::drawSphere(glm::mat4 vp, glm::vec3 center, float radius, float time)
+void debug::drawSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
 {
-    requests.push_back(DebugDrawRequest{objSphere, FillRasterState, glm::scale(glm::vec3(radius)), time});
+    requests.push_back(DebugDrawRequest{objSphere, FillRasterState,
+                                        glm::translate(center) * glm::scale(glm::vec3(radius)), time, color});
 }
 
-void debug::drawWireSphere(glm::mat4 vp, glm::vec3 center, float radius, float time)
+void debug::drawWireSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
 {
-    requests.push_back(DebugDrawRequest{objSphere, WireframeRasterState, glm::scale(glm::vec3(radius)), time});
+    requests.push_back(DebugDrawRequest{objSphere, WireframeRasterState,
+                                        glm::translate(center) * glm::scale(glm::vec3(radius)), time, color});
 }
 
-void debug::flush(float deltaT)
+void debug::flush(glm::mat4 vp, double deltaT)
 {
     debugRenderDevice->setShaderPipeline(pipeline);
     auto sz = debugWindow->getFramebufferSize();
@@ -146,19 +163,21 @@ void debug::flush(float deltaT)
         mvpBindingPoint->bind(mvpBuffer);
 
         auto& mvp = *(glm::mat4*)mvpBuffer->map();
-        mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
-              glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f}) *
-              it->modelMatrix;
+        mvp = vp * it->modelMatrix;
         mvpBuffer->unmap();
 
+        colorBindingPoint->setConstant(it->color);
+
         debugRenderDevice->setRasterState(it->rasterState);
-        debugRenderDevice->drawTrianglesIndexed(0, 6);
-        
+        debugRenderDevice->drawTrianglesIndexed(0, it->obj.numIndices);
+
         it->timeLeft -= deltaT;
 
         auto current = it++;
-        if (it->timeLeft <= 0) {
+        if (current->timeLeft <= 0)
+        {
             requests.erase(current);
         }
     }
+    debugRenderDevice->setRasterState(nullptr);
 }
