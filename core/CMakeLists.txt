@@ -46,6 +46,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/memory/buffer_stream.hpp"
     
     "include/cubos/memory/stream.hpp"
+    "include/cubos/memory/serialization_map.hpp"
     "include/cubos/memory/serializer.hpp"
     "include/cubos/memory/deserializer.hpp"
 
