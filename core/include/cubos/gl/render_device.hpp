@@ -824,31 +824,31 @@ namespace cubos::gl
             /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done.
             virtual void bind(gl::ConstantBuffer cb) = 0;
 
-            /// Sets the value of the uniform tied to the binding point to the provided vec3 value.
+            /// Sets the value of the uniform tied to the binding point to the provided vec2 value.
             virtual void setConstant(glm::vec2 val) = 0;
 
             /// Sets the value of the uniform tied to the binding point to the provided vec3 value.
             virtual void setConstant(glm::vec3 val) = 0;
 
-            /// Sets the value of the uniform tied to the binding point to the provided vec3 value.
+            /// Sets the value of the uniform tied to the binding point to the provided vec4 value.
             virtual void setConstant(glm::vec4 val) = 0;
 
-            /// Sets the value of the uniform tied to the binding point to the provided vec3 value.
+            /// Sets the value of the uniform tied to the binding point to the provided integer vec2 value.
             virtual void setConstant(glm::ivec2 val) = 0;
 
-            /// Sets the value of the uniform tied to the binding point to the provided vec3 value.
+            /// Sets the value of the uniform tied to the binding point to the provided integer vec3 value.
             virtual void setConstant(glm::ivec3 val) = 0;
 
-            /// Sets the value of the uniform tied to the binding point to the provided vec3 value.
+            /// Sets the value of the uniform tied to the binding point to the provided integer vec4 value.
             virtual void setConstant(glm::ivec4 val) = 0;
 
-            /// Sets the value of the uniform tied to the binding point to the provided vec3 value.
+            /// Sets the value of the uniform tied to the binding point to the provided unsigned integer vec2 value.
             virtual void setConstant(glm::uvec2 val) = 0;
 
-            /// Sets the value of the uniform tied to the binding point to the provided vec3 value.
+            /// Sets the value of the uniform tied to the binding point to the provided unsigned integer vec3 value.
             virtual void setConstant(glm::uvec3 val) = 0;
 
-            /// Sets the value of the uniform tied to the binding point to the provided vec3 value.
+            /// Sets the value of the uniform tied to the binding point to the provided unsigned integer vec4 value.
             virtual void setConstant(glm::uvec4 val) = 0;
 
             /// Sets the value of the uniform tied to the binding point to the provided float value.
@@ -857,7 +857,7 @@ namespace cubos::gl
             /// Sets the value of the uniform tied to the binding point to the provided int value.
             virtual void setConstant(int val) = 0;
 
-            /// Sets the value of the uniform tied to the binding point to the provided int value.
+            /// Sets the value of the uniform tied to the binding point to the provided unsigned int value.
             virtual void setConstant(unsigned int val) = 0;
 
             /// Gets the constant buffer structure of this binding point.
