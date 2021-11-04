@@ -858,17 +858,17 @@ public:
         glUniform4uiv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(float val)
+    virtual void setConstant(float val) override
     {
         glUniform1f(loc, val);
     }
 
-    virtual void setConstant(int val)
+    virtual void setConstant(int val) override
     {
         glUniform1i(loc, val);
     }
 
-    virtual void setConstant(unsigned int val)
+    virtual void setConstant(unsigned int val) override
     {
         glUniform1ui(loc, val);
     }
