@@ -5,6 +5,7 @@
 #include <mutex>
 
 #include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 #include <cubos/gl/render_device.hpp>
 
@@ -14,8 +15,10 @@ namespace cubos
     {
     public:
         static void init(gl::RenderDevice& renderDevice);
-        static void drawCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color = glm::vec3(1));
-        static void drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color = glm::vec3(1));
+        static void drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation = glm::quat(),
+                             glm::vec3 color = glm::vec3(1));
+        static void drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation = glm::quat(),
+                                 glm::vec3 color = glm::vec3(1));
         static void drawSphere(glm::vec3 center, float radius, float time, glm::vec3 color = glm::vec3(1));
         static void drawWireSphere(glm::vec3 center, float radius, float time, glm::vec3 color = glm::vec3(1));
         static void flush(glm::mat4 vp, double deltaT);

@@ -4,6 +4,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 using namespace cubos;
 using namespace cubos::gl;
@@ -405,19 +406,19 @@ void Debug::init(gl::RenderDevice& targetRenderDevice)
     wireframeRasterState = renderDevice->createRasterState(rsDesc);
 }
 
-void Debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
+void Debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation, glm::vec3 color)
 {
     debug_draw_mutex.lock();
-    requests.push_back(
-        DebugDrawRequest{objCube, fillRasterState, glm::translate(center) * glm::scale(size), time, color});
+    requests.push_back(DebugDrawRequest{
+        objCube, fillRasterState, glm::translate(center) * glm::toMat4(rotation) * glm::scale(size), time, color});
     debug_draw_mutex.unlock();
 }
 
-void Debug::drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
+void Debug::drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation, glm::vec3 color)
 {
     debug_draw_mutex.lock();
-    requests.push_back(
-        DebugDrawRequest{objCube, wireframeRasterState, glm::translate(center) * glm::scale(size), time, color});
+    requests.push_back(DebugDrawRequest{
+        objCube, wireframeRasterState, glm::translate(center) * glm::toMat4(rotation) * glm::scale(size), time, color});
     debug_draw_mutex.unlock();
 }
 
