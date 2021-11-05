@@ -1,7 +1,5 @@
 #include <cubos/debug_render.hpp>
 
-#include <cubos/gl/render_device.hpp>
-
 #include <list>
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -10,42 +8,23 @@
 using namespace cubos;
 using namespace cubos::gl;
 
-static RenderDevice* debugRenderDevice;
-static ConstantBuffer mvpBuffer;
-static ShaderBindingPoint mvpBindingPoint, colorBindingPoint;
-static ShaderPipeline pipeline;
-static io::Window* debugWindow;
+RenderDevice* Debug::renderDevice;
+ConstantBuffer Debug::mvpBuffer;
+ShaderBindingPoint Debug::mvpBindingPoint, Debug::colorBindingPoint;
+ShaderPipeline Debug::pipeline;
+RasterState Debug::fillRasterState, Debug::wireframeRasterState;
+Debug::DebugDrawObject Debug::objCube, Debug::objSphere;
+std::list<Debug::DebugDrawRequest> Debug::requests;
+std::mutex Debug::debug_draw_mutex;
 
-static RasterState FillRasterState, WireframeRasterState;
-
-struct DebugDrawObject
-{
-    VertexArray va;
-    IndexBuffer ib;
-    int numIndices;
-};
-
-static DebugDrawObject objCube, objSphere;
-
-struct DebugDrawRequest
-{
-    DebugDrawObject obj;
-    RasterState rasterState;
-    glm::mat4 modelMatrix;
-    double timeLeft;
-    glm::vec3 color;
-};
-
-static std::list<DebugDrawRequest> requests;
-
-static void initCube()
+void Debug::initCube()
 {
     float verts[] = {// front
                      -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f,
                      // back
                      -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f};
 
-    auto vb = debugRenderDevice->createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
+    auto vb = renderDevice->createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
 
     unsigned int indices[] = {// front
                               0, 1, 2, 2, 3, 0,
@@ -61,8 +40,7 @@ static void initCube()
                               3, 2, 6, 6, 7, 3};
 
     objCube.numIndices = sizeof(indices) / sizeof(unsigned int);
-    objCube.ib =
-        debugRenderDevice->createIndexBuffer(sizeof(indices), indices, gl::IndexFormat::UInt, gl::Usage::Static);
+    objCube.ib = renderDevice->createIndexBuffer(sizeof(indices), indices, gl::IndexFormat::UInt, gl::Usage::Static);
 
     gl::VertexArrayDesc vaDesc;
     vaDesc.elementCount = 1;
@@ -74,10 +52,10 @@ static void initCube()
     vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
     vaDesc.buffers[0] = vb;
     vaDesc.shaderPipeline = pipeline;
-    objCube.va = debugRenderDevice->createVertexArray(vaDesc);
+    objCube.va = renderDevice->createVertexArray(vaDesc);
 }
 
-static void initSphere()
+void Debug::initSphere()
 {
     float verts[] = {0.0f,
                      -1.0f,
@@ -338,7 +316,7 @@ static void initSphere()
                      0.90096884965897f,
                      -0.18825510144234f};
 
-    auto vb = debugRenderDevice->createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
+    auto vb = renderDevice->createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
 
     unsigned int indices[] = {
         2,  16, 17, 3,  17, 18, 4,  18, 19, 5,  19, 20, 6,  20, 21, 7,  21, 22, 8,  22, 23, 9,  23, 24, 10, 24, 25, 11,
@@ -361,8 +339,7 @@ static void initSphere()
         63, 63, 78, 64, 64, 79, 65, 65, 80, 66, 66, 81, 67, 67, 82, 68, 68, 83, 69, 69, 84, 70, 70, 85, 71, 71, 72, 58};
 
     objSphere.numIndices = sizeof(indices) / sizeof(unsigned int);
-    objSphere.ib =
-        debugRenderDevice->createIndexBuffer(sizeof(indices), indices, gl::IndexFormat::UInt, gl::Usage::Static);
+    objSphere.ib = renderDevice->createIndexBuffer(sizeof(indices), indices, gl::IndexFormat::UInt, gl::Usage::Static);
 
     gl::VertexArrayDesc vaDesc;
     vaDesc.elementCount = 1;
@@ -374,15 +351,14 @@ static void initSphere()
     vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
     vaDesc.buffers[0] = vb;
     vaDesc.shaderPipeline = pipeline;
-    objSphere.va = debugRenderDevice->createVertexArray(vaDesc);
+    objSphere.va = renderDevice->createVertexArray(vaDesc);
 }
 
-void Debug::init(io::Window* window)
+void Debug::init(gl::RenderDevice& targetRenderDevice)
 {
-    debugWindow = window;
-    debugRenderDevice = &debugWindow->getRenderDevice();
+    renderDevice = &targetRenderDevice;
 
-    auto vs = debugRenderDevice->createShaderStage(gl::Stage::Vertex, R"(
+    auto vs = renderDevice->createShaderStage(gl::Stage::Vertex, R"(
             #version 330 core
 
             in vec3 position;
@@ -398,7 +374,7 @@ void Debug::init(io::Window* window)
             }
         )");
 
-    auto ps = debugRenderDevice->createShaderStage(gl::Stage::Pixel, R"(
+    auto ps = renderDevice->createShaderStage(gl::Stage::Pixel, R"(
             #version 330 core
 
             out vec4 color;
@@ -411,56 +387,65 @@ void Debug::init(io::Window* window)
             }
         )");
 
-    pipeline = debugRenderDevice->createShaderPipeline(vs, ps);
+    pipeline = renderDevice->createShaderPipeline(vs, ps);
 
     initCube();
     initSphere();
 
-    mvpBuffer = debugRenderDevice->createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+    mvpBuffer = renderDevice->createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
     mvpBindingPoint = pipeline->getBindingPoint("MVP");
     colorBindingPoint = pipeline->getBindingPoint("objColor");
 
     RasterStateDesc rsDesc;
 
     rsDesc.rasterMode = RasterMode::Fill;
-    FillRasterState = debugRenderDevice->createRasterState(rsDesc);
+    fillRasterState = renderDevice->createRasterState(rsDesc);
 
     rsDesc.rasterMode = RasterMode::Wireframe;
-    WireframeRasterState = debugRenderDevice->createRasterState(rsDesc);
+    wireframeRasterState = renderDevice->createRasterState(rsDesc);
 }
 
 void Debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
 {
+    debug_draw_mutex.lock();
     requests.push_back(
-        DebugDrawRequest{objCube, FillRasterState, glm::translate(center) * glm::scale(size), time, color});
+        DebugDrawRequest{objCube, fillRasterState, glm::translate(center) * glm::scale(size), time, color});
+    debug_draw_mutex.unlock();
 }
 
 void Debug::drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::vec3 color)
 {
+    debug_draw_mutex.lock();
     requests.push_back(
-        DebugDrawRequest{objCube, WireframeRasterState, glm::translate(center) * glm::scale(size), time, color});
+        DebugDrawRequest{objCube, wireframeRasterState, glm::translate(center) * glm::scale(size), time, color});
+    debug_draw_mutex.unlock();
 }
 
 void Debug::drawSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
 {
-    requests.push_back(DebugDrawRequest{objSphere, FillRasterState,
+    debug_draw_mutex.lock();
+    requests.push_back(DebugDrawRequest{objSphere, fillRasterState,
                                         glm::translate(center) * glm::scale(glm::vec3(radius)), time, color});
+    debug_draw_mutex.unlock();
 }
 
 void Debug::drawWireSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
 {
-    requests.push_back(DebugDrawRequest{objSphere, WireframeRasterState,
+    debug_draw_mutex.lock();
+    requests.push_back(DebugDrawRequest{objSphere, wireframeRasterState,
                                         glm::translate(center) * glm::scale(glm::vec3(radius)), time, color});
+    debug_draw_mutex.unlock();
 }
 
 void Debug::flush(glm::mat4 vp, double deltaT)
 {
-    debugRenderDevice->setShaderPipeline(pipeline);
-    auto sz = debugWindow->getFramebufferSize();
+    renderDevice->setShaderPipeline(pipeline);
+
+    debug_draw_mutex.lock();
     for (auto it = requests.begin(); it != requests.end();)
     {
-        debugRenderDevice->setVertexArray(it->obj.va);
-        debugRenderDevice->setIndexBuffer(it->obj.ib);
+        renderDevice->setVertexArray(it->obj.va);
+        renderDevice->setIndexBuffer(it->obj.ib);
         mvpBindingPoint->bind(mvpBuffer);
 
         auto& mvp = *(glm::mat4*)mvpBuffer->map();
@@ -469,8 +454,8 @@ void Debug::flush(glm::mat4 vp, double deltaT)
 
         colorBindingPoint->setConstant(it->color);
 
-        debugRenderDevice->setRasterState(it->rasterState);
-        debugRenderDevice->drawTrianglesIndexed(0, it->obj.numIndices);
+        renderDevice->setRasterState(it->rasterState);
+        renderDevice->drawTrianglesIndexed(0, it->obj.numIndices);
 
         it->timeLeft -= deltaT;
 
@@ -480,5 +465,6 @@ void Debug::flush(glm::mat4 vp, double deltaT)
             requests.erase(current);
         }
     }
-    debugRenderDevice->setRasterState(nullptr);
+    debug_draw_mutex.unlock();
+    renderDevice->setRasterState(nullptr);
 }

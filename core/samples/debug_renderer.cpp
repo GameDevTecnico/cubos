@@ -19,7 +19,7 @@ int main(void)
     initializeLogger();
     auto* window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
-    Debug::init(window);
+    Debug::init(renderDevice);
 
     window->onKeyDown.registerCallback(debugTest);
 
