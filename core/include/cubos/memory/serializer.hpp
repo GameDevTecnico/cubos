@@ -9,6 +9,11 @@
 #include <unordered_map>
 #include <concepts>
 
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/gtc/quaternion.hpp>
+
 namespace cubos::memory
 {
     class Serializer;
@@ -95,6 +100,30 @@ namespace cubos::memory
         /// @param name The name of the value (optional).
         virtual void write(const char* str, const char* name = nullptr) = 0;
 
+        /// Serializes a 2D vector.
+        /// @tparam T The type of the vector.
+        /// @param vec The vector to serialize.
+        /// @param name The name of the value (optional).
+        template <typename T> void write(const glm::tvec2<T>& vec, const char* name = nullptr);
+
+        /// Serializes a 3D vector.
+        /// @tparam T The type of the vector.
+        /// @param vec The vector to serialize.
+        /// @param name The name of the value (optional).
+        template <typename T> void write(const glm::tvec3<T>& vec, const char* name = nullptr);
+
+        /// Serializes a 4D vector.
+        /// @tparam T The type of the vector.
+        /// @param vec The vector to serialize.
+        /// @param name The name of the value (optional).
+        template <typename T> void write(const glm::tvec4<T>& vec, const char* name = nullptr);
+
+        /// Serializes a quaternion.
+        /// @tparam T The type of the quaternion.
+        /// @param quat The quaternion to serialize.
+        /// @param name The name of the value (optional).
+        template <typename T> void write(const glm::tquat<T>& quat, const char* name = nullptr);
+
         /// Serializes a object.
         /// @tparam T The type of the object.
         /// @param obj The object to serialize.
@@ -153,7 +182,7 @@ namespace cubos::memory
         /// @param name The name of the map (optional).
         template <typename K, typename V> void write(const std::unordered_map<K, V>& dic, const char* name = nullptr);
 
-        /// Serializes a std::vector.
+        /// Serializes a vector.
         /// @tparam T The type of the vector.
         /// @tparam R The reference type.
         /// @tparam I The serialized identifier type.
@@ -214,6 +243,43 @@ namespace cubos::memory
     };
 
     // Implementation
+
+    template <typename T> void Serializer::write(const glm::tvec2<T>& vec, const char* value)
+    {
+        this->beginObject(value);
+        this->write(vec.x, "x");
+        this->write(vec.y, "y");
+        this->endObject();
+    }
+
+    template <typename T> void Serializer::write(const glm::tvec3<T>& vec, const char* value)
+    {
+        this->beginObject(value);
+        this->write(vec.x, "x");
+        this->write(vec.y, "y");
+        this->write(vec.z, "z");
+        this->endObject();
+    }
+
+    template <typename T> void Serializer::write(const glm::tvec4<T>& vec, const char* value)
+    {
+        this->beginObject(value);
+        this->write(vec.x, "x");
+        this->write(vec.y, "y");
+        this->write(vec.z, "z");
+        this->write(vec.w, "w");
+        this->endObject();
+    }
+
+    template <typename T> void Serializer::write(const glm::tquat<T>& quat, const char* value)
+    {
+        this->beginObject(value);
+        this->write(quat.x, "x");
+        this->write(quat.y, "y");
+        this->write(quat.z, "z");
+        this->write(quat.w, "w");
+        this->endObject();
+    }
 
     template <typename T> requires TriviallySerializable<T> void Serializer::write(const T& obj, const char* name)
     {
