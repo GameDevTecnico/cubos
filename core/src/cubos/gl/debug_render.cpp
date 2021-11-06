@@ -1,4 +1,4 @@
-#include <cubos/debug_render.hpp>
+#include <cubos/gl/debug_render.hpp>
 
 #include <list>
 

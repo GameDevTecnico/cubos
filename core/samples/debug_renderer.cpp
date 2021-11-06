@@ -1,8 +1,9 @@
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <cubos/log.hpp>
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
-#include <cubos/debug_render.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include <cubos/gl/debug_render.hpp>
 
 using namespace cubos;
 
@@ -27,7 +28,7 @@ int main(void)
 
     while (!window->shouldClose())
     {
-        float t = window->getTime();
+        double t = window->getTime();
         if (prevT < 0)
             prevT = t;
         double deltaT = t - prevT;
