@@ -16,7 +16,7 @@ ShaderPipeline Debug::pipeline;
 RasterState Debug::fillRasterState, Debug::wireframeRasterState;
 Debug::DebugDrawObject Debug::objCube, Debug::objSphere;
 std::list<Debug::DebugDrawRequest> Debug::requests;
-std::mutex Debug::debug_draw_mutex;
+std::mutex Debug::debugDrawMutex;
 
 void Debug::initCube()
 {
@@ -408,41 +408,41 @@ void Debug::init(gl::RenderDevice& targetRenderDevice)
 
 void Debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation, glm::vec3 color)
 {
-    debug_draw_mutex.lock();
+    debugDrawMutex.lock();
     requests.push_back(DebugDrawRequest{
         objCube, fillRasterState, glm::translate(center) * glm::toMat4(rotation) * glm::scale(size), time, color});
-    debug_draw_mutex.unlock();
+    debugDrawMutex.unlock();
 }
 
 void Debug::drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation, glm::vec3 color)
 {
-    debug_draw_mutex.lock();
+    debugDrawMutex.lock();
     requests.push_back(DebugDrawRequest{
         objCube, wireframeRasterState, glm::translate(center) * glm::toMat4(rotation) * glm::scale(size), time, color});
-    debug_draw_mutex.unlock();
+    debugDrawMutex.unlock();
 }
 
 void Debug::drawSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
 {
-    debug_draw_mutex.lock();
+    debugDrawMutex.lock();
     requests.push_back(DebugDrawRequest{objSphere, fillRasterState,
                                         glm::translate(center) * glm::scale(glm::vec3(radius)), time, color});
-    debug_draw_mutex.unlock();
+    debugDrawMutex.unlock();
 }
 
 void Debug::drawWireSphere(glm::vec3 center, float radius, float time, glm::vec3 color)
 {
-    debug_draw_mutex.lock();
+    debugDrawMutex.lock();
     requests.push_back(DebugDrawRequest{objSphere, wireframeRasterState,
                                         glm::translate(center) * glm::scale(glm::vec3(radius)), time, color});
-    debug_draw_mutex.unlock();
+    debugDrawMutex.unlock();
 }
 
 void Debug::flush(glm::mat4 vp, double deltaT)
 {
     renderDevice->setShaderPipeline(pipeline);
 
-    debug_draw_mutex.lock();
+    debugDrawMutex.lock();
     for (auto it = requests.begin(); it != requests.end();)
     {
         renderDevice->setVertexArray(it->obj.va);
@@ -466,6 +466,6 @@ void Debug::flush(glm::mat4 vp, double deltaT)
             requests.erase(current);
         }
     }
-    debug_draw_mutex.unlock();
+    debugDrawMutex.unlock();
     renderDevice->setRasterState(nullptr);
 }
