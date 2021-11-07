@@ -4,6 +4,7 @@
 # Set sample source files
 set(CORE_SAMPLES_SOURCES
     "render_device.cpp"
+    "serialization.cpp"
 )
 
 # For each sample file, create a target named after the file but without the
