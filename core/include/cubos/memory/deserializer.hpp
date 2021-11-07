@@ -2,7 +2,6 @@
 #define CUBOS_MEMORY_DESERIALIZER_HPP
 
 #include <cubos/memory/stream.hpp>
-#include <cubos/memory/serialization_map.hpp>
 #include <cubos/log.hpp>
 
 #include <string>
@@ -28,12 +27,11 @@ namespace cubos::memory
         ->std::same_as<void>;
     };
 
-    /// Concept for deserializable objects which require a serialization map.
-    template <typename T, typename R, typename I>
-    concept MapDeserializable = requires(T obj, Deserializer& s, SerializationMap<R, I>& map)
+    /// Concept for deserializable objects which require a context to be deserialized.
+    template <typename T, typename TCtx> concept ContextDeserializable = requires(T obj, Deserializer& s, TCtx ctx)
     {
         {
-            obj.deserialize(s, map)
+            obj.deserialize(s, ctx)
         }
         ->std::same_as<void>;
     };
@@ -86,6 +84,10 @@ namespace cubos::memory
         /// @param value The value to deserialize.
         virtual void read(double& value) = 0;
 
+        /// Deserializes a boolean.
+        /// @param value The value to deserialize.
+        virtual void read(bool& value) = 0;
+
         /// Deserializes a string.
         /// @param value The value to deserialize.
         virtual void read(std::string& value) = 0;
@@ -122,21 +124,17 @@ namespace cubos::memory
 
         /// Deserializes a object.
         /// @tparam T The type of the object.
-        /// @tparam R The reference type.
-        /// @tparam I The serialized identifier type.
+        /// @tparam TCtx The type of the context.
         /// @param obj The object to deserialize.
-        /// @param map The serialization map.
-        template <typename T, typename R, typename I>
-        requires TriviallyDeserializable<T> void read(T& obj, SerializationMap<R, I>& map);
+        /// @param ctx The context required to deserialize.
+        template <typename T, typename TCtx> requires TriviallyDeserializable<T> void read(T& obj, TCtx ctx);
 
         /// Deserializes a object.
         /// @tparam T The type of the object.
-        /// @tparam R The reference type.
-        /// @tparam I The serialized identifier type.
+        /// @tparam TCtx The type of the context.
         /// @param obj The object to deserialize.
-        /// @param map The serialization map.
-        template <typename T, typename R, typename I>
-        requires MapDeserializable<T, R, I> void read(T& obj, SerializationMap<R, I>& map);
+        /// @param ctx The context required to deserialize.
+        template <typename T, typename TCtx> requires ContextDeserializable<T, TCtx> void read(T& obj, TCtx ctx);
 
         /// Deserializes a vector.
         /// @tparam T The type of the vector.
@@ -158,31 +156,27 @@ namespace cubos::memory
 
         /// Deserializes a vector.
         /// @tparam T The type of the vector.
-        /// @tparam R The reference type.
-        /// @tparam I The serialized identifier type.
+        /// @tparam TCtx The type of the context.
         /// @param vec The vector to deserialize.
-        /// @param map The serialization map.
-        template <typename T, typename R, typename I> void read(std::vector<T>& vec, SerializationMap<R, I>& map);
+        /// @param ctx The context required to deserialize.
+        template <typename T, typename TCtx> void read(std::vector<T>& vec, TCtx ctx);
 
         /// Deserializes an array.
         /// @tparam T The type of the array.
-        /// @tparam R The reference type.
-        /// @tparam I The serialized identifier type.
+        /// @tparam TCtx The type of the context.
         /// @param ptr The array to deserialize.
         /// @param length The maximum length of the array.
-        /// @param map The serialization map.
+        /// @param ctx The context required to deserialize.
         /// @return The number of elements read.
-        template <typename T, typename R, typename I> size_t read(T* ptr, size_t length, SerializationMap<R, I>& map);
+        template <typename T, typename TCtx> size_t read(T* ptr, size_t length, TCtx ctx);
 
         /// Deserializes a unordered map.
         /// @tparam K The key type.
         /// @tparam V The value type.
-        /// @tparam R The reference type.
-        /// @tparam I The serialized identifier type.
+        /// @tparam TCtx The type of the context.
         /// @param dic The map to deserialize.
-        /// @param map The serialization map.
-        template <typename K, typename V, typename R, typename I>
-        void read(std::unordered_map<K, V>& dic, SerializationMap<R, I>& map);
+        /// @param ctx The context required to deserialize.
+        template <typename K, typename V, typename TCtx> void read(std::unordered_map<K, V>& dic, TCtx ctx);
 
     protected:
         /// Indicates that a object is currently being deserialized.
@@ -258,17 +252,16 @@ namespace cubos::memory
         this->endObject();
     }
 
-    template <typename T, typename R, typename I>
-    requires TriviallyDeserializable<T> void Deserializer::read(T& obj, SerializationMap<R, I>& map)
+    template <typename T, typename TCtx> requires TriviallyDeserializable<T> void Deserializer::read(T& obj, TCtx)
     {
         this->read(obj);
     }
 
-    template <typename T, typename R, typename I>
-    requires MapDeserializable<T, R, I> void Deserializer::read(T& obj, SerializationMap<R, I>& map)
+    template <typename T, typename TCtx>
+    requires ContextDeserializable<T, TCtx> void Deserializer::read(T& obj, TCtx ctx)
     {
         this->beginObject();
-        obj.deserialize(*this, map);
+        obj.deserialize(*this, ctx);
         this->endObject();
     }
 
@@ -310,42 +303,39 @@ namespace cubos::memory
         this->endDictionary();
     }
 
-    template <typename T, typename R, typename I>
-    void Deserializer::read(std::vector<T>& vec, SerializationMap<R, I>& map)
+    template <typename T, typename TCtx> void Deserializer::read(std::vector<T>& vec, TCtx ctx)
     {
         size_t length = this->beginArray();
         vec.resize(length);
         for (size_t i = 0; i < length; ++i)
-            this->read(vec[i], map);
+            this->read(vec[i], ctx);
         this->endArray();
     }
 
-    template <typename T, typename R, typename I>
-    size_t Deserializer::read(T* ptr, size_t length, SerializationMap<R, I>& map)
+    template <typename T, typename TCtx> size_t Deserializer::read(T* ptr, size_t length, TCtx ctx)
     {
         size_t l = this->beginArray();
         if (length > l)
             length = l;
         else
-            logWarning("Deserializer::read(T*, size_t, SerializationMap<R, I>) couldn't read the entire array because "
+            logWarning("Deserializer::read(T*, size_t, TCtx) couldn't read the entire array because "
                        "the array passed was too small ({} < {})",
                        length, l);
         for (size_t i = 0; i < length; ++i)
-            this->read(ptr[i], map);
+            this->read(ptr[i], ctx);
         this->endArray();
         return length;
     }
 
-    template <typename K, typename V, typename R, typename I>
-    void Deserializer::read(std::unordered_map<K, V>& dic, SerializationMap<R, I>& map)
+    template <typename K, typename V, typename TCtx> void Deserializer::read(std::unordered_map<K, V>& dic, TCtx ctx)
     {
         size_t length = this->beginDictionary();
         for (size_t i = 0; i < length; ++i)
         {
             K key;
             V value;
-            this->read(key, map);
-            this->read(value, map);
+            this->read(key, ctx);
+            this->read(value, ctx);
             dic[key] = value;
         }
         this->endDictionary();

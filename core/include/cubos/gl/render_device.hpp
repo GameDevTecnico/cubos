@@ -413,7 +413,7 @@ namespace cubos::gl
     /// Vertex element description.
     struct VertexElement
     {
-        const char* name = nullptr; ///< Element name.
+        const char* name; ///< Element name.
         Type type = Type::Float;    ///< Element type.
         size_t size;                ///< Number of components in the vertex element (1, 2, 3 or 4).
 

@@ -42,7 +42,14 @@ namespace cubos::memory
         /// Clears the map.
         void clear();
 
+        /// Gets the number of mapped references.
+        /// @returns Number of mapped references.
+        size_t size() const;
+
     private:
+        SerializationMap(const SerializationMap&) = delete;
+        SerializationMap(SerializationMap&&) = delete;
+
         std::unordered_map<R, I> ref_to_id; ///< Map of references to serialized IDs.
         std::unordered_map<I, R> id_to_ref; ///< Map of serialized IDs to references.
     };
@@ -81,6 +88,10 @@ namespace cubos::memory
         this->id_to_ref.clear();
     }
 
+    template <typename R, typename I> size_t SerializationMap<R, I>::size() const
+    {
+        return this->ref_to_id.size();
+    }
 } // namespace cubos::memory
 
 #endif // CUBOS_MEMORY_SERIALIZATION_MAP_HPP
