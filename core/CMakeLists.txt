@@ -38,6 +38,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/io/window.hpp"
 
     "include/cubos/gl/render_device.hpp"
+
+    "include/cubos/input/input_manager.hpp"
 )
 
 
