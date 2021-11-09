@@ -1,5 +1,5 @@
-#ifndef CUBOS_DEBUG_RENDER_HPP
-#define CUBOS_DEBUG_RENDER_HPP
+#ifndef CUBOS_GL_DEBUG_HPP
+#define CUBOS_GL_DEBUG_HPP
 
 #include <list>
 #include <mutex>
@@ -57,12 +57,17 @@ namespace cubos::gl
         /// @param deltaT Time that has passed since the last call to flush.
         static void flush(glm::mat4 vp, double deltaT);
 
+        /// Clean up the debug rendering system's resources.
+        static void terminate();
+
     private:
         struct DebugDrawObject
         {
             gl::VertexArray va = nullptr;
             gl::IndexBuffer ib = nullptr;
             unsigned int numIndices;
+
+            void clear();
         };
 
         struct DebugDrawRequest
@@ -91,4 +96,4 @@ namespace cubos::gl
     };
 } // namespace cubos::gl
 
-#endif // CUBOS_DEBUG_RENDER_HPP
+#endif // CUBOS_GL_DEBUG_HPP

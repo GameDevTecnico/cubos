@@ -46,6 +46,7 @@ int main(void)
         window->pollEvents();
     }
 
+    gl::Debug::terminate();
     delete window;
     return 0;
 }

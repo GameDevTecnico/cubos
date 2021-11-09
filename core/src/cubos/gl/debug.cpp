@@ -21,6 +21,12 @@ Debug::DebugDrawObject Debug::objCube, Debug::objSphere;
 std::list<Debug::DebugDrawRequest> Debug::requests;
 std::mutex Debug::debugDrawMutex;
 
+void Debug::DebugDrawObject::clear()
+{
+    va = nullptr;
+    ib = nullptr;
+}
+
 void Debug::initCube()
 {
     float verts[] = {// front
@@ -68,13 +74,13 @@ void Debug::initSphere()
 
     float x, y, z, xz;
 
-    float sectorStep = 2 * M_PI / sectorCount;
-    float stackStep = M_PI / stackCount;
+    float sectorStep = (float)(2 * M_PI / sectorCount);
+    float stackStep = (float)(M_PI / stackCount);
     float sectorAngle, stackAngle;
 
     for (int i = 0; i <= stackCount; ++i)
     {
-        stackAngle = M_PI / 2 - i * stackStep;
+        stackAngle = (float)(M_PI / 2 - i * stackStep);
         xz = cosf(stackAngle);
         y = sinf(stackAngle);
 
@@ -117,7 +123,7 @@ void Debug::initSphere()
         }
     }
 
-    objSphere.numIndices = indices.size();
+    objSphere.numIndices = (unsigned int)indices.size();
     objSphere.ib = renderDevice->createIndexBuffer(indices.size() * sizeof(unsigned int), &indices[0],
                                                    gl::IndexFormat::UInt, gl::Usage::Static);
 
@@ -244,4 +250,15 @@ void Debug::flush(glm::mat4 vp, double deltaT)
             requests.erase(current);
     }
     debugDrawMutex.unlock();
+}
+
+void Debug::terminate()
+{
+    mvpBuffer = nullptr;
+    mvpBindingPoint = colorBindingPoint = nullptr;
+    pipeline = nullptr;
+    fillRasterState = wireframeRasterState = nullptr;
+    objCube.clear();
+    objSphere.clear();
+    requests.clear();
 }
