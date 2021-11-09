@@ -1,5 +1,17 @@
 var NAVTREEINDEX1 =
 {
+"structcubos_1_1gl_1_1Texture3DDesc.html":[1,0,0,0,12],
+"structcubos_1_1gl_1_1Texture3DDesc.html#a0093f1b55bf54a60c9346e005a9517a5":[1,0,0,0,12,6],
+"structcubos_1_1gl_1_1Texture3DDesc.html#a2de3d550d12698314a911263e802d715":[1,0,0,0,12,2],
+"structcubos_1_1gl_1_1Texture3DDesc.html#a3694e541d969f3b72dbaad4871961051":[1,0,0,0,12,0],
+"structcubos_1_1gl_1_1Texture3DDesc.html#a5893d1224ff3231451e3dfb8d7e4d5fe":[1,0,0,0,12,5],
+"structcubos_1_1gl_1_1Texture3DDesc.html#ac86a3e95e3d2ff5355955a0e84d80ac0":[1,0,0,0,12,3],
+"structcubos_1_1gl_1_1Texture3DDesc.html#acee908ac2c2c5ae1743117ddda6fde3a":[1,0,0,0,12,1],
+"structcubos_1_1gl_1_1Texture3DDesc.html#ad6264f11abf42c4f653a01af2ad25632":[1,0,0,0,12,4],
+"structcubos_1_1gl_1_1VertexArrayDesc.html":[1,0,0,0,13],
+"structcubos_1_1gl_1_1VertexArrayDesc.html#a2e26a0a188e3e07a5383e976af083232":[1,0,0,0,13,3],
+"structcubos_1_1gl_1_1VertexArrayDesc.html#a6cf421ed9df0b4a55b948de0fac63885":[1,0,0,0,13,1],
+"structcubos_1_1gl_1_1VertexArrayDesc.html#a7b1aa80d310e1a953bd1407d549667a5":[1,0,0,0,13,2],
 "structcubos_1_1gl_1_1VertexArrayDesc.html#afc209c6163743e02df71eb9a672ee6bc":[1,0,0,0,13,0],
 "structcubos_1_1gl_1_1VertexElement.html":[1,0,0,0,14],
 "structcubos_1_1gl_1_1VertexElement.html#a386e743bbb2cc960b9dfd66035eedaff":[1,0,0,0,14,1],
