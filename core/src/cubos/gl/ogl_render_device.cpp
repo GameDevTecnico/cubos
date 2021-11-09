@@ -813,6 +813,66 @@ public:
             glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
     }
 
+    virtual void setConstant(glm::vec2 val) override
+    {
+        glUniform2fv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(glm::vec3 val) override
+    {
+        glUniform3fv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(glm::vec4 val) override
+    {
+        glUniform4fv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(glm::ivec2 val) override
+    {
+        glUniform2iv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(glm::ivec3 val) override
+    {
+        glUniform3iv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(glm::ivec4 val) override
+    {
+        glUniform4iv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(glm::uvec2 val) override
+    {
+        glUniform2uiv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(glm::uvec3 val) override
+    {
+        glUniform3uiv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(glm::uvec4 val) override
+    {
+        glUniform4uiv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(float val) override
+    {
+        glUniform1f(loc, val);
+    }
+
+    virtual void setConstant(int val) override
+    {
+        glUniform1i(loc, val);
+    }
+
+    virtual void setConstant(unsigned int val) override
+    {
+        glUniform1ui(loc, val);
+    }
+
     virtual bool queryConstantBufferStructure(ConstantBufferStructure* structure) override
     {
         return false; // TODO
