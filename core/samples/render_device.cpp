@@ -127,9 +127,10 @@ int main(void)
             {
                 auto& mvp = *(glm::mat4*)cb->map();
                 mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
-                    glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f}) *
-                    glm::translate(glm::mat4(1.0f), glm::vec3{-2.0f, 0.0f, 0.0f}) *
-                    glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
+                      glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f},
+                                  glm::vec3{0.0f, 1.0f, 0.0f}) *
+                      glm::translate(glm::mat4(1.0f), glm::vec3{-2.0f, 0.0f, 0.0f}) *
+                      glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
                 cb->unmap();
             }
 
@@ -139,9 +140,10 @@ int main(void)
             {
                 auto& mvp = *(glm::mat4*)cb->map();
                 mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
-                    glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f}) *
-                    glm::translate(glm::mat4(1.0f), glm::vec3{2.0f, 0.0f, 0.0f}) *
-                    glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
+                      glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f},
+                                  glm::vec3{0.0f, 1.0f, 0.0f}) *
+                      glm::translate(glm::mat4(1.0f), glm::vec3{2.0f, 0.0f, 0.0f}) *
+                      glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
                 cb->unmap();
             }
 
