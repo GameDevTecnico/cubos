@@ -60,7 +60,7 @@ namespace cubos
         {
             gl::VertexArray va = nullptr;
             gl::IndexBuffer ib = nullptr;
-            int numIndices;
+            unsigned int numIndices;
         };
 
         struct DebugDrawRequest

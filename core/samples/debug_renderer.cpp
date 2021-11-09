@@ -24,7 +24,7 @@ int main(void)
 
     window->onKeyDown.registerCallback(debugTest);
 
-    float prevT = -1;
+    double prevT = -1;
 
     while (!window->shouldClose())
     {
@@ -38,7 +38,8 @@ int main(void)
         auto sz = window->getFramebufferSize();
 
         auto vp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
-                  glm::lookAt(glm::vec3{4.0f, 3.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f}, glm::vec3{0.0f, 1.0f, 0.0f});
+                  glm::lookAt(glm::vec3{3 * sinf((float)t), 3, 3 * cosf((float)t)}, glm::vec3{0.0f, 0.0f, 0.0f},
+                              glm::vec3{0.0f, 1.0f, 0.0f});
 
         Debug::flush(vp, deltaT);
         window->swapBuffers();
