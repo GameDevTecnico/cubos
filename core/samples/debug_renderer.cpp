@@ -3,16 +3,16 @@
 #include <cubos/log.hpp>
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
-#include <cubos/gl/debug_render.hpp>
+#include <cubos/gl/debug.hpp>
 
 using namespace cubos;
 
 void debugTest(io::Key key)
 {
     if (key == io::Key::C)
-        Debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
+        gl::Debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
     else if (key == io::Key::S)
-        Debug::drawWireSphere(glm::vec3(0, 0, 0), 1, 1);
+        gl::Debug::drawWireSphere(glm::vec3(0, 0, 0), 1, 1);
 }
 
 int main(void)
@@ -20,7 +20,7 @@ int main(void)
     initializeLogger();
     auto* window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
-    Debug::init(renderDevice);
+    gl::Debug::init(renderDevice);
 
     window->onKeyDown.registerCallback(debugTest);
 
@@ -41,7 +41,7 @@ int main(void)
                   glm::lookAt(glm::vec3{3 * sinf((float)t), 3, 3 * cosf((float)t)}, glm::vec3{0.0f, 0.0f, 0.0f},
                               glm::vec3{0.0f, 1.0f, 0.0f});
 
-        Debug::flush(vp, deltaT);
+        gl::Debug::flush(vp, deltaT);
         window->swapBuffers();
         window->pollEvents();
     }

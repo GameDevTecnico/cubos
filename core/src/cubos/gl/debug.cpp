@@ -1,4 +1,4 @@
-#include <cubos/gl/debug_render.hpp>
+#include <cubos/gl/debug.hpp>
 
 #include <list>
 #include <vector>
@@ -241,10 +241,7 @@ void Debug::flush(glm::mat4 vp, double deltaT)
 
         auto current = it++;
         if (current->timeLeft <= 0)
-        {
             requests.erase(current);
-        }
     }
     debugDrawMutex.unlock();
-    renderDevice->setRasterState(nullptr);
 }

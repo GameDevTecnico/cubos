@@ -9,8 +9,10 @@
 
 #include <cubos/gl/render_device.hpp>
 
-namespace cubos
+namespace cubos::gl
 {
+
+    /// This class includes static methods to draw basic objects on screen for debugging purposes.
     class Debug
     {
     public:
@@ -87,6 +89,6 @@ namespace cubos
 
         static std::mutex debugDrawMutex;
     };
-} // namespace cubos
+} // namespace cubos::gl
 
 #endif // CUBOS_DEBUG_RENDER_HPP
