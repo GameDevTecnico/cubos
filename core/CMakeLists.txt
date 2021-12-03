@@ -27,6 +27,10 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/io/glfw_window.hpp"
     "src/cubos/io/glfw_window.cpp"
 
+    "src/cubos/input/binding.hpp"
+    "src/cubos/input/binding.cpp"
+    "src/cubos/input/input_manager.cpp"
+
     "src/cubos/gl/ogl_render_device.hpp"
     "src/cubos/gl/ogl_render_device.cpp"
 )
