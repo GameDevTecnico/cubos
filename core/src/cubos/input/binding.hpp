@@ -11,10 +11,8 @@ namespace cubos::input
     {
     public:
         Binding(std::shared_ptr<ActionMapping> mapping);
-        virtual void Register();
-        virtual int GetValue() = 0;
 
-    private:
+    protected:
         std::shared_ptr<ActionMapping> mapping;
     };
 
@@ -23,20 +21,15 @@ namespace cubos::input
     public:
         ButtonBinding(std::shared_ptr<ActionMapping> mapping, cubos::io::Key key);
         ButtonBinding(std::shared_ptr<ActionMapping> mapping, cubos::io::MouseButton mouseButton);
-        int GetValue()
-        {
-            return 1;
-        }
+        void handleButtonPress();
     };
 
     class AxisBinding : public Binding
     {
     public:
         AxisBinding(std::shared_ptr<ActionMapping> mapping, cubos::io::Key keyPos, cubos::io::Key keyNeg);
-        int GetValue()
-        {
-            return 1;
-        }
+        void handlePosKey();
+        void handleNegKey();
     };
 
 } // namespace cubos::input

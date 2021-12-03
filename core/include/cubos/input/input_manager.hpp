@@ -51,15 +51,19 @@ namespace cubos::input
         static void Init(cubos::io::Window* window);
         static std::shared_ptr<ActionMapping> CreateActionMapping(const std::string& name);
         static std::shared_ptr<ActionMapping> GetActionMapping(const std::string& name);
-        static void RegisterKeyBinding(cubos::io::Key key, std::shared_ptr<Binding> binding);
-        static void RegisterMouseBinding(cubos::io::MouseButton mouse, std::shared_ptr<Binding> binding);
+        static void RegisterKeyBinding(cubos::io::Key key, std::function<void(void)> callback);
+        static void RegisterMouseBinding(cubos::io::MouseButton mouse, std::function<void(void)> callback);
 
     private:
         static cubos::io::Window* window;
         static std::map<std::string, std::shared_ptr<ActionMapping>> mappings;
-        static std::map<cubos::io::Key, std::vector<std::shared_ptr<Binding>>> keyBindings;
-        static std::map<cubos::io::MouseButton, std::vector<std::shared_ptr<Binding>>> mouseButtonsBindings;
+        static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyBindings;
+        static std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> mouseButtonsBindings;
 
+        static void handleKeyDown(cubos::io::Key key);
+        static void handleKeyUp(cubos::io::Key key);
+        static void handleMouseDown(cubos::io::MouseButton mouseButton);
+        static void handleMouseUp(cubos::io::MouseButton mouseButton);
         friend class ActionMapping;
     };
 } // namespace cubos::input

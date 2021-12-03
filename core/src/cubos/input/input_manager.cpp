@@ -8,6 +8,40 @@ using namespace cubos::input;
 void InputManager::Init(cubos::io::Window* window)
 {
     InputManager::window = window;
+    InputManager::window->onKeyDown.registerCallback(handleKeyDown);
+    InputManager::window->onKeyUp.registerCallback(handleKeyUp);
+    InputManager::window->onMouseDown.registerCallback(handleMouseDown);
+    InputManager::window->onMouseUp.registerCallback(handleMouseUp);
+}
+
+void InputManager::handleKeyDown(Key key)
+{
+    if (InputManager::keyBindings.empty() || !InputManager::keyBindings.contains(key) ||
+        InputManager::keyBindings[key].empty())
+    {
+        return;
+    }
+
+    for (std::vector<std::function<void(void)>>::iterator it = InputManager::keyBindings[key].begin();
+         it != InputManager::keyBindings[key].end(); it++)
+    {
+        (*it)(); // TODO: Share state of the key binding (was it pressed)
+    }
+}
+
+void InputManager::handleKeyUp(Key key)
+{
+    if (InputManager::keyBindings.empty() || !InputManager::keyBindings.contains(key) ||
+        InputManager::keyBindings[key].empty())
+    {
+        return;
+    }
+
+    for (std::vector<std::function<void(void)>>::iterator it = InputManager::keyBindings[key].begin();
+         it != InputManager::keyBindings[key].end(); it++)
+    {
+        (*it)(); // TODO: Share state of the key binding (was it pressed)
+    }
 }
 
 std::shared_ptr<ActionMapping> InputManager::CreateActionMapping(const std::string& name)
@@ -22,7 +56,7 @@ std::shared_ptr<ActionMapping> InputManager::GetActionMapping(const std::string&
 {
     if (mappings.contains(name))
     {
-        // SHould Crash
+        // Should Crash
     }
 
     return mappings[name];
@@ -47,25 +81,55 @@ void ActionMapping::RegisterBinding(ButtonBindingDesc bindingDesc)
     this->bindings.push_back(binding);
 }
 
+void InputManager::handleMouseDown(MouseButton mouseButton)
+{
+    if (InputManager::mouseButtonsBindings.empty() || !InputManager::mouseButtonsBindings.contains(mouseButton) ||
+        InputManager::mouseButtonsBindings[mouseButton].empty())
+    {
+        return;
+    }
+
+    for (std::vector<std::function<void(void)>>::iterator it = InputManager::mouseButtonsBindings[mouseButton].begin();
+         it != InputManager::mouseButtonsBindings[mouseButton].end(); it++)
+    {
+        (*it)(); // TODO: Share state of the key binding (was it pressed)
+    }
+}
+
+void InputManager::handleMouseUp(MouseButton mouseButton)
+{
+    if (InputManager::mouseButtonsBindings.empty() || !InputManager::mouseButtonsBindings.contains(mouseButton) ||
+        InputManager::mouseButtonsBindings[mouseButton].empty())
+    {
+        return;
+    }
+
+    for (std::vector<std::function<void(void)>>::iterator it = InputManager::mouseButtonsBindings[mouseButton].begin();
+         it != InputManager::mouseButtonsBindings[mouseButton].end(); it++)
+    {
+        (*it)(); // TODO: Share state of the key binding (was it pressed)
+    }
+}
+
 void ActionMapping::SubscribeAction(std::function<void(InputContext)> function)
 {
     this->onTrigger.registerCallback(function);
 }
 
-void InputManager::RegisterKeyBinding(Key key, std::shared_ptr<Binding> binding)
+void InputManager::RegisterKeyBinding(Key key, std::function<void(void)> callback)
 {
     if (!InputManager::keyBindings.contains(key))
     {
-        InputManager::keyBindings[key] = std::vector<std::shared_ptr<Binding>>();
+        InputManager::keyBindings[key] = std::vector<std::function<void(void)>>();
     }
-    InputManager::keyBindings[key].push_back(binding);
+    InputManager::keyBindings[key].push_back(callback);
 }
 
-void InputManager::RegisterMouseBinding(MouseButton mouseButton, std::shared_ptr<Binding> binding)
+void InputManager::RegisterMouseBinding(MouseButton mouseButton, std::function<void(void)> callback)
 {
     if (!InputManager::mouseButtonsBindings.contains(mouseButton))
     {
-        InputManager::mouseButtonsBindings[mouseButton] = std::vector<std::shared_ptr<Binding>>();
+        InputManager::mouseButtonsBindings[mouseButton] = std::vector<std::function<void(void)>>();
     }
-    InputManager::mouseButtonsBindings[mouseButton].push_back(binding);
+    InputManager::mouseButtonsBindings[mouseButton].push_back(callback);
 }
