@@ -30,17 +30,21 @@ std::shared_ptr<ActionMapping> InputManager::GetActionMapping(const std::string&
 
 void ActionMapping::RegisterBinding(ButtonBindingDesc bindingDesc)
 {
+    std::shared_ptr<Binding> binding;
+
     switch (bindingDesc.type)
     {
     case ButtonBindingDesc::ButtonType::Key:
-        ButtonBinding(shared_from_this(), bindingDesc.Key);
+        binding = std::make_shared<ButtonBinding>(shared_from_this(), std::get<Key>(bindingDesc.button));
         break;
     case ButtonBindingDesc::ButtonType::Mouse:
-        ButtonBinding(shared_from_this(), bindingDesc.Mouse);
+        binding = std::make_shared<ButtonBinding>(shared_from_this(), std::get<MouseButton>(bindingDesc.button));
         break;
     default:
         break;
     }
+
+    this->bindings.push_back(binding);
 }
 
 void ActionMapping::SubscribeAction(std::function<void(InputContext)> function)

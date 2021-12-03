@@ -42,6 +42,7 @@ namespace cubos::input
 
     private:
         Event<InputContext> onTrigger;
+        std::vector<std::shared_ptr<Binding>> bindings;
     };
 
     class InputManager
