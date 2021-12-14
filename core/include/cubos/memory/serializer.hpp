@@ -43,6 +43,9 @@ namespace cubos::memory
         Serializer(Stream& stream);
         virtual ~Serializer() = default;
 
+        /// Flushes the serializer and writes the data to the stream.
+        virtual void flush();
+
         /// Serializes a signed 8 bit integer.
         /// @param value The value to serialize.
         /// @param name The name of the value (optional).
