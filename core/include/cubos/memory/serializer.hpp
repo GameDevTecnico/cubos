@@ -314,7 +314,7 @@ namespace cubos::memory
     {
         this->beginArray(vec.size(), name);
         for (const auto& obj : vec)
-            this->write(obj);
+            this->write(obj, nullptr);
         this->endArray();
     }
 
@@ -322,7 +322,7 @@ namespace cubos::memory
     {
         this->beginArray(length, name);
         for (size_t i = 0; i < length; ++i)
-            this->write(ptr[i]);
+            this->write(ptr[i], nullptr);
         this->endArray();
     }
 
