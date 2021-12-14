@@ -3,6 +3,7 @@
 
 #include <cubos/event.hpp>
 #include <cubos/io/window.hpp>
+#include <cubos/io/keyboard.hpp>
 #include <map>
 #include <string>
 #include <memory>
@@ -53,6 +54,8 @@ namespace cubos::input
         static std::shared_ptr<ActionMapping> GetActionMapping(const std::string& name);
         static void RegisterKeyBinding(cubos::io::Key key, std::function<void(void)> callback);
         static void RegisterMouseBinding(cubos::io::MouseButton mouse, std::function<void(void)> callback);
+        static void RegisterAxisBinding(cubos::io::Key keyPos, cubos::io::Key keyNeg,
+                                        std::function<void(float)> callback);
 
     private:
         static cubos::io::Window* window;

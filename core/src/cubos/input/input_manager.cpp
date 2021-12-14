@@ -5,6 +5,17 @@
 using namespace cubos::io;
 using namespace cubos::input;
 
+std::map<std::string, std::shared_ptr<ActionMapping>> InputManager::mappings =
+    std::map<std::string, std::shared_ptr<ActionMapping>>();
+std::map<cubos::io::Key, std::vector<std::function<void(void)>>> InputManager::keyBindings =
+    std::map<cubos::io::Key, std::vector<std::function<void(void)>>>();
+std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> InputManager::mouseButtonsBindings =
+    std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>>();
+cubos::io::Window* InputManager::window = nullptr;
+ActionMapping::ActionMapping(const std::string& actionId)
+{
+}
+
 void InputManager::Init(cubos::io::Window* window)
 {
     InputManager::window = window;
@@ -54,7 +65,7 @@ std::shared_ptr<ActionMapping> InputManager::CreateActionMapping(const std::stri
 
 std::shared_ptr<ActionMapping> InputManager::GetActionMapping(const std::string& name)
 {
-    if (mappings.contains(name))
+    if (!mappings.contains(name))
     {
         // Should Crash
     }
@@ -132,4 +143,20 @@ void InputManager::RegisterMouseBinding(MouseButton mouseButton, std::function<v
         InputManager::mouseButtonsBindings[mouseButton] = std::vector<std::function<void(void)>>();
     }
     InputManager::mouseButtonsBindings[mouseButton].push_back(callback);
+}
+
+void InputManager::RegisterAxisBinding(cubos::io::Key keyPos, cubos::io::Key keyNeg,
+                                       std::function<void(float)> callback)
+{
+    if (!InputManager::keyBindings.contains(keyPos))
+    {
+        InputManager::keyBindings[keyPos] = std::vector<std::function<void(void)>>();
+    }
+    InputManager::keyBindings[keyPos].push_back([&]() { callback(1); });
+
+    if (!InputManager::keyBindings.contains(keyNeg))
+    {
+        InputManager::keyBindings[keyNeg] = std::vector<std::function<void(void)>>();
+    }
+    InputManager::keyBindings[keyNeg].push_back([&]() { callback(-1); });
 }
