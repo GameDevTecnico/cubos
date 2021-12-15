@@ -39,6 +39,7 @@ namespace cubos::memory
         virtual void endDictionary() override;
 
     private:
+        /// The possible states of serialization.
         enum class Mode
         {
             Object,

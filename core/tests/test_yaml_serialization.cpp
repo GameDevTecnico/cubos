@@ -1,11 +1,45 @@
 #include <gtest/gtest.h>
 #include <cubos/memory/buffer_stream.hpp>
 #include <cubos/memory/yaml_serializer.hpp>
+#include <cubos/memory/serialization_map.hpp>
+
+using namespace cubos::memory;
+
+struct Human
+{
+    std::string name;
+    int age;
+    double weight;
+    bool dead;
+    std::vector<Human*> children;
+
+    void serialize(Serializer& s) const
+    {
+        s.write(this->name, "name");
+        s.write(this->age, "age");
+        s.write(this->weight, "weight");
+        s.write(this->dead, "dead");
+        s.beginArray(this->children.size(), "children");
+        for (auto& child : this->children)
+            s.write(*child, "child");
+        s.endArray();
+    }
+
+    void serialize(Serializer& s, SerializationMap<Human*, size_t>* map) const
+    {
+        s.write(this->name, "name");
+        s.write(this->age, "age");
+        s.write(this->weight, "weight");
+        s.write(this->dead, "dead");
+        s.beginArray(this->children.size(), "children");
+        for (auto& child : this->children)
+            s.write(map->getId(child), "child");
+        s.endArray();
+    }
+};
 
 TEST(Cubos_Memory_YAML_Serialization, Serialize_Primitives)
 {
-    using namespace cubos::memory;
-
     char buf[2048];
     auto stream = BufferStream(buf, sizeof(buf));
     {
@@ -34,8 +68,6 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Primitives)
 
 TEST(Cubos_Memory_YAML_Serialization, Serialize_Array)
 {
-    using namespace cubos::memory;
-
     char buf[2048];
     auto stream = BufferStream(buf, sizeof(buf));
     {
@@ -87,8 +119,6 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Array)
 
 TEST(Cubos_Memory_YAML_Serialization, Serialize_Dictionary)
 {
-    using namespace cubos::memory;
-
     char buf[2048];
     auto stream = BufferStream(buf, sizeof(buf));
     {
@@ -137,8 +167,6 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Dictionary)
 
 TEST(Cubos_Memory_YAML_Serialization, Serialize_GLM)
 {
-    using namespace cubos::memory;
-
     char buf[2048];
     auto stream = BufferStream(buf, sizeof(buf));
     {
@@ -201,4 +229,109 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_GLM)
                            "  z: 4\n"
                            "...\n";
     EXPECT_STREQ(expected, buf);
+}
+
+TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom_Serializable)
+{
+    using namespace cubos::memory;
+
+    char buf[4096];
+    auto stream = BufferStream(buf, sizeof(buf));
+    {
+        std::vector<Human> humans = {{"José", 90, 79, true, {}},
+                                     {"Joana", 70, 60, false, {}},
+                                     {"Josefina", 50, 100, false, {}},
+                                     {"João", 30, 80, true, {}},
+                                     {"Joaquim", 23, 70, false, {}}};
+
+        humans[0].children.push_back(&humans[1]);
+        humans[1].children.push_back(&humans[2]);
+        humans[2].children.push_back(&humans[3]);
+        humans[2].children.push_back(&humans[4]);
+
+        auto map = SerializationMap<Human*, size_t>();
+        for (size_t i = 0; i < humans.size(); ++i)
+            map.add(&humans[i], i);
+
+        auto serializer = (Serializer*)new YAMLSerializer(stream);
+        serializer->write(humans[0], "trivially_serializable");
+        serializer->beginDictionary(humans.size(), "context_serializable");
+        for (size_t i = 0; i < humans.size(); ++i)
+        {
+            serializer->write(i, nullptr);
+            serializer->write(humans[i], &map, nullptr);
+        }
+        serializer->endDictionary();
+        delete serializer;
+    }
+    stream.put('\0');
+
+    EXPECT_STREQ("---\n"
+                 "trivially_serializable:\n"
+                 "  name: José\n"
+                 "  age: 90\n"
+                 "  weight: 79\n"
+                 "  dead: true\n"
+                 "  children:\n"
+                 "    - name: Joana\n"
+                 "      age: 70\n"
+                 "      weight: 60\n"
+                 "      dead: false\n"
+                 "      children:\n"
+                 "        - name: Josefina\n"
+                 "          age: 50\n"
+                 "          weight: 100\n"
+                 "          dead: false\n"
+                 "          children:\n"
+                 "            - name: João\n"
+                 "              age: 30\n"
+                 "              weight: 80\n"
+                 "              dead: true\n"
+                 "              children:\n"
+                 "                []\n"
+                 "            - name: Joaquim\n"
+                 "              age: 23\n"
+                 "              weight: 70\n"
+                 "              dead: false\n"
+                 "              children:\n"
+                 "                []\n"
+                 "context_serializable:\n"
+                 "  0:\n"
+                 "    name: José\n"
+                 "    age: 90\n"
+                 "    weight: 79\n"
+                 "    dead: true\n"
+                 "    children:\n"
+                 "      - 1\n"
+                 "  1:\n"
+                 "    name: Joana\n"
+                 "    age: 70\n"
+                 "    weight: 60\n"
+                 "    dead: false\n"
+                 "    children:\n"
+                 "      - 2\n"
+                 "  2:\n"
+                 "    name: Josefina\n"
+                 "    age: 50\n"
+                 "    weight: 100\n"
+                 "    dead: false\n"
+                 "    children:\n"
+                 "      - 3\n"
+                 "      - 4\n"
+                 "  3:\n"
+                 "    name: João\n"
+                 "    age: 30\n"
+                 "    weight: 80\n"
+                 "    dead: true\n"
+                 "    children:\n"
+                 "      []\n"
+                 "  4:\n"
+                 "    name: Joaquim\n"
+                 "    age: 23\n"
+                 "    weight: 70\n"
+                 "    dead: false\n"
+                 "    children:\n"
+                 "      []\n"
+                 "...\n",
+                 buf);
 }
