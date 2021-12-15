@@ -287,7 +287,7 @@ int main()
     s->write(fruitsByPrice, "fruitsByPrice");
 
     // Array to serialize
-    Human humans[5];
+    std::vector<Human> humans(5);
     humans[0] = {nullptr, nullptr, 43, "John"};
     humans[1] = {&humans[0], &humans[2], 12, "Alex"};
     humans[2] = {nullptr, &humans[3], 41, "Jane"};
@@ -297,13 +297,13 @@ int main()
     // Prepare context (in this case its a SerializationMap, used to map references to ids)
     SerializationMap<Human*, int> sMap;
     sMap.add(nullptr, -1);
-    for (size_t i = 0; i < sizeof(humans) / sizeof(Human); ++i)
+    for (size_t i = 0; i < humans.size(); ++i)
         sMap.add(&humans[i], i);
     
     // Serialize humans array
     Stream::stdOut.print("# Family tree which requires context to be serialized\n");
     Stream::stdOut.print("# ---------------------------------------------------\n");
-    s->write(humans, sizeof(humans) / sizeof(Human), &sMap, "family");
+    s->write(humans, &sMap, "family");
 
     delete s;
     return 0;
