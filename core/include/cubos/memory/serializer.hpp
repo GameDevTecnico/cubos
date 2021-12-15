@@ -7,6 +7,7 @@
 #include <vector>
 #include <unordered_map>
 #include <concepts>
+#include <type_traits>
 
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
@@ -18,21 +19,21 @@ namespace cubos::memory
     class Serializer;
 
     /// Concept for serializable objects which are trivial to serialize.
-    template <typename T> concept TriviallySerializable = requires(T obj, Serializer& s)
+    template <typename T>
+    concept TriviallySerializable = requires(T obj, Serializer& s)
     {
         {
             obj.serialize(s)
-        }
-        ->std::same_as<void>;
+            } -> std::same_as<void>;
     };
 
     /// Concept for serializable objects which require a context to be serialized.
-    template <typename T, typename TCtx> concept ContextSerializable = requires(T obj, Serializer& s, TCtx ctx)
+    template <typename T, typename TCtx>
+    concept ContextSerializable = requires(T obj, Serializer& s, TCtx ctx)
     {
         {
             obj.serialize(s, ctx)
-        }
-        ->std::same_as<void>;
+            } -> std::same_as<void>;
     };
 
     /// Abstract class for serializing data.
@@ -139,7 +140,9 @@ namespace cubos::memory
         /// @tparam T The type of the object.
         /// @param obj The object to serialize.
         /// @param name The name of the object (optional).
-        template <typename T> requires TriviallySerializable<T> void write(const T& obj, const char* name);
+        template <typename T>
+        requires TriviallySerializable<T>
+        void write(const T& obj, const char* name);
 
         /// Serializes a object.
         /// @tparam T The type of the object.
@@ -148,7 +151,8 @@ namespace cubos::memory
         /// @param ctx The context required to serialize.
         /// @param name The name of the object (optional).
         template <typename T, typename TCtx>
-        requires TriviallySerializable<T> void write(const T& obj, TCtx ctx, const char* name);
+        requires TriviallySerializable<T>
+        void write(const T& obj, TCtx ctx, const char* name);
 
         /// Serializes a object which requires context to be serialized.
         /// @tparam T The type of the object.
@@ -157,7 +161,8 @@ namespace cubos::memory
         /// @param ctx The context required to serialize.
         /// @param name The name of the object (optional).
         template <typename T, typename TCtx>
-        requires ContextSerializable<T, TCtx> void write(const T& obj, TCtx ctx, const char* name);
+        requires ContextSerializable<T, TCtx>
+        void write(const T& obj, TCtx ctx, const char* name);
 
         /// Serializes a object.
         /// @tparam T The type of the object.
@@ -198,7 +203,6 @@ namespace cubos::memory
         template <typename K, typename V, typename TCtx>
         void write(const std::unordered_map<K, V>& dic, TCtx ctx, const char* name);
 
-    protected:
         /// Indicates that a object is currently being serialized.
         /// @param name The name of the object (optional).
         virtual void beginObject(const char* name) = 0;
@@ -222,6 +226,7 @@ namespace cubos::memory
         /// Indicates that a dictionary is no longer being serialized.
         virtual void endDictionary() = 0;
 
+    protected:
         Stream& stream; ///< Stream used by the serializer.
 
     private:
@@ -261,14 +266,16 @@ namespace cubos::memory
     template <typename T> void Serializer::write(const glm::tquat<T>& quat, const char* value)
     {
         this->beginObject(value);
+        this->write(quat.w, "w");
         this->write(quat.x, "x");
         this->write(quat.y, "y");
         this->write(quat.z, "z");
-        this->write(quat.w, "w");
         this->endObject();
     }
 
-    template <typename T> requires TriviallySerializable<T> void Serializer::write(const T& obj, const char* name)
+    template <typename T>
+    requires TriviallySerializable<T>
+    void Serializer::write(const T& obj, const char* name)
     {
         this->beginObject(name);
         obj.serialize(*this);
@@ -276,13 +283,15 @@ namespace cubos::memory
     }
 
     template <typename T, typename TCtx>
-    requires TriviallySerializable<T> void Serializer::write(const T& obj, TCtx ctx, const char* name)
+    requires TriviallySerializable<T>
+    void Serializer::write(const T& obj, TCtx ctx, const char* name)
     {
         this->write(obj, name);
     }
 
     template <typename T, typename TCtx>
-    requires ContextSerializable<T, TCtx> void Serializer::write(const T& obj, TCtx ctx, const char* name)
+    requires ContextSerializable<T, TCtx>
+    void Serializer::write(const T& obj, TCtx ctx, const char* name)
     {
         this->beginObject(name);
         obj.serialize(*this, ctx);
