@@ -7,7 +7,6 @@
 #include <vector>
 #include <unordered_map>
 #include <concepts>
-#include <type_traits>
 
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
