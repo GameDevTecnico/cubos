@@ -42,7 +42,7 @@ void YAMLSerializer::flush()
 
 void YAMLSerializer::write(int8_t value, const char* name)
 {
-    WRITE_PRIMITIVE(value, name);
+    WRITE_PRIMITIVE(static_cast<int16_t>(value), name);
 }
 
 void YAMLSerializer::write(int16_t value, const char* name)
@@ -62,7 +62,7 @@ void YAMLSerializer::write(int64_t value, const char* name)
 
 void YAMLSerializer::write(uint8_t value, const char* name)
 {
-    WRITE_PRIMITIVE(value, name);
+    WRITE_PRIMITIVE(static_cast<uint16_t>(value), name);
 }
 
 void YAMLSerializer::write(uint16_t value, const char* name)
