@@ -173,13 +173,6 @@ namespace cubos::memory
         /// @param name The name of the vector (optional).
         template <typename T> void write(const std::vector<T>& vec, const char* name);
 
-        /// Serializes an array.
-        /// @tparam T The type of the array.
-        /// @param ptr The array to serialize.
-        /// @param length The length of the array.
-        /// @param name The name of the array (optional).
-        template <typename T> void write(const T* ptr, size_t length, const char* name);
-
         /// Serializes a unordered map.
         /// @tparam K The key type.
         /// @tparam V The value type.
@@ -194,15 +187,6 @@ namespace cubos::memory
         /// @param ctx The context required to serialize.
         /// @param name The name of the vector (optional).
         template <typename T, typename TCtx> void write(const std::vector<T>& vec, TCtx ctx, const char* name);
-
-        /// Serializes an array.
-        /// @tparam T The type of the array.
-        /// @tparam TCtx The type of the context.
-        /// @param ptr The array to serialize.
-        /// @param length The length of the array.
-        /// @param ctx The context required to serialize.
-        /// @param name The name of the array (optional).
-        template <typename T, typename TCtx> void write(const T* ptr, size_t length, TCtx ctx, const char* name);
 
         /// Serializes a unordered map.
         /// @tparam K The key type.
@@ -318,14 +302,6 @@ namespace cubos::memory
         this->endArray();
     }
 
-    template <typename T> void Serializer::write(const T* ptr, size_t length, const char* name)
-    {
-        this->beginArray(length, name);
-        for (size_t i = 0; i < length; ++i)
-            this->write(ptr[i], nullptr);
-        this->endArray();
-    }
-
     template <typename K, typename V> void Serializer::write(const std::unordered_map<K, V>& dic, const char* name)
     {
         this->beginDictionary(dic.size(), name);
@@ -342,14 +318,6 @@ namespace cubos::memory
         this->beginArray(vec.size(), name);
         for (const auto& obj : vec)
             this->write(obj, ctx, nullptr);
-        this->endArray();
-    }
-
-    template <typename T, typename TCtx> void Serializer::write(const T* ptr, size_t length, TCtx ctx, const char* name)
-    {
-        this->beginArray(length, name);
-        for (size_t i = 0; i < length; ++i)
-            this->write(ptr[i], ctx, nullptr);
         this->endArray();
     }
 
