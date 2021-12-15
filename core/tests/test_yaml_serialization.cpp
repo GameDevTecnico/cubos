@@ -44,6 +44,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Primitives)
     auto stream = BufferStream(buf, sizeof(buf));
     {
         auto serializer = YAMLSerializer(stream);
+        serializer.write(static_cast<uint8_t>(1), "named_uint8");
         serializer.write(12, "named_integer");
         serializer.write(0.5f, "named_float");
         serializer.write(6.5, "named_double");
@@ -55,6 +56,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Primitives)
     stream.put('\0');
 
     const char* expected = "---\n"
+                           "named_uint8: 1\n"
                            "named_integer: 12\n"
                            "named_float: 0.5\n"
                            "named_double: 6.5\n"
