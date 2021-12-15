@@ -5,31 +5,35 @@ using namespace cubos::memory;
 YAMLDeserializer::YAMLDeserializer(Stream& stream) : Deserializer(stream)
 {
     this->loadDocument();
-    this->frame.push({Mode::Object, this->document.begin()});
-    this->key = true;
+    this->frame.push({Mode::Object, this->document.begin(), false});
 }
 
 #define READ_PRIMITIVE(T, value)                                                                                       \
     do                                                                                                                 \
     {                                                                                                                  \
-        auto iter = this->get();                                                                                      \
+        auto iter = this->get();                                                                                       \
         if (this->frame.top().mode == Mode::Dictionary)                                                                \
         {                                                                                                              \
-            if (this->key)                                                                                             \
-                value = iter->first.as<int8_t>();                                                                       \
+            if (this->frame.top().key)                                                                                 \
+                value = iter->first.as<T>(T());                                                                        \
             else                                                                                                       \
-                value = iter->second.as<int8_t>();                                                                      \
-            this->key = !this->key;                                                                                    \
+                value = iter->second.as<T>(T());                                                                       \
+            this->frame.top().key = !this->frame.top().key;                                                            \
         }                                                                                                              \
         else if (this->frame.top().mode == Mode::Object)                                                               \
-            value = iter->second.as<int8_t>();                                                                          \
+            value = iter->second.as<T>(T());                                                                           \
         else                                                                                                           \
-            value = iter->as<int8_t>();                                                                                 \
+            value = iter->as<T>(T());                                                                                  \
     } while (false)
 
 void YAMLDeserializer::read(int8_t& value)
 {
-    READ_PRIMITIVE(int8_t, value);
+    int16_t v;
+    READ_PRIMITIVE(int16_t, v);
+    if (v < INT8_MIN || v > INT8_MAX)
+        value = 0;
+    else
+        value = v;
 }
 
 void YAMLDeserializer::read(int16_t& value)
@@ -49,7 +53,12 @@ void YAMLDeserializer::read(int64_t& value)
 
 void YAMLDeserializer::read(uint8_t& value)
 {
-    READ_PRIMITIVE(uint8_t, value);
+    uint16_t v;
+    READ_PRIMITIVE(uint16_t, v);
+    if (v > UINT8_MAX)
+        value = 0;
+    else
+        value = v;
 }
 
 void YAMLDeserializer::read(uint16_t& value)
@@ -89,43 +98,78 @@ void YAMLDeserializer::read(std::string& value)
 
 void YAMLDeserializer::beginObject()
 {
-    auto& frame = this->frame.top();
-    assert(frame.iter->IsMap());
-    this->frame.push({Mode::Object, (frame.iter++)->begin()});
+    auto iter = this->get();
+    if (this->frame.top().mode == Mode::Array)
+    {
+        assert(iter->IsMap());
+        this->frame.push({Mode::Object, iter->begin(), false});
+    }
+    else
+    {
+        // Objects can't be used as keys in dictionaries.
+        assert(this->frame.top().mode != Mode::Dictionary || !this->frame.top().key);
+        assert(iter->second.IsMap());
+        this->frame.push({Mode::Object, iter->second.begin(), false});
+    }
 }
 
 void YAMLDeserializer::endObject()
 {
     assert(this->frame.size() > 1);
     this->frame.pop();
+    this->frame.top().key = true;
 }
 
 size_t YAMLDeserializer::beginArray()
 {
-    auto& frame = this->frame.top();
-    assert(frame.iter->IsSequence());
-    this->frame.push({Mode::Array, frame.iter->begin()});
-    return (frame.iter++)->size();
+    auto iter = this->get();
+    if (this->frame.top().mode == Mode::Array)
+    {
+        assert(iter->IsSequence());
+        this->frame.push({Mode::Array, iter->begin(), false});
+        return iter->size();
+    }
+    else
+    {
+        // Arrays can't be used as keys in dictionaries.
+        assert(this->frame.top().mode != Mode::Dictionary || !this->frame.top().key);
+        assert(iter->second.IsSequence());
+        this->frame.push({Mode::Array, iter->second.begin(), false});
+        return iter->second.size();
+    }
 }
 
 void YAMLDeserializer::endArray()
 {
     assert(this->frame.size() > 1);
     this->frame.pop();
+    this->frame.top().key = true;
 }
 
 size_t YAMLDeserializer::beginDictionary()
 {
-    auto& frame = this->frame.top();
-    assert(frame.iter->IsMap());
-    this->frame.push({Mode::Dictionary, frame.iter->begin()});
-    return (frame.iter++)->size();
+    auto iter = this->get();
+    if (this->frame.top().mode == Mode::Array)
+    {
+        assert(iter->IsMap());
+        this->frame.push({Mode::Dictionary, iter->begin(), true});
+        return iter->size();
+    }
+    else
+    {
+        // Dictionaries can't be used as keys in dictionaries.
+        assert(this->frame.top().mode != Mode::Dictionary || !this->frame.top().key);
+        assert(iter->second.IsMap());
+        this->frame.push({Mode::Dictionary, iter->second.begin(), true});
+        return iter->second.size();
+    }
 }
 
 void YAMLDeserializer::endDictionary()
 {
     assert(this->frame.size() > 1);
     this->frame.pop();
+    this->frame.top().key = true;
 }
 
 void YAMLDeserializer::loadDocument()
@@ -144,5 +188,8 @@ YAML::const_iterator YAMLDeserializer::get()
         this->frame.top().iter = this->document.begin();
     }
 
-    return this->frame.top().iter++;
+    if (this->frame.top().mode != Mode::Dictionary || !this->frame.top().key)
+        return this->frame.top().iter++;
+    else
+        return this->frame.top().iter;
 }

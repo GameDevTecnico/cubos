@@ -54,13 +54,13 @@ namespace cubos::memory
         /// The current frame of serialization.
         struct Frame
         {
-            Mode mode;
-            YAML::const_iterator iter;
+            Mode mode;                 ///< The current mode of deserialization.
+            YAML::const_iterator iter; ///< The current node.
+            bool key;                  ///< Whether the current node is a key.
         };
 
         std::stack<Frame> frame; ///< The current frame of the deserializer.
         YAML::Node document;     ///< The YAML document being deserialized.
-        bool key;                ///< Will the next value read be a key or a value?
     };
 } // namespace cubos::memory
 
