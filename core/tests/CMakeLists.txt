@@ -7,6 +7,7 @@ set(CUBOS_TESTS_SOURCE
     "test_buffer_stream.cpp"
     "test_yaml_serialization.cpp"
     "test_yaml_deserialization.cpp"
+    "test_yaml_serialization_and_deserialization.cpp"
 )
 
 # Add tests target
