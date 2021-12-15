@@ -28,6 +28,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/memory/buffer_stream.cpp"
     "src/cubos/memory/serializer.cpp"
     "src/cubos/memory/deserializer.cpp"
+    "src/cubos/memory/yaml_serializer.cpp"
+    "src/cubos/memory/yaml_deserializer.cpp"
 
     "src/cubos/io/window.cpp"
     "src/cubos/io/glfw_window.hpp"
@@ -50,6 +52,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/memory/serialization_map.hpp"
     "include/cubos/memory/serializer.hpp"
     "include/cubos/memory/deserializer.hpp"
+    "include/cubos/memory/yaml_serializer.hpp"
+    "include/cubos/memory/yaml_deserializer.hpp"
 
     "include/cubos/io/window.hpp"
 
