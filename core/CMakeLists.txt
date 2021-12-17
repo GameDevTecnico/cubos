@@ -56,6 +56,7 @@ set(CUBOS_CORE_INCLUDE
 add_library(cubos-core ${CUBOS_CORE_SOURCE} ${CUBOS_CORE_INCLUDE})
 target_include_directories(cubos-core PUBLIC "include" PRIVATE "src")
 set_property(TARGET cubos-core PROPERTY CXX_STANDARD 20)
+target_compile_features(cubos-core PUBLIC cxx_std_20)
 
 # Link dependencies
 
