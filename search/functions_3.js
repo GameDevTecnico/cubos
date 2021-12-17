@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['fire_233',['fire',['../classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc',1,'cubos::Event']]],
-  ['flush_234',['flush',['../classcubos_1_1gl_1_1Debug.html#ab5a290a4fb95cfb82891d12f962e3f85',1,'cubos::gl::Debug']]]
+  ['eof_256',['eof',['../classcubos_1_1memory_1_1BufferStream.html#a8f4a6d7c5f8fcd84f6f5d26c8a11aed1',1,'cubos::memory::BufferStream::eof()'],['../classcubos_1_1memory_1_1StdStream.html#aa63eefc2b3210f13f1e060ab9609292f',1,'cubos::memory::StdStream::eof()'],['../classcubos_1_1memory_1_1Stream.html#a34bc3d53a1d0bbc991849e753a5399fd',1,'cubos::memory::Stream::eof()']]]
 ];

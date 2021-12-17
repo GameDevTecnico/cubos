@@ -22,6 +22,11 @@ var annotated_dup =
       [ "io", null, [
         [ "Window", "classcubos_1_1io_1_1Window.html", "classcubos_1_1io_1_1Window" ]
       ] ],
+      [ "memory", null, [
+        [ "BufferStream", "classcubos_1_1memory_1_1BufferStream.html", "classcubos_1_1memory_1_1BufferStream" ],
+        [ "StdStream", "classcubos_1_1memory_1_1StdStream.html", "classcubos_1_1memory_1_1StdStream" ],
+        [ "Stream", "classcubos_1_1memory_1_1Stream.html", "classcubos_1_1memory_1_1Stream" ]
+      ] ],
       [ "Event", "classcubos_1_1Event.html", "classcubos_1_1Event" ],
       [ "Settings", "classcubos_1_1Settings.html", "classcubos_1_1Settings" ]
     ] ]
