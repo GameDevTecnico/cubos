@@ -12,3 +12,4 @@ set(CUBOS_ENGINE_SOURCE
 add_executable(cubos-engine ${CUBOS_ENGINE_SOURCE})
 target_link_libraries(cubos-engine cubos-core)
 set_property(TARGET cubos-engine PROPERTY CXX_STANDARD 20)
+target_compile_features(cubos-engine PUBLIC cxx_std_20)
