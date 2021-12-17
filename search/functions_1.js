@@ -1,23 +1,8 @@
 var searchData=
 [
-  ['clear_228',['clear',['../classcubos_1_1Settings.html#a0cb3f94bdbee29eb019c7c7bc11b4327',1,'cubos::Settings']]],
-  ['clearcolor_229',['clearColor',['../classcubos_1_1gl_1_1RenderDevice.html#a8f791985c2c137e30b7d3fb5676cabcb',1,'cubos::gl::RenderDevice']]],
-  ['cleardepth_230',['clearDepth',['../classcubos_1_1gl_1_1RenderDevice.html#a5b40155a95286475ce4eec4eed7f16fe',1,'cubos::gl::RenderDevice']]],
-  ['clearstencil_231',['clearStencil',['../classcubos_1_1gl_1_1RenderDevice.html#a843c7cad027757c83f277056dee98a92',1,'cubos::gl::RenderDevice']]],
-  ['create_232',['create',['../classcubos_1_1io_1_1Window.html#a274063e6dc2ada19e4131002e9590999',1,'cubos::io::Window']]],
-  ['createblendstate_233',['createBlendState',['../classcubos_1_1gl_1_1RenderDevice.html#a2265376ae4cf710462610e5d65ff70fc',1,'cubos::gl::RenderDevice']]],
-  ['createconstantbuffer_234',['createConstantBuffer',['../classcubos_1_1gl_1_1RenderDevice.html#a5e1564bac3a2ececa03b36db8b3e7332',1,'cubos::gl::RenderDevice']]],
-  ['createcubemap_235',['createCubeMap',['../classcubos_1_1gl_1_1RenderDevice.html#a2173b72ed7922d3b28700da722165573',1,'cubos::gl::RenderDevice']]],
-  ['createdepthstencilstate_236',['createDepthStencilState',['../classcubos_1_1gl_1_1RenderDevice.html#ada9d051684c59f93124aa1b477a6cffa',1,'cubos::gl::RenderDevice']]],
-  ['createframebuffer_237',['createFramebuffer',['../classcubos_1_1gl_1_1RenderDevice.html#aa81bb2c4789de09e737e3a863e32fb27',1,'cubos::gl::RenderDevice']]],
-  ['createindexbuffer_238',['createIndexBuffer',['../classcubos_1_1gl_1_1RenderDevice.html#ae8fb08998cd59214c484cc3a64e1d8d7',1,'cubos::gl::RenderDevice']]],
-  ['createrasterstate_239',['createRasterState',['../classcubos_1_1gl_1_1RenderDevice.html#ac4e627e27fd589e506a2295cd0d19db6',1,'cubos::gl::RenderDevice']]],
-  ['createsampler_240',['createSampler',['../classcubos_1_1gl_1_1RenderDevice.html#a97b756d843a80ac0be7e0970b03fa8d6',1,'cubos::gl::RenderDevice']]],
-  ['createshaderpipeline_241',['createShaderPipeline',['../classcubos_1_1gl_1_1RenderDevice.html#a42a71e483e6393e558d47c9f340e05f5',1,'cubos::gl::RenderDevice']]],
-  ['createshaderstage_242',['createShaderStage',['../classcubos_1_1gl_1_1RenderDevice.html#a52e9c5f4ca77a23112420440d46b4a2e',1,'cubos::gl::RenderDevice']]],
-  ['createtexture1d_243',['createTexture1D',['../classcubos_1_1gl_1_1RenderDevice.html#a3a5319f8cd3c26f439c9b38a11c77c23',1,'cubos::gl::RenderDevice']]],
-  ['createtexture2d_244',['createTexture2D',['../classcubos_1_1gl_1_1RenderDevice.html#a9e2b50c25a2bdbcd49556f737646a75b',1,'cubos::gl::RenderDevice']]],
-  ['createtexture3d_245',['createTexture3D',['../classcubos_1_1gl_1_1RenderDevice.html#a9ef34632d2bbdd06ca285a4835fab6ae',1,'cubos::gl::RenderDevice']]],
-  ['createvertexarray_246',['createVertexArray',['../classcubos_1_1gl_1_1RenderDevice.html#a4b1142f2a32cd97573fa375858465d87',1,'cubos::gl::RenderDevice']]],
-  ['createvertexbuffer_247',['createVertexBuffer',['../classcubos_1_1gl_1_1RenderDevice.html#a76a06667ead8fbf41f24be75fd1bdf32',1,'cubos::gl::RenderDevice']]]
+  ['beginarray_245',['beginArray',['../classcubos_1_1memory_1_1Deserializer.html#a08c708125013afe44dfab1347d02f279',1,'cubos::memory::Deserializer::beginArray()'],['../classcubos_1_1memory_1_1Serializer.html#aed463dd00b7620bd8f4af2f77634d011',1,'cubos::memory::Serializer::beginArray()']]],
+  ['begindictionary_246',['beginDictionary',['../classcubos_1_1memory_1_1Deserializer.html#a3fb998ddefbb4b913520bcd5deee405b',1,'cubos::memory::Deserializer::beginDictionary()'],['../classcubos_1_1memory_1_1Serializer.html#a122beeb728087751a34157833101b833',1,'cubos::memory::Serializer::beginDictionary()']]],
+  ['beginobject_247',['beginObject',['../classcubos_1_1memory_1_1Deserializer.html#a517d05e6e9531d796d793d7462244bbe',1,'cubos::memory::Deserializer::beginObject()'],['../classcubos_1_1memory_1_1Serializer.html#a9fe85b6f04e66263d8d86c30f1a5c63c',1,'cubos::memory::Serializer::beginObject()']]],
+  ['bind_248',['bind',['../classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a696e16ebb1de51ecf5aec1633e24b5c8',1,'cubos::gl::impl::ShaderBindingPoint::bind(gl::Sampler sampler)=0'],['../classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a3606535965e78ac2a0e4b13c38cfe2f2',1,'cubos::gl::impl::ShaderBindingPoint::bind(gl::Texture1D tex)=0'],['../classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html#ae4f3286cfcc7e67032113a0b934f5432',1,'cubos::gl::impl::ShaderBindingPoint::bind(gl::Texture2D tex)=0'],['../classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a7605cb598df975a964849a2b81dec5cc',1,'cubos::gl::impl::ShaderBindingPoint::bind(gl::Texture3D tex)=0'],['../classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a25c11c9e495d26cc708e40e99d1335b7',1,'cubos::gl::impl::ShaderBindingPoint::bind(gl::CubeMap cubeMap)=0'],['../classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a5300dfe6bf6b4f6ec242c43ac505aa4a',1,'cubos::gl::impl::ShaderBindingPoint::bind(gl::ConstantBuffer cb)=0']]],
+  ['bufferstream_249',['BufferStream',['../classcubos_1_1memory_1_1BufferStream.html#a98ba3e5bca51408b12921fdcb7625ded',1,'cubos::memory::BufferStream::BufferStream(void *buffer, size_t size, bool readOnly=false)'],['../classcubos_1_1memory_1_1BufferStream.html#aed073b5b688f3073aa2d94ec5f947d42',1,'cubos::memory::BufferStream::BufferStream(const void *buffer, size_t size)']]]
 ];

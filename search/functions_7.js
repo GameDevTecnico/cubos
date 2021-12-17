@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['map_270',['map',['../classcubos_1_1gl_1_1impl_1_1ConstantBuffer.html#adba3e576db4872102fe9787b3bd1374d',1,'cubos::gl::impl::ConstantBuffer::map()'],['../classcubos_1_1gl_1_1impl_1_1IndexBuffer.html#a1792cbc6e97fd231a93094b708ebc0cb',1,'cubos::gl::impl::IndexBuffer::map()'],['../classcubos_1_1gl_1_1impl_1_1VertexBuffer.html#aefa2637157ada49dcaeec53bb2386e25',1,'cubos::gl::impl::VertexBuffer::map()']]]
+  ['hasid_296',['hasId',['../classcubos_1_1memory_1_1SerializationMap.html#ae7211959725da17824057ebe7afa1b8d',1,'cubos::memory::SerializationMap']]],
+  ['hasref_297',['hasRef',['../classcubos_1_1memory_1_1SerializationMap.html#a493b5b635a3776abd8932602274ccd36',1,'cubos::memory::SerializationMap']]]
 ];

@@ -24,6 +24,9 @@ var annotated_dup =
       ] ],
       [ "memory", null, [
         [ "BufferStream", "classcubos_1_1memory_1_1BufferStream.html", "classcubos_1_1memory_1_1BufferStream" ],
+        [ "Deserializer", "classcubos_1_1memory_1_1Deserializer.html", "classcubos_1_1memory_1_1Deserializer" ],
+        [ "SerializationMap", "classcubos_1_1memory_1_1SerializationMap.html", "classcubos_1_1memory_1_1SerializationMap" ],
+        [ "Serializer", "classcubos_1_1memory_1_1Serializer.html", "classcubos_1_1memory_1_1Serializer" ],
         [ "StdStream", "classcubos_1_1memory_1_1StdStream.html", "classcubos_1_1memory_1_1StdStream" ],
         [ "Stream", "classcubos_1_1memory_1_1Stream.html", "classcubos_1_1memory_1_1Stream" ]
       ] ],

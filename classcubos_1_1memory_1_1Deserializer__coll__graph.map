@@ -1,0 +1,4 @@
+<map id="cubos::memory::Deserializer" name="cubos::memory::Deserializer">
+<area shape="rect" id="node1" title="Abstract class for deserializing data." alt="" coords="5,112,213,139"/>
+<area shape="rect" id="node2" href="$classcubos_1_1memory_1_1Stream.html" title="Abstract class for memory streams." alt="" coords="21,14,198,41"/>
+</map>

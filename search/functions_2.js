@@ -1,11 +1,23 @@
 var searchData=
 [
-  ['drawcube_248',['drawCube',['../classcubos_1_1gl_1_1Debug.html#a1af28b4c08f4d90d8799804bac64f3ec',1,'cubos::gl::Debug']]],
-  ['drawsphere_249',['drawSphere',['../classcubos_1_1gl_1_1Debug.html#a89dd75387813a270623718f3879ed007',1,'cubos::gl::Debug']]],
-  ['drawtriangles_250',['drawTriangles',['../classcubos_1_1gl_1_1RenderDevice.html#a1d8d6b9a6fd4dbcb1d6b77f38e0d5808',1,'cubos::gl::RenderDevice']]],
-  ['drawtrianglesindexed_251',['drawTrianglesIndexed',['../classcubos_1_1gl_1_1RenderDevice.html#a315cbf53c7888da6b38bf301a4ac0b5b',1,'cubos::gl::RenderDevice']]],
-  ['drawtrianglesindexedinstanced_252',['drawTrianglesIndexedInstanced',['../classcubos_1_1gl_1_1RenderDevice.html#a3f8f892c70c999b841510ea607888ce8',1,'cubos::gl::RenderDevice']]],
-  ['drawtrianglesinstanced_253',['drawTrianglesInstanced',['../classcubos_1_1gl_1_1RenderDevice.html#adb42dcaa84ab1ce5945ad3e87fc33e89',1,'cubos::gl::RenderDevice']]],
-  ['drawwirecube_254',['drawWireCube',['../classcubos_1_1gl_1_1Debug.html#a55d1df9b444bf4b89f5e0e7a62000815',1,'cubos::gl::Debug']]],
-  ['drawwiresphere_255',['drawWireSphere',['../classcubos_1_1gl_1_1Debug.html#aed22334212e0fbd3da233caada0e64bd',1,'cubos::gl::Debug']]]
+  ['clear_250',['clear',['../classcubos_1_1memory_1_1SerializationMap.html#ab00e610dedc028683dadee20d3ebaee5',1,'cubos::memory::SerializationMap::clear()'],['../classcubos_1_1Settings.html#a0cb3f94bdbee29eb019c7c7bc11b4327',1,'cubos::Settings::clear()']]],
+  ['clearcolor_251',['clearColor',['../classcubos_1_1gl_1_1RenderDevice.html#a8f791985c2c137e30b7d3fb5676cabcb',1,'cubos::gl::RenderDevice']]],
+  ['cleardepth_252',['clearDepth',['../classcubos_1_1gl_1_1RenderDevice.html#a5b40155a95286475ce4eec4eed7f16fe',1,'cubos::gl::RenderDevice']]],
+  ['clearstencil_253',['clearStencil',['../classcubos_1_1gl_1_1RenderDevice.html#a843c7cad027757c83f277056dee98a92',1,'cubos::gl::RenderDevice']]],
+  ['create_254',['create',['../classcubos_1_1io_1_1Window.html#a274063e6dc2ada19e4131002e9590999',1,'cubos::io::Window']]],
+  ['createblendstate_255',['createBlendState',['../classcubos_1_1gl_1_1RenderDevice.html#a2265376ae4cf710462610e5d65ff70fc',1,'cubos::gl::RenderDevice']]],
+  ['createconstantbuffer_256',['createConstantBuffer',['../classcubos_1_1gl_1_1RenderDevice.html#a5e1564bac3a2ececa03b36db8b3e7332',1,'cubos::gl::RenderDevice']]],
+  ['createcubemap_257',['createCubeMap',['../classcubos_1_1gl_1_1RenderDevice.html#a2173b72ed7922d3b28700da722165573',1,'cubos::gl::RenderDevice']]],
+  ['createdepthstencilstate_258',['createDepthStencilState',['../classcubos_1_1gl_1_1RenderDevice.html#ada9d051684c59f93124aa1b477a6cffa',1,'cubos::gl::RenderDevice']]],
+  ['createframebuffer_259',['createFramebuffer',['../classcubos_1_1gl_1_1RenderDevice.html#aa81bb2c4789de09e737e3a863e32fb27',1,'cubos::gl::RenderDevice']]],
+  ['createindexbuffer_260',['createIndexBuffer',['../classcubos_1_1gl_1_1RenderDevice.html#ae8fb08998cd59214c484cc3a64e1d8d7',1,'cubos::gl::RenderDevice']]],
+  ['createrasterstate_261',['createRasterState',['../classcubos_1_1gl_1_1RenderDevice.html#ac4e627e27fd589e506a2295cd0d19db6',1,'cubos::gl::RenderDevice']]],
+  ['createsampler_262',['createSampler',['../classcubos_1_1gl_1_1RenderDevice.html#a97b756d843a80ac0be7e0970b03fa8d6',1,'cubos::gl::RenderDevice']]],
+  ['createshaderpipeline_263',['createShaderPipeline',['../classcubos_1_1gl_1_1RenderDevice.html#a42a71e483e6393e558d47c9f340e05f5',1,'cubos::gl::RenderDevice']]],
+  ['createshaderstage_264',['createShaderStage',['../classcubos_1_1gl_1_1RenderDevice.html#a52e9c5f4ca77a23112420440d46b4a2e',1,'cubos::gl::RenderDevice']]],
+  ['createtexture1d_265',['createTexture1D',['../classcubos_1_1gl_1_1RenderDevice.html#a3a5319f8cd3c26f439c9b38a11c77c23',1,'cubos::gl::RenderDevice']]],
+  ['createtexture2d_266',['createTexture2D',['../classcubos_1_1gl_1_1RenderDevice.html#a9e2b50c25a2bdbcd49556f737646a75b',1,'cubos::gl::RenderDevice']]],
+  ['createtexture3d_267',['createTexture3D',['../classcubos_1_1gl_1_1RenderDevice.html#a9ef34632d2bbdd06ca285a4835fab6ae',1,'cubos::gl::RenderDevice']]],
+  ['createvertexarray_268',['createVertexArray',['../classcubos_1_1gl_1_1RenderDevice.html#a4b1142f2a32cd97573fa375858465d87',1,'cubos::gl::RenderDevice']]],
+  ['createvertexbuffer_269',['createVertexBuffer',['../classcubos_1_1gl_1_1RenderDevice.html#a76a06667ead8fbf41f24be75fd1bdf32',1,'cubos::gl::RenderDevice']]]
 ];

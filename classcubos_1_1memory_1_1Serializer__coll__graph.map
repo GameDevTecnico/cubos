@@ -1,0 +1,4 @@
+<map id="cubos::memory::Serializer" name="cubos::memory::Serializer">
+<area shape="rect" id="node1" title="Abstract class for serializing data." alt="" coords="5,112,196,139"/>
+<area shape="rect" id="node2" href="$classcubos_1_1memory_1_1Stream.html" title="Abstract class for memory streams." alt="" coords="12,14,189,41"/>
+</map>
