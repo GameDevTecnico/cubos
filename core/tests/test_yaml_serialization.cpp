@@ -125,15 +125,8 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Dictionary)
     auto stream = BufferStream(buf, sizeof(buf));
     {
         auto serializer = (Serializer*)new YAMLSerializer(stream);
-
-        std::unordered_map<std::string, int64_t> map = {{"one", 1}, {"two", 2}, {"three", 3}};
         const char* strs[] = {"one", "two", "three"};
-        std::unordered_map<std::string, std::unordered_map<std::string, int>> map2d = {
-            {"one", {{"one", 1}, {"two", 2}}},
-            {"two", {{"three", 3}, {"four", 4}}},
-        };
-
-        serializer->write(map, "map");
+    
         serializer->beginDictionary(3, "strings");
         for (size_t i = 0; i < 3; ++i)
         {
@@ -141,28 +134,16 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Dictionary)
             serializer->write(strs[i], nullptr);
         }
         serializer->endDictionary();
-        serializer->write(map2d, "map2d");
 
         delete serializer;
     }
     stream.put('\0');
 
     const char* expected = "---\n"
-                           "map:\n"
-                           "  three: 3\n"
-                           "  two: 2\n"
-                           "  one: 1\n"
                            "strings:\n"
                            "  0: one\n"
                            "  1: two\n"
                            "  2: three\n"
-                           "map2d:\n"
-                           "  two:\n"
-                           "    four: 4\n"
-                           "    three: 3\n"
-                           "  one:\n"
-                           "    two: 2\n"
-                           "    one: 1\n"
                            "...\n";
     EXPECT_STREQ(expected, buf);
 }
