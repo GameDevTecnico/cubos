@@ -1,6 +1,7 @@
 #include <cubos/memory/serializer.hpp>
 #include <cubos/memory/serialization_map.hpp>
 #include <cubos/memory/yaml_serializer.hpp>
+
 #include <stack>
 
 using namespace cubos::memory;
