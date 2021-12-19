@@ -119,8 +119,8 @@ else()
     find_package(spdlog REQUIRED)
 endif()
 
-target_link_libraries(cubos-core PUBLIC glm spdlog ${CMAKE_DL_LIBS})
-target_link_libraries(cubos-core PRIVATE glad yaml-cpp)
+target_link_libraries(cubos-core PUBLIC glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PRIVATE glad)
 
 # Add core tests
 
