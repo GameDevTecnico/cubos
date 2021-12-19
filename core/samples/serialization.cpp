@@ -1,5 +1,7 @@
 #include <cubos/memory/serializer.hpp>
 #include <cubos/memory/serialization_map.hpp>
+#include <cubos/memory/yaml_serializer.hpp>
+
 #include <stack>
 
 using namespace cubos::memory;
@@ -273,8 +275,15 @@ int main()
 {
     using namespace cubos::memory;
 
-    Serializer* s = new MySerializer(Stream::stdOut);
+    Serializer* s;
 
+    Stream::stdOut.print("Write 0 to serialize with a custom serializer, or 1 to serialize to YAML: ");
+    int type;
+    Stream::stdIn.parse(type);
+    if (type == 0)
+        s = new MySerializer(Stream::stdOut);
+    else
+        s = new YAMLSerializer(Stream::stdOut);
 
     // Dictionary of trivially serializable types (don't require context).
     std::unordered_map<int, Fruit> fruitsByPrice = {
@@ -285,6 +294,7 @@ int main()
     Stream::stdOut.print("# Dictionary of trivially serializable types\n");
     Stream::stdOut.print("# ------------------------------------------\n");
     s->write(fruitsByPrice, "fruitsByPrice");
+    s->flush();
 
     // Array to serialize
     std::vector<Human> humans(5);
@@ -299,11 +309,13 @@ int main()
     sMap.add(nullptr, -1);
     for (size_t i = 0; i < humans.size(); ++i)
         sMap.add(&humans[i], i);
-    
+
     // Serialize humans array
+    Stream::stdOut.print("\n\n");
     Stream::stdOut.print("# Family tree which requires context to be serialized\n");
     Stream::stdOut.print("# ---------------------------------------------------\n");
     s->write(humans, &sMap, "family");
+    s->flush();
 
     delete s;
     return 0;
