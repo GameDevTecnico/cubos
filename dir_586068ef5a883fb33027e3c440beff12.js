@@ -5,5 +5,7 @@ var dir_586068ef5a883fb33027e3c440beff12 =
     [ "serialization_map.hpp", "serialization__map_8hpp_source.html", null ],
     [ "serializer.hpp", "serializer_8hpp_source.html", null ],
     [ "std_stream.hpp", "std__stream_8hpp_source.html", null ],
-    [ "stream.hpp", "stream_8hpp_source.html", null ]
+    [ "stream.hpp", "stream_8hpp_source.html", null ],
+    [ "yaml_deserializer.hpp", "yaml__deserializer_8hpp_source.html", null ],
+    [ "yaml_serializer.hpp", "yaml__serializer_8hpp_source.html", null ]
 ];

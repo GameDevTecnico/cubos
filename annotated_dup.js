@@ -28,7 +28,9 @@ var annotated_dup =
         [ "SerializationMap", "classcubos_1_1memory_1_1SerializationMap.html", "classcubos_1_1memory_1_1SerializationMap" ],
         [ "Serializer", "classcubos_1_1memory_1_1Serializer.html", "classcubos_1_1memory_1_1Serializer" ],
         [ "StdStream", "classcubos_1_1memory_1_1StdStream.html", "classcubos_1_1memory_1_1StdStream" ],
-        [ "Stream", "classcubos_1_1memory_1_1Stream.html", "classcubos_1_1memory_1_1Stream" ]
+        [ "Stream", "classcubos_1_1memory_1_1Stream.html", "classcubos_1_1memory_1_1Stream" ],
+        [ "YAMLDeserializer", "classcubos_1_1memory_1_1YAMLDeserializer.html", "classcubos_1_1memory_1_1YAMLDeserializer" ],
+        [ "YAMLSerializer", "classcubos_1_1memory_1_1YAMLSerializer.html", "classcubos_1_1memory_1_1YAMLSerializer" ]
       ] ],
       [ "Event", "classcubos_1_1Event.html", "classcubos_1_1Event" ],
       [ "Settings", "classcubos_1_1Settings.html", "classcubos_1_1Settings" ]

@@ -46,7 +46,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classcubos_1_1memory_1_1StdStream.html#ae61af15851f43f77cec6ad3ad91baba8"
+"classcubos_1_1memory_1_1StdStream.html#ae61af15851f43f77cec6ad3ad91baba8",
+"window_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

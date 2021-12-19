@@ -11,7 +11,9 @@ var hierarchy =
     [ "cubos::gl::DepthStencilStateDesc::Depth", "structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Depth.html", null ],
     [ "cubos::gl::impl::DepthStencilState", "classcubos_1_1gl_1_1impl_1_1DepthStencilState.html", null ],
     [ "cubos::gl::DepthStencilStateDesc", "structcubos_1_1gl_1_1DepthStencilStateDesc.html", null ],
-    [ "cubos::memory::Deserializer", "classcubos_1_1memory_1_1Deserializer.html", null ],
+    [ "cubos::memory::Deserializer", "classcubos_1_1memory_1_1Deserializer.html", [
+      [ "cubos::memory::YAMLDeserializer", "classcubos_1_1memory_1_1YAMLDeserializer.html", null ]
+    ] ],
     [ "cubos::Event< TArgs >", "classcubos_1_1Event.html", null ],
     [ "cubos::Event< glm::ivec2 >", "classcubos_1_1Event.html", null ],
     [ "cubos::Event< Key >", "classcubos_1_1Event.html", null ],
@@ -26,7 +28,9 @@ var hierarchy =
     [ "cubos::gl::impl::Sampler", "classcubos_1_1gl_1_1impl_1_1Sampler.html", null ],
     [ "cubos::gl::SamplerDesc", "structcubos_1_1gl_1_1SamplerDesc.html", null ],
     [ "cubos::memory::SerializationMap< R, I >", "classcubos_1_1memory_1_1SerializationMap.html", null ],
-    [ "cubos::memory::Serializer", "classcubos_1_1memory_1_1Serializer.html", null ],
+    [ "cubos::memory::Serializer", "classcubos_1_1memory_1_1Serializer.html", [
+      [ "cubos::memory::YAMLSerializer", "classcubos_1_1memory_1_1YAMLSerializer.html", null ]
+    ] ],
     [ "cubos::Settings", "classcubos_1_1Settings.html", null ],
     [ "cubos::gl::impl::ShaderBindingPoint", "classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html", null ],
     [ "cubos::gl::impl::ShaderPipeline", "classcubos_1_1gl_1_1impl_1_1ShaderPipeline.html", null ],
