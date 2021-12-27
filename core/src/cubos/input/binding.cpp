@@ -1,4 +1,4 @@
-#include <cubos/input/binding.hpp>
+/*#include <cubos/input/binding.hpp>
 
 using namespace cubos::input;
 using namespace cubos::io;
@@ -37,4 +37,4 @@ void AxisBinding::handlePosKey()
 void AxisBinding::handleNegKey()
 {
     // TODO
-}
+}*/

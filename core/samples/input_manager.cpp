@@ -19,11 +19,11 @@ int main(void)
     initializeLogger();
     auto window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
-
+    /*
     input::InputManager::Init(window);
     input::InputManager::RegisterMouseBinding(cubos::io::MouseButton::Left, redIinc);
     input::InputManager::RegisterKeyBinding(cubos::io::Key::D, redIdec);
-
+    */
     while (!window->shouldClose())
     {
         renderDevice.clearColor(red, 0.0, 0.0, 0.0f);

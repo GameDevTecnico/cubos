@@ -5,6 +5,7 @@
 using namespace cubos::io;
 using namespace cubos::input;
 
+/*
 std::map<std::string, std::shared_ptr<ActionMapping>> InputManager::mappings =
     std::map<std::string, std::shared_ptr<ActionMapping>>();
 std::map<cubos::io::Key, std::vector<std::function<void(void)>>> InputManager::keyBindings =
@@ -159,4 +160,4 @@ void InputManager::RegisterAxisBinding(cubos::io::Key keyPos, cubos::io::Key key
         InputManager::keyBindings[keyNeg] = std::vector<std::function<void(void)>>();
     }
     InputManager::keyBindings[keyNeg].push_back([&]() { callback(-1); });
-}
+}*/

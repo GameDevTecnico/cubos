@@ -16,12 +16,14 @@
 
 namespace cubos::input
 {
-    class Binding;
+
+    // class Binding;
 
     class InputContext
     {
     };
 
+    /*
     struct ButtonBindingDesc
     {
         enum ButtonType
@@ -32,8 +34,8 @@ namespace cubos::input
 
         ButtonType type;
         std::variant<cubos::io::Key, cubos::io::MouseButton> button;
-    };
-
+    };*/
+    /*
     class ActionMapping : public std::enable_shared_from_this<ActionMapping>
     {
     public:
@@ -44,11 +46,48 @@ namespace cubos::input
     private:
         Event<InputContext> onTrigger;
         std::vector<std::shared_ptr<Binding>> bindings;
+    };*/
+
+    class InputSource
+    {
+    public:
+        void SubscribeEvents(cubos::io::Window* window);
+        void UnsubscribeEvents(cubos::io::Window* window);
+        bool isTriggered();
+    };
+
+    class ButtonPress : public InputSource
+    {
+    public:
+        std::variant<cubos::io::Key, cubos::io::MouseButton> button;
+        ButtonPress(cubos::io::Key key);
+        ButtonPress(cubos::io::MouseButton button);
+
+    private:
+        void handleKeyUp();
+        void handleKeyDown();
+    };
+
+    class InputAction
+    {
+    public:
+        std::string name;
+        bool enable;
+
+        InputAction(std::string name);
+        void AddInput(InputSource source);
+        void AddBinding(std::function<void(InputContext)>);
+        void ProcessSources();
     };
 
     class InputManager
     {
     public:
+        static std::map<std::string, InputAction> actions;
+
+        static InputAction CreateAction(std::string name);
+        static InputAction GetAction(std::string name);
+        /*
         static void Init(cubos::io::Window* window);
         static std::shared_ptr<ActionMapping> CreateActionMapping(const std::string& name);
         static std::shared_ptr<ActionMapping> GetActionMapping(const std::string& name);
@@ -56,7 +95,6 @@ namespace cubos::input
         static void RegisterMouseBinding(cubos::io::MouseButton mouse, std::function<void(void)> callback);
         static void RegisterAxisBinding(cubos::io::Key keyPos, cubos::io::Key keyNeg,
                                         std::function<void(float)> callback);
-
     private:
         static cubos::io::Window* window;
         static std::map<std::string, std::shared_ptr<ActionMapping>> mappings;
@@ -68,6 +106,7 @@ namespace cubos::input
         static void handleMouseDown(cubos::io::MouseButton mouseButton);
         static void handleMouseUp(cubos::io::MouseButton mouseButton);
         friend class ActionMapping;
+    */
     };
 } // namespace cubos::input
 

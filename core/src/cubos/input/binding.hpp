@@ -1,4 +1,4 @@
-#ifndef CUBOS_INPUT_BINDING_HPP
+/*#ifndef CUBOS_INPUT_BINDING_HPP
 #define CUBOS_INPUT_BINDING_HPP
 
 #include <memory>
@@ -34,4 +34,4 @@ namespace cubos::input
 
 } // namespace cubos::input
 
-#endif // CUBOS_INPUT_BINDING_HPP
+#endif // CUBOS_INPUT_BINDING_HPP*/
