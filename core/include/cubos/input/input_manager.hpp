@@ -74,7 +74,10 @@ namespace cubos::input
         std::string name;
         bool enable;
 
-        InputAction(std::string name);
+        InputAction(std::string actionName)
+        {
+            name = actionName;
+        }
         void AddInput(InputSource source);
         void AddBinding(std::function<void(InputContext)>);
         void ProcessSources();
@@ -83,10 +86,10 @@ namespace cubos::input
     class InputManager
     {
     public:
-        static std::map<std::string, InputAction> actions;
+        static std::map<std::string, std::shared_ptr<InputAction>> actions;
 
-        static InputAction CreateAction(std::string name);
-        static InputAction GetAction(std::string name);
+        static std::shared_ptr<InputAction> CreateAction(std::string name);
+        static std::shared_ptr<InputAction> GetAction(std::string name);
         /*
         static void Init(cubos::io::Window* window);
         static std::shared_ptr<ActionMapping> CreateActionMapping(const std::string& name);

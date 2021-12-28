@@ -5,6 +5,25 @@
 using namespace cubos::io;
 using namespace cubos::input;
 
+std::map<std::string, std::shared_ptr<InputAction>> InputManager::actions =
+    std::map<std::string, std::shared_ptr<InputAction>>();
+
+std::shared_ptr<InputAction> InputManager::CreateAction(std::string name)
+{
+    std::shared_ptr<InputAction> action = std::make_shared<InputAction>(name);
+    // What if it tries to create 2 actions with the same name? We have to check?
+    InputManager::actions.insert({name, action});
+    return action;
+};
+
+std::shared_ptr<InputAction> InputManager::GetAction(std::string name)
+{
+    if (InputManager::actions.contains(name))
+        return InputManager::actions[name];
+    else
+        return nullptr;
+};
+
 /*
 std::map<std::string, std::shared_ptr<ActionMapping>> InputManager::mappings =
     std::map<std::string, std::shared_ptr<ActionMapping>>();
