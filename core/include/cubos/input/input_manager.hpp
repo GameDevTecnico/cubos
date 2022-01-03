@@ -51,26 +51,39 @@ namespace cubos::input
     class InputSource
     {
     public:
-        void SubscribeEvents(cubos::io::Window* window);
-        void UnsubscribeEvents(cubos::io::Window* window);
-        bool isTriggered();
+        virtual void SubscribeEvents(cubos::io::Window* window) = 0;
+        virtual void UnsubscribeEvents(cubos::io::Window* window) = 0;
+        virtual bool isTriggered() = 0;
     };
 
     class ButtonPress : public InputSource
     {
     public:
         std::variant<cubos::io::Key, cubos::io::MouseButton> button;
-        ButtonPress(cubos::io::Key key);
-        ButtonPress(cubos::io::MouseButton button);
+        ButtonPress(cubos::io::Key key)
+        {
+            button = key;
+        }
+        ButtonPress(cubos::io::MouseButton button)
+        {
+            this->button = button;
+        }
+
+        bool isTriggered();
+        void SubscribeEvents(cubos::io::Window* window);
+        void UnsubscribeEvents(cubos::io::Window* window);
 
     private:
-        void handleKeyUp();
-        void handleKeyDown();
+        bool wasTriggered = false;
+        void handleKeyUp(std::variant<cubos::io::Key, cubos::io::MouseButton>);
+        void handleKeyDown(cubos::io::Key key);
     };
 
     class InputAction
     {
     public:
+        std::list<InputSource*> inputSources;
+        std::list<std::function<void(InputContext)>> functionBindings;
         std::string name;
         bool enable;
 
@@ -78,18 +91,23 @@ namespace cubos::input
         {
             name = actionName;
         }
-        void AddInput(InputSource source);
-        void AddBinding(std::function<void(InputContext)>);
+        void AddInput(InputSource* source);
+        void AddBinding(std::function<void(InputContext)> binding);
         void ProcessSources();
     };
 
     class InputManager
     {
     public:
+        static cubos::io::Window* window;
         static std::map<std::string, std::shared_ptr<InputAction>> actions;
 
+        static void Init(cubos::io::Window* window);
         static std::shared_ptr<InputAction> CreateAction(std::string name);
         static std::shared_ptr<InputAction> GetAction(std::string name);
+        static void ProcessActions();
+
+        static void handleKeyDown(cubos::io::Key key);
         /*
         static void Init(cubos::io::Window* window);
         static std::shared_ptr<ActionMapping> CreateActionMapping(const std::string& name);

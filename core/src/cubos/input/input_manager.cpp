@@ -7,11 +7,17 @@ using namespace cubos::input;
 
 std::map<std::string, std::shared_ptr<InputAction>> InputManager::actions =
     std::map<std::string, std::shared_ptr<InputAction>>();
-
+cubos::io::Window* InputManager::window = nullptr;
 std::shared_ptr<InputAction> InputManager::CreateAction(std::string name)
 {
+    if (InputManager::actions.contains(name))
+    {
+        // returns null if an action with that name already exists
+        return nullptr;
+    }
+
     std::shared_ptr<InputAction> action = std::make_shared<InputAction>(name);
-    // What if it tries to create 2 actions with the same name? We have to check?
+
     InputManager::actions.insert({name, action});
     return action;
 };
@@ -20,9 +26,76 @@ std::shared_ptr<InputAction> InputManager::GetAction(std::string name)
 {
     if (InputManager::actions.contains(name))
         return InputManager::actions[name];
-    else
-        return nullptr;
+    return nullptr;
 };
+
+bool ButtonPress::isTriggered()
+{
+    if (ButtonPress::wasTriggered)
+    {
+        ButtonPress::wasTriggered = false;
+        return true;
+    }
+    return false;
+}
+
+void ButtonPress::SubscribeEvents(cubos::io::Window* window)
+{
+    window->onKeyDown.registerCallback([this](cubos::io::Key key) { this->handleKeyDown(key); });
+}
+
+void ButtonPress::UnsubscribeEvents(cubos::io::Window* window)
+{
+}
+
+void ButtonPress::handleKeyDown(cubos::io::Key key)
+{
+    // verify the key
+    this->wasTriggered = true;
+}
+
+void InputAction::AddInput(InputSource* source)
+{
+    source->SubscribeEvents(InputManager::window);
+    this->inputSources.push_back(source);
+}
+
+void InputAction::AddBinding(std::function<void(InputContext)> binding)
+{
+    this->functionBindings.push_back(binding);
+}
+
+void InputAction::ProcessSources()
+{
+    std::list<InputSource*>::iterator itSource;
+    std::list<std::function<void(InputContext)>>::iterator itBinding;
+    for (itSource = InputAction::inputSources.begin(); itSource != InputAction::inputSources.end(); itSource++)
+    {
+        if ((*itSource)->isTriggered())
+        {
+            for (itBinding = InputAction::functionBindings.begin(); itBinding != InputAction::functionBindings.end();
+                 itBinding++)
+            {
+                (*itBinding)(InputContext());
+            }
+            return;
+        }
+    }
+}
+
+void InputManager::ProcessActions()
+{
+    std::map<std::string, std::shared_ptr<InputAction>>::iterator it;
+    for (it = InputManager::actions.begin(); it != InputManager::actions.end(); it++)
+    {
+        it->second->ProcessSources();
+    }
+}
+
+void InputManager::Init(cubos::io::Window* window)
+{
+    InputManager::window = window;
+}
 
 /*
 std::map<std::string, std::shared_ptr<ActionMapping>> InputManager::mappings =
