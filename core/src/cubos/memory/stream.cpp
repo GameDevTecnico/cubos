@@ -21,7 +21,7 @@ Stream& Stream::stdErr = stdErrI;
 
 char Stream::get()
 {
-    char c;
+    char c = '\0';
     this->read(&c, sizeof(c));
     return c;
 }
@@ -456,10 +456,8 @@ void Stream::readUntil(std::string& str, const char* terminator)
     size_t terminatorI = 0;
     char c;
 
-    while (!this->eof() && this->peek() != '\0')
+    for (char c = this->get(); !this->eof() && c != '\0'; c = this->get())
     {
-        c = this->get();
-
         if (c == terminator[terminatorI])
         {
             ++terminatorI;
@@ -484,10 +482,8 @@ size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
     size_t terminatorI = 0, position = 0;
     char c;
 
-    while (!this->eof() && this->peek() != '\0' && position < size)
+    for (char c = this->get(); !this->eof() && c != '\0' && position < size; c = this->get())
     {
-        c = this->get();
-
         if (c == terminator[terminatorI])
         {
             ++terminatorI;

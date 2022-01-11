@@ -8,6 +8,14 @@ StdStream::StdStream(FILE* file, bool close)
     this->close = close;
 }
 
+StdStream::StdStream(StdStream&& other)
+{
+    this->file = other.file;
+    this->close = other.close;
+    other.file = nullptr;
+    other.close = false;
+}
+
 StdStream::~StdStream()
 {
     if (this->close)
