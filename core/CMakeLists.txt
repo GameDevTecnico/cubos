@@ -31,6 +31,10 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/memory/yaml_serializer.cpp"
     "src/cubos/memory/yaml_deserializer.cpp"
 
+    "src/cubos/data/file.cpp"
+    "src/cubos/data/file_system.cpp"
+    "src/cubos/data/std_archive.cpp"
+
     "src/cubos/io/window.cpp"
     "src/cubos/io/glfw_window.hpp"
     "src/cubos/io/glfw_window.cpp"
@@ -47,20 +51,23 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/memory/stream.hpp"
     "include/cubos/memory/std_stream.hpp"
     "include/cubos/memory/buffer_stream.hpp"
-    
-    "include/cubos/memory/stream.hpp"
-    "include/cubos/memory/serialization_map.hpp"
     "include/cubos/memory/serializer.hpp"
     "include/cubos/memory/deserializer.hpp"
     "include/cubos/memory/yaml_serializer.hpp"
     "include/cubos/memory/yaml_deserializer.hpp"
+    "include/cubos/memory/serialization_map.hpp"
+    
+    "include/cubos/data/file.hpp"
+    "include/cubos/data/file_stream.hpp"
+    "include/cubos/data/file_system.hpp"
+    "include/cubos/data/archive.hpp"
+    "include/cubos/data/std_archive.hpp"
 
     "include/cubos/io/window.hpp"
 
     "include/cubos/gl/debug.hpp"
     "include/cubos/gl/render_device.hpp"
 )
-
 
 # Create core library
 
@@ -119,7 +126,7 @@ else()
     find_package(spdlog REQUIRED)
 endif()
 
-target_link_libraries(cubos-core PUBLIC glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp ${CMAKE_DL_LIBS} pthread)
 target_link_libraries(cubos-core PRIVATE glad)
 
 # Add core tests
