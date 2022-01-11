@@ -8,11 +8,19 @@ float red = 0.0f;
 void redIinc(input::InputContext context)
 {
     red += 0.1f;
+    if (red > 1)
+    {
+        red = 1;
+    }
 }
 
 void redIdec(input::InputContext context)
 {
     red -= 0.1f;
+    if (red < 0)
+    {
+        red = 0;
+    }
 }
 int main(void)
 {
@@ -21,10 +29,15 @@ int main(void)
     auto& renderDevice = window->getRenderDevice();
 
     input::InputManager::init(window);
-    auto testAction = input::InputManager::createAction("test");
-    testAction->addBinding(redIinc);
-    testAction->addInput(new input::ButtonPress(io::Key::K));
-    testAction->addInput(new input::ButtonPress(io::MouseButton::Left));
+    auto incRedAction = input::InputManager::createAction("increase_red");
+    incRedAction->addBinding(redIinc);
+    incRedAction->addInput(new input::ButtonPress(io::Key::W));
+    incRedAction->addInput(new input::ButtonPress(io::MouseButton::Left));
+
+    auto decRedAction = input::InputManager::createAction("decrease_red");
+    decRedAction->addBinding(redIdec);
+    decRedAction->addInput(new input::ButtonPress(io::Key::S));
+    decRedAction->addInput(new input::ButtonPress(io::MouseButton::Right));
 
     while (!window->shouldClose())
     {
