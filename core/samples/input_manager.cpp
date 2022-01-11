@@ -24,6 +24,8 @@ int main(void)
     auto testAction = input::InputManager::createAction("test");
     testAction->addBinding(redIinc);
     testAction->addInput(new input::ButtonPress(io::Key::K));
+    testAction->addInput(new input::ButtonPress(io::MouseButton::Left));
+
     while (!window->shouldClose())
     {
         renderDevice.clearColor(red, 0.0, 0.0, 0.0f);

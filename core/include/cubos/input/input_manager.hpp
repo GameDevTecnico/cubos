@@ -50,8 +50,7 @@ namespace cubos::input
 
     private:
         bool wasTriggered = false;
-        void handleKeyUp(cubos::io::Key key);
-        void handleKeyDown();
+        void handleButtonDown();
     };
 
     class InputAction
@@ -79,6 +78,8 @@ namespace cubos::input
 
         static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyDownCallbacks;
         static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyUpCallbacks;
+        static std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> mouseButtonDownCallbacks;
+        static std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> mouseButtonUpCallbacks;
 
         static void init(cubos::io::Window* window);
         static std::shared_ptr<InputAction> createAction(std::string name);
@@ -86,12 +87,13 @@ namespace cubos::input
         static void processActions();
 
         static void registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key);
+        static void registerMouseButtonDownCallback(std::function<void(void)> callback, cubos::io::MouseButton);
 
     private:
         static void handleKeyDown(cubos::io::Key key);
         static void handleKeyUp(cubos::io::Key key);
-        static void handleMouseDown(cubos::io::MouseButton mouseButton);
-        static void handleMouseUp(cubos::io::MouseButton mouseButton);
+        static void handleMouseButtonDown(cubos::io::MouseButton mouseButton);
+        static void handleMouseButtonUp(cubos::io::MouseButton mouseButton);
     };
 } // namespace cubos::input
 

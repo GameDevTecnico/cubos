@@ -1,4 +1,5 @@
 #include <memory>
+#include <variant>
 #include <cubos/input/input_manager.hpp>
 #include <cubos/input/binding.hpp>
 
@@ -11,6 +12,10 @@ std::map<cubos::io::Key, std::vector<std::function<void(void)>>> InputManager::k
     std::map<cubos::io::Key, std::vector<std::function<void(void)>>>();
 std::map<cubos::io::Key, std::vector<std::function<void(void)>>> InputManager::keyUpCallbacks =
     std::map<cubos::io::Key, std::vector<std::function<void(void)>>>();
+std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> InputManager::mouseButtonDownCallbacks =
+    std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>>();
+std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> InputManager::mouseButtonUpCallbacks =
+    std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>>();
 cubos::io::Window* InputManager::window = nullptr;
 
 void InputManager::registerKeyDownCallback(std::function<void()> callback, cubos::io::Key key)
@@ -24,6 +29,20 @@ void InputManager::registerKeyDownCallback(std::function<void()> callback, cubos
         std::vector<std::function<void(void)>> v = std::vector<std::function<void(void)>>();
         v.push_back(callback);
         InputManager::keyDownCallbacks.insert({key, v});
+    }
+};
+
+void InputManager::registerMouseButtonDownCallback(std::function<void()> callback, cubos::io::MouseButton mouseButton)
+{
+    if (InputManager::mouseButtonDownCallbacks.contains(mouseButton))
+    {
+        InputManager::mouseButtonDownCallbacks[mouseButton].push_back(callback);
+    }
+    else
+    {
+        std::vector<std::function<void(void)>> v = std::vector<std::function<void(void)>>();
+        v.push_back(callback);
+        InputManager::mouseButtonDownCallbacks.insert({mouseButton, v});
     }
 };
 
@@ -60,14 +79,23 @@ bool ButtonPress::isTriggered()
 
 void ButtonPress::subscribeEvents(cubos::io::Window* window)
 {
-    InputManager::registerKeyDownCallback([this]() { this->handleKeyDown(); }, std::get<cubos::io::Key>(this->button));
+    if (std::holds_alternative<cubos::io::Key>(this->button))
+    {
+        InputManager::registerKeyDownCallback([this]() { this->handleButtonDown(); },
+                                              std::get<cubos::io::Key>(this->button));
+    }
+    else if (std::holds_alternative<cubos::io::MouseButton>(this->button))
+    {
+        InputManager::registerMouseButtonDownCallback([this]() { this->handleButtonDown(); },
+                                                      std::get<cubos::io::MouseButton>(this->button));
+    }
 }
 
 void ButtonPress::unsubscribeEvents(cubos::io::Window* window)
 {
 }
 
-void ButtonPress::handleKeyDown()
+void ButtonPress::handleButtonDown()
 {
     this->wasTriggered = true;
 }
@@ -123,11 +151,27 @@ void InputManager::handleKeyDown(cubos::io::Key key)
     };
 };
 
+void InputManager::handleMouseButtonDown(cubos::io::MouseButton mouseButton)
+{
+    for (auto itCallbacksVector = InputManager::mouseButtonDownCallbacks.begin();
+         itCallbacksVector != InputManager::mouseButtonDownCallbacks.end(); itCallbacksVector++)
+    {
+        if (itCallbacksVector->first == mouseButton)
+        {
+            for (auto itCallback = itCallbacksVector->second.begin(); itCallback != itCallbacksVector->second.end();
+                 itCallback++)
+            {
+                (*itCallback)();
+            }
+        }
+    };
+};
+
 void InputManager::init(cubos::io::Window* window)
 {
     InputManager::window = window;
     InputManager::window->onKeyDown.registerCallback(handleKeyDown);
     // InputManager::window->onKeyUp.registerCallback(handleKeyUp);
-    // InputManager::window->onMouseDown.registerCallback(handleMouseDown);
+    InputManager::window->onMouseDown.registerCallback(handleMouseButtonDown);
     // InputManager::window->onMouseUp.registerCallback(handleMouseUp);
 }
