@@ -4,6 +4,8 @@
 # Set sample source files
 set(CORE_SAMPLES_SOURCES
     "render_device.cpp"
+    "debug_renderer.cpp"
+    "serialization.cpp"
     "input_manager.cpp"
 )
 
@@ -20,4 +22,5 @@ foreach(file ${CORE_SAMPLES_SOURCES})
     add_executable(${target} ${file})
     target_link_libraries(${target} cubos-core)
     set_property(TARGET ${target} PROPERTY CXX_STANDARD 20)
+    target_compile_features(${target} PUBLIC cxx_std_20)
 endforeach()

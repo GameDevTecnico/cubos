@@ -23,6 +23,14 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/log.cpp"
     "src/cubos/settings.cpp"
 
+    "src/cubos/memory/stream.cpp"
+    "src/cubos/memory/std_stream.cpp"
+    "src/cubos/memory/buffer_stream.cpp"
+    "src/cubos/memory/serializer.cpp"
+    "src/cubos/memory/deserializer.cpp"
+    "src/cubos/memory/yaml_serializer.cpp"
+    "src/cubos/memory/yaml_deserializer.cpp"
+
     "src/cubos/io/window.cpp"
     "src/cubos/io/glfw_window.hpp"
     "src/cubos/io/glfw_window.cpp"
@@ -31,6 +39,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/input/binding.cpp"
     "src/cubos/input/input_manager.cpp"
 
+    "src/cubos/gl/debug.cpp"
+    
     "src/cubos/gl/ogl_render_device.hpp"
     "src/cubos/gl/ogl_render_device.cpp"
 )
@@ -38,9 +48,21 @@ set(CUBOS_CORE_SOURCE
 set(CUBOS_CORE_INCLUDE
     "include/cubos/log.hpp"
     "include/cubos/settings.hpp"
+
+    "include/cubos/memory/stream.hpp"
+    "include/cubos/memory/std_stream.hpp"
+    "include/cubos/memory/buffer_stream.hpp"
     
+    "include/cubos/memory/stream.hpp"
+    "include/cubos/memory/serialization_map.hpp"
+    "include/cubos/memory/serializer.hpp"
+    "include/cubos/memory/deserializer.hpp"
+    "include/cubos/memory/yaml_serializer.hpp"
+    "include/cubos/memory/yaml_deserializer.hpp"
+
     "include/cubos/io/window.hpp"
 
+    "include/cubos/gl/debug.hpp"
     "include/cubos/gl/render_device.hpp"
 
     "include/cubos/input/input_manager.hpp"
@@ -52,6 +74,7 @@ set(CUBOS_CORE_INCLUDE
 add_library(cubos-core ${CUBOS_CORE_SOURCE} ${CUBOS_CORE_INCLUDE})
 target_include_directories(cubos-core PUBLIC "include" PRIVATE "src")
 set_property(TARGET cubos-core PROPERTY CXX_STANDARD 20)
+target_compile_features(cubos-core PUBLIC cxx_std_20)
 
 # Link dependencies
 
@@ -103,8 +126,8 @@ else()
     find_package(spdlog REQUIRED)
 endif()
 
-target_link_libraries(cubos-core PUBLIC glm spdlog ${CMAKE_DL_LIBS})
-target_link_libraries(cubos-core PRIVATE glad yaml-cpp)
+target_link_libraries(cubos-core PUBLIC glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PRIVATE glad)
 
 # Add core tests
 

@@ -129,6 +129,16 @@ bool GLFWWindow::shouldClose() const
 #endif
 }
 
+double GLFWWindow::getTime() const
+{
+#ifdef WITH_GLFW
+    return glfwGetTime();
+#else
+    logCritical("GLFWWindow::getTime() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
 #ifdef WITH_GLFW
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
