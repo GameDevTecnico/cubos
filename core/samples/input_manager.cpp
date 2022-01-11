@@ -19,17 +19,17 @@ int main(void)
     initializeLogger();
     auto window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
-    input::InputManager::Init(window);
-    auto testAction = input::InputManager::CreateAction("test");
-    testAction->AddBinding(redIinc);
-    testAction->AddInput(new input::ButtonPress(io::Key::K));
 
+    input::InputManager::init(window);
+    auto testAction = input::InputManager::createAction("test");
+    testAction->addBinding(redIinc);
+    testAction->addInput(new input::ButtonPress(io::Key::K));
     while (!window->shouldClose())
     {
         renderDevice.clearColor(red, 0.0, 0.0, 0.0f);
         window->swapBuffers();
         window->pollEvents();
-        input::InputManager::ProcessActions();
+        input::InputManager::processActions();
     }
 
     delete window;

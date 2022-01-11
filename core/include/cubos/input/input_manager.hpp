@@ -26,8 +26,8 @@ namespace cubos::input
     class InputSource
     {
     public:
-        virtual void SubscribeEvents(cubos::io::Window* window) = 0;
-        virtual void UnsubscribeEvents(cubos::io::Window* window) = 0;
+        virtual void subscribeEvents(cubos::io::Window* window) = 0;
+        virtual void unsubscribeEvents(cubos::io::Window* window) = 0;
         virtual bool isTriggered() = 0;
     };
 
@@ -45,8 +45,8 @@ namespace cubos::input
         }
 
         bool isTriggered();
-        void SubscribeEvents(cubos::io::Window* window);
-        void UnsubscribeEvents(cubos::io::Window* window);
+        void subscribeEvents(cubos::io::Window* window);
+        void unsubscribeEvents(cubos::io::Window* window);
 
     private:
         bool wasTriggered = false;
@@ -66,9 +66,9 @@ namespace cubos::input
         {
             name = actionName;
         }
-        void AddInput(InputSource* source);
-        void AddBinding(std::function<void(InputContext)> binding);
-        void ProcessSources();
+        void addInput(InputSource* source);
+        void addBinding(std::function<void(InputContext)> binding);
+        void processSources();
     };
 
     class InputManager
@@ -80,10 +80,10 @@ namespace cubos::input
         static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyDownCallbacks;
         static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyUpCallbacks;
 
-        static void Init(cubos::io::Window* window);
-        static std::shared_ptr<InputAction> CreateAction(std::string name);
-        static std::shared_ptr<InputAction> GetAction(std::string name);
-        static void ProcessActions();
+        static void init(cubos::io::Window* window);
+        static std::shared_ptr<InputAction> createAction(std::string name);
+        static std::shared_ptr<InputAction> getAction(std::string name);
+        static void processActions();
 
         static void registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key);
 

@@ -27,7 +27,7 @@ void InputManager::registerKeyDownCallback(std::function<void()> callback, cubos
     }
 };
 
-std::shared_ptr<InputAction> InputManager::CreateAction(std::string name)
+std::shared_ptr<InputAction> InputManager::createAction(std::string name)
 {
     if (InputManager::actions.contains(name))
     {
@@ -41,7 +41,7 @@ std::shared_ptr<InputAction> InputManager::CreateAction(std::string name)
     return action;
 };
 
-std::shared_ptr<InputAction> InputManager::GetAction(std::string name)
+std::shared_ptr<InputAction> InputManager::getAction(std::string name)
 {
     if (InputManager::actions.contains(name))
         return InputManager::actions[name];
@@ -58,12 +58,12 @@ bool ButtonPress::isTriggered()
     return false;
 }
 
-void ButtonPress::SubscribeEvents(cubos::io::Window* window)
+void ButtonPress::subscribeEvents(cubos::io::Window* window)
 {
     InputManager::registerKeyDownCallback([this]() { this->handleKeyDown(); }, std::get<cubos::io::Key>(this->button));
 }
 
-void ButtonPress::UnsubscribeEvents(cubos::io::Window* window)
+void ButtonPress::unsubscribeEvents(cubos::io::Window* window)
 {
 }
 
@@ -72,27 +72,25 @@ void ButtonPress::handleKeyDown()
     this->wasTriggered = true;
 }
 
-void InputAction::AddInput(InputSource* source)
+void InputAction::addInput(InputSource* source)
 {
-    source->SubscribeEvents(InputManager::window);
+    source->subscribeEvents(InputManager::window);
     this->inputSources.push_back(source);
 }
 
-void InputAction::AddBinding(std::function<void(InputContext)> binding)
+void InputAction::addBinding(std::function<void(InputContext)> binding)
 {
     this->functionBindings.push_back(binding);
 }
 
-void InputAction::ProcessSources()
+void InputAction::processSources()
 {
-    std::list<InputSource*>::iterator itSource;
-    std::list<std::function<void(InputContext)>>::iterator itBinding;
-    for (itSource = InputAction::inputSources.begin(); itSource != InputAction::inputSources.end(); itSource++)
+    for (auto itSource = InputAction::inputSources.begin(); itSource != InputAction::inputSources.end(); itSource++)
     {
         if ((*itSource)->isTriggered())
         {
-            for (itBinding = InputAction::functionBindings.begin(); itBinding != InputAction::functionBindings.end();
-                 itBinding++)
+            for (auto itBinding = InputAction::functionBindings.begin();
+                 itBinding != InputAction::functionBindings.end(); itBinding++)
             {
                 (*itBinding)(InputContext());
             }
@@ -101,25 +99,22 @@ void InputAction::ProcessSources()
     }
 }
 
-void InputManager::ProcessActions()
+void InputManager::processActions()
 {
-    std::map<std::string, std::shared_ptr<InputAction>>::iterator it;
-    for (it = InputManager::actions.begin(); it != InputManager::actions.end(); it++)
+    for (auto it = InputManager::actions.begin(); it != InputManager::actions.end(); it++)
     {
-        it->second->ProcessSources();
+        it->second->processSources();
     }
 }
 
 void InputManager::handleKeyDown(cubos::io::Key key)
 {
-    std::map<cubos::io::Key, std::vector<std::function<void(void)>>>::iterator itCallbacksVector;
-    std::vector<std::function<void(void)>>::iterator itCallback;
-    for (itCallbacksVector = InputManager::keyDownCallbacks.begin();
+    for (auto itCallbacksVector = InputManager::keyDownCallbacks.begin();
          itCallbacksVector != InputManager::keyDownCallbacks.end(); itCallbacksVector++)
     {
         if (itCallbacksVector->first == key)
         {
-            for (itCallback = itCallbacksVector->second.begin(); itCallback != itCallbacksVector->second.end();
+            for (auto itCallback = itCallbacksVector->second.begin(); itCallback != itCallbacksVector->second.end();
                  itCallback++)
             {
                 (*itCallback)();
@@ -128,7 +123,7 @@ void InputManager::handleKeyDown(cubos::io::Key key)
     };
 };
 
-void InputManager::Init(cubos::io::Window* window)
+void InputManager::init(cubos::io::Window* window)
 {
     InputManager::window = window;
     InputManager::window->onKeyDown.registerCallback(handleKeyDown);
