@@ -113,12 +113,12 @@ void InputAction::addBinding(std::function<void(InputContext)> binding)
 
 void InputAction::processSources()
 {
-    for (auto itSource = InputAction::inputSources.begin(); itSource != InputAction::inputSources.end(); itSource++)
+    for (auto itSource = this->inputSources.begin(); itSource != this->inputSources.end(); itSource++)
     {
         if ((*itSource)->isTriggered())
         {
-            for (auto itBinding = InputAction::functionBindings.begin();
-                 itBinding != InputAction::functionBindings.end(); itBinding++)
+            for (auto itBinding = this->functionBindings.begin(); itBinding != this->functionBindings.end();
+                 itBinding++)
             {
                 (*itBinding)(InputContext());
             }
