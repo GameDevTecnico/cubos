@@ -86,11 +86,11 @@ namespace cubos::input
         template <class TObj, typename... TArgs> class ObjectCallback : public Callback<TArgs...>
         {
         public:
-            ObjectCallback(TObj* obj, void (TObj::*callback)()) : obj(obj), callback(callback)
+            ObjectCallback(TObj* obj, void (TObj::*callback)(TArgs...)) : obj(obj), callback(callback)
             {
             }
             TObj* obj;
-            void (TObj::*callback)();
+            void (TObj::*callback)(TArgs...);
             virtual void call(TArgs... args) override
             {
                 (obj->*callback)(args...);
@@ -128,9 +128,12 @@ namespace cubos::input
                 auto it = keyDownObjectCallbacks[key].begin();
                 for (; it < keyDownObjectCallbacks[key].end(); it++)
                 {
-                    auto cb = dynamic_cast<ObjectCallback<T>*>(*it);
-                    if (cb != nullptr && cb->obj == obj && cb->callback == callback)
-                        break;
+                    if (typeid(**it) == typeid(ObjectCallback<T>))
+                    {
+                        auto cb = static_cast<ObjectCallback<T>*>(*it);
+                        if (cb->obj == obj && cb->callback == callback)
+                            break;
+                    }
                 }
                 if (it != keyDownObjectCallbacks[key].end())
                 {
