@@ -77,6 +77,26 @@ namespace cubos::input
         static std::map<std::string, std::shared_ptr<InputAction>> actions;
 
         static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyDownCallbacks;
+
+        class Callback
+        {
+        public:
+            virtual void call() = 0;
+        };
+        template <class TObj> class ObjectCallback : public Callback
+        {
+        public:
+            ObjectCallback(TObj* obj, void (TObj::*callback)()) : obj(obj), callback(callback)
+            {
+            }
+            TObj* obj;
+            void (TObj::*callback)();
+            virtual void call() override
+            {
+                (obj->*callback)();
+            }
+        };
+        static std::map<cubos::io::Key, std::vector<Callback*>> keyDownObjectCallbacks;
         static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyUpCallbacks;
         static std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> mouseButtonDownCallbacks;
         static std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> mouseButtonUpCallbacks;
@@ -87,6 +107,37 @@ namespace cubos::input
         static void processActions();
 
         static void registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key);
+        template <class T> static void registerKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
+        {
+            auto cb = new ObjectCallback<T>(obj, callback);
+            if (InputManager::keyDownObjectCallbacks.contains(key))
+            {
+                InputManager::keyDownObjectCallbacks[key].push_back(cb);
+            }
+            else
+            {
+                std::vector<Callback*> v = std::vector<Callback*>();
+                v.push_back(cb);
+                InputManager::keyDownObjectCallbacks.insert({key, v});
+            }
+        }
+        template <class T> static void removeKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
+        {
+            if (InputManager::keyDownObjectCallbacks.contains(key))
+            {
+                auto it = keyDownObjectCallbacks[key].begin();
+                for (; it < keyDownObjectCallbacks[key].end(); it++)
+                {
+                    auto cb = dynamic_cast<ObjectCallback<T>*>(*it);
+                    if (cb != nullptr && cb->obj == obj && cb->callback == callback)
+                        break;
+                }
+                if (it != keyDownObjectCallbacks[key].end())
+                {
+                    keyDownObjectCallbacks[key].erase(it);
+                }
+            }
+        }
         static void registerMouseButtonDownCallback(std::function<void(void)> callback, cubos::io::MouseButton);
 
     private:
