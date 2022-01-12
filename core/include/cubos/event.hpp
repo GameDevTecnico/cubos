@@ -107,7 +107,6 @@ namespace cubos
     {
         auto lock = std::lock_guard<std::mutex>(this->mutex);
         this->callbacks[id] = nullptr;
-        return this->callbacks.size() - 1;
     }
 
     template <typename... TArgs> void Event<TArgs...>::fire(TArgs... args) const
