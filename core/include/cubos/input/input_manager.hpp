@@ -128,7 +128,8 @@ namespace cubos::input
                 auto it = keyDownObjectCallbacks[key].begin();
                 for (; it < keyDownObjectCallbacks[key].end(); it++)
                 {
-                    if (typeid(**it) == typeid(ObjectCallback<T>))
+                    Callback<>& ref = **it;
+                    if (typeid(ref) == typeid(ObjectCallback<T>))
                     {
                         auto cb = static_cast<ObjectCallback<T>*>(*it);
                         if (cb->obj == obj && cb->callback == callback)
