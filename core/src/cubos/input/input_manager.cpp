@@ -10,8 +10,8 @@ std::map<std::string, std::shared_ptr<InputAction>> InputManager::actions =
     std::map<std::string, std::shared_ptr<InputAction>>();
 std::map<cubos::io::Key, std::vector<std::function<void(void)>>> InputManager::keyDownCallbacks =
     std::map<cubos::io::Key, std::vector<std::function<void(void)>>>();
-std::map<cubos::io::Key, std::vector<InputManager::Callback*>> InputManager::keyDownObjectCallbacks =
-    std::map<cubos::io::Key, std::vector<InputManager::Callback*>>();
+std::map<cubos::io::Key, std::vector<InputManager::Callback<>*>> InputManager::keyDownObjectCallbacks =
+    std::map<cubos::io::Key, std::vector<InputManager::Callback<>*>>();
 std::map<cubos::io::Key, std::vector<std::function<void(void)>>> InputManager::keyUpCallbacks =
     std::map<cubos::io::Key, std::vector<std::function<void(void)>>>();
 std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> InputManager::mouseButtonDownCallbacks =

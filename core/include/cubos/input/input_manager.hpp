@@ -78,12 +78,12 @@ namespace cubos::input
 
         static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyDownCallbacks;
 
-        class Callback
+        template <typename... TArgs> class Callback
         {
         public:
-            virtual void call() = 0;
+            virtual void call(TArgs...) = 0;
         };
-        template <class TObj> class ObjectCallback : public Callback
+        template <class TObj, typename... TArgs> class ObjectCallback : public Callback<TArgs...>
         {
         public:
             ObjectCallback(TObj* obj, void (TObj::*callback)()) : obj(obj), callback(callback)
@@ -91,12 +91,12 @@ namespace cubos::input
             }
             TObj* obj;
             void (TObj::*callback)();
-            virtual void call() override
+            virtual void call(TArgs... args) override
             {
-                (obj->*callback)();
+                (obj->*callback)(args...);
             }
         };
-        static std::map<cubos::io::Key, std::vector<Callback*>> keyDownObjectCallbacks;
+        static std::map<cubos::io::Key, std::vector<Callback<>*>> keyDownObjectCallbacks;
         static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyUpCallbacks;
         static std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> mouseButtonDownCallbacks;
         static std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> mouseButtonUpCallbacks;
@@ -116,7 +116,7 @@ namespace cubos::input
             }
             else
             {
-                std::vector<Callback*> v = std::vector<Callback*>();
+                std::vector<Callback<>*> v = std::vector<Callback<>*>();
                 v.push_back(cb);
                 InputManager::keyDownObjectCallbacks.insert({key, v});
             }
@@ -134,7 +134,9 @@ namespace cubos::input
                 }
                 if (it != keyDownObjectCallbacks[key].end())
                 {
+                    auto cb = *it;
                     keyDownObjectCallbacks[key].erase(it);
+                    delete cb;
                 }
             }
         }
