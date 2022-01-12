@@ -87,6 +87,12 @@ namespace cubos::input
         static void processActions();
 
         static void registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key);
+        template <class T> static void registerKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
+        {
+        }
+        template <class T> static void unregisterKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
+        {
+        }
         static void registerMouseButtonDownCallback(std::function<void(void)> callback, cubos::io::MouseButton);
 
     private:

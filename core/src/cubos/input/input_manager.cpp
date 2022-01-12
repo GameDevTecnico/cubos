@@ -10,6 +10,8 @@ std::map<std::string, std::shared_ptr<InputAction>> InputManager::actions =
     std::map<std::string, std::shared_ptr<InputAction>>();
 std::map<cubos::io::Key, std::vector<std::function<void(void)>>> InputManager::keyDownCallbacks =
     std::map<cubos::io::Key, std::vector<std::function<void(void)>>>();
+std::map<cubos::io::Key, std::vector<InputManager::Callback<>*>> InputManager::keyDownObjectCallbacks =
+    std::map<cubos::io::Key, std::vector<InputManager::Callback<>*>>();
 std::map<cubos::io::Key, std::vector<std::function<void(void)>>> InputManager::keyUpCallbacks =
     std::map<cubos::io::Key, std::vector<std::function<void(void)>>>();
 std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> InputManager::mouseButtonDownCallbacks =
@@ -81,8 +83,8 @@ void ButtonPress::subscribeEvents(cubos::io::Window* window)
 {
     if (std::holds_alternative<cubos::io::Key>(this->button))
     {
-        InputManager::registerKeyDownCallback([this]() { this->handleButtonDown(); },
-                                              std::get<cubos::io::Key>(this->button));
+        InputManager::registerKeyDownCallback<ButtonPress>(this, &ButtonPress::handleButtonDown,
+                                                           std::get<cubos::io::Key>(this->button));
     }
     else if (std::holds_alternative<cubos::io::MouseButton>(this->button))
     {
@@ -137,18 +139,21 @@ void InputManager::processActions()
 
 void InputManager::handleKeyDown(cubos::io::Key key)
 {
-    for (auto itCallbacksVector = InputManager::keyDownCallbacks.begin();
-         itCallbacksVector != InputManager::keyDownCallbacks.end(); itCallbacksVector++)
+    if (keyDownCallbacks.contains(key))
     {
-        if (itCallbacksVector->first == key)
+        for (auto itCallback = keyDownCallbacks[key].begin(); itCallback != keyDownCallbacks[key].end(); itCallback++)
         {
-            for (auto itCallback = itCallbacksVector->second.begin(); itCallback != itCallbacksVector->second.end();
-                 itCallback++)
-            {
-                (*itCallback)();
-            }
+            (*itCallback)();
         }
-    };
+    }
+    if (keyDownObjectCallbacks.contains(key))
+    {
+        for (auto itCallback = keyDownObjectCallbacks[key].begin(); itCallback != keyDownObjectCallbacks[key].end();
+             itCallback++)
+        {
+            (*itCallback)->call();
+        }
+    }
 };
 
 void InputManager::handleMouseButtonDown(cubos::io::MouseButton mouseButton)
