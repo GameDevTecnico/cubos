@@ -76,24 +76,90 @@ namespace cubos::input
         static cubos::io::Window* window;
         static std::map<std::string, std::shared_ptr<InputAction>> actions;
 
-        static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyDownCallbacks;
-        static std::map<cubos::io::Key, std::vector<std::function<void(void)>>> keyUpCallbacks;
-        static std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> mouseButtonDownCallbacks;
-        static std::map<cubos::io::MouseButton, std::vector<std::function<void(void)>>> mouseButtonUpCallbacks;
+        static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> keyDownCallbacks;
+        static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> keyUpCallbacks;
+        static std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> mouseButtonDownCallbacks;
+        static std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> mouseButtonUpCallbacks;
 
         static void init(cubos::io::Window* window);
         static std::shared_ptr<InputAction> createAction(std::string name);
         static std::shared_ptr<InputAction> getAction(std::string name);
         static void processActions();
 
-        static void registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key);
+        static cubos::Event<>::ID registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key)
+        {
+            if (!InputManager::keyDownCallbacks.contains(key))
+            {
+                InputManager::keyDownCallbacks[key] = std::make_shared<cubos::Event<>>();
+            }
+            InputManager::keyDownCallbacks[key]->registerCallback(callback);
+        }
+
+        static void unregisterKeyDownCallback(cubos::Event<>::ID callbackID, cubos::io::Key key)
+        {
+            if (!InputManager::keyDownCallbacks.contains(key))
+            {
+                return;
+            }
+            InputManager::keyDownCallbacks[key]->unregisterCallback(callbackID);
+        }
+
         template <class T> static void registerKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
         {
+            if (!InputManager::keyDownCallbacks.contains(key))
+            {
+                InputManager::keyDownCallbacks[key] = std::make_shared<cubos::Event<>>();
+            }
+            InputManager::keyDownCallbacks[key]->registerCallback<T>(obj, callback);
         }
+
         template <class T> static void unregisterKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
         {
+            if (!InputManager::keyDownCallbacks.contains(key))
+            {
+                return;
+            }
+            InputManager::keyDownCallbacks[key]->unregisterCallback<T>(obj, callback);
         }
-        static void registerMouseButtonDownCallback(std::function<void(void)> callback, cubos::io::MouseButton);
+
+        static cubos::Event<>::ID registerMouseButtonDownCallback(std::function<void(void)> callback,
+                                                                  cubos::io::MouseButton mouseButton)
+        {
+            if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
+            {
+                InputManager::mouseButtonDownCallbacks[mouseButton] = std::make_shared<cubos::Event<>>();
+            }
+            InputManager::mouseButtonDownCallbacks[mouseButton]->registerCallback(callback);
+        }
+
+        static void unregisterMouseButtonDownCallback(cubos::Event<>::ID callbackID, cubos::io::MouseButton mouseButton)
+        {
+            if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
+            {
+                return;
+            }
+            InputManager::mouseButtonDownCallbacks[mouseButton]->unregisterCallback(callbackID);
+        }
+
+        template <class T>
+        static void registerMouseButtonDownCallback(T* obj, void (T::*callback)(), cubos::io::MouseButton mouseButton)
+        {
+            if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
+            {
+                InputManager::mouseButtonDownCallbacks[mouseButton] = std::make_shared<cubos::Event<>>();
+            }
+            InputManager::mouseButtonDownCallbacks[mouseButton]->registerCallback<T>(obj, callback);
+        }
+
+        template <class T>
+        static void unregisterMouseButtonDownCallback(T* obj, void (T::*callback)(), cubos::io::MouseButton mouseButton)
+        {
+            if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
+            {
+                return;
+            }
+            InputManager::mouseButtonDownCallbacks[mouseButton]->unregisterCallback<T>(obj, callback);
+        }
 
     private:
         static void handleKeyDown(cubos::io::Key key);
