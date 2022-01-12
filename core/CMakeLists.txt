@@ -38,6 +38,9 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/gl/debug.cpp"
     "src/cubos/gl/ogl_render_device.hpp"
     "src/cubos/gl/ogl_render_device.cpp"
+    "src/cubos/gl/material.cpp"
+    "src/cubos/gl/palette.cpp"
+    "src/cubos/gl/grid.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE
@@ -59,6 +62,9 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/gl/debug.hpp"
     "include/cubos/gl/render_device.hpp"
+    "include/cubos/gl/material.hpp"
+    "include/cubos/gl/palette.hpp"
+    "include/cubos/gl/grid.hpp"
 )
 
 
