@@ -18,7 +18,7 @@ namespace cubos::gl
         enum class IndexWidth
         {
             U8,  ///< 1-byte material index, works with up to 255 materials.
-            U16, ///<  2-byte material indices, works with up to 65535 materials.
+            U16, ///< 2-byte material indices, works with up to 65535 materials.
         };
 
         /// @param size The size of the grid.
@@ -34,9 +34,10 @@ namespace cubos::gl
         Grid(const glm::ivec3& size, const std::vector<uint16_t>& indices);
 
         Grid();
+        Grid(Grid&&);
         ~Grid();
 
-        /// Changes the material index width to use. This will clear the grid if the width is changed.
+        /// Changes the material index width to use.
         /// @param width The new material index width to use.
         void setIndexWidth(IndexWidth width);
 
@@ -49,6 +50,9 @@ namespace cubos::gl
 
         /// @return The size of the grid.
         const glm::uvec3& getSize() const;
+
+        /// Clears the grid.
+        void clear();
 
         /// @param position The position of the voxel.
         /// @param mat The material index to set.

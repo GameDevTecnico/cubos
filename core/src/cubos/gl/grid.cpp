@@ -65,8 +65,16 @@ Grid::Grid(const glm::ivec3& size, const std::vector<uint16_t>& indices)
 
 Grid::Grid() : width(IndexWidth::U8)
 {
-    this->size = {1, 1, 1};
-    new (&this->shortIndices) std::vector<uint8_t>(1, 0);
+    this->size = {0, 0, 0};
+    new (&this->shortIndices) std::vector<uint8_t>();
+}
+
+Grid::Grid(Grid&& other) : width(other.width), size(other.size)
+{
+    if (this->width == IndexWidth::U8)
+        new (&this->shortIndices) std::vector<uint8_t>(std::move(other.shortIndices));
+    else
+        new (&this->longIndices) std::vector<uint16_t>(std::move(other.longIndices));
 }
 
 Grid::~Grid()
@@ -85,13 +93,27 @@ void Grid::setIndexWidth(IndexWidth width)
 
     if (this->width == IndexWidth::U8)
     {
+        auto indices = std::move(this->longIndices);
         this->longIndices.~vector();
         new (&this->shortIndices) std::vector<uint8_t>(this->size.x * this->size.y * this->size.z, 0);
+        for (size_t i = 0; i < indices.size(); i++)
+        {
+            if (indices[i] > UINT8_MAX)
+            {
+                logWarning("Grid::setIndexWidth(): index {} is too large for a uint8_t, setting to 0.", indices[i]);
+                this->shortIndices[i] = 0;
+            }
+            else
+                this->shortIndices[i] = indices[i];
+        }
     }
     else
     {
+        auto indices = std::move(this->shortIndices);
         this->shortIndices.~vector();
         new (&this->longIndices) std::vector<uint16_t>(this->size.x * this->size.y * this->size.z, 0);
+        for (size_t i = 0; i < indices.size(); i++)
+            this->longIndices[i] = indices[i];
     }
 }
 
@@ -120,14 +142,14 @@ void Grid::setSize(const glm::ivec3& size)
         this->longIndices.resize(this->size.x * this->size.y * this->size.z, 0);
 }
 
-size_t Grid::get(const glm::ivec3& position) const
+void Grid::clear()
 {
-    assert(position.x >= 0 && position.x < this->size.x && position.y >= 0 && position.y < this->size.y &&
-           position.z >= 0 && position.z < this->size.z);
     if (this->width == IndexWidth::U8)
-        return this->shortIndices[position.x + position.y * size.x + position.z * size.x * size.y];
+        for (size_t i = 0; i < this->shortIndices.size(); i++)
+            this->shortIndices[i] = 0;
     else
-        return this->longIndices[position.x + position.y * size.x + position.z * size.x * size.y];
+        for (size_t i = 0; i < this->longIndices.size(); i++)
+            this->longIndices[i] = 0;
 }
 
 void Grid::set(const glm::ivec3& position, size_t mat)
@@ -138,6 +160,16 @@ void Grid::set(const glm::ivec3& position, size_t mat)
         this->shortIndices[position.x + position.y * size.x + position.z * size.x * size.y] = mat;
     else
         this->longIndices[position.x + position.y * size.x + position.z * size.x * size.y] = mat;
+}
+
+size_t Grid::get(const glm::ivec3& position) const
+{
+    assert(position.x >= 0 && position.x < this->size.x && position.y >= 0 && position.y < this->size.y &&
+           position.z >= 0 && position.z < this->size.z);
+    if (this->width == IndexWidth::U8)
+        return this->shortIndices[position.x + position.y * size.x + position.z * size.x * size.y];
+    else
+        return this->longIndices[position.x + position.y * size.x + position.z * size.x * size.y];
 }
 
 void Grid::serialize(memory::Serializer& serializer) const
