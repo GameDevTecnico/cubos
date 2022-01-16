@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['rastermode_389',['rasterMode',['../structcubos_1_1gl_1_1RasterStateDesc.html#a8a74c2c99ba2277fda70f2317c29cfb4',1,'cubos::gl::RasterStateDesc']]],
-  ['readmask_390',['readMask',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html#a97de23e918aadcb20d749e4b42f7651b',1,'cubos::gl::DepthStencilStateDesc::Stencil']]],
-  ['ref_391',['ref',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html#a174574f22de837c367029a7428d2a44e',1,'cubos::gl::DepthStencilStateDesc::Stencil']]]
+  ['pass_420',['pass',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil_1_1Face.html#a7a09f4293c5be6b69b09b134f0dffe43',1,'cubos::gl::DepthStencilStateDesc::Stencil::Face']]]
 ];
