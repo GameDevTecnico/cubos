@@ -45,6 +45,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/gl/material.cpp"
     "src/cubos/gl/palette.cpp"
     "src/cubos/gl/grid.cpp"
+
+    "src/cubos/data/qb_parser.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE
@@ -73,6 +75,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/material.hpp"
     "include/cubos/gl/palette.hpp"
     "include/cubos/gl/grid.hpp"
+
+    "include/cubos/data/qb_parser.hpp"
 )
 
 # Create core library
