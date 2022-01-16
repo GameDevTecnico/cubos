@@ -122,9 +122,8 @@ void Grid::setSize(const glm::ivec3& size)
 
 size_t Grid::get(const glm::ivec3& position) const
 {
-    if (position.x < 0 || position.x >= size.x || position.y < 0 || position.y >= size.y || position.z < 0 ||
-        position.z >= size.z)
-        return 0;
+    assert(position.x >= 0 && position.x < this->size.x && position.y >= 0 && position.y < this->size.y &&
+           position.z >= 0 && position.z < this->size.z);
     if (this->width == IndexWidth::U8)
         return this->shortIndices[position.x + position.y * size.x + position.z * size.x * size.y];
     else
@@ -133,9 +132,8 @@ size_t Grid::get(const glm::ivec3& position) const
 
 void Grid::set(const glm::ivec3& position, size_t mat)
 {
-    if (position.x < 0 || position.x >= size.x || position.y < 0 || position.y >= size.y || position.z < 0 ||
-        position.z >= size.z)
-        return;
+    assert(position.x >= 0 && position.x < this->size.x && position.y >= 0 && position.y < this->size.y &&
+           position.z >= 0 && position.z < this->size.z);
     if (this->width == IndexWidth::U8)
         this->shortIndices[position.x + position.y * size.x + position.z * size.x * size.y] = mat;
     else
