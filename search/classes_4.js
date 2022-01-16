@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['face_233',['Face',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil_1_1Face.html',1,'cubos::gl::DepthStencilStateDesc::Stencil']]],
-  ['framebuffer_234',['Framebuffer',['../classcubos_1_1gl_1_1impl_1_1Framebuffer.html',1,'cubos::gl::impl']]],
-  ['framebufferdesc_235',['FramebufferDesc',['../structcubos_1_1gl_1_1FramebufferDesc.html',1,'cubos::gl']]]
+  ['event_250',['Event',['../classcubos_1_1Event.html',1,'cubos']]],
+  ['event_3c_20glm_3a_3aivec2_20_3e_251',['Event&lt; glm::ivec2 &gt;',['../classcubos_1_1Event.html',1,'cubos']]],
+  ['event_3c_20key_20_3e_252',['Event&lt; Key &gt;',['../classcubos_1_1Event.html',1,'cubos']]],
+  ['event_3c_20mousebutton_20_3e_253',['Event&lt; MouseButton &gt;',['../classcubos_1_1Event.html',1,'cubos']]]
 ];

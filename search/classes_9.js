@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['rasterstate_240',['RasterState',['../classcubos_1_1gl_1_1impl_1_1RasterState.html',1,'cubos::gl::impl']]],
-  ['rasterstatedesc_241',['RasterStateDesc',['../structcubos_1_1gl_1_1RasterStateDesc.html',1,'cubos::gl']]],
-  ['renderdevice_242',['RenderDevice',['../classcubos_1_1gl_1_1RenderDevice.html',1,'cubos::gl']]]
+  ['palette_263',['Palette',['../classcubos_1_1gl_1_1Palette.html',1,'cubos::gl']]]
 ];

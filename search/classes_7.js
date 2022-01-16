@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['material_238',['Material',['../structcubos_1_1gl_1_1Material.html',1,'cubos::gl']]]
+  ['indexbuffer_261',['IndexBuffer',['../classcubos_1_1gl_1_1impl_1_1IndexBuffer.html',1,'cubos::gl::impl']]]
 ];

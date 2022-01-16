@@ -1,6 +1,7 @@
 var classcubos_1_1memory_1_1StdStream =
 [
     [ "StdStream", "classcubos_1_1memory_1_1StdStream.html#aba1fdcf55cfdf254c9e505784e4c2acb", null ],
+    [ "StdStream", "classcubos_1_1memory_1_1StdStream.html#a5ba5e028b448a7846b201ba71a163023", null ],
     [ "~StdStream", "classcubos_1_1memory_1_1StdStream.html#a576164e7ad53e5161a27946f5fe9d984", null ],
     [ "eof", "classcubos_1_1memory_1_1StdStream.html#aa63eefc2b3210f13f1e060ab9609292f", null ],
     [ "peek", "classcubos_1_1memory_1_1StdStream.html#abd857a77e429264a7987227eaa42a4fa", null ],

@@ -1,5 +1,8 @@
 var hierarchy =
 [
+    [ "cubos::data::Archive", "classcubos_1_1data_1_1Archive.html", [
+      [ "cubos::data::STDArchive", "classcubos_1_1data_1_1STDArchive.html", null ]
+    ] ],
     [ "cubos::gl::impl::BlendState", "classcubos_1_1gl_1_1impl_1_1BlendState.html", null ],
     [ "cubos::gl::BlendStateDesc", "structcubos_1_1gl_1_1BlendStateDesc.html", null ],
     [ "cubos::gl::impl::ConstantBuffer", "classcubos_1_1gl_1_1impl_1_1ConstantBuffer.html", null ],
@@ -14,11 +17,15 @@ var hierarchy =
     [ "cubos::memory::Deserializer", "classcubos_1_1memory_1_1Deserializer.html", [
       [ "cubos::memory::YAMLDeserializer", "classcubos_1_1memory_1_1YAMLDeserializer.html", null ]
     ] ],
+    [ "enable_shared_from_this", null, [
+      [ "cubos::data::File", "classcubos_1_1data_1_1File.html", null ]
+    ] ],
     [ "cubos::Event< TArgs >", "classcubos_1_1Event.html", null ],
     [ "cubos::Event< glm::ivec2 >", "classcubos_1_1Event.html", null ],
     [ "cubos::Event< Key >", "classcubos_1_1Event.html", null ],
     [ "cubos::Event< MouseButton >", "classcubos_1_1Event.html", null ],
     [ "cubos::gl::DepthStencilStateDesc::Stencil::Face", "structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil_1_1Face.html", null ],
+    [ "cubos::data::FileSystem", "classcubos_1_1data_1_1FileSystem.html", null ],
     [ "cubos::gl::impl::Framebuffer", "classcubos_1_1gl_1_1impl_1_1Framebuffer.html", null ],
     [ "cubos::gl::FramebufferDesc", "structcubos_1_1gl_1_1FramebufferDesc.html", null ],
     [ "cubos::gl::Grid", "classcubos_1_1gl_1_1Grid.html", null ],
@@ -40,6 +47,7 @@ var hierarchy =
     [ "cubos::gl::impl::ShaderStage", "classcubos_1_1gl_1_1impl_1_1ShaderStage.html", null ],
     [ "cubos::gl::DepthStencilStateDesc::Stencil", "structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html", null ],
     [ "cubos::memory::Stream", "classcubos_1_1memory_1_1Stream.html", [
+      [ "cubos::data::FileStream< T >", "classcubos_1_1data_1_1FileStream.html", null ],
       [ "cubos::memory::BufferStream", "classcubos_1_1memory_1_1BufferStream.html", null ],
       [ "cubos::memory::StdStream", "classcubos_1_1memory_1_1StdStream.html", null ]
     ] ],

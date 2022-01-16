@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['palette_239',['Palette',['../classcubos_1_1gl_1_1Palette.html',1,'cubos::gl']]]
+  ['material_262',['Material',['../structcubos_1_1gl_1_1Material.html',1,'cubos::gl']]]
 ];

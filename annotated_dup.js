@@ -1,6 +1,13 @@
 var annotated_dup =
 [
     [ "cubos", null, [
+      [ "data", null, [
+        [ "Archive", "classcubos_1_1data_1_1Archive.html", "classcubos_1_1data_1_1Archive" ],
+        [ "File", "classcubos_1_1data_1_1File.html", "classcubos_1_1data_1_1File" ],
+        [ "FileStream", "classcubos_1_1data_1_1FileStream.html", "classcubos_1_1data_1_1FileStream" ],
+        [ "FileSystem", "classcubos_1_1data_1_1FileSystem.html", "classcubos_1_1data_1_1FileSystem" ],
+        [ "STDArchive", "classcubos_1_1data_1_1STDArchive.html", "classcubos_1_1data_1_1STDArchive" ]
+      ] ],
       [ "gl", null, [
         [ "impl", "namespacecubos_1_1gl_1_1impl.html", "namespacecubos_1_1gl_1_1impl" ],
         [ "BlendStateDesc", "structcubos_1_1gl_1_1BlendStateDesc.html", "structcubos_1_1gl_1_1BlendStateDesc" ],

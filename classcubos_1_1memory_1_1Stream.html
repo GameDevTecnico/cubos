@@ -104,9 +104,10 @@ Inheritance diagram for cubos::memory::Stream:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcubos_1_1memory_1_1Stream__inherit__graph.png" border="0" usemap="#cubos_1_1memory_1_1Stream_inherit__map" alt="Inheritance graph"/></div>
 <map name="cubos_1_1memory_1_1Stream_inherit__map" id="cubos_1_1memory_1_1Stream_inherit__map">
-<area shape="rect" title="Abstract class for memory streams." alt="" coords="141,5,318,32"/>
-<area shape="rect" href="classcubos_1_1memory_1_1BufferStream.html" title="Implements a stream that writes to/reads from a buffer." alt="" coords="5,80,221,107"/>
-<area shape="rect" href="classcubos_1_1memory_1_1StdStream.html" title="Stream implementation for stdio." alt="" coords="246,80,445,107"/>
+<area shape="rect" title="Abstract class for memory streams." alt="" coords="262,5,439,32"/>
+<area shape="rect" href="classcubos_1_1data_1_1FileStream.html" title=" " alt="" coords="5,80,219,107"/>
+<area shape="rect" href="classcubos_1_1memory_1_1BufferStream.html" title="Implements a stream that writes to/reads from a buffer." alt="" coords="243,80,459,107"/>
+<area shape="rect" href="classcubos_1_1memory_1_1StdStream.html" title="Stream implementation for stdio." alt="" coords="483,80,682,107"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -120,6 +121,12 @@ Collaboration diagram for cubos::memory::Stream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ab5270d43b83077eb04c9ce60c8e02ebf"><td class="memItemLeft" align="right" valign="top"><a id="ab5270d43b83077eb04c9ce60c8e02ebf"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Stream</b> (<a class="el" href="classcubos_1_1memory_1_1Stream.html">Stream</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:ab5270d43b83077eb04c9ce60c8e02ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6525fe0b3f2d0aa882e3136fb56c955"><td class="memItemLeft" align="right" valign="top"><a id="ab6525fe0b3f2d0aa882e3136fb56c955"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Stream</b> (const <a class="el" href="classcubos_1_1memory_1_1Stream.html">Stream</a> &amp;)=delete</td></tr>
+<tr class="separator:ab6525fe0b3f2d0aa882e3136fb56c955"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c6ee7a6a9d8d6be4329a63792ee9073"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1memory_1_1Stream.html#a0c6ee7a6a9d8d6be4329a63792ee9073">read</a> (void *data, size_t size)=0</td></tr>
 <tr class="separator:a0c6ee7a6a9d8d6be4329a63792ee9073"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7980c9e9081f9b9662ce4c467c1a5f47"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1memory_1_1Stream.html#a7980c9e9081f9b9662ce4c467c1a5f47">write</a> (const void *data, size_t size)=0</td></tr>
@@ -234,7 +241,7 @@ static <a class="el" href="classcubos_1_1memory_1_1Stream.html">Stream</a> &amp;
 </div><div class="memdoc">
 <p>Checks if the stream still has content to read. </p><dl class="section return"><dt>Returns</dt><dd>True if the stream has no more content to read, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#a8f4a6d7c5f8fcd84f6f5d26c8a11aed1">cubos::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1memory_1_1StdStream.html#aa63eefc2b3210f13f1e060ab9609292f">cubos::memory::StdStream</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1FileStream.html#ab5d44df64726d500cc8955ce8d5e16ea">cubos::data::FileStream&lt; T &gt;</a>, <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#a8f4a6d7c5f8fcd84f6f5d26c8a11aed1">cubos::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1memory_1_1StdStream.html#aa63eefc2b3210f13f1e060ab9609292f">cubos::memory::StdStream</a>.</p>
 
 </div>
 </div>
@@ -632,7 +639,7 @@ static <a class="el" href="classcubos_1_1memory_1_1Stream.html">Stream</a> &amp;
 </div><div class="memdoc">
 <p>Peeks one byte from the stream. </p><dl class="section return"><dt>Returns</dt><dd>The byte peeked. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#ac0e245ceb283a76b0b92c869df02f5ab">cubos::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1memory_1_1StdStream.html#abd857a77e429264a7987227eaa42a4fa">cubos::memory::StdStream</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1FileStream.html#aba31ff6991f3bc3da1ac57e2ab51f7ae">cubos::data::FileStream&lt; T &gt;</a>, <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#ac0e245ceb283a76b0b92c869df02f5ab">cubos::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1memory_1_1StdStream.html#abd857a77e429264a7987227eaa42a4fa">cubos::memory::StdStream</a>.</p>
 
 </div>
 </div>
@@ -1188,7 +1195,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of bytes read. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#a17bb9b4b244f254bd58539b8680ba7f9">cubos::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1memory_1_1StdStream.html#a0d7f7b0f45484c4ce3dcad0a07fd0569">cubos::memory::StdStream</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#a17bb9b4b244f254bd58539b8680ba7f9">cubos::memory::BufferStream</a>, <a class="el" href="classcubos_1_1memory_1_1StdStream.html#a0d7f7b0f45484c4ce3dcad0a07fd0569">cubos::memory::StdStream</a>, and <a class="el" href="classcubos_1_1data_1_1FileStream.html#a7a3f1711f97a6fe6050f9de1ae1b4a0d">cubos::data::FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -1311,7 +1318,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#a05c600315b36accd667e2f8d78ca5d8f">cubos::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1memory_1_1StdStream.html#a63e6bca4113a9a96c3c1a9c61a5dd121">cubos::memory::StdStream</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#a05c600315b36accd667e2f8d78ca5d8f">cubos::memory::BufferStream</a>, <a class="el" href="classcubos_1_1memory_1_1StdStream.html#a63e6bca4113a9a96c3c1a9c61a5dd121">cubos::memory::StdStream</a>, and <a class="el" href="classcubos_1_1data_1_1FileStream.html#aa158549191f3248ed85d7b2bc8e73a42">cubos::data::FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -1339,7 +1346,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
 </div><div class="memdoc">
 <p>Gets the current position in the stream. </p><dl class="section return"><dt>Returns</dt><dd>The current position in the stream. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#afba22e0998fbbb4b19f060c36e2237ee">cubos::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1memory_1_1StdStream.html#ae8fedfe020dd8a50f214c2aedffbfb7b">cubos::memory::StdStream</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1FileStream.html#ad531169057d7e96b0c44dbfb8db43916">cubos::data::FileStream&lt; T &gt;</a>, <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#afba22e0998fbbb4b19f060c36e2237ee">cubos::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1memory_1_1StdStream.html#ae8fedfe020dd8a50f214c2aedffbfb7b">cubos::memory::StdStream</a>.</p>
 
 </div>
 </div>
@@ -1385,7 +1392,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of bytes written. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#a1a4d9126845a3db9fe4fbf8ce52e61ec">cubos::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1memory_1_1StdStream.html#ae61af15851f43f77cec6ad3ad91baba8">cubos::memory::StdStream</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1memory_1_1BufferStream.html#a1a4d9126845a3db9fe4fbf8ce52e61ec">cubos::memory::BufferStream</a>, <a class="el" href="classcubos_1_1memory_1_1StdStream.html#ae61af15851f43f77cec6ad3ad91baba8">cubos::memory::StdStream</a>, and <a class="el" href="classcubos_1_1data_1_1FileStream.html#a8d802d9b365511d5ef2f316e08b1f728">cubos::data::FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>
