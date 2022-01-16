@@ -126,8 +126,11 @@ else()
     find_package(spdlog REQUIRED)
 endif()
 
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp ${CMAKE_DL_LIBS} pthread)
-target_link_libraries(cubos-core PRIVATE glad)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests
 
