@@ -3,9 +3,9 @@
 
 option(WITH_GLFW "With GLFW?" ON)
 option(WITH_OPENGL "With OpenGL?" ON)
-if(WITH_GLFW)
+if (WITH_GLFW)
     option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
-endif()
+endif ()
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
 option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
@@ -14,58 +14,59 @@ option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
 
-message( "# Building core samples: " ${BUILD_CORE_SAMPLES})
-message( "# Building core tests: " ${BUILD_CORE_TESTS})
+message("# Building core samples: " ${BUILD_CORE_SAMPLES})
+message("# Building core tests: " ${BUILD_CORE_TESTS})
 
 # Set core source files
 
 set(CUBOS_CORE_SOURCE
-    "src/cubos/log.cpp"
-    "src/cubos/settings.cpp"
+        "src/cubos/log.cpp"
+        "src/cubos/settings.cpp"
 
-    "src/cubos/memory/stream.cpp"
-    "src/cubos/memory/std_stream.cpp"
-    "src/cubos/memory/buffer_stream.cpp"
-    "src/cubos/memory/serializer.cpp"
-    "src/cubos/memory/deserializer.cpp"
-    "src/cubos/memory/yaml_serializer.cpp"
-    "src/cubos/memory/yaml_deserializer.cpp"
+        "src/cubos/memory/stream.cpp"
+        "src/cubos/memory/std_stream.cpp"
+        "src/cubos/memory/buffer_stream.cpp"
+        "src/cubos/memory/serializer.cpp"
+        "src/cubos/memory/deserializer.cpp"
+        "src/cubos/memory/yaml_serializer.cpp"
+        "src/cubos/memory/yaml_deserializer.cpp"
 
-    "src/cubos/io/window.cpp"
-    "src/cubos/io/glfw_window.hpp"
-    "src/cubos/io/glfw_window.cpp"
+        "src/cubos/io/window.cpp"
+        "src/cubos/io/glfw_window.hpp"
+        "src/cubos/io/glfw_window.cpp"
 
-    "src/cubos/gl/debug.cpp"
-    "src/cubos/gl/ogl_render_device.hpp"
-    "src/cubos/gl/ogl_render_device.cpp"
-    "src/cubos/gl/material.cpp"
-    "src/cubos/gl/palette.cpp"
-    "src/cubos/gl/grid.cpp"
-)
+        "src/cubos/gl/debug.cpp"
+        "src/cubos/gl/render_device.cpp"
+        "src/cubos/gl/ogl_render_device.hpp"
+        "src/cubos/gl/ogl_render_device.cpp"
+        "src/cubos/gl/material.cpp"
+        "src/cubos/gl/palette.cpp"
+        "src/cubos/gl/grid.cpp"
+        )
 
 set(CUBOS_CORE_INCLUDE
-    "include/cubos/log.hpp"
-    "include/cubos/settings.hpp"
+        "include/cubos/log.hpp"
+        "include/cubos/settings.hpp"
 
-    "include/cubos/memory/stream.hpp"
-    "include/cubos/memory/std_stream.hpp"
-    "include/cubos/memory/buffer_stream.hpp"
-    
-    "include/cubos/memory/stream.hpp"
-    "include/cubos/memory/serialization_map.hpp"
-    "include/cubos/memory/serializer.hpp"
-    "include/cubos/memory/deserializer.hpp"
-    "include/cubos/memory/yaml_serializer.hpp"
-    "include/cubos/memory/yaml_deserializer.hpp"
+        "include/cubos/memory/stream.hpp"
+        "include/cubos/memory/std_stream.hpp"
+        "include/cubos/memory/buffer_stream.hpp"
 
-    "include/cubos/io/window.hpp"
+        "include/cubos/memory/stream.hpp"
+        "include/cubos/memory/serialization_map.hpp"
+        "include/cubos/memory/serializer.hpp"
+        "include/cubos/memory/deserializer.hpp"
+        "include/cubos/memory/yaml_serializer.hpp"
+        "include/cubos/memory/yaml_deserializer.hpp"
 
-    "include/cubos/gl/debug.hpp"
-    "include/cubos/gl/render_device.hpp"
-    "include/cubos/gl/material.hpp"
-    "include/cubos/gl/palette.hpp"
-    "include/cubos/gl/grid.hpp"
-)
+        "include/cubos/io/window.hpp"
+
+        "include/cubos/gl/debug.hpp"
+        "include/cubos/gl/render_device.hpp"
+        "include/cubos/gl/material.hpp"
+        "include/cubos/gl/palette.hpp"
+        "include/cubos/gl/grid.hpp"
+        )
 
 
 # Create core library
@@ -77,71 +78,71 @@ target_compile_features(cubos-core PUBLIC cxx_std_20)
 
 # Link dependencies
 
-if(WITH_OPENGL)
+if (WITH_OPENGL)
     add_subdirectory(lib/glad)
     target_link_libraries(cubos-core PRIVATE glad)
     target_compile_definitions(cubos-core PRIVATE WITH_OPENGL)
-endif()
+endif ()
 
-if(WITH_GLFW)
-    if(GLFW_USE_SUBMODULE)
+if (WITH_GLFW)
+    if (GLFW_USE_SUBMODULE)
         set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
         set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
         set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
         add_subdirectory(lib/glfw)
-    else()
+    else ()
         find_package(glfw3 REQUIRED)
-    endif()
+    endif ()
 
     target_link_libraries(cubos-core PRIVATE glfw)
     target_compile_definitions(cubos-core PRIVATE WITH_GLFW)
-endif()
+endif ()
 
-if(GLM_USE_SUBMODULE)
+if (GLM_USE_SUBMODULE)
     add_subdirectory(lib/glm)
-else()
+else ()
     find_package(glm REQUIRED)
-endif()
+endif ()
 
-if(YAMLCPP_USE_SUBMODULE)
+if (YAMLCPP_USE_SUBMODULE)
     set(YAML_CPP_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
     add_subdirectory(lib/yaml-cpp)
-else()
+else ()
     find_package(yaml-cpp REQUIRED)
-endif()
+endif ()
 
 if (GOOGLETEST_USE_SUBMODULE)
-    if(WIN32)
+    if (WIN32)
         set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    endif()
+    endif ()
     add_subdirectory(lib/googletest)
-else()
+else ()
     find_package(googletest REQUIRED)
-endif()
+endif ()
 
 if (SPDLOG_USE_SUBMODULE)
     add_subdirectory(lib/spdlog)
-else()
+else ()
     find_package(spdlog REQUIRED)
-endif()
+endif ()
 
 target_link_libraries(cubos-core PUBLIC glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad)
 
 # Add core tests
 
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_CORE_TESTS) 
+if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_CORE_TESTS)
     include(CTest)
     enable_testing()
 
     include(GoogleTest)
     add_subdirectory(tests)
-endif()
+endif ()
 
 # Add core samples
 if (BUILD_CORE_SAMPLES)
     add_subdirectory(samples)
-endif()
+endif ()
 
 # Add doxygen documentation
 
@@ -154,8 +155,8 @@ if (Doxygen_FOUND)
     set(DOXYGEN_HTML_HEADER ${CMAKE_SOURCE_DIR}/docs/header.html)
     set(DOXYGEN_HTML_FOOTER ${CMAKE_SOURCE_DIR}/docs/footer.html)
     doxygen_add_docs(
-        core-doxygen
-        "include"
-        COMMENT "Generate core documentation"
+            core-doxygen
+            "include"
+            COMMENT "Generate core documentation"
     )
-endif()
+endif ()

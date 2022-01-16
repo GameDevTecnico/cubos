@@ -255,34 +255,20 @@ namespace cubos::gl
             Texture2D handle; ///< Texture handle.
         };                    ///< If the target isn't a cube map, this handle is used.
 
-        struct
+        struct FramebufferTarget
         {
             bool isCubeMap = false; ///< Is this target a cube map face?
             uint32_t mipLevel = 0;  ///< Mip level of the texture which will be set as a render target.
 
             std::variant<CubeMapTarget, Texture2DTarget> target;
 
-            const CubeMapTarget& getCubeMapTarget() const
-            {
-                return std::get<CubeMapTarget>(target);
-            }
+            [[nodiscard]] const CubeMapTarget& getCubeMapTarget() const;
 
-            const Texture2DTarget& getTexture2DTarget() const
-            {
-                return std::get<Texture2DTarget>(target);
-            }
+            [[nodiscard]] const Texture2DTarget& getTexture2DTarget() const;
 
-            void setCubeMapTarget(const CubeMap& handle, CubeFace face)
-            {
-                isCubeMap = true;
-                target = CubeMapTarget{handle, face};
-            }
+            void setCubeMapTarget(const CubeMap& handle, CubeFace face);
 
-            void setTexture2DTarget(const Texture2D& handle)
-            {
-                isCubeMap = false;
-                target = Texture2DTarget{handle};
-            }
+            void setTexture2DTarget(const Texture2D& handle);
         } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
         uint32_t targetCount = 1; ///< Number of render targets.
