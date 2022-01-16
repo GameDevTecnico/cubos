@@ -11,6 +11,13 @@ namespace cubos::rendering
     class Renderer
     {
     protected:
+        struct VertexModel
+        {
+            glm::uvec3 vertex;
+            glm::vec3 normal;
+            uint32_t material;
+        };
+
         struct RendererModel
         {
             cubos::gl::VertexArray va;
@@ -37,8 +44,7 @@ namespace cubos::rendering
         Renderer(const Renderer&) = delete;
         using ID = size_t;
 
-        virtual ID registerModel(const std::vector<glm::uvec3>& vertices, const std::vector<glm::vec3>& normals,
-                                 const std::vector<uint32_t>& materials, std::vector<uint32_t>& indices) = 0;
+        virtual ID registerModel(const std::vector<VertexModel>& vertices, std::vector<uint32_t>& indices) = 0;
         virtual void render() = 0;
         virtual void drawModel(ID modelID, glm::mat4 modelMat) = 0;
     };

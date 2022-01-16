@@ -102,18 +102,12 @@ DeferredRenderer::DeferredRenderer(io::Window& window) : Renderer(window)
     setupFrameBuffers();
 }
 
-Renderer::ID DeferredRenderer::registerModel(const std::vector<glm::uvec3>& vertices,
-                                             const std::vector<glm::vec3>& normals,
-                                             const std::vector<uint32_t>& materials, std::vector<uint32_t>& indices)
+Renderer::ID DeferredRenderer::registerModel(const std::vector<VertexModel>& vertices, std::vector<uint32_t>& indices)
 {
     RendererModel model;
 
     VertexBuffer vb =
-        renderDevice.createVertexBuffer(vertices.size() * sizeof(glm::uvec3), &vertices[0], gl::Usage::Static);
-    VertexBuffer nb =
-        renderDevice.createVertexBuffer(normals.size() * sizeof(glm::vec3), &normals[0], gl::Usage::Static);
-    VertexBuffer mb =
-        renderDevice.createVertexBuffer(normals.size() * sizeof(uint32_t), &materials[0], gl::Usage::Static);
+        renderDevice.createVertexBuffer(vertices.size() * sizeof(VertexModel), &vertices[0], gl::Usage::Static);
 
     VertexArrayDesc vaDesc;
     vaDesc.elementCount = 2;
@@ -136,8 +130,6 @@ Renderer::ID DeferredRenderer::registerModel(const std::vector<glm::uvec3>& vert
     vaDesc.elements[1].buffer.offset = 0;
     vaDesc.elements[1].buffer.stride = sizeof(uint32_t);
     vaDesc.buffers[0] = vb;
-    vaDesc.buffers[1] = nb;
-    vaDesc.buffers[2] = mb;
     vaDesc.shaderPipeline = shaderPipeline;
 
     model.va = renderDevice.createVertexArray(vaDesc);

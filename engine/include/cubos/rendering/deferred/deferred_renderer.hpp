@@ -28,8 +28,7 @@ namespace cubos::rendering
 
     public:
         explicit DeferredRenderer(io::Window& window);
-        ID registerModel(const std::vector<glm::uvec3>& vertices, const std::vector<glm::vec3>& normals,
-                         const std::vector<uint32_t>& materials, std::vector<uint32_t>& indices) override;
+        ID registerModel(const std::vector<VertexModel>& vertices, std::vector<uint32_t>& indices) override;
         void drawModel(ID modelID, glm::mat4 modelMat) override;
 
         void render() override;
