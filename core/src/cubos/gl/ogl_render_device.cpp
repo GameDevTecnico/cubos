@@ -158,23 +158,23 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         break;
     case TextureFormat::Depth16:
         internalFormat = GL_DEPTH_COMPONENT16;
-        format = GL_DEPTH_COMPONENT16;
+        format = GL_DEPTH_COMPONENT;
         type = GL_FLOAT;
         break;
     case TextureFormat::Depth32:
         internalFormat = GL_DEPTH_COMPONENT32F;
-        format = GL_DEPTH_COMPONENT32F;
+        format = GL_DEPTH_COMPONENT;
         type = GL_FLOAT;
         break;
     case TextureFormat::Depth24Stencil8:
         internalFormat = GL_DEPTH24_STENCIL8;
-        format = GL_DEPTH24_STENCIL8;
-        type = GL_FLOAT;
+        format = GL_DEPTH_STENCIL;
+        type = GL_UNSIGNED_INT_24_8;
         break;
     case TextureFormat::Depth32Stencil8:
         internalFormat = GL_DEPTH32F_STENCIL8;
-        format = GL_DEPTH32F_STENCIL8;
-        type = GL_FLOAT;
+        format = GL_DEPTH_STENCIL;
+        type = GL_FLOAT_32_UNSIGNED_INT_24_8_REV;
         break;
 
     default:
@@ -966,8 +966,8 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     }
 
     for (int i = 0; i < desc.targetCount; ++i)
-        if (desc.targets[i].isCubeMap && desc.targets[i].cubeMap.handle == nullptr ||
-            !desc.targets[i].isCubeMap && desc.targets[i].texture.handle == nullptr)
+        if (desc.targets[i].isCubeMap && desc.targets[i].getCubeMapTarget().handle == nullptr ||
+            !desc.targets[i].isCubeMap && desc.targets[i].getTexture2DTarget().handle == nullptr)
         {
             logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
             return nullptr;
@@ -983,23 +983,25 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         if (desc.targets[i].isCubeMap)
         {
             GLenum face;
-            cubeFaceToGL(desc.targets[i].cubeMap.face, face);
+            cubeFaceToGL(desc.targets[i].getCubeMapTarget().face, face);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, face,
-                                   std::static_pointer_cast<OGLTexture2D>(desc.targets[i].texture.handle)->id, 0);
+                                   std::static_pointer_cast<OGLCubeMap>(desc.targets[i].getCubeMapTarget().handle)->id,
+                                   0);
         }
         else
         {
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, GL_TEXTURE_2D,
-                                   std::static_pointer_cast<OGLTexture2D>(desc.targets[i].texture.handle)->id, 0);
+            glFramebufferTexture2D(
+                GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, GL_TEXTURE_2D,
+                std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id, 0);
         }
 
     // Attach depth stencil texture
     if (desc.depthStencil)
     {
         auto ds = std::static_pointer_cast<OGLTexture2D>(desc.depthStencil);
-        if (ds->format == GL_DEPTH_COMPONENT16 || ds->format == GL_DEPTH_COMPONENT32F)
+        if (ds->format == GL_DEPTH_COMPONENT)
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
-        else if (ds->format == GL_DEPTH24_STENCIL8 || ds->format == GL_DEPTH32F_STENCIL8)
+        else if (ds->format == GL_DEPTH_STENCIL)
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
         else
         {

@@ -2,6 +2,7 @@
 #define CUBOS_GL_RENDER_DEVICE_HPP
 
 #include <memory>
+#include <variant>
 #include <glm/glm.hpp>
 
 #define CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT 8
@@ -243,23 +244,45 @@ namespace cubos::gl
     /// Framebuffer description.
     struct FramebufferDesc
     {
+        struct CubeMapTarget
+        {
+            CubeMap handle; ///< Cube map handle.
+            CubeFace face;  ///< Cube map face which will be used as target.
+        };                  ///< If the target is a cube map, this handle is used.
+
+        struct Texture2DTarget
+        {
+            Texture2D handle; ///< Texture handle.
+        };                    ///< If the target isn't a cube map, this handle is used.
+
         struct
         {
             bool isCubeMap = false; ///< Is this target a cube map face?
             uint32_t mipLevel = 0;  ///< Mip level of the texture which will be set as a render target.
 
-            union {
-                struct
-                {
-                    CubeMap handle; ///< Cube map handle.
-                    CubeFace face;  ///< Cube map face which will be used as target.
-                } cubeMap;          ///< If the target is a cube map, this handle is used.
+            std::variant<CubeMapTarget, Texture2DTarget> target;
 
-                struct
-                {
-                    Texture2D handle; ///< Texture handle.
-                } texture;            ///< If the target isn't a cube map, this handle is used.
-            };
+            const CubeMapTarget& getCubeMapTarget() const
+            {
+                return std::get<CubeMapTarget>(target);
+            }
+
+            const Texture2DTarget& getTexture2DTarget() const
+            {
+                return std::get<Texture2DTarget>(target);
+            }
+
+            void setCubeMapTarget(const CubeMap& handle, CubeFace face)
+            {
+                isCubeMap = true;
+                target = CubeMapTarget{handle, face};
+            }
+
+            void setTexture2DTarget(const Texture2D& handle)
+            {
+                isCubeMap = false;
+                target = Texture2DTarget{handle};
+            }
         } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
         uint32_t targetCount = 1; ///< Number of render targets.
@@ -352,45 +375,46 @@ namespace cubos::gl
     /// 1D texture description.
     struct Texture1DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                       ///< Number of mip levels.
-        size_t width;                                   ///< Texture width.
-        Usage usage;                                    ///< Texture usage mode.
-        TextureFormat format;                           ///< Texture format.
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                            ///< Number of mip levels.
+        size_t width;                                        ///< Texture width.
+        Usage usage;                                         ///< Texture usage mode.
+        TextureFormat format;                                ///< Texture format.
     };
 
     /// 2D texture description.
     struct Texture2DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                       ///< Number of mip levels.
-        size_t width;                                   ///< Texture width.
-        size_t height;                                  ///< Texture height.
-        Usage usage;                                    ///< Texture usage mode.
-        TextureFormat format;                           ///< Texture format.
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                            ///< Number of mip levels.
+        size_t width;                                        ///< Texture width.
+        size_t height;                                       ///< Texture height.
+        Usage usage;                                         ///< Texture usage mode.
+        TextureFormat format;                                ///< Texture format.
     };
 
     /// 3D texture description.
     struct Texture3DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                       ///< Number of mip levels.
-        size_t width;                                   ///< Texture width.
-        size_t height;                                  ///< Texture height.
-        size_t depth;                                   ///< Texture depth.
-        Usage usage;                                    ///< Texture usage mode.
-        TextureFormat format;                           ///< Texture format.
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                            ///< Number of mip levels.
+        size_t width;                                        ///< Texture width.
+        size_t height;                                       ///< Texture height.
+        size_t depth;                                        ///< Texture depth.
+        Usage usage;                                         ///< Texture usage mode.
+        TextureFormat format;                                ///< Texture format.
     };
 
     /// Cube map description.
     struct CubeMapDesc
     {
-        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial cube map data, indexed using CubeFace.
-        size_t mipLevelCount = 1;                          ///< Number of mip levels.
-        size_t width;                                      ///< Cube map face width.
-        size_t height;                                     ///< Cube map face height.
-        Usage usage;                                       ///< Texture usage mode.
-        TextureFormat format;                              ///< Texture format.
+        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {
+            {}, {}, {}, {}, {}, {}}; ///< Optional initial cube map data, indexed using CubeFace.
+        size_t mipLevelCount = 1;    ///< Number of mip levels.
+        size_t width;                ///< Cube map face width.
+        size_t height;               ///< Cube map face height.
+        Usage usage;                 ///< Texture usage mode.
+        TextureFormat format;        ///< Texture format.
     };
 
     /// Constant buffer element.
@@ -414,9 +438,9 @@ namespace cubos::gl
     /// Vertex element description.
     struct VertexElement
     {
-        const char* name; ///< Element name.
-        Type type = Type::Float;    ///< Element type.
-        size_t size;                ///< Number of components in the vertex element (1, 2, 3 or 4).
+        const char* name;        ///< Element name.
+        Type type = Type::Float; ///< Element type.
+        size_t size;             ///< Number of components in the vertex element (1, 2, 3 or 4).
 
         struct
         {
