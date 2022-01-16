@@ -72,9 +72,8 @@ namespace cubos::data
 
         /// Marks this file for destruction. The file will be deleted when no more references to it are held.
         /// All children of this file will be marked for deletion as well.
-        /// If the archive where the file is is read-only, or if this function is called on a mount point, abort() is
-        /// called.
-        void destroy();
+        /// @return True if the file was marked for destroyed, false if it couldn't be destroyed.
+        bool destroy();
 
         /// Opens this file for reading or writing.
         /// If the archive where the file is is read-only, or if the file is a directory, nullptr is returned.

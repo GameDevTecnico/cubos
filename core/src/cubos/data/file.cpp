@@ -288,29 +288,29 @@ File::Handle File::create(std::string_view path, bool directory)
     return file;
 }
 
-void File::destroy()
+bool File::destroy()
 {
     // Lock the file mutex.
     std::lock_guard file_lock(this->mutex);
 
     if (this->destroyed)
-        return;
+        return true;
     this->destroyed = true;
 
     if (this->archive == nullptr)
     {
-        logError("Could not destroy file '{}', it is not mounted", this->path);
-        abort();
+        logWarning("Could not destroy file '{}', it is not mounted", this->path);
+        return false;
     }
     else if (this->archive->isReadOnly())
     {
-        logError("Could not destroy file '{}', the archive it is mounted on is read-only", this->path);
-        abort();
+        logWarning("Could not destroy file '{}', the archive it is mounted on is read-only", this->path);
+        return false;
     }
     else if (this->id == 1)
     {
-        logError("Could not destroy file '{}', the file is the mount point of an archive", this->path);
-        abort();
+        logWarning("Could not destroy file '{}', the file is the mount point of an archive", this->path);
+        return false;
     }
 
     // Lock the directory mutex and recursively destroy all children.
@@ -324,6 +324,8 @@ void File::destroy()
     std::lock_guard dir_lock(this->parent->mutex);
     this->parent->removeChild(this->shared_from_this());
     this->parent = nullptr;
+
+    return true;
 }
 
 void File::destroyRecursive()

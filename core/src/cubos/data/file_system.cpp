@@ -85,10 +85,7 @@ bool FileSystem::destroy(std::string_view path)
     // Find the file.
     auto file = FileSystem::root()->find(path);
     if (file)
-    {
-        file->destroy();
-        return true;
-    }
+        return file->destroy();
     else
     {
         logWarning("Could not destroy file at path '{}', the file does not exist");
