@@ -163,6 +163,8 @@ inline void DeferredRenderer::setupFrameBuffers()
 
     gBuffer = renderDevice.createFramebuffer(gBufferDesc);
 
+    renderDevice.setShaderPipeline(outputPipeline);
+
     SamplerDesc positionSamplerDesc;
     positionSamplerDesc.addressU = gl::AddressMode::Clamp;
     positionSamplerDesc.addressV = gl::AddressMode::Clamp;
