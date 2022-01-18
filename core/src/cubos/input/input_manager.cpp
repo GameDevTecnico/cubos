@@ -16,6 +16,9 @@ std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> InputManager::
     std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>>();
 std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> InputManager::mouseButtonUpCallbacks =
     std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>>();
+std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>> InputManager::mouseAxisCallbacks =
+    std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>>();
+
 cubos::io::Window* InputManager::window = nullptr;
 
 std::shared_ptr<InputAction> InputManager::createAction(std::string name)
@@ -82,6 +85,11 @@ void ButtonPress::handleButtonDown()
     this->wasTriggered = true;
 }
 
+InputContext ButtonPress::createInputContext()
+{
+    return InputContext();
+}
+
 void InputAction::addInput(InputSource* source)
 {
     source->subscribeEvents(InputManager::window);
@@ -102,7 +110,7 @@ void InputAction::processSources()
             for (auto itBinding = this->functionBindings.begin(); itBinding != this->functionBindings.end();
                  itBinding++)
             {
-                (*itBinding)(InputContext());
+                (*itBinding)((*itSource)->createInputContext());
             }
             return;
         }
@@ -133,6 +141,81 @@ void InputManager::handleMouseButtonDown(cubos::io::MouseButton mouseButton)
     }
 };
 
+void InputManager::handleMouseAxis(glm::ivec2 coordinates)
+{
+    if (mouseAxisCallbacks.contains(cubos::io::MouseAxis::X))
+    {
+        mouseAxisCallbacks[cubos::io::MouseAxis::X]->fire(float(coordinates.x));
+    }
+
+    if (mouseAxisCallbacks.contains(cubos::io::MouseAxis::Y))
+    {
+        mouseAxisCallbacks[cubos::io::MouseAxis::Y]->fire(float(coordinates.y));
+    }
+}
+
+void DoubleAxis::subscribeEvents(cubos::io::Window* window)
+{
+    if (std::holds_alternative<cubos::io::MouseAxis>(this->horizontalAxis))
+    {
+        InputManager::registerMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleHorizontalAxis,
+                                                            std::get<cubos::io::MouseAxis>(this->horizontalAxis));
+    }
+
+    if (std::holds_alternative<cubos::io::MouseAxis>(this->verticalAxis))
+    {
+        InputManager::registerMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleVerticalAxis,
+                                                            std::get<cubos::io::MouseAxis>(this->verticalAxis));
+    }
+};
+
+void DoubleAxis::unsubscribeEvents(cubos::io::Window* window)
+{
+    if (std::holds_alternative<cubos::io::MouseAxis>(this->horizontalAxis))
+    {
+        InputManager::unregisterMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleHorizontalAxis,
+                                                              std::get<cubos::io::MouseAxis>(this->horizontalAxis));
+    }
+
+    if (std::holds_alternative<cubos::io::MouseAxis>(this->verticalAxis))
+    {
+        InputManager::unregisterMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleVerticalAxis,
+                                                              std::get<cubos::io::MouseAxis>(this->verticalAxis));
+    }
+};
+
+void DoubleAxis::handleHorizontalAxis(float xPos)
+{
+    this->xPos = xPos;
+    this->wasTriggered = true;
+}
+
+void DoubleAxis::handleVerticalAxis(float yPos)
+{
+    this->yPos = yPos;
+    this->wasTriggered = true;
+}
+
+bool DoubleAxis::isTriggered()
+{
+    if (DoubleAxis::wasTriggered)
+    {
+        DoubleAxis::wasTriggered = false;
+        return true;
+    }
+    return false;
+}
+
+InputContext DoubleAxis::createInputContext()
+{
+    return InputContext(glm::vec2(this->xPos, this->yPos));
+}
+
+glm::vec2 InputContext::getValue()
+{
+    return this->value;
+}
+
 void InputManager::init(cubos::io::Window* window)
 {
     InputManager::window = window;
@@ -140,4 +223,5 @@ void InputManager::init(cubos::io::Window* window)
     // InputManager::window->onKeyUp.registerCallback(handleKeyUp);
     InputManager::window->onMouseDown.registerCallback(handleMouseButtonDown);
     // InputManager::window->onMouseUp.registerCallback(handleMouseUp);
+    InputManager::window->onMouseMoved.registerCallback(handleMouseAxis);
 }

@@ -21,6 +21,18 @@ namespace cubos::input
 
     class InputContext
     {
+    public:
+        glm::vec2 value;
+        InputContext()
+        {
+        }
+
+        InputContext(glm::vec2 value)
+        {
+            this->value = value;
+        }
+
+        glm::vec2 getValue();
     };
 
     class InputSource
@@ -29,6 +41,7 @@ namespace cubos::input
         virtual void subscribeEvents(cubos::io::Window* window) = 0;
         virtual void unsubscribeEvents(cubos::io::Window* window) = 0;
         virtual bool isTriggered() = 0;
+        virtual InputContext createInputContext() = 0;
     };
 
     class ButtonPress : public InputSource
@@ -44,13 +57,39 @@ namespace cubos::input
             this->button = button;
         }
 
-        bool isTriggered();
-        void subscribeEvents(cubos::io::Window* window);
-        void unsubscribeEvents(cubos::io::Window* window);
+        bool isTriggered() override;
+        void subscribeEvents(cubos::io::Window* window) override;
+        void unsubscribeEvents(cubos::io::Window* window) override;
+        InputContext createInputContext() override;
 
     private:
         bool wasTriggered = false;
         void handleButtonDown();
+    };
+
+    class DoubleAxis : public InputSource
+    {
+    public:
+        DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis verticalAxis)
+        {
+            this->horizontalAxis = horizontalAxis;
+            this->verticalAxis = verticalAxis;
+        };
+
+        bool isTriggered() override;
+        void subscribeEvents(cubos::io::Window* window) override;
+        void unsubscribeEvents(cubos::io::Window* window) override;
+        InputContext createInputContext() override;
+
+    private:
+        bool wasTriggered = false;
+        float xPos;
+        float yPos;
+        using Axis = std::variant<cubos::io::MouseAxis>;
+        Axis horizontalAxis;
+        Axis verticalAxis;
+        void handleHorizontalAxis(float xPos);
+        void handleVerticalAxis(float yPos);
     };
 
     class InputAction
@@ -80,6 +119,7 @@ namespace cubos::input
         static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> keyUpCallbacks;
         static std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> mouseButtonDownCallbacks;
         static std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> mouseButtonUpCallbacks;
+        static std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>> mouseAxisCallbacks;
 
         static void init(cubos::io::Window* window);
         static std::shared_ptr<InputAction> createAction(std::string name);
@@ -161,11 +201,51 @@ namespace cubos::input
             InputManager::mouseButtonDownCallbacks[mouseButton]->unregisterCallback<T>(obj, callback);
         }
 
+        static cubos::Event<float>::ID registerMouseAxisCallback(std::function<void(float)> callback,
+                                                                 cubos::io::MouseAxis mouseAxis)
+        {
+            if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
+            {
+                InputManager::mouseAxisCallbacks[mouseAxis] = std::make_shared<cubos::Event<float>>();
+            }
+            InputManager::mouseAxisCallbacks[mouseAxis]->registerCallback(callback);
+        }
+
+        static void unregisterMouseAxisCallback(cubos::Event<float>::ID callbackID, cubos::io::MouseAxis mouseAxis)
+        {
+            if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
+            {
+                return;
+            }
+            InputManager::mouseAxisCallbacks[mouseAxis]->unregisterCallback(callbackID);
+        }
+
+        template <class T>
+        static void registerMouseAxisCallback(T* obj, void (T::*callback)(float), cubos::io::MouseAxis mouseAxis)
+        {
+            if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
+            {
+                InputManager::mouseAxisCallbacks[mouseAxis] = std::make_shared<cubos::Event<float>>();
+            }
+            InputManager::mouseAxisCallbacks[mouseAxis]->registerCallback<T>(obj, callback);
+        }
+
+        template <class T>
+        static void unregisterMouseAxisCallback(T* obj, void (T::*callback)(float), cubos::io::MouseAxis mouseAxis)
+        {
+            if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
+            {
+                return;
+            }
+            InputManager::mouseAxisCallbacks[mouseAxis]->unregisterCallback<T>(obj, callback);
+        }
+
     private:
         static void handleKeyDown(cubos::io::Key key);
         static void handleKeyUp(cubos::io::Key key);
         static void handleMouseButtonDown(cubos::io::MouseButton mouseButton);
         static void handleMouseButtonUp(cubos::io::MouseButton mouseButton);
+        static void handleMouseAxis(glm::ivec2 coordinates);
     };
 } // namespace cubos::input
 
