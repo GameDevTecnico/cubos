@@ -11,13 +11,6 @@ namespace cubos::rendering
     class Renderer
     {
     protected:
-        struct VertexModel
-        {
-            glm::uvec3 vertex;
-            glm::vec3 normal;
-            uint32_t material;
-        };
-
         struct RendererModel
         {
             cubos::gl::VertexArray va;
@@ -36,6 +29,20 @@ namespace cubos::rendering
         io::Window& window;
         gl::RenderDevice& renderDevice;
 
+    public:
+        struct VertexModel
+        {
+            glm::uvec3 vertex;
+            glm::vec3 normal;
+            uint32_t material;
+        };
+
+        struct CameraData {
+            glm::mat4 viewMatrix;
+            glm::mat4 perspectiveMatrix;
+            gl::Framebuffer target;
+        };
+
     protected:
         explicit Renderer(io::Window& window);
 
@@ -45,7 +52,7 @@ namespace cubos::rendering
         using ID = size_t;
 
         virtual ID registerModel(const std::vector<VertexModel>& vertices, std::vector<uint32_t>& indices) = 0;
-        virtual void render() = 0;
+        virtual void render(const CameraData& camera, bool usePostProcessing = true) = 0;
         virtual void drawModel(ID modelID, glm::mat4 modelMat) = 0;
     };
 } // namespace cubos::rendering

@@ -3,9 +3,9 @@
 using namespace cubos::gl;
 using namespace cubos::rendering;
 
-inline void DeferredRenderer::createPipeline()
+inline void DeferredRenderer::createShaderPipelines()
 {
-    auto vs = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
+    auto gBufferVertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
             #version 330 core
 
             in uvec3 position;
@@ -35,7 +35,7 @@ inline void DeferredRenderer::createPipeline()
             }
         )");
 
-    auto ps = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
+    auto gBufferPixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
             #version 330 core
 
             in vec3 fragPosition;
@@ -54,7 +54,72 @@ inline void DeferredRenderer::createPipeline()
             }
         )");
 
-    shaderPipeline = renderDevice.createShaderPipeline(vs, ps);
+    gBufferPipeline = renderDevice.createShaderPipeline(gBufferVertex, gBufferPixel);
+
+    mvpBindingPoint = gBufferPipeline->getBindingPoint("MVP");
+    mvpBuffer = renderDevice.createConstantBuffer(3 * sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+
+    auto outputVertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
+            #version 330 core
+
+            in vec2 position;
+            in vec2 uv;
+
+            out vec2 fraguv;
+
+            void main(void)
+            {
+                gl_Position = vec4(position, 0, 1);
+                fraguv = uv;
+            }
+        )");
+
+    auto outputPixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
+            #version 330 core
+
+            in vec2 fraguv;
+
+            uniform sampler2D position;
+            uniform sampler2D normal;
+            uniform sampler2D material;
+
+            out vec4 color;
+
+            void main()
+            {
+                color = texture(position, fraguv);
+            }
+        )");
+
+    outputPipeline = renderDevice.createShaderPipeline(outputVertex, outputPixel);
+
+    float screenVerts[] = {
+        -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, +1.0f, 0.0f, 1.0f, +1.0f, +1.0f, 1.0f, 1.0f, +1.0f, -1.0f, 1.0f, 0.0f,
+    };
+    auto screenVertexBuffer = renderDevice.createVertexBuffer(sizeof(screenVerts), screenVerts, gl::Usage::Static);
+
+    VertexArrayDesc screenVADesc;
+    screenVADesc.elementCount = 2;
+    screenVADesc.elements[0].name = "position";
+    screenVADesc.elements[0].type = gl::Type::Float;
+    screenVADesc.elements[0].size = 2;
+    screenVADesc.elements[0].buffer.index = 0;
+    screenVADesc.elements[0].buffer.offset = 0;
+    screenVADesc.elements[0].buffer.stride = 4 * sizeof(float);
+    screenVADesc.elements[1].name = "uv";
+    screenVADesc.elements[1].type = gl::Type::Float;
+    screenVADesc.elements[1].size = 2;
+    screenVADesc.elements[1].buffer.index = 0;
+    screenVADesc.elements[1].buffer.offset = 2 * sizeof(float);
+    screenVADesc.elements[1].buffer.stride = 4 * sizeof(float);
+    screenVADesc.buffers[0] = screenVertexBuffer;
+    screenVertexArray = renderDevice.createVertexArray(screenVADesc);
+
+    unsigned int screenIndices[] = {
+        0, 1, 2, 2, 3, 0,
+    };
+    screenIndexBuffer =
+        renderDevice.createIndexBuffer(sizeof(screenIndices), screenIndices, gl::IndexFormat::UInt, gl::Usage::Static);
 }
 
 inline void DeferredRenderer::setupFrameBuffers()
@@ -94,11 +159,20 @@ inline void DeferredRenderer::setupFrameBuffers()
     gBufferDesc.depthStencil = depthTex;
 
     gBuffer = renderDevice.createFramebuffer(gBufferDesc);
+
+    SamplerDesc positionSamplerDesc;
+    positionSamplerDesc.addressU = gl::AddressMode::Clamp;
+    positionSamplerDesc.addressV = gl::AddressMode::Clamp;
+    positionSamplerDesc.magFilter = gl::TextureFilter::Nearest;
+    positionSamplerDesc.minFilter = gl::TextureFilter::Nearest;
+    positionSampler = renderDevice.createSampler(positionSamplerDesc);
+
+    // TODO: bind, other samplers
 }
 
 DeferredRenderer::DeferredRenderer(io::Window& window) : Renderer(window)
 {
-    createPipeline();
+    createShaderPipelines();
     setupFrameBuffers();
 }
 
@@ -115,22 +189,22 @@ Renderer::ID DeferredRenderer::registerModel(const std::vector<VertexModel>& ver
     vaDesc.elements[0].type = gl::Type::UInt;
     vaDesc.elements[0].size = 3;
     vaDesc.elements[0].buffer.index = 0;
-    vaDesc.elements[0].buffer.offset = 0;
-    vaDesc.elements[0].buffer.stride = sizeof(glm::uvec3);
+    vaDesc.elements[0].buffer.offset = offsetof(VertexModel, vertex);
+    vaDesc.elements[0].buffer.stride = sizeof(VertexModel);
     vaDesc.elements[1].name = "normal";
     vaDesc.elements[1].type = gl::Type::Float;
     vaDesc.elements[1].size = 3;
-    vaDesc.elements[1].buffer.index = 1;
-    vaDesc.elements[1].buffer.offset = 0;
-    vaDesc.elements[1].buffer.stride = sizeof(glm::vec3);
-    vaDesc.elements[1].name = "material";
-    vaDesc.elements[1].type = gl::Type::UInt;
-    vaDesc.elements[1].size = 1;
-    vaDesc.elements[1].buffer.index = 2;
-    vaDesc.elements[1].buffer.offset = 0;
-    vaDesc.elements[1].buffer.stride = sizeof(uint32_t);
+    vaDesc.elements[1].buffer.index = 0;
+    vaDesc.elements[1].buffer.offset = offsetof(VertexModel, normal);
+    vaDesc.elements[1].buffer.stride = sizeof(VertexModel);
+    vaDesc.elements[2].name = "material";
+    vaDesc.elements[2].type = gl::Type::UInt;
+    vaDesc.elements[2].size = 1;
+    vaDesc.elements[2].buffer.index = 0;
+    vaDesc.elements[2].buffer.offset = offsetof(VertexModel, material);
+    vaDesc.elements[2].buffer.stride = sizeof(VertexModel);
     vaDesc.buffers[0] = vb;
-    vaDesc.shaderPipeline = shaderPipeline;
+    vaDesc.shaderPipeline = gBufferPipeline;
 
     model.va = renderDevice.createVertexArray(vaDesc);
     model.ib = renderDevice.createIndexBuffer(indices.size() * sizeof(size_t), &indices[0], gl::IndexFormat::UInt,
@@ -145,6 +219,40 @@ void DeferredRenderer::drawModel(Renderer::ID modelID, glm::mat4 modelMat)
 {
     drawRequests.emplace_back(models[modelID], modelMat);
 }
-void DeferredRenderer::render()
+void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
 {
+    mvpBindingPoint->bind(mvpBuffer);
+
+    auto& mvp = *(MVP*)mvpBuffer->map();
+    mvp.V = camera.viewMatrix;
+    mvp.P = camera.perspectiveMatrix;
+    mvpBuffer->unmap();
+
+    renderDevice.setFramebuffer(camera.target);
+    auto sz = window.getFramebufferSize();
+
+    renderDevice.setShaderPipeline(gBufferPipeline);
+    renderDevice.setFramebuffer(gBuffer);
+    renderDevice.setViewport(0, 0, sz.x, sz.y);
+
+    for (auto it = drawRequests.begin(); it != drawRequests.end(); it++)
+    {
+        auto& m = *(glm::mat4*)mvpBuffer->map();
+        m = it->modelMat;
+        mvpBuffer->unmap();
+
+        RendererModel& model = it->model;
+
+        renderDevice.setVertexArray(model.va);
+        renderDevice.setIndexBuffer(model.ib);
+
+        renderDevice.drawTrianglesIndexed(0, model.numIndices);
+    }
+
+    renderDevice.setShaderPipeline(outputPipeline);
+    renderDevice.setFramebuffer(camera.target);
+    renderDevice.setViewport(0, 0, sz.x, sz.y);
+
+
+
 }
