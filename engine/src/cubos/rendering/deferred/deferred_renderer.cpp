@@ -113,6 +113,7 @@ inline void DeferredRenderer::createShaderPipelines()
     screenVADesc.elements[1].buffer.offset = 2 * sizeof(float);
     screenVADesc.elements[1].buffer.stride = 4 * sizeof(float);
     screenVADesc.buffers[0] = screenVertexBuffer;
+    screenVADesc.shaderPipeline = outputPipeline;
     screenVertexArray = renderDevice.createVertexArray(screenVADesc);
 
     unsigned int screenIndices[] = {
