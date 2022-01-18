@@ -87,7 +87,9 @@ inline void DeferredRenderer::createShaderPipelines()
 
             void main()
             {
-                color = texture(position, fraguv);
+                color = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv);
+
+                
             }
         )");
 
@@ -277,4 +279,8 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
     renderDevice.setShaderPipeline(outputPipeline);
     renderDevice.setFramebuffer(camera.target);
     renderDevice.setViewport(0, 0, sz.x, sz.y);
+
+    renderDevice.setVertexArray(screenVertexArray);
+    renderDevice.setIndexBuffer(screenIndexBuffer);
+    renderDevice.drawTrianglesIndexed(0,6);
 }

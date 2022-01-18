@@ -14,6 +14,7 @@ int main(void)
 
     while (!window->shouldClose())
     {
+        renderDevice.setFramebuffer(0);
         renderDevice.clearColor(0.0, 0.0, 0.0, 0.0f);
         window->swapBuffers();
         window->pollEvents();
