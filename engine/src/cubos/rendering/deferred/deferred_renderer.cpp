@@ -167,7 +167,31 @@ inline void DeferredRenderer::setupFrameBuffers()
     positionSamplerDesc.minFilter = gl::TextureFilter::Nearest;
     positionSampler = renderDevice.createSampler(positionSamplerDesc);
 
-    // TODO: bind, other samplers
+    auto outputPositionBP = outputPipeline->getBindingPoint("position");
+    outputPositionBP->bind(positionTex);
+    outputPositionBP->bind(positionSampler);
+
+    SamplerDesc normalSamplerDesc;
+    normalSamplerDesc.addressU = gl::AddressMode::Clamp;
+    normalSamplerDesc.addressV = gl::AddressMode::Clamp;
+    normalSamplerDesc.magFilter = gl::TextureFilter::Nearest;
+    normalSamplerDesc.minFilter = gl::TextureFilter::Nearest;
+    normalSampler = renderDevice.createSampler(normalSamplerDesc);
+
+    auto outputNormalBP = outputPipeline->getBindingPoint("normal");
+    outputNormalBP->bind(normalTex);
+    outputNormalBP->bind(normalSampler);
+
+    SamplerDesc materialSamplerDesc;
+    materialSamplerDesc.addressU = gl::AddressMode::Clamp;
+    materialSamplerDesc.addressV = gl::AddressMode::Clamp;
+    materialSamplerDesc.magFilter = gl::TextureFilter::Nearest;
+    materialSamplerDesc.minFilter = gl::TextureFilter::Nearest;
+    materialSampler = renderDevice.createSampler(materialSamplerDesc);
+
+    auto outputMaterialBP = outputPipeline->getBindingPoint("material");
+    outputMaterialBP->bind(materialTex);
+    outputMaterialBP->bind(materialSampler);
 }
 
 DeferredRenderer::DeferredRenderer(io::Window& window) : Renderer(window)
@@ -252,7 +276,4 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
     renderDevice.setShaderPipeline(outputPipeline);
     renderDevice.setFramebuffer(camera.target);
     renderDevice.setViewport(0, 0, sz.x, sz.y);
-
-
-
 }
