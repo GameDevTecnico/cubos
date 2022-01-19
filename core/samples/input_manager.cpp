@@ -5,20 +5,32 @@
 #include <algorithm>
 using namespace cubos;
 float red = 0.0f;
+float green = 0.0f;
+float blue = 0.0f;
 int width = 0;
 int height = 0;
 
-void updateRed(input::InputContext context)
+void updateColour(input::InputContext context)
 {
     red = std::clamp(context.getValue().x / width, 0.0f, 1.0f);
+    green = std::clamp(context.getValue().y / width, 0.0f, 1.0f);
 }
 
-void redIdec(input::InputContext context)
+void blueIncr(input::InputContext context)
 {
-    red -= 0.1f;
-    if (red < 0)
+    blue += 0.1f;
+    if (blue < 0)
     {
-        red = 0;
+        blue = 0;
+    }
+}
+
+void blueDecr(input::InputContext context)
+{
+    blue -= 0.1f;
+    if (blue < 0)
+    {
+        blue = 0;
     }
 }
 int main(void)
@@ -31,18 +43,23 @@ int main(void)
     width = window->getFramebufferSize().x;
 
     input::InputManager::init(window);
-    auto incRedAction = input::InputManager::createAction("update_red");
-    incRedAction->addBinding(updateRed);
-    incRedAction->addInput(new input::DoubleAxis(cubos::io::MouseAxis::X, cubos::io::MouseAxis::Y));
+    auto updateRedGreenAction = input::InputManager::createAction("update_red_green");
+    updateRedGreenAction->addBinding(updateColour);
+    updateRedGreenAction->addInput(new input::DoubleAxis(cubos::io::MouseAxis::X, cubos::io::MouseAxis::Y));
 
-    auto decRedAction = input::InputManager::createAction("decrease_red");
-    decRedAction->addBinding(redIdec);
-    decRedAction->addInput(new input::ButtonPress(io::Key::S));
-    decRedAction->addInput(new input::ButtonPress(io::MouseButton::Right));
+    auto incBlueAction = input::InputManager::createAction("increase_blue");
+    incBlueAction->addBinding(blueIncr);
+    incBlueAction->addInput(new input::ButtonPress(io::Key::D));
+    incBlueAction->addInput(new input::ButtonPress(io::MouseButton::Right));
+
+    auto decBlueAction = input::InputManager::createAction("decrease_blue");
+    decBlueAction->addBinding(blueDecr);
+    decBlueAction->addInput(new input::ButtonPress(io::Key::A));
+    decBlueAction->addInput(new input::ButtonPress(io::MouseButton::Left));
 
     while (!window->shouldClose())
     {
-        renderDevice.clearColor(red, 0.0, 0.0, 0.0f);
+        renderDevice.clearColor(red, green, blue, 0.0f);
         window->swapBuffers();
         window->pollEvents();
         input::InputManager::processActions();
