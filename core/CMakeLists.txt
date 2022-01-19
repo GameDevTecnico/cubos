@@ -39,6 +39,9 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/input/binding.cpp"
     "src/cubos/input/input_manager.cpp"
 
+    "src/cubos/input/input_sources/button_press.cpp"
+    "src/cubos/input/input_sources/double_axis.cpp"
+
     "src/cubos/gl/debug.cpp"
     
     "src/cubos/gl/ogl_render_device.hpp"
@@ -66,6 +69,9 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/render_device.hpp"
 
     "include/cubos/input/input_manager.hpp"
+    "include/cubos/input/input_sources/input_source.hpp"
+    "include/cubos/input/input_sources/button_press.hpp"
+    "include/cubos/input/input_sources/double_axis.hpp"
 )
 
 

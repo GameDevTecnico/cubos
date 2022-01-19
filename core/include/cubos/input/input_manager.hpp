@@ -10,14 +10,15 @@
 #include <variant>
 #include <list>
 #include <glm/glm.hpp>
+#include <cubos/input/input_sources/input_source.hpp>
+#include <cubos/input/input_sources/button_press.hpp>
+#include <cubos/input/input_sources/double_axis.hpp>
 
 // INPUT MANAGER
 //   - MAPPINGS (EVENTS (e.g. keys, mouseclicks, gamepads, joysticks, etc..) -> ACTIONS (e.g. Fire, Shoot, Jumpt, Move))
 
 namespace cubos::input
 {
-
-    // class Binding;
 
     class InputContext
     {
@@ -33,63 +34,6 @@ namespace cubos::input
         }
 
         glm::vec2 getValue();
-    };
-
-    class InputSource
-    {
-    public:
-        virtual void subscribeEvents(cubos::io::Window* window) = 0;
-        virtual void unsubscribeEvents(cubos::io::Window* window) = 0;
-        virtual bool isTriggered() = 0;
-        virtual InputContext createInputContext() = 0;
-    };
-
-    class ButtonPress : public InputSource
-    {
-    public:
-        std::variant<cubos::io::Key, cubos::io::MouseButton> button;
-        ButtonPress(cubos::io::Key key)
-        {
-            button = key;
-        }
-        ButtonPress(cubos::io::MouseButton button)
-        {
-            this->button = button;
-        }
-
-        bool isTriggered() override;
-        void subscribeEvents(cubos::io::Window* window) override;
-        void unsubscribeEvents(cubos::io::Window* window) override;
-        InputContext createInputContext() override;
-
-    private:
-        bool wasTriggered = false;
-        void handleButtonDown();
-    };
-
-    class DoubleAxis : public InputSource
-    {
-    public:
-        DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis verticalAxis)
-        {
-            this->horizontalAxis = horizontalAxis;
-            this->verticalAxis = verticalAxis;
-        };
-
-        bool isTriggered() override;
-        void subscribeEvents(cubos::io::Window* window) override;
-        void unsubscribeEvents(cubos::io::Window* window) override;
-        InputContext createInputContext() override;
-
-    private:
-        bool wasTriggered = false;
-        float xPos;
-        float yPos;
-        using Axis = std::variant<cubos::io::MouseAxis>;
-        Axis horizontalAxis;
-        Axis verticalAxis;
-        void handleHorizontalAxis(float xPos);
-        void handleVerticalAxis(float yPos);
     };
 
     class InputAction

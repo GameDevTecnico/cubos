@@ -42,54 +42,6 @@ std::shared_ptr<InputAction> InputManager::getAction(std::string name)
     return nullptr;
 };
 
-bool ButtonPress::isTriggered()
-{
-    if (ButtonPress::wasTriggered)
-    {
-        ButtonPress::wasTriggered = false;
-        return true;
-    }
-    return false;
-}
-
-void ButtonPress::subscribeEvents(cubos::io::Window* window)
-{
-    if (std::holds_alternative<cubos::io::Key>(this->button))
-    {
-        InputManager::registerKeyDownCallback<ButtonPress>(this, &ButtonPress::handleButtonDown,
-                                                           std::get<cubos::io::Key>(this->button));
-    }
-    else if (std::holds_alternative<cubos::io::MouseButton>(this->button))
-    {
-        InputManager::registerMouseButtonDownCallback<ButtonPress>(this, &ButtonPress::handleButtonDown,
-                                                                   std::get<cubos::io::MouseButton>(this->button));
-    }
-}
-
-void ButtonPress::unsubscribeEvents(cubos::io::Window* window)
-{
-    if (std::holds_alternative<cubos::io::Key>(this->button))
-    {
-        InputManager::unregisterKeyDownCallback<ButtonPress>(this, &ButtonPress::handleButtonDown,
-                                                             std::get<cubos::io::Key>(this->button));
-    }
-    else if (std::holds_alternative<cubos::io::MouseButton>(this->button))
-    {
-        InputManager::unregisterMouseButtonDownCallback<ButtonPress>(this, &ButtonPress::handleButtonDown,
-                                                                     std::get<cubos::io::MouseButton>(this->button));
-    }
-}
-
-void ButtonPress::handleButtonDown()
-{
-    this->wasTriggered = true;
-}
-
-InputContext ButtonPress::createInputContext()
-{
-    return InputContext();
-}
-
 void InputAction::addInput(InputSource* source)
 {
     source->subscribeEvents(InputManager::window);
@@ -152,63 +104,6 @@ void InputManager::handleMouseAxis(glm::ivec2 coordinates)
     {
         mouseAxisCallbacks[cubos::io::MouseAxis::Y]->fire(float(coordinates.y));
     }
-}
-
-void DoubleAxis::subscribeEvents(cubos::io::Window* window)
-{
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->horizontalAxis))
-    {
-        InputManager::registerMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleHorizontalAxis,
-                                                            std::get<cubos::io::MouseAxis>(this->horizontalAxis));
-    }
-
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->verticalAxis))
-    {
-        InputManager::registerMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleVerticalAxis,
-                                                            std::get<cubos::io::MouseAxis>(this->verticalAxis));
-    }
-};
-
-void DoubleAxis::unsubscribeEvents(cubos::io::Window* window)
-{
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->horizontalAxis))
-    {
-        InputManager::unregisterMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleHorizontalAxis,
-                                                              std::get<cubos::io::MouseAxis>(this->horizontalAxis));
-    }
-
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->verticalAxis))
-    {
-        InputManager::unregisterMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleVerticalAxis,
-                                                              std::get<cubos::io::MouseAxis>(this->verticalAxis));
-    }
-};
-
-void DoubleAxis::handleHorizontalAxis(float xPos)
-{
-    this->xPos = xPos;
-    this->wasTriggered = true;
-}
-
-void DoubleAxis::handleVerticalAxis(float yPos)
-{
-    this->yPos = yPos;
-    this->wasTriggered = true;
-}
-
-bool DoubleAxis::isTriggered()
-{
-    if (DoubleAxis::wasTriggered)
-    {
-        DoubleAxis::wasTriggered = false;
-        return true;
-    }
-    return false;
-}
-
-InputContext DoubleAxis::createInputContext()
-{
-    return InputContext(glm::vec2(this->xPos, this->yPos));
 }
 
 glm::vec2 InputContext::getValue()
