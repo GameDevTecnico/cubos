@@ -31,6 +31,10 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/memory/yaml_serializer.cpp"
     "src/cubos/memory/yaml_deserializer.cpp"
 
+    "src/cubos/data/file.cpp"
+    "src/cubos/data/file_system.cpp"
+    "src/cubos/data/std_archive.cpp"
+
     "src/cubos/io/window.cpp"
     "src/cubos/io/glfw_window.hpp"
     "src/cubos/io/glfw_window.cpp"
@@ -47,6 +51,9 @@ set(CUBOS_CORE_SOURCE
     
     "src/cubos/gl/ogl_render_device.hpp"
     "src/cubos/gl/ogl_render_device.cpp"
+    "src/cubos/gl/material.cpp"
+    "src/cubos/gl/palette.cpp"
+    "src/cubos/gl/grid.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE
@@ -56,18 +63,25 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/memory/stream.hpp"
     "include/cubos/memory/std_stream.hpp"
     "include/cubos/memory/buffer_stream.hpp"
-    
-    "include/cubos/memory/stream.hpp"
-    "include/cubos/memory/serialization_map.hpp"
     "include/cubos/memory/serializer.hpp"
     "include/cubos/memory/deserializer.hpp"
     "include/cubos/memory/yaml_serializer.hpp"
     "include/cubos/memory/yaml_deserializer.hpp"
+    "include/cubos/memory/serialization_map.hpp"
+    
+    "include/cubos/data/file.hpp"
+    "include/cubos/data/file_stream.hpp"
+    "include/cubos/data/file_system.hpp"
+    "include/cubos/data/archive.hpp"
+    "include/cubos/data/std_archive.hpp"
 
     "include/cubos/io/window.hpp"
 
     "include/cubos/gl/debug.hpp"
     "include/cubos/gl/render_device.hpp"
+    "include/cubos/gl/material.hpp"
+    "include/cubos/gl/palette.hpp"
+    "include/cubos/gl/grid.hpp"
 
     "include/cubos/input/input_manager.hpp"
     "include/cubos/input/input_sources/input_source.hpp"
@@ -75,7 +89,6 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/input/input_sources/single_axis.hpp"
     "include/cubos/input/input_sources/double_axis.hpp"
 )
-
 
 # Create core library
 
@@ -134,8 +147,11 @@ else()
     find_package(spdlog REQUIRED)
 endif()
 
-target_link_libraries(cubos-core PUBLIC glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
-target_link_libraries(cubos-core PRIVATE glad)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests
 
