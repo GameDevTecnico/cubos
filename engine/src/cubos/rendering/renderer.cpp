@@ -7,3 +7,8 @@ using namespace cubos::rendering;
 Renderer::Renderer(io::Window& window) : window(window), renderDevice(window.getRenderDevice())
 {
 }
+
+void Renderer::flush()
+{
+    drawRequests.clear();
+}

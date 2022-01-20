@@ -130,14 +130,14 @@ inline void DeferredRenderer::setupFrameBuffers()
     auto sz = window.getFramebufferSize();
 
     Texture2DDesc positionTexDesc;
-    positionTexDesc.format = TextureFormat::RGBA32Float;
+    positionTexDesc.format = TextureFormat::RGB32Float;
     positionTexDesc.width = sz.x;
     positionTexDesc.height = sz.y;
     // positionTexDesc.data[0] = nullptr;
     positionTex = renderDevice.createTexture2D(positionTexDesc);
 
     Texture2DDesc normalTexDesc;
-    normalTexDesc.format = TextureFormat::RGBA32Float;
+    normalTexDesc.format = TextureFormat::RGB32Float;
     normalTexDesc.width = sz.x;
     normalTexDesc.height = sz.y;
     normalTex = renderDevice.createTexture2D(normalTexDesc);
@@ -250,12 +250,6 @@ void DeferredRenderer::drawModel(Renderer::ID modelID, glm::mat4 modelMat)
 }
 void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
 {
-    mvpBindingPoint->bind(mvpBuffer);
-
-    auto& mvp = *(MVP*)mvpBuffer->map();
-    mvp.V = camera.viewMatrix;
-    mvp.P = camera.perspectiveMatrix;
-    mvpBuffer->unmap();
 
     renderDevice.setFramebuffer(camera.target);
     auto sz = window.getFramebufferSize();
@@ -263,6 +257,15 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
     renderDevice.setShaderPipeline(gBufferPipeline);
     renderDevice.setFramebuffer(gBuffer);
     renderDevice.setViewport(0, 0, sz.x, sz.y);
+    renderDevice.clearColor(1, 0, 0, 0);
+    renderDevice.clearDepth(0);
+
+    mvpBindingPoint->bind(mvpBuffer);
+
+    auto& mvp = *(MVP*)mvpBuffer->map();
+    mvp.V = camera.viewMatrix;
+    mvp.P = camera.perspectiveMatrix;
+    mvpBuffer->unmap();
 
     for (auto it = drawRequests.begin(); it != drawRequests.end(); it++)
     {
@@ -284,5 +287,5 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
 
     renderDevice.setVertexArray(screenVertexArray);
     renderDevice.setIndexBuffer(screenIndexBuffer);
-    renderDevice.drawTrianglesIndexed(0,6);
+    renderDevice.drawTrianglesIndexed(0, 6);
 }

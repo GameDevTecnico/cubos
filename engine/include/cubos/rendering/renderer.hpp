@@ -37,7 +37,8 @@ namespace cubos::rendering
             uint32_t material;
         };
 
-        struct CameraData {
+        struct CameraData
+        {
             glm::mat4 viewMatrix;
             glm::mat4 perspectiveMatrix;
             gl::Framebuffer target;
@@ -54,6 +55,7 @@ namespace cubos::rendering
         virtual ID registerModel(const std::vector<VertexModel>& vertices, std::vector<uint32_t>& indices) = 0;
         virtual void render(const CameraData& camera, bool usePostProcessing = true) = 0;
         virtual void drawModel(ID modelID, glm::mat4 modelMat) = 0;
+        virtual void flush();
     };
 } // namespace cubos::rendering
 
