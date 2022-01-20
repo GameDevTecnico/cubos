@@ -106,11 +106,6 @@ void InputManager::handleMouseAxis(glm::ivec2 coordinates)
     }
 }
 
-glm::vec2 InputContext::getValue()
-{
-    return this->value;
-}
-
 void InputManager::init(cubos::io::Window* window)
 {
     InputManager::window = window;

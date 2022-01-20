@@ -12,8 +12,8 @@ int height = 0;
 
 void updateColour(input::InputContext context)
 {
-    red = std::clamp(context.getValue().x / width, 0.0f, 1.0f);
-    green = std::clamp(context.getValue().y / width, 0.0f, 1.0f);
+    red = std::clamp(context.getValue<glm::vec2>().x / width, 0.0f, 1.0f);
+    green = std::clamp(context.getValue<glm::vec2>().y / width, 0.0f, 1.0f);
 }
 
 void blueIncr(input::InputContext context)

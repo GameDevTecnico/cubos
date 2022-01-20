@@ -23,7 +23,7 @@ namespace cubos::input
     class InputContext
     {
     public:
-        glm::vec2 value;
+        std::variant<float, glm::vec2> value;
         InputContext()
         {
         }
@@ -33,7 +33,15 @@ namespace cubos::input
             this->value = value;
         }
 
-        glm::vec2 getValue();
+        InputContext(float value)
+        {
+            this->value = value;
+        }
+
+        template <class T> T getValue()
+        {
+            return std::get<T>(this->value);
+        }
     };
 
     class InputAction
