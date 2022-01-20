@@ -978,8 +978,11 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     glGenFramebuffers(1, &id);
     glBindFramebuffer(GL_FRAMEBUFFER, id);
 
+    std::vector<GLenum> drawBuffers;
+
     // Attach targets
     for (int i = 0; i < desc.targetCount; ++i)
+    {
         if (desc.targets[i].isCubeMap)
         {
             GLenum face;
@@ -994,6 +997,8 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
                 std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id, 0);
         }
+        drawBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
+    }
 
     // Attach depth stencil texture
     if (desc.depthStencil)
@@ -1010,6 +1015,9 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             return nullptr;
         }
     }
+
+    // Define draw buffers
+    glDrawBuffers(drawBuffers.size(), &drawBuffers[0]);
 
     // Check errors
     GLenum glErr = glGetError();
