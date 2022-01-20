@@ -2,6 +2,9 @@
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
 #include <cubos/input/input_manager.hpp>
+#include <cubos/input/input_sources/button_press.hpp>
+#include <cubos/input/input_sources/single_axis.hpp>
+#include <cubos/input/input_sources/double_axis.hpp>
 #include <algorithm>
 using namespace cubos;
 float red = 0.0f;

@@ -11,8 +11,6 @@
 #include <list>
 #include <glm/glm.hpp>
 #include <cubos/input/input_sources/input_source.hpp>
-#include <cubos/input/input_sources/button_press.hpp>
-#include <cubos/input/input_sources/double_axis.hpp>
 
 // INPUT MANAGER
 //   - MAPPINGS (EVENTS (e.g. keys, mouseclicks, gamepads, joysticks, etc..) -> ACTIONS (e.g. Fire, Shoot, Jumpt, Move))
