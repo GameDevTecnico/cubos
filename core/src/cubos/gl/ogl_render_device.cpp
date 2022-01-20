@@ -984,14 +984,14 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         {
             GLenum face;
             cubeFaceToGL(desc.targets[i].getCubeMapTarget().face, face);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, face,
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, face,
                                    std::static_pointer_cast<OGLCubeMap>(desc.targets[i].getCubeMapTarget().handle)->id,
                                    0);
         }
         else
         {
             glFramebufferTexture2D(
-                GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, GL_TEXTURE_2D,
+                GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
                 std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id, 0);
         }
 
