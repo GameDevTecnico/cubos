@@ -18,14 +18,9 @@ namespace cubos::input
     {
     public:
         std::variant<cubos::io::Key, cubos::io::MouseButton> button;
-        ButtonPress(cubos::io::Key key)
-        {
-            button = key;
-        }
-        ButtonPress(cubos::io::MouseButton button)
-        {
-            this->button = button;
-        }
+
+        ButtonPress(cubos::io::Key key);
+        ButtonPress(cubos::io::MouseButton button);
 
         bool isTriggered() override;
         void subscribeEvents(cubos::io::Window* window) override;

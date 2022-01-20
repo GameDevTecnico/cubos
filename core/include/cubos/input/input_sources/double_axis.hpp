@@ -17,11 +17,7 @@ namespace cubos::input
     class DoubleAxis : public InputSource
     {
     public:
-        DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis verticalAxis)
-        {
-            this->horizontalAxis = horizontalAxis;
-            this->verticalAxis = verticalAxis;
-        };
+        DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis verticalAxis);
 
         bool isTriggered() override;
         void subscribeEvents(cubos::io::Window* window) override;

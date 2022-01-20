@@ -50,10 +50,7 @@ namespace cubos::input
         std::string name;
         bool enable;
 
-        InputAction(std::string actionName)
-        {
-            name = actionName;
-        }
+        InputAction(std::string actionName);
         void addInput(InputSource* source);
         void addBinding(std::function<void(InputContext)> binding);
         void processSources();

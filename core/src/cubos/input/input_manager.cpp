@@ -21,26 +21,10 @@ std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>> InputManage
 
 cubos::io::Window* InputManager::window = nullptr;
 
-std::shared_ptr<InputAction> InputManager::createAction(std::string name)
+InputAction::InputAction(std::string actionName)
 {
-    if (InputManager::actions.contains(name))
-    {
-        // returns null if an action with that name already exists
-        return nullptr;
-    }
-
-    std::shared_ptr<InputAction> action = std::make_shared<InputAction>(name);
-
-    InputManager::actions.insert({name, action});
-    return action;
-};
-
-std::shared_ptr<InputAction> InputManager::getAction(std::string name)
-{
-    if (InputManager::actions.contains(name))
-        return InputManager::actions[name];
-    return nullptr;
-};
+    name = actionName;
+}
 
 void InputAction::addInput(InputSource* source)
 {
@@ -68,6 +52,27 @@ void InputAction::processSources()
         }
     }
 }
+
+std::shared_ptr<InputAction> InputManager::createAction(std::string name)
+{
+    if (InputManager::actions.contains(name))
+    {
+        // returns null if an action with that name already exists
+        return nullptr;
+    }
+
+    std::shared_ptr<InputAction> action = std::make_shared<InputAction>(name);
+
+    InputManager::actions.insert({name, action});
+    return action;
+};
+
+std::shared_ptr<InputAction> InputManager::getAction(std::string name)
+{
+    if (InputManager::actions.contains(name))
+        return InputManager::actions[name];
+    return nullptr;
+};
 
 void InputManager::processActions()
 {

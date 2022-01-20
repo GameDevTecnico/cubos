@@ -12,6 +12,12 @@
 
 using namespace cubos::input;
 
+DoubleAxis::DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis verticalAxis)
+{
+    this->horizontalAxis = horizontalAxis;
+    this->verticalAxis = verticalAxis;
+};
+
 void DoubleAxis::subscribeEvents(cubos::io::Window* window)
 {
     if (std::holds_alternative<cubos::io::MouseAxis>(this->horizontalAxis))

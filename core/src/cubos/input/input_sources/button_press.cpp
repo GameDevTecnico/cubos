@@ -12,6 +12,16 @@
 
 using namespace cubos::input;
 
+ButtonPress::ButtonPress(cubos::io::Key key)
+{
+    button = key;
+}
+
+ButtonPress::ButtonPress(cubos::io::MouseButton button)
+{
+    this->button = button;
+}
+
 bool ButtonPress::isTriggered()
 {
     if (ButtonPress::wasTriggered)
