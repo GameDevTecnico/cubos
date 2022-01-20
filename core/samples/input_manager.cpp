@@ -10,6 +10,7 @@ using namespace cubos;
 float red = 0.0f;
 float green = 0.0f;
 float blue = 0.0f;
+float alpha = 1.0f;
 int width = 0;
 int height = 0;
 
@@ -36,6 +37,14 @@ void blueDecr(input::InputContext context)
         blue = 0;
     }
 }
+
+void updateToBlack(input::InputContext context)
+{
+    red = std::clamp(red + context.getValue<float>() * 0.05f, 0.0f, 1.0f);
+    green = std::clamp(green + context.getValue<float>() * 0.05f, 0.0f, 1.0f);
+    blue = std::clamp(blue + context.getValue<float>() * 0.05f, 0.0f, 1.0f);
+}
+
 int main(void)
 {
     initializeLogger();
@@ -59,6 +68,10 @@ int main(void)
     decBlueAction->addBinding(blueDecr);
     decBlueAction->addInput(new input::ButtonPress(io::Key::A));
     decBlueAction->addInput(new input::ButtonPress(io::MouseButton::Left));
+
+    auto updateAlphaAction = input::InputManager::createAction("update_alpha");
+    updateAlphaAction->addBinding(updateToBlack);
+    updateAlphaAction->addInput(new input::SingleAxis(io::Key::O, io::Key::L));
 
     while (!window->shouldClose())
     {
