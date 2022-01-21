@@ -14,7 +14,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     {
         if (readOnly)
         {
-            logError("Couldn't create STDArchive: file/directory '{}' doesn't exist", osPath.c_str());
+            logError("Couldn't create STDArchive: file/directory '{}' doesn't exist", osPath.string());
             abort();
         }
         else
@@ -29,7 +29,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
                 FILE* file = fopen(path.c_str(), "w");
                 if (!file)
                 {
-                    logError("Couldn't create STDArchive: couldn't create root file '{}'", osPath.c_str());
+                    logError("Couldn't create STDArchive: couldn't create root file '{}'", path);
                     abort();
                 }
                 fclose(file);
@@ -42,7 +42,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     {
         if (!isDirectory)
         {
-            logError("Couldn't create STDArchive: expected a file at '{}', found a directory", osPath.c_str());
+            logError("Couldn't create STDArchive: expected a file at '{}', found a directory", osPath.string());
             abort();
         }
 
@@ -55,7 +55,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     {
         if (isDirectory)
         {
-            logError("Couldn't create STDArchive: expected a directory at '{}', found a file", osPath.c_str());
+            logError("Couldn't create STDArchive: expected a directory at '{}', found a file", osPath.string());
             abort();
         }
 
