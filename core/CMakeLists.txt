@@ -65,6 +65,7 @@ set(CUBOS_CORE_INCLUDE
         "include/cubos/gl/render_device.hpp"
         "include/cubos/gl/material.hpp"
         "include/cubos/gl/palette.hpp"
+        "include/cubos/gl/vertex.hpp"
         "include/cubos/gl/grid.hpp"
         )
 

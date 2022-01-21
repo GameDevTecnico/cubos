@@ -1,3 +1,4 @@
+#include <cubos/gl/vertex.hpp>
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
 
 using namespace cubos::gl;
@@ -226,12 +227,13 @@ DeferredRenderer::DeferredRenderer(io::Window& window) : Renderer(window)
     createRenderDeviceStates();
 }
 
-Renderer::ID DeferredRenderer::registerModel(const std::vector<VertexModel>& vertices, std::vector<uint32_t>& indices)
+Renderer::ID DeferredRenderer::registerModel(const std::vector<cubos::gl::Vertex>& vertices,
+                                             std::vector<uint32_t>& indices)
 {
     RendererModel model;
 
     VertexBuffer vb =
-        renderDevice.createVertexBuffer(vertices.size() * sizeof(VertexModel), &vertices[0], gl::Usage::Static);
+        renderDevice.createVertexBuffer(vertices.size() * sizeof(cubos::gl::Vertex), &vertices[0], gl::Usage::Static);
 
     VertexArrayDesc vaDesc;
     vaDesc.elementCount = 3;
@@ -239,20 +241,20 @@ Renderer::ID DeferredRenderer::registerModel(const std::vector<VertexModel>& ver
     vaDesc.elements[0].type = gl::Type::UInt;
     vaDesc.elements[0].size = 3;
     vaDesc.elements[0].buffer.index = 0;
-    vaDesc.elements[0].buffer.offset = offsetof(VertexModel, vertex);
-    vaDesc.elements[0].buffer.stride = sizeof(VertexModel);
+    vaDesc.elements[0].buffer.offset = offsetof(cubos::gl::Vertex, position);
+    vaDesc.elements[0].buffer.stride = sizeof(cubos::gl::Vertex);
     vaDesc.elements[1].name = "normal";
     vaDesc.elements[1].type = gl::Type::Float;
     vaDesc.elements[1].size = 3;
     vaDesc.elements[1].buffer.index = 0;
-    vaDesc.elements[1].buffer.offset = offsetof(VertexModel, normal);
-    vaDesc.elements[1].buffer.stride = sizeof(VertexModel);
+    vaDesc.elements[1].buffer.offset = offsetof(cubos::gl::Vertex, normal);
+    vaDesc.elements[1].buffer.stride = sizeof(cubos::gl::Vertex);
     vaDesc.elements[2].name = "material";
     vaDesc.elements[2].type = gl::Type::UShort;
     vaDesc.elements[2].size = 1;
     vaDesc.elements[2].buffer.index = 0;
-    vaDesc.elements[2].buffer.offset = offsetof(VertexModel, material);
-    vaDesc.elements[2].buffer.stride = sizeof(VertexModel);
+    vaDesc.elements[2].buffer.offset = offsetof(cubos::gl::Vertex, material);
+    vaDesc.elements[2].buffer.stride = sizeof(cubos::gl::Vertex);
     vaDesc.buffers[0] = vb;
     vaDesc.shaderPipeline = gBufferPipeline;
 

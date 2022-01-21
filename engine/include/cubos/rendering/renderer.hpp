@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <cubos/gl/render_device.hpp>
+#include <cubos/gl/vertex.hpp>
 #include "cubos/io/window.hpp"
 
 namespace cubos::rendering
@@ -30,13 +31,6 @@ namespace cubos::rendering
         gl::RenderDevice& renderDevice;
 
     public:
-        struct VertexModel
-        {
-            glm::uvec3 vertex;
-            glm::vec3 normal;
-            uint16_t material;
-        };
-
         struct CameraData
         {
             glm::mat4 viewMatrix;
@@ -52,7 +46,7 @@ namespace cubos::rendering
         Renderer(const Renderer&) = delete;
         using ID = size_t;
 
-        virtual ID registerModel(const std::vector<VertexModel>& vertices, std::vector<uint32_t>& indices) = 0;
+        virtual ID registerModel(const std::vector<cubos::gl::Vertex>& vertices, std::vector<uint32_t>& indices) = 0;
         virtual void render(const CameraData& camera, bool usePostProcessing = true) = 0;
         virtual void drawModel(ID modelID, glm::mat4 modelMat) = 0;
         virtual void flush();

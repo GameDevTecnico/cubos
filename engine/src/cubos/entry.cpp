@@ -1,6 +1,7 @@
 #include <cubos/log.hpp>
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
+#include <cubos/gl/vertex.hpp>
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -13,7 +14,7 @@ int main(void)
     auto& renderDevice = window->getRenderDevice();
     auto renderer = rendering::DeferredRenderer(*window);
 
-    std::vector<rendering::Renderer::VertexModel> vertices = {
+    std::vector<cubos::gl::Vertex> vertices = {
         // Front
         {{1, 0, 0}, {0, 0, -1}, 0},
         {{0, 0, 0}, {0, 0, -1}, 0},

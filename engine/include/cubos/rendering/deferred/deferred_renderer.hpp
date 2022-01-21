@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include <cubos/gl/vertex.hpp>
 #include <cubos/gl/render_device.hpp>
 #include <cubos/rendering/renderer.hpp>
 
@@ -59,7 +60,7 @@ namespace cubos::rendering
 
     public:
         explicit DeferredRenderer(io::Window& window);
-        ID registerModel(const std::vector<VertexModel>& vertices, std::vector<uint32_t>& indices) override;
+        ID registerModel(const std::vector<cubos::gl::Vertex>& vertices, std::vector<uint32_t>& indices) override;
         void drawModel(ID modelID, glm::mat4 modelMat) override;
 
         void render(const CameraData& camera, bool usePostProcessing = true) override;
