@@ -34,7 +34,7 @@ namespace cubos::rendering
         {
             glm::uvec3 vertex;
             glm::vec3 normal;
-            uint32_t material;
+            uint16_t material;
         };
 
         struct CameraData

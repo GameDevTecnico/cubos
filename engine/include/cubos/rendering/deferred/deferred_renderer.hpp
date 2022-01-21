@@ -23,6 +23,9 @@ namespace cubos::rendering
         gl::ShaderPipeline gBufferPipeline;
         gl::ShaderBindingPoint mvpBindingPoint;
         gl::ConstantBuffer mvpBuffer;
+        gl::RasterState rasterState;
+        gl::BlendState blendState;
+        gl::DepthStencilState depthStencilState;
 
         // Framebuffers
         gl::Framebuffer gBuffer;
@@ -39,6 +42,9 @@ namespace cubos::rendering
         gl::ShaderPipeline outputPipeline;
         gl::VertexArray screenVertexArray;
         gl::IndexBuffer screenIndexBuffer;
+        gl::ShaderBindingPoint outputPositionBP;
+        gl::ShaderBindingPoint outputNormalBP;
+        gl::ShaderBindingPoint outputMaterialBP;
 
         // Samplers
         gl::Sampler positionSampler;
@@ -49,6 +55,7 @@ namespace cubos::rendering
     private:
         void createShaderPipelines();
         void setupFrameBuffers();
+        void createRenderDeviceStates();
 
     public:
         explicit DeferredRenderer(io::Window& window);

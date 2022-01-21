@@ -1728,6 +1728,12 @@ void OGLRenderDevice::clearColor(float r, float g, float b, float a)
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void OGLRenderDevice::clearTargetColor(size_t target, float r, float g, float b, float a)
+{
+    float color[] = {r, g, b, a};
+    glClearBufferfv(GL_COLOR, target, color);
+}
+
 void OGLRenderDevice::clearDepth(float depth)
 {
     glClearDepth(depth);

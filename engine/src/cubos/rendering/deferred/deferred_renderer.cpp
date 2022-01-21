@@ -29,9 +29,11 @@ inline void DeferredRenderer::createShaderPipelines()
                 fragPosition = vec3(viewPosition);
 
                 mat3 N = transpose(inverse(mat3(V * M)));
-                fragNormal = N * (normal);
+                fragNormal = N * normal;
 
                 gl_Position = P * viewPosition;
+
+                fragMaterial = material;
             }
         )");
 
@@ -81,15 +83,15 @@ inline void DeferredRenderer::createShaderPipelines()
 
             uniform sampler2D position;
             uniform sampler2D normal;
-            uniform sampler2D material;
+            uniform usampler2D material;
 
             out vec4 color;
 
             void main()
             {
-                color = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv);
-
-                
+                color = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
+                //color += vec4(vec3(float(texture(material, fraguv).r) / float(0xffff)), 1);
+                color += vec4(texture(normal, fraguv).xyz, 1);
             }
         )");
 
@@ -172,7 +174,7 @@ inline void DeferredRenderer::setupFrameBuffers()
     positionSamplerDesc.minFilter = gl::TextureFilter::Nearest;
     positionSampler = renderDevice.createSampler(positionSamplerDesc);
 
-    auto outputPositionBP = outputPipeline->getBindingPoint("position");
+    outputPositionBP = outputPipeline->getBindingPoint("position");
     outputPositionBP->bind(positionTex);
     outputPositionBP->bind(positionSampler);
 
@@ -183,7 +185,7 @@ inline void DeferredRenderer::setupFrameBuffers()
     normalSamplerDesc.minFilter = gl::TextureFilter::Nearest;
     normalSampler = renderDevice.createSampler(normalSamplerDesc);
 
-    auto outputNormalBP = outputPipeline->getBindingPoint("normal");
+    outputNormalBP = outputPipeline->getBindingPoint("normal");
     outputNormalBP->bind(normalTex);
     outputNormalBP->bind(normalSampler);
 
@@ -194,15 +196,34 @@ inline void DeferredRenderer::setupFrameBuffers()
     materialSamplerDesc.minFilter = gl::TextureFilter::Nearest;
     materialSampler = renderDevice.createSampler(materialSamplerDesc);
 
-    auto outputMaterialBP = outputPipeline->getBindingPoint("material");
+    outputMaterialBP = outputPipeline->getBindingPoint("material");
     outputMaterialBP->bind(materialTex);
     outputMaterialBP->bind(materialSampler);
+}
+
+inline void DeferredRenderer::createRenderDeviceStates()
+{
+    RasterStateDesc rasterStateDesc;
+    rasterStateDesc.frontFace = gl::Winding::CCW;
+    rasterStateDesc.cullFace = gl::Face::Back;
+    rasterStateDesc.cullEnabled = true;
+    rasterState = renderDevice.createRasterState(rasterStateDesc);
+
+    BlendStateDesc blendStateDesc;
+    // blendStateDesc.blendEnabled = true;
+    blendState = renderDevice.createBlendState(blendStateDesc);
+
+    DepthStencilStateDesc depthStencilStateDesc;
+    depthStencilStateDesc.depth.enabled = true;
+    depthStencilStateDesc.depth.writeEnabled = true;
+    depthStencilState = renderDevice.createDepthStencilState(depthStencilStateDesc);
 }
 
 DeferredRenderer::DeferredRenderer(io::Window& window) : Renderer(window)
 {
     createShaderPipelines();
     setupFrameBuffers();
+    createRenderDeviceStates();
 }
 
 Renderer::ID DeferredRenderer::registerModel(const std::vector<VertexModel>& vertices, std::vector<uint32_t>& indices)
@@ -213,7 +234,7 @@ Renderer::ID DeferredRenderer::registerModel(const std::vector<VertexModel>& ver
         renderDevice.createVertexBuffer(vertices.size() * sizeof(VertexModel), &vertices[0], gl::Usage::Static);
 
     VertexArrayDesc vaDesc;
-    vaDesc.elementCount = 2;
+    vaDesc.elementCount = 3;
     vaDesc.elements[0].name = "position";
     vaDesc.elements[0].type = gl::Type::UInt;
     vaDesc.elements[0].size = 3;
@@ -227,7 +248,7 @@ Renderer::ID DeferredRenderer::registerModel(const std::vector<VertexModel>& ver
     vaDesc.elements[1].buffer.offset = offsetof(VertexModel, normal);
     vaDesc.elements[1].buffer.stride = sizeof(VertexModel);
     vaDesc.elements[2].name = "material";
-    vaDesc.elements[2].type = gl::Type::UInt;
+    vaDesc.elements[2].type = gl::Type::UShort;
     vaDesc.elements[2].size = 1;
     vaDesc.elements[2].buffer.index = 0;
     vaDesc.elements[2].buffer.offset = offsetof(VertexModel, material);
@@ -257,8 +278,14 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
     renderDevice.setShaderPipeline(gBufferPipeline);
     renderDevice.setFramebuffer(gBuffer);
     renderDevice.setViewport(0, 0, sz.x, sz.y);
-    renderDevice.clearColor(1, 0, 0, 0);
-    renderDevice.clearDepth(0);
+
+    renderDevice.setRasterState(rasterState);
+    renderDevice.setBlendState(blendState);
+    renderDevice.setDepthStencilState(depthStencilState);
+    renderDevice.clearTargetColor(0, 0, 0, FLT_MAX, 1);
+    renderDevice.clearTargetColor(1, 0, 0, 0, 1);
+    renderDevice.clearTargetColor(2, 0, 0, 0, 0);
+    renderDevice.clearDepth(1);
 
     mvpBindingPoint->bind(mvpBuffer);
 
@@ -284,6 +311,12 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
     renderDevice.setShaderPipeline(outputPipeline);
     renderDevice.setFramebuffer(camera.target);
     renderDevice.setViewport(0, 0, sz.x, sz.y);
+    renderDevice.clearColor(0, 0, 0, 0);
+    renderDevice.clearDepth(1);
+
+    renderDevice.setRasterState(nullptr);
+    renderDevice.setBlendState(nullptr);
+    renderDevice.setDepthStencilState(nullptr);
 
     renderDevice.setVertexArray(screenVertexArray);
     renderDevice.setIndexBuffer(screenIndexBuffer);

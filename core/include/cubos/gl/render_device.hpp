@@ -550,6 +550,9 @@ namespace cubos::gl
         /// Clears the color buffer bit on the current framebuffer to a specific color.
         virtual void clearColor(float r, float g, float b, float a) = 0;
 
+        /// Clears the color buffer of a specific target on the current framebuffer to a specific color.
+        virtual void clearTargetColor(size_t target,float r, float g, float b, float a) = 0;
+
         /// Clears the depth buffer bit on the current framebuffer to a specific value.
         virtual void clearDepth(float depth) = 0;
 
