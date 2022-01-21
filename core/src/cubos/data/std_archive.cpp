@@ -25,7 +25,8 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
             else
             {
                 // Write an empty file.
-                FILE* file = fopen(osPath.c_str(), "w");
+                std::string path = osPath.string();
+                FILE* file = fopen(path.c_str(), "w");
                 if (!file)
                 {
                     logError("Couldn't create STDArchive: couldn't create root file '{}'", osPath.c_str());
@@ -101,7 +102,8 @@ size_t STDArchive::create(size_t parent, std::string_view name, bool directory)
     else
     {
         // Write an empty file.
-        FILE* file = fopen(osPath.c_str(), "w");
+        std::string path = osPath.string();
+        FILE* file = fopen(path.c_str(), "w");
         if (!file)
             return false;
         fclose(file);
@@ -242,6 +244,7 @@ std::unique_ptr<memory::Stream> STDArchive::open(File::Handle file, File::OpenMo
 
     // Open the file.
     const char* std_mode = mode == File::OpenMode::Write ? "wb" : "rb";
+    std::string path  = it->second.osPath.string();
     return std::make_unique<FileStream<memory::StdStream>>(
-        file, mode, std::move(memory::StdStream(fopen(it->second.osPath.c_str(), std_mode), true)));
+        file, mode, std::move(memory::StdStream(fopen(path.c_str(), std_mode), true)));
 }
