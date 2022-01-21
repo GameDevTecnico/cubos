@@ -1,4 +1,4 @@
-name: Build Engine
+name: 🐧 Build Engine Linux
 
 on:
   push:
