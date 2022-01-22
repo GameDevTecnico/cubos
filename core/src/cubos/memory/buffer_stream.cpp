@@ -10,6 +10,7 @@ BufferStream::BufferStream(void* buffer, size_t size, bool readOnly)
     this->size = size;
     this->position = 0;
     this->readOnly = readOnly;
+    this->reachedEof = false;
 }
 
 BufferStream::BufferStream(const void* buffer, size_t size)
@@ -20,13 +21,32 @@ BufferStream::BufferStream(const void* buffer, size_t size)
     this->size = size;
     this->position = 0;
     this->readOnly = true;
+    this->reachedEof = false;
 }
+
+BufferStream::BufferStream(BufferStream&& other)
+{
+    this->buffer = other.buffer;
+    this->size = other.size;
+    this->position = other.position;
+    this->readOnly = other.readOnly;
+    this->reachedEof = other.reachedEof;
+    other.buffer = nullptr;
+    other.size = 0;
+    other.position = 0;
+    other.readOnly = true;
+    other.reachedEof = true;
+}
+
 
 size_t BufferStream::read(void* data, size_t size)
 {
     size_t bytesRemaining = this->size - this->position;
     if (size > bytesRemaining)
+    {
         size = bytesRemaining;
+        this->reachedEof = true;
+    }
     memcpy(data, static_cast<char*>(this->buffer) + this->position, size);
     this->position += size;
     return size;
@@ -39,7 +59,10 @@ size_t BufferStream::write(const void* data, size_t size)
 
     size_t bytesRemaining = this->size - this->position;
     if (size > bytesRemaining)
+    {
         size = bytesRemaining;
+        this->reachedEof = true;
+    }
     memcpy(static_cast<char*>(this->buffer) + this->position, data, size);
     this->position += size;
     return size;
@@ -76,11 +99,13 @@ void BufferStream::seek(int64_t offset, SeekOrigin origin)
 
     if (this->position > this->size)
         this->position = this->size;
+
+    this->reachedEof = false;
 }
 
 bool BufferStream::eof() const
 {
-    return this->position == this->size;
+    return this->reachedEof;
 }
 
 char BufferStream::peek() const

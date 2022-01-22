@@ -4,16 +4,16 @@
 # Set engine source files
 
 set(CUBOS_ENGINE_SOURCE
-        src/cubos/rendering/renderer.cpp
+    src/cubos/rendering/renderer.cpp
 
-        src/cubos/entry.cpp
-        src/cubos/rendering/deferred/deferred_renderer.cpp
-        )
+    src/cubos/entry.cpp
+    src/cubos/rendering/deferred/deferred_renderer.cpp
+    )
 
 set(CUBOS_ENGINE_INCLUDE
-        include/cubos/rendering/renderer.hpp
-        include/cubos/rendering/deferred/deferred_renderer.hpp
-        )
+    include/cubos/rendering/renderer.hpp
+    include/cubos/rendering/deferred/deferred_renderer.hpp
+    )
 
 # Create cubos engine
 

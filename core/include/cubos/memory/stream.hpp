@@ -19,6 +19,9 @@ namespace cubos::memory
     class Stream
     {
     public:
+        Stream() = default;
+        Stream(Stream&&) = default;
+        Stream(const Stream&) = delete;
         virtual ~Stream() = default;
 
         static Stream& stdIn;  ///< Stream wrapper for stdin.
