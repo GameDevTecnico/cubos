@@ -29,10 +29,12 @@ namespace cubos
         /// @return The setting's value.
         static std::string getString(const std::string& key, const std::string& defaultValue);
 
+        static Settings global;
+
     private:
         Settings() = default;
         static Settings& getInstance();
-        
+
         std::unordered_map<std::string, std::string> values;
     };
 
