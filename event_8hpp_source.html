@@ -101,55 +101,108 @@ $(document).ready(function(){initNavTree('event_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classcubos_1_1Event.html">   20</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... TArgs&gt; <span class="keyword">class </span><a class="code" href="classcubos_1_1Event.html">Event</a></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">   23</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Callback</a> = std::function&lt;void(TArgs...)&gt;; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">   24</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> = size_t;                              </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> <a class="code" href="classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec">registerCallback</a>(<a class="code" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Callback</a> callback);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">unregisterCallback</a>(<a class="code" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">fire</a>(TArgs... args) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">mutable</span> std::mutex mutex;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        std::vector&lt;Callback&gt; callbacks;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">class </span>MethodCallback</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> call(TArgs...) = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        };</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> TObj&gt; <span class="keyword">class </span>ObjectMethodCallback : <span class="keyword">public</span> MethodCallback</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            ObjectMethodCallback(TObj* obj, <span class="keywordtype">void</span> (TObj::*callback)(TArgs...)) : obj(obj), callback(callback)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            TObj* obj;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            void (TObj::*callback)(TArgs...);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> call(TArgs... args)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                (obj-&gt;*callback)(args...);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        };</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">   44</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Callback</a> = std::function&lt;void(TArgs...)&gt;; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... TArgs&gt;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec">   47</a></span>&#160;    <a class="code" href="classcubos_1_1Event.html">Event</a>&lt;TArgs...&gt;<a class="code" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">::ID</a> <a class="code" href="classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec">Event&lt;TArgs...&gt;::registerCallback</a>(<a class="code" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Event&lt;TArgs...&gt;::Callback</a> callback)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">auto</span> lock = std::lock_guard&lt;std::mutex&gt;(this-&gt;mutex);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        this-&gt;callbacks.push_back(callback);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">return</span> this-&gt;callbacks.size() - 1;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">   46</a></span>&#160;        <span class="keyword">using</span> <a class="code" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> = size_t; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> <a class="code" href="classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08">registerCallback</a>(<a class="code" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Callback</a> callback);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">   54</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... TArgs&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">Event&lt;TArgs...&gt;::unregisterCallback</a>(<a class="code" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">Event&lt;TArgs...&gt;::ID</a> <span class="keywordtype">id</span>)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">auto</span> lock = std::lock_guard&lt;std::mutex&gt;(this-&gt;mutex);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        this-&gt;callbacks[id] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">return</span> this-&gt;callbacks.size() - 1;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">   61</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... TArgs&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">Event&lt;TArgs...&gt;::fire</a>(TArgs... args)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keyword">auto</span> lock = std::lock_guard&lt;std::mutex&gt;(this-&gt;mutex);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; callback : this-&gt;callbacks)</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">if</span> (callback)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                callback(args...);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;} <span class="comment">// namespace cubos</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif // CUBOS_EVENT_HPP</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">unregisterCallback</a>(<a class="code" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> TObj&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08">registerCallback</a>(TObj* obj, <span class="keywordtype">void</span> (TObj::*callback)(TArgs...))</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keyword">auto</span> lock = std::lock_guard&lt;std::mutex&gt;(this-&gt;mutex);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keyword">auto</span> cb = <span class="keyword">new</span> ObjectMethodCallback&lt;TObj&gt;(obj, callback);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            this-&gt;methodCallbacks.push_back(cb);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> TObj&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">unregisterCallback</a>(TObj* obj, <span class="keywordtype">void</span> (TObj::*callback)(TArgs...))</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keyword">auto</span> lock = std::lock_guard&lt;std::mutex&gt;(this-&gt;mutex);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keyword">auto</span> it = methodCallbacks.begin();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordflow">for</span> (; it &lt; methodCallbacks.end(); it++)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                MethodCallback&amp; ref = **it;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keywordflow">if</span> (<span class="keyword">typeid</span>(ref) == <span class="keyword">typeid</span>(ObjectMethodCallback&lt;TObj&gt;))</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    <span class="keyword">auto</span> cb = <span class="keyword">static_cast&lt;</span>ObjectMethodCallback&lt;TObj&gt;*<span class="keyword">&gt;</span>(*it);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    <span class="keywordflow">if</span> (cb-&gt;obj == obj &amp;&amp; cb-&gt;callback == callback)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">if</span> (it != methodCallbacks.end())</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keyword">auto</span> cb = *it;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                methodCallbacks.erase(it);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keyword">delete</span> cb;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">fire</a>(TArgs... args) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keyword">mutable</span> std::mutex mutex;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        std::vector&lt;Callback&gt; callbacks;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        std::vector&lt;MethodCallback*&gt; methodCallbacks;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    };</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... TArgs&gt;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    Event&lt;TArgs...&gt;::ID <a class="code" href="classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08">Event&lt;TArgs...&gt;::registerCallback</a>(<a class="code" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Event&lt;TArgs...&gt;::Callback</a> callback)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">auto</span> lock = std::lock_guard&lt;std::mutex&gt;(this-&gt;mutex);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        this-&gt;callbacks.push_back(callback);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span> this-&gt;callbacks.size() - 1;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... TArgs&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">Event&lt;TArgs...&gt;::unregisterCallback</a>(<a class="code" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">Event&lt;TArgs...&gt;::ID</a> <span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keyword">auto</span> lock = std::lock_guard&lt;std::mutex&gt;(this-&gt;mutex);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        this-&gt;callbacks[id] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">  112</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... TArgs&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">Event&lt;TArgs...&gt;::fire</a>(TArgs... args)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keyword">auto</span> lock = std::lock_guard&lt;std::mutex&gt;(this-&gt;mutex);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; callback : this-&gt;callbacks)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordflow">if</span> (callback)</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                callback(args...);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; callback : this-&gt;methodCallbacks)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <span class="keywordflow">if</span> (callback)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                callback-&gt;call(args...);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;} <span class="comment">// namespace cubos</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#endif // CUBOS_EVENT_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasscubos_1_1Event_html_a2b4556a77e14a625fadb5f43a8c9b3a9"><div class="ttname"><a href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">cubos::Event::unregisterCallback</a></div><div class="ttdeci">void unregisterCallback(ID id)</div><div class="ttdef"><b>Definition:</b> event.hpp:54</div></div>
+<div class="ttc" id="aclasscubos_1_1Event_html_a2b4556a77e14a625fadb5f43a8c9b3a9"><div class="ttname"><a href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">cubos::Event::unregisterCallback</a></div><div class="ttdeci">void unregisterCallback(ID id)</div></div>
 <div class="ttc" id="aclasscubos_1_1Event_html"><div class="ttname"><a href="classcubos_1_1Event.html">cubos::Event</a></div><div class="ttdef"><b>Definition:</b> event.hpp:20</div></div>
-<div class="ttc" id="aclasscubos_1_1Event_html_a03bd8bf0216ef6a8f7ec88788772284e"><div class="ttname"><a href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">cubos::Event&lt; MouseButton &gt;::ID</a></div><div class="ttdeci">size_t ID</div><div class="ttdoc">Callback identifier.</div><div class="ttdef"><b>Definition:</b> event.hpp:24</div></div>
-<div class="ttc" id="aclasscubos_1_1Event_html_a77f19d0edf6e754e8b13687f138c6ebc"><div class="ttname"><a href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">cubos::Event::fire</a></div><div class="ttdeci">void fire(TArgs... args) const</div><div class="ttdef"><b>Definition:</b> event.hpp:61</div></div>
-<div class="ttc" id="aclasscubos_1_1Event_html_afbf4a62eeac097e1c43a0c0cf1d40aec"><div class="ttname"><a href="classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec">cubos::Event::registerCallback</a></div><div class="ttdeci">ID registerCallback(Callback callback)</div><div class="ttdef"><b>Definition:</b> event.hpp:47</div></div>
-<div class="ttc" id="aclasscubos_1_1Event_html_a3d5bdb17bf64983c2e1c59a356fe5928"><div class="ttname"><a href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">cubos::Event&lt; MouseButton &gt;::Callback</a></div><div class="ttdeci">std::function&lt; void(TArgs...)&gt; Callback</div><div class="ttdoc">Callback type.</div><div class="ttdef"><b>Definition:</b> event.hpp:23</div></div>
+<div class="ttc" id="aclasscubos_1_1Event_html_a51688c4ecb9ae733efe336db8c58ad08"><div class="ttname"><a href="classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08">cubos::Event::registerCallback</a></div><div class="ttdeci">ID registerCallback(Callback callback)</div></div>
+<div class="ttc" id="aclasscubos_1_1Event_html_a03bd8bf0216ef6a8f7ec88788772284e"><div class="ttname"><a href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">cubos::Event&lt; MouseButton &gt;::ID</a></div><div class="ttdeci">size_t ID</div><div class="ttdoc">Callback identifier.</div><div class="ttdef"><b>Definition:</b> event.hpp:46</div></div>
+<div class="ttc" id="aclasscubos_1_1Event_html_a77f19d0edf6e754e8b13687f138c6ebc"><div class="ttname"><a href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">cubos::Event::fire</a></div><div class="ttdeci">void fire(TArgs... args) const</div><div class="ttdef"><b>Definition:</b> event.hpp:112</div></div>
+<div class="ttc" id="aclasscubos_1_1Event_html_a3d5bdb17bf64983c2e1c59a356fe5928"><div class="ttname"><a href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">cubos::Event&lt; MouseButton &gt;::Callback</a></div><div class="ttdeci">std::function&lt; void(TArgs...)&gt; Callback</div><div class="ttdoc">Callback type.</div><div class="ttdef"><b>Definition:</b> event.hpp:44</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

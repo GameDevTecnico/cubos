@@ -1,5 +1,9 @@
 var NAVTREEINDEX1 =
 {
+"classcubos_1_1memory_1_1BufferStream.html#a98ba3e5bca51408b12921fdcb7625ded":[1,0,0,3,0,0],
+"classcubos_1_1memory_1_1BufferStream.html#ac0e245ceb283a76b0b92c869df02f5ab":[1,0,0,3,0,4],
+"classcubos_1_1memory_1_1BufferStream.html#aed073b5b688f3073aa2d94ec5f947d42":[1,0,0,3,0,1],
+"classcubos_1_1memory_1_1BufferStream.html#afba22e0998fbbb4b19f060c36e2237ee":[1,0,0,3,0,7],
 "classcubos_1_1memory_1_1Deserializer.html":[1,0,0,3,1],
 "classcubos_1_1memory_1_1Deserializer.html#a031d352de85d30f8c4cb3eae22059f3e":[1,0,0,3,1,13],
 "classcubos_1_1memory_1_1Deserializer.html#a06e984e162574407589c5690c0d07457":[1,0,0,3,1,0],
@@ -245,9 +249,5 @@ var NAVTREEINDEX1 =
 "pages.html":[],
 "palette_8hpp_source.html":[2,0,0,0,1,3],
 "render__device_8hpp_source.html":[2,0,0,0,1,4],
-"serialization__map_8hpp_source.html":[2,0,0,0,3,2],
-"serializer_8hpp_source.html":[2,0,0,0,3,3],
-"settings_8hpp_source.html":[2,0,0,0,6],
-"std__archive_8hpp_source.html":[2,0,0,0,0,4],
-"std__stream_8hpp_source.html":[2,0,0,0,3,4]
+"serialization__map_8hpp_source.html":[2,0,0,0,3,2]
 };

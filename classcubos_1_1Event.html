@@ -87,6 +87,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1Event.html',''); initRes
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classcubos_1_1Event-members.html">List of all members</a>  </div>
@@ -110,12 +111,28 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afbf4a62eeac097e1c43a0c0cf1d40aec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec">registerCallback</a> (<a class="el" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Callback</a> callback)</td></tr>
-<tr class="separator:afbf4a62eeac097e1c43a0c0cf1d40aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51688c4ecb9ae733efe336db8c58ad08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08">registerCallback</a> (<a class="el" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Callback</a> callback)</td></tr>
+<tr class="separator:a51688c4ecb9ae733efe336db8c58ad08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b4556a77e14a625fadb5f43a8c9b3a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">unregisterCallback</a> (<a class="el" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> id)</td></tr>
 <tr class="separator:a2b4556a77e14a625fadb5f43a8c9b3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa45cf6111f9dc9baa3c1902c0d71b8ab"><td class="memTemplParams" colspan="2"><a id="aa45cf6111f9dc9baa3c1902c0d71b8ab"></a>
+template&lt;class TObj &gt; </td></tr>
+<tr class="memitem:aa45cf6111f9dc9baa3c1902c0d71b8ab"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>registerCallback</b> (TObj *obj, void(TObj::*callback)(TArgs...))</td></tr>
+<tr class="separator:aa45cf6111f9dc9baa3c1902c0d71b8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af01852c92a7203dc0a4ecd2529602744"><td class="memTemplParams" colspan="2"><a id="af01852c92a7203dc0a4ecd2529602744"></a>
+template&lt;class TObj &gt; </td></tr>
+<tr class="memitem:af01852c92a7203dc0a4ecd2529602744"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>unregisterCallback</b> (TObj *obj, void(TObj::*callback)(TArgs...))</td></tr>
+<tr class="separator:af01852c92a7203dc0a4ecd2529602744"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77f19d0edf6e754e8b13687f138c6ebc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">fire</a> (TArgs... args) const</td></tr>
 <tr class="separator:a77f19d0edf6e754e8b13687f138c6ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac290f11c35d02d6fdf622eaa236042c4"><td class="memTemplParams" colspan="2"><a id="ac290f11c35d02d6fdf622eaa236042c4"></a>
+template&lt;typename... TArgs&gt; </td></tr>
+<tr class="memitem:ac290f11c35d02d6fdf622eaa236042c4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1Event.html">Event</a>&lt; TArgs... &gt;::<a class="el" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>registerCallback</b> (<a class="el" href="classcubos_1_1Event.html">Event</a>&lt; TArgs... &gt;::<a class="el" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Callback</a> callback)</td></tr>
+<tr class="separator:ac290f11c35d02d6fdf622eaa236042c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a610b78d3f24fe7a800fcaec7d66c42d1"><td class="memTemplParams" colspan="2"><a id="a610b78d3f24fe7a800fcaec7d66c42d1"></a>
+template&lt;typename... TArgs&gt; </td></tr>
+<tr class="memitem:a610b78d3f24fe7a800fcaec7d66c42d1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>unregisterCallback</b> (<a class="el" href="classcubos_1_1Event.html">Event</a>&lt; TArgs... &gt;::<a class="el" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> id)</td></tr>
+<tr class="separator:a610b78d3f24fe7a800fcaec7d66c42d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename... TArgs&gt;<br />
@@ -159,8 +176,8 @@ template&lt;typename... TArgs&gt; </div>
 
 </div>
 </div>
-<a id="afbf4a62eeac097e1c43a0c0cf1d40aec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbf4a62eeac097e1c43a0c0cf1d40aec">&#9670;&nbsp;</a></span>registerCallback()</h2>
+<a id="a51688c4ecb9ae733efe336db8c58ad08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51688c4ecb9ae733efe336db8c58ad08">&#9670;&nbsp;</a></span>registerCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,7 +185,7 @@ template&lt;typename... TArgs&gt; </div>
 template&lt;typename... TArgs&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classcubos_1_1Event.html">Event</a>&lt; TArgs... &gt;::<a class="el" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> <a class="el" href="classcubos_1_1Event.html">cubos::Event</a>&lt; TArgs &gt;::registerCallback </td>
+          <td class="memname"><a class="el" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> <a class="el" href="classcubos_1_1Event.html">cubos::Event</a>&lt; TArgs &gt;::registerCallback </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928">Callback</a>&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
@@ -210,7 +227,7 @@ template&lt;typename... TArgs&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec">registerCallback</a>. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08">registerCallback</a>. </dd></dl>
 
 </div>
 </div>

@@ -12,10 +12,14 @@ var NAVTREEINDEX0 =
 "buffer__stream_8hpp_source.html":[2,0,0,0,3,0],
 "classcubos_1_1Event.html":[1,0,0,4],
 "classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e":[1,0,0,4,1],
-"classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9":[1,0,0,4,4],
+"classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9":[1,0,0,4,7],
 "classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928":[1,0,0,4,0],
+"classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08":[1,0,0,4,3],
+"classcubos_1_1Event.html#a610b78d3f24fe7a800fcaec7d66c42d1":[1,0,0,4,6],
 "classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc":[1,0,0,4,2],
-"classcubos_1_1Event.html#afbf4a62eeac097e1c43a0c0cf1d40aec":[1,0,0,4,3],
+"classcubos_1_1Event.html#aa45cf6111f9dc9baa3c1902c0d71b8ab":[1,0,0,4,5],
+"classcubos_1_1Event.html#ac290f11c35d02d6fdf622eaa236042c4":[1,0,0,4,4],
+"classcubos_1_1Event.html#af01852c92a7203dc0a4ecd2529602744":[1,0,0,4,8],
 "classcubos_1_1Settings.html":[1,0,0,5],
 "classcubos_1_1Settings.html#a98bf2f604f948e3b8efbb5ff8c6be206":[1,0,0,5,0],
 "classcubos_1_1Settings.html#adc767c26c234eee79bd5d704db18f6c3":[1,0,0,5,1],
@@ -245,9 +249,5 @@ var NAVTREEINDEX0 =
 "classcubos_1_1memory_1_1BufferStream.html#a17bb9b4b244f254bd58539b8680ba7f9":[1,0,0,3,0,5],
 "classcubos_1_1memory_1_1BufferStream.html#a1a4d9126845a3db9fe4fbf8ce52e61ec":[1,0,0,3,0,8],
 "classcubos_1_1memory_1_1BufferStream.html#a524bf7a5e8532e1f839d2e88b2eb95f2":[1,0,0,3,0,2],
-"classcubos_1_1memory_1_1BufferStream.html#a8f4a6d7c5f8fcd84f6f5d26c8a11aed1":[1,0,0,3,0,3],
-"classcubos_1_1memory_1_1BufferStream.html#a98ba3e5bca51408b12921fdcb7625ded":[1,0,0,3,0,0],
-"classcubos_1_1memory_1_1BufferStream.html#ac0e245ceb283a76b0b92c869df02f5ab":[1,0,0,3,0,4],
-"classcubos_1_1memory_1_1BufferStream.html#aed073b5b688f3073aa2d94ec5f947d42":[1,0,0,3,0,1],
-"classcubos_1_1memory_1_1BufferStream.html#afba22e0998fbbb4b19f060c36e2237ee":[1,0,0,3,0,7]
+"classcubos_1_1memory_1_1BufferStream.html#a8f4a6d7c5f8fcd84f6f5d26c8a11aed1":[1,0,0,3,0,3]
 };
