@@ -635,7 +635,7 @@ public:
 class OGLConstantBuffer : public impl::ConstantBuffer
 {
 public:
-    OGLConstantBuffer(GLuint id) : id(id)
+    OGLConstantBuffer(GLuint id, GLenum bufferType) : id(id), bufferType(bufferType)
     {
     }
 
@@ -646,16 +646,17 @@ public:
 
     virtual void* map() override
     {
-        glBindBuffer(GL_UNIFORM_BUFFER, this->id);
-        return glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
+        glBindBuffer(bufferType, this->id);
+        return glMapBuffer(bufferType, GL_WRITE_ONLY);
     }
 
     virtual void unmap() override
     {
-        glUnmapBuffer(GL_UNIFORM_BUFFER);
+        glUnmapBuffer(bufferType);
     }
 
     GLuint id;
+    GLenum bufferType;
 };
 
 class OGLIndexBuffer : public impl::IndexBuffer
@@ -808,7 +809,8 @@ public:
     virtual void bind(ConstantBuffer cb) override
     {
         if (cb)
-            glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+            glBindBufferBase(std::static_pointer_cast<OGLConstantBuffer>(cb)->bufferType, this->loc,
+                             std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
         else
             glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
     }
@@ -1417,11 +1419,20 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
     else
         abort(); // Invalid enum value
 
+    // Choose SSBO or UBO depending on given buffer size
+    GLint maxUniformBufferSize;
+    glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &maxUniformBufferSize);
+    GLenum bufferType;
+    if (size > maxUniformBufferSize)
+        bufferType = GL_SHADER_STORAGE_BUFFER;
+    else
+        bufferType = GL_UNIFORM_BUFFER;
+
     // Initialize buffer
     GLuint id;
     glGenBuffers(1, &id);
-    glBindBuffer(GL_UNIFORM_BUFFER, id);
-    glBufferData(GL_UNIFORM_BUFFER, size, data, glUsage);
+    glBindBuffer(bufferType, id);
+    glBufferData(bufferType, size, data, glUsage);
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1432,7 +1443,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
         return nullptr;
     }
 
-    return std::make_shared<OGLConstantBuffer>(id);
+    return std::make_shared<OGLConstantBuffer>(id, bufferType);
 }
 
 IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage)
