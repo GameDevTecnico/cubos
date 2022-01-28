@@ -655,6 +655,20 @@ public:
         glUnmapBuffer(bufferType);
     }
 
+    virtual BufferStorageType getStorageTypeHint() override
+    {
+        switch (bufferType)
+        {
+        case GL_UNIFORM_BUFFER:
+            return BufferStorageType::Small;
+        case GL_SHADER_STORAGE_BUFFER:
+            return BufferStorageType::Large;
+        default:
+            logError("OGLContantBuffer::getStorageTypeHint() failed: Invalid bufferType value.");
+            abort();
+        }
+    }
+
     GLuint id;
     GLenum bufferType;
 };
@@ -890,6 +904,7 @@ public:
     OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program) : vs(vs), ps(ps), program(program)
     {
         this->uboCount = 0;
+        this->ssboCount = 0;
     }
 
     virtual ~OGLShaderPipeline() override
@@ -933,6 +948,27 @@ public:
             return &bps.back();
         }
 
+        // Search for shader storage block binding
+        index = glGetProgramResourceIndex(this->program, GL_SHADER_STORAGE_BLOCK, name);
+        if (index != GL_INVALID_INDEX)
+        {
+            auto loc = this->ssboCount;
+            glShaderStorageBlockBinding(this->program, index, loc);
+
+            GLenum glErr = glGetError();
+            if (glErr != 0)
+            {
+                logError(
+                    "OGLShaderPipeline::getBindingPoint() failed: glShaderStorageBlockBinding caused OpenGL error {}",
+                    glErr);
+                return nullptr;
+            }
+
+            this->ssboCount += 1;
+            bps.emplace_back(name, loc);
+            return &bps.back();
+        }
+
         return nullptr;
     }
 
@@ -942,6 +978,7 @@ public:
 
 private:
     int uboCount;
+    int ssboCount;
 };
 
 OGLRenderDevice::OGLRenderDevice()

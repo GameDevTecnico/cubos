@@ -1,5 +1,6 @@
 #include <cubos/gl/vertex.hpp>
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
+#include <cubos/log.hpp>
 
 using namespace cubos::gl;
 using namespace cubos::rendering;
@@ -59,25 +60,25 @@ inline void DeferredRenderer::createShaderPipelines()
 
     gBufferPipeline = renderDevice.createShaderPipeline(gBufferVertex, gBufferPixel);
 
-    mvpBindingPoint = gBufferPipeline->getBindingPoint("MVP");
+    mvpBP = gBufferPipeline->getBindingPoint("MVP");
     mvpBuffer = renderDevice.createConstantBuffer(3 * sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
 
     auto outputVertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
             #version 330 core
 
-            in vec2 position;
+            in vec4 position;
             in vec2 uv;
 
             out vec2 fraguv;
 
             void main(void)
             {
-                gl_Position = vec4(position, 0, 1);
+                gl_Position = position;
                 fraguv = uv;
             }
         )");
 
-    auto outputPixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
+    auto outputSmallPixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
             #version 330 core
 
             in vec2 fraguv;
@@ -86,17 +87,65 @@ inline void DeferredRenderer::createShaderPipelines()
             uniform sampler2D normal;
             uniform usampler2D material;
 
+            struct Material
+            {
+                vec4 color;
+            };
+
+            uniform palette {
+                 Material materials[gl_MaxFragmentUniformComponents / 4];
+            };
+
             out vec4 color;
 
             void main()
             {
                 color = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
-                //color += vec4(vec3(float(texture(material, fraguv).r) / float(0xffff)), 1);
-                color += vec4(texture(normal, fraguv).xyz, 1);
+                uint m = texture(material, fraguv).r;
+                if (m == uint(0)) {
+                    color += vec4(0);
+                }
+                else {
+                    color += materials[m - uint(1)].color;
+                }
             }
         )");
 
-    outputPipeline = renderDevice.createShaderPipeline(outputVertex, outputPixel);
+    auto outputLargePixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
+            #version 430 core
+
+            in vec2 fraguv;
+
+            uniform sampler2D position;
+            uniform sampler2D normal;
+            uniform usampler2D material;
+
+            struct Material
+            {
+                vec4 color;
+            };
+
+            layout(std430) buffer palette {
+                Material materials[];
+            };
+
+            out vec4 color;
+
+            void main()
+            {
+                color = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
+                uint m = texture(material, fraguv).r;
+                if (m == uint(0)) {
+                    color += vec4(0);
+                }
+                else {
+                    color += materials[m - uint(1)].color;
+                }
+            }
+        )");
+
+    smallOutputPipeline = renderDevice.createShaderPipeline(outputVertex, outputSmallPixel);
+    largeOutputPipeline = renderDevice.createShaderPipeline(outputVertex, outputLargePixel);
 
     float screenVerts[] = {
         -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, +1.0f, 0.0f, 1.0f, +1.0f, +1.0f, 1.0f, 1.0f, +1.0f, -1.0f, 1.0f, 0.0f,
@@ -118,7 +167,7 @@ inline void DeferredRenderer::createShaderPipelines()
     screenVADesc.elements[1].buffer.offset = 2 * sizeof(float);
     screenVADesc.elements[1].buffer.stride = 4 * sizeof(float);
     screenVADesc.buffers[0] = screenVertexBuffer;
-    screenVADesc.shaderPipeline = outputPipeline;
+    screenVADesc.shaderPipeline = smallOutputPipeline;
     screenVertexArray = renderDevice.createVertexArray(screenVADesc);
 
     unsigned int screenIndices[] = {
@@ -149,7 +198,7 @@ inline void DeferredRenderer::setupFrameBuffers()
     materialTexDesc.format = TextureFormat::R16UInt;
     materialTexDesc.width = sz.x;
     materialTexDesc.height = sz.y;
-    materialTex = renderDevice.createTexture2D(materialTexDesc);
+    colorTex = renderDevice.createTexture2D(materialTexDesc);
 
     Texture2DDesc depthTexDesc;
     depthTexDesc.format = TextureFormat::Depth24Stencil8;
@@ -161,12 +210,10 @@ inline void DeferredRenderer::setupFrameBuffers()
     gBufferDesc.targetCount = 3;
     gBufferDesc.targets[0].setTexture2DTarget(positionTex);
     gBufferDesc.targets[1].setTexture2DTarget(normalTex);
-    gBufferDesc.targets[2].setTexture2DTarget(materialTex);
+    gBufferDesc.targets[2].setTexture2DTarget(colorTex);
     gBufferDesc.depthStencil = depthTex;
 
     gBuffer = renderDevice.createFramebuffer(gBufferDesc);
-
-    renderDevice.setShaderPipeline(outputPipeline);
 
     SamplerDesc positionSamplerDesc;
     positionSamplerDesc.addressU = gl::AddressMode::Clamp;
@@ -175,20 +222,12 @@ inline void DeferredRenderer::setupFrameBuffers()
     positionSamplerDesc.minFilter = gl::TextureFilter::Nearest;
     positionSampler = renderDevice.createSampler(positionSamplerDesc);
 
-    outputPositionBP = outputPipeline->getBindingPoint("position");
-    outputPositionBP->bind(positionTex);
-    outputPositionBP->bind(positionSampler);
-
     SamplerDesc normalSamplerDesc;
     normalSamplerDesc.addressU = gl::AddressMode::Clamp;
     normalSamplerDesc.addressV = gl::AddressMode::Clamp;
     normalSamplerDesc.magFilter = gl::TextureFilter::Nearest;
     normalSamplerDesc.minFilter = gl::TextureFilter::Nearest;
     normalSampler = renderDevice.createSampler(normalSamplerDesc);
-
-    outputNormalBP = outputPipeline->getBindingPoint("normal");
-    outputNormalBP->bind(normalTex);
-    outputNormalBP->bind(normalSampler);
 
     SamplerDesc materialSamplerDesc;
     materialSamplerDesc.addressU = gl::AddressMode::Clamp;
@@ -197,9 +236,37 @@ inline void DeferredRenderer::setupFrameBuffers()
     materialSamplerDesc.minFilter = gl::TextureFilter::Nearest;
     materialSampler = renderDevice.createSampler(materialSamplerDesc);
 
-    outputMaterialBP = outputPipeline->getBindingPoint("material");
-    outputMaterialBP->bind(materialTex);
-    outputMaterialBP->bind(materialSampler);
+    renderDevice.setShaderPipeline(smallOutputPipeline);
+
+    smallOutputPositionBP = smallOutputPipeline->getBindingPoint("position");
+    smallOutputPositionBP->bind(positionTex);
+    smallOutputPositionBP->bind(positionSampler);
+
+    smallOutputNormalBP = smallOutputPipeline->getBindingPoint("normal");
+    smallOutputNormalBP->bind(normalTex);
+    smallOutputNormalBP->bind(normalSampler);
+
+    smallOutputMaterialBP = smallOutputPipeline->getBindingPoint("material");
+    smallOutputMaterialBP->bind(colorTex);
+    smallOutputMaterialBP->bind(materialSampler);
+
+    smallOutputPaletteBP = smallOutputPipeline->getBindingPoint("palette");
+
+    renderDevice.setShaderPipeline(largeOutputPipeline);
+
+    largeOutputPositionBP = largeOutputPipeline->getBindingPoint("position");
+    largeOutputPositionBP->bind(positionTex);
+    largeOutputPositionBP->bind(positionSampler);
+
+    largeOutputNormalBP = largeOutputPipeline->getBindingPoint("normal");
+    largeOutputNormalBP->bind(normalTex);
+    largeOutputNormalBP->bind(normalSampler);
+
+    largeOutputMaterialBP = largeOutputPipeline->getBindingPoint("material");
+    largeOutputMaterialBP->bind(colorTex);
+    largeOutputMaterialBP->bind(materialSampler);
+
+    largeOutputPaletteBP = largeOutputPipeline->getBindingPoint("palette");
 }
 
 inline void DeferredRenderer::createRenderDeviceStates()
@@ -227,8 +294,8 @@ DeferredRenderer::DeferredRenderer(io::Window& window) : Renderer(window)
     createRenderDeviceStates();
 }
 
-Renderer::ID DeferredRenderer::registerModel(const std::vector<cubos::gl::Vertex>& vertices,
-                                             std::vector<uint32_t>& indices)
+Renderer::ModelID DeferredRenderer::registerModel(const std::vector<cubos::gl::Vertex>& vertices,
+                                                  std::vector<uint32_t>& indices)
 {
     RendererModel model;
 
@@ -267,10 +334,35 @@ Renderer::ID DeferredRenderer::registerModel(const std::vector<cubos::gl::Vertex
     return models.size() - 1;
 }
 
-void DeferredRenderer::drawModel(Renderer::ID modelID, glm::mat4 modelMat)
+Renderer::PaletteID DeferredRenderer::registerPalette(const Palette& palette)
 {
+    auto materials = palette.getData();
+    size_t size = sizeof(Material) * palette.getSize();
+    auto cb = renderDevice.createConstantBuffer(size, materials, gl::Usage::Static);
+    palettes.push_back(cb);
+    return palettes.size() - 1;
+}
+
+void DeferredRenderer::setPalette(Renderer::PaletteID paletteID)
+{
+    if (paletteID > palettes.size() - 1)
+    {
+        logError("DeferredRenderer::setPalette() failed: no palette was registered with paletteID \"{}\"", paletteID);
+        return;
+    }
+    currentPalette = palettes[paletteID];
+}
+
+void DeferredRenderer::drawModel(Renderer::ModelID modelID, glm::mat4 modelMat)
+{
+    if (modelID > models.size() - 1)
+    {
+        logError("DeferredRenderer::drawModel() failed: no model was registered with modelID \"{}\"", modelID);
+        return;
+    }
     drawRequests.emplace_back(models[modelID], modelMat);
 }
+
 void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
 {
 
@@ -289,7 +381,7 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
     renderDevice.clearTargetColor(2, 0, 0, 0, 0);
     renderDevice.clearDepth(1);
 
-    mvpBindingPoint->bind(mvpBuffer);
+    mvpBP->bind(mvpBuffer);
 
     auto& mvp = *(MVP*)mvpBuffer->map();
     mvp.V = camera.viewMatrix;
@@ -310,7 +402,21 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
         renderDevice.drawTrianglesIndexed(0, model.numIndices);
     }
 
-    renderDevice.setShaderPipeline(outputPipeline);
+    ShaderPipeline pp;
+    switch (currentPalette->getStorageTypeHint())
+    {
+    case BufferStorageType::Small:
+        pp = smallOutputPipeline;
+        renderDevice.setShaderPipeline(pp);
+        smallOutputPaletteBP->bind(currentPalette);
+        break;
+    case BufferStorageType::Large:
+        pp = largeOutputPipeline;
+        renderDevice.setShaderPipeline(pp);
+        largeOutputPaletteBP->bind(currentPalette);
+        break;
+    }
+
     renderDevice.setFramebuffer(camera.target);
     renderDevice.setViewport(0, 0, sz.x, sz.y);
     renderDevice.clearColor(0, 0, 0, 0);

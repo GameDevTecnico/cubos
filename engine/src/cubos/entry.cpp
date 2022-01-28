@@ -2,6 +2,7 @@
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
 #include <cubos/gl/vertex.hpp>
+#include <cubos/gl/palette.hpp>
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -14,37 +15,57 @@ int main(void)
     auto& renderDevice = window->getRenderDevice();
     auto renderer = rendering::DeferredRenderer(*window);
 
+    gl::Palette palette1(std::vector<gl::Material>{
+        {{1, 0, 0, 1}},
+        {{0, 1, 0, 1}},
+        {{0, 0, 1, 1}},
+        {{1, 1, 0, 1}},
+        {{0, 1, 1, 1}},
+        {{1, 0, 1, 1}},
+    });
+    gl::Palette palette2(std::vector<gl::Material>{
+        {{0, 1, 1, 1}},
+        {{1, 0, 1, 1}},
+        {{1, 1, 0, 1}},
+        {{0, 0, 1, 1}},
+        {{1, 0, 0, 1}},
+        {{0, 1, 0, 1}},
+    });
+
+    auto palette1ID = renderer.registerPalette(palette1);
+    auto palette2ID = renderer.registerPalette(palette2);
+
     std::vector<cubos::gl::Vertex> vertices = {
         // Front
-        {{1, 0, 0}, {0, 0, -1}, 0},
-        {{0, 0, 0}, {0, 0, -1}, 0},
-        {{0, 1, 0}, {0, 0, -1}, 0},
-        {{1, 1, 0}, {0, 0, -1}, 0},
+        {{1, 0, 0}, {0, 0, -1}, 1},
+        {{0, 0, 0}, {0, 0, -1}, 1},
+        {{0, 1, 0}, {0, 0, -1}, 1},
+        {{1, 1, 0}, {0, 0, -1}, 1},
         // Back
-        {{0, 0, 1}, {0, 0, 1}, 0xf},
-        {{1, 0, 1}, {0, 0, 1}, 0xf},
-        {{1, 1, 1}, {0, 0, 1}, 0xf},
-        {{0, 1, 1}, {0, 0, 1}, 0xf},
+        {{0, 0, 1}, {0, 0, 1}, 2},
+        {{1, 0, 1}, {0, 0, 1}, 2},
+        {{1, 1, 1}, {0, 0, 1}, 2},
+        {{0, 1, 1}, {0, 0, 1}, 2},
         // Left
-        {{1, 0, 1}, {1, 0, 0}, 0xff},
-        {{1, 0, 0}, {1, 0, 0}, 0xff},
-        {{1, 1, 0}, {1, 0, 0}, 0xff},
-        {{1, 1, 1}, {1, 0, 0}, 0xff},
+        {{1, 0, 1}, {1, 0, 0}, 3},
+        {{1, 0, 0}, {1, 0, 0}, 3},
+        {{1, 1, 0}, {1, 0, 0}, 3},
+        {{1, 1, 1}, {1, 0, 0}, 3},
         // Right
-        {{0, 0, 0}, {-1, 0, 0}, 0xfff},
-        {{0, 0, 1}, {-1, 0, 0}, 0xfff},
-        {{0, 1, 1}, {-1, 0, 0}, 0xfff},
-        {{0, 1, 0}, {-1, 0, 0}, 0xfff},
+        {{0, 0, 0}, {-1, 0, 0}, 4},
+        {{0, 0, 1}, {-1, 0, 0}, 4},
+        {{0, 1, 1}, {-1, 0, 0}, 4},
+        {{0, 1, 0}, {-1, 0, 0}, 4},
         // Bottom
-        {{1, 0, 1}, {0, -1, 0}, 1},
-        {{0, 0, 1}, {0, -1, 0}, 1},
-        {{0, 0, 0}, {0, -1, 0}, 1},
-        {{1, 0, 0}, {0, -1, 0}, 1},
+        {{1, 0, 1}, {0, -1, 0}, 5},
+        {{0, 0, 1}, {0, -1, 0}, 5},
+        {{0, 0, 0}, {0, -1, 0}, 5},
+        {{1, 0, 0}, {0, -1, 0}, 5},
         // Top
-        {{1, 1, 0}, {0, 1, 0}, 0xffff},
-        {{0, 1, 0}, {0, 1, 0}, 0xffff},
-        {{0, 1, 1}, {0, 1, 0}, 0xffff},
-        {{1, 1, 1}, {0, 1, 0}, 0xffff},
+        {{1, 1, 0}, {0, 1, 0}, 6},
+        {{0, 1, 0}, {0, 1, 0}, 6},
+        {{0, 1, 1}, {0, 1, 0}, 6},
+        {{1, 1, 1}, {0, 1, 0}, 6},
     };
 
     std::vector<uint32_t> indices = {
@@ -97,7 +118,7 @@ int main(void)
         23,
     };
 
-    rendering::Renderer::ID id = renderer.registerModel(vertices, indices);
+    rendering::Renderer::ModelID id = renderer.registerModel(vertices, indices);
 
     glm::vec2 windowSize = window->getFramebufferSize();
     rendering::Renderer::CameraData mainCamera = {
@@ -131,16 +152,15 @@ int main(void)
             }
         }
 
-        /*
-        auto modelMat1 = glm::rotate(glm::mat4(1.0f), glm::radians(t * 10), glm::vec3(0, 1, 0)) *
-                         glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f));
-        auto modelMat2 = glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0, -0.5f)) *
-                         glm::rotate(glm::mat4(1.0f), glm::radians(t * 10), glm::vec3(0, 1, 0)) *
-                         glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f));
+        if (sin(t * 4) > 0)
+        {
+            renderer.setPalette(palette1ID);
+        }
+        else
+        {
+            renderer.setPalette(palette2ID);
+        }
 
-        renderer.drawModel(id, modelMat1);
-        renderer.drawModel(id, modelMat2);
-         */
         renderer.render(mainCamera, false);
         renderer.flush();
 

@@ -241,6 +241,12 @@ namespace cubos::gl
         NegativeZ = 5,
     };
 
+    enum class BufferStorageType
+    {
+        Small,
+        Large,
+    };
+
     /// Framebuffer description.
     struct FramebufferDesc
     {
@@ -551,7 +557,7 @@ namespace cubos::gl
         virtual void clearColor(float r, float g, float b, float a) = 0;
 
         /// Clears the color buffer of a specific target on the current framebuffer to a specific color.
-        virtual void clearTargetColor(size_t target,float r, float g, float b, float a) = 0;
+        virtual void clearTargetColor(size_t target, float r, float g, float b, float a) = 0;
 
         /// Clears the depth buffer bit on the current framebuffer to a specific value.
         virtual void clearDepth(float depth) = 0;
@@ -736,6 +742,7 @@ namespace cubos::gl
 
             /// Unmaps the constant buffer, updating it with data written to the mapped region.
             virtual void unmap() = 0;
+            virtual BufferStorageType getStorageTypeHint() = 0;
 
         protected:
             ConstantBuffer() = default;
