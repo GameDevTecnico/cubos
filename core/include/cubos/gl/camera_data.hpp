@@ -16,4 +16,4 @@ namespace cubos::gl
     };
 } // namespace cubos::gl
 
-#endif // CORE_INCLUDE_CUBOS_GL_CAMERA_DATA_HPP
+#endif // CUBOS_GL_CAMERA_DATA_HPP
