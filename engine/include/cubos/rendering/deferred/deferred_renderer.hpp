@@ -7,6 +7,10 @@
 #include <cubos/gl/render_device.hpp>
 #include <cubos/rendering/renderer.hpp>
 
+#define CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT 128
+#define CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT 128
+#define CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT 128
+
 namespace cubos::rendering
 {
     class DeferredRenderer : public Renderer
@@ -66,9 +70,9 @@ namespace cubos::rendering
     public:
         explicit DeferredRenderer(io::Window& window);
         ModelID registerModel(const std::vector<cubos::gl::Vertex>& vertices, std::vector<uint32_t>& indices) override;
-        virtual PaletteID registerPalette(const cubos::gl::Palette& palette) override;
-        virtual void setPalette(PaletteID paletteID) override;
-        void drawModel(ModelID modelID, glm::mat4 modelMat) override;
+        virtual void drawLight(const cubos::gl::SpotLightData& light) override;
+        virtual void drawLight(const cubos::gl::DirectionalLightData& light) override;
+        virtual void drawLight(const cubos::gl::PointLightData& light) override;
         void render(const cubos::gl::CameraData& camera, bool usePostProcessing = true) override;
     };
 } // namespace cubos::rendering

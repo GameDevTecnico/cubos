@@ -83,6 +83,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/grid.hpp"
     "include/cubos/gl/vertex.hpp"
     "include/cubos/gl/camera_data.hpp"
+    "include/cubos/gl/light.hpp"
     )
 
 # Create core library
