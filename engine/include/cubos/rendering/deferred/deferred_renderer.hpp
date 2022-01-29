@@ -69,7 +69,7 @@ namespace cubos::rendering
         virtual PaletteID registerPalette(const cubos::gl::Palette& palette) override;
         virtual void setPalette(PaletteID paletteID) override;
         void drawModel(ModelID modelID, glm::mat4 modelMat) override;
-        void render(const CameraData& camera, bool usePostProcessing = true) override;
+        void render(const cubos::gl::CameraData& camera, bool usePostProcessing = true) override;
     };
 } // namespace cubos::rendering
 

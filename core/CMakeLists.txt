@@ -75,6 +75,14 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/memory/yaml_deserializer.hpp"
 
     "include/cubos/io/window.hpp"
+
+    "include/cubos/gl/debug.hpp"
+    "include/cubos/gl/render_device.hpp"
+    "include/cubos/gl/material.hpp"
+    "include/cubos/gl/palette.hpp"
+    "include/cubos/gl/grid.hpp"
+    "include/cubos/gl/vertex.hpp"
+    "include/cubos/gl/camera_data.hpp"
     )
 
 # Create core library

@@ -343,7 +343,7 @@ Renderer::PaletteID DeferredRenderer::registerPalette(const Palette& palette)
     return palettes.size() - 1;
 }
 
-void DeferredRenderer::setPalette(Renderer::PaletteID paletteID)
+void DeferredRenderer::setPalette(PaletteID paletteID)
 {
     if (paletteID > palettes.size() - 1)
     {
@@ -353,7 +353,7 @@ void DeferredRenderer::setPalette(Renderer::PaletteID paletteID)
     currentPalette = palettes[paletteID];
 }
 
-void DeferredRenderer::drawModel(Renderer::ModelID modelID, glm::mat4 modelMat)
+void DeferredRenderer::drawModel(ModelID modelID, glm::mat4 modelMat)
 {
     if (modelID > models.size() - 1)
     {

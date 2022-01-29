@@ -5,8 +5,9 @@
 
 #include <cubos/gl/render_device.hpp>
 #include <cubos/gl/vertex.hpp>
-#include "cubos/gl/palette.hpp"
-#include "cubos/io/window.hpp"
+#include <cubos/gl/palette.hpp>
+#include <cubos/gl/camera_data.hpp>
+#include <cubos/io/window.hpp>
 
 namespace cubos::rendering
 {
@@ -33,14 +34,6 @@ namespace cubos::rendering
         io::Window& window;
         gl::RenderDevice& renderDevice;
 
-    public:
-        struct CameraData
-        {
-            glm::mat4 viewMatrix;
-            glm::mat4 perspectiveMatrix;
-            gl::Framebuffer target;
-        };
-
     protected:
         explicit Renderer(io::Window& window);
 
@@ -54,7 +47,7 @@ namespace cubos::rendering
                                       std::vector<uint32_t>& indices) = 0;
         virtual PaletteID registerPalette(const cubos::gl::Palette& palette) = 0;
         virtual void setPalette(PaletteID paletteID) = 0;
-        virtual void render(const CameraData& camera, bool usePostProcessing = true) = 0;
+        virtual void render(const cubos::gl::CameraData& camera, bool usePostProcessing = true) = 0;
         virtual void drawModel(ModelID modelID, glm::mat4 modelMat) = 0;
         virtual void flush();
     };

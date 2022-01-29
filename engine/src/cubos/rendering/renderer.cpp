@@ -1,5 +1,4 @@
 #include <cubos/rendering/renderer.hpp>
-#include "cubos/io/window.hpp"
 
 using namespace cubos::gl;
 using namespace cubos::rendering;
