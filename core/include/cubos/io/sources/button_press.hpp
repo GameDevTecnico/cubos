@@ -10,11 +10,11 @@
 #include <variant>
 #include <list>
 #include <glm/glm.hpp>
-#include <cubos/io/input_sources/input_source.hpp>
+#include <cubos/io/sources/source.hpp>
 
 namespace cubos::io
 {
-    class ButtonPress : public InputSource
+    class ButtonPress : public Source
     {
     public:
         std::variant<cubos::io::Key, cubos::io::MouseButton> button;
@@ -25,7 +25,7 @@ namespace cubos::io
         bool isTriggered() override;
         void subscribeEvents(cubos::io::Window* window) override;
         void unsubscribeEvents(cubos::io::Window* window) override;
-        InputContext createInputContext() override;
+        Context createInputContext() override;
 
     private:
         bool wasTriggered = false;

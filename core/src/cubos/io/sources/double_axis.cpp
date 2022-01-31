@@ -8,7 +8,7 @@
 #include <list>
 #include <glm/glm.hpp>
 #include <cubos/io/input_manager.hpp>
-#include <cubos/io/input_sources/double_axis.hpp>
+#include <cubos/io/sources/double_axis.hpp>
 
 using namespace cubos::io;
 
@@ -70,7 +70,7 @@ bool DoubleAxis::isTriggered()
     return false;
 }
 
-InputContext DoubleAxis::createInputContext()
+Context DoubleAxis::createInputContext()
 {
-    return InputContext(glm::vec2(this->xPos, this->yPos));
+    return Context(glm::vec2(this->xPos, this->yPos));
 }

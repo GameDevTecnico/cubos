@@ -2,14 +2,14 @@
 #define CUBOS_IO_SINGLE_AXIS_HPP
 
 #include <cubos/io/window.hpp>
-#include <cubos/io/input_sources/input_source.hpp>
+#include <cubos/io/sources/source.hpp>
 #include <variant>
 #include <tuple>
 
 namespace cubos::io
 {
 
-    class SingleAxis : public InputSource
+    class SingleAxis : public Source
     {
 
     public:
@@ -18,7 +18,7 @@ namespace cubos::io
         bool isTriggered() override;
         void subscribeEvents(cubos::io::Window* window) override;
         void unsubscribeEvents(cubos::io::Window* window) override;
-        InputContext createInputContext() override;
+        Context createInputContext() override;
 
     private:
         std::variant<cubos::io::MouseAxis, std::tuple<cubos::io::Key, cubos::io::Key>> inputs;

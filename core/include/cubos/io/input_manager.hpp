@@ -10,9 +10,9 @@
 #include <variant>
 #include <list>
 #include <glm/glm.hpp>
-#include <cubos/io/input_action.hpp>
-#include <cubos/io/input_context.hpp>
-#include <cubos/io/input_sources/input_source.hpp>
+#include <cubos/io/action.hpp>
+#include <cubos/io/context.hpp>
+#include <cubos/io/sources/source.hpp>
 
 namespace cubos::io
 {

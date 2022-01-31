@@ -2,9 +2,9 @@
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
 #include <cubos/io/input_manager.hpp>
-#include <cubos/io/input_sources/button_press.hpp>
-#include <cubos/io/input_sources/single_axis.hpp>
-#include <cubos/io/input_sources/double_axis.hpp>
+#include <cubos/io/sources/button_press.hpp>
+#include <cubos/io/sources/single_axis.hpp>
+#include <cubos/io/sources/double_axis.hpp>
 #include <algorithm>
 using namespace cubos;
 float red = 0.0f;
@@ -14,13 +14,13 @@ float alpha = 1.0f;
 int width = 0;
 int height = 0;
 
-void updateColour(io::InputContext context)
+void updateColour(io::Context context)
 {
     red = std::clamp(context.getValue<glm::vec2>().x / width, 0.0f, 1.0f);
     green = std::clamp(context.getValue<glm::vec2>().y / width, 0.0f, 1.0f);
 }
 
-void blueIncr(io::InputContext context)
+void blueIncr(io::Context context)
 {
     blue += 0.1f;
     if (blue < 0)
@@ -29,7 +29,7 @@ void blueIncr(io::InputContext context)
     }
 }
 
-void blueDecr(io::InputContext context)
+void blueDecr(io::Context context)
 {
     blue -= 0.1f;
     if (blue < 0)
@@ -38,7 +38,7 @@ void blueDecr(io::InputContext context)
     }
 }
 
-void updateToBlack(io::InputContext context)
+void updateToBlack(io::Context context)
 {
     red = std::clamp(red + context.getValue<float>() * 0.05f, 0.0f, 1.0f);
     green = std::clamp(green + context.getValue<float>() * 0.05f, 0.0f, 1.0f);

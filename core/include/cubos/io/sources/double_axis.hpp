@@ -10,11 +10,11 @@
 #include <variant>
 #include <list>
 #include <glm/glm.hpp>
-#include <cubos/io/input_sources/input_source.hpp>
+#include <cubos/io/sources/source.hpp>
 
 namespace cubos::io
 {
-    class DoubleAxis : public InputSource
+    class DoubleAxis : public Source
     {
     public:
         DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis verticalAxis);
@@ -22,7 +22,7 @@ namespace cubos::io
         bool isTriggered() override;
         void subscribeEvents(cubos::io::Window* window) override;
         void unsubscribeEvents(cubos::io::Window* window) override;
-        InputContext createInputContext() override;
+        Context createInputContext() override;
 
     private:
         bool wasTriggered = false;

@@ -1,25 +1,25 @@
-#ifndef CUBOS_IO_INPUT_CONTEXT_HPP
-#define CUBOS_IO_INPUT_CONTEXT_HPP
+#ifndef CUBOS_IO_CONTEXT_HPP
+#define CUBOS_IO_CONTEXT_HPP
 
 #include <glm/glm.hpp>
 #include <variant>
 namespace cubos::io
 {
 
-    class InputContext
+    class Context
     {
     public:
         std::variant<float, glm::vec2> value;
-        InputContext()
+        Context()
         {
         }
 
-        InputContext(glm::vec2 value)
+        Context(glm::vec2 value)
         {
             this->value = value;
         }
 
-        InputContext(float value)
+        Context(float value)
         {
             this->value = value;
         }
@@ -31,4 +31,4 @@ namespace cubos::io
     };
 } // namespace cubos::io
 
-#endif // CUBOS_IO_INPUT_CONTEXT_HPP
+#endif // CUBOS_IO_CONTEXT_HPP

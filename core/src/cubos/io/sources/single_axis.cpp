@@ -1,4 +1,4 @@
-#include <cubos/io/input_sources/single_axis.hpp>
+#include <cubos/io/sources/single_axis.hpp>
 #include <cubos/io/input_manager.hpp>
 #include <tuple>
 #include <variant>
@@ -97,7 +97,7 @@ bool SingleAxis::isTriggered()
     return false;
 }
 
-InputContext SingleAxis::createInputContext()
+Context SingleAxis::createInputContext()
 {
-    return InputContext(float(this->value));
+    return Context(float(this->value));
 }

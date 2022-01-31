@@ -8,7 +8,7 @@
 #include <list>
 #include <glm/glm.hpp>
 #include <cubos/io/input_manager.hpp>
-#include <cubos/io/input_sources/button_press.hpp>
+#include <cubos/io/sources/button_press.hpp>
 
 using namespace cubos::io;
 
@@ -65,7 +65,7 @@ void ButtonPress::handleButtonDown()
     this->wasTriggered = true;
 }
 
-InputContext ButtonPress::createInputContext()
+Context ButtonPress::createInputContext()
 {
-    return InputContext();
+    return Context();
 }
