@@ -1,10 +1,10 @@
 #include <cubos/log.hpp>
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
-#include <cubos/input/input_manager.hpp>
-#include <cubos/input/input_sources/button_press.hpp>
-#include <cubos/input/input_sources/single_axis.hpp>
-#include <cubos/input/input_sources/double_axis.hpp>
+#include <cubos/io/input_manager.hpp>
+#include <cubos/io/input_sources/button_press.hpp>
+#include <cubos/io/input_sources/single_axis.hpp>
+#include <cubos/io/input_sources/double_axis.hpp>
 #include <algorithm>
 using namespace cubos;
 float red = 0.0f;
@@ -14,13 +14,13 @@ float alpha = 1.0f;
 int width = 0;
 int height = 0;
 
-void updateColour(input::InputContext context)
+void updateColour(io::InputContext context)
 {
     red = std::clamp(context.getValue<glm::vec2>().x / width, 0.0f, 1.0f);
     green = std::clamp(context.getValue<glm::vec2>().y / width, 0.0f, 1.0f);
 }
 
-void blueIncr(input::InputContext context)
+void blueIncr(io::InputContext context)
 {
     blue += 0.1f;
     if (blue < 0)
@@ -29,7 +29,7 @@ void blueIncr(input::InputContext context)
     }
 }
 
-void blueDecr(input::InputContext context)
+void blueDecr(io::InputContext context)
 {
     blue -= 0.1f;
     if (blue < 0)
@@ -38,7 +38,7 @@ void blueDecr(input::InputContext context)
     }
 }
 
-void updateToBlack(input::InputContext context)
+void updateToBlack(io::InputContext context)
 {
     red = std::clamp(red + context.getValue<float>() * 0.05f, 0.0f, 1.0f);
     green = std::clamp(green + context.getValue<float>() * 0.05f, 0.0f, 1.0f);
@@ -54,31 +54,31 @@ int main(void)
     height = window->getFramebufferSize().y;
     width = window->getFramebufferSize().x;
 
-    input::InputManager::init(window);
-    auto updateRedGreenAction = input::InputManager::createAction("update_red_green");
+    io::InputManager::init(window);
+    auto updateRedGreenAction = io::InputManager::createAction("update_red_green");
     updateRedGreenAction->addBinding(updateColour);
-    updateRedGreenAction->addInput(new input::DoubleAxis(cubos::io::MouseAxis::X, cubos::io::MouseAxis::Y));
+    updateRedGreenAction->addInput(new io::DoubleAxis(cubos::io::MouseAxis::X, cubos::io::MouseAxis::Y));
 
-    auto incBlueAction = input::InputManager::createAction("increase_blue");
+    auto incBlueAction = io::InputManager::createAction("increase_blue");
     incBlueAction->addBinding(blueIncr);
-    incBlueAction->addInput(new input::ButtonPress(io::Key::D));
-    incBlueAction->addInput(new input::ButtonPress(io::MouseButton::Right));
+    incBlueAction->addInput(new io::ButtonPress(io::Key::D));
+    incBlueAction->addInput(new io::ButtonPress(io::MouseButton::Right));
 
-    auto decBlueAction = input::InputManager::createAction("decrease_blue");
+    auto decBlueAction = io::InputManager::createAction("decrease_blue");
     decBlueAction->addBinding(blueDecr);
-    decBlueAction->addInput(new input::ButtonPress(io::Key::A));
-    decBlueAction->addInput(new input::ButtonPress(io::MouseButton::Left));
+    decBlueAction->addInput(new io::ButtonPress(io::Key::A));
+    decBlueAction->addInput(new io::ButtonPress(io::MouseButton::Left));
 
-    auto updateAlphaAction = input::InputManager::createAction("update_alpha");
+    auto updateAlphaAction = io::InputManager::createAction("update_alpha");
     updateAlphaAction->addBinding(updateToBlack);
-    updateAlphaAction->addInput(new input::SingleAxis(io::Key::O, io::Key::L));
+    updateAlphaAction->addInput(new io::SingleAxis(io::Key::O, io::Key::L));
 
     while (!window->shouldClose())
     {
         renderDevice.clearColor(red, green, blue, 0.0f);
         window->swapBuffers();
         window->pollEvents();
-        input::InputManager::processActions();
+        io::InputManager::processActions();
     }
 
     delete window;

@@ -1,9 +1,9 @@
-#include <cubos/input/input_sources/single_axis.hpp>
-#include <cubos/input/input_manager.hpp>
+#include <cubos/io/input_sources/single_axis.hpp>
+#include <cubos/io/input_manager.hpp>
 #include <tuple>
 #include <variant>
 
-using namespace cubos::input;
+using namespace cubos::io;
 
 SingleAxis::SingleAxis(cubos::io::MouseAxis axis)
 {

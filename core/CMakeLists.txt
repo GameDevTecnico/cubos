@@ -39,13 +39,12 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/io/glfw_window.hpp"
     "src/cubos/io/glfw_window.cpp"
 
-    "src/cubos/input/binding.hpp"
-    "src/cubos/input/binding.cpp"
-    "src/cubos/input/input_manager.cpp"
+    "src/cubos/io/input_manager.cpp"
+    "src/cubos/io/input_action.cpp"
 
-    "src/cubos/input/input_sources/button_press.cpp"
-    "src/cubos/input/input_sources/single_axis.cpp"
-    "src/cubos/input/input_sources/double_axis.cpp"
+    "src/cubos/io/input_sources/button_press.cpp"
+    "src/cubos/io/input_sources/single_axis.cpp"
+    "src/cubos/io/input_sources/double_axis.cpp"
 
     "src/cubos/gl/debug.cpp"
     
@@ -83,11 +82,13 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/palette.hpp"
     "include/cubos/gl/grid.hpp"
 
-    "include/cubos/input/input_manager.hpp"
-    "include/cubos/input/input_sources/input_source.hpp"
-    "include/cubos/input/input_sources/button_press.hpp"
-    "include/cubos/input/input_sources/single_axis.hpp"
-    "include/cubos/input/input_sources/double_axis.hpp"
+    "include/cubos/io/input_manager.hpp"
+    "include/cubos/io/input_action.hpp"
+    "include/cubos/io/input_context.hpp"
+    "include/cubos/io/input_sources/input_source.hpp"
+    "include/cubos/io/input_sources/button_press.hpp"
+    "include/cubos/io/input_sources/single_axis.hpp"
+    "include/cubos/io/input_sources/double_axis.hpp"
 )
 
 # Create core library

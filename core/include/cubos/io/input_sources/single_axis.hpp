@@ -1,12 +1,12 @@
-#ifndef CUBOS_INPUT_SINGLE_AXIS_HPP
-#define CUBOS_INPUT_SINGLE_AXIS_HPP
+#ifndef CUBOS_IO_SINGLE_AXIS_HPP
+#define CUBOS_IO_SINGLE_AXIS_HPP
 
 #include <cubos/io/window.hpp>
-#include <cubos/input/input_sources/input_source.hpp>
+#include <cubos/io/input_sources/input_source.hpp>
 #include <variant>
 #include <tuple>
 
-namespace cubos::input
+namespace cubos::io
 {
 
     class SingleAxis : public InputSource
@@ -28,6 +28,6 @@ namespace cubos::input
         bool wasTriggered;
         float value;
     };
-} // namespace cubos::input
+} // namespace cubos::io
 
-#endif // CUBOS_INPUT_SINGLE_AXIS_HPP
+#endif // CUBOS_IO_SINGLE_AXIS_HPP
