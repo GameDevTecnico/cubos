@@ -103,7 +103,7 @@ namespace cubos
     }
 
     template <typename... TArgs>
-    template <class TObj>
+    template <typename TObj>
     void Event<TArgs...>::registerCallback(TObj* obj, void (TObj::*callback)(TArgs...))
     {
         auto lock = std::lock_guard<std::mutex>(this->mutex);
@@ -112,7 +112,7 @@ namespace cubos
     }
 
     template <typename... TArgs>
-    template <class TObj>
+    template <typename TObj>
     void Event<TArgs...>::unregisterCallback(TObj* obj, void (TObj::*callback)(TArgs...))
     {
         auto lock = std::lock_guard<std::mutex>(this->mutex);
