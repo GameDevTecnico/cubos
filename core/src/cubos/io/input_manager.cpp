@@ -4,8 +4,7 @@
 
 using namespace cubos::io;
 
-std::map<std::string, std::shared_ptr<InputAction>> InputManager::actions =
-    std::map<std::string, std::shared_ptr<InputAction>>();
+std::map<std::string, std::shared_ptr<Action>> InputManager::actions = std::map<std::string, std::shared_ptr<Action>>();
 std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> InputManager::keyDownCallbacks =
     std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>>();
 std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> InputManager::keyUpCallbacks =
@@ -19,7 +18,7 @@ std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>> InputManage
 
 cubos::io::Window* InputManager::window = nullptr;
 
-std::shared_ptr<InputAction> InputManager::createAction(std::string name)
+std::shared_ptr<Action> InputManager::createAction(std::string name)
 {
     if (InputManager::actions.contains(name))
     {
@@ -27,13 +26,13 @@ std::shared_ptr<InputAction> InputManager::createAction(std::string name)
         return nullptr;
     }
 
-    std::shared_ptr<InputAction> action = std::make_shared<InputAction>(name);
+    std::shared_ptr<Action> action = std::make_shared<Action>(name);
 
     InputManager::actions.insert({name, action});
     return action;
 };
 
-std::shared_ptr<InputAction> InputManager::getAction(std::string name)
+std::shared_ptr<Action> InputManager::getAction(std::string name)
 {
     if (InputManager::actions.contains(name))
         return InputManager::actions[name];

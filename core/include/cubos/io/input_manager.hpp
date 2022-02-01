@@ -21,7 +21,7 @@ namespace cubos::io
     {
     public:
         static cubos::io::Window* window;
-        static std::map<std::string, std::shared_ptr<InputAction>> actions;
+        static std::map<std::string, std::shared_ptr<Action>> actions;
 
         static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> keyDownCallbacks;
         static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> keyUpCallbacks;
@@ -30,8 +30,8 @@ namespace cubos::io
         static std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>> mouseAxisCallbacks;
 
         static void init(cubos::io::Window* window);
-        static std::shared_ptr<InputAction> createAction(std::string name);
-        static std::shared_ptr<InputAction> getAction(std::string name);
+        static std::shared_ptr<Action> createAction(std::string name);
+        static std::shared_ptr<Action> getAction(std::string name);
         static void processActions();
 
         static cubos::Event<>::ID registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key)

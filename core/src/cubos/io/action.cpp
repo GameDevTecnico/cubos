@@ -6,23 +6,23 @@
 
 using namespace cubos::io;
 
-InputAction::InputAction(std::string actionName)
+Action::Action(std::string actionName)
 {
     name = actionName;
 }
 
-void InputAction::addInput(Source* source)
+void Action::addInput(Source* source)
 {
     source->subscribeEvents(InputManager::window);
     this->inputSources.push_back(source);
 }
 
-void InputAction::addBinding(std::function<void(Context)> binding)
+void Action::addBinding(std::function<void(Context)> binding)
 {
     this->functionBindings.push_back(binding);
 }
 
-void InputAction::processSources()
+void Action::processSources()
 {
     for (auto itSource = this->inputSources.begin(); itSource != this->inputSources.end(); itSource++)
     {

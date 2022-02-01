@@ -9,6 +9,7 @@ namespace cubos::io
 {
 
     class InputAction
+    class Action
     {
     public:
         std::list<Source*> inputSources;
@@ -16,7 +17,7 @@ namespace cubos::io
         std::string name;
         bool enable;
 
-        InputAction(std::string actionName);
+        Action(std::string actionName);
         void addInput(Source* source);
         void addBinding(std::function<void(Context)> binding);
         void processSources();
