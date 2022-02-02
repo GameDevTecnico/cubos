@@ -14,21 +14,45 @@
 
 namespace cubos::io
 {
+
+    /// Class use has a handler for button presses
+    /// Handles events subscription and context creation for when a button is pressed
+    /// Handles button presses from keyboard and mouse
+    /// @see Source
     class ButtonPress : public Source
     {
     public:
         std::variant<cubos::io::Key, cubos::io::MouseButton> button;
 
+        /// Creates a Button Press source associated to a keyboard button
+        /// @param key the keyboard key associated to this Button Press source
         ButtonPress(cubos::io::Key key);
+
+        /// Creates a Button Press source associated mouse button
+        /// @param button the mouse button associated to this Button Press source
         ButtonPress(cubos::io::MouseButton button);
 
+        /// Checks if the button associated with this Button Press source has been pressed
+        /// @return true if button associated with this Button Pressed has been pressed, otherwise false
         bool isTriggered() override;
+
+        /// Subscribes this object to callbacks in the Input Manager
+        /// @see unsubscribeEvents
         void subscribeEvents(cubos::io::Window* window) override;
+
+        /// Unsubscribes this object to callbacks in the Input Manager
+        /// @see subscribeEvents
         void unsubscribeEvents(cubos::io::Window* window) override;
-        Context createInputContext() override;
+
+        /// Creates the context related to this Button Press
+        /// @return context created by this Button Press
+        Context createContext() override;
 
     private:
         bool wasTriggered = false;
+
+        /// Called when the button associated with this Button Press source has been pressed.
+        /// Sets the wasTriggered variable to true
         void handleButtonDown();
     };
 } // namespace cubos::io

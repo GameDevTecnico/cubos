@@ -22,7 +22,7 @@ namespace cubos::io
         bool isTriggered() override;
         void subscribeEvents(cubos::io::Window* window) override;
         void unsubscribeEvents(cubos::io::Window* window) override;
-        Context createInputContext() override;
+        Context createContext() override;
 
     private:
         bool wasTriggered = false;

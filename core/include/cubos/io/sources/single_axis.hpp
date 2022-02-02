@@ -18,7 +18,7 @@ namespace cubos::io
         bool isTriggered() override;
         void subscribeEvents(cubos::io::Window* window) override;
         void unsubscribeEvents(cubos::io::Window* window) override;
-        Context createInputContext() override;
+        Context createContext() override;
 
     private:
         std::variant<cubos::io::MouseAxis, std::tuple<cubos::io::Key, cubos::io::Key>> inputs;

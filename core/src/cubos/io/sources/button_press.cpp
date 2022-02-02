@@ -65,7 +65,7 @@ void ButtonPress::handleButtonDown()
     this->wasTriggered = true;
 }
 
-Context ButtonPress::createInputContext()
+Context ButtonPress::createContext()
 {
     return Context();
 }

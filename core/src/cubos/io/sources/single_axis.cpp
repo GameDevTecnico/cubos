@@ -97,7 +97,7 @@ bool SingleAxis::isTriggered()
     return false;
 }
 
-Context SingleAxis::createInputContext()
+Context SingleAxis::createContext()
 {
     return Context(float(this->value));
 }

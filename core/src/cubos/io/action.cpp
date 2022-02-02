@@ -31,7 +31,7 @@ void Action::processSources()
             for (auto itBinding = this->functionBindings.begin(); itBinding != this->functionBindings.end();
                  itBinding++)
             {
-                (*itBinding)((*itSource)->createInputContext());
+                (*itBinding)((*itSource)->createContext());
             }
             return;
         }

@@ -70,7 +70,7 @@ bool DoubleAxis::isTriggered()
     return false;
 }
 
-Context DoubleAxis::createInputContext()
+Context DoubleAxis::createContext()
 {
     return Context(glm::vec2(this->xPos, this->yPos));
 }
