@@ -26,6 +26,8 @@ namespace cubos
         /// @return The setting's value.
         std::string getString(const std::string& key, const std::string& defaultValue);
 
+        void merge(const Settings& settingsToMerge);
+
         static Settings global;
 
     private:

@@ -21,3 +21,11 @@ std::string Settings::getString(const std::string& key, const std::string& defau
 
     return this->values[key];
 }
+
+void Settings::merge(const Settings& settingsToMerge)
+{
+    for (auto it = settingsToMerge.values.begin(); it != settingsToMerge.values.end(); it++)
+    {
+        this->setString(it->first, it->second);
+    }
+}
