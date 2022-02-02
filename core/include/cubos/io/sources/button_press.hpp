@@ -15,14 +15,15 @@
 namespace cubos::io
 {
 
-    /// Class use has a handler for button presses
+    /// ButtonPress is used to bind button presses to the gameplay logic.
+    /// The bindings are not invoked while the button is down.
     /// Handles events subscription and context creation for when a button is pressed
     /// Handles button presses from keyboard and mouse
     /// @see Source
     class ButtonPress : public Source
     {
     public:
-        std::variant<cubos::io::Key, cubos::io::MouseButton> button;
+        std::variant<cubos::io::Key, cubos::io::MouseButton> button; ///< Button to track
 
         /// Creates a Button Press source associated to a keyboard button
         /// @param key the keyboard key associated to this Button Press source

@@ -17,23 +17,28 @@ namespace cubos::io
     class Action
     {
     public:
-        std::list<Source*> inputSources;
-        std::list<std::function<void(Context)>> functionBindings;
-        std::string name;
-        bool enable;
+        std::string name; ///< Name of the Action.
 
+        /// The constructor for an Action with a name
         /// @param actionName name of the Action being created
         Action(std::string actionName);
 
+        /// Adds a new source to the Action
         /// @param source Source to add
         void addInput(Source* source);
 
+        /// Adds a new bindings to the Action
         /// @param binding Function to add
         void addBinding(std::function<void(Context)> binding);
 
         /// Checks if any Input Source was triggered.
         /// If so, calls all the binded functions
         void processSources();
+
+    private:
+        std::list<Source*> inputSources;
+        std::list<std::function<void(Context)>> functionBindings;
+        bool enable;
     };
 } // namespace cubos::io
 
