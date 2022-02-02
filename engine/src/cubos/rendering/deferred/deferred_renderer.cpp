@@ -2,6 +2,10 @@
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
 #include <cubos/log.hpp>
 
+#include <format>
+
+#include <glm/gtx/quaternion.hpp>
+
 using namespace cubos;
 using namespace cubos::gl;
 using namespace cubos::rendering;
@@ -28,10 +32,11 @@ inline void DeferredRenderer::createShaderPipelines()
 
             void main()
             {
-                vec4 viewPosition = V * M * vec4(position, 1.0);
-                fragPosition = vec3(viewPosition);
+                vec4 worldPosition = M * vec4(position, 1.0);
+                vec4 viewPosition = V * worldPosition;
+                fragPosition = vec3(worldPosition);
 
-                mat3 N = transpose(inverse(mat3(V * M)));
+                mat3 N = transpose(inverse(mat3(M)));
                 fragNormal = N * normal;
 
                 gl_Position = P * viewPosition;
@@ -80,7 +85,7 @@ inline void DeferredRenderer::createShaderPipelines()
         )");
 
     auto outputSmallPixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
-            #version 330 core
+            #version 430 core
 
             in vec2 fraguv;
 
@@ -93,22 +98,109 @@ inline void DeferredRenderer::createShaderPipelines()
                 vec4 color;
             };
 
-            uniform palette {
+            uniform palette
+            {
                  Material materials[gl_MaxFragmentUniformComponents / 4];
+            };
+
+            struct SpotLightData
+            {
+                vec4 position;
+                mat4 rotation;
+                vec4 color;
+                float intensity;
+                float range;
+                float spotCutoff;
+                float innerSpotCutoff;
+            };
+
+            struct DirectionalLightData
+            {
+                mat4 rotation;
+                vec4 color;
+                float intensity;
+            };
+
+            struct PointLightData
+            {
+                vec4 position;
+                vec4 color;
+                float intensity;
+                float range;
+            };
+
+            layout(std140) uniform Lights
+            {
+                SpotLightData spotLights[128];
+                DirectionalLightData directionalLights[128];
+                PointLightData pointLights[128];
+                uint numSpotLights;
+                uint numDirectionalLights;
+                uint numPointLights;
             };
 
             out vec4 color;
 
+            float remap(float value, float min1, float max1, float min2, float max2) {
+                return max2 + (value - min1) * (max2 - min2) / (max1 - min1);
+            }
+
+            vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLightData light) {
+                vec3 toLight = vec3(light.position) - fragPos;
+                float r = length(toLight) / light.range;
+                if (r < 1) {
+                    vec3 toLightNormalized = normalize(toLight);
+                    float a = dot(toLightNormalized, -vec3(light.rotation * vec4(0,0,1,1)));
+                    if (a > light.spotCutoff) {
+                        float angleValue = clamp(remap(a, light.innerSpotCutoff, light.spotCutoff, 1, 0), 0, 1);
+                        float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0 , 1);
+                        float diffuse = max(dot(fragNormal, toLightNormalized), 0);
+                        return angleValue * attenuation * diffuse * light.intensity * vec3(light.color);
+                    }
+                }
+                return vec3(0);
+            }
+
+            vec3 directionalLightCalc(vec3 fragNormal, DirectionalLightData light)
+            {
+                return max(dot(fragNormal, -vec3(light.rotation * vec4(0,0,1,1))), 0) * light.intensity * vec3(light.color);
+            }
+
+            vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLightData light) {
+                vec3 toLight = vec3(light.position) - fragPos;
+                float r = length(toLight) / light.range;
+                if (r < 1) {
+                    float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
+                    float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0);
+                    return attenuation * diffuse * light.intensity * vec3(light.color);
+                }
+                return vec3(0);
+            }
+
             void main()
             {
-                color = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
+                vec4 albedo = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
                 uint m = texture(material, fraguv).r;
-                if (m == uint(0)) {
-                    color += vec4(0);
+                if (m == 0u) {
+                    albedo += vec4(0);
                 }
                 else {
-                    color += materials[m - uint(1)].color;
+                    albedo += materials[m - 1u].color;
                 }
+                vec3 lighting = vec3(0);
+                vec3 fragPos = texture(position, fraguv).xyz;
+                vec3 fragNormal = texture(normal, fraguv).xyz;
+                for (uint i = 0u; i < numSpotLights; i++) {
+                    lighting += spotLightCalc(fragPos, fragNormal, spotLights[i]);
+                }
+                for (uint i = 0u; i < numDirectionalLights; i++) {
+                    lighting += directionalLightCalc(fragNormal, directionalLights[i]);
+                }
+                for (uint i = 0u; i < numPointLights; i++) {
+                    lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
+                }
+                color = albedo * vec4(lighting, 1);
+                //color += albedo;
             }
         )");
 
@@ -130,23 +222,119 @@ inline void DeferredRenderer::createShaderPipelines()
                 Material materials[];
             };
 
+            struct SpotLightData
+            {
+                vec4 position;
+                mat4 rotation;
+                vec4 color;
+                float intensity;
+                float range;
+                float spotCutoff;
+                float innerSpotCutoff;
+            };
+
+            struct DirectionalLightData
+            {
+                mat4 rotation;
+                vec4 color;
+                float intensity;
+            };
+
+            struct PointLightData
+            {
+                vec4 position;
+                vec4 color;
+                float intensity;
+                float range;
+            };
+
+            layout(std140) uniform Lights
+            {
+                SpotLightData spotLights[128];
+                DirectionalLightData directionalLights[128];
+                PointLightData pointLights[128];
+                uint numSpotLights;
+                uint numDirectionalLights;
+                uint numPointLights;
+            };
+
             out vec4 color;
+
+            float remap(float value, float min1, float max1, float min2, float max2) {
+                return max2 + (value - min1) * (max2 - min2) / (max1 - min1);
+            }
+
+            vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLightData light) {
+                vec3 toLight = vec3(light.position) - fragPos;
+                float r = length(toLight) / light.range;
+                if (r < 1) {
+                    vec3 toLightNormalized = normalize(toLight);
+                    float a = dot(toLightNormalized, -vec3(light.rotation * vec4(0,0,1,1)));
+                    if (a > light.spotCutoff) {
+                        float angleValue = clamp(remap(a, light.innerSpotCutoff, light.spotCutoff, 1, 0), 0, 1);
+                        float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0 , 1);
+                        float diffuse = max(dot(fragNormal, toLightNormalized), 0);
+                        return angleValue * attenuation * diffuse * light.intensity * vec3(light.color);
+                    }
+                }
+                return vec3(0);
+            }
+
+            vec3 directionalLightCalc(vec3 fragNormal, DirectionalLightData light)
+            {
+                return max(dot(fragNormal, -vec3(light.rotation * vec4(0,0,1,1))), 0) * light.intensity * vec3(light.color);
+            }
+
+            vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLightData light) {
+                vec3 toLight = vec3(light.position) - fragPos;
+                float r = length(toLight) / light.range;
+                if (r < 1) {
+                    float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
+                    float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0);
+                    return attenuation * diffuse * light.intensity * vec3(light.color);
+                }
+                return vec3(0);
+            }
 
             void main()
             {
-                color = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
+                vec4 albedo = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
                 uint m = texture(material, fraguv).r;
-                if (m == uint(0)) {
-                    color += vec4(0);
+                if (m == 0u) {
+                    albedo += vec4(0);
                 }
                 else {
-                    color += materials[m - uint(1)].color;
+                    albedo += materials[m - 1u].color;
                 }
+                vec3 lighting = vec3(0);
+                vec3 fragPos = texture(position, fraguv).xyz;
+                vec3 fragNormal = texture(normal, fraguv).xyz;
+                for (uint i = 0u; i < numSpotLights; i++) {
+                    lighting += spotLightCalc(fragPos, fragNormal, spotLights[i]);
+                }
+                for (uint i = 0u; i < numDirectionalLights; i++) {
+                    lighting += directionalLightCalc(fragNormal, directionalLights[i]);
+                }
+                for (uint i = 0u; i < numPointLights; i++) {
+                    lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
+                }
+                color = albedo * vec4(lighting, 1);
+                //color += albedo;
             }
         )");
 
     smallOutputPipeline = renderDevice.createShaderPipeline(outputVertex, outputSmallPixel);
     largeOutputPipeline = renderDevice.createShaderPipeline(outputVertex, outputLargePixel);
+
+    logDebug("{}", sizeof(SpotLightData) == 6 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+
+    outputLightBlockBuffer = renderDevice.createConstantBuffer(sizeof(LightBlock), nullptr, gl::Usage::Dynamic);
+
+    renderDevice.setShaderPipeline(smallOutputPipeline);
+    smallOutputLightBlockBP = smallOutputPipeline->getBindingPoint("Lights");
+
+    renderDevice.setShaderPipeline(largeOutputPipeline);
+    largeOutputLightBlockBP = largeOutputPipeline->getBindingPoint("Lights");
 
     float screenVerts[] = {
         -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, +1.0f, 0.0f, 1.0f, +1.0f, +1.0f, 1.0f, 1.0f, +1.0f, -1.0f, 1.0f, 0.0f,
@@ -303,35 +491,35 @@ Renderer::ModelID DeferredRenderer::registerModel(const std::vector<cubos::gl::V
 
 void DeferredRenderer::drawLight(const SpotLightData& light)
 {
-    if (spotLightRequests.size() >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
+    if (lights.numSpotLights >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
     {
         logWarning("DeferredRenderer::drawLight(const SpotLightData& light) failed: number of spot lights to be drawn "
                    "this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT.");
         return;
     }
-    Renderer::drawLight(light);
+    lights.spotLights[lights.numSpotLights++] = light;
 }
 
 void DeferredRenderer::drawLight(const DirectionalLightData& light)
 {
-    if (directionalLightRequests.size() >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
+    if (lights.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
     {
         logWarning("DeferredRenderer::drawLight(const DirectionalLightData& light) failed: number of directional "
                    "lights to be drawn this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT.");
         return;
     }
-    Renderer::drawLight(light);
+    lights.directionalLights[lights.numDirectionalLights++] = light;
 }
 
 void DeferredRenderer::drawLight(const PointLightData& light)
 {
-    if (pointLightRequests.size() >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
+    if (lights.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
     {
         logWarning("DeferredRenderer::drawLight(const PointLightData& light) failed: number of point lights to be "
                    "drawn this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT.");
         return;
     }
-    Renderer::drawLight(light);
+    lights.pointLights[lights.numPointLights++] = light;
 }
 
 void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
@@ -380,11 +568,23 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
         pp = smallOutputPipeline;
         renderDevice.setShaderPipeline(pp);
         smallOutputPaletteBP->bind(currentPalette);
+        smallOutputLightBlockBP->bind(outputLightBlockBuffer);
+        {
+            auto& lightBlock = *(LightBlock*)outputLightBlockBuffer->map();
+            lightBlock = lights;
+            outputLightBlockBuffer->unmap();
+        }
         break;
     case BufferStorageType::Large:
         pp = largeOutputPipeline;
         renderDevice.setShaderPipeline(pp);
         largeOutputPaletteBP->bind(currentPalette);
+        {
+            auto& lightBlock = *(LightBlock*)outputLightBlockBuffer->map();
+            lightBlock = lights;
+            outputLightBlockBuffer->unmap();
+        }
+        largeOutputLightBlockBP->bind(outputLightBlockBuffer);
         break;
     }
 
@@ -400,4 +600,30 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
     renderDevice.setVertexArray(screenVertexArray);
     renderDevice.setIndexBuffer(screenIndexBuffer);
     renderDevice.drawTrianglesIndexed(0, 6);
+}
+
+void DeferredRenderer::flush()
+{
+    Renderer::flush();
+    lights.numSpotLights = 0;
+    lights.numDirectionalLights = 0;
+    lights.numPointLights = 0;
+}
+
+DeferredRenderer::LightBlock::SpotLightData::SpotLightData(const gl::SpotLightData& light)
+    : position(glm::vec4(light.position, 1)), rotation(glm::toMat4(light.rotation)), color(glm::vec4(light.color, 1)),
+      intensity(light.intensity), range(light.range), spotCutoff(cos(light.spotAngle)),
+      innerSpotCutoff(cos(light.innerSpotAngle))
+{
+}
+
+DeferredRenderer::LightBlock::DirectionalLightData::DirectionalLightData(const gl::DirectionalLightData& light)
+    : rotation(glm::toMat4(light.rotation)), color(glm::vec4(light.color, 1)), intensity(light.intensity)
+{
+}
+
+DeferredRenderer::LightBlock::PointLightData::PointLightData(const gl::PointLightData& light)
+    : position(glm::vec4(light.position, 1)), color(glm::vec4(light.color, 1)), intensity(light.intensity),
+      range(light.range)
+{
 }

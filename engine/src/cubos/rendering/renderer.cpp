@@ -94,4 +94,7 @@ void Renderer::drawLight(const PointLightData& light)
 void Renderer::flush()
 {
     drawRequests.clear();
+    spotLightRequests.clear();
+    directionalLightRequests.clear();
+    pointLightRequests.clear();
 }

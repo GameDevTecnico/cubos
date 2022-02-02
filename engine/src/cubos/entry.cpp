@@ -5,6 +5,8 @@
 #include <cubos/gl/palette.hpp>
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 using namespace cubos;
 
@@ -127,10 +129,22 @@ int main(void)
                                  glm::perspective(glm::radians(20.0f), windowSize.x / windowSize.y, 0.1f, 1000.f),
                                  // gl::Framebuffer target;
                                  0};
+    float t = 0;
+    int s = 0;
 
     while (!window->shouldClose())
     {
-        float t = window->getTime();
+        float currentT = window->getTime();
+        float deltaT = 0;
+        if (t != 0)
+        {
+            deltaT = currentT - t;
+            int newS = std::round(t);
+            if (newS != s)
+                logDebug("FPS: {}", std::round(1 / deltaT));
+            s = newS;
+        }
+        t = currentT;
         renderDevice.setFramebuffer(0);
         renderDevice.clearColor(0.0, 0.0, 0.0, 0.0f);
 
@@ -144,12 +158,22 @@ int main(void)
 
                     auto modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z)) *
                                     glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f)) *
-                                    glm::rotate(glm::mat4(1.0f), glm::radians(t * 10), axis) *
+                                    glm::rotate(glm::mat4(1.0f), glm::radians(t), axis) *
                                     glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f));
                     renderer.drawModel(id, modelMat);
                 }
             }
         }
+
+        glm::quat spotLightRotation = glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+        glm::quat directionalLightRotation =
+            glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+        glm::quat pointLightRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+
+        renderer.drawLight(gl::SpotLightData(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1),
+                                             1, 100, glm::radians(10.0f), glm::radians(9.0f)));
+        renderer.drawLight(gl::DirectionalLightData(directionalLightRotation, glm::vec3(1), 0.5f));
+        renderer.drawLight(gl::PointLightData(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
 
         if (sin(t * 4) > 0)
         {

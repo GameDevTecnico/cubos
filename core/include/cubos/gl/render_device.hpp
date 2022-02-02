@@ -742,6 +742,7 @@ namespace cubos::gl
 
             /// Unmaps the constant buffer, updating it with data written to the mapped region.
             virtual void unmap() = 0;
+            /// Get hint as to what underlying storage type is being used for the buffer.
             virtual BufferStorageType getStorageTypeHint() = 0;
 
         protected:
