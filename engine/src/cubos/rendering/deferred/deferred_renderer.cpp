@@ -2,8 +2,6 @@
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
 #include <cubos/log.hpp>
 
-#include <format>
-
 #include <glm/gtx/quaternion.hpp>
 
 using namespace cubos;
