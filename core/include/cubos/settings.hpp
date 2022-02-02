@@ -26,9 +26,12 @@ namespace cubos
         /// @return The setting's value.
         std::string getString(const std::string& key, const std::string& defaultValue);
 
+        /// Merges the settings from settingsToMerge.
+        /// If a setting from settingsToMerge already exists, overrides its value. @see setString.
+        /// @param settingsToMerge The settings to be merged to this instance.
         void merge(const Settings& settingsToMerge);
 
-        static Settings global;
+        static Settings global; ///< The Global Instance of Settings.
 
     private:
         std::unordered_map<std::string, std::string> values;
