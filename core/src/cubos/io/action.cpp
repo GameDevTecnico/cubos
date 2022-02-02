@@ -13,7 +13,7 @@ Action::Action(std::string actionName)
 
 void Action::addInput(Source* source)
 {
-    source->subscribeEvents(InputManager::window);
+    source->subscribeEvents();
     this->inputSources.push_back(source);
 }
 

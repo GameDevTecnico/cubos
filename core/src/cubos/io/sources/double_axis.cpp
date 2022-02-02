@@ -18,7 +18,7 @@ DoubleAxis::DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis
     this->verticalAxis = verticalAxis;
 };
 
-void DoubleAxis::subscribeEvents(cubos::io::Window* window)
+void DoubleAxis::subscribeEvents()
 {
     if (std::holds_alternative<cubos::io::MouseAxis>(this->horizontalAxis))
     {
@@ -33,7 +33,7 @@ void DoubleAxis::subscribeEvents(cubos::io::Window* window)
     }
 };
 
-void DoubleAxis::unsubscribeEvents(cubos::io::Window* window)
+void DoubleAxis::unsubscribeEvents()
 {
     if (std::holds_alternative<cubos::io::MouseAxis>(this->horizontalAxis))
     {

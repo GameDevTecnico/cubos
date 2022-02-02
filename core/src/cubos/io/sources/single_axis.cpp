@@ -14,7 +14,7 @@ SingleAxis::SingleAxis(cubos::io::Key negativeKey, cubos::io::Key positiveKey)
     this->inputs = std::make_tuple(negativeKey, positiveKey);
 }
 
-void SingleAxis::subscribeEvents(cubos::io::Window* window)
+void SingleAxis::subscribeEvents()
 {
     if (std::holds_alternative<cubos::io::MouseAxis>(this->inputs))
     {
@@ -34,7 +34,7 @@ void SingleAxis::subscribeEvents(cubos::io::Window* window)
     }
 }
 
-void SingleAxis::unsubscribeEvents(cubos::io::Window* window)
+void SingleAxis::unsubscribeEvents()
 {
     if (std::holds_alternative<cubos::io::MouseAxis>(this->inputs))
     {

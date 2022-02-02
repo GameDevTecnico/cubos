@@ -20,8 +20,8 @@ namespace cubos::io
         DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis verticalAxis);
 
         bool isTriggered() override;
-        void subscribeEvents(cubos::io::Window* window) override;
-        void unsubscribeEvents(cubos::io::Window* window) override;
+        void subscribeEvents() override;
+        void unsubscribeEvents() override;
         Context createContext() override;
 
     private:

@@ -32,7 +32,7 @@ bool ButtonPress::isTriggered()
     return false;
 }
 
-void ButtonPress::subscribeEvents(cubos::io::Window* window)
+void ButtonPress::subscribeEvents()
 {
     if (std::holds_alternative<cubos::io::Key>(this->button))
     {
@@ -46,7 +46,7 @@ void ButtonPress::subscribeEvents(cubos::io::Window* window)
     }
 }
 
-void ButtonPress::unsubscribeEvents(cubos::io::Window* window)
+void ButtonPress::unsubscribeEvents()
 {
     if (std::holds_alternative<cubos::io::Key>(this->button))
     {

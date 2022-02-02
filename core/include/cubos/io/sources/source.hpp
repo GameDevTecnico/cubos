@@ -22,11 +22,11 @@ namespace cubos::io
     public:
         /// Subscribes this object to callbacks in the Input Manager
         /// @see unsubscribeEvents
-        virtual void subscribeEvents(cubos::io::Window* window) = 0;
+        virtual void subscribeEvents() = 0;
 
         /// Unsubscribes this object to callbacks in the Input Manager
         /// @see subscribeEvents
-        virtual void unsubscribeEvents(cubos::io::Window* window) = 0;
+        virtual void unsubscribeEvents() = 0;
 
         /// Checks if this source as been triggered since last check
         /// @return true if source was triggered, otherwise false

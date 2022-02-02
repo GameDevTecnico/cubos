@@ -16,8 +16,8 @@ namespace cubos::io
         SingleAxis(cubos::io::MouseAxis axis);
         SingleAxis(cubos::io::Key negativeKey, cubos::io::Key positiveKey);
         bool isTriggered() override;
-        void subscribeEvents(cubos::io::Window* window) override;
-        void unsubscribeEvents(cubos::io::Window* window) override;
+        void subscribeEvents() override;
+        void unsubscribeEvents() override;
         Context createContext() override;
 
     private:

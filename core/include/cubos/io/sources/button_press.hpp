@@ -38,11 +38,11 @@ namespace cubos::io
 
         /// Subscribes this object to callbacks in the Input Manager
         /// @see unsubscribeEvents
-        void subscribeEvents(cubos::io::Window* window) override;
+        void subscribeEvents() override;
 
         /// Unsubscribes this object to callbacks in the Input Manager
         /// @see subscribeEvents
-        void unsubscribeEvents(cubos::io::Window* window) override;
+        void unsubscribeEvents() override;
 
         /// Creates the context related to this Button Press
         /// @return context created by this Button Press
