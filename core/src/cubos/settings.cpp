@@ -2,29 +2,22 @@
 
 using namespace cubos;
 
-Settings& Settings::getInstance()
-{
-    static Settings instance;
-    return instance;
-}
+Settings Settings::global = Settings();
 
 void Settings::clear()
 {
-    auto& settings = Settings::getInstance();
-    settings.values.clear();
+    this->values.clear();
 }
 
 void Settings::setString(const std::string& key, const std::string& value)
 {
-    auto& settings = Settings::getInstance();
-    settings.values[key] = value;
+    this->values[key] = value;
 }
 
 std::string Settings::getString(const std::string& key, const std::string& defaultValue)
 {
-    auto& settings = Settings::getInstance();
-    if (settings.values.count(key) == 0)
+    if (this->values.count(key) == 0)
         return defaultValue;
 
-    return settings.values[key];
+    return this->values[key];
 }
