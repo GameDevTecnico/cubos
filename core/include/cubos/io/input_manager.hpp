@@ -16,22 +16,41 @@
 
 namespace cubos::io
 {
-
+    /// InputManager is used to control the flow between Sources and the gameplay logic.
+    /// Handles actions managment and callbacks.
+    /// @see Actions
     class InputManager
     {
     public:
-        static cubos::io::Window* window;
-        static std::map<std::string, std::shared_ptr<Action>> actions;
+        static cubos::io::Window* window;                              ///< Window associated with this Input Manager
+        static std::map<std::string, std::shared_ptr<Action>> actions; ///< Mapping of all registered Actions
 
-        static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> keyDownCallbacks;
-        static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> keyUpCallbacks;
-        static std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> mouseButtonDownCallbacks;
-        static std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> mouseButtonUpCallbacks;
-        static std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>> mouseAxisCallbacks;
+        static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>>
+            keyDownCallbacks; ///< Mapping of all key down Callbacks
+        static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>>
+            keyUpCallbacks; ///< Mapping of all key up Callbacks
+        static std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>>
+            mouseButtonDownCallbacks; ///< Mapping of all button down Callbacks
+        static std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>>
+            mouseButtonUpCallbacks; ///< Mapping of all button up Callbacks
+        static std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>>
+            mouseAxisCallbacks; ///< Mapping of all mouse axis Callbacks
 
+        /// Associates a window to this InputManager. An InputManager can only be associated to one window at once
+        /// @param window the window to assciate this InputManager to
         static void init(cubos::io::Window* window);
+
+        /// Creates an action with a given name
+        /// @param name the name of the Action to be created
+        /// @return A pointer to the created action
         static std::shared_ptr<Action> createAction(std::string name);
+
+        /// Returns an Action with a given name
+        /// @param name the name of the Action to be returned
+        /// @return A pointer to the Action with the given name or null if no Action with the given name exists.
         static std::shared_ptr<Action> getAction(std::string name);
+
+        /// Calls the processSources method in all registered Actions
         static void processActions();
 
         static cubos::Event<>::ID registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key)
