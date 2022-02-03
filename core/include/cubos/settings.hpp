@@ -3,6 +3,8 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <cubos/memory/serializer.hpp>
+#include <cubos/memory/deserializer.hpp>
 
 namespace cubos
 {
@@ -32,6 +34,14 @@ namespace cubos
         void merge(const Settings& settingsToMerge);
 
         static Settings global; ///< The Global Instance of Settings.
+
+        /// Serializes the settings.
+        /// @param serializer The serializer to use.
+        void serialize(cubos::memory::Serializer& serializer) const;
+
+        /// Deserializes the settings.
+        /// @param deserializer The deserializer to use.
+        void deserialize(cubos::memory::Deserializer& deserializer);
 
     private:
         std::unordered_map<std::string, std::string> values;
