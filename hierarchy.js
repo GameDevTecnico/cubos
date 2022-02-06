@@ -1,6 +1,7 @@
 var hierarchy =
 [
     [ "cubos::data::Archive", "classcubos_1_1data_1_1Archive.html", [
+      [ "cubos::data::EmbeddedArchive", "classcubos_1_1data_1_1EmbeddedArchive.html", null ],
       [ "cubos::data::STDArchive", "classcubos_1_1data_1_1STDArchive.html", null ]
     ] ],
     [ "cubos::gl::impl::BlendState", "classcubos_1_1gl_1_1impl_1_1BlendState.html", null ],
@@ -10,6 +11,7 @@ var hierarchy =
     [ "cubos::gl::ConstantBufferStructure", "structcubos_1_1gl_1_1ConstantBufferStructure.html", null ],
     [ "cubos::gl::impl::CubeMap", "classcubos_1_1gl_1_1impl_1_1CubeMap.html", null ],
     [ "cubos::gl::CubeMapDesc", "structcubos_1_1gl_1_1CubeMapDesc.html", null ],
+    [ "cubos::data::EmbeddedArchive::Data", "structcubos_1_1data_1_1EmbeddedArchive_1_1Data.html", null ],
     [ "cubos::gl::Debug", "classcubos_1_1gl_1_1Debug.html", null ],
     [ "cubos::gl::DepthStencilStateDesc::Depth", "structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Depth.html", null ],
     [ "cubos::gl::impl::DepthStencilState", "classcubos_1_1gl_1_1impl_1_1DepthStencilState.html", null ],
@@ -20,6 +22,7 @@ var hierarchy =
     [ "enable_shared_from_this", null, [
       [ "cubos::data::File", "classcubos_1_1data_1_1File.html", null ]
     ] ],
+    [ "cubos::data::EmbeddedArchive::Data::Entry", "structcubos_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html", null ],
     [ "cubos::Event< TArgs >", "classcubos_1_1Event.html", null ],
     [ "cubos::Event< glm::ivec2 >", "classcubos_1_1Event.html", null ],
     [ "cubos::Event< Key >", "classcubos_1_1Event.html", null ],

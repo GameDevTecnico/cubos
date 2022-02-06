@@ -101,8 +101,9 @@ Inheritance diagram for cubos::data::Archive:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcubos_1_1data_1_1Archive__inherit__graph.png" border="0" usemap="#cubos_1_1data_1_1Archive_inherit__map" alt="Inheritance graph"/></div>
 <map name="cubos_1_1data_1_1Archive_inherit__map" id="cubos_1_1data_1_1Archive_inherit__map">
-<area shape="rect" title=" " alt="" coords="18,5,173,32"/>
-<area shape="rect" href="classcubos_1_1data_1_1STDArchive.html" title=" " alt="" coords="5,80,185,107"/>
+<area shape="rect" title=" " alt="" coords="151,5,306,32"/>
+<area shape="rect" href="classcubos_1_1data_1_1EmbeddedArchive.html" title="Archive implementation used to load data embedded in the executable." alt="" coords="5,80,228,107"/>
+<area shape="rect" href="classcubos_1_1data_1_1STDArchive.html" title=" " alt="" coords="252,80,432,107"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -185,7 +186,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The identifier of the file, or 0 if the file could not be created. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a5316f3b74fce8c03ec4389e80a2eb9b5">cubos::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1EmbeddedArchive.html#ab20bca82e313d8ec6240da901e682de6">cubos::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a5316f3b74fce8c03ec4389e80a2eb9b5">cubos::data::STDArchive</a>.</p>
 
 </div>
 </div>
@@ -220,7 +221,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the file was destroyed, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a9998e724a0b3aba3fc0a81ef11f83021">cubos::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1EmbeddedArchive.html#ae89ed2da4a5f5154e17221a7124d93a0">cubos::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a9998e724a0b3aba3fc0a81ef11f83021">cubos::data::STDArchive</a>.</p>
 
 </div>
 </div>
@@ -255,7 +256,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The identifier of the first child, or 0 if the file is not a directory or if it is empty. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a3e3934a0b2834954730c4d5bdba894d5">cubos::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1EmbeddedArchive.html#a2aaae97444c6391eacc7a2077bbe2bce">cubos::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a3e3934a0b2834954730c4d5bdba894d5">cubos::data::STDArchive</a>.</p>
 
 </div>
 </div>
@@ -290,7 +291,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The name of the file. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1data_1_1STDArchive.html#acca5c19bf1de6534fadbe5dbf88bad8b">cubos::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1EmbeddedArchive.html#a39621325a18a02750a1af093599c04bf">cubos::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1data_1_1STDArchive.html#acca5c19bf1de6534fadbe5dbf88bad8b">cubos::data::STDArchive</a>.</p>
 
 </div>
 </div>
@@ -325,7 +326,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The identifier of the parent file, or 0 if the file is the root file. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a9f2ec938e17e72a64a6225126b344c33">cubos::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1EmbeddedArchive.html#a61e3d627b5968072c4ae3bd1c83db131">cubos::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a9f2ec938e17e72a64a6225126b344c33">cubos::data::STDArchive</a>.</p>
 
 </div>
 </div>
@@ -360,7 +361,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The identifier of the next sibling, or 0 if the file is the last child of its parent. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a1640159edd4c0c690ed3bd53f47fc02f">cubos::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1EmbeddedArchive.html#a7ee1db006387a216f6717dd6c4574912">cubos::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a1640159edd4c0c690ed3bd53f47fc02f">cubos::data::STDArchive</a>.</p>
 
 </div>
 </div>
@@ -395,7 +396,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the file is a directory, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1data_1_1STDArchive.html#aadd2ebb795f0827f552239c94c1e10be">cubos::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1EmbeddedArchive.html#ad0904d2e6619795eeb507cd579257a98">cubos::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1data_1_1STDArchive.html#aadd2ebb795f0827f552239c94c1e10be">cubos::data::STDArchive</a>.</p>
 
 </div>
 </div>
@@ -423,7 +424,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </div><div class="memdoc">
 <p>Checks if the archive is read-only. </p><dl class="section return"><dt>Returns</dt><dd>True if the archive is read-only, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a30b9e220fe04fe69310760cfd71a6d2c">cubos::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1EmbeddedArchive.html#a83e535718d0a93060918a09290f7c7aa">cubos::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1data_1_1STDArchive.html#a30b9e220fe04fe69310760cfd71a6d2c">cubos::data::STDArchive</a>.</p>
 
 </div>
 </div>
@@ -469,7 +470,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The file stream, or nullptr if the file could not be opened. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1data_1_1STDArchive.html#af0f261d62c46dbb9b20fccdfbb7f5e94">cubos::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1data_1_1EmbeddedArchive.html#a5963e6bb6e0dccc66c01877fa53fe8b1">cubos::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1data_1_1STDArchive.html#af0f261d62c46dbb9b20fccdfbb7f5e94">cubos::data::STDArchive</a>.</p>
 
 </div>
 </div>

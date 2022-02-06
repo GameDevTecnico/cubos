@@ -3,6 +3,7 @@ var annotated_dup =
     [ "cubos", null, [
       [ "data", null, [
         [ "Archive", "classcubos_1_1data_1_1Archive.html", "classcubos_1_1data_1_1Archive" ],
+        [ "EmbeddedArchive", "classcubos_1_1data_1_1EmbeddedArchive.html", "classcubos_1_1data_1_1EmbeddedArchive" ],
         [ "File", "classcubos_1_1data_1_1File.html", "classcubos_1_1data_1_1File" ],
         [ "FileStream", "classcubos_1_1data_1_1FileStream.html", "classcubos_1_1data_1_1FileStream" ],
         [ "FileSystem", "classcubos_1_1data_1_1FileSystem.html", "classcubos_1_1data_1_1FileSystem" ],
