@@ -180,11 +180,9 @@ inline void DeferredRenderer::createShaderPipelines()
                 vec4 albedo = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
                 uint m = texture(material, fraguv).r;
                 if (m == 0u) {
-                    albedo += vec4(0);
+                    discard;
                 }
-                else {
-                    albedo += materials[m - 1u].color;
-                }
+                albedo += materials[m - 1u].color;
                 vec3 lighting = vec3(0);
                 vec3 fragPos = texture(position, fraguv).xyz;
                 vec3 fragNormal = texture(normal, fraguv).xyz;
@@ -299,11 +297,9 @@ inline void DeferredRenderer::createShaderPipelines()
                 vec4 albedo = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
                 uint m = texture(material, fraguv).r;
                 if (m == 0u) {
-                    albedo += vec4(0);
+                    discard;
                 }
-                else {
-                    albedo += materials[m - 1u].color;
-                }
+                albedo += materials[m - 1u].color;
                 vec3 lighting = vec3(0);
                 vec3 fragPos = texture(position, fraguv).xyz;
                 vec3 fragNormal = texture(normal, fraguv).xyz;
