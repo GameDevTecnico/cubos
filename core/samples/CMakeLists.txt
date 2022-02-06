@@ -6,6 +6,7 @@ set(CORE_SAMPLES_SOURCES
     "render_device.cpp"
     "debug_renderer.cpp"
     "serialization.cpp"
+    "embedded_archive.cpp"
 )
 
 # For each sample file, create a target named after the file but without the
