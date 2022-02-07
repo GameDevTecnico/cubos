@@ -32,26 +32,10 @@ void Settings::merge(const Settings& settingsToMerge)
 
 void Settings::serialize(cubos::memory::Serializer& serializer) const
 {
-    serializer.beginDictionary(this->values.size(), "settings");
-    for (auto entry : this->values)
-    {
-        serializer.write(entry.first, "key");
-        serializer.write(entry.second, "value");
-    }
-    serializer.endDictionary();
+    serializer.write(this->values, "values");
 }
 
 void Settings::deserialize(cubos::memory::Deserializer& deserializer)
 {
-    size_t settings_size = deserializer.beginDictionary();
-    for (int i = 0; i < settings_size; i++)
-    {
-        std::string setting_key;
-        std::string setting_value;
-        deserializer.read(setting_key);
-        deserializer.read(setting_value);
-
-        this->setString(setting_key, setting_value);
-    }
-    deserializer.endDictionary();
+    deserializer.read(this->values);
 }
