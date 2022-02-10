@@ -82,7 +82,7 @@ namespace cubos::rendering
         // Textures
         gl::Texture2D positionTex;
         gl::Texture2D normalTex;
-        gl::Texture2D colorTex;
+        gl::Texture2D materialTex;
         gl::Texture2D depthTex;
         gl::Texture2D outputTexture1, outputTexture2;
         // endregion

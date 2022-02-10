@@ -26,19 +26,22 @@ cubos::rendering::CopyPass::CopyPass(cubos::io::Window& window) : PostProcessing
 
             in vec2 fraguv;
 
-            uniform sampler2D input;
+            uniform sampler2D inputTex;
 
             out vec4 color;
 
             void main()
             {
-                color = texture(input, fraguv);
+                color = vec4(texture(inputTex, fraguv).rgb,1);
+                //color += vec4(fraguv,0,1);
             }
         )");
 
     pipeline = renderDevice.createShaderPipeline(vertex, pixel);
 
-    inputTexBP = pipeline->getBindingPoint("input");
+    renderDevice.setShaderPipeline(pipeline);
+
+    inputTexBP = pipeline->getBindingPoint("inputTex");
 
     SamplerDesc samplerDesc;
     samplerDesc.addressU = gl::AddressMode::Clamp;
@@ -89,7 +92,6 @@ void cubos::rendering::CopyPass::execute(const Renderer& renderer, gl::Texture2D
 
     renderDevice.setViewport(0, 0, sz.x, sz.y);
     renderDevice.clearColor(0, 0, 0, 0);
-    renderDevice.clearDepth(1);
 
     renderDevice.setRasterState(nullptr);
     renderDevice.setBlendState(nullptr);

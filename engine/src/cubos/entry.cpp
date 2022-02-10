@@ -4,6 +4,7 @@
 #include <cubos/gl/vertex.hpp>
 #include <cubos/gl/palette.hpp>
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
+#include <cubos/rendering/post_processing/copy_pass.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -122,6 +123,9 @@ int main(void)
 
     rendering::Renderer::ModelID id = renderer.registerModel(vertices, indices);
 
+    rendering::CopyPass pass = rendering::CopyPass(*window);
+    renderer.addPostProcessingPass(pass);
+
     glm::vec2 windowSize = window->getFramebufferSize();
     gl::CameraData mainCamera = {// glm::mat4 viewMatrix;
                                  glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
@@ -184,7 +188,7 @@ int main(void)
             renderer.setPalette(palette2ID);
         }
 
-        renderer.render(mainCamera, false);
+        renderer.render(mainCamera);
         renderer.flush();
 
         window->swapBuffers();

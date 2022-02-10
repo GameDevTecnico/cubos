@@ -137,7 +137,7 @@ inline void DeferredRenderer::createShaderPipelines()
                 uint numPointLights;
             };
 
-            out vec4 color;
+            layout(location = 0) out vec3 color;
 
             float remap(float value, float min1, float max1, float min2, float max2) {
                 return max2 + (value - min1) * (max2 - min2) / (max1 - min1);
@@ -177,12 +177,11 @@ inline void DeferredRenderer::createShaderPipelines()
 
             void main()
             {
-                vec4 albedo = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
                 uint m = texture(material, fraguv).r;
                 if (m == 0u) {
                     discard;
                 }
-                albedo += materials[m - 1u].color;
+                vec3 albedo = materials[m - 1u].color.rgb;
                 vec3 lighting = vec3(0);
                 vec3 fragPos = texture(position, fraguv).xyz;
                 vec3 fragNormal = texture(normal, fraguv).xyz;
@@ -195,7 +194,7 @@ inline void DeferredRenderer::createShaderPipelines()
                 for (uint i = 0u; i < numPointLights; i++) {
                     lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
                 }
-                color = albedo * vec4(lighting, 1);
+                color = albedo * lighting;
                 //color += albedo;
             }
         )");
@@ -254,7 +253,7 @@ inline void DeferredRenderer::createShaderPipelines()
                 uint numPointLights;
             };
 
-            out vec4 color;
+            layout(location = 0) out vec3 color;
 
             float remap(float value, float min1, float max1, float min2, float max2) {
                 return max2 + (value - min1) * (max2 - min2) / (max1 - min1);
@@ -294,12 +293,11 @@ inline void DeferredRenderer::createShaderPipelines()
 
             void main()
             {
-                vec4 albedo = texture(material, fraguv) * texture(normal,fraguv)* texture(position, fraguv) * 0.00001f;
                 uint m = texture(material, fraguv).r;
                 if (m == 0u) {
                     discard;
                 }
-                albedo += materials[m - 1u].color;
+                vec3 albedo = materials[m - 1u].color.rgb;
                 vec3 lighting = vec3(0);
                 vec3 fragPos = texture(position, fraguv).xyz;
                 vec3 fragNormal = texture(normal, fraguv).xyz;
@@ -312,15 +310,13 @@ inline void DeferredRenderer::createShaderPipelines()
                 for (uint i = 0u; i < numPointLights; i++) {
                     lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
                 }
-                color = albedo * vec4(lighting, 1);
+                color = albedo * lighting;
                 //color += albedo;
             }
         )");
 
     smallOutputPipeline = renderDevice.createShaderPipeline(outputVertex, outputSmallPixel);
     largeOutputPipeline = renderDevice.createShaderPipeline(outputVertex, outputLargePixel);
-
-    logDebug("{}", sizeof(SpotLightData) == 6 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
 
     outputLightBlockBuffer = renderDevice.createConstantBuffer(sizeof(LightBlock), nullptr, gl::Usage::Dynamic);
 
@@ -380,7 +376,7 @@ inline void DeferredRenderer::setupFrameBuffers()
     materialTexDesc.format = TextureFormat::R16UInt;
     materialTexDesc.width = sz.x;
     materialTexDesc.height = sz.y;
-    colorTex = renderDevice.createTexture2D(materialTexDesc);
+    materialTex = renderDevice.createTexture2D(materialTexDesc);
 
     Texture2DDesc depthTexDesc;
     depthTexDesc.format = TextureFormat::Depth24Stencil8;
@@ -388,11 +384,25 @@ inline void DeferredRenderer::setupFrameBuffers()
     depthTexDesc.height = sz.y;
     depthTex = renderDevice.createTexture2D(depthTexDesc);
 
+    Texture2DDesc outputTexDesc;
+    outputTexDesc.format = TextureFormat::RGB32Float;
+    outputTexDesc.width = sz.x;
+    outputTexDesc.height = sz.y;
+    outputTexture1 = renderDevice.createTexture2D(outputTexDesc);
+    outputTexture2 = renderDevice.createTexture2D(outputTexDesc);
+
+    FramebufferDesc outputFramebufferDesc;
+    outputFramebufferDesc.targetCount = 1;
+    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture1);
+    outputFramebuffer1 = renderDevice.createFramebuffer(outputFramebufferDesc);
+    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture2);
+    outputFramebuffer2 = renderDevice.createFramebuffer(outputFramebufferDesc);
+
     FramebufferDesc gBufferDesc;
     gBufferDesc.targetCount = 3;
     gBufferDesc.targets[0].setTexture2DTarget(positionTex);
     gBufferDesc.targets[1].setTexture2DTarget(normalTex);
-    gBufferDesc.targets[2].setTexture2DTarget(colorTex);
+    gBufferDesc.targets[2].setTexture2DTarget(materialTex);
     gBufferDesc.depthStencil = depthTex;
 
     gBuffer = renderDevice.createFramebuffer(gBufferDesc);
@@ -429,7 +439,7 @@ inline void DeferredRenderer::setupFrameBuffers()
     smallOutputNormalBP->bind(normalSampler);
 
     smallOutputMaterialBP = smallOutputPipeline->getBindingPoint("material");
-    smallOutputMaterialBP->bind(colorTex);
+    smallOutputMaterialBP->bind(materialTex);
     smallOutputMaterialBP->bind(materialSampler);
 
     smallOutputPaletteBP = smallOutputPipeline->getBindingPoint("palette");
@@ -445,26 +455,10 @@ inline void DeferredRenderer::setupFrameBuffers()
     largeOutputNormalBP->bind(normalSampler);
 
     largeOutputMaterialBP = largeOutputPipeline->getBindingPoint("material");
-    largeOutputMaterialBP->bind(colorTex);
+    largeOutputMaterialBP->bind(materialTex);
     largeOutputMaterialBP->bind(materialSampler);
 
     largeOutputPaletteBP = largeOutputPipeline->getBindingPoint("palette");
-
-    // Post Processing Targets
-
-    Texture2DDesc outputTexDesc;
-    outputTexDesc.format = TextureFormat::RGBA32Float;
-    outputTexDesc.width = sz.x;
-    outputTexDesc.height = sz.y;
-    outputTexture1 = renderDevice.createTexture2D(positionTexDesc);
-    outputTexture2 = renderDevice.createTexture2D(positionTexDesc);
-
-    FramebufferDesc outputFramebufferDesc;
-    outputFramebufferDesc.targetCount = 1;
-    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture1);
-    outputFramebuffer1 = renderDevice.createFramebuffer(outputFramebufferDesc);
-    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture2);
-    outputFramebuffer2 = renderDevice.createFramebuffer(outputFramebufferDesc);
 }
 
 inline void DeferredRenderer::createRenderDeviceStates()

@@ -6,7 +6,7 @@
 
 namespace cubos::rendering
 {
-    class CopyPass : PostProcessingPass
+    class CopyPass : public PostProcessingPass
     {
     private:
         gl::ShaderPipeline pipeline;
