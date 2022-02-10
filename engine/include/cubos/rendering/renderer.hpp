@@ -2,6 +2,8 @@
 #define CUBOS_RENDERING_RENDERER_HPP
 
 #include <vector>
+#include <functional>
+#include <list>
 
 #include <cubos/gl/render_device.hpp>
 #include <cubos/gl/vertex.hpp>
@@ -9,9 +11,12 @@
 #include <cubos/gl/camera_data.hpp>
 #include <cubos/gl/light.hpp>
 #include <cubos/io/window.hpp>
+#include <cubos/rendering/post_processing/post_processing_pass.hpp>
 
 namespace cubos::rendering
 {
+    class PostProcessingPass;
+
     class Renderer
     {
     protected:
@@ -38,6 +43,8 @@ namespace cubos::rendering
         io::Window& window;
         gl::RenderDevice& renderDevice;
 
+        std::list<std::reference_wrapper<const PostProcessingPass>> postProcessingPasses;
+
     public:
         using ModelID = size_t;
         using PaletteID = size_t;
@@ -55,6 +62,7 @@ namespace cubos::rendering
                                       std::vector<uint32_t>& indices) = 0;
         virtual PaletteID registerPalette(const cubos::gl::Palette& palette);
         virtual void setPalette(PaletteID paletteID);
+        virtual void addPostProcessingPass(const PostProcessingPass& pass);
         virtual void render(const cubos::gl::CameraData& camera, bool usePostProcessing = true) = 0;
         virtual void drawModel(ModelID modelID, glm::mat4 modelMat);
         virtual void drawLight(const cubos::gl::SpotLightData& light);

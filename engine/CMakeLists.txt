@@ -8,12 +8,14 @@ set(CUBOS_ENGINE_SOURCE
 
     src/cubos/entry.cpp
     src/cubos/rendering/deferred/deferred_renderer.cpp
-    )
+    src/cubos/rendering/post_processing/post_processing_pass.cpp
+    src/cubos/rendering/post_processing/copy_pass.cpp)
 
 set(CUBOS_ENGINE_INCLUDE
     include/cubos/rendering/renderer.hpp
     include/cubos/rendering/deferred/deferred_renderer.hpp
-    )
+    include/cubos/rendering/post_processing/post_processing_pass.hpp
+    include/cubos/rendering/post_processing/copy_pass.hpp)
 
 # Create cubos engine
 

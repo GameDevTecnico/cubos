@@ -368,7 +368,6 @@ inline void DeferredRenderer::setupFrameBuffers()
     positionTexDesc.format = TextureFormat::RGB32Float;
     positionTexDesc.width = sz.x;
     positionTexDesc.height = sz.y;
-    // positionTexDesc.data[0] = nullptr;
     positionTex = renderDevice.createTexture2D(positionTexDesc);
 
     Texture2DDesc normalTexDesc;
@@ -450,6 +449,22 @@ inline void DeferredRenderer::setupFrameBuffers()
     largeOutputMaterialBP->bind(materialSampler);
 
     largeOutputPaletteBP = largeOutputPipeline->getBindingPoint("palette");
+
+    // Post Processing Targets
+
+    Texture2DDesc outputTexDesc;
+    outputTexDesc.format = TextureFormat::RGBA32Float;
+    outputTexDesc.width = sz.x;
+    outputTexDesc.height = sz.y;
+    outputTexture1 = renderDevice.createTexture2D(positionTexDesc);
+    outputTexture2 = renderDevice.createTexture2D(positionTexDesc);
+
+    FramebufferDesc outputFramebufferDesc;
+    outputFramebufferDesc.targetCount = 1;
+    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture1);
+    outputFramebuffer1 = renderDevice.createFramebuffer(outputFramebufferDesc);
+    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture2);
+    outputFramebuffer2 = renderDevice.createFramebuffer(outputFramebufferDesc);
 }
 
 inline void DeferredRenderer::createRenderDeviceStates()
@@ -582,7 +597,17 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
         break;
     }
 
-    renderDevice.setFramebuffer(camera.target);
+    bool doPostProcessing = usePostProcessing && !postProcessingPasses.empty();
+
+    if (doPostProcessing)
+    {
+        renderDevice.setFramebuffer(outputFramebuffer1);
+    }
+    else
+    {
+        renderDevice.setFramebuffer(camera.target);
+    }
+
     renderDevice.setViewport(0, 0, sz.x, sz.y);
     renderDevice.clearColor(0, 0, 0, 0);
     renderDevice.clearDepth(1);
@@ -594,6 +619,24 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
     renderDevice.setVertexArray(screenVertexArray);
     renderDevice.setIndexBuffer(screenIndexBuffer);
     renderDevice.drawTrianglesIndexed(0, 6);
+
+    if (doPostProcessing)
+    {
+        auto last = std::prev(postProcessingPasses.end());
+        for (auto it = postProcessingPasses.begin(); it != last; it++)
+        {
+            it->get().execute(*this, outputTexture1, outputFramebuffer2);
+
+            // swap input and output
+            auto tempTex = outputTexture1;
+            outputTexture1 = outputTexture2;
+            outputTexture2 = tempTex;
+            auto tempFB = outputFramebuffer1;
+            outputFramebuffer1 = outputFramebuffer2;
+            outputFramebuffer2 = tempFB;
+        }
+        last->get().execute(*this, outputTexture1, camera.target);
+    }
 }
 
 void DeferredRenderer::flush()

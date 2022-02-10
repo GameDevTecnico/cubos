@@ -66,6 +66,11 @@ void Renderer::setPalette(PaletteID paletteID)
     currentPalette = palettes[paletteID];
 }
 
+void Renderer::addPostProcessingPass(const PostProcessingPass& pass)
+{
+    postProcessingPasses.emplace_back(pass);
+}
+
 void Renderer::drawModel(ModelID modelID, glm::mat4 modelMat)
 {
     if (modelID > models.size() - 1)

@@ -77,12 +77,14 @@ namespace cubos::rendering
 
         // Framebuffers
         gl::Framebuffer gBuffer;
+        gl::Framebuffer outputFramebuffer1, outputFramebuffer2;
 
         // Textures
         gl::Texture2D positionTex;
         gl::Texture2D normalTex;
         gl::Texture2D colorTex;
         gl::Texture2D depthTex;
+        gl::Texture2D outputTexture1, outputTexture2;
         // endregion
 
         // region outputBuffer
