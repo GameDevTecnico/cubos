@@ -85,3 +85,59 @@ void InputManager::init(cubos::io::Window* window)
     // InputManager::window->onMouseUp.registerCallback(handleMouseUp);
     InputManager::window->onMouseMoved.registerCallback(handleMouseAxis);
 }
+
+cubos::Event<>::ID InputManager::registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key)
+{
+    if (!InputManager::keyDownCallbacks.contains(key))
+    {
+        InputManager::keyDownCallbacks[key] = std::make_shared<cubos::Event<>>();
+    }
+    return InputManager::keyDownCallbacks[key]->registerCallback(callback);
+}
+
+void InputManager::unregisterKeyDownCallback(cubos::Event<>::ID callbackID, cubos::io::Key key)
+{
+    if (!InputManager::keyDownCallbacks.contains(key))
+    {
+        return;
+    }
+    InputManager::keyDownCallbacks[key]->unregisterCallback(callbackID);
+}
+
+cubos::Event<>::ID InputManager::registerMouseButtonDownCallback(std::function<void(void)> callback,
+                                                                 cubos::io::MouseButton mouseButton)
+{
+    if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
+    {
+        InputManager::mouseButtonDownCallbacks[mouseButton] = std::make_shared<cubos::Event<>>();
+    }
+    return InputManager::mouseButtonDownCallbacks[mouseButton]->registerCallback(callback);
+}
+
+void InputManager::unregisterMouseButtonDownCallback(cubos::Event<>::ID callbackID, cubos::io::MouseButton mouseButton)
+{
+    if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
+    {
+        return;
+    }
+    InputManager::mouseButtonDownCallbacks[mouseButton]->unregisterCallback(callbackID);
+}
+
+cubos::Event<float>::ID InputManager::registerMouseAxisCallback(std::function<void(float)> callback,
+                                                                cubos::io::MouseAxis mouseAxis)
+{
+    if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
+    {
+        InputManager::mouseAxisCallbacks[mouseAxis] = std::make_shared<cubos::Event<float>>();
+    }
+    return InputManager::mouseAxisCallbacks[mouseAxis]->registerCallback(callback);
+}
+
+void InputManager::unregisterMouseAxisCallback(cubos::Event<float>::ID callbackID, cubos::io::MouseAxis mouseAxis)
+{
+    if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
+    {
+        return;
+    }
+    InputManager::mouseAxisCallbacks[mouseAxis]->unregisterCallback(callbackID);
+}
