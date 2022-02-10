@@ -19,6 +19,27 @@ namespace cubos
     /// @tparam TArgs The argument types of the callback functions.
     template <typename... TArgs> class Event
     {
+    private:
+        class MethodCallback
+        {
+        public:
+            virtual void call(TArgs...) = 0;
+        };
+
+        template <class TObj> class ObjectMethodCallback : public MethodCallback
+        {
+        public:
+            ObjectMethodCallback(TObj* obj, void (TObj::*callback)(TArgs...)) : obj(obj), callback(callback)
+            {
+            }
+            TObj* obj;
+            void (TObj::*callback)(TArgs...);
+            virtual void call(TArgs... args) override
+            {
+                (obj->*callback)(args...);
+            }
+        };
+
     public:
         using Callback = std::function<void(TArgs...)>; ///< Callback type.
 
