@@ -19,6 +19,38 @@ namespace cubos
     /// @tparam TArgs The argument types of the callback functions.
     template <typename... TArgs> class Event
     {
+    public:
+        using Callback = std::function<void(TArgs...)>; ///< Callback type.
+
+        using ID = size_t; ///< Callback identifier.
+
+        /// Registers a new callback.
+        /// @param callback The callback called when the event is fired.
+        /// @return The callback ID, used for unregistering the callback later on.
+        /// @see unregisterCallback.
+        ID registerCallback(Callback callback);
+
+        /// Unregisters a callback.
+        /// @param id The ID returned when the callback was registered.
+        /// @see registerCallback.
+        void unregisterCallback(ID id);
+
+        /// Registers a callback.
+        /// @param obj The instance associated with the method callback that should be called when the event is fired.
+        /// @param callback The method callback when the event is fired.
+        /// @see unregisterCallback.
+        template <class TObj> void registerCallback(TObj* obj, void (TObj::*callback)(TArgs...));
+
+        /// Unregisters a callback.
+        /// @param obj The instance associated with the method callback that should be unregistered.
+        /// @param callback The method callback that should be unregistred.
+        /// @see registerCallback.
+        template <class TObj> void unregisterCallback(TObj* obj, void (TObj::*callback)(TArgs...));
+
+        /// Fires the event, calling all the callbacks with the passed arguments.
+        /// @param args Event arguments.
+        void fire(TArgs... args) const;
+
     private:
         class MethodCallback
         {
@@ -40,56 +72,6 @@ namespace cubos
             }
         };
 
-    public:
-        using Callback = std::function<void(TArgs...)>; ///< Callback type.
-
-        using ID = size_t; ///< Callback identifier.
-
-        /// Registers a new callback.
-        /// @param callback The callback called when the event is fired.
-        /// @return The callback ID, used for unregistering the callback later on.
-        /// @see unregisterCallback.
-        ID registerCallback(Callback callback);
-
-        /// Unregisters a callback.
-        /// @param id The ID returned when the callback was registered.
-        /// @see registerCallback.
-        void unregisterCallback(ID id);
-
-        template <class TObj> void registerCallback(TObj* obj, void (TObj::*callback)(TArgs...))
-        {
-            auto lock = std::lock_guard<std::mutex>(this->mutex);
-            auto cb = new ObjectMethodCallback<TObj>(obj, callback);
-            this->methodCallbacks.push_back(cb);
-        }
-
-        template <class TObj> void unregisterCallback(TObj* obj, void (TObj::*callback)(TArgs...))
-        {
-            auto lock = std::lock_guard<std::mutex>(this->mutex);
-            auto it = methodCallbacks.begin();
-            for (; it < methodCallbacks.end(); it++)
-            {
-                MethodCallback& ref = **it;
-                if (typeid(ref) == typeid(ObjectMethodCallback<TObj>))
-                {
-                    auto cb = static_cast<ObjectMethodCallback<TObj>*>(*it);
-                    if (cb->obj == obj && cb->callback == callback)
-                        break;
-                }
-            }
-            if (it != methodCallbacks.end())
-            {
-                auto cb = *it;
-                methodCallbacks.erase(it);
-                delete cb;
-            }
-        }
-
-        /// Fires the event, calling all the callbacks with the passed arguments.
-        /// @param args Event arguments.
-        void fire(TArgs... args) const;
-
-    private:
         mutable std::mutex mutex;
         std::vector<Callback> callbacks;
         std::vector<MethodCallback*> methodCallbacks;
@@ -119,6 +101,40 @@ namespace cubos
             if (callback)
                 callback->call(args...);
     }
+
+    template <typename... TArgs>
+    template <typename TObj>
+    void Event<TArgs...>::registerCallback(TObj* obj, void (TObj::*callback)(TArgs...))
+    {
+        auto lock = std::lock_guard<std::mutex>(this->mutex);
+        auto cb = new ObjectMethodCallback<TObj>(obj, callback);
+        this->methodCallbacks.push_back(cb);
+    }
+
+    template <typename... TArgs>
+    template <typename TObj>
+    void Event<TArgs...>::unregisterCallback(TObj* obj, void (TObj::*callback)(TArgs...))
+    {
+        auto lock = std::lock_guard<std::mutex>(this->mutex);
+        auto it = methodCallbacks.begin();
+        for (; it < methodCallbacks.end(); it++)
+        {
+            MethodCallback& ref = **it;
+            if (typeid(ref) == typeid(ObjectMethodCallback<TObj>))
+            {
+                auto cb = static_cast<ObjectMethodCallback<TObj>*>(*it);
+                if (cb->obj == obj && cb->callback == callback)
+                    break;
+            }
+        }
+        if (it != methodCallbacks.end())
+        {
+            auto cb = *it;
+            methodCallbacks.erase(it);
+            delete cb;
+        }
+    }
+
 } // namespace cubos
 
 #endif // CUBOS_EVENT_HPP
