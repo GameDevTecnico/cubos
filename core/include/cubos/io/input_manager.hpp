@@ -138,8 +138,7 @@ namespace cubos::io
         static void handleMouseAxis(glm::ivec2 coordinates);
     };
 
-    template <class T>
-    static void InputManager::registerKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
+    template <class T> void InputManager::registerKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
     {
         if (!InputManager::keyDownCallbacks.contains(key))
         {
@@ -148,8 +147,7 @@ namespace cubos::io
         InputManager::keyDownCallbacks[key]->registerCallback<T>(obj, callback);
     }
 
-    template <class T>
-    static void InputManager::unregisterKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
+    template <class T> void InputManager::unregisterKeyDownCallback(T* obj, void (T::*callback)(), cubos::io::Key key)
     {
         if (!InputManager::keyDownCallbacks.contains(key))
         {
@@ -159,8 +157,8 @@ namespace cubos::io
     }
 
     template <class T>
-    static void InputManager::registerMouseButtonDownCallback(T* obj, void (T::*callback)(),
-                                                              cubos::io::MouseButton mouseButton)
+    void InputManager::registerMouseButtonDownCallback(T* obj, void (T::*callback)(),
+                                                       cubos::io::MouseButton mouseButton)
     {
         if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
         {
@@ -170,8 +168,8 @@ namespace cubos::io
     }
 
     template <class T>
-    static void InputManager::unregisterMouseButtonDownCallback(T* obj, void (T::*callback)(),
-                                                                cubos::io::MouseButton mouseButton)
+    void InputManager::unregisterMouseButtonDownCallback(T* obj, void (T::*callback)(),
+                                                         cubos::io::MouseButton mouseButton)
     {
         if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
         {
@@ -181,8 +179,7 @@ namespace cubos::io
     }
 
     template <class T>
-    static void InputManager::registerMouseAxisCallback(T* obj, void (T::*callback)(float),
-                                                        cubos::io::MouseAxis mouseAxis)
+    void InputManager::registerMouseAxisCallback(T* obj, void (T::*callback)(float), cubos::io::MouseAxis mouseAxis)
     {
         if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
         {
@@ -192,8 +189,7 @@ namespace cubos::io
     }
 
     template <class T>
-    static void InputManager::unregisterMouseAxisCallback(T* obj, void (T::*callback)(float),
-                                                          cubos::io::MouseAxis mouseAxis)
+    void InputManager::unregisterMouseAxisCallback(T* obj, void (T::*callback)(float), cubos::io::MouseAxis mouseAxis)
     {
         if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
         {
