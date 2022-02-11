@@ -32,8 +32,7 @@ cubos::rendering::CopyPass::CopyPass(cubos::io::Window& window) : PostProcessing
 
             void main()
             {
-                color = vec4(texture(inputTex, fraguv).rgb,1);
-                //color += vec4(fraguv,0,1);
+                color = texture(inputTex, fraguv);
             }
         )");
 
