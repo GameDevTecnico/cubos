@@ -1,38 +1,20 @@
 #include <cubos/gl/util.hpp>
 
-#include <map>
-#include <functional>
-#include <utility>
-
 using namespace cubos;
 using namespace cubos::gl;
 
-Util::QuadBuffers::QuadBuffers(VertexBuffer vb, IndexBuffer ib) : vb(std::move(vb)), ib(std::move(ib))
+void gl::generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va,
+                            IndexBuffer& ib)
 {
-}
+    float screenVerts[] = {
+        -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, +1.0f, 0.0f, 1.0f, +1.0f, +1.0f, 1.0f, 1.0f, +1.0f, -1.0f, 1.0f, 0.0f,
+    };
+    VertexBuffer vb = renderDevice.createVertexBuffer(sizeof(screenVerts), screenVerts, gl::Usage::Static);
 
-void Util::getScreenQuad(RenderDevice& renderDevice, ShaderPipeline pipeline, VertexArray& va, IndexBuffer& ib)
-{
-    VertexBuffer vb;
-    if (auto it = bufferMap.find(&renderDevice); it != bufferMap.end())
-    {
-        vb = it->second.vb;
-        ib = it->second.ib;
-    }
-    else
-    {
-        float screenVerts[] = {
-            -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, +1.0f, 0.0f, 1.0f, +1.0f, +1.0f, 1.0f, 1.0f, +1.0f, -1.0f, 1.0f, 0.0f,
-        };
-        vb = renderDevice.createVertexBuffer(sizeof(screenVerts), screenVerts, gl::Usage::Static);
-
-        unsigned int screenIndices[] = {
-            0, 1, 2, 2, 3, 0,
-        };
-        ib = renderDevice.createIndexBuffer(sizeof(screenIndices), screenIndices, gl::IndexFormat::UInt,
-                                            gl::Usage::Static);
-        bufferMap.try_emplace(&renderDevice, vb, ib);
-    }
+    unsigned int screenIndices[] = {
+        0, 1, 2, 2, 3, 0,
+    };
+    ib = renderDevice.createIndexBuffer(sizeof(screenIndices), screenIndices, gl::IndexFormat::UInt, gl::Usage::Static);
 
     VertexArrayDesc screenVADesc;
     screenVADesc.elementCount = 2;
