@@ -19,6 +19,7 @@ namespace cubos::io
     /// InputManager is used to control the flow between Sources and the gameplay logic.
     /// Handles actions managment and callbacks.
     /// @see Actions
+    /// @see Sources
     class InputManager
     {
     public:

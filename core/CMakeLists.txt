@@ -42,6 +42,7 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/io/input_manager.cpp"
     "src/cubos/io/action.cpp"
+    "src/cubos/io/context.cpp"
 
     "src/cubos/io/sources/button_press.cpp"
     "src/cubos/io/sources/single_axis.cpp"
