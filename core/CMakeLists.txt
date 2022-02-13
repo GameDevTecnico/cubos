@@ -34,6 +34,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/data/file.cpp"
     "src/cubos/data/file_system.cpp"
     "src/cubos/data/std_archive.cpp"
+    "src/cubos/data/embedded_archive.cpp"
 
     "src/cubos/io/window.cpp"
     "src/cubos/io/glfw_window.hpp"
@@ -46,7 +47,9 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/gl/material.cpp"
     "src/cubos/gl/palette.cpp"
     "src/cubos/gl/grid.cpp"
-    src/cubos/gl/light.cpp)
+    "src/cubos/gl/light.cpp")
+    "src/cubos/gl/util.cpp"
+    )
 
 set(CUBOS_CORE_INCLUDE
     "include/cubos/log.hpp"
@@ -66,6 +69,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/data/file_system.hpp"
     "include/cubos/data/archive.hpp"
     "include/cubos/data/std_archive.hpp"
+    "include/cubos/data/embedded_archive.hpp"
 
     "include/cubos/memory/stream.hpp"
     "include/cubos/memory/serialization_map.hpp"
@@ -84,6 +88,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/vertex.hpp"
     "include/cubos/gl/camera_data.hpp"
     "include/cubos/gl/light.hpp"
+    "include/cubos/gl/util.hpp"
     )
 
 # Create core library

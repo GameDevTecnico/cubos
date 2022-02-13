@@ -597,6 +597,8 @@ namespace cubos::gl
         /// Gets a runtime property of the render device.
         /// @param prop Property name.
         virtual int getProperty(Property prop) = 0;
+
+
     };
 
     /// Abstract gl types are defined inside this namespace, they should be used (derived) only in render device
