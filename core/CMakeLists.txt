@@ -47,7 +47,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/gl/material.cpp"
     "src/cubos/gl/palette.cpp"
     "src/cubos/gl/grid.cpp"
-    "src/cubos/gl/light.cpp")
+    "src/cubos/gl/light.cpp"
     "src/cubos/gl/util.cpp"
     )
 
