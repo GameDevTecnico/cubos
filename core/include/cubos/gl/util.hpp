@@ -18,7 +18,7 @@ namespace cubos::gl
             VertexBuffer vb;
             IndexBuffer ib;
         };
-        static std::map<std::reference_wrapper<RenderDevice>, QuadBuffers> bufferMap;
+        static std::map<RenderDevice*, QuadBuffers> bufferMap;
 
     public:
         /// @brief Gets the resources required to draw a quad that fills the screen.

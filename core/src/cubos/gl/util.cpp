@@ -14,7 +14,7 @@ Util::QuadBuffers::QuadBuffers(VertexBuffer vb, IndexBuffer ib) : vb(std::move(v
 void Util::getScreenQuad(RenderDevice& renderDevice, ShaderPipeline pipeline, VertexArray& va, IndexBuffer& ib)
 {
     VertexBuffer vb;
-    if (auto it = bufferMap.find(renderDevice); it != bufferMap.end())
+    if (auto it = bufferMap.find(&renderDevice); it != bufferMap.end())
     {
         vb = it->second.vb;
         ib = it->second.ib;
@@ -31,7 +31,7 @@ void Util::getScreenQuad(RenderDevice& renderDevice, ShaderPipeline pipeline, Ve
         };
         ib = renderDevice.createIndexBuffer(sizeof(screenIndices), screenIndices, gl::IndexFormat::UInt,
                                             gl::Usage::Static);
-        bufferMap.try_emplace(renderDevice, vb, ib);
+        bufferMap.try_emplace(&renderDevice, vb, ib);
     }
 
     VertexArrayDesc screenVADesc;
