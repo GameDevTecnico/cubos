@@ -414,9 +414,9 @@ namespace cubos::gl
     /// Vertex element description.
     struct VertexElement
     {
-        const char* name; ///< Element name.
-        Type type = Type::Float;    ///< Element type.
-        size_t size;                ///< Number of components in the vertex element (1, 2, 3 or 4).
+        const char* name;        ///< Element name.
+        Type type = Type::Float; ///< Element type.
+        size_t size;             ///< Number of components in the vertex element (1, 2, 3 or 4).
 
         struct
         {
@@ -578,6 +578,8 @@ namespace cubos::gl
         /// Gets a runtime property of the render device.
         /// @param prop Property name.
         virtual int getProperty(Property prop) = 0;
+
+
     };
 
     /// Abstract gl types are defined inside this namespace, they should be used (derived) only in render device
