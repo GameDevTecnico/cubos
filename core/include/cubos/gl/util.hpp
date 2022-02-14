@@ -16,8 +16,8 @@ namespace cubos::gl
     /// @param pipeline Pipeline to associate the quad's VertexArray with.
     /// @param va Reference in which the quad's VertexArray will be stored.
     /// @param ib Reference in which the quad's IndexBuffer will be stored.
-    static void generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va,
-                                   IndexBuffer& ib);
+    void generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va,
+                            IndexBuffer& ib);
 } // namespace cubos::gl
 
 #endif // CUBOS_GL_UTIL_HPP
