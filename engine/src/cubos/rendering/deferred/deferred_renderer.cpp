@@ -356,13 +356,6 @@ inline void DeferredRenderer::setupFrameBuffers()
     depthTexDesc.height = sz.y;
     depthTex = renderDevice.createTexture2D(depthTexDesc);
 
-    Texture2DDesc outputTexDesc;
-    outputTexDesc.format = TextureFormat::RGBA32Float;
-    outputTexDesc.width = sz.x;
-    outputTexDesc.height = sz.y;
-    outputTexture1 = renderDevice.createTexture2D(outputTexDesc);
-    outputTexture2 = renderDevice.createTexture2D(outputTexDesc);
-
     FramebufferDesc gBufferDesc;
     gBufferDesc.targetCount = 3;
     gBufferDesc.targets[0].setTexture2DTarget(positionTex);
@@ -371,13 +364,6 @@ inline void DeferredRenderer::setupFrameBuffers()
     gBufferDesc.depthStencil = depthTex;
 
     gBuffer = renderDevice.createFramebuffer(gBufferDesc);
-
-    FramebufferDesc outputFramebufferDesc;
-    outputFramebufferDesc.targetCount = 1;
-    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture1);
-    outputFramebuffer1 = renderDevice.createFramebuffer(outputFramebufferDesc);
-    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture2);
-    outputFramebuffer2 = renderDevice.createFramebuffer(outputFramebufferDesc);
 
     SamplerDesc positionSamplerDesc;
     positionSamplerDesc.addressU = gl::AddressMode::Clamp;
@@ -592,20 +578,7 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
 
     if (doPostProcessing)
     {
-        auto last = std::prev(postProcessingPasses.end());
-        for (auto it = postProcessingPasses.begin(); it != last; it++)
-        {
-            it->get().execute(*this, outputTexture1, outputFramebuffer2);
-
-            // swap input and output
-            auto tempTex = outputTexture1;
-            outputTexture1 = outputTexture2;
-            outputTexture2 = tempTex;
-            auto tempFB = outputFramebuffer1;
-            outputFramebuffer1 = outputFramebuffer2;
-            outputFramebuffer2 = tempFB;
-        }
-        last->get().execute(*this, outputTexture1, camera.target);
+        executePostProcessing(camera.target);
     }
 }
 

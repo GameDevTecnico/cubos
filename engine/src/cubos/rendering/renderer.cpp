@@ -1,3 +1,4 @@
+#include <cubos/log.hpp>
 #include <cubos/rendering/renderer.hpp>
 
 using namespace cubos::gl;
@@ -5,6 +6,21 @@ using namespace cubos::rendering;
 
 Renderer::Renderer(io::Window& window) : window(window), renderDevice(window.getRenderDevice())
 {
+    auto sz = window.getFramebufferSize();
+
+    Texture2DDesc outputTexDesc;
+    outputTexDesc.format = TextureFormat::RGBA32Float;
+    outputTexDesc.width = sz.x;
+    outputTexDesc.height = sz.y;
+    outputTexture1 = renderDevice.createTexture2D(outputTexDesc);
+    outputTexture2 = renderDevice.createTexture2D(outputTexDesc);
+
+    FramebufferDesc outputFramebufferDesc;
+    outputFramebufferDesc.targetCount = 1;
+    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture1);
+    outputFramebuffer1 = renderDevice.createFramebuffer(outputFramebufferDesc);
+    outputFramebufferDesc.targets[0].setTexture2DTarget(outputTexture2);
+    outputFramebuffer2 = renderDevice.createFramebuffer(outputFramebufferDesc);
 }
 
 Renderer::ModelID Renderer::registerModelInternal(const std::vector<cubos::gl::Vertex>& vertices,
@@ -69,6 +85,29 @@ void Renderer::setPalette(PaletteID paletteID)
 void Renderer::addPostProcessingPass(const PostProcessingPass& pass)
 {
     postProcessingPasses.emplace_back(pass);
+}
+
+void Renderer::executePostProcessing(Framebuffer target)
+{
+    if (postProcessingPasses.empty())
+    {
+        logWarning("renderer::ExecutePostProcessing(): no PostProcessingPass was added to the stack, skipping.");
+        return;
+    }
+    auto last = std::prev(postProcessingPasses.end());
+    for (auto it = postProcessingPasses.begin(); it != last; it++)
+    {
+        it->get().execute(*this, outputTexture1, outputFramebuffer2);
+
+        // swap input and output
+        auto tempTex = outputTexture1;
+        outputTexture1 = outputTexture2;
+        outputTexture2 = tempTex;
+        auto tempFB = outputFramebuffer1;
+        outputFramebuffer1 = outputFramebuffer2;
+        outputFramebuffer2 = tempFB;
+    }
+    last->get().execute(*this, outputTexture1, std::move(target));
 }
 
 void Renderer::drawModel(ModelID modelID, glm::mat4 modelMat)

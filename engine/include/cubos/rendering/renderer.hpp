@@ -22,8 +22,8 @@ namespace cubos::rendering
     protected:
         struct RendererModel
         {
-            cubos::gl::VertexArray va;
-            cubos::gl::IndexBuffer ib;
+            gl::VertexArray va;
+            gl::IndexBuffer ib;
             size_t numIndices;
         };
 
@@ -34,7 +34,7 @@ namespace cubos::rendering
         };
 
         std::vector<RendererModel> models;
-        std::vector<cubos::gl::ConstantBuffer> palettes;
+        std::vector<gl::ConstantBuffer> palettes;
         cubos::gl::ConstantBuffer currentPalette;
         std::vector<DrawRequest> drawRequests;
         std::vector<gl::SpotLightData> spotLightRequests;
@@ -42,6 +42,10 @@ namespace cubos::rendering
         std::vector<gl::PointLightData> pointLightRequests;
         io::Window& window;
         gl::RenderDevice& renderDevice;
+
+        // Post Processing
+        gl::Framebuffer outputFramebuffer1, outputFramebuffer2;
+        gl::Texture2D outputTexture1, outputTexture2;
 
         std::list<std::reference_wrapper<const PostProcessingPass>> postProcessingPasses;
 
@@ -51,24 +55,25 @@ namespace cubos::rendering
 
     protected:
         explicit Renderer(io::Window& window);
-        virtual ModelID registerModelInternal(const std::vector<cubos::gl::Vertex>& vertices,
-                                              std::vector<uint32_t>& indices, cubos::gl::ShaderPipeline pipeline);
+        virtual ModelID registerModelInternal(const std::vector<gl::Vertex>& vertices, std::vector<uint32_t>& indices,
+                                              gl::ShaderPipeline pipeline);
+
+        virtual void executePostProcessing(gl::Framebuffer target);
 
     public:
         virtual ~Renderer() = default;
         Renderer(const Renderer&) = delete;
 
-        virtual ModelID registerModel(const std::vector<cubos::gl::Vertex>& vertices,
-                                      std::vector<uint32_t>& indices) = 0;
-        virtual PaletteID registerPalette(const cubos::gl::Palette& palette);
+        virtual ModelID registerModel(const std::vector<gl::Vertex>& vertices, std::vector<uint32_t>& indices) = 0;
+        virtual PaletteID registerPalette(const gl::Palette& palette);
         virtual void setPalette(PaletteID paletteID);
         virtual void addPostProcessingPass(const PostProcessingPass& pass);
-        virtual void getScreenQuad(cubos::gl::VertexArray& va, cubos::gl::IndexBuffer& ib) const = 0;
-        virtual void render(const cubos::gl::CameraData& camera, bool usePostProcessing = true) = 0;
+        virtual void getScreenQuad(gl::VertexArray& va, gl::IndexBuffer& ib) const = 0;
+        virtual void render(const gl::CameraData& camera, bool usePostProcessing = true) = 0;
         virtual void drawModel(ModelID modelID, glm::mat4 modelMat);
-        virtual void drawLight(const cubos::gl::SpotLightData& light);
-        virtual void drawLight(const cubos::gl::DirectionalLightData& light);
-        virtual void drawLight(const cubos::gl::PointLightData& light);
+        virtual void drawLight(const gl::SpotLightData& light);
+        virtual void drawLight(const gl::DirectionalLightData& light);
+        virtual void drawLight(const gl::PointLightData& light);
         virtual void flush();
     };
 } // namespace cubos::rendering
