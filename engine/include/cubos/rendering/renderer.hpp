@@ -63,6 +63,7 @@ namespace cubos::rendering
         virtual PaletteID registerPalette(const cubos::gl::Palette& palette);
         virtual void setPalette(PaletteID paletteID);
         virtual void addPostProcessingPass(const PostProcessingPass& pass);
+        virtual void getScreenQuad(cubos::gl::VertexArray& va, cubos::gl::IndexBuffer& ib) const = 0;
         virtual void render(const cubos::gl::CameraData& camera, bool usePostProcessing = true) = 0;
         virtual void drawModel(ModelID modelID, glm::mat4 modelMat);
         virtual void drawLight(const cubos::gl::SpotLightData& light);

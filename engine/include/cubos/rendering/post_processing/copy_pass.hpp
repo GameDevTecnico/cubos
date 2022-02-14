@@ -13,10 +13,6 @@ namespace cubos::rendering
         gl::ShaderBindingPoint inputTexBP;
         gl::Sampler inputTexSampler;
 
-        // Screen Quad
-        gl::VertexArray screenVertexArray;
-        gl::IndexBuffer screenIndexBuffer;
-
     public:
         explicit CopyPass(io::Window& window);
 

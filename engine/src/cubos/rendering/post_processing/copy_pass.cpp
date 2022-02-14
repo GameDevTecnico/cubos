@@ -50,35 +50,6 @@ cubos::rendering::CopyPass::CopyPass(cubos::io::Window& window) : PostProcessing
     inputTexSampler = renderDevice.createSampler(samplerDesc);
 
     inputTexBP->bind(inputTexSampler);
-
-    float screenVerts[] = {
-        -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, +1.0f, 0.0f, 1.0f, +1.0f, +1.0f, 1.0f, 1.0f, +1.0f, -1.0f, 1.0f, 0.0f,
-    };
-    auto screenVertexBuffer = renderDevice.createVertexBuffer(sizeof(screenVerts), screenVerts, gl::Usage::Static);
-
-    VertexArrayDesc screenVADesc;
-    screenVADesc.elementCount = 2;
-    screenVADesc.elements[0].name = "position";
-    screenVADesc.elements[0].type = gl::Type::Float;
-    screenVADesc.elements[0].size = 2;
-    screenVADesc.elements[0].buffer.index = 0;
-    screenVADesc.elements[0].buffer.offset = 0;
-    screenVADesc.elements[0].buffer.stride = 4 * sizeof(float);
-    screenVADesc.elements[1].name = "uv";
-    screenVADesc.elements[1].type = gl::Type::Float;
-    screenVADesc.elements[1].size = 2;
-    screenVADesc.elements[1].buffer.index = 0;
-    screenVADesc.elements[1].buffer.offset = 2 * sizeof(float);
-    screenVADesc.elements[1].buffer.stride = 4 * sizeof(float);
-    screenVADesc.buffers[0] = screenVertexBuffer;
-    screenVADesc.shaderPipeline = pipeline;
-    screenVertexArray = renderDevice.createVertexArray(screenVADesc);
-
-    unsigned int screenIndices[] = {
-        0, 1, 2, 2, 3, 0,
-    };
-    screenIndexBuffer =
-        renderDevice.createIndexBuffer(sizeof(screenIndices), screenIndices, gl::IndexFormat::UInt, gl::Usage::Static);
 }
 
 void cubos::rendering::CopyPass::execute(const Renderer& renderer, gl::Texture2D input, gl::Framebuffer output) const
@@ -96,7 +67,12 @@ void cubos::rendering::CopyPass::execute(const Renderer& renderer, gl::Texture2D
     renderDevice.setBlendState(nullptr);
     renderDevice.setDepthStencilState(nullptr);
 
-    renderDevice.setVertexArray(screenVertexArray);
-    renderDevice.setIndexBuffer(screenIndexBuffer);
+    VertexArray va;
+    IndexBuffer ib;
+
+    renderer.getScreenQuad(va, ib);
+
+    renderDevice.setVertexArray(va);
+    renderDevice.setIndexBuffer(ib);
     renderDevice.drawTrianglesIndexed(0, 6);
 }

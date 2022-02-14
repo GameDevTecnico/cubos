@@ -120,6 +120,7 @@ namespace cubos::rendering
 
     public:
         explicit DeferredRenderer(io::Window& window);
+        virtual void getScreenQuad(cubos::gl::VertexArray& va, cubos::gl::IndexBuffer& ib) const override;
         virtual ModelID registerModel(const std::vector<cubos::gl::Vertex>& vertices,
                                       std::vector<uint32_t>& indices) override;
         virtual void drawLight(const cubos::gl::SpotLightData& light) override;

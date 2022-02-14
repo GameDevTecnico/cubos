@@ -1,4 +1,5 @@
 #include <cubos/gl/vertex.hpp>
+#include <cubos/gl/util.hpp>
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
 #include <cubos/log.hpp>
 
@@ -324,34 +325,7 @@ inline void DeferredRenderer::createShaderPipelines()
     renderDevice.setShaderPipeline(largeOutputPipeline);
     largeOutputLightBlockBP = largeOutputPipeline->getBindingPoint("Lights");
 
-    float screenVerts[] = {
-        -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, +1.0f, 0.0f, 1.0f, +1.0f, +1.0f, 1.0f, 1.0f, +1.0f, -1.0f, 1.0f, 0.0f,
-    };
-    auto screenVertexBuffer = renderDevice.createVertexBuffer(sizeof(screenVerts), screenVerts, gl::Usage::Static);
-
-    VertexArrayDesc screenVADesc;
-    screenVADesc.elementCount = 2;
-    screenVADesc.elements[0].name = "position";
-    screenVADesc.elements[0].type = gl::Type::Float;
-    screenVADesc.elements[0].size = 2;
-    screenVADesc.elements[0].buffer.index = 0;
-    screenVADesc.elements[0].buffer.offset = 0;
-    screenVADesc.elements[0].buffer.stride = 4 * sizeof(float);
-    screenVADesc.elements[1].name = "uv";
-    screenVADesc.elements[1].type = gl::Type::Float;
-    screenVADesc.elements[1].size = 2;
-    screenVADesc.elements[1].buffer.index = 0;
-    screenVADesc.elements[1].buffer.offset = 2 * sizeof(float);
-    screenVADesc.elements[1].buffer.stride = 4 * sizeof(float);
-    screenVADesc.buffers[0] = screenVertexBuffer;
-    screenVADesc.shaderPipeline = smallOutputPipeline;
-    screenVertexArray = renderDevice.createVertexArray(screenVADesc);
-
-    unsigned int screenIndices[] = {
-        0, 1, 2, 2, 3, 0,
-    };
-    screenIndexBuffer =
-        renderDevice.createIndexBuffer(sizeof(screenIndices), screenIndices, gl::IndexFormat::UInt, gl::Usage::Static);
+    generateScreenQuad(renderDevice, smallOutputPipeline, screenVertexArray, screenIndexBuffer);
 }
 
 inline void DeferredRenderer::setupFrameBuffers()
@@ -641,6 +615,11 @@ void DeferredRenderer::flush()
     lights.numSpotLights = 0;
     lights.numDirectionalLights = 0;
     lights.numPointLights = 0;
+}
+void DeferredRenderer::getScreenQuad(VertexArray& va, IndexBuffer& ib) const
+{
+    va = screenVertexArray;
+    ib = screenIndexBuffer;
 }
 
 DeferredRenderer::LightBlock::SpotLightData::SpotLightData(const gl::SpotLightData& light)
