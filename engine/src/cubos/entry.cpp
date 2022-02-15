@@ -4,7 +4,7 @@
 #include <cubos/gl/vertex.hpp>
 #include <cubos/gl/palette.hpp>
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
-#include <cubos/rendering/post_processing/copy_pass.hpp>
+#include <cubos/rendering/post_processing/hdr_tonemapping_pass.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -123,7 +123,7 @@ int main(void)
 
     rendering::Renderer::ModelID id = renderer.registerModel(vertices, indices);
 
-    rendering::CopyPass pass = rendering::CopyPass(*window);
+    rendering::HDRTonemappingPass pass = rendering::HDRTonemappingPass(*window);
     renderer.addPostProcessingPass(pass);
 
     glm::vec2 windowSize = window->getFramebufferSize();
