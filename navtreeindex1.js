@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classcubos_1_1io_1_1Window.html#ac50e5049a17b92baf713c38843b23625":[1,0,0,2,0,14],
 "classcubos_1_1io_1_1Window.html#ac957d7bdea4629f07d0387144a36e5ba":[1,0,0,2,0,5],
 "classcubos_1_1io_1_1Window.html#acc7585f2f8dc9e85d72b7881da66dab4":[1,0,0,2,0,1],
 "classcubos_1_1io_1_1Window.html#ad61a110ed77b78bd724f798b2aa954b1":[1,0,0,2,0,7],
@@ -205,8 +206,8 @@ var NAVTREEINDEX1 =
 "file__stream_8hpp_source.html":[2,0,0,0,0,3],
 "file__system_8hpp_source.html":[2,0,0,0,0,4],
 "files.html":[2,0],
-"functions.html":[1,3,0],
 "functions.html":[1,3,0,0],
+"functions.html":[1,3,0],
 "functions_b.html":[1,3,0,1],
 "functions_c.html":[1,3,0,2],
 "functions_d.html":[1,3,0,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "functions_type.html":[1,3,3],
 "functions_u.html":[1,3,0,18],
 "functions_vars.html":[1,3,2],
-"functions_w.html":[1,3,0,19],
-"functions_y.html":[1,3,0,20]
+"functions_w.html":[1,3,0,19]
 };

@@ -115,13 +115,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a51688c4ecb9ae733efe336db8c58ad08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b4556a77e14a625fadb5f43a8c9b3a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">unregisterCallback</a> (<a class="el" href="classcubos_1_1Event.html#a03bd8bf0216ef6a8f7ec88788772284e">ID</a> id)</td></tr>
 <tr class="separator:a2b4556a77e14a625fadb5f43a8c9b3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa45cf6111f9dc9baa3c1902c0d71b8ab"><td class="memTemplParams" colspan="2"><a id="aa45cf6111f9dc9baa3c1902c0d71b8ab"></a>
-template&lt;class TObj &gt; </td></tr>
-<tr class="memitem:aa45cf6111f9dc9baa3c1902c0d71b8ab"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>registerCallback</b> (TObj *obj, void(TObj::*callback)(TArgs...))</td></tr>
+<tr class="memitem:aa45cf6111f9dc9baa3c1902c0d71b8ab"><td class="memTemplParams" colspan="2">template&lt;class TObj &gt; </td></tr>
+<tr class="memitem:aa45cf6111f9dc9baa3c1902c0d71b8ab"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1Event.html#aa45cf6111f9dc9baa3c1902c0d71b8ab">registerCallback</a> (TObj *obj, void(TObj::*callback)(TArgs...))</td></tr>
 <tr class="separator:aa45cf6111f9dc9baa3c1902c0d71b8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af01852c92a7203dc0a4ecd2529602744"><td class="memTemplParams" colspan="2"><a id="af01852c92a7203dc0a4ecd2529602744"></a>
-template&lt;class TObj &gt; </td></tr>
-<tr class="memitem:af01852c92a7203dc0a4ecd2529602744"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>unregisterCallback</b> (TObj *obj, void(TObj::*callback)(TArgs...))</td></tr>
+<tr class="memitem:af01852c92a7203dc0a4ecd2529602744"><td class="memTemplParams" colspan="2">template&lt;class TObj &gt; </td></tr>
+<tr class="memitem:af01852c92a7203dc0a4ecd2529602744"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1Event.html#af01852c92a7203dc0a4ecd2529602744">unregisterCallback</a> (TObj *obj, void(TObj::*callback)(TArgs...))</td></tr>
 <tr class="separator:af01852c92a7203dc0a4ecd2529602744"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77f19d0edf6e754e8b13687f138c6ebc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1Event.html#a77f19d0edf6e754e8b13687f138c6ebc">fire</a> (TArgs... args) const</td></tr>
 <tr class="separator:a77f19d0edf6e754e8b13687f138c6ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,7 +175,7 @@ template&lt;typename... TArgs&gt; </div>
 </div>
 </div>
 <a id="a51688c4ecb9ae733efe336db8c58ad08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51688c4ecb9ae733efe336db8c58ad08">&#9670;&nbsp;</a></span>registerCallback()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a51688c4ecb9ae733efe336db8c58ad08">&#9670;&nbsp;</a></span>registerCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,8 +202,48 @@ template&lt;typename... TArgs&gt; </div>
 
 </div>
 </div>
+<a id="aa45cf6111f9dc9baa3c1902c0d71b8ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa45cf6111f9dc9baa3c1902c0d71b8ab">&#9670;&nbsp;</a></span>registerCallback() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... TArgs&gt; </div>
+<div class="memtemplate">
+template&lt;typename TObj &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classcubos_1_1Event.html">cubos::Event</a>&lt; TArgs &gt;::registerCallback </td>
+          <td>(</td>
+          <td class="paramtype">TObj *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(TObj::*)(TArgs...)&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Registers a callback. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>The instance associated with the method callback that should be called when the event is fired. </td></tr>
+    <tr><td class="paramname">callback</td><td>The method callback when the event is fired. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1Event.html#a2b4556a77e14a625fadb5f43a8c9b3a9">unregisterCallback</a>. </dd></dl>
+
+</div>
+</div>
 <a id="a2b4556a77e14a625fadb5f43a8c9b3a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b4556a77e14a625fadb5f43a8c9b3a9">&#9670;&nbsp;</a></span>unregisterCallback()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b4556a77e14a625fadb5f43a8c9b3a9">&#9670;&nbsp;</a></span>unregisterCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,6 +262,46 @@ template&lt;typename... TArgs&gt; </div>
 <p>Unregisters a callback. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>The ID returned when the callback was registered. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08">registerCallback</a>. </dd></dl>
+
+</div>
+</div>
+<a id="af01852c92a7203dc0a4ecd2529602744"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af01852c92a7203dc0a4ecd2529602744">&#9670;&nbsp;</a></span>unregisterCallback() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... TArgs&gt; </div>
+<div class="memtemplate">
+template&lt;typename TObj &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classcubos_1_1Event.html">cubos::Event</a>&lt; TArgs &gt;::unregisterCallback </td>
+          <td>(</td>
+          <td class="paramtype">TObj *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(TObj::*)(TArgs...)&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Unregisters a callback. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>The instance associated with the method callback that should be unregistered. </td></tr>
+    <tr><td class="paramname">callback</td><td>The method callback that should be unregistred. </td></tr>
   </table>
   </dd>
 </dl>

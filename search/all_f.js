@@ -7,7 +7,7 @@ var searchData=
   ['readmask_169',['readMask',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html#a97de23e918aadcb20d749e4b42f7651b',1,'cubos::gl::DepthStencilStateDesc::Stencil']]],
   ['readuntil_170',['readUntil',['../classcubos_1_1memory_1_1Stream.html#af6aff15341f1c294311c9e39be39de88',1,'cubos::memory::Stream::readUntil(std::string &amp;str, const char *terminator)'],['../classcubos_1_1memory_1_1Stream.html#a1de19554436884d1e40861287130ab98',1,'cubos::memory::Stream::readUntil(char *buffer, size_t size, const char *terminator)']]],
   ['ref_171',['ref',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html#a174574f22de837c367029a7428d2a44e',1,'cubos::gl::DepthStencilStateDesc::Stencil']]],
-  ['registercallback_172',['registerCallback',['../classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08',1,'cubos::Event']]],
+  ['registercallback_172',['registerCallback',['../classcubos_1_1Event.html#a51688c4ecb9ae733efe336db8c58ad08',1,'cubos::Event::registerCallback(Callback callback)'],['../classcubos_1_1Event.html#aa45cf6111f9dc9baa3c1902c0d71b8ab',1,'cubos::Event::registerCallback(TObj *obj, void(TObj::*callback)(TArgs...))']]],
   ['registerdata_173',['registerData',['../classcubos_1_1data_1_1EmbeddedArchive.html#a0cba8c56ef8bd40225b34febe0ce6bab',1,'cubos::data::EmbeddedArchive']]],
   ['renderdevice_174',['RenderDevice',['../classcubos_1_1gl_1_1RenderDevice.html',1,'cubos::gl']]],
   ['requires_175',['requires',['../classcubos_1_1memory_1_1Deserializer.html#a271a6aa8f3c5e26f577386fbdfb679b5',1,'cubos::memory::Deserializer::requires()'],['../classcubos_1_1memory_1_1Serializer.html#aaad7cd58b72960e223644162dd725348',1,'cubos::memory::Serializer::requires()']]],
