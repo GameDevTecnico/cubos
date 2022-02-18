@@ -1,9 +1,9 @@
 #include <cubos/core/gl/debug.hpp>
+#include <cubos/core/gl/imgui_impl.hpp>
 
 #include <list>
 #include <vector>
-#define _USE_MATH_DEFINES
-#include <math.h>
+#include <cmath>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
@@ -140,9 +140,9 @@ void Debug::initSphere()
     objSphere.va = renderDevice->createVertexArray(vaDesc);
 }
 
-void Debug::init(gl::RenderDevice& targetRenderDevice)
+void Debug::init(io::Window& window)
 {
-    renderDevice = &targetRenderDevice;
+    renderDevice = &window.getRenderDevice();
 
     auto vs = renderDevice->createShaderStage(gl::Stage::Vertex, R"(
             #version 330 core
@@ -189,6 +189,13 @@ void Debug::init(gl::RenderDevice& targetRenderDevice)
 
     rsDesc.rasterMode = RasterMode::Wireframe;
     wireframeRasterState = renderDevice->createRasterState(rsDesc);
+
+    // Initialize ImGui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGui::StyleColorsDark();
+    ImGui_ImplCubos_Init(window);
+    ImGui_ImplCubos_NewFrame();
 }
 
 void Debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation, glm::vec3 color)
@@ -250,10 +257,17 @@ void Debug::flush(glm::mat4 vp, double deltaT)
             requests.erase(current);
     }
     debugDrawMutex.unlock();
+
+    ImGui::Render();
+    ImGui_ImplCubos_RenderDrawData(ImGui::GetDrawData());
+    ImGui_ImplCubos_NewFrame();
 }
 
 void Debug::terminate()
 {
+    ImGui_ImplCubos_Shutdown();
+    ImGui::DestroyContext();
+
     mvpBuffer = nullptr;
     mvpBindingPoint = colorBindingPoint = nullptr;
     pipeline = nullptr;

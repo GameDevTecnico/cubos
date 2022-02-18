@@ -62,6 +62,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/light.cpp"
     "src/cubos/core/gl/util.cpp"
     "src/cubos/core/gl/vertex.cpp"
+    "src/cubos/core/gl/imgui_impl.hpp"
+    "src/cubos/core/gl/imgui_impl.cpp"
 
     "src/cubos/core/ecs/world.cpp"
 )
@@ -181,10 +183,20 @@ else ()
     find_package(fmt REQUIRED)
 endif ()
 
+add_library(imgui STATIC
+    "lib/imgui/imgui.cpp"
+    "lib/imgui/imgui_draw.cpp"
+    "lib/imgui/imgui_tables.cpp"
+    "lib/imgui/imgui_widgets.cpp"
+    "lib/imgui/imgui_demo.cpp"
+)
+
+target_include_directories(imgui PUBLIC "lib/imgui")
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp fmt::fmt ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp imgui fmt::fmt ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests

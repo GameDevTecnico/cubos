@@ -20,7 +20,7 @@ int main(void)
     initializeLogger();
     auto* window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
-    gl::Debug::init(renderDevice);
+    gl::Debug::init(*window);
 
     window->onKeyDown.registerCallback(debugTest);
 
