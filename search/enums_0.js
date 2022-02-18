@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['indexwidth_505',['IndexWidth',['../classcubos_1_1gl_1_1Grid.html#afec886982491e30ef53563675f5bd5f3',1,'cubos::gl::Grid']]]
+  ['openmode_494',['OpenMode',['../classcubos_1_1data_1_1File.html#a19074285e993f9d58efb6dac1be10041',1,'cubos::data::File']]]
 ];

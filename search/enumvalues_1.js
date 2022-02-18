@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['u16_508',['U16',['../classcubos_1_1gl_1_1Grid.html#afec886982491e30ef53563675f5bd5f3aef9ef3ebca4d2b64b6ec83808bafa5f2',1,'cubos::gl::Grid']]],
-  ['u8_509',['U8',['../classcubos_1_1gl_1_1Grid.html#afec886982491e30ef53563675f5bd5f3a6669348b484e3008dca2bfa8e85e40b5',1,'cubos::gl::Grid']]]
+  ['write_496',['Write',['../classcubos_1_1data_1_1File.html#a19074285e993f9d58efb6dac1be10041a1129c0e4d43f2d121652a7302712cff6',1,'cubos::data::File']]]
 ];

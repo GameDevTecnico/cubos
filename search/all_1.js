@@ -9,7 +9,7 @@ var searchData=
   ['blendstate_12',['BlendState',['../classcubos_1_1gl_1_1impl_1_1BlendState.html',1,'cubos::gl::impl']]],
   ['blendstatedesc_13',['BlendStateDesc',['../structcubos_1_1gl_1_1BlendStateDesc.html',1,'cubos::gl']]],
   ['bordercolor_14',['borderColor',['../structcubos_1_1gl_1_1SamplerDesc.html#a04a39459855129bdd5c771469a4562f6',1,'cubos::gl::SamplerDesc']]],
-  ['buffer_15',['buffer',['../structcubos_1_1gl_1_1VertexElement.html#ad614d82e39f41a13dceb32a5f0917554',1,'cubos::gl::VertexElement']]],
+  ['buffer_15',['buffer',['../structcubos_1_1gl_1_1VertexElement.html#ae05df627941c74c84c571598abc30756',1,'cubos::gl::VertexElement']]],
   ['buffers_16',['buffers',['../structcubos_1_1gl_1_1VertexArrayDesc.html#afc209c6163743e02df71eb9a672ee6bc',1,'cubos::gl::VertexArrayDesc']]],
   ['bufferstream_17',['BufferStream',['../classcubos_1_1memory_1_1BufferStream.html',1,'cubos::memory::BufferStream'],['../classcubos_1_1memory_1_1BufferStream.html#a98ba3e5bca51408b12921fdcb7625ded',1,'cubos::memory::BufferStream::BufferStream(void *buffer, size_t size, bool readOnly=false)'],['../classcubos_1_1memory_1_1BufferStream.html#aed073b5b688f3073aa2d94ec5f947d42',1,'cubos::memory::BufferStream::BufferStream(const void *buffer, size_t size)']]]
 ];

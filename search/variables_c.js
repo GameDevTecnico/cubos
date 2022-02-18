@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['parent_478',['parent',['../structcubos_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a4199a3b58ac914adff0ce7747c422542',1,'cubos::data::EmbeddedArchive::Data::Entry']]],
-  ['pass_479',['pass',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil_1_1Face.html#a7a09f4293c5be6b69b09b134f0dffe43',1,'cubos::gl::DepthStencilStateDesc::Stencil::Face']]]
+  ['rastermode_470',['rasterMode',['../structcubos_1_1gl_1_1RasterStateDesc.html#a8a74c2c99ba2277fda70f2317c29cfb4',1,'cubos::gl::RasterStateDesc']]],
+  ['readmask_471',['readMask',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html#a97de23e918aadcb20d749e4b42f7651b',1,'cubos::gl::DepthStencilStateDesc::Stencil']]],
+  ['ref_472',['ref',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html#a174574f22de837c367029a7428d2a44e',1,'cubos::gl::DepthStencilStateDesc::Stencil']]]
 ];
