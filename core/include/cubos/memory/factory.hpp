@@ -1,8 +1,10 @@
 #ifndef CUBOS_MEMORY_FACTORY_HPP
 #define CUBOS_MEMORY_FACTORY_HPP
 
-#include <cubos/memory/serializer.hpp>
-#include <cubos/memory/deserializer.hpp>
+#include <cubos/log.hpp>
+
+#include <string>
+#include <functional>
 
 namespace cubos::memory
 {
