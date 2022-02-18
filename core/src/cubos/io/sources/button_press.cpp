@@ -1,14 +1,15 @@
 #include <cubos/event.hpp>
 #include <cubos/io/window.hpp>
 #include <cubos/io/keyboard.hpp>
+#include <cubos/io/input_manager.hpp>
+#include <cubos/io/sources/button_press.hpp>
+
 #include <map>
 #include <string>
 #include <memory>
 #include <variant>
 #include <list>
 #include <glm/glm.hpp>
-#include <cubos/io/input_manager.hpp>
-#include <cubos/io/sources/button_press.hpp>
 
 using namespace cubos::io;
 

@@ -1,5 +1,6 @@
 #include <cubos/io/sources/single_axis.hpp>
 #include <cubos/io/input_manager.hpp>
+
 #include <tuple>
 #include <variant>
 

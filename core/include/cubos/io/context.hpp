@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include <variant>
+
 namespace cubos::io
 {
     /// Context is used to pass parameters created by input

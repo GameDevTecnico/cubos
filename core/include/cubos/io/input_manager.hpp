@@ -4,16 +4,16 @@
 #include <cubos/event.hpp>
 #include <cubos/io/window.hpp>
 #include <cubos/io/keyboard.hpp>
+#include <cubos/io/action.hpp>
+#include <cubos/io/context.hpp>
+#include <cubos/io/sources/source.hpp>
+
 #include <map>
 #include <string>
 #include <memory>
 #include <variant>
 #include <list>
 #include <glm/glm.hpp>
-#include <cubos/io/action.hpp>
-#include <cubos/io/context.hpp>
-#include <cubos/io/sources/source.hpp>
-
 namespace cubos::io
 {
     /// InputManager is used to control the flow between Sources and the gameplay logic.

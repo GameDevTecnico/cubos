@@ -3,6 +3,7 @@
 
 #include <cubos/io/context.hpp>
 #include <cubos/io/sources/source.hpp>
+
 #include <list>
 
 namespace cubos::io
@@ -20,8 +21,8 @@ namespace cubos::io
         std::string name; ///< Name of the Action.
 
         /// The constructor for an Action with a name
-        /// @param actionName name of the Action being created
-        Action(std::string actionName);
+        /// @param name name of the Action being created
+        Action(std::string name);
 
         /// Adds a new source to the Action
         /// @param source Source to add
