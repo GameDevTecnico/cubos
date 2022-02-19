@@ -565,6 +565,38 @@ public:
     GLenum type;
 };
 
+class OGLTexture2DArray : public impl::Texture2DArray
+{
+public:
+    OGLTexture2DArray(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : id(id), internalFormat(internalFormat), format(format), type(type)
+    {
+    }
+
+    virtual ~OGLTexture2DArray() override
+    {
+        glDeleteTextures(1, &this->id);
+    }
+
+    virtual void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data,
+                        size_t level) override
+    {
+        glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
+        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, level, x, y, i, width, height, 1, this->format, this->type, data);
+    }
+
+    virtual void generateMipmaps() override
+    {
+        glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+
+    GLuint id;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
+};
+
 class OGLTexture3D : public impl::Texture3D
 {
 public:
@@ -782,6 +814,16 @@ public:
             glBindTexture(GL_TEXTURE_2D, std::static_pointer_cast<OGLTexture2D>(tex)->id);
         else
             glBindTexture(GL_TEXTURE_2D, 0);
+        glUniform1i(this->loc, this->loc);
+    }
+
+    virtual void bind(Texture2DArray tex) override
+    {
+        glActiveTexture(GL_TEXTURE0 + this->loc);
+        if (tex)
+            glBindTexture(GL_TEXTURE_2D_ARRAY, std::static_pointer_cast<OGLTexture2DArray>(tex)->id);
+        else
+            glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
         glUniform1i(this->loc, this->loc);
     }
 
@@ -1297,6 +1339,48 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     }
 
     return std::make_shared<OGLTexture2D>(id, internalFormat, format, type);
+}
+
+Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& desc)
+{
+    GLenum internalFormat, format, type;
+
+    if (!textureFormatToGL(desc.format, internalFormat, format, type))
+    {
+        logError("OGLRenderDevice::createTexture2DArray() failed: unsupported texture format {}", desc.format);
+        return nullptr;
+    }
+
+    // Initialize texture
+    GLuint id;
+    glGenTextures(1, &id);
+    glBindTexture(GL_TEXTURE_2D_ARRAY, id);
+    glTexStorage3D(GL_TEXTURE_2D_ARRAY, desc.mipLevelCount, internalFormat, desc.width, desc.height, desc.size);
+    for (size_t i = 0; i < desc.size; ++i)
+    {
+        for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
+        {
+            glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i, desc.width / div, desc.height / div, 1, format, type,
+                            desc.data[i][j]);
+        }
+    }
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    if (GL_ARB_texture_filter_anisotropic)
+        glTexParameterf(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteTextures(1, &id);
+        logError("OGLRenderDevice::createTexture2DArray() failed: OpenGL error {}", glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLTexture2DArray>(id, internalFormat, format, type);
 }
 
 Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
