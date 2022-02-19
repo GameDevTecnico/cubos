@@ -18,11 +18,12 @@ namespace cubos::io
     class Action
     {
     public:
-        std::string name; ///< Name of the Action.
-
         /// The constructor for an Action with a name
         /// @param name name of the Action being created
         Action(std::string name);
+
+        /// Gets the name of the action
+        std::string getName() const;
 
         /// Adds a new source to the Action
         /// @param source Source to add
@@ -37,6 +38,7 @@ namespace cubos::io
         void processSources();
 
     private:
+        std::string name;
         std::list<Source*> inputSources;
         std::list<std::function<void(Context)>> functionBindings;
         bool enable;

@@ -12,6 +12,11 @@ Action::Action(std::string actionName)
     name = actionName;
 }
 
+std::string Action::getName() const
+{
+    return this->name;
+}
+
 void Action::addInput(Source* source)
 {
     source->subscribeEvents();
