@@ -1,10 +1,9 @@
+#include <cubos/entry.hpp>
 #include <cubos/log.hpp>
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
 
-using namespace cubos;
-
-int main(void)
+void cubos::init()
 {
     initializeLogger();
     auto window = io::Window::create();
@@ -18,5 +17,4 @@ int main(void)
     }
 
     delete window;
-    return 0;
 }
