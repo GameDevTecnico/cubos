@@ -31,6 +31,13 @@ var annotated_dup =
         [ "VertexElement", "structcubos_1_1gl_1_1VertexElement.html", "structcubos_1_1gl_1_1VertexElement" ]
       ] ],
       [ "io", null, [
+        [ "Action", "classcubos_1_1io_1_1Action.html", "classcubos_1_1io_1_1Action" ],
+        [ "ButtonPress", "classcubos_1_1io_1_1ButtonPress.html", "classcubos_1_1io_1_1ButtonPress" ],
+        [ "Context", "classcubos_1_1io_1_1Context.html", "classcubos_1_1io_1_1Context" ],
+        [ "DoubleAxis", "classcubos_1_1io_1_1DoubleAxis.html", "classcubos_1_1io_1_1DoubleAxis" ],
+        [ "InputManager", "classcubos_1_1io_1_1InputManager.html", null ],
+        [ "SingleAxis", "classcubos_1_1io_1_1SingleAxis.html", "classcubos_1_1io_1_1SingleAxis" ],
+        [ "Source", "classcubos_1_1io_1_1Source.html", "classcubos_1_1io_1_1Source" ],
         [ "Window", "classcubos_1_1io_1_1Window.html", "classcubos_1_1io_1_1Window" ]
       ] ],
       [ "memory", null, [

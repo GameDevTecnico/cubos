@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "cubos::io::Action", "classcubos_1_1io_1_1Action.html", null ],
     [ "cubos::data::Archive", "classcubos_1_1data_1_1Archive.html", [
       [ "cubos::data::EmbeddedArchive", "classcubos_1_1data_1_1EmbeddedArchive.html", null ],
       [ "cubos::data::STDArchive", "classcubos_1_1data_1_1STDArchive.html", null ]
@@ -9,6 +10,7 @@ var hierarchy =
     [ "cubos::gl::impl::ConstantBuffer", "classcubos_1_1gl_1_1impl_1_1ConstantBuffer.html", null ],
     [ "cubos::gl::ConstantBufferElement", "structcubos_1_1gl_1_1ConstantBufferElement.html", null ],
     [ "cubos::gl::ConstantBufferStructure", "structcubos_1_1gl_1_1ConstantBufferStructure.html", null ],
+    [ "cubos::io::Context", "classcubos_1_1io_1_1Context.html", null ],
     [ "cubos::gl::impl::CubeMap", "classcubos_1_1gl_1_1impl_1_1CubeMap.html", null ],
     [ "cubos::gl::CubeMapDesc", "structcubos_1_1gl_1_1CubeMapDesc.html", null ],
     [ "cubos::data::EmbeddedArchive::Data", "structcubos_1_1data_1_1EmbeddedArchive_1_1Data.html", null ],
@@ -33,6 +35,7 @@ var hierarchy =
     [ "cubos::gl::FramebufferDesc", "structcubos_1_1gl_1_1FramebufferDesc.html", null ],
     [ "cubos::gl::Grid", "classcubos_1_1gl_1_1Grid.html", null ],
     [ "cubos::gl::impl::IndexBuffer", "classcubos_1_1gl_1_1impl_1_1IndexBuffer.html", null ],
+    [ "cubos::io::InputManager", "classcubos_1_1io_1_1InputManager.html", null ],
     [ "cubos::gl::Material", "structcubos_1_1gl_1_1Material.html", null ],
     [ "cubos::gl::Palette", "classcubos_1_1gl_1_1Palette.html", null ],
     [ "cubos::gl::impl::RasterState", "classcubos_1_1gl_1_1impl_1_1RasterState.html", null ],
@@ -48,6 +51,11 @@ var hierarchy =
     [ "cubos::gl::impl::ShaderBindingPoint", "classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html", null ],
     [ "cubos::gl::impl::ShaderPipeline", "classcubos_1_1gl_1_1impl_1_1ShaderPipeline.html", null ],
     [ "cubos::gl::impl::ShaderStage", "classcubos_1_1gl_1_1impl_1_1ShaderStage.html", null ],
+    [ "cubos::io::Source", "classcubos_1_1io_1_1Source.html", [
+      [ "cubos::io::ButtonPress", "classcubos_1_1io_1_1ButtonPress.html", null ],
+      [ "cubos::io::DoubleAxis", "classcubos_1_1io_1_1DoubleAxis.html", null ],
+      [ "cubos::io::SingleAxis", "classcubos_1_1io_1_1SingleAxis.html", null ]
+    ] ],
     [ "cubos::gl::DepthStencilStateDesc::Stencil", "structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html", null ],
     [ "cubos::memory::Stream", "classcubos_1_1memory_1_1Stream.html", [
       [ "cubos::data::FileStream< T >", "classcubos_1_1data_1_1FileStream.html", null ],
