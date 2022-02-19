@@ -2,7 +2,7 @@ var searchData=
 [
   ['callback_22',['Callback',['../classcubos_1_1Event.html#a3d5bdb17bf64983c2e1c59a356fe5928',1,'cubos::Event']]],
   ['child_23',['child',['../structcubos_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a7f01dcfd2afed39140041ca7287fa258',1,'cubos::data::EmbeddedArchive::Data::Entry']]],
-  ['clear_24',['clear',['../classcubos_1_1memory_1_1SerializationMap.html#ab00e610dedc028683dadee20d3ebaee5',1,'cubos::memory::SerializationMap::clear()'],['../classcubos_1_1Settings.html#a0cb3f94bdbee29eb019c7c7bc11b4327',1,'cubos::Settings::clear()']]],
+  ['clear_24',['clear',['../classcubos_1_1memory_1_1SerializationMap.html#ab00e610dedc028683dadee20d3ebaee5',1,'cubos::memory::SerializationMap::clear()'],['../classcubos_1_1Settings.html#a9e98a4ee5b0749d92d3960605554488f',1,'cubos::Settings::clear()']]],
   ['clearcolor_25',['clearColor',['../classcubos_1_1gl_1_1RenderDevice.html#a8f791985c2c137e30b7d3fb5676cabcb',1,'cubos::gl::RenderDevice']]],
   ['cleardepth_26',['clearDepth',['../classcubos_1_1gl_1_1RenderDevice.html#a5b40155a95286475ce4eec4eed7f16fe',1,'cubos::gl::RenderDevice']]],
   ['clearstencil_27',['clearStencil',['../classcubos_1_1gl_1_1RenderDevice.html#a843c7cad027757c83f277056dee98a92',1,'cubos::gl::RenderDevice']]],
