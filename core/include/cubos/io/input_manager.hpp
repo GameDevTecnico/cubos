@@ -23,9 +23,6 @@ namespace cubos::io
     class InputManager
     {
     public:
-        static cubos::io::Window* window;                              ///< Window associated with this Input Manager
-        static std::map<std::string, std::shared_ptr<Action>> actions; ///< Mapping of all registered Actions
-
         static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>>
             keyDownCallbacks; ///< Mapping of all key down Callbacks
         static std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>>
@@ -132,6 +129,9 @@ namespace cubos::io
         static void unregisterMouseAxisCallback(T* obj, void (T::*callback)(float), cubos::io::MouseAxis mouseAxis);
 
     private:
+        static cubos::io::Window* window;
+        static std::map<std::string, std::shared_ptr<Action>> actions;
+
         static void handleKeyDown(cubos::io::Key key);
         static void handleKeyUp(cubos::io::Key key);
         static void handleMouseButtonDown(cubos::io::MouseButton mouseButton);
