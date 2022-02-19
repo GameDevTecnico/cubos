@@ -12,4 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run clang-format
-      run: find . -regex '.*\.\(cpp\|hpp\)' -exec clang-format -style=file -n --verbose {} \;
+      run: find . -regex '.*\.\(cpp\|hpp\)' -exec clang-format -style=file --verbose {} \;
