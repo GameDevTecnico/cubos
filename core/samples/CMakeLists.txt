@@ -6,6 +6,7 @@ set(CORE_SAMPLES_SOURCES
     "render_device.cpp"
     "debug_renderer.cpp"
     "serialization.cpp"
+    "input_manager.cpp"
     "embedded_archive.cpp"
 )
 
