@@ -39,7 +39,7 @@ namespace cubos::memory
 
     /// Statically registers a type to be created on a factory, using the given identifier.
     /// @param factory The factory to register the type on.
-    /// @param consructor The constructor to be used to create the type.
+    /// @param constructor The constructor to be used to create the type.
     /// @param id The identifier of the type to be registered.
 #define CUBOS_REGISTER_TYPE(factory, constructor, id)                                                                  \
     namespace impl                                                                                                     \
