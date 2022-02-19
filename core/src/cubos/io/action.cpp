@@ -17,7 +17,7 @@ std::string Action::getName() const
     return this->name;
 }
 
-void Action::addInput(Source* source)
+void Action::addSource(Source* source)
 {
     source->subscribeEvents();
     this->inputSources.push_back(source);

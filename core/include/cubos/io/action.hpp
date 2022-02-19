@@ -14,7 +14,7 @@ namespace cubos::io
     ///     io::InputManager::init(window);
     ///     auto ShootAction = io::InputManager::createAction("shoot_action");
     ///     ShootAction->addBinding(shoot);
-    ///     ShootAction->addInput(new io::DoubleAxis(new io::ButtonPress(io::MouseButton::Right));
+    ///     ShootAction->addSource(new io::DoubleAxis(new io::ButtonPress(io::MouseButton::Right));
     class Action
     {
     public:
@@ -27,7 +27,7 @@ namespace cubos::io
 
         /// Adds a new source to the Action
         /// @param source Source to add
-        void addInput(Source* source);
+        void addSource(Source* source);
 
         /// Adds a new bindings to the Action
         /// @param binding Function to add

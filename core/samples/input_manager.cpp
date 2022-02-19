@@ -57,21 +57,21 @@ int main(void)
     io::InputManager::init(window);
     auto updateRedGreenAction = io::InputManager::createAction("update_red_green");
     updateRedGreenAction->addBinding(updateColour);
-    updateRedGreenAction->addInput(new io::DoubleAxis(cubos::io::MouseAxis::X, cubos::io::MouseAxis::Y));
+    updateRedGreenAction->addSource(new io::DoubleAxis(cubos::io::MouseAxis::X, cubos::io::MouseAxis::Y));
 
     auto incBlueAction = io::InputManager::createAction("increase_blue");
     incBlueAction->addBinding(blueIncr);
-    incBlueAction->addInput(new io::ButtonPress(io::Key::D));
-    incBlueAction->addInput(new io::ButtonPress(io::MouseButton::Right));
+    incBlueAction->addSource(new io::ButtonPress(io::Key::D));
+    incBlueAction->addSource(new io::ButtonPress(io::MouseButton::Right));
 
     auto decBlueAction = io::InputManager::createAction("decrease_blue");
     decBlueAction->addBinding(blueDecr);
-    decBlueAction->addInput(new io::ButtonPress(io::Key::A));
-    decBlueAction->addInput(new io::ButtonPress(io::MouseButton::Left));
+    decBlueAction->addSource(new io::ButtonPress(io::Key::A));
+    decBlueAction->addSource(new io::ButtonPress(io::MouseButton::Left));
 
     auto updateAlphaAction = io::InputManager::createAction("update_alpha");
     updateAlphaAction->addBinding(updateToBlack);
-    updateAlphaAction->addInput(new io::SingleAxis(io::Key::O, io::Key::L));
+    updateAlphaAction->addSource(new io::SingleAxis(io::Key::O, io::Key::L));
 
     while (!window->shouldClose())
     {
