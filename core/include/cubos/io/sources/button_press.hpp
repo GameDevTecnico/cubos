@@ -24,8 +24,6 @@ namespace cubos::io
     class ButtonPress : public Source
     {
     public:
-        std::variant<cubos::io::Key, cubos::io::MouseButton> button; ///< Button to track
-
         /// Creates a Button Press source associated to a keyboard button
         /// @param key the keyboard key associated to this Button Press source
         ButtonPress(cubos::io::Key key);
@@ -51,6 +49,8 @@ namespace cubos::io
         Context createContext() override;
 
     private:
+        std::variant<cubos::io::Key, cubos::io::MouseButton> button; ///< Button to track
+
         bool wasTriggered = false;
 
         /// Called when the button associated with this Button Press source has been pressed.
