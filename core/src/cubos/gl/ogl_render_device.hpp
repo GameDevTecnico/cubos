@@ -36,6 +36,7 @@ namespace cubos::gl
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) override;
         virtual void setShaderPipeline(ShaderPipeline pipeline) override;
         virtual void clearColor(float r, float g, float b, float a) override;
+        virtual void clearTargetColor(size_t target, float r, float g, float b, float a) override;
         virtual void clearDepth(float depth) override;
         virtual void clearStencil(int stencil) override;
         virtual void drawTriangles(size_t offset, size_t count) override;
