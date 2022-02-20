@@ -262,26 +262,49 @@ namespace cubos::gl
         struct Texture2DTarget
         {
             Texture2D handle; ///< Texture handle.
-        };                    ///< If the target isn't a cube map, this handle is used.
+        };
+
+        struct Texture2DArrayTarget
+        {
+            Texture2DArray handle; ///< Texture handle.
+        };
+
+        enum class TargetType
+        {
+            CubeMap,
+            Texture2D,
+            Texture2DArray
+        }; ///< If the target isn't a cube map, this handle is used.
 
         struct FramebufferTarget
         {
-            bool isCubeMap = false; ///< Is this target a cube map face?
-            uint32_t mipLevel = 0;  ///< Mip level of the texture which will be set as a render target.
+        private:
+            bool set;
+            TargetType type; ///< Type of the currently set target.
 
-            std::variant<CubeMapTarget, Texture2DTarget> target;
+            std::variant<CubeMapTarget, Texture2DTarget, Texture2DArrayTarget> target;
 
+        public:
+            uint32_t mipLevel = 0; ///< Mip level of the target which will be set as a render target.
+
+            [[nodiscard]] TargetType getTargetType() const;
+            [[nodiscard]] bool isSet() const;
             [[nodiscard]] const CubeMapTarget& getCubeMapTarget() const;
 
             [[nodiscard]] const Texture2DTarget& getTexture2DTarget() const;
 
+            [[nodiscard]] const Texture2DArrayTarget& getTexture2DArrayTarget() const;
+
             void setCubeMapTarget(const CubeMap& handle, CubeFace face);
 
             void setTexture2DTarget(const Texture2D& handle);
+
+            void setTexture2DArrayTarget(const Texture2DArray& handle);
+
         } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
-        uint32_t targetCount = 1; ///< Number of render targets.
-        Texture2D depthStencil;   ///< Optional depth stencil texture.
+        uint32_t targetCount = 1;       ///< Number of render targets.
+        FramebufferTarget depthStencil; ///< Optional depth stencil target.
     };
 
     /// Rasterizer state description.

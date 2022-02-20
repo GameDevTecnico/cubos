@@ -1047,12 +1047,32 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     }
 
     for (int i = 0; i < desc.targetCount; ++i)
-        if (desc.targets[i].isCubeMap && desc.targets[i].getCubeMapTarget().handle == nullptr ||
-            !desc.targets[i].isCubeMap && desc.targets[i].getTexture2DTarget().handle == nullptr)
+    {
+        switch (desc.targets[i].getTargetType())
         {
-            logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
-            return nullptr;
+        case FramebufferDesc::TargetType::CubeMap:
+            if (desc.targets[i].getCubeMapTarget().handle == nullptr)
+            {
+                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                return nullptr;
+            }
+            break;
+        case FramebufferDesc::TargetType::Texture2D:
+            if (desc.targets[i].getTexture2DTarget().handle == nullptr)
+            {
+                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                return nullptr;
+            }
+            break;
+        case FramebufferDesc::TargetType::Texture2DArray:
+            if (desc.targets[i].getTexture2DArrayTarget().handle == nullptr)
+            {
+                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                return nullptr;
+            }
+            break;
         }
+    }
 
     // Initialize framebuffer
     GLuint id;
@@ -1064,35 +1084,75 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     // Attach targets
     for (int i = 0; i < desc.targetCount; ++i)
     {
-        if (desc.targets[i].isCubeMap)
+        switch (desc.targets[i].getTargetType())
         {
+        case FramebufferDesc::TargetType::CubeMap:
             GLenum face;
             cubeFaceToGL(desc.targets[i].getCubeMapTarget().face, face);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, face,
                                    std::static_pointer_cast<OGLCubeMap>(desc.targets[i].getCubeMapTarget().handle)->id,
                                    0);
-        }
-        else
-        {
+            break;
+        case FramebufferDesc::TargetType::Texture2D:
             glFramebufferTexture2D(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
                 std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id, 0);
+            break;
+        case FramebufferDesc::TargetType::Texture2DArray:
+
+            glFramebufferTexture(
+                GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
+                std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id, 0);
+            break;
         }
         drawBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
     }
 
     // Attach depth stencil texture
-    if (desc.depthStencil)
+    if (desc.depthStencil.isSet())
     {
-        auto ds = std::static_pointer_cast<OGLTexture2D>(desc.depthStencil);
-        if (ds->format == GL_DEPTH_COMPONENT)
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
-        else if (ds->format == GL_DEPTH_STENCIL)
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
-        else
+        bool formatError = false;
+        switch (desc.depthStencil.getTargetType())
+        {
+        case FramebufferDesc::TargetType::CubeMap: {
+            auto target = desc.depthStencil.getCubeMapTarget();
+            GLenum face;
+            cubeFaceToGL(target.face, face);
+            auto ds = std::static_pointer_cast<OGLCubeMap>(target.handle);
+            if (ds->format == GL_DEPTH_COMPONENT)
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, face, ds->id, 0);
+            else if (ds->format == GL_DEPTH_STENCIL)
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+            else
+                formatError = true;
+        }
+        break;
+        case FramebufferDesc::TargetType::Texture2D: {
+            auto ds = std::static_pointer_cast<OGLTexture2D>(desc.depthStencil.getTexture2DTarget().handle);
+            if (ds->format == GL_DEPTH_COMPONENT)
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+            else if (ds->format == GL_DEPTH_STENCIL)
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+            else
+                formatError = true;
+        }
+        break;
+        case FramebufferDesc::TargetType::Texture2DArray: {
+            auto ds = std::static_pointer_cast<OGLTexture2DArray>(desc.depthStencil.getTexture2DArrayTarget().handle);
+            if (ds->format == GL_DEPTH_COMPONENT)
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id, 0);
+            else if (ds->format == GL_DEPTH_STENCIL)
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id, 0);
+            else
+                formatError = true;
+        }
+        break;
+        }
+
+        if (formatError)
         {
             glDeleteFramebuffers(1, &id);
-            logError("OGLRenderDevice::createFramebuffer() failed: invalid depth stencil texture format");
+            logError("OGLRenderDevice::createFramebuffer() failed: invalid depth stencil target format");
             return nullptr;
         }
     }
