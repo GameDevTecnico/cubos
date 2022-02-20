@@ -1091,12 +1091,13 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             cubeFaceToGL(desc.targets[i].getCubeMapTarget().face, face);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, face,
                                    std::static_pointer_cast<OGLCubeMap>(desc.targets[i].getCubeMapTarget().handle)->id,
-                                   0);
+                                   desc.targets[i].mipLevel);
             break;
         case FramebufferDesc::TargetType::Texture2D:
             glFramebufferTexture2D(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
-                std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id, 0);
+                std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id,
+                desc.targets[i].mipLevel);
             break;
         case FramebufferDesc::TargetType::Texture2DArray:
 
