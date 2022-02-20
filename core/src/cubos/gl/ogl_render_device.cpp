@@ -1103,7 +1103,8 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
 
             glFramebufferTexture(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
-                std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id, 0);
+                std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id,
+                desc.targets[i].mipLevel);
             break;
         }
         drawBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
@@ -1121,9 +1122,10 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             cubeFaceToGL(target.face, face);
             auto ds = std::static_pointer_cast<OGLCubeMap>(target.handle);
             if (ds->format == GL_DEPTH_COMPONENT)
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, face, ds->id, 0);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, face, ds->id, desc.depthStencil.mipLevel);
             else if (ds->format == GL_DEPTH_STENCIL)
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id,
+                                       desc.depthStencil.mipLevel);
             else
                 formatError = true;
         }
@@ -1131,9 +1133,11 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         case FramebufferDesc::TargetType::Texture2D: {
             auto ds = std::static_pointer_cast<OGLTexture2D>(desc.depthStencil.getTexture2DTarget().handle);
             if (ds->format == GL_DEPTH_COMPONENT)
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id,
+                                       desc.depthStencil.mipLevel);
             else if (ds->format == GL_DEPTH_STENCIL)
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id,
+                                       desc.depthStencil.mipLevel);
             else
                 formatError = true;
         }
@@ -1141,9 +1145,9 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         case FramebufferDesc::TargetType::Texture2DArray: {
             auto ds = std::static_pointer_cast<OGLTexture2DArray>(desc.depthStencil.getTexture2DArrayTarget().handle);
             if (ds->format == GL_DEPTH_COMPONENT)
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id, 0);
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id, desc.depthStencil.mipLevel);
             else if (ds->format == GL_DEPTH_STENCIL)
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id, 0);
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id, desc.depthStencil.mipLevel);
             else
                 formatError = true;
         }
