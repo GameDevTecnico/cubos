@@ -40,6 +40,14 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/io/glfw_window.hpp"
     "src/cubos/io/glfw_window.cpp"
 
+    "src/cubos/io/input_manager.cpp"
+    "src/cubos/io/action.cpp"
+    "src/cubos/io/context.cpp"
+
+    "src/cubos/io/sources/button_press.cpp"
+    "src/cubos/io/sources/single_axis.cpp"
+    "src/cubos/io/sources/double_axis.cpp"
+
     "src/cubos/gl/debug.cpp"
     "src/cubos/gl/render_device.cpp"
     "src/cubos/gl/ogl_render_device.hpp"
@@ -89,6 +97,14 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/camera_data.hpp"
     "include/cubos/gl/light.hpp"
     "include/cubos/gl/util.hpp"
+
+    "include/cubos/io/input_manager.hpp"
+    "include/cubos/io/action.hpp"
+    "include/cubos/io/context.hpp"
+    "include/cubos/io/sources/source.hpp"
+    "include/cubos/io/sources/button_press.hpp"
+    "include/cubos/io/sources/single_axis.hpp"
+    "include/cubos/io/sources/double_axis.hpp"
     )
 
 # Create core library

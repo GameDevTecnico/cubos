@@ -21,15 +21,15 @@ namespace cubos::gl
         const Material* getData() const;
 
         /// @return The number of materials in the palette.
-        size_t getSize() const;
+        uint16_t getSize() const;
 
         /// @param index The index of the material to get (1-based, 0 is empty).
         /// @return The material at the given index.
-        const Material& get(size_t index) const;
+        const Material& get(uint16_t index) const;
 
         /// @param index The index of the material to set (1-based, 0 is empty).
         /// @param material The material to set.
-        void set(size_t index, const Material& material);
+        void set(uint16_t index, const Material& material);
 
         /// Serializes the palette.
         /// @param serializer The serializer to use.
