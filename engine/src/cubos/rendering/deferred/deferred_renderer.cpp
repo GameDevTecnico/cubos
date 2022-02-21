@@ -83,123 +83,7 @@ inline void DeferredRenderer::createShaderPipelines()
             }
         )");
 
-    auto outputSmallPixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
-            #version 430 core
-
-            in vec2 fraguv;
-
-            uniform sampler2D position;
-            uniform sampler2D normal;
-            uniform usampler2D material;
-
-            struct Material
-            {
-                vec4 color;
-            };
-
-            uniform palette
-            {
-                 Material materials[gl_MaxFragmentUniformComponents / 4];
-            };
-
-            struct SpotLightData
-            {
-                vec4 position;
-                mat4 rotation;
-                vec4 color;
-                float intensity;
-                float range;
-                float spotCutoff;
-                float innerSpotCutoff;
-            };
-
-            struct DirectionalLightData
-            {
-                mat4 rotation;
-                vec4 color;
-                float intensity;
-            };
-
-            struct PointLightData
-            {
-                vec4 position;
-                vec4 color;
-                float intensity;
-                float range;
-            };
-
-            layout(std140) uniform Lights
-            {
-                SpotLightData spotLights[128];
-                DirectionalLightData directionalLights[128];
-                PointLightData pointLights[128];
-                uint numSpotLights;
-                uint numDirectionalLights;
-                uint numPointLights;
-            };
-
-            layout(location = 0) out vec4 color;
-
-            float remap(float value, float min1, float max1, float min2, float max2) {
-                return max2 + (value - min1) * (max2 - min2) / (max1 - min1);
-            }
-
-            vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLightData light) {
-                vec3 toLight = vec3(light.position) - fragPos;
-                float r = length(toLight) / light.range;
-                if (r < 1) {
-                    vec3 toLightNormalized = normalize(toLight);
-                    float a = dot(toLightNormalized, -vec3(light.rotation * vec4(0,0,1,1)));
-                    if (a > light.spotCutoff) {
-                        float angleValue = clamp(remap(a, light.innerSpotCutoff, light.spotCutoff, 1, 0), 0, 1);
-                        float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0 , 1);
-                        float diffuse = max(dot(fragNormal, toLightNormalized), 0);
-                        return angleValue * attenuation * diffuse * light.intensity * vec3(light.color);
-                    }
-                }
-                return vec3(0);
-            }
-
-            vec3 directionalLightCalc(vec3 fragNormal, DirectionalLightData light)
-            {
-                return max(dot(fragNormal, -vec3(light.rotation * vec4(0,0,1,1))), 0) * light.intensity * vec3(light.color);
-            }
-
-            vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLightData light) {
-                vec3 toLight = vec3(light.position) - fragPos;
-                float r = length(toLight) / light.range;
-                if (r < 1) {
-                    float attenuation = clamp(1.0 / (1.0 + 25.0 * r * r) * clamp((1 - r) * 5.0, 0, 1), 0, 1);
-                    float diffuse = max(dot(fragNormal, vec3(normalize(toLight))), 0);
-                    return attenuation * diffuse * light.intensity * vec3(light.color);
-                }
-                return vec3(0);
-            }
-
-            void main()
-            {
-                uint m = texture(material, fraguv).r;
-                if (m == 0u) {
-                    discard;
-                }
-                vec3 albedo = materials[m - 1u].color.rgb;
-                vec3 lighting = vec3(0);
-                vec3 fragPos = texture(position, fraguv).xyz;
-                vec3 fragNormal = texture(normal, fraguv).xyz;
-                for (uint i = 0u; i < numSpotLights; i++) {
-                    lighting += spotLightCalc(fragPos, fragNormal, spotLights[i]);
-                }
-                for (uint i = 0u; i < numDirectionalLights; i++) {
-                    lighting += directionalLightCalc(fragNormal, directionalLights[i]);
-                }
-                for (uint i = 0u; i < numPointLights; i++) {
-                    lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
-                }
-                color = vec4(albedo * lighting, 1);
-            }
-        )");
-
-    auto outputLargePixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
+    auto outputPixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
             #version 430 core
 
             in vec2 fraguv;
@@ -314,18 +198,14 @@ inline void DeferredRenderer::createShaderPipelines()
             }
         )");
 
-    smallOutputPipeline = renderDevice.createShaderPipeline(outputVertex, outputSmallPixel);
-    largeOutputPipeline = renderDevice.createShaderPipeline(outputVertex, outputLargePixel);
+    outputPipeline = renderDevice.createShaderPipeline(outputVertex, outputPixel);
 
     outputLightBlockBuffer = renderDevice.createConstantBuffer(sizeof(LightBlock), nullptr, gl::Usage::Dynamic);
 
-    renderDevice.setShaderPipeline(smallOutputPipeline);
-    smallOutputLightBlockBP = smallOutputPipeline->getBindingPoint("Lights");
+    renderDevice.setShaderPipeline(outputPipeline);
+    outputLightBlockBP = outputPipeline->getBindingPoint("Lights");
 
-    renderDevice.setShaderPipeline(largeOutputPipeline);
-    largeOutputLightBlockBP = largeOutputPipeline->getBindingPoint("Lights");
-
-    generateScreenQuad(renderDevice, smallOutputPipeline, screenVertexArray, screenIndexBuffer);
+    generateScreenQuad(renderDevice, outputPipeline, screenVertexArray, screenIndexBuffer);
 }
 
 inline void DeferredRenderer::setupFrameBuffers()
@@ -361,7 +241,7 @@ inline void DeferredRenderer::setupFrameBuffers()
     gBufferDesc.targets[0].setTexture2DTarget(positionTex);
     gBufferDesc.targets[1].setTexture2DTarget(normalTex);
     gBufferDesc.targets[2].setTexture2DTarget(materialTex);
-    gBufferDesc.depthStencil = depthTex;
+    gBufferDesc.depthStencil.setTexture2DTarget(depthTex);
 
     gBuffer = renderDevice.createFramebuffer(gBufferDesc);
 
@@ -386,37 +266,21 @@ inline void DeferredRenderer::setupFrameBuffers()
     materialSamplerDesc.minFilter = gl::TextureFilter::Nearest;
     materialSampler = renderDevice.createSampler(materialSamplerDesc);
 
-    renderDevice.setShaderPipeline(smallOutputPipeline);
+    renderDevice.setShaderPipeline(outputPipeline);
 
-    smallOutputPositionBP = smallOutputPipeline->getBindingPoint("position");
-    smallOutputPositionBP->bind(positionTex);
-    smallOutputPositionBP->bind(positionSampler);
+    outputPositionBP = outputPipeline->getBindingPoint("position");
+    outputPositionBP->bind(positionTex);
+    outputPositionBP->bind(positionSampler);
 
-    smallOutputNormalBP = smallOutputPipeline->getBindingPoint("normal");
-    smallOutputNormalBP->bind(normalTex);
-    smallOutputNormalBP->bind(normalSampler);
+    outputNormalBP = outputPipeline->getBindingPoint("normal");
+    outputNormalBP->bind(normalTex);
+    outputNormalBP->bind(normalSampler);
 
-    smallOutputMaterialBP = smallOutputPipeline->getBindingPoint("material");
-    smallOutputMaterialBP->bind(materialTex);
-    smallOutputMaterialBP->bind(materialSampler);
+    outputMaterialBP = outputPipeline->getBindingPoint("material");
+    outputMaterialBP->bind(materialTex);
+    outputMaterialBP->bind(materialSampler);
 
-    smallOutputPaletteBP = smallOutputPipeline->getBindingPoint("palette");
-
-    renderDevice.setShaderPipeline(largeOutputPipeline);
-
-    largeOutputPositionBP = largeOutputPipeline->getBindingPoint("position");
-    largeOutputPositionBP->bind(positionTex);
-    largeOutputPositionBP->bind(positionSampler);
-
-    largeOutputNormalBP = largeOutputPipeline->getBindingPoint("normal");
-    largeOutputNormalBP->bind(normalTex);
-    largeOutputNormalBP->bind(normalSampler);
-
-    largeOutputMaterialBP = largeOutputPipeline->getBindingPoint("material");
-    largeOutputMaterialBP->bind(materialTex);
-    largeOutputMaterialBP->bind(materialSampler);
-
-    largeOutputPaletteBP = largeOutputPipeline->getBindingPoint("palette");
+    outputPaletteBP = outputPipeline->getBindingPoint("palette");
 }
 
 inline void DeferredRenderer::createRenderDeviceStates()
@@ -533,38 +397,17 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
         renderDevice.setFramebuffer(camera.target);
     }
 
-    ShaderPipeline pp;
-    switch (currentPalette->getStorageTypeHint())
+    renderDevice.setShaderPipeline(outputPipeline);
+    outputPaletteBP->bind(currentPalette);
+    outputLightBlockBP->bind(outputLightBlockBuffer);
     {
-    case BufferStorageType::Small:
-        pp = smallOutputPipeline;
-        renderDevice.setShaderPipeline(pp);
-        smallOutputPaletteBP->bind(currentPalette);
-        smallOutputLightBlockBP->bind(outputLightBlockBuffer);
-        {
-            auto& lightBlock = *(LightBlock*)outputLightBlockBuffer->map();
-            lightBlock = lights;
-            outputLightBlockBuffer->unmap();
-        }
-        smallOutputPositionBP->bind(positionTex);
-        smallOutputNormalBP->bind(normalTex);
-        smallOutputMaterialBP->bind(materialTex);
-        break;
-    case BufferStorageType::Large:
-        pp = largeOutputPipeline;
-        renderDevice.setShaderPipeline(pp);
-        largeOutputPaletteBP->bind(currentPalette);
-        largeOutputLightBlockBP->bind(outputLightBlockBuffer);
-        {
-            auto& lightBlock = *(LightBlock*)outputLightBlockBuffer->map();
-            lightBlock = lights;
-            outputLightBlockBuffer->unmap();
-        }
-        largeOutputPositionBP->bind(positionTex);
-        largeOutputNormalBP->bind(normalTex);
-        largeOutputMaterialBP->bind(materialTex);
-        break;
+        auto& lightBlock = *(LightBlock*)outputLightBlockBuffer->map();
+        lightBlock = lights;
+        outputLightBlockBuffer->unmap();
     }
+    outputPositionBP->bind(positionTex);
+    outputNormalBP->bind(normalTex);
+    outputMaterialBP->bind(materialTex);
 
     renderDevice.setViewport(0, 0, sz.x, sz.y);
     renderDevice.setRasterState(nullptr);

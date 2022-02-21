@@ -67,7 +67,7 @@ Renderer::PaletteID Renderer::registerPalette(const Palette& palette)
 {
     auto materials = palette.getData();
     size_t size = sizeof(Material) * palette.getSize();
-    auto cb = renderDevice.createConstantBuffer(size, materials, gl::Usage::Static);
+    auto cb = renderDevice.createConstantBuffer(size, materials, gl::Usage::Static, gl::BufferStorageType::Large);
     palettes.push_back(cb);
     return palettes.size() - 1;
 }

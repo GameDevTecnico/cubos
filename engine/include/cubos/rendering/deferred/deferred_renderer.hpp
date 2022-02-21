@@ -87,18 +87,12 @@ namespace cubos::rendering
 
         // region outputBuffer
         // Shader Pipeline
-        gl::ShaderPipeline smallOutputPipeline;
-        gl::ShaderBindingPoint smallOutputPositionBP;
-        gl::ShaderBindingPoint smallOutputNormalBP;
-        gl::ShaderBindingPoint smallOutputMaterialBP;
-        gl::ShaderBindingPoint smallOutputPaletteBP;
-        gl::ShaderBindingPoint smallOutputLightBlockBP;
-        gl::ShaderPipeline largeOutputPipeline;
-        gl::ShaderBindingPoint largeOutputPositionBP;
-        gl::ShaderBindingPoint largeOutputNormalBP;
-        gl::ShaderBindingPoint largeOutputMaterialBP;
-        gl::ShaderBindingPoint largeOutputPaletteBP;
-        gl::ShaderBindingPoint largeOutputLightBlockBP;
+        gl::ShaderPipeline outputPipeline;
+        gl::ShaderBindingPoint outputPositionBP;
+        gl::ShaderBindingPoint outputNormalBP;
+        gl::ShaderBindingPoint outputMaterialBP;
+        gl::ShaderBindingPoint outputPaletteBP;
+        gl::ShaderBindingPoint outputLightBlockBP;
         gl::ConstantBuffer outputLightBlockBuffer;
 
         // Screen Quad
