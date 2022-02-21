@@ -27,6 +27,8 @@ namespace cubos::gl
         virtual Texture3D createTexture3D(const Texture3DDesc& desc) override;
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) override;
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) override;
+        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
+                                                    BufferStorageType storage) override;
         virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage) override;
         virtual void setIndexBuffer(IndexBuffer ib) override;
         virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage) override;
