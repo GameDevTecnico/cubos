@@ -515,6 +515,14 @@ namespace cubos::gl
         /// @return Constant buffer handle, or nullptr if the creation failed.
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) = 0;
 
+        /// Creates a new constant buffer.
+        /// @param size Size in bytes.
+        /// @param data Initial data, can be nullptr.
+        /// @param usage The usage which the buffer will have.
+        /// @param storage The intended storage type for the buffer.
+        /// @return Constant buffer handle, or nullptr if the creation failed.
+        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage, BufferStorageType storage) = 0;
+
         /// Creates a new index buffer.
         /// @param size Size in bytes.
         /// @param data Initial data, can be nullptr.
