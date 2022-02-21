@@ -1591,6 +1591,20 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage)
 {
+    // Choose SSBO or UBO depending on given buffer size
+    GLint maxUniformBufferSize;
+    glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &maxUniformBufferSize);
+    BufferStorageType storage;
+    if (size > maxUniformBufferSize)
+        storage = BufferStorageType::Large;
+    else
+        storage = BufferStorageType::Small;
+    return createConstantBuffer(size, data, usage, storage);
+}
+
+ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage,
+                                                     BufferStorageType storage)
+{
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
         abort();
@@ -1605,14 +1619,11 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
     else
         abort(); // Invalid enum value
 
-    // Choose SSBO or UBO depending on given buffer size
-    GLint maxUniformBufferSize;
-    glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &maxUniformBufferSize);
     GLenum bufferType;
-    if (size > maxUniformBufferSize)
-        bufferType = GL_SHADER_STORAGE_BUFFER;
-    else
+    if (storage == BufferStorageType::Small)
         bufferType = GL_UNIFORM_BUFFER;
+    else
+        bufferType = GL_SHADER_STORAGE_BUFFER;
 
     // Initialize buffer
     GLuint id;
