@@ -175,9 +175,9 @@ int main(void)
         glm::quat pointLightRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
 
         renderer.drawLight(gl::SpotLightData(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1),
-                                             1, 100, glm::radians(10.0f), glm::radians(9.0f)));
-        renderer.drawLight(gl::DirectionalLightData(directionalLightRotation, glm::vec3(1), 0.5f));
-        renderer.drawLight(gl::PointLightData(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
+                                             1, 100, glm::radians(10.0f), glm::radians(9.0f), false));
+        renderer.drawLight(gl::DirectionalLightData(directionalLightRotation, glm::vec3(1), 0.5f, false));
+        renderer.drawLight(gl::PointLightData(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10, false));
 
         if (sin(t * 4) > 0)
         {
