@@ -36,6 +36,7 @@ namespace cubos::gl
         virtual void setVertexArray(VertexArray va) override;
         virtual ShaderStage createShaderStage(Stage stage, const char* src) override;
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) override;
+        virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps) override;
         virtual void setShaderPipeline(ShaderPipeline pipeline) override;
         virtual void clearColor(float r, float g, float b, float a) override;
         virtual void clearTargetColor(size_t target, float r, float g, float b, float a) override;
