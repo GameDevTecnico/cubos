@@ -38,7 +38,12 @@ namespace cubos::rendering
             PointLightData(const gl::PointLightData& light);
         };
 
+        gl::RenderDevice& renderDevice;
+
     public:
+    public:
+        explicit ShadowMapper(gl::RenderDevice& renderDevice);
+
         virtual void bind() = 0;
         virtual void unbind() = 0;
         virtual void clear() = 0;
@@ -46,8 +51,8 @@ namespace cubos::rendering
         virtual void addLight(const gl::DirectionalLightData& light) = 0;
         virtual void addLight(const gl::PointLightData& light) = 0;
         virtual size_t getSpotOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices);
-        virtual size_t getDirectionalOutput(std::vector<gl::Texture2D>& maps, std::vector<glm::mat4>& matrices);
-        virtual size_t getDirectionalOutput(std::vector<gl::Texture2DArray>& maps, std::vector<glm::mat4>& matrices);
+        virtual size_t getDirectionalOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices,
+                                            size_t& atlasStride);
 
         // TODO: Need CubeMapArrays for Point Light shadows, otherwise not enough texture units
         // virtual size_t getPointOutput(gl::CubeMapArray& mapAtlas, std::vector<glm::mat4>& matrices) = 0;

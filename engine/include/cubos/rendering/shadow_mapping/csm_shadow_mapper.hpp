@@ -3,21 +3,44 @@
 
 #include <cubos/rendering/shadow_mapping/shadow_mapper.hpp>
 
+#define CUBOS_CSM_MAX_SPOT_SHADOW_COUNT 32
+#define CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT 8
+#define CUBOS_CSM_MAX_POINT_SHADOW_COUNT 8
+
+#define CUBOS_CSM_SHADOW_CASCADE_COUNT 5
+
 namespace cubos::rendering
 {
-    class CSMShadowMapper : ShadowMapper
+    class CSMShadowMapper : public ShadowMapper
     {
+    private:
+        gl::Texture2DArray spotAtlas;
+        gl::Texture2DArray directionalAtlas;
+
+        gl::Framebuffer spotFramebuffer;
+        gl::Framebuffer directionalFramebuffer;
+
+        size_t resolution;
+
+        gl::ShaderPipeline spotPipeline;
+        gl::ShaderPipeline directionalPipeline;
+
+    private:
+        inline void setupFramebuffers();
+        inline void setupPipelines();
+
     public:
-        CSMShadowMapper();
-        void bind() override;
-        void unbind() override;
-        void clear() override;
-        void addLight(const gl::SpotLightData& light) override;
-        void addLight(const gl::DirectionalLightData& light) override;
-        void addLight(const gl::PointLightData& light) override;
-        size_t getSpotOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices) override;
-        size_t getDirectionalOutput(std::vector<gl::Texture2D>& maps, std::vector<glm::mat4>& matrices) override;
-        size_t getDirectionalOutput(std::vector<gl::Texture2DArray>& maps, std::vector<glm::mat4>& matrices) override;
+        CSMShadowMapper(gl::RenderDevice& renderDevice, size_t resolution);
+
+        virtual void bind() override;
+        virtual void unbind() override;
+        virtual void clear() override;
+        virtual void addLight(const gl::SpotLightData& light) override;
+        virtual void addLight(const gl::DirectionalLightData& light) override;
+        virtual void addLight(const gl::PointLightData& light) override;
+        virtual size_t getSpotOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices) override;
+        virtual size_t getDirectionalOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices,
+                                            size_t& atlasStride) override;
     };
 } // namespace cubos::rendering
 
