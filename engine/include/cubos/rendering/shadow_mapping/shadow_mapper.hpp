@@ -44,6 +44,7 @@ namespace cubos::rendering
     public:
         explicit ShadowMapper(gl::RenderDevice& renderDevice);
 
+        virtual void setModelMatrix(glm::mat4 modelMat) = 0;
         virtual void bind() = 0;
         virtual void unbind() = 0;
         virtual void clear() = 0;

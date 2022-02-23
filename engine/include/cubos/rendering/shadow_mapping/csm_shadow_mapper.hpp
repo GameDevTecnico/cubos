@@ -32,6 +32,7 @@ namespace cubos::rendering
     public:
         CSMShadowMapper(gl::RenderDevice& renderDevice, size_t resolution);
 
+        virtual void setModelMatrix(glm::mat4 modelMat) override;
         virtual void bind() override;
         virtual void unbind() override;
         virtual void clear() override;

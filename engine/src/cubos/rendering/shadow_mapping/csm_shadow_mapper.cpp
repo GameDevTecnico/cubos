@@ -30,7 +30,53 @@ inline void CSMShadowMapper::setupFramebuffers()
 
 inline void CSMShadowMapper::setupPipelines()
 {
-    
+    ShaderStage vertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
+        #version 460 core
+        layout (location = 0) in uvec3 aPos;
+
+        uniform M
+        {
+            mat4 M;
+        };
+
+        void main()
+        {
+            gl_Position = M * vec4(position, 1.0);
+        }
+    )");
+
+    ShaderStage directionalGeom = renderDevice.createShaderStage(gl::Stage::Geometry, R"(
+        #version 460 core
+
+        layout(triangles, invocations = 5) in;
+        layout(triangle_strip, max_vertices = 3) out;
+
+        layout (std140) uniform LightSpaceMatrices
+        {
+            mat4 lightSpaceMatrices[8 * 5];
+        };
+
+        uniform uint atlasOffset;
+
+        void main()
+        {
+            for (int i = 0; i < 3; ++i)
+            {
+                gl_Position = lightSpaceMatrices[atlasOffset + gl_InvocationID] * gl_in[i].gl_Position;
+                gl_Layer = atlasOffset + gl_InvocationID;
+                EmitVertex();
+            }
+            EndPrimitive();
+        }
+    )");
+
+    ShaderStage pixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
+        #version 460 core
+
+        void main()
+        {
+        }
+    )");
 }
 
 cubos::rendering::CSMShadowMapper::CSMShadowMapper(RenderDevice& renderDevice, size_t resolution)
@@ -38,6 +84,10 @@ cubos::rendering::CSMShadowMapper::CSMShadowMapper(RenderDevice& renderDevice, s
 {
     setupFramebuffers();
     setupPipelines();
+}
+
+void CSMShadowMapper::setModelMatrix(glm::mat4 modelMat)
+{
 }
 
 void cubos::rendering::CSMShadowMapper::bind()
@@ -71,8 +121,7 @@ size_t cubos::rendering::CSMShadowMapper::getSpotOutput(cubos::gl::Texture2DArra
 }
 
 size_t cubos::rendering::CSMShadowMapper::getDirectionalOutput(cubos::gl::Texture2DArray& mapAtlas,
-                                                               std::vector<glm::mat4>& matrices,
-                                                               size_t& atlasStride)
+                                                               std::vector<glm::mat4>& matrices, size_t& atlasStride)
 {
     return ShadowMapper::getDirectionalOutput(mapAtlas, matrices, atlasStride);
 }
