@@ -49,12 +49,13 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/io/sources/double_axis.cpp"
 
     "src/cubos/gl/debug.cpp"
-    
+    "src/cubos/gl/render_device.cpp"
     "src/cubos/gl/ogl_render_device.hpp"
     "src/cubos/gl/ogl_render_device.cpp"
     "src/cubos/gl/material.cpp"
     "src/cubos/gl/palette.cpp"
     "src/cubos/gl/grid.cpp"
+    "src/cubos/gl/light.cpp"
     "src/cubos/gl/util.cpp"
     )
 
@@ -78,6 +79,13 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/data/std_archive.hpp"
     "include/cubos/data/embedded_archive.hpp"
 
+    "include/cubos/memory/stream.hpp"
+    "include/cubos/memory/serialization_map.hpp"
+    "include/cubos/memory/serializer.hpp"
+    "include/cubos/memory/deserializer.hpp"
+    "include/cubos/memory/yaml_serializer.hpp"
+    "include/cubos/memory/yaml_deserializer.hpp"
+
     "include/cubos/io/window.hpp"
 
     "include/cubos/gl/debug.hpp"
@@ -85,6 +93,9 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/material.hpp"
     "include/cubos/gl/palette.hpp"
     "include/cubos/gl/grid.hpp"
+    "include/cubos/gl/vertex.hpp"
+    "include/cubos/gl/camera_data.hpp"
+    "include/cubos/gl/light.hpp"
     "include/cubos/gl/util.hpp"
 
     "include/cubos/io/input_manager.hpp"
