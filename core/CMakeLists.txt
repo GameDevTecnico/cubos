@@ -57,6 +57,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/gl/grid.cpp"
     "src/cubos/gl/light.cpp"
     "src/cubos/gl/util.cpp"
+    "src/cubos/gl/triangulation.cpp"
     )
 
 set(CUBOS_CORE_INCLUDE
@@ -97,6 +98,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/camera_data.hpp"
     "include/cubos/gl/light.hpp"
     "include/cubos/gl/util.hpp"
+    "include/cubos/gl/triangulation.hpp"
 
     "include/cubos/io/input_manager.hpp"
     "include/cubos/io/action.hpp"
