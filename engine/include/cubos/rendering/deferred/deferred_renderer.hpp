@@ -6,6 +6,7 @@
 #include <cubos/gl/vertex.hpp>
 #include <cubos/gl/render_device.hpp>
 #include <cubos/rendering/renderer.hpp>
+#include <cubos/rendering/shadow_mapping/shadow_mapper.hpp>
 
 #define CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT 128
@@ -66,6 +67,25 @@ namespace cubos::rendering
             uint32_t numPointLights = 0;
         } lights;
 
+        struct CameraDataUniform
+        {
+            glm::mat4 V;
+            float nearPlane;
+            float farPlane;
+        };
+
+        struct ShadowMapInfoUniform
+        {
+            glm::mat4 directionalMatrices[CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS];
+            size_t numDirectionalShadows;
+        };
+
+        struct CascadeInfoUniform
+        {
+            float cascadeDistances[CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE - 1];
+            uint32_t cascadeCount;
+        };
+
         // region gBuffer
         //  Shader Pipeline
         gl::ShaderPipeline gBufferPipeline;
@@ -95,6 +115,17 @@ namespace cubos::rendering
         gl::ShaderBindingPoint outputLightBlockBP;
         gl::ConstantBuffer outputLightBlockBuffer;
 
+        gl::ShaderBindingPoint cameraDataBP;
+        gl::ConstantBuffer cameraDataBuffer;
+
+        gl::ShaderBindingPoint shadowMapInfoBP;
+        gl::ConstantBuffer shadowMapInfoBuffer;
+
+        gl::ShaderBindingPoint cascadeInfoBP;
+        gl::ConstantBuffer cascadeInfoBuffer;
+
+        gl::ShaderBindingPoint directionalShadowMapBP;
+
         // Screen Quad
         gl::VertexArray screenVertexArray;
         gl::IndexBuffer screenIndexBuffer;
@@ -103,7 +134,12 @@ namespace cubos::rendering
         gl::Sampler positionSampler;
         gl::Sampler normalSampler;
         gl::Sampler materialSampler;
+
+        gl::Sampler shadowMapSampler;
         // endregion
+
+        ShadowMapper* shadowMapper = nullptr;
+
     private:
         void createShaderPipelines();
         void setupFrameBuffers();
@@ -118,6 +154,7 @@ namespace cubos::rendering
         virtual void drawLight(const cubos::gl::SpotLightData& light) override;
         virtual void drawLight(const cubos::gl::DirectionalLightData& light) override;
         virtual void drawLight(const cubos::gl::PointLightData& light) override;
+        void setShadowMapper(ShadowMapper* shadowMapper);
         virtual void render(const cubos::gl::CameraData& camera, bool usePostProcessing = true) override;
         virtual void flush() override;
     };

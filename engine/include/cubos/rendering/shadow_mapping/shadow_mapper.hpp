@@ -3,57 +3,44 @@
 
 #include <cubos/gl/render_device.hpp>
 #include <cubos/gl/light.hpp>
+#include <cubos/gl/camera_data.hpp>
+#include <cubos/rendering/renderer.hpp>
 
 #include <vector>
+
+#define CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS 64
+#define CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE 8
 
 namespace cubos::rendering
 {
     class ShadowMapper
     {
     protected:
-        struct SpotLightData
-        {
-            glm::vec4 position;
-            glm::mat4 rotation;
-            float range;
-            float spotAngle;
-            float padding[2];
-
-            SpotLightData(const gl::SpotLightData& light);
-        };
-
-        struct DirectionalLightData
-        {
-            glm::mat4 rotation;
-
-            DirectionalLightData(const gl::DirectionalLightData& light);
-        };
-
-        struct PointLightData
-        {
-            glm::vec4 position;
-            float range;
-            float padding[3];
-
-            PointLightData(const gl::PointLightData& light);
-        };
-
         gl::RenderDevice& renderDevice;
 
+        std::vector<Renderer::DrawRequest> drawRequests;
+
     public:
+        struct DirectionalOutput
+        {
+            gl::Texture2DArray mapAtlas = nullptr;
+            std::vector<glm::mat4> matrices = {};
+            std::vector<float> planeDistances = {};
+            size_t atlasStride = 0;
+            size_t numLights = 0;
+        };
+
     public:
         explicit ShadowMapper(gl::RenderDevice& renderDevice);
 
-        virtual void setModelMatrix(glm::mat4 modelMat) = 0;
-        virtual void bind() = 0;
-        virtual void unbind() = 0;
-        virtual void clear() = 0;
+        virtual void drawModel(const Renderer::DrawRequest& model);
+        virtual void render(const gl::CameraData& camera) = 0;
+        virtual void flush() = 0;
         virtual void addLight(const gl::SpotLightData& light) = 0;
         virtual void addLight(const gl::DirectionalLightData& light) = 0;
         virtual void addLight(const gl::PointLightData& light) = 0;
         virtual size_t getSpotOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices);
-        virtual size_t getDirectionalOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices,
-                                            size_t& atlasStride);
+        virtual DirectionalOutput getDirectionalOutput();
 
         // TODO: Need CubeMapArrays for Point Light shadows, otherwise not enough texture units
         // virtual size_t getPointOutput(gl::CubeMapArray& mapAtlas, std::vector<glm::mat4>& matrices) = 0;

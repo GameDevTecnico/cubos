@@ -19,7 +19,7 @@ namespace cubos::rendering
 
     class Renderer
     {
-    protected:
+    public:
         struct RendererModel
         {
             gl::VertexArray va;
@@ -33,6 +33,7 @@ namespace cubos::rendering
             glm::mat4 modelMat;
         };
 
+    protected:
         std::vector<RendererModel> models;
         std::vector<gl::ConstantBuffer> palettes;
         cubos::gl::ConstantBuffer currentPalette;

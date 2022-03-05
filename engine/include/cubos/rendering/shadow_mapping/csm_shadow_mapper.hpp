@@ -7,13 +7,24 @@
 #define CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT 8
 #define CUBOS_CSM_MAX_POINT_SHADOW_COUNT 8
 
-#define CUBOS_CSM_SHADOW_CASCADE_COUNT 5
-
 namespace cubos::rendering
 {
     class CSMShadowMapper : public ShadowMapper
     {
     private:
+        gl::SpotLightData spotLights[CUBOS_CSM_MAX_SPOT_SHADOW_COUNT]{};
+        size_t numSpotLights = 0;
+        gl::DirectionalLightData directionalLights[CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT]{};
+        glm::mat4 directionalMatrices[CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS];
+        size_t numDirectionalLights = 0;
+        gl::PointLightData pointLights[CUBOS_CSM_MAX_POINT_SHADOW_COUNT]{};
+        size_t numPointLights = 0;
+
+        size_t numCascades;
+        float cascades[CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE - 1];
+
+        float zMultiplier = 1.0f;
+
         gl::Texture2DArray spotAtlas;
         gl::Texture2DArray directionalAtlas;
 
@@ -25,23 +36,36 @@ namespace cubos::rendering
         gl::ShaderPipeline spotPipeline;
         gl::ShaderPipeline directionalPipeline;
 
+        gl::ShaderBindingPoint modelMatrixBP;
+        gl::ConstantBuffer modelMatrixBuffer;
+
+        gl::ConstantBuffer directionalLightMatricesBuffer;
+        gl::ShaderBindingPoint directionalLightMatricesBP;
+
+        gl::ShaderBindingPoint directionalAtlasOffsetBP;
+
+        gl::RasterState rasterState;
+        gl::BlendState blendState;
+        gl::DepthStencilState depthStencilState;
+
     private:
         inline void setupFramebuffers();
         inline void setupPipelines();
 
-    public:
-        CSMShadowMapper(gl::RenderDevice& renderDevice, size_t resolution);
+        inline void createRenderDeviceStates();
 
-        virtual void setModelMatrix(glm::mat4 modelMat) override;
-        virtual void bind() override;
-        virtual void unbind() override;
-        virtual void clear() override;
+    public:
+        CSMShadowMapper(gl::RenderDevice& renderDevice, size_t resolution, size_t numCascades);
+        virtual void drawModel(const Renderer::DrawRequest& model) override;
+        virtual void render(const gl::CameraData& camera) override;
+        virtual void flush() override;
         virtual void addLight(const gl::SpotLightData& light) override;
         virtual void addLight(const gl::DirectionalLightData& light) override;
         virtual void addLight(const gl::PointLightData& light) override;
+
         virtual size_t getSpotOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices) override;
-        virtual size_t getDirectionalOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices,
-                                            size_t& atlasStride) override;
+        virtual DirectionalOutput getDirectionalOutput() override;
+        void setCascadeDistances(const std::vector<float>& distances);
     };
 } // namespace cubos::rendering
 

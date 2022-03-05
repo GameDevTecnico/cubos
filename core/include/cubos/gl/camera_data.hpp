@@ -10,7 +10,10 @@ namespace cubos::gl
     {
         glm::mat4 viewMatrix; ///< The Camera's view matrix.
 
-        glm::mat4 perspectiveMatrix; ///< The camera's perspective matrix.
+        float FOV;
+        float aspectRatio;
+        float nearPlane;
+        float farPlane;
 
         gl::Framebuffer target; ///< The target framebuffer which the camera should be used to draw into.
     };
