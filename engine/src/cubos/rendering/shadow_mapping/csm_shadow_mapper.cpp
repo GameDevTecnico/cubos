@@ -223,7 +223,7 @@ void CSMShadowMapper::render(const gl::CameraData& camera)
 
     for (int i = 0; i < numDirectionalLights; ++i)
     {
-        directionalAtlasOffsetBP->setConstant(i * numCascades);
+        directionalAtlasOffsetBP->setConstant(static_cast<unsigned int>(i * numCascades));
         for (auto it = drawRequests.begin(); it != drawRequests.end(); it++)
         {
             auto& m = *(glm::mat4*)modelMatrixBuffer->map();

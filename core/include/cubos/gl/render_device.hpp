@@ -280,7 +280,7 @@ namespace cubos::gl
         struct FramebufferTarget
         {
         private:
-            bool set;
+            bool set = false;
             TargetType type; ///< Type of the currently set target.
 
             std::variant<CubeMapTarget, Texture2DTarget, Texture2DArrayTarget> target;
