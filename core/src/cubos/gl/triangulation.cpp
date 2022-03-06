@@ -9,9 +9,8 @@ using namespace cubos::gl;
 using namespace glm;
 using std::vector;
 
-std::tuple<Triangle, Triangle> add_triangle_from_quad(vector<Triangle>& triangles, glm::vec3 bottomLeft,
-                                                      glm::vec3 bottomRight, glm::vec3 topLeft, glm::vec3 topRight,
-                                                      uint16_t material_id)
+void add_triangle_from_quad(vector<Triangle>& triangles, glm::vec3 bottomLeft, glm::vec3 bottomRight, glm::vec3 topLeft,
+                            glm::vec3 topRight, uint16_t material_id)
 {
     Triangle triangle_bl, triangle_tr;
 

@@ -3,11 +3,14 @@
 #include <cubos/gl/render_device.hpp>
 #include <cubos/gl/vertex.hpp>
 #include <cubos/gl/palette.hpp>
+#include <cubos/gl/grid.hpp>
+#include <cubos/gl/triangulation.hpp>
 #include <cubos/rendering/deferred/deferred_renderer.hpp>
 #include <cubos/rendering/post_processing/copy_pass.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <unordered_map>
 
 using namespace cubos;
 
@@ -38,88 +41,66 @@ int main(void)
     auto palette1ID = renderer.registerPalette(palette1);
     auto palette2ID = renderer.registerPalette(palette2);
 
-    std::vector<cubos::gl::Vertex> vertices = {
-        // Front
-        {{1, 0, 0}, {0, 0, -1}, 1},
-        {{0, 0, 0}, {0, 0, -1}, 1},
-        {{0, 1, 0}, {0, 0, -1}, 1},
-        {{1, 1, 0}, {0, 0, -1}, 1},
-        // Back
-        {{0, 0, 1}, {0, 0, 1}, 2},
-        {{1, 0, 1}, {0, 0, 1}, 2},
-        {{1, 1, 1}, {0, 0, 1}, 2},
-        {{0, 1, 1}, {0, 0, 1}, 2},
-        // Left
-        {{1, 0, 1}, {1, 0, 0}, 3},
-        {{1, 0, 0}, {1, 0, 0}, 3},
-        {{1, 1, 0}, {1, 0, 0}, 3},
-        {{1, 1, 1}, {1, 0, 0}, 3},
-        // Right
-        {{0, 0, 0}, {-1, 0, 0}, 4},
-        {{0, 0, 1}, {-1, 0, 0}, 4},
-        {{0, 1, 1}, {-1, 0, 0}, 4},
-        {{0, 1, 0}, {-1, 0, 0}, 4},
-        // Bottom
-        {{1, 0, 1}, {0, -1, 0}, 5},
-        {{0, 0, 1}, {0, -1, 0}, 5},
-        {{0, 0, 0}, {0, -1, 0}, 5},
-        {{1, 0, 0}, {0, -1, 0}, 5},
-        // Top
-        {{1, 1, 0}, {0, 1, 0}, 6},
-        {{0, 1, 0}, {0, 1, 0}, 6},
-        {{0, 1, 1}, {0, 1, 0}, 6},
-        {{1, 1, 1}, {0, 1, 0}, 6},
-    };
+    std::vector<cubos::gl::Vertex> vertices;
 
-    std::vector<uint32_t> indices = {
-        // Front
-        0,
-        1,
-        3,
-        1,
-        2,
-        3,
+    std::vector<uint32_t> indices;
 
-        // Back
-        4,
-        5,
-        7,
-        5,
-        6,
-        7,
+    cubos::gl::Grid grid(glm::ivec3(3, 2, 3));
+    grid.set(glm::ivec3(0, 0, 0), 1);
+    grid.set(glm::ivec3(0, 0, 1), 1);
+    grid.set(glm::ivec3(0, 0, 2), 1);
+    grid.set(glm::ivec3(1, 0, 0), 1);
+    grid.set(glm::ivec3(1, 0, 1), 1);
+    grid.set(glm::ivec3(1, 0, 2), 1);
+    grid.set(glm::ivec3(2, 0, 0), 1);
+    grid.set(glm::ivec3(2, 0, 1), 1);
+    grid.set(glm::ivec3(2, 0, 2), 1);
+    grid.set(glm::ivec3(2, 1, 2), 2);
 
-        // Left
-        8,
-        9,
-        11,
-        9,
-        10,
-        11,
+    std::vector<cubos::gl::Triangle> triangles = cubos::gl::Triangulation::Triangulate(grid);
+    std::unordered_map<cubos::gl::Vertex, int> vertex_to_index = {};
 
-        // Right
-        12,
-        13,
-        15,
-        13,
-        14,
-        15,
+    for (auto it = triangles.begin(); it != triangles.end(); it++)
+    {
+        int v0_index = -1;
+        if (!vertex_to_index.contains(it->v0))
+        {
+            v0_index = vertex_to_index[it->v0] = vertices.size();
+            vertices.push_back(it->v0);
+        }
+        else
+        {
+            v0_index = vertex_to_index[it->v0];
+        }
 
-        // Bottom
-        16,
-        17,
-        19,
-        17,
-        18,
-        19,
+        indices.push_back(v0_index);
 
-        // Top
-        20,
-        21,
-        23,
-        21,
-        22,
-        23,
-    };
+        int v1_index = -1;
+        if (!vertex_to_index.contains(it->v1))
+        {
+            v1_index = vertex_to_index[it->v1] = vertices.size();
+            vertices.push_back(it->v1);
+        }
+        else
+        {
+            v1_index = vertex_to_index[it->v1];
+        }
+
+        indices.push_back(v1_index);
+
+        int v2_index = -1;
+        if (!vertex_to_index.contains(it->v2))
+        {
+            v2_index = vertex_to_index[it->v2] = vertices.size();
+            vertices.push_back(it->v2);
+        }
+        else
+        {
+            v2_index = vertex_to_index[it->v2];
+        }
+
+        indices.push_back(v2_index);
+    }
 
     rendering::Renderer::ModelID id = renderer.registerModel(vertices, indices);
 
