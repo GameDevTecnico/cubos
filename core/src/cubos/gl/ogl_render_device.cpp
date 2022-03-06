@@ -1488,8 +1488,9 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     {
         for (size_t j = 0, div = 1; j < desc.mipLevelCount; ++j, div *= 2)
         {
-            glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i, desc.width / div, desc.height / div, 1, format, type,
-                            desc.data[i][j]);
+            if (desc.data[i][j] != nullptr)
+                glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i, desc.width / div, desc.height / div, 1, format, type,
+                                desc.data[i][j]);
         }
     }
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
