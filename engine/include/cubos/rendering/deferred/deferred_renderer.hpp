@@ -72,17 +72,19 @@ namespace cubos::rendering
             glm::mat4 V;
             float nearPlane;
             float farPlane;
+            float padding[2];
         };
 
         struct ShadowMapInfoUniform
         {
             glm::mat4 directionalMatrices[CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS];
             size_t numDirectionalShadows;
+            float padding[3];
         };
 
         struct CascadeInfoUniform
         {
-            float cascadeDistances[CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE - 1];
+            float cascadeDistances[CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE];
             uint32_t cascadeCount;
         };
 

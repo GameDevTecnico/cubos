@@ -47,29 +47,28 @@ inline void CSMShadowMapper::setupPipelines()
         }
     )");
     ShaderStage directionalGeom =
-        renderDevice.createShaderStage(gl::Stage::Geometry, fmt::sprintf(R"(
-        #version 460 core
+        renderDevice.createShaderStage(gl::Stage::Geometry, fmt::sprintf(R"(#version 460 core
 
-        layout(triangles, invocations = %d) in;
-        layout(triangle_strip, max_vertices = 3) out;
+layout(triangles, invocations = %d) in;
+layout(triangle_strip, max_vertices = 3) out;
 
-        uniform LightMatrices
-        {
-            mat4 lightMatrices[%d];
-        };
+uniform LightMatrices
+{
+    mat4 lightMatrices[%d];
+};
 
-        uniform int atlasOffset;
+uniform int atlasOffset;
 
-        void main()
-        {
-            for (int i = 0; i < 3; ++i)
-            {
-                gl_Layer = atlasOffset + gl_InvocationID;
-                gl_Position = lightMatrices[atlasOffset + gl_InvocationID] * gl_in[i].gl_Position;
-                EmitVertex();
-            }
-            EndPrimitive();
-        }
+void main()
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        gl_Position = lightMatrices[atlasOffset + gl_InvocationID] * gl_in[i].gl_Position;
+        gl_Layer = atlasOffset + gl_InvocationID;
+        EmitVertex();
+    }
+    EndPrimitive();
+}
     )",
                                                                          numCascades, CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS)
                                                                 .c_str());
@@ -101,7 +100,7 @@ inline void CSMShadowMapper::createRenderDeviceStates()
 {
     RasterStateDesc rasterStateDesc;
     rasterStateDesc.frontFace = gl::Winding::CCW;
-    rasterStateDesc.cullFace = gl::Face::Front;
+    // rasterStateDesc.cullFace = gl::Face::Front;
     rasterStateDesc.cullEnabled = true;
     rasterState = renderDevice.createRasterState(rasterStateDesc);
 
@@ -169,7 +168,7 @@ void CSMShadowMapper::render(const gl::CameraData& camera)
             }
             center /= worldCorners.size();
 
-            const auto lightView = glm::lookAt(center + directionalLights[i].rotation * glm::vec3(0, 0, 1), center,
+            const auto lightView = glm::lookAt(center - (directionalLights[i].rotation * glm::vec3(0, 0, 1)), center,
                                                glm::vec3(0.0f, 1.0f, 0.0f));
 
             float minX = std::numeric_limits<float>::max();

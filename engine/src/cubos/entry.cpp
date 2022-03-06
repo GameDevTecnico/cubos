@@ -19,7 +19,7 @@ int main(void)
     auto& renderDevice = window->getRenderDevice();
 
     auto shadowMapper = rendering::CSMShadowMapper(renderDevice, 1024, 5);
-    shadowMapper.setCascadeDistances({20, 50, 200, 500});
+    shadowMapper.setCascadeDistances({5, 10, 15, 20});
 
     auto renderer = rendering::DeferredRenderer(*window);
 
@@ -138,7 +138,7 @@ int main(void)
                                  glm::radians(20.0f),
                                  windowSize.x / windowSize.y,
                                  0.1f,
-                                 1000.f,
+                                 20.f,
                                  0};
     float t = 0;
     int s = 0;
@@ -178,7 +178,7 @@ int main(void)
 
         glm::quat spotLightRotation = glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
         glm::quat directionalLightRotation =
-            glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+            glm::quat(glm::vec3(0, t * 0.2, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
         glm::quat pointLightRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
 
         /*/
@@ -201,7 +201,7 @@ int main(void)
             renderer.setPalette(palette2ID);
         }
 
-        renderer.render(mainCamera);
+        renderer.render(mainCamera, false);
         renderer.flush();
 
         window->swapBuffers();

@@ -94,7 +94,7 @@ uniform sampler2D position;
 uniform sampler2D normal;
 uniform usampler2D material;
 
-layout(st140) uniform CameraData
+layout(std140) uniform CameraData
 {
     mat4 V;
     float nearPlane;
@@ -152,7 +152,7 @@ layout(std140) uniform ShadowMapInfo
     uint numDirectionalShadows;
 };
 
-layout(std140) uniform CascadeInfo
+uniform CascadeInfo
 {
     float cascadeDistances[%d];
     uint cascadeCount;
@@ -198,24 +198,24 @@ vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLightData light) {
     return vec3(0);
 }
 
-float directionalShadow(vec3 fragPos, vec3 normal, int lightIndex) {
-    if (lightIndex > numDirectional) {
+float directionalShadow(vec3 fragPos, vec3 fragNormal, uint lightIndex) {
+    if (lightIndex > numDirectionalShadows) {
         return 0;
     }
     // select cascade layer
     vec4 fragPosView = V * vec4(fragPos, 1.0);
     float depth = abs(fragPosView.z);
 
-    int layer = 0;
-    for (; layer < cascadeCount - 1; layer++)
+    int layer;
+    for (layer = 0; layer < int(cascadeCount) - 1; layer++)
     {
-        if (depth < cascadeDistances[i])
+        if (depth < cascadeDistances[layer])
         {
             break;
         }
     }
 
-    vec4 fragPosLightSpace = lightSpaceMatrices[lightIndex * cascadeCount + layer] * vec4(fragPos, 1.0);
+    vec4 fragPosLightSpace = directionalMatrices[lightIndex * cascadeCount + layer] * vec4(fragPos, 1.0);
 
     // perform perspective divide
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
@@ -224,12 +224,12 @@ float directionalShadow(vec3 fragPos, vec3 normal, int lightIndex) {
 
     // get depth of current fragment from light's perspective
     float currentDepth = projCoords.z;
-    if (currentDepth  > 1.0)
+    if (currentDepth > 1.0)
     {
         return 0.0;
     }
     // calculate bias (based on depth map resolution and slope)
-    float bias = max(0.05 * (1.0 - dot(normal, -vec3(light.rotation * vec4(0, 0, 1, 1)))), 0.005);
+    float bias = max(0.05 * (1.0 - dot(fragNormal, -vec3(directionalLights[lightIndex].rotation * vec4(0, 0, 1, 1)))), 0.005);
     if (layer == cascadeCount - 1)
     {
         bias *= 1 / (farPlane * 0.5f);
@@ -284,12 +284,12 @@ void main()
     for (uint i = 0u; i < numPointLights; i++) {
         lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
     }
-    color = vec4(albedo * lighting, 1);
+    color = vec4(albedo * max(lighting, 0.05), 1);
 }
         )",
                      CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT, CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT,
                      CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT, CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS,
-                     CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE - 1)
+                     CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE)
             .c_str());
 
     outputPipeline = renderDevice.createShaderPipeline(outputVertex, outputPixel);
