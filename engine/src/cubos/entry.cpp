@@ -58,7 +58,8 @@ int main(void)
     grid.set(glm::ivec3(2, 1, 2), 2);
 
     std::vector<cubos::gl::Triangle> triangles = cubos::gl::Triangulation::Triangulate(grid);
-    std::unordered_map<cubos::gl::Vertex, int> vertex_to_index = {};
+
+    std::unordered_map<cubos::gl::Vertex, int, cubos::gl::Vertex::hash> vertex_to_index;
 
     for (auto it = triangles.begin(); it != triangles.end(); it++)
     {
