@@ -41,7 +41,7 @@ Grid::Grid()
     this->indices.resize(1, 0);
 }
 
-void Grid::setSize(const glm::ivec3& size)
+void Grid::setSize(const glm::uvec3& size)
 {
     if (size == this->size)
         return;
@@ -56,6 +56,11 @@ void Grid::setSize(const glm::ivec3& size)
     this->size = size;
     this->indices.clear();
     this->indices.resize(this->size.x * this->size.y * this->size.z, 0);
+}
+
+const glm::uvec3& Grid::getSize() const
+{
+    return size;
 }
 
 uint16_t Grid::get(const glm::ivec3& position) const
