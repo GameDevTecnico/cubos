@@ -1,6 +1,7 @@
-#include <cubos/entry.hpp>
+#include <cubos/cubos.hpp>
 
 int main(int argc, char** argv)
 {
-    cubos::init();
+    cubos::init(argc, argv);
+    cubos::run();
 }
