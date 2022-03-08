@@ -58,6 +58,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/gl/light.cpp"
     "src/cubos/gl/util.cpp"
     "src/cubos/gl/triangulation.cpp"
+    "src/cubos/gl/vertex.cpp"
     )
 
 set(CUBOS_CORE_INCLUDE

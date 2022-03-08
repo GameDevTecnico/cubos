@@ -14,24 +14,10 @@ namespace cubos::gl
 
         uint16_t material; ///< The material index on the palette.
 
-        bool operator==(const Vertex& lhs, const Vertex& rhs)
-        {
-            return lhs.position == rhs.position && lhs.normal == rhs.normal && lhs.material == rhs.normal;
-        }
+        bool operator==(const Vertex& v) const;
 
-        struct hash
-        {
-            std::size_t operator()(const cubos::gl::Vertex& vertex) const
-            {
-                std::size_t hash_res = std::hash<glm::uint>()(vertex.position.x);
-                hash_res = hash_res ^ std::hash<glm::uint>()(vertex.position.y) << 1;
-                hash_res = hash_res ^ std::hash<glm::uint>()(vertex.position.z) << 1;
-                hash_res = hash_res ^ std::hash<glm::uint>()(vertex.normal.x) << 1;
-                hash_res = hash_res ^ std::hash<glm::uint>()(vertex.normal.y) << 1;
-                hash_res = hash_res ^ std::hash<glm::uint>()(vertex.normal.z) << 1;
-                hash_res = hash_res ^ std::hash<uint16_t>()(vertex.material) << 1;
-                return hash_res;
-            }
+        struct hash {
+            size_t operator()(const cubos::gl::Vertex& vertex) const;
         };
     };
 } // namespace cubos::gl
