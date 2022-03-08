@@ -47,15 +47,15 @@ int main(void)
 
     cubos::gl::Grid grid(glm::ivec3(3, 2, 3));
     grid.set(glm::ivec3(0, 0, 0), 1);
-    grid.set(glm::ivec3(0, 0, 1), 1);
-    grid.set(glm::ivec3(0, 0, 2), 1);
-    grid.set(glm::ivec3(1, 0, 0), 1);
-    grid.set(glm::ivec3(1, 0, 1), 1);
-    grid.set(glm::ivec3(1, 0, 2), 1);
+    grid.set(glm::ivec3(1, 0, 0), 2);
     grid.set(glm::ivec3(2, 0, 0), 1);
-    grid.set(glm::ivec3(2, 0, 1), 1);
+    grid.set(glm::ivec3(0, 0, 1), 2);
+    grid.set(glm::ivec3(1, 0, 1), 1);
+    grid.set(glm::ivec3(2, 0, 1), 2);
+    grid.set(glm::ivec3(0, 0, 2), 1);
+    grid.set(glm::ivec3(1, 0, 2), 2);
     grid.set(glm::ivec3(2, 0, 2), 1);
-    grid.set(glm::ivec3(2, 1, 2), 2);
+    grid.set(glm::ivec3(1, 1, 1), 3);
 
     std::vector<cubos::gl::Triangle> triangles = cubos::gl::Triangulation::Triangulate(grid);
 
@@ -63,6 +63,7 @@ int main(void)
 
     for (auto it = triangles.begin(); it != triangles.end(); it++)
     {
+
         int v0_index = -1;
         if (!vertex_to_index.contains(it->v0))
         {
@@ -134,22 +135,13 @@ int main(void)
         renderDevice.setFramebuffer(0);
         renderDevice.clearColor(0.0, 0.0, 0.0, 0.0f);
 
-        for (int x = -1; x < 1; x++)
-        {
-            for (int y = -1; y < 1; y++)
-            {
-                for (int z = -1; z < 1; z++)
-                {
-                    auto axis = glm::vec3(x, y, z) * 2.0f + glm::vec3(1);
+        auto axis = glm::vec3(0, 0, 0) * 2.0f + glm::vec3(1);
 
-                    auto modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z)) *
-                                    glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f)) *
-                                    glm::rotate(glm::mat4(1.0f), glm::radians(t), axis) *
-                                    glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f));
-                    renderer.drawModel(id, modelMat);
-                }
-            }
-        }
+        auto modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0)) *
+                        glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f)) *
+                        glm::rotate(glm::mat4(1.0f), glm::radians(t) * 2, axis) *
+                        glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f));
+        renderer.drawModel(id, modelMat);
 
         glm::quat spotLightRotation = glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
         glm::quat directionalLightRotation =

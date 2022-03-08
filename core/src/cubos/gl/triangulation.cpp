@@ -17,18 +17,18 @@ void add_triangle_from_quad(vector<Triangle>& triangles, glm::vec3 bottomLeft, g
     triangle_bl.v0.material = triangle_bl.v1.material = triangle_bl.v2.material = triangle_tr.v0.material =
         triangle_tr.v1.material = triangle_tr.v2.material = material_id;
 
-    auto normal = glm::cross(topLeft - bottomLeft, bottomRight - topLeft);
+    auto normal = glm::cross(topLeft - bottomLeft, bottomRight - bottomLeft);
 
     triangle_bl.v0.normal = triangle_bl.v1.normal = triangle_bl.v2.normal = triangle_tr.v0.normal =
         triangle_tr.v1.normal = triangle_tr.v2.normal = normal;
 
     triangle_bl.v0.position = topLeft;
-    triangle_bl.v1.position = bottomLeft;
-    triangle_bl.v2.position = bottomRight;
+    triangle_bl.v1.position = bottomRight;
+    triangle_bl.v2.position = bottomLeft;
 
     triangle_tr.v0.position = topRight;
-    triangle_tr.v1.position = topLeft;
-    triangle_tr.v2.position = bottomRight;
+    triangle_tr.v1.position = bottomRight;
+    triangle_tr.v2.position = topLeft;
 
     triangles.push_back(triangle_bl);
     triangles.push_back(triangle_tr);
@@ -36,7 +36,7 @@ void add_triangle_from_quad(vector<Triangle>& triangles, glm::vec3 bottomLeft, g
 
 void add_all_voxel_triangles(vector<Triangle>& triangles, glm::uvec3 position, uint16_t material_id)
 {
-    add_triangle_from_quad(triangles, position, position + glm::uvec3(1, 0, 0), position + glm::uvec3(1, 0, 0),
+    add_triangle_from_quad(triangles, position, position + glm::uvec3(1, 0, 0), position + glm::uvec3(0, 1, 0),
                            position + glm::uvec3(1, 1, 0), material_id);
 
     add_triangle_from_quad(triangles, position + glm::uvec3(1, 0, 1), position + glm::uvec3(0, 0, 1),
