@@ -7,17 +7,21 @@ using namespace cubos::rendering;
 
 inline void CSMShadowMapper::setupFramebuffers()
 {
-    Texture2DArrayDesc atlasDesc;
-    atlasDesc.format = TextureFormat::Depth32;
-    atlasDesc.width = resolution;
-    atlasDesc.height = resolution;
-    atlasDesc.usage = gl::Usage::Dynamic;
+    Texture2DArrayDesc spotAtlasDesc;
+    spotAtlasDesc.format = TextureFormat::Depth32;
+    spotAtlasDesc.width = spotResolution;
+    spotAtlasDesc.height = spotResolution;
+    spotAtlasDesc.usage = gl::Usage::Dynamic;
+    spotAtlasDesc.size = CUBOS_MAX_SPOT_SHADOW_MAPS;
+    spotAtlas = renderDevice.createTexture2DArray(spotAtlasDesc);
 
-    atlasDesc.size = CUBOS_CSM_MAX_SPOT_SHADOW_COUNT;
-    spotAtlas = renderDevice.createTexture2DArray(atlasDesc);
-
-    atlasDesc.size = CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT * numCascades;
-    directionalAtlas = renderDevice.createTexture2DArray(atlasDesc);
+    Texture2DArrayDesc directionalAtlasDesc;
+    directionalAtlasDesc.format = TextureFormat::Depth32;
+    directionalAtlasDesc.width = spotResolution;
+    directionalAtlasDesc.height = spotResolution;
+    directionalAtlasDesc.usage = gl::Usage::Dynamic;
+    directionalAtlasDesc.size = CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT * numCascades;
+    directionalAtlas = renderDevice.createTexture2DArray(directionalAtlasDesc);
 
     FramebufferDesc spotFBDesc;
     spotFBDesc.targetCount = 0;
@@ -32,7 +36,45 @@ inline void CSMShadowMapper::setupFramebuffers()
 
 inline void CSMShadowMapper::setupPipelines()
 {
-    ShaderStage vertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
+    ShaderStage spotVertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
+        #version 460 core
+        layout (location = 0) in uvec3 position;
+
+        uniform ModelMat
+        {
+            mat4 M;
+        };
+
+        uniform Light {
+            mat4 L;
+        };
+
+        void main()
+        {
+            gl_Position = L * M * vec4(position, 1.0);
+        }
+    )");
+
+    ShaderStage spotGeom = renderDevice.createShaderStage(gl::Stage::Geometry, R"(#version 460 core
+
+layout(triangles) in;
+layout(triangle_strip, max_vertices = 3) out;
+
+uniform int atlasOffset;
+
+void main()
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        gl_Position = gl_in[i].gl_Position;
+        gl_Layer = atlasOffset;
+        EmitVertex();
+    }
+    EndPrimitive();
+}
+    )");
+
+    ShaderStage directionalVertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
         #version 460 core
         layout (location = 0) in uvec3 position;
 
@@ -46,6 +88,7 @@ inline void CSMShadowMapper::setupPipelines()
             gl_Position = M * vec4(position, 1.0);
         }
     )");
+
     ShaderStage directionalGeom =
         renderDevice.createShaderStage(gl::Stage::Geometry, fmt::sprintf(R"(#version 460 core
 
@@ -81,11 +124,11 @@ void main()
         }
     )");
 
-    directionalPipeline = renderDevice.createShaderPipeline(vertex, directionalGeom, pixel);
+    directionalPipeline = renderDevice.createShaderPipeline(directionalVertex, directionalGeom, pixel);
 
-    modelMatrixBP = directionalPipeline->getBindingPoint("ModelMat");
-    modelMatrixBuffer = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
-    modelMatrixBP->bind(modelMatrixBuffer);
+    directionalModelMatrixBP = directionalPipeline->getBindingPoint("ModelMat");
+    directionalModelMatrixBuffer = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+    directionalModelMatrixBP->bind(directionalModelMatrixBuffer);
 
     directionalLightMatricesBP = directionalPipeline->getBindingPoint("LightMatrices");
     directionalLightMatricesBuffer =
@@ -94,6 +137,18 @@ void main()
     directionalLightMatricesBP->bind(directionalLightMatricesBuffer);
 
     directionalAtlasOffsetBP = directionalPipeline->getBindingPoint("atlasOffset");
+
+    spotPipeline = renderDevice.createShaderPipeline(spotVertex, spotGeom, pixel);
+
+    spotModelMatrixBP = spotPipeline->getBindingPoint("ModelMat");
+    spotModelMatrixBuffer = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+    spotModelMatrixBP->bind(spotModelMatrixBuffer);
+
+    spotLightBP = spotPipeline->getBindingPoint("Light");
+    spotLightBuffer = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+    spotLightBP->bind(spotLightBuffer);
+
+    spotAtlasOffsetBP = spotPipeline->getBindingPoint("atlasOffset");
 }
 
 inline void CSMShadowMapper::createRenderDeviceStates()
@@ -114,8 +169,10 @@ inline void CSMShadowMapper::createRenderDeviceStates()
     depthStencilState = renderDevice.createDepthStencilState(depthStencilStateDesc);
 }
 
-CSMShadowMapper::CSMShadowMapper(RenderDevice& renderDevice, size_t resolution, size_t numCascades)
-    : ShadowMapper(renderDevice), resolution(resolution), numCascades(numCascades)
+CSMShadowMapper::CSMShadowMapper(RenderDevice& renderDevice, size_t spotResolution, size_t directionalResolution,
+                                 size_t numCascades)
+    : ShadowMapper(renderDevice), spotResolution(spotResolution), directionalResolution(directionalResolution),
+      numCascades(numCascades)
 {
     setupFramebuffers();
     setupPipelines();
@@ -147,7 +204,47 @@ std::vector<glm::vec4> getFrustumCornersWorldSpace(const glm::mat4& view, const 
     return frustumCorners;
 }
 
-void CSMShadowMapper::render(const gl::CameraData& camera)
+inline void CSMShadowMapper::renderSpotLights()
+{
+    renderDevice.setShaderPipeline(spotPipeline);
+    renderDevice.setFramebuffer(spotFramebuffer);
+    renderDevice.setViewport(0, 0, spotResolution, spotResolution);
+    renderDevice.clearDepth(1);
+    for (int i = 0; i < numSpotLights; ++i)
+    {
+        auto& light = *(glm::mat4*)spotLightBuffer->map();
+        {
+            light = spotMatrices[i] =
+                glm::perspective(spotLights[i].spotAngle * 2, 1.0f, 0.001f, spotLights[i].range) *
+                glm::lookAt(spotLights[i].position,
+                            spotLights[i].position + spotLights[i].rotation * glm::vec3(0.0, 0.0, 1.0),
+                            glm::vec3(0.0, 1.0, 0.0));
+
+            spotLightBuffer->unmap();
+        }
+        spotLightBP->bind(spotLightBuffer);
+
+        spotAtlasOffsetBP->setConstant(static_cast<unsigned int>(i));
+        for (auto& drawRequest : drawRequests)
+        {
+            auto& m = *(glm::mat4*)spotModelMatrixBuffer->map();
+            {
+                m = drawRequest.modelMat;
+                spotModelMatrixBuffer->unmap();
+            }
+            spotModelMatrixBP->bind(spotModelMatrixBuffer);
+
+            Renderer::RendererModel& model = drawRequest.model;
+
+            renderDevice.setVertexArray(model.va);
+            renderDevice.setIndexBuffer(model.ib);
+
+            renderDevice.drawTrianglesIndexed(0, model.numIndices);
+        }
+    }
+}
+
+inline void CSMShadowMapper::renderDirectionalLights(const CameraData& camera)
 {
     renderDevice.setShaderPipeline(directionalPipeline);
 
@@ -215,21 +312,18 @@ void CSMShadowMapper::render(const gl::CameraData& camera)
     directionalLightMatricesBP->bind(directionalLightMatricesBuffer);
 
     renderDevice.setFramebuffer(directionalFramebuffer);
-    renderDevice.setViewport(0, 0, resolution, resolution);
+    renderDevice.setViewport(0, 0, directionalResolution, directionalResolution);
     renderDevice.clearDepth(1);
-    renderDevice.setRasterState(rasterState);
-    renderDevice.setBlendState(blendState);
-    renderDevice.setDepthStencilState(depthStencilState);
 
     for (int i = 0; i < numDirectionalLights; ++i)
     {
         directionalAtlasOffsetBP->setConstant(static_cast<unsigned int>(i * numCascades));
         for (auto it = drawRequests.begin(); it != drawRequests.end(); it++)
         {
-            auto& m = *(glm::mat4*)modelMatrixBuffer->map();
+            auto& m = *(glm::mat4*)directionalModelMatrixBuffer->map();
             m = it->modelMat;
-            modelMatrixBuffer->unmap();
-            modelMatrixBP->bind(modelMatrixBuffer);
+            directionalModelMatrixBuffer->unmap();
+            directionalModelMatrixBP->bind(directionalModelMatrixBuffer);
 
             Renderer::RendererModel& model = it->model;
 
@@ -239,6 +333,16 @@ void CSMShadowMapper::render(const gl::CameraData& camera)
             renderDevice.drawTrianglesIndexed(0, model.numIndices);
         }
     }
+}
+
+void CSMShadowMapper::render(const gl::CameraData& camera)
+{
+    renderDevice.setRasterState(rasterState);
+    renderDevice.setBlendState(blendState);
+    renderDevice.setDepthStencilState(depthStencilState);
+
+    renderSpotLights();
+    renderDirectionalLights(camera);
 }
 
 void CSMShadowMapper::flush()
@@ -251,7 +355,7 @@ void CSMShadowMapper::flush()
 
 void CSMShadowMapper::addLight(const gl::SpotLightData& light)
 {
-    if (numSpotLights < CUBOS_CSM_MAX_SPOT_SHADOW_COUNT)
+    if (numSpotLights < CUBOS_MAX_SPOT_SHADOW_MAPS)
     {
         spotLights[numSpotLights++] = light;
     }
@@ -273,9 +377,13 @@ void CSMShadowMapper::addLight(const gl::PointLightData& light)
     }
 }
 
-size_t CSMShadowMapper::getSpotOutput(Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices)
+ShadowMapper::SpotOutput CSMShadowMapper::getSpotOutput()
 {
-    return ShadowMapper::getSpotOutput(mapAtlas, matrices);
+    SpotOutput output;
+    output.mapAtlas = spotAtlas;
+    output.matrices = std::vector<glm::mat4>(spotMatrices, spotMatrices + numSpotLights);
+    output.numLights = numSpotLights;
+    return output;
 }
 
 ShadowMapper::DirectionalOutput CSMShadowMapper::getDirectionalOutput()

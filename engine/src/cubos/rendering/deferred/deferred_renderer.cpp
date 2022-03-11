@@ -148,7 +148,9 @@ layout(std140) uniform Lights
 
 layout(std140) uniform ShadowMapInfo
 {
+    mat4 spotMatrices[%d];
     mat4 directionalMatrices[%d];
+    uint numSpotShadows;
     uint numDirectionalShadows;
 };
 
@@ -158,6 +160,7 @@ uniform CascadeInfo
     uint cascadeCount;
 };
 
+uniform sampler2DArray spotShadows;
 uniform sampler2DArray directionalShadows;
 
 layout(location = 0) out vec4 color;
@@ -196,6 +199,61 @@ vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLightData light) {
         return attenuation * diffuse * light.intensity * vec3(light.color);
     }
     return vec3(0);
+}
+
+float linearizeDepth(float depth, float nearPlane, float farPlane)
+{
+    float z = depth * 2.0 - 1.0; // Back to NDC
+    return (2.0 * nearPlane * farPlane) / (farPlane + nearPlane - z * (farPlane - nearPlane)) / farPlane;
+}
+
+float spotShadow(vec3 fragPos, vec3 fragNormal, uint lightIndex) {
+    if (lightIndex > numSpotShadows) {
+        return 0;
+    }
+
+    vec4 fragPosLightSpace = spotMatrices[lightIndex] * vec4(fragPos, 1.0);
+
+    // perform perspective divide
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+    // transform to [0,1] range
+    projCoords = projCoords * 0.5 + 0.5;
+
+    // get depth of current fragment from light's perspective
+    float currentDepth = projCoords.z;
+    if (currentDepth > 1.0)
+    {
+        return 0.0;
+    }
+    // calculate bias (based on depth map resolution and slope)
+    float bias = max(0.05 * (1.0 - dot(fragNormal, -normalize(vec3(spotLights[lightIndex].position) - fragPos))), 0.005);
+    bias *= 0.1 / (spotLights[lightIndex].range * 0.5f);
+
+    // PCF
+    float shadow = 0.0;
+    vec2 texelSize = 1.0 / vec2(textureSize(spotShadows, 0));
+    currentDepth = linearizeDepth(currentDepth, 0.001f, spotLights[lightIndex].range);
+    for (int x = -1; x <= 1; ++x)
+    {
+        for (int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture(
+            spotShadows,
+            vec3(projCoords.xy + vec2(x, y) * texelSize,
+            lightIndex)
+            ).r;
+            shadow += (currentDepth - bias) > linearizeDepth(pcfDepth, 0.001f, spotLights[lightIndex].range) ? 1.0 : 0.0;
+        }
+    }
+    shadow /= 9.0;
+
+    // keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
+    if (projCoords.z > 1.0)
+    {
+        shadow = 0.0;
+    }
+
+    return shadow;
 }
 
 float directionalShadow(vec3 fragPos, vec3 fragNormal, uint lightIndex) {
@@ -276,7 +334,11 @@ void main()
     vec3 fragPos = texture(position, fraguv).xyz;
     vec3 fragNormal = texture(normal, fraguv).xyz;
     for (uint i = 0u; i < numSpotLights; i++) {
-        lighting += spotLightCalc(fragPos, fragNormal, spotLights[i]);
+        vec3 val = spotLightCalc(fragPos, fragNormal, spotLights[i]);
+        if (val != vec3(0.0f)) {
+            val = min(val, 1 - spotShadow(fragPos, fragNormal, i));
+        }
+        lighting += val;
     }
     for (uint i = 0u; i < numDirectionalLights; i++) {
         lighting += min(directionalLightCalc(fragNormal, directionalLights[i]), 1 - directionalShadow(fragPos, fragNormal, i));
@@ -288,8 +350,8 @@ void main()
 }
         )",
                      CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT, CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT,
-                     CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT, CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS,
-                     CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE)
+                     CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT, CUBOS_MAX_SPOT_SHADOW_MAPS,
+                     CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS, CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE)
             .c_str());
 
     outputPipeline = renderDevice.createShaderPipeline(outputVertex, outputPixel);
@@ -388,6 +450,9 @@ inline void DeferredRenderer::setupFrameBuffers()
     outputMaterialBP = outputPipeline->getBindingPoint("material");
     outputMaterialBP->bind(materialTex);
     outputMaterialBP->bind(materialSampler);
+
+    spotShadowMapBP = outputPipeline->getBindingPoint("spotShadows");
+    spotShadowMapBP->bind(shadowMapSampler);
 
     directionalShadowMapBP = outputPipeline->getBindingPoint("directionalShadows");
     directionalShadowMapBP->bind(shadowMapSampler);
@@ -542,18 +607,22 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
         cameraDataBuffer->unmap();
     }
 
+    ShadowMapper::SpotOutput spotOutput;
     ShadowMapper::DirectionalOutput directionalOutput;
 
     if (shadowMapper)
     {
+        spotOutput = shadowMapper->getSpotOutput();
         directionalOutput = shadowMapper->getDirectionalOutput();
     }
 
     shadowMapInfoBP->bind(shadowMapInfoBuffer);
     {
         auto& shadowMapInfo = *(ShadowMapInfoUniform*)shadowMapInfoBuffer->map();
+        std::copy(spotOutput.matrices.begin(), spotOutput.matrices.end(), shadowMapInfo.spotMatrices);
         std::copy(directionalOutput.matrices.begin(), directionalOutput.matrices.end(),
                   shadowMapInfo.directionalMatrices);
+        shadowMapInfo.numSpotShadows = spotOutput.numLights;
         shadowMapInfo.numDirectionalShadows = directionalOutput.numLights;
         shadowMapInfoBuffer->unmap();
     }
@@ -567,7 +636,8 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
         cascadeInfoBuffer->unmap();
     }
 
-    shadowMapInfoBP->bind(directionalOutput.mapAtlas);
+    spotShadowMapBP->bind(spotOutput.mapAtlas);
+    directionalShadowMapBP->bind(directionalOutput.mapAtlas);
 
     outputPositionBP->bind(positionTex);
     outputNormalBP->bind(normalTex);

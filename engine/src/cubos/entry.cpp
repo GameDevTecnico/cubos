@@ -18,7 +18,7 @@ int main(void)
     auto window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
 
-    auto shadowMapper = rendering::CSMShadowMapper(renderDevice, 1024, 5);
+    auto shadowMapper = rendering::CSMShadowMapper(renderDevice, 512, 1024, 5);
     shadowMapper.setCascadeDistances({5, 10, 15, 20});
 
     auto renderer = rendering::DeferredRenderer(*window);
@@ -138,7 +138,7 @@ int main(void)
                                  glm::radians(20.0f),
                                  windowSize.x / windowSize.y,
                                  0.1f,
-                                 20.f,
+                                 100.f,
                                  0};
     float t = 0;
     int s = 0;
@@ -176,18 +176,21 @@ int main(void)
             }
         }
 
-        glm::quat spotLightRotation = glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+        glm::quat spotLightRotation =
+            glm::quat(glm::vec3(0, -t * 0.5f, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
         glm::quat directionalLightRotation =
-            glm::quat(glm::vec3(0, t * 0.2, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+            glm::quat(glm::vec3(0, t * 0.5f, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
         glm::quat pointLightRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
 
-        /*/
-        renderer.drawLight(gl::SpotLightData(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1),
-                                             1, 100, glm::radians(10.0f), glm::radians(9.0f), false));
         /**/
+        renderer.drawLight(gl::SpotLightData(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1),
+                                             1, 20, glm::radians(10.0f), glm::radians(9.0f), false));
+        /**/
+
         /**/
         renderer.drawLight(gl::DirectionalLightData(directionalLightRotation, glm::vec3(1), 1.0f, false));
         /**/
+
         /*/
         renderer.drawLight(gl::PointLightData(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10, false));
         /**/

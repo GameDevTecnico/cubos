@@ -10,11 +10,9 @@ ShadowMapper::ShadowMapper(RenderDevice& renderDevice) : renderDevice(renderDevi
 {
 }
 
-size_t ShadowMapper::getSpotOutput(Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices)
+ShadowMapper::SpotOutput ShadowMapper::getSpotOutput()
 {
-    mapAtlas = nullptr;
-    matrices = {};
-    return 0;
+    return {};
 }
 
 ShadowMapper::DirectionalOutput ShadowMapper::getDirectionalOutput()

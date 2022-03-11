@@ -3,7 +3,6 @@
 
 #include <cubos/rendering/shadow_mapping/shadow_mapper.hpp>
 
-#define CUBOS_CSM_MAX_SPOT_SHADOW_COUNT 32
 #define CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT 8
 #define CUBOS_CSM_MAX_POINT_SHADOW_COUNT 8
 
@@ -12,7 +11,8 @@ namespace cubos::rendering
     class CSMShadowMapper : public ShadowMapper
     {
     private:
-        gl::SpotLightData spotLights[CUBOS_CSM_MAX_SPOT_SHADOW_COUNT]{};
+        gl::SpotLightData spotLights[CUBOS_MAX_SPOT_SHADOW_MAPS]{};
+        glm::mat4 spotMatrices[CUBOS_MAX_SPOT_SHADOW_MAPS];
         size_t numSpotLights = 0;
         gl::DirectionalLightData directionalLights[CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT]{};
         glm::mat4 directionalMatrices[CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS];
@@ -31,18 +31,30 @@ namespace cubos::rendering
         gl::Framebuffer spotFramebuffer;
         gl::Framebuffer directionalFramebuffer;
 
-        size_t resolution;
+        size_t spotResolution;
+        size_t directionalResolution;
 
         gl::ShaderPipeline spotPipeline;
+
+        gl::ShaderBindingPoint spotModelMatrixBP;
+        gl::ConstantBuffer spotModelMatrixBuffer;
+
+        gl::ConstantBuffer spotLightBuffer;
+        gl::ShaderBindingPoint spotLightBP;
+
+        gl::ShaderBindingPoint spotAtlasOffsetBP;
+
+        // region Directional Pipeline
         gl::ShaderPipeline directionalPipeline;
 
-        gl::ShaderBindingPoint modelMatrixBP;
-        gl::ConstantBuffer modelMatrixBuffer;
+        gl::ShaderBindingPoint directionalModelMatrixBP;
+        gl::ConstantBuffer directionalModelMatrixBuffer;
 
         gl::ConstantBuffer directionalLightMatricesBuffer;
         gl::ShaderBindingPoint directionalLightMatricesBP;
 
         gl::ShaderBindingPoint directionalAtlasOffsetBP;
+        // endregion
 
         gl::RasterState rasterState;
         gl::BlendState blendState;
@@ -54,8 +66,12 @@ namespace cubos::rendering
 
         inline void createRenderDeviceStates();
 
+        inline void renderSpotLights();
+        inline void renderDirectionalLights(const gl::CameraData& camera);
+
     public:
-        CSMShadowMapper(gl::RenderDevice& renderDevice, size_t resolution, size_t numCascades);
+        CSMShadowMapper(gl::RenderDevice& renderDevice, size_t spotResolution, size_t directionalResolution,
+                        size_t numCascades);
         virtual void drawModel(const Renderer::DrawRequest& model) override;
         virtual void render(const gl::CameraData& camera) override;
         virtual void flush() override;
@@ -63,7 +79,7 @@ namespace cubos::rendering
         virtual void addLight(const gl::DirectionalLightData& light) override;
         virtual void addLight(const gl::PointLightData& light) override;
 
-        virtual size_t getSpotOutput(gl::Texture2DArray& mapAtlas, std::vector<glm::mat4>& matrices) override;
+        virtual SpotOutput getSpotOutput() override;
         virtual DirectionalOutput getDirectionalOutput() override;
         void setCascadeDistances(const std::vector<float>& distances);
     };
