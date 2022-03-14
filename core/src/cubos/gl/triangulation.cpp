@@ -34,27 +34,6 @@ void add_triangle_from_quad(vector<Triangle>& triangles, glm::vec3 bottomLeft, g
     triangles.push_back(triangle_tr);
 }
 
-void add_all_voxel_triangles(vector<Triangle>& triangles, glm::uvec3 position, uint16_t material_id)
-{
-    add_triangle_from_quad(triangles, position, position + glm::uvec3(1, 0, 0), position + glm::uvec3(0, 1, 0),
-                           position + glm::uvec3(1, 1, 0), material_id);
-
-    add_triangle_from_quad(triangles, position + glm::uvec3(1, 0, 1), position + glm::uvec3(0, 0, 1),
-                           position + glm::uvec3(1, 1, 1), position + glm::uvec3(0, 1, 1), material_id);
-
-    add_triangle_from_quad(triangles, position + glm::uvec3(1, 0, 0), position + glm::uvec3(1, 0, 1),
-                           position + glm::uvec3(1, 1, 0), position + glm::uvec3(1, 1, 1), material_id);
-
-    add_triangle_from_quad(triangles, position + glm::uvec3(0, 0, 1), position, position + glm::uvec3(0, 1, 1),
-                           position + glm::uvec3(0, 1, 0), material_id);
-
-    add_triangle_from_quad(triangles, position, position + glm::uvec3(0, 0, 1), position + glm::uvec3(1, 0, 0),
-                           position + glm::uvec3(1, 0, 1), material_id);
-
-    add_triangle_from_quad(triangles, position + glm::uvec3(1, 1, 0), position + glm::uvec3(1, 1, 1),
-                           position + glm::uvec3(0, 1, 0), position + glm::uvec3(0, 1, 1), material_id);
-}
-
 vector<Triangle> Triangulation::Triangulate(Grid grid)
 {
     glm::uvec3 grid_size = grid.getSize();
@@ -67,11 +46,74 @@ vector<Triangle> Triangulation::Triangulate(Grid grid)
             for (uint z = 0; z < grid_size.z; z++)
             {
                 glm::uvec3 position = {x, y, z};
+
                 uint16_t material_id = grid.get(position);
 
                 if (material_id != 0)
                 {
-                    add_all_voxel_triangles(triangles, position, material_id);
+
+                    // Front Face
+                    uint front_index = z + 1;
+                    if (front_index < 0 || front_index >= grid_size.z ||
+                        (front_index >= 0 && front_index < grid_size.z && grid.get({x, y, front_index}) == 0))
+                    {
+                        add_triangle_from_quad(triangles, position, position + glm::uvec3(1, 0, 0),
+                                               position + glm::uvec3(0, 1, 0), position + glm::uvec3(1, 1, 0),
+                                               material_id);
+                    }
+
+                    // Back Face
+                    uint back_index = z - 1;
+                    if (back_index < 0 || back_index >= grid_size.z ||
+                        (back_index >= 0 && back_index < grid_size.z && grid.get({x, y, back_index}) == 0))
+                    {
+                        add_triangle_from_quad(triangles, position + glm::uvec3(1, 0, 1),
+                                               position + glm::uvec3(0, 0, 1), position + glm::uvec3(1, 1, 1),
+                                               position + glm::uvec3(0, 1, 1), material_id);
+                    }
+
+                    // Top Face
+                    uint top_index = y + 1;
+                    if (top_index < 0 || top_index >= grid_size.y ||
+                        (top_index >= 0 && top_index < grid_size.y && grid.get({x, top_index, z}) == 0))
+                    {
+                        add_triangle_from_quad(triangles, position + glm::uvec3(1, 1, 0),
+                                               position + glm::uvec3(1, 1, 1), position + glm::uvec3(0, 1, 0),
+                                               position + glm::uvec3(0, 1, 1), material_id);
+                    }
+
+                    // Bottom Face
+                    uint bottom_index = y - 1;
+                    if (bottom_index < 0 || bottom_index >= grid_size.y ||
+                        (bottom_index >= 0 && bottom_index < grid_size.y && grid.get({x, bottom_index, z}) == 0))
+                    {
+                        add_triangle_from_quad(triangles, position, position + glm::uvec3(0, 0, 1),
+                                               position + glm::uvec3(1, 0, 0), position + glm::uvec3(1, 0, 1),
+                                               material_id);
+                    }
+
+                    // Right Face
+                    uint right_face = x + 1;
+                    if (right_face < 0 || right_face >= grid_size.x ||
+                        (right_face >= 0 && right_face < grid_size.x && grid.get({right_face, y, z}) == 0))
+                    {
+
+                        add_triangle_from_quad(triangles, position + glm::uvec3(1, 0, 0),
+                                               position + glm::uvec3(1, 0, 1), position + glm::uvec3(1, 1, 0),
+                                               position + glm::uvec3(1, 1, 1), material_id);
+                    }
+
+                    // Left face
+                    uint left_face = x - 1;
+                    if (left_face < 0 || left_face >= grid_size.x ||
+                        (left_face >= 0 && left_face < grid_size.x && grid.get({left_face, y, z}) == 0))
+
+                    {
+
+                        add_triangle_from_quad(triangles, position + glm::uvec3(0, 0, 1), position,
+                                               position + glm::uvec3(0, 1, 1), position + glm::uvec3(0, 1, 0),
+                                               material_id);
+                    }
                 }
             }
         }
