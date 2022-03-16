@@ -8,5 +8,5 @@ var classcubos_1_1gl_1_1Grid =
     [ "getSize", "classcubos_1_1gl_1_1Grid.html#a243f314aea5bfbcc6d0682775ac31c45", null ],
     [ "serialize", "classcubos_1_1gl_1_1Grid.html#a54f33e8948caeccae9a8dfb6bc7b8219", null ],
     [ "set", "classcubos_1_1gl_1_1Grid.html#a94882a323f422da82048352443813341", null ],
-    [ "setSize", "classcubos_1_1gl_1_1Grid.html#aa153f1e912b4e5f7611042a2b8f207c8", null ]
+    [ "setSize", "classcubos_1_1gl_1_1Grid.html#a1a100dcd03b73a32be4e79cc4b14db14", null ]
 ];
