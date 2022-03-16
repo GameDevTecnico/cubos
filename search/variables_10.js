@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['targetcount_558',['targetCount',['../structcubos_1_1gl_1_1FramebufferDesc.html#a070d890dfc03f3dc443437705ebdaa94',1,'cubos::gl::FramebufferDesc']]],
-  ['targets_559',['targets',['../structcubos_1_1gl_1_1FramebufferDesc.html#a5602de73a063a8e4991a76f014a46816',1,'cubos::gl::FramebufferDesc']]],
-  ['texture_560',['texture',['../structcubos_1_1gl_1_1FramebufferDesc.html#a2da462ecca6642cefccd2c9f89a91d98',1,'cubos::gl::FramebufferDesc']]],
-  ['type_561',['type',['../structcubos_1_1gl_1_1VertexElement.html#aabf9204ec640e51eb7dd144a97cadfce',1,'cubos::gl::VertexElement']]]
+  ['targetcount_566',['targetCount',['../structcubos_1_1gl_1_1FramebufferDesc.html#a070d890dfc03f3dc443437705ebdaa94',1,'cubos::gl::FramebufferDesc']]],
+  ['targets_567',['targets',['../structcubos_1_1gl_1_1FramebufferDesc.html#a66aa2881e520bca5e2bcb8dd2d9fcc7a',1,'cubos::gl::FramebufferDesc']]],
+  ['type_568',['type',['../structcubos_1_1gl_1_1VertexElement.html#aabf9204ec640e51eb7dd144a97cadfce',1,'cubos::gl::VertexElement']]]
 ];

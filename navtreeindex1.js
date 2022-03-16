@@ -1,5 +1,8 @@
 var NAVTREEINDEX1 =
 {
+"classcubos_1_1io_1_1Action.html#afde6a8ecd2c39d501f808af25d59b241":[1,0,0,2,0,2],
+"classcubos_1_1io_1_1ButtonPress.html":[1,0,0,2,1],
+"classcubos_1_1io_1_1ButtonPress.html#a06600482ed0ed9b25356865de52307a1":[1,0,0,2,1,1],
 "classcubos_1_1io_1_1ButtonPress.html#a2b404f0a85c32b65c9fa99e549909158":[1,0,0,2,1,2],
 "classcubos_1_1io_1_1ButtonPress.html#a3786c630674c59b4066a4d8ebc73b0f0":[1,0,0,2,1,5],
 "classcubos_1_1io_1_1ButtonPress.html#a7ab50c7b3c45fe708cb4ab4f18f6fef0":[1,0,0,2,1,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "file_8hpp_source.html":[2,0,0,0,0,2],
 "file__stream_8hpp_source.html":[2,0,0,0,0,3],
 "file__system_8hpp_source.html":[2,0,0,0,0,4],
-"files.html":[2,0],
-"functions.html":[1,3,0],
-"functions.html":[1,3,0,0],
-"functions_b.html":[1,3,0,1]
+"files.html":[2,0]
 };

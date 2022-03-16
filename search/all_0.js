@@ -7,6 +7,6 @@ var searchData=
   ['addressv_4',['addressV',['../structcubos_1_1gl_1_1SamplerDesc.html#a2ccb38ea9f232f9c718a4a4df4254883',1,'cubos::gl::SamplerDesc']]],
   ['addressw_5',['addressW',['../structcubos_1_1gl_1_1SamplerDesc.html#a56b2bfe761652ab96e32b5ef42600b8b',1,'cubos::gl::SamplerDesc']]],
   ['addsource_6',['addSource',['../classcubos_1_1io_1_1Action.html#afde6a8ecd2c39d501f808af25d59b241',1,'cubos::io::Action']]],
-  ['alpha_7',['alpha',['../structcubos_1_1gl_1_1BlendStateDesc.html#a65e2b111c3d5bfaa50ab9110e15e33c7',1,'cubos::gl::BlendStateDesc']]],
+  ['alpha_7',['alpha',['../structcubos_1_1gl_1_1BlendStateDesc.html#ad6dd89770783f52880b473cc0fbeb147',1,'cubos::gl::BlendStateDesc']]],
   ['archive_8',['Archive',['../classcubos_1_1data_1_1Archive.html',1,'cubos::data']]]
 ];
