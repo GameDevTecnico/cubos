@@ -895,6 +895,16 @@ public:
         glUniform1i(this->loc, this->loc);
     }
 
+    virtual void bind(CubeMapArray cubeMap) override
+    {
+        glActiveTexture(GL_TEXTURE0 + this->loc);
+        if (cubeMap)
+            glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, std::static_pointer_cast<OGLCubeMapArray>(cubeMap)->id);
+        else
+            glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
+        glUniform1i(this->loc, this->loc);
+    }
+
     virtual void bind(ConstantBuffer cb) override
     {
         if (cb)

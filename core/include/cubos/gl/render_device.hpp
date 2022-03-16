@@ -970,6 +970,10 @@ namespace cubos::gl
             /// If this binding point doesn't support a cube map, an error is logged and nothing is done.
             virtual void bind(gl::CubeMap cubeMap) = 0;
 
+            /// Binds a cube map array to the binding point.
+            /// If this binding point doesn't support a cube map array, an error is logged and nothing is done.
+            virtual void bind(gl::CubeMapArray cubeMap) = 0;
+
             /// Binds a constant buffer to the binding point.
             /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done.
             virtual void bind(gl::ConstantBuffer cb) = 0;
