@@ -17,7 +17,7 @@ var searchData=
   ['createindexbuffer_370',['createIndexBuffer',['../classcubos_1_1gl_1_1RenderDevice.html#ae8fb08998cd59214c484cc3a64e1d8d7',1,'cubos::gl::RenderDevice']]],
   ['createrasterstate_371',['createRasterState',['../classcubos_1_1gl_1_1RenderDevice.html#ac4e627e27fd589e506a2295cd0d19db6',1,'cubos::gl::RenderDevice']]],
   ['createsampler_372',['createSampler',['../classcubos_1_1gl_1_1RenderDevice.html#a97b756d843a80ac0be7e0970b03fa8d6',1,'cubos::gl::RenderDevice']]],
-  ['createshaderpipeline_373',['createShaderPipeline',['../classcubos_1_1gl_1_1RenderDevice.html#a42a71e483e6393e558d47c9f340e05f5',1,'cubos::gl::RenderDevice']]],
+  ['createshaderpipeline_373',['createShaderPipeline',['../classcubos_1_1gl_1_1RenderDevice.html#a42a71e483e6393e558d47c9f340e05f5',1,'cubos::gl::RenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage ps)=0'],['../classcubos_1_1gl_1_1RenderDevice.html#a0930986b0b55c0abceb00204782824f8',1,'cubos::gl::RenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps)=0']]],
   ['createshaderstage_374',['createShaderStage',['../classcubos_1_1gl_1_1RenderDevice.html#a52e9c5f4ca77a23112420440d46b4a2e',1,'cubos::gl::RenderDevice']]],
   ['createtexture1d_375',['createTexture1D',['../classcubos_1_1gl_1_1RenderDevice.html#a3a5319f8cd3c26f439c9b38a11c77c23',1,'cubos::gl::RenderDevice']]],
   ['createtexture2d_376',['createTexture2D',['../classcubos_1_1gl_1_1RenderDevice.html#a9e2b50c25a2bdbcd49556f737646a75b',1,'cubos::gl::RenderDevice']]],

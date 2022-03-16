@@ -16,6 +16,7 @@ var classcubos_1_1gl_1_1RenderDevice =
     [ "createIndexBuffer", "classcubos_1_1gl_1_1RenderDevice.html#ae8fb08998cd59214c484cc3a64e1d8d7", null ],
     [ "createRasterState", "classcubos_1_1gl_1_1RenderDevice.html#ac4e627e27fd589e506a2295cd0d19db6", null ],
     [ "createSampler", "classcubos_1_1gl_1_1RenderDevice.html#a97b756d843a80ac0be7e0970b03fa8d6", null ],
+    [ "createShaderPipeline", "classcubos_1_1gl_1_1RenderDevice.html#a0930986b0b55c0abceb00204782824f8", null ],
     [ "createShaderPipeline", "classcubos_1_1gl_1_1RenderDevice.html#a42a71e483e6393e558d47c9f340e05f5", null ],
     [ "createShaderStage", "classcubos_1_1gl_1_1RenderDevice.html#a52e9c5f4ca77a23112420440d46b4a2e", null ],
     [ "createTexture1D", "classcubos_1_1gl_1_1RenderDevice.html#a3a5319f8cd3c26f439c9b38a11c77c23", null ],

@@ -157,6 +157,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a52e9c5f4ca77a23112420440d46b4a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42a71e483e6393e558d47c9f340e05f5"><td class="memItemLeft" align="right" valign="top">virtual ShaderPipeline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a42a71e483e6393e558d47c9f340e05f5">createShaderPipeline</a> (ShaderStage vs, ShaderStage ps)=0</td></tr>
 <tr class="separator:a42a71e483e6393e558d47c9f340e05f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0930986b0b55c0abceb00204782824f8"><td class="memItemLeft" align="right" valign="top">virtual ShaderPipeline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a0930986b0b55c0abceb00204782824f8">createShaderPipeline</a> (ShaderStage vs, ShaderStage gs, ShaderStage ps)=0</td></tr>
+<tr class="separator:a0930986b0b55c0abceb00204782824f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2beb023a8ff0b5986c307592e3c061c8"><td class="memItemLeft" align="right" valign="top"><a id="a2beb023a8ff0b5986c307592e3c061c8"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a2beb023a8ff0b5986c307592e3c061c8">setShaderPipeline</a> (ShaderPipeline pipeline)=0</td></tr>
 <tr class="memdesc:a2beb023a8ff0b5986c307592e3c061c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the current shader pipeline used for rendering. <br /></td></tr>
@@ -522,8 +524,59 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
+<a id="a0930986b0b55c0abceb00204782824f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0930986b0b55c0abceb00204782824f8">&#9670;&nbsp;</a></span>createShaderPipeline() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual ShaderPipeline cubos::gl::RenderDevice::createShaderPipeline </td>
+          <td>(</td>
+          <td class="paramtype">ShaderStage&#160;</td>
+          <td class="paramname"><em>vs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ShaderStage&#160;</td>
+          <td class="paramname"><em>gs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ShaderStage&#160;</td>
+          <td class="paramname"><em>ps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a new shader pipeline from a vertex and pixel shaders. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vs</td><td>Vertex shader stage. </td></tr>
+    <tr><td class="paramname">gs</td><td>Geometry shader stage. </td></tr>
+    <tr><td class="paramname">ps</td><td>Pixel shader stage. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Shader pipeline handle, or nullptr if the creation failed. </dd></dl>
+
+</div>
+</div>
 <a id="a42a71e483e6393e558d47c9f340e05f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42a71e483e6393e558d47c9f340e05f5">&#9670;&nbsp;</a></span>createShaderPipeline()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a71e483e6393e558d47c9f340e05f5">&#9670;&nbsp;</a></span>createShaderPipeline() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
