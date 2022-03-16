@@ -588,7 +588,7 @@ public:
     virtual void generateMipmaps() override
     {
         glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
-        glGenerateMipmap(GL_TEXTURE_2D);
+        glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
     }
 
     GLuint id;
