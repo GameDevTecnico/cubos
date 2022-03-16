@@ -1103,7 +1103,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
 
             glFramebufferTexture(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
-                std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id,
+                std::static_pointer_cast<OGLTexture2DArray>(desc.targets[i].getTexture2DArrayTarget().handle)->id,
                 desc.targets[i].mipLevel);
             break;
         }
