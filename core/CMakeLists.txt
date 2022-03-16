@@ -50,7 +50,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/io/sources/double_axis.cpp"
 
     "src/cubos/gl/debug.cpp"
-    
+    "src/cubos/gl/render_device.cpp"
     "src/cubos/gl/ogl_render_device.hpp"
     "src/cubos/gl/ogl_render_device.cpp"
     "src/cubos/gl/material.cpp"
