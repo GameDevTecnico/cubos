@@ -224,7 +224,7 @@ inline void CSMShadowMapper::renderSpotLights()
         }
         spotLightBP->bind(spotLightBuffer);
 
-        spotAtlasOffsetBP->setConstant(static_cast<unsigned int>(i));
+        spotAtlasOffsetBP->setConstant(static_cast<int>(i));
         for (auto& drawRequest : drawRequests)
         {
             auto& m = *(glm::mat4*)spotModelMatrixBuffer->map();
@@ -317,7 +317,7 @@ inline void CSMShadowMapper::renderDirectionalLights(const CameraData& camera)
 
     for (int i = 0; i < numDirectionalLights; ++i)
     {
-        directionalAtlasOffsetBP->setConstant(static_cast<unsigned int>(i * numCascades));
+        directionalAtlasOffsetBP->setConstant(static_cast<int>(i * numCascades));
         for (auto it = drawRequests.begin(); it != drawRequests.end(); it++)
         {
             auto& m = *(glm::mat4*)directionalModelMatrixBuffer->map();
