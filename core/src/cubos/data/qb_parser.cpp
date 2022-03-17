@@ -104,9 +104,7 @@ bool cubos::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream& strea
                             matrices[i].palette.set(mat, desc);
                             nextMat += 1;
 
-                            if (mat >= 256)
-                                matrices[i].grid.setIndexWidth(gl::Grid::IndexWidth::U16);
-                            else if (mat >= 65536)
+                            if (mat >= 65536)
                             {
                                 logError("parseQB(): too many materials, max is 65536");
                                 return false;

@@ -3,19 +3,20 @@
 
 option(WITH_GLFW "With GLFW?" ON)
 option(WITH_OPENGL "With OpenGL?" ON)
-if(WITH_GLFW)
+if (WITH_GLFW)
     option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
-endif()
+endif ()
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
 option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
-option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
+option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source?" ON)
+option(FMT_USE_SUBMODULE "Compile FMT from source?" ON)
 
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
 
-message( "# Building core samples: " ${BUILD_CORE_SAMPLES})
-message( "# Building core tests: " ${BUILD_CORE_TESTS})
+message("# Building core samples: " ${BUILD_CORE_SAMPLES})
+message("# Building core tests: " ${BUILD_CORE_TESTS})
 
 # Set core source files
 
@@ -34,19 +35,30 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/data/file.cpp"
     "src/cubos/data/file_system.cpp"
     "src/cubos/data/std_archive.cpp"
+    "src/cubos/data/embedded_archive.cpp"
     "src/cubos/data/qb_parser.cpp"
 
     "src/cubos/io/window.cpp"
     "src/cubos/io/glfw_window.hpp"
     "src/cubos/io/glfw_window.cpp"
 
+    "src/cubos/io/input_manager.cpp"
+    "src/cubos/io/action.cpp"
+    "src/cubos/io/context.cpp"
+
+    "src/cubos/io/sources/button_press.cpp"
+    "src/cubos/io/sources/single_axis.cpp"
+    "src/cubos/io/sources/double_axis.cpp"
+
     "src/cubos/gl/debug.cpp"
+    "src/cubos/gl/render_device.cpp"
     "src/cubos/gl/ogl_render_device.hpp"
     "src/cubos/gl/ogl_render_device.cpp"
     "src/cubos/gl/material.cpp"
     "src/cubos/gl/palette.cpp"
     "src/cubos/gl/grid.cpp"
-)
+    "src/cubos/gl/util.cpp"
+    )
 
 set(CUBOS_CORE_INCLUDE
     "include/cubos/log.hpp"
@@ -60,12 +72,13 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/memory/yaml_serializer.hpp"
     "include/cubos/memory/yaml_deserializer.hpp"
     "include/cubos/memory/serialization_map.hpp"
-    
+
     "include/cubos/data/file.hpp"
     "include/cubos/data/file_stream.hpp"
     "include/cubos/data/file_system.hpp"
     "include/cubos/data/archive.hpp"
     "include/cubos/data/std_archive.hpp"
+    "include/cubos/data/embedded_archive.hpp"
     "include/cubos/data/qb_parser.hpp"
 
     "include/cubos/io/window.hpp"
@@ -75,7 +88,16 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/material.hpp"
     "include/cubos/gl/palette.hpp"
     "include/cubos/gl/grid.hpp"
-)
+    "include/cubos/gl/util.hpp"
+
+    "include/cubos/io/input_manager.hpp"
+    "include/cubos/io/action.hpp"
+    "include/cubos/io/context.hpp"
+    "include/cubos/io/sources/source.hpp"
+    "include/cubos/io/sources/button_press.hpp"
+    "include/cubos/io/sources/single_axis.hpp"
+    "include/cubos/io/sources/double_axis.hpp"
+    )
 
 # Create core library
 
@@ -86,74 +108,80 @@ target_compile_features(cubos-core PUBLIC cxx_std_20)
 
 # Link dependencies
 
-if(WITH_OPENGL)
+if (WITH_OPENGL)
     add_subdirectory(lib/glad)
     target_link_libraries(cubos-core PRIVATE glad)
     target_compile_definitions(cubos-core PRIVATE WITH_OPENGL)
-endif()
+endif ()
 
-if(WITH_GLFW)
-    if(GLFW_USE_SUBMODULE)
+if (WITH_GLFW)
+    if (GLFW_USE_SUBMODULE)
         set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
         set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
         set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
         add_subdirectory(lib/glfw)
-    else()
+    else ()
         find_package(glfw3 REQUIRED)
-    endif()
+    endif ()
 
     target_link_libraries(cubos-core PRIVATE glfw)
     target_compile_definitions(cubos-core PRIVATE WITH_GLFW)
-endif()
+endif ()
 
-if(GLM_USE_SUBMODULE)
+if (GLM_USE_SUBMODULE)
     add_subdirectory(lib/glm)
-else()
+else ()
     find_package(glm REQUIRED)
-endif()
+endif ()
 
-if(YAMLCPP_USE_SUBMODULE)
+if (YAMLCPP_USE_SUBMODULE)
     set(YAML_CPP_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
     add_subdirectory(lib/yaml-cpp)
-else()
+else ()
     find_package(yaml-cpp REQUIRED)
-endif()
+endif ()
 
 if (GOOGLETEST_USE_SUBMODULE)
-    if(WIN32)
+    if (WIN32)
         set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    endif()
+    endif ()
     add_subdirectory(lib/googletest)
-else()
+else ()
     find_package(googletest REQUIRED)
-endif()
+endif ()
 
 if (SPDLOG_USE_SUBMODULE)
     add_subdirectory(lib/spdlog)
-else()
+else ()
     find_package(spdlog REQUIRED)
-endif()
+endif ()
+
+if (FMT_USE_SUBMODULE)
+    add_subdirectory(lib/fmt)
+else ()
+    find_package(fmt REQUIRED)
+endif ()
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp fmt::fmt ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests
 
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_CORE_TESTS) 
+if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_CORE_TESTS)
     include(CTest)
     enable_testing()
 
     include(GoogleTest)
     add_subdirectory(tests)
-endif()
+endif ()
 
 # Add core samples
 if (BUILD_CORE_SAMPLES)
     add_subdirectory(samples)
-endif()
+endif ()
 
 # Add doxygen documentation
 
@@ -170,4 +198,4 @@ if (Doxygen_FOUND)
         "include"
         COMMENT "Generate core documentation"
     )
-endif()
+endif ()
