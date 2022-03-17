@@ -34,7 +34,7 @@ void add_triangle_from_quad(vector<Triangle>& triangles, glm::vec3 bottomLeft, g
     triangles.push_back(triangle_tr);
 }
 
-vector<Triangle> Triangulation::Triangulate(Grid grid)
+vector<Triangle> Triangulation::Triangulate(const Grid& grid)
 {
     glm::uvec3 grid_size = grid.getSize();
     vector<Triangle> triangles = vector<Triangle>();

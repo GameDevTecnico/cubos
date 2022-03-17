@@ -18,7 +18,7 @@ namespace cubos::gl
     {
 
     public:
-        static std::vector<Triangle> Triangulate(cubos::gl::Grid grid);
+        static std::vector<Triangle> Triangulate(const cubos::gl::Grid& grid);
     };
 } // namespace cubos::gl
 
