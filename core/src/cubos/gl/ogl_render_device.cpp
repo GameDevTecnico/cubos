@@ -1689,7 +1689,7 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
     {
         for (int face = 0; face < 6; ++face)
         {
-            for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
+            for (size_t j = 0, div = 1; j < desc.mipLevelCount; ++j, div *= 2)
             {
                 if (desc.data[i][face][j] != nullptr)
                     glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i * 6 + face, desc.width / div, desc.height / div, 1,

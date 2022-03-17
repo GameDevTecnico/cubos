@@ -152,6 +152,7 @@ layout(std140) uniform ShadowMapInfo
     mat4 directionalMatrices[%d];
     uint numSpotShadows;
     uint numDirectionalShadows;
+    uint numPointShadows;
 };
 
 uniform CascadeInfo
@@ -162,6 +163,7 @@ uniform CascadeInfo
 
 uniform sampler2DArray spotShadows;
 uniform sampler2DArray directionalShadows;
+uniform samplerCubeArray pointShadows;
 
 layout(location = 0) out vec4 color;
 
@@ -323,6 +325,41 @@ float directionalShadow(vec3 fragPos, vec3 fragNormal, uint lightIndex) {
     return shadow;
 }
 
+vec3 sampleOffsetDirections[20] = vec3[]
+(
+vec3( 1,  1,  1), vec3( 1, -1,  1), vec3(-1, -1,  1), vec3(-1,  1,  1),
+vec3( 1,  1, -1), vec3( 1, -1, -1), vec3(-1, -1, -1), vec3(-1,  1, -1),
+vec3( 1,  1,  0), vec3( 1, -1,  0), vec3(-1, -1,  0), vec3(-1,  1,  0),
+vec3( 1,  0,  1), vec3(-1,  0,  1), vec3( 1,  0, -1), vec3(-1,  0, -1),
+vec3( 0,  1,  1), vec3( 0, -1,  1), vec3( 0, -1, -1), vec3( 0,  1, -1)
+);
+
+float pointShadow(vec3 fragPos, vec3 fragNormal, uint lightIndex) {
+    if (lightIndex > numPointShadows) {
+        return 0;
+    }
+
+    vec3 fragToLight = fragPos - vec3(pointLights[lightIndex].position);
+    float currentDepth = length(fragToLight);
+    float bias = max(0.1 * (1.0 - dot(fragNormal, -normalize(vec3(pointLights[lightIndex].position) - fragPos))), 0.005);
+    bias *= 1 / (pointLights[lightIndex].range * 0.5f);
+
+    float shadow = 0.0;
+    int samples  = 20;
+    float viewDistance = length(V * vec4(fragPos, 1.0f));
+    float diskRadius = (1.0 + (viewDistance / farPlane)) / 100.0;
+    for(int i = 0; i < samples; ++i)
+    {
+        float closestDepth = texture(pointShadows, vec4(fragToLight + sampleOffsetDirections[i] * diskRadius, lightIndex)).r;
+        closestDepth *= pointLights[lightIndex].range;
+        if(currentDepth - bias > closestDepth)
+            shadow += 1.0;
+    }
+    shadow /= float(samples);
+
+    return shadow;
+}
+
 void main()
 {
     uint m = texture(material, fraguv).r;
@@ -344,7 +381,11 @@ void main()
         lighting += min(directionalLightCalc(fragNormal, directionalLights[i]), 1 - directionalShadow(fragPos, fragNormal, i));
     }
     for (uint i = 0u; i < numPointLights; i++) {
-        lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
+        vec3 val = pointLightCalc(fragPos, fragNormal, pointLights[i]);
+        if (val != vec3(0.0f)) {
+            val = min(val, 1 - pointShadow(fragPos, fragNormal, i));
+        }
+        lighting += val;
     }
     color = vec4(albedo * max(lighting, 0.05), 1);
 }
@@ -456,6 +497,9 @@ inline void DeferredRenderer::setupFrameBuffers()
 
     directionalShadowMapBP = outputPipeline->getBindingPoint("directionalShadows");
     directionalShadowMapBP->bind(shadowMapSampler);
+
+    pointShadowMapBP = outputPipeline->getBindingPoint("pointShadows");
+    pointShadowMapBP->bind(shadowMapSampler);
 
     outputPaletteBP = outputPipeline->getBindingPoint("palette");
 }
@@ -609,11 +653,13 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
 
     ShadowMapper::SpotOutput spotOutput;
     ShadowMapper::DirectionalOutput directionalOutput;
+    ShadowMapper::PointOutput pointOutput;
 
     if (shadowMapper)
     {
         spotOutput = shadowMapper->getSpotOutput();
         directionalOutput = shadowMapper->getDirectionalOutput();
+        pointOutput = shadowMapper->getPointOutput();
     }
 
     shadowMapInfoBP->bind(shadowMapInfoBuffer);
@@ -624,6 +670,7 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
                   shadowMapInfo.directionalMatrices);
         shadowMapInfo.numSpotShadows = spotOutput.numLights;
         shadowMapInfo.numDirectionalShadows = directionalOutput.numLights;
+        shadowMapInfo.numPointShadows = pointOutput.numLights;
         shadowMapInfoBuffer->unmap();
     }
 
@@ -638,6 +685,7 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
 
     spotShadowMapBP->bind(spotOutput.mapAtlas);
     directionalShadowMapBP->bind(directionalOutput.mapAtlas);
+    pointShadowMapBP->bind(pointOutput.mapAtlas);
 
     outputPositionBP->bind(positionTex);
     outputNormalBP->bind(normalTex);

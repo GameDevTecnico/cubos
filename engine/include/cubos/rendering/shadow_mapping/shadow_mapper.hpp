@@ -10,6 +10,7 @@
 
 #define CUBOS_MAX_SPOT_SHADOW_MAPS 32
 #define CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS 64
+#define CUBOS_MAX_POINT_SHADOW_MAPS 8
 #define CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE 8
 
 namespace cubos::rendering
@@ -38,6 +39,12 @@ namespace cubos::rendering
             size_t numLights = 0;
         };
 
+        struct PointOutput
+        {
+            gl::CubeMapArray mapAtlas = nullptr;
+            size_t numLights = 0;
+        };
+
     public:
         explicit ShadowMapper(gl::RenderDevice& renderDevice);
 
@@ -47,11 +54,9 @@ namespace cubos::rendering
         virtual void addLight(const gl::SpotLightData& light) = 0;
         virtual void addLight(const gl::DirectionalLightData& light) = 0;
         virtual void addLight(const gl::PointLightData& light) = 0;
-        virtual SpotOutput getSpotOutput();
-        virtual DirectionalOutput getDirectionalOutput();
-
-        // TODO: Need CubeMapArrays for Point Light shadows, otherwise not enough texture units
-        // virtual size_t getPointOutput(gl::CubeMapArray& mapAtlas, std::vector<glm::mat4>& matrices) = 0;
+        virtual SpotOutput getSpotOutput() const;
+        virtual DirectionalOutput getDirectionalOutput() const;
+        virtual PointOutput getPointOutput() const;
     };
 } // namespace cubos::rendering
 

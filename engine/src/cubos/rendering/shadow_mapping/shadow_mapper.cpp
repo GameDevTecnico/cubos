@@ -10,12 +10,17 @@ ShadowMapper::ShadowMapper(RenderDevice& renderDevice) : renderDevice(renderDevi
 {
 }
 
-ShadowMapper::SpotOutput ShadowMapper::getSpotOutput()
+ShadowMapper::SpotOutput ShadowMapper::getSpotOutput() const
 {
     return {};
 }
 
-ShadowMapper::DirectionalOutput ShadowMapper::getDirectionalOutput()
+ShadowMapper::DirectionalOutput ShadowMapper::getDirectionalOutput() const
+{
+    return {};
+}
+
+ShadowMapper::PointOutput ShadowMapper::getPointOutput() const
 {
     return {};
 }

@@ -81,7 +81,8 @@ namespace cubos::rendering
             glm::mat4 directionalMatrices[CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS];
             size_t numSpotShadows;
             size_t numDirectionalShadows;
-            float padding[2];
+            size_t numPointShadows;
+            float padding;
         };
 
         struct CascadeInfoUniform
@@ -130,6 +131,7 @@ namespace cubos::rendering
 
         gl::ShaderBindingPoint spotShadowMapBP;
         gl::ShaderBindingPoint directionalShadowMapBP;
+        gl::ShaderBindingPoint pointShadowMapBP;
 
         // Screen Quad
         gl::VertexArray screenVertexArray;
