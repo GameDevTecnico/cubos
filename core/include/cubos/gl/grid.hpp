@@ -26,7 +26,7 @@ namespace cubos::gl
         Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices);
         
         Grid(Grid&&);
-        ~Grid();
+        ~Grid() = default;
 
         /// Resizes the grid.
         /// @param size The new size of the grid.

@@ -35,6 +35,11 @@ Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
     this->indices = indices;
 }
 
+Grid::Grid(Grid&& other) : size(other.size)
+{
+    new (&this->indices) std::vector<uint16_t>(std::move(other.indices));
+}
+
 Grid::Grid()
 {
     this->size = {1, 1, 1};
