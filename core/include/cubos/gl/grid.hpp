@@ -16,7 +16,7 @@ namespace cubos::gl
     public:
         // Default constructor.
         Grid();
-        
+
         /// @param size The size of the grid.
         /// @param width The material index width to use.
         Grid(const glm::ivec3& size);
@@ -25,10 +25,9 @@ namespace cubos::gl
         /// @param indices The material indices of the voxels.
         Grid(const glm::ivec3& size, const std::vector<uint16_t>& indices);
 
-
         /// Resizes the grid. Any voxels set before are cleared.
         /// @param size The new size of the grid.
-        void setSize(const glm::ivec3& size);
+        void setSize(const glm::uvec3& size);
 
         /// @return The size of the grid.
         const glm::uvec3& getSize() const;
@@ -50,7 +49,7 @@ namespace cubos::gl
         void deserialize(memory::Deserializer& deserializer);
 
     private:
-        glm::ivec3 size;               ///< The size of the grid.
+        glm::uvec3 size;               ///< The size of the grid.
         std::vector<uint16_t> indices; ///< The indices of the grid.
     };
 } // namespace cubos::gl
