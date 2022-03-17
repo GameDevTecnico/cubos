@@ -588,7 +588,7 @@ public:
     virtual void generateMipmaps() override
     {
         glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
-        glGenerateMipmap(GL_TEXTURE_2D);
+        glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
     }
 
     GLuint id;
@@ -656,6 +656,39 @@ public:
     {
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
         glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+    }
+
+    GLuint id;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
+};
+
+class OGLCubeMapArray : public impl::CubeMapArray
+{
+public:
+    OGLCubeMapArray(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
+        : id(id), internalFormat(internalFormat), format(format), type(type)
+    {
+    }
+
+    virtual ~OGLCubeMapArray() override
+    {
+        glDeleteTextures(1, &this->id);
+    }
+
+    virtual void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data, CubeFace face,
+                        size_t level = 0) override
+    {
+        glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, this->id);
+        glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, level, x, y, i * 6 + static_cast<int>(face), width, height, 1,
+                        this->format, this->type, data);
+    }
+
+    virtual void generateMipmaps() override
+    {
+        glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, this->id);
+        glGenerateMipmap(GL_TEXTURE_CUBE_MAP_ARRAY);
     }
 
     GLuint id;
@@ -862,6 +895,16 @@ public:
         glUniform1i(this->loc, this->loc);
     }
 
+    virtual void bind(CubeMapArray cubeMap) override
+    {
+        glActiveTexture(GL_TEXTURE0 + this->loc);
+        if (cubeMap)
+            glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, std::static_pointer_cast<OGLCubeMapArray>(cubeMap)->id);
+        else
+            glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
+        glUniform1i(this->loc, this->loc);
+    }
+
     virtual void bind(ConstantBuffer cb) override
     {
         if (cb)
@@ -949,6 +992,14 @@ public:
         this->ssboCount = 0;
     }
 
+    OGLShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps, GLuint program)
+        : OGLShaderPipeline(vs, ps, program)
+    {
+        this->gs = gs;
+        this->uboCount = 0;
+        this->ssboCount = 0;
+    }
+
     virtual ~OGLShaderPipeline() override
     {
         glDeleteProgram(this->program);
@@ -1014,7 +1065,7 @@ public:
         return nullptr;
     }
 
-    ShaderStage vs, ps;
+    ShaderStage vs, gs, ps;
     GLuint program;
     std::list<OGLShaderBindingPoint> bps;
 
@@ -1064,6 +1115,13 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
                 return nullptr;
             }
             break;
+        case FramebufferDesc::TargetType::CubeMapArray:
+            if (desc.targets[i].getCubeMapArrayTarget().handle == nullptr)
+            {
+                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                return nullptr;
+            }
+            break;
         case FramebufferDesc::TargetType::Texture2DArray:
             if (desc.targets[i].getTexture2DArrayTarget().handle == nullptr)
             {
@@ -1099,11 +1157,16 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
                 std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id,
                 desc.targets[i].mipLevel);
             break;
-        case FramebufferDesc::TargetType::Texture2DArray:
-
+        case FramebufferDesc::TargetType::CubeMapArray:
             glFramebufferTexture(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
-                std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id,
+                std::static_pointer_cast<OGLCubeMapArray>(desc.targets[i].getCubeMapArrayTarget().handle)->id,
+                desc.targets[i].mipLevel);
+            break;
+        case FramebufferDesc::TargetType::Texture2DArray:
+            glFramebufferTexture(
+                GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
+                std::static_pointer_cast<OGLTexture2DArray>(desc.targets[i].getTexture2DArrayTarget().handle)->id,
                 desc.targets[i].mipLevel);
             break;
         }
@@ -1138,6 +1201,16 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             else if (ds->format == GL_DEPTH_STENCIL)
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id,
                                        desc.depthStencil.mipLevel);
+            else
+                formatError = true;
+        }
+        break;
+        case FramebufferDesc::TargetType::CubeMapArray: {
+            auto ds = std::static_pointer_cast<OGLCubeMapArray>(desc.depthStencil.getCubeMapArrayTarget().handle);
+            if (ds->format == GL_DEPTH_COMPONENT)
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id, desc.depthStencil.mipLevel);
+            else if (ds->format == GL_DEPTH_STENCIL)
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id, desc.depthStencil.mipLevel);
             else
                 formatError = true;
         }
@@ -1474,8 +1547,9 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     {
         for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
         {
-            glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i, desc.width / div, desc.height / div, 1, format, type,
-                            desc.data[i][j]);
+            if (desc.data[i][j] != nullptr)
+                glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i, desc.width / div, desc.height / div, 1, format, type,
+                                desc.data[i][j]);
         }
     }
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -1587,6 +1661,53 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     }
 
     return std::make_shared<OGLCubeMap>(id, internalFormat, format, type);
+}
+
+CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
+{
+    GLenum internalFormat, format, type;
+
+    if (!textureFormatToGL(desc.format, internalFormat, format, type))
+    {
+        logError("OGLRenderDevice::createCubeMapArray() failed: unsupported texture format {}", desc.format);
+        return nullptr;
+    }
+
+    // Initialize texture
+    GLuint id;
+    glGenTextures(1, &id);
+    glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, id);
+    glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, desc.mipLevelCount, internalFormat, desc.width, desc.height,
+                   desc.size * 6);
+    for (size_t i = 0; i < desc.size; ++i)
+    {
+        for (int face = 0; face < 6; ++face)
+        {
+            for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
+            {
+                if (desc.data[i][face][j] != nullptr)
+                    glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i * 6 + face, desc.width / div, desc.height / div, 1,
+                                    format, type, desc.data[i][face][j]);
+            }
+        }
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    if (GL_ARB_texture_filter_anisotropic)
+        glTexParameterf(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+
+    // Check errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteTextures(1, &id);
+        logError("OGLRenderDevice::createTexture2DArray() failed: OpenGL error {}", glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLCubeMapArray>(id, internalFormat, format, type);
 }
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage)
@@ -1857,6 +1978,9 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     case Stage::Vertex:
         shader_type = GL_VERTEX_SHADER;
         break;
+    case Stage::Geometry:
+        shader_type = GL_GEOMETRY_SHADER;
+        break;
     case Stage::Pixel:
         shader_type = GL_FRAGMENT_SHADER;
         break;
@@ -1898,6 +2022,43 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     // Initialize program
     auto id = glCreateProgram();
     glAttachShader(id, vs->shader);
+    glAttachShader(id, ps->shader);
+    glLinkProgram(id);
+
+    // Check for linking errors
+    GLint success;
+    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        GLchar infoLog[512];
+        glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        return nullptr;
+    }
+
+    // Check for OpenGL errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLShaderPipeline>(vs, ps, id);
+}
+
+ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStage _gs, ShaderStage _ps)
+{
+    auto vs = std::static_pointer_cast<OGLShaderStage>(_vs);
+    auto gs = std::static_pointer_cast<OGLShaderStage>(_gs);
+    auto ps = std::static_pointer_cast<OGLShaderStage>(_ps);
+
+    // Initialize program
+    auto id = glCreateProgram();
+    glAttachShader(id, vs->shader);
+    glAttachShader(id, gs->shader);
     glAttachShader(id, ps->shader);
     glLinkProgram(id);
 

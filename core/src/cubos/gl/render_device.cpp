@@ -17,6 +17,11 @@ const FramebufferDesc::Texture2DTarget& FramebufferDesc::FramebufferTarget::getT
     return std::get<Texture2DTarget>(target);
 }
 
+const FramebufferDesc::CubeMapArrayTarget& FramebufferDesc::FramebufferTarget::getCubeMapArrayTarget() const
+{
+    return std::get<CubeMapArrayTarget>(target);
+}
+
 const FramebufferDesc::Texture2DArrayTarget& FramebufferDesc::FramebufferTarget::getTexture2DArrayTarget() const
 {
     return std::get<Texture2DArrayTarget>(target);
@@ -33,6 +38,13 @@ void FramebufferDesc::FramebufferTarget::setTexture2DTarget(const Texture2D& han
     set = true;
     type = TargetType::Texture2D;
     target = Texture2DTarget{handle};
+}
+
+void FramebufferDesc::FramebufferTarget::setCubeMapArrayTarget(const CubeMapArray& handle)
+{
+    set = true;
+    type = TargetType::CubeMapArray;
+    target = CubeMapArrayTarget{handle};
 }
 
 void FramebufferDesc::FramebufferTarget::setTexture2DArrayTarget(const Texture2DArray& handle)
