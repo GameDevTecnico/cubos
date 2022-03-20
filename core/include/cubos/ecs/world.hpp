@@ -32,14 +32,6 @@ namespace cubos::ecs
             }
         }
 
-        template <typename T> size_t registerComponent(Storage<T>* storage)
-        {
-            assert(_masks.size() == 0);
-            size_t component_id = getComponentID<T>();
-            _storages.push_back(storage);
-            return component_id;
-        }
-
         size_t create()
         {
             if (_masks.size() == 0)
@@ -57,26 +49,11 @@ namespace cubos::ecs
             return id;
         }
 
-        template <typename T> T* addComponent(size_t entity, T value)
-        {
-            size_t component_id = getComponentID<T>();
-            Storage<T>* storage = (Storage<T>*)_storages[component_id];
-            // Set the entity mask for this component
-            _masks[entity * _bytes_per_mask + component_id / 8] |= 1 << (component_id % 8);
+        template <typename T> size_t registerComponent(Storage<T>* storage);
 
-            return storage->insert(entity, value);
-        }
+        template <typename T> T* addComponent(size_t entity, T value);
 
-        template <typename T> T* getComponent(size_t entity)
-        {
-            size_t component_id = getComponentID<T>();
-
-            if ((_masks[entity * _bytes_per_mask + component_id / 8] & (1 << (component_id % 8))) == 0)
-                return nullptr;
-
-            Storage<T>* storage = (Storage<T>*)_storages[component_id];
-            return storage->get(entity);
-        }
+        template <typename T> T* getComponent(size_t entity);
 
         template <typename... ComponentTypes> friend class WorldView;
     };
@@ -171,6 +148,35 @@ namespace cubos::ecs
             return it;
         }
     };
-} // namespace ecs
+
+    template <typename T> size_t World::registerComponent(Storage<T>* storage)
+    {
+        assert(_masks.size() == 0);
+        size_t component_id = getComponentID<T>();
+        _storages.push_back(storage);
+        return component_id;
+    }
+
+    template <typename T> T* World::addComponent(size_t entity, T value)
+    {
+        size_t component_id = getComponentID<T>();
+        Storage<T>* storage = (Storage<T>*)_storages[component_id];
+        // Set the entity mask for this component
+        _masks[entity * _bytes_per_mask + component_id / 8] |= 1 << (component_id % 8);
+
+        return storage->insert(entity, value);
+    }
+
+    template <typename T> T* World::getComponent(size_t entity)
+    {
+        size_t component_id = getComponentID<T>();
+
+        if ((_masks[entity * _bytes_per_mask + component_id / 8] & (1 << (component_id % 8))) == 0)
+            return nullptr;
+
+        Storage<T>* storage = (Storage<T>*)_storages[component_id];
+        return storage->get(entity);
+    }
+} // namespace cubos::ecs
 
 #endif // CUBOS_ECS_WORLD_HPP
