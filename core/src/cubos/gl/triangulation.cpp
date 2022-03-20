@@ -57,9 +57,9 @@ vector<Triangle> Triangulation::Triangulate(const Grid& grid)
                     if (front_index < 0 || front_index >= grid_size.z ||
                         (front_index >= 0 && front_index < grid_size.z && grid.get({x, y, front_index}) == 0))
                     {
-                        add_triangle_from_quad(triangles, position, position + glm::uvec3(1, 0, 0),
-                                               position + glm::uvec3(0, 1, 0), position + glm::uvec3(1, 1, 0),
-                                               material_id);
+                        add_triangle_from_quad(triangles, position + glm::uvec3(1, 0, 1),
+                                               position + glm::uvec3(0, 0, 1), position + glm::uvec3(1, 1, 1),
+                                               position + glm::uvec3(0, 1, 1), material_id);
                     }
 
                     // Back Face
@@ -67,9 +67,10 @@ vector<Triangle> Triangulation::Triangulate(const Grid& grid)
                     if (back_index < 0 || back_index >= grid_size.z ||
                         (back_index >= 0 && back_index < grid_size.z && grid.get({x, y, back_index}) == 0))
                     {
-                        add_triangle_from_quad(triangles, position + glm::uvec3(1, 0, 1),
-                                               position + glm::uvec3(0, 0, 1), position + glm::uvec3(1, 1, 1),
-                                               position + glm::uvec3(0, 1, 1), material_id);
+
+                        add_triangle_from_quad(triangles, position, position + glm::uvec3(1, 0, 0),
+                                               position + glm::uvec3(0, 1, 0), position + glm::uvec3(1, 1, 0),
+                                               material_id);
                     }
 
                     // Top Face
