@@ -17,8 +17,8 @@ inline void CSMShadowMapper::setupFramebuffers()
 
     Texture2DArrayDesc directionalAtlasDesc;
     directionalAtlasDesc.format = TextureFormat::Depth32;
-    directionalAtlasDesc.width = spotResolution;
-    directionalAtlasDesc.height = spotResolution;
+    directionalAtlasDesc.width = directionalResolution;
+    directionalAtlasDesc.height = directionalResolution;
     directionalAtlasDesc.usage = gl::Usage::Dynamic;
     directionalAtlasDesc.size = CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT * numCascades;
     directionalAtlas = renderDevice.createTexture2DArray(directionalAtlasDesc);
