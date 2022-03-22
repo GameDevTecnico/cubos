@@ -8,7 +8,7 @@ namespace cubos::gl
     // Represents a voxel vertex
     struct Vertex
     {
-        glm::uvec3 position; ///< The position of the vertex.
+        glm::vec3 position; ///< The position of the vertex.
 
         glm::vec3 normal; ///< The normal of the vertex.
 
@@ -16,7 +16,8 @@ namespace cubos::gl
 
         bool operator==(const Vertex& v) const;
 
-        struct hash {
+        struct hash
+        {
             size_t operator()(const cubos::gl::Vertex& vertex) const;
         };
     };

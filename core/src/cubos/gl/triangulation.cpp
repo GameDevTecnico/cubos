@@ -1,6 +1,7 @@
 
 #include <vector>
 #include <tuple>
+#include <cubos/log.hpp>
 #include <cubos/gl/vertex.hpp>
 #include <cubos/gl/grid.hpp>
 #include <cubos/gl/triangulation.hpp>
@@ -12,6 +13,12 @@ using std::vector;
 void add_triangle_from_quad(vector<Triangle>& triangles, glm::vec3 bottomLeft, glm::vec3 bottomRight, glm::vec3 topLeft,
                             glm::vec3 topRight, uint16_t material_id)
 {
+    cubos::logDebug("Add Quad");
+    cubos::logDebug("{},{},{}", bottomLeft.x, bottomLeft.y, bottomLeft.z);
+    cubos::logDebug("{},{},{}", bottomRight.x, bottomRight.y, bottomRight.z);
+    cubos::logDebug("{},{},{}", topLeft.x, topLeft.y, topLeft.z);
+    cubos::logDebug("{},{},{}", topRight.x, topRight.y, topRight.z);
+
     Triangle triangle_bl, triangle_tr;
 
     triangle_bl.v0.material = triangle_bl.v1.material = triangle_bl.v2.material = triangle_tr.v0.material =
@@ -37,87 +44,148 @@ void add_triangle_from_quad(vector<Triangle>& triangles, glm::vec3 bottomLeft, g
 vector<Triangle> Triangulation::Triangulate(const Grid& grid)
 {
     glm::uvec3 grid_size = grid.getSize();
-    vector<Triangle> triangles = vector<Triangle>();
+    vector<Triangle> triangles;
+    std::vector<uint16_t> mask;
 
-    for (uint x = 0; x < grid_size.x; x++)
+    glm::vec3 offset = -glm::vec3(grid_size) / 2.0f;
+
+    // For both back and front faces
+    bool back_face = true;
+    do
     {
-        for (uint y = 0; y < grid_size.y; y++)
+        back_face = !back_face;
+
+        // For each axis
+        for (int d = 0; d < 3; ++d)
         {
-            for (uint z = 0; z < grid_size.z; z++)
+            int u = (d + 1) % 3;
+            int v = (d + 2) % 3;
+
+            glm::ivec3 x = {0, 0, 0}, q = {0, 0, 0};
+            q[d] = 1;
+            mask.resize(grid_size[u] * grid_size[v]);
+
+            for (x[d] = -1; x[d] < int(grid_size[d]);)
             {
-                glm::uvec3 position = {x, y, z};
+                int n = 0;
 
-                uint16_t material_id = grid.get(position);
-
-                if (material_id != 0)
+                // Create mask
+                for (x[v] = 0; x[v] < int(grid_size[v]); ++x[v])
                 {
-
-                    // Front Face
-                    uint front_index = z + 1;
-                    if (front_index < 0 || front_index >= grid_size.z ||
-                        (front_index >= 0 && front_index < grid_size.z && grid.get({x, y, front_index}) == 0))
+                    for (x[u] = 0; x[u] < int(grid_size[u]); ++x[u])
                     {
-                        add_triangle_from_quad(triangles, position + glm::uvec3(1, 0, 1),
-                                               position + glm::uvec3(0, 0, 1), position + glm::uvec3(1, 1, 1),
-                                               position + glm::uvec3(0, 1, 1), material_id);
+                        if (x[d] < 0)
+                        {
+                            mask[n++] = back_face ? grid.get({x.x + q.x, x.y + q.y, x.z + q.z}) : 0;
+                        }
+                        else if (x[d] == int(grid_size[d]) - 1)
+                        {
+                            mask[n++] = back_face ? 0 : grid.get({x.x, x.y, x.z});
+                        }
+                        else if (grid.get({x.x, x.y, x.z}) == 0 || grid.get({x.x + q.x, x.y + q.y, x.z + q.z}) == 0)
+                        {
+                            mask[n++] =
+                                back_face ? grid.get({x.x + q.x, x.y + q.y, x.z + q.z}) : grid.get({x.x, x.y, x.z});
+                        }
+                        else
+                        {
+                            mask[n++] = 0;
+                        }
                     }
+                }
 
-                    // Back Face
-                    uint back_index = z - 1;
-                    if (back_index < 0 || back_index >= grid_size.z ||
-                        (back_index >= 0 && back_index < grid_size.z && grid.get({x, y, back_index}) == 0))
+                ++x[d];
+                n = 0;
+
+                // Generate mesh from mask
+                for (int j = 0; j < int(grid_size[v]); ++j)
+                {
+                    for (int i = 0; i < int(grid_size[u]);)
                     {
+                        if (mask[n] != 0)
+                        {
+                            int w, h;
+                            for (w = 1; i + w < int(grid_size[u]) && mask[n + w] == mask[n]; ++w)
+                                ;
+                            bool done = false;
+                            for (h = 1; j + h < int(grid_size[v]); ++h)
+                            {
+                                for (int k = 0; k < w; ++k)
+                                {
+                                    if (mask[n + k + h * grid_size[u]] == 0 ||
+                                        mask[n + k + h * grid_size[u]] != mask[n])
+                                    {
+                                        done = true;
+                                        break;
+                                    }
+                                }
 
-                        add_triangle_from_quad(triangles, position, position + glm::uvec3(1, 0, 0),
-                                               position + glm::uvec3(0, 1, 0), position + glm::uvec3(1, 1, 0),
-                                               material_id);
-                    }
+                                if (done)
+                                {
+                                    break;
+                                }
+                            }
 
-                    // Top Face
-                    uint top_index = y + 1;
-                    if (top_index < 0 || top_index >= grid_size.y ||
-                        (top_index >= 0 && top_index < grid_size.y && grid.get({x, top_index, z}) == 0))
-                    {
-                        add_triangle_from_quad(triangles, position + glm::uvec3(1, 1, 0),
-                                               position + glm::uvec3(1, 1, 1), position + glm::uvec3(0, 1, 0),
-                                               position + glm::uvec3(0, 1, 1), material_id);
-                    }
+                            if (mask[n] != 0)
+                            {
+                                x[u] = i;
+                                x[v] = j;
 
-                    // Bottom Face
-                    uint bottom_index = y - 1;
-                    if (bottom_index < 0 || bottom_index >= grid_size.y ||
-                        (bottom_index >= 0 && bottom_index < grid_size.y && grid.get({x, bottom_index, z}) == 0))
-                    {
-                        add_triangle_from_quad(triangles, position, position + glm::uvec3(0, 0, 1),
-                                               position + glm::uvec3(1, 0, 0), position + glm::uvec3(1, 0, 1),
-                                               material_id);
-                    }
+                                glm::ivec3 du = {0, 0, 0}, dv = {0, 0, 0};
+                                du[u] = w;
+                                dv[v] = h;
 
-                    // Right Face
-                    uint right_face = x + 1;
-                    if (right_face < 0 || right_face >= grid_size.x ||
-                        (right_face >= 0 && right_face < grid_size.x && grid.get({right_face, y, z}) == 0))
-                    {
+                                if (!back_face)
+                                {
+                                    add_triangle_from_quad(triangles, offset + glm::vec3(x + du),
+                                                           offset + glm::vec3(x + du + dv), offset + glm::vec3(x),
+                                                           offset + glm::vec3(x + dv), mask[n] - 1);
+                                }
+                                else
+                                {
+                                    add_triangle_from_quad(triangles, offset + glm::vec3(x + du + dv),
+                                                           offset + glm::vec3(x + du), offset + glm::vec3(x + dv),
+                                                           offset + glm::vec3(x), mask[n] - 1);
+                                }
+                            }
 
-                        add_triangle_from_quad(triangles, position + glm::uvec3(1, 0, 0),
-                                               position + glm::uvec3(1, 0, 1), position + glm::uvec3(1, 1, 0),
-                                               position + glm::uvec3(1, 1, 1), material_id);
-                    }
+                            for (int l = 0; l < h; ++l)
+                            {
+                                for (int k = 0; k < w; ++k)
+                                {
+                                    mask[n + k + l * grid_size[u]] = 0;
+                                }
+                            }
 
-                    // Left face
-                    uint left_face = x - 1;
-                    if (left_face < 0 || left_face >= grid_size.x ||
-                        (left_face >= 0 && left_face < grid_size.x && grid.get({left_face, y, z}) == 0))
-
-                    {
-
-                        add_triangle_from_quad(triangles, position + glm::uvec3(0, 0, 1), position,
-                                               position + glm::uvec3(0, 1, 1), position + glm::uvec3(0, 1, 0),
-                                               material_id);
+                            i += w;
+                            n += w;
+                        }
+                        else
+                        {
+                            ++i;
+                            ++n;
+                        }
                     }
                 }
             }
         }
+    } while (back_face != true);
+    for (auto it = triangles.begin(); it != triangles.end(); it++)
+    {
+        logDebug("VO:");
+        logDebug("pos: {},{},{}", it->v0.position.x, it->v0.position.y, it->v0.position.z);
+        logDebug("normal: {},{},{}", it->v0.normal.x, it->v0.normal.y, it->v0.normal.z);
+        logDebug("material: {}", it->v0.material);
+
+        logDebug("V1:");
+        logDebug("pos: {},{},{}", it->v1.position.x, it->v1.position.y, it->v1.position.z);
+        logDebug("normal: {},{},{}", it->v1.normal.x, it->v1.normal.y, it->v1.normal.z);
+        logDebug("material: {}", it->v1.material);
+
+        logDebug("V2:");
+        logDebug("pos: {},{},{}", it->v2.position.x, it->v2.position.y, it->v2.position.z);
+        logDebug("normal: {},{},{}", it->v2.normal.x, it->v2.normal.y, it->v2.normal.z);
+        logDebug("material: {}", it->v2.material);
     }
 
     return triangles;
