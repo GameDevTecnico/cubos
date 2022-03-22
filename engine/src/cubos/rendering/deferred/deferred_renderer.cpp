@@ -292,11 +292,11 @@ float directionalShadow(vec3 fragPos, vec3 fragNormal, uint lightIndex) {
     float bias = max(0.05 * (1.0 - dot(fragNormal, -vec3(directionalLights[lightIndex].rotation * vec4(0, 0, 1, 1)))), 0.005);
     if (layer == cascadeCount - 1)
     {
-        bias *= 1 / (farPlane * 0.5f);
+        bias *= 0.2 / (farPlane * 0.5f);
     }
     else
     {
-        bias *= 1 / (cascadeDistances[layer] * 0.5f);
+        bias *= 0.2 / (cascadeDistances[layer] * 0.5f);
     }
 
     // PCF

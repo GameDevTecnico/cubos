@@ -3,7 +3,7 @@
 
 #include <cubos/rendering/shadow_mapping/shadow_mapper.hpp>
 
-#define CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT 8
+#define CUBOS_CSM_MAX_DIRECTIONAL_SHADOW_COUNT 4
 
 namespace cubos::rendering
 {

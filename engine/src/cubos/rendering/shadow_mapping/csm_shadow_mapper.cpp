@@ -259,6 +259,13 @@ CSMShadowMapper::CSMShadowMapper(RenderDevice& renderDevice, size_t spotResoluti
     : ShadowMapper(renderDevice), spotResolution(spotResolution), directionalResolution(directionalResolution),
       pointResolution(pointResolution), numCascades(numCascades)
 {
+    if (numCascades > CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE)
+    {
+        logCritical("CSMShadowMapper() failed: numCascades was {}, must not exceed "
+                    "CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE ({})",
+                    numCascades, CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE);
+        abort();
+    }
     setupFramebuffers();
     setupPipelines();
     createRenderDeviceStates();

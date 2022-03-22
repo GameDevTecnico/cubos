@@ -20,8 +20,8 @@ int main(void)
     auto window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
 
-    auto shadowMapper = rendering::CSMShadowMapper(renderDevice, 512, 1024, 256, 5);
-    shadowMapper.setCascadeDistances({5, 10, 15, 20});
+    auto shadowMapper = rendering::CSMShadowMapper(renderDevice, 512, 1024, 256, 4);
+    shadowMapper.setCascadeDistances({5, 10, 20});
 
     auto renderer = rendering::DeferredRenderer(*window);
 
