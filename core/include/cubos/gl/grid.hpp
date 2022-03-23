@@ -6,7 +6,6 @@
 
 #include <glm/glm.hpp>
 #include <vector>
-
 namespace cubos::gl
 {
     /// Represents a grid of voxels.
