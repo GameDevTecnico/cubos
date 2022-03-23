@@ -50,7 +50,7 @@ namespace cubos::io
         void handlePositive();
         void handleNegative();
         bool wasTriggered;
-        float value;
+        float value = 0;
     };
 } // namespace cubos::io
 

@@ -28,9 +28,15 @@ void SingleAxis::subscribeEvents()
         InputManager::registerKeyDownCallback<SingleAxis>(
             this, &SingleAxis::handleNegative,
             std::get<0>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
+        InputManager::registerKeyUpCallback<SingleAxis>(
+            this, &SingleAxis::handlePositive,
+            std::get<0>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
 
         InputManager::registerKeyDownCallback<SingleAxis>(
             this, &SingleAxis::handlePositive,
+            std::get<1>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
+        InputManager::registerKeyUpCallback<SingleAxis>(
+            this, &SingleAxis::handleNegative,
             std::get<1>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
     }
 }
@@ -44,13 +50,18 @@ void SingleAxis::unsubscribeEvents()
     }
     else if (std::holds_alternative<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs))
     {
-
         InputManager::unregisterKeyDownCallback<SingleAxis>(
             this, &SingleAxis::handleNegative,
+            std::get<0>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
+        InputManager::unregisterKeyUpCallback<SingleAxis>(
+            this, &SingleAxis::handlePositive,
             std::get<0>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
 
         InputManager::unregisterKeyDownCallback<SingleAxis>(
             this, &SingleAxis::handlePositive,
+            std::get<1>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
+        InputManager::unregisterKeyUpCallback<SingleAxis>(
+            this, &SingleAxis::handleNegative,
             std::get<1>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
     }
 }
@@ -63,28 +74,14 @@ void SingleAxis::handleAxis(float value)
 
 void SingleAxis::handlePositive()
 {
-    if (this->wasTriggered)
-    {
-        this->value += 1;
-    }
-    else
-    {
-        this->value = 1;
-        this->wasTriggered = true;
-    }
+    this->value += 1;
+    this->wasTriggered = true;
 }
 
 void SingleAxis::handleNegative()
 {
-    if (this->wasTriggered)
-    {
-        this->value += -1;
-    }
-    else
-    {
-        this->value = -1;
-        this->wasTriggered = true;
-    }
+    this->value -= 1;
+    this->wasTriggered = true;
 }
 
 bool SingleAxis::isTriggered()
