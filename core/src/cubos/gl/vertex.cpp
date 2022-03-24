@@ -22,7 +22,7 @@ void Vertex::deserialize(memory::Deserializer& deserializer)
 
 void cubos::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
 {
-    std::vector<unsigned char> mask;
+    std::vector<uint16_t> mask;
 
     auto& sz = grid.getSize();
 
@@ -77,13 +77,11 @@ void cubos::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertices, std
                             for (h = 1; j + h < int(sz[v]); ++h)
                             {
                                 for (int k = 0; k < w; ++k)
-                                {
                                     if (mask[n + k + h * sz[u]] == 0 || mask[n + k + h * sz[u]] != mask[n])
                                     {
                                         done = true;
                                         break;
                                     }
-                                }
 
                                 if (done)
                                     break;
@@ -99,7 +97,7 @@ void cubos::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertices, std
                                 dv[v] = h;
 
                                 auto vi = vertices.size();
-                                vertices.resize(vi + 4, {{}, back_face ? -q : q, (unsigned char)(mask[n] - 1)});
+                                vertices.resize(vi + 4, {{}, back_face ? -q : q, mask[n]});
                                 vertices[vi + 0].position = x;
                                 vertices[vi + 1].position = x + du;
                                 vertices[vi + 2].position = x + du + dv;
@@ -129,9 +127,7 @@ void cubos::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertices, std
 
                             for (int l = 0; l < h; ++l)
                                 for (int k = 0; k < w; ++k)
-                                {
                                     mask[n + k + l * sz[u]] = 0;
-                                }
 
                             i += w;
                             n += w;
