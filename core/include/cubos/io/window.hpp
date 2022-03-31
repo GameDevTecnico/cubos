@@ -25,6 +25,13 @@ namespace cubos::io
         Extra2,
     };
 
+    enum class MouseAxis
+    {
+        X,
+        Y,
+        Scroll,
+    };
+
     /// Wrapper around a window object.
     /// Handles input events and creates the render device.
     class Window

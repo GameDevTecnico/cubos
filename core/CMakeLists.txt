@@ -9,7 +9,8 @@ endif ()
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
 option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
-option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
+option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source?" ON)
+option(FMT_USE_SUBMODULE "Compile FMT from source?" ON)
 
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
@@ -40,7 +41,16 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/io/glfw_window.hpp"
     "src/cubos/io/glfw_window.cpp"
 
+    "src/cubos/io/input_manager.cpp"
+    "src/cubos/io/action.cpp"
+    "src/cubos/io/context.cpp"
+
+    "src/cubos/io/sources/button_press.cpp"
+    "src/cubos/io/sources/single_axis.cpp"
+    "src/cubos/io/sources/double_axis.cpp"
+
     "src/cubos/gl/debug.cpp"
+    "src/cubos/gl/render_device.cpp"
     "src/cubos/gl/ogl_render_device.hpp"
     "src/cubos/gl/ogl_render_device.cpp"
     "src/cubos/gl/material.cpp"
@@ -77,6 +87,14 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/gl/palette.hpp"
     "include/cubos/gl/grid.hpp"
     "include/cubos/gl/util.hpp"
+
+    "include/cubos/io/input_manager.hpp"
+    "include/cubos/io/action.hpp"
+    "include/cubos/io/context.hpp"
+    "include/cubos/io/sources/source.hpp"
+    "include/cubos/io/sources/button_press.hpp"
+    "include/cubos/io/sources/single_axis.hpp"
+    "include/cubos/io/sources/double_axis.hpp"
     )
 
 # Create core library
@@ -136,10 +154,16 @@ else ()
     find_package(spdlog REQUIRED)
 endif ()
 
+if (FMT_USE_SUBMODULE)
+    add_subdirectory(lib/fmt)
+else ()
+    find_package(fmt REQUIRED)
+endif ()
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp fmt::fmt ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests

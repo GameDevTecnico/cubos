@@ -1,12 +1,15 @@
+#include <cubos/cubos.hpp>
 #include <cubos/log.hpp>
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
 
-using namespace cubos;
-
-int main(void)
+void cubos::init(int argc, char** argv)
 {
-    initializeLogger();
+    initializeLogger();    
+}
+
+void cubos::run()
+{
     auto window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
 
@@ -18,5 +21,5 @@ int main(void)
     }
 
     delete window;
-    return 0;
 }
+

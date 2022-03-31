@@ -2,6 +2,7 @@
 #define CUBOS_GL_RENDER_DEVICE_HPP
 
 #include <memory>
+#include <variant>
 #include <glm/glm.hpp>
 
 #define CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT 8
@@ -226,6 +227,7 @@ namespace cubos::gl
     enum class Stage
     {
         Vertex,
+        Geometry,
         Pixel,
     };
 
@@ -240,26 +242,40 @@ namespace cubos::gl
         NegativeZ = 5,
     };
 
+    enum class BufferStorageType
+    {
+        Small,
+        Large,
+    };
+
     /// Framebuffer description.
     struct FramebufferDesc
     {
-        struct
+        struct CubeMapTarget
+        {
+            CubeMap handle; ///< Cube map handle.
+            CubeFace face;  ///< Cube map face which will be used as target.
+        };                  ///< If the target is a cube map, this handle is used.
+
+        struct Texture2DTarget
+        {
+            Texture2D handle; ///< Texture handle.
+        };                    ///< If the target isn't a cube map, this handle is used.
+
+        struct FramebufferTarget
         {
             bool isCubeMap = false; ///< Is this target a cube map face?
             uint32_t mipLevel = 0;  ///< Mip level of the texture which will be set as a render target.
 
-            union {
-                struct
-                {
-                    CubeMap handle; ///< Cube map handle.
-                    CubeFace face;  ///< Cube map face which will be used as target.
-                } cubeMap;          ///< If the target is a cube map, this handle is used.
+            std::variant<CubeMapTarget, Texture2DTarget> target;
 
-                struct
-                {
-                    Texture2D handle; ///< Texture handle.
-                } texture;            ///< If the target isn't a cube map, this handle is used.
-            };
+            [[nodiscard]] const CubeMapTarget& getCubeMapTarget() const;
+
+            [[nodiscard]] const Texture2DTarget& getTexture2DTarget() const;
+
+            void setCubeMapTarget(const CubeMap& handle, CubeFace face);
+
+            void setTexture2DTarget(const Texture2D& handle);
         } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
         uint32_t targetCount = 1; ///< Number of render targets.
@@ -352,45 +368,46 @@ namespace cubos::gl
     /// 1D texture description.
     struct Texture1DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                       ///< Number of mip levels.
-        size_t width;                                   ///< Texture width.
-        Usage usage;                                    ///< Texture usage mode.
-        TextureFormat format;                           ///< Texture format.
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                            ///< Number of mip levels.
+        size_t width;                                        ///< Texture width.
+        Usage usage;                                         ///< Texture usage mode.
+        TextureFormat format;                                ///< Texture format.
     };
 
     /// 2D texture description.
     struct Texture2DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                       ///< Number of mip levels.
-        size_t width;                                   ///< Texture width.
-        size_t height;                                  ///< Texture height.
-        Usage usage;                                    ///< Texture usage mode.
-        TextureFormat format;                           ///< Texture format.
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                            ///< Number of mip levels.
+        size_t width;                                        ///< Texture width.
+        size_t height;                                       ///< Texture height.
+        Usage usage;                                         ///< Texture usage mode.
+        TextureFormat format;                                ///< Texture format.
     };
 
     /// 3D texture description.
     struct Texture3DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                       ///< Number of mip levels.
-        size_t width;                                   ///< Texture width.
-        size_t height;                                  ///< Texture height.
-        size_t depth;                                   ///< Texture depth.
-        Usage usage;                                    ///< Texture usage mode.
-        TextureFormat format;                           ///< Texture format.
+        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                            ///< Number of mip levels.
+        size_t width;                                        ///< Texture width.
+        size_t height;                                       ///< Texture height.
+        size_t depth;                                        ///< Texture depth.
+        Usage usage;                                         ///< Texture usage mode.
+        TextureFormat format;                                ///< Texture format.
     };
 
     /// Cube map description.
     struct CubeMapDesc
     {
-        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT]; ///< Optional initial cube map data, indexed using CubeFace.
-        size_t mipLevelCount = 1;                          ///< Number of mip levels.
-        size_t width;                                      ///< Cube map face width.
-        size_t height;                                     ///< Cube map face height.
-        Usage usage;                                       ///< Texture usage mode.
-        TextureFormat format;                              ///< Texture format.
+        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {
+            {}, {}, {}, {}, {}, {}}; ///< Optional initial cube map data, indexed using CubeFace.
+        size_t mipLevelCount = 1;    ///< Number of mip levels.
+        size_t width;                ///< Cube map face width.
+        size_t height;               ///< Cube map face height.
+        Usage usage;                 ///< Texture usage mode.
+        TextureFormat format;        ///< Texture format.
     };
 
     /// Constant buffer element.
@@ -499,6 +516,14 @@ namespace cubos::gl
         /// @return Constant buffer handle, or nullptr if the creation failed.
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) = 0;
 
+        /// Creates a new constant buffer.
+        /// @param size Size in bytes.
+        /// @param data Initial data, can be nullptr.
+        /// @param usage The usage which the buffer will have.
+        /// @param storage The intended storage type for the buffer.
+        /// @return Constant buffer handle, or nullptr if the creation failed.
+        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage, BufferStorageType storage) = 0;
+
         /// Creates a new index buffer.
         /// @param size Size in bytes.
         /// @param data Initial data, can be nullptr.
@@ -534,11 +559,21 @@ namespace cubos::gl
         /// @return Shader pipeline handle, or nullptr if the creation failed.
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) = 0;
 
+        /// Creates a new shader pipeline from a vertex and pixel shaders.
+        /// @param vs Vertex shader stage.
+        /// @param gs Geometry shader stage.
+        /// @param ps Pixel shader stage.
+        /// @return Shader pipeline handle, or nullptr if the creation failed.
+        virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps) = 0;
+
         /// Sets the current shader pipeline used for rendering.
         virtual void setShaderPipeline(ShaderPipeline pipeline) = 0;
 
         /// Clears the color buffer bit on the current framebuffer to a specific color.
         virtual void clearColor(float r, float g, float b, float a) = 0;
+
+        /// Clears the color buffer of a specific target on the current framebuffer to a specific color.
+        virtual void clearTargetColor(size_t target, float r, float g, float b, float a) = 0;
 
         /// Clears the depth buffer bit on the current framebuffer to a specific value.
         virtual void clearDepth(float depth) = 0;
@@ -725,6 +760,8 @@ namespace cubos::gl
 
             /// Unmaps the constant buffer, updating it with data written to the mapped region.
             virtual void unmap() = 0;
+            /// Get hint as to what underlying storage type is being used for the buffer.
+            virtual BufferStorageType getStorageTypeHint() = 0;
 
         protected:
             ConstantBuffer() = default;

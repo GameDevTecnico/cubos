@@ -26,6 +26,8 @@ namespace cubos::gl
         virtual Texture3D createTexture3D(const Texture3DDesc& desc) override;
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) override;
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) override;
+        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
+                                                    BufferStorageType storage) override;
         virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage) override;
         virtual void setIndexBuffer(IndexBuffer ib) override;
         virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage) override;
@@ -33,8 +35,10 @@ namespace cubos::gl
         virtual void setVertexArray(VertexArray va) override;
         virtual ShaderStage createShaderStage(Stage stage, const char* src) override;
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) override;
+        virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps) override;
         virtual void setShaderPipeline(ShaderPipeline pipeline) override;
         virtual void clearColor(float r, float g, float b, float a) override;
+        virtual void clearTargetColor(size_t target, float r, float g, float b, float a) override;
         virtual void clearDepth(float depth) override;
         virtual void clearStencil(int stencil) override;
         virtual void drawTriangles(size_t offset, size_t count) override;

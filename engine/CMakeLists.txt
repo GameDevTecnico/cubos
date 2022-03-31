@@ -1,15 +1,28 @@
 # engine/CMakeLists.txt
 # Cubos engine build configuration
 
+option(BUILD_ENGINE_SAMPLES "Build cubos engine samples" OFF)
+
+message( "# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
+
 # Set engine source files
 
 set(CUBOS_ENGINE_SOURCE
-    "src/cubos/entry.cpp"
+    "src/cubos/cubos.cpp"
+)
+
+set(CUBOS_ENGINE_INCLUDE
+    "include/cubos/cubos.hpp"
 )
 
 # Create cubos engine
 
-add_executable(cubos-engine ${CUBOS_ENGINE_SOURCE})
-target_link_libraries(cubos-engine cubos-core)
-set_property(TARGET cubos-engine PROPERTY CXX_STANDARD 20)
+add_library(cubos-engine ${CUBOS_ENGINE_SOURCE} ${CUBOS_ENGINE_INCLUDE})
+target_include_directories(cubos-engine PUBLIC "include" PRIVATE "src")
+target_link_libraries(cubos-engine PUBLIC cubos-core)
 target_compile_features(cubos-engine PUBLIC cxx_std_20)
+
+# Add engine samples
+if (BUILD_ENGINE_SAMPLES)
+    add_subdirectory(samples)
+endif()
