@@ -22,12 +22,23 @@ namespace cubos::ecs
     public:
         ~World();
 
+        /// Creates a new entity.
         size_t create();
 
+        /// Register a component type.
+        /// @tparam T Component type.
+        /// @param storage Storage for the component type.
         template <typename T> size_t registerComponent(Storage<T>* storage);
 
+        /// Add a component to an entity.
+        /// @tparam T Component type.
+        /// @param entity Entity ID.
+        /// @param value Initial value of the component
         template <typename T> T* addComponent(size_t entity, T value);
 
+        /// Get a component of an entity.
+        /// @tparam T Component type.
+        /// @param entity Entity ID.
         template <typename T> T* getComponent(size_t entity);
 
         template <typename... ComponentTypes> friend class WorldView;
