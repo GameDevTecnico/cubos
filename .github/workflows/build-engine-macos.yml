@@ -21,10 +21,10 @@ jobs:
         
     - name: Install dependencies
       run: |
-        brew install gcc@10
+        brew install gcc@10 glfw
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DGLFW_USE_SUBMODULE=OFF -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON
       shell: bash
       env:
         CC:   gcc-10
