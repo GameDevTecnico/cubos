@@ -4,7 +4,7 @@ using namespace cubos::ecs;
 
 World::~World()
 {
-    for (auto* storage : _storages)
+    for (auto* storage : storages)
     {
         delete storage;
     }
@@ -12,16 +12,16 @@ World::~World()
 
 size_t World::create()
 {
-    if (_masks.size() == 0)
+    if (masks.size() == 0)
     {
-        _bytes_per_mask = (7 + _storages.size()) / 8;
+        bytesPerMask = (7 + storages.size()) / 8;
     }
 
-    size_t id = _next_entity_id++;
-    for (size_t i = 0; i < _bytes_per_mask; i++)
+    size_t id = nextEntityId++;
+    for (size_t i = 0; i < bytesPerMask; i++)
     {
         uint8_t n = 0;
-        _masks.push_back(n);
+        masks.push_back(n);
     }
 
     return id;
