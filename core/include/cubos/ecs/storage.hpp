@@ -20,7 +20,7 @@ namespace cubos::ecs
     template <typename T> class VecStorage : public Storage<T>
     {
     private:
-        std::vector<T> _data;
+        std::vector<T> data;
 
     public:
         T* insert(size_t index, T value) override;
@@ -31,7 +31,7 @@ namespace cubos::ecs
     template <typename T> class MapStorage : public Storage<T>
     {
     private:
-        std::unordered_map<size_t, T> _data;
+        std::unordered_map<size_t, T> data;
 
     public:
         T* insert(size_t index, T value) override;
@@ -42,7 +42,7 @@ namespace cubos::ecs
     template <typename T> class NullStorage : public Storage<T>
     {
     private:
-        T _data;
+        T data;
 
     public:
         T* insert(size_t index, T value) override;
@@ -52,43 +52,43 @@ namespace cubos::ecs
 
     template <typename T> T* VecStorage<T>::insert(size_t index, T value)
     {
-        if (_data.size() <= index)
+        if (data.size() <= index)
         {
-            _data.resize(index);
-            _data.push_back(value);
+            data.resize(index);
+            data.push_back(value);
         }
         else
         {
-            _data[index] = value;
+            data[index] = value;
         }
 
-        return &_data[index];
+        return &data[index];
     }
 
     template <typename T> T* VecStorage<T>::get(size_t index)
     {
-        return &_data[index];
+        return &data[index];
     }
 
     template <typename T> T* MapStorage<T>::insert(size_t index, T value)
     {
-        _data[index] = value;
-        return &_data[index];
+        data[index] = value;
+        return &data[index];
     }
 
     template <typename T> T* MapStorage<T>::get(size_t index)
     {
-        return &_data[index];
+        return &data[index];
     }
 
     template <typename T> T* NullStorage<T>::insert(size_t index, T value)
     {
-        return &_data;
+        return &data;
     }
 
     template <typename T> T* NullStorage<T>::get(size_t index)
     {
-        return &_data;
+        return &data;
     }
 } // namespace cubos::ecs
 

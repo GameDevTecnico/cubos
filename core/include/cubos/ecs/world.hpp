@@ -11,11 +11,11 @@ namespace cubos::ecs
     class World
     {
     private:
-        std::vector<std::uint8_t> _masks;
-        std::vector<IStorage*> _storages;
+        std::vector<std::uint8_t> masks;
+        std::vector<IStorage*> storages;
 
-        size_t _next_entity_id = 0;
-        size_t _bytes_per_mask;
+        size_t nextEntityId = 0;
+        size_t bytesPerMask;
 
         template <typename T> size_t getComponentID();
 
@@ -35,27 +35,26 @@ namespace cubos::ecs
 
     template <typename... ComponentTypes> struct WorldView
     {
-        World* _world;
-        std::vector<uint8_t> _mask;
+        World* world;
+        std::vector<uint8_t> mask;
 
-        WorldView(World& world) : _world(&world)
+        WorldView(World& w) : world(&w)
         {
-            _mask.resize(_world->_bytes_per_mask);
-            size_t componentIds[] = {_world->getComponentID<ComponentTypes>()...};
+            mask.resize(world->bytesPerMask);
+            size_t componentIds[] = {world->getComponentID<ComponentTypes>()...};
             for (auto id : componentIds)
             {
-                _mask[id / 8] |= 1 << (id % 8);
+                mask[id / 8] |= 1 << (id % 8);
             }
         }
 
         struct Iterator
         {
-            World* _world;
+            World* world;
             size_t current;
-            std::vector<uint8_t>* _mask;
+            std::vector<uint8_t>* mask;
 
-            Iterator(World* world, size_t index, std::vector<uint8_t>* mask)
-                : _world(world), current(index), _mask(mask)
+            Iterator(World* w, size_t index, std::vector<uint8_t>* m) : world(w), current(index), mask(m)
             {
             }
 
@@ -66,19 +65,19 @@ namespace cubos::ecs
 
             bool operator==(const Iterator& other) const
             {
-                return current == other.current || current == _world->_next_entity_id;
+                return current == other.current || current == world->nextEntityId;
             }
 
             bool operator!=(const Iterator& other) const
             {
-                return current != other.current && current != _world->_next_entity_id;
+                return current != other.current && current != world->nextEntityId;
             }
 
             bool isValidID()
             {
-                for (size_t i = 0; i < _mask->size(); i++)
+                for (size_t i = 0; i < mask->size(); i++)
                 {
-                    if ((_mask->at(i) & _world->_masks[current * _world->_bytes_per_mask + i]) != _mask->at(i))
+                    if ((mask->at(i) & world->masks[current * world->bytesPerMask + i]) != mask->at(i))
                         return false;
                 }
                 return true;
@@ -89,16 +88,16 @@ namespace cubos::ecs
                 do
                 {
                     current++;
-                } while (current < _world->_next_entity_id && !isValidID());
+                } while (current < world->nextEntityId && !isValidID());
                 return *this;
             }
         };
 
         bool isValidIndex(size_t index)
         {
-            for (size_t i = 0; i < _mask.size(); i++)
+            for (size_t i = 0; i < mask.size(); i++)
             {
-                if ((_mask[i] & _world->_masks[index * _world->_bytes_per_mask + i]) != _mask[i])
+                if ((mask[i] & world->masks[index * world->bytesPerMask + i]) != mask[i])
                     return false;
             }
 
@@ -108,25 +107,25 @@ namespace cubos::ecs
         Iterator begin()
         {
             size_t firstIndex = 0;
-            while (firstIndex < _world->_next_entity_id && !isValidIndex(firstIndex))
+            while (firstIndex < world->nextEntityId && !isValidIndex(firstIndex))
             {
                 firstIndex++;
             }
 
-            Iterator it(_world, firstIndex, &_mask);
+            Iterator it(world, firstIndex, &mask);
             return it;
         }
 
         Iterator end()
         {
-            Iterator it(_world, _world->_next_entity_id, &_mask);
+            Iterator it(world, world->nextEntityId, &mask);
             return it;
         }
     };
 
     template <typename T> size_t World::getComponentID()
     {
-        static size_t id = _storages.size();
+        static size_t id = storages.size();
         return id;
     }
 
@@ -134,28 +133,28 @@ namespace cubos::ecs
     {
         assert(_masks.size() == 0);
         size_t component_id = getComponentID<T>();
-        _storages.push_back(storage);
+        storages.push_back(storage);
         return component_id;
     }
 
     template <typename T> T* World::addComponent(size_t entity, T value)
     {
-        size_t component_id = getComponentID<T>();
-        Storage<T>* storage = (Storage<T>*)_storages[component_id];
+        size_t componentId = getComponentID<T>();
+        Storage<T>* storage = (Storage<T>*)storages[componentId];
         // Set the entity mask for this component
-        _masks[entity * _bytes_per_mask + component_id / 8] |= 1 << (component_id % 8);
+        masks[entity * bytesPerMask + componentId / 8] |= 1 << (componentId % 8);
 
         return storage->insert(entity, value);
     }
 
     template <typename T> T* World::getComponent(size_t entity)
     {
-        size_t component_id = getComponentID<T>();
+        size_t componentId = getComponentID<T>();
 
-        if ((_masks[entity * _bytes_per_mask + component_id / 8] & (1 << (component_id % 8))) == 0)
+        if ((masks[entity * bytesPerMask + componentId / 8] & (1 << (componentId % 8))) == 0)
             return nullptr;
 
-        Storage<T>* storage = (Storage<T>*)_storages[component_id];
+        Storage<T>* storage = (Storage<T>*)storages[componentId];
         return storage->get(entity);
     }
 } // namespace cubos::ecs
