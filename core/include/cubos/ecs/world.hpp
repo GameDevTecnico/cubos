@@ -17,11 +17,7 @@ namespace cubos::ecs
         size_t _next_entity_id = 0;
         size_t _bytes_per_mask;
 
-        template <typename T> size_t getComponentID()
-        {
-            static size_t id = _storages.size();
-            return id;
-        }
+        template <typename T> size_t getComponentID();
 
     public:
         ~World();
@@ -127,6 +123,12 @@ namespace cubos::ecs
             return it;
         }
     };
+
+    template <typename T> size_t World::getComponentID()
+    {
+        static size_t id = _storages.size();
+        return id;
+    }
 
     template <typename T> size_t World::registerComponent(Storage<T>* storage)
     {
