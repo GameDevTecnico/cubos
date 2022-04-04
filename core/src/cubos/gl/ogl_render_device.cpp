@@ -158,23 +158,23 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         break;
     case TextureFormat::Depth16:
         internalFormat = GL_DEPTH_COMPONENT16;
-        format = GL_DEPTH_COMPONENT16;
+        format = GL_DEPTH_COMPONENT;
         type = GL_FLOAT;
         break;
     case TextureFormat::Depth32:
         internalFormat = GL_DEPTH_COMPONENT32F;
-        format = GL_DEPTH_COMPONENT32F;
+        format = GL_DEPTH_COMPONENT;
         type = GL_FLOAT;
         break;
     case TextureFormat::Depth24Stencil8:
         internalFormat = GL_DEPTH24_STENCIL8;
-        format = GL_DEPTH24_STENCIL8;
-        type = GL_FLOAT;
+        format = GL_DEPTH_STENCIL;
+        type = GL_UNSIGNED_INT_24_8;
         break;
     case TextureFormat::Depth32Stencil8:
         internalFormat = GL_DEPTH32F_STENCIL8;
-        format = GL_DEPTH32F_STENCIL8;
-        type = GL_FLOAT;
+        format = GL_DEPTH_STENCIL;
+        type = GL_FLOAT_32_UNSIGNED_INT_24_8_REV;
         break;
 
     default:
@@ -635,7 +635,7 @@ public:
 class OGLConstantBuffer : public impl::ConstantBuffer
 {
 public:
-    OGLConstantBuffer(GLuint id) : id(id)
+    OGLConstantBuffer(GLuint id, GLenum bufferType) : id(id), bufferType(bufferType)
     {
     }
 
@@ -646,16 +646,31 @@ public:
 
     virtual void* map() override
     {
-        glBindBuffer(GL_UNIFORM_BUFFER, this->id);
-        return glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
+        glBindBuffer(bufferType, this->id);
+        return glMapBuffer(bufferType, GL_WRITE_ONLY);
     }
 
     virtual void unmap() override
     {
-        glUnmapBuffer(GL_UNIFORM_BUFFER);
+        glUnmapBuffer(bufferType);
+    }
+
+    virtual BufferStorageType getStorageTypeHint() override
+    {
+        switch (bufferType)
+        {
+        case GL_UNIFORM_BUFFER:
+            return BufferStorageType::Small;
+        case GL_SHADER_STORAGE_BUFFER:
+            return BufferStorageType::Large;
+        default:
+            logError("OGLContantBuffer::getStorageTypeHint() failed: Invalid bufferType value.");
+            abort();
+        }
     }
 
     GLuint id;
+    GLenum bufferType;
 };
 
 class OGLIndexBuffer : public impl::IndexBuffer
@@ -808,7 +823,8 @@ public:
     virtual void bind(ConstantBuffer cb) override
     {
         if (cb)
-            glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+            glBindBufferBase(std::static_pointer_cast<OGLConstantBuffer>(cb)->bufferType, this->loc,
+                             std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
         else
             glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
     }
@@ -888,6 +904,15 @@ public:
     OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program) : vs(vs), ps(ps), program(program)
     {
         this->uboCount = 0;
+        this->ssboCount = 0;
+    }
+
+    OGLShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps, GLuint program)
+        : OGLShaderPipeline(vs, ps, program)
+    {
+        this->gs = gs;
+        this->uboCount = 0;
+        this->ssboCount = 0;
     }
 
     virtual ~OGLShaderPipeline() override
@@ -931,15 +956,37 @@ public:
             return &bps.back();
         }
 
+        // Search for shader storage block binding
+        index = glGetProgramResourceIndex(this->program, GL_SHADER_STORAGE_BLOCK, name);
+        if (index != GL_INVALID_INDEX)
+        {
+            auto loc = this->ssboCount;
+            glShaderStorageBlockBinding(this->program, index, loc);
+
+            GLenum glErr = glGetError();
+            if (glErr != 0)
+            {
+                logError(
+                    "OGLShaderPipeline::getBindingPoint() failed: glShaderStorageBlockBinding caused OpenGL error {}",
+                    glErr);
+                return nullptr;
+            }
+
+            this->ssboCount += 1;
+            bps.emplace_back(name, loc);
+            return &bps.back();
+        }
+
         return nullptr;
     }
 
-    ShaderStage vs, ps;
+    ShaderStage vs, gs, ps;
     GLuint program;
     std::list<OGLShaderBindingPoint> bps;
 
 private:
     int uboCount;
+    int ssboCount;
 };
 
 OGLRenderDevice::OGLRenderDevice()
@@ -966,8 +1013,8 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     }
 
     for (int i = 0; i < desc.targetCount; ++i)
-        if (desc.targets[i].isCubeMap && desc.targets[i].cubeMap.handle == nullptr ||
-            !desc.targets[i].isCubeMap && desc.targets[i].texture.handle == nullptr)
+        if (desc.targets[i].isCubeMap && desc.targets[i].getCubeMapTarget().handle == nullptr ||
+            !desc.targets[i].isCubeMap && desc.targets[i].getTexture2DTarget().handle == nullptr)
         {
             logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
             return nullptr;
@@ -978,28 +1025,36 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     glGenFramebuffers(1, &id);
     glBindFramebuffer(GL_FRAMEBUFFER, id);
 
+    std::vector<GLenum> drawBuffers;
+
     // Attach targets
     for (int i = 0; i < desc.targetCount; ++i)
+    {
         if (desc.targets[i].isCubeMap)
         {
             GLenum face;
-            cubeFaceToGL(desc.targets[i].cubeMap.face, face);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, face,
-                                   std::static_pointer_cast<OGLTexture2D>(desc.targets[i].texture.handle)->id, 0);
+            cubeFaceToGL(desc.targets[i].getCubeMapTarget().face, face);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, face,
+                                   std::static_pointer_cast<OGLCubeMap>(desc.targets[i].getCubeMapTarget().handle)->id,
+                                   desc.targets[i].mipLevel);
         }
         else
         {
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + 1, GL_TEXTURE_2D,
-                                   std::static_pointer_cast<OGLTexture2D>(desc.targets[i].texture.handle)->id, 0);
+            glFramebufferTexture2D(
+                GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
+                std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id,
+                desc.targets[i].mipLevel);
         }
+        drawBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
+    }
 
     // Attach depth stencil texture
     if (desc.depthStencil)
     {
         auto ds = std::static_pointer_cast<OGLTexture2D>(desc.depthStencil);
-        if (ds->format == GL_DEPTH_COMPONENT16 || ds->format == GL_DEPTH_COMPONENT32F)
+        if (ds->format == GL_DEPTH_COMPONENT)
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
-        else if (ds->format == GL_DEPTH24_STENCIL8 || ds->format == GL_DEPTH32F_STENCIL8)
+        else if (ds->format == GL_DEPTH_STENCIL)
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id, 0);
         else
         {
@@ -1008,6 +1063,9 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             return nullptr;
         }
     }
+
+    // Define draw buffers
+    glDrawBuffers(drawBuffers.size(), &drawBuffers[0]);
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1393,6 +1451,20 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage)
 {
+    // Choose SSBO or UBO depending on given buffer size
+    GLint maxUniformBufferSize;
+    glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &maxUniformBufferSize);
+    BufferStorageType storage;
+    if (size > maxUniformBufferSize)
+        storage = BufferStorageType::Large;
+    else
+        storage = BufferStorageType::Small;
+    return createConstantBuffer(size, data, usage, storage);
+}
+
+ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage,
+                                                     BufferStorageType storage)
+{
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
         abort();
@@ -1407,11 +1479,17 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
     else
         abort(); // Invalid enum value
 
+    GLenum bufferType;
+    if (storage == BufferStorageType::Small)
+        bufferType = GL_UNIFORM_BUFFER;
+    else
+        bufferType = GL_SHADER_STORAGE_BUFFER;
+
     // Initialize buffer
     GLuint id;
     glGenBuffers(1, &id);
-    glBindBuffer(GL_UNIFORM_BUFFER, id);
-    glBufferData(GL_UNIFORM_BUFFER, size, data, glUsage);
+    glBindBuffer(bufferType, id);
+    glBufferData(bufferType, size, data, glUsage);
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1422,7 +1500,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
         return nullptr;
     }
 
-    return std::make_shared<OGLConstantBuffer>(id);
+    return std::make_shared<OGLConstantBuffer>(id, bufferType);
 }
 
 IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage)
@@ -1639,6 +1717,9 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     case Stage::Vertex:
         shader_type = GL_VERTEX_SHADER;
         break;
+    case Stage::Geometry:
+        shader_type = GL_GEOMETRY_SHADER;
+        break;
     case Stage::Pixel:
         shader_type = GL_FRAGMENT_SHADER;
         break;
@@ -1707,6 +1788,43 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     return std::make_shared<OGLShaderPipeline>(vs, ps, id);
 }
 
+ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStage _gs, ShaderStage _ps)
+{
+    auto vs = std::static_pointer_cast<OGLShaderStage>(_vs);
+    auto gs = std::static_pointer_cast<OGLShaderStage>(_gs);
+    auto ps = std::static_pointer_cast<OGLShaderStage>(_ps);
+
+    // Initialize program
+    auto id = glCreateProgram();
+    glAttachShader(id, vs->shader);
+    glAttachShader(id, gs->shader);
+    glAttachShader(id, ps->shader);
+    glLinkProgram(id);
+
+    // Check for linking errors
+    GLint success;
+    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        GLchar infoLog[512];
+        glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        return nullptr;
+    }
+
+    // Check for OpenGL errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLShaderPipeline>(vs, ps, id);
+}
+
 void OGLRenderDevice::setShaderPipeline(ShaderPipeline pipeline)
 {
     glUseProgram(std::static_pointer_cast<OGLShaderPipeline>(pipeline)->program);
@@ -1716,6 +1834,12 @@ void OGLRenderDevice::clearColor(float r, float g, float b, float a)
 {
     glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void OGLRenderDevice::clearTargetColor(size_t target, float r, float g, float b, float a)
+{
+    float color[] = {r, g, b, a};
+    glClearBufferfv(GL_COLOR, target, color);
 }
 
 void OGLRenderDevice::clearDepth(float depth)

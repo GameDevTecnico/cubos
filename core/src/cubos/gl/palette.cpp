@@ -11,33 +11,26 @@ const Material* Palette::getData() const
     return materials.data();
 }
 
-size_t Palette::getSize() const
+uint16_t Palette::getSize() const
 {
-    return materials.size();
+    return static_cast<uint16_t>(materials.size());
 }
 
-const Material& Palette::get(size_t index) const
+const Material& Palette::get(uint16_t index) const
 {
-    if (index == 0 || index > materials.size())
+    if (index == 0 || index > static_cast<uint16_t>(materials.size()))
         return Material::Empty;
     return materials[index - 1];
 }
 
-void Palette::set(size_t index, const Material& material)
+void Palette::set(uint16_t index, const Material& material)
 {
     if (index == 0)
     {
         logWarning("Trying to set a palette material at an invalid index 0, which is reserved for empty voxels");
         return;
     }
-    else if (index > 65535)
-    {
-        logWarning(
-            "Trying to set a palette material at an invalid index %d, which is greater than the maximum index of 65535",
-            index);
-        return;
-    }
-    else if (index > materials.size())
+    else if (index > static_cast<uint16_t>(materials.size()))
         materials.resize(index, Material::Empty);
 
     materials[index - 1] = material;
@@ -79,13 +72,6 @@ void Palette::deserialize(memory::Deserializer& deserializer)
         {
             logWarning(
                 "Trying to deserialize a palette material at an invalid index 0, which is reserved for empty voxels");
-            continue;
-        }
-        else if (index > 65535)
-        {
-            logWarning("Trying to deserialize a palette material at an invalid index {}, which is greater than the "
-                       "maximum index of 65535",
-                       index);
             continue;
         }
         else if (index > materials.size())
