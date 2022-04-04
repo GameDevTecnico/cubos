@@ -13,12 +13,12 @@ namespace cubos::ecs
     template <typename T> class Storage : public IStorage
     {
     public:
-        /// \brief Inserts a value into the storage.
+        /// @brief Inserts a value into the storage.
         /// @param index The index where to insert the value.
         /// @param value The value to be inserted.
         virtual T* insert(size_t index, T value) = 0;
 
-        /// \brief Gets a value from the storage.
+        /// @brief Gets a value from the storage.
         /// @param index The index of the value to be retrieved.
         virtual T* get(size_t index) = 0;
     };
