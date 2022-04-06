@@ -13,6 +13,8 @@ namespace cubos::ecs
     template <typename T> class Storage : public IStorage
     {
     public:
+        using Type = T;
+
         /// @brief Inserts a value into the storage.
         /// @param index The index where to insert the value.
         /// @param value The value to be inserted.

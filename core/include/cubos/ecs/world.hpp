@@ -113,8 +113,9 @@ namespace cubos::ecs
     {
         assert(_masks.size() == 0);
         size_t component_id = getComponentID<T>();
-        Storage<T>* storage = new typename T::Storage();
-        storages.push_back(storage);
+        static_assert(std::is_same<T, typename T::Storage::Type>(),
+                      "A component can't use a storage for a different component type!");
+        storages.push_back(new typename T::Storage());
         return component_id;
     }
 
