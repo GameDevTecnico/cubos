@@ -113,7 +113,8 @@ namespace cubos::ecs
     {
         assert(_masks.size() == 0);
         size_t component_id = getComponentID<T>();
-        storages.push_back(new typename T::Storage());
+        Storage<T>* storage = new typename T::Storage();
+        storages.push_back(storage);
         return component_id;
     }
 
