@@ -4,7 +4,7 @@
 
 #include <stack>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 // Example serializer
 class MySerializer : public Serializer
@@ -273,7 +273,7 @@ struct Fruit
 
 int main()
 {
-    using namespace cubos::memory;
+    using namespace cubos::core::memory;
 
     Serializer* s;
 

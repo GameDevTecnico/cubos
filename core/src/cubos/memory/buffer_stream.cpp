@@ -2,7 +2,7 @@
 
 #include <cstring>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 BufferStream::BufferStream(void* buffer, size_t size, bool readOnly)
 {

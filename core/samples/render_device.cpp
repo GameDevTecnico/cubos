@@ -6,7 +6,7 @@
 
 #include <cstdio>
 
-using namespace cubos;
+using namespace cubos::core;
 
 int main(void)
 {

@@ -1,9 +1,9 @@
-#ifndef CUBOS_GL_OGL_RENDER_DEVICE_HPP
-#define CUBOS_GL_OGL_RENDER_DEVICE_HPP
+#ifndef CUBOS_CORE_GL_OGL_RENDER_DEVICE_HPP
+#define CUBOS_CORE_GL_OGL_RENDER_DEVICE_HPP
 
 #include <cubos/gl/render_device.hpp>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     /// Render device implementation using OpenGL.
     /// @see RenderDevice.
@@ -55,6 +55,6 @@ namespace cubos::gl
         DepthStencilState defaultDSS;
         BlendState defaultBS;
     };
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_OGL_RENDER_DEVICE_HPP
+#endif // CUBOS_CORE_GL_OGL_RENDER_DEVICE_HPP

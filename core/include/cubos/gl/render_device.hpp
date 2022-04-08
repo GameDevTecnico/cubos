@@ -1,18 +1,18 @@
-#ifndef CUBOS_GL_RENDER_DEVICE_HPP
-#define CUBOS_GL_RENDER_DEVICE_HPP
+#ifndef CUBOS_CORE_GL_RENDER_DEVICE_HPP
+#define CUBOS_CORE_GL_RENDER_DEVICE_HPP
 
 #include <memory>
 #include <variant>
 #include <glm/glm.hpp>
 
-#define CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT 8
-#define CUBOS_GL_MAX_MIP_LEVEL_COUNT 8
-#define CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE 32
-#define CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT 32
-#define CUBOS_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT 8
-#define CUBOS_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT 8
+#define CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT 8
+#define CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT 8
+#define CUBOS_CORE_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE 32
+#define CUBOS_CORE_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT 32
+#define CUBOS_CORE_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT 8
+#define CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT 8
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     namespace impl
     {
@@ -276,7 +276,7 @@ namespace cubos::gl
             void setCubeMapTarget(const CubeMap& handle, CubeFace face);
 
             void setTexture2DTarget(const Texture2D& handle);
-        } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
+        } targets[CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
         uint32_t targetCount = 1; ///< Number of render targets.
         Texture2D depthStencil;   ///< Optional depth stencil texture.
@@ -368,7 +368,7 @@ namespace cubos::gl
     /// 1D texture description.
     struct Texture1DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
+        const void* data[CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
         size_t mipLevelCount = 1;                            ///< Number of mip levels.
         size_t width;                                        ///< Texture width.
         Usage usage;                                         ///< Texture usage mode.
@@ -378,30 +378,30 @@ namespace cubos::gl
     /// 2D texture description.
     struct Texture2DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                            ///< Number of mip levels.
-        size_t width;                                        ///< Texture width.
-        size_t height;                                       ///< Texture height.
-        Usage usage;                                         ///< Texture usage mode.
-        TextureFormat format;                                ///< Texture format.
+        const void* data[CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                                 ///< Number of mip levels.
+        size_t width;                                             ///< Texture width.
+        size_t height;                                            ///< Texture height.
+        Usage usage;                                              ///< Texture usage mode.
+        TextureFormat format;                                     ///< Texture format.
     };
 
     /// 3D texture description.
     struct Texture3DDesc
     {
-        const void* data[CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                            ///< Number of mip levels.
-        size_t width;                                        ///< Texture width.
-        size_t height;                                       ///< Texture height.
-        size_t depth;                                        ///< Texture depth.
-        Usage usage;                                         ///< Texture usage mode.
-        TextureFormat format;                                ///< Texture format.
+        const void* data[CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
+        size_t mipLevelCount = 1;                                 ///< Number of mip levels.
+        size_t width;                                             ///< Texture width.
+        size_t height;                                            ///< Texture height.
+        size_t depth;                                             ///< Texture depth.
+        Usage usage;                                              ///< Texture usage mode.
+        TextureFormat format;                                     ///< Texture format.
     };
 
     /// Cube map description.
     struct CubeMapDesc
     {
-        const void* data[6][CUBOS_GL_MAX_MIP_LEVEL_COUNT] = {
+        const void* data[6][CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {
             {}, {}, {}, {}, {}, {}}; ///< Optional initial cube map data, indexed using CubeFace.
         size_t mipLevelCount = 1;    ///< Number of mip levels.
         size_t width;                ///< Cube map face width.
@@ -413,7 +413,7 @@ namespace cubos::gl
     /// Constant buffer element.
     struct ConstantBufferElement
     {
-        char name[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE]; ///< Element name.
+        char name[CUBOS_CORE_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE]; ///< Element name.
 
         size_t offset; ///< Offset of the element in the buffer.
         size_t size;   ///< Number of values in the element if it is an array. If it isn't, this is set to 1.
@@ -423,9 +423,9 @@ namespace cubos::gl
     /// Constant buffer structure.
     struct ConstantBufferStructure
     {
-        size_t size;                                                                ///< Size of the buffer in bytes.
-        size_t elementCount;                                                        ///< Number of elements.
-        ConstantBufferElement elements[CUBOS_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT]; ///< Constant buffer elements.
+        size_t size;         ///< Size of the buffer in bytes.
+        size_t elementCount; ///< Number of elements.
+        ConstantBufferElement elements[CUBOS_CORE_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT]; ///< Constant buffer elements.
     };
 
     /// Vertex element description.
@@ -446,9 +446,9 @@ namespace cubos::gl
     /// Vertex array description.
     struct VertexArrayDesc
     {
-        size_t elementCount = 0;                                         ///< Number of vertex elements.
-        VertexElement elements[CUBOS_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT]; ///< Vertex elements.
-        VertexBuffer buffers[CUBOS_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];    ///< Vertex buffers.
+        size_t elementCount = 0;                                              ///< Number of vertex elements.
+        VertexElement elements[CUBOS_CORE_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT]; ///< Vertex elements.
+        VertexBuffer buffers[CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];    ///< Vertex buffers.
         ShaderPipeline shaderPipeline; ///< Shader pipeline used with the vertex array.
     };
 
@@ -522,7 +522,8 @@ namespace cubos::gl
         /// @param usage The usage which the buffer will have.
         /// @param storage The intended storage type for the buffer.
         /// @return Constant buffer handle, or nullptr if the creation failed.
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage, BufferStorageType storage) = 0;
+        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
+                                                    BufferStorageType storage) = 0;
 
         /// Creates a new index buffer.
         /// @param size Size in bytes.
@@ -613,8 +614,6 @@ namespace cubos::gl
         /// Gets a runtime property of the render device.
         /// @param prop Property name.
         virtual int getProperty(Property prop) = 0;
-
-
     };
 
     /// Abstract gl types are defined inside this namespace, they should be used (derived) only in render device
@@ -909,6 +908,6 @@ namespace cubos::gl
             virtual ~ShaderBindingPoint() = default;
         };
     } // namespace impl
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_RENDER_DEVICE_HPP
+#endif // CUBOS_CORE_GL_RENDER_DEVICE_HPP

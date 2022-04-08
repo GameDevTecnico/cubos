@@ -3,8 +3,8 @@
 #include <cubos/memory/buffer_stream.hpp>
 #include <cubos/log.hpp>
 
-using namespace cubos;
-using namespace cubos::data;
+using namespace cubos::core;
+using namespace cubos::core::data;
 
 EmbeddedArchive::EmbeddedArchive(const std::string& name)
 {

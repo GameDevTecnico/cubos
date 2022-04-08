@@ -2,8 +2,8 @@
 #include <cubos/data/archive.hpp>
 #include <cubos/log.hpp>
 
-using namespace cubos;
-using namespace cubos::data;
+using namespace cubos::core;
+using namespace cubos::core::data;
 
 File::File(Handle parent, std::string_view name)
 {

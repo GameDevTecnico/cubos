@@ -1,9 +1,9 @@
-#ifndef CUBOS_DATA_FILE_SYSTEM_HPP
-#define CUBOS_DATA_FILE_SYSTEM_HPP
+#ifndef CUBOS_CORE_DATA_FILE_SYSTEM_HPP
+#define CUBOS_CORE_DATA_FILE_SYSTEM_HPP
 
 #include <cubos/data/file.hpp>
 
-namespace cubos::data
+namespace cubos::core::data
 {
     /// Represents the virtual file system of the engine.
     /// This class is never instantiated, and is only used to provide static methods.
@@ -72,6 +72,6 @@ namespace cubos::data
         /// @return A handle to the file stream, or nullptr if an error occurred.
         static std::unique_ptr<memory::Stream> open(std::string_view path, File::OpenMode mode);
     };
-} // namespace cubos::data
+} // namespace cubos::core::data
 
-#endif // CUBOS_DATA_FILE_SYSTEM_HPP
+#endif // CUBOS_CORE_DATA_FILE_SYSTEM_HPP

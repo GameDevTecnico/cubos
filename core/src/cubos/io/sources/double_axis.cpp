@@ -11,9 +11,9 @@
 #include <list>
 #include <glm/glm.hpp>
 
-using namespace cubos::io;
+using namespace cubos::core::io;
 
-DoubleAxis::DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis verticalAxis)
+DoubleAxis::DoubleAxis(cubos::core::io::MouseAxis horizontalAxis, cubos::core::io::MouseAxis verticalAxis)
 {
     this->horizontalAxis = horizontalAxis;
     this->verticalAxis = verticalAxis;
@@ -21,31 +21,31 @@ DoubleAxis::DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis
 
 void DoubleAxis::subscribeEvents()
 {
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->horizontalAxis))
+    if (std::holds_alternative<cubos::core::io::MouseAxis>(this->horizontalAxis))
     {
         InputManager::registerMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleHorizontalAxis,
-                                                            std::get<cubos::io::MouseAxis>(this->horizontalAxis));
+                                                            std::get<cubos::core::io::MouseAxis>(this->horizontalAxis));
     }
 
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->verticalAxis))
+    if (std::holds_alternative<cubos::core::io::MouseAxis>(this->verticalAxis))
     {
         InputManager::registerMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleVerticalAxis,
-                                                            std::get<cubos::io::MouseAxis>(this->verticalAxis));
+                                                            std::get<cubos::core::io::MouseAxis>(this->verticalAxis));
     }
 };
 
 void DoubleAxis::unsubscribeEvents()
 {
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->horizontalAxis))
+    if (std::holds_alternative<cubos::core::io::MouseAxis>(this->horizontalAxis))
     {
         InputManager::unregisterMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleHorizontalAxis,
-                                                              std::get<cubos::io::MouseAxis>(this->horizontalAxis));
+                                                              std::get<cubos::core::io::MouseAxis>(this->horizontalAxis));
     }
 
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->verticalAxis))
+    if (std::holds_alternative<cubos::core::io::MouseAxis>(this->verticalAxis))
     {
         InputManager::unregisterMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleVerticalAxis,
-                                                              std::get<cubos::io::MouseAxis>(this->verticalAxis));
+                                                              std::get<cubos::core::io::MouseAxis>(this->verticalAxis));
     }
 };
 

@@ -1,6 +1,6 @@
 #include <cubos/io/context.hpp>
 
-using namespace cubos::io;
+using namespace cubos::core::io;
 
 Context::Context()
 {

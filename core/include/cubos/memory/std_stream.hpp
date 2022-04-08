@@ -1,11 +1,11 @@
-#ifndef CUBOS_MEMORY_STD_STREAM_HPP
-#define CUBOS_MEMORY_STD_STREAM_HPP
+#ifndef CUBOS_CORE_MEMORY_STD_STREAM_HPP
+#define CUBOS_CORE_MEMORY_STD_STREAM_HPP
 
 #include <cubos/memory/stream.hpp>
 
 #include <cstdio>
 
-namespace cubos::memory
+namespace cubos::core::memory
 {
     /// Stream implementation for stdio.
     class StdStream : public Stream
@@ -28,6 +28,6 @@ namespace cubos::memory
         FILE* file; ///< Stdio file to read/write from.
         bool close; ///< Should the file be closed when this stream is destructed?
     };
-} // namespace cubos::memory
+} // namespace cubos::core::memory
 
-#endif // CUBOS_MEMORY_STD_STREAM_HPP
+#endif // CUBOS_CORE_MEMORY_STD_STREAM_HPP

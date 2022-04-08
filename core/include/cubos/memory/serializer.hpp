@@ -1,5 +1,5 @@
-#ifndef CUBOS_MEMORY_SERIALIZER_HPP
-#define CUBOS_MEMORY_SERIALIZER_HPP
+#ifndef CUBOS_CORE_MEMORY_SERIALIZER_HPP
+#define CUBOS_CORE_MEMORY_SERIALIZER_HPP
 
 #include <cubos/memory/stream.hpp>
 
@@ -13,7 +13,7 @@
 #include <glm/vec4.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-namespace cubos::memory
+namespace cubos::core::memory
 {
     class Serializer;
 
@@ -340,6 +340,6 @@ namespace cubos::memory
         }
         this->endDictionary();
     }
-} // namespace cubos::memory
+} // namespace cubos::core::memory
 
-#endif // CUBOS_MEMORY_SERIALIZER_HPP
+#endif // CUBOS_CORE_MEMORY_SERIALIZER_HPP

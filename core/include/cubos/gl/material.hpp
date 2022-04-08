@@ -1,12 +1,12 @@
-#ifndef CUBOS_GL_MATERIAL_HPP
-#define CUBOS_GL_MATERIAL_HPP
+#ifndef CUBOS_CORE_GL_MATERIAL_HPP
+#define CUBOS_CORE_GL_MATERIAL_HPP
 
 #include <cubos/memory/serializer.hpp>
 #include <cubos/memory/deserializer.hpp>
 
 #include <glm/glm.hpp>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     /// Represents a voxel material.
     struct Material
@@ -23,6 +23,6 @@ namespace cubos::gl
         /// @param deserializer The deserializer to use.
         void deserialize(memory::Deserializer& deserializer);
     };
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_MATERIAL_HPP
+#endif // CUBOS_CORE_GL_MATERIAL_HPP

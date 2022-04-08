@@ -1,11 +1,11 @@
-#ifndef CUBOS_GL_PALETTE_HPP
-#define CUBOS_GL_PALETTE_HPP
+#ifndef CUBOS_CORE_GL_PALETTE_HPP
+#define CUBOS_CORE_GL_PALETTE_HPP
 
 #include <cubos/gl/material.hpp>
 
 #include <vector>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     /// Represents a palette of materials. Supports up to 65535 materials.
     class Palette final
@@ -42,6 +42,6 @@ namespace cubos::gl
     private:
         std::vector<Material> materials; ///< The materials in the palette.
     };
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_PALETTE_HPP
+#endif // CUBOS_CORE_GL_PALETTE_HPP

@@ -1,8 +1,8 @@
 #include <cubos/data/file_system.hpp>
 #include <cubos/log.hpp>
 
-using namespace cubos;
-using namespace cubos::data;
+using namespace cubos::core;
+using namespace cubos::core::data;
 
 File::Handle FileSystem::root()
 {

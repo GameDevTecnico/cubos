@@ -3,8 +3,8 @@
 #include <cubos/memory/std_stream.hpp>
 #include <cubos/log.hpp>
 
-using namespace cubos;
-using namespace cubos::data;
+using namespace cubos::core;
+using namespace cubos::core::data;
 
 STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly)
     : osPath(osPath), readOnly(readOnly)

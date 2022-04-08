@@ -3,14 +3,14 @@
 #include <cubos/io/window.hpp>
 #include <cubos/gl/render_device.hpp>
 
-void cubos::init(int argc, char** argv)
+void cubos::engine::init(int argc, char** argv)
 {
-    initializeLogger();    
+    core::initializeLogger();
 }
 
-void cubos::run()
+void cubos::engine::run()
 {
-    auto window = io::Window::create();
+    auto window = core::io::Window::create();
     auto& renderDevice = window->getRenderDevice();
 
     while (!window->shouldClose())
@@ -22,4 +22,3 @@ void cubos::run()
 
     delete window;
 }
-

@@ -1,5 +1,5 @@
-#ifndef CUBOS_IO_SINGLE_AXIS_HPP
-#define CUBOS_IO_SINGLE_AXIS_HPP
+#ifndef CUBOS_CORE_IO_SINGLE_AXIS_HPP
+#define CUBOS_CORE_IO_SINGLE_AXIS_HPP
 
 #include <cubos/io/window.hpp>
 #include <cubos/io/sources/source.hpp>
@@ -7,7 +7,7 @@
 #include <variant>
 #include <tuple>
 
-namespace cubos::io
+namespace cubos::core::io
 {
     /// SingleAxis is used to bind position change in one axis to the gameplay logic.
     /// The bindings are only invoken when change in the position occurs.
@@ -20,12 +20,12 @@ namespace cubos::io
     public:
         /// Creates a Single Axis source associated to a mouse axis
         /// @param axis the axis assoaiated to this Single Axis source
-        SingleAxis(cubos::io::MouseAxis axis);
+        SingleAxis(cubos::core::io::MouseAxis axis);
 
         /// Creates a Single Axis source associated to keyboard keys
         /// @param negativeKey the keyboard key associated to moving in the negative direction in the axis
         /// @param positiveKey the keyboard key associated to moving in the positive direction in the axis
-        SingleAxis(cubos::io::Key negativeKey, cubos::io::Key positiveKey);
+        SingleAxis(cubos::core::io::Key negativeKey, cubos::core::io::Key positiveKey);
 
         /// Checks if the position in the axis associated with this Single Axis source has been changed since last
         /// checked
@@ -45,13 +45,13 @@ namespace cubos::io
         Context createContext() override;
 
     private:
-        std::variant<cubos::io::MouseAxis, std::tuple<cubos::io::Key, cubos::io::Key>> inputs;
+        std::variant<cubos::core::io::MouseAxis, std::tuple<cubos::core::io::Key, cubos::core::io::Key>> inputs;
         void handleAxis(float value);
         void handlePositive();
         void handleNegative();
         bool wasTriggered;
         float value;
     };
-} // namespace cubos::io
+} // namespace cubos::core::io
 
-#endif // CUBOS_IO_SINGLE_AXIS_HPP
+#endif // CUBOS_CORE_IO_SINGLE_AXIS_HPP

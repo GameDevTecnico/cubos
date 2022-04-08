@@ -9,8 +9,8 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-using namespace cubos;
-using namespace cubos::gl;
+using namespace cubos::core;
+using namespace cubos::core::gl;
 
 RenderDevice* Debug::renderDevice;
 ConstantBuffer Debug::mvpBuffer;

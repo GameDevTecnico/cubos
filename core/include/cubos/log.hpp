@@ -1,9 +1,9 @@
-#ifndef CUBOS_LOG_HPP
-#define CUBOS_LOG_HPP
+#ifndef CUBOS_CORE_LOG_HPP
+#define CUBOS_CORE_LOG_HPP
 
 #include <spdlog/spdlog.h>
 
-namespace cubos
+namespace cubos::core
 {
     /// Initializes the logger, must be called before any logging is done.
     void initializeLogger();
@@ -109,6 +109,6 @@ namespace cubos
     {
         spdlog::critical(fmt, std::forward<Args>(args)...);
     }
-} // namespace cubos
+} // namespace cubos::core
 
-#endif // CUBOS_LOG_HPP
+#endif // CUBOS_CORE_LOG_HPP

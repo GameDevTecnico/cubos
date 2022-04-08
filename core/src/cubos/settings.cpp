@@ -1,7 +1,7 @@
 #include <string>
 #include <cubos/settings.hpp>
 
-using namespace cubos;
+using namespace cubos::core;
 
 Settings Settings::global = Settings();
 
@@ -57,12 +57,12 @@ void Settings::merge(const Settings& settingsToMerge)
     }
 }
 
-void Settings::serialize(cubos::memory::Serializer& serializer) const
+void Settings::serialize(cubos::core::memory::Serializer& serializer) const
 {
     serializer.write(this->values, "values");
 }
 
-void Settings::deserialize(cubos::memory::Deserializer& deserializer)
+void Settings::deserialize(cubos::core::memory::Deserializer& deserializer)
 {
     deserializer.read(this->values);
 }

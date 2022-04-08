@@ -1,11 +1,11 @@
-#ifndef CUBOS_MEMORY_STREAM_HPP
-#define CUBOS_MEMORY_STREAM_HPP
+#ifndef CUBOS_CORE_MEMORY_STREAM_HPP
+#define CUBOS_CORE_MEMORY_STREAM_HPP
 
 #include <cstddef>
 #include <cstdint>
 #include <string>
 
-namespace cubos::memory
+namespace cubos::core::memory
 {
     /// Seek origin.
     enum class SeekOrigin
@@ -240,6 +240,6 @@ namespace cubos::memory
         this->print(fmt);
     }
 
-} // namespace cubos::memory
+} // namespace cubos::core::memory
 
-#endif // CUBOS_MEMORY_STREAM_HPP
+#endif // CUBOS_CORE_MEMORY_STREAM_HPP

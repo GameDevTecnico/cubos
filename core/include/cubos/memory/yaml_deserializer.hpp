@@ -1,12 +1,12 @@
-#ifndef CUBOS_MEMORY_YAML_DESERIALIZER_HPP
-#define CUBOS_MEMORY_YAML_DESERIALIZER_HPP
+#ifndef CUBOS_CORE_MEMORY_YAML_DESERIALIZER_HPP
+#define CUBOS_CORE_MEMORY_YAML_DESERIALIZER_HPP
 
 #include <cubos/memory/deserializer.hpp>
 
 #include <yaml-cpp/yaml.h>
 #include <stack>
 
-namespace cubos::memory
+namespace cubos::core::memory
 {
     /// Implementation of the abstract Deserializer class for deserializng from YAML.
     class YAMLDeserializer : public Deserializer
@@ -62,6 +62,6 @@ namespace cubos::memory
         std::stack<Frame> frame; ///< The current frame of the deserializer.
         YAML::Node document;     ///< The YAML document being deserialized.
     };
-} // namespace cubos::memory
+} // namespace cubos::core::memory
 
-#endif // CUBOS_MEMORY_YAML_DESERIALIZER_HPP
+#endif // CUBOS_CORE_MEMORY_YAML_DESERIALIZER_HPP

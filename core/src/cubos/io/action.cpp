@@ -5,7 +5,7 @@
 
 #include <string>
 
-using namespace cubos::io;
+using namespace cubos::core::io;
 
 Action::Action(std::string actionName)
 {

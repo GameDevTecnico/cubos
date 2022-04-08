@@ -11,14 +11,14 @@
 #include <list>
 #include <glm/glm.hpp>
 
-using namespace cubos::io;
+using namespace cubos::core::io;
 
-ButtonPress::ButtonPress(cubos::io::Key key)
+ButtonPress::ButtonPress(cubos::core::io::Key key)
 {
     button = key;
 }
 
-ButtonPress::ButtonPress(cubos::io::MouseButton button)
+ButtonPress::ButtonPress(cubos::core::io::MouseButton button)
 {
     this->button = button;
 }
@@ -35,29 +35,29 @@ bool ButtonPress::isTriggered()
 
 void ButtonPress::subscribeEvents()
 {
-    if (std::holds_alternative<cubos::io::Key>(this->button))
+    if (std::holds_alternative<cubos::core::io::Key>(this->button))
     {
         InputManager::registerKeyDownCallback<ButtonPress>(this, &ButtonPress::handleButtonDown,
-                                                           std::get<cubos::io::Key>(this->button));
+                                                           std::get<cubos::core::io::Key>(this->button));
     }
-    else if (std::holds_alternative<cubos::io::MouseButton>(this->button))
+    else if (std::holds_alternative<cubos::core::io::MouseButton>(this->button))
     {
         InputManager::registerMouseButtonDownCallback<ButtonPress>(this, &ButtonPress::handleButtonDown,
-                                                                   std::get<cubos::io::MouseButton>(this->button));
+                                                                   std::get<cubos::core::io::MouseButton>(this->button));
     }
 }
 
 void ButtonPress::unsubscribeEvents()
 {
-    if (std::holds_alternative<cubos::io::Key>(this->button))
+    if (std::holds_alternative<cubos::core::io::Key>(this->button))
     {
         InputManager::unregisterKeyDownCallback<ButtonPress>(this, &ButtonPress::handleButtonDown,
-                                                             std::get<cubos::io::Key>(this->button));
+                                                             std::get<cubos::core::io::Key>(this->button));
     }
-    else if (std::holds_alternative<cubos::io::MouseButton>(this->button))
+    else if (std::holds_alternative<cubos::core::io::MouseButton>(this->button))
     {
         InputManager::unregisterMouseButtonDownCallback<ButtonPress>(this, &ButtonPress::handleButtonDown,
-                                                                     std::get<cubos::io::MouseButton>(this->button));
+                                                                     std::get<cubos::core::io::MouseButton>(this->button));
     }
 }
 

@@ -1,5 +1,5 @@
-#ifndef CUBOS_GL_GRID_HPP
-#define CUBOS_GL_GRID_HPP
+#ifndef CUBOS_CORE_GL_GRID_HPP
+#define CUBOS_CORE_GL_GRID_HPP
 
 #include <cubos/memory/serializer.hpp>
 #include <cubos/memory/deserializer.hpp>
@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     /// Represents a grid of voxels.
     /// Voxel indices are determined by the following formula: x + y * size.x + z * size.x * size.y
@@ -52,6 +52,6 @@ namespace cubos::gl
         glm::uvec3 size;               ///< The size of the grid.
         std::vector<uint16_t> indices; ///< The indices of the grid.
     };
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_GRID_HPP
+#endif // CUBOS_CORE_GL_GRID_HPP

@@ -2,6 +2,6 @@
 
 int main(int argc, char** argv)
 {
-    cubos::init(argc, argv);
-    cubos::run();
+    cubos::engine::init(argc, argv);
+    cubos::engine::run();
 }

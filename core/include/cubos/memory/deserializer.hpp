@@ -1,5 +1,5 @@
-#ifndef CUBOS_MEMORY_DESERIALIZER_HPP
-#define CUBOS_MEMORY_DESERIALIZER_HPP
+#ifndef CUBOS_CORE_MEMORY_DESERIALIZER_HPP
+#define CUBOS_CORE_MEMORY_DESERIALIZER_HPP
 
 #include <cubos/memory/stream.hpp>
 #include <cubos/log.hpp>
@@ -14,7 +14,7 @@
 #include <glm/vec4.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-namespace cubos::memory
+namespace cubos::core::memory
 {
     class Deserializer;
 
@@ -299,6 +299,6 @@ namespace cubos::memory
         this->endDictionary();
     }
 
-} // namespace cubos::memory
+} // namespace cubos::core::memory
 
-#endif // CUBOS_MEMORY_DESERIALIZER_HPP
+#endif // CUBOS_CORE_MEMORY_DESERIALIZER_HPP

@@ -5,7 +5,7 @@
 
 #include <cctype>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 // Digits used for printing
 static const char* const DIGITS = "0123456789ABCDEF";

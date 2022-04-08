@@ -1,5 +1,5 @@
-#ifndef CUBOS_IO_BUTTON_PRESS_HPP
-#define CUBOS_IO_BUTTON_PRESS_HPP
+#ifndef CUBOS_CORE_IO_BUTTON_PRESS_HPP
+#define CUBOS_CORE_IO_BUTTON_PRESS_HPP
 
 #include <cubos/event.hpp>
 #include <cubos/io/window.hpp>
@@ -13,7 +13,7 @@
 #include <list>
 #include <glm/glm.hpp>
 
-namespace cubos::io
+namespace cubos::core::io
 {
 
     /// ButtonPress is used to bind button presses to the gameplay logic.
@@ -26,11 +26,11 @@ namespace cubos::io
     public:
         /// Creates a Button Press source associated to a keyboard button
         /// @param key the keyboard key associated to this Button Press source
-        ButtonPress(cubos::io::Key key);
+        ButtonPress(cubos::core::io::Key key);
 
         /// Creates a Button Press source associated mouse button
         /// @param button the mouse button associated to this Button Press source
-        ButtonPress(cubos::io::MouseButton button);
+        ButtonPress(cubos::core::io::MouseButton button);
 
         /// Checks if the button associated with this Button Press source has been pressed
         /// @return true if button associated with this Button Pressed has been pressed, otherwise false
@@ -49,7 +49,7 @@ namespace cubos::io
         Context createContext() override;
 
     private:
-        std::variant<cubos::io::Key, cubos::io::MouseButton> button; ///< Button to track
+        std::variant<cubos::core::io::Key, cubos::core::io::MouseButton> button; ///< Button to track
 
         bool wasTriggered = false;
 
@@ -57,5 +57,5 @@ namespace cubos::io
         /// Sets the wasTriggered variable to true
         void handleButtonDown();
     };
-} // namespace cubos::io
-#endif // CUBOS_IO_BUTTON_PRESS_HPP
+} // namespace cubos::core::io
+#endif // CUBOS_CORE_IO_BUTTON_PRESS_HPP
