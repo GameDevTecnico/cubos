@@ -241,7 +241,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom_Serializable)
         serializer->beginDictionary(humans.size(), "context_serializable");
         for (size_t i = 0; i < humans.size(); ++i)
         {
-            serializer->write(i, nullptr);
+            serializer->write(static_cast<uint64_t>(i), nullptr);
             serializer->write(humans[i], &map, nullptr);
         }
         serializer->endDictionary();
