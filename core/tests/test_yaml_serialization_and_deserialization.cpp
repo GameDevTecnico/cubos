@@ -37,7 +37,7 @@ struct Human
         s.write(this->dead, "dead");
         s.beginArray(this->children.size(), "children");
         for (auto& child : this->children)
-            s.write(map->getId(child), "child");
+            s.write(static_cast<uint64_t>(map->getId(child)), "child");
         s.endArray();
     }
 
