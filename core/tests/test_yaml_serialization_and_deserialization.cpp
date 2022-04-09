@@ -37,7 +37,7 @@ struct Human
         s.write(this->dead, "dead");
         s.beginArray(this->children.size(), "children");
         for (auto& child : this->children)
-            s.write(map->getId(child), "child");
+            s.write(static_cast<uint64_t>(map->getId(child)), "child");
         s.endArray();
     }
 
@@ -65,9 +65,9 @@ struct Human
         this->children.resize(s.beginArray());
         for (auto& child : this->children)
         {
-            size_t id;
+            uint64_t id;
             s.read(id);
-            child = map->getRef(id);
+            child = map->getRef(static_cast<size_t>(id));
         }
         s.endArray();
     }
@@ -150,7 +150,7 @@ TEST(Cubos_Memory_YAML_Serialization_And_Deserialization, Context_Types)
         serializer->beginDictionary(src.size(), "humans");
         for (size_t i = 0; i < src.size(); ++i)
         {
-            serializer->write(i, nullptr);
+            serializer->write(static_cast<uint64_t>(i), nullptr);
             serializer->write(src[i], &map, nullptr);
         }
         serializer->endDictionary();
@@ -167,7 +167,7 @@ TEST(Cubos_Memory_YAML_Serialization_And_Deserialization, Context_Types)
             map.add(&dst[i], i);
         for (size_t i = 0; i < dst.size(); ++i)
         {
-            size_t id;
+            uint64_t id;
             deserializer->read(id);
             deserializer->read(dst[id], &map);
         }
