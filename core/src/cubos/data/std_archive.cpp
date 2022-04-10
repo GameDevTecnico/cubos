@@ -244,7 +244,7 @@ std::unique_ptr<memory::Stream> STDArchive::open(File::Handle file, File::OpenMo
 
     // Open the file.
     const char* std_mode = mode == File::OpenMode::Write ? "wb" : "rb";
-    std::string path  = it->second.osPath.string();
+    std::string path = it->second.osPath.string();
     return std::make_unique<FileStream<memory::StdStream>>(
         file, mode, std::move(memory::StdStream(fopen(path.c_str(), std_mode), true)));
 }

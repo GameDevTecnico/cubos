@@ -522,7 +522,8 @@ namespace cubos::gl
         /// @param usage The usage which the buffer will have.
         /// @param storage The intended storage type for the buffer.
         /// @return Constant buffer handle, or nullptr if the creation failed.
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage, BufferStorageType storage) = 0;
+        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
+                                                    BufferStorageType storage) = 0;
 
         /// Creates a new index buffer.
         /// @param size Size in bytes.
@@ -613,8 +614,6 @@ namespace cubos::gl
         /// Gets a runtime property of the render device.
         /// @param prop Property name.
         virtual int getProperty(Property prop) = 0;
-
-
     };
 
     /// Abstract gl types are defined inside this namespace, they should be used (derived) only in render device

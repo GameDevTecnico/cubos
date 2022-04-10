@@ -66,7 +66,7 @@ TEST(Cubos_Memory_Buffer_Stream, Print_String)
     stream.print(str);
     stream.put('\0');
     EXPECT_STREQ(str, buf);
-    
+
     stream.seek(0, SeekOrigin::Begin);
     stream.print(str, 4);
     EXPECT_EQ(strncmp(str, buf, 4), 0);

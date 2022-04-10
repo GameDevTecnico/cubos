@@ -5,7 +5,7 @@
 
 void cubos::init(int argc, char** argv)
 {
-    initializeLogger();    
+    initializeLogger();
 }
 
 void cubos::run()
@@ -22,4 +22,3 @@ void cubos::run()
 
     delete window;
 }
-

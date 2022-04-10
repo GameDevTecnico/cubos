@@ -126,7 +126,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Dictionary)
     {
         auto serializer = (Serializer*)new YAMLSerializer(stream);
         const char* strs[] = {"one", "two", "three"};
-    
+
         serializer->beginDictionary(3, "strings");
         for (size_t i = 0; i < 3; ++i)
         {
