@@ -280,7 +280,7 @@ namespace cubos::gl
         struct FramebufferTarget
         {
         private:
-            bool set;
+            bool set = false;
             TargetType type; ///< Type of the currently set target.
 
             std::variant<CubeMapTarget, Texture2DTarget, Texture2DArrayTarget> target;
@@ -288,13 +288,13 @@ namespace cubos::gl
         public:
             uint32_t mipLevel = 0; ///< Mip level of the target which will be set as a render target.
 
-            [[nodiscard]] TargetType getTargetType() const;
-            [[nodiscard]] bool isSet() const;
-            [[nodiscard]] const CubeMapTarget& getCubeMapTarget() const;
+            TargetType getTargetType() const;
+            bool isSet() const;
+            const CubeMapTarget& getCubeMapTarget() const;
 
-            [[nodiscard]] const Texture2DTarget& getTexture2DTarget() const;
+            const Texture2DTarget& getTexture2DTarget() const;
 
-            [[nodiscard]] const Texture2DArrayTarget& getTexture2DArrayTarget() const;
+            const Texture2DArrayTarget& getTexture2DArrayTarget() const;
 
             void setCubeMapTarget(const CubeMap& handle, CubeFace face);
 
@@ -565,7 +565,8 @@ namespace cubos::gl
         /// @param usage The usage which the buffer will have.
         /// @param storage The intended storage type for the buffer.
         /// @return Constant buffer handle, or nullptr if the creation failed.
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage, BufferStorageType storage) = 0;
+        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
+                                                    BufferStorageType storage) = 0;
 
         /// Creates a new index buffer.
         /// @param size Size in bytes.
