@@ -13,6 +13,7 @@ var namespacecubos_1_1gl_1_1impl =
     [ "ShaderStage", "classcubos_1_1gl_1_1impl_1_1ShaderStage.html", "classcubos_1_1gl_1_1impl_1_1ShaderStage" ],
     [ "Texture1D", "classcubos_1_1gl_1_1impl_1_1Texture1D.html", "classcubos_1_1gl_1_1impl_1_1Texture1D" ],
     [ "Texture2D", "classcubos_1_1gl_1_1impl_1_1Texture2D.html", "classcubos_1_1gl_1_1impl_1_1Texture2D" ],
+    [ "Texture2DArray", "classcubos_1_1gl_1_1impl_1_1Texture2DArray.html", "classcubos_1_1gl_1_1impl_1_1Texture2DArray" ],
     [ "Texture3D", "classcubos_1_1gl_1_1impl_1_1Texture3D.html", "classcubos_1_1gl_1_1impl_1_1Texture3D" ],
     [ "VertexArray", "classcubos_1_1gl_1_1impl_1_1VertexArray.html", "classcubos_1_1gl_1_1impl_1_1VertexArray" ],
     [ "VertexBuffer", "classcubos_1_1gl_1_1impl_1_1VertexBuffer.html", "classcubos_1_1gl_1_1impl_1_1VertexBuffer" ]

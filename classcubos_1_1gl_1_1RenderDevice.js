@@ -21,6 +21,7 @@ var classcubos_1_1gl_1_1RenderDevice =
     [ "createShaderStage", "classcubos_1_1gl_1_1RenderDevice.html#a52e9c5f4ca77a23112420440d46b4a2e", null ],
     [ "createTexture1D", "classcubos_1_1gl_1_1RenderDevice.html#a3a5319f8cd3c26f439c9b38a11c77c23", null ],
     [ "createTexture2D", "classcubos_1_1gl_1_1RenderDevice.html#a9e2b50c25a2bdbcd49556f737646a75b", null ],
+    [ "createTexture2DArray", "classcubos_1_1gl_1_1RenderDevice.html#aa62d2c20275e7236f9d1aaffcf59f68c", null ],
     [ "createTexture3D", "classcubos_1_1gl_1_1RenderDevice.html#a9ef34632d2bbdd06ca285a4835fab6ae", null ],
     [ "createVertexArray", "classcubos_1_1gl_1_1RenderDevice.html#a4b1142f2a32cd97573fa375858465d87", null ],
     [ "createVertexBuffer", "classcubos_1_1gl_1_1RenderDevice.html#a76a06667ead8fbf41f24be75fd1bdf32", null ],

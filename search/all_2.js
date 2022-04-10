@@ -28,13 +28,14 @@ var searchData=
   ['createshaderstage_47',['createShaderStage',['../classcubos_1_1gl_1_1RenderDevice.html#a52e9c5f4ca77a23112420440d46b4a2e',1,'cubos::gl::RenderDevice']]],
   ['createtexture1d_48',['createTexture1D',['../classcubos_1_1gl_1_1RenderDevice.html#a3a5319f8cd3c26f439c9b38a11c77c23',1,'cubos::gl::RenderDevice']]],
   ['createtexture2d_49',['createTexture2D',['../classcubos_1_1gl_1_1RenderDevice.html#a9e2b50c25a2bdbcd49556f737646a75b',1,'cubos::gl::RenderDevice']]],
-  ['createtexture3d_50',['createTexture3D',['../classcubos_1_1gl_1_1RenderDevice.html#a9ef34632d2bbdd06ca285a4835fab6ae',1,'cubos::gl::RenderDevice']]],
-  ['createvertexarray_51',['createVertexArray',['../classcubos_1_1gl_1_1RenderDevice.html#a4b1142f2a32cd97573fa375858465d87',1,'cubos::gl::RenderDevice']]],
-  ['createvertexbuffer_52',['createVertexBuffer',['../classcubos_1_1gl_1_1RenderDevice.html#a76a06667ead8fbf41f24be75fd1bdf32',1,'cubos::gl::RenderDevice']]],
-  ['cubemap_53',['CubeMap',['../classcubos_1_1gl_1_1impl_1_1CubeMap.html',1,'cubos::gl::impl']]],
-  ['cubemapdesc_54',['CubeMapDesc',['../structcubos_1_1gl_1_1CubeMapDesc.html',1,'cubos::gl']]],
-  ['cubemaptarget_55',['CubeMapTarget',['../structcubos_1_1gl_1_1FramebufferDesc_1_1CubeMapTarget.html',1,'cubos::gl::FramebufferDesc']]],
-  ['cullenabled_56',['cullEnabled',['../structcubos_1_1gl_1_1RasterStateDesc.html#a306e7eba9c7a5474e5a945047fa46b1a',1,'cubos::gl::RasterStateDesc']]],
-  ['cullface_57',['cullFace',['../structcubos_1_1gl_1_1RasterStateDesc.html#a3490091f45010bf5e21bf5305530214f',1,'cubos::gl::RasterStateDesc']]],
-  ['impl_58',['impl',['../namespacecubos_1_1gl_1_1impl.html',1,'cubos::gl']]]
+  ['createtexture2darray_50',['createTexture2DArray',['../classcubos_1_1gl_1_1RenderDevice.html#aa62d2c20275e7236f9d1aaffcf59f68c',1,'cubos::gl::RenderDevice']]],
+  ['createtexture3d_51',['createTexture3D',['../classcubos_1_1gl_1_1RenderDevice.html#a9ef34632d2bbdd06ca285a4835fab6ae',1,'cubos::gl::RenderDevice']]],
+  ['createvertexarray_52',['createVertexArray',['../classcubos_1_1gl_1_1RenderDevice.html#a4b1142f2a32cd97573fa375858465d87',1,'cubos::gl::RenderDevice']]],
+  ['createvertexbuffer_53',['createVertexBuffer',['../classcubos_1_1gl_1_1RenderDevice.html#a76a06667ead8fbf41f24be75fd1bdf32',1,'cubos::gl::RenderDevice']]],
+  ['cubemap_54',['CubeMap',['../classcubos_1_1gl_1_1impl_1_1CubeMap.html',1,'cubos::gl::impl']]],
+  ['cubemapdesc_55',['CubeMapDesc',['../structcubos_1_1gl_1_1CubeMapDesc.html',1,'cubos::gl']]],
+  ['cubemaptarget_56',['CubeMapTarget',['../structcubos_1_1gl_1_1FramebufferDesc_1_1CubeMapTarget.html',1,'cubos::gl::FramebufferDesc']]],
+  ['cullenabled_57',['cullEnabled',['../structcubos_1_1gl_1_1RasterStateDesc.html#a306e7eba9c7a5474e5a945047fa46b1a',1,'cubos::gl::RasterStateDesc']]],
+  ['cullface_58',['cullFace',['../structcubos_1_1gl_1_1RasterStateDesc.html#a3490091f45010bf5e21bf5305530214f',1,'cubos::gl::RasterStateDesc']]],
+  ['impl_59',['impl',['../namespacecubos_1_1gl_1_1impl.html',1,'cubos::gl']]]
 ];

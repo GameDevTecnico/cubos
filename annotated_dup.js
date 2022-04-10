@@ -25,6 +25,7 @@ var annotated_dup =
         [ "RenderDevice", "classcubos_1_1gl_1_1RenderDevice.html", "classcubos_1_1gl_1_1RenderDevice" ],
         [ "SamplerDesc", "structcubos_1_1gl_1_1SamplerDesc.html", "structcubos_1_1gl_1_1SamplerDesc" ],
         [ "Texture1DDesc", "structcubos_1_1gl_1_1Texture1DDesc.html", "structcubos_1_1gl_1_1Texture1DDesc" ],
+        [ "Texture2DArrayDesc", "structcubos_1_1gl_1_1Texture2DArrayDesc.html", "structcubos_1_1gl_1_1Texture2DArrayDesc" ],
         [ "Texture2DDesc", "structcubos_1_1gl_1_1Texture2DDesc.html", "structcubos_1_1gl_1_1Texture2DDesc" ],
         [ "Texture3DDesc", "structcubos_1_1gl_1_1Texture3DDesc.html", "structcubos_1_1gl_1_1Texture3DDesc" ],
         [ "VertexArrayDesc", "structcubos_1_1gl_1_1VertexArrayDesc.html", "structcubos_1_1gl_1_1VertexArrayDesc" ],

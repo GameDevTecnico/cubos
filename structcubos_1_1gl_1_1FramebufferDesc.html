@@ -88,6 +88,7 @@ $(document).ready(function(){initNavTree('structcubos_1_1gl_1_1FramebufferDesc.h
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structcubos_1_1gl_1_1FramebufferDesc-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -104,7 +105,7 @@ Collaboration diagram for cubos::gl::FramebufferDesc:</div>
 <div class="dyncontent">
 <div class="center"><img src="structcubos_1_1gl_1_1FramebufferDesc__coll__graph.png" border="0" usemap="#cubos_1_1gl_1_1FramebufferDesc_coll__map" alt="Collaboration graph"/></div>
 <map name="cubos_1_1gl_1_1FramebufferDesc_coll__map" id="cubos_1_1gl_1_1FramebufferDesc_coll__map">
-<area shape="rect" title="Framebuffer description." alt="" coords="5,109,204,136"/>
+<area shape="rect" title="Framebuffer description." alt="" coords="5,124,204,151"/>
 <area shape="rect" href="structcubos_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget.html" title=" " alt="" coords="5,5,204,47"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -115,8 +116,18 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget.html">FramebufferTarget</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1gl_1_1FramebufferDesc_1_1Texture2DArrayTarget.html">Texture2DArrayTarget</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1gl_1_1FramebufferDesc_1_1Texture2DTarget.html">Texture2DTarget</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a399be10e998a7e9070732409c4b24e37"><td class="memItemLeft" align="right" valign="top"><a id="a399be10e998a7e9070732409c4b24e37"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>TargetType</b> { <b>CubeMap</b>, 
+<b>Texture2D</b>, 
+<b>Texture2DArray</b>
+ }</td></tr>
+<tr class="separator:a399be10e998a7e9070732409c4b24e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -128,10 +139,10 @@ struct <a class="el" href="structcubos_1_1gl_1_1FramebufferDesc_1_1FramebufferTa
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1gl_1_1FramebufferDesc.html#a070d890dfc03f3dc443437705ebdaa94">targetCount</a> = 1</td></tr>
 <tr class="memdesc:a070d890dfc03f3dc443437705ebdaa94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of render targets. <br /></td></tr>
 <tr class="separator:a070d890dfc03f3dc443437705ebdaa94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a727efc5aa07df47fb4c95b302a3aaa9f"><td class="memItemLeft" align="right" valign="top"><a id="a727efc5aa07df47fb4c95b302a3aaa9f"></a>
-Texture2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1gl_1_1FramebufferDesc.html#a727efc5aa07df47fb4c95b302a3aaa9f">depthStencil</a></td></tr>
-<tr class="memdesc:a727efc5aa07df47fb4c95b302a3aaa9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional depth stencil texture. <br /></td></tr>
-<tr class="separator:a727efc5aa07df47fb4c95b302a3aaa9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81b569281e33d75c9a27c5fe22ecc215"><td class="memItemLeft" align="right" valign="top"><a id="a81b569281e33d75c9a27c5fe22ecc215"></a>
+<a class="el" href="structcubos_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget.html">FramebufferTarget</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1gl_1_1FramebufferDesc.html#a81b569281e33d75c9a27c5fe22ecc215">depthStencil</a></td></tr>
+<tr class="memdesc:a81b569281e33d75c9a27c5fe22ecc215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional depth stencil target. <br /></td></tr>
+<tr class="separator:a81b569281e33d75c9a27c5fe22ecc215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Framebuffer description. </p>

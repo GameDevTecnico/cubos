@@ -131,6 +131,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a3a5319f8cd3c26f439c9b38a11c77c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e2b50c25a2bdbcd49556f737646a75b"><td class="memItemLeft" align="right" valign="top">virtual Texture2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a9e2b50c25a2bdbcd49556f737646a75b">createTexture2D</a> (const <a class="el" href="structcubos_1_1gl_1_1Texture2DDesc.html">Texture2DDesc</a> &amp;desc)=0</td></tr>
 <tr class="separator:a9e2b50c25a2bdbcd49556f737646a75b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa62d2c20275e7236f9d1aaffcf59f68c"><td class="memItemLeft" align="right" valign="top">virtual Texture2DArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#aa62d2c20275e7236f9d1aaffcf59f68c">createTexture2DArray</a> (const <a class="el" href="structcubos_1_1gl_1_1Texture2DArrayDesc.html">Texture2DArrayDesc</a> &amp;desc)=0</td></tr>
+<tr class="separator:aa62d2c20275e7236f9d1aaffcf59f68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ef34632d2bbdd06ca285a4835fab6ae"><td class="memItemLeft" align="right" valign="top">virtual Texture3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a9ef34632d2bbdd06ca285a4835fab6ae">createTexture3D</a> (const <a class="el" href="structcubos_1_1gl_1_1Texture3DDesc.html">Texture3DDesc</a> &amp;desc)=0</td></tr>
 <tr class="separator:a9ef34632d2bbdd06ca285a4835fab6ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2173b72ed7922d3b28700da722165573"><td class="memItemLeft" align="right" valign="top">virtual CubeMap&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a2173b72ed7922d3b28700da722165573">createCubeMap</a> (const <a class="el" href="structcubos_1_1gl_1_1CubeMapDesc.html">CubeMapDesc</a> &amp;desc)=0</td></tr>
@@ -707,6 +709,33 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table>
 </div><div class="memdoc">
 <p>Creates a new 2D texture. </p><dl class="section return"><dt>Returns</dt><dd>Texture handle, or nullptr if the creation failed. </dd></dl>
+
+</div>
+</div>
+<a id="aa62d2c20275e7236f9d1aaffcf59f68c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa62d2c20275e7236f9d1aaffcf59f68c">&#9670;&nbsp;</a></span>createTexture2DArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Texture2DArray cubos::gl::RenderDevice::createTexture2DArray </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcubos_1_1gl_1_1Texture2DArrayDesc.html">Texture2DArrayDesc</a> &amp;&#160;</td>
+          <td class="paramname"><em>desc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a new 2D texture array. </p><dl class="section return"><dt>Returns</dt><dd>Texture array handle, or nullptr if the creation failed. </dd></dl>
 
 </div>
 </div>
