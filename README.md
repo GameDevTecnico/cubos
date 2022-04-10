@@ -28,6 +28,10 @@ The source code is divided into three main parts:
 
 You can find more information about how the engine is structured in the [documentation](https://gamedevtecnico.github.io/cubos/).
 
+## Contributing
+
+Check out the [contribution guidelines](CONTRIBUTE.md) for more information.
+
 ## Getting the engine
 
 ### Executables
