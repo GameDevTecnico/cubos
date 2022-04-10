@@ -139,6 +139,29 @@ double GLFWWindow::getTime() const
 #endif
 }
 
+void GLFWWindow::setMouseLockState(MouseLockState state)
+{
+#ifdef WITH_GLFW
+    int cursorState;
+    switch (state)
+    {
+    case MouseLockState::Default:
+        cursorState = GLFW_CURSOR_NORMAL;
+        break;
+    case MouseLockState::Locked:
+        cursorState = GLFW_CURSOR_DISABLED;
+        break;
+    case MouseLockState::Hidden:
+        cursorState = GLFW_CURSOR_HIDDEN;
+        break;
+    }
+    glfwSetInputMode(handle, GLFW_CURSOR, cursorState);
+#else
+    logCritical("GLFWWindow::setMouseLockState() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
 #ifdef WITH_GLFW
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)

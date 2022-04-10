@@ -992,6 +992,14 @@ public:
         this->ssboCount = 0;
     }
 
+    OGLShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps, GLuint program)
+        : OGLShaderPipeline(vs, ps, program)
+    {
+        this->gs = gs;
+        this->uboCount = 0;
+        this->ssboCount = 0;
+    }
+
     virtual ~OGLShaderPipeline() override
     {
         glDeleteProgram(this->program);
@@ -1057,7 +1065,7 @@ public:
         return nullptr;
     }
 
-    ShaderStage vs, ps;
+    ShaderStage vs, gs, ps;
     GLuint program;
     std::list<OGLShaderBindingPoint> bps;
 
@@ -1970,6 +1978,9 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     case Stage::Vertex:
         shader_type = GL_VERTEX_SHADER;
         break;
+    case Stage::Geometry:
+        shader_type = GL_GEOMETRY_SHADER;
+        break;
     case Stage::Pixel:
         shader_type = GL_FRAGMENT_SHADER;
         break;
@@ -2011,6 +2022,43 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     // Initialize program
     auto id = glCreateProgram();
     glAttachShader(id, vs->shader);
+    glAttachShader(id, ps->shader);
+    glLinkProgram(id);
+
+    // Check for linking errors
+    GLint success;
+    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        GLchar infoLog[512];
+        glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        return nullptr;
+    }
+
+    // Check for OpenGL errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLShaderPipeline>(vs, ps, id);
+}
+
+ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStage _gs, ShaderStage _ps)
+{
+    auto vs = std::static_pointer_cast<OGLShaderStage>(_vs);
+    auto gs = std::static_pointer_cast<OGLShaderStage>(_gs);
+    auto ps = std::static_pointer_cast<OGLShaderStage>(_ps);
+
+    // Initialize program
+    auto id = glCreateProgram();
+    glAttachShader(id, vs->shader);
+    glAttachShader(id, gs->shader);
     glAttachShader(id, ps->shader);
     glLinkProgram(id);
 

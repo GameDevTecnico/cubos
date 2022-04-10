@@ -9,7 +9,8 @@ endif ()
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
 option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
-option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source" ON)
+option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source?" ON)
+option(FMT_USE_SUBMODULE "Compile FMT from source?" ON)
 
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
@@ -153,10 +154,16 @@ else ()
     find_package(spdlog REQUIRED)
 endif ()
 
+if (FMT_USE_SUBMODULE)
+    add_subdirectory(lib/fmt)
+else ()
+    find_package(fmt REQUIRED)
+endif ()
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp fmt::fmt ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests

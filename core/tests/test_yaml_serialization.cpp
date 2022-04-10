@@ -33,7 +33,7 @@ struct Human
         s.write(this->dead, "dead");
         s.beginArray(this->children.size(), "children");
         for (auto& child : this->children)
-            s.write(map->getId(child), "child");
+            s.write(static_cast<uint64_t>(map->getId(child)), "child");
         s.endArray();
     }
 };
@@ -130,7 +130,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Dictionary)
         serializer->beginDictionary(3, "strings");
         for (size_t i = 0; i < 3; ++i)
         {
-            serializer->write(i, nullptr);
+            serializer->write(static_cast<uint64_t>(i), nullptr);
             serializer->write(strs[i], nullptr);
         }
         serializer->endDictionary();
@@ -241,7 +241,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom_Serializable)
         serializer->beginDictionary(humans.size(), "context_serializable");
         for (size_t i = 0; i < humans.size(); ++i)
         {
-            serializer->write(i, nullptr);
+            serializer->write(static_cast<uint64_t>(i), nullptr);
             serializer->write(humans[i], &map, nullptr);
         }
         serializer->endDictionary();

@@ -233,6 +233,7 @@ namespace cubos::gl
     enum class Stage
     {
         Vertex,
+        Geometry,
         Pixel,
     };
 
@@ -296,12 +297,12 @@ namespace cubos::gl
         public:
             uint32_t mipLevel = 0; ///< Mip level of the target which will be set as a render target.
 
-            [[nodiscard]] TargetType getTargetType() const;
-            [[nodiscard]] bool isSet() const;
-
-            [[nodiscard]] const CubeMapTarget& getCubeMapTarget() const;
-            [[nodiscard]] const Texture2DTarget& getTexture2DTarget() const;
-            [[nodiscard]] const Texture2DArrayTarget& getTexture2DArrayTarget() const;
+            TargetType getTargetType() const;
+            bool isSet() const;
+            
+            const CubeMapTarget& getCubeMapTarget() const;
+            const Texture2DTarget& getTexture2DTarget() const;
+            const Texture2DArrayTarget& getTexture2DArrayTarget() const;
             [[nodiscard]] const CubeMapArrayTarget& getCubeMapArrayTarget() const;
 
             void setCubeMapTarget(const CubeMap& handle, CubeFace face);
@@ -626,6 +627,13 @@ namespace cubos::gl
         /// @param ps Pixel shader stage.
         /// @return Shader pipeline handle, or nullptr if the creation failed.
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) = 0;
+
+        /// Creates a new shader pipeline from a vertex and pixel shaders.
+        /// @param vs Vertex shader stage.
+        /// @param gs Geometry shader stage.
+        /// @param ps Pixel shader stage.
+        /// @return Shader pipeline handle, or nullptr if the creation failed.
+        virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps) = 0;
 
         /// Sets the current shader pipeline used for rendering.
         virtual void setShaderPipeline(ShaderPipeline pipeline) = 0;
