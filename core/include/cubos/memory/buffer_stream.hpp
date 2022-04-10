@@ -16,7 +16,7 @@ namespace cubos::memory
         /// @param buffer The buffer to read/write from.
         /// @param size The size of the buffer.
         BufferStream(const void* buffer, size_t size);
-        
+
         BufferStream(BufferStream&&);
 
         virtual size_t read(void* data, size_t size) override;
