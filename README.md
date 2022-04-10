@@ -60,8 +60,7 @@ The following dependencies are used to compile **CUBOS.**:
 Dependencies marked as *Essential* are required to compile the engine.
 **CUBOS.** uses [CMake](https://cmake.org/) as its build system, so you must install it to compile the engine.
 
-Most dependencies come as submodules, so, you may choose whether to install them separately or not. If you choose to install some or all of them separately, you can do so easily by using the package manager of your choice. If you use Windows (ew), it should be easier to simply install all of them with the engine by cloning
-the whole repository with the `--recursive` flag.
+Most dependencies come as submodules, so, you may choose whether to install them separately or not. If you choose to install some or all of them separately, you can do so easily by using the package manager of your choice. If you use Windows, it should be easier to simply install all of them with the engine by cloning the whole repository with the `--recursive` flag.
 
 #### Compiling
 
