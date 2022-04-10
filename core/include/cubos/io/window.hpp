@@ -32,6 +32,15 @@ namespace cubos::io
         Scroll,
     };
 
+    enum class MouseLockState
+    {
+        Default, ///< Default lock state, mouse will function as is specified by the OS.
+        Locked,  ///< Mouse cursor will be hidden and locked to the center of the window,
+                 ///< useful for control schemes that require infinite mouse movement.
+        Hidden   ///< Mouse cursor will be hidden when over the window, otherwise functioning in the same way as
+                 ///< MouseLockState::Default
+    };
+
     /// Wrapper around a window object.
     /// Handles input events and creates the render device.
     class Window
@@ -61,6 +70,9 @@ namespace cubos::io
 
         /// Current time since the window was created.
         virtual double getTime() const = 0;
+
+        /// Set the lock state for the mouse when the window is focused.
+        virtual void setMouseLockState(MouseLockState state) = 0;
 
         /// Invoked with a key code, when a keyboard key is pressed.
         Event<Key> onKeyDown;

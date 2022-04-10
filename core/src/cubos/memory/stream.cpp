@@ -31,21 +31,6 @@ void Stream::put(char c)
     this->write(&c, sizeof(c));
 }
 
-void Stream::print(int8_t value, size_t base)
-{
-    this->print(static_cast<int64_t>(value), base);
-}
-
-void Stream::print(int16_t value, size_t base)
-{
-    this->print(static_cast<int64_t>(value), base);
-}
-
-void Stream::print(int32_t value, size_t base)
-{
-    this->print(static_cast<int64_t>(value), base);
-}
-
 void Stream::print(int64_t value, size_t base)
 {
     if (value < 0)
@@ -57,20 +42,6 @@ void Stream::print(int64_t value, size_t base)
     this->print(static_cast<uint64_t>(value), base);
 }
 
-void Stream::print(uint8_t value, size_t base)
-{
-    this->print(static_cast<uint64_t>(value), base);
-}
-
-void Stream::print(uint16_t value, size_t base)
-{
-    this->print(static_cast<uint64_t>(value), base);
-}
-
-void Stream::print(uint32_t value, size_t base)
-{
-    this->print(static_cast<uint64_t>(value), base);
-}
 
 void Stream::print(uint64_t value, size_t base)
 {

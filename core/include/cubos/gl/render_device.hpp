@@ -230,6 +230,7 @@ namespace cubos::gl
     enum class Stage
     {
         Vertex,
+        Geometry,
         Pixel,
     };
 
@@ -600,6 +601,13 @@ namespace cubos::gl
         /// @param ps Pixel shader stage.
         /// @return Shader pipeline handle, or nullptr if the creation failed.
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) = 0;
+
+        /// Creates a new shader pipeline from a vertex and pixel shaders.
+        /// @param vs Vertex shader stage.
+        /// @param gs Geometry shader stage.
+        /// @param ps Pixel shader stage.
+        /// @return Shader pipeline handle, or nullptr if the creation failed.
+        virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps) = 0;
 
         /// Sets the current shader pipeline used for rendering.
         virtual void setShaderPipeline(ShaderPipeline pipeline) = 0;
