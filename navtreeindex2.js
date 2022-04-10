@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"functions.html":[1,3,0,0],
 "functions_b.html":[1,3,0,1],
 "functions_c.html":[1,3,0,2],
 "functions_d.html":[1,3,0,3],
@@ -50,8 +51,8 @@ var NAVTREEINDEX2 =
 "keyboard_8hpp_source.html":[2,0,0,0,2,4],
 "log_8hpp_source.html":[2,0,0,0,5],
 "material_8hpp_source.html":[2,0,0,0,1,2],
-"namespacecubos_1_1gl_1_1impl.html":[0,0,0,0,0],
 "namespacecubos_1_1gl_1_1impl.html":[1,0,0,1,0],
+"namespacecubos_1_1gl_1_1impl.html":[0,0,0,0,0],
 "namespaces.html":[0,0],
 "pages.html":[],
 "palette_8hpp_source.html":[2,0,0,0,1,3],

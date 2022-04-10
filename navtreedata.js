@@ -48,7 +48,7 @@ var NAVTREEINDEX =
 [
 ".html",
 "classcubos_1_1io_1_1Action.html#ad58f5d7a1a5f464f39b7abf3d772aff1",
-"functions_b.html"
+"functions.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -6,6 +6,7 @@ var classcubos_1_1io_1_1Window =
     [ "getRenderDevice", "classcubos_1_1io_1_1Window.html#aee255c7e06bfdb1d400b3eeda520ff2a", null ],
     [ "getTime", "classcubos_1_1io_1_1Window.html#ae6595eb60cec870b531c353b709199ab", null ],
     [ "pollEvents", "classcubos_1_1io_1_1Window.html#ac957d7bdea4629f07d0387144a36e5ba", null ],
+    [ "setMouseLockState", "classcubos_1_1io_1_1Window.html#a165265b6ff32099622d8ffeb4aacfb68", null ],
     [ "shouldClose", "classcubos_1_1io_1_1Window.html#aa708bdf84d7c26194fdf7d24bdda2768", null ],
     [ "swapBuffers", "classcubos_1_1io_1_1Window.html#ad61a110ed77b78bd724f798b2aa954b1", null ],
     [ "onFramebufferResize", "classcubos_1_1io_1_1Window.html#ac363690e93b2827fa48814f83ac554f3", null ],
