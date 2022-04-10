@@ -299,11 +299,11 @@ namespace cubos::gl
 
             TargetType getTargetType() const;
             bool isSet() const;
-            
+
             const CubeMapTarget& getCubeMapTarget() const;
             const Texture2DTarget& getTexture2DTarget() const;
             const Texture2DArrayTarget& getTexture2DArrayTarget() const;
-            [[nodiscard]] const CubeMapArrayTarget& getCubeMapArrayTarget() const;
+            const CubeMapArrayTarget& getCubeMapArrayTarget() const;
 
             void setCubeMapTarget(const CubeMap& handle, CubeFace face);
             void setTexture2DTarget(const Texture2D& handle);
