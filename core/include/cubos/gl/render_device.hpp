@@ -261,7 +261,7 @@ namespace cubos::gl
         {
             CubeMap handle; ///< Cube map handle.
             CubeFace face;  ///< Cube map face which will be used as target.
-        };                  ///< If the target is a cube map, this handle is used.
+        };
 
         struct Texture2DTarget
         {
@@ -270,12 +270,12 @@ namespace cubos::gl
 
         struct CubeMapArrayTarget
         {
-            CubeMapArray handle; ///< Cube map handle.
+            CubeMapArray handle; ///< Cube map array handle.
         };
 
         struct Texture2DArrayTarget
         {
-            Texture2DArray handle; ///< Texture handle.
+            Texture2DArray handle; ///< Texture array handle.
         };
 
         enum class TargetType
@@ -284,7 +284,7 @@ namespace cubos::gl
             Texture2D,
             CubeMapArray,
             Texture2DArray
-        }; ///< If the target isn't a cube map, this handle is used.
+        };
 
         struct FramebufferTarget
         {
