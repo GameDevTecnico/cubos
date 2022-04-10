@@ -26,6 +26,7 @@ namespace cubos::gl
         virtual Texture2DArray createTexture2DArray(const Texture2DArrayDesc& desc) override;
         virtual Texture3D createTexture3D(const Texture3DDesc& desc) override;
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) override;
+        virtual CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) override;
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) override;
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
                                                     BufferStorageType storage) override;
