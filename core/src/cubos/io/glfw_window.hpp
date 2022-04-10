@@ -39,6 +39,8 @@ namespace cubos::io
         /// Current time since the window was created.
         virtual double getTime() const override;
 
+        virtual void setMouseLockState(MouseLockState state) override;
+
     private:
 #ifdef WITH_GLFW
         GLFWwindow* handle;
