@@ -11,11 +11,12 @@ namespace cubos::ecs
     class World
     {
     private:
-        std::vector<std::uint8_t> masks;
+        std::vector<std::uint32_t> entityData;
+        std::vector<std::uint32_t> availableEntities;
         std::vector<IStorage*> storages;
 
         size_t nextEntityId = 0;
-        size_t bytesPerMask;
+        size_t elementsPerEntity;
 
         template <typename T> size_t getComponentID();
 
@@ -25,7 +26,9 @@ namespace cubos::ecs
         /// @brief Creates a new entity.
         /// @tparam ComponentTypes The types of the components to be added when the entity is created.
         /// @param components The initial values for the components.
-        template <typename... ComponentTypes> size_t create(ComponentTypes... components);
+        template <typename... ComponentTypes> uint64_t create(ComponentTypes... components);
+
+        void remove(uint64_t entity);
 
         /// @brief Register a component type.
         /// @tparam T Component type.
@@ -36,21 +39,21 @@ namespace cubos::ecs
         /// @tparam T Component type.
         /// @param entity Entity ID.
         /// @param value Initial value of the component
-        template <typename T> T* addComponent(size_t entity, T value = {});
+        template <typename T> T* addComponent(uint64_t entity, T value = {});
 
         /// @brief Adds components to an entity.
         /// @tparam ComponentTypes The types of the components to be added.
         /// @param components The initial values for the components.
-        template <typename... ComponentTypes> void addComponents(size_t entity, ComponentTypes... components);
+        template <typename... ComponentTypes> void addComponents(uint64_t entity, ComponentTypes... components);
 
         /// @brief Get a component of an entity.
         /// @tparam T Component type.
         /// @param entity Entity ID.
-        template <typename T> T* getComponent(size_t entity);
+        template <typename T> T* getComponent(uint64_t entity);
 
-        template <typename T> void removeComponent(size_t entity);
+        template <typename T> void removeComponent(uint64_t entity);
 
-        template <typename... ComponentTypes> void removeComponents(size_t entity);
+        template <typename... ComponentTypes> void removeComponents(uint64_t entity);
 
         template <typename... ComponentTypes> friend class WorldView;
     };
@@ -94,18 +97,25 @@ namespace cubos::ecs
         return id;
     }
 
-    template <typename... ComponentTypes> size_t World::create(ComponentTypes... components)
+    template <typename... ComponentTypes> uint64_t World::create(ComponentTypes... components)
     {
-        if (masks.size() == 0)
-        {
-            bytesPerMask = (7 + storages.size()) / 8;
-        }
+        if (entityData.size() == 0)
+            elementsPerEntity = 1 + (31 + storages.size()) / 32;
 
-        size_t id = nextEntityId++;
-        for (size_t i = 0; i < bytesPerMask; i++)
+        uint64_t id;
+        if (!availableEntities.empty())
         {
-            uint8_t n = 0;
-            masks.push_back(n);
+            uint32_t index = availableEntities.back();
+            uint32_t version = entityData[elementsPerEntity * index];
+            id = ((uint64_t)version << 32) | index;
+        }
+        else
+        {
+            id = nextEntityId++;
+            for (size_t i = 0; i < elementsPerEntity; i++)
+            {
+                entityData.push_back(0);
+            }
         }
 
         addComponents(id, components...);
@@ -115,7 +125,7 @@ namespace cubos::ecs
 
     template <typename T> size_t World::registerComponent()
     {
-        assert(masks.size() == 0);
+        assert(entityData.size() == 0);
         size_t component_id = getComponentID<T>();
         static_assert(std::is_same<T, typename T::Storage::Type>(),
                       "A component can't use a storage for a different component type!");
@@ -123,50 +133,61 @@ namespace cubos::ecs
         return component_id;
     }
 
-    template <typename T> T* World::addComponent(size_t entity, T value)
+    template <typename T> T* World::addComponent(uint64_t entity, T value)
     {
+        uint32_t entityIndex = (uint32_t)entity;
+        if (entity >> 32 != entityData[entityIndex * elementsPerEntity])
+            return nullptr;
+
         size_t componentId = getComponentID<T>();
         Storage<T>* storage = (Storage<T>*)storages[componentId];
         // Set the entity mask for this component
-        masks[entity * bytesPerMask + componentId / 8] |= 1 << (componentId % 8);
+        entityData[entityIndex * elementsPerEntity + 1 + componentId / 8] |= 1 << (componentId % 8);
 
-        return storage->insert(entity, value);
+        return storage->insert(entityIndex, value);
     }
 
-    template <typename... ComponentTypes> void World::addComponents(size_t entity, ComponentTypes... components)
+    template <typename... ComponentTypes> void World::addComponents(uint64_t entity, ComponentTypes... components)
     {
         ([&](auto& component) { addComponent(entity, component); }(components), ...);
     }
 
-    template <typename T> T* World::getComponent(size_t entity)
+    template <typename T> T* World::getComponent(uint64_t entity)
     {
-        size_t componentId = getComponentID<T>();
+        uint32_t entityIndex = (uint32_t)entity;
+        if (entity >> 32 != entityData[entityIndex * elementsPerEntity])
+            return nullptr;
 
-        if ((masks[entity * bytesPerMask + componentId / 8] & (1 << (componentId % 8))) == 0)
+        size_t componentId = getComponentID<T>();
+        if ((entityData[entityIndex * elementsPerEntity + 1 + componentId / 8] & (1 << (componentId % 8))) == 0)
             return nullptr;
 
         Storage<T>* storage = (Storage<T>*)storages[componentId];
-        return storage->get(entity);
+        return storage->get(entityIndex);
     }
 
-    template <typename T> void World::removeComponent(size_t entity)
+    template <typename T> void World::removeComponent(uint64_t entity)
     {
+        uint32_t entityIndex = (uint32_t)entity;
+        if (entity >> 32 != entityData[entityIndex * elementsPerEntity])
+            return;
+
         size_t componentId = getComponentID<T>();
-        masks[entity * bytesPerMask + componentId / 8] ^= 1 << (componentId % 8);
+        entityData[entityIndex * elementsPerEntity + 1 + componentId / 8] ^= 1 << (componentId % 8);
     }
 
-    template <typename... ComponentTypes> void World::removeComponents(size_t entity)
+    template <typename... ComponentTypes> void World::removeComponents(uint64_t entity)
     {
         ([&]() { removeComponent<ComponentTypes>(entity); }(), ...);
     }
 
     template <typename... ComponentTypes> WorldView<ComponentTypes...>::WorldView(World& w) : world(&w)
     {
-        mask.resize(world->bytesPerMask);
+        mask.resize(world->elementsPerEntity - 1);
         size_t componentIds[] = {world->getComponentID<ComponentTypes>()...};
         for (auto id : componentIds)
         {
-            mask[id / 8] |= 1 << (id % 8);
+            mask[id / 32] |= 1 << (id % 32);
         }
     }
 
@@ -197,7 +218,7 @@ namespace cubos::ecs
     {
         for (size_t i = 0; i < mask->size(); i++)
         {
-            if ((mask->at(i) & world->masks[current * world->bytesPerMask + i]) != mask->at(i))
+            if ((mask->at(i) & world->entityData[current * world->elementsPerEntity + 1 + i]) != mask->at(i))
                 return false;
         }
         return true;
@@ -217,7 +238,7 @@ namespace cubos::ecs
     {
         for (size_t i = 0; i < mask.size(); i++)
         {
-            if ((mask[i] & world->masks[index * world->bytesPerMask + i]) != mask[i])
+            if ((mask[i] & world->entityData[index * world->elementsPerEntity + 1 + i]) != mask[i])
                 return false;
         }
 
