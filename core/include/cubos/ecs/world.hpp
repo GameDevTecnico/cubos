@@ -111,7 +111,7 @@ namespace cubos::ecs
 
     template <typename T> size_t World::registerComponent()
     {
-        assert(_masks.size() == 0);
+        assert(masks.size() == 0);
         size_t component_id = getComponentID<T>();
         static_assert(std::is_same<T, typename T::Storage::Type>(),
                       "A component can't use a storage for a different component type!");
