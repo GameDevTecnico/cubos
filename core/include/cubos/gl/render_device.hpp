@@ -301,13 +301,19 @@ namespace cubos::gl
             bool isSet() const;
 
             const CubeMapTarget& getCubeMapTarget() const;
+
             const Texture2DTarget& getTexture2DTarget() const;
+
             const Texture2DArrayTarget& getTexture2DArrayTarget() const;
+
             const CubeMapArrayTarget& getCubeMapArrayTarget() const;
 
             void setCubeMapTarget(const CubeMap& handle, CubeFace face);
+
             void setTexture2DTarget(const Texture2D& handle);
+
             void setTexture2DArrayTarget(const Texture2DArray& handle);
+
             void setCubeMapArrayTarget(const CubeMapArray& handle);
 
         } targets[CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
