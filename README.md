@@ -67,19 +67,19 @@ If you chose to install some dependencies separately, you must pass the correspo
 
 The following is a list of all the options available to configure the engine:
 
-| Name                     | Description                        |
-| ------------------------ | ---------------------------------- |
-| WITH_GLFW                | Use GLFW? (Required for now)       |
-| WITH_OPENGL              | Use OpenGL? (Required for now)     |
-| GLFW_USE_SUBMODULE       | Compile glfw from source?          |
-| GLM_USE_SUBMODULE        | Compile glm from source?           |
-| YAMLCPP_USE_SUBMODULE    | Compile yaml-cpp from source?      |
-| GOOGLETEST_USE_SUBMODULE | Compile GoogleTest from source?    |
-| SPDLOG_USE_SUBMODULE     | Compile spdlog from source?        |
-| FMT_USE_SUBMODULE        | Compile fmt from source?           |
-| BUILD_CORE_SAMPLES       | Build **CUBOS.** `core` samples?   |
-| BUILD_CORE_TESTS         | Build **CUBOS.** `core` tests?     |
-| BUILD_ENGINE_SAMPLES     | Build **CUBOS.** `engine` samples? |
+| Name                       | Description                        |
+| -------------------------- | ---------------------------------- |
+| `WITH_GLFW`                | Use GLFW? (Required for now)       |
+| `WITH_OPENGL`              | Use OpenGL? (Required for now)     |
+| `GLFW_USE_SUBMODULE`       | Compile glfw from source?          |
+| `GLM_USE_SUBMODULE`        | Compile glm from source?           |
+| `YAMLCPP_USE_SUBMODULE`    | Compile yaml-cpp from source?      |
+| `GOOGLETEST_USE_SUBMODULE` | Compile GoogleTest from source?    |
+| `SPDLOG_USE_SUBMODULE`     | Compile spdlog from source?        |
+| `FMT_USE_SUBMODULE`        | Compile fmt from source?           |
+| `BUILD_CORE_SAMPLES`       | Build **CUBOS.** `core` samples?   |
+| `BUILD_CORE_TESTS`         | Build **CUBOS.** `core` tests?     |
+| `BUILD_ENGINE_SAMPLES`     | Build **CUBOS.** `engine` samples? |
 
 ### Samples
 
