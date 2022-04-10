@@ -38,6 +38,8 @@ int main()
     auto e3 = world.create(Position{0, 15, 7}, Velocity{0, 4, 1});
     auto e4 = world.create(Position{0, 12, 7}, Velocity{0, 5, 1});
 
+    world.removeComponents<Position, Velocity>(e3);
+
     for (auto entity : ecs::WorldView<Position, Velocity>(world))
     {
         auto* pos = world.getComponent<Position>(entity);

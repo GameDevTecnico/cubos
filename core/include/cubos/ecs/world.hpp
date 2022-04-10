@@ -48,6 +48,10 @@ namespace cubos::ecs
         /// @param entity Entity ID.
         template <typename T> T* getComponent(size_t entity);
 
+        template <typename T> void removeComponent(size_t entity);
+
+        template <typename... ComponentTypes> void removeComponents(size_t entity);
+
         template <typename... ComponentTypes> friend class WorldView;
     };
 
@@ -143,6 +147,17 @@ namespace cubos::ecs
 
         Storage<T>* storage = (Storage<T>*)storages[componentId];
         return storage->get(entity);
+    }
+
+    template <typename T> void World::removeComponent(size_t entity)
+    {
+        size_t componentId = getComponentID<T>();
+        masks[entity * bytesPerMask + componentId / 8] ^= 1 << (componentId % 8);
+    }
+
+    template <typename... ComponentTypes> void World::removeComponents(size_t entity)
+    {
+        ([&]() { removeComponent<ComponentTypes>(entity); }(), ...);
     }
 
     template <typename... ComponentTypes> WorldView<ComponentTypes...>::WorldView(World& w) : world(&w)
