@@ -17,6 +17,17 @@
 Its vast render distances and the destructibility it allows set it apart from other engines.
 Written in *C++*, built with *OpenGL*, it's a high-performance engine.
 
+## Structure
+
+The source code is divided into three main parts:
+- `core`: library which is shared between the tools and the games. This includes some basic functionality like serialization, logging, render devices, input handling and others.
+- `engine`: library with code exclusive to the game execution. This includes the main loop, the asset manager and systems like the renderer and physics.
+- `tools`: contains programs that help you with the game development and which may depend on the `core`. One example is the future `editor`. Right now the only finished tool is the `embed` tool.
+
+### Further reading
+
+You can find more information about how the engine is structured in the [documentation](https://gamedevtecnico.github.io/cubos/).
+
 ## Getting the engine
 
 ### Executables
@@ -25,93 +36,59 @@ There are no releases of **CUBOS.** so far. We will update this section once we 
 <!--Official binaries for **CUBOS.** can be found
 on the [releases](https://github.com/GameDevTecnico/cubos/releases) page.-->
 
-### Compiling from the source code
+### Building from the source code
 
-#### Downloading 
+#### Dependencies
 
-While you can simply download the code as a zip from the green **Code** button at the top of the repository, downloading via the *git* control system is preferable.
+The following dependencies are used to compile **CUBOS.**:
 
-This way, you can easily get the latest version and even contribute to the project yourself. [Here's](https://learngitbranching.js.org/) a great way to learn *git*. Don't forget to [download and install](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) *git* for your operating system. A GUI client (i.e. [Sourcetree](https://www.sourcetreeapp.com/), [GitKraken](https://www.gitkraken.com/)) is also suggested for beginners.
+| Name                                               | Importance         | Submodule Path        | Installed Separately |
+| -------------------------------------------------- | ------------------ | --------------------- | -------------------- |
+| [CMake](https://cmake.org/)                        | Essential          | -                     | Yes                  |
+| [glad](https://github.com/Dav1dde/glad)            | Essential          | -                     | No                   |
+| [glfw](https://github.com/glfw/glfw)               | Essential          | `core/lib/glfw`       | Optionally           |
+| [glm](https://github.com/g-truc/glm)               | Essential          | `core/lib/glm`        | Optionally           |
+| [fmt](https://github.com/fmtlib/fmt)               | Essential          | `core/lib/fmt`        | Optionally           |
+| [spdlog](https://github.com/gabime/spdlog)         | Essential          | `core/lib/spdlog`     | Optionally           |
+| [yaml-cpp](https://github.com/jbeder/yaml-cpp)     | Essential          | `core/lib/yaml-cpp`   | Optionally           |
+| [googletest](https://github.com/google/googletest) | Required for tests | `core/lib/googletest` | Optionally           |
 
-Here's how you download the code through *git*:
+Dependencies marked as *Essential* are required to compile the engine.
+**CUBOS.** uses [CMake](https://cmake.org/) as its build system, so you must install it to compile the engine.
 
-1. Open up your terminal and navigate to the directory where you want **CUBOS.** to be saved.
-2. Run the following command (*--recursive* is required so it clones the submodules that **CUBOS.** requires as well.):
-
-``` git clone --recursive https://github.com/GameDevTecnico/cubos.git ``` 
-
-Let it download all the files and complete the operation, and you're done. The entirety of **CUBOS.** is now on that directory.
-
-To compile those files into a working program, you have many options:
+Most dependencies come as submodules, so, you may choose whether to install them separately or not. If you choose to install some or all of them separately, you can do so easily by using the package manager of your choice. If you use Windows (ew), it should be easier to simply install all of them with the engine by cloning
+the whole repository with the `--recursive` flag.
 
 #### Compiling
 
-##### Visual Studio
+If you chose to install some dependencies separately, you must pass the corresponding `-D` flag to CMake. For example, if you installed GLFW, GLM and CMake separetely you would pass the following flags to CMake:
 
-1. Make sure that both the *Desktop development with C++* workload and the optional *C++ CMake Tools for Windows* package is installed with your version of *Visual Studio*. 
-To do so, open *Visual Studio Installer* and select **Modify** on the version of VS you plan on using. On the left panel, make sure that the *Desktop development with C++* workload is checked. On the right, under *Desktop development with C++*, make sure *C++ CMake Tools for Windows* is checked. Then click **Modify** at the bottom and let the installation complete.
+`cmake -H. -Bbuild -DGLFW_USE_SUBMODULE=OFF -DGLM_USE_SUBMODULE=OFF -DYAMLCPP_USE_SUBMODULE=OFF`
 
-<p align="center">
-    <img src="docs/images/VisualStudioInstaller1.png" alt="Select modify on the version of *Visual Studio* you have installed in *Visual Studio Installer*">
-</p>
-<p align="center">
-    <img src="docs/images/VisualStudioInstaller2.png" alt="Make sure the right workloads and packages are selected">
-</p>
+The following is a list of all the options available to configure the engine:
 
-2. Open *Visual Studio* and select the ```Open local folder``` option, and then choose the repository directory. 
-3. *CMake* will automatically start configuring the project. Let it do so until it reads ```CMake generation finished.``` in the output window.
-4. In the Project Solution window on the right, click on the icon right to the home button (when hovered it says ```Switch between solutions and available views```).
+| Name                     | Description                        |
+| ------------------------ | ---------------------------------- |
+| WITH_GLFW                | Use GLFW? (Required for now)       |
+| WITH_OPENGL              | Use OpenGL? (Required for now)     |
+| GLFW_USE_SUBMODULE       | Compile glfw from source?          |
+| GLM_USE_SUBMODULE        | Compile glm from source?           |
+| YAMLCPP_USE_SUBMODULE    | Compile yaml-cpp from source?      |
+| GOOGLETEST_USE_SUBMODULE | Compile GoogleTest from source?    |
+| SPDLOG_USE_SUBMODULE     | Compile spdlog from source?        |
+| FMT_USE_SUBMODULE        | Compile fmt from source?           |
+| BUILD_CORE_SAMPLES       | Build **CUBOS.** `core` samples?   |
+| BUILD_CORE_TESTS         | Build **CUBOS.** `core` tests?     |
+| BUILD_ENGINE_SAMPLES     | Build **CUBOS.** `engine` samples? |
 
-<p align="center">
-    <img src="docs/images/VSChangeView.png" alt="```Switch between solutions and available views``` button">
-</p>
+### Samples
 
-5. Select ```CMake Targets View``` and then under ```cubos Project``` right-click ```cubos (static library)``` and select **Build**.
-
-##### Visual Studio Code
-
-1. Install *Microsoft's* *[CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)* extension for *Visual Studio Code*.
-2. Open the repository folder in *Visual Studio Code*. It will automatically scan your project.
-3. On the ```Would you like to configure project 'cubos'?``` prompt thrown by *CMake Tools*, press **Yes**
-
-<p align="center">
-    <img src="docs/images/CMakeToolsPrompt.png" alt="```Would you like to configure project 'cubos'?``` prompt">
-</p>
-
-4. Then pick a kit for **CUBOS.** This is your preferred compiler.
-
-<p align="center">
-    <img src="docs/images/CMakeKitPrompt.png" alt="Kit prompt">
-</p>
-
-5. Finally, on the bar at the bottom, press **Build**. The first time it compiles will take longer.
-
-<p align="center">
-    <img src="docs/images/VSCodeBuild.png" alt="Build Button">
-</p>
-
-##### Terminal
-
-1. Install *[CMake](https://cmake.org/install/)* on your terminal.
-2. Open your terminal and navigate to the *cubos* directory.
-3. Run the following commands:
-
-```cmake -H. -Bbuild```
-
-```cmake --build build```
-
-Also, you can use versions of the required libraries that are installed on your computer already, outside the repository. This makes the compiling process faster. Just don't use the ```--recursive``` flag when cloning the repository, and install the dependencies yourself. Then instead of the commands above, run the following: 
-
-```cmake -H. -Bbuild -DGLFW_USE_SUBMODULE=OFF -DGLM_USE_SUBMODULE=OFF -DYAMLCPP_USE_SUBMODULE=OFF```
+Both the `core` and the `engine` contain samples that you can run to get an idea of how the engine works.
 
 ### Testing
 
-We use GoogleTest for unit testing the engine source.
-All tests should be inside *tests* directory.
-
-CMakeLists.txt builds a test executable that can be run using ctest:
-
-```cd build && ctest ```
+**CUBOS.** uses GoogleTest for unit testing the engine.
+To test the engine's core you can use the following command: `cd build/core && ctest`.
 
 ## Who is making this engine
 
