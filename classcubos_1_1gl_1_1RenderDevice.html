@@ -137,6 +137,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a9ef34632d2bbdd06ca285a4835fab6ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2173b72ed7922d3b28700da722165573"><td class="memItemLeft" align="right" valign="top">virtual CubeMap&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a2173b72ed7922d3b28700da722165573">createCubeMap</a> (const <a class="el" href="structcubos_1_1gl_1_1CubeMapDesc.html">CubeMapDesc</a> &amp;desc)=0</td></tr>
 <tr class="separator:a2173b72ed7922d3b28700da722165573"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d906ea7a25ae6b454ba4122be492901"><td class="memItemLeft" align="right" valign="top">virtual CubeMapArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a4d906ea7a25ae6b454ba4122be492901">createCubeMapArray</a> (const <a class="el" href="structcubos_1_1gl_1_1CubeMapArrayDesc.html">CubeMapArrayDesc</a> &amp;desc)=0</td></tr>
+<tr class="separator:a4d906ea7a25ae6b454ba4122be492901"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e1564bac3a2ececa03b36db8b3e7332"><td class="memItemLeft" align="right" valign="top">virtual ConstantBuffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a5e1564bac3a2ececa03b36db8b3e7332">createConstantBuffer</a> (size_t size, const void *data, Usage usage)=0</td></tr>
 <tr class="separator:a5e1564bac3a2ececa03b36db8b3e7332"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a629fdbb8e5627d999aa83d7ee15c048b"><td class="memItemLeft" align="right" valign="top">virtual ConstantBuffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1RenderDevice.html#a629fdbb8e5627d999aa83d7ee15c048b">createConstantBuffer</a> (size_t size, const void *data, Usage usage, BufferStorageType storage)=0</td></tr>
@@ -357,6 +359,33 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table>
 </div><div class="memdoc">
 <p>Creates a new cube map. </p><dl class="section return"><dt>Returns</dt><dd>Cube map handle, or nullptr if the creation failed. </dd></dl>
+
+</div>
+</div>
+<a id="a4d906ea7a25ae6b454ba4122be492901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d906ea7a25ae6b454ba4122be492901">&#9670;&nbsp;</a></span>createCubeMapArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual CubeMapArray cubos::gl::RenderDevice::createCubeMapArray </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structcubos_1_1gl_1_1CubeMapArrayDesc.html">CubeMapArrayDesc</a> &amp;&#160;</td>
+          <td class="paramname"><em>desc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a new cube map array. </p><dl class="section return"><dt>Returns</dt><dd>Cube map array handle, or nullptr if the creation failed. </dd></dl>
 
 </div>
 </div>

@@ -11,6 +11,7 @@ var classcubos_1_1gl_1_1RenderDevice =
     [ "createConstantBuffer", "classcubos_1_1gl_1_1RenderDevice.html#a5e1564bac3a2ececa03b36db8b3e7332", null ],
     [ "createConstantBuffer", "classcubos_1_1gl_1_1RenderDevice.html#a629fdbb8e5627d999aa83d7ee15c048b", null ],
     [ "createCubeMap", "classcubos_1_1gl_1_1RenderDevice.html#a2173b72ed7922d3b28700da722165573", null ],
+    [ "createCubeMapArray", "classcubos_1_1gl_1_1RenderDevice.html#a4d906ea7a25ae6b454ba4122be492901", null ],
     [ "createDepthStencilState", "classcubos_1_1gl_1_1RenderDevice.html#ada9d051684c59f93124aa1b477a6cffa", null ],
     [ "createFramebuffer", "classcubos_1_1gl_1_1RenderDevice.html#aa81bb2c4789de09e737e3a863e32fb27", null ],
     [ "createIndexBuffer", "classcubos_1_1gl_1_1RenderDevice.html#ae8fb08998cd59214c484cc3a64e1d8d7", null ],

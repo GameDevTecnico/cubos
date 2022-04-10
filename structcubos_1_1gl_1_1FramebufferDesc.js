@@ -1,5 +1,6 @@
 var structcubos_1_1gl_1_1FramebufferDesc =
 [
+    [ "CubeMapArrayTarget", "structcubos_1_1gl_1_1FramebufferDesc_1_1CubeMapArrayTarget.html", "structcubos_1_1gl_1_1FramebufferDesc_1_1CubeMapArrayTarget" ],
     [ "CubeMapTarget", "structcubos_1_1gl_1_1FramebufferDesc_1_1CubeMapTarget.html", "structcubos_1_1gl_1_1FramebufferDesc_1_1CubeMapTarget" ],
     [ "FramebufferTarget", "structcubos_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget.html", "structcubos_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget" ],
     [ "Texture2DArrayTarget", "structcubos_1_1gl_1_1FramebufferDesc_1_1Texture2DArrayTarget.html", "structcubos_1_1gl_1_1FramebufferDesc_1_1Texture2DArrayTarget" ],
@@ -7,6 +8,7 @@ var structcubos_1_1gl_1_1FramebufferDesc =
     [ "TargetType", "structcubos_1_1gl_1_1FramebufferDesc.html#a399be10e998a7e9070732409c4b24e37", [
       [ "CubeMap", "structcubos_1_1gl_1_1FramebufferDesc.html#a399be10e998a7e9070732409c4b24e37a6c4765d2cb592dcc2f21f311db02f43b", null ],
       [ "Texture2D", "structcubos_1_1gl_1_1FramebufferDesc.html#a399be10e998a7e9070732409c4b24e37aa6e2bae752d3bf4e34cb392bca789995", null ],
+      [ "CubeMapArray", "structcubos_1_1gl_1_1FramebufferDesc.html#a399be10e998a7e9070732409c4b24e37a41bb72f1b095b1c24d6335f09377dd29", null ],
       [ "Texture2DArray", "structcubos_1_1gl_1_1FramebufferDesc.html#a399be10e998a7e9070732409c4b24e37a5452f0008bbc07c796bb4ac7d284928d", null ]
     ] ],
     [ "depthStencil", "structcubos_1_1gl_1_1FramebufferDesc.html#a81b569281e33d75c9a27c5fe22ecc215", null ],

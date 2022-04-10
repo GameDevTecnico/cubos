@@ -113,6 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7605cb598df975a964849a2b81dec5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25c11c9e495d26cc708e40e99d1335b7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a25c11c9e495d26cc708e40e99d1335b7">bind</a> (gl::CubeMap cubeMap)=0</td></tr>
 <tr class="separator:a25c11c9e495d26cc708e40e99d1335b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5c868d90c5a43b7f28aefc51c2f6082"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html#af5c868d90c5a43b7f28aefc51c2f6082">bind</a> (gl::CubeMapArray cubeMap)=0</td></tr>
+<tr class="separator:af5c868d90c5a43b7f28aefc51c2f6082"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5300dfe6bf6b4f6ec242c43ac505aa4a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a5300dfe6bf6b4f6ec242c43ac505aa4a">bind</a> (gl::ConstantBuffer cb)=0</td></tr>
 <tr class="separator:a5300dfe6bf6b4f6ec242c43ac505aa4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbf818377d89ba237bbac612622fe106"><td class="memItemLeft" align="right" valign="top"><a id="abbf818377d89ba237bbac612622fe106"></a>
@@ -170,7 +172,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div class="textblock"><p>Abstract shader binding point, should not be used directly. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5300dfe6bf6b4f6ec242c43ac505aa4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5300dfe6bf6b4f6ec242c43ac505aa4a">&#9670;&nbsp;</a></span>bind() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5300dfe6bf6b4f6ec242c43ac505aa4a">&#9670;&nbsp;</a></span>bind() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,7 +199,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="a25c11c9e495d26cc708e40e99d1335b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25c11c9e495d26cc708e40e99d1335b7">&#9670;&nbsp;</a></span>bind() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c11c9e495d26cc708e40e99d1335b7">&#9670;&nbsp;</a></span>bind() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -223,8 +225,35 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
+<a id="af5c868d90c5a43b7f28aefc51c2f6082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5c868d90c5a43b7f28aefc51c2f6082">&#9670;&nbsp;</a></span>bind() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void cubos::gl::impl::ShaderBindingPoint::bind </td>
+          <td>(</td>
+          <td class="paramtype">gl::CubeMapArray&#160;</td>
+          <td class="paramname"><em>cubeMap</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Binds a cube map array to the binding point. If this binding point doesn't support a cube map array, an error is logged and nothing is done. </p>
+
+</div>
+</div>
 <a id="a696e16ebb1de51ecf5aec1633e24b5c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a696e16ebb1de51ecf5aec1633e24b5c8">&#9670;&nbsp;</a></span>bind() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a696e16ebb1de51ecf5aec1633e24b5c8">&#9670;&nbsp;</a></span>bind() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -251,7 +280,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="a3606535965e78ac2a0e4b13c38cfe2f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3606535965e78ac2a0e4b13c38cfe2f2">&#9670;&nbsp;</a></span>bind() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3606535965e78ac2a0e4b13c38cfe2f2">&#9670;&nbsp;</a></span>bind() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -278,7 +307,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="ae4f3286cfcc7e67032113a0b934f5432"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4f3286cfcc7e67032113a0b934f5432">&#9670;&nbsp;</a></span>bind() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f3286cfcc7e67032113a0b934f5432">&#9670;&nbsp;</a></span>bind() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -305,7 +334,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="a0c0f6499c3df8e1a5a63e6cdfffebb92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c0f6499c3df8e1a5a63e6cdfffebb92">&#9670;&nbsp;</a></span>bind() <span class="overload">[6/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c0f6499c3df8e1a5a63e6cdfffebb92">&#9670;&nbsp;</a></span>bind() <span class="overload">[7/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -332,7 +361,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="a7605cb598df975a964849a2b81dec5cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7605cb598df975a964849a2b81dec5cc">&#9670;&nbsp;</a></span>bind() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7605cb598df975a964849a2b81dec5cc">&#9670;&nbsp;</a></span>bind() <span class="overload">[8/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

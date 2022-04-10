@@ -3,6 +3,7 @@ var namespacecubos_1_1gl_1_1impl =
     [ "BlendState", "classcubos_1_1gl_1_1impl_1_1BlendState.html", "classcubos_1_1gl_1_1impl_1_1BlendState" ],
     [ "ConstantBuffer", "classcubos_1_1gl_1_1impl_1_1ConstantBuffer.html", "classcubos_1_1gl_1_1impl_1_1ConstantBuffer" ],
     [ "CubeMap", "classcubos_1_1gl_1_1impl_1_1CubeMap.html", "classcubos_1_1gl_1_1impl_1_1CubeMap" ],
+    [ "CubeMapArray", "classcubos_1_1gl_1_1impl_1_1CubeMapArray.html", "classcubos_1_1gl_1_1impl_1_1CubeMapArray" ],
     [ "DepthStencilState", "classcubos_1_1gl_1_1impl_1_1DepthStencilState.html", "classcubos_1_1gl_1_1impl_1_1DepthStencilState" ],
     [ "Framebuffer", "classcubos_1_1gl_1_1impl_1_1Framebuffer.html", "classcubos_1_1gl_1_1impl_1_1Framebuffer" ],
     [ "IndexBuffer", "classcubos_1_1gl_1_1impl_1_1IndexBuffer.html", "classcubos_1_1gl_1_1impl_1_1IndexBuffer" ],

@@ -14,6 +14,7 @@ var annotated_dup =
         [ "BlendStateDesc", "structcubos_1_1gl_1_1BlendStateDesc.html", "structcubos_1_1gl_1_1BlendStateDesc" ],
         [ "ConstantBufferElement", "structcubos_1_1gl_1_1ConstantBufferElement.html", "structcubos_1_1gl_1_1ConstantBufferElement" ],
         [ "ConstantBufferStructure", "structcubos_1_1gl_1_1ConstantBufferStructure.html", "structcubos_1_1gl_1_1ConstantBufferStructure" ],
+        [ "CubeMapArrayDesc", "structcubos_1_1gl_1_1CubeMapArrayDesc.html", "structcubos_1_1gl_1_1CubeMapArrayDesc" ],
         [ "CubeMapDesc", "structcubos_1_1gl_1_1CubeMapDesc.html", "structcubos_1_1gl_1_1CubeMapDesc" ],
         [ "Debug", "classcubos_1_1gl_1_1Debug.html", null ],
         [ "DepthStencilStateDesc", "structcubos_1_1gl_1_1DepthStencilStateDesc.html", "structcubos_1_1gl_1_1DepthStencilStateDesc" ],
