@@ -173,6 +173,7 @@ namespace cubos::ecs
             return;
 
         size_t componentId = getComponentID<T>();
+        ((Storage<T>*)storages[componentId])->erase(entityIndex);
         entityData[entityIndex * elementsPerEntity + 1 + componentId / 8] ^= 1 << (componentId % 8);
     }
 

@@ -18,11 +18,13 @@ namespace cubos::ecs
         /// @brief Inserts a value into the storage.
         /// @param index The index where to insert the value.
         /// @param value The value to be inserted.
-        virtual T* insert(size_t index, T value) = 0;
+        virtual T* insert(uint32_t index, T value) = 0;
 
         /// @brief Gets a value from the storage.
         /// @param index The index of the value to be retrieved.
-        virtual T* get(size_t index) = 0;
+        virtual T* get(uint32_t index) = 0;
+
+        virtual void erase(uint32_t index) = 0;
     };
 
     template <typename T> class VecStorage : public Storage<T>
@@ -31,20 +33,24 @@ namespace cubos::ecs
         std::vector<T> data;
 
     public:
-        T* insert(size_t index, T value) override;
+        T* insert(uint32_t index, T value) override;
 
-        T* get(size_t index) override;
+        T* get(uint32_t index) override;
+
+        void erase(uint32_t index) override;
     };
 
     template <typename T> class MapStorage : public Storage<T>
     {
     private:
-        std::unordered_map<size_t, T> data;
+        std::unordered_map<uint32_t, T> data;
 
     public:
-        T* insert(size_t index, T value) override;
+        T* insert(uint32_t index, T value) override;
 
-        T* get(size_t index) override;
+        T* get(uint32_t index) override;
+
+        void erase(uint32_t index) override;
     };
 
     template <typename T> class NullStorage : public Storage<T>
@@ -53,12 +59,14 @@ namespace cubos::ecs
         T data;
 
     public:
-        T* insert(size_t index, T value) override;
+        T* insert(uint32_t index, T value) override;
 
-        T* get(size_t index) override;
+        T* get(uint32_t index) override;
+
+        void erase(uint32_t index) override;
     };
 
-    template <typename T> T* VecStorage<T>::insert(size_t index, T value)
+    template <typename T> T* VecStorage<T>::insert(uint32_t index, T value)
     {
         if (data.size() <= index)
         {
@@ -73,31 +81,44 @@ namespace cubos::ecs
         return &data[index];
     }
 
-    template <typename T> T* VecStorage<T>::get(size_t index)
+    template <typename T> T* VecStorage<T>::get(uint32_t index)
     {
         return &data[index];
     }
 
-    template <typename T> T* MapStorage<T>::insert(size_t index, T value)
+    template <typename T> void VecStorage<T>::erase(uint32_t index)
     {
         data[index] = value;
         return &data[index];
     }
 
-    template <typename T> T* MapStorage<T>::get(size_t index)
+    template <typename T> T* MapStorage<T>::insert(uint32_t index, T value)
+    {
+    }
+
+    template <typename T> T* MapStorage<T>::get(uint32_t index)
     {
         return &data[index];
     }
 
-    template <typename T> T* NullStorage<T>::insert(size_t index, T value)
+    template <typename T> void MapStorage<T>::erase(uint32_t index)
+    {
+    }
+
+    template <typename T> T* NullStorage<T>::insert(uint32_t index, T value)
     {
         return &data;
     }
 
-    template <typename T> T* NullStorage<T>::get(size_t index)
+    template <typename T> T* NullStorage<T>::get(uint32_t index)
     {
         return &data;
     }
+
+    template <typename T> void NullStorage<T>::erase(uint32_t index)
+    {
+    }
+
 } // namespace cubos::ecs
 
 #endif // ECS_STORAGE_HPP
