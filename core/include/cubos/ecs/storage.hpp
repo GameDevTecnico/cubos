@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <vector>
+#include <cstdint>
 
 namespace cubos::ecs
 {
@@ -88,12 +89,14 @@ namespace cubos::ecs
 
     template <typename T> void VecStorage<T>::erase(uint32_t index)
     {
-        data[index] = value;
-        return &data[index];
+        data[index].~T();
+        new (&data[index]) T;
     }
 
     template <typename T> T* MapStorage<T>::insert(uint32_t index, T value)
     {
+        data[index] = value;
+        return &data[index];
     }
 
     template <typename T> T* MapStorage<T>::get(uint32_t index)
@@ -103,6 +106,7 @@ namespace cubos::ecs
 
     template <typename T> void MapStorage<T>::erase(uint32_t index)
     {
+        data.erase(index);
     }
 
     template <typename T> T* NullStorage<T>::insert(uint32_t index, T value)
