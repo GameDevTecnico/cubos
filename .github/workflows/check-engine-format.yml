@@ -8,16 +8,18 @@ on:
 
 jobs:
   build:
+    name: Formatting Check
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        path:
+          - 'core'
+          - 'engine'
+          - 'tools'
     steps:
     - uses: actions/checkout@v2
-    - name: Install Clang Format
-      run: |
-        sudo apt-get update
-        sudo apt-get install clang-format-13
-    - name: Print Clang Format Version
-      run: clang-format --version
-    - name: Print Clang Format Configuration
-      run: clang-format -dump-config
-    - name: Run clang-format
-      run: find ./core/ ./engine/ ./tools/ -iname *.hpp -o -iname *.cpp  | xargs clang-format -style=file --dry-run --Werror
+    - name: clang-format Check
+      uses: jidicula/clang-format-action@v4.6.2
+      with:
+        clang-format-version: '13'
+        check-path: ${{ matrix.path }}
