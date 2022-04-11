@@ -17,3 +17,4 @@ jobs:
         source: 'core engine tools'
         extensions: 'hpp,cpp'
         style: file
+        clangFormatVersion: 12
