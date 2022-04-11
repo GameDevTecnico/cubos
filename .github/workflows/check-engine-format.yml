@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Print Clang Format --version
+    - name: Print Clang Format Version
       run: clang-format --version
+    - name: Print Clang Format Configuration
+      run: clang-format -dump-config
     - name: Run clang-format
       run: find ./core/ ./engine/ ./tools/ -iname *.hpp -o -iname *.cpp  | xargs clang-format -style=file --dry-run --Werror
