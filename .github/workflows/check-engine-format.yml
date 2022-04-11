@@ -11,10 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: clang-format lint
-      uses: DoozyX/clang-format-lint-action@v0.13
-      with:
-        source: 'core engine tools'
-        extensions: 'hpp,cpp'
-        style: file
-        clangFormatVersion: 12
+    - name: Install clang-format
+      run: find ./core/ ./engine/ ./tools/ -iname *.hpp -o -iname *.cpp  | xargs clang-format --dry-run --Werror
