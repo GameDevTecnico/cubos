@@ -42,7 +42,6 @@ void Stream::print(int64_t value, size_t base)
     this->print(static_cast<uint64_t>(value), base);
 }
 
-
 void Stream::print(uint64_t value, size_t base)
 {
     // Validate input
