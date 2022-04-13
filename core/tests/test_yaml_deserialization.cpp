@@ -393,7 +393,7 @@ TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Multiple_Documents)
                       "---\n"
                       "x: 3\n"
                       "...\n";
-    
+
     auto stream = BufferStream(src, strlen(src));
     auto deserializer = (Deserializer*)new YAMLDeserializer(stream);
 
