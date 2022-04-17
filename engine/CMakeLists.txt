@@ -8,7 +8,7 @@ message( "# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 # Set engine source files
 
 set(CUBOS_ENGINE_SOURCE
-    src/cubos/cubos.cpp
+    "src/cubos/engine/cubos.cpp"
 
     src/cubos/rendering/renderer.cpp
     src/cubos/rendering/deferred/deferred_renderer.cpp
@@ -16,7 +16,7 @@ set(CUBOS_ENGINE_SOURCE
     src/cubos/rendering/post_processing/copy_pass.cpp)
 
 set(CUBOS_ENGINE_INCLUDE
-    include/cubos/cubos.hpp
+    "include/cubos/engine/cubos.hpp"
 
     include/cubos/rendering/renderer.hpp
     include/cubos/rendering/deferred/deferred_renderer.hpp
