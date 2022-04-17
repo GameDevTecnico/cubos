@@ -1,9 +1,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <cubos/log.hpp>
-#include <cubos/io/window.hpp>
-#include <cubos/gl/render_device.hpp>
-#include <cubos/gl/debug.hpp>
+#include <cubos/core/log.hpp>
+#include <cubos/core/io/window.hpp>
+#include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/gl/debug.hpp>
 
 using namespace cubos::core;
 

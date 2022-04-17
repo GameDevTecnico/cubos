@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
-#include <cubos/memory/buffer_stream.hpp>
-#include <cubos/memory/yaml_serializer.hpp>
-#include <cubos/memory/yaml_deserializer.hpp>
-#include <cubos/memory/serialization_map.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
+#include <cubos/core/memory/yaml_serializer.hpp>
+#include <cubos/core/memory/yaml_deserializer.hpp>
+#include <cubos/core/memory/serialization_map.hpp>
 
 #include <random>
 

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <cubos/data/file_system.hpp>
-#include <cubos/data/std_archive.hpp>
+#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/std_archive.hpp>
 
 #include <fstream>
 #include <filesystem>
