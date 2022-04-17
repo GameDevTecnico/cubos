@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
-#include <cubos/memory/buffer_stream.hpp>
-#include <cubos/memory/yaml_deserializer.hpp>
-#include <cubos/memory/serialization_map.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
+#include <cubos/core/memory/yaml_deserializer.hpp>
+#include <cubos/core/memory/serialization_map.hpp>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 struct Human
 {
@@ -37,9 +37,9 @@ struct Human
         this->children.resize(s.beginArray());
         for (auto& child : this->children)
         {
-            size_t id;
+            uint64_t id;
             s.read(id);
-            child = map->getRef(id);
+            child = map->getRef(static_cast<size_t>(id));
         }
         s.endArray();
     }
@@ -347,8 +347,9 @@ TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Context_Deserializable)
     for (size_t i = 0; i < humans.size(); ++i)
         map.add(&humans[i], i);
 
-    for (size_t i = 0, id; i < humans.size(); ++i)
+    for (size_t i = 0; i < humans.size(); ++i)
     {
+        uint64_t id;
         deserializer->read(id);
         deserializer->read(humans[id], &map);
     }
@@ -392,7 +393,7 @@ TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Multiple_Documents)
                       "---\n"
                       "x: 3\n"
                       "...\n";
-    
+
     auto stream = BufferStream(src, strlen(src));
     auto deserializer = (Deserializer*)new YAMLDeserializer(stream);
 
