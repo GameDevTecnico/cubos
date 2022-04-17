@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <cubos/memory/buffer_stream.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
 
 #include <random>
 #include <string>

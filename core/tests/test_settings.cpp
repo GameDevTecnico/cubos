@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <cubos/settings.hpp>
+#include <cubos/core/settings.hpp>
 
 const std::string key1 = "key 1";
 const std::string key2 = "key 2";

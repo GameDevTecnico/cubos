@@ -1,5 +1,5 @@
-#include <cubos/data/file_system.hpp>
-#include <cubos/data/embedded_archive.hpp>
+#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/embedded_archive.hpp>
 
 int main()
 {
@@ -37,7 +37,7 @@ int main()
 /// use it in an EmbeddedArchive, you just need to construct
 /// an EmbeddedArchive with the data name 'assets'
 
-#include <cubos/data/embedded_archive.hpp>
+#include <cubos/core/data/embedded_archive.hpp>
 
 using namespace cubos::core::data;
 

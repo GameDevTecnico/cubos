@@ -8,11 +8,11 @@ message( "# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 # Set engine source files
 
 set(CUBOS_ENGINE_SOURCE
-    "src/cubos/cubos.cpp"
+    "src/cubos/engine/cubos.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
-    "include/cubos/cubos.hpp"
+    "include/cubos/engine/cubos.hpp"
 )
 
 # Create cubos engine

@@ -1,10 +1,10 @@
-#include <cubos/log.hpp>
-#include <cubos/io/window.hpp>
-#include <cubos/gl/render_device.hpp>
-#include <cubos/io/input_manager.hpp>
-#include <cubos/io/sources/button_press.hpp>
-#include <cubos/io/sources/single_axis.hpp>
-#include <cubos/io/sources/double_axis.hpp>
+#include <cubos/core/log.hpp>
+#include <cubos/core/io/window.hpp>
+#include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/io/input_manager.hpp>
+#include <cubos/core/io/sources/button_press.hpp>
+#include <cubos/core/io/sources/single_axis.hpp>
+#include <cubos/core/io/sources/double_axis.hpp>
 #include <algorithm>
 using namespace cubos::core;
 float red = 0.0f;
