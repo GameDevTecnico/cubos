@@ -38,7 +38,6 @@ BufferStream::BufferStream(BufferStream&& other)
     other.reachedEof = true;
 }
 
-
 size_t BufferStream::read(void* data, size_t size)
 {
     size_t bytesRemaining = this->size - this->position;

@@ -65,40 +65,24 @@ namespace cubos::core::memory
         /// @param c The byte to put.
         void put(char c);
 
-        /// Prints a 8 bit signed integer to the stream.
+        /// Prints a signed integer to the stream.
+        /// @tparam T The type of the integer.
         /// @param value The value to print.
         /// @param base The base to use.
-        void print(int8_t value, size_t base = 10);
+        template <typename T>
+        requires(std::is_integral_v<T>&& std::is_signed_v<T>) void print(T value, size_t base = 10);
 
-        /// Prints a 16 bit signed integer to the stream.
+        /// Prints a signed integer to the stream.
+        /// @tparam T The type of the integer.
         /// @param value The value to print.
         /// @param base The base to use.
-        void print(int16_t value, size_t base = 10);
-
-        /// Prints a 32 bit signed integer to the stream.
-        /// @param value The value to print.
-        /// @param base The base to use.
-        void print(int32_t value, size_t base = 10);
+        template <typename T>
+        requires(std::is_integral_v<T> && !std::is_signed_v<T>) inline void print(T value, size_t base = 10);
 
         /// Prints a 64 bit signed integer to the stream.
         /// @param value The value to print.
         /// @param base The base to use.
         void print(int64_t value, size_t base = 10);
-
-        /// Prints a 8 bit unsigned integer to the stream.
-        /// @param value The value to print.
-        /// @param base The base to use.
-        void print(uint8_t value, size_t base = 10);
-
-        /// Prints a 16 bit unsigned integer to the stream.
-        /// @param value The value to print.
-        /// @param base The base to use.
-        void print(uint16_t value, size_t base = 10);
-
-        /// Prints a 32 bit unsigned integer to the stream.
-        /// @param value The value to print.
-        /// @param base The base to use.
-        void print(uint32_t value, size_t base = 10);
 
         /// Prints a 64 bit unsigned integer to the stream.
         /// @param value The value to print.
@@ -212,6 +196,18 @@ namespace cubos::core::memory
     };
 
     // Implementation
+
+    template <typename T>
+    requires(std::is_integral_v<T>&& std::is_signed_v<T>) inline void Stream::print(T value, size_t base)
+    {
+        this->print(static_cast<int64_t>(value), base);
+    }
+
+    template <typename T>
+    requires(std::is_integral_v<T> && !std::is_signed_v<T>) inline void Stream::print(T value, size_t base)
+    {
+        this->print(static_cast<uint64_t>(value), base);
+    }
 
     template <typename T, typename... TArgs> void Stream::printf(const char* fmt, T arg, TArgs... args)
     {

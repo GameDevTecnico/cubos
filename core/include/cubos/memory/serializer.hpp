@@ -150,8 +150,8 @@ namespace cubos::core::memory
         /// @param ctx The context required to serialize.
         /// @param name The name of the object (optional).
         template <typename T, typename TCtx>
-        requires (TriviallySerializable<T> && !ContextSerializable<T, TCtx>)
-        void write(const T& obj, TCtx ctx, const char* name);
+        requires(TriviallySerializable<T> && !ContextSerializable<T, TCtx>) void write(const T& obj, TCtx ctx,
+                                                                                       const char* name);
 
         /// Serializes a object which requires context to be serialized.
         /// @tparam T The type of the object.
@@ -282,8 +282,8 @@ namespace cubos::core::memory
     }
 
     template <typename T, typename TCtx>
-    requires (TriviallySerializable<T> && !ContextSerializable<T, TCtx>)
-    void Serializer::write(const T& obj, TCtx ctx, const char* name)
+    requires(TriviallySerializable<T> && !ContextSerializable<T, TCtx>) void Serializer::write(const T& obj, TCtx ctx,
+                                                                                               const char* name)
     {
         this->write(obj, name);
     }

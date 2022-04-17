@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 
 #define CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT 8
+#define CUBOS_CORE_GL_MAX_TEXTURE_2D_ARRAY_SIZE 256
+#define CUBOS_CORE_GL_MAX_CUBEMAP_ARRAY_SIZE 256
 #define CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT 8
 #define CUBOS_CORE_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE 32
 #define CUBOS_CORE_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT 32
@@ -24,8 +26,10 @@ namespace cubos::core::gl
         class Sampler;
         class Texture1D;
         class Texture2D;
+        class Texture2DArray;
         class Texture3D;
         class CubeMap;
+        class CubeMapArray;
 
         class ConstantBuffer;
         class IndexBuffer;
@@ -45,8 +49,10 @@ namespace cubos::core::gl
     using Sampler = std::shared_ptr<impl::Sampler>;
     using Texture1D = std::shared_ptr<impl::Texture1D>;
     using Texture2D = std::shared_ptr<impl::Texture2D>;
+    using Texture2DArray = std::shared_ptr<impl::Texture2DArray>;
     using Texture3D = std::shared_ptr<impl::Texture3D>;
     using CubeMap = std::shared_ptr<impl::CubeMap>;
+    using CubeMapArray = std::shared_ptr<impl::CubeMapArray>;
 
     using ConstantBuffer = std::shared_ptr<impl::ConstantBuffer>;
     using IndexBuffer = std::shared_ptr<impl::IndexBuffer>;
@@ -255,31 +261,65 @@ namespace cubos::core::gl
         {
             CubeMap handle; ///< Cube map handle.
             CubeFace face;  ///< Cube map face which will be used as target.
-        };                  ///< If the target is a cube map, this handle is used.
+        };
 
         struct Texture2DTarget
         {
             Texture2D handle; ///< Texture handle.
-        };                    ///< If the target isn't a cube map, this handle is used.
+        };
+
+        struct CubeMapArrayTarget
+        {
+            CubeMapArray handle; ///< Cube map array handle.
+        };
+
+        struct Texture2DArrayTarget
+        {
+            Texture2DArray handle; ///< Texture array handle.
+        };
+
+        enum class TargetType
+        {
+            CubeMap,
+            Texture2D,
+            CubeMapArray,
+            Texture2DArray
+        };
 
         struct FramebufferTarget
         {
-            bool isCubeMap = false; ///< Is this target a cube map face?
-            uint32_t mipLevel = 0;  ///< Mip level of the texture which will be set as a render target.
+        private:
+            bool set = false;
+            TargetType type; ///< Type of the currently set target.
 
-            std::variant<CubeMapTarget, Texture2DTarget> target;
+            std::variant<CubeMapTarget, Texture2DTarget, CubeMapArrayTarget, Texture2DArrayTarget> target;
 
-            [[nodiscard]] const CubeMapTarget& getCubeMapTarget() const;
+        public:
+            uint32_t mipLevel = 0; ///< Mip level of the target which will be set as a render target.
 
-            [[nodiscard]] const Texture2DTarget& getTexture2DTarget() const;
+            TargetType getTargetType() const;
+            bool isSet() const;
+
+            const CubeMapTarget& getCubeMapTarget() const;
+
+            const Texture2DTarget& getTexture2DTarget() const;
+
+            const Texture2DArrayTarget& getTexture2DArrayTarget() const;
+
+            const CubeMapArrayTarget& getCubeMapArrayTarget() const;
 
             void setCubeMapTarget(const CubeMap& handle, CubeFace face);
 
             void setTexture2DTarget(const Texture2D& handle);
+
+            void setTexture2DArrayTarget(const Texture2DArray& handle);
+
+            void setCubeMapArrayTarget(const CubeMapArray& handle);
+
         } targets[CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
-        uint32_t targetCount = 1; ///< Number of render targets.
-        Texture2D depthStencil;   ///< Optional depth stencil texture.
+        uint32_t targetCount = 1;       ///< Number of render targets.
+        FramebufferTarget depthStencil; ///< Optional depth stencil target.
     };
 
     /// Rasterizer state description.
@@ -386,6 +426,19 @@ namespace cubos::core::gl
         TextureFormat format;                                     ///< Texture format.
     };
 
+    /// 2D texture array description.
+    struct Texture2DArrayDesc
+    {
+        const void* data[CUBOS_CORE_GL_MAX_TEXTURE_2D_ARRAY_SIZE][CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] =
+            {};                   ///< Optional initial texture data.
+        size_t mipLevelCount = 1; ///< Number of mip levels.
+        size_t width;             ///< Texture width.
+        size_t height;            ///< Texture height.
+        size_t size;              ///< Number of 2D Textures contained in the array.
+        Usage usage;              ///< Texture usage mode.
+        TextureFormat format;     ///< Texture format.
+    };
+
     /// 3D texture description.
     struct Texture3DDesc
     {
@@ -401,13 +454,26 @@ namespace cubos::core::gl
     /// Cube map description.
     struct CubeMapDesc
     {
-        const void* data[6][CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {
-            {}, {}, {}, {}, {}, {}}; ///< Optional initial cube map data, indexed using CubeFace.
-        size_t mipLevelCount = 1;    ///< Number of mip levels.
-        size_t width;                ///< Cube map face width.
-        size_t height;               ///< Cube map face height.
-        Usage usage;                 ///< Texture usage mode.
-        TextureFormat format;        ///< Texture format.
+        const void* data[6][CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] =
+            {};                   ///< Optional initial cube map data, indexed using CubeFace.
+        size_t mipLevelCount = 1; ///< Number of mip levels.
+        size_t width;             ///< Cube map face width.
+        size_t height;            ///< Cube map face height.
+        Usage usage;              ///< Texture usage mode.
+        TextureFormat format;     ///< Texture format.
+    };
+
+    /// Cube map array description.
+    struct CubeMapArrayDesc
+    {
+        const void* data[CUBOS_CORE_GL_MAX_CUBEMAP_ARRAY_SIZE][6][CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] =
+            {};                   ///< Optional initial cube map data, indexed using CubeFace.
+        size_t mipLevelCount = 1; ///< Number of mip levels.
+        size_t width;             ///< Cube map face width.
+        size_t height;            ///< Cube map face height.
+        size_t size;              ///< Number of cube maps contained in the array.
+        Usage usage;              ///< Texture usage mode.
+        TextureFormat format;     ///< Texture format.
     };
 
     /// Constant buffer element.
@@ -501,6 +567,10 @@ namespace cubos::core::gl
         /// @return Texture handle, or nullptr if the creation failed.
         virtual Texture2D createTexture2D(const Texture2DDesc& desc) = 0;
 
+        /// Creates a new 2D texture array.
+        /// @return Texture array handle, or nullptr if the creation failed.
+        virtual Texture2DArray createTexture2DArray(const Texture2DArrayDesc& desc) = 0;
+
         /// Creates a new 3D texture.
         /// @return Texture handle, or nullptr if the creation failed.
         virtual Texture3D createTexture3D(const Texture3DDesc& desc) = 0;
@@ -508,6 +578,10 @@ namespace cubos::core::gl
         /// Creates a new cube map.
         /// @return Cube map handle, or nullptr if the creation failed.
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) = 0;
+
+        /// Creates a new cube map array.
+        /// @return Cube map array handle, or nullptr if the creation failed.
+        virtual CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) = 0;
 
         /// Creates a new constant buffer.
         /// @param size Size in bytes.
@@ -701,6 +775,29 @@ namespace cubos::core::gl
             virtual ~Texture2D() = default;
         };
 
+        /// Abstract 2D texture array, should not be used directly.
+        class Texture2DArray
+        {
+        public:
+            /// Updates the texture with new data, which must have the same format used when the texture was created.
+            /// @param x Destination X coordinate.
+            /// @param y Destination Y coordinate.
+            /// @param i Index of the destination texture within the array.
+            /// @param width Width of the section which will be updated.
+            /// @param height Height of the section which will be updated.
+            /// @param data Pointer to the new data.
+            /// @param level Mip level to update.
+            virtual void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data,
+                                size_t level = 0) = 0;
+
+            /// Generates mipmaps on this texture.
+            virtual void generateMipmaps() = 0;
+
+        protected:
+            Texture2DArray() = default;
+            virtual ~Texture2DArray() = default;
+        };
+
         /// Abstract 3D texture, should not be used directly.
         class Texture3D
         {
@@ -747,6 +844,31 @@ namespace cubos::core::gl
         protected:
             CubeMap() = default;
             virtual ~CubeMap() = default;
+        };
+
+        /// Abstract cube map, should not be used directly.
+        class CubeMapArray
+        {
+        public:
+            /// Updates a cube map's face with new data, which must have the same format used when the cube map was
+            /// created.
+            /// @param x Destination X coordinate.
+            /// @param y Destination Y coordinate.
+            /// @param i Index of the destination texture within the array.
+            /// @param width Width of the section which will be updated.
+            /// @param height Height of the section which will be updated.
+            /// @param data Pointer to the new data.
+            /// @param face Face to update.
+            /// @param level Mip level to update.
+            virtual void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data,
+                                CubeFace face, size_t level = 0) = 0;
+
+            /// Generates mipmaps on this cube map.
+            virtual void generateMipmaps() = 0;
+
+        protected:
+            CubeMapArray() = default;
+            virtual ~CubeMapArray() = default;
         };
 
         /// Abstract constant buffer, should not be used directly.
@@ -850,6 +972,10 @@ namespace cubos::core::gl
             /// If this binding point doesn't support a 2D texture, an error is logged and nothing is done.
             virtual void bind(gl::Texture2D tex) = 0;
 
+            /// Binds a 2D texture array to the binding point.
+            /// If this binding point doesn't support a 2D texture array, an error is logged and nothing is done.
+            virtual void bind(gl::Texture2DArray tex) = 0;
+
             /// Binds a 3D texture to the binding point.
             /// If this binding point doesn't support a 3D texture, an error is logged and nothing is done.
             virtual void bind(gl::Texture3D tex) = 0;
@@ -857,6 +983,10 @@ namespace cubos::core::gl
             /// Binds a cube map to the binding point.
             /// If this binding point doesn't support a cube map, an error is logged and nothing is done.
             virtual void bind(gl::CubeMap cubeMap) = 0;
+
+            /// Binds a cube map array to the binding point.
+            /// If this binding point doesn't support a cube map array, an error is logged and nothing is done.
+            virtual void bind(gl::CubeMapArray cubeMap) = 0;
 
             /// Binds a constant buffer to the binding point.
             /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done.

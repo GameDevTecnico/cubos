@@ -1,0 +1,18 @@
+name: 🔎 check-engine-format
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    name: Formatting Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: clang-format Check
+      uses: jidicula/clang-format-action@v4.6.2
+      with:
+        clang-format-version: '13'
+        exclude-regex: 'lib'

@@ -19,7 +19,8 @@ EmbeddedArchive::EmbeddedArchive(const std::string& name)
     data = &it->second;
 }
 
-std::map<std::string, const EmbeddedArchive::Data&>& EmbeddedArchive::getRegistry() {
+std::map<std::string, const EmbeddedArchive::Data&>& EmbeddedArchive::getRegistry()
+{
     static std::map<std::string, const EmbeddedArchive::Data&> registry;
     return registry;
 }

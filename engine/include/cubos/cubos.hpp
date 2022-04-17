@@ -10,6 +10,6 @@ namespace cubos::engine
 
     /// Runs the game engine.
     void run();
-}
+} // namespace cubos
 
 #endif // CUBOS_ENGINE_CUBOS_HPP

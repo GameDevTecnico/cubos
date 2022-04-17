@@ -23,8 +23,10 @@ namespace cubos::core::gl
         virtual Sampler createSampler(const SamplerDesc& desc) override;
         virtual Texture1D createTexture1D(const Texture1DDesc& desc) override;
         virtual Texture2D createTexture2D(const Texture2DDesc& desc) override;
+        virtual Texture2DArray createTexture2DArray(const Texture2DArrayDesc& desc) override;
         virtual Texture3D createTexture3D(const Texture3DDesc& desc) override;
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) override;
+        virtual CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) override;
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) override;
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
                                                     BufferStorageType storage) override;
