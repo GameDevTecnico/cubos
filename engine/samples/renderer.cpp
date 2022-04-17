@@ -1,15 +1,16 @@
-#include <cubos/log.hpp>
-#include <cubos/io/window.hpp>
-#include <cubos/gl/render_device.hpp>
-#include <cubos/gl/vertex.hpp>
-#include <cubos/gl/palette.hpp>
-#include <cubos/rendering/deferred/deferred_renderer.hpp>
-#include <cubos/rendering/post_processing/copy_pass.hpp>
+#include <cubos/core/log.hpp>
+#include <cubos/core/io/window.hpp>
+#include <cubos/core/gl/render_device.hpp>
+#include "cubos/core/gl/vertex.hpp"
+#include <cubos/core/gl/palette.hpp>
+#include <cubos/engine/rendering/deferred/deferred_renderer.hpp>
+#include <cubos/engine/rendering/post_processing/copy_pass.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-using namespace cubos;
+using namespace cubos::core;
+using namespace cubos::engine;
 
 int main(void)
 {
@@ -38,7 +39,7 @@ int main(void)
     auto palette1ID = renderer.registerPalette(palette1);
     auto palette2ID = renderer.registerPalette(palette2);
 
-    std::vector<cubos::gl::Vertex> vertices = {
+    std::vector<gl::Vertex> vertices = {
         // Front
         {{1, 0, 0}, {0, 0, -1}, 1},
         {{0, 0, 0}, {0, 0, -1}, 1},

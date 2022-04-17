@@ -1,9 +1,9 @@
-#ifndef CUBOS_GL_VERTEX_HPP
-#define CUBOS_GL_VERTEX_HPP
+#ifndef CUBOS_CORE_GL_VERTEX_HPP
+#define CUBOS_CORE_GL_VERTEX_HPP
 
 #include <glm/glm.hpp>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     // Represents a voxel vertex
     struct Vertex
@@ -14,6 +14,6 @@ namespace cubos::gl
 
         uint16_t material; ///< The material index on the palette.
     };
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_VERTEX_HPP
+#endif // CUBOS_CORE_GL_VERTEX_HPP

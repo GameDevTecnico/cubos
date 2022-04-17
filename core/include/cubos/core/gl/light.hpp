@@ -1,11 +1,11 @@
 
-#ifndef CUBOS_GL_LIGHT_DATA_HPP
-#define CUBOS_GL_LIGHT_DATA_HPP
+#ifndef CUBOS_CORE_GL_LIGHT_DATA_HPP
+#define CUBOS_CORE_GL_LIGHT_DATA_HPP
 
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     struct SpotLightData
     {
@@ -39,6 +39,6 @@ namespace cubos::gl
 
         PointLightData(const glm::vec3& position, const glm::vec3& color, float intensity, float range);
     };
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_LIGHT_DATA_HPP
+#endif // CUBOS_CORE_GL_LIGHT_DATA_HPP

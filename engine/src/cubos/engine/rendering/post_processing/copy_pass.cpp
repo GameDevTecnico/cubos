@@ -1,10 +1,11 @@
-#include "cubos/rendering/post_processing/copy_pass.hpp"
+#include <cubos/engine/rendering/post_processing/copy_pass.hpp>
 
 using namespace cubos;
-using namespace cubos::gl;
-using namespace cubos::rendering;
+using namespace cubos::core;
+using namespace cubos::core::gl;
+using namespace cubos::engine;
 
-cubos::rendering::CopyPass::CopyPass(cubos::io::Window& window) : PostProcessingPass(window)
+engine::rendering::CopyPass::CopyPass(io::Window& window) : PostProcessingPass(window)
 {
     auto vertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
             #version 330 core
@@ -52,7 +53,7 @@ cubos::rendering::CopyPass::CopyPass(cubos::io::Window& window) : PostProcessing
     inputTexBP->bind(inputTexSampler);
 }
 
-void cubos::rendering::CopyPass::execute(const Renderer& renderer, gl::Texture2D input, gl::Framebuffer output) const
+void rendering::CopyPass::execute(const Renderer& renderer, Texture2D input, Framebuffer output) const
 {
     renderDevice.setShaderPipeline(pipeline);
     renderDevice.setFramebuffer(output);

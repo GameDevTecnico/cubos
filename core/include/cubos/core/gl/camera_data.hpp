@@ -1,10 +1,10 @@
-#ifndef CUBOS_GL_CAMERA_DATA_HPP
-#define CUBOS_GL_CAMERA_DATA_HPP
+#ifndef CUBOS_CORE_GL_CAMERA_DATA_HPP
+#define CUBOS_CORE_GL_CAMERA_DATA_HPP
 
-#include <cubos/gl/render_device.hpp>
+#include <cubos/core/gl/render_device.hpp>
 #include <glm/glm.hpp>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     struct CameraData
     {
@@ -14,6 +14,6 @@ namespace cubos::gl
 
         gl::Framebuffer target; ///< The target framebuffer which the camera should be used to draw into.
     };
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_CAMERA_DATA_HPP
+#endif // CUBOS_CORE_GL_CAMERA_DATA_HPP

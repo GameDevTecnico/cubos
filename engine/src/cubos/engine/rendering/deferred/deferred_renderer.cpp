@@ -1,13 +1,14 @@
-#include <cubos/gl/vertex.hpp>
-#include <cubos/gl/util.hpp>
-#include <cubos/rendering/deferred/deferred_renderer.hpp>
-#include <cubos/log.hpp>
+#include <cubos/core/gl/vertex.hpp>
+#include <cubos/core/gl/util.hpp>
+#include <cubos/engine/rendering/deferred/deferred_renderer.hpp>
+#include <cubos/core/log.hpp>
 
 #include <glm/gtx/quaternion.hpp>
 
-using namespace cubos;
-using namespace cubos::gl;
-using namespace cubos::rendering;
+using namespace cubos::core;
+using namespace cubos::core::gl;
+using namespace cubos::engine;
+using namespace cubos::engine::rendering;
 
 inline void DeferredRenderer::createShaderPipelines()
 {
@@ -308,8 +309,7 @@ DeferredRenderer::DeferredRenderer(io::Window& window) : Renderer(window)
     createRenderDeviceStates();
 }
 
-Renderer::ModelID DeferredRenderer::registerModel(const std::vector<cubos::gl::Vertex>& vertices,
-                                                  std::vector<uint32_t>& indices)
+Renderer::ModelID DeferredRenderer::registerModel(const std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
 {
     return registerModelInternal(vertices, indices, gBufferPipeline);
 }
