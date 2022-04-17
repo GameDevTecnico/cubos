@@ -38,8 +38,8 @@ void DoubleAxis::unsubscribeEvents()
 {
     if (std::holds_alternative<cubos::core::io::MouseAxis>(this->horizontalAxis))
     {
-        InputManager::unregisterMouseAxisCallback<DoubleAxis>(this, &DoubleAxis::handleHorizontalAxis,
-                                                              std::get<cubos::core::io::MouseAxis>(this->horizontalAxis));
+        InputManager::unregisterMouseAxisCallback<DoubleAxis>(
+            this, &DoubleAxis::handleHorizontalAxis, std::get<cubos::core::io::MouseAxis>(this->horizontalAxis));
     }
 
     if (std::holds_alternative<cubos::core::io::MouseAxis>(this->verticalAxis))

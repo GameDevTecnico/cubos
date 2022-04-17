@@ -87,7 +87,8 @@ void InputManager::init(cubos::core::io::Window* window)
     InputManager::window->onMouseMoved.registerCallback(handleMouseAxis);
 }
 
-cubos::core::Event<>::ID InputManager::registerKeyDownCallback(std::function<void(void)> callback, cubos::core::io::Key key)
+cubos::core::Event<>::ID InputManager::registerKeyDownCallback(std::function<void(void)> callback,
+                                                               cubos::core::io::Key key)
 {
     if (!InputManager::keyDownCallbacks.contains(key))
     {
@@ -106,7 +107,7 @@ void InputManager::unregisterKeyDownCallback(cubos::core::Event<>::ID callbackID
 }
 
 cubos::core::Event<>::ID InputManager::registerMouseButtonDownCallback(std::function<void(void)> callback,
-                                                                 cubos::core::io::MouseButton mouseButton)
+                                                                       cubos::core::io::MouseButton mouseButton)
 {
     if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
     {
@@ -115,7 +116,8 @@ cubos::core::Event<>::ID InputManager::registerMouseButtonDownCallback(std::func
     return InputManager::mouseButtonDownCallbacks[mouseButton]->registerCallback(callback);
 }
 
-void InputManager::unregisterMouseButtonDownCallback(cubos::core::Event<>::ID callbackID, cubos::core::io::MouseButton mouseButton)
+void InputManager::unregisterMouseButtonDownCallback(cubos::core::Event<>::ID callbackID,
+                                                     cubos::core::io::MouseButton mouseButton)
 {
     if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
     {
@@ -125,7 +127,7 @@ void InputManager::unregisterMouseButtonDownCallback(cubos::core::Event<>::ID ca
 }
 
 cubos::core::Event<float>::ID InputManager::registerMouseAxisCallback(std::function<void(float)> callback,
-                                                                cubos::core::io::MouseAxis mouseAxis)
+                                                                      cubos::core::io::MouseAxis mouseAxis)
 {
     if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
     {
@@ -134,7 +136,8 @@ cubos::core::Event<float>::ID InputManager::registerMouseAxisCallback(std::funct
     return InputManager::mouseAxisCallbacks[mouseAxis]->registerCallback(callback);
 }
 
-void InputManager::unregisterMouseAxisCallback(cubos::core::Event<float>::ID callbackID, cubos::core::io::MouseAxis mouseAxis)
+void InputManager::unregisterMouseAxisCallback(cubos::core::Event<float>::ID callbackID,
+                                               cubos::core::io::MouseAxis mouseAxis)
 {
     if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
     {
