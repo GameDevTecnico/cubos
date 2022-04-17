@@ -5,7 +5,7 @@
 
 void cubos::engine::init(int argc, char** argv)
 {
-  core::initializeLogger();
+    core::initializeLogger();
 }
 
 void cubos::engine::run()
