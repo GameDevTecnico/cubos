@@ -71,7 +71,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/memory/yaml_serializer.hpp"
     "include/cubos/memory/yaml_deserializer.hpp"
     "include/cubos/memory/serialization_map.hpp"
-
+    "include/cubos/memory/factory.hpp"
+    
     "include/cubos/data/file.hpp"
     "include/cubos/data/file_stream.hpp"
     "include/cubos/data/file_system.hpp"
