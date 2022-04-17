@@ -409,10 +409,10 @@ namespace cubos::core::gl
     struct Texture1DDesc
     {
         const void* data[CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                            ///< Number of mip levels.
-        size_t width;                                        ///< Texture width.
-        Usage usage;                                         ///< Texture usage mode.
-        TextureFormat format;                                ///< Texture format.
+        size_t mipLevelCount = 1;                                 ///< Number of mip levels.
+        size_t width;                                             ///< Texture width.
+        Usage usage;                                              ///< Texture usage mode.
+        TextureFormat format;                                     ///< Texture format.
     };
 
     /// 2D texture description.
