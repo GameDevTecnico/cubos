@@ -90,8 +90,8 @@ $(document).ready(function(){initNavTree('button__press_8hpp_source.html',''); i
 <div class="title">button_press.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_IO_BUTTON_PRESS_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_IO_BUTTON_PRESS_HPP</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_IO_BUTTON_PRESS_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_IO_BUTTON_PRESS_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/event.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/io/window.hpp&gt;</span></div>
@@ -105,43 +105,43 @@ $(document).ready(function(){initNavTree('button__press_8hpp_source.html',''); i
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>cubos::io</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>cubos::core::io</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1ButtonPress.html">   24</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1io_1_1ButtonPress.html">ButtonPress</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1io_1_1Source.html">Source</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1ButtonPress.html">   24</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1io_1_1ButtonPress.html">ButtonPress</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html">Source</a></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="classcubos_1_1io_1_1ButtonPress.html#a7ab50c7b3c45fe708cb4ab4f18f6fef0">ButtonPress</a>(cubos::io::Key key);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1ButtonPress.html#ac48451e10020c3c849469e561dc24105">ButtonPress</a>(cubos::core::io::Key key);</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="classcubos_1_1io_1_1ButtonPress.html#a7ab50c7b3c45fe708cb4ab4f18f6fef0">ButtonPress</a>(cubos::io::MouseButton button);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1ButtonPress.html#ac48451e10020c3c849469e561dc24105">ButtonPress</a>(cubos::core::io::MouseButton button);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1io_1_1ButtonPress.html#a7bed811276baf2671a10ee4dc565fd72">isTriggered</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1core_1_1io_1_1ButtonPress.html#ad6a6ebab699fcd902db704e3d5e71c41">isTriggered</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1ButtonPress.html#ae260f9b11681c69306260040efac0420">subscribeEvents</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1ButtonPress.html#a64517e79582d46eaa99009fdf71cec66">subscribeEvents</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1ButtonPress.html#a3786c630674c59b4066a4d8ebc73b0f0">unsubscribeEvents</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1ButtonPress.html#ab7a8d2d9fed63f26047c2d0a92ba4dae">unsubscribeEvents</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classcubos_1_1io_1_1Context.html">Context</a> <a class="code" href="classcubos_1_1io_1_1ButtonPress.html#a2b404f0a85c32b65c9fa99e549909158">createContext</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a> <a class="code" href="classcubos_1_1core_1_1io_1_1ButtonPress.html#a87d4e20f0e0f23d78c2c98488e7b34d0">createContext</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        std::variant&lt;cubos::io::Key, cubos::io::MouseButton&gt; button; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        std::variant&lt;cubos::core::io::Key, cubos::core::io::MouseButton&gt; button; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">bool</span> wasTriggered = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">void</span> handleButtonDown();</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    };</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <span class="comment">// namespace cubos::io</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // CUBOS_IO_BUTTON_PRESS_HPP</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_IO_BUTTON_PRESS_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasscubos_1_1io_1_1ButtonPress_html"><div class="ttname"><a href="classcubos_1_1io_1_1ButtonPress.html">cubos::io::ButtonPress</a></div><div class="ttdef"><b>Definition:</b> button_press.hpp:24</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1ButtonPress_html_a2b404f0a85c32b65c9fa99e549909158"><div class="ttname"><a href="classcubos_1_1io_1_1ButtonPress.html#a2b404f0a85c32b65c9fa99e549909158">cubos::io::ButtonPress::createContext</a></div><div class="ttdeci">Context createContext() override</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1ButtonPress_html_a3786c630674c59b4066a4d8ebc73b0f0"><div class="ttname"><a href="classcubos_1_1io_1_1ButtonPress.html#a3786c630674c59b4066a4d8ebc73b0f0">cubos::io::ButtonPress::unsubscribeEvents</a></div><div class="ttdeci">void unsubscribeEvents() override</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1ButtonPress_html_a7bed811276baf2671a10ee4dc565fd72"><div class="ttname"><a href="classcubos_1_1io_1_1ButtonPress.html#a7bed811276baf2671a10ee4dc565fd72">cubos::io::ButtonPress::isTriggered</a></div><div class="ttdeci">bool isTriggered() override</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1io_1_1Context.html">cubos::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1ButtonPress_html_ae260f9b11681c69306260040efac0420"><div class="ttname"><a href="classcubos_1_1io_1_1ButtonPress.html#ae260f9b11681c69306260040efac0420">cubos::io::ButtonPress::subscribeEvents</a></div><div class="ttdeci">void subscribeEvents() override</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1io_1_1Source.html">cubos::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:20</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1ButtonPress_html_a7ab50c7b3c45fe708cb4ab4f18f6fef0"><div class="ttname"><a href="classcubos_1_1io_1_1ButtonPress.html#a7ab50c7b3c45fe708cb4ab4f18f6fef0">cubos::io::ButtonPress::ButtonPress</a></div><div class="ttdeci">ButtonPress(cubos::io::Key key)</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html_ac48451e10020c3c849469e561dc24105"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html#ac48451e10020c3c849469e561dc24105">cubos::core::io::ButtonPress::ButtonPress</a></div><div class="ttdeci">ButtonPress(cubos::core::io::Key key)</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:20</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html_ab7a8d2d9fed63f26047c2d0a92ba4dae"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html#ab7a8d2d9fed63f26047c2d0a92ba4dae">cubos::core::io::ButtonPress::unsubscribeEvents</a></div><div class="ttdeci">void unsubscribeEvents() override</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html">cubos::core::io::ButtonPress</a></div><div class="ttdef"><b>Definition:</b> button_press.hpp:24</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html_a64517e79582d46eaa99009fdf71cec66"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html#a64517e79582d46eaa99009fdf71cec66">cubos::core::io::ButtonPress::subscribeEvents</a></div><div class="ttdeci">void subscribeEvents() override</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html_a87d4e20f0e0f23d78c2c98488e7b34d0"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html#a87d4e20f0e0f23d78c2c98488e7b34d0">cubos::core::io::ButtonPress::createContext</a></div><div class="ttdeci">Context createContext() override</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html_ad6a6ebab699fcd902db704e3d5e71c41"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html#ad6a6ebab699fcd902db704e3d5e71c41">cubos::core::io::ButtonPress::isTriggered</a></div><div class="ttdeci">bool isTriggered() override</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

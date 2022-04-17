@@ -1,6 +1,0 @@
-<map id="cubos::memory::Stream" name="cubos::memory::Stream">
-<area shape="rect" id="node1" title="Abstract class for memory streams." alt="" coords="262,5,439,32"/>
-<area shape="rect" id="node2" href="$classcubos_1_1data_1_1FileStream.html" title=" " alt="" coords="5,80,219,107"/>
-<area shape="rect" id="node3" href="$classcubos_1_1memory_1_1BufferStream.html" title="Implements a stream that writes to/reads from a buffer." alt="" coords="243,80,459,107"/>
-<area shape="rect" id="node4" href="$classcubos_1_1memory_1_1StdStream.html" title="Stream implementation for stdio." alt="" coords="483,80,682,107"/>
-</map>

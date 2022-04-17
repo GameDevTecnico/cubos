@@ -90,8 +90,8 @@ $(document).ready(function(){initNavTree('single__axis_8hpp_source.html',''); in
 <div class="title">single_axis.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_IO_SINGLE_AXIS_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_IO_SINGLE_AXIS_HPP</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_IO_SINGLE_AXIS_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_IO_SINGLE_AXIS_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/io/window.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/io/sources/source.hpp&gt;</span></div>
@@ -99,45 +99,45 @@ $(document).ready(function(){initNavTree('single__axis_8hpp_source.html',''); in
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;tuple&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>cubos::io</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>cubos::core::io</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1SingleAxis.html">   17</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1io_1_1SingleAxis.html">SingleAxis</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1io_1_1Source.html">Source</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1SingleAxis.html">   17</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1io_1_1SingleAxis.html">SingleAxis</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html">Source</a></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classcubos_1_1io_1_1SingleAxis.html#af9c9749a13919577b834202db3d19966">SingleAxis</a>(cubos::io::MouseAxis axis);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1SingleAxis.html#ad5375e34a25bbcfbf9f35a7c42312960">SingleAxis</a>(cubos::core::io::MouseAxis axis);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="classcubos_1_1io_1_1SingleAxis.html#af9c9749a13919577b834202db3d19966">SingleAxis</a>(cubos::io::Key negativeKey, cubos::io::Key positiveKey);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1SingleAxis.html#ad5375e34a25bbcfbf9f35a7c42312960">SingleAxis</a>(cubos::core::io::Key negativeKey, cubos::core::io::Key positiveKey);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1io_1_1SingleAxis.html#a0a481d70e41dbc0ddb6b50dd65494bd1">isTriggered</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1core_1_1io_1_1SingleAxis.html#abb5eb4f13489e247deb74dc13ea857c3">isTriggered</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1SingleAxis.html#a829a5466fe332b43ef7879a69c09b46c">subscribeEvents</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1SingleAxis.html#a36b99c7af01fd93a85a2e4c1a5d506b0">subscribeEvents</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1SingleAxis.html#ac409d256eb3eef8301cae772a2f70fc1">unsubscribeEvents</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1SingleAxis.html#a08ca5ca5e17b47acac8645d8d564b2d2">unsubscribeEvents</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classcubos_1_1io_1_1Context.html">Context</a> <a class="code" href="classcubos_1_1io_1_1SingleAxis.html#a8906f4cf56e23fee8b4f75d45ec2388b">createContext</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a> <a class="code" href="classcubos_1_1core_1_1io_1_1SingleAxis.html#a0712b7cf06e8eaf6b04bcbefdf4adef4">createContext</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        std::variant&lt;cubos::io::MouseAxis, std::tuple&lt;cubos::io::Key, cubos::io::Key&gt;&gt; inputs;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        std::variant&lt;cubos::core::io::MouseAxis, std::tuple&lt;cubos::core::io::Key, cubos::core::io::Key&gt;&gt; inputs;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">void</span> handleAxis(<span class="keywordtype">float</span> value);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">void</span> handlePositive();</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">void</span> handleNegative();</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">bool</span> wasTriggered;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">float</span> value;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;} <span class="comment">// namespace cubos::io</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif // CUBOS_IO_SINGLE_AXIS_HPP</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_IO_SINGLE_AXIS_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasscubos_1_1io_1_1SingleAxis_html"><div class="ttname"><a href="classcubos_1_1io_1_1SingleAxis.html">cubos::io::SingleAxis</a></div><div class="ttdef"><b>Definition:</b> single_axis.hpp:17</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1SingleAxis_html_ac409d256eb3eef8301cae772a2f70fc1"><div class="ttname"><a href="classcubos_1_1io_1_1SingleAxis.html#ac409d256eb3eef8301cae772a2f70fc1">cubos::io::SingleAxis::unsubscribeEvents</a></div><div class="ttdeci">void unsubscribeEvents() override</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1SingleAxis_html_a0a481d70e41dbc0ddb6b50dd65494bd1"><div class="ttname"><a href="classcubos_1_1io_1_1SingleAxis.html#a0a481d70e41dbc0ddb6b50dd65494bd1">cubos::io::SingleAxis::isTriggered</a></div><div class="ttdeci">bool isTriggered() override</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1io_1_1Context.html">cubos::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1SingleAxis_html_af9c9749a13919577b834202db3d19966"><div class="ttname"><a href="classcubos_1_1io_1_1SingleAxis.html#af9c9749a13919577b834202db3d19966">cubos::io::SingleAxis::SingleAxis</a></div><div class="ttdeci">SingleAxis(cubos::io::MouseAxis axis)</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1SingleAxis_html_a8906f4cf56e23fee8b4f75d45ec2388b"><div class="ttname"><a href="classcubos_1_1io_1_1SingleAxis.html#a8906f4cf56e23fee8b4f75d45ec2388b">cubos::io::SingleAxis::createContext</a></div><div class="ttdeci">Context createContext() override</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1io_1_1Source.html">cubos::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:20</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1SingleAxis_html_a829a5466fe332b43ef7879a69c09b46c"><div class="ttname"><a href="classcubos_1_1io_1_1SingleAxis.html#a829a5466fe332b43ef7879a69c09b46c">cubos::io::SingleAxis::subscribeEvents</a></div><div class="ttdeci">void subscribeEvents() override</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:20</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1SingleAxis_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1SingleAxis.html">cubos::core::io::SingleAxis</a></div><div class="ttdef"><b>Definition:</b> single_axis.hpp:17</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1SingleAxis_html_abb5eb4f13489e247deb74dc13ea857c3"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1SingleAxis.html#abb5eb4f13489e247deb74dc13ea857c3">cubos::core::io::SingleAxis::isTriggered</a></div><div class="ttdeci">bool isTriggered() override</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1SingleAxis_html_a0712b7cf06e8eaf6b04bcbefdf4adef4"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1SingleAxis.html#a0712b7cf06e8eaf6b04bcbefdf4adef4">cubos::core::io::SingleAxis::createContext</a></div><div class="ttdeci">Context createContext() override</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1SingleAxis_html_a08ca5ca5e17b47acac8645d8d564b2d2"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1SingleAxis.html#a08ca5ca5e17b47acac8645d8d564b2d2">cubos::core::io::SingleAxis::unsubscribeEvents</a></div><div class="ttdeci">void unsubscribeEvents() override</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1SingleAxis_html_ad5375e34a25bbcfbf9f35a7c42312960"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1SingleAxis.html#ad5375e34a25bbcfbf9f35a7c42312960">cubos::core::io::SingleAxis::SingleAxis</a></div><div class="ttdeci">SingleAxis(cubos::core::io::MouseAxis axis)</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1SingleAxis_html_a36b99c7af01fd93a85a2e4c1a5d506b0"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1SingleAxis.html#a36b99c7af01fd93a85a2e4c1a5d506b0">cubos::core::io::SingleAxis::subscribeEvents</a></div><div class="ttdeci">void subscribeEvents() override</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

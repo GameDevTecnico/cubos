@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['window_356',['Window',['../classcubos_1_1io_1_1Window.html',1,'cubos::io']]]
+  ['window_356',['Window',['../classcubos_1_1core_1_1io_1_1Window.html',1,'cubos::core::io']]]
 ];

@@ -90,41 +90,41 @@ $(document).ready(function(){initNavTree('context_8hpp_source.html',''); initRes
 <div class="title">context.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_IO_CONTEXT_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_IO_CONTEXT_HPP</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_IO_CONTEXT_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_IO_CONTEXT_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>cubos::io</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>cubos::core::io</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Context.html">   12</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1io_1_1Context.html">Context</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Context.html">   12</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classcubos_1_1io_1_1Context.html#a70633eadeb31c1d76a81ff8e239a5f0a">Context</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#ad295c2837fa34a3f318b88abf397b95c">Context</a>();</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classcubos_1_1io_1_1Context.html#a70633eadeb31c1d76a81ff8e239a5f0a">Context</a>(glm::vec2 value);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#ad295c2837fa34a3f318b88abf397b95c">Context</a>(glm::vec2 value);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classcubos_1_1io_1_1Context.html#a70633eadeb31c1d76a81ff8e239a5f0a">Context</a>(<span class="keywordtype">float</span> value);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#ad295c2837fa34a3f318b88abf397b95c">Context</a>(<span class="keywordtype">float</span> value);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T <a class="code" href="classcubos_1_1io_1_1Context.html#aa795104d0eaa59dca22576b256e68e02">getValue</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#a8cffaf363e2905b300ac430048893f46">getValue</a>();</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        std::variant&lt;float, glm::vec2&gt; value;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    };</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Context.html#aa795104d0eaa59dca22576b256e68e02">   35</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T <a class="code" href="classcubos_1_1io_1_1Context.html#aa795104d0eaa59dca22576b256e68e02">Context::getValue</a>()</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Context.html#a8cffaf363e2905b300ac430048893f46">   35</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#a8cffaf363e2905b300ac430048893f46">Context::getValue</a>()</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> std::get&lt;T&gt;(this-&gt;value);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;} <span class="comment">// namespace cubos::io</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif // CUBOS_IO_CONTEXT_HPP</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_IO_CONTEXT_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasscubos_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1io_1_1Context.html">cubos::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Context_html_a70633eadeb31c1d76a81ff8e239a5f0a"><div class="ttname"><a href="classcubos_1_1io_1_1Context.html#a70633eadeb31c1d76a81ff8e239a5f0a">cubos::io::Context::Context</a></div><div class="ttdeci">Context()</div><div class="ttdoc">Empty Context constructor.</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Context_html_aa795104d0eaa59dca22576b256e68e02"><div class="ttname"><a href="classcubos_1_1io_1_1Context.html#aa795104d0eaa59dca22576b256e68e02">cubos::io::Context::getValue</a></div><div class="ttdeci">T getValue()</div><div class="ttdef"><b>Definition:</b> context.hpp:35</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html_a8cffaf363e2905b300ac430048893f46"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html#a8cffaf363e2905b300ac430048893f46">cubos::core::io::Context::getValue</a></div><div class="ttdeci">T getValue()</div><div class="ttdef"><b>Definition:</b> context.hpp:35</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html_ad295c2837fa34a3f318b88abf397b95c"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html#ad295c2837fa34a3f318b88abf397b95c">cubos::core::io::Context::Context</a></div><div class="ttdeci">Context()</div><div class="ttdoc">Empty Context constructor.</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

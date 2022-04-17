@@ -90,48 +90,48 @@ $(document).ready(function(){initNavTree('action_8hpp_source.html',''); initResi
 <div class="title">action.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_IO_ACTION_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_IO_ACTION_HPP</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_IO_ACTION_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_IO_ACTION_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/io/context.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/io/sources/source.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>cubos::io</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>cubos::core::io</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Action.html">   18</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1io_1_1Action.html">Action</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Action.html">   18</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classcubos_1_1io_1_1Action.html#ad58f5d7a1a5f464f39b7abf3d772aff1">Action</a>(std::string name);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#a0a5f99776d5a3ba22620917a35df42f9">Action</a>(std::string name);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        std::string <a class="code" href="classcubos_1_1io_1_1Action.html#a72cb1bc4a0cacb21080a05f33128a8d3">getName</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        std::string <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#a7405b36cf25900b6ade351b4fcbca4c1">getName</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1Action.html#afde6a8ecd2c39d501f808af25d59b241">addSource</a>(<a class="code" href="classcubos_1_1io_1_1Source.html">Source</a>* source);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#a07bb075b0f4dd5933b0af64520bd843d">addSource</a>(<a class="code" href="classcubos_1_1core_1_1io_1_1Source.html">Source</a>* source);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1Action.html#aa20cc1c579676f4442cbac40d81553ef">addBinding</a>(std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classcubos_1_1io_1_1Context.html">Context</a>)&gt; binding);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#ae41533fe966dae6bdbeefb468ec1c8ab">addBinding</a>(std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a>)&gt; binding);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1Action.html#aab3197d96b8a1426968abda096e43ee6">processSources</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#adf2e7b2e247db375ed9303c54c8a3d21">processSources</a>();</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        std::string name;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::list&lt;Source*&gt; inputSources;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        std::list&lt;std::function&lt;void(<a class="code" href="classcubos_1_1io_1_1Context.html">Context</a>)&gt;&gt; functionBindings;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        std::list&lt;std::function&lt;void(<a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a>)&gt;&gt; functionBindings;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">bool</span> enable;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    };</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;} <span class="comment">// namespace cubos::io</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif // CUBOS_IO_ACTION_HPP</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_IO_ACTION_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasscubos_1_1io_1_1Action_html"><div class="ttname"><a href="classcubos_1_1io_1_1Action.html">cubos::io::Action</a></div><div class="ttdef"><b>Definition:</b> action.hpp:18</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Action_html_afde6a8ecd2c39d501f808af25d59b241"><div class="ttname"><a href="classcubos_1_1io_1_1Action.html#afde6a8ecd2c39d501f808af25d59b241">cubos::io::Action::addSource</a></div><div class="ttdeci">void addSource(Source *source)</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Action_html_ad58f5d7a1a5f464f39b7abf3d772aff1"><div class="ttname"><a href="classcubos_1_1io_1_1Action.html#ad58f5d7a1a5f464f39b7abf3d772aff1">cubos::io::Action::Action</a></div><div class="ttdeci">Action(std::string name)</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1io_1_1Context.html">cubos::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Action_html_aa20cc1c579676f4442cbac40d81553ef"><div class="ttname"><a href="classcubos_1_1io_1_1Action.html#aa20cc1c579676f4442cbac40d81553ef">cubos::io::Action::addBinding</a></div><div class="ttdeci">void addBinding(std::function&lt; void(Context)&gt; binding)</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Action_html_a72cb1bc4a0cacb21080a05f33128a8d3"><div class="ttname"><a href="classcubos_1_1io_1_1Action.html#a72cb1bc4a0cacb21080a05f33128a8d3">cubos::io::Action::getName</a></div><div class="ttdeci">std::string getName() const</div><div class="ttdoc">Gets the name of the action.</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Action_html_aab3197d96b8a1426968abda096e43ee6"><div class="ttname"><a href="classcubos_1_1io_1_1Action.html#aab3197d96b8a1426968abda096e43ee6">cubos::io::Action::processSources</a></div><div class="ttdeci">void processSources()</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1io_1_1Source.html">cubos::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:20</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_a07bb075b0f4dd5933b0af64520bd843d"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#a07bb075b0f4dd5933b0af64520bd843d">cubos::core::io::Action::addSource</a></div><div class="ttdeci">void addSource(Source *source)</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html">cubos::core::io::Action</a></div><div class="ttdef"><b>Definition:</b> action.hpp:18</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:20</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_ae41533fe966dae6bdbeefb468ec1c8ab"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#ae41533fe966dae6bdbeefb468ec1c8ab">cubos::core::io::Action::addBinding</a></div><div class="ttdeci">void addBinding(std::function&lt; void(Context)&gt; binding)</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_a7405b36cf25900b6ade351b4fcbca4c1"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#a7405b36cf25900b6ade351b4fcbca4c1">cubos::core::io::Action::getName</a></div><div class="ttdeci">std::string getName() const</div><div class="ttdoc">Gets the name of the action.</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_adf2e7b2e247db375ed9303c54c8a3d21"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#adf2e7b2e247db375ed9303c54c8a3d21">cubos::core::io::Action::processSources</a></div><div class="ttdeci">void processSources()</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_a0a5f99776d5a3ba22620917a35df42f9"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#a0a5f99776d5a3ba22620917a35df42f9">cubos::core::io::Action::Action</a></div><div class="ttdeci">Action(std::string name)</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

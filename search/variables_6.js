@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['global_540',['global',['../classcubos_1_1Settings.html#acae09d8feb132237dc8f6c628da1d922',1,'cubos::Settings']]]
+  ['global_540',['global',['../classcubos_1_1core_1_1Settings.html#a7fcbd112c8660be1e6d58fd1369f8b01',1,'cubos::core::Settings']]]
 ];

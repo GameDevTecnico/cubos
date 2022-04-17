@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['backface_514',['backFace',['../structcubos_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html#acd1da8e542a2c0ef4bb353f67af1836f',1,'cubos::gl::DepthStencilStateDesc::Stencil']]],
-  ['blendenabled_515',['blendEnabled',['../structcubos_1_1gl_1_1BlendStateDesc.html#a8369d443dae477c3863ae6c58c4b1d4e',1,'cubos::gl::BlendStateDesc']]],
-  ['bordercolor_516',['borderColor',['../structcubos_1_1gl_1_1SamplerDesc.html#a04a39459855129bdd5c771469a4562f6',1,'cubos::gl::SamplerDesc']]],
-  ['buffer_517',['buffer',['../structcubos_1_1gl_1_1VertexElement.html#a2eda578c3796388fc3e396ea4166c26f',1,'cubos::gl::VertexElement']]],
-  ['buffers_518',['buffers',['../structcubos_1_1gl_1_1VertexArrayDesc.html#afc209c6163743e02df71eb9a672ee6bc',1,'cubos::gl::VertexArrayDesc']]]
+  ['backface_514',['backFace',['../structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html#af00b2d75c977344f792c52093da202bd',1,'cubos::core::gl::DepthStencilStateDesc::Stencil']]],
+  ['blendenabled_515',['blendEnabled',['../structcubos_1_1core_1_1gl_1_1BlendStateDesc.html#ada455e7e0dd287caf5a27faff224fda8',1,'cubos::core::gl::BlendStateDesc']]],
+  ['bordercolor_516',['borderColor',['../structcubos_1_1core_1_1gl_1_1SamplerDesc.html#ae3284b7f74cb19870d711bd2cfbb2cdb',1,'cubos::core::gl::SamplerDesc']]],
+  ['buffer_517',['buffer',['../structcubos_1_1core_1_1gl_1_1VertexElement.html#a2ae1e9d0fce1d5903adc86b374bf7d9e',1,'cubos::core::gl::VertexElement']]],
+  ['buffers_518',['buffers',['../structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#aaadf8586143337887cc8868b76f49e6c',1,'cubos::core::gl::VertexArrayDesc']]]
 ];

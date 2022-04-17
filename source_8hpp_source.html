@@ -90,8 +90,8 @@ $(document).ready(function(){initNavTree('source_8hpp_source.html',''); initResi
 <div class="title">source.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_IO_SOURCE_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_IO_SOURCE_HPP</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_IO_SOURCE_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_IO_SOURCE_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/event.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/io/window.hpp&gt;</span></div>
@@ -103,31 +103,31 @@ $(document).ready(function(){initNavTree('source_8hpp_source.html',''); initResi
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>cubos::io</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>cubos::core::io</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">class </span>Context;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classcubos_1_1io_1_1Source.html">   20</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1io_1_1Source.html">Source</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html">   20</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1io_1_1Source.html">Source</a></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1Source.html#a32dffedbbdf60b8ee8ec11a5227fe1e2">subscribeEvents</a>() = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#ab3f702a92bcf814a2bf3643ede5dcfa3">subscribeEvents</a>() = 0;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1io_1_1Source.html#a313dfdcee21a0c914a1b4fea5342457e">unsubscribeEvents</a>() = 0;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#a6fad17326287ade49236b61c052382ba">unsubscribeEvents</a>() = 0;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1io_1_1Source.html#a3c835fd8e46fc80438cfe36f5b545a5c">isTriggered</a>() = 0;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#ab0f2e08e9c5547fd5ce71f1612cfd240">isTriggered</a>() = 0;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classcubos_1_1io_1_1Context.html">Context</a> <a class="code" href="classcubos_1_1io_1_1Source.html#a120a5abbc6cabe695049099b41b748b5">createContext</a>() = 0;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#af731307cda8dab95732e600cec28d6a6">createContext</a>() = 0;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    };</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;} <span class="comment">// namespace cubos::io</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif // CUBOS_IO_SOURCE_HPP</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_IO_SOURCE_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasscubos_1_1io_1_1Source_html_a3c835fd8e46fc80438cfe36f5b545a5c"><div class="ttname"><a href="classcubos_1_1io_1_1Source.html#a3c835fd8e46fc80438cfe36f5b545a5c">cubos::io::Source::isTriggered</a></div><div class="ttdeci">virtual bool isTriggered()=0</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Source_html_a120a5abbc6cabe695049099b41b748b5"><div class="ttname"><a href="classcubos_1_1io_1_1Source.html#a120a5abbc6cabe695049099b41b748b5">cubos::io::Source::createContext</a></div><div class="ttdeci">virtual Context createContext()=0</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Source_html_a313dfdcee21a0c914a1b4fea5342457e"><div class="ttname"><a href="classcubos_1_1io_1_1Source.html#a313dfdcee21a0c914a1b4fea5342457e">cubos::io::Source::unsubscribeEvents</a></div><div class="ttdeci">virtual void unsubscribeEvents()=0</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1io_1_1Context.html">cubos::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Source_html_a32dffedbbdf60b8ee8ec11a5227fe1e2"><div class="ttname"><a href="classcubos_1_1io_1_1Source.html#a32dffedbbdf60b8ee8ec11a5227fe1e2">cubos::io::Source::subscribeEvents</a></div><div class="ttdeci">virtual void subscribeEvents()=0</div></div>
-<div class="ttc" id="aclasscubos_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1io_1_1Source.html">cubos::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:20</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html_a6fad17326287ade49236b61c052382ba"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html#a6fad17326287ade49236b61c052382ba">cubos::core::io::Source::unsubscribeEvents</a></div><div class="ttdeci">virtual void unsubscribeEvents()=0</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:20</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html_af731307cda8dab95732e600cec28d6a6"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html#af731307cda8dab95732e600cec28d6a6">cubos::core::io::Source::createContext</a></div><div class="ttdeci">virtual Context createContext()=0</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html_ab0f2e08e9c5547fd5ce71f1612cfd240"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html#ab0f2e08e9c5547fd5ce71f1612cfd240">cubos::core::io::Source::isTriggered</a></div><div class="ttdeci">virtual bool isTriggered()=0</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html_ab3f702a92bcf814a2bf3643ede5dcfa3"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html#ab3f702a92bcf814a2bf3643ede5dcfa3">cubos::core::io::Source::subscribeEvents</a></div><div class="ttdeci">virtual void subscribeEvents()=0</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

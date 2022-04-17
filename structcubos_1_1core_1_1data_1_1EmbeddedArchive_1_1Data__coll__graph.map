@@ -1,0 +1,4 @@
+<map id="cubos::core::data::EmbeddedArchive::Data" name="cubos::core::data::EmbeddedArchive::Data">
+<area shape="rect" id="node1" title="Structure of the data embedded in the executable." alt="" coords="5,124,184,165"/>
+<area shape="rect" id="node2" href="$structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html" title="Represents a file entry in the embedded archive." alt="" coords="5,5,184,61"/>
+</map>

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['addressu_510',['addressU',['../structcubos_1_1gl_1_1SamplerDesc.html#ab3852f1b4bdba6d8539d80e32e0c7070',1,'cubos::gl::SamplerDesc']]],
-  ['addressv_511',['addressV',['../structcubos_1_1gl_1_1SamplerDesc.html#a2ccb38ea9f232f9c718a4a4df4254883',1,'cubos::gl::SamplerDesc']]],
-  ['addressw_512',['addressW',['../structcubos_1_1gl_1_1SamplerDesc.html#a56b2bfe761652ab96e32b5ef42600b8b',1,'cubos::gl::SamplerDesc']]],
-  ['alpha_513',['alpha',['../structcubos_1_1gl_1_1BlendStateDesc.html#ad6dd89770783f52880b473cc0fbeb147',1,'cubos::gl::BlendStateDesc']]]
+  ['addressu_510',['addressU',['../structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a4d944747ddd0983631859dff193c9f3f',1,'cubos::core::gl::SamplerDesc']]],
+  ['addressv_511',['addressV',['../structcubos_1_1core_1_1gl_1_1SamplerDesc.html#af184642f4abaa5f78f2ea781d7986732',1,'cubos::core::gl::SamplerDesc']]],
+  ['addressw_512',['addressW',['../structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a4ca6426e6c6b71c046bf82b2c3bf90bd',1,'cubos::core::gl::SamplerDesc']]],
+  ['alpha_513',['alpha',['../structcubos_1_1core_1_1gl_1_1BlendStateDesc.html#ab02cf5412c206056d9c92979876e17c7',1,'cubos::core::gl::BlendStateDesc']]]
 ];

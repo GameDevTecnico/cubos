@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['keydowncallbacks_545',['keyDownCallbacks',['../classcubos_1_1io_1_1InputManager.html#a52249e22b6706d06d7644da30c7fd238',1,'cubos::io::InputManager']]],
-  ['keyupcallbacks_546',['keyUpCallbacks',['../classcubos_1_1io_1_1InputManager.html#aae7c71709c599a653394d5587c262580',1,'cubos::io::InputManager']]]
+  ['keydowncallbacks_545',['keyDownCallbacks',['../classcubos_1_1core_1_1io_1_1InputManager.html#a7837cce9b28f914ba4e7c51afffc365f',1,'cubos::core::io::InputManager']]],
+  ['keyupcallbacks_546',['keyUpCallbacks',['../classcubos_1_1core_1_1io_1_1InputManager.html#a7bbd2f431af13a214de0c11280f632dd',1,'cubos::core::io::InputManager']]]
 ];
