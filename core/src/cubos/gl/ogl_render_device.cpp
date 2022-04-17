@@ -8,8 +8,8 @@
 #include <list>
 #include <string>
 
-using namespace cubos;
-using namespace cubos::gl;
+using namespace cubos::core;
+using namespace cubos::core::gl;
 
 // Converts a texture format into the necessary GL parameters
 static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, GLenum& format, GLenum& type)
@@ -796,7 +796,7 @@ class OGLVertexArray : public impl::VertexArray
 public:
     OGLVertexArray(GLuint id, const VertexBuffer* buffers) : id(id)
     {
-        for (int i = 0; i < CUBOS_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
+        for (int i = 0; i < CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
             this->buffers[i] = buffers[i];
     }
 
@@ -805,7 +805,7 @@ public:
         glDeleteVertexArrays(1, &this->id);
     }
 
-    VertexBuffer buffers[CUBOS_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];
+    VertexBuffer buffers[CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];
     GLuint id;
 };
 
@@ -1090,10 +1090,10 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer must have at least one render target");
         return nullptr;
     }
-    else if (desc.targetCount > CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT)
+    else if (desc.targetCount > CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT)
     {
         logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer can only have at most {} render targets",
-                 CUBOS_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT);
+                 CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT);
         return nullptr;
     }
 
@@ -1858,7 +1858,7 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
     glBindVertexArray(id);
 
     // Link elements
-    assert(desc.elementCount <= CUBOS_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT);
+    assert(desc.elementCount <= CUBOS_CORE_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT);
     for (int i = 0; i < desc.elementCount; ++i)
     {
         // Get buffer

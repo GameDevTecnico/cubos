@@ -3,21 +3,21 @@
 #include <memory>
 #include <variant>
 
-using namespace cubos::io;
+using namespace cubos::core::io;
 
 std::map<std::string, std::shared_ptr<Action>> InputManager::actions = std::map<std::string, std::shared_ptr<Action>>();
-std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> InputManager::keyDownCallbacks =
-    std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>>();
-std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>> InputManager::keyUpCallbacks =
-    std::map<cubos::io::Key, std::shared_ptr<cubos::Event<>>>();
-std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> InputManager::mouseButtonDownCallbacks =
-    std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>>();
-std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>> InputManager::mouseButtonUpCallbacks =
-    std::map<cubos::io::MouseButton, std::shared_ptr<cubos::Event<>>>();
-std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>> InputManager::mouseAxisCallbacks =
-    std::map<cubos::io::MouseAxis, std::shared_ptr<cubos::Event<float>>>();
+std::map<cubos::core::io::Key, std::shared_ptr<cubos::core::Event<>>> InputManager::keyDownCallbacks =
+    std::map<cubos::core::io::Key, std::shared_ptr<cubos::core::Event<>>>();
+std::map<cubos::core::io::Key, std::shared_ptr<cubos::core::Event<>>> InputManager::keyUpCallbacks =
+    std::map<cubos::core::io::Key, std::shared_ptr<cubos::core::Event<>>>();
+std::map<cubos::core::io::MouseButton, std::shared_ptr<cubos::core::Event<>>> InputManager::mouseButtonDownCallbacks =
+    std::map<cubos::core::io::MouseButton, std::shared_ptr<cubos::core::Event<>>>();
+std::map<cubos::core::io::MouseButton, std::shared_ptr<cubos::core::Event<>>> InputManager::mouseButtonUpCallbacks =
+    std::map<cubos::core::io::MouseButton, std::shared_ptr<cubos::core::Event<>>>();
+std::map<cubos::core::io::MouseAxis, std::shared_ptr<cubos::core::Event<float>>> InputManager::mouseAxisCallbacks =
+    std::map<cubos::core::io::MouseAxis, std::shared_ptr<cubos::core::Event<float>>>();
 
-cubos::io::Window* InputManager::window = nullptr;
+cubos::core::io::Window* InputManager::window = nullptr;
 
 std::shared_ptr<Action> InputManager::createAction(std::string name)
 {
@@ -48,7 +48,7 @@ void InputManager::processActions()
     }
 }
 
-void InputManager::handleKeyDown(cubos::io::Key key)
+void InputManager::handleKeyDown(cubos::core::io::Key key)
 {
     if (keyDownCallbacks.contains(key))
     {
@@ -56,7 +56,7 @@ void InputManager::handleKeyDown(cubos::io::Key key)
     }
 };
 
-void InputManager::handleMouseButtonDown(cubos::io::MouseButton mouseButton)
+void InputManager::handleMouseButtonDown(cubos::core::io::MouseButton mouseButton)
 {
     if (mouseButtonDownCallbacks.contains(mouseButton))
     {
@@ -66,18 +66,18 @@ void InputManager::handleMouseButtonDown(cubos::io::MouseButton mouseButton)
 
 void InputManager::handleMouseAxis(glm::ivec2 coordinates)
 {
-    if (mouseAxisCallbacks.contains(cubos::io::MouseAxis::X))
+    if (mouseAxisCallbacks.contains(cubos::core::io::MouseAxis::X))
     {
-        mouseAxisCallbacks[cubos::io::MouseAxis::X]->fire(float(coordinates.x));
+        mouseAxisCallbacks[cubos::core::io::MouseAxis::X]->fire(float(coordinates.x));
     }
 
-    if (mouseAxisCallbacks.contains(cubos::io::MouseAxis::Y))
+    if (mouseAxisCallbacks.contains(cubos::core::io::MouseAxis::Y))
     {
-        mouseAxisCallbacks[cubos::io::MouseAxis::Y]->fire(float(coordinates.y));
+        mouseAxisCallbacks[cubos::core::io::MouseAxis::Y]->fire(float(coordinates.y));
     }
 }
 
-void InputManager::init(cubos::io::Window* window)
+void InputManager::init(cubos::core::io::Window* window)
 {
     InputManager::window = window;
     InputManager::window->onKeyDown.registerCallback(handleKeyDown);
@@ -87,16 +87,17 @@ void InputManager::init(cubos::io::Window* window)
     InputManager::window->onMouseMoved.registerCallback(handleMouseAxis);
 }
 
-cubos::Event<>::ID InputManager::registerKeyDownCallback(std::function<void(void)> callback, cubos::io::Key key)
+cubos::core::Event<>::ID InputManager::registerKeyDownCallback(std::function<void(void)> callback,
+                                                               cubos::core::io::Key key)
 {
     if (!InputManager::keyDownCallbacks.contains(key))
     {
-        InputManager::keyDownCallbacks[key] = std::make_shared<cubos::Event<>>();
+        InputManager::keyDownCallbacks[key] = std::make_shared<cubos::core::Event<>>();
     }
     return InputManager::keyDownCallbacks[key]->registerCallback(callback);
 }
 
-void InputManager::unregisterKeyDownCallback(cubos::Event<>::ID callbackID, cubos::io::Key key)
+void InputManager::unregisterKeyDownCallback(cubos::core::Event<>::ID callbackID, cubos::core::io::Key key)
 {
     if (!InputManager::keyDownCallbacks.contains(key))
     {
@@ -105,17 +106,18 @@ void InputManager::unregisterKeyDownCallback(cubos::Event<>::ID callbackID, cubo
     InputManager::keyDownCallbacks[key]->unregisterCallback(callbackID);
 }
 
-cubos::Event<>::ID InputManager::registerMouseButtonDownCallback(std::function<void(void)> callback,
-                                                                 cubos::io::MouseButton mouseButton)
+cubos::core::Event<>::ID InputManager::registerMouseButtonDownCallback(std::function<void(void)> callback,
+                                                                       cubos::core::io::MouseButton mouseButton)
 {
     if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
     {
-        InputManager::mouseButtonDownCallbacks[mouseButton] = std::make_shared<cubos::Event<>>();
+        InputManager::mouseButtonDownCallbacks[mouseButton] = std::make_shared<cubos::core::Event<>>();
     }
     return InputManager::mouseButtonDownCallbacks[mouseButton]->registerCallback(callback);
 }
 
-void InputManager::unregisterMouseButtonDownCallback(cubos::Event<>::ID callbackID, cubos::io::MouseButton mouseButton)
+void InputManager::unregisterMouseButtonDownCallback(cubos::core::Event<>::ID callbackID,
+                                                     cubos::core::io::MouseButton mouseButton)
 {
     if (!InputManager::mouseButtonDownCallbacks.contains(mouseButton))
     {
@@ -124,17 +126,18 @@ void InputManager::unregisterMouseButtonDownCallback(cubos::Event<>::ID callback
     InputManager::mouseButtonDownCallbacks[mouseButton]->unregisterCallback(callbackID);
 }
 
-cubos::Event<float>::ID InputManager::registerMouseAxisCallback(std::function<void(float)> callback,
-                                                                cubos::io::MouseAxis mouseAxis)
+cubos::core::Event<float>::ID InputManager::registerMouseAxisCallback(std::function<void(float)> callback,
+                                                                      cubos::core::io::MouseAxis mouseAxis)
 {
     if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
     {
-        InputManager::mouseAxisCallbacks[mouseAxis] = std::make_shared<cubos::Event<float>>();
+        InputManager::mouseAxisCallbacks[mouseAxis] = std::make_shared<cubos::core::Event<float>>();
     }
     return InputManager::mouseAxisCallbacks[mouseAxis]->registerCallback(callback);
 }
 
-void InputManager::unregisterMouseAxisCallback(cubos::Event<float>::ID callbackID, cubos::io::MouseAxis mouseAxis)
+void InputManager::unregisterMouseAxisCallback(cubos::core::Event<float>::ID callbackID,
+                                               cubos::core::io::MouseAxis mouseAxis)
 {
     if (!InputManager::mouseAxisCallbacks.contains(mouseAxis))
     {

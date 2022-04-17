@@ -1,12 +1,12 @@
-#ifndef CUBOS_SETTINGS_HPP
-#define CUBOS_SETTINGS_HPP
+#ifndef CUBOS_CORE_SETTINGS_HPP
+#define CUBOS_CORE_SETTINGS_HPP
 #include <memory>
 #include <string>
 #include <unordered_map>
 #include <cubos/memory/serializer.hpp>
 #include <cubos/memory/deserializer.hpp>
 
-namespace cubos
+namespace cubos::core
 {
     /// Class used to manage settings.
     class Settings
@@ -63,16 +63,16 @@ namespace cubos
 
         /// Serializes the settings.
         /// @param serializer The serializer to use.
-        void serialize(cubos::memory::Serializer& serializer) const;
+        void serialize(memory::Serializer& serializer) const;
 
         /// Deserializes the settings.
         /// @param deserializer The deserializer to use.
-        void deserialize(cubos::memory::Deserializer& deserializer);
+        void deserialize(memory::Deserializer& deserializer);
 
     private:
         std::unordered_map<std::string, std::string> values;
     };
 
-} // namespace cubos
+} // namespace cubos::core
 
-#endif // CUBOS_SETTINGS_HPP
+#endif // CUBOS_CORE_SETTINGS_HPP

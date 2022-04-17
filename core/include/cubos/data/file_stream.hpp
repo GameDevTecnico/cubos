@@ -1,11 +1,11 @@
-#ifndef CUBOS_DATA_FILE_STREAM_HPP
-#define CUBOS_DATA_FILE_STREAM_HPP
+#ifndef CUBOS_CORE_DATA_FILE_STREAM_HPP
+#define CUBOS_CORE_DATA_FILE_STREAM_HPP
 
 #include <cubos/data/file.hpp>
 #include <cubos/memory/stream.hpp>
 #include <cubos/log.hpp>
 
-namespace cubos::data
+namespace cubos::core::data
 {
     /// Represents a stream of data from/to a file.
     /// Acts as a wrapper around a specific file stream, while maintaining a reference to the file so that it
@@ -82,6 +82,6 @@ namespace cubos::data
     {
         return stream.peek();
     }
-} // namespace cubos::data
+} // namespace cubos::core::data
 
-#endif // CUBOS_DATA_FILE_STREAM_HPP
+#endif // CUBOS_CORE_DATA_FILE_STREAM_HPP

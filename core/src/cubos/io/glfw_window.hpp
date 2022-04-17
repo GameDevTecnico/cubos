@@ -1,5 +1,5 @@
-#ifndef CUBOS_IO_GLFW_WINDOW_HPP
-#define CUBOS_IO_GLFW_WINDOW_HPP
+#ifndef CUBOS_CORE_IO_GLFW_WINDOW_HPP
+#define CUBOS_CORE_IO_GLFW_WINDOW_HPP
 
 #include <glm/glm.hpp>
 
@@ -12,10 +12,10 @@
 
 #include <cubos/io/window.hpp>
 
-namespace cubos::io
+namespace cubos::core::io
 {
     /// Wrapper around a window object, handles input events and creates the render device
-    class GLFWWindow : public cubos::io::Window
+    class GLFWWindow : public cubos::core::io::Window
     {
     public:
         GLFWWindow(); // TODO: pass settings here?
@@ -47,6 +47,6 @@ namespace cubos::io
         gl::OGLRenderDevice* renderDevice;
 #endif
     };
-} // namespace cubos::io
+} // namespace cubos::core::io
 
-#endif // CUBOS_IO_GLFW_WINDOW_HPP
+#endif // CUBOS_CORE_IO_GLFW_WINDOW_HPP

@@ -1,11 +1,11 @@
-#ifndef CUBOS_EVENT_HPP
-#define CUBOS_EVENT_HPP
+#ifndef CUBOS_CORE_EVENT_HPP
+#define CUBOS_CORE_EVENT_HPP
 
 #include <functional>
 #include <vector>
 #include <mutex>
 
-namespace cubos
+namespace cubos::core
 {
     /// Class used to easily implement the observer pattern.
     /// Example usage:
@@ -155,6 +155,6 @@ namespace cubos
         (static_cast<TObj*>(this->obj)->*callback)(args...);
     }
 
-} // namespace cubos
+} // namespace cubos::core
 
-#endif // CUBOS_EVENT_HPP
+#endif // CUBOS_CORE_EVENT_HPP

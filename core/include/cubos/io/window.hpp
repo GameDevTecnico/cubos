@@ -1,17 +1,17 @@
-#ifndef CUBOS_IO_WINDOW_HPP
-#define CUBOS_IO_WINDOW_HPP
+#ifndef CUBOS_CORE_IO_WINDOW_HPP
+#define CUBOS_CORE_IO_WINDOW_HPP
 
 #include <cubos/event.hpp>
 #include <cubos/io/keyboard.hpp>
 
 #include <glm/glm.hpp>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     class RenderDevice;
 }
 
-namespace cubos::io
+namespace cubos::core::io
 {
     /// Mouse button codes enum.
     enum class MouseButton
@@ -95,6 +95,6 @@ namespace cubos::io
         /// Invoked with the new framebuffer size when it changes size.
         Event<glm::ivec2> onFramebufferResize;
     };
-} // namespace cubos::io
+} // namespace cubos::core::io
 
-#endif // CUBOS_IO_WINDOW_HPP
+#endif // CUBOS_CORE_IO_WINDOW_HPP

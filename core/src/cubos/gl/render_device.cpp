@@ -1,6 +1,6 @@
 #include <cubos/gl/render_device.hpp>
 
-using namespace cubos::gl;
+using namespace cubos::core::gl;
 
 FramebufferDesc::TargetType FramebufferDesc::FramebufferTarget::getTargetType() const
 {

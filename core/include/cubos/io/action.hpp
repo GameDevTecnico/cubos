@@ -1,12 +1,12 @@
-#ifndef CUBOS_IO_ACTION_HPP
-#define CUBOS_IO_ACTION_HPP
+#ifndef CUBOS_CORE_IO_ACTION_HPP
+#define CUBOS_CORE_IO_ACTION_HPP
 
 #include <cubos/io/context.hpp>
 #include <cubos/io/sources/source.hpp>
 
 #include <list>
 
-namespace cubos::io
+namespace cubos::core::io
 {
     /// Class used to map between inputSources and the functions they should call when triggered
     /// Example usage:
@@ -43,6 +43,6 @@ namespace cubos::io
         std::list<std::function<void(Context)>> functionBindings;
         bool enable;
     };
-} // namespace cubos::io
+} // namespace cubos::core::io
 
-#endif // CUBOS_IO_ACTION_HPP
+#endif // CUBOS_CORE_IO_ACTION_HPP

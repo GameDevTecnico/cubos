@@ -5,11 +5,11 @@
 #include <fstream>
 #include <filesystem>
 
-using namespace cubos::data;
+using namespace cubos::core::data;
 
 TEST(Cubos_Std_Archive_Tests, Read_Directory)
 {
-    using namespace cubos::data;
+    using namespace cubos::core::data;
 
     // Create a temporary directory.
     std::filesystem::path tempDir = std::filesystem::temp_directory_path() / "cubos_std_archive_tests";

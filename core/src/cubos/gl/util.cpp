@@ -1,7 +1,7 @@
 #include <cubos/gl/util.hpp>
 
-using namespace cubos;
-using namespace cubos::gl;
+using namespace cubos::core;
+using namespace cubos::core::gl;
 
 void gl::generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va,
                             IndexBuffer& ib)

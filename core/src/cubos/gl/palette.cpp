@@ -1,6 +1,6 @@
 #include <cubos/gl/palette.hpp>
 
-using namespace cubos::gl;
+using namespace cubos::core::gl;
 
 Palette::Palette(std::vector<Material>&& materials) : materials(std::move(materials))
 {

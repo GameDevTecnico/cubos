@@ -1,7 +1,7 @@
-#ifndef CUBOS_IO_KEYBOARD_HPP
-#define CUBOS_IO_KEYBOARD_HPP
+#ifndef CUBOS_CORE_IO_KEYBOARD_HPP
+#define CUBOS_CORE_IO_KEYBOARD_HPP
 
-namespace cubos::io
+namespace cubos::core::io
 {
     /// Keyboard key codes enum.
     enum class Key
@@ -109,6 +109,6 @@ namespace cubos::io
 
         Count
     };
-} // namespace cubos::io
+} // namespace cubos::core::io
 
-#endif // CUBOS_IO_KEYBOARD_HPP
+#endif // CUBOS_CORE_IO_KEYBOARD_HPP

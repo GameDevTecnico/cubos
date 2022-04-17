@@ -3,7 +3,7 @@
 #include <cubos/memory/yaml_serializer.hpp>
 #include <cubos/memory/serialization_map.hpp>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 struct Human
 {
@@ -216,7 +216,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_GLM)
 
 TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom_Serializable)
 {
-    using namespace cubos::memory;
+    using namespace cubos::core::memory;
 
     char buf[4096];
     auto stream = BufferStream(buf, sizeof(buf));

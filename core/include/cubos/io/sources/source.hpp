@@ -1,5 +1,5 @@
-#ifndef CUBOS_IO_SOURCE_HPP
-#define CUBOS_IO_SOURCE_HPP
+#ifndef CUBOS_CORE_IO_SOURCE_HPP
+#define CUBOS_CORE_IO_SOURCE_HPP
 
 #include <cubos/event.hpp>
 #include <cubos/io/window.hpp>
@@ -11,7 +11,7 @@
 #include <list>
 #include <glm/glm.hpp>
 
-namespace cubos::io
+namespace cubos::core::io
 {
     class Context;
 
@@ -36,5 +36,5 @@ namespace cubos::io
         /// @return context created by this source
         virtual Context createContext() = 0;
     };
-} // namespace cubos::io
-#endif // CUBOS_IO_SOURCE_HPP
+} // namespace cubos::core::io
+#endif // CUBOS_CORE_IO_SOURCE_HPP

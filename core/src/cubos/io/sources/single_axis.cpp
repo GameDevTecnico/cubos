@@ -4,54 +4,54 @@
 #include <tuple>
 #include <variant>
 
-using namespace cubos::io;
+using namespace cubos::core::io;
 
-SingleAxis::SingleAxis(cubos::io::MouseAxis axis)
+SingleAxis::SingleAxis(cubos::core::io::MouseAxis axis)
 {
     this->inputs = axis;
 }
-SingleAxis::SingleAxis(cubos::io::Key negativeKey, cubos::io::Key positiveKey)
+SingleAxis::SingleAxis(cubos::core::io::Key negativeKey, cubos::core::io::Key positiveKey)
 {
     this->inputs = std::make_tuple(negativeKey, positiveKey);
 }
 
 void SingleAxis::subscribeEvents()
 {
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->inputs))
+    if (std::holds_alternative<cubos::core::io::MouseAxis>(this->inputs))
     {
         InputManager::registerMouseAxisCallback<SingleAxis>(this, &SingleAxis::handleAxis,
-                                                            std::get<cubos::io::MouseAxis>(this->inputs));
+                                                            std::get<cubos::core::io::MouseAxis>(this->inputs));
     }
-    else if (std::holds_alternative<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs))
+    else if (std::holds_alternative<std::tuple<cubos::core::io::Key, cubos::core::io::Key>>(this->inputs))
     {
 
         InputManager::registerKeyDownCallback<SingleAxis>(
             this, &SingleAxis::handleNegative,
-            std::get<0>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
+            std::get<0>(std::get<std::tuple<cubos::core::io::Key, cubos::core::io::Key>>(this->inputs)));
 
         InputManager::registerKeyDownCallback<SingleAxis>(
             this, &SingleAxis::handlePositive,
-            std::get<1>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
+            std::get<1>(std::get<std::tuple<cubos::core::io::Key, cubos::core::io::Key>>(this->inputs)));
     }
 }
 
 void SingleAxis::unsubscribeEvents()
 {
-    if (std::holds_alternative<cubos::io::MouseAxis>(this->inputs))
+    if (std::holds_alternative<cubos::core::io::MouseAxis>(this->inputs))
     {
         InputManager::unregisterMouseAxisCallback<SingleAxis>(this, &SingleAxis::handleAxis,
-                                                              std::get<cubos::io::MouseAxis>(this->inputs));
+                                                              std::get<cubos::core::io::MouseAxis>(this->inputs));
     }
-    else if (std::holds_alternative<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs))
+    else if (std::holds_alternative<std::tuple<cubos::core::io::Key, cubos::core::io::Key>>(this->inputs))
     {
 
         InputManager::unregisterKeyDownCallback<SingleAxis>(
             this, &SingleAxis::handleNegative,
-            std::get<0>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
+            std::get<0>(std::get<std::tuple<cubos::core::io::Key, cubos::core::io::Key>>(this->inputs)));
 
         InputManager::unregisterKeyDownCallback<SingleAxis>(
             this, &SingleAxis::handlePositive,
-            std::get<1>(std::get<std::tuple<cubos::io::Key, cubos::io::Key>>(this->inputs)));
+            std::get<1>(std::get<std::tuple<cubos::core::io::Key, cubos::core::io::Key>>(this->inputs)));
     }
 }
 

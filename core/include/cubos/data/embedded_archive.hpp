@@ -1,12 +1,12 @@
-#ifndef CUBOS_DATA_EMBEDDED_ARCHIVE_HPP
-#define CUBOS_DATA_EMBEDDED_ARCHIVE_HPP
+#ifndef CUBOS_CORE_DATA_EMBEDDED_ARCHIVE_HPP
+#define CUBOS_CORE_DATA_EMBEDDED_ARCHIVE_HPP
 
 #include <cubos/data/archive.hpp>
 
 #include <vector>
 #include <map>
 
-namespace cubos::data
+namespace cubos::core::data
 {
     /// Archive implementation used to load data embedded in the executable.
     class EmbeddedArchive : public Archive
@@ -59,6 +59,6 @@ namespace cubos::data
 
         const Data* data; ///< The embedded archive data.
     };
-} // namespace cubos::data
+} // namespace cubos::core::data
 
-#endif // CUBOS_DATA_EMBEDDED_ARCHIVE_HPP
+#endif // CUBOS_CORE_DATA_EMBEDDED_ARCHIVE_HPP

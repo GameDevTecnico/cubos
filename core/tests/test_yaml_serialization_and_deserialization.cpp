@@ -7,7 +7,7 @@
 
 #include <random>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 struct Human
 {

@@ -1,7 +1,7 @@
-#ifndef CUBOS_CUBOS_HPP
-#define CUBOS_CUBOS_HPP
+#ifndef CUBOS_ENGINE_CUBOS_HPP
+#define CUBOS_ENGINE_CUBOS_HPP
 
-namespace cubos
+namespace cubos::engine
 {
     /// Initializes the game engine.
     /// @param argc The number of arguments passed to the program.
@@ -10,6 +10,6 @@ namespace cubos
 
     /// Runs the game engine.
     void run();
-} // namespace cubos
+} // namespace cubos::engine
 
-#endif // CUBOS_CUBOS_HPP
+#endif // CUBOS_ENGINE_CUBOS_HPP

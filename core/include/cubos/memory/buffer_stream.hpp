@@ -1,9 +1,9 @@
-#ifndef CUBOS_MEMORY_BUFFER_STREAM_HPP
-#define CUBOS_MEMORY_BUFFER_STREAM_HPP
+#ifndef CUBOS_CORE_MEMORY_BUFFER_STREAM_HPP
+#define CUBOS_CORE_MEMORY_BUFFER_STREAM_HPP
 
 #include <cubos/memory/stream.hpp>
 
-namespace cubos::memory
+namespace cubos::core::memory
 {
     /// Implements a stream that writes to/reads from a buffer.
     class BufferStream : public Stream
@@ -33,6 +33,6 @@ namespace cubos::memory
         bool readOnly;   ///< Whether the buffer is read-only.
         bool reachedEof; ///< Whether the end of the buffer has been reached.
     };
-} // namespace cubos::memory
+} // namespace cubos::core::memory
 
-#endif // CUBOS_MEMORY_BUFFER_STREAM_HPP
+#endif // CUBOS_CORE_MEMORY_BUFFER_STREAM_HPP

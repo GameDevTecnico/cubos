@@ -1,12 +1,12 @@
-#ifndef CUBOS_MEMORY_YAML_SERIALIZER_HPP
-#define CUBOS_MEMORY_YAML_SERIALIZER_HPP
+#ifndef CUBOS_CORE_MEMORY_YAML_SERIALIZER_HPP
+#define CUBOS_CORE_MEMORY_YAML_SERIALIZER_HPP
 
 #include <cubos/memory/serializer.hpp>
 
 #include <yaml-cpp/emitter.h>
 #include <stack>
 
-namespace cubos::memory
+namespace cubos::core::memory
 {
     /// Implementation of the abstract Serializer class for serializing to YAML.
     class YAMLSerializer : public Serializer
@@ -52,6 +52,6 @@ namespace cubos::memory
         YAML::Emitter emitter; ///< The YAML emitter.
         size_t head;           ///< The number of characters already flushed.
     };
-} // namespace cubos::memory
+} // namespace cubos::core::memory
 
-#endif // CUBOS_MEMORY_YAML_SERIALIZER_HPP
+#endif // CUBOS_CORE_MEMORY_YAML_SERIALIZER_HPP

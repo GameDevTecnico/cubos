@@ -1,5 +1,5 @@
-#ifndef CUBOS_GL_DEBUG_HPP
-#define CUBOS_GL_DEBUG_HPP
+#ifndef CUBOS_CORE_GL_DEBUG_HPP
+#define CUBOS_CORE_GL_DEBUG_HPP
 
 #include <list>
 #include <mutex>
@@ -9,7 +9,7 @@
 
 #include <cubos/gl/render_device.hpp>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
 
     /// This class includes static methods to draw basic objects on screen for debugging purposes.
@@ -94,6 +94,6 @@ namespace cubos::gl
 
         static std::mutex debugDrawMutex;
     };
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_DEBUG_HPP
+#endif // CUBOS_CORE_GL_DEBUG_HPP

@@ -6,8 +6,8 @@
 
 #include <glad/glad.h>
 
-using namespace cubos;
-using namespace cubos::io;
+using namespace cubos::core;
+using namespace cubos::core::io;
 
 #ifdef WITH_GLFW
 

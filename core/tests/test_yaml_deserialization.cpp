@@ -3,7 +3,7 @@
 #include <cubos/memory/yaml_deserializer.hpp>
 #include <cubos/memory/serialization_map.hpp>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 struct Human
 {

@@ -1,6 +1,6 @@
 #include <cubos/memory/std_stream.hpp>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 StdStream::StdStream(FILE* file, bool close)
 {

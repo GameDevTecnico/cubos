@@ -1,5 +1,5 @@
-#ifndef CUBOS_IO_DOUBLE_AXIS_HPP
-#define CUBOS_IO_DOUBLE_AXIS_HPP
+#ifndef CUBOS_CORE_IO_DOUBLE_AXIS_HPP
+#define CUBOS_CORE_IO_DOUBLE_AXIS_HPP
 
 #include <cubos/event.hpp>
 #include <cubos/io/window.hpp>
@@ -13,7 +13,7 @@
 #include <list>
 #include <glm/glm.hpp>
 
-namespace cubos::io
+namespace cubos::core::io
 {
     /// DoubleAxis is used to bind position change in two axis to the gameplay logic.
     /// The bindings are only invoken when change in the position occurs.
@@ -26,7 +26,7 @@ namespace cubos::io
         /// Creates a Double Axis Source associated to two mouse axis
         /// @param horizontalAxis the horizontal axis assoaiated to this Double Axis source
         /// @param verticalAxis the vertical axis assoaiated to this Double Axis source
-        DoubleAxis(cubos::io::MouseAxis horizontalAxis, cubos::io::MouseAxis verticalAxis);
+        DoubleAxis(cubos::core::io::MouseAxis horizontalAxis, cubos::core::io::MouseAxis verticalAxis);
 
         /// Checks if the position in the axis associated with this Double Axis source has been changed since last
         /// checked
@@ -49,12 +49,12 @@ namespace cubos::io
         bool wasTriggered = false;
         float xPos;
         float yPos;
-        using Axis = std::variant<cubos::io::MouseAxis>;
+        using Axis = std::variant<cubos::core::io::MouseAxis>;
         Axis horizontalAxis;
         Axis verticalAxis;
         void handleHorizontalAxis(float xPos);
         void handleVerticalAxis(float yPos);
     };
-} // namespace cubos::io
+} // namespace cubos::core::io
 
-#endif // CUBOS_IO_DOUBLE_AXIS_HPP
+#endif // CUBOS_CORE_IO_DOUBLE_AXIS_HPP

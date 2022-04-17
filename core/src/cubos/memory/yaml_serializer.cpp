@@ -2,7 +2,7 @@
 
 constexpr const char* ANONYMOUS_FIELD_NAME = "anonymous";
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 YAMLSerializer::YAMLSerializer(Stream& stream) : Serializer(stream)
 {

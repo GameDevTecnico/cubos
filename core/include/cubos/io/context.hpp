@@ -1,10 +1,10 @@
-#ifndef CUBOS_IO_CONTEXT_HPP
-#define CUBOS_IO_CONTEXT_HPP
+#ifndef CUBOS_CORE_IO_CONTEXT_HPP
+#define CUBOS_CORE_IO_CONTEXT_HPP
 
 #include <glm/glm.hpp>
 #include <variant>
 
-namespace cubos::io
+namespace cubos::core::io
 {
     /// Context is used to pass parameters created by input
     /// Actions that are relevant to the gameplay logic.
@@ -36,6 +36,6 @@ namespace cubos::io
     {
         return std::get<T>(this->value);
     }
-} // namespace cubos::io
+} // namespace cubos::core::io
 
-#endif // CUBOS_IO_CONTEXT_HPP
+#endif // CUBOS_CORE_IO_CONTEXT_HPP

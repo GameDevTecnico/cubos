@@ -5,7 +5,7 @@
 #include <cubos/gl/render_device.hpp>
 #include <cubos/gl/debug.hpp>
 
-using namespace cubos;
+using namespace cubos::core;
 
 void debugTest(io::Key key)
 {

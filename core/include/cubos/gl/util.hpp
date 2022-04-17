@@ -1,10 +1,10 @@
 
-#ifndef CUBOS_GL_UTIL_HPP
-#define CUBOS_GL_UTIL_HPP
+#ifndef CUBOS_CORE_GL_UTIL_HPP
+#define CUBOS_CORE_GL_UTIL_HPP
 
 #include <cubos/gl/render_device.hpp>
 
-namespace cubos::gl
+namespace cubos::core::gl
 {
     /// @brief Creates the resources required to draw a quad that fills the screen and returns its VertexArray and
     /// IndexBuffer.
@@ -18,6 +18,6 @@ namespace cubos::gl
     /// @param ib Reference in which the quad's IndexBuffer will be stored.
     void generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va,
                             IndexBuffer& ib);
-} // namespace cubos::gl
+} // namespace cubos::core::gl
 
-#endif // CUBOS_GL_UTIL_HPP
+#endif // CUBOS_CORE_GL_UTIL_HPP

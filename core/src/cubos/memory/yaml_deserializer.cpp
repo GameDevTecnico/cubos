@@ -1,6 +1,6 @@
 #include <cubos/memory/yaml_deserializer.hpp>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 YAMLDeserializer::YAMLDeserializer(Stream& stream) : Deserializer(stream)
 {

@@ -1,5 +1,5 @@
-#ifndef CUBOS_DATA_FILE_HPP
-#define CUBOS_DATA_FILE_HPP
+#ifndef CUBOS_CORE_DATA_FILE_HPP
+#define CUBOS_CORE_DATA_FILE_HPP
 
 #include <cubos/memory/stream.hpp>
 
@@ -7,7 +7,7 @@
 #include <memory>
 #include <mutex>
 
-namespace cubos::data
+namespace cubos::core::data
 {
     class Archive;
     class FileSystem;
@@ -167,6 +167,6 @@ namespace cubos::data
 
         std::mutex mutex; ///< The mutex used to synchronize changing properties of this file.
     };
-} // namespace cubos::data
+} // namespace cubos::core::data
 
-#endif // CUBOS_DATA_FILE_HPP
+#endif // CUBOS_CORE_DATA_FILE_HPP

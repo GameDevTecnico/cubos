@@ -1,6 +1,6 @@
 #include <cubos/memory/serializer.hpp>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 Serializer::Serializer(Stream& stream) : stream(stream)
 {

@@ -1,9 +1,9 @@
-#ifndef CUBOS_DATA_ARCHIVE_HPP
-#define CUBOS_DATA_ARCHIVE_HPP
+#ifndef CUBOS_CORE_DATA_ARCHIVE_HPP
+#define CUBOS_CORE_DATA_ARCHIVE_HPP
 
 #include <cubos/data/file.hpp>
 
-namespace cubos::data
+namespace cubos::core::data
 {
     /// Represents an archive in the virtual file system.
     /// This class is meant to only be used internally by the virtual file system.
@@ -66,6 +66,6 @@ namespace cubos::data
         /// @return The file stream, or nullptr if the file could not be opened.
         virtual std::unique_ptr<memory::Stream> open(File::Handle file, File::OpenMode mode) = 0;
     };
-} // namespace cubos::data
+} // namespace cubos::core::data
 
-#endif // CUBOS_DATA_ARCHIVE_HPP
+#endif // CUBOS_CORE_DATA_ARCHIVE_HPP

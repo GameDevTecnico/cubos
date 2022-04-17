@@ -3,8 +3,8 @@
 
 int main()
 {
-    using namespace cubos;
-    using namespace cubos::data;
+    using namespace cubos::core;
+    using namespace cubos::core::data;
 
     // The name passed to the constructor of the embedded archive must be the same as the name used when embedding the
     // data. In this case, since the name wasn't specified, the name of the root directory was used.
@@ -39,7 +39,7 @@ int main()
 
 #include <cubos/data/embedded_archive.hpp>
 
-using namespace cubos::data;
+using namespace cubos::core::data;
 
 static const uint8_t fileData3[] = {
     0x62,

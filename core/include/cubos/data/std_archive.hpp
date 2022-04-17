@@ -1,12 +1,12 @@
-#ifndef CUBOS_DATA_STD_ARCHIVE_HPP
-#define CUBOS_DATA_STD_ARCHIVE_HPP
+#ifndef CUBOS_CORE_DATA_STD_ARCHIVE_HPP
+#define CUBOS_CORE_DATA_STD_ARCHIVE_HPP
 
 #include <cubos/data/archive.hpp>
 
 #include <unordered_map>
 #include <filesystem>
 
-namespace cubos::data
+namespace cubos::core::data
 {
     /// Archive implementation which represents a file/directory in the OS file system, implemented with the standard
     /// library.
@@ -49,6 +49,6 @@ namespace cubos::data
         std::unordered_map<size_t, FileInfo> files; ///< Maps file identifiers to file info.
         size_t nextId;                              ///< The next identifier to assign to a file.
     };
-} // namespace cubos::data
+} // namespace cubos::core::data
 
-#endif // CUBOS_DATA_ARCHIVE_HPP
+#endif // CUBOS_CORE_DATA_ARCHIVE_HPP

@@ -1,7 +1,7 @@
 #include <cubos/gl/grid.hpp>
 #include <cubos/log.hpp>
 
-using namespace cubos::gl;
+using namespace cubos::core::gl;
 
 Grid::Grid(const glm::ivec3& size)
 {
