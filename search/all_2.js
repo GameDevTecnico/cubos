@@ -2,7 +2,7 @@ var searchData=
 [
   ['callback_22',['Callback',['../classcubos_1_1core_1_1Event.html#aaee6ae7458121be28a547245a6817751',1,'cubos::core::Event']]],
   ['child_23',['child',['../structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#aecb9205c91ab559d2ac560655e9a8308',1,'cubos::core::data::EmbeddedArchive::Data::Entry']]],
-  ['clear_24',['clear',['../classcubos_1_1core_1_1memory_1_1SerializationMap.html#ac841ea6debc7d6786201a10fd10adc63',1,'cubos::core::memory::SerializationMap::clear()'],['../classcubos_1_1core_1_1Settings.html#a7c7e51718d2f6c2b196757d64a1fd259',1,'cubos::core::Settings::clear()']]],
+  ['clear_24',['clear',['../classcubos_1_1core_1_1gl_1_1Grid.html#a43865eff4f14ffe47f16f468967ff93e',1,'cubos::core::gl::Grid::clear()'],['../classcubos_1_1core_1_1memory_1_1SerializationMap.html#ac841ea6debc7d6786201a10fd10adc63',1,'cubos::core::memory::SerializationMap::clear()'],['../classcubos_1_1core_1_1Settings.html#a7c7e51718d2f6c2b196757d64a1fd259',1,'cubos::core::Settings::clear()']]],
   ['clearcolor_25',['clearColor',['../classcubos_1_1core_1_1gl_1_1RenderDevice.html#aa5821fee68de56be7c1dcb67ee5877a6',1,'cubos::core::gl::RenderDevice']]],
   ['cleardepth_26',['clearDepth',['../classcubos_1_1core_1_1gl_1_1RenderDevice.html#a5014d0ea90013108af6e1419bbb09877',1,'cubos::core::gl::RenderDevice']]],
   ['clearstencil_27',['clearStencil',['../classcubos_1_1core_1_1gl_1_1RenderDevice.html#af090cc99ed3ff832055c1f9c536a6496',1,'cubos::core::gl::RenderDevice']]],

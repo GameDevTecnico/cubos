@@ -107,29 +107,34 @@ $(document).ready(function(){initNavTree('grid_8hpp_source.html',''); initResiza
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="comment">// Default constructor.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>();</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>(<span class="keyword">const</span> glm::ivec3&amp; size);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>(<span class="keyword">const</span> glm::uvec3&amp; size);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>(<span class="keyword">const</span> glm::ivec3&amp; size, <span class="keyword">const</span> std::vector&lt;uint16_t&gt;&amp; indices);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>(<span class="keyword">const</span> glm::uvec3&amp; size, <span class="keyword">const</span> std::vector&lt;uint16_t&gt;&amp; indices);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#a4be6aa45b55006a782fe2a366a243ef4">setSize</a>(<span class="keyword">const</span> glm::uvec3&amp; size);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">const</span> glm::uvec3&amp; <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#ad6f92fd6646593addece930bed9b20fb">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>&amp;&amp;);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        ~<a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#a4be6aa45b55006a782fe2a366a243ef4">setSize</a>(<span class="keyword">const</span> glm::uvec3&amp; size);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#acc83d2b66777e77ba2b6a725c2f9004e">set</a>(<span class="keyword">const</span> glm::ivec3&amp; position, uint16_t mat);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        uint16_t <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#a4f86c62f435581ec581ea8a9fa001016">get</a>(<span class="keyword">const</span> glm::ivec3&amp; position) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#a321cc2cebccee1c3df5121281e6cb716">serialize</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a>&amp; serializer) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#a7dd55328cc6759b79d36503db3d9bf87">deserialize</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a>&amp; deserializer);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        glm::uvec3 size;               </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        std::vector&lt;uint16_t&gt; indices; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">const</span> glm::uvec3&amp; <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#ad6f92fd6646593addece930bed9b20fb">getSize</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#a43865eff4f14ffe47f16f468967ff93e">clear</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#acc83d2b66777e77ba2b6a725c2f9004e">set</a>(<span class="keyword">const</span> glm::ivec3&amp; position, uint16_t mat);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        uint16_t <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#a4f86c62f435581ec581ea8a9fa001016">get</a>(<span class="keyword">const</span> glm::ivec3&amp; position) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#a321cc2cebccee1c3df5121281e6cb716">serialize</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a>&amp; serializer) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html#a7dd55328cc6759b79d36503db3d9bf87">deserialize</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a>&amp; deserializer);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_GL_GRID_HPP</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        glm::uvec3 size;               </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        std::vector&lt;uint16_t&gt; indices; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    };</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_GL_GRID_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html_a321cc2cebccee1c3df5121281e6cb716"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html#a321cc2cebccee1c3df5121281e6cb716">cubos::core::gl::Grid::serialize</a></div><div class="ttdeci">void serialize(memory::Serializer &amp;serializer) const</div></div>
@@ -138,6 +143,7 @@ $(document).ready(function(){initNavTree('grid_8hpp_source.html',''); initResiza
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html_a4be6aa45b55006a782fe2a366a243ef4"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html#a4be6aa45b55006a782fe2a366a243ef4">cubos::core::gl::Grid::setSize</a></div><div class="ttdeci">void setSize(const glm::uvec3 &amp;size)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html_a4f86c62f435581ec581ea8a9fa001016"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html#a4f86c62f435581ec581ea8a9fa001016">cubos::core::gl::Grid::get</a></div><div class="ttdeci">uint16_t get(const glm::ivec3 &amp;position) const</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html">cubos::core::gl::Grid</a></div><div class="ttdef"><b>Definition:</b> grid.hpp:14</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html_a43865eff4f14ffe47f16f468967ff93e"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html#a43865eff4f14ffe47f16f468967ff93e">cubos::core::gl::Grid::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Clears the grid.</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html_acc83d2b66777e77ba2b6a725c2f9004e"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html#acc83d2b66777e77ba2b6a725c2f9004e">cubos::core::gl::Grid::set</a></div><div class="ttdeci">void set(const glm::ivec3 &amp;position, uint16_t mat)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Deserializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Deserializer.html">cubos::core::memory::Deserializer</a></div><div class="ttdoc">Abstract class for deserializing data.</div><div class="ttdef"><b>Definition:</b> deserializer.hpp:40</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html_a7dd55328cc6759b79d36503db3d9bf87"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html#a7dd55328cc6759b79d36503db3d9bf87">cubos::core::gl::Grid::deserialize</a></div><div class="ttdeci">void deserialize(memory::Deserializer &amp;deserializer)</div></div>

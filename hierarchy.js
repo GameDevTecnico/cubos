@@ -43,6 +43,7 @@ var hierarchy =
     [ "cubos::core::io::InputManager", "classcubos_1_1core_1_1io_1_1InputManager.html", null ],
     [ "cubos::core::gl::Material", "structcubos_1_1core_1_1gl_1_1Material.html", null ],
     [ "cubos::core::gl::Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
+    [ "cubos::core::data::QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", null ],
     [ "cubos::core::gl::impl::RasterState", "classcubos_1_1core_1_1gl_1_1impl_1_1RasterState.html", null ],
     [ "cubos::core::gl::RasterStateDesc", "structcubos_1_1core_1_1gl_1_1RasterStateDesc.html", null ],
     [ "cubos::core::gl::RenderDevice", "classcubos_1_1core_1_1gl_1_1RenderDevice.html", null ],

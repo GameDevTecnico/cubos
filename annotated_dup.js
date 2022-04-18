@@ -8,6 +8,7 @@ var annotated_dup =
           [ "File", "classcubos_1_1core_1_1data_1_1File.html", "classcubos_1_1core_1_1data_1_1File" ],
           [ "FileStream", "classcubos_1_1core_1_1data_1_1FileStream.html", "classcubos_1_1core_1_1data_1_1FileStream" ],
           [ "FileSystem", "classcubos_1_1core_1_1data_1_1FileSystem.html", "classcubos_1_1core_1_1data_1_1FileSystem" ],
+          [ "QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", "structcubos_1_1core_1_1data_1_1QBMatrix" ],
           [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", "classcubos_1_1core_1_1data_1_1STDArchive" ]
         ] ],
         [ "gl", null, [
