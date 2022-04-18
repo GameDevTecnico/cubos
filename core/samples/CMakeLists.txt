@@ -8,6 +8,7 @@ set(CORE_SAMPLES_SOURCES
     "serialization.cpp"
     "input_manager.cpp"
     "embedded_archive.cpp"
+    "ecs.cpp"
 )
 
 # For each sample file, create a target named after the file but without the
