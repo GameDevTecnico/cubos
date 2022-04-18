@@ -1,5 +1,5 @@
-#ifndef ECS_VEC_STORAGE_HPP
-#define ECS_VEC_STORAGE_HPP
+#ifndef CUBOS_CORE_ECS_VEC_STORAGE_HPP
+#define CUBOS_CORE_ECS_VEC_STORAGE_HPP
 
 #include <cubos/ecs/storage.hpp>
 

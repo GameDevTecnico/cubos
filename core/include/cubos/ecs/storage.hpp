@@ -1,5 +1,5 @@
-#ifndef ECS_STORAGE_HPP
-#define ECS_STORAGE_HPP
+#ifndef CUBOS_CORE_ECS_STORAGE_HPP
+#define CUBOS_CORE_ECS_STORAGE_HPP
 
 #include <unordered_map>
 #include <vector>
