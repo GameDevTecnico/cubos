@@ -6,7 +6,7 @@
 
 #include <cubos/ecs/storage.hpp>
 
-namespace cubos::ecs
+namespace cubos::core::ecs
 {
 
     /// @brief World is used as a container for all of the entity and component data.
@@ -280,6 +280,6 @@ namespace cubos::ecs
         Iterator it(world, world->nextEntityId, &mask);
         return it;
     }
-} // namespace cubos::ecs
+} // namespace cubos::core::ecs
 
 #endif // CUBOS_ECS_WORLD_HPP

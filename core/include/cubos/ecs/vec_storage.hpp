@@ -3,7 +3,7 @@
 
 #include <cubos/ecs/storage.hpp>
 
-namespace cubos::ecs
+namespace cubos::core::ecs
 {
 
     /// @brief VecStorage is a Storage implementation that uses a STL vector, this is best
@@ -46,6 +46,6 @@ namespace cubos::ecs
         new (&data[index]) T;
     }
 
-} // namespace cubos::ecs
+} // namespace cubos::core::ecs
 
 #endif // ECS_VEC_STORAGE_HPP

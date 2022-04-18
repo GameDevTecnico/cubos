@@ -6,7 +6,7 @@
 #include <cubos/ecs/map_storage.hpp>
 #include <cubos/ecs/null_storage.hpp>
 
-using namespace cubos;
+using namespace cubos::core;
 
 struct Player
 {

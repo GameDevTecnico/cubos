@@ -3,7 +3,7 @@
 
 #include <cubos/ecs/storage.hpp>
 
-namespace cubos::ecs
+namespace cubos::core::ecs
 {
 
     /// @brief NullStorage is a Storage implementation that doesn't keep any data, made for components
@@ -34,6 +34,6 @@ namespace cubos::ecs
     {
     }
 
-} // namespace cubos::ecs
+} // namespace cubos::core::ecs
 
 #endif // ECS_NULL_STORAGE_HPP

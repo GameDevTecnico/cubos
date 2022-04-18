@@ -1,6 +1,6 @@
 #include <cubos/ecs/world.hpp>
 
-using namespace cubos::ecs;
+using namespace cubos::core::ecs;
 
 World::~World()
 {

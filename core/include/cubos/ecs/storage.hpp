@@ -5,7 +5,7 @@
 #include <vector>
 #include <cstdint>
 
-namespace cubos::ecs
+namespace cubos::core::ecs
 {
 
     /// IStorage is an abstract parent class for all storages.
@@ -37,6 +37,6 @@ namespace cubos::ecs
         virtual void erase(uint32_t index) = 0;
     };
 
-} // namespace cubos::ecs
+} // namespace cubos::core::ecs
 
 #endif // ECS_STORAGE_HPP

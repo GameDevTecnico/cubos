@@ -3,7 +3,7 @@
 
 #include <cubos/ecs/storage.hpp>
 
-namespace cubos::ecs
+namespace cubos::core::ecs
 {
 
     /// @brief MapStorage is a Storage implementation that uses a STL unordered_map, this is best
@@ -36,6 +36,6 @@ namespace cubos::ecs
         data.erase(index);
     }
 
-} // namespace cubos::ecs
+} // namespace cubos::core::ecs
 
 #endif // ECS_MAP_STORAGE_HPP
