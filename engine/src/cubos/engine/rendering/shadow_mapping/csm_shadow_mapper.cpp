@@ -1,9 +1,10 @@
-#include <cubos/rendering/shadow_mapping/csm_shadow_mapper.hpp>
-#include <fmt/printf.h>
+#include <cubos/engine/rendering/shadow_mapping/csm_shadow_mapper.hpp>
+#include "fmt/printf.h"
 
-using namespace cubos;
-using namespace cubos::gl;
-using namespace cubos::rendering;
+using namespace cubos::core;
+using namespace cubos::core::gl;
+using namespace cubos::engine;
+using namespace cubos::engine::rendering;
 
 inline void CSMShadowMapper::setupFramebuffers()
 {

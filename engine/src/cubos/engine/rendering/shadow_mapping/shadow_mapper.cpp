@@ -1,10 +1,11 @@
-#include <cubos/rendering/shadow_mapping/shadow_mapper.hpp>
+#include <cubos/engine/rendering/shadow_mapping/shadow_mapper.hpp>
 
-#include <glm/gtx/quaternion.hpp>
+#include "glm/gtx/quaternion.hpp"
 
-using namespace cubos;
-using namespace cubos::gl;
-using namespace cubos::rendering;
+using namespace cubos::core;
+using namespace cubos::core::gl;
+using namespace cubos::engine;
+using namespace cubos::engine::rendering;
 
 ShadowMapper::ShadowMapper(RenderDevice& renderDevice) : renderDevice(renderDevice)
 {

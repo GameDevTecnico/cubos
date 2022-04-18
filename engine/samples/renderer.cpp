@@ -4,7 +4,7 @@
 #include "cubos/core/gl/vertex.hpp"
 #include <cubos/core/gl/palette.hpp>
 #include <cubos/engine/rendering/deferred/deferred_renderer.hpp>
-#include <cubos/rendering/shadow_mapping/csm_shadow_mapper.hpp>
+#include <cubos/engine/rendering/shadow_mapping/csm_shadow_mapper.hpp>
 #include <cubos/engine/rendering/post_processing/copy_pass.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
