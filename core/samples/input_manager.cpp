@@ -1,12 +1,12 @@
-#include <cubos/log.hpp>
-#include <cubos/io/window.hpp>
-#include <cubos/gl/render_device.hpp>
-#include <cubos/io/input_manager.hpp>
-#include <cubos/io/sources/button_press.hpp>
-#include <cubos/io/sources/single_axis.hpp>
-#include <cubos/io/sources/double_axis.hpp>
+#include <cubos/core/log.hpp>
+#include <cubos/core/io/window.hpp>
+#include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/io/input_manager.hpp>
+#include <cubos/core/io/sources/button_press.hpp>
+#include <cubos/core/io/sources/single_axis.hpp>
+#include <cubos/core/io/sources/double_axis.hpp>
 #include <algorithm>
-using namespace cubos;
+using namespace cubos::core;
 float red = 0.0f;
 float green = 0.0f;
 float blue = 0.0f;
@@ -57,7 +57,7 @@ int main(void)
     io::InputManager::init(window);
     auto updateRedGreenAction = io::InputManager::createAction("update_red_green");
     updateRedGreenAction->addBinding(updateColour);
-    updateRedGreenAction->addSource(new io::DoubleAxis(cubos::io::MouseAxis::X, cubos::io::MouseAxis::Y));
+    updateRedGreenAction->addSource(new io::DoubleAxis(cubos::core::io::MouseAxis::X, cubos::core::io::MouseAxis::Y));
 
     auto incBlueAction = io::InputManager::createAction("increase_blue");
     incBlueAction->addBinding(blueIncr);

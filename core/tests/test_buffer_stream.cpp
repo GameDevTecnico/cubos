@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
-#include <cubos/memory/buffer_stream.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
 
 #include <random>
 #include <string>
 
 TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Integers)
 {
-    using namespace cubos::memory;
+    using namespace cubos::core::memory;
 
     srand(1); // Seed the number random generation, so that the tests always produce the same results
 
@@ -30,7 +30,7 @@ TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Integers)
 
 TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Floats)
 {
-    using namespace cubos::memory;
+    using namespace cubos::core::memory;
 
     srand(1); // Seed the number random generation, so that the tests always produce the same results
 
@@ -57,7 +57,7 @@ TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Floats)
 
 TEST(Cubos_Memory_Buffer_Stream, Print_String)
 {
-    using namespace cubos::memory;
+    using namespace cubos::core::memory;
 
     const char* str = "test string\n";
     char buf[256];
@@ -66,7 +66,7 @@ TEST(Cubos_Memory_Buffer_Stream, Print_String)
     stream.print(str);
     stream.put('\0');
     EXPECT_STREQ(str, buf);
-    
+
     stream.seek(0, SeekOrigin::Begin);
     stream.print(str, 4);
     EXPECT_EQ(strncmp(str, buf, 4), 0);
@@ -74,7 +74,7 @@ TEST(Cubos_Memory_Buffer_Stream, Print_String)
 
 TEST(Cubos_Memory_Buffer_Stream, Print_Formatted_String)
 {
-    using namespace cubos::memory;
+    using namespace cubos::core::memory;
 
     char buf[256];
     auto stream = BufferStream(buf, sizeof(buf));
@@ -86,7 +86,7 @@ TEST(Cubos_Memory_Buffer_Stream, Print_Formatted_String)
 
 TEST(Cubos_Memory_Buffer_Stream, Read_Until)
 {
-    using namespace cubos::memory;
+    using namespace cubos::core::memory;
 
     const char* str = "testbananastr\ning\nsdaad";
     auto stream = BufferStream(str, strlen(str));
