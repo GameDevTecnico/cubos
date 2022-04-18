@@ -1085,7 +1085,7 @@ OGLRenderDevice::OGLRenderDevice()
 Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
 {
     // Validate arguments
-    if (desc.targetCount == 0)
+    if (desc.targetCount == 0 && !desc.depthStencil.isSet())
     {
         logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer must have at least one render target");
         return nullptr;
@@ -1236,7 +1236,13 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     }
 
     // Define draw buffers
-    glDrawBuffers(drawBuffers.size(), &drawBuffers[0]);
+    if (drawBuffers.size() > 0)
+        glDrawBuffers(drawBuffers.size(), &drawBuffers[0]);
+    else
+    {
+        glDrawBuffer(GL_NONE);
+        glReadBuffer(GL_NONE);
+    }
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1545,7 +1551,7 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     glTexStorage3D(GL_TEXTURE_2D_ARRAY, desc.mipLevelCount, internalFormat, desc.width, desc.height, desc.size);
     for (size_t i = 0; i < desc.size; ++i)
     {
-        for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
+        for (size_t j = 0, div = 1; j < desc.mipLevelCount; ++j, div *= 2)
         {
             if (desc.data[i][j] != nullptr)
                 glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i, desc.width / div, desc.height / div, 1, format, type,
@@ -1683,7 +1689,7 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
     {
         for (int face = 0; face < 6; ++face)
         {
-            for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
+            for (size_t j = 0, div = 1; j < desc.mipLevelCount; ++j, div *= 2)
             {
                 if (desc.data[i][face][j] != nullptr)
                     glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i * 6 + face, desc.width / div, desc.height / div, 1,

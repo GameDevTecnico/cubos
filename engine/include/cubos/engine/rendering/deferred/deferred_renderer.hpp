@@ -1,11 +1,12 @@
-#ifndef CUBOS_RENDERING_DEFERRED_DEFERRED_RENDERER_HPP
-#define CUBOS_RENDERING_DEFERRED_DEFERRED_RENDERER_HPP
+#ifndef CUBOS_ENGINE_RENDERING_DEFERRED_DEFERRED_RENDERER_HPP
+#define CUBOS_ENGINE_RENDERING_DEFERRED_DEFERRED_RENDERER_HPP
 
 #include <vector>
 
-#include "cubos/core/gl/vertex.hpp"
+#include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/render_device.hpp>
 #include "cubos/engine/rendering/renderer.hpp"
+#include "cubos/engine/rendering/shadow_mapping/shadow_mapper.hpp"
 
 #define CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT 128
@@ -66,6 +67,30 @@ namespace cubos::engine::rendering
             uint32_t numPointLights = 0;
         } lights;
 
+        struct CameraDataUniform
+        {
+            glm::mat4 V;
+            float nearPlane;
+            float farPlane;
+            float padding[2];
+        };
+
+        struct ShadowMapInfoUniform
+        {
+            glm::mat4 spotMatrices[CUBOS_MAX_SPOT_SHADOW_MAPS];
+            glm::mat4 directionalMatrices[CUBOS_MAX_DIRECTIONAL_SHADOW_MAPS];
+            size_t numSpotShadows;
+            size_t numDirectionalShadows;
+            size_t numPointShadows;
+            float padding;
+        };
+
+        struct CascadeInfoUniform
+        {
+            float cascadeDistances[CUBOS_MAX_DIRECTIONAL_SHADOW_MAP_STRIDE];
+            uint32_t cascadeCount;
+        };
+
         // region gBuffer
         //  Shader Pipeline
         core::gl::ShaderPipeline gBufferPipeline;
@@ -95,6 +120,19 @@ namespace cubos::engine::rendering
         core::gl::ShaderBindingPoint outputLightBlockBP;
         core::gl::ConstantBuffer outputLightBlockBuffer;
 
+        core::gl::ShaderBindingPoint cameraDataBP;
+        core::gl::ConstantBuffer cameraDataBuffer;
+
+        core::gl::ShaderBindingPoint shadowMapInfoBP;
+        core::gl::ConstantBuffer shadowMapInfoBuffer;
+
+        core::gl::ShaderBindingPoint cascadeInfoBP;
+        core::gl::ConstantBuffer cascadeInfoBuffer;
+
+        core::gl::ShaderBindingPoint spotShadowMapBP;
+        core::gl::ShaderBindingPoint directionalShadowMapBP;
+        core::gl::ShaderBindingPoint pointShadowMapBP;
+
         // Screen Quad
         core::gl::VertexArray screenVertexArray;
         core::gl::IndexBuffer screenIndexBuffer;
@@ -103,7 +141,12 @@ namespace cubos::engine::rendering
         core::gl::Sampler positionSampler;
         core::gl::Sampler normalSampler;
         core::gl::Sampler materialSampler;
+
+        core::gl::Sampler shadowMapSampler;
         // endregion
+
+        ShadowMapper* shadowMapper = nullptr;
+
     private:
         void createShaderPipelines();
         void setupFrameBuffers();
@@ -118,9 +161,10 @@ namespace cubos::engine::rendering
         virtual void drawLight(const core::gl::SpotLightData& light) override;
         virtual void drawLight(const core::gl::DirectionalLightData& light) override;
         virtual void drawLight(const core::gl::PointLightData& light) override;
+        void setShadowMapper(ShadowMapper* shadowMapper);
         virtual void render(const core::gl::CameraData& camera, bool usePostProcessing = true) override;
         virtual void flush() override;
     };
 } // namespace cubos::engine::rendering
 
-#endif // CUBOS_RENDERING_DEFERRED_DEFERRED_RENDERER_HPP
+#endif // CUBOS_ENGINE_RENDERING_DEFERRED_DEFERRED_RENDERER_HPP

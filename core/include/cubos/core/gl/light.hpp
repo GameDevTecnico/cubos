@@ -16,9 +16,11 @@ namespace cubos::core::gl
         float range;
         float spotAngle;
         float innerSpotAngle;
+        bool castShadows;
 
         SpotLightData(const glm::vec3& position, const glm::quat& rotation, const glm::vec3& color, float intensity,
-                      float range, float spotAngle, float innerSpotAngle);
+                      float range, float spotAngle, float innerSpotAngle, bool castShadows);
+        SpotLightData() = default;
     };
 
     struct DirectionalLightData
@@ -26,8 +28,10 @@ namespace cubos::core::gl
         glm::quat rotation;
         glm::vec3 color;
         float intensity;
+        bool castShadows;
 
-        DirectionalLightData(const glm::quat& rotation, const glm::vec3& color, float intensity);
+        DirectionalLightData(const glm::quat& rotation, const glm::vec3& color, float intensity, bool castShadows);
+        DirectionalLightData() = default;
     };
 
     struct PointLightData
@@ -36,8 +40,11 @@ namespace cubos::core::gl
         glm::vec3 color;
         float intensity;
         float range;
+        bool castShadows;
 
-        PointLightData(const glm::vec3& position, const glm::vec3& color, float intensity, float range);
+        PointLightData(const glm::vec3& position, const glm::vec3& color, float intensity, float range,
+                       bool castShadows);
+        PointLightData() = default;
     };
 } // namespace cubos::core::gl
 

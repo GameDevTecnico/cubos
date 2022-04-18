@@ -4,10 +4,13 @@
 #include "cubos/core/gl/vertex.hpp"
 #include <cubos/core/gl/palette.hpp>
 #include <cubos/engine/rendering/deferred/deferred_renderer.hpp>
+#include <cubos/engine/rendering/shadow_mapping/csm_shadow_mapper.hpp>
 #include <cubos/engine/rendering/post_processing/copy_pass.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <chrono>
+#include <thread>
 
 using namespace cubos::core;
 using namespace cubos::engine;
@@ -17,7 +20,13 @@ int main(void)
     initializeLogger();
     auto window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
+
+    auto shadowMapper = rendering::CSMShadowMapper(renderDevice, 512, 1024, 256, 4);
+    shadowMapper.setCascadeDistances({5, 10, 20});
+
     auto renderer = rendering::DeferredRenderer(*window);
+
+    renderer.setShadowMapper(&shadowMapper);
 
     gl::Palette palette1(std::vector<gl::Material>{
         {{1, 0, 0, 1}},
@@ -128,11 +137,11 @@ int main(void)
     renderer.addPostProcessingPass(pass);
 
     glm::vec2 windowSize = window->getFramebufferSize();
-    gl::CameraData mainCamera = {// glm::mat4 viewMatrix;
-                                 glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
-                                 // glm::mat4 perspectiveMatrix;
-                                 glm::perspective(glm::radians(20.0f), windowSize.x / windowSize.y, 0.1f, 1000.f),
-                                 // gl::Framebuffer target;
+    gl::CameraData mainCamera = {glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
+                                 glm::radians(20.0f),
+                                 windowSize.x / windowSize.y,
+                                 0.1f,
+                                 100.f,
                                  0};
     float t = 0;
     int s = 0;
@@ -170,15 +179,28 @@ int main(void)
             }
         }
 
-        glm::quat spotLightRotation = glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
         glm::quat directionalLightRotation =
-            glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-        glm::quat pointLightRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+            glm::quat(glm::vec3(0, t * 0.5f, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+        glm::quat pointLightRotation =
+            glm::quat(glm::vec3(0, -t * 0.1f, 0)) * glm::quat(glm::vec3(glm::radians(30.0f), 0, 0));
 
+        /*/
+        glm::quat spotLightRotation =
+            glm::quat(glm::vec3(0, -t * 0.5f, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
         renderer.drawLight(gl::SpotLightData(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1),
-                                             1, 100, glm::radians(10.0f), glm::radians(9.0f)));
-        renderer.drawLight(gl::DirectionalLightData(directionalLightRotation, glm::vec3(1), 0.5f));
-        renderer.drawLight(gl::PointLightData(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
+                                             1, 20, glm::radians(10.0f), glm::radians(9.0f), false));
+        spotLightRotation = glm::quat(glm::vec3(0, t * 0.5f, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+        renderer.drawLight(gl::SpotLightData(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1),
+                                             1, 20, glm::radians(10.0f), glm::radians(9.0f), false));
+        /**/
+
+        /*/
+        renderer.drawLight(gl::DirectionalLightData(directionalLightRotation, glm::vec3(1), 1.0f, false));
+        /**/
+
+        /**/
+        renderer.drawLight(gl::PointLightData(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10, false));
+        /**/
 
         if (sin(t * 4) > 0)
         {
@@ -189,7 +211,7 @@ int main(void)
             renderer.setPalette(palette2ID);
         }
 
-        renderer.render(mainCamera);
+        renderer.render(mainCamera, false);
         renderer.flush();
 
         window->swapBuffers();
