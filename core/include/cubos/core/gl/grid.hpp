@@ -24,7 +24,7 @@ namespace cubos::core::gl
         /// @param size The size of the grid.
         /// @param indices The material indices of the voxels.
         Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices);
-        
+
         Grid(Grid&&);
         ~Grid() = default;
 
