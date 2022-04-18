@@ -1,10 +1,9 @@
-#include "cubos/ecs/storage.hpp"
 #include <iostream>
 
-#include <cubos/ecs/world.hpp>
-#include <cubos/ecs/vec_storage.hpp>
-#include <cubos/ecs/map_storage.hpp>
-#include <cubos/ecs/null_storage.hpp>
+#include <cubos/core/ecs/world.hpp>
+#include <cubos/core/ecs/vec_storage.hpp>
+#include <cubos/core/ecs/map_storage.hpp>
+#include <cubos/core/ecs/null_storage.hpp>
 
 using namespace cubos::core;
 
