@@ -102,6 +102,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/sources/double_axis.hpp"
 
     "include/cubos/core/ecs/world.hpp"
+    "include/cubos/core/ecs/world_view.hpp"
     "include/cubos/core/ecs/storage.hpp"
     "include/cubos/core/ecs/vec_storage.hpp"
     "include/cubos/core/ecs/map_storage.hpp"

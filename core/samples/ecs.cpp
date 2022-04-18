@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/ecs/world_view.hpp>
 #include <cubos/core/ecs/vec_storage.hpp>
 #include <cubos/core/ecs/map_storage.hpp>
 #include <cubos/core/ecs/null_storage.hpp>
