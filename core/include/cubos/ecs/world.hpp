@@ -10,16 +10,6 @@ namespace cubos::ecs
 {
     class World
     {
-    private:
-        std::vector<std::uint32_t> entityData;
-        std::vector<std::uint32_t> availableEntities;
-        std::vector<IStorage*> storages;
-
-        size_t nextEntityId = 0;
-        size_t elementsPerEntity;
-
-        template <typename T> size_t getComponentID();
-
     public:
         ~World();
 
@@ -56,6 +46,16 @@ namespace cubos::ecs
         template <typename... ComponentTypes> void removeComponents(uint64_t entity);
 
         template <typename... ComponentTypes> friend class WorldView;
+
+    private:
+        std::vector<std::uint32_t> entityData;
+        std::vector<std::uint32_t> availableEntities;
+        std::vector<IStorage*> storages;
+
+        size_t nextEntityId = 0;
+        size_t elementsPerEntity;
+
+        template <typename T> size_t getComponentID();
     };
 
     template <typename... ComponentTypes> struct WorldView

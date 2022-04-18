@@ -100,6 +100,9 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/ecs/world.hpp"
     "include/cubos/ecs/storage.hpp"
+    "include/cubos/ecs/vec_storage.hpp"
+    "include/cubos/ecs/map_storage.hpp"
+    "include/cubos/ecs/null_storage.hpp"
 )
 
 # Create core library
