@@ -1,7 +1,7 @@
 ---
 metas:
   - id: car/qb
-    type: QBMatrix
+    type: QBModel
     usage: Dynamic
     params:
       path: /assets/car.qb
@@ -15,4 +15,6 @@ metas:
     type: Palette
     usage: Static
     params:
+      qb: car/qb
+      index: 0
 ...
