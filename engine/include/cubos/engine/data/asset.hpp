@@ -53,13 +53,15 @@ namespace cubos::engine::data
 
     // Implementation.
 
-    template <typename T> Asset<T>::Asset(std::nullptr_t)
+    template <typename T>
+    requires IsAsset<T> Asset<T>::Asset(std::nullptr_t)
     {
         this->refCount = nullptr;
         this->ptr = nullptr;
     }
 
-    template <typename T> Asset<T>::Asset(Asset&& rhs)
+    template <typename T>
+    requires IsAsset<T> Asset<T>::Asset(Asset&& rhs)
     {
         this->refCount = rhs.refCount;
         this->ptr = rhs.ptr;
@@ -67,7 +69,8 @@ namespace cubos::engine::data
         rhs.ptr = nullptr;
     }
 
-    template <typename T> Asset<T>::Asset(const Asset& rhs)
+    template <typename T>
+    requires IsAsset<T> Asset<T>::Asset(const Asset& rhs)
     {
         this->refCount = rhs.refCount;
         this->ptr = rhs.ptr;
@@ -78,7 +81,8 @@ namespace cubos::engine::data
         }
     }
 
-    template <typename T> Asset<T>::Asset(size_t* refCount, const T* ptr)
+    template <typename T>
+    requires IsAsset<T> Asset<T>::Asset(size_t* refCount, const T* ptr)
     {
         this->refCount = refCount;
         this->ptr = ptr;
@@ -89,7 +93,8 @@ namespace cubos::engine::data
         }
     }
 
-    template <typename T> Asset<T>::~Asset()
+    template <typename T>
+    requires IsAsset<T> Asset<T>::~Asset()
     {
         if (this->ptr != nullptr)
         {
@@ -97,7 +102,9 @@ namespace cubos::engine::data
         }
     }
 
-    template <typename T> const T& Asset<T>::get() const
+    template <typename T>
+    requires IsAsset<T>
+    const T& Asset<T>::get() const
     {
         if (this->ptr == nullptr)
         {
@@ -107,17 +114,23 @@ namespace cubos::engine::data
         return *this->ptr;
     }
 
-    template <typename T> inline const T* Asset<T>::operator->() const
+    template <typename T>
+    requires IsAsset<T>
+    inline const T* Asset<T>::operator->() const
     {
         return &this->get();
     }
 
-    template <typename T> inline Asset<T>::operator bool() const
+    template <typename T>
+    requires IsAsset<T>
+    inline Asset<T>::operator bool() const
     {
         return this->ptr != nullptr;
     }
 
-    template <typename T> inline Asset<T>& Asset<T>::operator=(const Asset& rhs)
+    template <typename T>
+    requires IsAsset<T>
+    inline Asset<T>& Asset<T>::operator=(const Asset& rhs)
     {
         if (this->ptr != rhs.ptr)
         {
