@@ -9,6 +9,8 @@ namespace cubos::ecs
 {
     class IStorage
     {
+    public:
+        virtual ~IStorage() = default;
     };
 
     template <typename T> class Storage : public IStorage
@@ -30,41 +32,35 @@ namespace cubos::ecs
 
     template <typename T> class VecStorage : public Storage<T>
     {
-    private:
-        std::vector<T> data;
-
     public:
         T* insert(uint32_t index, T value) override;
-
         T* get(uint32_t index) override;
-
         void erase(uint32_t index) override;
+
+    private:
+        std::vector<T> data;
     };
 
     template <typename T> class MapStorage : public Storage<T>
     {
-    private:
-        std::unordered_map<uint32_t, T> data;
-
     public:
         T* insert(uint32_t index, T value) override;
-
         T* get(uint32_t index) override;
-
         void erase(uint32_t index) override;
+
+    private:
+        std::unordered_map<uint32_t, T> data;
     };
 
     template <typename T> class NullStorage : public Storage<T>
     {
-    private:
-        T data;
-
     public:
         T* insert(uint32_t index, T value) override;
-
         T* get(uint32_t index) override;
-
         void erase(uint32_t index) override;
+
+    private:
+        T data;
     };
 
     template <typename T> T* VecStorage<T>::insert(uint32_t index, T value)
