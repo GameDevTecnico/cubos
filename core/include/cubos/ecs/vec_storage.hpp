@@ -6,6 +6,9 @@
 namespace cubos::ecs
 {
 
+    /// @brief VecStorage is a Storage implementation that uses a STL vector, this is best
+    /// for components that are used very often, in order to be the most efficient memory wise.
+    /// @tparam T The type to be stored in the storage.
     template <typename T> class VecStorage : public Storage<T>
     {
     public:

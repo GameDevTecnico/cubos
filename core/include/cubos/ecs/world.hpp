@@ -8,6 +8,10 @@
 
 namespace cubos::ecs
 {
+
+    /// @brief World is used as a container for all of the entity and component data.
+    /// Components are stored in abstract containers called storages.
+    /// @see Storage
     class World
     {
     public:
@@ -18,6 +22,8 @@ namespace cubos::ecs
         /// @param components The initial values for the components.
         template <typename... ComponentTypes> uint64_t create(ComponentTypes... components);
 
+        /// @brief Removes an entity.
+        /// @param entity Entity ID.
         void remove(uint64_t entity);
 
         /// @brief Register a component type.
@@ -41,8 +47,14 @@ namespace cubos::ecs
         /// @param entity Entity ID.
         template <typename T> T* getComponent(uint64_t entity);
 
+        /// @brief Remove a component from an entity.
+        /// @tparam T Component type to be removed.
+        /// @param entity Entity ID.
         template <typename T> void removeComponent(uint64_t entity);
 
+        /// @brief Remove components from an entity.
+        /// @tparam ComponentTypes Component types to be removed.
+        /// @param entity Entity ID.
         template <typename... ComponentTypes> void removeComponents(uint64_t entity);
 
         template <typename... ComponentTypes> friend class WorldView;
@@ -58,6 +70,9 @@ namespace cubos::ecs
         template <typename T> size_t getComponentID();
     };
 
+    /// @brief WorldView is an iterator over the entities of a world
+    /// that contain a certain set of components.
+    /// @tparam ComponentTypes The set of component types to be iterated.
     template <typename... ComponentTypes> struct WorldView
     {
         World* world;

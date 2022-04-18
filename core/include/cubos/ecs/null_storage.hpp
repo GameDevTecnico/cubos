@@ -6,6 +6,9 @@
 namespace cubos::ecs
 {
 
+    /// @brief NullStorage is a Storage implementation that doesn't keep any data, made for components
+    /// that don't hold any data and just work as tags.
+    /// @tparam T The type to be stored in the storage.
     template <typename T> class NullStorage : public Storage<T>
     {
     public:

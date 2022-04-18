@@ -6,6 +6,9 @@
 namespace cubos::ecs
 {
 
+    /// @brief MapStorage is a Storage implementation that uses a STL unordered_map, this is best
+    /// for components that aren't used that often so the data is stored in a more compact way.
+    /// @tparam T The type to be stored in the storage.
     template <typename T> class MapStorage : public Storage<T>
     {
     public:
