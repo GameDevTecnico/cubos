@@ -1,0 +1,4 @@
+<map id="cubos::core::ecs::WorldView&lt; ComponentTypes &gt;" name="cubos::core::ecs::WorldView&lt; ComponentTypes &gt;">
+<area shape="rect" id="node1" title="WorldView is an iterator over the entities of a world that contain a certain set of components." alt="" coords="5,95,208,136"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1World.html" title="World is used as a container for all of the entity and component data. Components are stored in abstr..." alt="" coords="21,5,192,32"/>
+</map>

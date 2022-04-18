@@ -47,8 +47,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classcubos_1_1core_1_1gl_1_1impl_1_1Texture2DArray.html#a9ac08c9b46be4a0993b7a00a47a7d9d5",
-"classes.html"
+"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#ace7b4b5ed17a08b342fd40c72584af34",
+"classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html#a9d57bc60fae83ecdac51332611d8a2fd",
+"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a55f08c3785965c5a3d59940eebde0993"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

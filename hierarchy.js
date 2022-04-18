@@ -41,6 +41,14 @@ var hierarchy =
     [ "cubos::core::gl::Grid", "classcubos_1_1core_1_1gl_1_1Grid.html", null ],
     [ "cubos::core::gl::impl::IndexBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1IndexBuffer.html", null ],
     [ "cubos::core::io::InputManager", "classcubos_1_1core_1_1io_1_1InputManager.html", null ],
+    [ "cubos::core::ecs::IStorage", "classcubos_1_1core_1_1ecs_1_1IStorage.html", [
+      [ "cubos::core::ecs::Storage< T >", "classcubos_1_1core_1_1ecs_1_1Storage.html", [
+        [ "cubos::core::ecs::MapStorage< T >", "classcubos_1_1core_1_1ecs_1_1MapStorage.html", null ],
+        [ "cubos::core::ecs::NullStorage< T >", "classcubos_1_1core_1_1ecs_1_1NullStorage.html", null ],
+        [ "cubos::core::ecs::VecStorage< T >", "classcubos_1_1core_1_1ecs_1_1VecStorage.html", null ]
+      ] ]
+    ] ],
+    [ "cubos::core::ecs::WorldView< ComponentTypes >::Iterator", "structcubos_1_1core_1_1ecs_1_1WorldView_1_1Iterator.html", null ],
     [ "cubos::core::gl::Material", "structcubos_1_1core_1_1gl_1_1Material.html", null ],
     [ "cubos::core::gl::Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
     [ "cubos::core::data::QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", null ],
@@ -82,5 +90,7 @@ var hierarchy =
     [ "cubos::core::gl::VertexArrayDesc", "structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html", null ],
     [ "cubos::core::gl::impl::VertexBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1VertexBuffer.html", null ],
     [ "cubos::core::gl::VertexElement", "structcubos_1_1core_1_1gl_1_1VertexElement.html", null ],
-    [ "cubos::core::io::Window", "classcubos_1_1core_1_1io_1_1Window.html", null ]
+    [ "cubos::core::io::Window", "classcubos_1_1core_1_1io_1_1Window.html", null ],
+    [ "cubos::core::ecs::World", "classcubos_1_1core_1_1ecs_1_1World.html", null ],
+    [ "cubos::core::ecs::WorldView< ComponentTypes >", "structcubos_1_1core_1_1ecs_1_1WorldView.html", null ]
 ];

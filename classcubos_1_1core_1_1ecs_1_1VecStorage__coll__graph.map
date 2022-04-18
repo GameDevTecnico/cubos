@@ -1,0 +1,5 @@
+<map id="cubos::core::ecs::VecStorage&lt; T &gt;" name="cubos::core::ecs::VecStorage&lt; T &gt;">
+<area shape="rect" id="node1" title="VecStorage is a Storage implementation that uses a STL vector, this is best for components that are u..." alt="" coords="5,155,251,181"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Storage.html" title="Storage is an abstract container for a certain type with common operations, such as,..." alt="" coords="17,80,239,107"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1ecs_1_1IStorage.html" title="IStorage is an abstract parent class for all storages." alt="" coords="34,5,222,32"/>
+</map>
