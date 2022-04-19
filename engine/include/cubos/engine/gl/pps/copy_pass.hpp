@@ -1,10 +1,10 @@
 
-#ifndef CUBOS_ENGINE_RENDERING_POST_PROCESSING_COPY_PASS_HPP
-#define CUBOS_ENGINE_RENDERING_POST_PROCESSING_COPY_PASS_HPP
+#ifndef CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP
+#define CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP
 
-#include <cubos/engine/rendering/post_processing/post_processing_pass.hpp>
+#include <cubos/engine/gl/pps/pass.hpp>
 
-namespace cubos::engine::rendering
+namespace cubos::engine::gl
 {
     class CopyPass : public PostProcessingPass
     {
@@ -19,6 +19,6 @@ namespace cubos::engine::rendering
     private:
         void execute(const Renderer& renderer, core::gl::Texture2D input, core::gl::Framebuffer output) const override;
     };
-} // namespace cubos::engine::rendering
+} // namespace cubos::engine::gl
 
-#endif // CUBOS_ENGINE_RENDERING_POST_PROCESSING_COPY_PASS_HPP
+#endif // CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP

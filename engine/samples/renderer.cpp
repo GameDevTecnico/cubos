@@ -2,9 +2,10 @@
 #include <cubos/core/io/window.hpp>
 #include <cubos/core/gl/render_device.hpp>
 #include "cubos/core/gl/vertex.hpp"
+#include "cubos/engine/gl/pps/copy_pass.hpp"
 #include <cubos/core/gl/palette.hpp>
-#include <cubos/engine/rendering/deferred/deferred_renderer.hpp>
-#include <cubos/engine/rendering/post_processing/copy_pass.hpp>
+#include <cubos/engine/gl/deferred/renderer.hpp>
+#include <cubos/engine/gl/pps/copy_pass.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -17,9 +18,13 @@ int main(void)
     initializeLogger();
     auto window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
-    auto renderer = rendering::DeferredRenderer(*window);
 
-    gl::Palette palette1(std::vector<gl::Material>{
+    using namespace cubos::core::gl;
+    using namespace cubos::engine::gl;
+
+    auto renderer = cubos::engine::gl::deferred::Renderer(*window);
+
+    Palette palette1(std::vector<Material>{
         {{1, 0, 0, 1}},
         {{0, 1, 0, 1}},
         {{0, 0, 1, 1}},
@@ -27,7 +32,7 @@ int main(void)
         {{0, 1, 1, 1}},
         {{1, 0, 1, 1}},
     });
-    gl::Palette palette2(std::vector<gl::Material>{
+    Palette palette2(std::vector<Material>{
         {{0, 1, 1, 1}},
         {{1, 0, 1, 1}},
         {{1, 1, 0, 1}},
@@ -39,7 +44,7 @@ int main(void)
     auto palette1ID = renderer.registerPalette(palette1);
     auto palette2ID = renderer.registerPalette(palette2);
 
-    std::vector<gl::Vertex> vertices = {
+    std::vector<Vertex> vertices = {
         // Front
         {{1, 0, 0}, {0, 0, -1}, 1},
         {{0, 0, 0}, {0, 0, -1}, 1},
@@ -122,13 +127,13 @@ int main(void)
         23,
     };
 
-    rendering::Renderer::ModelID id = renderer.registerModel(vertices, indices);
+    Renderer::ModelID id = renderer.registerModel(vertices, indices);
 
-    rendering::CopyPass pass = rendering::CopyPass(*window);
+    CopyPass pass = CopyPass(*window);
     renderer.addPostProcessingPass(pass);
 
     glm::vec2 windowSize = window->getFramebufferSize();
-    gl::CameraData mainCamera = {// glm::mat4 viewMatrix;
+    CameraData mainCamera = {// glm::mat4 viewMatrix;
                                  glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
                                  // glm::mat4 perspectiveMatrix;
                                  glm::perspective(glm::radians(20.0f), windowSize.x / windowSize.y, 0.1f, 1000.f),
@@ -175,10 +180,10 @@ int main(void)
             glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
         glm::quat pointLightRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
 
-        renderer.drawLight(gl::SpotLight(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1),
-                                             1, 100, glm::radians(10.0f), glm::radians(9.0f)));
-        renderer.drawLight(gl::DirectionalLight(directionalLightRotation, glm::vec3(1), 0.5f));
-        renderer.drawLight(gl::PointLight(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
+        renderer.drawLight(SpotLight(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1), 1,
+                                         100, glm::radians(10.0f), glm::radians(9.0f)));
+        renderer.drawLight(DirectionalLight(directionalLightRotation, glm::vec3(1), 0.5f));
+        renderer.drawLight(PointLight(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
 
         if (sin(t * 4) > 0)
         {

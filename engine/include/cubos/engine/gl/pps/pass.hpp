@@ -1,11 +1,11 @@
-#ifndef CUBOS_ENGINE_RENDERING_POST_PROCESSING_POST_PROCESSING_HPP
-#define CUBOS_ENGINE_RENDERING_POST_PROCESSING_POST_PROCESSING_HPP
+#ifndef CUBOS_ENGINE_GL_PPS_PASS_HPP
+#define CUBOS_ENGINE_GL_PPS_PASS_HPP
 
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/window.hpp>
-#include <cubos/engine/rendering/renderer.hpp>
+#include <cubos/engine/gl/renderer.hpp>
 
-namespace cubos::engine::rendering
+namespace cubos::engine::gl
 {
     class Renderer;
 
@@ -21,6 +21,6 @@ namespace cubos::engine::rendering
         virtual void execute(const Renderer& renderer, core::gl::Texture2D input,
                              core::gl::Framebuffer output) const = 0;
     };
-} // namespace cubos::engine::rendering
+} // namespace cubos::engine::gl
 
-#endif // CUBOS_ENGINE_RENDERING_POST_PROCESSING_POST_PROCESSING_HPP
+#endif // CUBOS_ENGINE_GL_PPS_PASS_HPP

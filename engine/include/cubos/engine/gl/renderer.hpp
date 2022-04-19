@@ -1,5 +1,5 @@
-#ifndef CUBOS_ENGINE_RENDERING_RENDERER_HPP
-#define CUBOS_ENGINE_RENDERING_RENDERER_HPP
+#ifndef CUBOS_ENGINE_GL_RENDERER_HPP
+#define CUBOS_ENGINE_GL_RENDERER_HPP
 
 #include <vector>
 #include <functional>
@@ -11,9 +11,9 @@
 #include <cubos/core/gl/camera_data.hpp>
 #include <cubos/core/gl/light.hpp>
 #include <cubos/core/io/window.hpp>
-#include <cubos/engine/rendering/post_processing/post_processing_pass.hpp>
+#include <cubos/engine/gl/pps/pass.hpp>
 
-namespace cubos::engine::rendering
+namespace cubos::engine::gl
 {
     class PostProcessingPass;
 
@@ -77,6 +77,6 @@ namespace cubos::engine::rendering
         virtual void drawLight(const core::gl::PointLight& light);
         virtual void flush();
     };
-} // namespace cubos::engine::rendering
+} // namespace cubos::engine::gl
 
-#endif // CUBOS_ENGINE_RENDERING_RENDERER_HPP
+#endif // CUBOS_ENGINE_GL_RENDERER_HPP

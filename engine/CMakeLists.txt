@@ -10,18 +10,18 @@ message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
 
-    src/cubos/engine/rendering/renderer.cpp
-    src/cubos/engine/rendering/deferred/deferred_renderer.cpp
-    src/cubos/engine/rendering/post_processing/post_processing_pass.cpp
-    src/cubos/engine/rendering/post_processing/copy_pass.cpp)
+    src/cubos/engine/gl/renderer.cpp
+    src/cubos/engine/gl/deferred/renderer.cpp
+    src/cubos/engine/gl/pps/pass.cpp
+    src/cubos/engine/gl/pps/copy_pass.cpp)
 
 set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/cubos.hpp"
 
-    include/cubos/engine/rendering/renderer.hpp
-    include/cubos/engine/rendering/deferred/deferred_renderer.hpp
-    include/cubos/engine/rendering/post_processing/post_processing_pass.hpp
-    include/cubos/engine/rendering/post_processing/copy_pass.hpp)
+    include/cubos/engine/gl/renderer.hpp
+    include/cubos/engine/gl/deferred/renderer.hpp
+    include/cubos/engine/gl/pps/pass.hpp
+    include/cubos/engine/gl/pps/copy_pass.hpp)
 
 # Create cubos engine
 

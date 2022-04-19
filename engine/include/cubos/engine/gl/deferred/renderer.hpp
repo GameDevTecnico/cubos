@@ -1,19 +1,19 @@
-#ifndef CUBOS_RENDERING_DEFERRED_DEFERRED_RENDERER_HPP
-#define CUBOS_RENDERING_DEFERRED_DEFERRED_RENDERER_HPP
+#ifndef CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP
+#define CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP
 
 #include <vector>
 
 #include "cubos/core/gl/vertex.hpp"
 #include <cubos/core/gl/render_device.hpp>
-#include "cubos/engine/rendering/renderer.hpp"
+#include "cubos/engine/gl/renderer.hpp"
 
 #define CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT 128
 
-namespace cubos::engine::rendering
+namespace cubos::engine::gl::deferred
 {
-    class DeferredRenderer : public Renderer
+    class Renderer : public gl::Renderer
     {
     private:
         struct MVP
@@ -111,7 +111,7 @@ namespace cubos::engine::rendering
         void createRenderDeviceStates();
 
     public:
-        explicit DeferredRenderer(core::io::Window& window);
+        explicit Renderer(core::io::Window& window);
         virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const override;
         virtual ModelID registerModel(const std::vector<core::gl::Vertex>& vertices,
                                       std::vector<uint32_t>& indices) override;
@@ -121,6 +121,6 @@ namespace cubos::engine::rendering
         virtual void render(const core::gl::CameraData& camera, bool usePostProcessing = true) override;
         virtual void flush() override;
     };
-} // namespace cubos::engine::rendering
+} // namespace cubos::engine::gl::deferred
 
-#endif // CUBOS_RENDERING_DEFERRED_DEFERRED_RENDERER_HPP
+#endif // CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP

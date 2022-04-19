@@ -1,18 +1,20 @@
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/util.hpp>
-#include <cubos/engine/rendering/deferred/deferred_renderer.hpp>
+#include <cubos/engine/gl/deferred/renderer.hpp>
 #include <cubos/core/log.hpp>
 
 #include <glm/gtx/quaternion.hpp>
 
+using namespace cubos;
 using namespace cubos::core;
 using namespace cubos::core::gl;
 using namespace cubos::engine;
-using namespace cubos::engine::rendering;
+using namespace cubos::engine::gl;
+using namespace cubos::engine::gl::deferred;
 
-inline void DeferredRenderer::createShaderPipelines()
+inline void deferred::Renderer::createShaderPipelines()
 {
-    auto gBufferVertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
+    auto gBufferVertex = renderDevice.createShaderStage(Stage::Vertex, R"(
             #version 330 core
 
             in uvec3 position;
@@ -45,7 +47,7 @@ inline void DeferredRenderer::createShaderPipelines()
             }
         )");
 
-    auto gBufferPixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
+    auto gBufferPixel = renderDevice.createShaderStage(Stage::Pixel, R"(
             #version 330 core
 
             in vec3 fragPosition;
@@ -67,9 +69,9 @@ inline void DeferredRenderer::createShaderPipelines()
     gBufferPipeline = renderDevice.createShaderPipeline(gBufferVertex, gBufferPixel);
 
     mvpBP = gBufferPipeline->getBindingPoint("MVP");
-    mvpBuffer = renderDevice.createConstantBuffer(3 * sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+    mvpBuffer = renderDevice.createConstantBuffer(3 * sizeof(glm::mat4), nullptr, Usage::Dynamic);
 
-    auto outputVertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
+    auto outputVertex = renderDevice.createShaderStage(Stage::Vertex, R"(
             #version 330 core
 
             in vec4 position;
@@ -84,7 +86,7 @@ inline void DeferredRenderer::createShaderPipelines()
             }
         )");
 
-    auto outputPixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
+    auto outputPixel = renderDevice.createShaderStage(Stage::Pixel, R"(
             #version 430 core
 
             in vec2 fraguv;
@@ -201,7 +203,7 @@ inline void DeferredRenderer::createShaderPipelines()
 
     outputPipeline = renderDevice.createShaderPipeline(outputVertex, outputPixel);
 
-    outputLightBlockBuffer = renderDevice.createConstantBuffer(sizeof(LightBlock), nullptr, gl::Usage::Dynamic);
+    outputLightBlockBuffer = renderDevice.createConstantBuffer(sizeof(LightBlock), nullptr, Usage::Dynamic);
 
     renderDevice.setShaderPipeline(outputPipeline);
     outputLightBlockBP = outputPipeline->getBindingPoint("Lights");
@@ -209,7 +211,7 @@ inline void DeferredRenderer::createShaderPipelines()
     generateScreenQuad(renderDevice, outputPipeline, screenVertexArray, screenIndexBuffer);
 }
 
-inline void DeferredRenderer::setupFrameBuffers()
+inline void deferred::Renderer::setupFrameBuffers()
 {
     auto sz = window.getFramebufferSize();
 
@@ -247,24 +249,24 @@ inline void DeferredRenderer::setupFrameBuffers()
     gBuffer = renderDevice.createFramebuffer(gBufferDesc);
 
     SamplerDesc positionSamplerDesc;
-    positionSamplerDesc.addressU = gl::AddressMode::Clamp;
-    positionSamplerDesc.addressV = gl::AddressMode::Clamp;
-    positionSamplerDesc.magFilter = gl::TextureFilter::Nearest;
-    positionSamplerDesc.minFilter = gl::TextureFilter::Nearest;
+    positionSamplerDesc.addressU = AddressMode::Clamp;
+    positionSamplerDesc.addressV = AddressMode::Clamp;
+    positionSamplerDesc.magFilter = TextureFilter::Nearest;
+    positionSamplerDesc.minFilter = TextureFilter::Nearest;
     positionSampler = renderDevice.createSampler(positionSamplerDesc);
 
     SamplerDesc normalSamplerDesc;
-    normalSamplerDesc.addressU = gl::AddressMode::Clamp;
-    normalSamplerDesc.addressV = gl::AddressMode::Clamp;
-    normalSamplerDesc.magFilter = gl::TextureFilter::Nearest;
-    normalSamplerDesc.minFilter = gl::TextureFilter::Nearest;
+    normalSamplerDesc.addressU = AddressMode::Clamp;
+    normalSamplerDesc.addressV = AddressMode::Clamp;
+    normalSamplerDesc.magFilter = TextureFilter::Nearest;
+    normalSamplerDesc.minFilter = TextureFilter::Nearest;
     normalSampler = renderDevice.createSampler(normalSamplerDesc);
 
     SamplerDesc materialSamplerDesc;
-    materialSamplerDesc.addressU = gl::AddressMode::Clamp;
-    materialSamplerDesc.addressV = gl::AddressMode::Clamp;
-    materialSamplerDesc.magFilter = gl::TextureFilter::Nearest;
-    materialSamplerDesc.minFilter = gl::TextureFilter::Nearest;
+    materialSamplerDesc.addressU = AddressMode::Clamp;
+    materialSamplerDesc.addressV = AddressMode::Clamp;
+    materialSamplerDesc.magFilter = TextureFilter::Nearest;
+    materialSamplerDesc.minFilter = TextureFilter::Nearest;
     materialSampler = renderDevice.createSampler(materialSamplerDesc);
 
     renderDevice.setShaderPipeline(outputPipeline);
@@ -284,11 +286,11 @@ inline void DeferredRenderer::setupFrameBuffers()
     outputPaletteBP = outputPipeline->getBindingPoint("palette");
 }
 
-inline void DeferredRenderer::createRenderDeviceStates()
+inline void deferred::Renderer::createRenderDeviceStates()
 {
     RasterStateDesc rasterStateDesc;
-    rasterStateDesc.frontFace = gl::Winding::CCW;
-    rasterStateDesc.cullFace = gl::Face::Back;
+    rasterStateDesc.frontFace = Winding::CCW;
+    rasterStateDesc.cullFace = Face::Back;
     rasterStateDesc.cullEnabled = true;
     rasterState = renderDevice.createRasterState(rasterStateDesc);
 
@@ -302,52 +304,53 @@ inline void DeferredRenderer::createRenderDeviceStates()
     depthStencilState = renderDevice.createDepthStencilState(depthStencilStateDesc);
 }
 
-DeferredRenderer::DeferredRenderer(io::Window& window) : Renderer(window)
+deferred::Renderer::Renderer(io::Window& window) : cubos::engine::gl::Renderer(window)
 {
     createShaderPipelines();
     setupFrameBuffers();
     createRenderDeviceStates();
 }
 
-Renderer::ModelID DeferredRenderer::registerModel(const std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
+engine::gl::Renderer::ModelID deferred::Renderer::registerModel(const std::vector<Vertex>& vertices,
+                                                                std::vector<uint32_t>& indices)
 {
     return registerModelInternal(vertices, indices, gBufferPipeline);
 }
 
-void DeferredRenderer::drawLight(const SpotLight& light)
+void deferred::Renderer::drawLight(const SpotLight& light)
 {
     if (lights.numSpotLights >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
     {
-        logWarning("DeferredRenderer::drawLight(const SpotLight& light) failed: number of spot lights to be drawn "
+        logWarning("deferred::Renderer::drawLight(const SpotLight& light) failed: number of spot lights to be drawn "
                    "this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT.");
         return;
     }
     lights.spotLights[lights.numSpotLights++] = light;
 }
 
-void DeferredRenderer::drawLight(const DirectionalLight& light)
+void deferred::Renderer::drawLight(const DirectionalLight& light)
 {
     if (lights.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
     {
-        logWarning("DeferredRenderer::drawLight(const DirectionalLight& light) failed: number of directional "
+        logWarning("deferred::Renderer::drawLight(const DirectionalLight& light) failed: number of directional "
                    "lights to be drawn this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT.");
         return;
     }
     lights.directionalLights[lights.numDirectionalLights++] = light;
 }
 
-void DeferredRenderer::drawLight(const PointLight& light)
+void deferred::Renderer::drawLight(const PointLight& light)
 {
     if (lights.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
     {
-        logWarning("DeferredRenderer::drawLight(const PointLight& light) failed: number of point lights to be "
+        logWarning("deferred::Renderer::drawLight(const PointLight& light) failed: number of point lights to be "
                    "drawn this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT.");
         return;
     }
     lights.pointLights[lights.numPointLights++] = light;
 }
 
-void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
+void deferred::Renderer::render(const CameraData& camera, bool usePostProcessing)
 {
 
     renderDevice.setFramebuffer(camera.target);
@@ -425,32 +428,32 @@ void DeferredRenderer::render(const CameraData& camera, bool usePostProcessing)
     }
 }
 
-void DeferredRenderer::flush()
+void deferred::Renderer::flush()
 {
-    Renderer::flush();
+    gl::Renderer::flush();
     lights.numSpotLights = 0;
     lights.numDirectionalLights = 0;
     lights.numPointLights = 0;
 }
-void DeferredRenderer::getScreenQuad(VertexArray& va, IndexBuffer& ib) const
+void deferred::Renderer::getScreenQuad(VertexArray& va, IndexBuffer& ib) const
 {
     va = screenVertexArray;
     ib = screenIndexBuffer;
 }
 
-DeferredRenderer::LightBlock::SpotLightData::SpotLightData(const gl::SpotLight& light)
+deferred::Renderer::LightBlock::SpotLightData::SpotLightData(const SpotLight& light)
     : position(glm::vec4(light.position, 1)), rotation(glm::toMat4(light.rotation)), color(glm::vec4(light.color, 1)),
       intensity(light.intensity), range(light.range), spotCutoff(cos(light.spotAngle)),
       innerSpotCutoff(cos(light.innerSpotAngle))
 {
 }
 
-DeferredRenderer::LightBlock::DirectionalLightData::DirectionalLightData(const gl::DirectionalLight& light)
+deferred::Renderer::LightBlock::DirectionalLightData::DirectionalLightData(const DirectionalLight& light)
     : rotation(glm::toMat4(light.rotation)), color(glm::vec4(light.color, 1)), intensity(light.intensity)
 {
 }
 
-DeferredRenderer::LightBlock::PointLightData::PointLightData(const gl::PointLight& light)
+deferred::Renderer::LightBlock::PointLightData::PointLightData(const PointLight& light)
     : position(glm::vec4(light.position, 1)), color(glm::vec4(light.color, 1)), intensity(light.intensity),
       range(light.range)
 {

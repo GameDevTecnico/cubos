@@ -1,10 +1,10 @@
 #include <cubos/core/log.hpp>
-#include <cubos/engine/rendering/renderer.hpp>
+#include <cubos/engine/gl/renderer.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::gl;
 using namespace cubos::engine;
-using namespace cubos::engine::rendering;
+using namespace cubos::engine::gl;
 
 Renderer::Renderer(io::Window& window) : window(window), renderDevice(window.getRenderDevice())
 {
@@ -30,25 +30,24 @@ Renderer::ModelID Renderer::registerModelInternal(const std::vector<Vertex>& ver
 {
     RendererModel model;
 
-    VertexBuffer vb =
-        renderDevice.createVertexBuffer(vertices.size() * sizeof(Vertex), &vertices[0], gl::Usage::Static);
+    VertexBuffer vb = renderDevice.createVertexBuffer(vertices.size() * sizeof(Vertex), &vertices[0], Usage::Static);
 
     VertexArrayDesc vaDesc;
     vaDesc.elementCount = 3;
     vaDesc.elements[0].name = "position";
-    vaDesc.elements[0].type = gl::Type::UInt;
+    vaDesc.elements[0].type = Type::UInt;
     vaDesc.elements[0].size = 3;
     vaDesc.elements[0].buffer.index = 0;
     vaDesc.elements[0].buffer.offset = offsetof(Vertex, position);
     vaDesc.elements[0].buffer.stride = sizeof(Vertex);
     vaDesc.elements[1].name = "normal";
-    vaDesc.elements[1].type = gl::Type::Float;
+    vaDesc.elements[1].type = Type::Float;
     vaDesc.elements[1].size = 3;
     vaDesc.elements[1].buffer.index = 0;
     vaDesc.elements[1].buffer.offset = offsetof(Vertex, normal);
     vaDesc.elements[1].buffer.stride = sizeof(Vertex);
     vaDesc.elements[2].name = "material";
-    vaDesc.elements[2].type = gl::Type::UShort;
+    vaDesc.elements[2].type = Type::UShort;
     vaDesc.elements[2].size = 1;
     vaDesc.elements[2].buffer.index = 0;
     vaDesc.elements[2].buffer.offset = offsetof(Vertex, material);
@@ -57,8 +56,8 @@ Renderer::ModelID Renderer::registerModelInternal(const std::vector<Vertex>& ver
     vaDesc.shaderPipeline = pipeline;
 
     model.va = renderDevice.createVertexArray(vaDesc);
-    model.ib = renderDevice.createIndexBuffer(indices.size() * sizeof(size_t), &indices[0], gl::IndexFormat::UInt,
-                                              gl::Usage::Static);
+    model.ib =
+        renderDevice.createIndexBuffer(indices.size() * sizeof(size_t), &indices[0], IndexFormat::UInt, Usage::Static);
     model.numIndices = indices.size();
 
     models.push_back(model);
@@ -69,7 +68,7 @@ Renderer::PaletteID Renderer::registerPalette(const Palette& palette)
 {
     auto materials = palette.getData();
     size_t size = sizeof(Material) * palette.getSize();
-    auto cb = renderDevice.createConstantBuffer(size, materials, gl::Usage::Static, gl::BufferStorageType::Large);
+    auto cb = renderDevice.createConstantBuffer(size, materials, Usage::Static, BufferStorageType::Large);
     palettes.push_back(cb);
     return palettes.size() - 1;
 }

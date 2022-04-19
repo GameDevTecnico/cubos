@@ -1,13 +1,13 @@
-#include <cubos/engine/rendering/post_processing/copy_pass.hpp>
+#include <cubos/engine/gl/pps/copy_pass.hpp>
 
 using namespace cubos;
 using namespace cubos::core;
 using namespace cubos::core::gl;
 using namespace cubos::engine;
 
-engine::rendering::CopyPass::CopyPass(io::Window& window) : PostProcessingPass(window)
+engine::gl::CopyPass::CopyPass(io::Window& window) : PostProcessingPass(window)
 {
-    auto vertex = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
+    auto vertex = renderDevice.createShaderStage(Stage::Vertex, R"(
             #version 330 core
 
             in vec4 position;
@@ -22,7 +22,7 @@ engine::rendering::CopyPass::CopyPass(io::Window& window) : PostProcessingPass(w
             }
         )");
 
-    auto pixel = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
+    auto pixel = renderDevice.createShaderStage(Stage::Pixel, R"(
             #version 430 core
 
             in vec2 fraguv;
@@ -44,16 +44,16 @@ engine::rendering::CopyPass::CopyPass(io::Window& window) : PostProcessingPass(w
     inputTexBP = pipeline->getBindingPoint("inputTex");
 
     SamplerDesc samplerDesc;
-    samplerDesc.addressU = gl::AddressMode::Clamp;
-    samplerDesc.addressV = gl::AddressMode::Clamp;
-    samplerDesc.magFilter = gl::TextureFilter::Nearest;
-    samplerDesc.minFilter = gl::TextureFilter::Nearest;
+    samplerDesc.addressU = AddressMode::Clamp;
+    samplerDesc.addressV = AddressMode::Clamp;
+    samplerDesc.magFilter = TextureFilter::Nearest;
+    samplerDesc.minFilter = TextureFilter::Nearest;
     inputTexSampler = renderDevice.createSampler(samplerDesc);
 
     inputTexBP->bind(inputTexSampler);
 }
 
-void rendering::CopyPass::execute(const Renderer& renderer, Texture2D input, Framebuffer output) const
+void engine::gl::CopyPass::execute(const Renderer& renderer, Texture2D input, Framebuffer output) const
 {
     renderDevice.setShaderPipeline(pipeline);
     renderDevice.setFramebuffer(output);
