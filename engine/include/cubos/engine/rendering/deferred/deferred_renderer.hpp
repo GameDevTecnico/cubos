@@ -36,7 +36,7 @@ namespace cubos::engine::rendering
                 float innerSpotCutoff;
 
                 SpotLightData() = default;
-                SpotLightData(const core::gl::SpotLightData& light);
+                SpotLightData(const core::gl::SpotLight& light);
             } spotLights[CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT];
 
             struct DirectionalLightData
@@ -47,7 +47,7 @@ namespace cubos::engine::rendering
                 float padding[3];
 
                 DirectionalLightData() = default;
-                DirectionalLightData(const core::gl::DirectionalLightData& light);
+                DirectionalLightData(const core::gl::DirectionalLight& light);
             } directionalLights[CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT];
 
             struct PointLightData
@@ -59,7 +59,7 @@ namespace cubos::engine::rendering
                 float padding[2];
 
                 PointLightData() = default;
-                PointLightData(const core::gl::PointLightData& light);
+                PointLightData(const core::gl::PointLight& light);
             } pointLights[CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT];
             uint32_t numSpotLights = 0;
             uint32_t numDirectionalLights = 0;
@@ -115,9 +115,9 @@ namespace cubos::engine::rendering
         virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const override;
         virtual ModelID registerModel(const std::vector<core::gl::Vertex>& vertices,
                                       std::vector<uint32_t>& indices) override;
-        virtual void drawLight(const core::gl::SpotLightData& light) override;
-        virtual void drawLight(const core::gl::DirectionalLightData& light) override;
-        virtual void drawLight(const core::gl::PointLightData& light) override;
+        virtual void drawLight(const core::gl::SpotLight& light) override;
+        virtual void drawLight(const core::gl::DirectionalLight& light) override;
+        virtual void drawLight(const core::gl::PointLight& light) override;
         virtual void render(const core::gl::CameraData& camera, bool usePostProcessing = true) override;
         virtual void flush() override;
     };

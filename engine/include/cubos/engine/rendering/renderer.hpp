@@ -37,9 +37,9 @@ namespace cubos::engine::rendering
         std::vector<core::gl::ConstantBuffer> palettes;
         core::gl::ConstantBuffer currentPalette;
         std::vector<DrawRequest> drawRequests;
-        std::vector<core::gl::SpotLightData> spotLightRequests;
-        std::vector<core::gl::DirectionalLightData> directionalLightRequests;
-        std::vector<core::gl::PointLightData> pointLightRequests;
+        std::vector<core::gl::SpotLight> spotLightRequests;
+        std::vector<core::gl::DirectionalLight> directionalLightRequests;
+        std::vector<core::gl::PointLight> pointLightRequests;
         core::io::Window& window;
         core::gl::RenderDevice& renderDevice;
 
@@ -72,9 +72,9 @@ namespace cubos::engine::rendering
         virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const = 0;
         virtual void render(const core::gl::CameraData& camera, bool usePostProcessing = true) = 0;
         virtual void drawModel(ModelID modelID, glm::mat4 modelMat);
-        virtual void drawLight(const core::gl::SpotLightData& light);
-        virtual void drawLight(const core::gl::DirectionalLightData& light);
-        virtual void drawLight(const core::gl::PointLightData& light);
+        virtual void drawLight(const core::gl::SpotLight& light);
+        virtual void drawLight(const core::gl::DirectionalLight& light);
+        virtual void drawLight(const core::gl::PointLight& light);
         virtual void flush();
     };
 } // namespace cubos::engine::rendering

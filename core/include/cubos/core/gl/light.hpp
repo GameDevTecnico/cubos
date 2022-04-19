@@ -7,7 +7,7 @@
 
 namespace cubos::core::gl
 {
-    struct SpotLightData
+    struct SpotLight
     {
         glm::vec3 position;
         glm::quat rotation;
@@ -17,27 +17,27 @@ namespace cubos::core::gl
         float spotAngle;
         float innerSpotAngle;
 
-        SpotLightData(const glm::vec3& position, const glm::quat& rotation, const glm::vec3& color, float intensity,
-                      float range, float spotAngle, float innerSpotAngle);
+        SpotLight(const glm::vec3& position, const glm::quat& rotation, const glm::vec3& color, float intensity,
+                  float range, float spotAngle, float innerSpotAngle);
     };
 
-    struct DirectionalLightData
+    struct DirectionalLight
     {
         glm::quat rotation;
         glm::vec3 color;
         float intensity;
 
-        DirectionalLightData(const glm::quat& rotation, const glm::vec3& color, float intensity);
+        DirectionalLight(const glm::quat& rotation, const glm::vec3& color, float intensity);
     };
 
-    struct PointLightData
+    struct PointLight
     {
         glm::vec3 position;
         glm::vec3 color;
         float intensity;
         float range;
 
-        PointLightData(const glm::vec3& position, const glm::vec3& color, float intensity, float range);
+        PointLight(const glm::vec3& position, const glm::vec3& color, float intensity, float range);
     };
 } // namespace cubos::core::gl
 

@@ -102,7 +102,7 @@ inline void DeferredRenderer::createShaderPipelines()
                 Material materials[];
             };
 
-            struct SpotLightData
+            struct SpotLight
             {
                 vec4 position;
                 mat4 rotation;
@@ -113,14 +113,14 @@ inline void DeferredRenderer::createShaderPipelines()
                 float innerSpotCutoff;
             };
 
-            struct DirectionalLightData
+            struct DirectionalLight
             {
                 mat4 rotation;
                 vec4 color;
                 float intensity;
             };
 
-            struct PointLightData
+            struct PointLight
             {
                 vec4 position;
                 vec4 color;
@@ -130,9 +130,9 @@ inline void DeferredRenderer::createShaderPipelines()
 
             layout(std140) uniform Lights
             {
-                SpotLightData spotLights[128];
-                DirectionalLightData directionalLights[128];
-                PointLightData pointLights[128];
+                SpotLight spotLights[128];
+                DirectionalLight directionalLights[128];
+                PointLight pointLights[128];
                 uint numSpotLights;
                 uint numDirectionalLights;
                 uint numPointLights;
@@ -144,7 +144,7 @@ inline void DeferredRenderer::createShaderPipelines()
                 return max2 + (value - min1) * (max2 - min2) / (max1 - min1);
             }
 
-            vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLightData light) {
+            vec3 spotLightCalc(vec3 fragPos, vec3 fragNormal, SpotLight light) {
                 vec3 toLight = vec3(light.position) - fragPos;
                 float r = length(toLight) / light.range;
                 if (r < 1) {
@@ -160,12 +160,12 @@ inline void DeferredRenderer::createShaderPipelines()
                 return vec3(0);
             }
 
-            vec3 directionalLightCalc(vec3 fragNormal, DirectionalLightData light)
+            vec3 directionalLightCalc(vec3 fragNormal, DirectionalLight light)
             {
                 return max(dot(fragNormal, -vec3(light.rotation * vec4(0,0,1,1))), 0) * light.intensity * vec3(light.color);
             }
 
-            vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLightData light) {
+            vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLight light) {
                 vec3 toLight = vec3(light.position) - fragPos;
                 float r = length(toLight) / light.range;
                 if (r < 1) {
@@ -314,33 +314,33 @@ Renderer::ModelID DeferredRenderer::registerModel(const std::vector<Vertex>& ver
     return registerModelInternal(vertices, indices, gBufferPipeline);
 }
 
-void DeferredRenderer::drawLight(const SpotLightData& light)
+void DeferredRenderer::drawLight(const SpotLight& light)
 {
     if (lights.numSpotLights >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
     {
-        logWarning("DeferredRenderer::drawLight(const SpotLightData& light) failed: number of spot lights to be drawn "
+        logWarning("DeferredRenderer::drawLight(const SpotLight& light) failed: number of spot lights to be drawn "
                    "this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT.");
         return;
     }
     lights.spotLights[lights.numSpotLights++] = light;
 }
 
-void DeferredRenderer::drawLight(const DirectionalLightData& light)
+void DeferredRenderer::drawLight(const DirectionalLight& light)
 {
     if (lights.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
     {
-        logWarning("DeferredRenderer::drawLight(const DirectionalLightData& light) failed: number of directional "
+        logWarning("DeferredRenderer::drawLight(const DirectionalLight& light) failed: number of directional "
                    "lights to be drawn this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT.");
         return;
     }
     lights.directionalLights[lights.numDirectionalLights++] = light;
 }
 
-void DeferredRenderer::drawLight(const PointLightData& light)
+void DeferredRenderer::drawLight(const PointLight& light)
 {
     if (lights.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
     {
-        logWarning("DeferredRenderer::drawLight(const PointLightData& light) failed: number of point lights to be "
+        logWarning("DeferredRenderer::drawLight(const PointLight& light) failed: number of point lights to be "
                    "drawn this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT.");
         return;
     }
@@ -438,19 +438,19 @@ void DeferredRenderer::getScreenQuad(VertexArray& va, IndexBuffer& ib) const
     ib = screenIndexBuffer;
 }
 
-DeferredRenderer::LightBlock::SpotLightData::SpotLightData(const gl::SpotLightData& light)
+DeferredRenderer::LightBlock::SpotLightData::SpotLightData(const gl::SpotLight& light)
     : position(glm::vec4(light.position, 1)), rotation(glm::toMat4(light.rotation)), color(glm::vec4(light.color, 1)),
       intensity(light.intensity), range(light.range), spotCutoff(cos(light.spotAngle)),
       innerSpotCutoff(cos(light.innerSpotAngle))
 {
 }
 
-DeferredRenderer::LightBlock::DirectionalLightData::DirectionalLightData(const gl::DirectionalLightData& light)
+DeferredRenderer::LightBlock::DirectionalLightData::DirectionalLightData(const gl::DirectionalLight& light)
     : rotation(glm::toMat4(light.rotation)), color(glm::vec4(light.color, 1)), intensity(light.intensity)
 {
 }
 
-DeferredRenderer::LightBlock::PointLightData::PointLightData(const gl::PointLightData& light)
+DeferredRenderer::LightBlock::PointLightData::PointLightData(const gl::PointLight& light)
     : position(glm::vec4(light.position, 1)), color(glm::vec4(light.color, 1)), intensity(light.intensity),
       range(light.range)
 {

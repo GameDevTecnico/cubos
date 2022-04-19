@@ -122,17 +122,17 @@ void Renderer::drawModel(ModelID modelID, glm::mat4 modelMat)
     drawRequests.emplace_back(models[modelID], modelMat);
 }
 
-void Renderer::drawLight(const SpotLightData& light)
+void Renderer::drawLight(const SpotLight& light)
 {
     spotLightRequests.push_back(light);
 }
 
-void Renderer::drawLight(const DirectionalLightData& light)
+void Renderer::drawLight(const DirectionalLight& light)
 {
     directionalLightRequests.push_back(light);
 }
 
-void Renderer::drawLight(const PointLightData& light)
+void Renderer::drawLight(const PointLight& light)
 {
     pointLightRequests.push_back(light);
 }
