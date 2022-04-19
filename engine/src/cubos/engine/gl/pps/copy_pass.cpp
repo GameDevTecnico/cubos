@@ -5,7 +5,7 @@ using namespace cubos::core;
 using namespace cubos::core::gl;
 using namespace cubos::engine;
 
-engine::gl::CopyPass::CopyPass(io::Window& window) : PostProcessingPass(window)
+engine::gl::pps::CopyPass::CopyPass(io::Window& window) : PostProcessingPass(window)
 {
     auto vertex = renderDevice.createShaderStage(Stage::Vertex, R"(
             #version 330 core
@@ -53,7 +53,7 @@ engine::gl::CopyPass::CopyPass(io::Window& window) : PostProcessingPass(window)
     inputTexBP->bind(inputTexSampler);
 }
 
-void engine::gl::CopyPass::execute(const Renderer& renderer, Texture2D input, Framebuffer output) const
+void engine::gl::pps::CopyPass::execute(const Renderer& renderer, Texture2D input, Framebuffer output) const
 {
     renderDevice.setShaderPipeline(pipeline);
     renderDevice.setFramebuffer(output);

@@ -82,7 +82,7 @@ void Renderer::setPalette(PaletteID paletteID)
     currentPalette = palettes[paletteID];
 }
 
-void Renderer::addPostProcessingPass(const PostProcessingPass& pass)
+void Renderer::addPostProcessingPass(const pps::PostProcessingPass& pass)
 {
     postProcessingPasses.emplace_back(pass);
 }

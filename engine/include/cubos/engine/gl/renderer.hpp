@@ -15,7 +15,10 @@
 
 namespace cubos::engine::gl
 {
-    class PostProcessingPass;
+    namespace pps
+    {
+        class PostProcessingPass;
+    }
 
     class Renderer
     {
@@ -59,7 +62,7 @@ namespace cubos::engine::gl
         core::gl::Framebuffer outputFramebuffer1, outputFramebuffer2;
         core::gl::Texture2D outputTexture1, outputTexture2;
 
-        std::list<std::reference_wrapper<const PostProcessingPass>> postProcessingPasses;
+        std::list<std::reference_wrapper<const pps::PostProcessingPass>> postProcessingPasses;
 
     protected:
         explicit Renderer(core::io::Window& window);
@@ -77,7 +80,7 @@ namespace cubos::engine::gl
                                       const std::vector<uint32_t>& indices) = 0;
         virtual PaletteID registerPalette(const core::gl::Palette& palette);
         virtual void setPalette(PaletteID paletteID);
-        virtual void addPostProcessingPass(const PostProcessingPass& pass);
+        virtual void addPostProcessingPass(const pps::PostProcessingPass& pass);
         virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const = 0;
         virtual void render(const core::gl::CameraData& camera, bool usePostProcessing = true) = 0;
         virtual void drawModel(ModelID modelID, glm::mat4 modelMat);

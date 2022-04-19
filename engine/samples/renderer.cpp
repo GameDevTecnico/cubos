@@ -129,7 +129,7 @@ int main(void)
 
     Renderer::ModelID id = renderer.registerModel(vertices, indices);
 
-    CopyPass pass = CopyPass(*window);
+    pps::CopyPass pass = pps::CopyPass(*window);
     renderer.addPostProcessingPass(pass);
 
     glm::vec2 windowSize = window->getFramebufferSize();

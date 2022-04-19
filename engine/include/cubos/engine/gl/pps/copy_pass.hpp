@@ -4,7 +4,7 @@
 
 #include <cubos/engine/gl/pps/pass.hpp>
 
-namespace cubos::engine::gl
+namespace cubos::engine::gl::pps
 {
     class CopyPass : public PostProcessingPass
     {
@@ -19,6 +19,6 @@ namespace cubos::engine::gl
     private:
         void execute(const Renderer& renderer, core::gl::Texture2D input, core::gl::Framebuffer output) const override;
     };
-} // namespace cubos::engine::gl
+} // namespace cubos::engine::gl::pps
 
 #endif // CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP

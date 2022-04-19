@@ -8,6 +8,10 @@
 namespace cubos::engine::gl
 {
     class Renderer;
+}
+
+namespace cubos::engine::gl::pps
+{
 
     class PostProcessingPass
     {
@@ -18,9 +22,9 @@ namespace cubos::engine::gl
     public:
         explicit PostProcessingPass(core::io::Window& window);
 
-        virtual void execute(const Renderer& renderer, core::gl::Texture2D input,
+        virtual void execute(const gl::Renderer& renderer, core::gl::Texture2D input,
                              core::gl::Framebuffer output) const = 0;
     };
-} // namespace cubos::engine::gl
+} // namespace cubos::engine::gl::pps
 
 #endif // CUBOS_ENGINE_GL_PPS_PASS_HPP
