@@ -104,11 +104,6 @@ namespace cubos::engine::gl::deferred
         core::gl::Sampler normalSampler;
         core::gl::Sampler materialSampler;
         // endregion
-    private:
-        void createShaderPipelines();
-        void setupFrameBuffers();
-
-        void createRenderDeviceStates();
 
     public:
         explicit Renderer(core::io::Window& window);
@@ -120,6 +115,11 @@ namespace cubos::engine::gl::deferred
         virtual void drawLight(const core::gl::PointLight& light) override;
         virtual void render(const core::gl::CameraData& camera, bool usePostProcessing = true) override;
         virtual void flush() override;
+    private:
+        void createShaderPipelines();
+        void setupFrameBuffers();
+
+        void createRenderDeviceStates();
     };
 } // namespace cubos::engine::gl::deferred
 
