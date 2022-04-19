@@ -134,11 +134,11 @@ int main(void)
 
     glm::vec2 windowSize = window->getFramebufferSize();
     CameraData mainCamera = {// glm::mat4 viewMatrix;
-                                 glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
-                                 // glm::mat4 perspectiveMatrix;
-                                 glm::perspective(glm::radians(20.0f), windowSize.x / windowSize.y, 0.1f, 1000.f),
-                                 // gl::Framebuffer target;
-                                 0};
+                             glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
+                             // glm::mat4 perspectiveMatrix;
+                             glm::perspective(glm::radians(20.0f), windowSize.x / windowSize.y, 0.1f, 1000.f),
+                             // gl::Framebuffer target;
+                             0};
     float t = 0;
     int s = 0;
 
@@ -180,8 +180,8 @@ int main(void)
             glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
         glm::quat pointLightRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
 
-        renderer.drawLight(SpotLight(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1), 1,
-                                         100, glm::radians(10.0f), glm::radians(9.0f)));
+        renderer.drawLight(SpotLight(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1), 1, 100,
+                                     glm::radians(10.0f), glm::radians(9.0f)));
         renderer.drawLight(DirectionalLight(directionalLightRotation, glm::vec3(1), 0.5f));
         renderer.drawLight(PointLight(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
 
