@@ -12,7 +12,7 @@ using namespace cubos::engine;
 using namespace cubos::engine::gl;
 using namespace cubos::engine::gl::deferred;
 
-inline void deferred::Renderer::createShaderPipelines()
+void deferred::Renderer::createShaderPipelines()
 {
     auto gBufferVertex = renderDevice.createShaderStage(Stage::Vertex, R"(
             #version 330 core
@@ -211,7 +211,7 @@ inline void deferred::Renderer::createShaderPipelines()
     generateScreenQuad(renderDevice, outputPipeline, screenVertexArray, screenIndexBuffer);
 }
 
-inline void deferred::Renderer::setupFrameBuffers()
+void deferred::Renderer::setupFrameBuffers()
 {
     auto sz = window.getFramebufferSize();
 
@@ -286,7 +286,7 @@ inline void deferred::Renderer::setupFrameBuffers()
     outputPaletteBP = outputPipeline->getBindingPoint("palette");
 }
 
-inline void deferred::Renderer::createRenderDeviceStates()
+void deferred::Renderer::createRenderDeviceStates()
 {
     RasterStateDesc rasterStateDesc;
     rasterStateDesc.frontFace = Winding::CCW;
