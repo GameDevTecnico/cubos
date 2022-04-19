@@ -114,7 +114,7 @@ namespace cubos::engine::gl::deferred
         explicit Renderer(core::io::Window& window);
         virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const override;
         virtual ModelID registerModel(const std::vector<core::gl::Vertex>& vertices,
-                                      std::vector<uint32_t>& indices) override;
+                                      const std::vector<uint32_t>& indices) override;
         virtual void drawLight(const core::gl::SpotLight& light) override;
         virtual void drawLight(const core::gl::DirectionalLight& light) override;
         virtual void drawLight(const core::gl::PointLight& light) override;

@@ -19,6 +19,10 @@ namespace cubos::engine::gl
 
     class Renderer
     {
+    public:
+        using ModelID = size_t;
+        using PaletteID = size_t;
+
     protected:
         struct RendererModel
         {
@@ -27,15 +31,23 @@ namespace cubos::engine::gl
             size_t numIndices;
         };
 
+        struct RegisterModelRequest
+        {
+            const std::vector<core::gl::Vertex>& vertices;
+            const std::vector<uint32_t>& indices;
+        };
+
         struct DrawRequest
         {
-            RendererModel& model;
+            ModelID modelId;
             glm::mat4 modelMat;
         };
 
         std::vector<RendererModel> models;
+        size_t modelCounter = 0;
         std::vector<core::gl::ConstantBuffer> palettes;
         core::gl::ConstantBuffer currentPalette;
+        std::vector<RegisterModelRequest> registerRequests;
         std::vector<DrawRequest> drawRequests;
         std::vector<core::gl::SpotLight> spotLightRequests;
         std::vector<core::gl::DirectionalLight> directionalLightRequests;
@@ -49,14 +61,11 @@ namespace cubos::engine::gl
 
         std::list<std::reference_wrapper<const PostProcessingPass>> postProcessingPasses;
 
-    public:
-        using ModelID = size_t;
-        using PaletteID = size_t;
-
     protected:
         explicit Renderer(core::io::Window& window);
-        virtual ModelID registerModelInternal(const std::vector<core::gl::Vertex>& vertices,
-                                              std::vector<uint32_t>& indices, core::gl::ShaderPipeline pipeline);
+        virtual RendererModel registerModelInternal(const std::vector<core::gl::Vertex>& vertices,
+                                                    const std::vector<uint32_t>& indices,
+                                                    core::gl::ShaderPipeline pipeline);
 
         virtual void executePostProcessing(core::gl::Framebuffer target);
 
@@ -65,7 +74,7 @@ namespace cubos::engine::gl
         Renderer(const Renderer&) = delete;
 
         virtual ModelID registerModel(const std::vector<core::gl::Vertex>& vertices,
-                                      std::vector<uint32_t>& indices) = 0;
+                                      const std::vector<uint32_t>& indices) = 0;
         virtual PaletteID registerPalette(const core::gl::Palette& palette);
         virtual void setPalette(PaletteID paletteID);
         virtual void addPostProcessingPass(const PostProcessingPass& pass);

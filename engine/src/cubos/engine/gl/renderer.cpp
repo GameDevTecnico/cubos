@@ -25,8 +25,8 @@ Renderer::Renderer(io::Window& window) : window(window), renderDevice(window.get
     outputFramebuffer2 = renderDevice.createFramebuffer(outputFramebufferDesc);
 }
 
-Renderer::ModelID Renderer::registerModelInternal(const std::vector<Vertex>& vertices, std::vector<uint32_t>& indices,
-                                                  ShaderPipeline pipeline)
+Renderer::RendererModel Renderer::registerModelInternal(const std::vector<Vertex>& vertices,
+                                                        const std::vector<uint32_t>& indices, ShaderPipeline pipeline)
 {
     RendererModel model;
 
@@ -60,8 +60,7 @@ Renderer::ModelID Renderer::registerModelInternal(const std::vector<Vertex>& ver
         renderDevice.createIndexBuffer(indices.size() * sizeof(size_t), &indices[0], IndexFormat::UInt, Usage::Static);
     model.numIndices = indices.size();
 
-    models.push_back(model);
-    return models.size() - 1;
+    return model;
 }
 
 Renderer::PaletteID Renderer::registerPalette(const Palette& palette)
@@ -113,12 +112,12 @@ void Renderer::executePostProcessing(Framebuffer target)
 
 void Renderer::drawModel(ModelID modelID, glm::mat4 modelMat)
 {
-    if (modelID > models.size() - 1)
+    if (modelID > modelCounter - 1)
     {
         logError("DeferredRenderer::drawModel() failed: no model was registered with modelID \"{}\"", modelID);
         return;
     }
-    drawRequests.emplace_back(models[modelID], modelMat);
+    drawRequests.emplace_back(modelID, modelMat);
 }
 
 void Renderer::drawLight(const SpotLight& light)

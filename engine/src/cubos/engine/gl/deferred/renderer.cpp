@@ -312,9 +312,10 @@ deferred::Renderer::Renderer(io::Window& window) : cubos::engine::gl::Renderer(w
 }
 
 engine::gl::Renderer::ModelID deferred::Renderer::registerModel(const std::vector<Vertex>& vertices,
-                                                                std::vector<uint32_t>& indices)
+                                                                const std::vector<uint32_t>& indices)
 {
-    return registerModelInternal(vertices, indices, gBufferPipeline);
+    registerRequests.emplace_back(vertices, indices);
+    return modelCounter++;
 }
 
 void deferred::Renderer::drawLight(const SpotLight& light)
@@ -352,6 +353,11 @@ void deferred::Renderer::drawLight(const PointLight& light)
 
 void deferred::Renderer::render(const CameraData& camera, bool usePostProcessing)
 {
+    for (auto& request : registerRequests)
+    {
+        models.push_back(registerModelInternal(request.vertices, request.indices, gBufferPipeline));
+    }
+    registerRequests.clear();
 
     renderDevice.setFramebuffer(camera.target);
     auto sz = window.getFramebufferSize();
@@ -375,13 +381,13 @@ void deferred::Renderer::render(const CameraData& camera, bool usePostProcessing
     mvp.P = camera.perspectiveMatrix;
     mvpBuffer->unmap();
 
-    for (auto it = drawRequests.begin(); it != drawRequests.end(); it++)
+    for (auto& request : drawRequests)
     {
         auto& m = *(glm::mat4*)mvpBuffer->map();
-        m = it->modelMat;
+        m = request.modelMat;
         mvpBuffer->unmap();
 
-        RendererModel& model = it->model;
+        RendererModel& model = models[request.modelId];
 
         renderDevice.setVertexArray(model.va);
         renderDevice.setIndexBuffer(model.ib);
