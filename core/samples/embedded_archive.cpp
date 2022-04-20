@@ -1,10 +1,10 @@
-#include <cubos/data/file_system.hpp>
-#include <cubos/data/embedded_archive.hpp>
+#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/embedded_archive.hpp>
 
 int main()
 {
-    using namespace cubos;
-    using namespace cubos::data;
+    using namespace cubos::core;
+    using namespace cubos::core::data;
 
     // The name passed to the constructor of the embedded archive must be the same as the name used when embedding the
     // data. In this case, since the name wasn't specified, the name of the root directory was used.
@@ -37,18 +37,29 @@ int main()
 /// use it in an EmbeddedArchive, you just need to construct
 /// an EmbeddedArchive with the data name 'assets'
 
-#include <cubos/data/embedded_archive.hpp>
+#include <cubos/core/data/embedded_archive.hpp>
 
-using namespace cubos::data;
+using namespace cubos::core::data;
 
-static const uint8_t fileData3[] = { 0x62, 0x61, 0x7a, 0xa, };
-static const uint8_t fileData4[] = { 0x66, 0x6f, 0x6f, 0xa, };
+static const uint8_t fileData3[] = {
+    0x62,
+    0x61,
+    0x7a,
+    0xa,
+};
+
+static const uint8_t fileData4[] = {
+    0x66,
+    0x6f,
+    0x6f,
+    0xa,
+};
 
 static const EmbeddedArchive::Data::Entry entries[] = {
-    { "", true, 0, 0, 2, nullptr, 0 },
-    { "bar", true, 1, 4, 3, nullptr, 0 },
-    { "baz.txt", false, 2, 0, 0, fileData3, sizeof(fileData3) },
-    { "foo.txt", false, 1, 0, 0, fileData4, sizeof(fileData4) },
+    {"", true, 0, 0, 2, nullptr, 0},
+    {"bar", true, 1, 4, 3, nullptr, 0},
+    {"baz.txt", false, 2, 0, 0, fileData3, sizeof(fileData3)},
+    {"foo.txt", false, 1, 0, 0, fileData4, sizeof(fileData4)},
 };
 
 static const EmbeddedArchive::Data embeddedArchiveData = {

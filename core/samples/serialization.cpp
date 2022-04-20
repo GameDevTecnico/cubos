@@ -1,10 +1,10 @@
-#include <cubos/memory/serializer.hpp>
-#include <cubos/memory/serialization_map.hpp>
-#include <cubos/memory/yaml_serializer.hpp>
+#include <cubos/core/memory/serializer.hpp>
+#include <cubos/core/memory/serialization_map.hpp>
+#include <cubos/core/memory/yaml_serializer.hpp>
 
 #include <stack>
 
-using namespace cubos::memory;
+using namespace cubos::core::memory;
 
 // Example serializer
 class MySerializer : public Serializer
@@ -273,7 +273,7 @@ struct Fruit
 
 int main()
 {
-    using namespace cubos::memory;
+    using namespace cubos::core::memory;
 
     Serializer* s;
 
