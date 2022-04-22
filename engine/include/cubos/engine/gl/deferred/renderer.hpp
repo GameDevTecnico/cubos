@@ -115,6 +115,7 @@ namespace cubos::engine::gl::deferred
         virtual void drawLight(const core::gl::PointLight& light) override;
         virtual void render(const core::gl::CameraData& camera, bool usePostProcessing = true) override;
         virtual void flush() override;
+
     private:
         void createShaderPipelines();
         void setupFrameBuffers();
