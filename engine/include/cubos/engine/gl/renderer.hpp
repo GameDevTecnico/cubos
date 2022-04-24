@@ -6,6 +6,7 @@
 #include <list>
 
 #include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/gl/grid.hpp>
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/palette.hpp>
 #include <cubos/core/gl/camera_data.hpp>
@@ -34,12 +35,6 @@ namespace cubos::engine::gl
             size_t numIndices;
         };
 
-        struct RegisterModelRequest
-        {
-            const std::vector<core::gl::Vertex>& vertices;
-            const std::vector<uint32_t>& indices;
-        };
-
         struct DrawRequest
         {
             ModelID modelId;
@@ -50,7 +45,7 @@ namespace cubos::engine::gl
         size_t modelCounter = 0;
         std::vector<core::gl::ConstantBuffer> palettes;
         core::gl::ConstantBuffer currentPalette;
-        std::vector<RegisterModelRequest> registerRequests;
+        std::vector<std::reference_wrapper<const core::gl::Grid>> registerRequests;
         std::vector<DrawRequest> drawRequests;
         std::vector<core::gl::SpotLight> spotLightRequests;
         std::vector<core::gl::DirectionalLight> directionalLightRequests;
@@ -66,9 +61,7 @@ namespace cubos::engine::gl
 
     protected:
         explicit Renderer(core::io::Window& window);
-        virtual RendererModel registerModelInternal(const std::vector<core::gl::Vertex>& vertices,
-                                                    const std::vector<uint32_t>& indices,
-                                                    core::gl::ShaderPipeline pipeline);
+        virtual RendererModel registerModelInternal(const core::gl::Grid& grid, core::gl::ShaderPipeline pipeline);
 
         virtual void executePostProcessing(core::gl::Framebuffer target);
 
@@ -76,8 +69,7 @@ namespace cubos::engine::gl
         virtual ~Renderer() = default;
         Renderer(const Renderer&) = delete;
 
-        virtual ModelID registerModel(const std::vector<core::gl::Vertex>& vertices,
-                                      const std::vector<uint32_t>& indices) = 0;
+        virtual ModelID registerModel(const core::gl::Grid& grid) = 0;
         virtual PaletteID registerPalette(const core::gl::Palette& palette);
         virtual void setPalette(PaletteID paletteID);
         virtual void addPostProcessingPass(const pps::PostProcessingPass& pass);

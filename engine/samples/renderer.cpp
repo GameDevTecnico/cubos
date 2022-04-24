@@ -44,90 +44,11 @@ int main(void)
     auto palette1ID = renderer.registerPalette(palette1);
     auto palette2ID = renderer.registerPalette(palette2);
 
-    std::vector<Vertex> vertices = {
-        // Front
-        {{1, 0, 0}, {0, 0, -1}, 1},
-        {{0, 0, 0}, {0, 0, -1}, 1},
-        {{0, 1, 0}, {0, 0, -1}, 1},
-        {{1, 1, 0}, {0, 0, -1}, 1},
-        // Back
-        {{0, 0, 1}, {0, 0, 1}, 2},
-        {{1, 0, 1}, {0, 0, 1}, 2},
-        {{1, 1, 1}, {0, 0, 1}, 2},
-        {{0, 1, 1}, {0, 0, 1}, 2},
-        // Left
-        {{1, 0, 1}, {1, 0, 0}, 3},
-        {{1, 0, 0}, {1, 0, 0}, 3},
-        {{1, 1, 0}, {1, 0, 0}, 3},
-        {{1, 1, 1}, {1, 0, 0}, 3},
-        // Right
-        {{0, 0, 0}, {-1, 0, 0}, 4},
-        {{0, 0, 1}, {-1, 0, 0}, 4},
-        {{0, 1, 1}, {-1, 0, 0}, 4},
-        {{0, 1, 0}, {-1, 0, 0}, 4},
-        // Bottom
-        {{1, 0, 1}, {0, -1, 0}, 5},
-        {{0, 0, 1}, {0, -1, 0}, 5},
-        {{0, 0, 0}, {0, -1, 0}, 5},
-        {{1, 0, 0}, {0, -1, 0}, 5},
-        // Top
-        {{1, 1, 0}, {0, 1, 0}, 6},
-        {{0, 1, 0}, {0, 1, 0}, 6},
-        {{0, 1, 1}, {0, 1, 0}, 6},
-        {{1, 1, 1}, {0, 1, 0}, 6},
-    };
+    Grid cube;
 
-    std::vector<uint32_t> indices = {
-        // Front
-        0,
-        1,
-        3,
-        1,
-        2,
-        3,
+    cube.set({0,0,0}, 1);
 
-        // Back
-        4,
-        5,
-        7,
-        5,
-        6,
-        7,
-
-        // Left
-        8,
-        9,
-        11,
-        9,
-        10,
-        11,
-
-        // Right
-        12,
-        13,
-        15,
-        13,
-        14,
-        15,
-
-        // Bottom
-        16,
-        17,
-        19,
-        17,
-        18,
-        19,
-
-        // Top
-        20,
-        21,
-        23,
-        21,
-        22,
-        23,
-    };
-
-    Renderer::ModelID id = renderer.registerModel(vertices, indices);
+    Renderer::ModelID id = renderer.registerModel(cube);
 
     pps::CopyPass pass = pps::CopyPass(*window);
     renderer.addPostProcessingPass(pass);

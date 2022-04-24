@@ -25,10 +25,13 @@ Renderer::Renderer(io::Window& window) : window(window), renderDevice(window.get
     outputFramebuffer2 = renderDevice.createFramebuffer(outputFramebufferDesc);
 }
 
-Renderer::RendererModel Renderer::registerModelInternal(const std::vector<Vertex>& vertices,
-                                                        const std::vector<uint32_t>& indices, ShaderPipeline pipeline)
+Renderer::RendererModel Renderer::registerModelInternal(const core::gl::Grid& grid, ShaderPipeline pipeline)
 {
     RendererModel model;
+
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+    triangulate(grid, vertices, indices);
 
     VertexBuffer vb = renderDevice.createVertexBuffer(vertices.size() * sizeof(Vertex), &vertices[0], Usage::Static);
 

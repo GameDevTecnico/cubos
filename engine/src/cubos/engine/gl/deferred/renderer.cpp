@@ -311,10 +311,9 @@ deferred::Renderer::Renderer(io::Window& window) : cubos::engine::gl::Renderer(w
     createRenderDeviceStates();
 }
 
-engine::gl::Renderer::ModelID deferred::Renderer::registerModel(const std::vector<Vertex>& vertices,
-                                                                const std::vector<uint32_t>& indices)
+engine::gl::Renderer::ModelID deferred::Renderer::registerModel(const core::gl::Grid& grid)
 {
-    registerRequests.emplace_back(vertices, indices);
+    registerRequests.emplace_back(grid);
     return modelCounter++;
 }
 
@@ -353,9 +352,9 @@ void deferred::Renderer::drawLight(const PointLight& light)
 
 void deferred::Renderer::render(const CameraData& camera, bool usePostProcessing)
 {
-    for (auto& request : registerRequests)
+    for (auto& grid : registerRequests)
     {
-        models.push_back(registerModelInternal(request.vertices, request.indices, gBufferPipeline));
+        models.push_back(registerModelInternal(grid, gBufferPipeline));
     }
     registerRequests.clear();
 

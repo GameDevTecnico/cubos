@@ -59,9 +59,7 @@ int main(void)
     grid.set({2, 0, 2}, 1);
     grid.set({1, 1, 1}, 3);
 
-    triangulate(grid, vertices, indices);
-
-    Renderer::ModelID id = renderer.registerModel(vertices, indices);
+    Renderer::ModelID id = renderer.registerModel(grid);
 
     pps::CopyPass pass = pps::CopyPass(*window);
     renderer.addPostProcessingPass(pass);
