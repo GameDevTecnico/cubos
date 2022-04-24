@@ -58,6 +58,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/grid.cpp"
     "src/cubos/core/gl/light.cpp"
     "src/cubos/core/gl/util.cpp"
+    "src/cubos/core/gl/vertex.cpp"
     )
 
 set(CUBOS_CORE_INCLUDE
