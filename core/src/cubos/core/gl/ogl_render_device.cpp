@@ -833,76 +833,76 @@ public:
 class OGLShaderBindingPoint : public impl::ShaderBindingPoint
 {
 public:
-    OGLShaderBindingPoint(const char* name, int loc) : name(name), loc(loc)
+    OGLShaderBindingPoint(const char* name, int loc, int tex = 0) : name(name), loc(loc), tex(tex)
     {
     }
 
     virtual void bind(Sampler sampler) override
     {
         if (sampler)
-            glBindSampler(this->loc, std::static_pointer_cast<OGLSampler>(sampler)->id);
+            glBindSampler(this->tex, std::static_pointer_cast<OGLSampler>(sampler)->id);
         else
-            glBindSampler(this->loc, 0);
+            glBindSampler(this->tex, 0);
     }
 
     virtual void bind(Texture1D tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->loc);
+        glActiveTexture(GL_TEXTURE0 + this->tex);
         if (tex)
             glBindTexture(GL_TEXTURE_1D, std::static_pointer_cast<OGLTexture1D>(tex)->id);
         else
             glBindTexture(GL_TEXTURE_1D, 0);
-        glUniform1i(this->loc, this->loc);
+        glUniform1i(this->loc, this->tex);
     }
 
     virtual void bind(Texture2D tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->loc);
+        glActiveTexture(GL_TEXTURE0 + this->tex);
         if (tex)
             glBindTexture(GL_TEXTURE_2D, std::static_pointer_cast<OGLTexture2D>(tex)->id);
         else
             glBindTexture(GL_TEXTURE_2D, 0);
-        glUniform1i(this->loc, this->loc);
+        glUniform1i(this->loc, this->tex);
     }
 
     virtual void bind(Texture2DArray tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->loc);
+        glActiveTexture(GL_TEXTURE0 + this->tex);
         if (tex)
             glBindTexture(GL_TEXTURE_2D_ARRAY, std::static_pointer_cast<OGLTexture2DArray>(tex)->id);
         else
             glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
-        glUniform1i(this->loc, this->loc);
+        glUniform1i(this->loc, this->tex);
     }
 
     virtual void bind(Texture3D tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->loc);
+        glActiveTexture(GL_TEXTURE0 + this->tex);
         if (tex)
             glBindTexture(GL_TEXTURE_3D, std::static_pointer_cast<OGLTexture3D>(tex)->id);
         else
             glBindTexture(GL_TEXTURE_3D, 0);
-        glUniform1i(this->loc, this->loc);
+        glUniform1i(this->loc, this->tex);
     }
 
     virtual void bind(CubeMap cubeMap) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->loc);
+        glActiveTexture(GL_TEXTURE0 + this->tex);
         if (cubeMap)
             glBindTexture(GL_TEXTURE_CUBE_MAP, std::static_pointer_cast<OGLCubeMap>(cubeMap)->id);
         else
             glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-        glUniform1i(this->loc, this->loc);
+        glUniform1i(this->loc, this->tex);
     }
 
     virtual void bind(CubeMapArray cubeMap) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->loc);
+        glActiveTexture(GL_TEXTURE0 + this->tex);
         if (cubeMap)
             glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, std::static_pointer_cast<OGLCubeMapArray>(cubeMap)->id);
         else
             glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
-        glUniform1i(this->loc, this->loc);
+        glUniform1i(this->loc, this->tex);
     }
 
     virtual void bind(ConstantBuffer cb) override
@@ -980,7 +980,7 @@ public:
     }
 
     std::string name;
-    int loc;
+    int loc, tex;
 };
 
 class OGLShaderPipeline : public impl::ShaderPipeline
@@ -988,6 +988,7 @@ class OGLShaderPipeline : public impl::ShaderPipeline
 public:
     OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program) : vs(vs), ps(ps), program(program)
     {
+        this->texCount = 0;
         this->uboCount = 0;
         this->ssboCount = 0;
     }
@@ -996,6 +997,7 @@ public:
         : OGLShaderPipeline(vs, ps, program)
     {
         this->gs = gs;
+        this->texCount = 0;
         this->uboCount = 0;
         this->ssboCount = 0;
     }
@@ -1017,7 +1019,7 @@ public:
         auto loc = glGetUniformLocation(this->program, name);
         if (loc != -1)
         {
-            bps.emplace_back(name, loc);
+            bps.emplace_back(name, loc, this->texCount++);
             return &bps.back();
         }
 
@@ -1070,6 +1072,7 @@ public:
     std::list<OGLShaderBindingPoint> bps;
 
 private:
+    int texCount;
     int uboCount;
     int ssboCount;
 };
