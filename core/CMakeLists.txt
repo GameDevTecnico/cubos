@@ -57,7 +57,9 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/material.cpp"
     "src/cubos/core/gl/palette.cpp"
     "src/cubos/core/gl/grid.cpp"
+    "src/cubos/core/gl/light.cpp"
     "src/cubos/core/gl/util.cpp"
+    "src/cubos/core/gl/vertex.cpp"
 
     "src/cubos/core/ecs/world.cpp"
 )
@@ -91,6 +93,9 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/gl/material.hpp"
     "include/cubos/core/gl/palette.hpp"
     "include/cubos/core/gl/grid.hpp"
+    "include/cubos/core/gl/vertex.hpp"
+    "include/cubos/core/gl/camera.hpp"
+    "include/cubos/core/gl/light.hpp"
     "include/cubos/core/gl/util.hpp"
 
     "include/cubos/core/io/input_manager.hpp"
