@@ -6,7 +6,8 @@ set(ENGINE_SAMPLES_SOURCES
     "empty.cpp"
     "renderer.cpp"
     "triangulation.cpp"
-    )
+    "asset.cpp"
+)
 
 # For each sample file, create a target named after the file but without the
 # file extension
@@ -19,6 +20,7 @@ foreach (file ${ENGINE_SAMPLES_SOURCES})
 
     # Add sample target
     add_executable(${target} ${file})
+    target_compile_definitions(${target} PUBLIC SAMPLE_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
     target_link_libraries(${target} cubos-engine)
     set_property(TARGET ${target} PROPERTY CXX_STANDARD 20)
     target_compile_features(${target} PUBLIC cxx_std_20)
