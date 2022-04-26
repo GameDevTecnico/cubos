@@ -5,7 +5,7 @@ using namespace cubos::core;
 using namespace cubos::core::gl;
 using namespace cubos::engine;
 
-engine::gl::pps::CopyPass::CopyPass(io::Window& window) : PostProcessingPass(window)
+engine::gl::pps::CopyPass::CopyPass(io::Window& window) : Pass(window)
 {
     auto vertex = renderDevice.createShaderStage(Stage::Vertex, R"(
             #version 330 core

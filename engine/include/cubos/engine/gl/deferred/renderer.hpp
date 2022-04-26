@@ -1,11 +1,12 @@
 #ifndef CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP
 #define CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP
 
-#include <vector>
+#include <cubos/engine/gl/renderer.hpp>
 
-#include "cubos/core/gl/vertex.hpp"
+#include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/render_device.hpp>
-#include "cubos/engine/gl/renderer.hpp"
+
+#include <vector>
 
 #define CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT 128
@@ -15,7 +16,22 @@ namespace cubos::engine::gl::deferred
 {
     class Renderer : public gl::Renderer
     {
+    public:
+        explicit Renderer(core::io::Window& window);
+        virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const override;
+        virtual ModelID registerModel(const core::gl::Grid& grid) override;
+        virtual void drawLight(const core::gl::SpotLight& light) override;
+        virtual void drawLight(const core::gl::DirectionalLight& light) override;
+        virtual void drawLight(const core::gl::PointLight& light) override;
+        virtual void render(const core::gl::Camera& camera, bool usePostProcessing = true) override;
+        virtual void flush() override;
+
     private:
+        void createShaderPipelines();
+        void setupFrameBuffers();
+
+        void createRenderDeviceStates();
+
         struct MVP
         {
             glm::mat4 M;
@@ -66,7 +82,6 @@ namespace cubos::engine::gl::deferred
             uint32_t numPointLights = 0;
         } lights;
 
-        // region gBuffer
         //  Shader Pipeline
         core::gl::ShaderPipeline gBufferPipeline;
         core::gl::ShaderBindingPoint mvpBP;
@@ -83,9 +98,7 @@ namespace cubos::engine::gl::deferred
         core::gl::Texture2D normalTex;
         core::gl::Texture2D materialTex;
         core::gl::Texture2D depthTex;
-        // endregion
 
-        // region outputBuffer
         // Shader Pipeline
         core::gl::ShaderPipeline outputPipeline;
         core::gl::ShaderBindingPoint outputPositionBP;
@@ -103,23 +116,6 @@ namespace cubos::engine::gl::deferred
         core::gl::Sampler positionSampler;
         core::gl::Sampler normalSampler;
         core::gl::Sampler materialSampler;
-        // endregion
-
-    public:
-        explicit Renderer(core::io::Window& window);
-        virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const override;
-        virtual ModelID registerModel(const core::gl::Grid& grid) override;
-        virtual void drawLight(const core::gl::SpotLight& light) override;
-        virtual void drawLight(const core::gl::DirectionalLight& light) override;
-        virtual void drawLight(const core::gl::PointLight& light) override;
-        virtual void render(const core::gl::CameraData& camera, bool usePostProcessing = true) override;
-        virtual void flush() override;
-
-    private:
-        void createShaderPipelines();
-        void setupFrameBuffers();
-
-        void createRenderDeviceStates();
     };
 } // namespace cubos::engine::gl::deferred
 

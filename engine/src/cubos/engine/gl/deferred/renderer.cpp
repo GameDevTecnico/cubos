@@ -350,7 +350,7 @@ void deferred::Renderer::drawLight(const PointLight& light)
     lights.pointLights[lights.numPointLights++] = light;
 }
 
-void deferred::Renderer::render(const CameraData& camera, bool usePostProcessing)
+void deferred::Renderer::render(const Camera& camera, bool usePostProcessing)
 {
     for (auto& grid : registerRequests)
     {

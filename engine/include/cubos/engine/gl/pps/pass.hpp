@@ -12,15 +12,15 @@ namespace cubos::engine::gl
 
 namespace cubos::engine::gl::pps
 {
-
-    class PostProcessingPass
+    /// A generic post procresssing pass.
+    class Pass
     {
     protected:
         core::io::Window& window;
         core::gl::RenderDevice& renderDevice;
 
     public:
-        explicit PostProcessingPass(core::io::Window& window);
+        explicit Pass(core::io::Window& window);
 
         virtual void execute(const gl::Renderer& renderer, core::gl::Texture2D input,
                              core::gl::Framebuffer output) const = 0;

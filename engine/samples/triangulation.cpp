@@ -67,12 +67,12 @@ int main(void)
         renderer.addPostProcessingPass(pass);
 
         glm::vec2 windowSize = window->getFramebufferSize();
-        CameraData mainCamera = {// glm::mat4 viewMatrix;
-                                 glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
-                                 // glm::mat4 perspectiveMatrix;
-                                 glm::perspective(glm::radians(20.0f), windowSize.x / windowSize.y, 0.1f, 1000.f),
-                                 // gl::Framebuffer target;
-                                 0};
+        Camera mainCamera = {// glm::mat4 viewMatrix;
+                             glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
+                             // glm::mat4 perspectiveMatrix;
+                             glm::perspective(glm::radians(20.0f), windowSize.x / windowSize.y, 0.1f, 1000.f),
+                             // gl::Framebuffer target;
+                             0};
         float t = 0;
         int s = 0;
 

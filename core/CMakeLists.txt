@@ -89,7 +89,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/gl/palette.hpp"
     "include/cubos/core/gl/grid.hpp"
     "include/cubos/core/gl/vertex.hpp"
-    "include/cubos/core/gl/camera_data.hpp"
+    "include/cubos/core/gl/camera.hpp"
     "include/cubos/core/gl/light.hpp"
     "include/cubos/core/gl/util.hpp"
 

@@ -6,18 +6,17 @@
 
 namespace cubos::engine::gl::pps
 {
-    class CopyPass : public PostProcessingPass
+    class CopyPass : public Pass
     {
-    private:
-        core::gl::ShaderPipeline pipeline;
-        core::gl::ShaderBindingPoint inputTexBP;
-        core::gl::Sampler inputTexSampler;
-
     public:
         explicit CopyPass(core::io::Window& window);
 
     private:
         void execute(const Renderer& renderer, core::gl::Texture2D input, core::gl::Framebuffer output) const override;
+
+        core::gl::ShaderPipeline pipeline;
+        core::gl::ShaderBindingPoint inputTexBP;
+        core::gl::Sampler inputTexSampler;
     };
 } // namespace cubos::engine::gl::pps
 
