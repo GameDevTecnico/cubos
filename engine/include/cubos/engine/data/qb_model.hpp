@@ -29,7 +29,7 @@ namespace cubos::engine::data
         class QBModelLoader : public Loader
         {
         public:
-            QBModelLoader() = default;
+            using Loader::Loader;
             virtual ~QBModelLoader() override = default;
 
             virtual const void* load(const Meta& meta) override;

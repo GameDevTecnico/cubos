@@ -46,6 +46,14 @@ Grid::Grid()
     this->indices.resize(1, 0);
 }
 
+Grid& Grid::operator=(const Grid& rhs)
+{
+    this->size = rhs.size;
+    this->indices = rhs.indices;
+
+    return *this;
+}
+
 void Grid::setSize(const glm::uvec3& size)
 {
     if (size == this->size)
