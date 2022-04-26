@@ -36,6 +36,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/file_system.cpp"
     "src/cubos/core/data/std_archive.cpp"
     "src/cubos/core/data/embedded_archive.cpp"
+    "src/cubos/core/data/qb_parser.cpp"
 
     "src/cubos/core/io/window.cpp"
     "src/cubos/core/io/glfw_window.hpp"
@@ -59,7 +60,9 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/light.cpp"
     "src/cubos/core/gl/util.cpp"
     "src/cubos/core/gl/vertex.cpp"
-    )
+
+    "src/cubos/core/ecs/world.cpp"
+)
 
 set(CUBOS_CORE_INCLUDE
     "include/cubos/core/log.hpp"
@@ -73,6 +76,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/memory/yaml_serializer.hpp"
     "include/cubos/core/memory/yaml_deserializer.hpp"
     "include/cubos/core/memory/serialization_map.hpp"
+    "include/cubos/core/memory/endianness.hpp"
 
     "include/cubos/core/data/file.hpp"
     "include/cubos/core/data/file_stream.hpp"
@@ -80,6 +84,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/archive.hpp"
     "include/cubos/core/data/std_archive.hpp"
     "include/cubos/core/data/embedded_archive.hpp"
+    "include/cubos/core/data/qb_parser.hpp"
 
     "include/cubos/core/io/window.hpp"
 
@@ -100,7 +105,14 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/sources/button_press.hpp"
     "include/cubos/core/io/sources/single_axis.hpp"
     "include/cubos/core/io/sources/double_axis.hpp"
-    )
+
+    "include/cubos/core/ecs/world.hpp"
+    "include/cubos/core/ecs/world_view.hpp"
+    "include/cubos/core/ecs/storage.hpp"
+    "include/cubos/core/ecs/vec_storage.hpp"
+    "include/cubos/core/ecs/map_storage.hpp"
+    "include/cubos/core/ecs/null_storage.hpp"
+)
 
 # Create core library
 

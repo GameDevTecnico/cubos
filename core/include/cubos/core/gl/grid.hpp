@@ -19,18 +19,24 @@ namespace cubos::core::gl
 
         /// @param size The size of the grid.
         /// @param width The material index width to use.
-        Grid(const glm::ivec3& size);
+        Grid(const glm::uvec3& size);
 
         /// @param size The size of the grid.
         /// @param indices The material indices of the voxels.
-        Grid(const glm::ivec3& size, const std::vector<uint16_t>& indices);
+        Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices);
 
-        /// Resizes the grid. Any voxels set before are cleared.
+        Grid(Grid&&);
+        ~Grid() = default;
+
+        /// Resizes the grid.
         /// @param size The new size of the grid.
         void setSize(const glm::uvec3& size);
 
         /// @return The size of the grid.
         const glm::uvec3& getSize() const;
+
+        /// Clears the grid.
+        void clear();
 
         /// @param position The position of the voxel.
         /// @param mat The material index to set.

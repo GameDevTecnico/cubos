@@ -3,7 +3,7 @@
 
 using namespace cubos::core::gl;
 
-Grid::Grid(const glm::ivec3& size)
+Grid::Grid(const glm::uvec3& size)
 {
     if (size.x < 1 || size.y < 1 || size.z < 1)
     {
@@ -16,7 +16,7 @@ Grid::Grid(const glm::ivec3& size)
     this->indices.resize(this->size.x * this->size.y * this->size.z, 0);
 }
 
-Grid::Grid(const glm::ivec3& size, const std::vector<uint16_t>& indices)
+Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
 {
     if (size.x < 1 || size.y < 1 || size.z < 1)
     {
@@ -33,6 +33,11 @@ Grid::Grid(const glm::ivec3& size, const std::vector<uint16_t>& indices)
     else
         this->size = size;
     this->indices = indices;
+}
+
+Grid::Grid(Grid&& other) : size(other.size)
+{
+    new (&this->indices) std::vector<uint16_t>(std::move(other.indices));
 }
 
 Grid::Grid()
@@ -61,6 +66,12 @@ void Grid::setSize(const glm::uvec3& size)
 const glm::uvec3& Grid::getSize() const
 {
     return size;
+}
+
+void Grid::clear()
+{
+    for (size_t i = 0; i < this->indices.size(); i++)
+        this->indices[i] = 0;
 }
 
 uint16_t Grid::get(const glm::ivec3& position) const
