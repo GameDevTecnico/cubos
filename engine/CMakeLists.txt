@@ -9,10 +9,18 @@ message( "# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 
 set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
+
+    "src/cubos/engine/data/meta.cpp"
+    "src/cubos/engine/data/asset_manager.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/cubos.hpp"
+
+    "include/cubos/engine/data/meta.hpp"
+    "include/cubos/engine/data/asset.hpp"
+    "include/cubos/engine/data/asset_manager.hpp"
+    "include/cubos/engine/data/loader.hpp"
 )
 
 # Create cubos engine

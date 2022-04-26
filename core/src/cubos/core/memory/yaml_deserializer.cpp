@@ -159,9 +159,17 @@ size_t YAMLDeserializer::beginDictionary()
     {
         // Dictionaries can't be used as keys in dictionaries.
         assert(this->frame.top().mode != Mode::Dictionary || !this->frame.top().key);
-        assert(iter->second.IsMap());
-        this->frame.push({Mode::Dictionary, iter->second.begin(), true});
-        return iter->second.size();
+        if (iter->second.IsNull())
+        {
+            this->frame.push({Mode::Dictionary, iter->second.begin(), true});
+            return 0;
+        }
+        else
+        {
+            assert(iter->second.IsMap());
+            this->frame.push({Mode::Dictionary, iter->second.begin(), true});
+            return iter->second.size();
+        }
     }
 }
 
