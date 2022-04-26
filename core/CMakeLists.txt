@@ -58,7 +58,9 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/palette.cpp"
     "src/cubos/core/gl/grid.cpp"
     "src/cubos/core/gl/util.cpp"
-    )
+
+    "src/cubos/core/ecs/world.cpp"
+)
 
 set(CUBOS_CORE_INCLUDE
     "include/cubos/core/log.hpp"
@@ -98,6 +100,13 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/sources/button_press.hpp"
     "include/cubos/core/io/sources/single_axis.hpp"
     "include/cubos/core/io/sources/double_axis.hpp"
+
+    "include/cubos/core/ecs/world.hpp"
+    "include/cubos/core/ecs/world_view.hpp"
+    "include/cubos/core/ecs/storage.hpp"
+    "include/cubos/core/ecs/vec_storage.hpp"
+    "include/cubos/core/ecs/map_storage.hpp"
+    "include/cubos/core/ecs/null_storage.hpp"
 )
 
 # Create core library
