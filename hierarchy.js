@@ -7,6 +7,7 @@ var hierarchy =
     ] ],
     [ "cubos::core::gl::impl::BlendState", "classcubos_1_1core_1_1gl_1_1impl_1_1BlendState.html", null ],
     [ "cubos::core::gl::BlendStateDesc", "structcubos_1_1core_1_1gl_1_1BlendStateDesc.html", null ],
+    [ "cubos::core::gl::Camera", "structcubos_1_1core_1_1gl_1_1Camera.html", null ],
     [ "cubos::core::gl::impl::ConstantBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1ConstantBuffer.html", null ],
     [ "cubos::core::gl::ConstantBufferElement", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html", null ],
     [ "cubos::core::gl::ConstantBufferStructure", "structcubos_1_1core_1_1gl_1_1ConstantBufferStructure.html", null ],
@@ -25,6 +26,7 @@ var hierarchy =
     [ "cubos::core::memory::Deserializer", "classcubos_1_1core_1_1memory_1_1Deserializer.html", [
       [ "cubos::core::memory::YAMLDeserializer", "classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html", null ]
     ] ],
+    [ "cubos::core::gl::DirectionalLight", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html", null ],
     [ "enable_shared_from_this", null, [
       [ "cubos::core::data::File", "classcubos_1_1core_1_1data_1_1File.html", null ]
     ] ],
@@ -51,6 +53,7 @@ var hierarchy =
     [ "cubos::core::ecs::WorldView< ComponentTypes >::Iterator", "structcubos_1_1core_1_1ecs_1_1WorldView_1_1Iterator.html", null ],
     [ "cubos::core::gl::Material", "structcubos_1_1core_1_1gl_1_1Material.html", null ],
     [ "cubos::core::gl::Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
+    [ "cubos::core::gl::PointLight", "structcubos_1_1core_1_1gl_1_1PointLight.html", null ],
     [ "cubos::core::data::QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", null ],
     [ "cubos::core::gl::impl::RasterState", "classcubos_1_1core_1_1gl_1_1impl_1_1RasterState.html", null ],
     [ "cubos::core::gl::RasterStateDesc", "structcubos_1_1core_1_1gl_1_1RasterStateDesc.html", null ],
@@ -70,6 +73,7 @@ var hierarchy =
       [ "cubos::core::io::DoubleAxis", "classcubos_1_1core_1_1io_1_1DoubleAxis.html", null ],
       [ "cubos::core::io::SingleAxis", "classcubos_1_1core_1_1io_1_1SingleAxis.html", null ]
     ] ],
+    [ "cubos::core::gl::SpotLight", "structcubos_1_1core_1_1gl_1_1SpotLight.html", null ],
     [ "cubos::core::gl::DepthStencilStateDesc::Stencil", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html", null ],
     [ "cubos::core::memory::Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", [
       [ "cubos::core::data::FileStream< T >", "classcubos_1_1core_1_1data_1_1FileStream.html", null ],
@@ -86,6 +90,7 @@ var hierarchy =
     [ "cubos::core::gl::FramebufferDesc::Texture2DTarget", "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1Texture2DTarget.html", null ],
     [ "cubos::core::gl::impl::Texture3D", "classcubos_1_1core_1_1gl_1_1impl_1_1Texture3D.html", null ],
     [ "cubos::core::gl::Texture3DDesc", "structcubos_1_1core_1_1gl_1_1Texture3DDesc.html", null ],
+    [ "cubos::core::gl::Vertex", "structcubos_1_1core_1_1gl_1_1Vertex.html", null ],
     [ "cubos::core::gl::impl::VertexArray", "classcubos_1_1core_1_1gl_1_1impl_1_1VertexArray.html", null ],
     [ "cubos::core::gl::VertexArrayDesc", "structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html", null ],
     [ "cubos::core::gl::impl::VertexBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1VertexBuffer.html", null ],

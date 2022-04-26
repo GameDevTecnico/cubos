@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#abbf4bb35777a26f34bbc492f462e41cf":[1,0,0,0,2,0,9,6],
 "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#ace7b4b5ed17a08b342fd40c72584af34":[1,0,0,0,2,0,9,1],
 "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#acfa23b313bc48dae8780e8ed9d75cba1":[1,0,0,0,2,0,9,4],
 "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#ad80dcb94065d0aa369b8f4ab553b0197":[1,0,0,0,2,0,9,7],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html#a4b680170eb761e600ffda5840bf758e9":[1,0,0,0,4,6,12],
 "classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html#a4de880ea50572e45d99611fcef9d3b55":[1,0,0,0,4,6,7],
 "classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html#a5cafc045e8e30bac892121f5bbcce4e4":[1,0,0,0,4,6,0],
-"classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html#a5edb4210b475fd2fa37739481f208d3e":[1,0,0,0,4,6,17],
-"classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html#a99a33044a0e6a9b4843f4c7f8316caa2":[1,0,0,0,4,6,9]
+"classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html#a5edb4210b475fd2fa37739481f208d3e":[1,0,0,0,4,6,17]
 };

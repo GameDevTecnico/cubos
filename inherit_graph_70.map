@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classcubos_1_1core_1_1memory_1_1Deserializer.html" title="Abstract class for deserializing data." alt="" coords="5,5,164,47"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html" title="Implementation of the abstract Deserializer class for deserializng from YAML." alt="" coords="212,5,371,47"/>
+</map>
