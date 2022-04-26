@@ -1,8 +1,9 @@
 #ifndef CUBOS_ENGINE_COMPONENTS_TRANSFORM_HPP
 #define CUBOS_ENGINE_COMPONENTS_TRANSFORM_HPP
 
-#include <glm/ext.hpp>
 #include <cubos/core/ecs/vec_storage.hpp>
+
+#include <glm/glm.hpp>
 
 namespace cubos::engine::components {
 

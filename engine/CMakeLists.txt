@@ -10,6 +10,8 @@ message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
 
+    "src/cubos/engine/systems/render_system.cpp"
+
     "src/cubos/engine/gl/renderer.cpp"
     "src/cubos/engine/gl/deferred/renderer.cpp"
     "src/cubos/engine/gl/pps/pass.cpp"
@@ -20,6 +22,10 @@ set(CUBOS_ENGINE_SOURCE
 
 set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/cubos.hpp"
+
+    "include/cubos/engine/components/transform.hpp"
+    "include/cubos/engine/components/grid_renderable.hpp"
+    "include/cubos/engine/systems/render_system.hpp"
 
     "include/cubos/engine/gl/renderer.hpp"
     "include/cubos/engine/gl/deferred/renderer.hpp"
