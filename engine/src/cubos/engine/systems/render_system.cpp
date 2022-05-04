@@ -11,7 +11,7 @@ using namespace cubos;
 using namespace cubos::engine::components;
 using namespace cubos::engine::systems;
 
-void renderSystem(core::ecs::World &world, engine::gl::Renderer &renderer)
+void cubos::engine::systems::renderSystem(core::ecs::World &world, engine::gl::Renderer &renderer)
 {
     for(auto entity : core::ecs::WorldView<Transform, GridRenderable>(world))
     {
