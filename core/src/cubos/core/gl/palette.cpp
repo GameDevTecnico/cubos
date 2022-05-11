@@ -36,6 +36,24 @@ void Palette::set(uint16_t index, const Material& material)
     materials[index - 1] = material;
 }
 
+uint16_t Palette::find(const Material& material)
+{
+    uint16_t best_i = 0;
+    float best_s = material.similarity(Material::Empty);
+
+    for (uint16_t i = 1; i < this->getSize(); ++i)
+    {
+        float s = material.similarity(this->get(i));
+        if (s > best_s)
+        {
+            best_s = s;
+            best_i = i;
+        }
+    }
+
+    return best_i;
+}
+
 void Palette::serialize(memory::Serializer& serializer) const
 {
     // Count non-empty materials.
