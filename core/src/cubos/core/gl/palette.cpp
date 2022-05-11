@@ -36,7 +36,7 @@ void Palette::set(uint16_t index, const Material& material)
     materials[index - 1] = material;
 }
 
-uint16_t Palette::find(const Material& material)
+uint16_t Palette::find(const Material& material) const
 {
     uint16_t best_i = 0;
     float best_s = material.similarity(Material::Empty);

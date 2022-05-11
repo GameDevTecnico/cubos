@@ -34,7 +34,7 @@ namespace cubos::core::gl
         /// Searches for the index of the material most similar to the given material.
         /// @param material The material to search for.
         /// @return The index of the material.
-        uint16_t find(const Material& material);
+        uint16_t find(const Material& material) const;
 
         /// Serializes the palette.
         /// @param serializer The serializer to use.
