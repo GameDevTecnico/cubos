@@ -1,7 +1,8 @@
+#include "tools.hpp"
+
 #include <filesystem>
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <vector>
 
 namespace fs = std::filesystem;
@@ -19,7 +20,7 @@ struct Options
 /// Prints the help message of the program.
 static void printHelp()
 {
-    std::cerr << "Usage: cubos-embed [options] <input>" << std::endl;
+    std::cerr << "Usage: cubinhos embed [options] <input>" << std::endl;
     std::cerr << "Options:" << std::endl;
     std::cerr << "  -n <name>    Sets the name of the output data." << std::endl;
     std::cerr << "  -r           Recursively embed all files in the input directory." << std::endl;
@@ -274,7 +275,7 @@ static bool embedFileEntry(State& state, size_t id)
 /// Runs the generator from the command line options.
 /// @param options The command line options.
 /// @return True if the embedding was successful, false otherwise.
-bool generate(const Options& options)
+static bool generate(const Options& options)
 {
     // Initialize the state.
     State state = {options, std::cout, options.name, {}};
@@ -349,7 +350,7 @@ bool generate(const Options& options)
     return true;
 }
 
-int main(int argc, char** argv)
+int runEmbed(int argc, char** argv)
 {
     // Parse command line arguments.
     Options options;
