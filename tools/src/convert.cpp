@@ -55,9 +55,9 @@ static bool parseArguments(int argc, char** argv, Options& options)
     // Iterate over the arguments.
     for (int i = 1; i < argc; ++i)
     {
-        if (std::string(argv[i]).substr(0, 1) == "-g")
+        if (std::string(argv[i]).substr(0, 2) == "-g")
         {
-            int index = argv[i][2] == '0' ? 0 : std::stoi(std::string(argv[i]).substr(2));
+            int index = argv[i][2] == '\0' ? 0 : std::stoi(std::string(argv[i]).substr(2));
 
             if (i + 1 < argc)
             {
@@ -112,11 +112,17 @@ static bool parseArguments(int argc, char** argv, Options& options)
             }
         }
         else if (std::string(argv[i]) == "-w")
+        {
             options.write = true;
+        }
         else if (std::string(argv[i]) == "-v")
+        {
             options.verbose = true;
+        }
         else if (std::string(argv[i]) == "-f")
+        {
             options.force = true;
+        }
         else if (std::string(argv[i]) == "-h")
         {
             options.help = true;
@@ -244,11 +250,11 @@ static bool convert(const Options& options)
     gl::Palette palette;
     if (!loadPalette(options.palette, palette))
     {
-        if (options.verbose)
+        if (options.write && options.verbose)
         {
             std::cerr << "Failed to load palette: write enabled, creating new palette." << std::endl;
         }
-        else
+        else if (!options.write)
         {
             std::cerr << "Failed to load palette: write disabled & file " << options.palette << " not found."
                       << std::endl;
@@ -275,8 +281,8 @@ static bool convert(const Options& options)
         for (size_t i = 0; i < model.size(); i++)
         {
             std::cerr << "Matrix " << i << ":" << std::endl;
-            std::cerr << "- Position: " << model[i].position.x << " " << model[i].position.y << " " << model[i].position.z
-                      << std::endl;
+            std::cerr << "- Position: " << model[i].position.x << " " << model[i].position.y << " "
+                      << model[i].position.z << std::endl;
             std::cerr << "- Grid size: " << model[i].grid.getSize().x << "x" << model[i].grid.getSize().y << "x"
                       << model[i].grid.getSize().z << std::endl;
             std::cerr << "- Palette size: " << model[i].palette.getSize() << std::endl;

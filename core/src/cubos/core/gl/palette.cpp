@@ -105,7 +105,7 @@ void cubos::core::data::serialize(Serializer& serializer, const gl::Palette& pal
     for (uint16_t i = 0; i < static_cast<uint16_t>(palette.materials.size()); i++)
         if (memcmp(&palette.materials[i], &Material::Empty, sizeof(Material)) != 0)
         {
-            serializer.write(i + 1, nullptr);
+            serializer.write<uint16_t>(i + 1, nullptr);
             serializer.write(palette.materials[i], nullptr);
         }
     serializer.endDictionary();
@@ -121,7 +121,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, gl::Palette& pal
     size_t count = deserializer.beginDictionary();
     for (size_t i = 0; i < count; i++)
     {
-        deserializer.read(index);
+        deserializer.read<uint16_t>(index);
         deserializer.read(mat);
 
         if (index == 0)
