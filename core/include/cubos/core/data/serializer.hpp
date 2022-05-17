@@ -165,8 +165,12 @@ namespace cubos::core::data
         /// Indicates that a dictionary is no longer being serialized.
         virtual void endDictionary() = 0;
 
+        /// Checks if the serializer has failed.
+        bool failed() const;
+
     protected:
         memory::Stream& stream; ///< Stream used by the serializer.
+        bool failBit;           ///< Indicates if the serializer failed.
 
     private:
         Serializer(const Serializer&) = delete;

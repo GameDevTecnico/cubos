@@ -136,8 +136,12 @@ namespace cubos::core::data
         /// Indicates that a dictionary is no longer being deserialized.
         virtual void endDictionary() = 0;
 
+        /// Checks if the deserializer has failed.
+        bool failed() const;
+
     protected:
         memory::Stream& stream; ///< Stream used by the deserializer.
+        bool failBit;           ///< Indicates if the deserializer has failed.
 
     private:
         Deserializer(const Deserializer&) = delete;
