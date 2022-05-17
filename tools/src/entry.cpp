@@ -6,7 +6,7 @@
 /// Prints the help message of the program.
 int runHelp(int, char**)
 {
-    std::cerr << "Usage: cubinhos <tool>" << std::endl;
+    std::cerr << "Usage: cubinhos <TOOL>" << std::endl;
     std::cerr << "Tools:" << std::endl;
     for (size_t i = 0; i < sizeof(tools) / sizeof(tools[0]); ++i)
     {

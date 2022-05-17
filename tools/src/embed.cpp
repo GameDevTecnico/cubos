@@ -20,7 +20,7 @@ struct Options
 /// Prints the help message of the program.
 static void printHelp()
 {
-    std::cerr << "Usage: cubinhos embed [options] <input>" << std::endl;
+    std::cerr << "Usage: cubinhos embed [OPTIONS] <INPUT>" << std::endl;
     std::cerr << "Options:" << std::endl;
     std::cerr << "  -n <name>    Sets the name of the output data." << std::endl;
     std::cerr << "  -r           Recursively embed all files in the input directory." << std::endl;

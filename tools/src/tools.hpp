@@ -12,10 +12,8 @@ struct Tool
 
 int runHelp(int argc, char** argv);
 int runEmbed(int argc, char** argv);
+int runConvert(int argc, char** argv);
 
-static const Tool tools[] = {
-    {"help", runHelp},
-    {"embed", runEmbed}
-};
+static const Tool tools[] = {{"help", runHelp}, {"embed", runEmbed}, {"convert", runConvert}};
 
 #endif // CUBINHOS_TOOLS_HPP
