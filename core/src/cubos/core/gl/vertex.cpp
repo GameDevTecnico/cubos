@@ -1,23 +1,27 @@
-#include "cubos/core/gl/vertex.hpp"
-#include "cubos/core/gl/grid.hpp"
+#include <cubos/core/gl/vertex.hpp>
+#include <cubos/core/gl/grid.hpp>
 
 #include <vector>
 
 using namespace cubos;
 using namespace cubos::core::gl;
 
-void Vertex::serialize(memory::Serializer& serializer) const
+void cubos::core::data::serialize(Serializer& serializer, const gl::Vertex& vertex, const char* name)
 {
-    serializer.write(this->position, "position");
-    serializer.write(this->normal, "normal");
-    serializer.write(this->material, "material");
+    serializer.beginObject(name);
+    serializer.write(vertex.position, "position");
+    serializer.write(vertex.normal, "normal");
+    serializer.write(vertex.material, "material");
+    serializer.endObject();
 }
 
-void Vertex::deserialize(memory::Deserializer& deserializer)
+void cubos::core::data::deserialize(Deserializer& deserializer, gl::Vertex& vertex)
 {
-    deserializer.read(this->position);
-    deserializer.read(this->normal);
-    deserializer.read(this->material);
+    deserializer.beginObject();
+    deserializer.read(vertex.position);
+    deserializer.read(vertex.normal);
+    deserializer.read(vertex.material);
+    deserializer.endObject();
 }
 
 void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)

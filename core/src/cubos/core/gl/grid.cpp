@@ -88,24 +88,28 @@ void Grid::set(const glm::ivec3& position, uint16_t mat)
     this->indices[position.x + position.y * size.x + position.z * size.x * size.y] = mat;
 }
 
-void Grid::serialize(memory::Serializer& serializer) const
+void cubos::core::data::serialize(Serializer& serializer, const gl::Grid& grid, const char* name)
 {
-    serializer.write(this->size, "size");
-    serializer.write(this->indices, "data");
+    serializer.beginObject(name);
+    serializer.write(grid.size, "size");
+    serializer.write(grid.indices, "data");
+    serializer.endObject();
 }
 
-void Grid::deserialize(memory::Deserializer& deserializer)
+void cubos::core::data::deserialize(Deserializer& deserializer, gl::Grid& grid)
 {
-    deserializer.read(this->size);
-    deserializer.read(this->indices);
+    deserializer.beginObject();
+    deserializer.read(grid.size);
+    deserializer.read(grid.indices);
+    deserializer.endObject();
 
-    if (this->size.x * this->size.y * this->size.z != static_cast<int>(this->indices.size()))
+    if (grid.size.x * grid.size.y * grid.size.z != static_cast<int>(grid.indices.size()))
     {
         logWarning(
             "Could not deserialize grid: grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.",
-            size.x, size.y, size.z, indices.size());
-        this->size = {1, 1, 1};
-        this->indices.clear();
-        this->indices.resize(1, 0);
+            grid.size.x, grid.size.y, grid.size.z, grid.indices.size());
+        grid.size = {1, 1, 1};
+        grid.indices.clear();
+        grid.indices.resize(1, 0);
     }
 }

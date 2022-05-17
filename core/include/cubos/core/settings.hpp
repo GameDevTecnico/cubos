@@ -1,13 +1,27 @@
 #ifndef CUBOS_CORE_SETTINGS_HPP
 #define CUBOS_CORE_SETTINGS_HPP
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <cubos/core/memory/serializer.hpp>
-#include <cubos/core/memory/deserializer.hpp>
+
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/deserializer.hpp>
 
 namespace cubos::core
 {
+    class Settings;
+
+    namespace data
+    {
+        /// Serializes settings.
+        /// @param serializer The serializer to use.
+        /// @param settings The settings to serialize.
+        /// @param name The name of the settings.
+        void serialize(Serializer& serializer, const Settings& settings, const char* name);
+
+        /// Deserializes settings.
+        /// @param deserializer The deserializer to use.
+        /// @param settings The settings to deserialize.
+        void deserialize(Deserializer& deserializer, Settings& settings);
+    } // namespace data
+
     /// Class used to manage settings.
     class Settings
     {
@@ -61,15 +75,10 @@ namespace cubos::core
 
         static Settings global; ///< The Global Instance of Settings.
 
-        /// Serializes the settings.
-        /// @param serializer The serializer to use.
-        void serialize(memory::Serializer& serializer) const;
-
-        /// Deserializes the settings.
-        /// @param deserializer The deserializer to use.
-        void deserialize(memory::Deserializer& deserializer);
-
     private:
+        friend void data::serialize(data::Serializer&, const Settings&, const char*);
+        friend void data::deserialize(data::Deserializer&, Settings&);
+
         std::unordered_map<std::string, std::string> values;
     };
 

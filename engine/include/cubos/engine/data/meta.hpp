@@ -1,12 +1,31 @@
 #ifndef CUBOS_ENGINE_DATA_META_HPP
 #define CUBOS_ENGINE_DATA_META_HPP
 
-#include <cubos/core/memory/serializer.hpp>
-#include <cubos/core/memory/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/deserializer.hpp>
 
 #include <string>
 #include <vector>
 #include <unordered_map>
+
+namespace cubos::engine::data
+{
+    class Meta;
+}
+
+namespace cubos::core::data
+{
+    /// Serializes asset meta data.
+    /// @param serializer The serializer to use.
+    /// @param meta The meta data to serialize.
+    /// @param name The name of the meta data.
+    void serialize(Serializer& serializer, const engine::data::Meta& meta, const char* name);
+
+    /// Deserializes asset meta data.
+    /// @param deserializer The deserializer to use.
+    /// @param meta The meta data to deserialize.
+    void deserialize(Deserializer& deserializer, engine::data::Meta& meta);
+} // namespace cubos::core::data
 
 namespace cubos::engine::data
 {
@@ -42,15 +61,10 @@ namespace cubos::engine::data
         /// @return The parameters of the asset.
         const std::unordered_map<std::string, std::string>& getParameters() const;
 
-        /// Serializes the meta data.
-        /// @param serializer The serializer to use.
-        void serialize(core::memory::Serializer& serializer) const;
-
-        /// Deserializes the meta data.
-        /// @param deserializer The deserializer to use.
-        void deserialize(core::memory::Deserializer& deserializer);
-
     private:
+        friend void core::data::serialize(core::data::Serializer&, const Meta&, const char*);
+        friend void core::data::deserialize(core::data::Deserializer&, Meta&);
+
         std::string id;                                          ///< The asset's ID.
         std::string type;                                        ///< The asset's type name.
         Usage usage;                                             ///< The asset's usage.
