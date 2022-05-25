@@ -88,6 +88,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1gl_1_1Grid.html'
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classcubos_1_1core_1_1gl_1_1Grid-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">cubos::core::gl::Grid Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div>  </div>
@@ -117,10 +118,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:acc83d2b66777e77ba2b6a725c2f9004e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f86c62f435581ec581ea8a9fa001016"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html#a4f86c62f435581ec581ea8a9fa001016">get</a> (const glm::ivec3 &amp;position) const</td></tr>
 <tr class="separator:a4f86c62f435581ec581ea8a9fa001016"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a321cc2cebccee1c3df5121281e6cb716"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html#a321cc2cebccee1c3df5121281e6cb716">serialize</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a> &amp;serializer) const</td></tr>
-<tr class="separator:a321cc2cebccee1c3df5121281e6cb716"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dd55328cc6759b79d36503db3d9bf87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html#a7dd55328cc6759b79d36503db3d9bf87">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a> &amp;deserializer)</td></tr>
-<tr class="separator:a7dd55328cc6759b79d36503db3d9bf87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a26b166bfac9895b2723ebee37a1c8991"><td class="memItemLeft" align="right" valign="top"><a id="a26b166bfac9895b2723ebee37a1c8991"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>data::serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">data::Serializer</a> &amp;, const <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a> &amp;, const char *)</td></tr>
+<tr class="separator:a26b166bfac9895b2723ebee37a1c8991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6e4bafa85af822f0367754e95dd640c"><td class="memItemLeft" align="right" valign="top"><a id="ac6e4bafa85af822f0367754e95dd640c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">data::Deserializer</a> &amp;, <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a> &amp;)</td></tr>
+<tr class="separator:ac6e4bafa85af822f0367754e95dd640c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a grid of voxels. Voxel indices are determined by the following formula: x + y * size.x + z * size.x * size.y </p>
@@ -186,30 +192,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7dd55328cc6759b79d36503db3d9bf87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dd55328cc6759b79d36503db3d9bf87">&#9670;&nbsp;</a></span>deserialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cubos::core::gl::Grid::deserialize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a> &amp;&#160;</td>
-          <td class="paramname"><em>deserializer</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Deserializes the grid. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">deserializer</td><td>The deserializer to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a4f86c62f435581ec581ea8a9fa001016"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4f86c62f435581ec581ea8a9fa001016">&#9670;&nbsp;</a></span>get()</h2>
 
@@ -250,30 +232,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The size of the grid. </dd></dl>
-
-</div>
-</div>
-<a id="a321cc2cebccee1c3df5121281e6cb716"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a321cc2cebccee1c3df5121281e6cb716">&#9670;&nbsp;</a></span>serialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cubos::core::gl::Grid::serialize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a> &amp;&#160;</td>
-          <td class="paramname"><em>serializer</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Serializes the grid. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">serializer</td><td>The serializer to use. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

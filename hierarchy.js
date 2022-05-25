@@ -23,8 +23,9 @@ var hierarchy =
     [ "cubos::core::gl::DepthStencilStateDesc::Depth", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Depth.html", null ],
     [ "cubos::core::gl::impl::DepthStencilState", "classcubos_1_1core_1_1gl_1_1impl_1_1DepthStencilState.html", null ],
     [ "cubos::core::gl::DepthStencilStateDesc", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc.html", null ],
-    [ "cubos::core::memory::Deserializer", "classcubos_1_1core_1_1memory_1_1Deserializer.html", [
-      [ "cubos::core::memory::YAMLDeserializer", "classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html", null ]
+    [ "cubos::core::data::Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html", [
+      [ "cubos::core::data::BinaryDeserializer", "classcubos_1_1core_1_1data_1_1BinaryDeserializer.html", null ],
+      [ "cubos::core::data::YAMLDeserializer", "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html", null ]
     ] ],
     [ "cubos::core::gl::DirectionalLight", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html", null ],
     [ "enable_shared_from_this", null, [
@@ -60,9 +61,10 @@ var hierarchy =
     [ "cubos::core::gl::RenderDevice", "classcubos_1_1core_1_1gl_1_1RenderDevice.html", null ],
     [ "cubos::core::gl::impl::Sampler", "classcubos_1_1core_1_1gl_1_1impl_1_1Sampler.html", null ],
     [ "cubos::core::gl::SamplerDesc", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html", null ],
-    [ "cubos::core::memory::SerializationMap< R, I >", "classcubos_1_1core_1_1memory_1_1SerializationMap.html", null ],
-    [ "cubos::core::memory::Serializer", "classcubos_1_1core_1_1memory_1_1Serializer.html", [
-      [ "cubos::core::memory::YAMLSerializer", "classcubos_1_1core_1_1memory_1_1YAMLSerializer.html", null ]
+    [ "cubos::core::data::SerializationMap< R, I >", "classcubos_1_1core_1_1data_1_1SerializationMap.html", null ],
+    [ "cubos::core::data::Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", [
+      [ "cubos::core::data::BinarySerializer", "classcubos_1_1core_1_1data_1_1BinarySerializer.html", null ],
+      [ "cubos::core::data::YAMLSerializer", "classcubos_1_1core_1_1data_1_1YAMLSerializer.html", null ]
     ] ],
     [ "cubos::core::Settings", "classcubos_1_1core_1_1Settings.html", null ],
     [ "cubos::core::gl::impl::ShaderBindingPoint", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html", null ],

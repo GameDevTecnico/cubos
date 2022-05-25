@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structcubos_1_1core_1_1ecs_1_1WorldView.html" title="WorldView is an iterator over the entities of a world that contain a certain set of components." alt="" coords="5,5,208,47"/>
+<area shape="rect" id="node1" href="$classcubos_1_1core_1_1data_1_1Serializer.html" title="Abstract class for serializing data." alt="" coords="5,39,147,80"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinarySerializer.html" title=" " alt="" coords="195,5,336,47"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1YAMLSerializer.html" title="Implementation of the abstract Serializer class for serializing to YAML." alt="" coords="195,71,336,112"/>
 </map>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['yamldeserializer_403',['YAMLDeserializer',['../classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html',1,'cubos::core::memory']]],
-  ['yamlserializer_404',['YAMLSerializer',['../classcubos_1_1core_1_1memory_1_1YAMLSerializer.html',1,'cubos::core::memory']]]
+  ['yamldeserializer_431',['YAMLDeserializer',['../classcubos_1_1core_1_1data_1_1YAMLDeserializer.html',1,'cubos::core::data']]],
+  ['yamlserializer_432',['YAMLSerializer',['../classcubos_1_1core_1_1data_1_1YAMLSerializer.html',1,'cubos::core::data']]]
 ];

@@ -88,6 +88,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1gl_1_1Palette.ht
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classcubos_1_1core_1_1gl_1_1Palette-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">cubos::core::gl::Palette Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div>  </div>
@@ -111,10 +112,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abd53bf4f8cfe26b5bbb37fc03a7819b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cde9e9005b5e61b7233a11576e80f6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a0cde9e9005b5e61b7233a11576e80f6b">set</a> (uint16_t index, const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a> &amp;material)</td></tr>
 <tr class="separator:a0cde9e9005b5e61b7233a11576e80f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8eba7a9a4968ea40f2983f1a45ecc390"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a8eba7a9a4968ea40f2983f1a45ecc390">serialize</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a> &amp;serializer) const</td></tr>
-<tr class="separator:a8eba7a9a4968ea40f2983f1a45ecc390"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38cc74f41ac7ca3bcb274fc479f0ff5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a38cc74f41ac7ca3bcb274fc479f0ff5b">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a> &amp;deserializer)</td></tr>
-<tr class="separator:a38cc74f41ac7ca3bcb274fc479f0ff5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a4678e4128e58b305d8fd473e157b02b3"><td class="memItemLeft" align="right" valign="top"><a id="a4678e4128e58b305d8fd473e157b02b3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>data::serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">data::Serializer</a> &amp;, const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a> &amp;, const char *)</td></tr>
+<tr class="separator:a4678e4128e58b305d8fd473e157b02b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a247b54a67c269f5cf1879d44681214"><td class="memItemLeft" align="right" valign="top"><a id="a4a247b54a67c269f5cf1879d44681214"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">data::Deserializer</a> &amp;, <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a> &amp;)</td></tr>
+<tr class="separator:a4a247b54a67c269f5cf1879d44681214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a palette of materials. Supports up to 65535 materials. </p>
@@ -144,30 +150,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a38cc74f41ac7ca3bcb274fc479f0ff5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38cc74f41ac7ca3bcb274fc479f0ff5b">&#9670;&nbsp;</a></span>deserialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cubos::core::gl::Palette::deserialize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a> &amp;&#160;</td>
-          <td class="paramname"><em>deserializer</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Deserializes the palette. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">deserializer</td><td>The deserializer to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="abd53bf4f8cfe26b5bbb37fc03a7819b2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd53bf4f8cfe26b5bbb37fc03a7819b2">&#9670;&nbsp;</a></span>get()</h2>
 
@@ -226,30 +208,6 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The number of materials in the palette. </dd></dl>
-
-</div>
-</div>
-<a id="a8eba7a9a4968ea40f2983f1a45ecc390"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8eba7a9a4968ea40f2983f1a45ecc390">&#9670;&nbsp;</a></span>serialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cubos::core::gl::Palette::serialize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a> &amp;&#160;</td>
-          <td class="paramname"><em>serializer</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Serializes the palette. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">serializer</td><td>The serializer to use. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

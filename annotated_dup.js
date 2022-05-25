@@ -4,12 +4,19 @@ var annotated_dup =
       [ "core", null, [
         [ "data", null, [
           [ "Archive", "classcubos_1_1core_1_1data_1_1Archive.html", "classcubos_1_1core_1_1data_1_1Archive" ],
+          [ "BinaryDeserializer", "classcubos_1_1core_1_1data_1_1BinaryDeserializer.html", "classcubos_1_1core_1_1data_1_1BinaryDeserializer" ],
+          [ "BinarySerializer", "classcubos_1_1core_1_1data_1_1BinarySerializer.html", "classcubos_1_1core_1_1data_1_1BinarySerializer" ],
+          [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html", "classcubos_1_1core_1_1data_1_1Deserializer" ],
           [ "EmbeddedArchive", "classcubos_1_1core_1_1data_1_1EmbeddedArchive.html", "classcubos_1_1core_1_1data_1_1EmbeddedArchive" ],
           [ "File", "classcubos_1_1core_1_1data_1_1File.html", "classcubos_1_1core_1_1data_1_1File" ],
           [ "FileStream", "classcubos_1_1core_1_1data_1_1FileStream.html", "classcubos_1_1core_1_1data_1_1FileStream" ],
           [ "FileSystem", "classcubos_1_1core_1_1data_1_1FileSystem.html", "classcubos_1_1core_1_1data_1_1FileSystem" ],
           [ "QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", "structcubos_1_1core_1_1data_1_1QBMatrix" ],
-          [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", "classcubos_1_1core_1_1data_1_1STDArchive" ]
+          [ "SerializationMap", "classcubos_1_1core_1_1data_1_1SerializationMap.html", "classcubos_1_1core_1_1data_1_1SerializationMap" ],
+          [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", "classcubos_1_1core_1_1data_1_1Serializer" ],
+          [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", "classcubos_1_1core_1_1data_1_1STDArchive" ],
+          [ "YAMLDeserializer", "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html", "classcubos_1_1core_1_1data_1_1YAMLDeserializer" ],
+          [ "YAMLSerializer", "classcubos_1_1core_1_1data_1_1YAMLSerializer.html", "classcubos_1_1core_1_1data_1_1YAMLSerializer" ]
         ] ],
         [ "ecs", null, [
           [ "IStorage", "classcubos_1_1core_1_1ecs_1_1IStorage.html", "classcubos_1_1core_1_1ecs_1_1IStorage" ],
@@ -60,13 +67,8 @@ var annotated_dup =
         ] ],
         [ "memory", null, [
           [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html", "classcubos_1_1core_1_1memory_1_1BufferStream" ],
-          [ "Deserializer", "classcubos_1_1core_1_1memory_1_1Deserializer.html", "classcubos_1_1core_1_1memory_1_1Deserializer" ],
-          [ "SerializationMap", "classcubos_1_1core_1_1memory_1_1SerializationMap.html", "classcubos_1_1core_1_1memory_1_1SerializationMap" ],
-          [ "Serializer", "classcubos_1_1core_1_1memory_1_1Serializer.html", "classcubos_1_1core_1_1memory_1_1Serializer" ],
           [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html", "classcubos_1_1core_1_1memory_1_1StdStream" ],
-          [ "Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", "classcubos_1_1core_1_1memory_1_1Stream" ],
-          [ "YAMLDeserializer", "classcubos_1_1core_1_1memory_1_1YAMLDeserializer.html", "classcubos_1_1core_1_1memory_1_1YAMLDeserializer" ],
-          [ "YAMLSerializer", "classcubos_1_1core_1_1memory_1_1YAMLSerializer.html", "classcubos_1_1core_1_1memory_1_1YAMLSerializer" ]
+          [ "Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", "classcubos_1_1core_1_1memory_1_1Stream" ]
         ] ],
         [ "Event", "classcubos_1_1core_1_1Event.html", "classcubos_1_1core_1_1Event" ],
         [ "Settings", "classcubos_1_1core_1_1Settings.html", "classcubos_1_1core_1_1Settings" ]

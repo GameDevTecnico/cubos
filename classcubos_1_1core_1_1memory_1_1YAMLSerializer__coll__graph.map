@@ -1,5 +1,0 @@
-<map id="cubos::core::memory::YAMLSerializer" name="cubos::core::memory::YAMLSerializer">
-<area shape="rect" id="node1" title="Implementation of the abstract Serializer class for serializing to YAML." alt="" coords="5,203,164,244"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1memory_1_1Serializer.html" title="Abstract class for serializing data." alt="" coords="5,112,164,153"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1memory_1_1Stream.html" title="Abstract class for memory streams." alt="" coords="5,7,164,48"/>
-</map>

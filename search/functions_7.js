@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hasid_492',['hasId',['../classcubos_1_1core_1_1memory_1_1SerializationMap.html#a7ce1746cc04524fafb48e4efbffc831c',1,'cubos::core::memory::SerializationMap']]],
-  ['hasref_493',['hasRef',['../classcubos_1_1core_1_1memory_1_1SerializationMap.html#a50fe5ab2a8cf2303ee78298491060b18',1,'cubos::core::memory::SerializationMap']]]
+  ['hasid_522',['hasId',['../classcubos_1_1core_1_1data_1_1SerializationMap.html#adc132e59bb05bae7781bfb7178b6abe2',1,'cubos::core::data::SerializationMap']]],
+  ['hasref_523',['hasRef',['../classcubos_1_1core_1_1data_1_1SerializationMap.html#a1cc16230f3e93b305d16709f1f9e5d17',1,'cubos::core::data::SerializationMap']]]
 ];

@@ -87,21 +87,18 @@ $(document).ready(function(){initNavTree('structcubos_1_1core_1_1gl_1_1Vertex.ht
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structcubos_1_1core_1_1gl_1_1Vertex-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">cubos::core::gl::Vertex Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a voxel vertex.  
+ <a href="structcubos_1_1core_1_1gl_1_1Vertex.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="vertex_8hpp_source.html">vertex.hpp</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:aa08b781297973c64a747e3bdb0edb90e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1gl_1_1Vertex.html#aa08b781297973c64a747e3bdb0edb90e">serialize</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a> &amp;serializer) const</td></tr>
-<tr class="separator:aa08b781297973c64a747e3bdb0edb90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4c7fbe74999ee3af1b2195c82c961ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1gl_1_1Vertex.html#af4c7fbe74999ee3af1b2195c82c961ed">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a> &amp;deserializer)</td></tr>
-<tr class="separator:af4c7fbe74999ee3af1b2195c82c961ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aa7eeeb9141932d0915e0aab9576f2334"><td class="memItemLeft" align="right" valign="top"><a id="aa7eeeb9141932d0915e0aab9576f2334"></a>
@@ -114,59 +111,12 @@ glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="separator:a59762543951a30c830e78c8ff73143bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5656ccc239f5168678c34e65653664d"><td class="memItemLeft" align="right" valign="top"><a id="ae5656ccc239f5168678c34e65653664d"></a>
 uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1gl_1_1Vertex.html#ae5656ccc239f5168678c34e65653664d">material</a></td></tr>
-<tr class="memdesc:ae5656ccc239f5168678c34e65653664d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The material index on the palette. <br /></td></tr>
+<tr class="memdesc:ae5656ccc239f5168678c34e65653664d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The index of the material on the palette. <br /></td></tr>
 <tr class="separator:ae5656ccc239f5168678c34e65653664d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="af4c7fbe74999ee3af1b2195c82c961ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4c7fbe74999ee3af1b2195c82c961ed">&#9670;&nbsp;</a></span>deserialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cubos::core::gl::Vertex::deserialize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a> &amp;&#160;</td>
-          <td class="paramname"><em>deserializer</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Deserializes the grid. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">deserializer</td><td>The deserializer to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="aa08b781297973c64a747e3bdb0edb90e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa08b781297973c64a747e3bdb0edb90e">&#9670;&nbsp;</a></span>serialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cubos::core::gl::Vertex::serialize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a> &amp;&#160;</td>
-          <td class="paramname"><em>serializer</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Serializes the grid. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">serializer</td><td>The serializer to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a voxel vertex. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/cubos/core/gl/<a class="el" href="vertex_8hpp_source.html">vertex.hpp</a></li>
 </ul>
 </div><!-- contents -->

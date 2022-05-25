@@ -93,8 +93,8 @@ $(document).ready(function(){initNavTree('vertex_8hpp_source.html',''); initResi
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_GL_VERTEX_HPP</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_GL_VERTEX_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/memory/serializer.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/memory/deserializer.hpp&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/data/serializer.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/data/deserializer.hpp&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
@@ -102,35 +102,31 @@ $(document).ready(function(){initNavTree('vertex_8hpp_source.html',''); initResi
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">class </span>Grid;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">// Represents a voxel vertex</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structcubos_1_1core_1_1gl_1_1Vertex.html">   14</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html">Vertex</a></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structcubos_1_1core_1_1gl_1_1Vertex.html#aa7eeeb9141932d0915e0aab9576f2334">   16</a></span>&#160;        glm::uvec3 <a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html#aa7eeeb9141932d0915e0aab9576f2334">position</a>; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structcubos_1_1core_1_1gl_1_1Vertex.html#a59762543951a30c830e78c8ff73143bf">   18</a></span>&#160;        glm::vec3 <a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html#a59762543951a30c830e78c8ff73143bf">normal</a>; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structcubos_1_1core_1_1gl_1_1Vertex.html#ae5656ccc239f5168678c34e65653664d">   20</a></span>&#160;        uint16_t <a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html#ae5656ccc239f5168678c34e65653664d">material</a>; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html#aa08b781297973c64a747e3bdb0edb90e">serialize</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a>&amp; serializer) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html#af4c7fbe74999ee3af1b2195c82c961ed">deserialize</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a>&amp; deserializer);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    };</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> triangulate(<span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>&amp; grid, std::vector&lt;Vertex&gt;&amp; vertices, std::vector&lt;uint32_t&gt;&amp; indices);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_GL_VERTEX_HPP</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structcubos_1_1core_1_1gl_1_1Vertex.html#a59762543951a30c830e78c8ff73143bf">   17</a></span>&#160;        glm::vec3 <a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html#a59762543951a30c830e78c8ff73143bf">normal</a>;    </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structcubos_1_1core_1_1gl_1_1Vertex.html#ae5656ccc239f5168678c34e65653664d">   18</a></span>&#160;        uint16_t <a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html#ae5656ccc239f5168678c34e65653664d">material</a>;   </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    };</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> triangulate(<span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">Grid</a>&amp; grid, std::vector&lt;Vertex&gt;&amp; vertices, std::vector&lt;uint32_t&gt;&amp; indices);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span>cubos::core::data</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> serialize(Serializer&amp; serializer, <span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html">gl::Vertex</a>&amp; vertex, <span class="keyword">const</span> <span class="keywordtype">char</span>* name);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; deserializer, <a class="code" href="structcubos_1_1core_1_1gl_1_1Vertex.html">gl::Vertex</a>&amp; vertex);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_GL_VERTEX_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Vertex_html_aa7eeeb9141932d0915e0aab9576f2334"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Vertex.html#aa7eeeb9141932d0915e0aab9576f2334">cubos::core::gl::Vertex::position</a></div><div class="ttdeci">glm::uvec3 position</div><div class="ttdoc">The position of the vertex.</div><div class="ttdef"><b>Definition:</b> vertex.hpp:16</div></div>
-<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Vertex_html_af4c7fbe74999ee3af1b2195c82c961ed"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Vertex.html#af4c7fbe74999ee3af1b2195c82c961ed">cubos::core::gl::Vertex::deserialize</a></div><div class="ttdeci">void deserialize(memory::Deserializer &amp;deserializer)</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Serializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Serializer.html">cubos::core::memory::Serializer</a></div><div class="ttdoc">Abstract class for serializing data.</div><div class="ttdef"><b>Definition:</b> serializer.hpp:39</div></div>
-<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Vertex_html_ae5656ccc239f5168678c34e65653664d"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Vertex.html#ae5656ccc239f5168678c34e65653664d">cubos::core::gl::Vertex::material</a></div><div class="ttdeci">uint16_t material</div><div class="ttdoc">The material index on the palette.</div><div class="ttdef"><b>Definition:</b> vertex.hpp:20</div></div>
-<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Vertex_html"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Vertex.html">cubos::core::gl::Vertex</a></div><div class="ttdef"><b>Definition:</b> vertex.hpp:14</div></div>
-<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Vertex_html_a59762543951a30c830e78c8ff73143bf"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Vertex.html#a59762543951a30c830e78c8ff73143bf">cubos::core::gl::Vertex::normal</a></div><div class="ttdeci">glm::vec3 normal</div><div class="ttdoc">The normal of the vertex.</div><div class="ttdef"><b>Definition:</b> vertex.hpp:18</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html">cubos::core::gl::Grid</a></div><div class="ttdef"><b>Definition:</b> grid.hpp:14</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Deserializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Deserializer.html">cubos::core::memory::Deserializer</a></div><div class="ttdoc">Abstract class for deserializing data.</div><div class="ttdef"><b>Definition:</b> deserializer.hpp:40</div></div>
-<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Vertex_html_aa08b781297973c64a747e3bdb0edb90e"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Vertex.html#aa08b781297973c64a747e3bdb0edb90e">cubos::core::gl::Vertex::serialize</a></div><div class="ttdeci">void serialize(memory::Serializer &amp;serializer) const</div></div>
+<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Vertex_html_ae5656ccc239f5168678c34e65653664d"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Vertex.html#ae5656ccc239f5168678c34e65653664d">cubos::core::gl::Vertex::material</a></div><div class="ttdeci">uint16_t material</div><div class="ttdoc">The index of the material on the palette.</div><div class="ttdef"><b>Definition:</b> vertex.hpp:18</div></div>
+<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Vertex_html"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Vertex.html">cubos::core::gl::Vertex</a></div><div class="ttdoc">Represents a voxel vertex.</div><div class="ttdef"><b>Definition:</b> vertex.hpp:14</div></div>
+<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Vertex_html_a59762543951a30c830e78c8ff73143bf"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Vertex.html#a59762543951a30c830e78c8ff73143bf">cubos::core::gl::Vertex::normal</a></div><div class="ttdeci">glm::vec3 normal</div><div class="ttdoc">The normal of the vertex.</div><div class="ttdef"><b>Definition:</b> vertex.hpp:17</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html">cubos::core::gl::Grid</a></div><div class="ttdef"><b>Definition:</b> grid.hpp:33</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

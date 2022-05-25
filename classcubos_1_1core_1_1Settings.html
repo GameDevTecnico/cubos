@@ -89,6 +89,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1Settings.html','
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classcubos_1_1core_1_1Settings-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">cubos::core::Settings Class Reference</div>  </div>
@@ -128,10 +129,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a7a21b85c5fc93e75730ed5815e9e3055"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a359f07610a3baa7bc1d12d5691a172be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1Settings.html#a359f07610a3baa7bc1d12d5691a172be">merge</a> (const <a class="el" href="classcubos_1_1core_1_1Settings.html">Settings</a> &amp;settingsToMerge)</td></tr>
 <tr class="separator:a359f07610a3baa7bc1d12d5691a172be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a149277ab4b301714a3cf6d5e640210e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1Settings.html#a149277ab4b301714a3cf6d5e640210e9">serialize</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a> &amp;serializer) const</td></tr>
-<tr class="separator:a149277ab4b301714a3cf6d5e640210e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af04b439f5868704eb38c4ce08824c92d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1Settings.html#af04b439f5868704eb38c4ce08824c92d">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a> &amp;deserializer)</td></tr>
-<tr class="separator:af04b439f5868704eb38c4ce08824c92d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -139,34 +136,19 @@ Static Public Attributes</h2></td></tr>
 static <a class="el" href="classcubos_1_1core_1_1Settings.html">Settings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1Settings.html#a7fcbd112c8660be1e6d58fd1369f8b01">global</a></td></tr>
 <tr class="memdesc:a7fcbd112c8660be1e6d58fd1369f8b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Global Instance of <a class="el" href="classcubos_1_1core_1_1Settings.html" title="Class used to manage settings.">Settings</a>. <br /></td></tr>
 <tr class="separator:a7fcbd112c8660be1e6d58fd1369f8b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a6efdaa5923f3992fbad75c29cdd1e70a"><td class="memItemLeft" align="right" valign="top"><a id="a6efdaa5923f3992fbad75c29cdd1e70a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>data::serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">data::Serializer</a> &amp;, const <a class="el" href="classcubos_1_1core_1_1Settings.html">Settings</a> &amp;, const char *)</td></tr>
+<tr class="separator:a6efdaa5923f3992fbad75c29cdd1e70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a926371e3dc8ff4e644e11cd44d7091e4"><td class="memItemLeft" align="right" valign="top"><a id="a926371e3dc8ff4e644e11cd44d7091e4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">data::Deserializer</a> &amp;, <a class="el" href="classcubos_1_1core_1_1Settings.html">Settings</a> &amp;)</td></tr>
+<tr class="separator:a926371e3dc8ff4e644e11cd44d7091e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class used to manage settings. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af04b439f5868704eb38c4ce08824c92d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af04b439f5868704eb38c4ce08824c92d">&#9670;&nbsp;</a></span>deserialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cubos::core::Settings::deserialize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1memory_1_1Deserializer.html">memory::Deserializer</a> &amp;&#160;</td>
-          <td class="paramname"><em>deserializer</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Deserializes the settings. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">deserializer</td><td>The deserializer to use. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a7a21b85c5fc93e75730ed5815e9e3055"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a21b85c5fc93e75730ed5815e9e3055">&#9670;&nbsp;</a></span>getDouble()</h2>
 
@@ -294,30 +276,6 @@ static <a class="el" href="classcubos_1_1core_1_1Settings.html">Settings</a>&#16
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">settingsToMerge</td><td>The settings to be merged to this instance. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a149277ab4b301714a3cf6d5e640210e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a149277ab4b301714a3cf6d5e640210e9">&#9670;&nbsp;</a></span>serialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cubos::core::Settings::serialize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1memory_1_1Serializer.html">memory::Serializer</a> &amp;&#160;</td>
-          <td class="paramname"><em>serializer</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Serializes the settings. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">serializer</td><td>The serializer to use. </td></tr>
   </table>
   </dd>
 </dl>
