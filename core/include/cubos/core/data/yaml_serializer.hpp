@@ -1,36 +1,36 @@
-#ifndef CUBOS_CORE_MEMORY_YAML_SERIALIZER_HPP
-#define CUBOS_CORE_MEMORY_YAML_SERIALIZER_HPP
+#ifndef CUBOS_CORE_DATA_YAML_SERIALIZER_HPP
+#define CUBOS_CORE_DATA_YAML_SERIALIZER_HPP
 
-#include <cubos/core/memory/serializer.hpp>
+#include <cubos/core/data/serializer.hpp>
 
 #include <yaml-cpp/emitter.h>
 #include <stack>
 
-namespace cubos::core::memory
+namespace cubos::core::data
 {
     /// Implementation of the abstract Serializer class for serializing to YAML.
     class YAMLSerializer : public Serializer
     {
     public:
         /// @param stream The stream to serialize to.
-        YAMLSerializer(Stream& stream);
+        YAMLSerializer(memory::Stream& stream);
         virtual ~YAMLSerializer() override;
 
         // Implement interface methods.
 
         virtual void flush() override;
-        virtual void write(int8_t value, const char* name) override;
-        virtual void write(int16_t value, const char* name) override;
-        virtual void write(int32_t value, const char* name) override;
-        virtual void write(int64_t value, const char* name) override;
-        virtual void write(uint8_t value, const char* name) override;
-        virtual void write(uint16_t value, const char* name) override;
-        virtual void write(uint32_t value, const char* name) override;
-        virtual void write(uint64_t value, const char* name) override;
-        virtual void write(float value, const char* name) override;
-        virtual void write(double value, const char* name) override;
-        virtual void write(bool value, const char* name) override;
-        virtual void write(const char* value, const char* name) override;
+        virtual void writeI8(int8_t value, const char* name) override;
+        virtual void writeI16(int16_t value, const char* name) override;
+        virtual void writeI32(int32_t value, const char* name) override;
+        virtual void writeI64(int64_t value, const char* name) override;
+        virtual void writeU8(uint8_t value, const char* name) override;
+        virtual void writeU16(uint16_t value, const char* name) override;
+        virtual void writeU32(uint32_t value, const char* name) override;
+        virtual void writeU64(uint64_t value, const char* name) override;
+        virtual void writeF32(float value, const char* name) override;
+        virtual void writeF64(double value, const char* name) override;
+        virtual void writeBool(bool value, const char* name) override;
+        virtual void writeString(const char* value, const char* name) override;
         virtual void beginObject(const char* name) override;
         virtual void endObject() override;
         virtual void beginArray(size_t length, const char* name) override;
@@ -52,6 +52,6 @@ namespace cubos::core::memory
         YAML::Emitter emitter; ///< The YAML emitter.
         size_t head;           ///< The number of characters already flushed.
     };
-} // namespace cubos::core::memory
+} // namespace cubos::core::data
 
-#endif // CUBOS_CORE_MEMORY_YAML_SERIALIZER_HPP
+#endif // CUBOS_CORE_DATA_YAML_SERIALIZER_HPP

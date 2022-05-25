@@ -1,12 +1,13 @@
 #include <gtest/gtest.h>
 
 #include <cubos/core/memory/buffer_stream.hpp>
-#include <cubos/core/memory/yaml_serializer.hpp>
-#include <cubos/core/memory/yaml_deserializer.hpp>
-#include <cubos/core/memory/serialization_map.hpp>
+#include <cubos/core/data/yaml_serializer.hpp>
+#include <cubos/core/data/yaml_deserializer.hpp>
+#include <cubos/core/data/serialization_map.hpp>
 
 #include <random>
 
+using namespace cubos::core::data;
 using namespace cubos::core::memory;
 
 struct Human
@@ -16,62 +17,73 @@ struct Human
     double weight;
     bool dead;
     std::vector<Human*> children;
+};
 
-    void serialize(Serializer& s) const
+namespace cubos::core::data
+{
+    static void serialize(Serializer& s, const Human& human, const char* name)
     {
-        s.write(this->name, "name");
-        s.write(this->age, "age");
-        s.write(this->weight, "weight");
-        s.write(this->dead, "dead");
-        s.beginArray(this->children.size(), "children");
-        for (auto& child : this->children)
+        s.beginObject(name);
+        s.write(human.name, "name");
+        s.write(human.age, "age");
+        s.write(human.weight, "weight");
+        s.write(human.dead, "dead");
+        s.beginArray(human.children.size(), "children");
+        for (auto& child : human.children)
             s.write(*child, "child");
         s.endArray();
+        s.endObject();
     }
 
-    void serialize(Serializer& s, SerializationMap<Human*, size_t>* map) const
+    static void serialize(Serializer& s, const Human& human, SerializationMap<Human*, size_t>* map, const char* name)
     {
-        s.write(this->name, "name");
-        s.write(this->age, "age");
-        s.write(this->weight, "weight");
-        s.write(this->dead, "dead");
-        s.beginArray(this->children.size(), "children");
-        for (auto& child : this->children)
+        s.beginObject(name);
+        s.write(human.name, "name");
+        s.write(human.age, "age");
+        s.write(human.weight, "weight");
+        s.write(human.dead, "dead");
+        s.beginArray(human.children.size(), "children");
+        for (auto& child : human.children)
             s.write(static_cast<uint64_t>(map->getId(child)), "child");
         s.endArray();
+        s.endObject();
     }
 
-    void deserialize(Deserializer& s)
+    static void deserialize(Deserializer& s, Human& human)
     {
-        s.read(this->name);
-        s.read(this->age);
-        s.read(this->weight);
-        s.read(this->dead);
-        this->children.resize(s.beginArray(), nullptr);
-        for (auto& child : this->children)
+        s.beginObject();
+        s.read(human.name);
+        s.read(human.age);
+        s.read(human.weight);
+        s.read(human.dead);
+        human.children.resize(s.beginArray(), nullptr);
+        for (auto& child : human.children)
         {
             child = new Human();
             s.read(*child);
         }
         s.endArray();
+        s.endObject();
     }
 
-    void deserialize(Deserializer& s, SerializationMap<Human*, size_t>* map)
+    static void deserialize(Deserializer& s, Human& human, SerializationMap<Human*, size_t>* map)
     {
-        s.read(this->name);
-        s.read(this->age);
-        s.read(this->weight);
-        s.read(this->dead);
-        this->children.resize(s.beginArray());
-        for (auto& child : this->children)
+        s.beginObject();
+        s.read(human.name);
+        s.read(human.age);
+        s.read(human.weight);
+        s.read(human.dead);
+        human.children.resize(s.beginArray());
+        for (auto& child : human.children)
         {
             uint64_t id;
             s.read(id);
             child = map->getRef(static_cast<size_t>(id));
         }
         s.endArray();
+        s.endObject();
     }
-};
+} // namespace cubos::core::data
 
 TEST(Cubos_Memory_YAML_Serialization_And_Deserialization, Trivial_Types)
 {

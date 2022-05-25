@@ -1,4 +1,3 @@
-#include <string>
 #include <cubos/core/settings.hpp>
 
 using namespace cubos::core;
@@ -57,12 +56,12 @@ void Settings::merge(const Settings& settingsToMerge)
     }
 }
 
-void Settings::serialize(cubos::core::memory::Serializer& serializer) const
+void cubos::core::data::serialize(Serializer& serializer, const Settings& settings, const char* name)
 {
-    serializer.write(this->values, "values");
+    serializer.write(settings.values, name);
 }
 
-void Settings::deserialize(cubos::core::memory::Deserializer& deserializer)
+void cubos::core::data::deserialize(Deserializer& deserializer, Settings& settings)
 {
-    deserializer.read(this->values);
+    deserializer.read(settings.values);
 }

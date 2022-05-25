@@ -1,10 +1,11 @@
-#include <cubos/core/memory/serializer.hpp>
-#include <cubos/core/memory/serialization_map.hpp>
-#include <cubos/core/memory/yaml_serializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/serialization_map.hpp>
+#include <cubos/core/data/yaml_serializer.hpp>
 
 #include <stack>
 
 using namespace cubos::core::memory;
+using namespace cubos::core::data;
 
 // Example serializer
 class MySerializer : public Serializer
@@ -16,7 +17,7 @@ public:
         this->key = true;
     }
 
-    virtual void write(uint8_t x, const char* name) override
+    virtual void writeU8(uint8_t x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -30,7 +31,7 @@ public:
             this->stream.printf("uint8_t {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(uint16_t x, const char* name) override
+    virtual void writeU16(uint16_t x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -44,7 +45,7 @@ public:
             this->stream.printf("uint16_t {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(uint32_t x, const char* name) override
+    virtual void writeU32(uint32_t x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -58,7 +59,7 @@ public:
             this->stream.printf("uint32_t {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(uint64_t x, const char* name) override
+    virtual void writeU64(uint64_t x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -72,7 +73,7 @@ public:
             this->stream.printf("uint64_t {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(int8_t x, const char* name) override
+    virtual void writeI8(int8_t x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -86,7 +87,7 @@ public:
             this->stream.printf("int8_t {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(int16_t x, const char* name) override
+    virtual void writeI16(int16_t x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -100,7 +101,7 @@ public:
             this->stream.printf("int16_t {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(int32_t x, const char* name) override
+    virtual void writeI32(int32_t x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -114,7 +115,7 @@ public:
             this->stream.printf("int32_t {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(int64_t x, const char* name) override
+    virtual void writeI64(int64_t x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -128,7 +129,7 @@ public:
             this->stream.printf("int64_t {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(float x, const char* name) override
+    virtual void writeF32(float x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -142,7 +143,7 @@ public:
             this->stream.printf("float {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(double x, const char* name) override
+    virtual void writeF64(double x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -156,7 +157,7 @@ public:
             this->stream.printf("double {}: {}\n", name ? name : "unnamed", x);
     }
 
-    virtual void write(bool x, const char* name) override
+    virtual void writeBool(bool x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -170,7 +171,7 @@ public:
             this->stream.printf("bool {}: {}\n", name ? name : "unnamed", x ? "true" : "false");
     }
 
-    virtual void write(const char* x, const char* name) override
+    virtual void writeString(const char* x, const char* name) override
     {
         if (this->dictMode.top())
         {
@@ -248,14 +249,6 @@ struct Human
     Human* mother;
     int32_t age;
     std::string name;
-
-    void serialize(Serializer& s, const SerializationMap<Human*, int>* map) const
-    {
-        s.write(map->getId(this->father), "father");
-        s.write(map->getId(this->mother), "mother");
-        s.write(this->age, "age");
-        s.write(this->name, "name");
-    }
 };
 
 // Example serializable type which doesn't require context
@@ -263,18 +256,31 @@ struct Fruit
 {
     std::string name;
     int32_t weight;
-
-    void serialize(Serializer& s) const
-    {
-        s.write(this->name, "name");
-        s.write(this->weight, "weight");
-    }
 };
+
+namespace cubos::core::data
+{
+    void serialize(Serializer& s, const Human& human, const SerializationMap<Human*, int>* map, const char* name)
+    {
+        s.beginObject(name);
+        s.write(map->getId(human.father), "father");
+        s.write(map->getId(human.mother), "mother");
+        s.write(human.age, "age");
+        s.write(human.name, "name");
+        s.endObject();
+    }
+
+    void serialize(Serializer& s, const Fruit& fruit, const char* name)
+    {
+        s.beginObject(name);
+        s.write(fruit.name, "name");
+        s.write(fruit.weight, "weight");
+        s.endObject();
+    }
+} // namespace cubos::core::data
 
 int main()
 {
-    using namespace cubos::core::memory;
-
     Serializer* s;
 
     Stream::stdOut.print("Write 0 to serialize with a custom serializer, or 1 to serialize to YAML: ");
