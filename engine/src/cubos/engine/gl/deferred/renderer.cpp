@@ -91,18 +91,10 @@ void deferred::Renderer::createShaderPipelines()
 
             in vec2 fraguv;
 
+            uniform sampler2D palette;
             uniform sampler2D position;
             uniform sampler2D normal;
             uniform usampler2D material;
-
-            struct Material
-            {
-                vec4 color;
-            };
-
-            layout(std430) buffer palette {
-                Material materials[];
-            };
 
             struct SpotLight
             {
@@ -178,13 +170,18 @@ void deferred::Renderer::createShaderPipelines()
                 return vec3(0);
             }
 
+            vec4 fetchAlbedo(uint material)
+            {
+                return texelFetch(palette, ivec2(material % 256, material / 256));
+            }
+
             void main()
             {
                 uint m = texture(material, fraguv).r;
                 if (m == 0u) {
                     discard;
                 }
-                vec3 albedo = materials[m - 1u].color.rgb;
+                vec3 albedo = fetchAlbedo(m).rgb;
                 vec3 lighting = vec3(0);
                 vec3 fragPos = texture(position, fraguv).xyz;
                 vec3 fragNormal = texture(normal, fraguv).xyz;
@@ -311,10 +308,15 @@ deferred::Renderer::Renderer(io::Window& window) : cubos::engine::gl::Renderer(w
     createRenderDeviceStates();
 }
 
-engine::gl::Renderer::ModelID deferred::Renderer::registerModel(const core::gl::Grid& grid)
+engine::gl::Renderer::GridID deferred::Renderer::registerGrid(const core::gl::Grid& grid)
 {
     registerRequests.emplace_back(grid);
     return modelCounter++;
+}
+
+void deferred::Renderer::setPalette(const core::gl::Palette& palette)
+{
+    
 }
 
 void deferred::Renderer::drawLight(const SpotLight& light)
@@ -350,7 +352,7 @@ void deferred::Renderer::drawLight(const PointLight& light)
     lights.pointLights[lights.numPointLights++] = light;
 }
 
-void deferred::Renderer::render(const Camera& camera, bool usePostProcessing)
+void deferred::Renderer::render(const Camera& camera, const Frame& frame, bool usePostProcessing)
 {
     for (auto& grid : registerRequests)
     {
@@ -433,13 +435,6 @@ void deferred::Renderer::render(const Camera& camera, bool usePostProcessing)
     }
 }
 
-void deferred::Renderer::flush()
-{
-    gl::Renderer::flush();
-    lights.numSpotLights = 0;
-    lights.numDirectionalLights = 0;
-    lights.numPointLights = 0;
-}
 void deferred::Renderer::getScreenQuad(VertexArray& va, IndexBuffer& ib) const
 {
     va = screenVertexArray;

@@ -700,7 +700,7 @@ public:
 class OGLConstantBuffer : public impl::ConstantBuffer
 {
 public:
-    OGLConstantBuffer(GLuint id, GLenum bufferType) : id(id), bufferType(bufferType)
+    OGLConstantBuffer(GLuint id) : id(id)
     {
     }
 
@@ -711,31 +711,16 @@ public:
 
     virtual void* map() override
     {
-        glBindBuffer(bufferType, this->id);
-        return glMapBuffer(bufferType, GL_WRITE_ONLY);
+        glBindBuffer(GL_UNIFORM_BUFFER, this->id);
+        return glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
     }
 
     virtual void unmap() override
     {
-        glUnmapBuffer(bufferType);
-    }
-
-    virtual BufferStorageType getStorageTypeHint() override
-    {
-        switch (bufferType)
-        {
-        case GL_UNIFORM_BUFFER:
-            return BufferStorageType::Small;
-        case GL_SHADER_STORAGE_BUFFER:
-            return BufferStorageType::Large;
-        default:
-            logError("OGLContantBuffer::getStorageTypeHint() failed: Invalid bufferType value.");
-            abort();
-        }
+        glUnmapBuffer(GL_UNIFORM_BUFFER);
     }
 
     GLuint id;
-    GLenum bufferType;
 };
 
 class OGLIndexBuffer : public impl::IndexBuffer
@@ -908,8 +893,7 @@ public:
     virtual void bind(ConstantBuffer cb) override
     {
         if (cb)
-            glBindBufferBase(std::static_pointer_cast<OGLConstantBuffer>(cb)->bufferType, this->loc,
-                             std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+            glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
         else
             glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
     }
@@ -1079,6 +1063,8 @@ private:
 
 OGLRenderDevice::OGLRenderDevice()
 {
+    glGetString(GL_VERSION);
+
     // Create default states
     this->defaultRS = this->createRasterState({});
     this->defaultDSS = this->createDepthStencilState({});
@@ -1715,20 +1701,6 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage)
 {
-    // Choose SSBO or UBO depending on given buffer size
-    GLint maxUniformBufferSize;
-    glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &maxUniformBufferSize);
-    BufferStorageType storage;
-    if (size > maxUniformBufferSize)
-        storage = BufferStorageType::Large;
-    else
-        storage = BufferStorageType::Small;
-    return createConstantBuffer(size, data, usage, storage);
-}
-
-ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage,
-                                                     BufferStorageType storage)
-{
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
         abort();
@@ -1743,17 +1715,11 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
     else
         abort(); // Invalid enum value
 
-    GLenum bufferType;
-    if (storage == BufferStorageType::Small)
-        bufferType = GL_UNIFORM_BUFFER;
-    else
-        bufferType = GL_SHADER_STORAGE_BUFFER;
-
     // Initialize buffer
     GLuint id;
     glGenBuffers(1, &id);
-    glBindBuffer(bufferType, id);
-    glBufferData(bufferType, size, data, glUsage);
+    glBindBuffer(GL_UNIFORM_BUFFER, id);
+    glBufferData(GL_UNIFORM_BUFFER, size, data, glUsage);
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1764,7 +1730,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
         return nullptr;
     }
 
-    return std::make_shared<OGLConstantBuffer>(id, bufferType);
+    return std::make_shared<OGLConstantBuffer>(id);
 }
 
 IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage)

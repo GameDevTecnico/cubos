@@ -18,13 +18,12 @@ namespace cubos::engine::gl::deferred
     {
     public:
         explicit Renderer(core::io::Window& window);
+
+        virtual GridID registerGrid(const core::gl::Grid& grid) override;
+        virtual void setPalette(const core::gl::Palette& palette) override;
+        virtual void render(const core::gl::Camera& camera, const Frame& frame, bool usePostProcessing = true) override;
+
         virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const override;
-        virtual ModelID registerModel(const core::gl::Grid& grid) override;
-        virtual void drawLight(const core::gl::SpotLight& light) override;
-        virtual void drawLight(const core::gl::DirectionalLight& light) override;
-        virtual void drawLight(const core::gl::PointLight& light) override;
-        virtual void render(const core::gl::Camera& camera, bool usePostProcessing = true) override;
-        virtual void flush() override;
 
     private:
         void createShaderPipelines();
@@ -77,12 +76,13 @@ namespace cubos::engine::gl::deferred
                 PointLightData() = default;
                 PointLightData(const core::gl::PointLight& light);
             } pointLights[CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT];
+
             uint32_t numSpotLights = 0;
             uint32_t numDirectionalLights = 0;
             uint32_t numPointLights = 0;
         } lights;
 
-        //  Shader Pipeline
+        //  Shader Pipeline.
         core::gl::ShaderPipeline gBufferPipeline;
         core::gl::ShaderBindingPoint mvpBP;
         core::gl::ConstantBuffer mvpBuffer;
@@ -93,13 +93,14 @@ namespace cubos::engine::gl::deferred
         // Framebuffers
         core::gl::Framebuffer gBuffer;
 
-        // Textures
+        // Textures.
+        core::gl::Texture2D paletteTex;
         core::gl::Texture2D positionTex;
         core::gl::Texture2D normalTex;
         core::gl::Texture2D materialTex;
         core::gl::Texture2D depthTex;
 
-        // Shader Pipeline
+        // Shader Pipeline.
         core::gl::ShaderPipeline outputPipeline;
         core::gl::ShaderBindingPoint outputPositionBP;
         core::gl::ShaderBindingPoint outputNormalBP;
@@ -108,11 +109,11 @@ namespace cubos::engine::gl::deferred
         core::gl::ShaderBindingPoint outputLightBlockBP;
         core::gl::ConstantBuffer outputLightBlockBuffer;
 
-        // Screen Quad
+        // Screen Quad.
         core::gl::VertexArray screenVertexArray;
         core::gl::IndexBuffer screenIndexBuffer;
 
-        // Samplers
+        // Samplers.
         core::gl::Sampler positionSampler;
         core::gl::Sampler normalSampler;
         core::gl::Sampler materialSampler;

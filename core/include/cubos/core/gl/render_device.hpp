@@ -67,7 +67,7 @@ namespace cubos::core::gl
     /// @see RenderDevice::getProperty().
     enum class Property
     {
-        MaxAnisotropy
+        MaxAnisotropy,
     };
 
     /// Usage mode for buffers and textures.
@@ -246,12 +246,6 @@ namespace cubos::core::gl
         NegativeY = 3,
         PositiveZ = 4,
         NegativeZ = 5,
-    };
-
-    enum class BufferStorageType
-    {
-        Small,
-        Large,
     };
 
     /// Framebuffer description.
@@ -590,15 +584,6 @@ namespace cubos::core::gl
         /// @return Constant buffer handle, or nullptr if the creation failed.
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) = 0;
 
-        /// Creates a new constant buffer.
-        /// @param size Size in bytes.
-        /// @param data Initial data, can be nullptr.
-        /// @param usage The usage which the buffer will have.
-        /// @param storage The intended storage type for the buffer.
-        /// @return Constant buffer handle, or nullptr if the creation failed.
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
-                                                    BufferStorageType storage) = 0;
-
         /// Creates a new index buffer.
         /// @param size Size in bytes.
         /// @param data Initial data, can be nullptr.
@@ -881,8 +866,6 @@ namespace cubos::core::gl
 
             /// Unmaps the constant buffer, updating it with data written to the mapped region.
             virtual void unmap() = 0;
-            /// Get hint as to what underlying storage type is being used for the buffer.
-            virtual BufferStorageType getStorageTypeHint() = 0;
 
         protected:
             ConstantBuffer() = default;
