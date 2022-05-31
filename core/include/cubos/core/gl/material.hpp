@@ -14,6 +14,13 @@ namespace cubos::core::gl
         static const Material Empty; ///< The empty material.
 
         glm::vec4 color; ///< The color of the material.
+
+        /// Compares this material with another and returns a number which indicates how similar they are to one
+        /// another. The number is in the range [0, 1], where 0 means they are completely different and 1 means they
+        /// are exactly the same.
+        /// @param other The other material to compare with.
+        /// @return The similarity between the two materials.
+        float similarity(const Material& other) const;
     };
 } // namespace cubos::core::gl
 

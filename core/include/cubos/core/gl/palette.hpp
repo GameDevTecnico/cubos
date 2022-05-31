@@ -50,6 +50,24 @@ namespace cubos::core::gl
         /// @param material The material to set.
         void set(uint16_t index, const Material& material);
 
+        /// Searches for the index of the material most similar to the given material.
+        /// @param material The material to search for.
+        /// @return The index of the material.
+        uint16_t find(const Material& material) const;
+
+        /// Adds a material to the palette, if one not similar enough already exists.
+        /// Materials equal to Material::Empty will be considered empty and may be replaced by the new material.
+        /// @param material The material to add.
+        /// @param similarity The minimum similarity for a material to be considered similar enough.
+        /// @return The index of the material in the palette.
+        uint16_t add(const Material& material, float similarity = 1.0f);
+
+        /// Merges another palette into this one. All materials equal to Material::Empty will be considered empty and
+        /// may be overwritten.
+        /// @param palette The palette to merge.
+        /// @param similarity The minimum similarity for two materials to be merged.
+        void merge(const Palette& palette, float similarity = 1.0f);
+
     private:
         friend void data::serialize(data::Serializer&, const Palette&, const char*);
         friend void data::deserialize(data::Deserializer&, Palette&);

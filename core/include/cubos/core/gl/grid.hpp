@@ -9,8 +9,9 @@
 
 namespace cubos::core::gl
 {
+    class Palette;
     class Grid;
-}
+} // namespace cubos::core::gl
 
 namespace cubos::core::data
 {
@@ -64,6 +65,15 @@ namespace cubos::core::gl
         /// @param position The position of the voxel.
         /// @return The material index at a given position.
         uint16_t get(const glm::ivec3& position) const;
+
+        /// Converts the material indices of this grid from one palette to another.
+        /// For each index, it will search for another index in the second palette which matches the first palette.
+        /// The conversion fails if no matching index is found.
+        /// @param src The original palette.
+        /// @param dst The new palette.
+        /// @param min_similarity The minimum similarity between two materials to consider them the same.
+        /// @return Whether the conversion was successful.
+        bool convert(const Palette& src, const Palette& dst, float min_similarity);
 
     private:
         friend void data::serialize(data::Serializer&, const Grid&, const char*);
