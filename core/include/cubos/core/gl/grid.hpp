@@ -9,8 +9,9 @@
 
 namespace cubos::core::gl
 {
+    class Palette;
     class Grid;
-}
+} // namespace cubos::core::gl
 
 namespace cubos::core::data
 {
@@ -28,8 +29,6 @@ namespace cubos::core::data
 
 namespace cubos::core::gl
 {
-    class Palette;
-
     /// Represents a grid of voxels.
     /// Voxel indices are determined by the following formula: x + y * size.x + z * size.x * size.y
     class Grid final
