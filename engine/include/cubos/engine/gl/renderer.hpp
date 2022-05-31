@@ -13,7 +13,6 @@
 #include <cubos/core/gl/light.hpp>
 #include <cubos/core/io/window.hpp>
 
-#include <cubos/engine/gl/frame.hpp>
 #include <cubos/engine/gl/pps/pass.hpp>
 
 namespace cubos::engine::gl
@@ -22,6 +21,8 @@ namespace cubos::engine::gl
     {
         class Pass;
     }
+
+    class Frame;
 
     /// Interface class which abstracts different rendering methods.
     class Renderer
