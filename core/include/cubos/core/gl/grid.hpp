@@ -1,8 +1,8 @@
 #ifndef CUBOS_CORE_GL_GRID_HPP
 #define CUBOS_CORE_GL_GRID_HPP
 
-#include <cubos/core/memory/serializer.hpp>
-#include <cubos/core/memory/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/deserializer.hpp>
 
 #include <glm/glm.hpp>
 #include <vector>
@@ -10,7 +10,25 @@
 namespace cubos::core::gl
 {
     class Palette;
+    class Grid;
+}
 
+namespace cubos::core::data
+{
+    /// Serializes a voxel grid.
+    /// @param serializer The serializer to use.
+    /// @param grid The voxel grid to serialize.
+    /// @param name The name of the voxel grid.
+    void serialize(Serializer& serializer, const gl::Grid& grid, const char* name);
+
+    /// Deserializes a voxel grid.
+    /// @param deserializer The deserializer to use.
+    /// @param grid The voxel grid to deserialize.
+    void deserialize(Deserializer& deserializer, gl::Grid& grid);
+} // namespace cubos::core::data
+
+namespace cubos::core::gl
+{
     /// Represents a grid of voxels.
     /// Voxel indices are determined by the following formula: x + y * size.x + z * size.x * size.y
     class Grid final
@@ -57,15 +75,10 @@ namespace cubos::core::gl
         /// @return Whether the conversion was successful.
         bool convert(const Palette& src, const Palette& dst, float min_similarity);
 
-        /// Serializes the grid.
-        /// @param serializer The serializer to use.
-        void serialize(memory::Serializer& serializer) const;
-
-        /// Deserializes the grid.
-        /// @param deserializer The deserializer to use.
-        void deserialize(memory::Deserializer& deserializer);
-
     private:
+        friend void data::serialize(data::Serializer&, const Grid&, const char*);
+        friend void data::deserialize(data::Deserializer&, Grid&);
+
         glm::uvec3 size;               ///< The size of the grid.
         std::vector<uint16_t> indices; ///< The indices of the grid.
     };

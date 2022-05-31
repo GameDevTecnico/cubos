@@ -7,6 +7,25 @@
 
 namespace cubos::core::gl
 {
+    class Palette;
+}
+
+namespace cubos::core::data
+{
+    /// Serializes a material palette.
+    /// @param serializer The serializer to use.
+    /// @param palette The palette to serialize.
+    /// @param name The name of the palette.
+    void serialize(Serializer& serializer, const gl::Palette& palette, const char* name);
+
+    /// Deserializes a material palette.
+    /// @param deserializer The deserializer to use.
+    /// @param palette The palette to deserialize.
+    void deserialize(Deserializer& deserializer, gl::Palette& palette);
+} // namespace cubos::core::data
+
+namespace cubos::core::gl
+{
     /// Represents a palette of materials. Supports up to 65535 materials.
     class Palette final
     {
@@ -36,15 +55,10 @@ namespace cubos::core::gl
         /// @return The index of the material.
         uint16_t find(const Material& material) const;
 
-        /// Serializes the palette.
-        /// @param serializer The serializer to use.
-        void serialize(memory::Serializer& serializer) const;
-
-        /// Deserializes the palette.
-        /// @param deserializer The deserializer to use.
-        void deserialize(memory::Deserializer& deserializer);
-
     private:
+        friend void data::serialize(data::Serializer&, const Palette&, const char*);
+        friend void data::deserialize(data::Deserializer&, Palette&);
+
         std::vector<Material> materials; ///< The materials in the palette.
     };
 } // namespace cubos::core::gl

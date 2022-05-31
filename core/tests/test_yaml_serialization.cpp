@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 #include <cubos/core/memory/buffer_stream.hpp>
-#include <cubos/core/memory/yaml_serializer.hpp>
-#include <cubos/core/memory/serialization_map.hpp>
+#include <cubos/core/data/yaml_serializer.hpp>
+#include <cubos/core/data/serialization_map.hpp>
 
 using namespace cubos::core::memory;
+using namespace cubos::core::data;
 
 struct Human
 {
@@ -12,31 +13,38 @@ struct Human
     double weight;
     bool dead;
     std::vector<Human*> children;
+};
 
-    void serialize(Serializer& s) const
+namespace cubos::core::data
+{
+    static void serialize(Serializer& s, const Human& human, const char* name)
     {
-        s.write(this->name, "name");
-        s.write(this->age, "age");
-        s.write(this->weight, "weight");
-        s.write(this->dead, "dead");
-        s.beginArray(this->children.size(), "children");
-        for (auto& child : this->children)
+        s.beginObject(name);
+        s.write(human.name, "name");
+        s.write(human.age, "age");
+        s.write(human.weight, "weight");
+        s.write(human.dead, "dead");
+        s.beginArray(human.children.size(), "children");
+        for (auto& child : human.children)
             s.write(*child, "child");
         s.endArray();
+        s.endObject();
     }
 
-    void serialize(Serializer& s, SerializationMap<Human*, size_t>* map) const
+    static void serialize(Serializer& s, const Human& human, SerializationMap<Human*, size_t>* map, const char* name)
     {
-        s.write(this->name, "name");
-        s.write(this->age, "age");
-        s.write(this->weight, "weight");
-        s.write(this->dead, "dead");
-        s.beginArray(this->children.size(), "children");
-        for (auto& child : this->children)
+        s.beginObject(name);
+        s.write(human.name, "name");
+        s.write(human.age, "age");
+        s.write(human.weight, "weight");
+        s.write(human.dead, "dead");
+        s.beginArray(human.children.size(), "children");
+        for (auto& child : human.children)
             s.write(static_cast<uint64_t>(map->getId(child)), "child");
         s.endArray();
+        s.endObject();
     }
-};
+} // namespace cubos::core::data
 
 TEST(Cubos_Memory_YAML_Serialization, Serialize_Primitives)
 {
@@ -79,7 +87,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Array)
         std::vector<std::vector<std::vector<int>>> vec3d = {{{1, 2}, {3, 4, 5}}, {{6, 7}, {8}}};
         const char* strs[] = {"one", "two", "three"};
 
-        serializer->write<int64_t>(vec, "vector");
+        serializer->write(vec, "vector");
         serializer->beginArray(3, "strings");
         for (size_t i = 0; i < 3; ++i)
             serializer->write(strs[i], nullptr);

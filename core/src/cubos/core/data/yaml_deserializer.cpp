@@ -1,8 +1,8 @@
-#include <cubos/core/memory/yaml_deserializer.hpp>
+#include <cubos/core/data/yaml_deserializer.hpp>
 
-using namespace cubos::core::memory;
+using namespace cubos::core::data;
 
-YAMLDeserializer::YAMLDeserializer(Stream& stream) : Deserializer(stream)
+YAMLDeserializer::YAMLDeserializer(memory::Stream& stream) : Deserializer(stream)
 {
     this->loadDocument();
     this->frame.push({Mode::Object, this->document.begin(), false});
@@ -26,7 +26,7 @@ YAMLDeserializer::YAMLDeserializer(Stream& stream) : Deserializer(stream)
             value = iter->as<T>(T());                                                                                  \
     } while (false)
 
-void YAMLDeserializer::read(int8_t& value)
+void YAMLDeserializer::readI8(int8_t& value)
 {
     int16_t v;
     READ_PRIMITIVE(int16_t, v);
@@ -36,22 +36,22 @@ void YAMLDeserializer::read(int8_t& value)
         value = v;
 }
 
-void YAMLDeserializer::read(int16_t& value)
+void YAMLDeserializer::readI16(int16_t& value)
 {
     READ_PRIMITIVE(int16_t, value);
 }
 
-void YAMLDeserializer::read(int32_t& value)
+void YAMLDeserializer::readI32(int32_t& value)
 {
     READ_PRIMITIVE(int32_t, value);
 }
 
-void YAMLDeserializer::read(int64_t& value)
+void YAMLDeserializer::readI64(int64_t& value)
 {
     READ_PRIMITIVE(int64_t, value);
 }
 
-void YAMLDeserializer::read(uint8_t& value)
+void YAMLDeserializer::readU8(uint8_t& value)
 {
     uint16_t v;
     READ_PRIMITIVE(uint16_t, v);
@@ -61,37 +61,37 @@ void YAMLDeserializer::read(uint8_t& value)
         value = v;
 }
 
-void YAMLDeserializer::read(uint16_t& value)
+void YAMLDeserializer::readU16(uint16_t& value)
 {
     READ_PRIMITIVE(uint16_t, value);
 }
 
-void YAMLDeserializer::read(uint32_t& value)
+void YAMLDeserializer::readU32(uint32_t& value)
 {
     READ_PRIMITIVE(uint32_t, value);
 }
 
-void YAMLDeserializer::read(uint64_t& value)
+void YAMLDeserializer::readU64(uint64_t& value)
 {
     READ_PRIMITIVE(uint64_t, value);
 }
 
-void YAMLDeserializer::read(float& value)
+void YAMLDeserializer::readF32(float& value)
 {
     READ_PRIMITIVE(float, value);
 }
 
-void YAMLDeserializer::read(double& value)
+void YAMLDeserializer::readF64(double& value)
 {
     READ_PRIMITIVE(double, value);
 }
 
-void YAMLDeserializer::read(bool& value)
+void YAMLDeserializer::readBool(bool& value)
 {
     READ_PRIMITIVE(bool, value);
 }
 
-void YAMLDeserializer::read(std::string& value)
+void YAMLDeserializer::readString(std::string& value)
 {
     READ_PRIMITIVE(std::string, value);
 }

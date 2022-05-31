@@ -1,10 +1,10 @@
-#include <cubos/core/memory/yaml_serializer.hpp>
+#include <cubos/core/data/yaml_serializer.hpp>
 
 constexpr const char* ANONYMOUS_FIELD_NAME = "anonymous";
 
-using namespace cubos::core::memory;
+using namespace cubos::core::data;
 
-YAMLSerializer::YAMLSerializer(Stream& stream) : Serializer(stream)
+YAMLSerializer::YAMLSerializer(memory::Stream& stream) : Serializer(stream)
 {
     this->mode.push(Mode::Object);
     this->key = true;
@@ -40,62 +40,62 @@ void YAMLSerializer::flush()
             emitter << YAML::Key << (name ? name : ANONYMOUS_FIELD_NAME) << YAML::Value << value;                      \
     } while (false)
 
-void YAMLSerializer::write(int8_t value, const char* name)
+void YAMLSerializer::writeI8(int8_t value, const char* name)
 {
     WRITE_PRIMITIVE(static_cast<int16_t>(value), name);
 }
 
-void YAMLSerializer::write(int16_t value, const char* name)
+void YAMLSerializer::writeI16(int16_t value, const char* name)
 {
     WRITE_PRIMITIVE(value, name);
 }
 
-void YAMLSerializer::write(int32_t value, const char* name)
+void YAMLSerializer::writeI32(int32_t value, const char* name)
 {
     WRITE_PRIMITIVE(value, name);
 }
 
-void YAMLSerializer::write(int64_t value, const char* name)
+void YAMLSerializer::writeI64(int64_t value, const char* name)
 {
     WRITE_PRIMITIVE(value, name);
 }
 
-void YAMLSerializer::write(uint8_t value, const char* name)
+void YAMLSerializer::writeU8(uint8_t value, const char* name)
 {
     WRITE_PRIMITIVE(static_cast<uint16_t>(value), name);
 }
 
-void YAMLSerializer::write(uint16_t value, const char* name)
+void YAMLSerializer::writeU16(uint16_t value, const char* name)
 {
     WRITE_PRIMITIVE(value, name);
 }
 
-void YAMLSerializer::write(uint32_t value, const char* name)
+void YAMLSerializer::writeU32(uint32_t value, const char* name)
 {
     WRITE_PRIMITIVE(value, name);
 }
 
-void YAMLSerializer::write(uint64_t value, const char* name)
+void YAMLSerializer::writeU64(uint64_t value, const char* name)
 {
     WRITE_PRIMITIVE(value, name);
 }
 
-void YAMLSerializer::write(float value, const char* name)
+void YAMLSerializer::writeF32(float value, const char* name)
 {
     WRITE_PRIMITIVE(value, name);
 }
 
-void YAMLSerializer::write(double value, const char* name)
+void YAMLSerializer::writeF64(double value, const char* name)
 {
     WRITE_PRIMITIVE(value, name);
 }
 
-void YAMLSerializer::write(bool value, const char* name)
+void YAMLSerializer::writeBool(bool value, const char* name)
 {
     WRITE_PRIMITIVE(value, name);
 }
 
-void YAMLSerializer::write(const char* value, const char* name)
+void YAMLSerializer::writeString(const char* value, const char* name)
 {
     assert(value != nullptr);
     WRITE_PRIMITIVE(value, name);

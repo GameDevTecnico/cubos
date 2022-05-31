@@ -1,9 +1,9 @@
-#ifndef CUBOS_CORE_MEMORY_SERIALIZATION_MAP_HPP
-#define CUBOS_CORE_MEMORY_SERIALIZATION_MAP_HPP
+#ifndef CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
+#define CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
 
 #include <unordered_map>
 
-namespace cubos::core::memory
+namespace cubos::core::data
 {
     /// Class used to map between references and their serialized identifiers.
     /// @tparam R Reference type.
@@ -92,6 +92,6 @@ namespace cubos::core::memory
     {
         return this->ref_to_id.size();
     }
-} // namespace cubos::core::memory
+} // namespace cubos::core::data
 
-#endif // CUBOS_CORE_MEMORY_SERIALIZATION_MAP_HPP
+#endif // CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
