@@ -11,7 +11,7 @@ namespace cubos::core::gl
 {
     class Palette;
     class Grid;
-}
+} // namespace cubos::core::gl
 
 namespace cubos::core::data
 {
