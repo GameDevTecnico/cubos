@@ -17,8 +17,6 @@ namespace cubos::engine::gl::pps
         Lighting, ///< Renderer output with lighting applied.
         Position, ///< GBuffer texture with the world position of the pixels.
         Normal,   ///< GBuffer texture with the world normal of the pixels.
-
-        Count,
     };
 
     /// Class responsible for managing the post processing passes.
@@ -40,7 +38,7 @@ namespace cubos::engine::gl::pps
 
         /// Provides a texture input to be used by the passes.
         /// @param input The input identifier.
-        /// @param texture The texture to use.
+        /// @param texture The texture to provide.
         void provideInput(Input input, core::gl::Texture2D texture);
 
         /// Adds a pass to the manager.
