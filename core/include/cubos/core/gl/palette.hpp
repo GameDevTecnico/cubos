@@ -50,6 +50,11 @@ namespace cubos::core::gl
         /// @param material The material to set.
         void set(uint16_t index, const Material& material);
 
+        /// Searches for the index of the material most similar to the given material.
+        /// @param material The material to search for.
+        /// @return The index of the material.
+        uint16_t find(const Material& material) const;
+
     private:
         friend void data::serialize(data::Serializer&, const Palette&, const char*);
         friend void data::deserialize(data::Deserializer&, Palette&);
