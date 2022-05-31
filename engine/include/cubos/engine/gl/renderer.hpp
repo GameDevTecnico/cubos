@@ -1,10 +1,6 @@
 #ifndef CUBOS_ENGINE_GL_RENDERER_HPP
 #define CUBOS_ENGINE_GL_RENDERER_HPP
 
-#include <vector>
-#include <functional>
-#include <list>
-
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/gl/grid.hpp>
 #include <cubos/core/gl/vertex.hpp>
@@ -13,7 +9,9 @@
 #include <cubos/core/gl/light.hpp>
 #include <cubos/core/io/window.hpp>
 
-#include <cubos/engine/gl/pps/pass.hpp>
+#include <cubos/engine/gl/pps/manager.hpp>
+
+#include <glm/glm.hpp>
 
 namespace cubos::engine::gl
 {
@@ -31,39 +29,58 @@ namespace cubos::engine::gl
         using GridID = size_t;
         using PaletteID = size_t;
 
-        virtual ~Renderer() = default;
+        /// @param renderDevice The render device to use.
+        /// @param size The size of the window.
+        Renderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
         Renderer(const Renderer&) = delete;
+        virtual ~Renderer() = default;
 
         /// Uploads a grid to the GPU and returns an ID, which can be used to draw it.
         /// @param grid The grid to upload.
         /// @return The ID of the grid.
-        virtual GridID registerGrid(const core::gl::Grid& grid) = 0;
+        virtual GridID upload(const core::gl::Grid& grid) = 0;
+
+        /// Frees a grid from the GPU.
+        /// @param grid The ID of the grid to free.
+        virtual void free(GridID grid) = 0;
 
         /// Sets the current palette of the renderer.
         /// @param palette The palette to set.
         virtual void setPalette(const core::gl::Palette& palette) = 0;
 
-        /// Draws a frame.
+        /// Resizes the renderer's framebuffers.
+        /// @param size The new size of the window.
+        void resize(glm::uvec2 size);
+
+        /// Draws a frame, with post processing.
         /// @param camera The camera to use.
         /// @param frame The frame to draw.
         /// @param usePostProcessing Whether to use post processing.
-        virtual void render(const core::gl::Camera& camera, const Frame& frame, bool usePostProcessing = true) = 0;
+        void render(const core::gl::Camera& camera, const Frame& frame, bool usePostProcessing = true);
 
-        virtual void addPostProcessingPass(const pps::Pass& pass);
-        virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const = 0;
+        /// Gets a reference to the post processing manager.
+        /// @return The post processing manager.
+        pps::Manager& pps();
 
     protected:
-        explicit Renderer(core::io::Window& window);
+        core::gl::RenderDevice& renderDevice; ///< The render device being used.
 
-        virtual void executePostProcessing(core::gl::Framebuffer target);
+        /// Called when resizze() is called.
+        /// Renderer implementations should override this function to resize their framebuffers.
+        virtual void onResize(glm::uvec2 size) = 0;
 
-        core::io::Window& window;
-        core::gl::RenderDevice& renderDevice;
+        /// Called when render() is called, before applying post processing effects.
+        /// Renderer implementations should implement this function to draw the frame.
+        /// @param camera The camera to use.
+        /// @param frame The frame to draw.
+        /// @param output The output framebuffer. If postprocessing is enabled, it won't be the same as the camera's
+        /// framebuffer.
+        virtual void onRender(const core::gl::Camera& camera, const Frame& frame, core::gl::Framebuffer output) = 0;
 
-        // Post Processing
-        core::gl::Framebuffer outputFramebuffer1, outputFramebuffer2;
-        core::gl::Texture2D outputTexture1, outputTexture2;
-        std::list<std::reference_wrapper<const pps::Pass>> postProcessingPasses;
+    private:
+        pps::Manager ppsManager;           ///< The post processing manager.
+        core::gl::Framebuffer framebuffer; ///< The framebuffer where the frame is drawn.
+        core::gl::Texture2D texture;       ///< The texture where the frame is drawn.
     };
 } // namespace cubos::engine::gl
 
