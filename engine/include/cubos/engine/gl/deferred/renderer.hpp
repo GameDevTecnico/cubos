@@ -23,14 +23,23 @@ namespace cubos::engine::gl::deferred
     class Renderer : public gl::Renderer
     {
     public:
-        /// @param window The window to render on.
-        Renderer(core::io::Window& window);
+        /// @param renderDevice The render device to use.
+        /// @param size The size of the window.
+        Renderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
+        virtual ~Renderer() override = default;
 
         // Implement interface methods.
 
-        virtual GridID registerGrid(const core::gl::Grid& grid) override;
+        virtual GridID upload(const core::gl::Grid& grid) override;
+        virtual void free(GridID grid) override;
         virtual void setPalette(const core::gl::Palette& palette) override;
-        virtual void render(const core::gl::Camera& camera, const Frame& frame, bool usePostProcessing = true) override;
+
+    protected:
+        // Implement interface methods.
+
+        virtual void onResize(glm::uvec2 size) override;
+        virtual void onRender(const core::gl::Camera& camera, const Frame& frame,
+                              core::gl::Framebuffer target) override;
 
     private:
         void createShaderPipelines();

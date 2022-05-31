@@ -73,9 +73,8 @@ namespace cubos::engine::gl
         /// Renderer implementations should implement this function to draw the frame.
         /// @param camera The camera to use.
         /// @param frame The frame to draw.
-        /// @param output The output framebuffer. If postprocessing is enabled, it won't be the same as the camera's
-        /// framebuffer.
-        virtual void onRender(const core::gl::Camera& camera, const Frame& frame, core::gl::Framebuffer output) = 0;
+        /// @param target The target framebuffer. If postprocessing is enabled, it won't be the camera's target.
+        virtual void onRender(const core::gl::Camera& camera, const Frame& frame, core::gl::Framebuffer target) = 0;
 
     private:
         pps::Manager ppsManager;           ///< The post processing manager.
