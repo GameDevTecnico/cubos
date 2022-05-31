@@ -7,7 +7,7 @@ const Material Material::Empty = {{0, 0, 0, 0}};
 /// Returns the similarity between two colors.
 static float colorSimilarity(const glm::vec4& a, const glm::vec4& b)
 {
-    return 1.0f - glm::abs(a.r - b.r) * glm::abs(a.g - b.g) * glm::abs(a.b - b.b) * glm::abs(a.a - b.a);
+    return 1.0f - (glm::abs(a.r - b.r) + glm::abs(a.g - b.g) + glm::abs(a.b - b.b) + glm::abs(a.a - b.a)) / 4.0f;
 }
 
 float Material::similarity(const Material& other) const

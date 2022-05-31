@@ -95,7 +95,7 @@ bool Grid::convert(const Palette& src, const Palette& dst, float min_similarity)
 {
     // Find the mappings for every material in the source palette.
     std::unordered_map<uint16_t, uint16_t> mappings;
-    for (uint16_t i = 0; i < src.getSize(); ++i)
+    for (uint16_t i = 0; i <= src.getSize(); ++i)
     {
         uint16_t j = dst.find(src.get(i));
         if (src.get(i).similarity(dst.get(j)) >= min_similarity)
@@ -108,7 +108,9 @@ bool Grid::convert(const Palette& src, const Palette& dst, float min_similarity)
     for (uint16_t i = 0; i < this->size.x * this->size.y * this->size.z; ++i)
     {
         if (mappings.find(this->indices[i]) == mappings.end())
+        {
             return false;
+        }
     }
 
     // Apply the mappings.

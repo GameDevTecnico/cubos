@@ -41,17 +41,56 @@ uint16_t Palette::find(const Material& material) const
     uint16_t best_i = 0;
     float best_s = material.similarity(Material::Empty);
 
-    for (uint16_t i = 1; i < this->getSize(); ++i)
+    for (uint16_t i = 0; i < this->getSize(); ++i)
     {
-        float s = material.similarity(this->get(i));
+        float s = material.similarity(this->get(i + 1));
         if (s > best_s)
         {
             best_s = s;
-            best_i = i;
+            best_i = i + 1;
         }
     }
 
     return best_i;
+}
+
+uint16_t Palette::add(const Material& material, float similarity)
+{
+    size_t i = this->find(material);
+    if (this->get(i).similarity(material) >= similarity)
+    {
+        return i;
+    }
+    else
+    {
+        for (uint16_t i = 0; i < this->getSize(); ++i)
+        {
+            if (this->get(i + 1).similarity(Material::Empty) >= 1.0f)
+            {
+                this->set(i + 1, material);
+                return i + 1;
+            }
+        }
+
+        if (this->getSize() == UINT16_MAX)
+        {
+            logWarning("Palette is full, cannot add new material");
+            return i;
+        }
+        else
+        {
+            this->materials.push_back(material);
+            return this->getSize();
+        }
+    }
+}
+
+void Palette::merge(const Palette& palette, float similarity)
+{
+    for (uint16_t i = 0; i < palette.getSize(); ++i)
+    {
+        this->add(palette.get(i + 1), similarity);
+    }
 }
 
 void cubos::core::data::serialize(Serializer& serializer, const gl::Palette& palette, const char* name)
@@ -66,7 +105,7 @@ void cubos::core::data::serialize(Serializer& serializer, const gl::Palette& pal
     for (uint16_t i = 0; i < static_cast<uint16_t>(palette.materials.size()); i++)
         if (memcmp(&palette.materials[i], &Material::Empty, sizeof(Material)) != 0)
         {
-            serializer.write(i + 1, nullptr);
+            serializer.write<uint16_t>(i + 1, nullptr);
             serializer.write(palette.materials[i], nullptr);
         }
     serializer.endDictionary();
@@ -82,7 +121,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, gl::Palette& pal
     size_t count = deserializer.beginDictionary();
     for (size_t i = 0; i < count; i++)
     {
-        deserializer.read(index);
+        deserializer.read<uint16_t>(index);
         deserializer.read(mat);
 
         if (index == 0)

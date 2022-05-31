@@ -19,7 +19,6 @@ namespace cubos::core::data
 
         // Implement interface methods.
 
-        virtual void flush() override;
         virtual void writeI8(int8_t value, const char* name) override;
         virtual void writeI16(int16_t value, const char* name) override;
         virtual void writeI32(int32_t value, const char* name) override;
