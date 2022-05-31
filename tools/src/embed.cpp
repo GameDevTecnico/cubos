@@ -38,7 +38,7 @@ static bool parseArguments(int argc, char** argv, Options& options)
     bool foundInput = false;
 
     // Iterate over the arguments.
-    for (int i = 1; i < argc; ++i)
+    for (int i = 0; i < argc; ++i)
     {
         if (std::string(argv[i]) == "-n")
         {

@@ -25,7 +25,7 @@ int main(int argc, char** argv)
         {
             if (tools[i].name == argv[1])
             {
-                return tools[i].run(argc - 1, argv + 1);
+                return tools[i].run(argc - 2, argv + 2);
             }
         }
     }

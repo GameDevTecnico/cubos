@@ -33,7 +33,7 @@ static void printHelp()
 {
     std::cerr << "Usage: cubinhos convert <INPUT> -p <PALETTE-PATH> [OPTIONS]" << std::endl;
     std::cerr << "Options:" << std::endl;
-    std::cerr << "  -gx <PATH>   Sets the output path of the grid number x." << std::endl;
+    std::cerr << "  -g<N> <PATH> Sets the output path of the grid <N>." << std::endl;
     std::cerr << "  -p  <PATH>   Specifies the path of the palette being used." << std::endl;
     std::cerr << "  -w           Allows the palette to be written to." << std::endl;
     std::cerr << "  -v           Enables verbose mode." << std::endl;
@@ -53,7 +53,7 @@ static bool parseArguments(int argc, char** argv, Options& options)
     bool foundInput = false;
 
     // Iterate over the arguments.
-    for (int i = 1; i < argc; ++i)
+    for (int i = 0; i < argc; ++i)
     {
         if (std::string(argv[i]).substr(0, 2) == "-g")
         {
