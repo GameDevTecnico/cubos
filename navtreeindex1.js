@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a659b4df19df27e9c3f6b3baaeec4420d":[1,0,0,0,0,13,13],
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a65b3a16b562bb80b9f3520a67a7ce496":[1,0,0,0,0,13,4],
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a85d66d0a99d5e62616d3bdeb5faf6679":[1,0,0,0,0,13,19],
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a9c6cb0ecaa6a0ff016682eb4ce96d14f":[1,0,0,0,0,13,15],
@@ -58,15 +57,17 @@ var NAVTREEINDEX1 =
 "classcubos_1_1core_1_1gl_1_1Grid.html#ad6f92fd6646593addece930bed9b20fb":[1,0,0,0,2,11,8],
 "classcubos_1_1core_1_1gl_1_1Grid.html#af187f9343f1fc7e6c9fd61e98385b98a":[1,0,0,0,2,11,6],
 "classcubos_1_1core_1_1gl_1_1Palette.html":[1,0,0,0,2,13],
-"classcubos_1_1core_1_1gl_1_1Palette.html#a0cde9e9005b5e61b7233a11576e80f6b":[1,0,0,0,2,13,7],
-"classcubos_1_1core_1_1gl_1_1Palette.html#a4182b2b1782a95c75546ed063bcd6b3b":[1,0,0,0,2,13,5],
-"classcubos_1_1core_1_1gl_1_1Palette.html#a4678e4128e58b305d8fd473e157b02b3":[1,0,0,0,2,13,9],
-"classcubos_1_1core_1_1gl_1_1Palette.html#a4a247b54a67c269f5cf1879d44681214":[1,0,0,0,2,13,8],
+"classcubos_1_1core_1_1gl_1_1Palette.html#a0cde9e9005b5e61b7233a11576e80f6b":[1,0,0,0,2,13,9],
+"classcubos_1_1core_1_1gl_1_1Palette.html#a4182b2b1782a95c75546ed063bcd6b3b":[1,0,0,0,2,13,6],
+"classcubos_1_1core_1_1gl_1_1Palette.html#a4678e4128e58b305d8fd473e157b02b3":[1,0,0,0,2,13,11],
+"classcubos_1_1core_1_1gl_1_1Palette.html#a4a247b54a67c269f5cf1879d44681214":[1,0,0,0,2,13,10],
 "classcubos_1_1core_1_1gl_1_1Palette.html#a4d22164d8ea3cebf615c6f15109f70a2":[1,0,0,0,2,13,1],
-"classcubos_1_1core_1_1gl_1_1Palette.html#a627b852ff3b414d1e07639fc7b7af355":[1,0,0,0,2,13,3],
-"classcubos_1_1core_1_1gl_1_1Palette.html#aa408dbbc9c25b40f71ee25ff3d439a2b":[1,0,0,0,2,13,6],
+"classcubos_1_1core_1_1gl_1_1Palette.html#a627b852ff3b414d1e07639fc7b7af355":[1,0,0,0,2,13,4],
+"classcubos_1_1core_1_1gl_1_1Palette.html#a6cbbedb2c67b556cf71b6cb4028e20e7":[1,0,0,0,2,13,8],
+"classcubos_1_1core_1_1gl_1_1Palette.html#aa408dbbc9c25b40f71ee25ff3d439a2b":[1,0,0,0,2,13,7],
 "classcubos_1_1core_1_1gl_1_1Palette.html#aacf7590ec8378191fc789e357a6b07e7":[1,0,0,0,2,13,0],
-"classcubos_1_1core_1_1gl_1_1Palette.html#abd53bf4f8cfe26b5bbb37fc03a7819b2":[1,0,0,0,2,13,4],
+"classcubos_1_1core_1_1gl_1_1Palette.html#abd53bf4f8cfe26b5bbb37fc03a7819b2":[1,0,0,0,2,13,5],
+"classcubos_1_1core_1_1gl_1_1Palette.html#ac6fca79b00049b39df58e6672bdf3bda":[1,0,0,0,2,13,3],
 "classcubos_1_1core_1_1gl_1_1Palette.html#aef3534810c16bae021920e55b2ef2236":[1,0,0,0,2,13,2],
 "classcubos_1_1core_1_1gl_1_1RenderDevice.html":[1,0,0,0,2,16],
 "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a052af425a86fa1896095ec30ff533add":[1,0,0,0,2,16,7],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classcubos_1_1core_1_1io_1_1Window.html#a4a64a3864daee7150d79fc838744b973":[1,0,0,0,3,7,0],
 "classcubos_1_1core_1_1io_1_1Window.html#a6698015b4673547e832efade74684617":[1,0,0,0,3,7,12],
 "classcubos_1_1core_1_1io_1_1Window.html#a6ab07462b72861d0ab000a4d91fd3990":[1,0,0,0,3,7,6],
-"classcubos_1_1core_1_1io_1_1Window.html#a7d3cc260d013fb0f014e52074d6d5ae0":[1,0,0,0,3,7,13],
-"classcubos_1_1core_1_1io_1_1Window.html#a7d78d9a21ecd199f54aaa87613ef4347":[1,0,0,0,3,7,5]
+"classcubos_1_1core_1_1io_1_1Window.html#a7d3cc260d013fb0f014e52074d6d5ae0":[1,0,0,0,3,7,13]
 };

@@ -8,7 +8,6 @@ var classcubos_1_1core_1_1data_1_1BinarySerializer =
     [ "endArray", "classcubos_1_1core_1_1data_1_1BinarySerializer.html#a7b159e82912968e35b8fa95587025140", null ],
     [ "endDictionary", "classcubos_1_1core_1_1data_1_1BinarySerializer.html#a242dbba416c861871a928ead1a1f4c2d", null ],
     [ "endObject", "classcubos_1_1core_1_1data_1_1BinarySerializer.html#aba0324354e9357228f9fa36dbfbb8296", null ],
-    [ "flush", "classcubos_1_1core_1_1data_1_1BinarySerializer.html#a1f817fd7ecabf9ac3602145dae6fe284", null ],
     [ "writeBool", "classcubos_1_1core_1_1data_1_1BinarySerializer.html#a633d31b8d93465307d1982abca6c090a", null ],
     [ "writeF32", "classcubos_1_1core_1_1data_1_1BinarySerializer.html#ae04a754c67339e2718e3056cde540bed", null ],
     [ "writeF64", "classcubos_1_1core_1_1data_1_1BinarySerializer.html#a620fbf97f9dc2705e4ac61f204bb5750", null ],

@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"structcubos_1_1core_1_1gl_1_1DirectionalLight.html#aaab8ed740114e0fc12de7914175926de":[1,0,0,0,2,9,3],
 "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#afccc438f0a56e03317e9cf10777c21b3":[1,0,0,0,2,9,2],
 "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html":[1,0,0,0,2,10],
 "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html#a8c9b366031a05743a1e867c547839b20":[1,0,0,0,2,10,5],
