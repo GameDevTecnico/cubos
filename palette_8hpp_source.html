@@ -127,17 +127,20 @@ $(document).ready(function(){initNavTree('palette_8hpp_source.html',''); initRes
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Palette.html#a0cde9e9005b5e61b7233a11576e80f6b">set</a>(uint16_t index, <span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a>&amp; material);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">void</span> data::serialize(<a class="code" href="classcubos_1_1core_1_1data_1_1Serializer.html">data::Serializer</a>&amp;, <span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a>&amp;, <span class="keyword">const</span> <span class="keywordtype">char</span>*);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">void</span> data::deserialize(<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html">data::Deserializer</a>&amp;, <a class="code" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a>&amp;);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        std::vector&lt;Material&gt; materials; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    };</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_GL_PALETTE_HPP</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        uint16_t <a class="code" href="classcubos_1_1core_1_1gl_1_1Palette.html#a627b852ff3b414d1e07639fc7b7af355">find</a>(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a>&amp; material) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">void</span> data::serialize(<a class="code" href="classcubos_1_1core_1_1data_1_1Serializer.html">data::Serializer</a>&amp;, <span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a>&amp;, <span class="keyword">const</span> <span class="keywordtype">char</span>*);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">void</span> data::deserialize(<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html">data::Deserializer</a>&amp;, <a class="code" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a>&amp;);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        std::vector&lt;Material&gt; materials; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    };</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_GL_PALETTE_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Palette_html_a627b852ff3b414d1e07639fc7b7af355"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Palette.html#a627b852ff3b414d1e07639fc7b7af355">cubos::core::gl::Palette::find</a></div><div class="ttdeci">uint16_t find(const Material &amp;material) const</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Deserializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html">cubos::core::data::Deserializer</a></div><div class="ttdoc">Abstract class for deserializing data.</div><div class="ttdef"><b>Definition:</b> deserializer.hpp:40</div></div>
 <div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Material_html"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Material.html">cubos::core::gl::Material</a></div><div class="ttdoc">Represents a voxel material.</div><div class="ttdef"><b>Definition:</b> material.hpp:12</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Palette_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Palette.html">cubos::core::gl::Palette</a></div><div class="ttdoc">Represents a palette of materials. Supports up to 65535 materials.</div><div class="ttdef"><b>Definition:</b> palette.hpp:30</div></div>

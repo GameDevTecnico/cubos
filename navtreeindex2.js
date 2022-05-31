@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"classcubos_1_1core_1_1io_1_1Window.html#a7ed740855f2400fffb309194c1d15991":[1,0,0,0,3,7,15],
+"classcubos_1_1core_1_1io_1_1Window.html#a8224353a4ae61efc8dba43fb3f29fbf6":[1,0,0,0,3,7,11],
 "classcubos_1_1core_1_1io_1_1Window.html#a8af2149f5419d5dc881529eda415bb17":[1,0,0,0,3,7,7],
 "classcubos_1_1core_1_1io_1_1Window.html#aa7b55a28decd5ba5bdea1553dfb96d96":[1,0,0,0,3,7,8],
 "classcubos_1_1core_1_1io_1_1Window.html#aa9ec0b40bef5fedf4e9533674ddb970c":[1,0,0,0,3,7,3],
@@ -84,8 +86,8 @@ var NAVTREEINDEX2 =
 "file__stream_8hpp_source.html":[2,0,0,0,0,0,6],
 "file__system_8hpp_source.html":[2,0,0,0,0,0,7],
 "files.html":[2,0],
-"functions.html":[1,3,0,0],
 "functions.html":[1,3,0],
+"functions.html":[1,3,0,0],
 "functions_b.html":[1,3,0,1],
 "functions_c.html":[1,3,0,2],
 "functions_d.html":[1,3,0,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX2 =
 "structcubos_1_1core_1_1gl_1_1DirectionalLight.html":[1,0,0,0,2,9],
 "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#a26e8627f380cb771c43397b4a51f18ee":[1,0,0,0,2,9,0],
 "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#a7a2cd51a02e6f2c5c2178374130728d8":[1,0,0,0,2,9,1],
-"structcubos_1_1core_1_1gl_1_1DirectionalLight.html#aaab8ed740114e0fc12de7914175926de":[1,0,0,0,2,9,3],
-"structcubos_1_1core_1_1gl_1_1DirectionalLight.html#afccc438f0a56e03317e9cf10777c21b3":[1,0,0,0,2,9,2],
-"structcubos_1_1core_1_1gl_1_1FramebufferDesc.html":[1,0,0,0,2,10]
+"structcubos_1_1core_1_1gl_1_1DirectionalLight.html#aaab8ed740114e0fc12de7914175926de":[1,0,0,0,2,9,3]
 };

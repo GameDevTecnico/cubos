@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"structcubos_1_1core_1_1gl_1_1DirectionalLight.html#afccc438f0a56e03317e9cf10777c21b3":[1,0,0,0,2,9,2],
+"structcubos_1_1core_1_1gl_1_1FramebufferDesc.html":[1,0,0,0,2,10],
 "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html#a8c9b366031a05743a1e867c547839b20":[1,0,0,0,2,10,5],
 "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html#a8c9b366031a05743a1e867c547839b20a41bb72f1b095b1c24d6335f09377dd29":[1,0,0,0,2,10,5,2],
 "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html#a8c9b366031a05743a1e867c547839b20a5452f0008bbc07c796bb4ac7d284928d":[1,0,0,0,2,10,5,3],
@@ -30,7 +32,8 @@ var NAVTREEINDEX3 =
 "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1Texture2DTarget.html":[1,0,0,0,2,10,4],
 "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1Texture2DTarget.html#a668c55f18162fd76c6d79eb67554e141":[1,0,0,0,2,10,4,0],
 "structcubos_1_1core_1_1gl_1_1Material.html":[1,0,0,0,2,12],
-"structcubos_1_1core_1_1gl_1_1Material.html#a7b9d9093e0c3510899acfe223d0238aa":[1,0,0,0,2,12,0],
+"structcubos_1_1core_1_1gl_1_1Material.html#a1863f332ff1d0326e7f07182e68b1913":[1,0,0,0,2,12,0],
+"structcubos_1_1core_1_1gl_1_1Material.html#a7b9d9093e0c3510899acfe223d0238aa":[1,0,0,0,2,12,1],
 "structcubos_1_1core_1_1gl_1_1PointLight.html":[1,0,0,0,2,14],
 "structcubos_1_1core_1_1gl_1_1PointLight.html#a2f69e8812247e15592fb72e632a32fd5":[1,0,0,0,2,14,0],
 "structcubos_1_1core_1_1gl_1_1PointLight.html#a7e2d4a83e76a537d2cf6748609354a99":[1,0,0,0,2,14,4],

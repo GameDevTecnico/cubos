@@ -118,6 +118,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:acc83d2b66777e77ba2b6a725c2f9004e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f86c62f435581ec581ea8a9fa001016"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html#a4f86c62f435581ec581ea8a9fa001016">get</a> (const glm::ivec3 &amp;position) const</td></tr>
 <tr class="separator:a4f86c62f435581ec581ea8a9fa001016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af187f9343f1fc7e6c9fd61e98385b98a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html#af187f9343f1fc7e6c9fd61e98385b98a">convert</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a> &amp;src, const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a> &amp;dst, float min_similarity)</td></tr>
+<tr class="separator:af187f9343f1fc7e6c9fd61e98385b98a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -192,6 +194,49 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="af187f9343f1fc7e6c9fd61e98385b98a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af187f9343f1fc7e6c9fd61e98385b98a">&#9670;&nbsp;</a></span>convert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cubos::core::gl::Grid::convert </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a> &amp;&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>min_similarity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Converts the material indices of this grid from one palette to another. For each index, it will search for another index in the second palette which matches the first palette. The conversion fails if no matching index is found. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The original palette. </td></tr>
+    <tr><td class="paramname">dst</td><td>The new palette. </td></tr>
+    <tr><td class="paramname">min_similarity</td><td>The minimum similarity between two materials to consider them the same. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the conversion was successful. </dd></dl>
+
+</div>
+</div>
 <a id="a4f86c62f435581ec581ea8a9fa001016"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4f86c62f435581ec581ea8a9fa001016">&#9670;&nbsp;</a></span>get()</h2>
 
