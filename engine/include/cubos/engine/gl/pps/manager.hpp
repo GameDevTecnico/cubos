@@ -34,6 +34,10 @@ namespace cubos::engine::gl::pps
         /// @param size The size of the window.
         Manager(const core::gl::RenderDevice& renderDevice, glm::uvec2 size);
 
+        /// Called when the window framebuffer size changes.
+        /// @param size The new size of the window.
+        void resize(glm::uvec2 size);
+
         /// Provides a texture input to be used by the passes.
         /// @param input The input identifier.
         /// @param texture The texture to use.
