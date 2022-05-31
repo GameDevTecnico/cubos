@@ -14,21 +14,27 @@
 
 namespace cubos::engine::gl::deferred
 {
+    /// Renderer implementation which uses deferred rendering.
+    ///
+    /// Voxel grids are first triangulated, and then the triangles are uploaded to the GPU.
+    /// The rendering is done in two passes:
+    /// - The first pass renders the scene to the GBuffer textures: position, normal and material.
+    /// - The second pass takes the GBuffer textures and calculates the color of the pixels with the lighting applied.
     class Renderer : public gl::Renderer
     {
     public:
-        explicit Renderer(core::io::Window& window);
+        /// @param window The window to render on.
+        Renderer(core::io::Window& window);
+
+        // Implement interface methods.
 
         virtual GridID registerGrid(const core::gl::Grid& grid) override;
         virtual void setPalette(const core::gl::Palette& palette) override;
         virtual void render(const core::gl::Camera& camera, const Frame& frame, bool usePostProcessing = true) override;
 
-        virtual void getScreenQuad(core::gl::VertexArray& va, core::gl::IndexBuffer& ib) const override;
-
     private:
         void createShaderPipelines();
         void setupFrameBuffers();
-
         void createRenderDeviceStates();
 
         struct MVP
