@@ -6,6 +6,7 @@
 #include <cubos/core/gl/render_device.hpp>
 
 #include <glm/glm.hpp>
+#include <map>
 
 namespace cubos::engine::gl::pps
 {
@@ -25,12 +26,13 @@ namespace cubos::engine::gl::pps
     /// Passes are executed in the order they are added, and take as input the output of the previous pass and the
     /// outputs of the renderer.
     /// @see Pass
-    class Manager
+    class Manager final
     {
     public:
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
-        Manager(const core::gl::RenderDevice& renderDevice, glm::uvec2 size);
+        Manager(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
+        ~Manager();
 
         /// Called when the window framebuffer size changes.
         /// @param size The new size of the window.
@@ -53,8 +55,26 @@ namespace cubos::engine::gl::pps
         /// Applies all post processing passes sequentially, and outputs the result to the screen.
         /// The lighting input must have been provided before calling this function, since it acts as the input for the
         /// first pass.
-        void execute(core::gl::Framebuffer out) const;
+        void execute(core::gl::Framebuffer out);
+
+    private:
+        core::gl::RenderDevice& renderDevice;        ///< The render device to use.
+        glm::uvec2 size;                             ///< The current size of the window.
+        std::map<Input, core::gl::Texture2D> inputs; ///< The inputs provided to the passes.
+        std::map<size_t, Pass*> passes;              ///< The passes present in the manager.
+        size_t nextId;                               ///< The next ID to use for a pass.
+        core::gl::Texture2D intermediateTex[2];      ///< Intermediate textures used for the passes.
+        core::gl::Framebuffer intermediateFb[2];     ///< Intermediate framebuffers used for the passes.
     };
+
+    // Implementation.
+
+    template <typename T> size_t Manager::addPass()
+    {
+        size_t id = this->nextId++;
+        this->passes[id] = new T(this->renderDevice, this->size);
+        return id;
+    }
 } // namespace cubos::engine::gl::pps
 
 #endif // CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP
