@@ -42,96 +42,53 @@ namespace cubos::engine::gl::deferred
                               core::gl::Framebuffer target) override;
 
     private:
-        void createShaderPipelines();
-        void setupFrameBuffers();
-        void createRenderDeviceStates();
+        // Uploaded grids.
 
-        struct MVP
+        struct GpuGrid
         {
-            glm::mat4 M;
-            glm::mat4 V;
-            glm::mat4 P;
+            core::gl::VertexArray va;
+            core::gl::IndexBuffer ib;
+            size_t indexCount;
         };
 
-        struct LightBlock
-        {
-            struct SpotLightData
-            {
-                glm::vec4 position;
-                glm::mat4 rotation;
-                glm::vec4 color;
-                float intensity;
-                float range;
-                float spotCutoff;
-                float innerSpotCutoff;
+        std::vector<GpuGrid> grids;
 
-                SpotLightData() = default;
-                SpotLightData(const core::gl::SpotLight& light);
-            } spotLights[CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT];
+        // Render device states.
 
-            struct DirectionalLightData
-            {
-                glm::mat4 rotation;
-                glm::vec4 color;
-                float intensity;
-                float padding[3];
-
-                DirectionalLightData() = default;
-                DirectionalLightData(const core::gl::DirectionalLight& light);
-            } directionalLights[CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT];
-
-            struct PointLightData
-            {
-                glm::vec4 position;
-                glm::vec4 color;
-                float intensity;
-                float range;
-                float padding[2];
-
-                PointLightData() = default;
-                PointLightData(const core::gl::PointLight& light);
-            } pointLights[CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT];
-
-            uint32_t numSpotLights = 0;
-            uint32_t numDirectionalLights = 0;
-            uint32_t numPointLights = 0;
-        } lights;
-
-        //  Shader Pipeline.
-        core::gl::ShaderPipeline gBufferPipeline;
-        core::gl::ShaderBindingPoint mvpBP;
-        core::gl::ConstantBuffer mvpBuffer;
         core::gl::RasterState rasterState;
         core::gl::BlendState blendState;
         core::gl::DepthStencilState depthStencilState;
 
-        // Framebuffers
-        core::gl::Framebuffer gBuffer;
+        // GBuffer.
 
-        // Textures.
-        core::gl::Texture2D paletteTex;
+        glm::uvec2 size;
+        core::gl::Framebuffer gBuffer;
         core::gl::Texture2D positionTex;
         core::gl::Texture2D normalTex;
         core::gl::Texture2D materialTex;
         core::gl::Texture2D depthTex;
 
-        // Shader Pipeline.
-        core::gl::ShaderPipeline outputPipeline;
-        core::gl::ShaderBindingPoint outputPositionBP;
-        core::gl::ShaderBindingPoint outputNormalBP;
-        core::gl::ShaderBindingPoint outputMaterialBP;
-        core::gl::ShaderBindingPoint outputPaletteBP;
-        core::gl::ShaderBindingPoint outputLightBlockBP;
-        core::gl::ConstantBuffer outputLightBlockBuffer;
+        //  Geometry pass pipeline.
 
-        // Screen Quad.
-        core::gl::VertexArray screenVertexArray;
-        core::gl::IndexBuffer screenIndexBuffer;
+        core::gl::ShaderPipeline geometryPipeline;
+        core::gl::ShaderBindingPoint mvpBP;
+        core::gl::ConstantBuffer mvpBuffer;
 
-        // Samplers.
-        core::gl::Sampler positionSampler;
-        core::gl::Sampler normalSampler;
-        core::gl::Sampler materialSampler;
+        // Lighting pass pipeline.
+
+        core::gl::ShaderPipeline lightingPipeline;
+        core::gl::ShaderBindingPoint paletteBP;
+        core::gl::ShaderBindingPoint positionBP;
+        core::gl::ShaderBindingPoint normalBP;
+        core::gl::ShaderBindingPoint materialBP;
+        core::gl::ShaderBindingPoint lightsBP;
+        core::gl::Sampler sampler;
+        core::gl::Texture2D paletteTex;
+        core::gl::ConstantBuffer lightsBuffer;
+
+        // Screen quad used for the lighting pass.
+
+        core::gl::VertexArray screenQuadVA;
     };
 } // namespace cubos::engine::gl::deferred
 

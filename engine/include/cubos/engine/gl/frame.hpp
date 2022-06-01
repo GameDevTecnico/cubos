@@ -3,6 +3,8 @@
 
 #include <cubos/engine/gl/renderer.hpp>
 
+#include <vector>
+
 namespace cubos::engine::gl
 {
     /// Contains all scene data needed to draw a frame.
@@ -14,7 +16,14 @@ namespace cubos::engine::gl
         Frame() = default;
         ~Frame() = default;
 
-        /// Submits a draw call.
+        /// Data of a single draw command.
+        struct DrawCmd
+        {
+            Renderer::GridID grid;
+            glm::mat4 modelMat;
+        };
+
+        /// Submits a draw command.
         /// @param grid The renderer identifier of the grid to draw.
         /// @param modelMat The model matrix of the grid, used for applying transformations.
         void draw(Renderer::GridID grid, glm::mat4 modelMat);
@@ -38,8 +47,32 @@ namespace cubos::engine::gl
         /// Clears the frame, removing all draw calls and lights.
         void clear();
 
+        /// Gets all of the draw commands stored in the frame.
+        /// @return The draw commands.
+        const std::vector<DrawCmd>& getDrawCmds() const;
+
+        /// Gets the ambient light of the scene.
+        /// @return The ambient light.
+        const glm::vec3& getAmbient() const;
+
+        /// Gets the spot lights of the frame.
+        /// @return The spot lights.
+        const std::vector<core::gl::SpotLight>& getSpotLights() const;
+
+        /// Gets the directional lights of the frame.
+        /// @return The directional lights.
+        const std::vector<core::gl::DirectionalLight>& getDirectionalLights() const;
+
+        /// Gets the point lights of the frame.
+        /// @return The point lights.
+        const std::vector<core::gl::PointLight>& getPointLights() const;
+
     private:
-        // TODO: how to store this data and make it accessible to the renderer?
+        glm::vec3 ambientColor;
+        std::vector<DrawCmd> drawCmds;
+        std::vector<core::gl::SpotLight> spotLights;
+        std::vector<core::gl::DirectionalLight> directionalLights;
+        std::vector<core::gl::PointLight> pointLights;
     };
 } // namespace cubos::engine::gl
 

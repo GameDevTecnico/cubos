@@ -282,12 +282,6 @@ namespace cubos::core::gl
 
         struct FramebufferTarget
         {
-        private:
-            bool set = false;
-            TargetType type; ///< Type of the currently set target.
-
-            std::variant<CubeMapTarget, Texture2DTarget, CubeMapArrayTarget, Texture2DArrayTarget> target;
-
         public:
             uint32_t mipLevel = 0; ///< Mip level of the target which will be set as a render target.
 
@@ -310,6 +304,11 @@ namespace cubos::core::gl
 
             void setCubeMapArrayTarget(const CubeMapArray& handle);
 
+        private:
+            bool set = false;
+            TargetType type; ///< Type of the currently set target.
+
+            std::variant<CubeMapTarget, Texture2DTarget, CubeMapArrayTarget, Texture2DArrayTarget> target;
         } targets[CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
         uint32_t targetCount = 1;       ///< Number of render targets.
