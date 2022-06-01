@@ -24,16 +24,16 @@ void Renderer::resize(glm::uvec2 size)
     this->onResize(size);
 }
 
-void Renderer::render(const Camera& camera, const Frame& frame, bool usePostProcessing)
+void Renderer::render(const Camera& camera, const Frame& frame, bool usePostProcessing, core::gl::Framebuffer target)
 {
     if (usePostProcessing)
     {
         this->onRender(camera, frame, this->framebuffer);
         this->ppsManager.provideInput(pps::Input::Lighting, this->texture);
-        this->ppsManager.execute(this->framebuffer);
+        this->ppsManager.execute(target);
     }
     else
     {
-        this->onRender(camera, frame, camera.target);
+        this->onRender(camera, frame, target);
     }
 }

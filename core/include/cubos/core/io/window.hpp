@@ -49,7 +49,7 @@ namespace cubos::core::io
         Window() = default;
         virtual ~Window() = default;
 
-        /// Creates a window.
+        /// Creates a window. It must be freed with delete.
         /// @return New window, or nullptr if creation failed.
         static Window* create();
 

@@ -1,31 +1,34 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/io/window.hpp>
 #include <cubos/core/gl/render_device.hpp>
-#include "cubos/core/gl/vertex.hpp"
-#include "cubos/engine/gl/pps/copy_pass.hpp"
+#include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/palette.hpp>
+
+#include <cubos/engine/gl/frame.hpp>
 #include <cubos/engine/gl/deferred/renderer.hpp>
 #include <cubos/engine/gl/pps/copy_pass.hpp>
+
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-using namespace cubos::core;
-using namespace cubos::engine;
+using namespace cubos;
 
 int main(void)
 {
-    initializeLogger();
-    auto window = io::Window::create();
+    core::initializeLogger();
+    auto window = core::io::Window::create();
     auto& renderDevice = window->getRenderDevice();
 
     {
-        using namespace cubos::core::gl;
-        using namespace cubos::engine::gl;
+        using namespace core::gl;
+        using namespace engine::gl;
 
-        auto renderer = deferred::Renderer(*window);
+        auto renderer = deferred::Renderer(renderDevice, window->getFramebufferSize());
+        auto frame = Frame();
 
-        Palette palette1(std::vector<Material>{
+        // Set the palette.
+        Palette palette({
             {{1, 0, 0, 1}},
             {{0, 1, 0, 1}},
             {{0, 0, 1, 1}},
@@ -33,39 +36,31 @@ int main(void)
             {{0, 1, 1, 1}},
             {{1, 0, 1, 1}},
         });
-        Palette palette2(std::vector<Material>{
-            {{0, 1, 1, 1}},
-            {{1, 0, 1, 1}},
-            {{1, 1, 0, 1}},
-            {{0, 0, 1, 1}},
-            {{1, 0, 0, 1}},
-            {{0, 1, 0, 1}},
-        });
+        renderer.setPalette(palette);
 
-        auto palette1ID = renderer.registerPalette(palette1);
-        auto palette2ID = renderer.registerPalette(palette2);
-
-        Grid cube;
-
+        // Create and upload a simple grid.
+        Grid cube({1, 1, 1});
         cube.set({0, 0, 0}, 1);
+        Renderer::GridID id = renderer.upload(cube);
 
-        Renderer::ModelID id = renderer.registerModel(cube);
+        // Add a copy pass to the post processing stack.
+        renderer.pps().addPass<pps::CopyPass>();
 
-        pps::CopyPass pass = pps::CopyPass(*window);
-        renderer.addPostProcessingPass(pass);
+        // Initialize the camera.
+        Camera camera;
+        camera.fovY = 20.0f;
+        camera.zNear = 0.1f;
+        camera.zFar = 1000.0f;
+        camera.view = glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0});
 
-        glm::vec2 windowSize = window->getFramebufferSize();
-        Camera mainCamera = {// glm::mat4 viewMatrix;
-                             glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
-                             // glm::mat4 perspectiveMatrix;
-                             glm::perspective(glm::radians(20.0f), windowSize.x / windowSize.y, 0.1f, 1000.f),
-                             // gl::Framebuffer target;
-                             0};
         float t = 0;
         int s = 0;
 
         while (!window->shouldClose())
         {
+            window->pollEvents();
+
+            // Calculate the delta time.
             float currentT = window->getTime();
             float deltaT = 0;
             if (t != 0)
@@ -73,13 +68,15 @@ int main(void)
                 deltaT = currentT - t;
                 int newS = std::round(t);
                 if (newS != s)
-                    logDebug("FPS: {}", std::round(1 / deltaT));
+                    core::logDebug("FPS: {}", std::round(1 / deltaT));
                 s = newS;
             }
             t = currentT;
-            renderDevice.setFramebuffer(0);
-            renderDevice.clearColor(0.0, 0.0, 0.0, 0.0f);
 
+            // Clear the frame commands.
+            frame.clear();
+
+            // Draw cube of cubes to the frame.
             for (int x = -1; x < 1; x++)
             {
                 for (int y = -1; y < 1; y++)
@@ -92,37 +89,23 @@ int main(void)
                                         glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f)) *
                                         glm::rotate(glm::mat4(1.0f), glm::radians(t), axis) *
                                         glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f));
-                        renderer.drawModel(id, modelMat);
+                        frame.draw(id, modelMat);
                     }
                 }
             }
 
-            glm::quat spotLightRotation =
-                glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-            glm::quat directionalLightRotation =
-                glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-            glm::quat pointLightRotation =
-                glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+            // Add lights to the frame.
+            auto spotRotation = glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+            auto directionalRotation = glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+            auto pointRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+            frame.light(SpotLight(spotRotation * glm::vec3(0, 0, -5), spotRotation, glm::vec3(1), 1, 100,
+                                  glm::radians(10.0f), glm::radians(9.0f)));
+            frame.light(DirectionalLight(directionalRotation, glm::vec3(1), 0.5f));
+            frame.light(PointLight(pointRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
 
-            renderer.drawLight(SpotLight(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1), 1,
-                                         100, glm::radians(10.0f), glm::radians(9.0f)));
-            renderer.drawLight(DirectionalLight(directionalLightRotation, glm::vec3(1), 0.5f));
-            renderer.drawLight(PointLight(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
-
-            if (sin(t * 4) > 0)
-            {
-                renderer.setPalette(palette1ID);
-            }
-            else
-            {
-                renderer.setPalette(palette2ID);
-            }
-
-            renderer.render(mainCamera);
-            renderer.flush();
-
+            // Render the frame.
+            renderer.render(camera, frame);
             window->swapBuffers();
-            window->pollEvents();
         }
     }
 
