@@ -366,7 +366,19 @@ void deferred::Renderer::free(GridID grid)
 
 void deferred::Renderer::setPalette(const core::gl::Palette& palette)
 {
-    // TODO: write the palette to the palette texture.
+    // Get the colors from the palette.
+    // Magenta is used for non-existent materials in order to easily identify errors.
+    std::vector<glm::vec4> data(65536, {1.0f, 0.0f, 1.0f, 1.0f});
+    for (size_t i = 0; i < palette.getSize(); ++i)
+    {
+        if (palette.getData()[i].similarity(Material::Empty) < 1.0f)
+        {
+            data[i + 1] = palette.getData()[i].color;
+        }
+    }
+
+    // Update the data to the GPU.
+    this->paletteTex->update(1, 0, 256, 256, &data[0]);
 }
 
 void deferred::Renderer::onResize(glm::uvec2 size)
