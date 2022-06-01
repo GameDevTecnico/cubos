@@ -19,8 +19,7 @@ namespace cubos::engine::gl::pps
     {
     public:
         /// @param renderDevice The render device to use.
-        /// @param size The size of the window.
-        Pass(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
+        Pass(core::gl::RenderDevice& renderDevice);
         Pass(const Pass&) = delete;
         virtual ~Pass() = default;
 

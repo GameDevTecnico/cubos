@@ -3,8 +3,7 @@
 using namespace cubos::core;
 using namespace cubos::core::gl;
 
-void gl::generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va,
-                            IndexBuffer& ib)
+void gl::generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va)
 {
     // The vertices of the quad (positions + uvs)
     float screenVerts[] = {
@@ -29,5 +28,5 @@ void gl::generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pi
     desc.elements[1].buffer.stride = 4 * sizeof(float);
     desc.buffers[0] = renderDevice.createVertexBuffer(sizeof(screenVerts), screenVerts, gl::Usage::Static);
     desc.shaderPipeline = pipeline;
-    va = renderDevice.createVertexArray(screenVADesc);
+    va = renderDevice.createVertexArray(desc);
 }

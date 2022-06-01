@@ -481,7 +481,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
             break;
         }
 
-        lightData.directionalLights[lightData.numDirectionalLights].rotation = glm::toMat4(light.rotation, 0.0f);
+        lightData.directionalLights[lightData.numDirectionalLights].rotation = glm::toMat4(light.rotation);
         lightData.directionalLights[lightData.numDirectionalLights].color = glm::vec4(light.color, 1.0f);
         lightData.directionalLights[lightData.numDirectionalLights].intensity = light.intensity;
     }
@@ -543,9 +543,13 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     this->renderDevice.setFramebuffer(target);
     this->renderDevice.setShaderPipeline(this->lightingPipeline);
     this->positionBP->bind(this->positionTex);
+    this->positionBP->bind(this->sampler);
     this->normalBP->bind(this->normalTex);
+    this->normalBP->bind(this->sampler);
     this->materialBP->bind(this->materialTex);
+    this->materialBP->bind(this->sampler);
     this->paletteBP->bind(this->paletteTex);
+    this->paletteBP->bind(this->sampler);
     this->lightsBP->bind(this->lightsBuffer);
 
     // 5.2. Draw the screen quad.
