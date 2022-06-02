@@ -1,0 +1,4 @@
+<map id="cubos::engine::data::Loader" name="cubos::engine::data::Loader">
+<area shape="rect" id="node1" title="Base class of all asset loaders." alt="" coords="16,5,165,47"/>
+<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1data_1_1impl_1_1QBModelLoader.html" title="Loader for QBModel assets." alt="" coords="5,95,176,136"/>
+</map>

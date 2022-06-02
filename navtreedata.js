@@ -22,7 +22,10 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "cubos", "index.html", [
+  [ "Cubos", "index.html", [
+    [ "Core", "md_docs_1_core.html", null ],
+    [ "Engine", "md_docs_2_engine.html", null ],
+    [ "Cubinhos", "md_docs_3_cubinhos.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
     ] ],
@@ -47,9 +50,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a65b3a16b562bb80b9f3520a67a7ce496",
-"classcubos_1_1core_1_1io_1_1Window.html#a7d78d9a21ecd199f54aaa87613ef4347",
-"structcubos_1_1core_1_1gl_1_1DirectionalLight.html#aaab8ed740114e0fc12de7914175926de"
+"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a25d54c1a60ef3a007846c36aff900217",
+"classcubos_1_1core_1_1io_1_1Window.html",
+"keyboard_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,13 +1,20 @@
 var searchData=
 [
-  ['texture1d_414',['Texture1D',['../classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html',1,'cubos::core::gl::impl']]],
-  ['texture1ddesc_415',['Texture1DDesc',['../structcubos_1_1core_1_1gl_1_1Texture1DDesc.html',1,'cubos::core::gl']]],
-  ['texture2d_416',['Texture2D',['../classcubos_1_1core_1_1gl_1_1impl_1_1Texture2D.html',1,'cubos::core::gl::impl']]],
-  ['texture2darray_417',['Texture2DArray',['../classcubos_1_1core_1_1gl_1_1impl_1_1Texture2DArray.html',1,'cubos::core::gl::impl']]],
-  ['texture2darraydesc_418',['Texture2DArrayDesc',['../structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html',1,'cubos::core::gl']]],
-  ['texture2darraytarget_419',['Texture2DArrayTarget',['../structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1Texture2DArrayTarget.html',1,'cubos::core::gl::FramebufferDesc']]],
-  ['texture2ddesc_420',['Texture2DDesc',['../structcubos_1_1core_1_1gl_1_1Texture2DDesc.html',1,'cubos::core::gl']]],
-  ['texture2dtarget_421',['Texture2DTarget',['../structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1Texture2DTarget.html',1,'cubos::core::gl::FramebufferDesc']]],
-  ['texture3d_422',['Texture3D',['../classcubos_1_1core_1_1gl_1_1impl_1_1Texture3D.html',1,'cubos::core::gl::impl']]],
-  ['texture3ddesc_423',['Texture3DDesc',['../structcubos_1_1core_1_1gl_1_1Texture3DDesc.html',1,'cubos::core::gl']]]
+  ['sampler_438',['Sampler',['../classcubos_1_1core_1_1gl_1_1impl_1_1Sampler.html',1,'cubos::core::gl::impl']]],
+  ['samplerdesc_439',['SamplerDesc',['../structcubos_1_1core_1_1gl_1_1SamplerDesc.html',1,'cubos::core::gl']]],
+  ['serializationmap_440',['SerializationMap',['../classcubos_1_1core_1_1data_1_1SerializationMap.html',1,'cubos::core::data']]],
+  ['serializer_441',['Serializer',['../classcubos_1_1core_1_1data_1_1Serializer.html',1,'cubos::core::data']]],
+  ['settings_442',['Settings',['../classcubos_1_1core_1_1Settings.html',1,'cubos::core']]],
+  ['shaderbindingpoint_443',['ShaderBindingPoint',['../classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html',1,'cubos::core::gl::impl']]],
+  ['shaderpipeline_444',['ShaderPipeline',['../classcubos_1_1core_1_1gl_1_1impl_1_1ShaderPipeline.html',1,'cubos::core::gl::impl']]],
+  ['shaderstage_445',['ShaderStage',['../classcubos_1_1core_1_1gl_1_1impl_1_1ShaderStage.html',1,'cubos::core::gl::impl']]],
+  ['singleaxis_446',['SingleAxis',['../classcubos_1_1core_1_1io_1_1SingleAxis.html',1,'cubos::core::io']]],
+  ['source_447',['Source',['../classcubos_1_1core_1_1io_1_1Source.html',1,'cubos::core::io']]],
+  ['spotlight_448',['SpotLight',['../structcubos_1_1core_1_1gl_1_1SpotLight.html',1,'cubos::core::gl']]],
+  ['spotlightdata_449',['SpotLightData',['../structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData.html',1,'cubos::engine::gl::deferred::Renderer::LightBlock']]],
+  ['stdarchive_450',['STDArchive',['../classcubos_1_1core_1_1data_1_1STDArchive.html',1,'cubos::core::data']]],
+  ['stdstream_451',['StdStream',['../classcubos_1_1core_1_1memory_1_1StdStream.html',1,'cubos::core::memory']]],
+  ['stencil_452',['Stencil',['../structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html',1,'cubos::core::gl::DepthStencilStateDesc']]],
+  ['storage_453',['Storage',['../classcubos_1_1core_1_1ecs_1_1Storage.html',1,'cubos::core::ecs']]],
+  ['stream_454',['Stream',['../classcubos_1_1core_1_1memory_1_1Stream.html',1,'cubos::core::memory']]]
 ];
