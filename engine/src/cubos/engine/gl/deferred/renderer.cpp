@@ -378,7 +378,7 @@ void deferred::Renderer::setPalette(const core::gl::Palette& palette)
     }
 
     // Update the data to the GPU.
-    this->paletteTex->update(1, 0, 256, 256, &data[0]);
+    this->paletteTex->update(0, 0, 256, 256, &data[0]);
 }
 
 void deferred::Renderer::onResize(glm::uvec2 size)
