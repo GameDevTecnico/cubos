@@ -23,6 +23,10 @@ namespace cubos::engine::gl
     class Frame;
 
     /// Interface class which abstracts different rendering methods.
+    /// @details This abstraction allows us to, for example, switch between a
+    /// raytracing and a deferred rendering method as we need to, without
+    /// changing the API. This is useful since not all computers support
+    /// realtime raytracing.
     class Renderer
     {
     public:
