@@ -37,3 +37,8 @@ void Renderer::render(const Camera& camera, const Frame& frame, bool usePostProc
         this->onRender(camera, frame, target);
     }
 }
+
+pps::Manager& Renderer::pps()
+{
+    return this->ppsManager;
+}

@@ -223,7 +223,7 @@ vec3 pointLightCalc(vec3 fragPos, vec3 fragNormal, PointLight light) {
 
 vec4 fetchAlbedo(uint material)
 {
-    return texelFetch(palette, ivec2(material % 256, material / 256));
+    return texelFetch(palette, ivec2(mod(material, 256u), material / 256u), 0);
 }
 
 void main()
