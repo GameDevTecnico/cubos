@@ -1,3 +1,3 @@
-# Cubinhos
+# Cubinhos {#cubinhos}
 
 TODO

@@ -1,3 +1,3 @@
-# Core
+# Core {#core}
 
 TODO
