@@ -41,6 +41,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/qb_parser.cpp"
 
     "src/cubos/core/io/window.cpp"
+    "src/cubos/core/io/cursor.cpp"
     "src/cubos/core/io/glfw_window.hpp"
     "src/cubos/core/io/glfw_window.cpp"
 
@@ -93,6 +94,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/qb_parser.hpp"
 
     "include/cubos/core/io/window.hpp"
+    "include/cubos/core/io/keyboard.hpp"
+    "include/cubos/core/io/cursor.hpp"
 
     "include/cubos/core/gl/debug.hpp"
     "include/cubos/core/gl/render_device.hpp"

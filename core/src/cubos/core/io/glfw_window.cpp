@@ -153,25 +153,96 @@ double GLFWWindow::getTime() const
 #endif
 }
 
-void GLFWWindow::setMouseLockState(MouseLockState state)
+void GLFWWindow::setMouseState(MouseState state)
 {
 #ifdef WITH_GLFW
     int cursorState;
     switch (state)
     {
-    case MouseLockState::Default:
+    case MouseState::Default:
         cursorState = GLFW_CURSOR_NORMAL;
         break;
-    case MouseLockState::Locked:
+    case MouseState::Locked:
         cursorState = GLFW_CURSOR_DISABLED;
         break;
-    case MouseLockState::Hidden:
+    case MouseState::Hidden:
         cursorState = GLFW_CURSOR_HIDDEN;
         break;
     }
     glfwSetInputMode(handle, GLFW_CURSOR, cursorState);
 #else
-    logCritical("GLFWWindow::setMouseLockState() failed: Building without GLFW, not supported");
+    logCritical("GLFWWindow::setMouseState() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+MouseState GLFWWindow::getMouseState() const
+{
+#ifdef WITH_GLFW
+    switch (glfwGetInputMode(handle, GLFW_CURSOR))
+    {
+    case GLFW_CURSOR_NORMAL:
+        return MouseState::Default;
+    case GLFW_CURSOR_DISABLED:
+        return MouseState::Locked;
+    case GLFW_CURSOR_HIDDEN:
+        return MouseState::Hidden;
+    default:
+        logError("GLFWWindow::getMouseState() failed: Unknown mouse state, returning default");
+        return MouseState::Default;
+    }
+#else
+    logCritical("GLFWWindow::setMouseState() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+std::shared_ptr<Cursor> GLFWWindow::createCursor(Cursor::Standard standard)
+{
+#ifdef WITH_GLFW
+    GLFWcursor* cursor = nullptr;
+    switch (standard)
+    {
+    case Cursor::Standard::Arrow:
+        cursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
+        break;
+    case Cursor::Standard::IBeam:
+        cursor = glfwCreateStandardCursor(GLFW_IBEAM_CURSOR);
+        break;
+    case Cursor::Standard::Cross:
+        cursor = glfwCreateStandardCursor(GLFW_CROSSHAIR_CURSOR);
+        break;
+    case Cursor::Standard::Hand:
+        cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
+        break;
+    case Cursor::Standard::EWResize:
+        cursor = glfwCreateStandardCursor(GLFW_HRESIZE_CURSOR);
+        break;
+    case Cursor::Standard::NSResize:
+        cursor = glfwCreateStandardCursor(GLFW_VRESIZE_CURSOR);
+        break;
+    }
+
+    if (cursor == nullptr)
+        return nullptr;
+    else
+        return std::shared_ptr<Cursor>(new Cursor(cursor));
+#else
+    logCritical("GLFWWindow::createCursor() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+void GLFWWindow::setCursor(std::shared_ptr<Cursor> cursor)
+{
+#ifdef WITH_GLFW
+    if (cursor == nullptr)
+        glfwSetCursor(this->handle, nullptr);
+    else
+        glfwSetCursor(this->handle, cursor->glfwHandle);
+    this->cursor = cursor;
+#else
+    logCritical("GLFWWindow::setCursor() failed: Building without GLFW, not supported");
     abort();
 #endif
 }

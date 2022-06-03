@@ -30,9 +30,14 @@ namespace cubos::core::io
         virtual glm::ivec2 getFramebufferSize() const override;
         virtual bool shouldClose() const override;
         virtual double getTime() const override;
-        virtual void setMouseLockState(MouseLockState state) override;
+        virtual void setMouseState(MouseState state) override;
+        virtual MouseState getMouseState() const override;
+        virtual std::shared_ptr<Cursor> createCursor(Cursor::Standard standard) override;
+        virtual void setCursor(std::shared_ptr<Cursor> cursor) override;
 
     private:
+        std::shared_ptr<Cursor> cursor;
+
 #ifdef WITH_GLFW
         GLFWwindow* handle;
         gl::OGLRenderDevice* renderDevice;
