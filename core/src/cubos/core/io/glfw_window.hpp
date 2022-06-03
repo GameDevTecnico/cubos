@@ -34,7 +34,9 @@ namespace cubos::core::io
         virtual MouseState getMouseState() const override;
         virtual std::shared_ptr<Cursor> createCursor(Cursor::Standard standard) override;
         virtual void setCursor(std::shared_ptr<Cursor> cursor) override;
-
+        virtual void setClipboard(const std::string& text) override;
+        virtual const char* getClipboard() const override;
+    
     private:
         std::shared_ptr<Cursor> cursor;
 

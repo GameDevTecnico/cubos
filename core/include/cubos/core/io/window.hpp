@@ -95,11 +95,23 @@ namespace cubos::core::io
         /// @param cursor Cursor to set.
         virtual void setCursor(std::shared_ptr<Cursor> cursor) = 0;
 
+        /// Sets the content of the clipboard.
+        /// @param text Text to set.
+        virtual void setClipboard(const std::string& text) = 0;
+
+        /// Gets the content of the clipboard. This string is guaranteed to be valid until the next call to
+        /// getClipboard().
+        /// @return Text from the clipboard.
+        virtual const char* getClipboard() const = 0;
+
         /// Invoked with a key code, when a keyboard key is pressed.
         Event<Key> onKeyDown;
 
         /// Invoked with a key code, when a keyboard key is released.
         Event<Key> onKeyUp;
+
+        /// Invoked with the modifiers, when the modifiers change.
+        Event<Modifiers> onModsChanged;
 
         /// Invoked with the cursor position when the cursor is moved.
         Event<glm::ivec2> onMouseMoved;

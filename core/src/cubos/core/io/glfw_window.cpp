@@ -17,6 +17,7 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 static void charCallback(GLFWwindow* window, unsigned int codepoint);
+static void updateMods(GLFWWindow* handler, int mods);
 static MouseButton glfwToCubosMouseButton(int button);
 static Key glfwToCubosKey(int key);
 
@@ -247,12 +248,33 @@ void GLFWWindow::setCursor(std::shared_ptr<Cursor> cursor)
 #endif
 }
 
+void GLFWWindow::setClipboard(const std::string& text)
+{
+#ifdef WITH_GLFW
+    glfwSetClipboardString(this->handle, text.c_str());
+#else
+    logCritical("GLFWWindow::setClipboard() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+const char* GLFWWindow::getClipboard() const
+{
+#ifdef WITH_GLFW
+    return glfwGetClipboardString(this->handle);
+#else
+    logCritical("GLFWWindow::setClipboard() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
 #ifdef WITH_GLFW
 
 static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     Key cubosKey = glfwToCubosKey(key);
+    updateMods(handler, mods);
     if (action == GLFW_PRESS)
     {
         handler->onKeyDown.fire(cubosKey);
@@ -273,6 +295,7 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     MouseButton cubosButton = glfwToCubosMouseButton(button);
+    updateMods(handler, mods);
     if (action == GLFW_PRESS)
         handler->onMouseDown.fire(cubosButton);
     else // with GLFW_RELEASE
@@ -295,6 +318,20 @@ static void charCallback(GLFWwindow* window, unsigned int codepoint)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->onChar.fire(codepoint);
+}
+
+static void updateMods(GLFWWindow* handler, int glfwMods)
+{
+    Modifiers mods = Modifiers::None;
+    if (glfwMods & GLFW_MOD_CONTROL)
+        mods |= Modifiers::Control;
+    if (glfwMods & GLFW_MOD_SHIFT)
+        mods |= Modifiers::Shift;
+    if (glfwMods & GLFW_MOD_ALT)
+        mods |= Modifiers::Alt;
+    if (glfwMods & GLFW_MOD_SUPER)
+        mods |= Modifiers::System;
+    handler->onModsChanged.fire(mods);
 }
 
 static MouseButton glfwToCubosMouseButton(int button)

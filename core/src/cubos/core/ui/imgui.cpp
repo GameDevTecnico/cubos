@@ -19,6 +19,7 @@ struct ImGuiData
     size_t onKeyDownId;
     size_t onKeyUpId;
     size_t onCharId;
+    size_t onModsId;
 
     std::shared_ptr<io::Cursor> cursors[ImGuiMouseCursor_COUNT];
 
@@ -162,6 +163,18 @@ static int keyToImGuiKey(io::Key key)
         return ImGuiKey_None;
     }
 #undef MAP_KEY
+}
+
+static void setClipboardText(void* userData, const char* text)
+{
+    auto window = (io::Window*)userData;
+    window->setClipboard(text);
+}
+
+static const char* getClipboardText(void* userData)
+{
+    auto window = (io::Window*)userData;
+    return window->getClipboard();
 }
 
 static void createDeviceObjects()
@@ -340,6 +353,18 @@ void ui::init(io::Window& window)
         ImGuiIO& io = ImGui::GetIO();
         io.AddInputCharacter(c);
     });
+
+    bd->onModsId = window.onModsChanged.registerCallback([](io::Modifiers mods) {
+        ImGuiIO& io = ImGui::GetIO();
+        io.KeyCtrl = (mods & io::Modifiers::Control) != io::Modifiers::None;
+        io.KeyShift = (mods & io::Modifiers::Shift) != io::Modifiers::None;
+        io.KeyAlt = (mods & io::Modifiers::Alt) != io::Modifiers::None;
+        io.KeySuper = (mods & io::Modifiers::System) != io::Modifiers::None;
+    });
+
+    io.SetClipboardTextFn = setClipboardText;
+    io.GetClipboardTextFn = getClipboardText;
+    io.ClipboardUserData = (void*)&window;
 
     bd->time = window.getTime();
 
