@@ -32,15 +32,19 @@ int main(void)
             {{1, 0, 0, 1}},
             {{0, 1, 0, 1}},
             {{0, 0, 1, 1}},
-            {{1, 1, 0, 1}},
-            {{0, 1, 1, 1}},
-            {{1, 0, 1, 1}},
         });
         renderer.setPalette(palette);
 
         // Create and upload a simple grid.
-        Grid cube({1, 1, 1});
+        Grid cube({2, 2, 2});
         cube.set({0, 0, 0}, 1);
+        cube.set({0, 0, 1}, 2);
+        cube.set({0, 1, 0}, 3);
+        cube.set({0, 1, 1}, 1);
+        cube.set({1, 0, 0}, 2);
+        cube.set({1, 0, 1}, 3);
+        cube.set({1, 1, 0}, 1);
+        cube.set({1, 1, 1}, 2);
         Renderer::GridID id = renderer.upload(cube);
 
         // Add a copy pass to the post processing stack.
@@ -88,7 +92,8 @@ int main(void)
                         auto modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z)) *
                                         glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f)) *
                                         glm::rotate(glm::mat4(1.0f), glm::radians(t), axis) *
-                                        glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f));
+                                        glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f)) *
+                                        glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
                         frame.draw(id, modelMat);
                     }
                 }
@@ -98,13 +103,15 @@ int main(void)
             auto spotRotation = glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
             auto directionalRotation = glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
             auto pointRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+
+            frame.ambient(glm::vec3(0.1f));
             frame.light(SpotLight(spotRotation * glm::vec3(0, 0, -5), spotRotation, glm::vec3(1), 1, 100,
                                   glm::radians(10.0f), glm::radians(9.0f)));
             frame.light(DirectionalLight(directionalRotation, glm::vec3(1), 0.5f));
             frame.light(PointLight(pointRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
 
             // Render the frame.
-            renderer.render(camera, frame);
+            renderer.render(camera, frame, false);
             window->swapBuffers();
         }
     }

@@ -53,12 +53,6 @@ namespace cubos::engine::gl::deferred
 
         std::vector<GpuGrid> grids;
 
-        // Render device states.
-
-        core::gl::RasterState rasterState;
-        core::gl::BlendState blendState;
-        core::gl::DepthStencilState depthStencilState;
-
         // GBuffer.
 
         glm::uvec2 size;
@@ -73,6 +67,9 @@ namespace cubos::engine::gl::deferred
         core::gl::ShaderPipeline geometryPipeline;
         core::gl::ShaderBindingPoint mvpBP;
         core::gl::ConstantBuffer mvpBuffer;
+        core::gl::RasterState geometryRasterState;
+        core::gl::BlendState geometryBlendState;
+        core::gl::DepthStencilState geometryDepthStencilState;
 
         // Lighting pass pipeline.
 

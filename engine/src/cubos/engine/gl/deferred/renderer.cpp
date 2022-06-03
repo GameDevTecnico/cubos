@@ -230,41 +230,42 @@ void main()
 {
     uint m = texture(material, fragUv).r;
     if (m == 0u) {
-        discard;
+        color = vec4(0.0, 0.0, 0.0, 1.0);
+    } else {
+        vec3 albedo = fetchAlbedo(m).rgb;
+        vec3 lighting = ambientLight.rgb;
+        vec3 fragPos = texture(position, fragUv).xyz;
+        vec3 fragNormal = texture(normal, fragUv).xyz;
+        for (uint i = 0u; i < numSpotLights; i++) {
+            lighting += spotLightCalc(fragPos, fragNormal, spotLights[i]);
+        }
+        for (uint i = 0u; i < numDirectionalLights; i++) {
+            lighting += directionalLightCalc(fragNormal, directionalLights[i]);
+        }
+        for (uint i = 0u; i < numPointLights; i++) {
+            lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
+        }
+        color = vec4(albedo * lighting, 1.0);
     }
-    vec3 albedo = fetchAlbedo(m).rgb;
-    vec3 lighting = ambientLight.rgb;
-    vec3 fragPos = texture(position, fragUv).xyz;
-    vec3 fragNormal = texture(normal, fragUv).xyz;
-    for (uint i = 0u; i < numSpotLights; i++) {
-        lighting += spotLightCalc(fragPos, fragNormal, spotLights[i]);
-    }
-    for (uint i = 0u; i < numDirectionalLights; i++) {
-        lighting += directionalLightCalc(fragNormal, directionalLights[i]);
-    }
-    for (uint i = 0u; i < numPointLights; i++) {
-        lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
-    }
-    color = vec4(albedo * lighting, 1);
 }
 )glsl";
 
 deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size) : gl::Renderer(renderDevice, size)
 {
-    // Create the render device states.
+    // Create the states.
     RasterStateDesc rasterStateDesc;
     rasterStateDesc.frontFace = Winding::CCW;
     rasterStateDesc.cullFace = Face::Back;
     rasterStateDesc.cullEnabled = true;
-    this->rasterState = this->renderDevice.createRasterState(rasterStateDesc);
+    this->geometryRasterState = this->renderDevice.createRasterState(rasterStateDesc);
 
     BlendStateDesc blendStateDesc;
-    this->blendState = this->renderDevice.createBlendState(blendStateDesc);
+    this->geometryBlendState = this->renderDevice.createBlendState(blendStateDesc);
 
     DepthStencilStateDesc depthStencilStateDesc;
     depthStencilStateDesc.depth.enabled = true;
     depthStencilStateDesc.depth.writeEnabled = true;
-    this->depthStencilState = this->renderDevice.createDepthStencilState(depthStencilStateDesc);
+    this->geometryDepthStencilState = this->renderDevice.createDepthStencilState(depthStencilStateDesc);
 
     // Create the geometry pipeline.
     auto geometryVS = this->renderDevice.createShaderStage(Stage::Vertex, GEOMETRY_PASS_VS);
@@ -468,6 +469,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         lightData.spotLights[lightData.numSpotLights].range = light.range;
         lightData.spotLights[lightData.numSpotLights].spotCutoff = glm::cos(light.spotAngle);
         lightData.spotLights[lightData.numSpotLights].spotCutoff = glm::cos(light.innerSpotAngle);
+        lightData.numSpotLights += 1;
     }
 
     // Directional lights.
@@ -484,6 +486,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         lightData.directionalLights[lightData.numDirectionalLights].rotation = glm::toMat4(light.rotation);
         lightData.directionalLights[lightData.numDirectionalLights].color = glm::vec4(light.color, 1.0f);
         lightData.directionalLights[lightData.numDirectionalLights].intensity = light.intensity;
+        lightData.numDirectionalLights += 1;
     }
 
     // Point lights.
@@ -500,20 +503,21 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         lightData.pointLights[lightData.numPointLights].color = glm::vec4(light.color, 1.0f);
         lightData.pointLights[lightData.numPointLights].intensity = light.intensity;
         lightData.pointLights[lightData.numPointLights].range = light.range;
+        lightData.numPointLights += 1;
     }
 
     // Unmap the buffer.
     this->lightsBuffer->unmap();
 
     // 3. Set the renderer state.
-    this->renderDevice.setRasterState(rasterState);
-    this->renderDevice.setBlendState(blendState);
-    this->renderDevice.setDepthStencilState(depthStencilState);
     this->renderDevice.setViewport(0, 0, this->size.x, this->size.y);
 
     // 4. Geometry pass.
     // 4.1. Set the geometry pass state.
     this->renderDevice.setFramebuffer(this->gBuffer);
+    this->renderDevice.setRasterState(this->geometryRasterState);
+    this->renderDevice.setBlendState(this->geometryBlendState);
+    this->renderDevice.setDepthStencilState(this->geometryDepthStencilState);
     this->renderDevice.setShaderPipeline(this->geometryPipeline);
     this->mvpBP->bind(this->mvpBuffer);
 
@@ -541,6 +545,9 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     // 5. Lighting pass.
     // 5.1. Set the lighting pass state.
     this->renderDevice.setFramebuffer(target);
+    this->renderDevice.setRasterState(nullptr);
+    this->renderDevice.setBlendState(nullptr);
+    this->renderDevice.setDepthStencilState(nullptr);
     this->renderDevice.setShaderPipeline(this->lightingPipeline);
     this->positionBP->bind(this->positionTex);
     this->positionBP->bind(this->sampler);
