@@ -12,7 +12,7 @@ int main(void)
     initializeLogger();
     auto window = io::Window::create();
     auto& renderDevice = window->getRenderDevice();
-    ui::init(*window);
+    ui::initialize(*window);
 
     while (!window->shouldClose())
     {

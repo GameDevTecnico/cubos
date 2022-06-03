@@ -36,7 +36,7 @@ namespace cubos::core::io
         virtual void setCursor(std::shared_ptr<Cursor> cursor) override;
         virtual void setClipboard(const std::string& text) override;
         virtual const char* getClipboard() const override;
-    
+
     private:
         std::shared_ptr<Cursor> cursor;
 

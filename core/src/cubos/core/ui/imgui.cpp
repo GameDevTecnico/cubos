@@ -277,7 +277,7 @@ void main()
     bd->ibSize = 0;
 }
 
-void ui::init(io::Window& window)
+void ui::initialize(io::Window& window)
 {
     // Initialize ImGui
     IMGUI_CHECKVERSION();
