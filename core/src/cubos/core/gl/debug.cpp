@@ -78,7 +78,7 @@ void Debug::initSphere()
 
     for (int i = 0; i <= stackCount; ++i)
     {
-        stackAngle = (float)(M_PI / 2 - i * stackStep);
+        stackAngle = (float)(glm::pi<float>() / 2 - i * stackStep);
         xz = glm::cos(stackAngle);
         y = glm::sin(stackAngle);
 
