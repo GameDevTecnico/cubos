@@ -329,6 +329,7 @@ namespace cubos::core::gl
         Face cullFace = Face::Back;               ///< Face that will be culled.
         Winding frontFace = Winding::CCW;         ///< Front face winding.
         RasterMode rasterMode = RasterMode::Fill; ///< Rasterizer mode.
+        bool scissorEnabled = false;              ///< Is scissor test enabled?
     };
 
     /// Depth stencil state description.
@@ -684,6 +685,13 @@ namespace cubos::core::gl
         /// @param w Viewport width.
         /// @param h Viewport height.
         virtual void setViewport(int x, int y, int w, int h) = 0;
+
+        /// Sets the current scissor rectangle.
+        /// @param x Bottom left scissor rectangle corner X coordinate.
+        /// @param y Bottom left scissor rectangle corner Y coordinate.
+        /// @param w Scissor rectangle width.
+        /// @param h Scissor rectangle height.
+        virtual void setScissor(int x, int y, int w, int h) = 0;
 
         /// Gets a runtime property of the render device.
         /// @param prop Property name.

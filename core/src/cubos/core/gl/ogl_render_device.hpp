@@ -48,10 +48,12 @@ namespace cubos::core::gl
         virtual void drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount) override;
         virtual void drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount) override;
         virtual void setViewport(int x, int y, int w, int h) override;
+        virtual void setScissor(int x, int y, int w, int h) override;
         virtual int getProperty(Property prop) override;
 
     private:
         int currentIndexFormat;
+        size_t currentIndexSz;
 
         RasterState defaultRS;
         DepthStencilState defaultDSS;

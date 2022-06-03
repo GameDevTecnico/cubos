@@ -62,8 +62,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/light.cpp"
     "src/cubos/core/gl/util.cpp"
     "src/cubos/core/gl/vertex.cpp"
-    "src/cubos/core/gl/imgui_impl.hpp"
-    "src/cubos/core/gl/imgui_impl.cpp"
+
+    "src/cubos/core/ui/imgui.cpp"
 
     "src/cubos/core/ecs/world.cpp"
 )
@@ -111,6 +111,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/sources/button_press.hpp"
     "include/cubos/core/io/sources/single_axis.hpp"
     "include/cubos/core/io/sources/double_axis.hpp"
+
+    "include/cubos/core/ui/imgui.hpp"
 
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/world_view.hpp"

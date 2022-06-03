@@ -62,6 +62,10 @@ namespace cubos::core::io
         /// Returns the window render device.
         virtual gl::RenderDevice& getRenderDevice() const = 0;
 
+        /// Returns the window size, in screen coordinates.
+        /// May differ from the framebuffer size in some displays.
+        virtual glm::ivec2 getSize() const = 0;
+
         /// Returns the window framebuffer size in pixels.
         virtual glm::ivec2 getFramebufferSize() const = 0;
 
@@ -94,6 +98,9 @@ namespace cubos::core::io
 
         /// Invoked with the new framebuffer size when it changes size.
         Event<glm::ivec2> onFramebufferResize;
+
+        /// Invoked when an unicode character is entered.
+        Event<char32_t> onChar;
     };
 } // namespace cubos::core::io
 

@@ -16,6 +16,7 @@ static void mousePositionCallback(GLFWwindow* window, double xPos, double yPos);
 static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+static void charCallback(GLFWwindow* window, unsigned int codepoint);
 static MouseButton glfwToCubosMouseButton(int button);
 static Key glfwToCubosKey(int key);
 
@@ -60,6 +61,7 @@ GLFWWindow::GLFWWindow()
     glfwSetMouseButtonCallback(this->handle, mouseButtonCallback);
     glfwSetScrollCallback(this->handle, scrollCallback);
     glfwSetFramebufferSizeCallback(this->handle, framebufferSizeCallback);
+    glfwSetCharCallback(this->handle, charCallback);
 #else
     logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
     abort();
@@ -103,6 +105,18 @@ gl::RenderDevice& GLFWWindow::getRenderDevice() const
     return *this->renderDevice;
 #else
     logCritical("GLFWWindow::getRenderDevice() failed: Building without GLFW, not supported");
+    abort();
+#endif
+}
+
+glm::ivec2 GLFWWindow::getSize() const
+{
+#ifdef WITH_GLFW
+    int width, height;
+    glfwGetWindowSize(this->handle, &width, &height);
+    return {width, height};
+#else
+    logCritical("GLFWWindow::getSize() failed: Building without GLFW, not supported");
     abort();
 #endif
 }
@@ -204,6 +218,12 @@ static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->onFramebufferResize.fire(glm::ivec2(width, height));
+}
+
+static void charCallback(GLFWwindow* window, unsigned int codepoint)
+{
+    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    handler->onChar.fire(codepoint);
 }
 
 static MouseButton glfwToCubosMouseButton(int button)

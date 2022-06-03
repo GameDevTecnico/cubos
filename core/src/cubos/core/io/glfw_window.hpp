@@ -21,24 +21,15 @@ namespace cubos::core::io
         GLFWWindow(); // TODO: pass settings here?
         virtual ~GLFWWindow() override;
 
-        /// Polls window events, firing the events
+        // Interface implementation.
+
         virtual void pollEvents() const override;
-
-        /// Swaps the window buffers
         virtual void swapBuffers() const override;
-
-        /// Returns the window render device
         virtual gl::RenderDevice& getRenderDevice() const override;
-
-        /// Return the window framebuffer size in pixels
+        virtual glm::ivec2 getSize() const override;
         virtual glm::ivec2 getFramebufferSize() const override;
-
-        /// Should the window close?
         virtual bool shouldClose() const override;
-
-        /// Current time since the window was created.
         virtual double getTime() const override;
-
         virtual void setMouseLockState(MouseLockState state) override;
 
     private:

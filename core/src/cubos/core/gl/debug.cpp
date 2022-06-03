@@ -1,5 +1,4 @@
 #include <cubos/core/gl/debug.hpp>
-#include <cubos/core/gl/imgui_impl.hpp>
 
 #include <list>
 #include <vector>
@@ -140,11 +139,11 @@ void Debug::initSphere()
     objSphere.va = renderDevice->createVertexArray(vaDesc);
 }
 
-void Debug::init(io::Window& window)
+void Debug::init(RenderDevice& renderDevice)
 {
-    renderDevice = &window.getRenderDevice();
+    Debug::renderDevice = &renderDevice;
 
-    auto vs = renderDevice->createShaderStage(gl::Stage::Vertex, R"(
+    auto vs = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
             #version 330 core
 
             in vec3 position;
@@ -160,7 +159,7 @@ void Debug::init(io::Window& window)
             }
         )");
 
-    auto ps = renderDevice->createShaderStage(gl::Stage::Pixel, R"(
+    auto ps = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
             #version 330 core
 
             out vec4 color;
@@ -173,29 +172,20 @@ void Debug::init(io::Window& window)
             }
         )");
 
-    pipeline = renderDevice->createShaderPipeline(vs, ps);
+    pipeline = renderDevice.createShaderPipeline(vs, ps);
 
     initCube();
     initSphere();
 
-    mvpBuffer = renderDevice->createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+    mvpBuffer = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
     mvpBindingPoint = pipeline->getBindingPoint("MVP");
     colorBindingPoint = pipeline->getBindingPoint("objColor");
 
     RasterStateDesc rsDesc;
-
     rsDesc.rasterMode = RasterMode::Fill;
-    fillRasterState = renderDevice->createRasterState(rsDesc);
-
+    fillRasterState = renderDevice.createRasterState(rsDesc);
     rsDesc.rasterMode = RasterMode::Wireframe;
-    wireframeRasterState = renderDevice->createRasterState(rsDesc);
-
-    // Initialize ImGui
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGui::StyleColorsDark();
-    ImGui_ImplCubos_Init(window);
-    ImGui_ImplCubos_NewFrame();
+    wireframeRasterState = renderDevice.createRasterState(rsDesc);
 }
 
 void Debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation, glm::vec3 color)
@@ -257,17 +247,10 @@ void Debug::flush(glm::mat4 vp, double deltaT)
             requests.erase(current);
     }
     debugDrawMutex.unlock();
-
-    ImGui::Render();
-    ImGui_ImplCubos_RenderDrawData(ImGui::GetDrawData());
-    ImGui_ImplCubos_NewFrame();
 }
 
 void Debug::terminate()
 {
-    ImGui_ImplCubos_Shutdown();
-    ImGui::DestroyContext();
-
     mvpBuffer = nullptr;
     mvpBindingPoint = colorBindingPoint = nullptr;
     pipeline = nullptr;
