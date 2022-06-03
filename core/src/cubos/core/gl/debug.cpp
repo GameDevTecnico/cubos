@@ -2,7 +2,6 @@
 
 #include <list>
 #include <vector>
-#include <cmath>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
@@ -73,22 +72,22 @@ void Debug::initSphere()
 
     float x, y, z, xz;
 
-    float sectorStep = (float)(2 * M_PI / sectorCount);
-    float stackStep = (float)(M_PI / stackCount);
+    float sectorStep = (float)(2 * glm::pi<float>() / sectorCount);
+    float stackStep = (float)(glm::pi<float>() / stackCount);
     float sectorAngle, stackAngle;
 
     for (int i = 0; i <= stackCount; ++i)
     {
         stackAngle = (float)(M_PI / 2 - i * stackStep);
-        xz = cosf(stackAngle);
-        y = sinf(stackAngle);
+        xz = glm::cos(stackAngle);
+        y = glm::sin(stackAngle);
 
         for (int j = 0; j <= sectorCount; ++j)
         {
             sectorAngle = j * sectorStep;
 
-            x = xz * cosf(sectorAngle);
-            z = xz * sinf(sectorAngle);
+            x = xz * glm::cos(sectorAngle);
+            z = xz * glm::sin(sectorAngle);
             vertices.push_back(x);
             vertices.push_back(y);
             vertices.push_back(z);
