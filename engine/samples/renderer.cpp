@@ -60,10 +60,10 @@ int main(void)
         float t = 0;
         int s = 0;
 
+        window->onFramebufferResize.registerCallback([&](glm::ivec2 sz) { renderer.resize(sz); });
         while (!window->shouldClose())
         {
             window->pollEvents();
-
             // Calculate the delta time.
             float currentT = window->getTime();
             float deltaT = 0;
@@ -111,7 +111,7 @@ int main(void)
             frame.light(PointLight(pointRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
 
             // Render the frame.
-            renderer.render(camera, frame, false);
+            renderer.render(camera, frame);
             window->swapBuffers();
         }
     }
