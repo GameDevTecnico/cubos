@@ -562,4 +562,8 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     // 5.2. Draw the screen quad.
     this->renderDevice.setVertexArray(this->screenQuadVA);
     this->renderDevice.drawTriangles(0, 6);
+
+    // Provide custom inputs to the PPS manager.
+    this->pps().provideInput(pps::Input::Position, this->positionTex);
+    this->pps().provideInput(pps::Input::Normal, this->normalTex);
 }
