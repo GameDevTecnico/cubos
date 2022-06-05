@@ -3,8 +3,6 @@
 #include <cubos/core/data/std_archive.hpp>
 
 #include <cubos/engine/data/asset_manager.hpp>
-#include <cubos/engine/data/grid.hpp>
-#include <cubos/engine/data/palette.hpp>
 
 using namespace cubos;
 using namespace engine;
@@ -74,8 +72,6 @@ int main(int argc, char** argv)
 
     // Initialize the asset manager and register the asset types.
     data::AssetManager assetManager;
-    assetManager.registerType<data::Grid>();
-    assetManager.registerType<data::Palette>();
     assetManager.registerType<SampleText>();
 
     // Import all asset meta datdirectorys in the assets directory.

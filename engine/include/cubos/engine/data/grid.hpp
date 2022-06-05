@@ -1,9 +1,10 @@
 #ifndef CUBOS_ENGINE_DATA_GRID_HPP
 #define CUBOS_ENGINE_DATA_GRID_HPP
 
-#include <cubos/engine/data/loader.hpp>
-
 #include <cubos/core/gl/grid.hpp>
+
+#include <cubos/engine/data/loader.hpp>
+#include <cubos/engine/gl/renderer.hpp>
 
 namespace cubos::engine::data
 {
@@ -17,7 +18,8 @@ namespace cubos::engine::data
         static constexpr const char* TypeName = "Grid";
         using Loader = impl::GridLoader;
 
-        core::gl::Grid grid;
+        core::gl::Grid grid;     ///< Raw grid data.
+        gl::Renderer::GridID id; ///< ID of the GPU uploaded grid.
     };
 
     namespace impl
@@ -26,12 +28,15 @@ namespace cubos::engine::data
         class GridLoader : public Loader
         {
         public:
-            using Loader::Loader;
+            GridLoader(AssetManager* manager, gl::Renderer* renderer);
             virtual ~GridLoader() override = default;
 
             virtual const void* load(const Meta& meta) override;
             virtual std::future<const void*> loadAsync(const Meta& meta) override;
             virtual void unload(const Meta& meta, const void* asset) override;
+
+        private:
+            gl::Renderer* renderer;
         };
     } // namespace impl
 } // namespace cubos::engine::data
