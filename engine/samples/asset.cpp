@@ -3,7 +3,8 @@
 #include <cubos/core/data/std_archive.hpp>
 
 #include <cubos/engine/data/asset_manager.hpp>
-#include <cubos/engine/data/qb_model.hpp>
+#include <cubos/engine/data/grid.hpp>
+
 
 using namespace cubos;
 using namespace engine;
@@ -25,6 +26,7 @@ public:
 class SampleTextLoader : public data::Loader
 {
 public:
+    using data::Loader::Loader;
     virtual const void* load(const data::Meta& meta)
     {
         auto path = meta.getParameters().find("path");
@@ -73,6 +75,7 @@ int main(int argc, char** argv)
     // Initialize the asset manager and register the asset types.
     data::AssetManager assetManager;
     assetManager.registerType<data::QBModel>();
+    assetManager.registerType<data::Grid>();
     assetManager.registerType<SampleText>();
 
     // Import all asset meta datdirectorys in the assets directory.
@@ -84,5 +87,5 @@ int main(int argc, char** argv)
         core::memory::Stream::stdOut.printf("{}", text->content);
     }
 
-    assetManager.load<data::QBModel>("car/qb");
+    assetManager.load<data::Grid>("car/grid");
 }

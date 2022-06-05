@@ -8,11 +8,13 @@
 
 namespace cubos::engine::data
 {
+    class AssetManager;
+
     /// Base class of all asset loaders.
     class Loader
     {
     public:
-        Loader() = default;
+        Loader(AssetManager* manager);
         virtual ~Loader() = default;
 
         /// Loads an asset, synchronously.
@@ -29,6 +31,9 @@ namespace cubos::engine::data
         /// @param meta Asset meta data.
         /// @param asset Pointer to asset data.
         virtual void unload(const Meta& meta, const void* asset) = 0;
+
+    protected:
+        AssetManager* manager;
     };
 } // namespace cubos::engine::data
 

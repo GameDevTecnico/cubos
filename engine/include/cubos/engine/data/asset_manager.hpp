@@ -76,7 +76,7 @@ namespace cubos::engine::data
         auto it = this->loaders.find(T::TypeName);
         if (it == this->loaders.end())
         {
-            this->loaders[T::TypeName] = new typename T::Loader(args...);
+            this->loaders[T::TypeName] = new typename T::Loader(this, args...);
         }
         else
         {

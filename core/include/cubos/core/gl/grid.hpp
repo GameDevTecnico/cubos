@@ -48,6 +48,8 @@ namespace cubos::core::gl
         Grid(Grid&&);
         ~Grid() = default;
 
+        Grid& operator=(const Grid& rhs);
+
         /// Resizes the grid.
         /// @param size The new size of the grid.
         void setSize(const glm::uvec3& size);
