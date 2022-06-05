@@ -4,7 +4,7 @@
 
 #include <cubos/engine/data/asset_manager.hpp>
 #include <cubos/engine/data/grid.hpp>
-
+#include <cubos/engine/data/palette.hpp>
 
 using namespace cubos;
 using namespace engine;
@@ -74,8 +74,8 @@ int main(int argc, char** argv)
 
     // Initialize the asset manager and register the asset types.
     data::AssetManager assetManager;
-    assetManager.registerType<data::QBModel>();
     assetManager.registerType<data::Grid>();
+    assetManager.registerType<data::Palette>();
     assetManager.registerType<SampleText>();
 
     // Import all asset meta datdirectorys in the assets directory.
@@ -87,5 +87,6 @@ int main(int argc, char** argv)
         core::memory::Stream::stdOut.printf("{}", text->content);
     }
 
-    assetManager.load<data::Grid>("car/grid");
+    // Loads all unloaded static assets.
+    assetManager.loadStatic();
 }

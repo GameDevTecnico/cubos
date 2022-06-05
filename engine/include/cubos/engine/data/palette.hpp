@@ -1,33 +1,33 @@
-#ifndef CUBOS_ENGINE_DATA_GRID_HPP
-#define CUBOS_ENGINE_DATA_GRID_HPP
+#ifndef CUBOS_ENGINE_DATA_PALETTE_HPP
+#define CUBOS_ENGINE_DATA_PALETTE_HPP
 
 #include <cubos/engine/data/loader.hpp>
 
-#include <cubos/core/gl/grid.hpp>
+#include <cubos/core/gl/palette.hpp>
 
 namespace cubos::engine::data
 {
     namespace impl
     {
-        class GridLoader;
+        class PaletteLoader;
     } // namespace impl
 
-    struct Grid
+    struct Palette
     {
-        static constexpr const char* TypeName = "Grid";
-        using Loader = impl::GridLoader;
+        static constexpr const char* TypeName = "Palette";
+        using Loader = impl::PaletteLoader;
 
-        core::gl::Grid grid;
+        core::gl::Palette palette;
     };
 
     namespace impl
     {
-        /// Loader for Grid assets.
-        class GridLoader : public Loader
+        /// Loader for Palette assets.
+        class PaletteLoader : public Loader
         {
         public:
             using Loader::Loader;
-            virtual ~GridLoader() override = default;
+            virtual ~PaletteLoader() override = default;
 
             virtual const void* load(const Meta& meta) override;
             virtual std::future<const void*> loadAsync(const Meta& meta) override;
@@ -36,4 +36,4 @@ namespace cubos::engine::data
     } // namespace impl
 } // namespace cubos::engine::data
 
-#endif // CUBOS_ENGINE_DATA_GRID_HPP
+#endif // CUBOS_ENGINE_DATA_PALETTE_HPP

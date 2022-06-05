@@ -16,10 +16,11 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/gl/pps/manager.cpp"
     "src/cubos/engine/gl/pps/pass.cpp"
     "src/cubos/engine/gl/pps/copy_pass.cpp"
+
     "src/cubos/engine/data/meta.cpp"
     "src/cubos/engine/data/asset_manager.cpp"
-    "src/cubos/engine/data/qb_model.cpp"
     "src/cubos/engine/data/grid.cpp" 
+    "src/cubos/engine/data/palette.cpp" 
     "src/cubos/engine/data/loader.cpp"
 )
 
@@ -32,11 +33,12 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/gl/pps/manager.hpp"
     "include/cubos/engine/gl/pps/pass.hpp"
     "include/cubos/engine/gl/pps/copy_pass.hpp"
+
     "include/cubos/engine/data/meta.hpp"
     "include/cubos/engine/data/asset.hpp"
     "include/cubos/engine/data/asset_manager.hpp"
     "include/cubos/engine/data/loader.hpp"
-    "include/cubos/engine/data/qb_model.hpp"
+    "include/cubos/engine/data/palette.hpp"
     "include/cubos/engine/data/grid.hpp"
 )
 
