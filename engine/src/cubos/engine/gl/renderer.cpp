@@ -26,7 +26,7 @@ void Renderer::resize(glm::uvec2 size)
 
 void Renderer::render(const Camera& camera, const Frame& frame, bool usePostProcessing, core::gl::Framebuffer target)
 {
-    if (usePostProcessing)
+    if (usePostProcessing && this->ppsManager.passCount() > 0)
     {
         this->onRender(camera, frame, this->framebuffer);
         this->ppsManager.provideInput(pps::Input::Lighting, this->texture);

@@ -85,3 +85,8 @@ void pps::Manager::execute(Framebuffer out)
         }
     }
 }
+
+size_t pps::Manager::passCount() const
+{
+    return this->passes.size();
+}

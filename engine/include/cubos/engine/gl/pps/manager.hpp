@@ -57,6 +57,10 @@ namespace cubos::engine::gl::pps
         /// first pass.
         void execute(core::gl::Framebuffer out);
 
+        /// Gets the number of passes in the manager.
+        /// @return The number of passes.
+        size_t passCount() const;
+
     private:
         core::gl::RenderDevice& renderDevice;        ///< The render device to use.
         glm::uvec2 size;                             ///< The current size of the window.
