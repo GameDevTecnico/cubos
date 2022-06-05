@@ -41,20 +41,6 @@ namespace cubos::engine::gl::deferred
                               core::gl::Framebuffer target) override;
 
     private:
-<<<<<<< HEAD
-=======
-        // Uploaded grids.
-
-        struct GpuGrid
-        {
-            core::gl::VertexArray va;
-            core::gl::IndexBuffer ib;
-            size_t indexCount;
-        };
-
-        std::vector<GpuGrid> grids;
-
->>>>>>> 65f91ba (Fix deferred renderer)
         // GBuffer.
 
         glm::uvec2 size;
