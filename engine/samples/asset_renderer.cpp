@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     // Open the window.
     auto window = std::unique_ptr<core::io::Window>(core::io::Window::create());
     auto& renderDevice = window->getRenderDevice();
-    
+
     using namespace core::gl;
     using namespace engine::gl;
 
@@ -78,6 +78,6 @@ int main(int argc, char** argv)
         renderer.render(camera, frame, false);
         window->swapBuffers();
     }
-    
+
     return 0;
 }
