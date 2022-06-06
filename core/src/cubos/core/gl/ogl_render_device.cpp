@@ -1063,8 +1063,6 @@ private:
 
 OGLRenderDevice::OGLRenderDevice()
 {
-    glGetString(GL_VERSION);
-
     // Create default states
     this->defaultRS = this->createRasterState({});
     this->defaultDSS = this->createDepthStencilState({});
