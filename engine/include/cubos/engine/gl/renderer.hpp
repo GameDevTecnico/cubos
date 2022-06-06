@@ -83,6 +83,9 @@ namespace cubos::engine::gl
         virtual void onRender(const core::gl::Camera& camera, const Frame& frame, core::gl::Framebuffer target) = 0;
 
     private:
+        /// Called when the internal texture used for post processing needs to be resized.
+        void resizeTex(glm::uvec2 size);
+
         pps::Manager ppsManager;           ///< The post processing manager.
         core::gl::Framebuffer framebuffer; ///< The framebuffer where the frame is drawn.
         core::gl::Texture2D texture;       ///< The texture where the frame is drawn.
