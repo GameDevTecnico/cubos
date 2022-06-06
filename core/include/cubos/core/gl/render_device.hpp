@@ -67,7 +67,8 @@ namespace cubos::core::gl
     /// @see RenderDevice::getProperty().
     enum class Property
     {
-        MaxAnisotropy
+        MaxAnisotropy,    ///< Specifies the upper bound of anisotropic filtering.
+        ComputeSupported, ///< Specifies whether compute shaders are supported (0 or 1).
     };
 
     /// Usage mode for buffers and textures.
@@ -235,9 +236,10 @@ namespace cubos::core::gl
         Vertex,
         Geometry,
         Pixel,
+        Compute,
     };
 
-    // Cube map face.
+    /// Cube map face.
     enum class CubeFace
     {
         PositiveX = 0,
@@ -246,6 +248,40 @@ namespace cubos::core::gl
         NegativeY = 3,
         PositiveZ = 4,
         NegativeZ = 5,
+    };
+
+    /// Memory barrier flags for synchronization.
+    enum class MemoryBarriers
+    {
+        /// Utility flag to indicate that no memory barrier is set.
+        None = 0,
+
+        /// If set, data sourced from vertex buffers after the barrier will reflect the data written
+        /// by shaders prior to the barrier.
+        VertexBuffer = 1,
+
+        /// If set, data sourced from index buffers after the barrier will reflect the data written
+        /// by shaders prior to the barrier.
+        IndexBuffer = 2,
+
+        /// If set, data sourced from constant buffers after the barrier will reflect the data written
+        /// by shaders prior to the barrier.
+        ConstantBuffer = 4,
+
+        /// If set, memory accesses using shader image load, store, and atomic built-in functions issued after the
+        /// barrier will reflect the data written by shaders prior to the barrier.
+        ImageAccess = 8,
+
+        /// If set, texture accesses from shaders after the barrier will reflect the data written by shaders
+        /// prior to the barrier.
+        TextureAccess = 16,
+
+        /// If set, reads and writes via framebuffer objects after the barrier will reflect the data written
+        /// by shaders prior to the barrier.
+        Framebuffer = 32,
+
+        /// Utility flag to set all memory barriers.
+        All = VertexBuffer | IndexBuffer | ConstantBuffer | ImageAccess | TextureAccess | Framebuffer,
     };
 
     enum class BufferStorageType
@@ -625,6 +661,8 @@ namespace cubos::core::gl
         virtual void setVertexArray(VertexArray va) = 0;
 
         /// Creates a new shader stage from GLSL source code.
+        /// Compute shaders aren't supported on some platforms. Support can be queried using
+        /// `renderDevice.getProperty(Property::ComputeSupported)`.
         /// @return Shader stage handle, or nullptr if the creation failed.
         virtual ShaderStage createShaderStage(Stage stage, const char* src) = 0;
 
@@ -640,6 +678,13 @@ namespace cubos::core::gl
         /// @param ps Pixel shader stage.
         /// @return Shader pipeline handle, or nullptr if the creation failed.
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps) = 0;
+
+        /// Creates a new shader pipeline from a compute shader.
+        /// Compute shaders aren't supported on some platforms. Support can be queried using
+        /// `renderDevice.getProperty(Property::ComputeSupported)`.
+        /// @param cs Compute shader stage.
+        /// @return Shader pipeline handle, or nullptr if the creation failed.
+        virtual ShaderPipeline createShaderPipeline(ShaderStage cs) = 0;
 
         /// Sets the current shader pipeline used for rendering.
         virtual void setShaderPipeline(ShaderPipeline pipeline) = 0;
@@ -677,6 +722,20 @@ namespace cubos::core::gl
         /// @param count Number of indices that will be drawn.
         /// @param instanceCount Number of instances drawn.
         virtual void drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount) = 0;
+
+        /// Dispatches a compute pipeline.
+        /// @param x X dimension of the work group.
+        /// @param y Y dimension of the work group.
+        /// @param z Z dimension of the work group.
+        virtual void dispatchCompute(size_t x, size_t y, size_t z) = 0;
+
+        /// Defines a barrier ordering memory transactions.
+        /// This ensure that all memory transactions before the barrier are completed before the
+        /// barrier is executed.
+        /// This function isn't supported on some platforms. Support can be queried using
+        /// `renderDevice.getProperty(Property::ComputeSupported)`.
+        /// @param barriers The barriers to apply.
+        virtual void memoryBarrier(MemoryBarriers barriers) = 0;
 
         /// Sets the current viewport.
         /// @param x Bottom left viewport corner X coordinate.
@@ -1038,6 +1097,31 @@ namespace cubos::core::gl
             virtual ~ShaderBindingPoint() = default;
         };
     } // namespace impl
+
+    // Operator overloads for MemoryBarriers.
+
+    inline MemoryBarriers operator|(MemoryBarriers lhs, MemoryBarriers rhs)
+    {
+        return static_cast<MemoryBarriers>(static_cast<int>(lhs) | static_cast<int>(rhs));
+    }
+
+    inline MemoryBarriers operator&(MemoryBarriers lhs, MemoryBarriers rhs)
+    {
+        return static_cast<MemoryBarriers>(static_cast<int>(lhs) & static_cast<int>(rhs));
+    }
+
+    inline MemoryBarriers& operator|=(MemoryBarriers& lhs, MemoryBarriers rhs)
+    {
+        lhs = lhs | rhs;
+        return lhs;
+    }
+
+    inline MemoryBarriers& operator&=(MemoryBarriers& lhs, MemoryBarriers rhs)
+    {
+        lhs = lhs & rhs;
+        return lhs;
+    }
+
 } // namespace cubos::core::gl
 
 #endif // CUBOS_CORE_GL_RENDER_DEVICE_HPP
