@@ -284,6 +284,14 @@ namespace cubos::core::gl
         All = VertexBuffer | IndexBuffer | ConstantBuffer | ImageAccess | TextureAccess | Framebuffer,
     };
 
+    /// Access mode for a resource.
+    enum class Access
+    {
+        Read,      ///< Read access.
+        Write,     ///< Write access.
+        ReadWrite, ///< Read and write access.
+    };
+
     enum class BufferStorageType
     {
         Small,
@@ -1050,6 +1058,12 @@ namespace cubos::core::gl
             /// Binds a constant buffer to the binding point.
             /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done.
             virtual void bind(gl::ConstantBuffer cb) = 0;
+
+            /// Binds a level of a 2D texture to an image unit.
+            /// If this binding point doesn't support an image unit, an error is logged and nothing is done.
+            /// This function isn't supported on some platforms. Support can be queried using
+            /// `renderDevice.getProperty(Property::ComputeSupported)`.
+            virtual void bind(gl::Texture2D tex, int level, Access access) = 0;
 
             /// Sets the value of the uniform tied to the binding point to the provided vec2 value.
             virtual void setConstant(glm::vec2 val) = 0;

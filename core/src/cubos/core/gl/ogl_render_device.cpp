@@ -914,6 +914,29 @@ public:
             glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
     }
 
+    virtual void bind(gl::Texture2D _tex, int level, Access _access) override
+    {
+        auto tex = std::static_pointer_cast<OGLTexture2D>(_tex);
+        GLenum access;
+        switch (_access)
+        {
+        case Access::Read:
+            access = GL_READ_ONLY;
+            break;
+        case Access::Write:
+            access = GL_WRITE_ONLY;
+            break;
+        case Access::ReadWrite:
+            access = GL_READ_WRITE;
+            break;
+        default:
+            abort();
+        }
+
+        glUniform1i(this->loc, this->tex);
+        glBindImageTexture(this->tex, tex->id, level, GL_TRUE, 0, access, tex->internalFormat);
+    }
+
     virtual void setConstant(glm::vec2 val) override
     {
         glUniform2fv(loc, 1, &val[0]);
