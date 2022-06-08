@@ -94,37 +94,39 @@ $(document).ready(function(){initNavTree('pass_8hpp_source.html',''); initResiza
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_ENGINE_GL_PPS_PASS_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/gl/render_device.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/window.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cubos/engine/gl/renderer.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cubos/engine/gl/pps/manager.hpp&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>cubos::engine::gl</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">class </span>Renderer;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>cubos::engine::gl::pps</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">   16</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">Pass</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1Window.html">core::io::Window</a>&amp; window;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; renderDevice;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">Pass</a>(<a class="code" href="classcubos_1_1core_1_1io_1_1Window.html">core::io::Window</a>&amp; window);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> execute(<span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">gl::Renderer</a>&amp; renderer, core::gl::Texture2D input,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                             core::gl::Framebuffer output) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    };</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <span class="comment">// namespace cubos::engine::gl::pps</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>cubos::engine::gl::pps</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">   18</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">Pass</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#ae93ccdfe8b1e333c45d3d0bbec817842">Pass</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; renderDevice);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#ae93ccdfe8b1e333c45d3d0bbec817842">Pass</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">Pass</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">Pass</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#ac5d3fa49c62d3e2870d6d7306b8e730d">resize</a>(glm::uvec2 size) = 0;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif // CUBOS_ENGINE_GL_PPS_PASS_HPP</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#a5bf36215375af3c44e127bbfa1065773">execute</a>(std::map&lt;Input, core::gl::Texture2D&gt;&amp; inputs, core::gl::Texture2D prev,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                             core::gl::Framebuffer out) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; renderDevice;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    };</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;} <span class="comment">// namespace cubos::engine::gl::pps</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif // CUBOS_ENGINE_GL_PPS_PASS_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Pass_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">cubos::engine::gl::pps::Pass</a></div><div class="ttdoc">A generic post procresssing pass.</div><div class="ttdef"><b>Definition:</b> pass.hpp:16</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:523</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html">cubos::engine::gl::Renderer</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:24</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Window_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Window.html">cubos::core::io::Window</a></div><div class="ttdef"><b>Definition:</b> window.hpp:46</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Pass_html_ac5d3fa49c62d3e2870d6d7306b8e730d"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#ac5d3fa49c62d3e2870d6d7306b8e730d">cubos::engine::gl::pps::Pass::resize</a></div><div class="ttdeci">virtual void resize(glm::uvec2 size)=0</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Pass_html_ae93ccdfe8b1e333c45d3d0bbec817842"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#ae93ccdfe8b1e333c45d3d0bbec817842">cubos::engine::gl::pps::Pass::Pass</a></div><div class="ttdeci">Pass(core::gl::RenderDevice &amp;renderDevice)</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Pass_html_a5bf36215375af3c44e127bbfa1065773"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#a5bf36215375af3c44e127bbfa1065773">cubos::engine::gl::pps::Pass::execute</a></div><div class="ttdeci">virtual void execute(std::map&lt; Input, core::gl::Texture2D &gt; &amp;inputs, core::gl::Texture2D prev, core::gl::Framebuffer out) const =0</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Pass_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">cubos::engine::gl::pps::Pass</a></div><div class="ttdef"><b>Definition:</b> pass.hpp:18</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:516</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

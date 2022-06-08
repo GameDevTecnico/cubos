@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.8.17" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cubos: cubos::engine::gl::deferred::Renderer::LightBlock::SpotLightData Struct Reference</title>
+    <title>Cubos: cubos::engine::gl::Frame::DrawCmd Struct Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -67,7 +67,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -87,46 +87,31 @@ $(document).ready(function(){initNavTree('structcubos_1_1engine_1_1gl_1_1deferre
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData-members.html">List of all members</a>  </div>
+<a href="structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">cubos::engine::gl::deferred::Renderer::LightBlock::SpotLightData Struct Reference</div>  </div>
+<div class="title">cubos::engine::gl::Frame::DrawCmd Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Data of a single draw command.  
+ <a href="structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="frame_8hpp_source.html">frame.hpp</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a345c38d1de0d087ebd4b74ac3386e334"><td class="memItemLeft" align="right" valign="top"><a id="a345c38d1de0d087ebd4b74ac3386e334"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SpotLightData</b> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1SpotLight.html">core::gl::SpotLight</a> &amp;light)</td></tr>
-<tr class="separator:a345c38d1de0d087ebd4b74ac3386e334"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a5a45fb91e474c740b8c3770c1df34137"><td class="memItemLeft" align="right" valign="top"><a id="a5a45fb91e474c740b8c3770c1df34137"></a>
-glm::vec4&#160;</td><td class="memItemRight" valign="bottom"><b>position</b></td></tr>
-<tr class="separator:a5a45fb91e474c740b8c3770c1df34137"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e4e666d1969b1754abd2928e1efc251"><td class="memItemLeft" align="right" valign="top"><a id="a8e4e666d1969b1754abd2928e1efc251"></a>
-glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>rotation</b></td></tr>
-<tr class="separator:a8e4e666d1969b1754abd2928e1efc251"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e70867d6b16002846f36138810c46e4"><td class="memItemLeft" align="right" valign="top"><a id="a2e70867d6b16002846f36138810c46e4"></a>
-glm::vec4&#160;</td><td class="memItemRight" valign="bottom"><b>color</b></td></tr>
-<tr class="separator:a2e70867d6b16002846f36138810c46e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfa2750a30ebd6227f3b46297975c81c"><td class="memItemLeft" align="right" valign="top"><a id="acfa2750a30ebd6227f3b46297975c81c"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>intensity</b></td></tr>
-<tr class="separator:acfa2750a30ebd6227f3b46297975c81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5c42cf80b0467fbfe4514480b9cf322"><td class="memItemLeft" align="right" valign="top"><a id="af5c42cf80b0467fbfe4514480b9cf322"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>range</b></td></tr>
-<tr class="separator:af5c42cf80b0467fbfe4514480b9cf322"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac633a6924e770eb0011aa119bbf81ebf"><td class="memItemLeft" align="right" valign="top"><a id="ac633a6924e770eb0011aa119bbf81ebf"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>spotCutoff</b></td></tr>
-<tr class="separator:ac633a6924e770eb0011aa119bbf81ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5aa056bff09b9455da95219ad4058b89"><td class="memItemLeft" align="right" valign="top"><a id="a5aa056bff09b9455da95219ad4058b89"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>innerSpotCutoff</b></td></tr>
-<tr class="separator:a5aa056bff09b9455da95219ad4058b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6c182bdeda5d691e80ddfee36fcafc5"><td class="memItemLeft" align="right" valign="top"><a id="ac6c182bdeda5d691e80ddfee36fcafc5"></a>
+Renderer::GridID&#160;</td><td class="memItemRight" valign="bottom"><b>grid</b></td></tr>
+<tr class="separator:ac6c182bdeda5d691e80ddfee36fcafc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34587ff41d0dafb1a139cf94076355eb"><td class="memItemLeft" align="right" valign="top"><a id="a34587ff41d0dafb1a139cf94076355eb"></a>
+glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>modelMat</b></td></tr>
+<tr class="separator:a34587ff41d0dafb1a139cf94076355eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>engine/include/cubos/engine/gl/deferred/<a class="el" href="deferred_2renderer_8hpp_source.html">renderer.hpp</a></li>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data of a single draw command. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>engine/include/cubos/engine/gl/<a class="el" href="frame_8hpp_source.html">frame.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -135,7 +120,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>innerSpotCutoff</b><
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>cubos</b></li><li class="navelem"><b>engine</b></li><li class="navelem"><b>gl</b></li><li class="navelem"><b>deferred</b></li><li class="navelem"><a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html">Renderer</a></li><li class="navelem"><b>LightBlock</b></li><li class="navelem"><a class="el" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData.html">SpotLightData</a></li>
+    <li class="navelem"><b>cubos</b></li><li class="navelem"><b>engine</b></li><li class="navelem"><b>gl</b></li><li class="navelem"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a></li><li class="navelem"><a class="el" href="structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd.html">DrawCmd</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.8.17 </li>
   </ul>

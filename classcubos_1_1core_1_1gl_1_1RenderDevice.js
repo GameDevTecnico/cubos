@@ -9,7 +9,6 @@ var classcubos_1_1core_1_1gl_1_1RenderDevice =
     [ "clearTargetColor", "classcubos_1_1core_1_1gl_1_1RenderDevice.html#af30620ac48cb40668b5ecd2c5d1115d3", null ],
     [ "createBlendState", "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a052af425a86fa1896095ec30ff533add", null ],
     [ "createConstantBuffer", "classcubos_1_1core_1_1gl_1_1RenderDevice.html#aad03ed7a6d601cab00e05f76043559fe", null ],
-    [ "createConstantBuffer", "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a3f9609278b9a713f55fe2722a901f885", null ],
     [ "createCubeMap", "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a3688e1e05f51ece0a07e33cf1b042fed", null ],
     [ "createCubeMapArray", "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a1c125bdb650c982122e2fec7ac590895", null ],
     [ "createDepthStencilState", "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a9b28f939f304b1e5ef49038d0187484f", null ],

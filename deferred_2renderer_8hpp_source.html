@@ -106,126 +106,91 @@ $(document).ready(function(){initNavTree('deferred_2renderer_8hpp_source.html','
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>cubos::engine::gl::deferred</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html">   17</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html">Renderer</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">gl::Renderer</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html">Renderer</a>(<a class="code" href="classcubos_1_1core_1_1io_1_1Window.html">core::io::Window</a>&amp; window);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> getScreenQuad(core::gl::VertexArray&amp; va, core::gl::IndexBuffer&amp; ib) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">virtual</span> ModelID registerModel(<span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a>&amp; grid) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> drawLight(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1SpotLight.html">core::gl::SpotLight</a>&amp; light) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> drawLight(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html">core::gl::DirectionalLight</a>&amp; light) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> drawLight(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1PointLight.html">core::gl::PointLight</a>&amp; light) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> render(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a>&amp; camera, <span class="keywordtype">bool</span> usePostProcessing = <span class="keyword">true</span>) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> flush() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">void</span> createShaderPipelines();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">void</span> setupFrameBuffers();</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html">   23</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html">Renderer</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">gl::Renderer</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a1ee1589140309caeb7ce8de770992fea">Renderer</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">renderDevice</a>, glm::uvec2 size);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html">Renderer</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="comment">// Implement interface methods.</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">void</span> createRenderDeviceStates();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">struct </span>MVP</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            glm::mat4 M;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            glm::mat4 V;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            glm::mat4 P;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        };</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">struct </span>LightBlock</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        {</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData.html">   44</a></span>&#160;            <span class="keyword">struct </span><a class="code" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData.html">SpotLightData</a></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                glm::vec4 position;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                glm::mat4 rotation;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                glm::vec4 color;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="keywordtype">float</span> intensity;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="keywordtype">float</span> range;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordtype">float</span> spotCutoff;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordtype">float</span> innerSpotCutoff;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">virtual</span> GridID <a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a99b531fb2556c1e309947717fd0515df">upload</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a>&amp; grid) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a4617fd3aebd6b9b6f3d1697cb166e449">free</a>(GridID grid) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a378d29a4fbde6e9edb688baeecaef96f">setPalette</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Palette.html">core::gl::Palette</a>&amp; palette) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">// Implement interface methods.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a5ef6d5c9f219a1c25906dda2f082a603">onResize</a>(glm::uvec2 size) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#ac6a0f52801ad1734a7aeaea3892f995a">onRender</a>(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a>&amp; camera, <span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a>&amp; frame,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                              core::gl::Framebuffer target) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="comment">// Uploaded grids.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">struct </span>GpuGrid</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            core::gl::VertexArray va;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            core::gl::IndexBuffer ib;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordtype">size_t</span> indexCount;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        };</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <a class="code" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData.html">SpotLightData</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <a class="code" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData.html">SpotLightData</a>(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1SpotLight.html">core::gl::SpotLight</a>&amp; light);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            } spotLights[CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT];</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        std::vector&lt;GpuGrid&gt; grids;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="comment">// GBuffer.</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1DirectionalLightData.html">   58</a></span>&#160;            <span class="keyword">struct </span><a class="code" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1DirectionalLightData.html">DirectionalLightData</a></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                glm::mat4 rotation;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                glm::vec4 color;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="keywordtype">float</span> intensity;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordtype">float</span> padding[3];</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        glm::uvec2 size;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        core::gl::Framebuffer gBuffer;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        core::gl::Texture2D positionTex;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        core::gl::Texture2D normalTex;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        core::gl::Texture2D materialTex;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        core::gl::Texture2D depthTex;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <a class="code" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1DirectionalLightData.html">DirectionalLightData</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <a class="code" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1DirectionalLightData.html">DirectionalLightData</a>(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html">core::gl::DirectionalLight</a>&amp; light);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            } directionalLights[CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT];</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1PointLightData.html">   69</a></span>&#160;            <span class="keyword">struct </span><a class="code" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1PointLightData.html">PointLightData</a></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                glm::vec4 position;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                glm::vec4 color;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keywordtype">float</span> intensity;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keywordtype">float</span> range;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="keywordtype">float</span> padding[2];</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <a class="code" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1PointLightData.html">PointLightData</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <a class="code" href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1PointLightData.html">PointLightData</a>(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1PointLight.html">core::gl::PointLight</a>&amp; light);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            } pointLights[CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT];</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            uint32_t numSpotLights = 0;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            uint32_t numDirectionalLights = 0;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            uint32_t numPointLights = 0;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        } lights;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment">//  Shader Pipeline</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        core::gl::ShaderPipeline gBufferPipeline;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> mvpBP;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        core::gl::ConstantBuffer mvpBuffer;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        core::gl::RasterState rasterState;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        core::gl::BlendState blendState;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        core::gl::DepthStencilState depthStencilState;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="comment">// Framebuffers</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        core::gl::Framebuffer gBuffer;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="comment">// Textures</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        core::gl::Texture2D positionTex;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        core::gl::Texture2D normalTex;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        core::gl::Texture2D materialTex;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        core::gl::Texture2D depthTex;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="comment">// Shader Pipeline</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        core::gl::ShaderPipeline outputPipeline;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> outputPositionBP;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> outputNormalBP;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> outputMaterialBP;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> outputPaletteBP;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> outputLightBlockBP;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        core::gl::ConstantBuffer outputLightBlockBuffer;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="comment">// Screen Quad</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        core::gl::VertexArray screenVertexArray;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        core::gl::IndexBuffer screenIndexBuffer;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="comment">// Samplers</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        core::gl::Sampler positionSampler;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        core::gl::Sampler normalSampler;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        core::gl::Sampler materialSampler;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    };</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;} <span class="comment">// namespace cubos::engine::gl::deferred</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#endif // CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="comment">//  Geometry pass pipeline.</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        core::gl::ShaderPipeline geometryPipeline;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> mvpBP;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        core::gl::ConstantBuffer mvpBuffer;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        core::gl::RasterState geometryRasterState;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        core::gl::BlendState geometryBlendState;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        core::gl::DepthStencilState geometryDepthStencilState;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="comment">// Lighting pass pipeline.</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        core::gl::ShaderPipeline lightingPipeline;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> paletteBP;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> positionBP;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> normalBP;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> materialBP;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> lightsBP;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        core::gl::Sampler sampler;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        core::gl::Texture2D paletteTex;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        core::gl::ConstantBuffer lightsBuffer;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="comment">// Screen quad used for the lighting pass.</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        core::gl::VertexArray screenQuadVA;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    };</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;} <span class="comment">// namespace cubos::engine::gl::deferred</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif // CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astructcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1DirectionalLightData_html"><div class="ttname"><a href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1DirectionalLightData.html">cubos::engine::gl::deferred::Renderer::LightBlock::DirectionalLightData</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:58</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html">cubos::engine::gl::deferred::Renderer</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:17</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">cubos::core::gl::impl::ShaderBindingPoint</a></div><div class="ttdoc">Abstract shader binding point, should not be used directly.</div><div class="ttdef"><b>Definition:</b> render_device.hpp:960</div></div>
-<div class="ttc" id="astructcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData_html"><div class="ttname"><a href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData.html">cubos::engine::gl::deferred::Renderer::LightBlock::SpotLightData</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:44</div></div>
-<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1DirectionalLight_html"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html">cubos::core::gl::DirectionalLight</a></div><div class="ttdef"><b>Definition:</b> light.hpp:24</div></div>
-<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1PointLight_html"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1PointLight.html">cubos::core::gl::PointLight</a></div><div class="ttdef"><b>Definition:</b> light.hpp:33</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_html_a1ee1589140309caeb7ce8de770992fea"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a1ee1589140309caeb7ce8de770992fea">cubos::engine::gl::deferred::Renderer::Renderer</a></div><div class="ttdeci">Renderer(core::gl::RenderDevice &amp;renderDevice, glm::uvec2 size)</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html">cubos::engine::gl::deferred::Renderer</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:23</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">cubos::core::gl::impl::ShaderBindingPoint</a></div><div class="ttdoc">Abstract shader binding point, should not be used directly.</div><div class="ttdef"><b>Definition:</b> render_device.hpp:942</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_html_a378d29a4fbde6e9edb688baeecaef96f"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a378d29a4fbde6e9edb688baeecaef96f">cubos::engine::gl::deferred::Renderer::setPalette</a></div><div class="ttdeci">virtual void setPalette(const core::gl::Palette &amp;palette) override</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Frame_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Frame.html">cubos::engine::gl::Frame</a></div><div class="ttdef"><b>Definition:</b> frame.hpp:13</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_html_a4617fd3aebd6b9b6f3d1697cb166e449"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a4617fd3aebd6b9b6f3d1697cb166e449">cubos::engine::gl::deferred::Renderer::free</a></div><div class="ttdeci">virtual void free(GridID grid) override</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_a5f0c0a5691c25987d79601dd13c79b6a"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">cubos::engine::gl::Renderer::renderDevice</a></div><div class="ttdeci">core::gl::RenderDevice &amp; renderDevice</div><div class="ttdoc">The render device being used.</div><div class="ttdef"><b>Definition:</b> renderer.hpp:72</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Palette_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Palette.html">cubos::core::gl::Palette</a></div><div class="ttdoc">Represents a palette of materials. Supports up to 65535 materials.</div><div class="ttdef"><b>Definition:</b> palette.hpp:30</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_html_a99b531fb2556c1e309947717fd0515df"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a99b531fb2556c1e309947717fd0515df">cubos::engine::gl::deferred::Renderer::upload</a></div><div class="ttdeci">virtual GridID upload(const core::gl::Grid &amp;grid) override</div></div>
 <div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Camera_html"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Camera.html">cubos::core::gl::Camera</a></div><div class="ttdoc">Holds data describing a camera.</div><div class="ttdef"><b>Definition:</b> camera.hpp:11</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html">cubos::core::gl::Grid</a></div><div class="ttdef"><b>Definition:</b> grid.hpp:34</div></div>
-<div class="ttc" id="astructcubos_1_1core_1_1gl_1_1SpotLight_html"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1SpotLight.html">cubos::core::gl::SpotLight</a></div><div class="ttdef"><b>Definition:</b> light.hpp:10</div></div>
-<div class="ttc" id="astructcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1PointLightData_html"><div class="ttname"><a href="structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1PointLightData.html">cubos::engine::gl::deferred::Renderer::LightBlock::PointLightData</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:69</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html">cubos::engine::gl::Renderer</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:24</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Window_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Window.html">cubos::core::io::Window</a></div><div class="ttdef"><b>Definition:</b> window.hpp:46</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:516</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_html_a5ef6d5c9f219a1c25906dda2f082a603"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a5ef6d5c9f219a1c25906dda2f082a603">cubos::engine::gl::deferred::Renderer::onResize</a></div><div class="ttdeci">virtual void onResize(glm::uvec2 size) override</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_html_ac6a0f52801ad1734a7aeaea3892f995a"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#ac6a0f52801ad1734a7aeaea3892f995a">cubos::engine::gl::deferred::Renderer::onRender</a></div><div class="ttdeci">virtual void onRender(const core::gl::Camera &amp;camera, const Frame &amp;frame, core::gl::Framebuffer target) override</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html">cubos::engine::gl::Renderer</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:30</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

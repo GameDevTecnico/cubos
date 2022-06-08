@@ -30,8 +30,7 @@ var hierarchy =
       [ "cubos::core::data::YAMLDeserializer", "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html", null ]
     ] ],
     [ "cubos::core::gl::DirectionalLight", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html", null ],
-    [ "cubos::engine::gl::deferred::Renderer::LightBlock::DirectionalLightData", "structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1DirectionalLightData.html", null ],
-    [ "cubos::engine::gl::Renderer::DrawRequest", "structcubos_1_1engine_1_1gl_1_1Renderer_1_1DrawRequest.html", null ],
+    [ "cubos::engine::gl::Frame::DrawCmd", "structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd.html", null ],
     [ "enable_shared_from_this", null, [
       [ "cubos::core::data::File", "classcubos_1_1core_1_1data_1_1File.html", null ]
     ] ],
@@ -42,6 +41,7 @@ var hierarchy =
     [ "cubos::core::Event< MouseButton >", "classcubos_1_1core_1_1Event.html", null ],
     [ "cubos::core::gl::DepthStencilStateDesc::Stencil::Face", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil_1_1Face.html", null ],
     [ "cubos::core::data::FileSystem", "classcubos_1_1core_1_1data_1_1FileSystem.html", null ],
+    [ "cubos::engine::gl::Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html", null ],
     [ "cubos::core::gl::impl::Framebuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1Framebuffer.html", null ],
     [ "cubos::core::gl::FramebufferDesc", "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html", null ],
     [ "cubos::core::gl::FramebufferDesc::FramebufferTarget", "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget.html", null ],
@@ -59,6 +59,7 @@ var hierarchy =
     [ "cubos::engine::data::Loader", "classcubos_1_1engine_1_1data_1_1Loader.html", [
       [ "cubos::engine::data::impl::QBModelLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1QBModelLoader.html", null ]
     ] ],
+    [ "cubos::engine::gl::pps::Manager", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html", null ],
     [ "cubos::core::gl::Material", "structcubos_1_1core_1_1gl_1_1Material.html", null ],
     [ "cubos::engine::data::Meta", "classcubos_1_1engine_1_1data_1_1Meta.html", null ],
     [ "cubos::core::gl::Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
@@ -66,7 +67,6 @@ var hierarchy =
       [ "cubos::engine::gl::pps::CopyPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html", null ]
     ] ],
     [ "cubos::core::gl::PointLight", "structcubos_1_1core_1_1gl_1_1PointLight.html", null ],
-    [ "cubos::engine::gl::deferred::Renderer::LightBlock::PointLightData", "structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1PointLightData.html", null ],
     [ "cubos::core::data::QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", null ],
     [ "cubos::engine::data::QBModel", "structcubos_1_1engine_1_1data_1_1QBModel.html", null ],
     [ "cubos::core::gl::impl::RasterState", "classcubos_1_1core_1_1gl_1_1impl_1_1RasterState.html", null ],
@@ -75,7 +75,6 @@ var hierarchy =
     [ "cubos::engine::gl::Renderer", "classcubos_1_1engine_1_1gl_1_1Renderer.html", [
       [ "cubos::engine::gl::deferred::Renderer", "classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html", null ]
     ] ],
-    [ "cubos::engine::gl::Renderer::RendererModel", "structcubos_1_1engine_1_1gl_1_1Renderer_1_1RendererModel.html", null ],
     [ "cubos::core::gl::impl::Sampler", "classcubos_1_1core_1_1gl_1_1impl_1_1Sampler.html", null ],
     [ "cubos::core::gl::SamplerDesc", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html", null ],
     [ "cubos::core::data::SerializationMap< R, I >", "classcubos_1_1core_1_1data_1_1SerializationMap.html", null ],
@@ -93,7 +92,6 @@ var hierarchy =
       [ "cubos::core::io::SingleAxis", "classcubos_1_1core_1_1io_1_1SingleAxis.html", null ]
     ] ],
     [ "cubos::core::gl::SpotLight", "structcubos_1_1core_1_1gl_1_1SpotLight.html", null ],
-    [ "cubos::engine::gl::deferred::Renderer::LightBlock::SpotLightData", "structcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer_1_1LightBlock_1_1SpotLightData.html", null ],
     [ "cubos::core::gl::DepthStencilStateDesc::Stencil", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html", null ],
     [ "cubos::core::memory::Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", [
       [ "cubos::core::data::FileStream< T >", "classcubos_1_1core_1_1data_1_1FileStream.html", null ],

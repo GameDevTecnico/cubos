@@ -141,8 +141,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a1c125bdb650c982122e2fec7ac590895"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad03ed7a6d601cab00e05f76043559fe"><td class="memItemLeft" align="right" valign="top">virtual ConstantBuffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#aad03ed7a6d601cab00e05f76043559fe">createConstantBuffer</a> (size_t size, const void *data, Usage usage)=0</td></tr>
 <tr class="separator:aad03ed7a6d601cab00e05f76043559fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f9609278b9a713f55fe2722a901f885"><td class="memItemLeft" align="right" valign="top">virtual ConstantBuffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#a3f9609278b9a713f55fe2722a901f885">createConstantBuffer</a> (size_t size, const void *data, Usage usage, BufferStorageType storage)=0</td></tr>
-<tr class="separator:a3f9609278b9a713f55fe2722a901f885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8a16932752141c5f7761e22f630237d"><td class="memItemLeft" align="right" valign="top">virtual IndexBuffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#af8a16932752141c5f7761e22f630237d">createIndexBuffer</a> (size_t size, const void *data, IndexFormat format, Usage usage)=0</td></tr>
 <tr class="separator:af8a16932752141c5f7761e22f630237d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a2981c1f3b52584df179704e8326f54"><td class="memItemLeft" align="right" valign="top"><a id="a0a2981c1f3b52584df179704e8326f54"></a>
@@ -227,7 +225,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="aad03ed7a6d601cab00e05f76043559fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad03ed7a6d601cab00e05f76043559fe">&#9670;&nbsp;</a></span>createConstantBuffer() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aad03ed7a6d601cab00e05f76043559fe">&#9670;&nbsp;</a></span>createConstantBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -270,64 +268,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
     <tr><td class="paramname">size</td><td>Size in bytes. </td></tr>
     <tr><td class="paramname">data</td><td>Initial data, can be nullptr. </td></tr>
     <tr><td class="paramname">usage</td><td>The usage which the buffer will have. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Constant buffer handle, or nullptr if the creation failed. </dd></dl>
-
-</div>
-</div>
-<a id="a3f9609278b9a713f55fe2722a901f885"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f9609278b9a713f55fe2722a901f885">&#9670;&nbsp;</a></span>createConstantBuffer() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual ConstantBuffer cubos::core::gl::RenderDevice::createConstantBuffer </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Usage&#160;</td>
-          <td class="paramname"><em>usage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">BufferStorageType&#160;</td>
-          <td class="paramname"><em>storage</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Creates a new constant buffer. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">size</td><td>Size in bytes. </td></tr>
-    <tr><td class="paramname">data</td><td>Initial data, can be nullptr. </td></tr>
-    <tr><td class="paramname">usage</td><td>The usage which the buffer will have. </td></tr>
-    <tr><td class="paramname">storage</td><td>The intended storage type for the buffer. </td></tr>
   </table>
   </dd>
 </dl>

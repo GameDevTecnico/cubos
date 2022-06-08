@@ -1,9 +1,5 @@
 <map id="cubos::engine::gl::pps::CopyPass" name="cubos::engine::gl::pps::CopyPass">
-<area shape="rect" id="node1" title=" " alt="" coords="877,61,1017,102"/>
-<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html" title="A generic post procresssing pass." alt="" coords="688,61,828,102"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1gl_1_1RenderDevice.html" title=" " alt="" coords="333,43,548,69"/>
-<area shape="rect" id="node4" href="$classcubos_1_1core_1_1io_1_1Window.html" title=" " alt="" coords="353,93,529,120"/>
-<area shape="rect" id="node5" href="$classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,21,147,62"/>
-<area shape="rect" id="node6" href="$classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,86,147,127"/>
-<area shape="rect" id="node7" href="$classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,151,147,193"/>
+<area shape="rect" id="node1" title=" " alt="" coords="43,185,183,227"/>
+<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html" title=" " alt="" coords="43,95,183,136"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1gl_1_1RenderDevice.html" title=" " alt="" coords="5,5,220,32"/>
 </map>

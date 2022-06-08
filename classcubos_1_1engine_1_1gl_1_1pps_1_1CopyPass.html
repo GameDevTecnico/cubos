@@ -93,13 +93,15 @@ $(document).ready(function(){initNavTree('classcubos_1_1engine_1_1gl_1_1pps_1_1C
 <div class="title">cubos::engine::gl::pps::CopyPass Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="copy__pass_8hpp_source.html">copy_pass.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for cubos::engine::gl::pps::CopyPass:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass__inherit__graph.png" border="0" usemap="#cubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_inherit__map" alt="Inheritance graph"/></div>
 <map name="cubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_inherit__map" id="cubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_inherit__map">
 <area shape="rect" title=" " alt="" coords="5,95,145,136"/>
-<area shape="rect" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html" title="A generic post procresssing pass." alt="" coords="5,5,145,47"/>
+<area shape="rect" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html" title=" " alt="" coords="5,5,145,47"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -107,36 +109,159 @@ Collaboration diagram for cubos::engine::gl::pps::CopyPass:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass__coll__graph.png" border="0" usemap="#cubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_coll__map" alt="Collaboration graph"/></div>
 <map name="cubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_coll__map" id="cubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_coll__map">
-<area shape="rect" title=" " alt="" coords="877,61,1017,102"/>
-<area shape="rect" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html" title="A generic post procresssing pass." alt="" coords="688,61,828,102"/>
-<area shape="rect" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" title=" " alt="" coords="333,43,548,69"/>
-<area shape="rect" href="classcubos_1_1core_1_1io_1_1Window.html" title=" " alt="" coords="353,93,529,120"/>
-<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,21,147,62"/>
-<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,86,147,127"/>
-<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,151,147,193"/>
+<area shape="rect" title=" " alt="" coords="43,185,183,227"/>
+<area shape="rect" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html" title=" " alt="" coords="43,95,183,136"/>
+<area shape="rect" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" title=" " alt="" coords="5,5,220,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a74a32ee649a507317939b45e22d2621f"><td class="memItemLeft" align="right" valign="top"><a id="a74a32ee649a507317939b45e22d2621f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CopyPass</b> (<a class="el" href="classcubos_1_1core_1_1io_1_1Window.html">core::io::Window</a> &amp;window)</td></tr>
-<tr class="separator:a74a32ee649a507317939b45e22d2621f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a6782e41c2f0c598dfefb2c87d527c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#a7a6782e41c2f0c598dfefb2c87d527c0">CopyPass</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;renderDevice, glm::uvec2 size)</td></tr>
+<tr class="separator:a7a6782e41c2f0c598dfefb2c87d527c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af223e428a8f5d5dd77727ed3745d6323"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#af223e428a8f5d5dd77727ed3745d6323">resize</a> (glm::uvec2 size) override</td></tr>
+<tr class="separator:af223e428a8f5d5dd77727ed3745d6323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61c08fe83770a3dde90882877cdfe05a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#a61c08fe83770a3dde90882877cdfe05a">execute</a> (std::map&lt; Input, core::gl::Texture2D &gt; &amp;inputs, core::gl::Texture2D prev, core::gl::Framebuffer out) const override</td></tr>
+<tr class="separator:a61c08fe83770a3dde90882877cdfe05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">cubos::engine::gl::pps::Pass</a></td></tr>
-<tr class="memitem:ad500676d08346aaaf3cb7560d7a3f671 inherit pub_methods_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memItemLeft" align="right" valign="top"><a id="ad500676d08346aaaf3cb7560d7a3f671"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Pass</b> (<a class="el" href="classcubos_1_1core_1_1io_1_1Window.html">core::io::Window</a> &amp;window)</td></tr>
-<tr class="separator:ad500676d08346aaaf3cb7560d7a3f671 inherit pub_methods_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae93ccdfe8b1e333c45d3d0bbec817842 inherit pub_methods_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#ae93ccdfe8b1e333c45d3d0bbec817842">Pass</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;renderDevice)</td></tr>
+<tr class="separator:ae93ccdfe8b1e333c45d3d0bbec817842 inherit pub_methods_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3dc81585c34f27b972f2fcdfb004502 inherit pub_methods_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memItemLeft" align="right" valign="top"><a id="aa3dc81585c34f27b972f2fcdfb004502"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Pass</b> (const <a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">Pass</a> &amp;)=delete</td></tr>
+<tr class="separator:aa3dc81585c34f27b972f2fcdfb004502 inherit pub_methods_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">cubos::engine::gl::pps::Pass</a></td></tr>
-<tr class="memitem:aa3d48f14cccb6ea081e62f5fca225a53 inherit pro_attribs_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memItemLeft" align="right" valign="top"><a id="aa3d48f14cccb6ea081e62f5fca225a53"></a>
-<a class="el" href="classcubos_1_1core_1_1io_1_1Window.html">core::io::Window</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>window</b></td></tr>
-<tr class="separator:aa3d48f14cccb6ea081e62f5fca225a53 inherit pro_attribs_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a094a144fab75f405190b5cbe5b8ecbf9 inherit pro_attribs_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memItemLeft" align="right" valign="top"><a id="a094a144fab75f405190b5cbe5b8ecbf9"></a>
 <a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>renderDevice</b></td></tr>
 <tr class="separator:a094a144fab75f405190b5cbe5b8ecbf9 inherit pro_attribs_classcubos_1_1engine_1_1gl_1_1pps_1_1Pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A simple post processing pass that copies the input texture to the output. This pass is thus useless and is only used as an example and for testing. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7a6782e41c2f0c598dfefb2c87d527c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a6782e41c2f0c598dfefb2c87d527c0">&#9670;&nbsp;</a></span>CopyPass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cubos::engine::gl::pps::CopyPass::CopyPass </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderDevice</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">glm::uvec2&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderDevice</td><td>The render device to use. </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the window. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a61c08fe83770a3dde90882877cdfe05a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61c08fe83770a3dde90882877cdfe05a">&#9670;&nbsp;</a></span>execute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void cubos::engine::gl::pps::CopyPass::execute </td>
+          <td>(</td>
+          <td class="paramtype">std::map&lt; Input, core::gl::Texture2D &gt; &amp;&#160;</td>
+          <td class="paramname"><em>inputs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">core::gl::Texture2D&#160;</td>
+          <td class="paramname"><em>prev</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">core::gl::Framebuffer&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Called each frame. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inputs</td><td>The available extra input textures. The reference is mutable so that a pass can provide its own inputs. </td></tr>
+    <tr><td class="paramname">prev</td><td>The resulting texture of the previous pass. </td></tr>
+    <tr><td class="paramname">out</td><td>The framebuffer where the pass will render to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#a5bf36215375af3c44e127bbfa1065773">cubos::engine::gl::pps::Pass</a>.</p>
+
+</div>
+</div>
+<a id="af223e428a8f5d5dd77727ed3745d6323"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af223e428a8f5d5dd77727ed3745d6323">&#9670;&nbsp;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void cubos::engine::gl::pps::CopyPass::resize </td>
+          <td>(</td>
+          <td class="paramtype">glm::uvec2&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Called when the window framebuffer size changes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>The new size of the window. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#ac5d3fa49c62d3e2870d6d7306b8e730d">cubos::engine::gl::pps::Pass</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>engine/include/cubos/engine/gl/pps/<a class="el" href="copy__pass_8hpp_source.html">copy_pass.hpp</a></li>
 </ul>

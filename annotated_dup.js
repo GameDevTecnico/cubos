@@ -90,8 +90,10 @@ var annotated_dup =
           ] ],
           [ "pps", null, [
             [ "CopyPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass" ],
+            [ "Manager", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager" ],
             [ "Pass", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass" ]
           ] ],
+          [ "Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html", "classcubos_1_1engine_1_1gl_1_1Frame" ],
           [ "Renderer", "classcubos_1_1engine_1_1gl_1_1Renderer.html", "classcubos_1_1engine_1_1gl_1_1Renderer" ]
         ] ]
       ] ]
