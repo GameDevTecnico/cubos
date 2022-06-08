@@ -46,7 +46,7 @@ namespace cubos::engine::gl::pps
 
     private:
         // Extraction pipeline
-        core::gl::Framebuffer extractionFB;                    ///< The framebuffer of the extraction step.
+        core::gl::Framebuffer extFB;                           ///< The framebuffer of the extraction step.
         core::gl::ShaderPipeline extPipeline;                  ///< The shader pipeline to extract image data required.
         core::gl::ShaderBindingPoint extInputTexBP;            ///< The binding point for the input texture.
         core::gl::ShaderBindingPoint extBrightnessThresholdBP; ///< The binding point for the brightness threshold.
@@ -56,12 +56,16 @@ namespace cubos::engine::gl::pps
         // Blur pipeline
         core::gl::Framebuffer blurFB;                      ///< The framebuffer to store the blurred bright areas.
         core::gl::ShaderPipeline blurPipeline;             ///< The shader pipeline to blur the bright areas.
-        core::gl::ShaderBindingPoint lightBleedStrengthBP; ///< The binding point for the bloom strength.
+        core::gl::ShaderBindingPoint blurInputTexBP;       ///< The binding point for the input texture.
+        core::gl::ShaderBindingPoint blurLightBleedBP;     ///< The binding point for the bloom strength.
+        core::gl::ShaderBindingPoint blurVerticalBP;       ///< The binding point for knowing when to perform vertical blur.
         core::gl::Texture2D blurTex;                       ///< The result texture from the blur step.
 
     private:
         // Combine pipeline
-        core::gl::ShaderPipeline combinePipeline; ///< The shader pipeline to combine the results in the final output.
+        core::gl::ShaderPipeline combinePipeline;        ///< The shader pipeline to combine the results in the final output.
+        core::gl::ShaderBindingPoint combineRenderTexBP; ///< The binding point for the initially rendered texture.
+        core::gl::ShaderBindingPoint combineBlurTexBP;   ///< The binding point for the blurred result texture.
     };
 } // namespace cubos::engine::gl::pps
 
