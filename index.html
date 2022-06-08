@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.8.17" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cubos: Cubos</title>
+    <title>CUBOS.: Introduction</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -30,7 +30,7 @@
                 <tbody>
                     <tr style="height: 56px;">
                         <td id="projectalign" style="padding-left: 0.5em;">
-                            <div id="projectname">Cubos
+                            <div id="projectname">CUBOS.
                                 &#160;<span id="projectnumber">0.1.0</span>
                             </div>
                         </td>
@@ -87,10 +87,23 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Cubos </div>  </div>
+<div class="title">Introduction </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>TODO </p>
+<div class="textblock"><div class="image">
+<img src="CubosLogo.png" alt=""/>
+</div>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Voxel based engine</h1>
+<p><b>CUBOS. aims to be a simple, but powerful engine for PC, where everything is</b> <b>made out of voxels.</b></p>
+<p>It aims to support vast render distances and destructibility, which sets it apart from other engines. Written in <em>C++</em>, built with <em>OpenGL</em>, it's a high-performance engine.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Structure</h1>
+<p>The source code is divided into three main parts:</p><ul>
+<li><a class="el" href="core.html">Core</a> - library which is shared between the tools and the games. This includes some basic functionality like serialization, logging, render devices, input handling and others.</li>
+<li><a class="el" href="engine.html">Engine</a> - library with code exclusive to the game execution. This includes the main loop, the asset manager and systems like the renderer and physics.</li>
+<li><a class="el" href="cubinhos.html">Cubinhos</a> - a tool which helps you with the game development and which may depend on <b>Core</b>. One example use case of <b>Cubinhos</b> is convert from external voxel formats to the internal format used by <b>CUBOS.</b>. </li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
