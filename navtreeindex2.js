@@ -1,9 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"classcubos_1_1core_1_1io_1_1Source.html#ab0f2e08e9c5547fd5ce71f1612cfd240":[5,0,0,0,3,6,1],
-"classcubos_1_1core_1_1io_1_1Source.html#ab3f702a92bcf814a2bf3643ede5dcfa3":[5,0,0,0,3,6,2],
-"classcubos_1_1core_1_1io_1_1Source.html#af731307cda8dab95732e600cec28d6a6":[5,0,0,0,3,6,0],
-"classcubos_1_1core_1_1io_1_1Window.html":[5,0,0,0,3,7],
 "classcubos_1_1core_1_1io_1_1Window.html#a0ca919cf42142ddb275a963939d09ef9":[5,0,0,0,3,7,9],
 "classcubos_1_1core_1_1io_1_1Window.html#a3e6e32216c7711740d8d391bd51e6c19":[5,0,0,0,3,7,14],
 "classcubos_1_1core_1_1io_1_1Window.html#a49949b5ecc04376de33e25385974b979":[5,0,0,0,3,7,10],
@@ -229,16 +225,16 @@ var NAVTREEINDEX2 =
 "file__system_8hpp_source.html":[6,0,0,0,0,0,0,7],
 "files.html":[6,0],
 "frame_8hpp_source.html":[6,0,1,0,0,0,1,2],
-"functions.html":[5,3,0],
 "functions.html":[5,3,0,0],
+"functions.html":[5,3,0],
 "functions_b.html":[5,3,0,1],
 "functions_c.html":[5,3,0,2],
 "functions_d.html":[5,3,0,3],
 "functions_e.html":[5,3,0,4],
 "functions_enum.html":[5,3,4],
 "functions_f.html":[5,3,0,5],
-"functions_func.html":[5,3,1,0],
 "functions_func.html":[5,3,1],
+"functions_func.html":[5,3,1,0],
 "functions_func_b.html":[5,3,1,1],
 "functions_func_c.html":[5,3,1,2],
 "functions_func_d.html":[5,3,1,3],
@@ -249,5 +245,9 @@ var NAVTREEINDEX2 =
 "functions_func_i.html":[5,3,1,8],
 "functions_func_l.html":[5,3,1,9],
 "functions_func_m.html":[5,3,1,10],
-"functions_func_o.html":[5,3,1,11]
+"functions_func_o.html":[5,3,1,11],
+"functions_func_p.html":[5,3,1,12],
+"functions_func_q.html":[5,3,1,13],
+"functions_func_r.html":[5,3,1,14],
+"functions_func_s.html":[5,3,1,15]
 };

@@ -1,9 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#a5d0bc64971a1a3d350931f898aa0266e":[5,0,0,0,2,24,3],
-"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#a7f717191c44c04b7749b4b9d3989a92a":[5,0,0,0,2,24,2],
-"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#aaadf8586143337887cc8868b76f49e6c":[5,0,0,0,2,24,0],
-"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#acb47ad4bd4fcfb349a85552357b2224d":[5,0,0,0,2,24,1],
 "structcubos_1_1core_1_1gl_1_1VertexElement.html":[5,0,0,0,2,25],
 "structcubos_1_1core_1_1gl_1_1VertexElement.html#a006a4db13160b26497136286b380d6e1":[5,0,0,0,2,25,3],
 "structcubos_1_1core_1_1gl_1_1VertexElement.html#a2ae1e9d0fce1d5903adc86b374bf7d9e":[5,0,0,0,2,25,0],
