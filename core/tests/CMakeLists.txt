@@ -8,6 +8,7 @@ set(CUBOS_TESTS_SOURCE
     "test_yaml_serialization.cpp"
     "test_yaml_deserialization.cpp"
     "test_yaml_serialization_and_deserialization.cpp"
+    "test_package.cpp"
     "test_std_archive.cpp"
 )
 
