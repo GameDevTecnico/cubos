@@ -40,7 +40,7 @@ namespace cubos::core::data
 
     private:
         memory::Stream& stream; ///< The stream to serialize from.
-        bool readLittleEndian; ///< Whether to write in little endian or big endian format.
+        bool readLittleEndian;  ///< Whether to write in little endian or big endian format.
     };
 } // namespace cubos::core::data
 
