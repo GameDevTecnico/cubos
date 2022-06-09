@@ -1,5 +1,15 @@
 var NAVTREEINDEX2 =
 {
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html":[5,0,0,0,3,4],
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#a5cc56023d7d4aebfac3d62891abf997e":[5,0,0,0,3,4,2],
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#a8ac5eef4d4197b529cfa5205da8c8f47":[5,0,0,0,3,4,4],
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#aad8ac4aaac88bfe6a69077bf296ce03f":[5,0,0,0,3,4,1],
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#adc1c265f08509827c21e6133d8be2f5f":[5,0,0,0,3,4,0],
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#afefa6520d2f82b63dd36d3425c7fa0b3":[5,0,0,0,3,4,3],
+"classcubos_1_1core_1_1io_1_1InputManager.html":[5,0,0,0,3,5],
+"classcubos_1_1core_1_1io_1_1SingleAxis.html":[5,0,0,0,3,6],
+"classcubos_1_1core_1_1io_1_1SingleAxis.html#a0712b7cf06e8eaf6b04bcbefdf4adef4":[5,0,0,0,3,6,2],
+"classcubos_1_1core_1_1io_1_1SingleAxis.html#a08ca5ca5e17b47acac8645d8d564b2d2":[5,0,0,0,3,6,5],
 "classcubos_1_1core_1_1io_1_1SingleAxis.html#a36b99c7af01fd93a85a2e4c1a5d506b0":[5,0,0,0,3,6,4],
 "classcubos_1_1core_1_1io_1_1SingleAxis.html#a69b9d9ada88af101582ceaca65a95340":[5,0,0,0,3,6,1],
 "classcubos_1_1core_1_1io_1_1SingleAxis.html#abb5eb4f13489e247deb74dc13ea857c3":[5,0,0,0,3,6,3],
@@ -239,15 +249,5 @@ var NAVTREEINDEX2 =
 "dir_95549d37735ad5b142799f042eef0d37.html":[6,0,0,0,0,0,0],
 "dir_996f45160da62e1a3d7f6046fad68f51.html":[6,0,1],
 "dir_9bdaf8f561be1ffd03f616379797b70b.html":[6,0,0,0,0,0,4],
-"dir_b6daa990b896c2c0c53126427e4d978d.html":[6,0,0,0,0,0,1],
-"dir_bafa501d493553e442f19f5f8dd7b29c.html":[6,0,1,0],
-"dir_bafb7af0e03e95b24a45ff63060ab57b.html":[6,0,1,0,0,0],
-"dir_c4311188e9cc606330f5e3e0b9dd5059.html":[6,0,0,0,0,0,2],
-"dir_f478c07aba78138ba98c84c32278121e.html":[6,0,0,0,0],
-"dir_f556bbe30cd07922836d0e9d7f5fa0a5.html":[6,0,0,0,0,0,5],
-"double__axis_8hpp_source.html":[6,0,0,0,0,0,3,0,1],
-"embedded__archive_8hpp_source.html":[6,0,0,0,0,0,0,4],
-"endianness_8hpp_source.html":[6,0,0,0,0,0,4,1],
-"engine.html":[2],
-"engine_2include_2cubos_2engine_2data_2grid_8hpp_source.html":[6,0,1,0,0,0,0,2]
+"dir_b6daa990b896c2c0c53126427e4d978d.html":[6,0,0,0,0,0,1]
 };

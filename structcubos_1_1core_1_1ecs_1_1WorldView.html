@@ -113,12 +113,13 @@ Collaboration diagram for cubos::core::ecs::WorldView&lt; ComponentTypes &gt;:</
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1WorldView_1_1Iterator.html">Iterator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the iterator.  <a href="structcubos_1_1core_1_1ecs_1_1WorldView_1_1Iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad4fd8c51ffbe3d67674212ef2758d0af"><td class="memItemLeft" align="right" valign="top"><a id="ad4fd8c51ffbe3d67674212ef2758d0af"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>WorldView</b> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;w)</td></tr>
+<tr class="memitem:ad4fd8c51ffbe3d67674212ef2758d0af"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1WorldView.html#ad4fd8c51ffbe3d67674212ef2758d0af">WorldView</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;w)</td></tr>
+<tr class="memdesc:ad4fd8c51ffbe3d67674212ef2758d0af"><td class="mdescLeft">&#160;</td><td class="mdescRight">The mask of the components to be iterated.  <a href="structcubos_1_1core_1_1ecs_1_1WorldView.html#ad4fd8c51ffbe3d67674212ef2758d0af">More...</a><br /></td></tr>
 <tr class="separator:ad4fd8c51ffbe3d67674212ef2758d0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad93e03e76a74df9e8bfa2bbe4052f007"><td class="memItemLeft" align="right" valign="top"><a id="ad93e03e76a74df9e8bfa2bbe4052f007"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValidIndex</b> (size_t index)</td></tr>
@@ -132,9 +133,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValidIndex</b> (siz
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ae190d5ea9160463c06b044aee4ed3fed"><td class="memItemLeft" align="right" valign="top"><a id="ae190d5ea9160463c06b044aee4ed3fed"></a>
-<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>world</b></td></tr>
-<tr class="separator:ae190d5ea9160463c06b044aee4ed3fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad942808863923af17bde04bdaa7c810e"><td class="memItemLeft" align="right" valign="top"><a id="ad942808863923af17bde04bdaa7c810e"></a>
+<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1WorldView.html#ad942808863923af17bde04bdaa7c810e">world</a></td></tr>
+<tr class="memdesc:ad942808863923af17bde04bdaa7c810e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The world being viewed. <br /></td></tr>
+<tr class="separator:ad942808863923af17bde04bdaa7c810e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11f3224ca03c5648890ed8a2a0892f4b"><td class="memItemLeft" align="right" valign="top"><a id="a11f3224ca03c5648890ed8a2a0892f4b"></a>
 std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mask</b></td></tr>
 <tr class="separator:a11f3224ca03c5648890ed8a2a0892f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,7 +152,36 @@ struct cubos::core::ecs::WorldView&lt; ComponentTypes &gt;</h3>
   </table>
   </dd>
 </dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad4fd8c51ffbe3d67674212ef2758d0af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4fd8c51ffbe3d67674212ef2758d0af">&#9670;&nbsp;</a></span>WorldView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... ComponentTypes&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcubos_1_1core_1_1ecs_1_1WorldView.html">cubos::core::ecs::WorldView</a>&lt; ComponentTypes &gt;::<a class="el" href="structcubos_1_1core_1_1ecs_1_1WorldView.html">WorldView</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;&#160;</td>
+          <td class="paramname"><em>w</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The mask of the components to be iterated. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">w</td><td>The world to be viewed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>core/include/cubos/core/ecs/<a class="el" href="world__view_8hpp_source.html">world_view.hpp</a></li>
 </ul>
 </div><!-- contents -->

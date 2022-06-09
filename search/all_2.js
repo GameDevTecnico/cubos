@@ -54,13 +54,14 @@ var searchData=
   ['cubinhos_90',['Cubinhos',['../cubinhos.html',1,'']]],
   ['cullenabled_91',['cullEnabled',['../structcubos_1_1core_1_1gl_1_1RasterStateDesc.html#a1b1fe8effe89efb5cc016aeff8c60b6b',1,'cubos::core::gl::RasterStateDesc']]],
   ['cullface_92',['cullFace',['../structcubos_1_1core_1_1gl_1_1RasterStateDesc.html#ab004a2a33f2bc9b5c9d55bf7fb751646',1,'cubos::core::gl::RasterStateDesc']]],
-  ['cursor_93',['Cursor',['../classcubos_1_1core_1_1io_1_1Cursor.html',1,'cubos::core::io']]],
-  ['cw_94',['CW',['../namespacecubos_1_1core_1_1gl.html#a432f9b0e7954700825e62c1d648112b4a9af3107a066f6b0defb1cafc0499f6ed',1,'cubos::core::gl']]],
-  ['data_95',['data',['../namespacecubos_1_1core_1_1data.html',1,'cubos::core']]],
-  ['ecs_96',['ecs',['../namespacecubos_1_1core_1_1ecs.html',1,'cubos::core']]],
-  ['gl_97',['gl',['../namespacecubos_1_1core_1_1gl.html',1,'cubos::core']]],
-  ['impl_98',['impl',['../namespacecubos_1_1core_1_1gl_1_1impl.html',1,'cubos::core::gl']]],
-  ['io_99',['io',['../namespacecubos_1_1core_1_1io.html',1,'cubos::core']]],
-  ['memory_100',['memory',['../namespacecubos_1_1core_1_1memory.html',1,'cubos::core']]],
-  ['ui_101',['ui',['../namespacecubos_1_1core_1_1ui.html',1,'cubos::core']]]
+  ['current_93',['current',['../structcubos_1_1core_1_1ecs_1_1WorldView_1_1Iterator.html#af6a9aa6101a7811ed6fdeaee97a3d62b',1,'cubos::core::ecs::WorldView::Iterator']]],
+  ['cursor_94',['Cursor',['../classcubos_1_1core_1_1io_1_1Cursor.html',1,'cubos::core::io']]],
+  ['cw_95',['CW',['../namespacecubos_1_1core_1_1gl.html#a432f9b0e7954700825e62c1d648112b4a9af3107a066f6b0defb1cafc0499f6ed',1,'cubos::core::gl']]],
+  ['data_96',['data',['../namespacecubos_1_1core_1_1data.html',1,'cubos::core']]],
+  ['ecs_97',['ecs',['../namespacecubos_1_1core_1_1ecs.html',1,'cubos::core']]],
+  ['gl_98',['gl',['../namespacecubos_1_1core_1_1gl.html',1,'cubos::core']]],
+  ['impl_99',['impl',['../namespacecubos_1_1core_1_1gl_1_1impl.html',1,'cubos::core::gl']]],
+  ['io_100',['io',['../namespacecubos_1_1core_1_1io.html',1,'cubos::core']]],
+  ['memory_101',['memory',['../namespacecubos_1_1core_1_1memory.html',1,'cubos::core']]],
+  ['ui_102',['ui',['../namespacecubos_1_1core_1_1ui.html',1,'cubos::core']]]
 ];

@@ -103,6 +103,9 @@ var hierarchy =
       [ "cubos::core::memory::BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html", null ],
       [ "cubos::core::memory::StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html", null ]
     ] ],
+    [ "cubos::core::ecs::System", "classcubos_1_1core_1_1ecs_1_1System.html", [
+      [ "cubos::core::ecs::IteratingSystem< ComponentTypes >", "classcubos_1_1core_1_1ecs_1_1IteratingSystem.html", null ]
+    ] ],
     [ "cubos::core::gl::impl::Texture1D", "classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html", null ],
     [ "cubos::core::gl::Texture1DDesc", "structcubos_1_1core_1_1gl_1_1Texture1DDesc.html", null ],
     [ "cubos::core::gl::impl::Texture2D", "classcubos_1_1core_1_1gl_1_1impl_1_1Texture2D.html", null ],
