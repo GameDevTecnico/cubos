@@ -2,6 +2,8 @@
 
 using namespace cubos::core::ecs;
 
+size_t World::nextGlobalComponentId = 0;
+
 World::~World()
 {
     for (auto* storage : storages)

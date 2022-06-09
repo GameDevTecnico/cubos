@@ -67,6 +67,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ui/imgui.cpp"
 
     "src/cubos/core/ecs/world.cpp"
+    "src/cubos/core/ecs/system.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE
@@ -123,6 +124,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/vec_storage.hpp"
     "include/cubos/core/ecs/map_storage.hpp"
     "include/cubos/core/ecs/null_storage.hpp"
+    "include/cubos/core/ecs/system.hpp"
+    "include/cubos/core/ecs/iterating_system.hpp"
 )
 
 # Create core library
