@@ -898,6 +898,29 @@ public:
             glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
     }
 
+    virtual void bind(gl::Texture2D _tex, int level, Access _access) override
+    {
+        auto tex = std::static_pointer_cast<OGLTexture2D>(_tex);
+        GLenum access;
+        switch (_access)
+        {
+        case Access::Read:
+            access = GL_READ_ONLY;
+            break;
+        case Access::Write:
+            access = GL_WRITE_ONLY;
+            break;
+        case Access::ReadWrite:
+            access = GL_READ_WRITE;
+            break;
+        default:
+            abort();
+        }
+
+        glUniform1i(this->loc, this->tex);
+        glBindImageTexture(this->tex, tex->id, level, GL_TRUE, 0, access, tex->internalFormat);
+    }
+
     virtual void setConstant(glm::vec2 val) override
     {
         glUniform2fv(loc, 1, &val[0]);
@@ -981,6 +1004,10 @@ public:
         : OGLShaderPipeline(vs, ps, program)
     {
         this->gs = gs;
+    }
+
+    OGLShaderPipeline(ShaderStage cs, GLuint program) : cs(cs), program(program)
+    {
         this->texCount = 0;
         this->uboCount = 0;
         this->ssboCount = 0;
@@ -1051,7 +1078,7 @@ public:
         return nullptr;
     }
 
-    ShaderStage vs, gs, ps;
+    ShaderStage vs, gs, ps, cs;
     GLuint program;
     std::list<OGLShaderBindingPoint> bps;
 
@@ -1953,6 +1980,9 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     case Stage::Pixel:
         shader_type = GL_FRAGMENT_SHADER;
         break;
+    case Stage::Compute:
+        shader_type = GL_COMPUTE_SHADER;
+        break;
     }
 
     // Initialize shader
@@ -2052,7 +2082,40 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderPipeline>(vs, ps, id);
+    return std::make_shared<OGLShaderPipeline>(vs, gs, ps, id);
+}
+
+ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _cs)
+{
+    auto cs = std::static_pointer_cast<OGLShaderStage>(_cs);
+
+    // Initialize program
+    auto id = glCreateProgram();
+    glAttachShader(id, cs->shader);
+    glLinkProgram(id);
+
+    // Check for linking errors
+    GLint success;
+    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        GLchar infoLog[512];
+        glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        return nullptr;
+    }
+
+    // Check for OpenGL errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLShaderPipeline>(cs, id);
 }
 
 void OGLRenderDevice::setShaderPipeline(ShaderPipeline pipeline)
@@ -2105,6 +2168,29 @@ void OGLRenderDevice::drawTrianglesIndexedInstanced(size_t offset, size_t count,
                             instanceCount);
 }
 
+void OGLRenderDevice::dispatchCompute(size_t x, size_t y, size_t z)
+{
+    glDispatchCompute(x, y, z);
+}
+
+void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
+{
+    GLbitfield barrier = 0;
+    if ((barriers & MemoryBarriers::VertexBuffer) != MemoryBarriers::None)
+        barrier |= GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::IndexBuffer) != MemoryBarriers::None)
+        barrier |= GL_ELEMENT_ARRAY_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::ConstantBuffer) != MemoryBarriers::None)
+        barrier |= GL_UNIFORM_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::ImageAccess) != MemoryBarriers::None)
+        barrier |= GL_SHADER_IMAGE_ACCESS_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::TextureAccess) != MemoryBarriers::None)
+        barrier |= GL_TEXTURE_FETCH_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::Framebuffer) != MemoryBarriers::None)
+        barrier |= GL_FRAMEBUFFER_BARRIER_BIT;
+    glMemoryBarrier(barrier);
+}
+
 void OGLRenderDevice::setViewport(int x, int y, int w, int h)
 {
     glViewport(x, y, w, h);
@@ -2112,6 +2198,8 @@ void OGLRenderDevice::setViewport(int x, int y, int w, int h)
 
 int OGLRenderDevice::getProperty(Property prop)
 {
+    GLint major, minor;
+
     switch (prop)
     {
     case Property::MaxAnisotropy:
@@ -2123,6 +2211,11 @@ int OGLRenderDevice::getProperty(Property prop)
             glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &val);
             return static_cast<int>(val);
         }
+
+    case Property::ComputeSupported:
+        glGetIntegerv(GL_MAJOR_VERSION, &major);
+        glGetIntegerv(GL_MINOR_VERSION, &minor);
+        return (major >= 4 && minor >= 3) ? 1 : 0;
 
     default:
         return -1;

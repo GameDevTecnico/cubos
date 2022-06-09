@@ -4,6 +4,7 @@
 # Set sample source files
 set(CORE_SAMPLES_SOURCES
     "render_device.cpp"
+    "render_device_compute.cpp"
     "debug_renderer.cpp"
     "serialization.cpp"
     "input_manager.cpp"
