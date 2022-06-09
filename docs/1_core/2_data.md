@@ -1,7 +1,7 @@
 # Data {#core-data}
 
-The data namespace \ref cubos::core::data "core::data" provides utilities for interacting with files
-and also provides a serialization system.
+The namespace \ref cubos::core::data provides utilities for
+interacting with files and also provides a serialization system.
 
 ## File System
 
