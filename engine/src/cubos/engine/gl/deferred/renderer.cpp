@@ -378,7 +378,7 @@ void deferred::Renderer::setPalette(const core::gl::Palette& palette)
         }
     }
 
-    // Update the data to the GPU.
+    // Update the data on the GPU.
     this->paletteTex->update(0, 0, 256, 256, data.data());
 }
 

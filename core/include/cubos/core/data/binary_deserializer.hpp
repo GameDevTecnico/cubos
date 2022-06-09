@@ -8,7 +8,7 @@
 
 namespace cubos::core::data
 {
-    /// Implementation of the abstract Deserializer class for deserializng from raw binary data.
+    /// Implementation of the abstract Deserializer class for deserializing from raw binary data.
     /// This class allows data to be deserialized from both little and big endian formats.
     class BinaryDeserializer : public Deserializer
     {
