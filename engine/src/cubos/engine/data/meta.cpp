@@ -31,11 +31,12 @@ const std::unordered_map<std::string, std::string>& Meta::getParameters() const
     return this->parameters;
 }
 
-void Meta::serialize(core::memory::Serializer& serializer) const
+void cubos::core::data::serialize(Serializer& serializer, const Meta& meta, const char* name)
 {
-    serializer.write(this->id, "id");
-    serializer.write(this->type, "type");
-    switch (this->usage)
+    serializer.beginObject(name);
+    serializer.write(meta.id, "id");
+    serializer.write(meta.type, "type");
+    switch (meta.usage)
     {
     case Usage::Static:
         serializer.write("Static", "usage");
@@ -44,28 +45,31 @@ void Meta::serialize(core::memory::Serializer& serializer) const
         serializer.write("Dynamic", "usage");
         break;
     }
-    serializer.write(this->parameters, "params");
+    serializer.write(meta.parameters, "params");
+    serializer.endObject();
 }
 
-void Meta::deserialize(core::memory::Deserializer& deserializer)
+void cubos::core::data::deserialize(Deserializer& deserializer, Meta& meta)
 {
     std::string usage;
-    deserializer.read(this->id);
-    deserializer.read(this->type);
+    deserializer.beginObject();
+    deserializer.read(meta.id);
+    deserializer.read(meta.type);
     deserializer.read(usage);
-    deserializer.read(this->parameters);
+    deserializer.read(meta.parameters);
+    deserializer.endObject();
 
     if (usage == "Static")
     {
-        this->usage = Usage::Static;
+        meta.usage = Usage::Static;
     }
     else if (usage == "Dynamic")
     {
-        this->usage = Usage::Dynamic;
+        meta.usage = Usage::Dynamic;
     }
     else
     {
-        core::logError("asset::Meta::deserialize() failed: Invalid usage type '{}'", usage);
-        abort();
+        core::logError("asset::Meta::deserialize() failed: Invalid usage type '{}', defaulting to Static", usage);
+        meta.usage = Usage::Static;
     }
 }

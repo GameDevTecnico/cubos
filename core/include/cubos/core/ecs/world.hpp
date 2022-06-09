@@ -5,8 +5,8 @@
 #include <cubos/core/ecs/storage.hpp>
 
 #include <cassert>
-#include <cinttypes>
 #include <unordered_map>
+#include <cstddef>
 
 namespace cubos::core::ecs
 {

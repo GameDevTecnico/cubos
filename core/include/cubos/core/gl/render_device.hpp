@@ -67,7 +67,8 @@ namespace cubos::core::gl
     /// @see RenderDevice::getProperty().
     enum class Property
     {
-        MaxAnisotropy
+        MaxAnisotropy,    ///< Specifies the upper bound of anisotropic filtering.
+        ComputeSupported, ///< Specifies whether compute shaders are supported (0 or 1).
     };
 
     /// Usage mode for buffers and textures.
@@ -235,9 +236,10 @@ namespace cubos::core::gl
         Vertex,
         Geometry,
         Pixel,
+        Compute,
     };
 
-    // Cube map face.
+    /// Cube map face.
     enum class CubeFace
     {
         PositiveX = 0,
@@ -246,6 +248,48 @@ namespace cubos::core::gl
         NegativeY = 3,
         PositiveZ = 4,
         NegativeZ = 5,
+    };
+
+    /// Memory barrier flags for synchronization.
+    enum class MemoryBarriers
+    {
+        /// Utility flag to indicate that no memory barrier is set.
+        None = 0,
+
+        /// If set, data sourced from vertex buffers after the barrier will reflect the data written
+        /// by shaders prior to the barrier.
+        VertexBuffer = 1,
+
+        /// If set, data sourced from index buffers after the barrier will reflect the data written
+        /// by shaders prior to the barrier.
+        IndexBuffer = 2,
+
+        /// If set, data sourced from constant buffers after the barrier will reflect the data written
+        /// by shaders prior to the barrier.
+        ConstantBuffer = 4,
+
+        /// If set, memory accesses using shader image load, store, and atomic built-in functions issued after the
+        /// barrier will reflect the data written by shaders prior to the barrier.
+        ImageAccess = 8,
+
+        /// If set, texture accesses from shaders after the barrier will reflect the data written by shaders
+        /// prior to the barrier.
+        TextureAccess = 16,
+
+        /// If set, reads and writes via framebuffer objects after the barrier will reflect the data written
+        /// by shaders prior to the barrier.
+        Framebuffer = 32,
+
+        /// Utility flag to set all memory barriers.
+        All = VertexBuffer | IndexBuffer | ConstantBuffer | ImageAccess | TextureAccess | Framebuffer,
+    };
+
+    /// Access mode for a resource.
+    enum class Access
+    {
+        Read,      ///< Read access.
+        Write,     ///< Write access.
+        ReadWrite, ///< Read and write access.
     };
 
     enum class BufferStorageType
@@ -288,12 +332,6 @@ namespace cubos::core::gl
 
         struct FramebufferTarget
         {
-        private:
-            bool set = false;
-            TargetType type; ///< Type of the currently set target.
-
-            std::variant<CubeMapTarget, Texture2DTarget, CubeMapArrayTarget, Texture2DArrayTarget> target;
-
         public:
             uint32_t mipLevel = 0; ///< Mip level of the target which will be set as a render target.
 
@@ -316,6 +354,11 @@ namespace cubos::core::gl
 
             void setCubeMapArrayTarget(const CubeMapArray& handle);
 
+        private:
+            bool set = false;
+            TargetType type; ///< Type of the currently set target.
+
+            std::variant<CubeMapTarget, Texture2DTarget, CubeMapArrayTarget, Texture2DArrayTarget> target;
         } targets[CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
         uint32_t targetCount = 1;       ///< Number of render targets.
@@ -329,6 +372,7 @@ namespace cubos::core::gl
         Face cullFace = Face::Back;               ///< Face that will be culled.
         Winding frontFace = Winding::CCW;         ///< Front face winding.
         RasterMode rasterMode = RasterMode::Fill; ///< Rasterizer mode.
+        bool scissorEnabled = false;              ///< Is scissor test enabled?
     };
 
     /// Depth stencil state description.
@@ -590,15 +634,6 @@ namespace cubos::core::gl
         /// @return Constant buffer handle, or nullptr if the creation failed.
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) = 0;
 
-        /// Creates a new constant buffer.
-        /// @param size Size in bytes.
-        /// @param data Initial data, can be nullptr.
-        /// @param usage The usage which the buffer will have.
-        /// @param storage The intended storage type for the buffer.
-        /// @return Constant buffer handle, or nullptr if the creation failed.
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
-                                                    BufferStorageType storage) = 0;
-
         /// Creates a new index buffer.
         /// @param size Size in bytes.
         /// @param data Initial data, can be nullptr.
@@ -625,6 +660,8 @@ namespace cubos::core::gl
         virtual void setVertexArray(VertexArray va) = 0;
 
         /// Creates a new shader stage from GLSL source code.
+        /// Compute shaders aren't supported on some platforms. Support can be queried using
+        /// `renderDevice.getProperty(Property::ComputeSupported)`.
         /// @return Shader stage handle, or nullptr if the creation failed.
         virtual ShaderStage createShaderStage(Stage stage, const char* src) = 0;
 
@@ -640,6 +677,13 @@ namespace cubos::core::gl
         /// @param ps Pixel shader stage.
         /// @return Shader pipeline handle, or nullptr if the creation failed.
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps) = 0;
+
+        /// Creates a new shader pipeline from a compute shader.
+        /// Compute shaders aren't supported on some platforms. Support can be queried using
+        /// `renderDevice.getProperty(Property::ComputeSupported)`.
+        /// @param cs Compute shader stage.
+        /// @return Shader pipeline handle, or nullptr if the creation failed.
+        virtual ShaderPipeline createShaderPipeline(ShaderStage cs) = 0;
 
         /// Sets the current shader pipeline used for rendering.
         virtual void setShaderPipeline(ShaderPipeline pipeline) = 0;
@@ -678,12 +722,33 @@ namespace cubos::core::gl
         /// @param instanceCount Number of instances drawn.
         virtual void drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount) = 0;
 
+        /// Dispatches a compute pipeline.
+        /// @param x X dimension of the work group.
+        /// @param y Y dimension of the work group.
+        /// @param z Z dimension of the work group.
+        virtual void dispatchCompute(size_t x, size_t y, size_t z) = 0;
+
+        /// Defines a barrier ordering memory transactions.
+        /// This ensure that all memory transactions before the barrier are completed before the
+        /// barrier is executed.
+        /// This function isn't supported on some platforms. Support can be queried using
+        /// `renderDevice.getProperty(Property::ComputeSupported)`.
+        /// @param barriers The barriers to apply.
+        virtual void memoryBarrier(MemoryBarriers barriers) = 0;
+
         /// Sets the current viewport.
         /// @param x Bottom left viewport corner X coordinate.
         /// @param y Bottom left viewport corner Y coordinate.
         /// @param w Viewport width.
         /// @param h Viewport height.
         virtual void setViewport(int x, int y, int w, int h) = 0;
+
+        /// Sets the current scissor rectangle.
+        /// @param x Bottom left scissor rectangle corner X coordinate.
+        /// @param y Bottom left scissor rectangle corner Y coordinate.
+        /// @param w Scissor rectangle width.
+        /// @param h Scissor rectangle height.
+        virtual void setScissor(int x, int y, int w, int h) = 0;
 
         /// Gets a runtime property of the render device.
         /// @param prop Property name.
@@ -881,8 +946,6 @@ namespace cubos::core::gl
 
             /// Unmaps the constant buffer, updating it with data written to the mapped region.
             virtual void unmap() = 0;
-            /// Get hint as to what underlying storage type is being used for the buffer.
-            virtual BufferStorageType getStorageTypeHint() = 0;
 
         protected:
             ConstantBuffer() = default;
@@ -992,6 +1055,12 @@ namespace cubos::core::gl
             /// If this binding point doesn't support a constant buffer, an error is logged and nothing is done.
             virtual void bind(gl::ConstantBuffer cb) = 0;
 
+            /// Binds a level of a 2D texture to an image unit.
+            /// If this binding point doesn't support an image unit, an error is logged and nothing is done.
+            /// This function isn't supported on some platforms. Support can be queried using
+            /// `renderDevice.getProperty(Property::ComputeSupported)`.
+            virtual void bind(gl::Texture2D tex, int level, Access access) = 0;
+
             /// Sets the value of the uniform tied to the binding point to the provided vec2 value.
             virtual void setConstant(glm::vec2 val) = 0;
 
@@ -1038,6 +1107,31 @@ namespace cubos::core::gl
             virtual ~ShaderBindingPoint() = default;
         };
     } // namespace impl
+
+    // Operator overloads for MemoryBarriers.
+
+    inline MemoryBarriers operator|(MemoryBarriers lhs, MemoryBarriers rhs)
+    {
+        return static_cast<MemoryBarriers>(static_cast<int>(lhs) | static_cast<int>(rhs));
+    }
+
+    inline MemoryBarriers operator&(MemoryBarriers lhs, MemoryBarriers rhs)
+    {
+        return static_cast<MemoryBarriers>(static_cast<int>(lhs) & static_cast<int>(rhs));
+    }
+
+    inline MemoryBarriers& operator|=(MemoryBarriers& lhs, MemoryBarriers rhs)
+    {
+        lhs = lhs | rhs;
+        return lhs;
+    }
+
+    inline MemoryBarriers& operator&=(MemoryBarriers& lhs, MemoryBarriers rhs)
+    {
+        lhs = lhs & rhs;
+        return lhs;
+    }
+
 } // namespace cubos::core::gl
 
 #endif // CUBOS_CORE_GL_RENDER_DEVICE_HPP

@@ -57,7 +57,7 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         type = GL_BYTE;
         break;
     case TextureFormat::RGBA8UNorm:
-        internalFormat = GL_RGBA8;
+        internalFormat = GL_RGBA;
         format = GL_RGBA;
         type = GL_UNSIGNED_BYTE;
         break;
@@ -440,6 +440,7 @@ public:
     virtual ~OGLRasterState() = default;
 
     GLboolean cullEnabled;
+    GLboolean scissorEnabled;
     GLenum frontFace;
     GLenum cullFace;
     GLenum polygonMode;
@@ -700,7 +701,7 @@ public:
 class OGLConstantBuffer : public impl::ConstantBuffer
 {
 public:
-    OGLConstantBuffer(GLuint id, GLenum bufferType) : id(id), bufferType(bufferType)
+    OGLConstantBuffer(GLuint id) : id(id)
     {
     }
 
@@ -711,37 +712,22 @@ public:
 
     virtual void* map() override
     {
-        glBindBuffer(bufferType, this->id);
-        return glMapBuffer(bufferType, GL_WRITE_ONLY);
+        glBindBuffer(GL_UNIFORM_BUFFER, this->id);
+        return glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
     }
 
     virtual void unmap() override
     {
-        glUnmapBuffer(bufferType);
-    }
-
-    virtual BufferStorageType getStorageTypeHint() override
-    {
-        switch (bufferType)
-        {
-        case GL_UNIFORM_BUFFER:
-            return BufferStorageType::Small;
-        case GL_SHADER_STORAGE_BUFFER:
-            return BufferStorageType::Large;
-        default:
-            logError("OGLContantBuffer::getStorageTypeHint() failed: Invalid bufferType value.");
-            abort();
-        }
+        glUnmapBuffer(GL_UNIFORM_BUFFER);
     }
 
     GLuint id;
-    GLenum bufferType;
 };
 
 class OGLIndexBuffer : public impl::IndexBuffer
 {
 public:
-    OGLIndexBuffer(GLuint id, GLenum format) : id(id), format(format)
+    OGLIndexBuffer(GLuint id, GLenum format, size_t indexSz) : id(id), format(format), indexSz(indexSz)
     {
     }
 
@@ -763,6 +749,7 @@ public:
 
     GLenum format;
     GLuint id;
+    size_t indexSz;
 };
 
 class OGLVertexBuffer : public impl::VertexBuffer
@@ -908,10 +895,32 @@ public:
     virtual void bind(ConstantBuffer cb) override
     {
         if (cb)
-            glBindBufferBase(std::static_pointer_cast<OGLConstantBuffer>(cb)->bufferType, this->loc,
-                             std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+            glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
         else
             glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
+    }
+
+    virtual void bind(gl::Texture2D _tex, int level, Access _access) override
+    {
+        auto tex = std::static_pointer_cast<OGLTexture2D>(_tex);
+        GLenum access;
+        switch (_access)
+        {
+        case Access::Read:
+            access = GL_READ_ONLY;
+            break;
+        case Access::Write:
+            access = GL_WRITE_ONLY;
+            break;
+        case Access::ReadWrite:
+            access = GL_READ_WRITE;
+            break;
+        default:
+            abort();
+        }
+
+        glUniform1i(this->loc, this->tex);
+        glBindImageTexture(this->tex, tex->id, level, GL_TRUE, 0, access, tex->internalFormat);
     }
 
     virtual void setConstant(glm::vec2 val) override
@@ -997,6 +1006,10 @@ public:
         : OGLShaderPipeline(vs, ps, program)
     {
         this->gs = gs;
+    }
+
+    OGLShaderPipeline(ShaderStage cs, GLuint program) : cs(cs), program(program)
+    {
         this->texCount = 0;
         this->uboCount = 0;
         this->ssboCount = 0;
@@ -1067,7 +1080,7 @@ public:
         return nullptr;
     }
 
-    ShaderStage vs, gs, ps;
+    ShaderStage vs, gs, ps, cs;
     GLuint program;
     std::list<OGLShaderBindingPoint> bps;
 
@@ -1079,6 +1092,8 @@ private:
 
 OGLRenderDevice::OGLRenderDevice()
 {
+    glGetString(GL_VERSION);
+
     // Create default states
     this->defaultRS = this->createRasterState({});
     this->defaultDSS = this->createDepthStencilState({});
@@ -1274,6 +1289,7 @@ RasterState OGLRenderDevice::createRasterState(const RasterStateDesc& desc)
 {
     auto rs = std::make_shared<OGLRasterState>();
     rs->cullEnabled = desc.cullEnabled;
+    rs->scissorEnabled = desc.scissorEnabled;
     faceToGL(desc.cullFace, rs->cullFace);
     windingToGL(desc.frontFace, rs->frontFace);
     rasterModeToGL(desc.rasterMode, rs->polygonMode);
@@ -1291,6 +1307,11 @@ void OGLRenderDevice::setRasterState(RasterState _rs)
         glEnable(GL_CULL_FACE);
         glCullFace(rs->cullFace);
     }
+
+    if (!rs->scissorEnabled)
+        glDisable(GL_SCISSOR_TEST);
+    else
+        glEnable(GL_SCISSOR_TEST);
 
     glFrontFace(rs->frontFace);
     glPolygonMode(GL_FRONT_AND_BACK, rs->polygonMode);
@@ -1509,6 +1530,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     GLuint id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
         glTexImage2D(GL_TEXTURE_2D, i, internalFormat, desc.width / div, desc.height / div, 0, format, type,
                      desc.data[i]);
@@ -1715,20 +1737,6 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage)
 {
-    // Choose SSBO or UBO depending on given buffer size
-    GLint maxUniformBufferSize;
-    glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &maxUniformBufferSize);
-    BufferStorageType storage;
-    if (size > maxUniformBufferSize)
-        storage = BufferStorageType::Large;
-    else
-        storage = BufferStorageType::Small;
-    return createConstantBuffer(size, data, usage, storage);
-}
-
-ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage,
-                                                     BufferStorageType storage)
-{
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
         abort();
@@ -1743,17 +1751,11 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
     else
         abort(); // Invalid enum value
 
-    GLenum bufferType;
-    if (storage == BufferStorageType::Small)
-        bufferType = GL_UNIFORM_BUFFER;
-    else
-        bufferType = GL_SHADER_STORAGE_BUFFER;
-
     // Initialize buffer
     GLuint id;
     glGenBuffers(1, &id);
-    glBindBuffer(bufferType, id);
-    glBufferData(bufferType, size, data, glUsage);
+    glBindBuffer(GL_UNIFORM_BUFFER, id);
+    glBufferData(GL_UNIFORM_BUFFER, size, data, glUsage);
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1764,7 +1766,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
         return nullptr;
     }
 
-    return std::make_shared<OGLConstantBuffer>(id, bufferType);
+    return std::make_shared<OGLConstantBuffer>(id);
 }
 
 IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage)
@@ -1784,10 +1786,17 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
         abort(); // Invalid enum value
 
     GLenum glFormat;
+    size_t indexSz;
     if (format == IndexFormat::UShort)
+    {
         glFormat = GL_UNSIGNED_SHORT;
+        indexSz = 2;
+    }
     else if (format == IndexFormat::UInt)
+    {
         glFormat = GL_UNSIGNED_INT;
+        indexSz = 4;
+    }
     else
         abort(); // Invalid enum value
 
@@ -1806,7 +1815,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
         return nullptr;
     }
 
-    return std::make_shared<OGLIndexBuffer>(id, glFormat);
+    return std::make_shared<OGLIndexBuffer>(id, glFormat, indexSz);
 }
 
 void OGLRenderDevice::setIndexBuffer(IndexBuffer _ib)
@@ -1814,6 +1823,7 @@ void OGLRenderDevice::setIndexBuffer(IndexBuffer _ib)
     auto ib = std::static_pointer_cast<OGLIndexBuffer>(_ib);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib->id);
     this->currentIndexFormat = ib->format;
+    this->currentIndexSz = ib->indexSz;
 }
 
 VertexBuffer OGLRenderDevice::createVertexBuffer(size_t size, const void* data, Usage usage)
@@ -1987,6 +1997,9 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     case Stage::Pixel:
         shader_type = GL_FRAGMENT_SHADER;
         break;
+    case Stage::Compute:
+        shader_type = GL_COMPUTE_SHADER;
+        break;
     }
 
     // Initialize shader
@@ -2086,7 +2099,40 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderPipeline>(vs, ps, id);
+    return std::make_shared<OGLShaderPipeline>(vs, gs, ps, id);
+}
+
+ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _cs)
+{
+    auto cs = std::static_pointer_cast<OGLShaderStage>(_cs);
+
+    // Initialize program
+    auto id = glCreateProgram();
+    glAttachShader(id, cs->shader);
+    glLinkProgram(id);
+
+    // Check for linking errors
+    GLint success;
+    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        GLchar infoLog[512];
+        glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        return nullptr;
+    }
+
+    // Check for OpenGL errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteProgram(id);
+        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLShaderPipeline>(cs, id);
 }
 
 void OGLRenderDevice::setShaderPipeline(ShaderPipeline pipeline)
@@ -2125,7 +2171,8 @@ void OGLRenderDevice::drawTriangles(size_t offset, size_t count)
 
 void OGLRenderDevice::drawTrianglesIndexed(size_t offset, size_t count)
 {
-    glDrawElements(GL_TRIANGLES, count, this->currentIndexFormat, reinterpret_cast<const void*>(offset));
+    glDrawElements(GL_TRIANGLES, count, this->currentIndexFormat,
+                   reinterpret_cast<const void*>(offset * this->currentIndexSz));
 }
 
 void OGLRenderDevice::drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount)
@@ -2135,8 +2182,31 @@ void OGLRenderDevice::drawTrianglesInstanced(size_t offset, size_t count, size_t
 
 void OGLRenderDevice::drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount)
 {
-    glDrawElementsInstanced(GL_TRIANGLES, count, this->currentIndexFormat, reinterpret_cast<const void*>(offset),
-                            instanceCount);
+    glDrawElementsInstanced(GL_TRIANGLES, count, this->currentIndexFormat,
+                            reinterpret_cast<const void*>(offset * this->currentIndexSz), instanceCount);
+}
+
+void OGLRenderDevice::dispatchCompute(size_t x, size_t y, size_t z)
+{
+    glDispatchCompute(x, y, z);
+}
+
+void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
+{
+    GLbitfield barrier = 0;
+    if ((barriers & MemoryBarriers::VertexBuffer) != MemoryBarriers::None)
+        barrier |= GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::IndexBuffer) != MemoryBarriers::None)
+        barrier |= GL_ELEMENT_ARRAY_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::ConstantBuffer) != MemoryBarriers::None)
+        barrier |= GL_UNIFORM_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::ImageAccess) != MemoryBarriers::None)
+        barrier |= GL_SHADER_IMAGE_ACCESS_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::TextureAccess) != MemoryBarriers::None)
+        barrier |= GL_TEXTURE_FETCH_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::Framebuffer) != MemoryBarriers::None)
+        barrier |= GL_FRAMEBUFFER_BARRIER_BIT;
+    glMemoryBarrier(barrier);
 }
 
 void OGLRenderDevice::setViewport(int x, int y, int w, int h)
@@ -2144,8 +2214,15 @@ void OGLRenderDevice::setViewport(int x, int y, int w, int h)
     glViewport(x, y, w, h);
 }
 
+void OGLRenderDevice::setScissor(int x, int y, int w, int h)
+{
+    glScissor(x, y, w, h);
+}
+
 int OGLRenderDevice::getProperty(Property prop)
 {
+    GLint major, minor;
+
     switch (prop)
     {
     case Property::MaxAnisotropy:
@@ -2157,6 +2234,11 @@ int OGLRenderDevice::getProperty(Property prop)
             glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &val);
             return static_cast<int>(val);
         }
+
+    case Property::ComputeSupported:
+        glGetIntegerv(GL_MAJOR_VERSION, &major);
+        glGetIntegerv(GL_MINOR_VERSION, &minor);
+        return (major >= 4 && minor >= 3) ? 1 : 0;
 
     default:
         return -1;

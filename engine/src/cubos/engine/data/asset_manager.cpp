@@ -1,6 +1,6 @@
 #include <cubos/engine/data/asset_manager.hpp>
 
-#include <cubos/core/memory/yaml_deserializer.hpp>
+#include <cubos/core/data/yaml_deserializer.hpp>
 
 using namespace cubos;
 using namespace cubos::engine::data;

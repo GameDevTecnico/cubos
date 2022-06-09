@@ -4,12 +4,23 @@ using namespace cubos::core::gl;
 
 const Material Material::Empty = {{0, 0, 0, 0}};
 
-void Material::serialize(memory::Serializer& serializer) const
+/// Returns the similarity between two colors.
+static float colorSimilarity(const glm::vec4& a, const glm::vec4& b)
 {
-    serializer.write(color, "color");
+    return 1.0f - (glm::abs(a.r - b.r) + glm::abs(a.g - b.g) + glm::abs(a.b - b.b) + glm::abs(a.a - b.a)) / 4.0f;
 }
 
-void Material::deserialize(memory::Deserializer& deserializer)
+float Material::similarity(const Material& other) const
 {
-    deserializer.read(color);
+    return colorSimilarity(this->color, other.color);
+}
+
+void cubos::core::data::serialize(Serializer& serializer, const Material& mat, const char* name)
+{
+    serializer.write(mat.color, name);
+}
+
+void cubos::core::data::deserialize(Deserializer& deserializer, Material& mat)
+{
+    deserializer.read(mat.color);
 }

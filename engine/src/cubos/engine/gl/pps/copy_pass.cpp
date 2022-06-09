@@ -1,79 +1,81 @@
+#include <cubos/core/gl/util.hpp>
+
 #include <cubos/engine/gl/pps/copy_pass.hpp>
 
-using namespace cubos;
-using namespace cubos::core;
 using namespace cubos::core::gl;
-using namespace cubos::engine;
+using namespace cubos::engine::gl;
 
-engine::gl::pps::CopyPass::CopyPass(io::Window& window) : Pass(window)
+/// The vertex shader of the copy pass.
+static const char* COPY_VS = R"glsl(
+#version 330 core
+
+in vec4 position;
+in vec2 uv;
+
+out vec2 fragUv;
+
+void main(void)
 {
-    auto vertex = renderDevice.createShaderStage(Stage::Vertex, R"(
-            #version 330 core
+    gl_Position = position;
+    fragUv = uv;
+}
+)glsl";
 
-            in vec4 position;
-            in vec2 uv;
+/// The pixel shader of the copy pass.
+static const char* COPY_PS = R"glsl(
+#version 330 core
 
-            out vec2 fraguv;
+in vec2 fragUv;
 
-            void main(void)
-            {
-                gl_Position = position;
-                fraguv = uv;
-            }
-        )");
+uniform sampler2D inputTex;
 
-    auto pixel = renderDevice.createShaderStage(Stage::Pixel, R"(
-            #version 430 core
+out vec4 color;
 
-            in vec2 fraguv;
+void main()
+{
+    color = texture(inputTex, fragUv);
+}
+)glsl";
 
-            uniform sampler2D inputTex;
+pps::CopyPass::CopyPass(RenderDevice& renderDevice, glm::uvec2 size) : Pass(renderDevice), size(size)
+{
+    // Create the shader pipeline.
+    auto vs = this->renderDevice.createShaderStage(Stage::Vertex, COPY_VS);
+    auto ps = this->renderDevice.createShaderStage(Stage::Pixel, COPY_PS);
+    this->pipeline = this->renderDevice.createShaderPipeline(vs, ps);
+    this->inputTexBP = this->pipeline->getBindingPoint("inputTex");
 
-            out vec4 color;
+    // Create the screen quad VA.
+    generateScreenQuad(this->renderDevice, this->pipeline, this->screenQuadVA);
 
-            void main()
-            {
-                color = texture(inputTex, fraguv);
-            }
-        )");
-
-    pipeline = renderDevice.createShaderPipeline(vertex, pixel);
-
-    renderDevice.setShaderPipeline(pipeline);
-
-    inputTexBP = pipeline->getBindingPoint("inputTex");
-
+    // Create the sampler.
     SamplerDesc samplerDesc;
     samplerDesc.addressU = AddressMode::Clamp;
     samplerDesc.addressV = AddressMode::Clamp;
     samplerDesc.magFilter = TextureFilter::Nearest;
     samplerDesc.minFilter = TextureFilter::Nearest;
-    inputTexSampler = renderDevice.createSampler(samplerDesc);
-
-    inputTexBP->bind(inputTexSampler);
+    this->inputTexSampler = this->renderDevice.createSampler(samplerDesc);
 }
 
-void engine::gl::pps::CopyPass::execute(const Renderer& renderer, Texture2D input, Framebuffer output) const
+void pps::CopyPass::resize(glm::uvec2 size)
 {
-    renderDevice.setShaderPipeline(pipeline);
-    renderDevice.setFramebuffer(output);
-    inputTexBP->bind(input);
+    this->size = size;
+}
 
-    auto sz = window.getFramebufferSize();
+void pps::CopyPass::execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
+                            core::gl::Framebuffer out) const
+{
+    // Set the framebuffer and state.
+    this->renderDevice.setFramebuffer(out);
+    this->renderDevice.setViewport(0, 0, this->size.x, this->size.y);
+    this->renderDevice.setRasterState(nullptr);
+    this->renderDevice.setBlendState(nullptr);
+    this->renderDevice.setDepthStencilState(nullptr);
 
-    renderDevice.setViewport(0, 0, sz.x, sz.y);
-    renderDevice.clearColor(0, 0, 0, 0);
-
-    renderDevice.setRasterState(nullptr);
-    renderDevice.setBlendState(nullptr);
-    renderDevice.setDepthStencilState(nullptr);
-
-    VertexArray va;
-    IndexBuffer ib;
-
-    renderer.getScreenQuad(va, ib);
-
-    renderDevice.setVertexArray(va);
-    renderDevice.setIndexBuffer(ib);
-    renderDevice.drawTrianglesIndexed(0, 6);
+    // Set the pipeline and draw the screen quad.
+    this->renderDevice.setShaderPipeline(this->pipeline);
+    this->inputTexBP->bind(prev);
+    this->inputTexBP->bind(inputTexSampler);
+    this->renderDevice.setVertexArray(this->screenQuadVA);
+    this->renderDevice.drawTriangles(0, 6);
 }

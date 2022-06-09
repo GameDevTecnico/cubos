@@ -9,24 +9,29 @@
 
 ## Voxel based engine
 
-**CUBOS. is a simple, but powerful engine for PC, where everything is made out of voxels.**
+**CUBOS. aims to be a simple, but powerful engine for PC, where everything is**
+**made out of voxels.**
 
-**IMPORTANT NOTE:** **CUBOS.** is a work in progress still in its very early stages. This description matches our hopes for the engine, not its current state.
-
-**CUBOS.** is a 3D game engine that is perfect for beginners, but also a powerful tool in the hands of experienced developers.
-Its vast render distances and the destructibility it allows set it apart from other engines.
-Written in *C++*, built with *OpenGL*, it's a high-performance engine.
+It aims to support vast render distances and destructibility, which sets it
+apart from other engines. Written in *C++*, built with *OpenGL*, it's a
+high-performance engine.
 
 ## Structure
 
 The source code is divided into three main parts:
-- `core`: library which is shared between the tools and the games. This includes some basic functionality like serialization, logging, render devices, input handling and others.
-- `engine`: library with code exclusive to the game execution. This includes the main loop, the asset manager and systems like the renderer and physics.
-- `tools`: contains programs that help you with the game development and which may depend on the `core`. One example is the future `editor`. Right now the only finished tool is the `embed` tool.
+- `core`: library which is shared between the tools and the games. This
+includes some basic functionality like serialization, logging, render devices,
+input handling and others.
+- `engine`: library with code exclusive to the game execution. This includes
+the main loop, the asset manager and systems like the renderer and physics.
+- `cubinhos`: a tool which helps you with the game development and which
+may depend on `core`. One example use case of `cubinhos` is convert from
+external voxel formats to the internal format used by **CUBOS.**.
 
 ### Further reading
 
-You can find more information about how the engine is structured in the [documentation](https://gamedevtecnico.github.io/cubos/).
+You can find more information about how the engine is structured in the
+[documentation](https://gamedevtecnico.github.io/cubos/).
 
 ## Contributing
 
@@ -36,7 +41,8 @@ Check out the [contribution guidelines](CONTRIBUTE.md) for more information.
 
 ### Executables
 
-There are no releases of **CUBOS.** so far. We will update this section once we release official binaries.
+There are no releases of **CUBOS.** so far. We will update this section once
+we release official binaries.
 <!--Official binaries for **CUBOS.** can be found
 on the [releases](https://github.com/GameDevTecnico/cubos/releases) page.-->
 
@@ -58,13 +64,20 @@ The following dependencies are used to compile **CUBOS.**:
 | [googletest](https://github.com/google/googletest) | Required for tests | `core/lib/googletest` | Optionally           |
 
 Dependencies marked as *Essential* are required to compile the engine.
-**CUBOS.** uses [CMake](https://cmake.org/) as its build system, so you must install it to compile the engine.
+**CUBOS.** uses [CMake](https://cmake.org/) as its build system, so you must
+install it to compile the engine.
 
-Most dependencies come as submodules, so, you may choose whether to install them separately or not. If you choose to install some or all of them separately, you can do so easily by using the package manager of your choice. If you use Windows, it should be easier to simply install all of them with the engine by cloning the whole repository with the `--recursive` flag.
+Most dependencies come as submodules, so, you may choose whether to install
+them separately or not. If you choose to install some or all of them
+separately, you can do so easily by using the package manager of your choice.
+If you use Windows, it should be easier to simply install all of them with the
+engine by cloning the whole repository with the `--recursive` flag.
 
 #### Compiling
 
-If you chose to install some dependencies separately, you must pass the corresponding `-D` flag to CMake. For example, if you installed GLFW, GLM and CMake separetely you would pass the following flags to CMake:
+If you chose to install some dependencies separately, you must pass the
+corresponding `-D` flag to CMake. For example, if you installed GLFW, GLM and
+CMake separetely you would pass the following flags to CMake:
 
 `cmake -H. -Bbuild -DGLFW_USE_SUBMODULE=OFF -DGLM_USE_SUBMODULE=OFF -DYAMLCPP_USE_SUBMODULE=OFF`
 
@@ -86,16 +99,20 @@ The following is a list of all the options available to configure the engine:
 
 ### Samples
 
-Both the `core` and the `engine` contain samples that you can run to get an idea of how the engine works.
+Both the `core` and the `engine` contain samples that you can run to get an
+idea of how the engine works.
 
 ### Testing
 
 **CUBOS.** uses GoogleTest for unit testing the engine.
-To test the engine's core you can use the following command: `cd build/core && ctest`.
+To test the engine's core you can use the following
+command: `cd build/core && ctest`.
 
 ## Who is making this engine
 
-We are  [Gamedev Técnico](https://www.instagram.com/gamedevtecnico/), a student group from [Instituto Superior Técnico](https://tecnico.ulisboa.pt/en/) who makes games. Our goal is to build a game engine from the ground up. 
+We are  [Gamedev Técnico](https://www.instagram.com/gamedevtecnico/), a student
+group from [Instituto Superior Técnico](https://tecnico.ulisboa.pt/en/) who
+makes games. Our goal is to build a game engine from the ground up. 
 
 Find us at:
 

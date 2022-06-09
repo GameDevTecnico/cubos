@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
 #include <cubos/core/memory/buffer_stream.hpp>
-#include <cubos/core/memory/yaml_deserializer.hpp>
-#include <cubos/core/memory/serialization_map.hpp>
+#include <cubos/core/data/yaml_deserializer.hpp>
+#include <cubos/core/data/serialization_map.hpp>
 
+using namespace cubos::core::data;
 using namespace cubos::core::memory;
 
 struct Human
@@ -12,38 +13,45 @@ struct Human
     double weight;
     bool dead;
     std::vector<Human*> children;
+};
 
-    void deserialize(Deserializer& s)
+namespace cubos::core::data
+{
+    void deserialize(Deserializer& s, Human& human)
     {
-        s.read(this->name);
-        s.read(this->age);
-        s.read(this->weight);
-        s.read(this->dead);
-        this->children.resize(s.beginArray(), nullptr);
-        for (auto& child : this->children)
+        s.beginObject();
+        s.read(human.name);
+        s.read(human.age);
+        s.read(human.weight);
+        s.read(human.dead);
+        human.children.resize(s.beginArray(), nullptr);
+        for (auto& child : human.children)
         {
             child = new Human();
             s.read(*child);
         }
         s.endArray();
+        s.endObject();
     }
 
-    void deserialize(Deserializer& s, SerializationMap<Human*, size_t>* map)
+    void deserialize(Deserializer& s, Human& human, SerializationMap<Human*, size_t>* map)
     {
-        s.read(this->name);
-        s.read(this->age);
-        s.read(this->weight);
-        s.read(this->dead);
-        this->children.resize(s.beginArray());
-        for (auto& child : this->children)
+        s.beginObject();
+        s.read(human.name);
+        s.read(human.age);
+        s.read(human.weight);
+        s.read(human.dead);
+        human.children.resize(s.beginArray());
+        for (auto& child : human.children)
         {
             uint64_t id;
             s.read(id);
             child = map->getRef(static_cast<size_t>(id));
         }
         s.endArray();
+        s.endObject();
     }
-};
+} // namespace cubos::core::data
 
 TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Primitives)
 {
