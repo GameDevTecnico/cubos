@@ -2,7 +2,7 @@
 #define CUBOS_ECS_WORLD_HPP
 
 #include <cassert>
-#include <cinttypes>
+#include <cstddef>
 
 #include <cubos/core/ecs/storage.hpp>
 

@@ -5,7 +5,6 @@
 set(ENGINE_SAMPLES_SOURCES
     "empty.cpp"
     "renderer.cpp"
-    "triangulation.cpp"
     "asset.cpp"
 )
 

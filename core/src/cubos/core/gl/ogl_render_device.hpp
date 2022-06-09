@@ -28,8 +28,6 @@ namespace cubos::core::gl
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) override;
         virtual CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) override;
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) override;
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
-                                                    BufferStorageType storage) override;
         virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage) override;
         virtual void setIndexBuffer(IndexBuffer ib) override;
         virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage) override;

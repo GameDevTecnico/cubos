@@ -10,8 +10,10 @@ message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
 
+    "src/cubos/engine/gl/frame.cpp"
     "src/cubos/engine/gl/renderer.cpp"
     "src/cubos/engine/gl/deferred/renderer.cpp"
+    "src/cubos/engine/gl/pps/manager.cpp"
     "src/cubos/engine/gl/pps/pass.cpp"
     "src/cubos/engine/gl/pps/copy_pass.cpp"
     "src/cubos/engine/data/meta.cpp"
@@ -22,8 +24,10 @@ set(CUBOS_ENGINE_SOURCE
 set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/cubos.hpp"
 
+    "include/cubos/engine/gl/frame.hpp"
     "include/cubos/engine/gl/renderer.hpp"
     "include/cubos/engine/gl/deferred/renderer.hpp"
+    "include/cubos/engine/gl/pps/manager.hpp"
     "include/cubos/engine/gl/pps/pass.hpp"
     "include/cubos/engine/gl/pps/copy_pass.hpp"
     "include/cubos/engine/data/meta.hpp"
