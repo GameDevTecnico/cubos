@@ -441,7 +441,6 @@ void impl::Unpackager::readI32(int32_t& value)
         value = std::get<int32_t>(d->data);
 }
 
-
 void impl::Unpackager::readI64(int64_t& value)
 {
     auto d = this->pop();
