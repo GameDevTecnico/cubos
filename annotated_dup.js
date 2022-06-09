@@ -76,13 +76,15 @@ var annotated_dup =
       [ "engine", null, [
         [ "data", null, [
           [ "impl", null, [
-            [ "QBModelLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1QBModelLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1QBModelLoader" ]
+            [ "GridLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader" ],
+            [ "PaletteLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader" ]
           ] ],
           [ "Asset", "classcubos_1_1engine_1_1data_1_1Asset.html", "classcubos_1_1engine_1_1data_1_1Asset" ],
           [ "AssetManager", "classcubos_1_1engine_1_1data_1_1AssetManager.html", "classcubos_1_1engine_1_1data_1_1AssetManager" ],
+          [ "Grid", "structcubos_1_1engine_1_1data_1_1Grid.html", "structcubos_1_1engine_1_1data_1_1Grid" ],
           [ "Loader", "classcubos_1_1engine_1_1data_1_1Loader.html", "classcubos_1_1engine_1_1data_1_1Loader" ],
           [ "Meta", "classcubos_1_1engine_1_1data_1_1Meta.html", "classcubos_1_1engine_1_1data_1_1Meta" ],
-          [ "QBModel", "structcubos_1_1engine_1_1data_1_1QBModel.html", "structcubos_1_1engine_1_1data_1_1QBModel" ]
+          [ "Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", "structcubos_1_1engine_1_1data_1_1Palette" ]
         ] ],
         [ "gl", null, [
           [ "deferred", null, [

@@ -9,6 +9,7 @@ var classcubos_1_1core_1_1gl_1_1Grid =
     [ "convert", "classcubos_1_1core_1_1gl_1_1Grid.html#af187f9343f1fc7e6c9fd61e98385b98a", null ],
     [ "get", "classcubos_1_1core_1_1gl_1_1Grid.html#a4f86c62f435581ec581ea8a9fa001016", null ],
     [ "getSize", "classcubos_1_1core_1_1gl_1_1Grid.html#ad6f92fd6646593addece930bed9b20fb", null ],
+    [ "operator=", "classcubos_1_1core_1_1gl_1_1Grid.html#afc276e14e2a975196f9fc37d9f7b8470", null ],
     [ "set", "classcubos_1_1core_1_1gl_1_1Grid.html#acc83d2b66777e77ba2b6a725c2f9004e", null ],
     [ "setSize", "classcubos_1_1core_1_1gl_1_1Grid.html#a4be6aa45b55006a782fe2a366a243ef4", null ],
     [ "data::deserialize", "classcubos_1_1core_1_1gl_1_1Grid.html#ac6e4bafa85af822f0367754e95dd640c", null ],

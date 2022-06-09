@@ -46,6 +46,7 @@ var hierarchy =
     [ "cubos::core::gl::FramebufferDesc", "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html", null ],
     [ "cubos::core::gl::FramebufferDesc::FramebufferTarget", "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget.html", null ],
     [ "cubos::core::gl::Grid", "classcubos_1_1core_1_1gl_1_1Grid.html", null ],
+    [ "cubos::engine::data::Grid", "structcubos_1_1engine_1_1data_1_1Grid.html", null ],
     [ "cubos::core::gl::impl::IndexBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1IndexBuffer.html", null ],
     [ "cubos::core::io::InputManager", "classcubos_1_1core_1_1io_1_1InputManager.html", null ],
     [ "cubos::core::ecs::IStorage", "classcubos_1_1core_1_1ecs_1_1IStorage.html", [
@@ -57,18 +58,19 @@ var hierarchy =
     ] ],
     [ "cubos::core::ecs::WorldView< ComponentTypes >::Iterator", "structcubos_1_1core_1_1ecs_1_1WorldView_1_1Iterator.html", null ],
     [ "cubos::engine::data::Loader", "classcubos_1_1engine_1_1data_1_1Loader.html", [
-      [ "cubos::engine::data::impl::QBModelLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1QBModelLoader.html", null ]
+      [ "cubos::engine::data::impl::GridLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html", null ],
+      [ "cubos::engine::data::impl::PaletteLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html", null ]
     ] ],
     [ "cubos::engine::gl::pps::Manager", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html", null ],
     [ "cubos::core::gl::Material", "structcubos_1_1core_1_1gl_1_1Material.html", null ],
     [ "cubos::engine::data::Meta", "classcubos_1_1engine_1_1data_1_1Meta.html", null ],
     [ "cubos::core::gl::Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
+    [ "cubos::engine::data::Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", null ],
     [ "cubos::engine::gl::pps::Pass", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html", [
       [ "cubos::engine::gl::pps::CopyPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html", null ]
     ] ],
     [ "cubos::core::gl::PointLight", "structcubos_1_1core_1_1gl_1_1PointLight.html", null ],
     [ "cubos::core::data::QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", null ],
-    [ "cubos::engine::data::QBModel", "structcubos_1_1engine_1_1data_1_1QBModel.html", null ],
     [ "cubos::core::gl::impl::RasterState", "classcubos_1_1core_1_1gl_1_1impl_1_1RasterState.html", null ],
     [ "cubos::core::gl::RasterStateDesc", "structcubos_1_1core_1_1gl_1_1RasterStateDesc.html", null ],
     [ "cubos::core::gl::RenderDevice", "classcubos_1_1core_1_1gl_1_1RenderDevice.html", null ],

@@ -117,6 +117,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acfa23b313bc48dae8780e8ed9d75cba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade29c780ef66aba7ee1fe1491e5204f0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#ade29c780ef66aba7ee1fe1491e5204f0">bind</a> (gl::ConstantBuffer cb)=0</td></tr>
 <tr class="separator:ade29c780ef66aba7ee1fe1491e5204f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb8fa4b00cdac4403d5fb2b82f26e8e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#afcb8fa4b00cdac4403d5fb2b82f26e8e">bind</a> (gl::Texture2D tex, int level, Access access)=0</td></tr>
+<tr class="separator:afcb8fa4b00cdac4403d5fb2b82f26e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5542c5d6a0747b94b8172a9a840d5149"><td class="memItemLeft" align="right" valign="top"><a id="a5542c5d6a0747b94b8172a9a840d5149"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a5542c5d6a0747b94b8172a9a840d5149">setConstant</a> (glm::vec2 val)=0</td></tr>
 <tr class="memdesc:a5542c5d6a0747b94b8172a9a840d5149"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of the uniform tied to the binding point to the provided vec2 value. <br /></td></tr>
@@ -172,7 +174,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div class="textblock"><p>Abstract shader binding point, should not be used directly. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ade29c780ef66aba7ee1fe1491e5204f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade29c780ef66aba7ee1fe1491e5204f0">&#9670;&nbsp;</a></span>bind() <span class="overload">[1/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ade29c780ef66aba7ee1fe1491e5204f0">&#9670;&nbsp;</a></span>bind() <span class="overload">[1/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,7 +201,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="a70eaab95bcc8f92492f5f4e41b015dfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70eaab95bcc8f92492f5f4e41b015dfc">&#9670;&nbsp;</a></span>bind() <span class="overload">[2/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a70eaab95bcc8f92492f5f4e41b015dfc">&#9670;&nbsp;</a></span>bind() <span class="overload">[2/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,7 +228,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="acfa23b313bc48dae8780e8ed9d75cba1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfa23b313bc48dae8780e8ed9d75cba1">&#9670;&nbsp;</a></span>bind() <span class="overload">[3/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acfa23b313bc48dae8780e8ed9d75cba1">&#9670;&nbsp;</a></span>bind() <span class="overload">[3/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,7 +255,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="a418b9d2d2ef3a331c5dd0c227b7453ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a418b9d2d2ef3a331c5dd0c227b7453ff">&#9670;&nbsp;</a></span>bind() <span class="overload">[4/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a418b9d2d2ef3a331c5dd0c227b7453ff">&#9670;&nbsp;</a></span>bind() <span class="overload">[4/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +282,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="abbf4bb35777a26f34bbc492f462e41cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbf4bb35777a26f34bbc492f462e41cf">&#9670;&nbsp;</a></span>bind() <span class="overload">[5/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abbf4bb35777a26f34bbc492f462e41cf">&#9670;&nbsp;</a></span>bind() <span class="overload">[5/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,7 +309,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="ad80dcb94065d0aa369b8f4ab553b0197"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad80dcb94065d0aa369b8f4ab553b0197">&#9670;&nbsp;</a></span>bind() <span class="overload">[6/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad80dcb94065d0aa369b8f4ab553b0197">&#9670;&nbsp;</a></span>bind() <span class="overload">[6/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -333,8 +335,51 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
+<a id="afcb8fa4b00cdac4403d5fb2b82f26e8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcb8fa4b00cdac4403d5fb2b82f26e8e">&#9670;&nbsp;</a></span>bind() <span class="overload">[7/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void cubos::core::gl::impl::ShaderBindingPoint::bind </td>
+          <td>(</td>
+          <td class="paramtype">gl::Texture2D&#160;</td>
+          <td class="paramname"><em>tex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Access&#160;</td>
+          <td class="paramname"><em>access</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Binds a level of a 2D texture to an image unit. If this binding point doesn't support an image unit, an error is logged and nothing is done. This function isn't supported on some platforms. Support can be queried using <code>renderDevice.getProperty(Property::ComputeSupported)</code>. </p>
+
+</div>
+</div>
 <a id="aa560f005b103468a21830101631cb545"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa560f005b103468a21830101631cb545">&#9670;&nbsp;</a></span>bind() <span class="overload">[7/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa560f005b103468a21830101631cb545">&#9670;&nbsp;</a></span>bind() <span class="overload">[8/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -361,7 +406,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="ae30e8fdef913e5a67a5bcdba019e8bab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae30e8fdef913e5a67a5bcdba019e8bab">&#9670;&nbsp;</a></span>bind() <span class="overload">[8/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae30e8fdef913e5a67a5bcdba019e8bab">&#9670;&nbsp;</a></span>bind() <span class="overload">[9/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
