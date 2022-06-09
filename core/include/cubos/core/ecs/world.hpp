@@ -1,10 +1,12 @@
 #ifndef CUBOS_ECS_WORLD_HPP
 #define CUBOS_ECS_WORLD_HPP
 
+#include <cubos/core/log.hpp>
+#include <cubos/core/ecs/storage.hpp>
+
 #include <cassert>
 #include <cinttypes>
-
-#include <cubos/core/ecs/storage.hpp>
+#include <unordered_map>
 
 namespace cubos::core::ecs
 {
@@ -26,40 +28,46 @@ namespace cubos::core::ecs
         /// @param entity Entity ID.
         void remove(uint64_t entity);
 
-        /// @brief Register a component type.
+        /// @brief Registers a component type.
         /// @tparam T Component type.
         /// @param storage Storage for the component type.
-        template <typename T> size_t registerComponent();
+        template <typename T> void registerComponent();
 
-        /// @brief Add a component to an entity.
+        /// @brief Adds a component to an entity.
         /// @tparam T Component type.
         /// @param entity Entity ID.
         /// @param value Initial value of the component
-        template <typename T> T* addComponent(uint64_t entity, T value = {});
+        template <typename T> void addComponent(uint64_t entity, T value = {});
 
         /// @brief Adds components to an entity.
         /// @tparam ComponentTypes The types of the components to be added.
         /// @param components The initial values for the components.
         template <typename... ComponentTypes> void addComponents(uint64_t entity, ComponentTypes... components);
 
-        /// @brief Get a component of an entity.
+        /// @brief Gets a reference to a component of an entity.
         /// @tparam T Component type.
         /// @param entity Entity ID.
-        template <typename T> T* getComponent(uint64_t entity);
+        template <typename T> T& getComponent(uint64_t entity);
 
-        /// @brief Remove a component from an entity.
+        /// @brief Removes a component from an entity.
         /// @tparam T Component type to be removed.
         /// @param entity Entity ID.
         template <typename T> void removeComponent(uint64_t entity);
 
-        /// @brief Remove components from an entity.
+        /// @brief Removes components from an entity.
         /// @tparam ComponentTypes Component types to be removed.
         /// @param entity Entity ID.
         template <typename... ComponentTypes> void removeComponents(uint64_t entity);
 
+    private:
         template <typename... ComponentTypes> friend class WorldView;
 
-    private:
+        /// Keeps track of the next available global component ID.
+        static size_t nextGlobalComponentId;
+
+        /// Maps global component IDs to local component IDs.
+        std::unordered_map<size_t, size_t> globalToLocalComponentIds;
+
         std::vector<std::uint32_t> entityData;
         std::vector<std::uint32_t> availableEntities;
         std::vector<IStorage*> storages;
@@ -67,14 +75,17 @@ namespace cubos::core::ecs
         size_t nextEntityId = 0;
         size_t elementsPerEntity;
 
-        template <typename T> size_t getComponentID();
+        /// Utility function which returns the global ID of a component.
+        /// @tparam T Component type.
+        /// @return Global ID of the component.
+        template <typename T> static size_t getGlobalComponentId();
+
+        /// Utility function which returns the local ID of a component in this world.
+        /// @tparam T Component type.
+        template <typename T> size_t getLocalComponentID();
     };
 
-    template <typename T> size_t World::getComponentID()
-    {
-        static size_t id = storages.size();
-        return id;
-    }
+    // Implementation.
 
     template <typename... ComponentTypes> uint64_t World::create(ComponentTypes... components)
     {
@@ -102,28 +113,31 @@ namespace cubos::core::ecs
         return id;
     }
 
-    template <typename T> size_t World::registerComponent()
+    template <typename T> void World::registerComponent()
     {
-        assert(entityData.size() == 0);
-        size_t component_id = getComponentID<T>();
         static_assert(std::is_same<T, typename T::Storage::Type>(),
                       "A component can't use a storage for a different component type!");
+        assert(entityData.size() == 0);
+        auto globalId = World::getGlobalComponentId<T>();
+        this->globalToLocalComponentIds[globalId] = storages.size();
         storages.push_back(new typename T::Storage());
-        return component_id;
     }
 
-    template <typename T> T* World::addComponent(uint64_t entity, T value)
+    template <typename T> void World::addComponent(uint64_t entity, T value)
     {
         uint32_t entityIndex = (uint32_t)entity;
         if (entity >> 32 != entityData[entityIndex * elementsPerEntity])
-            return nullptr;
+        {
+            logError("World::addComponent() failed because entity {} was already removed!", entity);
+            return;
+        }
 
-        size_t componentId = getComponentID<T>();
+        size_t componentId = this->getLocalComponentID<T>();
         Storage<T>* storage = (Storage<T>*)storages[componentId];
         // Set the entity mask for this component
         entityData[entityIndex * elementsPerEntity + 1 + componentId / 8] |= 1 << (componentId % 8);
 
-        return storage->insert(entityIndex, value);
+        storage->insert(entityIndex, value);
     }
 
     template <typename... ComponentTypes> void World::addComponents(uint64_t entity, ComponentTypes... components)
@@ -131,27 +145,37 @@ namespace cubos::core::ecs
         ([&](auto& component) { addComponent(entity, component); }(components), ...);
     }
 
-    template <typename T> T* World::getComponent(uint64_t entity)
+    template <typename T> T& World::getComponent(uint64_t entity)
     {
         uint32_t entityIndex = (uint32_t)entity;
         if (entity >> 32 != entityData[entityIndex * elementsPerEntity])
-            return nullptr;
+        {
+            logCritical("World::getComponent() failed because entity {} was already removed!", entity);
+            abort();
+        }
 
-        size_t componentId = getComponentID<T>();
+        size_t componentId = this->getLocalComponentID<T>();
         if ((entityData[entityIndex * elementsPerEntity + 1 + componentId / 8] & (1 << (componentId % 8))) == 0)
-            return nullptr;
+        {
+            logCritical("World::getComponent() failed because entity {} doesn't have component {}!", entity,
+                        typeid(T).name());
+            abort();
+        }
 
         Storage<T>* storage = (Storage<T>*)storages[componentId];
-        return storage->get(entityIndex);
+        return *storage->get(entityIndex);
     }
 
     template <typename T> void World::removeComponent(uint64_t entity)
     {
         uint32_t entityIndex = (uint32_t)entity;
         if (entity >> 32 != entityData[entityIndex * elementsPerEntity])
+        {
+            logError("World::getComponent() failed because entity {} was already removed!", entity);
             return;
+        }
 
-        size_t componentId = getComponentID<T>();
+        size_t componentId = this->getLocalComponentID<T>();
         ((Storage<T>*)storages[componentId])->erase(entityIndex);
         entityData[entityIndex * elementsPerEntity + 1 + componentId / 8] ^= 1 << (componentId % 8);
     }
@@ -159,6 +183,18 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes> void World::removeComponents(uint64_t entity)
     {
         ([&]() { removeComponent<ComponentTypes>(entity); }(), ...);
+    }
+
+    template <typename T> size_t World::getGlobalComponentId()
+    {
+        static size_t id = World::nextGlobalComponentId++;
+        return id;
+    }
+
+    template <typename T> size_t World::getLocalComponentID()
+    {
+        auto globalId = World::getGlobalComponentId<T>();
+        return this->globalToLocalComponentIds[globalId];
     }
 
 } // namespace cubos::core::ecs

@@ -48,20 +48,18 @@ public:
 class PrintPositions : public ecs::IteratingSystem<Position, Velocity>
 {
 public:
-    void process(ecs::World& world, uint64_t entity) override
+    void process(ecs::World& world, uint64_t entity, Position& pos, Velocity&) override
     {
-        auto* pos = world.getComponent<Position>(entity);
-        std::cout << pos->y << std::endl;
+        std::cout << pos.y << std::endl;
     }
 };
 
 class PrintPositions2 : public ecs::IteratingSystem<Player, Position, Velocity>
 {
 public:
-    void process(ecs::World& world, uint64_t entity) override
+    void process(ecs::World& world, uint64_t entity, Player&, Position& pos, Velocity&) override
     {
-        auto* pos = world.getComponent<Position>(entity);
-        std::cout << pos->y << std::endl;
+        std::cout << pos.y << std::endl;
     }
 };
 

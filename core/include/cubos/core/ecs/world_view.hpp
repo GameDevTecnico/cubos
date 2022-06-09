@@ -11,27 +11,28 @@ namespace cubos::core::ecs
     /// @tparam ComponentTypes The set of component types to be iterated.
     template <typename... ComponentTypes> struct WorldView
     {
-        World* world;
-        std::vector<uint8_t> mask;
+        World& world;              ///< The world being viewed.
+        std::vector<uint8_t> mask; /// The mask of the components to be iterated.
 
+        /// @param w The world to be viewed.
         WorldView(World& w);
 
+        /// Type of the iterator.
         struct Iterator
         {
-            World* world;
-            size_t current;
-            std::vector<uint8_t>* mask;
+            World& world;                     ///< The world being viewed.
+            size_t current;                   ///< The current entity.
+            const std::vector<uint8_t>& mask; ///< The mask of the components to be iterated.
 
-            Iterator(World* w, size_t index, std::vector<uint8_t>* m);
+            /// @param w The world to be viewed.
+            /// @param index The current entity.
+            /// @param m The mask of the components to be iterated.
+            Iterator(World& w, size_t index, const std::vector<uint8_t>& m);
 
             size_t operator*() const;
-
-            bool operator==(const Iterator& other) const;
-
-            bool operator!=(const Iterator& other) const;
-
+            bool operator==(const Iterator&) const;
+            bool operator!=(const Iterator&) const;
             bool isValidID();
-
             Iterator& operator++();
         };
 
@@ -42,10 +43,10 @@ namespace cubos::core::ecs
         Iterator end();
     };
 
-    template <typename... ComponentTypes> WorldView<ComponentTypes...>::WorldView(World& w) : world(&w)
+    template <typename... ComponentTypes> WorldView<ComponentTypes...>::WorldView(World& w) : world(w)
     {
-        mask.resize(world->elementsPerEntity - 1);
-        size_t componentIds[] = {world->getComponentID<ComponentTypes>()...};
+        mask.resize(world.elementsPerEntity - 1);
+        size_t componentIds[] = {world.getLocalComponentID<ComponentTypes>()...};
         for (auto id : componentIds)
         {
             mask[id / 32] |= 1 << (id % 32);
@@ -53,7 +54,7 @@ namespace cubos::core::ecs
     }
 
     template <typename... ComponentTypes>
-    WorldView<ComponentTypes...>::Iterator::Iterator(World* w, size_t index, std::vector<uint8_t>* m)
+    WorldView<ComponentTypes...>::Iterator::Iterator(World& w, size_t index, const std::vector<uint8_t>& m)
         : world(w), current(index), mask(m)
     {
     }
@@ -66,20 +67,20 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     bool WorldView<ComponentTypes...>::Iterator::operator==(const Iterator& other) const
     {
-        return current == other.current || current == world->nextEntityId;
+        return current == other.current || current == world.nextEntityId;
     }
 
     template <typename... ComponentTypes>
     bool WorldView<ComponentTypes...>::Iterator::operator!=(const Iterator& other) const
     {
-        return current != other.current && current != world->nextEntityId;
+        return current != other.current && current != world.nextEntityId;
     }
 
     template <typename... ComponentTypes> bool WorldView<ComponentTypes...>::Iterator::isValidID()
     {
-        for (size_t i = 0; i < mask->size(); i++)
+        for (size_t i = 0; i < mask.size(); i++)
         {
-            if ((mask->at(i) & world->entityData[current * world->elementsPerEntity + 1 + i]) != mask->at(i))
+            if ((mask[i] & world.entityData[current * world.elementsPerEntity + 1 + i]) != mask[i])
                 return false;
         }
         return true;
@@ -91,7 +92,7 @@ namespace cubos::core::ecs
         do
         {
             current++;
-        } while (current < world->nextEntityId && !isValidID());
+        } while (current < world.nextEntityId && !isValidID());
         return *this;
     }
 
@@ -99,7 +100,7 @@ namespace cubos::core::ecs
     {
         for (size_t i = 0; i < mask.size(); i++)
         {
-            if ((mask[i] & world->entityData[index * world->elementsPerEntity + 1 + i]) != mask[i])
+            if ((mask[i] & world.entityData[index * world.elementsPerEntity + 1 + i]) != mask[i])
                 return false;
         }
 
@@ -110,19 +111,19 @@ namespace cubos::core::ecs
     typename WorldView<ComponentTypes...>::Iterator WorldView<ComponentTypes...>::begin()
     {
         size_t firstIndex = 0;
-        while (firstIndex < world->nextEntityId && !isValidIndex(firstIndex))
+        while (firstIndex < world.nextEntityId && !isValidIndex(firstIndex))
         {
             firstIndex++;
         }
 
-        Iterator it(world, firstIndex, &mask);
+        Iterator it(world, firstIndex, mask);
         return it;
     }
 
     template <typename... ComponentTypes>
     typename WorldView<ComponentTypes...>::Iterator WorldView<ComponentTypes...>::end()
     {
-        Iterator it(world, world->nextEntityId, &mask);
+        Iterator it(world, world.nextEntityId, mask);
         return it;
     }
 
