@@ -28,8 +28,6 @@ namespace cubos::core::gl
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) override;
         virtual CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) override;
         virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) override;
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage,
-                                                    BufferStorageType storage) override;
         virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage) override;
         virtual void setIndexBuffer(IndexBuffer ib) override;
         virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage) override;
@@ -38,6 +36,7 @@ namespace cubos::core::gl
         virtual ShaderStage createShaderStage(Stage stage, const char* src) override;
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage ps) override;
         virtual ShaderPipeline createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps) override;
+        virtual ShaderPipeline createShaderPipeline(ShaderStage cs) override;
         virtual void setShaderPipeline(ShaderPipeline pipeline) override;
         virtual void clearColor(float r, float g, float b, float a) override;
         virtual void clearTargetColor(size_t target, float r, float g, float b, float a) override;
@@ -47,6 +46,8 @@ namespace cubos::core::gl
         virtual void drawTrianglesIndexed(size_t offset, size_t count) override;
         virtual void drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount) override;
         virtual void drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount) override;
+        virtual void dispatchCompute(size_t x, size_t y, size_t z) override;
+        virtual void memoryBarrier(MemoryBarriers barriers) override;
         virtual void setViewport(int x, int y, int w, int h) override;
         virtual void setScissor(int x, int y, int w, int h) override;
         virtual int getProperty(Property prop) override;

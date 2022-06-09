@@ -218,20 +218,3 @@ endif ()
 if (BUILD_CORE_SAMPLES)
     add_subdirectory(samples)
 endif ()
-
-# Add doxygen documentation
-
-find_package(Doxygen COMPONENTS dot)
-
-if (Doxygen_FOUND)
-    set(DOXYGEN_GENERATE_TREEVIEW YES)
-    set(DOXYGEN_HTML_EXTRA_FILES ${CMAKE_SOURCE_DIR}/docs/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js)
-    set(DOXYGEN_HTML_EXTRA_STYLESHEET ${CMAKE_SOURCE_DIR}/docs/doxygen-awesome-css/doxygen-awesome.css)
-    set(DOXYGEN_HTML_HEADER ${CMAKE_SOURCE_DIR}/docs/header.html)
-    set(DOXYGEN_HTML_FOOTER ${CMAKE_SOURCE_DIR}/docs/footer.html)
-    doxygen_add_docs(
-        core-doxygen
-        "include"
-        COMMENT "Generate core documentation"
-    )
-endif ()
