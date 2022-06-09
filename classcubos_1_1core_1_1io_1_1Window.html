@@ -102,10 +102,12 @@ Collaboration diagram for cubos::core::io::Window:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcubos_1_1core_1_1io_1_1Window__coll__graph.png" border="0" usemap="#cubos_1_1core_1_1io_1_1Window_coll__map" alt="Collaboration graph"/></div>
 <map name="cubos_1_1core_1_1io_1_1Window_coll__map" id="cubos_1_1core_1_1io_1_1Window_coll__map">
-<area shape="rect" title=" " alt="" coords="333,92,509,119"/>
-<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,19,147,61"/>
-<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,85,147,126"/>
-<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,150,147,191"/>
+<area shape="rect" title=" " alt="" coords="333,160,509,187"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,22,147,63"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,87,147,129"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,153,147,194"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,218,147,259"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,283,147,325"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -123,6 +125,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual <a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">gl::RenderDevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#aa9ec0b40bef5fedf4e9533674ddb970c">getRenderDevice</a> () const =0</td></tr>
 <tr class="memdesc:aa9ec0b40bef5fedf4e9533674ddb970c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the window render device. <br /></td></tr>
 <tr class="separator:aa9ec0b40bef5fedf4e9533674ddb970c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e47996a0e180b703acb404851dba087"><td class="memItemLeft" align="right" valign="top">virtual glm::ivec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a4e47996a0e180b703acb404851dba087">getSize</a> () const =0</td></tr>
+<tr class="separator:a4e47996a0e180b703acb404851dba087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada492e0bd79c89ef26689daf50f65007"><td class="memItemLeft" align="right" valign="top"><a id="ada492e0bd79c89ef26689daf50f65007"></a>
 virtual glm::ivec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#ada492e0bd79c89ef26689daf50f65007">getFramebufferSize</a> () const =0</td></tr>
 <tr class="memdesc:ada492e0bd79c89ef26689daf50f65007"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the window framebuffer size in pixels. <br /></td></tr>
@@ -135,10 +139,22 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#ab3a133524044c3f5066e121b49dbccc7">getTime</a> () const =0</td></tr>
 <tr class="memdesc:ab3a133524044c3f5066e121b49dbccc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current time since the window was created. <br /></td></tr>
 <tr class="separator:ab3a133524044c3f5066e121b49dbccc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ab07462b72861d0ab000a4d91fd3990"><td class="memItemLeft" align="right" valign="top"><a id="a6ab07462b72861d0ab000a4d91fd3990"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a6ab07462b72861d0ab000a4d91fd3990">setMouseLockState</a> (MouseLockState state)=0</td></tr>
-<tr class="memdesc:a6ab07462b72861d0ab000a4d91fd3990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the lock state for the mouse when the window is focused. <br /></td></tr>
-<tr class="separator:a6ab07462b72861d0ab000a4d91fd3990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a556f8cfa101025446f449acc836d4198"><td class="memItemLeft" align="right" valign="top"><a id="a556f8cfa101025446f449acc836d4198"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a556f8cfa101025446f449acc836d4198">setMouseState</a> (MouseState state)=0</td></tr>
+<tr class="memdesc:a556f8cfa101025446f449acc836d4198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mouse state when the window is focused. <br /></td></tr>
+<tr class="separator:a556f8cfa101025446f449acc836d4198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18fe10fc48268d08101273db33b6c76b"><td class="memItemLeft" align="right" valign="top"><a id="a18fe10fc48268d08101273db33b6c76b"></a>
+virtual MouseState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a18fe10fc48268d08101273db33b6c76b">getMouseState</a> () const =0</td></tr>
+<tr class="memdesc:a18fe10fc48268d08101273db33b6c76b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the mouse state when the window is focused. <br /></td></tr>
+<tr class="separator:a18fe10fc48268d08101273db33b6c76b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a052183711119dfcfa24a00e5dec48156"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1io_1_1Cursor.html">Cursor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a052183711119dfcfa24a00e5dec48156">createCursor</a> (<a class="el" href="classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24">Cursor::Standard</a> standard)=0</td></tr>
+<tr class="separator:a052183711119dfcfa24a00e5dec48156"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ff93950c6d17811327faad6621e6828"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a2ff93950c6d17811327faad6621e6828">setCursor</a> (std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1io_1_1Cursor.html">Cursor</a> &gt; cursor)=0</td></tr>
+<tr class="separator:a2ff93950c6d17811327faad6621e6828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa773b99cc1983877cb720b6c7c668d91"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#aa773b99cc1983877cb720b6c7c668d91">setClipboard</a> (const std::string &amp;text)=0</td></tr>
+<tr class="separator:aa773b99cc1983877cb720b6c7c668d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a932ea052277524d2c91d47275805e43e"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a932ea052277524d2c91d47275805e43e">getClipboard</a> () const =0</td></tr>
+<tr class="separator:a932ea052277524d2c91d47275805e43e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -155,6 +171,10 @@ Public Attributes</h2></td></tr>
 <a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; Key &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a8224353a4ae61efc8dba43fb3f29fbf6">onKeyUp</a></td></tr>
 <tr class="memdesc:a8224353a4ae61efc8dba43fb3f29fbf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with a key code, when a keyboard key is released. <br /></td></tr>
 <tr class="separator:a8224353a4ae61efc8dba43fb3f29fbf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b84b54b23ef5d169a0e3a158034d255"><td class="memItemLeft" align="right" valign="top"><a id="a0b84b54b23ef5d169a0e3a158034d255"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; Modifiers &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a0b84b54b23ef5d169a0e3a158034d255">onModsChanged</a></td></tr>
+<tr class="memdesc:a0b84b54b23ef5d169a0e3a158034d255"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with the modifiers, when the modifiers change. <br /></td></tr>
+<tr class="separator:a0b84b54b23ef5d169a0e3a158034d255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d3cc260d013fb0f014e52074d6d5ae0"><td class="memItemLeft" align="right" valign="top"><a id="a7d3cc260d013fb0f014e52074d6d5ae0"></a>
 <a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; glm::ivec2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a7d3cc260d013fb0f014e52074d6d5ae0">onMouseMoved</a></td></tr>
 <tr class="memdesc:a7d3cc260d013fb0f014e52074d6d5ae0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with the cursor position when the cursor is moved. <br /></td></tr>
@@ -175,6 +195,10 @@ Public Attributes</h2></td></tr>
 <a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; glm::ivec2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a0ca919cf42142ddb275a963939d09ef9">onFramebufferResize</a></td></tr>
 <tr class="memdesc:a0ca919cf42142ddb275a963939d09ef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with the new framebuffer size when it changes size. <br /></td></tr>
 <tr class="separator:a0ca919cf42142ddb275a963939d09ef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed2da43d4c0cf44f314d00671206d91a"><td class="memItemLeft" align="right" valign="top"><a id="aed2da43d4c0cf44f314d00671206d91a"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; char32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#aed2da43d4c0cf44f314d00671206d91a">onChar</a></td></tr>
+<tr class="memdesc:aed2da43d4c0cf44f314d00671206d91a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked when an unicode character is entered. <br /></td></tr>
+<tr class="separator:aed2da43d4c0cf44f314d00671206d91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Wrapper around a window object. Handles input events and creates the render device. </p>
@@ -202,6 +226,155 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Creates a window. It must be freed with delete. </p><dl class="section return"><dt>Returns</dt><dd>New window, or nullptr if creation failed. </dd></dl>
+
+</div>
+</div>
+<a id="a052183711119dfcfa24a00e5dec48156"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a052183711119dfcfa24a00e5dec48156">&#9670;&nbsp;</a></span>createCursor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt;<a class="el" href="classcubos_1_1core_1_1io_1_1Cursor.html">Cursor</a>&gt; cubos::core::io::Window::createCursor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24">Cursor::Standard</a>&#160;</td>
+          <td class="paramname"><em>standard</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a new cursor with a standard shape. In the future custom cursors should also be supported. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">standard</td><td>Standard cursor to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New cursor, or nullptr if creation failed. </dd></dl>
+
+</div>
+</div>
+<a id="a932ea052277524d2c91d47275805e43e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a932ea052277524d2c91d47275805e43e">&#9670;&nbsp;</a></span>getClipboard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char* cubos::core::io::Window::getClipboard </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Gets the content of the clipboard. This string is guaranteed to be valid until the next call to <a class="el" href="classcubos_1_1core_1_1io_1_1Window.html#a932ea052277524d2c91d47275805e43e">getClipboard()</a>. </p><dl class="section return"><dt>Returns</dt><dd>Text from the clipboard. </dd></dl>
+
+</div>
+</div>
+<a id="a4e47996a0e180b703acb404851dba087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e47996a0e180b703acb404851dba087">&#9670;&nbsp;</a></span>getSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual glm::ivec2 cubos::core::io::Window::getSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the window size, in screen coordinates. May differ from the framebuffer size in some displays. </p>
+
+</div>
+</div>
+<a id="aa773b99cc1983877cb720b6c7c668d91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa773b99cc1983877cb720b6c7c668d91">&#9670;&nbsp;</a></span>setClipboard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void cubos::core::io::Window::setClipboard </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sets the content of the clipboard. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">text</td><td>Text to set. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2ff93950c6d17811327faad6621e6828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ff93950c6d17811327faad6621e6828">&#9670;&nbsp;</a></span>setCursor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void cubos::core::io::Window::setCursor </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1io_1_1Cursor.html">Cursor</a> &gt;&#160;</td>
+          <td class="paramname"><em>cursor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sets the current cursor. If the cursor is nullptr, the default cursor will be used. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cursor</td><td><a class="el" href="classcubos_1_1core_1_1io_1_1Cursor.html" title="Handle for a custom mouse cursor.">Cursor</a> to set. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

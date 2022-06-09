@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['read_810',['Read',['../classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6a7a1a5f3e79fdc91edf2f5ead9d66abb4',1,'cubos::core::data::File']]]
+  ['allresize_850',['AllResize',['../classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24a15b7bafe4fbfdf7fe9800ddf98a5c47e',1,'cubos::core::io::Cursor']]],
+  ['arrow_851',['Arrow',['../classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24a0f4e1aaabd074689b7d3ead824d1ee8e',1,'cubos::core::io::Cursor']]]
 ];

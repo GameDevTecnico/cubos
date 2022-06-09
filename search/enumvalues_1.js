@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write_811',['Write',['../classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6a1129c0e4d43f2d121652a7302712cff6',1,'cubos::core::data::File']]]
+  ['cross_852',['Cross',['../classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24ae76b449b9fc8536af7557ffa6321d269',1,'cubos::core::io::Cursor']]]
 ];

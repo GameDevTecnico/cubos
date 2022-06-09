@@ -161,6 +161,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a0b443e8dadf319a919a2b12c1f3c52b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2615abd77d1fc360c6709a5ecfaa710"><td class="memItemLeft" align="right" valign="top">virtual ShaderPipeline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#ac2615abd77d1fc360c6709a5ecfaa710">createShaderPipeline</a> (ShaderStage vs, ShaderStage gs, ShaderStage ps)=0</td></tr>
 <tr class="separator:ac2615abd77d1fc360c6709a5ecfaa710"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bcf86e72d8a4ee6f2e7d5d2046f4748"><td class="memItemLeft" align="right" valign="top">virtual ShaderPipeline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#a4bcf86e72d8a4ee6f2e7d5d2046f4748">createShaderPipeline</a> (ShaderStage cs)=0</td></tr>
+<tr class="separator:a4bcf86e72d8a4ee6f2e7d5d2046f4748"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59e963ef8e22daf2e2efbdbdcd30e536"><td class="memItemLeft" align="right" valign="top"><a id="a59e963ef8e22daf2e2efbdbdcd30e536"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#a59e963ef8e22daf2e2efbdbdcd30e536">setShaderPipeline</a> (ShaderPipeline pipeline)=0</td></tr>
 <tr class="memdesc:a59e963ef8e22daf2e2efbdbdcd30e536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the current shader pipeline used for rendering. <br /></td></tr>
@@ -189,8 +191,14 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a3187f4ce1a2842024a79e385caf38615"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7141910141accbd110b9d6faca9038a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#ad7141910141accbd110b9d6faca9038a">drawTrianglesIndexedInstanced</a> (size_t offset, size_t count, size_t instanceCount)=0</td></tr>
 <tr class="separator:ad7141910141accbd110b9d6faca9038a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c68558b8097a3e1cb7a623c1fb6a41d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#a3c68558b8097a3e1cb7a623c1fb6a41d">dispatchCompute</a> (size_t x, size_t y, size_t z)=0</td></tr>
+<tr class="separator:a3c68558b8097a3e1cb7a623c1fb6a41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae78091060921f548e1522590ae682a25"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#ae78091060921f548e1522590ae682a25">memoryBarrier</a> (MemoryBarriers barriers)=0</td></tr>
+<tr class="separator:ae78091060921f548e1522590ae682a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a328774d8b1dc2ce0ffddb2f4fa7956c6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#a328774d8b1dc2ce0ffddb2f4fa7956c6">setViewport</a> (int x, int y, int w, int h)=0</td></tr>
 <tr class="separator:a328774d8b1dc2ce0ffddb2f4fa7956c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bef37f87139163e196f78d35376f76a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#a7bef37f87139163e196f78d35376f76a">setScissor</a> (int x, int y, int w, int h)=0</td></tr>
+<tr class="separator:a7bef37f87139163e196f78d35376f76a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaf440d76c698d86e376e38e21d3cfa8"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#aaaf440d76c698d86e376e38e21d3cfa8">getProperty</a> (Property prop)=0</td></tr>
 <tr class="separator:aaaf440d76c698d86e376e38e21d3cfa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -495,8 +503,41 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
+<a id="a4bcf86e72d8a4ee6f2e7d5d2046f4748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bcf86e72d8a4ee6f2e7d5d2046f4748">&#9670;&nbsp;</a></span>createShaderPipeline() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual ShaderPipeline cubos::core::gl::RenderDevice::createShaderPipeline </td>
+          <td>(</td>
+          <td class="paramtype">ShaderStage&#160;</td>
+          <td class="paramname"><em>cs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a new shader pipeline from a compute shader. Compute shaders aren't supported on some platforms. Support can be queried using <code>renderDevice.getProperty(Property::ComputeSupported)</code>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cs</td><td>Compute shader stage. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Shader pipeline handle, or nullptr if the creation failed. </dd></dl>
+
+</div>
+</div>
 <a id="ac2615abd77d1fc360c6709a5ecfaa710"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2615abd77d1fc360c6709a5ecfaa710">&#9670;&nbsp;</a></span>createShaderPipeline() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2615abd77d1fc360c6709a5ecfaa710">&#9670;&nbsp;</a></span>createShaderPipeline() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -547,7 +588,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="a0b443e8dadf319a919a2b12c1f3c52b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b443e8dadf319a919a2b12c1f3c52b0">&#9670;&nbsp;</a></span>createShaderPipeline() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b443e8dadf319a919a2b12c1f3c52b0">&#9670;&nbsp;</a></span>createShaderPipeline() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -623,7 +664,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Creates a new shader stage from GLSL source code. </p><dl class="section return"><dt>Returns</dt><dd>Shader stage handle, or nullptr if the creation failed. </dd></dl>
+<p>Creates a new shader stage from GLSL source code. Compute shaders aren't supported on some platforms. Support can be queried using <code>renderDevice.getProperty(Property::ComputeSupported)</code>. </p><dl class="section return"><dt>Returns</dt><dd>Shader stage handle, or nullptr if the creation failed. </dd></dl>
 
 </div>
 </div>
@@ -810,6 +851,56 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="structcubos_1_1core_1_1gl_1_1Vertex.html" title="Represents a voxel vertex.">Vertex</a> buffer handle, or nullptr if the creation failed. </dd></dl>
+
+</div>
+</div>
+<a id="a3c68558b8097a3e1cb7a623c1fb6a41d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c68558b8097a3e1cb7a623c1fb6a41d">&#9670;&nbsp;</a></span>dispatchCompute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void cubos::core::gl::RenderDevice::dispatchCompute </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Dispatches a compute pipeline. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>X dimension of the work group. </td></tr>
+    <tr><td class="paramname">y</td><td>Y dimension of the work group. </td></tr>
+    <tr><td class="paramname">z</td><td>Z dimension of the work group. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1025,6 +1116,95 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <p>Gets a runtime property of the render device. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">prop</td><td>Property name. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae78091060921f548e1522590ae682a25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae78091060921f548e1522590ae682a25">&#9670;&nbsp;</a></span>memoryBarrier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void cubos::core::gl::RenderDevice::memoryBarrier </td>
+          <td>(</td>
+          <td class="paramtype">MemoryBarriers&#160;</td>
+          <td class="paramname"><em>barriers</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Defines a barrier ordering memory transactions. This ensure that all memory transactions before the barrier are completed before the barrier is executed. This function isn't supported on some platforms. Support can be queried using <code>renderDevice.getProperty(Property::ComputeSupported)</code>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">barriers</td><td>The barriers to apply. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7bef37f87139163e196f78d35376f76a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bef37f87139163e196f78d35376f76a">&#9670;&nbsp;</a></span>setScissor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void cubos::core::gl::RenderDevice::setScissor </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sets the current scissor rectangle. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Bottom left scissor rectangle corner X coordinate. </td></tr>
+    <tr><td class="paramname">y</td><td>Bottom left scissor rectangle corner Y coordinate. </td></tr>
+    <tr><td class="paramname">w</td><td>Scissor rectangle width. </td></tr>
+    <tr><td class="paramname">h</td><td>Scissor rectangle height. </td></tr>
   </table>
   </dd>
 </dl>

@@ -65,9 +65,9 @@ var NAVTREEINDEX =
 [
 ".html",
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a25d54c1a60ef3a007846c36aff900217",
-"classcubos_1_1core_1_1io_1_1Window.html#a0ca919cf42142ddb275a963939d09ef9",
-"functions_func_t.html",
-"structcubos_1_1core_1_1gl_1_1VertexElement.html"
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#a8ac5eef4d4197b529cfa5205da8c8f47",
+"file__system_8hpp_source.html",
+"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a4185d191b7a85d35183161379ca43c6a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
