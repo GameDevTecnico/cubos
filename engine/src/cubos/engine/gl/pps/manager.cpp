@@ -46,7 +46,7 @@ void pps::Manager::resize(glm::uvec2 size)
     fbDesc.targetCount = 1;
     fbDesc.targets[0].setTexture2DTarget(this->intermediateTex[0]);
     this->intermediateFb[0] = this->renderDevice.createFramebuffer(fbDesc);
-    fbDesc.targets[1].setTexture2DTarget(this->intermediateTex[1]);
+    fbDesc.targets[0].setTexture2DTarget(this->intermediateTex[1]);
     this->intermediateFb[1] = this->renderDevice.createFramebuffer(fbDesc);
 }
 
@@ -84,4 +84,9 @@ void pps::Manager::execute(Framebuffer out)
             nextI = (nextI + 1) % 2;
         }
     }
+}
+
+size_t pps::Manager::passCount() const
+{
+    return this->passes.size();
 }
