@@ -1,13 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a25d54c1a60ef3a007846c36aff900217":[5,0,0,0,0,13,20],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a297b60a8b90eaa1a970714f507f964c3":[5,0,0,0,0,13,6],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a29f7761c1a804d2b4988ebc300e8c199":[5,0,0,0,0,13,7],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a4dab29800187158c7e7236ba1980cab5":[5,0,0,0,0,13,3],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a52625a559f4e40b5a5d6b350c932d64e":[5,0,0,0,0,13,10],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a5407fa0ec8a434fb26278397ca0ca2c3":[5,0,0,0,0,13,2],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a58d34ebec38b0306a2632984cc78420e":[5,0,0,0,0,13,18],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a659b4df19df27e9c3f6b3baaeec4420d":[5,0,0,0,0,13,13],
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a65b3a16b562bb80b9f3520a67a7ce496":[5,0,0,0,0,13,4],
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a85d66d0a99d5e62616d3bdeb5faf6679":[5,0,0,0,0,13,19],
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a9c6cb0ecaa6a0ff016682eb4ce96d14f":[5,0,0,0,0,13,15],
@@ -249,5 +241,13 @@ var NAVTREEINDEX1 =
 "classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24af91a1326832b5be81a65007ffa28cb7b":[5,0,0,0,3,3,0,6],
 "classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24afa89fcc81e9dcfd52671c968fe4e6ddf":[5,0,0,0,3,3,0,9],
 "classcubos_1_1core_1_1io_1_1DoubleAxis.html":[5,0,0,0,3,4],
-"classcubos_1_1core_1_1io_1_1DoubleAxis.html#a5cc56023d7d4aebfac3d62891abf997e":[5,0,0,0,3,4,2]
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#a5cc56023d7d4aebfac3d62891abf997e":[5,0,0,0,3,4,2],
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#a8ac5eef4d4197b529cfa5205da8c8f47":[5,0,0,0,3,4,4],
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#aad8ac4aaac88bfe6a69077bf296ce03f":[5,0,0,0,3,4,1],
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#adc1c265f08509827c21e6133d8be2f5f":[5,0,0,0,3,4,0],
+"classcubos_1_1core_1_1io_1_1DoubleAxis.html#afefa6520d2f82b63dd36d3425c7fa0b3":[5,0,0,0,3,4,3],
+"classcubos_1_1core_1_1io_1_1InputManager.html":[5,0,0,0,3,5],
+"classcubos_1_1core_1_1io_1_1SingleAxis.html":[5,0,0,0,3,6],
+"classcubos_1_1core_1_1io_1_1SingleAxis.html#a0712b7cf06e8eaf6b04bcbefdf4adef4":[5,0,0,0,3,6,2],
+"classcubos_1_1core_1_1io_1_1SingleAxis.html#a08ca5ca5e17b47acac8645d8d564b2d2":[5,0,0,0,3,6,5]
 };

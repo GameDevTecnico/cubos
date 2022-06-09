@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['standard_849',['Standard',['../classcubos_1_1core_1_1io_1_1Cursor.html#a7b9c8b67bcf8b75c75663c9387d79b24',1,'cubos::core::io::Cursor']]]
+  ['blendfactor_993',['BlendFactor',['../namespacecubos_1_1core_1_1gl.html#a6f403e3c92ca905c93adf824782b9310',1,'cubos::core::gl']]],
+  ['blendop_994',['BlendOp',['../namespacecubos_1_1core_1_1gl.html#a8dcc78162dafd48d1f94a6c406d745e8',1,'cubos::core::gl']]]
 ];

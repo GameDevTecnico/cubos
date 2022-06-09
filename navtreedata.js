@@ -24,24 +24,30 @@ var NAVTREE =
 [
   [ "CUBOS.", "index.html", [
     [ "Introduction", "index.html", [
-      [ "Voxel based engine", "index.html#autotoc_md7", null ],
-      [ "Structure", "index.html#autotoc_md8", null ]
+      [ "Voxel based engine", "index.html#autotoc_md13", null ],
+      [ "Structure", "index.html#autotoc_md14", null ]
     ] ],
-    [ "Core", "core.html", null ],
+    [ "Core", "core.html", "core" ],
     [ "Engine", "engine.html", null ],
     [ "Cubinhos", "cubinhos.html", [
-      [ "Convert", "cubinhos.html#autotoc_md0", [
-        [ "Usage", "cubinhos.html#autotoc_md1", [
-          [ "Example 1: Creating a new palette", "cubinhos.html#autotoc_md2", null ],
-          [ "Example 2: Updating an existing palette", "cubinhos.html#autotoc_md3", null ],
-          [ "Example 3: Using an existing palette", "cubinhos.html#autotoc_md4", null ],
-          [ "Example 4: Querying the contents of a model", "cubinhos.html#autotoc_md5", null ]
+      [ "Convert", "cubinhos.html#autotoc_md6", [
+        [ "Usage", "cubinhos.html#autotoc_md7", [
+          [ "Example 1: Creating a new palette", "cubinhos.html#autotoc_md8", null ],
+          [ "Example 2: Updating an existing palette", "cubinhos.html#autotoc_md9", null ],
+          [ "Example 3: Using an existing palette", "cubinhos.html#autotoc_md10", null ],
+          [ "Example 4: Querying the contents of a model", "cubinhos.html#autotoc_md11", null ]
         ] ]
       ] ],
-      [ "Embed", "cubinhos.html#autotoc_md6", null ]
+      [ "Embed", "cubinhos.html#autotoc_md12", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ]
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ]
+      ] ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -64,10 +70,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a25d54c1a60ef3a007846c36aff900217",
-"classcubos_1_1core_1_1io_1_1DoubleAxis.html#a8ac5eef4d4197b529cfa5205da8c8f47",
-"file__system_8hpp_source.html",
-"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a4185d191b7a85d35183161379ca43c6a"
+"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a65b3a16b562bb80b9f3520a67a7ce496",
+"classcubos_1_1core_1_1io_1_1SingleAxis.html#a36b99c7af01fd93a85a2e4c1a5d506b0",
+"engine_2include_2cubos_2engine_2data_2palette_8hpp_source.html",
+"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a55f08c3785965c5a3d59940eebde0993"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
