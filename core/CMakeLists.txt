@@ -41,6 +41,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/qb_parser.cpp"
 
     "src/cubos/core/io/window.cpp"
+    "src/cubos/core/io/cursor.cpp"
     "src/cubos/core/io/glfw_window.hpp"
     "src/cubos/core/io/glfw_window.cpp"
 
@@ -62,6 +63,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/light.cpp"
     "src/cubos/core/gl/util.cpp"
     "src/cubos/core/gl/vertex.cpp"
+
+    "src/cubos/core/ui/imgui.cpp"
 
     "src/cubos/core/ecs/world.cpp"
 )
@@ -91,6 +94,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/qb_parser.hpp"
 
     "include/cubos/core/io/window.hpp"
+    "include/cubos/core/io/keyboard.hpp"
+    "include/cubos/core/io/cursor.hpp"
 
     "include/cubos/core/gl/debug.hpp"
     "include/cubos/core/gl/render_device.hpp"
@@ -109,6 +114,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/sources/button_press.hpp"
     "include/cubos/core/io/sources/single_axis.hpp"
     "include/cubos/core/io/sources/double_axis.hpp"
+
+    "include/cubos/core/ui/imgui.hpp"
 
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/world_view.hpp"
@@ -181,10 +188,20 @@ else ()
     find_package(fmt REQUIRED)
 endif ()
 
+add_library(imgui STATIC
+    "lib/imgui/imgui.cpp"
+    "lib/imgui/imgui_draw.cpp"
+    "lib/imgui/imgui_tables.cpp"
+    "lib/imgui/imgui_widgets.cpp"
+    "lib/imgui/imgui_demo.cpp"
+)
+
+target_include_directories(imgui PUBLIC "lib/imgui")
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp fmt::fmt ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp imgui fmt::fmt ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests

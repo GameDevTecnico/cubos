@@ -57,7 +57,7 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         type = GL_BYTE;
         break;
     case TextureFormat::RGBA8UNorm:
-        internalFormat = GL_RGBA8;
+        internalFormat = GL_RGBA;
         format = GL_RGBA;
         type = GL_UNSIGNED_BYTE;
         break;
@@ -440,6 +440,7 @@ public:
     virtual ~OGLRasterState() = default;
 
     GLboolean cullEnabled;
+    GLboolean scissorEnabled;
     GLenum frontFace;
     GLenum cullFace;
     GLenum polygonMode;
@@ -726,7 +727,7 @@ public:
 class OGLIndexBuffer : public impl::IndexBuffer
 {
 public:
-    OGLIndexBuffer(GLuint id, GLenum format) : id(id), format(format)
+    OGLIndexBuffer(GLuint id, GLenum format, size_t indexSz) : id(id), format(format), indexSz(indexSz)
     {
     }
 
@@ -748,6 +749,7 @@ public:
 
     GLenum format;
     GLuint id;
+    size_t indexSz;
 };
 
 class OGLVertexBuffer : public impl::VertexBuffer
@@ -1287,6 +1289,7 @@ RasterState OGLRenderDevice::createRasterState(const RasterStateDesc& desc)
 {
     auto rs = std::make_shared<OGLRasterState>();
     rs->cullEnabled = desc.cullEnabled;
+    rs->scissorEnabled = desc.scissorEnabled;
     faceToGL(desc.cullFace, rs->cullFace);
     windingToGL(desc.frontFace, rs->frontFace);
     rasterModeToGL(desc.rasterMode, rs->polygonMode);
@@ -1304,6 +1307,11 @@ void OGLRenderDevice::setRasterState(RasterState _rs)
         glEnable(GL_CULL_FACE);
         glCullFace(rs->cullFace);
     }
+
+    if (!rs->scissorEnabled)
+        glDisable(GL_SCISSOR_TEST);
+    else
+        glEnable(GL_SCISSOR_TEST);
 
     glFrontFace(rs->frontFace);
     glPolygonMode(GL_FRONT_AND_BACK, rs->polygonMode);
@@ -1522,6 +1530,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     GLuint id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
         glTexImage2D(GL_TEXTURE_2D, i, internalFormat, desc.width / div, desc.height / div, 0, format, type,
                      desc.data[i]);
@@ -1777,10 +1786,17 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
         abort(); // Invalid enum value
 
     GLenum glFormat;
+    size_t indexSz;
     if (format == IndexFormat::UShort)
+    {
         glFormat = GL_UNSIGNED_SHORT;
+        indexSz = 2;
+    }
     else if (format == IndexFormat::UInt)
+    {
         glFormat = GL_UNSIGNED_INT;
+        indexSz = 4;
+    }
     else
         abort(); // Invalid enum value
 
@@ -1799,7 +1815,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
         return nullptr;
     }
 
-    return std::make_shared<OGLIndexBuffer>(id, glFormat);
+    return std::make_shared<OGLIndexBuffer>(id, glFormat, indexSz);
 }
 
 void OGLRenderDevice::setIndexBuffer(IndexBuffer _ib)
@@ -1807,6 +1823,7 @@ void OGLRenderDevice::setIndexBuffer(IndexBuffer _ib)
     auto ib = std::static_pointer_cast<OGLIndexBuffer>(_ib);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib->id);
     this->currentIndexFormat = ib->format;
+    this->currentIndexSz = ib->indexSz;
 }
 
 VertexBuffer OGLRenderDevice::createVertexBuffer(size_t size, const void* data, Usage usage)
@@ -2154,7 +2171,8 @@ void OGLRenderDevice::drawTriangles(size_t offset, size_t count)
 
 void OGLRenderDevice::drawTrianglesIndexed(size_t offset, size_t count)
 {
-    glDrawElements(GL_TRIANGLES, count, this->currentIndexFormat, reinterpret_cast<const void*>(offset));
+    glDrawElements(GL_TRIANGLES, count, this->currentIndexFormat,
+                   reinterpret_cast<const void*>(offset * this->currentIndexSz));
 }
 
 void OGLRenderDevice::drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount)
@@ -2164,8 +2182,8 @@ void OGLRenderDevice::drawTrianglesInstanced(size_t offset, size_t count, size_t
 
 void OGLRenderDevice::drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount)
 {
-    glDrawElementsInstanced(GL_TRIANGLES, count, this->currentIndexFormat, reinterpret_cast<const void*>(offset),
-                            instanceCount);
+    glDrawElementsInstanced(GL_TRIANGLES, count, this->currentIndexFormat,
+                            reinterpret_cast<const void*>(offset * this->currentIndexSz), instanceCount);
 }
 
 void OGLRenderDevice::dispatchCompute(size_t x, size_t y, size_t z)
@@ -2194,6 +2212,11 @@ void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
 void OGLRenderDevice::setViewport(int x, int y, int w, int h)
 {
     glViewport(x, y, w, h);
+}
+
+void OGLRenderDevice::setScissor(int x, int y, int w, int h)
+{
+    glScissor(x, y, w, h);
 }
 
 int OGLRenderDevice::getProperty(Property prop)
