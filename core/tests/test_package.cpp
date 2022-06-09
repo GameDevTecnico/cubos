@@ -61,7 +61,7 @@ TEST(Cubos_Core_Data_Package, Packaging_And_Unpackaging)
     EXPECT_EQ(listPkg.size(), 2);
     EXPECT_STREQ(listPkg.element(0).field("name").get<std::string>().c_str(), "orange");
     EXPECT_STREQ(listPkg.element(1).field("name").get<std::string>().c_str(), "apple");
-    
+
     // Add the banana to the list.
     listPkg.elements().push_back(pkg);
     EXPECT_EQ(listPkg.size(), 3);
