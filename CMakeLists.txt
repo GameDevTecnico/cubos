@@ -14,6 +14,7 @@ find_package(Doxygen COMPONENTS dot)
 
 if (Doxygen_FOUND)
     set(DOXYGEN_GENERATE_TREEVIEW YES)
+    set(DOXYGEN_HIDE_SCOPE_NAMES YES)
     set(DOXYGEN_PROJECT_NAME "CUBOS.")
     set(DOXYGEN_HTML_EXTRA_FILES ${CMAKE_SOURCE_DIR}/docs/css/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js)
     set(DOXYGEN_HTML_EXTRA_STYLESHEET ${CMAKE_SOURCE_DIR}/docs/css/doxygen-awesome-css/doxygen-awesome.css)
