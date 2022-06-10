@@ -1,18 +1,14 @@
 ---
 metas:
-  - id: car/qb
-    type: QBMatrix
-    usage: Dynamic
-    params:
-      path: /assets/car.qb
-  - id: car/grid
-    type: Grid
-    usage: Static
-    params:
-      qb: car/qb
-      index: 0
-  - id: car/palette
+  - id: palette
     type: Palette
     usage: Static
     params:
+      path: /assets/main.pal
+
+  - id: car
+    type: Grid
+    usage: Static
+    params:
+      path: /assets/car.grd
 ...

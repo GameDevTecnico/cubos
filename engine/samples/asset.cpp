@@ -24,6 +24,7 @@ public:
 class SampleTextLoader : public data::Loader
 {
 public:
+    using data::Loader::Loader;
     virtual const void* load(const data::Meta& meta)
     {
         auto path = meta.getParameters().find("path");
@@ -81,4 +82,7 @@ int main(int argc, char** argv)
     {
         core::memory::Stream::stdOut.printf("{}", text->content);
     }
+
+    // Loads all unloaded static assets.
+    assetManager.loadStatic();
 }

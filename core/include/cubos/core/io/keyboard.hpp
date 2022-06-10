@@ -109,6 +109,40 @@ namespace cubos::core::io
 
         Count
     };
+
+    /// Keyboard modifier flags enum.
+    enum class Modifiers
+    {
+        None = 0,
+        Control = 1,
+        Shift = 2,
+        Alt = 4,
+        System = 8,
+    };
+
+    // Operator overloads for Modifiers.
+
+    inline Modifiers operator|(Modifiers lhs, Modifiers rhs)
+    {
+        return static_cast<Modifiers>(static_cast<int>(lhs) | static_cast<int>(rhs));
+    }
+
+    inline Modifiers operator&(Modifiers lhs, Modifiers rhs)
+    {
+        return static_cast<Modifiers>(static_cast<int>(lhs) & static_cast<int>(rhs));
+    }
+
+    inline Modifiers& operator|=(Modifiers& lhs, Modifiers rhs)
+    {
+        lhs = lhs | rhs;
+        return lhs;
+    }
+
+    inline Modifiers& operator&=(Modifiers& lhs, Modifiers rhs)
+    {
+        lhs = lhs & rhs;
+        return lhs;
+    }
 } // namespace cubos::core::io
 
 #endif // CUBOS_CORE_IO_KEYBOARD_HPP

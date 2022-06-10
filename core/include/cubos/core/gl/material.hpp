@@ -1,8 +1,8 @@
 #ifndef CUBOS_CORE_GL_MATERIAL_HPP
 #define CUBOS_CORE_GL_MATERIAL_HPP
 
-#include <cubos/core/memory/serializer.hpp>
-#include <cubos/core/memory/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/deserializer.hpp>
 
 #include <glm/glm.hpp>
 
@@ -15,14 +15,27 @@ namespace cubos::core::gl
 
         glm::vec4 color; ///< The color of the material.
 
-        /// Serializes the material.
-        /// @param serializer The serializer to use.
-        void serialize(memory::Serializer& serializer) const;
-
-        /// Deserializes the material.
-        /// @param deserializer The deserializer to use.
-        void deserialize(memory::Deserializer& deserializer);
+        /// Compares this material with another and returns a number which indicates how similar they are to one
+        /// another. The number is in the range [0, 1], where 0 means they are completely different and 1 means they
+        /// are exactly the same.
+        /// @param other The other material to compare with.
+        /// @return The similarity between the two materials.
+        float similarity(const Material& other) const;
     };
 } // namespace cubos::core::gl
+
+namespace cubos::core::data
+{
+    /// Serializes a material.
+    /// @param serializer The serializer to use.
+    /// @param mat The material to serialize.
+    /// @param name The name of the material.
+    void serialize(Serializer& serializer, const gl::Material& mat, const char* name);
+
+    /// Deserializes a material.
+    /// @param deserializer The deserializer to use.
+    /// @param mat The material to deserialize.
+    void deserialize(Deserializer& deserializer, gl::Material& mat);
+} // namespace cubos::core::data
 
 #endif // CUBOS_CORE_GL_MATERIAL_HPP

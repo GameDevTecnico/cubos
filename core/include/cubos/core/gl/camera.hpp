@@ -10,9 +10,10 @@ namespace cubos::core::gl
     /// Holds data describing a camera.
     struct Camera
     {
-        glm::mat4 viewMatrix;        ///< The Camera's view matrix.
-        glm::mat4 perspectiveMatrix; ///< The camera's perspective matrix.
-        gl::Framebuffer target;      ///< The target framebuffer which the camera should be used to draw into.
+        float fovY;     ///< The vertical field of view in degrees.
+        float zNear;    ///< The near clipping plane.
+        float zFar;     ///< The far clipping plane.
+        glm::mat4 view; ///< The camera's view matrix.
     };
 } // namespace cubos::core::gl
 

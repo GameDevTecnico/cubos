@@ -27,11 +27,13 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/std_stream.cpp"
     "src/cubos/core/memory/buffer_stream.cpp"
-    "src/cubos/core/memory/serializer.cpp"
-    "src/cubos/core/memory/deserializer.cpp"
-    "src/cubos/core/memory/yaml_serializer.cpp"
-    "src/cubos/core/memory/yaml_deserializer.cpp"
 
+    "src/cubos/core/data/serializer.cpp"
+    "src/cubos/core/data/deserializer.cpp"
+    "src/cubos/core/data/yaml_serializer.cpp"
+    "src/cubos/core/data/yaml_deserializer.cpp"
+    "src/cubos/core/data/binary_serializer.cpp"
+    "src/cubos/core/data/binary_deserializer.cpp"
     "src/cubos/core/data/file.cpp"
     "src/cubos/core/data/file_system.cpp"
     "src/cubos/core/data/std_archive.cpp"
@@ -39,6 +41,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/qb_parser.cpp"
 
     "src/cubos/core/io/window.cpp"
+    "src/cubos/core/io/cursor.cpp"
     "src/cubos/core/io/glfw_window.hpp"
     "src/cubos/core/io/glfw_window.cpp"
 
@@ -61,7 +64,10 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/util.cpp"
     "src/cubos/core/gl/vertex.cpp"
 
+    "src/cubos/core/ui/imgui.cpp"
+
     "src/cubos/core/ecs/world.cpp"
+    "src/cubos/core/ecs/system.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE
@@ -71,13 +77,15 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/std_stream.hpp"
     "include/cubos/core/memory/buffer_stream.hpp"
-    "include/cubos/core/memory/serializer.hpp"
-    "include/cubos/core/memory/deserializer.hpp"
-    "include/cubos/core/memory/yaml_serializer.hpp"
-    "include/cubos/core/memory/yaml_deserializer.hpp"
-    "include/cubos/core/memory/serialization_map.hpp"
     "include/cubos/core/memory/endianness.hpp"
 
+    "include/cubos/core/data/serializer.hpp"
+    "include/cubos/core/data/deserializer.hpp"
+    "include/cubos/core/data/yaml_serializer.hpp"
+    "include/cubos/core/data/yaml_deserializer.hpp"
+    "include/cubos/core/data/binary_serializer.hpp"
+    "include/cubos/core/data/binary_deserializer.hpp"
+    "include/cubos/core/data/serialization_map.hpp"
     "include/cubos/core/data/file.hpp"
     "include/cubos/core/data/file_stream.hpp"
     "include/cubos/core/data/file_system.hpp"
@@ -87,6 +95,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/qb_parser.hpp"
 
     "include/cubos/core/io/window.hpp"
+    "include/cubos/core/io/keyboard.hpp"
+    "include/cubos/core/io/cursor.hpp"
 
     "include/cubos/core/gl/debug.hpp"
     "include/cubos/core/gl/render_device.hpp"
@@ -106,12 +116,16 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/sources/single_axis.hpp"
     "include/cubos/core/io/sources/double_axis.hpp"
 
+    "include/cubos/core/ui/imgui.hpp"
+
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/world_view.hpp"
     "include/cubos/core/ecs/storage.hpp"
     "include/cubos/core/ecs/vec_storage.hpp"
     "include/cubos/core/ecs/map_storage.hpp"
     "include/cubos/core/ecs/null_storage.hpp"
+    "include/cubos/core/ecs/system.hpp"
+    "include/cubos/core/ecs/iterating_system.hpp"
 )
 
 # Create core library
@@ -177,10 +191,20 @@ else ()
     find_package(fmt REQUIRED)
 endif ()
 
+add_library(imgui STATIC
+    "lib/imgui/imgui.cpp"
+    "lib/imgui/imgui_draw.cpp"
+    "lib/imgui/imgui_tables.cpp"
+    "lib/imgui/imgui_widgets.cpp"
+    "lib/imgui/imgui_demo.cpp"
+)
+
+target_include_directories(imgui PUBLIC "lib/imgui")
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp fmt::fmt ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp imgui fmt::fmt ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests
@@ -196,21 +220,4 @@ endif ()
 # Add core samples
 if (BUILD_CORE_SAMPLES)
     add_subdirectory(samples)
-endif ()
-
-# Add doxygen documentation
-
-find_package(Doxygen COMPONENTS dot)
-
-if (Doxygen_FOUND)
-    set(DOXYGEN_GENERATE_TREEVIEW YES)
-    set(DOXYGEN_HTML_EXTRA_FILES ${CMAKE_SOURCE_DIR}/docs/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js)
-    set(DOXYGEN_HTML_EXTRA_STYLESHEET ${CMAKE_SOURCE_DIR}/docs/doxygen-awesome-css/doxygen-awesome.css)
-    set(DOXYGEN_HTML_HEADER ${CMAKE_SOURCE_DIR}/docs/header.html)
-    set(DOXYGEN_HTML_FOOTER ${CMAKE_SOURCE_DIR}/docs/footer.html)
-    doxygen_add_docs(
-        core-doxygen
-        "include"
-        COMMENT "Generate core documentation"
-    )
 endif ()
