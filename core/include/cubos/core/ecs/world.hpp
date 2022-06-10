@@ -49,6 +49,11 @@ namespace cubos::core::ecs
         /// @param entity Entity ID.
         template <typename T> T& getComponent(uint64_t entity);
 
+        /// @brief Checks if an entity has a component.
+        /// @tparam T Component type.
+        /// @param entity Entity ID.
+        template <typename T> bool hasComponent(uint64_t entity);
+
         /// @brief Removes a component from an entity.
         /// @tparam T Component type to be removed.
         /// @param entity Entity ID.
@@ -164,6 +169,19 @@ namespace cubos::core::ecs
 
         Storage<T>* storage = (Storage<T>*)storages[componentId];
         return *storage->get(entityIndex);
+    }
+
+    template <typename T> bool World::hasComponent(uint64_t entity)
+    {
+        uint32_t entityIndex = (uint32_t)entity;
+        if (entity >> 32 != entityData[entityIndex * elementsPerEntity])
+        {
+            logCritical("World::hasComponent() failed because entity {} was already removed!", entity);
+            abort();
+        }
+
+        size_t componentId = this->getLocalComponentID<T>();
+        return (entityData[entityIndex * elementsPerEntity + 1 + componentId / 8] & (1 << (componentId % 8))) != 0;
     }
 
     template <typename T> void World::removeComponent(uint64_t entity)
