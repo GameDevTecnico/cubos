@@ -11,6 +11,7 @@ BufferStream::BufferStream(void* buffer, size_t size, bool readOnly)
     this->position = 0;
     this->readOnly = readOnly;
     this->reachedEof = false;
+    this->owned = false;
 }
 
 BufferStream::BufferStream(const void* buffer, size_t size)
@@ -22,6 +23,30 @@ BufferStream::BufferStream(const void* buffer, size_t size)
     this->position = 0;
     this->readOnly = true;
     this->reachedEof = false;
+    this->owned = false;
+}
+
+BufferStream::BufferStream(size_t size)
+{
+    if (size == 0)
+    {
+        abort();
+    }
+
+    this->buffer = new char[size];
+    this->size = size;
+    this->position = 0;
+    this->readOnly = false;
+    this->reachedEof = false;
+    this->owned = true;
+}
+
+BufferStream::~BufferStream()
+{
+    if (this->owned)
+    {
+        delete[] static_cast<char*>(this->buffer);
+    }
 }
 
 BufferStream::BufferStream(BufferStream&& other)
@@ -31,11 +56,13 @@ BufferStream::BufferStream(BufferStream&& other)
     this->position = other.position;
     this->readOnly = other.readOnly;
     this->reachedEof = other.reachedEof;
+    this->owned = other.owned;
     other.buffer = nullptr;
     other.size = 0;
     other.position = 0;
     other.readOnly = true;
     other.reachedEof = true;
+    other.owned = false;
 }
 
 size_t BufferStream::read(void* data, size_t size)
@@ -59,8 +86,26 @@ size_t BufferStream::write(const void* data, size_t size)
     size_t bytesRemaining = this->size - this->position;
     if (size > bytesRemaining)
     {
-        size = bytesRemaining;
-        this->reachedEof = true;
+        if (this->owned)
+        {
+            // Expand the buffer.
+            size_t newSize = this->size * 2;
+            while (newSize < this->position + size)
+            {
+                newSize *= 2;
+            }
+
+            char* newBuffer = new char[newSize];
+            memcpy(newBuffer, static_cast<char*>(this->buffer), this->size);
+            delete[] static_cast<char*>(this->buffer);
+            this->buffer = newBuffer;
+            this->size = newSize;
+        }
+        else
+        {
+            size = bytesRemaining;
+            this->reachedEof = true;
+        }
     }
     memcpy(static_cast<char*>(this->buffer) + this->position, data, size);
     this->position += size;
