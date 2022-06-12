@@ -65,6 +65,11 @@ BufferStream::BufferStream(BufferStream&& other)
     other.owned = false;
 }
 
+const void* BufferStream::getBuffer() const
+{
+    return this->buffer;
+}
+
 size_t BufferStream::read(void* data, size_t size)
 {
     size_t bytesRemaining = this->size - this->position;
