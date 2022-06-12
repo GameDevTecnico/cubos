@@ -30,6 +30,7 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/data/serializer.cpp"
     "src/cubos/core/data/deserializer.cpp"
+    "src/cubos/core/data/debug_serializer.cpp"
     "src/cubos/core/data/yaml_serializer.cpp"
     "src/cubos/core/data/yaml_deserializer.cpp"
     "src/cubos/core/data/binary_serializer.cpp"
@@ -81,6 +82,7 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/data/serializer.hpp"
     "include/cubos/core/data/deserializer.hpp"
+    "include/cubos/core/data/debug_serializer.hpp"
     "include/cubos/core/data/yaml_serializer.hpp"
     "include/cubos/core/data/yaml_deserializer.hpp"
     "include/cubos/core/data/binary_serializer.hpp"
@@ -179,16 +181,17 @@ else ()
     find_package(googletest REQUIRED)
 endif ()
 
-if (SPDLOG_USE_SUBMODULE)
-    add_subdirectory(lib/spdlog)
-else ()
-    find_package(spdlog REQUIRED)
-endif ()
-
 if (FMT_USE_SUBMODULE)
     add_subdirectory(lib/fmt)
 else ()
     find_package(fmt REQUIRED)
+endif ()
+
+if (SPDLOG_USE_SUBMODULE)
+    add_subdirectory(lib/spdlog)
+else ()
+    set(SPDLOG_FMT_EXTERNAL ON CACHE BOOL "" FORCE)
+    find_package(spdlog REQUIRED)
 endif ()
 
 add_library(imgui STATIC
