@@ -11,7 +11,7 @@ namespace cubos::core::ecs
     /// @tparam ComponentTypes The set of component types to be iterated.
     template <typename... ComponentTypes> struct WorldView
     {
-        World& world;              ///< The world being viewed.
+        World& world;               ///< The world being viewed.
         std::vector<uint32_t> mask; /// The mask of the components to be iterated.
 
         /// @param w The world to be viewed.
@@ -20,8 +20,8 @@ namespace cubos::core::ecs
         /// Type of the iterator.
         struct Iterator
         {
-            World& world;                     ///< The world being viewed.
-            size_t current;                   ///< The current entity.
+            World& world;                      ///< The world being viewed.
+            size_t current;                    ///< The current entity.
             const std::vector<uint32_t>& mask; ///< The mask of the components to be iterated.
 
             /// @param w The world to be viewed.
