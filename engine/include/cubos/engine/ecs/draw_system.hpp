@@ -18,7 +18,7 @@ namespace cubos::engine::ecs
         DrawSystem(gl::Frame& frame);
 
     private:
-        virtual void process(core::ecs::World& World, uint64_t entity, Grid& grid, LocalToWorld& localToWorld) override;
+        virtual void process(core::ecs::World& world, uint64_t entity, Grid& grid, LocalToWorld& localToWorld) override;
 
         gl::Frame& frame; ///< The frame to draw to.
     };
