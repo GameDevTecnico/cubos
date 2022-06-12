@@ -11,8 +11,11 @@ namespace cubos::engine::ecs
     /// Scale components present.
     class TransformSystem : public core::ecs::IteratingSystem<LocalToWorld>
     {
+    public:
+        virtual void init(core::ecs::World& world) override;
+
     private:
-        void process(core::ecs::World& world, uint64_t entity, LocalToWorld& localToWorld) override;
+        virtual void process(core::ecs::World& world, uint64_t entity, LocalToWorld& localToWorld) override;
     };
 } // namespace cubos::engine::ecs
 

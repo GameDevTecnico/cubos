@@ -3,8 +3,7 @@
 
 #include <cubos/core/ecs/vec_storage.hpp>
 
-#include <cubos/engine/data/grid.hpp>
-#include <cubos/engine/data/asset.hpp>
+#include <cubos/engine/gl/renderer.hpp>
 
 #include <glm/glm.hpp>
 
@@ -15,8 +14,8 @@ namespace cubos::engine::ecs
     {
         using Storage = core::ecs::VecStorage<Grid>;
 
-        data::Asset<data::Grid> asset; ///< The asset of the grid being rendered.
-        glm::vec3 modelOffset;         ///< The offset of the model.
+        gl::RendererGrid handle; ///< The handle of the grid being rendered.
+        glm::vec3 modelOffset;   ///< The offset of the model.
     };
 
 } // namespace cubos::engine::ecs

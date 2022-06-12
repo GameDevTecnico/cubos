@@ -30,8 +30,7 @@ namespace cubos::engine::gl::deferred
 
         // Implement interface methods.
 
-        virtual GridID upload(const core::gl::Grid& grid) override;
-        virtual void free(GridID grid) override;
+        virtual RendererGrid upload(const core::gl::Grid& grid) override;
         virtual void setPalette(const core::gl::Palette& palette) override;
 
     protected:
@@ -42,17 +41,6 @@ namespace cubos::engine::gl::deferred
                               core::gl::Framebuffer target) override;
 
     private:
-        // Uploaded grids.
-
-        struct GpuGrid
-        {
-            core::gl::VertexArray va;
-            core::gl::IndexBuffer ib;
-            size_t indexCount;
-        };
-
-        std::vector<GpuGrid> grids;
-
         // GBuffer.
 
         glm::uvec2 size;

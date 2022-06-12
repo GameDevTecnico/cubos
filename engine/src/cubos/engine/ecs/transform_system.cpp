@@ -8,6 +8,14 @@
 using namespace cubos::core::ecs;
 using namespace cubos::engine::ecs;
 
+void TransformSystem::init(World& world)
+{
+    world.registerComponent<LocalToWorld>();
+    world.registerComponent<Position>();
+    world.registerComponent<Rotation>();
+    world.registerComponent<Scale>();
+}
+
 void TransformSystem::process(World& world, uint64_t entity, LocalToWorld& localToWorld)
 {
     localToWorld.mat = glm::mat4(1.0f);

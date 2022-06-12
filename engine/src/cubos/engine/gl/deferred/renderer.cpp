@@ -14,6 +14,14 @@ using namespace cubos::core::gl;
 using namespace cubos::engine;
 using namespace cubos::engine::gl;
 
+/// Deferred renderer grid implementation.
+struct DeferredGrid : public engine::gl::impl::RendererGrid
+{
+    core::gl::VertexArray va;
+    core::gl::IndexBuffer ib;
+    size_t indexCount;
+};
+
 /// Holds the model view matrix sent to the geometry pass pipeline.
 struct MVP
 {
@@ -313,9 +321,9 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size) : gl::
     this->onResize(size);
 }
 
-Renderer::GridID deferred::Renderer::upload(const Grid& grid)
+RendererGrid deferred::Renderer::upload(const Grid& grid)
 {
-    GpuGrid gpuGrid;
+    auto deferredGrid = std::make_shared<DeferredGrid>();
 
     // First, triangulate the grid.
     // This may be improved in the future by doing it in a separate thread and only blocking on it when the grid needs
@@ -348,21 +356,12 @@ Renderer::GridID deferred::Renderer::upload(const Grid& grid)
     vaDesc.buffers[0] =
         this->renderDevice.createVertexBuffer(vertices.size() * sizeof(Vertex), vertices.data(), Usage::Static);
     vaDesc.shaderPipeline = this->geometryPipeline;
-    gpuGrid.va = renderDevice.createVertexArray(vaDesc);
-    gpuGrid.ib =
+    deferredGrid->va = renderDevice.createVertexArray(vaDesc);
+    deferredGrid->ib =
         renderDevice.createIndexBuffer(indices.size() * sizeof(size_t), &indices[0], IndexFormat::UInt, Usage::Static);
-    gpuGrid.indexCount = indices.size();
+    deferredGrid->indexCount = indices.size();
 
-    // Add it to the vector of grids.
-    this->grids.push_back(gpuGrid);
-    return this->grids.size() - 1;
-}
-
-void deferred::Renderer::free(GridID grid)
-{
-    this->grids[grid].va = nullptr;
-    this->grids[grid].ib = nullptr;
-    this->grids[grid].indexCount = 0;
+    return deferredGrid;
 }
 
 void deferred::Renderer::setPalette(const core::gl::Palette& palette)
@@ -536,10 +535,10 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         this->mvpBuffer->unmap();
 
         // 4.3.2. Draw the geometry.
-        GpuGrid& grid = this->grids[drawCmd.grid];
-        this->renderDevice.setVertexArray(grid.va);
-        this->renderDevice.setIndexBuffer(grid.ib);
-        this->renderDevice.drawTrianglesIndexed(0, grid.indexCount);
+        auto grid = std::static_pointer_cast<DeferredGrid>(drawCmd.grid);
+        this->renderDevice.setVertexArray(grid->va);
+        this->renderDevice.setIndexBuffer(grid->ib);
+        this->renderDevice.drawTrianglesIndexed(0, grid->indexCount);
     }
 
     // 5. Lighting pass.

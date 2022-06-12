@@ -5,7 +5,11 @@
 using namespace cubos::core::ecs;
 using namespace cubos::engine::ecs;
 
+DrawSystem::DrawSystem(gl::Frame& frame) : frame(frame)
+{
+}
+
 void DrawSystem::process(World& world, uint64_t entity, Grid& grid, LocalToWorld& localToWorld)
 {
-    this->frame.draw(grid.asset->id, localToWorld.mat * glm::translate(glm::mat4(1.0f), grid.modelOffset));
+    this->frame.draw(grid.handle, localToWorld.mat * glm::translate(glm::mat4(1.0f), grid.modelOffset));
 }

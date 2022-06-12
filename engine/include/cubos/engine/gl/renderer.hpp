@@ -15,12 +15,20 @@
 
 namespace cubos::engine::gl
 {
+    class Frame;
+
     namespace pps
     {
         class Pass;
     }
 
-    class Frame;
+    namespace impl
+    {
+        class RendererGrid;
+    }
+
+    /// Handle to a grid uploaded to the GPU, to be used for rendering.
+    using RendererGrid = std::shared_ptr<impl::RendererGrid>;
 
     /// Interface class which abstracts different rendering methods.
     /// @details This abstraction allows us to, for example, switch between a
@@ -30,23 +38,16 @@ namespace cubos::engine::gl
     class Renderer
     {
     public:
-        using GridID = size_t;
-        using PaletteID = size_t;
-
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
         Renderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
         Renderer(const Renderer&) = delete;
         virtual ~Renderer() = default;
 
-        /// Uploads a grid to the GPU and returns an ID, which can be used to draw it.
+        /// Uploads a grid to the GPU and returns an handle, which can be used to draw it.
         /// @param grid The grid to upload.
-        /// @return The ID of the grid.
-        virtual GridID upload(const core::gl::Grid& grid) = 0;
-
-        /// Frees a grid from the GPU.
-        /// @param grid The ID of the grid to free.
-        virtual void free(GridID grid) = 0;
+        /// @return The handle of the grid.
+        virtual RendererGrid upload(const core::gl::Grid& grid) = 0;
 
         /// Sets the current palette of the renderer.
         /// @param palette The palette to set.
@@ -90,6 +91,19 @@ namespace cubos::engine::gl
         core::gl::Framebuffer framebuffer; ///< The framebuffer where the frame is drawn.
         core::gl::Texture2D texture;       ///< The texture where the frame is drawn.
     };
+
+    /// Abstract types are defined inside this namespace, they should be used (derived) only in renderer
+    /// implementations.
+    namespace impl
+    {
+        /// Represents a grid which was uploaded to the GPU.
+        class RendererGrid
+        {
+        protected:
+            RendererGrid() = default;
+            virtual ~RendererGrid() = default;
+        };
+    } // namespace impl
 } // namespace cubos::engine::gl
 
 #endif // CUBOS_ENGINE_GL_RENDERER_HPP

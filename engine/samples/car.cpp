@@ -1,370 +1,383 @@
 #include <cubos/core/log.hpp>
+
+#include <cubos/core/ecs/world.hpp>
+#include <cubos/core/ecs/null_storage.hpp>
+
 #include <cubos/core/io/window.hpp>
-#include <cubos/core/gl/render_device.hpp>
-#include <cubos/core/gl/vertex.hpp>
-#include <cubos/core/gl/palette.hpp>
-#include <cubos/core/gl/grid.hpp>
-#include <cubos/core/gl/debug.hpp>
-#include <cubos/engine/gl/deferred/renderer.hpp>
-#include <cubos/engine/gl/pps/copy_pass.hpp>
+
+#include <cubos/core/gl/light.hpp>
+
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/data/std_archive.hpp>
 #include <cubos/core/data/qb_parser.hpp>
+
 #include <cubos/core/io/input_manager.hpp>
 #include <cubos/core/io/sources/double_axis.hpp>
 #include <cubos/core/io/sources/single_axis.hpp>
 #include <cubos/core/io/sources/button_press.hpp>
-#define GLM_ENABLE_EXPERIMENTAL
+
+#include <cubos/engine/gl/deferred/renderer.hpp>
+
+#include <cubos/engine/data/asset_manager.hpp>
+#include <cubos/engine/data/grid.hpp>
+#include <cubos/engine/data/palette.hpp>
+
+#include <cubos/engine/ecs/position.hpp>
+#include <cubos/engine/ecs/rotation.hpp>
+#include <cubos/engine/ecs/scale.hpp>
+#include <cubos/engine/ecs/local_to_world.hpp>
+#include <cubos/engine/ecs/grid.hpp>
+#include <cubos/engine/ecs/draw_system.hpp>
+#include <cubos/engine/ecs/transform_system.hpp>
+
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include <glm/ext.hpp>
-#include <unordered_map>
+#include <glm/gtx/vector_angle.hpp>
 
 using namespace cubos;
-using namespace cubos::core;
-using namespace cubos::core::gl;
 using namespace cubos::engine;
-using namespace cubos::engine::gl;
 
-Palette palette;
-
-Renderer::ModelID registerModel(Grid& grid, const Palette& modelPalette,
-                                           Renderer& renderer)
+// Tag for the floor entity.
+struct Floor
 {
-    for (int x = 0; x < grid.getSize().x; ++x)
-    {
-        for (int y = 0; y < grid.getSize().y; ++y)
-        {
-            for (int z = 0; z < grid.getSize().z; ++z)
-            {
-                auto index = grid.get(glm::vec3(x, y, z));
-                if (index > 0)
-                    grid.set(glm::vec3(x, y, z), index + palette.getSize());
-            }
-        }
-    }
-    auto origSize = palette.getSize();
-    for (int i = 0; i < modelPalette.getSize(); ++i)
-    {
-        palette.set(origSize + i + 1, modelPalette.get(i + 1));
-    }
+    using Storage = core::ecs::NullStorage<Floor>;
+};
 
-    return renderer.registerModel(grid);
-}
-
-class FreeCamera : public cubos::core::gl::Camera
+// Tag for the camera entity.
+struct Camera
 {
-private:
-    bool enabled = true;
-    glm::vec2 lastLook{-1};
-    glm::vec3 pos{7, 7, 7};
-    glm::vec2 orientation{45.0f * 3, 0.0f};
-    glm::vec3 movement{0};
+    using Storage = core::ecs::NullStorage<Camera>;
+};
 
+// Component for the car entity.
+struct Car
+{
+    using Storage = core::ecs::VecStorage<Car>;
+
+    glm::vec3 vel = {0.0f, 0.0f, 0.0f};
+    float angVel = 0.0f;
+};
+
+// Stores input data.
+struct Input
+{
+    using Storage = core::ecs::NullStorage<Input>;
+
+    float deltaTime;
+    glm::vec2 lastLook;
+    glm::vec2 lookDelta;
+    glm::vec3 movement;
+    bool cameraEnabled;
+};
+
+// System which manages the floor.
+class FloorSystem : public core::ecs::IteratingSystem<Floor, ecs::Position>
+{
 public:
-    FreeCamera(float aspect_ratio)
-        : Camera(glm::lookAt(pos, pos + getForward(), glm::vec3{0,1,0}),
-                 glm::perspective(glm::radians(70.0f), aspect_ratio, 0.1f, 1000.f),
-                 0)
+    virtual void process(core::ecs::World& world, uint64_t entity, Floor& floor, ecs::Position& position)
     {
-        auto lookAction = io::InputManager::createAction("Look");
-        lookAction->addBinding([&](io::Context ctx) {
-            auto pos = ctx.getValue<glm::vec2>();
-            pos.y = -pos.y;
-            if (lastLook != glm::vec2(-1))
-            {
-                auto delta = pos - lastLook;
-                orientation += delta * 0.1f;
-                orientation.y = glm::clamp(orientation.y, -80.0f, 80.0f);
-            }
-            lastLook = pos;
-        });
-        lookAction->addSource(new io::DoubleAxis(io::MouseAxis::X, io::MouseAxis::Y));
-
-        auto forwardAction = io::InputManager::createAction("Camera Forward");
-        forwardAction->addBinding([&](io::Context ctx) {
-            if (enabled)
-                movement.z = ctx.getValue<float>();
-        });
-        forwardAction->addSource(new io::SingleAxis(io::Key::S, io::Key::W));
-
-        auto strafeAction = io::InputManager::createAction("Camera Strafe");
-        strafeAction->addBinding([&](io::Context ctx) {
-            if (enabled)
-                movement.x = ctx.getValue<float>();
-        });
-        strafeAction->addSource(new io::SingleAxis(io::Key::A, io::Key::D));
-
-        auto verticalAction = io::InputManager::createAction("Camera Vertical");
-        verticalAction->addBinding([&](io::Context ctx) {
-            if (enabled)
-                movement.y = ctx.getValue<float>();
-        });
-        verticalAction->addSource(new io::SingleAxis(io::Key::Q, io::Key::E));
-
-        auto enableAction = io::InputManager::createAction("Enable Camera");
-        enableAction->addBinding([&](io::Context ctx) { enabled = !enabled; });
-        enableAction->addSource(new io::ButtonPress(io::Key::Space));
-    }
-
-    glm::vec3 getForward() const
-    {
-        auto o = glm::radians(orientation);
-        return {cos(o.x) * cos(o.y), sin(o.y), sin(o.x) * cos(o.y)};
-    }
-
-    void update(float deltaT)
-    {
-        auto forward = getForward();
-        auto right = glm::cross(forward, {0, 1, 0});
-        auto up = glm::cross(right, forward);
-        auto offset = (movement.z * forward + movement.x * right + movement.y * up) * deltaT * 2;
-        pos += offset;
-        viewMatrix = glm::lookAt(pos, pos + forward, glm::vec3{0,1,0});
+        // TODO: move floor so that its always on screen.
     }
 };
 
-class Car
+// System which manages the camera.
+class CameraSystem : public core::ecs::IteratingSystem<Camera, ecs::LocalToWorld>
+{
+public:
+    CameraSystem(core::gl::Camera& camera) : camera(camera)
+    {
+    }
+
+    virtual void process(core::ecs::World&, uint64_t, Camera&, ecs::LocalToWorld& localToWorld)
+    {
+        // We want to convert world space to camera space, so we need to invert the matrix.
+        this->camera.view = glm::inverse(localToWorld.mat);
+    }
+
+private:
+    core::gl::Camera& camera;
+};
+
+// System which manages the input.
+class InputSystem : public core::ecs::IteratingSystem<Input>
+{
+public:
+    InputSystem()
+    {
+        this->input.lastLook = glm::vec2(-1.0f);
+        this->input.lookDelta = glm::vec2(0.0f);
+        this->input.movement = glm::vec3(0.0f);
+        this->input.cameraEnabled = false;
+        this->input.deltaTime = 1.0f / 60.0f;
+
+        auto lookAction = core::io::InputManager::createAction("Look");
+        lookAction->addBinding([&](core::io::Context ctx) {
+            auto pos = ctx.getValue<glm::vec2>();
+            if (this->input.lastLook != glm::vec2(-1.0f))
+            {
+                this->input.lookDelta = pos - this->input.lastLook;
+            }
+            this->input.lastLook = pos;
+        });
+        lookAction->addSource(new core::io::DoubleAxis(core::io::MouseAxis::X, core::io::MouseAxis::Y));
+
+        auto forwardAction = core::io::InputManager::createAction("Camera Forward");
+        forwardAction->addBinding([&](core::io::Context ctx) { this->input.movement.z = ctx.getValue<float>(); });
+        forwardAction->addSource(new core::io::SingleAxis(core::io::Key::W, core::io::Key::S));
+
+        auto strafeAction = core::io::InputManager::createAction("Camera Strafe");
+        strafeAction->addBinding([&](core::io::Context ctx) { this->input.movement.x = ctx.getValue<float>(); });
+        strafeAction->addSource(new core::io::SingleAxis(core::io::Key::A, core::io::Key::D));
+
+        auto verticalAction = core::io::InputManager::createAction("Camera Vertical");
+        verticalAction->addBinding([&](core::io::Context ctx) { this->input.movement.y = ctx.getValue<float>(); });
+        verticalAction->addSource(new core::io::SingleAxis(core::io::Key::Q, core::io::Key::E));
+
+        auto enableAction = core::io::InputManager::createAction("Enable Camera");
+        enableAction->addBinding(
+            [&](core::io::Context ctx) { this->input.cameraEnabled = !this->input.cameraEnabled; });
+        enableAction->addSource(new core::io::ButtonPress(core::io::Key::C));
+    }
+
+    virtual void update(core::ecs::World& world) override
+    {
+        core::ecs::IteratingSystem<Input>::update(world);
+        this->input.lookDelta = glm::vec2(0.0f);
+    }
+
+private:
+    virtual void process(core::ecs::World&, uint64_t, Input& input) override
+    {
+        input = this->input;
+    }
+
+    Input input;
+};
+
+// System which controls the camera.
+class CameraControllerSystem : public core::ecs::IteratingSystem<Camera, Input, ecs::Position, ecs::Rotation>
 {
 private:
-    bool enabled = false;
-    Renderer& renderer;
-    Renderer::ModelID carId;
-    float turnInput = 0;
-    float accelerationInput = 0;
-    float accelerationTime = 0.1f;
-    float drag = 1.0f;
-    float lateralDrag = 3.0f;
-    float maxVelocity = 10;
-    glm::vec3 modelOffset;
-    glm::vec3 velocity{0.0f};
-    float turnSpeed = 50.0f;
-    float rotationVelocity = 0;
-    float rotationMaxVelocity = 3.0f;
-    float rotationDrag = 0.1f;
-    std::vector<core::data::QBMatrix> carModel;
-
-public:
-    glm::vec3 position{0};
-    glm::quat rotation = glm::angleAxis(0.0f, glm::vec3(0, 1, 0));
-    glm::vec3 scale{0.1f};
-
-    explicit Car(Renderer& renderer) : renderer(renderer)
+    virtual void process(core::ecs::World& world, uint64_t entity, Camera&, Input& input, ecs::Position& position,
+                         ecs::Rotation& rotation)
     {
-        using namespace cubos::core::data;
-        auto qb = FileSystem::find("/assets/car.qb");
-        auto qbStream = qb->open(File::OpenMode::Read);
-        parseQB(carModel, *qbStream);
-
-        modelOffset = -glm::vec3(carModel[0].grid.getSize()) / 2.0f;
-        modelOffset.y = 0;
-
-        carId = registerModel(carModel[0].grid, carModel[0].palette, renderer);
-
-        auto forwardAction = io::InputManager::createAction("Car Forward");
-        forwardAction->addBinding([&](io::Context ctx) {
-            if (enabled)
-                accelerationInput = ctx.getValue<float>();
-        });
-        forwardAction->addSource(new io::SingleAxis(io::Key::S, io::Key::W));
-
-        auto strafeAction = io::InputManager::createAction("Car Turn");
-        strafeAction->addBinding([&](io::Context ctx) {
-            if (enabled)
-                turnInput = ctx.getValue<float>();
-        });
-        strafeAction->addSource(new io::SingleAxis(io::Key::A, io::Key::D));
-
-        auto enableAction = io::InputManager::createAction("Enable Car");
-        enableAction->addBinding([&](io::Context ctx) { enabled = !enabled; });
-        enableAction->addSource(new io::ButtonPress(io::Key::Space));
-    }
-
-    void draw()
-    {
-        glm::mat4 modelMat = glm::translate(glm::mat4(1.0f), position) * glm::toMat4(rotation) *
-                             glm::scale(glm::mat4(1.0f), scale) * glm::translate(glm::mat4{1.0f}, modelOffset);
-        renderer.drawModel(carId, modelMat);
-    }
-
-    void update(float deltaT)
-    {
-        glm::vec3 forward = rotation * glm::vec3(0, 0, 1.0f);
-        glm::vec3 right = rotation * glm::vec3(1.0, 0, 0.0f);
-
-        float absVelocity = glm::length(velocity);
-        float forwardVelocity = glm::dot(forward, velocity);
-        float drift = glm::dot(right, velocity);
-
-        rotationVelocity *= glm::max(0.0f, 1.0f - rotationDrag * (1.0f + drift)) * deltaT;
-        rotationVelocity += turnInput * turnSpeed * forwardVelocity * deltaT;
-        rotationVelocity = glm::clamp(rotationVelocity, -rotationMaxVelocity, rotationMaxVelocity);
-        rotation = glm::angleAxis(rotationVelocity * deltaT, glm::vec3(0, -1, 0)) * rotation;
-
-        if (accelerationInput == 0.0f)
+        if (input.cameraEnabled)
         {
-            velocity *= glm::max(0.0f, 1.0f - drag * deltaT);
-            if (absVelocity < 0.02f)
-                velocity = glm::vec3(0.0f);
+            // Translate the camera.
+            glm::vec3 movement = rotation.quat * input.movement * input.deltaTime * 10.0f;
+            position.vec += movement;
+        }
+
+        // Rotate the camera.
+        auto pitchRot = glm::angleAxis(input.lookDelta.y * -0.002f, glm::vec3(1.0f, 0.0f, 0.0f));
+        auto yawRot = glm::angleAxis(input.lookDelta.x * -0.002f, glm::vec3(0.0f, 1.0f, 0.0f));
+        auto pitch = glm::angle(rotation.quat * glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        rotation.quat = yawRot * rotation.quat;
+        if ((pitch > glm::radians(10.0f) || input.lookDelta.y < 0.0f) &&
+            (pitch < glm::radians(170.0f) || input.lookDelta.y > 0.0f))
+        {
+            rotation.quat = rotation.quat * pitchRot;
+        }
+    }
+};
+
+// System which controls the car.
+class CarSystem : public core::ecs::IteratingSystem<Car, Input, ecs::Position, ecs::Rotation>
+{
+private:
+    virtual void process(core::ecs::World&, uint64_t, Car& car, Input& input, ecs::Position& position,
+                         ecs::Rotation& rotation)
+    {
+        const float DRAG = 1.0f;
+        const float LAT_DRAG = 3.0f;
+        const float ANG_DRAG = 1.0f;
+        const float TURN_SPEED = 0.2f;
+        const float MAX_ANG_VEL = 3.0f;
+        const float ACCELERATION = 20.0f;
+
+        // Get direction vectors.
+        glm::vec3 forward = rotation.quat * glm::vec3(0.0f, 0.0f, 1.0f);
+        glm::vec3 strafe = rotation.quat * glm::vec3(1.0f, 0.0f, 0.0f);
+
+        // Get linear velocities.
+        float absVel = glm::length(car.vel);
+        float forwardVel = glm::dot(car.vel, forward);
+        float strafeVel = glm::dot(car.vel, strafe);
+
+        // Update linear velocity.
+        if (input.movement.z == 0.0f || input.cameraEnabled)
+        {
+            if (absVel < 0.02f)
+            {
+                car.vel = glm::vec3(0.0f);
+            }
+            else
+            {
+                car.vel *= glm::max(0.0f, 1.0f - DRAG * input.deltaTime);
+            }
         }
         else
-            velocity += forward * deltaT / accelerationTime * accelerationInput;
+        {
+            car.vel += forward * ACCELERATION * -input.movement.z * input.deltaTime;
+        }
+        car.vel -= strafe * strafeVel * LAT_DRAG * input.deltaTime;
 
-        velocity -= right * drift * lateralDrag * deltaT;
+        // Update angular velocity.
+        car.angVel *= glm::max(0.0f, 1.0f - ANG_DRAG * (1.0f + glm::abs(strafeVel)) * input.deltaTime);
+        if (!input.cameraEnabled)
+        {
+            car.angVel += -input.movement.x * TURN_SPEED * forwardVel * input.deltaTime;
+            car.angVel = glm::clamp(car.angVel, -MAX_ANG_VEL, MAX_ANG_VEL);
+        }
 
-        position += velocity * deltaT;
+        // Update position and rotation.
+        position.vec += car.vel * input.deltaTime;
+        rotation.quat = glm::angleAxis(car.angVel * input.deltaTime, glm::vec3(0.0f, 1.0f, 0.0f)) * rotation.quat;
     }
 };
 
-class Floor
+void prepareScene(data::AssetManager& assetManager, gl::Renderer& renderer, core::ecs::World& world,
+                  core::gl::Palette& palette)
 {
-public:
-    Floor(Renderer& renderer, Car& car) : renderer(renderer), car(car)
+    // Generate the floor's grid.
+    auto black = palette.add({{0.1f, 0.1f, 0.1f, 1.0f}});
+    auto white = palette.add({{0.9f, 0.9f, 0.9f, 1.0f}});
+    auto floorGrid = core::gl::Grid({256, 1, 256});
+    for (int x = 0; x < 256; ++x)
     {
-        grid = new Grid({256, 1, 256});
-        palette = new Palette({
-            Material{{0.5f, 0.5f, 0.5f, 1.0f}},
-            Material{{1.0f, 1.0f, 1.0f, 1.0f}},
-        });
-
-        for (int x = 0; x < 256; ++x)
-            for (int z = 0; z < 256; ++z)
-                grid->set({x, 0, z}, (x + z) % 2 + 1);
-
-        floorId = registerModel(*grid, *palette, renderer);
-
-        scale = {1.0f, 1.0f, 1.0f};
+        for (int z = 0; z < 256; ++z)
+        {
+            floorGrid.set({x, 0, z}, (x + z) % 2 == 0 ? black : white);
+        }
     }
-    ~Floor() {
-        delete grid;
-        delete palette;
-    }
+    auto floor = renderer.upload(floorGrid);
 
-    void draw()
+    // Spawn the floor.
+    world.create(Floor{}, ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, ecs::LocalToWorld{}, ecs::Position{},
+                 ecs::Scale{4.0f});
+
+    // Spawn the cars.
+    auto car = assetManager.load<data::Grid>("car");
+    for (int x = -1; x < 3; ++x)
     {
-        position =
-            glm::round(glm::vec3(car.position.x, 0, car.position.z) / 64.0f) * 64.0f - glm::vec3(128.0f, 1.0f, 128.0f);
-        glm::mat4 modelMat = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), scale);
-        renderer.drawModel(floorId, modelMat);
+        for (int y = -1; y < 3; ++y)
+        {
+            world.create(Car{}, Input{},
+                         ecs::Grid{car->rendererGrid,
+                                   {-float(car->grid.getSize().x) / 2.0f, 0.0f, -float(car->grid.getSize().z) / 2.0f}},
+                         ecs::LocalToWorld{}, ecs::Position{{36.0f * x, 0.0f, 36.0f * y}}, ecs::Rotation{});
+        }
     }
 
-private:
-    glm::vec3 position, scale;
-
-    Grid* grid;
-    Palette* palette;
-
-    Car& car;
-    Renderer& renderer;
-    Renderer::ModelID floorId;
-};
+    // Spawn the camera.
+    world.create(Camera{}, Input{}, ecs::LocalToWorld{}, ecs::Position{{0.0f, 40.0f, -70.0f}},
+                 ecs::Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})});
+}
 
 int main(void)
 {
-    initializeLogger();
-    auto window = io::Window::create();
-    window->setMouseLockState(io::MouseLockState::Locked);
+    core::initializeLogger();
+    auto window = std::unique_ptr<core::io::Window>(core::io::Window::create());
+    window->setMouseState(core::io::MouseState::Locked);
 
+    // Initialize the renderer.
     auto& renderDevice = window->getRenderDevice();
+    auto renderer = gl::deferred::Renderer(renderDevice, window->getSize());
+    auto frame = gl::Frame();
 
-    //Debug::init(renderDevice);
+    // Initialize the camera.
+    core::gl::Camera camera;
+    camera.fovY = 60.0f;
+    camera.zNear = 0.1f;
+    camera.zFar = 1000.0f;
 
-    // FIXME: CSMShadowMapper disappeared on `main`?
-    //auto shadowMapper = rendering::CSMShadowMapper(renderDevice, 512, 2048, 256, 4);
-    //shadowMapper.setCascadeDistances({/**/ 3, 10, 24 /**/});
+    // Mount the assets directory.
+    core::data::FileSystem::mount("/assets",
+                                  std::make_shared<core::data::STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
 
-    auto renderer = deferred::Renderer(*window);
+    // Initialize the asset manager.
+    auto assetManager = data::AssetManager();
+    assetManager.registerType<data::Grid>(&renderer);
+    assetManager.registerType<data::Palette>();
+    assetManager.importMeta(core::data::FileSystem::find("/assets/"));
 
-    //renderer.setShadowMapper(&shadowMapper);
+    // Initialize the input manager.
+    core::io::InputManager::init(window.get());
 
-    data::FileSystem::mount("/assets", std::make_shared<data::STDArchive>(SAMPLE_ASSETS_FOLDER, true, false));
-    io::InputManager::init(window);
+    // Create the ECS world and initialize the systems.
+    core::ecs::World world;
+    auto transformSystem = ecs::TransformSystem();
+    auto drawSystem = ecs::DrawSystem(frame);
+    auto floorSystem = FloorSystem();
+    auto cameraSystem = CameraSystem(camera);
+    auto inputSystem = InputSystem();
+    auto cameraControllerSystem = CameraControllerSystem();
+    auto carSystem = CarSystem();
+    transformSystem.init(world);
+    drawSystem.init(world);
+    floorSystem.init(world);
+    cameraSystem.init(world);
+    inputSystem.init(world);
+    cameraControllerSystem.init(world);
+    carSystem.init(world);
 
-    Car car(renderer);
-    Floor floor(renderer, car);
-    glm::vec2 windowSize = window->getFramebufferSize();
-    FreeCamera camera(windowSize.x / windowSize.y);
+    // Get the palette.
+    auto paletteAsset = assetManager.load<data::Palette>("palette");
+    auto palette = paletteAsset->palette;
 
-    Camera mainCamera = {// glm::mat4 viewMatrix;
-                             glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0}),
-                             // glm::mat4 perspectiveMatrix;
-                             glm::perspective(glm::radians(90.0f), windowSize.x / windowSize.y, 0.1f, 1000.f),
-                             // gl::Framebuffer target;
-                             0};
+    // Prepare the scene.
+    prepareScene(assetManager, renderer, world, palette);
 
-    auto paletteID = renderer.registerPalette(palette);
-    renderer.setPalette(paletteID);
+    // Set the palette.
+    renderer.setPalette(palette);
 
-    pps::CopyPass pass = pps::CopyPass(*window);
-    renderer.addPostProcessingPass(pass);
-    float t = 0;
-    float deltaT = 0;
-
-
-    int s = 0;
+    // Prepare delta time variables.
+    float lastT = 0.0f;
+    float deltaT = 0.0f;
+    int lastSeconds = 0;
 
     while (!window->shouldClose())
     {
+        // Handle input events.
+        window->pollEvents();
+        core::io::InputManager::processActions();
+
+        // Calculate the delta time.
         float currentT = window->getTime();
-        if (t != 0)
+        if (lastT != 0.0f)
         {
-            deltaT = currentT - t;
-            int newS = std::round(t);
-            if (newS != s)
-                logDebug("FPS: {}", std::round(1 / deltaT));
-            s = newS;
+            deltaT = currentT - lastT;
+            int newSeconds = glm::round(lastT);
+            if (newSeconds != lastSeconds)
+            {
+                core::logDebug("FPS: {}", std::round(1.0f / deltaT));
+                lastSeconds = newSeconds;
+            }
         }
-        t = currentT;
-        renderDevice.setFramebuffer(0);
-        renderDevice.clearColor(0.0, 0.0, 0.0, 0.0f);
+        lastT = currentT;
 
-        auto axis = glm::vec3(1, 0, 0);
+        // Clear the frame.
+        frame.clear();
+        frame.ambient({0.1f, 0.1f, 0.1f});
 
-        car.update(deltaT);
-        car.draw();
-        floor.draw();
+        // Add a directional light to the frame.
+        glm::quat directionalLightRotation = glm::quat(glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0));
+        frame.light(core::gl::DirectionalLight(directionalLightRotation, glm::vec3(1), 1.0f));
 
-        /*
-        modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0)) *
-                   glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), axis) *
-                   glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-        renderer.drawModel(floorId, modelMat);
-         */
+        // Update the ECS systems.
+        inputSystem.update(world);
+        floorSystem.update(world);
+        cameraControllerSystem.update(world);
+        carSystem.update(world);
+        transformSystem.update(world);
+        cameraSystem.update(world);
+        drawSystem.update(world);
 
-        glm::quat directionalLightRotation =
-            glm::quat(glm::vec3(0, 0, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-        glm::quat pointLightRotation =
-            glm::quat(glm::vec3(0, -t * 0.1f, 0)) * glm::quat(glm::vec3(glm::radians(30.0f), 0, 0));
-
-        /*/
-        glm::quat spotLightRotation =
-            glm::quat(glm::vec3(0, -t * 0.5f, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-        renderer.drawLight(gl::SpotLightData(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1),
-                                             1, 20, glm::radians(10.0f), glm::radians(9.0f), false));
-        spotLightRotation = glm::quat(glm::vec3(0, t * 0.5f, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-        renderer.drawLight(gl::SpotLightData(spotLightRotation * glm::vec3(0, 0, -5), spotLightRotation, glm::vec3(1),
-                                             1, 20, glm::radians(10.0f), glm::radians(9.0f), false));
-        /**/
-
-        /**/
-        renderer.drawLight(DirectionalLight(directionalLightRotation, glm::vec3(1), 1.0f));
-        /**/
-
-        /*/
-        renderer.drawLight(gl::PointLightData(pointLightRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10, false));
-        /**/
-
-        camera.update(deltaT);
-
-        renderer.render(camera);
-        renderer.flush();
+        // Render the frame.
+        renderer.render(camera, frame);
 
         window->swapBuffers();
-        window->pollEvents();
-        io::InputManager::processActions();
     }
 
-    delete window;
     return 0;
 }

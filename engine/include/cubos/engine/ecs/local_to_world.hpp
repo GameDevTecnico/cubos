@@ -13,7 +13,7 @@ namespace cubos::engine::ecs
     {
         using Storage = core::ecs::VecStorage<LocalToWorld>;
 
-        glm::mat4 mat; ///< The local to world matrix.
+        glm::mat4 mat = glm::mat4(1.0f); ///< The local to world matrix.
     };
 
 } // namespace cubos::engine::ecs

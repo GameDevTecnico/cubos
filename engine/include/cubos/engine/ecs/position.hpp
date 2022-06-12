@@ -12,7 +12,7 @@ namespace cubos::engine::ecs
     {
         using Storage = core::ecs::VecStorage<Position>;
 
-        glm::vec3 vec; ///< The position of the entity.
+        glm::vec3 vec = {0.0f, 0.0f, 0.0f}; ///< The position of the entity.
     };
 
 } // namespace cubos::engine::ecs

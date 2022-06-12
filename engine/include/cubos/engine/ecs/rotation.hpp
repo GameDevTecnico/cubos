@@ -12,7 +12,7 @@ namespace cubos::engine::ecs
     {
         using Storage = core::ecs::VecStorage<Rotation>;
 
-        glm::quat quat; ///< The position of the entity.
+        glm::quat quat = glm::quat(1.0f, 0.0f, 0.0f, 0.0f); ///< The rotation of the entity.
     };
 
 } // namespace cubos::engine::ecs

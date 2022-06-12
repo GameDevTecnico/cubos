@@ -18,8 +18,8 @@ namespace cubos::engine::data
         static constexpr const char* TypeName = "Grid";
         using Loader = impl::GridLoader;
 
-        core::gl::Grid grid;     ///< Raw grid data.
-        gl::Renderer::GridID id; ///< ID of the GPU uploaded grid.
+        core::gl::Grid grid;           ///< Raw grid data.
+        gl::RendererGrid rendererGrid; ///< Handle of the grid uploaded to the GPU.
     };
 
     namespace impl

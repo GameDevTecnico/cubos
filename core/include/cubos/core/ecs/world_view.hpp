@@ -12,7 +12,7 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes> struct WorldView
     {
         World& world;              ///< The world being viewed.
-        std::vector<uint8_t> mask; /// The mask of the components to be iterated.
+        std::vector<uint32_t> mask; /// The mask of the components to be iterated.
 
         /// @param w The world to be viewed.
         WorldView(World& w);
@@ -22,12 +22,12 @@ namespace cubos::core::ecs
         {
             World& world;                     ///< The world being viewed.
             size_t current;                   ///< The current entity.
-            const std::vector<uint8_t>& mask; ///< The mask of the components to be iterated.
+            const std::vector<uint32_t>& mask; ///< The mask of the components to be iterated.
 
             /// @param w The world to be viewed.
             /// @param index The current entity.
             /// @param m The mask of the components to be iterated.
-            Iterator(World& w, size_t index, const std::vector<uint8_t>& m);
+            Iterator(World& w, size_t index, const std::vector<uint32_t>& m);
 
             size_t operator*() const;
             bool operator==(const Iterator&) const;
@@ -54,7 +54,7 @@ namespace cubos::core::ecs
     }
 
     template <typename... ComponentTypes>
-    WorldView<ComponentTypes...>::Iterator::Iterator(World& w, size_t index, const std::vector<uint8_t>& m)
+    WorldView<ComponentTypes...>::Iterator::Iterator(World& w, size_t index, const std::vector<uint32_t>& m)
         : world(w), current(index), mask(m)
     {
     }
