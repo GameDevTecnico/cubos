@@ -148,7 +148,8 @@ requires(cubos::core::data::TriviallySerializable<T> && !std::is_pointer_v<T> &&
         serializer.write(val, nullptr);
         stream.put('\0');
         // Skip the '?: ' prefix.
-        return format_to(ctx.out(), "{}", static_cast<const char*>(stream.getBuffer()) + 3);
+        auto result = std::string(static_cast<const char*>(stream.getBuffer()) + 3);
+        return format_to(ctx.out(), "{}", result);
     }
 };
 
