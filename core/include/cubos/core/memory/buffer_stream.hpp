@@ -37,7 +37,7 @@ namespace cubos::core::memory
         virtual void seek(int64_t offset, SeekOrigin origin) override;
         virtual bool eof() const override;
         virtual char peek() const override;
-        
+
     private:
         void* buffer;    ///< Pointer to the buffer being written to/read from.
         size_t size;     ///< Size of the buffer.
