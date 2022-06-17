@@ -119,6 +119,7 @@ namespace cubos::core
 template <typename T>
 requires(cubos::core::data::TriviallySerializable<T> && !std::is_pointer_v<T> && !std::is_array_v<T> &&
          !std::integral<T> && !std::floating_point<T> && !std::is_same_v<T, std::string>) struct fmt::formatter<T>
+    : formatter<string_view>
 {
     bool pretty = false; ///< Whether to pretty print the data.
     bool types = false;  ///< Whether to print the type name.
@@ -149,7 +150,7 @@ requires(cubos::core::data::TriviallySerializable<T> && !std::is_pointer_v<T> &&
         stream.put('\0');
         // Skip the '?: ' prefix.
         auto result = std::string(static_cast<const char*>(stream.getBuffer()) + 3);
-        return format_to(ctx.out(), "{}", result);
+        return formatter<string_view>::format(string_view(result), ctx);
     }
 };
 
