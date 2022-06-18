@@ -3,6 +3,7 @@
 
 # Set sample source files
 set(CORE_SAMPLES_SOURCES
+    "logging.cpp"
     "render_device.cpp"
     "render_device_compute.cpp"
     "debug_renderer.cpp"

@@ -17,7 +17,19 @@ namespace cubos::core::memory
         /// @param size The size of the buffer.
         BufferStream(const void* buffer, size_t size);
 
+        /// Initializes a buffer stream with a new buffer, initially of the given size.
+        /// When initialized this way, the buffer stream will own the buffer and will delete it when it is destroyed.
+        /// It will expand the buffer when needed.
+        /// @param size The size of the buffer.
+        BufferStream(size_t size);
+
+        virtual ~BufferStream() override;
         BufferStream(BufferStream&&);
+
+        /// Gets the buffer of this stream.
+        const void* getBuffer() const;
+
+        // Method implementations.
 
         virtual size_t read(void* data, size_t size) override;
         virtual size_t write(const void* data, size_t size) override;
@@ -32,6 +44,7 @@ namespace cubos::core::memory
         size_t position; ///< Current position in the buffer.
         bool readOnly;   ///< Whether the buffer is read-only.
         bool reachedEof; ///< Whether the end of the buffer has been reached.
+        bool owned;      ///< Whether the buffer is owned by this stream.
     };
 } // namespace cubos::core::memory
 

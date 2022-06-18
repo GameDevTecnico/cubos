@@ -85,7 +85,7 @@ void Stream::print(uint64_t value, size_t base)
 
 void Stream::print(float value, size_t decimalPlaces)
 {
-    this->print(static_cast<double>(value, decimalPlaces));
+    this->print(static_cast<double>(value), decimalPlaces);
 }
 
 void Stream::print(double value, size_t decimalPlaces)
@@ -96,6 +96,19 @@ void Stream::print(double value, size_t decimalPlaces)
     {
         this->put('-');
         value = -value;
+    }
+    else if (value == 0.0)
+    {
+        this->put('0');
+        if (decimalPlaces > 0)
+        {
+            this->put('.');
+            for (size_t i = 0; i < decimalPlaces; ++i)
+            {
+                this->put('0');
+            }
+        }
+        return;
     }
 
     // Validate input
