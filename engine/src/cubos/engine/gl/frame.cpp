@@ -3,7 +3,7 @@
 using namespace cubos::core::gl;
 using namespace cubos::engine::gl;
 
-void Frame::draw(Renderer::GridID grid, glm::mat4 modelMat)
+void Frame::draw(RendererGrid grid, glm::mat4 modelMat)
 {
     drawCmds.push_back(DrawCmd{grid, modelMat});
 }

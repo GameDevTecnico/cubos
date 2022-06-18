@@ -18,7 +18,8 @@ namespace cubos::core::ecs
 
         // Method implementations.
 
-        void update(World& world) override;
+        virtual void init(World& world) override;
+        virtual void update(World& world) override;
 
     protected:
         /// Called every frame of the engine.
@@ -33,6 +34,11 @@ namespace cubos::core::ecs
     };
 
     // Implementation.
+
+    template <typename... ComponentTypes> inline void IteratingSystem<ComponentTypes...>::init(World& world)
+    {
+        (world.registerComponent<ComponentTypes>(), ...);
+    }
 
     template <typename... ComponentTypes> inline void IteratingSystem<ComponentTypes...>::update(World& world)
     {
