@@ -1,5 +1,6 @@
 <map id="cubos::core::data::Serializer" name="cubos::core::data::Serializer">
-<area shape="rect" id="node1" title="Abstract class for serializing data." alt="" coords="88,5,229,47"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinarySerializer.html" title=" " alt="" coords="5,95,147,136"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1YAMLSerializer.html" title="Implementation of the abstract Serializer class for serializing to YAML." alt="" coords="171,95,312,136"/>
+<area shape="rect" id="node1" title="Abstract class for serializing data." alt="" coords="5,71,147,112"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinarySerializer.html" title=" " alt="" coords="195,5,336,47"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1DebugSerializer.html" title=" " alt="" coords="195,71,336,112"/>
+<area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1YAMLSerializer.html" title="Implementation of the abstract Serializer class for serializing to YAML." alt="" coords="195,136,336,177"/>
 </map>

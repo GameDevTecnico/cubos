@@ -25,6 +25,7 @@ var classcubos_1_1core_1_1memory_1_1Stream =
     [ "print", "classcubos_1_1core_1_1memory_1_1Stream.html#a18872dfebd2fd0ecb675cf319e97f0f3", null ],
     [ "print", "classcubos_1_1core_1_1memory_1_1Stream.html#a83b18f75b293a036e1bb5d9a370ac250", null ],
     [ "print", "classcubos_1_1core_1_1memory_1_1Stream.html#a45f3a178956a8c02a9baa9f6cd5f4df8", null ],
+    [ "printf", "classcubos_1_1core_1_1memory_1_1Stream.html#aa0a22412e670d35e93df4684ae8b6971", null ],
     [ "printf", "classcubos_1_1core_1_1memory_1_1Stream.html#ad6a14e841ba6f89786f189edb4e59586", null ],
     [ "put", "classcubos_1_1core_1_1memory_1_1Stream.html#af1423e4600073d89d24422b17b463d1f", null ],
     [ "read", "classcubos_1_1core_1_1memory_1_1Stream.html#ae3cb44e4338129a18db51a50f834e74b", null ],

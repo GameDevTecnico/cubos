@@ -167,6 +167,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad6a14e841ba6f89786f189edb4e59586"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... TArgs&gt; </td></tr>
 <tr class="memitem:ad6a14e841ba6f89786f189edb4e59586"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ad6a14e841ba6f89786f189edb4e59586">printf</a> (const char *fmt, T arg, TArgs... args)</td></tr>
 <tr class="separator:ad6a14e841ba6f89786f189edb4e59586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0a22412e670d35e93df4684ae8b6971"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa0a22412e670d35e93df4684ae8b6971">printf</a> (const char *fmt)</td></tr>
+<tr class="separator:aa0a22412e670d35e93df4684ae8b6971"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f5c30e186203c8ee6ccdc16ed160233"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a6f5c30e186203c8ee6ccdc16ed160233">parse</a> (int8_t &amp;value, size_t base=10)</td></tr>
 <tr class="separator:a6f5c30e186203c8ee6ccdc16ed160233"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad63cf12704409d3b3778bdd54e9c3235"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ad63cf12704409d3b3778bdd54e9c3235">parse</a> (int16_t &amp;value, size_t base=10)</td></tr>
@@ -242,7 +244,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 </div><div class="memdoc">
 <p>Checks if the stream still has content to read. </p><dl class="section return"><dt>Returns</dt><dd>True if the stream has no more content to read, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a97b383dc7d12e85631aae34b308a1157">cubos::core::data::FileStream&lt; T &gt;</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#adb9aaab8965c29a10645f8598486a50f">cubos::core::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#ad4b2858395b81956eda80bc41ae82fa8">cubos::core::memory::StdStream</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#adb9aaab8965c29a10645f8598486a50f">cubos::core::memory::BufferStream</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a97b383dc7d12e85631aae34b308a1157">cubos::core::data::FileStream&lt; T &gt;</a>, and <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#ad4b2858395b81956eda80bc41ae82fa8">cubos::core::memory::StdStream</a>.</p>
 
 </div>
 </div>
@@ -640,7 +642,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 </div><div class="memdoc">
 <p>Peeks one byte from the stream. </p><dl class="section return"><dt>Returns</dt><dd>The byte peeked. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a66d99f90f9a2c74a5616c14abfd8a328">cubos::core::data::FileStream&lt; T &gt;</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a3a6cb4960d696c179cefde27d902fb6e">cubos::core::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#ad1b29d8b0020dd495016039b3f0c8552">cubos::core::memory::StdStream</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a3a6cb4960d696c179cefde27d902fb6e">cubos::core::memory::BufferStream</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a66d99f90f9a2c74a5616c14abfd8a328">cubos::core::data::FileStream&lt; T &gt;</a>, and <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#ad1b29d8b0020dd495016039b3f0c8552">cubos::core::memory::StdStream</a>.</p>
 
 </div>
 </div>
@@ -867,8 +869,40 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
+<a id="aa0a22412e670d35e93df4684ae8b6971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0a22412e670d35e93df4684ae8b6971">&#9670;&nbsp;</a></span>printf() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::memory::Stream::printf </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fmt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Formatted print recursion tail function. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fmt</td><td>The remainder format string. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad6a14e841ba6f89786f189edb4e59586"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6a14e841ba6f89786f189edb4e59586">&#9670;&nbsp;</a></span>printf()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6a14e841ba6f89786f189edb4e59586">&#9670;&nbsp;</a></span>printf() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1203,7 +1237,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <p>Gets the current position in the stream. </p><dl class="section return"><dt>Returns</dt><dd>The current position in the stream. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a40328275b70361001b677f7345d5b793">cubos::core::data::FileStream&lt; T &gt;</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#af47590b6bede0bb7fd7e775beb8722c7">cubos::core::memory::BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#a4f03fde02eade91a5c22c27ecc56fb4c">cubos::core::memory::StdStream</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#af47590b6bede0bb7fd7e775beb8722c7">cubos::core::memory::BufferStream</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a40328275b70361001b677f7345d5b793">cubos::core::data::FileStream&lt; T &gt;</a>, and <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#a4f03fde02eade91a5c22c27ecc56fb4c">cubos::core::memory::StdStream</a>.</p>
 
 </div>
 </div>

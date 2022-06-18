@@ -91,6 +91,7 @@ var hierarchy =
     [ "cubos::core::data::SerializationMap< R, I >", "classcubos_1_1core_1_1data_1_1SerializationMap.html", null ],
     [ "cubos::core::data::Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", [
       [ "cubos::core::data::BinarySerializer", "classcubos_1_1core_1_1data_1_1BinarySerializer.html", null ],
+      [ "cubos::core::data::DebugSerializer", "classcubos_1_1core_1_1data_1_1DebugSerializer.html", null ],
       [ "cubos::core::data::YAMLSerializer", "classcubos_1_1core_1_1data_1_1YAMLSerializer.html", null ]
     ] ],
     [ "cubos::core::Settings", "classcubos_1_1core_1_1Settings.html", null ],

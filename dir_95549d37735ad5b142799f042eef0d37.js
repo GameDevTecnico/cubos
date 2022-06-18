@@ -3,6 +3,7 @@ var dir_95549d37735ad5b142799f042eef0d37 =
     [ "archive.hpp", "archive_8hpp_source.html", null ],
     [ "binary_deserializer.hpp", "binary__deserializer_8hpp_source.html", null ],
     [ "binary_serializer.hpp", "binary__serializer_8hpp_source.html", null ],
+    [ "debug_serializer.hpp", "debug__serializer_8hpp_source.html", null ],
     [ "deserializer.hpp", "deserializer_8hpp_source.html", null ],
     [ "embedded_archive.hpp", "embedded__archive_8hpp_source.html", null ],
     [ "file.hpp", "file_8hpp_source.html", null ],
