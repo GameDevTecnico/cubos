@@ -87,7 +87,6 @@ $(document).ready(function(){initNavTree('classcubos_1_1engine_1_1gl_1_1Renderer
 
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -117,15 +116,6 @@ Collaboration diagram for cubos::engine::gl::Renderer:</div>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a1d54cb2c961d95cdfc28e78d10b8f39d"><td class="memItemLeft" align="right" valign="top"><a id="a1d54cb2c961d95cdfc28e78d10b8f39d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>GridID</b> = size_t</td></tr>
-<tr class="separator:a1d54cb2c961d95cdfc28e78d10b8f39d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af79a7af6ed255281daa8158e3f386262"><td class="memItemLeft" align="right" valign="top"><a id="af79a7af6ed255281daa8158e3f386262"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>PaletteID</b> = size_t</td></tr>
-<tr class="separator:af79a7af6ed255281daa8158e3f386262"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a220f1166d7be98a37ff2aa4bfe29f97e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a220f1166d7be98a37ff2aa4bfe29f97e">Renderer</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;<a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">renderDevice</a>, glm::uvec2 size)</td></tr>
@@ -133,10 +123,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a62baf7714b6fc0b60ebac7132f47d4a0"><td class="memItemLeft" align="right" valign="top"><a id="a62baf7714b6fc0b60ebac7132f47d4a0"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Renderer</b> (const <a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a> &amp;)=delete</td></tr>
 <tr class="separator:a62baf7714b6fc0b60ebac7132f47d4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1a8a016546211c24f559055e2e05dc7"><td class="memItemLeft" align="right" valign="top">virtual GridID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#aa1a8a016546211c24f559055e2e05dc7">upload</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a> &amp;grid)=0</td></tr>
-<tr class="separator:aa1a8a016546211c24f559055e2e05dc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f21a314c604feb320c75465caa3462f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a4f21a314c604feb320c75465caa3462f">free</a> (GridID grid)=0</td></tr>
-<tr class="separator:a4f21a314c604feb320c75465caa3462f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae672c6e8dac90eb216ef466e0b4818ba"><td class="memItemLeft" align="right" valign="top">virtual RendererGrid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#ae672c6e8dac90eb216ef466e0b4818ba">upload</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a> &amp;grid)=0</td></tr>
+<tr class="separator:ae672c6e8dac90eb216ef466e0b4818ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a253660106935f26190000050d78b71f9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a253660106935f26190000050d78b71f9">setPalette</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">core::gl::Palette</a> &amp;palette)=0</td></tr>
 <tr class="separator:a253660106935f26190000050d78b71f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7b9159b469a26ce75d9e441cc948306"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#ab7b9159b469a26ce75d9e441cc948306">resize</a> (glm::uvec2 size)</td></tr>
@@ -200,40 +188,6 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4f21a314c604feb320c75465caa3462f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f21a314c604feb320c75465caa3462f">&#9670;&nbsp;</a></span>free()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void cubos::engine::gl::Renderer::free </td>
-          <td>(</td>
-          <td class="paramtype">GridID&#160;</td>
-          <td class="paramname"><em>grid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Frees a grid from the GPU. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">grid</td><td>The ID of the grid to free. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a4617fd3aebd6b9b6f3d1697cb166e449">cubos::engine::gl::deferred::Renderer</a>.</p>
-
-</div>
-</div>
 <a id="a56ee4181aeabe9bf225bf1c6fe0c1aae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a56ee4181aeabe9bf225bf1c6fe0c1aae">&#9670;&nbsp;</a></span>onRender()</h2>
 
@@ -440,8 +394,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa1a8a016546211c24f559055e2e05dc7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1a8a016546211c24f559055e2e05dc7">&#9670;&nbsp;</a></span>upload()</h2>
+<a id="ae672c6e8dac90eb216ef466e0b4818ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae672c6e8dac90eb216ef466e0b4818ba">&#9670;&nbsp;</a></span>upload()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -450,7 +404,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual GridID cubos::engine::gl::Renderer::upload </td>
+          <td class="memname">virtual RendererGrid cubos::engine::gl::Renderer::upload </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a> &amp;&#160;</td>
           <td class="paramname"><em>grid</em></td><td>)</td>
@@ -463,15 +417,15 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Uploads a grid to the GPU and returns an ID, which can be used to draw it. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Uploads a grid to the GPU and returns an handle, which can be used to draw it. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">grid</td><td>The grid to upload. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The ID of the grid. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The handle of the grid. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a99b531fb2556c1e309947717fd0515df">cubos::engine::gl::deferred::Renderer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a2dd5b860e004eb1a46d4f549c62d406b">cubos::engine::gl::deferred::Renderer</a>.</p>
 
 </div>
 </div>

@@ -107,53 +107,65 @@ $(document).ready(function(){initNavTree('renderer_8hpp_source.html',''); initRe
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>cubos::engine::gl</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">namespace </span>pps</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">class </span>Pass;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">class </span>Frame;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">class </span>Frame;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">namespace </span>pps</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">class </span>Pass;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">   30</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">using</span> GridID = size_t;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">using</span> PaletteID = size_t;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a220f1166d7be98a37ff2aa4bfe29f97e">Renderer</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">renderDevice</a>, glm::uvec2 size);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a220f1166d7be98a37ff2aa4bfe29f97e">Renderer</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">virtual</span> GridID <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#aa1a8a016546211c24f559055e2e05dc7">upload</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a>&amp; grid) = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="namespacecubos_1_1engine_1_1gl_1_1impl.html">   25</a></span>&#160;    <span class="keyword">namespace </span>impl</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html">RendererGrid</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> RendererGrid = std::shared_ptr&lt;impl::RendererGrid&gt;;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">   38</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a220f1166d7be98a37ff2aa4bfe29f97e">Renderer</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">renderDevice</a>, glm::uvec2 size);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a220f1166d7be98a37ff2aa4bfe29f97e">Renderer</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a4f21a314c604feb320c75465caa3462f">free</a>(GridID grid) = 0;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a253660106935f26190000050d78b71f9">setPalette</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Palette.html">core::gl::Palette</a>&amp; palette) = 0;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#ab7b9159b469a26ce75d9e441cc948306">resize</a>(glm::uvec2 size);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a9892c316695e3168b526fc490066f413">render</a>(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a>&amp; camera, <span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a>&amp; frame, <span class="keywordtype">bool</span> usePostProcessing = <span class="keyword">true</span>,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    core::gl::Framebuffer target = 0);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html">pps::Manager</a>&amp; <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a692b9503e4453982c0528b55cb4c9865">pps</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">   72</a></span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">renderDevice</a>; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5d81bd0086d0202fffce1fa41e487741">onResize</a>(glm::uvec2 size) = 0;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a56ee4181aeabe9bf225bf1c6fe0c1aae">onRender</a>(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a>&amp; camera, <span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a>&amp; frame, core::gl::Framebuffer target) = 0;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordtype">void</span> resizeTex(glm::uvec2 size);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html">pps::Manager</a> ppsManager;           </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        core::gl::Framebuffer framebuffer; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        core::gl::Texture2D texture;       </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    };</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;} <span class="comment">// namespace cubos::engine::gl</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">virtual</span> RendererGrid <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#ae672c6e8dac90eb216ef466e0b4818ba">upload</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a>&amp; grid) = 0;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a253660106935f26190000050d78b71f9">setPalette</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Palette.html">core::gl::Palette</a>&amp; palette) = 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#ab7b9159b469a26ce75d9e441cc948306">resize</a>(glm::uvec2 size);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a9892c316695e3168b526fc490066f413">render</a>(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a>&amp; camera, <span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a>&amp; frame, <span class="keywordtype">bool</span> usePostProcessing = <span class="keyword">true</span>,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    core::gl::Framebuffer target = 0);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html">pps::Manager</a>&amp; <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a692b9503e4453982c0528b55cb4c9865">pps</a>();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">   73</a></span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">renderDevice</a>; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5d81bd0086d0202fffce1fa41e487741">onResize</a>(glm::uvec2 size) = 0;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a56ee4181aeabe9bf225bf1c6fe0c1aae">onRender</a>(<span class="keyword">const</span> <a class="code" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a>&amp; camera, <span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a>&amp; frame, core::gl::Framebuffer target) = 0;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordtype">void</span> resizeTex(glm::uvec2 size);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html">pps::Manager</a> ppsManager;           </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        core::gl::Framebuffer framebuffer; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        core::gl::Texture2D texture;       </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    };</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif // CUBOS_ENGINE_GL_RENDERER_HPP</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">namespace </span>impl</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html">  100</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html">RendererGrid</a></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <a class="code" href="classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html">RendererGrid</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html">RendererGrid</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        };</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    } <span class="comment">// namespace impl</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;} <span class="comment">// namespace cubos::engine::gl</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#endif // CUBOS_ENGINE_GL_RENDERER_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Manager_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html">cubos::engine::gl::pps::Manager</a></div><div class="ttdef"><b>Definition:</b> manager.hpp:29</div></div>
@@ -161,16 +173,16 @@ $(document).ready(function(){initNavTree('renderer_8hpp_source.html',''); initRe
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_a56ee4181aeabe9bf225bf1c6fe0c1aae"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a56ee4181aeabe9bf225bf1c6fe0c1aae">cubos::engine::gl::Renderer::onRender</a></div><div class="ttdeci">virtual void onRender(const core::gl::Camera &amp;camera, const Frame &amp;frame, core::gl::Framebuffer target)=0</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_a9892c316695e3168b526fc490066f413"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a9892c316695e3168b526fc490066f413">cubos::engine::gl::Renderer::render</a></div><div class="ttdeci">void render(const core::gl::Camera &amp;camera, const Frame &amp;frame, bool usePostProcessing=true, core::gl::Framebuffer target=0)</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Frame_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Frame.html">cubos::engine::gl::Frame</a></div><div class="ttdef"><b>Definition:</b> frame.hpp:13</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_a4f21a314c604feb320c75465caa3462f"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a4f21a314c604feb320c75465caa3462f">cubos::engine::gl::Renderer::free</a></div><div class="ttdeci">virtual void free(GridID grid)=0</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_a5f0c0a5691c25987d79601dd13c79b6a"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">cubos::engine::gl::Renderer::renderDevice</a></div><div class="ttdeci">core::gl::RenderDevice &amp; renderDevice</div><div class="ttdoc">The render device being used.</div><div class="ttdef"><b>Definition:</b> renderer.hpp:72</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_a5f0c0a5691c25987d79601dd13c79b6a"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">cubos::engine::gl::Renderer::renderDevice</a></div><div class="ttdeci">core::gl::RenderDevice &amp; renderDevice</div><div class="ttdoc">The render device being used.</div><div class="ttdef"><b>Definition:</b> renderer.hpp:73</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Palette_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Palette.html">cubos::core::gl::Palette</a></div><div class="ttdoc">Represents a palette of materials. Supports up to 65535 materials.</div><div class="ttdef"><b>Definition:</b> palette.hpp:30</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_aa1a8a016546211c24f559055e2e05dc7"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#aa1a8a016546211c24f559055e2e05dc7">cubos::engine::gl::Renderer::upload</a></div><div class="ttdeci">virtual GridID upload(const core::gl::Grid &amp;grid)=0</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_ae672c6e8dac90eb216ef466e0b4818ba"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#ae672c6e8dac90eb216ef466e0b4818ba">cubos::engine::gl::Renderer::upload</a></div><div class="ttdeci">virtual RendererGrid upload(const core::gl::Grid &amp;grid)=0</div></div>
 <div class="ttc" id="astructcubos_1_1core_1_1gl_1_1Camera_html"><div class="ttname"><a href="structcubos_1_1core_1_1gl_1_1Camera.html">cubos::core::gl::Camera</a></div><div class="ttdoc">Holds data describing a camera.</div><div class="ttdef"><b>Definition:</b> camera.hpp:11</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Grid_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Grid.html">cubos::core::gl::Grid</a></div><div class="ttdef"><b>Definition:</b> grid.hpp:34</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html">cubos::engine::gl::impl::RendererGrid</a></div><div class="ttdoc">Represents a grid which was uploaded to the GPU.</div><div class="ttdef"><b>Definition:</b> renderer.hpp:100</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:567</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_a220f1166d7be98a37ff2aa4bfe29f97e"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a220f1166d7be98a37ff2aa4bfe29f97e">cubos::engine::gl::Renderer::Renderer</a></div><div class="ttdeci">Renderer(core::gl::RenderDevice &amp;renderDevice, glm::uvec2 size)</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_a692b9503e4453982c0528b55cb4c9865"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a692b9503e4453982c0528b55cb4c9865">cubos::engine::gl::Renderer::pps</a></div><div class="ttdeci">pps::Manager &amp; pps()</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html">cubos::engine::gl::Renderer</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:30</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html">cubos::engine::gl::Renderer</a></div><div class="ttdef"><b>Definition:</b> renderer.hpp:38</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_a253660106935f26190000050d78b71f9"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a253660106935f26190000050d78b71f9">cubos::engine::gl::Renderer::setPalette</a></div><div class="ttdeci">virtual void setPalette(const core::gl::Palette &amp;palette)=0</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1Renderer_html_ab7b9159b469a26ce75d9e441cc948306"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1Renderer.html#ab7b9159b469a26ce75d9e441cc948306">cubos::engine::gl::Renderer::resize</a></div><div class="ttdeci">void resize(glm::uvec2 size)</div></div>
 <!-- HTML footer for doxygen 1.9.1-->

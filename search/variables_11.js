@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['usage_993',['usage',['../structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#a56733214ea0db2ef7a2d29d540414a7c',1,'cubos::core::gl::Texture1DDesc::usage()'],['../structcubos_1_1core_1_1gl_1_1Texture2DDesc.html#a23d3d5daaec860a96ba75c77c4991c71',1,'cubos::core::gl::Texture2DDesc::usage()'],['../structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a8cc41cdb412b3888aa3080c5f7161f30',1,'cubos::core::gl::Texture2DArrayDesc::usage()'],['../structcubos_1_1core_1_1gl_1_1Texture3DDesc.html#ae664ff5646b68a293733b0019a8ba18e',1,'cubos::core::gl::Texture3DDesc::usage()'],['../structcubos_1_1core_1_1gl_1_1CubeMapDesc.html#a2df251b275ec82aceb02bad1601b779c',1,'cubos::core::gl::CubeMapDesc::usage()'],['../structcubos_1_1core_1_1gl_1_1CubeMapArrayDesc.html#a82ab6b16126ae4cd2cc4961aad09ed31',1,'cubos::core::gl::CubeMapArrayDesc::usage()']]]
+  ['targetcount_1015',['targetCount',['../structcubos_1_1core_1_1gl_1_1FramebufferDesc.html#ac01356d0b15e90f5f42b1ec2d47fa897',1,'cubos::core::gl::FramebufferDesc']]],
+  ['targets_1016',['targets',['../structcubos_1_1core_1_1gl_1_1FramebufferDesc.html#aff652dcdfd9d8ead81f4dcca44811215',1,'cubos::core::gl::FramebufferDesc']]],
+  ['triviallydeserializable_1017',['TriviallyDeserializable',['../namespacecubos_1_1core_1_1data.html#a0920d9e6afeb2d81996bb8e8086504c8',1,'cubos::core::data']]],
+  ['triviallyserializable_1018',['TriviallySerializable',['../namespacecubos_1_1core_1_1data.html#a70463bc817f6bebca71dc2336b6b00da',1,'cubos::core::data']]],
+  ['type_1019',['type',['../structcubos_1_1core_1_1gl_1_1VertexElement.html#aa8463436ece84a11da409700b337f6a3',1,'cubos::core::gl::VertexElement']]]
 ];

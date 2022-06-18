@@ -105,8 +105,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab13b739768b2367b8f0cb41a8b1972d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html#ab13b739768b2367b8f0cb41a8b1972d8">draw</a> (Renderer::GridID grid, glm::mat4 modelMat)</td></tr>
-<tr class="separator:ab13b739768b2367b8f0cb41a8b1972d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7ea0ae69a46fe534d41414b871f2989"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html#ac7ea0ae69a46fe534d41414b871f2989">draw</a> (RendererGrid grid, glm::mat4 modelMat)</td></tr>
+<tr class="separator:ac7ea0ae69a46fe534d41414b871f2989"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21c9f778deb596454db417b77e8acb9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html#a21c9f778deb596454db417b77e8acb9e">ambient</a> (const glm::vec3 &amp;color)</td></tr>
 <tr class="separator:a21c9f778deb596454db417b77e8acb9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ee455767abc52861a326ec644f109d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html#a4ee455767abc52861a326ec644f109d6">light</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1SpotLight.html">core::gl::SpotLight</a> &amp;light)</td></tr>
@@ -157,8 +157,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="ab13b739768b2367b8f0cb41a8b1972d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab13b739768b2367b8f0cb41a8b1972d8">&#9670;&nbsp;</a></span>draw()</h2>
+<a id="ac7ea0ae69a46fe534d41414b871f2989"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7ea0ae69a46fe534d41414b871f2989">&#9670;&nbsp;</a></span>draw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +166,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">void cubos::engine::gl::Frame::draw </td>
           <td>(</td>
-          <td class="paramtype">Renderer::GridID&#160;</td>
+          <td class="paramtype">RendererGrid&#160;</td>
           <td class="paramname"><em>grid</em>, </td>
         </tr>
         <tr>
@@ -184,7 +184,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 <p>Submits a draw command. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">grid</td><td>The renderer identifier of the grid to draw. </td></tr>
+    <tr><td class="paramname">grid</td><td>The handle of the grid to draw. </td></tr>
     <tr><td class="paramname">modelMat</td><td>The model matrix of the grid, used for applying transformations. </td></tr>
   </table>
   </dd>

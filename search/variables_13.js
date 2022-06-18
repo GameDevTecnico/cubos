@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['width_995',['width',['../structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#ace398cf8ce3dd4176ce85d4fd52b9228',1,'cubos::core::gl::Texture1DDesc::width()'],['../structcubos_1_1core_1_1gl_1_1Texture2DDesc.html#a735d236695cbbcc3f69830f19bca86bf',1,'cubos::core::gl::Texture2DDesc::width()'],['../structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a4185d191b7a85d35183161379ca43c6a',1,'cubos::core::gl::Texture2DArrayDesc::width()'],['../structcubos_1_1core_1_1gl_1_1Texture3DDesc.html#a130a2c2c9bb309840e8d55f2cd3612de',1,'cubos::core::gl::Texture3DDesc::width()'],['../structcubos_1_1core_1_1gl_1_1CubeMapDesc.html#a261a2ab66fa6f6e514ff7d11d34e284f',1,'cubos::core::gl::CubeMapDesc::width()'],['../structcubos_1_1core_1_1gl_1_1CubeMapArrayDesc.html#a23b6ca2e4eb9d209bb9506ca43edb1e5',1,'cubos::core::gl::CubeMapArrayDesc::width()']]],
-  ['world_996',['world',['../structcubos_1_1core_1_1ecs_1_1WorldView.html#ad942808863923af17bde04bdaa7c810e',1,'cubos::core::ecs::WorldView::world()'],['../structcubos_1_1core_1_1ecs_1_1WorldView_1_1Iterator.html#a7c9cd7aa683d7dd865676408e62e9439',1,'cubos::core::ecs::WorldView::Iterator::world()']]],
-  ['writeenabled_997',['writeEnabled',['../structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Depth.html#ab715eb49b2292191ec463008029862ed',1,'cubos::core::gl::DepthStencilStateDesc::Depth']]],
-  ['writemask_998',['writeMask',['../structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html#af4b592babd9872a21431999513218187',1,'cubos::core::gl::DepthStencilStateDesc::Stencil']]]
+  ['vec_1021',['vec',['../structcubos_1_1engine_1_1ecs_1_1Position.html#a2406ed00278ec8f5bcabcddc2c83fd00',1,'cubos::engine::ecs::Position']]],
+  ['view_1022',['view',['../structcubos_1_1core_1_1gl_1_1Camera.html#aec1f10288bac142f0e30d662c73fd984',1,'cubos::core::gl::Camera']]]
 ];

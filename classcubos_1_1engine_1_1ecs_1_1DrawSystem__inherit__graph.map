@@ -1,0 +1,5 @@
+<map id="cubos::engine::ecs::DrawSystem" name="cubos::engine::ecs::DrawSystem">
+<area shape="rect" id="node1" title="Draws all entities with a Grid and a LocalToWorld component to a frame." alt="" coords="45,169,187,211"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1IteratingSystem.html" title=" " alt="" coords="5,80,227,121"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1ecs_1_1System.html" title="Base class for all systems." alt="" coords="25,5,207,32"/>
+</map>

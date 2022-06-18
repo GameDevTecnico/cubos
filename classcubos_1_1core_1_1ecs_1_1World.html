@@ -125,6 +125,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a587db48b662bcb4a9421b664cdc0e373"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a587db48b662bcb4a9421b664cdc0e373">getComponent</a> (uint64_t entity)</td></tr>
 <tr class="memdesc:a587db48b662bcb4a9421b664cdc0e373"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reference to a component of an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a587db48b662bcb4a9421b664cdc0e373">More...</a><br /></td></tr>
 <tr class="separator:a587db48b662bcb4a9421b664cdc0e373"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65f51b86719efdb0f6eeafc45a8e3bbf"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a65f51b86719efdb0f6eeafc45a8e3bbf"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a65f51b86719efdb0f6eeafc45a8e3bbf">hasComponent</a> (uint64_t entity)</td></tr>
+<tr class="memdesc:a65f51b86719efdb0f6eeafc45a8e3bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an entity has a component.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a65f51b86719efdb0f6eeafc45a8e3bbf">More...</a><br /></td></tr>
+<tr class="separator:a65f51b86719efdb0f6eeafc45a8e3bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d744a0fb2afad8072048531cc776773"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a7d744a0fb2afad8072048531cc776773"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a7d744a0fb2afad8072048531cc776773">removeComponent</a> (uint64_t entity)</td></tr>
 <tr class="memdesc:a7d744a0fb2afad8072048531cc776773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a component from an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a7d744a0fb2afad8072048531cc776773">More...</a><br /></td></tr>
@@ -287,6 +291,40 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Gets a reference to a component of an entity. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Component type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>Entity ID. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a65f51b86719efdb0f6eeafc45a8e3bbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65f51b86719efdb0f6eeafc45a8e3bbf">&#9670;&nbsp;</a></span>hasComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cubos::core::ecs::World::hasComponent </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if an entity has a component. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Component type. </td></tr>

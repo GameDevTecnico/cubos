@@ -1,13 +1,16 @@
 var NAVTREEINDEX0 =
 {
 ".html":[4,0,0],
+".html":[4,0,0,1],
+".html":[4,0,0,1,0],
 ".html":[5,0,0],
 ".html":[5,0,0,1],
 ".html":[5,0,0,1,0],
 ".html":[5,0,0,1,0,0],
 ".html":[5,0,0,1,1],
-".html":[5,0,0,1,1,0],
-".html":[5,0,0,1,1,1],
+".html":[5,0,0,1,2],
+".html":[5,0,0,1,2,0],
+".html":[5,0,0,1,2,2],
 "action_8hpp_source.html":[6,0,0,0,0,0,3,1],
 "annotated.html":[5,0],
 "archive_8hpp_source.html":[6,0,0,0,0,0,0,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX0 =
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a297b60a8b90eaa1a970714f507f964c3":[5,0,0,0,0,13,6],
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a29f7761c1a804d2b4988ebc300e8c199":[5,0,0,0,0,13,7],
 "classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a4dab29800187158c7e7236ba1980cab5":[5,0,0,0,0,13,3],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a52625a559f4e40b5a5d6b350c932d64e":[5,0,0,0,0,13,10],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a5407fa0ec8a434fb26278397ca0ca2c3":[5,0,0,0,0,13,2],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a58d34ebec38b0306a2632984cc78420e":[5,0,0,0,0,13,18],
-"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a659b4df19df27e9c3f6b3baaeec4420d":[5,0,0,0,0,13,13]
+"classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a52625a559f4e40b5a5d6b350c932d64e":[5,0,0,0,0,13,10]
 };

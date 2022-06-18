@@ -1,4 +1,8 @@
 <map id="cubos::core::ecs::System" name="cubos::core::ecs::System">
-<area shape="rect" id="node1" title="Base class for all systems." alt="" coords="21,5,203,32"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1IteratingSystem.html" title=" " alt="" coords="5,80,219,121"/>
+<area shape="rect" id="node1" title="Base class for all systems." alt="" coords="5,78,188,105"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1IteratingSystem.html" title=" " alt="" coords="240,5,453,47"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1ecs_1_1IteratingSystem.html" title=" " alt="" coords="236,71,457,112"/>
+<area shape="rect" id="node5" href="$classcubos_1_1core_1_1ecs_1_1IteratingSystem.html" title=" " alt="" coords="252,136,441,177"/>
+<area shape="rect" id="node4" href="$classcubos_1_1engine_1_1ecs_1_1DrawSystem.html" title="Draws all entities with a Grid and a LocalToWorld component to a frame." alt="" coords="506,71,649,112"/>
+<area shape="rect" id="node6" href="$classcubos_1_1engine_1_1ecs_1_1TransformSystem.html" title=" " alt="" coords="505,136,649,177"/>
 </map>
