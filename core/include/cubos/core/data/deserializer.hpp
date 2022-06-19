@@ -40,8 +40,7 @@ namespace cubos::core::data
     class Deserializer
     {
     public:
-        /// @param stream The stream to deserialize from.
-        Deserializer(memory::Stream& stream);
+        Deserializer();
         virtual ~Deserializer() = default;
 
         /// Deserializes a signed 8 bit integer.
@@ -140,8 +139,7 @@ namespace cubos::core::data
         bool failed() const;
 
     protected:
-        memory::Stream& stream; ///< Stream used by the deserializer.
-        bool failBit;           ///< Indicates if the deserializer has failed.
+        bool failBit; ///< Indicates if the deserializer has failed.
 
     private:
         Deserializer(const Deserializer&) = delete;

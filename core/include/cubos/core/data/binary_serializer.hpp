@@ -39,6 +39,7 @@ namespace cubos::core::data
         virtual void endDictionary() override;
 
     private:
+        memory::Stream& stream; ///< The stream to serialize to.
         bool writeLittleEndian; ///< Whether to write in little endian or big endian format.
     };
 } // namespace cubos::core::data

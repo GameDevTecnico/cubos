@@ -13,7 +13,7 @@ template <typename T> static inline T fromEndianness(T val, bool fromLittleEndia
         return memory::fromBigEndian(val);
 }
 
-BinaryDeserializer::BinaryDeserializer(memory::Stream& stream, bool readLittleEndian) : Deserializer(stream)
+BinaryDeserializer::BinaryDeserializer(memory::Stream& stream, bool readLittleEndian) : stream(stream)
 {
     this->readLittleEndian = readLittleEndian;
 }

@@ -47,10 +47,11 @@ namespace cubos::core::data
             Dictionary
         };
 
-        std::stack<Mode> mode; ///< The current mode of the serializer.
-        bool key;              ///< Whether the next write is a key or a value (if we are in a dictionary).
-        YAML::Emitter emitter; ///< The YAML emitter.
-        size_t head;           ///< The number of characters already flushed.
+        memory::Stream& stream; ///< The stream to serialize to.
+        std::stack<Mode> mode;  ///< The current mode of the serializer.
+        bool key;               ///< Whether the next write is a key or a value (if we are in a dictionary).
+        YAML::Emitter emitter;  ///< The YAML emitter.
+        size_t head;            ///< The number of characters already flushed.
     };
 } // namespace cubos::core::data
 

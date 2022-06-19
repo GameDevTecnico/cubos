@@ -2,7 +2,7 @@
 
 using namespace cubos::core::data;
 
-YAMLDeserializer::YAMLDeserializer(memory::Stream& stream) : Deserializer(stream)
+YAMLDeserializer::YAMLDeserializer(memory::Stream& stream) : stream(stream)
 {
     this->loadDocument();
     this->frame.push({Mode::Object, this->document.begin(), false});

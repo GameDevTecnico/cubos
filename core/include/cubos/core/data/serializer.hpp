@@ -39,8 +39,7 @@ namespace cubos::core::data
     class Serializer
     {
     public:
-        /// @param stream The stream to serialize to.
-        Serializer(memory::Stream& stream);
+        Serializer();
         virtual ~Serializer() = default;
 
         /// Flushes the serializer and writes the data to the stream.
@@ -169,8 +168,7 @@ namespace cubos::core::data
         bool failed() const;
 
     protected:
-        memory::Stream& stream; ///< Stream used by the serializer.
-        bool failBit;           ///< Indicates if the serializer failed.
+        bool failBit; ///< Indicates if the serializer failed.
 
     private:
         Serializer(const Serializer&) = delete;

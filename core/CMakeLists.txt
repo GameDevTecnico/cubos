@@ -35,6 +35,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/yaml_deserializer.cpp"
     "src/cubos/core/data/binary_serializer.cpp"
     "src/cubos/core/data/binary_deserializer.cpp"
+    "src/cubos/core/data/package.cpp"
     "src/cubos/core/data/file.cpp"
     "src/cubos/core/data/file_system.cpp"
     "src/cubos/core/data/std_archive.cpp"
@@ -66,6 +67,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/vertex.cpp"
 
     "src/cubos/core/ui/imgui.cpp"
+    "src/cubos/core/ui/serialization.cpp"
 
     "src/cubos/core/ecs/world.cpp"
     "src/cubos/core/ecs/system.cpp"
@@ -88,6 +90,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/binary_serializer.hpp"
     "include/cubos/core/data/binary_deserializer.hpp"
     "include/cubos/core/data/serialization_map.hpp"
+    "include/cubos/core/data/package.hpp"
     "include/cubos/core/data/file.hpp"
     "include/cubos/core/data/file_stream.hpp"
     "include/cubos/core/data/file_system.hpp"
@@ -119,6 +122,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/sources/double_axis.hpp"
 
     "include/cubos/core/ui/imgui.hpp"
+    "include/cubos/core/ui/serialization.hpp"
 
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/world_view.hpp"

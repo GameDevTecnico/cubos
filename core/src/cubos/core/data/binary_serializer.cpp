@@ -12,7 +12,7 @@ template <typename T> static inline T toEndianness(T val, bool toLittleEndian)
         return memory::toBigEndian(val);
 }
 
-BinarySerializer::BinarySerializer(memory::Stream& stream, bool writeLittleEndian) : Serializer(stream)
+BinarySerializer::BinarySerializer(memory::Stream& stream, bool writeLittleEndian) : stream(stream)
 {
     this->writeLittleEndian = writeLittleEndian;
 }
