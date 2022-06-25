@@ -120,6 +120,7 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/ui/imgui.hpp"
 
+    "include/cubos/core/ecs/resource_manager.hpp"
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/world_view.hpp"
     "include/cubos/core/ecs/storage.hpp"

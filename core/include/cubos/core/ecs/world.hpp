@@ -3,6 +3,7 @@
 
 #include <cubos/core/log.hpp>
 #include <cubos/core/ecs/storage.hpp>
+#include <cubos/core/ecs/resource_manager.hpp>
 
 #include <cassert>
 #include <unordered_map>
@@ -18,6 +19,23 @@ namespace cubos::core::ecs
     {
     public:
         ~World();
+
+        /// Registers a new resource type.
+        /// Unsafe to call during any reads or writes, should be called at the start of the program.
+        /// @tparam T The type of the resource.
+        /// @tparam TArgs The types of the arguments of the constructor of the resource.
+        /// @param args The arguments of the constructor of the resource.
+        template <typename T, typename... TArgs> void addResource(TArgs... args);
+
+        /// Reads a resource, locking it for reading.
+        /// @tparam T The type of the resource.
+        /// @returns A lock referring to the resource.
+        template <typename T> ReadResource<T> readResource() const;
+
+        /// Writes a resource, locking it for writing.
+        /// @tparam T The type of the resource.
+        /// @returns A lock referring to the resource.
+        template <typename T> WriteResource<T> writeResource() const;
 
         /// @brief Creates a new entity.
         /// @tparam ComponentTypes The types of the components to be added when the entity is created.
@@ -79,6 +97,8 @@ namespace cubos::core::ecs
 
         size_t nextEntityId = 0;
         size_t elementsPerEntity;
+        
+        ResourceManager resourceManager;
 
         /// Utility function which returns the global ID of a component.
         /// @tparam T Component type.
@@ -91,6 +111,21 @@ namespace cubos::core::ecs
     };
 
     // Implementation.
+
+    template <typename T, typename... TArgs> void World::addResource(TArgs... args)
+    {
+        this->resourceManager.add<T>(args...);
+    }
+
+    template <typename T> ReadResource<T> World::readResource() const
+    {
+        return this->resourceManager.read<T>();
+    }
+
+    template <typename T> WriteResource<T> World::writeResource() const
+    {
+        return this->resourceManager.write<T>();
+    }
 
     template <typename... ComponentTypes> uint64_t World::create(ComponentTypes... components)
     {

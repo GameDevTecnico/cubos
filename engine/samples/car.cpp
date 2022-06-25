@@ -61,8 +61,6 @@ struct Car
 // Stores input data.
 struct Input
 {
-    using Storage = core::ecs::NullStorage<Input>;
-
     float deltaTime;
     glm::vec2 lastLook;
     glm::vec2 lookDelta;
@@ -99,68 +97,84 @@ private:
 };
 
 // System which manages the input.
-class InputSystem : public core::ecs::IteratingSystem<Input>
+class InputSystem : public core::ecs::System
 {
 public:
-    InputSystem()
+    virtual void init(core::ecs::World& world) override
     {
-        this->input.lastLook = glm::vec2(-1.0f);
-        this->input.lookDelta = glm::vec2(0.0f);
-        this->input.movement = glm::vec3(0.0f);
-        this->input.cameraEnabled = false;
-        this->input.deltaTime = 1.0f / 60.0f;
+        Input input;
+        input.lastLook = glm::vec2(-1.0f);
+        input.lookDelta = glm::vec2(0.0f);
+        input.movement = glm::vec3(0.0f);
+        input.cameraEnabled = false;
+        input.deltaTime = 1.0f / 60.0f;
+        world.addResource<Input>(input);
 
         auto lookAction = core::io::InputManager::createAction("Look");
         lookAction->addBinding([&](core::io::Context ctx) {
+            auto inputResource = world.writeResource<Input>();
+            auto& input = inputResource.get();
             auto pos = ctx.getValue<glm::vec2>();
-            if (this->input.lastLook != glm::vec2(-1.0f))
+
+            if (input.lastLook != glm::vec2(-1.0f))
             {
-                this->input.lookDelta = pos - this->input.lastLook;
+                input.lookDelta = pos - input.lastLook;
             }
-            this->input.lastLook = pos;
+
+            input.lastLook = pos;
         });
         lookAction->addSource(new core::io::DoubleAxis(core::io::MouseAxis::X, core::io::MouseAxis::Y));
 
         auto forwardAction = core::io::InputManager::createAction("Camera Forward");
-        forwardAction->addBinding([&](core::io::Context ctx) { this->input.movement.z = ctx.getValue<float>(); });
+        forwardAction->addBinding([&](core::io::Context ctx) {
+            auto inputResource = world.writeResource<Input>();
+            auto& input = inputResource.get();
+            input.movement.z = ctx.getValue<float>();
+        });
         forwardAction->addSource(new core::io::SingleAxis(core::io::Key::W, core::io::Key::S));
 
         auto strafeAction = core::io::InputManager::createAction("Camera Strafe");
-        strafeAction->addBinding([&](core::io::Context ctx) { this->input.movement.x = ctx.getValue<float>(); });
+        strafeAction->addBinding([&](core::io::Context ctx) {
+            auto inputResource = world.writeResource<Input>();
+            auto& input = inputResource.get();
+            input.movement.x = ctx.getValue<float>();
+        });
         strafeAction->addSource(new core::io::SingleAxis(core::io::Key::A, core::io::Key::D));
 
         auto verticalAction = core::io::InputManager::createAction("Camera Vertical");
-        verticalAction->addBinding([&](core::io::Context ctx) { this->input.movement.y = ctx.getValue<float>(); });
+        verticalAction->addBinding([&](core::io::Context ctx) {
+            auto inputResource = world.writeResource<Input>();
+            auto& input = inputResource.get();
+            input.movement.y = ctx.getValue<float>();
+        });
         verticalAction->addSource(new core::io::SingleAxis(core::io::Key::Q, core::io::Key::E));
 
         auto enableAction = core::io::InputManager::createAction("Enable Camera");
-        enableAction->addBinding(
-            [&](core::io::Context ctx) { this->input.cameraEnabled = !this->input.cameraEnabled; });
+        enableAction->addBinding([&](core::io::Context ctx) {
+            auto inputResource = world.writeResource<Input>();
+            auto& input = inputResource.get();
+            input.cameraEnabled = !input.cameraEnabled;
+        });
         enableAction->addSource(new core::io::ButtonPress(core::io::Key::C));
     }
 
     virtual void update(core::ecs::World& world) override
     {
-        core::ecs::IteratingSystem<Input>::update(world);
-        this->input.lookDelta = glm::vec2(0.0f);
+        auto inputResource = world.writeResource<Input>();
+        inputResource.get().lookDelta = glm::vec2(0.0f);
     }
-
-private:
-    virtual void process(core::ecs::World&, uint64_t, Input& input) override
-    {
-        input = this->input;
-    }
-
-    Input input;
 };
 
 // System which controls the camera.
-class CameraControllerSystem : public core::ecs::IteratingSystem<Camera, Input, ecs::Position, ecs::Rotation>
+class CameraControllerSystem : public core::ecs::IteratingSystem<Camera, ecs::Position, ecs::Rotation>
 {
 private:
-    virtual void process(core::ecs::World& world, uint64_t entity, Camera&, Input& input, ecs::Position& position,
+    virtual void process(core::ecs::World& world, uint64_t entity, Camera&, ecs::Position& position,
                          ecs::Rotation& rotation)
     {
+        auto inputResource = world.readResource<Input>();
+        auto& input = inputResource.get();
+        
         if (input.cameraEnabled)
         {
             // Translate the camera.
@@ -182,11 +196,10 @@ private:
 };
 
 // System which controls the car.
-class CarSystem : public core::ecs::IteratingSystem<Car, Input, ecs::Position, ecs::Rotation>
+class CarSystem : public core::ecs::IteratingSystem<Car, ecs::Position, ecs::Rotation>
 {
 private:
-    virtual void process(core::ecs::World&, uint64_t, Car& car, Input& input, ecs::Position& position,
-                         ecs::Rotation& rotation)
+    virtual void process(core::ecs::World& world, uint64_t, Car& car, ecs::Position& position, ecs::Rotation& rotation)
     {
         const float DRAG = 1.0f;
         const float LAT_DRAG = 3.0f;
@@ -194,6 +207,9 @@ private:
         const float TURN_SPEED = 0.2f;
         const float MAX_ANG_VEL = 3.0f;
         const float ACCELERATION = 20.0f;
+
+        auto inputResource = world.readResource<Input>();
+        auto& input = inputResource.get();
 
         // Get direction vectors.
         glm::vec3 forward = rotation.quat * glm::vec3(0.0f, 0.0f, 1.0f);
@@ -262,7 +278,7 @@ void prepareScene(data::AssetManager& assetManager, gl::Renderer& renderer, core
     {
         for (int y = -1; y < 3; ++y)
         {
-            world.create(Car{}, Input{},
+            world.create(Car{},
                          ecs::Grid{car->rendererGrid,
                                    {-float(car->grid.getSize().x) / 2.0f, 0.0f, -float(car->grid.getSize().z) / 2.0f}},
                          ecs::LocalToWorld{}, ecs::Position{{36.0f * x, 0.0f, 36.0f * y}}, ecs::Rotation{});
@@ -270,7 +286,7 @@ void prepareScene(data::AssetManager& assetManager, gl::Renderer& renderer, core
     }
 
     // Spawn the camera.
-    world.create(Camera{}, Input{}, ecs::LocalToWorld{}, ecs::Position{{0.0f, 40.0f, -70.0f}},
+    world.create(Camera{}, ecs::LocalToWorld{}, ecs::Position{{0.0f, 40.0f, -70.0f}},
                  ecs::Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})});
 }
 
