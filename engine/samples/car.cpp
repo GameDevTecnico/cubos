@@ -282,7 +282,7 @@ int main(void)
 
     // Initialize the renderer.
     auto& renderDevice = window->getRenderDevice();
-    auto renderer = gl::deferred::Renderer(renderDevice, window->getSize());
+    auto renderer = gl::deferred::Renderer(renderDevice, window->getFramebufferSize());
     auto frame = gl::Frame();
 
     // Initialize the camera.
