@@ -363,11 +363,11 @@ int main(void)
         frame.light(core::gl::DirectionalLight(directionalLightRotation, glm::vec3(1), 1.0f));
 
         // Update the ECS systems.
-        inputSystem.update(world);
         cameraControllerSystem.update(world);
         carSystem.update(world);
         transformSystem.update(world);
         cameraSystem.update(world);
+        inputSystem.update(world);
         drawSystem.update(world);
 
         // Render the frame.
