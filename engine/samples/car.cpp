@@ -92,7 +92,7 @@ public:
         input.movement = glm::vec3(0.0f);
         input.cameraEnabled = false;
         input.deltaTime = 1.0f / 60.0f;
-        world.addResource<Input>(input);
+        world.registerResource<Input>(input);
 
         auto lookAction = core::io::InputManager::createAction("Look");
         lookAction->addBinding([&](core::io::Context ctx) {

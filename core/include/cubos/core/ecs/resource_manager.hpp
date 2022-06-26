@@ -88,7 +88,7 @@ namespace cubos::core::ecs
     // Implementation.
 
     template <typename T>
-    ReadResource<T>::ReadResource(ReadResource&& other) : resource(other.resource), lock(other.lock)
+    ReadResource<T>::ReadResource(ReadResource&& other) : resource(other.resource), lock(std::move(other.lock))
     {
         // Do nothing.
     }
@@ -106,7 +106,7 @@ namespace cubos::core::ecs
     }
 
     template <typename T>
-    WriteResource<T>::WriteResource(WriteResource&& other) : resource(other.resource), lock(other.lock)
+    WriteResource<T>::WriteResource(WriteResource&& other) : resource(other.resource), lock(std::move(other.lock))
     {
         // Do nothing.
     }

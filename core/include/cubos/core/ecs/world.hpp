@@ -28,7 +28,7 @@ namespace cubos::core::ecs
         /// @tparam T The type of the resource.
         /// @tparam TArgs The types of the arguments of the constructor of the resource.
         /// @param args The arguments of the constructor of the resource.
-        template <typename T, typename... TArgs> void addResource(TArgs... args);
+        template <typename T, typename... TArgs> void registerResource(TArgs... args);
 
         /// Reads a resource, locking it for reading.
         /// @tparam T The type of the resource.
@@ -120,7 +120,7 @@ namespace cubos::core::ecs
 
     // Implementation.
 
-    template <typename T, typename... TArgs> void World::addResource(TArgs... args)
+    template <typename T, typename... TArgs> void World::registerResource(TArgs... args)
     {
         this->resourceManager.add<T>(args...);
     }

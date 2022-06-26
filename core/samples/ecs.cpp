@@ -62,12 +62,34 @@ public:
     }
 };
 
+struct DeltaTime
+{
+    float dt;
+};
+
+struct MyResource
+{
+    int val;
+};
+
+void mySystem(DeltaTime& dt, const MyResource& res)
+{
+    std::cout << "mySystem: " << dt.dt << " " << res.val << std::endl;
+}
+
 int main()
 {
     ecs::World world;
+    world.registerResource<DeltaTime>(DeltaTime{1.0f});
+    world.registerResource<MyResource>(MyResource{0});
     world.registerComponent<Player>();
     world.registerComponent<Position>();
     world.registerComponent<Velocity>();
+
+    ecs::SystemWrapper(mySystem).call(world);
+    ecs::SystemWrapper([](const DeltaTime& dt, MyResource& res) {
+        std::cout << "lambda: " << dt.dt << " " << res.val << std::endl;
+    }).call(world);
 
     Spawner spawner;
     PrintPositions printPositions;
