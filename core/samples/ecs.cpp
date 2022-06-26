@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include <cubos/core/ecs/world.hpp>
-#include <cubos/core/ecs/world_view.hpp>
 #include <cubos/core/ecs/vec_storage.hpp>
 #include <cubos/core/ecs/map_storage.hpp>
 #include <cubos/core/ecs/null_storage.hpp>
@@ -48,7 +47,7 @@ public:
 class PrintPositions : public ecs::IteratingSystem<Position, Velocity>
 {
 public:
-    void process(ecs::World& world, uint64_t entity, Position& pos, Velocity&) override
+    void process(ecs::World& world, ecs::Entity entity, Position& pos, Velocity&) override
     {
         std::cout << pos.y << std::endl;
     }
@@ -57,7 +56,7 @@ public:
 class PrintPositions2 : public ecs::IteratingSystem<Player, Position, Velocity>
 {
 public:
-    void process(ecs::World& world, uint64_t entity, Player&, Position& pos, Velocity&) override
+    void process(ecs::World& world, ecs::Entity entity, Player&, Position& pos, Velocity&) override
     {
         std::cout << pos.y << std::endl;
     }

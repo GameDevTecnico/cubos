@@ -16,7 +16,7 @@ void TransformSystem::init(World& world)
     world.registerComponent<Scale>();
 }
 
-void TransformSystem::process(World& world, uint64_t entity, LocalToWorld& localToWorld)
+void TransformSystem::process(World& world, core::ecs::Entity entity, LocalToWorld& localToWorld)
 {
     localToWorld.mat = glm::mat4(1.0f);
     if (world.hasComponent<Position>(entity))

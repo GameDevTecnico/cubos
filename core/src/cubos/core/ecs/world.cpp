@@ -4,6 +4,12 @@ using namespace cubos::core::ecs;
 
 size_t World::nextGlobalComponentId = 0;
 
+World::World(size_t initialCapacity) : entityManager(initialCapacity)
+{
+    // Do nothing.
+    // Edu: BAH!
+}
+
 World::~World()
 {
     for (auto* storage : storages)
@@ -12,16 +18,13 @@ World::~World()
     }
 }
 
-void World::remove(uint64_t entity)
+void World::remove(Entity entity)
 {
-    uint32_t entityIndex = (uint32_t)entity;
-    uint32_t entityVersion = entity >> 32;
-    if (entityVersion != entityData[entityIndex * elementsPerEntity])
-        return;
+    this->entityManager.remove(entity);
+    // TODO: remove from all storages.
+}
 
-    entityData[entityIndex * elementsPerEntity] = entityVersion + 1;
-    for (size_t i = 1; i < elementsPerEntity; i++)
-    {
-        entityData[entityIndex * elementsPerEntity + i] = 0;
-    }
+EntityManager::Iterator World::end() const
+{
+    return this->entityManager.end();
 }

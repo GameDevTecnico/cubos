@@ -4,7 +4,6 @@
 #include <cinttypes>
 
 #include <cubos/core/ecs/system.hpp>
-#include <cubos/core/ecs/world_view.hpp>
 
 namespace cubos::core::ecs
 {
@@ -30,7 +29,7 @@ namespace cubos::core::ecs
         /// @param world The world the system is added to.
         /// @param entity The entity to be processed.
         /// @param components The components of the entity being viewed.
-        virtual void process(World& world, uint64_t entity, ComponentTypes&... components) = 0;
+        virtual void process(World& world, Entity entity, ComponentTypes&... components) = 0;
     };
 
     // Implementation.
@@ -42,9 +41,9 @@ namespace cubos::core::ecs
 
     template <typename... ComponentTypes> inline void IteratingSystem<ComponentTypes...>::update(World& world)
     {
-        for (auto entity : WorldView<ComponentTypes...>(world))
+        for (auto it = world.view<ComponentTypes...>(); it != world.end(); ++it)
         {
-            process(world, entity, world.getComponent<ComponentTypes>(entity)...);
+            process(world, *it, world.getComponent<ComponentTypes>(*it)...);
         }
     }
 } // namespace cubos::core::ecs

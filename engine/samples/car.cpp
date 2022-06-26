@@ -37,12 +37,6 @@
 using namespace cubos;
 using namespace cubos::engine;
 
-// Tag for the floor entity.
-struct Floor
-{
-    using Storage = core::ecs::NullStorage<Floor>;
-};
-
 // Tag for the camera entity.
 struct Camera
 {
@@ -68,16 +62,6 @@ struct Input
     bool cameraEnabled;
 };
 
-// System which manages the floor.
-class FloorSystem : public core::ecs::IteratingSystem<Floor, ecs::Position>
-{
-public:
-    virtual void process(core::ecs::World& world, uint64_t entity, Floor& floor, ecs::Position& position)
-    {
-        // TODO: move floor so that its always on screen.
-    }
-};
-
 // System which manages the camera.
 class CameraSystem : public core::ecs::IteratingSystem<Camera, ecs::LocalToWorld>
 {
@@ -86,7 +70,7 @@ public:
     {
     }
 
-    virtual void process(core::ecs::World&, uint64_t, Camera&, ecs::LocalToWorld& localToWorld)
+    virtual void process(core::ecs::World&, core::ecs::Entity, Camera&, ecs::LocalToWorld& localToWorld)
     {
         // We want to convert world space to camera space, so we need to invert the matrix.
         this->camera.view = glm::inverse(localToWorld.mat);
@@ -169,12 +153,12 @@ public:
 class CameraControllerSystem : public core::ecs::IteratingSystem<Camera, ecs::Position, ecs::Rotation>
 {
 private:
-    virtual void process(core::ecs::World& world, uint64_t entity, Camera&, ecs::Position& position,
+    virtual void process(core::ecs::World& world, core::ecs::Entity entity, Camera&, ecs::Position& position,
                          ecs::Rotation& rotation)
     {
         auto inputResource = world.readResource<Input>();
         auto& input = inputResource.get();
-        
+
         if (input.cameraEnabled)
         {
             // Translate the camera.
@@ -199,7 +183,8 @@ private:
 class CarSystem : public core::ecs::IteratingSystem<Car, ecs::Position, ecs::Rotation>
 {
 private:
-    virtual void process(core::ecs::World& world, uint64_t, Car& car, ecs::Position& position, ecs::Rotation& rotation)
+    virtual void process(core::ecs::World& world, core::ecs::Entity, Car& car, ecs::Position& position,
+                         ecs::Rotation& rotation)
     {
         const float DRAG = 1.0f;
         const float LAT_DRAG = 3.0f;
@@ -269,8 +254,7 @@ void prepareScene(data::AssetManager& assetManager, gl::Renderer& renderer, core
     auto floor = renderer.upload(floorGrid);
 
     // Spawn the floor.
-    world.create(Floor{}, ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, ecs::LocalToWorld{}, ecs::Position{},
-                 ecs::Scale{4.0f});
+    world.create(ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, ecs::LocalToWorld{}, ecs::Position{}, ecs::Scale{4.0f});
 
     // Spawn the cars.
     auto car = assetManager.load<data::Grid>("car");
@@ -324,14 +308,12 @@ int main(void)
     core::ecs::World world;
     auto transformSystem = ecs::TransformSystem();
     auto drawSystem = ecs::DrawSystem(frame);
-    auto floorSystem = FloorSystem();
     auto cameraSystem = CameraSystem(camera);
     auto inputSystem = InputSystem();
     auto cameraControllerSystem = CameraControllerSystem();
     auto carSystem = CarSystem();
     transformSystem.init(world);
     drawSystem.init(world);
-    floorSystem.init(world);
     cameraSystem.init(world);
     inputSystem.init(world);
     cameraControllerSystem.init(world);
@@ -382,7 +364,6 @@ int main(void)
 
         // Update the ECS systems.
         inputSystem.update(world);
-        floorSystem.update(world);
         cameraControllerSystem.update(world);
         carSystem.update(world);
         transformSystem.update(world);

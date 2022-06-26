@@ -15,7 +15,7 @@ namespace cubos::engine::ecs
         virtual void init(core::ecs::World& world) override;
 
     private:
-        virtual void process(core::ecs::World& world, uint64_t entity, LocalToWorld& localToWorld) override;
+        virtual void process(core::ecs::World& world, core::ecs::Entity entity, LocalToWorld& localToWorld) override;
     };
 } // namespace cubos::engine::ecs
 
