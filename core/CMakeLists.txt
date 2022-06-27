@@ -72,7 +72,6 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/ecs/entity_manager.cpp"
     "src/cubos/core/ecs/world.cpp"
-    "src/cubos/core/ecs/system.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE
@@ -126,13 +125,13 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/ecs/entity_manager.hpp"
     "include/cubos/core/ecs/resource_manager.hpp"
-    "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/storage.hpp"
     "include/cubos/core/ecs/vec_storage.hpp"
     "include/cubos/core/ecs/map_storage.hpp"
     "include/cubos/core/ecs/null_storage.hpp"
+    "include/cubos/core/ecs/world.hpp"
+    "include/cubos/core/ecs/query.hpp"
     "include/cubos/core/ecs/system.hpp"
-    "include/cubos/core/ecs/iterating_system.hpp"
 )
 
 # Create core library

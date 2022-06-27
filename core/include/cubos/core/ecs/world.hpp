@@ -85,17 +85,8 @@ namespace cubos::core::ecs
         /// @param entity Entity ID.
         template <typename... ComponentTypes> void removeComponents(Entity entity);
 
-        /// Returns an iterator over all entities with the given components.
-        /// @tparam ComponentTypes The types of the components to be checked.
-        /// @returns An iterator over all entities with the given components.
-        template <typename... ComponentTypes> EntityManager::Iterator view() const;
-
-        /// Returns an iterator pointing to the end of the world.
-        /// @returns An iterator pointing to the end of the world.
-        EntityManager::Iterator end() const;
-
     private:
-        template <typename... ComponentTypes> friend class WorldView;
+        template <typename... ComponentTypes> friend class Query;
 
         /// Keeps track of the next available global component ID.
         static size_t nextGlobalComponentId;
@@ -227,17 +218,6 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes> void World::removeComponents(Entity entity)
     {
         ([&]() { this->removeComponent<ComponentTypes>(entity); }(), ...);
-    }
-    
-    template <typename... ComponentTypes> EntityManager::Iterator World::view() const
-    {
-        size_t ids[] = { this->getLocalComponentID<ComponentTypes>()... };
-        Entity::Mask mask;
-        for (size_t id : ids)
-        {
-            mask.set(id);
-        }
-        return this->entityManager.withMask(mask);
     }
 
     template <typename T> size_t World::getGlobalComponentId()

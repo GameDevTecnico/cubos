@@ -23,8 +23,3 @@ void World::remove(Entity entity)
     this->entityManager.remove(entity);
     // TODO: remove from all storages.
 }
-
-EntityManager::Iterator World::end() const
-{
-    return this->entityManager.end();
-}

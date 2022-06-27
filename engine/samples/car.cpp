@@ -2,6 +2,7 @@
 
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/ecs/null_storage.hpp>
+#include <cubos/core/ecs/system.hpp>
 
 #include <cubos/core/io/window.hpp>
 
@@ -52,7 +53,7 @@ struct Car
     float angVel = 0.0f;
 };
 
-// Stores input data.
+// Resource which stores input data.
 struct Input
 {
     float deltaTime;
@@ -62,103 +63,85 @@ struct Input
     bool cameraEnabled;
 };
 
-// System which manages the camera.
-class CameraSystem : public core::ecs::IteratingSystem<Camera, ecs::LocalToWorld>
+// System which sets the position of the camera resource from the camera entity.
+void cameraSystem(core::gl::Camera& cameraRsc, core::ecs::Query<const Camera&, const ecs::LocalToWorld&> query)
 {
-public:
-    CameraSystem(core::gl::Camera& camera) : camera(camera)
+    for (auto [entity, camera, localToWorld] : query)
     {
+        cameraRsc.view = glm::inverse(localToWorld.mat);
     }
+}
 
-    virtual void process(core::ecs::World&, core::ecs::Entity, Camera&, ecs::LocalToWorld& localToWorld)
-    {
-        // We want to convert world space to camera space, so we need to invert the matrix.
-        this->camera.view = glm::inverse(localToWorld.mat);
-    }
-
-private:
-    core::gl::Camera& camera;
-};
-
-// System which manages the input.
-class InputSystem : public core::ecs::System
+// Function which setups input callbacks and sets up the input resource.
+void setupInput(core::ecs::World& world)
 {
-public:
-    virtual void init(core::ecs::World& world) override
-    {
-        Input input;
-        input.lastLook = glm::vec2(-1.0f);
-        input.lookDelta = glm::vec2(0.0f);
-        input.movement = glm::vec3(0.0f);
-        input.cameraEnabled = false;
-        input.deltaTime = 1.0f / 60.0f;
-        world.registerResource<Input>(input);
+    Input input;
+    input.lastLook = glm::vec2(-1.0f);
+    input.lookDelta = glm::vec2(0.0f);
+    input.movement = glm::vec3(0.0f);
+    input.cameraEnabled = false;
+    input.deltaTime = 1.0f / 60.0f;
+    world.registerResource<Input>(input);
 
-        auto lookAction = core::io::InputManager::createAction("Look");
-        lookAction->addBinding([&](core::io::Context ctx) {
-            auto inputResource = world.writeResource<Input>();
-            auto& input = inputResource.get();
-            auto pos = ctx.getValue<glm::vec2>();
-
-            if (input.lastLook != glm::vec2(-1.0f))
-            {
-                input.lookDelta = pos - input.lastLook;
-            }
-
-            input.lastLook = pos;
-        });
-        lookAction->addSource(new core::io::DoubleAxis(core::io::MouseAxis::X, core::io::MouseAxis::Y));
-
-        auto forwardAction = core::io::InputManager::createAction("Camera Forward");
-        forwardAction->addBinding([&](core::io::Context ctx) {
-            auto inputResource = world.writeResource<Input>();
-            auto& input = inputResource.get();
-            input.movement.z = ctx.getValue<float>();
-        });
-        forwardAction->addSource(new core::io::SingleAxis(core::io::Key::W, core::io::Key::S));
-
-        auto strafeAction = core::io::InputManager::createAction("Camera Strafe");
-        strafeAction->addBinding([&](core::io::Context ctx) {
-            auto inputResource = world.writeResource<Input>();
-            auto& input = inputResource.get();
-            input.movement.x = ctx.getValue<float>();
-        });
-        strafeAction->addSource(new core::io::SingleAxis(core::io::Key::A, core::io::Key::D));
-
-        auto verticalAction = core::io::InputManager::createAction("Camera Vertical");
-        verticalAction->addBinding([&](core::io::Context ctx) {
-            auto inputResource = world.writeResource<Input>();
-            auto& input = inputResource.get();
-            input.movement.y = ctx.getValue<float>();
-        });
-        verticalAction->addSource(new core::io::SingleAxis(core::io::Key::Q, core::io::Key::E));
-
-        auto enableAction = core::io::InputManager::createAction("Enable Camera");
-        enableAction->addBinding([&](core::io::Context ctx) {
-            auto inputResource = world.writeResource<Input>();
-            auto& input = inputResource.get();
-            input.cameraEnabled = !input.cameraEnabled;
-        });
-        enableAction->addSource(new core::io::ButtonPress(core::io::Key::C));
-    }
-
-    virtual void update(core::ecs::World& world) override
-    {
+    auto lookAction = core::io::InputManager::createAction("Look");
+    lookAction->addBinding([&](core::io::Context ctx) {
         auto inputResource = world.writeResource<Input>();
-        inputResource.get().lookDelta = glm::vec2(0.0f);
-    }
-};
-
-// System which controls the camera.
-class CameraControllerSystem : public core::ecs::IteratingSystem<Camera, ecs::Position, ecs::Rotation>
-{
-private:
-    virtual void process(core::ecs::World& world, core::ecs::Entity entity, Camera&, ecs::Position& position,
-                         ecs::Rotation& rotation)
-    {
-        auto inputResource = world.readResource<Input>();
         auto& input = inputResource.get();
+        auto pos = ctx.getValue<glm::vec2>();
 
+        if (input.lastLook != glm::vec2(-1.0f))
+        {
+            input.lookDelta = pos - input.lastLook;
+        }
+
+        input.lastLook = pos;
+    });
+    lookAction->addSource(new core::io::DoubleAxis(core::io::MouseAxis::X, core::io::MouseAxis::Y));
+
+    auto forwardAction = core::io::InputManager::createAction("Camera Forward");
+    forwardAction->addBinding([&](core::io::Context ctx) {
+        auto inputResource = world.writeResource<Input>();
+        auto& input = inputResource.get();
+        input.movement.z = ctx.getValue<float>();
+    });
+    forwardAction->addSource(new core::io::SingleAxis(core::io::Key::W, core::io::Key::S));
+
+    auto strafeAction = core::io::InputManager::createAction("Camera Strafe");
+    strafeAction->addBinding([&](core::io::Context ctx) {
+        auto inputResource = world.writeResource<Input>();
+        auto& input = inputResource.get();
+        input.movement.x = ctx.getValue<float>();
+    });
+    strafeAction->addSource(new core::io::SingleAxis(core::io::Key::A, core::io::Key::D));
+
+    auto verticalAction = core::io::InputManager::createAction("Camera Vertical");
+    verticalAction->addBinding([&](core::io::Context ctx) {
+        auto inputResource = world.writeResource<Input>();
+        auto& input = inputResource.get();
+        input.movement.y = ctx.getValue<float>();
+    });
+    verticalAction->addSource(new core::io::SingleAxis(core::io::Key::Q, core::io::Key::E));
+
+    auto enableAction = core::io::InputManager::createAction("Enable Camera");
+    enableAction->addBinding([&](core::io::Context ctx) {
+        auto inputResource = world.writeResource<Input>();
+        auto& input = inputResource.get();
+        input.cameraEnabled = !input.cameraEnabled;
+    });
+    enableAction->addSource(new core::io::ButtonPress(core::io::Key::C));
+}
+
+// System which updates the input state.
+void inputSystem(Input& input)
+{
+    input.lookDelta = glm::vec2(0.0f);
+}
+
+// System which controls the camera from the input state.
+void cameraControllerSystem(const Input& input, core::ecs::Query<const Camera&, ecs::Position&, ecs::Rotation&> query)
+{
+    for (auto [entity, camera, position, rotation] : query)
+    {
         if (input.cameraEnabled)
         {
             // Translate the camera.
@@ -177,25 +160,20 @@ private:
             rotation.quat = rotation.quat * pitchRot;
         }
     }
-};
+}
 
-// System which controls the car.
-class CarSystem : public core::ecs::IteratingSystem<Car, ecs::Position, ecs::Rotation>
+// System which controls and updates the car.
+void carSystem(const Input& input, core::ecs::Query<Car&, ecs::Position&, ecs::Rotation&> query)
 {
-private:
-    virtual void process(core::ecs::World& world, core::ecs::Entity, Car& car, ecs::Position& position,
-                         ecs::Rotation& rotation)
+    const float DRAG = 1.0f;
+    const float LAT_DRAG = 3.0f;
+    const float ANG_DRAG = 1.0f;
+    const float TURN_SPEED = 0.2f;
+    const float MAX_ANG_VEL = 3.0f;
+    const float ACCELERATION = 20.0f;
+
+    for (auto [entity, car, position, rotation] : query)
     {
-        const float DRAG = 1.0f;
-        const float LAT_DRAG = 3.0f;
-        const float ANG_DRAG = 1.0f;
-        const float TURN_SPEED = 0.2f;
-        const float MAX_ANG_VEL = 3.0f;
-        const float ACCELERATION = 20.0f;
-
-        auto inputResource = world.readResource<Input>();
-        auto& input = inputResource.get();
-
         // Get direction vectors.
         glm::vec3 forward = rotation.quat * glm::vec3(0.0f, 0.0f, 1.0f);
         glm::vec3 strafe = rotation.quat * glm::vec3(1.0f, 0.0f, 0.0f);
@@ -235,7 +213,7 @@ private:
         position.vec += car.vel * input.deltaTime;
         rotation.quat = glm::angleAxis(car.angVel * input.deltaTime, glm::vec3(0.0f, 1.0f, 0.0f)) * rotation.quat;
     }
-};
+}
 
 void prepareScene(data::AssetManager& assetManager, gl::Renderer& renderer, core::ecs::World& world,
                   core::gl::Palette& palette)
@@ -283,13 +261,6 @@ int main(void)
     // Initialize the renderer.
     auto& renderDevice = window->getRenderDevice();
     auto renderer = gl::deferred::Renderer(renderDevice, window->getFramebufferSize());
-    auto frame = gl::Frame();
-
-    // Initialize the camera.
-    core::gl::Camera camera;
-    camera.fovY = 60.0f;
-    camera.zNear = 0.1f;
-    camera.zFar = 1000.0f;
 
     // Mount the assets directory.
     core::data::FileSystem::mount("/assets",
@@ -304,20 +275,28 @@ int main(void)
     // Initialize the input manager.
     core::io::InputManager::init(window.get());
 
-    // Create the ECS world and initialize the systems.
+    // Create the ECS world and register the necessary components.
     core::ecs::World world;
-    auto transformSystem = ecs::TransformSystem();
-    auto drawSystem = ecs::DrawSystem(frame);
-    auto cameraSystem = CameraSystem(camera);
-    auto inputSystem = InputSystem();
-    auto cameraControllerSystem = CameraControllerSystem();
-    auto carSystem = CarSystem();
-    transformSystem.init(world);
-    drawSystem.init(world);
-    cameraSystem.init(world);
-    inputSystem.init(world);
-    cameraControllerSystem.init(world);
-    carSystem.init(world);
+    world.registerComponent<ecs::Grid>();
+    world.registerComponent<ecs::LocalToWorld>();
+    world.registerComponent<ecs::Position>();
+    world.registerComponent<ecs::Rotation>();
+    world.registerComponent<ecs::Scale>();
+    world.registerComponent<Camera>();
+    world.registerComponent<Car>();
+
+    // Add the frame and camera resources.
+    world.registerResource<gl::Frame>();
+    {
+        core::gl::Camera camera;
+        camera.fovY = 60.0f;
+        camera.zNear = 0.1f;
+        camera.zFar = 1000.0f;
+        world.registerResource<core::gl::Camera>(camera);
+    }
+
+    // Prepare the input resource.
+    setupInput(world);
 
     // Get the palette.
     auto paletteAsset = assetManager.load<data::Palette>("palette");
@@ -354,24 +333,31 @@ int main(void)
         }
         lastT = currentT;
 
-        // Clear the frame.
-        frame.clear();
-        frame.ambient({0.1f, 0.1f, 0.1f});
+        // Clear the frame and add a light to it.
+        {
+            auto frame = world.writeResource<gl::Frame>();
+            frame.get().clear();
+            frame.get().ambient({0.1f, 0.1f, 0.1f});
 
-        // Add a directional light to the frame.
-        glm::quat directionalLightRotation = glm::quat(glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0));
-        frame.light(core::gl::DirectionalLight(directionalLightRotation, glm::vec3(1), 1.0f));
+            // Add a directional light to the frame.
+            glm::quat directionalLightRotation = glm::quat(glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0));
+            frame.get().light(core::gl::DirectionalLight(directionalLightRotation, glm::vec3(1), 1.0f));
+        }
 
         // Update the ECS systems.
-        cameraControllerSystem.update(world);
-        carSystem.update(world);
-        transformSystem.update(world);
-        cameraSystem.update(world);
-        inputSystem.update(world);
-        drawSystem.update(world);
+        core::ecs::SystemWrapper(cameraControllerSystem).call(world);
+        core::ecs::SystemWrapper(carSystem).call(world);
+        core::ecs::SystemWrapper(ecs::transformSystem).call(world);
+        core::ecs::SystemWrapper(cameraSystem).call(world);
+        core::ecs::SystemWrapper(inputSystem).call(world);
+        core::ecs::SystemWrapper(ecs::drawSystem).call(world);
 
         // Render the frame.
-        renderer.render(camera, frame);
+        {
+            auto camera = world.readResource<core::gl::Camera>();
+            auto frame = world.readResource<gl::Frame>();
+            renderer.render(camera.get(), frame.get());
+        }
 
         window->swapBuffers();
     }
