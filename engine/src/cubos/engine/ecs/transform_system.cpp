@@ -14,6 +14,5 @@ void cubos::engine::ecs::transformSystem(
             localToWorld.mat *= glm::toMat4(rotation->quat);
         if (scale != nullptr)
             localToWorld.mat = glm::scale(localToWorld.mat, glm::vec3(scale->factor));
-        printf("%p %p %p\n", position, rotation, scale);
     }
 }
