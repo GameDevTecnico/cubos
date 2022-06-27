@@ -2,6 +2,12 @@
 
 using namespace cubos::core::ecs;
 
+Entity::Entity()
+{
+    this->index = UINT32_MAX;
+    this->generation = UINT32_MAX;
+}
+
 Entity::Entity(uint32_t index, uint32_t generation) : index(index), generation(generation)
 {
     // Do nothing.

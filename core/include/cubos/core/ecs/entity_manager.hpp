@@ -16,6 +16,7 @@ namespace cubos::core::ecs
     public:
         using Mask = std::bitset<CUBOS_CORE_ECS_MAX_COMPONENTS>;
 
+        Entity();
         Entity(const Entity&) = default;
         Entity& operator=(const Entity&) = default;
 

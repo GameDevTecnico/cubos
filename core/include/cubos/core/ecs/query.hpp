@@ -138,11 +138,16 @@ namespace cubos::core::ecs
         /// @return The iterator to the end of the entity list.
         Iterator end();
 
+        /// @param entity The entity to get the components from.
+        /// @returns The requested components.
+        std::optional<std::tuple<ComponentTypes...>> operator[](Entity entity);
+
     private:
         friend World;
 
         const World& world; ///< The world to query.
         Fetched fetched;    ///< The fetched data.
+        Entity::Mask mask;  ///< The mask of the components to query.
     };
 
     // Implementation.
@@ -190,26 +195,25 @@ namespace cubos::core::ecs
     Query<ComponentTypes...>::Query(const World& world)
         : world(world), fetched(std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::fetch(world)...))
     {
-        // Nothing to do.
-    }
-
-    template <typename... ComponentTypes> Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::begin()
-    {
         // We must turn the type from const T& and similar to T before getting the ID.
         size_t ids[] = {
             (impl::QueryFetcher<ComponentTypes>::IS_OPTIONAL
                  ? SIZE_MAX
                  : this->world.getLocalComponentID<
                        std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
-        Entity::Mask mask = 0;
+        this->mask = 0;
         for (size_t id : ids)
         {
             if (id != SIZE_MAX)
             {
-                mask.set(id);
+                this->mask.set(id);
             }
         }
-        return Iterator(this->fetched, this->world.entityManager.withMask(mask));
+    }
+
+    template <typename... ComponentTypes> Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::begin()
+    {
+        return Iterator(this->fetched, this->world.entityManager.withMask(this->mask));
     }
 
     template <typename... ComponentTypes> Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::end()
@@ -272,6 +276,26 @@ namespace cubos::core::ecs
         else
         {
             return nullptr;
+        }
+    }
+
+    template <typename... ComponentTypes>
+    std::optional<std::tuple<ComponentTypes...>> Query<ComponentTypes...>::operator[](Entity entity)
+    {
+        auto mask = this->world.entityManager.getMask(entity);
+        if ((mask & this->mask) == this->mask)
+        {
+            // TODO: replace by
+            // return std::forward_as_tuple(this->it, impl::QueryFetcher<ComponentTypes>::arg(
+            //                   std::get<typename impl::QueryFetcher<ComponentTypes>::Type>(this->fetched),
+            //                   *this->it)...);
+            // when we start using storages.
+            return std::forward_as_tuple(
+                impl::QueryFetcher<ComponentTypes>::arg(std::get<0>(this->fetched), entity)...);
+        }
+        else
+        {
+            return std::nullopt;
         }
     }
 
