@@ -1,12 +1,10 @@
 #include <iostream>
 
 #include <cubos/core/ecs/world.hpp>
-#include <cubos/core/ecs/world_view.hpp>
 #include <cubos/core/ecs/vec_storage.hpp>
 #include <cubos/core/ecs/map_storage.hpp>
 #include <cubos/core/ecs/null_storage.hpp>
 #include <cubos/core/ecs/system.hpp>
-#include <cubos/core/ecs/iterating_system.hpp>
 
 using namespace cubos::core;
 
@@ -27,53 +25,66 @@ struct Velocity
     float x, y, z;
 };
 
-class Spawner : public ecs::System
+void spawner(ecs::World& world)
 {
-public:
-    void init(ecs::World& world) override
-    {
-        auto player = world.create();
-        world.addComponent<Position>(player, {0, 5, 1});
-        world.addComponent<Velocity>(player, {0, 3, 1});
-        world.addComponent<Player>(player);
+    auto player = world.create();
+    world.addComponent<Position>(player, {0, 5, 1});
+    world.addComponent<Velocity>(player, {0, 3, 1});
+    world.addComponent<Player>(player);
 
-        auto e2 = world.create<Position>({0, 8, 7});
-        auto e3 = world.create(Position{0, 15, 7}, Velocity{0, 4, 1});
-        auto e4 = world.create(Position{0, 12, 7}, Velocity{0, 5, 1});
+    auto e2 = world.create<Position>({0, 8, 7});
+    auto e3 = world.create(Position{0, 15, 7}, Velocity{0, 4, 1});
+    auto e4 = world.create(Position{0, 12, 7}, Velocity{0, 5, 1});
 
-        world.removeComponents<Position, Velocity>(e3);
-    }
+    world.removeComponents<Position, Velocity>(e3);
+}
+
+struct DeltaTime
+{
+    float dt;
 };
 
-class PrintPositions : public ecs::IteratingSystem<Position, Velocity>
+struct MyResource
 {
-public:
-    void process(ecs::World& world, uint64_t entity, Position& pos, Velocity&) override
-    {
-        std::cout << pos.y << std::endl;
-    }
+    int val;
 };
 
-class PrintPositions2 : public ecs::IteratingSystem<Player, Position, Velocity>
+void printPositions(ecs::Query<Position&, const Velocity&> query)
 {
-public:
-    void process(ecs::World& world, uint64_t entity, Player&, Position& pos, Velocity&) override
+    for (auto [entity, position, velocity] : query)
     {
-        std::cout << pos.y << std::endl;
+        std::cout << position.y << std::endl;
     }
-};
+}
+
+void printPlayerPosition(ecs::Query<const Player&, Position&, const Velocity&> query)
+{
+    for (auto [entity, player, position, velocity] : query)
+    {
+        std::cout << position.y << std::endl;
+    }
+}
+
+void mySystem(DeltaTime& dt, const MyResource& res)
+{
+    std::cout << "mySystem: " << dt.dt << " " << res.val << std::endl;
+}
 
 int main()
 {
     ecs::World world;
+    world.registerResource<DeltaTime>(DeltaTime{1.0f});
+    world.registerResource<MyResource>(MyResource{0});
     world.registerComponent<Player>();
     world.registerComponent<Position>();
     world.registerComponent<Velocity>();
 
-    Spawner spawner;
-    PrintPositions printPositions;
-    PrintPositions2 printPositions2;
-    spawner.init(world);
-    printPositions.update(world);
-    printPositions2.update(world);
+    ecs::SystemWrapper(mySystem).call(world);
+    ecs::SystemWrapper([](const DeltaTime& dt, MyResource& res) {
+        std::cout << "lambda: " << dt.dt << " " << res.val << std::endl;
+    }).call(world);
+
+    spawner(world);
+    ecs::SystemWrapper(printPositions).call(world);
+    ecs::SystemWrapper(printPlayerPosition).call(world);
 }

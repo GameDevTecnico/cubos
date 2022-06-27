@@ -6,7 +6,8 @@ set(ENGINE_SAMPLES_SOURCES
     "empty.cpp"
     "renderer.cpp"
     "asset.cpp"
-    "car.cpp"
+    "cars.cpp"
+    "race.cpp"
     "asset_renderer.cpp"
 )
 

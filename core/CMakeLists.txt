@@ -12,6 +12,9 @@ option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
 option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source?" ON)
 option(FMT_USE_SUBMODULE "Compile FMT from source?" ON)
 
+set(CUBOS_CORE_ECS_MAX_COMPONENTS "64" CACHE STRING "The maximum number of components registered in an ECS world.")
+
+
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
 
@@ -67,8 +70,8 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/ui/imgui.cpp"
 
+    "src/cubos/core/ecs/entity_manager.cpp"
     "src/cubos/core/ecs/world.cpp"
-    "src/cubos/core/ecs/system.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE
@@ -120,14 +123,15 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/ui/imgui.hpp"
 
-    "include/cubos/core/ecs/world.hpp"
-    "include/cubos/core/ecs/world_view.hpp"
+    "include/cubos/core/ecs/entity_manager.hpp"
+    "include/cubos/core/ecs/resource_manager.hpp"
     "include/cubos/core/ecs/storage.hpp"
     "include/cubos/core/ecs/vec_storage.hpp"
     "include/cubos/core/ecs/map_storage.hpp"
     "include/cubos/core/ecs/null_storage.hpp"
+    "include/cubos/core/ecs/world.hpp"
+    "include/cubos/core/ecs/query.hpp"
     "include/cubos/core/ecs/system.hpp"
-    "include/cubos/core/ecs/iterating_system.hpp"
 )
 
 # Create core library
@@ -136,6 +140,7 @@ add_library(cubos-core ${CUBOS_CORE_SOURCE} ${CUBOS_CORE_INCLUDE})
 target_include_directories(cubos-core PUBLIC "include" PRIVATE "src")
 set_property(TARGET cubos-core PROPERTY CXX_STANDARD 20)
 target_compile_features(cubos-core PUBLIC cxx_std_20)
+target_compile_definitions(cubos-core PUBLIC -DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS})
 
 # Link dependencies
 
