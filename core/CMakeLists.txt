@@ -6,6 +6,7 @@ option(WITH_OPENGL "With OpenGL?" ON)
 if (WITH_GLFW)
     option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
 endif ()
+option(WITH_OPENAL "With OpenAL?" ON)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
 option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
@@ -63,8 +64,12 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/util.cpp"
     "src/cubos/core/gl/vertex.cpp"
 
+    "src/cubos/core/al/audio_device.cpp"
+    "src/cubos/core/al/oal_audio_device.cpp"
+    "src/cubos/core/al/oal_audio_device.hpp"
+
     "src/cubos/core/ecs/world.cpp"
-)
+ )
 
 set(CUBOS_CORE_INCLUDE
     "include/cubos/core/log.hpp"
@@ -101,6 +106,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/gl/camera.hpp"
     "include/cubos/core/gl/light.hpp"
     "include/cubos/core/gl/util.hpp"
+
+    "include/cubos/core/al/audio_device.hpp"
 
     "include/cubos/core/io/input_manager.hpp"
     "include/cubos/core/io/action.hpp"
@@ -146,6 +153,13 @@ if (WITH_GLFW)
     target_link_libraries(cubos-core PRIVATE glfw)
     target_compile_definitions(cubos-core PRIVATE WITH_GLFW)
 endif ()
+
+if (WITH_OPENAL)
+    add_subdirectory(lib/openal-soft)
+    target_include_directories(cubos-core PRIVATE lib/openal-soft/include)
+    target_link_libraries(cubos-core PRIVATE OpenAL)
+    target_compile_definitions(cubos-core PRIVATE WITH_OPENAL)
+endif()
 
 if (GLM_USE_SUBMODULE)
     add_subdirectory(lib/glm)

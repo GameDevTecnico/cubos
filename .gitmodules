@@ -19,3 +19,6 @@
 [submodule "core/lib/fmt"]
 	path = core/lib/fmt
 	url = https://github.com/fmtlib/fmt.git
+[submodule "core/lib/openal-soft"]
+	path = core/lib/openal-soft
+	url = https://github.com/kcat/openal-soft
