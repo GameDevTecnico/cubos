@@ -125,6 +125,7 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/ecs/entity_manager.hpp"
     "include/cubos/core/ecs/resource_manager.hpp"
+    "include/cubos/core/ecs/commands.hpp"
     "include/cubos/core/ecs/storage.hpp"
     "include/cubos/core/ecs/vec_storage.hpp"
     "include/cubos/core/ecs/map_storage.hpp"

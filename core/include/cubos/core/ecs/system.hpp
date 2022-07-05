@@ -177,7 +177,8 @@ namespace cubos::core::ecs
     }
 
     template <typename... Args>
-    std::tuple<typename impl::SystemFetcher<Args>::Type...> impl::SystemFetcher<std::tuple<Args...>>::fetch(const World& world)
+    std::tuple<typename impl::SystemFetcher<Args>::Type...> impl::SystemFetcher<std::tuple<Args...>>::fetch(
+        const World& world)
     {
         return std::make_tuple(impl::SystemFetcher<Args>::fetch(world)...);
     }

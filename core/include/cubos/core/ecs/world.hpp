@@ -47,7 +47,7 @@ namespace cubos::core::ecs
 
         /// @brief Removes an entity.
         /// @param entity Entity ID.
-        void remove(Entity entity);
+        void destroy(Entity entity);
 
         /// @brief Registers a component type.
         /// @tparam T Component type.

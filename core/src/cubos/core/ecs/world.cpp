@@ -18,7 +18,7 @@ World::~World()
     }
 }
 
-void World::remove(Entity entity)
+void World::destroy(Entity entity)
 {
     this->entityManager.remove(entity);
     // TODO: remove from all storages.
