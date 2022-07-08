@@ -29,22 +29,25 @@ int main(void)
 
         // Set the palette.
         Palette palette({
-            {{1, 0, 0, 1}},
-            {{0, 10, 0, 1}},
-            {{0, 0, 1, 1}},
+            {{2, 0, 0, 1}},
+            {{0, 2, 0, 1}},
+            {{0, 0, 2, 1}},
+            {{2, 2, 0, 1}},
+            {{2, 0, 2, 1}},
+            {{0, 2, 2, 1}},
+            {{2, 2, 2, 1}}
         });
         renderer.setPalette(palette);
 
         // Create and upload a simple grid.
-        Grid cube({2, 2, 2});
-        cube.set({0, 0, 0}, 1);
-        cube.set({0, 0, 1}, 2);
-        cube.set({0, 1, 0}, 3);
-        cube.set({0, 1, 1}, 1);
-        cube.set({1, 0, 0}, 2);
-        cube.set({1, 0, 1}, 3);
-        cube.set({1, 1, 0}, 1);
-        cube.set({1, 1, 1}, 2);
+        Grid cube({16, 1, 16});
+        int paletteIdx = 0;
+        for(int x = 0; x < 16; x++) {
+            for(int z = 0; z < 16; z++) {
+                cube.set({x, 0, z}, paletteIdx + 1);
+                paletteIdx = (paletteIdx + 1) % 7;
+            }
+        }
         auto gpuCube = renderer.upload(cube);
 
         // Add a bloom pass to the post processing stack.
@@ -81,23 +84,11 @@ int main(void)
             frame.clear();
 
             // Draw cube of cubes to the frame.
-            for (int x = -1; x < 1; x++)
-            {
-                for (int y = -1; y < 1; y++)
-                {
-                    for (int z = -1; z < 1; z++)
-                    {
-                        auto axis = glm::vec3(x, y, z) * 2.0f + glm::vec3(1);
+            auto axis = glm::vec3(0, 0, 0) * 2.0f + glm::vec3(1);
 
-                        auto modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z)) *
-                                        glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f)) *
-                                        glm::rotate(glm::mat4(1.0f), glm::radians(t), axis) *
-                                        glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f)) *
-                                        glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
-                        frame.draw(gpuCube, modelMat);
-                    }
-                }
-            }
+            auto modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(-4, 0, -4)) *
+                            glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
+            frame.draw(gpuCube, modelMat);
 
             // Add lights to the frame.
             auto spotRotation = glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
