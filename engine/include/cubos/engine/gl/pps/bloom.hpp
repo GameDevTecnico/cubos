@@ -7,10 +7,14 @@
 
 #include <glm/glm.hpp>
 
+#include <vector>
+
 namespace cubos::engine::gl::pps
 {
     /// A post processing pass that adds a "bloom" effect to any bright objects
     /// in the scene.
+    ///
+    /// Source: https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom
     class BloomPass : public Pass
     {
     public:
@@ -20,52 +24,58 @@ namespace cubos::engine::gl::pps
 
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
-        /// @param brightnessThreshold The brightness threshold to use.
-        /// @param lightBleedStrength The strength of the light bleed effect.
-        BloomPass(core::gl::RenderDevice& renderDevice, glm::uvec2 size, float brightnessThreshold, float lightBleedStrength);
+        /// @param iterations Number of iterations for downsample/upsample step
+        /// @param threshold Pixel brightness threshold to be considered for bloom effect
+        /// @param softThreshold Ratio for including pixels that don't pass the threshold test
+        /// @param intensity The intensity of the bloom effect.
+        BloomPass(core::gl::RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold, float softThreshold, float intensity);
 
-        void setBrightnessThreshold(float brightnessThreshold);
-        void setLightBleedStrength(float lightBleedStrength);
-        float getBrightnessThreshold() const;
-        float getLightBleedStrength() const;
+        float getThreshold() const;
+        float getSoftThreshold() const;
+        float getIntensity() const;
+        void setThreshold(float threshold);
+        void setSoftThreshold(float softThreshold);
+        void setIntensity(float intensity);
+
+        void generateTextures();
 
         // Interface methods implementation.
-
         virtual void resize(glm::uvec2 size) override;
         virtual void execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
                              core::gl::Framebuffer out) const override;
 
     private:
-        float brightnessThreshold; ///< The upper brighness threshold for applying the effect on.
-        float lightBleedStrength;  ///< The strength of the light bleed effect
+        unsigned int iterations; ///< Number of iterations for downscale/upscale operation
+        float threshold;         ///< Brighness threshold for applying the effect on.
+        float softThreshold;     ///< Soft brightness threshold to include some samples under the upper threshold.
+        float intensity;         ///< Effect intensity
 
     private:
-        glm::uvec2 size;                            ///< The size of the window.
-        core::gl::VertexArray screenQuadVA;         ///< The screen quad VA used to render the output.
-        core::gl::Sampler texSampler1, texSampler2; ///< The samplers to use for required textures.
+        glm::uvec2 size;                    ///< Size of the window.
+        core::gl::VertexArray screenQuadVA; ///< Screen quad VA used to render the output.
+        core::gl::Sampler texSampler;       ///< Sampler to use for required textures.
+        core::gl::BlendState blendState;    ///< Blend state required for upscaling process.
 
     private:
         // Extraction pipeline
-        core::gl::Framebuffer extFB;                           ///< The framebuffer of the extraction step.
-        core::gl::ShaderPipeline extPipeline;                  ///< The shader pipeline to extract image data required.
-        core::gl::ShaderBindingPoint extInputTexBP;            ///< The binding point for the input texture.
-        core::gl::ShaderBindingPoint extBrightnessThresholdBP; ///< The binding point for the brightness threshold.
-        core::gl::Texture2D extTex;                            ///< The result texture from the extraction step.
+        core::gl::Framebuffer extFB;                       ///< Framebuffer of the extraction step.
+        core::gl::ShaderPipeline extPipeline;              ///< Shader pipeline of the extraction step.
+        core::gl::ShaderBindingPoint extInputTexBP;        ///< Input texture binding point.
+        core::gl::ShaderBindingPoint extThresholdFilterBP; ///< Threshold information binding point.
+        core::gl::Texture2D extTex;                        ///< Result texture from extraction step
 
     private:
-        // Blur pipeline
-        core::gl::Framebuffer blurFB;                      ///< The framebuffer to store the blurred bright areas.
-        core::gl::ShaderPipeline blurPipeline;             ///< The shader pipeline to blur the bright areas.
-        core::gl::ShaderBindingPoint blurInputTexBP;       ///< The binding point for the input texture.
-        core::gl::ShaderBindingPoint blurLightBleedBP;     ///< The binding point for the bloom strength.
-        core::gl::ShaderBindingPoint blurVerticalBP;       ///< The binding point for knowing when to perform vertical blur.
-        core::gl::Texture2D blurTex;                       ///< The result texture from the blur step.
+        // Bloom pipeline
+        core::gl::ShaderPipeline bloomPipeline;          ///< Shader pipeline of the bloom effect.
+        core::gl::ShaderBindingPoint bloomInputTexBP;    ///< Input texture binding point.
+        core::gl::ShaderBindingPoint bloomSrcTexBP;      ///< Source texture binding point.
+        core::gl::ShaderBindingPoint bloomScalingBP;     ///< Texture scaling binding point.
+        core::gl::ShaderBindingPoint bloomCurrPassBP;    ///< Current pass binding point.
+        core::gl::ShaderBindingPoint bloomIntensityBP;   ///< Bloom intensity binding point.
+        std::vector<core::gl::Texture2D> bloomTexBuffer; ///< The texture buffer of the bloom effect.
+        std::vector<core::gl::Framebuffer> bloomFBs;     ///< The framebuffers of the bloom effect.
 
-    private:
-        // Combine pipeline
-        core::gl::ShaderPipeline combinePipeline;        ///< The shader pipeline to combine the results in the final output.
-        core::gl::ShaderBindingPoint combineRenderTexBP; ///< The binding point for the initially rendered texture.
-        core::gl::ShaderBindingPoint combineBlurTexBP;   ///< The binding point for the blurred result texture.
+
     };
 } // namespace cubos::engine::gl::pps
 
