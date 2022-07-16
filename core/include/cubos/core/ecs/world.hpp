@@ -2,9 +2,9 @@
 #define CUBOS_ECS_WORLD_HPP
 
 #include <cubos/core/log.hpp>
-#include <cubos/core/ecs/storage.hpp>
 #include <cubos/core/ecs/resource_manager.hpp>
 #include <cubos/core/ecs/entity_manager.hpp>
+#include <cubos/core/ecs/component_manager.hpp>
 
 #include <cassert>
 #include <unordered_map>
@@ -87,14 +87,6 @@ namespace cubos::core::ecs
 
     private:
         template <typename... ComponentTypes> friend class Query;
-
-        /// Keeps track of the next available global component ID.
-        static size_t nextGlobalComponentId;
-
-        /// Maps global component IDs to local component IDs.
-        std::unordered_map<size_t, size_t> globalToLocalComponentIds;
-
-        std::vector<IStorage*> storages;
 
         ResourceManager resourceManager;
         EntityManager entityManager;

@@ -110,7 +110,7 @@ Entity EntityManager::create(Entity::Mask mask)
     uint32_t index = this->availableEntities.front();
     this->availableEntities.pop();
     this->entities[index].mask = mask;
-    if (mask.any())
+    if (mask.any() && mask.test(0))
     {
         this->archetypes[mask].insert(index);
     }
@@ -129,10 +129,10 @@ void EntityManager::setMask(Entity entity, Entity::Mask mask)
 {
     if (this->entities[entity.index].mask != mask)
     {
-        if (this->entities[entity.index].mask.any())
+        if (this->entities[entity.index].mask.any() && this->entities[entity.index].mask.test(0))
             this->archetypes[this->entities[entity.index].mask].erase(entity.index);
         this->entities[entity.index].mask = mask;
-        if (mask.any())
+        if (mask.any() && mask.test(0))
             this->archetypes[mask].insert(entity.index);
     }
 }

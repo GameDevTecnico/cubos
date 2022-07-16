@@ -1,6 +1,7 @@
 #include <cubos/core/log.hpp>
 
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/ecs/null_storage.hpp>
 #include <cubos/core/ecs/system.hpp>
 
@@ -53,6 +54,14 @@ struct Car
     float angVel = 0.0f;
 };
 
+// Component for particle entities.
+struct Particle
+{
+    using Storage = core::ecs::VecStorage<Particle>;
+
+    float life = 0.0f;
+};
+
 // Resource which stores input data.
 struct Input
 {
@@ -69,6 +78,19 @@ void cameraSystem(core::gl::Camera& cameraRsc, core::ecs::Query<const Camera&, c
     for (auto [entity, camera, localToWorld] : query)
     {
         cameraRsc.view = glm::inverse(localToWorld.mat);
+    }
+}
+
+// System which updates the particles.
+void particleSystem(core::ecs::Commands& commands, Input& input, core::ecs::Query<Particle&> query)
+{
+    for (auto [entity, particle] : query)
+    {
+        particle.life -= input.deltaTime;
+        if (particle.life <= 0.0f)
+        {
+            commands.destroy(entity);
+        }
     }
 }
 
@@ -345,6 +367,7 @@ int main(void)
         }
 
         // Update the ECS systems.
+
         core::ecs::SystemWrapper(cameraControllerSystem).call(world);
         core::ecs::SystemWrapper(carSystem).call(world);
         core::ecs::SystemWrapper(ecs::transformSystem).call(world);

@@ -3,13 +3,17 @@
 
 #include <cubos/core/ecs/world.hpp>
 
+#include <unordered_map>
+#include <mutex>
+
 namespace cubos::core::ecs
 {
     /// Object responsible for storing ECS commands to execute them later.
     class Commands final
     {
     public:
-        Commands() = default;
+        /// @param world The world to which the commands will be applied.
+        Commands(World& world);
         ~Commands() = default;
 
         /// Adds components to an entity.
@@ -34,7 +38,11 @@ namespace cubos::core::ecs
         void destroy(Entity entity);
 
     private:
+        /// Commits the commands to the world.
+        void commit();
 
+        World& world;     ///< The world to which the commands will be applied.
+        std::mutex mutex; ///< Protects the world.
     };
 } // namespace cubos::core::ecs
 
