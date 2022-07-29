@@ -8,6 +8,7 @@
 #include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/registry.hpp>
+#include <cubos/core/ecs/dispatcher.hpp>
 
 using namespace cubos::core;
 
