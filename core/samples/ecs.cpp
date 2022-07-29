@@ -5,6 +5,7 @@
 #include <cubos/core/ecs/map_storage.hpp>
 #include <cubos/core/ecs/null_storage.hpp>
 #include <cubos/core/ecs/system.hpp>
+#include <cubos/core/ecs/dispatcher.hpp>
 
 using namespace cubos::core;
 
@@ -79,12 +80,20 @@ int main()
     world.registerComponent<Position>();
     world.registerComponent<Velocity>();
 
-    ecs::SystemWrapper(mySystem).call(world);
+    spawner(world);
+    // create dispatcher
+    ecs::Dispatcher dispatcher;
+    // register systems wrappers on dispatcher
+    dispatcher.registerSystem(mySystem);
+    dispatcher.registerSystem(printPositions);
+    dispatcher.registerSystem(printPlayerPosition);
+    dispatcher.registerSystem(
+        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; });
+    // call systems on dispatcher
+    dispatcher.callSystems(world);
+
+    /*
     ecs::SystemWrapper([](const DeltaTime& dt, MyResource& res) {
         std::cout << "lambda: " << dt.dt << " " << res.val << std::endl;
-    }).call(world);
-
-    spawner(world);
-    ecs::SystemWrapper(printPositions).call(world);
-    ecs::SystemWrapper(printPlayerPosition).call(world);
+    }).call(world);*/
 }

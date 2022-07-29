@@ -71,6 +71,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ui/imgui.cpp"
 
     "src/cubos/core/ecs/entity_manager.cpp"
+    "src/cubos/core/ecs/dispatcher.cpp"
     "src/cubos/core/ecs/world.cpp"
 )
 
@@ -132,6 +133,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/query.hpp"
     "include/cubos/core/ecs/system.hpp"
+    "include/cubos/core/ecs/dispatcher.hpp"
 )
 
 # Create core library
