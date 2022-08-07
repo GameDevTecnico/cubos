@@ -22,9 +22,10 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/data/meta.cpp"
     "src/cubos/engine/data/asset_manager.cpp"
+    "src/cubos/engine/data/loader.cpp"
     "src/cubos/engine/data/grid.cpp" 
     "src/cubos/engine/data/palette.cpp" 
-    "src/cubos/engine/data/loader.cpp"
+    "src/cubos/engine/data/scene.cpp" 
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -51,6 +52,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/data/loader.hpp"
     "include/cubos/engine/data/palette.hpp"
     "include/cubos/engine/data/grid.hpp"
+    "include/cubos/engine/data/scene.hpp"
 )
 
 # Create cubos engine

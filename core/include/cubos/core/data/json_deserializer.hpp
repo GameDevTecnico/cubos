@@ -1,21 +1,19 @@
-#ifndef CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP
-#define CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP
+#ifndef CUBOS_CORE_DATA_JSON_DESERIALIZER_HPP
+#define CUBOS_CORE_DATA_JSON_DESERIALIZER_HPP
 
 #include <cubos/core/data/deserializer.hpp>
 
-#include <yaml-cpp/yaml.h>
+#include <nlohmann/json.hpp>
 #include <stack>
 
 namespace cubos::core::data
 {
-    /// Implementation of the abstract Deserializer class for deserializing from raw binary data.
-    /// This class allows data to be deserialized from both little and big endian formats.
-    class BinaryDeserializer : public Deserializer
+    /// Implementation of the abstract Deserializer class for deserializing from JSON.
+    class JSONDeserializer : public Deserializer
     {
     public:
-        /// @param stream The stream to deserialize from.
-        /// @param readLittleEndian If true, the data will be read in little endian format (big endian otherwise).
-        BinaryDeserializer(memory::Stream& stream, bool readLittleEndian = true);
+        /// @param src The string to deserialize from. Must correspond to a JSON literal/object/array.
+        JSONDeserializer(const std::string& src);
 
         // Implement interface methods.
 
@@ -39,9 +37,25 @@ namespace cubos::core::data
         virtual void endDictionary() override;
 
     private:
-        memory::Stream& stream; ///< THe stream to deserialize from.
-        bool readLittleEndian;  ///< Whether to write in little endian or big endian format.
+        /// The possible states of deserialization.
+        enum class Mode
+        {
+            Object,
+            Array,
+            Dictionary
+        };
+
+        /// The current frame of deserialization.
+        struct Frame
+        {
+            Mode mode;                             ///< The current mode of deserialization.
+            nlohmann::ordered_json::iterator iter; ///< The current node.
+            bool key;                              ///< Whether the current node is a key.
+        };
+
+        std::stack<Frame> frame;     ///< The current frame of the deserializer.
+        nlohmann::ordered_json json; ///< The current JSON value being read.
     };
 } // namespace cubos::core::data
 
-#endif // CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP
+#endif // CUBOS_CORE_DATA_JSON_DESERIALIZER_HPP

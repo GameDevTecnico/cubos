@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <vector>
 #include <shared_mutex>
+#include <typeindex>
 
 namespace cubos::core::ecs
 {
@@ -46,19 +47,9 @@ namespace cubos::core::ecs
         std::unique_lock<std::shared_mutex> lock;
     };
 
-    /// Object which stores temporary component data for use with the Commands object.
-    /// Used internally by the ComponentManager.
-    /// @tparam T The type of the component.
-    template <typename T> class StagingArea
-    {
-    public:
-    private:
-    };
-
     class ComponentManager final
     {
     public:
-        ComponentManager();
         ~ComponentManager();
 
         /// Registers a new component type with the component manager.
@@ -81,16 +72,25 @@ namespace cubos::core::ecs
         /// @returns The storage guard of the component type.
         template <typename T> WriteStorage<T> write() const;
 
-        /// Stages a component to be added to an entity.
+        /// Adds a component to an entity.
         /// @tparam T The type of the component.
         /// @param id The ID of the entity.
         /// @param value The initial value of the component.
-        template <typename T> void add(uint32_t id, T&& value) const;
+        template <typename T> void add(uint32_t id, T value);
 
-        /// Stages a component to be removed from an entity.
+        /// Removes a component from an entity.
         /// @tparam T The type of the component.
         /// @param id The ID of the entity.
-        template <typename T> void remove(uint32_t id) const;
+        template <typename T> void remove(uint32_t id);
+
+        /// Removes a component from an entity.
+        /// @param id The ID of the entity.
+        /// @param componentId The ID of the component.
+        void remove(uint32_t id, size_t componentId);
+
+        /// Removes all components from an entity.
+        /// @param id The ID of the entity.
+        void removeAll(uint32_t id);
 
         /// Commits the staged components to their storages.
         void commit();
@@ -98,23 +98,14 @@ namespace cubos::core::ecs
     private:
         struct Entry
         {
-            IStorage* storage;       ///< The generic component storage.
-            void* staging;           ///< The staging area for the component.
-            std::shared_mutex mutex; ///< Read/write lock for the storage.
+            IStorage* storage;                        ///< The generic component storage.
+            std::unique_ptr<std::shared_mutex> mutex; ///< Read/write lock for the storage.
 
-            Entry(IStorage* storage, void* staging);
+            Entry(IStorage* storage);
         };
 
-        /// Utility function which returns the global ID of a component.
-        /// @tparam T Component type.
-        /// @return Global ID of the component.
-        template <typename T> static size_t getGlobalComponentId();
-
-        /// Keeps track of the next available global component ID.
-        static size_t nextGlobalComponentId;
-
-        /// Maps global component IDs to local component IDs.
-        std::unordered_map<size_t, size_t> globalToLocalComponentIds;
+        /// Maps component types to component IDs.
+        std::unordered_map<std::type_index, size_t> typeToIds;
 
         std::vector<Entry> entries; ///< The registered component storages.
     };
@@ -161,59 +152,46 @@ namespace cubos::core::ecs
     {
         static_assert(std::is_same<T, typename T::Storage::Type>(),
                       "A component can't use a storage for a different component type!");
-        const size_t globalComponentId = ComponentManager::getGlobalComponentId<T>();
-        if (this->globalToLocalComponentIds.find(globalId) == this->globalToLocalComponentIds.end())
+        const auto type = std::type_index(typeid(T));
+        if (this->typeToIds.find(type) == this->typeToIds.end())
         {
-            this->globalToLocalComponentIds[globalComponentId] = this->storages.size();
+            this->typeToIds[type] = this->entries.size() + 1; // Component ids start at 1.
             this->entries.emplace_back(new typename T::Storage());
         }
     }
 
     template <typename T> size_t ComponentManager::getID() const
     {
-        const size_t globalComponentId = ComponentManager::getGlobalComponentId<T>();
-        return this->globalToLocalComponentIds.at(globalComponentId);
+        return this->typeToIds.at(std::type_index(typeid(T)));
     }
 
     template <typename T> ReadStorage<T> ComponentManager::read() const
     {
         const size_t id = this->getID<T>();
-        return ReadStorage<T>(*static_cast<const typename T::Storage*>(this->entries[id].storage),
-                              std::shared_lock<std::shared_mutex>(this->entries[id].mutex));
+        return ReadStorage<T>(*static_cast<const typename T::Storage*>(this->entries[id - 1].storage),
+                              std::shared_lock<std::shared_mutex>(*this->entries[id - 1].mutex));
     }
 
     template <typename T> WriteStorage<T> ComponentManager::write() const
     {
         const size_t id = this->getID<T>();
-        return WriteStorage<T>(*static_cast<typename T::Storage*>(this->entries[id].storage),
-                               std::unique_lock<std::shared_mutex>(this->entries[id].mutex));
+        return WriteStorage<T>(*static_cast<typename T::Storage*>(this->entries[id - 1].storage),
+                               std::unique_lock<std::shared_mutex>(*this->entries[id - 1].mutex));
     }
 
-    template <typename T> void ComponentManager::add(uint32_t id, T&& value) const
+    template <typename T> void ComponentManager::add(uint32_t entityId, T value)
     {
         const size_t id = this->getID<T>();
-        this->entries[id].storage->add(id, std::forward<T>(value));
+        auto storage = static_cast<typename T::Storage*>(this->entries[id - 1].storage);
+        storage->insert(entityId, std::move(value));
     }
 
-    template <typename T> void ComponentManager::remove(uint32_t id) const
+    template <typename T> void ComponentManager::remove(uint32_t entityId)
     {
         const size_t id = this->getID<T>();
-        this->entries[id].storage->remove(id);
+        auto storage = static_cast<typename T::Storage*>(this->entries[id - 1].storage);
+        storage->erase(entityId);
     }
-
-    void ComponentManager::commit()
-    {
-        for (auto& entry : this->entries)
-        {
-            entry.storage->commit();
-        }
-    }
-
-    ComponentManager::Entry::Entry(IStorage* storage, void* staging) : storage(storage), staging(staging)
-    {
-        // Do nothing.
-    }
-
 } // namespace cubos::core::ecs
 
 #endif // CUBOS_CORE_ECS_COMPONENT_MANAGER_HPP

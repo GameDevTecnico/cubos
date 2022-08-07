@@ -8,25 +8,59 @@
 #include <set>
 #include <unordered_map>
 
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serialization_map.hpp>
+
 namespace cubos::core::ecs
 {
+    class Entity;
+}
+
+namespace cubos::core::data
+{
+    /// Serializes an entity.
+    /// @param serializer The serializer to use.
+    /// @param entity The entity to serialize.
+    /// @param map Map used to convert entity handles to the external representation.
+    /// @param name The name of the entity.
+    void serialize(Serializer& serializer, const ecs::Entity& entity,
+                   const SerializationMap<ecs::Entity, std::string>* map, const char* name);
+
+    /// Deserializes an entity.
+    /// @param deserializer The deserializer to use.
+    /// @param entity The entity to deserialize.
+    /// @param map Map used to convert from the external representation to entity handles.
+    void deserialize(Deserializer& deserializer, ecs::Entity& entity,
+                     const SerializationMap<ecs::Entity, std::string>* map);
+} // namespace cubos::core::data
+
+namespace cubos::core::ecs
+{
+    namespace impl
+    {
+        template <typename T> class QueryFetcher;
+    }
+
     /// Handle used to identify an Entity.
     class Entity
     {
     public:
-        using Mask = std::bitset<CUBOS_CORE_ECS_MAX_COMPONENTS>;
+        using Mask = std::bitset<CUBOS_CORE_ECS_MAX_COMPONENTS + 1>;
 
         Entity();
-        Entity(const Entity&) = default;
-        Entity& operator=(const Entity&) = default;
-
-    private:
-        friend class EntityManager;
-        friend class World;
 
         /// @param index The index of the entity.
         /// @param generation The generation of the entity.
         Entity(uint32_t index, uint32_t generation);
+
+        Entity(const Entity&) = default;
+        Entity& operator=(const Entity&) = default;
+        bool operator==(const Entity&) const;
+        bool operator!=(const Entity&) const;
+
+        /// Checks if the entity is 'none' (special value returned on errors).
+        bool isNull() const;
 
         uint32_t index;      ///< Used as index in storages.
         uint32_t generation; ///< Used to detect if the entity has been removed.
@@ -73,7 +107,7 @@ namespace cubos::core::ecs
 
         /// Removes an entity from the world.
         /// @param entity The entity to remove.
-        void remove(Entity entity);
+        void destroy(Entity entity);
 
         /// Sets the component mask of an entity.
         /// @param entity The entity to set the mask of.
@@ -113,4 +147,17 @@ namespace cubos::core::ecs
         std::unordered_map<Entity::Mask, std::set<uint32_t>> archetypes; ///< Cache archetype entity indices.
     };
 } // namespace cubos::core::ecs
+
+namespace std
+{
+    // Add hash function for Entity, so that it can be used as a key in an unordered_map.
+    template <> struct hash<cubos::core::ecs::Entity>
+    {
+        inline std::size_t operator()(const cubos::core::ecs::Entity& k) const
+        {
+            return hash<uint32_t>()(k.index);
+        }
+    };
+} // namespace std
+
 #endif // CUBOS_CORE_ECS_ENTITY_MANAGER_HPP

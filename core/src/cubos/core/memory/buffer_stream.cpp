@@ -49,6 +49,24 @@ BufferStream::~BufferStream()
     }
 }
 
+BufferStream::BufferStream(const BufferStream& other)
+{
+    this->size = other.size;
+    this->position = other.position;
+    this->readOnly = other.readOnly;
+    this->reachedEof = other.reachedEof;
+    this->owned = other.owned;
+    if (this->owned)
+    {
+        this->buffer = new char[this->size];
+        memcpy(this->buffer, other.buffer, this->size);
+    }
+    else
+    {
+        this->buffer = other.buffer;
+    }
+}
+
 BufferStream::BufferStream(BufferStream&& other)
 {
     this->buffer = other.buffer;

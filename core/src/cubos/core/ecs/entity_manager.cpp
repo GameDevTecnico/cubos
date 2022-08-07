@@ -2,6 +2,34 @@
 
 using namespace cubos::core::ecs;
 
+void cubos::core::data::serialize(Serializer& serializer, const ecs::Entity& entity,
+                                  const SerializationMap<ecs::Entity, std::string>* map, const char* name)
+{
+    if (entity.isNull())
+    {
+        serializer.write("null", name);
+    }
+    else
+    {
+        serializer.write(map->getId(entity), name);
+    }
+}
+
+void cubos::core::data::deserialize(Deserializer& deserializer, ecs::Entity& entity,
+                                    const SerializationMap<ecs::Entity, std::string>* map)
+{
+    std::string name;
+    deserializer.read(name);
+    if (name == "null")
+    {
+        entity = Entity();
+    }
+    else
+    {
+        entity = map->getRef(name);
+    }
+}
+
 Entity::Entity()
 {
     this->index = UINT32_MAX;
@@ -13,8 +41,28 @@ Entity::Entity(uint32_t index, uint32_t generation) : index(index), generation(g
     // Do nothing.
 }
 
+bool Entity::operator==(const Entity& entity) const
+{
+    return this->index == entity.index && this->generation == entity.generation;
+}
+
+bool Entity::operator!=(const Entity& entity) const
+{
+    return !(*this == entity);
+}
+
+bool Entity::isNull() const
+{
+    return this->index == UINT32_MAX && this->generation == UINT32_MAX;
+}
+
 EntityManager::Iterator::Iterator(const EntityManager& e, const Entity::Mask m) : manager(e), mask(m)
 {
+    if (!m.test(0))
+    {
+        abort(); // You can't iterate over invalid entities.
+    }
+
     this->archetypeIt = this->manager.archetypes.begin();
     while (this->archetypeIt != this->manager.archetypes.end() &&
            ((this->archetypeIt->first & this->mask) != this->mask || this->archetypeIt->second.empty()))
@@ -88,7 +136,7 @@ EntityManager::EntityManager(size_t initialCapacity)
     this->entities.reserve(initialCapacity);
     for (size_t i = 0; i < initialCapacity; ++i)
     {
-        this->entities.emplace_back(0, 0);
+        this->entities.emplace_back(0, 1);
         this->availableEntities.push(i);
     }
 }
@@ -118,7 +166,7 @@ Entity EntityManager::create(Entity::Mask mask)
     return Entity(index, this->entities[index].generation);
 }
 
-void EntityManager::remove(Entity entity)
+void EntityManager::destroy(Entity entity)
 {
     this->setMask(entity, 0);
     this->entities[entity.index].generation += 1;

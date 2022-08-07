@@ -12,8 +12,7 @@ option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
 option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source?" ON)
 option(FMT_USE_SUBMODULE "Compile FMT from source?" ON)
 
-set(CUBOS_CORE_ECS_MAX_COMPONENTS "64" CACHE STRING "The maximum number of components registered in an ECS world.")
-
+set(CUBOS_CORE_ECS_MAX_COMPONENTS "63" CACHE STRING "The maximum number of components registered in an ECS world.")
 
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
@@ -36,6 +35,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/debug_serializer.cpp"
     "src/cubos/core/data/yaml_serializer.cpp"
     "src/cubos/core/data/yaml_deserializer.cpp"
+    "src/cubos/core/data/json_serializer.cpp"
+    "src/cubos/core/data/json_deserializer.cpp"
     "src/cubos/core/data/binary_serializer.cpp"
     "src/cubos/core/data/binary_deserializer.cpp"
     "src/cubos/core/data/file.cpp"
@@ -72,7 +73,10 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/ecs/entity_manager.cpp"
     "src/cubos/core/ecs/component_manager.cpp"
+    "src/cubos/core/ecs/commands.cpp"
+    "src/cubos/core/ecs/blueprint.cpp"
     "src/cubos/core/ecs/world.cpp"
+    "src/cubos/core/ecs/registry.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE
@@ -89,6 +93,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/debug_serializer.hpp"
     "include/cubos/core/data/yaml_serializer.hpp"
     "include/cubos/core/data/yaml_deserializer.hpp"
+    "include/cubos/core/data/json_serializer.hpp"
+    "include/cubos/core/data/json_deserializer.hpp"
     "include/cubos/core/data/binary_serializer.hpp"
     "include/cubos/core/data/binary_deserializer.hpp"
     "include/cubos/core/data/serialization_map.hpp"
@@ -127,6 +133,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/entity_manager.hpp"
     "include/cubos/core/ecs/resource_manager.hpp"
     "include/cubos/core/ecs/component_manager.hpp"
+    "include/cubos/core/ecs/blueprint.hpp"
     "include/cubos/core/ecs/commands.hpp"
     "include/cubos/core/ecs/storage.hpp"
     "include/cubos/core/ecs/vec_storage.hpp"
@@ -135,6 +142,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/query.hpp"
     "include/cubos/core/ecs/system.hpp"
+    "include/cubos/core/ecs/registry.hpp"
 )
 
 # Create core library
@@ -202,6 +210,8 @@ else ()
     find_package(spdlog REQUIRED)
 endif ()
 
+add_subdirectory(lib/json)
+
 add_library(imgui STATIC
     "lib/imgui/imgui.cpp"
     "lib/imgui/imgui_draw.cpp"
@@ -215,7 +225,7 @@ target_include_directories(imgui PUBLIC "lib/imgui")
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp imgui fmt::fmt ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp imgui fmt::fmt json ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests

@@ -107,7 +107,7 @@ void setupInput(core::ecs::World& world)
 
     auto lookAction = core::io::InputManager::createAction("Look");
     lookAction->addBinding([&](core::io::Context ctx) {
-        auto inputResource = world.writeResource<Input>();
+        auto inputResource = world.write<Input>();
         auto& input = inputResource.get();
         auto pos = ctx.getValue<glm::vec2>();
 
@@ -122,7 +122,7 @@ void setupInput(core::ecs::World& world)
 
     auto forwardAction = core::io::InputManager::createAction("Camera Forward");
     forwardAction->addBinding([&](core::io::Context ctx) {
-        auto inputResource = world.writeResource<Input>();
+        auto inputResource = world.write<Input>();
         auto& input = inputResource.get();
         input.movement.z = ctx.getValue<float>();
     });
@@ -130,7 +130,7 @@ void setupInput(core::ecs::World& world)
 
     auto strafeAction = core::io::InputManager::createAction("Camera Strafe");
     strafeAction->addBinding([&](core::io::Context ctx) {
-        auto inputResource = world.writeResource<Input>();
+        auto inputResource = world.write<Input>();
         auto& input = inputResource.get();
         input.movement.x = ctx.getValue<float>();
     });
@@ -138,7 +138,7 @@ void setupInput(core::ecs::World& world)
 
     auto verticalAction = core::io::InputManager::createAction("Camera Vertical");
     verticalAction->addBinding([&](core::io::Context ctx) {
-        auto inputResource = world.writeResource<Input>();
+        auto inputResource = world.write<Input>();
         auto& input = inputResource.get();
         input.movement.y = ctx.getValue<float>();
     });
@@ -146,7 +146,7 @@ void setupInput(core::ecs::World& world)
 
     auto enableAction = core::io::InputManager::createAction("Enable Camera");
     enableAction->addBinding([&](core::io::Context ctx) {
-        auto inputResource = world.writeResource<Input>();
+        auto inputResource = world.write<Input>();
         auto& input = inputResource.get();
         input.cameraEnabled = !input.cameraEnabled;
     });
@@ -357,7 +357,7 @@ int main(void)
 
         // Clear the frame and add a light to it.
         {
-            auto frame = world.writeResource<gl::Frame>();
+            auto frame = world.write<gl::Frame>();
             frame.get().clear();
             frame.get().ambient({0.1f, 0.1f, 0.1f});
 
@@ -368,17 +368,18 @@ int main(void)
 
         // Update the ECS systems.
 
-        core::ecs::SystemWrapper(cameraControllerSystem).call(world);
-        core::ecs::SystemWrapper(carSystem).call(world);
-        core::ecs::SystemWrapper(ecs::transformSystem).call(world);
-        core::ecs::SystemWrapper(cameraSystem).call(world);
-        core::ecs::SystemWrapper(inputSystem).call(world);
-        core::ecs::SystemWrapper(ecs::drawSystem).call(world);
+        auto cmds = core::ecs::Commands(world);
+        core::ecs::SystemWrapper(cameraControllerSystem).call(world, cmds);
+        core::ecs::SystemWrapper(carSystem).call(world, cmds);
+        core::ecs::SystemWrapper(ecs::transformSystem).call(world, cmds);
+        core::ecs::SystemWrapper(cameraSystem).call(world, cmds);
+        core::ecs::SystemWrapper(inputSystem).call(world, cmds);
+        core::ecs::SystemWrapper(ecs::drawSystem).call(world, cmds);
 
         // Render the frame.
         {
-            auto camera = world.readResource<core::gl::Camera>();
-            auto frame = world.readResource<gl::Frame>();
+            auto camera = world.read<core::gl::Camera>();
+            auto frame = world.read<gl::Frame>();
             renderer.render(camera.get(), frame.get());
         }
 
