@@ -90,7 +90,7 @@ namespace cubos::core::data
 
     void deserialize(Deserializer& des, Parent& parent, const SerializationMap<ecs::Entity, std::string>* map)
     {
-        des.read(parent.entity, map); 
+        des.read(parent.entity, map);
     }
 } // namespace cubos::core::data
 
