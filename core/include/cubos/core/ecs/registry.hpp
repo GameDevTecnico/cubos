@@ -26,11 +26,10 @@ namespace cubos::core::ecs
         static bool create(const std::string& name, data::Deserializer& des, Blueprint& blueprint,
                            data::SerializationMap<Entity, std::string>* map, Entity id);
 
-        /// Registers a component type described by a deserializer and a name.
-        /// @param index The type index of the component.
+        /// Registers a new component type.
+        /// @tparam T The component type to register.
         /// @param name The name of the component.
-        /// @param fun The function to instantiate the component into a buffer.
-        static void add(std::type_index index, const std::string& name, Creator fun);
+        template <typename ComponentType> static void add(const std::string& name);
 
         /// Gets the name of a component type.
         /// @param index The type index of the component.
@@ -44,9 +43,36 @@ namespace cubos::core::ecs
         /// Accesses the global component name registry.
         static std::unordered_map<std::type_index, std::string>& names();
     };
+
+    // Implementation.
+
+    template <typename ComponentType> void Registry::add(const std::string& name)
+    {
+        auto& creators = Registry::creators();
+        auto& names = Registry::names();
+        assert(creators.find(name) == creators.end());
+
+        creators.emplace(name, [](data::Deserializer& des, Blueprint& blueprint,
+                                  data::SerializationMap<Entity, std::string>* map, Entity id) {
+            ComponentType comp;
+            des.read(comp, map);
+            if (des.failed())
+            {
+                return false;
+            }
+            else
+            {
+                blueprint.add(id, comp);
+                return true;
+            }
+        });
+
+        names.emplace(typeid(ComponentType), name);
+    }
 } // namespace cubos::core::ecs
 
 /// Macro used to register a component type so that it can be deserialized from files.
+/// An alternative to calling Registry::add() manually.
 #define CUBOS_REGISTER_COMPONENT(type, name)                                                                           \
     namespace cubos::core::ecs::impl                                                                                   \
     {                                                                                                                  \
@@ -55,22 +81,7 @@ namespace cubos::core::ecs
         private:                                                                                                       \
             static inline bool registerType()                                                                          \
             {                                                                                                          \
-                ::cubos::core::ecs::Registry::add(                                                                     \
-                    typeid(type), name,                                                                                \
-                    [](::cubos::core::data::Deserializer& des, ::cubos::core::ecs::Blueprint& blueprint,               \
-                       ::cubos::core::data::SerializationMap<Entity, std::string>* map, Entity id) {                   \
-                        type comp;                                                                                     \
-                        des.read(comp, map);                                                                           \
-                        if (des.failed())                                                                              \
-                        {                                                                                              \
-                            return false;                                                                              \
-                        }                                                                                              \
-                        else                                                                                           \
-                        {                                                                                              \
-                            blueprint.add(id, comp);                                                                   \
-                            return true;                                                                               \
-                        }                                                                                              \
-                    });                                                                                                \
+                ::cubos::core::ecs::Registry::add<type>(name);                                                         \
                 return true;                                                                                           \
             }                                                                                                          \
                                                                                                                        \

@@ -17,15 +17,6 @@ bool Registry::create(const std::string& name, data::Deserializer& des, Blueprin
     return creators.at(name)(des, blueprint, map, id);
 }
 
-void Registry::add(std::type_index index, const std::string& name, Creator fun)
-{
-    auto& creators = Registry::creators();
-    auto& names = Registry::names();
-    assert(creators.find(name) == creators.end());
-    creators.emplace(name, fun);
-    names.emplace(index, name);
-}
-
 const std::string& Registry::name(std::type_index index)
 {
     auto& names = Registry::names();
