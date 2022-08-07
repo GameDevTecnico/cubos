@@ -11,10 +11,6 @@ namespace cubos::core::ecs
     class Registry final
     {
     public:
-        /// Function type for creating components from deserializers.
-        using Creator =
-            std::function<bool(data::Deserializer&, Blueprint&, data::SerializationMap<Entity, std::string>*, Entity)>;
-
         Registry() = delete;
 
         /// Instantiates a new component into a blueprint from a deserializer.
@@ -37,6 +33,10 @@ namespace cubos::core::ecs
         static const std::string& name(std::type_index index);
 
     private:
+        /// Function type for creating components from deserializers.
+        using Creator =
+            std::function<bool(data::Deserializer&, Blueprint&, data::SerializationMap<Entity, std::string>*, Entity)>;
+
         /// Accesses the global component creator registry.
         static std::unordered_map<std::string, Creator>& creators();
 
