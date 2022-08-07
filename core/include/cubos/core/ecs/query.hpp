@@ -3,8 +3,18 @@
 
 #include <cubos/core/ecs/world.hpp>
 
+#include <typeindex>
+#include <unordered_set>
+
 namespace cubos::core::ecs
 {
+    /// Contains information about a query.
+    struct QueryInfo
+    {
+        std::unordered_set<std::type_index> read;    ///< The type set of components the query reads.
+        std::unordered_set<std::type_index> written; ///< The type set of components the query writes.
+    };
+
     /// This namespace contains functions used internally by the implementation
     /// of the ECS.
     namespace impl
@@ -25,6 +35,10 @@ namespace cubos::core::ecs
             /// Whether the component is optional
             constexpr static bool IS_OPTIONAL = false;
 
+            /// Adds the component to the query info structure.
+            /// @param info The query info structure to add to.
+            static void add(QueryInfo& info);
+
             /// @param world The world to fetch from.
             /// @returns The requested component write lock.
             static Type fetch(const World& world);
@@ -42,6 +56,10 @@ namespace cubos::core::ecs
 
             /// Whether the component is optional
             constexpr static bool IS_OPTIONAL = false;
+
+            /// Adds the component to the query info structure.
+            /// @param info The query info structure to add to.
+            static void add(QueryInfo& info);
 
             /// @param world The world to fetch from.
             /// @returns The requested component read lock.
@@ -61,6 +79,10 @@ namespace cubos::core::ecs
             /// Whether the component is optional
             constexpr static bool IS_OPTIONAL = true;
 
+            /// Adds the component to the query info structure.
+            /// @param info The query info structure to add to.
+            static void add(QueryInfo& info);
+
             /// @param world The world to fetch from.
             /// @returns The requested component write lock.
             static Type fetch(const World& world);
@@ -78,6 +100,10 @@ namespace cubos::core::ecs
 
             /// Whether the component is optional
             constexpr static bool IS_OPTIONAL = true;
+
+            /// Adds the component to the query info structure.
+            /// @param info The query info structure to add to.
+            static void add(QueryInfo& info);
 
             /// @param world The world to fetch from.
             /// @returns The requested component read lock.
@@ -140,6 +166,10 @@ namespace cubos::core::ecs
         /// @param entity The entity to get the components from.
         /// @returns The requested components.
         std::optional<std::tuple<ComponentTypes...>> operator[](Entity entity);
+
+        /// Gets information about the query.
+        /// @returns The query information.
+        static QueryInfo info();
 
     private:
         friend World;
@@ -219,6 +249,18 @@ namespace cubos::core::ecs
         return Iterator(this->world, this->fetched, this->world.entityManager.end());
     }
 
+    template <typename... ComponentTypes> QueryInfo Query<ComponentTypes...>::info()
+    {
+        QueryInfo info;
+        ([&]() { impl::QueryFetcher<ComponentTypes>::add(info); }(), ...);
+        return info;
+    }
+
+    template <typename Component> void impl::QueryFetcher<Component&>::add(QueryInfo& info)
+    {
+        info.written.insert(typeid(Component));
+    }
+
     template <typename Component>
     typename impl::QueryFetcher<Component&>::Type impl::QueryFetcher<Component&>::fetch(const World& world)
     {
@@ -231,6 +273,11 @@ namespace cubos::core::ecs
         return *lock.get().get(entity.index);
     }
 
+    template <typename Component> void impl::QueryFetcher<const Component&>::add(QueryInfo& info)
+    {
+        info.read.insert(typeid(Component));
+    }
+
     template <typename Component>
     typename impl::QueryFetcher<const Component&>::Type impl::QueryFetcher<const Component&>::fetch(const World& world)
     {
@@ -241,6 +288,11 @@ namespace cubos::core::ecs
     const Component& impl::QueryFetcher<const Component&>::arg(const World& world, Type& lock, Entity entity)
     {
         return *lock.get().get(entity.index);
+    }
+
+    template <typename Component> void impl::QueryFetcher<Component*>::add(QueryInfo& info)
+    {
+        info.written.insert(typeid(Component));
     }
 
     template <typename Component>
@@ -260,6 +312,11 @@ namespace cubos::core::ecs
         {
             return nullptr;
         }
+    }
+
+    template <typename Component> void impl::QueryFetcher<const Component*>::add(QueryInfo& info)
+    {
+        info.read.insert(typeid(Component));
     }
 
     template <typename Component>

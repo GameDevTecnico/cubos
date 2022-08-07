@@ -6,20 +6,57 @@
 #include <cubos/core/ecs/commands.hpp>
 
 #include <functional>
+#include <unordered_set>
+#include <typeindex>
 
 namespace cubos::core::ecs
 {
+    /// Contains information about a system.
+    struct SystemInfo
+    {
+        /// Whether the system uses commands or not.
+        bool usesCommands;
+
+        /// The type set of resources the system reads.
+        std::unordered_set<std::type_index> resourcesRead;
+
+        /// The type set of resources the system writes.
+        std::unordered_set<std::type_index> resourcesWritten;
+
+        /// The type set of components the system reads.
+        std::unordered_set<std::type_index> componentsRead;
+
+        /// The type set of components the system writes.
+        std::unordered_set<std::type_index> componentsWritten;
+
+        /// Checks if this system is valid.
+        /// A system may be invalid, if, for example, it both reads and writes the same resource.
+        /// @returns True if the system is valid, false otherwise.
+        bool valid() const;
+
+        /// Checks if this system is compatible with another system.
+        /// @param other The other system info to check compatibility with.
+        /// @returns True if the systems are compatible, false otherwise.
+        bool compatible(const SystemInfo& other) const;
+    };
+
     /// Base class for system wrappers.
     class AnySystemWrapper
     {
     public:
-        AnySystemWrapper() = default;
+        AnySystemWrapper(SystemInfo&& info);
         virtual ~AnySystemWrapper() = default;
 
         /// Calls the wrapped system with parameters taken from the given world.
         /// @param world The world used by the system.
         /// @param commands The commands object used by the system.
         virtual void call(const World& world, Commands& commands) const = 0;
+
+        /// Gets information about the requirements of the system.
+        const SystemInfo& info() const;
+
+    private:
+        SystemInfo m_info; ///< Information about the wrapped system.
     };
 
     /// A system wrapper for a system which takes some arguments.
@@ -52,6 +89,10 @@ namespace cubos::core::ecs
         {
             using Type = WriteResource<R>;
 
+            /// Adds the resource to the system info structure.
+            /// @param info The system info structure to add to.
+            static void add(SystemInfo& info);
+
             /// @param world The world to fetch from.
             /// @param commands The commands object.
             /// @returns The requested resource write lock.
@@ -65,6 +106,10 @@ namespace cubos::core::ecs
         template <typename R> struct SystemFetcher<const R&>
         {
             using Type = ReadResource<R>;
+
+            /// Adds the resource to the system info structure.
+            /// @param info The system info structure to add to.
+            static void add(SystemInfo& info);
 
             /// @param world The world to fetch from.
             /// @param commands The commands object.
@@ -80,6 +125,10 @@ namespace cubos::core::ecs
         {
             using Type = Query<ComponentTypes...>;
 
+            /// Adds the query to the system info structure.
+            /// @param info The system info structure to add to.
+            static void add(SystemInfo& info);
+
             /// @param world The world to query from.
             /// @param commands The commands object.
             /// @returns The requested query data.
@@ -94,6 +143,10 @@ namespace cubos::core::ecs
         {
             using Type = Commands*;
 
+            /// Adds the commands to the system info structure.
+            /// @param info The system info structure to add to.
+            static void add(SystemInfo& info);
+
             /// @param world The world to query from.
             /// @param commands The commands object.
             /// @returns The requested query data.
@@ -107,6 +160,10 @@ namespace cubos::core::ecs
         template <typename... Args> struct SystemFetcher<std::tuple<Args...>>
         {
             using Type = std::tuple<typename SystemFetcher<Args>::Type...>;
+
+            /// Adds the arguments to the system info structure.
+            /// @param info The system info structure to add to.
+            static void add(SystemInfo& info);
 
             /// @param world The world to fetch from.
             /// @param commands The commands object.
@@ -125,6 +182,9 @@ namespace cubos::core::ecs
         template <typename... Args> struct SystemTraits<void (*)(Args...)>
         {
             using Arguments = std::tuple<Args...>;
+
+            /// Gets information about the system.
+            static SystemInfo info();
         };
 
         /// Specialization for member functions.
@@ -147,7 +207,15 @@ namespace cubos::core::ecs
 
     // Implementation.
 
-    template <typename F> SystemWrapper<F>::SystemWrapper(F system) : system(system)
+    template <typename... Args> SystemInfo impl::SystemTraits<void (*)(Args...)>::info()
+    {
+        SystemInfo info;
+        impl::SystemFetcher<std::tuple<Args...>>::add(info);
+        return info;
+    }
+
+    template <typename F>
+    SystemWrapper<F>::SystemWrapper(F system) : AnySystemWrapper(impl::SystemTraits<F>::info()), system(system)
     {
         // Do nothing.
     }
@@ -165,6 +233,11 @@ namespace cubos::core::ecs
         std::apply(this->system, std::forward<Arguments>(args));
     }
 
+    template <typename R> void impl::SystemFetcher<R&>::add(SystemInfo& info)
+    {
+        info.resourcesWritten.insert(typeid(R));
+    }
+
     template <typename R> WriteResource<R> impl::SystemFetcher<R&>::fetch(const World& world, Commands&)
     {
         return world.write<R>();
@@ -175,6 +248,11 @@ namespace cubos::core::ecs
         return lock.get();
     }
 
+    template <typename R> void impl::SystemFetcher<const R&>::add(SystemInfo& info)
+    {
+        info.resourcesRead.insert(typeid(R));
+    }
+
     template <typename R> ReadResource<R> impl::SystemFetcher<const R&>::fetch(const World& world, Commands&)
     {
         return world.read<R>();
@@ -183,6 +261,21 @@ namespace cubos::core::ecs
     template <typename R> const R& impl::SystemFetcher<const R&>::arg(const World& world, ReadResource<R>&& lock)
     {
         return lock.get();
+    }
+
+    template <typename... ComponentTypes> void impl::SystemFetcher<Query<ComponentTypes...>>::add(SystemInfo& info)
+    {
+        auto queryInfo = Query<ComponentTypes...>::info();
+
+        for (auto& comp : queryInfo.read)
+        {
+            info.componentsRead.insert(comp);
+        }
+
+        for (auto& comp : queryInfo.written)
+        {
+            info.componentsWritten.insert(comp);
+        }
     }
 
     template <typename... ComponentTypes>
@@ -198,6 +291,11 @@ namespace cubos::core::ecs
         return std::move(fetched);
     }
 
+    inline void impl::SystemFetcher<Commands&>::add(SystemInfo& info)
+    {
+        info.usesCommands = true;
+    }
+
     inline Commands* impl::SystemFetcher<Commands&>::fetch(const World&, Commands& commands)
     {
         return &commands;
@@ -206,6 +304,11 @@ namespace cubos::core::ecs
     inline Commands& impl::SystemFetcher<Commands&>::arg(const World&, Commands* fetched)
     {
         return *fetched;
+    }
+
+    template <typename... Args> void impl::SystemFetcher<std::tuple<Args...>>::add(SystemInfo& info)
+    {
+        ([&]() { impl::SystemFetcher<Args>::add(info); }(), ...);
     }
 
     template <typename... Args>
