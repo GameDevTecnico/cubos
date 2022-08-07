@@ -157,7 +157,16 @@ Package& Package::field(const std::string& name)
 {
     // If the field already exists, return it, otherwise create it and return it.
     auto& fields = this->fields();
-    return fields.insert({name, Package()}).first->second;
+    for (auto& field : fields)
+    {
+        if (field.first == name)
+        {
+            return field.second;
+        }
+    }
+
+    logCritical("Package::field() failed: package doesn't contain field '{}'", name);
+    abort();
 }
 
 Package::Fields& Package::fields()
@@ -383,8 +392,9 @@ Package* impl::Packager::push(Package::Data&& data, const char* name)
         {
         case Package::Type::Object:
             assert(name != nullptr);
-            pkg->field(name).data = std::move(data);
-            return &pkg->field(name);
+            pkg->fields().emplace_back(name, Package());
+            pkg->fields().back().second.data = std::move(data);
+            return &pkg->fields().back().second;
         case Package::Type::Array:
             pkg->elements().emplace_back();
             pkg->elements().back().data = std::move(data);

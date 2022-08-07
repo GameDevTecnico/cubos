@@ -6,7 +6,7 @@
 namespace cubos::core::ui
 {
     /// Shows a serializable object's properties in the UI. Should be called
-    /// inside a ImGui::Begin()/ImGui::End() block.
+    /// inside a ImGui::BeginTable(2)/ImGui::EndTable() block.
     /// @tparam T The type of the serializable object.
     /// @param object The object to show.
     /// @param name The name of the object.
@@ -17,7 +17,7 @@ namespace cubos::core::ui
     /// Shows a serializable and deserializable object's properties in the UI,
     /// allowing the user to edit the object. If any of the properties is
     /// edited, the object's deserialize() method is called. Should be called
-    /// inside a ImGui::Begin()/ImGui::End() block.
+    /// inside a ImGui::BeginTable(2)/ImGui::EndTable() block.
     /// @tparam T The type of the serializable object.
     /// @param object The object to edit.
     /// @param name The name of the object.
@@ -27,13 +27,14 @@ namespace cubos::core::ui
     bool edit(T& object, const std::string& name);
 
     /// Shows a packaged object's properties in the UI. Should be called
-    /// inside a ImGui::Begin()/ImGui::End() block.
+    /// inside a ImGui::BeginTable(2)/ImGui::EndTable() block.
     /// @param pkg The packaged object to show.
     /// @param name The name of the object.
     void showPackage(const data::Package& pkg, const std::string& name);
 
     /// Shows a packaged object's properties in the UI, allowing the user to
-    /// edit the object.
+    /// edit the object. Should be called inside a
+    /// ImGui::BeginTable(2)/ImGui::EndTable() block.
     /// @param pkg The packaged object to edit.
     /// @param name The name of the object.
     /// @returns True if the object was edited, false otherwise.

@@ -73,7 +73,7 @@ namespace cubos::core::data
         };
 
         /// Type alias for the map used to store the object fields.
-        using Fields = std::map<std::string, Package>;
+        using Fields = std::vector<std::pair<std::string, Package>>;
         /// Type alias for the vector used to store the array elements.
         using Elements = std::vector<Package>;
         /// Type alias for the vector used to store the dictionary pairs.
@@ -184,8 +184,7 @@ namespace cubos::core::data
         size_t size() const;
 
         /// Gets a reference to a field of this package.
-        /// If the field doesn't exist, an empty field is created.
-        /// If the package isn't storing an object, this method will abort.
+        /// If the package isn't storing an object or if the field doesn't exist, this method will abort.
         /// @param name The name of the field.
         /// @returns A reference to the field.
         Package& field(const std::string& name);
