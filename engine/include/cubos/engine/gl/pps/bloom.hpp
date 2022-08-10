@@ -6,7 +6,6 @@
 #include <cubos/engine/gl/pps/pass.hpp>
 
 #include <glm/glm.hpp>
-
 #include <vector>
 
 namespace cubos::engine::gl::pps
@@ -28,7 +27,8 @@ namespace cubos::engine::gl::pps
         /// @param threshold Pixel brightness threshold to be considered for bloom effect
         /// @param softThreshold Ratio for including pixels that don't pass the threshold test
         /// @param intensity The intensity of the bloom effect.
-        BloomPass(core::gl::RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold, float softThreshold, float intensity);
+        BloomPass(core::gl::RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
+                  float softThreshold, float intensity);
 
         float getThreshold() const;
         float getSoftThreshold() const;
@@ -50,13 +50,11 @@ namespace cubos::engine::gl::pps
         float softThreshold;     ///< Soft brightness threshold to include some samples under the upper threshold.
         float intensity;         ///< Effect intensity
 
-    private:
         glm::uvec2 size;                    ///< Size of the window.
         core::gl::VertexArray screenQuadVA; ///< Screen quad VA used to render the output.
         core::gl::Sampler texSampler;       ///< Sampler to use for required textures.
         core::gl::BlendState blendState;    ///< Blend state required for upscaling process.
 
-    private:
         // Extraction pipeline
         core::gl::Framebuffer extFB;                       ///< Framebuffer of the extraction step.
         core::gl::ShaderPipeline extPipeline;              ///< Shader pipeline of the extraction step.
@@ -64,7 +62,6 @@ namespace cubos::engine::gl::pps
         core::gl::ShaderBindingPoint extThresholdFilterBP; ///< Threshold information binding point.
         core::gl::Texture2D extTex;                        ///< Result texture from extraction step
 
-    private:
         // Bloom pipeline
         core::gl::ShaderPipeline bloomPipeline;          ///< Shader pipeline of the bloom effect.
         core::gl::ShaderBindingPoint bloomInputTexBP;    ///< Input texture binding point.
@@ -74,8 +71,6 @@ namespace cubos::engine::gl::pps
         core::gl::ShaderBindingPoint bloomIntensityBP;   ///< Bloom intensity binding point.
         std::vector<core::gl::Texture2D> bloomTexBuffer; ///< The texture buffer of the bloom effect.
         std::vector<core::gl::Framebuffer> bloomFBs;     ///< The framebuffers of the bloom effect.
-
-
     };
 } // namespace cubos::engine::gl::pps
 

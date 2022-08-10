@@ -28,22 +28,22 @@ int main(void)
         auto frame = Frame();
 
         // Set the palette.
-        Palette palette({
-            {{2, 0, 0, 1}},
-            {{0, 2, 0, 1}},
-            {{0, 0, 2, 1}},
-            {{2, 2, 0, 1}},
-            {{2, 0, 2, 1}},
-            {{0, 2, 2, 1}},
-            {{2, 2, 2, 1}}
-        });
+        Palette palette({{{2, 0, 0, 1}},
+                         {{0, 2, 0, 1}},
+                         {{0, 0, 2, 1}},
+                         {{2, 2, 0, 1}},
+                         {{2, 0, 2, 1}},
+                         {{0, 2, 2, 1}},
+                         {{2, 2, 2, 1}}});
         renderer.setPalette(palette);
 
         // Create and upload a simple grid.
         Grid cube({16, 1, 16});
         int paletteIdx = 0;
-        for(int x = 0; x < 16; x++) {
-            for(int z = 0; z < 16; z++) {
+        for (int x = 0; x < 16; x++)
+        {
+            for (int z = 0; z < 16; z++)
+            {
                 cube.set({x, 0, z}, paletteIdx + 1);
                 paletteIdx = (paletteIdx + 1) % 7;
             }
@@ -86,8 +86,8 @@ int main(void)
             // Draw cube of cubes to the frame.
             auto axis = glm::vec3(0, 0, 0) * 2.0f + glm::vec3(1);
 
-            auto modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(-4, 0, -4)) *
-                            glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
+            auto modelMat =
+                glm::translate(glm::mat4(1.0f), glm::vec3(-4, 0, -4)) * glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
             frame.draw(gpuCube, modelMat);
 
             // Add lights to the frame.

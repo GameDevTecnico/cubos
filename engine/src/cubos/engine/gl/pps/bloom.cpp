@@ -108,12 +108,14 @@ void main(void)
 )glsl";
 
 pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size)
-    : BloomPass(renderDevice, size, 5, 1.0f, 0.5f, 1.0f) {}
+    : BloomPass(renderDevice, size, 5, 1.0f, 0.5f, 1.0f)
+{
+}
 
-pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations,
-                          float threshold, float softThreshold, float intensity)
-    : Pass(renderDevice), size(size), iterations(iterations), threshold(threshold),
-      softThreshold(softThreshold), intensity(intensity)
+pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
+                          float softThreshold, float intensity)
+    : Pass(renderDevice), size(size), iterations(iterations), threshold(threshold), softThreshold(softThreshold),
+      intensity(intensity)
 {
     generateTextures();
 
@@ -197,10 +199,12 @@ void pps::BloomPass::generateTextures()
 
     bloomTexBuffer.clear();
     bloomTexBuffer.resize(iterations);
-    for (int i = 0; i < iterations; i++) {
+    for (int i = 0; i < iterations; i++)
+    {
         texDesc.width /= 2;
         texDesc.height /= 2;
-        if (texDesc.width == 0 or texDesc.height == 0) {
+        if (texDesc.width == 0 or texDesc.height == 0)
+        {
             iterations = i;
             bloomTexBuffer.resize(iterations);
             break;
@@ -217,7 +221,8 @@ void pps::BloomPass::generateTextures()
     bloomFBs.clear();
     bloomFBs.resize(iterations);
     fbDesc.targetCount = 1;
-    for (int i = 0; i < iterations; i++) {
+    for (int i = 0; i < iterations; i++)
+    {
         fbDesc.targets[0].setTexture2DTarget(bloomTexBuffer[i]);
         bloomFBs[i] = renderDevice.createFramebuffer(fbDesc);
     }
@@ -229,8 +234,7 @@ void pps::BloomPass::resize(glm::uvec2 size)
     generateTextures();
 }
 
-void pps::BloomPass::execute(std::map<Input, Texture2D>& inputs, Texture2D prev,
-                            Framebuffer out) const
+void pps::BloomPass::execute(std::map<Input, Texture2D>& inputs, Texture2D prev, Framebuffer out) const
 {
     // Set the framebuffer and state.
     this->renderDevice.setViewport(0, 0, this->size.x, this->size.y);
@@ -265,7 +269,8 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>& inputs, Texture2D prev,
     // Downscale textures
     this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_DOWNSCALE_PASS);
     float scaling = 2.0f;
-    for(int i = 0; i < iterations; i++) {
+    for (int i = 0; i < iterations; i++)
+    {
         this->bloomScalingBP->setConstant(scaling);
         this->renderDevice.setFramebuffer(bloomFBs[i]);
         this->renderDevice.drawTriangles(0, 6);
@@ -277,7 +282,8 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>& inputs, Texture2D prev,
     scaling /= 2;
     this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_UPSCALE_PASS);
     this->renderDevice.setBlendState(this->blendState);
-    for(int i = iterations - 2; i >= 0; i--) {
+    for (int i = iterations - 2; i >= 0; i--)
+    {
         scaling /= 2;
         this->bloomScalingBP->setConstant(scaling);
         this->renderDevice.setFramebuffer(bloomFBs[i]);
