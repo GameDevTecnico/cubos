@@ -18,12 +18,12 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
     {
     case TextureFormat::R8UNorm:
         internalFormat = GL_R8;
-        format = GL_R;
+        format = GL_RED;
         type = GL_UNSIGNED_BYTE;
         break;
     case TextureFormat::R8SNorm:
         internalFormat = GL_R8_SNORM;
-        format = GL_R;
+        format = GL_RED;
         type = GL_BYTE;
         break;
     case TextureFormat::R8UInt:
@@ -78,12 +78,12 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         break;
     case TextureFormat::R16UNorm:
         internalFormat = GL_R16;
-        format = GL_R;
+        format = GL_RED;
         type = GL_UNSIGNED_SHORT;
         break;
     case TextureFormat::R16SNorm:
         internalFormat = GL_R16_SNORM;
-        format = GL_R;
+        format = GL_RED;
         type = GL_SHORT;
         break;
     case TextureFormat::R16UInt:
@@ -136,9 +136,19 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         format = GL_RGBA_INTEGER;
         type = GL_SHORT;
         break;
+    case TextureFormat::R16Float:
+        internalFormat = GL_R16F;
+        format = GL_RED;
+        type = GL_FLOAT;
+        break;
     case TextureFormat::R32Float:
         internalFormat = GL_R32F;
-        format = GL_R;
+        format = GL_RED;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::RG16Float:
+        internalFormat = GL_RG16F;
+        format = GL_RG;
         type = GL_FLOAT;
         break;
     case TextureFormat::RG32Float:
@@ -146,9 +156,19 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         format = GL_RG;
         type = GL_FLOAT;
         break;
+    case TextureFormat::RGB16Float:
+        internalFormat = GL_RGBA16F;
+        format = GL_RGB;
+        type = GL_FLOAT;
+        break;
     case TextureFormat::RGB32Float:
         internalFormat = GL_RGB32F;
         format = GL_RGB;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::RGBA16Float:
+        internalFormat = GL_RGBA16F;
+        format = GL_RGBA;
         type = GL_FLOAT;
         break;
     case TextureFormat::RGBA32Float:
@@ -966,6 +986,11 @@ public:
     virtual void setConstant(glm::uvec4 val) override
     {
         glUniform4uiv(loc, 1, &val[0]);
+    }
+
+    virtual void setConstant(glm::mat4 val) override
+    {
+        glUniformMatrix4fv(loc, 1, GL_FALSE, &val[0][0]);
     }
 
     virtual void setConstant(float val) override

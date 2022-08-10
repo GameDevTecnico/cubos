@@ -33,12 +33,19 @@ namespace cubos::engine::gl::deferred
         virtual RendererGrid upload(const core::gl::Grid& grid) override;
         virtual void setPalette(const core::gl::Palette& palette) override;
 
+        bool isSSAOEnabled() const;
+        void setSSAOEnabled(bool ssaoEnabled);
+
     protected:
         // Implement interface methods.
 
         virtual void onResize(glm::uvec2 size) override;
         virtual void onRender(const core::gl::Camera& camera, const Frame& frame,
                               core::gl::Framebuffer target) override;
+
+    private:
+        void createSSAOTextures();
+        void generateSSAONoise();
 
     private:
         // GBuffer.
@@ -67,6 +74,8 @@ namespace cubos::engine::gl::deferred
         core::gl::ShaderBindingPoint normalBP;
         core::gl::ShaderBindingPoint materialBP;
         core::gl::ShaderBindingPoint lightsBP;
+        core::gl::ShaderBindingPoint ssaoEnabledBP;
+        core::gl::ShaderBindingPoint ssaoTexBP;
         core::gl::Sampler sampler;
         core::gl::Texture2D paletteTex;
         core::gl::ConstantBuffer lightsBuffer;
@@ -74,6 +83,28 @@ namespace cubos::engine::gl::deferred
         // Screen quad used for the lighting pass.
 
         core::gl::VertexArray screenQuadVA;
+
+    private:
+        // SSAO (Screen-Scrape Ambient Occlusion)
+        bool ssaoEnabled = false;
+        std::vector<glm::vec3> ssaoKernel;
+
+        core::gl::Framebuffer ssaoFB;
+        core::gl::Texture2D ssaoTex;
+        core::gl::Texture2D ssaoNoiseTex;
+        core::gl::Sampler ssaoNoiseSampler;
+
+        core::gl::ShaderPipeline ssaoPipeline;
+        core::gl::ShaderBindingPoint ssaoPositionBP;
+        core::gl::ShaderBindingPoint ssaoNormalBP;
+        core::gl::ShaderBindingPoint ssaoNoiseBP;
+        core::gl::ShaderBindingPoint ssaoSamplesBP;
+        core::gl::ShaderBindingPoint ssaoViewBP;
+        core::gl::ShaderBindingPoint ssaoProjectionBP;
+        core::gl::ShaderBindingPoint ssaoScreenSizeBP;
+
+        core::gl::ShaderPipeline ssaoBlurPipeline;
+        core::gl::ShaderBindingPoint ssaoBlurTexBP;
     };
 } // namespace cubos::engine::gl::deferred
 

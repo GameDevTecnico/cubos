@@ -9,6 +9,7 @@ set(ENGINE_SAMPLES_SOURCES
     "car.cpp"
     "asset_renderer.cpp"
     "bloom.cpp"
+    "ssao.cpp"
 )
 
 # For each sample file, create a target named after the file but without the

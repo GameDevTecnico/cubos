@@ -113,7 +113,7 @@ bool Grid::convert(const Palette& src, const Palette& dst, float min_similarity)
     }
 
     // Check if the mappings are complete for every material being used in the grid.
-    for (uint16_t i = 0; i < this->size.x * this->size.y * this->size.z; ++i)
+    for (uint32_t i = 0; i < this->size.x * this->size.y * this->size.z; ++i)
     {
         if (mappings.find(this->indices[i]) == mappings.end())
         {
@@ -122,7 +122,7 @@ bool Grid::convert(const Palette& src, const Palette& dst, float min_similarity)
     }
 
     // Apply the mappings.
-    for (uint16_t i = 0; i < this->size.x * this->size.y * this->size.z; ++i)
+    for (uint32_t i = 0; i < this->size.x * this->size.y * this->size.z; ++i)
     {
         this->indices[i] = mappings[this->indices[i]];
     }
