@@ -18,6 +18,7 @@ var NAVTREEINDEX0 =
 "asset__manager_8hpp_source.html":[6,0,1,0,0,0,0,1],
 "binary__deserializer_8hpp_source.html":[6,0,0,0,0,0,0,1],
 "binary__serializer_8hpp_source.html":[6,0,0,0,0,0,0,2],
+"bloom_8hpp_source.html":[6,0,1,0,0,0,2,1,0],
 "buffer__stream_8hpp_source.html":[6,0,0,0,0,0,4,0],
 "button__press_8hpp_source.html":[6,0,0,0,0,0,3,0,0],
 "camera_8hpp_source.html":[6,0,0,0,0,0,2,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a130165976c4be592ea4ea49aa0ceb7fa":[5,0,0,0,0,13,6],
 "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a38b15fae42ca7a612e4dde9370d975b8":[5,0,0,0,0,13,8],
 "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a463d092fcedeaa05c337e179ee1ede86":[5,0,0,0,0,13,4],
-"classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a51e4ce53452a2c834181b4a228e73688":[5,0,0,0,0,13,9],
-"classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a55b580e42eeb8feb24db27e42716c245":[5,0,0,0,0,13,3]
+"classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a51e4ce53452a2c834181b4a228e73688":[5,0,0,0,0,13,9]
 };

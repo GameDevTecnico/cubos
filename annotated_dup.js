@@ -30,6 +30,7 @@ var annotated_dup =
           ] ],
           [ "impl", "namespacecubos_1_1engine_1_1gl_1_1impl.html", "namespacecubos_1_1engine_1_1gl_1_1impl" ],
           [ "pps", null, [
+            [ "BloomPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass" ],
             [ "CopyPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass" ],
             [ "Manager", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager" ],
             [ "Pass", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass" ]

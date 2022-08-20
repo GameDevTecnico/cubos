@@ -49,8 +49,8 @@ var hierarchy =
     [ "cubos::core::gl::FramebufferDesc", "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html", null ],
     [ "cubos::core::gl::FramebufferDesc::FramebufferTarget", "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget.html", null ],
     [ "cubos::core::gl::Grid", "classcubos_1_1core_1_1gl_1_1Grid.html", null ],
-    [ "cubos::engine::data::Grid", "structcubos_1_1engine_1_1data_1_1Grid.html", null ],
     [ "cubos::engine::ecs::Grid", "structcubos_1_1engine_1_1ecs_1_1Grid.html", null ],
+    [ "cubos::engine::data::Grid", "structcubos_1_1engine_1_1data_1_1Grid.html", null ],
     [ "cubos::core::gl::impl::IndexBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1IndexBuffer.html", null ],
     [ "cubos::core::io::InputManager", "classcubos_1_1core_1_1io_1_1InputManager.html", null ],
     [ "cubos::core::ecs::IStorage", "classcubos_1_1core_1_1ecs_1_1IStorage.html", [
@@ -72,6 +72,7 @@ var hierarchy =
     [ "cubos::core::gl::Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
     [ "cubos::engine::data::Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", null ],
     [ "cubos::engine::gl::pps::Pass", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html", [
+      [ "cubos::engine::gl::pps::BloomPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html", null ],
       [ "cubos::engine::gl::pps::CopyPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html", null ]
     ] ],
     [ "cubos::core::gl::PointLight", "structcubos_1_1core_1_1gl_1_1PointLight.html", null ],

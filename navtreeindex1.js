@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a55b580e42eeb8feb24db27e42716c245":[5,0,0,0,0,13,3],
 "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a5f0bd8e23b353c213592c9c0b7f8ff21":[5,0,0,0,0,13,18],
 "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a724425a1119f3ce190470b6faf97d478":[5,0,0,0,0,13,2],
 "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a730649d9ae95afe61495186c8d1963dd":[5,0,0,0,0,13,7],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classcubos_1_1core_1_1io_1_1Action.html":[5,0,0,0,3,0],
 "classcubos_1_1core_1_1io_1_1Action.html#a07bb075b0f4dd5933b0af64520bd843d":[5,0,0,0,3,0,2],
 "classcubos_1_1core_1_1io_1_1Action.html#a0a5f99776d5a3ba22620917a35df42f9":[5,0,0,0,3,0,0],
-"classcubos_1_1core_1_1io_1_1Action.html#a7405b36cf25900b6ade351b4fcbca4c1":[5,0,0,0,3,0,3],
-"classcubos_1_1core_1_1io_1_1Action.html#adf2e7b2e247db375ed9303c54c8a3d21":[5,0,0,0,3,0,4]
+"classcubos_1_1core_1_1io_1_1Action.html#a7405b36cf25900b6ade351b4fcbca4c1":[5,0,0,0,3,0,3]
 };
