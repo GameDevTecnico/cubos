@@ -73,6 +73,7 @@ void mySystem(DeltaTime& dt, const MyResource& res)
 
 int main()
 {
+    initializeLogger();
     ecs::World world;
     world.registerResource<DeltaTime>(DeltaTime{1.0f});
     world.registerResource<MyResource>(MyResource{0});
@@ -84,16 +85,15 @@ int main()
     // create dispatcher
     ecs::Dispatcher dispatcher;
     // register systems wrappers on dispatcher
-    dispatcher.registerSystem(mySystem);
-    dispatcher.registerSystem(printPositions);
-    dispatcher.registerSystem(printPlayerPosition);
+    dispatcher.registerSystem(mySystem, "Main");
+    dispatcher.registerSystem(printPositions, "Transform");
+    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::AFTER);
+    dispatcher.registerSystem(printPlayerPosition, "New");
+    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::BEFORE);
     dispatcher.registerSystem(
-        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; });
+        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; },
+        "PreProcess");
+    dispatcher.putStageBefore("PreProcess", "Transform");
     // call systems on dispatcher
     dispatcher.callSystems(world);
-
-    /*
-    ecs::SystemWrapper([](const DeltaTime& dt, MyResource& res) {
-        std::cout << "lambda: " << dt.dt << " " << res.val << std::endl;
-    }).call(world);*/
 }
