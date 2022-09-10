@@ -158,6 +158,7 @@ template <typename F> void dispatch(ecs::World& world, ecs::Commands& cmds, cons
 
 int main()
 {
+    initializeLogger();
     ecs::World world;
     world.registerResource<DeltaTime>(DeltaTime{1.0f});
     world.registerResource<MyResource>(MyResource{0});
