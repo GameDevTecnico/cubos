@@ -28,7 +28,7 @@ namespace cubos::core::ecs
 
         /// Calls all systems in order of the stages they are in
         /// @param world World to call the systems in
-        void callSystems(World& world);
+        void callSystems(World& world, ecs::Commands& cmds);
 
         /// Sets the default stage and the direction new stages will be added in
         /// @param stage the stage to set as default

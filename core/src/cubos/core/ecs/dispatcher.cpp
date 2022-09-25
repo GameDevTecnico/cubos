@@ -3,7 +3,7 @@
 using namespace cubos::core::ecs;
 
 // call systems from stagesOrder order
-void Dispatcher::callSystems(World& world)
+void Dispatcher::callSystems(World& world, ecs::Commands& cmds)
 {
     logInfo("Calling stages by the following order:");
     for (auto& stageName : stagesOrder)
@@ -15,8 +15,9 @@ void Dispatcher::callSystems(World& world)
     {
         for (auto& system : stagesByName[stageName])
         {
-            system->call(world);
+            system->call(world, cmds);
         }
+        cmds.commit();
     }
 }
 
