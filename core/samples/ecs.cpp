@@ -5,9 +5,12 @@
 #include <cubos/core/ecs/map_storage.hpp>
 #include <cubos/core/ecs/null_storage.hpp>
 #include <cubos/core/ecs/system.hpp>
+<<<<<<< HEAD
 #include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/registry.hpp>
+=======
+>>>>>>> ecs-dispatcher
 #include <cubos/core/ecs/dispatcher.hpp>
 
 using namespace cubos::core;
@@ -171,6 +174,7 @@ int main()
     dispatch(world, cmds, spawner);
     cmds.commit();
 
+<<<<<<< HEAD
     dispatch(world, cmds, [](const DeltaTime& dt, MyResource& res) {
         std::cout << "lambda: " << dt.dt << " " << res.val << std::endl;
     });
@@ -180,4 +184,21 @@ int main()
     dispatch(world, cmds, mySystem);
     dispatch(world, cmds, printPositions);
     dispatch(world, cmds, printPlayerPosition);
+=======
+    spawner(world);
+    // create dispatcher
+    ecs::Dispatcher dispatcher;
+    // register systems wrappers on dispatcher
+    dispatcher.registerSystem(mySystem, "Main");
+    dispatcher.registerSystem(printPositions, "Transform");
+    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::AFTER);
+    dispatcher.registerSystem(printPlayerPosition, "New");
+    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::BEFORE);
+    dispatcher.registerSystem(
+        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; },
+        "PreProcess");
+    dispatcher.putStageBefore("PreProcess", "Transform");
+    // call systems on dispatcher
+    dispatcher.callSystems(world);
+>>>>>>> ecs-dispatcher
 }

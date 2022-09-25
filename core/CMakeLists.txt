@@ -72,9 +72,12 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ui/imgui.cpp"
 
     "src/cubos/core/ecs/entity_manager.cpp"
+<<<<<<< HEAD
     "src/cubos/core/ecs/component_manager.cpp"
     "src/cubos/core/ecs/commands.cpp"
     "src/cubos/core/ecs/blueprint.cpp"
+=======
+>>>>>>> ecs-dispatcher
     "src/cubos/core/ecs/dispatcher.cpp"
     "src/cubos/core/ecs/world.cpp"
     "src/cubos/core/ecs/system.cpp"
@@ -144,7 +147,10 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/query.hpp"
     "include/cubos/core/ecs/system.hpp"
+<<<<<<< HEAD
     "include/cubos/core/ecs/registry.hpp"
+=======
+>>>>>>> ecs-dispatcher
     "include/cubos/core/ecs/dispatcher.hpp"
 )
 
