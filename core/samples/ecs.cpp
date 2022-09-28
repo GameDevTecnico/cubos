@@ -150,12 +150,6 @@ void mySystem(DeltaTime& dt, const MyResource& res)
     std::cout << "mySystem: " << dt.dt << " " << res.val << std::endl;
 }
 
-// Utility used while there's no dispatcher.
-template <typename F> void dispatch(ecs::World& world, ecs::Commands& cmds, const F f)
-{
-    ecs::SystemWrapper(f).call(world, cmds);
-}
-
 int main()
 {
     initializeLogger();
