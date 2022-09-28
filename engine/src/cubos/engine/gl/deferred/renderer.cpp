@@ -528,7 +528,8 @@ bool deferred::Renderer::isSSAOEnabled() const
 void deferred::Renderer::setSSAOEnabled(bool ssaoEnabled)
 {
     this->ssaoEnabled = ssaoEnabled;
-    if(ssaoEnabled) {
+    if (ssaoEnabled)
+    {
         createSSAOTextures();
         generateSSAONoise();
     }
@@ -697,7 +698,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     }
 
     // 5. SSAO pass.
-    if(ssaoEnabled)
+    if (ssaoEnabled)
     {
         // 5.1. Set the SSAO pass state.
         this->renderDevice.setFramebuffer(ssaoFB);
@@ -716,8 +717,10 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         this->ssaoScreenSizeBP->setConstant(this->size);
 
         // Samples
-        for(int i = 0; i < 64; i++) {
-            this->ssaoSamplesBP = this->ssaoPipeline->getBindingPoint(std::string("samples[" + std::to_string(i) + "]").c_str());
+        for (int i = 0; i < 64; i++)
+        {
+            this->ssaoSamplesBP =
+                this->ssaoPipeline->getBindingPoint(std::string("samples[" + std::to_string(i) + "]").c_str());
             this->ssaoSamplesBP->setConstant(ssaoKernel[i]);
         }
 
@@ -747,7 +750,8 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     this->paletteBP->bind(this->sampler);
     this->lightsBP->bind(this->lightsBuffer);
     this->ssaoEnabledBP->setConstant(this->ssaoEnabled);
-    if(this->ssaoEnabledBP) {
+    if (this->ssaoEnabledBP)
+    {
         this->ssaoTexBP->bind(this->ssaoTex);
         this->ssaoTexBP->bind(this->sampler);
     }
@@ -797,20 +801,21 @@ void deferred::Renderer::createSSAOTextures()
     this->ssaoFB = this->renderDevice.createFramebuffer(fbDesc);
 }
 
-void deferred::Renderer::generateSSAONoise() {
+void deferred::Renderer::generateSSAONoise()
+{
     // Generate kernel samples
     std::uniform_real_distribution<float> randomFloats(0.0, 1.0); // random floats between [0.0, 1.0]
     std::default_random_engine generator;
 
     this->ssaoKernel.resize(64);
-    for (unsigned int i = 0; i < 64; i++) {
-        glm::vec3 sample(
-            randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
-            randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
-            randomFloats(generator)              // [ 0.0, 1.0]
+    for (unsigned int i = 0; i < 64; i++)
+    {
+        glm::vec3 sample(randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
+                         randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
+                         randomFloats(generator)              // [ 0.0, 1.0]
         );
         sample = glm::normalize(sample);
-        //sample *= randomFloats(generator);
+        // sample *= randomFloats(generator);
         float scale = float(i) / 64.0;
 
         scale = glm::lerp(0.1f, 1.0f, scale * scale);
