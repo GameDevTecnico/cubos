@@ -3,12 +3,14 @@
 
 # Set sample source files
 set(ENGINE_SAMPLES_SOURCES
+    "asset.cpp"
     "empty.cpp"
     "renderer.cpp"
     "asset.cpp"
     "cars.cpp"
     "asset_renderer.cpp"
     "scene.cpp"
+    "bloom.cpp"
 )
 
 # For each sample file, create a target named after the file but without the
