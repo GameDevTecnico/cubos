@@ -103,49 +103,54 @@ $(document).ready(function(){initNavTree('vec__storage_8hpp_source.html',''); in
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a98417c6ab3da0bc0bd4d8d461b2c1980">insert</a>(uint32_t index, T value) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#ae6e5bcd3eb2009ec7f2d4b421e77d670">get</a>(uint32_t index) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#af93b4b90264fe3dc5780c9f19c1dd7f4">erase</a>(uint32_t index) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        std::vector&lt;T&gt; data;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    };</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a98417c6ab3da0bc0bd4d8d461b2c1980">   23</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a98417c6ab3da0bc0bd4d8d461b2c1980">VecStorage&lt;T&gt;::insert</a>(uint32_t index, T value)</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">if</span> (data.size() &lt;= index)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            data.resize(index);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            data.push_back(value);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        }</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            data[index] = value;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> &amp;data[index];</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#ae6e5bcd3eb2009ec7f2d4b421e77d670">   38</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#ae6e5bcd3eb2009ec7f2d4b421e77d670">VecStorage&lt;T&gt;::get</a>(uint32_t index)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> &amp;data[index];</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#af93b4b90264fe3dc5780c9f19c1dd7f4">   43</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#af93b4b90264fe3dc5780c9f19c1dd7f4">VecStorage&lt;T&gt;::erase</a>(uint32_t index)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        data[index].~T();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">new</span> (&amp;data[index]) T;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">const</span> T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#ae6e5bcd3eb2009ec7f2d4b421e77d670">get</a>(uint32_t index) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#af93b4b90264fe3dc5780c9f19c1dd7f4">erase</a>(uint32_t index) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        std::vector&lt;T&gt; data;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    };</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a98417c6ab3da0bc0bd4d8d461b2c1980">   24</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a98417c6ab3da0bc0bd4d8d461b2c1980">VecStorage&lt;T&gt;::insert</a>(uint32_t index, T value)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">if</span> (data.size() &lt;= index)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            data.resize(index);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            data.push_back(value);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        }</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            data[index] = value;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> &amp;data[index];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#ae6e5bcd3eb2009ec7f2d4b421e77d670">   39</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#ae6e5bcd3eb2009ec7f2d4b421e77d670">VecStorage&lt;T&gt;::get</a>(uint32_t index)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">return</span> &amp;data[index];</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a4398143b8d13760a3cf09741ca98fc5f">   44</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">const</span> T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#ae6e5bcd3eb2009ec7f2d4b421e77d670">VecStorage&lt;T&gt;::get</a>(uint32_t index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">return</span> &amp;data[index];</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// namespace cubos::core::ecs</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif // ECS_VEC_STORAGE_HPP</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#af93b4b90264fe3dc5780c9f19c1dd7f4">   49</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#af93b4b90264fe3dc5780c9f19c1dd7f4">VecStorage&lt;T&gt;::erase</a>(uint32_t index)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        data[index].~T();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">new</span> (&amp;data[index]) T;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <span class="comment">// namespace cubos::core::ecs</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif // ECS_VEC_STORAGE_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> iterating_system.hpp:9</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Storage_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html">cubos::core::ecs::Storage</a></div><div class="ttdoc">Storage is an abstract container for a certain type with common operations, such as,...</div><div class="ttdef"><b>Definition:</b> storage.hpp:21</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_a98417c6ab3da0bc0bd4d8d461b2c1980"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a98417c6ab3da0bc0bd4d8d461b2c1980">cubos::core::ecs::VecStorage::insert</a></div><div class="ttdeci">T * insert(uint32_t index, T value) override</div><div class="ttdoc">Inserts a value into the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:23</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> blueprint.hpp:10</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Storage_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html">cubos::core::ecs::Storage</a></div><div class="ttdoc">Storage is an abstract container for a certain type with common operations, such as,...</div><div class="ttdef"><b>Definition:</b> storage.hpp:24</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_a98417c6ab3da0bc0bd4d8d461b2c1980"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a98417c6ab3da0bc0bd4d8d461b2c1980">cubos::core::ecs::VecStorage::insert</a></div><div class="ttdeci">T * insert(uint32_t index, T value) override</div><div class="ttdoc">Inserts a value into the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:24</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html">cubos::core::ecs::VecStorage</a></div><div class="ttdoc">VecStorage is a Storage implementation that uses a STL vector, this is best for components that are u...</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:12</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_af93b4b90264fe3dc5780c9f19c1dd7f4"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#af93b4b90264fe3dc5780c9f19c1dd7f4">cubos::core::ecs::VecStorage::erase</a></div><div class="ttdeci">void erase(uint32_t index) override</div><div class="ttdoc">Remove a value from the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:43</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_ae6e5bcd3eb2009ec7f2d4b421e77d670"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#ae6e5bcd3eb2009ec7f2d4b421e77d670">cubos::core::ecs::VecStorage::get</a></div><div class="ttdeci">T * get(uint32_t index) override</div><div class="ttdoc">Gets a value from the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:38</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_af93b4b90264fe3dc5780c9f19c1dd7f4"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#af93b4b90264fe3dc5780c9f19c1dd7f4">cubos::core::ecs::VecStorage::erase</a></div><div class="ttdeci">void erase(uint32_t index) override</div><div class="ttdoc">Remove a value from the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:49</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_ae6e5bcd3eb2009ec7f2d4b421e77d670"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#ae6e5bcd3eb2009ec7f2d4b421e77d670">cubos::core::ecs::VecStorage::get</a></div><div class="ttdeci">T * get(uint32_t index) override</div><div class="ttdoc">Gets a value from the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:39</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

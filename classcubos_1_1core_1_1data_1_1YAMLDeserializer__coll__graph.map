@@ -1,5 +1,4 @@
 <map id="cubos::core::data::YAMLDeserializer" name="cubos::core::data::YAMLDeserializer">
-<area shape="rect" id="node1" title="Implementation of the abstract Deserializer class for deserializng from YAML." alt="" coords="14,203,155,244"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1Deserializer.html" title="Abstract class for deserializing data." alt="" coords="14,112,155,153"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1memory_1_1Stream.html" title="Abstract class for memory streams." alt="" coords="5,7,164,48"/>
+<area shape="rect" id="node1" title="Implementation of the abstract Deserializer class for deserializng from YAML." alt="" coords="5,95,147,136"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1Deserializer.html" title="Abstract class for deserializing data." alt="" coords="5,5,147,47"/>
 </map>

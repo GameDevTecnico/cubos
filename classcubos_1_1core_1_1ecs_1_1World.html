@@ -102,100 +102,86 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1World.htm
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afa8ea96503f29c0959388ce34c00d201"><td class="memTemplParams" colspan="2">template&lt;typename... ComponentTypes&gt; </td></tr>
-<tr class="memitem:afa8ea96503f29c0959388ce34c00d201"><td class="memTemplItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#afa8ea96503f29c0959388ce34c00d201">create</a> (ComponentTypes... components)</td></tr>
-<tr class="memdesc:afa8ea96503f29c0959388ce34c00d201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#afa8ea96503f29c0959388ce34c00d201">More...</a><br /></td></tr>
-<tr class="separator:afa8ea96503f29c0959388ce34c00d201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99c2e27cb4432a0423261f9d3885b268"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a99c2e27cb4432a0423261f9d3885b268">remove</a> (uint64_t entity)</td></tr>
-<tr class="memdesc:a99c2e27cb4432a0423261f9d3885b268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a99c2e27cb4432a0423261f9d3885b268">More...</a><br /></td></tr>
-<tr class="separator:a99c2e27cb4432a0423261f9d3885b268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e5e26eba4fae47466cd6bb4f766c938"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a4e5e26eba4fae47466cd6bb4f766c938">World</a> (size_t initialCapacity=1024)</td></tr>
+<tr class="separator:a4e5e26eba4fae47466cd6bb4f766c938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dfa30af4b1d6efd94790c62683ec5de"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... TArgs&gt; </td></tr>
+<tr class="memitem:a9dfa30af4b1d6efd94790c62683ec5de"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a9dfa30af4b1d6efd94790c62683ec5de">registerResource</a> (TArgs... args)</td></tr>
+<tr class="separator:a9dfa30af4b1d6efd94790c62683ec5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d4eb893c802cd8f7145cb9c2de3ac89"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a2d4eb893c802cd8f7145cb9c2de3ac89"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a2d4eb893c802cd8f7145cb9c2de3ac89">registerComponent</a> ()</td></tr>
 <tr class="memdesc:a2d4eb893c802cd8f7145cb9c2de3ac89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a component type.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a2d4eb893c802cd8f7145cb9c2de3ac89">More...</a><br /></td></tr>
 <tr class="separator:a2d4eb893c802cd8f7145cb9c2de3ac89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac790526f78009b1fd1af112618fe6bbf"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ac790526f78009b1fd1af112618fe6bbf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#ac790526f78009b1fd1af112618fe6bbf">addComponent</a> (uint64_t entity, T value={})</td></tr>
-<tr class="memdesc:ac790526f78009b1fd1af112618fe6bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a component to an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#ac790526f78009b1fd1af112618fe6bbf">More...</a><br /></td></tr>
-<tr class="separator:ac790526f78009b1fd1af112618fe6bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2366eb3e133eda9f3a10356949d78cc9"><td class="memTemplParams" colspan="2">template&lt;typename... ComponentTypes&gt; </td></tr>
-<tr class="memitem:a2366eb3e133eda9f3a10356949d78cc9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a2366eb3e133eda9f3a10356949d78cc9">addComponents</a> (uint64_t entity, ComponentTypes... components)</td></tr>
-<tr class="memdesc:a2366eb3e133eda9f3a10356949d78cc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds components to an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a2366eb3e133eda9f3a10356949d78cc9">More...</a><br /></td></tr>
-<tr class="separator:a2366eb3e133eda9f3a10356949d78cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a587db48b662bcb4a9421b664cdc0e373"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a587db48b662bcb4a9421b664cdc0e373"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a587db48b662bcb4a9421b664cdc0e373">getComponent</a> (uint64_t entity)</td></tr>
-<tr class="memdesc:a587db48b662bcb4a9421b664cdc0e373"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reference to a component of an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a587db48b662bcb4a9421b664cdc0e373">More...</a><br /></td></tr>
-<tr class="separator:a587db48b662bcb4a9421b664cdc0e373"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65f51b86719efdb0f6eeafc45a8e3bbf"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a65f51b86719efdb0f6eeafc45a8e3bbf"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a65f51b86719efdb0f6eeafc45a8e3bbf">hasComponent</a> (uint64_t entity)</td></tr>
-<tr class="memdesc:a65f51b86719efdb0f6eeafc45a8e3bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an entity has a component.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a65f51b86719efdb0f6eeafc45a8e3bbf">More...</a><br /></td></tr>
-<tr class="separator:a65f51b86719efdb0f6eeafc45a8e3bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d744a0fb2afad8072048531cc776773"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a7d744a0fb2afad8072048531cc776773"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a7d744a0fb2afad8072048531cc776773">removeComponent</a> (uint64_t entity)</td></tr>
-<tr class="memdesc:a7d744a0fb2afad8072048531cc776773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a component from an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a7d744a0fb2afad8072048531cc776773">More...</a><br /></td></tr>
-<tr class="separator:a7d744a0fb2afad8072048531cc776773"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8924799ccd050cf4454731b795b78ab7"><td class="memTemplParams" colspan="2">template&lt;typename... ComponentTypes&gt; </td></tr>
-<tr class="memitem:a8924799ccd050cf4454731b795b78ab7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a8924799ccd050cf4454731b795b78ab7">removeComponents</a> (uint64_t entity)</td></tr>
-<tr class="memdesc:a8924799ccd050cf4454731b795b78ab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes components from an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a8924799ccd050cf4454731b795b78ab7">More...</a><br /></td></tr>
-<tr class="separator:a8924799ccd050cf4454731b795b78ab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e519642d0c3862bf07bdfe9111a4656"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3e519642d0c3862bf07bdfe9111a4656"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a3e519642d0c3862bf07bdfe9111a4656">read</a> () const</td></tr>
+<tr class="separator:a3e519642d0c3862bf07bdfe9111a4656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9e5c57e0a8e8abff6cd74d88f18038"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6b9e5c57e0a8e8abff6cd74d88f18038"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a6b9e5c57e0a8e8abff6cd74d88f18038">write</a> () const</td></tr>
+<tr class="separator:a6b9e5c57e0a8e8abff6cd74d88f18038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62e7ba5430a945109dd0e5958406a9a0"><td class="memTemplParams" colspan="2">template&lt;typename... ComponentTypes&gt; </td></tr>
+<tr class="memitem:a62e7ba5430a945109dd0e5958406a9a0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a62e7ba5430a945109dd0e5958406a9a0">create</a> (ComponentTypes &amp;&amp;... components)</td></tr>
+<tr class="memdesc:a62e7ba5430a945109dd0e5958406a9a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a62e7ba5430a945109dd0e5958406a9a0">More...</a><br /></td></tr>
+<tr class="separator:a62e7ba5430a945109dd0e5958406a9a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37a304f4a486f692e862b8585b79fa61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a37a304f4a486f692e862b8585b79fa61">destroy</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
+<tr class="memdesc:a37a304f4a486f692e862b8585b79fa61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a37a304f4a486f692e862b8585b79fa61">More...</a><br /></td></tr>
+<tr class="separator:a37a304f4a486f692e862b8585b79fa61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6811bfcd5ade3a4d808814de3813f7"><td class="memTemplParams" colspan="2">template&lt;typename... ComponentTypes&gt; </td></tr>
+<tr class="memitem:a5b6811bfcd5ade3a4d808814de3813f7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a5b6811bfcd5ade3a4d808814de3813f7">add</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity, ComponentTypes &amp;&amp;... components)</td></tr>
+<tr class="memdesc:a5b6811bfcd5ade3a4d808814de3813f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds components to an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a5b6811bfcd5ade3a4d808814de3813f7">More...</a><br /></td></tr>
+<tr class="separator:a5b6811bfcd5ade3a4d808814de3813f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab71c54cee050a09efe87eeaa1d0fe389"><td class="memTemplParams" colspan="2">template&lt;typename... ComponentTypes&gt; </td></tr>
+<tr class="memitem:ab71c54cee050a09efe87eeaa1d0fe389"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#ab71c54cee050a09efe87eeaa1d0fe389">remove</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity)</td></tr>
+<tr class="memdesc:ab71c54cee050a09efe87eeaa1d0fe389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes components from an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#ab71c54cee050a09efe87eeaa1d0fe389">More...</a><br /></td></tr>
+<tr class="separator:ab71c54cee050a09efe87eeaa1d0fe389"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a3810602a346f07a2d0e23103b14db1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6a3810602a346f07a2d0e23103b14db1"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a6a3810602a346f07a2d0e23103b14db1">has</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity) const</td></tr>
+<tr class="memdesc:a6a3810602a346f07a2d0e23103b14db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an entity has a component.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a6a3810602a346f07a2d0e23103b14db1">More...</a><br /></td></tr>
+<tr class="separator:a6a3810602a346f07a2d0e23103b14db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a651c404a19552668cf20614a97dcdb7e"><td class="memTemplParams" colspan="2"><a id="a651c404a19552668cf20614a97dcdb7e"></a>
+<tr class="memitem:ac4631ae0173c324dc84781c944ebb28a"><td class="memTemplParams" colspan="2"><a id="ac4631ae0173c324dc84781c944ebb28a"></a>
 template&lt;typename... ComponentTypes&gt; </td></tr>
-<tr class="memitem:a651c404a19552668cf20614a97dcdb7e"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>WorldView</b></td></tr>
-<tr class="separator:a651c404a19552668cf20614a97dcdb7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4631ae0173c324dc84781c944ebb28a"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Query</b></td></tr>
+<tr class="separator:ac4631ae0173c324dc84781c944ebb28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4252c8c0645791b80ce23eeefc1d9b5f"><td class="memTemplParams" colspan="2"><a id="a4252c8c0645791b80ce23eeefc1d9b5f"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4252c8c0645791b80ce23eeefc1d9b5f"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>impl::QueryFetcher</b></td></tr>
+<tr class="separator:a4252c8c0645791b80ce23eeefc1d9b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9a2dffe589da1f81fa5c202d18e6551"><td class="memItemLeft" align="right" valign="top"><a id="ae9a2dffe589da1f81fa5c202d18e6551"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>Commands</b></td></tr>
+<tr class="separator:ae9a2dffe589da1f81fa5c202d18e6551"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html" title="World is used as a container for all of the entity and component data. Components are stored in abstr...">World</a> is used as a container for all of the entity and component data. Components are stored in abstract containers called storages. </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html" title="Storage is an abstract container for a certain type with common operations, such as,...">Storage</a> </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac790526f78009b1fd1af112618fe6bbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac790526f78009b1fd1af112618fe6bbf">&#9670;&nbsp;</a></span>addComponent()</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4e5e26eba4fae47466cd6bb4f766c938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e5e26eba4fae47466cd6bb4f766c938">&#9670;&nbsp;</a></span>World()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::World::addComponent </td>
+          <td class="memname">cubos::core::ecs::World::World </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>entity</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>initialCapacity</em> = <code>1024</code></td><td>)</td>
           <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>value</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Adds a component to an entity. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>Component type. </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">entity</td><td>Entity ID. </td></tr>
-    <tr><td class="paramname">value</td><td>Initial value of the component </td></tr>
+    <tr><td class="paramname">initialCapacity</td><td>The initial capacity of the world. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a2366eb3e133eda9f3a10356949d78cc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2366eb3e133eda9f3a10356949d78cc9">&#9670;&nbsp;</a></span>addComponents()</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5b6811bfcd5ade3a4d808814de3813f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b6811bfcd5ade3a4d808814de3813f7">&#9670;&nbsp;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -203,15 +189,15 @@ template&lt;typename T &gt; </div>
 template&lt;typename... ComponentTypes&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::World::addComponents </td>
+          <td class="memname">void cubos::core::ecs::World::add </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
           <td class="paramname"><em>entity</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ComponentTypes...&#160;</td>
+          <td class="paramtype">ComponentTypes &amp;&amp;...&#160;</td>
           <td class="paramname"><em>components</em>&#160;</td>
         </tr>
         <tr>
@@ -238,8 +224,8 @@ template&lt;typename... ComponentTypes&gt; </div>
 
 </div>
 </div>
-<a id="afa8ea96503f29c0959388ce34c00d201"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa8ea96503f29c0959388ce34c00d201">&#9670;&nbsp;</a></span>create()</h2>
+<a id="a62e7ba5430a945109dd0e5958406a9a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62e7ba5430a945109dd0e5958406a9a0">&#9670;&nbsp;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,9 +233,9 @@ template&lt;typename... ComponentTypes&gt; </div>
 template&lt;typename... ComponentTypes&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t cubos::core::ecs::World::create </td>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> cubos::core::ecs::World::create </td>
           <td>(</td>
-          <td class="paramtype">ComponentTypes...&#160;</td>
+          <td class="paramtype">ComponentTypes &amp;&amp;...&#160;</td>
           <td class="paramname"><em>components</em></td><td>)</td>
           <td></td>
         </tr>
@@ -272,42 +258,34 @@ template&lt;typename... ComponentTypes&gt; </div>
 
 </div>
 </div>
-<a id="a587db48b662bcb4a9421b664cdc0e373"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a587db48b662bcb4a9421b664cdc0e373">&#9670;&nbsp;</a></span>getComponent()</h2>
+<a id="a37a304f4a486f692e862b8585b79fa61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37a304f4a486f692e862b8585b79fa61">&#9670;&nbsp;</a></span>destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">T &amp; cubos::core::ecs::World::getComponent </td>
+          <td class="memname">void cubos::core::ecs::World::destroy </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
           <td class="paramname"><em>entity</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Gets a reference to a component of an entity. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>Component type. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Removes an entity. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">entity</td><td>Entity ID. </td></tr>
+    <tr><td class="paramname">entity</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a> ID. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a65f51b86719efdb0f6eeafc45a8e3bbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65f51b86719efdb0f6eeafc45a8e3bbf">&#9670;&nbsp;</a></span>hasComponent()</h2>
+<a id="a6a3810602a346f07a2d0e23103b14db1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a3810602a346f07a2d0e23103b14db1">&#9670;&nbsp;</a></span>has()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,11 +293,11 @@ template&lt;typename T &gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool cubos::core::ecs::World::hasComponent </td>
+          <td class="memname">bool cubos::core::ecs::World::has </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
           <td class="paramname"><em>entity</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -333,10 +311,33 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">entity</td><td>Entity ID. </td></tr>
+    <tr><td class="paramname">entity</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a> ID. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a3e519642d0c3862bf07bdfe9111a4656"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e519642d0c3862bf07bdfe9111a4656">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a>&lt; T &gt; cubos::core::ecs::World::read</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reads a resource, locking it for reading. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the resource. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A lock referring to the resource. </dd></dl>
 
 </div>
 </div>
@@ -370,68 +371,41 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a99c2e27cb4432a0423261f9d3885b268"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99c2e27cb4432a0423261f9d3885b268">&#9670;&nbsp;</a></span>remove()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cubos::core::ecs::World::remove </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>entity</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Removes an entity. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">entity</td><td>Entity ID. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a7d744a0fb2afad8072048531cc776773"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d744a0fb2afad8072048531cc776773">&#9670;&nbsp;</a></span>removeComponent()</h2>
+<a id="a9dfa30af4b1d6efd94790c62683ec5de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dfa30af4b1d6efd94790c62683ec5de">&#9670;&nbsp;</a></span>registerResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename... TArgs&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::World::removeComponent </td>
+          <td class="memname">void cubos::core::ecs::World::registerResource </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td class="paramtype">TArgs...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Removes a component from an entity. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Registers a new resource type. Unsafe to call during any reads or writes, should be called at the start of the program. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>Component type to be removed. </td></tr>
+    <tr><td class="paramname">T</td><td>The type of the resource. </td></tr>
+    <tr><td class="paramname">TArgs</td><td>The types of the arguments of the constructor of the resource. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">entity</td><td>Entity ID. </td></tr>
+    <tr><td class="paramname">args</td><td>The arguments of the constructor of the resource. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a8924799ccd050cf4454731b795b78ab7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8924799ccd050cf4454731b795b78ab7">&#9670;&nbsp;</a></span>removeComponents()</h2>
+<a id="ab71c54cee050a09efe87eeaa1d0fe389"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab71c54cee050a09efe87eeaa1d0fe389">&#9670;&nbsp;</a></span>remove()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -439,9 +413,9 @@ template&lt;typename T &gt; </div>
 template&lt;typename... ComponentTypes&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::World::removeComponents </td>
+          <td class="memname">void cubos::core::ecs::World::remove </td>
           <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
           <td class="paramname"><em>entity</em></td><td>)</td>
           <td></td>
         </tr>
@@ -457,10 +431,33 @@ template&lt;typename... ComponentTypes&gt; </div>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">entity</td><td>Entity ID. </td></tr>
+    <tr><td class="paramname">entity</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a> ID. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a6b9e5c57e0a8e8abff6cd74d88f18038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9e5c57e0a8e8abff6cd74d88f18038">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a>&lt; T &gt; cubos::core::ecs::World::write</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Writes a resource, locking it for writing. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the resource. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A lock referring to the resource. </dd></dl>
 
 </div>
 </div>

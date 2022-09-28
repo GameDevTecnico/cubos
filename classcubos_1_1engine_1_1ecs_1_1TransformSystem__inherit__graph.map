@@ -1,5 +1,0 @@
-<map id="cubos::engine::ecs::TransformSystem" name="cubos::engine::ecs::TransformSystem">
-<area shape="rect" id="node1" title=" " alt="" coords="28,169,172,211"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1IteratingSystem.html" title=" " alt="" coords="5,80,195,121"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1ecs_1_1System.html" title="Base class for all systems." alt="" coords="9,5,191,32"/>
-</map>

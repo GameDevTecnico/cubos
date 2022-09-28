@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['zfar_543',['zFar',['../structcubos_1_1core_1_1gl_1_1Camera.html#a10ea6545a08a7673a16e413a4e844505',1,'cubos::core::gl::Camera']]],
-  ['znear_544',['zNear',['../structcubos_1_1core_1_1gl_1_1Camera.html#ad0c319fc03a01de358029f6d68447ef6',1,'cubos::core::gl::Camera']]]
+  ['yamldeserializer_592',['YAMLDeserializer',['../classcubos_1_1core_1_1data_1_1YAMLDeserializer.html',1,'cubos::core::data::YAMLDeserializer'],['../classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#adc0ddbad48fb921c4ff83c09fa5567c8',1,'cubos::core::data::YAMLDeserializer::YAMLDeserializer()']]],
+  ['yamlserializer_593',['YAMLSerializer',['../classcubos_1_1core_1_1data_1_1YAMLSerializer.html',1,'cubos::core::data::YAMLSerializer'],['../classcubos_1_1core_1_1data_1_1YAMLSerializer.html#afd3b044f67085903cea08530af405111',1,'cubos::core::data::YAMLSerializer::YAMLSerializer()']]]
 ];

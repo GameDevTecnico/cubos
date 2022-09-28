@@ -193,7 +193,7 @@ $(document).ready(function(){initNavTree('asset_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">if</span> (this-&gt;ptr == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <a class="code" href="namespacecubos_1_1core.html#a9cf2faa96fce578c0c068969482c5e9c">core::logError</a>(<span class="stringliteral">&quot;Asset::get(): can&#39;t get reference to data since the handle is null&quot;</span>);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <a class="code" href="namespacecubos_1_1core.html#a1638c6c2a462ea10ef21e5ad13db4509">core::logCritical</a>(<span class="stringliteral">&quot;Asset::get(): can&#39;t get reference to data since the handle is null&quot;</span>);</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            abort();</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordflow">return</span> *this-&gt;ptr;</div>
@@ -242,7 +242,7 @@ $(document).ready(function(){initNavTree('asset_8hpp_source.html',''); initResiz
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Asset_html"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Asset.html">cubos::engine::data::Asset</a></div><div class="ttdef"><b>Definition:</b> asset.hpp:28</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_html_a9cf2faa96fce578c0c068969482c5e9c"><div class="ttname"><a href="namespacecubos_1_1core.html#a9cf2faa96fce578c0c068969482c5e9c">cubos::core::logError</a></div><div class="ttdeci">void logError(T &amp;msg)</div><div class="ttdef"><b>Definition:</b> log.hpp:85</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_html_a1638c6c2a462ea10ef21e5ad13db4509"><div class="ttname"><a href="namespacecubos_1_1core.html#a1638c6c2a462ea10ef21e5ad13db4509">cubos::core::logCritical</a></div><div class="ttdeci">void logCritical(T &amp;msg)</div><div class="ttdef"><b>Definition:</b> log.hpp:102</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1AssetManager_html"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1AssetManager.html">cubos::engine::data::AssetManager</a></div><div class="ttdef"><b>Definition:</b> asset_manager.hpp:19</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

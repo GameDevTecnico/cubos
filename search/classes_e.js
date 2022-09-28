@@ -1,21 +1,11 @@
 var searchData=
 [
-  ['sampler_624',['Sampler',['../classcubos_1_1core_1_1gl_1_1impl_1_1Sampler.html',1,'cubos::core::gl::impl']]],
-  ['samplerdesc_625',['SamplerDesc',['../structcubos_1_1core_1_1gl_1_1SamplerDesc.html',1,'cubos::core::gl']]],
-  ['scale_626',['Scale',['../structcubos_1_1engine_1_1ecs_1_1Scale.html',1,'cubos::engine::ecs']]],
-  ['serializationmap_627',['SerializationMap',['../classcubos_1_1core_1_1data_1_1SerializationMap.html',1,'cubos::core::data']]],
-  ['serializer_628',['Serializer',['../classcubos_1_1core_1_1data_1_1Serializer.html',1,'cubos::core::data']]],
-  ['settings_629',['Settings',['../classcubos_1_1core_1_1Settings.html',1,'cubos::core']]],
-  ['shaderbindingpoint_630',['ShaderBindingPoint',['../classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html',1,'cubos::core::gl::impl']]],
-  ['shaderpipeline_631',['ShaderPipeline',['../classcubos_1_1core_1_1gl_1_1impl_1_1ShaderPipeline.html',1,'cubos::core::gl::impl']]],
-  ['shaderstage_632',['ShaderStage',['../classcubos_1_1core_1_1gl_1_1impl_1_1ShaderStage.html',1,'cubos::core::gl::impl']]],
-  ['singleaxis_633',['SingleAxis',['../classcubos_1_1core_1_1io_1_1SingleAxis.html',1,'cubos::core::io']]],
-  ['source_634',['Source',['../classcubos_1_1core_1_1io_1_1Source.html',1,'cubos::core::io']]],
-  ['spotlight_635',['SpotLight',['../structcubos_1_1core_1_1gl_1_1SpotLight.html',1,'cubos::core::gl']]],
-  ['stdarchive_636',['STDArchive',['../classcubos_1_1core_1_1data_1_1STDArchive.html',1,'cubos::core::data']]],
-  ['stdstream_637',['StdStream',['../classcubos_1_1core_1_1memory_1_1StdStream.html',1,'cubos::core::memory']]],
-  ['stencil_638',['Stencil',['../structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html',1,'cubos::core::gl::DepthStencilStateDesc']]],
-  ['storage_639',['Storage',['../classcubos_1_1core_1_1ecs_1_1Storage.html',1,'cubos::core::ecs']]],
-  ['stream_640',['Stream',['../classcubos_1_1core_1_1memory_1_1Stream.html',1,'cubos::core::memory']]],
-  ['system_641',['System',['../classcubos_1_1core_1_1ecs_1_1System.html',1,'cubos::core::ecs']]]
+  ['qbmatrix_675',['QBMatrix',['../structcubos_1_1core_1_1data_1_1QBMatrix.html',1,'cubos::core::data']]],
+  ['query_676',['Query',['../classcubos_1_1core_1_1ecs_1_1Query.html',1,'cubos::core::ecs']]],
+  ['queryfetcher_677',['QueryFetcher',['../classcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20component_20_26_20_3e_678',['QueryFetcher&lt; Component &amp; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_6_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20component_20_2a_20_3e_679',['QueryFetcher&lt; Component * &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_5_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20const_20component_20_26_20_3e_680',['QueryFetcher&lt; const Component &amp; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20const_20component_20_2a_20_3e_681',['QueryFetcher&lt; const Component * &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_5_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryinfo_682',['QueryInfo',['../structcubos_1_1core_1_1ecs_1_1QueryInfo.html',1,'cubos::core::ecs']]]
 ];

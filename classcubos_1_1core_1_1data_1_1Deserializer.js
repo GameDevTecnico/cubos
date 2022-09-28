@@ -1,6 +1,6 @@
 var classcubos_1_1core_1_1data_1_1Deserializer =
 [
-    [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html#ac15252db0a02796c20dd18f2df3269c1", null ],
+    [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html#af0dd08a2a51caff761e4bee6cbe0354b", null ],
     [ "~Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html#aa14c190aa3d5043a3638246e5c0c7511", null ],
     [ "beginArray", "classcubos_1_1core_1_1data_1_1Deserializer.html#a5514e7311fd76ebfc39c88b8fa9844d0", null ],
     [ "beginDictionary", "classcubos_1_1core_1_1data_1_1Deserializer.html#a3a7ee60d1154731a2a4e27d7838016b4", null ],
@@ -25,6 +25,5 @@ var classcubos_1_1core_1_1data_1_1Deserializer =
     [ "readU8", "classcubos_1_1core_1_1data_1_1Deserializer.html#a3d960663343b3bd3978374aee57d5358", null ],
     [ "requires", "classcubos_1_1core_1_1data_1_1Deserializer.html#a909963d4e6b768291b195edadfaaa958", null ],
     [ "ctx", "classcubos_1_1core_1_1data_1_1Deserializer.html#a44afb5e7922a46037a4485c6012681cf", null ],
-    [ "failBit", "classcubos_1_1core_1_1data_1_1Deserializer.html#ae97b0af7351f6596a6dd9fffe620ce41", null ],
-    [ "stream", "classcubos_1_1core_1_1data_1_1Deserializer.html#a3ba2041eb51e37788ab19118b6c80643", null ]
+    [ "failBit", "classcubos_1_1core_1_1data_1_1Deserializer.html#ae97b0af7351f6596a6dd9fffe620ce41", null ]
 ];

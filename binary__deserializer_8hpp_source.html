@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('binary__deserializer_8hpp_source.html'
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html">   13</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html">BinaryDeserializer</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a3104a09570199af99d77138d020ac492">BinaryDeserializer</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; <a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a3ba2041eb51e37788ab19118b6c80643">stream</a>, <span class="keywordtype">bool</span> readLittleEndian = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a3104a09570199af99d77138d020ac492">BinaryDeserializer</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; stream, <span class="keywordtype">bool</span> readLittleEndian = <span class="keyword">true</span>);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="comment">// Implement interface methods.</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
@@ -127,11 +127,12 @@ $(document).ready(function(){initNavTree('binary__deserializer_8hpp_source.html'
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a686bdc8ad983bc26d167125ea751eb1c">endDictionary</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">bool</span> readLittleEndian; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; stream; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">bool</span> readLittleEndian;  </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1BinaryDeserializer_html_a1561d09b293e90715c1a3628e07e8d5a"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a1561d09b293e90715c1a3628e07e8d5a">cubos::core::data::BinaryDeserializer::endObject</a></div><div class="ttdeci">virtual void endObject() override</div><div class="ttdoc">Indicates that a object is no longer being deserialized.</div></div>
@@ -156,7 +157,6 @@ $(document).ready(function(){initNavTree('binary__deserializer_8hpp_source.html'
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1BinaryDeserializer_html_a1de2501d93204f21c521447c522c0243"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a1de2501d93204f21c521447c522c0243">cubos::core::data::BinaryDeserializer::readU32</a></div><div class="ttdeci">virtual void readU32(uint32_t &amp;value) override</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1BinaryDeserializer_html_a409dfa83a15a56f3360ddd631c2edb78"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a409dfa83a15a56f3360ddd631c2edb78">cubos::core::data::BinaryDeserializer::readI8</a></div><div class="ttdeci">virtual void readI8(int8_t &amp;value) override</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Deserializer_html_a3ba2041eb51e37788ab19118b6c80643"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html#a3ba2041eb51e37788ab19118b6c80643">cubos::core::data::Deserializer::stream</a></div><div class="ttdeci">memory::Stream &amp; stream</div><div class="ttdoc">Stream used by the deserializer.</div><div class="ttdef"><b>Definition:</b> deserializer.hpp:143</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1BinaryDeserializer_html_a228884a95f593359e0b78947b0379e02"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a228884a95f593359e0b78947b0379e02">cubos::core::data::BinaryDeserializer::readBool</a></div><div class="ttdeci">virtual void readBool(bool &amp;value) override</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

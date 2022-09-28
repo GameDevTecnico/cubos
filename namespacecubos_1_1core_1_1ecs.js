@@ -1,12 +1,28 @@
 var namespacecubos_1_1core_1_1ecs =
 [
+    [ "impl", "namespacecubos_1_1core_1_1ecs_1_1impl.html", "namespacecubos_1_1core_1_1ecs_1_1impl" ],
+    [ "AnySystemWrapper", "classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html", "classcubos_1_1core_1_1ecs_1_1AnySystemWrapper" ],
+    [ "Blueprint", "classcubos_1_1core_1_1ecs_1_1Blueprint.html", "classcubos_1_1core_1_1ecs_1_1Blueprint" ],
+    [ "BlueprintBuilder", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder" ],
+    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html", "classcubos_1_1core_1_1ecs_1_1Commands" ],
+    [ "ComponentManager", "classcubos_1_1core_1_1ecs_1_1ComponentManager.html", "classcubos_1_1core_1_1ecs_1_1ComponentManager" ],
+    [ "Entity", "classcubos_1_1core_1_1ecs_1_1Entity.html", "classcubos_1_1core_1_1ecs_1_1Entity" ],
+    [ "EntityBuilder", "classcubos_1_1core_1_1ecs_1_1EntityBuilder.html", "classcubos_1_1core_1_1ecs_1_1EntityBuilder" ],
+    [ "EntityManager", "classcubos_1_1core_1_1ecs_1_1EntityManager.html", "classcubos_1_1core_1_1ecs_1_1EntityManager" ],
     [ "IStorage", "classcubos_1_1core_1_1ecs_1_1IStorage.html", "classcubos_1_1core_1_1ecs_1_1IStorage" ],
-    [ "IteratingSystem", "classcubos_1_1core_1_1ecs_1_1IteratingSystem.html", "classcubos_1_1core_1_1ecs_1_1IteratingSystem" ],
     [ "MapStorage", "classcubos_1_1core_1_1ecs_1_1MapStorage.html", "classcubos_1_1core_1_1ecs_1_1MapStorage" ],
     [ "NullStorage", "classcubos_1_1core_1_1ecs_1_1NullStorage.html", "classcubos_1_1core_1_1ecs_1_1NullStorage" ],
+    [ "Query", "classcubos_1_1core_1_1ecs_1_1Query.html", "classcubos_1_1core_1_1ecs_1_1Query" ],
+    [ "QueryInfo", "structcubos_1_1core_1_1ecs_1_1QueryInfo.html", "structcubos_1_1core_1_1ecs_1_1QueryInfo" ],
+    [ "ReadResource", "classcubos_1_1core_1_1ecs_1_1ReadResource.html", "classcubos_1_1core_1_1ecs_1_1ReadResource" ],
+    [ "ReadStorage", "classcubos_1_1core_1_1ecs_1_1ReadStorage.html", "classcubos_1_1core_1_1ecs_1_1ReadStorage" ],
+    [ "Registry", "classcubos_1_1core_1_1ecs_1_1Registry.html", "classcubos_1_1core_1_1ecs_1_1Registry" ],
+    [ "ResourceManager", "classcubos_1_1core_1_1ecs_1_1ResourceManager.html", "classcubos_1_1core_1_1ecs_1_1ResourceManager" ],
     [ "Storage", "classcubos_1_1core_1_1ecs_1_1Storage.html", "classcubos_1_1core_1_1ecs_1_1Storage" ],
-    [ "System", "classcubos_1_1core_1_1ecs_1_1System.html", "classcubos_1_1core_1_1ecs_1_1System" ],
+    [ "SystemInfo", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html", "structcubos_1_1core_1_1ecs_1_1SystemInfo" ],
+    [ "SystemWrapper", "classcubos_1_1core_1_1ecs_1_1SystemWrapper.html", "classcubos_1_1core_1_1ecs_1_1SystemWrapper" ],
     [ "VecStorage", "classcubos_1_1core_1_1ecs_1_1VecStorage.html", "classcubos_1_1core_1_1ecs_1_1VecStorage" ],
     [ "World", "classcubos_1_1core_1_1ecs_1_1World.html", "classcubos_1_1core_1_1ecs_1_1World" ],
-    [ "WorldView", "structcubos_1_1core_1_1ecs_1_1WorldView.html", "structcubos_1_1core_1_1ecs_1_1WorldView" ]
+    [ "WriteResource", "classcubos_1_1core_1_1ecs_1_1WriteResource.html", "classcubos_1_1core_1_1ecs_1_1WriteResource" ],
+    [ "WriteStorage", "classcubos_1_1core_1_1ecs_1_1WriteStorage.html", "classcubos_1_1core_1_1ecs_1_1WriteStorage" ]
 ];

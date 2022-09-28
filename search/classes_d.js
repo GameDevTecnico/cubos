@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['rasterstate_618',['RasterState',['../classcubos_1_1core_1_1gl_1_1impl_1_1RasterState.html',1,'cubos::core::gl::impl']]],
-  ['rasterstatedesc_619',['RasterStateDesc',['../structcubos_1_1core_1_1gl_1_1RasterStateDesc.html',1,'cubos::core::gl']]],
-  ['renderdevice_620',['RenderDevice',['../classcubos_1_1core_1_1gl_1_1RenderDevice.html',1,'cubos::core::gl']]],
-  ['renderer_621',['Renderer',['../classcubos_1_1engine_1_1gl_1_1Renderer.html',1,'cubos::engine::gl::Renderer'],['../classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html',1,'cubos::engine::gl::deferred::Renderer']]],
-  ['renderergrid_622',['RendererGrid',['../classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html',1,'cubos::engine::gl::impl']]],
-  ['rotation_623',['Rotation',['../structcubos_1_1engine_1_1ecs_1_1Rotation.html',1,'cubos::engine::ecs']]]
+  ['palette_670',['Palette',['../classcubos_1_1core_1_1gl_1_1Palette.html',1,'cubos::core::gl::Palette'],['../structcubos_1_1engine_1_1data_1_1Palette.html',1,'cubos::engine::data::Palette']]],
+  ['paletteloader_671',['PaletteLoader',['../classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html',1,'cubos::engine::data::impl']]],
+  ['pass_672',['Pass',['../classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html',1,'cubos::engine::gl::pps']]],
+  ['pointlight_673',['PointLight',['../structcubos_1_1core_1_1gl_1_1PointLight.html',1,'cubos::core::gl']]],
+  ['position_674',['Position',['../structcubos_1_1engine_1_1ecs_1_1Position.html',1,'cubos::engine::ecs']]]
 ];

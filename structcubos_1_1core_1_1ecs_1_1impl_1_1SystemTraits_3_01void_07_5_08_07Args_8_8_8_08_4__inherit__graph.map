@@ -1,0 +1,5 @@
+<map id="cubos::core::ecs::impl::SystemTraits&lt; void(*)(Args...)&gt;" name="cubos::core::ecs::impl::SystemTraits&lt; void(*)(Args...)&gt;">
+<area shape="rect" id="node1" title="Specialization for function pointers." alt="" coords="5,45,180,101"/>
+<area shape="rect" id="node2" href="$structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_01const_01_4.html" title="Specialization for const member functions." alt="" coords="228,5,399,61"/>
+<area shape="rect" id="node3" href="$structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_4.html" title="Specialization for member functions." alt="" coords="228,85,399,141"/>
+</map>

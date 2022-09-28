@@ -127,6 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a78d6f174126a2f0a2218d66e0cf08e39"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1MapStorage.html#a78d6f174126a2f0a2218d66e0cf08e39">get</a> (uint32_t index) override</td></tr>
 <tr class="memdesc:a78d6f174126a2f0a2218d66e0cf08e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a value from the storage.  <a href="classcubos_1_1core_1_1ecs_1_1MapStorage.html#a78d6f174126a2f0a2218d66e0cf08e39">More...</a><br /></td></tr>
 <tr class="separator:a78d6f174126a2f0a2218d66e0cf08e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9283ca197f4da27b34101cc17e0874d5"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1MapStorage.html#a9283ca197f4da27b34101cc17e0874d5">get</a> (uint32_t index) const override</td></tr>
+<tr class="memdesc:a9283ca197f4da27b34101cc17e0874d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a value from the storage.  <a href="classcubos_1_1core_1_1ecs_1_1MapStorage.html#a9283ca197f4da27b34101cc17e0874d5">More...</a><br /></td></tr>
+<tr class="separator:a9283ca197f4da27b34101cc17e0874d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6da434ab8ca35329cfeb6ff4903b2d73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1MapStorage.html#a6da434ab8ca35329cfeb6ff4903b2d73">erase</a> (uint32_t index) override</td></tr>
 <tr class="memdesc:a6da434ab8ca35329cfeb6ff4903b2d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a value from the storage.  <a href="classcubos_1_1core_1_1ecs_1_1MapStorage.html#a6da434ab8ca35329cfeb6ff4903b2d73">More...</a><br /></td></tr>
 <tr class="separator:a6da434ab8ca35329cfeb6ff4903b2d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,12 +187,50 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#abe58afa6930338befdf06951d1810cba">cubos::core::ecs::Storage&lt; T &gt;</a>.</p>
+<p>Implements <a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html#a60384081976ed3bd34b3170b2980d116">cubos::core::ecs::IStorage</a>.</p>
+
+</div>
+</div>
+<a id="a9283ca197f4da27b34101cc17e0874d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9283ca197f4da27b34101cc17e0874d5">&#9670;&nbsp;</a></span>get() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T * <a class="el" href="classcubos_1_1core_1_1ecs_1_1MapStorage.html">cubos::core::ecs::MapStorage</a>&lt; T &gt;::get </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a value from the storage. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the value to be retrieved. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#af51f59a6bd057560888531e09fa0d424">cubos::core::ecs::Storage&lt; T &gt;</a>.</p>
 
 </div>
 </div>
 <a id="a78d6f174126a2f0a2218d66e0cf08e39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78d6f174126a2f0a2218d66e0cf08e39">&#9670;&nbsp;</a></span>get()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a78d6f174126a2f0a2218d66e0cf08e39">&#9670;&nbsp;</a></span>get() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

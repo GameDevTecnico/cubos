@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qbmatrix_617',['QBMatrix',['../structcubos_1_1core_1_1data_1_1QBMatrix.html',1,'cubos::core::data']]]
+  ['nullstorage_669',['NullStorage',['../classcubos_1_1core_1_1ecs_1_1NullStorage.html',1,'cubos::core::ecs']]]
 ];

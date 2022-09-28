@@ -6,23 +6,23 @@ var annotated_dup =
         [ "data", null, [
           [ "impl", null, [
             [ "GridLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader" ],
-            [ "PaletteLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader" ]
+            [ "PaletteLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader" ],
+            [ "SceneLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader" ]
           ] ],
           [ "Asset", "classcubos_1_1engine_1_1data_1_1Asset.html", "classcubos_1_1engine_1_1data_1_1Asset" ],
           [ "AssetManager", "classcubos_1_1engine_1_1data_1_1AssetManager.html", "classcubos_1_1engine_1_1data_1_1AssetManager" ],
           [ "Grid", "structcubos_1_1engine_1_1data_1_1Grid.html", "structcubos_1_1engine_1_1data_1_1Grid" ],
           [ "Loader", "classcubos_1_1engine_1_1data_1_1Loader.html", "classcubos_1_1engine_1_1data_1_1Loader" ],
           [ "Meta", "classcubos_1_1engine_1_1data_1_1Meta.html", "classcubos_1_1engine_1_1data_1_1Meta" ],
-          [ "Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", "structcubos_1_1engine_1_1data_1_1Palette" ]
+          [ "Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", "structcubos_1_1engine_1_1data_1_1Palette" ],
+          [ "Scene", "structcubos_1_1engine_1_1data_1_1Scene.html", "structcubos_1_1engine_1_1data_1_1Scene" ]
         ] ],
         [ "ecs", null, [
-          [ "DrawSystem", "classcubos_1_1engine_1_1ecs_1_1DrawSystem.html", "classcubos_1_1engine_1_1ecs_1_1DrawSystem" ],
           [ "Grid", "structcubos_1_1engine_1_1ecs_1_1Grid.html", "structcubos_1_1engine_1_1ecs_1_1Grid" ],
           [ "LocalToWorld", "structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html", "structcubos_1_1engine_1_1ecs_1_1LocalToWorld" ],
           [ "Position", "structcubos_1_1engine_1_1ecs_1_1Position.html", "structcubos_1_1engine_1_1ecs_1_1Position" ],
           [ "Rotation", "structcubos_1_1engine_1_1ecs_1_1Rotation.html", "structcubos_1_1engine_1_1ecs_1_1Rotation" ],
-          [ "Scale", "structcubos_1_1engine_1_1ecs_1_1Scale.html", "structcubos_1_1engine_1_1ecs_1_1Scale" ],
-          [ "TransformSystem", "classcubos_1_1engine_1_1ecs_1_1TransformSystem.html", "classcubos_1_1engine_1_1ecs_1_1TransformSystem" ]
+          [ "Scale", "structcubos_1_1engine_1_1ecs_1_1Scale.html", "structcubos_1_1engine_1_1ecs_1_1Scale" ]
         ] ],
         [ "gl", null, [
           [ "deferred", null, [
@@ -39,5 +39,8 @@ var annotated_dup =
           [ "Renderer", "classcubos_1_1engine_1_1gl_1_1Renderer.html", "classcubos_1_1engine_1_1gl_1_1Renderer" ]
         ] ]
       ] ]
+    ] ],
+    [ "std", null, [
+      [ "hash< cubos::core::ecs::Entity >", "structstd_1_1hash_3_01cubos_1_1core_1_1ecs_1_1Entity_01_4.html", "structstd_1_1hash_3_01cubos_1_1core_1_1ecs_1_1Entity_01_4" ]
     ] ]
 ];

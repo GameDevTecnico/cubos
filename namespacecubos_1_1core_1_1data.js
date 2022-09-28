@@ -9,6 +9,8 @@ var namespacecubos_1_1core_1_1data =
     [ "File", "classcubos_1_1core_1_1data_1_1File.html", "classcubos_1_1core_1_1data_1_1File" ],
     [ "FileStream", "classcubos_1_1core_1_1data_1_1FileStream.html", "classcubos_1_1core_1_1data_1_1FileStream" ],
     [ "FileSystem", "classcubos_1_1core_1_1data_1_1FileSystem.html", "classcubos_1_1core_1_1data_1_1FileSystem" ],
+    [ "JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", "classcubos_1_1core_1_1data_1_1JSONDeserializer" ],
+    [ "JSONSerializer", "classcubos_1_1core_1_1data_1_1JSONSerializer.html", "classcubos_1_1core_1_1data_1_1JSONSerializer" ],
     [ "QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", "structcubos_1_1core_1_1data_1_1QBMatrix" ],
     [ "SerializationMap", "classcubos_1_1core_1_1data_1_1SerializationMap.html", "classcubos_1_1core_1_1data_1_1SerializationMap" ],
     [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", "classcubos_1_1core_1_1data_1_1Serializer" ],
