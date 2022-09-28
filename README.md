@@ -55,6 +55,7 @@ The following dependencies are used to compile **CUBOS.**:
 | Name                                               | Importance         | Submodule Path        | Installed Separately |
 | -------------------------------------------------- | ------------------ | --------------------- | -------------------- |
 | [CMake](https://cmake.org/)                        | Essential          | -                     | Yes                  |
+| [json](https://github.com/nlohmann/json)           | Essential          | -                     | No                   |
 | [glad](https://github.com/Dav1dde/glad)            | Essential          | -                     | No                   |
 | [glfw](https://github.com/glfw/glfw)               | Essential          | `core/lib/glfw`       | Optionally           |
 | [glm](https://github.com/g-truc/glm)               | Essential          | `core/lib/glm`        | Optionally           |

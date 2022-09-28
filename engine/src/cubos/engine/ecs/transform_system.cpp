@@ -1,28 +1,18 @@
 #include <cubos/engine/ecs/transform_system.hpp>
-#include <cubos/engine/ecs/position.hpp>
-#include <cubos/engine/ecs/rotation.hpp>
-#include <cubos/engine/ecs/scale.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 
-using namespace cubos::core::ecs;
-using namespace cubos::engine::ecs;
-
-void TransformSystem::init(World& world)
+void cubos::engine::ecs::transformSystem(
+    core::ecs::Query<LocalToWorld&, const Position*, const Rotation*, const Scale*> query)
 {
-    world.registerComponent<LocalToWorld>();
-    world.registerComponent<Position>();
-    world.registerComponent<Rotation>();
-    world.registerComponent<Scale>();
-}
-
-void TransformSystem::process(World& world, uint64_t entity, LocalToWorld& localToWorld)
-{
-    localToWorld.mat = glm::mat4(1.0f);
-    if (world.hasComponent<Position>(entity))
-        localToWorld.mat = glm::translate(localToWorld.mat, world.getComponent<Position>(entity).vec);
-    if (world.hasComponent<Rotation>(entity))
-        localToWorld.mat *= glm::toMat4(world.getComponent<Rotation>(entity).quat);
-    if (world.hasComponent<Scale>(entity))
-        localToWorld.mat = glm::scale(localToWorld.mat, glm::vec3(world.getComponent<Scale>(entity).factor));
+    for (auto [entity, localToWorld, position, rotation, scale] : query)
+    {
+        localToWorld.mat = glm::mat4(1.0f);
+        if (position != nullptr)
+            localToWorld.mat = glm::translate(localToWorld.mat, position->vec);
+        if (rotation != nullptr)
+            localToWorld.mat *= glm::toMat4(rotation->quat);
+        if (scale != nullptr)
+            localToWorld.mat = glm::scale(localToWorld.mat, glm::vec3(scale->factor));
+    }
 }

@@ -2,12 +2,75 @@
 
 using namespace cubos::core::ecs;
 
-void System::init(World& world)
+bool SystemInfo::valid() const
 {
-    // Do nothing.
+    for (auto& rsc : this->resourcesRead)
+    {
+        if (this->resourcesWritten.contains(rsc))
+        {
+            return false;
+        }
+    }
+
+    for (auto& comp : this->componentsRead)
+    {
+        if (this->componentsWritten.contains(comp))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
-void System::update(World& world)
+bool SystemInfo::compatible(const SystemInfo& other) const
 {
-    // Do nothing.
+    for (auto& rsc : this->resourcesRead)
+    {
+        if (other.resourcesWritten.contains(rsc))
+        {
+            return false;
+        }
+    }
+
+    for (auto& comp : this->componentsRead)
+    {
+        if (other.componentsWritten.contains(comp))
+        {
+            return false;
+        }
+    }
+
+    for (auto& rsc : other.resourcesRead)
+    {
+        if (this->resourcesWritten.contains(rsc))
+        {
+            return false;
+        }
+    }
+
+    for (auto& comp : other.componentsRead)
+    {
+        if (this->componentsWritten.contains(comp))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+AnySystemWrapper::AnySystemWrapper(SystemInfo&& info) : m_info(std::move(info))
+{
+    if (!this->m_info.valid())
+    {
+        logCritical("AnySystemWrapper::AnySystemWrapper() failed: system is invalid. This may happen, if, for example, "
+                    "it both reads and writes the same resource.");
+        abort();
+    }
+}
+
+const SystemInfo& AnySystemWrapper::info() const
+{
+    return m_info;
 }

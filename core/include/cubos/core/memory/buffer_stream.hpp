@@ -21,9 +21,10 @@ namespace cubos::core::memory
         /// When initialized this way, the buffer stream will own the buffer and will delete it when it is destroyed.
         /// It will expand the buffer when needed.
         /// @param size The size of the buffer.
-        BufferStream(size_t size);
+        BufferStream(size_t size = 16);
 
         virtual ~BufferStream() override;
+        BufferStream(const BufferStream&);
         BufferStream(BufferStream&&);
 
         /// Gets the buffer of this stream.

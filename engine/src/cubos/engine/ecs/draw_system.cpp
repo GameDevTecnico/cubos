@@ -2,14 +2,10 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-using namespace cubos::core::ecs;
-using namespace cubos::engine::ecs;
-
-DrawSystem::DrawSystem(gl::Frame& frame) : frame(frame)
+void cubos::engine::ecs::drawSystem(gl::Frame& frame, core::ecs::Query<const Grid&, const LocalToWorld&> query)
 {
-}
-
-void DrawSystem::process(World& world, uint64_t entity, Grid& grid, LocalToWorld& localToWorld)
-{
-    this->frame.draw(grid.handle, localToWorld.mat * glm::translate(glm::mat4(1.0f), grid.modelOffset));
+    for (auto [entity, grid, localToWorld] : query)
+    {
+        frame.draw(grid.handle, localToWorld.mat * glm::translate(glm::mat4(1.0f), grid.modelOffset));
+    }
 }

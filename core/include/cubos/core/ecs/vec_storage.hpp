@@ -14,6 +14,7 @@ namespace cubos::core::ecs
     public:
         T* insert(uint32_t index, T value) override;
         T* get(uint32_t index) override;
+        const T* get(uint32_t index) const override;
         void erase(uint32_t index) override;
 
     private:
@@ -40,12 +41,16 @@ namespace cubos::core::ecs
         return &data[index];
     }
 
+    template <typename T> const T* VecStorage<T>::get(uint32_t index) const
+    {
+        return &data[index];
+    }
+
     template <typename T> void VecStorage<T>::erase(uint32_t index)
     {
         data[index].~T();
         new (&data[index]) T;
     }
-
 } // namespace cubos::core::ecs
 
 #endif // ECS_VEC_STORAGE_HPP
