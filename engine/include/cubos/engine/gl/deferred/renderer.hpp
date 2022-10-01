@@ -33,9 +33,6 @@ namespace cubos::engine::gl::deferred
         virtual RendererGrid upload(const core::gl::Grid& grid) override;
         virtual void setPalette(const core::gl::Palette& palette) override;
 
-        bool isSSAOEnabled() const;
-        void setSSAOEnabled(bool ssaoEnabled);
-
     protected:
         // Implement interface methods.
 
@@ -47,7 +44,6 @@ namespace cubos::engine::gl::deferred
         void createSSAOTextures();
         void generateSSAONoise();
 
-    private:
         // GBuffer.
 
         glm::uvec2 size;
@@ -84,8 +80,8 @@ namespace cubos::engine::gl::deferred
 
         core::gl::VertexArray screenQuadVA;
 
-    private:
         // SSAO (Screen-Scrape Ambient Occlusion)
+
         bool ssaoEnabled = false;
         std::vector<glm::vec3> ssaoKernel;
 

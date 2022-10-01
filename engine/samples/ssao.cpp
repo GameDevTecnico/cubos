@@ -5,6 +5,7 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/palette.hpp>
+#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/data/asset_manager.hpp>
 #include <cubos/engine/data/grid.hpp>
@@ -29,6 +30,9 @@ int main(void)
         using namespace engine::gl;
         using namespace engine;
 
+        // Enable SSAO
+        cubos::core::Settings::global.setBool("ssaoEnabled", true);
+
         auto renderer = deferred::Renderer(renderDevice, window->getFramebufferSize());
         auto frame = Frame();
 
@@ -46,9 +50,6 @@ int main(void)
 
         auto gpuCube = renderer.upload(grd->grid);
         renderer.setPalette(pal->palette);
-
-        // Enable SSAO on the renderer
-        renderer.setSSAOEnabled(true);
 
         // Initialize the camera.
         Camera camera;

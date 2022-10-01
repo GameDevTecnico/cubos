@@ -1,6 +1,7 @@
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/gl/frame.hpp>
 #include <cubos/engine/gl/deferred/renderer.hpp>
@@ -458,6 +459,14 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size) : gl::
     // Create the GBuffer.
     this->size = glm::uvec2(0, 0);
     this->onResize(size);
+
+    // Check whether SSAO is enabled
+    ssaoEnabled = Settings::global.getBool("ssaoEnabled", false);
+    if (ssaoEnabled)
+    {
+        createSSAOTextures();
+        generateSSAONoise();
+    }
 }
 
 RendererGrid deferred::Renderer::upload(const Grid& grid)
@@ -518,21 +527,6 @@ void deferred::Renderer::setPalette(const core::gl::Palette& palette)
 
     // Update the data on the GPU.
     this->paletteTex->update(0, 0, 256, 256, data.data());
-}
-
-bool deferred::Renderer::isSSAOEnabled() const
-{
-    return this->ssaoEnabled;
-}
-
-void deferred::Renderer::setSSAOEnabled(bool ssaoEnabled)
-{
-    this->ssaoEnabled = ssaoEnabled;
-    if (ssaoEnabled)
-    {
-        createSSAOTextures();
-        generateSSAONoise();
-    }
 }
 
 void deferred::Renderer::onResize(glm::uvec2 size)
