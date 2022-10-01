@@ -161,16 +161,14 @@ int main()
     world.registerComponent<Velocity>();
     world.registerComponent<Parent>();
 
-    // create dispatcher
     ecs::Dispatcher dispatcher;
     auto cmds = ecs::Commands(world);
-    // register systems wrappers on dispatcher
-    dispatcher.registerSystem(mySystem, "Main");
-    dispatcher.registerSystem(printPositions, "Transform");
+    dispatcher.addSystem(mySystem, "Main");
+    dispatcher.addSystem(printPositions, "Transform");
     dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::After);
-    dispatcher.registerSystem(printPlayerPosition, "New");
+    dispatcher.addSystem(printPlayerPosition, "New");
     dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::Before);
-    dispatcher.registerSystem(
+    dispatcher.addSystem(
         [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; },
         "PreProcess");
     dispatcher.putStageBefore("PreProcess", "Transform");

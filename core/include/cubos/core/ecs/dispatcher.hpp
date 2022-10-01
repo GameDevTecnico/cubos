@@ -23,10 +23,10 @@ namespace cubos::core::ecs
             After
         };
 
-        /// Registers a system in a stage.
-        /// @param system System to register.
-        /// @param stage Stage to register the system in.
-        template <typename F> void registerSystem(F system, std::string stage);
+        /// Adds a system into a stage.
+        /// @param system System to add.
+        /// @param stage Stage to add the system in.
+        template <typename F> void addSystem(F system, std::string stage);
 
         /// Calls all systems in order of the stages they are in.
         /// @param world World to call the systems in.
@@ -60,7 +60,7 @@ namespace cubos::core::ecs
         Direction defaultDirection; ///< The direction new stages are put in relation to the default stage.
     };
 
-    template <typename F> void Dispatcher::registerSystem(F system, std::string stage)
+    template <typename F> void Dispatcher::addSystem(F system, std::string stage)
     {
         // Register stage if it doesn't exist.
         if (this->stagesByName.find(stage) == this->stagesByName.end())
@@ -71,7 +71,7 @@ namespace cubos::core::ecs
         // Wrap the system and put it in its stage.
         auto systemWrapper = std::make_unique<SystemWrapper<F>>(system);
         this->stagesByName[stage].push_back(std::move(systemWrapper));
-        logInfo("Dispatcher:::registerSystem(): added system to stage '{}'", stage);
+        logInfo("Dispatcher:::addSystem(): added system to stage '{}'", stage);
     }
 } // namespace cubos::core::ecs
 #endif // CUBOS_CORE_ECS_DISPATCHER_HPP

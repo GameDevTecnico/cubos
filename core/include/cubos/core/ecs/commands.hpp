@@ -84,7 +84,7 @@ namespace cubos::core::ecs
     class Commands final
     {
     public:
-        /// TODO: make this private after implementing the dispatcher.
+        /// TODO: make this private after implementing the Cubos class.
         /// @param world The world to which the commands will be applied.
         Commands(World& world);
         Commands(Commands&&);

@@ -67,7 +67,7 @@ void setup(Commands& cmds, std::shared_ptr<data::AssetManager>& assetManager)
     cmds.spawn(scene->blueprint).add("main", Parent{root});
 }
 
-void print_stuff(Query<const Parent*, const Num*> query)
+void printStuff(Query<const Parent*, const Num*> query)
 {
     for (auto [entity, parent, num] : query)
     {
@@ -105,8 +105,8 @@ int main(int argc, char** argv)
 
     // Create the dispatcher and register the systems.
     Dispatcher dispatcher;
-    dispatcher.registerSystem(setup, "Setup");
-    dispatcher.registerSystem(print_stuff, "End");
+    dispatcher.addSystem(setup, "Setup");
+    dispatcher.addSystem(printStuff, "End");
 
     // Create the command buffer and run the dispatcher.
     auto cmds = Commands(world);
