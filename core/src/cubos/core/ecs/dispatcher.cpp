@@ -2,146 +2,87 @@
 
 using namespace cubos::core::ecs;
 
-// call systems from stagesOrder order
-void Dispatcher::callSystems(World& world, ecs::Commands& cmds)
+void Dispatcher::callSystems(World& world, Commands& cmds)
 {
-    logInfo("Calling stages by the following order:");
-    for (auto& stageName : stagesOrder)
+    for (auto& stageName : this->stagesOrder)
     {
-        logInfo("{}", stageName);
-    };
-    // call systems
-    for (auto& stageName : stagesOrder)
-    {
-        for (auto& system : stagesByName[stageName])
+        logTrace("Dispatcher::callSystems(): dispatching stage '{}'", stageName);
+
+        for (auto& system : this->stagesByName[stageName])
         {
             system->call(world, cmds);
         }
+
         cmds.commit();
     }
 }
 
-void Dispatcher::registerStage(std::string stage, std::string defaultStage)
+void Dispatcher::setDefaultStage(std::string stage, Direction direction)
 {
-    // check if stage already exists
-    if (stagesByName.count(stage) > 0)
+    // Check if stage exists.
+    if (this->stagesByName.find(stage) == this->stagesByName.end())
     {
-        logWarning("Stage {} already exists", stage);
-        return;
+        this->putStage(stage, this->defaultStage, this->defaultDirection);
     }
-    // check if default stage is set, if not create stage in end of stagesOrder vector
-    if (defaultStage == "")
-    {
-        stagesOrder.push_back(stage);
-    }
-    // if default stage is set, add stage to vector after default vector if direction is AFTER or before if direction is
-    // BEFORE
-    else
-    {
-        auto it = std::find(stagesOrder.begin(), stagesOrder.end(), defaultStage);
-        if (it == stagesOrder.end())
-        {
-            logWarning("Default stage {} not found", defaultStage);
-            return;
-        }
-        if (direction == Direction::AFTER)
-        {
-            stagesOrder.insert(it + 1, stage);
-        }
-        else
-        {
-            stagesOrder.insert(it, stage);
-        }
-    }
-    // add new vector of system wrapper to map
-    stagesByName[stage] = std::vector<std::unique_ptr<AnySystemWrapper>>();
-}
 
-void Dispatcher::setDefaultStage(std::string stage, ecs::Dispatcher::Direction direction)
-{
-    // check if stage exists
-    if (stagesByName.find(stage) == stagesByName.end())
-    {
-        logWarning("Stage {} not found", stage);
-        return;
-    }
-    // set default stage and direction
-    defaultStage = stage;
-    this->direction = direction;
+    this->defaultStage = stage;
+    this->defaultDirection = direction;
 }
 
 void Dispatcher::putStageBefore(std::string stage, std::string referenceStage)
 {
-    // check if stage exists
-    if (stagesByName.find(stage) == stagesByName.end())
-    {
-        logWarning("Stage {} not found", stage);
-        return;
-    }
-    // check if reference stage exists
-    if (stagesByName.find(referenceStage) == stagesByName.end())
-    {
-        logWarning("Reference stage {} not found", referenceStage);
-        return;
-    }
-    // find stage index in stagesOrder vector
-    auto it = std::find(stagesOrder.begin(), stagesOrder.end(), stage);
-    // find reference stage index in stagesOrder vector
-    auto it2 = std::find(stagesOrder.begin(), stagesOrder.end(), referenceStage);
-    // check if stage is before reference stage
-    if (it < it2)
-    {
-        logWarning("Stage {} is already before reference stage {}", stage, referenceStage);
-        return;
-    }
-
-    // check if stage is the same as reference stage
-    if (it == it2)
-    {
-        logWarning("Stage {} is the same as reference stage {}", stage, referenceStage);
-        return;
-    }
-    // remove stage from vector
-    stagesOrder.erase(it);
-    it2 = std::find(stagesOrder.begin(), stagesOrder.end(), referenceStage);
-    // insert stage it before reference stage it2
-    stagesOrder.insert(it2, stage);
+    this->putStage(stage, referenceStage, Direction::Before);
 }
 
 void Dispatcher::putStageAfter(std::string stage, std::string referenceStage)
 {
-    // check if stage exists
-    if (stagesByName.find(stage) == stagesByName.end())
+    this->putStage(stage, referenceStage, Direction::After);
+}
+
+void Dispatcher::putStage(std::string stage, std::string referenceStage, Direction direction)
+{
+    // Check if the stage is valid.
+    if (stage == "")
     {
-        logWarning("Stage {} not found", stage);
-        return;
+        logCritical("Dispatcher::putStage(): stage name must not be empty");
+        abort();
     }
-    // check if reference stage exists
-    if (stagesByName.find(referenceStage) == stagesByName.end())
+    // Check if they're the same stage.
+    else if (stage == referenceStage)
     {
-        logWarning("Reference stage {} not found", referenceStage);
-        return;
-    }
-    // find stage index in stagesOrder vector
-    auto it = std::find(stagesOrder.begin(), stagesOrder.end(), stage);
-    // find reference stage index in stagesOrder vector
-    auto it2 = std::find(stagesOrder.begin(), stagesOrder.end(), referenceStage);
-    // check if stage is after reference stage
-    if (it > it2)
-    {
-        logWarning("Stage {} is already after reference stage {}", stage, referenceStage);
-        return;
+        logCritical("Dispatcher::putStage(): can't put the stage '{}' after/before itself", stage);
+        abort();
     }
 
-    // check if stage is the same as reference stage
-    if (it == it2)
+    // Get the iterators for both stages in the order vector.
+    auto it = std::find(this->stagesOrder.begin(), this->stagesOrder.end(), stage);
+    auto refIt = std::find(this->stagesOrder.begin(), this->stagesOrder.end(), referenceStage);
+
+    // Check if the reference stage exists
+    if (refIt == this->stagesOrder.end() && !referenceStage.empty())
     {
-        logWarning("Stage {} is the same as reference stage {}", stage, referenceStage);
-        return;
+        logCritical("Dispatcher::putStage(): stage '{}' not found", referenceStage);
+        abort();
     }
-    // remove stage from vector
-    stagesOrder.erase(it);
-    it2 = std::find(stagesOrder.begin(), stagesOrder.end(), referenceStage);
-    // insert stage it after reference stage it2
-    stagesOrder.insert(it2 + 1, stage);
+
+    // Remove the stage from the order vector and reinsert it before the reference stage.
+    if (it != this->stagesOrder.end())
+    {
+        this->stagesOrder.erase(it);
+    }
+
+    if (referenceStage.empty() || direction == Direction::Before)
+    {
+        this->stagesOrder.insert(refIt, stage);
+    }
+    else
+    {
+        this->stagesOrder.insert(refIt + 1, stage);
+    }
+
+    // Check if we need to initialize the new stage.
+    if (this->stagesByName.find(stage) == this->stagesByName.end())
+    {
+        this->stagesByName[stage] = std::vector<std::unique_ptr<AnySystemWrapper>>();
+    }
 }

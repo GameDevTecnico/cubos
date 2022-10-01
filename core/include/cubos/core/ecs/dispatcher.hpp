@@ -2,10 +2,12 @@
 #define CUBOS_CORE_ECS_DISPATCHER_HPP
 
 #include <cubos/core/ecs/system.hpp>
-#include <iostream>
+#include <cubos/core/log.hpp>
+
 #include <map>
 #include <vector>
-#include <cubos/core/log.hpp>
+#include <string>
+#include <memory>
 
 namespace cubos::core::ecs
 {
@@ -17,60 +19,59 @@ namespace cubos::core::ecs
         // Direction enum
         enum class Direction
         {
-            BEFORE,
-            AFTER
+            Before,
+            After
         };
 
-        /// Registers a system in a stage
-        /// @param system System to register
-        /// @param stage Stage to register the system in
+        /// Registers a system in a stage.
+        /// @param system System to register.
+        /// @param stage Stage to register the system in.
         template <typename F> void registerSystem(F system, std::string stage);
 
-        /// Calls all systems in order of the stages they are in
-        /// @param world World to call the systems in
-        void callSystems(World& world, ecs::Commands& cmds);
+        /// Calls all systems in order of the stages they are in.
+        /// @param world World to call the systems in.
+        void callSystems(World& world, Commands& cmds);
 
-        /// Sets the default stage and the direction new stages will be added in
-        /// @param stage the stage to set as default
-        /// @param direction Direction to add new stages in
+        /// Sets the default stage and the direction new stages will be added in.
+        /// @param stage The stage to set as default.
+        /// @param direction Direction to add new stages in.
         void setDefaultStage(std::string stage, ecs::Dispatcher::Direction direction);
 
-        /// Puts a stage before another stage
-        /// @param stage Stage to put before another stage
-        /// @param before Stage to put the stage before
+        /// Puts a stage before another stage.
+        /// @param stage Stage to put before another stage.
+        /// @param before Stage to put the stage before.
         void putStageBefore(std::string stage, std::string referenceStage);
 
-        /// Puts a stage after another stage
-        /// @param stage Stage to put after another stage
-        /// @param after Stage to put the stage after
+        /// Puts a stage after another stage.
+        /// @param stage Stage to put after another stage.
+        /// @param after Stage to put the stage after.
         void putStageAfter(std::string stage, std::string referenceStage);
 
-    private:
-        /// Registers a new stage
-        /// @param stage the stage to register
-        /// @param defaultStage the default stage of the dispatcher
-        void registerStage(std::string stage, std::string defaultStage);
+        /// Puts a stage next to another stage.
+        /// @param stage Stage to put next to another stage.
+        /// @param referenceStage Stage to put the stage next to.
+        /// @param direction Direction to put the stage in.
+        void putStage(std::string stage, std::string referenceStage, Direction direction);
 
-        std::vector<std::string> stagesOrder;                                               ///< Vector of stages order
-        std::map<std::string, std::vector<std::unique_ptr<AnySystemWrapper>>> stagesByName; ///< Map of stages by name
-        std::string defaultStage;                                                           ///< Default stage
-        ecs::Dispatcher::Direction direction; ///< Direction of default stage
+    private:
+        std::vector<std::string> stagesOrder; ///< Order in which stages are dispatched.
+        std::map<std::string, std::vector<std::unique_ptr<AnySystemWrapper>>> stagesByName; ///< Maps names to stages.
+        std::string defaultStage;   ///< The stage that new stages are put after/before.
+        Direction defaultDirection; ///< The direction new stages are put in relation to the default stage.
     };
 
     template <typename F> void Dispatcher::registerSystem(F system, std::string stage)
     {
-        // Register stage if it doesn't exist
-        if (stagesByName.find(stage) == stagesByName.end())
+        // Register stage if it doesn't exist.
+        if (this->stagesByName.find(stage) == this->stagesByName.end())
         {
-            registerStage(stage, defaultStage);
+            this->putStage(stage, this->defaultStage, this->defaultDirection);
         }
 
-        // Create system wrapper
+        // Wrap the system and put it in its stage.
         auto systemWrapper = std::make_unique<SystemWrapper<F>>(system);
-
-        // Add system to stage
-        stagesByName[stage].push_back(std::move(systemWrapper));
-        logInfo("Added system to: {}", stage);
+        this->stagesByName[stage].push_back(std::move(systemWrapper));
+        logInfo("Dispatcher:::registerSystem(): added system to stage '{}'", stage);
     }
 } // namespace cubos::core::ecs
 #endif // CUBOS_CORE_ECS_DISPATCHER_HPP

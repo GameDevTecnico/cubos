@@ -167,9 +167,9 @@ int main()
     // register systems wrappers on dispatcher
     dispatcher.registerSystem(mySystem, "Main");
     dispatcher.registerSystem(printPositions, "Transform");
-    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::AFTER);
+    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::After);
     dispatcher.registerSystem(printPlayerPosition, "New");
-    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::BEFORE);
+    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::Before);
     dispatcher.registerSystem(
         [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; },
         "PreProcess");

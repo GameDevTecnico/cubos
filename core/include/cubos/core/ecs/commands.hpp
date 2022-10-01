@@ -11,6 +11,7 @@ namespace cubos::core::ecs
 {
     class Blueprint;
     class Commands;
+    class Dispatcher;
 
     /// Used to edit an entity created by the Commands object.
     class EntityBuilder final
@@ -115,12 +116,9 @@ namespace cubos::core::ecs
         /// @returns Blueprint builder which allows components to be overridden.
         BlueprintBuilder spawn(const Blueprint& blueprint);
 
-        /// Commits the commands to the world.
-        /// TODO: make this private after implementing the dispatcher.
-        void commit();
-
     private:
         friend EntityBuilder;
+        friend Dispatcher;
 
         /// Object used internally which stores components of a specific type, queued for addition to the component
         /// manager.
@@ -153,6 +151,9 @@ namespace cubos::core::ecs
 
         /// Clears the commands.
         void clear();
+
+        /// Commits the commands to the world.
+        void commit();
 
         std::mutex mutex; ///< Make this thread-safe.
         World& world;     ///< The world to which the commands will be applied.

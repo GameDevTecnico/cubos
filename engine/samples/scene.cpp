@@ -9,6 +9,7 @@
 #include <cubos/core/ecs/registry.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/ecs/system.hpp>
+#include <cubos/core/ecs/dispatcher.hpp>
 
 #include <cubos/engine/data/asset_manager.hpp>
 #include <cubos/engine/data/scene.hpp>
@@ -68,37 +69,43 @@ int main(int argc, char** argv)
     assetManager.registerType<data::Scene>();
     assetManager.importMeta(FileSystem::find("/assets/"));
 
-    // Load the scene.
-    auto scene = assetManager.load<data::Scene>("scenes/main");
-
     // Create an ECS world.
     auto world = World();
     world.registerComponent<Num>();
     world.registerComponent<Parent>();
 
-    // Spawn the scene.
-    auto commands = Commands(world);
-    auto root = commands.create().entity();
-    commands.spawn(scene->blueprint).add("main", Parent{root});
-    commands.commit();
+    Dispatcher dispatcher;
 
-    // Query the world with systems.
-    SystemWrapper([](Query<const Parent*, const Num*> query) {
-        for (auto [entity, parent, num] : query)
-        {
-            Stream::stdOut.printf("Entity {}", entity.index);
+    dispatcher.registerSystem(
+        [&](Commands& cmds) {
+            // Load and spawn the scene.
+            auto scene = assetManager.load<data::Scene>("scenes/main");
+            auto root = cmds.create().entity();
+            cmds.spawn(scene->blueprint).add("main", Parent{root});
+        },
+        "startup");
 
-            if (parent != nullptr)
+    dispatcher.registerSystem(
+        [](Query<const Parent*, const Num*> query) {
+            for (auto [entity, parent, num] : query)
             {
-                Stream::stdOut.printf(" (Parent = {})", parent->entity.index);
-            }
+                Stream::stdOut.printf("Entity {}", entity.index);
 
-            if (num != nullptr)
-            {
-                Stream::stdOut.printf(" (Num = {})", num->value);
-            }
+                if (parent != nullptr)
+                {
+                    Stream::stdOut.printf(" (Parent = {})", parent->entity.index);
+                }
 
-            Stream::stdOut.put('\n');
-        }
-    }).call(world, commands);
+                if (num != nullptr)
+                {
+                    Stream::stdOut.printf(" (Num = {})", num->value);
+                }
+
+                Stream::stdOut.put('\n');
+            }
+        },
+        "print");
+
+    auto cmds = Commands(world);
+    dispatcher.callSystems(world, cmds);
 }
