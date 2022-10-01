@@ -59,53 +59,56 @@ namespace cubos::core::data
 CUBOS_REGISTER_COMPONENT(Num, "Num");
 CUBOS_REGISTER_COMPONENT(Parent, "Parent");
 
+void setup(Commands& cmds, std::shared_ptr<data::AssetManager>& assetManager)
+{
+    // Load and spawn the scene.
+    auto scene = assetManager->load<data::Scene>("scenes/main");
+    auto root = cmds.create().entity();
+    cmds.spawn(scene->blueprint).add("main", Parent{root});
+}
+
+void print_stuff(Query<const Parent*, const Num*> query)
+{
+    for (auto [entity, parent, num] : query)
+    {
+        Stream::stdOut.printf("Entity {}", entity.index);
+
+        if (parent != nullptr)
+        {
+            Stream::stdOut.printf(" (Parent = {})", parent->entity.index);
+        }
+
+        if (num != nullptr)
+        {
+            Stream::stdOut.printf(" (Num = {})", num->value);
+        }
+
+        Stream::stdOut.put('\n');
+    }
+}
+
 int main(int argc, char** argv)
 {
     core::initializeLogger();
     FileSystem::mount("/assets/", std::make_shared<STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
 
     // Initialize the asset manager.
-    data::AssetManager assetManager;
-    assetManager.registerType<data::Scene>();
-    assetManager.importMeta(FileSystem::find("/assets/"));
+    auto assetManager = std::make_shared<data::AssetManager>();
+    assetManager->registerType<data::Scene>();
+    assetManager->importMeta(FileSystem::find("/assets/"));
 
     // Create an ECS world.
     auto world = World();
+    world.registerResource<std::shared_ptr<data::AssetManager>>(assetManager);
     world.registerComponent<Num>();
     world.registerComponent<Parent>();
 
+    // Create the dispatcher and register the systems.
     Dispatcher dispatcher;
+    dispatcher.registerSystem(setup, "Setup");
+    dispatcher.registerSystem(print_stuff, "End");
 
-    dispatcher.registerSystem(
-        [&](Commands& cmds) {
-            // Load and spawn the scene.
-            auto scene = assetManager.load<data::Scene>("scenes/main");
-            auto root = cmds.create().entity();
-            cmds.spawn(scene->blueprint).add("main", Parent{root});
-        },
-        "startup");
-
-    dispatcher.registerSystem(
-        [](Query<const Parent*, const Num*> query) {
-            for (auto [entity, parent, num] : query)
-            {
-                Stream::stdOut.printf("Entity {}", entity.index);
-
-                if (parent != nullptr)
-                {
-                    Stream::stdOut.printf(" (Parent = {})", parent->entity.index);
-                }
-
-                if (num != nullptr)
-                {
-                    Stream::stdOut.printf(" (Num = {})", num->value);
-                }
-
-                Stream::stdOut.put('\n');
-            }
-        },
-        "print");
-
+    // Create the command buffer and run the dispatcher.
     auto cmds = Commands(world);
     dispatcher.callSystems(world, cmds);
 }
