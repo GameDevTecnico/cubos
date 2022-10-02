@@ -6,6 +6,7 @@ var namespacecubos_1_1core_1_1ecs =
     [ "BlueprintBuilder", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder" ],
     [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html", "classcubos_1_1core_1_1ecs_1_1Commands" ],
     [ "ComponentManager", "classcubos_1_1core_1_1ecs_1_1ComponentManager.html", "classcubos_1_1core_1_1ecs_1_1ComponentManager" ],
+    [ "Dispatcher", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html", "classcubos_1_1core_1_1ecs_1_1Dispatcher" ],
     [ "Entity", "classcubos_1_1core_1_1ecs_1_1Entity.html", "classcubos_1_1core_1_1ecs_1_1Entity" ],
     [ "EntityBuilder", "classcubos_1_1core_1_1ecs_1_1EntityBuilder.html", "classcubos_1_1core_1_1ecs_1_1EntityBuilder" ],
     [ "EntityManager", "classcubos_1_1core_1_1ecs_1_1EntityManager.html", "classcubos_1_1core_1_1ecs_1_1EntityManager" ],

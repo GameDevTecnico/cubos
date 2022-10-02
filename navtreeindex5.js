@@ -1,5 +1,15 @@
 var NAVTREEINDEX5 =
 {
+"structcubos_1_1core_1_1gl_1_1PointLight.html#aae92c0d431ec7bc5fdc371229376ab0c":[5,0,0,0,2,14,1],
+"structcubos_1_1core_1_1gl_1_1PointLight.html#ab1c438339ac64461a6c0aedd6de675c8":[5,0,0,0,2,14,2],
+"structcubos_1_1core_1_1gl_1_1PointLight.html#ad6154e0fc199fbbb0f1a75cf96e1c4b4":[5,0,0,0,2,14,3],
+"structcubos_1_1core_1_1gl_1_1RasterStateDesc.html":[5,0,0,0,2,15],
+"structcubos_1_1core_1_1gl_1_1RasterStateDesc.html#a1b1fe8effe89efb5cc016aeff8c60b6b":[5,0,0,0,2,15,0],
+"structcubos_1_1core_1_1gl_1_1RasterStateDesc.html#aae9708c86197ee4199a14aee96296d29":[5,0,0,0,2,15,3],
+"structcubos_1_1core_1_1gl_1_1RasterStateDesc.html#ab004a2a33f2bc9b5c9d55bf7fb751646":[5,0,0,0,2,15,1],
+"structcubos_1_1core_1_1gl_1_1RasterStateDesc.html#ab3c8d997346af251f89129cb8d616315":[5,0,0,0,2,15,4],
+"structcubos_1_1core_1_1gl_1_1RasterStateDesc.html#af558a1570433ac80e94b8d488bd79f8e":[5,0,0,0,2,15,2],
+"structcubos_1_1core_1_1gl_1_1SamplerDesc.html":[5,0,0,0,2,17],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a2c1272224d07f4ded27ec8bc01e73b5f":[5,0,0,0,2,17,7],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a3864dc1e10b2d054a4421f975ec3d3a3":[5,0,0,0,2,17,5],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a4ca6426e6c6b71c046bf82b2c3bf90bd":[5,0,0,0,2,17,2],
@@ -94,13 +104,13 @@ var NAVTREEINDEX5 =
 "structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd.html#a3a220188ca8110da00f4efa12b846687":[5,0,0,1,2,3,0,0],
 "structstd_1_1hash_3_01cubos_1_1core_1_1ecs_1_1Entity_01_4.html":[5,0,1,0],
 "structstd_1_1hash_3_01cubos_1_1core_1_1ecs_1_1Entity_01_4.html#aa22a10bba2beedfd230e24472453e9a5":[5,0,1,0,0],
-"system_8hpp_source.html":[6,0,0,0,0,0,1,10],
+"system_8hpp_source.html":[6,0,0,0,0,0,1,11],
 "transform__system_8hpp_source.html":[6,0,1,0,0,0,1,6],
 "util_8hpp_source.html":[6,0,0,0,0,0,2,7],
-"vec__storage_8hpp_source.html":[6,0,0,0,0,0,1,11],
+"vec__storage_8hpp_source.html":[6,0,0,0,0,0,1,12],
 "vertex_8hpp_source.html":[6,0,0,0,0,0,2,8],
 "window_8hpp_source.html":[6,0,0,0,0,0,3,6],
-"world_8hpp_source.html":[6,0,0,0,0,0,1,12],
+"world_8hpp_source.html":[6,0,0,0,0,0,1,13],
 "yaml__deserializer_8hpp_source.html":[6,0,0,0,0,0,0,15],
 "yaml__serializer_8hpp_source.html":[6,0,0,0,0,0,0,16]
 };
