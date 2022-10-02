@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"classcubos_1_1core_1_1memory_1_1Stream.html#a18872dfebd2fd0ecb675cf319e97f0f3":[5,0,0,0,4,2,22],
+"classcubos_1_1core_1_1memory_1_1Stream.html#a1937aad2d6607c9f24ce5a72f1c5e1a1":[5,0,0,0,4,2,13],
+"classcubos_1_1core_1_1memory_1_1Stream.html#a1ee2b8ab4e131d14dbb4db0f6a029069":[5,0,0,0,4,2,8],
 "classcubos_1_1core_1_1memory_1_1Stream.html#a2aa69cfa0ca02f3eee4fe1783cdf2149":[5,0,0,0,4,2,18],
 "classcubos_1_1core_1_1memory_1_1Stream.html#a2d15d5258bfcd87715b0f604b9ea142e":[5,0,0,0,4,2,2],
 "classcubos_1_1core_1_1memory_1_1Stream.html#a2e6e638bd2bfe6a60329aeb8c154674c":[5,0,0,0,4,2,32],
@@ -222,8 +225,8 @@ var NAVTREEINDEX3 =
 "file__system_8hpp_source.html":[6,0,0,0,0,0,0,8],
 "files.html":[6,0],
 "frame_8hpp_source.html":[6,0,1,0,0,0,2,2],
-"functions.html":[5,3,0,0],
 "functions.html":[5,3,0],
+"functions.html":[5,3,0,0],
 "functions_b.html":[5,3,0,1],
 "functions_c.html":[5,3,0,2],
 "functions_d.html":[5,3,0,3],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "functions_func_n.html":[5,3,1,12],
 "functions_func_o.html":[5,3,1,13],
 "functions_func_p.html":[5,3,1,14],
-"functions_func_q.html":[5,3,1,15],
-"functions_func_r.html":[5,3,1,16],
-"functions_func_s.html":[5,3,1,17],
-"functions_func_t.html":[5,3,1,18]
+"functions_func_q.html":[5,3,1,15]
 };

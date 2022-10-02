@@ -115,6 +115,10 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1Settings.html#a7c7e51718d2f6c2b196757d64a1fd259">clear</a> ()</td></tr>
 <tr class="memdesc:a7c7e51718d2f6c2b196757d64a1fd259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all the settings. <br /></td></tr>
 <tr class="separator:a7c7e51718d2f6c2b196757d64a1fd259"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f1c966921ac73f35c3128b6a671b42c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1Settings.html#a8f1c966921ac73f35c3128b6a671b42c">setBool</a> (const std::string &amp;key, const bool &amp;value)</td></tr>
+<tr class="separator:a8f1c966921ac73f35c3128b6a671b42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac63af799da1b5f765ca8c463bed6e2de"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1Settings.html#ac63af799da1b5f765ca8c463bed6e2de">getBool</a> (const std::string &amp;key, const bool &amp;defaultValue) const</td></tr>
+<tr class="separator:ac63af799da1b5f765ca8c463bed6e2de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba398a53536c67bf040030c5a2f98fc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1Settings.html#aba398a53536c67bf040030c5a2f98fc9">setString</a> (const std::string &amp;key, const std::string &amp;value)</td></tr>
 <tr class="separator:aba398a53536c67bf040030c5a2f98fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed639b9b2f48b6f7fd97badf9f1563f9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1Settings.html#aed639b9b2f48b6f7fd97badf9f1563f9">getString</a> (const std::string &amp;key, const std::string &amp;defaultValue) const</td></tr>
@@ -149,6 +153,42 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class used to manage settings. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac63af799da1b5f765ca8c463bed6e2de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac63af799da1b5f765ca8c463bed6e2de">&#9670;&nbsp;</a></span>getBool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cubos::core::Settings::getBool </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>defaultValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Retrieves the bool settings with a specific key. If no setting exists with such key, returns the default value. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>The setting's key. </td></tr>
+    <tr><td class="paramname">defaultValue</td><td>The value returned when not setting with the provided key exists. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The setting's value. </dd></dl>
+
+</div>
+</div>
 <a id="a7a21b85c5fc93e75730ed5815e9e3055"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a21b85c5fc93e75730ed5815e9e3055">&#9670;&nbsp;</a></span>getDouble()</h2>
 
@@ -276,6 +316,41 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">settingsToMerge</td><td>The settings to be merged to this instance. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8f1c966921ac73f35c3128b6a671b42c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f1c966921ac73f35c3128b6a671b42c">&#9670;&nbsp;</a></span>setBool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::Settings::setBool </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Defines a new bool setting. If the setting already exists, overrides its value with the new value. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>The setting's key. </td></tr>
+    <tr><td class="paramname">value</td><td>The setting's value. </td></tr>
   </table>
   </dd>
 </dl>

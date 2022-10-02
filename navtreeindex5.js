@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a2c1272224d07f4ded27ec8bc01e73b5f":[5,0,0,0,2,17,7],
+"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a3864dc1e10b2d054a4421f975ec3d3a3":[5,0,0,0,2,17,5],
+"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a4ca6426e6c6b71c046bf82b2c3bf90bd":[5,0,0,0,2,17,2],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a4d944747ddd0983631859dff193c9f3f":[5,0,0,0,2,17,0],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a55f08c3785965c5a3d59940eebde0993":[5,0,0,0,2,17,4],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#acca006edf712803f5d929fa120eb7f8b":[5,0,0,0,2,17,6],

@@ -16,6 +16,7 @@ var classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint =
     [ "setConstant", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a425a7fcb80c58bf9a95b42e8a5716e51", null ],
     [ "setConstant", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a4b3b417d90b1eeb73848b53d9cd03d39", null ],
     [ "setConstant", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a80533017bc8315fa901e85a9850ebce6", null ],
+    [ "setConstant", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a5ebf31e39364f5d59f469900f1c75137", null ],
     [ "setConstant", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a6537f2cd0ca6f208d106d5b840369612", null ],
     [ "setConstant", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#aecf2956b8e2ef8cc14b96eec9db643df", null ],
     [ "setConstant", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a5bedb705f40a435c84b8f2f49793f487", null ],
