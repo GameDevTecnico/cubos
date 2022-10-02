@@ -8,6 +8,7 @@
 #include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/registry.hpp>
+#include <cubos/core/ecs/dispatcher.hpp>
 
 using namespace cubos::core;
 
@@ -149,14 +150,9 @@ void mySystem(DeltaTime& dt, const MyResource& res)
     std::cout << "mySystem: " << dt.dt << " " << res.val << std::endl;
 }
 
-// Utility used while there's no dispatcher.
-template <typename F> void dispatch(ecs::World& world, ecs::Commands& cmds, const F f)
-{
-    ecs::SystemWrapper(f).call(world, cmds);
-}
-
 int main()
 {
+    initializeLogger();
     ecs::World world;
     world.registerResource<DeltaTime>(DeltaTime{1.0f});
     world.registerResource<MyResource>(MyResource{0});
@@ -165,17 +161,17 @@ int main()
     world.registerComponent<Velocity>();
     world.registerComponent<Parent>();
 
+    ecs::Dispatcher dispatcher;
     auto cmds = ecs::Commands(world);
-    dispatch(world, cmds, spawner);
-    cmds.commit();
-
-    dispatch(world, cmds, [](const DeltaTime& dt, MyResource& res) {
-        std::cout << "lambda: " << dt.dt << " " << res.val << std::endl;
-    });
-    dispatch(world, cmds, []() { std::cout << "no arguments lambda" << std::endl; });
-    dispatch(world, cmds, [](const DeltaTime& dt) { std::cout << "dt lambda: " << dt.dt << std::endl; });
-
-    dispatch(world, cmds, mySystem);
-    dispatch(world, cmds, printPositions);
-    dispatch(world, cmds, printPlayerPosition);
+    dispatcher.addSystem(mySystem, "Main");
+    dispatcher.addSystem(printPositions, "Transform");
+    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::After);
+    dispatcher.addSystem(printPlayerPosition, "New");
+    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::Before);
+    dispatcher.addSystem(
+        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; },
+        "PreProcess");
+    dispatcher.putStageBefore("PreProcess", "Transform");
+    // call systems on dispatcher
+    dispatcher.callSystems(world, cmds);
 }
