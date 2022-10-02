@@ -11,6 +11,7 @@ set(ENGINE_SAMPLES_SOURCES
     "asset_renderer.cpp"
     "scene.cpp"
     "bloom.cpp"
+    "ssao.cpp"
 )
 
 # For each sample file, create a target named after the file but without the

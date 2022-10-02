@@ -29,6 +29,19 @@ namespace cubos::core
         /// Clears all the settings.
         void clear();
 
+        /// Defines a new bool setting.
+        /// If the setting already exists, overrides its value with the new value.
+        /// @param key The setting's key.
+        /// @param value The setting's value.
+        void setBool(const std::string& key, const bool& value);
+
+        /// Retrieves the bool settings with a specific key.
+        /// If no setting exists with such key, returns the default value.
+        /// @param key The setting's key.
+        /// @param defaultValue The value returned when not setting with the provided key exists.
+        /// @return The setting's value.
+        bool getBool(const std::string& key, const bool& defaultValue) const;
+
         /// Defines a new string setting.
         /// If the setting already exists, overrides its value with the new value.
         /// @param key The setting's key.
