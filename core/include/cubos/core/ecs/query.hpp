@@ -205,7 +205,7 @@ namespace cubos::core::ecs
     }
 
     template <typename... ComponentTypes>
-    Query<ComponentTypes...>::Iterator& Query<ComponentTypes...>::Iterator::operator++()
+    typename Query<ComponentTypes...>::Iterator& Query<ComponentTypes...>::Iterator::operator++()
     {
         ++this->it;
         return *this;
@@ -226,7 +226,7 @@ namespace cubos::core::ecs
         size_t ids[] = {
             (impl::QueryFetcher<ComponentTypes>::IS_OPTIONAL
                  ? SIZE_MAX
-                 : this->world.componentManager.getID<
+                 : this->world.componentManager.template getID<
                        std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
         this->mask.reset();
         this->mask.set(0);
@@ -239,12 +239,12 @@ namespace cubos::core::ecs
         }
     }
 
-    template <typename... ComponentTypes> Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::begin()
+    template <typename... ComponentTypes> typename Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::begin()
     {
         return Iterator(this->world, this->fetched, this->world.entityManager.withMask(this->mask));
     }
 
-    template <typename... ComponentTypes> Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::end()
+    template <typename... ComponentTypes> typename Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::end()
     {
         return Iterator(this->world, this->fetched, this->world.entityManager.end());
     }
