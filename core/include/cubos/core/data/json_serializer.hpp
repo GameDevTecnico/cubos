@@ -59,6 +59,7 @@ namespace cubos::core::data
             std::string name;            ///< The name of the value being serialized.
         };
 
+        memory::Stream& stream;   ///< The stream to serialize to.
         std::stack<Frame> frames; ///< The stack of frames.
         int indent;               ///< The indentation of the JSON output.
     };

@@ -59,6 +59,7 @@ namespace cubos::core::data
         /// Prints spaces to indent the output.
         void printIndent();
 
+        memory::Stream& stream;  ///< The stream to serialize to.
         std::stack<State> state; ///< The current state of the serializer.
         int indent;              ///< The current indentation level.
         bool pretty;             ///< Whether to pretty-print the output.
