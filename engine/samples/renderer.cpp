@@ -45,7 +45,7 @@ int main(void)
         cube.set({1, 0, 1}, 3);
         cube.set({1, 1, 0}, 1);
         cube.set({1, 1, 1}, 2);
-        Renderer::GridID id = renderer.upload(cube);
+        auto gpuCube = renderer.upload(cube);
 
         // Add a copy pass to the post processing stack.
         renderer.pps().addPass<pps::CopyPass>();
@@ -94,7 +94,7 @@ int main(void)
                                         glm::rotate(glm::mat4(1.0f), glm::radians(t), axis) *
                                         glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f)) *
                                         glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
-                        frame.draw(id, modelMat);
+                        frame.draw(gpuCube, modelMat);
                     }
                 }
             }

@@ -51,7 +51,7 @@ namespace cubos::core::data
             Dictionary
         };
 
-        /// The current frame of serialization.
+        /// The current frame of deserialization.
         struct Frame
         {
             Mode mode;                 ///< The current mode of deserialization.

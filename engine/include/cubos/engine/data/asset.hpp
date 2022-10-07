@@ -108,7 +108,7 @@ namespace cubos::engine::data
     {
         if (this->ptr == nullptr)
         {
-            core::logError("Asset::get(): can't get reference to data since the handle is null");
+            core::logCritical("Asset::get(): can't get reference to data since the handle is null");
             abort();
         }
         return *this->ptr;

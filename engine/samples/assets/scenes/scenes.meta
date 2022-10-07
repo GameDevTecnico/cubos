@@ -1,0 +1,13 @@
+---
+metas:
+  - id: scenes/main
+    type: Scene
+    usage: Dynamic
+    params:
+      path: /assets/scenes/main.cubos
+  - id: scenes/sub
+    type: Scene
+    usage: Dynamic
+    params:
+      path: /assets/scenes/sub.cubos
+...

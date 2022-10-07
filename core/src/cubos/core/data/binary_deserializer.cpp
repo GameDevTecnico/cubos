@@ -20,66 +20,66 @@ BinaryDeserializer::BinaryDeserializer(memory::Stream& stream, bool readLittleEn
 
 void BinaryDeserializer::readI8(int8_t& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
 }
 
 void BinaryDeserializer::readI16(int16_t& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
     value = fromEndianness(value, this->readLittleEndian);
 }
 
 void BinaryDeserializer::readI32(int32_t& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
     value = fromEndianness(value, this->readLittleEndian);
 }
 
 void BinaryDeserializer::readI64(int64_t& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
     value = fromEndianness(value, this->readLittleEndian);
 }
 
 void BinaryDeserializer::readU8(uint8_t& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
     value = fromEndianness(value, this->readLittleEndian);
 }
 
 void BinaryDeserializer::readU16(uint16_t& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
     value = fromEndianness(value, this->readLittleEndian);
 }
 
 void BinaryDeserializer::readU32(uint32_t& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
     value = fromEndianness(value, this->readLittleEndian);
 }
 
 void BinaryDeserializer::readU64(uint64_t& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
     value = fromEndianness(value, this->readLittleEndian);
 }
 
 void BinaryDeserializer::readF32(float& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
     value = fromEndianness(value, this->readLittleEndian);
 }
 
 void BinaryDeserializer::readF64(double& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
     value = fromEndianness(value, this->readLittleEndian);
 }
 
 void BinaryDeserializer::readBool(bool& value)
 {
-    this->failBit |= stream.read(&value, sizeof(value)) == sizeof(value);
+    this->failBit |= stream.read(&value, sizeof(value)) != sizeof(value);
 }
 
 void BinaryDeserializer::readString(std::string& value)

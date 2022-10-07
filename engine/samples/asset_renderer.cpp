@@ -67,7 +67,7 @@ int main(int argc, char** argv)
         frame.clear();
 
         // Add the car to the frame.
-        frame.draw(car->id, glm::scale(glm::mat4(1.0f), {0.1f, 0.1f, 0.1f}));
+        frame.draw(car->rendererGrid, glm::scale(glm::mat4(1.0f), {0.1f, 0.1f, 0.1f}));
 
         // Add lights to the frame.
         auto directionalRotation = glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));

@@ -50,6 +50,11 @@ namespace cubos::engine::data
         template <typename T>
         requires IsAsset<T> Asset<T> load(const std::string& id);
 
+        /// Stores the given asset data in the asset manager, with a certain
+        /// ID. If an asset with the same ID is already stored, it is replaced.
+        /// Assets created through this function are always dynamic, and should
+        /// @tparam T The type of the asset.
+
     private :
         /// Stores runtime information about an asset.
         struct Info

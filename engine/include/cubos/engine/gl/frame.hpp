@@ -19,14 +19,14 @@ namespace cubos::engine::gl
         /// Data of a single draw command.
         struct DrawCmd
         {
-            Renderer::GridID grid;
+            RendererGrid grid;
             glm::mat4 modelMat;
         };
 
         /// Submits a draw command.
-        /// @param grid The renderer identifier of the grid to draw.
+        /// @param grid The handle of the grid to draw.
         /// @param modelMat The model matrix of the grid, used for applying transformations.
-        void draw(Renderer::GridID grid, glm::mat4 modelMat);
+        void draw(RendererGrid grid, glm::mat4 modelMat);
 
         /// Sets the ambient light of the scene.
         /// @param color The color of the ambient light.

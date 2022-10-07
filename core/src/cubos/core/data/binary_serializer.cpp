@@ -85,6 +85,7 @@ void BinarySerializer::writeString(const char* value, const char*)
 {
     assert(value != nullptr);
     this->stream.print(value);
+    this->stream.put('\0');
 }
 
 void BinarySerializer::beginObject(const char*)
