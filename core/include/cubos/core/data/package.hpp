@@ -88,6 +88,9 @@ namespace cubos::core::data
         Package(const Package& rhs) = default;
         ~Package() = default;
 
+        Package& operator=(Package&& rhs) = default;
+        Package& operator=(const Package& rhs) = default;
+
         /// Packages trivially serializable data and returns the result.
         /// @tparam T The type of the data to package.
         /// @param data The data to package.
@@ -182,6 +185,10 @@ namespace cubos::core::data
         /// field count, the element count and the key-value pair count.
         /// @returns The size of the packaged
         size_t size() const;
+
+        /// Checks if the package is storing a structured data type (object, array or dictionary).
+        /// @returns True if the package is storing a structured data type, false otherwise.
+        bool isStructured() const;
 
         /// Gets a reference to a field of this package.
         /// If the package isn't storing an object or if the field doesn't exist, this method will abort.

@@ -75,4 +75,47 @@ TEST(Cubos_Core_Data_Package, Packaging_And_Unpackaging)
     EXPECT_STREQ(list[0].name.c_str(), "orange");
     EXPECT_STREQ(list[1].name.c_str(), "apple");
     EXPECT_STREQ(list[2].name.c_str(), "banana");
+
+    // Package and unpackage a list of lists.
+    std::vector<std::vector<bool>> listList = {
+        {true, false, true},
+        {false, false},
+    };
+    auto listListPkg = Package::from(listList);
+    listListPkg.into(listList);
+    EXPECT_EQ(listList.size(), 2);
+    EXPECT_EQ(listList[0].size(), 3);
+    EXPECT_EQ(listList[1].size(), 2);
+    EXPECT_EQ(listList[0][0], true);
+    EXPECT_EQ(listList[0][1], false);
+    EXPECT_EQ(listList[0][2], true);
+    EXPECT_EQ(listList[1][0], false);
+    EXPECT_EQ(listList[1][1], false);
+
+    // Package and unpackage a dictionary.
+    std::unordered_map<int, Fruit> dict = {
+        {0, {"orange", 100, 1.5}},
+        {1, {"apple", 200, 2.5}},
+    };
+    auto dictPkg = Package::from(dict);
+    dictPkg.into(dict);
+    EXPECT_EQ(dict.size(), 2);
+    EXPECT_STREQ(dict[0].name.c_str(), "orange");
+    EXPECT_STREQ(dict[1].name.c_str(), "apple");
+
+    // Package and unpackage a dictionary of lists.
+    std::unordered_map<std::string, std::vector<bool>> dictList = {
+        {"a", {true, false, true}},
+        {"b", {false, false}},
+    };
+    auto dictListPkg = Package::from(dictList);
+    dictListPkg.into(dictList);
+    EXPECT_EQ(dictList.size(), 2);
+    EXPECT_EQ(dictList.at("a").size(), 3);
+    EXPECT_EQ(dictList.at("b").size(), 2);
+    EXPECT_EQ(dictList.at("a")[0], true);
+    EXPECT_EQ(dictList.at("a")[1], false);
+    EXPECT_EQ(dictList.at("a")[2], true);
+    EXPECT_EQ(dictList.at("b")[0], false);
+    EXPECT_EQ(dictList.at("b")[1], false);
 }
