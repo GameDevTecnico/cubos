@@ -378,7 +378,7 @@ static bool editStructured(data::Package& pkg, const std::string& name)
                 {
                     auto key = pkg.dictionary()[i].first;
                     pickScalar(key, "Key");
-                    if (ImGui::Button("OK"))
+                    if (ImGui::IsItemDeactivatedAfterEdit())
                     {
                         pkg.dictionary().emplace(pkg.dictionary().begin(),
                                                  std::make_pair(key, pkg.dictionary()[i].second));
