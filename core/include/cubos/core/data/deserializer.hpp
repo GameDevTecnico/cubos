@@ -29,7 +29,7 @@ namespace cubos::core::data
 
     /// Concept for deserializable objects which require a context to be deserialized.
     template <typename T, typename TCtx>
-    concept ContextDeserializable = requires(Deserializer& s, T& obj, TCtx ctx)
+    concept ContextDeserializable = requires(Deserializer& s, T& obj, TCtx&& ctx)
     {
         {
             deserialize(s, obj, ctx)
@@ -104,7 +104,7 @@ namespace cubos::core::data
         /// @param obj The object to deserialize.
         /// @param ctx The context required to deserialize.
         template <typename T, typename TCtx>
-        requires(TriviallyDeserializable<T> && !ContextDeserializable<T, TCtx>) void read(T& obj, TCtx ctx);
+        requires(TriviallyDeserializable<T> && !ContextDeserializable<T, TCtx>) void read(T& obj, TCtx&& ctx);
 
         /// Deserializes a object.
         /// @tparam T The type of the object.
@@ -113,7 +113,7 @@ namespace cubos::core::data
         /// @param ctx The context required to deserialize.
         template <typename T, typename TCtx>
         requires ContextDeserializable<T, TCtx>
-        void read(T& obj, TCtx ctx);
+        void read(T& obj, TCtx&& ctx);
 
         /// Indicates that a object is currently being deserialized.
         virtual void beginObject() = 0;
@@ -156,14 +156,14 @@ namespace cubos::core::data
     }
 
     template <typename T, typename TCtx>
-    requires(TriviallyDeserializable<T> && !ContextDeserializable<T, TCtx>) void Deserializer::read(T& obj, TCtx)
+    requires(TriviallyDeserializable<T> && !ContextDeserializable<T, TCtx>) void Deserializer::read(T& obj, TCtx&&)
     {
         this->read(obj);
     }
 
     template <typename T, typename TCtx>
     requires ContextDeserializable<T, TCtx>
-    void Deserializer::read(T& obj, TCtx ctx)
+    void Deserializer::read(T& obj, TCtx&& ctx)
     {
         deserialize(*this, obj, ctx);
     }
@@ -316,7 +316,7 @@ namespace cubos::core::data
 
     template <typename T, typename TCtx>
     requires ContextDeserializable<T, TCtx>
-    void deserialize(Deserializer& d, std::vector<T>& vec, TCtx ctx)
+    void deserialize(Deserializer& d, std::vector<T>& vec, TCtx&& ctx)
     {
         size_t length = d.beginArray();
         vec.resize(length);
@@ -328,7 +328,7 @@ namespace cubos::core::data
     template <typename K, typename V, typename TCtx>
     requires(TriviallyDeserializable<K> || ContextDeserializable<K, TCtx>) &&
         (TriviallyDeserializable<V> ||
-         ContextDeserializable<V, TCtx>)void deserialize(Deserializer& d, std::unordered_map<K, V>& dic, TCtx ctx)
+         ContextDeserializable<V, TCtx>)void deserialize(Deserializer& d, std::unordered_map<K, V>& dic, TCtx&& ctx)
     {
         size_t length = d.beginDictionary();
         dic.clear();

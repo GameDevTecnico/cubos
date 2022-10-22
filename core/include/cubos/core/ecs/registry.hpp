@@ -20,7 +20,7 @@ namespace cubos::core::ecs
         /// @param id The id of the entity the component belongs to.
         /// @returns True if the component type was found and successfully instantiated, false otherwise.
         static bool create(const std::string& name, data::Deserializer& des, Blueprint& blueprint,
-                           data::SerializationMap<Entity, std::string>* map, Entity id);
+                           const data::SerializationMap<Entity, std::string>& map, Entity id);
 
         /// Registers a new component type.
         /// @tparam T The component type to register.
@@ -32,10 +32,15 @@ namespace cubos::core::ecs
         /// @returns The name of the component.
         static const std::string& name(std::type_index index);
 
+        /// Gets the type index of a component type.
+        /// @param name The name of the component.
+        /// @returns The type index of the component, or typeid(void) if the component type was not found.
+        static std::type_index index(const std::string& name);
+
     private:
         /// Function type for creating components from deserializers.
         using Creator =
-            std::function<bool(data::Deserializer&, Blueprint&, data::SerializationMap<Entity, std::string>*, Entity)>;
+            std::function<bool(data::Deserializer&, Blueprint&, const data::SerializationMap<Entity, std::string>&, Entity)>;
 
         /// Accesses the global component creator registry.
         static std::unordered_map<std::string, Creator>& creators();
@@ -53,7 +58,7 @@ namespace cubos::core::ecs
         assert(creators.find(name) == creators.end());
 
         creators.emplace(name, [](data::Deserializer& des, Blueprint& blueprint,
-                                  data::SerializationMap<Entity, std::string>* map, Entity id) {
+                                  const data::SerializationMap<Entity, std::string>& map, Entity id) {
             ComponentType comp;
             des.read(comp, map);
             if (des.failed())

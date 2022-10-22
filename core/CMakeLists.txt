@@ -72,12 +72,14 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/ui/imgui.cpp"
     "src/cubos/core/ui/serialization.cpp"
+    "src/cubos/core/ui/ecs.cpp"
 
     "src/cubos/core/ecs/entity_manager.cpp"
     "src/cubos/core/ecs/component_manager.cpp"
     "src/cubos/core/ecs/commands.cpp"
     "src/cubos/core/ecs/blueprint.cpp"
     "src/cubos/core/ecs/world.cpp"
+    "src/cubos/core/ecs/debug.cpp"
     "src/cubos/core/ecs/system.cpp"
     "src/cubos/core/ecs/dispatcher.cpp"
     "src/cubos/core/ecs/registry.cpp"
@@ -135,6 +137,7 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/ui/imgui.hpp"
     "include/cubos/core/ui/serialization.hpp"
+    "include/cubos/core/ui/ecs.hpp"
 
     "include/cubos/core/ecs/entity_manager.hpp"
     "include/cubos/core/ecs/resource_manager.hpp"
@@ -147,6 +150,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/null_storage.hpp"
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/query.hpp"
+    "include/cubos/core/ecs/debug.hpp"
     "include/cubos/core/ecs/system.hpp"
     "include/cubos/core/ecs/registry.hpp"
     "include/cubos/core/ecs/dispatcher.hpp"

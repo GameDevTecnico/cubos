@@ -14,7 +14,7 @@ Blueprint::~Blueprint()
 bool Blueprint::addFromDeserializer(Entity entity, const std::string& name, data::Deserializer& deserializer)
 {
     assert(entity.generation == 0);
-    return Registry::create(name, deserializer, *this, &this->map, entity);
+    return Registry::create(name, deserializer, *this, this->map, entity);
 }
 
 Entity Blueprint::entity(const std::string& name) const

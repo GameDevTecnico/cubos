@@ -14,7 +14,6 @@ namespace cubos::engine::ecs
 
         glm::vec3 vec = {0.0f, 0.0f, 0.0f}; ///< The position of the entity.
     };
-
 } // namespace cubos::engine::ecs
 
 #endif // CUBOS_ENGINE_ECS_POSITION_HPP

@@ -2,6 +2,7 @@
 #define CUBOS_CORE_ECS_SYSTEM_HPP
 
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/ecs/debug.hpp>
 #include <cubos/core/ecs/query.hpp>
 #include <cubos/core/ecs/commands.hpp>
 
@@ -16,6 +17,9 @@ namespace cubos::core::ecs
     {
         /// Whether the system uses commands or not.
         bool usesCommands;
+
+        /// Whether the system queries debug information or not.
+        bool usesDebug;
 
         /// The type set of resources the system reads.
         std::unordered_set<std::type_index> resourcesRead;
@@ -139,6 +143,24 @@ namespace cubos::core::ecs
             static Type arg(const World& world, Type&& fetched);
         };
 
+        template <> struct SystemFetcher<Debug>
+        {
+            using Type = Debug;
+
+            /// Adds the debug query to the system info structure.
+            /// @param info The system info structure to add to.
+            static void add(SystemInfo& info);
+
+            /// @param world The world to query from.
+            /// @param commands The commands object.
+            /// @returns The requested query data.
+            static Type fetch(const World& world, Commands& commands);
+
+            /// @param fetched The fetched query.
+            /// @returns The query.
+            static Type arg(const World& world, Type&& fetched);
+        };
+
         template <> struct SystemFetcher<Commands&>
         {
             using Type = Commands*;
@@ -209,7 +231,9 @@ namespace cubos::core::ecs
 
     template <typename... Args> SystemInfo impl::SystemTraits<void (*)(Args...)>::info()
     {
-        SystemInfo info;
+        auto info = SystemInfo();
+        info.usesCommands = false;
+        info.usesDebug = false;
         impl::SystemFetcher<std::tuple<Args...>>::add(info);
         return info;
     }
@@ -287,6 +311,23 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     Query<ComponentTypes...> impl::SystemFetcher<Query<ComponentTypes...>>::arg(const World& world,
                                                                                 Query<ComponentTypes...>&& fetched)
+    {
+        return std::move(fetched);
+    }
+
+    inline void impl::SystemFetcher<Debug>::add(SystemInfo& info)
+    {
+        info.usesDebug = true;
+    }
+
+    inline Debug impl::SystemFetcher<Debug>::fetch(const World& world, Commands&)
+    {
+        // Albeit incredibly cursed and ugly, this const_cast is safe since we're certain this system
+        // is the only one running in this stage.
+        return Debug(const_cast<World&>(world));
+    }
+
+    inline Debug impl::SystemFetcher<Debug>::arg(const World& world, Debug&& fetched)
     {
         return std::move(fetched);
     }

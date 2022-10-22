@@ -58,9 +58,19 @@ namespace cubos::core::ecs
         template <typename T> void registerComponent();
 
         /// Gets the ID of the component type.
+        /// @param type The type of the component.
+        /// @returns The ID of the component type.
+        size_t getIDFromIndex(std::type_index type) const;
+
+        /// Gets the ID of the component type.
         /// @tparam T The type of the component.
         /// @returns The ID of the component type.
         template <typename T> size_t getID() const;
+
+        /// Gets the type of the component.
+        /// @param id The ID of the component type.
+        /// @returns The type of the component.
+        std::type_index getType(size_t id) const;
 
         /// Gets the storage of the component type.
         /// @tparam T The type of the component.
@@ -92,8 +102,20 @@ namespace cubos::core::ecs
         /// @param id The ID of the entity.
         void removeAll(uint32_t id);
 
-        /// Commits the staged components to their storages.
-        void commit();
+        /// @brief Creates a package from a component of an entity.
+        /// @param id Entity ID.
+        /// @param componentId Component ID.
+        /// @returns A package containing the component entity.
+        data::Package pack(uint32_t id, size_t componentId,
+                           const data::SerializationMap<Entity, std::string>& map) const;
+
+        /// @brief Inserts a component into an entity, by unpacking a package.
+        /// @param id Entity ID.
+        /// @param componentId Component ID.
+        /// @param package Package to unpack.
+        /// @returns True if the package was unpacked successfully, false otherwise.
+        bool unpack(uint32_t id, size_t componentId, const data::Package& package,
+                    const data::SerializationMap<Entity, std::string>& map);
 
     private:
         struct Entry
@@ -162,7 +184,7 @@ namespace cubos::core::ecs
 
     template <typename T> size_t ComponentManager::getID() const
     {
-        return this->typeToIds.at(std::type_index(typeid(T)));
+        return this->getIDFromIndex(typeid(T));
     }
 
     template <typename T> ReadStorage<T> ComponentManager::read() const

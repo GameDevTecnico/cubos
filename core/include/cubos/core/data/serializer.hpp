@@ -28,7 +28,7 @@ namespace cubos::core::data
 
     /// Concept for serializable objects which require a context to be serialized.
     template <typename T, typename TCtx>
-    concept ContextSerializable = requires(Serializer& s, const T& obj, TCtx ctx, const char* name)
+    concept ContextSerializable = requires(Serializer& s, const T& obj, TCtx&& ctx, const char* name)
     {
         {
             serialize(s, obj, ctx, name)
@@ -120,7 +120,7 @@ namespace cubos::core::data
         /// @param ctx The context required to serialize.
         /// @param name The name of the object (optional).
         template <typename T, typename TCtx>
-        requires(TriviallySerializable<T> && !ContextSerializable<T, TCtx>) void write(const T& obj, TCtx ctx,
+        requires(TriviallySerializable<T> && !ContextSerializable<T, TCtx>) void write(const T& obj, TCtx&& ctx,
                                                                                        const char* name);
 
         /// Serializes a object which requires context to be serialized.
@@ -131,7 +131,7 @@ namespace cubos::core::data
         /// @param name The name of the object (optional).
         template <typename T, typename TCtx>
         requires ContextSerializable<T, TCtx>
-        void write(const T& obj, TCtx ctx, const char* name);
+        void write(const T& obj, TCtx&& ctx, const char* name);
 
         /// Serializes a object.
         /// @tparam T The type of the object.
@@ -139,7 +139,7 @@ namespace cubos::core::data
         /// @param obj The object to serialize.
         /// @param ctx The context required to serialize.
         /// @param name The name of the object (optional).
-        template <typename T, typename TCtx> void write(const T& obj, TCtx ctx, const char* name);
+        template <typename T, typename TCtx> void write(const T& obj, TCtx&& ctx, const char* name);
 
         /// Indicates that a object is currently being serialized.
         /// @param name The name of the object (optional).
@@ -185,7 +185,7 @@ namespace cubos::core::data
     }
 
     template <typename T, typename TCtx>
-    requires(TriviallySerializable<T> && !ContextSerializable<T, TCtx>) void Serializer::write(const T& obj, TCtx ctx,
+    requires(TriviallySerializable<T> && !ContextSerializable<T, TCtx>) void Serializer::write(const T& obj, TCtx&& ctx,
                                                                                                const char* name)
     {
         this->write(obj, name);
@@ -193,7 +193,7 @@ namespace cubos::core::data
 
     template <typename T, typename TCtx>
     requires ContextSerializable<T, TCtx>
-    void Serializer::write(const T& obj, TCtx ctx, const char* name)
+    void Serializer::write(const T& obj, TCtx&& ctx, const char* name)
     {
         serialize(*this, obj, ctx, name);
     }
@@ -312,7 +312,7 @@ namespace cubos::core::data
 
     template <typename T, typename TCtx>
     requires ContextSerializable<T, TCtx>
-    void serialize(Serializer& s, const std::vector<T>& vec, TCtx ctx, const char* name)
+    void serialize(Serializer& s, const std::vector<T>& vec, TCtx&& ctx, const char* name)
     {
         s.beginArray(vec.size(), name);
         for (const auto& obj : vec)
@@ -337,7 +337,7 @@ namespace cubos::core::data
     requires(TriviallySerializable<K> || ContextSerializable<K, TCtx>) &&
         (TriviallySerializable<V> || ContextSerializable<V, TCtx>)void serialize(Serializer& s,
                                                                                  const std::unordered_map<K, V>& dic,
-                                                                                 TCtx ctx, const char* name)
+                                                                                 TCtx&& ctx, const char* name)
     {
         s.beginDictionary(dic.size(), name);
         for (const auto& pair : dic)

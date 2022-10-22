@@ -1,5 +1,5 @@
-#ifndef CUBOS_ECS_WORLD_HPP
-#define CUBOS_ECS_WORLD_HPP
+#ifndef CUBOS_CORE_ECS_WORLD_HPP
+#define CUBOS_CORE_ECS_WORLD_HPP
 
 #include <cubos/core/log.hpp>
 #include <cubos/core/ecs/resource_manager.hpp>
@@ -72,7 +72,19 @@ namespace cubos::core::ecs
         /// @param entity Entity ID.
         template <typename T> bool has(Entity entity) const;
 
+        /// @brief Creates a package from the components of an entity.
+        /// @param entity Entity ID.
+        /// @returns A package containing the components of the entity.
+        data::Package pack(Entity entity) const;
+
+        /// @brief Unpacks components specified in a package into an entity.
+        /// @param entity Entity ID.
+        /// @param package Package to unpack.
+        /// @returns True if the package was unpacked successfully, false otherwise.
+        bool unpack(Entity entity, const data::Package& package);
+
     private:
+        friend class Debug;
         template <typename... ComponentTypes> friend class Query;
         template <typename T> friend class impl::QueryFetcher;
         friend class Commands;

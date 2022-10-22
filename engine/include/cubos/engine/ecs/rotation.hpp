@@ -14,7 +14,6 @@ namespace cubos::engine::ecs
 
         glm::quat quat = glm::quat(1.0f, 0.0f, 0.0f, 0.0f); ///< The rotation of the entity.
     };
-
 } // namespace cubos::engine::ecs
 
 #endif // CUBOS_ENGINE_ECS_ROTATION_HPP

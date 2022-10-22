@@ -25,6 +25,11 @@ bool SystemInfo::valid() const
 
 bool SystemInfo::compatible(const SystemInfo& other) const
 {
+    if (this->usesDebug || other.usesDebug)
+    {
+        return false;
+    }
+
     for (auto& rsc : this->resourcesRead)
     {
         if (other.resourcesWritten.contains(rsc))

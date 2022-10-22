@@ -25,14 +25,14 @@ namespace cubos::core::data
     /// @param map Map used to convert entity handles to the external representation.
     /// @param name The name of the entity.
     void serialize(Serializer& serializer, const ecs::Entity& entity,
-                   const SerializationMap<ecs::Entity, std::string>* map, const char* name);
+                   const SerializationMap<ecs::Entity, std::string>& map, const char* name);
 
     /// Deserializes an entity.
     /// @param deserializer The deserializer to use.
     /// @param entity The entity to deserialize.
     /// @param map Map used to convert from the external representation to entity handles.
     void deserialize(Deserializer& deserializer, ecs::Entity& entity,
-                     const SerializationMap<ecs::Entity, std::string>* map);
+                     const SerializationMap<ecs::Entity, std::string>& map);
 } // namespace cubos::core::data
 
 namespace cubos::core::ecs
@@ -124,10 +124,13 @@ namespace cubos::core::ecs
         /// @returns True if the entity is still valid, false otherwise.
         bool isValid(Entity entity) const;
 
-        /// Returns an iterator over all entities of a world with a certain set of components.
-        /// @param world The world to iterate over.
+        /// Returns an iterator over all entities.
+        /// @returns An iterator over all entities.
+        Iterator begin() const;
+
+        /// Returns an iterator over all entities with a certain set of components.
         /// @param mask The mask of the components to be iterated.
-        /// @returns An iterator over all entities of the world with the given components.
+        /// @returns An iterator over all entities with the given components.
         Iterator withMask(Entity::Mask mask) const;
 
         /// Returns an iterator which points to the end of the entity manager.

@@ -122,7 +122,7 @@ namespace cubos::core::ecs
                     it = this->buffers.emplace(typeid(ComponentTypes), new Buffer<ComponentTypes>()).first;
                 }
 
-                data::BinarySerializer(it->second->stream).write(components, &this->map, "data");
+                data::BinarySerializer(it->second->stream).write(components, this->map, "data");
                 it->second->names.push_back(this->map.getId(entity));
             }(),
 
@@ -140,7 +140,7 @@ namespace cubos::core::ecs
         for (auto name : this->names)
         {
             ComponentType type;
-            des.read(type, &map);
+            des.read(type, map);
             commands.add(map.getRef(name), std::move(type));
         }
         this->stream.seek(pos, memory::SeekOrigin::Begin);
@@ -170,8 +170,8 @@ namespace cubos::core::ecs
         {
             this->names.push_back(prefix + "." + name);
             ComponentType type;
-            des.read(type, &src);
-            ser.write(type, &dst, "data");
+            des.read(type, src);
+            ser.write(type, dst, "data");
         }
         buffer->stream.seek(pos, memory::SeekOrigin::Begin);
         buffer->mutex.unlock();

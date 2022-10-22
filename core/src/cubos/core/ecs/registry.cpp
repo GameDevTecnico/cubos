@@ -4,7 +4,7 @@ using namespace cubos::core;
 using namespace cubos::core::ecs;
 
 bool Registry::create(const std::string& name, data::Deserializer& des, Blueprint& blueprint,
-                      data::SerializationMap<Entity, std::string>* map, Entity id)
+                      const data::SerializationMap<Entity, std::string>& map, Entity id)
 {
     auto& creators = Registry::creators();
 
@@ -27,6 +27,20 @@ const std::string& Registry::name(std::type_index index)
         abort();
     }
     return it->second;
+}
+
+std::type_index Registry::index(const std::string& name)
+{
+    auto& names = Registry::names();
+    for (const auto& pair : names)
+    {
+        if (pair.second == name)
+        {
+            return pair.first;
+        }
+    }
+
+    return typeid(void);
 }
 
 std::unordered_map<std::string, Registry::Creator>& Registry::creators()
