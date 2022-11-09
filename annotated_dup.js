@@ -37,7 +37,9 @@ var annotated_dup =
           ] ],
           [ "Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html", "classcubos_1_1engine_1_1gl_1_1Frame" ],
           [ "Renderer", "classcubos_1_1engine_1_1gl_1_1Renderer.html", "classcubos_1_1engine_1_1gl_1_1Renderer" ]
-        ] ]
+        ] ],
+        [ "Cubos", "classcubos_1_1engine_1_1Cubos.html", "classcubos_1_1engine_1_1Cubos" ],
+        [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ]
       ] ]
     ] ],
     [ "std", null, [

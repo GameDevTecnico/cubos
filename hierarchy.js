@@ -27,6 +27,7 @@ var hierarchy =
     [ "cubos::core::gl::FramebufferDesc::CubeMapArrayTarget", "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1CubeMapArrayTarget.html", null ],
     [ "cubos::core::gl::CubeMapDesc", "structcubos_1_1core_1_1gl_1_1CubeMapDesc.html", null ],
     [ "cubos::core::gl::FramebufferDesc::CubeMapTarget", "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1CubeMapTarget.html", null ],
+    [ "cubos::engine::Cubos", "classcubos_1_1engine_1_1Cubos.html", null ],
     [ "cubos::core::io::Cursor", "classcubos_1_1core_1_1io_1_1Cursor.html", null ],
     [ "cubos::core::data::EmbeddedArchive::Data", "structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html", null ],
     [ "cubos::core::gl::Debug", "classcubos_1_1core_1_1gl_1_1Debug.html", null ],
@@ -60,8 +61,8 @@ var hierarchy =
     [ "cubos::core::gl::impl::Framebuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1Framebuffer.html", null ],
     [ "cubos::core::gl::FramebufferDesc", "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html", null ],
     [ "cubos::core::gl::FramebufferDesc::FramebufferTarget", "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget.html", null ],
-    [ "cubos::engine::ecs::Grid", "structcubos_1_1engine_1_1ecs_1_1Grid.html", null ],
     [ "cubos::engine::data::Grid", "structcubos_1_1engine_1_1data_1_1Grid.html", null ],
+    [ "cubos::engine::ecs::Grid", "structcubos_1_1engine_1_1ecs_1_1Grid.html", null ],
     [ "cubos::core::gl::Grid", "classcubos_1_1core_1_1gl_1_1Grid.html", null ],
     [ "std::hash< cubos::core::ecs::Entity >", "structstd_1_1hash_3_01cubos_1_1core_1_1ecs_1_1Entity_01_4.html", null ],
     [ "cubos::core::gl::impl::IndexBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1IndexBuffer.html", null ],
@@ -84,8 +85,8 @@ var hierarchy =
     [ "cubos::engine::gl::pps::Manager", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html", null ],
     [ "cubos::core::gl::Material", "structcubos_1_1core_1_1gl_1_1Material.html", null ],
     [ "cubos::engine::data::Meta", "classcubos_1_1engine_1_1data_1_1Meta.html", null ],
-    [ "cubos::engine::data::Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", null ],
     [ "cubos::core::gl::Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
+    [ "cubos::engine::data::Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", null ],
     [ "cubos::engine::gl::pps::Pass", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html", [
       [ "cubos::engine::gl::pps::BloomPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html", null ],
       [ "cubos::engine::gl::pps::CopyPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html", null ]
@@ -128,6 +129,7 @@ var hierarchy =
     [ "cubos::core::gl::impl::ShaderBindingPoint", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html", null ],
     [ "cubos::core::gl::impl::ShaderPipeline", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderPipeline.html", null ],
     [ "cubos::core::gl::impl::ShaderStage", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderStage.html", null ],
+    [ "cubos::engine::ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", null ],
     [ "cubos::core::io::Source", "classcubos_1_1core_1_1io_1_1Source.html", [
       [ "cubos::core::io::ButtonPress", "classcubos_1_1core_1_1io_1_1ButtonPress.html", null ],
       [ "cubos::core::io::DoubleAxis", "classcubos_1_1core_1_1io_1_1DoubleAxis.html", null ],
