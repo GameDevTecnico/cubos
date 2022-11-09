@@ -7,10 +7,8 @@
 
 #include <cubos/core/ecs/vec_storage.hpp>
 #include <cubos/core/ecs/registry.hpp>
-#include <cubos/core/ecs/world.hpp>
-#include <cubos/core/ecs/system.hpp>
-#include <cubos/core/ecs/dispatcher.hpp>
 
+#include <cubos/engine/cubos.hpp>
 #include <cubos/engine/data/asset_manager.hpp>
 #include <cubos/engine/data/scene.hpp>
 
@@ -59,10 +57,13 @@ namespace cubos::core::data
 CUBOS_REGISTER_COMPONENT(Num, "Num");
 CUBOS_REGISTER_COMPONENT(Parent, "Parent");
 
-void setup(Commands& cmds, std::shared_ptr<data::AssetManager>& assetManager)
+void setup(Commands& cmds, data::AssetManager& assetManager)
 {
+    assetManager.registerType<data::Scene>();
+    assetManager.importMeta(FileSystem::find("/assets/"));
+
     // Load and spawn the scene.
-    auto scene = assetManager->load<data::Scene>("scenes/main");
+    auto scene = assetManager.load<data::Scene>("scenes/main");
     auto root = cmds.create().entity();
     cmds.spawn(scene->blueprint).add("main", Parent{root});
 }
@@ -94,21 +95,14 @@ int main(int argc, char** argv)
 
     // Initialize the asset manager.
     auto assetManager = std::make_shared<data::AssetManager>();
-    assetManager->registerType<data::Scene>();
-    assetManager->importMeta(FileSystem::find("/assets/"));
 
-    // Create an ECS world.
-    auto world = World();
-    world.registerResource<std::shared_ptr<data::AssetManager>>(assetManager);
-    world.registerComponent<Num>();
-    world.registerComponent<Parent>();
+    cubos::engine::Cubos()
+        .addResource<data::AssetManager>()
+        .addComponent<Num>()
+        .addComponent<Parent>()
 
-    // Create the dispatcher and register the systems.
-    Dispatcher dispatcher;
-    dispatcher.addSystem(setup, "Setup");
-    dispatcher.addSystem(printStuff, "End");
+        .addStartupSystem(setup, "Setup")
+        .addStartupSystem(printStuff, "End")
 
-    // Create the command buffer and run the dispatcher.
-    auto cmds = Commands(world);
-    dispatcher.callSystems(world, cmds);
+        .run();
 }
