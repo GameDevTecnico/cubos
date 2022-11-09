@@ -114,6 +114,13 @@ namespace cubos::core
     }
 } // namespace cubos::core
 
+#define CUBOS_TRACE(...) SPDLOG_TRACE(__VA_ARGS__)
+#define CUBOS_DEBUG(...) SPDLOG_DEBUG(__VA_ARGS__)
+#define CUBOS_INFO(...) SPDLOG_INFO(__VA_ARGS__)
+#define CUBOS_WARN(...) SPDLOG_WARN(__VA_ARGS__)
+#define CUBOS_ERROR(...) SPDLOG_ERROR(__VA_ARGS__)
+#define CUBOS_CRITICAL(...) SPDLOG_CRITICAL(__VA_ARGS__)
+
 // Implement custom formatting for all trivially serializable types.
 
 template <typename T>
