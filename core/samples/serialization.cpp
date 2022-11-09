@@ -11,7 +11,7 @@ using namespace cubos::core::data;
 class MySerializer : public Serializer
 {
 public:
-    MySerializer(Stream& s) : Serializer(s)
+    MySerializer(Stream& s) : stream(s)
     {
         this->dictMode.push(false);
         this->key = true;
@@ -185,7 +185,6 @@ public:
             this->stream.printf("string {}: \"{}\"\n", name ? name : "unnamed", x);
     }
 
-protected:
     virtual void beginObject(const char* name) override
     {
         this->stream.printf("object {}: {\n", name ? name : "unnamed");
@@ -238,6 +237,7 @@ protected:
     }
 
 private:
+    Stream& stream;
     std::stack<bool> dictMode;
     bool key = false;
 };

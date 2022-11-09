@@ -223,6 +223,13 @@ namespace cubos::core::data
         d.readBool(value);
     }
 
+    inline void deserialize(Deserializer& d, std::vector<bool>::reference& value)
+    {
+        bool boolean;
+        d.readBool(boolean);
+        value = boolean;
+    }
+
     inline void deserialize(Deserializer& d, std::string& value)
     {
         d.readString(value);
@@ -276,11 +283,26 @@ namespace cubos::core::data
         d.endArray();
     }
 
+    template <> inline void deserialize(Deserializer& d, std::vector<bool>& vec)
+    {
+        size_t length = d.beginArray();
+        vec.resize(length);
+        for (size_t i = 0; i < length; ++i)
+        {
+            bool val;
+            d.read(val);
+            vec[i] = val;
+        }
+        d.endArray();
+    }
+
     template <typename K, typename V>
     requires TriviallyDeserializable<K> && TriviallyDeserializable<V>
     void deserialize(Deserializer& d, std::unordered_map<K, V>& dic)
     {
         size_t length = d.beginDictionary();
+        dic.clear();
+        dic.reserve(length);
         for (size_t i = 0; i < length; ++i)
         {
             K key;
@@ -309,6 +331,8 @@ namespace cubos::core::data
          ContextDeserializable<V, TCtx>)void deserialize(Deserializer& d, std::unordered_map<K, V>& dic, TCtx ctx)
     {
         size_t length = d.beginDictionary();
+        dic.clear();
+        dic.reserve(length);
         for (size_t i = 0; i < length; ++i)
         {
             K key;
