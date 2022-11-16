@@ -1,21 +1,18 @@
 # ECS {#core-ecs}
 
-[Wikipedia](https://en.wikipedia.org/wiki/Entity_component_system) defines
-*ECS* as:
+    > Entity Component System (ECS) is a software architectural pattern mostly used
+    > in video game development for the representation of game world objects. An
+    > ECS comprises entities composed from components of data, with systems which
+    > operate on entities' components.
+    > 
+    > ECS follows the principle of composition over inheritance, meaning that every
+    > entity is defined not by a type hierarchy, but by the components that are
+    > associated with it. Systems act globally over all entities which have the
+    > required components.
 
-> Entity Component System (ECS) is a software architectural pattern mostly used
-> in video game development for the representation of game world objects. An
-> ECS comprises entities composed from components of data, with systems which
-> operate on entities' components.
-> 
-> ECS follows the principle of composition over inheritance, meaning that every
-> entity is defined not by a type hierarchy, but by the components that are
-> associated with it. Systems act globally over all entities which have the
-> required components.
-
-The *ECS* thus is a vital part of the engine, since all of the rest is
-structured around it in some way. This sets the engine apart from other engines
-which follow a more traditional model, like *Unity*, *Unreal* and *Godot*.
+    The *ECS* thus is a vital part of the engine, since all of the rest is
+    structured around it in some way. This sets the engine apart from other engines
+    which follow a more traditional model, like *Unity*, *Unreal* and *Godot*.
 
 ## A primer on ECS
 
