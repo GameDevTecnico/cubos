@@ -35,6 +35,40 @@ namespace cubos::core::data
             } -> std::same_as<void>;
     };
 
+    /// Concept for serializable objects which are trivial to serialize and define a serialize method.
+    template <typename T>
+    concept TriviallySerializableWithMethod = requires(Serializer& s, const T& obj, const char* name)
+    {
+        {
+            obj.serialize(s, name)
+            } -> std::same_as<void>;
+    };
+
+    /// Concept for serializable objects which require a context to be serialized and define a serialize method.
+    template <typename T, typename TCtx>
+    concept ContextSerializableWithMethod = requires(Serializer& s, const T& obj, TCtx&& ctx, const char* name)
+    {
+        {
+            obj.serialize(s, ctx, name)
+            } -> std::same_as<void>;
+    };
+
+    /// Define serialize functions for trivially serializable types which define a serialize method.
+    template <typename T>
+    requires TriviallySerializableWithMethod<T>
+    inline void serialize(Serializer& s, const T& obj, const char* name)
+    {
+        obj.serialize(s, name);
+    }
+
+    /// Define serialize functions for context serializable types which define a serialize method.
+    template <typename T, typename TCtx>
+    requires ContextSerializableWithMethod<T, TCtx>
+    inline void serialize(Serializer& s, const T& obj, TCtx&& ctx, const char* name)
+    {
+        obj.serialize(s, ctx, name);
+    }
+
     /// Abstract class for serializing data.
     class Serializer
     {

@@ -36,6 +36,40 @@ namespace cubos::core::data
             } -> std::same_as<void>;
     };
 
+    /// Concept for deserializable objects which are trivial to deserialize and define a deserialize method.
+    template <typename T>
+    concept TriviallyDeserializableWithMethod = requires(Deserializer& s, T& obj)
+    {
+        {
+            obj.deserialize(s)
+            } -> std::same_as<void>;
+    };
+
+    /// Concept for deserializable objects which require a context to be deserialized and define a deserialize method.
+    template <typename T, typename TCtx>
+    concept ContextDeserializableWithMethod = requires(Deserializer& s, T& obj, TCtx&& ctx)
+    {
+        {
+            obj.deserialize(s, ctx)
+            } -> std::same_as<void>;
+    };
+
+    /// Define deserialize functions for trivially deserializable types which define a deserialize method.
+    template <typename T>
+    requires TriviallyDeserializableWithMethod<T>
+    inline void deserialize(Deserializer& s, T& obj)
+    {
+        obj.deserialize(s);
+    }
+
+    /// Define deserialize functions for context deserializable types which define a deserialize method.
+    template <typename T, typename TCtx>
+    requires ContextDeserializableWithMethod<T, TCtx>
+    inline void deserialize(Deserializer& s, T& obj, TCtx&& ctx)
+    {
+        obj.deserialize(s, ctx);
+    }
+
     /// Abstract class for deserializing data.
     class Deserializer
     {
