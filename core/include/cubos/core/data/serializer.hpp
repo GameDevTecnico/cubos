@@ -300,6 +300,16 @@ namespace cubos::core::data
         s.endObject();
     }
 
+    template <typename T> void serialize(Serializer& s, const glm::tmat4x4<T>& mat, const char* name)
+    {
+        s.beginObject(name);
+        s.write(mat[0], "0");
+        s.write(mat[1], "1");
+        s.write(mat[2], "2");
+        s.write(mat[3], "3");
+        s.endObject();
+    }
+
     template <typename T>
     requires TriviallySerializable<T>
     void serialize(Serializer& s, const std::vector<T>& vec, const char* name)

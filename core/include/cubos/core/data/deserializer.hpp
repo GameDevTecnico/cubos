@@ -272,6 +272,16 @@ namespace cubos::core::data
         d.endObject();
     }
 
+    template <typename T> void deserialize(Deserializer& d, glm::tmat4x4<T>& mat)
+    {
+        d.beginObject();
+        d.read(mat[0]);
+        d.read(mat[1]);
+        d.read(mat[2]);
+        d.read(mat[3]);
+        d.endObject();
+    }
+
     template <typename T>
     requires TriviallyDeserializable<T>
     void deserialize(Deserializer& d, std::vector<T>& vec)

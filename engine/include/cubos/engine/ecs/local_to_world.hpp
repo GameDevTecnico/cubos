@@ -1,18 +1,16 @@
 #ifndef CUBOS_ENGINE_ECS_LOCAL_TO_WORLD_HPP
 #define CUBOS_ENGINE_ECS_LOCAL_TO_WORLD_HPP
 
-#include <cubos/core/ecs/vec_storage.hpp>
-
 #include <glm/glm.hpp>
+
+#include <components/base.hpp>
 
 namespace cubos::engine::ecs
 {
     /// A matrix calculated from the position, rotation and scale of an entity.
     /// This matrix should
-    struct LocalToWorld
+    struct [[cubos::component("cubos/local_to_world", VecStorage)]] LocalToWorld
     {
-        using Storage = core::ecs::VecStorage<LocalToWorld>;
-
         glm::mat4 mat = glm::mat4(1.0f); ///< The local to world matrix.
     };
 
