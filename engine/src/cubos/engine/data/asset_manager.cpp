@@ -11,6 +11,15 @@ AssetManager::Info::Info(Meta&& meta) : meta(std::move(meta))
 {
     this->data = nullptr;
     this->refCount = 0;
+    this->stored = false;
+}
+
+AssetManager::Info::Info(Meta&& meta, const void* data, std::function<void(const void*)> deleter)
+    : meta(std::move(meta)), deleter(std::move(deleter))
+{
+    this->data = data;
+    this->refCount = 0;
+    this->stored = true;
 }
 
 AssetManager::~AssetManager()
@@ -102,8 +111,16 @@ void AssetManager::cleanup()
             std::lock_guard lock(it.second.mutex);
             if (it.second.data != nullptr && it.second.refCount == 0)
             {
-                auto loader = this->loaders[it.second.meta.getType()];
-                loader->unload(it.second.meta, it.second.data);
+                if (it.second.stored)
+                {
+                    it.second.deleter(it.second.data);
+                }
+                else
+                {
+                    auto loader = this->loaders[it.second.meta.getType()];
+                    loader->unload(it.second.meta, it.second.data);
+                }
+
                 core::logInfo("AssetManager::cleanup(): unloaded '{}'", it.second.meta.getId());
                 it.second.data = nullptr;
             }

@@ -63,7 +63,8 @@ namespace cubos::core::ecs
 
         // Implementation.
 
-        virtual data::Package pack(uint32_t index, const data::SerializationMap<Entity, std::string>& map) const override;
+        virtual data::Package pack(uint32_t index,
+                                   const data::SerializationMap<Entity, std::string>& map) const override;
         virtual bool unpack(uint32_t index, const data::Package& package,
                             const data::SerializationMap<Entity, std::string>& map) override;
         virtual std::type_index type() const override;

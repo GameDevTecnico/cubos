@@ -43,29 +43,37 @@ namespace cubos::engine::data
         requires IsAsset<T>
         void registerType(LArgs... args);
 
-        /// Loads the given asset from its ID, synchronously.
+        /// Loads the given asset from its ID, synchronously, and returns a handle to it.
         /// @tparam T The type of the asset.
         /// @param id The ID of the asset to load.
-        /// @return Handle to the loaded asset.
+        /// @return Handle to the loaded asset, or nullptr if the loading failed.
         template <typename T>
         requires IsAsset<T> Asset<T> load(const std::string& id);
 
         /// Stores the given asset data in the asset manager, with a certain
-        /// ID. If an asset with the same ID is already stored, it is replaced.
-        /// Assets created through this function are always dynamic, and should
+        /// ID. If an asset with the same ID already exists, abort() is called.
         /// @tparam T The type of the asset.
+        /// @param id The ID of the asset.
+        /// @param usage The usage of the asset.
+        /// @param data The data of the asset.
+        template <typename T>
+        requires IsAsset<T>
+        void store(const std::string& id, Usage usage, T&& data);
 
-    private :
+    private:
         /// Stores runtime information about an asset.
         struct Info
         {
             Info(Meta&& meta);
+            Info(Meta&& meta, const void* data, std::function<void(const void*)> deleter);
             Info(Info&&) = default;
 
-            Meta meta;        ///< Asset's meta data.
-            const void* data; ///< Pointer to the asset's data, if its loaded.
-            size_t refCount;  ///< Number of references to the asset's data.
-            std::mutex mutex; ///< Protects the asset's state.
+            Meta meta;                                ///< Asset's meta data.
+            const void* data;                         ///< Pointer to the asset's data, if its loaded.
+            size_t refCount;                          ///< Number of references to the asset's data.
+            std::mutex mutex;                         ///< Protects the asset's state.
+            bool stored;                              ///< Was the asset stored, instead of loaded normally?
+            std::function<void(const void*)> deleter; ///< Function used to delete the asset, if it was stored.
         };
 
         std::map<std::string, Loader*> loaders; ///< The loaders of the registered asset types.
@@ -85,9 +93,10 @@ namespace cubos::engine::data
         }
         else
         {
-            core::logError("AssetManager::registerType(): couldn't register asset type because another type with the "
-                           "name '{}' was already register",
-                           T::TypeName);
+            core::logCritical(
+                "AssetManager::registerType(): couldn't register asset type because another type with the "
+                "name '{}' was already register",
+                T::TypeName);
             abort();
         }
     }
@@ -118,9 +127,10 @@ namespace cubos::engine::data
             auto lit = this->loaders.find(T::TypeName);
             if (lit == this->loaders.end())
             {
-                core::logError("AssetManager::load(): couldn't load asset '{}' because the loader for type '{}' wasn't "
-                               "found",
-                               id, T::TypeName);
+                core::logCritical(
+                    "AssetManager::load(): couldn't load asset '{}' because the loader for type '{}' wasn't "
+                    "found",
+                    id, T::TypeName);
                 abort();
             }
 
@@ -139,6 +149,43 @@ namespace cubos::engine::data
         return Asset<T>(&it->second.refCount, static_cast<const T*>(it->second.data));
     }
 
+    template <typename T>
+    requires IsAsset<T>
+    void AssetManager::store(const std::string& id, Usage usage, T&& data)
+    {
+        auto it = this->infos.find(id);
+        if (it != this->infos.end())
+        {
+            core::logCritical(
+                "AssetManager::store(): couldn't store asset '{}' because an asset with the same ID already "
+                "exists",
+                id);
+            abort();
+        }
+
+        this->infos.emplace(id, Meta(id, T::TypeName, usage), new T(std::move(data)),
+                            [](const void* data) { delete static_cast<const T*>(data); });
+    }
 } // namespace cubos::engine::data
+
+namespace cubos::core::data
+{
+    template <typename T>
+    requires engine::data::IsAsset<T>
+    inline void serialize(Serializer& serializer, const engine::data::Asset<T>& asset, const char* name)
+    {
+        serializer.write(asset.id, name);
+    }
+
+    template <typename T>
+    requires engine::data::IsAsset<T>
+    inline void deserialize(Deserializer& deserializer, engine::data::Asset<T>& asset,
+                            engine::data::AssetManager& manager)
+    {
+        std::string id;
+        deserializer.read(id);
+        asset = manager.load<T>(id);
+    }
+} // namespace cubos::core::data
 
 #endif // CUBOS_ENGINE_DATA_ASSET_MANAGER_HPP

@@ -7,6 +7,7 @@
 
 #include <concepts>
 #include <memory>
+#include <future>
 
 namespace cubos::engine::data
 {
@@ -49,6 +50,7 @@ namespace cubos::engine::data
 
         size_t* refCount; ///< Pointer to the reference counter.
         const T* ptr;     ///< Pointer to the asset.
+        const char* id;   ///< Id of the asset.
     };
 
     // Implementation.
@@ -150,7 +152,6 @@ namespace cubos::engine::data
 
         return *this;
     }
-
 } // namespace cubos::engine::data
 
 #endif // CUBOS_ENGINE_DATA_ASSET_HPP
