@@ -50,6 +50,14 @@ namespace cubos::engine::data
         template <typename T>
         requires IsAsset<T> Asset<T> load(const std::string& id);
 
+        /// Converts the given weak asset handle to a strong one. If the asset is not loaded, it will
+        /// be loaded synchronously.
+        /// @tparam T The type of the asset.
+        /// @param handle The weak asset handle to convert.
+        /// @return Handle to the loaded asset, or nullptr if the loading failed.
+        template <typename T>
+        requires IsAsset<T> Asset<T> load(WeakAsset<T> handle);
+
         /// Stores the given asset data in the asset manager, with a certain
         /// ID. If an asset with the same ID already exists, abort() is called.
         /// @tparam T The type of the asset.
@@ -146,7 +154,13 @@ namespace cubos::engine::data
             }
         }
 
-        return Asset<T>(&it->second.refCount, static_cast<const T*>(it->second.data));
+        return Asset<T>(&it->second.refCount, static_cast<const T*>(it->second.data), &it->first);
+    }
+
+    template <typename T>
+    requires IsAsset<T> Asset<T> AssetManager::load(WeakAsset<T> handle)
+    {
+        return this->load<T>(handle.getId());
     }
 
     template <typename T>
@@ -167,25 +181,5 @@ namespace cubos::engine::data
                             [](const void* data) { delete static_cast<const T*>(data); });
     }
 } // namespace cubos::engine::data
-
-namespace cubos::core::data
-{
-    template <typename T>
-    requires engine::data::IsAsset<T>
-    inline void serialize(Serializer& serializer, const engine::data::Asset<T>& asset, const char* name)
-    {
-        serializer.write(asset.id, name);
-    }
-
-    template <typename T>
-    requires engine::data::IsAsset<T>
-    inline void deserialize(Deserializer& deserializer, engine::data::Asset<T>& asset,
-                            engine::data::AssetManager& manager)
-    {
-        std::string id;
-        deserializer.read(id);
-        asset = manager.load<T>(id);
-    }
-} // namespace cubos::core::data
 
 #endif // CUBOS_ENGINE_DATA_ASSET_MANAGER_HPP
