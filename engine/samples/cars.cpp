@@ -43,6 +43,16 @@ using namespace cubos::engine;
 struct Camera
 {
     using Storage = core::ecs::NullStorage<Camera>;
+
+    void serialize(core::data::Serializer& ser, const char* name) const
+    {
+        // Do nothing.
+    }
+
+    void deserialize(core::data::Deserializer& des)
+    {
+        // Do nothing.
+    }
 };
 
 // Component for the car entity.
@@ -52,6 +62,22 @@ struct Car
 
     glm::vec3 vel = {0.0f, 0.0f, 0.0f};
     float angVel = 0.0f;
+
+    void serialize(core::data::Serializer& ser, const char* name) const
+    {
+        ser.beginObject(name);
+        ser.write(vel, "vel");
+        ser.write(angVel, "angVel");
+        ser.endObject();
+    }
+
+    void deserialize(core::data::Deserializer& des)
+    {
+        des.beginObject();
+        des.read(vel, "vel");
+        des.read(angVel, "angVel");
+        des.endObject();
+    }
 };
 
 // Component for particle entities.
@@ -60,6 +86,16 @@ struct Particle
     using Storage = core::ecs::VecStorage<Particle>;
 
     float life = 0.0f;
+
+    void serialize(core::data::Serializer& ser, const char* name) const
+    {
+        ser.write(life, name);
+    }
+
+    void deserialize(core::data::Deserializer& des)
+    {
+        des.read(life);
+    }
 };
 
 // Resource which stores input data.
@@ -251,7 +287,13 @@ void prepareScene(data::AssetManager& assetManager, gl::Renderer& renderer, core
             floorGrid.set({x, 0, z}, (x + z) % 2 == 0 ? black : white);
         }
     }
-    auto floor = renderer.upload(floorGrid);
+
+    auto floorRendererGrid = renderer.upload(floorGrid);
+    auto floor = assetManager.store<data::Grid>("floor", data::Usage::Static,
+                                                data::Grid{
+                                                    .grid = std::move(floorGrid),
+                                                    .rendererGrid = floorRendererGrid,
+                                                });
 
     // Spawn the floor.
     world.create(ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, ecs::LocalToWorld{}, ecs::Position{}, ecs::Scale{4.0f});
@@ -262,10 +304,10 @@ void prepareScene(data::AssetManager& assetManager, gl::Renderer& renderer, core
     {
         for (int y = -1; y < 3; ++y)
         {
-            world.create(Car{},
-                         ecs::Grid{car->rendererGrid,
-                                   {-float(car->grid.getSize().x) / 2.0f, 0.0f, -float(car->grid.getSize().z) / 2.0f}},
-                         ecs::LocalToWorld{}, ecs::Position{{36.0f * x, 0.0f, 36.0f * y}}, ecs::Rotation{});
+            world.create(
+                Car{},
+                ecs::Grid{car, {-float(car->grid.getSize().x) / 2.0f, 0.0f, -float(car->grid.getSize().z) / 2.0f}},
+                ecs::LocalToWorld{}, ecs::Position{{36.0f * x, 0.0f, 36.0f * y}}, ecs::Rotation{});
         }
     }
 
@@ -288,12 +330,6 @@ int main(void)
     core::data::FileSystem::mount("/assets",
                                   std::make_shared<core::data::STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
 
-    // Initialize the asset manager.
-    auto assetManager = data::AssetManager();
-    assetManager.registerType<data::Grid>(&renderer);
-    assetManager.registerType<data::Palette>();
-    assetManager.importMeta(core::data::FileSystem::find("/assets/"));
-
     // Initialize the input manager.
     core::io::InputManager::init(window.get());
 
@@ -306,6 +342,15 @@ int main(void)
     world.registerComponent<ecs::Scale>();
     world.registerComponent<Camera>();
     world.registerComponent<Car>();
+
+    // Add the asset manager.
+    world.registerResource<data::AssetManager>();
+    {
+        auto assetManager = world.write<data::AssetManager>();
+        assetManager.get().registerType<data::Grid>(&renderer);
+        assetManager.get().registerType<data::Palette>();
+        assetManager.get().importMeta(core::data::FileSystem::find("/assets/"));
+    }
 
     // Add the frame and camera resources.
     world.registerResource<gl::Frame>();
@@ -321,11 +366,11 @@ int main(void)
     setupInput(world);
 
     // Get the palette.
-    auto paletteAsset = assetManager.load<data::Palette>("palette");
+    auto paletteAsset = world.write<data::AssetManager>().get().load<data::Palette>("palette");
     auto palette = paletteAsset->palette;
 
     // Prepare the scene.
-    prepareScene(assetManager, renderer, world, palette);
+    prepareScene(world.write<data::AssetManager>().get(), renderer, world, palette);
 
     // Set the palette.
     renderer.setPalette(palette);

@@ -11,8 +11,7 @@
 namespace cubos::engine::ecs
 {
     /// Draws all entities with a Grid and a LocalToWorld component to the frame resource.
-    void drawSystem(gl::Frame& frame, data::AssetManager& assetMgr,
-                    core::ecs::Query<const Grid&, const LocalToWorld&> query);
+    void drawSystem(gl::Frame& frame, data::AssetManager& assetMgr, core::ecs::Query<Grid&, const LocalToWorld&> query);
 } // namespace cubos::engine::ecs
 
 #endif // CUBOS_ENGINE_ECS_DRAW_SYSTEM_HPP

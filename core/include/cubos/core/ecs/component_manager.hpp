@@ -19,6 +19,19 @@ namespace cubos::core::ecs
         static_assert(!std::is_same_v<T, T>, "ComponentStorage must be specialized for each component type.");
     };
 
+    template <typename T>
+    concept ComponentUsingStorage = requires
+    {
+        typename T::Storage;
+    };
+
+    template <typename T>
+    requires ComponentUsingStorage<T>
+    struct ComponentStorage<T>
+    {
+        using Type = typename T::Storage;
+    };
+
     /// Utility struct used to reference component storages for reading.
     template <typename T> class ReadStorage
     {

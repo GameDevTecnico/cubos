@@ -50,13 +50,14 @@ namespace cubos::engine::data
         template <typename T>
         requires IsAsset<T> Asset<T> load(const std::string& id);
 
-        /// Converts the given weak asset handle to a strong one. If the asset is not loaded, it will
-        /// be loaded synchronously.
+        /// Gives ownership of the asset to the given weak asset handle. If the asset is already owned by it, nothing
+        /// happens. Otherwise, if the asset is not already loaded, it is loaded synchronously.
         /// @tparam T The type of the asset.
         /// @param handle The weak asset handle to convert.
-        /// @return Handle to the loaded asset, or nullptr if the loading failed.
+        /// @return True on success, false otherwise.
         template <typename T>
-        requires IsAsset<T> Asset<T> load(WeakAsset<T> handle);
+        requires IsAsset<T>
+        bool load(WeakAsset<T>& handle);
 
         /// Stores the given asset data in the asset manager, with a certain
         /// ID. If an asset with the same ID already exists, abort() is called.
@@ -65,10 +66,9 @@ namespace cubos::engine::data
         /// @param usage The usage of the asset.
         /// @param data The data of the asset.
         template <typename T>
-        requires IsAsset<T>
-        void store(const std::string& id, Usage usage, T&& data);
+        requires IsAsset<T> Asset<T> store(const std::string& id, Usage usage, T&& data);
 
-    private:
+    private :
         /// Stores runtime information about an asset.
         struct Info
         {
@@ -158,14 +158,20 @@ namespace cubos::engine::data
     }
 
     template <typename T>
-    requires IsAsset<T> Asset<T> AssetManager::load(WeakAsset<T> handle)
+    requires IsAsset<T>
+    bool AssetManager::load(WeakAsset<T>& handle)
     {
-        return this->load<T>(handle.getId());
+        if (handle.isOwned())
+        {
+            return true;
+        }
+
+        handle = this->load<T>(handle.getId());
+        return handle;
     }
 
     template <typename T>
-    requires IsAsset<T>
-    void AssetManager::store(const std::string& id, Usage usage, T&& data)
+    requires IsAsset<T> Asset<T> AssetManager::store(const std::string& id, Usage usage, T&& data)
     {
         auto it = this->infos.find(id);
         if (it != this->infos.end())
@@ -177,8 +183,12 @@ namespace cubos::engine::data
             abort();
         }
 
-        this->infos.emplace(id, Meta(id, T::TypeName, usage), new T(std::move(data)),
-                            [](const void* data) { delete static_cast<const T*>(data); });
+        this->infos.emplace(std::piecewise_construct, std::forward_as_tuple(id),
+                            std::forward_as_tuple(Meta(id, T::TypeName, usage), new T(std::move(data)),
+                                                  [](const void* data) { delete static_cast<const T*>(data); }));
+
+        it = this->infos.find(id);
+        return Asset<T>(&it->second.refCount, static_cast<const T*>(it->second.data), &it->first);
     }
 } // namespace cubos::engine::data
 
