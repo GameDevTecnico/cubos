@@ -69,6 +69,21 @@ namespace cubos::core::data
         obj.serialize(s, ctx, name);
     }
 
+    // Define serialize functions which requires extracting the context from a tuple.
+    template <typename T, typename TCtx, typename U>
+    requires ContextSerializable<T, TCtx>
+    inline void serialize(Serializer& s, const T& obj, std::tuple<TCtx, U> ctx, const char* name)
+    {
+        serialize(s, obj, std::get<TCtx>(ctx), name);
+    }
+
+    template <typename T, typename TCtx, typename U>
+    requires ContextSerializable<T, TCtx>
+    inline void serialize(Serializer& s, const T& obj, std::tuple<U, TCtx> ctx, const char* name)
+    {
+        serialize(s, obj, std::get<TCtx>(ctx), name);
+    }
+
     /// Abstract class for serializing data.
     class Serializer
     {

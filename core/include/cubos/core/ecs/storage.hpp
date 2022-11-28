@@ -1,8 +1,10 @@
 #ifndef CUBOS_CORE_ECS_STORAGE_HPP
 #define CUBOS_CORE_ECS_STORAGE_HPP
 
+#include <cubos/core/data/handle.hpp>
 #include <cubos/core/data/package.hpp>
 #include <cubos/core/data/serialization_map.hpp>
+
 #include <cubos/core/ecs/entity_manager.hpp>
 
 #include <unordered_map>
@@ -26,7 +28,8 @@ namespace cubos::core::ecs
         /// @param index The index of the value to package.
         /// @param map Serialization map needed for serialization.
         /// @returns The packaged value.
-        virtual data::Package pack(uint32_t index, const data::SerializationMap<Entity, std::string>& map) const = 0;
+        virtual data::Package pack(uint32_t index, const data::SerializationMap<Entity, std::string>& map,
+                                   data::Handle::SerContext handleCtx) const = 0;
 
         /// @brief Unpackages a value.
         /// @param index The index of the value to unpackage.
@@ -34,7 +37,8 @@ namespace cubos::core::ecs
         /// @param map Serialization map needed for deserialization.
         /// @returns True if the value was unpackaged successfully, false otherwise.
         virtual bool unpack(uint32_t index, const data::Package& package,
-                            const data::SerializationMap<Entity, std::string>& map) = 0;
+                            const data::SerializationMap<Entity, std::string>& map,
+                            data::Handle::DesContext handleCtx) = 0;
 
         /// @brief Gets the type the components being stored here.
         virtual std::type_index type() const = 0;
@@ -63,27 +67,29 @@ namespace cubos::core::ecs
 
         // Implementation.
 
-        virtual data::Package pack(uint32_t index,
-                                   const data::SerializationMap<Entity, std::string>& map) const override;
+        virtual data::Package pack(uint32_t index, const data::SerializationMap<Entity, std::string>& map,
+                                   data::Handle::SerContext handleCtx) const override;
         virtual bool unpack(uint32_t index, const data::Package& package,
-                            const data::SerializationMap<Entity, std::string>& map) override;
+                            const data::SerializationMap<Entity, std::string>& map,
+                            data::Handle::DesContext handleCtx) override;
         virtual std::type_index type() const override;
     };
 
     // Implementation.
 
     template <typename T>
-    data::Package Storage<T>::pack(uint32_t index, const data::SerializationMap<Entity, std::string>& map) const
+    data::Package Storage<T>::pack(uint32_t index, const data::SerializationMap<Entity, std::string>& map,
+                                   data::Handle::SerContext handleCtx) const
     {
-        return data::Package::from(*this->get(index), map);
+        return data::Package::from(*this->get(index), std::forward_as_tuple(map, handleCtx));
     }
 
     template <typename T>
     bool Storage<T>::unpack(uint32_t index, const data::Package& package,
-                            const data::SerializationMap<Entity, std::string>& map)
+                            const data::SerializationMap<Entity, std::string>& map, data::Handle::DesContext handleCtx)
     {
         T value;
-        if (package.into(value, map))
+        if (package.into(value, std::forward_as_tuple(map, handleCtx)))
         {
             this->insert(index, value);
             return true;

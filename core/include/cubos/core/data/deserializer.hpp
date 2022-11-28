@@ -54,7 +54,7 @@ namespace cubos::core::data
             } -> std::same_as<void>;
     };
 
-    /// Define deserialize functions for trivially deserializable types which define a deserialize method.
+    // Define deserialize functions for trivially deserializable types which define a deserialize method.
     template <typename T>
     requires TriviallyDeserializableWithMethod<T>
     inline void deserialize(Deserializer& s, T& obj)
@@ -62,12 +62,28 @@ namespace cubos::core::data
         obj.deserialize(s);
     }
 
-    /// Define deserialize functions for context deserializable types which define a deserialize method.
+    // Define deserialize functions for context deserializable types which define a deserialize method.
     template <typename T, typename TCtx>
     requires ContextDeserializableWithMethod<T, TCtx>
     inline void deserialize(Deserializer& s, T& obj, TCtx&& ctx)
     {
         obj.deserialize(s, ctx);
+    }
+
+    // Define deserialize functions which requires extracting the context from a tuple.
+    template <typename T, typename TCtx, typename U>
+    requires ContextDeserializable<T, TCtx>
+    inline void deserialize(Deserializer& s, T& obj, std::tuple<TCtx, U> ctx)
+    {
+        deserialize(s, obj, std::get<TCtx>(ctx));
+    }
+
+    // Define deserialize functions which requires extracting the context from a tuple.
+    template <typename T, typename TCtx, typename U>
+    requires ContextDeserializable<T, TCtx>
+    inline void deserialize(Deserializer& s, T& obj, std::tuple<U, TCtx> ctx)
+    {
+        deserialize(s, obj, std::get<TCtx>(ctx));
     }
 
     /// Abstract class for deserializing data.

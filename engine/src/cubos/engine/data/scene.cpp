@@ -47,6 +47,13 @@ const void* impl::SceneLoader::load(const Meta& meta)
 
     auto asset = new Scene();
 
+    // Prepare handle context to deserialize assets.
+    auto handleCtx = [&](core::data::Deserializer& des, core::data::Handle& handle) {
+        std::string id;
+        des.read(id);
+        handle = this->manager->loadAny(id);
+    };
+
     deserializer.beginObject();
 
     // Read imports sections.
@@ -92,7 +99,7 @@ const void* impl::SceneLoader::load(const Meta& meta)
         {
             std::string compName;
             deserializer.readString(compName);
-            if (!asset->blueprint.addFromDeserializer(entity, compName, deserializer))
+            if (!asset->blueprint.addFromDeserializer(entity, compName, deserializer, handleCtx))
             {
                 core::logError("SceneLoader::load() failed: failed to add component '{}' to entity '{}'", compName,
                                name);

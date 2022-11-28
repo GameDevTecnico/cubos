@@ -74,14 +74,16 @@ namespace cubos::core::ecs
 
         /// @brief Creates a package from the components of an entity.
         /// @param entity Entity ID.
+        /// @param handleCtx Context necessary to serialize handles in the components.
         /// @returns A package containing the components of the entity.
-        data::Package pack(Entity entity) const;
+        data::Package pack(Entity entity, data::Handle::SerContext handleCtx) const;
 
         /// @brief Unpacks components specified in a package into an entity.
         /// @param entity Entity ID.
         /// @param package Package to unpack.
+        /// @param handleCtx Context necessary to deserialize handles in the components.
         /// @returns True if the package was unpacked successfully, false otherwise.
-        bool unpack(Entity entity, const data::Package& package);
+        bool unpack(Entity entity, const data::Package& package, data::Handle::DesContext handleCtx);
 
     private:
         friend class Debug;

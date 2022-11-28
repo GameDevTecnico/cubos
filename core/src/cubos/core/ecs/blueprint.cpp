@@ -11,10 +11,11 @@ Blueprint::~Blueprint()
     }
 }
 
-bool Blueprint::addFromDeserializer(Entity entity, const std::string& name, data::Deserializer& deserializer)
+bool Blueprint::addFromDeserializer(Entity entity, const std::string& name, data::Deserializer& deserializer,
+                                    data::Handle::DesContext handleCtx)
 {
     assert(entity.generation == 0);
-    return Registry::create(name, deserializer, *this, this->map, entity);
+    return Registry::create(name, deserializer, *this, this->map, handleCtx, entity);
 }
 
 Entity Blueprint::entity(const std::string& name) const
@@ -39,6 +40,18 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
         dstMap.add(Entity(i, 0), name);
     }
 
+    auto serHandleCtx = [&](data::Serializer& ser, const data::Handle& handle, const char* name) {
+        auto id = reinterpret_cast<uint64_t>(handle.getRaw());
+        ser.write(id, name);
+        this->handles.emplace(id, handle);
+    };
+
+    auto desHandleCtx = [&](data::Deserializer& des, data::Handle& handle) {
+        uint64_t id;
+        des.read(id);
+        handle = this->handles[id];
+    };
+
     /// Then, merge the buffers.
     for (auto& buffer : other.buffers)
     {
@@ -48,7 +61,7 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
             it = this->buffers.emplace(buffer.first, buffer.second->create()).first;
         }
 
-        it->second->merge(buffer.second, prefix, other.map, dstMap);
+        it->second->merge(buffer.second, prefix, other.map, desHandleCtx, dstMap, serHandleCtx);
     }
 }
 

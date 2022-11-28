@@ -10,7 +10,9 @@ Debug::Iterator::Iterator(const World& world, EntityManager::Iterator it) : worl
 
 std::tuple<Entity, data::Package> Debug::Iterator::operator*() const
 {
-    return {*it, this->world.pack(*it)};
+    return {*it, this->world.pack(*it, [](data::Serializer& ser, const data::Handle& handle, const char* name) {
+                ser.write(handle.getId(), name);
+            })};
 }
 
 bool Debug::Iterator::operator==(const Iterator& other) const
@@ -46,10 +48,12 @@ Debug::Iterator Debug::end()
 
 data::Package Debug::pack(Entity entity)
 {
-    return this->world.pack(entity);
+    return this->world.pack(entity, [](data::Serializer& ser, const data::Handle& handle, const char* name) {
+        ser.write(handle.getId(), name);
+    });
 }
 
-void Debug::unpack(Entity entity, const data::Package& package)
+void Debug::unpack(Entity entity, const data::Package& package, data::Handle::DesContext handleCtx)
 {
-    this->world.unpack(entity, package);
+    this->world.unpack(entity, package, handleCtx);
 }

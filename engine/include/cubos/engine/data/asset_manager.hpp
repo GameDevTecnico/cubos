@@ -50,14 +50,10 @@ namespace cubos::engine::data
         template <typename T>
         requires IsAsset<T> Asset<T> load(const std::string& id);
 
-        /// Gives ownership of the asset to the given weak asset handle. If the asset is already owned by it, nothing
-        /// happens. Otherwise, if the asset is not already loaded, it is loaded synchronously.
-        /// @tparam T The type of the asset.
-        /// @param handle The weak asset handle to convert.
-        /// @return True on success, false otherwise.
-        template <typename T>
-        requires IsAsset<T>
-        bool load(WeakAsset<T>& handle);
+        /// Loads the given asset from its ID, synchronously, and returns a generic handle to it.
+        /// @param id The ID of the asset to load.
+        /// @return Handle to the loaded asset, or nullptr if the loading failed.
+        core::data::Handle loadAny(const std::string& id);
 
         /// Stores the given asset data in the asset manager, with a certain
         /// ID. If an asset with the same ID already exists, abort() is called.
@@ -155,19 +151,6 @@ namespace cubos::engine::data
         }
 
         return Asset<T>(&it->second.refCount, static_cast<const T*>(it->second.data), &it->first);
-    }
-
-    template <typename T>
-    requires IsAsset<T>
-    bool AssetManager::load(WeakAsset<T>& handle)
-    {
-        if (handle.isOwned())
-        {
-            return true;
-        }
-
-        handle = this->load<T>(handle.getId());
-        return handle;
     }
 
     template <typename T>

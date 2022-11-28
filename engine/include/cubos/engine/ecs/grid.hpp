@@ -13,8 +13,8 @@ namespace cubos::engine::ecs
     /// A Grid component which makes the renderer render a grid.
     struct [[cubos::component("cubos/grid", VecStorage)]] Grid
     {
-        data::WeakAsset<data::Grid> handle; ///< The handle of the grid being rendered.
-        glm::vec3 modelOffset;              ///< The offset of the model.
+        data::Asset<data::Grid> handle; ///< The handle of the grid being rendered.
+        glm::vec3 modelOffset;          ///< The offset of the model.
     };
 
 } // namespace cubos::engine::ecs

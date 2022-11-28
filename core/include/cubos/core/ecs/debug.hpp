@@ -48,7 +48,8 @@ namespace cubos::core::ecs
         /// @brief Unpacks components specified in a package into an entity.
         /// @param entity Entity ID.
         /// @param package Package to unpack.
-        void unpack(Entity entity, const data::Package& package);
+        /// @param handleCtx The handle context to use.
+        void unpack(Entity entity, const data::Package& package, data::Handle::DesContext handleCtx);
 
     private:
         World& world; ///< The world to query.

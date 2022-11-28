@@ -32,7 +32,7 @@ void World::destroy(Entity entity)
     this->componentManager.removeAll(entity.index);
 }
 
-data::Package World::pack(Entity entity) const
+data::Package World::pack(Entity entity, data::Handle::SerContext handleCtx) const
 {
     Entity::Mask mask = this->entityManager.getMask(entity);
 
@@ -42,14 +42,14 @@ data::Package World::pack(Entity entity) const
         if (mask.test(i))
         {
             auto name = Registry::name(this->componentManager.getType(i));
-            pkg.fields().push_back({name, this->componentManager.pack(entity.index, i, directMap)});
+            pkg.fields().push_back({name, this->componentManager.pack(entity.index, i, directMap, handleCtx)});
         }
     }
 
     return pkg;
 }
 
-bool World::unpack(Entity entity, const data::Package& package)
+bool World::unpack(Entity entity, const data::Package& package, data::Handle::DesContext handleCtx)
 {
     if (package.type() != data::Package::Type::Object)
     {
@@ -71,7 +71,7 @@ bool World::unpack(Entity entity, const data::Package& package)
         }
 
         auto id = this->componentManager.getIDFromIndex(index);
-        if (this->componentManager.unpack(entity.index, id, field.second, directMap))
+        if (this->componentManager.unpack(entity.index, id, field.second, directMap, handleCtx))
         {
             mask.set(id);
         }

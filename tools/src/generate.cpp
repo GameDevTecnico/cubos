@@ -732,32 +732,34 @@ static bool generate(const Options& options)
         file << "namespace cubos::core::data" << std::endl;
         file << "{" << std::endl;
         file << "    inline static void serialize(Serializer& ser, const " << id << "& c," << std::endl;
-        file << "                                 const SerializationMap<ecs::Entity, std::string>& map, const char* "
-                "name)"
-             << std::endl;
+        file << "                                 std::tuple<const SerializationMap<ecs::Entity, std::string>&, "
+                "Handle::SerContext> ctx,"
+             << std::endl
+             << "                                 const char* name)" << std::endl;
         file << "    {" << std::endl;
         if (component.fields.size() == 1)
-            file << "        ser.write(c." << component.fields[0] << ", map, name);" << std::endl;
+            file << "        ser.write(c." << component.fields[0] << ", ctx, name);" << std::endl;
         else
         {
             file << "        ser.beginObject(name);" << std::endl;
             for (auto& field : component.fields)
-                file << "        ser.write(c." << field << ", map, \"" << field << "\");" << std::endl;
+                file << "        ser.write(c." << field << ", ctx, \"" << field << "\");" << std::endl;
             file << "        ser.endObject();" << std::endl;
         }
         file << "    }" << std::endl;
         file << std::endl;
         file << "    inline static void deserialize(Deserializer& des, " << id << "& c," << std::endl;
-        file << "                                   const SerializationMap<ecs::Entity, std::string>& map)"
+        file << "                                   std::tuple<const SerializationMap<ecs::Entity, std::string>&, "
+                "Handle::DesContext> ctx)"
              << std::endl;
         file << "    {" << std::endl;
         if (component.fields.size() == 1)
-            file << "        des.read(c." << component.fields[0] << ", map);" << std::endl;
+            file << "        des.read(c." << component.fields[0] << ", ctx);" << std::endl;
         else
         {
             file << "        des.beginObject();" << std::endl;
             for (auto& field : component.fields)
-                file << "        des.read(c." << field << ", map);" << std::endl;
+                file << "        des.read(c." << field << ", ctx);" << std::endl;
             file << "        des.endObject();" << std::endl;
         }
         file << "    }" << std::endl;
