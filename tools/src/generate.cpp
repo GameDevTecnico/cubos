@@ -699,6 +699,13 @@ static bool generate(const Options& options)
         path.append(component.name + ".hpp");
         fs::create_directories(path.parent_path());
 
+        if (std::filesystem::exists(path) &&
+            std::filesystem::last_write_time(path) > std::filesystem::last_write_time(component.header))
+        {
+            std::cerr << "Skipping '" << component.name << "' because it's up to date" << std::endl;
+            continue;
+        }
+
         std::ofstream file(path);
         if (!file.is_open())
         {
