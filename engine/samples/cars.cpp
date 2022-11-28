@@ -18,6 +18,9 @@
 #include <cubos/core/io/sources/single_axis.hpp>
 #include <cubos/core/io/sources/button_press.hpp>
 
+#include <cubos/core/ui/imgui.hpp>
+#include <cubos/core/ui/ecs.hpp>
+
 #include <cubos/engine/gl/deferred/renderer.hpp>
 
 #include <cubos/engine/data/asset_manager.hpp>
@@ -35,6 +38,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/vector_angle.hpp>
+
+#include <imgui.h>
 
 using namespace cubos;
 using namespace cubos::engine;
@@ -98,6 +103,10 @@ struct Particle
     }
 };
 
+CUBOS_REGISTER_COMPONENT(Camera, "Camera");
+CUBOS_REGISTER_COMPONENT(Car, "Car");
+CUBOS_REGISTER_COMPONENT(Particle, "Particle");
+
 // Resource which stores input data.
 struct Input
 {
@@ -131,7 +140,7 @@ void particleSystem(core::ecs::Commands& commands, Input& input, core::ecs::Quer
 }
 
 // Function which setups input callbacks and sets up the input resource.
-void setupInput(core::ecs::World& world)
+void setupInput(core::ecs::World& world, core::io::Window& window)
 {
     Input input;
     input.lastLook = glm::vec2(-1.0f);
@@ -185,6 +194,10 @@ void setupInput(core::ecs::World& world)
         auto inputResource = world.write<Input>();
         auto& input = inputResource.get();
         input.cameraEnabled = !input.cameraEnabled;
+        if (input.cameraEnabled)
+            window.setMouseState(core::io::MouseState::Locked);
+        else
+            window.setMouseState(core::io::MouseState::Default);
     });
     enableAction->addSource(new core::io::ButtonPress(core::io::Key::C));
 }
@@ -205,17 +218,17 @@ void cameraControllerSystem(const Input& input, core::ecs::Query<const Camera&, 
             // Translate the camera.
             glm::vec3 movement = rotation.quat * input.movement * input.deltaTime * 10.0f;
             position.vec += movement;
-        }
 
-        // Rotate the camera.
-        auto pitchRot = glm::angleAxis(input.lookDelta.y * -0.002f, glm::vec3(1.0f, 0.0f, 0.0f));
-        auto yawRot = glm::angleAxis(input.lookDelta.x * -0.002f, glm::vec3(0.0f, 1.0f, 0.0f));
-        auto pitch = glm::angle(rotation.quat * glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        rotation.quat = yawRot * rotation.quat;
-        if ((pitch > glm::radians(10.0f) || input.lookDelta.y < 0.0f) &&
-            (pitch < glm::radians(170.0f) || input.lookDelta.y > 0.0f))
-        {
-            rotation.quat = rotation.quat * pitchRot;
+            // Rotate the camera.
+            auto pitchRot = glm::angleAxis(input.lookDelta.y * -0.002f, glm::vec3(1.0f, 0.0f, 0.0f));
+            auto yawRot = glm::angleAxis(input.lookDelta.x * -0.002f, glm::vec3(0.0f, 1.0f, 0.0f));
+            auto pitch = glm::angle(rotation.quat * glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+            rotation.quat = yawRot * rotation.quat;
+            if ((pitch > glm::radians(10.0f) || input.lookDelta.y < 0.0f) &&
+                (pitch < glm::radians(170.0f) || input.lookDelta.y > 0.0f))
+            {
+                rotation.quat = rotation.quat * pitchRot;
+            }
         }
     }
 }
@@ -320,7 +333,7 @@ int main(void)
 {
     core::initializeLogger();
     auto window = std::unique_ptr<core::io::Window>(core::io::Window::create());
-    window->setMouseState(core::io::MouseState::Locked);
+    core::ui::initialize(*window);
 
     // Initialize the renderer.
     auto& renderDevice = window->getRenderDevice();
@@ -363,7 +376,7 @@ int main(void)
     }
 
     // Prepare the input resource.
-    setupInput(world);
+    setupInput(world, *window);
 
     // Get the palette.
     auto paletteAsset = world.write<data::AssetManager>().get().load<data::Palette>("palette");
@@ -382,6 +395,8 @@ int main(void)
 
     while (!window->shouldClose())
     {
+        core::ui::beginFrame();
+
         // Handle input events.
         window->pollEvents();
         core::io::InputManager::processActions();
@@ -414,6 +429,20 @@ int main(void)
         // Update the ECS systems.
 
         auto cmds = core::ecs::Commands(world);
+        core::ecs::SystemWrapper([](core::ecs::Debug debug) {
+            ImGui::Begin("Inspector");
+            core::ui::showWorld(debug);
+            ImGui::End();
+        }).call(world, cmds);
+        core::ecs::SystemWrapper([](core::ecs::Debug debug, data::AssetManager& assetManager) {
+            ImGui::Begin("Editor");
+            core::ui::editWorld(debug, [&](core::data::Deserializer& deserializer, core::data::Handle& handle) {
+                std::string id;
+                deserializer.read(id);
+                handle = assetManager.loadAny(id);
+            });
+            ImGui::End();
+        }).call(world, cmds);
         core::ecs::SystemWrapper(cameraControllerSystem).call(world, cmds);
         core::ecs::SystemWrapper(carSystem).call(world, cmds);
         core::ecs::SystemWrapper(ecs::transformSystem).call(world, cmds);
@@ -428,6 +457,12 @@ int main(void)
             renderer.render(camera.get(), frame.get());
         }
 
+        auto sz = window->getFramebufferSize();
+        renderDevice.setRasterState(nullptr);
+        renderDevice.setBlendState(nullptr);
+        renderDevice.setDepthStencilState(nullptr);
+        renderDevice.setViewport(0, 0, sz.x, sz.y);
+        core::ui::endFrame();
         window->swapBuffers();
     }
 
