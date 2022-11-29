@@ -799,10 +799,14 @@ static bool generate(const Options& options)
         file << "    };" << std::endl;
         file << "} // namespace cubos::core::ecs" << std::endl;
         file << std::endl;
-        file << "namespace " << component.namespaceStr << std::endl;
-        file << "{" << std::endl;
+        if (!component.namespaceStr.empty())
+        {
+            file << "namespace " << component.namespaceStr << std::endl;
+            file << "{" << std::endl;
+        }
         file << "    CUBOS_REGISTER_COMPONENT(" << component.typeStr << ", \"" << component.name << "\");" << std::endl;
-        file << "} // namespace " << component.namespaceStr << std::endl;
+        if (!component.namespaceStr.empty())
+            file << "} // namespace " << component.namespaceStr << std::endl;
         file << std::endl;
         file << "#endif // GEN_COMPONENT_" << macro_name << "_HPP" << std::endl;
     }

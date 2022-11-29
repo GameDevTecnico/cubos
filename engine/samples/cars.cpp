@@ -35,6 +35,8 @@
 #include <components/cubos/scale.hpp>
 #include <components/cubos/local_to_world.hpp>
 #include <components/cubos/grid.hpp>
+#include <components/car.hpp>
+#include <components/camera.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -44,69 +46,6 @@
 
 using namespace cubos;
 using namespace cubos::engine;
-
-// Tag for the camera entity.
-struct Camera
-{
-    using Storage = core::ecs::NullStorage<Camera>;
-
-    void serialize(core::data::Serializer& ser, const char* name) const
-    {
-        // Do nothing.
-    }
-
-    void deserialize(core::data::Deserializer& des)
-    {
-        // Do nothing.
-    }
-};
-
-// Component for the car entity.
-struct Car
-{
-    using Storage = core::ecs::VecStorage<Car>;
-
-    glm::vec3 vel = {0.0f, 0.0f, 0.0f};
-    float angVel = 0.0f;
-
-    void serialize(core::data::Serializer& ser, const char* name) const
-    {
-        ser.beginObject(name);
-        ser.write(vel, "vel");
-        ser.write(angVel, "angVel");
-        ser.endObject();
-    }
-
-    void deserialize(core::data::Deserializer& des)
-    {
-        des.beginObject();
-        des.read(vel, "vel");
-        des.read(angVel, "angVel");
-        des.endObject();
-    }
-};
-
-// Component for particle entities.
-struct Particle
-{
-    using Storage = core::ecs::VecStorage<Particle>;
-
-    float life = 0.0f;
-
-    void serialize(core::data::Serializer& ser, const char* name) const
-    {
-        ser.write(life, name);
-    }
-
-    void deserialize(core::data::Deserializer& des)
-    {
-        des.read(life);
-    }
-};
-
-CUBOS_REGISTER_COMPONENT(Camera, "Camera");
-CUBOS_REGISTER_COMPONENT(Car, "Car");
-CUBOS_REGISTER_COMPONENT(Particle, "Particle");
 
 // Resource which stores input data.
 struct Input
@@ -124,19 +63,6 @@ void cameraSystem(core::gl::Camera& cameraRsc, core::ecs::Query<const Camera&, c
     for (auto [entity, camera, localToWorld] : query)
     {
         cameraRsc.view = glm::inverse(localToWorld.mat);
-    }
-}
-
-// System which updates the particles.
-void particleSystem(core::ecs::Commands& commands, Input& input, core::ecs::Query<Particle&> query)
-{
-    for (auto [entity, particle] : query)
-    {
-        particle.life -= input.deltaTime;
-        if (particle.life <= 0.0f)
-        {
-            commands.destroy(entity);
-        }
     }
 }
 
