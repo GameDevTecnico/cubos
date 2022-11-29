@@ -1,6 +1,8 @@
 #ifndef CUBOS_ENGINE_ECS_GRID_HPP
 #define CUBOS_ENGINE_ECS_GRID_HPP
 
+#include <components/base.hpp>
+
 #include <cubos/engine/gl/renderer.hpp>
 #include <cubos/engine/data/asset.hpp>
 #include <cubos/engine/data/grid.hpp>

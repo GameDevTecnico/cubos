@@ -27,13 +27,14 @@
 #include <cubos/engine/data/grid.hpp>
 #include <cubos/engine/data/palette.hpp>
 
-#include <cubos/engine/ecs/position.hpp>
-#include <cubos/engine/ecs/rotation.hpp>
-#include <cubos/engine/ecs/scale.hpp>
-#include <cubos/engine/ecs/local_to_world.hpp>
-#include <cubos/engine/ecs/grid.hpp>
 #include <cubos/engine/ecs/draw_system.hpp>
 #include <cubos/engine/ecs/transform_system.hpp>
+
+#include <components/cubos/position.hpp>
+#include <components/cubos/rotation.hpp>
+#include <components/cubos/scale.hpp>
+#include <components/cubos/local_to_world.hpp>
+#include <components/cubos/grid.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>

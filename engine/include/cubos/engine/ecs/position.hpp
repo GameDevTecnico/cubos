@@ -1,6 +1,8 @@
 #ifndef CUBOS_ENGINE_ECS_POSITION_HPP
 #define CUBOS_ENGINE_ECS_POSITION_HPP
 
+#include <components/base.hpp>
+
 #include <glm/glm.hpp>
 
 namespace cubos::engine::ecs

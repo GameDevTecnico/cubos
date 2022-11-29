@@ -1,6 +1,8 @@
 #ifndef CUBOS_ENGINE_ECS_SCALE_HPP
 #define CUBOS_ENGINE_ECS_SCALE_HPP
 
+#include <components/base.hpp>
+
 #include <glm/glm.hpp>
 
 namespace cubos::engine::ecs
