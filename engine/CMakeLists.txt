@@ -65,7 +65,9 @@ target_include_directories(cubos-engine PUBLIC "include" PRIVATE "src")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
 set_property(TARGET cubos-engine PROPERTY CXX_STANDARD 20)
 target_compile_features(cubos-engine PUBLIC cxx_std_20)
-target_compile_options(cubos-engine PUBLIC -Wno-attributes)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(cubos-engine PUBLIC -Wno-attributes)
+endif()
 
 # Generate component headers
 cubinhos_generate(cubos-engine ${CMAKE_CURRENT_SOURCE_DIR}/include)
