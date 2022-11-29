@@ -181,7 +181,7 @@ namespace cubos::core::ecs
             }
         }
 
-        logCritical("EntityBuilder::get() failed: called on an entity which does not have the requested component.");
+        CUBOS_CRITICAL("Entity does not have the requested component");
         abort();
     }
 
@@ -204,7 +204,7 @@ namespace cubos::core::ecs
             }
         }
 
-        logCritical("BlueprintBuilder::get() failed: called on an entity which does not have the requested component.");
+        CUBOS_CRITICAL("Entity does not have the requested component");
         abort();
     }
 

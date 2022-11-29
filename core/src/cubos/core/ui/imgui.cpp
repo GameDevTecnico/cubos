@@ -264,7 +264,7 @@ void main()
     bd->texture = bd->renderDevice.createTexture2D(desc);
     if (!bd->texture)
     {
-        logCritical("Failed to create ImGui font texture");
+        CUBOS_CRITICAL("Failed to create ImGui font texture");
         abort();
     }
     io.Fonts->SetTexID((void*)bd->texture.get());
@@ -287,7 +287,7 @@ void ui::initialize(io::Window& window)
     ImGuiIO& io = ImGui::GetIO();
     if (io.BackendPlatformUserData != nullptr)
     {
-        logWarning("ui::init: already initialized");
+        CUBOS_WARN("Already initialized");
         return;
     }
 
@@ -369,6 +369,8 @@ void ui::initialize(io::Window& window)
     bd->time = window.getTime();
 
     createDeviceObjects();
+
+    CUBOS_INFO("Initialized UI");
 }
 
 void ui::terminate()

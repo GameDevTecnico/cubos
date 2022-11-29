@@ -10,8 +10,8 @@ Grid::Grid(const glm::uvec3& size)
 {
     if (size.x < 1 || size.y < 1 || size.z < 1)
     {
-        logWarning("Grid size must be at least 1 in each dimension: was ({}, {}, {}), defaulting to (1, 1, 1).", size.x,
-                   size.y, size.z);
+        CUBOS_ERROR("Grid size must be at least 1 in each dimension: was ({}, {}, {}), defaulting to (1, 1, 1).",
+                    size.x, size.y, size.z);
         this->size = {1, 1, 1};
     }
     else
@@ -23,14 +23,14 @@ Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
 {
     if (size.x < 1 || size.y < 1 || size.z < 1)
     {
-        logWarning("Grid size must be at least 1 in each dimension: was ({}, {}, {}), defaulting to (1, 1, 1).", size.x,
-                   size.y, size.z);
+        CUBOS_ERROR("Grid size must be at least 1 in each dimension: was ({}, {}, {}), defaulting to (1, 1, 1).",
+                    size.x, size.y, size.z);
         this->size = {1, 1, 1};
     }
     else if (indices.size() != size.x * size.y * size.z)
     {
-        logWarning("Grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.", size.x, size.y, size.z,
-                   indices.size());
+        CUBOS_ERROR("Grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.", size.x, size.y,
+                    size.z, indices.size());
         this->size = {1, 1, 1};
     }
     else
@@ -63,9 +63,9 @@ void Grid::setSize(const glm::uvec3& size)
         return;
     else if (size.x < 1 || size.y < 1 || size.z < 1)
     {
-        logWarning("Grid size must be at least 1 in each dimension: preserving original dimensions (tried to set to "
-                   "({}, {}, {}))",
-                   size.x, size.y, size.z);
+        CUBOS_ERROR("Grid size must be at least 1 in each dimension: preserving original dimensions (tried to set to "
+                    "({}, {}, {}))",
+                    size.x, size.y, size.z);
         return;
     }
 
@@ -147,9 +147,8 @@ void cubos::core::data::deserialize(Deserializer& deserializer, gl::Grid& grid)
 
     if (grid.size.x * grid.size.y * grid.size.z != static_cast<int>(grid.indices.size()))
     {
-        logWarning(
-            "Could not deserialize grid: grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.",
-            grid.size.x, grid.size.y, grid.size.z, grid.indices.size());
+        CUBOS_ERROR("Grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.", grid.size.x,
+                    grid.size.y, grid.size.z, grid.indices.size());
         grid.size = {1, 1, 1};
         grid.indices.clear();
         grid.indices.resize(1, 0);

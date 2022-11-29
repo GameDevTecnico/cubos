@@ -97,10 +97,9 @@ namespace cubos::engine::data
         }
         else
         {
-            core::logCritical(
-                "AssetManager::registerType(): couldn't register asset type because another type with the "
-                "name '{}' was already register",
-                T::TypeName);
+            CUBOS_CRITICAL("Could not register asset type because another type with the "
+                           "name '{}' is already registered",
+                           T::TypeName);
             abort();
         }
     }
@@ -108,49 +107,7 @@ namespace cubos::engine::data
     template <typename T>
     requires IsAsset<T> Asset<T> AssetManager::load(const std::string& id)
     {
-        auto it = this->infos.find(id);
-        if (it == this->infos.end())
-        {
-            core::logError("AssetManager::load(): couldn't load asset '{}' because it wasn't found", id);
-            return nullptr;
-        }
-
-        if (it->second.meta.getType() != T::TypeName)
-        {
-            core::logError("AssetManager::load(): couldn't load asset '{}' because it's type is '{}' but the type "
-                           "expected is '{}'",
-                           id, it->second.meta.getType(), T::TypeName);
-            return nullptr;
-        }
-
-        // Check if it's loaded and load it if it isn't.
-        std::lock_guard lock(it->second.mutex);
-
-        if (it->second.data == nullptr)
-        {
-            auto lit = this->loaders.find(T::TypeName);
-            if (lit == this->loaders.end())
-            {
-                core::logCritical(
-                    "AssetManager::load(): couldn't load asset '{}' because the loader for type '{}' wasn't "
-                    "found",
-                    id, T::TypeName);
-                abort();
-            }
-
-            it->second.data = lit->second->load(it->second.meta);
-            if (it->second.data == nullptr)
-            {
-                core::logError("AssetManager::load(): couldn't load '{}'", it->second.meta.getId());
-                return nullptr;
-            }
-            else
-            {
-                core::logInfo("AssetManager::load(): loaded '{}'", it->second.meta.getId());
-            }
-        }
-
-        return Asset<T>(&it->second.refCount, static_cast<const T*>(it->second.data), &it->first);
+        return Asset<T>(this->loadAny(id));
     }
 
     template <typename T>
@@ -159,10 +116,9 @@ namespace cubos::engine::data
         auto it = this->infos.find(id);
         if (it != this->infos.end())
         {
-            core::logCritical(
-                "AssetManager::store(): couldn't store asset '{}' because an asset with the same ID already "
-                "exists",
-                id);
+            CUBOS_CRITICAL("Could not store asset '{}': an asset with this ID already "
+                           "exists",
+                           id);
             abort();
         }
 

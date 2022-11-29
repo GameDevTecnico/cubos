@@ -55,8 +55,9 @@ void File::mount(std::string_view path, std::shared_ptr<Archive> archive)
     // Check if the directory exists.
     if (!dir)
     {
-        logError("Could not mount archive at path '{}' relative to '{}', the parent directory '{}' does not exist",
-                 path, this->path, path.substr(0, i));
+        CUBOS_CRITICAL(
+            "Could not mount archive at path '{}' relative to '{}', the parent directory '{}' does not exist", path,
+            this->path, path.substr(0, i));
         abort();
     }
 
@@ -68,19 +69,19 @@ void File::mount(std::string_view path, std::shared_ptr<Archive> archive)
     {
         if (dir->parent != nullptr)
         {
-            logError("Could not mount archive at path '{}', a file already exists at that path", dir->path);
+            CUBOS_CRITICAL("Could not mount archive at path '{}', a file already exists at that path", dir->path);
             abort();
         }
 
         if (dir->archive != nullptr)
         {
-            logError("Could not mount archive at root, an archive has already been mounted at root");
+            CUBOS_CRITICAL("Could not mount archive at root, an archive has already been mounted at root");
             abort();
         }
 
         if (!archive->isDirectory(1))
         {
-            logError("Could not mount archive at root, archive must be a directory to be mounted at root");
+            CUBOS_CRITICAL("Could not mount archive at root, archive must be a directory to be mounted at root");
             abort();
         }
 
@@ -93,8 +94,8 @@ void File::mount(std::string_view path, std::shared_ptr<Archive> archive)
     {
         if (dir->findChild(name) != nullptr)
         {
-            logError("Could not mount archive at path '{}', a file already exists at that path",
-                     dir->path + "/" + std::string(name));
+            CUBOS_CRITICAL("Could not mount archive at path '{}', a file already exists at that path",
+                           dir->path + "/" + std::string(name));
             abort();
         }
 
@@ -104,6 +105,8 @@ void File::mount(std::string_view path, std::shared_ptr<Archive> archive)
         file->sibling = dir->child;
         dir->child = file;
     }
+
+    CUBOS_TRACE("Mounted archive at path '{}' relative to '{}'", path, this->path);
 }
 
 void File::generateArchive()
@@ -128,7 +131,7 @@ void File::unmount(std::string_view path)
     auto mountPoint = this->find(path);
     if (mountPoint == nullptr)
     {
-        logError("Could not unmount archive at path '{}', no mount point exists at that path", path);
+        CUBOS_ERROR("Could not unmount archive at path '{}', no mount point exists at that path", path);
         return;
     }
 
@@ -138,14 +141,15 @@ void File::unmount(std::string_view path)
     // Check if the file is a mount point.
     if (mountPoint->archive == nullptr)
     {
-        logError("Could not unmount archive at path '{}', no archive mounted on that path");
+        CUBOS_ERROR("Could not unmount archive at path '{}', no archive mounted on that path");
         return;
     }
 
     // Check if the mount point is the root directory of an archive.
     if (mountPoint->parent != nullptr && mountPoint->archive == mountPoint->parent->archive)
     {
-        logError("Could not unmount archive at path '{}', the path must be the mount point (root) of an archive", path);
+        CUBOS_ERROR("Could not unmount archive at path '{}', the path must be the mount point (root) of an archive",
+                    path);
         return;
     }
 
@@ -167,6 +171,8 @@ void File::unmount(std::string_view path)
 
     mountPoint->archive = nullptr;
     mountPoint->id = 0;
+
+    CUBOS_TRACE("Unmounted archive at path '{}' relative to '{}'", path, this->path);
 }
 
 void File::destroyArchive()
@@ -176,8 +182,8 @@ void File::destroyArchive()
 
     if (this->archive != this->parent->archive)
     {
-        logError("Could not unmount archive, a file within the archive is mounted on a different archive, which "
-                 "must be unmounted first");
+        CUBOS_ERROR("Could not unmount archive, a file within the archive is mounted on a different archive, which "
+                    "must be unmounted first");
         abort();
     }
 
@@ -242,8 +248,8 @@ File::Handle File::create(std::string_view path, bool directory)
     // Check if the directory exists.
     if (dir == nullptr)
     {
-        logWarning("Could not create file at path '{}' relative to '{}', the parent directory '{}' does not exist",
-                   path, this->path, path.substr(0, i));
+        CUBOS_ERROR("Could not create file at path '{}' relative to '{}': the parent directory '{}' does not exist",
+                    path, this->path, path.substr(0, i));
         return nullptr;
     }
 
@@ -253,24 +259,24 @@ File::Handle File::create(std::string_view path, bool directory)
     // Check if the file already exists.
     if (dir->findChild(name) != nullptr)
     {
-        logWarning("Could not create file at path '{}', a file already exists at that path",
-                   dir->path + "/" + std::string(name));
+        CUBOS_ERROR("Could not create file at path '{}': a file already exists at that path",
+                    dir->path + "/" + std::string(name));
         return nullptr;
     }
 
     // Check if the directory is mounted on an archive.
     if (dir->archive == nullptr)
     {
-        logWarning("Could not create file at path '{}', parent directory must be mounted on an archive",
-                   dir->path + "/" + std::string(name));
+        CUBOS_ERROR("Could not create file at path '{}': parent directory must be mounted on an archive",
+                    dir->path + "/" + std::string(name));
         return nullptr;
     }
 
     // Check if the archive is read-only.
     if (dir->archive->isReadOnly())
     {
-        logWarning("Could not create file at path '{}', parent directory is mounted on a read-only archive",
-                   dir->path + "/" + std::string(name));
+        CUBOS_ERROR("Could not create file at path '{}': parent directory is mounted on a read-only archive",
+                    dir->path + "/" + std::string(name));
         return nullptr;
     }
 
@@ -278,13 +284,14 @@ File::Handle File::create(std::string_view path, bool directory)
     size_t id = dir->archive->create(dir->id, name, directory);
     if (id == 0)
     {
-        logWarning("Could not create file at path '{}', internal archive error", dir->path + "/" + std::string(name));
+        CUBOS_ERROR("Could not create file at path '{}': internal archive error", dir->path + "/" + std::string(name));
         return nullptr;
     }
 
     // Add the file to the parent directory.
     auto file = std::shared_ptr<File>(new File(dir, dir->archive, id));
     this->addChild(file);
+    CUBOS_TRACE("Created {} at path '{}' relative to '{}'", directory ? "directory" : "file", file->path, this->path);
     return file;
 }
 
@@ -299,17 +306,17 @@ bool File::destroy()
 
     if (this->archive == nullptr)
     {
-        logWarning("Could not destroy file '{}', it is not mounted", this->path);
+        CUBOS_ERROR("Could not destroy file '{}': file not mounted", this->path);
         return false;
     }
     else if (this->archive->isReadOnly())
     {
-        logWarning("Could not destroy file '{}', the archive it is mounted on is read-only", this->path);
+        CUBOS_ERROR("Could not destroy file '{}': archive is read-only", this->path);
         return false;
     }
     else if (this->id == 1)
     {
-        logWarning("Could not destroy file '{}', the file is the mount point of an archive", this->path);
+        CUBOS_ERROR("Could not destroy file '{}': file is the mount point of an archive", this->path);
         return false;
     }
 
@@ -325,6 +332,7 @@ bool File::destroy()
     this->parent->removeChild(this->shared_from_this());
     this->parent = nullptr;
 
+    CUBOS_TRACE("Destroyed file '{}'", this->path);
     return true;
 }
 
@@ -355,17 +363,17 @@ std::unique_ptr<memory::Stream> File::open(OpenMode mode)
 
     if (this->archive == nullptr)
     {
-        logWarning("Could not open file '{}', it is not mounted", this->path);
+        CUBOS_WARN("Could not open file '{}': it is not mounted", this->path);
         return nullptr;
     }
     else if (this->archive->isReadOnly() && mode == OpenMode::Write)
     {
-        logWarning("Could not open file '{}' for writing, the archive it is mounted on is read-only", this->path);
+        CUBOS_WARN("Could not open file '{}' for writing: archive is read-only", this->path);
         return nullptr;
     }
     else if (this->directory)
     {
-        logWarning("Could not open file '{}', the file is a directory", this->path);
+        CUBOS_WARN("Could not open file '{}: it is a directory", this->path);
         return nullptr;
     }
 
@@ -444,8 +452,5 @@ File::~File()
 {
     if (this->destroyed && this->archive)
         if (!this->archive->destroy(this->id))
-        {
-            logError("Could not destroy file '{}', internal archive error", this->path);
-            abort();
-        }
+            CUBOS_ERROR("Could not destroy file '{}': internal archive error", this->path);
 }

@@ -23,12 +23,19 @@ static Key glfwToCubosKey(int key);
 
 #endif // WITH_GLFW
 
+#define UNSUPPORTED()                                                                                                  \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        CUBOS_CRITICAL("Unsupported when building without GLFW");                                                      \
+        abort();                                                                                                       \
+    } while (0)
+
 GLFWWindow::GLFWWindow()
 {
 #ifdef WITH_GLFW
     if (!glfwInit())
     {
-        logCritical("OGLRenderDevice::OGLRenderDevice() failed: glfwInit() failed");
+        CUBOS_CRITICAL("glfwInit() failed");
         abort();
     }
 
@@ -42,7 +49,7 @@ GLFWWindow::GLFWWindow()
     this->handle = glfwCreateWindow(800, 600, "Cubos", nullptr, nullptr);
     if (!this->handle)
     {
-        logCritical("OGLRenderDevice::OGLRenderDevice() failed: glfwCreateWindow() failed");
+        CUBOS_CRITICAL("glfwCreateWindow() failed");
         abort();
     }
 
@@ -50,7 +57,7 @@ GLFWWindow::GLFWWindow()
     glfwMakeContextCurrent(this->handle);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        logCritical("GLFWWindowImpl::GLFWWindowImpl() failed: OpenGL loader failed");
+        CUBOS_CRITICAL("OpenGL loader failed");
         abort();
     }
     this->renderDevice = new gl::OGLRenderDevice();
@@ -64,8 +71,7 @@ GLFWWindow::GLFWWindow()
     glfwSetFramebufferSizeCallback(this->handle, framebufferSizeCallback);
     glfwSetCharCallback(this->handle, charCallback);
 #else
-    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -75,8 +81,7 @@ GLFWWindow::~GLFWWindow()
     delete this->renderDevice;
     glfwTerminate();
 #else
-    logCritical("GLFWWindow::~GLFWWindow() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -85,8 +90,7 @@ void GLFWWindow::pollEvents() const
 #ifdef WITH_GLFW
     glfwPollEvents();
 #else
-    logCritical("GLFWWindow::pollEvents() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -95,8 +99,7 @@ void GLFWWindow::swapBuffers() const
 #ifdef WITH_GLFW
     glfwSwapBuffers(this->handle);
 #else
-    logCritical("GLFWWindow::swapBuffers() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -105,8 +108,7 @@ gl::RenderDevice& GLFWWindow::getRenderDevice() const
 #ifdef WITH_GLFW
     return *this->renderDevice;
 #else
-    logCritical("GLFWWindow::getRenderDevice() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -117,8 +119,7 @@ glm::ivec2 GLFWWindow::getSize() const
     glfwGetWindowSize(this->handle, &width, &height);
     return {width, height};
 #else
-    logCritical("GLFWWindow::getSize() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -129,8 +130,7 @@ glm::ivec2 GLFWWindow::getFramebufferSize() const
     glfwGetFramebufferSize(this->handle, &width, &height);
     return {width, height};
 #else
-    logCritical("GLFWWindow::getFramebufferSize() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -139,8 +139,7 @@ bool GLFWWindow::shouldClose() const
 #ifdef WITH_GLFW
     return glfwWindowShouldClose(this->handle);
 #else
-    logCritical("GLFWWindow::shouldClose() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -149,8 +148,7 @@ double GLFWWindow::getTime() const
 #ifdef WITH_GLFW
     return glfwGetTime();
 #else
-    logCritical("GLFWWindow::getTime() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -172,8 +170,7 @@ void GLFWWindow::setMouseState(MouseState state)
     }
     glfwSetInputMode(handle, GLFW_CURSOR, cursorState);
 #else
-    logCritical("GLFWWindow::setMouseState() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -189,12 +186,11 @@ MouseState GLFWWindow::getMouseState() const
     case GLFW_CURSOR_HIDDEN:
         return MouseState::Hidden;
     default:
-        logError("GLFWWindow::getMouseState() failed: Unknown mouse state, returning default");
+        CUBOS_WARN("Unknown GLFW cursor state, returning MouseState::Default");
         return MouseState::Default;
     }
 #else
-    logCritical("GLFWWindow::setMouseState() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -229,8 +225,7 @@ std::shared_ptr<Cursor> GLFWWindow::createCursor(Cursor::Standard standard)
     else
         return std::shared_ptr<Cursor>(new Cursor(cursor));
 #else
-    logCritical("GLFWWindow::createCursor() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -243,8 +238,7 @@ void GLFWWindow::setCursor(std::shared_ptr<Cursor> cursor)
         glfwSetCursor(this->handle, cursor->glfwHandle);
     this->cursor = cursor;
 #else
-    logCritical("GLFWWindow::setCursor() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -253,8 +247,7 @@ void GLFWWindow::setClipboard(const std::string& text)
 #ifdef WITH_GLFW
     glfwSetClipboardString(this->handle, text.c_str());
 #else
-    logCritical("GLFWWindow::setClipboard() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -263,8 +256,7 @@ const char* GLFWWindow::getClipboard() const
 #ifdef WITH_GLFW
     return glfwGetClipboardString(this->handle);
 #else
-    logCritical("GLFWWindow::setClipboard() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 

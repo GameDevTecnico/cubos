@@ -61,11 +61,11 @@ namespace cubos::engine::data
     template <typename T>
     requires IsAsset<T> Asset<T>::Asset(Handle&& handle) : Handle(std::move(handle))
     {
-        if (this->type != NULL && this->type != T::TypeName)
+        if (this->type != NULL && std::string(this->type) != T::TypeName)
         {
-            core::logError(
-                "Asset(Handle): couldn't get asset handle '{}' of type '{}' from generic handle of type '{}'",
-                *this->id, T::TypeName, this->type);
+            CUBOS_ERROR("Could not cast generic handle to asset handle of type '{}': the generic handle points to '{}' "
+                        "of type '{}'",
+                        T::TypeName, *this->id, this->type);
 
             --(*this->refCount);
             this->refCount = nullptr;
@@ -88,7 +88,7 @@ namespace cubos::engine::data
     {
         if (this->data == nullptr)
         {
-            core::logCritical("Asset::get(): can't get reference to data since the handle is null");
+            CUBOS_CRITICAL("Cannot get reference to data: invalid handle");
             abort();
         }
 

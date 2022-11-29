@@ -30,21 +30,21 @@ public:
         auto path = meta.getParameters().find("path");
         if (path == meta.getParameters().end())
         {
-            core::logError("SampleTextLoader: No path specified");
+            CUBOS_ERROR("No path parameter specified");
             return nullptr;
         }
 
         auto file = FileSystem::find(path->second);
         if (!file)
         {
-            core::logError("SampleTextLoader: File not found: {}", path->second);
+            CUBOS_ERROR("Could not find file '{}'", path->second);
             return nullptr;
         }
 
         auto stream = file->open(File::OpenMode::Read);
         if (!stream)
         {
-            core::logError("SampleTextLoader: Failed to open file: {}", path->second);
+            CUBOS_ERROR("Could not open file '{}'", path->second);
             return nullptr;
         }
 

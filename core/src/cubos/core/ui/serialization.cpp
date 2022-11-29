@@ -40,7 +40,7 @@ static std::string valueToString(const data::Package& pkg)
     case Type::String:
         return "\"" + pkg.get<std::string>() + "\"";
     default:
-        logCritical("ui::showPackage() failed: expected scalar value, got object/array/dictionary");
+        CUBOS_CRITICAL("Expected scalar value, got object/array/dictionary");
         abort();
     }
 }

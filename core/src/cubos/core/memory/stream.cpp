@@ -48,12 +48,12 @@ void Stream::print(uint64_t value, size_t base)
     if (base > 16)
     {
         base = 10;
-        logWarning("Stream::print(integer): base must be <= 16, defaulting to base 10");
+        CUBOS_WARN("Base must be <= 16, defaulting to base 10");
     }
     else if (base < 2)
     {
         base = 10;
-        logWarning("Stream::print(integer): base must be >= 2, defaulting to base 10");
+        CUBOS_WARN("Base must be >= 2, defaulting to base 10");
     }
 
     if (value == 0)
@@ -115,8 +115,7 @@ void Stream::print(double value, size_t decimalPlaces)
     if (decimalPlaces > MAX_DECIMAL_PLACES)
     {
         decimalPlaces = MAX_DECIMAL_PLACES;
-        logWarning("Stream::print(double): decimalPlaces must be <= {}, defaulting to {}", MAX_DECIMAL_PLACES,
-                   MAX_DECIMAL_PLACES);
+        CUBOS_WARN("decimalPlaces must be <= {}, defaulting to {}", MAX_DECIMAL_PLACES, MAX_DECIMAL_PLACES);
     }
 
     if (value == INFINITY)
@@ -205,7 +204,7 @@ void Stream::parse(int8_t& value, size_t base)
     if (v < INT8_MIN || v > INT8_MAX)
     {
         value = 0;
-        logWarning("Stream::parse(int8_t): value out of range, defaulting to 0");
+        CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
         value = static_cast<int8_t>(v);
@@ -218,7 +217,7 @@ void Stream::parse(int16_t& value, size_t base)
     if (v < INT16_MIN || v > INT16_MAX)
     {
         value = 0;
-        logWarning("Stream::parse(int16_t): value out of range, defaulting to 0");
+        CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
         value = static_cast<int16_t>(v);
@@ -231,7 +230,7 @@ void Stream::parse(int32_t& value, size_t base)
     if (v < INT32_MIN || v > INT32_MAX)
     {
         value = 0;
-        logWarning("Stream::parse(int32_t): value out of range, defaulting to 0");
+        CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
         value = static_cast<int32_t>(v);
@@ -253,7 +252,7 @@ void Stream::parse(int64_t& value, size_t base)
     if (v > INT64_MAX)
     {
         value = 0;
-        logWarning("Stream::parse(int64_t): value out of range, defaulting to 0");
+        CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else if (negative)
         value = -static_cast<int64_t>(v);
@@ -268,7 +267,7 @@ void Stream::parse(uint8_t& value, size_t base)
     if (v > UINT8_MAX)
     {
         value = 0;
-        logWarning("Stream::parse(uint8_t): value out of range, defaulting to 0");
+        CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
         value = static_cast<uint8_t>(v);
@@ -281,7 +280,7 @@ void Stream::parse(uint16_t& value, size_t base)
     if (v > UINT16_MAX)
     {
         value = 0;
-        logWarning("Stream::parse(uint16_t): value out of range, defaulting to 0");
+        CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
         value = static_cast<uint16_t>(v);
@@ -294,7 +293,7 @@ void Stream::parse(uint32_t& value, size_t base)
     if (v > UINT32_MAX)
     {
         value = 0;
-        logWarning("Stream::parse(uint32_t): value out of range, defaulting to 0");
+        CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
         value = static_cast<uint32_t>(v);
@@ -306,12 +305,12 @@ void Stream::parse(uint64_t& value, size_t base)
     if (base > 16)
     {
         base = 10;
-        logWarning("Stream::parse(integer): base must be <= 16, defaulting to base 10");
+        CUBOS_WARN("Base must be <= 16, defaulting to base 10");
     }
     else if (base < 2)
     {
         base = 10;
-        logWarning("Stream::parse(integer): base must be >= 2, defaulting to base 10");
+        CUBOS_WARN("Base must be >= 2, defaulting to base 10");
     }
 
     // Ignore whitespace
@@ -329,7 +328,7 @@ void Stream::parse(uint64_t& value, size_t base)
         {
             if (c - '0' >= base)
             {
-                logWarning("Stream::parse(uint64_t): digit out of range, defaulting to 0");
+                CUBOS_WARN("'{}' is not a base {} digit, defaulting to 0", c, base);
                 value = 0;
                 return;
             }

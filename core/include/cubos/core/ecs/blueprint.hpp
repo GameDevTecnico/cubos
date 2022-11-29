@@ -169,8 +169,7 @@ namespace cubos::core::ecs
 
         if (des.failed())
         {
-            logCritical("Blueprint::Buffer::addAll() failed: deserialization of component type '{}' failed.",
-                        typeid(ComponentType).name());
+            CUBOS_CRITICAL("Could not deserialize component of type '{}'", typeid(ComponentType).name());
             abort();
         }
     }

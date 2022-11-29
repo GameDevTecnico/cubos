@@ -11,7 +11,7 @@ bool Registry::create(const std::string& name, data::Deserializer& des, Blueprin
 
     if (creators.find(name) == creators.end())
     {
-        core::logWarning("Registry::create(): component type {} not registered", name);
+        CUBOS_ERROR("Component type '{}' not registered", name);
         return false;
     }
 
@@ -24,7 +24,7 @@ const std::string& Registry::name(std::type_index index)
     auto it = names.find(index);
     if (it == names.end())
     {
-        core::logCritical("Registry::name(): component type {} not registered", index.name());
+        CUBOS_CRITICAL("Component type '{}' not registered", index.name());
         abort();
     }
     return it->second;

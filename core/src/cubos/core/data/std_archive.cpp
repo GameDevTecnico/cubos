@@ -14,7 +14,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     {
         if (readOnly)
         {
-            logError("Couldn't create STDArchive: file/directory '{}' doesn't exist", osPath.string());
+            CUBOS_CRITICAL("File/directory '{}' does not exist", osPath.string());
             abort();
         }
         else
@@ -29,7 +29,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
                 FILE* file = fopen(path.c_str(), "w");
                 if (!file)
                 {
-                    logError("Couldn't create STDArchive: couldn't create root file '{}'", path);
+                    CUBOS_CRITICAL("Could not create root file '{}'", path);
                     abort();
                 }
                 fclose(file);
@@ -42,7 +42,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     {
         if (!isDirectory)
         {
-            logError("Couldn't create STDArchive: expected a file at '{}', found a directory", osPath.string());
+            CUBOS_CRITICAL("Expected file at '{}', found directory", osPath.string());
             abort();
         }
 
@@ -55,7 +55,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     {
         if (isDirectory)
         {
-            logError("Couldn't create STDArchive: expected a directory at '{}', found a file", osPath.string());
+            CUBOS_CRITICAL("Expected directory at '{}', found file", osPath.string());
             abort();
         }
 
@@ -158,7 +158,7 @@ std::string STDArchive::getName(size_t id) const
     auto it = this->files.find(id);
     if (it == this->files.end())
     {
-        logError("STDArchive: Couldn't get name of file, file doesn't exist");
+        CUBOS_CRITICAL("File does not exist");
         abort();
     }
 
@@ -170,7 +170,7 @@ bool STDArchive::isDirectory(size_t id) const
     auto it = this->files.find(id);
     if (it == this->files.end())
     {
-        logError("STDArchive: Couldn't check if file is directory, file doesn't exist");
+        CUBOS_CRITICAL("File does not exist");
         abort();
     }
 
@@ -187,7 +187,7 @@ size_t STDArchive::getParent(size_t id) const
     auto it = this->files.find(id);
     if (it == this->files.end())
     {
-        logError("STDArchive: Couldn't get parent of file, file doesn't exist");
+        CUBOS_CRITICAL("File does not exist");
         abort();
     }
 
@@ -199,7 +199,7 @@ size_t STDArchive::getSibling(size_t id) const
     auto it = this->files.find(id);
     if (it == this->files.end())
     {
-        logError("STDArchive: Couldn't get sibling of file, file doesn't exist");
+        CUBOS_CRITICAL("File does not exist");
         abort();
     }
 
@@ -211,7 +211,7 @@ size_t STDArchive::getChild(size_t id) const
     auto it = this->files.find(id);
     if (it == this->files.end())
     {
-        logError("STDArchive: Couldn't get child of file, file doesn't exist");
+        CUBOS_CRITICAL("File does not exist");
         abort();
     }
 
@@ -223,7 +223,7 @@ std::unique_ptr<memory::Stream> STDArchive::open(File::Handle file, File::OpenMo
     // Check if the archive is read-only.
     if (this->readOnly && mode != File::OpenMode::Read)
     {
-        logError("STDArchive: Couldn't open file for writing, archive is read-only");
+        CUBOS_CRITICAL("Could not open file for writing: archive is read-only");
         abort();
     }
 
@@ -231,14 +231,14 @@ std::unique_ptr<memory::Stream> STDArchive::open(File::Handle file, File::OpenMo
     auto it = this->files.find(file->getId());
     if (it == this->files.end())
     {
-        logError("STDArchive: Couldn't open file, file doesn't exist");
+        CUBOS_CRITICAL("File does not exist");
         abort();
     }
 
     // Check if the file is a directory.
     if (it->second.directory)
     {
-        logError("STDArchive: Couldn't open file, file is a directory");
+        CUBOS_CRITICAL("Could not open file: is directory");
         abort();
     }
 

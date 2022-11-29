@@ -77,7 +77,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, Meta& meta)
     }
     else
     {
-        core::logError("asset::Meta::deserialize() failed: Invalid usage type '{}', defaulting to Static", usage);
+        CUBOS_ERROR("Invalid asset usage type '{}', defaulting to Usage::Static", usage);
         meta.usage = Usage::Static;
     }
 }

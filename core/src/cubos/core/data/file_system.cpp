@@ -14,7 +14,7 @@ void FileSystem::mount(std::string_view path, std::shared_ptr<Archive> archive)
 {
     if (path.empty() || path[0] != '/')
     {
-        logError("Could not mount archive at path '{}', the path must be absolute");
+        CUBOS_CRITICAL("Could not mount archive at '{}': path must be absolute", path);
         abort();
     }
 
@@ -29,7 +29,7 @@ void FileSystem::unmount(std::string_view path)
 {
     if (path.empty() || path[0] != '/')
     {
-        logError("Could not unmount archive at path '{}', the path must be absolute");
+        CUBOS_ERROR("Could not unmount archive at '{}': path must be absolute", path);
         return;
     }
 
@@ -44,7 +44,7 @@ File::Handle FileSystem::find(std::string_view path)
 {
     if (path.empty() || path[0] != '/')
     {
-        logWarning("Could not find file at path '{}', the path must be absolute");
+        CUBOS_ERROR("Could not find file at path '{}', the path must be absolute", path);
         return nullptr;
     }
 
@@ -59,7 +59,7 @@ File::Handle FileSystem::create(std::string_view path, bool directory)
 {
     if (path.empty() || path[0] != '/')
     {
-        logWarning("Could not create file at path '{}', the path must be absolute");
+        CUBOS_ERROR("Could not create file at path '{}', the path must be absolute");
         return nullptr;
     }
 
@@ -74,7 +74,7 @@ bool FileSystem::destroy(std::string_view path)
 {
     if (path.empty() || path[0] != '/')
     {
-        logWarning("Could not destroy file at path '{}', the path must be absolute");
+        CUBOS_ERROR("Could not destroy file at path '{}', the path must be absolute");
         return false;
     }
 
@@ -88,7 +88,7 @@ bool FileSystem::destroy(std::string_view path)
         return file->destroy();
     else
     {
-        logWarning("Could not destroy file at path '{}', the file does not exist");
+        CUBOS_WARN("Could not destroy file at path '{}', the file does not exist");
         return false;
     }
 }
@@ -97,7 +97,7 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
 {
     if (path.empty() || path[0] != '/')
     {
-        logWarning("Could not open file at path '{}', the path must be absolute");
+        CUBOS_ERROR("Could not open file at path '{}', the path must be absolute");
         return nullptr;
     }
 
@@ -111,7 +111,7 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
         return file->open(mode);
     else
     {
-        logWarning("Could not open file at path '{}', the file does not exist");
+        CUBOS_WARN("Could not open file at path '{}', the file does not exist");
         return nullptr;
     }
 }
