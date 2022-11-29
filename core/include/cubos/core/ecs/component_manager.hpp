@@ -41,14 +41,14 @@ namespace cubos::core::ecs
         ReadStorage(ReadStorage&&);
 
         /// Gets the underlying storage reference.
-        const ComponentStorage<T>::Type& get() const;
+        const typename ComponentStorage<T>::Type& get() const;
 
     private:
         friend class ComponentManager;
 
-        ReadStorage(const ComponentStorage<T>::Type& storage, std::shared_lock<std::shared_mutex>&& lock);
+        ReadStorage(const typename ComponentStorage<T>::Type& storage, std::shared_lock<std::shared_mutex>&& lock);
 
-        const ComponentStorage<T>::Type& storage;
+        const typename ComponentStorage<T>::Type& storage;
         std::shared_lock<std::shared_mutex> lock;
     };
 
@@ -59,14 +59,14 @@ namespace cubos::core::ecs
         WriteStorage(WriteStorage&&);
 
         /// Gets the underlying storage reference.
-        ComponentStorage<T>::Type& get() const;
+        typename ComponentStorage<T>::Type& get() const;
 
     private:
         friend class ComponentManager;
 
-        WriteStorage(ComponentStorage<T>::Type& resource, std::unique_lock<std::shared_mutex>&& lock);
+        WriteStorage(typename ComponentStorage<T>::Type& resource, std::unique_lock<std::shared_mutex>&& lock);
 
-        ComponentStorage<T>::Type& storage;
+        typename ComponentStorage<T>::Type& storage;
         std::unique_lock<std::shared_mutex> lock;
     };
 
@@ -167,13 +167,14 @@ namespace cubos::core::ecs
         // Do nothing.
     }
 
-    template <typename T> const ComponentStorage<T>::Type& ReadStorage<T>::get() const
+    template <typename T> const typename ComponentStorage<T>::Type& ReadStorage<T>::get() const
     {
         return this->storage;
     }
 
     template <typename T>
-    ReadStorage<T>::ReadStorage(const ComponentStorage<T>::Type& storage, std::shared_lock<std::shared_mutex>&& lock)
+    ReadStorage<T>::ReadStorage(const typename ComponentStorage<T>::Type& storage,
+                                std::shared_lock<std::shared_mutex>&& lock)
         : storage(storage), lock(std::move(lock))
     {
         // Do nothing.
@@ -185,13 +186,14 @@ namespace cubos::core::ecs
         // Do nothing.
     }
 
-    template <typename T> ComponentStorage<T>::Type& WriteStorage<T>::get() const
+    template <typename T> typename ComponentStorage<T>::Type& WriteStorage<T>::get() const
     {
         return this->storage;
     }
 
     template <typename T>
-    WriteStorage<T>::WriteStorage(ComponentStorage<T>::Type& storage, std::unique_lock<std::shared_mutex>&& lock)
+    WriteStorage<T>::WriteStorage(typename ComponentStorage<T>::Type& storage,
+                                  std::unique_lock<std::shared_mutex>&& lock)
         : storage(storage), lock(std::move(lock))
     {
         // Do nothing.
@@ -205,7 +207,7 @@ namespace cubos::core::ecs
         if (this->typeToIds.find(type) == this->typeToIds.end())
         {
             this->typeToIds[type] = this->entries.size() + 1; // Component ids start at 1.
-            this->entries.emplace_back(new ComponentStorage<T>::Type());
+            this->entries.emplace_back(new typename ComponentStorage<T>::Type());
         }
     }
 
@@ -217,28 +219,28 @@ namespace cubos::core::ecs
     template <typename T> ReadStorage<T> ComponentManager::read() const
     {
         const size_t id = this->getID<T>();
-        return ReadStorage<T>(*static_cast<const ComponentStorage<T>::Type*>(this->entries[id - 1].storage),
+        return ReadStorage<T>(*static_cast<const typename ComponentStorage<T>::Type*>(this->entries[id - 1].storage),
                               std::shared_lock<std::shared_mutex>(*this->entries[id - 1].mutex));
     }
 
     template <typename T> WriteStorage<T> ComponentManager::write() const
     {
         const size_t id = this->getID<T>();
-        return WriteStorage<T>(*static_cast<ComponentStorage<T>::Type*>(this->entries[id - 1].storage),
+        return WriteStorage<T>(*static_cast<typename ComponentStorage<T>::Type*>(this->entries[id - 1].storage),
                                std::unique_lock<std::shared_mutex>(*this->entries[id - 1].mutex));
     }
 
     template <typename T> void ComponentManager::add(uint32_t entityId, T value)
     {
         const size_t id = this->getID<T>();
-        auto storage = static_cast<ComponentStorage<T>::Type*>(this->entries[id - 1].storage);
+        auto storage = static_cast<typename ComponentStorage<T>::Type*>(this->entries[id - 1].storage);
         storage->insert(entityId, std::move(value));
     }
 
     template <typename T> void ComponentManager::remove(uint32_t entityId)
     {
         const size_t id = this->getID<T>();
-        auto storage = static_cast<ComponentStorage<T>::Type*>(this->entries[id - 1].storage);
+        auto storage = static_cast<typename ComponentStorage<T>::Type*>(this->entries[id - 1].storage);
         storage->erase(entityId);
     }
 } // namespace cubos::core::ecs
