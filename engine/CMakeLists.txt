@@ -1,6 +1,8 @@
 # engine/CMakeLists.txt
 # Cubos engine build configuration
 
+include(CubinhosGenerate)
+
 option(BUILD_ENGINE_SAMPLES "Build cubos engine samples" OFF)
 
 message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
@@ -67,18 +69,7 @@ target_compile_features(cubos-engine PUBLIC cxx_std_20)
 target_compile_options(cubos-engine PUBLIC -Wno-attributes)
 
 # Run cubinhos generate before building engine
-add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include
-    COMMAND $<TARGET_FILE:cubinhos> generate ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include/components
-    DEPENDS $<TARGET_FILE:cubinhos> ${CUBOS_ENGINE_INCLUDE}
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-)
-
-# Make cubos-engine depend on cubinhos generate
-add_custom_target(cubos-engine-cubinhos DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/include)
-add_dependencies(cubos-engine cubos-engine-cubinhos)
-
-target_include_directories(cubos-engine PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include)
+cubinhos_generate(cubos-engine ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Add engine samples
 if (BUILD_ENGINE_SAMPLES)
