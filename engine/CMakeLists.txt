@@ -69,8 +69,8 @@ target_compile_options(cubos-engine PUBLIC -Wno-attributes)
 # Run cubinhos generate before building engine
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include
-    COMMAND ${CMAKE_BINARY_DIR}/tools/cubinhos generate ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include/components
-    DEPENDS ${CMAKE_BINARY_DIR}/tools/cubinhos ${CUBOS_ENGINE_INCLUDE}
+    COMMAND ${CMAKE_BINARY_DIR}/tools/cubinhos${CMAKE_EXECUTABLE_SUFFIX} generate ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include/components
+    DEPENDS ${CMAKE_BINARY_DIR}/tools/cubinhos${CMAKE_EXECUTABLE_SUFFIX} ${CUBOS_ENGINE_INCLUDE}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
