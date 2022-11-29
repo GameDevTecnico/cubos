@@ -395,8 +395,6 @@ int main(void)
 
     while (!window->shouldClose())
     {
-        core::ui::beginFrame();
-
         // Handle input events.
         window->pollEvents();
         core::io::InputManager::processActions();
@@ -425,6 +423,8 @@ int main(void)
             glm::quat directionalLightRotation = glm::quat(glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0));
             frame.get().light(core::gl::DirectionalLight(directionalLightRotation, glm::vec3(1), 1.0f));
         }
+
+        core::ui::beginFrame();
 
         // Update the ECS systems.
 
