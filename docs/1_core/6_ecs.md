@@ -72,16 +72,13 @@ In **CUBOS.** there are no game objects. Instead, we would define two
 components:
 
 ```cpp
-struct Position
+struct [[cubos::component("position", VecStorage)]] Position
 {
-    // We need to specify how the components of this type are stored.
-    using Storage = core::ecs::VecStorage<Position>;
     glm::vec3 vec = { 0.0f, 0.0f, 0.0f };
 };
 
-struct Velocity
+struct [[cubos::component("velocity", VecStorage)]] Velocity
 {
-    using Storage = core::ecs::VecStorage<Velocity>;
     glm::vec3 vec = { 0.0f, 0.0f, 0.0f };
 };
 ```
