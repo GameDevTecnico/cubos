@@ -1,3 +1,5 @@
+# ECS {#core-ecs}
+
     [Wikipedia](https://en.wikipedia.org/wiki/Entity_component_system) defines
     *ECS* as:
 
