@@ -8,6 +8,8 @@
 #include <vector>
 #include <shared_mutex>
 #include <typeindex>
+#include <memory>
+#include <mutex>
 
 namespace cubos::core::ecs
 {

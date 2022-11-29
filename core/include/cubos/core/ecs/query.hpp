@@ -5,6 +5,7 @@
 
 #include <typeindex>
 #include <unordered_set>
+#include <optional>
 
 namespace cubos::core::ecs
 {
