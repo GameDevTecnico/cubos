@@ -112,9 +112,9 @@ void spawner(ecs::Commands& cmds)
     ecs::Entity main = epicBlueprint.create("main", Position{0, 0, 0}, Velocity{0, 0, 0});
     epicBlueprint.create("sub", Parent{main});
 
-    cmds.spawn(epicBlueprint).add("main", Position(1, 1, 1));
-    cmds.spawn(epicBlueprint).add("main", Position(2, 2, 2));
-    cmds.spawn(epicBlueprint).add("main", Position(3, 3, 3));
+    cmds.spawn(epicBlueprint).add("main", Position{1, 1, 1});
+    cmds.spawn(epicBlueprint).add("main", Position{2, 2, 2});
+    cmds.spawn(epicBlueprint).add("main", Position{3, 3, 3});
 }
 
 struct DeltaTime

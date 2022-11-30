@@ -84,7 +84,7 @@ namespace cubos::core
     }
 
     template <typename... TArgs>
-    Event<TArgs...>::ID Event<TArgs...>::registerCallback(Event<TArgs...>::Callback callback)
+    typename Event<TArgs...>::ID Event<TArgs...>::registerCallback(Event<TArgs...>::Callback callback)
     {
         auto lock = std::lock_guard<std::mutex>(this->mutex);
         this->callbacks.push_back(callback);
