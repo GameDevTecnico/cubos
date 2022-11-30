@@ -14,7 +14,6 @@
           buildInputs = with pkgs; [
             pkg-config
             cmake
-            gcc
             glfw
             glm
             libyamlcpp
@@ -22,6 +21,7 @@
             clang-tools
             doxygen
             graphviz
+            clang_14
           ];
         };
       }

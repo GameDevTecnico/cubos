@@ -60,7 +60,6 @@ namespace cubos::engine::data
         struct Info
         {
             Info(Meta&& meta);
-            Info(Info&&) = default;
 
             Meta meta;        ///< Asset's meta data.
             const void* data; ///< Pointer to the asset's data, if its loaded.
