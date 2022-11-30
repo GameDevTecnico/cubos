@@ -12,6 +12,7 @@
 #endif
 #endif
 
+#undef SPDLOG_ACTIVE_LEVEL
 #define SPDLOG_ACTIVE_LEVEL CUBOS_LOG_LEVEL
 #include <spdlog/spdlog.h>
 
