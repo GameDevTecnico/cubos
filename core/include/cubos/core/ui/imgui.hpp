@@ -12,7 +12,7 @@ namespace cubos::core::ui
     void initialize(io::Window& window);
 
     /// Shuts down ImGui.
-    /// Should only be called once, after initImGui, and no ImGui calls should be made after this is called.
+    /// Should only be called once, after @ref initialize, and no ImGui calls should be made after this is called.
     void terminate();
 
     /// Begins a new ImGui frame.
