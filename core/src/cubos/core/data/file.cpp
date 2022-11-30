@@ -75,13 +75,13 @@ void File::mount(std::string_view path, std::shared_ptr<Archive> archive)
 
         if (dir->archive != nullptr)
         {
-            CUBOS_CRITICAL("Could not mount archive at root, an archive has already been mounted at root");
+            CUBOS_CRITICAL("Could not mount archive at root, an archive has already been mounted");
             abort();
         }
 
         if (!archive->isDirectory(1))
         {
-            CUBOS_CRITICAL("Could not mount archive at root, archive must be a directory to be mounted at root");
+            CUBOS_CRITICAL("Could not mount archive at root, archive must be a directory to be mounted");
             abort();
         }
 

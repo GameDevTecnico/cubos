@@ -142,7 +142,7 @@ namespace cubos::core::ecs
         auto it = resources.find(typeid(T));
         if (it != resources.end())
         {
-            CUBOS_CRITICAL("Could not registe resource of type {}: already registered", typeid(T).name());
+            CUBOS_CRITICAL("Could not register resource of type {}: already registered", typeid(T).name());
             abort();
         }
 
