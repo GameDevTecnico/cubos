@@ -5,7 +5,61 @@ interacting with files and also provides a serialization system.
 
 ## File System
 
-TODO
+**CUBOS.** provides a file system abstraction layer that allows you to access
+files in a representation/platform independent way.
+
+### Motivation
+
+Why is this useful? Imagine you are writing a game and you want to package it
+into a single executable. During development, it would be inconvenient to have
+to merge all the files into the executable every time you make a change. So
+you would probably have a folder with all the files and you would load them
+from there.
+
+But when you package the game, you would have to merge all the files into the
+executable. How do you do this without having to change the code?
+
+The solution is to use the file system abstraction layer. When you access
+files, you use the \ref cubos::core::data::FileSystem "FileSystem" class.
+During development, you would mount a \ref cubos::core::data::STDArchive
+"STDArchive" with the folder where the files are located. When you package the
+game, you would mount a \ref cubos::core::data::EmbeddedArchive
+"EmbeddedArchive". Code wise, you would not have to change anything, provided
+that the paths relative to the archive are the same.
+
+This means its also possible to compress the files without any code changes.
+
+### Archive
+
+Archives represent 'gateways' to the real data in the virtual file system.
+Currently, there are only two types of archives:
+- \ref cubos::core::data::STDArchive "STDArchive" - represents a file or
+  directory in the real file system.
+- \ref cubos::core::data::EmbeddedArchive "EmbeddedArchive" - represents a file
+  or directory embedded in the executable.
+
+Archives can be mounted into a path in the file system using the
+\ref cubos::core::data::FileSystem::mount "FileSystem::mount" method. This
+makes it so that any path that starts with the mounted path will be redirected
+to the archive.
+
+Archives can be configured to be read-only: files cannot be created, modified
+or deleted. This is useful for archives used, for example, by the assets of a
+game.
+
+### Files
+
+\ref cubos::core::data::File "File" objects represent files in the virtual file
+system. You can get a file from its path in the virtual file system using the
+\ref cubos::core::data::FileSystem::find "FileSystem::find" method.
+
+Files can be opened for reading or writing, using the
+\ref cubos::core::data::File::open "File::open" method.
+
+### Example
+
+You can check out the `embedded_archive` sample to see how you can use this
+feature.
 
 ## Serialization
 
