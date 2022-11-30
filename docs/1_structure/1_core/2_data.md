@@ -240,7 +240,7 @@ for (size_t i = 0; i < family.size(); ++i)
     map.add(&family[i], i); // Add a mapping index <-> Human*
 
 // Then we serialize the family, using the map.
-serializer.write(family, &map, "family");
+serializer.write(family, map, "family");
 ```
 
 The serialization functions for `Human` then could be written as:
@@ -249,7 +249,7 @@ The serialization functions for `Human` then could be written as:
 // Once again, we must put these in the right namespace.
 namespace cubos::core::data
 {
-    void serialize(Serializer& s, const Human& h, SerializationMap<Human*, uint32_t>* map, const char* name)
+    void serialize(Serializer& s, const Human& h, const SerializationMap<Human*, uint32_t>& map, const char* name)
     {
         s.beginObject(name);
         s.write(h.name, "name");
@@ -258,7 +258,7 @@ namespace cubos::core::data
         s.endObject();
     }
 
-    void deserialize(Deserializer& d, Human& h, SerializationMap<Human*, uint32_t>* map)
+    void deserialize(Deserializer& d, Human& h, const SerializationMap<Human*, uint32_t>& map)
     {
         int32_t id;
 
