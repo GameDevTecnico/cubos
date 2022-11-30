@@ -14,6 +14,7 @@ namespace cubos::engine::data
     class Loader
     {
     public:
+        /// @param manager The asset manager that owns this loader.
         Loader(AssetManager* manager);
         virtual ~Loader() = default;
 
@@ -33,7 +34,7 @@ namespace cubos::engine::data
         virtual void unload(const Meta& meta, const void* asset) = 0;
 
     protected:
-        AssetManager* manager;
+        AssetManager* manager; ///< Asset manager that owns this loader.
     };
 } // namespace cubos::engine::data
 
