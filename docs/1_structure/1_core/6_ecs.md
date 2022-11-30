@@ -33,16 +33,17 @@ systems, since they have clearly defined dependencies.
 
 **CUBOS.** *ECS* contains the following concepts:
 - **World**: the main object that holds all of the *ECS* state.
-- **Entities**: represent objects in the game world.
+- **Entities**: represent objects in the game world (e.g. a car, a player, a tree)
 - **Components**: data associated with an entity (e.g. `Position`, `Rotation`,
 `Velocity`, etc.).
 - **Resources**: singleton-like objects which are stored per world and which do not belong to a specific entity (e.g. `DeltaTime`, `AssetManager`).
-- **Systems**: functions which operate on resources and entities' components.
+- **Systems**: functions which operate on resources and entities' components. This is where the logic is implemented.
+- **Dispatcher**: decides when each system is called and knows which systems are independent from each other so they can be called at the same time (parallel computing).
 
 One important thing to note is that in an *ECS* the data is completely
 decoupled from the logic. What this means is that entities and components
 do not and should not possess any functionality other than storing data.
-All of the logic is relegated to the systems. 
+All of the logic is relegated to the systems.
 
 ### How do we use it?
 
@@ -158,7 +159,7 @@ So, how do we do it?
 
 Until now we've seen systems which operate only on resources and
 queries. Systems may also receive a third type of argument: `Commands`.
-`Commands` objects store *ECS* commands that are executed at a later time, when
+`Commands` objects store *ECS* commands to be executed at a later time, when
 its safe to do so. A possible spawner system could look like this:
 
 ```cpp
@@ -184,8 +185,91 @@ commands are executed only when no system is iterating over the same entities.
 
 ### Blueprints
 
-TODO
+A common pattern in game engines is to have a way to create entities in
+bundles, such as *Unity*'s *prefabs*. In **CUBOS.** we call these *blueprints*.
+A blueprint is a set of entities and their components, which can be spawned
+into the world as many times as needed.
+
+For example, if we wanted to create a blueprint for a motorbike with two
+wheels:
+```cpp
+auto motorbike = ecs::Blueprint();
+auto body = motorbike.create("body", Position{...}, ...);
+motorbike.create("front_wheel", Parent{body}, ...);
+motorbike.create("back_wheel", Parent{body}, ...);
+```
+
+To spawn the blueprint into the world:
+```cpp
+// You can just spawn the bike as is.
+commands.spawn(motorbike);
+
+// Lets say we want to spawn the bike in a different position.
+// You can override components of the spawned entities.
+commands
+    .spawn(motorbike)
+    .add("body", Position{...});
+```
+
+#### Merging blueprints
+
+It's possible to merge a blueprint into another one. Lets say we have a
+blueprint for the wheels of the motorbike:
+
+```cpp
+auto wheel = ecs::Blueprint();
+wheel.create("wheel", ...);
+```
+
+When creating the motorbike blueprint, we can merge the wheel blueprint into
+it:
+```cpp
+auto motorbike = ecs::Blueprint();
+auto body = motorbike.create("body", Position{...}, ...);
+motorbike.merge("front", wheel);
+motorbike.merge("back", wheel);
+```
+
+When spawning the motorbike blueprint, the entities of the wheel blueprint
+will be accessible with the prefix we gave them:
+```cpp
+commands
+    .spawn(motorbike)
+    .add("front.wheel", ...)
+    .add("back.wheel", ...);
+```
 
 ### Dispatcher
 
-TODO
+The \ref cubos::core::ecs::Dispatcher "Dispatcher" is the object which manages
+when each system is called. It is used to organize the order in which systems
+are called each frame (or at startup) and to organize the systems in a way to
+know which systems do not share resources between them, as in, don't write and
+read from the same component or resource at the same time) so they can be
+called in parallel.
+
+#### How is it organized?
+
+The dispatcher keeps a list of **stages**, each stage represents a step in
+which its systems are called (possibly in parallel). Each stage has a list of
+**systems**. Since these systems may be called in parallel, they must not
+share resources between them.
+
+#### Adding systems to the dispatcher
+
+When a system is added to the dispatcher, to a stage which was not yet
+created, the \ref cubos::core::ecs::Dispatcher "Dispatcher" will create a new
+stage and put it in the default position.
+
+#### Stage ordering
+
+If you want to specify a certain order for the stages, you can use the
+\ref cubos::core::ecs::Dispatcher::putStageBefore "Dispatcher::putStageBefore"
+and
+\ref cubos::core::ecs::Dispatcher::putStageAfter "Dispatcher::putStageAfter"
+methods. These move a stage to a certain position in the list of stages, in
+relation to another stage.
+
+You can also set the default position for new stages using the
+\ref cubos::core::ecs::Dispatcher::setDefaultStage
+"Dispatcher::setDefaultStage".
