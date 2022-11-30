@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcubos_1_1core_1_1ecs_1_1Blueprint.html" title=" " alt="" coords="5,5,199,32"/>
+<area shape="rect" id="node1" href="$classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" title="Base class for system wrappers." alt="" coords="5,5,213,47"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1SystemWrapper.html" title="A system wrapper for a system which takes some arguments." alt="" coords="261,5,444,47"/>
 </map>

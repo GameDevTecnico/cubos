@@ -11,6 +11,7 @@ var dir_95549d37735ad5b142799f042eef0d37 =
     [ "file_system.hpp", "file__system_8hpp_source.html", null ],
     [ "json_deserializer.hpp", "json__deserializer_8hpp_source.html", null ],
     [ "json_serializer.hpp", "json__serializer_8hpp_source.html", null ],
+    [ "package.hpp", "package_8hpp_source.html", null ],
     [ "qb_parser.hpp", "qb__parser_8hpp_source.html", null ],
     [ "serialization_map.hpp", "serialization__map_8hpp_source.html", null ],
     [ "serializer.hpp", "serializer_8hpp_source.html", null ],

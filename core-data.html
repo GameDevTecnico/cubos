@@ -120,7 +120,7 @@ Serialization</h1>
 <div class="line"><span class="comment">// Fruit is defined in another namespace.</span></div>
 <div class="line"><span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div>
 <div class="line">{</div>
-<div class="line">    <span class="keywordtype">void</span> serialize(Serializer&amp; s, <span class="keyword">const</span> Fruit&amp; f, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<div class="line">    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> Fruit&amp; f, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
 <div class="line">    {</div>
 <div class="line">        s.beginObject(name);</div>
 <div class="line">        s.write(f.name, <span class="stringliteral">&quot;name&quot;</span>);</div>
@@ -231,7 +231,7 @@ Context serializable types</h2>
 <div class="fragment"><div class="line"><span class="comment">// Once again, we must put these in the right namespace.</span></div>
 <div class="line"><span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div>
 <div class="line">{</div>
-<div class="line">    <span class="keywordtype">void</span> serialize(Serializer&amp; s, <span class="keyword">const</span> Human&amp; h, SerializationMap&lt;Human*, uint32_t&gt;* map, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<div class="line">    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> Human&amp; h, SerializationMap&lt;Human*, uint32_t&gt;* map, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
 <div class="line">    {</div>
 <div class="line">        s.beginObject(name);</div>
 <div class="line">        s.write(h.name, <span class="stringliteral">&quot;name&quot;</span>);</div>
@@ -272,7 +272,7 @@ Context serializable types</h2>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Going further</h2>
 <p>One way we're taking advantage of the serialization system is to use it to both show object's properties in the UI (with <code>ImGui</code>) and also allow the user to edit those properties.</p>
-<p>For this purpose, we needed an easy way to inspect properties of any serializable object, and we also needed a way to edit those properties. So, we came up with the Package class. Any object which provides a trivial serialization function (that is, a function which won't receive extra arguments) can be packaged. We can also unpackage packages into trivially deserializable objects!</p>
+<p>For this purpose, we needed an easy way to inspect properties of any serializable object, and we also needed a way to edit those properties. So, we came up with the <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">Package</a> class. Any object which provides a trivial serialization function (that is, a function which won't receive extra arguments) can be packaged. We can also unpackage packages into trivially deserializable objects!</p>
 <p>Previously we defined a trivially serializable <code>Fruit</code> struct. Let's say we wanted to inspect which properties a <code>Fruit</code> object has, dynamically. We can first package it:</p>
 <div class="fragment"><div class="line">Fruit fruit = { <span class="stringliteral">&quot;Apple&quot;</span>, 0.5f, 10 };</div>
 <div class="line"><span class="keyword">auto</span> pkg = Package::from(fruit);</div>
@@ -286,7 +286,7 @@ Going further</h2>
 </div><!-- fragment --><p>And even edit them if necessary:</p>
 <div class="fragment"><div class="line">pkg.field(<span class="stringliteral">&quot;name&quot;</span>).set(<span class="stringliteral">&quot;Banana&quot;</span>);</div>
 <div class="line">...</div>
-</div><!-- fragment --><p>If we edit the package, the original object won't be immediately updated. To do this, we need to use the into method. This method only works with trivially deserializable objects, and will return true or false, depending on whether the conversion was successful.</p>
+</div><!-- fragment --><p>If we edit the package, the original object won't be immediately updated. To do this, we need to use the <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a4f389b4eb5e19d80de659150df1faa6a">into</a> method. This method only works with trivially deserializable objects, and will return true or false, depending on whether the conversion was successful.</p>
 <div class="fragment"><div class="line">Fruit fruit = { <span class="stringliteral">&quot;Apple&quot;</span>, 0.5f, 10 };</div>
 <div class="line"><span class="keyword">auto</span> pkg = Package::from(fruit);</div>
 <div class="line">pkg.field(<span class="stringliteral">&quot;name&quot;</span>).set(<span class="stringliteral">&quot;Banana&quot;</span>);</div>
@@ -296,6 +296,7 @@ Going further</h2>
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html_aa12e5ea3b14b35fbab982dc1275d54ea"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html#aa12e5ea3b14b35fbab982dc1275d54ea">cubos::core::memory::Stream::stdOut</a></div><div class="ttdeci">static Stream &amp; stdOut</div><div class="ttdoc">Stream wrapper for stdout.</div><div class="ttdef"><b>Definition:</b> stream.hpp:28</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a97f36cce7ff37b16121110f7562a7d23"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Package &amp;pkg, const char *name)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1YAMLSerializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">cubos::core::data::YAMLSerializer</a></div><div class="ttdoc">Implementation of the abstract Serializer class for serializing to YAML.</div><div class="ttdef"><b>Definition:</b> yaml_serializer.hpp:12</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_html"><div class="ttname"><a href="namespacecubos_1_1core.html">cubos::core</a></div><div class="ttdoc">Namespace of the CUBOS. core library.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>

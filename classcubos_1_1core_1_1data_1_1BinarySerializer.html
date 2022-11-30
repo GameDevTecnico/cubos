@@ -109,15 +109,14 @@ Collaboration diagram for cubos::core::data::BinarySerializer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcubos_1_1core_1_1data_1_1BinarySerializer__coll__graph.png" border="0" usemap="#cubos_1_1core_1_1data_1_1BinarySerializer_coll__map" alt="Collaboration graph"/></div>
 <map name="cubos_1_1core_1_1data_1_1BinarySerializer_coll__map" id="cubos_1_1core_1_1data_1_1BinarySerializer_coll__map">
-<area shape="rect" title=" " alt="" coords="14,203,155,244"/>
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1Serializer.html" title="Abstract class for serializing data." alt="" coords="14,112,155,153"/>
-<area shape="rect" href="classcubos_1_1core_1_1memory_1_1Stream.html" title="Abstract class for memory streams." alt="" coords="5,7,164,48"/>
+<area shape="rect" title=" " alt="" coords="5,95,147,136"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1Serializer.html" title="Abstract class for serializing data." alt="" coords="5,5,147,47"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2875df7bfc2277cb8c469b71ee457657"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1BinarySerializer.html#a2875df7bfc2277cb8c469b71ee457657">BinarySerializer</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &amp;<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html#a20c7d6b89636313eebf3458b95fbf20d">stream</a>, bool writeLittleEndian=true)</td></tr>
+<tr class="memitem:a2875df7bfc2277cb8c469b71ee457657"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1BinarySerializer.html#a2875df7bfc2277cb8c469b71ee457657">BinarySerializer</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &amp;stream, bool writeLittleEndian=true)</td></tr>
 <tr class="separator:a2875df7bfc2277cb8c469b71ee457657"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28f3360a4651634a1ff6d7ee57afc725"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1BinarySerializer.html#a28f3360a4651634a1ff6d7ee57afc725">writeI8</a> (int8_t value, const char *name) override</td></tr>
 <tr class="separator:a28f3360a4651634a1ff6d7ee57afc725"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,8 +161,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a242dbba416c861871a928ead1a1f4c2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates that a dictionary is no longer being serialized. <br /></td></tr>
 <tr class="separator:a242dbba416c861871a928ead1a1f4c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classcubos_1_1core_1_1data_1_1Serializer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classcubos_1_1core_1_1data_1_1Serializer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">cubos::core::data::Serializer</a></td></tr>
-<tr class="memitem:a64b91d206b1b03835799610d4d52a8b9 inherit pub_methods_classcubos_1_1core_1_1data_1_1Serializer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html#a64b91d206b1b03835799610d4d52a8b9">Serializer</a> (<a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &amp;<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html#a20c7d6b89636313eebf3458b95fbf20d">stream</a>)</td></tr>
-<tr class="separator:a64b91d206b1b03835799610d4d52a8b9 inherit pub_methods_classcubos_1_1core_1_1data_1_1Serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed1b6b8d7710f232584398af4201f396 inherit pub_methods_classcubos_1_1core_1_1data_1_1Serializer"><td class="memItemLeft" align="right" valign="top"><a id="aed1b6b8d7710f232584398af4201f396"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html#aed1b6b8d7710f232584398af4201f396">flush</a> ()</td></tr>
 <tr class="memdesc:aed1b6b8d7710f232584398af4201f396 inherit pub_methods_classcubos_1_1core_1_1data_1_1Serializer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes the serializer and writes the data to the stream. <br /></td></tr>
@@ -195,10 +192,6 @@ TCtx&#160;</td><td class="memItemRight" valign="bottom"><b>ctx</b></td></tr>
 TCtx const char *&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
 <tr class="separator:a16ffe97c72ea3fe3f17ed9b32f620e08 inherit pub_attribs_classcubos_1_1core_1_1data_1_1Serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classcubos_1_1core_1_1data_1_1Serializer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classcubos_1_1core_1_1data_1_1Serializer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">cubos::core::data::Serializer</a></td></tr>
-<tr class="memitem:a20c7d6b89636313eebf3458b95fbf20d inherit pro_attribs_classcubos_1_1core_1_1data_1_1Serializer"><td class="memItemLeft" align="right" valign="top"><a id="a20c7d6b89636313eebf3458b95fbf20d"></a>
-<a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html#a20c7d6b89636313eebf3458b95fbf20d">stream</a></td></tr>
-<tr class="memdesc:a20c7d6b89636313eebf3458b95fbf20d inherit pro_attribs_classcubos_1_1core_1_1data_1_1Serializer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream used by the serializer. <br /></td></tr>
-<tr class="separator:a20c7d6b89636313eebf3458b95fbf20d inherit pro_attribs_classcubos_1_1core_1_1data_1_1Serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6124cf68bf2547d673f7f68b4fd4d8b2 inherit pro_attribs_classcubos_1_1core_1_1data_1_1Serializer"><td class="memItemLeft" align="right" valign="top"><a id="a6124cf68bf2547d673f7f68b4fd4d8b2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html#a6124cf68bf2547d673f7f68b4fd4d8b2">failBit</a></td></tr>
 <tr class="memdesc:a6124cf68bf2547d673f7f68b4fd4d8b2 inherit pro_attribs_classcubos_1_1core_1_1data_1_1Serializer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if the serializer failed. <br /></td></tr>

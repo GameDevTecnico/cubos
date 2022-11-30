@@ -1,6 +1,6 @@
 var classcubos_1_1core_1_1data_1_1Serializer =
 [
-    [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html#a64b91d206b1b03835799610d4d52a8b9", null ],
+    [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html#af8ee7392116e14ce6f458d15b720a8d7", null ],
     [ "~Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html#a96eb2ff7095c13e56b4c58451f15c0ab", null ],
     [ "beginArray", "classcubos_1_1core_1_1data_1_1Serializer.html#ae89691cadf3eba29a6b627704de7c2f3", null ],
     [ "beginDictionary", "classcubos_1_1core_1_1data_1_1Serializer.html#a629f05fa646edb1c9d74241a66ead2c3", null ],
@@ -28,6 +28,5 @@ var classcubos_1_1core_1_1data_1_1Serializer =
     [ "writeU8", "classcubos_1_1core_1_1data_1_1Serializer.html#a08f499cbfc19895115f7729f52dd0e37", null ],
     [ "ctx", "classcubos_1_1core_1_1data_1_1Serializer.html#a90e0fec1eff788cd576f4855eebc625d", null ],
     [ "failBit", "classcubos_1_1core_1_1data_1_1Serializer.html#a6124cf68bf2547d673f7f68b4fd4d8b2", null ],
-    [ "name", "classcubos_1_1core_1_1data_1_1Serializer.html#a16ffe97c72ea3fe3f17ed9b32f620e08", null ],
-    [ "stream", "classcubos_1_1core_1_1data_1_1Serializer.html#a20c7d6b89636313eebf3458b95fbf20d", null ]
+    [ "name", "classcubos_1_1core_1_1data_1_1Serializer.html#a16ffe97c72ea3fe3f17ed9b32f620e08", null ]
 ];

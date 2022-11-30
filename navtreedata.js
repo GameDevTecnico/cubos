@@ -58,7 +58,8 @@ var NAVTREE =
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
         [ "Typedefs", "functions_type.html", null ],
-        [ "Enumerations", "functions_enum.html", null ]
+        [ "Enumerations", "functions_enum.html", null ],
+        [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -70,11 +71,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classcubos_1_1core_1_1data_1_1SerializationMap.html#a3bd4bddd094a9c452fc2cd15a71686dc",
-"classcubos_1_1core_1_1gl_1_1Grid.html#ad38d07b4bc8d2b1564db5956816dce7f",
-"classcubos_1_1core_1_1memory_1_1StdStream.html#a81f8554f89c70d4ac3d996431a900992",
-"functions_f.html",
-"structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1Texture2DTarget.html"
+"classcubos_1_1core_1_1data_1_1Package.html#a783ceebb710b57e00e93a300c43f6fab",
+"classcubos_1_1core_1_1ecs_1_1MapStorage.html",
+"classcubos_1_1core_1_1io_1_1ButtonPress.html#a64517e79582d46eaa99009fdf71cec66",
+"classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#ae544e9318ea9d40dd3341d4e2a2f15cb",
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07_5_08_07Args_8_8_8_08_4.html#a1d021ab6b0ccac4317700275d23511ba"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

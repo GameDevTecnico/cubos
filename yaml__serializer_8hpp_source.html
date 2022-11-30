@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('yaml__serializer_8hpp_source.html','')
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">   12</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">YAMLSerializer</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html#afd3b044f67085903cea08530af405111">YAMLSerializer</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; <a class="code" href="classcubos_1_1core_1_1data_1_1Serializer.html#a20c7d6b89636313eebf3458b95fbf20d">stream</a>);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html#afd3b044f67085903cea08530af405111">YAMLSerializer</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; stream);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">YAMLSerializer</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="comment">// Implement interface methods.</span></div>
@@ -136,14 +136,15 @@ $(document).ready(function(){initNavTree('yaml__serializer_8hpp_source.html','')
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            Dictionary</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        };</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        std::stack&lt;Mode&gt; mode; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">bool</span> key;              </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        YAML::Emitter emitter; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">size_t</span> head;           </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_DATA_YAML_SERIALIZER_HPP</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; stream; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        std::stack&lt;Mode&gt; mode;  </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">bool</span> key;               </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        YAML::Emitter emitter;  </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">size_t</span> head;            </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    };</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_DATA_YAML_SERIALIZER_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1YAMLSerializer_html_a65b3a16b562bb80b9f3520a67a7ce496"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a65b3a16b562bb80b9f3520a67a7ce496">cubos::core::data::YAMLSerializer::beginObject</a></div><div class="ttdeci">virtual void beginObject(const char *name) override</div></div>
@@ -162,7 +163,6 @@ $(document).ready(function(){initNavTree('yaml__serializer_8hpp_source.html','')
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html">cubos::core::memory::Stream</a></div><div class="ttdoc">Abstract class for memory streams.</div><div class="ttdef"><b>Definition:</b> stream.hpp:19</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1YAMLSerializer_html_afd3b044f67085903cea08530af405111"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html#afd3b044f67085903cea08530af405111">cubos::core::data::YAMLSerializer::YAMLSerializer</a></div><div class="ttdeci">YAMLSerializer(memory::Stream &amp;stream)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1YAMLSerializer_html_aa8fb92eeedfa500e1380d6bf9e21bf5e"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html#aa8fb92eeedfa500e1380d6bf9e21bf5e">cubos::core::data::YAMLSerializer::flush</a></div><div class="ttdeci">virtual void flush() override</div><div class="ttdoc">Flushes the serializer and writes the data to the stream.</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Serializer_html_a20c7d6b89636313eebf3458b95fbf20d"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Serializer.html#a20c7d6b89636313eebf3458b95fbf20d">cubos::core::data::Serializer::stream</a></div><div class="ttdeci">memory::Stream &amp; stream</div><div class="ttdoc">Stream used by the serializer.</div><div class="ttdef"><b>Definition:</b> serializer.hpp:172</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Serializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Serializer.html">cubos::core::data::Serializer</a></div><div class="ttdoc">Abstract class for serializing data.</div><div class="ttdef"><b>Definition:</b> serializer.hpp:39</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1YAMLSerializer_html_ac195588364f7ddcdfa47fde6483ef0ac"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html#ac195588364f7ddcdfa47fde6483ef0ac">cubos::core::data::YAMLSerializer::writeBool</a></div><div class="ttdeci">virtual void writeBool(bool value, const char *name) override</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1YAMLSerializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">cubos::core::data::YAMLSerializer</a></div><div class="ttdoc">Implementation of the abstract Serializer class for serializing to YAML.</div><div class="ttdef"><b>Definition:</b> yaml_serializer.hpp:12</div></div>

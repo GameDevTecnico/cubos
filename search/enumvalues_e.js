@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['ubyte_1271',['UByte',['../namespacecubos_1_1core_1_1gl.html#a038c1bf33dd18d2e43cccb9c70ded3caa4b4ba765b750d5836bfeb2213cc3caea',1,'cubos::core::gl']]],
-  ['uint_1272',['UInt',['../namespacecubos_1_1core_1_1gl.html#a038c1bf33dd18d2e43cccb9c70ded3caa0b1291eded63143ac04709711274785a',1,'cubos::core::gl']]],
-  ['ushort_1273',['UShort',['../namespacecubos_1_1core_1_1gl.html#a038c1bf33dd18d2e43cccb9c70ded3caadfe785f133347f9b473f99009732b1bc',1,'cubos::core::gl']]]
+  ['textureaccess_1329',['TextureAccess',['../namespacecubos_1_1core_1_1gl.html#ad592e3b1750db98571a080c2a636a296a9c0e7b88ee700bbef28ec83985603ec5',1,'cubos::core::gl']]]
 ];

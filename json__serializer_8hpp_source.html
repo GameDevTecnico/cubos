@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('json__serializer_8hpp_source.html','')
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1data_1_1JSONSerializer.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1data_1_1JSONSerializer.html">JSONSerializer</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1JSONSerializer.html#acd3ce716831f1193bda111b18d719480">JSONSerializer</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; <a class="code" href="classcubos_1_1core_1_1data_1_1Serializer.html#a20c7d6b89636313eebf3458b95fbf20d">stream</a>, <span class="keywordtype">int</span> indent = -1);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1JSONSerializer.html#acd3ce716831f1193bda111b18d719480">JSONSerializer</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; stream, <span class="keywordtype">int</span> indent = -1);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="comment">// Implement interface methods.</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
@@ -144,12 +144,13 @@ $(document).ready(function(){initNavTree('json__serializer_8hpp_source.html','')
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            std::string name;            </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        };</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        std::stack&lt;Frame&gt; frames; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">int</span> indent;               </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    };</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_DATA_JSON_SERIALIZER_HPP</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; stream;   </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        std::stack&lt;Frame&gt; frames; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">int</span> indent;               </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    };</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_DATA_JSON_SERIALIZER_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1JSONSerializer_html_ad50d5835712b2583d0f6c8588f6ce087"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html#ad50d5835712b2583d0f6c8588f6ce087">cubos::core::data::JSONSerializer::endObject</a></div><div class="ttdeci">virtual void endObject() override</div><div class="ttdoc">Indicates that a object is no longer being serialized.</div></div>
@@ -165,7 +166,6 @@ $(document).ready(function(){initNavTree('json__serializer_8hpp_source.html','')
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1JSONSerializer_html_a82f5e86da681fe5b3270d2400284b6ba"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html#a82f5e86da681fe5b3270d2400284b6ba">cubos::core::data::JSONSerializer::beginDictionary</a></div><div class="ttdeci">virtual void beginDictionary(size_t length, const char *name) override</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html">cubos::core::memory::Stream</a></div><div class="ttdoc">Abstract class for memory streams.</div><div class="ttdef"><b>Definition:</b> stream.hpp:19</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1JSONSerializer_html_a9806f17b33b963f0b4246846a9eb90d3"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html#a9806f17b33b963f0b4246846a9eb90d3">cubos::core::data::JSONSerializer::beginObject</a></div><div class="ttdeci">virtual void beginObject(const char *name) override</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Serializer_html_a20c7d6b89636313eebf3458b95fbf20d"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Serializer.html#a20c7d6b89636313eebf3458b95fbf20d">cubos::core::data::Serializer::stream</a></div><div class="ttdeci">memory::Stream &amp; stream</div><div class="ttdoc">Stream used by the serializer.</div><div class="ttdef"><b>Definition:</b> serializer.hpp:172</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Serializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Serializer.html">cubos::core::data::Serializer</a></div><div class="ttdoc">Abstract class for serializing data.</div><div class="ttdef"><b>Definition:</b> serializer.hpp:39</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1JSONSerializer_html_aff7ab7d08a917f9d0ad6cdb62a55ec13"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html#aff7ab7d08a917f9d0ad6cdb62a55ec13">cubos::core::data::JSONSerializer::writeBool</a></div><div class="ttdeci">virtual void writeBool(bool value, const char *name) override</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1JSONSerializer_html_a50e6f8a503c82e678884c77dac331b6b"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html#a50e6f8a503c82e678884c77dac331b6b">cubos::core::data::JSONSerializer::writeF32</a></div><div class="ttdeci">virtual void writeF32(float value, const char *name) override</div></div>

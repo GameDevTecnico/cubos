@@ -1,7 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcubos_1_1core_1_1data_1_1Serializer.html" title="Abstract class for serializing data." alt="" coords="5,104,147,145"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinarySerializer.html" title=" " alt="" coords="195,5,336,47"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1DebugSerializer.html" title=" " alt="" coords="195,71,336,112"/>
-<area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1JSONSerializer.html" title=" " alt="" coords="195,136,336,177"/>
-<area shape="rect" id="node5" href="$classcubos_1_1core_1_1data_1_1YAMLSerializer.html" title="Implementation of the abstract Serializer class for serializing to YAML." alt="" coords="195,201,336,243"/>
+<area shape="rect" id="node1" href="$classcubos_1_1core_1_1data_1_1SerializationMap.html" title=" " alt="" coords="5,5,188,47"/>
 </map>

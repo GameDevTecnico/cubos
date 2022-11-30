@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('event_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... TArgs&gt;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    Event&lt;TArgs...&gt;::ID <a class="code" href="classcubos_1_1core_1_1Event.html#a1cb5d678025e778c57b6040b66b10e5f">Event&lt;TArgs...&gt;::registerCallback</a>(<a class="code" href="classcubos_1_1core_1_1Event.html#aaee6ae7458121be28a547245a6817751">Event&lt;TArgs...&gt;::Callback</a> callback)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">typename</span> Event&lt;TArgs...&gt;::ID <a class="code" href="classcubos_1_1core_1_1Event.html#a1cb5d678025e778c57b6040b66b10e5f">Event&lt;TArgs...&gt;::registerCallback</a>(<a class="code" href="classcubos_1_1core_1_1Event.html#aaee6ae7458121be28a547245a6817751">Event&lt;TArgs...&gt;::Callback</a> callback)</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    {</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">auto</span> lock = std::lock_guard&lt;std::mutex&gt;(this-&gt;mutex);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        this-&gt;callbacks.push_back(callback);</div>

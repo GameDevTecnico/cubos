@@ -36,6 +36,7 @@ var hierarchy =
     [ "cubos::core::gl::DepthStencilStateDesc", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc.html", null ],
     [ "cubos::core::data::Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html", [
       [ "cubos::core::data::BinaryDeserializer", "classcubos_1_1core_1_1data_1_1BinaryDeserializer.html", null ],
+      [ "cubos::core::data::impl::Unpackager", "classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html", null ],
       [ "cubos::core::data::JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", null ],
       [ "cubos::core::data::YAMLDeserializer", "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html", null ]
     ] ],
@@ -61,9 +62,9 @@ var hierarchy =
     [ "cubos::core::gl::impl::Framebuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1Framebuffer.html", null ],
     [ "cubos::core::gl::FramebufferDesc", "structcubos_1_1core_1_1gl_1_1FramebufferDesc.html", null ],
     [ "cubos::core::gl::FramebufferDesc::FramebufferTarget", "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1FramebufferTarget.html", null ],
+    [ "cubos::core::gl::Grid", "classcubos_1_1core_1_1gl_1_1Grid.html", null ],
     [ "cubos::engine::data::Grid", "structcubos_1_1engine_1_1data_1_1Grid.html", null ],
     [ "cubos::engine::ecs::Grid", "structcubos_1_1engine_1_1ecs_1_1Grid.html", null ],
-    [ "cubos::core::gl::Grid", "classcubos_1_1core_1_1gl_1_1Grid.html", null ],
     [ "std::hash< cubos::core::ecs::Entity >", "structstd_1_1hash_3_01cubos_1_1core_1_1ecs_1_1Entity_01_4.html", null ],
     [ "cubos::core::gl::impl::IndexBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1IndexBuffer.html", null ],
     [ "cubos::core::io::InputManager", "classcubos_1_1core_1_1io_1_1InputManager.html", null ],
@@ -74,8 +75,8 @@ var hierarchy =
         [ "cubos::core::ecs::VecStorage< T >", "classcubos_1_1core_1_1ecs_1_1VecStorage.html", null ]
       ] ]
     ] ],
-    [ "cubos::core::ecs::EntityManager::Iterator", "classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html", null ],
     [ "cubos::core::ecs::Query< ComponentTypes >::Iterator", "classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html", null ],
+    [ "cubos::core::ecs::EntityManager::Iterator", "classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html", null ],
     [ "cubos::engine::data::Loader", "classcubos_1_1engine_1_1data_1_1Loader.html", [
       [ "cubos::engine::data::impl::GridLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html", null ],
       [ "cubos::engine::data::impl::PaletteLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html", null ],
@@ -85,8 +86,9 @@ var hierarchy =
     [ "cubos::engine::gl::pps::Manager", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html", null ],
     [ "cubos::core::gl::Material", "structcubos_1_1core_1_1gl_1_1Material.html", null ],
     [ "cubos::engine::data::Meta", "classcubos_1_1engine_1_1data_1_1Meta.html", null ],
-    [ "cubos::core::gl::Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
+    [ "cubos::core::data::Package", "classcubos_1_1core_1_1data_1_1Package.html", null ],
     [ "cubos::engine::data::Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", null ],
+    [ "cubos::core::gl::Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
     [ "cubos::engine::gl::pps::Pass", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html", [
       [ "cubos::engine::gl::pps::BloomPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html", null ],
       [ "cubos::engine::gl::pps::CopyPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html", null ]
@@ -122,6 +124,7 @@ var hierarchy =
     [ "cubos::core::data::Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", [
       [ "cubos::core::data::BinarySerializer", "classcubos_1_1core_1_1data_1_1BinarySerializer.html", null ],
       [ "cubos::core::data::DebugSerializer", "classcubos_1_1core_1_1data_1_1DebugSerializer.html", null ],
+      [ "cubos::core::data::impl::Packager", "classcubos_1_1core_1_1data_1_1impl_1_1Packager.html", null ],
       [ "cubos::core::data::JSONSerializer", "classcubos_1_1core_1_1data_1_1JSONSerializer.html", null ],
       [ "cubos::core::data::YAMLSerializer", "classcubos_1_1core_1_1data_1_1YAMLSerializer.html", null ]
     ] ],
