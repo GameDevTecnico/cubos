@@ -65,6 +65,8 @@ namespace cubos::core::ecs
             memory::BufferStream stream; ///< Self growing buffer stream where the component data is stored.
             std::mutex mutex;            ///< Protect the stream.
 
+            virtual ~IBuffer() = default;
+
             /// Adds all of the components stored in the buffer to the specified commands object.
             /// @param commands The commands object to add the components to.
             /// @param map The serialization map which maps from the entity names to the instantiated entities.

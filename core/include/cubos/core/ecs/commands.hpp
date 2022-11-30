@@ -118,12 +118,15 @@ namespace cubos::core::ecs
 
     private:
         friend EntityBuilder;
+        friend BlueprintBuilder;
         friend Dispatcher;
 
         /// Object used internally which stores components of a specific type, queued for addition to the component
         /// manager.
         struct IBuffer
         {
+            virtual ~IBuffer() = default;
+
             /// Clears every component in the buffer.
             virtual void clear() = 0;
 
