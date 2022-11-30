@@ -1,3 +1,5 @@
+#include <components/cubos/grid.hpp>
+
 #include <cubos/core/log.hpp>
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/data/std_archive.hpp>
@@ -11,6 +13,8 @@
 #include <cubos/engine/cubos.hpp>
 #include <cubos/engine/data/asset_manager.hpp>
 #include <cubos/engine/data/scene.hpp>
+
+#include <cubos/engine/plugins/window.hpp>
 
 using namespace cubos;
 using namespace engine;
@@ -104,5 +108,6 @@ int main(int argc, char** argv)
         .addStartupSystem(setup, "Setup")
         .addStartupSystem(printStuff, "End")
 
+        .addPlugin(cubos::engine::plugins::windowPlugin)
         .run();
 }

@@ -380,7 +380,7 @@ static bool convert(const Options& options)
 int runConvert(int argc, char** argv)
 {
     // Parse command line arguments.
-    Options options;
+    Options options = {};
     if (!parseArguments(argc, argv, options))
     {
         printHelp();

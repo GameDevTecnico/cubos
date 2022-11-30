@@ -57,6 +57,20 @@ namespace cubos::engine
         /// @param stage The stage in which the system should be executed.
         template <typename F> Cubos& addStartupSystem(F func, std::string stage);
 
+        /// Sets a given stage to happen after another stage.
+        /// The current stage must exist, but the reference stage may not, in which case it
+        /// will be created.
+        /// @param current The current stage, which will be placed right after the reference stage.
+        /// @param reference The reference stage.
+        Cubos& putStageAfter(const std::string& stage, const std::string& referenceStage);
+
+        /// Sets a given stage to happen before another stage.
+        /// The current stage must exist, but the reference stage may not, in which case it
+        /// will be created.
+        /// @param current The current stage, which will be placed right before the reference stage.
+        /// @param reference The reference stage.
+        Cubos& putStageBefore(const std::string& stage, const std::string& referenceStage);
+
         /// Runs the engine.
         void run();
 
@@ -64,6 +78,8 @@ namespace cubos::engine
         core::ecs::Dispatcher mainDispatcher, startupDispatcher;
         core::ecs::World world;
         std::set<void (*)(Cubos&)> plugins;
+
+        bool isStartupStage;
     };
 
     // Implementation.
@@ -83,12 +99,14 @@ namespace cubos::engine
     template <typename F> Cubos& Cubos::addSystem(F func, std::string stage)
     {
         mainDispatcher.addSystem(func, stage);
+        isStartupStage = false;
         return *this;
     }
 
     template <typename F> Cubos& Cubos::addStartupSystem(F func, std::string stage)
     {
         startupDispatcher.addSystem(func, stage);
+        isStartupStage = true;
         return *this;
     }
 } // namespace cubos::engine

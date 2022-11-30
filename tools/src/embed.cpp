@@ -353,7 +353,7 @@ static bool generate(const Options& options)
 int runEmbed(int argc, char** argv)
 {
     // Parse command line arguments.
-    Options options;
+    Options options = {};
     if (!parseArguments(argc, argv, options))
     {
         printHelp();

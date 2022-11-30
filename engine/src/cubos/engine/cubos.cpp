@@ -20,6 +20,32 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
     return *this;
 }
 
+Cubos& Cubos::putStageAfter(const std::string& stage, const std::string& referenceStage)
+{
+    if(isStartupStage)
+    {
+        startupDispatcher.putStageAfter(stage, referenceStage);
+    }
+    else
+    {
+        mainDispatcher.putStageAfter(stage, referenceStage);
+    }
+    return *this;
+}
+
+Cubos& Cubos::putStageBefore(const std::string& stage, const std::string& referenceStage)
+{
+    if(isStartupStage)
+    {
+        startupDispatcher.putStageBefore(stage, referenceStage);
+    }
+    else
+    {
+        mainDispatcher.putStageBefore(stage, referenceStage);
+    }
+    return *this;
+}
+
 Cubos::Cubos()
 {
     addResource<ShouldQuit>(true);
