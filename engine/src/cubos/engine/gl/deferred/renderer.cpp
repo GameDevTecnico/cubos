@@ -1,12 +1,16 @@
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/gl/frame.hpp>
 #include <cubos/engine/gl/deferred/renderer.hpp>
 
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/compatibility.hpp>
+
+#include <random>
 
 using namespace cubos;
 using namespace cubos::core;
@@ -154,6 +158,9 @@ uniform sampler2D position;
 uniform sampler2D normal;
 uniform usampler2D material;
 
+uniform bool ssaoEnabled;
+uniform sampler2D ssaoTex;
+
 struct SpotLight
 {
     vec4 position;
@@ -254,7 +261,118 @@ void main()
             lighting += pointLightCalc(fragPos, fragNormal, pointLights[i]);
         }
         color = vec4(albedo * lighting, 1.0);
+        color.r = min(color.r, 1.0);
+        color.g = min(color.g, 1.0);
+        color.b = min(color.b, 1.0);
+        if (ssaoEnabled) {
+            color *= texture(ssaoTex, fragUv).r;
+        }
     }
+}
+)glsl";
+
+/// The vertex shader of the SSAO pass pipeline.
+static const char* SSAO_PASS_VS = R"glsl(
+#version 330 core
+
+in vec4 position;
+in vec2 uv;
+
+out vec2 fragUv;
+
+void main(void)
+{
+    gl_Position = position;
+    fragUv = uv;
+}
+)glsl";
+
+/// The pixel shader of the SSAO pass pipeline.
+static const char* SSAO_PASS_PS = R"glsl(
+#version 330 core
+
+#define KERNEL_SIZE 64
+#define RADIUS 0.5
+#define BIAS 0.025
+
+in vec2 fragUv;
+
+uniform sampler2D position;
+uniform sampler2D normal;
+uniform sampler2D noise;
+uniform vec3 samples[KERNEL_SIZE];
+uniform mat4 view;
+uniform mat4 projection;
+uniform vec2 screenSize;
+
+
+layout (location = 0) out float color;
+
+vec3 getFragPos(vec2 fragUv) {
+    vec4 tmp = texture(position, fragUv);
+    return (view * tmp).xyz;
+}
+
+vec3 getFragNorm(vec2 fragUv) {
+    vec4 tmp = texture(normal, fragUv);
+    tmp.w = 0;
+    return (view * tmp).xyz;
+}
+
+void main(void)
+{
+    vec3 fragPos = getFragPos(fragUv);
+    vec3 fragNormal = getFragNorm(fragUv);
+    vec2 noiseScale = screenSize / 4;
+    vec3 randVec = normalize(texture(noise, fragUv * noiseScale).xyz);
+
+    vec3 tangent = normalize(randVec - fragNormal * dot(randVec, fragNormal));
+    vec3 bitangent = cross(fragNormal, tangent);
+    mat3 TBN = mat3(tangent, bitangent, fragNormal);
+
+    float occlusion = 0.0;
+    for(int i = 0; i < KERNEL_SIZE; i++)
+    {
+        vec3 samplePos = TBN * samples[i];
+        samplePos = fragPos + samplePos * RADIUS;
+
+        vec4 offset = vec4(samplePos, 1.0);
+        offset = projection * offset;
+        offset.xyz /= offset.w;
+        offset.xyz = offset.xyz * 0.5 + 0.5;
+
+        float sampleDepth = getFragPos(offset.xy).z;
+        float rangeCheck = smoothstep(0.0, 1.0, RADIUS / abs(fragPos.z - sampleDepth));
+        occlusion += (sampleDepth >= samplePos.z + BIAS ? 1.0 : 0.0) * rangeCheck;
+    }
+
+    occlusion = 1.0 - (occlusion / KERNEL_SIZE);
+    color = occlusion;
+}
+)glsl";
+
+// The pixel shader of the SSAO blur pass pipeline.
+static const char* SSAO_BLUR_PS = R"glsl(
+#version 330 core
+
+in vec2 fragUv;
+
+uniform sampler2D ssaoInput;
+
+layout (location = 0) out float color;
+
+void main() {
+    vec2 texelSize = 1.0 / vec2(textureSize(ssaoInput, 0));
+    float result = 0.0;
+    for (int x = -2; x < 2; ++x)
+    {
+        for (int y = -2; y < 2; ++y)
+        {
+            vec2 offset = vec2(float(x), float(y)) * texelSize;
+            result += texture(ssaoInput, fragUv + offset).r;
+        }
+    }
+    color = result / (4.0 * 4.0);
 }
 )glsl";
 
@@ -293,6 +411,24 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size) : gl::
     this->materialBP = this->lightingPipeline->getBindingPoint("material");
     this->paletteBP = this->lightingPipeline->getBindingPoint("palette");
     this->lightsBP = this->lightingPipeline->getBindingPoint("Lights");
+    this->ssaoEnabledBP = this->lightingPipeline->getBindingPoint("ssaoEnabled");
+    this->ssaoTexBP = this->lightingPipeline->getBindingPoint("ssaoTex");
+
+    // Create the SSAO pipeline.
+    auto ssaoVS = this->renderDevice.createShaderStage(Stage::Vertex, SSAO_PASS_VS);
+    auto ssaoPS = this->renderDevice.createShaderStage(Stage::Pixel, SSAO_PASS_PS);
+    this->ssaoPipeline = this->renderDevice.createShaderPipeline(ssaoVS, ssaoPS);
+    this->ssaoPositionBP = this->ssaoPipeline->getBindingPoint("position");
+    this->ssaoNormalBP = this->ssaoPipeline->getBindingPoint("normal");
+    this->ssaoNoiseBP = this->ssaoPipeline->getBindingPoint("noise");
+    this->ssaoViewBP = this->ssaoPipeline->getBindingPoint("view");
+    this->ssaoProjectionBP = this->ssaoPipeline->getBindingPoint("projection");
+    this->ssaoScreenSizeBP = this->ssaoPipeline->getBindingPoint("screenSize");
+
+    // Create the SSAO blur pipeline.
+    auto ssaoBlurPS = this->renderDevice.createShaderStage(Stage::Pixel, SSAO_BLUR_PS);
+    this->ssaoBlurPipeline = this->renderDevice.createShaderPipeline(ssaoVS, ssaoBlurPS);
+    this->ssaoBlurTexBP = this->ssaoBlurPipeline->getBindingPoint("ssaoInput");
 
     // Create the sampler used to access the palette and the GBuffer textures in the lighting pipeline.
     SamplerDesc samplerDesc;
@@ -301,6 +437,10 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size) : gl::
     samplerDesc.magFilter = TextureFilter::Nearest;
     samplerDesc.minFilter = TextureFilter::Nearest;
     this->sampler = this->renderDevice.createSampler(samplerDesc);
+
+    // Create the sampler for the SSAO noise texture
+    samplerDesc.addressU = samplerDesc.addressV = samplerDesc.addressW = AddressMode::Repeat;
+    this->ssaoNoiseSampler = this->renderDevice.createSampler(samplerDesc);
 
     // Create the palette texture.
     Texture2DDesc texDesc;
@@ -319,6 +459,14 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size) : gl::
     // Create the GBuffer.
     this->size = glm::uvec2(0, 0);
     this->onResize(size);
+
+    // Check whether SSAO is enabled
+    ssaoEnabled = Settings::global.getBool("ssaoEnabled", false);
+    if (ssaoEnabled)
+    {
+        createSSAOTextures();
+        generateSSAONoise();
+    }
 }
 
 RendererGrid deferred::Renderer::upload(const Grid& grid)
@@ -416,6 +564,8 @@ void deferred::Renderer::onResize(glm::uvec2 size)
     gBufferDesc.targets[2].setTexture2DTarget(this->materialTex);
     gBufferDesc.depthStencil.setTexture2DTarget(this->depthTex);
     this->gBuffer = this->renderDevice.createFramebuffer(gBufferDesc);
+
+    createSSAOTextures();
 }
 
 void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Framebuffer target)
@@ -541,8 +691,44 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         this->renderDevice.drawTrianglesIndexed(0, grid->indexCount);
     }
 
-    // 5. Lighting pass.
-    // 5.1. Set the lighting pass state.
+    // 5. SSAO pass.
+    if (ssaoEnabled)
+    {
+        // 5.1. Set the SSAO pass state.
+        this->renderDevice.setFramebuffer(ssaoFB);
+        this->renderDevice.setRasterState(nullptr);
+        this->renderDevice.setBlendState(nullptr);
+        this->renderDevice.setDepthStencilState(nullptr);
+        this->renderDevice.setShaderPipeline(this->ssaoPipeline);
+        this->ssaoPositionBP->bind(this->positionTex);
+        this->ssaoPositionBP->bind(this->sampler);
+        this->ssaoNormalBP->bind(this->normalTex);
+        this->ssaoNormalBP->bind(this->sampler);
+        this->ssaoNoiseBP->bind(this->ssaoNoiseTex);
+        this->ssaoNoiseBP->bind(this->ssaoNoiseSampler);
+        this->ssaoViewBP->setConstant(mvp.V);
+        this->ssaoProjectionBP->setConstant(mvp.P);
+        this->ssaoScreenSizeBP->setConstant(this->size);
+
+        // Samples
+        for (int i = 0; i < 64; i++)
+        {
+            this->ssaoSamplesBP =
+                this->ssaoPipeline->getBindingPoint(std::string("samples[" + std::to_string(i) + "]").c_str());
+            this->ssaoSamplesBP->setConstant(ssaoKernel[i]);
+        }
+
+        this->renderDevice.setVertexArray(this->screenQuadVA);
+        this->renderDevice.drawTriangles(0, 6);
+
+        // 5.2. Set the SSAO blur pass state.
+        this->renderDevice.setShaderPipeline(this->ssaoBlurPipeline);
+        this->ssaoBlurTexBP->bind(this->ssaoTex);
+        this->renderDevice.drawTriangles(0, 6);
+    }
+
+    // 6. Lighting pass.
+    // 6.1. Set the lighting pass state.
     this->renderDevice.setFramebuffer(target);
     this->renderDevice.setRasterState(nullptr);
     this->renderDevice.setBlendState(nullptr);
@@ -557,12 +743,78 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     this->paletteBP->bind(this->paletteTex);
     this->paletteBP->bind(this->sampler);
     this->lightsBP->bind(this->lightsBuffer);
+    this->ssaoEnabledBP->setConstant(this->ssaoEnabled);
+    if (this->ssaoEnabledBP)
+    {
+        this->ssaoTexBP->bind(this->ssaoTex);
+        this->ssaoTexBP->bind(this->sampler);
+    }
 
-    // 5.2. Draw the screen quad.
+    // 6.2. Draw the screen quad.
     this->renderDevice.setVertexArray(this->screenQuadVA);
     this->renderDevice.drawTriangles(0, 6);
 
     // Provide custom inputs to the PPS manager.
     this->pps().provideInput(pps::Input::Position, this->positionTex);
     this->pps().provideInput(pps::Input::Normal, this->normalTex);
+}
+
+void deferred::Renderer::createSSAOTextures()
+{
+    Texture2DDesc texDesc;
+    texDesc.width = this->size.x;
+    texDesc.height = this->size.y;
+    texDesc.usage = Usage::Dynamic;
+
+    // Create output texture
+    texDesc.format = TextureFormat::R32Float;
+    this->ssaoTex = this->renderDevice.createTexture2D(texDesc);
+
+    // Generate noise texture
+    std::uniform_real_distribution<float> randomFloats(0.0, 1.0); // random floats between [0.0, 1.0]
+    std::default_random_engine generator;
+    std::vector<glm::vec3> ssaoNoise;
+    ssaoNoise.resize(16);
+    for (unsigned int i = 0; i < 16; i++)
+    {
+        glm::vec3 noise(randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
+                        randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
+                        0.0f);
+        ssaoNoise[i] = noise;
+    }
+
+    texDesc.width = texDesc.height = 4;
+    texDesc.format = TextureFormat::RGB16Float;
+    texDesc.data[0] = ssaoNoise.data();
+    this->ssaoNoiseTex = this->renderDevice.createTexture2D(texDesc);
+
+    // Create the framebuffer
+    FramebufferDesc fbDesc;
+    fbDesc.targetCount = 1;
+    fbDesc.targets[0].setTexture2DTarget(this->ssaoTex);
+    this->ssaoFB = this->renderDevice.createFramebuffer(fbDesc);
+}
+
+void deferred::Renderer::generateSSAONoise()
+{
+    // Generate kernel samples
+    std::uniform_real_distribution<float> randomFloats(0.0, 1.0); // random floats between [0.0, 1.0]
+    std::default_random_engine generator;
+
+    this->ssaoKernel.resize(64);
+    for (unsigned int i = 0; i < 64; i++)
+    {
+        glm::vec3 sample(randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
+                         randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
+                         randomFloats(generator)              // [ 0.0, 1.0]
+        );
+        sample = glm::normalize(sample);
+        // sample *= randomFloats(generator);
+        float scale = float(i) / 64.0;
+
+        scale = glm::lerp(0.1f, 1.0f, scale * scale);
+        sample *= scale;
+
+        this->ssaoKernel[i] = sample;
+    }
 }

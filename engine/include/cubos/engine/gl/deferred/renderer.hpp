@@ -41,6 +41,9 @@ namespace cubos::engine::gl::deferred
                               core::gl::Framebuffer target) override;
 
     private:
+        void createSSAOTextures();
+        void generateSSAONoise();
+
         // GBuffer.
 
         glm::uvec2 size;
@@ -67,6 +70,8 @@ namespace cubos::engine::gl::deferred
         core::gl::ShaderBindingPoint normalBP;
         core::gl::ShaderBindingPoint materialBP;
         core::gl::ShaderBindingPoint lightsBP;
+        core::gl::ShaderBindingPoint ssaoEnabledBP;
+        core::gl::ShaderBindingPoint ssaoTexBP;
         core::gl::Sampler sampler;
         core::gl::Texture2D paletteTex;
         core::gl::ConstantBuffer lightsBuffer;
@@ -74,6 +79,28 @@ namespace cubos::engine::gl::deferred
         // Screen quad used for the lighting pass.
 
         core::gl::VertexArray screenQuadVA;
+
+        // SSAO (Screen-Scrape Ambient Occlusion)
+
+        bool ssaoEnabled = false;
+        std::vector<glm::vec3> ssaoKernel;
+
+        core::gl::Framebuffer ssaoFB;
+        core::gl::Texture2D ssaoTex;
+        core::gl::Texture2D ssaoNoiseTex;
+        core::gl::Sampler ssaoNoiseSampler;
+
+        core::gl::ShaderPipeline ssaoPipeline;
+        core::gl::ShaderBindingPoint ssaoPositionBP;
+        core::gl::ShaderBindingPoint ssaoNormalBP;
+        core::gl::ShaderBindingPoint ssaoNoiseBP;
+        core::gl::ShaderBindingPoint ssaoSamplesBP;
+        core::gl::ShaderBindingPoint ssaoViewBP;
+        core::gl::ShaderBindingPoint ssaoProjectionBP;
+        core::gl::ShaderBindingPoint ssaoScreenSizeBP;
+
+        core::gl::ShaderPipeline ssaoBlurPipeline;
+        core::gl::ShaderBindingPoint ssaoBlurTexBP;
     };
 } // namespace cubos::engine::gl::deferred
 

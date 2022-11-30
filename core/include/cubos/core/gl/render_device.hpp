@@ -129,9 +129,13 @@ namespace cubos::core::gl
         RG16UInt,    ///< 2 channel 16 bits unsigned integer.
         RGBA8UInt,   ///< 4 channel 8 bits unsigned integer.
         RGBA16UInt,  ///< 4 channel 16 bits unsigned integer.
+        R16Float,    ///< 1 channel 16 bits floating point.
         R32Float,    ///< 1 channel 32 bits floating point.
+        RG16Float,   ///< 2 channel 16 bits floating point.
         RG32Float,   ///< 2 channel 32 bits floating point.
+        RGB16Float,  ///< 3 channel 16 bits floating point.
         RGB32Float,  ///< 3 channel 32 bits floating point.
+        RGBA16Float, ///< 4 channel 16 bits floating point.
         RGBA32Float, ///< 4 channel 32 bits floating point.
 
         Depth16,         ///< 16 depth bits.
@@ -1087,6 +1091,8 @@ namespace cubos::core::gl
 
             /// Sets the value of the uniform tied to the binding point to the provided unsigned integer vec4 value.
             virtual void setConstant(glm::uvec4 val) = 0;
+
+            virtual void setConstant(glm::mat4 val) = 0;
 
             /// Sets the value of the uniform tied to the binding point to the provided float value.
             virtual void setConstant(float val) = 0;

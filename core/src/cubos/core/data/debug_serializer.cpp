@@ -3,7 +3,7 @@
 using namespace cubos::core;
 using namespace cubos::core::data;
 
-DebugSerializer::DebugSerializer(memory::Stream& stream, bool pretty, bool typeNames) : Serializer(stream)
+DebugSerializer::DebugSerializer(memory::Stream& stream, bool pretty, bool typeNames) : stream(stream)
 {
     this->indent = 0;
     this->pretty = pretty;

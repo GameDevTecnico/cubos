@@ -1,0 +1,14 @@
+---
+metas:
+  - id: cubos-pal
+    type: Palette
+    usage: Static
+    params:
+      path: /assets/cubos.pal
+
+  - id: cubos
+    type: Grid
+    usage: Static
+    params:
+      path: /assets/cubos.grd
+...

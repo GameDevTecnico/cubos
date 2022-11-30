@@ -1,25 +1,41 @@
+#include <cubos/core/log.hpp>
+#include <cubos/core/settings.hpp>
+#include <cubos/core/ecs/commands.hpp>
+
 #include <cubos/engine/cubos.hpp>
 
-#include <cubos/core/log.hpp>
-#include <cubos/core/io/window.hpp>
-#include <cubos/core/gl/render_device.hpp>
+using namespace cubos::engine;
 
-void cubos::engine::init(int argc, char** argv)
+Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 {
-    core::initializeLogger();
+    if (!plugins.contains(func))
+    {
+        func(*this);
+        plugins.insert(func);
+    }
+    else
+    {
+        cubos::core::logTrace("Plugin was already registered!");
+    }
+    return *this;
 }
 
-void cubos::engine::run()
+Cubos::Cubos()
 {
-    auto window = core::io::Window::create();
-    auto& renderDevice = window->getRenderDevice();
+    addResource<ShouldQuit>(true);
+    addResource<cubos::core::Settings>();
+}
 
-    while (!window->shouldClose())
+void Cubos::run()
+{
+    plugins.clear();
+
+    cubos::core::ecs::Commands cmds(world);
+
+    startupDispatcher.callSystems(world, cmds);
+
+    while (!world.read<ShouldQuit>().get().value)
     {
-        renderDevice.clearColor(0.0, 0.0, 0.0, 0.0f);
-        window->swapBuffers();
-        window->pollEvents();
+        mainDispatcher.callSystems(world, cmds);
     }
-
-    delete window;
 }
