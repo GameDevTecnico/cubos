@@ -1,7 +1,6 @@
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/log.hpp>
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/gl/frame.hpp>
 #include <cubos/engine/gl/deferred/renderer.hpp>
@@ -376,7 +375,8 @@ void main() {
 }
 )glsl";
 
-deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size) : gl::Renderer(renderDevice, size)
+deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings)
+    : gl::Renderer(renderDevice, size)
 {
     // Create the states.
     RasterStateDesc rasterStateDesc;
@@ -460,9 +460,9 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size) : gl::
     this->size = glm::uvec2(0, 0);
     this->onResize(size);
 
-    // Check whether SSAO is enabled
-    ssaoEnabled = Settings::global.getBool("ssaoEnabled", false);
-    if (ssaoEnabled)
+    // Check whether SSAO is enabled.
+    this->ssaoEnabled = settings.getBool("ssaoEnabled", false);
+    if (this->ssaoEnabled)
     {
         createSSAOTextures();
         generateSSAONoise();
@@ -565,7 +565,10 @@ void deferred::Renderer::onResize(glm::uvec2 size)
     gBufferDesc.depthStencil.setTexture2DTarget(this->depthTex);
     this->gBuffer = this->renderDevice.createFramebuffer(gBufferDesc);
 
-    createSSAOTextures();
+    if (this->ssaoEnabled)
+    {
+        createSSAOTextures();
+    }
 }
 
 void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Framebuffer target)

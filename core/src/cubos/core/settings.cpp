@@ -2,8 +2,6 @@
 
 using namespace cubos::core;
 
-Settings Settings::global = Settings();
-
 void Settings::clear()
 {
     this->values.clear();

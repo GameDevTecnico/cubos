@@ -282,7 +282,7 @@ int main(void)
 
     // Initialize the renderer.
     auto& renderDevice = window->getRenderDevice();
-    auto renderer = gl::deferred::Renderer(renderDevice, window->getFramebufferSize());
+    auto renderer = gl::deferred::Renderer(renderDevice, window->getFramebufferSize(), core::Settings());
 
     // Mount the assets directory.
     core::data::FileSystem::mount("/assets",
