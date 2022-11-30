@@ -15,6 +15,8 @@ namespace cubos::core::gl
 
 namespace cubos::core::io
 {
+    class BaseWindow;
+
     /// Mouse button codes enum.
     enum class MouseButton
     {
@@ -45,17 +47,22 @@ namespace cubos::core::io
                  ///< MouseState::Default
     };
 
-    /// Wrapper around a window object.
+    /// Handle to a generic window.
+    using Window = std::shared_ptr<BaseWindow>;
+
+    /// Opens a new window.
+    /// @param title Window title.
+    /// @param size Window size, in screen coordinates.
+    /// @return New window, or nullptr if creation failed.
+    Window openWindow(const std::string& title = "Cubos", const glm::ivec2& size = {800, 600});
+
+    /// The base class for all window implementations.
     /// Handles input events and creates the render device.
-    class Window
+    class BaseWindow
     {
     public:
-        Window() = default;
-        virtual ~Window() = default;
-
-        /// Creates a window. It must be freed with delete.
-        /// @return New window, or nullptr if creation failed.
-        static Window* create();
+        BaseWindow() = default;
+        virtual ~BaseWindow() = default;
 
         /// Polls window events, firing the events.
         virtual void pollEvents() const = 0;

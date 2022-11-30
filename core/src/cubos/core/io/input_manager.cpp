@@ -17,7 +17,7 @@ std::map<cubos::core::io::MouseButton, std::shared_ptr<cubos::core::Event<>>> In
 std::map<cubos::core::io::MouseAxis, std::shared_ptr<cubos::core::Event<float>>> InputManager::mouseAxisCallbacks =
     std::map<cubos::core::io::MouseAxis, std::shared_ptr<cubos::core::Event<float>>>();
 
-cubos::core::io::Window* InputManager::window = nullptr;
+Window InputManager::window = nullptr;
 
 std::shared_ptr<Action> InputManager::createAction(std::string name)
 {
@@ -93,7 +93,7 @@ void InputManager::handleMouseAxis(glm::ivec2 coordinates)
     }
 }
 
-void InputManager::init(cubos::core::io::Window* window)
+void InputManager::init(Window window)
 {
     InputManager::window = window;
     InputManager::window->onKeyDown.registerCallback(handleKeyDown);

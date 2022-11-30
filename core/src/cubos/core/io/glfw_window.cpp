@@ -30,7 +30,7 @@ static Key glfwToCubosKey(int key);
         abort();                                                                                                       \
     } while (0)
 
-GLFWWindow::GLFWWindow()
+GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 {
 #ifdef WITH_GLFW
     if (!glfwInit())
@@ -45,8 +45,9 @@ GLFWWindow::GLFWWindow()
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif // __APPLE__
-    // TODO: Read settings and set the correct window size, title and mode (fullscreen, ...)
-    this->handle = glfwCreateWindow(800, 600, "Cubos", nullptr, nullptr);
+
+    // TODO: handle mode (fullscreen, ...)
+    this->handle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
     if (!this->handle)
     {
         CUBOS_CRITICAL("glfwCreateWindow() failed");

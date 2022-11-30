@@ -18,7 +18,7 @@ void debugTest(io::Key key)
 int main(void)
 {
     initializeLogger();
-    auto* window = io::Window::create();
+    auto window = io::openWindow();
     auto& renderDevice = window->getRenderDevice();
     gl::Debug::init(renderDevice);
 
@@ -49,6 +49,5 @@ int main(void)
     }
 
     gl::Debug::terminate();
-    delete window;
     return 0;
 }

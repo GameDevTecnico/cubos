@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     FileSystem::mount("/assets/", std::make_shared<STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
 
     // Open the window.
-    auto window = std::unique_ptr<core::io::Window>(core::io::Window::create());
+    auto window = core::io::openWindow();
     auto& renderDevice = window->getRenderDevice();
 
     using namespace core::gl;

@@ -3,7 +3,7 @@
 
 using namespace cubos::core::io;
 
-Window* Window::create()
+Window cubos::core::io::openWindow(const std::string& title, const glm::ivec2& size)
 {
-    return new GLFWWindow();
+    return std::make_shared<GLFWWindow>(title, size);
 }

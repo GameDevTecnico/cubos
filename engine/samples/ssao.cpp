@@ -22,7 +22,7 @@ using namespace cubos;
 int main(void)
 {
     core::initializeLogger();
-    auto window = core::io::Window::create();
+    auto window = core::io::openWindow();
     auto& renderDevice = window->getRenderDevice();
 
     {
@@ -104,6 +104,5 @@ int main(void)
         }
     }
 
-    delete window;
     return 0;
 }
