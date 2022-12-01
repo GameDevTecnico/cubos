@@ -24,7 +24,7 @@ int main(void)
         using namespace core::gl;
         using namespace engine::gl;
 
-        auto renderer = deferred::Renderer(renderDevice, window->getFramebufferSize());
+        auto renderer = deferred::Renderer(renderDevice, window->getFramebufferSize(), core::Settings());
         auto frame = Frame();
 
         // Set the palette.

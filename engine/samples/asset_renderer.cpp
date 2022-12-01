@@ -30,7 +30,7 @@ int main(int argc, char** argv)
     using namespace engine::gl;
 
     // Initialize the renderer.
-    auto renderer = deferred::Renderer(renderDevice, window->getFramebufferSize());
+    auto renderer = deferred::Renderer(renderDevice, window->getFramebufferSize(), core::Settings());
     auto frame = Frame();
 
     // Initialize the asset manager and register the asset types.
