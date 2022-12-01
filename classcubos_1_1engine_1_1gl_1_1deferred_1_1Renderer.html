@@ -118,8 +118,8 @@ Collaboration diagram for cubos::engine::gl::deferred::Renderer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1ee1589140309caeb7ce8de770992fea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a1ee1589140309caeb7ce8de770992fea">Renderer</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;<a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">renderDevice</a>, glm::uvec2 size)</td></tr>
-<tr class="separator:a1ee1589140309caeb7ce8de770992fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84a8d76c562e1965d4731e6009955ce2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a84a8d76c562e1965d4731e6009955ce2">Renderer</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;<a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a5f0c0a5691c25987d79601dd13c79b6a">renderDevice</a>, glm::uvec2 size, const <a class="el" href="classcubos_1_1core_1_1Settings.html">core::Settings</a> &amp;settings)</td></tr>
+<tr class="separator:a84a8d76c562e1965d4731e6009955ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dd5b860e004eb1a46d4f549c62d406b"><td class="memItemLeft" align="right" valign="top">virtual RendererGrid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a2dd5b860e004eb1a46d4f549c62d406b">upload</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a> &amp;grid) override</td></tr>
 <tr class="separator:a2dd5b860e004eb1a46d4f549c62d406b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a378d29a4fbde6e9edb688baeecaef96f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a378d29a4fbde6e9edb688baeecaef96f">setPalette</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">core::gl::Palette</a> &amp;palette) override</td></tr>
@@ -159,8 +159,8 @@ Additional Inherited Members</h2></td></tr>
 <li>The second pass takes the GBuffer textures and calculates the color of the pixels with the lighting applied. </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a1ee1589140309caeb7ce8de770992fea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ee1589140309caeb7ce8de770992fea">&#9670;&nbsp;</a></span>Renderer()</h2>
+<a id="a84a8d76c562e1965d4731e6009955ce2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84a8d76c562e1965d4731e6009955ce2">&#9670;&nbsp;</a></span>Renderer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,7 +175,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">glm::uvec2&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1Settings.html">core::Settings</a> &amp;&#160;</td>
+          <td class="paramname"><em>settings</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -188,6 +194,7 @@ Additional Inherited Members</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">renderDevice</td><td>The render device to use. </td></tr>
     <tr><td class="paramname">size</td><td>The size of the window. </td></tr>
+    <tr><td class="paramname">settings</td><td>The settings to use. </td></tr>
   </table>
   </dd>
 </dl>

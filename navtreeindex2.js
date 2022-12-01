@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"classcubos_1_1core_1_1ecs_1_1IStorage.html#a60384081976ed3bd34b3170b2980d116":[5,0,0,0,1,10,1],
+"classcubos_1_1core_1_1ecs_1_1IStorage.html#ab8f9c05ad99daf0ea1f405c4b29abba9":[5,0,0,0,1,10,0],
 "classcubos_1_1core_1_1ecs_1_1MapStorage.html":[5,0,0,0,1,11],
 "classcubos_1_1core_1_1ecs_1_1MapStorage.html#a514649406572f8220972c2d1d56ee2e2":[5,0,0,0,1,11,3],
 "classcubos_1_1core_1_1ecs_1_1MapStorage.html#a6da434ab8ca35329cfeb6ff4903b2d73":[5,0,0,0,1,11,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX2 =
 "classcubos_1_1core_1_1io_1_1Action.html#a07bb075b0f4dd5933b0af64520bd843d":[5,0,0,0,3,0,2],
 "classcubos_1_1core_1_1io_1_1Action.html#a0a5f99776d5a3ba22620917a35df42f9":[5,0,0,0,3,0,0],
 "classcubos_1_1core_1_1io_1_1Action.html#a7405b36cf25900b6ade351b4fcbca4c1":[5,0,0,0,3,0,3],
-"classcubos_1_1core_1_1io_1_1Action.html#adf2e7b2e247db375ed9303c54c8a3d21":[5,0,0,0,3,0,4],
-"classcubos_1_1core_1_1io_1_1Action.html#ae41533fe966dae6bdbeefb468ec1c8ab":[5,0,0,0,3,0,1],
-"classcubos_1_1core_1_1io_1_1ButtonPress.html":[5,0,0,0,3,1]
+"classcubos_1_1core_1_1io_1_1Action.html#adf2e7b2e247db375ed9303c54c8a3d21":[5,0,0,0,3,0,4]
 };

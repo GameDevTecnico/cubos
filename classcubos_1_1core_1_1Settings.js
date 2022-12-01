@@ -1,5 +1,7 @@
 var classcubos_1_1core_1_1Settings =
 [
+    [ "Settings", "classcubos_1_1core_1_1Settings.html#a7c563b45fca0f06919484a9ca0b308fb", null ],
+    [ "~Settings", "classcubos_1_1core_1_1Settings.html#ab3c0c0c6b3d7da69817c0bde419a3b19", null ],
     [ "clear", "classcubos_1_1core_1_1Settings.html#a7c7e51718d2f6c2b196757d64a1fd259", null ],
     [ "getBool", "classcubos_1_1core_1_1Settings.html#ac63af799da1b5f765ca8c463bed6e2de", null ],
     [ "getDouble", "classcubos_1_1core_1_1Settings.html#a7a21b85c5fc93e75730ed5815e9e3055", null ],

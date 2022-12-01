@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"classcubos_1_1core_1_1data_1_1Package.html#a6ffd1e4c0cc0cacf824d035440416d55":[5,0,0,0,0,12,5],
+"classcubos_1_1core_1_1data_1_1Package.html#a749e8b682762f32f789ad7aaee23e50b":[5,0,0,0,0,12,30],
 "classcubos_1_1core_1_1data_1_1Package.html#a783ceebb710b57e00e93a300c43f6fab":[5,0,0,0,0,12,26],
 "classcubos_1_1core_1_1data_1_1Package.html#a7aae5c17a9b16064ec3e03fd2a809f30":[5,0,0,0,0,12,27],
 "classcubos_1_1core_1_1data_1_1Package.html#a85ff6334a53dcef86dbd174461a651e1":[5,0,0,0,0,12,11],
@@ -247,7 +249,5 @@ var NAVTREEINDEX1 =
 "classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html#a2d44e741e8334d3f6bedef6013a9fb2d":[5,0,0,0,1,9,0,2],
 "classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html#a4818f629f6018b676aeac1711548a368":[5,0,0,0,1,9,0,1],
 "classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html#ab7e46d60853118845b910fed0db1b9d7":[5,0,0,0,1,9,0,3],
-"classcubos_1_1core_1_1ecs_1_1IStorage.html":[5,0,0,0,1,10],
-"classcubos_1_1core_1_1ecs_1_1IStorage.html#a60384081976ed3bd34b3170b2980d116":[5,0,0,0,1,10,1],
-"classcubos_1_1core_1_1ecs_1_1IStorage.html#ab8f9c05ad99daf0ea1f405c4b29abba9":[5,0,0,0,1,10,0]
+"classcubos_1_1core_1_1ecs_1_1IStorage.html":[5,0,0,0,1,10]
 };
