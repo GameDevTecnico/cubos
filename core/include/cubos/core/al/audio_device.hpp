@@ -1,6 +1,8 @@
 #ifndef CUBOS_CORE_AL_AUDIO_DEVICE_HPP
 #define CUBOS_CORE_AL_AUDIO_DEVICE_HPP
 
+#include <string>
+#include <vector>
 #include <memory>
 #include <glm/glm.hpp>
 
@@ -77,8 +79,7 @@ namespace cubos::core::al
             /// @param size The size of the buffer in bytes.
             /// @param data The buffer data.
             /// @param frequency The audio frequency.
-            /// @return The handle of the new buffer.
-            virtual Buffer fill(Format format, size_t size, const void* data, size_t frequency) = 0;
+            virtual void fill(Format format, size_t size, const void* data, size_t frequency) = 0;
 
         protected:
             Buffer() = default;
@@ -91,7 +92,7 @@ namespace cubos::core::al
         public:
             /// Sets the buffer to be played.
             /// @param buffer The buffer to be played.
-            virtual void setBuffer(Buffer buffer) = 0;
+            virtual void setBuffer(std::shared_ptr<Buffer> buffer) = 0;
 
             /// Sets the position of the source.
             /// @param position The position of the source.
@@ -140,6 +141,10 @@ namespace cubos::core::al
 
             /// Plays the source.
             virtual void play() = 0;
+
+        protected:
+            Source() = default;
+            virtual ~Source() = default;
         };
     } // namespace impl
 } // namespace cubos::core::al
