@@ -118,7 +118,43 @@ that it uses `10` different materials.
 
 ## Embed
 
-TODO
+The `cubinhos embed` tool is used to embed files directly into an executable for
+use with the `EmbeddedArchive`. This is useful for example when you want to ship
+a game with a set of assets, but don't want to have to distribute them as
+separate files. This way, you are able to ship a single executable file.
+
+### Usage
+
+This tool takes a file and generates a C++ source file which registers a new
+`EmbeddedArchive`, outputting it to the standard output. This source file can
+then be compiled and linked with your executable.
+
+If no name for the archive is specified, the name of the file will be used. For
+example, if you run `cubinhos embed logo.png > logo.cpp`, the name of the
+archive will be `logo.png`.
+
+The resulting archive can then be mounted like this:
+
+```cpp
+#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/embedded_archive.hpp>
+
+int main()
+{
+    using namespace cubos::core::data;
+
+    FileSystem::mount("/logo.png", std::make_shared<EmbeddedArchive>("logo.png"));
+
+    // ...
+
+    return 0;
+}
+```
+
+It's also possible to embed a whole directory, in which case you will need to
+use the `-r` flag. This will recursively embed all files in the directory.
+
+Checkout the `embedded_archive` sample for a complete example.
 
 ## Generate
 
