@@ -1,6 +1,6 @@
-<map id="cubos::core::io::Source" name="cubos::core::io::Source">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,173,83"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1io_1_1ButtonPress.html" title=" " alt="" coords="221,5,424,32"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1io_1_1DoubleAxis.html" title=" " alt="" coords="223,56,422,83"/>
-<area shape="rect" id="node4" href="$classcubos_1_1core_1_1io_1_1SingleAxis.html" title=" " alt="" coords="227,107,419,133"/>
+<map id="Source" name="Source">
+<area shape="rect" id="node1" title=" " alt="" coords="145,5,211,32"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1io_1_1ButtonPress.html" title=" " alt="" coords="5,80,105,107"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1io_1_1DoubleAxis.html" title=" " alt="" coords="130,80,226,107"/>
+<area shape="rect" id="node4" href="$classcubos_1_1core_1_1io_1_1SingleAxis.html" title=" " alt="" coords="250,80,341,107"/>
 </map>

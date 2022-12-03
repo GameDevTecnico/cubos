@@ -1,4 +1,4 @@
-<map id="cubos::core::data::FileStream&lt; T &gt;" name="cubos::core::data::FileStream&lt; T &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="14,99,155,140"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1memory_1_1Stream.html" title="Abstract class for memory streams." alt="" coords="5,7,164,48"/>
+<map id="FileStream&lt; T &gt;" name="FileStream&lt; T &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="5,99,136,125"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1memory_1_1Stream.html" title="Abstract class for memory streams." alt="" coords="36,14,105,41"/>
 </map>

@@ -165,45 +165,45 @@ $(document).ready(function(){initNavTree('log_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">// Implement custom formatting for all trivially serializable types.</span></div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;requires(cubos::core::data::TriviallySerializable&lt;T&gt; &amp;&amp; !std::is_pointer_v&lt;T&gt; &amp;&amp; !std::is_array_v&lt;T&gt; &amp;&amp;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;         !std::integral&lt;T&gt; &amp;&amp; !std::floating_point&lt;T&gt; &amp;&amp; !std::is_same_v&lt;T, std::string&gt;) <span class="keyword">struct </span>fmt::formatter&lt;T&gt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    : formatter&lt;string_view&gt;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">bool</span> pretty = <span class="keyword">false</span>; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">bool</span> types = <span class="keyword">false</span>;  </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    constexpr <span class="keyword">auto</span> parse(format_parse_context&amp; ctx) -&gt; decltype(ctx.begin())</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keyword">auto</span> it = ctx.begin(), end = ctx.end();</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">while</span> (it != end)</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keywordflow">if</span> (*it == <span class="charliteral">&#39;p&#39;</span>)</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                this-&gt;pretty = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*it == <span class="charliteral">&#39;t&#39;</span>)</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                this-&gt;types = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*it != <span class="charliteral">&#39;}&#39;</span>)</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                <span class="keywordflow">throw</span> format_error(<span class="stringliteral">&quot;invalid format&quot;</span>);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            ++it;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        }</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordflow">return</span> it;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    }</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt; <span class="keyword">auto</span> format(<span class="keyword">const</span> T&amp; val, FormatContext&amp; ctx) -&gt; decltype(ctx.out())</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    {</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">auto</span> stream = <a class="code" href="classcubos_1_1core_1_1memory_1_1BufferStream.html">cubos::core::memory::BufferStream</a>(32);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1DebugSerializer.html">cubos::core::data::DebugSerializer</a> serializer(stream, this-&gt;pretty, this-&gt;types);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        serializer.write(val, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        stream.put(<span class="charliteral">&#39;\0&#39;</span>);</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="comment">// Skip the &#39;?: &#39; prefix.</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="keyword">auto</span> result = std::string(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(stream.getBuffer()) + 3);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">return</span> formatter&lt;string_view&gt;::format(string_view(result), ctx);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;};</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_LOG_HPP</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;requires(cubos::core::data::TriviallySerializable&lt;T&gt; &amp;&amp; !std::is_pointer_v&lt;T&gt; &amp;&amp; !std::is_array_v&lt;T&gt; &amp;&amp;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;         !std::integral&lt;T&gt; &amp;&amp; !std::floating_point&lt;T&gt; &amp;&amp; !std::is_same_v&lt;T, std::string&gt;) <span class="keyword">struct </span>fmt::formatter&lt;T&gt;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    : formatter&lt;string_view&gt;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;{</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">bool</span> pretty = <span class="keyword">false</span>; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">bool</span> types = <span class="keyword">false</span>;  </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    constexpr <span class="keyword">auto</span> parse(format_parse_context&amp; ctx) -&gt; decltype(ctx.begin())</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keyword">auto</span> it = ctx.begin(), end = ctx.end();</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">while</span> (it != end)</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keywordflow">if</span> (*it == <span class="charliteral">&#39;p&#39;</span>)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                this-&gt;pretty = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*it == <span class="charliteral">&#39;t&#39;</span>)</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                this-&gt;types = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*it != <span class="charliteral">&#39;}&#39;</span>)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                <span class="keywordflow">throw</span> format_error(<span class="stringliteral">&quot;invalid format&quot;</span>);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            ++it;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        }</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">return</span> it;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    }</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt; <span class="keyword">auto</span> format(<span class="keyword">const</span> T&amp; val, FormatContext&amp; ctx) -&gt; decltype(ctx.out())</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    {</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keyword">auto</span> stream = <a class="code" href="classcubos_1_1core_1_1memory_1_1BufferStream.html">cubos::core::memory::BufferStream</a>(32);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1DebugSerializer.html">cubos::core::data::DebugSerializer</a> serializer(stream, this-&gt;pretty, this-&gt;types);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        serializer.write(val, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        stream.put(<span class="charliteral">&#39;\0&#39;</span>);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="comment">// Skip the &#39;?: &#39; prefix.</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keyword">auto</span> result = std::string(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(stream.getBuffer()) + 3);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">return</span> formatter&lt;string_view&gt;::format(string_view(result), ctx);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;};</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#endif // CUBOS_CORE_LOG_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="anamespacecubos_1_1core_html_ad567090dfaf70e696712c8cd2e72539e"><div class="ttname"><a href="namespacecubos_1_1core.html#ad567090dfaf70e696712c8cd2e72539e">cubos::core::logWarning</a></div><div class="ttdeci">void logWarning(T &amp;msg)</div><div class="ttdef"><b>Definition:</b> log.hpp:68</div></div>

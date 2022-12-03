@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quat_1179',['quat',['../structcubos_1_1engine_1_1ecs_1_1Rotation.html#a7aff7d3eb6a109dddf9a0e56035533a3',1,'cubos::engine::ecs::Rotation']]]
+  ['quat_1211',['quat',['../structcubos_1_1engine_1_1ecs_1_1Rotation.html#a09597e0564319480b3e9ebf3a2f69787',1,'cubos::engine::ecs::Rotation']]]
 ];

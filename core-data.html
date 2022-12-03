@@ -93,8 +93,29 @@ $(document).ready(function(){initNavTree('core-data.html',''); initResizable(); 
 <div class="textblock"><p>The namespace <a class="el" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a> provides utilities for interacting with files and also provides a serialization system.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 File System</h1>
-<p>TODO</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<p><b>CUBOS.</b> provides a file system abstraction layer that allows you to access files in a representation/platform independent way.</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Motivation</h2>
+<p>Why is this useful? Imagine you are writing a game and you want to package it into a single executable. During development, it would be inconvenient to have to merge all the files into the executable every time you make a change. So you would probably have a folder with all the files and you would load them from there.</p>
+<p>But when you package the game, you would have to merge all the files into the executable. How do you do this without having to change the code?</p>
+<p>The solution is to use the file system abstraction layer. When you access files, you use the <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html">FileSystem</a> class. During development, you would mount a <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html">STDArchive</a> with the folder where the files are located. When you package the game, you would mount a <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html">EmbeddedArchive</a>. Code wise, you would not have to change anything, provided that the paths relative to the archive are the same.</p>
+<p>This means its also possible to compress the files without any code changes.</p>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Archive</h2>
+<p>Archives represent 'gateways' to the real data in the virtual file system. Currently, there are only two types of archives:</p><ul>
+<li><a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html">STDArchive</a> - represents a file or directory in the real file system.</li>
+<li><a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html">EmbeddedArchive</a> - represents a file or directory embedded in the executable.</li>
+</ul>
+<p>Archives can be mounted into a path in the file system using the <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">FileSystem::mount</a> method. This makes it so that any path that starts with the mounted path will be redirected to the archive.</p>
+<p>Archives can be configured to be read-only: files cannot be created, modified or deleted. This is useful for archives used, for example, by the assets of a game.</p>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Files</h2>
+<p><a class="el" href="classcubos_1_1core_1_1data_1_1File.html">File</a> objects represent files in the virtual file system. You can get a file from its path in the virtual file system using the <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab7279dfd43000746d763c53e72623e5e">FileSystem::find</a> method.</p>
+<p>Files can be opened for reading or writing, using the <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a91c0ed17c745118fe25a5b2c1e8ffe80">File::open</a> method.</p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Example</h2>
+<p>You can check out the <code>embedded_archive</code> sample to see how you can use this feature.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Serialization</h1>
 <p><a href="https://en.wikipedia.org/wiki/Serialization">Wikipedia</a> defines serialization as:</p>
 <blockquote class="doxtable">
@@ -143,7 +164,7 @@ Serialization</h1>
 <p>The main advantage of this approach is that we have just written two simple functions, and now we are able to write and read <code>Fruit</code> objects to and from a multitude of different formats. At the moment of writing this, we have two <a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> and <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> implementations: <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">YAMLSerializer</a> and <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html">YAMLDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinarySerializer.html">BinarySerializer</a> and <a class="el" href="classcubos_1_1core_1_1data_1_1BinarySerializer.html">BinarySerializer</a>.</p>
 <p>Let's say we would like to write a list of <code>Fruit</code> objects to the console in YAML format. First we'll need to create a <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">YAMLSerializer</a>: </p><div class="fragment"><div class="line"><span class="comment">// The include cubos/core/data/yaml_serializer.hpp is necessary.</span></div>
 <div class="line"><span class="keyword">using namespace </span><a class="code" href="namespacecubos_1_1core.html">cubos::core</a>;</div>
-<div class="line"><span class="keyword">auto</span> serializer = <a class="code" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">data::YAMLSerializer</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa12e5ea3b14b35fbab982dc1275d54ea">memory::Stream::stdOut</a>);</div>
+<div class="line"><span class="keyword">auto</span> serializer = <a class="code" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">data::YAMLSerializer</a>(<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa28b8b5cd53eed1267b62da87e053a76">memory::Stream::stdOut</a>);</div>
 <div class="line">...</div>
 </div><!-- fragment --><p>We've just created a <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">YAMLSerializer</a> object, which outputs to the standard output stream. Now, let's write a list of <code>Fruit</code> objects, and some more test data: </p><div class="fragment"><div class="line">...</div>
 <div class="line">std::vector&lt;Fruit&gt; fruits = {</div>
@@ -154,7 +175,7 @@ Serialization</h1>
 <div class="line"> </div>
 <div class="line">serializer.write(fruits, <span class="stringliteral">&quot;fruits&quot;</span>);</div>
 <div class="line">serializer.write(42, <span class="stringliteral">&quot;number&quot;</span>);</div>
-</div><!-- fragment --><p>Since <code>Fruit</code> and <code>std::vector&lt;T&gt;</code> are both serializable (for <code>Fruit</code>, we defined a <code>serialize</code> function, and <code>std::vector&lt;T&gt;</code> has one defined automatically for every <code>T</code> which is serialiable), we can just use <a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html#a2471bb2316e392857708a675a7ee4f88">Serializer::write</a>.</p>
+</div><!-- fragment --><p>Since <code>Fruit</code> and <code>std::vector&lt;T&gt;</code> are both serializable (for <code>Fruit</code>, we defined a <code>serialize</code> function, and <code>std::vector&lt;T&gt;</code> has one defined automatically for every <code>T</code> which is serialiable), we can just use <a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html#a5f152aac97f3df1ea0b11483a472a869">Serializer::write</a>.</p>
 <p>This piece of code should output the following to the console: </p><div class="fragment"><div class="line">---</div>
 <div class="line">fruits:</div>
 <div class="line">- name: Apple</div>
@@ -170,7 +191,7 @@ Serialization</h1>
 <div class="line">...</div>
 </div><!-- fragment --><p>Until now we've only written data. What if we wanted to read the data back? Let's now create a <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html">YAMLDeserializer</a> object, which reads from the standard input stream: </p><div class="fragment"><div class="line"><span class="keyword">auto</span> deserializer = data::YAMLDeserializer(memory::Stream::stdIn);</div>
 <div class="line">...</div>
-</div><!-- fragment --><p>For the deserialization, we can just use <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a4c2109b40cc894770f4d2c5af2ed4c37">Deserializer::read</a>, because, once again, <code>Fruit</code> and <code>std::vector&lt;T&gt;</code> are both deserializable.</p>
+</div><!-- fragment --><p>For the deserialization, we can just use <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a2628f0d35c899f2da2faaf87c70dbf01">Deserializer::read</a>, because, once again, <code>Fruit</code> and <code>std::vector&lt;T&gt;</code> are both deserializable.</p>
 <div class="fragment"><div class="line">...</div>
 <div class="line">std::vector&lt;Fruit&gt; fruits;</div>
 <div class="line"><span class="keywordtype">int</span> number;</div>
@@ -178,7 +199,7 @@ Serialization</h1>
 <div class="line">deserializer.read(fruits);</div>
 <div class="line">deserializer.read(number);</div>
 </div><!-- fragment --><p>Now, if you run this code, and feed it the output of the previous code, you should get the same list of fruits and number back.</p>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 Context serializable types</h2>
 <p>Until now, we've only covered trivially serializable types: they can be serialized without providing any additional context. There are however, some types which do require additional context. Imagine we want to serialize the following structure: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>Human</div>
 <div class="line">{</div>
@@ -226,12 +247,12 @@ Context serializable types</h2>
 <div class="line">    map.add(&amp;family[i], i); <span class="comment">// Add a mapping index &lt;-&gt; Human*</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Then we serialize the family, using the map.</span></div>
-<div class="line">serializer.write(family, &amp;map, <span class="stringliteral">&quot;family&quot;</span>);</div>
+<div class="line">serializer.write(family, map, <span class="stringliteral">&quot;family&quot;</span>);</div>
 </div><!-- fragment --><p>The serialization functions for <code>Human</code> then could be written as:</p>
 <div class="fragment"><div class="line"><span class="comment">// Once again, we must put these in the right namespace.</span></div>
 <div class="line"><span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div>
 <div class="line">{</div>
-<div class="line">    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> Human&amp; h, SerializationMap&lt;Human*, uint32_t&gt;* map, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<div class="line">    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> Human&amp; h, <span class="keyword">const</span> SerializationMap&lt;Human*, uint32_t&gt;&amp; map, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
 <div class="line">    {</div>
 <div class="line">        s.beginObject(name);</div>
 <div class="line">        s.write(h.name, <span class="stringliteral">&quot;name&quot;</span>);</div>
@@ -240,7 +261,7 @@ Context serializable types</h2>
 <div class="line">        s.endObject();</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, Human&amp; h, SerializationMap&lt;Human*, uint32_t&gt;* map)</div>
+<div class="line">    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, Human&amp; h, <span class="keyword">const</span> SerializationMap&lt;Human*, uint32_t&gt;&amp; map)</div>
 <div class="line">    {</div>
 <div class="line">        int32_t id;</div>
 <div class="line"> </div>
@@ -269,7 +290,7 @@ Context serializable types</h2>
 <div class="line">  father: 1</div>
 <div class="line">...</div>
 </div><!-- fragment --><p>Which contains exactly the information we need to reconstruct the family! You can check the <a class="el" href="core.html">Core</a> <code>serialization.cpp</code> sample for more details.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Going further</h2>
 <p>One way we're taking advantage of the serialization system is to use it to both show object's properties in the UI (with <code>ImGui</code>) and also allow the user to edit those properties.</p>
 <p>For this purpose, we needed an easy way to inspect properties of any serializable object, and we also needed a way to edit those properties. So, we came up with the <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">Package</a> class. Any object which provides a trivial serialization function (that is, a function which won't receive extra arguments) can be packaged. We can also unpackage packages into trivially deserializable objects!</p>
@@ -286,7 +307,7 @@ Going further</h2>
 </div><!-- fragment --><p>And even edit them if necessary:</p>
 <div class="fragment"><div class="line">pkg.field(<span class="stringliteral">&quot;name&quot;</span>).set(<span class="stringliteral">&quot;Banana&quot;</span>);</div>
 <div class="line">...</div>
-</div><!-- fragment --><p>If we edit the package, the original object won't be immediately updated. To do this, we need to use the <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a4f389b4eb5e19d80de659150df1faa6a">into</a> method. This method only works with trivially deserializable objects, and will return true or false, depending on whether the conversion was successful.</p>
+</div><!-- fragment --><p>If we edit the package, the original object won't be immediately updated. To do this, we need to use the <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a2c1044dbf4dce5f7e2f2a5c0a6358d87">into</a> method. This method only works with trivially deserializable objects, and will return true or false, depending on whether the conversion was successful.</p>
 <div class="fragment"><div class="line">Fruit fruit = { <span class="stringliteral">&quot;Apple&quot;</span>, 0.5f, 10 };</div>
 <div class="line"><span class="keyword">auto</span> pkg = Package::from(fruit);</div>
 <div class="line">pkg.field(<span class="stringliteral">&quot;name&quot;</span>).set(<span class="stringliteral">&quot;Banana&quot;</span>);</div>
@@ -295,8 +316,8 @@ Going further</h2>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html_aa12e5ea3b14b35fbab982dc1275d54ea"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html#aa12e5ea3b14b35fbab982dc1275d54ea">cubos::core::memory::Stream::stdOut</a></div><div class="ttdeci">static Stream &amp; stdOut</div><div class="ttdoc">Stream wrapper for stdout.</div><div class="ttdef"><b>Definition:</b> stream.hpp:28</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a97f36cce7ff37b16121110f7562a7d23"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Package &amp;pkg, const char *name)</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html_aa28b8b5cd53eed1267b62da87e053a76"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html#aa28b8b5cd53eed1267b62da87e053a76">cubos::core::memory::Stream::stdOut</a></div><div class="ttdeci">static Stream &amp; stdOut</div><div class="ttdoc">Stream wrapper for stdout.</div><div class="ttdef"><b>Definition:</b> stream.hpp:28</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1YAMLSerializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">cubos::core::data::YAMLSerializer</a></div><div class="ttdoc">Implementation of the abstract Serializer class for serializing to YAML.</div><div class="ttdef"><b>Definition:</b> yaml_serializer.hpp:12</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_html"><div class="ttname"><a href="namespacecubos_1_1core.html">cubos::core</a></div><div class="ttdoc">Namespace of the CUBOS. core library.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>
@@ -305,7 +326,7 @@ Going further</h2>
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="core.html">Core</a></li>
+    <li class="navelem"><a class="el" href="structure.html">Structure</a></li><li class="navelem"><a class="el" href="core.html">Core</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.8.17 </li>
   </ul>

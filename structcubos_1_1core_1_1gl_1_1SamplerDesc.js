@@ -1,11 +1,11 @@
 var structcubos_1_1core_1_1gl_1_1SamplerDesc =
 [
-    [ "addressU", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a4d944747ddd0983631859dff193c9f3f", null ],
-    [ "addressV", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#af184642f4abaa5f78f2ea781d7986732", null ],
-    [ "addressW", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a4ca6426e6c6b71c046bf82b2c3bf90bd", null ],
-    [ "borderColor", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#ae3284b7f74cb19870d711bd2cfbb2cdb", null ],
-    [ "magFilter", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a55f08c3785965c5a3d59940eebde0993", null ],
-    [ "maxAnisotropy", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a3864dc1e10b2d054a4421f975ec3d3a3", null ],
-    [ "minFilter", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#acca006edf712803f5d929fa120eb7f8b", null ],
-    [ "mipmapFilter", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a2c1272224d07f4ded27ec8bc01e73b5f", null ]
+    [ "addressU", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a47616bef639f142cd16b76ae9d29f919", null ],
+    [ "addressV", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a561bb27857e732974173e8a15f2b0738", null ],
+    [ "addressW", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a48f5bb45f9870b7033e8845e1b173245", null ],
+    [ "borderColor", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#af1d6e2fd60e18d3b3722f361c178ab40", null ],
+    [ "magFilter", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a60b730bd9ed3db31bc2f38bd1b8657ec", null ],
+    [ "maxAnisotropy", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a76bf897a4812515bdcfd98034601c4da", null ],
+    [ "minFilter", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a67da04ceb5af5baf9df55bdad3970651", null ],
+    [ "mipmapFilter", "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a88275efef5168c517532f64522d72e3c", null ]
 ];

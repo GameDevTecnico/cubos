@@ -1,11 +1,11 @@
 var classcubos_1_1core_1_1ecs_1_1Commands =
 [
-    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#ad456317a8052b989803899c525d77e52", null ],
-    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#ae1c07daa944aff5dd284df0ba389daac", null ],
-    [ "~Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#a0404acdaa6cfb8adec4ddbede3437971", null ],
-    [ "add", "classcubos_1_1core_1_1ecs_1_1Commands.html#a20560235e123ca3f212eedd24a738c0d", null ],
-    [ "create", "classcubos_1_1core_1_1ecs_1_1Commands.html#ad50f5ed3dde87272026b12d9c09e87a0", null ],
-    [ "destroy", "classcubos_1_1core_1_1ecs_1_1Commands.html#a9f706449bc8e9bc1b080a1faa2c96375", null ],
-    [ "remove", "classcubos_1_1core_1_1ecs_1_1Commands.html#a2ee750278717506eb33f1720b1ef1741", null ],
-    [ "spawn", "classcubos_1_1core_1_1ecs_1_1Commands.html#a0c75cfde6373904798ba117b9627cd5f", null ]
+    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#a81b1f56a3cdc9424382d665f346afeee", null ],
+    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#a2324555277115c0890fc4bf1d7d47cfd", null ],
+    [ "~Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#aa8d9439482bf3dc4da09f81d88d90480", null ],
+    [ "add", "classcubos_1_1core_1_1ecs_1_1Commands.html#ad8a2aba82414b6d0397c3ce08ce3357a", null ],
+    [ "create", "classcubos_1_1core_1_1ecs_1_1Commands.html#abf69fbc9a95edcdeef2c2d026f12ab55", null ],
+    [ "destroy", "classcubos_1_1core_1_1ecs_1_1Commands.html#a4eaf0e751e5f813a14c33957a0b3dcf7", null ],
+    [ "remove", "classcubos_1_1core_1_1ecs_1_1Commands.html#af117c3ded1f313f8133e01d245c7c484", null ],
+    [ "spawn", "classcubos_1_1core_1_1ecs_1_1Commands.html#a8d5203f13e6ca9742b5ec75e0498fbf2", null ]
 ];

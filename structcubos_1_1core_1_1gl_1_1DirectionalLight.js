@@ -1,7 +1,7 @@
 var structcubos_1_1core_1_1gl_1_1DirectionalLight =
 [
-    [ "DirectionalLight", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#a26e8627f380cb771c43397b4a51f18ee", null ],
-    [ "color", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#a7a2cd51a02e6f2c5c2178374130728d8", null ],
-    [ "intensity", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#afccc438f0a56e03317e9cf10777c21b3", null ],
-    [ "rotation", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#aaab8ed740114e0fc12de7914175926de", null ]
+    [ "DirectionalLight", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#a35e359d55aa5aeff6a2bf448f0e9b3a8", null ],
+    [ "color", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#a0475c18c501e71cebb5fbd79145f8e81", null ],
+    [ "intensity", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#a2dfe87f3417747242e8f043dd4f3fb59", null ],
+    [ "rotation", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html#a4ebe780b81ca4be607e3fa456c0b6160", null ]
 ];

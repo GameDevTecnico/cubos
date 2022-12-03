@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['usage_1244',['Usage',['../namespacecubos_1_1core_1_1gl.html#a27b9573013b62d42dc33b642ebf6a268',1,'cubos::core::gl']]]
+  ['usage_1276',['Usage',['../namespacecubos_1_1core_1_1gl.html#a25fc5084eef40185be1491e806c96baa',1,'cubos::core::gl']]]
 ];

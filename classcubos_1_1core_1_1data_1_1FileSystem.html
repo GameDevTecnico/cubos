@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.8.17" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: cubos::core::data::FileSystem Class Reference</title>
+    <title>CUBOS.: FileSystem Class Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1data_1_1FileSyst
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classcubos_1_1core_1_1data_1_1FileSystem-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">cubos::core::data::FileSystem Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div>  </div>
+<div class="title">FileSystem Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -98,30 +98,30 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1data_1_1FileSyst
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a844d381b145e952e330e272401c5e773"><td class="memItemLeft" align="right" valign="top"><a id="a844d381b145e952e330e272401c5e773"></a>
-static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a844d381b145e952e330e272401c5e773">root</a> ()</td></tr>
-<tr class="memdesc:a844d381b145e952e330e272401c5e773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a handle to the root file. <br /></td></tr>
-<tr class="separator:a844d381b145e952e330e272401c5e773"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99a94a92bf53b655207dad5170318c97"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a99a94a92bf53b655207dad5170318c97">mount</a> (std::string_view path, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; archive)</td></tr>
-<tr class="separator:a99a94a92bf53b655207dad5170318c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a120a5537971ddb32aa9714f6f08943af"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a120a5537971ddb32aa9714f6f08943af">unmount</a> (std::string_view path)</td></tr>
-<tr class="separator:a120a5537971ddb32aa9714f6f08943af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac29156752cd056122cb673018fc51ed4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ac29156752cd056122cb673018fc51ed4">find</a> (std::string_view path)</td></tr>
-<tr class="separator:ac29156752cd056122cb673018fc51ed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a5c6b0cb8c33de83caa6cdaf4147f87"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a4a5c6b0cb8c33de83caa6cdaf4147f87">create</a> (std::string_view path, bool directory=false)</td></tr>
-<tr class="separator:a4a5c6b0cb8c33de83caa6cdaf4147f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa128c3b6d37a3c0b67feee0337fbf5c9"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aa128c3b6d37a3c0b67feee0337fbf5c9">destroy</a> (std::string_view path)</td></tr>
-<tr class="separator:aa128c3b6d37a3c0b67feee0337fbf5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ad14295e7ae3b1fea7baf6d026d4d5d"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a8ad14295e7ae3b1fea7baf6d026d4d5d">open</a> (std::string_view path, <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6">File::OpenMode</a> mode)</td></tr>
-<tr class="separator:a8ad14295e7ae3b1fea7baf6d026d4d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8a83c3e003a35bcc308f2b9f4a7b3a4"><td class="memItemLeft" align="right" valign="top"><a id="af8a83c3e003a35bcc308f2b9f4a7b3a4"></a>
+static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#af8a83c3e003a35bcc308f2b9f4a7b3a4">root</a> ()</td></tr>
+<tr class="memdesc:af8a83c3e003a35bcc308f2b9f4a7b3a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a handle to the root file. <br /></td></tr>
+<tr class="separator:af8a83c3e003a35bcc308f2b9f4a7b3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24316e70715c3ebe4e53e13f2d01f909"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">mount</a> (std::string_view path, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; archive)</td></tr>
+<tr class="separator:a24316e70715c3ebe4e53e13f2d01f909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab21b1dd5440a253dba0162c40588760c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab21b1dd5440a253dba0162c40588760c">unmount</a> (std::string_view path)</td></tr>
+<tr class="separator:ab21b1dd5440a253dba0162c40588760c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7279dfd43000746d763c53e72623e5e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab7279dfd43000746d763c53e72623e5e">find</a> (std::string_view path)</td></tr>
+<tr class="separator:ab7279dfd43000746d763c53e72623e5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e860389d6238e316234d6953ede4c2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a26e860389d6238e316234d6953ede4c2">create</a> (std::string_view path, bool directory=false)</td></tr>
+<tr class="separator:a26e860389d6238e316234d6953ede4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2c5d4d05a30324600358e22726891e4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aa2c5d4d05a30324600358e22726891e4">destroy</a> (std::string_view path)</td></tr>
+<tr class="separator:aa2c5d4d05a30324600358e22726891e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7158894929ee9241b715fc243cc07eec"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a7158894929ee9241b715fc243cc07eec">open</a> (std::string_view path, <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a3a70f8b621474c9885f80fe709e2dca2">File::OpenMode</a> mode)</td></tr>
+<tr class="separator:a7158894929ee9241b715fc243cc07eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the virtual file system of the engine. This class is never instantiated, and is only used to provide static methods.</p>
-<p>Example 1: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a99a94a92bf53b655207dad5170318c97">FileSystem::mount</a>("/assets", ...); ... auto modelsDir = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ac29156752cd056122cb673018fc51ed4">FileSystem::find</a>("/assets/models"); if (modelsDir != nullptr &amp;&amp; modelsDir-&gt;isDirectory()) for (auto model = modelsDir-&gt;getChild(); model != nullptr; model = model-&gt;getSibling()) loadModel(*model-&gt;open(File::OpenMode::Read)); ... <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a120a5537971ddb32aa9714f6f08943af">FileSystem::unmount</a>("/assets");</p>
-<p>Example 2: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a99a94a92bf53b655207dad5170318c97">FileSystem::mount</a>("/settings.yaml", ...); ... auto settingsFile = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a844d381b145e952e330e272401c5e773" title="Gets a handle to the root file.">FileSystem::root()</a>-&gt;find("settings.yaml"); if (settingsFile) loadSettings(*model-&gt;open(File::OpenMode::Read)); ... </p>
+<p>Example 1: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">FileSystem::mount</a>("/assets", ...); ... auto modelsDir = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab7279dfd43000746d763c53e72623e5e">FileSystem::find</a>("/assets/models"); if (modelsDir != nullptr &amp;&amp; modelsDir-&gt;isDirectory()) for (auto model = modelsDir-&gt;getChild(); model != nullptr; model = model-&gt;getSibling()) loadModel(*model-&gt;open(File::OpenMode::Read)); ... <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab21b1dd5440a253dba0162c40588760c">FileSystem::unmount</a>("/assets");</p>
+<p>Example 2: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">FileSystem::mount</a>("/settings.yaml", ...); ... auto settingsFile = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#af8a83c3e003a35bcc308f2b9f4a7b3a4" title="Gets a handle to the root file.">FileSystem::root()</a>-&gt;find("settings.yaml"); if (settingsFile) loadSettings(*model-&gt;open(File::OpenMode::Read)); ... </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4a5c6b0cb8c33de83caa6cdaf4147f87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a5c6b0cb8c33de83caa6cdaf4147f87">&#9670;&nbsp;</a></span>create()</h2>
+<a id="a26e860389d6238e316234d6953ede4c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26e860389d6238e316234d6953ede4c2">&#9670;&nbsp;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,7 +130,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d">File::Handle</a> cubos::core::data::FileSystem::create </td>
+          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a> create </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>path</em>, </td>
@@ -164,8 +164,8 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
 
 </div>
 </div>
-<a id="aa128c3b6d37a3c0b67feee0337fbf5c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa128c3b6d37a3c0b67feee0337fbf5c9">&#9670;&nbsp;</a></span>destroy()</h2>
+<a id="aa2c5d4d05a30324600358e22726891e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2c5d4d05a30324600358e22726891e4">&#9670;&nbsp;</a></span>destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,7 +174,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool cubos::core::data::FileSystem::destroy </td>
+          <td class="memname">static bool destroy </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -197,8 +197,8 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
 
 </div>
 </div>
-<a id="ac29156752cd056122cb673018fc51ed4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac29156752cd056122cb673018fc51ed4">&#9670;&nbsp;</a></span>find()</h2>
+<a id="ab7279dfd43000746d763c53e72623e5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7279dfd43000746d763c53e72623e5e">&#9670;&nbsp;</a></span>find()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +207,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d">File::Handle</a> cubos::core::data::FileSystem::find </td>
+          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a> find </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -230,8 +230,8 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
 
 </div>
 </div>
-<a id="a99a94a92bf53b655207dad5170318c97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99a94a92bf53b655207dad5170318c97">&#9670;&nbsp;</a></span>mount()</h2>
+<a id="a24316e70715c3ebe4e53e13f2d01f909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24316e70715c3ebe4e53e13f2d01f909">&#9670;&nbsp;</a></span>mount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,7 +240,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void cubos::core::data::FileSystem::mount </td>
+          <td class="memname">static void mount </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>path</em>, </td>
@@ -274,8 +274,8 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
 
 </div>
 </div>
-<a id="a8ad14295e7ae3b1fea7baf6d026d4d5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ad14295e7ae3b1fea7baf6d026d4d5d">&#9670;&nbsp;</a></span>open()</h2>
+<a id="a7158894929ee9241b715fc243cc07eec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7158894929ee9241b715fc243cc07eec">&#9670;&nbsp;</a></span>open()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -284,7 +284,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static std::unique_ptr&lt;<a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&gt; cubos::core::data::FileSystem::open </td>
+          <td class="memname">static std::unique_ptr&lt;<a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&gt; open </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>path</em>, </td>
@@ -292,7 +292,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6">File::OpenMode</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a3a70f8b621474c9885f80fe709e2dca2">File::OpenMode</a>&#160;</td>
           <td class="paramname"><em>mode</em>&#160;</td>
         </tr>
         <tr>
@@ -318,8 +318,8 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
 
 </div>
 </div>
-<a id="a120a5537971ddb32aa9714f6f08943af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a120a5537971ddb32aa9714f6f08943af">&#9670;&nbsp;</a></span>unmount()</h2>
+<a id="ab21b1dd5440a253dba0162c40588760c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab21b1dd5440a253dba0162c40588760c">&#9670;&nbsp;</a></span>unmount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -328,7 +328,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void cubos::core::data::FileSystem::unmount </td>
+          <td class="memname">static void unmount </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>

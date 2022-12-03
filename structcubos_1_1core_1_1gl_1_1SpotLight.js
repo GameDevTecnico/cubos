@@ -1,11 +1,11 @@
 var structcubos_1_1core_1_1gl_1_1SpotLight =
 [
-    [ "SpotLight", "structcubos_1_1core_1_1gl_1_1SpotLight.html#abb3c0095f129ba1a9da9db0d653bf986", null ],
-    [ "color", "structcubos_1_1core_1_1gl_1_1SpotLight.html#ac9b5a47ab35b354df32e72072bc7e005", null ],
-    [ "innerSpotAngle", "structcubos_1_1core_1_1gl_1_1SpotLight.html#ada0a522b6856cab57d402a15b9e132d7", null ],
-    [ "intensity", "structcubos_1_1core_1_1gl_1_1SpotLight.html#ac2436853ec199248bed155f44ff87762", null ],
-    [ "position", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a539929b61e511bd32d36cbb1ff7ac978", null ],
-    [ "range", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a4671a43f38f4b7ab2735309fbba3272e", null ],
-    [ "rotation", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a3b8e38c6549c902988c687bcd3f5fef7", null ],
-    [ "spotAngle", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a3a0e84bf80930e5c43a542ab10a3c7fb", null ]
+    [ "SpotLight", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a1a6dd1899ef91f547e799986b5fb3753", null ],
+    [ "color", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a0475c18c501e71cebb5fbd79145f8e81", null ],
+    [ "innerSpotAngle", "structcubos_1_1core_1_1gl_1_1SpotLight.html#add660c3fe9ec956fb8123fad372e6e71", null ],
+    [ "intensity", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a2dfe87f3417747242e8f043dd4f3fb59", null ],
+    [ "position", "structcubos_1_1core_1_1gl_1_1SpotLight.html#ab17456efa59b99dbb85317ee492274b6", null ],
+    [ "range", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a3930d1e8af0848833f4de0e0e9517dca", null ],
+    [ "rotation", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a4ebe780b81ca4be607e3fa456c0b6160", null ],
+    [ "spotAngle", "structcubos_1_1core_1_1gl_1_1SpotLight.html#a90fce7087383bb3f4dd8d67bbc98cd26", null ]
 ];

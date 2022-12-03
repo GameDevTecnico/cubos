@@ -1,5 +1,3 @@
-<map id="cubos::engine::gl::deferred::Renderer" name="cubos::engine::gl::deferred::Renderer">
-<area shape="rect" id="node1" title=" " alt="" coords="41,185,185,227"/>
-<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1gl_1_1Renderer.html" title=" " alt="" coords="43,95,183,136"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1gl_1_1RenderDevice.html" title=" " alt="" coords="5,5,220,32"/>
+<map id="Renderer" name="Renderer">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,87,32"/>
 </map>

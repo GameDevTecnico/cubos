@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.8.17" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: cubos::core::data::Archive Class Reference</title>
+    <title>CUBOS.: Archive Class Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -91,55 +91,55 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1data_1_1Archive.
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classcubos_1_1core_1_1data_1_1Archive-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">cubos::core::data::Archive Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">Archive Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="archive_8hpp_source.html">archive.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for cubos::core::data::Archive:</div>
+Inheritance diagram for Archive:</div>
 <div class="dyncontent">
-<div class="center"><img src="classcubos_1_1core_1_1data_1_1Archive__inherit__graph.png" border="0" usemap="#cubos_1_1core_1_1data_1_1Archive_inherit__map" alt="Inheritance graph"/></div>
-<map name="cubos_1_1core_1_1data_1_1Archive_inherit__map" id="cubos_1_1core_1_1data_1_1Archive_inherit__map">
-<area shape="rect" title=" " alt="" coords="88,5,229,47"/>
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" title="Archive implementation used to load data embedded in the executable." alt="" coords="5,95,147,136"/>
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1STDArchive.html" title=" " alt="" coords="171,95,312,136"/>
+<div class="center"><img src="classcubos_1_1core_1_1data_1_1Archive__inherit__graph.png" border="0" usemap="#Archive_inherit__map" alt="Inheritance graph"/></div>
+<map name="Archive_inherit__map" id="Archive_inherit__map">
+<area shape="rect" title=" " alt="" coords="111,5,181,32"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" title="Archive implementation used to load data embedded in the executable." alt="" coords="5,80,145,107"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1STDArchive.html" title=" " alt="" coords="169,80,267,107"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae352a64e944955ac8b73e5d963b42b0d"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#ae352a64e944955ac8b73e5d963b42b0d">create</a> (size_t parent, std::string_view name, bool directory=false)=0</td></tr>
-<tr class="separator:ae352a64e944955ac8b73e5d963b42b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad00ae7f0d9b492b34c5cf76203d53cd8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#ad00ae7f0d9b492b34c5cf76203d53cd8">destroy</a> (size_t id)=0</td></tr>
-<tr class="separator:ad00ae7f0d9b492b34c5cf76203d53cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e4618ccee3b6ebecc78b973fb90a35e"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a7e4618ccee3b6ebecc78b973fb90a35e">getName</a> (size_t id) const =0</td></tr>
-<tr class="separator:a7e4618ccee3b6ebecc78b973fb90a35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4e902da8a11df3b6e89878131e5bf78"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#ae4e902da8a11df3b6e89878131e5bf78">isDirectory</a> (size_t id) const =0</td></tr>
-<tr class="separator:ae4e902da8a11df3b6e89878131e5bf78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c02651db4078fe7e372424e47344169"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a9c02651db4078fe7e372424e47344169">isReadOnly</a> () const =0</td></tr>
-<tr class="separator:a9c02651db4078fe7e372424e47344169"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7d1e2919b1d1c2bbbc334f6a71a362d"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#af7d1e2919b1d1c2bbbc334f6a71a362d">getParent</a> (size_t id) const =0</td></tr>
-<tr class="separator:af7d1e2919b1d1c2bbbc334f6a71a362d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae148a213949d7dc3b72b6b53e372ab81"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#ae148a213949d7dc3b72b6b53e372ab81">getSibling</a> (size_t id) const =0</td></tr>
-<tr class="separator:ae148a213949d7dc3b72b6b53e372ab81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a185d598a5f3d2a93560bebf9d526cfe1"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a185d598a5f3d2a93560bebf9d526cfe1">getChild</a> (size_t id) const =0</td></tr>
-<tr class="separator:a185d598a5f3d2a93560bebf9d526cfe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86e7432b4199cb4967d6ca41fc24031f"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a86e7432b4199cb4967d6ca41fc24031f">open</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d">File::Handle</a> file, <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6">File::OpenMode</a> mode)=0</td></tr>
-<tr class="separator:a86e7432b4199cb4967d6ca41fc24031f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92bc5446aed8e673902d9f9b1f6362b0"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a92bc5446aed8e673902d9f9b1f6362b0">create</a> (size_t parent, std::string_view name, bool directory=false)=0</td></tr>
+<tr class="separator:a92bc5446aed8e673902d9f9b1f6362b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55976c705f5ecbda4e83edd6c263aee9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a55976c705f5ecbda4e83edd6c263aee9">destroy</a> (size_t id)=0</td></tr>
+<tr class="separator:a55976c705f5ecbda4e83edd6c263aee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4960e6e2669c563cfc19d8e0d76af25c"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a4960e6e2669c563cfc19d8e0d76af25c">getName</a> (size_t id) const =0</td></tr>
+<tr class="separator:a4960e6e2669c563cfc19d8e0d76af25c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affcb8636d9e2b6692771b9c717c8314b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#affcb8636d9e2b6692771b9c717c8314b">isDirectory</a> (size_t id) const =0</td></tr>
+<tr class="separator:affcb8636d9e2b6692771b9c717c8314b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bb56c87be69509bfa5b6c5231b320df"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a7bb56c87be69509bfa5b6c5231b320df">isReadOnly</a> () const =0</td></tr>
+<tr class="separator:a7bb56c87be69509bfa5b6c5231b320df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16dc00b4871390b72bdcc39d2ee3cc72"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a16dc00b4871390b72bdcc39d2ee3cc72">getParent</a> (size_t id) const =0</td></tr>
+<tr class="separator:a16dc00b4871390b72bdcc39d2ee3cc72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2dee2401f678c7ee797c7580943c20e"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#af2dee2401f678c7ee797c7580943c20e">getSibling</a> (size_t id) const =0</td></tr>
+<tr class="separator:af2dee2401f678c7ee797c7580943c20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74f7fbfb2b19dd0a94d047a194e2b529"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a74f7fbfb2b19dd0a94d047a194e2b529">getChild</a> (size_t id) const =0</td></tr>
+<tr class="separator:a74f7fbfb2b19dd0a94d047a194e2b529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a076c8e6a42144d6706bb608ec78c5b5a"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html#a076c8e6a42144d6706bb608ec78c5b5a">open</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a> file, <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a3a70f8b621474c9885f80fe709e2dca2">File::OpenMode</a> mode)=0</td></tr>
+<tr class="separator:a076c8e6a42144d6706bb608ec78c5b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a57e8ec771b3af9e05cb889e1b93b00f3"><td class="memItemLeft" align="right" valign="top"><a id="a57e8ec771b3af9e05cb889e1b93b00f3"></a>
+<tr class="memitem:a59d4c338e81c922ed0d08835df106c3b"><td class="memItemLeft" align="right" valign="top"><a id="a59d4c338e81c922ed0d08835df106c3b"></a>
 friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
-<tr class="separator:a57e8ec771b3af9e05cb889e1b93b00f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a59d4c338e81c922ed0d08835df106c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents an archive in the virtual file system. This class is meant to only be used internally by the virtual file system.</p>
 <p>Each file in an archive is represented by a unique integer identifier. The identifier 0 is reserved for errors, and the identifier 1 is reserved for the root file/directory. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae352a64e944955ac8b73e5d963b42b0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae352a64e944955ac8b73e5d963b42b0d">&#9670;&nbsp;</a></span>create()</h2>
+<a id="a92bc5446aed8e673902d9f9b1f6362b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92bc5446aed8e673902d9f9b1f6362b0">&#9670;&nbsp;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,7 +148,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t cubos::core::data::Archive::create </td>
+          <td class="memname">virtual size_t create </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>parent</em>, </td>
@@ -186,12 +186,12 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The identifier of the file, or 0 if the file could not be created. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#ab8c47dd56811f93d31e65e8ca35fd216">cubos::core::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#ad00ca232da1d6bfd9bf28231d2f79737">cubos::core::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#ab6773d9d41adcedbe011288158850553">EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#ab6773d9d41adcedbe011288158850553">STDArchive</a>.</p>
 
 </div>
 </div>
-<a id="ad00ae7f0d9b492b34c5cf76203d53cd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad00ae7f0d9b492b34c5cf76203d53cd8">&#9670;&nbsp;</a></span>destroy()</h2>
+<a id="a55976c705f5ecbda4e83edd6c263aee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55976c705f5ecbda4e83edd6c263aee9">&#9670;&nbsp;</a></span>destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -200,7 +200,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool cubos::core::data::Archive::destroy </td>
+          <td class="memname">virtual bool destroy </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -221,12 +221,12 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the file was destroyed, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#a73656ce929d32563be16c0dd000cd9be">cubos::core::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a39886b5aff2dcfae03cbae528a6faf75">cubos::core::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#a1aaa533a2bde2bad71cf84437fdb6db3">EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a1aaa533a2bde2bad71cf84437fdb6db3">STDArchive</a>.</p>
 
 </div>
 </div>
-<a id="a185d598a5f3d2a93560bebf9d526cfe1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a185d598a5f3d2a93560bebf9d526cfe1">&#9670;&nbsp;</a></span>getChild()</h2>
+<a id="a74f7fbfb2b19dd0a94d047a194e2b529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f7fbfb2b19dd0a94d047a194e2b529">&#9670;&nbsp;</a></span>getChild()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -235,7 +235,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t cubos::core::data::Archive::getChild </td>
+          <td class="memname">virtual size_t getChild </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -256,12 +256,12 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The identifier of the first child, or 0 if the file is not a directory or if it is empty. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#ad20273b5c9f790a96976cafdf1d833c1">cubos::core::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a373c2ddf9ab54147668ec5f4c9912bd5">cubos::core::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#aa551d4303da3c56e7cb32a663ce8a1ce">EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#aa551d4303da3c56e7cb32a663ce8a1ce">STDArchive</a>.</p>
 
 </div>
 </div>
-<a id="a7e4618ccee3b6ebecc78b973fb90a35e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e4618ccee3b6ebecc78b973fb90a35e">&#9670;&nbsp;</a></span>getName()</h2>
+<a id="a4960e6e2669c563cfc19d8e0d76af25c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4960e6e2669c563cfc19d8e0d76af25c">&#9670;&nbsp;</a></span>getName()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -270,7 +270,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::string cubos::core::data::Archive::getName </td>
+          <td class="memname">virtual std::string getName </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -291,12 +291,12 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The name of the file. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#a55bc22f5608997c16e0b04d23eec739a">cubos::core::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#ae9802dab3bdc034e31f5a507231541ee">cubos::core::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#ad09e73de766045d9695e7da9aaebf770">EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#ad09e73de766045d9695e7da9aaebf770">STDArchive</a>.</p>
 
 </div>
 </div>
-<a id="af7d1e2919b1d1c2bbbc334f6a71a362d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7d1e2919b1d1c2bbbc334f6a71a362d">&#9670;&nbsp;</a></span>getParent()</h2>
+<a id="a16dc00b4871390b72bdcc39d2ee3cc72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16dc00b4871390b72bdcc39d2ee3cc72">&#9670;&nbsp;</a></span>getParent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -305,7 +305,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t cubos::core::data::Archive::getParent </td>
+          <td class="memname">virtual size_t getParent </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -326,12 +326,12 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The identifier of the parent file, or 0 if the file is the root file. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#ac15e25fb1939027815aae92ebd4ebe71">cubos::core::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a12693dd41c23b6c2742e89820e6ec20c">cubos::core::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#a6b3a9b4a475e0e3efae68a1f13ab75e8">EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a6b3a9b4a475e0e3efae68a1f13ab75e8">STDArchive</a>.</p>
 
 </div>
 </div>
-<a id="ae148a213949d7dc3b72b6b53e372ab81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae148a213949d7dc3b72b6b53e372ab81">&#9670;&nbsp;</a></span>getSibling()</h2>
+<a id="af2dee2401f678c7ee797c7580943c20e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2dee2401f678c7ee797c7580943c20e">&#9670;&nbsp;</a></span>getSibling()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -340,7 +340,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t cubos::core::data::Archive::getSibling </td>
+          <td class="memname">virtual size_t getSibling </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -361,12 +361,12 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The identifier of the next sibling, or 0 if the file is the last child of its parent. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#af6b26314f888db0e6800d97851df0766">cubos::core::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a8e9f4fc910bf58ffa66eb875566a61b9">cubos::core::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#a46eddcdc47b21728037fdb43c355e5cd">EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a46eddcdc47b21728037fdb43c355e5cd">STDArchive</a>.</p>
 
 </div>
 </div>
-<a id="ae4e902da8a11df3b6e89878131e5bf78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4e902da8a11df3b6e89878131e5bf78">&#9670;&nbsp;</a></span>isDirectory()</h2>
+<a id="affcb8636d9e2b6692771b9c717c8314b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affcb8636d9e2b6692771b9c717c8314b">&#9670;&nbsp;</a></span>isDirectory()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -375,7 +375,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool cubos::core::data::Archive::isDirectory </td>
+          <td class="memname">virtual bool isDirectory </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -396,12 +396,12 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the file is a directory, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#af56eb0faac08d5196327f6d55294f89b">cubos::core::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a6a9eb08effbcced8aaff3c4f3538d9f9">cubos::core::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#a8c377649d4c168738142e01f2499ee8b">EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a8c377649d4c168738142e01f2499ee8b">STDArchive</a>.</p>
 
 </div>
 </div>
-<a id="a9c02651db4078fe7e372424e47344169"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c02651db4078fe7e372424e47344169">&#9670;&nbsp;</a></span>isReadOnly()</h2>
+<a id="a7bb56c87be69509bfa5b6c5231b320df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bb56c87be69509bfa5b6c5231b320df">&#9670;&nbsp;</a></span>isReadOnly()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -410,7 +410,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool cubos::core::data::Archive::isReadOnly </td>
+          <td class="memname">virtual bool isReadOnly </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -424,12 +424,12 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </div><div class="memdoc">
 <p>Checks if the archive is read-only. </p><dl class="section return"><dt>Returns</dt><dd>True if the archive is read-only, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#accfe0df5cda7c2607c4107396dc9a715">cubos::core::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a66b008b780b925bc3dff507d58385594">cubos::core::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#af32a6c217bea73bda42da69b6382750d">EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#af32a6c217bea73bda42da69b6382750d">STDArchive</a>.</p>
 
 </div>
 </div>
-<a id="a86e7432b4199cb4967d6ca41fc24031f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86e7432b4199cb4967d6ca41fc24031f">&#9670;&nbsp;</a></span>open()</h2>
+<a id="a076c8e6a42144d6706bb608ec78c5b5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a076c8e6a42144d6706bb608ec78c5b5a">&#9670;&nbsp;</a></span>open()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -438,15 +438,15 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::unique_ptr&lt;<a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&gt; cubos::core::data::Archive::open </td>
+          <td class="memname">virtual std::unique_ptr&lt;<a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&gt; open </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d">File::Handle</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td>
           <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6">File::OpenMode</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a3a70f8b621474c9885f80fe709e2dca2">File::OpenMode</a>&#160;</td>
           <td class="paramname"><em>mode</em>&#160;</td>
         </tr>
         <tr>
@@ -470,7 +470,7 @@ friend&#160;</td><td class="memItemRight" valign="bottom"><b>File</b></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The file stream, or nullptr if the file could not be opened. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#ab6c85ce94520e9c29f012dbbb0dcfd58">cubos::core::data::EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#a4a2e49da22e85460d078e1fa88e1bc97">cubos::core::data::STDArchive</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html#aeae352a5bc600e1e5385f04058d788bb">EmbeddedArchive</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#aeae352a5bc600e1e5385f04058d788bb">STDArchive</a>.</p>
 
 </div>
 </div>

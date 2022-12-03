@@ -1,7 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcubos_1_1core_1_1data_1_1Deserializer.html" title="Abstract class for deserializing data." alt="" coords="5,104,147,145"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinaryDeserializer.html" title=" " alt="" coords="195,5,337,47"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html" title=" " alt="" coords="195,71,337,112"/>
-<area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1JSONDeserializer.html" title="Implementation of the abstract Deserializer class for deserializing from JSON." alt="" coords="195,136,337,177"/>
-<area shape="rect" id="node5" href="$classcubos_1_1core_1_1data_1_1YAMLDeserializer.html" title="Implementation of the abstract Deserializer class for deserializng from YAML." alt="" coords="195,201,337,243"/>
+<area shape="rect" id="node1" href="$classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" title="Base class for system wrappers." alt="" coords="5,5,156,32"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1SystemWrapper.html" title="A system wrapper for a system which takes some arguments." alt="" coords="204,5,368,32"/>
 </map>

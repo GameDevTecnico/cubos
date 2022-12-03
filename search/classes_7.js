@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['hash_3c_20cubos_3a_3acore_3a_3aecs_3a_3aentity_20_3e_701',['hash&lt; cubos::core::ecs::Entity &gt;',['../structstd_1_1hash_3_01cubos_1_1core_1_1ecs_1_1Entity_01_4.html',1,'std']]]
+  ['indexbuffer_718',['IndexBuffer',['../classcubos_1_1core_1_1gl_1_1impl_1_1IndexBuffer.html',1,'cubos::core::gl::impl']]],
+  ['inputmanager_719',['InputManager',['../classcubos_1_1core_1_1io_1_1InputManager.html',1,'cubos::core::io']]],
+  ['istorage_720',['IStorage',['../classcubos_1_1core_1_1ecs_1_1IStorage.html',1,'cubos::core::ecs']]],
+  ['iterator_721',['Iterator',['../classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html',1,'EntityManager::Iterator'],['../classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html',1,'Query&lt; ComponentTypes &gt;::Iterator']]]
 ];

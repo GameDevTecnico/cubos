@@ -1,4 +1,4 @@
-<map id="cubos::core::gl::VertexArrayDesc" name="cubos::core::gl::VertexArrayDesc">
-<area shape="rect" id="node1" title="Vertex array description." alt="" coords="5,95,239,121"/>
-<area shape="rect" id="node2" href="$structcubos_1_1core_1_1gl_1_1VertexElement.html" title="Vertex element description." alt="" coords="12,5,232,32"/>
+<map id="VertexArrayDesc" name="VertexArrayDesc">
+<area shape="rect" id="node1" title="Vertex array description." alt="" coords="5,95,136,121"/>
+<area shape="rect" id="node2" href="$structcubos_1_1core_1_1gl_1_1VertexElement.html" title="Vertex element description." alt="" coords="11,5,130,32"/>
 </map>

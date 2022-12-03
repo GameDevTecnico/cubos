@@ -1,9 +1,9 @@
 var classcubos_1_1engine_1_1data_1_1Loader =
 [
-    [ "Loader", "classcubos_1_1engine_1_1data_1_1Loader.html#ab26f19d7676cb097391833f3ebb21e44", null ],
-    [ "~Loader", "classcubos_1_1engine_1_1data_1_1Loader.html#a8cb5d839d8d55a620b819a6978b5a230", null ],
-    [ "load", "classcubos_1_1engine_1_1data_1_1Loader.html#a55dba9943eb3e86d01ed7e65b5ee346c", null ],
-    [ "loadAsync", "classcubos_1_1engine_1_1data_1_1Loader.html#a358ebcb8221e2c9feeb0011b8e3cc30f", null ],
-    [ "unload", "classcubos_1_1engine_1_1data_1_1Loader.html#a322588b0fa88b4f962645bd33dd5d4ba", null ],
-    [ "manager", "classcubos_1_1engine_1_1data_1_1Loader.html#ad929ea9c2b6a0703f9c0d67d03e842b1", null ]
+    [ "Loader", "classcubos_1_1engine_1_1data_1_1Loader.html#adbd53f90e9a70cbfc83d13e0d6d6e0bd", null ],
+    [ "~Loader", "classcubos_1_1engine_1_1data_1_1Loader.html#a17511e29698bdc7b518647e2f8b9d759", null ],
+    [ "load", "classcubos_1_1engine_1_1data_1_1Loader.html#a6d50c1df2881b3fdb448c2d175bb62c9", null ],
+    [ "loadAsync", "classcubos_1_1engine_1_1data_1_1Loader.html#a9db2b6f8d713a2c10783a26542a4fd55", null ],
+    [ "unload", "classcubos_1_1engine_1_1data_1_1Loader.html#a4da6ecc8b3326fd28acb8bf898c5c70f", null ],
+    [ "manager", "classcubos_1_1engine_1_1data_1_1Loader.html#abd8717c36d3e35c3d550647076e15ab4", null ]
 ];

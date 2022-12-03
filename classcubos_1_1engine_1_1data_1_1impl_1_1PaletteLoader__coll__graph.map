@@ -1,5 +1,5 @@
-<map id="cubos::engine::data::impl::PaletteLoader" name="cubos::engine::data::impl::PaletteLoader">
-<area shape="rect" id="node1" title="Loader for Palette assets." alt="" coords="5,200,161,241"/>
-<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1data_1_1Loader.html" title="Base class of all asset loaders." alt="" coords="9,109,158,151"/>
-<area shape="rect" id="node3" href="$classcubos_1_1engine_1_1data_1_1AssetManager.html" title=" " alt="" coords="9,5,158,47"/>
+<map id="PaletteLoader" name="PaletteLoader">
+<area shape="rect" id="node1" title="Loader for Palette assets." alt="" coords="7,171,118,197"/>
+<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1data_1_1Loader.html" title="Base class of all asset loaders." alt="" coords="29,95,96,121"/>
+<area shape="rect" id="node3" href="$classcubos_1_1engine_1_1data_1_1AssetManager.html" title=" " alt="" coords="5,5,120,32"/>
 </map>

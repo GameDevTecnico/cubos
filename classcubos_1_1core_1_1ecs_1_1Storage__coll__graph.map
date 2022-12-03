@@ -1,4 +1,4 @@
-<map id="cubos::core::ecs::Storage&lt; T &gt;" name="cubos::core::ecs::Storage&lt; T &gt;">
-<area shape="rect" id="node1" title="Storage is an abstract container for a certain type with common operations, such as,..." alt="" coords="5,80,228,107"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1IStorage.html" title="IStorage is an abstract parent class for all storages." alt="" coords="23,5,211,32"/>
+<map id="Storage&lt; T &gt;" name="Storage&lt; T &gt;">
+<area shape="rect" id="node1" title="Storage is an abstract container for a certain type with common operations, such as,..." alt="" coords="5,80,116,107"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1IStorage.html" title="IStorage is an abstract parent class for all storages." alt="" coords="23,5,99,32"/>
 </map>

@@ -1,5 +1,5 @@
-<map id="cubos::engine::data::impl::GridLoader" name="cubos::engine::data::impl::GridLoader">
-<area shape="rect" id="node1" title="Loader for Grid assets." alt="" coords="5,200,155,241"/>
-<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1data_1_1Loader.html" title="Base class of all asset loaders." alt="" coords="5,109,155,151"/>
-<area shape="rect" id="node3" href="$classcubos_1_1engine_1_1data_1_1AssetManager.html" title=" " alt="" coords="5,5,155,47"/>
+<map id="GridLoader" name="GridLoader">
+<area shape="rect" id="node1" title="Loader for Grid assets." alt="" coords="16,171,109,197"/>
+<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1data_1_1Loader.html" title="Base class of all asset loaders." alt="" coords="29,95,96,121"/>
+<area shape="rect" id="node3" href="$classcubos_1_1engine_1_1data_1_1AssetManager.html" title=" " alt="" coords="5,5,120,32"/>
 </map>

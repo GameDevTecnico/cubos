@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['zfar_637',['zFar',['../structcubos_1_1core_1_1gl_1_1Camera.html#a10ea6545a08a7673a16e413a4e844505',1,'cubos::core::gl::Camera']]],
-  ['znear_638',['zNear',['../structcubos_1_1core_1_1gl_1_1Camera.html#ad0c319fc03a01de358029f6d68447ef6',1,'cubos::core::gl::Camera']]]
+  ['zfar_654',['zFar',['../structcubos_1_1core_1_1gl_1_1Camera.html#a44be78f8d91a84e8c1fa546dd1e406c0',1,'cubos::core::gl::Camera']]],
+  ['znear_655',['zNear',['../structcubos_1_1core_1_1gl_1_1Camera.html#a81d1f238a094dd2b4951321a11bc17c0',1,'cubos::core::gl::Camera']]]
 ];

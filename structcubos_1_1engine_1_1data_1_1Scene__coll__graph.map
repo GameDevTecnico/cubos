@@ -1,4 +1,4 @@
-<map id="cubos::engine::data::Scene" name="cubos::engine::data::Scene">
-<area shape="rect" id="node1" title=" " alt="" coords="27,95,177,136"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Blueprint.html" title=" " alt="" coords="5,5,199,32"/>
+<map id="Scene" name="Scene">
+<area shape="rect" id="node1" title=" " alt="" coords="15,95,77,121"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Blueprint.html" title=" " alt="" coords="5,5,87,32"/>
 </map>

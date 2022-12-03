@@ -1,4 +1,4 @@
-<map id="cubos::engine::gl::Renderer" name="cubos::engine::gl::Renderer">
-<area shape="rect" id="node1" title=" " alt="" coords="43,95,183,136"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1gl_1_1RenderDevice.html" title=" " alt="" coords="5,5,220,32"/>
+<map id="Renderer" name="Renderer">
+<area shape="rect" id="node1" title=" " alt="" coords="21,95,103,121"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1gl_1_1RenderDevice.html" title=" " alt="" coords="5,5,119,32"/>
 </map>

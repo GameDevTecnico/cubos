@@ -1,4 +1,4 @@
-<map id="cubos::core::gl::ConstantBufferStructure" name="cubos::core::gl::ConstantBufferStructure">
-<area shape="rect" id="node1" title="Constant buffer structure." alt="" coords="5,109,188,151"/>
-<area shape="rect" id="node2" href="$structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html" title="Constant buffer element." alt="" coords="5,5,188,47"/>
+<map id="ConstantBufferStructure" name="ConstantBufferStructure">
+<area shape="rect" id="node1" title="Constant buffer structure." alt="" coords="5,95,184,121"/>
+<area shape="rect" id="node2" href="$structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html" title="Constant buffer element." alt="" coords="8,5,181,32"/>
 </map>

@@ -1,5 +1,5 @@
-<map id="cubos::core::data::Archive" name="cubos::core::data::Archive">
-<area shape="rect" id="node1" title=" " alt="" coords="88,5,229,47"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" title="Archive implementation used to load data embedded in the executable." alt="" coords="5,95,147,136"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1STDArchive.html" title=" " alt="" coords="171,95,312,136"/>
+<map id="Archive" name="Archive">
+<area shape="rect" id="node1" title=" " alt="" coords="111,5,181,32"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" title="Archive implementation used to load data embedded in the executable." alt="" coords="5,80,145,107"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1STDArchive.html" title=" " alt="" coords="169,80,267,107"/>
 </map>

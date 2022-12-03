@@ -1,5 +1,5 @@
 var structcubos_1_1engine_1_1data_1_1Palette =
 [
-    [ "Loader", "structcubos_1_1engine_1_1data_1_1Palette.html#acc206c247af2bdd03b97dcfee95f087f", null ],
-    [ "palette", "structcubos_1_1engine_1_1data_1_1Palette.html#aaa7f5e38ed51374c77d4e9f61ee29db3", null ]
+    [ "Loader", "structcubos_1_1engine_1_1data_1_1Palette.html#a4c8e552e9b5dc0ecd126fa1e53fffed8", null ],
+    [ "palette", "structcubos_1_1engine_1_1data_1_1Palette.html#a71b884fc4ac1228d9197ba6b1d5a0d8a", null ]
 ];

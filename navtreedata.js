@@ -24,22 +24,13 @@ var NAVTREE =
 [
   [ "CUBOS.", "index.html", [
     [ "Introduction", "index.html", [
-      [ "Voxel based engine", "index.html#autotoc_md13", null ],
-      [ "Structure", "index.html#autotoc_md14", null ]
+      [ "Voxel based engine", "index.html#autotoc_md45", [
+        [ "Features", "index.html#autotoc_md46", null ],
+        [ "Getting started", "index.html#autotoc_md47", null ]
+      ] ]
     ] ],
-    [ "Core", "core.html", "core" ],
-    [ "Engine", "engine.html", null ],
-    [ "Cubinhos", "cubinhos.html", [
-      [ "Convert", "cubinhos.html#autotoc_md6", [
-        [ "Usage", "cubinhos.html#autotoc_md7", [
-          [ "Example 1: Creating a new palette", "cubinhos.html#autotoc_md8", null ],
-          [ "Example 2: Updating an existing palette", "cubinhos.html#autotoc_md9", null ],
-          [ "Example 3: Using an existing palette", "cubinhos.html#autotoc_md10", null ],
-          [ "Example 4: Querying the contents of a model", "cubinhos.html#autotoc_md11", null ]
-        ] ]
-      ] ],
-      [ "Embed", "cubinhos.html#autotoc_md12", null ]
-    ] ],
+    [ "Structure", "structure.html", "structure" ],
+    [ "Guides", "guides.html", "guides" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -71,11 +62,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classcubos_1_1core_1_1data_1_1Package.html#a6ffd1e4c0cc0cacf824d035440416d55",
-"classcubos_1_1core_1_1ecs_1_1IStorage.html#a60384081976ed3bd34b3170b2980d116",
-"classcubos_1_1core_1_1io_1_1Action.html#ae41533fe966dae6bdbeefb468ec1c8ab",
-"classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a92bf87b59adb9241b9b5097a77e2ac72",
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_4.html"
+"classcubos_1_1core_1_1data_1_1Package.html#a1d1cfd8ffb84e947f82999c682b666a7a6669348b484e3008dca2bfa8e85e40b5",
+"classcubos_1_1core_1_1ecs_1_1IStorage.html#add53e175e501082566a003a639e4178f",
+"classcubos_1_1core_1_1io_1_1ButtonPress.html",
+"classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a829d7114e3ed38c555af0fb4e974a6f6",
+"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a911f4daadd0450a091a589eb27d02f52",
+"yaml__deserializer_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

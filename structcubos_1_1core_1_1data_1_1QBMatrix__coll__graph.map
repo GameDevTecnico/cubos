@@ -1,5 +1,5 @@
-<map id="cubos::core::data::QBMatrix" name="cubos::core::data::QBMatrix">
-<area shape="rect" id="node1" title="Represents the data read from a matrix in a QB file." alt="" coords="102,95,243,136"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1gl_1_1Grid.html" title=" " alt="" coords="5,5,156,32"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1gl_1_1Palette.html" title="Represents a palette of materials. Supports up to 65535 materials." alt="" coords="180,5,349,32"/>
+<map id="QBMatrix" name="QBMatrix">
+<area shape="rect" id="node1" title="Represents the data read from a matrix in a QB file." alt="" coords="30,95,113,121"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1gl_1_1Grid.html" title=" " alt="" coords="5,5,55,32"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1gl_1_1Palette.html" title="Represents a palette of materials. Supports up to 65535 materials." alt="" coords="79,5,146,32"/>
 </map>

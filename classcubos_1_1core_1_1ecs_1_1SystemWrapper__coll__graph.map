@@ -1,4 +1,4 @@
-<map id="cubos::core::ecs::SystemWrapper&lt; F &gt;" name="cubos::core::ecs::SystemWrapper&lt; F &gt;">
-<area shape="rect" id="node1" title="A system wrapper for a system which takes some arguments." alt="" coords="18,95,201,136"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" title="Base class for system wrappers." alt="" coords="5,5,213,47"/>
+<map id="SystemWrapper&lt; F &gt;" name="SystemWrapper&lt; F &gt;">
+<area shape="rect" id="node1" title="A system wrapper for a system which takes some arguments." alt="" coords="5,80,169,107"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" title="Base class for system wrappers." alt="" coords="12,5,163,32"/>
 </map>

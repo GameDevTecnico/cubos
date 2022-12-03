@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.8.17" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: cubos::engine::data::Loader Class Reference</title>
+    <title>CUBOS.: Loader Class Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1engine_1_1data_1_1Loader
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classcubos_1_1engine_1_1data_1_1Loader-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">cubos::engine::data::Loader Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">Loader Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -100,49 +100,74 @@ $(document).ready(function(){initNavTree('classcubos_1_1engine_1_1data_1_1Loader
 
 <p><code>#include &lt;<a class="el" href="loader_8hpp_source.html">loader.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for cubos::engine::data::Loader:</div>
+Inheritance diagram for Loader:</div>
 <div class="dyncontent">
-<div class="center"><img src="classcubos_1_1engine_1_1data_1_1Loader__inherit__graph.png" border="0" usemap="#cubos_1_1engine_1_1data_1_1Loader_inherit__map" alt="Inheritance graph"/></div>
-<map name="cubos_1_1engine_1_1data_1_1Loader_inherit__map" id="cubos_1_1engine_1_1data_1_1Loader_inherit__map">
-<area shape="rect" title="Base class of all asset loaders." alt="" coords="5,71,155,112"/>
-<area shape="rect" href="classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html" title="Loader for Grid assets." alt="" coords="206,5,355,47"/>
-<area shape="rect" href="classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html" title="Loader for Palette assets." alt="" coords="203,71,359,112"/>
-<area shape="rect" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html" title="Loader for Scene assets." alt="" coords="205,136,356,177"/>
+<div class="center"><img src="classcubos_1_1engine_1_1data_1_1Loader__inherit__graph.png" border="0" usemap="#Loader_inherit__map" alt="Inheritance graph"/></div>
+<map name="Loader_inherit__map" id="Loader_inherit__map">
+<area shape="rect" title="Base class of all asset loaders." alt="" coords="145,5,212,32"/>
+<area shape="rect" href="classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html" title="Loader for Grid assets." alt="" coords="5,80,99,107"/>
+<area shape="rect" href="classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html" title="Loader for Palette assets." alt="" coords="123,80,234,107"/>
+<area shape="rect" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html" title="Loader for Scene assets." alt="" coords="258,80,363,107"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for cubos::engine::data::Loader:</div>
+Collaboration diagram for Loader:</div>
 <div class="dyncontent">
-<div class="center"><img src="classcubos_1_1engine_1_1data_1_1Loader__coll__graph.png" border="0" usemap="#cubos_1_1engine_1_1data_1_1Loader_coll__map" alt="Collaboration graph"/></div>
-<map name="cubos_1_1engine_1_1data_1_1Loader_coll__map" id="cubos_1_1engine_1_1data_1_1Loader_coll__map">
-<area shape="rect" title="Base class of all asset loaders." alt="" coords="5,109,155,151"/>
-<area shape="rect" href="classcubos_1_1engine_1_1data_1_1AssetManager.html" title=" " alt="" coords="5,5,155,47"/>
+<div class="center"><img src="classcubos_1_1engine_1_1data_1_1Loader__coll__graph.png" border="0" usemap="#Loader_coll__map" alt="Collaboration graph"/></div>
+<map name="Loader_coll__map" id="Loader_coll__map">
+<area shape="rect" title="Base class of all asset loaders." alt="" coords="29,95,96,121"/>
+<area shape="rect" href="classcubos_1_1engine_1_1data_1_1AssetManager.html" title=" " alt="" coords="5,5,120,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab26f19d7676cb097391833f3ebb21e44"><td class="memItemLeft" align="right" valign="top"><a id="ab26f19d7676cb097391833f3ebb21e44"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Loader</b> (<a class="el" href="classcubos_1_1engine_1_1data_1_1AssetManager.html">AssetManager</a> *manager)</td></tr>
-<tr class="separator:ab26f19d7676cb097391833f3ebb21e44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55dba9943eb3e86d01ed7e65b5ee346c"><td class="memItemLeft" align="right" valign="top">virtual const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html#a55dba9943eb3e86d01ed7e65b5ee346c">load</a> (const <a class="el" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> &amp;meta)=0</td></tr>
-<tr class="separator:a55dba9943eb3e86d01ed7e65b5ee346c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a358ebcb8221e2c9feeb0011b8e3cc30f"><td class="memItemLeft" align="right" valign="top">virtual std::future&lt; const void * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html#a358ebcb8221e2c9feeb0011b8e3cc30f">loadAsync</a> (const <a class="el" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> &amp;meta)=0</td></tr>
-<tr class="separator:a358ebcb8221e2c9feeb0011b8e3cc30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a322588b0fa88b4f962645bd33dd5d4ba"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html#a322588b0fa88b4f962645bd33dd5d4ba">unload</a> (const <a class="el" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> &amp;meta, const void *asset)=0</td></tr>
-<tr class="separator:a322588b0fa88b4f962645bd33dd5d4ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbd53f90e9a70cbfc83d13e0d6d6e0bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html#adbd53f90e9a70cbfc83d13e0d6d6e0bd">Loader</a> (<a class="el" href="classcubos_1_1engine_1_1data_1_1AssetManager.html">AssetManager</a> *<a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html#abd8717c36d3e35c3d550647076e15ab4">manager</a>)</td></tr>
+<tr class="separator:adbd53f90e9a70cbfc83d13e0d6d6e0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d50c1df2881b3fdb448c2d175bb62c9"><td class="memItemLeft" align="right" valign="top">virtual const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html#a6d50c1df2881b3fdb448c2d175bb62c9">load</a> (const <a class="el" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> &amp;meta)=0</td></tr>
+<tr class="separator:a6d50c1df2881b3fdb448c2d175bb62c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9db2b6f8d713a2c10783a26542a4fd55"><td class="memItemLeft" align="right" valign="top">virtual std::future&lt; const void * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html#a9db2b6f8d713a2c10783a26542a4fd55">loadAsync</a> (const <a class="el" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> &amp;meta)=0</td></tr>
+<tr class="separator:a9db2b6f8d713a2c10783a26542a4fd55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da6ecc8b3326fd28acb8bf898c5c70f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html#a4da6ecc8b3326fd28acb8bf898c5c70f">unload</a> (const <a class="el" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> &amp;meta, const void *asset)=0</td></tr>
+<tr class="separator:a4da6ecc8b3326fd28acb8bf898c5c70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ad929ea9c2b6a0703f9c0d67d03e842b1"><td class="memItemLeft" align="right" valign="top"><a id="ad929ea9c2b6a0703f9c0d67d03e842b1"></a>
-<a class="el" href="classcubos_1_1engine_1_1data_1_1AssetManager.html">AssetManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>manager</b></td></tr>
-<tr class="separator:ad929ea9c2b6a0703f9c0d67d03e842b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd8717c36d3e35c3d550647076e15ab4"><td class="memItemLeft" align="right" valign="top"><a id="abd8717c36d3e35c3d550647076e15ab4"></a>
+<a class="el" href="classcubos_1_1engine_1_1data_1_1AssetManager.html">AssetManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html#abd8717c36d3e35c3d550647076e15ab4">manager</a></td></tr>
+<tr class="memdesc:abd8717c36d3e35c3d550647076e15ab4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcubos_1_1engine_1_1data_1_1Asset.html">Asset</a> manager that owns this loader. <br /></td></tr>
+<tr class="separator:abd8717c36d3e35c3d550647076e15ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class of all asset loaders. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a55dba9943eb3e86d01ed7e65b5ee346c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55dba9943eb3e86d01ed7e65b5ee346c">&#9670;&nbsp;</a></span>load()</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="adbd53f90e9a70cbfc83d13e0d6d6e0bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd53f90e9a70cbfc83d13e0d6d6e0bd">&#9670;&nbsp;</a></span>Loader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1engine_1_1data_1_1Loader.html">Loader</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1engine_1_1data_1_1AssetManager.html">AssetManager</a> *&#160;</td>
+          <td class="paramname"><em>manager</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">manager</td><td>The asset manager that owns this loader. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6d50c1df2881b3fdb448c2d175bb62c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d50c1df2881b3fdb448c2d175bb62c9">&#9670;&nbsp;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -151,7 +176,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual const void* cubos::engine::data::Loader::load </td>
+          <td class="memname">virtual const void* load </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> &amp;&#160;</td>
           <td class="paramname"><em>meta</em></td><td>)</td>
@@ -172,12 +197,12 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to asset data. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html#afeaf5cdaa8f54ff5bdcba54152922140">cubos::engine::data::impl::GridLoader</a>, <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html#af00fe7710d7032671cd97d5deb460efe">cubos::engine::data::impl::PaletteLoader</a>, and <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#a3958995c4cd7544989f1a62edb33751a">cubos::engine::data::impl::SceneLoader</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html#aa1a12f27a4b8bae12d35ef446d32aae9">GridLoader</a>, <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aa1a12f27a4b8bae12d35ef446d32aae9">SceneLoader</a>, and <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html#aa1a12f27a4b8bae12d35ef446d32aae9">PaletteLoader</a>.</p>
 
 </div>
 </div>
-<a id="a358ebcb8221e2c9feeb0011b8e3cc30f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a358ebcb8221e2c9feeb0011b8e3cc30f">&#9670;&nbsp;</a></span>loadAsync()</h2>
+<a id="a9db2b6f8d713a2c10783a26542a4fd55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9db2b6f8d713a2c10783a26542a4fd55">&#9670;&nbsp;</a></span>loadAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,7 +211,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::future&lt;const void*&gt; cubos::engine::data::Loader::loadAsync </td>
+          <td class="memname">virtual std::future&lt;const void*&gt; loadAsync </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> &amp;&#160;</td>
           <td class="paramname"><em>meta</em></td><td>)</td>
@@ -207,12 +232,12 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to asset data. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html#ad7d73e1e3ca25e153f8794e92e563afa">cubos::engine::data::impl::GridLoader</a>, <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html#abf0c58e4a9a60c615dec182a06278b6a">cubos::engine::data::impl::PaletteLoader</a>, and <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#a9d348265815b0020b5953e85796287ba">cubos::engine::data::impl::SceneLoader</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html#aca0389c82d9edfb5e9285719f6483c76">GridLoader</a>, <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aca0389c82d9edfb5e9285719f6483c76">SceneLoader</a>, and <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html#aca0389c82d9edfb5e9285719f6483c76">PaletteLoader</a>.</p>
 
 </div>
 </div>
-<a id="a322588b0fa88b4f962645bd33dd5d4ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a322588b0fa88b4f962645bd33dd5d4ba">&#9670;&nbsp;</a></span>unload()</h2>
+<a id="a4da6ecc8b3326fd28acb8bf898c5c70f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4da6ecc8b3326fd28acb8bf898c5c70f">&#9670;&nbsp;</a></span>unload()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +246,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void cubos::engine::data::Loader::unload </td>
+          <td class="memname">virtual void unload </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> &amp;&#160;</td>
           <td class="paramname"><em>meta</em>, </td>
@@ -252,7 +277,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html#a74413845bf99e890e42b881b490b6660">cubos::engine::data::impl::GridLoader</a>, <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html#a0cc64b6d95d9c7a60c8c76d5dd0c865b">cubos::engine::data::impl::PaletteLoader</a>, and <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#a39d4be5348232e2a9a0bc83cef796da1">cubos::engine::data::impl::SceneLoader</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html#a8349bd7e3f1e7ddb09c35536fc244c44">GridLoader</a>, <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#a8349bd7e3f1e7ddb09c35536fc244c44">SceneLoader</a>, and <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html#a8349bd7e3f1e7ddb09c35536fc244c44">PaletteLoader</a>.</p>
 
 </div>
 </div>

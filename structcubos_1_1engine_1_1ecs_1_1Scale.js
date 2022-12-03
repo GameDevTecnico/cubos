@@ -1,5 +1,5 @@
 var structcubos_1_1engine_1_1ecs_1_1Scale =
 [
-    [ "Storage", "structcubos_1_1engine_1_1ecs_1_1Scale.html#a3e116219b8208bed3d5e61955fbb6cc5", null ],
-    [ "factor", "structcubos_1_1engine_1_1ecs_1_1Scale.html#a6f2330e10a27160d031714311abc85fa", null ]
+    [ "Storage", "structcubos_1_1engine_1_1ecs_1_1Scale.html#a5f274faf422c30cc5905428a11f443ec", null ],
+    [ "factor", "structcubos_1_1engine_1_1ecs_1_1Scale.html#a323c112c11500270be91b7cb353826bd", null ]
 ];

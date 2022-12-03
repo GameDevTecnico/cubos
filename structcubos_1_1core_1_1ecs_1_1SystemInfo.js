@@ -1,10 +1,10 @@
 var structcubos_1_1core_1_1ecs_1_1SystemInfo =
 [
-    [ "compatible", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a05714b34c0c00bdce62301f97ea831dc", null ],
-    [ "valid", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a804c5ac349872cff1c6b58cc5cc49ba3", null ],
-    [ "componentsRead", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a6157a5511699b6dbecc4de59f53a3d28", null ],
-    [ "componentsWritten", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#ade7e5bf48a1804706818b12f8ae7564e", null ],
-    [ "resourcesRead", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a1e9f6205413590bf8f58b5ffa6843634", null ],
-    [ "resourcesWritten", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a0360aa1a99f951dc4ac5a69a222649a2", null ],
-    [ "usesCommands", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#ad91a46336fc587a201e66abce7fecfd1", null ]
+    [ "compatible", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a839dec601886b186dd843700ef790f66", null ],
+    [ "valid", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a315419f26d3c59fa143b49b90a019049", null ],
+    [ "componentsRead", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#adcbb08ae8a79b0f50662c6746f88960c", null ],
+    [ "componentsWritten", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a61b7a284250952a4087e85dbfe918529", null ],
+    [ "resourcesRead", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a22c91adc0079c595cef6c3dd23391464", null ],
+    [ "resourcesWritten", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a069b6f2f9f063967fd8a8c3397d4129e", null ],
+    [ "usesCommands", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a6e3e5f9a43b61fd5e911f2fd151516ee", null ]
 ];

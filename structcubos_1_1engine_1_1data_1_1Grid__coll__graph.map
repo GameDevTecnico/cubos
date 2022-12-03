@@ -1,4 +1,3 @@
-<map id="cubos::engine::data::Grid" name="cubos::engine::data::Grid">
-<area shape="rect" id="node1" title=" " alt="" coords="6,95,155,136"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1gl_1_1Grid.html" title=" " alt="" coords="5,5,156,32"/>
+<map id="Grid" name="Grid">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,55,32"/>
 </map>

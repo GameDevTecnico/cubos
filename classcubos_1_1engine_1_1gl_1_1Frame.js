@@ -1,17 +1,17 @@
 var classcubos_1_1engine_1_1gl_1_1Frame =
 [
     [ "DrawCmd", "structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd.html", "structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd" ],
-    [ "Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html#a536f3fdfd1e64271d3c3402f7186db37", null ],
-    [ "~Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html#aca8a668a0bc6d9f284b4791de7c21529", null ],
-    [ "ambient", "classcubos_1_1engine_1_1gl_1_1Frame.html#a21c9f778deb596454db417b77e8acb9e", null ],
-    [ "clear", "classcubos_1_1engine_1_1gl_1_1Frame.html#a1ef7449885016c01c721e5d81922ce5e", null ],
-    [ "draw", "classcubos_1_1engine_1_1gl_1_1Frame.html#ac7ea0ae69a46fe534d41414b871f2989", null ],
-    [ "getAmbient", "classcubos_1_1engine_1_1gl_1_1Frame.html#a9306466f6154745b6450d99d8e7aec03", null ],
-    [ "getDirectionalLights", "classcubos_1_1engine_1_1gl_1_1Frame.html#a0ab14011aecd86033d7e8fc8f216ed86", null ],
-    [ "getDrawCmds", "classcubos_1_1engine_1_1gl_1_1Frame.html#aa6ebe1c210852ad0a6190453427b0fe9", null ],
-    [ "getPointLights", "classcubos_1_1engine_1_1gl_1_1Frame.html#a72c30ef245af5f2a363eea242257a27f", null ],
-    [ "getSpotLights", "classcubos_1_1engine_1_1gl_1_1Frame.html#a5cb970f5d5758a2fd17e6789384a5671", null ],
-    [ "light", "classcubos_1_1engine_1_1gl_1_1Frame.html#a7f2b3762e67e38c8304673a2bb9905d7", null ],
-    [ "light", "classcubos_1_1engine_1_1gl_1_1Frame.html#a33255387011d94f752492f8a4a206c33", null ],
-    [ "light", "classcubos_1_1engine_1_1gl_1_1Frame.html#a4ee455767abc52861a326ec644f109d6", null ]
+    [ "Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html#a0e35703efe34d479bb4922584d0c8d70", null ],
+    [ "~Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html#adacd20282e41d621c1339f8dd552b0ed", null ],
+    [ "ambient", "classcubos_1_1engine_1_1gl_1_1Frame.html#ab52d5adbd45b002614745dd4e75575a1", null ],
+    [ "clear", "classcubos_1_1engine_1_1gl_1_1Frame.html#ac8bb3912a3ce86b15842e79d0b421204", null ],
+    [ "draw", "classcubos_1_1engine_1_1gl_1_1Frame.html#acaeef62a8c9d61c0c74a9bf2bab23afc", null ],
+    [ "getAmbient", "classcubos_1_1engine_1_1gl_1_1Frame.html#a20b69e31ff181f30320553b8f5fa057b", null ],
+    [ "getDirectionalLights", "classcubos_1_1engine_1_1gl_1_1Frame.html#a6a67ee7e031c344d2cc3267e0d0410d1", null ],
+    [ "getDrawCmds", "classcubos_1_1engine_1_1gl_1_1Frame.html#abb2be2d0100a3a2fa634a778ac648b45", null ],
+    [ "getPointLights", "classcubos_1_1engine_1_1gl_1_1Frame.html#a5bc67e0d5d21218f4f8986ec863596c8", null ],
+    [ "getSpotLights", "classcubos_1_1engine_1_1gl_1_1Frame.html#ae3b41245843a11c68c2394f1ebe32adc", null ],
+    [ "light", "classcubos_1_1engine_1_1gl_1_1Frame.html#ad4fe64e8adf9e186df853ae77364cd17", null ],
+    [ "light", "classcubos_1_1engine_1_1gl_1_1Frame.html#aa1f8d4dcac112e6f8546f7df3aa54fb6", null ],
+    [ "light", "classcubos_1_1engine_1_1gl_1_1Frame.html#ad39aad770a2e498f7cd8cf4da8417deb", null ]
 ];

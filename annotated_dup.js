@@ -41,8 +41,5 @@ var annotated_dup =
         [ "Cubos", "classcubos_1_1engine_1_1Cubos.html", "classcubos_1_1engine_1_1Cubos" ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ]
       ] ]
-    ] ],
-    [ "std", null, [
-      [ "hash< cubos::core::ecs::Entity >", "structstd_1_1hash_3_01cubos_1_1core_1_1ecs_1_1Entity_01_4.html", "structstd_1_1hash_3_01cubos_1_1core_1_1ecs_1_1Entity_01_4" ]
     ] ]
 ];

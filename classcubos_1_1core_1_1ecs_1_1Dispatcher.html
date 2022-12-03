@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.8.17" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: cubos::core::ecs::Dispatcher Class Reference</title>
+    <title>CUBOS.: Dispatcher Class Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1Dispatche
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">cubos::core::ecs::Dispatcher Class Reference</div>  </div>
+<div class="title">Dispatcher Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -102,40 +102,38 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1Dispatche
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aa1120195a751b6c943834ac0284d5f13"><td class="memItemLeft" align="right" valign="top"><a id="aa1120195a751b6c943834ac0284d5f13"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Direction</b> { <b>Before</b>, 
+<tr class="memitem:a224b9163917ac32fc95a60d8c1eec3aa"><td class="memItemLeft" align="right" valign="top"><a id="a224b9163917ac32fc95a60d8c1eec3aa"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Direction</b> { <b>Before</b>, 
 <b>After</b>
  }</td></tr>
-<tr class="separator:aa1120195a751b6c943834ac0284d5f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a224b9163917ac32fc95a60d8c1eec3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6f2974a9431d79c888bd7c1644b76ecc"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
-<tr class="memitem:a6f2974a9431d79c888bd7c1644b76ecc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a6f2974a9431d79c888bd7c1644b76ecc">addSystem</a> (F system, std::string stage)</td></tr>
-<tr class="separator:a6f2974a9431d79c888bd7c1644b76ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21619600ba5e471ea80b544ac386face"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a21619600ba5e471ea80b544ac386face">callSystems</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Commands.html">Commands</a> &amp;cmds)</td></tr>
-<tr class="separator:a21619600ba5e471ea80b544ac386face"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17ddca2904a7a598c4c01cf128626dd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a17ddca2904a7a598c4c01cf128626dd3">setDefaultStage</a> (std::string stage, ecs::Dispatcher::Direction direction)</td></tr>
-<tr class="separator:a17ddca2904a7a598c4c01cf128626dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a412b120b3858ada8a8dc9db6f7cc48a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a412b120b3858ada8a8dc9db6f7cc48a3">putStageBefore</a> (std::string stage, std::string referenceStage)</td></tr>
-<tr class="separator:a412b120b3858ada8a8dc9db6f7cc48a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a339d16ada022ea371906a208090cb8d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a339d16ada022ea371906a208090cb8d8">putStageAfter</a> (std::string stage, std::string referenceStage)</td></tr>
-<tr class="separator:a339d16ada022ea371906a208090cb8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f279e2ed8a8c8edcbb3f74ef0ccfacf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a8f279e2ed8a8c8edcbb3f74ef0ccfacf">putStage</a> (std::string stage, std::string referenceStage, Direction direction)</td></tr>
-<tr class="separator:a8f279e2ed8a8c8edcbb3f74ef0ccfacf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7362f9f13e525bdb644b5819da7d47a"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:ae7362f9f13e525bdb644b5819da7d47a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae7362f9f13e525bdb644b5819da7d47a">addSystem</a> (F system, std::string stage)</td></tr>
+<tr class="separator:ae7362f9f13e525bdb644b5819da7d47a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad76925e6b54ce94fb4630e08b6349d27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ad76925e6b54ce94fb4630e08b6349d27">callSystems</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Commands.html">Commands</a> &amp;cmds)</td></tr>
+<tr class="separator:ad76925e6b54ce94fb4630e08b6349d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9188bca948fac416ba2b7889ca644b52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a9188bca948fac416ba2b7889ca644b52">setDefaultStage</a> (std::string stage, ecs::Dispatcher::Direction direction)</td></tr>
+<tr class="separator:a9188bca948fac416ba2b7889ca644b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93d3d9bf4e4670257138e40707000809"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a93d3d9bf4e4670257138e40707000809">putStageBefore</a> (std::string stage, std::string referenceStage)</td></tr>
+<tr class="separator:a93d3d9bf4e4670257138e40707000809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5727888f22830f657f4a71868e4d9546"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a5727888f22830f657f4a71868e4d9546">putStageAfter</a> (std::string stage, std::string referenceStage)</td></tr>
+<tr class="separator:a5727888f22830f657f4a71868e4d9546"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae54d8af8b0845c659d4505e1a6225211"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae54d8af8b0845c659d4505e1a6225211">putStage</a> (std::string stage, std::string referenceStage, Direction direction)</td></tr>
+<tr class="separator:ae54d8af8b0845c659d4505e1a6225211"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" title="Dispatcher is a class that is used to register systems and call them all at once, where they will be ...">Dispatcher</a> is a class that is used to register systems and call them all at once, where they will be executed in order of the stages they are in. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6f2974a9431d79c888bd7c1644b76ecc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f2974a9431d79c888bd7c1644b76ecc">&#9670;&nbsp;</a></span>addSystem()</h2>
+<a id="ae7362f9f13e525bdb644b5819da7d47a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7362f9f13e525bdb644b5819da7d47a">&#9670;&nbsp;</a></span>addSystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename F &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::Dispatcher::addSystem </td>
+          <td class="memname">void addSystem </td>
           <td>(</td>
           <td class="paramtype">F&#160;</td>
           <td class="paramname"><em>system</em>, </td>
@@ -163,14 +161,14 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
-<a id="a21619600ba5e471ea80b544ac386face"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21619600ba5e471ea80b544ac386face">&#9670;&nbsp;</a></span>callSystems()</h2>
+<a id="ad76925e6b54ce94fb4630e08b6349d27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad76925e6b54ce94fb4630e08b6349d27">&#9670;&nbsp;</a></span>callSystems()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::Dispatcher::callSystems </td>
+          <td class="memname">void callSystems </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;&#160;</td>
           <td class="paramname"><em>world</em>, </td>
@@ -197,14 +195,14 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
-<a id="a8f279e2ed8a8c8edcbb3f74ef0ccfacf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f279e2ed8a8c8edcbb3f74ef0ccfacf">&#9670;&nbsp;</a></span>putStage()</h2>
+<a id="ae54d8af8b0845c659d4505e1a6225211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae54d8af8b0845c659d4505e1a6225211">&#9670;&nbsp;</a></span>putStage()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::Dispatcher::putStage </td>
+          <td class="memname">void putStage </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>stage</em>, </td>
@@ -239,14 +237,14 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
-<a id="a339d16ada022ea371906a208090cb8d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a339d16ada022ea371906a208090cb8d8">&#9670;&nbsp;</a></span>putStageAfter()</h2>
+<a id="a5727888f22830f657f4a71868e4d9546"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5727888f22830f657f4a71868e4d9546">&#9670;&nbsp;</a></span>putStageAfter()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::Dispatcher::putStageAfter </td>
+          <td class="memname">void putStageAfter </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>stage</em>, </td>
@@ -274,14 +272,14 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
-<a id="a412b120b3858ada8a8dc9db6f7cc48a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a412b120b3858ada8a8dc9db6f7cc48a3">&#9670;&nbsp;</a></span>putStageBefore()</h2>
+<a id="a93d3d9bf4e4670257138e40707000809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93d3d9bf4e4670257138e40707000809">&#9670;&nbsp;</a></span>putStageBefore()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::Dispatcher::putStageBefore </td>
+          <td class="memname">void putStageBefore </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>stage</em>, </td>
@@ -309,14 +307,14 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
-<a id="a17ddca2904a7a598c4c01cf128626dd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17ddca2904a7a598c4c01cf128626dd3">&#9670;&nbsp;</a></span>setDefaultStage()</h2>
+<a id="a9188bca948fac416ba2b7889ca644b52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9188bca948fac416ba2b7889ca644b52">&#9670;&nbsp;</a></span>setDefaultStage()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::ecs::Dispatcher::setDefaultStage </td>
+          <td class="memname">void setDefaultStage </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>stage</em>, </td>

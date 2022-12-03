@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['input_20output_1344',['Input Output',['../core-io.html',1,'core']]],
-  ['introduction_1345',['Introduction',['../index.html',1,'']]]
+  ['graphics_20library_1377',['Graphics Library',['../core-gl.html',1,'core']]],
+  ['guides_1378',['Guides',['../guides.html',1,'']]]
 ];

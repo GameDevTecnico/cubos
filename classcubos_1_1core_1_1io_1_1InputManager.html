@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.8.17" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: cubos::core::io::InputManager Class Reference</title>
+    <title>CUBOS.: InputManager Class Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1io_1_1InputManag
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classcubos_1_1core_1_1io_1_1InputManager-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">cubos::core::io::InputManager Class Reference</div>  </div>
+<div class="title">InputManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -99,97 +99,97 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1io_1_1InputManag
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a28fda0ec7caef0d566e43071e4e1d4dc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a28fda0ec7caef0d566e43071e4e1d4dc">init</a> (<a class="el" href="classcubos_1_1core_1_1io_1_1Window.html">cubos::core::io::Window</a> *window)</td></tr>
-<tr class="separator:a28fda0ec7caef0d566e43071e4e1d4dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8aa55c2f1b516000858a66164a2f8d22"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a8aa55c2f1b516000858a66164a2f8d22">createAction</a> (std::string name)</td></tr>
-<tr class="separator:a8aa55c2f1b516000858a66164a2f8d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2a30ea7712ef48eb56eb10f44553c79"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ab2a30ea7712ef48eb56eb10f44553c79">getAction</a> (std::string name)</td></tr>
-<tr class="separator:ab2a30ea7712ef48eb56eb10f44553c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d9aafb82796fb0409f3f8936c01214c"><td class="memItemLeft" align="right" valign="top"><a id="a1d9aafb82796fb0409f3f8936c01214c"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a1d9aafb82796fb0409f3f8936c01214c">processActions</a> ()</td></tr>
-<tr class="memdesc:a1d9aafb82796fb0409f3f8936c01214c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the processSources method in all registered Actions. <br /></td></tr>
-<tr class="separator:a1d9aafb82796fb0409f3f8936c01214c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79f043911ca18b58f524cc8fea5f074d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a79f043911ca18b58f524cc8fea5f074d">registerKeyDownCallback</a> (std::function&lt; void(void)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a> key)</td></tr>
-<tr class="separator:a79f043911ca18b58f524cc8fea5f074d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1c86d4386dcdae3d781d13d048ef830"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ac1c86d4386dcdae3d781d13d048ef830">unregisterKeyDownCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a> key)</td></tr>
-<tr class="separator:ac1c86d4386dcdae3d781d13d048ef830"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47ec5269fac82b7cdc82d3938103095d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a47ec5269fac82b7cdc82d3938103095d"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a47ec5269fac82b7cdc82d3938103095d">registerKeyDownCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a> key)</td></tr>
-<tr class="separator:a47ec5269fac82b7cdc82d3938103095d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12aebd2cf01e8130e5f1b4bc446c1f40"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a12aebd2cf01e8130e5f1b4bc446c1f40"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a12aebd2cf01e8130e5f1b4bc446c1f40">unregisterKeyDownCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a> key)</td></tr>
-<tr class="separator:a12aebd2cf01e8130e5f1b4bc446c1f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc44e77174b97c03b81a024da6ab06bd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#adc44e77174b97c03b81a024da6ab06bd">registerKeyUpCallback</a> (std::function&lt; void(void)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a> key)</td></tr>
-<tr class="separator:adc44e77174b97c03b81a024da6ab06bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21f3c50305e8f2fc0135cd3c6c181f86"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a21f3c50305e8f2fc0135cd3c6c181f86">unregisterKeyUpCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a> key)</td></tr>
-<tr class="separator:a21f3c50305e8f2fc0135cd3c6c181f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fab21b41bbcefa1e8bc472407954357"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a8fab21b41bbcefa1e8bc472407954357"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a8fab21b41bbcefa1e8bc472407954357">registerKeyUpCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a> key)</td></tr>
-<tr class="separator:a8fab21b41bbcefa1e8bc472407954357"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51f1b3520c5b8e31389638c8148f2ad0"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a51f1b3520c5b8e31389638c8148f2ad0"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a51f1b3520c5b8e31389638c8148f2ad0">unregisterKeyUpCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a> key)</td></tr>
-<tr class="separator:a51f1b3520c5b8e31389638c8148f2ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21141cd0e703f49fd0514548d3502f13"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a21141cd0e703f49fd0514548d3502f13">registerMouseButtonDownCallback</a> (std::function&lt; void(void)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
-<tr class="separator:a21141cd0e703f49fd0514548d3502f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04878a3c1b47fde2c162ec9ac9a74e81"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a04878a3c1b47fde2c162ec9ac9a74e81">unregisterMouseButtonDownCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
-<tr class="separator:a04878a3c1b47fde2c162ec9ac9a74e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc6fb1de0c5c37e3786af9ca2a0b428c"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:adc6fb1de0c5c37e3786af9ca2a0b428c"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#adc6fb1de0c5c37e3786af9ca2a0b428c">registerMouseButtonDownCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
-<tr class="separator:adc6fb1de0c5c37e3786af9ca2a0b428c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29d2f3d82c652d733a1dbfb22fe04766"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a29d2f3d82c652d733a1dbfb22fe04766"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a29d2f3d82c652d733a1dbfb22fe04766">unregisterMouseButtonDownCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
-<tr class="separator:a29d2f3d82c652d733a1dbfb22fe04766"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6ee9259f37603aac431b3c09c316a9f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ac6ee9259f37603aac431b3c09c316a9f">registerMouseButtonUpCallback</a> (std::function&lt; void(void)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
-<tr class="separator:ac6ee9259f37603aac431b3c09c316a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0030717800b59858c88f3fb99670a7e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#aa0030717800b59858c88f3fb99670a7e">unregisterMouseButtonUpCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
-<tr class="separator:aa0030717800b59858c88f3fb99670a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45c23266206737dd399c854ee9d43cb7"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a45c23266206737dd399c854ee9d43cb7"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a45c23266206737dd399c854ee9d43cb7">registerMouseButtonUpCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
-<tr class="separator:a45c23266206737dd399c854ee9d43cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7284b8860efbddb252981e29ee6a967e"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a7284b8860efbddb252981e29ee6a967e"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a7284b8860efbddb252981e29ee6a967e">unregisterMouseButtonUpCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
-<tr class="separator:a7284b8860efbddb252981e29ee6a967e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1741b6359c8c9f50dcc9ddfb1025c996"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt; float &gt;::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a1741b6359c8c9f50dcc9ddfb1025c996">registerMouseAxisCallback</a> (std::function&lt; void(float)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#ad80efa2cc9794975a6e6e0151494ce26">cubos::core::io::MouseAxis</a> mouseAxis)</td></tr>
-<tr class="separator:a1741b6359c8c9f50dcc9ddfb1025c996"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad20472d162d2718083773e3f19cca89f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ad20472d162d2718083773e3f19cca89f">unregisterMouseAxisCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt; float &gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#ad80efa2cc9794975a6e6e0151494ce26">cubos::core::io::MouseAxis</a> mouseAxis)</td></tr>
-<tr class="separator:ad20472d162d2718083773e3f19cca89f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae65c8b88b91d1a1e47704d48dbd434a9"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:ae65c8b88b91d1a1e47704d48dbd434a9"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ae65c8b88b91d1a1e47704d48dbd434a9">registerMouseAxisCallback</a> (T *obj, void(T::*callback)(float), <a class="el" href="namespacecubos_1_1core_1_1io.html#ad80efa2cc9794975a6e6e0151494ce26">cubos::core::io::MouseAxis</a> mouseAxis)</td></tr>
-<tr class="separator:ae65c8b88b91d1a1e47704d48dbd434a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acad8a034ea29d487f32ab876a8d0b681"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:acad8a034ea29d487f32ab876a8d0b681"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#acad8a034ea29d487f32ab876a8d0b681">unregisterMouseAxisCallback</a> (T *obj, void(T::*callback)(float), <a class="el" href="namespacecubos_1_1core_1_1io.html#ad80efa2cc9794975a6e6e0151494ce26">cubos::core::io::MouseAxis</a> mouseAxis)</td></tr>
-<tr class="separator:acad8a034ea29d487f32ab876a8d0b681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a996f9daacc53571244aa4f959fd81c46"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a996f9daacc53571244aa4f959fd81c46">init</a> (<a class="el" href="classcubos_1_1core_1_1io_1_1Window.html">cubos::core::io::Window</a> *window)</td></tr>
+<tr class="separator:a996f9daacc53571244aa4f959fd81c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3660985fb73dcb2e67a0e89c65cfff3b"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a3660985fb73dcb2e67a0e89c65cfff3b">createAction</a> (std::string name)</td></tr>
+<tr class="separator:a3660985fb73dcb2e67a0e89c65cfff3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a077309aebef761217482e854df9a2180"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a077309aebef761217482e854df9a2180">getAction</a> (std::string name)</td></tr>
+<tr class="separator:a077309aebef761217482e854df9a2180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7883b2aa573b0a508a58b2a608d6d6e"><td class="memItemLeft" align="right" valign="top"><a id="ac7883b2aa573b0a508a58b2a608d6d6e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ac7883b2aa573b0a508a58b2a608d6d6e">processActions</a> ()</td></tr>
+<tr class="memdesc:ac7883b2aa573b0a508a58b2a608d6d6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the processSources method in all registered Actions. <br /></td></tr>
+<tr class="separator:ac7883b2aa573b0a508a58b2a608d6d6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1ccec65bb9a4de6702185f65c590916"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#aa1ccec65bb9a4de6702185f65c590916">registerKeyDownCallback</a> (std::function&lt; void(void)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a> key)</td></tr>
+<tr class="separator:aa1ccec65bb9a4de6702185f65c590916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b36318f00756a876db57ad47a550dc4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a2b36318f00756a876db57ad47a550dc4">unregisterKeyDownCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a> key)</td></tr>
+<tr class="separator:a2b36318f00756a876db57ad47a550dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c7fe64a7e59baee098e475b2fb2355d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a5c7fe64a7e59baee098e475b2fb2355d"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a5c7fe64a7e59baee098e475b2fb2355d">registerKeyDownCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a> key)</td></tr>
+<tr class="separator:a5c7fe64a7e59baee098e475b2fb2355d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69042de4ab9b904a7b5e966ef0a3a417"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a69042de4ab9b904a7b5e966ef0a3a417"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a69042de4ab9b904a7b5e966ef0a3a417">unregisterKeyDownCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a> key)</td></tr>
+<tr class="separator:a69042de4ab9b904a7b5e966ef0a3a417"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a233c4fd062c18bb6b839a1da82863edf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a233c4fd062c18bb6b839a1da82863edf">registerKeyUpCallback</a> (std::function&lt; void(void)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a> key)</td></tr>
+<tr class="separator:a233c4fd062c18bb6b839a1da82863edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24461b91f5def4ee4a67e06c36589bc1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a24461b91f5def4ee4a67e06c36589bc1">unregisterKeyUpCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a> key)</td></tr>
+<tr class="separator:a24461b91f5def4ee4a67e06c36589bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a67066e3dfd6c7bc9aea8f3cde50f9a"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a5a67066e3dfd6c7bc9aea8f3cde50f9a"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a5a67066e3dfd6c7bc9aea8f3cde50f9a">registerKeyUpCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a> key)</td></tr>
+<tr class="separator:a5a67066e3dfd6c7bc9aea8f3cde50f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f438f6f99d5ef901110f92dd83d0fc8"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a7f438f6f99d5ef901110f92dd83d0fc8"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a7f438f6f99d5ef901110f92dd83d0fc8">unregisterKeyUpCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a> key)</td></tr>
+<tr class="separator:a7f438f6f99d5ef901110f92dd83d0fc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0b142b1d99a67e5508c6bfcdbb84988"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ae0b142b1d99a67e5508c6bfcdbb84988">registerMouseButtonDownCallback</a> (std::function&lt; void(void)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
+<tr class="separator:ae0b142b1d99a67e5508c6bfcdbb84988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9b88a837ac3a33b53056d289f5631d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a9c9b88a837ac3a33b53056d289f5631d">unregisterMouseButtonDownCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
+<tr class="separator:a9c9b88a837ac3a33b53056d289f5631d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae561b06d32e55e0ee504514ddedbc4cd"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ae561b06d32e55e0ee504514ddedbc4cd"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ae561b06d32e55e0ee504514ddedbc4cd">registerMouseButtonDownCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
+<tr class="separator:ae561b06d32e55e0ee504514ddedbc4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34fdce67c36ad2f89d988ea4d60e1639"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a34fdce67c36ad2f89d988ea4d60e1639"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a34fdce67c36ad2f89d988ea4d60e1639">unregisterMouseButtonDownCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
+<tr class="separator:a34fdce67c36ad2f89d988ea4d60e1639"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10e321954e996d6b774652b8d87cc7d5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a10e321954e996d6b774652b8d87cc7d5">registerMouseButtonUpCallback</a> (std::function&lt; void(void)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
+<tr class="separator:a10e321954e996d6b774652b8d87cc7d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab318d8808c00704b462f7da5d885b581"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ab318d8808c00704b462f7da5d885b581">unregisterMouseButtonUpCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
+<tr class="separator:ab318d8808c00704b462f7da5d885b581"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74492bd111f88216e110cb72ad8b8e64"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a74492bd111f88216e110cb72ad8b8e64"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a74492bd111f88216e110cb72ad8b8e64">registerMouseButtonUpCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
+<tr class="separator:a74492bd111f88216e110cb72ad8b8e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5a9e4b0a71f3732d4d7c0476a7370ba"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:af5a9e4b0a71f3732d4d7c0476a7370ba"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#af5a9e4b0a71f3732d4d7c0476a7370ba">unregisterMouseButtonUpCallback</a> (T *obj, void(T::*callback)(), <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a> mouseButton)</td></tr>
+<tr class="separator:af5a9e4b0a71f3732d4d7c0476a7370ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58f81126e84684773acb7b6bd93f458b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt; float &gt;::ID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a58f81126e84684773acb7b6bd93f458b">registerMouseAxisCallback</a> (std::function&lt; void(float)&gt; callback, <a class="el" href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a> mouseAxis)</td></tr>
+<tr class="separator:a58f81126e84684773acb7b6bd93f458b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e80d19f597ef029b74a0fa2f70c1b1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a72e80d19f597ef029b74a0fa2f70c1b1">unregisterMouseAxisCallback</a> (<a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt; float &gt;::ID callbackID, <a class="el" href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a> mouseAxis)</td></tr>
+<tr class="separator:a72e80d19f597ef029b74a0fa2f70c1b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4db7ba2f5c3493219f2823973cd892d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ae4db7ba2f5c3493219f2823973cd892d"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ae4db7ba2f5c3493219f2823973cd892d">registerMouseAxisCallback</a> (T *obj, void(T::*callback)(float), <a class="el" href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a> mouseAxis)</td></tr>
+<tr class="separator:ae4db7ba2f5c3493219f2823973cd892d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0daaa16985fda6e9a5bd33bc4dcc8565"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a0daaa16985fda6e9a5bd33bc4dcc8565"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a0daaa16985fda6e9a5bd33bc4dcc8565">unregisterMouseAxisCallback</a> (T *obj, void(T::*callback)(float), <a class="el" href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a> mouseAxis)</td></tr>
+<tr class="separator:a0daaa16985fda6e9a5bd33bc4dcc8565"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a7837cce9b28f914ba4e7c51afffc365f"><td class="memItemLeft" align="right" valign="top"><a id="a7837cce9b28f914ba4e7c51afffc365f"></a>
-static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a7837cce9b28f914ba4e7c51afffc365f">keyDownCallbacks</a></td></tr>
-<tr class="memdesc:a7837cce9b28f914ba4e7c51afffc365f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all key down Callbacks. <br /></td></tr>
-<tr class="separator:a7837cce9b28f914ba4e7c51afffc365f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bbd2f431af13a214de0c11280f632dd"><td class="memItemLeft" align="right" valign="top"><a id="a7bbd2f431af13a214de0c11280f632dd"></a>
-static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a7bbd2f431af13a214de0c11280f632dd">keyUpCallbacks</a></td></tr>
-<tr class="memdesc:a7bbd2f431af13a214de0c11280f632dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all key up Callbacks. <br /></td></tr>
-<tr class="separator:a7bbd2f431af13a214de0c11280f632dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7373d490b8847de04c8cecd7c048bbe5"><td class="memItemLeft" align="right" valign="top"><a id="a7373d490b8847de04c8cecd7c048bbe5"></a>
-static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a7373d490b8847de04c8cecd7c048bbe5">mouseButtonDownCallbacks</a></td></tr>
-<tr class="memdesc:a7373d490b8847de04c8cecd7c048bbe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all button down Callbacks. <br /></td></tr>
-<tr class="separator:a7373d490b8847de04c8cecd7c048bbe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fbb3f69575a7e98c101622a41653a06"><td class="memItemLeft" align="right" valign="top"><a id="a5fbb3f69575a7e98c101622a41653a06"></a>
-static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a5fbb3f69575a7e98c101622a41653a06">mouseButtonUpCallbacks</a></td></tr>
-<tr class="memdesc:a5fbb3f69575a7e98c101622a41653a06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all button up Callbacks. <br /></td></tr>
-<tr class="separator:a5fbb3f69575a7e98c101622a41653a06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac43abe71965278eaea4a98411c7d4424"><td class="memItemLeft" align="right" valign="top"><a id="ac43abe71965278eaea4a98411c7d4424"></a>
-static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#ad80efa2cc9794975a6e6e0151494ce26">cubos::core::io::MouseAxis</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt; float &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ac43abe71965278eaea4a98411c7d4424">mouseAxisCallbacks</a></td></tr>
-<tr class="memdesc:ac43abe71965278eaea4a98411c7d4424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all mouse axis Callbacks. <br /></td></tr>
-<tr class="separator:ac43abe71965278eaea4a98411c7d4424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41c059bb55cd17583e51ec80867be82c"><td class="memItemLeft" align="right" valign="top"><a id="a41c059bb55cd17583e51ec80867be82c"></a>
+static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a41c059bb55cd17583e51ec80867be82c">keyDownCallbacks</a></td></tr>
+<tr class="memdesc:a41c059bb55cd17583e51ec80867be82c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all key down Callbacks. <br /></td></tr>
+<tr class="separator:a41c059bb55cd17583e51ec80867be82c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c462905bda50c192cde9cd36e799c15"><td class="memItemLeft" align="right" valign="top"><a id="a4c462905bda50c192cde9cd36e799c15"></a>
+static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a4c462905bda50c192cde9cd36e799c15">keyUpCallbacks</a></td></tr>
+<tr class="memdesc:a4c462905bda50c192cde9cd36e799c15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all key up Callbacks. <br /></td></tr>
+<tr class="separator:a4c462905bda50c192cde9cd36e799c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a236e4f6d93f9fd3b7442482a64df34a6"><td class="memItemLeft" align="right" valign="top"><a id="a236e4f6d93f9fd3b7442482a64df34a6"></a>
+static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a236e4f6d93f9fd3b7442482a64df34a6">mouseButtonDownCallbacks</a></td></tr>
+<tr class="memdesc:a236e4f6d93f9fd3b7442482a64df34a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all button down Callbacks. <br /></td></tr>
+<tr class="separator:a236e4f6d93f9fd3b7442482a64df34a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac387a8017beb1a0f3e7c468684b31486"><td class="memItemLeft" align="right" valign="top"><a id="ac387a8017beb1a0f3e7c468684b31486"></a>
+static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#ac387a8017beb1a0f3e7c468684b31486">mouseButtonUpCallbacks</a></td></tr>
+<tr class="memdesc:ac387a8017beb1a0f3e7c468684b31486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all button up Callbacks. <br /></td></tr>
+<tr class="separator:ac387a8017beb1a0f3e7c468684b31486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d6c812f101e836936ee90af357e9f82"><td class="memItemLeft" align="right" valign="top"><a id="a8d6c812f101e836936ee90af357e9f82"></a>
+static std::map&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a>, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt; float &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html#a8d6c812f101e836936ee90af357e9f82">mouseAxisCallbacks</a></td></tr>
+<tr class="memdesc:a8d6c812f101e836936ee90af357e9f82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping of all mouse axis Callbacks. <br /></td></tr>
+<tr class="separator:a8d6c812f101e836936ee90af357e9f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classcubos_1_1core_1_1io_1_1InputManager.html">InputManager</a> is used to control the flow between Sources and the gameplay logic. Handles actions managment and callbacks. </p><dl class="section see"><dt>See also</dt><dd>Actions </dd>
 <dd>
 Sources </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8aa55c2f1b516000858a66164a2f8d22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8aa55c2f1b516000858a66164a2f8d22">&#9670;&nbsp;</a></span>createAction()</h2>
+<a id="a3660985fb73dcb2e67a0e89c65cfff3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3660985fb73dcb2e67a0e89c65cfff3b">&#9670;&nbsp;</a></span>createAction()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -198,7 +198,7 @@ Sources </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static std::shared_ptr&lt;<a class="el" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a>&gt; cubos::core::io::InputManager::createAction </td>
+          <td class="memname">static std::shared_ptr&lt;<a class="el" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a>&gt; createAction </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -221,8 +221,8 @@ Sources </dd></dl>
 
 </div>
 </div>
-<a id="ab2a30ea7712ef48eb56eb10f44553c79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2a30ea7712ef48eb56eb10f44553c79">&#9670;&nbsp;</a></span>getAction()</h2>
+<a id="a077309aebef761217482e854df9a2180"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a077309aebef761217482e854df9a2180">&#9670;&nbsp;</a></span>getAction()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -231,7 +231,7 @@ Sources </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static std::shared_ptr&lt;<a class="el" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a>&gt; cubos::core::io::InputManager::getAction </td>
+          <td class="memname">static std::shared_ptr&lt;<a class="el" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a>&gt; getAction </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -254,8 +254,8 @@ Sources </dd></dl>
 
 </div>
 </div>
-<a id="a28fda0ec7caef0d566e43071e4e1d4dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28fda0ec7caef0d566e43071e4e1d4dc">&#9670;&nbsp;</a></span>init()</h2>
+<a id="a996f9daacc53571244aa4f959fd81c46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a996f9daacc53571244aa4f959fd81c46">&#9670;&nbsp;</a></span>init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,7 +264,7 @@ Sources </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void cubos::core::io::InputManager::init </td>
+          <td class="memname">static void init </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html">cubos::core::io::Window</a> *&#160;</td>
           <td class="paramname"><em>window</em></td><td>)</td>
@@ -286,8 +286,8 @@ Sources </dd></dl>
 
 </div>
 </div>
-<a id="a79f043911ca18b58f524cc8fea5f074d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79f043911ca18b58f524cc8fea5f074d">&#9670;&nbsp;</a></span>registerKeyDownCallback() <span class="overload">[1/2]</span></h2>
+<a id="aa1ccec65bb9a4de6702185f65c590916"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1ccec65bb9a4de6702185f65c590916">&#9670;&nbsp;</a></span>registerKeyDownCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,7 +296,7 @@ Sources </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID cubos::core::io::InputManager::registerKeyDownCallback </td>
+          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID registerKeyDownCallback </td>
           <td>(</td>
           <td class="paramtype">std::function&lt; void(void)&gt;&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
@@ -304,7 +304,7 @@ Sources </dd></dl>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>&#160;</td>
           <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
@@ -330,19 +330,17 @@ Sources </dd></dl>
 
 </div>
 </div>
-<a id="a47ec5269fac82b7cdc82d3938103095d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47ec5269fac82b7cdc82d3938103095d">&#9670;&nbsp;</a></span>registerKeyDownCallback() <span class="overload">[2/2]</span></h2>
+<a id="a5c7fe64a7e59baee098e475b2fb2355d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c7fe64a7e59baee098e475b2fb2355d">&#9670;&nbsp;</a></span>registerKeyDownCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::registerKeyDownCallback </td>
+          <td class="memname">void registerKeyDownCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -356,7 +354,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>&#160;</td>
           <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
@@ -382,8 +380,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="adc44e77174b97c03b81a024da6ab06bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc44e77174b97c03b81a024da6ab06bd">&#9670;&nbsp;</a></span>registerKeyUpCallback() <span class="overload">[1/2]</span></h2>
+<a id="a233c4fd062c18bb6b839a1da82863edf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a233c4fd062c18bb6b839a1da82863edf">&#9670;&nbsp;</a></span>registerKeyUpCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -392,7 +390,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID cubos::core::io::InputManager::registerKeyUpCallback </td>
+          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID registerKeyUpCallback </td>
           <td>(</td>
           <td class="paramtype">std::function&lt; void(void)&gt;&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
@@ -400,7 +398,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>&#160;</td>
           <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
@@ -426,19 +424,17 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a8fab21b41bbcefa1e8bc472407954357"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8fab21b41bbcefa1e8bc472407954357">&#9670;&nbsp;</a></span>registerKeyUpCallback() <span class="overload">[2/2]</span></h2>
+<a id="a5a67066e3dfd6c7bc9aea8f3cde50f9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a67066e3dfd6c7bc9aea8f3cde50f9a">&#9670;&nbsp;</a></span>registerKeyUpCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::registerKeyUpCallback </td>
+          <td class="memname">void registerKeyUpCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -452,7 +448,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>&#160;</td>
           <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
@@ -478,8 +474,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a1741b6359c8c9f50dcc9ddfb1025c996"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1741b6359c8c9f50dcc9ddfb1025c996">&#9670;&nbsp;</a></span>registerMouseAxisCallback() <span class="overload">[1/2]</span></h2>
+<a id="a58f81126e84684773acb7b6bd93f458b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58f81126e84684773acb7b6bd93f458b">&#9670;&nbsp;</a></span>registerMouseAxisCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -488,7 +484,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;float&gt;::ID cubos::core::io::InputManager::registerMouseAxisCallback </td>
+          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;float&gt;::ID registerMouseAxisCallback </td>
           <td>(</td>
           <td class="paramtype">std::function&lt; void(float)&gt;&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
@@ -496,7 +492,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ad80efa2cc9794975a6e6e0151494ce26">cubos::core::io::MouseAxis</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a>&#160;</td>
           <td class="paramname"><em>mouseAxis</em>&#160;</td>
         </tr>
         <tr>
@@ -522,19 +518,17 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="ae65c8b88b91d1a1e47704d48dbd434a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae65c8b88b91d1a1e47704d48dbd434a9">&#9670;&nbsp;</a></span>registerMouseAxisCallback() <span class="overload">[2/2]</span></h2>
+<a id="ae4db7ba2f5c3493219f2823973cd892d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4db7ba2f5c3493219f2823973cd892d">&#9670;&nbsp;</a></span>registerMouseAxisCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::registerMouseAxisCallback </td>
+          <td class="memname">void registerMouseAxisCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -548,7 +542,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ad80efa2cc9794975a6e6e0151494ce26">cubos::core::io::MouseAxis</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a>&#160;</td>
           <td class="paramname"><em>mouseAxis</em>&#160;</td>
         </tr>
         <tr>
@@ -574,8 +568,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a21141cd0e703f49fd0514548d3502f13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21141cd0e703f49fd0514548d3502f13">&#9670;&nbsp;</a></span>registerMouseButtonDownCallback() <span class="overload">[1/2]</span></h2>
+<a id="ae0b142b1d99a67e5508c6bfcdbb84988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0b142b1d99a67e5508c6bfcdbb84988">&#9670;&nbsp;</a></span>registerMouseButtonDownCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -584,7 +578,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID cubos::core::io::InputManager::registerMouseButtonDownCallback </td>
+          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID registerMouseButtonDownCallback </td>
           <td>(</td>
           <td class="paramtype">std::function&lt; void(void)&gt;&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
@@ -592,7 +586,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>&#160;</td>
           <td class="paramname"><em>mouseButton</em>&#160;</td>
         </tr>
         <tr>
@@ -618,19 +612,17 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="adc6fb1de0c5c37e3786af9ca2a0b428c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc6fb1de0c5c37e3786af9ca2a0b428c">&#9670;&nbsp;</a></span>registerMouseButtonDownCallback() <span class="overload">[2/2]</span></h2>
+<a id="ae561b06d32e55e0ee504514ddedbc4cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae561b06d32e55e0ee504514ddedbc4cd">&#9670;&nbsp;</a></span>registerMouseButtonDownCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::registerMouseButtonDownCallback </td>
+          <td class="memname">void registerMouseButtonDownCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -644,7 +636,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>&#160;</td>
           <td class="paramname"><em>mouseButton</em>&#160;</td>
         </tr>
         <tr>
@@ -670,8 +662,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="ac6ee9259f37603aac431b3c09c316a9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6ee9259f37603aac431b3c09c316a9f">&#9670;&nbsp;</a></span>registerMouseButtonUpCallback() <span class="overload">[1/2]</span></h2>
+<a id="a10e321954e996d6b774652b8d87cc7d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10e321954e996d6b774652b8d87cc7d5">&#9670;&nbsp;</a></span>registerMouseButtonUpCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -680,7 +672,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID cubos::core::io::InputManager::registerMouseButtonUpCallback </td>
+          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a> ::ID registerMouseButtonUpCallback </td>
           <td>(</td>
           <td class="paramtype">std::function&lt; void(void)&gt;&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
@@ -688,7 +680,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>&#160;</td>
           <td class="paramname"><em>mouseButton</em>&#160;</td>
         </tr>
         <tr>
@@ -714,19 +706,17 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a45c23266206737dd399c854ee9d43cb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45c23266206737dd399c854ee9d43cb7">&#9670;&nbsp;</a></span>registerMouseButtonUpCallback() <span class="overload">[2/2]</span></h2>
+<a id="a74492bd111f88216e110cb72ad8b8e64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74492bd111f88216e110cb72ad8b8e64">&#9670;&nbsp;</a></span>registerMouseButtonUpCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::registerMouseButtonUpCallback </td>
+          <td class="memname">void registerMouseButtonUpCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -740,7 +730,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>&#160;</td>
           <td class="paramname"><em>mouseButton</em>&#160;</td>
         </tr>
         <tr>
@@ -766,8 +756,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="ac1c86d4386dcdae3d781d13d048ef830"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1c86d4386dcdae3d781d13d048ef830">&#9670;&nbsp;</a></span>unregisterKeyDownCallback() <span class="overload">[1/2]</span></h2>
+<a id="a2b36318f00756a876db57ad47a550dc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b36318f00756a876db57ad47a550dc4">&#9670;&nbsp;</a></span>unregisterKeyDownCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -776,7 +766,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void cubos::core::io::InputManager::unregisterKeyDownCallback </td>
+          <td class="memname">static void unregisterKeyDownCallback </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID&#160;</td>
           <td class="paramname"><em>callbackID</em>, </td>
@@ -784,7 +774,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>&#160;</td>
           <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
@@ -809,19 +799,17 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a12aebd2cf01e8130e5f1b4bc446c1f40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12aebd2cf01e8130e5f1b4bc446c1f40">&#9670;&nbsp;</a></span>unregisterKeyDownCallback() <span class="overload">[2/2]</span></h2>
+<a id="a69042de4ab9b904a7b5e966ef0a3a417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69042de4ab9b904a7b5e966ef0a3a417">&#9670;&nbsp;</a></span>unregisterKeyDownCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::unregisterKeyDownCallback </td>
+          <td class="memname">void unregisterKeyDownCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -835,7 +823,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>&#160;</td>
           <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
@@ -861,8 +849,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a21f3c50305e8f2fc0135cd3c6c181f86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21f3c50305e8f2fc0135cd3c6c181f86">&#9670;&nbsp;</a></span>unregisterKeyUpCallback() <span class="overload">[1/2]</span></h2>
+<a id="a24461b91f5def4ee4a67e06c36589bc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24461b91f5def4ee4a67e06c36589bc1">&#9670;&nbsp;</a></span>unregisterKeyUpCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -871,7 +859,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void cubos::core::io::InputManager::unregisterKeyUpCallback </td>
+          <td class="memname">static void unregisterKeyUpCallback </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID&#160;</td>
           <td class="paramname"><em>callbackID</em>, </td>
@@ -879,7 +867,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>&#160;</td>
           <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
@@ -904,19 +892,17 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a51f1b3520c5b8e31389638c8148f2ad0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51f1b3520c5b8e31389638c8148f2ad0">&#9670;&nbsp;</a></span>unregisterKeyUpCallback() <span class="overload">[2/2]</span></h2>
+<a id="a7f438f6f99d5ef901110f92dd83d0fc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f438f6f99d5ef901110f92dd83d0fc8">&#9670;&nbsp;</a></span>unregisterKeyUpCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::unregisterKeyUpCallback </td>
+          <td class="memname">void unregisterKeyUpCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -930,7 +916,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341">cubos::core::io::Key</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a>&#160;</td>
           <td class="paramname"><em>key</em>&#160;</td>
         </tr>
         <tr>
@@ -956,8 +942,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="ad20472d162d2718083773e3f19cca89f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad20472d162d2718083773e3f19cca89f">&#9670;&nbsp;</a></span>unregisterMouseAxisCallback() <span class="overload">[1/2]</span></h2>
+<a id="a72e80d19f597ef029b74a0fa2f70c1b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72e80d19f597ef029b74a0fa2f70c1b1">&#9670;&nbsp;</a></span>unregisterMouseAxisCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -966,7 +952,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void cubos::core::io::InputManager::unregisterMouseAxisCallback </td>
+          <td class="memname">static void unregisterMouseAxisCallback </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt; float &gt;::ID&#160;</td>
           <td class="paramname"><em>callbackID</em>, </td>
@@ -974,7 +960,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ad80efa2cc9794975a6e6e0151494ce26">cubos::core::io::MouseAxis</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a>&#160;</td>
           <td class="paramname"><em>mouseAxis</em>&#160;</td>
         </tr>
         <tr>
@@ -999,19 +985,17 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="acad8a034ea29d487f32ab876a8d0b681"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acad8a034ea29d487f32ab876a8d0b681">&#9670;&nbsp;</a></span>unregisterMouseAxisCallback() <span class="overload">[2/2]</span></h2>
+<a id="a0daaa16985fda6e9a5bd33bc4dcc8565"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0daaa16985fda6e9a5bd33bc4dcc8565">&#9670;&nbsp;</a></span>unregisterMouseAxisCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::unregisterMouseAxisCallback </td>
+          <td class="memname">void unregisterMouseAxisCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -1025,7 +1009,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ad80efa2cc9794975a6e6e0151494ce26">cubos::core::io::MouseAxis</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a>&#160;</td>
           <td class="paramname"><em>mouseAxis</em>&#160;</td>
         </tr>
         <tr>
@@ -1051,8 +1035,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a04878a3c1b47fde2c162ec9ac9a74e81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04878a3c1b47fde2c162ec9ac9a74e81">&#9670;&nbsp;</a></span>unregisterMouseButtonDownCallback() <span class="overload">[1/2]</span></h2>
+<a id="a9c9b88a837ac3a33b53056d289f5631d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c9b88a837ac3a33b53056d289f5631d">&#9670;&nbsp;</a></span>unregisterMouseButtonDownCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1061,7 +1045,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void cubos::core::io::InputManager::unregisterMouseButtonDownCallback </td>
+          <td class="memname">static void unregisterMouseButtonDownCallback </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID&#160;</td>
           <td class="paramname"><em>callbackID</em>, </td>
@@ -1069,7 +1053,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>&#160;</td>
           <td class="paramname"><em>mouseButton</em>&#160;</td>
         </tr>
         <tr>
@@ -1094,19 +1078,17 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a29d2f3d82c652d733a1dbfb22fe04766"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29d2f3d82c652d733a1dbfb22fe04766">&#9670;&nbsp;</a></span>unregisterMouseButtonDownCallback() <span class="overload">[2/2]</span></h2>
+<a id="a34fdce67c36ad2f89d988ea4d60e1639"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34fdce67c36ad2f89d988ea4d60e1639">&#9670;&nbsp;</a></span>unregisterMouseButtonDownCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::unregisterMouseButtonDownCallback </td>
+          <td class="memname">void unregisterMouseButtonDownCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -1120,7 +1102,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>&#160;</td>
           <td class="paramname"><em>mouseButton</em>&#160;</td>
         </tr>
         <tr>
@@ -1146,8 +1128,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="aa0030717800b59858c88f3fb99670a7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0030717800b59858c88f3fb99670a7e">&#9670;&nbsp;</a></span>unregisterMouseButtonUpCallback() <span class="overload">[1/2]</span></h2>
+<a id="ab318d8808c00704b462f7da5d885b581"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab318d8808c00704b462f7da5d885b581">&#9670;&nbsp;</a></span>unregisterMouseButtonUpCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1156,7 +1138,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void cubos::core::io::InputManager::unregisterMouseButtonUpCallback </td>
+          <td class="memname">static void unregisterMouseButtonUpCallback </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1Event.html">cubos::core::Event</a>&lt;&gt;::ID&#160;</td>
           <td class="paramname"><em>callbackID</em>, </td>
@@ -1164,7 +1146,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>&#160;</td>
           <td class="paramname"><em>mouseButton</em>&#160;</td>
         </tr>
         <tr>
@@ -1189,19 +1171,17 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a7284b8860efbddb252981e29ee6a967e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7284b8860efbddb252981e29ee6a967e">&#9670;&nbsp;</a></span>unregisterMouseButtonUpCallback() <span class="overload">[2/2]</span></h2>
+<a id="af5a9e4b0a71f3732d4d7c0476a7370ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5a9e4b0a71f3732d4d7c0476a7370ba">&#9670;&nbsp;</a></span>unregisterMouseButtonUpCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void cubos::core::io::InputManager::unregisterMouseButtonUpCallback </td>
+          <td class="memname">void unregisterMouseButtonUpCallback </td>
           <td>(</td>
           <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -1215,7 +1195,7 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a345e43df7245483a92ed345d78c340d5">cubos::core::io::MouseButton</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a>&#160;</td>
           <td class="paramname"><em>mouseButton</em>&#160;</td>
         </tr>
         <tr>

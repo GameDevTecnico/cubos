@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['memory_1346',['Memory',['../core-memory.html',1,'core']]]
+  ['hello_20world_1379',['Hello World',['../guide-hello-world.html',1,'guides']]]
 ];

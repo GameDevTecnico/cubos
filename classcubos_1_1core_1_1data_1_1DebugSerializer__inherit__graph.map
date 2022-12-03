@@ -1,4 +1,4 @@
-<map id="cubos::core::data::DebugSerializer" name="cubos::core::data::DebugSerializer">
-<area shape="rect" id="node1" title=" " alt="" coords="5,95,147,136"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1Serializer.html" title="Abstract class for serializing data." alt="" coords="5,5,147,47"/>
+<map id="DebugSerializer" name="DebugSerializer">
+<area shape="rect" id="node1" title=" " alt="" coords="5,80,131,107"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1Serializer.html" title="Abstract class for serializing data." alt="" coords="27,5,109,32"/>
 </map>

@@ -103,7 +103,7 @@ Streams</h1>
 <li><a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html">StdStream</a> - a stream which reads/writes data from/to a standard C stream (basically, a <code>FILE*</code> wrapper).</li>
 <li><a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html">FileStream</a> - a stream which reads/writes data from/to a virtual file.</li>
 </ul>
-<p>Sometimes its useful to have a <b>CUBOS.</b> stream connected to either <code>stdin</code>, <code>stdout</code> or <code>stderr</code>. For this reason, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</a> provides the static members <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a12aa8dff3c8fc123d8f5bccf63200843">Stream::stdIn</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa12e5ea3b14b35fbab982dc1275d54ea">Stream::stdOut</a> and <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ac9830c3566fba9eb086e7f386b3f0db4">Stream::stdErr</a>.</p>
+<p>Sometimes its useful to have a <b>CUBOS.</b> stream connected to either <code>stdin</code>, <code>stdout</code> or <code>stderr</code>. For this reason, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</a> provides the static members <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a3aa3dbec6fae127914becb6f66c309d4">Stream::stdIn</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa28b8b5cd53eed1267b62da87e053a76">Stream::stdOut</a> and <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a97c021d9768bdfb6530d0f4510d63ad1">Stream::stdErr</a>.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Using a stream</h2>
 <p>The following is an example use case of streams. Let's say we have a function <code>helloWorld</code> which takes a <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream&amp;</a> as an argument, and writes the string <code>"Hello, world!"</code> to the stream.</p>
@@ -113,7 +113,7 @@ Using a stream</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> helloWorld(<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a>&amp; stream)</div>
 <div class="line">{</div>
-<div class="line">    stream.<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html#a83b18f75b293a036e1bb5d9a370ac250">print</a>(<span class="stringliteral">&quot;Hello, world!&quot;</span>);</div>
+<div class="line">    stream.<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html#ac9dc6de3b4db890ffbabd12e287a3b75">print</a>(<span class="stringliteral">&quot;Hello, world!&quot;</span>);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>If we now wanted to write the string to the standard output, we could just call:</p>
 <div class="fragment"><div class="line">helloWorld(memory::Stream::stdOut);</div>
@@ -123,11 +123,11 @@ Using a stream</h2>
 <div class="line"><span class="keywordtype">char</span> buf[256];</div>
 <div class="line"><span class="keyword">auto</span> stream = <a class="code" href="classcubos_1_1core_1_1memory_1_1BufferStream.html">memory::BufferStream</a>(buf, <span class="keyword">sizeof</span>(buf));</div>
 <div class="line">helloWorld(stream);</div>
-<div class="line">stream.<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html#af1423e4600073d89d24422b17b463d1f">put</a>(<span class="charliteral">&#39;\0&#39;</span>); <span class="comment">// Add a null terminator.</span></div>
+<div class="line">stream.<a class="code" href="classcubos_1_1core_1_1memory_1_1Stream.html#a30ac9d6ab47903731da84bf97172b0d0">put</a>(<span class="charliteral">&#39;\0&#39;</span>); <span class="comment">// Add a null terminator.</span></div>
 <div class="line"><span class="comment">// Now we can use buf as a string.</span></div>
-</div><!-- fragment --><p>One of the common mistakes to be aware of is forgetting to handle different <a href="https://en.wikipedia.org/wiki/Endianness">endianness</a> when writing binary data (e.g.: using <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a56153c34cbc302b0cfcbf4ddd10ae9e7">Stream::write</a> directly). <b>CUBOS.</b> provides utility endianness functions in <code><a class="el" href="endianness_8hpp_source.html">cubos/core/memory/endianness.hpp</a></code>, such as:</p><ul>
-<li><a class="el" href="namespacecubos_1_1core_1_1memory.html#a542ca475a4392ceda925fab6d9200b26">toBigEndian</a> - converts a value from the host endianness to big endian.</li>
-<li><a class="el" href="namespacecubos_1_1core_1_1memory.html#a8d48939acb057aaed839810919294142">toLittleEndian</a> - converts a value from the host endianness to little endian.</li>
+</div><!-- fragment --><p>One of the common mistakes to be aware of is forgetting to handle different <a href="https://en.wikipedia.org/wiki/Endianness">endianness</a> when writing binary data (e.g.: using <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa8d1e62670e063f3506baea1434dd533">Stream::write</a> directly). <b>CUBOS.</b> provides utility endianness functions in <code><a class="el" href="endianness_8hpp_source.html">cubos/core/memory/endianness.hpp</a></code>, such as:</p><ul>
+<li><a class="el" href="namespacecubos_1_1core_1_1memory.html#a2033ec239d66ac5dfa4ee8f84d67934d">toBigEndian</a> - converts a value from the host endianness to big endian.</li>
+<li><a class="el" href="namespacecubos_1_1core_1_1memory.html#a411a446a87f0d75b75624a27ea736ea1">toLittleEndian</a> - converts a value from the host endianness to little endian.</li>
 <li>and so on.</li>
 </ul>
 <p>For further details, see the methods of <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</a>. </p>
@@ -136,15 +136,15 @@ Using a stream</h2>
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1BufferStream_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1BufferStream.html">cubos::core::memory::BufferStream</a></div><div class="ttdoc">Implements a stream that writes to/reads from a buffer.</div><div class="ttdef"><b>Definition:</b> buffer_stream.hpp:9</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html">cubos::core::memory::Stream</a></div><div class="ttdoc">Abstract class for memory streams.</div><div class="ttdef"><b>Definition:</b> stream.hpp:19</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html_a83b18f75b293a036e1bb5d9a370ac250"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html#a83b18f75b293a036e1bb5d9a370ac250">cubos::core::memory::Stream::print</a></div><div class="ttdeci">void print(int64_t value, size_t base=10)</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html_af1423e4600073d89d24422b17b463d1f"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html#af1423e4600073d89d24422b17b463d1f">cubos::core::memory::Stream::put</a></div><div class="ttdeci">void put(char c)</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_html"><div class="ttname"><a href="namespacecubos_1_1core.html">cubos::core</a></div><div class="ttdoc">Namespace of the CUBOS. core library.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html_ac9dc6de3b4db890ffbabd12e287a3b75"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html#ac9dc6de3b4db890ffbabd12e287a3b75">cubos::core::memory::Stream::print</a></div><div class="ttdeci">void print(int64_t value, size_t base=10)</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html_a30ac9d6ab47903731da84bf97172b0d0"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html#a30ac9d6ab47903731da84bf97172b0d0">cubos::core::memory::Stream::put</a></div><div class="ttdeci">void put(char c)</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="core.html">Core</a></li>
+    <li class="navelem"><a class="el" href="structure.html">Structure</a></li><li class="navelem"><a class="el" href="core.html">Core</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.8.17 </li>
   </ul>

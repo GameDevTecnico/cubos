@@ -1,7 +1,7 @@
 var classcubos_1_1core_1_1ecs_1_1MapStorage =
 [
-    [ "erase", "classcubos_1_1core_1_1ecs_1_1MapStorage.html#a6da434ab8ca35329cfeb6ff4903b2d73", null ],
-    [ "get", "classcubos_1_1core_1_1ecs_1_1MapStorage.html#a9283ca197f4da27b34101cc17e0874d5", null ],
-    [ "get", "classcubos_1_1core_1_1ecs_1_1MapStorage.html#a78d6f174126a2f0a2218d66e0cf08e39", null ],
-    [ "insert", "classcubos_1_1core_1_1ecs_1_1MapStorage.html#a514649406572f8220972c2d1d56ee2e2", null ]
+    [ "erase", "classcubos_1_1core_1_1ecs_1_1MapStorage.html#a764df9d21523541086f0b45aed83068a", null ],
+    [ "get", "classcubos_1_1core_1_1ecs_1_1MapStorage.html#aa107a99750a791fbe7ea47b0e7aa21f4", null ],
+    [ "get", "classcubos_1_1core_1_1ecs_1_1MapStorage.html#a00f2f0c8f38e90a91fb4157c44872ecc", null ],
+    [ "insert", "classcubos_1_1core_1_1ecs_1_1MapStorage.html#a60a1d0177fd324dfcbc392130532fc75", null ]
 ];

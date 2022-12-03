@@ -1,9 +1,9 @@
 var classcubos_1_1core_1_1io_1_1ButtonPress =
 [
-    [ "ButtonPress", "classcubos_1_1core_1_1io_1_1ButtonPress.html#ac48451e10020c3c849469e561dc24105", null ],
-    [ "ButtonPress", "classcubos_1_1core_1_1io_1_1ButtonPress.html#ac43e83eb18fe6447dc820f8f18829bfd", null ],
-    [ "createContext", "classcubos_1_1core_1_1io_1_1ButtonPress.html#a87d4e20f0e0f23d78c2c98488e7b34d0", null ],
-    [ "isTriggered", "classcubos_1_1core_1_1io_1_1ButtonPress.html#ad6a6ebab699fcd902db704e3d5e71c41", null ],
-    [ "subscribeEvents", "classcubos_1_1core_1_1io_1_1ButtonPress.html#a64517e79582d46eaa99009fdf71cec66", null ],
-    [ "unsubscribeEvents", "classcubos_1_1core_1_1io_1_1ButtonPress.html#ab7a8d2d9fed63f26047c2d0a92ba4dae", null ]
+    [ "ButtonPress", "classcubos_1_1core_1_1io_1_1ButtonPress.html#a263b0e241578334737ad0c1e8eb2820e", null ],
+    [ "ButtonPress", "classcubos_1_1core_1_1io_1_1ButtonPress.html#a338957492892016f182f664226326186", null ],
+    [ "createContext", "classcubos_1_1core_1_1io_1_1ButtonPress.html#ad544c77ef234e9c6d5e0982de065b668", null ],
+    [ "isTriggered", "classcubos_1_1core_1_1io_1_1ButtonPress.html#a33b78031fa9652b31d6fbd0f2a124735", null ],
+    [ "subscribeEvents", "classcubos_1_1core_1_1io_1_1ButtonPress.html#aae87450ddb504d187d7f686671296b98", null ],
+    [ "unsubscribeEvents", "classcubos_1_1core_1_1io_1_1ButtonPress.html#a13064fc65c4c3537b86e189f14c04565", null ]
 ];
