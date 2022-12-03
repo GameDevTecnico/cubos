@@ -26,6 +26,7 @@ namespace cubos::engine::data
         class SceneLoader : public Loader
         {
         public:
+            /// @param manager The asset manager that owns this loader.
             SceneLoader(AssetManager* manager);
             virtual ~SceneLoader() override = default;
 

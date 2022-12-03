@@ -116,6 +116,7 @@ namespace cubos::core
 
 // Implement custom formatting for all trivially serializable types.
 
+/// @cond
 template <typename T>
 requires(cubos::core::data::TriviallySerializable<T> && !std::is_pointer_v<T> && !std::is_array_v<T> &&
          !std::integral<T> && !std::floating_point<T> && !std::is_same_v<T, std::string>) struct fmt::formatter<T>
@@ -153,5 +154,6 @@ requires(cubos::core::data::TriviallySerializable<T> && !std::is_pointer_v<T> &&
         return formatter<string_view>::format(string_view(result), ctx);
     }
 };
+/// @endcond
 
 #endif // CUBOS_CORE_LOG_HPP
