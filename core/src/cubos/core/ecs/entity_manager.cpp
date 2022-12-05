@@ -3,7 +3,7 @@
 using namespace cubos::core::ecs;
 
 void cubos::core::data::serialize(Serializer& serializer, const ecs::Entity& entity,
-                                  const SerializationMap<ecs::Entity, std::string>* map, const char* name)
+                                  const SerializationMap<ecs::Entity, std::string>& map, const char* name)
 {
     if (entity.isNull())
     {
@@ -11,12 +11,12 @@ void cubos::core::data::serialize(Serializer& serializer, const ecs::Entity& ent
     }
     else
     {
-        serializer.write(map->getId(entity), name);
+        serializer.write(map.getId(entity), name);
     }
 }
 
 void cubos::core::data::deserialize(Deserializer& deserializer, ecs::Entity& entity,
-                                    const SerializationMap<ecs::Entity, std::string>* map)
+                                    const SerializationMap<ecs::Entity, std::string>& map)
 {
     std::string name;
     deserializer.read(name);
@@ -26,7 +26,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, ecs::Entity& ent
     }
     else
     {
-        entity = map->getRef(name);
+        entity = map.getRef(name);
     }
 }
 
@@ -193,6 +193,11 @@ const Entity::Mask& EntityManager::getMask(Entity entity) const
 bool EntityManager::isValid(Entity entity) const
 {
     return entity.index < this->entities.size() && this->entities[entity.index].generation == entity.generation;
+}
+
+EntityManager::Iterator EntityManager::begin() const
+{
+    return Iterator(*this, Entity::Mask(1));
 }
 
 EntityManager::Iterator EntityManager::withMask(Entity::Mask mask) const

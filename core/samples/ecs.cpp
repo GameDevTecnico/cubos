@@ -83,13 +83,13 @@ namespace cubos::core::data
         des.endObject();
     }
 
-    void serialize(Serializer& ser, const Parent& parent, const SerializationMap<ecs::Entity, std::string>* map,
+    void serialize(Serializer& ser, const Parent& parent, const SerializationMap<ecs::Entity, std::string>& map,
                    const char* name)
     {
         ser.write(parent.entity, map, name);
     }
 
-    void deserialize(Deserializer& des, Parent& parent, const SerializationMap<ecs::Entity, std::string>* map)
+    void deserialize(Deserializer& des, Parent& parent, const SerializationMap<ecs::Entity, std::string>& map)
     {
         des.read(parent.entity, map);
     }

@@ -42,13 +42,13 @@ namespace cubos::core::data
         des.read(num.value);
     }
 
-    static void serialize(Serializer& ser, const Parent& parent, const SerializationMap<Entity, std::string>* map,
+    static void serialize(Serializer& ser, const Parent& parent, const SerializationMap<Entity, std::string>& map,
                           const char* name)
     {
         ser.write(parent.entity, map, name);
     }
 
-    static void deserialize(Deserializer& des, Parent& parent, const SerializationMap<Entity, std::string>* map)
+    static void deserialize(Deserializer& des, Parent& parent, const SerializationMap<Entity, std::string>& map)
     {
         des.read(parent.entity, map);
     }

@@ -4,6 +4,63 @@
 
 using namespace cubos::core::data;
 
+Package::Package(Type type)
+{
+    switch (type)
+    {
+    case Type::None:
+        this->data = std::monostate();
+        break;
+    case Type::I8:
+        this->data = static_cast<int8_t>(0);
+        break;
+    case Type::I16:
+        this->data = static_cast<int16_t>(0);
+        break;
+    case Type::I32:
+        this->data = static_cast<int32_t>(0);
+        break;
+    case Type::I64:
+        this->data = static_cast<int64_t>(0);
+        break;
+    case Type::U8:
+        this->data = static_cast<uint8_t>(0);
+        break;
+    case Type::U16:
+        this->data = static_cast<uint16_t>(0);
+        break;
+    case Type::U32:
+        this->data = static_cast<uint32_t>(0);
+        break;
+    case Type::U64:
+        this->data = static_cast<uint64_t>(0);
+        break;
+    case Type::F32:
+        this->data = static_cast<float>(0);
+        break;
+    case Type::F64:
+        this->data = static_cast<double>(0);
+        break;
+    case Type::Bool:
+        this->data = false;
+        break;
+    case Type::String:
+        this->data = std::string();
+        break;
+    case Type::Object:
+        this->data = Fields();
+        break;
+    case Type::Array:
+        this->data = Elements();
+        break;
+    case Type::Dictionary:
+        this->data = Dictionary();
+        break;
+    default:
+        abort();
+    }
+}
+
 bool Package::change(int64_t data)
 {
     switch (this->type())

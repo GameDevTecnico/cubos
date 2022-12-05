@@ -6,6 +6,7 @@ set(CUBINHOS_SOURCE
     "src/entry.cpp"
     "src/embed.cpp"
     "src/convert.cpp"
+    "src/generate.cpp"
 )
 
 add_executable(cubinhos ${CUBINHOS_SOURCE})

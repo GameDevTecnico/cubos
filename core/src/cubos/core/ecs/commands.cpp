@@ -67,9 +67,15 @@ BlueprintBuilder Commands::spawn(const Blueprint& blueprint)
         map.add(this->create().entity(), blueprint.map.getId(Entity(i, 0)));
     }
 
+    auto desHandleCtx = [&](data::Deserializer& des, data::Handle& handle) {
+        uint64_t id;
+        des.read(id);
+        handle = blueprint.handles.at(id);
+    };
+
     for (auto& buf : blueprint.buffers)
     {
-        buf.second->addAll(*this, map);
+        buf.second->addAll(*this, map, desHandleCtx);
     }
 
     return BlueprintBuilder(std::move(map), *this);

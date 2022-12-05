@@ -272,7 +272,7 @@ static bool pickScalar(data::Package& pkg, const std::string& name)
         char buf[1024];
         memset(buf, 0, sizeof(buf));
         strncpy(buf, pkg.get<std::string>().c_str(), sizeof(buf) - 1);
-        if (ImGui::InputText(name.c_str(), buf, sizeof(buf)))
+        if (ImGui::InputText(name.c_str(), buf, sizeof(buf), ImGuiInputTextFlags_EnterReturnsTrue))
         {
             pkg.set(std::string(buf));
             return true;

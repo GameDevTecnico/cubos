@@ -4,8 +4,9 @@
 #include <cubos/core/ecs/query.hpp>
 
 #include <cubos/engine/gl/frame.hpp>
-#include <cubos/engine/ecs/grid.hpp>
-#include <cubos/engine/ecs/local_to_world.hpp>
+
+#include <components/cubos/local_to_world.hpp>
+#include <components/cubos/grid.hpp>
 
 namespace cubos::engine::ecs
 {

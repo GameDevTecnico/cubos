@@ -70,6 +70,16 @@ namespace cubos::core::ecs
 
         // Wrap the system and put it in its stage.
         auto systemWrapper = std::make_unique<SystemWrapper<F>>(system);
+        for (auto& system : this->stagesByName[stage])
+        {
+            if (system->info().compatible(systemWrapper->info()))
+            {
+                logCritical("Dispatcher::addSystem(): couldn't add system to stage '{}' because it is incompatible "
+                            "with another system in the same stage.",
+                            stage);
+                return;
+            }
+        }
         this->stagesByName[stage].push_back(std::move(systemWrapper));
         logInfo("Dispatcher:::addSystem(): added system to stage '{}'", stage);
     }
