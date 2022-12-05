@@ -31,9 +31,9 @@ int main(void)
         using namespace engine;
 
         // Enable SSAO
-        cubos::core::Settings::global.setBool("ssaoEnabled", true);
-
-        auto renderer = deferred::Renderer(renderDevice, window->getFramebufferSize());
+        auto settings = core::Settings();
+        settings.setBool("ssaoEnabled", true);
+        auto renderer = deferred::Renderer(renderDevice, window->getFramebufferSize(), settings);
         auto frame = Frame();
 
         // Setup asset manager

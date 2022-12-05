@@ -19,8 +19,8 @@ namespace cubos::engine::gl
         /// Data of a single draw command.
         struct DrawCmd
         {
-            RendererGrid grid;
-            glm::mat4 modelMat;
+            RendererGrid grid;  ///< Grid to be drawn.
+            glm::mat4 modelMat; ///< Model transform matrix.
         };
 
         /// Submits a draw command.

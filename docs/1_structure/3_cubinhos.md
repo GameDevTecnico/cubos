@@ -4,9 +4,10 @@
 the following commands:
 - `cubinhos help`: shows the help message;
 - `cubinhos convert`: converts a `.qb` voxel file into the internal format used
-by CUBOS., `.grd` and `.pal`.
+  by CUBOS., `.grd` and `.pal`.
 - `cubinhos embed`: utility used to embed files directly into an executable for
-use with the `EmbeddedArchive`.
+  use with the `EmbeddedArchive`.
+- `cubinhos generate`: generates component definition boilerplate code.
 
 ## Convert
 
@@ -117,4 +118,143 @@ that it uses `10` different materials.
 
 ## Embed
 
-TODO
+The `cubinhos embed` tool is used to embed files directly into an executable for
+use with the `EmbeddedArchive`. This is useful for example when you want to ship
+a game with a set of assets, but don't want to have to distribute them as
+separate files. This way, you are able to ship a single executable file.
+
+### Usage
+
+This tool takes a file and generates a C++ source file which registers a new
+`EmbeddedArchive`, outputting it to the standard output. This source file can
+then be compiled and linked with your executable.
+
+If no name for the archive is specified, the name of the file will be used. For
+example, if you run `cubinhos embed logo.png > logo.cpp`, the name of the
+archive will be `logo.png`.
+
+The resulting archive can then be mounted like this:
+
+```cpp
+#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/embedded_archive.hpp>
+
+int main()
+{
+    using namespace cubos::core::data;
+
+    FileSystem::mount("/logo.png", std::make_shared<EmbeddedArchive>("logo.png"));
+
+    // ...
+
+    return 0;
+}
+```
+
+It's also possible to embed a whole directory, in which case you will need to
+use the `-r` flag. This will recursively embed all files in the directory.
+
+Checkout the `embedded_archive` sample for a complete example.
+
+## Generate
+
+For a type to be usable as a component, it must satisfy the following
+requirements:
+- it must be (de)serializable, taking optionally some context necessary (such
+  as the mapping between `Entity`s and their IDs, or a function to read or
+  write handles).
+- it must define a storage type, which will then be used to store the
+  component's data in the `World`.
+- it must call the `CUBOS_REGISTER_COMPONENT` macro, passing the ID of the
+  component type, which associates the type with a unique ID.
+
+This means that, before `cubinhos generate`, component definitions looked like:
+
+```cpp
+struct MyComponent
+{
+    int x;
+    float y;
+    std::string z;
+};
+
+// The serialization functions must be defined in this namespace.
+namespace cubos::core::data
+{
+    inline static void serialize(Serializer& s, const MyComponent& c, const char* name)
+    {
+        s.beginObject(name);
+        s.write(c.x);
+        s.write(c.y);
+        s.write(c.z);
+        s.endObject();
+    }
+
+    inline static void deserialize(Deserializer& d, MyComponent& c)
+    {
+        d.beginObject();
+        d.read(c.x);
+        d.read(c.y);
+        d.read(c.z);
+        d.endObject();
+    }
+}
+
+// The storage type must be defined in this namespace.
+namespace cubos::core::ecs
+{
+    template <>
+    struct ComponentStorage<MyComponent>
+    {
+        using Type = VecStorage<MyComponent>;
+    };
+}
+
+CUBOS_REGISTER_COMPONENT(MyComponent, "my_component");
+```
+
+This amount of boilerplate is not acceptable, specially for user-facing code.
+The `cubinhos generate` command makes use of a recent C++ feature called
+[attributes](https://en.cppreference.com/w/cpp/language/attributes). Attributes
+are usually used to provide hints to the compiler. However, on our case, we're
+using them to mark types as components.
+
+With `cubinhos generate`, the same component definition can be written as:
+
+```cpp
+// Must be included in the file where the component is defined.
+#include <components/base.hpp>
+
+struct [[cubos::component("my_component", VecStorage)]] MyComponent
+{
+    int x;
+    float y;
+    std::string z;
+};
+```
+
+This tool then searches for all types marked with the `cubos::component` and
+generates a header file for each one. In this case, a header file would be
+generated which could be included with `#include <components/my_component.hpp>`.
+
+When using the component, the user must include the generated header file, and
+not the original one. Otherwise, the compiler won't see the generated code.
+
+If the component is identified with a slash, as, for example,
+`game/my_component`, the generated header file will be placed in the
+`components/game` directory. This is useful for organizing components into
+different modules. For example, `cubos-engine` names all its components with the
+`cubos/` directory.
+
+### CMake
+
+This tool can be configured to run automatically when building the project. To
+do this, you can include the `CubinhosGenerate` module in your `CMakeLists.txt`
+and call the `cubinhos_generate` function with your target and the directory
+where the base component headers are located.
+
+```cmake
+include(CubinhosGenerate)
+
+cubinhos_generate(my_target ${CMAKE_CURRENT_SOURCE_DIR}/components)
+```

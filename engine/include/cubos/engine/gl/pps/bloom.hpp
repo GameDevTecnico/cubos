@@ -30,16 +30,35 @@ namespace cubos::engine::gl::pps
         BloomPass(core::gl::RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
                   float softThreshold, float intensity);
 
+        /// Gets the threshold for the bloom effect.
+        /// @return The threshold for the bloom effect.
         float getThreshold() const;
+
+        /// Gets the soft threshold ratio.
+        /// @return The soft threshold ratio.
         float getSoftThreshold() const;
+
+        /// Gets the intensity of the bloom effect.
+        /// @return The intensity of the bloom effect.
         float getIntensity() const;
+
+        /// Sets the threshold for the bloom effect.
+        /// @param threshold The new threshold.
         void setThreshold(float threshold);
+
+        /// Sets the soft threshold ratio.
+        /// @param softThreshold Ratio for including pixels that don't pass the threshold test.
         void setSoftThreshold(float softThreshold);
+
+        /// Sets the intensity of the bloom effect.
+        /// @param intensity The intensity of the bloom effect.
         void setIntensity(float intensity);
 
+        /// Generates the textures used by the pass.
         void generateTextures();
 
         // Interface methods implementation.
+
         virtual void resize(glm::uvec2 size) override;
         virtual void execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
                              core::gl::Framebuffer out) const override;

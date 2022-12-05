@@ -11,14 +11,16 @@ It aims to support vast render distances and destructibility, which sets it
 apart from other engines. Written in *C++*, built with *OpenGL*, it's a
 high-performance engine.
 
-## Structure
+### Features
 
-The source code is divided into three main parts:
-- \ref core - library which is shared between the tools and the games. This
-includes some basic functionality like serialization, logging, render devices,
-input handling and others.
-- \ref engine - library with code exclusive to the game execution. This includes
-the main loop, the asset manager and systems like the renderer and physics.
-- \ref cubinhos - a tool which helps you with the game development and which
-may depend on **Core**. One example use case of **Cubinhos** is convert from
-external voxel formats to the internal format used by **CUBOS.**.
+**CUBOS.** is structured around the \ref core-ecs "Entity Component System"
+(ECS) pattern, which makes it very flexible and easy to extend. It also makes
+it easy to parallelize the systems, since they have clearly defined
+dependencies.
+
+You can read more about how the engine is structured in \ref structure section.
+
+### Getting started
+
+In the \ref guides section you can find multiple guides on how to use the
+engine and create your own game.

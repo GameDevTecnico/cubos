@@ -153,7 +153,8 @@ namespace cubos::core::ecs
 
 namespace std
 {
-    // Add hash function for Entity, so that it can be used as a key in an unordered_map.
+    /// Add hash function for Entity, so that it can be used as a key in an unordered_map.
+    /// @cond
     template <> struct hash<cubos::core::ecs::Entity>
     {
         inline std::size_t operator()(const cubos::core::ecs::Entity& k) const
@@ -161,6 +162,7 @@ namespace std
             return hash<uint32_t>()(k.index);
         }
     };
+    /// @endcond
 } // namespace std
 
 #endif // CUBOS_CORE_ECS_ENTITY_MANAGER_HPP
