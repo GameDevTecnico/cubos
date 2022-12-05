@@ -37,6 +37,7 @@ var NAVTREE =
         [ "All", "namespacemembers.html", null ],
         [ "Functions", "namespacemembers_func.html", null ],
         [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ],
         [ "Enumerations", "namespacemembers_enum.html", null ]
       ] ]
     ] ],
@@ -67,7 +68,7 @@ var NAVTREEINDEX =
 "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#adae2e6f8cfce6ec772163d708ec649a1",
 "classcubos_1_1engine_1_1gl_1_1Frame.html#aa1f8d4dcac112e6f8546f7df3aa54fb6",
 "namespacecubos_1_1core_1_1data_1_1impl.html",
-"structcubos_1_1core_1_1gl_1_1Texture3DDesc.html#a02bed8590a9ddf520e58a060059518ec"
+"structcubos_1_1core_1_1gl_1_1Texture3DDesc.html#a02afeaaf8574e7a78d6b466ff2695052"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

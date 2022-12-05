@@ -88,6 +88,7 @@ $(document).ready(function(){initNavTree('namespacecubos_1_1core_1_1io.html','')
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -101,6 +102,8 @@ $(document).ready(function(){initNavTree('namespacecubos_1_1core_1_1io.html','')
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html">BaseWindow</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1ButtonPress.html">ButtonPress</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,8 +120,13 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Source.html">Source</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1Window.html">Window</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a373938cb890b16a010475e7a68557737"><td class="memItemLeft" align="right" valign="top"><a id="a373938cb890b16a010475e7a68557737"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1io.html#a373938cb890b16a010475e7a68557737">Window</a> = std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html">BaseWindow</a> &gt;</td></tr>
+<tr class="memdesc:a373938cb890b16a010475e7a68557737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle to a generic window. <br /></td></tr>
+<tr class="separator:a373938cb890b16a010475e7a68557737"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -301,6 +309,8 @@ Functions</h2></td></tr>
 <tr class="memitem:aefe65608166a28922f14953566ff8b8d"><td class="memItemLeft" align="right" valign="top"><a id="aefe65608166a28922f14953566ff8b8d"></a>
 <a class="el" href="namespacecubos_1_1core_1_1io.html#a153f7e4dd506d333b40d9b3c27719e0d">Modifiers</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&amp;=</b> (<a class="el" href="namespacecubos_1_1core_1_1io.html#a153f7e4dd506d333b40d9b3c27719e0d">Modifiers</a> &amp;lhs, <a class="el" href="namespacecubos_1_1core_1_1io.html#a153f7e4dd506d333b40d9b3c27719e0d">Modifiers</a> rhs)</td></tr>
 <tr class="separator:aefe65608166a28922f14953566ff8b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79a5c02b2ce9bb5815f8c93dcef87c0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacecubos_1_1core_1_1io.html#a373938cb890b16a010475e7a68557737">Window</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1io.html#a79a5c02b2ce9bb5815f8c93dcef87c0b">openWindow</a> (const std::string &amp;title=&quot;Cubos&quot;, const glm::ivec2 &amp;size={800, 600})</td></tr>
+<tr class="separator:a79a5c02b2ce9bb5815f8c93dcef87c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains input/output related code, such as window management and the input manager. </p>
@@ -362,6 +372,43 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a3fe1dc281e20599dff9635c050a28b8ca7acdf85c69cc3c5305456a293524386e"></a>Hidden&#160;</td><td class="fielddoc"><p>Mouse cursor will be hidden when over the window, otherwise functioning in the same way as <a class="el" href="namespacecubos_1_1core_1_1io.html#a3fe1dc281e20599dff9635c050a28b8ca7a1920d61156abc05a60135aefe8bc67" title="Default mouse state, mouse will function as is specified by the OS.">MouseState::Default</a> </p>
 </td></tr>
 </table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a79a5c02b2ce9bb5815f8c93dcef87c0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79a5c02b2ce9bb5815f8c93dcef87c0b">&#9670;&nbsp;</a></span>openWindow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacecubos_1_1core_1_1io.html#a373938cb890b16a010475e7a68557737">Window</a> cubos::core::io::openWindow </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>title</em> = <code>&quot;Cubos&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const glm::ivec2 &amp;&#160;</td>
+          <td class="paramname"><em>size</em> = <code>{800,&#160;600}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Opens a new window. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">title</td><td>Window title. </td></tr>
+    <tr><td class="paramname">size</td><td>Window size, in screen coordinates. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New window, or nullptr if creation failed. </dd></dl>
 
 </div>
 </div>

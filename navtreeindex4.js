@@ -246,8 +246,8 @@ var NAVTREEINDEX4 =
 "map__storage_8hpp_source.html":[5,0,0,0,1,0,1,6],
 "material_8hpp_source.html":[5,0,0,0,1,0,2,4],
 "meta_8hpp_source.html":[5,0,1,0,0,0,0,4],
-"namespacecubos_1_1core.html":[3,0,0,0],
 "namespacecubos_1_1core.html":[4,0,0,0],
+"namespacecubos_1_1core.html":[3,0,0,0],
 "namespacecubos_1_1core_1_1data.html":[3,0,0,0,0],
 "namespacecubos_1_1core_1_1data.html":[4,0,0,0,0]
 };
