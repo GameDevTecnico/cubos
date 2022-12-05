@@ -215,7 +215,7 @@ $(document).ready(function(){initNavTree('resource__manager_8hpp_source.html',''
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keyword">auto</span> it = resources.find(<span class="keyword">typeid</span>(T));</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">if</span> (it != resources.end())</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        {</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <a class="code" href="namespacecubos_1_1core.html#a1638c6c2a462ea10ef21e5ad13db4509">logCritical</a>(<span class="stringliteral">&quot;ecs::ResourceManager::add: Resource of type {} was already added.&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not register resource of type {}: already registered&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            abort();</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        }</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
@@ -227,7 +227,7 @@ $(document).ready(function(){initNavTree('resource__manager_8hpp_source.html',''
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keyword">auto</span> it = resources.find(<span class="keyword">typeid</span>(T));</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">if</span> (it == resources.end())</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        {</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <a class="code" href="namespacecubos_1_1core.html#a1638c6c2a462ea10ef21e5ad13db4509">logCritical</a>(<span class="stringliteral">&quot;ecs::ResourceManager::read: Resource of type {} not found.&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not find resource of type {}&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            abort();</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        }</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
@@ -240,7 +240,7 @@ $(document).ready(function(){initNavTree('resource__manager_8hpp_source.html',''
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keyword">auto</span> it = resources.find(<span class="keyword">typeid</span>(T));</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordflow">if</span> (it == resources.end())</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <a class="code" href="namespacecubos_1_1core.html#a1638c6c2a462ea10ef21e5ad13db4509">logCritical</a>(<span class="stringliteral">&quot;ecs::ResourceManager::write: Resource of type {} not found.&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not find resource of type {}&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            abort();</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        }</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
@@ -257,7 +257,6 @@ $(document).ready(function(){initNavTree('resource__manager_8hpp_source.html',''
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ReadResource_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">cubos::core::ecs::ReadResource</a></div><div class="ttdoc">Utility struct used to reference resources for reading.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:13</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1WriteResource_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">cubos::core::ecs::WriteResource</a></div><div class="ttdoc">Utility struct used to reference resources for writing.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:31</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1WriteResource_html_ae2893386dcb56aa821ef423abd25817d"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html#ae2893386dcb56aa821ef423abd25817d">cubos::core::ecs::WriteResource::get</a></div><div class="ttdeci">T &amp; get() const</div><div class="ttdoc">Gets the underlying resource reference.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:121</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_html_a1638c6c2a462ea10ef21e5ad13db4509"><div class="ttname"><a href="namespacecubos_1_1core.html#a1638c6c2a462ea10ef21e5ad13db4509">cubos::core::logCritical</a></div><div class="ttdeci">void logCritical(T &amp;msg)</div><div class="ttdef"><b>Definition:</b> log.hpp:102</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ResourceManager_html_a0995a3af0aad2206c95a203e3d26072e"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a0995a3af0aad2206c95a203e3d26072e">cubos::core::ecs::ResourceManager::read</a></div><div class="ttdeci">ReadResource&lt; T &gt; read() const</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:152</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ReadResource_html_a9681b4de0a8572cf68ac6025484bfcef"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html#a9681b4de0a8572cf68ac6025484bfcef">cubos::core::ecs::ReadResource::get</a></div><div class="ttdeci">const T &amp; get() const</div><div class="ttdoc">Gets the underlying resource reference.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:103</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ResourceManager_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html">cubos::core::ecs::ResourceManager</a></div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:50</div></div>

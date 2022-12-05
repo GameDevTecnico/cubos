@@ -89,6 +89,7 @@ $(document).ready(function(){initNavTree('namespacecubos_1_1core_1_1ecs.html',''
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">cubos::core::ecs Namespace Reference</div>  </div>
@@ -181,6 +182,14 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility struct used to reference component storages for writing.  <a href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a9e81f6d785dcfa68dcb144999aeccbf9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9e81f6d785dcfa68dcb144999aeccbf9"><td class="memTemplItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ecs.html#a9e81f6d785dcfa68dcb144999aeccbf9">getComponentName</a> ()</td></tr>
+<tr class="separator:a9e81f6d785dcfa68dcb144999aeccbf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a458c164d4dfe1f31240bea7a3bc7330d"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ecs.html#a458c164d4dfe1f31240bea7a3bc7330d">getComponentName</a> (std::type_index type)</td></tr>
+<tr class="separator:a458c164d4dfe1f31240bea7a3bc7330d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a0d2f4625a3a355f8c7b59782980a0230"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -189,7 +198,57 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains the Entity-Component-System framework. </p>
-</div><h2 class="groupheader">Variable Documentation</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a9e81f6d785dcfa68dcb144999aeccbf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e81f6d785dcfa68dcb144999aeccbf9">&#9670;&nbsp;</a></span>getComponentName() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; getComponentName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the registered name of a component type. If the component type is not registered, aborts the program. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Component type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The registered name of the component type. </dd></dl>
+
+</div>
+</div>
+<a id="a458c164d4dfe1f31240bea7a3bc7330d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a458c164d4dfe1f31240bea7a3bc7330d">&#9670;&nbsp;</a></span>getComponentName() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string&amp; cubos::core::ecs::getComponentName </td>
+          <td>(</td>
+          <td class="paramtype">std::type_index&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the registered name of a component type. If the component type is not registered, aborts the program. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>Component type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The registered name of the component type. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
 <a id="a0d2f4625a3a355f8c7b59782980a0230"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d2f4625a3a355f8c7b59782980a0230">&#9670;&nbsp;</a></span>ComponentUsingStorage</h2>
 

@@ -145,11 +145,11 @@ $(document).ready(function(){initNavTree('asset_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    requires IsAsset&lt;T&gt; Asset&lt;T&gt;::Asset(Handle&amp;&amp; handle) : Handle(std::move(handle))</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span> (this-&gt;type != NULL &amp;&amp; this-&gt;type != T::TypeName)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span> (this-&gt;type != NULL &amp;&amp; std::string(this-&gt;type) != T::TypeName)</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <a class="code" href="namespacecubos_1_1core.html#a9cf2faa96fce578c0c068969482c5e9c">core::logError</a>(</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="stringliteral">&quot;Asset(Handle): couldn&#39;t get asset handle &#39;{}&#39; of type &#39;{}&#39; from generic handle of type &#39;{}&#39;&quot;</span>,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                *this-&gt;<span class="keywordtype">id</span>, T::TypeName, this-&gt;type);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            CUBOS_ERROR(<span class="stringliteral">&quot;Could not cast generic handle to asset handle of type &#39;{}&#39;: the generic handle points to &#39;{}&#39; &quot;</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        <span class="stringliteral">&quot;of type &#39;{}&#39;&quot;</span>,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        T::TypeName, *this-&gt;<span class="keywordtype">id</span>, this-&gt;type);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            --(*this-&gt;refCount);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            this-&gt;refCount = <span class="keyword">nullptr</span>;</div>
@@ -172,7 +172,7 @@ $(document).ready(function(){initNavTree('asset_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">if</span> (this-&gt;data == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <a class="code" href="namespacecubos_1_1core.html#a1638c6c2a462ea10ef21e5ad13db4509">core::logCritical</a>(<span class="stringliteral">&quot;Asset::get(): can&#39;t get reference to data since the handle is null&quot;</span>);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Cannot get reference to data: invalid handle&quot;</span>);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            abort();</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        }</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
@@ -191,8 +191,6 @@ $(document).ready(function(){initNavTree('asset_8hpp_source.html',''); initResiz
 </div><!-- doc-content -->
 <div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Asset_html"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Asset.html">cubos::engine::data::Asset</a></div><div class="ttdef"><b>Definition:</b> asset.hpp:31</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Handle_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Handle.html">cubos::core::data::Handle</a></div><div class="ttdoc">A generic handle to a resource.</div><div class="ttdef"><b>Definition:</b> handle.hpp:12</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_html_a1638c6c2a462ea10ef21e5ad13db4509"><div class="ttname"><a href="namespacecubos_1_1core.html#a1638c6c2a462ea10ef21e5ad13db4509">cubos::core::logCritical</a></div><div class="ttdeci">void logCritical(T &amp;msg)</div><div class="ttdef"><b>Definition:</b> log.hpp:102</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_html_a9cf2faa96fce578c0c068969482c5e9c"><div class="ttname"><a href="namespacecubos_1_1core.html#a9cf2faa96fce578c0c068969482c5e9c">cubos::core::logError</a></div><div class="ttdeci">void logError(T &amp;msg)</div><div class="ttdef"><b>Definition:</b> log.hpp:85</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1AssetManager_html"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1AssetManager.html">cubos::engine::data::AssetManager</a></div><div class="ttdef"><b>Definition:</b> asset_manager.hpp:19</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Asset_html_a0f359382abcd8babf112e42a89ec9bc0"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Asset.html#a0f359382abcd8babf112e42a89ec9bc0">cubos::engine::data::Asset::get</a></div><div class="ttdeci">const T &amp; get() const</div><div class="ttdef"><b>Definition:</b> asset.hpp:87</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
