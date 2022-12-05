@@ -3,12 +3,10 @@
 
 #include <components/base.hpp>
 
-#include <cubos/engine/gl/renderer.hpp>
 #include <cubos/engine/data/asset.hpp>
 #include <cubos/engine/data/grid.hpp>
 
 #include <glm/glm.hpp>
-#include <string>
 
 namespace cubos::engine::ecs
 {
