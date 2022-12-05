@@ -9,7 +9,7 @@ namespace cubos::core::ui
     /// Initializes ImGui for use with the given window.
     /// Should only be called once and no ImGui calls should be made before this is called.
     /// @param window The window to use.
-    void initialize(io::Window& window);
+    void initialize(io::Window window);
 
     /// Shuts down ImGui.
     /// Should only be called once, after @ref initialize, and no ImGui calls should be made after this is called.

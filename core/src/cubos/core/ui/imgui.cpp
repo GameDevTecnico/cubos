@@ -9,7 +9,7 @@ using namespace cubos::core;
 
 struct ImGuiData
 {
-    io::Window& window;
+    io::Window window;
     gl::RenderDevice& renderDevice;
 
     size_t onMouseMovedId;
@@ -167,14 +167,14 @@ static int keyToImGuiKey(io::Key key)
 
 static void setClipboardText(void* userData, const char* text)
 {
-    auto window = (io::Window*)userData;
-    window->setClipboard(text);
+    auto bd = static_cast<ImGuiData*>(userData);
+    bd->window->setClipboard(text);
 }
 
 static const char* getClipboardText(void* userData)
 {
-    auto window = (io::Window*)userData;
-    return window->getClipboard();
+    auto bd = static_cast<ImGuiData*>(userData);
+    return bd->window->getClipboard();
 }
 
 static void createDeviceObjects()
@@ -277,7 +277,7 @@ void main()
     bd->ibSize = 0;
 }
 
-void ui::initialize(io::Window& window)
+void ui::initialize(io::Window window)
 {
     // Initialize ImGui
     IMGUI_CHECKVERSION();
@@ -292,69 +292,69 @@ void ui::initialize(io::Window& window)
     }
 
     // Setup back-end capabilities flags
-    ImGuiData* bd = IM_NEW(ImGuiData){window, window.getRenderDevice()};
+    ImGuiData* bd = IM_NEW(ImGuiData){window, window->getRenderDevice()};
     io.BackendPlatformUserData = (void*)bd;
     io.BackendPlatformName = "imgui_impl_cubos";
 
     // Create mouse cursors.
     io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-    bd->cursors[ImGuiMouseCursor_Arrow] = window.createCursor(io::Cursor::Standard::Arrow);
-    bd->cursors[ImGuiMouseCursor_TextInput] = window.createCursor(io::Cursor::Standard::IBeam);
-    bd->cursors[ImGuiMouseCursor_ResizeAll] = window.createCursor(io::Cursor::Standard::AllResize);
-    bd->cursors[ImGuiMouseCursor_ResizeNS] = window.createCursor(io::Cursor::Standard::NSResize);
-    bd->cursors[ImGuiMouseCursor_ResizeEW] = window.createCursor(io::Cursor::Standard::EWResize);
-    bd->cursors[ImGuiMouseCursor_ResizeNESW] = window.createCursor(io::Cursor::Standard::NESWResize);
-    bd->cursors[ImGuiMouseCursor_ResizeNWSE] = window.createCursor(io::Cursor::Standard::NWSEResize);
-    bd->cursors[ImGuiMouseCursor_Hand] = window.createCursor(io::Cursor::Standard::Hand);
-    bd->cursors[ImGuiMouseCursor_NotAllowed] = window.createCursor(io::Cursor::Standard::NotAllowed);
+    bd->cursors[ImGuiMouseCursor_Arrow] = window->createCursor(io::Cursor::Standard::Arrow);
+    bd->cursors[ImGuiMouseCursor_TextInput] = window->createCursor(io::Cursor::Standard::IBeam);
+    bd->cursors[ImGuiMouseCursor_ResizeAll] = window->createCursor(io::Cursor::Standard::AllResize);
+    bd->cursors[ImGuiMouseCursor_ResizeNS] = window->createCursor(io::Cursor::Standard::NSResize);
+    bd->cursors[ImGuiMouseCursor_ResizeEW] = window->createCursor(io::Cursor::Standard::EWResize);
+    bd->cursors[ImGuiMouseCursor_ResizeNESW] = window->createCursor(io::Cursor::Standard::NESWResize);
+    bd->cursors[ImGuiMouseCursor_ResizeNWSE] = window->createCursor(io::Cursor::Standard::NWSEResize);
+    bd->cursors[ImGuiMouseCursor_Hand] = window->createCursor(io::Cursor::Standard::Hand);
+    bd->cursors[ImGuiMouseCursor_NotAllowed] = window->createCursor(io::Cursor::Standard::NotAllowed);
     for (int i = 0; i < ImGuiMouseCursor_COUNT; i++)
         if (bd->cursors[i] == nullptr)
             bd->cursors[i] = bd->cursors[ImGuiMouseCursor_Arrow];
 
-    bd->onMouseMovedId = window.onMouseMoved.registerCallback([](glm::ivec2 pos) {
+    bd->onMouseMovedId = window->onMouseMoved.registerCallback([](glm::ivec2 pos) {
         ImGuiIO& io = ImGui::GetIO();
         io.AddMousePosEvent(static_cast<float>(pos.x), static_cast<float>(pos.y));
     });
 
-    bd->onMouseDownId = window.onMouseDown.registerCallback([](io::MouseButton button) {
+    bd->onMouseDownId = window->onMouseDown.registerCallback([](io::MouseButton button) {
         ImGuiIO& io = ImGui::GetIO();
         int b = buttonToImGuiButton(button);
         if (b != -1)
             io.AddMouseButtonEvent(b, true);
     });
 
-    bd->onMouseUpId = window.onMouseUp.registerCallback([](io::MouseButton button) {
+    bd->onMouseUpId = window->onMouseUp.registerCallback([](io::MouseButton button) {
         ImGuiIO& io = ImGui::GetIO();
         int b = buttonToImGuiButton(button);
         if (b != -1)
             io.AddMouseButtonEvent(b, false);
     });
 
-    bd->onMouseScrollId = window.onMouseScroll.registerCallback([](glm::ivec2 scroll) {
+    bd->onMouseScrollId = window->onMouseScroll.registerCallback([](glm::ivec2 scroll) {
         ImGuiIO& io = ImGui::GetIO();
         io.AddMouseWheelEvent(static_cast<float>(scroll.x), static_cast<float>(scroll.y));
     });
 
-    bd->onKeyDownId = window.onKeyDown.registerCallback([](io::Key key) {
+    bd->onKeyDownId = window->onKeyDown.registerCallback([](io::Key key) {
         ImGuiIO& io = ImGui::GetIO();
         int k = keyToImGuiKey(key);
         if (k != -1)
             io.AddKeyEvent(k, true);
     });
 
-    bd->onKeyUpId = window.onKeyUp.registerCallback([](io::Key key) {
+    bd->onKeyUpId = window->onKeyUp.registerCallback([](io::Key key) {
         ImGuiIO& io = ImGui::GetIO();
         int k = keyToImGuiKey(key);
         if (k != -1)
             io.AddKeyEvent(k, false);
     });
 
-    bd->onCharId = window.onChar.registerCallback([](char c) {
+    bd->onCharId = window->onChar.registerCallback([](char c) {
         ImGuiIO& io = ImGui::GetIO();
         io.AddInputCharacter(c);
     });
 
-    bd->onModsId = window.onModsChanged.registerCallback([](io::Modifiers mods) {
+    bd->onModsId = window->onModsChanged.registerCallback([](io::Modifiers mods) {
         ImGuiIO& io = ImGui::GetIO();
         io.KeyCtrl = (mods & io::Modifiers::Control) != io::Modifiers::None;
         io.KeyShift = (mods & io::Modifiers::Shift) != io::Modifiers::None;
@@ -366,7 +366,7 @@ void ui::initialize(io::Window& window)
     io.GetClipboardTextFn = getClipboardText;
     io.ClipboardUserData = (void*)&window;
 
-    bd->time = window.getTime();
+    bd->time = window->getTime();
 
     createDeviceObjects();
 
@@ -384,13 +384,13 @@ void ui::terminate()
         bd->cursors[i] = nullptr;
     }
 
-    bd->window.onMouseMoved.unregisterCallback(bd->onMouseMovedId);
-    bd->window.onMouseDown.unregisterCallback(bd->onMouseDownId);
-    bd->window.onMouseUp.unregisterCallback(bd->onMouseUpId);
-    bd->window.onMouseScroll.unregisterCallback(bd->onMouseScrollId);
-    bd->window.onKeyDown.unregisterCallback(bd->onKeyDownId);
-    bd->window.onKeyUp.unregisterCallback(bd->onKeyUpId);
-    bd->window.onChar.unregisterCallback(bd->onCharId);
+    bd->window->onMouseMoved.unregisterCallback(bd->onMouseMovedId);
+    bd->window->onMouseDown.unregisterCallback(bd->onMouseDownId);
+    bd->window->onMouseUp.unregisterCallback(bd->onMouseUpId);
+    bd->window->onMouseScroll.unregisterCallback(bd->onMouseScrollId);
+    bd->window->onKeyDown.unregisterCallback(bd->onKeyDownId);
+    bd->window->onKeyUp.unregisterCallback(bd->onKeyUpId);
+    bd->window->onChar.unregisterCallback(bd->onCharId);
 
     bd->rasterState = nullptr;
     bd->blendState = nullptr;
@@ -414,30 +414,30 @@ void ui::beginFrame()
 {
     ImGuiIO& io = ImGui::GetIO();
     ImGuiData* bd = (ImGuiData*)io.BackendPlatformUserData;
-    io.DisplaySize.x = bd->window.getFramebufferSize().x;
-    io.DisplaySize.y = bd->window.getFramebufferSize().y;
+    io.DisplaySize.x = bd->window->getFramebufferSize().x;
+    io.DisplaySize.y = bd->window->getFramebufferSize().y;
     // TODO: handle framebuffer scale
 
     // Setup time step.
-    double time = bd->window.getTime();
+    double time = bd->window->getTime();
     io.DeltaTime = static_cast<float>(time - bd->time);
     bd->time = time;
 
     // Update cursor.
     if (!(io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange) &&
-        bd->window.getMouseState() != io::MouseState::Locked)
+        bd->window->getMouseState() != io::MouseState::Locked)
     {
         ImGuiMouseCursor imguiCursor = ImGui::GetMouseCursor();
         if (imguiCursor == ImGuiMouseCursor_None || io.MouseDrawCursor)
         {
             // Hide OS mouse cursor.
-            bd->window.setMouseState(io::MouseState::Hidden);
+            bd->window->setMouseState(io::MouseState::Hidden);
         }
         else
         {
             // Show OS mouse cursor.
-            bd->window.setCursor(bd->cursors[imguiCursor]);
-            bd->window.setMouseState(io::MouseState::Default);
+            bd->window->setCursor(bd->cursors[imguiCursor]);
+            bd->window->setMouseState(io::MouseState::Default);
         }
     }
 

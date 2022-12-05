@@ -67,7 +67,7 @@ void cameraSystem(core::gl::Camera& cameraRsc, core::ecs::Query<const Camera&, c
 }
 
 // Function which setups input callbacks and sets up the input resource.
-void setupInput(core::ecs::World& world, core::io::Window& window)
+void setupInput(core::ecs::World& world, core::io::Window window)
 {
     Input input;
     input.lastLook = glm::vec2(-1.0f);
@@ -122,9 +122,9 @@ void setupInput(core::ecs::World& world, core::io::Window& window)
         auto& input = inputResource.get();
         input.cameraEnabled = !input.cameraEnabled;
         if (input.cameraEnabled)
-            window.setMouseState(core::io::MouseState::Locked);
+            window->setMouseState(core::io::MouseState::Locked);
         else
-            window.setMouseState(core::io::MouseState::Default);
+            window->setMouseState(core::io::MouseState::Default);
     });
     enableAction->addSource(new core::io::ButtonPress(core::io::Key::C));
 }
@@ -259,8 +259,8 @@ void prepareScene(data::AssetManager& assetManager, gl::Renderer& renderer, core
 int main(void)
 {
     core::initializeLogger();
-    auto window = std::unique_ptr<core::io::Window>(core::io::Window::create());
-    core::ui::initialize(*window);
+    auto window = core::io::openWindow();
+    core::ui::initialize(window);
 
     // Initialize the renderer.
     auto& renderDevice = window->getRenderDevice();
@@ -271,7 +271,7 @@ int main(void)
                                   std::make_shared<core::data::STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
 
     // Initialize the input manager.
-    core::io::InputManager::init(window.get());
+    core::io::InputManager::init(window);
 
     // Create the ECS world and register the necessary components.
     core::ecs::World world;
@@ -303,7 +303,7 @@ int main(void)
     }
 
     // Prepare the input resource.
-    setupInput(world, *window);
+    setupInput(world, window);
 
     // Get the palette.
     auto paletteAsset = world.write<data::AssetManager>().get().load<data::Palette>("palette");

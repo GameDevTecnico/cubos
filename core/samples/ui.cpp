@@ -12,9 +12,9 @@ using namespace cubos::core;
 int main(void)
 {
     initializeLogger();
-    auto window = io::Window::create();
+    auto window = io::openWindow();
     auto& renderDevice = window->getRenderDevice();
-    ui::initialize(*window);
+    ui::initialize(window);
 
     std::vector<std::unordered_map<std::string, gl::Material>> matDictArray = {
         {{"mat1", gl::Material()}, {"mat2", gl::Material()}},
@@ -88,6 +88,5 @@ int main(void)
     }
 
     ui::terminate();
-    delete window;
     return 0;
 }

@@ -15,10 +15,10 @@
 namespace cubos::core::io
 {
     /// Wrapper around a window object, handles input events and creates the render device
-    class GLFWWindow : public cubos::core::io::Window
+    class GLFWWindow : public BaseWindow
     {
     public:
-        GLFWWindow(); // TODO: pass settings here?
+        GLFWWindow(const std::string& title, const glm::ivec2& size);
         virtual ~GLFWWindow() override;
 
         // Interface implementation.

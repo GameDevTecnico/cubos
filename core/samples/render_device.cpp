@@ -11,7 +11,7 @@ using namespace cubos::core;
 int main(void)
 {
     initializeLogger();
-    auto window = io::Window::create();
+    auto window = io::openWindow();
     auto& renderDevice = window->getRenderDevice();
 
     {
@@ -157,6 +157,5 @@ int main(void)
         }
     }
 
-    delete window;
     return 0;
 }

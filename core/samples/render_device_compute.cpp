@@ -10,7 +10,7 @@ using namespace cubos::core;
 int main(void)
 {
     initializeLogger();
-    auto window = io::Window::create();
+    auto window = io::openWindow();
     auto& renderDevice = window->getRenderDevice();
 
     if (!renderDevice.getProperty(gl::Property::ComputeSupported))
@@ -135,6 +135,5 @@ int main(void)
         }
     }
 
-    delete window;
     return 0;
 }
