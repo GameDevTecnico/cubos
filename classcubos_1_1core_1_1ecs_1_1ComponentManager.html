@@ -100,9 +100,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5c250a1d583a309287af21ccd991346"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aa5c250a1d583a309287af21ccd991346"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#aa5c250a1d583a309287af21ccd991346">registerComponent</a> ()</td></tr>
 <tr class="separator:aa5c250a1d583a309287af21ccd991346"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa67fa925471ccdd8cfac00189921adf6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#aa67fa925471ccdd8cfac00189921adf6">getIDFromIndex</a> (std::type_index type) const</td></tr>
+<tr class="separator:aa67fa925471ccdd8cfac00189921adf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67460f48bcbe66b54d8a457c11616910"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a67460f48bcbe66b54d8a457c11616910"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a67460f48bcbe66b54d8a457c11616910">getID</a> () const</td></tr>
 <tr class="separator:a67460f48bcbe66b54d8a457c11616910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81553f580114eceac72bcb23467cd665"><td class="memItemLeft" align="right" valign="top">std::type_index&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a81553f580114eceac72bcb23467cd665">getType</a> (size_t id) const</td></tr>
+<tr class="separator:a81553f580114eceac72bcb23467cd665"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0516ed5d2b9a9fd4dad53b26d02ca78"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ad0516ed5d2b9a9fd4dad53b26d02ca78"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ReadStorage.html">ReadStorage</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#ad0516ed5d2b9a9fd4dad53b26d02ca78">read</a> () const</td></tr>
 <tr class="separator:ad0516ed5d2b9a9fd4dad53b26d02ca78"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,10 +123,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a460bef8e04ce499ba8792d5b3b93436a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a331a7378b8fec94b581a94c732a1b0a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a331a7378b8fec94b581a94c732a1b0a1">removeAll</a> (uint32_t id)</td></tr>
 <tr class="separator:a331a7378b8fec94b581a94c732a1b0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad55316f5135cdae6aa6c5a763f6c3473"><td class="memItemLeft" align="right" valign="top"><a id="ad55316f5135cdae6aa6c5a763f6c3473"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#ad55316f5135cdae6aa6c5a763f6c3473">commit</a> ()</td></tr>
-<tr class="memdesc:ad55316f5135cdae6aa6c5a763f6c3473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commits the staged components to their storages. <br /></td></tr>
-<tr class="separator:ad55316f5135cdae6aa6c5a763f6c3473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86740f5aec48c546484badf176001150"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a86740f5aec48c546484badf176001150">pack</a> (uint32_t id, size_t componentId, const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;map, data::Handle::SerContext handleCtx) const</td></tr>
+<tr class="memdesc:a86740f5aec48c546484badf176001150"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a package from a component of an entity.  <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a86740f5aec48c546484badf176001150">More...</a><br /></td></tr>
+<tr class="separator:a86740f5aec48c546484badf176001150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62cfa505501fe3981e4b28cd9dcaf949"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a62cfa505501fe3981e4b28cd9dcaf949">unpack</a> (uint32_t id, size_t componentId, const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;package, const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;map, data::Handle::DesContext handleCtx)</td></tr>
+<tr class="memdesc:a62cfa505501fe3981e4b28cd9dcaf949"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a component into an entity, by unpacking a package.  <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a62cfa505501fe3981e4b28cd9dcaf949">More...</a><br /></td></tr>
+<tr class="separator:a62cfa505501fe3981e4b28cd9dcaf949"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a58e9723ccf5ae15c6683141b4d8902d9"></a>
@@ -184,6 +190,108 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The ID of the component type. </dd></dl>
+
+</div>
+</div>
+<a id="aa67fa925471ccdd8cfac00189921adf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa67fa925471ccdd8cfac00189921adf6">&#9670;&nbsp;</a></span>getIDFromIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t getIDFromIndex </td>
+          <td>(</td>
+          <td class="paramtype">std::type_index&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the ID of the component type. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The type of the component. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The ID of the component type. </dd></dl>
+
+</div>
+</div>
+<a id="a81553f580114eceac72bcb23467cd665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81553f580114eceac72bcb23467cd665">&#9670;&nbsp;</a></span>getType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::type_index getType </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the type of the component. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID of the component type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The type of the component. </dd></dl>
+
+</div>
+</div>
+<a id="a86740f5aec48c546484badf176001150"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86740f5aec48c546484badf176001150">&#9670;&nbsp;</a></span>pack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> pack </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>componentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data::Handle::SerContext&#160;</td>
+          <td class="paramname"><em>handleCtx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a package from a component of an entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a> ID. </td></tr>
+    <tr><td class="paramname">componentId</td><td>Component ID. </td></tr>
+    <tr><td class="paramname">map</td><td>Map of component IDs to package IDs. </td></tr>
+    <tr><td class="paramname">handleCtx</td><td>Handle serialization context. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A package containing the component entity. </dd></dl>
 
 </div>
 </div>
@@ -314,6 +422,65 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a62cfa505501fe3981e4b28cd9dcaf949"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62cfa505501fe3981e4b28cd9dcaf949">&#9670;&nbsp;</a></span>unpack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool unpack </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>componentId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;&#160;</td>
+          <td class="paramname"><em>package</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data::Handle::DesContext&#160;</td>
+          <td class="paramname"><em>handleCtx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inserts a component into an entity, by unpacking a package. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a> ID. </td></tr>
+    <tr><td class="paramname">componentId</td><td>Component ID. </td></tr>
+    <tr><td class="paramname">package</td><td>Package to unpack. </td></tr>
+    <tr><td class="paramname">map</td><td>Map of component IDs to package IDs. </td></tr>
+    <tr><td class="paramname">handleCtx</td><td>Handle deserialization context. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the package was unpacked successfully, false otherwise. </dd></dl>
 
 </div>
 </div>

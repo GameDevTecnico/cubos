@@ -8,7 +8,6 @@ var hierarchy =
       [ "EmbeddedArchive", "classcubos_1_1core_1_1data_1_1EmbeddedArchive.html", null ],
       [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", null ]
     ] ],
-    [ "Asset< T >", "classcubos_1_1engine_1_1data_1_1Asset.html", null ],
     [ "AssetManager", "classcubos_1_1engine_1_1data_1_1AssetManager.html", null ],
     [ "BlendState", "classcubos_1_1core_1_1gl_1_1impl_1_1BlendState.html", null ],
     [ "BlendStateDesc", "structcubos_1_1core_1_1gl_1_1BlendStateDesc.html", null ],
@@ -17,6 +16,8 @@ var hierarchy =
     [ "Camera", "structcubos_1_1core_1_1gl_1_1Camera.html", null ],
     [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html", null ],
     [ "ComponentManager", "classcubos_1_1core_1_1ecs_1_1ComponentManager.html", null ],
+    [ "ComponentStorage< T >", "structcubos_1_1core_1_1ecs_1_1ComponentStorage.html", null ],
+    [ "ComponentStorage< T >", "structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4.html", null ],
     [ "ConstantBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1ConstantBuffer.html", null ],
     [ "ConstantBufferElement", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html", null ],
     [ "ConstantBufferStructure", "structcubos_1_1core_1_1gl_1_1ConstantBufferStructure.html", null ],
@@ -30,6 +31,7 @@ var hierarchy =
     [ "Cubos", "classcubos_1_1engine_1_1Cubos.html", null ],
     [ "Cursor", "classcubos_1_1core_1_1io_1_1Cursor.html", null ],
     [ "EmbeddedArchive::Data", "structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html", null ],
+    [ "Debug", "classcubos_1_1core_1_1ecs_1_1Debug.html", null ],
     [ "Debug", "classcubos_1_1core_1_1gl_1_1Debug.html", null ],
     [ "DepthStencilStateDesc::Depth", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Depth.html", null ],
     [ "DepthStencilState", "classcubos_1_1core_1_1gl_1_1impl_1_1DepthStencilState.html", null ],
@@ -65,6 +67,10 @@ var hierarchy =
     [ "Grid", "classcubos_1_1core_1_1gl_1_1Grid.html", null ],
     [ "Grid", "structcubos_1_1engine_1_1data_1_1Grid.html", null ],
     [ "Grid", "structcubos_1_1engine_1_1ecs_1_1Grid.html", null ],
+    [ "Handle", "classcubos_1_1core_1_1data_1_1Handle.html", [
+      [ "Asset< cubos::engine::data::Grid >", "classcubos_1_1engine_1_1data_1_1Asset.html", null ],
+      [ "Asset< T >", "classcubos_1_1engine_1_1data_1_1Asset.html", null ]
+    ] ],
     [ "IndexBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1IndexBuffer.html", null ],
     [ "InputManager", "classcubos_1_1core_1_1io_1_1InputManager.html", null ],
     [ "IStorage", "classcubos_1_1core_1_1ecs_1_1IStorage.html", [
@@ -74,6 +80,7 @@ var hierarchy =
         [ "VecStorage< T >", "classcubos_1_1core_1_1ecs_1_1VecStorage.html", null ]
       ] ]
     ] ],
+    [ "Debug::Iterator", "classcubos_1_1core_1_1ecs_1_1Debug_1_1Iterator.html", null ],
     [ "EntityManager::Iterator", "classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html", null ],
     [ "Query< ComponentTypes >::Iterator", "classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html", null ],
     [ "Loader", "classcubos_1_1engine_1_1data_1_1Loader.html", [
@@ -147,6 +154,7 @@ var hierarchy =
     [ "SystemFetcher< T >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html", null ],
     [ "SystemFetcher< Commands & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_6_01_4.html", null ],
     [ "SystemFetcher< const R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4.html", null ],
+    [ "SystemFetcher< Debug >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Debug_01_4.html", null ],
     [ "SystemFetcher< Query< ComponentTypes... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html", null ],
     [ "SystemFetcher< R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4.html", null ],
     [ "SystemFetcher< std::tuple< Args... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html", null ],

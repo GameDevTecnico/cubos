@@ -145,9 +145,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5d3016b17c69ea1b5319702cd26c42f3"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TCtx &gt; </td></tr>
 <tr class="memitem:a5d3016b17c69ea1b5319702cd26c42f3"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a5d3016b17c69ea1b5319702cd26c42f3">requires</a> (<a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; T &gt; &amp;&amp;!<a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt;) void <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a2628f0d35c899f2da2faaf87c70dbf01">read</a>(T &amp;obj</td></tr>
 <tr class="separator:a5d3016b17c69ea1b5319702cd26c42f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa52c7ef5bd4657d05c978ff594cc91c0"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TCtx &gt; </td></tr>
-<tr class="memitem:aa52c7ef5bd4657d05c978ff594cc91c0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a5d3016b17c69ea1b5319702cd26c42f3">requires</a> <a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#aa52c7ef5bd4657d05c978ff594cc91c0">read</a> (T &amp;obj, TCtx ctx)</td></tr>
-<tr class="separator:aa52c7ef5bd4657d05c978ff594cc91c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac77c1ee1ad8408437888f662d7504119"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TCtx &gt; </td></tr>
+<tr class="memitem:ac77c1ee1ad8408437888f662d7504119"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a5d3016b17c69ea1b5319702cd26c42f3">requires</a> <a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#ac77c1ee1ad8408437888f662d7504119">read</a> (T &amp;obj, TCtx &amp;&amp;ctx)</td></tr>
+<tr class="separator:ac77c1ee1ad8408437888f662d7504119"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af28e6ddb0fd64677a2d6e89b83f66e15"><td class="memItemLeft" align="right" valign="top"><a id="af28e6ddb0fd64677a2d6e89b83f66e15"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#af28e6ddb0fd64677a2d6e89b83f66e15">beginObject</a> ()=0</td></tr>
 <tr class="memdesc:af28e6ddb0fd64677a2d6e89b83f66e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates that a object is currently being deserialized. <br /></td></tr>
@@ -175,9 +175,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a3697669b96f0a18ed624d6fb7801c261"><td class="memItemLeft" align="right" valign="top"><a id="a3697669b96f0a18ed624d6fb7801c261"></a>
-TCtx&#160;</td><td class="memItemRight" valign="bottom"><b>ctx</b></td></tr>
-<tr class="separator:a3697669b96f0a18ed624d6fb7801c261"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77a7bca430192d96db974b9355f7f0ea"><td class="memItemLeft" align="right" valign="top"><a id="a77a7bca430192d96db974b9355f7f0ea"></a>
+TCtx &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><b>ctx</b></td></tr>
+<tr class="separator:a77a7bca430192d96db974b9355f7f0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -275,8 +275,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="aa52c7ef5bd4657d05c978ff594cc91c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa52c7ef5bd4657d05c978ff594cc91c0">&#9670;&nbsp;</a></span>read() <span class="overload">[2/2]</span></h2>
+<a id="ac77c1ee1ad8408437888f662d7504119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac77c1ee1ad8408437888f662d7504119">&#9670;&nbsp;</a></span>read() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,7 +290,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TCtx&#160;</td>
+          <td class="paramtype">TCtx &amp;&amp;&#160;</td>
           <td class="paramname"><em>ctx</em>&#160;</td>
         </tr>
         <tr>

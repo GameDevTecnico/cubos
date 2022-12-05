@@ -22,7 +22,7 @@ var classcubos_1_1core_1_1data_1_1Package =
       [ "Array", "classcubos_1_1core_1_1data_1_1Package.html#a1d1cfd8ffb84e947f82999c682b666a7a4410ec34d9e6c1a68100ca0ce033fb17", null ],
       [ "Dictionary", "classcubos_1_1core_1_1data_1_1Package.html#a1d1cfd8ffb84e947f82999c682b666a7a3beb75d1563ebc22253341be4ce57f44", null ]
     ] ],
-    [ "Package", "classcubos_1_1core_1_1data_1_1Package.html#a940b610a90c31b1461d7647b6503aebe", null ],
+    [ "Package", "classcubos_1_1core_1_1data_1_1Package.html#a80c404806c16d3e151ce58f0ab6668ce", null ],
     [ "Package", "classcubos_1_1core_1_1data_1_1Package.html#a8ad1c13e107b32a2ae06186cdc4e651d", null ],
     [ "Package", "classcubos_1_1core_1_1data_1_1Package.html#ad656fba2061a3e742768ce1f05c39ac3", null ],
     [ "~Package", "classcubos_1_1core_1_1data_1_1Package.html#ae7520fb3286ae2eebdaa403630ea9cdc", null ],
@@ -40,13 +40,18 @@ var classcubos_1_1core_1_1data_1_1Package =
     [ "fields", "classcubos_1_1core_1_1data_1_1Package.html#ac25a286817641fbe449e48d68c162283", null ],
     [ "fields", "classcubos_1_1core_1_1data_1_1Package.html#a1b85df1c24befece32b89019f54551a1", null ],
     [ "from", "classcubos_1_1core_1_1data_1_1Package.html#a902a973f2d5a2d14c104fae651637595", null ],
-    [ "get", "classcubos_1_1core_1_1data_1_1Package.html#ae6ed27f39a93748e7fdc3012971af127", null ],
+    [ "get", "classcubos_1_1core_1_1data_1_1Package.html#a55ddf6f80b7c55027fbcd4c683a14c1b", null ],
     [ "into", "classcubos_1_1core_1_1data_1_1Package.html#a2c1044dbf4dce5f7e2f2a5c0a6358d87", null ],
     [ "isStructured", "classcubos_1_1core_1_1data_1_1Package.html#a0df96404d3d5b00129803ff563198aa5", null ],
     [ "operator=", "classcubos_1_1core_1_1data_1_1Package.html#a4b92b86615255c6fee15560685c2f56d", null ],
     [ "operator=", "classcubos_1_1core_1_1data_1_1Package.html#af7d69a19e1250f9d0a0c21c2cbb7aa21", null ],
+    [ "requires", "classcubos_1_1core_1_1data_1_1Package.html#a790ad14a8ed6f2bf9202855a4227e500", null ],
+    [ "requires", "classcubos_1_1core_1_1data_1_1Package.html#aa0c1ac4205af006b351e67130515d8fd", null ],
+    [ "requires", "classcubos_1_1core_1_1data_1_1Package.html#a2dcaee2ad6fea800f80a36f538f4b689", null ],
     [ "set", "classcubos_1_1core_1_1data_1_1Package.html#a0c228d7960217dd3570fec14355fbae4", null ],
     [ "size", "classcubos_1_1core_1_1data_1_1Package.html#a259cb5a711406a8c3e5d937eb9350cca", null ],
     [ "type", "classcubos_1_1core_1_1data_1_1Package.html#adf4a6727c689e0038cf2cdd158d5ed2c", null ],
-    [ "serialize", "classcubos_1_1core_1_1data_1_1Package.html#a9bbe1a99b038e9583a972dbfee8f9325", null ]
+    [ "serialize", "classcubos_1_1core_1_1data_1_1Package.html#a9bbe1a99b038e9583a972dbfee8f9325", null ],
+    [ "const", "classcubos_1_1core_1_1data_1_1Package.html#a3ccc5b4687a8e74a9f9bc7d0b2107719", null ],
+    [ "ctx", "classcubos_1_1core_1_1data_1_1Package.html#ab31148069ca87453397480f4a486efeb", null ]
 ];

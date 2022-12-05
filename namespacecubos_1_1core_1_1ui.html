@@ -98,6 +98,10 @@ $(document).ready(function(){initNavTree('namespacecubos_1_1core_1_1ui.html','')
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a588862be1e62fc02a0f91f97810f8733"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a588862be1e62fc02a0f91f97810f8733">showWorld</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Debug.html">ecs::Debug</a> debug)</td></tr>
+<tr class="separator:a588862be1e62fc02a0f91f97810f8733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0120772ed222d0a3e4a9c9e6d7f42c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#ac0120772ed222d0a3e4a9c9e6d7f42c0">editWorld</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Debug.html">ecs::Debug</a> debug, data::Handle::DesContext handleCtx)</td></tr>
+<tr class="separator:ac0120772ed222d0a3e4a9c9e6d7f42c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeac956d2eabe3e664d81d77e034c8826"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#aeac956d2eabe3e664d81d77e034c8826">initialize</a> (<a class="el" href="classcubos_1_1core_1_1io_1_1Window.html">io::Window</a> &amp;window)</td></tr>
 <tr class="separator:aeac956d2eabe3e664d81d77e034c8826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8ed978d758b063ff778f65cc761a932"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#af8ed978d758b063ff778f65cc761a932">terminate</a> ()</td></tr>
@@ -203,6 +207,41 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 </div>
 </div>
+<a id="ac0120772ed222d0a3e4a9c9e6d7f42c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0120772ed222d0a3e4a9c9e6d7f42c0">&#9670;&nbsp;</a></span>editWorld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::ui::editWorld </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Debug.html">ecs::Debug</a>&#160;</td>
+          <td class="paramname"><em>debug</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data::Handle::DesContext&#160;</td>
+          <td class="paramname"><em>handleCtx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ECS system which allows the user to inspect and edit the entities and components in an ECS world. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">debug</td><td>Debug query. </td></tr>
+    <tr><td class="paramname">handleCtx</td><td>Context for deserializing handles. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aeac956d2eabe3e664d81d77e034c8826"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeac956d2eabe3e664d81d77e034c8826">&#9670;&nbsp;</a></span>initialize()</h2>
 
@@ -298,6 +337,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
   <table class="params">
     <tr><td class="paramname">pkg</td><td>The packaged object to show. </td></tr>
     <tr><td class="paramname">name</td><td>The name of the object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a588862be1e62fc02a0f91f97810f8733"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a588862be1e62fc02a0f91f97810f8733">&#9670;&nbsp;</a></span>showWorld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::ui::showWorld </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Debug.html">ecs::Debug</a>&#160;</td>
+          <td class="paramname"><em>debug</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ECS system which allows the user to inspect the entities and components in an ECS world. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">debug</td><td>Debug query. </td></tr>
   </table>
   </dd>
 </dl>

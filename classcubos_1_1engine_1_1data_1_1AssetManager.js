@@ -5,6 +5,8 @@ var classcubos_1_1engine_1_1data_1_1AssetManager =
     [ "cleanup", "classcubos_1_1engine_1_1data_1_1AssetManager.html#a4b66d5e31b5dc18b314c8a68163263bd", null ],
     [ "importMeta", "classcubos_1_1engine_1_1data_1_1AssetManager.html#aa0e7401d0228612c98ce5cee06424afa", null ],
     [ "load", "classcubos_1_1engine_1_1data_1_1AssetManager.html#a49eb766ea6aa2d7ae6c01e7dfd6da688", null ],
+    [ "loadAny", "classcubos_1_1engine_1_1data_1_1AssetManager.html#a3cec707ef9668405e385d24f0230136a", null ],
     [ "loadStatic", "classcubos_1_1engine_1_1data_1_1AssetManager.html#a2875a2906168077a9d6da203692c97c8", null ],
-    [ "registerType", "classcubos_1_1engine_1_1data_1_1AssetManager.html#a603fff640f34ace914a53abccbf8c0bb", null ]
+    [ "registerType", "classcubos_1_1engine_1_1data_1_1AssetManager.html#a603fff640f34ace914a53abccbf8c0bb", null ],
+    [ "store", "classcubos_1_1engine_1_1data_1_1AssetManager.html#a17d3aea96af5b712dd9df5a64b173ab3", null ]
 ];

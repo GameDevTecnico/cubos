@@ -101,6 +101,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4d7534ab00387a033d16662dc09cc585"><td class="memItemLeft" align="right" valign="top"><a id="a4d7534ab00387a033d16662dc09cc585"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SerializationMap</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a> &amp;&amp;)=default</td></tr>
 <tr class="separator:a4d7534ab00387a033d16662dc09cc585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95978f495ac80c9ca73a8a504dbe4d3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#a95978f495ac80c9ca73a8a504dbe4d3a">SerializationMap</a> (std::function&lt; bool(const R &amp;, I &amp;)&gt; serialize, std::function&lt; bool(R &amp;, const I &amp;)&gt; deserialize)</td></tr>
+<tr class="separator:a95978f495ac80c9ca73a8a504dbe4d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8583b009c0eefd4aa76cb32ac207de30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#a8583b009c0eefd4aa76cb32ac207de30">add</a> (const R &amp;reference, const I &amp;id)</td></tr>
 <tr class="separator:a8583b009c0eefd4aa76cb32ac207de30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0552aaaf94fbca755e74a578ec6244f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#a0552aaaf94fbca755e74a578ec6244f5">hasRef</a> (const R &amp;reference) const</td></tr>
@@ -129,7 +131,43 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a95978f495ac80c9ca73a8a504dbe4d3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95978f495ac80c9ca73a8a504dbe4d3a">&#9670;&nbsp;</a></span>SerializationMap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; bool(const R &amp;, I &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>serialize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; bool(R &amp;, const I &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>deserialize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Makes the serialization map use functions instead of keeping a map. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">serialize</td><td>Function used to serialize references. </td></tr>
+    <tr><td class="paramname">deserialize</td><td>Function used to deserialize references. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8583b009c0eefd4aa76cb32ac207de30"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8583b009c0eefd4aa76cb32ac207de30">&#9670;&nbsp;</a></span>add()</h2>
 

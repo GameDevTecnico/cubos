@@ -98,13 +98,15 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1Registry.
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a49e249daff244751ca35841e04764129"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#a49e249daff244751ca35841e04764129">create</a> (const std::string &amp;<a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#a5bbb8f058870c41e3e1602201a162027">name</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">data::Deserializer</a> &amp;des, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Blueprint.html">Blueprint</a> &amp;blueprint, <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; *map, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> id)</td></tr>
-<tr class="separator:a49e249daff244751ca35841e04764129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae3ca028fe8d3287611b2445cf4afacc"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#aae3ca028fe8d3287611b2445cf4afacc">create</a> (const std::string &amp;<a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#a5bbb8f058870c41e3e1602201a162027">name</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">data::Deserializer</a> &amp;des, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Blueprint.html">Blueprint</a> &amp;blueprint, const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;map, data::Handle::DesContext handleCtx, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> id)</td></tr>
+<tr class="separator:aae3ca028fe8d3287611b2445cf4afacc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa36c2177d7575278e7d4554901d07775"><td class="memTemplParams" colspan="2">template&lt;typename ComponentType &gt; </td></tr>
 <tr class="memitem:aa36c2177d7575278e7d4554901d07775"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#aa36c2177d7575278e7d4554901d07775">add</a> (const std::string &amp;<a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#a5bbb8f058870c41e3e1602201a162027">name</a>)</td></tr>
 <tr class="separator:aa36c2177d7575278e7d4554901d07775"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bbb8f058870c41e3e1602201a162027"><td class="memItemLeft" align="right" valign="top">static const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#a5bbb8f058870c41e3e1602201a162027">name</a> (std::type_index index)</td></tr>
+<tr class="memitem:a5bbb8f058870c41e3e1602201a162027"><td class="memItemLeft" align="right" valign="top">static const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#a5bbb8f058870c41e3e1602201a162027">name</a> (std::type_index <a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#ad35c80c43f48942b2897f24b61872881">index</a>)</td></tr>
 <tr class="separator:a5bbb8f058870c41e3e1602201a162027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad35c80c43f48942b2897f24b61872881"><td class="memItemLeft" align="right" valign="top">static std::type_index&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#ad35c80c43f48942b2897f24b61872881">index</a> (const std::string &amp;<a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#a5bbb8f058870c41e3e1602201a162027">name</a>)</td></tr>
+<tr class="separator:ad35c80c43f48942b2897f24b61872881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Singleton which stores the global registry of component types, allowing components to be created from deserializers. </p>
@@ -147,8 +149,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a49e249daff244751ca35841e04764129"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49e249daff244751ca35841e04764129">&#9670;&nbsp;</a></span>create()</h2>
+<a id="aae3ca028fe8d3287611b2445cf4afacc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae3ca028fe8d3287611b2445cf4afacc">&#9670;&nbsp;</a></span>create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,8 +179,14 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;&#160;</td>
           <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data::Handle::DesContext&#160;</td>
+          <td class="paramname"><em>handleCtx</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -203,11 +211,46 @@ Static Public Member Functions</h2></td></tr>
     <tr><td class="paramname">name</td><td>The name of the component. </td></tr>
     <tr><td class="paramname">des</td><td>The deserializer to read the component data from. </td></tr>
     <tr><td class="paramname">blueprint</td><td>The blueprint to instantiate the component into. </td></tr>
+    <tr><td class="paramname">map</td><td>The serialization map to use. </td></tr>
+    <tr><td class="paramname">handleCtx</td><td>The handle context to use. </td></tr>
     <tr><td class="paramname">id</td><td>The id of the entity the component belongs to. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the component type was found and successfully instantiated, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ad35c80c43f48942b2897f24b61872881"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad35c80c43f48942b2897f24b61872881">&#9670;&nbsp;</a></span>index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::type_index index </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Gets the type index of a component type. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the component. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The type index of the component, or typeid(void) if the component type was not found. </dd></dl>
 
 </div>
 </div>

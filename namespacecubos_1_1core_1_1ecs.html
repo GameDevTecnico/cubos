@@ -88,7 +88,8 @@ $(document).ready(function(){initNavTree('namespacecubos_1_1core_1_1ecs.html',''
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">cubos::core::ecs Namespace Reference</div>  </div>
 </div><!--header-->
@@ -116,6 +117,12 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object responsible for storing ECS commands to execute them later.  <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html">ComponentManager</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1ComponentStorage.html">ComponentStorage</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4.html">ComponentStorage&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Debug.html">Debug</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html">Dispatcher</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" title="Dispatcher is a class that is used to register systems and call them all at once, where they will be ...">Dispatcher</a> is a class that is used to register systems and call them all at once, where they will be executed in order of the stages they are in.  <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#details">More...</a><br /></td></tr>
@@ -173,10 +180,35 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html">WriteStorage</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility struct used to reference component storages for writing.  <a href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a0d2f4625a3a355f8c7b59782980a0230"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a0d2f4625a3a355f8c7b59782980a0230"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ComponentUsingStorage</b></td></tr>
+<tr class="separator:a0d2f4625a3a355f8c7b59782980a0230"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains the Entity-Component-System framework. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="a0d2f4625a3a355f8c7b59782980a0230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d2f4625a3a355f8c7b59782980a0230">&#9670;&nbsp;</a></span>ComponentUsingStorage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">concept ComponentUsingStorage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= requires</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">typename</span> T::Storage;</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

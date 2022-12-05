@@ -3,6 +3,7 @@ var dir_b6daa990b896c2c0c53126427e4d978d =
     [ "blueprint.hpp", "blueprint_8hpp_source.html", null ],
     [ "commands.hpp", "commands_8hpp_source.html", null ],
     [ "component_manager.hpp", "component__manager_8hpp_source.html", null ],
+    [ "debug.hpp", "ecs_2debug_8hpp_source.html", null ],
     [ "dispatcher.hpp", "dispatcher_8hpp_source.html", null ],
     [ "entity_manager.hpp", "entity__manager_8hpp_source.html", null ],
     [ "map_storage.hpp", "map__storage_8hpp_source.html", null ],

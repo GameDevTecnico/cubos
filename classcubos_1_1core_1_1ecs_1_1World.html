@@ -136,9 +136,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9086896c16795175df9f757a5a098e46"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a9086896c16795175df9f757a5a098e46">has</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity) const</td></tr>
 <tr class="memdesc:a9086896c16795175df9f757a5a098e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an entity has a component.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a9086896c16795175df9f757a5a098e46">More...</a><br /></td></tr>
 <tr class="separator:a9086896c16795175df9f757a5a098e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa371df7f73a11126885e048dfac218f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#aa371df7f73a11126885e048dfac218f1">pack</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity, data::Handle::SerContext handleCtx) const</td></tr>
+<tr class="memdesc:aa371df7f73a11126885e048dfac218f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a package from the components of an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#aa371df7f73a11126885e048dfac218f1">More...</a><br /></td></tr>
+<tr class="separator:aa371df7f73a11126885e048dfac218f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131863a321aa4e511640a91d06638018"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a131863a321aa4e511640a91d06638018">unpack</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity, const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;package, data::Handle::DesContext handleCtx)</td></tr>
+<tr class="memdesc:a131863a321aa4e511640a91d06638018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpacks components specified in a package into an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a131863a321aa4e511640a91d06638018">More...</a><br /></td></tr>
+<tr class="separator:a131863a321aa4e511640a91d06638018"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
+<tr class="memitem:a2bbda38dab973ea67b9b9dfbf7001640"><td class="memItemLeft" align="right" valign="top"><a id="a2bbda38dab973ea67b9b9dfbf7001640"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>Debug</b></td></tr>
+<tr class="separator:a2bbda38dab973ea67b9b9dfbf7001640"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4631ae0173c324dc84781c944ebb28a"><td class="memTemplParams" colspan="2"><a id="ac4631ae0173c324dc84781c944ebb28a"></a>
 template&lt;typename... ComponentTypes&gt; </td></tr>
 <tr class="memitem:ac4631ae0173c324dc84781c944ebb28a"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Query</b></td></tr>
@@ -312,6 +321,44 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Commands</b></td></t
 
 </div>
 </div>
+<a id="aa371df7f73a11126885e048dfac218f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa371df7f73a11126885e048dfac218f1">&#9670;&nbsp;</a></span>pack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> pack </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data::Handle::SerContext&#160;</td>
+          <td class="paramname"><em>handleCtx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a package from the components of an entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a> ID. </td></tr>
+    <tr><td class="paramname">handleCtx</td><td>Context necessary to serialize handles in the components. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A package containing the components of the entity. </dd></dl>
+
+</div>
+</div>
 <a id="a0995a3af0aad2206c95a203e3d26072e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0995a3af0aad2206c95a203e3d26072e">&#9670;&nbsp;</a></span>read()</h2>
 
@@ -421,6 +468,51 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Commands</b></td></t
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a131863a321aa4e511640a91d06638018"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a131863a321aa4e511640a91d06638018">&#9670;&nbsp;</a></span>unpack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool unpack </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;&#160;</td>
+          <td class="paramname"><em>package</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data::Handle::DesContext&#160;</td>
+          <td class="paramname"><em>handleCtx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unpacks components specified in a package into an entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a> ID. </td></tr>
+    <tr><td class="paramname">package</td><td>Package to unpack. </td></tr>
+    <tr><td class="paramname">handleCtx</td><td>Context necessary to deserialize handles in the components. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the package was unpacked successfully, false otherwise. </dd></dl>
 
 </div>
 </div>

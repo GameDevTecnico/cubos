@@ -115,6 +115,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a49eb766ea6aa2d7ae6c01e7dfd6da688"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a49eb766ea6aa2d7ae6c01e7dfd6da688"><td class="memTemplItemLeft" align="right" valign="top">requires IsAsset&lt; T &gt; <a class="el" href="classcubos_1_1engine_1_1data_1_1Asset.html">Asset</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1AssetManager.html#a49eb766ea6aa2d7ae6c01e7dfd6da688">load</a> (const std::string &amp;id)</td></tr>
 <tr class="separator:a49eb766ea6aa2d7ae6c01e7dfd6da688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cec707ef9668405e385d24f0230136a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Handle.html">core::data::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1AssetManager.html#a3cec707ef9668405e385d24f0230136a">loadAny</a> (const std::string &amp;id)</td></tr>
+<tr class="separator:a3cec707ef9668405e385d24f0230136a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17d3aea96af5b712dd9df5a64b173ab3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a17d3aea96af5b712dd9df5a64b173ab3"><td class="memTemplItemLeft" align="right" valign="top">requires IsAsset&lt; T &gt; <a class="el" href="classcubos_1_1engine_1_1data_1_1Asset.html">Asset</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1data_1_1AssetManager.html#a17d3aea96af5b712dd9df5a64b173ab3">store</a> (const std::string &amp;id, Usage usage, T &amp;&amp;data)</td></tr>
+<tr class="separator:a17d3aea96af5b712dd9df5a64b173ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages the loading and unloading of generic assets. Provides methods to register and unregister asset loaders. </p>
@@ -153,7 +158,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Loads the given asset from its ID, synchronously. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Loads the given asset from its ID, synchronously, and returns a handle to it. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The type of the asset. </td></tr>
   </table>
@@ -165,7 +170,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Handle to the loaded asset. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Handle to the loaded asset, or nullptr if the loading failed. </dd></dl>
+
+</div>
+</div>
+<a id="a3cec707ef9668405e385d24f0230136a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cec707ef9668405e385d24f0230136a">&#9670;&nbsp;</a></span>loadAny()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1data_1_1Handle.html">core::data::Handle</a> loadAny </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Loads the given asset from its ID, synchronously, and returns a generic handle to it. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID of the asset to load. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Handle to the loaded asset, or nullptr if the loading failed. </dd></dl>
 
 </div>
 </div>
@@ -194,6 +224,54 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">args</td><td>The arguments passed to the loader's constructor. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a17d3aea96af5b712dd9df5a64b173ab3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17d3aea96af5b712dd9df5a64b173ab3">&#9670;&nbsp;</a></span>store()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">requires IsAsset&lt; T &gt; <a class="el" href="classcubos_1_1engine_1_1data_1_1Asset.html">Asset</a>&lt; T &gt; store </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Usage&#160;</td>
+          <td class="paramname"><em>usage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Stores the given asset data in the asset manager, with a certain ID. If an asset with the same ID already exists, abort() is called. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the asset. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID of the asset. </td></tr>
+    <tr><td class="paramname">usage</td><td>The usage of the asset. </td></tr>
+    <tr><td class="paramname">data</td><td>The data of the asset. </td></tr>
   </table>
   </dd>
 </dl>

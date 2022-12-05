@@ -10,6 +10,7 @@ var namespacecubos_1_1core_1_1data =
     [ "File", "classcubos_1_1core_1_1data_1_1File.html", "classcubos_1_1core_1_1data_1_1File" ],
     [ "FileStream", "classcubos_1_1core_1_1data_1_1FileStream.html", "classcubos_1_1core_1_1data_1_1FileStream" ],
     [ "FileSystem", "classcubos_1_1core_1_1data_1_1FileSystem.html", "classcubos_1_1core_1_1data_1_1FileSystem" ],
+    [ "Handle", "classcubos_1_1core_1_1data_1_1Handle.html", "classcubos_1_1core_1_1data_1_1Handle" ],
     [ "JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", "classcubos_1_1core_1_1data_1_1JSONDeserializer" ],
     [ "JSONSerializer", "classcubos_1_1core_1_1data_1_1JSONSerializer.html", "classcubos_1_1core_1_1data_1_1JSONSerializer" ],
     [ "Package", "classcubos_1_1core_1_1data_1_1Package.html", "classcubos_1_1core_1_1data_1_1Package" ],

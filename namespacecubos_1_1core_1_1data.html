@@ -126,6 +126,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html">FileSystem</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Handle.html">Handle</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A generic handle to a resource.  <a href="classcubos_1_1core_1_1data_1_1Handle.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html">JSONDeserializer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of the abstract <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html" title="Abstract class for deserializing data.">Deserializer</a> class for deserializing from JSON.  <a href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,6 +156,22 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a9f42432470353dc54ee0b2c2cca2e0ff"><td class="memTemplParams" colspan="2"><a id="a9f42432470353dc54ee0b2c2cca2e0ff"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9f42432470353dc54ee0b2c2cca2e0ff"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a98e172c84b5707ad9c9c452d655e50bf">TriviallyDeserializableWithMethod</a>&lt; T &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;s, T &amp;obj)</td></tr>
+<tr class="separator:a9f42432470353dc54ee0b2c2cca2e0ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1781487f92ae00db5a1573e1e455bad"><td class="memTemplParams" colspan="2"><a id="ac1781487f92ae00db5a1573e1e455bad"></a>
+template&lt;typename T , typename TCtx &gt; </td></tr>
+<tr class="memitem:ac1781487f92ae00db5a1573e1e455bad"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#aab31a17cf941012a96ff67ebf332b029">ContextDeserializableWithMethod</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;s, T &amp;obj, TCtx &amp;&amp;ctx)</td></tr>
+<tr class="separator:ac1781487f92ae00db5a1573e1e455bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a843f936b575f54f4fba3106631913e02"><td class="memTemplParams" colspan="2"><a id="a843f936b575f54f4fba3106631913e02"></a>
+template&lt;typename T , typename TCtx , typename U &gt; </td></tr>
+<tr class="memitem:a843f936b575f54f4fba3106631913e02"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;s, T &amp;obj, std::tuple&lt; TCtx, U &gt; ctx)</td></tr>
+<tr class="separator:a843f936b575f54f4fba3106631913e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7da45c598e00873c61eb19e249d435"><td class="memTemplParams" colspan="2"><a id="afb7da45c598e00873c61eb19e249d435"></a>
+template&lt;typename T , typename TCtx , typename U &gt; </td></tr>
+<tr class="memitem:afb7da45c598e00873c61eb19e249d435"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;s, T &amp;obj, std::tuple&lt; U, TCtx &gt; ctx)</td></tr>
+<tr class="separator:afb7da45c598e00873c61eb19e249d435"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36e4f6faa5a06e9a9c751e5c2387297a"><td class="memTemplParams" colspan="2"><a id="a36e4f6faa5a06e9a9c751e5c2387297a"></a>
 template&lt;typename T , typename TCtx &gt; </td></tr>
 <tr class="memitem:a36e4f6faa5a06e9a9c751e5c2387297a"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>requires</b> (<a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; T &gt; &amp;&amp;!<a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt;) void <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a></td></tr>
@@ -212,6 +231,10 @@ template&lt;typename T &gt; </td></tr>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a1c826bfee48960c31395e84e353c42c2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;d, glm::tquat&lt; T &gt; &amp;value)</td></tr>
 <tr class="separator:a1c826bfee48960c31395e84e353c42c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f97b7522a0492e0c09362105baf8250"><td class="memTemplParams" colspan="2"><a id="a1f97b7522a0492e0c09362105baf8250"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1f97b7522a0492e0c09362105baf8250"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;d, glm::tmat4x4&lt; T &gt; &amp;mat)</td></tr>
+<tr class="separator:a1f97b7522a0492e0c09362105baf8250"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae200f0136376a1a8d58ce902bdd33df1"><td class="memTemplParams" colspan="2"><a id="ae200f0136376a1a8d58ce902bdd33df1"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ae200f0136376a1a8d58ce902bdd33df1"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; T &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;d, std::vector&lt; T &gt; &amp;vec)</td></tr>
@@ -224,21 +247,47 @@ template&lt;&gt; </td></tr>
 template&lt;typename K , typename V &gt; </td></tr>
 <tr class="memitem:a531d95a597530aa146bc432746ff824a"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; K &gt; &amp;&amp;<a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; V &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;d, std::unordered_map&lt; K, V &gt; &amp;dic)</td></tr>
 <tr class="separator:a531d95a597530aa146bc432746ff824a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b6f160793132c243c942f85e286add8"><td class="memTemplParams" colspan="2"><a id="a4b6f160793132c243c942f85e286add8"></a>
+<tr class="memitem:af71f9e9bbc8d29313fb1c8f5d61448dd"><td class="memTemplParams" colspan="2"><a id="af71f9e9bbc8d29313fb1c8f5d61448dd"></a>
 template&lt;typename T , typename TCtx &gt; </td></tr>
-<tr class="memitem:a4b6f160793132c243c942f85e286add8"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;d, std::vector&lt; T &gt; &amp;vec, TCtx ctx)</td></tr>
-<tr class="separator:a4b6f160793132c243c942f85e286add8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af71f9e9bbc8d29313fb1c8f5d61448dd"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;d, std::vector&lt; T &gt; &amp;vec, TCtx &amp;&amp;ctx)</td></tr>
+<tr class="separator:af71f9e9bbc8d29313fb1c8f5d61448dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbc910df5f32456363b827500a1eb7df"><td class="memTemplParams" colspan="2"><a id="adbc910df5f32456363b827500a1eb7df"></a>
 template&lt;typename K , typename V , typename TCtx &gt; </td></tr>
 <tr class="memitem:adbc910df5f32456363b827500a1eb7df"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>requires</b> (<a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; K &gt;||<a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; K, TCtx &gt;) &amp;&amp;(<a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; V &gt;||<a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; V</td></tr>
 <tr class="separator:adbc910df5f32456363b827500a1eb7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89cca550bffdb21d3908d6ca98029fe4"><td class="memItemLeft" align="right" valign="top"><a id="a89cca550bffdb21d3908d6ca98029fe4"></a>
-TCtx void&#160;</td><td class="memItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;d, std::unordered_map&lt; K, V &gt; &amp;dic, TCtx ctx)</td></tr>
-<tr class="separator:a89cca550bffdb21d3908d6ca98029fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23a190af21c5b2e07a8610f4b681278b"><td class="memItemLeft" align="right" valign="top"><a id="a23a190af21c5b2e07a8610f4b681278b"></a>
+TCtx void&#160;</td><td class="memItemRight" valign="bottom"><b>deserialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;d, std::unordered_map&lt; K, V &gt; &amp;dic, TCtx &amp;&amp;ctx)</td></tr>
+<tr class="separator:a23a190af21c5b2e07a8610f4b681278b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2162914e6d40f7ce4f2f7bc3a18b074f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;serializer, const <a class="el" href="classcubos_1_1core_1_1data_1_1Handle.html">Handle</a> &amp;handle, Handle::SerContext ctx, const char *name)</td></tr>
+<tr class="separator:a2162914e6d40f7ce4f2f7bc3a18b074f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd28160457cdbb2abc58be455e82072f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#abd28160457cdbb2abc58be455e82072f">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;deserializer, <a class="el" href="classcubos_1_1core_1_1data_1_1Handle.html">Handle</a> &amp;handle, Handle::DesContext ctx)</td></tr>
+<tr class="separator:abd28160457cdbb2abc58be455e82072f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97f36cce7ff37b16121110f7562a7d23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;serializer, const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">Package</a> &amp;pkg, const char *name)</td></tr>
 <tr class="separator:a97f36cce7ff37b16121110f7562a7d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc2c312cfbc960949e96556afc219b96"><td class="memTemplParams" colspan="2"><a id="afc2c312cfbc960949e96556afc219b96"></a>
+template&lt;typename T , typename TCtx &gt; </td></tr>
+<tr class="memitem:afc2c312cfbc960949e96556afc219b96"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>requires</b> (<a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">TriviallySerializable</a>&lt; T &gt;||<a class="el" href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">ContextSerializable</a>&lt; T, TCtx &gt;) inline <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">Package</a> <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">Package</a></td></tr>
+<tr class="separator:afc2c312cfbc960949e96556afc219b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab433d1a4ac859ebbdfb7c64f97348368"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#ab433d1a4ac859ebbdfb7c64f97348368">parseQB</a> (std::vector&lt; <a class="el" href="structcubos_1_1core_1_1data_1_1QBMatrix.html">QBMatrix</a> &gt; &amp;matrices, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &amp;stream)</td></tr>
 <tr class="separator:ab433d1a4ac859ebbdfb7c64f97348368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74a98e8692ef8512c17d039ec388b5f3"><td class="memTemplParams" colspan="2"><a id="a74a98e8692ef8512c17d039ec388b5f3"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a74a98e8692ef8512c17d039ec388b5f3"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a517e38f98ee34f63d311896e3c0c8b6a">TriviallySerializableWithMethod</a>&lt; T &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a74a98e8692ef8512c17d039ec388b5f3">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const T &amp;obj, const char *name)</td></tr>
+<tr class="memdesc:a74a98e8692ef8512c17d039ec388b5f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define serialize functions for trivially serializable types which define a serialize method. <br /></td></tr>
+<tr class="separator:a74a98e8692ef8512c17d039ec388b5f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ae64749a97ce74935c1512a29fb43a9"><td class="memTemplParams" colspan="2"><a id="a6ae64749a97ce74935c1512a29fb43a9"></a>
+template&lt;typename T , typename TCtx &gt; </td></tr>
+<tr class="memitem:a6ae64749a97ce74935c1512a29fb43a9"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a0f1f364a4630fe3ace8d234867b2d22d">ContextSerializableWithMethod</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a6ae64749a97ce74935c1512a29fb43a9">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const T &amp;obj, TCtx &amp;&amp;ctx, const char *name)</td></tr>
+<tr class="memdesc:a6ae64749a97ce74935c1512a29fb43a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define serialize functions for context serializable types which define a serialize method. <br /></td></tr>
+<tr class="separator:a6ae64749a97ce74935c1512a29fb43a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad35433f382533b85220be539fa4f1dc"><td class="memTemplParams" colspan="2"><a id="aad35433f382533b85220be539fa4f1dc"></a>
+template&lt;typename T , typename TCtx , typename U &gt; </td></tr>
+<tr class="memitem:aad35433f382533b85220be539fa4f1dc"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">ContextSerializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const T &amp;obj, std::tuple&lt; TCtx, U &gt; ctx, const char *name)</td></tr>
+<tr class="separator:aad35433f382533b85220be539fa4f1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6470ee03650037f60286d76ccab1a51a"><td class="memTemplParams" colspan="2"><a id="a6470ee03650037f60286d76ccab1a51a"></a>
+template&lt;typename T , typename TCtx , typename U &gt; </td></tr>
+<tr class="memitem:a6470ee03650037f60286d76ccab1a51a"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">ContextSerializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const T &amp;obj, std::tuple&lt; U, TCtx &gt; ctx, const char *name)</td></tr>
+<tr class="separator:a6470ee03650037f60286d76ccab1a51a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13ac451eb99a8c14fd516e8e676f6981"><td class="memTemplParams" colspan="2"><a id="a13ac451eb99a8c14fd516e8e676f6981"></a>
 template&lt;typename T , typename TCtx &gt; </td></tr>
 <tr class="memitem:a13ac451eb99a8c14fd516e8e676f6981"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>requires</b> (<a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">TriviallySerializable</a>&lt; T &gt; &amp;&amp;!<a class="el" href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">ContextSerializable</a>&lt; T, TCtx &gt;) void <a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a></td></tr>
@@ -298,14 +347,18 @@ template&lt;typename T &gt; </td></tr>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a612058acc7feaf7a402c458c44cc7090"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const glm::tquat&lt; T &gt; &amp;quat, const char *name)</td></tr>
 <tr class="separator:a612058acc7feaf7a402c458c44cc7090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab70cb07857a1fa1219711d4d97ba2d6"><td class="memTemplParams" colspan="2"><a id="aab70cb07857a1fa1219711d4d97ba2d6"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aab70cb07857a1fa1219711d4d97ba2d6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const glm::tmat4x4&lt; T &gt; &amp;mat, const char *name)</td></tr>
+<tr class="separator:aab70cb07857a1fa1219711d4d97ba2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae927e02bd0da5a1f798fcb52a8aa92d8"><td class="memTemplParams" colspan="2"><a id="ae927e02bd0da5a1f798fcb52a8aa92d8"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ae927e02bd0da5a1f798fcb52a8aa92d8"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">TriviallySerializable</a>&lt; T &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const std::vector&lt; T &gt; &amp;vec, const char *name)</td></tr>
 <tr class="separator:ae927e02bd0da5a1f798fcb52a8aa92d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0377b41c154f23b739e667b0ef4550e"><td class="memTemplParams" colspan="2"><a id="ae0377b41c154f23b739e667b0ef4550e"></a>
+<tr class="memitem:ac7b33acd346cf1e631a5c94904f7e832"><td class="memTemplParams" colspan="2"><a id="ac7b33acd346cf1e631a5c94904f7e832"></a>
 template&lt;typename T , typename TCtx &gt; </td></tr>
-<tr class="memitem:ae0377b41c154f23b739e667b0ef4550e"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">ContextSerializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const std::vector&lt; T &gt; &amp;vec, TCtx ctx, const char *name)</td></tr>
-<tr class="separator:ae0377b41c154f23b739e667b0ef4550e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7b33acd346cf1e631a5c94904f7e832"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">ContextSerializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const std::vector&lt; T &gt; &amp;vec, TCtx &amp;&amp;ctx, const char *name)</td></tr>
+<tr class="separator:ac7b33acd346cf1e631a5c94904f7e832"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad57a9ae5dfb2bd774038c884938a7552"><td class="memTemplParams" colspan="2"><a id="ad57a9ae5dfb2bd774038c884938a7552"></a>
 template&lt;typename K , typename V &gt; </td></tr>
 <tr class="memitem:ad57a9ae5dfb2bd774038c884938a7552"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">TriviallySerializable</a>&lt; K &gt; &amp;&amp;<a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">TriviallySerializable</a>&lt; V &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const std::unordered_map&lt; K, V &gt; &amp;dic, const char *name)</td></tr>
@@ -314,13 +367,13 @@ template&lt;typename K , typename V &gt; </td></tr>
 template&lt;typename K , typename V , typename TCtx &gt; </td></tr>
 <tr class="memitem:a7b058335defe97b88075ffd70829bc11"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>requires</b> (<a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">TriviallySerializable</a>&lt; K &gt;||<a class="el" href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">ContextSerializable</a>&lt; K, TCtx &gt;) &amp;&amp;(<a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">TriviallySerializable</a>&lt; V &gt;||<a class="el" href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">ContextSerializable</a>&lt; V</td></tr>
 <tr class="separator:a7b058335defe97b88075ffd70829bc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af59ebcef47fa756b56c4ee575ca87ae7"><td class="memItemLeft" align="right" valign="top"><a id="af59ebcef47fa756b56c4ee575ca87ae7"></a>
-TCtx void&#160;</td><td class="memItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const std::unordered_map&lt; K, V &gt; &amp;dic, TCtx ctx, const char *name)</td></tr>
-<tr class="separator:af59ebcef47fa756b56c4ee575ca87ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad630f8222701203f127f521f929817fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#ad630f8222701203f127f521f929817fc">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;serializer, const <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a> &amp;entity, const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a>, std::string &gt; *map, const char *name)</td></tr>
-<tr class="separator:ad630f8222701203f127f521f929817fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c538e236db1de686c498e62a6d903c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a4c538e236db1de686c498e62a6d903c9">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;deserializer, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a> &amp;entity, const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a>, std::string &gt; *map)</td></tr>
-<tr class="separator:a4c538e236db1de686c498e62a6d903c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abee2dd50a21f6ef022464102e0151012"><td class="memItemLeft" align="right" valign="top"><a id="abee2dd50a21f6ef022464102e0151012"></a>
+TCtx void&#160;</td><td class="memItemRight" valign="bottom"><b>serialize</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;s, const std::unordered_map&lt; K, V &gt; &amp;dic, TCtx &amp;&amp;ctx, const char *name)</td></tr>
+<tr class="separator:abee2dd50a21f6ef022464102e0151012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a201405228a3865021550350d9d77e014"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a201405228a3865021550350d9d77e014">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;serializer, const <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a> &amp;entity, const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a>, std::string &gt; &amp;map, const char *name)</td></tr>
+<tr class="separator:a201405228a3865021550350d9d77e014"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d2de9315ba27e737384caf908a5b58a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a8d2de9315ba27e737384caf908a5b58a">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;deserializer, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a> &amp;entity, const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a>, std::string &gt; &amp;map)</td></tr>
+<tr class="separator:a8d2de9315ba27e737384caf908a5b58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a827286054d3615075443c1cd3941ea7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a827286054d3615075443c1cd3941ea7f">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;serializer, const <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">gl::Grid</a> &amp;grid, const char *name)</td></tr>
 <tr class="separator:a827286054d3615075443c1cd3941ea7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9135006950d4bd8826c8babe6c027f2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a9135006950d4bd8826c8babe6c027f2f">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;deserializer, <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">gl::Grid</a> &amp;grid)</td></tr>
@@ -356,6 +409,14 @@ Variables</h2></td></tr>
 <tr class="memitem:a6c5f870db3ff0d0b463dd3e5b4c89d96"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a></td></tr>
 <tr class="memdesc:a6c5f870db3ff0d0b463dd3e5b4c89d96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for deserializable objects which require a context to be deserialized.  <a href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">More...</a><br /></td></tr>
 <tr class="separator:a6c5f870db3ff0d0b463dd3e5b4c89d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98e172c84b5707ad9c9c452d655e50bf"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a98e172c84b5707ad9c9c452d655e50bf"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a98e172c84b5707ad9c9c452d655e50bf">TriviallyDeserializableWithMethod</a></td></tr>
+<tr class="memdesc:a98e172c84b5707ad9c9c452d655e50bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for deserializable objects which are trivial to deserialize and define a deserialize method.  <a href="namespacecubos_1_1core_1_1data.html#a98e172c84b5707ad9c9c452d655e50bf">More...</a><br /></td></tr>
+<tr class="separator:a98e172c84b5707ad9c9c452d655e50bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab31a17cf941012a96ff67ebf332b029"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TCtx &gt; </td></tr>
+<tr class="memitem:aab31a17cf941012a96ff67ebf332b029"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#aab31a17cf941012a96ff67ebf332b029">ContextDeserializableWithMethod</a></td></tr>
+<tr class="memdesc:aab31a17cf941012a96ff67ebf332b029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for deserializable objects which require a context to be deserialized and define a deserialize method.  <a href="namespacecubos_1_1core_1_1data.html#aab31a17cf941012a96ff67ebf332b029">More...</a><br /></td></tr>
+<tr class="separator:aab31a17cf941012a96ff67ebf332b029"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4616a179c03fe1fc8bd7f554db6c03a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:af4616a179c03fe1fc8bd7f554db6c03a"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">TriviallySerializable</a></td></tr>
 <tr class="memdesc:af4616a179c03fe1fc8bd7f554db6c03a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for serializable objects which are trivial to serialize.  <a href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">More...</a><br /></td></tr>
@@ -364,12 +425,20 @@ Variables</h2></td></tr>
 <tr class="memitem:a612be5b2a47e124e2450daa82ae4bdab"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">ContextSerializable</a></td></tr>
 <tr class="memdesc:a612be5b2a47e124e2450daa82ae4bdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for serializable objects which require a context to be serialized.  <a href="namespacecubos_1_1core_1_1data.html#a612be5b2a47e124e2450daa82ae4bdab">More...</a><br /></td></tr>
 <tr class="separator:a612be5b2a47e124e2450daa82ae4bdab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a517e38f98ee34f63d311896e3c0c8b6a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a517e38f98ee34f63d311896e3c0c8b6a"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a517e38f98ee34f63d311896e3c0c8b6a">TriviallySerializableWithMethod</a></td></tr>
+<tr class="memdesc:a517e38f98ee34f63d311896e3c0c8b6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for serializable objects which are trivial to serialize and define a serialize method.  <a href="namespacecubos_1_1core_1_1data.html#a517e38f98ee34f63d311896e3c0c8b6a">More...</a><br /></td></tr>
+<tr class="separator:a517e38f98ee34f63d311896e3c0c8b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f1f364a4630fe3ace8d234867b2d22d"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TCtx &gt; </td></tr>
+<tr class="memitem:a0f1f364a4630fe3ace8d234867b2d22d"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a0f1f364a4630fe3ace8d234867b2d22d">ContextSerializableWithMethod</a></td></tr>
+<tr class="memdesc:a0f1f364a4630fe3ace8d234867b2d22d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept for serializable objects which require a context to be serialized and define a serialize method.  <a href="namespacecubos_1_1core_1_1data.html#a0f1f364a4630fe3ace8d234867b2d22d">More...</a><br /></td></tr>
+<tr class="separator:a0f1f364a4630fe3ace8d234867b2d22d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains the virtual file and serialization systems, and other data related utilities. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a4c538e236db1de686c498e62a6d903c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c538e236db1de686c498e62a6d903c9">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[1/7]</span></h2>
+<a id="a8d2de9315ba27e737384caf908a5b58a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d2de9315ba27e737384caf908a5b58a">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -389,7 +458,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a>, std::string &gt; *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a>, std::string &gt; &amp;&#160;</td>
           <td class="paramname"><em>map</em>&#160;</td>
         </tr>
         <tr>
@@ -411,7 +480,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="ae14a322ae8e18a98eaa54c3df7797729"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae14a322ae8e18a98eaa54c3df7797729">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae14a322ae8e18a98eaa54c3df7797729">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -446,7 +515,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a9135006950d4bd8826c8babe6c027f2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9135006950d4bd8826c8babe6c027f2f">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9135006950d4bd8826c8babe6c027f2f">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -481,7 +550,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a0c5e3540e2d531a1498c885183d14e68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c5e3540e2d531a1498c885183d14e68">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c5e3540e2d531a1498c885183d14e68">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -516,7 +585,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a2dc080f6aab288573be5d4259f9717e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dc080f6aab288573be5d4259f9717e0">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc080f6aab288573be5d4259f9717e0">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -551,7 +620,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a65ac97ec94c250cc0eb77c6a4ce6ef1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65ac97ec94c250cc0eb77c6a4ce6ef1b">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[6/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a65ac97ec94c250cc0eb77c6a4ce6ef1b">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -585,8 +654,50 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="abd28160457cdbb2abc58be455e82072f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd28160457cdbb2abc58be455e82072f">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::data::deserialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;&#160;</td>
+          <td class="paramname"><em>deserializer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Handle.html">Handle</a> &amp;&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Handle::DesContext&#160;</td>
+          <td class="paramname"><em>ctx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Deserializes the handle from the given deserializer. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deserializer</td><td>The deserializer to use. </td></tr>
+    <tr><td class="paramname">handle</td><td>The handle to deserialize. </td></tr>
+    <tr><td class="paramname">ctx</td><td>The deserialization context. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a6dfe86d1bf9f43db221aaf672f9073c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6dfe86d1bf9f43db221aaf672f9073c9">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[7/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dfe86d1bf9f43db221aaf672f9073c9">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[8/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -656,8 +767,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ad630f8222701203f127f521f929817fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad630f8222701203f127f521f929817fc">&#9670;&nbsp;</a></span>serialize() <span class="overload">[1/8]</span></h2>
+<a id="a201405228a3865021550350d9d77e014"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a201405228a3865021550350d9d77e014">&#9670;&nbsp;</a></span>serialize() <span class="overload">[1/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -677,7 +788,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a>, std::string &gt; *&#160;</td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">ecs::Entity</a>, std::string &gt; &amp;&#160;</td>
           <td class="paramname"><em>map</em>, </td>
         </tr>
         <tr>
@@ -706,7 +817,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="afa77a56485be6b9757f17780f2734059"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa77a56485be6b9757f17780f2734059">&#9670;&nbsp;</a></span>serialize() <span class="overload">[2/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afa77a56485be6b9757f17780f2734059">&#9670;&nbsp;</a></span>serialize() <span class="overload">[2/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -748,7 +859,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a827286054d3615075443c1cd3941ea7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a827286054d3615075443c1cd3941ea7f">&#9670;&nbsp;</a></span>serialize() <span class="overload">[3/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a827286054d3615075443c1cd3941ea7f">&#9670;&nbsp;</a></span>serialize() <span class="overload">[3/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -790,7 +901,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a24bcb0612242d6f862c0673496fbe3cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24bcb0612242d6f862c0673496fbe3cd">&#9670;&nbsp;</a></span>serialize() <span class="overload">[4/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24bcb0612242d6f862c0673496fbe3cd">&#9670;&nbsp;</a></span>serialize() <span class="overload">[4/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -832,7 +943,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a3e50c0d181734038683dfed8a6c1ad47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e50c0d181734038683dfed8a6c1ad47">&#9670;&nbsp;</a></span>serialize() <span class="overload">[5/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e50c0d181734038683dfed8a6c1ad47">&#9670;&nbsp;</a></span>serialize() <span class="overload">[5/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -874,7 +985,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="adb8cafb39417f95a63ca4c6d264b5c44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb8cafb39417f95a63ca4c6d264b5c44">&#9670;&nbsp;</a></span>serialize() <span class="overload">[6/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adb8cafb39417f95a63ca4c6d264b5c44">&#9670;&nbsp;</a></span>serialize() <span class="overload">[6/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -915,8 +1026,57 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a2162914e6d40f7ce4f2f7bc3a18b074f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2162914e6d40f7ce4f2f7bc3a18b074f">&#9670;&nbsp;</a></span>serialize() <span class="overload">[7/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::data::serialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;&#160;</td>
+          <td class="paramname"><em>serializer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1Handle.html">Handle</a> &amp;&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Handle::SerContext&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Serializes the handle to the given serializer. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">serializer</td><td>The serializer to use. </td></tr>
+    <tr><td class="paramname">handle</td><td>The handle to serialize. </td></tr>
+    <tr><td class="paramname">ctx</td><td>The serialization context. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the handle. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a97f36cce7ff37b16121110f7562a7d23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97f36cce7ff37b16121110f7562a7d23">&#9670;&nbsp;</a></span>serialize() <span class="overload">[7/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a97f36cce7ff37b16121110f7562a7d23">&#9670;&nbsp;</a></span>serialize() <span class="overload">[8/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -959,7 +1119,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="ae0dcfcd14e3d8077523c6cbadf30f0e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0dcfcd14e3d8077523c6cbadf30f0e2">&#9670;&nbsp;</a></span>serialize() <span class="overload">[8/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0dcfcd14e3d8077523c6cbadf30f0e2">&#9670;&nbsp;</a></span>serialize() <span class="overload">[9/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1012,7 +1172,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= requires(Deserializer&amp; s, T&amp; obj, TCtx ctx)</div>
+<b>Initial value:</b><div class="fragment"><div class="line">= requires(Deserializer&amp; s, T&amp; obj, TCtx&amp;&amp; ctx)</div>
 <div class="line">    {</div>
 <div class="line">        {</div>
 <div class="line">            deserialize(s, obj, ctx)</div>
@@ -1020,6 +1180,28 @@ Variables</h2></td></tr>
 <div class="line">    }</div>
 </div><!-- fragment -->
 <p>Concept for deserializable objects which require a context to be deserialized. </p>
+
+</div>
+</div>
+<a id="aab31a17cf941012a96ff67ebf332b029"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab31a17cf941012a96ff67ebf332b029">&#9670;&nbsp;</a></span>ContextDeserializableWithMethod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">concept ContextDeserializableWithMethod</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= requires(Deserializer&amp; s, T&amp; obj, TCtx&amp;&amp; ctx)</div>
+<div class="line">    {</div>
+<div class="line">        {</div>
+<div class="line">            obj.deserialize(s, ctx)</div>
+<div class="line">            } -&gt; std::same_as&lt;void&gt;;</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p>Concept for deserializable objects which require a context to be deserialized and define a deserialize method. </p>
 
 </div>
 </div>
@@ -1034,14 +1216,36 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= requires(Serializer&amp; s, <span class="keyword">const</span> T&amp; obj, TCtx ctx, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<b>Initial value:</b><div class="fragment"><div class="line">= requires(Serializer&amp; s, <span class="keyword">const</span> T&amp; obj, TCtx&amp;&amp; ctx, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
 <div class="line">    {</div>
 <div class="line">        {</div>
-<div class="line">            <a class="code" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a>(s, obj, ctx, name)</div>
+<div class="line">            <a class="code" href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">serialize</a>(s, obj, ctx, name)</div>
 <div class="line">            } -&gt; std::same_as&lt;void&gt;;</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
 <p>Concept for serializable objects which require a context to be serialized. </p>
+
+</div>
+</div>
+<a id="a0f1f364a4630fe3ace8d234867b2d22d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f1f364a4630fe3ace8d234867b2d22d">&#9670;&nbsp;</a></span>ContextSerializableWithMethod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">concept ContextSerializableWithMethod</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= requires(Serializer&amp; s, <span class="keyword">const</span> T&amp; obj, TCtx&amp;&amp; ctx, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<div class="line">    {</div>
+<div class="line">        {</div>
+<div class="line">            obj.serialize(s, ctx, name)</div>
+<div class="line">            } -&gt; std::same_as&lt;void&gt;;</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p>Concept for serializable objects which require a context to be serialized and define a serialize method. </p>
 
 </div>
 </div>
@@ -1067,6 +1271,28 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a98e172c84b5707ad9c9c452d655e50bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98e172c84b5707ad9c9c452d655e50bf">&#9670;&nbsp;</a></span>TriviallyDeserializableWithMethod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">concept TriviallyDeserializableWithMethod</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= requires(Deserializer&amp; s, T&amp; obj)</div>
+<div class="line">    {</div>
+<div class="line">        {</div>
+<div class="line">            obj.deserialize(s)</div>
+<div class="line">            } -&gt; std::same_as&lt;void&gt;;</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p>Concept for deserializable objects which are trivial to deserialize and define a deserialize method. </p>
+
+</div>
+</div>
 <a id="af4616a179c03fe1fc8bd7f554db6c03a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af4616a179c03fe1fc8bd7f554db6c03a">&#9670;&nbsp;</a></span>TriviallySerializable</h2>
 
@@ -1081,7 +1307,7 @@ Variables</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line">= requires(Serializer&amp; s, <span class="keyword">const</span> T&amp; obj, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
 <div class="line">    {</div>
 <div class="line">        {</div>
-<div class="line">            <a class="code" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a>(s, obj, name)</div>
+<div class="line">            <a class="code" href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">serialize</a>(s, obj, name)</div>
 <div class="line">            } -&gt; std::same_as&lt;void&gt;;</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
@@ -1089,9 +1315,31 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a517e38f98ee34f63d311896e3c0c8b6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a517e38f98ee34f63d311896e3c0c8b6a">&#9670;&nbsp;</a></span>TriviallySerializableWithMethod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">concept TriviallySerializableWithMethod</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= requires(Serializer&amp; s, <span class="keyword">const</span> T&amp; obj, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<div class="line">    {</div>
+<div class="line">        {</div>
+<div class="line">            obj.serialize(s, name)</div>
+<div class="line">            } -&gt; std::same_as&lt;void&gt;;</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p>Concept for serializable objects which are trivial to serialize and define a serialize method. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a97f36cce7ff37b16121110f7562a7d23"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Package &amp;pkg, const char *name)</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a2162914e6d40f7ce4f2f7bc3a18b074f"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Handle &amp;handle, Handle::SerContext ctx, const char *name)</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

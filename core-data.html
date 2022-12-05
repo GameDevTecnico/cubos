@@ -141,7 +141,7 @@ Serialization</h1>
 <div class="line"><span class="comment">// Fruit is defined in another namespace.</span></div>
 <div class="line"><span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div>
 <div class="line">{</div>
-<div class="line">    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> Fruit&amp; f, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<div class="line">    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> Fruit&amp; f, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
 <div class="line">    {</div>
 <div class="line">        s.beginObject(name);</div>
 <div class="line">        s.write(f.name, <span class="stringliteral">&quot;name&quot;</span>);</div>
@@ -252,7 +252,7 @@ Context serializable types</h2>
 <div class="fragment"><div class="line"><span class="comment">// Once again, we must put these in the right namespace.</span></div>
 <div class="line"><span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div>
 <div class="line">{</div>
-<div class="line">    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> Human&amp; h, <span class="keyword">const</span> SerializationMap&lt;Human*, uint32_t&gt;&amp; map, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<div class="line">    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> Human&amp; h, <span class="keyword">const</span> SerializationMap&lt;Human*, uint32_t&gt;&amp; map, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
 <div class="line">    {</div>
 <div class="line">        s.beginObject(name);</div>
 <div class="line">        s.write(h.name, <span class="stringliteral">&quot;name&quot;</span>);</div>
@@ -316,7 +316,7 @@ Going further</h2>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a97f36cce7ff37b16121110f7562a7d23"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Package &amp;pkg, const char *name)</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a2162914e6d40f7ce4f2f7bc3a18b074f"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Handle &amp;handle, Handle::SerContext ctx, const char *name)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1Stream_html_aa28b8b5cd53eed1267b62da87e053a76"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1Stream.html#aa28b8b5cd53eed1267b62da87e053a76">cubos::core::memory::Stream::stdOut</a></div><div class="ttdeci">static Stream &amp; stdOut</div><div class="ttdoc">Stream wrapper for stdout.</div><div class="ttdef"><b>Definition:</b> stream.hpp:28</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1YAMLSerializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1YAMLSerializer.html">cubos::core::data::YAMLSerializer</a></div><div class="ttdoc">Implementation of the abstract Serializer class for serializing to YAML.</div><div class="ttdef"><b>Definition:</b> yaml_serializer.hpp:12</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_html"><div class="ttname"><a href="namespacecubos_1_1core.html">cubos::core</a></div><div class="ttdoc">Namespace of the CUBOS. core library.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>

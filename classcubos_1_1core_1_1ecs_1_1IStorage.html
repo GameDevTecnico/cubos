@@ -116,6 +116,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:add53e175e501082566a003a639e4178f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html#add53e175e501082566a003a639e4178f">erase</a> (uint32_t index)=0</td></tr>
 <tr class="memdesc:add53e175e501082566a003a639e4178f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a value from the storage.  <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html#add53e175e501082566a003a639e4178f">More...</a><br /></td></tr>
 <tr class="separator:add53e175e501082566a003a639e4178f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac93ce4735eba52788efd728da62831e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html#aac93ce4735eba52788efd728da62831e">pack</a> (uint32_t index, const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;map, data::Handle::SerContext handleCtx) const =0</td></tr>
+<tr class="memdesc:aac93ce4735eba52788efd728da62831e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packages a value. If the value doesn't exist, undefined behavior will occur.  <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html#aac93ce4735eba52788efd728da62831e">More...</a><br /></td></tr>
+<tr class="separator:aac93ce4735eba52788efd728da62831e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf0800cc3a5061678b5d0e045041d8f2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html#abf0800cc3a5061678b5d0e045041d8f2">unpack</a> (uint32_t index, const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;package, const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;map, data::Handle::DesContext handleCtx)=0</td></tr>
+<tr class="memdesc:abf0800cc3a5061678b5d0e045041d8f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpackages a value.  <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html#abf0800cc3a5061678b5d0e045041d8f2">More...</a><br /></td></tr>
+<tr class="separator:abf0800cc3a5061678b5d0e045041d8f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f14291b1483666feb2b405b8f66f629"><td class="memItemLeft" align="right" valign="top"><a id="a3f14291b1483666feb2b405b8f66f629"></a>
+virtual std::type_index&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html#a3f14291b1483666feb2b405b8f66f629">type</a> () const =0</td></tr>
+<tr class="memdesc:a3f14291b1483666feb2b405b8f66f629"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type the components being stored here. <br /></td></tr>
+<tr class="separator:a3f14291b1483666feb2b405b8f66f629"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html" title="IStorage is an abstract parent class for all storages.">IStorage</a> is an abstract parent class for all storages. </p>
@@ -153,6 +163,121 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p>Implemented in <a class="el" href="classcubos_1_1core_1_1ecs_1_1MapStorage.html#a764df9d21523541086f0b45aed83068a">MapStorage&lt; T &gt;</a>, <a class="el" href="classcubos_1_1core_1_1ecs_1_1NullStorage.html#a764df9d21523541086f0b45aed83068a">NullStorage&lt; T &gt;</a>, and <a class="el" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a764df9d21523541086f0b45aed83068a">VecStorage&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aac93ce4735eba52788efd728da62831e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac93ce4735eba52788efd728da62831e">&#9670;&nbsp;</a></span>pack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> pack </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data::Handle::SerContext&#160;</td>
+          <td class="paramname"><em>handleCtx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Packages a value. If the value doesn't exist, undefined behavior will occur. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the value to package. </td></tr>
+    <tr><td class="paramname">map</td><td>Serialization map needed for serialization. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The packaged value. </dd></dl>
+
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#a02998842c0801cc01b6dbf8b6a86c18c">Storage&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="abf0800cc3a5061678b5d0e045041d8f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf0800cc3a5061678b5d0e045041d8f2">&#9670;&nbsp;</a></span>unpack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool unpack </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;&#160;</td>
+          <td class="paramname"><em>package</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">data::SerializationMap</a>&lt; <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">data::Handle::DesContext&#160;</td>
+          <td class="paramname"><em>handleCtx</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unpackages a value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the value to unpackage. </td></tr>
+    <tr><td class="paramname">package</td><td>The package to unpackage. </td></tr>
+    <tr><td class="paramname">map</td><td>Serialization map needed for deserialization. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the value was unpackaged successfully, false otherwise. </dd></dl>
+
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#a4e03f808a8531596ae071e45df9c3263">Storage&lt; T &gt;</a>.</p>
 
 </div>
 </div>

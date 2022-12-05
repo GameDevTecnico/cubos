@@ -62,12 +62,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classcubos_1_1core_1_1data_1_1Package.html#a1d1cfd8ffb84e947f82999c682b666a7a6669348b484e3008dca2bfa8e85e40b5",
-"classcubos_1_1core_1_1ecs_1_1IStorage.html#add53e175e501082566a003a639e4178f",
-"classcubos_1_1core_1_1io_1_1ButtonPress.html",
-"classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a829d7114e3ed38c555af0fb4e974a6f6",
-"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a911f4daadd0450a091a589eb27d02f52",
-"yaml__deserializer_8hpp_source.html"
+"classcubos_1_1core_1_1data_1_1JSONSerializer.html#abe760d52e3fed38b55f64c2e3910c517",
+"classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a9188bca948fac416ba2b7889ca644b52",
+"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#adae2e6f8cfce6ec772163d708ec649a1",
+"classcubos_1_1engine_1_1gl_1_1Frame.html#aa1f8d4dcac112e6f8546f7df3aa54fb6",
+"namespacecubos_1_1core_1_1data_1_1impl.html",
+"structcubos_1_1core_1_1gl_1_1Texture3DDesc.html#a02bed8590a9ddf520e58a060059518ec"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

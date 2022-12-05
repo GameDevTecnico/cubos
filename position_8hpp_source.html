@@ -93,27 +93,22 @@ $(document).ready(function(){initNavTree('position_8hpp_source.html',''); initRe
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_ENGINE_ECS_POSITION_HPP</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_ENGINE_ECS_POSITION_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/ecs/vec_storage.hpp&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;components/base.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>cubos::engine::ecs</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1ecs_1_1Position.html">   11</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structcubos_1_1engine_1_1ecs_1_1Position.html">Position</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1ecs_1_1Position.html">   11</a></span>&#160;    <span class="keyword">struct </span>[[cubos::component(&quot;cubos/position&quot;, VecStorage)]] <a class="code" href="structcubos_1_1engine_1_1ecs_1_1Position.html">Position</a></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keyword">using</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html">Storage</a> = <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html">core::ecs::VecStorage&lt;Position&gt;</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1ecs_1_1Position.html#a37dbc736c1553c6968b1118e4e93ff78">   15</a></span>&#160;        glm::vec3 <a class="code" href="structcubos_1_1engine_1_1ecs_1_1Position.html#a37dbc736c1553c6968b1118e4e93ff78">vec</a> = {0.0f, 0.0f, 0.0f}; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    };</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <span class="comment">// namespace cubos::engine::ecs</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif // CUBOS_ENGINE_ECS_POSITION_HPP</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1ecs_1_1Position.html#a37dbc736c1553c6968b1118e4e93ff78">   13</a></span>&#160;        glm::vec3 vec = {0.0f, 0.0f, 0.0f}; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    };</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;} <span class="comment">// namespace cubos::engine::ecs</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif // CUBOS_ENGINE_ECS_POSITION_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astructcubos_1_1engine_1_1ecs_1_1Position_html_a37dbc736c1553c6968b1118e4e93ff78"><div class="ttname"><a href="structcubos_1_1engine_1_1ecs_1_1Position.html#a37dbc736c1553c6968b1118e4e93ff78">cubos::engine::ecs::Position::vec</a></div><div class="ttdeci">glm::vec3 vec</div><div class="ttdoc">The position of the entity.</div><div class="ttdef"><b>Definition:</b> position.hpp:15</div></div>
 <div class="ttc" id="astructcubos_1_1engine_1_1ecs_1_1Position_html"><div class="ttname"><a href="structcubos_1_1engine_1_1ecs_1_1Position.html">cubos::engine::ecs::Position</a></div><div class="ttdoc">Assigns a position to an entity.</div><div class="ttdef"><b>Definition:</b> position.hpp:11</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html">cubos::core::ecs::VecStorage</a></div><div class="ttdoc">VecStorage is a Storage implementation that uses a STL vector, this is best for components that are u...</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:12</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">

@@ -178,7 +178,7 @@ Generate</h1>
 <div class="line"><span class="comment">// The serialization functions must be defined in this namespace.</span></div>
 <div class="line"><span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div>
 <div class="line">{</div>
-<div class="line">    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> MyComponent&amp; c, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<div class="line">    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> MyComponent&amp; c, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
 <div class="line">    {</div>
 <div class="line">        s.beginObject(name);</div>
 <div class="line">        s.write(c.x);</div>
@@ -231,10 +231,10 @@ CMake</h2>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> blueprint.hpp:10</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> blueprint.hpp:11</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1gl_html_a1d1cfd8ffb84e947f82999c682b666a7"><div class="ttname"><a href="namespacecubos_1_1core_1_1gl.html#a1d1cfd8ffb84e947f82999c682b666a7">cubos::core::gl::Type</a></div><div class="ttdeci">Type</div><div class="ttdoc">Data type.</div><div class="ttdef"><b>Definition:</b> render_device.hpp:83</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1FileSystem_html_a24316e70715c3ebe4e53e13f2d01f909"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">cubos::core::data::FileSystem::mount</a></div><div class="ttdeci">static void mount(std::string_view path, std::shared_ptr&lt; Archive &gt; archive)</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a97f36cce7ff37b16121110f7562a7d23"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a97f36cce7ff37b16121110f7562a7d23">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Package &amp;pkg, const char *name)</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a2162914e6d40f7ce4f2f7bc3a18b074f"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Handle &amp;handle, Handle::SerContext ctx, const char *name)</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->

@@ -1,9 +1,4 @@
 var searchData=
 [
-  ['vecstorage_800',['VecStorage',['../classcubos_1_1core_1_1ecs_1_1VecStorage.html',1,'cubos::core::ecs']]],
-  ['vertex_801',['Vertex',['../structcubos_1_1core_1_1gl_1_1Vertex.html',1,'cubos::core::gl']]],
-  ['vertexarray_802',['VertexArray',['../classcubos_1_1core_1_1gl_1_1impl_1_1VertexArray.html',1,'cubos::core::gl::impl']]],
-  ['vertexarraydesc_803',['VertexArrayDesc',['../structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html',1,'cubos::core::gl']]],
-  ['vertexbuffer_804',['VertexBuffer',['../classcubos_1_1core_1_1gl_1_1impl_1_1VertexBuffer.html',1,'cubos::core::gl::impl']]],
-  ['vertexelement_805',['VertexElement',['../structcubos_1_1core_1_1gl_1_1VertexElement.html',1,'cubos::core::gl']]]
+  ['unpackager_821',['Unpackager',['../classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html',1,'cubos::core::data::impl']]]
 ];

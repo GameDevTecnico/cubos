@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['loader_724',['Loader',['../classcubos_1_1engine_1_1data_1_1Loader.html',1,'cubos::engine::data']]],
-  ['localtoworld_725',['LocalToWorld',['../structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html',1,'cubos::engine::ecs']]]
+  ['jsondeserializer_743',['JSONDeserializer',['../classcubos_1_1core_1_1data_1_1JSONDeserializer.html',1,'cubos::core::data']]],
+  ['jsonserializer_744',['JSONSerializer',['../classcubos_1_1core_1_1data_1_1JSONSerializer.html',1,'cubos::core::data']]]
 ];
