@@ -7,6 +7,7 @@
 #include <cubos/engine/data/grid.hpp>
 
 #include <glm/glm.hpp>
+#include <string>
 
 namespace cubos::engine::ecs
 {

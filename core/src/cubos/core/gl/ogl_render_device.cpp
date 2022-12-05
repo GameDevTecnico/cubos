@@ -11,6 +11,8 @@
 using namespace cubos::core;
 using namespace cubos::core::gl;
 
+#define LOG_GL_ERROR(err) CUBOS_ERROR("OpenGL error: {}", err)
+
 // Converts a texture format into the necessary GL parameters
 static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, GLenum& format, GLenum& type)
 {
@@ -1071,8 +1073,7 @@ public:
             GLenum glErr = glGetError();
             if (glErr != 0)
             {
-                logError("OGLShaderPipeline::getBindingPoint() failed: glUniformBlockBinding caused OpenGL error {}",
-                         glErr);
+                LOG_GL_ERROR(glErr);
                 return nullptr;
             }
 
@@ -1091,9 +1092,7 @@ public:
             GLenum glErr = glGetError();
             if (glErr != 0)
             {
-                logError(
-                    "OGLShaderPipeline::getBindingPoint() failed: glShaderStorageBlockBinding caused OpenGL error {}",
-                    glErr);
+                LOG_GL_ERROR(glErr);
                 return nullptr;
             }
 
@@ -1130,13 +1129,13 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     // Validate arguments
     if (desc.targetCount == 0)
     {
-        logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer must have at least one render target");
+        CUBOS_ERROR("Framebuffer must have at least one render target");
         return nullptr;
     }
     else if (desc.targetCount > CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT)
     {
-        logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer can only have at most {} render targets",
-                 CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT);
+        CUBOS_ERROR("Framebuffer can only have at most {} render targets",
+                    CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT);
         return nullptr;
     }
 
@@ -1147,28 +1146,28 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         case FramebufferDesc::TargetType::CubeMap:
             if (desc.targets[i].getCubeMapTarget().handle == nullptr)
             {
-                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                CUBOS_ERROR("Target {} is nullptr", i);
                 return nullptr;
             }
             break;
         case FramebufferDesc::TargetType::Texture2D:
             if (desc.targets[i].getTexture2DTarget().handle == nullptr)
             {
-                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                CUBOS_ERROR("Target {} is nullptr", i);
                 return nullptr;
             }
             break;
         case FramebufferDesc::TargetType::CubeMapArray:
             if (desc.targets[i].getCubeMapArrayTarget().handle == nullptr)
             {
-                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                CUBOS_ERROR("Target {} is nullptr", i);
                 return nullptr;
             }
             break;
         case FramebufferDesc::TargetType::Texture2DArray:
             if (desc.targets[i].getTexture2DArrayTarget().handle == nullptr)
             {
-                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                CUBOS_ERROR("Target {} is nullptr", i);
                 return nullptr;
             }
             break;
@@ -1273,7 +1272,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         if (formatError)
         {
             glDeleteFramebuffers(1, &id);
-            logError("OGLRenderDevice::createFramebuffer() failed: invalid depth stencil target format");
+            CUBOS_ERROR("Invalid depth stencil target format");
             return nullptr;
         }
     }
@@ -1286,7 +1285,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     if (glErr != 0)
     {
         glDeleteFramebuffers(1, &id);
-        logError("OGLRenderDevice::createFramebuffer() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1294,8 +1293,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
         glDeleteFramebuffers(1, &id);
-        logError(
-            "OGLRenderDevice::createFramebuffer(): glCheckFramebufferStatus didn't return GL_FRAMEBUFFER_COMPLETE");
+        CUBOS_ERROR("glCheckFramebufferStatus didn't return GL_FRAMEBUFFER_COMPLETE");
         return nullptr;
     }
 
@@ -1493,7 +1491,7 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
     if (glErr != 0)
     {
         glDeleteSamplers(1, &id);
-        logError("OGLRenderDevice::createSampler() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1505,7 +1503,7 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
     if (desc.format == TextureFormat::Depth16 || desc.format == TextureFormat::Depth32 ||
         desc.format == TextureFormat::Depth24Stencil8 || desc.format == TextureFormat::Depth32Stencil8)
     {
-        logError("OGLRenderDevice::createTexture1D() failed: depth/stencil formats are not supported on 1D textures");
+        CUBOS_ERROR("Depth/stencil formats are not supported on 1D textures");
         return nullptr;
     }
 
@@ -1513,7 +1511,7 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createTexture1D() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1534,7 +1532,7 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture1D() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1547,7 +1545,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createTexture2D() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1571,7 +1569,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture2D() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1584,7 +1582,7 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createTexture2DArray() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1614,7 +1612,7 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture2DArray() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1626,7 +1624,7 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     if (desc.format == TextureFormat::Depth16 || desc.format == TextureFormat::Depth32 ||
         desc.format == TextureFormat::Depth24Stencil8 || desc.format == TextureFormat::Depth32Stencil8)
     {
-        logError("OGLRenderDevice::createTexture3D() failed: depth/stencil formats are not supported on 3D textures");
+        CUBOS_ERROR("Depth/stencil formats are not supported on 3D textures");
         return nullptr;
     }
 
@@ -1634,7 +1632,7 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createTexture3D() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1658,7 +1656,7 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture3D() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1671,7 +1669,7 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createCubeMap() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1706,7 +1704,7 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createCubeMap() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1719,7 +1717,7 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createCubeMapArray() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1753,7 +1751,7 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture2DArray() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1787,7 +1785,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
     if (glErr != 0)
     {
         glDeleteBuffers(1, &id);
-        logError("OGLRenderDevice::createConstantBuffer() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1836,7 +1834,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
     if (glErr != 0)
     {
         glDeleteBuffers(1, &id);
-        logError("OGLRenderDevice::createIndexBuffer() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1878,7 +1876,7 @@ VertexBuffer OGLRenderDevice::createVertexBuffer(size_t size, const void* data, 
     if (glErr != 0)
     {
         glDeleteBuffers(1, &id);
-        logError("OGLRenderDevice::createVertexBuffer() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1909,8 +1907,7 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
         if (loc == -1)
         {
             glDeleteVertexArrays(1, &id);
-            logError("OGLRenderDevice::createVertexArray() failed: couldn't find vertex element with name '{}'",
-                     desc.elements[i].name);
+            CUBOS_ERROR("Could not find vertex element with name '{}'", desc.elements[i].name);
             return nullptr;
         }
 
@@ -1996,7 +1993,7 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
     if (glErr != 0)
     {
         glDeleteVertexArrays(1, &id);
-        logError("OGLRenderDevice::createVertexArray() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -2040,7 +2037,7 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
         GLchar infoLog[512];
         glGetShaderInfoLog(id, sizeof(infoLog), NULL, infoLog);
         glDeleteShader(id);
-        logError("OGLRenderDevice::createShaderStage() failed: shader compilation failed, info log: {}", infoLog);
+        CUBOS_ERROR("Could not compile shader: {}", infoLog);
         return nullptr;
     }
 
@@ -2048,7 +2045,8 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     GLenum glErr = glGetError();
     if (glErr != 0)
     {
-        logError("OGLRenderDevice::createShaderStage() failed: OpenGL error {}", glErr);
+        glDeleteShader(id);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -2074,7 +2072,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
         GLchar infoLog[512];
         glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
     }
 
@@ -2083,7 +2081,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     if (glErr != 0)
     {
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -2111,7 +2109,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
         GLchar infoLog[512];
         glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
     }
 
@@ -2120,7 +2118,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     if (glErr != 0)
     {
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -2144,7 +2142,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _cs)
         GLchar infoLog[512];
         glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
     }
 
@@ -2153,7 +2151,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _cs)
     if (glErr != 0)
     {
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 

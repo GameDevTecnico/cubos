@@ -30,6 +30,7 @@ void World::destroy(Entity entity)
 {
     this->entityManager.destroy(entity);
     this->componentManager.removeAll(entity.index);
+    CUBOS_DEBUG("Destroyed entity {}", entity.index);
 }
 
 data::Package World::pack(Entity entity, data::Handle::SerContext handleCtx) const
@@ -53,7 +54,7 @@ bool World::unpack(Entity entity, const data::Package& package, data::Handle::De
 {
     if (package.type() != data::Package::Type::Object)
     {
-        logError("World::unpack(): package is not an object");
+        CUBOS_ERROR("Entities must be packaged as objects");
         return false;
     }
 
@@ -65,7 +66,7 @@ bool World::unpack(Entity entity, const data::Package& package, data::Handle::De
         auto index = Registry::index(field.first);
         if (index == typeid(void))
         {
-            logWarning("World::unpack(): unknown component type '{}'", field.first);
+            CUBOS_ERROR("Unknown component type '{}'", field.first);
             success = false;
             continue;
         }
@@ -77,7 +78,7 @@ bool World::unpack(Entity entity, const data::Package& package, data::Handle::De
         }
         else
         {
-            logError("World::unpack(): failed to unpack component '{}'", field.first);
+            CUBOS_ERROR("Could not unpack component '{}'", field.first);
             success = false;
         }
     }

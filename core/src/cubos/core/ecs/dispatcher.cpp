@@ -6,7 +6,7 @@ void Dispatcher::callSystems(World& world, Commands& cmds)
 {
     for (auto& stageName : this->stagesOrder)
     {
-        logTrace("Dispatcher::callSystems(): dispatching stage '{}'", stageName);
+        CUBOS_TRACE("Dispatching stage '{}'", stageName);
 
         for (auto& system : this->stagesByName[stageName])
         {
@@ -44,13 +44,13 @@ void Dispatcher::putStage(std::string stage, std::string referenceStage, Directi
     // Check if the stage is valid.
     if (stage == "")
     {
-        logCritical("Dispatcher::putStage(): stage name must not be empty");
+        CUBOS_CRITICAL("Stage name must not be empty");
         abort();
     }
     // Check if they're the same stage.
     else if (stage == referenceStage)
     {
-        logCritical("Dispatcher::putStage(): can't put the stage '{}' after/before itself", stage);
+        CUBOS_CRITICAL("Cannot put the stage '{}' after/before itself", stage);
         abort();
     }
 
@@ -61,7 +61,7 @@ void Dispatcher::putStage(std::string stage, std::string referenceStage, Directi
     // Check if the reference stage exists
     if (refIt == this->stagesOrder.end() && !referenceStage.empty())
     {
-        logCritical("Dispatcher::putStage(): stage '{}' not found", referenceStage);
+        CUBOS_CRITICAL("Stage '{}' not found", referenceStage);
         abort();
     }
 

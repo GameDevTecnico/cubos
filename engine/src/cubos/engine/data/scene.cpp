@@ -18,21 +18,21 @@ const void* impl::SceneLoader::load(const Meta& meta)
     auto path = meta.getParameters().find("path");
     if (path == meta.getParameters().end())
     {
-        core::logError("SceneLoader::load(): no path specified");
+        CUBOS_ERROR("No path specified for scene file");
         return nullptr;
     }
 
     auto file = core::data::FileSystem::find(path->second);
     if (!file)
     {
-        core::logError("SceneLoader::load(): file '{}' not found", path->second);
+        CUBOS_ERROR("Could not find scene file '{}'", path->second);
         return nullptr;
     }
 
     auto stream = file->open(core::data::File::OpenMode::Read);
     if (!stream)
     {
-        core::logError("SceneLoader::load(): failed to open file '{}'", path->second);
+        CUBOS_ERROR("Could not open scene file '{}'", path->second);
         return nullptr;
     }
 
@@ -41,7 +41,7 @@ const void* impl::SceneLoader::load(const Meta& meta)
     auto deserializer = core::data::JSONDeserializer(src);
     if (deserializer.failed())
     {
-        core::logError("SceneLoader::load(): couldn't parse JSON file '{}'");
+        CUBOS_ERROR("Could not parse scene file '{}' as JSON", path->second);
         return nullptr;
     }
 
@@ -87,7 +87,7 @@ const void* impl::SceneLoader::load(const Meta& meta)
             else
             {
                 // Entity isn't local so log an error.
-                core::logError("SceneLoader::load() failed: entity '{}' doesn't exist", name);
+                CUBOS_ERROR("Entity '{}' does not exist", name);
                 delete asset;
                 return nullptr;
             }
@@ -101,8 +101,7 @@ const void* impl::SceneLoader::load(const Meta& meta)
             deserializer.readString(compName);
             if (!asset->blueprint.addFromDeserializer(entity, compName, deserializer, handleCtx))
             {
-                core::logError("SceneLoader::load() failed: failed to add component '{}' to entity '{}'", compName,
-                               name);
+                CUBOS_ERROR("Could not add component '{}' to entity '{}'", compName, name);
                 delete asset;
                 return nullptr;
             }

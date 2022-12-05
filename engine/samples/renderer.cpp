@@ -72,7 +72,7 @@ int main(void)
                 deltaT = currentT - t;
                 int newS = std::round(t);
                 if (newS != s)
-                    core::logDebug("FPS: {}", std::round(1 / deltaT));
+                    CUBOS_DEBUG("FPS: {}", std::round(1 / deltaT));
                 s = newS;
             }
             t = currentT;

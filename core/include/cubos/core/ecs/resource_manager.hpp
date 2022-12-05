@@ -142,7 +142,7 @@ namespace cubos::core::ecs
         auto it = resources.find(typeid(T));
         if (it != resources.end())
         {
-            logCritical("ecs::ResourceManager::add: Resource of type {} was already added.", typeid(T).name());
+            CUBOS_CRITICAL("Could not register resource of type {}: already registered", typeid(T).name());
             abort();
         }
 
@@ -154,7 +154,7 @@ namespace cubos::core::ecs
         auto it = resources.find(typeid(T));
         if (it == resources.end())
         {
-            logCritical("ecs::ResourceManager::read: Resource of type {} not found.", typeid(T).name());
+            CUBOS_CRITICAL("Could not find resource of type {}", typeid(T).name());
             abort();
         }
 
@@ -167,7 +167,7 @@ namespace cubos::core::ecs
         auto it = resources.find(typeid(T));
         if (it == resources.end())
         {
-            logCritical("ecs::ResourceManager::write: Resource of type {} not found.", typeid(T).name());
+            CUBOS_CRITICAL("Could not find resource of type {}", typeid(T).name());
             abort();
         }
 

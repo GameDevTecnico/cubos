@@ -1,7 +1,13 @@
 #include <cubos/core/ecs/component_manager.hpp>
+#include <cubos/core/ecs/registry.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::ecs;
+
+const std::string& cubos::core::ecs::getComponentName(std::type_index type)
+{
+    return Registry::name(type);
+}
 
 ComponentManager::~ComponentManager()
 {
@@ -26,7 +32,7 @@ std::type_index ComponentManager::getType(size_t id) const
         }
     }
 
-    logCritical("ComponentManager::getType(): invalid component ID");
+    CUBOS_CRITICAL("No component found with ID {}", id);
     abort();
 }
 

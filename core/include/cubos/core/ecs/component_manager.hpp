@@ -34,6 +34,18 @@ namespace cubos::core::ecs
         using Type = typename T::Storage;
     };
 
+    /// Gets the registered name of a component type.
+    /// If the component type is not registered, aborts the program.
+    /// @tparam T Component type.
+    /// @returns The registered name of the component type.
+    template <typename T> const std::string& getComponentName();
+
+    /// Gets the registered name of a component type.
+    /// If the component type is not registered, aborts the program.
+    /// @param type Component type.
+    /// @returns The registered name of the component type.
+    const std::string& getComponentName(std::type_index type);
+
     /// Utility struct used to reference component storages for reading.
     template <typename T> class ReadStorage
     {
@@ -160,6 +172,11 @@ namespace cubos::core::ecs
     };
 
     // Implementation.
+
+    template <typename T> const std::string& getComponentName()
+    {
+        return getComponentName(typeid(T));
+    }
 
     template <typename T>
     ReadStorage<T>::ReadStorage(ReadStorage&& other) : storage(other.storage), lock(std::move(other.lock))

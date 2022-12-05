@@ -45,7 +45,7 @@ namespace cubos::core::data
     {
         if (this->mode != File::OpenMode::Read)
         {
-            logError("Attempted to read from a file stream opened for writing.");
+            CUBOS_CRITICAL("Can't read from a file stream opened for writing.");
             abort();
         }
 
@@ -56,7 +56,7 @@ namespace cubos::core::data
     {
         if (this->mode != File::OpenMode::Write)
         {
-            logError("Attempted to write to a file stream opened for reading.");
+            CUBOS_CRITICAL("Can't write to a file stream opened for reading.");
             abort();
         }
 

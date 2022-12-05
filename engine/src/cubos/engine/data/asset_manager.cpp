@@ -56,15 +56,14 @@ void AssetManager::importMeta(File::Handle file)
         {
             if (this->infos.find(meta.getId()) != this->infos.end())
             {
-                core::logCritical("AssetManager::importMeta(): found asset with duplicate ID '{}' defined in file '{}'",
-                                  meta.getId(), file->getPath());
+                CUBOS_CRITICAL("Found asset with duplicate ID '{}' in file '{}'", meta.getId(), file->getPath());
                 abort();
             }
             else
             {
                 std::string id = meta.getId();
                 this->infos.emplace(id, std::move(meta));
-                core::logInfo("AssetManager::importMeta(): imported '{}'", id);
+                CUBOS_INFO("Imported '{}'", id);
             }
         }
     }
@@ -78,26 +77,7 @@ void AssetManager::loadStatic()
         {
             std::lock_guard lock(it.second.mutex);
             if (it.second.data == nullptr)
-            {
-                auto lit = this->loaders.find(it.second.meta.getType());
-                if (lit == this->loaders.end())
-                {
-                    core::logWarning("AssetManager::importMeta(): no loader registered for loading asset of type '{}'",
-                                     it.second.meta.getType());
-                }
-                else
-                {
-                    it.second.data = lit->second->load(it.second.meta);
-                    if (it.second.data == nullptr)
-                    {
-                        core::logError("AssetManager::loadStatic(): couldn't load '{}'", it.second.meta.getId());
-                    }
-                    else
-                    {
-                        core::logInfo("AssetManager::loadStatic(): loaded '{}'", it.second.meta.getId());
-                    }
-                }
-            }
+                this->loadAny(it.first);
         }
     }
 }
@@ -121,7 +101,7 @@ void AssetManager::cleanup()
                     loader->unload(it.second.meta, it.second.data);
                 }
 
-                core::logInfo("AssetManager::cleanup(): unloaded '{}'", it.second.meta.getId());
+                CUBOS_INFO("Unloaded asset '{}'", it.second.meta.getId());
                 it.second.data = nullptr;
             }
         }
@@ -133,7 +113,7 @@ Handle AssetManager::loadAny(const std::string& id)
     auto it = this->infos.find(id);
     if (it == this->infos.end())
     {
-        core::logError("AssetManager::loadAny(): couldn't load asset '{}' because it wasn't found", id);
+        CUBOS_ERROR("Could not load asset '{}': not found", id);
         return nullptr;
     }
 
@@ -146,22 +126,19 @@ Handle AssetManager::loadAny(const std::string& id)
         auto lit = this->loaders.find(type);
         if (lit == this->loaders.end())
         {
-            core::logCritical(
-                "AssetManager::loadAny(): couldn't load asset '{}' because the loader for type '{}' wasn't "
-                "found",
-                id, type);
+            CUBOS_CRITICAL("Could not load asset '{}': no loader for type '{}' found", id, type);
             abort();
         }
 
         it->second.data = lit->second->load(it->second.meta);
         if (it->second.data == nullptr)
         {
-            core::logError("AssetManager::loadAny(): couldn't load '{}'", it->second.meta.getId());
+            CUBOS_ERROR("Could not load asset '{}': loader failed", it->second.meta.getId());
             return nullptr;
         }
         else
         {
-            core::logInfo("AssetManager::loadAny(): loaded '{}'", it->second.meta.getId());
+            CUBOS_INFO("Loaded asset '{}'", it->second.meta.getId());
         }
     }
 

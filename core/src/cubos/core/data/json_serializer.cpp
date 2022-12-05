@@ -147,8 +147,7 @@ void JSONSerializer::writeJSON(nlohmann::ordered_json&& json, const char* name)
     {
         if (name == nullptr)
         {
-            logCritical(
-                "JSONSerializer::writeJSON() failed: tried to serialize object field without name, which is required");
+            CUBOS_CRITICAL("Objects serialized with JSONSerializer must name their fields");
             abort();
         }
 

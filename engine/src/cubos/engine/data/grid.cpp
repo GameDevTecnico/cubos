@@ -17,21 +17,21 @@ const void* impl::GridLoader::load(const Meta& meta)
     auto path = meta.getParameters().find("path");
     if (path == meta.getParameters().end())
     {
-        core::logError("GridLoader::load(): no path specified");
+        CUBOS_ERROR("No path specified for grid file");
         return nullptr;
     }
 
     auto file = core::data::FileSystem::find(path->second);
     if (!file)
     {
-        core::logError("GridLoader::load(): file '{}' not found", path->second);
+        CUBOS_ERROR("Could not find grid file '{}'", path->second);
         return nullptr;
     }
 
     auto stream = file->open(core::data::File::OpenMode::Read);
     if (!stream)
     {
-        core::logError("GridLoader::load(): failed to open file '{}'", path->second);
+        CUBOS_ERROR("Could not open grid file '{}'", path->second);
         return nullptr;
     }
 

@@ -235,7 +235,7 @@ Package& Package::field(const std::string& name)
         }
     }
 
-    logCritical("Package::field() failed: package doesn't contain field '{}'", name);
+    CUBOS_CRITICAL("No field '{}' in package", name);
     abort();
 }
 
@@ -273,6 +273,47 @@ Package::Dictionary& Package::dictionary()
 const Package::Dictionary& Package::dictionary() const
 {
     return std::get<Dictionary>(this->data);
+}
+
+const char* Package::typeToString(Type type)
+{
+    switch (type)
+    {
+    case Type::None:
+        return "None";
+    case Type::I8:
+        return "I8";
+    case Type::I16:
+        return "I16";
+    case Type::I32:
+        return "I32";
+    case Type::I64:
+        return "I64";
+    case Type::U8:
+        return "U8";
+    case Type::U16:
+        return "U16";
+    case Type::U32:
+        return "U32";
+    case Type::U64:
+        return "U64";
+    case Type::F32:
+        return "F32";
+    case Type::F64:
+        return "F64";
+    case Type::Bool:
+        return "Bool";
+    case Type::String:
+        return "String";
+    case Type::Object:
+        return "Object";
+    case Type::Array:
+        return "Array";
+    case Type::Dictionary:
+        return "Dictionary";
+    default:
+        return "Unknown";
+    }
 }
 
 void cubos::core::data::serialize(Serializer& serializer, const Package& pkg, const char* name)
@@ -494,14 +535,20 @@ impl::Unpackager::Unpackager(const Package& pkg) : pkg(pkg)
     // Do nothing.
 }
 
+#define UNEXPECTED(expected, found)                                                                                    \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        CUBOS_ERROR("Expected {}, found {}", expected, found);                                                         \
+        this->failBit = true;                                                                                          \
+    } while (0)
+
+#define TYPE_MISMATCH(expected, found) UNEXPECTED(Package::typeToString(expected), Package::typeToString(found))
+
 void impl::Unpackager::readI8(int8_t& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I8)
-    {
-        logError("impl::Unpackager::readI8() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::I8, d->type());
     else
         value = std::get<int8_t>(d->data);
 }
@@ -510,10 +557,7 @@ void impl::Unpackager::readI16(int16_t& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I16)
-    {
-        logError("impl::Unpackager::readI16() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::I16, d->type());
     else
         value = std::get<int16_t>(d->data);
 }
@@ -522,10 +566,7 @@ void impl::Unpackager::readI32(int32_t& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I32)
-    {
-        logError("impl::Unpackager::readI32() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::I32, d->type());
     else
         value = std::get<int32_t>(d->data);
 }
@@ -534,10 +575,7 @@ void impl::Unpackager::readI64(int64_t& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I64)
-    {
-        logError("impl::Unpackager::readI64() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::I64, d->type());
     else
         value = std::get<int64_t>(d->data);
 }
@@ -546,10 +584,7 @@ void impl::Unpackager::readU8(uint8_t& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U8)
-    {
-        logError("impl::Unpackager::readU8() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::U8, d->type());
     else
         value = std::get<uint8_t>(d->data);
 }
@@ -558,10 +593,7 @@ void impl::Unpackager::readU16(uint16_t& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U16)
-    {
-        logError("impl::Unpackager::readU16() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::U16, d->type());
     else
         value = std::get<uint16_t>(d->data);
 }
@@ -570,10 +602,7 @@ void impl::Unpackager::readU32(uint32_t& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U32)
-    {
-        logError("impl::Unpackager::readU32() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::U32, d->type());
     else
         value = std::get<uint32_t>(d->data);
 }
@@ -582,10 +611,7 @@ void impl::Unpackager::readU64(uint64_t& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U64)
-    {
-        logError("impl::Unpackager::readU64() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::U64, d->type());
     else
         value = std::get<uint64_t>(d->data);
 }
@@ -594,10 +620,7 @@ void impl::Unpackager::readF32(float& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::F32)
-    {
-        logError("impl::Unpackager::readF32() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::F32, d->type());
     else
         value = std::get<float>(d->data);
 }
@@ -606,10 +629,7 @@ void impl::Unpackager::readF64(double& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::F64)
-    {
-        logError("impl::Unpackager::readF64() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::F64, d->type());
     else
         value = std::get<double>(d->data);
 }
@@ -618,10 +638,7 @@ void impl::Unpackager::readBool(bool& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Bool)
-    {
-        logError("impl::Unpackager::readBool() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::Bool, d->type());
     else
         value = std::get<bool>(d->data);
 }
@@ -630,10 +647,7 @@ void impl::Unpackager::readString(std::string& value)
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::String)
-    {
-        logError("impl::Unpackager::readString() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::String, d->type());
     else
         value = std::get<std::string>(d->data);
 }
@@ -642,10 +656,7 @@ void impl::Unpackager::beginObject()
 {
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Object)
-    {
-        logError("impl::Unpackager::beginObject() failed: type mismatch");
-        this->failBit = true;
-    }
+        TYPE_MISMATCH(Package::Type::Object, d->type());
     else
         this->stack.push({d, 0});
 }
@@ -661,8 +672,7 @@ size_t impl::Unpackager::beginArray()
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Array)
     {
-        logError("impl::Unpackager::beginArray() failed: type mismatch");
-        this->failBit = true;
+        TYPE_MISMATCH(Package::Type::Array, d->type());
         return 0;
     }
     else
@@ -683,8 +693,7 @@ size_t impl::Unpackager::beginDictionary()
     auto d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Dictionary)
     {
-        logError("impl::Unpackager::beginDictionary() failed: type mismatch");
-        this->failBit = true;
+        TYPE_MISMATCH(Package::Type::Dictionary, d->type());
         return 0;
     }
     else

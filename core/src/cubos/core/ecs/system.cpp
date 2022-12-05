@@ -69,8 +69,8 @@ AnySystemWrapper::AnySystemWrapper(SystemInfo&& info) : m_info(std::move(info))
 {
     if (!this->m_info.valid())
     {
-        logCritical("AnySystemWrapper::AnySystemWrapper() failed: system is invalid. This may happen, if, for example, "
-                    "it both reads and writes the same resource.");
+        CUBOS_CRITICAL("System is invalid - this may happen, if, for example, "
+                       "it both reads and writes the same resource");
         abort();
     }
 }

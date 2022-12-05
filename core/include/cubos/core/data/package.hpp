@@ -270,6 +270,11 @@ namespace cubos::core::data
         /// If the package isn't a dictionary, this method will abort.
         const Dictionary& dictionary() const;
 
+        /// Converts a package type into its string representation.
+        /// @param type The type to convert.
+        /// @returns The string representation of the type.
+        static const char* typeToString(Type type);
+
     private:
         friend impl::Packager;
         friend impl::Unpackager;

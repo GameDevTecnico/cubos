@@ -15,7 +15,7 @@ int main(void)
 
     if (!renderDevice.getProperty(gl::Property::ComputeSupported))
     {
-        logCritical("Compute shaders are not supported on this device.");
+        CUBOS_CRITICAL("Compute shaders are not supported on this device.");
         return 1;
     }
 

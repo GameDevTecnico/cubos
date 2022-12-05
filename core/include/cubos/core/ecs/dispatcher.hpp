@@ -74,14 +74,15 @@ namespace cubos::core::ecs
         {
             if (system->info().compatible(systemWrapper->info()))
             {
-                logCritical("Dispatcher::addSystem(): couldn't add system to stage '{}' because it is incompatible "
-                            "with another system in the same stage.",
-                            stage);
+                // TODO: explain whats wrong, e.g., both systems are trying to access the same component mutably
+                CUBOS_CRITICAL("Could not add system to stage '{}' because it is incompatible "
+                               "with another system in the same stage.",
+                               stage);
                 return;
             }
         }
         this->stagesByName[stage].push_back(std::move(systemWrapper));
-        logInfo("Dispatcher:::addSystem(): added system to stage '{}'", stage);
+        CUBOS_INFO("Added system to stage '{}'", stage);
     }
 } // namespace cubos::core::ecs
 #endif // CUBOS_CORE_ECS_DISPATCHER_HPP

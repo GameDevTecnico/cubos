@@ -99,12 +99,12 @@ const std::string& Handle::getId() const
 {
     if (this->data == nullptr)
     {
-        core::logCritical("Handle::getId(): can't get identifier since the handle is null");
+        CUBOS_CRITICAL("Cannot get handle ID: handle not valid");
         abort();
     }
     else if (this->id == nullptr)
     {
-        core::logCritical("Handle::getId(): can't get identifier since the handle doesn't have one");
+        CUBOS_CRITICAL("Cannot get handle ID: handle has no ID");
         abort();
     }
 

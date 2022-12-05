@@ -608,8 +608,8 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     {
         if (lightData.numSpotLights >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
         {
-            logWarning("deferred::Renderer::onRender() failed: number of spot lights to be drawn "
-                       "this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT ({}).",
+            CUBOS_WARN("Number of spot lights to be drawn "
+                       "this frame exceeds the maximum allowed ({}).",
                        CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT);
             break;
         }
@@ -629,8 +629,8 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     {
         if (lightData.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
         {
-            logWarning("deferred::Renderer::onRender() failed: number of directional lights to be drawn "
-                       "this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT ({}).",
+            CUBOS_WARN("Number of directional lights to be drawn "
+                       "this frame exceeds the maximum allowed ({}).",
                        CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT);
             break;
         }
@@ -646,8 +646,8 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     {
         if (lightData.numPointLights >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
         {
-            logWarning("deferred::Renderer::onRender() failed: number of point lights to be drawn "
-                       "this frame exceeds CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT ({}).",
+            CUBOS_WARN("Number of point lights to be drawn "
+                       "this frame exceeds the maximum allowed ({}).",
                        CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT);
             break;
         }

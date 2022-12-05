@@ -334,7 +334,7 @@ int main(void)
             int newSeconds = glm::round(lastT);
             if (newSeconds != lastSeconds)
             {
-                core::logDebug("FPS: {}", std::round(1.0f / deltaT));
+                CUBOS_DEBUG("FPS: {}", std::round(1.0f / deltaT));
                 lastSeconds = newSeconds;
             }
         }

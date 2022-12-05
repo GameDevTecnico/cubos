@@ -12,7 +12,7 @@ EmbeddedArchive::EmbeddedArchive(const std::string& name)
     auto it = registry.find(name);
     if (it == registry.end())
     {
-        logError("EmbeddedArchive::EmbeddedArchive(): Failed to find embedded archive '{}'.", name);
+        CUBOS_CRITICAL("No embedded archive with name '{}' found", name);
         abort();
     }
 
@@ -30,9 +30,7 @@ void EmbeddedArchive::registerData(const std::string& name, const Data& data)
     auto& registry = EmbeddedArchive::getRegistry();
     if (registry.find(name) != registry.end())
     {
-        logError(
-            "EmbeddedArchive::registerData(): Failed to register embedded archive data '{}' because it already exists.",
-            name);
+        CUBOS_CRITICAL("Embedded archive with name '{}' already registered", name);
         abort();
     }
 

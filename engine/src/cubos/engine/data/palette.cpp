@@ -12,21 +12,21 @@ const void* impl::PaletteLoader::load(const Meta& meta)
     auto path = meta.getParameters().find("path");
     if (path == meta.getParameters().end())
     {
-        core::logError("PaletteLoader::load(): no path specified");
+        CUBOS_ERROR("No path specified for palette file");
         return nullptr;
     }
 
     auto file = core::data::FileSystem::find(path->second);
     if (!file)
     {
-        core::logError("PaletteLoader::load(): file '{}' not found", path->second);
+        CUBOS_ERROR("Could not find palette file '{}'", path->second);
         return nullptr;
     }
 
     auto stream = file->open(core::data::File::OpenMode::Read);
     if (!stream)
     {
-        core::logError("PaletteLoader::load(): failed to open file '{}'", path->second);
+        CUBOS_ERROR("Could not open palette file '{}'", path->second);
         return nullptr;
     }
 

@@ -15,7 +15,7 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
     }
     else
     {
-        cubos::core::logTrace("Plugin was already registered!");
+        CUBOS_TRACE("Plugin was already registered!");
     }
     return *this;
 }

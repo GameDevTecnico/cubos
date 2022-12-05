@@ -23,7 +23,7 @@ Entity BlueprintBuilder::entity(const std::string& name) const
 {
     if (!this->map.hasId(name))
     {
-        logCritical("BlueprintBuilder::entity() failed: no entity with name '{}'", name);
+        CUBOS_CRITICAL("No entity with name '{}'", name);
         abort();
     }
 

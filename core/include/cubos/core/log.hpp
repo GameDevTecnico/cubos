@@ -4,114 +4,43 @@
 #include <cubos/core/memory/buffer_stream.hpp>
 #include <cubos/core/data/debug_serializer.hpp>
 
+#ifndef CUBOS_LOG_LEVEL
+#ifndef NDEBUG
+#define CUBOS_LOG_LEVEL 0
+#else
+#define CUBOS_LOG_LEVEL 2
+#endif
+#endif
+
+#undef SPDLOG_ACTIVE_LEVEL
+#define SPDLOG_ACTIVE_LEVEL CUBOS_LOG_LEVEL
 #include <spdlog/spdlog.h>
+
+// The possible log levels.
+
+#define CUBOS_LOG_LEVEL_TRACE SPDLOG_LEVEL_TRACE
+#define CUBOS_LOG_LEVEL_DEBUG SPDLOG_LEVEL_DEBUG
+#define CUBOS_LOG_LEVEL_INFO SPDLOG_LEVEL_INFO
+#define CUBOS_LOG_LEVEL_WARN SPDLOG_LEVEL_WARN
+#define CUBOS_LOG_LEVEL_ERROR SPDLOG_LEVEL_ERROR
+#define CUBOS_LOG_LEVEL_CRITICAL SPDLOG_LEVEL_CRITICAL
+#define CUBOS_LOG_LEVEL_OFF SPDLOG_LEVEL_OFF
+
+// Macros for logging.
+// These macros are only evaluated if CUBOS_LOG_LEVEL is set to a level that is equal or lower than the level of the
+// macro.
+
+#define CUBOS_TRACE(...) SPDLOG_TRACE(__VA_ARGS__)
+#define CUBOS_DEBUG(...) SPDLOG_DEBUG(__VA_ARGS__)
+#define CUBOS_INFO(...) SPDLOG_INFO(__VA_ARGS__)
+#define CUBOS_WARN(...) SPDLOG_WARN(__VA_ARGS__)
+#define CUBOS_ERROR(...) SPDLOG_ERROR(__VA_ARGS__)
+#define CUBOS_CRITICAL(...) SPDLOG_CRITICAL(__VA_ARGS__)
 
 namespace cubos::core
 {
     /// Initializes the logger, must be called before any logging is done.
     void initializeLogger();
-
-    /// Logs a trace message.
-    /// @tparam T Message type.
-    /// @param msg Message.
-    template <typename T> void logTrace(T& msg)
-    {
-        spdlog::trace(msg);
-    }
-
-    /// Logs a trace message.
-    /// @tparam Args Format arguments types.
-    /// @param fmt Format string.
-    /// @param args Format arguments.
-    template <typename... Args> void logTrace(fmt::format_string<Args...> fmt, Args&&... args)
-    {
-        spdlog::trace(fmt, std::forward<Args>(args)...);
-    }
-
-    /// Logs a debug message.
-    /// @tparam T Message type.
-    /// @param msg Message.
-    template <typename T> void logDebug(T& msg)
-    {
-        spdlog::debug(msg);
-    }
-
-    /// Logs a debug message.
-    /// @tparam Args Format arguments types.
-    /// @param fmt Format string.
-    /// @param args Format arguments.
-    template <typename... Args> void logDebug(fmt::format_string<Args...> fmt, Args&&... args)
-    {
-        spdlog::debug(fmt, std::forward<Args>(args)...);
-    }
-
-    /// Logs a info message.
-    /// @tparam T Message type.
-    /// @param msg Message.
-    template <typename T> void logInfo(T& msg)
-    {
-        spdlog::info(msg);
-    }
-
-    /// Logs a info message.
-    /// @tparam Args Format arguments types.
-    /// @param fmt Format string.
-    /// @param args Format arguments.
-    template <typename... Args> void logInfo(fmt::format_string<Args...> fmt, Args&&... args)
-    {
-        spdlog::info(fmt, std::forward<Args>(args)...);
-    }
-
-    /// Logs a warning message.
-    /// @tparam T Message type.
-    /// @param msg Message.
-    template <typename T> void logWarning(T& msg)
-    {
-        spdlog::warn(msg);
-    }
-
-    /// Logs a warning message.
-    /// @tparam Args Format arguments types.
-    /// @param fmt Format string.
-    /// @param args Format arguments.
-    template <typename... Args> void logWarning(fmt::format_string<Args...> fmt, Args&&... args)
-    {
-        spdlog::warn(fmt, std::forward<Args>(args)...);
-    }
-
-    /// Logs a error message.
-    /// @tparam T Message type.
-    /// @param msg Message.
-    template <typename T> void logError(T& msg)
-    {
-        spdlog::error(msg);
-    }
-
-    /// Logs a error message.
-    /// @tparam Args Format arguments types.
-    /// @param fmt Format string.
-    /// @param args Format arguments.
-    template <typename... Args> void logError(fmt::format_string<Args...> fmt, Args&&... args)
-    {
-        spdlog::error(fmt, std::forward<Args>(args)...);
-    }
-
-    /// Logs a critical message.
-    /// @tparam T Message type.
-    /// @param msg Message.
-    template <typename T> void logCritical(T& msg)
-    {
-        spdlog::critical(msg);
-    }
-
-    /// Logs a critical message.
-    /// @tparam Args Format arguments types.
-    /// @param fmt Format string.
-    /// @param args Format arguments.
-    template <typename... Args> void logCritical(fmt::format_string<Args...> fmt, Args&&... args)
-    {
-        spdlog::critical(fmt, std::forward<Args>(args)...);
-    }
 } // namespace cubos::core
 
 // Implement custom formatting for all trivially serializable types.

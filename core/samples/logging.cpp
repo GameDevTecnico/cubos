@@ -8,17 +8,17 @@ int main(void)
 {
     initializeLogger();
 
-    logTrace("Trace message");
-    logDebug("Debug message");
-    logInfo("Info message");
-    logWarning("Warning message");
-    logError("Error message");
-    logCritical("Critical message");
+    CUBOS_TRACE("Trace message");
+    CUBOS_DEBUG("Debug message");
+    CUBOS_INFO("Info message");
+    CUBOS_WARN("Warning message");
+    CUBOS_ERROR("Error message");
+    CUBOS_CRITICAL("Critical message");
 
-    logInfo("Trivially serializable type: {}", glm::vec3(0.0f, 1.0f, 2.0f));
-    logInfo("Again, but with type information: {:t}", glm::vec3(0.0f, 1.0f, 2.0f));
-    logInfo("Since unordered maps are serializable, we can do this: {}",
-            std::unordered_map<int, const char*>{{1, "one"}, {2, "two"}});
+    CUBOS_INFO("Trivially serializable type: {}", glm::vec3(0.0f, 1.0f, 2.0f));
+    CUBOS_INFO("Again, but with type information: {:t}", glm::vec3(0.0f, 1.0f, 2.0f));
+    CUBOS_INFO("Since unordered maps are serializable, we can do this: {}",
+               std::unordered_map<int, const char*>{{1, "one"}, {2, "two"}});
 
     return 0;
 }
