@@ -5,6 +5,7 @@
 
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/settings.hpp>
 
 #include <vector>
 
@@ -25,7 +26,8 @@ namespace cubos::engine::gl::deferred
     public:
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
-        Renderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
+        /// @param settings The settings to use.
+        Renderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings);
         virtual ~Renderer() override = default;
 
         // Implement interface methods.

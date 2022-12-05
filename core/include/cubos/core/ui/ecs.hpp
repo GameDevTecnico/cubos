@@ -9,7 +9,7 @@ namespace cubos::core::ui
     /// @param debug Debug query.
     void showWorld(ecs::Debug debug);
 
-    /// ECS system which allows the user to inspectand edit the entities and components in an ECS world.
+    /// ECS system which allows the user to inspect and edit the entities and components in an ECS world.
     /// @param debug Debug query.
     /// @param handleCtx Context for deserializing handles.
     void editWorld(ecs::Debug debug, data::Handle::DesContext handleCtx);
