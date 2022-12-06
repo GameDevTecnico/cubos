@@ -1,5 +1,3 @@
-#include <components/cubos/grid.hpp>
-
 #include <cubos/core/log.hpp>
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/data/std_archive.hpp>
