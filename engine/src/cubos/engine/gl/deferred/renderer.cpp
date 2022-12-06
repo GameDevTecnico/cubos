@@ -506,7 +506,7 @@ RendererGrid deferred::Renderer::upload(const Grid& grid)
     vaDesc.shaderPipeline = this->geometryPipeline;
     deferredGrid->va = renderDevice.createVertexArray(vaDesc);
     deferredGrid->ib =
-        renderDevice.createIndexBuffer(indices.size() * sizeof(size_t), &indices[0], IndexFormat::UInt, Usage::Static);
+        renderDevice.createIndexBuffer(indices.size() * sizeof(uint32_t), &indices[0], IndexFormat::UInt, Usage::Static);
     deferredGrid->indexCount = indices.size();
 
     return deferredGrid;
