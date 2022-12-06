@@ -1,22 +1,18 @@
 #include <cubos/engine/plugins/window.hpp>
 #include <cubos/core/settings.hpp>
 
-static void startup(cubos::core::io::Window& window, ShouldQuit& quit, cubos::core::Settings& settings)
+static void startup(cubos::core::io::Window& window, ShouldQuit& quit, const cubos::core::Settings& settings)
 {
     quit.value = false;
     window = cubos::core::io::openWindow(
         settings.getString("window.title", "Cubos"),
-        {
-            settings.getInteger("window.width", 800),
-            settings.getInteger("window.height", 600)
-        }
-    );
+        {settings.getInteger("window.width", 800), settings.getInteger("window.height", 600)});
 }
 
 static void pollSystem(const cubos::core::io::Window& window, ShouldQuit& quit)
 {
     window->pollEvents();
-    if(window->shouldClose())
+    if (window->shouldClose())
     {
         quit.value = true;
     }
@@ -35,8 +31,5 @@ void cubos::engine::plugins::windowPlugin(Cubos& cubos)
         .addStartupSystem(startup, "OpenWindow")
 
         .addSystem(pollSystem, "Poll")
-        .putStageAfter("Main", "Poll")
-
-        .addSystem(swapBuffersSystem, "SwapBuffers")
-        .putStageBefore("Main", "SwapBuffers");
+        .addSystem(swapBuffersSystem, "SwapBuffers");
 }

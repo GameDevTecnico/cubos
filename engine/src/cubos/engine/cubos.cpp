@@ -22,7 +22,7 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 
 Cubos& Cubos::putStageAfter(const std::string& stage, const std::string& referenceStage)
 {
-    if(isStartupStage)
+    if (isStartupStage)
     {
         startupDispatcher.putStageAfter(stage, referenceStage);
     }
@@ -35,7 +35,7 @@ Cubos& Cubos::putStageAfter(const std::string& stage, const std::string& referen
 
 Cubos& Cubos::putStageBefore(const std::string& stage, const std::string& referenceStage)
 {
-    if(isStartupStage)
+    if (isStartupStage)
     {
         startupDispatcher.putStageBefore(stage, referenceStage);
     }
