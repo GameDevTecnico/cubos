@@ -3,32 +3,38 @@
 
 include(CubinhosGenerate)
 
-# Set sample source files
-set(ENGINE_SAMPLES_SOURCES
-    "asset.cpp"
-    "empty.cpp"
-    "renderer.cpp"
-    "cars.cpp"
-    "asset_renderer.cpp"
-    "scene.cpp"
-    "bloom.cpp"
-    "ssao.cpp"
-)
+# Macro used to reduce the boilerplate code
+macro(make_sample)
+    set(options COMPONENTS ASSETS)
+    set(oneValueArgs NAME)
+    set(multiValueArgs SOURCES)
+    cmake_parse_arguments(MAKE_SAMPLE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-# For each sample file, create a target named after the file but without the
-# file extension.
-foreach (file ${ENGINE_SAMPLES_SOURCES})
-    # Remove file extension
-    string(REGEX MATCH "^(.*)\\.[^.]*$" _ ${file})
-    set(target "engine-sample." ${CMAKE_MATCH_1})
-    # Replace every _ with -
-    string(REPLACE "_" "-" target ${target})
+    set(sources "${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_NAME}/main.cpp")
+    foreach(source IN LISTS MAKE_SAMPLE_SOURCES)
+        list(APPEND sources "${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_NAME}/${source}")
+    endforeach()
 
-    # Add sample target
-    add_executable(${target} ${file})
-    target_compile_definitions(${target} PUBLIC SAMPLE_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
+    set(target "engine-sample.${MAKE_SAMPLE_NAME}")
+    add_executable(${target} ${sources})
     target_link_libraries(${target} cubos-engine)
     set_property(TARGET ${target} PROPERTY CXX_STANDARD 20)
     target_compile_features(${target} PUBLIC cxx_std_20)
-    cubinhos_generate(${target} ${CMAKE_CURRENT_SOURCE_DIR}/components)
-endforeach ()
+
+    if(MAKE_SAMPLE_ASSETS)
+        target_compile_definitions(${target} PUBLIC SAMPLE_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_NAME}/assets")
+    endif()
+
+    if(MAKE_SAMPLE_COMPONENTS)
+        cubinhos_generate(${target} "${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_NAME}/components")
+    endif()
+endmacro()
+
+# Add samples
+make_sample(NAME "empty")
+make_sample(NAME "renderer")
+make_sample(NAME "bloom")
+make_sample(NAME "ssao" ASSETS)
+make_sample(NAME "scene" ASSETS)
+make_sample(NAME "custom-asset" ASSETS)
+make_sample(NAME "cars" COMPONENTS ASSETS)
