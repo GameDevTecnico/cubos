@@ -47,7 +47,7 @@ void printStuff(Debug debug)
 int main(int argc, char** argv)
 {
     // Initialize the asset manager.
-    cubos::engine::Cubos()
+    Cubos()
         .addResource<data::AssetManager>()
         .addComponent<Num>()
         .addComponent<Parent>()
