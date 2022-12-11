@@ -1,14 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4.html#a5443824927c755984478285c87ab5605":[4,0,0,0,1,0,6,0],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4.html":[4,0,0,0,1,0,7],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4.html#a0f24ccd844bbc6af3a4c4301191be5e4":[4,0,0,0,1,0,7,0],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html":[4,0,0,0,1,0,11],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html#a1dea9d34e006d58046346face242f5f6":[4,0,0,0,1,0,11,0],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits.html":[4,0,0,0,1,0,12],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_01const_01_4.html":[4,0,0,0,1,0,15],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_4.html":[4,0,0,0,1,0,14],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07_5_08_07Args_8_8_8_08_4.html":[4,0,0,0,1,0,13],
 "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07_5_08_07Args_8_8_8_08_4.html#acde6664df2eec26753eac53721b2d434":[4,0,0,0,1,0,13,0],
 "structcubos_1_1core_1_1gl_1_1BlendStateDesc.html":[4,0,0,0,2,12],
 "structcubos_1_1core_1_1gl_1_1BlendStateDesc.html#a5e3022a48b184cc54f52eec14a60ab47":[4,0,0,0,2,12,5],
@@ -216,5 +207,14 @@ var NAVTREEINDEX7 =
 "vertex_8hpp_source.html":[5,0,0,0,1,0,2,8],
 "world_8hpp_source.html":[5,0,0,0,1,0,1,14],
 "yaml__deserializer_8hpp_source.html":[5,0,0,0,1,0,0,17],
-"yaml__serializer_8hpp_source.html":[5,0,0,0,1,0,0,18]
+"yaml__serializer_8hpp_source.html":[5,0,0,0,1,0,0,18],
+"":[3,0,0,1],
+"":[3,0,0,1,2],
+"":[3,0,0,1,0],
+"":[3,0,0,1,2,0],
+"":[3,0,0,1,3],
+"":[3,0,0,1,2,2],
+"":[3,0,0,1,0,0],
+"":[3,0,0,1,1],
+"":[3,0,0]
 };
