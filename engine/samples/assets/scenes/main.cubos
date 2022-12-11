@@ -5,11 +5,7 @@
   },
   "entities": {
     "main": {
-      "Num": 0,
-      "Grid": {
-        "handle": "car.grd",
-        "size": 1
-      }
+      "Num": 0
     },
     "sub1.root": {
       "Parent": "main"
