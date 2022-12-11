@@ -39,9 +39,9 @@ var hierarchy =
     [ "DepthStencilStateDesc", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc.html", null ],
     [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html", [
       [ "BinaryDeserializer", "classcubos_1_1core_1_1data_1_1BinaryDeserializer.html", null ],
-      [ "Unpackager", "classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html", null ],
       [ "JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", null ],
-      [ "YAMLDeserializer", "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html", null ]
+      [ "YAMLDeserializer", "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html", null ],
+      [ "Unpackager", "classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html", null ]
     ] ],
     [ "DirectionalLight", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html", null ],
     [ "Dispatcher", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html", null ],
@@ -94,8 +94,8 @@ var hierarchy =
     [ "Material", "structcubos_1_1core_1_1gl_1_1Material.html", null ],
     [ "Meta", "classcubos_1_1engine_1_1data_1_1Meta.html", null ],
     [ "Package", "classcubos_1_1core_1_1data_1_1Package.html", null ],
-    [ "Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", null ],
     [ "Palette", "classcubos_1_1core_1_1gl_1_1Palette.html", null ],
+    [ "Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", null ],
     [ "Pass", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html", [
       [ "BloomPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html", null ],
       [ "CopyPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html", null ]
@@ -131,9 +131,9 @@ var hierarchy =
     [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", [
       [ "BinarySerializer", "classcubos_1_1core_1_1data_1_1BinarySerializer.html", null ],
       [ "DebugSerializer", "classcubos_1_1core_1_1data_1_1DebugSerializer.html", null ],
-      [ "Packager", "classcubos_1_1core_1_1data_1_1impl_1_1Packager.html", null ],
       [ "JSONSerializer", "classcubos_1_1core_1_1data_1_1JSONSerializer.html", null ],
-      [ "YAMLSerializer", "classcubos_1_1core_1_1data_1_1YAMLSerializer.html", null ]
+      [ "YAMLSerializer", "classcubos_1_1core_1_1data_1_1YAMLSerializer.html", null ],
+      [ "Packager", "classcubos_1_1core_1_1data_1_1impl_1_1Packager.html", null ]
     ] ],
     [ "Settings", "classcubos_1_1core_1_1Settings.html", null ],
     [ "ShaderBindingPoint", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html", null ],

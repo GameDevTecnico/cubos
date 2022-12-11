@@ -1,8 +1,8 @@
 <map id="Serializer" name="Serializer">
-<area shape="rect" id="node1" title="Abstract class for serializing data." alt="" coords="303,5,385,32"/>
+<area shape="rect" id="node1" title="Abstract class for serializing data." alt="" coords="320,5,403,32"/>
 <area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinarySerializer.html" title=" " alt="" coords="5,80,131,107"/>
 <area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1DebugSerializer.html" title=" " alt="" coords="155,80,280,107"/>
-<area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1impl_1_1Packager.html" title=" " alt="" coords="304,80,384,107"/>
-<area shape="rect" id="node5" href="$classcubos_1_1core_1_1data_1_1JSONSerializer.html" title=" " alt="" coords="408,80,523,107"/>
-<area shape="rect" id="node6" href="$classcubos_1_1core_1_1data_1_1YAMLSerializer.html" title="Implementation of the abstract Serializer class for serializing to YAML." alt="" coords="547,80,666,107"/>
+<area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1JSONSerializer.html" title=" " alt="" coords="304,80,419,107"/>
+<area shape="rect" id="node5" href="$classcubos_1_1core_1_1data_1_1YAMLSerializer.html" title="Implementation of the abstract Serializer class for serializing to YAML." alt="" coords="443,80,562,107"/>
+<area shape="rect" id="node6" href="$classcubos_1_1core_1_1data_1_1impl_1_1Packager.html" title=" " alt="" coords="585,80,665,107"/>
 </map>

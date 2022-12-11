@@ -6,5 +6,5 @@ var dir_7376bacbd9e6243f425bd4c56d48edd9 =
     [ "cursor.hpp", "cursor_8hpp_source.html", null ],
     [ "input_manager.hpp", "input__manager_8hpp_source.html", null ],
     [ "keyboard.hpp", "keyboard_8hpp_source.html", null ],
-    [ "window.hpp", "window_8hpp_source.html", null ]
+    [ "window.hpp", "core_2include_2cubos_2core_2io_2window_8hpp_source.html", null ]
 ];
