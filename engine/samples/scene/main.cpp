@@ -52,8 +52,8 @@ int main(int argc, char** argv)
         .addComponent<Num>()
         .addComponent<Parent>()
 
-        .addStartupSystem(setup, "Setup")
-        .addStartupSystem(printStuff, "End")
+        .startupSystem(setup).tagged("Setup")
+        .startupSystem(printStuff).tagged("End")
 
         .addPlugin(cubos::engine::plugins::windowPlugin)
         .run();

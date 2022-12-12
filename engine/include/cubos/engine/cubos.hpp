@@ -2,9 +2,11 @@
 #define CUBOS_ENGINE_CUBOS_HPP
 
 #include <cubos/core/ecs/dispatcher.hpp>
+#include <cubos/core/ecs/system.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 #include <set>
+#include <map>
 #include <string>
 
 namespace cubos::engine
@@ -42,44 +44,79 @@ namespace cubos::engine
         /// @return Reference to this object, for chaining.
         template <typename C> Cubos& addComponent();
 
-        /// Adds a new system to the engine, which will be executed every iteration of the main loop.
-        /// If the stage doesn't already exist, it is created in the previously specified default position.
+        /// Sets the current tag of the engine. If the tag doesn't exist, it will be created.
+        /// Subsequent calls will set this tag's settings.
+        /// @param tag The tag to set.
+        Cubos& tag(const std::string& tag);
+
+        /// Adds a new system to the engine, which will be executed at every iteration of the main loop.
         /// @tparam F The type of the system function.
         /// @param func The system function.
-        /// @param stage The stage in which the system should be executed.
-        template <typename F> Cubos& addSystem(F func, std::string stage);
+        template <typename F> Cubos& system(F func);
 
         /// Adds a new startup system to the engine.
-        /// Startup systems are executed before the main loop starts.
-        /// If the stage doesn't already exist, it is created in the previously specified default position.
+        /// Startup systems are executed only once, before the main loop starts.
         /// @tparam F The type of the system function.
         /// @param func The system function.
-        /// @param stage The stage in which the system should be executed.
-        template <typename F> Cubos& addStartupSystem(F func, std::string stage);
+        template <typename F> Cubos& startupSystem(F func);
 
-        /// Sets a given stage to happen after another stage.
-        /// The current stage must exist, but the reference stage may not, in which case it
-        /// will be created.
-        /// @param current The current stage, which will be placed right after the reference stage.
-        /// @param reference The reference stage.
-        Cubos& putStageAfter(const std::string& stage, const std::string& referenceStage);
+        /// Defines the tag for the current `system`/`startupSystem` set.
+        /// @param tag The tag to run under.
+        Cubos& tagged(const std::string& tag);
+
+        /// Sets the current system to run after the tag.
+        /// If the specified tag doesn't exist, it is internally created.
+        /// @param tag The tag to run after.
+        Cubos& after(const std::string& tag);
 
         /// Sets a given stage to happen before another stage.
-        /// The current stage must exist, but the reference stage may not, in which case it
-        /// will be created.
-        /// @param current The current stage, which will be placed right before the reference stage.
-        /// @param reference The reference stage.
-        Cubos& putStageBefore(const std::string& stage, const std::string& referenceStage);
+        /// If the specified tag doesn't exist, it is internally created.
+        /// @param tag The tag to run after.
+        Cubos& before(const std::string& tag);
 
         /// Runs the engine.
         void run();
 
     private:
+        /// Internal class to handle tag settings
+        struct TagSettings
+        {
+            std::vector<std::string> after;
+            std::vector<std::string> before;
+        };
+
+        /// Internal class to handle system settings
+        struct SystemSettings
+        {
+            SystemSettings() = default;
+            SystemSettings(SystemSettings&) = default;
+
+            std::unique_ptr<cubos::core::ecs::AnySystemWrapper> wrapper;
+            bool isStartup;
+            std::string tag;
+            std::vector<std::string> after;
+            std::vector<std::string> before;
+        };
+
+        /// Compiles the execution chain using all defined tag and system settings.
+        void compileChain();
+
+        /// Compiles the startup dispatcher execution chain.
+        void compileStartupDispatcher();
+
+        /// Compiles the main dispatcher execution chain.
+        void compileMainDispatcher();
+
+        std::unordered_map<std::string, TagSettings> tags;
+        std::string currentTagKey = "";
+        TagSettings* currentTag = nullptr;
+
+        std::vector<SystemSettings> systems;
+        SystemSettings* currentSystem = nullptr;
+
         core::ecs::Dispatcher mainDispatcher, startupDispatcher;
         core::ecs::World world;
         std::set<void (*)(Cubos&)> plugins;
-
-        bool isStartupStage;
     };
 
     // Implementation.
@@ -96,17 +133,27 @@ namespace cubos::engine
         return *this;
     }
 
-    template <typename F> Cubos& Cubos::addSystem(F func, std::string stage)
+    template <typename F> Cubos& Cubos::system(F func)
     {
-        mainDispatcher.addSystem(func, stage);
-        isStartupStage = false;
+        SystemSettings settings;
+        settings.wrapper = std::make_unique<core::ecs::SystemWrapper<F>>(func);
+        settings.isStartup = false;
+
+        currentSystem = &settings;
+        systems.push_back(settings);
+
         return *this;
     }
 
-    template <typename F> Cubos& Cubos::addStartupSystem(F func, std::string stage)
+    template <typename F> Cubos& Cubos::startupSystem(F func)
     {
-        startupDispatcher.addSystem(func, stage);
-        isStartupStage = true;
+        SystemSettings settings;
+        settings.wrapper = std::make_unique<core::ecs::SystemWrapper<F>>(func);
+        settings.isStartup = true;
+
+        currentSystem = &settings;
+        systems.push_back(settings);
+
         return *this;
     }
 } // namespace cubos::engine

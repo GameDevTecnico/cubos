@@ -20,29 +20,43 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
     return *this;
 }
 
-Cubos& Cubos::putStageAfter(const std::string& stage, const std::string& referenceStage)
+Cubos& Cubos::after(const std::string& tag)
 {
-    if (isStartupStage)
+    if (!currentTag && !currentSystem)
     {
-        startupDispatcher.putStageAfter(stage, referenceStage);
+        CUBOS_ERROR("No tag or system currently selected! (on after({}))", tag);
+        abort();
     }
-    else
+
+    if (currentTag)
     {
-        mainDispatcher.putStageAfter(stage, referenceStage);
+        currentTag->after.push_back(tag);
     }
+    else if (currentSystem)
+    {
+        currentSystem->after.push_back(tag);
+    }
+
     return *this;
 }
 
-Cubos& Cubos::putStageBefore(const std::string& stage, const std::string& referenceStage)
+Cubos& Cubos::before(const std::string& tag)
 {
-    if (isStartupStage)
+    if (!currentTag && !currentSystem)
     {
-        startupDispatcher.putStageBefore(stage, referenceStage);
+        CUBOS_ERROR("No tag or system currently selected! (on before({}))", tag);
+        abort();
     }
-    else
+
+    if (currentTag)
     {
-        mainDispatcher.putStageBefore(stage, referenceStage);
+        currentTag->before.push_back(tag);
     }
+    else if (currentSystem)
+    {
+        currentSystem->before.push_back(tag);
+    }
+
     return *this;
 }
 
@@ -54,9 +68,28 @@ Cubos::Cubos()
     addResource<cubos::core::Settings>();
 }
 
+void Cubos::compileChain()
+{
+    compileStartupDispatcher();
+    compileMainDispatcher();
+}
+
+void Cubos::compileStartupDispatcher()
+{
+
+}
+
+void Cubos::compileMainDispatcher()
+{
+
+}
+
 void Cubos::run()
 {
     plugins.clear();
+
+    // Compile execution chain
+    compileChain();
 
     cubos::core::ecs::Commands cmds(world);
 
