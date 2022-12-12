@@ -48,6 +48,8 @@ Cubos& Cubos::putStageBefore(const std::string& stage, const std::string& refere
 
 Cubos::Cubos()
 {
+    core::initializeLogger();
+
     addResource<ShouldQuit>(true);
     addResource<cubos::core::Settings>();
 }
