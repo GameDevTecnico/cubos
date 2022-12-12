@@ -54,6 +54,15 @@ Cubos::Cubos()
     addResource<cubos::core::Settings>();
 }
 
+Cubos::Cubos(int argc, char** argv)
+{
+    std::vector<std::string> arguments(argv + 1, argv + argc);
+    addResource<Arguments>(arguments);
+
+    addResource<ShouldQuit>(true);
+    addResource<cubos::core::Settings>();
+}
+
 void Cubos::run()
 {
     plugins.clear();
