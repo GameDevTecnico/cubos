@@ -1,5 +1,8 @@
 var NAVTREEINDEX6 =
 {
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faf72747db68ba031deb19a62028c19288":[3,0,0,0,2,59,15],
+"namespacecubos_1_1core_1_1gl.html#ad3fc1d97a3c41ea9d58d0ab14f75294f":[3,0,0,0,2,51],
+"namespacecubos_1_1core_1_1gl.html#ad3fc1d97a3c41ea9d58d0ab14f75294fa0557fa923dcee4d0f86b1409f5c2167f":[3,0,0,0,2,51,1],
 "namespacecubos_1_1core_1_1gl.html#ad3fc1d97a3c41ea9d58d0ab14f75294fa5835bab1ade0060909e31a06af2e2cde":[3,0,0,0,2,51,0],
 "namespacecubos_1_1core_1_1gl.html#ad3fc1d97a3c41ea9d58d0ab14f75294fa8be41da9b58e32ece35a2b5751f6aeb9":[3,0,0,0,2,51,2],
 "namespacecubos_1_1core_1_1gl.html#ade054099d313f3bd90cd54be63cae9fd":[3,0,0,0,2,31],
@@ -246,8 +249,5 @@ var NAVTREEINDEX6 =
 "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_6_01_4.html":[4,0,0,0,1,0,10],
 "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_6_01_4.html#adc3b768c4050099174fe329bf53b1368":[4,0,0,0,1,0,10,0],
 "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Debug_01_4.html":[4,0,0,0,1,0,9],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Debug_01_4.html#a4aba85d8d22b1cc030725a90d5fc822d":[4,0,0,0,1,0,9,0],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html":[4,0,0,0,1,0,8],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html#a9ab19e53fd3193c6294fae60232de9e9":[4,0,0,0,1,0,8,0],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4.html":[4,0,0,0,1,0,6]
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Debug_01_4.html#a4aba85d8d22b1cc030725a90d5fc822d":[4,0,0,0,1,0,9,0]
 };

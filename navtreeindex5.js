@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"log_8hpp_source.html":[5,0,0,0,1,0,7],
+"manager_8hpp.html#a080a822f0093973313bd644e517a5090":[3,0,0,1,2,2,4],
+"manager_8hpp.html#a080a822f0093973313bd644e517a5090a2e4b97fde8cf63085ec969fcc7e490c0":[3,0,0,1,2,2,4,0],
 "manager_8hpp.html#a080a822f0093973313bd644e517a5090a52f5e0bc3859bc5f5e25130b6c7e8881":[3,0,0,1,2,2,4,1],
 "manager_8hpp.html#a080a822f0093973313bd644e517a5090a960b44c579bc2f6818d2daaf9e4c16f0":[3,0,0,1,2,2,4,2],
 "manager_8hpp_source.html":[5,0,1,0,0,0,2,1,2],
@@ -246,8 +249,5 @@ var NAVTREEINDEX5 =
 "namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fad7271caeb6a15b0b8a9d27dfbb1d9e7b":[3,0,0,0,2,59,22],
 "namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fae8bf59c37f9f97cb4d0edf054a935ac0":[3,0,0,0,2,59,25],
 "namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faeb2c00a865e6d373efbef741bd999a53":[3,0,0,0,2,59,31],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faf0a6f506aa5b194a87ae1ac8ae197c1f":[3,0,0,0,2,59,0],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faf72747db68ba031deb19a62028c19288":[3,0,0,0,2,59,15],
-"namespacecubos_1_1core_1_1gl.html#ad3fc1d97a3c41ea9d58d0ab14f75294f":[3,0,0,0,2,51],
-"namespacecubos_1_1core_1_1gl.html#ad3fc1d97a3c41ea9d58d0ab14f75294fa0557fa923dcee4d0f86b1409f5c2167f":[3,0,0,0,2,51,1]
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faf0a6f506aa5b194a87ae1ac8ae197c1f":[3,0,0,0,2,59,0]
 };

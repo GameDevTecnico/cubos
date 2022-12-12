@@ -180,6 +180,7 @@ var annotated_dup =
           [ "Renderer", "classcubos_1_1engine_1_1gl_1_1Renderer.html", "classcubos_1_1engine_1_1gl_1_1Renderer" ]
         ] ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
+        [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", "structcubos_1_1engine_1_1Arguments" ],
         [ "Cubos", "classcubos_1_1engine_1_1Cubos.html", "classcubos_1_1engine_1_1Cubos" ]
       ] ]
     ] ]

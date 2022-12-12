@@ -8,6 +8,7 @@ var hierarchy =
       [ "EmbeddedArchive", "classcubos_1_1core_1_1data_1_1EmbeddedArchive.html", null ],
       [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", null ]
     ] ],
+    [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", null ],
     [ "AssetManager", "classcubos_1_1engine_1_1data_1_1AssetManager.html", null ],
     [ "BaseWindow", "classcubos_1_1core_1_1io_1_1BaseWindow.html", null ],
     [ "BlendState", "classcubos_1_1core_1_1gl_1_1impl_1_1BlendState.html", null ],

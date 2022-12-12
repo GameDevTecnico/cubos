@@ -52,9 +52,11 @@ var namespaces_dup =
           [ "RendererGrid", "renderer_8hpp.html#a466baf930bfdebba0d977770dd4d0056", null ]
         ] ],
         [ "plugins", null, [
+          [ "envSettingsPlugin", "env__settings_8hpp.html#a934caabf9b9109a549c088d93cd8d281", null ],
           [ "windowPlugin", "engine_2include_2cubos_2engine_2plugins_2window_8hpp.html#afa8146f56bedab5286a623bdbad91054", null ]
         ] ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
+        [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", "structcubos_1_1engine_1_1Arguments" ],
         [ "Cubos", "classcubos_1_1engine_1_1Cubos.html", "classcubos_1_1engine_1_1Cubos" ]
       ] ]
     ] ]
