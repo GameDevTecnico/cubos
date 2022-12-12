@@ -15,7 +15,7 @@ namespace cubos::engine
         bool value;
     };
 
-    /// Resource used for storing program arguments
+    /// Resource used for storing program arguments.
     struct Arguments
     {
         const std::vector<std::string> value;
