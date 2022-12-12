@@ -26,6 +26,7 @@ namespace cubos::engine
     class Cubos final
     {
     public:
+        Cubos();
         Cubos(int argc, char** argv);
         ~Cubos() = default;
 

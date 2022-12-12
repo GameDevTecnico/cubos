@@ -13,7 +13,7 @@
 #include <cubos/engine/data/scene.hpp>
 
 #include <cubos/engine/plugins/window.hpp>
-#include <cubos/engine/plugins/envSettings.hpp>
+#include <cubos/engine/plugins/env_settings.hpp>
 
 using namespace cubos;
 using namespace engine;
