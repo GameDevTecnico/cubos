@@ -1,5 +1,5 @@
 #include <cubos/core/settings.hpp>
-#include <cubos/engine/plugins/envSettings.hpp>
+#include <cubos/engine/plugins/env_settings.hpp>
 
 static void startup(const Arguments& args, cubos::core::Settings& settings)
 {
