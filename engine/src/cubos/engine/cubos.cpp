@@ -46,9 +46,13 @@ Cubos& Cubos::putStageBefore(const std::string& stage, const std::string& refere
     return *this;
 }
 
-Cubos::Cubos()
+Cubos::Cubos(int argc, char** argv)
 {
     addResource<ShouldQuit>(true);
+
+    std::vector<std::string> arguments(argv + 1, argv + argc);
+    addResource<Arguments>(arguments);
+
     addResource<cubos::core::Settings>();
 }
 

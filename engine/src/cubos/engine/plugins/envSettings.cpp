@@ -1,14 +1,30 @@
 #include <cubos/core/settings.hpp>
 #include <cubos/engine/plugins/envSettings.hpp>
 
-static void startup()
+static void startup(const Arguments& args, cubos::core::Settings& settings)
 {
-    printf("[dbg] startup from env settings plugin !!!\n");
+    for (const auto& arg : args.value)
+    {
+        auto token = arg.find("=");
+        if (token == -1)
+        {
+            CUBOS_ERROR("Could not parse settings (missing '=' token)");
+            return;
+        }
+
+        auto settingName = arg.substr(0, token);
+        auto settingValue = arg.substr(token + 1);
+        if (settingValue.empty())
+        {
+            CUBOS_ERROR("Setting <{}> must have value", settingName);
+            return;
+        }
+
+        settings.setString(settingName, settingValue);
+    }
 }
 
 void cubos::engine::plugins::envSettingsPlugin(Cubos& cubos)
 {
-    cubos
-        //.addResource<cubos::core::Settings>() // FIXME: do we add resource here, or is it CUBOS' ctor job?
-        .addStartupSystem(startup, "Settings");
+    cubos.addStartupSystem(startup, "Settings");
 }

@@ -13,6 +13,7 @@
 #include <cubos/engine/data/scene.hpp>
 
 #include <cubos/engine/plugins/window.hpp>
+#include <cubos/engine/plugins/envSettings.hpp>
 
 using namespace cubos;
 using namespace engine;
@@ -98,7 +99,7 @@ int main(int argc, char** argv)
     // Initialize the asset manager.
     auto assetManager = std::make_shared<data::AssetManager>();
 
-    cubos::engine::Cubos()
+    cubos::engine::Cubos(argc, argv)
         .addResource<data::AssetManager>()
         .addComponent<Num>()
         .addComponent<Parent>()
@@ -106,6 +107,7 @@ int main(int argc, char** argv)
         .addStartupSystem(setup, "Setup")
         .addStartupSystem(printStuff, "End")
 
+        .addPlugin(cubos::engine::plugins::envSettingsPlugin)
         .addPlugin(cubos::engine::plugins::windowPlugin)
         .run();
 }
