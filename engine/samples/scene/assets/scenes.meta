@@ -4,10 +4,10 @@ metas:
     type: Scene
     usage: Dynamic
     params:
-      path: /assets/scenes/main.cubos
+      path: /assets/main.cubos
   - id: scenes/sub
     type: Scene
     usage: Dynamic
     params:
-      path: /assets/scenes/sub.cubos
+      path: /assets/sub.cubos
 ...
