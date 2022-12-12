@@ -45,7 +45,7 @@ namespace cubos::core::ecs
     };
 
     /// Base class for system wrappers.
-    class AnySystemWrapper
+    template <typename R> class AnySystemWrapper
     {
     public:
         AnySystemWrapper(SystemInfo&& info);
@@ -54,28 +54,14 @@ namespace cubos::core::ecs
         /// Calls the wrapped system with parameters taken from the given world.
         /// @param world The world used by the system.
         /// @param commands The commands object used by the system.
-        virtual void call(const World& world, Commands& commands) const = 0;
+        /// @returns The return value of the system.
+        virtual R call(const World& world, Commands& commands) const = 0;
 
         /// Gets information about the requirements of the system.
         const SystemInfo& info() const;
 
     private:
         SystemInfo m_info; ///< Information about the wrapped system.
-    };
-
-    /// A system wrapper for a system which takes some arguments.
-    template <typename F> class SystemWrapper final : public AnySystemWrapper
-    {
-    public:
-        /// @param system The system to wrap.
-        SystemWrapper(F system);
-        virtual ~SystemWrapper() override = default;
-
-        /// @see AnySystemWrapper::call
-        virtual void call(const World& world, Commands& commands) const override;
-
-    private:
-        F system; ///< The wrapped system.
     };
 
     /// This namespace contains functions used internally by the implementation
@@ -201,8 +187,9 @@ namespace cubos::core::ecs
         template <typename F> struct SystemTraits;
 
         /// Specialization for function pointers.
-        template <typename... Args> struct SystemTraits<void (*)(Args...)>
+        template <typename R, typename... Args> struct SystemTraits<R (*)(Args...)>
         {
+            using Return = R;
             using Arguments = std::tuple<Args...>;
 
             /// Gets information about the system.
@@ -210,14 +197,14 @@ namespace cubos::core::ecs
         };
 
         /// Specialization for member functions.
-        template <typename T, typename... Args>
-        struct SystemTraits<void (T::*)(Args...)> : SystemTraits<void (*)(Args...)>
+        template <typename R, typename T, typename... Args>
+        struct SystemTraits<R (T::*)(Args...)> : SystemTraits<R (*)(Args...)>
         {
         };
 
         /// Specialization for const member functions.
-        template <typename T, typename... Args>
-        struct SystemTraits<void (T::*)(Args...) const> : SystemTraits<void (*)(Args...)>
+        template <typename R, typename T, typename... Args>
+        struct SystemTraits<R (T::*)(Args...) const> : SystemTraits<R (*)(Args...)>
         {
         };
 
@@ -227,9 +214,40 @@ namespace cubos::core::ecs
         };
     } // namespace impl
 
+    /// A system wrapper for a system which takes some arguments.
+    /// @tparam F The type of the system function/method/lambda.
+    template <typename F> class SystemWrapper final : public AnySystemWrapper<typename impl::SystemTraits<F>::Return>
+    {
+    public:
+        /// @param system The system to wrap.
+        SystemWrapper(F system);
+        virtual ~SystemWrapper() override = default;
+
+        /// @see AnySystemWrapper::call
+        virtual typename impl::SystemTraits<F>::Return call(const World& world, Commands& commands) const override;
+
+    private:
+        F system; ///< The wrapped system.
+    };
+
     // Implementation.
 
-    template <typename... Args> SystemInfo impl::SystemTraits<void (*)(Args...)>::info()
+    template <typename R> AnySystemWrapper<R>::AnySystemWrapper(SystemInfo&& info) : m_info(std::move(info))
+    {
+        if (!this->m_info.valid())
+        {
+            CUBOS_CRITICAL("System is invalid - this may happen, if, for example, "
+                           "it both reads and writes the same resource");
+            abort();
+        }
+    }
+
+    template <typename R> const SystemInfo& AnySystemWrapper<R>::info() const
+    {
+        return this->m_info;
+    }
+
+    template <typename R, typename... Args> SystemInfo impl::SystemTraits<R (*)(Args...)>::info()
     {
         auto info = SystemInfo();
         info.usesCommands = false;
@@ -239,12 +257,14 @@ namespace cubos::core::ecs
     }
 
     template <typename F>
-    SystemWrapper<F>::SystemWrapper(F system) : AnySystemWrapper(impl::SystemTraits<F>::info()), system(system)
+    SystemWrapper<F>::SystemWrapper(F system)
+        : AnySystemWrapper<typename impl::SystemTraits<F>::Return>(impl::SystemTraits<F>::info()), system(system)
     {
         // Do nothing.
     }
 
-    template <typename F> void SystemWrapper<F>::call(const World& world, Commands& commands) const
+    template <typename F>
+    typename impl::SystemTraits<F>::Return SystemWrapper<F>::call(const World& world, Commands& commands) const
     {
         using Arguments = typename impl::SystemTraits<F>::Arguments;
         using Fetcher = impl::SystemFetcher<Arguments>;
@@ -254,7 +274,7 @@ namespace cubos::core::ecs
         // 3. Pass it into the system.
         auto fetched = Fetcher::fetch(world, commands);
         auto args = Fetcher::arg(world, std::move(fetched));
-        std::apply(this->system, std::forward<Arguments>(args));
+        return std::apply(this->system, std::forward<Arguments>(args));
     }
 
     template <typename R> void impl::SystemFetcher<R&>::add(SystemInfo& info)

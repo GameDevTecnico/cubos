@@ -64,18 +64,3 @@ bool SystemInfo::compatible(const SystemInfo& other) const
 
     return true;
 }
-
-AnySystemWrapper::AnySystemWrapper(SystemInfo&& info) : m_info(std::move(info))
-{
-    if (!this->m_info.valid())
-    {
-        CUBOS_CRITICAL("System is invalid - this may happen, if, for example, "
-                       "it both reads and writes the same resource");
-        abort();
-    }
-}
-
-const SystemInfo& AnySystemWrapper::info() const
-{
-    return m_info;
-}
