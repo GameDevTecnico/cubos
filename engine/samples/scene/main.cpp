@@ -9,6 +9,7 @@
 #include <cubos/engine/data/asset_manager.hpp>
 #include <cubos/engine/data/scene.hpp>
 
+#include <cubos/engine/plugins/transform.hpp>
 #include <cubos/engine/plugins/window.hpp>
 
 #include <components/num.hpp>
@@ -56,5 +57,6 @@ int main(int argc, char** argv)
         .addStartupSystem(printStuff, "End")
 
         .addPlugin(cubos::engine::plugins::windowPlugin)
+        .addPlugin(cubos::engine::plugins::transformPlugin)
         .run();
 }

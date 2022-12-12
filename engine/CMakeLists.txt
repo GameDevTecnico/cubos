@@ -8,7 +8,6 @@ option(BUILD_ENGINE_SAMPLES "Build cubos engine samples" OFF)
 message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 
 # Set engine source files
-
 set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
 
@@ -31,6 +30,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/data/scene.cpp"
 
     "src/cubos/engine/plugins/window.cpp"
+    "src/cubos/engine/plugins/transform.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -61,6 +61,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/data/scene.hpp"
 
     "include/cubos/engine/plugins/window.hpp"
+    "include/cubos/engine/plugins/transform.hpp"
 )
 
 # Create cubos engine
@@ -69,6 +70,7 @@ target_include_directories(cubos-engine PUBLIC "include" PRIVATE "src")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
 set_property(TARGET cubos-engine PROPERTY CXX_STANDARD 20)
 target_compile_features(cubos-engine PUBLIC cxx_std_20)
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(cubos-engine PUBLIC -Wno-attributes)
 endif()
@@ -77,6 +79,6 @@ endif()
 cubinhos_generate(cubos-engine ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Add engine samples
-if (BUILD_ENGINE_SAMPLES)
+if(BUILD_ENGINE_SAMPLES)
     add_subdirectory(samples)
-endif ()
+endif()
