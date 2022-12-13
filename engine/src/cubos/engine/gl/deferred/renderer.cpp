@@ -376,7 +376,7 @@ void main() {
 )glsl";
 
 deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings)
-    : gl::Renderer(renderDevice, size)
+    : gl::BaseRenderer(renderDevice, size)
 {
     // Create the states.
     RasterStateDesc rasterStateDesc;

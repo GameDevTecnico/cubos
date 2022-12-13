@@ -213,7 +213,7 @@ void carSystem(const Input& input, core::ecs::Query<Car&, ecs::Position&, ecs::R
     }
 }
 
-void prepareScene(data::AssetManager& assetManager, gl::Renderer& renderer, core::ecs::World& world,
+void prepareScene(data::AssetManager& assetManager, gl::BaseRenderer& renderer, core::ecs::World& world,
                   core::gl::Palette& palette)
 {
     // Generate the floor's grid.

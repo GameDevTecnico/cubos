@@ -11,6 +11,7 @@
 
 #include <cubos/engine/plugins/transform.hpp>
 #include <cubos/engine/plugins/window.hpp>
+#include <cubos/engine/plugins/renderer.hpp>
 
 #include <components/num.hpp>
 #include <components/parent.hpp>
@@ -58,5 +59,6 @@ int main(int argc, char** argv)
 
         .addPlugin(cubos::engine::plugins::windowPlugin)
         .addPlugin(cubos::engine::plugins::transformPlugin)
+        .addPlugin(cubos::engine::plugins::rendererPlugin)
         .run();
 }

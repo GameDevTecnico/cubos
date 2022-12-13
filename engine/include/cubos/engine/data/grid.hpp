@@ -28,7 +28,7 @@ namespace cubos::engine::data
         class GridLoader : public Loader
         {
         public:
-            GridLoader(AssetManager* manager, gl::Renderer* renderer);
+            GridLoader(AssetManager* manager, gl::BaseRenderer* renderer);
             virtual ~GridLoader() override = default;
 
             virtual const void* load(const Meta& meta) override;
@@ -36,7 +36,7 @@ namespace cubos::engine::data
             virtual void unload(const Meta& meta, const void* asset) override;
 
         private:
-            gl::Renderer* renderer;
+            gl::BaseRenderer* renderer;
         };
     } // namespace impl
 } // namespace cubos::engine::data

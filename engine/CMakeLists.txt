@@ -31,6 +31,7 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/plugins/window.cpp"
     "src/cubos/engine/plugins/transform.cpp"
+    "src/cubos/engine/plugins/renderer.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -62,6 +63,7 @@ set(CUBOS_ENGINE_INCLUDE
 
     "include/cubos/engine/plugins/window.hpp"
     "include/cubos/engine/plugins/transform.hpp"
+    "include/cubos/engine/plugins/renderer.hpp"
 )
 
 # Create cubos engine
