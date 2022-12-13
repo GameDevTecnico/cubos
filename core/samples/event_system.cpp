@@ -10,17 +10,50 @@ int main()
 {
     cubos::core::initializeLogger();
 
-    auto pipe = EventPipe<int>();
-    auto writer = EventWriter<int>(pipe);
-    writer.push(3, 1);
-    writer.push(1, 1);
-    writer.push(4);
-    auto reader = EventReader<int, 1>(pipe);
-
-    printf("### events:\n");
-    for (auto it = reader.begin(), end = reader.end(); it != end; ++it)
+    struct MyEvent
     {
-        const auto i = *it;
-        printf("\nevent vdata: : %d\n", i);
+        enum Mask
+        {
+            KEY_EVENT = 1 << 0,   // 0001
+            MOUSE_EVENT = 1 << 1, // 0010
+            WHEEL_EVENT = 1 << 2, // 0100
+            ALL = (1 << 3) - 1,   // 0111
+        };
+
+        int data; // random data member
+    };
+
+    auto pipe = EventPipe<MyEvent>();
+    auto writer = EventWriter<MyEvent>(pipe);
+
+    writer.push(MyEvent{.data = 4}, MyEvent::Mask::KEY_EVENT);
+    writer.push(MyEvent{.data = 1}, MyEvent::Mask::WHEEL_EVENT);
+    writer.push(MyEvent{.data = 2}, MyEvent::Mask::MOUSE_EVENT);
+    writer.push(MyEvent{.data = 6}, MyEvent::Mask::MOUSE_EVENT);
+    writer.push(MyEvent{.data = 2}); // MyEvent::Mask::ALL ignores this, should it?
+    writer.push(MyEvent{.data = 6}); // MyEvent::Mask::ALL ignores this, should it?
+
+    printf("### mouse events:\n");
+    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe))
+    {
+        printf("\t ## data: : %d\n", it);
+    }
+
+    printf("### wheel + key events:\n");
+    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT | MyEvent::Mask::WHEEL_EVENT>(pipe))
+    {
+        printf("\t ## data: : %d\n", it);
+    }
+
+    printf("\n### all masked events:\n");
+    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::ALL>(pipe))
+    {
+        printf("\t ## data: : %d\n", it);
+    }
+
+    printf("\n### all non masked events:\n");
+    for (const auto& it : EventReader<MyEvent, 0>(pipe))
+    {
+        printf("\t ## data: : %d\n", it);
     }
 }

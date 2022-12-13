@@ -66,15 +66,16 @@ TEST(Cubos_Core_Event_System, Event_Pipe_Writer_Simple_Test)
     EXPECT_EQ(pipe.size(), 0);
 }
 
-TEST(Cubos_Core_Event_System, Event_System_Integer_Masking_Test)
+TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
 {
     struct MyEvent
     {
         enum Mask
         {
-            KEY_EVENT = 1,
-            MOUSE_EVENT = 2,
-            WHEEL_EVENT = 3,
+            KEY_EVENT = 1 << 0,   // 0001
+            MOUSE_EVENT = 1 << 1, // 0010
+            WHEEL_EVENT = 1 << 2, // 0100
+            ALL = (1 << 3) - 1,   // 0111
         };
 
         int data; // random data member
@@ -83,22 +84,28 @@ TEST(Cubos_Core_Event_System, Event_System_Integer_Masking_Test)
     auto pipe = EventPipe<MyEvent>();
     auto writer = EventWriter<MyEvent>(pipe);
 
-    writer.push(MyEvent{.data = 4}, MyEvent::Mask::KEY_EVENT);
-    writer.push(MyEvent{.data = 1}, MyEvent::Mask::WHEEL_EVENT);
-    writer.push(MyEvent{.data = 2}, MyEvent::Mask::MOUSE_EVENT);
-    writer.push(MyEvent{.data = 6}, MyEvent::Mask::MOUSE_EVENT);
-    writer.push(MyEvent{.data = 2});
+    writer.push(MyEvent{.data = 1}, MyEvent::Mask::KEY_EVENT);
+    writer.push(MyEvent{.data = 2}, MyEvent::Mask::WHEEL_EVENT);
+    writer.push(MyEvent{.data = 3}, MyEvent::Mask::MOUSE_EVENT);
+    writer.push(MyEvent{.data = 4}, MyEvent::Mask::MOUSE_EVENT);
+    writer.push(MyEvent{.data = 5});
     writer.push(MyEvent{.data = 6});
 
     for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT>(pipe))
     {
         // should run only once
-        EXPECT_EQ(ev.data, 4);
+        EXPECT_EQ(ev.data, 1);
     }
 
     for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe))
     {
-        auto possibleData = ev.data == 2 || ev.data == 6;
+        auto possibleData = ev.data == 3 || ev.data == 4;
+        EXPECT_EQ(possibleData, true);
+    }
+
+    for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT | MyEvent::Mask::MOUSE_EVENT>(pipe))
+    {
+        auto possibleData = ev.data == 1 || ev.data == 3 || ev.data == 4;
         EXPECT_EQ(possibleData, true);
     }
 
@@ -108,4 +115,11 @@ TEST(Cubos_Core_Event_System, Event_System_Integer_Masking_Test)
         size++;
     }
     EXPECT_EQ(size, 2);
+
+    size = 0;
+    for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::ALL>(pipe))
+    {
+        size++;
+    }
+    EXPECT_EQ(size, 4);
 }

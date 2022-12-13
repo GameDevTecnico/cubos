@@ -18,10 +18,15 @@ namespace cubos::core::ecs
         {
         public:
             Iterator(const EventPipe<T>& pipe, decltype(M) mask, std::size_t index);
+
             const T& operator*() const;
             Iterator& operator++();
             bool operator==(const Iterator& other) const;
             bool operator!=(const Iterator& other) const;
+
+            /// Checks if current event mask is valid.
+            /// @return True if current event iterated matches the given mask.
+            bool matchesMask() const;
 
         private:
             const EventPipe<T>& pipe;
@@ -58,7 +63,7 @@ namespace cubos::core::ecs
     EventReader<T, M>::Iterator::Iterator(const EventPipe<T>& pipe, decltype(M) mask, std::size_t index)
         : pipe(pipe), mask(mask), index(index)
     {
-        while (this->index < this->pipe.size() && (this->pipe.getEventMask(this->index) != this->mask))
+        while (this->index < this->pipe.size() && !matchesMask())
         {
             this->index++;
         }
@@ -75,7 +80,7 @@ namespace cubos::core::ecs
         do
         {
             this->index++;
-        } while (this->index < this->pipe.size() && (this->pipe.getEventMask(this->index) != this->mask));
+        } while (this->index < this->pipe.size() && !matchesMask());
 
         return *this;
     }
@@ -88,6 +93,28 @@ namespace cubos::core::ecs
     template <typename T, unsigned int M> bool EventReader<T, M>::Iterator::operator!=(const Iterator& other) const
     {
         return !(*this == other);
+    }
+
+    template <typename T, unsigned int M> bool EventReader<T, M>::Iterator::matchesMask() const
+    {
+        auto eventMask = this->pipe.getEventMask(this->index);
+
+        if (eventMask == 0 && this->mask == 0)
+        {
+            return true;
+        }
+
+        if (!(eventMask & this->mask))
+        {
+            return false;
+        }
+
+        if ((eventMask & this->mask) != eventMask)
+        {
+            return false;
+        }
+
+        return true;
     }
 } // namespace cubos::core::ecs
 
