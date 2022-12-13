@@ -20,7 +20,7 @@ namespace cubos::core::ecs
 
         /// Returns the event mask from event pipe at index.
         /// @param index Event index.
-        std::size_t getEventMask(std::size_t index) const;
+        unsigned int getEventMask(std::size_t index) const;
 
         /// Returns the event from event pipe at index.
         /// @param index Event index.
@@ -37,7 +37,7 @@ namespace cubos::core::ecs
         struct Event
         {
             T event;
-            std::size_t mask;
+            unsigned int mask;
         };
 
         /// List of events that are in the pipe.
@@ -56,7 +56,7 @@ namespace cubos::core::ecs
         this->events.push_back({.event = event, .mask = mask});
     }
 
-    template <typename T> std::size_t EventPipe<T>::getEventMask(std::size_t index) const
+    template <typename T> unsigned int EventPipe<T>::getEventMask(std::size_t index) const
     {
         return this->events.at(index).mask;
     }

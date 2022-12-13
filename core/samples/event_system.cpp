@@ -12,10 +12,10 @@ int main()
 
     auto pipe = EventPipe<int>();
     auto writer = EventWriter<int>(pipe);
-    writer.push(3);
-    writer.push(1);
+    writer.push(3, 1);
+    writer.push(1, 1);
     writer.push(4);
-    auto reader = EventReader<int, 2>(pipe);
+    auto reader = EventReader<int, 1>(pipe);
 
     printf("### events:\n");
     for (auto it = reader.begin(), end = reader.end(); it != end; ++it)
