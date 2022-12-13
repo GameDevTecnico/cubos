@@ -24,11 +24,11 @@ namespace cubos::core::ecs
             bool operator==(const Iterator& other) const;
             bool operator!=(const Iterator& other) const;
 
+        private:
             /// Checks if current event mask is valid.
             /// @return True if current event iterated matches the given mask.
             bool matchesMask() const;
 
-        private:
             const EventPipe<T>& pipe;
             decltype(M) mask;
             std::size_t index;
