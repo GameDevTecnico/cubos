@@ -13,18 +13,14 @@ int main()
     auto pipe = EventPipe<int>();
     auto writer = EventWriter<int>(pipe);
     writer.push(3);
-    auto reader = EventReader<int, void>(pipe);
+    writer.push(1);
+    writer.push(4);
+    auto reader = EventReader<int, 2>(pipe);
 
-    Stream::stdOut.printf("### events: \n");
-    for (auto event : reader)
+    printf("### events:\n");
+    for (auto it = reader.begin(), end = reader.end(); it != end; ++it)
     {
-        Stream::stdOut.printf("# {} \n", event);
-    }
-    pipe.clear();
-
-    Stream::stdOut.printf("### after clearing: \n");
-    for (auto event : reader)
-    {
-        Stream::stdOut.printf("# {} \n", event);
+        const auto i = *it;
+        printf("\nevent vdata: : %d\n", i);
     }
 }
