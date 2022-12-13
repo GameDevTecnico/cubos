@@ -10,21 +10,26 @@ namespace cubos::core::ecs
     public:
         EventReader(const EventPipe<T>& pipe);
 
+        // For iterators.
+
         auto begin()
         {
-            return pipe.events.begin();
+            return pipe.begin();
         }
-        auto begin() const
-        {
-            return pipe.events.begin();
-        }
+
         auto end()
         {
-            return pipe.events.end();
+            return pipe.end();
         }
+
+        auto begin() const
+        {
+            return pipe.begin();
+        }
+
         auto end() const
         {
-            return pipe.events.end();
+            return pipe.end();
         }
 
     private:
