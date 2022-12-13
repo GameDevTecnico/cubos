@@ -16,7 +16,7 @@ namespace cubos::core::ecs
         /// Pushes event to event pipe, with its mask type.
         /// @param event Event which will be inserted into event pipe.
         /// @param mask Event mask.
-        void push(T event, std::size_t mask);
+        void push(T event, unsigned int mask);
 
         /// Returns the event mask from event pipe at index.
         /// @param index Event index.
@@ -51,7 +51,7 @@ namespace cubos::core::ecs
         this->events.push_back({.event = event, .mask = 0});
     }
 
-    template <typename T> void EventPipe<T>::push(T event, std::size_t mask)
+    template <typename T> void EventPipe<T>::push(T event, unsigned int mask)
     {
         this->events.push_back({.event = event, .mask = mask});
     }
