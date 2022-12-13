@@ -84,6 +84,9 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/system.cpp"
     "src/cubos/core/ecs/dispatcher.cpp"
     "src/cubos/core/ecs/registry.cpp"
+    "src/cubos/core/ecs/event_pipe.cpp"
+    "src/cubos/core/ecs/event_reader.cpp"
+    "src/cubos/core/ecs/event_writer.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE
@@ -156,6 +159,9 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/system.hpp"
     "include/cubos/core/ecs/registry.hpp"
     "include/cubos/core/ecs/dispatcher.hpp"
+    "include/cubos/core/ecs/event_pipe.hpp"
+    "include/cubos/core/ecs/event_reader.hpp"
+    "include/cubos/core/ecs/event_writer.hpp"
 )
 
 # Create core library
