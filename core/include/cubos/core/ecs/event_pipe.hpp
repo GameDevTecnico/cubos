@@ -17,11 +17,30 @@ namespace cubos::core::ecs
         /// Clears pipe event list.
         void clear();
 
-        /// FIXME: this should be private
-        /// its public for now until iterators are not implemented into event_reader
-        std::vector<T> events;
+        // For iterators.
+
+        auto begin()
+        {
+            return events.begin();
+        }
+
+        auto end()
+        {
+            return events.end();
+        }
+
+        auto begin() const
+        {
+            return events.begin();
+        }
+
+        auto end() const
+        {
+            return events.end();
+        }
 
     private:
+        std::vector<T> events;
     };
 
     // Implementation.
