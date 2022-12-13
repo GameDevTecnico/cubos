@@ -12,6 +12,7 @@ set(CUBOS_TESTS_SOURCE
     "test_json_serialization.cpp"
     "test_json_deserialization.cpp"
     "test_std_archive.cpp"
+    "test_event_system.cpp"
 )
 
 # Add tests target
