@@ -84,9 +84,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/system.cpp"
     "src/cubos/core/ecs/dispatcher.cpp"
     "src/cubos/core/ecs/registry.cpp"
-    "src/cubos/core/ecs/event_pipe.cpp"
-    "src/cubos/core/ecs/event_reader.cpp"
-    "src/cubos/core/ecs/event_writer.cpp"
 )
 
 set(CUBOS_CORE_INCLUDE

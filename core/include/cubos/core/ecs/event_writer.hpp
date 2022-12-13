@@ -14,11 +14,16 @@ namespace cubos::core::ecs
         /// @param event Event which will be inserted into event pipe.
         void push(T event);
 
+        /// Pushes event to event pipe, with its mask type.
+        /// @param event Event which will be inserted into event pipe.
+        /// @param mask Event mask.
+        void push(T event, std::size_t mask);
+
     private:
         EventPipe<T>& pipe;
     };
 
-    // Implementation.
+    // EventWriter implementation.
 
     template <typename T> EventWriter<T>::EventWriter(EventPipe<T>& pipe) : pipe(pipe)
     {
@@ -27,6 +32,11 @@ namespace cubos::core::ecs
     template <typename T> void EventWriter<T>::push(T event)
     {
         this->pipe.push(event);
+    }
+
+    template <typename T> void EventWriter<T>::push(T event, std::size_t mask)
+    {
+        this->pipe.push(event, mask);
     }
 
 } // namespace cubos::core::ecs
