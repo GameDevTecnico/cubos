@@ -8,7 +8,7 @@ namespace cubos::core::ecs
     /// Used to read events, filtering is also possible.
     /// @tparam T Event.
     /// @tparam M Event mask.
-    template <typename T, std::size_t M> class EventReader
+    template <typename T, unsigned int M> class EventReader
     {
     public:
         EventReader(const EventPipe<T>& pipe);
@@ -17,7 +17,7 @@ namespace cubos::core::ecs
         class Iterator
         {
         public:
-            Iterator(const EventPipe<T>& pipe, std::size_t mask, std::size_t index);
+            Iterator(const EventPipe<T>& pipe, decltype(M) mask, std::size_t index);
             const T& operator*() const;
             Iterator& operator++();
             bool operator==(const Iterator& other) const;
@@ -25,7 +25,7 @@ namespace cubos::core::ecs
 
         private:
             const EventPipe<T>& pipe;
-            std::size_t mask;
+            decltype(M) mask;
             std::size_t index;
         };
 
@@ -38,55 +38,54 @@ namespace cubos::core::ecs
 
     // EventReader implementation.
 
-    template <typename T, std::size_t M> EventReader<T, M>::EventReader(const EventPipe<T>& pipe) : pipe(pipe)
+    template <typename T, unsigned int M> EventReader<T, M>::EventReader(const EventPipe<T>& pipe) : pipe(pipe)
     {
     }
 
-    template <typename T, std::size_t M> EventReader<T, M>::Iterator EventReader<T, M>::begin() const
+    template <typename T, unsigned int M> EventReader<T, M>::Iterator EventReader<T, M>::begin() const
     {
-        return Iterator(pipe, M, 0);
+        return Iterator(this->pipe, M, 0);
     }
 
-    template <typename T, std::size_t M> EventReader<T, M>::Iterator EventReader<T, M>::end() const
+    template <typename T, unsigned int M> EventReader<T, M>::Iterator EventReader<T, M>::end() const
     {
-        return Iterator(pipe, M, pipe.size());
+        return Iterator(this->pipe, M, this->pipe.size());
     }
 
     // EventReader::Iterator implementation.
 
-    template <typename T, std::size_t M>
-    EventReader<T, M>::Iterator::Iterator(const EventPipe<T>& pipe, std::size_t mask, std::size_t index)
+    template <typename T, unsigned int M>
+    EventReader<T, M>::Iterator::Iterator(const EventPipe<T>& pipe, decltype(M) mask, std::size_t index)
         : pipe(pipe), mask(mask), index(index)
     {
-        while (index < pipe.size() && pipe.getEventMask(index) != mask)
+        while (this->index < this->pipe.size() && (this->pipe.getEventMask(this->index) != this->mask))
         {
-            ++index;
+            this->index++;
         }
     }
 
-    template <typename T, std::size_t M> const T& EventReader<T, M>::Iterator::operator*() const
+    template <typename T, unsigned int M> const T& EventReader<T, M>::Iterator::operator*() const
     {
-        return pipe.getEvent(index);
+        return this->pipe.getEvent(this->index);
     }
 
-    template <typename T, std::size_t M> EventReader<T, M>::Iterator& EventReader<T, M>::Iterator::operator++()
+    template <typename T, unsigned int M> EventReader<T, M>::Iterator& EventReader<T, M>::Iterator::operator++()
     {
         // Skip events that don't match the mask
         do
         {
-            ++index;
-        } while (index < pipe.size() && pipe.getEventMask(index) != mask);
+            this->index++;
+        } while (this->index < this->pipe.size() && (this->pipe.getEventMask(this->index) != this->mask));
 
         return *this;
     }
 
-    template <typename T, std::size_t M> bool EventReader<T, M>::Iterator::operator==(const Iterator& other) const
+    template <typename T, unsigned int M> bool EventReader<T, M>::Iterator::operator==(const Iterator& other) const
     {
-        // FIXME: known bug: this returns true for last element, which should not
-        return mask == other.mask && index == other.index && &pipe == &other.pipe;
+        return this->mask == other.mask && this->index == other.index && &(this->pipe) == &other.pipe;
     }
 
-    template <typename T, std::size_t M> bool EventReader<T, M>::Iterator::operator!=(const Iterator& other) const
+    template <typename T, unsigned int M> bool EventReader<T, M>::Iterator::operator!=(const Iterator& other) const
     {
         return !(*this == other);
     }
