@@ -11,7 +11,7 @@ namespace cubos::core::ecs
     template <typename T, unsigned int M> class EventReader
     {
     public:
-        EventReader(const EventPipe<T>& pipe);
+        EventReader(EventPipe<T>& pipe);
 
         /// EventReader custom iterator. Filters events depending on EventReader's M template parameter.
         class Iterator
@@ -38,13 +38,14 @@ namespace cubos::core::ecs
         Iterator end() const;
 
     private:
-        const EventPipe<T>& pipe;
+        EventPipe<T>& pipe;
     };
 
     // EventReader implementation.
 
-    template <typename T, unsigned int M> EventReader<T, M>::EventReader(const EventPipe<T>& pipe) : pipe(pipe)
+    template <typename T, unsigned int M> EventReader<T, M>::EventReader(EventPipe<T>& pipe) : pipe(pipe)
     {
+        this->pipe.addReader();
     }
 
     template <typename T, unsigned int M> EventReader<T, M>::Iterator EventReader<T, M>::begin() const
@@ -76,7 +77,6 @@ namespace cubos::core::ecs
 
     template <typename T, unsigned int M> EventReader<T, M>::Iterator& EventReader<T, M>::Iterator::operator++()
     {
-        // Skip events that don't match the mask
         do
         {
             this->index++;
