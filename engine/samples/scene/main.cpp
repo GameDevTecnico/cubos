@@ -12,6 +12,7 @@
 #include <cubos/engine/plugins/transform.hpp>
 #include <cubos/engine/plugins/window.hpp>
 #include <cubos/engine/plugins/renderer.hpp>
+#include <cubos/engine/plugins/env_settings.hpp>
 
 #include <components/num.hpp>
 #include <components/parent.hpp>
@@ -49,7 +50,7 @@ void printStuff(Debug debug)
 int main(int argc, char** argv)
 {
     // Initialize the asset manager.
-    Cubos()
+    Cubos(argc, argv)
         .addResource<data::AssetManager>()
         .addComponent<Num>()
         .addComponent<Parent>()
@@ -57,6 +58,7 @@ int main(int argc, char** argv)
         .addStartupSystem(setup, "Setup")
         .addStartupSystem(printStuff, "End")
 
+        .addPlugin(cubos::engine::plugins::envSettingsPlugin)
         .addPlugin(cubos::engine::plugins::windowPlugin)
         .addPlugin(cubos::engine::plugins::transformPlugin)
         .addPlugin(cubos::engine::plugins::rendererPlugin)
