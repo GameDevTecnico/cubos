@@ -1,9 +1,9 @@
 #ifndef CUBOS_CORE_ECS_EVENT_PIPE_HPP
 #define CUBOS_CORE_ECS_EVENT_PIPE_HPP
 
-#include <vector>
-#include <algorithm>
+#include <deque>
 #include <atomic>
+
 namespace cubos::core::ecs
 {
     /// Event pipe implementation.
@@ -60,7 +60,7 @@ namespace cubos::core::ecs
         };
 
         /// List of events that are in the pipe.
-        mutable std::vector<Event> events; // FIXME: std::deque for optimization
+        mutable std::deque<Event> events;
 
         /// Keeps track of how many readers the event pipe currently has.
         std::size_t readerCount;
@@ -87,12 +87,14 @@ namespace cubos::core::ecs
 
     template <typename T> void EventPipe<T>::clear()
     {
-        // FIXME: unefficient, we can use std::deque' pop_front which is O(1)
-        auto shouldBeCleared = [readerCount = this->readerCount](const Event& event) {
-            return event.readCount == readerCount;
-        };
-        this->events.erase(std::remove_if(this->events.begin(), this->events.end(), shouldBeCleared),
-                           this->events.end());
+        for (auto& ev : this->events)
+        {
+            if (ev.readCount == this->readerCount)
+            {
+                // we can assume that the older events always get read first, so this is safe
+                this->events.pop_front();
+            }
+        }
     }
 
     template <typename T> std::size_t EventPipe<T>::size() const
