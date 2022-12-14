@@ -18,7 +18,10 @@ static void showUserInterface(const cubos::core::io::Window& window)
 
     cubos::core::ui::beginFrame();
 
-    ImGui::ShowDemoWindow();
+    ImGui::Begin("Editor");
+    ImGui::End();
+    
+    //ImGui::ShowDemoWindow();
 
     auto sz = window->getFramebufferSize();
     renderDevice.setRasterState(nullptr);
