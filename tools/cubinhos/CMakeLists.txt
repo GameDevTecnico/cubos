@@ -1,5 +1,5 @@
 # tools/cubinhos/CMakeLists.txt
-# Cubos tools (cubinhos) build configuration
+# Cubinhos build configuration
 
 set(CUBINHOS_SOURCE
     "src/tools.hpp"

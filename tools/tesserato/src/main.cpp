@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main() {
+int main()
+{
     printf("hello from tesserato editor!");
     return 0;
 }

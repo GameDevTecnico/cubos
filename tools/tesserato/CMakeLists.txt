@@ -1,5 +1,5 @@
 # tools/tesserato/CMakeLists.txt
-# Cubos tools (tesserato) build configuration
+# Tesserato build configuration
 
 set(TESSERATO_SOURCE
     "src/main.cpp"
