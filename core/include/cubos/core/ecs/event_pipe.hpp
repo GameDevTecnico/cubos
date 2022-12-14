@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <atomic>
 namespace cubos::core::ecs
 {
     /// Event pipe implementation.
@@ -40,7 +41,22 @@ namespace cubos::core::ecs
         {
             T event;
             unsigned int mask;
-            std::size_t readCount;
+            mutable std::atomic_size_t readCount{0};
+
+            Event(T e, unsigned int m) : event(e), mask(m)
+            {
+            }
+            Event(const Event& other)
+            {
+                *this = other;
+            }
+            Event& operator=(const Event& other)
+            {
+                this->event = other.event;
+                this->mask = other.mask;
+                this->readCount = other.readCount.load();
+                return *this;
+            }
         };
 
         /// List of events that are in the pipe.
@@ -54,7 +70,7 @@ namespace cubos::core::ecs
 
     template <typename T> void EventPipe<T>::push(T event, unsigned int mask)
     {
-        this->events.push_back({.event = event, .mask = mask, .readCount = 0});
+        this->events.push_back(Event(event, mask));
     }
 
     template <typename T> unsigned int EventPipe<T>::getEventMask(std::size_t index) const
@@ -64,6 +80,9 @@ namespace cubos::core::ecs
 
     template <typename T> T& EventPipe<T>::getEvent(std::size_t index) const
     {
+        // const Event& ev = this->events.at(index);
+        // ev.readCount++;
+        // auto xd = this->events.at(index).event;
         Event& ev = const_cast<Event&>(this->events.at(index));
         ev.readCount++; // FIXME: this can go greater than readerCount?
         return ev.event;
