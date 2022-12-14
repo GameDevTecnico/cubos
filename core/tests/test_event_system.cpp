@@ -91,17 +91,18 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     writer.push(MyEvent{.data = 5});
     writer.push(MyEvent{.data = 6});
 
-    for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT>(pipe))
+    auto keyEventReader = EventReader<MyEvent, MyEvent::Mask::KEY_EVENT>(pipe);
+    for (auto& ev : keyEventReader)
     {
         // should run only once
         EXPECT_EQ(ev.data, 1);
-    }
-
-    for (auto& ev : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT>(pipe))
-    {
-        // should run only once
         ev.data = 1337;
         EXPECT_EQ(ev.data, 1337);
+    }
+    for (auto& ev : keyEventReader)
+    {
+        // this should NOT run, because all KEY_EVENTS from keyEventReader already got read
+        EXPECT_EQ(false, true);
     }
 
     for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe))
