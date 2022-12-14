@@ -12,7 +12,7 @@ static void setup(const cubos::core::io::Window& window, ShouldQuit& quit)
     cubos::core::ui::initialize(window);
 }
 
-static void showUserInterface(const cubos::core::io::Window& window)
+static void show(const cubos::core::io::Window& window)
 {
     auto& renderDevice = window->getRenderDevice();
 
@@ -20,8 +20,8 @@ static void showUserInterface(const cubos::core::io::Window& window)
 
     ImGui::Begin("Editor");
     ImGui::End();
-    
-    //ImGui::ShowDemoWindow();
+
+    // ImGui::ShowDemoWindow();
 
     auto sz = window->getFramebufferSize();
     renderDevice.setRasterState(nullptr);
@@ -37,7 +37,7 @@ int main(int argc, char** argv)
 {
     Cubos(argc, argv)
         .addPlugin(cubos::engine::plugins::windowPlugin)
-        .addStartupSystem(setup, "Setup")
-        .addSystem(showUserInterface, "UI")
+        .addStartupSystem(setup, "SetupUI")
+        .addSystem(show, "showUI")
         .run();
 }
