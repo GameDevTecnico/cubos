@@ -19,7 +19,7 @@ namespace cubos::core::ecs
         public:
             Iterator(const EventPipe<T>& pipe, decltype(M) mask, std::size_t index);
 
-            const T& operator*() const;
+            T& operator*() const;
             Iterator& operator++();
             bool operator==(const Iterator& other) const;
             bool operator!=(const Iterator& other) const;
@@ -70,7 +70,7 @@ namespace cubos::core::ecs
         }
     }
 
-    template <typename T, unsigned int M> const T& EventReader<T, M>::Iterator::operator*() const
+    template <typename T, unsigned int M> T& EventReader<T, M>::Iterator::operator*() const
     {
         return this->pipe.getEvent(this->index);
     }

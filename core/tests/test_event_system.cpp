@@ -41,12 +41,12 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
     }
     EXPECT_EQ(size, 2); // still one because we added a event "3" with mask 5
 
-    pipe.clear();
+    pipe.clear(); // clears only (3, 0) and (2, 0), because the reader is only on "0" mask events
     for (size = 0; auto& x : reader)
     {
         size++;
     }
-    EXPECT_EQ(size, 0);
+    EXPECT_EQ(size, 1); // (3,5) event was not read yet
 }
 
 TEST(Cubos_Core_Event_System, Event_Pipe_Writer_Simple_Test)
@@ -97,6 +97,13 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
         EXPECT_EQ(ev.data, 1);
     }
 
+    for (auto& ev : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT>(pipe))
+    {
+        // should run only once
+        ev.data = 1337;
+        EXPECT_EQ(ev.data, 1337);
+    }
+
     for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe))
     {
         auto possibleData = ev.data == 3 || ev.data == 4;
@@ -105,7 +112,7 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
 
     for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT | MyEvent::Mask::MOUSE_EVENT>(pipe))
     {
-        auto possibleData = ev.data == 1 || ev.data == 3 || ev.data == 4;
+        auto possibleData = ev.data == 1337 || ev.data == 3 || ev.data == 4;
         EXPECT_EQ(possibleData, true);
     }
 
