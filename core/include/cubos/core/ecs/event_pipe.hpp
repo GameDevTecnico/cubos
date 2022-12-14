@@ -20,18 +20,19 @@ namespace cubos::core::ecs
         /// @param index Event index.
         unsigned int getEventMask(std::size_t index) const;
 
-        /// Returns the event from event pipe at index.
+        /// Returns the event from event pipe at index, with read/write permissions.
         /// @param index Event index.
-        const T& getEvent(std::size_t index) const;
+        T& getEvent(std::size_t index) const;
 
         /// Clears pipe event list.
+        /// Only events that got read by all readers are deleted!
         void clear();
 
         /// Returns pipe event list size.
         std::size_t size() const;
 
         /// Adds a new reader to reader count.
-        void addReader(); // TODO: should be private
+        void addReader(); // FIXME: should be private
 
     private:
         /// Represents an Event, with its custom type, its mask and its read count.
@@ -41,9 +42,6 @@ namespace cubos::core::ecs
             unsigned int mask;
             std::size_t readCount;
         };
-
-        /// Deletes an event if it already got read by all readers.
-        const T deleteIfReadByAll(Event& event);
 
         /// List of events that are in the pipe.
         std::vector<Event> events;
@@ -64,16 +62,20 @@ namespace cubos::core::ecs
         return this->events.at(index).mask;
     }
 
-    template <typename T> const T& EventPipe<T>::getEvent(std::size_t index) const
+    template <typename T> T& EventPipe<T>::getEvent(std::size_t index) const
     {
-        // auto result = deleteIfReadByAll(this->events.at(index));
-        // return result;
-        return this->events.at(index).event;
+        Event& ev = const_cast<Event&>(this->events.at(index));
+        ev.readCount++; // FIXME: this can go greater than readerCount?
+        return ev.event;
     }
 
     template <typename T> void EventPipe<T>::clear()
     {
-        this->events.clear();
+        auto shouldBeCleared = [readerCount = this->readerCount](const Event& event) {
+            return event.readCount == readerCount;
+        };
+        this->events.erase(std::remove_if(this->events.begin(), this->events.end(), shouldBeCleared),
+                           this->events.end());
     }
 
     template <typename T> std::size_t EventPipe<T>::size() const
@@ -84,21 +86,6 @@ namespace cubos::core::ecs
     template <typename T> void EventPipe<T>::addReader()
     {
         this->readerCount++;
-    }
-
-    template <typename T> const T EventPipe<T>::deleteIfReadByAll(EventPipe<T>::Event& event)
-    {
-        if (++event.readCount == this->readerCount)
-        {
-            Event copy = event;
-            auto it = std::find(this->events.begin(), this->events.end(), event);
-            this->events.erase(it);
-            return copy.event;
-        }
-        else
-        {
-            return event.event;
-        }
     }
 
 } // namespace cubos::core::ecs
