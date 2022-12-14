@@ -60,7 +60,7 @@ namespace cubos::core::ecs
         };
 
         /// List of events that are in the pipe.
-        std::vector<Event> events;
+        mutable std::vector<Event> events; // FIXME: std::deque for optimization
 
         /// Keeps track of how many readers the event pipe currently has.
         std::size_t readerCount;
@@ -80,16 +80,14 @@ namespace cubos::core::ecs
 
     template <typename T> T& EventPipe<T>::getEvent(std::size_t index) const
     {
-        // const Event& ev = this->events.at(index);
-        // ev.readCount++;
-        // auto xd = this->events.at(index).event;
-        Event& ev = const_cast<Event&>(this->events.at(index));
-        ev.readCount++; // FIXME: this can go greater than readerCount?
+        Event& ev = this->events.at(index);
+        ev.readCount++;
         return ev.event;
     }
 
     template <typename T> void EventPipe<T>::clear()
     {
+        // FIXME: unefficient, we can use std::deque' pop_front which is O(1)
         auto shouldBeCleared = [readerCount = this->readerCount](const Event& event) {
             return event.readCount == readerCount;
         };
