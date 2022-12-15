@@ -13,6 +13,9 @@ namespace cubos::engine::plugins
     /// Stages:
     /// - BeginImGuiFrame: Starts a new ImGui frame (after Poll stage).
     /// - EndImGuiFrame: Ends the ImGui frame (before SwapBuffers stage).
+    ///
+    /// If you want to render your own ImGui component system, the system should run
+    /// between BeginImGuiFrame and EndImGuiFrame.
     /// @param cubos CUBOS. main class
     void imguiPlugin(Cubos& cubos);
 }; // namespace cubos::engine::plugins
