@@ -14,27 +14,17 @@ static void setup(const cubos::core::io::Window& window, ShouldQuit& quit)
 
 static void show(const cubos::core::io::Window& window)
 {
-    auto& renderDevice = window->getRenderDevice();
-
     cubos::core::ui::beginFrame();
 
     ImGui::Begin("Editor");
     ImGui::End();
-
-    // ImGui::ShowDemoWindow();
-
-    auto sz = window->getFramebufferSize();
-    renderDevice.setRasterState(nullptr);
-    renderDevice.setBlendState(nullptr);
-    renderDevice.setDepthStencilState(nullptr);
-    renderDevice.setViewport(0, 0, sz.x, sz.y);
-    renderDevice.clearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     cubos::core::ui::endFrame();
 }
 
 int main(int argc, char** argv)
 {
+    // FIXME: this will change once we have the imgui/editor plugin!!!
     Cubos(argc, argv)
         .addPlugin(cubos::engine::plugins::windowPlugin)
         .addStartupSystem(setup, "SetupUI")
