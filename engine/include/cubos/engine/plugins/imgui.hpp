@@ -6,6 +6,13 @@
 namespace cubos::engine::plugins
 {
     /// Plugin that adds ImGui functionalities and allows ImGui windows to be rendered.
+    ///
+    /// Startup Stages:
+    /// - InitImGui: Initializes the UI window (after OpenWindow stage).
+    ///
+    /// Stages:
+    /// - BeginImGuiFrame: Starts a new ImGui frame (after Poll stage).
+    /// - EndImGuiFrame: Ends the ImGui frame (before SwapBuffers stage).
     /// @param cubos CUBOS. main class
     void imguiPlugin(Cubos& cubos);
 }; // namespace cubos::engine::plugins
