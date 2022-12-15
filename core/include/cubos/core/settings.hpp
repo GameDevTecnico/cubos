@@ -89,6 +89,12 @@ namespace cubos::core
         /// @param settingsToMerge The settings to be merged to this instance.
         void merge(const Settings& settingsToMerge);
 
+        /// Returns an iterator pointing to the first element in the settings list.
+        std::unordered_map<std::string, std::string>::iterator begin();
+        
+        /// Returns an iterator pointing to the last element in the settings list.
+        std::unordered_map<std::string, std::string>::iterator end();
+
     private:
         friend void data::serialize(data::Serializer&, const Settings&, const char*);
         friend void data::deserialize(data::Deserializer&, Settings&);
