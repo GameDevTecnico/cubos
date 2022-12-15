@@ -23,6 +23,7 @@ using namespace engine;
 using namespace core::ecs;
 using namespace core::data;
 using namespace core::memory;
+using namespace cubos::engine;
 
 void setup(Commands& cmds, data::AssetManager& assetManager)
 {
@@ -65,11 +66,11 @@ int main(int argc, char** argv)
         .addStartupSystem(setup, "Setup")
         .addStartupSystem(printStuff, "End")
 
-        .addPlugin(cubos::engine::plugins::envSettingsPlugin)
-        .addPlugin(cubos::engine::plugins::windowPlugin)
+        .addPlugin(plugins::envSettingsPlugin)
+        .addPlugin(plugins::windowPlugin)
 
         // an example of how the imgui plugin can be used to render your own stuff :)
-        .addPlugin(cubos::engine::plugins::imguiPlugin)
+        .addPlugin(plugins::imguiPlugin)
         .addSystem(imguiExampleWindow, "ImGuiExampleWindow")
         .putStageAfter("ImGuiExampleWindow", "BeginImGuiFrame")
 
