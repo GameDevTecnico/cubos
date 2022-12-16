@@ -6,5 +6,5 @@ IndentWidth: 4
 AccessModifierOffset: -4
 DerivePointerAlignment: false
 PointerAlignment: Left
-
+AlwaysBreakTemplateDeclarations: Yes
 ...
