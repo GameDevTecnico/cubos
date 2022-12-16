@@ -39,7 +39,8 @@ namespace cubos::core::ecs
 {
     namespace impl
     {
-        template <typename T> class QueryFetcher;
+        template <typename T>
+        class QueryFetcher;
     }
 
     /// Handle used to identify an Entity.
@@ -155,7 +156,8 @@ namespace std
 {
     /// Add hash function for Entity, so that it can be used as a key in an unordered_map.
     /// @cond
-    template <> struct hash<cubos::core::ecs::Entity>
+    template <>
+    struct hash<cubos::core::ecs::Entity>
     {
         inline std::size_t operator()(const cubos::core::ecs::Entity& k) const
         {

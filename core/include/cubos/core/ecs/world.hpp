@@ -14,7 +14,8 @@ namespace cubos::core::ecs
 {
     namespace impl
     {
-        template <typename T> class QueryFetcher;
+        template <typename T>
+        class QueryFetcher;
     }
 
     /// @brief World is used as a container for all of the entity and component data.
@@ -31,27 +32,32 @@ namespace cubos::core::ecs
         /// @tparam T The type of the resource.
         /// @tparam TArgs The types of the arguments of the constructor of the resource.
         /// @param args The arguments of the constructor of the resource.
-        template <typename T, typename... TArgs> void registerResource(TArgs... args);
+        template <typename T, typename... TArgs>
+        void registerResource(TArgs... args);
 
         /// @brief Registers a component type.
         /// @tparam T Component type.
         /// @param storage Storage for the component type.
-        template <typename T> void registerComponent();
+        template <typename T>
+        void registerComponent();
 
         /// Reads a resource, locking it for reading.
         /// @tparam T The type of the resource.
         /// @returns A lock referring to the resource.
-        template <typename T> ReadResource<T> read() const;
+        template <typename T>
+        ReadResource<T> read() const;
 
         /// Writes a resource, locking it for writing.
         /// @tparam T The type of the resource.
         /// @returns A lock referring to the resource.
-        template <typename T> WriteResource<T> write() const;
+        template <typename T>
+        WriteResource<T> write() const;
 
         /// @brief Creates a new entity.
         /// @tparam ComponentTypes The types of the components to be added when the entity is created.
         /// @param components The initial values for the components.
-        template <typename... ComponentTypes> Entity create(ComponentTypes&&... components);
+        template <typename... ComponentTypes>
+        Entity create(ComponentTypes&&... components);
 
         /// @brief Removes an entity.
         /// @param entity Entity ID.
@@ -60,17 +66,20 @@ namespace cubos::core::ecs
         /// @brief Adds components to an entity.
         /// @tparam ComponentTypes The types of the components to be added.
         /// @param components The initial values for the components.
-        template <typename... ComponentTypes> void add(Entity entity, ComponentTypes&&... components);
+        template <typename... ComponentTypes>
+        void add(Entity entity, ComponentTypes&&... components);
 
         /// @brief Removes components from an entity.
         /// @tparam ComponentTypes Component types to be removed.
         /// @param entity Entity ID.
-        template <typename... ComponentTypes> void remove(Entity entity);
+        template <typename... ComponentTypes>
+        void remove(Entity entity);
 
         /// @brief Checks if an entity has a component.
         /// @tparam T Component type.
         /// @param entity Entity ID.
-        template <typename T> bool has(Entity entity) const;
+        template <typename T>
+        bool has(Entity entity) const;
 
         /// @brief Creates a package from the components of an entity.
         /// @param entity Entity ID.
@@ -87,8 +96,10 @@ namespace cubos::core::ecs
 
     private:
         friend class Debug;
-        template <typename... ComponentTypes> friend class Query;
-        template <typename T> friend class impl::QueryFetcher;
+        template <typename... ComponentTypes>
+        friend class Query;
+        template <typename T>
+        friend class impl::QueryFetcher;
         friend class Commands;
 
         ResourceManager resourceManager;
@@ -98,29 +109,34 @@ namespace cubos::core::ecs
 
     // Implementation.
 
-    template <typename T, typename... TArgs> void World::registerResource(TArgs... args)
+    template <typename T, typename... TArgs>
+    void World::registerResource(TArgs... args)
     {
         CUBOS_TRACE("Registered resource '{}'", typeid(T).name());
         this->resourceManager.add<T>(args...);
     }
 
-    template <typename T> void World::registerComponent()
+    template <typename T>
+    void World::registerComponent()
     {
         CUBOS_TRACE("Registered component '{}'", getComponentName<T>());
         this->componentManager.registerComponent<T>();
     }
 
-    template <typename T> ReadResource<T> World::read() const
+    template <typename T>
+    ReadResource<T> World::read() const
     {
         return this->resourceManager.read<T>();
     }
 
-    template <typename T> WriteResource<T> World::write() const
+    template <typename T>
+    WriteResource<T> World::write() const
     {
         return this->resourceManager.write<T>();
     }
 
-    template <typename... ComponentTypes> Entity World::create(ComponentTypes&&... components)
+    template <typename... ComponentTypes>
+    Entity World::create(ComponentTypes&&... components)
     {
         size_t ids[] = {
             (this->componentManager
@@ -143,7 +159,8 @@ namespace cubos::core::ecs
         return entity;
     }
 
-    template <typename... ComponentTypes> void World::add(Entity entity, ComponentTypes&&... components)
+    template <typename... ComponentTypes>
+    void World::add(Entity entity, ComponentTypes&&... components)
     {
         if (!this->entityManager.isValid(entity))
         {
@@ -169,7 +186,8 @@ namespace cubos::core::ecs
 #endif
     }
 
-    template <typename... ComponentTypes> void World::remove(Entity entity)
+    template <typename... ComponentTypes>
+    void World::remove(Entity entity)
     {
         if (!this->entityManager.isValid(entity))
         {
@@ -195,7 +213,8 @@ namespace cubos::core::ecs
 #endif
     }
 
-    template <typename T> bool World::has(Entity entity) const
+    template <typename T>
+    bool World::has(Entity entity) const
     {
         if (!this->entityManager.isValid(entity))
         {

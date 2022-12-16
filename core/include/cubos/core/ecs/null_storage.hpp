@@ -9,7 +9,8 @@ namespace cubos::core::ecs
     /// @brief NullStorage is a Storage implementation that doesn't keep any data, made for components
     /// that don't hold any data and just work as tags.
     /// @tparam T The type to be stored in the storage.
-    template <typename T> class NullStorage : public Storage<T>
+    template <typename T>
+    class NullStorage : public Storage<T>
     {
     public:
         T* insert(uint32_t index, T value) override;
@@ -21,22 +22,26 @@ namespace cubos::core::ecs
         T data;
     };
 
-    template <typename T> T* NullStorage<T>::insert(uint32_t index, T value)
+    template <typename T>
+    T* NullStorage<T>::insert(uint32_t index, T value)
     {
         return &data;
     }
 
-    template <typename T> T* NullStorage<T>::get(uint32_t index)
+    template <typename T>
+    T* NullStorage<T>::get(uint32_t index)
     {
         return &data;
     }
 
-    template <typename T> const T* NullStorage<T>::get(uint32_t index) const
+    template <typename T>
+    const T* NullStorage<T>::get(uint32_t index) const
     {
         return &data;
     }
 
-    template <typename T> void NullStorage<T>::erase(uint32_t index)
+    template <typename T>
+    void NullStorage<T>::erase(uint32_t index)
     {
     }
 

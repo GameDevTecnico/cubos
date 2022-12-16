@@ -7,7 +7,8 @@ namespace cubos::core::memory
     /// @tparam T The type of the value.
     /// @param value The value to swap.
     /// @return The swapped value.
-    template <typename T> T swapBytes(T value);
+    template <typename T>
+    T swapBytes(T value);
 
     /// Checks if the current platform is little endian.
     /// @return True if the current platform is little endian, false otherwise.
@@ -17,29 +18,34 @@ namespace cubos::core::memory
     /// @tparam T The type of the value.
     /// @param value The value to convert.
     /// @return The converted value.
-    template <typename T> T fromLittleEndian(T value);
+    template <typename T>
+    T fromLittleEndian(T value);
 
     /// Converts a value from local endianness to little endianness.
     /// @tparam T The type of the value.
     /// @param value The value to convert.
     /// @return The converted value.
-    template <typename T> T toLittleEndian(T value);
+    template <typename T>
+    T toLittleEndian(T value);
 
     /// Converts a value from big endianness to local endianness.
     /// @tparam T The type of the value.
     /// @param value The value to convert.
     /// @return The converted value.
-    template <typename T> T fromBigEndian(T value);
+    template <typename T>
+    T fromBigEndian(T value);
 
     /// Converts a value from local endianness to big endianness.
     /// @tparam T The type of the value.
     /// @param value The value to convert.
     /// @return The converted value.
-    template <typename T> T toBigEndian(T value);
+    template <typename T>
+    T toBigEndian(T value);
 
     // Implementation.
 
-    template <typename T> inline T swapBytes(T value)
+    template <typename T>
+    inline T swapBytes(T value)
     {
         union {
             T value;
@@ -58,22 +64,26 @@ namespace cubos::core::memory
         return *reinterpret_cast<char*>(&i) == 1;
     }
 
-    template <typename T> inline T fromLittleEndian(T value)
+    template <typename T>
+    inline T fromLittleEndian(T value)
     {
         return isLittleEndian() ? value : swapBytes(value);
     }
 
-    template <typename T> inline T toLittleEndian(T value)
+    template <typename T>
+    inline T toLittleEndian(T value)
     {
         return isLittleEndian() ? value : swapBytes(value);
     }
 
-    template <typename T> inline T fromBigEndian(T value)
+    template <typename T>
+    inline T fromBigEndian(T value)
     {
         return isLittleEndian() ? swapBytes(value) : value;
     }
 
-    template <typename T> inline T toBigEndian(T value)
+    template <typename T>
+    inline T toBigEndian(T value)
     {
         return isLittleEndian() ? swapBytes(value) : value;
     }

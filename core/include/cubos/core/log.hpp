@@ -72,7 +72,8 @@ requires(cubos::core::data::TriviallySerializable<T> && !std::is_pointer_v<T> &&
         return it;
     }
 
-    template <typename FormatContext> auto format(const T& val, FormatContext& ctx) -> decltype(ctx.out())
+    template <typename FormatContext>
+    auto format(const T& val, FormatContext& ctx) -> decltype(ctx.out())
     {
         auto stream = cubos::core::memory::BufferStream(32);
         cubos::core::data::DebugSerializer serializer(stream, this->pretty, this->types);

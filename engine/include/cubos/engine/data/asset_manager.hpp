@@ -64,7 +64,7 @@ namespace cubos::engine::data
         template <typename T>
         requires IsAsset<T> Asset<T> store(const std::string& id, Usage usage, T&& data);
 
-    private :
+    private:
         /// Stores runtime information about an asset.
         struct Info
         {
