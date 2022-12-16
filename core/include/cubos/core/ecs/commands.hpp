@@ -80,14 +80,51 @@ namespace cubos::core::ecs
         BlueprintBuilder(data::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands);
     };
 
+    /// Used to write ECS commands and execute them at a later time.
+    /// Just wraps a reference to a CommandBuffer object.
+    class Commands final
+    {
+    public:
+        /// @param buffer The command buffer to write to.
+        Commands(CommandBuffer& buffer);
+        Commands(Commands&&) = default;
+
+        /// Adds components to an entity.
+        /// @tparam ComponentTypes The types of the components to be added.
+        /// @param entity The entity to which the components will be added.
+        /// @param components The components to add.
+        template <typename... ComponentTypes> void add(Entity entity, ComponentTypes&&... components);
+
+        /// Removes components from an entity.
+        /// @tparam ComponentTypes The types of the components to be removed.
+        /// @param entity The entity from which the components will be removed.
+        template <typename... ComponentTypes> void remove(Entity entity);
+
+        /// Creates a new entity with the given components.
+        /// @tparam ComponentTypes The types of the components to be added.
+        /// @param components The components to add.
+        /// @returns The new entity.
+        template <typename... ComponentTypes> EntityBuilder create(ComponentTypes&&... components);
+
+        /// Destroys an entity.
+        /// @param entity The entity to destroy.
+        void destroy(Entity entity);
+
+        /// Spawns an instance of a blueprint into the world.
+        /// @param blueprint The blueprint to spawn.
+        /// @returns Blueprint builder which allows components to be overridden.
+        BlueprintBuilder spawn(const Blueprint& blueprint);
+
+    private:
+        CommandBuffer& buffer; ///< The command buffer to write to.
+    };
+
     /// Object responsible for storing ECS commands to execute them later.
     class CommandBuffer final
     {
     public:
-        /// TODO: make this private after implementing the Cubos class.
         /// @param world The world to which the commands will be applied.
         CommandBuffer(World& world);
-        CommandBuffer(CommandBuffer&&);
         ~CommandBuffer();
 
         /// Adds components to an entity.
@@ -216,6 +253,21 @@ namespace cubos::core::ecs
     {
         this->commands.add(this->entity(name), std::move(components)...);
         return *this;
+    }
+
+    template <typename... ComponentTypes> void Commands::add(Entity entity, ComponentTypes&&... components)
+    {
+        this->buffer.add(entity, std::move(components)...);
+    }
+
+    template <typename... ComponentTypes> void Commands::remove(Entity entity)
+    {
+        this->buffer.remove(entity);
+    }
+
+    template <typename... ComponentTypes> EntityBuilder Commands::create(ComponentTypes&&... components)
+    {
+        return this->buffer.create(std::move(components)...);
     }
 
     template <typename... ComponentTypes> void CommandBuffer::add(Entity entity, ComponentTypes&&... components)

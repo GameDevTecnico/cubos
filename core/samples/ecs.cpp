@@ -100,7 +100,7 @@ CUBOS_REGISTER_COMPONENT(Position, "Position");
 CUBOS_REGISTER_COMPONENT(Velocity, "Velocity");
 CUBOS_REGISTER_COMPONENT(Parent, "Parent");
 
-void spawner(ecs::CommandBuffer& cmds)
+void spawner(ecs::Commands cmds)
 {
     cmds.create().add<Position>({0, 5, 1}).add(Velocity{0, 3, 1}, Player{});
 

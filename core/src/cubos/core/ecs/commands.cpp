@@ -30,19 +30,24 @@ Entity BlueprintBuilder::entity(const std::string& name) const
     return this->map.getRef(name);
 }
 
-CommandBuffer::CommandBuffer(World& world) : world(world)
+Commands::Commands(CommandBuffer& buffer) : buffer(buffer)
 {
     // Do nothing.
 }
 
-CommandBuffer::CommandBuffer(CommandBuffer&& other) : world(other.world)
+void Commands::destroy(Entity entity)
 {
-    this->buffers = std::move(other.buffers);
-    this->created = std::move(other.created);
-    this->destroyed = std::move(other.destroyed);
-    this->added = std::move(other.added);
-    this->removed = std::move(other.removed);
-    this->changed = std::move(other.changed);
+    this->buffer.destroy(entity);
+}
+
+BlueprintBuilder Commands::spawn(const Blueprint& blueprint)
+{
+    return this->buffer.spawn(blueprint);
+}
+
+CommandBuffer::CommandBuffer(World& world) : world(world)
+{
+    // Do nothing.
 }
 
 CommandBuffer::~CommandBuffer()

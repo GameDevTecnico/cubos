@@ -161,7 +161,7 @@ namespace cubos::core::ecs
             static Type arg(const World& world, Type&& fetched);
         };
 
-        template <> struct SystemFetcher<CommandBuffer&>
+        template <> struct SystemFetcher<Commands>
         {
             using Type = CommandBuffer*;
 
@@ -176,7 +176,7 @@ namespace cubos::core::ecs
 
             /// @param fetched The fetched query.
             /// @returns The query.
-            static CommandBuffer& arg(const World& world, CommandBuffer* fetched);
+            static Commands arg(const World& world, CommandBuffer* fetched);
         };
 
         template <typename... Args> struct SystemFetcher<std::tuple<Args...>>
@@ -332,19 +332,19 @@ namespace cubos::core::ecs
         return std::move(fetched);
     }
 
-    inline void impl::SystemFetcher<CommandBuffer&>::add(SystemInfo& info)
+    inline void impl::SystemFetcher<Commands>::add(SystemInfo& info)
     {
         info.usesCommands = true;
     }
 
-    inline CommandBuffer* impl::SystemFetcher<CommandBuffer&>::fetch(const World&, CommandBuffer& commands)
+    inline CommandBuffer* impl::SystemFetcher<Commands>::fetch(const World&, CommandBuffer& commands)
     {
         return &commands;
     }
 
-    inline CommandBuffer& impl::SystemFetcher<CommandBuffer&>::arg(const World&, CommandBuffer* fetched)
+    inline Commands impl::SystemFetcher<Commands>::arg(const World&, CommandBuffer* fetched)
     {
-        return *fetched;
+        return Commands(*fetched);
     }
 
     template <typename... Args> void impl::SystemFetcher<std::tuple<Args...>>::add(SystemInfo& info)
