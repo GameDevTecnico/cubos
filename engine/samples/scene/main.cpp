@@ -11,6 +11,7 @@
 
 #include <cubos/engine/plugins/window.hpp>
 #include <cubos/engine/plugins/env_settings.hpp>
+#include <cubos/engine/plugins/file_settings.hpp>
 
 #include <components/num.hpp>
 #include <components/parent.hpp>
@@ -58,5 +59,6 @@ int main(int argc, char** argv)
 
         .addPlugin(cubos::engine::plugins::envSettingsPlugin)
         .addPlugin(cubos::engine::plugins::windowPlugin)
+        .addPlugin(cubos::engine::plugins::fileSettingsPlugin)
         .run();
 }

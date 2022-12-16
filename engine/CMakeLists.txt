@@ -32,6 +32,7 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/plugins/window.cpp"
 	"src/cubos/engine/plugins/env_settings.cpp"
+    "src/cubos/engine/plugins/file_settings.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -63,6 +64,7 @@ set(CUBOS_ENGINE_INCLUDE
 
     "include/cubos/engine/plugins/window.hpp"
 	"include/cubos/engine/plugins/env_settings.hpp"
+    "include/cubos/engine/plugins/file_settings.hpp"
 )
 
 # Create cubos engine
