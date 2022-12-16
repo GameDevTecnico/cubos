@@ -91,7 +91,7 @@ namespace cubos::core
 
         /// Returns an iterator pointing to the first element in the settings list.
         std::unordered_map<std::string, std::string>::iterator begin();
-        
+
         /// Returns an iterator pointing to the last element in the settings list.
         std::unordered_map<std::string, std::string>::iterator end();
 
