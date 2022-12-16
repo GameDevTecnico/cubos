@@ -21,7 +21,7 @@ using namespace core::ecs;
 using namespace core::data;
 using namespace core::memory;
 
-void setup(Commands& cmds, data::AssetManager& assetManager)
+void setup(CommandBuffer& cmds, data::AssetManager& assetManager)
 {
     FileSystem::mount("/assets/", std::make_shared<STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
 

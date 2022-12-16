@@ -355,7 +355,7 @@ int main(void)
 
         // Update the ECS systems.
 
-        auto cmds = core::ecs::Commands(world);
+        auto cmds = core::ecs::CommandBuffer(world);
         core::ecs::SystemWrapper([](core::ecs::Debug debug) {
             ImGui::Begin("Inspector");
             core::ui::showWorld(debug);
