@@ -121,7 +121,7 @@ namespace cubos::core::al
             /// Sets the min and max distance of the source.
             /// @param minDistance The min distance of the source.
             /// @param maxDistance The max distance of the source.
-            virtual void setDistance(float minDistance, float maxDistance) = 0;
+            virtual void setDistance(float maxDistance) = 0;
 
             /// Sets the cone angle of the source.
             /// @param coneAngle The cone angle of the source.

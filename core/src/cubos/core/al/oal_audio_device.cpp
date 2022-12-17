@@ -65,7 +65,65 @@ public:
         alSourcei(this->id, AL_BUFFER, oalBuffer->id);
     }
 
-    
+    virtual void setPosition(const glm::vec3& position) override
+    {
+        alSource3f(this->id, AL_POSITION, position.x, position.y, position.z);
+    }
+
+    virtual void setVelocity(const glm::vec3& velocity) override
+    {
+        alSource3f(this->id, AL_VELOCITY, velocity.x, velocity.y, velocity.z);
+    }
+
+    virtual void setGain(float gain) override
+    {
+        alSourcef(this->id, AL_GAIN, gain);
+    }
+
+    virtual void setPitch(float pitch) override
+    {
+        alSourcef(this->id, AL_PITCH, pitch);
+    }
+
+    virtual void setLooping(bool looping) override
+    {
+        alSourcei(this->id, AL_LOOPING, looping);
+    }
+
+    virtual void setRelative(bool relative) override
+    {
+        alSourcei(this->id, AL_SOURCE_RELATIVE, relative);
+    }
+
+    virtual void setDistance(float maxDistance) override
+    {
+        alSourcef(this->id, AL_MAX_DISTANCE, maxDistance);
+    }
+
+    virtual void setConeAngle(float coneAngle) override
+    {
+        alSourcef(this->id, AL_CONE_OUTER_ANGLE, coneAngle); 
+    }
+
+    virtual void setConeGain(float coneGain) override
+    {
+        alSourcef(this->id, AL_CONE_INNER_ANGLE, coneGain);
+    }
+
+    virtual void setConeDirection(const glm::vec3& direction) override
+    {
+        alSource3f(this->id, AL_DIRECTION, direction.x, direction.y, direction.z);
+    }
+
+    virtual void setReferenceDistance(float referenceDistance) override
+    {
+        alSourcef(this->id, AL_REFERENCE_DISTANCE, referenceDistance);
+    }
+
+    virtual void play() override
+    {
+        alSourcePlay(this->id);
+    }
 
     ALuint id;
 };
