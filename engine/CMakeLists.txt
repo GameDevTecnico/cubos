@@ -32,7 +32,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/plugins/window.cpp"
     "src/cubos/engine/plugins/transform.cpp"
     "src/cubos/engine/plugins/renderer.cpp"
-	"src/cubos/engine/plugins/env_settings.cpp"
+    "src/cubos/engine/plugins/env_settings.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -45,6 +45,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/ecs/grid.hpp"
     "include/cubos/engine/ecs/transform_system.hpp"
     "include/cubos/engine/ecs/draw_system.hpp"
+    "include/cubos/engine/ecs/camera.hpp"
 
     "include/cubos/engine/gl/frame.hpp"
     "include/cubos/engine/gl/renderer.hpp"

@@ -7,6 +7,7 @@
 
 #include <glm/glm.hpp>
 #include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/ecs/entity_manager.hpp>
 
 namespace cubos::engine::plugins
 {
@@ -19,6 +20,12 @@ namespace cubos::engine::plugins
     /// - draw: Draws component's to the renderer's frame.
     /// @param cubos CUBOS. main class
     void rendererPlugin(Cubos& cubos);
+
+    /// Resource to contain the current active camera
+    struct ActiveCamera
+    {
+        cubos::core::ecs::Entity entity;
+    };
 }; // namespace cubos::engine::plugins
 
 #endif // CUBOS_ENGINE_PLUGINS_RENDERER_HPP
