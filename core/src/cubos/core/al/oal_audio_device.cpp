@@ -131,7 +131,7 @@ public:
 OALAudioDevice::OALAudioDevice(std::string specifier)
 {
     auto device = alcOpenDevice(specifier.c_str());
-    auto context = alcCreateContext(device, nullptr); // May be relevant in the future, passes extra attributes
+    auto context = alcCreateContext(device, nullptr);
     alcMakeContextCurrent(context);
 }
 
@@ -148,7 +148,7 @@ void OALAudioDevice::enumerateDevices(std::vector<std::string>& devices)
 {
     if (alcIsExtensionPresent(nullptr, "ALC_ENUMERATION_EXT") == AL_FALSE)
     {
-        logCritical("Missing extension ALC_ENUMERATION_EXT");
+        CUBOS_CRITICAL("Missing extension ALC_ENUMERATION_EXT");
         abort();
     }
 
@@ -166,7 +166,7 @@ std::string OALAudioDevice::getDefaultDevice()
 {
     if (alcIsExtensionPresent(nullptr, "ALC_ENUMERATION_EXT") == AL_FALSE)
     {
-        logCritical("Missing extension ALC_ENUMERATION_EXT");
+        CUBOS_CRITICAL("Missing extension ALC_ENUMERATION_EXT");
         abort();
     }
 

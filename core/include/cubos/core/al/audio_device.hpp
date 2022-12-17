@@ -61,7 +61,7 @@ namespace cubos::core::al
         /// @param up The up direction of the listener.
         virtual void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up) = 0;
 
-        /// Sets the velocity of the listener.
+        /// @param velocity The velocity of the listener.
         /// @param velocity The velocity of the listener.
         virtual void setListenerVelocity(const glm::vec3& velocity) = 0;
     };
