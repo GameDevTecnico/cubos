@@ -15,33 +15,31 @@
 namespace cubos::core::io
 {
     /// Wrapper around a window object, handles input events and creates the render device
-    class GLFWWindow : public cubos::core::io::Window
+    class GLFWWindow : public BaseWindow
     {
     public:
-        GLFWWindow(); // TODO: pass settings here?
+        GLFWWindow(const std::string& title, const glm::ivec2& size);
         virtual ~GLFWWindow() override;
 
-        /// Polls window events, firing the events
+        // Interface implementation.
+
         virtual void pollEvents() const override;
-
-        /// Swaps the window buffers
         virtual void swapBuffers() const override;
-
-        /// Returns the window render device
         virtual gl::RenderDevice& getRenderDevice() const override;
-
-        /// Return the window framebuffer size in pixels
+        virtual glm::ivec2 getSize() const override;
         virtual glm::ivec2 getFramebufferSize() const override;
-
-        /// Should the window close?
         virtual bool shouldClose() const override;
-
-        /// Current time since the window was created.
         virtual double getTime() const override;
-
-        virtual void setMouseLockState(MouseLockState state) override;
+        virtual void setMouseState(MouseState state) override;
+        virtual MouseState getMouseState() const override;
+        virtual std::shared_ptr<Cursor> createCursor(Cursor::Standard standard) override;
+        virtual void setCursor(std::shared_ptr<Cursor> cursor) override;
+        virtual void setClipboard(const std::string& text) override;
+        virtual const char* getClipboard() const override;
 
     private:
+        std::shared_ptr<Cursor> cursor;
+
 #ifdef WITH_GLFW
         GLFWwindow* handle;
         gl::OGLRenderDevice* renderDevice;

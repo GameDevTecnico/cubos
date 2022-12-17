@@ -3,8 +3,14 @@
 using namespace cubos;
 using namespace cubos::engine::data;
 
+Meta::Meta(const std::string& id, const std::string& type, Usage usage) : id(id), type(type), usage(usage)
+{
+    this->stored = true;
+}
+
 Meta::Meta(Meta&& rhs)
 {
+    this->stored = rhs.stored;
     this->id = std::move(rhs.id);
     this->type = std::move(rhs.type);
     this->usage = rhs.usage;
@@ -51,6 +57,8 @@ void cubos::core::data::serialize(Serializer& serializer, const Meta& meta, cons
 
 void cubos::core::data::deserialize(Deserializer& deserializer, Meta& meta)
 {
+    meta.stored = false;
+
     std::string usage;
     deserializer.beginObject();
     deserializer.read(meta.id);
@@ -69,7 +77,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, Meta& meta)
     }
     else
     {
-        core::logError("asset::Meta::deserialize() failed: Invalid usage type '{}', defaulting to Static", usage);
+        CUBOS_WARN("Invalid asset usage type '{}', defaulting to Usage::Static", usage);
         meta.usage = Usage::Static;
     }
 }

@@ -14,6 +14,7 @@ namespace cubos::core::ecs
     public:
         T* insert(uint32_t index, T value) override;
         T* get(uint32_t index) override;
+        const T* get(uint32_t index) const override;
         void erase(uint32_t index) override;
 
     private:
@@ -28,7 +29,12 @@ namespace cubos::core::ecs
 
     template <typename T> T* MapStorage<T>::get(uint32_t index)
     {
-        return &data[index];
+        return &data.at(index);
+    }
+
+    template <typename T> const T* MapStorage<T>::get(uint32_t index) const
+    {
+        return &data.at(index);
     }
 
     template <typename T> void MapStorage<T>::erase(uint32_t index)

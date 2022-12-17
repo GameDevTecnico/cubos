@@ -36,7 +36,7 @@ namespace cubos::core::io
 
         /// Associates a window to this InputManager. An InputManager can only be associated to one window at once
         /// @param window the window to assciate this InputManager to
-        static void init(cubos::core::io::Window* window);
+        static void init(Window window);
 
         /// Creates an action with a given name
         /// @param name the name of the Action to be created
@@ -187,7 +187,7 @@ namespace cubos::core::io
                                                 cubos::core::io::MouseAxis mouseAxis);
 
     private:
-        static cubos::core::io::Window* window;
+        static Window window;
         static std::map<std::string, std::shared_ptr<Action>> actions;
 
         static void handleKeyDown(cubos::core::io::Key key);

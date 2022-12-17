@@ -2,13 +2,14 @@
 
 using namespace cubos::core::data;
 
-Serializer::Serializer(memory::Stream& stream) : stream(stream)
+Serializer::Serializer()
 {
     this->failBit = false;
 }
 
 void Serializer::flush()
 {
+    // Do nothing.
 }
 
 bool Serializer::failed() const

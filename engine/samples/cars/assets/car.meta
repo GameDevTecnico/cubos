@@ -1,0 +1,13 @@
+---
+metas:
+  - id: palette
+    type: Palette
+    usage: Static
+    params:
+      path: /assets/main.pal
+  - id: car
+    type: Grid
+    usage: Static
+    params:
+      path: /assets/car.grd
+...

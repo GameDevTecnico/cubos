@@ -42,6 +42,7 @@ namespace cubos::engine::data
     {
     public:
         Meta() = default;
+        Meta(const std::string& id, const std::string& type, Usage usage);
         Meta(Meta&& rhs);
         ~Meta() = default;
 
@@ -57,6 +58,10 @@ namespace cubos::engine::data
         /// @return The asset's usage.
         Usage getUsage() const;
 
+        /// Checks if the asset was stored instead of being loaded.
+        /// @return True if the asset was stored, false otherwise.
+        bool isStored() const;
+
         /// Gets the parameters of the asset.
         /// @return The parameters of the asset.
         const std::unordered_map<std::string, std::string>& getParameters() const;
@@ -68,6 +73,7 @@ namespace cubos::engine::data
         std::string id;                                          ///< The asset's ID.
         std::string type;                                        ///< The asset's type name.
         Usage usage;                                             ///< The asset's usage.
+        bool stored;                                             ///< True if the asset was stored, false otherwise.
         std::unordered_map<std::string, std::string> parameters; ///< List of parameters that this asset has.
     };
 } // namespace cubos::engine::data

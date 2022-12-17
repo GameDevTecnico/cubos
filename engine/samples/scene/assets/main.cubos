@@ -1,0 +1,20 @@
+{
+  "imports": {
+    "sub1": "scenes/sub",
+    "sub2": "scenes/sub"
+  },
+  "entities": {
+    "main": {
+      "num": 0
+    },
+    "sub1.root": {
+      "parent": "main"
+    },
+    "sub2.root": {
+      "parent": "main"
+    },
+    "sub2.child": {
+      "num": 3
+    }
+  }
+}

@@ -13,6 +13,8 @@ option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
 option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source?" ON)
 option(FMT_USE_SUBMODULE "Compile FMT from source?" ON)
 
+set(CUBOS_CORE_ECS_MAX_COMPONENTS "63" CACHE STRING "The maximum number of components registered in an ECS world.")
+
 option(BUILD_CORE_SAMPLES "Build cubos core samples" OFF)
 option(BUILD_CORE_TESTS "Build cubos core tests?" OFF)
 
@@ -31,17 +33,23 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/data/serializer.cpp"
     "src/cubos/core/data/deserializer.cpp"
+    "src/cubos/core/data/debug_serializer.cpp"
     "src/cubos/core/data/yaml_serializer.cpp"
     "src/cubos/core/data/yaml_deserializer.cpp"
+    "src/cubos/core/data/json_serializer.cpp"
+    "src/cubos/core/data/json_deserializer.cpp"
     "src/cubos/core/data/binary_serializer.cpp"
     "src/cubos/core/data/binary_deserializer.cpp"
+    "src/cubos/core/data/package.cpp"
     "src/cubos/core/data/file.cpp"
     "src/cubos/core/data/file_system.cpp"
     "src/cubos/core/data/std_archive.cpp"
     "src/cubos/core/data/embedded_archive.cpp"
     "src/cubos/core/data/qb_parser.cpp"
+    "src/cubos/core/data/handle.cpp"
 
     "src/cubos/core/io/window.cpp"
+    "src/cubos/core/io/cursor.cpp"
     "src/cubos/core/io/glfw_window.hpp"
     "src/cubos/core/io/glfw_window.cpp"
 
@@ -68,8 +76,20 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/al/oal_audio_device.cpp"
     "src/cubos/core/al/oal_audio_device.hpp"
 
+    "src/cubos/core/ui/imgui.cpp"
+    "src/cubos/core/ui/serialization.cpp"
+    "src/cubos/core/ui/ecs.cpp"
+
+    "src/cubos/core/ecs/entity_manager.cpp"
+    "src/cubos/core/ecs/component_manager.cpp"
+    "src/cubos/core/ecs/commands.cpp"
+    "src/cubos/core/ecs/blueprint.cpp"
     "src/cubos/core/ecs/world.cpp"
- )
+    "src/cubos/core/ecs/debug.cpp"
+    "src/cubos/core/ecs/system.cpp"
+    "src/cubos/core/ecs/dispatcher.cpp"
+    "src/cubos/core/ecs/registry.cpp"
+)
 
 set(CUBOS_CORE_INCLUDE
     "include/cubos/core/log.hpp"
@@ -82,11 +102,15 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/data/serializer.hpp"
     "include/cubos/core/data/deserializer.hpp"
+    "include/cubos/core/data/debug_serializer.hpp"
     "include/cubos/core/data/yaml_serializer.hpp"
     "include/cubos/core/data/yaml_deserializer.hpp"
+    "include/cubos/core/data/json_serializer.hpp"
+    "include/cubos/core/data/json_deserializer.hpp"
     "include/cubos/core/data/binary_serializer.hpp"
     "include/cubos/core/data/binary_deserializer.hpp"
     "include/cubos/core/data/serialization_map.hpp"
+    "include/cubos/core/data/package.hpp"
     "include/cubos/core/data/file.hpp"
     "include/cubos/core/data/file_stream.hpp"
     "include/cubos/core/data/file_system.hpp"
@@ -94,8 +118,11 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/std_archive.hpp"
     "include/cubos/core/data/embedded_archive.hpp"
     "include/cubos/core/data/qb_parser.hpp"
+    "include/cubos/core/data/handle.hpp"
 
     "include/cubos/core/io/window.hpp"
+    "include/cubos/core/io/keyboard.hpp"
+    "include/cubos/core/io/cursor.hpp"
 
     "include/cubos/core/gl/debug.hpp"
     "include/cubos/core/gl/render_device.hpp"
@@ -117,12 +144,25 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/sources/single_axis.hpp"
     "include/cubos/core/io/sources/double_axis.hpp"
 
-    "include/cubos/core/ecs/world.hpp"
-    "include/cubos/core/ecs/world_view.hpp"
+    "include/cubos/core/ui/imgui.hpp"
+    "include/cubos/core/ui/serialization.hpp"
+    "include/cubos/core/ui/ecs.hpp"
+
+    "include/cubos/core/ecs/entity_manager.hpp"
+    "include/cubos/core/ecs/resource_manager.hpp"
+    "include/cubos/core/ecs/component_manager.hpp"
+    "include/cubos/core/ecs/blueprint.hpp"
+    "include/cubos/core/ecs/commands.hpp"
     "include/cubos/core/ecs/storage.hpp"
     "include/cubos/core/ecs/vec_storage.hpp"
     "include/cubos/core/ecs/map_storage.hpp"
     "include/cubos/core/ecs/null_storage.hpp"
+    "include/cubos/core/ecs/world.hpp"
+    "include/cubos/core/ecs/query.hpp"
+    "include/cubos/core/ecs/debug.hpp"
+    "include/cubos/core/ecs/system.hpp"
+    "include/cubos/core/ecs/registry.hpp"
+    "include/cubos/core/ecs/dispatcher.hpp"
 )
 
 # Create core library
@@ -131,6 +171,7 @@ add_library(cubos-core ${CUBOS_CORE_SOURCE} ${CUBOS_CORE_INCLUDE})
 target_include_directories(cubos-core PUBLIC "include" PRIVATE "src")
 set_property(TARGET cubos-core PROPERTY CXX_STANDARD 20)
 target_compile_features(cubos-core PUBLIC cxx_std_20)
+target_compile_definitions(cubos-core PUBLIC -DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS})
 
 # Link dependencies
 
@@ -183,22 +224,35 @@ else ()
     find_package(googletest REQUIRED)
 endif ()
 
-if (SPDLOG_USE_SUBMODULE)
-    add_subdirectory(lib/spdlog)
-else ()
-    find_package(spdlog REQUIRED)
-endif ()
-
 if (FMT_USE_SUBMODULE)
     add_subdirectory(lib/fmt)
 else ()
     find_package(fmt REQUIRED)
 endif ()
 
+if (SPDLOG_USE_SUBMODULE)
+    add_subdirectory(lib/spdlog)
+else ()
+    set(SPDLOG_FMT_EXTERNAL ON CACHE BOOL "" FORCE)
+    find_package(spdlog REQUIRED)
+endif ()
+
+add_subdirectory(lib/json)
+
+add_library(imgui STATIC
+    "lib/imgui/imgui.cpp"
+    "lib/imgui/imgui_draw.cpp"
+    "lib/imgui/imgui_tables.cpp"
+    "lib/imgui/imgui_widgets.cpp"
+    "lib/imgui/imgui_demo.cpp"
+)
+
+target_include_directories(imgui PUBLIC "lib/imgui")
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp fmt::fmt ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp imgui fmt::fmt json ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests

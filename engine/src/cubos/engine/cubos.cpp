@@ -1,25 +1,78 @@
+#include <cubos/core/log.hpp>
+#include <cubos/core/settings.hpp>
+#include <cubos/core/ecs/commands.hpp>
+
 #include <cubos/engine/cubos.hpp>
 
-#include <cubos/core/log.hpp>
-#include <cubos/core/io/window.hpp>
-#include <cubos/core/gl/render_device.hpp>
+using namespace cubos::engine;
 
-void cubos::engine::init(int argc, char** argv)
+Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 {
-    core::initializeLogger();
+    if (!plugins.contains(func))
+    {
+        func(*this);
+        plugins.insert(func);
+    }
+    else
+    {
+        CUBOS_TRACE("Plugin was already registered!");
+    }
+    return *this;
 }
 
-void cubos::engine::run()
+Cubos& Cubos::putStageAfter(const std::string& stage, const std::string& referenceStage)
 {
-    auto window = core::io::Window::create();
-    auto& renderDevice = window->getRenderDevice();
-
-    while (!window->shouldClose())
+    if (isStartupStage)
     {
-        renderDevice.clearColor(0.0, 0.0, 0.0, 0.0f);
-        window->swapBuffers();
-        window->pollEvents();
+        startupDispatcher.putStageAfter(stage, referenceStage);
     }
+    else
+    {
+        mainDispatcher.putStageAfter(stage, referenceStage);
+    }
+    return *this;
+}
 
-    delete window;
+Cubos& Cubos::putStageBefore(const std::string& stage, const std::string& referenceStage)
+{
+    if (isStartupStage)
+    {
+        startupDispatcher.putStageBefore(stage, referenceStage);
+    }
+    else
+    {
+        mainDispatcher.putStageBefore(stage, referenceStage);
+    }
+    return *this;
+}
+
+Cubos::Cubos()
+{
+    core::initializeLogger();
+
+    addResource<ShouldQuit>(true);
+    addResource<cubos::core::Settings>();
+}
+
+Cubos::Cubos(int argc, char** argv)
+{
+    std::vector<std::string> arguments(argv + 1, argv + argc);
+    addResource<Arguments>(arguments);
+
+    addResource<ShouldQuit>(true);
+    addResource<cubos::core::Settings>();
+}
+
+void Cubos::run()
+{
+    plugins.clear();
+
+    cubos::core::ecs::Commands cmds(world);
+
+    startupDispatcher.callSystems(world, cmds);
+
+    while (!world.read<ShouldQuit>().get().value)
+    {
+        mainDispatcher.callSystems(world, cmds);
+    }
 }

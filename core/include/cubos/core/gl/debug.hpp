@@ -17,7 +17,7 @@ namespace cubos::core::gl
     {
     public:
         /// Initialize the debug rendering system.
-        static void init(gl::RenderDevice& renderDevice);
+        static void init(RenderDevice& renderDevice);
 
         /// Draw a filled cube that will stay visible for a specified amount of time.
         /// @param position Position of the cube's center in world space.

@@ -125,6 +125,10 @@ namespace cubos::core::memory
         /// @param args The arguments to print.
         template <typename T, typename... TArgs> void printf(const char* fmt, T arg, TArgs... args);
 
+        /// Formatted print recursion tail function.
+        /// @param fmt The remainder format string.
+        void printf(const char* fmt);
+
         /// Parses a 8 bit signed integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
@@ -188,11 +192,6 @@ namespace cubos::core::memory
         /// Ignores a number of bytes from the stream.
         /// @param size The number of bytes to ignore.
         void ignore(size_t size);
-
-    private:
-        /// Formatted print recursion tail function.
-        /// @param fmt The remainder format string.
-        void printf(const char* fmt);
     };
 
     // Implementation

@@ -11,6 +11,15 @@ AssetManager::Info::Info(Meta&& meta) : meta(std::move(meta))
 {
     this->data = nullptr;
     this->refCount = 0;
+    this->stored = false;
+}
+
+AssetManager::Info::Info(Meta&& meta, const void* data, std::function<void(const void*)> deleter)
+    : meta(std::move(meta)), deleter(std::move(deleter))
+{
+    this->data = data;
+    this->refCount = 0;
+    this->stored = true;
 }
 
 AssetManager::~AssetManager()
@@ -47,15 +56,14 @@ void AssetManager::importMeta(File::Handle file)
         {
             if (this->infos.find(meta.getId()) != this->infos.end())
             {
-                core::logCritical("AssetManager::importMeta(): found asset with duplicate ID '{}' defined in file '{}'",
-                                  meta.getId(), file->getPath());
+                CUBOS_CRITICAL("Found asset with duplicate ID '{}' in file '{}'", meta.getId(), file->getPath());
                 abort();
             }
             else
             {
                 std::string id = meta.getId();
                 this->infos.emplace(id, std::move(meta));
-                core::logInfo("AssetManager::importMeta(): imported '{}'", id);
+                CUBOS_INFO("Imported '{}'", id);
             }
         }
     }
@@ -69,26 +77,7 @@ void AssetManager::loadStatic()
         {
             std::lock_guard lock(it.second.mutex);
             if (it.second.data == nullptr)
-            {
-                auto lit = this->loaders.find(it.second.meta.getType());
-                if (lit == this->loaders.end())
-                {
-                    core::logWarning("AssetManager::importMeta(): no loader registered for loading asset of type '{}'",
-                                     it.second.meta.getType());
-                }
-                else
-                {
-                    it.second.data = lit->second->load(it.second.meta);
-                    if (it.second.data == nullptr)
-                    {
-                        core::logError("AssetManager::loadStatic(): couldn't load '{}'", it.second.meta.getId());
-                    }
-                    else
-                    {
-                        core::logInfo("AssetManager::loadStatic(): loaded '{}'", it.second.meta.getId());
-                    }
-                }
-            }
+                this->loadAny(it.first);
         }
     }
 }
@@ -102,11 +91,56 @@ void AssetManager::cleanup()
             std::lock_guard lock(it.second.mutex);
             if (it.second.data != nullptr && it.second.refCount == 0)
             {
-                auto loader = this->loaders[it.second.meta.getType()];
-                loader->unload(it.second.meta, it.second.data);
-                core::logInfo("AssetManager::cleanup(): unloaded '{}'", it.second.meta.getId());
+                if (it.second.stored)
+                {
+                    it.second.deleter(it.second.data);
+                }
+                else
+                {
+                    auto loader = this->loaders[it.second.meta.getType()];
+                    loader->unload(it.second.meta, it.second.data);
+                }
+
+                CUBOS_INFO("Unloaded asset '{}'", it.second.meta.getId());
                 it.second.data = nullptr;
             }
         }
     }
+}
+
+Handle AssetManager::loadAny(const std::string& id)
+{
+    auto it = this->infos.find(id);
+    if (it == this->infos.end())
+    {
+        CUBOS_ERROR("Could not load asset '{}': not found", id);
+        return nullptr;
+    }
+
+    // Check if it's loaded and load it if it isn't.
+    std::lock_guard lock(it->second.mutex);
+    auto& type = it->second.meta.getType();
+
+    if (it->second.data == nullptr)
+    {
+        auto lit = this->loaders.find(type);
+        if (lit == this->loaders.end())
+        {
+            CUBOS_CRITICAL("Could not load asset '{}': no loader for type '{}' found", id, type);
+            abort();
+        }
+
+        it->second.data = lit->second->load(it->second.meta);
+        if (it->second.data == nullptr)
+        {
+            CUBOS_ERROR("Could not load asset '{}': loader failed", it->second.meta.getId());
+            return nullptr;
+        }
+        else
+        {
+            CUBOS_INFO("Loaded asset '{}'", it->second.meta.getId());
+        }
+    }
+
+    return Handle(type.c_str(), &it->second.refCount, const_cast<void*>(it->second.data), &it->first);
 }

@@ -34,12 +34,12 @@ static void printHelp()
     std::cerr << "Usage: cubinhos convert <INPUT> -p <PALETTE-PATH> [OPTIONS]" << std::endl;
     std::cerr << "Options:" << std::endl;
     std::cerr << "  -g<N> <PATH> Sets the output path of the grid <N>." << std::endl;
-    std::cerr << "  -p  <PATH>   Specifies the path of the palette being used." << std::endl;
+    std::cerr << "  -p <PATH>    Specifies the path of the palette being used." << std::endl;
     std::cerr << "  -w           Allows the palette to be written to." << std::endl;
     std::cerr << "  -v           Enables verbose mode." << std::endl;
     std::cerr << "  -f           Disables asking for confirmation when overwriting files." << std::endl;
     std::cerr << "  -h           Prints this help message." << std::endl;
-    std::cerr << "  -s  <VAL>    Specifies the minimum similarity for two materials to be merged," << std::endl;
+    std::cerr << "  -s <VAL>     Specifies the minimum similarity for two materials to be merged," << std::endl;
     std::cerr << "               from 0.0 to 1.0 (default 1.0)" << std::endl;
 }
 
@@ -148,7 +148,7 @@ static bool parseArguments(int argc, char** argv, Options& options)
         std::cerr << "Missing input file." << std::endl;
         return false;
     }
-    else if (options.palette.empty())
+    else if (options.palette.empty() && !options.verbose)
     {
         std::cerr << "Missing input palette." << std::endl;
         return false;
@@ -248,17 +248,20 @@ static bool convert(const Options& options)
 {
     // First, load the palette.
     gl::Palette palette;
-    if (!loadPalette(options.palette, palette))
+    if (!options.palette.empty())
     {
-        if (options.write && options.verbose)
+        if (!loadPalette(options.palette, palette))
         {
-            std::cerr << "Failed to load palette: write enabled, creating new palette." << std::endl;
-        }
-        else if (!options.write)
-        {
-            std::cerr << "Failed to load palette: write disabled & file " << options.palette << " not found."
-                      << std::endl;
-            return false;
+            if (options.write && options.verbose)
+            {
+                std::cerr << "Failed to load palette: write enabled, creating new palette." << std::endl;
+            }
+            else if (!options.write)
+            {
+                std::cerr << "Failed to load palette: write disabled & file " << options.palette << " not found."
+                          << std::endl;
+                return false;
+            }
         }
     }
 
@@ -286,6 +289,11 @@ static bool convert(const Options& options)
             std::cerr << "- Grid size: " << model[i].grid.getSize().x << "x" << model[i].grid.getSize().y << "x"
                       << model[i].grid.getSize().z << std::endl;
             std::cerr << "- Palette size: " << model[i].palette.getSize() << std::endl;
+        }
+
+        if (options.palette.empty())
+        {
+            return true;
         }
     }
 
@@ -372,7 +380,7 @@ static bool convert(const Options& options)
 int runConvert(int argc, char** argv)
 {
     // Parse command line arguments.
-    Options options;
+    Options options = {};
     if (!parseArguments(argc, argv, options))
     {
         printHelp();

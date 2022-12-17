@@ -43,24 +43,41 @@ namespace cubos::engine::data
         requires IsAsset<T>
         void registerType(LArgs... args);
 
-        /// Loads the given asset from its ID, synchronously.
+        /// Loads the given asset from its ID, synchronously, and returns a handle to it.
         /// @tparam T The type of the asset.
         /// @param id The ID of the asset to load.
-        /// @return Handle to the loaded asset.
+        /// @return Handle to the loaded asset, or nullptr if the loading failed.
         template <typename T>
         requires IsAsset<T> Asset<T> load(const std::string& id);
+
+        /// Loads the given asset from its ID, synchronously, and returns a generic handle to it.
+        /// @param id The ID of the asset to load.
+        /// @return Handle to the loaded asset, or nullptr if the loading failed.
+        core::data::Handle loadAny(const std::string& id);
+
+        /// Stores the given asset data in the asset manager, with a certain
+        /// ID. If an asset with the same ID already exists, abort() is called.
+        /// @tparam T The type of the asset.
+        /// @param id The ID of the asset.
+        /// @param usage The usage of the asset.
+        /// @param data The data of the asset.
+        template <typename T>
+        requires IsAsset<T> Asset<T> store(const std::string& id, Usage usage, T&& data);
 
     private :
         /// Stores runtime information about an asset.
         struct Info
         {
             Info(Meta&& meta);
+            Info(Meta&& meta, const void* data, std::function<void(const void*)> deleter);
             Info(Info&&) = default;
 
-            Meta meta;        ///< Asset's meta data.
-            const void* data; ///< Pointer to the asset's data, if its loaded.
-            size_t refCount;  ///< Number of references to the asset's data.
-            std::mutex mutex; ///< Protects the asset's state.
+            Meta meta;                                ///< Asset's meta data.
+            const void* data;                         ///< Pointer to the asset's data, if its loaded.
+            size_t refCount;                          ///< Number of references to the asset's data.
+            std::mutex mutex;                         ///< Protects the asset's state.
+            bool stored;                              ///< Was the asset stored, instead of loaded normally?
+            std::function<void(const void*)> deleter; ///< Function used to delete the asset, if it was stored.
         };
 
         std::map<std::string, Loader*> loaders; ///< The loaders of the registered asset types.
@@ -76,12 +93,12 @@ namespace cubos::engine::data
         auto it = this->loaders.find(T::TypeName);
         if (it == this->loaders.end())
         {
-            this->loaders[T::TypeName] = new typename T::Loader(args...);
+            this->loaders[T::TypeName] = new typename T::Loader(this, args...);
         }
         else
         {
-            core::logError("AssetManager::registerType(): couldn't register asset type because another type with the "
-                           "name '{}' was already register",
+            CUBOS_CRITICAL("Could not register asset type because another type with the "
+                           "name '{}' is already registered",
                            T::TypeName);
             abort();
         }
@@ -90,50 +107,28 @@ namespace cubos::engine::data
     template <typename T>
     requires IsAsset<T> Asset<T> AssetManager::load(const std::string& id)
     {
-        auto it = this->infos.find(id);
-        if (it == this->infos.end())
-        {
-            core::logError("AssetManager::load(): couldn't load asset '{}' because it wasn't found", id);
-            return nullptr;
-        }
-
-        if (it->second.meta.getType() != T::TypeName)
-        {
-            core::logError("AssetManager::load(): couldn't load asset '{}' because it's type is '{}' but the type "
-                           "expected is '{}'",
-                           id, it->second.meta.getType(), T::TypeName);
-            return nullptr;
-        }
-
-        // Check if it's loaded and load it if it isn't.
-        std::lock_guard lock(it->second.mutex);
-
-        if (it->second.data == nullptr)
-        {
-            auto lit = this->loaders.find(T::TypeName);
-            if (lit == this->loaders.end())
-            {
-                core::logError("AssetManager::load(): couldn't load asset '{}' because the loader for type '{}' wasn't "
-                               "found",
-                               id, T::TypeName);
-                abort();
-            }
-
-            it->second.data = lit->second->load(it->second.meta);
-            if (it->second.data == nullptr)
-            {
-                core::logError("AssetManager::load(): couldn't load '{}'", it->second.meta.getId());
-                return nullptr;
-            }
-            else
-            {
-                core::logInfo("AssetManager::load(): loaded '{}'", it->second.meta.getId());
-            }
-        }
-
-        return Asset<T>(&it->second.refCount, static_cast<const T*>(it->second.data));
+        return Asset<T>(this->loadAny(id));
     }
 
+    template <typename T>
+    requires IsAsset<T> Asset<T> AssetManager::store(const std::string& id, Usage usage, T&& data)
+    {
+        auto it = this->infos.find(id);
+        if (it != this->infos.end())
+        {
+            CUBOS_CRITICAL("Could not store asset '{}': an asset with this ID already "
+                           "exists",
+                           id);
+            abort();
+        }
+
+        this->infos.emplace(std::piecewise_construct, std::forward_as_tuple(id),
+                            std::forward_as_tuple(Meta(id, T::TypeName, usage), new T(std::move(data)),
+                                                  [](const void* data) { delete static_cast<const T*>(data); }));
+
+        it = this->infos.find(id);
+        return Asset<T>(&it->second.refCount, static_cast<const T*>(it->second.data), &it->first);
+    }
 } // namespace cubos::engine::data
 
 #endif // CUBOS_ENGINE_DATA_ASSET_MANAGER_HPP

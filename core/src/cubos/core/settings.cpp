@@ -2,11 +2,22 @@
 
 using namespace cubos::core;
 
-Settings Settings::global = Settings();
-
 void Settings::clear()
 {
     this->values.clear();
+}
+
+void Settings::setBool(const std::string& key, const bool& value)
+{
+    this->values[key] = value ? "true" : "false";
+}
+
+bool Settings::getBool(const std::string& key, const bool& defaultValue) const
+{
+    if (this->values.count(key) == 0)
+        return defaultValue;
+
+    return this->values.at(key) == "true" ? true : false;
 }
 
 void Settings::setString(const std::string& key, const std::string& value)

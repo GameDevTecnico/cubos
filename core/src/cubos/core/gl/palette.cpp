@@ -27,7 +27,7 @@ void Palette::set(uint16_t index, const Material& material)
 {
     if (index == 0)
     {
-        logWarning("Trying to set a palette material at an invalid index 0, which is reserved for empty voxels");
+        CUBOS_ERROR("Cannot set a palette material at index 0: reserved for empty voxels");
         return;
     }
     else if (index > static_cast<uint16_t>(materials.size()))
@@ -74,7 +74,7 @@ uint16_t Palette::add(const Material& material, float similarity)
 
         if (this->getSize() == UINT16_MAX)
         {
-            logWarning("Palette is full, cannot add new material");
+            CUBOS_ERROR("Cannot add new material: palette is full");
             return i;
         }
         else
@@ -126,8 +126,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, gl::Palette& pal
 
         if (index == 0)
         {
-            logWarning(
-                "Trying to deserialize a palette material at an invalid index 0, which is reserved for empty voxels");
+            CUBOS_WARN("Invalid palette material index 0: reserved for empty voxels");
             continue;
         }
         else if (index > palette.materials.size())

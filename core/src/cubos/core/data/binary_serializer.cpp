@@ -12,7 +12,7 @@ template <typename T> static inline T toEndianness(T val, bool toLittleEndian)
         return memory::toBigEndian(val);
 }
 
-BinarySerializer::BinarySerializer(memory::Stream& stream, bool writeLittleEndian) : Serializer(stream)
+BinarySerializer::BinarySerializer(memory::Stream& stream, bool writeLittleEndian) : stream(stream)
 {
     this->writeLittleEndian = writeLittleEndian;
 }
@@ -85,6 +85,7 @@ void BinarySerializer::writeString(const char* value, const char*)
 {
     assert(value != nullptr);
     this->stream.print(value);
+    this->stream.put('\0');
 }
 
 void BinarySerializer::beginObject(const char*)

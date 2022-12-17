@@ -22,12 +22,28 @@ namespace cubos::core
         void deserialize(Deserializer& deserializer, Settings& settings);
     } // namespace data
 
-    /// Class used to manage settings.
-    class Settings
+    /// Object used to manage settings.
+    class Settings final
     {
     public:
+        Settings() = default;
+        ~Settings() = default;
+
         /// Clears all the settings.
         void clear();
+
+        /// Defines a new bool setting.
+        /// If the setting already exists, overrides its value with the new value.
+        /// @param key The setting's key.
+        /// @param value The setting's value.
+        void setBool(const std::string& key, const bool& value);
+
+        /// Retrieves the bool settings with a specific key.
+        /// If no setting exists with such key, returns the default value.
+        /// @param key The setting's key.
+        /// @param defaultValue The value returned when not setting with the provided key exists.
+        /// @return The setting's value.
+        bool getBool(const std::string& key, const bool& defaultValue) const;
 
         /// Defines a new string setting.
         /// If the setting already exists, overrides its value with the new value.
@@ -73,15 +89,12 @@ namespace cubos::core
         /// @param settingsToMerge The settings to be merged to this instance.
         void merge(const Settings& settingsToMerge);
 
-        static Settings global; ///< The Global Instance of Settings.
-
     private:
         friend void data::serialize(data::Serializer&, const Settings&, const char*);
         friend void data::deserialize(data::Deserializer&, Settings&);
 
         std::unordered_map<std::string, std::string> values;
     };
-
 } // namespace cubos::core
 
 #endif // CUBOS_CORE_SETTINGS_HPP

@@ -16,31 +16,41 @@ static void mousePositionCallback(GLFWwindow* window, double xPos, double yPos);
 static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+static void charCallback(GLFWwindow* window, unsigned int codepoint);
+static void updateMods(GLFWWindow* handler, int mods);
 static MouseButton glfwToCubosMouseButton(int button);
 static Key glfwToCubosKey(int key);
 
 #endif // WITH_GLFW
 
-GLFWWindow::GLFWWindow()
+#define UNSUPPORTED()                                                                                                  \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        CUBOS_CRITICAL("Unsupported when building without GLFW");                                                      \
+        abort();                                                                                                       \
+    } while (0)
+
+GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 {
 #ifdef WITH_GLFW
     if (!glfwInit())
     {
-        logCritical("OGLRenderDevice::OGLRenderDevice() failed: glfwInit() failed");
+        CUBOS_CRITICAL("glfwInit() failed");
         abort();
     }
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif // __APPLE__
-    // TODO: Read settings and set the correct window size, title and mode (fullscreen, ...)
-    this->handle = glfwCreateWindow(800, 600, "Cubos", nullptr, nullptr);
+
+    // TODO: handle mode (fullscreen, ...)
+    this->handle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
     if (!this->handle)
     {
-        logCritical("OGLRenderDevice::OGLRenderDevice() failed: glfwCreateWindow() failed");
+        CUBOS_CRITICAL("glfwCreateWindow() failed");
         abort();
     }
 
@@ -48,7 +58,7 @@ GLFWWindow::GLFWWindow()
     glfwMakeContextCurrent(this->handle);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        logCritical("GLFWWindowImpl::GLFWWindowImpl() failed: OpenGL loader failed");
+        CUBOS_CRITICAL("OpenGL loader failed");
         abort();
     }
     this->renderDevice = new gl::OGLRenderDevice();
@@ -60,9 +70,9 @@ GLFWWindow::GLFWWindow()
     glfwSetMouseButtonCallback(this->handle, mouseButtonCallback);
     glfwSetScrollCallback(this->handle, scrollCallback);
     glfwSetFramebufferSizeCallback(this->handle, framebufferSizeCallback);
+    glfwSetCharCallback(this->handle, charCallback);
 #else
-    logCritical("GLFWWindow::GLFWWindow() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -72,8 +82,7 @@ GLFWWindow::~GLFWWindow()
     delete this->renderDevice;
     glfwTerminate();
 #else
-    logCritical("GLFWWindow::~GLFWWindow() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -82,8 +91,7 @@ void GLFWWindow::pollEvents() const
 #ifdef WITH_GLFW
     glfwPollEvents();
 #else
-    logCritical("GLFWWindow::pollEvents() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -92,8 +100,7 @@ void GLFWWindow::swapBuffers() const
 #ifdef WITH_GLFW
     glfwSwapBuffers(this->handle);
 #else
-    logCritical("GLFWWindow::swapBuffers() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -102,8 +109,18 @@ gl::RenderDevice& GLFWWindow::getRenderDevice() const
 #ifdef WITH_GLFW
     return *this->renderDevice;
 #else
-    logCritical("GLFWWindow::getRenderDevice() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
+#endif
+}
+
+glm::ivec2 GLFWWindow::getSize() const
+{
+#ifdef WITH_GLFW
+    int width, height;
+    glfwGetWindowSize(this->handle, &width, &height);
+    return {width, height};
+#else
+    UNSUPPORTED();
 #endif
 }
 
@@ -114,8 +131,7 @@ glm::ivec2 GLFWWindow::getFramebufferSize() const
     glfwGetFramebufferSize(this->handle, &width, &height);
     return {width, height};
 #else
-    logCritical("GLFWWindow::getFramebufferSize() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -124,8 +140,7 @@ bool GLFWWindow::shouldClose() const
 #ifdef WITH_GLFW
     return glfwWindowShouldClose(this->handle);
 #else
-    logCritical("GLFWWindow::shouldClose() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
@@ -134,31 +149,115 @@ double GLFWWindow::getTime() const
 #ifdef WITH_GLFW
     return glfwGetTime();
 #else
-    logCritical("GLFWWindow::getTime() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
 #endif
 }
 
-void GLFWWindow::setMouseLockState(MouseLockState state)
+void GLFWWindow::setMouseState(MouseState state)
 {
 #ifdef WITH_GLFW
     int cursorState;
     switch (state)
     {
-    case MouseLockState::Default:
+    case MouseState::Default:
         cursorState = GLFW_CURSOR_NORMAL;
         break;
-    case MouseLockState::Locked:
+    case MouseState::Locked:
         cursorState = GLFW_CURSOR_DISABLED;
         break;
-    case MouseLockState::Hidden:
+    case MouseState::Hidden:
         cursorState = GLFW_CURSOR_HIDDEN;
         break;
     }
     glfwSetInputMode(handle, GLFW_CURSOR, cursorState);
 #else
-    logCritical("GLFWWindow::setMouseLockState() failed: Building without GLFW, not supported");
-    abort();
+    UNSUPPORTED();
+#endif
+}
+
+MouseState GLFWWindow::getMouseState() const
+{
+#ifdef WITH_GLFW
+    switch (glfwGetInputMode(handle, GLFW_CURSOR))
+    {
+    case GLFW_CURSOR_NORMAL:
+        return MouseState::Default;
+    case GLFW_CURSOR_DISABLED:
+        return MouseState::Locked;
+    case GLFW_CURSOR_HIDDEN:
+        return MouseState::Hidden;
+    default:
+        CUBOS_WARN("Unknown GLFW cursor state, returning MouseState::Default");
+        return MouseState::Default;
+    }
+#else
+    UNSUPPORTED();
+#endif
+}
+
+std::shared_ptr<Cursor> GLFWWindow::createCursor(Cursor::Standard standard)
+{
+#ifdef WITH_GLFW
+    GLFWcursor* cursor = nullptr;
+    switch (standard)
+    {
+    case Cursor::Standard::Arrow:
+        cursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
+        break;
+    case Cursor::Standard::IBeam:
+        cursor = glfwCreateStandardCursor(GLFW_IBEAM_CURSOR);
+        break;
+    case Cursor::Standard::Cross:
+        cursor = glfwCreateStandardCursor(GLFW_CROSSHAIR_CURSOR);
+        break;
+    case Cursor::Standard::Hand:
+        cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
+        break;
+    case Cursor::Standard::EWResize:
+        cursor = glfwCreateStandardCursor(GLFW_HRESIZE_CURSOR);
+        break;
+    case Cursor::Standard::NSResize:
+        cursor = glfwCreateStandardCursor(GLFW_VRESIZE_CURSOR);
+        break;
+    }
+
+    if (cursor == nullptr)
+        return nullptr;
+    else
+        return std::shared_ptr<Cursor>(new Cursor(cursor));
+#else
+    UNSUPPORTED();
+#endif
+}
+
+void GLFWWindow::setCursor(std::shared_ptr<Cursor> cursor)
+{
+#ifdef WITH_GLFW
+    if (cursor == nullptr)
+        glfwSetCursor(this->handle, nullptr);
+    else
+        glfwSetCursor(this->handle, cursor->glfwHandle);
+    this->cursor = cursor;
+#else
+    UNSUPPORTED();
+#endif
+}
+
+void GLFWWindow::setClipboard(const std::string& text)
+{
+#ifdef WITH_GLFW
+    glfwSetClipboardString(this->handle, text.c_str());
+#else
+    UNSUPPORTED();
+#endif
+}
+
+const char* GLFWWindow::getClipboard() const
+{
+#ifdef WITH_GLFW
+    return glfwGetClipboardString(this->handle);
+#else
+    UNSUPPORTED();
 #endif
 }
 
@@ -168,6 +267,7 @@ static void keyCallback(GLFWwindow* window, int key, int scancode, int action, i
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     Key cubosKey = glfwToCubosKey(key);
+    updateMods(handler, mods);
     if (action == GLFW_PRESS)
     {
         handler->onKeyDown.fire(cubosKey);
@@ -188,6 +288,7 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     MouseButton cubosButton = glfwToCubosMouseButton(button);
+    updateMods(handler, mods);
     if (action == GLFW_PRESS)
         handler->onMouseDown.fire(cubosButton);
     else // with GLFW_RELEASE
@@ -204,6 +305,26 @@ static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->onFramebufferResize.fire(glm::ivec2(width, height));
+}
+
+static void charCallback(GLFWwindow* window, unsigned int codepoint)
+{
+    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    handler->onChar.fire(codepoint);
+}
+
+static void updateMods(GLFWWindow* handler, int glfwMods)
+{
+    Modifiers mods = Modifiers::None;
+    if (glfwMods & GLFW_MOD_CONTROL)
+        mods |= Modifiers::Control;
+    if (glfwMods & GLFW_MOD_SHIFT)
+        mods |= Modifiers::Shift;
+    if (glfwMods & GLFW_MOD_ALT)
+        mods |= Modifiers::Alt;
+    if (glfwMods & GLFW_MOD_SUPER)
+        mods |= Modifiers::System;
+    handler->onModsChanged.fire(mods);
 }
 
 static MouseButton glfwToCubosMouseButton(int button)

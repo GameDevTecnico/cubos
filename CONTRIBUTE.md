@@ -19,6 +19,6 @@
 - `PascalCase` is used for class names and constants.
 - `UPPER_CASE` is used for macros.
 - `snake_case` is used for namespaces, folders and files.
-- Each file should have an `#ifndef`include guard.
+- Each file should have an `#ifndef` include guard.
 - When closing a namespace the namespace name should be added as a comment, the same goes for if macros (`#ifdef`, ...)
 - Namespaces should match the directory structure, except `namespace impl`, which can be used to hide implementation details (check `cubos::gl::impl`).

@@ -1,0 +1,12 @@
+{
+  "imports": {},
+  "entities": {
+    "root": {
+      "num": 1
+    },
+    "child": {
+      "num": 2,
+      "parent": "root"
+    }
+  }
+}

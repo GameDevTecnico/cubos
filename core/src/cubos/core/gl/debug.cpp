@@ -2,8 +2,6 @@
 
 #include <list>
 #include <vector>
-#define _USE_MATH_DEFINES
-#include <math.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
@@ -74,22 +72,22 @@ void Debug::initSphere()
 
     float x, y, z, xz;
 
-    float sectorStep = (float)(2 * M_PI / sectorCount);
-    float stackStep = (float)(M_PI / stackCount);
+    float sectorStep = (float)(2 * glm::pi<float>() / sectorCount);
+    float stackStep = (float)(glm::pi<float>() / stackCount);
     float sectorAngle, stackAngle;
 
     for (int i = 0; i <= stackCount; ++i)
     {
-        stackAngle = (float)(M_PI / 2 - i * stackStep);
-        xz = cosf(stackAngle);
-        y = sinf(stackAngle);
+        stackAngle = (float)(glm::pi<float>() / 2 - i * stackStep);
+        xz = glm::cos(stackAngle);
+        y = glm::sin(stackAngle);
 
         for (int j = 0; j <= sectorCount; ++j)
         {
             sectorAngle = j * sectorStep;
 
-            x = xz * cosf(sectorAngle);
-            z = xz * sinf(sectorAngle);
+            x = xz * glm::cos(sectorAngle);
+            z = xz * glm::sin(sectorAngle);
             vertices.push_back(x);
             vertices.push_back(y);
             vertices.push_back(z);
@@ -140,11 +138,11 @@ void Debug::initSphere()
     objSphere.va = renderDevice->createVertexArray(vaDesc);
 }
 
-void Debug::init(gl::RenderDevice& targetRenderDevice)
+void Debug::init(RenderDevice& renderDevice)
 {
-    renderDevice = &targetRenderDevice;
+    Debug::renderDevice = &renderDevice;
 
-    auto vs = renderDevice->createShaderStage(gl::Stage::Vertex, R"(
+    auto vs = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
             #version 330 core
 
             in vec3 position;
@@ -160,7 +158,7 @@ void Debug::init(gl::RenderDevice& targetRenderDevice)
             }
         )");
 
-    auto ps = renderDevice->createShaderStage(gl::Stage::Pixel, R"(
+    auto ps = renderDevice.createShaderStage(gl::Stage::Pixel, R"(
             #version 330 core
 
             out vec4 color;
@@ -173,22 +171,20 @@ void Debug::init(gl::RenderDevice& targetRenderDevice)
             }
         )");
 
-    pipeline = renderDevice->createShaderPipeline(vs, ps);
+    pipeline = renderDevice.createShaderPipeline(vs, ps);
 
     initCube();
     initSphere();
 
-    mvpBuffer = renderDevice->createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+    mvpBuffer = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
     mvpBindingPoint = pipeline->getBindingPoint("MVP");
     colorBindingPoint = pipeline->getBindingPoint("objColor");
 
     RasterStateDesc rsDesc;
-
     rsDesc.rasterMode = RasterMode::Fill;
-    fillRasterState = renderDevice->createRasterState(rsDesc);
-
+    fillRasterState = renderDevice.createRasterState(rsDesc);
     rsDesc.rasterMode = RasterMode::Wireframe;
-    wireframeRasterState = renderDevice->createRasterState(rsDesc);
+    wireframeRasterState = renderDevice.createRasterState(rsDesc);
 }
 
 void Debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation, glm::vec3 color)

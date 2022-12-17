@@ -48,7 +48,7 @@ void updateToBlack(io::Context context)
 int main(void)
 {
     initializeLogger();
-    auto window = io::Window::create();
+    auto window = io::openWindow();
     auto& renderDevice = window->getRenderDevice();
 
     height = window->getFramebufferSize().y;
@@ -81,6 +81,5 @@ int main(void)
         io::InputManager::processActions();
     }
 
-    delete window;
     return 0;
 }

@@ -11,6 +11,8 @@
 using namespace cubos::core;
 using namespace cubos::core::gl;
 
+#define LOG_GL_ERROR(err) CUBOS_ERROR("OpenGL error: {}", err)
+
 // Converts a texture format into the necessary GL parameters
 static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, GLenum& format, GLenum& type)
 {
@@ -18,12 +20,12 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
     {
     case TextureFormat::R8UNorm:
         internalFormat = GL_R8;
-        format = GL_R;
+        format = GL_RED;
         type = GL_UNSIGNED_BYTE;
         break;
     case TextureFormat::R8SNorm:
         internalFormat = GL_R8_SNORM;
-        format = GL_R;
+        format = GL_RED;
         type = GL_BYTE;
         break;
     case TextureFormat::R8UInt:
@@ -57,7 +59,7 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         type = GL_BYTE;
         break;
     case TextureFormat::RGBA8UNorm:
-        internalFormat = GL_RGBA8;
+        internalFormat = GL_RGBA;
         format = GL_RGBA;
         type = GL_UNSIGNED_BYTE;
         break;
@@ -78,12 +80,12 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         break;
     case TextureFormat::R16UNorm:
         internalFormat = GL_R16;
-        format = GL_R;
+        format = GL_RED;
         type = GL_UNSIGNED_SHORT;
         break;
     case TextureFormat::R16SNorm:
         internalFormat = GL_R16_SNORM;
-        format = GL_R;
+        format = GL_RED;
         type = GL_SHORT;
         break;
     case TextureFormat::R16UInt:
@@ -136,9 +138,19 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         format = GL_RGBA_INTEGER;
         type = GL_SHORT;
         break;
+    case TextureFormat::R16Float:
+        internalFormat = GL_R16F;
+        format = GL_RED;
+        type = GL_FLOAT;
+        break;
     case TextureFormat::R32Float:
         internalFormat = GL_R32F;
-        format = GL_R;
+        format = GL_RED;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::RG16Float:
+        internalFormat = GL_RG16F;
+        format = GL_RG;
         type = GL_FLOAT;
         break;
     case TextureFormat::RG32Float:
@@ -146,9 +158,19 @@ static bool textureFormatToGL(TextureFormat texFormat, GLenum& internalFormat, G
         format = GL_RG;
         type = GL_FLOAT;
         break;
+    case TextureFormat::RGB16Float:
+        internalFormat = GL_RGBA16F;
+        format = GL_RGB;
+        type = GL_FLOAT;
+        break;
     case TextureFormat::RGB32Float:
         internalFormat = GL_RGB32F;
         format = GL_RGB;
+        type = GL_FLOAT;
+        break;
+    case TextureFormat::RGBA16Float:
+        internalFormat = GL_RGBA16F;
+        format = GL_RGBA;
         type = GL_FLOAT;
         break;
     case TextureFormat::RGBA32Float:
@@ -440,6 +462,7 @@ public:
     virtual ~OGLRasterState() = default;
 
     GLboolean cullEnabled;
+    GLboolean scissorEnabled;
     GLenum frontFace;
     GLenum cullFace;
     GLenum polygonMode;
@@ -700,7 +723,7 @@ public:
 class OGLConstantBuffer : public impl::ConstantBuffer
 {
 public:
-    OGLConstantBuffer(GLuint id, GLenum bufferType) : id(id), bufferType(bufferType)
+    OGLConstantBuffer(GLuint id) : id(id)
     {
     }
 
@@ -711,37 +734,22 @@ public:
 
     virtual void* map() override
     {
-        glBindBuffer(bufferType, this->id);
-        return glMapBuffer(bufferType, GL_WRITE_ONLY);
+        glBindBuffer(GL_UNIFORM_BUFFER, this->id);
+        return glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
     }
 
     virtual void unmap() override
     {
-        glUnmapBuffer(bufferType);
-    }
-
-    virtual BufferStorageType getStorageTypeHint() override
-    {
-        switch (bufferType)
-        {
-        case GL_UNIFORM_BUFFER:
-            return BufferStorageType::Small;
-        case GL_SHADER_STORAGE_BUFFER:
-            return BufferStorageType::Large;
-        default:
-            logError("OGLContantBuffer::getStorageTypeHint() failed: Invalid bufferType value.");
-            abort();
-        }
+        glUnmapBuffer(GL_UNIFORM_BUFFER);
     }
 
     GLuint id;
-    GLenum bufferType;
 };
 
 class OGLIndexBuffer : public impl::IndexBuffer
 {
 public:
-    OGLIndexBuffer(GLuint id, GLenum format) : id(id), format(format)
+    OGLIndexBuffer(GLuint id, GLenum format, size_t indexSz) : id(id), format(format), indexSz(indexSz)
     {
     }
 
@@ -763,6 +771,7 @@ public:
 
     GLenum format;
     GLuint id;
+    size_t indexSz;
 };
 
 class OGLVertexBuffer : public impl::VertexBuffer
@@ -908,10 +917,32 @@ public:
     virtual void bind(ConstantBuffer cb) override
     {
         if (cb)
-            glBindBufferBase(std::static_pointer_cast<OGLConstantBuffer>(cb)->bufferType, this->loc,
-                             std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+            glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
         else
             glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
+    }
+
+    virtual void bind(gl::Texture2D _tex, int level, Access _access) override
+    {
+        auto tex = std::static_pointer_cast<OGLTexture2D>(_tex);
+        GLenum access;
+        switch (_access)
+        {
+        case Access::Read:
+            access = GL_READ_ONLY;
+            break;
+        case Access::Write:
+            access = GL_WRITE_ONLY;
+            break;
+        case Access::ReadWrite:
+            access = GL_READ_WRITE;
+            break;
+        default:
+            abort();
+        }
+
+        glUniform1i(this->loc, this->tex);
+        glBindImageTexture(this->tex, tex->id, level, GL_TRUE, 0, access, tex->internalFormat);
     }
 
     virtual void setConstant(glm::vec2 val) override
@@ -959,6 +990,11 @@ public:
         glUniform4uiv(loc, 1, &val[0]);
     }
 
+    virtual void setConstant(glm::mat4 val) override
+    {
+        glUniformMatrix4fv(loc, 1, GL_FALSE, &val[0][0]);
+    }
+
     virtual void setConstant(float val) override
     {
         glUniform1f(loc, val);
@@ -997,6 +1033,10 @@ public:
         : OGLShaderPipeline(vs, ps, program)
     {
         this->gs = gs;
+    }
+
+    OGLShaderPipeline(ShaderStage cs, GLuint program) : cs(cs), program(program)
+    {
         this->texCount = 0;
         this->uboCount = 0;
         this->ssboCount = 0;
@@ -1033,8 +1073,7 @@ public:
             GLenum glErr = glGetError();
             if (glErr != 0)
             {
-                logError("OGLShaderPipeline::getBindingPoint() failed: glUniformBlockBinding caused OpenGL error {}",
-                         glErr);
+                LOG_GL_ERROR(glErr);
                 return nullptr;
             }
 
@@ -1053,9 +1092,7 @@ public:
             GLenum glErr = glGetError();
             if (glErr != 0)
             {
-                logError(
-                    "OGLShaderPipeline::getBindingPoint() failed: glShaderStorageBlockBinding caused OpenGL error {}",
-                    glErr);
+                LOG_GL_ERROR(glErr);
                 return nullptr;
             }
 
@@ -1067,7 +1104,7 @@ public:
         return nullptr;
     }
 
-    ShaderStage vs, gs, ps;
+    ShaderStage vs, gs, ps, cs;
     GLuint program;
     std::list<OGLShaderBindingPoint> bps;
 
@@ -1079,6 +1116,8 @@ private:
 
 OGLRenderDevice::OGLRenderDevice()
 {
+    glGetString(GL_VERSION);
+
     // Create default states
     this->defaultRS = this->createRasterState({});
     this->defaultDSS = this->createDepthStencilState({});
@@ -1090,13 +1129,13 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     // Validate arguments
     if (desc.targetCount == 0)
     {
-        logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer must have at least one render target");
+        CUBOS_ERROR("Framebuffer must have at least one render target");
         return nullptr;
     }
     else if (desc.targetCount > CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT)
     {
-        logError("OGLRenderDevice::createFramebuffer() failed: a framebuffer can only have at most {} render targets",
-                 CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT);
+        CUBOS_ERROR("Framebuffer can only have at most {} render targets",
+                    CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT);
         return nullptr;
     }
 
@@ -1107,28 +1146,28 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         case FramebufferDesc::TargetType::CubeMap:
             if (desc.targets[i].getCubeMapTarget().handle == nullptr)
             {
-                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                CUBOS_ERROR("Target {} is nullptr", i);
                 return nullptr;
             }
             break;
         case FramebufferDesc::TargetType::Texture2D:
             if (desc.targets[i].getTexture2DTarget().handle == nullptr)
             {
-                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                CUBOS_ERROR("Target {} is nullptr", i);
                 return nullptr;
             }
             break;
         case FramebufferDesc::TargetType::CubeMapArray:
             if (desc.targets[i].getCubeMapArrayTarget().handle == nullptr)
             {
-                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                CUBOS_ERROR("Target {} is nullptr", i);
                 return nullptr;
             }
             break;
         case FramebufferDesc::TargetType::Texture2DArray:
             if (desc.targets[i].getTexture2DArrayTarget().handle == nullptr)
             {
-                logError("OGLRenderDevice::createFramebuffer() failed: target {} is nullptr", i);
+                CUBOS_ERROR("Target {} is nullptr", i);
                 return nullptr;
             }
             break;
@@ -1233,7 +1272,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         if (formatError)
         {
             glDeleteFramebuffers(1, &id);
-            logError("OGLRenderDevice::createFramebuffer() failed: invalid depth stencil target format");
+            CUBOS_ERROR("Invalid depth stencil target format");
             return nullptr;
         }
     }
@@ -1246,7 +1285,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     if (glErr != 0)
     {
         glDeleteFramebuffers(1, &id);
-        logError("OGLRenderDevice::createFramebuffer() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1254,8 +1293,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
         glDeleteFramebuffers(1, &id);
-        logError(
-            "OGLRenderDevice::createFramebuffer(): glCheckFramebufferStatus didn't return GL_FRAMEBUFFER_COMPLETE");
+        CUBOS_ERROR("glCheckFramebufferStatus didn't return GL_FRAMEBUFFER_COMPLETE");
         return nullptr;
     }
 
@@ -1274,6 +1312,7 @@ RasterState OGLRenderDevice::createRasterState(const RasterStateDesc& desc)
 {
     auto rs = std::make_shared<OGLRasterState>();
     rs->cullEnabled = desc.cullEnabled;
+    rs->scissorEnabled = desc.scissorEnabled;
     faceToGL(desc.cullFace, rs->cullFace);
     windingToGL(desc.frontFace, rs->frontFace);
     rasterModeToGL(desc.rasterMode, rs->polygonMode);
@@ -1291,6 +1330,11 @@ void OGLRenderDevice::setRasterState(RasterState _rs)
         glEnable(GL_CULL_FACE);
         glCullFace(rs->cullFace);
     }
+
+    if (!rs->scissorEnabled)
+        glDisable(GL_SCISSOR_TEST);
+    else
+        glEnable(GL_SCISSOR_TEST);
 
     glFrontFace(rs->frontFace);
     glPolygonMode(GL_FRONT_AND_BACK, rs->polygonMode);
@@ -1447,7 +1491,7 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
     if (glErr != 0)
     {
         glDeleteSamplers(1, &id);
-        logError("OGLRenderDevice::createSampler() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1459,7 +1503,7 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
     if (desc.format == TextureFormat::Depth16 || desc.format == TextureFormat::Depth32 ||
         desc.format == TextureFormat::Depth24Stencil8 || desc.format == TextureFormat::Depth32Stencil8)
     {
-        logError("OGLRenderDevice::createTexture1D() failed: depth/stencil formats are not supported on 1D textures");
+        CUBOS_ERROR("Depth/stencil formats are not supported on 1D textures");
         return nullptr;
     }
 
@@ -1467,7 +1511,7 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createTexture1D() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1488,7 +1532,7 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture1D() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1501,7 +1545,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createTexture2D() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1509,6 +1553,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     GLuint id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
         glTexImage2D(GL_TEXTURE_2D, i, internalFormat, desc.width / div, desc.height / div, 0, format, type,
                      desc.data[i]);
@@ -1524,7 +1569,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture2D() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1537,7 +1582,7 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createTexture2DArray() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1567,7 +1612,7 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture2DArray() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1579,7 +1624,7 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     if (desc.format == TextureFormat::Depth16 || desc.format == TextureFormat::Depth32 ||
         desc.format == TextureFormat::Depth24Stencil8 || desc.format == TextureFormat::Depth32Stencil8)
     {
-        logError("OGLRenderDevice::createTexture3D() failed: depth/stencil formats are not supported on 3D textures");
+        CUBOS_ERROR("Depth/stencil formats are not supported on 3D textures");
         return nullptr;
     }
 
@@ -1587,7 +1632,7 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createTexture3D() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1611,7 +1656,7 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture3D() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1624,7 +1669,7 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createCubeMap() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1659,7 +1704,7 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createCubeMap() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1672,7 +1717,7 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
-        logError("OGLRenderDevice::createCubeMapArray() failed: unsupported texture format {}", desc.format);
+        CUBOS_ERROR("Unsupported texture format {}", desc.format);
         return nullptr;
     }
 
@@ -1706,7 +1751,7 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
     if (glErr != 0)
     {
         glDeleteTextures(1, &id);
-        logError("OGLRenderDevice::createTexture2DArray() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1714,20 +1759,6 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
 }
 
 ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage)
-{
-    // Choose SSBO or UBO depending on given buffer size
-    GLint maxUniformBufferSize;
-    glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &maxUniformBufferSize);
-    BufferStorageType storage;
-    if (size > maxUniformBufferSize)
-        storage = BufferStorageType::Large;
-    else
-        storage = BufferStorageType::Small;
-    return createConstantBuffer(size, data, usage, storage);
-}
-
-ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage,
-                                                     BufferStorageType storage)
 {
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
@@ -1743,28 +1774,22 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
     else
         abort(); // Invalid enum value
 
-    GLenum bufferType;
-    if (storage == BufferStorageType::Small)
-        bufferType = GL_UNIFORM_BUFFER;
-    else
-        bufferType = GL_SHADER_STORAGE_BUFFER;
-
     // Initialize buffer
     GLuint id;
     glGenBuffers(1, &id);
-    glBindBuffer(bufferType, id);
-    glBufferData(bufferType, size, data, glUsage);
+    glBindBuffer(GL_UNIFORM_BUFFER, id);
+    glBufferData(GL_UNIFORM_BUFFER, size, data, glUsage);
 
     // Check errors
     GLenum glErr = glGetError();
     if (glErr != 0)
     {
         glDeleteBuffers(1, &id);
-        logError("OGLRenderDevice::createConstantBuffer() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
-    return std::make_shared<OGLConstantBuffer>(id, bufferType);
+    return std::make_shared<OGLConstantBuffer>(id);
 }
 
 IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage)
@@ -1784,10 +1809,17 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
         abort(); // Invalid enum value
 
     GLenum glFormat;
+    size_t indexSz;
     if (format == IndexFormat::UShort)
+    {
         glFormat = GL_UNSIGNED_SHORT;
+        indexSz = 2;
+    }
     else if (format == IndexFormat::UInt)
+    {
         glFormat = GL_UNSIGNED_INT;
+        indexSz = 4;
+    }
     else
         abort(); // Invalid enum value
 
@@ -1802,11 +1834,11 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
     if (glErr != 0)
     {
         glDeleteBuffers(1, &id);
-        logError("OGLRenderDevice::createIndexBuffer() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
-    return std::make_shared<OGLIndexBuffer>(id, glFormat);
+    return std::make_shared<OGLIndexBuffer>(id, glFormat, indexSz);
 }
 
 void OGLRenderDevice::setIndexBuffer(IndexBuffer _ib)
@@ -1814,6 +1846,7 @@ void OGLRenderDevice::setIndexBuffer(IndexBuffer _ib)
     auto ib = std::static_pointer_cast<OGLIndexBuffer>(_ib);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib->id);
     this->currentIndexFormat = ib->format;
+    this->currentIndexSz = ib->indexSz;
 }
 
 VertexBuffer OGLRenderDevice::createVertexBuffer(size_t size, const void* data, Usage usage)
@@ -1843,7 +1876,7 @@ VertexBuffer OGLRenderDevice::createVertexBuffer(size_t size, const void* data, 
     if (glErr != 0)
     {
         glDeleteBuffers(1, &id);
-        logError("OGLRenderDevice::createVertexBuffer() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1874,8 +1907,7 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
         if (loc == -1)
         {
             glDeleteVertexArrays(1, &id);
-            logError("OGLRenderDevice::createVertexArray() failed: couldn't find vertex element with name '{}'",
-                     desc.elements[i].name);
+            CUBOS_ERROR("Could not find vertex element with name '{}'", desc.elements[i].name);
             return nullptr;
         }
 
@@ -1961,7 +1993,7 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
     if (glErr != 0)
     {
         glDeleteVertexArrays(1, &id);
-        logError("OGLRenderDevice::createVertexArray() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -1987,6 +2019,9 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     case Stage::Pixel:
         shader_type = GL_FRAGMENT_SHADER;
         break;
+    case Stage::Compute:
+        shader_type = GL_COMPUTE_SHADER;
+        break;
     }
 
     // Initialize shader
@@ -2002,7 +2037,7 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
         GLchar infoLog[512];
         glGetShaderInfoLog(id, sizeof(infoLog), NULL, infoLog);
         glDeleteShader(id);
-        logError("OGLRenderDevice::createShaderStage() failed: shader compilation failed, info log: {}", infoLog);
+        CUBOS_ERROR("Could not compile shader: {}", infoLog);
         return nullptr;
     }
 
@@ -2010,7 +2045,8 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     GLenum glErr = glGetError();
     if (glErr != 0)
     {
-        logError("OGLRenderDevice::createShaderStage() failed: OpenGL error {}", glErr);
+        glDeleteShader(id);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -2036,7 +2072,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
         GLchar infoLog[512];
         glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
     }
 
@@ -2045,7 +2081,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     if (glErr != 0)
     {
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
@@ -2073,7 +2109,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
         GLchar infoLog[512];
         glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: program linking failed, info log: {}", infoLog);
+        CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
     }
 
@@ -2082,11 +2118,44 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     if (glErr != 0)
     {
         glDeleteProgram(id);
-        logError("OGLRenderDevice::createShaderPipeline() failed: OpenGL error {}", glErr);
+        LOG_GL_ERROR(glErr);
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderPipeline>(vs, ps, id);
+    return std::make_shared<OGLShaderPipeline>(vs, gs, ps, id);
+}
+
+ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _cs)
+{
+    auto cs = std::static_pointer_cast<OGLShaderStage>(_cs);
+
+    // Initialize program
+    auto id = glCreateProgram();
+    glAttachShader(id, cs->shader);
+    glLinkProgram(id);
+
+    // Check for linking errors
+    GLint success;
+    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        GLchar infoLog[512];
+        glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        glDeleteProgram(id);
+        CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
+        return nullptr;
+    }
+
+    // Check for OpenGL errors
+    GLenum glErr = glGetError();
+    if (glErr != 0)
+    {
+        glDeleteProgram(id);
+        LOG_GL_ERROR(glErr);
+        return nullptr;
+    }
+
+    return std::make_shared<OGLShaderPipeline>(cs, id);
 }
 
 void OGLRenderDevice::setShaderPipeline(ShaderPipeline pipeline)
@@ -2125,7 +2194,8 @@ void OGLRenderDevice::drawTriangles(size_t offset, size_t count)
 
 void OGLRenderDevice::drawTrianglesIndexed(size_t offset, size_t count)
 {
-    glDrawElements(GL_TRIANGLES, count, this->currentIndexFormat, reinterpret_cast<const void*>(offset));
+    glDrawElements(GL_TRIANGLES, count, this->currentIndexFormat,
+                   reinterpret_cast<const void*>(offset * this->currentIndexSz));
 }
 
 void OGLRenderDevice::drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount)
@@ -2135,8 +2205,31 @@ void OGLRenderDevice::drawTrianglesInstanced(size_t offset, size_t count, size_t
 
 void OGLRenderDevice::drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount)
 {
-    glDrawElementsInstanced(GL_TRIANGLES, count, this->currentIndexFormat, reinterpret_cast<const void*>(offset),
-                            instanceCount);
+    glDrawElementsInstanced(GL_TRIANGLES, count, this->currentIndexFormat,
+                            reinterpret_cast<const void*>(offset * this->currentIndexSz), instanceCount);
+}
+
+void OGLRenderDevice::dispatchCompute(size_t x, size_t y, size_t z)
+{
+    glDispatchCompute(x, y, z);
+}
+
+void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
+{
+    GLbitfield barrier = 0;
+    if ((barriers & MemoryBarriers::VertexBuffer) != MemoryBarriers::None)
+        barrier |= GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::IndexBuffer) != MemoryBarriers::None)
+        barrier |= GL_ELEMENT_ARRAY_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::ConstantBuffer) != MemoryBarriers::None)
+        barrier |= GL_UNIFORM_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::ImageAccess) != MemoryBarriers::None)
+        barrier |= GL_SHADER_IMAGE_ACCESS_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::TextureAccess) != MemoryBarriers::None)
+        barrier |= GL_TEXTURE_FETCH_BARRIER_BIT;
+    if ((barriers & MemoryBarriers::Framebuffer) != MemoryBarriers::None)
+        barrier |= GL_FRAMEBUFFER_BARRIER_BIT;
+    glMemoryBarrier(barrier);
 }
 
 void OGLRenderDevice::setViewport(int x, int y, int w, int h)
@@ -2144,8 +2237,15 @@ void OGLRenderDevice::setViewport(int x, int y, int w, int h)
     glViewport(x, y, w, h);
 }
 
+void OGLRenderDevice::setScissor(int x, int y, int w, int h)
+{
+    glScissor(x, y, w, h);
+}
+
 int OGLRenderDevice::getProperty(Property prop)
 {
+    GLint major, minor;
+
     switch (prop)
     {
     case Property::MaxAnisotropy:
@@ -2157,6 +2257,11 @@ int OGLRenderDevice::getProperty(Property prop)
             glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &val);
             return static_cast<int>(val);
         }
+
+    case Property::ComputeSupported:
+        glGetIntegerv(GL_MAJOR_VERSION, &major);
+        glGetIntegerv(GL_MINOR_VERSION, &minor);
+        return (major >= 4 && minor >= 3) ? 1 : 0;
 
     default:
         return -1;

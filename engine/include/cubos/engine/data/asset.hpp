@@ -3,10 +3,12 @@
 
 #include <cubos/engine/data/loader.hpp>
 
+#include <cubos/core/data/handle.hpp>
 #include <cubos/core/log.hpp>
 
 #include <concepts>
 #include <memory>
+#include <future>
 
 namespace cubos::engine::data
 {
@@ -21,97 +23,56 @@ namespace cubos::engine::data
         requires std::is_base_of_v<Loader, typename T::Loader>;
     };
 
-    /// Wrapper class that stores a reference to an asset, keeping track of how many references it has.
+    /// Handle to an asset with reference counting: it's guaranteed that the asset will be kept alive
+    /// as long as the handle is not destroyed.
     /// @tparam T The type of the asset.
     template <typename T>
     requires IsAsset<T>
-    class Asset
+    class Asset : public core::data::Handle
     {
     public:
-        Asset(std::nullptr_t x = nullptr);
-        Asset(Asset&&);
-        Asset(const Asset&);
-        ~Asset();
+        Asset(std::nullptr_t p = nullptr);
+        Asset(Asset&&) = default;
+        Asset(const Asset&) = default;
+        Asset(Handle&& handle);
+        ~Asset() = default;
 
-        const T& get() const;
+        Asset& operator=(const Asset&) = default;
         const T* operator->() const;
-        operator bool() const;
 
-        Asset& operator=(const Asset& rhs);
+        /// Gets the asset data referenced by this handle.
+        /// Will abort if the handle is invalid.
+        /// @return The asset data referenced by this handle.
+        const T& get() const;
 
     private:
         friend class AssetManager;
 
-        /// Creates a new handle.
-        /// @param refCount Pointer to the reference counter.
-        /// @param asset The asset to reference.
-        Asset(size_t* refCount, const T* ptr);
-
-        size_t* refCount; ///< Pointer to the reference counter.
-        const T* ptr;     ///< Pointer to the asset.
+        Asset(size_t* refCount, const T* data, const std::string* id);
     };
 
     // Implementation.
 
     template <typename T>
-    requires IsAsset<T> Asset<T>::Asset(std::nullptr_t)
+    requires IsAsset<T> Asset<T>::Asset(std::nullptr_t p)
     {
-        this->refCount = nullptr;
-        this->ptr = nullptr;
     }
 
     template <typename T>
-    requires IsAsset<T> Asset<T>::Asset(Asset&& rhs)
+    requires IsAsset<T> Asset<T>::Asset(Handle&& handle) : Handle(std::move(handle))
     {
-        this->refCount = rhs.refCount;
-        this->ptr = rhs.ptr;
-        rhs.refCount = nullptr;
-        rhs.ptr = nullptr;
-    }
-
-    template <typename T>
-    requires IsAsset<T> Asset<T>::Asset(const Asset& rhs)
-    {
-        this->refCount = rhs.refCount;
-        this->ptr = rhs.ptr;
-
-        if (this->ptr != nullptr)
+        if (this->type != NULL && std::string(this->type) != T::TypeName)
         {
-            ++(*this->refCount);
-        }
-    }
+            CUBOS_ERROR("Could not cast generic handle to asset handle of type '{}': the generic handle points to '{}' "
+                        "of type '{}'",
+                        T::TypeName, *this->id, this->type);
 
-    template <typename T>
-    requires IsAsset<T> Asset<T>::Asset(size_t* refCount, const T* ptr)
-    {
-        this->refCount = refCount;
-        this->ptr = ptr;
-
-        if (this->ptr != nullptr)
-        {
-            ++(*this->refCount);
-        }
-    }
-
-    template <typename T>
-    requires IsAsset<T> Asset<T>::~Asset()
-    {
-        if (this->ptr != nullptr)
-        {
             --(*this->refCount);
+            this->refCount = nullptr;
+            this->data = nullptr;
+            this->type = nullptr;
+            this->id = nullptr;
         }
-    }
-
-    template <typename T>
-    requires IsAsset<T>
-    const T& Asset<T>::get() const
-    {
-        if (this->ptr == nullptr)
-        {
-            core::logError("Asset::get(): can't get reference to data since the handle is null");
-            abort();
-        }
-        return *this->ptr;
     }
 
     template <typename T>
@@ -123,34 +84,22 @@ namespace cubos::engine::data
 
     template <typename T>
     requires IsAsset<T>
-    inline Asset<T>::operator bool() const
+    const T& Asset<T>::get() const
     {
-        return this->ptr != nullptr;
+        if (this->data == nullptr)
+        {
+            CUBOS_CRITICAL("Cannot get reference to data: invalid handle");
+            abort();
+        }
+
+        return *static_cast<const T*>(this->data);
     }
 
     template <typename T>
-    requires IsAsset<T>
-    inline Asset<T>& Asset<T>::operator=(const Asset& rhs)
+    requires IsAsset<T> Asset<T>::Asset(size_t* refCount, const T* data, const std::string* id)
+        : Handle(T::TypeName, refCount, const_cast<void*>(static_cast<const void*>(data)), id)
     {
-        if (this->ptr != rhs.ptr)
-        {
-            if (this->ptr != nullptr)
-            {
-                --(*this->refCount);
-            }
-
-            this->refCount = rhs.refCount;
-            this->ptr = rhs.ptr;
-
-            if (this->ptr != nullptr)
-            {
-                ++(*this->refCount);
-            }
-        }
-
-        return *this;
     }
-
 } // namespace cubos::engine::data
 
 #endif // CUBOS_ENGINE_DATA_ASSET_HPP

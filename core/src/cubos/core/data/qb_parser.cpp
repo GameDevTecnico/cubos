@@ -10,13 +10,13 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
     stream.read(version, 4);
     if (stream.eof())
     {
-        logError("parseQB(): unexpected end of file while reading file version");
+        CUBOS_ERROR("Unexpected end of file while reading file version");
         return false;
     }
     else if (version[0] != 1 || version[1] != 1 || version[2] != 0 || version[3] != 0)
     {
-        logError("parseQB(): unsupported version {}.{}.{}.{}, only 1.1.0.0 is supported", version[0], version[1],
-                 version[2], version[3]);
+        CUBOS_ERROR("Unsupported version {}.{}.{}.{}, only 1.1.0.0 is supported", version[0], version[1], version[2],
+                    version[3]);
         return false;
     }
 
@@ -34,12 +34,12 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
 
     if (stream.eof())
     {
-        logError("parseQB(): unexpected end of file while reading file header");
+        CUBOS_ERROR("Unexpected end of file while reading file header");
         return false;
     }
     else if (visibilityMaskEncoded)
     {
-        logError("parseQB(): visibility mask encoding is not supported");
+        CUBOS_ERROR("Visibility mask encoding is not supported");
         return false;
     }
 
@@ -106,7 +106,7 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
 
                             if (mat >= 65536)
                             {
-                                logError("parseQB(): too many materials, max is 65536");
+                                CUBOS_ERROR("Too many materials, max is 65536");
                                 return false;
                             }
                         }
@@ -117,7 +117,7 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
         }
         else
         {
-            logError("parseQB(): compressed QB files are not supported");
+            CUBOS_ERROR("Compressed QB files are not supported");
             return false;
         }
     }
