@@ -21,7 +21,7 @@ public:
     virtual void fill(Format format, size_t size, const void* data, size_t frequency) override
     {
         ALenum alFormat = 0;
-        
+
         switch (format)
         {
         case Format::Mono8:
@@ -102,7 +102,7 @@ public:
 
     virtual void setConeAngle(float coneAngle) override
     {
-        alSourcef(this->id, AL_CONE_OUTER_ANGLE, coneAngle); 
+        alSourcef(this->id, AL_CONE_OUTER_ANGLE, coneAngle);
     }
 
     virtual void setConeGain(float coneGain) override
