@@ -20,9 +20,22 @@ static void startup(gl::Renderer& renderer, const cubos::core::io::Window& windo
         std::make_shared<gl::deferred::Renderer>(renderDevice, window->getFramebufferSize(), cubos::core::Settings());
 }
 
-static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& camera, const gl::Frame& frame)
+static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& activeCamera, const gl::Frame& frame,
+                 cubos::core::ecs::Query<const ecs::LocalToWorld&, const ecs::Camera&> query)
 {
-    // renderer->render(camera, frame);
+    cubos::core::gl::Camera glCamera;
+
+    if (auto components = query[activeCamera.entity])
+    {
+        auto [localToWorld, camera] = *components;
+        glCamera.fovY = camera.fovY;
+        glCamera.zNear = camera.zNear;
+        glCamera.zFar = camera.zFar;
+
+        glCamera.view = glm::inverse(localToWorld.mat);
+    }
+
+    renderer->render(glCamera, frame);
 }
 
 void cubos::engine::plugins::rendererPlugin(Cubos& cubos)
