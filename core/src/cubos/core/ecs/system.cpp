@@ -6,7 +6,7 @@ bool SystemInfo::valid() const
 {
     for (auto& rsc : this->resourcesRead)
     {
-        if (this->resourcesWritten.contains(rsc))
+        if (this->resourcesWritten.contains(rsc) || this->usesWorld)
         {
             return false;
         }
@@ -14,7 +14,7 @@ bool SystemInfo::valid() const
 
     for (auto& comp : this->componentsRead)
     {
-        if (this->componentsWritten.contains(comp))
+        if (this->componentsWritten.contains(comp) || this->usesWorld)
         {
             return false;
         }
@@ -25,7 +25,7 @@ bool SystemInfo::valid() const
 
 bool SystemInfo::compatible(const SystemInfo& other) const
 {
-    if (this->usesDebug || other.usesDebug)
+    if (this->usesWorld || other.usesWorld)
     {
         return false;
     }

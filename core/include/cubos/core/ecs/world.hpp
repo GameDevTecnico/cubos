@@ -23,6 +23,9 @@ namespace cubos::core::ecs
     class World
     {
     public:
+        /// Used to iterate over all entities of a world.
+        using Iterator = EntityManager::Iterator;
+
         /// @param initialCapacity The initial capacity of the world.
         World(size_t initialCapacity = 1024);
 
@@ -85,8 +88,15 @@ namespace cubos::core::ecs
         /// @returns True if the package was unpacked successfully, false otherwise.
         bool unpack(Entity entity, const data::Package& package, data::Handle::DesContext handleCtx);
 
+        /// Returns an iterator which points to the first entity of the world.
+        /// @return An iterator.
+        Iterator begin() const;
+
+        /// Returns an iterator which points to the end of the world.
+        /// @return An iterator.
+        Iterator end() const;
+
     private:
-        friend class Debug;
         template <typename... ComponentTypes> friend class Query;
         template <typename T> friend class impl::QueryFetcher;
         friend class Commands;
