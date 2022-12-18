@@ -34,12 +34,14 @@ void setup(Commands& cmds, data::AssetManager& assetManager)
     cmds.spawn(scene->blueprint).add("main", Parent{root});
 }
 
-void printStuff(Debug debug)
+void printStuff(World& world)
 {
-    for (auto [entity, pkg] : debug)
+    for (auto entity : world)
     {
         auto name = std::to_string(entity.index);
         auto ser = DebugSerializer(Stream::stdOut);
+        auto pkg = world.pack(entity, [](core::data::Serializer& ser, const core::data::Handle& handle,
+                                         const char* name) { ser.write(handle.getId(), name); });
         ser.write(pkg, name.c_str());
         Stream::stdOut.put('\n');
     }
