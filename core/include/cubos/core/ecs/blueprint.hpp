@@ -55,7 +55,7 @@ namespace cubos::core::ecs
         void clear();
 
     private:
-        friend class Commands;
+        friend class CommandBuffer;
 
         /// Stores all component data of a certain type.
         struct IBuffer
@@ -71,7 +71,7 @@ namespace cubos::core::ecs
             /// @param commands The commands object to add the components to.
             /// @param map The serialization map which maps from the entity names to the instantiated entities.
             /// @param handleCtx The handle context to deserialize handles with.
-            virtual void addAll(Commands& commands, const data::SerializationMap<Entity, std::string>& map,
+            virtual void addAll(CommandBuffer& commands, const data::SerializationMap<Entity, std::string>& map,
                                 data::Handle::DesContext handleCtx) = 0;
 
             /// Merges the data of another buffer of the same type into this one.
@@ -94,7 +94,7 @@ namespace cubos::core::ecs
         {
             // Interface methods implementation.
 
-            void addAll(Commands& commands, const data::SerializationMap<Entity, std::string>& map,
+            void addAll(CommandBuffer& commands, const data::SerializationMap<Entity, std::string>& map,
                         data::Handle::DesContext handleCtx) override;
             virtual void merge(IBuffer* other, const std::string& prefix,
                                const data::SerializationMap<Entity, std::string>& src,
@@ -152,7 +152,7 @@ namespace cubos::core::ecs
     }
 
     template <typename ComponentType>
-    void Blueprint::Buffer<ComponentType>::addAll(Commands& commands,
+    void Blueprint::Buffer<ComponentType>::addAll(CommandBuffer& commands,
                                                   const data::SerializationMap<Entity, std::string>& map,
                                                   data::Handle::DesContext handleCtx)
     {

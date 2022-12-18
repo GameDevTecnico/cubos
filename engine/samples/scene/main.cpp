@@ -25,7 +25,7 @@ using namespace core::data;
 using namespace core::memory;
 using namespace cubos::engine;
 
-void setup(Commands& cmds, data::AssetManager& assetManager)
+void setup(Commands cmds, data::AssetManager& assetManager)
 {
     FileSystem::mount("/assets/", std::make_shared<STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
 

@@ -99,7 +99,7 @@ namespace cubos::core::ecs
     private:
         template <typename... ComponentTypes> friend class Query;
         template <typename T> friend class impl::QueryFetcher;
-        friend class Commands;
+        friend class CommandBuffer;
 
         ResourceManager resourceManager;
         EntityManager entityManager;

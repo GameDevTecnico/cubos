@@ -2,7 +2,7 @@
 
 using namespace cubos::core::ecs;
 
-void Dispatcher::callSystems(World& world, Commands& cmds)
+void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
 {
     for (auto& stageName : this->stagesOrder)
     {

@@ -54,7 +54,7 @@ namespace cubos::core::ecs
         /// @param world The world used by the system.
         /// @param commands The commands object used by the system.
         /// @returns The return value of the system.
-        virtual R call(World& world, Commands& commands) const = 0;
+        virtual R call(World& world, CommandBuffer& commands) const = 0;
 
         /// Gets information about the requirements of the system.
         const SystemInfo& info() const;
@@ -85,7 +85,7 @@ namespace cubos::core::ecs
             /// @param world The world to fetch from.
             /// @param commands The commands object.
             /// @returns The requested resource write lock.
-            static WriteResource<R> fetch(World& world, Commands& commands);
+            static WriteResource<R> fetch(World& world, CommandBuffer& commands);
 
             /// @param lock The resource lock to get the reference from.
             /// @returns The requested resource reference.
@@ -103,7 +103,7 @@ namespace cubos::core::ecs
             /// @param world The world to fetch from.
             /// @param commands The commands object.
             /// @returns The requested resource read lock.
-            static ReadResource<R> fetch(World& world, Commands& commands);
+            static ReadResource<R> fetch(World& world, CommandBuffer& commands);
 
             /// @param lock The resource lock to get the reference from.
             /// @returns The requested resource reference.
@@ -121,7 +121,7 @@ namespace cubos::core::ecs
             /// @param world The world to query from.
             /// @param commands The commands object.
             /// @returns The requested query data.
-            static Type fetch(World& world, Commands& commands);
+            static Type fetch(World& world, CommandBuffer& commands);
 
             /// @param fetched The fetched query.
             /// @returns The query.
@@ -139,16 +139,16 @@ namespace cubos::core::ecs
             /// @param world The world to query from.
             /// @param commands The commands object.
             /// @returns The requested query data.
-            static World* fetch(World& world, Commands& commands);
+            static World* fetch(World& world, CommandBuffer& commands);
 
             /// @param fetched The fetched query.
             /// @returns The query.
             static World& arg(World* fetched);
         };
 
-        template <> struct SystemFetcher<Commands&>
+        template <> struct SystemFetcher<Commands>
         {
-            using Type = Commands*;
+            using Type = CommandBuffer*;
 
             /// Adds the commands to the system info structure.
             /// @param info The system info structure to add to.
@@ -157,11 +157,11 @@ namespace cubos::core::ecs
             /// @param world The world to query from.
             /// @param commands The commands object.
             /// @returns The requested query data.
-            static Commands* fetch(World& world, Commands& commands);
+            static CommandBuffer* fetch(World& world, CommandBuffer& commands);
 
             /// @param fetched The fetched query.
             /// @returns The query.
-            static Commands& arg(Commands* fetched);
+            static Commands arg(CommandBuffer* fetched);
         };
 
         template <typename... Args> struct SystemFetcher<std::tuple<Args...>>
@@ -175,7 +175,7 @@ namespace cubos::core::ecs
             /// @param world The world to fetch from.
             /// @param commands The commands object.
             /// @returns The requested arguments fetch result.
-            static Type fetch(World& world, Commands& commands);
+            static Type fetch(World& world, CommandBuffer& commands);
 
             /// @param fetched The requested arguments fetch result.
             /// @returns The requested arguments.
@@ -223,7 +223,7 @@ namespace cubos::core::ecs
         virtual ~SystemWrapper() override = default;
 
         /// @see AnySystemWrapper::call
-        virtual typename impl::SystemTraits<F>::Return call(World& world, Commands& commands) const override;
+        virtual typename impl::SystemTraits<F>::Return call(World& world, CommandBuffer& commands) const override;
 
     private:
         F system; ///< The wrapped system.
@@ -263,7 +263,7 @@ namespace cubos::core::ecs
     }
 
     template <typename F>
-    typename impl::SystemTraits<F>::Return SystemWrapper<F>::call(World& world, Commands& commands) const
+    typename impl::SystemTraits<F>::Return SystemWrapper<F>::call(World& world, CommandBuffer& commands) const
     {
         using Arguments = typename impl::SystemTraits<F>::Arguments;
         using Fetcher = impl::SystemFetcher<Arguments>;
@@ -281,7 +281,7 @@ namespace cubos::core::ecs
         info.resourcesWritten.insert(typeid(R));
     }
 
-    template <typename R> WriteResource<R> impl::SystemFetcher<R&>::fetch(World& world, Commands&)
+    template <typename R> WriteResource<R> impl::SystemFetcher<R&>::fetch(World& world, CommandBuffer&)
     {
         return world.write<R>();
     }
@@ -296,7 +296,7 @@ namespace cubos::core::ecs
         info.resourcesRead.insert(typeid(R));
     }
 
-    template <typename R> ReadResource<R> impl::SystemFetcher<const R&>::fetch(World& world, Commands&)
+    template <typename R> ReadResource<R> impl::SystemFetcher<const R&>::fetch(World& world, CommandBuffer&)
     {
         return world.read<R>();
     }
@@ -322,7 +322,7 @@ namespace cubos::core::ecs
     }
 
     template <typename... ComponentTypes>
-    Query<ComponentTypes...> impl::SystemFetcher<Query<ComponentTypes...>>::fetch(World& world, Commands&)
+    Query<ComponentTypes...> impl::SystemFetcher<Query<ComponentTypes...>>::fetch(World& world, CommandBuffer&)
     {
         return Query<ComponentTypes...>(world);
     }
@@ -338,7 +338,7 @@ namespace cubos::core::ecs
         info.usesWorld = true;
     }
 
-    inline World* impl::SystemFetcher<World&>::fetch(World& world, Commands&)
+    inline World* impl::SystemFetcher<World&>::fetch(World& world, CommandBuffer&)
     {
         return &world;
     }
@@ -348,19 +348,19 @@ namespace cubos::core::ecs
         return *fetched;
     }
 
-    inline void impl::SystemFetcher<Commands&>::add(SystemInfo& info)
+    inline void impl::SystemFetcher<Commands>::add(SystemInfo& info)
     {
         info.usesCommands = true;
     }
 
-    inline Commands* impl::SystemFetcher<Commands&>::fetch(World&, Commands& commands)
+    inline CommandBuffer* impl::SystemFetcher<Commands>::fetch(World&, CommandBuffer& commands)
     {
         return &commands;
     }
 
-    inline Commands& impl::SystemFetcher<Commands&>::arg(Commands* fetched)
+    inline Commands impl::SystemFetcher<Commands>::arg(CommandBuffer* fetched)
     {
-        return *fetched;
+        return Commands(*fetched);
     }
 
     template <typename... Args> void impl::SystemFetcher<std::tuple<Args...>>::add(SystemInfo& info)
@@ -370,7 +370,7 @@ namespace cubos::core::ecs
 
     template <typename... Args>
     std::tuple<typename impl::SystemFetcher<Args>::Type...> impl::SystemFetcher<std::tuple<Args...>>::fetch(
-        World& world, Commands& commands)
+        World& world, CommandBuffer& commands)
     {
         return std::make_tuple(impl::SystemFetcher<Args>::fetch(world, commands)...);
     }
