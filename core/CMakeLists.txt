@@ -25,6 +25,7 @@ message("# Building core tests: " ${BUILD_CORE_TESTS})
 set(CUBOS_CORE_SOURCE
     "src/cubos/core/log.cpp"
     "src/cubos/core/settings.cpp"
+    "src/cubos/core/thread_pool.cpp"
 
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/std_stream.cpp"
@@ -88,6 +89,7 @@ set(CUBOS_CORE_SOURCE
 set(CUBOS_CORE_INCLUDE
     "include/cubos/core/log.hpp"
     "include/cubos/core/settings.hpp"
+    "include/cubos/core/thread_pool.hpp"
 
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/std_stream.hpp"
