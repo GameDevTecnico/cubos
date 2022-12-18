@@ -87,7 +87,6 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1Commands.
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classcubos_1_1core_1_1ecs_1_1Commands-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -95,18 +94,15 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1Commands.
 </div><!--header-->
 <div class="contents">
 
-<p>Object responsible for storing ECS commands to execute them later.  
- <a href="classcubos_1_1core_1_1ecs_1_1Commands.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="commands_8hpp_source.html">commands.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a81b1f56a3cdc9424382d665f346afeee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Commands.html#a81b1f56a3cdc9424382d665f346afeee">Commands</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world)</td></tr>
-<tr class="separator:a81b1f56a3cdc9424382d665f346afeee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2324555277115c0890fc4bf1d7d47cfd"><td class="memItemLeft" align="right" valign="top"><a id="a2324555277115c0890fc4bf1d7d47cfd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Commands</b> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Commands.html">Commands</a> &amp;&amp;)</td></tr>
-<tr class="separator:a2324555277115c0890fc4bf1d7d47cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40ad3d92477177c6cc2e3a2cd62b4cc7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Commands.html#a40ad3d92477177c6cc2e3a2cd62b4cc7">Commands</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a> &amp;buffer)</td></tr>
+<tr class="separator:a40ad3d92477177c6cc2e3a2cd62b4cc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fdf7dfd434d2ba365e490f2377218ce"><td class="memItemLeft" align="right" valign="top"><a id="a8fdf7dfd434d2ba365e490f2377218ce"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Commands</b> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Commands.html">Commands</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a8fdf7dfd434d2ba365e490f2377218ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8a2aba82414b6d0397c3ce08ce3357a"><td class="memTemplParams" colspan="2">template&lt;typename... ComponentTypes&gt; </td></tr>
 <tr class="memitem:ad8a2aba82414b6d0397c3ce08ce3357a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8a2aba82414b6d0397c3ce08ce3357a">add</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity, ComponentTypes &amp;&amp;... components)</td></tr>
 <tr class="separator:ad8a2aba82414b6d0397c3ce08ce3357a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,10 +118,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8d5203f13e6ca9742b5ec75e0498fbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Object responsible for storing ECS commands to execute them later. </p>
+<div class="textblock"><p>Used to write ECS commands and execute them at a later time. Just wraps a reference to a <a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" title="Object responsible for storing ECS commands to execute them later.">CommandBuffer</a> object. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a81b1f56a3cdc9424382d665f346afeee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81b1f56a3cdc9424382d665f346afeee">&#9670;&nbsp;</a></span>Commands()</h2>
+<a id="a40ad3d92477177c6cc2e3a2cd62b4cc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40ad3d92477177c6cc2e3a2cd62b4cc7">&#9670;&nbsp;</a></span>Commands()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -133,15 +129,15 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Commands.html">Commands</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;&#160;</td>
-          <td class="paramname"><em>world</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a> &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>TODO: make this private after implementing the Cubos class. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">world</td><td>The world to which the commands will be applied. </td></tr>
+    <tr><td class="paramname">buffer</td><td>The command buffer to write to. </td></tr>
   </table>
   </dd>
 </dl>

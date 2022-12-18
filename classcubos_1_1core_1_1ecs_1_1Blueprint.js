@@ -8,5 +8,5 @@ var classcubos_1_1core_1_1ecs_1_1Blueprint =
     [ "create", "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a428789b966ae87499434dc8a91e9befd", null ],
     [ "entity", "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a8fde7bdfdc9fa1b44c8f8a3b7995b99a", null ],
     [ "merge", "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a1dedadd7a84fbd99582f90de00222fae", null ],
-    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Blueprint.html#ae9a2dffe589da1f81fa5c202d18e6551", null ]
+    [ "CommandBuffer", "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a2d1fa14292823ae3718f547daeb56928", null ]
 ];

@@ -17,6 +17,7 @@ var hierarchy =
     [ "Blueprint", "classcubos_1_1core_1_1ecs_1_1Blueprint.html", null ],
     [ "BlueprintBuilder", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html", null ],
     [ "Camera", "structcubos_1_1core_1_1gl_1_1Camera.html", null ],
+    [ "CommandBuffer", "classcubos_1_1core_1_1ecs_1_1CommandBuffer.html", null ],
     [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html", null ],
     [ "ComponentManager", "classcubos_1_1core_1_1ecs_1_1ComponentManager.html", null ],
     [ "ComponentStorage< T >", "structcubos_1_1core_1_1ecs_1_1ComponentStorage.html", null ],
@@ -153,7 +154,7 @@ var hierarchy =
       [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html", null ]
     ] ],
     [ "SystemFetcher< T >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html", null ],
-    [ "SystemFetcher< Commands & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_6_01_4.html", null ],
+    [ "SystemFetcher< Commands >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4.html", null ],
     [ "SystemFetcher< const R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4.html", null ],
     [ "SystemFetcher< Query< ComponentTypes... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html", null ],
     [ "SystemFetcher< R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4.html", null ],

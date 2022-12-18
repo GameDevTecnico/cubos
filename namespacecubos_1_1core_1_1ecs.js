@@ -5,6 +5,7 @@ var namespacecubos_1_1core_1_1ecs =
     [ "EntityBuilder", "classcubos_1_1core_1_1ecs_1_1EntityBuilder.html", "classcubos_1_1core_1_1ecs_1_1EntityBuilder" ],
     [ "BlueprintBuilder", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder" ],
     [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html", "classcubos_1_1core_1_1ecs_1_1Commands" ],
+    [ "CommandBuffer", "classcubos_1_1core_1_1ecs_1_1CommandBuffer.html", "classcubos_1_1core_1_1ecs_1_1CommandBuffer" ],
     [ "ComponentStorage", "structcubos_1_1core_1_1ecs_1_1ComponentStorage.html", null ],
     [ "ComponentStorage< T >", "structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4.html", "structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4" ],
     [ "ReadStorage", "classcubos_1_1core_1_1ecs_1_1ReadStorage.html", "classcubos_1_1core_1_1ecs_1_1ReadStorage" ],

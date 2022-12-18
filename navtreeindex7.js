@@ -1,5 +1,12 @@
 var NAVTREEINDEX7 =
 {
+"structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html#a4c4f773e885ca27eca44356bf7aad2c0":[4,0,0,0,1,0,2,0],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html":[4,0,0,0,1,0,5],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4.html":[4,0,0,0,1,0,10],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4.html#a5202aa255d304e9c41332fc725958739":[4,0,0,0,1,0,10,0],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html":[4,0,0,0,1,0,8],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html#a9ab19e53fd3193c6294fae60232de9e9":[4,0,0,0,1,0,8,0],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4.html":[4,0,0,0,1,0,6],
 "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4.html#a5443824927c755984478285c87ab5605":[4,0,0,0,1,0,6,0],
 "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4.html":[4,0,0,0,1,0,9],
 "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4.html#ab9510521b9ff8b3328bcfb9d0442e9b7":[4,0,0,0,1,0,9,0],

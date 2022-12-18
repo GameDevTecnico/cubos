@@ -15,7 +15,7 @@ var classcubos_1_1core_1_1ecs_1_1World =
     [ "remove", "classcubos_1_1core_1_1ecs_1_1World.html#af117c3ded1f313f8133e01d245c7c484", null ],
     [ "unpack", "classcubos_1_1core_1_1ecs_1_1World.html#a131863a321aa4e511640a91d06638018", null ],
     [ "write", "classcubos_1_1core_1_1ecs_1_1World.html#a63c629b6a68bb93e7ec76a63029282cd", null ],
-    [ "Commands", "classcubos_1_1core_1_1ecs_1_1World.html#ae9a2dffe589da1f81fa5c202d18e6551", null ],
+    [ "CommandBuffer", "classcubos_1_1core_1_1ecs_1_1World.html#a2d1fa14292823ae3718f547daeb56928", null ],
     [ "impl::QueryFetcher", "classcubos_1_1core_1_1ecs_1_1World.html#a4252c8c0645791b80ce23eeefc1d9b5f", null ],
     [ "Query", "classcubos_1_1core_1_1ecs_1_1World.html#ac4631ae0173c324dc84781c944ebb28a", null ]
 ];

@@ -10,7 +10,7 @@ var namespacecubos_1_1core_1_1ecs_1_1impl =
     [ "SystemFetcher< const R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4" ],
     [ "SystemFetcher< Query< ComponentTypes... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4" ],
     [ "SystemFetcher< World & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4" ],
-    [ "SystemFetcher< Commands & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_6_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_6_01_4" ],
+    [ "SystemFetcher< Commands >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4" ],
     [ "SystemFetcher< std::tuple< Args... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4" ],
     [ "SystemTraits", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits.html", null ],
     [ "SystemTraits< R(*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07_5_08_07Args_8_8_8_08_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07_5_08_07Args_8_8_8_08_4" ],

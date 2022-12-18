@@ -1,8 +1,7 @@
 var classcubos_1_1core_1_1ecs_1_1Commands =
 [
-    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#a81b1f56a3cdc9424382d665f346afeee", null ],
-    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#a2324555277115c0890fc4bf1d7d47cfd", null ],
-    [ "~Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#aa8d9439482bf3dc4da09f81d88d90480", null ],
+    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#a40ad3d92477177c6cc2e3a2cd62b4cc7", null ],
+    [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html#a8fdf7dfd434d2ba365e490f2377218ce", null ],
     [ "add", "classcubos_1_1core_1_1ecs_1_1Commands.html#ad8a2aba82414b6d0397c3ce08ce3357a", null ],
     [ "create", "classcubos_1_1core_1_1ecs_1_1Commands.html#abf69fbc9a95edcdeef2c2d026f12ab55", null ],
     [ "destroy", "classcubos_1_1core_1_1ecs_1_1Commands.html#a4eaf0e751e5f813a14c33957a0b3dcf7", null ],
