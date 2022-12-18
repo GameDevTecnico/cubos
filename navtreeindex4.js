@@ -110,6 +110,7 @@ var NAVTREEINDEX4 =
 "core_2include_2cubos_2core_2gl_2grid_8hpp_source.html":[5,0,0,0,1,0,2,2],
 "core_2include_2cubos_2core_2gl_2palette_8hpp_source.html":[5,0,0,0,1,0,2,5],
 "core_2include_2cubos_2core_2io_2window_8hpp_source.html":[5,0,0,0,1,0,3,6],
+"core_2include_2cubos_2core_2ui_2imgui_8hpp_source.html":[5,0,0,0,1,0,5,1],
 "cubinhos.html":[1,2],
 "cubinhos.html#autotoc_md32":[1,2,0],
 "cubinhos.html#autotoc_md33":[1,2,0,0],
@@ -160,8 +161,10 @@ var NAVTREEINDEX4 =
 "engine_2include_2cubos_2engine_2data_2grid_8hpp_source.html":[5,0,1,0,0,0,0,2],
 "engine_2include_2cubos_2engine_2data_2palette_8hpp_source.html":[5,0,1,0,0,0,0,5],
 "engine_2include_2cubos_2engine_2ecs_2grid_8hpp_source.html":[5,0,1,0,0,0,1,1],
-"engine_2include_2cubos_2engine_2plugins_2window_8hpp.html#afa8146f56bedab5286a623bdbad91054":[3,0,0,1,3,1],
-"engine_2include_2cubos_2engine_2plugins_2window_8hpp_source.html":[5,0,1,0,0,0,3,1],
+"engine_2include_2cubos_2engine_2plugins_2imgui_8hpp.html#afb729bcc13bb2c13aa37b602860524dc":[3,0,0,1,3,1],
+"engine_2include_2cubos_2engine_2plugins_2imgui_8hpp_source.html":[5,0,1,0,0,0,3,1],
+"engine_2include_2cubos_2engine_2plugins_2window_8hpp.html#afa8146f56bedab5286a623bdbad91054":[3,0,0,1,3,2],
+"engine_2include_2cubos_2engine_2plugins_2window_8hpp_source.html":[5,0,1,0,0,0,3,2],
 "entity__manager_8hpp_source.html":[5,0,0,0,1,0,1,4],
 "env__settings_8hpp.html#a934caabf9b9109a549c088d93cd8d281":[3,0,0,1,3,0],
 "env__settings_8hpp_source.html":[5,0,1,0,0,0,3,0],
@@ -234,7 +237,6 @@ var NAVTREEINDEX4 =
 "guides.html":[2],
 "handle_8hpp_source.html":[5,0,0,0,1,0,0,9],
 "hierarchy.html":[4,2],
-"imgui_8hpp_source.html":[5,0,0,0,1,0,5,1],
 "index.html":[],
 "index.html":[0],
 "index.html#autotoc_md45":[0,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "light_8hpp_source.html":[5,0,0,0,1,0,2,3],
 "loader_8hpp_source.html":[5,0,1,0,0,0,0,3],
 "local__to__world_8hpp_source.html":[5,0,1,0,0,0,1,2],
-"log_8hpp_source.html":[5,0,0,0,1,0,7],
-"manager_8hpp.html#a080a822f0093973313bd644e517a5090":[3,0,0,1,2,2,4],
-"manager_8hpp.html#a080a822f0093973313bd644e517a5090a2e4b97fde8cf63085ec969fcc7e490c0":[3,0,0,1,2,2,4,0]
+"log_8hpp_source.html":[5,0,0,0,1,0,7]
 };

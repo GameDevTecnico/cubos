@@ -53,6 +53,7 @@ var namespaces_dup =
         ] ],
         [ "plugins", null, [
           [ "envSettingsPlugin", "env__settings_8hpp.html#a934caabf9b9109a549c088d93cd8d281", null ],
+          [ "imguiPlugin", "engine_2include_2cubos_2engine_2plugins_2imgui_8hpp.html#afb729bcc13bb2c13aa37b602860524dc", null ],
           [ "windowPlugin", "engine_2include_2cubos_2engine_2plugins_2window_8hpp.html#afa8146f56bedab5286a623bdbad91054", null ]
         ] ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
