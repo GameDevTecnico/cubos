@@ -1,5 +1,12 @@
 var NAVTREEINDEX2 =
 {
+"classcubos_1_1core_1_1ecs_1_1Entity.html#ad14ceaf6ca9c2b25b233e841d7295972":[4,0,0,0,1,11,2],
+"classcubos_1_1core_1_1ecs_1_1Entity.html#afb4718a8ca5b822cf88129ae04240489":[4,0,0,0,1,11,1],
+"classcubos_1_1core_1_1ecs_1_1EntityBuilder.html":[4,0,0,0,1,2],
+"classcubos_1_1core_1_1ecs_1_1EntityBuilder.html#a3b5a6ddb0e6121d15b7304b1b7fb117c":[4,0,0,0,1,2,3],
+"classcubos_1_1core_1_1ecs_1_1EntityBuilder.html#a4c1f9b16fada9d7beb6106ea80479ef0":[4,0,0,0,1,2,2],
+"classcubos_1_1core_1_1ecs_1_1EntityBuilder.html#acca1109210ce87b35336b4b9ab108450":[4,0,0,0,1,2,1],
+"classcubos_1_1core_1_1ecs_1_1EntityBuilder.html#ade3b7d4c549a90cd7fc85745eee76c2a":[4,0,0,0,1,2,0],
 "classcubos_1_1core_1_1ecs_1_1EntityManager.html":[4,0,0,0,1,12],
 "classcubos_1_1core_1_1ecs_1_1EntityManager.html#a09dd208593b9721a30a83ed978ede577":[4,0,0,0,1,12,3],
 "classcubos_1_1core_1_1ecs_1_1EntityManager.html#a35d574212c1b57a14c3134dc29ac363a":[4,0,0,0,1,12,8],
@@ -242,12 +249,5 @@ var NAVTREEINDEX2 =
 "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderPipeline.html#a395b67d5549289f76f57c4d71ab51290":[4,0,0,0,2,0,16,1],
 "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderPipeline.html#ac8c177c04070b419f185141708332d3e":[4,0,0,0,2,0,16,0],
 "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderStage.html":[4,0,0,0,2,0,15],
-"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderStage.html#a6597e832e34635412098a4620fbe6956":[4,0,0,0,2,0,15,2],
-"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderStage.html#a8b92499874c1edff16eb37294178fe6f":[4,0,0,0,2,0,15,0],
-"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderStage.html#aa0257862af7ad8a9dab52c29d9af84f8":[4,0,0,0,2,0,15,1],
-"classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html":[4,0,0,0,2,0,5],
-"classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html#a17150b82c42d5c9220c805c5e88c100e":[4,0,0,0,2,0,5,3],
-"classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html#a850961ab3dbb1ed4d644af39965b4207":[4,0,0,0,2,0,5,0],
-"classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html#ab276147c99abfe2f4e3ff41d411b3825":[4,0,0,0,2,0,5,2],
-"classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html#af000b087a4d9af8a56ca33efffbaa070":[4,0,0,0,2,0,5,1]
+"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderStage.html#a6597e832e34635412098a4620fbe6956":[4,0,0,0,2,0,15,2]
 };

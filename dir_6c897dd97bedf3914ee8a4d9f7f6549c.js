@@ -8,5 +8,6 @@ var dir_6c897dd97bedf3914ee8a4d9f7f6549c =
     [ "ui", "dir_f556bbe30cd07922836d0e9d7f5fa0a5.html", "dir_f556bbe30cd07922836d0e9d7f5fa0a5" ],
     [ "event.hpp", "event_8hpp_source.html", null ],
     [ "log.hpp", "log_8hpp_source.html", null ],
-    [ "settings.hpp", "settings_8hpp_source.html", null ]
+    [ "settings.hpp", "settings_8hpp_source.html", null ],
+    [ "thread_pool.hpp", "thread__pool_8hpp_source.html", null ]
 ];

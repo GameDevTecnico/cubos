@@ -19,5 +19,6 @@ var namespacecubos_1_1core =
     ] ],
     [ "Event", "classcubos_1_1core_1_1Event.html", "classcubos_1_1core_1_1Event" ],
     [ "Settings", "classcubos_1_1core_1_1Settings.html", "classcubos_1_1core_1_1Settings" ],
+    [ "ThreadPool", "classcubos_1_1core_1_1ThreadPool.html", "classcubos_1_1core_1_1ThreadPool" ],
     [ "initializeLogger", "namespacecubos_1_1core.html#ab23801234b8ff1ec70506039c7dc453a", null ]
 ];

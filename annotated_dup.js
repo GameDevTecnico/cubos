@@ -138,7 +138,8 @@ var annotated_dup =
           [ "Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", "classcubos_1_1core_1_1memory_1_1Stream" ]
         ] ],
         [ "Event", "classcubos_1_1core_1_1Event.html", "classcubos_1_1core_1_1Event" ],
-        [ "Settings", "classcubos_1_1core_1_1Settings.html", "classcubos_1_1core_1_1Settings" ]
+        [ "Settings", "classcubos_1_1core_1_1Settings.html", "classcubos_1_1core_1_1Settings" ],
+        [ "ThreadPool", "classcubos_1_1core_1_1ThreadPool.html", "classcubos_1_1core_1_1ThreadPool" ]
       ] ],
       [ "engine", null, [
         [ "data", null, [

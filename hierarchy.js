@@ -175,6 +175,7 @@ var hierarchy =
     [ "FramebufferDesc::Texture2DTarget", "structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1Texture2DTarget.html", null ],
     [ "Texture3D", "classcubos_1_1core_1_1gl_1_1impl_1_1Texture3D.html", null ],
     [ "Texture3DDesc", "structcubos_1_1core_1_1gl_1_1Texture3DDesc.html", null ],
+    [ "ThreadPool", "classcubos_1_1core_1_1ThreadPool.html", null ],
     [ "Vertex", "structcubos_1_1core_1_1gl_1_1Vertex.html", null ],
     [ "VertexArray", "classcubos_1_1core_1_1gl_1_1impl_1_1VertexArray.html", null ],
     [ "VertexArrayDesc", "structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html", null ],
