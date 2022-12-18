@@ -1,7 +1,8 @@
 var hierarchy =
 [
     [ "Action", "classcubos_1_1core_1_1io_1_1Action.html", null ],
-    [ "AnySystemWrapper", "classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html", [
+    [ "AnySystemWrapper< R >", "classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html", null ],
+    [ "AnySystemWrapper< impl::SystemTraits< F >::Return >", "classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html", [
       [ "SystemWrapper< F >", "classcubos_1_1core_1_1ecs_1_1SystemWrapper.html", null ]
     ] ],
     [ "Archive", "classcubos_1_1core_1_1data_1_1Archive.html", [
@@ -160,9 +161,9 @@ var hierarchy =
     [ "SystemFetcher< World & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4.html", null ],
     [ "SystemInfo", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html", null ],
     [ "SystemTraits< F >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits.html", null ],
-    [ "SystemTraits< void(*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07_5_08_07Args_8_8_8_08_4.html", [
-      [ "SystemTraits< void(T::*)(Args...) const >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", null ],
-      [ "SystemTraits< void(T::*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_4.html", null ]
+    [ "SystemTraits< R(*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07_5_08_07Args_8_8_8_08_4.html", [
+      [ "SystemTraits< R(T::*)(Args...) const >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07T_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", null ],
+      [ "SystemTraits< R(T::*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07T_1_1_5_08_07Args_8_8_8_08_4.html", null ]
     ] ],
     [ "Texture1D", "classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html", null ],
     [ "Texture1DDesc", "structcubos_1_1core_1_1gl_1_1Texture1DDesc.html", null ],

@@ -71,7 +71,7 @@ var NAVTREEINDEX =
 "classcubos_1_1engine_1_1gl_1_1Renderer.html#a9c727c891c4daf6fba6e7bc69035a57e",
 "namespacecubos_1_1core_1_1data.html#a112ee9a86933ae11d3098aee2ef88359",
 "namespacecubos_1_1core_1_1gl.html#afe8cfc6527c53b5ed688e88796077a4f",
-"structcubos_1_1core_1_1gl_1_1BlendStateDesc.html#ab2abbf1404fdcf12476202c5860abd81"
+"structcubos_1_1core_1_1gl_1_1BlendStateDesc.html#aa7dcfb2ba17cf75d8510328e67dc604e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

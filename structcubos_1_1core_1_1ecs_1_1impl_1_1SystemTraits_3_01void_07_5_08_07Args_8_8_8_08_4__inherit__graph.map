@@ -1,5 +1,0 @@
-<map id="SystemTraits&lt; void(*)(Args...)&gt;" name="SystemTraits&lt; void(*)(Args...)&gt;">
-<area shape="rect" id="node1" title="Specialization for function pointers." alt="" coords="99,5,249,47"/>
-<area shape="rect" id="node2" href="$structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_01const_01_4.html" title="Specialization for const member functions." alt="" coords="5,95,164,136"/>
-<area shape="rect" id="node3" href="$structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_4.html" title="Specialization for member functions." alt="" coords="189,95,338,136"/>
-</map>

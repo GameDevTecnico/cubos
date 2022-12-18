@@ -42,9 +42,9 @@ var annotated_dup =
             [ "SystemFetcher< Commands & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_6_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_6_01_4" ],
             [ "SystemFetcher< std::tuple< Args... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4" ],
             [ "SystemTraits", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits.html", null ],
-            [ "SystemTraits< void(*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07_5_08_07Args_8_8_8_08_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07_5_08_07Args_8_8_8_08_4" ],
-            [ "SystemTraits< void(T::*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_4.html", null ],
-            [ "SystemTraits< void(T::*)(Args...) const >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07T_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", null ]
+            [ "SystemTraits< R(*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07_5_08_07Args_8_8_8_08_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07_5_08_07Args_8_8_8_08_4" ],
+            [ "SystemTraits< R(T::*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07T_1_1_5_08_07Args_8_8_8_08_4.html", null ],
+            [ "SystemTraits< R(T::*)(Args...) const >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07T_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", null ]
           ] ],
           [ "Blueprint", "classcubos_1_1core_1_1ecs_1_1Blueprint.html", "classcubos_1_1core_1_1ecs_1_1Blueprint" ],
           [ "EntityBuilder", "classcubos_1_1core_1_1ecs_1_1EntityBuilder.html", "classcubos_1_1core_1_1ecs_1_1EntityBuilder" ],

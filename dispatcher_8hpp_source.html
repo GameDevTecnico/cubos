@@ -127,37 +127,38 @@ $(document).ready(function(){initNavTree('dispatcher_8hpp_source.html',''); init
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        std::vector&lt;std::string&gt; stagesOrder; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        std::map&lt;std::string, std::vector&lt;std::unique_ptr&lt;AnySystemWrapper&gt;&gt;&gt; stagesByName; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        std::string defaultStage;   </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        Direction defaultDirection; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    };</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae7362f9f13e525bdb644b5819da7d47a">   63</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae7362f9f13e525bdb644b5819da7d47a">Dispatcher::addSystem</a>(F system, std::string stage)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="comment">// Register stage if it doesn&#39;t exist.</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">if</span> (this-&gt;stagesByName.find(stage) == this-&gt;stagesByName.end())</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            this-&gt;<a class="code" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae54d8af8b0845c659d4505e1a6225211">putStage</a>(stage, this-&gt;defaultStage, this-&gt;defaultDirection);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="comment">// Wrap the system and put it in its stage.</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">auto</span> systemWrapper = std::make_unique&lt;SystemWrapper&lt;F&gt;&gt;(system);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; system : this-&gt;stagesByName[stage])</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordflow">if</span> (system-&gt;info().compatible(systemWrapper-&gt;info()))</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="comment">// TODO: explain whats wrong, e.g., both systems are trying to access the same component mutably</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not add system to stage &#39;{}&#39; because it is incompatible &quot;</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                               <span class="stringliteral">&quot;with another system in the same stage.&quot;</span>,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                               stage);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        this-&gt;stagesByName[stage].push_back(std::move(systemWrapper));</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        CUBOS_INFO(<span class="stringliteral">&quot;Added system to stage &#39;{}&#39;&quot;</span>, stage);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;} <span class="comment">// namespace cubos::core::ecs</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_ECS_DISPATCHER_HPP</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        std::map&lt;std::string, std::vector&lt;std::unique_ptr&lt;AnySystemWrapper&lt;void&gt;&gt;&gt;&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            stagesByName;           </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        std::string defaultStage;   </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        Direction defaultDirection; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    };</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae7362f9f13e525bdb644b5819da7d47a">   64</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt; <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae7362f9f13e525bdb644b5819da7d47a">Dispatcher::addSystem</a>(F system, std::string stage)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="comment">// Register stage if it doesn&#39;t exist.</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">if</span> (this-&gt;stagesByName.find(stage) == this-&gt;stagesByName.end())</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            this-&gt;<a class="code" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae54d8af8b0845c659d4505e1a6225211">putStage</a>(stage, this-&gt;defaultStage, this-&gt;defaultDirection);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="comment">// Wrap the system and put it in its stage.</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">auto</span> systemWrapper = std::make_unique&lt;SystemWrapper&lt;F&gt;&gt;(system);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; system : this-&gt;stagesByName[stage])</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordflow">if</span> (system-&gt;info().compatible(systemWrapper-&gt;info()))</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <span class="comment">// TODO: explain whats wrong, e.g., both systems are trying to access the same component mutably</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not add system to stage &#39;{}&#39; because it is incompatible &quot;</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                               <span class="stringliteral">&quot;with another system in the same stage.&quot;</span>,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                               stage);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        this-&gt;stagesByName[stage].push_back(std::move(systemWrapper));</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        CUBOS_INFO(<span class="stringliteral">&quot;Added system to stage &#39;{}&#39;&quot;</span>, stage);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// namespace cubos::core::ecs</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_ECS_DISPATCHER_HPP</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Commands_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Commands.html">cubos::core::ecs::Commands</a></div><div class="ttdoc">Object responsible for storing ECS commands to execute them later.</div><div class="ttdef"><b>Definition:</b> commands.hpp:85</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Dispatcher_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html">cubos::core::ecs::Dispatcher</a></div><div class="ttdoc">Dispatcher is a class that is used to register systems and call them all at once, where they will be ...</div><div class="ttdef"><b>Definition:</b> dispatcher.hpp:17</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Dispatcher_html_a5727888f22830f657f4a71868e4d9546"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a5727888f22830f657f4a71868e4d9546">cubos::core::ecs::Dispatcher::putStageAfter</a></div><div class="ttdeci">void putStageAfter(std::string stage, std::string referenceStage)</div></div>
@@ -165,7 +166,7 @@ $(document).ready(function(){initNavTree('dispatcher_8hpp_source.html',''); init
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Dispatcher_html_a93d3d9bf4e4670257138e40707000809"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a93d3d9bf4e4670257138e40707000809">cubos::core::ecs::Dispatcher::putStageBefore</a></div><div class="ttdeci">void putStageBefore(std::string stage, std::string referenceStage)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Dispatcher_html_ad76925e6b54ce94fb4630e08b6349d27"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ad76925e6b54ce94fb4630e08b6349d27">cubos::core::ecs::Dispatcher::callSystems</a></div><div class="ttdeci">void callSystems(World &amp;world, Commands &amp;cmds)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Dispatcher_html_ae54d8af8b0845c659d4505e1a6225211"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae54d8af8b0845c659d4505e1a6225211">cubos::core::ecs::Dispatcher::putStage</a></div><div class="ttdeci">void putStage(std::string stage, std::string referenceStage, Direction direction)</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Dispatcher_html_ae7362f9f13e525bdb644b5819da7d47a"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae7362f9f13e525bdb644b5819da7d47a">cubos::core::ecs::Dispatcher::addSystem</a></div><div class="ttdeci">void addSystem(F system, std::string stage)</div><div class="ttdef"><b>Definition:</b> dispatcher.hpp:63</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Dispatcher_html_ae7362f9f13e525bdb644b5819da7d47a"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae7362f9f13e525bdb644b5819da7d47a">cubos::core::ecs::Dispatcher::addSystem</a></div><div class="ttdeci">void addSystem(F system, std::string stage)</div><div class="ttdef"><b>Definition:</b> dispatcher.hpp:64</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1World_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1World.html">cubos::core::ecs::World</a></div><div class="ttdoc">World is used as a container for all of the entity and component data. Components are stored in abstr...</div><div class="ttdef"><b>Definition:</b> world.hpp:24</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> blueprint.hpp:12</div></div>
 </div><!-- fragment --></div><!-- contents -->

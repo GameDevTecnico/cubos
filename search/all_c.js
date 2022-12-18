@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['magfilter_345',['magFilter',['../structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a60b730bd9ed3db31bc2f38bd1b8657ec',1,'cubos::core::gl::SamplerDesc']]],
-  ['manager_346',['Manager',['../classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html',1,'Manager'],['../classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a02e16572d7c8a188b9dd90aac108e720',1,'cubos::engine::gl::pps::Manager::Manager()']]],
-  ['manager_347',['manager',['../classcubos_1_1engine_1_1data_1_1Loader.html#abd8717c36d3e35c3d550647076e15ab4',1,'cubos::engine::data::Loader']]],
+  ['magfilter_344',['magFilter',['../structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a60b730bd9ed3db31bc2f38bd1b8657ec',1,'cubos::core::gl::SamplerDesc']]],
+  ['manager_345',['Manager',['../classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html',1,'cubos::engine::gl::pps']]],
+  ['manager_346',['manager',['../classcubos_1_1engine_1_1data_1_1Loader.html#abd8717c36d3e35c3d550647076e15ab4',1,'cubos::engine::data::Loader']]],
+  ['manager_347',['Manager',['../classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a02e16572d7c8a188b9dd90aac108e720',1,'cubos::engine::gl::pps::Manager']]],
   ['map_348',['map',['../classcubos_1_1core_1_1gl_1_1impl_1_1ConstantBuffer.html#a3b8a627b2d622806bb16da4bd4dcc1d5',1,'cubos::core::gl::impl::ConstantBuffer::map()'],['../classcubos_1_1core_1_1gl_1_1impl_1_1IndexBuffer.html#a3b8a627b2d622806bb16da4bd4dcc1d5',1,'cubos::core::gl::impl::IndexBuffer::map()'],['../classcubos_1_1core_1_1gl_1_1impl_1_1VertexBuffer.html#a3b8a627b2d622806bb16da4bd4dcc1d5',1,'cubos::core::gl::impl::VertexBuffer::map()']]],
   ['mapstorage_349',['MapStorage',['../classcubos_1_1core_1_1ecs_1_1MapStorage.html',1,'cubos::core::ecs']]],
   ['mat_350',['mat',['../structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html#adc68cc75fb10fc123468ad032281061a',1,'cubos::engine::ecs::LocalToWorld']]],
