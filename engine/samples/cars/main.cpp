@@ -356,18 +356,24 @@ int main(void)
         // Update the ECS systems.
 
         auto cmds = core::ecs::CommandBuffer(world);
-        core::ecs::SystemWrapper([](core::ecs::Debug debug) {
+        core::ecs::SystemWrapper([](core::ecs::World& world) {
             ImGui::Begin("Inspector");
-            core::ui::showWorld(debug);
+            core::ui::showWorld(world, [](core::data::Serializer& ser, const core::data::Handle& handle,
+                                          const char* name) { ser.write(handle.getId(), name); });
             ImGui::End();
         }).call(world, cmds);
-        core::ecs::SystemWrapper([](core::ecs::Debug debug, data::AssetManager& assetManager) {
+        core::ecs::SystemWrapper([](core::ecs::World& world, data::AssetManager& assetManager) {
             ImGui::Begin("Editor");
-            core::ui::editWorld(debug, [&](core::data::Deserializer& deserializer, core::data::Handle& handle) {
-                std::string id;
-                deserializer.read(id);
-                handle = assetManager.loadAny(id);
-            });
+            core::ui::editWorld(
+                world,
+                [](core::data::Serializer& ser, const core::data::Handle& handle, const char* name) {
+                    ser.write(handle.getId(), name);
+                },
+                [&](core::data::Deserializer& deserializer, core::data::Handle& handle) {
+                    std::string id;
+                    deserializer.read(id);
+                    handle = assetManager.loadAny(id);
+                });
             ImGui::End();
         }).call(world, cmds);
         core::ecs::SystemWrapper(cameraControllerSystem).call(world, cmds);

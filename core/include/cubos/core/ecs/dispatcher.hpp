@@ -55,7 +55,8 @@ namespace cubos::core::ecs
 
     private:
         std::vector<std::string> stagesOrder; ///< Order in which stages are dispatched.
-        std::map<std::string, std::vector<std::unique_ptr<AnySystemWrapper>>> stagesByName; ///< Maps names to stages.
+        std::map<std::string, std::vector<std::unique_ptr<AnySystemWrapper<void>>>>
+            stagesByName;           ///< Maps names to stages.
         std::string defaultStage;   ///< The stage that new stages are put after/before.
         Direction defaultDirection; ///< The direction new stages are put in relation to the default stage.
     };

@@ -27,6 +27,8 @@ the main loop, the asset manager and systems like the renderer and physics.
 - `cubinhos`: a tool which helps you with the game development and which
 may depend on `core`. One example use case of `cubinhos` is convert from
 external voxel formats to the internal format used by **CUBOS.**.
+- `tesserato`: game editor made on top of multiple plugins, that can also be used individually 
+in your game using **CUBOS.**.
 
 ### Further reading
 

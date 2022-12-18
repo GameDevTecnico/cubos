@@ -86,3 +86,13 @@ bool World::unpack(Entity entity, const data::Package& package, data::Handle::De
     this->entityManager.setMask(entity, mask);
     return success;
 }
+
+World::Iterator World::begin() const
+{
+    return this->entityManager.begin();
+}
+
+World::Iterator World::end() const
+{
+    return this->entityManager.end();
+}
