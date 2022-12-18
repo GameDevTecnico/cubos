@@ -33,7 +33,6 @@ var hierarchy =
     [ "Cubos", "classcubos_1_1engine_1_1Cubos.html", null ],
     [ "Cursor", "classcubos_1_1core_1_1io_1_1Cursor.html", null ],
     [ "EmbeddedArchive::Data", "structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html", null ],
-    [ "Debug", "classcubos_1_1core_1_1ecs_1_1Debug.html", null ],
     [ "Debug", "classcubos_1_1core_1_1gl_1_1Debug.html", null ],
     [ "DepthStencilStateDesc::Depth", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Depth.html", null ],
     [ "DepthStencilState", "classcubos_1_1core_1_1gl_1_1impl_1_1DepthStencilState.html", null ],
@@ -82,7 +81,6 @@ var hierarchy =
         [ "VecStorage< T >", "classcubos_1_1core_1_1ecs_1_1VecStorage.html", null ]
       ] ]
     ] ],
-    [ "Debug::Iterator", "classcubos_1_1core_1_1ecs_1_1Debug_1_1Iterator.html", null ],
     [ "EntityManager::Iterator", "classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html", null ],
     [ "Query< ComponentTypes >::Iterator", "classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html", null ],
     [ "Loader", "classcubos_1_1engine_1_1data_1_1Loader.html", [
@@ -156,10 +154,10 @@ var hierarchy =
     [ "SystemFetcher< T >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html", null ],
     [ "SystemFetcher< Commands & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_6_01_4.html", null ],
     [ "SystemFetcher< const R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4.html", null ],
-    [ "SystemFetcher< Debug >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Debug_01_4.html", null ],
     [ "SystemFetcher< Query< ComponentTypes... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html", null ],
     [ "SystemFetcher< R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4.html", null ],
     [ "SystemFetcher< std::tuple< Args... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01std_1_1tuple_3_01Args_8_8_8_01_4_01_4.html", null ],
+    [ "SystemFetcher< World & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4.html", null ],
     [ "SystemInfo", "structcubos_1_1core_1_1ecs_1_1SystemInfo.html", null ],
     [ "SystemTraits< F >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits.html", null ],
     [ "SystemTraits< void(*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01void_07_5_08_07Args_8_8_8_08_4.html", [

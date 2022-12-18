@@ -10,7 +10,6 @@ var namespacecubos_1_1core_1_1ecs =
     [ "ReadStorage", "classcubos_1_1core_1_1ecs_1_1ReadStorage.html", "classcubos_1_1core_1_1ecs_1_1ReadStorage" ],
     [ "WriteStorage", "classcubos_1_1core_1_1ecs_1_1WriteStorage.html", "classcubos_1_1core_1_1ecs_1_1WriteStorage" ],
     [ "ComponentManager", "classcubos_1_1core_1_1ecs_1_1ComponentManager.html", "classcubos_1_1core_1_1ecs_1_1ComponentManager" ],
-    [ "Debug", "classcubos_1_1core_1_1ecs_1_1Debug.html", "classcubos_1_1core_1_1ecs_1_1Debug" ],
     [ "Dispatcher", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html", "classcubos_1_1core_1_1ecs_1_1Dispatcher" ],
     [ "Entity", "classcubos_1_1core_1_1ecs_1_1Entity.html", "classcubos_1_1core_1_1ecs_1_1Entity" ],
     [ "EntityManager", "classcubos_1_1core_1_1ecs_1_1EntityManager.html", "classcubos_1_1core_1_1ecs_1_1EntityManager" ],

@@ -87,6 +87,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1World.htm
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classcubos_1_1core_1_1ecs_1_1World-members.html">List of all members</a>  </div>
@@ -100,6 +101,13 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1World.htm
 
 <p><code>#include &lt;<a class="el" href="world_8hpp_source.html">world.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a6ae6b2f3107538ada39d2717b3173d7d"><td class="memItemLeft" align="right" valign="top"><a id="a6ae6b2f3107538ada39d2717b3173d7d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a6ae6b2f3107538ada39d2717b3173d7d">Iterator</a> = <a class="el" href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html">EntityManager::Iterator</a></td></tr>
+<tr class="memdesc:a6ae6b2f3107538ada39d2717b3173d7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to iterate over all entities of a world. <br /></td></tr>
+<tr class="separator:a6ae6b2f3107538ada39d2717b3173d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5cead66b63228b9ba76d66c38f868297"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a5cead66b63228b9ba76d66c38f868297">World</a> (size_t initialCapacity=1024)</td></tr>
@@ -142,12 +150,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a131863a321aa4e511640a91d06638018"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a131863a321aa4e511640a91d06638018">unpack</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity, const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;package, data::Handle::DesContext handleCtx)</td></tr>
 <tr class="memdesc:a131863a321aa4e511640a91d06638018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpacks components specified in a package into an entity.  <a href="classcubos_1_1core_1_1ecs_1_1World.html#a131863a321aa4e511640a91d06638018">More...</a><br /></td></tr>
 <tr class="separator:a131863a321aa4e511640a91d06638018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09dd208593b9721a30a83ed978ede577"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a6ae6b2f3107538ada39d2717b3173d7d">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a09dd208593b9721a30a83ed978ede577">begin</a> () const</td></tr>
+<tr class="separator:a09dd208593b9721a30a83ed978ede577"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62469461ed7c932afba3808f4da0fe3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a6ae6b2f3107538ada39d2717b3173d7d">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a62469461ed7c932afba3808f4da0fe3d">end</a> () const</td></tr>
+<tr class="separator:a62469461ed7c932afba3808f4da0fe3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a2bbda38dab973ea67b9b9dfbf7001640"><td class="memItemLeft" align="right" valign="top"><a id="a2bbda38dab973ea67b9b9dfbf7001640"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>Debug</b></td></tr>
-<tr class="separator:a2bbda38dab973ea67b9b9dfbf7001640"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4631ae0173c324dc84781c944ebb28a"><td class="memTemplParams" colspan="2"><a id="ac4631ae0173c324dc84781c944ebb28a"></a>
 template&lt;typename... ComponentTypes&gt; </td></tr>
 <tr class="memitem:ac4631ae0173c324dc84781c944ebb28a"><td class="memTemplItemLeft" align="right" valign="top">class&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Query</b></td></tr>
@@ -231,6 +240,24 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Commands</b></td></t
 
 </div>
 </div>
+<a id="a09dd208593b9721a30a83ed978ede577"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09dd208593b9721a30a83ed978ede577">&#9670;&nbsp;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a6ae6b2f3107538ada39d2717b3173d7d">Iterator</a> begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns an iterator which points to the first entity of the world. </p><dl class="section return"><dt>Returns</dt><dd>An iterator. </dd></dl>
+
+</div>
+</div>
 <a id="ab871327adf4765d2e6bd9a6db1916658"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab871327adf4765d2e6bd9a6db1916658">&#9670;&nbsp;</a></span>create()</h2>
 
@@ -286,6 +313,24 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Commands</b></td></t
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a62469461ed7c932afba3808f4da0fe3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62469461ed7c932afba3808f4da0fe3d">&#9670;&nbsp;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#a6ae6b2f3107538ada39d2717b3173d7d">Iterator</a> end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns an iterator which points to the end of the world. </p><dl class="section return"><dt>Returns</dt><dd>An iterator. </dd></dl>
 
 </div>
 </div>

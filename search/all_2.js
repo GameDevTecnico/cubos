@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['call_55',['call',['../classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#a170910ae7299e31a3409f3bab27402ee',1,'cubos::core::ecs::AnySystemWrapper::call()'],['../classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#a5b35f3747864a4b8660ecf786ad52e10',1,'cubos::core::ecs::SystemWrapper::call()']]],
+  ['call_55',['call',['../classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#a74a9e596da8259d94c4a6466491fd991',1,'cubos::core::ecs::AnySystemWrapper::call()'],['../classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#a720bb81fe77d265fd68a532b837b3df8',1,'cubos::core::ecs::SystemWrapper::call()']]],
   ['callback_56',['Callback',['../classcubos_1_1core_1_1Event.html#aca9ece8ae31e919ff79f5b12419a4a6d',1,'cubos::core::Event']]],
   ['callsystems_57',['callSystems',['../classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ad76925e6b54ce94fb4630e08b6349d27',1,'cubos::core::ecs::Dispatcher']]],
   ['camera_58',['Camera',['../structcubos_1_1core_1_1gl_1_1Camera.html',1,'cubos::core::gl']]],
