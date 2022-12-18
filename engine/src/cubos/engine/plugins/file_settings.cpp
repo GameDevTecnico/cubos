@@ -14,8 +14,10 @@ static void startup(const std::string& path, cubos::core::Settings& settings)
     auto stream = FileSystem::open(path, File::OpenMode::Read);
     stream->readUntil(contents, nullptr);
 
+    cubos::core::Settings newSettings;
     auto deserializer = JSONDeserializer(contents);
-    deserializer.read(settings);
+    deserializer.read(newSettings);
+    settings.merge(newSettings);
 }
 
 void cubos::engine::plugins::fileSettingsPlugin(Cubos& cubos)
