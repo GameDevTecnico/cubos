@@ -4,6 +4,7 @@
 # Set test sources
 set(CUBOS_TESTS_SOURCE
     "test_settings.cpp"
+    "test_thread_pool.cpp"
     "test_buffer_stream.cpp"
     "test_yaml_serialization.cpp"
     "test_yaml_deserialization.cpp"

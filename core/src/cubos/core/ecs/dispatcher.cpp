@@ -2,7 +2,7 @@
 
 using namespace cubos::core::ecs;
 
-void Dispatcher::callSystems(World& world, Commands& cmds)
+void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
 {
     for (auto& stageName : this->stagesOrder)
     {
@@ -88,6 +88,6 @@ void Dispatcher::putStage(std::string stage, std::string referenceStage, Directi
     // Check if we need to initialize the new stage.
     if (this->stagesByName.find(stage) == this->stagesByName.end())
     {
-        this->stagesByName[stage] = std::vector<std::unique_ptr<AnySystemWrapper>>();
+        this->stagesByName[stage] = std::vector<std::unique_ptr<AnySystemWrapper<void>>>();
     }
 }
