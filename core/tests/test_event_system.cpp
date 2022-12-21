@@ -11,42 +11,34 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
 {
     auto pipe = EventPipe<int>();
     auto writer = EventWriter<int>(pipe);
-    auto reader = EventReader<int, 0>(pipe);
 
     std::size_t size = 0;
-    for (auto& x : reader)
+    for (auto& x : EventReader<int, 0>(pipe))
     {
         size++;
     }
     EXPECT_EQ(size, 0);
 
-    writer.push(3);
-    for (size = 0; auto& x : reader)
+    writer.push(3); // push (3,0)
+    for (size = 0; auto& x : EventReader<int, 0>(pipe))
     {
         size++;
     }
     EXPECT_EQ(size, 1);
 
     writer.push(3, 5);
-    for (size = 0; auto& x : reader)
+    for (size = 0; auto& x : EventReader<int, 0>(pipe))
     {
         size++;
     }
-    EXPECT_EQ(size, 1); // still one because we added a event "3" with mask 5
+    EXPECT_EQ(size, 2);
 
-    writer.push(2);
-    for (size = 0; auto& x : reader)
+    pipe.clear();
+    for (size = 0; auto& x : EventReader<int, 0>(pipe))
     {
         size++;
     }
-    EXPECT_EQ(size, 2); // still one because we added a event "3" with mask 5
-
-    pipe.clear(); // clears only (3, 0) and (2, 0), because the reader is only on "0" mask events
-    for (size = 0; auto& x : reader)
-    {
-        size++;
-    }
-    EXPECT_EQ(size, 1); // (3,5) event was not read yet
+    EXPECT_EQ(size, 2);
 }
 
 TEST(Cubos_Core_Event_System, Event_Pipe_Writer_Simple_Test)
@@ -96,10 +88,11 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     {
         static auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe);
         auto it = mouseReader.read();
-        if (it != std::nullopt)
+        if (it == std::nullopt)
         {
-            mouseReaderSize++;
+            break;
         }
+        mouseReaderSize++;
     }
     EXPECT_EQ(mouseReaderSize, 2);
 
@@ -134,7 +127,7 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     {
         size++;
     }
-    EXPECT_EQ(size, 2);
+    EXPECT_EQ(size, 6);
 
     size = 0;
     for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::ALL>(pipe))
