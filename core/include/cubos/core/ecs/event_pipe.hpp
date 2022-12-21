@@ -21,9 +21,9 @@ namespace cubos::core::ecs
         /// @param index Event index.
         unsigned int getEventMask(std::size_t index) const;
 
-        /// Returns the event from event pipe at index, with read/write permissions.
+        /// Returns the event from event pipe at index (with read/write permissions) and its mask.
         /// @param index Event index.
-        T& getEvent(std::size_t index) const;
+        std::pair<T&, unsigned int> get(std::size_t index) const;
 
         /// Clears pipe event list.
         /// Only events that got read by all readers are deleted!
@@ -78,11 +78,11 @@ namespace cubos::core::ecs
         return this->events.at(index).mask;
     }
 
-    template <typename T> T& EventPipe<T>::getEvent(std::size_t index) const
+    template <typename T> std::pair<T&, unsigned int> EventPipe<T>::get(std::size_t index) const
     {
         Event& ev = this->events.at(index);
         ev.readCount++;
-        return ev.event;
+        return std::pair<T&, unsigned int>(ev.event, ev.mask);
     }
 
     template <typename T> void EventPipe<T>::clear()
