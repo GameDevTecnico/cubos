@@ -20,6 +20,7 @@ int main()
             ALL = (1 << 3) - 1,   // 0111
         };
 
+        char a;
         int data; // random data member
     };
 
@@ -33,27 +34,45 @@ int main()
     writer.push(MyEvent{.data = 2}); // MyEvent::Mask::ALL ignores this, should it?
     writer.push(MyEvent{.data = 6}); // MyEvent::Mask::ALL ignores this, should it?
 
-    printf("### mouse events:\n");
-    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe))
+    printf("### mouse events using .read():\n");
+    while (true)
     {
-        printf("\t ## data: : %d\n", it);
+        static auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe);
+        auto it = mouseReader.read();
+        if (it == std::nullopt)
+        {
+            break;
+        }
+        printf("\t ## data : %d\n", it->get().data);
     }
+
+    // range based
+
+    auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe);
+    printf("### mouse events:\n");
+    mouseReader.read(); // already read one event, the loop will only loop ince
+    for (const auto& it : mouseReader)
+    {
+        printf("\t ## data: : %d\n", it.data);
+    }
+
+    writer.push(MyEvent{.data = 2});
 
     printf("### wheel + key events:\n");
     for (const auto& it : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT | MyEvent::Mask::WHEEL_EVENT>(pipe))
     {
-        printf("\t ## data: : %d\n", it);
+        printf("\t ## data: : %d\n", it.data);
     }
 
     printf("\n### all masked events:\n");
     for (const auto& it : EventReader<MyEvent, MyEvent::Mask::ALL>(pipe))
     {
-        printf("\t ## data: : %d\n", it);
+        printf("\t ## data: : %d\n", it.data);
     }
 
     printf("\n### all non masked events:\n");
     for (const auto& it : EventReader<MyEvent, 0>(pipe))
     {
-        printf("\t ## data: : %d\n", it);
+        printf("\t ## data: : %d\n", it.data);
     }
 }

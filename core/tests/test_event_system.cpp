@@ -91,6 +91,18 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     writer.push(MyEvent{.data = 5});
     writer.push(MyEvent{.data = 6});
 
+    std::size_t mouseReaderSize = 0;
+    while (true)
+    {
+        static auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe);
+        auto it = mouseReader.read();
+        if (it != std::nullopt)
+        {
+            mouseReaderSize++;
+        }
+    }
+    EXPECT_EQ(mouseReaderSize, 2);
+
     auto keyEventReader = EventReader<MyEvent, MyEvent::Mask::KEY_EVENT>(pipe);
     for (auto& ev : keyEventReader)
     {
