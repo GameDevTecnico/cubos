@@ -80,6 +80,6 @@ int main(int argc, char** argv)
 
         // or a tesserato tool!
         .addPlugin(cubos::engine::plugins::tools::settingsInspectorPlugin)
-        
+
         .run();
 }
