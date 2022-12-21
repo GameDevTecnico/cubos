@@ -72,18 +72,30 @@ namespace cubos::engine
         /// Sets the current system to run after the tag.
         /// If the specified tag doesn't exist, it is internally created.
         /// @param tag The tag to run after.
-        Cubos& after(const std::string& tag);
+        Cubos& afterTag(const std::string& tag);
 
-        /// Sets a given stage to happen before another stage.
+        /// Sets the current system to run after a given system.
+        /// If the given argument is a string, it's set to run after a given tag instead.
+        /// The specified system must exist, but if it's a tag it will be created if it doesn't exist.
+        /// @param system The system to run after.
+        template <typename F> Cubos& after(F system);
+
+        /// Sets the current system to run before the tag.
         /// If the specified tag doesn't exist, it is internally created.
-        /// @param tag The tag to run after.
-        Cubos& before(const std::string& tag);
+        /// @param tag The tag to run before.
+        Cubos& beforeTag(const std::string& tag);
+
+        /// Sets the current system to run before a given system.
+        /// The specified system must exist.
+        /// @param system The system to run before.
+        template <typename F> Cubos& before(F system);
 
         /// Runs the engine.
         void run();
 
     private:
         bool isStartup;
+        bool isSystem;
 
         core::ecs::Dispatcher mainDispatcher, startupDispatcher;
         core::ecs::World world;
@@ -106,16 +118,38 @@ namespace cubos::engine
 
     template <typename F> Cubos& Cubos::system(F func)
     {
-        mainDispatcher.addSystem<F>(func);
+        mainDispatcher.addSystem(func);
         isStartup = false;
+        isSystem = true;
 
         return *this;
     }
 
     template <typename F> Cubos& Cubos::startupSystem(F func)
     {
-        startupDispatcher.addSystem<F>(func);
+        startupDispatcher.addSystem(func);
         isStartup = true;
+        isSystem = true;
+
+        return *this;
+    }
+
+    template <typename F> Cubos& Cubos::after(F system)
+    {
+        if (isStartup)
+            startupDispatcher.systemSetAfterSystem(system);
+        else
+            mainDispatcher.systemSetAfterSystem(system);
+
+        return *this;
+    }
+
+    template <typename F> Cubos& Cubos::before(F system)
+    {
+        if (isStartup)
+            startupDispatcher.systemSetBeforeSystem(system);
+        else
+            mainDispatcher.systemSetBeforeSystem(system);
 
         return *this;
     }

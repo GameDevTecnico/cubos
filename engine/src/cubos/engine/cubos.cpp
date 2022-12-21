@@ -23,6 +23,8 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 Cubos& Cubos::tag(const std::string& tag)
 {
     mainDispatcher.addTag(tag);
+    isStartup = false;
+    isSystem = false;
 
     return *this;
 }
@@ -30,47 +32,87 @@ Cubos& Cubos::tag(const std::string& tag)
 Cubos& Cubos::startupTag(const std::string& tag)
 {
     startupDispatcher.addTag(tag);
+    isStartup = true;
+    isSystem = false;
 
     return *this;
 }
 
 Cubos& Cubos::tagged(const std::string& tag)
 {
-    if(isStartup)
+    if(isSystem)
     {
-        startupDispatcher.setTag(tag);
-    }
-    else
+        if(isStartup)
+        {
+            startupDispatcher.systemSetTag(tag);
+        }
+        else
+        {
+            mainDispatcher.systemSetTag(tag);
+        }
+    } else
     {
-        mainDispatcher.setTag(tag);
+        if(isStartup)
+        {
+            startupDispatcher.tagInheritTag(tag);
+        }
+        else
+        {
+            mainDispatcher.tagInheritTag(tag);
+        }
     }
 
     return *this;
 }
 
-Cubos& Cubos::after(const std::string& tag)
+Cubos& Cubos::afterTag(const std::string& tag)
 {
-    if(isStartup)
+    if(isSystem)
     {
-        startupDispatcher.setAfter(tag);
-    }
-    else
+        if(isStartup)
+        {
+            startupDispatcher.systemSetAfterTag(tag);
+        }
+        else
+        {
+            mainDispatcher.systemSetAfterTag(tag);
+        }
+    } else
     {
-        mainDispatcher.setAfter(tag);
+        if(isStartup)
+        {
+            startupDispatcher.tagSetAfterTag(tag);
+        }
+        else
+        {
+            mainDispatcher.tagSetAfterTag(tag);
+        }
     }
-
     return *this;
 }
 
-Cubos& Cubos::before(const std::string& tag)
+Cubos& Cubos::beforeTag(const std::string& tag)
 {
-    if(isStartup)
+    if(isSystem)
     {
-        startupDispatcher.setBefore(tag);
-    }
-    else
+        if(isStartup)
+        {
+            startupDispatcher.systemSetBeforeTag(tag);
+        }
+        else
+        {
+            mainDispatcher.systemSetBeforeTag(tag);
+        }
+    } else
     {
-        mainDispatcher.setBefore(tag);
+        if(isStartup)
+        {
+            startupDispatcher.tagSetBeforeTag(tag);
+        }
+        else
+        {
+            mainDispatcher.tagSetBeforeTag(tag);
+        }
     }
 
     return *this;

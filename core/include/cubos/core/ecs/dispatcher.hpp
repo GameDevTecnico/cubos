@@ -10,7 +10,8 @@
 #include <memory>
 
 #define ENSURE_CURR_SYSTEM() if(!currSystem) { CUBOS_ERROR("No system currently selected!"); return; }
-#define ENSURE_SYSTEM_SETTINGS() if(!currSystem->settings) { currSystem->settings = std::make_shared<SystemSettings>(); }
+#define ENSURE_CURR_TAG() if(!currTagSettings) { CUBOS_ERROR("No tag currently selected!"); return; }
+#define ENSURE_SYSTEM_SETTINGS(obj) if(!obj->settings) { obj->settings = std::make_shared<SystemSettings>(); }
 
 namespace cubos::core::ecs
 {
@@ -42,13 +43,6 @@ namespace cubos::core::ecs
         /// Internal class to handle tag settings
         struct System
         {
-            template <typename F> bool operator==(F other) const
-            {
-                SystemWrapper<F> wrapper = dynamic_cast<SystemWrapper<F>>(system.get());
-                if(!wrapper) return false;
-                return wrapper.system == other;
-            }
-
             std::shared_ptr<SystemSettings> settings;
             std::unique_ptr<AnySystemWrapper> system;
         };
@@ -66,36 +60,46 @@ namespace cubos::core::ecs
         /// Makes a tag inherit the settings of another one.
         /// @param tag Tag to inherit.
         /// @param inherit Tag to inherit from.
-        void inheritTag(const std::string& tag, const std::string& other);
+        void tagInheritTag(const std::string& tag);
+
+        /// Makes a tag run after the given tag.
+        /// If the specified tag doesn't exist, it is internally created.
+        /// @param tag Tag to run after.
+        void tagSetAfterTag(const std::string& tag);
+
+        /// Makes a tag run before the given tag.
+        /// If the specified tag doesn't exist, it is internally created.
+        /// @param tag Tag to run before.
+        void tagSetBeforeTag(const std::string& tag);
 
         /// Adds a system. This system will be added to a pending queue
         /// and will properly be added when the call chain is compiled.
         /// @param system System to add.
         template <typename F> void addSystem(F func);
 
-        /// Adds a tag for the current system.
+        /// Sets a tag for the current system.
         /// @param tag The tag to run under.
-        void setTag(const std::string& tag);
+        void systemSetTag(const std::string& tag);
 
         /// Sets the current system to run after the tag.
         /// If the specified tag doesn't exist, it is internally created.
         /// @param tag The tag to run after.
-        void setAfter(const std::string& tag);
+        void systemSetAfterTag(const std::string& tag);
 
         /// Sets the current system to run after a given system.
         /// The specified system must exist.
         /// @param system The system to run after.
-        template <typename F> void setAfter(F func);
+        template <typename F> void systemSetAfterSystem(F func);
 
         /// Sets the current system to run before the tag.
         /// If the specified tag doesn't exist, it is internally created.
         /// @param tag The tag to run before.
-        void setBefore(const std::string& tag);
+        void systemSetBeforeTag(const std::string& tag);
 
         /// Sets the current system to run before the system.
         /// The specified system must exist.
         /// @param system The system to run before.
-        template <typename F> void setBefore(F func);
+        template <typename F> void systemSetBeforeSystem(F func);
 
         /// Compiles a call chain. This takes all pending systems and
         /// determines their execution order.
@@ -109,13 +113,14 @@ namespace cubos::core::ecs
         /// This is used internally during call chain compilation.
         /// @param node The node to visit.
         /// @return True if a cycle was detected, false if otherwise.
-        bool dfsVisit(DFSNode& node);
+        bool dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes);
 
     private:
         /// Variables for holding information before call chain is compiled.
-        std::vector<System> pendingSystems;               ///< All systems.
-        System* currSystem;                                ///< Last set setting, for changing settings.
+        std::vector<System> pendingSystems;                                 ///< All systems.
         std::map<std::string, std::shared_ptr<SystemSettings>> tagSettings; ///< All tags.
+        System* currSystem;                                                 ///< Last set system, for changing settings.
+        SystemSettings* currTagSettings;                                    ///< Last set tag, for changing settings.
 
         /// Variables for holding information after call chain is compiled.
         std::vector<System> systems;
@@ -129,30 +134,46 @@ namespace cubos::core::ecs
         currSystem = &pendingSystems.back();
     }
 
-    template <typename F> void Dispatcher::setAfter(F func)
+    template <typename F> void Dispatcher::systemSetAfterSystem(F func)
     {
-        auto it = std::find(pendingSystems.begin(), pendingSystems.end(), func);
+        auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System& system) {
+            SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system.system.get());
+            if(!wrapper) return false;
+            return wrapper->system == func;
+        });
         if(it == pendingSystems.end())
         {
             CUBOS_ERROR("Tried to set system after a non-existing system!");
             return;
         }
         ENSURE_CURR_SYSTEM();
-        ENSURE_SYSTEM_SETTINGS();
-        currSystem->settings->after.system.push_back(*it);
+        ENSURE_SYSTEM_SETTINGS(currSystem);
+        ENSURE_SYSTEM_SETTINGS(it);
+        // Set curr to run after this system
+        currSystem->settings->after.system.push_back(&(*it));
+        // And this system to run before curr
+        it->settings->before.system.push_back(currSystem);
     }
 
-    template <typename F> void Dispatcher::setBefore(F func)
+    template <typename F> void Dispatcher::systemSetBeforeSystem(F func)
     {
-        auto it = std::find(pendingSystems.begin(), pendingSystems.end(), func);
+        auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System& system) {
+            SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system.system.get());
+            if(!wrapper) return false;
+            return wrapper->system == func;
+        });
         if(it == pendingSystems.end())
         {
             CUBOS_ERROR("Tried to set system before a non-existing system!");
             return;
         }
         ENSURE_CURR_SYSTEM();
-        ENSURE_SYSTEM_SETTINGS();
-        currSystem->settings->before.system.push_back(*it);
+        ENSURE_SYSTEM_SETTINGS(currSystem);
+        ENSURE_SYSTEM_SETTINGS(it);
+        // Set curr to run before this system
+        currSystem->settings->before.system.push_back(&(*it));
+        // And this system to run after curr
+        it->settings->after.system.push_back(currSystem);
     }
 } // namespace cubos::core::ecs
 #endif // CUBOS_CORE_ECS_DISPATCHER_HPP
