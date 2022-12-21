@@ -22,8 +22,10 @@ void cubos::engine::plugins::imguiPlugin(Cubos& cubos)
     cubos.addPlugin(cubos::engine::plugins::windowPlugin)
         .addStartupSystem(initializeImGui, "InitImGui")
         .putStageAfter("InitImGui", "OpenWindow")
+
         .addSystem(beginImGuiFrame, "BeginImGuiFrame")
         .putStageAfter("BeginImGuiFrame", "Poll")
+        
         .addSystem(endImGuiFrame, "EndImGuiFrame")
         .putStageBefore("EndImGuiFrame", "SwapBuffers");
 }

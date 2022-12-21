@@ -67,7 +67,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/plugins/window.hpp"
 	"include/cubos/engine/plugins/env_settings.hpp"
 	"include/cubos/engine/plugins/imgui.hpp"
-    
+
 	"include/cubos/engine/plugins/tools/settings_inspector.hpp"
 )
 
