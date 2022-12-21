@@ -20,21 +20,43 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
     return *this;
 }
 
-Cubos& Cubos::after(const std::string& tag)
+Cubos& Cubos::tag(const std::string& tag)
 {
-    if (!currentTag && !currentSystem)
+    mainDispatcher.addTag(tag);
+
+    return *this;
+}
+
+Cubos& Cubos::startupTag(const std::string& tag)
+{
+    startupDispatcher.addTag(tag);
+
+    return *this;
+}
+
+Cubos& Cubos::tagged(const std::string& tag)
+{
+    if(isStartup)
     {
-        CUBOS_ERROR("No tag or system currently selected! (on after({}))", tag);
-        abort();
+        startupDispatcher.setTag(tag);
+    }
+    else
+    {
+        mainDispatcher.setTag(tag);
     }
 
-    if (currentTag)
+    return *this;
+}
+
+Cubos& Cubos::after(const std::string& tag)
+{
+    if(isStartup)
     {
-        currentTag->after.push_back(tag);
+        startupDispatcher.setAfter(tag);
     }
-    else if (currentSystem)
+    else
     {
-        currentSystem->after.push_back(tag);
+        mainDispatcher.setAfter(tag);
     }
 
     return *this;
@@ -42,19 +64,13 @@ Cubos& Cubos::after(const std::string& tag)
 
 Cubos& Cubos::before(const std::string& tag)
 {
-    if (!currentTag && !currentSystem)
+    if(isStartup)
     {
-        CUBOS_ERROR("No tag or system currently selected! (on before({}))", tag);
-        abort();
+        startupDispatcher.setBefore(tag);
     }
-
-    if (currentTag)
+    else
     {
-        currentTag->before.push_back(tag);
-    }
-    else if (currentSystem)
-    {
-        currentSystem->before.push_back(tag);
+        mainDispatcher.setBefore(tag);
     }
 
     return *this;
@@ -66,22 +82,8 @@ Cubos::Cubos()
 
     addResource<ShouldQuit>(true);
     addResource<cubos::core::Settings>();
-}
 
-void Cubos::compileChain()
-{
-    compileStartupDispatcher();
-    compileMainDispatcher();
-}
-
-void Cubos::compileStartupDispatcher()
-{
-
-}
-
-void Cubos::compileMainDispatcher()
-{
-
+    isStartup = false;
 }
 
 void Cubos::run()
@@ -89,7 +91,8 @@ void Cubos::run()
     plugins.clear();
 
     // Compile execution chain
-    compileChain();
+    startupDispatcher.compileChain();
+    mainDispatcher.compileChain();
 
     cubos::core::ecs::Commands cmds(world);
 

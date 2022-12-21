@@ -2,9 +2,97 @@
 
 using namespace cubos::core::ecs;
 
+void Dispatcher::addTag(const std::string& tag)
+{
+    if(tagSettings.find("tag") == tagSettings.end())
+    {
+        tagSettings[tag] = std::make_shared<SystemSettings>();
+    }
+}
+
+void Dispatcher::inheritTag(const std::string& tag, const std::string& other)
+{
+    addTag(tag);
+    auto settings = tagSettings[tag];
+    if(std::find(settings->inherits.begin(), settings->inherits.end(), other) != settings->inherits.end())
+    {
+        CUBOS_INFO("Tag '{}' already inherits from '{}'", tag, other);
+    }
+    settings->inherits.push_back(other);
+}
+
+void Dispatcher::setTag(const std::string& tag)
+{
+    ENSURE_CURR_SYSTEM();
+    ENSURE_SYSTEM_SETTINGS();
+    addTag(tag);
+    currSystem->settings = tagSettings[tag];
+}
+
+void Dispatcher::setAfter(const std::string& tag)
+{
+    ENSURE_CURR_SYSTEM();
+    ENSURE_SYSTEM_SETTINGS();
+    addTag(tag);
+    currSystem->settings->after.tag.push_back(tag);
+}
+
+void Dispatcher::setBefore(const std::string& tag)
+{
+    ENSURE_CURR_SYSTEM();
+    ENSURE_SYSTEM_SETTINGS();
+    addTag(tag);
+    currSystem->settings->before.tag.push_back(tag);
+}
+
+void Dispatcher::compileChain()
+{
+    // Build the system chain
+    std::vector<DFSNode> nodes;
+    for(auto& system : pendingSystems)
+    {
+        nodes.push_back(DFSNode{DFSNode::WHITE, &system});
+    }
+
+    // Keep running while there are unvisited nodes
+    std::vector<DFSNode>::iterator it;
+    while((it = std::find_if(nodes.begin(), nodes.end(), [](const DFSNode& node) { return node.m == DFSNode::WHITE; })) != nodes.end())
+    {
+        if(dfsVisit(*it))
+        {
+            CUBOS_ERROR("Cycle detected in system chain! Ensure there are no circular dependencies!");
+            return;
+        }
+    }
+}
+
+bool Dispatcher::dfsVisit(DFSNode& node)
+{
+    switch(node.m)
+    {
+        case DFSNode::BLACK:
+            return false;
+        case DFSNode::GRAY:
+            return true;
+        case DFSNode::WHITE:
+        {
+            node.m = DFSNode::GRAY;
+            System* system = node.s;
+            // TODO: Implement
+            return false;
+        }
+    }
+}
+
 void Dispatcher::callSystems(World& world, Commands& cmds)
 {
-    for (auto& stageName : this->stagesOrder)
+    for(auto it = systems.begin(); it != systems.end(); it++)
+    {
+        it->system->call(world, cmds);
+        // TODO: Check synchronization concerns when this gets multithreaded
+        cmds.commit();
+    }
+    /*for (auto& stageName : this->stagesOrder)
     {
         CUBOS_TRACE("Dispatching stage '{}'", stageName);
 
@@ -14,80 +102,5 @@ void Dispatcher::callSystems(World& world, Commands& cmds)
         }
 
         cmds.commit();
-    }
-}
-
-void Dispatcher::setDefaultStage(std::string stage, Direction direction)
-{
-    // Check if stage exists.
-    if (this->stagesByName.find(stage) == this->stagesByName.end())
-    {
-        this->putStage(stage, this->defaultStage, this->defaultDirection);
-    }
-
-    this->defaultStage = stage;
-    this->defaultDirection = direction;
-}
-
-void Dispatcher::putStageBefore(std::string stage, std::string referenceStage)
-{
-    this->putStage(stage, referenceStage, Direction::Before);
-}
-
-void Dispatcher::putStageAfter(std::string stage, std::string referenceStage)
-{
-    this->putStage(stage, referenceStage, Direction::After);
-}
-
-void Dispatcher::putStage(std::string stage, std::string referenceStage, Direction direction)
-{
-    // Check if the stage is valid.
-    if (stage == "")
-    {
-        CUBOS_CRITICAL("Stage name must not be empty");
-        abort();
-    }
-    // Check if they're the same stage.
-    else if (stage == referenceStage)
-    {
-        CUBOS_CRITICAL("Cannot put the stage '{}' after/before itself", stage);
-        abort();
-    }
-
-    // Get the iterators for both stages in the order vector.
-    auto it = std::find(this->stagesOrder.begin(), this->stagesOrder.end(), stage);
-    auto refIt = std::find(this->stagesOrder.begin(), this->stagesOrder.end(), referenceStage);
-
-    // Check if the reference stage exists
-    if (refIt == this->stagesOrder.end() && !referenceStage.empty())
-    {
-        CUBOS_CRITICAL("Stage '{}' not found", referenceStage);
-        abort();
-    }
-
-    // Remove the stage from the order vector and reinsert it before the reference stage.
-    if (it != this->stagesOrder.end())
-    {
-        this->stagesOrder.erase(it);
-        // Erase invalidates next iterators, so refIt may need to be updated.
-        if (refIt > it)
-        {
-            refIt = std::find(this->stagesOrder.begin(), this->stagesOrder.end(), referenceStage);
-        }
-    }
-
-    if (referenceStage.empty() || direction == Direction::Before)
-    {
-        this->stagesOrder.insert(refIt, stage);
-    }
-    else
-    {
-        this->stagesOrder.insert(refIt + 1, stage);
-    }
-
-    // Check if we need to initialize the new stage.
-    if (this->stagesByName.find(stage) == this->stagesByName.end())
-    {
-        this->stagesByName[stage] = std::vector<std::unique_ptr<AnySystemWrapper>>();
-    }
+    }*/
 }

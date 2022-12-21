@@ -9,6 +9,9 @@
 #include <string>
 #include <memory>
 
+#define ENSURE_CURR_SYSTEM() if(!currSystem) { CUBOS_ERROR("No system currently selected!"); return; }
+#define ENSURE_SYSTEM_SETTINGS() if(!currSystem->settings) { currSystem->settings = std::make_shared<SystemSettings>(); }
+
 namespace cubos::core::ecs
 {
     /// @brief Dispatcher is a class that is used to register systems and call them all at once, where they will be
@@ -16,73 +19,140 @@ namespace cubos::core::ecs
     class Dispatcher
     {
     public:
-        // Direction enum
-        enum class Direction
+        struct Dependency;
+        struct SystemSettings;
+        struct System;
+
+        /// Internal class to specify system dependencies
+        struct Dependency
         {
-            Before,
-            After
+            std::vector<std::string> tag;
+            std::vector<System*> system;
         };
 
-        /// Adds a system into a stage.
+        /// Internal class with settings pertaining to system/tag execution
+        struct SystemSettings
+        {
+            Dependency before, after;
+            // TODO: Add run conditions, threading modes, etc...
+            // TODO: Implement inherithance behavior
+            std::vector<std::string> inherits;
+        };
+
+        /// Internal class to handle tag settings
+        struct System
+        {
+            template <typename F> bool operator==(F other) const
+            {
+                SystemWrapper<F> wrapper = dynamic_cast<SystemWrapper<F>>(system.get());
+                if(!wrapper) return false;
+                return wrapper.system == other;
+            }
+
+            std::shared_ptr<SystemSettings> settings;
+            std::unique_ptr<AnySystemWrapper> system;
+        };
+
+        struct DFSNode
+        {
+            enum { WHITE, GRAY, BLACK } m;
+            System* s;
+        };
+
+        /// Adds a tag.
+        /// @param tag Tag to add.
+        void addTag(const std::string& tag);
+
+        /// Makes a tag inherit the settings of another one.
+        /// @param tag Tag to inherit.
+        /// @param inherit Tag to inherit from.
+        void inheritTag(const std::string& tag, const std::string& other);
+
+        /// Adds a system. This system will be added to a pending queue
+        /// and will properly be added when the call chain is compiled.
         /// @param system System to add.
-        /// @param stage Stage to add the system in.
-        template <typename F> void addSystem(F system, std::string stage);
+        template <typename F> void addSystem(F func);
+
+        /// Adds a tag for the current system.
+        /// @param tag The tag to run under.
+        void setTag(const std::string& tag);
+
+        /// Sets the current system to run after the tag.
+        /// If the specified tag doesn't exist, it is internally created.
+        /// @param tag The tag to run after.
+        void setAfter(const std::string& tag);
+
+        /// Sets the current system to run after a given system.
+        /// The specified system must exist.
+        /// @param system The system to run after.
+        template <typename F> void setAfter(F func);
+
+        /// Sets the current system to run before the tag.
+        /// If the specified tag doesn't exist, it is internally created.
+        /// @param tag The tag to run before.
+        void setBefore(const std::string& tag);
+
+        /// Sets the current system to run before the system.
+        /// The specified system must exist.
+        /// @param system The system to run before.
+        template <typename F> void setBefore(F func);
+
+        /// Compiles a call chain. This takes all pending systems and
+        /// determines their execution order.
+        void compileChain();
 
         /// Calls all systems in order of the stages they are in.
         /// @param world World to call the systems in.
         void callSystems(World& world, Commands& cmds);
 
-        /// Sets the default stage and the direction new stages will be added in.
-        /// @param stage The stage to set as default.
-        /// @param direction Direction to add new stages in.
-        void setDefaultStage(std::string stage, ecs::Dispatcher::Direction direction);
-
-        /// Puts a stage before another stage.
-        /// @param stage Stage to put before another stage.
-        /// @param before Stage to put the stage before.
-        void putStageBefore(std::string stage, std::string referenceStage);
-
-        /// Puts a stage after another stage.
-        /// @param stage Stage to put after another stage.
-        /// @param after Stage to put the stage after.
-        void putStageAfter(std::string stage, std::string referenceStage);
-
-        /// Puts a stage next to another stage.
-        /// @param stage Stage to put next to another stage.
-        /// @param referenceStage Stage to put the stage next to.
-        /// @param direction Direction to put the stage in.
-        void putStage(std::string stage, std::string referenceStage, Direction direction);
+        /// Visits a DFSNode to create a topological order.
+        /// This is used internally during call chain compilation.
+        /// @param node The node to visit.
+        /// @return True if a cycle was detected, false if otherwise.
+        bool dfsVisit(DFSNode& node);
 
     private:
-        std::vector<std::string> stagesOrder; ///< Order in which stages are dispatched.
-        std::map<std::string, std::vector<std::unique_ptr<AnySystemWrapper>>> stagesByName; ///< Maps names to stages.
-        std::string defaultStage;   ///< The stage that new stages are put after/before.
-        Direction defaultDirection; ///< The direction new stages are put in relation to the default stage.
+        /// Variables for holding information before call chain is compiled.
+        std::vector<System> pendingSystems;               ///< All systems.
+        System* currSystem;                                ///< Last set setting, for changing settings.
+        std::map<std::string, std::shared_ptr<SystemSettings>> tagSettings; ///< All tags.
+
+        /// Variables for holding information after call chain is compiled.
+        std::vector<System> systems;
     };
 
-    template <typename F> void Dispatcher::addSystem(F system, std::string stage)
+    template <typename F> void Dispatcher::addSystem(F func)
     {
-        // Register stage if it doesn't exist.
-        if (this->stagesByName.find(stage) == this->stagesByName.end())
-        {
-            this->putStage(stage, this->defaultStage, this->defaultDirection);
-        }
+        // Wrap the system and put it in the pending queue
+        System system = {nullptr, std::make_unique<SystemWrapper<F>>(func)};
+        pendingSystems.push_back(std::move(system));
+        currSystem = &pendingSystems.back();
+    }
 
-        // Wrap the system and put it in its stage.
-        auto systemWrapper = std::make_unique<SystemWrapper<F>>(system);
-        for (auto& system : this->stagesByName[stage])
+    template <typename F> void Dispatcher::setAfter(F func)
+    {
+        auto it = std::find(pendingSystems.begin(), pendingSystems.end(), func);
+        if(it == pendingSystems.end())
         {
-            if (system->info().compatible(systemWrapper->info()))
-            {
-                // TODO: explain whats wrong, e.g., both systems are trying to access the same component mutably
-                CUBOS_CRITICAL("Could not add system to stage '{}' because it is incompatible "
-                               "with another system in the same stage.",
-                               stage);
-                return;
-            }
+            CUBOS_ERROR("Tried to set system after a non-existing system!");
+            return;
         }
-        this->stagesByName[stage].push_back(std::move(systemWrapper));
-        CUBOS_INFO("Added system to stage '{}'", stage);
+        ENSURE_CURR_SYSTEM();
+        ENSURE_SYSTEM_SETTINGS();
+        currSystem->settings->after.system.push_back(*it);
+    }
+
+    template <typename F> void Dispatcher::setBefore(F func)
+    {
+        auto it = std::find(pendingSystems.begin(), pendingSystems.end(), func);
+        if(it == pendingSystems.end())
+        {
+            CUBOS_ERROR("Tried to set system before a non-existing system!");
+            return;
+        }
+        ENSURE_CURR_SYSTEM();
+        ENSURE_SYSTEM_SETTINGS();
+        currSystem->settings->before.system.push_back(*it);
     }
 } // namespace cubos::core::ecs
 #endif // CUBOS_CORE_ECS_DISPATCHER_HPP

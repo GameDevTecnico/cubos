@@ -44,10 +44,15 @@ namespace cubos::engine
         /// @return Reference to this object, for chaining.
         template <typename C> Cubos& addComponent();
 
-        /// Sets the current tag of the engine. If the tag doesn't exist, it will be created.
+        /// Sets the current tag for the main dispatcher. If the tag doesn't exist, it will be created.
         /// Subsequent calls will set this tag's settings.
         /// @param tag The tag to set.
         Cubos& tag(const std::string& tag);
+
+        /// Sets the current tag for the startup dispatcher. If the tag doesn't exist, it will be created.
+        /// Subsequent calls will set this tag's settings.
+        /// @param tag The tag to set.
+        Cubos& startupTag(const std::string& tag);
 
         /// Adds a new system to the engine, which will be executed at every iteration of the main loop.
         /// @tparam F The type of the system function.
@@ -78,41 +83,7 @@ namespace cubos::engine
         void run();
 
     private:
-        /// Internal class to handle tag settings
-        struct TagSettings
-        {
-            std::vector<std::string> after;
-            std::vector<std::string> before;
-        };
-
-        /// Internal class to handle system settings
-        struct SystemSettings
-        {
-            SystemSettings() = default;
-            SystemSettings(SystemSettings&) = default;
-
-            std::unique_ptr<cubos::core::ecs::AnySystemWrapper> wrapper;
-            bool isStartup;
-            std::string tag;
-            std::vector<std::string> after;
-            std::vector<std::string> before;
-        };
-
-        /// Compiles the execution chain using all defined tag and system settings.
-        void compileChain();
-
-        /// Compiles the startup dispatcher execution chain.
-        void compileStartupDispatcher();
-
-        /// Compiles the main dispatcher execution chain.
-        void compileMainDispatcher();
-
-        std::unordered_map<std::string, TagSettings> tags;
-        std::string currentTagKey = "";
-        TagSettings* currentTag = nullptr;
-
-        std::vector<SystemSettings> systems;
-        SystemSettings* currentSystem = nullptr;
+        bool isStartup;
 
         core::ecs::Dispatcher mainDispatcher, startupDispatcher;
         core::ecs::World world;
@@ -135,24 +106,16 @@ namespace cubos::engine
 
     template <typename F> Cubos& Cubos::system(F func)
     {
-        SystemSettings settings;
-        settings.wrapper = std::make_unique<core::ecs::SystemWrapper<F>>(func);
-        settings.isStartup = false;
-
-        currentSystem = &settings;
-        systems.push_back(settings);
+        mainDispatcher.addSystem<F>(func);
+        isStartup = false;
 
         return *this;
     }
 
     template <typename F> Cubos& Cubos::startupSystem(F func)
     {
-        SystemSettings settings;
-        settings.wrapper = std::make_unique<core::ecs::SystemWrapper<F>>(func);
-        settings.isStartup = true;
-
-        currentSystem = &settings;
-        systems.push_back(settings);
+        startupDispatcher.addSystem<F>(func);
+        isStartup = true;
 
         return *this;
     }

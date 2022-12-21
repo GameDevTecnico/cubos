@@ -152,7 +152,7 @@ void mySystem(DeltaTime& dt, const MyResource& res)
 
 int main()
 {
-    initializeLogger();
+    /*initializeLogger();
     ecs::World world;
     world.registerResource<DeltaTime>(DeltaTime{1.0f});
     world.registerResource<MyResource>(MyResource{0});
@@ -173,5 +173,5 @@ int main()
         "PreProcess");
     dispatcher.putStageBefore("PreProcess", "Transform");
     // call systems on dispatcher
-    dispatcher.callSystems(world, cmds);
+    dispatcher.callSystems(world, cmds);*/
 }
