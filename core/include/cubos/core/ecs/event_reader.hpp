@@ -6,10 +6,11 @@
 
 namespace cubos::core::ecs
 {
-    /// Used to read events, filtering is also possible via M param.
+    /// Used to read events, filtering is also possible via M parameter.
+    /// In case M template parameter is not provided, it will read all events (no filtering).
     /// @tparam T Event.
     /// @tparam M Event mask.
-    template <typename T, unsigned int M> class EventReader
+    template <typename T, unsigned int M = 0> class EventReader
     {
     public:
         EventReader(EventPipe<T>& pipe);
@@ -70,7 +71,7 @@ namespace cubos::core::ecs
 
     template <typename T, unsigned int M> bool EventReader<T, M>::matchesMask(decltype(M) eventMask) const
     {
-        if (eventMask == 0 && M == 0)
+        if (M == 0)
         {
             return true;
         }
