@@ -5,7 +5,7 @@
 
 using namespace cubos::engine;
 
-namespace cubos::engine::plugins
+namespace cubos::engine::plugins::tools
 {
     /// Plugin that allows inspecting the current settings
     /// @param cubos CUBOS. main class

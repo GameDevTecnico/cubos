@@ -1,4 +1,4 @@
-#include <cubos/engine/plugins/settings_inspector.hpp>
+#include <cubos/engine/plugins/tools/settings_inspector.hpp>
 #include <cubos/core/settings.hpp>
 #include <cubos/engine/plugins/imgui.hpp>
 #include <cubos/core/ui/imgui.hpp>
@@ -29,7 +29,7 @@ static void settingsInspectorSystem(cubos::core::Settings& settings)
     ImGui::End();
 }
 
-void cubos::engine::plugins::settingsInspectorPlugin(Cubos& cubos)
+void cubos::engine::plugins::tools::settingsInspectorPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::plugins::imguiPlugin)
         .addSystem(settingsInspectorSystem, "SettingsInspector")

@@ -12,7 +12,7 @@
 #include <cubos/engine/plugins/window.hpp>
 #include <cubos/engine/plugins/env_settings.hpp>
 #include <cubos/engine/plugins/imgui.hpp>
-#include <cubos/engine/plugins/settings_inspector.hpp>
+#include <cubos/engine/plugins/tools/settings_inspector.hpp>
 
 #include <components/num.hpp>
 #include <components/parent.hpp>
@@ -75,7 +75,7 @@ int main(int argc, char** argv)
         .putStageAfter("ImGuiExampleWindow", "BeginImGuiFrame")
 
         // or a tesserato tool!
-        .addPlugin(cubos::engine::plugins::settingsInspectorPlugin)
+        .addPlugin(cubos::engine::plugins::tools::settingsInspectorPlugin)
 
         .run();
 }
