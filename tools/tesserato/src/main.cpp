@@ -27,7 +27,12 @@ int main(int argc, char** argv)
     // FIXME: this will change once we have the imgui/editor plugin!!!
     Cubos(argc, argv)
         .addPlugin(cubos::engine::plugins::windowPlugin)
-        .startupSystem(setup).tagged("SetupUI")
-        .system(show).tagged("showUI")
+
+        .startupSystem(setup)
+        .tagged("SetupUI")
+
+        .system(show)
+        .tagged("showUI")
+
         .run();
 }
