@@ -166,13 +166,17 @@ int main()
     dispatcher.addTag("Main");
     dispatcher.addSystem(mySystem);
     dispatcher.systemSetTag("Main");
+
     dispatcher.addTag("Transform");
+    dispatcher.tagSetAfterTag("Main");
     dispatcher.addSystem(printPositions);
     dispatcher.systemSetTag("Transform");
+
     dispatcher.addTag("New");
     dispatcher.tagSetAfterTag("Main");
     dispatcher.addSystem(printPlayerPosition);
     dispatcher.systemSetTag("New");
+
     dispatcher.addTag("PreProcess");
     dispatcher.tagSetBeforeTag("Main");
     dispatcher.tagSetBeforeTag("Transform");
@@ -180,6 +184,8 @@ int main()
         [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; }
         );
     dispatcher.systemSetTag("PreProcess");
+
+    dispatcher.compileChain();
     // call systems on dispatcher
     dispatcher.callSystems(world, cmds);
 }
