@@ -181,8 +181,7 @@ int main()
     dispatcher.tagSetBeforeTag("Main");
     dispatcher.tagSetBeforeTag("Transform");
     dispatcher.addSystem(
-        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; }
-        );
+        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; });
     dispatcher.systemSetTag("PreProcess");
 
     dispatcher.compileChain();

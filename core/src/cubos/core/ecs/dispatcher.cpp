@@ -6,7 +6,7 @@ using namespace cubos::core::ecs;
 
 void Dispatcher::addTag(const std::string& tag)
 {
-    if(tagSettings.find(tag) == tagSettings.end())
+    if (tagSettings.find(tag) == tagSettings.end())
     {
         tagSettings[tag] = std::make_shared<SystemSettings>();
         currTagSettings = tagSettings[tag].get();
@@ -17,7 +17,8 @@ void Dispatcher::tagInheritTag(const std::string& tag)
 {
     ENSURE_CURR_TAG();
     addTag(tag);
-    if(std::find(currTagSettings->inherits.begin(), currTagSettings->inherits.end(), tag) != currTagSettings->inherits.end())
+    if (std::find(currTagSettings->inherits.begin(), currTagSettings->inherits.end(), tag) !=
+        currTagSettings->inherits.end())
     {
         CUBOS_INFO("Tag already inherits from '{}'", tag);
     }
@@ -33,7 +34,8 @@ void Dispatcher::tagSetAfterTag(const std::string& tag)
     // And, if it exists, this tag to run before curr's tag
     auto settings = currTagSettings;
     std::map<std::string, std::shared_ptr<SystemSettings>>::iterator it;
-    if((it = std::find_if(tagSettings.begin(), tagSettings.end(), [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
+    if ((it = std::find_if(tagSettings.begin(), tagSettings.end(),
+                           [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
     {
         tagSettings[tag]->before.tag.push_back(it->first);
     }
@@ -48,7 +50,8 @@ void Dispatcher::tagSetBeforeTag(const std::string& tag)
     // And, if it exists, this tag to run after curr's tag
     auto settings = currTagSettings;
     std::map<std::string, std::shared_ptr<SystemSettings>>::iterator it;
-    if((it = std::find_if(tagSettings.begin(), tagSettings.end(), [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
+    if ((it = std::find_if(tagSettings.begin(), tagSettings.end(),
+                           [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
     {
         tagSettings[tag]->after.tag.push_back(it->first);
     }
@@ -72,7 +75,8 @@ void Dispatcher::systemSetAfterTag(const std::string& tag)
     // And, if it exists, this tag to run before curr's tag
     auto* settings = currSystem->settings.get();
     std::map<std::string, std::shared_ptr<SystemSettings>>::iterator it;
-    if((it = std::find_if(tagSettings.begin(), tagSettings.end(), [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
+    if ((it = std::find_if(tagSettings.begin(), tagSettings.end(),
+                           [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
     {
         tagSettings[tag]->before.tag.push_back(it->first);
     }
@@ -88,7 +92,8 @@ void Dispatcher::systemSetBeforeTag(const std::string& tag)
     // And, if it exists, this tag to run after curr's tag
     auto* settings = currSystem->settings.get();
     std::map<std::string, std::shared_ptr<SystemSettings>>::iterator it;
-    if((it = std::find_if(tagSettings.begin(), tagSettings.end(), [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
+    if ((it = std::find_if(tagSettings.begin(), tagSettings.end(),
+                           [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
     {
         tagSettings[tag]->after.tag.push_back(it->first);
     }
@@ -98,16 +103,17 @@ void Dispatcher::compileChain()
 {
     // Build the system chain
     std::vector<DFSNode> nodes;
-    for(auto& system : pendingSystems)
+    for (auto& system : pendingSystems)
     {
         nodes.push_back(DFSNode{DFSNode::WHITE, &system});
     }
 
     // Keep running while there are unvisited nodes
     std::vector<DFSNode>::iterator it;
-    while((it = std::find_if(nodes.begin(), nodes.end(), [](const DFSNode& node) { return node.m == DFSNode::WHITE; })) != nodes.end())
+    while ((it = std::find_if(nodes.begin(), nodes.end(),
+                              [](const DFSNode& node) { return node.m == DFSNode::WHITE; })) != nodes.end())
     {
-        if(dfsVisit(*it, nodes))
+        if (dfsVisit(*it, nodes))
         {
             CUBOS_ERROR("Cycle detected in system chain! Ensure there are no circular dependencies!");
             return;
@@ -126,75 +132,64 @@ void Dispatcher::compileChain()
 
 bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
 {
-    switch(node.m)
+    switch (node.m)
     {
-        case DFSNode::BLACK:
-            return false;
-        case DFSNode::GRAY:
-            return true;
-        case DFSNode::WHITE:
+    case DFSNode::BLACK: // Node has been fully visited already. Nothing else to do.
+        return false;
+    case DFSNode::GRAY: // Node is being processed. This means there's a cycle.
+        return true;
+    case DFSNode::WHITE: // Node is unexplored.
+    {
+        node.m = DFSNode::GRAY;
+        System* systemInfo = node.s;
+        if (systemInfo->settings)
         {
-            node.m = DFSNode::GRAY;
-            System* systemInfo = node.s;
-            if(systemInfo->settings)
+            // Visit tags first
+            for (auto& tag : systemInfo->settings->before.tag)
             {
-                // Visit tags first
-                for(auto& tag : systemInfo->settings->before.tag)
+                auto settings = tagSettings[tag];
+                for (auto it = nodes.begin(); it != nodes.end(); it++)
                 {
-                    auto settings = tagSettings[tag];
-                    for(auto it = nodes.begin(); it != nodes.end(); it++)
+                    if (it->s->settings == settings)
                     {
-                        if(it->s->settings == settings)
+                        if (dfsVisit(*it, nodes))
                         {
-                            if(dfsVisit(*it, nodes))
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                }
-                // Now visit systems
-                for(auto& system : systemInfo->settings->before.system)
-                {
-                    auto settings = system->settings;
-                    for(auto it = nodes.begin(); it != nodes.end(); it++)
-                    {
-                        if(it->s->settings == settings)
-                        {
-                            if(dfsVisit(*it, nodes))
-                            {
-                                return true;
-                            }
+                            return true;
                         }
                     }
                 }
             }
-            // All children nodes were visited; mark this node as complete
-            node.m = DFSNode::BLACK;
-            systems.push_back(std::move(*systemInfo));
-            return false;
+            // Now visit systems
+            for (auto& system : systemInfo->settings->before.system)
+            {
+                auto settings = system->settings;
+                for (auto it = nodes.begin(); it != nodes.end(); it++)
+                {
+                    if (it->s->settings == settings)
+                    {
+                        if (dfsVisit(*it, nodes))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
         }
+        // All children nodes were visited; mark this node as complete
+        node.m = DFSNode::BLACK;
+        systems.push_back(std::move(*systemInfo));
+        return false;
+    }
     }
     return false;
 }
 
 void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
 {
-    for(auto it = systems.begin(); it != systems.end(); it++)
+    for (auto it = systems.begin(); it != systems.end(); it++)
     {
         it->system->call(world, cmds);
         // TODO: Check synchronization concerns when this gets multithreaded
         cmds.commit();
     }
-    /*for (auto& stageName : this->stagesOrder)
-    {
-        CUBOS_TRACE("Dispatching stage '{}'", stageName);
-
-        for (auto& system : this->stagesByName[stageName])
-        {
-            system->call(world, cmds);
-        }
-
-        cmds.commit();
-    }*/
 }

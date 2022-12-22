@@ -6,7 +6,6 @@
 #include <cubos/core/ecs/world.hpp>
 
 #include <set>
-#include <map>
 #include <string>
 
 namespace cubos::engine
@@ -82,8 +81,7 @@ namespace cubos::engine
         Cubos& afterTag(const std::string& tag);
 
         /// Sets the current system to run after a given system.
-        /// If the given argument is a string, it's set to run after a given tag instead.
-        /// The specified system must exist, but if it's a tag it will be created if it doesn't exist.
+        /// The specified system must exist.
         /// @param system The system to run after.
         template <typename F> Cubos& after(F system);
 

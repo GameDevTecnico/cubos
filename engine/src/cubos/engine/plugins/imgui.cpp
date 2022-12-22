@@ -20,13 +20,19 @@ static void endImGuiFrame()
 void cubos::engine::plugins::imguiPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::plugins::windowPlugin)
-        .startupTag("InitImGui").afterTag("OpenWindow")
-        .tag("BeginImGuiFrame").afterTag("Poll")
-        .tag("EndImGuiFrame").beforeTag("SwapBuffers")
+        .startupTag("InitImGui")
+        .afterTag("OpenWindow")
+        .tag("BeginImGuiFrame")
+        .afterTag("Poll")
+        .tag("EndImGuiFrame")
+        .beforeTag("SwapBuffers")
 
-        .startupSystem(initializeImGui).tagged("InitImGui")
+        .startupSystem(initializeImGui)
+        .tagged("InitImGui")
 
-        .system(beginImGuiFrame).tagged("BeginImGuiFrame")
+        .system(beginImGuiFrame)
+        .tagged("BeginImGuiFrame")
 
-        .system(endImGuiFrame).tagged("EndImGuiFrame");
+        .system(endImGuiFrame)
+        .tagged("EndImGuiFrame");
 }

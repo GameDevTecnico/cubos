@@ -40,9 +40,9 @@ Cubos& Cubos::startupTag(const std::string& tag)
 
 Cubos& Cubos::tagged(const std::string& tag)
 {
-    if(isSystem)
+    if (isSystem)
     {
-        if(isStartup)
+        if (isStartup)
         {
             startupDispatcher.systemSetTag(tag);
         }
@@ -50,9 +50,10 @@ Cubos& Cubos::tagged(const std::string& tag)
         {
             mainDispatcher.systemSetTag(tag);
         }
-    } else
+    }
+    else
     {
-        if(isStartup)
+        if (isStartup)
         {
             startupDispatcher.tagInheritTag(tag);
         }
@@ -67,9 +68,9 @@ Cubos& Cubos::tagged(const std::string& tag)
 
 Cubos& Cubos::afterTag(const std::string& tag)
 {
-    if(isSystem)
+    if (isSystem)
     {
-        if(isStartup)
+        if (isStartup)
         {
             startupDispatcher.systemSetAfterTag(tag);
         }
@@ -77,9 +78,10 @@ Cubos& Cubos::afterTag(const std::string& tag)
         {
             mainDispatcher.systemSetAfterTag(tag);
         }
-    } else
+    }
+    else
     {
-        if(isStartup)
+        if (isStartup)
         {
             startupDispatcher.tagSetAfterTag(tag);
         }
@@ -93,9 +95,9 @@ Cubos& Cubos::afterTag(const std::string& tag)
 
 Cubos& Cubos::beforeTag(const std::string& tag)
 {
-    if(isSystem)
+    if (isSystem)
     {
-        if(isStartup)
+        if (isStartup)
         {
             startupDispatcher.systemSetBeforeTag(tag);
         }
@@ -103,9 +105,10 @@ Cubos& Cubos::beforeTag(const std::string& tag)
         {
             mainDispatcher.systemSetBeforeTag(tag);
         }
-    } else
+    }
+    else
     {
-        if(isStartup)
+        if (isStartup)
         {
             startupDispatcher.tagSetBeforeTag(tag);
         }

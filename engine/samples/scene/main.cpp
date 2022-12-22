@@ -65,17 +65,21 @@ int main(int argc, char** argv)
         .addComponent<Num>()
         .addComponent<Parent>()
 
-        .tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame")
+        .tag("ImGuiExampleWindow")
+        .afterTag("BeginImGuiFrame")
 
-        .startupSystem(setup).tagged("Setup")
-        .startupSystem(printStuff).tagged("End")
+        .startupSystem(setup)
+        .tagged("Setup")
+        .startupSystem(printStuff)
+        .tagged("End")
 
         .addPlugin(plugins::envSettingsPlugin)
         .addPlugin(plugins::windowPlugin)
 
         // an example of how the imgui plugin can be used to render your own stuff :)
         .addPlugin(plugins::imguiPlugin)
-        .system(imguiExampleWindow).tagged("ImGuiExampleWindow")
+        .system(imguiExampleWindow)
+        .tagged("ImGuiExampleWindow")
 
         .run();
 }
