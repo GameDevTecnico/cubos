@@ -100,7 +100,7 @@ CUBOS_REGISTER_COMPONENT(Position, "Position");
 CUBOS_REGISTER_COMPONENT(Velocity, "Velocity");
 CUBOS_REGISTER_COMPONENT(Parent, "Parent");
 
-void spawner(ecs::Commands& cmds)
+void spawner(ecs::Commands cmds)
 {
     cmds.create().add<Position>({0, 5, 1}).add(Velocity{0, 3, 1}, Player{});
 
@@ -152,7 +152,7 @@ void mySystem(DeltaTime& dt, const MyResource& res)
 
 int main()
 {
-    /*initializeLogger();
+    initializeLogger();
     ecs::World world;
     world.registerResource<DeltaTime>(DeltaTime{1.0f});
     world.registerResource<MyResource>(MyResource{0});
@@ -162,16 +162,24 @@ int main()
     world.registerComponent<Parent>();
 
     ecs::Dispatcher dispatcher;
-    auto cmds = ecs::Commands(world);
-    dispatcher.addSystem(mySystem, "Main");
-    dispatcher.addSystem(printPositions, "Transform");
-    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::After);
-    dispatcher.addSystem(printPlayerPosition, "New");
-    dispatcher.setDefaultStage("Main", ecs::Dispatcher::Direction::Before);
+    auto cmds = ecs::CommandBuffer(world);
+    dispatcher.addTag("Main");
+    dispatcher.addSystem(mySystem);
+    dispatcher.systemSetTag("Main");
+    dispatcher.addTag("Transform");
+    dispatcher.addSystem(printPositions);
+    dispatcher.systemSetTag("Transform");
+    dispatcher.addTag("New");
+    dispatcher.tagSetAfterTag("Main");
+    dispatcher.addSystem(printPlayerPosition);
+    dispatcher.systemSetTag("New");
+    dispatcher.addTag("PreProcess");
+    dispatcher.tagSetBeforeTag("Main");
+    dispatcher.tagSetBeforeTag("Transform");
     dispatcher.addSystem(
-        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; },
-        "PreProcess");
-    dispatcher.putStageBefore("PreProcess", "Transform");
+        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; }
+        );
+    dispatcher.systemSetTag("PreProcess");
     // call systems on dispatcher
-    dispatcher.callSystems(world, cmds);*/
+    dispatcher.callSystems(world, cmds);
 }

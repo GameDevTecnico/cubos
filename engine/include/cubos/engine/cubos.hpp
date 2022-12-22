@@ -17,12 +17,19 @@ namespace cubos::engine
         bool value;
     };
 
+    /// Resource used for storing program arguments.
+    struct Arguments
+    {
+        const std::vector<std::string> value;
+    };
+
     /// Represents the engine itself, and exposes the interface with which the game developer interacts with.
     /// Ties up all the different parts of the engine together.
     class Cubos final
     {
     public:
         Cubos();
+        Cubos(int argc, char** argv);
         ~Cubos() = default;
 
         /// Adds a new plugin to the engine. If the plugin had already been added, nothing happens.

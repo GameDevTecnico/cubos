@@ -6,7 +6,7 @@ bool SystemInfo::valid() const
 {
     for (auto& rsc : this->resourcesRead)
     {
-        if (this->resourcesWritten.contains(rsc))
+        if (this->resourcesWritten.contains(rsc) || this->usesWorld)
         {
             return false;
         }
@@ -14,7 +14,7 @@ bool SystemInfo::valid() const
 
     for (auto& comp : this->componentsRead)
     {
-        if (this->componentsWritten.contains(comp))
+        if (this->componentsWritten.contains(comp) || this->usesWorld)
         {
             return false;
         }
@@ -25,7 +25,7 @@ bool SystemInfo::valid() const
 
 bool SystemInfo::compatible(const SystemInfo& other) const
 {
-    if (this->usesDebug || other.usesDebug)
+    if (this->usesWorld || other.usesWorld)
     {
         return false;
     }
@@ -63,19 +63,4 @@ bool SystemInfo::compatible(const SystemInfo& other) const
     }
 
     return true;
-}
-
-AnySystemWrapper::AnySystemWrapper(SystemInfo&& info) : m_info(std::move(info))
-{
-    if (!this->m_info.valid())
-    {
-        CUBOS_CRITICAL("System is invalid - this may happen, if, for example, "
-                       "it both reads and writes the same resource");
-        abort();
-    }
-}
-
-const SystemInfo& AnySystemWrapper::info() const
-{
-    return m_info;
 }

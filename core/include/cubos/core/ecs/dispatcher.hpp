@@ -44,7 +44,7 @@ namespace cubos::core::ecs
         struct System
         {
             std::shared_ptr<SystemSettings> settings;
-            std::unique_ptr<AnySystemWrapper> system;
+            std::unique_ptr<AnySystemWrapper<void>> system;
         };
 
         struct DFSNode
@@ -107,7 +107,7 @@ namespace cubos::core::ecs
 
         /// Calls all systems in order of the stages they are in.
         /// @param world World to call the systems in.
-        void callSystems(World& world, Commands& cmds);
+        void callSystems(World& world, CommandBuffer& cmds);
 
         /// Visits a DFSNode to create a topological order.
         /// This is used internally during call chain compilation.

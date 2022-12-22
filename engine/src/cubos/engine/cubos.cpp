@@ -128,6 +128,15 @@ Cubos::Cubos()
     isStartup = false;
 }
 
+Cubos::Cubos(int argc, char** argv)
+{
+    std::vector<std::string> arguments(argv + 1, argv + argc);
+    addResource<Arguments>(arguments);
+
+    addResource<ShouldQuit>(true);
+    addResource<cubos::core::Settings>();
+}
+
 void Cubos::run()
 {
     plugins.clear();
@@ -136,7 +145,7 @@ void Cubos::run()
     startupDispatcher.compileChain();
     mainDispatcher.compileChain();
 
-    cubos::core::ecs::Commands cmds(world);
+    cubos::core::ecs::CommandBuffer cmds(world);
 
     startupDispatcher.callSystems(world, cmds);
 

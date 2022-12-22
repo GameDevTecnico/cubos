@@ -178,7 +178,7 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
     return false;
 }
 
-void Dispatcher::callSystems(World& world, Commands& cmds)
+void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
 {
     for(auto it = systems.begin(); it != systems.end(); it++)
     {
