@@ -1,6 +1,9 @@
 #ifndef CUBOS_CORE_ECS_EVENT_PIPE_HPP
 #define CUBOS_CORE_ECS_EVENT_PIPE_HPP
 
+#define DEFAULT_FILTER_MASK ~0
+#define DEFAULT_PUSH_MASK 0
+
 #include <deque>
 #include <atomic>
 
@@ -15,7 +18,7 @@ namespace cubos::core::ecs
         /// In case mask is not provided, the default mask will be 0.
         /// @param event Event which will be inserted into event pipe.
         /// @param mask Event mask.
-        void push(T event, unsigned int mask = 0);
+        void push(T event, unsigned int mask = DEFAULT_PUSH_MASK);
 
         /// Returns the event mask from event pipe at index.
         /// @param index Event index.
@@ -23,7 +26,7 @@ namespace cubos::core::ecs
 
         /// Returns the event from event pipe at index (with read/write permissions) and its mask.
         /// @param index Event index.
-        std::pair<T&, unsigned int> get(std::size_t index) const;
+        std::pair<const T&, unsigned int> get(std::size_t index) const;
 
         /// Clears pipe event list.
         /// Only events that got read by all readers are deleted!
@@ -33,7 +36,10 @@ namespace cubos::core::ecs
         std::size_t size() const;
 
         /// Adds a new reader to reader count.
-        void addReader(); // FIXME: should be private
+        void addReader();
+
+        /// Removes a reader from reader count.
+        void removeReader();
 
     private:
         /// Represents an Event, with its custom type, its mask and its read count.
@@ -60,7 +66,7 @@ namespace cubos::core::ecs
         };
 
         /// List of events that are in the pipe.
-        mutable std::deque<Event> events;
+        std::deque<Event> events;
 
         /// Keeps track of how many readers the event pipe currently has.
         std::size_t readerCount;
@@ -78,11 +84,11 @@ namespace cubos::core::ecs
         return this->events.at(index).mask;
     }
 
-    template <typename T> std::pair<T&, unsigned int> EventPipe<T>::get(std::size_t index) const
+    template <typename T> std::pair<const T&, unsigned int> EventPipe<T>::get(std::size_t index) const
     {
-        Event& ev = this->events.at(index);
+        const Event& ev = this->events.at(index);
         ev.readCount++;
-        return std::pair<T&, unsigned int>(ev.event, ev.mask);
+        return std::pair<const T&, unsigned int>(ev.event, ev.mask);
     }
 
     template <typename T> void EventPipe<T>::clear()
@@ -105,6 +111,12 @@ namespace cubos::core::ecs
     template <typename T> void EventPipe<T>::addReader()
     {
         this->readerCount++;
+    }
+
+    template <typename T> void EventPipe<T>::removeReader()
+    {
+        if (this->readerCount > 0)
+            this->readerCount--;
     }
 
 } // namespace cubos::core::ecs

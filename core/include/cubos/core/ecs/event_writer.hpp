@@ -11,10 +11,10 @@ namespace cubos::core::ecs
         EventWriter(EventPipe<T>& pipe);
 
         /// Pushes event to event pipe, with its mask type.
-        /// In case mask is not provided, the default mask will be 0.
+        /// In case mask is not provided, the default mask will be 0. (no filtering possible)
         /// @param event Event which will be inserted into event pipe.
         /// @param mask Event mask.
-        void push(T event, std::size_t mask = 0);
+        void push(T event, unsigned int mask = DEFAULT_PUSH_MASK);
 
     private:
         EventPipe<T>& pipe;
@@ -26,7 +26,7 @@ namespace cubos::core::ecs
     {
     }
 
-    template <typename T> void EventWriter<T>::push(T event, std::size_t mask)
+    template <typename T> void EventWriter<T>::push(T event, unsigned int mask)
     {
         this->pipe.push(event, mask);
     }

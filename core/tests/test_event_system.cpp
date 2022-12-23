@@ -11,30 +11,34 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
 {
     auto pipe = EventPipe<int>();
     auto writer = EventWriter<int>(pipe);
+    std::size_t index = 0;
 
     std::size_t size = 0;
-    for (auto& x : EventReader<int, 0>(pipe))
+    for (auto& x : EventReader<int>(pipe, index))
     {
         size++;
     }
     EXPECT_EQ(size, 0);
 
+    index = 0;
     writer.push(3); // push (3,0)
-    for (size = 0; auto& x : EventReader<int, 0>(pipe))
+    for (size = 0; auto& x : EventReader<int>(pipe, index))
     {
         size++;
     }
     EXPECT_EQ(size, 1);
 
+    index = 0;
     writer.push(3, 5);
-    for (size = 0; auto& x : EventReader<int, 0>(pipe))
+    for (size = 0; auto& x : EventReader<int>(pipe, index))
     {
         size++;
     }
     EXPECT_EQ(size, 2);
 
+    index = 0;
     pipe.clear();
-    for (size = 0; auto& x : EventReader<int, 0>(pipe))
+    for (size = 0; auto& x : EventReader<int>(pipe, index))
     {
         size++;
     }
@@ -83,10 +87,13 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     writer.push(MyEvent{.data = 5});
     writer.push(MyEvent{.data = 6});
 
+    std::size_t index = 0;
+
     std::size_t mouseReaderSize = 0;
+    auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
+    pipe.addReader();
     while (true)
     {
-        static auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe);
         auto it = mouseReader.read();
         if (it == std::nullopt)
         {
@@ -95,44 +102,20 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
         mouseReaderSize++;
     }
     EXPECT_EQ(mouseReaderSize, 2);
+    pipe.removeReader();
 
-    auto keyEventReader = EventReader<MyEvent, MyEvent::Mask::KEY_EVENT>(pipe);
-    for (auto& ev : keyEventReader)
+    index = 0;
+    auto keyEventReader = EventReader<MyEvent, MyEvent::Mask::KEY_EVENT>(pipe, index);
+    pipe.addReader();
+    for (const auto& ev : keyEventReader)
     {
         // should run only once
         EXPECT_EQ(ev.data, 1);
-        ev.data = 1337;
-        EXPECT_EQ(ev.data, 1337);
     }
-    for (auto& ev : keyEventReader)
+    for (const auto& ev : keyEventReader)
     {
         // this should NOT run, because all KEY_EVENTS from keyEventReader already got read
         EXPECT_EQ(false, true);
     }
-
-    for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe))
-    {
-        auto possibleData = ev.data == 3 || ev.data == 4;
-        EXPECT_EQ(possibleData, true);
-    }
-
-    for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT | MyEvent::Mask::MOUSE_EVENT>(pipe))
-    {
-        auto possibleData = ev.data == 1337 || ev.data == 3 || ev.data == 4;
-        EXPECT_EQ(possibleData, true);
-    }
-
-    std::size_t size = 0;
-    for (const auto& ev : EventReader<MyEvent, 0>(pipe))
-    {
-        size++;
-    }
-    EXPECT_EQ(size, 6);
-
-    size = 0;
-    for (const auto& ev : EventReader<MyEvent, MyEvent::Mask::ALL>(pipe))
-    {
-        size++;
-    }
-    EXPECT_EQ(size, 4);
+    pipe.removeReader();
 }
