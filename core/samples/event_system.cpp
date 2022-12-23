@@ -17,7 +17,7 @@ int main()
             KEY_EVENT = 1 << 0,   // 0001
             MOUSE_EVENT = 1 << 1, // 0010
             WHEEL_EVENT = 1 << 2, // 0100
-            ALL = (1 << 3) - 1,   // 0111
+            ALL = ~0,             // 1111
         };
 
         char a;
@@ -31,13 +31,15 @@ int main()
     writer.push(MyEvent{.data = 1}, MyEvent::Mask::WHEEL_EVENT);
     writer.push(MyEvent{.data = 2}, MyEvent::Mask::MOUSE_EVENT);
     writer.push(MyEvent{.data = 6}, MyEvent::Mask::MOUSE_EVENT);
-    writer.push(MyEvent{.data = 15}); // MyEvent::Mask::ALL ignores this, should it?
-    writer.push(MyEvent{.data = 11}); // MyEvent::Mask::ALL ignores this, should it?
+    writer.push(MyEvent{.data = 15});
+    writer.push(MyEvent{.data = 11});
+
+    std::size_t index = 0;
 
     printf("\n\n### mouse events using .read():");
     while (true)
     {
-        static auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe);
+        static auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
         auto it = mouseReader.read();
         if (it == std::nullopt)
         {
@@ -48,7 +50,8 @@ int main()
 
     // range based
 
-    auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe);
+    index = 0;
+    auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
     printf("\n\n### mouse events:");
     mouseReader.read(); // already read one event, the loop will only loop ince
     for (const auto& it : mouseReader)
@@ -56,26 +59,23 @@ int main()
         printf(" %d , ", it.data);
     }
 
+    index = 0;
     printf("\n\n### wheel + key events:");
-    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT | MyEvent::Mask::WHEEL_EVENT>(pipe))
+    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT | MyEvent::Mask::WHEEL_EVENT>(pipe, index))
     {
         printf(" %d , ", it.data);
     }
 
+    index = 0;
     printf("\n\n### all masked events:");
-    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::ALL>(pipe))
+    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::ALL>(pipe, index))
     {
         printf(" %d , ", it.data);
     }
 
-    printf("\n\n### all events:");
-    for (const auto& it : EventReader<MyEvent, 0>(pipe))
-    {
-        printf(" %d , ", it.data);
-    }
-
+    index = 0;
     printf("\n\n### all events (no M parameter):");
-    for (const auto& it : EventReader<MyEvent>(pipe))
+    for (const auto& it : EventReader<MyEvent>(pipe, index))
     {
         printf(" %d , ", it.data);
     }
