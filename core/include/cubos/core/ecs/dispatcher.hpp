@@ -145,8 +145,8 @@ namespace cubos::core::ecs
         /// Variables for holding information before call chain is compiled.
         std::vector<System> pendingSystems;                                 ///< All systems.
         std::map<std::string, std::shared_ptr<SystemSettings>> tagSettings; ///< All tags.
-        System* currSystem;                                 ///< Last set system, for changing settings.
-        SystemSettings* currTagSettings;                    ///< Last set tag, for changing settings.
+        System* currSystem;                                                 ///< Last set system, for changing settings.
+        SystemSettings* currTagSettings;                                    ///< Last set tag, for changing settings.
 
         /// Variables for holding information after call chain is compiled.
         std::vector<System> systems; ///< Compiled order of running systems.

@@ -29,11 +29,9 @@ int main(int argc, char** argv)
 
     cubos.addPlugin(cubos::engine::plugins::windowPlugin);
 
-    cubos.startupSystem(setup)
-        .tagged("SetupUI");
+    cubos.startupSystem(setup).tagged("SetupUI");
 
-    cubos.system(show)
-        .tagged("showUI");
+    cubos.system(show).tagged("showUI");
 
     cubos.run();
 }
