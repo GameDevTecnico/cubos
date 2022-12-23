@@ -60,26 +60,29 @@ static void imguiExampleWindow()
 int main(int argc, char** argv)
 {
     // Initialize the asset manager.
-    Cubos(argc, argv)
-        .addResource<data::AssetManager>()
+    Cubos cubos(argc, argv);
+
+    cubos.addResource<data::AssetManager>()
         .addComponent<Num>()
-        .addComponent<Parent>()
+        .addComponent<Parent>();
 
-        .tag("ImGuiExampleWindow")
-        .afterTag("BeginImGuiFrame")
+    cubos.tag("ImGuiExampleWindow")
+        .afterTag("BeginImGuiFrame");
 
-        .startupSystem(setup)
-        .tagged("Setup")
-        .startupSystem(printStuff)
-        .tagged("End")
+    cubos.startupSystem(setup)
+        .tagged("Setup");
 
-        .addPlugin(plugins::envSettingsPlugin)
-        .addPlugin(plugins::windowPlugin)
+    cubos.startupSystem(printStuff)
+        .tagged("End");
 
-        // an example of how the imgui plugin can be used to render your own stuff :)
-        .addPlugin(plugins::imguiPlugin)
-        .system(imguiExampleWindow)
-        .tagged("ImGuiExampleWindow")
+    cubos.addPlugin(plugins::envSettingsPlugin)
+        .addPlugin(plugins::windowPlugin);
 
-        .run();
+    // an example of how the imgui plugin can be used to render your own stuff :)
+    cubos.addPlugin(plugins::imguiPlugin);
+
+    cubos.system(imguiExampleWindow)
+        .tagged("ImGuiExampleWindow");
+
+    cubos.run();
 }

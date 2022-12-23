@@ -25,14 +25,14 @@ static void swapBuffersSystem(const cubos::core::io::Window& window)
 
 void cubos::engine::plugins::windowPlugin(Cubos& cubos)
 {
-    cubos
-        .addResource<cubos::core::io::Window>()
+    cubos.addResource<cubos::core::io::Window>();
 
-        .startupSystem(startup)
-        .tagged("OpenWindow")
+    cubos.startupSystem(startup)
+        .tagged("OpenWindow");
 
-        .system(pollSystem)
-        .tagged("Poll")
-        .system(swapBuffersSystem)
+    cubos.system(pollSystem)
+        .tagged("Poll");
+
+    cubos.system(swapBuffersSystem)
         .tagged("SwapBuffers");
 }

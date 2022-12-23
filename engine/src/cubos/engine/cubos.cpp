@@ -6,6 +6,40 @@
 
 using namespace cubos::engine;
 
+TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher) : dispatcher(dispatcher) {}
+
+TagBuilder& TagBuilder::beforeTag(const std::string& tag)
+{
+    dispatcher.tagSetBeforeTag(tag);
+    return *this;
+}
+
+TagBuilder& TagBuilder::afterTag(const std::string& tag)
+{
+    dispatcher.tagSetAfterTag(tag);
+    return *this;
+}
+
+SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher) : dispatcher(dispatcher) {}
+
+SystemBuilder& SystemBuilder::tagged(const std::string& tag)
+{
+    dispatcher.systemSetTag(tag);
+    return *this;
+}
+
+SystemBuilder& SystemBuilder::beforeTag(const std::string& tag)
+{
+    dispatcher.systemSetBeforeTag(tag);
+    return *this;
+}
+
+SystemBuilder& SystemBuilder::afterTag(const std::string& tag)
+{
+    dispatcher.systemSetAfterTag(tag);
+    return *this;
+}
+
 Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 {
     if (!plugins.contains(func))
@@ -20,105 +54,20 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
     return *this;
 }
 
-Cubos& Cubos::tag(const std::string& tag)
+TagBuilder& Cubos::tag(const std::string& tag)
 {
     mainDispatcher.addTag(tag);
-    isStartup = false;
-    isSystem = false;
+    TagBuilder* builder = new TagBuilder(mainDispatcher);
 
-    return *this;
+    return *builder;
 }
 
-Cubos& Cubos::startupTag(const std::string& tag)
+TagBuilder& Cubos::startupTag(const std::string& tag)
 {
     startupDispatcher.addTag(tag);
-    isStartup = true;
-    isSystem = false;
+    TagBuilder* builder = new TagBuilder(startupDispatcher);
 
-    return *this;
-}
-
-Cubos& Cubos::tagged(const std::string& tag)
-{
-    if (isSystem)
-    {
-        if (isStartup)
-        {
-            startupDispatcher.systemSetTag(tag);
-        }
-        else
-        {
-            mainDispatcher.systemSetTag(tag);
-        }
-    }
-    else
-    {
-        if (isStartup)
-        {
-            startupDispatcher.tagInheritTag(tag);
-        }
-        else
-        {
-            mainDispatcher.tagInheritTag(tag);
-        }
-    }
-
-    return *this;
-}
-
-Cubos& Cubos::afterTag(const std::string& tag)
-{
-    if (isSystem)
-    {
-        if (isStartup)
-        {
-            startupDispatcher.systemSetAfterTag(tag);
-        }
-        else
-        {
-            mainDispatcher.systemSetAfterTag(tag);
-        }
-    }
-    else
-    {
-        if (isStartup)
-        {
-            startupDispatcher.tagSetAfterTag(tag);
-        }
-        else
-        {
-            mainDispatcher.tagSetAfterTag(tag);
-        }
-    }
-    return *this;
-}
-
-Cubos& Cubos::beforeTag(const std::string& tag)
-{
-    if (isSystem)
-    {
-        if (isStartup)
-        {
-            startupDispatcher.systemSetBeforeTag(tag);
-        }
-        else
-        {
-            mainDispatcher.systemSetBeforeTag(tag);
-        }
-    }
-    else
-    {
-        if (isStartup)
-        {
-            startupDispatcher.tagSetBeforeTag(tag);
-        }
-        else
-        {
-            mainDispatcher.tagSetBeforeTag(tag);
-        }
-    }
-
-    return *this;
+    return *builder;
 }
 
 Cubos::Cubos()

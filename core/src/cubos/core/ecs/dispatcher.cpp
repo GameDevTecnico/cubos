@@ -145,12 +145,12 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
         if (systemInfo->settings)
         {
             // Visit tags first
-            for (auto& tag : systemInfo->settings->before.tag)
+            for (std::string tag : systemInfo->settings->before.tag)
             {
-                auto settings = tagSettings[tag];
+                SystemSettings* settings = tagSettings[tag].get();
                 for (auto it = nodes.begin(); it != nodes.end(); it++)
                 {
-                    if (it->s->settings == settings)
+                    if (it->s->settings.get() == settings)
                     {
                         if (dfsVisit(*it, nodes))
                         {
@@ -160,12 +160,12 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
                 }
             }
             // Now visit systems
-            for (auto& system : systemInfo->settings->before.system)
+            for (System* system : systemInfo->settings->before.system)
             {
-                auto settings = system->settings;
+                SystemSettings* settings = system->settings.get();
                 for (auto it = nodes.begin(); it != nodes.end(); it++)
                 {
-                    if (it->s->settings == settings)
+                    if (it->s->settings.get() == settings)
                     {
                         if (dfsVisit(*it, nodes))
                         {
@@ -177,7 +177,7 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
         }
         // All children nodes were visited; mark this node as complete
         node.m = DFSNode::BLACK;
-        systems.push_back(std::move(*systemInfo));
+        systems.push_back(*systemInfo);
         return false;
     }
     }

@@ -1,32 +1,61 @@
 #include <cubos/engine/cubos.hpp>
 
-void a()
+void tagA()
 {
-    CUBOS_INFO("A");
+    CUBOS_INFO("[By Tag] A");
 }
-void b()
+void tagB()
 {
-    CUBOS_INFO("B");
+    CUBOS_INFO("[By Tag] B");
 }
-void c()
+void tagC()
 {
-    CUBOS_INFO("C");
+    CUBOS_INFO("[By Tag] C");
+}
+
+void systemA()
+{
+    CUBOS_INFO("[By System] A");
+}
+void systemB()
+{
+    CUBOS_INFO("[By System] B");
+}
+void systemC()
+{
+    CUBOS_INFO("[By System] C");
 }
 
 int main(int argc, char** argv)
 {
-    cubos::engine::Cubos()
+    cubos::engine::Cubos cubos;
 
-        .startupSystem(b)
+    // Order using tags
+    cubos.startupSystem(tagB)
         .tagged("B")
-        .beforeTag("C")
-
-        .startupSystem(c)
+        .beforeTag("C");
+    cubos.startupSystem(tagC)
         .tagged("C")
-        .afterTag("A")
+        .afterTag("A");
+    cubos.startupSystem(tagA)
+        .tagged("A");
 
-        .startupSystem(a)
-        .tagged("A")
 
-        .run();
+    // Order using systems
+    cubos.startupSystem(systemC);
+
+    cubos.startupSystem(systemA)
+        .beforeSystem(systemC)
+        .afterSystem(tagC);
+    
+    cubos.startupSystem(systemB)
+        .afterSystem(systemA);
+
+    // Now add a lambda between both systems to test
+    auto lambda = []() { CUBOS_INFO("--- INTERMISSION ---");};
+
+    cubos.startupSystem(lambda)
+        .afterSystem(tagC);
+
+    cubos.run();
 }

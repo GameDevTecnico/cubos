@@ -33,7 +33,7 @@ namespace cubos::core::ecs
     /// executed in order of the stages they are in.
     class Dispatcher
     {
-    public:
+    private:
         struct Dependency;
         struct SystemSettings;
         struct System;
@@ -58,7 +58,7 @@ namespace cubos::core::ecs
         struct System
         {
             std::shared_ptr<SystemSettings> settings;
-            std::unique_ptr<AnySystemWrapper<void>> system;
+            std::shared_ptr<AnySystemWrapper<void>> system;
         };
 
         /// Internal class used to implement a DFS algorithm for call chain compilation
@@ -73,6 +73,14 @@ namespace cubos::core::ecs
             System* s;
         };
 
+        /// Visits a DFSNode to create a topological order.
+        /// This is used internally during call chain compilation.
+        /// @param node The node to visit.
+        /// @param nodes Array of DFSNodes.
+        /// @return True if a cycle was detected, false if otherwise.
+        bool dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes);
+
+    public:
         /// Adds a tag, and sets it as the current tag for further
         /// settings.
         /// @param tag Tag to add.
@@ -133,19 +141,12 @@ namespace cubos::core::ecs
         /// @param cmds Command buffer.
         void callSystems(World& world, CommandBuffer& cmds);
 
-        /// Visits a DFSNode to create a topological order.
-        /// This is used internally during call chain compilation.
-        /// @param node The node to visit.
-        /// @param nodes Array of DFSNodes.
-        /// @return True if a cycle was detected, false if otherwise.
-        bool dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes);
-
     private:
         /// Variables for holding information before call chain is compiled.
         std::vector<System> pendingSystems;                                 ///< All systems.
         std::map<std::string, std::shared_ptr<SystemSettings>> tagSettings; ///< All tags.
-        System* currSystem;                                                 ///< Last set system, for changing settings.
-        SystemSettings* currTagSettings;                                    ///< Last set tag, for changing settings.
+        System* currSystem;                                 ///< Last set system, for changing settings.
+        SystemSettings* currTagSettings;                    ///< Last set tag, for changing settings.
 
         /// Variables for holding information after call chain is compiled.
         std::vector<System> systems; ///< Compiled order of running systems.
@@ -154,7 +155,7 @@ namespace cubos::core::ecs
     template <typename F> void Dispatcher::addSystem(F func)
     {
         // Wrap the system and put it in the pending queue
-        System system = {nullptr, std::make_unique<SystemWrapper<F>>(func)};
+        System system = {nullptr, std::make_shared<SystemWrapper<F>>(func)};
         pendingSystems.push_back(std::move(system));
         currSystem = &pendingSystems.back();
     }

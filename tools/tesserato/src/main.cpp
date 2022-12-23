@@ -25,14 +25,15 @@ static void show(const cubos::core::io::Window& window)
 int main(int argc, char** argv)
 {
     // FIXME: this will change once we have the imgui/editor plugin!!!
-    Cubos(argc, argv)
-        .addPlugin(cubos::engine::plugins::windowPlugin)
+    Cubos cubos(argc, argv);
 
-        .startupSystem(setup)
-        .tagged("SetupUI")
+    cubos.addPlugin(cubos::engine::plugins::windowPlugin);
 
-        .system(show)
-        .tagged("showUI")
+    cubos.startupSystem(setup)
+        .tagged("SetupUI");
 
-        .run();
+    cubos.system(show)
+        .tagged("showUI");
+
+    cubos.run();
 }
