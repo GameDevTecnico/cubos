@@ -27,12 +27,9 @@ void cubos::engine::plugins::windowPlugin(Cubos& cubos)
 {
     cubos.addResource<cubos::core::io::Window>();
 
-    cubos.startupSystem(startup)
-        .tagged("OpenWindow");
+    cubos.startupSystem(startup).tagged("OpenWindow");
 
-    cubos.system(pollSystem)
-        .tagged("Poll");
+    cubos.system(pollSystem).tagged("Poll");
 
-    cubos.system(swapBuffersSystem)
-        .tagged("SwapBuffers");
+    cubos.system(swapBuffersSystem).tagged("SwapBuffers");
 }

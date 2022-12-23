@@ -6,7 +6,9 @@
 
 using namespace cubos::engine;
 
-TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher) : dispatcher(dispatcher) {}
+TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher) : dispatcher(dispatcher)
+{
+}
 
 TagBuilder& TagBuilder::beforeTag(const std::string& tag)
 {
@@ -20,7 +22,9 @@ TagBuilder& TagBuilder::afterTag(const std::string& tag)
     return *this;
 }
 
-SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher) : dispatcher(dispatcher) {}
+SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher) : dispatcher(dispatcher)
+{
+}
 
 SystemBuilder& SystemBuilder::tagged(const std::string& tag)
 {

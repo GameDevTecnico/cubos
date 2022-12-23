@@ -62,27 +62,20 @@ int main(int argc, char** argv)
     // Initialize the asset manager.
     Cubos cubos(argc, argv);
 
-    cubos.addResource<data::AssetManager>()
-        .addComponent<Num>()
-        .addComponent<Parent>();
+    cubos.addResource<data::AssetManager>().addComponent<Num>().addComponent<Parent>();
 
-    cubos.tag("ImGuiExampleWindow")
-        .afterTag("BeginImGuiFrame");
+    cubos.tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame");
 
-    cubos.startupSystem(setup)
-        .tagged("Setup");
+    cubos.startupSystem(setup).tagged("Setup");
 
-    cubos.startupSystem(printStuff)
-        .tagged("End");
+    cubos.startupSystem(printStuff).tagged("End");
 
-    cubos.addPlugin(plugins::envSettingsPlugin)
-        .addPlugin(plugins::windowPlugin);
+    cubos.addPlugin(plugins::envSettingsPlugin).addPlugin(plugins::windowPlugin);
 
     // an example of how the imgui plugin can be used to render your own stuff :)
     cubos.addPlugin(plugins::imguiPlugin);
 
-    cubos.system(imguiExampleWindow)
-        .tagged("ImGuiExampleWindow");
+    cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
 
     cubos.run();
 }

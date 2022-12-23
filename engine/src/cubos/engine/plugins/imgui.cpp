@@ -21,21 +21,15 @@ void cubos::engine::plugins::imguiPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::plugins::windowPlugin);
 
-    cubos.startupTag("InitImGui")
-        .afterTag("OpenWindow");
+    cubos.startupTag("InitImGui").afterTag("OpenWindow");
 
-    cubos.tag("BeginImGuiFrame")
-        .afterTag("Poll");
+    cubos.tag("BeginImGuiFrame").afterTag("Poll");
 
-    cubos.tag("EndImGuiFrame")
-        .beforeTag("SwapBuffers");
+    cubos.tag("EndImGuiFrame").beforeTag("SwapBuffers");
 
-    cubos.startupSystem(initializeImGui)
-        .tagged("InitImGui");
+    cubos.startupSystem(initializeImGui).tagged("InitImGui");
 
-    cubos.system(beginImGuiFrame)
-        .tagged("BeginImGuiFrame");
+    cubos.system(beginImGuiFrame).tagged("BeginImGuiFrame");
 
-    cubos.system(endImGuiFrame)
-        .tagged("EndImGuiFrame");
+    cubos.system(endImGuiFrame).tagged("EndImGuiFrame");
 }
