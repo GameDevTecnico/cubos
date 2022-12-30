@@ -80,8 +80,6 @@ Cubos::Cubos()
 
     addResource<ShouldQuit>(true);
     addResource<cubos::core::Settings>();
-
-    isStartup = false;
 }
 
 Cubos::Cubos(int argc, char** argv)
