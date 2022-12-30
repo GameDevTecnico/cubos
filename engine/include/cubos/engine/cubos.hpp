@@ -125,9 +125,6 @@ namespace cubos::engine
         void run();
 
     private:
-        bool isStartup;
-        bool isSystem;
-
         core::ecs::Dispatcher mainDispatcher, startupDispatcher;
         core::ecs::World world;
         std::set<void (*)(Cubos&)> plugins;
