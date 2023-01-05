@@ -1,7 +1,7 @@
 #ifndef CUBOS_CORE_ECS_EVENT_PIPE_HPP
 #define CUBOS_CORE_ECS_EVENT_PIPE_HPP
 
-#define DEFAULT_FILTER_MASK ~0
+#define DEFAULT_FILTER_MASK ~0u
 #define DEFAULT_PUSH_MASK 0
 
 #include <deque>

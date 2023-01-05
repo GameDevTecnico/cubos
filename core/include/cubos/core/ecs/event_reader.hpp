@@ -65,7 +65,7 @@ namespace cubos::core::ecs
             auto mask = p.second;
             if (matchesMask(mask))
             {
-                return event;
+                return std::optional<std::reference_wrapper<T>>(std::reference_wrapper<T>(event));
             }
         }
 
