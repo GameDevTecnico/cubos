@@ -67,7 +67,7 @@ void Cubos::run()
 {
     plugins.clear();
 
-    cubos::core::ecs::Commands cmds(world);
+    cubos::core::ecs::CommandBuffer cmds(world);
 
     startupDispatcher.callSystems(world, cmds);
 

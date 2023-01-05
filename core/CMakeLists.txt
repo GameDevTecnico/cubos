@@ -25,6 +25,7 @@ message("# Building core tests: " ${BUILD_CORE_TESTS})
 set(CUBOS_CORE_SOURCE
     "src/cubos/core/log.cpp"
     "src/cubos/core/settings.cpp"
+    "src/cubos/core/thread_pool.cpp"
 
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/std_stream.cpp"
@@ -80,7 +81,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/commands.cpp"
     "src/cubos/core/ecs/blueprint.cpp"
     "src/cubos/core/ecs/world.cpp"
-    "src/cubos/core/ecs/debug.cpp"
     "src/cubos/core/ecs/system.cpp"
     "src/cubos/core/ecs/dispatcher.cpp"
     "src/cubos/core/ecs/registry.cpp"
@@ -89,6 +89,7 @@ set(CUBOS_CORE_SOURCE
 set(CUBOS_CORE_INCLUDE
     "include/cubos/core/log.hpp"
     "include/cubos/core/settings.hpp"
+    "include/cubos/core/thread_pool.hpp"
 
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/std_stream.hpp"
@@ -152,7 +153,6 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/null_storage.hpp"
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/query.hpp"
-    "include/cubos/core/ecs/debug.hpp"
     "include/cubos/core/ecs/system.hpp"
     "include/cubos/core/ecs/registry.hpp"
     "include/cubos/core/ecs/dispatcher.hpp"

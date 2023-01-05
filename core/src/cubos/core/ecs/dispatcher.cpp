@@ -2,7 +2,7 @@
 
 using namespace cubos::core::ecs;
 
-void Dispatcher::callSystems(World& world, Commands& cmds)
+void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
 {
     for (auto& stageName : this->stagesOrder)
     {
@@ -69,11 +69,8 @@ void Dispatcher::putStage(std::string stage, std::string referenceStage, Directi
     if (it != this->stagesOrder.end())
     {
         this->stagesOrder.erase(it);
-        // Erase invalidates next iterators, so refIt may need to be updated.
-        if (refIt > it)
-        {
-            refIt = std::find(this->stagesOrder.begin(), this->stagesOrder.end(), referenceStage);
-        }
+        // Erase invalidates next iterators, so refIt needs to to be updated.
+        refIt = std::find(this->stagesOrder.begin(), this->stagesOrder.end(), referenceStage);
     }
 
     if (referenceStage.empty() || direction == Direction::Before)
@@ -88,6 +85,6 @@ void Dispatcher::putStage(std::string stage, std::string referenceStage, Directi
     // Check if we need to initialize the new stage.
     if (this->stagesByName.find(stage) == this->stagesByName.end())
     {
-        this->stagesByName[stage] = std::vector<std::unique_ptr<AnySystemWrapper>>();
+        this->stagesByName[stage] = std::vector<std::unique_ptr<AnySystemWrapper<void>>>();
     }
 }
