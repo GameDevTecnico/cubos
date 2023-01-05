@@ -97,6 +97,7 @@ namespace cubos::core::ecs
         {
             if (ev.readCount == this->readerCount)
             {
+                printf("clearing:\n");
                 // we can assume that the older events always get read first, so this is safe
                 this->events.pop_front();
             }

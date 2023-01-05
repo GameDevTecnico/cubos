@@ -17,7 +17,7 @@ int main()
             KEY_EVENT = 1 << 0,   // 0001
             MOUSE_EVENT = 1 << 1, // 0010
             WHEEL_EVENT = 1 << 2, // 0100
-            ALL = ~0u,             // 1111
+            ALL = ~0u,            // 1111
         };
 
         char a;
@@ -53,7 +53,8 @@ int main()
     index = 0;
     auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
     printf("\n\n### mouse events:");
-    mouseReader.read(); // already read one event, the loop will only loop ince
+    auto x = mouseReader.read(); // already read one event, the loop will only loop once
+    printf("%d , ", x->get().data);
     for (const auto& it : mouseReader)
     {
         printf(" %d , ", it.data);
