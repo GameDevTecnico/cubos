@@ -10,22 +10,31 @@
 #include <memory>
 
 #define ENSURE_CURR_SYSTEM()                                                                                           \
-    if (!currSystem)                                                                                                   \
+    do                                                                                                                 \
     {                                                                                                                  \
-        CUBOS_ERROR("No system currently selected!");                                                                  \
-        return;                                                                                                        \
-    }
+        if (!currSystem)                                                                                               \
+        {                                                                                                              \
+            CUBOS_ERROR("No system currently selected!");                                                              \
+            return;                                                                                                    \
+        }                                                                                                              \
+    } while (false)
 #define ENSURE_CURR_TAG()                                                                                              \
-    if (!currTagSettings)                                                                                              \
+    do                                                                                                                 \
     {                                                                                                                  \
-        CUBOS_ERROR("No tag currently selected!");                                                                     \
-        return;                                                                                                        \
-    }
+        if (!currTagSettings)                                                                                          \
+        {                                                                                                              \
+            CUBOS_ERROR("No tag currently selected!");                                                                 \
+            return;                                                                                                    \
+        }                                                                                                              \
+    } while (false)
 #define ENSURE_SYSTEM_SETTINGS(obj)                                                                                    \
-    if (!obj->settings)                                                                                                \
+    do                                                                                                                 \
     {                                                                                                                  \
-        obj->settings = std::make_shared<SystemSettings>();                                                            \
-    }
+        if (!obj->settings)                                                                                            \
+        {                                                                                                              \
+            obj->settings = std::make_shared<SystemSettings>();                                                        \
+        }                                                                                                              \
+    } while (false)
 
 namespace cubos::core::ecs
 {
@@ -33,53 +42,6 @@ namespace cubos::core::ecs
     /// executed in order of the stages they are in.
     class Dispatcher
     {
-    private:
-        struct Dependency;
-        struct SystemSettings;
-        struct System;
-
-        /// Internal class to specify system dependencies
-        struct Dependency
-        {
-            std::vector<std::string> tag;
-            std::vector<System*> system;
-        };
-
-        /// Internal class with settings pertaining to system/tag execution
-        struct SystemSettings
-        {
-            Dependency before, after;
-            // TODO: Add run conditions, threading modes, etc...
-            // TODO: Implement inherithance behavior
-            std::vector<std::string> inherits;
-        };
-
-        /// Internal class to handle tag settings
-        struct System
-        {
-            std::shared_ptr<SystemSettings> settings;
-            std::shared_ptr<AnySystemWrapper<void>> system;
-        };
-
-        /// Internal class used to implement a DFS algorithm for call chain compilation
-        struct DFSNode
-        {
-            enum
-            {
-                WHITE,
-                GRAY,
-                BLACK
-            } m;
-            System* s;
-        };
-
-        /// Visits a DFSNode to create a topological order.
-        /// This is used internally during call chain compilation.
-        /// @param node The node to visit.
-        /// @param nodes Array of DFSNodes.
-        /// @return True if a cycle was detected, false if otherwise.
-        bool dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes);
-
     public:
         /// Adds a tag, and sets it as the current tag for further
         /// settings.
@@ -142,6 +104,52 @@ namespace cubos::core::ecs
         void callSystems(World& world, CommandBuffer& cmds);
 
     private:
+        struct Dependency;
+        struct SystemSettings;
+        struct System;
+
+        /// Internal class to specify system dependencies
+        struct Dependency
+        {
+            std::vector<std::string> tag;
+            std::vector<System*> system;
+        };
+
+        /// Internal class with settings pertaining to system/tag execution
+        struct SystemSettings
+        {
+            Dependency before, after;
+            // TODO: Add run conditions, threading modes, etc...
+            // TODO: Implement inherithance behavior
+            std::vector<std::string> inherits;
+        };
+
+        /// Internal class to handle tag settings
+        struct System
+        {
+            std::shared_ptr<SystemSettings> settings;
+            std::shared_ptr<AnySystemWrapper<void>> system;
+        };
+
+        /// Internal class used to implement a DFS algorithm for call chain compilation
+        struct DFSNode
+        {
+            enum
+            {
+                WHITE,
+                GRAY,
+                BLACK
+            } m;
+            System* s;
+        };
+
+        /// Visits a DFSNode to create a topological order.
+        /// This is used internally during call chain compilation.
+        /// @param node The node to visit.
+        /// @param nodes Array of DFSNodes.
+        /// @return True if a cycle was detected, false if otherwise.
+        bool dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes);
+
         /// Variables for holding information before call chain is compiled.
         std::vector<System> pendingSystems;                                 ///< All systems.
         std::map<std::string, std::shared_ptr<SystemSettings>> tagSettings; ///< All tags.

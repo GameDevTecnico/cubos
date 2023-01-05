@@ -22,7 +22,7 @@ namespace cubos::engine
         const std::vector<std::string> value;
     };
 
-    // Used to chain configurations related to tags
+    /// Used to chain configurations related to tags
     class TagBuilder
     {
     public:
@@ -41,7 +41,7 @@ namespace cubos::engine
         core::ecs::Dispatcher& dispatcher;
     };
 
-    // Used to chain configurations related to systems
+    /// Used to chain configurations related to systems
     class SystemBuilder
     {
     public:
