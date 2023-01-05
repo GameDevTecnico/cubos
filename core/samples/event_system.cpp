@@ -17,7 +17,7 @@ int main()
             KEY_EVENT = 1 << 0,   // 0001
             MOUSE_EVENT = 1 << 1, // 0010
             WHEEL_EVENT = 1 << 2, // 0100
-            ALL = ~0,             // 1111
+            ALL = ~0u,             // 1111
         };
 
         char a;
