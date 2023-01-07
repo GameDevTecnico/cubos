@@ -69,11 +69,8 @@ void Dispatcher::putStage(std::string stage, std::string referenceStage, Directi
     if (it != this->stagesOrder.end())
     {
         this->stagesOrder.erase(it);
-        // Erase invalidates next iterators, so refIt may need to be updated.
-        if (refIt > it)
-        {
-            refIt = std::find(this->stagesOrder.begin(), this->stagesOrder.end(), referenceStage);
-        }
+        // Erase invalidates next iterators, so refIt needs to to be updated.
+        refIt = std::find(this->stagesOrder.begin(), this->stagesOrder.end(), referenceStage);
     }
 
     if (referenceStage.empty() || direction == Direction::Before)

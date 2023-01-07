@@ -11,6 +11,7 @@
 
 #include <cubos/engine/plugins/window.hpp>
 #include <cubos/engine/plugins/env_settings.hpp>
+#include <cubos/engine/plugins/file_settings.hpp>
 #include <cubos/engine/plugins/imgui.hpp>
 
 #include <cubos/engine/plugins/tools/settings_inspector.hpp>
@@ -72,6 +73,7 @@ int main(int argc, char** argv)
 
         .addPlugin(cubos::engine::plugins::envSettingsPlugin)
         .addPlugin(cubos::engine::plugins::windowPlugin)
+        .addPlugin(cubos::engine::plugins::fileSettingsPlugin)
 
         // an example of how the imgui plugin can be used to render your own stuff :)
         .addPlugin(cubos::engine::plugins::imguiPlugin)
