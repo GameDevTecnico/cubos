@@ -62,7 +62,7 @@ int main(int argc, char** argv)
 {
     // Initialize the asset manager.
     Cubos cubos(argc, argv);
-    
+
     cubos.addPlugin(plugins::envSettingsPlugin);
     cubos.addPlugin(plugins::windowPlugin);
     cubos.addPlugin(cubos::engine::plugins::fileSettingsPlugin);
@@ -77,8 +77,6 @@ int main(int argc, char** argv)
     cubos.startupSystem(setup).tagged("Setup");
 
     cubos.startupSystem(printStuff).tagged("End");
-
-    
 
     cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
 
