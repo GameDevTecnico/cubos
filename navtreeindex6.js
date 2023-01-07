@@ -1,12 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fad2010a962bc2e90a8a6482536b0779c5":[3,0,0,0,2,59,19],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fad61354fa9f24e44c60534e4edf0f496d":[3,0,0,0,2,59,1],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fad7271caeb6a15b0b8a9d27dfbb1d9e7b":[3,0,0,0,2,59,22],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fae8bf59c37f9f97cb4d0edf054a935ac0":[3,0,0,0,2,59,25],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faeb2c00a865e6d373efbef741bd999a53":[3,0,0,0,2,59,31],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faf0a6f506aa5b194a87ae1ac8ae197c1f":[3,0,0,0,2,59,0],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faf72747db68ba031deb19a62028c19288":[3,0,0,0,2,59,15],
 "namespacecubos_1_1core_1_1gl.html#ad3fc1d97a3c41ea9d58d0ab14f75294f":[3,0,0,0,2,51],
 "namespacecubos_1_1core_1_1gl.html#ad3fc1d97a3c41ea9d58d0ab14f75294fa0557fa923dcee4d0f86b1409f5c2167f":[3,0,0,0,2,51,1],
 "namespacecubos_1_1core_1_1gl.html#ad3fc1d97a3c41ea9d58d0ab14f75294fa5835bab1ade0060909e31a06af2e2cde":[3,0,0,0,2,51,0],
@@ -249,5 +242,12 @@ var NAVTREEINDEX6 =
 "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_6_01_4.html#ac8cc44a105eb92dfd7337475bcef9456":[4,0,0,0,1,0,1,0],
 "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_5_01_4.html":[4,0,0,0,1,0,4],
 "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_5_01_4.html#a4c4f773e885ca27eca44356bf7aad2c0":[4,0,0,0,1,0,4,0],
-"structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html":[4,0,0,0,1,0,2]
+"structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html":[4,0,0,0,1,0,2],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html#a4c4f773e885ca27eca44356bf7aad2c0":[4,0,0,0,1,0,2,0],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html":[4,0,0,0,1,0,5],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4.html":[4,0,0,0,1,0,10],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4.html#a5202aa255d304e9c41332fc725958739":[4,0,0,0,1,0,10,0],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html":[4,0,0,0,1,0,8],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html#a9ab19e53fd3193c6294fae60232de9e9":[4,0,0,0,1,0,8,0],
+"structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4.html":[4,0,0,0,1,0,6]
 };

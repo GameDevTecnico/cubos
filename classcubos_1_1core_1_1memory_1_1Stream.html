@@ -1090,7 +1090,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Reads a string from the stream until the terminator (or '\0') is found. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Reads a string from the stream until the terminator (or '\0') is found. If terminator is nullptr reads a string until '\0' is found. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">str</td><td>The string to read. </td></tr>
     <tr><td class="paramname">terminator</td><td>The terminator to use. </td></tr>

@@ -1,12 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"json__deserializer_8hpp_source.html":[5,0,0,0,1,0,0,10],
-"json__serializer_8hpp_source.html":[5,0,0,0,1,0,0,11],
-"keyboard_8hpp_source.html":[5,0,0,0,1,0,3,5],
-"light_8hpp_source.html":[5,0,0,0,1,0,2,3],
-"loader_8hpp_source.html":[5,0,1,0,0,0,0,3],
-"local__to__world_8hpp_source.html":[5,0,1,0,0,0,1,2],
-"log_8hpp_source.html":[5,0,0,0,1,0,7],
 "manager_8hpp.html#a080a822f0093973313bd644e517a5090":[3,0,0,1,2,2,4],
 "manager_8hpp.html#a080a822f0093973313bd644e517a5090a2e4b97fde8cf63085ec969fcc7e490c0":[3,0,0,1,2,2,4,0],
 "manager_8hpp.html#a080a822f0093973313bd644e517a5090a52f5e0bc3859bc5f5e25130b6c7e8881":[3,0,0,1,2,2,4,1],
@@ -249,5 +242,12 @@ var NAVTREEINDEX5 =
 "namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fac00f58b73bbc5ff3f2f8b0146de7e527":[3,0,0,0,2,59,16],
 "namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fac245a1ee052faea0e6e4562d6b3558ac":[3,0,0,0,2,59,9],
 "namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fac410f4ad377210d2298e02075d9a287e":[3,0,0,0,2,59,12],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0facb7adf3f9aebeaae1e298f65def26a10":[3,0,0,0,2,59,23]
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0facb7adf3f9aebeaae1e298f65def26a10":[3,0,0,0,2,59,23],
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fad2010a962bc2e90a8a6482536b0779c5":[3,0,0,0,2,59,19],
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fad61354fa9f24e44c60534e4edf0f496d":[3,0,0,0,2,59,1],
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fad7271caeb6a15b0b8a9d27dfbb1d9e7b":[3,0,0,0,2,59,22],
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fae8bf59c37f9f97cb4d0edf054a935ac0":[3,0,0,0,2,59,25],
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faeb2c00a865e6d373efbef741bd999a53":[3,0,0,0,2,59,31],
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faf0a6f506aa5b194a87ae1ac8ae197c1f":[3,0,0,0,2,59,0],
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faf72747db68ba031deb19a62028c19288":[3,0,0,0,2,59,15]
 };
