@@ -11,6 +11,7 @@
 
 #include <cubos/engine/plugins/window.hpp>
 #include <cubos/engine/plugins/env_settings.hpp>
+#include <cubos/engine/plugins/file_settings.hpp>
 #include <cubos/engine/plugins/imgui.hpp>
 
 #include <components/num.hpp>
@@ -61,6 +62,13 @@ int main(int argc, char** argv)
 {
     // Initialize the asset manager.
     Cubos cubos(argc, argv);
+    
+    cubos.addPlugin(plugins::envSettingsPlugin);
+    cubos.addPlugin(plugins::windowPlugin);
+    cubos.addPlugin(cubos::engine::plugins::fileSettingsPlugin);
+
+    // an example of how the imgui plugin can be used to render your own stuff :)
+    cubos.addPlugin(plugins::imguiPlugin);
 
     cubos.addResource<data::AssetManager>().addComponent<Num>().addComponent<Parent>();
 
@@ -70,10 +78,7 @@ int main(int argc, char** argv)
 
     cubos.startupSystem(printStuff).tagged("End");
 
-    cubos.addPlugin(plugins::envSettingsPlugin).addPlugin(plugins::windowPlugin);
-
-    // an example of how the imgui plugin can be used to render your own stuff :)
-    cubos.addPlugin(plugins::imguiPlugin);
+    
 
     cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
 
