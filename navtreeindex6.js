@@ -1,14 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa55ec52d47b63b9be252396387b554e8d":[3,0,0,0,2,59,18],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa63697d10d05db9e24af76c62c43c1b54":[3,0,0,0,2,59,30],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa6dc6f228212f891edfd07efeb33d60e2":[3,0,0,0,2,59,4],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa733d24756144709f569c5cdaae3af79e":[3,0,0,0,2,59,32],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa78181d4f5d4b30baefed6c0da0de894f":[3,0,0,0,2,59,34],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa802f68a428b98949a742d8e333d836dd":[3,0,0,0,2,59,24],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa8145459ca7947c51cc8c594bcd35ee80":[3,0,0,0,2,59,14],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa84793afddd23d28be90f041bb018f9b2":[3,0,0,0,2,59,26],
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa886c4f569781f74850dcda931e9fbbde":[3,0,0,0,2,59,27],
 "namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa976adf6af511e151f4634ac9a155c1ad":[3,0,0,0,2,59,6],
 "namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faa433c9289a39945f953638e3b7b76f9c":[3,0,0,0,2,59,28],
 "namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0faaf9481887d2818243cefa367bd855cb1":[3,0,0,0,2,59,10],
@@ -249,5 +240,14 @@ var NAVTREEINDEX6 =
 "structcubos_1_1core_1_1data_1_1QBMatrix.html#abb065de194ca3d82ad666861d3b7c1b4":[4,0,0,0,0,14,0],
 "structcubos_1_1core_1_1ecs_1_1ComponentStorage.html":[4,0,0,0,1,6],
 "structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4.html":[4,0,0,0,1,7],
-"structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4.html#a5a55a6dffe51ba5acfa6c406cde15067":[4,0,0,0,1,7,0]
+"structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4.html#a5a55a6dffe51ba5acfa6c406cde15067":[4,0,0,0,1,7,0],
+"structcubos_1_1core_1_1ecs_1_1QueryInfo.html":[4,0,0,0,1,16],
+"structcubos_1_1core_1_1ecs_1_1QueryInfo.html#a8d86c9ca883b3000a90a50e011ff2bd3":[4,0,0,0,1,16,1],
+"structcubos_1_1core_1_1ecs_1_1QueryInfo.html#afbfb33ea88516f152605629177b7dcec":[4,0,0,0,1,16,0],
+"structcubos_1_1core_1_1ecs_1_1SystemInfo.html":[4,0,0,0,1,24],
+"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a069b6f2f9f063967fd8a8c3397d4129e":[4,0,0,0,1,24,5],
+"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a22c91adc0079c595cef6c3dd23391464":[4,0,0,0,1,24,4],
+"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a315419f26d3c59fa143b49b90a019049":[4,0,0,0,1,24,1],
+"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a61b7a284250952a4087e85dbfe918529":[4,0,0,0,1,24,3],
+"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a6e3e5f9a43b61fd5e911f2fd151516ee":[4,0,0,0,1,24,6]
 };

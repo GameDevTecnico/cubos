@@ -1,14 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"structcubos_1_1core_1_1ecs_1_1QueryInfo.html":[4,0,0,0,1,16],
-"structcubos_1_1core_1_1ecs_1_1QueryInfo.html#a8d86c9ca883b3000a90a50e011ff2bd3":[4,0,0,0,1,16,1],
-"structcubos_1_1core_1_1ecs_1_1QueryInfo.html#afbfb33ea88516f152605629177b7dcec":[4,0,0,0,1,16,0],
-"structcubos_1_1core_1_1ecs_1_1SystemInfo.html":[4,0,0,0,1,24],
-"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a069b6f2f9f063967fd8a8c3397d4129e":[4,0,0,0,1,24,5],
-"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a22c91adc0079c595cef6c3dd23391464":[4,0,0,0,1,24,4],
-"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a315419f26d3c59fa143b49b90a019049":[4,0,0,0,1,24,1],
-"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a61b7a284250952a4087e85dbfe918529":[4,0,0,0,1,24,3],
-"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a6e3e5f9a43b61fd5e911f2fd151516ee":[4,0,0,0,1,24,6],
 "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a839dec601886b186dd843700ef790f66":[4,0,0,0,1,24,0],
 "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#ac0631ec0477bc4c9acb54e8403c1b44d":[4,0,0,0,1,24,7],
 "structcubos_1_1core_1_1ecs_1_1SystemInfo.html#adcbb08ae8a79b0f50662c6746f88960c":[4,0,0,0,1,24,2],
@@ -248,5 +239,14 @@ var NAVTREEINDEX7 =
 "vertex_8hpp_source.html":[5,0,0,0,1,0,2,8],
 "world_8hpp_source.html":[5,0,0,0,1,0,1,13],
 "yaml__deserializer_8hpp_source.html":[5,0,0,0,1,0,0,17],
-"yaml__serializer_8hpp_source.html":[5,0,0,0,1,0,0,18]
+"yaml__serializer_8hpp_source.html":[5,0,0,0,1,0,0,18],
+"":[3,0,0],
+"":[3,0,0,1,2,0],
+"":[3,0,0,1,3],
+"":[3,0,0,1,2,2],
+"":[3,0,0,1,2],
+"":[3,0,0,1,1],
+"":[3,0,0,1],
+"":[3,0,0,1,0],
+"":[3,0,0,1,0,0]
 };
