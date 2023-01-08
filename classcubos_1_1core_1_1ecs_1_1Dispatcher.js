@@ -1,13 +1,15 @@
 var classcubos_1_1core_1_1ecs_1_1Dispatcher =
 [
-    [ "Direction", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a224b9163917ac32fc95a60d8c1eec3aa", [
-      [ "Before", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a224b9163917ac32fc95a60d8c1eec3aaa9060587edeb01a63e3d3edc959678d1e", null ],
-      [ "After", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a224b9163917ac32fc95a60d8c1eec3aaa7bfcadb5535fe8aad5032762b7bfe159", null ]
-    ] ],
-    [ "addSystem", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae7362f9f13e525bdb644b5819da7d47a", null ],
+    [ "addSystem", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a4783d358e3205382f29cc770cd32b221", null ],
+    [ "addTag", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a7d2c9145eed0ea491f309af984c06f52", null ],
     [ "callSystems", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aa22aeacf0816654953e7967d2ea55d9d", null ],
-    [ "putStage", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae54d8af8b0845c659d4505e1a6225211", null ],
-    [ "putStageAfter", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a5727888f22830f657f4a71868e4d9546", null ],
-    [ "putStageBefore", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a93d3d9bf4e4670257138e40707000809", null ],
-    [ "setDefaultStage", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a9188bca948fac416ba2b7889ca644b52", null ]
+    [ "compileChain", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a774d0da4c80e32f9d425e1652d346051", null ],
+    [ "systemSetAfterSystem", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aee8c76874a0851870b7ee8d9e10ef742", null ],
+    [ "systemSetAfterTag", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a75141febdfedc123354e0b0a474eca2b", null ],
+    [ "systemSetBeforeSystem", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a95800b10344381f6c1f80733bbb85acf", null ],
+    [ "systemSetBeforeTag", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ab07c473a3030bb9d8987f3ecf932143e", null ],
+    [ "systemSetTag", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a2bc8d7e450db25385f8ca8ec019569a9", null ],
+    [ "tagInheritTag", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a3319f711d2193bbfcc3fabeebc67aa5e", null ],
+    [ "tagSetAfterTag", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a9d38db2e75885a0e26cc5de13da1a997", null ],
+    [ "tagSetBeforeTag", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#acc00cd2ce015e19801d9283da9078f79", null ]
 ];

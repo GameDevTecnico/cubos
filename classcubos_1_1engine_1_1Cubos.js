@@ -6,9 +6,9 @@ var classcubos_1_1engine_1_1Cubos =
     [ "addComponent", "classcubos_1_1engine_1_1Cubos.html#a937bde10c2cdb9773050b62078fe61bc", null ],
     [ "addPlugin", "classcubos_1_1engine_1_1Cubos.html#a3ae5c8ca2befeead8f2fff5b7e0f340b", null ],
     [ "addResource", "classcubos_1_1engine_1_1Cubos.html#ace484b43fd068cb7b1299cf66b00c203", null ],
-    [ "addStartupSystem", "classcubos_1_1engine_1_1Cubos.html#acaff6b6cfd7a6a8c813e5fb794cc77e5", null ],
-    [ "addSystem", "classcubos_1_1engine_1_1Cubos.html#a819865d72e5666d41f70bc1a081eca0c", null ],
-    [ "putStageAfter", "classcubos_1_1engine_1_1Cubos.html#a48652f7a07a77858f182ee426a80fba5", null ],
-    [ "putStageBefore", "classcubos_1_1engine_1_1Cubos.html#a1f40a10c8f3b028ea2b1b66344904dc6", null ],
-    [ "run", "classcubos_1_1engine_1_1Cubos.html#a13a43e6d814de94978c515cb084873b1", null ]
+    [ "run", "classcubos_1_1engine_1_1Cubos.html#a13a43e6d814de94978c515cb084873b1", null ],
+    [ "startupSystem", "classcubos_1_1engine_1_1Cubos.html#ac45568473be4ab57396398a4985c5ecb", null ],
+    [ "startupTag", "classcubos_1_1engine_1_1Cubos.html#ad54b075ad2d40c1b4bf556b5927da9e6", null ],
+    [ "system", "classcubos_1_1engine_1_1Cubos.html#ac9bd733279f9e42f4dafd8b0d3c19443", null ],
+    [ "tag", "classcubos_1_1engine_1_1Cubos.html#a6d0054031ab35ce29782fa1fc6a378fc", null ]
 ];

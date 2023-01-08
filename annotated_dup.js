@@ -182,6 +182,8 @@ var annotated_dup =
         ] ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
         [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", "structcubos_1_1engine_1_1Arguments" ],
+        [ "TagBuilder", "classcubos_1_1engine_1_1TagBuilder.html", "classcubos_1_1engine_1_1TagBuilder" ],
+        [ "SystemBuilder", "classcubos_1_1engine_1_1SystemBuilder.html", "classcubos_1_1engine_1_1SystemBuilder" ],
         [ "Cubos", "classcubos_1_1engine_1_1Cubos.html", "classcubos_1_1engine_1_1Cubos" ]
       ] ]
     ] ]

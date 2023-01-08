@@ -2,5 +2,6 @@ var classcubos_1_1core_1_1ecs_1_1SystemWrapper =
 [
     [ "SystemWrapper", "classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#ae42e0bf6bacee0d19b9f09f4855eeff5", null ],
     [ "~SystemWrapper", "classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#acef0c498c46b8f4126bc494efde20721", null ],
-    [ "call", "classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#a0234fea830797bf9c2bb7c17a6bedc7e", null ]
+    [ "call", "classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#a0234fea830797bf9c2bb7c17a6bedc7e", null ],
+    [ "Dispatcher", "classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#ad90424f003fc2afb836709cbffa47e2c", null ]
 ];

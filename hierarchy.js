@@ -153,6 +153,7 @@ var hierarchy =
       [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html", null ],
       [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html", null ]
     ] ],
+    [ "SystemBuilder", "classcubos_1_1engine_1_1SystemBuilder.html", null ],
     [ "SystemFetcher< T >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html", null ],
     [ "SystemFetcher< Commands >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4.html", null ],
     [ "SystemFetcher< const R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4.html", null ],
@@ -166,6 +167,7 @@ var hierarchy =
       [ "SystemTraits< R(T::*)(Args...) const >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07T_1_1_5_08_07Args_8_8_8_08_01const_01_4.html", null ],
       [ "SystemTraits< R(T::*)(Args...)>", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits_3_01R_07T_1_1_5_08_07Args_8_8_8_08_4.html", null ]
     ] ],
+    [ "TagBuilder", "classcubos_1_1engine_1_1TagBuilder.html", null ],
     [ "Texture1D", "classcubos_1_1core_1_1gl_1_1impl_1_1Texture1D.html", null ],
     [ "Texture1DDesc", "structcubos_1_1core_1_1gl_1_1Texture1DDesc.html", null ],
     [ "Texture2D", "classcubos_1_1core_1_1gl_1_1impl_1_1Texture2D.html", null ],

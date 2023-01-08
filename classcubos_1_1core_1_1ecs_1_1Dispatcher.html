@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1Dispatche
 
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -100,34 +100,41 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1Dispatche
 
 <p><code>#include &lt;<a class="el" href="dispatcher_8hpp_source.html">dispatcher.hpp</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a224b9163917ac32fc95a60d8c1eec3aa"><td class="memItemLeft" align="right" valign="top"><a id="a224b9163917ac32fc95a60d8c1eec3aa"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>Direction</b> { <b>Before</b>
-, <b>After</b>
- }</td></tr>
-<tr class="separator:a224b9163917ac32fc95a60d8c1eec3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae7362f9f13e525bdb644b5819da7d47a"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
-<tr class="memitem:ae7362f9f13e525bdb644b5819da7d47a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae7362f9f13e525bdb644b5819da7d47a">addSystem</a> (F system, std::string stage)</td></tr>
-<tr class="separator:ae7362f9f13e525bdb644b5819da7d47a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d2c9145eed0ea491f309af984c06f52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a7d2c9145eed0ea491f309af984c06f52">addTag</a> (const std::string &amp;tag)</td></tr>
+<tr class="separator:a7d2c9145eed0ea491f309af984c06f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3319f711d2193bbfcc3fabeebc67aa5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a3319f711d2193bbfcc3fabeebc67aa5e">tagInheritTag</a> (const std::string &amp;tag)</td></tr>
+<tr class="separator:a3319f711d2193bbfcc3fabeebc67aa5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d38db2e75885a0e26cc5de13da1a997"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a9d38db2e75885a0e26cc5de13da1a997">tagSetAfterTag</a> (const std::string &amp;tag)</td></tr>
+<tr class="separator:a9d38db2e75885a0e26cc5de13da1a997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc00cd2ce015e19801d9283da9078f79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#acc00cd2ce015e19801d9283da9078f79">tagSetBeforeTag</a> (const std::string &amp;tag)</td></tr>
+<tr class="separator:acc00cd2ce015e19801d9283da9078f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4783d358e3205382f29cc770cd32b221"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a4783d358e3205382f29cc770cd32b221"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a4783d358e3205382f29cc770cd32b221">addSystem</a> (F func)</td></tr>
+<tr class="separator:a4783d358e3205382f29cc770cd32b221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bc8d7e450db25385f8ca8ec019569a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a2bc8d7e450db25385f8ca8ec019569a9">systemSetTag</a> (const std::string &amp;tag)</td></tr>
+<tr class="separator:a2bc8d7e450db25385f8ca8ec019569a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75141febdfedc123354e0b0a474eca2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a75141febdfedc123354e0b0a474eca2b">systemSetAfterTag</a> (const std::string &amp;tag)</td></tr>
+<tr class="separator:a75141febdfedc123354e0b0a474eca2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee8c76874a0851870b7ee8d9e10ef742"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:aee8c76874a0851870b7ee8d9e10ef742"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aee8c76874a0851870b7ee8d9e10ef742">systemSetAfterSystem</a> (F func)</td></tr>
+<tr class="separator:aee8c76874a0851870b7ee8d9e10ef742"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab07c473a3030bb9d8987f3ecf932143e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ab07c473a3030bb9d8987f3ecf932143e">systemSetBeforeTag</a> (const std::string &amp;tag)</td></tr>
+<tr class="separator:ab07c473a3030bb9d8987f3ecf932143e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95800b10344381f6c1f80733bbb85acf"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a95800b10344381f6c1f80733bbb85acf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a95800b10344381f6c1f80733bbb85acf">systemSetBeforeSystem</a> (F func)</td></tr>
+<tr class="separator:a95800b10344381f6c1f80733bbb85acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a774d0da4c80e32f9d425e1652d346051"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a774d0da4c80e32f9d425e1652d346051">compileChain</a> ()</td></tr>
+<tr class="separator:a774d0da4c80e32f9d425e1652d346051"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa22aeacf0816654953e7967d2ea55d9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aa22aeacf0816654953e7967d2ea55d9d">callSystems</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a> &amp;cmds)</td></tr>
 <tr class="separator:aa22aeacf0816654953e7967d2ea55d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9188bca948fac416ba2b7889ca644b52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a9188bca948fac416ba2b7889ca644b52">setDefaultStage</a> (std::string stage, ecs::Dispatcher::Direction direction)</td></tr>
-<tr class="separator:a9188bca948fac416ba2b7889ca644b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93d3d9bf4e4670257138e40707000809"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a93d3d9bf4e4670257138e40707000809">putStageBefore</a> (std::string stage, std::string referenceStage)</td></tr>
-<tr class="separator:a93d3d9bf4e4670257138e40707000809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5727888f22830f657f4a71868e4d9546"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a5727888f22830f657f4a71868e4d9546">putStageAfter</a> (std::string stage, std::string referenceStage)</td></tr>
-<tr class="separator:a5727888f22830f657f4a71868e4d9546"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae54d8af8b0845c659d4505e1a6225211"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae54d8af8b0845c659d4505e1a6225211">putStage</a> (std::string stage, std::string referenceStage, Direction direction)</td></tr>
-<tr class="separator:ae54d8af8b0845c659d4505e1a6225211"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" title="Dispatcher is a class that is used to register systems and call them all at once, where they will be ...">Dispatcher</a> is a class that is used to register systems and call them all at once, where they will be executed in order of the stages they are in. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae7362f9f13e525bdb644b5819da7d47a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7362f9f13e525bdb644b5819da7d47a">&#9670;&nbsp;</a></span>addSystem()</h2>
+<a id="a4783d358e3205382f29cc770cd32b221"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4783d358e3205382f29cc770cd32b221">&#9670;&nbsp;</a></span>addSystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,25 +143,38 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void addSystem </td>
           <td>(</td>
           <td class="paramtype">F&#160;</td>
-          <td class="paramname"><em>system</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>func</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>stage</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Adds a system into a stage. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Adds a system, and sets it as the current system for further settings. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">system</td><td>System to add. </td></tr>
-    <tr><td class="paramname">stage</td><td>Stage to add the system in. </td></tr>
+    <tr><td class="paramname">func</td><td>System to add. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7d2c9145eed0ea491f309af984c06f52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d2c9145eed0ea491f309af984c06f52">&#9670;&nbsp;</a></span>addTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addTag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a tag, and sets it as the current tag for further settings. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>Tag to add. </td></tr>
   </table>
   </dd>
 </dl>
@@ -186,156 +206,220 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Calls all systems in order of the stages they are in. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Calls all systems in order of the stages they are in. The call chain must be compiled successfully prior, otherwise this function won't run anything. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">world</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html" title="World is used as a container for all of the entity and component data. Components are stored in abstr...">World</a> to call the systems in. </td></tr>
+    <tr><td class="paramname">cmds</td><td>Command buffer. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ae54d8af8b0845c659d4505e1a6225211"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae54d8af8b0845c659d4505e1a6225211">&#9670;&nbsp;</a></span>putStage()</h2>
+<a id="a774d0da4c80e32f9d425e1652d346051"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a774d0da4c80e32f9d425e1652d346051">&#9670;&nbsp;</a></span>compileChain()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void putStage </td>
+          <td class="memname">void compileChain </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>stage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>referenceStage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Direction&#160;</td>
-          <td class="paramname"><em>direction</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Puts a stage next to another stage. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Compiles a call chain. This takes all pending systems and determines their execution order. This is required before systems can be run. </p>
+
+</div>
+</div>
+<a id="aee8c76874a0851870b7ee8d9e10ef742"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee8c76874a0851870b7ee8d9e10ef742">&#9670;&nbsp;</a></span>systemSetAfterSystem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void systemSetAfterSystem </td>
+          <td>(</td>
+          <td class="paramtype">F&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the current system to run after a given system. The specified system must exist. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stage</td><td>Stage to put next to another stage. </td></tr>
-    <tr><td class="paramname">referenceStage</td><td>Stage to put the stage next to. </td></tr>
-    <tr><td class="paramname">direction</td><td>Direction to put the stage in. </td></tr>
+    <tr><td class="paramname">func</td><td>The system to run after. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a5727888f22830f657f4a71868e4d9546"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5727888f22830f657f4a71868e4d9546">&#9670;&nbsp;</a></span>putStageAfter()</h2>
+<a id="a75141febdfedc123354e0b0a474eca2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75141febdfedc123354e0b0a474eca2b">&#9670;&nbsp;</a></span>systemSetAfterTag()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void putStageAfter </td>
+          <td class="memname">void systemSetAfterTag </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>stage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>referenceStage</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Puts a stage after another stage. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sets the current system to run after the tag. If the specified tag doesn't exist, it is internally created. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stage</td><td>Stage to put after another stage. </td></tr>
-    <tr><td class="paramname">after</td><td>Stage to put the stage after. </td></tr>
+    <tr><td class="paramname">tag</td><td>The tag to run after. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a93d3d9bf4e4670257138e40707000809"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93d3d9bf4e4670257138e40707000809">&#9670;&nbsp;</a></span>putStageBefore()</h2>
+<a id="a95800b10344381f6c1f80733bbb85acf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95800b10344381f6c1f80733bbb85acf">&#9670;&nbsp;</a></span>systemSetBeforeSystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void putStageBefore </td>
+          <td class="memname">void systemSetBeforeSystem </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>stage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">F&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>referenceStage</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Puts a stage before another stage. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sets the current system to run before the system. The specified system must exist. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stage</td><td>Stage to put before another stage. </td></tr>
-    <tr><td class="paramname">before</td><td>Stage to put the stage before. </td></tr>
+    <tr><td class="paramname">func</td><td>The system to run before. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a9188bca948fac416ba2b7889ca644b52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9188bca948fac416ba2b7889ca644b52">&#9670;&nbsp;</a></span>setDefaultStage()</h2>
+<a id="ab07c473a3030bb9d8987f3ecf932143e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab07c473a3030bb9d8987f3ecf932143e">&#9670;&nbsp;</a></span>systemSetBeforeTag()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void setDefaultStage </td>
+          <td class="memname">void systemSetBeforeTag </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>stage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">ecs::Dispatcher::Direction&#160;</td>
-          <td class="paramname"><em>direction</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the default stage and the direction new stages will be added in. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sets the current system to run before the tag. If the specified tag doesn't exist, it is internally created. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stage</td><td>The stage to set as default. </td></tr>
-    <tr><td class="paramname">direction</td><td>Direction to add new stages in. </td></tr>
+    <tr><td class="paramname">tag</td><td>The tag to run before. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2bc8d7e450db25385f8ca8ec019569a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bc8d7e450db25385f8ca8ec019569a9">&#9670;&nbsp;</a></span>systemSetTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void systemSetTag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the tag for the current system. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>The tag to run under. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3319f711d2193bbfcc3fabeebc67aa5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3319f711d2193bbfcc3fabeebc67aa5e">&#9670;&nbsp;</a></span>tagInheritTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tagInheritTag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Makes the current tag inherit the settings of another tag. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>Tag to inherit from. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9d38db2e75885a0e26cc5de13da1a997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d38db2e75885a0e26cc5de13da1a997">&#9670;&nbsp;</a></span>tagSetAfterTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tagSetAfterTag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Makes the current tag run after the given tag. If the specified tag doesn't exist, it is internally created. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>Tag to run after. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acc00cd2ce015e19801d9283da9078f79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc00cd2ce015e19801d9283da9078f79">&#9670;&nbsp;</a></span>tagSetBeforeTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tagSetBeforeTag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Makes the current tag run before the given tag. If the specified tag doesn't exist, it is internally created. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>Tag to run before. </td></tr>
   </table>
   </dd>
 </dl>
