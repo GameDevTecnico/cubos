@@ -63,25 +63,23 @@ static void imguiExampleWindow()
 int main(int argc, char** argv)
 {
     // Initialize the asset manager.
-    Cubos(argc, argv)
-        .addResource<data::AssetManager>()
-        .addComponent<Num>()
-        .addComponent<Parent>()
+    Cubos cubos(argc, argv);
 
-        .addStartupSystem(setup, "Setup")
-        .addStartupSystem(printStuff, "End")
+    cubos.addPlugin(plugins::envSettingsPlugin);
+    cubos.addPlugin(plugins::windowPlugin);
+    cubos.addPlugin(plugins::fileSettingsPlugin);
 
-        .addPlugin(cubos::engine::plugins::envSettingsPlugin)
-        .addPlugin(cubos::engine::plugins::windowPlugin)
-        .addPlugin(cubos::engine::plugins::fileSettingsPlugin)
+    cubos.addResource<data::AssetManager>().addComponent<Num>().addComponent<Parent>();
+    cubos.startupSystem(setup).tagged("Setup");
+    cubos.startupSystem(printStuff).tagged("End");
 
-        // an example of how the imgui plugin can be used to render your own stuff :)
-        .addPlugin(cubos::engine::plugins::imguiPlugin)
-        .addSystem(imguiExampleWindow, "ImGuiExampleWindow")
-        .putStageAfter("ImGuiExampleWindow", "BeginImGuiFrame")
+    // an example of how the imgui plugin can be used to render your own stuff :)
+    cubos.addPlugin(plugins::imguiPlugin);
+    cubos.tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame").beforeTag("EndImGuiFrame");
+    cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
 
-        // or a tesserato tool!
-        .addPlugin(cubos::engine::plugins::tools::settingsInspectorPlugin)
+    // or a tesserato tool!
+    cubos.addPlugin(plugins::tools::settingsInspectorPlugin);
 
-        .run();
+    cubos.run();
 }

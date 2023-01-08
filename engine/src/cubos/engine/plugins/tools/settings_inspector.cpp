@@ -31,7 +31,7 @@ static void settingsInspectorSystem(cubos::core::Settings& settings)
 
 void cubos::engine::plugins::tools::settingsInspectorPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::plugins::imguiPlugin)
-        .addSystem(settingsInspectorSystem, "SettingsInspector")
-        .putStageAfter("SettingsInspector", "BeginImGuiFrame");
+    cubos.addPlugin(cubos::engine::plugins::imguiPlugin);
+    cubos.tag("SettingsInspector").afterTag("BeginImGuiFrame").beforeTag("EndImGuiFrame");
+    cubos.system(settingsInspectorSystem).tagged("SettingsInspector");
 }
