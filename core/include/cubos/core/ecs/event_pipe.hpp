@@ -70,6 +70,9 @@ namespace cubos::core::ecs
 
         /// Keeps track of how many readers the event pipe currently has.
         std::size_t readerCount;
+
+        /// Keeps track of how many events were deleted.
+        std::size_t deletedEvents{0};
     };
 
     // EventPipe implementation.
@@ -81,11 +84,13 @@ namespace cubos::core::ecs
 
     template <typename T> unsigned int EventPipe<T>::getEventMask(std::size_t index) const
     {
+        index = index - deletedEvents;
         return this->events.at(index).mask;
     }
 
     template <typename T> std::pair<const T&, unsigned int> EventPipe<T>::get(std::size_t index) const
     {
+        index = index - deletedEvents;
         const Event& ev = this->events.at(index);
         ev.readCount++;
         return std::pair<const T&, unsigned int>(ev.event, ev.mask);
@@ -93,14 +98,10 @@ namespace cubos::core::ecs
 
     template <typename T> void EventPipe<T>::clear()
     {
-        for (auto& ev : this->events)
+        while (!this->events.empty() && this->events.front().readCount == this->readerCount)
         {
-            if (ev.readCount == this->readerCount)
-            {
-                printf("clearing:\n");
-                // we can assume that the older events always get read first, so this is safe
-                this->events.pop_front();
-            }
+            this->events.pop_front();
+            this->deletedEvents++;
         }
     }
 
