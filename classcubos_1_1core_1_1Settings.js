@@ -2,7 +2,9 @@ var classcubos_1_1core_1_1Settings =
 [
     [ "Settings", "classcubos_1_1core_1_1Settings.html#a408c38e2ece7d6a8dda04484f006e8bb", null ],
     [ "~Settings", "classcubos_1_1core_1_1Settings.html#a6f32ae88e02a7ba82b3e11ab5abaab68", null ],
+    [ "begin", "classcubos_1_1core_1_1Settings.html#a8f504757c133b45aea865a54a15f98b4", null ],
     [ "clear", "classcubos_1_1core_1_1Settings.html#ac8bb3912a3ce86b15842e79d0b421204", null ],
+    [ "end", "classcubos_1_1core_1_1Settings.html#adfdc3e70eba09e9f20e23d5c6ae665d2", null ],
     [ "getBool", "classcubos_1_1core_1_1Settings.html#a7ec1548318fff6e61e200310d3084c36", null ],
     [ "getDouble", "classcubos_1_1core_1_1Settings.html#a252f1eeddc6e12a981ede92afccff534", null ],
     [ "getInteger", "classcubos_1_1core_1_1Settings.html#a24b8980d154cddad9a5f3114ff922223", null ],

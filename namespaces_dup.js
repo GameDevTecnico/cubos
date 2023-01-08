@@ -52,6 +52,9 @@ var namespaces_dup =
           [ "RendererGrid", "renderer_8hpp.html#a466baf930bfdebba0d977770dd4d0056", null ]
         ] ],
         [ "plugins", null, [
+          [ "tools", null, [
+            [ "settingsInspectorPlugin", "settings__inspector_8hpp.html#af16ebf94aa7e16a57b67174b0addcd48", null ]
+          ] ],
           [ "envSettingsPlugin", "env__settings_8hpp.html#a934caabf9b9109a549c088d93cd8d281", null ],
           [ "fileSettingsPlugin", "file__settings_8hpp.html#a5a5954d3de736c0c8026aa1165eaa908", null ],
           [ "imguiPlugin", "engine_2include_2cubos_2engine_2plugins_2imgui_8hpp.html#afb729bcc13bb2c13aa37b602860524dc", null ],

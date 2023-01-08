@@ -64,14 +64,15 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"action_8hpp_source.html",
-"classcubos_1_1core_1_1data_1_1Package.html",
-"classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aee8c76874a0851870b7ee8d9e10ef742",
-"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#adc1455084700e7c459c20fc60f4f2ad7",
-"classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html#a8349bd7e3f1e7ddb09c35536fc244c44",
-"guide-hello-world.html#autotoc_md44",
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa976adf6af511e151f4634ac9a155c1ad",
-"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a839dec601886b186dd843700ef790f66"
+"",
+"classcubos_1_1core_1_1data_1_1JSONSerializer.html#a5cea905275e5a4e9c6cdecf4d234ee6f",
+"classcubos_1_1core_1_1ecs_1_1Dispatcher.html",
+"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a55003639c49dd39b890d24600028bb2e",
+"classcubos_1_1engine_1_1data_1_1Meta.html#a9d7a4e624766bbbc73c1cd870bc01e72",
+"functions_t.html",
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa46c380f94f3087cd3e31bf99ee4b1e92",
+"structcubos_1_1core_1_1data_1_1QBMatrix.html#a34cc55836c0a80298fc5df484563404a",
+"vec__storage_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
