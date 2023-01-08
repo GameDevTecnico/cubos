@@ -59,7 +59,7 @@ File::Handle FileSystem::create(std::string_view path, bool directory)
 {
     if (path.empty() || path[0] != '/')
     {
-        CUBOS_ERROR("Could not create file at path '{}', the path must be absolute");
+        CUBOS_ERROR("Could not create file at path '{}', the path must be absolute", path);
         return nullptr;
     }
 
@@ -74,7 +74,7 @@ bool FileSystem::destroy(std::string_view path)
 {
     if (path.empty() || path[0] != '/')
     {
-        CUBOS_ERROR("Could not destroy file at path '{}', the path must be absolute");
+        CUBOS_ERROR("Could not destroy file at path '{}', the path must be absolute", path);
         return false;
     }
 
@@ -88,7 +88,7 @@ bool FileSystem::destroy(std::string_view path)
         return file->destroy();
     else
     {
-        CUBOS_WARN("Could not destroy file at path '{}', the file does not exist");
+        CUBOS_WARN("Could not destroy file at path '{}', the file does not exist", path);
         return false;
     }
 }
@@ -97,7 +97,7 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
 {
     if (path.empty() || path[0] != '/')
     {
-        CUBOS_ERROR("Could not open file at path '{}', the path must be absolute");
+        CUBOS_ERROR("Could not open file at path '{}', the path must be absolute", path);
         return nullptr;
     }
 
@@ -111,7 +111,7 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
         return file->open(mode);
     else
     {
-        CUBOS_WARN("Could not open file at path '{}', the file does not exist");
+        CUBOS_WARN("Could not open file at path '{}', the file does not exist", path);
         return nullptr;
     }
 }
