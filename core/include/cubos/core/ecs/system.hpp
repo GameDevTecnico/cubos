@@ -218,6 +218,7 @@ namespace cubos::core::ecs
     template <typename F> class SystemWrapper final : public AnySystemWrapper<typename impl::SystemTraits<F>::Return>
     {
     public:
+        friend class Dispatcher;
         /// @param system The system to wrap.
         SystemWrapper(F system);
         virtual ~SystemWrapper() override = default;
