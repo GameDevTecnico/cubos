@@ -57,7 +57,7 @@ int main()
     printf("%d , ", x->get().data);
     for (const auto& it : mouseReader)
     {
-        printf(" %d , ", it.data);
+        printf(" %d , ", it.data); // 6
     }
 
     index = 0;
