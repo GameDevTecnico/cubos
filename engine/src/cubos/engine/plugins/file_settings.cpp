@@ -22,5 +22,5 @@ static void startup(const std::string& path, cubos::core::Settings& settings)
 
 void cubos::engine::plugins::fileSettingsPlugin(Cubos& cubos)
 {
-    cubos.addStartupSystem(startup, "ReadSettings");
+    cubos.startupSystem(startup).tagged("Settings");
 }
