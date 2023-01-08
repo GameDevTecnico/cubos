@@ -32,8 +32,11 @@ namespace cubos::core::ecs
         /// Only events that got read by all readers are deleted!
         void clear();
 
-        /// Returns the number of events that already were read/sent.
+        /// Returns the number of events that already were sent.
         std::size_t sentEvents() const;
+
+        /// Returns the number of events that are present on the pipe.
+        std::size_t size() const;
 
         /// Adds a new reader to reader count.
         void addReader();
@@ -108,6 +111,11 @@ namespace cubos::core::ecs
     template <typename T> std::size_t EventPipe<T>::sentEvents() const
     {
         return this->events.size() + deletedEvents;
+    }
+
+    template <typename T> std::size_t EventPipe<T>::size() const
+    {
+        return this->events.size();
     }
 
     template <typename T> void EventPipe<T>::addReader()

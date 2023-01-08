@@ -50,16 +50,19 @@ TEST(Cubos_Core_Event_System, Event_Pipe_Writer_Simple_Test)
     auto pipe = EventPipe<int>();
     auto writer = EventWriter<int>(pipe);
 
-    EXPECT_EQ(pipe.size(), 0);
+    EXPECT_EQ(pipe.sentEvents(), 0);
 
     writer.push(3);
-    EXPECT_EQ(pipe.size(), 1);
+    EXPECT_EQ(pipe.sentEvents(), 1);
 
     writer.push(3, 5);
-    EXPECT_EQ(pipe.size(), 2);
+    EXPECT_EQ(pipe.sentEvents(), 2);
 
     pipe.clear();
-    EXPECT_EQ(pipe.size(), 0);
+    EXPECT_EQ(pipe.sentEvents(), 2);
+
+    writer.push(3, 5);
+    EXPECT_EQ(pipe.sentEvents(), 3);
 }
 
 TEST(Cubos_Core_Event_System, Event_System_Masking_Test)

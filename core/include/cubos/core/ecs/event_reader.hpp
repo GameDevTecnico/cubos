@@ -58,7 +58,7 @@ namespace cubos::core::ecs
 
     template <typename T, unsigned int M> std::optional<std::reference_wrapper<const T>> EventReader<T, M>::read()
     {
-        while (this->index < this->pipe.size())
+        while (this->index < this->pipe.sentEvents())
         {
             std::pair<const T&, unsigned int> p = pipe.get(this->index++);
             auto& event = p.first;
@@ -81,7 +81,7 @@ namespace cubos::core::ecs
     template <typename T, unsigned int M> typename EventReader<T, M>::Iterator EventReader<T, M>::begin()
     {
         // return a new begin iterator only if we did not read all events yet(?)
-        return (this->index >= this->pipe.size()) ? this->end() : Iterator(*this, this->read(), false);
+        return (this->index >= this->pipe.sentEvents()) ? this->end() : Iterator(*this, this->read(), false);
     }
 
     template <typename T, unsigned int M> typename EventReader<T, M>::Iterator EventReader<T, M>::end()
