@@ -72,12 +72,11 @@ int main(int argc, char** argv)
 
     cubos.addResource<data::AssetManager>().addComponent<Num>().addComponent<Parent>();
 
-    cubos.tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame");
-
     cubos.startupSystem(setup).tagged("Setup");
 
     cubos.startupSystem(printStuff).tagged("End");
 
+    cubos.tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame").beforeTag("EndImGuiFrame");
     cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
 
     cubos.run();
