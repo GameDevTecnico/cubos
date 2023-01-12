@@ -9,7 +9,9 @@ using namespace core::memory;
 
 AssetManager::Info::Info(Meta&& meta) : meta(std::move(meta))
 {
-    this->data = nullptr; this->refCount = 0; this->stored = false;
+    this->data = nullptr;
+    this->refCount = 0;
+    this->stored = false;
 }
 
 AssetManager::Info::Info(Meta&& meta, const void* data, std::function<void(const void*)> deleter)
