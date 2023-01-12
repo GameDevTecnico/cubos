@@ -64,7 +64,8 @@ namespace cubos::core::ecs
     };
 
     /// A system wrapper for a system which takes some arguments.
-    template <typename F> class SystemWrapper final : public AnySystemWrapper
+    template <typename F>
+    class SystemWrapper final : public AnySystemWrapper
     {
     public:
         /// @param system The system to wrap.
@@ -83,13 +84,15 @@ namespace cubos::core::ecs
     namespace impl
     {
         /// Fetches the requested type from a world.
-        template <typename T> struct SystemFetcher
+        template <typename T>
+        struct SystemFetcher
         {
             // This should never be instantiated.
             static_assert(!std::is_same_v<T, T>, "Unknown system argument type.");
         };
 
-        template <typename R> struct SystemFetcher<R&>
+        template <typename R>
+        struct SystemFetcher<R&>
         {
             using Type = WriteResource<R>;
 
@@ -107,7 +110,8 @@ namespace cubos::core::ecs
             static R& arg(const World& world, WriteResource<R>&& lock);
         };
 
-        template <typename R> struct SystemFetcher<const R&>
+        template <typename R>
+        struct SystemFetcher<const R&>
         {
             using Type = ReadResource<R>;
 
@@ -125,7 +129,8 @@ namespace cubos::core::ecs
             static const R& arg(const World& world, ReadResource<R>&& lock);
         };
 
-        template <typename... ComponentTypes> struct SystemFetcher<Query<ComponentTypes...>>
+        template <typename... ComponentTypes>
+        struct SystemFetcher<Query<ComponentTypes...>>
         {
             using Type = Query<ComponentTypes...>;
 
@@ -143,7 +148,8 @@ namespace cubos::core::ecs
             static Type arg(const World& world, Type&& fetched);
         };
 
-        template <> struct SystemFetcher<Debug>
+        template <>
+        struct SystemFetcher<Debug>
         {
             using Type = Debug;
 
@@ -161,7 +167,8 @@ namespace cubos::core::ecs
             static Type arg(const World& world, Type&& fetched);
         };
 
-        template <> struct SystemFetcher<Commands&>
+        template <>
+        struct SystemFetcher<Commands&>
         {
             using Type = Commands*;
 
@@ -179,7 +186,8 @@ namespace cubos::core::ecs
             static Commands& arg(const World& world, Commands* fetched);
         };
 
-        template <typename... Args> struct SystemFetcher<std::tuple<Args...>>
+        template <typename... Args>
+        struct SystemFetcher<std::tuple<Args...>>
         {
             using Type = std::tuple<typename SystemFetcher<Args>::Type...>;
 
@@ -198,10 +206,12 @@ namespace cubos::core::ecs
         };
 
         /// Template magic used to inspect the arguments of a system.
-        template <typename F> struct SystemTraits;
+        template <typename F>
+        struct SystemTraits;
 
         /// Specialization for function pointers.
-        template <typename... Args> struct SystemTraits<void (*)(Args...)>
+        template <typename... Args>
+        struct SystemTraits<void (*)(Args...)>
         {
             using Arguments = std::tuple<Args...>;
 
@@ -222,14 +232,16 @@ namespace cubos::core::ecs
         };
 
         /// Specialization for lambdas and functors, like std::function.
-        template <typename F> struct SystemTraits : SystemTraits<decltype(&std::remove_reference<F>::type::operator())>
+        template <typename F>
+        struct SystemTraits : SystemTraits<decltype(&std::remove_reference<F>::type::operator())>
         {
         };
     } // namespace impl
 
     // Implementation.
 
-    template <typename... Args> SystemInfo impl::SystemTraits<void (*)(Args...)>::info()
+    template <typename... Args>
+    SystemInfo impl::SystemTraits<void (*)(Args...)>::info()
     {
         auto info = SystemInfo();
         info.usesCommands = false;
@@ -244,7 +256,8 @@ namespace cubos::core::ecs
         // Do nothing.
     }
 
-    template <typename F> void SystemWrapper<F>::call(const World& world, Commands& commands) const
+    template <typename F>
+    void SystemWrapper<F>::call(const World& world, Commands& commands) const
     {
         using Arguments = typename impl::SystemTraits<F>::Arguments;
         using Fetcher = impl::SystemFetcher<Arguments>;
@@ -257,37 +270,44 @@ namespace cubos::core::ecs
         std::apply(this->system, std::forward<Arguments>(args));
     }
 
-    template <typename R> void impl::SystemFetcher<R&>::add(SystemInfo& info)
+    template <typename R>
+    void impl::SystemFetcher<R&>::add(SystemInfo& info)
     {
         info.resourcesWritten.insert(typeid(R));
     }
 
-    template <typename R> WriteResource<R> impl::SystemFetcher<R&>::fetch(const World& world, Commands&)
+    template <typename R>
+    WriteResource<R> impl::SystemFetcher<R&>::fetch(const World& world, Commands&)
     {
         return world.write<R>();
     }
 
-    template <typename R> R& impl::SystemFetcher<R&>::arg(const World& world, WriteResource<R>&& lock)
+    template <typename R>
+    R& impl::SystemFetcher<R&>::arg(const World& world, WriteResource<R>&& lock)
     {
         return lock.get();
     }
 
-    template <typename R> void impl::SystemFetcher<const R&>::add(SystemInfo& info)
+    template <typename R>
+    void impl::SystemFetcher<const R&>::add(SystemInfo& info)
     {
         info.resourcesRead.insert(typeid(R));
     }
 
-    template <typename R> ReadResource<R> impl::SystemFetcher<const R&>::fetch(const World& world, Commands&)
+    template <typename R>
+    ReadResource<R> impl::SystemFetcher<const R&>::fetch(const World& world, Commands&)
     {
         return world.read<R>();
     }
 
-    template <typename R> const R& impl::SystemFetcher<const R&>::arg(const World& world, ReadResource<R>&& lock)
+    template <typename R>
+    const R& impl::SystemFetcher<const R&>::arg(const World& world, ReadResource<R>&& lock)
     {
         return lock.get();
     }
 
-    template <typename... ComponentTypes> void impl::SystemFetcher<Query<ComponentTypes...>>::add(SystemInfo& info)
+    template <typename... ComponentTypes>
+    void impl::SystemFetcher<Query<ComponentTypes...>>::add(SystemInfo& info)
     {
         auto queryInfo = Query<ComponentTypes...>::info();
 
@@ -347,7 +367,8 @@ namespace cubos::core::ecs
         return *fetched;
     }
 
-    template <typename... Args> void impl::SystemFetcher<std::tuple<Args...>>::add(SystemInfo& info)
+    template <typename... Args>
+    void impl::SystemFetcher<std::tuple<Args...>>::add(SystemInfo& info)
     {
         ([&]() { impl::SystemFetcher<Args>::add(info); }(), ...);
     }

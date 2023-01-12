@@ -26,13 +26,15 @@ namespace cubos::core::io
         /// Get the value stores inside the Context.
         /// Assumes the value stored is of type T.
         /// @return returns the value if stored value is of type T. Otherwise, crashes.
-        template <class T> T getValue();
+        template <class T>
+        T getValue();
 
     private:
         std::variant<float, glm::vec2> value;
     };
 
-    template <class T> T Context::getValue()
+    template <class T>
+    T Context::getValue()
     {
         return std::get<T>(this->value);
     }

@@ -67,7 +67,8 @@ namespace cubos::core::io
         /// @param obj the object owning the method
         /// @param callback the method that will be called when the key is down
         /// @param key the key to trigger the callback
-        template <class T> static void registerKeyDownCallback(T* obj, void (T::*callback)(), cubos::core::io::Key key);
+        template <class T>
+        static void registerKeyDownCallback(T* obj, void (T::*callback)(), cubos::core::io::Key key);
 
         /// Unregisters a key down method callback
         /// @param obj the object owning the method
@@ -92,13 +93,15 @@ namespace cubos::core::io
         /// @param obj the object owning the method
         /// @param callback the method that will be called when the key is released
         /// @param key the key to trigger the callback
-        template <class T> static void registerKeyUpCallback(T* obj, void (T::*callback)(), cubos::core::io::Key key);
+        template <class T>
+        static void registerKeyUpCallback(T* obj, void (T::*callback)(), cubos::core::io::Key key);
 
         /// Unregisters a key up method callback
         /// @param obj the object owning the method
         /// @param callback the method that will be unregistered
         /// @param key the key to unregister the callback
-        template <class T> static void unregisterKeyUpCallback(T* obj, void (T::*callback)(), cubos::core::io::Key key);
+        template <class T>
+        static void unregisterKeyUpCallback(T* obj, void (T::*callback)(), cubos::core::io::Key key);
 
         /// Registers a mouse button down function callback
         /// @param callback the function to call when the mouse button is down
@@ -217,7 +220,8 @@ namespace cubos::core::io
         InputManager::keyDownCallbacks[key]->unregisterCallback<T>(obj, callback);
     }
 
-    template <class T> void InputManager::registerKeyUpCallback(T* obj, void (T::*callback)(), cubos::core::io::Key key)
+    template <class T>
+    void InputManager::registerKeyUpCallback(T* obj, void (T::*callback)(), cubos::core::io::Key key)
     {
         if (!InputManager::keyUpCallbacks.contains(key))
         {
