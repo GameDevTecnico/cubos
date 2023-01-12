@@ -1,0 +1,18 @@
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+name: clang-format Code Formatter
+jobs:
+  lint:
+    name: clang-format Code Formatter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Formatter
+        uses: roby2014/clang-format-action@v1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          exclude-regex: "lib/"
