@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Code Formatter
-      uses: roby2014/clang-format-action@pr_prt
+      uses: roby2014/clang-format-action@v1.0
       env:
+        BRANCH: ${{ github.event.pull_request.base.ref }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         exclude-regex: 'lib/'
