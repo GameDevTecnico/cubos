@@ -179,6 +179,7 @@ namespace cubos::core::memory
         void parse(double& value);
 
         /// Reads a string from the stream until the terminator (or '\0') is found.
+        /// If terminator is nullptr reads a string until '\0' is found.
         /// @param str The string to read.
         /// @param terminator The terminator to use.
         void readUntil(std::string& str, const char* terminator);

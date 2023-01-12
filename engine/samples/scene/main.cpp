@@ -11,17 +11,24 @@
 
 #include <cubos/engine/plugins/window.hpp>
 #include <cubos/engine/plugins/env_settings.hpp>
+#include <cubos/engine/plugins/file_settings.hpp>
+#include <cubos/engine/plugins/imgui.hpp>
+
+#include <cubos/engine/plugins/tools/settings_inspector.hpp>
 
 #include <components/num.hpp>
 #include <components/parent.hpp>
+
+#include <imgui.h>
 
 using namespace cubos;
 using namespace engine;
 using namespace core::ecs;
 using namespace core::data;
 using namespace core::memory;
+using namespace cubos::engine;
 
-void setup(Commands& cmds, data::AssetManager& assetManager)
+void setup(Commands cmds, data::AssetManager& assetManager)
 {
     FileSystem::mount("/assets/", std::make_shared<STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
 
@@ -34,29 +41,45 @@ void setup(Commands& cmds, data::AssetManager& assetManager)
     cmds.spawn(scene->blueprint).add("main", Parent{root});
 }
 
-void printStuff(Debug debug)
+void printStuff(World& world)
 {
-    for (auto [entity, pkg] : debug)
+    for (auto entity : world)
     {
         auto name = std::to_string(entity.index);
         auto ser = DebugSerializer(Stream::stdOut);
+        auto pkg = world.pack(entity, [](core::data::Serializer& ser, const core::data::Handle& handle,
+                                         const char* name) { ser.write(handle.getId(), name); });
         ser.write(pkg, name.c_str());
         Stream::stdOut.put('\n');
     }
 }
 
+static void imguiExampleWindow()
+{
+    ImGui::Begin("hi !!!");
+    ImGui::End();
+}
+
 int main(int argc, char** argv)
 {
     // Initialize the asset manager.
-    Cubos(argc, argv)
-        .addResource<data::AssetManager>()
-        .addComponent<Num>()
-        .addComponent<Parent>()
+    Cubos cubos(argc, argv);
 
-        .addStartupSystem(setup, "Setup")
-        .addStartupSystem(printStuff, "End")
+    cubos.addPlugin(plugins::envSettingsPlugin);
+    cubos.addPlugin(plugins::windowPlugin);
+    cubos.addPlugin(plugins::fileSettingsPlugin);
 
-        .addPlugin(cubos::engine::plugins::envSettingsPlugin)
-        .addPlugin(cubos::engine::plugins::windowPlugin)
-        .run();
+    cubos.addResource<data::AssetManager>().addComponent<Num>().addComponent<Parent>();
+    cubos.startupSystem(setup).tagged("Setup");
+    cubos.startupSystem(printStuff).tagged("End");
+
+    // an example of how the imgui plugin can be used to render your own stuff :)
+    cubos.addPlugin(plugins::imguiPlugin);
+    cubos.tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame").beforeTag("EndImGuiFrame");
+    cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
+
+    // or a tesserato tool!
+    cubos.addPlugin(plugins::tools::settingsInspectorPlugin);
+
+    cubos.run();
 }

@@ -32,6 +32,7 @@ endmacro()
 
 # Add samples
 make_sample(NAME "empty")
+make_sample(NAME "systems")
 make_sample(NAME "renderer")
 make_sample(NAME "bloom")
 make_sample(NAME "ssao" ASSETS)

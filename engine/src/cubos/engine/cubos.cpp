@@ -6,6 +6,44 @@
 
 using namespace cubos::engine;
 
+TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher) : dispatcher(dispatcher)
+{
+}
+
+TagBuilder& TagBuilder::beforeTag(const std::string& tag)
+{
+    dispatcher.tagSetBeforeTag(tag);
+    return *this;
+}
+
+TagBuilder& TagBuilder::afterTag(const std::string& tag)
+{
+    dispatcher.tagSetAfterTag(tag);
+    return *this;
+}
+
+SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher) : dispatcher(dispatcher)
+{
+}
+
+SystemBuilder& SystemBuilder::tagged(const std::string& tag)
+{
+    dispatcher.systemSetTag(tag);
+    return *this;
+}
+
+SystemBuilder& SystemBuilder::beforeTag(const std::string& tag)
+{
+    dispatcher.systemSetBeforeTag(tag);
+    return *this;
+}
+
+SystemBuilder& SystemBuilder::afterTag(const std::string& tag)
+{
+    dispatcher.systemSetAfterTag(tag);
+    return *this;
+}
+
 Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 {
     if (!plugins.contains(func))
@@ -20,30 +58,20 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
     return *this;
 }
 
-Cubos& Cubos::putStageAfter(const std::string& stage, const std::string& referenceStage)
+TagBuilder& Cubos::tag(const std::string& tag)
 {
-    if (isStartupStage)
-    {
-        startupDispatcher.putStageAfter(stage, referenceStage);
-    }
-    else
-    {
-        mainDispatcher.putStageAfter(stage, referenceStage);
-    }
-    return *this;
+    mainDispatcher.addTag(tag);
+    TagBuilder* builder = new TagBuilder(mainDispatcher);
+
+    return *builder;
 }
 
-Cubos& Cubos::putStageBefore(const std::string& stage, const std::string& referenceStage)
+TagBuilder& Cubos::startupTag(const std::string& tag)
 {
-    if (isStartupStage)
-    {
-        startupDispatcher.putStageBefore(stage, referenceStage);
-    }
-    else
-    {
-        mainDispatcher.putStageBefore(stage, referenceStage);
-    }
-    return *this;
+    startupDispatcher.addTag(tag);
+    TagBuilder* builder = new TagBuilder(startupDispatcher);
+
+    return *builder;
 }
 
 Cubos::Cubos()
@@ -67,7 +95,11 @@ void Cubos::run()
 {
     plugins.clear();
 
-    cubos::core::ecs::Commands cmds(world);
+    // Compile execution chain
+    startupDispatcher.compileChain();
+    mainDispatcher.compileChain();
+
+    cubos::core::ecs::CommandBuffer cmds(world);
 
     startupDispatcher.callSystems(world, cmds);
 
