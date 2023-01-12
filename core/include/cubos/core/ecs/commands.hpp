@@ -26,12 +26,14 @@ namespace cubos::core::ecs
         /// Gets a reference to a component of the entity.
         /// @tparam ComponentType The type of the component.
         /// @returns A reference to the component.
-        template <typename ComponentType> ComponentType& get();
+        template <typename ComponentType>
+        ComponentType& get();
 
         /// Adds component to the entity.
         /// @tparam ComponentTypes The types of the components.
         /// @param components The components to add.
-        template <typename... ComponentTypes> EntityBuilder& add(ComponentTypes&&... components);
+        template <typename... ComponentTypes>
+        EntityBuilder& add(ComponentTypes&&... components);
 
     private:
         friend CommandBuffer;
@@ -60,7 +62,8 @@ namespace cubos::core::ecs
         /// Aborts if the name is not found.
         /// @tparam ComponentType The type of the component.
         /// @returns A reference to the component.
-        template <typename ComponentType> ComponentType& get(const std::string& name);
+        template <typename ComponentType>
+        ComponentType& get(const std::string& name);
 
         /// Adds component to the blueprint.
         /// Aborts if the name is not found.
@@ -93,18 +96,21 @@ namespace cubos::core::ecs
         /// @tparam ComponentTypes The types of the components to be added.
         /// @param entity The entity to which the components will be added.
         /// @param components The components to add.
-        template <typename... ComponentTypes> void add(Entity entity, ComponentTypes&&... components);
+        template <typename... ComponentTypes>
+        void add(Entity entity, ComponentTypes&&... components);
 
         /// Removes components from an entity.
         /// @tparam ComponentTypes The types of the components to be removed.
         /// @param entity The entity from which the components will be removed.
-        template <typename... ComponentTypes> void remove(Entity entity);
+        template <typename... ComponentTypes>
+        void remove(Entity entity);
 
         /// Creates a new entity with the given components.
         /// @tparam ComponentTypes The types of the components to be added.
         /// @param components The components to add.
         /// @returns The new entity.
-        template <typename... ComponentTypes> EntityBuilder create(ComponentTypes&&... components);
+        template <typename... ComponentTypes>
+        EntityBuilder create(ComponentTypes&&... components);
 
         /// Destroys an entity.
         /// @param entity The entity to destroy.
@@ -131,18 +137,21 @@ namespace cubos::core::ecs
         /// @tparam ComponentTypes The types of the components to be added.
         /// @param entity The entity to which the components will be added.
         /// @param components The components to add.
-        template <typename... ComponentTypes> void add(Entity entity, ComponentTypes&&... components);
+        template <typename... ComponentTypes>
+        void add(Entity entity, ComponentTypes&&... components);
 
         /// Removes components from an entity.
         /// @tparam ComponentTypes The types of the components to be removed.
         /// @param entity The entity from which the components will be removed.
-        template <typename... ComponentTypes> void remove(Entity entity);
+        template <typename... ComponentTypes>
+        void remove(Entity entity);
 
         /// Creates a new entity with the given components.
         /// @tparam ComponentTypes The types of the components to be added.
         /// @param components The components to add.
         /// @returns The new entity.
-        template <typename... ComponentTypes> EntityBuilder create(ComponentTypes&&... components);
+        template <typename... ComponentTypes>
+        EntityBuilder create(ComponentTypes&&... components);
 
         /// Destroys an entity.
         /// @param entity The entity to destroy.
@@ -176,7 +185,8 @@ namespace cubos::core::ecs
 
         /// Implementation of the IBuffer interface for a specific component type.
         /// @tparam ComponentType The type of the component.
-        template <typename ComponentType> struct Buffer : IBuffer
+        template <typename ComponentType>
+        struct Buffer : IBuffer
         {
             // Interface methods implementation.
 
@@ -208,7 +218,8 @@ namespace cubos::core::ecs
 
     // Implementation.
 
-    template <typename ComponentType> ComponentType& EntityBuilder::get()
+    template <typename ComponentType>
+    ComponentType& EntityBuilder::get()
     {
         auto it = this->commands.buffers.find(typeid(ComponentType));
         if (it != this->commands.buffers.end())
@@ -225,13 +236,15 @@ namespace cubos::core::ecs
         abort();
     }
 
-    template <typename... ComponentTypes> EntityBuilder& EntityBuilder::add(ComponentTypes&&... components)
+    template <typename... ComponentTypes>
+    EntityBuilder& EntityBuilder::add(ComponentTypes&&... components)
     {
         this->commands.add(this->eEntity, std::move(components)...);
         return *this;
     }
 
-    template <typename ComponentType> ComponentType& BlueprintBuilder::get(const std::string& name)
+    template <typename ComponentType>
+    ComponentType& BlueprintBuilder::get(const std::string& name)
     {
         auto it = this->commands.buffers.find(typeid(ComponentType));
         if (it != this->commands.buffers.end())
@@ -255,22 +268,26 @@ namespace cubos::core::ecs
         return *this;
     }
 
-    template <typename... ComponentTypes> void Commands::add(Entity entity, ComponentTypes&&... components)
+    template <typename... ComponentTypes>
+    void Commands::add(Entity entity, ComponentTypes&&... components)
     {
         this->buffer.add(entity, std::move(components)...);
     }
 
-    template <typename... ComponentTypes> void Commands::remove(Entity entity)
+    template <typename... ComponentTypes>
+    void Commands::remove(Entity entity)
     {
         this->buffer.remove(entity);
     }
 
-    template <typename... ComponentTypes> EntityBuilder Commands::create(ComponentTypes&&... components)
+    template <typename... ComponentTypes>
+    EntityBuilder Commands::create(ComponentTypes&&... components)
     {
         return this->buffer.create(std::move(components)...);
     }
 
-    template <typename... ComponentTypes> void CommandBuffer::add(Entity entity, ComponentTypes&&... components)
+    template <typename... ComponentTypes>
+    void CommandBuffer::add(Entity entity, ComponentTypes&&... components)
     {
         std::lock_guard<std::mutex> lock(this->mutex);
         Entity::Mask& mask = this->added[entity];
@@ -292,7 +309,8 @@ namespace cubos::core::ecs
             ...);
     }
 
-    template <typename... ComponentTypes> void CommandBuffer::remove(Entity entity)
+    template <typename... ComponentTypes>
+    void CommandBuffer::remove(Entity entity)
     {
         std::lock_guard<std::mutex> lock(this->mutex);
         Entity::Mask& mask = this->removed[entity];
@@ -306,7 +324,8 @@ namespace cubos::core::ecs
             ...);
     }
 
-    template <typename... ComponentTypes> EntityBuilder CommandBuffer::create(ComponentTypes&&... components)
+    template <typename... ComponentTypes>
+    EntityBuilder CommandBuffer::create(ComponentTypes&&... components)
     {
         std::lock_guard<std::mutex> lock(this->mutex);
 
@@ -333,7 +352,8 @@ namespace cubos::core::ecs
         return EntityBuilder(entity, *this);
     }
 
-    template <typename ComponentType> void CommandBuffer::Buffer<ComponentType>::clear()
+    template <typename ComponentType>
+    void CommandBuffer::Buffer<ComponentType>::clear()
     {
         this->components.clear();
     }
