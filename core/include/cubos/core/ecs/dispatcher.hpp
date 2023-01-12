@@ -26,7 +26,8 @@ namespace cubos::core::ecs
         /// Adds a system into a stage.
         /// @param system System to add.
         /// @param stage Stage to add the system in.
-        template <typename F> void addSystem(F system, std::string stage);
+        template <typename F>
+        void addSystem(F system, std::string stage);
 
         /// Calls all systems in order of the stages they are in.
         /// @param world World to call the systems in.
@@ -60,7 +61,8 @@ namespace cubos::core::ecs
         Direction defaultDirection; ///< The direction new stages are put in relation to the default stage.
     };
 
-    template <typename F> void Dispatcher::addSystem(F system, std::string stage)
+    template <typename F>
+    void Dispatcher::addSystem(F system, std::string stage)
     {
         // Register stage if it doesn't exist.
         if (this->stagesByName.find(stage) == this->stagesByName.end())

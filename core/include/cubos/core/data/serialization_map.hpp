@@ -9,7 +9,8 @@ namespace cubos::core::data
     /// Class used to map between references and their serialized identifiers.
     /// @tparam R Reference type.
     /// @tparam I Serialized identifier type.
-    template <typename R, typename I> class SerializationMap final
+    template <typename R, typename I>
+    class SerializationMap final
     {
     public:
         SerializationMap();
@@ -65,7 +66,8 @@ namespace cubos::core::data
 
     // Implementation
 
-    template <typename R, typename I> SerializationMap<R, I>::SerializationMap() : usingFunctions(false)
+    template <typename R, typename I>
+    SerializationMap<R, I>::SerializationMap() : usingFunctions(false)
     {
     }
 
@@ -76,14 +78,16 @@ namespace cubos::core::data
     {
     }
 
-    template <typename R, typename I> void SerializationMap<R, I>::add(const R& reference, const I& id)
+    template <typename R, typename I>
+    void SerializationMap<R, I>::add(const R& reference, const I& id)
     {
         assert(!this->usingFunctions);
         this->refToId.insert({reference, id});
         this->idToRef.insert({id, reference});
     }
 
-    template <typename R, typename I> bool SerializationMap<R, I>::hasRef(const R& reference) const
+    template <typename R, typename I>
+    bool SerializationMap<R, I>::hasRef(const R& reference) const
     {
         if (this->usingFunctions)
         {
@@ -96,7 +100,8 @@ namespace cubos::core::data
         }
     }
 
-    template <typename R, typename I> bool SerializationMap<R, I>::hasId(const I& id) const
+    template <typename R, typename I>
+    bool SerializationMap<R, I>::hasId(const I& id) const
     {
         if (this->usingFunctions)
         {
@@ -109,7 +114,8 @@ namespace cubos::core::data
         }
     }
 
-    template <typename R, typename I> R SerializationMap<R, I>::getRef(const I& id) const
+    template <typename R, typename I>
+    R SerializationMap<R, I>::getRef(const I& id) const
     {
         if (this->usingFunctions)
         {
@@ -123,7 +129,8 @@ namespace cubos::core::data
         }
     }
 
-    template <typename R, typename I> I SerializationMap<R, I>::getId(const R& reference) const
+    template <typename R, typename I>
+    I SerializationMap<R, I>::getId(const R& reference) const
     {
         if (this->usingFunctions)
         {
@@ -137,14 +144,16 @@ namespace cubos::core::data
         }
     }
 
-    template <typename R, typename I> void SerializationMap<R, I>::clear()
+    template <typename R, typename I>
+    void SerializationMap<R, I>::clear()
     {
         this->usingFunctions = false;
         this->refToId.clear();
         this->idToRef.clear();
     }
 
-    template <typename R, typename I> size_t SerializationMap<R, I>::size() const
+    template <typename R, typename I>
+    size_t SerializationMap<R, I>::size() const
     {
         return this->refToId.size();
     }

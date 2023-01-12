@@ -10,7 +10,8 @@
 namespace cubos::core::ecs
 {
     /// Utility struct used to reference resources for reading.
-    template <typename T> class ReadResource
+    template <typename T>
+    class ReadResource
     {
     public:
         ReadResource(ReadResource&&);
@@ -28,7 +29,8 @@ namespace cubos::core::ecs
     };
 
     /// Utility struct used to reference resources for writing.
-    template <typename T> class WriteResource
+    template <typename T>
+    class WriteResource
     {
     public:
         WriteResource(WriteResource&&);
@@ -58,17 +60,20 @@ namespace cubos::core::ecs
         /// @tparam T The type of the resource.
         /// @tparam TArgs The types of the arguments of the constructor of the resource.
         /// @param args The arguments of the constructor of the resource.
-        template <typename T, typename... TArgs> void add(TArgs... args);
+        template <typename T, typename... TArgs>
+        void add(TArgs... args);
 
         /// Reads a resource from the resource manager, locking it for reading.
         /// @tparam T The type of the resource.
         /// @returns A lock referring to the resource.
-        template <typename T> ReadResource<T> read() const;
+        template <typename T>
+        ReadResource<T> read() const;
 
         /// Writes a resource to the resource manager, locking it for writing.
         /// @tparam T The type of the resource.
         /// @returns A lock referring to the resource.
-        template <typename T> WriteResource<T> write() const;
+        template <typename T>
+        WriteResource<T> write() const;
 
     private:
         /// Data specific to a resource.
@@ -100,7 +105,8 @@ namespace cubos::core::ecs
         // Do nothing.
     }
 
-    template <typename T> const T& ReadResource<T>::get() const
+    template <typename T>
+    const T& ReadResource<T>::get() const
     {
         return this->resource;
     }
@@ -118,7 +124,8 @@ namespace cubos::core::ecs
         // Do nothing.
     }
 
-    template <typename T> T& WriteResource<T>::get() const
+    template <typename T>
+    T& WriteResource<T>::get() const
     {
         return this->resource;
     }
@@ -137,7 +144,8 @@ namespace cubos::core::ecs
         // Do nothing.
     }
 
-    template <typename T, typename... TArgs> void ResourceManager::add(TArgs... args)
+    template <typename T, typename... TArgs>
+    void ResourceManager::add(TArgs... args)
     {
         auto it = resources.find(typeid(T));
         if (it != resources.end())
@@ -149,7 +157,8 @@ namespace cubos::core::ecs
         this->resources.try_emplace(typeid(T), new T(args...), [](void* data) { delete static_cast<T*>(data); });
     }
 
-    template <typename T> ReadResource<T> ResourceManager::read() const
+    template <typename T>
+    ReadResource<T> ResourceManager::read() const
     {
         auto it = resources.find(typeid(T));
         if (it == resources.end())
@@ -162,7 +171,8 @@ namespace cubos::core::ecs
         return ReadResource<T>(*static_cast<const T*>(resource.data), std::shared_lock(resource.mutex));
     }
 
-    template <typename T> WriteResource<T> ResourceManager::write() const
+    template <typename T>
+    WriteResource<T> ResourceManager::write() const
     {
         auto it = resources.find(typeid(T));
         if (it == resources.end())

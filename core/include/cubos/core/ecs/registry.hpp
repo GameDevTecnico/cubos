@@ -28,7 +28,8 @@ namespace cubos::core::ecs
         /// Registers a new component type.
         /// @tparam T The component type to register.
         /// @param name The name of the component.
-        template <typename ComponentType> static void add(const std::string& name);
+        template <typename ComponentType>
+        static void add(const std::string& name);
 
         /// Gets the name of a component type.
         /// @param index The type index of the component.
@@ -55,7 +56,8 @@ namespace cubos::core::ecs
 
     // Implementation.
 
-    template <typename ComponentType> void Registry::add(const std::string& name)
+    template <typename ComponentType>
+    void Registry::add(const std::string& name)
     {
         auto& creators = Registry::creators();
         auto& names = Registry::names();
