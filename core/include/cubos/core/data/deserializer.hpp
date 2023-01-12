@@ -285,7 +285,8 @@ namespace cubos::core::data
         d.readString(value);
     }
 
-    template <typename T> void deserialize(Deserializer& d, glm::tvec2<T>& value)
+    template <typename T>
+    void deserialize(Deserializer& d, glm::tvec2<T>& value)
     {
         d.beginObject();
         d.read(value.x);
@@ -293,26 +294,18 @@ namespace cubos::core::data
         d.endObject();
     }
 
-    template <typename T> void deserialize(Deserializer& d, glm::tvec3<T>& value)
-    {
-        d.beginObject();
-        d.read(value.x);
-        d.read(value.y);
-        d.read(value.z);
-        d.endObject();
-    }
-
-    template <typename T> void deserialize(Deserializer& d, glm::tvec4<T>& value)
+    template <typename T>
+    void deserialize(Deserializer& d, glm::tvec3<T>& value)
     {
         d.beginObject();
         d.read(value.x);
         d.read(value.y);
         d.read(value.z);
-        d.read(value.w);
         d.endObject();
     }
 
-    template <typename T> void deserialize(Deserializer& d, glm::tquat<T>& value)
+    template <typename T>
+    void deserialize(Deserializer& d, glm::tvec4<T>& value)
     {
         d.beginObject();
         d.read(value.x);
@@ -322,7 +315,19 @@ namespace cubos::core::data
         d.endObject();
     }
 
-    template <typename T> void deserialize(Deserializer& d, glm::tmat4x4<T>& mat)
+    template <typename T>
+    void deserialize(Deserializer& d, glm::tquat<T>& value)
+    {
+        d.beginObject();
+        d.read(value.x);
+        d.read(value.y);
+        d.read(value.z);
+        d.read(value.w);
+        d.endObject();
+    }
+
+    template <typename T>
+    void deserialize(Deserializer& d, glm::tmat4x4<T>& mat)
     {
         d.beginObject();
         d.read(mat[0]);
@@ -343,7 +348,8 @@ namespace cubos::core::data
         d.endArray();
     }
 
-    template <> inline void deserialize(Deserializer& d, std::vector<bool>& vec)
+    template <>
+    inline void deserialize(Deserializer& d, std::vector<bool>& vec)
     {
         size_t length = d.beginArray();
         vec.resize(length);

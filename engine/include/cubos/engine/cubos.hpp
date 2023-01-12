@@ -42,19 +42,22 @@ namespace cubos::engine
         /// @tparam TArgs The types of the arguments passed to the resource's constructor.
         /// @param args The arguments passed to the resource's constructor.
         /// @return Reference to this object, for chaining.
-        template <typename R, typename... TArgs> Cubos& addResource(TArgs... args);
+        template <typename R, typename... TArgs>
+        Cubos& addResource(TArgs... args);
 
         /// Adds a new component type to the engine.
         /// @tparam C The type of the component.
         /// @return Reference to this object, for chaining.
-        template <typename C> Cubos& addComponent();
+        template <typename C>
+        Cubos& addComponent();
 
         /// Adds a new system to the engine, which will be executed every iteration of the main loop.
         /// If the stage doesn't already exist, it is created in the previously specified default position.
         /// @tparam F The type of the system function.
         /// @param func The system function.
         /// @param stage The stage in which the system should be executed.
-        template <typename F> Cubos& addSystem(F func, std::string stage);
+        template <typename F>
+        Cubos& addSystem(F func, std::string stage);
 
         /// Adds a new startup system to the engine.
         /// Startup systems are executed before the main loop starts.
@@ -62,7 +65,8 @@ namespace cubos::engine
         /// @tparam F The type of the system function.
         /// @param func The system function.
         /// @param stage The stage in which the system should be executed.
-        template <typename F> Cubos& addStartupSystem(F func, std::string stage);
+        template <typename F>
+        Cubos& addStartupSystem(F func, std::string stage);
 
         /// Sets a given stage to happen after another stage.
         /// The current stage must exist, but the reference stage may not, in which case it
@@ -91,26 +95,30 @@ namespace cubos::engine
 
     // Implementation.
 
-    template <typename R, typename... TArgs> Cubos& Cubos::addResource(TArgs... args)
+    template <typename R, typename... TArgs>
+    Cubos& Cubos::addResource(TArgs... args)
     {
         world.registerResource<R>(args...);
         return *this;
     }
 
-    template <typename C> Cubos& Cubos::addComponent()
+    template <typename C>
+    Cubos& Cubos::addComponent()
     {
         world.registerComponent<C>();
         return *this;
     }
 
-    template <typename F> Cubos& Cubos::addSystem(F func, std::string stage)
+    template <typename F>
+    Cubos& Cubos::addSystem(F func, std::string stage)
     {
         mainDispatcher.addSystem(func, stage);
         isStartupStage = false;
         return *this;
     }
 
-    template <typename F> Cubos& Cubos::addStartupSystem(F func, std::string stage)
+    template <typename F>
+    Cubos& Cubos::addStartupSystem(F func, std::string stage)
     {
         startupDispatcher.addSystem(func, stage);
         isStartupStage = true;
