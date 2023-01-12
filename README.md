@@ -113,7 +113,7 @@ command: `cd build/core && ctest`.
 
 ## Who is making this engine
 
-We are  [Gamedev Técnico](https://www.instagram.com/gamedevtecnico/), a student
+We are  [GameDev Técnico](https://www.instagram.com/gamedevtecnico/), a student
 group from [Instituto Superior Técnico](https://tecnico.ulisboa.pt/en/) who
 makes games. Our goal is to build a game engine from the ground up. 
 

@@ -1,12 +1,10 @@
 on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - main
+  pull_request_review:
+    types: [submitted]
 name: clang-format Code Formatter
 jobs:
   lint:
+    if: github.event.review.state == 'approved'
     name: clang-format Code Formatter
     runs-on: ubuntu-latest
     steps:
