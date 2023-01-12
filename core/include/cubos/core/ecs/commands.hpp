@@ -352,8 +352,7 @@ namespace cubos::core::ecs
         return EntityBuilder(entity, *this);
     }
 
-    template <typename ComponentType>
-    void CommandBuffer::Buffer<ComponentType>::clear()
+    template <typename ComponentType> void CommandBuffer::Buffer<ComponentType>::clear()
     {
         this->components.clear();
     }

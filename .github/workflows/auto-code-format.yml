@@ -11,7 +11,7 @@ jobs:
     - name: Code Formatter
       uses: roby2014/clang-format-action@v1.0
       env:
-        BRANCH: ${{ github.event.pull_request.base.ref }}
+        BRANCH: ${{ github.event.pull_request.head.ref }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         exclude-regex: 'lib/'
