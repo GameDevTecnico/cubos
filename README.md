@@ -18,7 +18,7 @@ high-performance engine.
 
 ## Structure
 
-The source code is divided into three main parts:
+The source code is divided into four main parts:
 - `core`: library which is shared between the tools and the games. This
 includes some basic functionality like serialization, logging, render devices,
 input handling and others.
