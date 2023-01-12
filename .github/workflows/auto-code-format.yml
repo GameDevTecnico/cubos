@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Code Formatter
-      uses: roby2014/clang-format-action@v1.0
+      uses: roby2014/clang-format-action@pr_prt
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
