@@ -158,6 +158,7 @@ namespace cubos::core::ecs
 
         /// Variables for holding information after call chain is compiled.
         std::vector<System> systems; ///< Compiled order of running systems.
+        bool prepared = false;       ///< Whether the systems are prepared for execution.
     };
 
     template <typename F> void Dispatcher::addSystem(F func)

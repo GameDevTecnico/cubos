@@ -52,6 +52,11 @@ namespace cubos::core::ecs
         AnySystemWrapper(SystemInfo&& info);
         virtual ~AnySystemWrapper() = default;
 
+        /// Prepares the system for being executed on the given world.
+        /// Requires exclusive access to the world, must be called before calling the system.
+        /// @param world The world to prepare the system for.
+        virtual void prepare(World& world) = 0;
+
         /// Calls the wrapped system with parameters taken from the given world.
         /// @param world The world used by the system.
         /// @param commands The commands object used by the system.
@@ -131,6 +136,29 @@ namespace cubos::core::ecs
             static Commands arg(CommandBuffer* fetched);
         };
 
+        template <typename T> struct SystemFetcher<EventReader<T>>
+        {
+            using Type = std::tuple<size_t&, ReadResource<EventPipe<T>>>;
+            using State = size_t; // Number of events read.
+
+            static void add(SystemInfo& info);
+            static State prepare(World& world);
+            static std::tuple<size_t&, ReadResource<EventPipe<T>>> fetch(World& world, CommandBuffer& commands,
+                                                                         State& state);
+            static EventReader<T> arg(std::tuple<size_t&, ReadResource<EventPipe<T>>>&& fetched);
+        };
+
+        template <typename T> struct SystemFetcher<EventWriter<T>>
+        {
+            using Type = WriteResource<EventPipe<T>>;
+            using State = std::monostate;
+
+            static void add(SystemInfo& info);
+            static State prepare(World& world);
+            static WriteResource<EventPipe<T>> fetch(World& world, CommandBuffer& commands, State& state);
+            static EventWriter<T> arg(WriteResource<EventPipe<T>>&& fetched);
+        };
+
         template <typename... Args> struct SystemFetcher<std::tuple<Args...>>
         {
             using Type = std::tuple<typename SystemFetcher<Args>::Type...>;
@@ -184,12 +212,14 @@ namespace cubos::core::ecs
         SystemWrapper(F system);
         virtual ~SystemWrapper() override = default;
 
+        /// @see AnySystemWrapper::prepare
+        virtual void prepare(World& world) override;
         /// @see AnySystemWrapper::call
         virtual typename impl::SystemTraits<F>::Return call(World& world, CommandBuffer& commands) override;
 
     private:
-        F system;                                    ///< The wrapped system.
-        typename impl::SystemTraits<F>::State state; ///< The state of the system.
+        F system;                                                   ///< The wrapped system.
+        std::optional<typename impl::SystemTraits<F>::State> state; ///< The state of the system.
     };
 
     // Implementation.
@@ -225,16 +255,33 @@ namespace cubos::core::ecs
         // Do nothing.
     }
 
+    template <typename F> void SystemWrapper<F>::prepare(World& world)
+    {
+        if (this->state.has_value())
+        {
+            CUBOS_CRITICAL("System was prepared twice");
+            abort();
+        }
+
+        this->state = impl::SystemTraits<F>::prepare(world);
+    }
+
     template <typename F>
     typename impl::SystemTraits<F>::Return SystemWrapper<F>::call(World& world, CommandBuffer& commands)
     {
         using Arguments = typename impl::SystemTraits<F>::Arguments;
         using Fetcher = impl::SystemFetcher<Arguments>;
 
+        if (!this->state.has_value())
+        {
+            CUBOS_CRITICAL("System was not prepared");
+            abort();
+        }
+
         // 1. Fetch the arguments from the world (ReadResource, etc).
         // 2. Convert the fetched data into the actual arguments (e.g: ReadResource<R> to const R&)
         // 3. Pass it into the system.
-        auto fetched = Fetcher::fetch(world, commands, this->state);
+        auto fetched = Fetcher::fetch(world, commands, this->state.value());
         auto args = Fetcher::arg(std::move(fetched));
         return std::apply(this->system, std::forward<Arguments>(args));
     }
@@ -349,6 +396,52 @@ namespace cubos::core::ecs
     inline Commands impl::SystemFetcher<Commands>::arg(CommandBuffer* fetched)
     {
         return Commands(*fetched);
+    }
+
+    template <typename T> void impl::SystemFetcher<EventReader<T>>::add(SystemInfo& info)
+    {
+        info.resourcesRead.insert(typeid(T));
+    }
+
+    template <typename T> size_t impl::SystemFetcher<EventReader<T>>::prepare(World& world)
+    {
+        world.write<EventPipe<T>>()->addReader();
+        return 0; // Initially we haven't read any events.
+    }
+
+    template <typename T>
+    std::tuple<size_t&, ReadResource<EventPipe<T>>> impl::SystemFetcher<EventReader<T>>::fetch(World& world,
+                                                                                               CommandBuffer&,
+                                                                                               State& state)
+    {
+        return std::forward_as_tuple(state, world.read<EventPipe<T>>());
+    }
+
+    template <typename T>
+    EventReader<T> impl::SystemFetcher<EventReader<T>>::arg(std::tuple<size_t&, ReadResource<EventPipe<T>>>&& fetched)
+    {
+        return EventReader<T>(std::get<0>(fetched), std::get<1>(fetched));
+    }
+
+    template <typename T> void impl::SystemFetcher<EventWriter<T>>::add(SystemInfo& info)
+    {
+        info.resourcesWritten.insert(typeid(T));
+    }
+
+    template <typename T> std::monostate impl::SystemFetcher<EventWriter<T>>::prepare(World&)
+    {
+        return std::monostate();
+    }
+
+    template <typename T>
+    WriteResource<EventPipe<T>> impl::SystemFetcher<EventWriter<T>>::fetch(World& world, CommandBuffer&, State&)
+    {
+        return world.write<EventPipe<T>>();
+    }
+
+    template <typename T> EventWriter<T> impl::SystemFetcher<EventWriter<T>>::arg(WriteResource<EventPipe<T>>&& fetched)
+    {
+        return EventWriter<T>(fetched);
     }
 
     template <typename... Args> void impl::SystemFetcher<std::tuple<Args...>>::add(SystemInfo& info)
