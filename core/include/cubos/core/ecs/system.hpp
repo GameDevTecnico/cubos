@@ -200,6 +200,21 @@ namespace cubos::core::ecs
         template <typename F> struct SystemTraits : SystemTraits<decltype(&std::remove_reference<F>::type::operator())>
         {
         };
+
+        /// Used to get the index of a type in a tuple.
+        /// Had to use this instead of std::apply due to a bug in MSVC :(
+        /// Taken from https://stackoverflow.com/questions/18063451.
+        template <class T, class Tuple> struct Index;
+
+        template <class T, class... Types> struct Index<T, std::tuple<T, Types...>>
+        {
+            static const std::size_t value = 0;
+        };
+
+        template <class T, class U, class... Types> struct Index<T, std::tuple<U, Types...>>
+        {
+            static const std::size_t value = 1 + Index<T, std::tuple<Types...>>::value;
+        };
     } // namespace impl
 
     /// A system wrapper for a system which takes some arguments.
@@ -463,9 +478,8 @@ namespace cubos::core::ecs
     std::tuple<typename impl::SystemFetcher<Args>::Type...> impl::SystemFetcher<std::tuple<Args...>>::fetch(
         World& world, CommandBuffer& commands, State& state)
     {
-        return std::apply(
-            [&](auto&... s) { return std::make_tuple(impl::SystemFetcher<Args>::fetch(world, commands, s)...); },
-            state);
+        return std::make_tuple(impl::SystemFetcher<Args>::fetch(
+            world, commands, std::get<impl::Index<Args, std::tuple<Args...>>::value>(state))...);
     }
 
     template <typename... Args>
