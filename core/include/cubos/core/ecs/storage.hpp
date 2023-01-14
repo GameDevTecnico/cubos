@@ -47,7 +47,8 @@ namespace cubos::core::ecs
     /// @brief Storage is an abstract container for a certain type with common operations, such as,
     /// insert, get and erase.
     /// @tparam T The type to be stored in the storage.
-    template <typename T> class Storage : public IStorage
+    template <typename T>
+    class Storage : public IStorage
     {
     public:
         using Type = T;
@@ -98,7 +99,8 @@ namespace cubos::core::ecs
         return false;
     }
 
-    template <typename T> std::type_index Storage<T>::type() const
+    template <typename T>
+    std::type_index Storage<T>::type() const
     {
         return std::type_index(typeid(T));
     }

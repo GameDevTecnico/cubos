@@ -30,7 +30,8 @@ namespace cubos::core::ecs
         /// @tparam ComponentTypes The types of the components.
         /// @param entity The entity to add the components to.
         /// @param components The components to add.
-        template <typename... ComponentTypes> void add(Entity entity, const ComponentTypes&... components);
+        template <typename... ComponentTypes>
+        void add(Entity entity, const ComponentTypes&... components);
 
         /// Deserializes a component and adds it to an entity.
         /// @param entity The entity to add the component to.
@@ -90,7 +91,8 @@ namespace cubos::core::ecs
 
         /// Implementation of the IBuffer interface for a single component type.
         /// @tparam ComponentType The type of the component.
-        template <typename ComponentType> struct Buffer : IBuffer
+        template <typename ComponentType>
+        struct Buffer : IBuffer
         {
             // Interface methods implementation.
 
@@ -125,7 +127,8 @@ namespace cubos::core::ecs
         return entity;
     }
 
-    template <typename... ComponentTypes> void Blueprint::add(Entity entity, const ComponentTypes&... components)
+    template <typename... ComponentTypes>
+    void Blueprint::add(Entity entity, const ComponentTypes&... components)
     {
         assert(entity.generation == 0 && this->map.hasRef(entity));
 
@@ -201,7 +204,8 @@ namespace cubos::core::ecs
         buffer->mutex.unlock();
     }
 
-    template <typename ComponentType> Blueprint::IBuffer* Blueprint::Buffer<ComponentType>::create()
+    template <typename ComponentType>
+    Blueprint::IBuffer* Blueprint::Buffer<ComponentType>::create()
     {
         return new Buffer<ComponentType>();
     }

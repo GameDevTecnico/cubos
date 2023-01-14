@@ -65,7 +65,8 @@ namespace cubos::core::ecs
         /// Adds a system, and sets it as the current system for further
         /// settings.
         /// @param func System to add.
-        template <typename F> void addSystem(F func);
+        template <typename F>
+        void addSystem(F func);
 
         /// Sets the tag for the current system.
         /// @param tag The tag to run under.
@@ -79,7 +80,8 @@ namespace cubos::core::ecs
         /// Sets the current system to run after a given system.
         /// The specified system must exist.
         /// @param func The system to run after.
-        template <typename F> void systemSetAfterSystem(F func);
+        template <typename F>
+        void systemSetAfterSystem(F func);
 
         /// Sets the current system to run before the tag.
         /// If the specified tag doesn't exist, it is internally created.
@@ -89,7 +91,8 @@ namespace cubos::core::ecs
         /// Sets the current system to run before the system.
         /// The specified system must exist.
         /// @param func The system to run before.
-        template <typename F> void systemSetBeforeSystem(F func);
+        template <typename F>
+        void systemSetBeforeSystem(F func);
 
         /// Compiles a call chain. This takes all pending systems and
         /// determines their execution order. This is required before
@@ -160,7 +163,8 @@ namespace cubos::core::ecs
         std::vector<System> systems; ///< Compiled order of running systems.
     };
 
-    template <typename F> void Dispatcher::addSystem(F func)
+    template <typename F>
+    void Dispatcher::addSystem(F func)
     {
         // Wrap the system and put it in the pending queue
         System system = {nullptr, std::make_shared<SystemWrapper<F>>(func)};
@@ -168,7 +172,8 @@ namespace cubos::core::ecs
         currSystem = &pendingSystems.back();
     }
 
-    template <typename F> void Dispatcher::systemSetAfterSystem(F func)
+    template <typename F>
+    void Dispatcher::systemSetAfterSystem(F func)
     {
         auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System& system) {
             SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system.system.get());
@@ -190,7 +195,8 @@ namespace cubos::core::ecs
         it->settings->before.system.push_back(currSystem);
     }
 
-    template <typename F> void Dispatcher::systemSetBeforeSystem(F func)
+    template <typename F>
+    void Dispatcher::systemSetBeforeSystem(F func)
     {
         auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System& system) {
             SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system.system.get());

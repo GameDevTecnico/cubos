@@ -18,7 +18,7 @@ high-performance engine.
 
 ## Structure
 
-The source code is divided into three main parts:
+The source code is divided into four main parts:
 - `core`: library which is shared between the tools and the games. This
 includes some basic functionality like serialization, logging, render devices,
 input handling and others.
@@ -113,7 +113,7 @@ command: `cd build/core && ctest`.
 
 ## Who is making this engine
 
-We are  [Gamedev Técnico](https://www.instagram.com/gamedevtecnico/), a student
+We are  [GameDev Técnico](https://www.instagram.com/gamedevtecnico/), a student
 group from [Instituto Superior Técnico](https://tecnico.ulisboa.pt/en/) who
 makes games. Our goal is to build a game engine from the ground up. 
 

@@ -123,7 +123,8 @@ namespace cubos::core::memory
         /// @tparam TArgs The types of the remaining arguments.
         /// @param arg First argument to print.
         /// @param args The arguments to print.
-        template <typename T, typename... TArgs> void printf(const char* fmt, T arg, TArgs... args);
+        template <typename T, typename... TArgs>
+        void printf(const char* fmt, T arg, TArgs... args);
 
         /// Formatted print recursion tail function.
         /// @param fmt The remainder format string.
@@ -209,7 +210,8 @@ namespace cubos::core::memory
         this->print(static_cast<uint64_t>(value), base);
     }
 
-    template <typename T, typename... TArgs> void Stream::printf(const char* fmt, T arg, TArgs... args)
+    template <typename T, typename... TArgs>
+    void Stream::printf(const char* fmt, T arg, TArgs... args)
     {
         for (;; ++fmt)
         {

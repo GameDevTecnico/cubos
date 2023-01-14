@@ -21,7 +21,8 @@ namespace cubos::core::ecs
     namespace impl
     {
         /// Fetches the requested type from a world.
-        template <typename T> struct QueryFetcher
+        template <typename T>
+        struct QueryFetcher
         {
             // This should never be instantiated.
             static_assert(!std::is_same_v<T, T>,
@@ -29,7 +30,8 @@ namespace cubos::core::ecs
         };
 
         /// @tparam Component The type of the component to fetch.
-        template <typename Component> struct QueryFetcher<Component&>
+        template <typename Component>
+        struct QueryFetcher<Component&>
         {
             using Type = WriteStorage<Component>;
 
@@ -51,7 +53,8 @@ namespace cubos::core::ecs
         };
 
         /// @tparam Component The type of the component to fetch.
-        template <typename Component> struct QueryFetcher<const Component&>
+        template <typename Component>
+        struct QueryFetcher<const Component&>
         {
             using Type = ReadStorage<Component>;
 
@@ -73,7 +76,8 @@ namespace cubos::core::ecs
         };
 
         /// @tparam Component The type of the component to fetch.
-        template <typename Component> struct QueryFetcher<Component*>
+        template <typename Component>
+        struct QueryFetcher<Component*>
         {
             using Type = WriteStorage<Component>;
 
@@ -95,7 +99,8 @@ namespace cubos::core::ecs
         };
 
         /// @tparam Component The type of the component to fetch.
-        template <typename Component> struct QueryFetcher<const Component*>
+        template <typename Component>
+        struct QueryFetcher<const Component*>
         {
             using Type = ReadStorage<Component>;
 
@@ -128,7 +133,8 @@ namespace cubos::core::ecs
     /// is not needed, a const reference/pointer should be used.
     ///
     /// @tparam ComponentTypes The types of the component references to be queried.
-    template <typename... ComponentTypes> class Query
+    template <typename... ComponentTypes>
+    class Query
     {
     public:
         using Fetched = std::tuple<typename impl::QueryFetcher<ComponentTypes>::Type...>;
@@ -240,24 +246,28 @@ namespace cubos::core::ecs
         }
     }
 
-    template <typename... ComponentTypes> typename Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::begin()
+    template <typename... ComponentTypes>
+    typename Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::begin()
     {
         return Iterator(this->world, this->fetched, this->world.entityManager.withMask(this->mask));
     }
 
-    template <typename... ComponentTypes> typename Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::end()
+    template <typename... ComponentTypes>
+    typename Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::end()
     {
         return Iterator(this->world, this->fetched, this->world.entityManager.end());
     }
 
-    template <typename... ComponentTypes> QueryInfo Query<ComponentTypes...>::info()
+    template <typename... ComponentTypes>
+    QueryInfo Query<ComponentTypes...>::info()
     {
         QueryInfo info;
         ([&]() { impl::QueryFetcher<ComponentTypes>::add(info); }(), ...);
         return info;
     }
 
-    template <typename Component> void impl::QueryFetcher<Component&>::add(QueryInfo& info)
+    template <typename Component>
+    void impl::QueryFetcher<Component&>::add(QueryInfo& info)
     {
         info.written.insert(typeid(Component));
     }
@@ -274,7 +284,8 @@ namespace cubos::core::ecs
         return *lock.get().get(entity.index);
     }
 
-    template <typename Component> void impl::QueryFetcher<const Component&>::add(QueryInfo& info)
+    template <typename Component>
+    void impl::QueryFetcher<const Component&>::add(QueryInfo& info)
     {
         info.read.insert(typeid(Component));
     }
@@ -291,7 +302,8 @@ namespace cubos::core::ecs
         return *lock.get().get(entity.index);
     }
 
-    template <typename Component> void impl::QueryFetcher<Component*>::add(QueryInfo& info)
+    template <typename Component>
+    void impl::QueryFetcher<Component*>::add(QueryInfo& info)
     {
         info.written.insert(typeid(Component));
     }
@@ -315,7 +327,8 @@ namespace cubos::core::ecs
         }
     }
 
-    template <typename Component> void impl::QueryFetcher<const Component*>::add(QueryInfo& info)
+    template <typename Component>
+    void impl::QueryFetcher<const Component*>::add(QueryInfo& info)
     {
         info.read.insert(typeid(Component));
     }
