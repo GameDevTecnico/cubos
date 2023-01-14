@@ -64,15 +64,15 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"action_8hpp_source.html",
-"classcubos_1_1core_1_1data_1_1JSONSerializer.html#ae69d2ac7057aa790db2aa605b1368bf3",
-"classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ab07c473a3030bb9d8987f3ecf932143e",
-"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#ad8846177f2a2bf6cbff6b74592e56a54",
-"classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html",
-"guide-hello-world.html",
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa8145459ca7947c51cc8c594bcd35ee80",
-"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a069b6f2f9f063967fd8a8c3397d4129e",
-""
+"",
+"classcubos_1_1core_1_1data_1_1JSONSerializer.html#a5cea905275e5a4e9c6cdecf4d234ee6f",
+"classcubos_1_1core_1_1ecs_1_1Dispatcher.html",
+"classcubos_1_1core_1_1gl_1_1impl_1_1Framebuffer.html",
+"classcubos_1_1engine_1_1data_1_1AssetManager.html#a2875a2906168077a9d6da203692c97c8",
+"functions_func_m.html",
+"namespacecubos_1_1core_1_1gl.html#ab4be653cdc055ecdcaca53e7382883fa",
+"scale_8hpp_source.html",
+"structcubos_1_1engine_1_1data_1_1Palette.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

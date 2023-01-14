@@ -61,6 +61,10 @@ var hierarchy =
     [ "Event< Key >", "classcubos_1_1core_1_1Event.html", null ],
     [ "Event< Modifiers >", "classcubos_1_1core_1_1Event.html", null ],
     [ "Event< MouseButton >", "classcubos_1_1core_1_1Event.html", null ],
+    [ "EventPipe< T >", "classcubos_1_1core_1_1ecs_1_1EventPipe.html", null ],
+    [ "EventReader< T, M >", "classcubos_1_1core_1_1ecs_1_1EventReader.html", null ],
+    [ "EventReader< T, M >", "classcubos_1_1core_1_1ecs_1_1EventReader.html", null ],
+    [ "EventWriter< T >", "classcubos_1_1core_1_1ecs_1_1EventWriter.html", null ],
     [ "DepthStencilStateDesc::Stencil::Face", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil_1_1Face.html", null ],
     [ "FileSystem", "classcubos_1_1core_1_1data_1_1FileSystem.html", null ],
     [ "Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html", null ],
@@ -84,6 +88,7 @@ var hierarchy =
       ] ]
     ] ],
     [ "EntityManager::Iterator", "classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html", null ],
+    [ "EventReader< T, M >::Iterator", "classcubos_1_1core_1_1ecs_1_1EventReader_1_1Iterator.html", null ],
     [ "Query< ComponentTypes >::Iterator", "classcubos_1_1core_1_1ecs_1_1Query_1_1Iterator.html", null ],
     [ "Loader", "classcubos_1_1engine_1_1data_1_1Loader.html", [
       [ "GridLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html", null ],
