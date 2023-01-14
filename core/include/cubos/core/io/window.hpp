@@ -5,6 +5,7 @@
 #include <cubos/core/io/cursor.hpp>
 
 #include <glm/glm.hpp>
+#include <optional>
 #include <variant>
 #include <memory>
 #include <string>
