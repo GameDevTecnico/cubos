@@ -8,7 +8,7 @@ set(CORE_SAMPLES_SOURCES
     "render_device_compute.cpp"
     "debug_renderer.cpp"
     "serialization.cpp"
-    "input_manager.cpp"
+    #"input_manager.cpp"
     "embedded_archive.cpp"
     "ecs.cpp"
     "ui.cpp"
