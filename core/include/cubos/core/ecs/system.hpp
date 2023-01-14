@@ -257,13 +257,16 @@ namespace cubos::core::ecs
 
     template <typename F> void SystemWrapper<F>::prepare(World& world)
     {
+        using Arguments = typename impl::SystemTraits<F>::Arguments;
+        using Fetcher = impl::SystemFetcher<Arguments>;
+
         if (this->state.has_value())
         {
             CUBOS_CRITICAL("System was prepared twice");
             abort();
         }
 
-        this->state = impl::SystemTraits<F>::prepare(world);
+        this->state = Fetcher::prepare(world);
     }
 
     template <typename F>

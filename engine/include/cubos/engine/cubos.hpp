@@ -1,6 +1,7 @@
 #ifndef CUBOS_ENGINE_CUBOS_HPP
 #define CUBOS_ENGINE_CUBOS_HPP
 
+#include <cubos/core/ecs/event_pipe.hpp>
 #include <cubos/core/ecs/dispatcher.hpp>
 #include <cubos/core/ecs/system.hpp>
 #include <cubos/core/ecs/world.hpp>
@@ -100,6 +101,11 @@ namespace cubos::engine
         /// @return Reference to this object, for chaining.
         template <typename C> Cubos& addComponent();
 
+        /// Adds a new event type to the engine.
+        /// @tparam E The type of the event.
+        /// @return Reference to this object, for chaining.
+        template <typename E> Cubos& addEvent();
+
         /// Sets the current tag for the main dispatcher. If the tag doesn't exist, it will be created.
         /// Subsequent calls will set this tag's settings.
         /// @param tag The tag to set.
@@ -153,6 +159,13 @@ namespace cubos::engine
     template <typename C> Cubos& Cubos::addComponent()
     {
         world.registerComponent<C>();
+        return *this;
+    }
+
+    template <typename E> Cubos& Cubos::addEvent()
+    {
+        // The user could register this manually, but using this method is more convenient.
+        world.registerResource<core::ecs::EventPipe<E>>();
         return *this;
     }
 
