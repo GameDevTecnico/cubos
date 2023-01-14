@@ -136,7 +136,7 @@ namespace cubos::core::ecs
             static Commands arg(CommandBuffer* fetched);
         };
 
-        template <typename T> struct SystemFetcher<EventReader<T>>
+        template <typename T, unsigned int M> struct SystemFetcher<EventReader<T, M>>
         {
             using Type = std::tuple<size_t&, ReadResource<EventPipe<T>>>;
             using State = size_t; // Number of events read.
@@ -145,7 +145,7 @@ namespace cubos::core::ecs
             static State prepare(World& world);
             static std::tuple<size_t&, ReadResource<EventPipe<T>>> fetch(World& world, CommandBuffer& commands,
                                                                          State& state);
-            static EventReader<T> arg(std::tuple<size_t&, ReadResource<EventPipe<T>>>&& fetched);
+            static EventReader<T, M> arg(std::tuple<size_t&, ReadResource<EventPipe<T>>>&& fetched);
         };
 
         template <typename T> struct SystemFetcher<EventWriter<T>>
@@ -416,27 +416,28 @@ namespace cubos::core::ecs
         return Commands(*fetched);
     }
 
-    template <typename T> void impl::SystemFetcher<EventReader<T>>::add(SystemInfo& info)
+    template <typename T, unsigned int M> void impl::SystemFetcher<EventReader<T, M>>::add(SystemInfo& info)
     {
         info.resourcesRead.insert(typeid(T));
     }
 
-    template <typename T> size_t impl::SystemFetcher<EventReader<T>>::prepare(World& world)
+    template <typename T, unsigned int M> size_t impl::SystemFetcher<EventReader<T, M>>::prepare(World& world)
     {
         world.write<EventPipe<T>>().get().addReader();
         return 0; // Initially we haven't read any events.
     }
 
-    template <typename T>
-    std::tuple<size_t&, ReadResource<EventPipe<T>>> impl::SystemFetcher<EventReader<T>>::fetch(World& world,
-                                                                                               CommandBuffer&,
-                                                                                               State& state)
+    template <typename T, unsigned int M>
+    std::tuple<size_t&, ReadResource<EventPipe<T>>> impl::SystemFetcher<EventReader<T, M>>::fetch(World& world,
+                                                                                                  CommandBuffer&,
+                                                                                                  State& state)
     {
         return std::forward_as_tuple(state, world.read<EventPipe<T>>());
     }
 
-    template <typename T>
-    EventReader<T> impl::SystemFetcher<EventReader<T>>::arg(std::tuple<size_t&, ReadResource<EventPipe<T>>>&& fetched)
+    template <typename T, unsigned int M>
+    EventReader<T, M> impl::SystemFetcher<EventReader<T, M>>::arg(
+        std::tuple<size_t&, ReadResource<EventPipe<T>>>&& fetched)
     {
         return EventReader<T>(std::get<1>(fetched).get(), std::get<0>(fetched));
     }
