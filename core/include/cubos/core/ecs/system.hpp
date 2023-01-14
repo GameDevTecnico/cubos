@@ -408,7 +408,7 @@ namespace cubos::core::ecs
 
     template <typename T> size_t impl::SystemFetcher<EventReader<T>>::prepare(World& world)
     {
-        world.write<EventPipe<T>>()->addReader();
+        world.write<EventPipe<T>>().get().addReader();
         return 0; // Initially we haven't read any events.
     }
 
@@ -423,7 +423,7 @@ namespace cubos::core::ecs
     template <typename T>
     EventReader<T> impl::SystemFetcher<EventReader<T>>::arg(std::tuple<size_t&, ReadResource<EventPipe<T>>>&& fetched)
     {
-        return EventReader<T>(std::get<0>(fetched), std::get<1>(fetched));
+        return EventReader<T>(std::get<1>(fetched).get(), std::get<0>(fetched));
     }
 
     template <typename T> void impl::SystemFetcher<EventWriter<T>>::add(SystemInfo& info)
@@ -444,7 +444,7 @@ namespace cubos::core::ecs
 
     template <typename T> EventWriter<T> impl::SystemFetcher<EventWriter<T>>::arg(WriteResource<EventPipe<T>>&& fetched)
     {
-        return EventWriter<T>(fetched);
+        return EventWriter<T>(fetched.get());
     }
 
     template <typename... Args> void impl::SystemFetcher<std::tuple<Args...>>::add(SystemInfo& info)
