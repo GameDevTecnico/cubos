@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <variant>
 #include <memory>
+#include <string>
 #include <deque>
 
 namespace cubos::core::gl
