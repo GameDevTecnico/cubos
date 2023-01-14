@@ -13,6 +13,11 @@ BaseWindow::BaseWindow()
     this->polled = false;
 }
 
+void BaseWindow::pushEvent(WindowEvent&& event)
+{
+    this->events.push_back(event);
+}
+
 std::optional<WindowEvent> BaseWindow::pollEvent()
 {
     // Only poll events after pollEvent() has returned std::nullopt (or if it has never been called).

@@ -115,7 +115,7 @@ namespace cubos::core::io
 
         /// Pushes an event to the event queue.
         /// @param event Event to push.
-        void pushEvent(WindowEvent event);
+        void pushEvent(WindowEvent&& event);
 
         /// Polls the window for events.
         /// @return The next event, or std::nullopt if there are no more events.
