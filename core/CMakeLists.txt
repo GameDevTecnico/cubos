@@ -156,6 +156,9 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/system.hpp"
     "include/cubos/core/ecs/registry.hpp"
     "include/cubos/core/ecs/dispatcher.hpp"
+    "include/cubos/core/ecs/event_pipe.hpp"
+    "include/cubos/core/ecs/event_reader.hpp"
+    "include/cubos/core/ecs/event_writer.hpp"
 )
 
 # Create core library
