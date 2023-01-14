@@ -107,24 +107,26 @@ namespace cubos::engine
         template <typename E> Cubos& addEvent();
 
         /// Sets the current tag for the main dispatcher. If the tag doesn't exist, it will be created.
-        /// Subsequent calls will set this tag's settings.
         /// @param tag The tag to set.
+        /// @return Tag builder used to configure the tag.
         TagBuilder& tag(const std::string& tag);
 
         /// Sets the current tag for the startup dispatcher. If the tag doesn't exist, it will be created.
-        /// Subsequent calls will set this tag's settings.
         /// @param tag The tag to set.
+        /// @return Tag builder used to configure the tag.
         TagBuilder& startupTag(const std::string& tag);
 
         /// Adds a new system to the engine, which will be executed at every iteration of the main loop.
         /// @tparam F The type of the system function.
         /// @param func The system function.
+        /// @return System builder used to configure the system.
         template <typename F> SystemBuilder& system(F func);
 
         /// Adds a new startup system to the engine.
         /// Startup systems are executed only once, before the main loop starts.
         /// @tparam F The type of the system function.
         /// @param func The system function.
+        /// @return System builder used to configure the system.
         template <typename F> SystemBuilder& startupSystem(F func);
 
         /// Runs the engine.
