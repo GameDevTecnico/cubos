@@ -107,24 +107,26 @@ $(document).ready(function(){initNavTree('context_8hpp_source.html',''); initRes
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Context.html#ac7d79a1c5a283944ab5ed65b74b4c8ad">   24</a></span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#ac7d79a1c5a283944ab5ed65b74b4c8ad">Context</a>(<span class="keywordtype">float</span> value);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#aedd60577b6a6b934b66dc81f2f8b858a">getValue</a>();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        std::variant&lt;float, glm::vec2&gt; value;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    };</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Context.html#aedd60577b6a6b934b66dc81f2f8b858a">   35</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#aedd60577b6a6b934b66dc81f2f8b858a">Context::getValue</a>()</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> std::get&lt;T&gt;(this-&gt;value);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_IO_CONTEXT_HPP</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        T <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#aedd60577b6a6b934b66dc81f2f8b858a">getValue</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        std::variant&lt;float, glm::vec2&gt; value;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Context.html#aedd60577b6a6b934b66dc81f2f8b858a">   37</a></span>&#160;    T <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html#aedd60577b6a6b934b66dc81f2f8b858a">Context::getValue</a>()</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">return</span> std::get&lt;T&gt;(this-&gt;value);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_IO_CONTEXT_HPP</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:13</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html_a4d72b82ab9e1d087548417d8658853cd"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html#a4d72b82ab9e1d087548417d8658853cd">cubos::core::io::Context::Context</a></div><div class="ttdeci">Context(glm::vec2 value)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html_a7540648fc201ffee17e0cdea0888a6f7"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html#a7540648fc201ffee17e0cdea0888a6f7">cubos::core::io::Context::Context</a></div><div class="ttdeci">Context()</div><div class="ttdoc">Empty Context constructor.</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html_ac7d79a1c5a283944ab5ed65b74b4c8ad"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html#ac7d79a1c5a283944ab5ed65b74b4c8ad">cubos::core::io::Context::Context</a></div><div class="ttdeci">Context(float value)</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html_aedd60577b6a6b934b66dc81f2f8b858a"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html#aedd60577b6a6b934b66dc81f2f8b858a">cubos::core::io::Context::getValue</a></div><div class="ttdeci">T getValue()</div><div class="ttdef"><b>Definition:</b> context.hpp:35</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html_aedd60577b6a6b934b66dc81f2f8b858a"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html#aedd60577b6a6b934b66dc81f2f8b858a">cubos::core::io::Context::getValue</a></div><div class="ttdeci">T getValue()</div><div class="ttdef"><b>Definition:</b> context.hpp:37</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1io_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div><div class="ttdoc">Contains input/output related code, such as window management and the input manager.</div><div class="ttdef"><b>Definition:</b> action.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

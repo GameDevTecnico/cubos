@@ -162,19 +162,20 @@ $(document).ready(function(){initNavTree('log_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">return</span> it;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt; <span class="keyword">auto</span> format(<span class="keyword">const</span> T&amp; val, FormatContext&amp; ctx) -&gt; decltype(ctx.out())</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keyword">auto</span> stream = <a class="code" href="classcubos_1_1core_1_1memory_1_1BufferStream.html">cubos::core::memory::BufferStream</a>(32);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1DebugSerializer.html">cubos::core::data::DebugSerializer</a> serializer(stream, this-&gt;pretty, this-&gt;types);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        serializer.write(val, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        stream.put(<span class="charliteral">&#39;\0&#39;</span>);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="comment">// Skip the &#39;?: &#39; prefix.</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keyword">auto</span> result = std::string(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(stream.getBuffer()) + 3);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span> formatter&lt;string_view&gt;::format(string_view(result), ctx);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_LOG_HPP</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">auto</span> format(<span class="keyword">const</span> T&amp; val, FormatContext&amp; ctx) -&gt; decltype(ctx.out())</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keyword">auto</span> stream = <a class="code" href="classcubos_1_1core_1_1memory_1_1BufferStream.html">cubos::core::memory::BufferStream</a>(32);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <a class="code" href="classcubos_1_1core_1_1data_1_1DebugSerializer.html">cubos::core::data::DebugSerializer</a> serializer(stream, this-&gt;pretty, this-&gt;types);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        serializer.write(val, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        stream.put(<span class="charliteral">&#39;\0&#39;</span>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">// Skip the &#39;?: &#39; prefix.</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">auto</span> result = std::string(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(stream.getBuffer()) + 3);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> formatter&lt;string_view&gt;::format(string_view(result), ctx);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_LOG_HPP</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1DebugSerializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1DebugSerializer.html">cubos::core::data::DebugSerializer</a></div><div class="ttdef"><b>Definition:</b> debug_serializer.hpp:13</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1BufferStream_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1BufferStream.html">cubos::core::memory::BufferStream</a></div><div class="ttdoc">Implements a stream that writes to/reads from a buffer.</div><div class="ttdef"><b>Definition:</b> buffer_stream.hpp:10</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_html"><div class="ttname"><a href="namespacecubos_1_1core.html">cubos::core</a></div><div class="ttdoc">Namespace of the CUBOS. core library.</div><div class="ttdef"><b>Definition:</b> archive.hpp:7</div></div>

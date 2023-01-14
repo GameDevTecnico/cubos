@@ -326,127 +326,133 @@ $(document).ready(function(){initNavTree('deserializer_8hpp_source.html',''); in
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        d.readString(value);</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    }</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tvec2&lt;T&gt;&amp; value)</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    {</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        d.beginObject();</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        d.read(value.x);</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        d.read(value.y);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        d.endObject();</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    }</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tvec3&lt;T&gt;&amp; value)</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    {</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        d.beginObject();</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        d.read(value.x);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        d.read(value.y);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        d.read(value.z);</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        d.endObject();</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    }</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tvec4&lt;T&gt;&amp; value)</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    {</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        d.beginObject();</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        d.read(value.x);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        d.read(value.y);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        d.read(value.z);</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        d.read(value.w);</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        d.endObject();</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    }</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tquat&lt;T&gt;&amp; value)</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    {</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        d.beginObject();</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        d.read(value.x);</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        d.read(value.y);</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        d.read(value.z);</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        d.read(value.w);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        d.endObject();</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    }</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tmat4x4&lt;T&gt;&amp; mat)</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    {</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        d.beginObject();</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        d.read(mat[0]);</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        d.read(mat[1]);</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        d.read(mat[2]);</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        d.read(mat[3]);</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        d.endObject();</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    }</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    requires TriviallyDeserializable&lt;T&gt;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::vector&lt;T&gt;&amp; vec)</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    {</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginArray();</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        vec.resize(length);</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            d.read(vec[i]);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        d.endArray();</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    }</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="keyword">template</span> &lt;&gt; <span class="keyword">inline</span> <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::vector&lt;bool&gt;&amp; vec)</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginArray();</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        vec.resize(length);</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        {</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            <span class="keywordtype">bool</span> val;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            d.read(val);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            vec[i] = val;</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        }</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        d.endArray();</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    }</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt;</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    requires TriviallyDeserializable&lt;K&gt; &amp;&amp; TriviallyDeserializable&lt;V&gt;</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::unordered_map&lt;K, V&gt;&amp; dic)</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    {</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginDictionary();</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        dic.clear();</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        dic.reserve(length);</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        {</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            K key;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;            V value;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            d.read(key);</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            d.read(value);</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            dic[key] = value;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        }</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        d.endDictionary();</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    }</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> TCtx&gt;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    requires ContextDeserializable&lt;T, TCtx&gt;</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::vector&lt;T&gt;&amp; vec, TCtx&amp;&amp; ctx)</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    {</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginArray();</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        vec.resize(length);</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            d.read(vec[i], ctx);</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        d.endArray();</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    }</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V, <span class="keyword">typename</span> TCtx&gt;</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    requires(TriviallyDeserializable&lt;K&gt; || ContextDeserializable&lt;K, TCtx&gt;) &amp;&amp;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        (TriviallyDeserializable&lt;V&gt; ||</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;         ContextDeserializable&lt;V, TCtx&gt;)<span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::unordered_map&lt;K, V&gt;&amp; dic, TCtx&amp;&amp; ctx)</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    {</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginDictionary();</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        dic.clear();</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        dic.reserve(length);</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        {</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            K key;</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;            V value;</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            d.read(key, ctx);</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;            d.read(value, ctx);</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;            dic[key] = value;</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        }</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        d.endDictionary();</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    }</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_DATA_DESERIALIZER_HPP</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tvec2&lt;T&gt;&amp; value)</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    {</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        d.beginObject();</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        d.read(value.x);</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        d.read(value.y);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        d.endObject();</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    }</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tvec3&lt;T&gt;&amp; value)</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        d.beginObject();</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        d.read(value.x);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        d.read(value.y);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        d.read(value.z);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        d.endObject();</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    }</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tvec4&lt;T&gt;&amp; value)</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        d.beginObject();</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        d.read(value.x);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        d.read(value.y);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        d.read(value.z);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        d.read(value.w);</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        d.endObject();</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    }</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tquat&lt;T&gt;&amp; value)</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    {</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        d.beginObject();</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        d.read(value.x);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        d.read(value.y);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        d.read(value.z);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        d.read(value.w);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        d.endObject();</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    }</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, glm::tmat4x4&lt;T&gt;&amp; mat)</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    {</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        d.beginObject();</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        d.read(mat[0]);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        d.read(mat[1]);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        d.read(mat[2]);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        d.read(mat[3]);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        d.endObject();</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    }</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    requires TriviallyDeserializable&lt;T&gt;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::vector&lt;T&gt;&amp; vec)</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    {</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginArray();</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        vec.resize(length);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            d.read(vec[i]);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        d.endArray();</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::vector&lt;bool&gt;&amp; vec)</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    {</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginArray();</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        vec.resize(length);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        {</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            <span class="keywordtype">bool</span> val;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            d.read(val);</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            vec[i] = val;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        }</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        d.endArray();</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    }</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    requires TriviallyDeserializable&lt;K&gt; &amp;&amp; TriviallyDeserializable&lt;V&gt;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::unordered_map&lt;K, V&gt;&amp; dic)</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    {</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginDictionary();</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        dic.clear();</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        dic.reserve(length);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        {</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            K key;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;            V value;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            d.read(key);</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            d.read(value);</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            dic[key] = value;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        }</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;        d.endDictionary();</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    }</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> TCtx&gt;</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    requires ContextDeserializable&lt;T, TCtx&gt;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::vector&lt;T&gt;&amp; vec, TCtx&amp;&amp; ctx)</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    {</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginArray();</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        vec.resize(length);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            d.read(vec[i], ctx);</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        d.endArray();</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V, <span class="keyword">typename</span> TCtx&gt;</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    requires(TriviallyDeserializable&lt;K&gt; || ContextDeserializable&lt;K, TCtx&gt;) &amp;&amp;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        (TriviallyDeserializable&lt;V&gt; ||</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;         ContextDeserializable&lt;V, TCtx&gt;)<span class="keywordtype">void</span> deserialize(Deserializer&amp; d, std::unordered_map&lt;K, V&gt;&amp; dic, TCtx&amp;&amp; ctx)</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    {</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="keywordtype">size_t</span> length = d.beginDictionary();</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        dic.clear();</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        dic.reserve(length);</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; length; ++i)</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        {</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            K key;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            V value;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            d.read(key, ctx);</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;            d.read(value, ctx);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;            dic[key] = value;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        }</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        d.endDictionary();</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    }</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_DATA_DESERIALIZER_HPP</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Deserializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html">cubos::core::data::Deserializer</a></div><div class="ttdoc">Abstract class for deserializing data.</div><div class="ttdef"><b>Definition:</b> deserializer.hpp:91</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Deserializer_html_a03c20ddaa381f1926a24672f545b70eb"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html#a03c20ddaa381f1926a24672f545b70eb">cubos::core::data::Deserializer::failed</a></div><div class="ttdeci">bool failed() const</div><div class="ttdoc">Checks if the deserializer has failed.</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Deserializer_html_a2628f0d35c899f2da2faaf87c70dbf01"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html#a2628f0d35c899f2da2faaf87c70dbf01">cubos::core::data::Deserializer::read</a></div><div class="ttdeci">requires TriviallyDeserializable&lt; T &gt; void read(T &amp;obj)</div><div class="ttdef"><b>Definition:</b> deserializer.hpp:203</div></div>

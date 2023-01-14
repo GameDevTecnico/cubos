@@ -121,40 +121,42 @@ $(document).ready(function(){initNavTree('manager_8hpp_source.html',''); initRes
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a11ae8d3f46c8ba5ccd50b324427d5e28">   44</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a11ae8d3f46c8ba5ccd50b324427d5e28">provideInput</a>(Input input, core::gl::Texture2D texture);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">size_t</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a463e06aa04938848b6f6a75b3ebc59d1">addPass</a>();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#ae1113c6e0f82a2a6025e54db7f2ae948">   53</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#ae1113c6e0f82a2a6025e54db7f2ae948">removePass</a>(<span class="keywordtype">size_t</span> <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#aca1e4e72ddf863d1b22dac40cbc4eca3">   58</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#aca1e4e72ddf863d1b22dac40cbc4eca3">execute</a>(core::gl::Framebuffer out);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a4cb005b66210273c59902a63d4a8ea72">   62</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a4cb005b66210273c59902a63d4a8ea72">passCount</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; renderDevice;        </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        glm::uvec2 size;                             </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        std::map&lt;Input, core::gl::Texture2D&gt; inputs; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::map&lt;size_t, Pass*&gt; passes;              </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">size_t</span> nextId;                               </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        core::gl::Texture2D intermediateTex[2];      </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        core::gl::Framebuffer intermediateFb[2];     </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// Implementation.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a463e06aa04938848b6f6a75b3ebc59d1">   76</a></span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keywordtype">size_t</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a463e06aa04938848b6f6a75b3ebc59d1">Manager::addPass</a>()</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">size_t</span> <span class="keywordtype">id</span> = this-&gt;nextId++;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        this-&gt;passes[id] = <span class="keyword">new</span> T(this-&gt;renderDevice, this-&gt;size);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> id;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;} <span class="comment">// namespace cubos::engine::gl::pps</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a463e06aa04938848b6f6a75b3ebc59d1">addPass</a>();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#ae1113c6e0f82a2a6025e54db7f2ae948">   54</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#ae1113c6e0f82a2a6025e54db7f2ae948">removePass</a>(<span class="keywordtype">size_t</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#aca1e4e72ddf863d1b22dac40cbc4eca3">   59</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#aca1e4e72ddf863d1b22dac40cbc4eca3">execute</a>(core::gl::Framebuffer out);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a4cb005b66210273c59902a63d4a8ea72">   63</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a4cb005b66210273c59902a63d4a8ea72">passCount</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; renderDevice;        </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        glm::uvec2 size;                             </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::map&lt;Input, core::gl::Texture2D&gt; inputs; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        std::map&lt;size_t, Pass*&gt; passes;              </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">size_t</span> nextId;                               </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        core::gl::Texture2D intermediateTex[2];      </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        core::gl::Framebuffer intermediateFb[2];     </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    };</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">// Implementation.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a463e06aa04938848b6f6a75b3ebc59d1">   78</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a463e06aa04938848b6f6a75b3ebc59d1">Manager::addPass</a>()</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">size_t</span> <span class="keywordtype">id</span> = this-&gt;nextId++;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        this-&gt;passes[id] = <span class="keyword">new</span> T(this-&gt;renderDevice, this-&gt;size);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span> id;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;} <span class="comment">// namespace cubos::engine::gl::pps</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:572</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Manager_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html">cubos::engine::gl::pps::Manager</a></div><div class="ttdef"><b>Definition:</b> manager.hpp:30</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Manager_html_a02e16572d7c8a188b9dd90aac108e720"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a02e16572d7c8a188b9dd90aac108e720">cubos::engine::gl::pps::Manager::Manager</a></div><div class="ttdeci">Manager(core::gl::RenderDevice &amp;renderDevice, glm::uvec2 size)</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Manager_html_a11ae8d3f46c8ba5ccd50b324427d5e28"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a11ae8d3f46c8ba5ccd50b324427d5e28">cubos::engine::gl::pps::Manager::provideInput</a></div><div class="ttdeci">void provideInput(Input input, core::gl::Texture2D texture)</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Manager_html_a463e06aa04938848b6f6a75b3ebc59d1"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a463e06aa04938848b6f6a75b3ebc59d1">cubos::engine::gl::pps::Manager::addPass</a></div><div class="ttdeci">size_t addPass()</div><div class="ttdef"><b>Definition:</b> manager.hpp:76</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Manager_html_a463e06aa04938848b6f6a75b3ebc59d1"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a463e06aa04938848b6f6a75b3ebc59d1">cubos::engine::gl::pps::Manager::addPass</a></div><div class="ttdeci">size_t addPass()</div><div class="ttdef"><b>Definition:</b> manager.hpp:78</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Manager_html_a4cb005b66210273c59902a63d4a8ea72"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a4cb005b66210273c59902a63d4a8ea72">cubos::engine::gl::pps::Manager::passCount</a></div><div class="ttdeci">size_t passCount() const</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Manager_html_aca1e4e72ddf863d1b22dac40cbc4eca3"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#aca1e4e72ddf863d1b22dac40cbc4eca3">cubos::engine::gl::pps::Manager::execute</a></div><div class="ttdeci">void execute(core::gl::Framebuffer out)</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Manager_html_ae1113c6e0f82a2a6025e54db7f2ae948"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#ae1113c6e0f82a2a6025e54db7f2ae948">cubos::engine::gl::pps::Manager::removePass</a></div><div class="ttdeci">void removePass(size_t id)</div></div>

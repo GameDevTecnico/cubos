@@ -64,15 +64,15 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"",
-"classcubos_1_1core_1_1data_1_1JSONSerializer.html#a5cea905275e5a4e9c6cdecf4d234ee6f",
-"classcubos_1_1core_1_1ecs_1_1Dispatcher.html",
-"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a55003639c49dd39b890d24600028bb2e",
-"classcubos_1_1engine_1_1data_1_1Meta.html#a9d7a4e624766bbbc73c1cd870bc01e72",
-"functions_t.html",
-"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa46c380f94f3087cd3e31bf99ee4b1e92",
-"structcubos_1_1core_1_1data_1_1QBMatrix.html#a34cc55836c0a80298fc5df484563404a",
-"vec__storage_8hpp_source.html"
+"action_8hpp_source.html",
+"classcubos_1_1core_1_1data_1_1JSONSerializer.html#ae69d2ac7057aa790db2aa605b1368bf3",
+"classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ab07c473a3030bb9d8987f3ecf932143e",
+"classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#ad8846177f2a2bf6cbff6b74592e56a54",
+"classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html",
+"guide-hello-world.html",
+"namespacecubos_1_1core_1_1gl.html#acbce0af680bcfc0a5b989bcfc6583e0fa8145459ca7947c51cc8c594bcd35ee80",
+"structcubos_1_1core_1_1ecs_1_1SystemInfo.html#a069b6f2f9f063967fd8a8c3397d4129e",
+""
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
