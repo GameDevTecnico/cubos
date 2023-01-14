@@ -6,6 +6,7 @@
 #include <mutex>
 #include <deque>
 #include <condition_variable>
+#include <vector>
 
 namespace cubos::core
 {
