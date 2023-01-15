@@ -6,6 +6,14 @@
 
 using namespace cubos::engine;
 
+ShouldQuit::ShouldQuit(bool value) : value(value)
+{
+}
+
+Arguments::Arguments(const std::vector<std::string>& value) : value(value)
+{
+}
+
 TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher) : dispatcher(dispatcher)
 {
 }
