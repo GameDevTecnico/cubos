@@ -16,7 +16,7 @@ using namespace cubos::core;
 namespace fs = std::filesystem;
 
 /// The input options of the program.
-struct Options
+struct ConvertOptions
 {
     fs::path input = "";                        ///< The input file path.
     fs::path palette = "";                      ///< The palette path.
@@ -48,7 +48,7 @@ static void printHelp()
 /// @param argv The arguments.
 /// @param options The options to fill.
 /// @return True if the arguments were parsed successfully, false otherwise.
-static bool parseArguments(int argc, char** argv, Options& options)
+static bool parseArguments(int argc, char** argv, ConvertOptions& options)
 {
     bool foundInput = false;
 
@@ -244,7 +244,7 @@ static bool saveGrid(const fs::path& path, const gl::Grid& grid)
 /// Runs the converter from the command line options.
 /// @param options The command line options.
 /// @return True if the conversion was successful, false otherwise.
-static bool convert(const Options& options)
+static bool convert(const ConvertOptions& options)
 {
     // First, load the palette.
     gl::Palette palette;
@@ -380,7 +380,7 @@ static bool convert(const Options& options)
 int runConvert(int argc, char** argv)
 {
     // Parse command line arguments.
-    Options options = {};
+    ConvertOptions options = {};
     if (!parseArguments(argc, argv, options))
     {
         printHelp();

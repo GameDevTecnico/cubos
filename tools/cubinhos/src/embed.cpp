@@ -8,7 +8,7 @@
 namespace fs = std::filesystem;
 
 /// The input options of the program.
-struct Options
+struct EmbedOptions
 {
     std::string name = "";  ///< The name of the output data.
     fs::path input = "";    ///< The input file path.
@@ -33,7 +33,7 @@ static void printHelp()
 /// @param argv The arguments.
 /// @param options The options to fill.
 /// @return True if the arguments were parsed successfully, false otherwise.
-static bool parseArguments(int argc, char** argv, Options& options)
+static bool parseArguments(int argc, char** argv, EmbedOptions& options)
 {
     bool foundInput = false;
 
@@ -117,7 +117,7 @@ struct ScanEntry
 /// State required for the embedding process.
 struct State
 {
-    const Options& options; ///< The options of the program.
+    const EmbedOptions& options; ///< The options of the program.
     std::ostream& out;      ///< The output stream.
 
     std::string name;               ///< The name of the output data.
@@ -275,7 +275,7 @@ static bool embedFileEntry(State& state, size_t id)
 /// Runs the generator from the command line options.
 /// @param options The command line options.
 /// @return True if the embedding was successful, false otherwise.
-static bool generate(const Options& options)
+static bool generate(const EmbedOptions& options)
 {
     // Initialize the state.
     State state = {options, std::cout, options.name, {}};
@@ -353,7 +353,7 @@ static bool generate(const Options& options)
 int runEmbed(int argc, char** argv)
 {
     // Parse command line arguments.
-    Options options = {};
+    EmbedOptions options = {};
     if (!parseArguments(argc, argv, options))
     {
         printHelp();
