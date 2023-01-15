@@ -62,7 +62,7 @@ public:
     virtual void setBuffer(Buffer buffer) override
     {
         auto oalBuffer = std::dynamic_pointer_cast<OALBuffer>(buffer);
-        alSourcei(this->id, AL_BUFFER, oalBuffer->id);
+        alSourcei(this->id, AL_BUFFER, buffer.id);
     }
 
     virtual void setPosition(const glm::vec3& position) override
