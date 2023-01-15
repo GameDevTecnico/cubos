@@ -183,6 +183,10 @@ Buffer OALAudioDevice::createBuffer()
 
 Source OALAudioDevice::createSource()
 {
+    ALuint sources;
+    alGenSources(1, &sources);
+
+    return std::make_shared<OALSource>(sources);
 }
 
 void OALAudioDevice::setListenerPosition(const glm::vec3& position)
