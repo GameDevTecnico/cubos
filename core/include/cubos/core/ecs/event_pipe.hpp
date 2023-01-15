@@ -11,7 +11,8 @@ namespace cubos::core::ecs
 {
     /// Event pipe implementation.
     /// @tparam T Event type.
-    template <typename T> class EventPipe
+    template <typename T>
+    class EventPipe
     {
     public:
         /// Pushes event to event pipe, with its mask type.
@@ -80,18 +81,21 @@ namespace cubos::core::ecs
 
     // EventPipe implementation.
 
-    template <typename T> void EventPipe<T>::push(T event, unsigned int mask)
+    template <typename T>
+    void EventPipe<T>::push(T event, unsigned int mask)
     {
         this->events.push_back(Event(event, mask));
     }
 
-    template <typename T> unsigned int EventPipe<T>::getEventMask(std::size_t index) const
+    template <typename T>
+    unsigned int EventPipe<T>::getEventMask(std::size_t index) const
     {
         index = index - deletedEvents;
         return this->events.at(index).mask;
     }
 
-    template <typename T> std::pair<const T&, unsigned int> EventPipe<T>::get(std::size_t index) const
+    template <typename T>
+    std::pair<const T&, unsigned int> EventPipe<T>::get(std::size_t index) const
     {
         index = index - deletedEvents;
         const Event& ev = this->events.at(index);
@@ -99,7 +103,8 @@ namespace cubos::core::ecs
         return std::pair<const T&, unsigned int>(ev.event, ev.mask);
     }
 
-    template <typename T> void EventPipe<T>::clear()
+    template <typename T>
+    void EventPipe<T>::clear()
     {
         while (!this->events.empty() && this->events.front().readCount == this->readerCount)
         {
@@ -108,22 +113,26 @@ namespace cubos::core::ecs
         }
     }
 
-    template <typename T> std::size_t EventPipe<T>::sentEvents() const
+    template <typename T>
+    std::size_t EventPipe<T>::sentEvents() const
     {
         return this->events.size() + deletedEvents;
     }
 
-    template <typename T> std::size_t EventPipe<T>::size() const
+    template <typename T>
+    std::size_t EventPipe<T>::size() const
     {
         return this->events.size();
     }
 
-    template <typename T> void EventPipe<T>::addReader()
+    template <typename T>
+    void EventPipe<T>::addReader()
     {
         this->readerCount++;
     }
 
-    template <typename T> void EventPipe<T>::removeReader()
+    template <typename T>
+    void EventPipe<T>::removeReader()
     {
         if (this->readerCount > 0)
             this->readerCount--;

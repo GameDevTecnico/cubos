@@ -118,7 +118,7 @@ struct ScanEntry
 struct State
 {
     const EmbedOptions& options; ///< The options of the program.
-    std::ostream& out;      ///< The output stream.
+    std::ostream& out;           ///< The output stream.
 
     std::string name;               ///< The name of the output data.
     std::vector<ScanEntry> entries; ///< The scanned entries.
