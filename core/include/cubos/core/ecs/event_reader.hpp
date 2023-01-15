@@ -41,7 +41,7 @@ namespace cubos::core::ecs
 
     private:
         const EventPipe<T>& pipe;
-        std::size_t& index{};
+        std::size_t& index;
 
         /// Checks if given mask is valid to reader's one.
         /// @return True if mask is valid.
