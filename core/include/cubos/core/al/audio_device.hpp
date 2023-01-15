@@ -42,7 +42,7 @@ namespace cubos::core::al
 
         /// Enumerates the available devices.
         /// @param devices The vector to fill with the available devices.
-        static void enumerateDevices(std::vector<std::string>& devices);
+        static std::vector<std::string> enumerateDevices();
 
         /// Creates a new audio buffer
         /// @return The handle of the new buffer.
