@@ -20,7 +20,7 @@ static void startup(gl::Renderer& renderer, const cubos::core::io::Window& windo
         std::make_shared<gl::deferred::Renderer>(renderDevice, window->getFramebufferSize(), cubos::core::Settings());
 }
 
-static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& activeCamera, const gl::Frame& frame,
+static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& activeCamera, gl::Frame& frame,
                  cubos::core::ecs::Query<const ecs::LocalToWorld&, const ecs::Camera&> query)
 {
     cubos::core::gl::Camera glCamera;
@@ -36,6 +36,7 @@ static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& activeCame
     }
 
     renderer->render(glCamera, frame);
+    frame.clear();
 }
 
 void cubos::engine::plugins::rendererPlugin(Cubos& cubos)

@@ -10,4 +10,9 @@ metas:
     usage: Dynamic
     params:
       path: /assets/sub.cubos
+  - id: palette
+    type: Palette
+    usage: Static
+    params:
+      path: /assets/main.pal
 ...
