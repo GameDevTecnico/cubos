@@ -13,7 +13,7 @@ void cubos::engine::plugins::transformPlugin(Cubos& cubos)
     cubos.addComponent<ecs::Position>()
         .addComponent<ecs::Rotation>()
         .addComponent<ecs::Scale>()
-        .addComponent<ecs::LocalToWorld>()
+        .addComponent<ecs::LocalToWorld>();
 
-        .addSystem(ecs::transformSystem, "PrepareDraw");
+    cubos.system(ecs::transformSystem).tagged("PrepareDraw");
 }

@@ -1,5 +1,6 @@
 #include <cubos/engine/plugins/renderer.hpp>
 #include <cubos/engine/plugins/transform.hpp>
+#include <cubos/engine/plugins/window.hpp>
 
 #include <cubos/engine/ecs/draw_system.hpp>
 #include <components/cubos/camera.hpp>
@@ -42,12 +43,15 @@ static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& activeCame
 void cubos::engine::plugins::rendererPlugin(Cubos& cubos)
 {
     cubos.addPlugin(transformPlugin)
+        .addPlugin(windowPlugin)
         .addComponent<ecs::Grid>()
         .addComponent<ecs::Camera>()
         .addResource<gl::Frame>()
         .addResource<gl::Renderer>()
-        .addResource<ActiveCamera>()
-        .addStartupSystem(startup, "SetRenderer")
-        .addSystem(ecs::drawSystem, "CreateDrawList")
-        .addSystem(draw, "Draw");
+        .addResource<ActiveCamera>();
+
+    cubos.startupTag("SetRenderer").afterTag("OpenWindow");
+    cubos.startupSystem(startup).tagged("SetRenderer");
+    cubos.system(ecs::drawSystem).tagged("CreateDrawList");
+    cubos.system(draw).tagged("Draw");
 }
