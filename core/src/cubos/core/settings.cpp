@@ -67,6 +67,16 @@ void Settings::merge(const Settings& settingsToMerge)
     }
 }
 
+std::unordered_map<std::string, std::string>::iterator Settings::begin()
+{
+    return this->values.begin();
+}
+
+std::unordered_map<std::string, std::string>::iterator Settings::end()
+{
+    return this->values.end();
+}
+
 void cubos::core::data::serialize(Serializer& serializer, const Settings& settings, const char* name)
 {
     serializer.write(settings.values, name);

@@ -11,7 +11,8 @@ namespace cubos::core::data
     /// Acts as a wrapper around a specific file stream, while maintaining a reference to the file so that it
     /// can be destroyed automatically when the stream is destroyed.
     /// @tparam T The type of internal stream in the stream.
-    template <typename T> class FileStream final : public memory::Stream
+    template <typename T>
+    class FileStream final : public memory::Stream
     {
     public:
         /// @param file The file which the stream is reading/writing from/to.
@@ -41,7 +42,8 @@ namespace cubos::core::data
     {
     }
 
-    template <typename T> inline size_t FileStream<T>::read(void* buffer, size_t size)
+    template <typename T>
+    inline size_t FileStream<T>::read(void* buffer, size_t size)
     {
         if (this->mode != File::OpenMode::Read)
         {
@@ -52,7 +54,8 @@ namespace cubos::core::data
         return stream.read(buffer, size);
     }
 
-    template <typename T> inline size_t FileStream<T>::write(const void* buffer, size_t size)
+    template <typename T>
+    inline size_t FileStream<T>::write(const void* buffer, size_t size)
     {
         if (this->mode != File::OpenMode::Write)
         {
@@ -63,22 +66,26 @@ namespace cubos::core::data
         return stream.write(buffer, size);
     }
 
-    template <typename T> inline size_t FileStream<T>::tell() const
+    template <typename T>
+    inline size_t FileStream<T>::tell() const
     {
         return stream.tell();
     }
 
-    template <typename T> inline void FileStream<T>::seek(int64_t offset, memory::SeekOrigin origin)
+    template <typename T>
+    inline void FileStream<T>::seek(int64_t offset, memory::SeekOrigin origin)
     {
         stream.seek(offset, origin);
     }
 
-    template <typename T> inline bool FileStream<T>::eof() const
+    template <typename T>
+    inline bool FileStream<T>::eof() const
     {
         return stream.eof();
     }
 
-    template <typename T> inline char FileStream<T>::peek() const
+    template <typename T>
+    inline char FileStream<T>::peek() const
     {
         return stream.peek();
     }

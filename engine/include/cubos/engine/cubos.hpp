@@ -63,11 +63,13 @@ namespace cubos::engine
 
         /// Sets the current system to be executed before another system.
         /// @param func The system to be executed before.
-        template <typename F> SystemBuilder& beforeSystem(F func);
+        template <typename F>
+        SystemBuilder& beforeSystem(F func);
 
         /// Sets the current system to be executed after another system.
         /// @param func The system to be executed after.
-        template <typename F> SystemBuilder& afterSystem(F func);
+        template <typename F>
+        SystemBuilder& afterSystem(F func);
 
     private:
         core::ecs::Dispatcher& dispatcher;
@@ -94,17 +96,20 @@ namespace cubos::engine
         /// @tparam TArgs The types of the arguments passed to the resource's constructor.
         /// @param args The arguments passed to the resource's constructor.
         /// @return Reference to this object, for chaining.
-        template <typename R, typename... TArgs> Cubos& addResource(TArgs... args);
+        template <typename R, typename... TArgs>
+        Cubos& addResource(TArgs... args);
 
         /// Adds a new component type to the engine.
         /// @tparam C The type of the component.
         /// @return Reference to this object, for chaining.
-        template <typename C> Cubos& addComponent();
+        template <typename C>
+        Cubos& addComponent();
 
         /// Adds a new event type to the engine.
         /// @tparam E The type of the event.
         /// @return Reference to this object, for chaining.
-        template <typename E> Cubos& addEvent();
+        template <typename E>
+        Cubos& addEvent();
 
         /// Sets the current tag for the main dispatcher. If the tag doesn't exist, it will be created.
         /// @param tag The tag to set.
@@ -120,14 +125,16 @@ namespace cubos::engine
         /// @tparam F The type of the system function.
         /// @param func The system function.
         /// @return System builder used to configure the system.
-        template <typename F> SystemBuilder& system(F func);
+        template <typename F>
+        SystemBuilder& system(F func);
 
         /// Adds a new startup system to the engine.
         /// Startup systems are executed only once, before the main loop starts.
         /// @tparam F The type of the system function.
         /// @param func The system function.
         /// @return System builder used to configure the system.
-        template <typename F> SystemBuilder& startupSystem(F func);
+        template <typename F>
+        SystemBuilder& startupSystem(F func);
 
         /// Runs the engine.
         void run();
@@ -140,38 +147,44 @@ namespace cubos::engine
 
     // Implementation.
 
-    template <typename F> SystemBuilder& SystemBuilder::beforeSystem(F func)
+    template <typename F>
+    SystemBuilder& SystemBuilder::beforeSystem(F func)
     {
         dispatcher.systemSetBeforeSystem(func);
         return *this;
     }
 
-    template <typename F> SystemBuilder& SystemBuilder::afterSystem(F func)
+    template <typename F>
+    SystemBuilder& SystemBuilder::afterSystem(F func)
     {
         dispatcher.systemSetAfterSystem(func);
         return *this;
     }
 
-    template <typename R, typename... TArgs> Cubos& Cubos::addResource(TArgs... args)
+    template <typename R, typename... TArgs>
+    Cubos& Cubos::addResource(TArgs... args)
     {
         world.registerResource<R>(args...);
         return *this;
     }
 
-    template <typename C> Cubos& Cubos::addComponent()
+    template <typename C>
+    Cubos& Cubos::addComponent()
     {
         world.registerComponent<C>();
         return *this;
     }
 
-    template <typename E> Cubos& Cubos::addEvent()
+    template <typename E>
+    Cubos& Cubos::addEvent()
     {
         // The user could register this manually, but using this method is more convenient.
         world.registerResource<core::ecs::EventPipe<E>>();
         return *this;
     }
 
-    template <typename F> SystemBuilder& Cubos::system(F func)
+    template <typename F>
+    SystemBuilder& Cubos::system(F func)
     {
         mainDispatcher.addSystem(func);
         SystemBuilder* builder = new SystemBuilder(mainDispatcher);
@@ -179,7 +192,8 @@ namespace cubos::engine
         return *builder;
     }
 
-    template <typename F> SystemBuilder& Cubos::startupSystem(F func)
+    template <typename F>
+    SystemBuilder& Cubos::startupSystem(F func)
     {
         startupDispatcher.addSystem(func);
         SystemBuilder* builder = new SystemBuilder(startupDispatcher);

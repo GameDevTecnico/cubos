@@ -46,7 +46,8 @@ namespace cubos::core::ecs
     };
 
     /// Base class for system wrappers.
-    template <typename R> class AnySystemWrapper
+    template <typename R>
+    class AnySystemWrapper
     {
     public:
         AnySystemWrapper(SystemInfo&& info);
@@ -75,13 +76,15 @@ namespace cubos::core::ecs
     namespace impl
     {
         /// Fetches the requested type from a world.
-        template <typename T> struct SystemFetcher
+        template <typename T>
+        struct SystemFetcher
         {
             // This should never be instantiated.
             static_assert(!std::is_same_v<T, T>, "Unknown system argument type.");
         };
 
-        template <typename R> struct SystemFetcher<R&>
+        template <typename R>
+        struct SystemFetcher<R&>
         {
             using Type = WriteResource<R>;
             using State = std::monostate;
@@ -92,7 +95,8 @@ namespace cubos::core::ecs
             static R& arg(Type&& lock);
         };
 
-        template <typename R> struct SystemFetcher<const R&>
+        template <typename R>
+        struct SystemFetcher<const R&>
         {
             using Type = ReadResource<R>;
             using State = std::monostate;
@@ -103,7 +107,8 @@ namespace cubos::core::ecs
             static const R& arg(Type&& lock);
         };
 
-        template <typename... ComponentTypes> struct SystemFetcher<Query<ComponentTypes...>>
+        template <typename... ComponentTypes>
+        struct SystemFetcher<Query<ComponentTypes...>>
         {
             using Type = Query<ComponentTypes...>;
             using State = std::monostate;
@@ -114,7 +119,8 @@ namespace cubos::core::ecs
             static Type arg(Type&& fetched);
         };
 
-        template <> struct SystemFetcher<World&>
+        template <>
+        struct SystemFetcher<World&>
         {
             using Type = World*;
             using State = std::monostate;
@@ -125,7 +131,8 @@ namespace cubos::core::ecs
             static World& arg(Type fetched);
         };
 
-        template <> struct SystemFetcher<Commands>
+        template <>
+        struct SystemFetcher<Commands>
         {
             using Type = CommandBuffer*;
             using State = std::monostate;
@@ -136,7 +143,8 @@ namespace cubos::core::ecs
             static Commands arg(Type fetched);
         };
 
-        template <typename T, unsigned int M> struct SystemFetcher<EventReader<T, M>>
+        template <typename T, unsigned int M>
+        struct SystemFetcher<EventReader<T, M>>
         {
             using Type = std::tuple<size_t&, ReadResource<EventPipe<T>>>;
             using State = size_t; // Number of events read.
@@ -147,7 +155,8 @@ namespace cubos::core::ecs
             static EventReader<T, M> arg(Type&& fetched);
         };
 
-        template <typename T> struct SystemFetcher<EventWriter<T>>
+        template <typename T>
+        struct SystemFetcher<EventWriter<T>>
         {
             using Type = WriteResource<EventPipe<T>>;
             using State = std::monostate;
@@ -158,7 +167,8 @@ namespace cubos::core::ecs
             static EventWriter<T> arg(Type&& fetched);
         };
 
-        template <typename... Args> struct SystemFetcher<std::tuple<Args...>>
+        template <typename... Args>
+        struct SystemFetcher<std::tuple<Args...>>
         {
             using Type = std::tuple<typename SystemFetcher<Args>::Type...>;
             using State = std::tuple<typename SystemFetcher<Args>::State...>;
@@ -170,10 +180,12 @@ namespace cubos::core::ecs
         };
 
         /// Template magic used to inspect the arguments of a system.
-        template <typename F> struct SystemTraits;
+        template <typename F>
+        struct SystemTraits;
 
         /// Specialization for function pointers.
-        template <typename R, typename... Args> struct SystemTraits<R (*)(Args...)>
+        template <typename R, typename... Args>
+        struct SystemTraits<R (*)(Args...)>
         {
             using Return = R;
             using Arguments = std::tuple<Args...>;
@@ -196,21 +208,25 @@ namespace cubos::core::ecs
         };
 
         /// Specialization for lambdas and functors, like std::function.
-        template <typename F> struct SystemTraits : SystemTraits<decltype(&std::remove_reference<F>::type::operator())>
+        template <typename F>
+        struct SystemTraits : SystemTraits<decltype(&std::remove_reference<F>::type::operator())>
         {
         };
 
         /// Used to get the index of a type in a tuple.
         /// Had to use this instead of std::apply due to a bug in MSVC :(
         /// Taken from https://stackoverflow.com/questions/18063451.
-        template <class T, class Tuple> struct Index;
+        template <class T, class Tuple>
+        struct Index;
 
-        template <class T, class... Types> struct Index<T, std::tuple<T, Types...>>
+        template <class T, class... Types>
+        struct Index<T, std::tuple<T, Types...>>
         {
             static const std::size_t value = 0;
         };
 
-        template <class T, class U, class... Types> struct Index<T, std::tuple<U, Types...>>
+        template <class T, class U, class... Types>
+        struct Index<T, std::tuple<U, Types...>>
         {
             static const std::size_t value = 1 + Index<T, std::tuple<Types...>>::value;
         };
@@ -218,7 +234,8 @@ namespace cubos::core::ecs
 
     /// A system wrapper for a system which takes some arguments.
     /// @tparam F The type of the system function/method/lambda.
-    template <typename F> class SystemWrapper final : public AnySystemWrapper<typename impl::SystemTraits<F>::Return>
+    template <typename F>
+    class SystemWrapper final : public AnySystemWrapper<typename impl::SystemTraits<F>::Return>
     {
     public:
         friend class Dispatcher;
@@ -238,7 +255,8 @@ namespace cubos::core::ecs
 
     // Implementation.
 
-    template <typename R> AnySystemWrapper<R>::AnySystemWrapper(SystemInfo&& info) : m_info(std::move(info))
+    template <typename R>
+    AnySystemWrapper<R>::AnySystemWrapper(SystemInfo&& info) : m_info(std::move(info))
     {
         if (!this->m_info.valid())
         {
@@ -248,12 +266,14 @@ namespace cubos::core::ecs
         }
     }
 
-    template <typename R> const SystemInfo& AnySystemWrapper<R>::info() const
+    template <typename R>
+    const SystemInfo& AnySystemWrapper<R>::info() const
     {
         return this->m_info;
     }
 
-    template <typename R, typename... Args> SystemInfo impl::SystemTraits<R (*)(Args...)>::info()
+    template <typename R, typename... Args>
+    SystemInfo impl::SystemTraits<R (*)(Args...)>::info()
     {
         auto info = SystemInfo();
         info.usesCommands = false;
@@ -269,7 +289,8 @@ namespace cubos::core::ecs
         // Do nothing.
     }
 
-    template <typename F> void SystemWrapper<F>::prepare(World& world)
+    template <typename F>
+    void SystemWrapper<F>::prepare(World& world)
     {
         using Arguments = typename impl::SystemTraits<F>::Arguments;
         using Fetcher = impl::SystemFetcher<Arguments>;
@@ -303,47 +324,56 @@ namespace cubos::core::ecs
         return std::apply(this->system, std::forward<Arguments>(args));
     }
 
-    template <typename R> void impl::SystemFetcher<R&>::add(SystemInfo& info)
+    template <typename R>
+    void impl::SystemFetcher<R&>::add(SystemInfo& info)
     {
         info.resourcesWritten.insert(typeid(R));
     }
 
-    template <typename R> std::monostate impl::SystemFetcher<R&>::prepare(World&)
+    template <typename R>
+    std::monostate impl::SystemFetcher<R&>::prepare(World&)
     {
         return std::monostate();
     }
 
-    template <typename R> WriteResource<R> impl::SystemFetcher<R&>::fetch(World& world, CommandBuffer&, State&)
+    template <typename R>
+    WriteResource<R> impl::SystemFetcher<R&>::fetch(World& world, CommandBuffer&, State&)
     {
         return world.write<R>();
     }
 
-    template <typename R> R& impl::SystemFetcher<R&>::arg(WriteResource<R>&& lock)
+    template <typename R>
+    R& impl::SystemFetcher<R&>::arg(WriteResource<R>&& lock)
     {
         return lock.get();
     }
 
-    template <typename R> void impl::SystemFetcher<const R&>::add(SystemInfo& info)
+    template <typename R>
+    void impl::SystemFetcher<const R&>::add(SystemInfo& info)
     {
         info.resourcesRead.insert(typeid(R));
     }
 
-    template <typename R> std::monostate impl::SystemFetcher<const R&>::prepare(World&)
+    template <typename R>
+    std::monostate impl::SystemFetcher<const R&>::prepare(World&)
     {
         return std::monostate();
     }
 
-    template <typename R> ReadResource<R> impl::SystemFetcher<const R&>::fetch(World& world, CommandBuffer&, State&)
+    template <typename R>
+    ReadResource<R> impl::SystemFetcher<const R&>::fetch(World& world, CommandBuffer&, State&)
     {
         return world.read<R>();
     }
 
-    template <typename R> const R& impl::SystemFetcher<const R&>::arg(ReadResource<R>&& lock)
+    template <typename R>
+    const R& impl::SystemFetcher<const R&>::arg(ReadResource<R>&& lock)
     {
         return lock.get();
     }
 
-    template <typename... ComponentTypes> void impl::SystemFetcher<Query<ComponentTypes...>>::add(SystemInfo& info)
+    template <typename... ComponentTypes>
+    void impl::SystemFetcher<Query<ComponentTypes...>>::add(SystemInfo& info)
     {
         auto queryInfo = Query<ComponentTypes...>::info();
 
@@ -358,7 +388,8 @@ namespace cubos::core::ecs
         }
     }
 
-    template <typename... ComponentTypes> std::monostate impl::SystemFetcher<Query<ComponentTypes...>>::prepare(World&)
+    template <typename... ComponentTypes>
+    std::monostate impl::SystemFetcher<Query<ComponentTypes...>>::prepare(World&)
     {
         return std::monostate();
     }
@@ -415,12 +446,14 @@ namespace cubos::core::ecs
         return Commands(*fetched);
     }
 
-    template <typename T, unsigned int M> void impl::SystemFetcher<EventReader<T, M>>::add(SystemInfo& info)
+    template <typename T, unsigned int M>
+    void impl::SystemFetcher<EventReader<T, M>>::add(SystemInfo& info)
     {
         info.resourcesRead.insert(typeid(T));
     }
 
-    template <typename T, unsigned int M> size_t impl::SystemFetcher<EventReader<T, M>>::prepare(World& world)
+    template <typename T, unsigned int M>
+    size_t impl::SystemFetcher<EventReader<T, M>>::prepare(World& world)
     {
         world.write<EventPipe<T>>().get().addReader();
         return 0; // Initially we haven't read any events.
@@ -441,12 +474,14 @@ namespace cubos::core::ecs
         return EventReader<T>(std::get<1>(fetched).get(), std::get<0>(fetched));
     }
 
-    template <typename T> void impl::SystemFetcher<EventWriter<T>>::add(SystemInfo& info)
+    template <typename T>
+    void impl::SystemFetcher<EventWriter<T>>::add(SystemInfo& info)
     {
         info.resourcesWritten.insert(typeid(T));
     }
 
-    template <typename T> std::monostate impl::SystemFetcher<EventWriter<T>>::prepare(World&)
+    template <typename T>
+    std::monostate impl::SystemFetcher<EventWriter<T>>::prepare(World&)
     {
         return std::monostate();
     }
@@ -457,12 +492,14 @@ namespace cubos::core::ecs
         return world.write<EventPipe<T>>();
     }
 
-    template <typename T> EventWriter<T> impl::SystemFetcher<EventWriter<T>>::arg(WriteResource<EventPipe<T>>&& fetched)
+    template <typename T>
+    EventWriter<T> impl::SystemFetcher<EventWriter<T>>::arg(WriteResource<EventPipe<T>>&& fetched)
     {
         return EventWriter<T>(fetched.get());
     }
 
-    template <typename... Args> void impl::SystemFetcher<std::tuple<Args...>>::add(SystemInfo& info)
+    template <typename... Args>
+    void impl::SystemFetcher<std::tuple<Args...>>::add(SystemInfo& info)
     {
         ([&]() { impl::SystemFetcher<Args>::add(info); }(), ...);
     }

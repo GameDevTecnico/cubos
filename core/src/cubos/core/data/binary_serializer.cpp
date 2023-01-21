@@ -4,7 +4,8 @@
 using namespace cubos::core;
 using namespace cubos::core::data;
 
-template <typename T> static inline T toEndianness(T val, bool toLittleEndian)
+template <typename T>
+static inline T toEndianness(T val, bool toLittleEndian)
 {
     if (toLittleEndian)
         return memory::toLittleEndian(val);

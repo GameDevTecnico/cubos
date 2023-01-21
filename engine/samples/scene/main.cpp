@@ -14,6 +14,8 @@
 #include <cubos/engine/plugins/file_settings.hpp>
 #include <cubos/engine/plugins/imgui.hpp>
 
+#include <cubos/engine/plugins/tools/settings_inspector.hpp>
+
 #include <components/num.hpp>
 #include <components/parent.hpp>
 
@@ -65,20 +67,19 @@ int main(int argc, char** argv)
 
     cubos.addPlugin(plugins::envSettingsPlugin);
     cubos.addPlugin(plugins::windowPlugin);
-    cubos.addPlugin(cubos::engine::plugins::fileSettingsPlugin);
+    cubos.addPlugin(plugins::fileSettingsPlugin);
+
+    cubos.addResource<data::AssetManager>().addComponent<Num>().addComponent<Parent>();
+    cubos.startupSystem(setup).tagged("Setup");
+    cubos.startupSystem(printStuff).tagged("End");
 
     // an example of how the imgui plugin can be used to render your own stuff :)
     cubos.addPlugin(plugins::imguiPlugin);
-
-    cubos.addResource<data::AssetManager>().addComponent<Num>().addComponent<Parent>();
-
-    cubos.tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame");
-
-    cubos.startupSystem(setup).tagged("Setup");
-
-    cubos.startupSystem(printStuff).tagged("End");
-
+    cubos.tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame").beforeTag("EndImGuiFrame");
     cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
+
+    // or a tesserato tool!
+    cubos.addPlugin(plugins::tools::settingsInspectorPlugin);
 
     cubos.run();
 }
