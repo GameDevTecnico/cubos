@@ -3,7 +3,7 @@
 
 using namespace cubos::core::ecs;
 
-EntityBuilder::EntityBuilder(Entity entity, Commands& commands) : eEntity(entity), commands(commands)
+EntityBuilder::EntityBuilder(Entity entity, CommandBuffer& commands) : eEntity(entity), commands(commands)
 {
     // Do nothing.
 }
@@ -13,7 +13,7 @@ Entity EntityBuilder::entity() const
     return this->eEntity;
 }
 
-BlueprintBuilder::BlueprintBuilder(data::SerializationMap<Entity, std::string>&& map, Commands& commands)
+BlueprintBuilder::BlueprintBuilder(data::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands)
     : map(std::move(map)), commands(commands)
 {
     // Do nothing.
@@ -30,27 +30,32 @@ Entity BlueprintBuilder::entity(const std::string& name) const
     return this->map.getRef(name);
 }
 
-Commands::Commands(World& world) : world(world)
+Commands::Commands(CommandBuffer& buffer) : buffer(buffer)
 {
     // Do nothing.
 }
 
-Commands::Commands(Commands&& other) : world(other.world)
+void Commands::destroy(Entity entity)
 {
-    this->buffers = std::move(other.buffers);
-    this->created = std::move(other.created);
-    this->destroyed = std::move(other.destroyed);
-    this->added = std::move(other.added);
-    this->removed = std::move(other.removed);
-    this->changed = std::move(other.changed);
+    this->buffer.destroy(entity);
 }
 
-Commands::~Commands()
+BlueprintBuilder Commands::spawn(const Blueprint& blueprint)
+{
+    return this->buffer.spawn(blueprint);
+}
+
+CommandBuffer::CommandBuffer(World& world) : world(world)
+{
+    // Do nothing.
+}
+
+CommandBuffer::~CommandBuffer()
 {
     this->abort();
 }
 
-void Commands::destroy(Entity entity)
+void CommandBuffer::destroy(Entity entity)
 {
     std::lock_guard<std::mutex> lock(this->mutex);
 
@@ -59,7 +64,7 @@ void Commands::destroy(Entity entity)
 
 #include <iostream>
 
-BlueprintBuilder Commands::spawn(const Blueprint& blueprint)
+BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
 {
     data::SerializationMap<Entity, std::string> map;
     for (uint32_t i = 0; i < static_cast<uint32_t>(blueprint.map.size()); ++i)
@@ -81,7 +86,7 @@ BlueprintBuilder Commands::spawn(const Blueprint& blueprint)
     return BlueprintBuilder(std::move(map), *this);
 }
 
-void Commands::commit()
+void CommandBuffer::commit()
 {
     std::lock_guard<std::mutex> lock(this->mutex);
 
@@ -146,7 +151,7 @@ void Commands::commit()
     this->clear();
 }
 
-void Commands::abort()
+void CommandBuffer::abort()
 {
     std::lock_guard<std::mutex> lock(this->mutex);
 
@@ -158,7 +163,7 @@ void Commands::abort()
     this->clear();
 }
 
-void Commands::clear()
+void CommandBuffer::clear()
 {
     for (auto& buffer : this->buffers)
     {

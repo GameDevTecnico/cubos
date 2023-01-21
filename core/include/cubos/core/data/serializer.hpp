@@ -188,7 +188,8 @@ namespace cubos::core::data
         /// @param obj The object to serialize.
         /// @param ctx The context required to serialize.
         /// @param name The name of the object (optional).
-        template <typename T, typename TCtx> void write(const T& obj, TCtx&& ctx, const char* name);
+        template <typename T, typename TCtx>
+        void write(const T& obj, TCtx&& ctx, const char* name);
 
         /// Indicates that a object is currently being serialized.
         /// @param name The name of the object (optional).
@@ -312,7 +313,8 @@ namespace cubos::core::data
         s.writeString(v.c_str(), name);
     }
 
-    template <typename T> void serialize(Serializer& s, const glm::tvec2<T>& vec, const char* name)
+    template <typename T>
+    void serialize(Serializer& s, const glm::tvec2<T>& vec, const char* name)
     {
         s.beginObject(name);
         s.write(vec.x, "x");
@@ -320,7 +322,8 @@ namespace cubos::core::data
         s.endObject();
     }
 
-    template <typename T> void serialize(Serializer& s, const glm::tvec3<T>& vec, const char* name)
+    template <typename T>
+    void serialize(Serializer& s, const glm::tvec3<T>& vec, const char* name)
     {
         s.beginObject(name);
         s.write(vec.x, "x");
@@ -329,7 +332,8 @@ namespace cubos::core::data
         s.endObject();
     }
 
-    template <typename T> void serialize(Serializer& s, const glm::tvec4<T>& vec, const char* name)
+    template <typename T>
+    void serialize(Serializer& s, const glm::tvec4<T>& vec, const char* name)
     {
         s.beginObject(name);
         s.write(vec.x, "x");
@@ -339,7 +343,8 @@ namespace cubos::core::data
         s.endObject();
     }
 
-    template <typename T> void serialize(Serializer& s, const glm::tquat<T>& quat, const char* name)
+    template <typename T>
+    void serialize(Serializer& s, const glm::tquat<T>& quat, const char* name)
     {
         s.beginObject(name);
         s.write(quat.w, "w");
@@ -349,7 +354,8 @@ namespace cubos::core::data
         s.endObject();
     }
 
-    template <typename T> void serialize(Serializer& s, const glm::tmat4x4<T>& mat, const char* name)
+    template <typename T>
+    void serialize(Serializer& s, const glm::tmat4x4<T>& mat, const char* name)
     {
         s.beginObject(name);
         s.write(mat[0], "0");

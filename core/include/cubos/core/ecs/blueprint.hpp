@@ -30,7 +30,8 @@ namespace cubos::core::ecs
         /// @tparam ComponentTypes The types of the components.
         /// @param entity The entity to add the components to.
         /// @param components The components to add.
-        template <typename... ComponentTypes> void add(Entity entity, const ComponentTypes&... components);
+        template <typename... ComponentTypes>
+        void add(Entity entity, const ComponentTypes&... components);
 
         /// Deserializes a component and adds it to an entity.
         /// @param entity The entity to add the component to.
@@ -55,7 +56,7 @@ namespace cubos::core::ecs
         void clear();
 
     private:
-        friend class Commands;
+        friend class CommandBuffer;
 
         /// Stores all component data of a certain type.
         struct IBuffer
@@ -71,7 +72,7 @@ namespace cubos::core::ecs
             /// @param commands The commands object to add the components to.
             /// @param map The serialization map which maps from the entity names to the instantiated entities.
             /// @param handleCtx The handle context to deserialize handles with.
-            virtual void addAll(Commands& commands, const data::SerializationMap<Entity, std::string>& map,
+            virtual void addAll(CommandBuffer& commands, const data::SerializationMap<Entity, std::string>& map,
                                 data::Handle::DesContext handleCtx) = 0;
 
             /// Merges the data of another buffer of the same type into this one.
@@ -90,11 +91,12 @@ namespace cubos::core::ecs
 
         /// Implementation of the IBuffer interface for a single component type.
         /// @tparam ComponentType The type of the component.
-        template <typename ComponentType> struct Buffer : IBuffer
+        template <typename ComponentType>
+        struct Buffer : IBuffer
         {
             // Interface methods implementation.
 
-            void addAll(Commands& commands, const data::SerializationMap<Entity, std::string>& map,
+            void addAll(CommandBuffer& commands, const data::SerializationMap<Entity, std::string>& map,
                         data::Handle::DesContext handleCtx) override;
             virtual void merge(IBuffer* other, const std::string& prefix,
                                const data::SerializationMap<Entity, std::string>& src,
@@ -125,7 +127,8 @@ namespace cubos::core::ecs
         return entity;
     }
 
-    template <typename... ComponentTypes> void Blueprint::add(Entity entity, const ComponentTypes&... components)
+    template <typename... ComponentTypes>
+    void Blueprint::add(Entity entity, const ComponentTypes&... components)
     {
         assert(entity.generation == 0 && this->map.hasRef(entity));
 
@@ -152,7 +155,7 @@ namespace cubos::core::ecs
     }
 
     template <typename ComponentType>
-    void Blueprint::Buffer<ComponentType>::addAll(Commands& commands,
+    void Blueprint::Buffer<ComponentType>::addAll(CommandBuffer& commands,
                                                   const data::SerializationMap<Entity, std::string>& map,
                                                   data::Handle::DesContext handleCtx)
     {
@@ -201,7 +204,8 @@ namespace cubos::core::ecs
         buffer->mutex.unlock();
     }
 
-    template <typename ComponentType> Blueprint::IBuffer* Blueprint::Buffer<ComponentType>::create()
+    template <typename ComponentType>
+    Blueprint::IBuffer* Blueprint::Buffer<ComponentType>::create()
     {
         return new Buffer<ComponentType>();
     }

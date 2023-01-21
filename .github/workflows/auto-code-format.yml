@@ -1,0 +1,17 @@
+on:
+  pull_request_review:
+    types: [submitted]
+name: clang-format Code Formatter
+jobs:
+  lint:
+    if: github.event.review.state == 'approved'
+    name: clang-format Code Formatter
+    runs-on: ubuntu-latest
+    steps:
+    - name: Code Formatter
+      uses: roby2014/clang-format-action@v1.0
+      env:
+        BRANCH: ${{ github.event.pull_request.head.ref }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        exclude-regex: 'lib/'

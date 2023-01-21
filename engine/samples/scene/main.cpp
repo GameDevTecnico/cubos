@@ -18,6 +18,10 @@
 #include <cubos/engine/plugins/window.hpp>
 #include <cubos/engine/plugins/renderer.hpp>
 #include <cubos/engine/plugins/env_settings.hpp>
+#include <cubos/engine/plugins/file_settings.hpp>
+#include <cubos/engine/plugins/imgui.hpp>
+
+#include <cubos/engine/plugins/tools/settings_inspector.hpp>
 
 #include <components/cubos/position.hpp>
 #include <components/cubos/rotation.hpp>
@@ -29,37 +33,44 @@
 #include <components/num.hpp>
 #include <components/parent.hpp>
 
+#include <imgui.h>
+
 using namespace cubos;
 using namespace engine;
 using namespace core::ecs;
 using namespace core::data;
 using namespace core::memory;
+using namespace cubos::engine;
 
-void setup(Commands& cmds, data::AssetManager& assetManager)
+void setup(World& world, data::AssetManager& assetManager)
 {
+    CUBOS_INFO("SettingUp");
     FileSystem::mount("/assets/", std::make_shared<STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
 
+    assetManager.registerType<data::Palette>();
     assetManager.registerType<data::Scene>();
     assetManager.importMeta(FileSystem::find("/assets/"));
 
     // Load and spawn the scene.
     auto scene = assetManager.load<data::Scene>("scenes/main");
-    auto root = cmds.create().entity();
-    cmds.spawn(scene->blueprint).add("main", Parent{root});
+    // auto root = world.create().entity();
+    // cmds.spawn(scene->blueprint).add("main", Parent{root});
 }
 
-void printStuff(Debug debug)
+void printStuff(World& world)
 {
-    for (auto [entity, pkg] : debug)
+    for (auto entity : world)
     {
         auto name = std::to_string(entity.index);
         auto ser = DebugSerializer(Stream::stdOut);
+        auto pkg = world.pack(entity, [](core::data::Serializer& ser, const core::data::Handle& handle,
+                                         const char* name) { ser.write(handle.getId(), name); });
         ser.write(pkg, name.c_str());
         Stream::stdOut.put('\n');
     }
 }
 
-void createScene(core::ecs::Commands& commands, data::AssetManager& assetManager, gl::Renderer& renderer,
+void createScene(World& world, data::AssetManager& assetManager, gl::Renderer& renderer,
                  plugins::ActiveCamera& activeCamera)
 {
     ecs::Camera camera;
@@ -67,12 +78,9 @@ void createScene(core::ecs::Commands& commands, data::AssetManager& assetManager
     camera.zNear = 0.1f;
     camera.zFar = 1000.0f;
     activeCamera.entity =
-        commands
-            .create(ecs::LocalToWorld{}, ecs::Camera{camera}, ecs::Position{{0.0f, 40.0f, -70.0f}},
-                    ecs::Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})})
-            .entity();
+        world.create(ecs::LocalToWorld{}, ecs::Camera{camera}, ecs::Position{{0.0f, 40.0f, -70.0f}},
+                     ecs::Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})});
 
-    assetManager.registerType<data::Palette>();
     auto paletteAsset = assetManager.load<data::Palette>("palette");
     auto palette = paletteAsset->palette;
 
@@ -95,8 +103,7 @@ void createScene(core::ecs::Commands& commands, data::AssetManager& assetManager
                                                     .rendererGrid = floorRendererGrid,
                                                 });
 
-    commands.create(ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, ecs::LocalToWorld{}, ecs::Position{},
-                    ecs::Scale{4.0f});
+    world.create(ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, ecs::LocalToWorld{}, ecs::Position{}, ecs::Scale{4.0f});
 } //
 
 static void TurnOnLight(gl::Frame& frame)
@@ -108,24 +115,42 @@ static void TurnOnLight(gl::Frame& frame)
     frame.light(core::gl::DirectionalLight(directionalLightRotation, glm::vec3(1), 1.0f));
 }
 
+static void imguiExampleWindow()
+{
+    ImGui::Begin("hi !!!");
+    ImGui::End();
+}
+
 int main(int argc, char** argv)
 {
     // Initialize the asset manager.
-    Cubos(argc, argv)
-        .addResource<data::AssetManager>()
-        .addComponent<Num>()
-        .addComponent<Parent>()
+    Cubos cubos(argc, argv);
 
-        .addPlugin(cubos::engine::plugins::envSettingsPlugin)
-        .addPlugin(cubos::engine::plugins::windowPlugin)
-        .addPlugin(cubos::engine::plugins::transformPlugin)
-        .addPlugin(cubos::engine::plugins::rendererPlugin)
+    cubos.addPlugin(plugins::envSettingsPlugin);
+    cubos.addPlugin(plugins::windowPlugin);
+    cubos.addPlugin(plugins::fileSettingsPlugin);
 
-        .addStartupSystem(setup, "Setup")
-        .addStartupSystem(createScene, "CreateScene")
-        .addStartupSystem(printStuff, "End")
+    cubos.addPlugin(plugins::envSettingsPlugin);
+    cubos.addPlugin(plugins::rendererPlugin);
 
-        .addSystem(TurnOnLight, "SetLight")
-        .putStageBefore("SetLight", "Draw")
-        .run();
+    cubos.addResource<data::AssetManager>().addComponent<Num>().addComponent<Parent>();
+
+    cubos.startupTag("Setup").afterTag("SetRenderer");
+    cubos.startupSystem(setup).tagged("Setup");
+
+    cubos.startupTag("CreateScene").afterTag("Setup");
+    cubos.startupSystem(createScene).tagged("CreateScene");
+    cubos.startupSystem(printStuff).tagged("End");
+
+    // an example of how the imgui plugin can be used to render your own stuff :)
+    cubos.addPlugin(plugins::imguiPlugin);
+    cubos.tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame").beforeTag("EndImGuiFrame");
+    cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
+
+    cubos.tag("SetLight").beforeTag("Draw");
+    cubos.system(TurnOnLight).tagged("SetLight");
+    // or a tesserato tool!
+    cubos.addPlugin(plugins::tools::settingsInspectorPlugin);
+
+    cubos.run();
 }
