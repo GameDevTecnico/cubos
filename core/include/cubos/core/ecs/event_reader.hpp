@@ -65,7 +65,6 @@ namespace cubos::core::ecs
             auto mask = p.second;
             if (matchesMask(mask))
             {
-                // return std::optional<std::reference_wrapper<const T>>(std::reference_wrapper<const T>(event));
                 return std::make_optional(std::reference_wrapper<const T>(event));
             }
         }
@@ -75,13 +74,16 @@ namespace cubos::core::ecs
 
     template <typename T, unsigned int M> bool EventReader<T, M>::matchesMask(decltype(M) eventMask) const
     {
-        return M == ~0 ? true : eventMask & M;
+        return (M == ~0) || (eventMask & M);
     }
 
     template <typename T, unsigned int M> typename EventReader<T, M>::Iterator EventReader<T, M>::begin()
     {
-        // return a new begin iterator only if we did not read all events yet(?)
-        return (this->index >= this->pipe.sentEvents()) ? this->end() : Iterator(*this, this->read(), false);
+        // Return a new begin iterator only if we haven't read all events yet.
+        if (this->index >= this->pipe.sentEvents())
+            return this->end();
+        else
+            return Iterator(*this, this->read(), false);
     }
 
     template <typename T, unsigned int M> typename EventReader<T, M>::Iterator EventReader<T, M>::end()

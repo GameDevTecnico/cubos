@@ -88,8 +88,8 @@ namespace cubos::core::ecs
 
             static void add(SystemInfo& info);
             static State prepare(World& world);
-            static WriteResource<R> fetch(World& world, CommandBuffer& commands, State& state);
-            static R& arg(WriteResource<R>&& lock);
+            static Type fetch(World& world, CommandBuffer& commands, State& state);
+            static R& arg(Type&& lock);
         };
 
         template <typename R> struct SystemFetcher<const R&>
@@ -99,8 +99,8 @@ namespace cubos::core::ecs
 
             static void add(SystemInfo& info);
             static State prepare(World& world);
-            static ReadResource<R> fetch(World& world, CommandBuffer& commands, State& state);
-            static const R& arg(ReadResource<R>&& lock);
+            static Type fetch(World& world, CommandBuffer& commands, State& state);
+            static const R& arg(Type&& lock);
         };
 
         template <typename... ComponentTypes> struct SystemFetcher<Query<ComponentTypes...>>
@@ -121,8 +121,8 @@ namespace cubos::core::ecs
 
             static void add(SystemInfo& info);
             static State prepare(World& world);
-            static World* fetch(World& world, CommandBuffer& commands, State& state);
-            static World& arg(World* fetched);
+            static Type fetch(World& world, CommandBuffer& commands, State& state);
+            static World& arg(Type fetched);
         };
 
         template <> struct SystemFetcher<Commands>
@@ -132,8 +132,8 @@ namespace cubos::core::ecs
 
             static void add(SystemInfo& info);
             static State prepare(World& world);
-            static CommandBuffer* fetch(World& world, CommandBuffer& commands, State& state);
-            static Commands arg(CommandBuffer* fetched);
+            static Type fetch(World& world, CommandBuffer& commands, State& state);
+            static Commands arg(Type fetched);
         };
 
         template <typename T, unsigned int M> struct SystemFetcher<EventReader<T, M>>
@@ -143,9 +143,8 @@ namespace cubos::core::ecs
 
             static void add(SystemInfo& info);
             static State prepare(World& world);
-            static std::tuple<size_t&, ReadResource<EventPipe<T>>> fetch(World& world, CommandBuffer& commands,
-                                                                         State& state);
-            static EventReader<T, M> arg(std::tuple<size_t&, ReadResource<EventPipe<T>>>&& fetched);
+            static Type fetch(World& world, CommandBuffer& commands, State& state);
+            static EventReader<T, M> arg(Type&& fetched);
         };
 
         template <typename T> struct SystemFetcher<EventWriter<T>>
@@ -155,8 +154,8 @@ namespace cubos::core::ecs
 
             static void add(SystemInfo& info);
             static State prepare(World& world);
-            static WriteResource<EventPipe<T>> fetch(World& world, CommandBuffer& commands, State& state);
-            static EventWriter<T> arg(WriteResource<EventPipe<T>>&& fetched);
+            static Type fetch(World& world, CommandBuffer& commands, State& state);
+            static EventWriter<T> arg(Type&& fetched);
         };
 
         template <typename... Args> struct SystemFetcher<std::tuple<Args...>>
