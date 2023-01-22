@@ -1,7 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcubos_1_1core_1_1data_1_1Deserializer.html" title="Abstract class for deserializing data." alt="" coords="5,81,105,108"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinaryDeserializer.html" title=" " alt="" coords="153,5,296,32"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1JSONDeserializer.html" title="Implementation of the abstract Deserializer class for deserializing from JSON." alt="" coords="159,56,291,83"/>
-<area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1YAMLDeserializer.html" title="Implementation of the abstract Deserializer class for deserializng from YAML." alt="" coords="157,107,292,133"/>
-<area shape="rect" id="node5" href="$classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html" title=" " alt="" coords="175,157,274,184"/>
+<area shape="rect" id="node1" href="$structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html" title="Stencil state description." alt="" coords="5,5,176,47"/>
 </map>

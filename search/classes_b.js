@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['manager_829',['Manager',['../classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html',1,'cubos::engine::gl::pps']]],
-  ['mapstorage_830',['MapStorage',['../classcubos_1_1core_1_1ecs_1_1MapStorage.html',1,'cubos::core::ecs']]],
-  ['material_831',['Material',['../structcubos_1_1core_1_1gl_1_1Material.html',1,'cubos::core::gl']]],
-  ['meta_832',['Meta',['../classcubos_1_1engine_1_1data_1_1Meta.html',1,'cubos::engine::data']]]
+  ['loader_857',['Loader',['../classcubos_1_1engine_1_1data_1_1Loader.html',1,'cubos::engine::data']]],
+  ['localtoworld_858',['LocalToWorld',['../structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html',1,'cubos::engine::ecs']]]
 ];

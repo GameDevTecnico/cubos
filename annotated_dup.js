@@ -2,6 +2,13 @@ var annotated_dup =
 [
     [ "cubos", null, [
       [ "core", "namespacecubos_1_1core.html", [
+        [ "al", null, [
+          [ "impl", "namespacecubos_1_1core_1_1al_1_1impl.html", [
+            [ "Buffer", "classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html", "classcubos_1_1core_1_1al_1_1impl_1_1Buffer" ],
+            [ "Source", "classcubos_1_1core_1_1al_1_1impl_1_1Source.html", "classcubos_1_1core_1_1al_1_1impl_1_1Source" ]
+          ] ],
+          [ "AudioDevice", "classcubos_1_1core_1_1al_1_1AudioDevice.html", "classcubos_1_1core_1_1al_1_1AudioDevice" ]
+        ] ],
         [ "data", "namespacecubos_1_1core_1_1data.html", [
           [ "impl", "namespacecubos_1_1core_1_1data_1_1impl.html", [
             [ "Packager", "classcubos_1_1core_1_1data_1_1impl_1_1Packager.html", "classcubos_1_1core_1_1data_1_1impl_1_1Packager" ],
@@ -139,6 +146,13 @@ var annotated_dup =
           [ "DoubleAxis", "classcubos_1_1core_1_1io_1_1DoubleAxis.html", "classcubos_1_1core_1_1io_1_1DoubleAxis" ],
           [ "SingleAxis", "classcubos_1_1core_1_1io_1_1SingleAxis.html", "classcubos_1_1core_1_1io_1_1SingleAxis" ],
           [ "Source", "classcubos_1_1core_1_1io_1_1Source.html", "classcubos_1_1core_1_1io_1_1Source" ],
+          [ "KeyEvent", "structcubos_1_1core_1_1io_1_1KeyEvent.html", "structcubos_1_1core_1_1io_1_1KeyEvent" ],
+          [ "ModifiersEvent", "structcubos_1_1core_1_1io_1_1ModifiersEvent.html", "structcubos_1_1core_1_1io_1_1ModifiersEvent" ],
+          [ "MouseButtonEvent", "structcubos_1_1core_1_1io_1_1MouseButtonEvent.html", "structcubos_1_1core_1_1io_1_1MouseButtonEvent" ],
+          [ "MouseMoveEvent", "structcubos_1_1core_1_1io_1_1MouseMoveEvent.html", "structcubos_1_1core_1_1io_1_1MouseMoveEvent" ],
+          [ "MouseScrollEvent", "structcubos_1_1core_1_1io_1_1MouseScrollEvent.html", "structcubos_1_1core_1_1io_1_1MouseScrollEvent" ],
+          [ "ResizeEvent", "structcubos_1_1core_1_1io_1_1ResizeEvent.html", "structcubos_1_1core_1_1io_1_1ResizeEvent" ],
+          [ "TextEvent", "structcubos_1_1core_1_1io_1_1TextEvent.html", "structcubos_1_1core_1_1io_1_1TextEvent" ],
           [ "BaseWindow", "classcubos_1_1core_1_1io_1_1BaseWindow.html", "classcubos_1_1core_1_1io_1_1BaseWindow" ]
         ] ],
         [ "memory", "namespacecubos_1_1core_1_1memory.html", [
