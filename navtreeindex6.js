@@ -1,15 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"namespacecubos_1_1core_1_1gl.html#ab4be653cdc055ecdcaca53e7382883fa":[3,0,0,0,2,47],
-"namespacecubos_1_1core_1_1gl.html#ab4be653cdc055ecdcaca53e7382883faa6a061313d22e51e0f25b7cd4dc065233":[3,0,0,0,2,47,4],
-"namespacecubos_1_1core_1_1gl.html#ab4be653cdc055ecdcaca53e7382883faa78d811e98514cd165dda532286610fd2":[3,0,0,0,2,47,3],
-"namespacecubos_1_1core_1_1gl.html#ab4be653cdc055ecdcaca53e7382883faabb2c356401c2d3c0be676d940cfddaf6":[3,0,0,0,2,47,1],
-"namespacecubos_1_1core_1_1gl.html#ab4be653cdc055ecdcaca53e7382883faac8aa3177a3930f58e59d8c23929bb20f":[3,0,0,0,2,47,2],
-"namespacecubos_1_1core_1_1gl.html#ab4be653cdc055ecdcaca53e7382883faaec211f7c20af43e742bf2570c3cb84f9":[3,0,0,0,2,47,0],
-"namespacecubos_1_1core_1_1gl.html#ac3e0e8e3a194037cdf6103a95a1c6d31":[3,0,0,0,2,62],
-"namespacecubos_1_1core_1_1gl.html#ac3e0e8e3a194037cdf6103a95a1c6d31a59ec5d573abd014f3ae2c26ca962e8cf":[3,0,0,0,2,62,1],
-"namespacecubos_1_1core_1_1gl.html#ac3e0e8e3a194037cdf6103a95a1c6d31a9af3107a066f6b0defb1cafc0499f6ed":[3,0,0,0,2,62,0],
-"namespacecubos_1_1core_1_1gl.html#ac4b92e6b8c820ded95490092f8bfff74":[3,0,0,0,2,58],
 "namespacecubos_1_1core_1_1gl.html#ac4b92e6b8c820ded95490092f8bfff74a32a843da6ea40ab3b17a3421ccdf671b":[3,0,0,0,2,58,2],
 "namespacecubos_1_1core_1_1gl.html#ac4b92e6b8c820ded95490092f8bfff74a60494f02d440f316319dd0fad40ad007":[3,0,0,0,2,58,1],
 "namespacecubos_1_1core_1_1gl.html#ac4b92e6b8c820ded95490092f8bfff74a6adf97f83acf6453d4a6a4b1070f3754":[3,0,0,0,2,58,0],
@@ -249,5 +239,15 @@ var NAVTREEINDEX6 =
 "renderer_8hpp.html#a466baf930bfdebba0d977770dd4d0056":[3,0,0,1,2,5],
 "renderer_8hpp_source.html":[5,0,1,0,0,0,2,3],
 "resource__manager_8hpp_source.html":[5,0,0,0,1,0,1,12],
-"rotation_8hpp_source.html":[5,0,1,0,0,0,1,4]
+"rotation_8hpp_source.html":[5,0,1,0,0,0,1,4],
+"scale_8hpp_source.html":[5,0,1,0,0,0,1,5],
+"scene_8hpp_source.html":[5,0,1,0,0,0,0,6],
+"serialization_8hpp_source.html":[5,0,0,0,1,0,5,2],
+"serialization__map_8hpp_source.html":[5,0,0,0,1,0,0,14],
+"serializer_8hpp_source.html":[5,0,0,0,1,0,0,15],
+"settings_8hpp_source.html":[5,0,0,0,1,0,8],
+"settings__inspector_8hpp.html#af16ebf94aa7e16a57b67174b0addcd48":[3,0,0,1,3,0,0],
+"settings__inspector_8hpp_source.html":[5,0,1,0,0,0,3,0,0],
+"single__axis_8hpp_source.html":[5,0,0,0,1,0,3,0,2],
+"source_8hpp_source.html":[5,0,0,0,1,0,3,0,3]
 };

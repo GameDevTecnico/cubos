@@ -1,13 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"structcubos_1_1engine_1_1data_1_1Palette.html":[4,0,0,1,0,6],
-"structcubos_1_1engine_1_1data_1_1Palette.html#a4c8e552e9b5dc0ecd126fa1e53fffed8":[4,0,0,1,0,6,0],
-"structcubos_1_1engine_1_1data_1_1Palette.html#a71b884fc4ac1228d9197ba6b1d5a0d8a":[4,0,0,1,0,6,1],
-"structcubos_1_1engine_1_1data_1_1Scene.html":[4,0,0,1,0,7],
-"structcubos_1_1engine_1_1data_1_1Scene.html#a99fc37eebd43a75ccc74da7e8ae30b93":[4,0,0,1,0,7,1],
-"structcubos_1_1engine_1_1data_1_1Scene.html#af3a556d8502c2c55066c6ee9c44c62e0":[4,0,0,1,0,7,0],
-"structcubos_1_1engine_1_1ecs_1_1Grid.html":[4,0,0,1,1,0],
-"structcubos_1_1engine_1_1ecs_1_1Grid.html#a768698acfbfd3a8af90cbd697020ee82":[4,0,0,1,1,0,0],
 "structcubos_1_1engine_1_1ecs_1_1Grid.html#af45f1ee427751f6263ac629221a8398c":[4,0,0,1,1,0,1],
 "structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html":[4,0,0,1,1,1],
 "structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html#adc68cc75fb10fc123468ad032281061a":[4,0,0,1,1,1,0],
@@ -30,5 +22,15 @@ var NAVTREEINDEX8 =
 "vertex_8hpp_source.html":[5,0,0,0,1,0,2,8],
 "world_8hpp_source.html":[5,0,0,0,1,0,1,16],
 "yaml__deserializer_8hpp_source.html":[5,0,0,0,1,0,0,17],
-"yaml__serializer_8hpp_source.html":[5,0,0,0,1,0,0,18]
+"yaml__serializer_8hpp_source.html":[5,0,0,0,1,0,0,18],
+"":[3,0,0,1,3],
+"":[3,0,0,1,2],
+"":[3,0,0,1,0,0],
+"":[3,0,0,1,1],
+"":[3,0,0,1,2,0],
+"":[3,0,0,1,2,2],
+"":[3,0,0,1,3,0],
+"":[3,0,0],
+"":[3,0,0,1],
+"":[3,0,0,1,0]
 };
