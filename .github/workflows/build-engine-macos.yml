@@ -21,7 +21,7 @@ jobs:
         
     - name: Install dependencies
       run: |
-        brew install glfw
+        brew install glfw llvm@14
 
     - name: Configure CMake
       run: CC=$(brew --prefix llvm@14)/bin/clang CXX=$(brew --prefix llvm@14)/bin/clang++ cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DGLFW_USE_SUBMODULE=OFF -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON
