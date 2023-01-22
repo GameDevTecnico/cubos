@@ -60,10 +60,17 @@ int main(void)
         float t = 0;
         int s = 0;
 
-        window->onFramebufferResize.registerCallback([&](glm::ivec2 sz) { renderer.resize(sz); });
         while (!window->shouldClose())
         {
-            window->pollEvents();
+            while (auto event = window->pollEvent())
+            {
+                if (std::holds_alternative<core::io::ResizeEvent>(event.value()))
+                {
+                    auto resizeEvent = std::get<core::io::ResizeEvent>(event.value());
+                    renderer.resize(resizeEvent.size);
+                }
+            }
+
             // Calculate the delta time.
             float currentT = window->getTime();
             float deltaT = 0;

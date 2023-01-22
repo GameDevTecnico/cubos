@@ -52,14 +52,12 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/io/cursor.cpp"
     "src/cubos/core/io/glfw_window.hpp"
     "src/cubos/core/io/glfw_window.cpp"
-
-    "src/cubos/core/io/input_manager.cpp"
-    "src/cubos/core/io/action.cpp"
-    "src/cubos/core/io/context.cpp"
-
-    "src/cubos/core/io/sources/button_press.cpp"
-    "src/cubos/core/io/sources/single_axis.cpp"
-    "src/cubos/core/io/sources/double_axis.cpp"
+    #"src/cubos/core/io/input_manager.cpp"
+    #"src/cubos/core/io/action.cpp"
+    #"src/cubos/core/io/context.cpp"
+    #"src/cubos/core/io/sources/button_press.cpp"
+    #"src/cubos/core/io/sources/single_axis.cpp"
+    #"src/cubos/core/io/sources/double_axis.cpp"
 
     "src/cubos/core/gl/debug.cpp"
     "src/cubos/core/gl/render_device.cpp"
@@ -119,7 +117,14 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/window.hpp"
     "include/cubos/core/io/keyboard.hpp"
     "include/cubos/core/io/cursor.hpp"
-
+    #"include/cubos/core/io/input_manager.hpp"
+    #"include/cubos/core/io/action.hpp"
+    #"include/cubos/core/io/context.hpp"
+    #"include/cubos/core/io/sources/source.hpp"
+    #"include/cubos/core/io/sources/button_press.hpp"
+    #"include/cubos/core/io/sources/single_axis.hpp"
+    #"include/cubos/core/io/sources/double_axis.hpp"
+    
     "include/cubos/core/gl/debug.hpp"
     "include/cubos/core/gl/render_device.hpp"
     "include/cubos/core/gl/material.hpp"
@@ -129,14 +134,6 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/gl/camera.hpp"
     "include/cubos/core/gl/light.hpp"
     "include/cubos/core/gl/util.hpp"
-
-    "include/cubos/core/io/input_manager.hpp"
-    "include/cubos/core/io/action.hpp"
-    "include/cubos/core/io/context.hpp"
-    "include/cubos/core/io/sources/source.hpp"
-    "include/cubos/core/io/sources/button_press.hpp"
-    "include/cubos/core/io/sources/single_axis.hpp"
-    "include/cubos/core/io/sources/double_axis.hpp"
 
     "include/cubos/core/ui/imgui.hpp"
     "include/cubos/core/ui/serialization.hpp"

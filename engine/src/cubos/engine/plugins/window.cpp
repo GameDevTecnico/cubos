@@ -11,7 +11,11 @@ static void startup(cubos::core::io::Window& window, ShouldQuit& quit, const cub
 
 static void pollSystem(const cubos::core::io::Window& window, ShouldQuit& quit)
 {
-    window->pollEvents();
+    while (auto event = window->pollEvent())
+    {
+        // TODO: when event pipes get merged, this should be changed to use them.
+    }
+
     if (window->shouldClose())
     {
         quit.value = true;

@@ -131,7 +131,8 @@ int main(void)
             renderDevice.drawTrianglesIndexed(0, 6);
 
             window->swapBuffers();
-            window->pollEvents();
+            while (window->pollEvent().has_value())
+                ; // Do nothing with events.
         }
     }
 

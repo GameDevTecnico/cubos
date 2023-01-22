@@ -1,12 +1,15 @@
 #ifndef CUBOS_CORE_IO_WINDOW_HPP
 #define CUBOS_CORE_IO_WINDOW_HPP
 
-#include <cubos/core/event.hpp>
 #include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/io/cursor.hpp>
 
 #include <glm/glm.hpp>
+#include <optional>
+#include <variant>
 #include <memory>
+#include <string>
+#include <deque>
 
 namespace cubos::core::gl
 {
@@ -47,6 +50,54 @@ namespace cubos::core::io
                  ///< MouseState::Default
     };
 
+    /// Event sent when a key is pressed or released.
+    struct KeyEvent
+    {
+        Key key;      ///< Key that was pressed or released.
+        bool pressed; ///< True if the key was pressed, false if it was released.
+    };
+
+    /// Event sent when the modifiers change.
+    struct ModifiersEvent
+    {
+        Modifiers modifiers; ///< New modifiers.
+    };
+
+    /// Event sent when a mouse button state changes.
+    struct MouseButtonEvent
+    {
+        MouseButton button; ///< Button that was pressed or released.
+        bool pressed;       ///< True if the button was pressed, false if it was released.
+    };
+
+    /// Event sent when the mouse cursor moves.
+    struct MouseMoveEvent
+    {
+        glm::ivec2 position; ///< New position of the mouse cursor.
+    };
+
+    /// Event sent when the mouse wheel is scrolled.
+    struct MouseScrollEvent
+    {
+        glm::ivec2 offset; ///< Offset of the scroll.
+    };
+
+    /// Event sent when the window framebuffer is resized.
+    struct ResizeEvent
+    {
+        glm::ivec2 size; ///< New size of the framebuffer.
+    };
+
+    /// Event sent when a unicode character is input.
+    struct TextEvent
+    {
+        char32_t codepoint; ///< Unicode character that was input.
+    };
+
+    /// Variant that can hold any of the window events.
+    using WindowEvent = std::variant<KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent,
+                                     ResizeEvent, TextEvent>;
+
     /// Handle to a generic window.
     using Window = std::shared_ptr<BaseWindow>;
 
@@ -61,14 +112,19 @@ namespace cubos::core::io
     class BaseWindow
     {
     public:
-        BaseWindow() = default;
+        BaseWindow();
         virtual ~BaseWindow() = default;
 
-        /// Polls window events, firing the events.
-        virtual void pollEvents() const = 0;
+        /// Pushes an event to the event queue.
+        /// @param event Event to push.
+        void pushEvent(WindowEvent&& event);
+
+        /// Polls the window for events.
+        /// @return The next event, or std::nullopt if there are no more events.
+        std::optional<WindowEvent> pollEvent();
 
         /// Swaps the window buffers.
-        virtual void swapBuffers() const = 0;
+        virtual void swapBuffers() = 0;
 
         /// Returns the window render device.
         virtual gl::RenderDevice& getRenderDevice() const = 0;
@@ -111,32 +167,13 @@ namespace cubos::core::io
         /// @return Text from the clipboard.
         virtual const char* getClipboard() const = 0;
 
-        /// Invoked with a key code, when a keyboard key is pressed.
-        Event<Key> onKeyDown;
+    protected:
+        /// Asks the implementation to fill the event queue with new events.
+        virtual void pollEvents() = 0;
 
-        /// Invoked with a key code, when a keyboard key is released.
-        Event<Key> onKeyUp;
-
-        /// Invoked with the modifiers, when the modifiers change.
-        Event<Modifiers> onModsChanged;
-
-        /// Invoked with the cursor position when the cursor is moved.
-        Event<glm::ivec2> onMouseMoved;
-
-        /// Invoked with the scroll offset, when the mouse wheel is scrolled.
-        Event<glm::ivec2> onMouseScroll;
-
-        /// Invoked with a button code when a mouse button is released.
-        Event<MouseButton> onMouseUp;
-
-        /// Invoked with a button code when a mouse button is pressed.
-        Event<MouseButton> onMouseDown;
-
-        /// Invoked with the new framebuffer size when it changes size.
-        Event<glm::ivec2> onFramebufferResize;
-
-        /// Invoked when an unicode character is entered.
-        Event<char32_t> onChar;
+    private:
+        bool polled;
+        std::deque<WindowEvent> events;
     };
 } // namespace cubos::core::io
 
