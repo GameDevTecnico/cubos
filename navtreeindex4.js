@@ -1,9 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classcubos_1_1engine_1_1data_1_1Loader.html#a4da6ecc8b3326fd28acb8bf898c5c70f":[4,0,0,1,0,4,4],
-"classcubos_1_1engine_1_1data_1_1Loader.html#a6d50c1df2881b3fdb448c2d175bb62c9":[4,0,0,1,0,4,2],
-"classcubos_1_1engine_1_1data_1_1Loader.html#a9db2b6f8d713a2c10783a26542a4fd55":[4,0,0,1,0,4,3],
-"classcubos_1_1engine_1_1data_1_1Loader.html#abd8717c36d3e35c3d550647076e15ab4":[4,0,0,1,0,4,5],
 "classcubos_1_1engine_1_1data_1_1Loader.html#adbd53f90e9a70cbfc83d13e0d6d6e0bd":[4,0,0,1,0,4,0],
 "classcubos_1_1engine_1_1data_1_1Meta.html":[4,0,0,1,0,5],
 "classcubos_1_1engine_1_1data_1_1Meta.html#a007c673f8c367017105345ac525bf5f8":[4,0,0,1,0,5,3],
@@ -220,8 +216,8 @@ var NAVTREEINDEX4 =
 "file__system_8hpp_source.html":[5,0,0,0,1,0,0,8],
 "files.html":[5,0],
 "frame_8hpp_source.html":[5,0,1,0,0,0,2,2],
-"functions.html":[4,3,0,0],
 "functions.html":[4,3,0],
+"functions.html":[4,3,0,0],
 "functions_b.html":[4,3,0,1],
 "functions_c.html":[4,3,0,2],
 "functions_d.html":[4,3,0,3],
@@ -249,5 +245,9 @@ var NAVTREEINDEX4 =
 "functions_func_s.html":[4,3,1,17],
 "functions_func_t.html":[4,3,1,18],
 "functions_func_u.html":[4,3,1,19],
-"functions_func_v.html":[4,3,1,20]
+"functions_func_v.html":[4,3,1,20],
+"functions_func_w.html":[4,3,1,21],
+"functions_func_y.html":[4,3,1,22],
+"functions_g.html":[4,3,0,6],
+"functions_h.html":[4,3,0,7]
 };

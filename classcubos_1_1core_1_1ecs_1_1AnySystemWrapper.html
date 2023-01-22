@@ -104,8 +104,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a124675554dabd01e846620744f6d5758"><td class="memItemLeft" align="right" valign="top"><a id="a124675554dabd01e846620744f6d5758"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AnySystemWrapper</b> (<a class="el" href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html">SystemInfo</a> &amp;&amp;<a class="el" href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#a3360cdcc92fec727b285fdb1f03ace0b">info</a>)</td></tr>
 <tr class="separator:a124675554dabd01e846620744f6d5758"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a272ac3b01ffa31b658baf680e5ac7b93"><td class="memItemLeft" align="right" valign="top">virtual R&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#a272ac3b01ffa31b658baf680e5ac7b93">call</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a> &amp;commands) const =0</td></tr>
-<tr class="separator:a272ac3b01ffa31b658baf680e5ac7b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83bfbae73d866c28f65c3771439be4a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#a83bfbae73d866c28f65c3771439be4a6">prepare</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world)=0</td></tr>
+<tr class="separator:a83bfbae73d866c28f65c3771439be4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3af8bff9b5e1a68e265c7cd173ca2d19"><td class="memItemLeft" align="right" valign="top">virtual R&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#a3af8bff9b5e1a68e265c7cd173ca2d19">call</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a> &amp;commands)=0</td></tr>
+<tr class="separator:a3af8bff9b5e1a68e265c7cd173ca2d19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3360cdcc92fec727b285fdb1f03ace0b"><td class="memItemLeft" align="right" valign="top"><a id="a3360cdcc92fec727b285fdb1f03ace0b"></a>
 const <a class="el" href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html">SystemInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#a3360cdcc92fec727b285fdb1f03ace0b">info</a> () const</td></tr>
 <tr class="memdesc:a3360cdcc92fec727b285fdb1f03ace0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets information about the requirements of the system. <br /></td></tr>
@@ -117,8 +119,8 @@ class cubos::core::ecs::AnySystemWrapper&lt; R &gt;</h3>
 
 <p>Base class for system wrappers. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a272ac3b01ffa31b658baf680e5ac7b93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a272ac3b01ffa31b658baf680e5ac7b93">&#9670;&nbsp;</a></span>call()</h2>
+<a id="a3af8bff9b5e1a68e265c7cd173ca2d19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3af8bff9b5e1a68e265c7cd173ca2d19">&#9670;&nbsp;</a></span>call()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +143,7 @@ class cubos::core::ecs::AnySystemWrapper&lt; R &gt;</h3>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -159,7 +161,41 @@ class cubos::core::ecs::AnySystemWrapper&lt; R &gt;</h3>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The return value of the system. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#a0234fea830797bf9c2bb7c17a6bedc7e">SystemWrapper&lt; F &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#a3e8323b148a6ed9a22899de9046bf062">SystemWrapper&lt; F &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a83bfbae73d866c28f65c3771439be4a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83bfbae73d866c28f65c3771439be4a6">&#9670;&nbsp;</a></span>prepare()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void prepare </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;&#160;</td>
+          <td class="paramname"><em>world</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Prepares the system for being executed on the given world. Requires exclusive access to the world, must be called before calling the system. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td>The world to prepare the system for. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#a560205b33e07f2071d89c8e72505e33a">SystemWrapper&lt; F &gt;</a>.</p>
 
 </div>
 </div>

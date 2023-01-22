@@ -109,6 +109,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a937bde10c2cdb9773050b62078fe61bc"><td class="memTemplParams" colspan="2">template&lt;typename C &gt; </td></tr>
 <tr class="memitem:a937bde10c2cdb9773050b62078fe61bc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1Cubos.html">Cubos</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1Cubos.html#a937bde10c2cdb9773050b62078fe61bc">addComponent</a> ()</td></tr>
 <tr class="separator:a937bde10c2cdb9773050b62078fe61bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a3799d91bf6546dedb10f6b48d327c1"><td class="memTemplParams" colspan="2">template&lt;typename E &gt; </td></tr>
+<tr class="memitem:a6a3799d91bf6546dedb10f6b48d327c1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1Cubos.html">Cubos</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1Cubos.html#a6a3799d91bf6546dedb10f6b48d327c1">addEvent</a> ()</td></tr>
+<tr class="separator:a6a3799d91bf6546dedb10f6b48d327c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d0054031ab35ce29782fa1fc6a378fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1TagBuilder.html">TagBuilder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1Cubos.html#a6d0054031ab35ce29782fa1fc6a378fc">tag</a> (const std::string &amp;tag)</td></tr>
 <tr class="separator:a6d0054031ab35ce29782fa1fc6a378fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad54b075ad2d40c1b4bf556b5927da9e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1TagBuilder.html">TagBuilder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1Cubos.html#ad54b075ad2d40c1b4bf556b5927da9e6">startupTag</a> (const std::string &amp;<a class="el" href="classcubos_1_1engine_1_1Cubos.html#a6d0054031ab35ce29782fa1fc6a378fc">tag</a>)</td></tr>
@@ -141,6 +144,27 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Adds a new component type to the engine. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">C</td><td>The type of the component. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this object, for chaining. </dd></dl>
+
+</div>
+</div>
+<a id="a6a3799d91bf6546dedb10f6b48d327c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a3799d91bf6546dedb10f6b48d327c1">&#9670;&nbsp;</a></span>addEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1engine_1_1Cubos.html">Cubos</a> &amp; addEvent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a new event type to the engine. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">E</td><td>The type of the event. </td></tr>
   </table>
   </dd>
 </dl>
@@ -232,6 +256,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>System builder used to configure the system. </dd></dl>
 
 </div>
 </div>
@@ -250,12 +275,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the current tag for the startup dispatcher. If the tag doesn't exist, it will be created. Subsequent calls will set this tag's settings. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sets the current tag for the startup dispatcher. If the tag doesn't exist, it will be created. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">tag</td><td>The tag to set. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Tag builder used to configure the tag. </dd></dl>
 
 </div>
 </div>
@@ -286,6 +312,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>System builder used to configure the system. </dd></dl>
 
 </div>
 </div>
@@ -304,12 +331,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the current tag for the main dispatcher. If the tag doesn't exist, it will be created. Subsequent calls will set this tag's settings. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sets the current tag for the main dispatcher. If the tag doesn't exist, it will be created. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">tag</td><td>The tag to set. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Tag builder used to configure the tag. </dd></dl>
 
 </div>
 </div>

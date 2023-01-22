@@ -4,6 +4,7 @@ var classcubos_1_1engine_1_1Cubos =
     [ "Cubos", "classcubos_1_1engine_1_1Cubos.html#ab7e93f5359b83de2bbb5048def02413d", null ],
     [ "~Cubos", "classcubos_1_1engine_1_1Cubos.html#a561a317c3fd9c6f0a8dbc9f12f491dbe", null ],
     [ "addComponent", "classcubos_1_1engine_1_1Cubos.html#a937bde10c2cdb9773050b62078fe61bc", null ],
+    [ "addEvent", "classcubos_1_1engine_1_1Cubos.html#a6a3799d91bf6546dedb10f6b48d327c1", null ],
     [ "addPlugin", "classcubos_1_1engine_1_1Cubos.html#a3ae5c8ca2befeead8f2fff5b7e0f340b", null ],
     [ "addResource", "classcubos_1_1engine_1_1Cubos.html#ace484b43fd068cb7b1299cf66b00c203", null ],
     [ "run", "classcubos_1_1engine_1_1Cubos.html#a13a43e6d814de94978c515cb084873b1", null ],

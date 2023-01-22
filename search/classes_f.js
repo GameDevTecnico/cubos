@@ -1,13 +1,11 @@
 var searchData=
 [
-  ['rasterstate_838',['RasterState',['../classcubos_1_1core_1_1gl_1_1impl_1_1RasterState.html',1,'cubos::core::gl::impl']]],
-  ['rasterstatedesc_839',['RasterStateDesc',['../structcubos_1_1core_1_1gl_1_1RasterStateDesc.html',1,'cubos::core::gl']]],
-  ['readresource_840',['ReadResource',['../classcubos_1_1core_1_1ecs_1_1ReadResource.html',1,'cubos::core::ecs']]],
-  ['readstorage_841',['ReadStorage',['../classcubos_1_1core_1_1ecs_1_1ReadStorage.html',1,'cubos::core::ecs']]],
-  ['registry_842',['Registry',['../classcubos_1_1core_1_1ecs_1_1Registry.html',1,'cubos::core::ecs']]],
-  ['renderdevice_843',['RenderDevice',['../classcubos_1_1core_1_1gl_1_1RenderDevice.html',1,'cubos::core::gl']]],
-  ['renderer_844',['Renderer',['../classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html',1,'Renderer'],['../classcubos_1_1engine_1_1gl_1_1Renderer.html',1,'Renderer']]],
-  ['renderergrid_845',['RendererGrid',['../classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html',1,'cubos::engine::gl::impl']]],
-  ['resourcemanager_846',['ResourceManager',['../classcubos_1_1core_1_1ecs_1_1ResourceManager.html',1,'cubos::core::ecs']]],
-  ['rotation_847',['Rotation',['../structcubos_1_1engine_1_1ecs_1_1Rotation.html',1,'cubos::engine::ecs']]]
+  ['qbmatrix_846',['QBMatrix',['../structcubos_1_1core_1_1data_1_1QBMatrix.html',1,'cubos::core::data']]],
+  ['query_847',['Query',['../classcubos_1_1core_1_1ecs_1_1Query.html',1,'cubos::core::ecs']]],
+  ['queryfetcher_848',['QueryFetcher',['../classcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20component_20_26_20_3e_849',['QueryFetcher&lt; Component &amp; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_6_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20component_20_2a_20_3e_850',['QueryFetcher&lt; Component * &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_5_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20const_20component_20_26_20_3e_851',['QueryFetcher&lt; const Component &amp; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20const_20component_20_2a_20_3e_852',['QueryFetcher&lt; const Component * &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_5_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryinfo_853',['QueryInfo',['../structcubos_1_1core_1_1ecs_1_1QueryInfo.html',1,'cubos::core::ecs']]]
 ];

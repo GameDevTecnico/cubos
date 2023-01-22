@@ -100,126 +100,25 @@ Public Types</h2></td></tr>
 <tr class="memitem:ab9510521b9ff8b3328bcfb9d0442e9b7"><td class="memItemLeft" align="right" valign="top"><a id="ab9510521b9ff8b3328bcfb9d0442e9b7"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> = <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> *</td></tr>
 <tr class="separator:ab9510521b9ff8b3328bcfb9d0442e9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64ecd1c8cd44d87c4f7dc722b82c3f1f"><td class="memItemLeft" align="right" valign="top"><a id="a64ecd1c8cd44d87c4f7dc722b82c3f1f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>State</b> = std::monostate</td></tr>
+<tr class="separator:a64ecd1c8cd44d87c4f7dc722b82c3f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:afed27102f238e9885ebcdadcc6b63ca6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4.html#afed27102f238e9885ebcdadcc6b63ca6">add</a> (<a class="el" href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html">SystemInfo</a> &amp;info)</td></tr>
+<tr class="memitem:afed27102f238e9885ebcdadcc6b63ca6"><td class="memItemLeft" align="right" valign="top"><a id="afed27102f238e9885ebcdadcc6b63ca6"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (<a class="el" href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html">SystemInfo</a> &amp;info)</td></tr>
 <tr class="separator:afed27102f238e9885ebcdadcc6b63ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e9601e66eba452eaa92dfdfdb04887c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4.html#a6e9601e66eba452eaa92dfdfdb04887c">fetch</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a> &amp;commands)</td></tr>
-<tr class="separator:a6e9601e66eba452eaa92dfdfdb04887c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a678ebac192375ca32ef7c02a406ff53d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4.html#a678ebac192375ca32ef7c02a406ff53d">arg</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> *fetched)</td></tr>
-<tr class="separator:a678ebac192375ca32ef7c02a406ff53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdc8827639c297d051403bbecb7550b4"><td class="memItemLeft" align="right" valign="top"><a id="abdc8827639c297d051403bbecb7550b4"></a>
+static State&#160;</td><td class="memItemRight" valign="bottom"><b>prepare</b> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world)</td></tr>
+<tr class="separator:abdc8827639c297d051403bbecb7550b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93d2c5ce7202172b2dacb5b6c1530d5e"><td class="memItemLeft" align="right" valign="top"><a id="a93d2c5ce7202172b2dacb5b6c1530d5e"></a>
+static <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fetch</b> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a> &amp;commands, State &amp;state)</td></tr>
+<tr class="separator:a93d2c5ce7202172b2dacb5b6c1530d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3286e5e3721a6992db1a094f1029d560"><td class="memItemLeft" align="right" valign="top"><a id="a3286e5e3721a6992db1a094f1029d560"></a>
+static <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>arg</b> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">Type</a> fetched)</td></tr>
+<tr class="separator:a3286e5e3721a6992db1a094f1029d560"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="afed27102f238e9885ebcdadcc6b63ca6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afed27102f238e9885ebcdadcc6b63ca6">&#9670;&nbsp;</a></span>add()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void add </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html">SystemInfo</a> &amp;&#160;</td>
-          <td class="paramname"><em>info</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Adds the debug query to the system info structure. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">info</td><td>The system info structure to add to. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a678ebac192375ca32ef7c02a406ff53d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a678ebac192375ca32ef7c02a406ff53d">&#9670;&nbsp;</a></span>arg()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp; arg </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> *&#160;</td>
-          <td class="paramname"><em>fetched</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fetched</td><td>The fetched query. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The query. </dd></dl>
-
-</div>
-</div>
-<a id="a6e9601e66eba452eaa92dfdfdb04887c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e9601e66eba452eaa92dfdfdb04887c">&#9670;&nbsp;</a></span>fetch()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> * fetch </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;&#160;</td>
-          <td class="paramname"><em>world</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a> &amp;&#160;</td>
-          <td class="paramname"><em>commands</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">world</td><td>The world to query from. </td></tr>
-    <tr><td class="paramname">commands</td><td>The commands object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The requested query data. </dd></dl>
-
-</div>
-</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>core/include/cubos/core/ecs/<a class="el" href="system_8hpp_source.html">system.hpp</a></li>
 </ul>
