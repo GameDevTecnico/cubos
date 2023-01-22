@@ -5,7 +5,8 @@
 
 namespace cubos::core::ecs
 {
-    template <typename T> class EventWriter
+    template <typename T>
+    class EventWriter
     {
     public:
         EventWriter(EventPipe<T>& pipe);
@@ -22,11 +23,13 @@ namespace cubos::core::ecs
 
     // EventWriter implementation.
 
-    template <typename T> EventWriter<T>::EventWriter(EventPipe<T>& pipe) : pipe(pipe)
+    template <typename T>
+    EventWriter<T>::EventWriter(EventPipe<T>& pipe) : pipe(pipe)
     {
     }
 
-    template <typename T> void EventWriter<T>::push(T event, unsigned int mask)
+    template <typename T>
+    void EventWriter<T>::push(T event, unsigned int mask)
     {
         this->pipe.push(event, mask);
     }

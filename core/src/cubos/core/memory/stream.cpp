@@ -459,7 +459,7 @@ void Stream::readUntil(std::string& str, const char* terminator)
 size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
 {
     if (terminator == nullptr)
-        terminator == "";
+        terminator = "";
 
     size_t terminatorI = 0, position = 0;
     char c;

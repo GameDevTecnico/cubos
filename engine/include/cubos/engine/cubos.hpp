@@ -13,12 +13,14 @@ namespace cubos::engine
     /// Resource used as a flag to indicate whether the engine should stop running.
     struct ShouldQuit
     {
+        ShouldQuit(bool value);
         bool value;
     };
 
     /// Resource used for storing program arguments.
     struct Arguments
     {
+        Arguments(const std::vector<std::string>& value);
         const std::vector<std::string> value;
     };
 
