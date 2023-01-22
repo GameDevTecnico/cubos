@@ -84,7 +84,8 @@ int main(void)
 
         ui::endFrame();
         window->swapBuffers();
-        window->pollEvents();
+        while (auto event = window->pollEvent())
+            ui::handleEvent(event.value());
     }
 
     ui::terminate();

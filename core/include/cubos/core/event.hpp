@@ -17,7 +17,8 @@ namespace cubos::core
     ///     event.fire("Hello!"); // Prints "Hello!"
     ///
     /// @tparam TArgs The argument types of the callback functions.
-    template <typename... TArgs> class Event
+    template <typename... TArgs>
+    class Event
     {
     public:
         using Callback = std::function<void(TArgs...)>; ///< Callback type.
@@ -41,13 +42,15 @@ namespace cubos::core
         /// @param obj The instance associated with the method callback that should be called when the event is fired.
         /// @param callback The method callback when the event is fired.
         /// @see unregisterCallback.
-        template <class TObj> void registerCallback(TObj* obj, void (TObj::*callback)(TArgs...));
+        template <class TObj>
+        void registerCallback(TObj* obj, void (TObj::*callback)(TArgs...));
 
         /// Unregisters a callback.
         /// @param obj The instance associated with the method callback that should be unregistered.
         /// @param callback The method callback that should be unregistred.
         /// @see registerCallback.
-        template <class TObj> void unregisterCallback(TObj* obj, void (TObj::*callback)(TArgs...));
+        template <class TObj>
+        void unregisterCallback(TObj* obj, void (TObj::*callback)(TArgs...));
 
         /// Fires the event, calling all the callbacks with the passed arguments.
         /// @param args Event arguments.
@@ -62,7 +65,8 @@ namespace cubos::core
             void* obj;
         };
 
-        template <typename TObj> struct ObjectMethodCallback : public MethodCallback
+        template <typename TObj>
+        struct ObjectMethodCallback : public MethodCallback
         {
 
             ObjectMethodCallback(TObj* obj, void (TObj::*callback)(TArgs...));
@@ -77,7 +81,8 @@ namespace cubos::core
         std::vector<MethodCallback*> methodCallbacks;
     };
 
-    template <typename... TArgs> Event<TArgs...>::~Event()
+    template <typename... TArgs>
+    Event<TArgs...>::~Event()
     {
         for (auto& m : this->methodCallbacks)
             delete m;
@@ -91,13 +96,15 @@ namespace cubos::core
         return this->callbacks.size() - 1;
     }
 
-    template <typename... TArgs> void Event<TArgs...>::unregisterCallback(Event<TArgs...>::ID id)
+    template <typename... TArgs>
+    void Event<TArgs...>::unregisterCallback(Event<TArgs...>::ID id)
     {
         auto lock = std::lock_guard<std::mutex>(this->mutex);
         this->callbacks[id] = nullptr;
     }
 
-    template <typename... TArgs> void Event<TArgs...>::fire(TArgs... args) const
+    template <typename... TArgs>
+    void Event<TArgs...>::fire(TArgs... args) const
     {
         auto lock = std::lock_guard<std::mutex>(this->mutex);
         for (auto& callback : this->callbacks)

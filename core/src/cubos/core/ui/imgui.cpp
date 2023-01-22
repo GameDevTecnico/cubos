@@ -12,15 +12,6 @@ struct ImGuiData
     io::Window window;
     gl::RenderDevice& renderDevice;
 
-    size_t onMouseMovedId;
-    size_t onMouseDownId;
-    size_t onMouseUpId;
-    size_t onMouseScrollId;
-    size_t onKeyDownId;
-    size_t onKeyUpId;
-    size_t onCharId;
-    size_t onModsId;
-
     std::shared_ptr<io::Cursor> cursors[ImGuiMouseCursor_COUNT];
 
     double time;
@@ -311,57 +302,6 @@ void ui::initialize(io::Window window)
         if (bd->cursors[i] == nullptr)
             bd->cursors[i] = bd->cursors[ImGuiMouseCursor_Arrow];
 
-    bd->onMouseMovedId = window->onMouseMoved.registerCallback([](glm::ivec2 pos) {
-        ImGuiIO& io = ImGui::GetIO();
-        io.AddMousePosEvent(static_cast<float>(pos.x), static_cast<float>(pos.y));
-    });
-
-    bd->onMouseDownId = window->onMouseDown.registerCallback([](io::MouseButton button) {
-        ImGuiIO& io = ImGui::GetIO();
-        int b = buttonToImGuiButton(button);
-        if (b != -1)
-            io.AddMouseButtonEvent(b, true);
-    });
-
-    bd->onMouseUpId = window->onMouseUp.registerCallback([](io::MouseButton button) {
-        ImGuiIO& io = ImGui::GetIO();
-        int b = buttonToImGuiButton(button);
-        if (b != -1)
-            io.AddMouseButtonEvent(b, false);
-    });
-
-    bd->onMouseScrollId = window->onMouseScroll.registerCallback([](glm::ivec2 scroll) {
-        ImGuiIO& io = ImGui::GetIO();
-        io.AddMouseWheelEvent(static_cast<float>(scroll.x), static_cast<float>(scroll.y));
-    });
-
-    bd->onKeyDownId = window->onKeyDown.registerCallback([](io::Key key) {
-        ImGuiIO& io = ImGui::GetIO();
-        int k = keyToImGuiKey(key);
-        if (k != -1)
-            io.AddKeyEvent(k, true);
-    });
-
-    bd->onKeyUpId = window->onKeyUp.registerCallback([](io::Key key) {
-        ImGuiIO& io = ImGui::GetIO();
-        int k = keyToImGuiKey(key);
-        if (k != -1)
-            io.AddKeyEvent(k, false);
-    });
-
-    bd->onCharId = window->onChar.registerCallback([](char c) {
-        ImGuiIO& io = ImGui::GetIO();
-        io.AddInputCharacter(c);
-    });
-
-    bd->onModsId = window->onModsChanged.registerCallback([](io::Modifiers mods) {
-        ImGuiIO& io = ImGui::GetIO();
-        io.KeyCtrl = (mods & io::Modifiers::Control) != io::Modifiers::None;
-        io.KeyShift = (mods & io::Modifiers::Shift) != io::Modifiers::None;
-        io.KeyAlt = (mods & io::Modifiers::Alt) != io::Modifiers::None;
-        io.KeySuper = (mods & io::Modifiers::System) != io::Modifiers::None;
-    });
-
     io.SetClipboardTextFn = setClipboardText;
     io.GetClipboardTextFn = getClipboardText;
     io.ClipboardUserData = (void*)&window;
@@ -383,14 +323,6 @@ void ui::terminate()
     {
         bd->cursors[i] = nullptr;
     }
-
-    bd->window->onMouseMoved.unregisterCallback(bd->onMouseMovedId);
-    bd->window->onMouseDown.unregisterCallback(bd->onMouseDownId);
-    bd->window->onMouseUp.unregisterCallback(bd->onMouseUpId);
-    bd->window->onMouseScroll.unregisterCallback(bd->onMouseScrollId);
-    bd->window->onKeyDown.unregisterCallback(bd->onKeyDownId);
-    bd->window->onKeyUp.unregisterCallback(bd->onKeyUpId);
-    bd->window->onChar.unregisterCallback(bd->onCharId);
 
     bd->rasterState = nullptr;
     bd->blendState = nullptr;
@@ -565,4 +497,63 @@ void ui::endFrame(gl::Framebuffer target)
             }
         }
     }
+}
+
+static bool handle(const io::MouseMoveEvent& event)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.MousePos = ImVec2(static_cast<float>(event.position.x), static_cast<float>(event.position.y));
+    return io.WantCaptureMouse;
+}
+
+static bool handle(const io::MouseButtonEvent& event)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    int button = buttonToImGuiButton(event.button);
+    if (button != -1)
+        io.AddMouseButtonEvent(button, event.pressed);
+    return io.WantCaptureMouse;
+}
+
+static bool handle(const io::MouseScrollEvent& event)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.AddMouseWheelEvent(static_cast<float>(event.offset.x), static_cast<float>(event.offset.y));
+    return io.WantCaptureMouse;
+}
+
+static bool handle(const io::KeyEvent& event)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    int key = keyToImGuiKey(event.key);
+    if (key != -1)
+        io.AddKeyEvent(key, event.pressed);
+    return io.WantCaptureKeyboard;
+}
+
+static bool handle(const io::TextEvent& event)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.AddInputCharacter(event.codepoint);
+    return io.WantCaptureKeyboard;
+}
+
+static bool handle(const io::ModifiersEvent& event)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.KeyCtrl = (event.modifiers & io::Modifiers::Control) != io::Modifiers::None;
+    io.KeyShift = (event.modifiers & io::Modifiers::Shift) != io::Modifiers::None;
+    io.KeyAlt = (event.modifiers & io::Modifiers::Alt) != io::Modifiers::None;
+    io.KeySuper = (event.modifiers & io::Modifiers::System) != io::Modifiers::None;
+    return io.WantCaptureKeyboard;
+}
+
+static bool handle(auto&& event)
+{
+    return false;
+}
+
+bool ui::handleEvent(const io::WindowEvent& event)
+{
+    return std::visit([&](const auto& e) { return handle(e); }, event);
 }

@@ -86,7 +86,7 @@ GLFWWindow::~GLFWWindow()
 #endif
 }
 
-void GLFWWindow::pollEvents() const
+void GLFWWindow::pollEvents()
 {
 #ifdef WITH_GLFW
     glfwPollEvents();
@@ -95,7 +95,7 @@ void GLFWWindow::pollEvents() const
 #endif
 }
 
-void GLFWWindow::swapBuffers() const
+void GLFWWindow::swapBuffers()
 {
 #ifdef WITH_GLFW
     glfwSwapBuffers(this->handle);
@@ -268,20 +268,14 @@ static void keyCallback(GLFWwindow* window, int key, int scancode, int action, i
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     Key cubosKey = glfwToCubosKey(key);
     updateMods(handler, mods);
-    if (action == GLFW_PRESS)
-    {
-        handler->onKeyDown.fire(cubosKey);
-    }
-    else if (action == GLFW_RELEASE)
-    {
-        handler->onKeyUp.fire(cubosKey);
-    }
+    if (action == GLFW_PRESS || action == GLFW_RELEASE)
+        handler->pushEvent(KeyEvent{.key = cubosKey, .pressed = action == GLFW_PRESS});
 }
 
 static void mousePositionCallback(GLFWwindow* window, double xPos, double yPos)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
-    handler->onMouseMoved.fire(glm::ivec2(xPos, yPos));
+    handler->pushEvent(MouseMoveEvent{.position = glm::ivec2(xPos, yPos)});
 }
 
 static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
@@ -289,28 +283,26 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     MouseButton cubosButton = glfwToCubosMouseButton(button);
     updateMods(handler, mods);
-    if (action == GLFW_PRESS)
-        handler->onMouseDown.fire(cubosButton);
-    else // with GLFW_RELEASE
-        handler->onMouseUp.fire(cubosButton);
+    if (action == GLFW_PRESS || action == GLFW_RELEASE)
+        handler->pushEvent(MouseButtonEvent{.button = cubosButton, .pressed = action == GLFW_PRESS});
 }
 
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
-    handler->onMouseScroll.fire(glm::ivec2(xoffset, yoffset));
+    handler->pushEvent(MouseScrollEvent{.offset = glm::vec2(xoffset, yoffset)});
 }
 
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
-    handler->onFramebufferResize.fire(glm::ivec2(width, height));
+    handler->pushEvent(ResizeEvent{.size = glm::ivec2(width, height)});
 }
 
 static void charCallback(GLFWwindow* window, unsigned int codepoint)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
-    handler->onChar.fire(codepoint);
+    handler->pushEvent(TextEvent{.codepoint = static_cast<char32_t>(codepoint)});
 }
 
 static void updateMods(GLFWWindow* handler, int glfwMods)
@@ -324,7 +316,7 @@ static void updateMods(GLFWWindow* handler, int glfwMods)
         mods |= Modifiers::Alt;
     if (glfwMods & GLFW_MOD_SUPER)
         mods |= Modifiers::System;
-    handler->onModsChanged.fire(mods);
+    handler->pushEvent(ModifiersEvent{.modifiers = mods});
 }
 
 static MouseButton glfwToCubosMouseButton(int button)

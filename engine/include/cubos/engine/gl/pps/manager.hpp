@@ -46,7 +46,8 @@ namespace cubos::engine::gl::pps
         /// Adds a pass to the manager.
         /// @tparam T The type of the pass to add.
         /// @return The ID of the pass.
-        template <typename T> size_t addPass();
+        template <typename T>
+        size_t addPass();
 
         /// Removes a pass from the manager.
         /// @param id The ID of the pass.
@@ -73,7 +74,8 @@ namespace cubos::engine::gl::pps
 
     // Implementation.
 
-    template <typename T> size_t Manager::addPass()
+    template <typename T>
+    size_t Manager::addPass()
     {
         size_t id = this->nextId++;
         this->passes[id] = new T(this->renderDevice, this->size);

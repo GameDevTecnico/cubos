@@ -9,7 +9,8 @@ namespace cubos::core::ecs
     /// @brief VecStorage is a Storage implementation that uses a STL vector, this is best
     /// for components that are used very often, in order to be the most efficient memory wise.
     /// @tparam T The type to be stored in the storage.
-    template <typename T> class VecStorage : public Storage<T>
+    template <typename T>
+    class VecStorage : public Storage<T>
     {
     public:
         T* insert(uint32_t index, T value) override;
@@ -21,7 +22,8 @@ namespace cubos::core::ecs
         std::vector<T> data;
     };
 
-    template <typename T> T* VecStorage<T>::insert(uint32_t index, T value)
+    template <typename T>
+    T* VecStorage<T>::insert(uint32_t index, T value)
     {
         if (data.size() <= index)
         {
@@ -36,17 +38,20 @@ namespace cubos::core::ecs
         return &data[index];
     }
 
-    template <typename T> T* VecStorage<T>::get(uint32_t index)
+    template <typename T>
+    T* VecStorage<T>::get(uint32_t index)
     {
         return &data[index];
     }
 
-    template <typename T> const T* VecStorage<T>::get(uint32_t index) const
+    template <typename T>
+    const T* VecStorage<T>::get(uint32_t index) const
     {
         return &data[index];
     }
 
-    template <typename T> void VecStorage<T>::erase(uint32_t index)
+    template <typename T>
+    void VecStorage<T>::erase(uint32_t index)
     {
         data[index].~T();
         new (&data[index]) T;

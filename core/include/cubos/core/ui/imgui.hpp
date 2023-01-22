@@ -20,6 +20,11 @@ namespace cubos::core::ui
 
     /// Ends the current ImGui frame, and renders the ImGui draw data to the window.
     void endFrame(gl::Framebuffer target = 0);
+
+    /// Passes a window event to ImGui.
+    /// @param event The event to pass.
+    /// @return True if the event was consumed by ImGui, false otherwise.
+    bool handleEvent(const io::WindowEvent& event);
 } // namespace cubos::core::ui
 
 #endif // CUBOS_CORE_UI_IMGUI_HPP

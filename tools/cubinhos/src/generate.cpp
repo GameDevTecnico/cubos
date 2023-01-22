@@ -8,7 +8,7 @@
 namespace fs = std::filesystem;
 
 /// The input options of the program.
-struct Options
+struct GenerateOptions
 {
     fs::path input = "";  ///< The input directory.
     fs::path output = ""; ///< The output directory.
@@ -39,7 +39,7 @@ static void printHelp()
 /// @param argv The arguments.
 /// @param options The options to fill.
 /// @return True if the arguments were parsed successfully, false otherwise.
-static bool parseArguments(int argc, char** argv, Options& options)
+static bool parseArguments(int argc, char** argv, GenerateOptions& options)
 {
     int foundInput = 0;
 
@@ -703,7 +703,7 @@ static bool parse(fs::path path, std::vector<Component>& components)
 /// Runs the generator from the command line options.
 /// @param options The command line options.
 /// @return True if the generation was successful, false otherwise.
-static bool generate(const Options& options)
+static bool generate(const GenerateOptions& options)
 {
     std::vector<Component> components;
     if (!parse(options.input, components))
@@ -817,7 +817,7 @@ static bool generate(const Options& options)
 int runGenerate(int argc, char** argv)
 {
     // Parse command line arguments.
-    Options options = {};
+    GenerateOptions options = {};
     if (!parseArguments(argc, argv, options))
     {
         printHelp();

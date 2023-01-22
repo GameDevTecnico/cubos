@@ -2,6 +2,7 @@
 #define CUBOS_CORE_IO_GLFW_WINDOW_HPP
 
 #include <glm/glm.hpp>
+#include <deque>
 
 #ifdef WITH_GLFW
 #define GLFW_INCLUDE_NONE
@@ -23,8 +24,8 @@ namespace cubos::core::io
 
         // Interface implementation.
 
-        virtual void pollEvents() const override;
-        virtual void swapBuffers() const override;
+        virtual void pollEvents() override;
+        virtual void swapBuffers() override;
         virtual gl::RenderDevice& getRenderDevice() const override;
         virtual glm::ivec2 getSize() const override;
         virtual glm::ivec2 getFramebufferSize() const override;

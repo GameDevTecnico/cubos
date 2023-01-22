@@ -26,6 +26,7 @@ message("# Building core tests: " ${BUILD_CORE_TESTS})
 set(CUBOS_CORE_SOURCE
     "src/cubos/core/log.cpp"
     "src/cubos/core/settings.cpp"
+    "src/cubos/core/thread_pool.cpp"
 
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/std_stream.cpp"
@@ -52,14 +53,12 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/io/cursor.cpp"
     "src/cubos/core/io/glfw_window.hpp"
     "src/cubos/core/io/glfw_window.cpp"
-
-    "src/cubos/core/io/input_manager.cpp"
-    "src/cubos/core/io/action.cpp"
-    "src/cubos/core/io/context.cpp"
-
-    "src/cubos/core/io/sources/button_press.cpp"
-    "src/cubos/core/io/sources/single_axis.cpp"
-    "src/cubos/core/io/sources/double_axis.cpp"
+    #"src/cubos/core/io/input_manager.cpp"
+    #"src/cubos/core/io/action.cpp"
+    #"src/cubos/core/io/context.cpp"
+    #"src/cubos/core/io/sources/button_press.cpp"
+    #"src/cubos/core/io/sources/single_axis.cpp"
+    #"src/cubos/core/io/sources/double_axis.cpp"
 
     "src/cubos/core/gl/debug.cpp"
     "src/cubos/core/gl/render_device.cpp"
@@ -85,7 +84,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/commands.cpp"
     "src/cubos/core/ecs/blueprint.cpp"
     "src/cubos/core/ecs/world.cpp"
-    "src/cubos/core/ecs/debug.cpp"
     "src/cubos/core/ecs/system.cpp"
     "src/cubos/core/ecs/dispatcher.cpp"
     "src/cubos/core/ecs/registry.cpp"
@@ -94,6 +92,7 @@ set(CUBOS_CORE_SOURCE
 set(CUBOS_CORE_INCLUDE
     "include/cubos/core/log.hpp"
     "include/cubos/core/settings.hpp"
+    "include/cubos/core/thread_pool.hpp"
 
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/std_stream.hpp"
@@ -123,7 +122,14 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/window.hpp"
     "include/cubos/core/io/keyboard.hpp"
     "include/cubos/core/io/cursor.hpp"
-
+    #"include/cubos/core/io/input_manager.hpp"
+    #"include/cubos/core/io/action.hpp"
+    #"include/cubos/core/io/context.hpp"
+    #"include/cubos/core/io/sources/source.hpp"
+    #"include/cubos/core/io/sources/button_press.hpp"
+    #"include/cubos/core/io/sources/single_axis.hpp"
+    #"include/cubos/core/io/sources/double_axis.hpp"
+    
     "include/cubos/core/gl/debug.hpp"
     "include/cubos/core/gl/render_device.hpp"
     "include/cubos/core/gl/material.hpp"
@@ -135,14 +141,6 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/gl/util.hpp"
 
     "include/cubos/core/al/audio_device.hpp"
-
-    "include/cubos/core/io/input_manager.hpp"
-    "include/cubos/core/io/action.hpp"
-    "include/cubos/core/io/context.hpp"
-    "include/cubos/core/io/sources/source.hpp"
-    "include/cubos/core/io/sources/button_press.hpp"
-    "include/cubos/core/io/sources/single_axis.hpp"
-    "include/cubos/core/io/sources/double_axis.hpp"
 
     "include/cubos/core/ui/imgui.hpp"
     "include/cubos/core/ui/serialization.hpp"
@@ -159,10 +157,12 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/ecs/null_storage.hpp"
     "include/cubos/core/ecs/world.hpp"
     "include/cubos/core/ecs/query.hpp"
-    "include/cubos/core/ecs/debug.hpp"
     "include/cubos/core/ecs/system.hpp"
     "include/cubos/core/ecs/registry.hpp"
     "include/cubos/core/ecs/dispatcher.hpp"
+    "include/cubos/core/ecs/event_pipe.hpp"
+    "include/cubos/core/ecs/event_reader.hpp"
+    "include/cubos/core/ecs/event_writer.hpp"
 )
 
 # Create core library

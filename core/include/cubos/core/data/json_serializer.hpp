@@ -1,5 +1,5 @@
 #ifndef CUBOS_CORE_DATA_JSON_SERIALIZER_HPP
-#define CUBOS_CORE_DATA_JSOn_SERIALIZER_HPP
+#define CUBOS_CORE_DATA_JSON_SERIALIZER_HPP
 
 #include <cubos/core/data/serializer.hpp>
 
