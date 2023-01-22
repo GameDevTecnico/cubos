@@ -139,13 +139,6 @@ var annotated_dup =
           [ "DoubleAxis", "classcubos_1_1core_1_1io_1_1DoubleAxis.html", "classcubos_1_1core_1_1io_1_1DoubleAxis" ],
           [ "SingleAxis", "classcubos_1_1core_1_1io_1_1SingleAxis.html", "classcubos_1_1core_1_1io_1_1SingleAxis" ],
           [ "Source", "classcubos_1_1core_1_1io_1_1Source.html", "classcubos_1_1core_1_1io_1_1Source" ],
-          [ "KeyEvent", "structcubos_1_1core_1_1io_1_1KeyEvent.html", "structcubos_1_1core_1_1io_1_1KeyEvent" ],
-          [ "ModifiersEvent", "structcubos_1_1core_1_1io_1_1ModifiersEvent.html", "structcubos_1_1core_1_1io_1_1ModifiersEvent" ],
-          [ "MouseButtonEvent", "structcubos_1_1core_1_1io_1_1MouseButtonEvent.html", "structcubos_1_1core_1_1io_1_1MouseButtonEvent" ],
-          [ "MouseMoveEvent", "structcubos_1_1core_1_1io_1_1MouseMoveEvent.html", "structcubos_1_1core_1_1io_1_1MouseMoveEvent" ],
-          [ "MouseScrollEvent", "structcubos_1_1core_1_1io_1_1MouseScrollEvent.html", "structcubos_1_1core_1_1io_1_1MouseScrollEvent" ],
-          [ "ResizeEvent", "structcubos_1_1core_1_1io_1_1ResizeEvent.html", "structcubos_1_1core_1_1io_1_1ResizeEvent" ],
-          [ "TextEvent", "structcubos_1_1core_1_1io_1_1TextEvent.html", "structcubos_1_1core_1_1io_1_1TextEvent" ],
           [ "BaseWindow", "classcubos_1_1core_1_1io_1_1BaseWindow.html", "classcubos_1_1core_1_1io_1_1BaseWindow" ]
         ] ],
         [ "memory", "namespacecubos_1_1core_1_1memory.html", [

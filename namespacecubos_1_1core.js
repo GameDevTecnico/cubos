@@ -11,7 +11,6 @@ var namespacecubos_1_1core =
       [ "editPackage", "namespacecubos_1_1core_1_1ui.html#a8904bc96ce2ff05ef698f88e0d107290", null ],
       [ "editWorld", "namespacecubos_1_1core_1_1ui.html#ab8feca199f9895e310e114fbe26fe42c", null ],
       [ "endFrame", "namespacecubos_1_1core_1_1ui.html#ad92cb427eeda20114418ef1baf422bcb", null ],
-      [ "handleEvent", "namespacecubos_1_1core_1_1ui.html#a31fdceab5f801da6c1861e7e9b89f5e7", null ],
       [ "initialize", "namespacecubos_1_1core_1_1ui.html#abdef4dee46ee75856196dc27a1bad855", null ],
       [ "show", "namespacecubos_1_1core_1_1ui.html#ad1daa051dd0b9cab502bdf33ecff4fa1", null ],
       [ "showPackage", "namespacecubos_1_1core_1_1ui.html#a9cc812c329eab0ddf0116d0944df9e16", null ],

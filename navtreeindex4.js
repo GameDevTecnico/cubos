@@ -1,5 +1,12 @@
 var NAVTREEINDEX4 =
 {
+"classcubos_1_1engine_1_1data_1_1AssetManager.html#aa0e7401d0228612c98ce5cee06424afa":[4,0,0,1,0,2,3],
+"classcubos_1_1engine_1_1data_1_1Loader.html":[4,0,0,1,0,4],
+"classcubos_1_1engine_1_1data_1_1Loader.html#a17511e29698bdc7b518647e2f8b9d759":[4,0,0,1,0,4,1],
+"classcubos_1_1engine_1_1data_1_1Loader.html#a4da6ecc8b3326fd28acb8bf898c5c70f":[4,0,0,1,0,4,4],
+"classcubos_1_1engine_1_1data_1_1Loader.html#a6d50c1df2881b3fdb448c2d175bb62c9":[4,0,0,1,0,4,2],
+"classcubos_1_1engine_1_1data_1_1Loader.html#a9db2b6f8d713a2c10783a26542a4fd55":[4,0,0,1,0,4,3],
+"classcubos_1_1engine_1_1data_1_1Loader.html#abd8717c36d3e35c3d550647076e15ab4":[4,0,0,1,0,4,5],
 "classcubos_1_1engine_1_1data_1_1Loader.html#adbd53f90e9a70cbfc83d13e0d6d6e0bd":[4,0,0,1,0,4,0],
 "classcubos_1_1engine_1_1data_1_1Meta.html":[4,0,0,1,0,5],
 "classcubos_1_1engine_1_1data_1_1Meta.html#a007c673f8c367017105345ac525bf5f8":[4,0,0,1,0,5,3],
@@ -242,12 +249,5 @@ var NAVTREEINDEX4 =
 "functions_func_p.html":[4,3,1,14],
 "functions_func_q.html":[4,3,1,15],
 "functions_func_r.html":[4,3,1,16],
-"functions_func_s.html":[4,3,1,17],
-"functions_func_t.html":[4,3,1,18],
-"functions_func_u.html":[4,3,1,19],
-"functions_func_v.html":[4,3,1,20],
-"functions_func_w.html":[4,3,1,21],
-"functions_func_y.html":[4,3,1,22],
-"functions_g.html":[4,3,0,6],
-"functions_h.html":[4,3,0,7]
+"functions_func_s.html":[4,3,1,17]
 };

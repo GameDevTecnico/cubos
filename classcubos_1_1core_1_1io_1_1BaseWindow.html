@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1io_1_1BaseWindow
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classcubos_1_1core_1_1io_1_1BaseWindow-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">BaseWindow Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -96,17 +96,30 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1io_1_1BaseWindow
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="core_2include_2cubos_2core_2io_2window_8hpp_source.html">window.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for BaseWindow:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcubos_1_1core_1_1io_1_1BaseWindow__coll__graph.png" border="0" usemap="#aBaseWindow_coll__map" alt="Collaboration graph"/></div>
+<map name="aBaseWindow_coll__map" id="aBaseWindow_coll__map">
+<area shape="rect" title=" " alt="" coords="371,157,477,184"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="14,37,171,64"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="5,97,180,124"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="36,155,149,181"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="20,205,165,232"/>
+<area shape="rect" href="classcubos_1_1core_1_1Event.html" title=" " alt="" coords="18,256,167,283"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab63f387884d25f199f71e7158740157b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#ab63f387884d25f199f71e7158740157b">pushEvent</a> (<a class="el" href="namespacecubos_1_1core_1_1io.html#a17a64c7d8c1e2b747322f79bf21b3934">WindowEvent</a> &amp;&amp;event)</td></tr>
-<tr class="separator:ab63f387884d25f199f71e7158740157b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b25ec55633357b787cf6fa429f94960"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#a17a64c7d8c1e2b747322f79bf21b3934">WindowEvent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a4b25ec55633357b787cf6fa429f94960">pollEvent</a> ()</td></tr>
-<tr class="separator:a4b25ec55633357b787cf6fa429f94960"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a960db4e1e503ea5428a1351783fffed3"><td class="memItemLeft" align="right" valign="top"><a id="a960db4e1e503ea5428a1351783fffed3"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a960db4e1e503ea5428a1351783fffed3">swapBuffers</a> ()=0</td></tr>
-<tr class="memdesc:a960db4e1e503ea5428a1351783fffed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the window buffers. <br /></td></tr>
-<tr class="separator:a960db4e1e503ea5428a1351783fffed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2275d7d3b4d516231e6596a31762e5a1"><td class="memItemLeft" align="right" valign="top"><a id="a2275d7d3b4d516231e6596a31762e5a1"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a2275d7d3b4d516231e6596a31762e5a1">pollEvents</a> () const =0</td></tr>
+<tr class="memdesc:a2275d7d3b4d516231e6596a31762e5a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Polls window events, firing the events. <br /></td></tr>
+<tr class="separator:a2275d7d3b4d516231e6596a31762e5a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac43b48866597eca9c494bb4dc7641926"><td class="memItemLeft" align="right" valign="top"><a id="ac43b48866597eca9c494bb4dc7641926"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#ac43b48866597eca9c494bb4dc7641926">swapBuffers</a> () const =0</td></tr>
+<tr class="memdesc:ac43b48866597eca9c494bb4dc7641926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the window buffers. <br /></td></tr>
+<tr class="separator:ac43b48866597eca9c494bb4dc7641926"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a250b59cf452291838b63bdbd8147845c"><td class="memItemLeft" align="right" valign="top"><a id="a250b59cf452291838b63bdbd8147845c"></a>
 virtual <a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">gl::RenderDevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a250b59cf452291838b63bdbd8147845c">getRenderDevice</a> () const =0</td></tr>
 <tr class="memdesc:a250b59cf452291838b63bdbd8147845c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the window render device. <br /></td></tr>
@@ -142,12 +155,44 @@ virtual <a class="el" href="namespacecubos_1_1core_1_1io.html#a3fe1dc281e20599df
 <tr class="memitem:ae322719720228f5ea2408ed38c07eeb0"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#ae322719720228f5ea2408ed38c07eeb0">getClipboard</a> () const =0</td></tr>
 <tr class="separator:ae322719720228f5ea2408ed38c07eeb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a20c230108c90bbd5dc0f806a06cfb262"><td class="memItemLeft" align="right" valign="top"><a id="a20c230108c90bbd5dc0f806a06cfb262"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a20c230108c90bbd5dc0f806a06cfb262">pollEvents</a> ()=0</td></tr>
-<tr class="memdesc:a20c230108c90bbd5dc0f806a06cfb262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asks the implementation to fill the event queue with new events. <br /></td></tr>
-<tr class="separator:a20c230108c90bbd5dc0f806a06cfb262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ada421acaff52420f0430b47f50944c56"><td class="memItemLeft" align="right" valign="top"><a id="ada421acaff52420f0430b47f50944c56"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">Key</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#ada421acaff52420f0430b47f50944c56">onKeyDown</a></td></tr>
+<tr class="memdesc:ada421acaff52420f0430b47f50944c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with a key code, when a keyboard key is pressed. <br /></td></tr>
+<tr class="separator:ada421acaff52420f0430b47f50944c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af77b6102b4f9cb5b277c3a6e444170e4"><td class="memItemLeft" align="right" valign="top"><a id="af77b6102b4f9cb5b277c3a6e444170e4"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">Key</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#af77b6102b4f9cb5b277c3a6e444170e4">onKeyUp</a></td></tr>
+<tr class="memdesc:af77b6102b4f9cb5b277c3a6e444170e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with a key code, when a keyboard key is released. <br /></td></tr>
+<tr class="separator:af77b6102b4f9cb5b277c3a6e444170e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94fc2f4add877c44225ad28d8aa0c27f"><td class="memItemLeft" align="right" valign="top"><a id="a94fc2f4add877c44225ad28d8aa0c27f"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#a153f7e4dd506d333b40d9b3c27719e0d">Modifiers</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a94fc2f4add877c44225ad28d8aa0c27f">onModsChanged</a></td></tr>
+<tr class="memdesc:a94fc2f4add877c44225ad28d8aa0c27f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with the modifiers, when the modifiers change. <br /></td></tr>
+<tr class="separator:a94fc2f4add877c44225ad28d8aa0c27f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0d3f6c078b9dc88f33998b40b5a6265"><td class="memItemLeft" align="right" valign="top"><a id="ac0d3f6c078b9dc88f33998b40b5a6265"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; glm::ivec2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#ac0d3f6c078b9dc88f33998b40b5a6265">onMouseMoved</a></td></tr>
+<tr class="memdesc:ac0d3f6c078b9dc88f33998b40b5a6265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with the cursor position when the cursor is moved. <br /></td></tr>
+<tr class="separator:ac0d3f6c078b9dc88f33998b40b5a6265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a498922bb77d1fb91a89156e381568f48"><td class="memItemLeft" align="right" valign="top"><a id="a498922bb77d1fb91a89156e381568f48"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; glm::ivec2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a498922bb77d1fb91a89156e381568f48">onMouseScroll</a></td></tr>
+<tr class="memdesc:a498922bb77d1fb91a89156e381568f48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with the scroll offset, when the mouse wheel is scrolled. <br /></td></tr>
+<tr class="separator:a498922bb77d1fb91a89156e381568f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a792e384e5684ee7689c9ecf52b7db209"><td class="memItemLeft" align="right" valign="top"><a id="a792e384e5684ee7689c9ecf52b7db209"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">MouseButton</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a792e384e5684ee7689c9ecf52b7db209">onMouseUp</a></td></tr>
+<tr class="memdesc:a792e384e5684ee7689c9ecf52b7db209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with a button code when a mouse button is released. <br /></td></tr>
+<tr class="separator:a792e384e5684ee7689c9ecf52b7db209"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90926f6abcb2156ef9fc3dd6a9ec9241"><td class="memItemLeft" align="right" valign="top"><a id="a90926f6abcb2156ef9fc3dd6a9ec9241"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; <a class="el" href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">MouseButton</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a90926f6abcb2156ef9fc3dd6a9ec9241">onMouseDown</a></td></tr>
+<tr class="memdesc:a90926f6abcb2156ef9fc3dd6a9ec9241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with a button code when a mouse button is pressed. <br /></td></tr>
+<tr class="separator:a90926f6abcb2156ef9fc3dd6a9ec9241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ee0158c3e3785a2d2120b6098ac2f50"><td class="memItemLeft" align="right" valign="top"><a id="a4ee0158c3e3785a2d2120b6098ac2f50"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; glm::ivec2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#a4ee0158c3e3785a2d2120b6098ac2f50">onFramebufferResize</a></td></tr>
+<tr class="memdesc:a4ee0158c3e3785a2d2120b6098ac2f50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked with the new framebuffer size when it changes size. <br /></td></tr>
+<tr class="separator:a4ee0158c3e3785a2d2120b6098ac2f50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc2b6b2c5973273034ffc22a01a075af"><td class="memItemLeft" align="right" valign="top"><a id="abc2b6b2c5973273034ffc22a01a075af"></a>
+<a class="el" href="classcubos_1_1core_1_1Event.html">Event</a>&lt; char32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#abc2b6b2c5973273034ffc22a01a075af">onChar</a></td></tr>
+<tr class="memdesc:abc2b6b2c5973273034ffc22a01a075af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoked when an unicode character is entered. <br /></td></tr>
+<tr class="separator:abc2b6b2c5973273034ffc22a01a075af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The base class for all window implementations. Handles input events and creates the render device. </p>
@@ -234,48 +279,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table>
 </div><div class="memdoc">
 <p>Returns the window size, in screen coordinates. May differ from the framebuffer size in some displays. </p>
-
-</div>
-</div>
-<a id="a4b25ec55633357b787cf6fa429f94960"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b25ec55633357b787cf6fa429f94960">&#9670;&nbsp;</a></span>pollEvent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::optional&lt;<a class="el" href="namespacecubos_1_1core_1_1io.html#a17a64c7d8c1e2b747322f79bf21b3934">WindowEvent</a>&gt; pollEvent </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Polls the window for events. </p><dl class="section return"><dt>Returns</dt><dd>The next event, or std::nullopt if there are no more events. </dd></dl>
-
-</div>
-</div>
-<a id="ab63f387884d25f199f71e7158740157b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab63f387884d25f199f71e7158740157b">&#9670;&nbsp;</a></span>pushEvent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void pushEvent </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1io.html#a17a64c7d8c1e2b747322f79bf21b3934">WindowEvent</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Pushes an event to the event queue. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">event</td><td><a class="el" href="classcubos_1_1core_1_1Event.html">Event</a> to push. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

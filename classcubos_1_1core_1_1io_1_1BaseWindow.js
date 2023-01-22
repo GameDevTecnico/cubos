@@ -1,6 +1,6 @@
 var classcubos_1_1core_1_1io_1_1BaseWindow =
 [
-    [ "BaseWindow", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ae826f022800c7f651f2f2fbe3251733e", null ],
+    [ "BaseWindow", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ad618e6f3a11af18e36558b4ecb10cdf1", null ],
     [ "~BaseWindow", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ab0d87d40fee13b483fb22d4ccf72d6f0", null ],
     [ "createCursor", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a865c7d133829ed15b46779ef158d9361", null ],
     [ "getClipboard", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ae322719720228f5ea2408ed38c07eeb0", null ],
@@ -9,12 +9,19 @@ var classcubos_1_1core_1_1io_1_1BaseWindow =
     [ "getRenderDevice", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a250b59cf452291838b63bdbd8147845c", null ],
     [ "getSize", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ab43abaca489688f446399e640edec980", null ],
     [ "getTime", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a757da3e7a58cd8fc3cc9f14a35e4f072", null ],
-    [ "pollEvent", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a4b25ec55633357b787cf6fa429f94960", null ],
-    [ "pollEvents", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a20c230108c90bbd5dc0f806a06cfb262", null ],
-    [ "pushEvent", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ab63f387884d25f199f71e7158740157b", null ],
+    [ "pollEvents", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a2275d7d3b4d516231e6596a31762e5a1", null ],
     [ "setClipboard", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a0f228bb59f33f1f8273cd995d0421725", null ],
     [ "setCursor", "classcubos_1_1core_1_1io_1_1BaseWindow.html#af71b82ff56ebcb815679ed01bda61561", null ],
     [ "setMouseState", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ae755d918c3aa83ba31569610f033e769", null ],
     [ "shouldClose", "classcubos_1_1core_1_1io_1_1BaseWindow.html#af232ff9fe3a4a6225a2086fa7d702ab4", null ],
-    [ "swapBuffers", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a960db4e1e503ea5428a1351783fffed3", null ]
+    [ "swapBuffers", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ac43b48866597eca9c494bb4dc7641926", null ],
+    [ "onChar", "classcubos_1_1core_1_1io_1_1BaseWindow.html#abc2b6b2c5973273034ffc22a01a075af", null ],
+    [ "onFramebufferResize", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a4ee0158c3e3785a2d2120b6098ac2f50", null ],
+    [ "onKeyDown", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ada421acaff52420f0430b47f50944c56", null ],
+    [ "onKeyUp", "classcubos_1_1core_1_1io_1_1BaseWindow.html#af77b6102b4f9cb5b277c3a6e444170e4", null ],
+    [ "onModsChanged", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a94fc2f4add877c44225ad28d8aa0c27f", null ],
+    [ "onMouseDown", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a90926f6abcb2156ef9fc3dd6a9ec9241", null ],
+    [ "onMouseMoved", "classcubos_1_1core_1_1io_1_1BaseWindow.html#ac0d3f6c078b9dc88f33998b40b5a6265", null ],
+    [ "onMouseScroll", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a498922bb77d1fb91a89156e381568f48", null ],
+    [ "onMouseUp", "classcubos_1_1core_1_1io_1_1BaseWindow.html#a792e384e5684ee7689c9ecf52b7db209", null ]
 ];

@@ -68,11 +68,11 @@ var NAVTREEINDEX =
 "classcubos_1_1core_1_1data_1_1JSONSerializer.html#ae69d2ac7057aa790db2aa605b1368bf3",
 "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aa22aeacf0816654953e7967d2ea55d9d",
 "classcubos_1_1core_1_1gl_1_1impl_1_1RasterState.html",
-"classcubos_1_1engine_1_1data_1_1Loader.html#adbd53f90e9a70cbfc83d13e0d6d6e0bd",
-"functions_i.html",
-"namespacecubos_1_1core_1_1gl.html#aca8133200c1122e29b87b314d82604eb",
-"storage_8hpp_source.html",
-"structcubos_1_1core_1_1io_1_1ModifiersEvent.html#a42b465b57abcbac7a73dcc8cd147baed"
+"classcubos_1_1engine_1_1data_1_1AssetManager.html#aa0e7401d0228612c98ce5cee06424afa",
+"functions_func_t.html",
+"namespacecubos_1_1core_1_1gl.html#ac3e0e8e3a194037cdf6103a95a1c6d31a59ec5d573abd014f3ae2c26ca962e8cf",
+"settings__inspector_8hpp_source.html",
+"structcubos_1_1core_1_1gl_1_1VertexElement.html#ab6f4e6d3fde00ce906e46494f60dfe7a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

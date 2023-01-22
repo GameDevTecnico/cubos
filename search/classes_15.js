@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['world_922',['World',['../classcubos_1_1core_1_1ecs_1_1World.html',1,'cubos::core::ecs']]],
-  ['writeresource_923',['WriteResource',['../classcubos_1_1core_1_1ecs_1_1WriteResource.html',1,'cubos::core::ecs']]],
-  ['writestorage_924',['WriteStorage',['../classcubos_1_1core_1_1ecs_1_1WriteStorage.html',1,'cubos::core::ecs']]]
+  ['yamldeserializer_918',['YAMLDeserializer',['../classcubos_1_1core_1_1data_1_1YAMLDeserializer.html',1,'cubos::core::data']]],
+  ['yamlserializer_919',['YAMLSerializer',['../classcubos_1_1core_1_1data_1_1YAMLSerializer.html',1,'cubos::core::data']]]
 ];

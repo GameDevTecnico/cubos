@@ -1,5 +1,10 @@
 var NAVTREEINDEX7 =
 {
+"settings__inspector_8hpp_source.html":[5,0,1,0,0,0,3,0,0],
+"single__axis_8hpp_source.html":[5,0,0,0,1,0,3,0,2],
+"source_8hpp_source.html":[5,0,0,0,1,0,3,0,3],
+"std__archive_8hpp_source.html":[5,0,0,0,1,0,0,16],
+"std__stream_8hpp_source.html":[5,0,0,0,1,0,4,2],
 "storage_8hpp_source.html":[5,0,0,0,1,0,1,13],
 "stream_8hpp_source.html":[5,0,0,0,1,0,4,3],
 "structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html":[4,0,0,0,0,6,0],
@@ -244,10 +249,5 @@ var NAVTREEINDEX7 =
 "structcubos_1_1core_1_1gl_1_1VertexElement.html#a854352f53b148adc24983a58a1866d66":[4,0,0,0,2,22,4],
 "structcubos_1_1core_1_1gl_1_1VertexElement.html#a8f8f80d37794cde9472343e4487ba3eb":[4,0,0,0,2,22,2],
 "structcubos_1_1core_1_1gl_1_1VertexElement.html#a900fefd49b36ef78c82fc53c05cf0a6a":[4,0,0,0,2,22,0],
-"structcubos_1_1core_1_1gl_1_1VertexElement.html#aadb6d6eb83e646653a1402032e45dcab":[4,0,0,0,2,22,3],
-"structcubos_1_1core_1_1gl_1_1VertexElement.html#ab6f4e6d3fde00ce906e46494f60dfe7a":[4,0,0,0,2,22,6],
-"structcubos_1_1core_1_1io_1_1KeyEvent.html":[4,0,0,0,3,8],
-"structcubos_1_1core_1_1io_1_1KeyEvent.html#a132ba96da5ba28448b61e42c019312a9":[4,0,0,0,3,8,1],
-"structcubos_1_1core_1_1io_1_1KeyEvent.html#a96313403719d705d2df812e3ba166772":[4,0,0,0,3,8,0],
-"structcubos_1_1core_1_1io_1_1ModifiersEvent.html":[4,0,0,0,3,9]
+"structcubos_1_1core_1_1gl_1_1VertexElement.html#aadb6d6eb83e646653a1402032e45dcab":[4,0,0,0,2,22,3]
 };
