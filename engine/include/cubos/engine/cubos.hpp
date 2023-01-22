@@ -1,6 +1,7 @@
 #ifndef CUBOS_ENGINE_CUBOS_HPP
 #define CUBOS_ENGINE_CUBOS_HPP
 
+#include <cubos/core/ecs/event_pipe.hpp>
 #include <cubos/core/ecs/dispatcher.hpp>
 #include <cubos/core/ecs/system.hpp>
 #include <cubos/core/ecs/world.hpp>
@@ -106,19 +107,26 @@ namespace cubos::engine
         template <typename C>
         Cubos& addComponent();
 
+        /// Adds a new event type to the engine.
+        /// @tparam E The type of the event.
+        /// @return Reference to this object, for chaining.
+        template <typename E>
+        Cubos& addEvent();
+
         /// Sets the current tag for the main dispatcher. If the tag doesn't exist, it will be created.
-        /// Subsequent calls will set this tag's settings.
         /// @param tag The tag to set.
+        /// @return Tag builder used to configure the tag.
         TagBuilder& tag(const std::string& tag);
 
         /// Sets the current tag for the startup dispatcher. If the tag doesn't exist, it will be created.
-        /// Subsequent calls will set this tag's settings.
         /// @param tag The tag to set.
+        /// @return Tag builder used to configure the tag.
         TagBuilder& startupTag(const std::string& tag);
 
         /// Adds a new system to the engine, which will be executed at every iteration of the main loop.
         /// @tparam F The type of the system function.
         /// @param func The system function.
+        /// @return System builder used to configure the system.
         template <typename F>
         SystemBuilder& system(F func);
 
@@ -126,6 +134,7 @@ namespace cubos::engine
         /// Startup systems are executed only once, before the main loop starts.
         /// @tparam F The type of the system function.
         /// @param func The system function.
+        /// @return System builder used to configure the system.
         template <typename F>
         SystemBuilder& startupSystem(F func);
 
@@ -165,6 +174,14 @@ namespace cubos::engine
     Cubos& Cubos::addComponent()
     {
         world.registerComponent<C>();
+        return *this;
+    }
+
+    template <typename E>
+    Cubos& Cubos::addEvent()
+    {
+        // The user could register this manually, but using this method is more convenient.
+        world.registerResource<core::ecs::EventPipe<E>>();
         return *this;
     }
 

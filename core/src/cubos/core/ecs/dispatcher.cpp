@@ -186,6 +186,15 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
 
 void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
 {
+    // If the systems haven't been prepared yet, do so now.
+    // We can't multi-thread this as the systems require exclusive access to the world to prepare.
+    if (!this->prepared)
+    {
+        for (auto& system : systems)
+            system.system->prepare(world);
+        this->prepared = true;
+    }
+
     for (auto it = systems.begin(); it != systems.end(); it++)
     {
         it->system->call(world, cmds);
