@@ -26,6 +26,16 @@ void systemC()
     CUBOS_INFO("[By System] C");
 }
 
+void systemInherit1()
+{
+    CUBOS_INFO("[By System] Inheritance 1");
+}
+
+void systemInherit2()
+{
+    CUBOS_INFO("[By System] Inheritance 2");
+}
+
 int main(int argc, char** argv)
 {
     cubos::engine::Cubos cubos;
@@ -43,6 +53,10 @@ int main(int argc, char** argv)
     // Now add a lambda between both systems to test
     auto lambda = []() { CUBOS_INFO("--- INTERMISSION ---"); };
     cubos.startupSystem(lambda).afterSystem(tagC);
+
+    // System inheritance
+    //cubos.startupSystem(systemInherit1);
+    //cubos.startupSystem(systemInherit2).tagged("B").afterSystem(systemInherit1);
 
     cubos.run();
 }

@@ -4,6 +4,18 @@
 
 using namespace cubos::core::ecs;
 
+void Dispatcher::SystemSettings::copyFrom(const SystemSettings& other)
+{
+    std::unique_copy(other.before.tag.begin(), other.before.tag.end(),
+                    std::back_inserter(this->before.tag));
+    std::unique_copy(other.after.tag.begin(), other.after.tag.end(),
+                    std::back_inserter(this->after.tag));
+    std::unique_copy(other.before.system.begin(), other.before.system.end(),
+                    std::back_inserter(this->before.system));
+    std::unique_copy(other.after.system.begin(), other.after.system.end(),
+                    std::back_inserter(this->after.system));
+}
+
 void Dispatcher::addTag(const std::string& tag)
 {
     if (tagSettings.find(tag) == tagSettings.end())
@@ -60,9 +72,8 @@ void Dispatcher::tagSetBeforeTag(const std::string& tag)
 void Dispatcher::systemSetTag(const std::string& tag)
 {
     ENSURE_CURR_SYSTEM();
-    ENSURE_SYSTEM_SETTINGS(currSystem);
     addTag(tag);
-    currSystem->settings = tagSettings[tag];
+    currSystem->tag = tag;
 }
 
 void Dispatcher::systemSetAfterTag(const std::string& tag)
@@ -99,8 +110,38 @@ void Dispatcher::systemSetBeforeTag(const std::string& tag)
     }
 }
 
+void Dispatcher::handleTagInheritance(std::shared_ptr<SystemSettings>& settings)
+{
+    for (auto& parentTag : settings->inherits)
+    {
+        std::shared_ptr<SystemSettings> parentSettings = tagSettings[parentTag];
+        handleTagInheritance(parentSettings);
+        settings->copyFrom(*parentSettings);
+    }
+    settings->inherits.clear();
+}
+
 void Dispatcher::compileChain()
 {
+    // Implement tag inheritance by copying configs from parent tags
+    for(auto [tag, settings] : tagSettings)
+    {
+        handleTagInheritance(settings);
+    }
+
+    // Implement system tag settings with custom settings
+    for(auto system : pendingSystems)
+    {
+        if(!system.tag.empty())
+        {
+            if (!system.settings)
+            {
+                system.settings = std::make_shared<SystemSettings>();
+            }
+            system.settings->copyFrom(*tagSettings[system.tag]);
+        }
+    }
+
     // Build the system chain
     std::vector<DFSNode> nodes;
     for (auto& system : pendingSystems)

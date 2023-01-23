@@ -121,9 +121,10 @@ namespace cubos::core::ecs
         /// Internal class with settings pertaining to system/tag execution
         struct SystemSettings
         {
+            void copyFrom(const SystemSettings& other);
+
             Dependency before, after;
             // TODO: Add run conditions, threading modes, etc...
-            // TODO: Implement inherithance behavior
             std::vector<std::string> inherits;
         };
 
@@ -132,6 +133,7 @@ namespace cubos::core::ecs
         {
             std::shared_ptr<SystemSettings> settings;
             std::shared_ptr<AnySystemWrapper<void>> system;
+            std::string tag;
         };
 
         /// Internal class used to implement a DFS algorithm for call chain compilation
@@ -152,6 +154,11 @@ namespace cubos::core::ecs
         /// @param nodes Array of DFSNodes.
         /// @return True if a cycle was detected, false if otherwise.
         bool dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes);
+
+        /// Copies settings from inherited tags to this system, recursively
+        /// solving nested inheritance.
+        /// @param settings Settings to handle inheritance for.
+        void handleTagInheritance(std::shared_ptr<SystemSettings>& settings);
 
         /// Variables for holding information before call chain is compiled.
         std::vector<System> pendingSystems;                                 ///< All systems.
