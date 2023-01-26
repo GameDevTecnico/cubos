@@ -21,7 +21,7 @@
 #define ENSURE_CURR_TAG()                                                                                              \
     do                                                                                                                 \
     {                                                                                                                  \
-        if (!currTagSettings)                                                                                          \
+        if (currTag.empty())                                                                                           \
         {                                                                                                              \
             CUBOS_ERROR("No tag currently selected!");                                                                 \
             return;                                                                                                    \
@@ -33,6 +33,14 @@
         if (!obj->settings)                                                                                            \
         {                                                                                                              \
             obj->settings = std::make_shared<SystemSettings>();                                                        \
+        }                                                                                                              \
+    } while (false)
+#define ENSURE_TAG_SETTINGS(tag)                                                                                       \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        if (tagSettings.find(tag) == tagSettings.end())                                                                \
+        {                                                                                                              \
+            tagSettings[tag] = std::make_shared<SystemSettings>();                                                     \
         }                                                                                                              \
     } while (false)
 
@@ -121,7 +129,7 @@ namespace cubos::core::ecs
         /// Internal class with settings pertaining to system/tag execution
         struct SystemSettings
         {
-            void copyFrom(const SystemSettings& other);
+            void copyFrom(const SystemSettings* other);
 
             Dependency before, after;
             // TODO: Add run conditions, threading modes, etc...
@@ -161,10 +169,10 @@ namespace cubos::core::ecs
         void handleTagInheritance(std::shared_ptr<SystemSettings>& settings);
 
         /// Variables for holding information before call chain is compiled.
-        std::vector<System> pendingSystems;                                 ///< All systems.
+        std::vector<System*> pendingSystems;                                ///< All systems.
         std::map<std::string, std::shared_ptr<SystemSettings>> tagSettings; ///< All tags.
         System* currSystem;                                                 ///< Last set system, for changing settings.
-        SystemSettings* currTagSettings;                                    ///< Last set tag, for changing settings.
+        std::string currTag;                                                ///< Last set tag, for changing settings.
 
         /// Variables for holding information after call chain is compiled.
         std::vector<System> systems; ///< Compiled order of running systems.
@@ -175,16 +183,16 @@ namespace cubos::core::ecs
     void Dispatcher::addSystem(F func)
     {
         // Wrap the system and put it in the pending queue
-        System system = {nullptr, std::make_shared<SystemWrapper<F>>(func)};
-        pendingSystems.push_back(std::move(system));
-        currSystem = &pendingSystems.back();
+        System* system = new System {nullptr, std::make_shared<SystemWrapper<F>>(func)};
+        pendingSystems.push_back(system);
+        currSystem = pendingSystems.back();
     }
 
     template <typename F>
     void Dispatcher::systemSetAfterSystem(F func)
     {
-        auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System& system) {
-            SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system.system.get());
+        auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System* system) {
+            SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system->system.get());
             if (!wrapper)
                 return false;
             return wrapper->system == func;
@@ -196,18 +204,19 @@ namespace cubos::core::ecs
         }
         ENSURE_CURR_SYSTEM();
         ENSURE_SYSTEM_SETTINGS(currSystem);
-        ENSURE_SYSTEM_SETTINGS(it);
+        System* system = *it;
+        ENSURE_SYSTEM_SETTINGS(system);
         // Set curr to run after this system
-        currSystem->settings->after.system.push_back(&(*it));
+        currSystem->settings->after.system.push_back(system);
         // And this system to run before curr
-        it->settings->before.system.push_back(currSystem);
+        system->settings->before.system.push_back(currSystem);
     }
 
     template <typename F>
     void Dispatcher::systemSetBeforeSystem(F func)
     {
-        auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System& system) {
-            SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system.system.get());
+        auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System* system) {
+            SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system->system.get());
             if (!wrapper)
                 return false;
             return wrapper->system == func;
@@ -219,11 +228,12 @@ namespace cubos::core::ecs
         }
         ENSURE_CURR_SYSTEM();
         ENSURE_SYSTEM_SETTINGS(currSystem);
-        ENSURE_SYSTEM_SETTINGS(it);
+        System* system = *it;
+        ENSURE_SYSTEM_SETTINGS(system);
         // Set curr to run before this system
-        currSystem->settings->before.system.push_back(&(*it));
+        currSystem->settings->before.system.push_back(system);
         // And this system to run after curr
-        it->settings->after.system.push_back(currSystem);
+        system->settings->after.system.push_back(currSystem);
     }
 } // namespace cubos::core::ecs
 #endif // CUBOS_CORE_ECS_DISPATCHER_HPP

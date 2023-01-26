@@ -29,7 +29,7 @@ namespace cubos::engine
     class TagBuilder
     {
     public:
-        TagBuilder(core::ecs::Dispatcher& dispatcher);
+        TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
         ~TagBuilder() = delete;
 
         /// Sets the current tag to be executed before another tag.
@@ -42,13 +42,14 @@ namespace cubos::engine
 
     private:
         core::ecs::Dispatcher& dispatcher;
+        std::vector<std::string>& tags;
     };
 
     /// Used to chain configurations related to systems
     class SystemBuilder
     {
     public:
-        SystemBuilder(core::ecs::Dispatcher& dispatcher);
+        SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
         ~SystemBuilder() = delete;
 
         /// Sets the current system's tag.
@@ -75,6 +76,7 @@ namespace cubos::engine
 
     private:
         core::ecs::Dispatcher& dispatcher;
+        std::vector<std::string>& tags;
     };
 
     /// Represents the engine itself, and exposes the interface with which the game developer interacts with.
@@ -145,6 +147,7 @@ namespace cubos::engine
         core::ecs::Dispatcher mainDispatcher, startupDispatcher;
         core::ecs::World world;
         std::set<void (*)(Cubos&)> plugins;
+        std::vector<std::string> mainTags, startupTags;
     };
 
     // Implementation.
@@ -189,7 +192,7 @@ namespace cubos::engine
     SystemBuilder& Cubos::system(F func)
     {
         mainDispatcher.addSystem(func);
-        SystemBuilder* builder = new SystemBuilder(mainDispatcher);
+        SystemBuilder* builder = new SystemBuilder(mainDispatcher, startupTags);
 
         return *builder;
     }
@@ -198,7 +201,7 @@ namespace cubos::engine
     SystemBuilder& Cubos::startupSystem(F func)
     {
         startupDispatcher.addSystem(func);
-        SystemBuilder* builder = new SystemBuilder(startupDispatcher);
+        SystemBuilder* builder = new SystemBuilder(startupDispatcher, mainTags);
 
         return *builder;
     }
