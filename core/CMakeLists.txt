@@ -6,6 +6,7 @@ option(WITH_OPENGL "With OpenGL?" ON)
 if (WITH_GLFW)
     option(GLFW_USE_SUBMODULE "Compile GLFW from source?" ON)
 endif ()
+option(WITH_OPENAL "With OpenAL?" ON)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
 option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
@@ -52,14 +53,12 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/io/cursor.cpp"
     "src/cubos/core/io/glfw_window.hpp"
     "src/cubos/core/io/glfw_window.cpp"
-
-    "src/cubos/core/io/input_manager.cpp"
-    "src/cubos/core/io/action.cpp"
-    "src/cubos/core/io/context.cpp"
-
-    "src/cubos/core/io/sources/button_press.cpp"
-    "src/cubos/core/io/sources/single_axis.cpp"
-    "src/cubos/core/io/sources/double_axis.cpp"
+    #"src/cubos/core/io/input_manager.cpp"
+    #"src/cubos/core/io/action.cpp"
+    #"src/cubos/core/io/context.cpp"
+    #"src/cubos/core/io/sources/button_press.cpp"
+    #"src/cubos/core/io/sources/single_axis.cpp"
+    #"src/cubos/core/io/sources/double_axis.cpp"
 
     "src/cubos/core/gl/debug.cpp"
     "src/cubos/core/gl/render_device.cpp"
@@ -71,6 +70,10 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/light.cpp"
     "src/cubos/core/gl/util.cpp"
     "src/cubos/core/gl/vertex.cpp"
+
+    "src/cubos/core/al/audio_device.cpp"
+    "src/cubos/core/al/oal_audio_device.cpp"
+    "src/cubos/core/al/oal_audio_device.hpp"
 
     "src/cubos/core/ui/imgui.cpp"
     "src/cubos/core/ui/serialization.cpp"
@@ -119,7 +122,14 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/window.hpp"
     "include/cubos/core/io/keyboard.hpp"
     "include/cubos/core/io/cursor.hpp"
-
+    #"include/cubos/core/io/input_manager.hpp"
+    #"include/cubos/core/io/action.hpp"
+    #"include/cubos/core/io/context.hpp"
+    #"include/cubos/core/io/sources/source.hpp"
+    #"include/cubos/core/io/sources/button_press.hpp"
+    #"include/cubos/core/io/sources/single_axis.hpp"
+    #"include/cubos/core/io/sources/double_axis.hpp"
+    
     "include/cubos/core/gl/debug.hpp"
     "include/cubos/core/gl/render_device.hpp"
     "include/cubos/core/gl/material.hpp"
@@ -130,13 +140,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/gl/light.hpp"
     "include/cubos/core/gl/util.hpp"
 
-    "include/cubos/core/io/input_manager.hpp"
-    "include/cubos/core/io/action.hpp"
-    "include/cubos/core/io/context.hpp"
-    "include/cubos/core/io/sources/source.hpp"
-    "include/cubos/core/io/sources/button_press.hpp"
-    "include/cubos/core/io/sources/single_axis.hpp"
-    "include/cubos/core/io/sources/double_axis.hpp"
+    "include/cubos/core/al/audio_device.hpp"
 
     "include/cubos/core/ui/imgui.hpp"
     "include/cubos/core/ui/serialization.hpp"
@@ -190,6 +194,16 @@ if (WITH_GLFW)
     target_link_libraries(cubos-core PRIVATE glfw)
     target_compile_definitions(cubos-core PRIVATE WITH_GLFW)
 endif ()
+
+if (WITH_OPENAL)
+    set(ALSOFT_UTILS OFF CACHE BOOL "" FORCE)
+    set(ALSOFT_NO_CONFIG_UTIL OFF CACHE BOOL "" FORCE)
+    set(ALSOFT_EXAMPLES OFF CACHE BOOL "" FORCE)
+    add_subdirectory(lib/openal-soft)
+    target_include_directories(cubos-core PRIVATE lib/openal-soft/include)
+    target_link_libraries(cubos-core PRIVATE OpenAL)
+    target_compile_definitions(cubos-core PRIVATE WITH_OPENAL)
+endif()
 
 if (GLM_USE_SUBMODULE)
     add_subdirectory(lib/glm)

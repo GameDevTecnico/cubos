@@ -118,7 +118,7 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     for (const auto& ev : keyEventReader)
     {
         // this should NOT run, because all KEY_EVENTS from keyEventReader already got read
-        EXPECT_EQ(false, true);
+        FAIL();
     }
     pipe.removeReader();
 }

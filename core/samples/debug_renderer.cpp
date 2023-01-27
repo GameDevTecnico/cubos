@@ -7,22 +7,12 @@
 
 using namespace cubos::core;
 
-void debugTest(io::Key key)
-{
-    if (key == io::Key::C)
-        gl::Debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
-    else if (key == io::Key::S)
-        gl::Debug::drawWireSphere(glm::vec3(0, 0, 0), 1, 1);
-}
-
 int main(void)
 {
     initializeLogger();
     auto window = io::openWindow();
     auto& renderDevice = window->getRenderDevice();
     gl::Debug::init(renderDevice);
-
-    window->onKeyDown.registerCallback(debugTest);
 
     double prevT = -1;
 
@@ -45,7 +35,17 @@ int main(void)
         gl::Debug::drawWireCube({0.0, 0.0, 0.0}, {1.0, 1.0, 1.0}, 0.0);
         gl::Debug::flush(vp, deltaT);
         window->swapBuffers();
-        window->pollEvents();
+        while (auto event = window->pollEvent())
+        {
+            if (std::holds_alternative<io::KeyEvent>(event.value()))
+            {
+                auto keyEvent = std::get<io::KeyEvent>(event.value());
+                if (keyEvent.key == io::Key::C && keyEvent.pressed)
+                    gl::Debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
+                else if (keyEvent.key == io::Key::S && keyEvent.pressed)
+                    gl::Debug::drawWireSphere(glm::vec3(0, 0, 0), 1, 1);
+            }
+        }
     }
 
     gl::Debug::terminate();

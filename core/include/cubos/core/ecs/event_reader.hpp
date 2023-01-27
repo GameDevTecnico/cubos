@@ -10,7 +10,8 @@ namespace cubos::core::ecs
     /// In case M template parameter is not provided, it will read all events (no filtering).
     /// @tparam T Event.
     /// @tparam M Event mask.
-    template <typename T, unsigned int M = DEFAULT_FILTER_MASK> class EventReader
+    template <typename T, unsigned int M = DEFAULT_FILTER_MASK>
+    class EventReader
     {
     public:
         EventReader(const EventPipe<T>& pipe, std::size_t& index);
@@ -41,7 +42,7 @@ namespace cubos::core::ecs
 
     private:
         const EventPipe<T>& pipe;
-        std::size_t& index{};
+        std::size_t& index;
 
         /// Checks if given mask is valid to reader's one.
         /// @return True if mask is valid.
@@ -56,7 +57,8 @@ namespace cubos::core::ecs
         static_assert(M != 0, "Invalid mask.");
     }
 
-    template <typename T, unsigned int M> std::optional<std::reference_wrapper<const T>> EventReader<T, M>::read()
+    template <typename T, unsigned int M>
+    std::optional<std::reference_wrapper<const T>> EventReader<T, M>::read()
     {
         while (this->index < this->pipe.sentEvents())
         {
@@ -65,7 +67,6 @@ namespace cubos::core::ecs
             auto mask = p.second;
             if (matchesMask(mask))
             {
-                // return std::optional<std::reference_wrapper<const T>>(std::reference_wrapper<const T>(event));
                 return std::make_optional(std::reference_wrapper<const T>(event));
             }
         }
@@ -73,18 +74,24 @@ namespace cubos::core::ecs
         return std::nullopt;
     }
 
-    template <typename T, unsigned int M> bool EventReader<T, M>::matchesMask(decltype(M) eventMask) const
+    template <typename T, unsigned int M>
+    bool EventReader<T, M>::matchesMask(decltype(M) eventMask) const
     {
-        return M == ~0 ? true : eventMask & M;
+        return (M == ~0) || (eventMask & M);
     }
 
-    template <typename T, unsigned int M> typename EventReader<T, M>::Iterator EventReader<T, M>::begin()
+    template <typename T, unsigned int M>
+    typename EventReader<T, M>::Iterator EventReader<T, M>::begin()
     {
-        // return a new begin iterator only if we did not read all events yet(?)
-        return (this->index >= this->pipe.sentEvents()) ? this->end() : Iterator(*this, this->read(), false);
+        // Return a new begin iterator only if we haven't read all events yet.
+        if (this->index >= this->pipe.sentEvents())
+            return this->end();
+        else
+            return Iterator(*this, this->read(), false);
     }
 
-    template <typename T, unsigned int M> typename EventReader<T, M>::Iterator EventReader<T, M>::end()
+    template <typename T, unsigned int M>
+    typename EventReader<T, M>::Iterator EventReader<T, M>::end()
     {
         return Iterator(*this, std::nullopt, true);
     }
@@ -98,7 +105,8 @@ namespace cubos::core::ecs
     {
     }
 
-    template <typename T, unsigned int M> const T& EventReader<T, M>::Iterator::operator*()
+    template <typename T, unsigned int M>
+    const T& EventReader<T, M>::Iterator::operator*()
     {
         return currentEvent->get();
     }
@@ -114,12 +122,14 @@ namespace cubos::core::ecs
         return *this;
     }
 
-    template <typename T, unsigned int M> bool EventReader<T, M>::Iterator::operator==(const Iterator& other)
+    template <typename T, unsigned int M>
+    bool EventReader<T, M>::Iterator::operator==(const Iterator& other)
     {
         return this->end == other.end;
     }
 
-    template <typename T, unsigned int M> bool EventReader<T, M>::Iterator::operator!=(const Iterator& other)
+    template <typename T, unsigned int M>
+    bool EventReader<T, M>::Iterator::operator!=(const Iterator& other)
     {
         return !(*this == other);
     }

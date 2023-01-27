@@ -36,50 +36,50 @@ int main()
 
     std::size_t index = 0;
 
-    printf("\n\n### mouse events using .read():");
+    Stream::stdOut.printf("\n\n### mouse events using .read():");
     while (true)
     {
-        static auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
+        auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
         auto it = mouseReader.read();
         if (it == std::nullopt)
         {
             break;
         }
-        printf(" %d , ", it->get().data);
+        Stream::stdOut.printf(" {} , ", it->get().data);
     }
 
     // range based
 
     index = 0;
     auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
-    printf("\n\n### mouse events:");
+    Stream::stdOut.printf("\n\n### mouse events:");
     auto x = mouseReader.read(); // already read one event, the loop will only loop once
-    printf("%d , ", x->get().data);
+    Stream::stdOut.printf("{} , ", x->get().data);
     for (const auto& it : mouseReader)
     {
-        printf(" %d , ", it.data); // 6
+        Stream::stdOut.printf(" {} , ", it.data); // 6
     }
 
     index = 0;
-    printf("\n\n### wheel + key events:");
+    Stream::stdOut.printf("\n\n### wheel + key events:");
     for (const auto& it : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT | MyEvent::Mask::WHEEL_EVENT>(pipe, index))
     {
-        printf(" %d , ", it.data);
+        Stream::stdOut.printf(" {} , ", it.data);
     }
 
     index = 0;
-    printf("\n\n### all masked events:");
+    Stream::stdOut.printf("\n\n### all masked events:");
     for (const auto& it : EventReader<MyEvent, MyEvent::Mask::ALL>(pipe, index))
     {
-        printf(" %d , ", it.data);
+        Stream::stdOut.printf(" {} , ", it.data);
     }
 
     index = 0;
-    printf("\n\n### all events (no M parameter):");
+    Stream::stdOut.printf("\n\n### all events (no M parameter):");
     for (const auto& it : EventReader<MyEvent>(pipe, index))
     {
-        printf(" %d , ", it.data);
+        Stream::stdOut.printf(" {} , ", it.data);
     }
 
-    printf("\n");
+    Stream::stdOut.printf("\n");
 }
