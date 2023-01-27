@@ -53,8 +53,6 @@ void setup(World& world, data::AssetManager& assetManager)
 
     // Load and spawn the scene.
     auto scene = assetManager.load<data::Scene>("scenes/main");
-    // auto root = world.create().entity();
-    // cmds.spawn(scene->blueprint).add("main", Parent{root});
 }
 
 void printStuff(World& world)
@@ -104,9 +102,9 @@ void createScene(World& world, data::AssetManager& assetManager, gl::Renderer& r
                                                 });
 
     world.create(ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, ecs::LocalToWorld{}, ecs::Position{}, ecs::Scale{4.0f});
-} //
+}
 
-static void TurnOnLight(gl::Frame& frame)
+static void turnOnLight(gl::Frame& frame)
 {
     frame.ambient({0.1f, 0.1f, 0.1f});
 
@@ -148,7 +146,7 @@ int main(int argc, char** argv)
     cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
 
     cubos.tag("SetLight").beforeTag("Draw");
-    cubos.system(TurnOnLight).tagged("SetLight");
+    cubos.system(turnOnLight).tagged("SetLight");
     // or a tesserato tool!
     cubos.addPlugin(plugins::tools::settingsInspectorPlugin);
 

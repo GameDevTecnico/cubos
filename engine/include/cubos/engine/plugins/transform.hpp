@@ -12,7 +12,7 @@ namespace cubos::engine::plugins
     /// Plugin to create and use transforms.
     ///
     /// Stages:
-    /// - setMatrix: Sets the glm matrix for the transform.
+    /// - Transform: Sets the glm matrix for the transforms.
     /// @param cubos CUBOS. main class
     void transformPlugin(Cubos& cubos);
 }; // namespace cubos::engine::plugins

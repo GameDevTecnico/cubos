@@ -13,11 +13,12 @@ namespace cubos::engine::plugins
 {
     /// Plugin to create and use a renderer.
     ///
-    /// Startup Stages:
+    /// Startup Tags:
     /// - setRenderer: Sets up the renderer.
     ///
-    /// Stages:
-    /// - draw: Draws component's to the renderer's frame.
+    /// Tags:
+    /// - CreateDrawList: Creates list of entities to be drawn in a frame.
+    /// - Draw: Draws component's to the renderer's frame.
     /// @param cubos CUBOS. main class
     void rendererPlugin(Cubos& cubos);
 
