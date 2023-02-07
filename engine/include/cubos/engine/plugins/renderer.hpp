@@ -1,8 +1,6 @@
 #ifndef CUBOS_ENGINE_PLUGINS_RENDERER_HPP
 #define CUBOS_ENGINE_PLUGINS_RENDERER_HPP
 
-#include <cubos/engine/ecs/transform_system.hpp>
-
 #include <cubos/engine/cubos.hpp>
 
 #include <glm/glm.hpp>

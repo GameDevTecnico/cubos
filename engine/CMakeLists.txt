@@ -11,9 +11,6 @@ message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
 
-    "src/cubos/engine/ecs/draw_system.cpp"
-    "src/cubos/engine/ecs/transform_system.cpp"
-
     "src/cubos/engine/gl/frame.cpp"
     "src/cubos/engine/gl/renderer.cpp"
     "src/cubos/engine/gl/deferred/renderer.cpp"
@@ -48,8 +45,6 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/ecs/scale.hpp"
     "include/cubos/engine/ecs/local_to_world.hpp"
     "include/cubos/engine/ecs/grid.hpp"
-    "include/cubos/engine/ecs/transform_system.hpp"
-    "include/cubos/engine/ecs/draw_system.hpp"
     "include/cubos/engine/ecs/camera.hpp"
 
     "include/cubos/engine/gl/frame.hpp"

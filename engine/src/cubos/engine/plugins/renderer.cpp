@@ -5,6 +5,13 @@
 #include <components/cubos/camera.hpp>
 #include <components/cubos/grid.hpp>
 
+#include <cubos/core/ecs/query.hpp>
+
+#include <components/cubos/local_to_world.hpp>
+#include <components/cubos/position.hpp>
+#include <components/cubos/rotation.hpp>
+#include <components/cubos/scale.hpp>
+
 #include <cubos/engine/gl/deferred/renderer.hpp>
 #include <cubos/engine/gl/renderer.hpp>
 #include <cubos/engine/gl/frame.hpp>
