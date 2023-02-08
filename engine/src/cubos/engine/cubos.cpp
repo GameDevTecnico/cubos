@@ -80,20 +80,20 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
     return *this;
 }
 
-TagBuilder& Cubos::tag(const std::string& tag)
+TagBuilder Cubos::tag(const std::string& tag)
 {
     mainDispatcher.addTag(tag);
-    TagBuilder* builder = new TagBuilder(mainDispatcher, mainTags);
+    TagBuilder builder(mainDispatcher, mainTags);
 
-    return *builder;
+    return builder;
 }
 
-TagBuilder& Cubos::startupTag(const std::string& tag)
+TagBuilder Cubos::startupTag(const std::string& tag)
 {
     startupDispatcher.addTag(tag);
-    TagBuilder* builder = new TagBuilder(startupDispatcher, startupTags);
+    TagBuilder builder(startupDispatcher, startupTags);
 
-    return *builder;
+    return builder;
 }
 
 Cubos::Cubos()

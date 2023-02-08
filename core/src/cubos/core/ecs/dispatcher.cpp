@@ -16,6 +16,14 @@ void Dispatcher::SystemSettings::copyFrom(const SystemSettings* other)
                     std::back_inserter(this->after.system));
 }
 
+Dispatcher::~Dispatcher()
+{
+    for(System* system : systems)
+    {
+        delete system;
+    }
+}
+
 void Dispatcher::addTag(const std::string& tag)
 {
     ENSURE_TAG_SETTINGS(tag);
@@ -190,7 +198,7 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
         }
         // All children nodes were visited; mark this node as complete
         node.m = DFSNode::BLACK;
-        systems.push_back(*systemInfo);
+        systems.push_back(systemInfo);
         return false;
     }
     }
@@ -204,13 +212,13 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
     if (!this->prepared)
     {
         for (auto& system : systems)
-            system.system->prepare(world);
+            system->system->prepare(world);
         this->prepared = true;
     }
 
-    for (auto it = systems.begin(); it != systems.end(); it++)
+    for (auto& system : systems)
     {
-        it->system->call(world, cmds);
+        system->system->call(world, cmds);
         // TODO: Check synchronization concerns when this gets multithreaded
         cmds.commit();
     }

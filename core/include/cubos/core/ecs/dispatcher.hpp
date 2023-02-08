@@ -51,6 +51,8 @@ namespace cubos::core::ecs
     class Dispatcher
     {
     public:
+        ~Dispatcher();
+
         /// Adds a tag, and sets it as the current tag for further
         /// settings.
         /// @param tag Tag to add.
@@ -175,7 +177,7 @@ namespace cubos::core::ecs
         std::string currTag;                                                ///< Last set tag, for changing settings.
 
         /// Variables for holding information after call chain is compiled.
-        std::vector<System> systems; ///< Compiled order of running systems.
+        std::vector<System*> systems; ///< Compiled order of running systems.
         bool prepared = false;       ///< Whether the systems are prepared for execution.
     };
 
