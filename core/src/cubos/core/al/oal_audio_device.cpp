@@ -1,11 +1,21 @@
 #include <cubos/core/al/oal_audio_device.hpp>
 #include <cubos/core/log.hpp>
 
+#ifdef WITH_OPENAL
 #include <AL/al.h>
 #include <AL/alc.h>
+#endif // WITH_OPENAL
+
+#define UNSUPPORTED()                                                                                                  \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        CUBOS_CRITICAL("Unsupported when building without OpenAL");                                                    \
+        abort();                                                                                                       \
+    } while (0)
 
 using namespace cubos::core::al;
 
+#ifdef WITH_OPENAL
 class OALBuffer : public impl::Buffer
 {
 public:
@@ -127,25 +137,35 @@ public:
 
     ALuint id;
 };
+#endif // WITH_OPENAL
 
 OALAudioDevice::OALAudioDevice(std::string specifier)
 {
+#ifdef WITH_OPENAL
     auto device = alcOpenDevice(specifier.c_str());
     auto context = alcCreateContext(device, nullptr);
     alcMakeContextCurrent(context);
+#else
+    UNSUPPORTED();
+#endif // WITH_OPENAL
 }
 
 OALAudioDevice::~OALAudioDevice()
 {
+#ifdef WITH_OPENAL
     auto context = alcGetCurrentContext();
     auto device = alcGetContextsDevice(context);
     alcMakeContextCurrent(nullptr);
     alcDestroyContext(context);
     alcCloseDevice(device);
+#else
+    UNSUPPORTED();
+#endif // WITH_OPENAL
 }
 
 void OALAudioDevice::enumerateDevices(std::vector<std::string>& devices)
 {
+#ifdef WITH_OPENAL
     if (alcIsExtensionPresent(nullptr, "ALC_ENUMERATION_EXT") == AL_FALSE)
     {
         CUBOS_CRITICAL("Missing extension ALC_ENUMERATION_EXT");
@@ -160,10 +180,14 @@ void OALAudioDevice::enumerateDevices(std::vector<std::string>& devices)
         devices.push_back(s);
         pointer += s.size() + 1;
     }
+#else
+    UNSUPPORTED();
+#endif // WITH_OPENAL
 }
 
 std::string OALAudioDevice::getDefaultDevice()
 {
+#ifdef WITH_OPENAL
     if (alcIsExtensionPresent(nullptr, "ALC_ENUMERATION_EXT") == AL_FALSE)
     {
         CUBOS_CRITICAL("Missing extension ALC_ENUMERATION_EXT");
@@ -171,36 +195,59 @@ std::string OALAudioDevice::getDefaultDevice()
     }
 
     return alcGetString(nullptr, ALC_DEFAULT_DEVICE_SPECIFIER);
+#else
+    UNSUPPORTED();
+#endif // WITH_OPENAL
 }
 
 Buffer OALAudioDevice::createBuffer()
 {
+#ifdef WITH_OPENAL
     ALuint id;
     alGenBuffers(1, &id);
 
     return std::make_shared<OALBuffer>(id);
+#else
+    UNSUPPORTED();
+#endif // WITH_OPENAL
 }
 
 Source OALAudioDevice::createSource()
 {
+#ifdef WITH_OPENAL
     ALuint sources;
     alGenSources(1, &sources);
 
     return std::make_shared<OALSource>(sources);
+#else
+    UNSUPPORTED();
+#endif // WITH_OPENAL
 }
 
 void OALAudioDevice::setListenerPosition(const glm::vec3& position)
 {
+#ifdef WITH_OPENAL
     alListener3f(AL_POSITION, position.x, position.y, position.z);
+#else
+    UNSUPPORTED();
+#endif // WITH_OPENAL
 }
 
 void OALAudioDevice::setListenerOrientation(const glm::vec3& forward, const glm::vec3& up)
 {
+#ifdef WITH_OPENAL
     float orientation[6] = {forward.x, forward.y, forward.z, up.x, up.y, up.z};
     alListenerfv(AL_ORIENTATION, orientation);
+#else
+    UNSUPPORTED();
+#endif // WITH_OPENAL
 }
 
 void OALAudioDevice::setListenerVelocity(const glm::vec3& velocity)
 {
+#ifdef WITH_OPENAL
     alListener3f(AL_VELOCITY, velocity.x, velocity.y, velocity.z);
+#else
+    UNSUPPORTED();
+#endif // WITH_OPENAL
 }
