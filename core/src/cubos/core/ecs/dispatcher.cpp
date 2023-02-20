@@ -6,19 +6,15 @@ using namespace cubos::core::ecs;
 
 void Dispatcher::SystemSettings::copyFrom(const SystemSettings* other)
 {
-    std::unique_copy(other->before.tag.begin(), other->before.tag.end(),
-                    std::back_inserter(this->before.tag));
-    std::unique_copy(other->after.tag.begin(), other->after.tag.end(),
-                    std::back_inserter(this->after.tag));
-    std::unique_copy(other->before.system.begin(), other->before.system.end(),
-                    std::back_inserter(this->before.system));
-    std::unique_copy(other->after.system.begin(), other->after.system.end(),
-                    std::back_inserter(this->after.system));
+    std::unique_copy(other->before.tag.begin(), other->before.tag.end(), std::back_inserter(this->before.tag));
+    std::unique_copy(other->after.tag.begin(), other->after.tag.end(), std::back_inserter(this->after.tag));
+    std::unique_copy(other->before.system.begin(), other->before.system.end(), std::back_inserter(this->before.system));
+    std::unique_copy(other->after.system.begin(), other->after.system.end(), std::back_inserter(this->after.system));
 }
 
 Dispatcher::~Dispatcher()
 {
-    for(System* system : systems)
+    for (System* system : systems)
     {
         delete system;
     }
@@ -113,7 +109,7 @@ void Dispatcher::compileChain()
     // Implement system tag settings with custom settings
     for (System* system : pendingSystems)
     {
-        if(!system->tag.empty())
+        if (!system->tag.empty())
         {
             if (!system->settings)
             {

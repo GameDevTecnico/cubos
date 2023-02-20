@@ -49,7 +49,6 @@ int main(int argc, char** argv)
     cubos.startupSystem(tagC).tagged("C");
     cubos.startupSystem(tagA).tagged("A");
 
-
     // Order using systems
     cubos.startupSystem(systemC);
     cubos.startupSystem(systemA).beforeSystem(systemC).afterTag("C");

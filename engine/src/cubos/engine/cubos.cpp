@@ -14,7 +14,8 @@ Arguments::Arguments(const std::vector<std::string>& value) : value(value)
 {
 }
 
-TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags) : dispatcher(dispatcher), tags(tags)
+TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
+    : dispatcher(dispatcher), tags(tags)
 {
 }
 
@@ -32,15 +33,17 @@ TagBuilder& TagBuilder::afterTag(const std::string& tag)
     return *this;
 }
 
-SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags) : dispatcher(dispatcher), tags(tags)
+SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
+    : dispatcher(dispatcher), tags(tags)
 {
 }
 
 SystemBuilder& SystemBuilder::tagged(const std::string& tag)
 {
-    if(std::find(tags.begin(), tags.end(), tag) != tags.end())
+    if (std::find(tags.begin(), tags.end(), tag) != tags.end())
     {
-        CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ", tag);
+        CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
+                   tag);
     }
     dispatcher.systemSetTag(tag);
     return *this;
@@ -48,9 +51,10 @@ SystemBuilder& SystemBuilder::tagged(const std::string& tag)
 
 SystemBuilder& SystemBuilder::beforeTag(const std::string& tag)
 {
-    if(std::find(tags.begin(), tags.end(), tag) != tags.end())
+    if (std::find(tags.begin(), tags.end(), tag) != tags.end())
     {
-        CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ", tag);
+        CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
+                   tag);
     }
     dispatcher.systemSetBeforeTag(tag);
     return *this;
@@ -58,9 +62,10 @@ SystemBuilder& SystemBuilder::beforeTag(const std::string& tag)
 
 SystemBuilder& SystemBuilder::afterTag(const std::string& tag)
 {
-    if(std::find(tags.begin(), tags.end(), tag) != tags.end())
+    if (std::find(tags.begin(), tags.end(), tag) != tags.end())
     {
-        CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ", tag);
+        CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
+                   tag);
     }
     dispatcher.systemSetAfterTag(tag);
     return *this;

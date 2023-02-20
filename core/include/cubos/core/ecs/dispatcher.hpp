@@ -178,14 +178,14 @@ namespace cubos::core::ecs
 
         /// Variables for holding information after call chain is compiled.
         std::vector<System*> systems; ///< Compiled order of running systems.
-        bool prepared = false;       ///< Whether the systems are prepared for execution.
+        bool prepared = false;        ///< Whether the systems are prepared for execution.
     };
 
     template <typename F>
     void Dispatcher::addSystem(F func)
     {
         // Wrap the system and put it in the pending queue
-        System* system = new System {nullptr, std::make_shared<SystemWrapper<F>>(func)};
+        System* system = new System{nullptr, std::make_shared<SystemWrapper<F>>(func)};
         pendingSystems.push_back(system);
         currSystem = pendingSystems.back();
     }
