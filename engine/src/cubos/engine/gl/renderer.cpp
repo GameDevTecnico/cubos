@@ -3,20 +3,21 @@
 using namespace cubos::core::gl;
 using namespace cubos::engine::gl;
 
-Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size)
+BaseRenderer::BaseRenderer(RenderDevice& renderDevice, glm::uvec2 size)
     : renderDevice(renderDevice), ppsManager(renderDevice, size)
 {
     this->resizeTex(size);
 }
 
-void Renderer::resize(glm::uvec2 size)
+void BaseRenderer::resize(glm::uvec2 size)
 {
     this->resizeTex(size);
     this->ppsManager.resize(size);
     this->onResize(size);
 }
 
-void Renderer::render(const Camera& camera, const Frame& frame, bool usePostProcessing, core::gl::Framebuffer target)
+void BaseRenderer::render(const Camera& camera, const Frame& frame, bool usePostProcessing,
+                          core::gl::Framebuffer target)
 {
     if (usePostProcessing && this->ppsManager.passCount() > 0)
     {
@@ -30,12 +31,12 @@ void Renderer::render(const Camera& camera, const Frame& frame, bool usePostProc
     }
 }
 
-pps::Manager& Renderer::pps()
+pps::Manager& BaseRenderer::pps()
 {
     return this->ppsManager;
 }
 
-void Renderer::resizeTex(glm::uvec2 size)
+void BaseRenderer::resizeTex(glm::uvec2 size)
 {
     Texture2DDesc textureDesc;
     textureDesc.format = TextureFormat::RGBA32Float;
