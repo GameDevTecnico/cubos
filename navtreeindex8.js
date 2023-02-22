@@ -1,16 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"structcubos_1_1core_1_1gl_1_1SpotLight.html#add660c3fe9ec956fb8123fad372e6e71":[4,0,0,0,3,4,2],
-"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html":[4,0,0,0,3,14],
-"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#a02bed8590a9ddf520e58a060059518ec":[4,0,0,0,3,14,4],
-"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#a16e432492c0e8a2e06f95f5cdf3f357c":[4,0,0,0,3,14,2],
-"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#a88eeb70d67698508761cc43059175f5e":[4,0,0,0,3,14,0],
-"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#ac541b9cb7a75a625df257feb8408a96b":[4,0,0,0,3,14,3],
-"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#aec0c28221349a5f3c278d835599bb0b6":[4,0,0,0,3,14,1],
-"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html":[4,0,0,0,3,16],
-"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a02afeaaf8574e7a78d6b466ff2695052":[4,0,0,0,3,16,2],
-"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a02bed8590a9ddf520e58a060059518ec":[4,0,0,0,3,16,6],
-"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a16e432492c0e8a2e06f95f5cdf3f357c":[4,0,0,0,3,16,3],
 "structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a854352f53b148adc24983a58a1866d66":[4,0,0,0,3,16,4],
 "structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#ab5d86354c62a5215eb43b536a9f6b635":[4,0,0,0,3,16,0],
 "structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#ac541b9cb7a75a625df257feb8408a96b":[4,0,0,0,3,16,5],
@@ -109,5 +98,16 @@ var NAVTREEINDEX8 =
 "vertex_8hpp_source.html":[5,0,0,0,1,0,3,8],
 "world_8hpp_source.html":[5,0,0,0,1,0,2,16],
 "yaml__deserializer_8hpp_source.html":[5,0,0,0,1,0,1,17],
-"yaml__serializer_8hpp_source.html":[5,0,0,0,1,0,1,18]
+"yaml__serializer_8hpp_source.html":[5,0,0,0,1,0,1,18],
+"":[3,0,0,1,0],
+"":[3,0,0,1,3,0],
+"":[3,0,0,1],
+"":[3,0,0,1,2,2],
+"":[3,0,0,0,0],
+"":[3,0,0],
+"":[3,0,0,1,3],
+"":[3,0,0,1,2,0],
+"":[3,0,0,1,2],
+"":[3,0,0,1,0,0],
+"":[3,0,0,1,1]
 };

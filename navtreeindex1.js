@@ -1,16 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classcubos_1_1core_1_1data_1_1Handle.html#a735984d41155bc1032e09bece8f8d66d":[4,0,0,0,1,10,12],
-"classcubos_1_1core_1_1data_1_1Handle.html#a763fd8db6bba8fbbbc113ca0d61c47c2":[4,0,0,0,1,10,15],
-"classcubos_1_1core_1_1data_1_1Handle.html#a8a175d4d5327cdaf77cb05ef3013e0da":[4,0,0,0,1,10,13],
-"classcubos_1_1core_1_1data_1_1Handle.html#a969bf4bc8a19092948989ccf30c46c10":[4,0,0,0,1,10,0],
-"classcubos_1_1core_1_1data_1_1Handle.html#aa28a6e41d0c530d873dd778c2c7ae079":[4,0,0,0,1,10,7],
-"classcubos_1_1core_1_1data_1_1Handle.html#ac63896f8498ab5be8b670d2e53a78072":[4,0,0,0,1,10,6],
-"classcubos_1_1core_1_1data_1_1Handle.html#adfd70878eef68923e227d08842f4250e":[4,0,0,0,1,10,1],
-"classcubos_1_1core_1_1data_1_1Handle.html#aeae092c8a9ce75693e95d61166d2f67b":[4,0,0,0,1,10,8],
-"classcubos_1_1core_1_1data_1_1Handle.html#af116d9f18350d41fb30e3e2c59ac3409":[4,0,0,0,1,10,5],
-"classcubos_1_1core_1_1data_1_1JSONDeserializer.html":[4,0,0,0,1,11],
-"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a10410746d95c9d9aa2cc2799782348f4":[4,0,0,0,1,11,11],
 "classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a127c755ca31f40039297deb214228807":[4,0,0,0,1,11,15],
 "classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a30309eb84c8bfbcfc93f92e400a237c8":[4,0,0,0,1,11,12],
 "classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a317afd563319492c4841a4cdf92b6119":[4,0,0,0,1,11,4],
@@ -249,5 +238,16 @@ var NAVTREEINDEX1 =
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a2d1fa14292823ae3718f547daeb56928":[4,0,0,0,2,1,8],
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a428789b966ae87499434dc8a91e9befd":[4,0,0,0,2,1,5],
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a64337a6ef7507f885ca0cb9e13370879":[4,0,0,0,2,1,2],
-"classcubos_1_1core_1_1ecs_1_1Blueprint.html#a8fde7bdfdc9fa1b44c8f8a3b7995b99a":[4,0,0,0,2,1,6]
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#a8fde7bdfdc9fa1b44c8f8a3b7995b99a":[4,0,0,0,2,1,6],
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#aa81023c69347d6a21b3599569ebfbbef":[4,0,0,0,2,1,1],
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#ac8bb3912a3ce86b15842e79d0b421204":[4,0,0,0,2,1,4],
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#ad21389d02b85e61c80602085a3768c4c":[4,0,0,0,2,1,0],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html":[4,0,0,0,2,3],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html#a4febf71417f599239ec10030e8f7f0d0":[4,0,0,0,2,3,3],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html#a579a10387517c9bb8befc1b14a9660b3":[4,0,0,0,2,3,1],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html#a8fde7bdfdc9fa1b44c8f8a3b7995b99a":[4,0,0,0,2,3,2],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html#ac1835c1144f147336bc72faf11a2a31b":[4,0,0,0,2,3,0],
+"classcubos_1_1core_1_1ecs_1_1CommandBuffer.html":[4,0,0,0,2,5],
+"classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#a4eaf0e751e5f813a14c33957a0b3dcf7":[4,0,0,0,2,5,4],
+"classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#a5c0d0acbf6a8ee186682ba2ef65eb385":[4,0,0,0,2,5,1]
 };

@@ -1,16 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"namespacecubos_1_1core_1_1memory.html#a912db41bd94a5bc9831669a08891993a":[3,0,0,0,5,4],
-"namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0":[3,0,0,0,5,3],
-"namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0a1a06729125544cab7cee73195fc044f0":[3,0,0,0,5,3,0],
-"namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0a222a267cc5778206b253be35ee3ddab5":[3,0,0,0,5,3,1],
-"namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0a87557f11575c0ad78e4e28abedc13b6e":[3,0,0,0,5,3,2],
-"namespacecubos_1_1core_1_1memory.html#ad253881fe73b77e302a57b327c3e17b9":[3,0,0,0,5,9],
-"namespacecubos_1_1core_1_1memory.html#ae41c010a7cb0cc984aeb7f0da18780f2":[3,0,0,0,5,5],
-"namespacecubos_1_1core_1_1ui.html":[3,0,0,0,6],
-"namespacecubos_1_1core_1_1ui.html#a00d2e0adc5245a734361b6e5f5fb6fa6":[3,0,0,0,6,0],
-"namespacecubos_1_1core_1_1ui.html#a31fdceab5f801da6c1861e7e9b89f5e7":[3,0,0,0,6,5],
-"namespacecubos_1_1core_1_1ui.html#a8904bc96ce2ff05ef698f88e0d107290":[3,0,0,0,6,2],
 "namespacecubos_1_1core_1_1ui.html#a8a966ee930dde3d209514a521967e3d3":[3,0,0,0,6,1],
 "namespacecubos_1_1core_1_1ui.html#a9cc812c329eab0ddf0116d0944df9e16":[3,0,0,0,6,8],
 "namespacecubos_1_1core_1_1ui.html#ab8feca199f9895e310e114fbe26fe42c":[3,0,0,0,6,3],
@@ -249,5 +238,16 @@ var NAVTREEINDEX7 =
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#a3930d1e8af0848833f4de0e0e9517dca":[4,0,0,0,3,4,5],
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#a4ebe780b81ca4be607e3fa456c0b6160":[4,0,0,0,3,4,6],
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#a90fce7087383bb3f4dd8d67bbc98cd26":[4,0,0,0,3,4,7],
-"structcubos_1_1core_1_1gl_1_1SpotLight.html#ab17456efa59b99dbb85317ee492274b6":[4,0,0,0,3,4,4]
+"structcubos_1_1core_1_1gl_1_1SpotLight.html#ab17456efa59b99dbb85317ee492274b6":[4,0,0,0,3,4,4],
+"structcubos_1_1core_1_1gl_1_1SpotLight.html#add660c3fe9ec956fb8123fad372e6e71":[4,0,0,0,3,4,2],
+"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html":[4,0,0,0,3,14],
+"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#a02bed8590a9ddf520e58a060059518ec":[4,0,0,0,3,14,4],
+"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#a16e432492c0e8a2e06f95f5cdf3f357c":[4,0,0,0,3,14,2],
+"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#a88eeb70d67698508761cc43059175f5e":[4,0,0,0,3,14,0],
+"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#ac541b9cb7a75a625df257feb8408a96b":[4,0,0,0,3,14,3],
+"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#aec0c28221349a5f3c278d835599bb0b6":[4,0,0,0,3,14,1],
+"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html":[4,0,0,0,3,16],
+"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a02afeaaf8574e7a78d6b466ff2695052":[4,0,0,0,3,16,2],
+"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a02bed8590a9ddf520e58a060059518ec":[4,0,0,0,3,16,6],
+"structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html#a16e432492c0e8a2e06f95f5cdf3f357c":[4,0,0,0,3,16,3]
 };

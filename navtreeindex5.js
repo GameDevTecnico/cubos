@@ -1,16 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"env__settings_8hpp_source.html":[5,0,1,0,0,0,3,1],
-"event_8hpp_source.html":[5,0,0,0,1,0,7],
-"event__pipe_8hpp_source.html":[5,0,0,0,1,0,2,5],
-"event__reader_8hpp_source.html":[5,0,0,0,1,0,2,6],
-"event__writer_8hpp_source.html":[5,0,0,0,1,0,2,7],
-"file_8hpp_source.html":[5,0,0,0,1,0,1,6],
-"file__settings_8hpp.html#a5a5954d3de736c0c8026aa1165eaa908":[3,0,0,1,3,3],
-"file__settings_8hpp_source.html":[5,0,1,0,0,0,3,2],
-"file__stream_8hpp_source.html":[5,0,0,0,1,0,1,7],
-"file__system_8hpp_source.html":[5,0,0,0,1,0,1,8],
-"files.html":[5,0],
 "frame_8hpp_source.html":[5,0,1,0,0,0,2,2],
 "functions.html":[4,3,0],
 "functions.html":[4,3,0,0],
@@ -249,5 +238,16 @@ var NAVTREEINDEX5 =
 "namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88adf650699c6df4a63fd0381a132d37f14":[3,0,0,0,3,46,3],
 "namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88af72dbe2436b38a39e5927ed644e6818b":[3,0,0,0,3,46,8],
 "namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88afaedf511c99a5461048fd6a3b73da26c":[3,0,0,0,3,46,4],
-"namespacecubos_1_1core_1_1gl.html#a3ed6bf74e81d6d8c3c87716152e69a71":[3,0,0,0,3,36]
+"namespacecubos_1_1core_1_1gl.html#a3ed6bf74e81d6d8c3c87716152e69a71":[3,0,0,0,3,36],
+"namespacecubos_1_1core_1_1gl.html#a600ed22330adf45ec2fec55faa5beb89":[3,0,0,0,3,39],
+"namespacecubos_1_1core_1_1gl.html#a63ecf03fc723ea620bd585ca4fbbad31":[3,0,0,0,3,29],
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658d":[3,0,0,0,3,57],
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658da02bce93bff905887ad2233110bf9c49e":[3,0,0,0,3,57,1],
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658da0ebe6df8a3ac338e0512acc741823fdb":[3,0,0,0,3,57,2],
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658da6182913ea7b5c02fe2773ea87177d4f9":[3,0,0,0,3,57,5],
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658da6ec565c329385c8d59333abc6a1003d1":[3,0,0,0,3,57,6],
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658da6f15bdfa71aa83b0d197cad75757d580":[3,0,0,0,3,57,3],
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658da9b8958acb7be504bb5f55f17c0eea366":[3,0,0,0,3,57,7],
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658daaa91cb7f033b90dec9582dc5e9611732":[3,0,0,0,3,57,4],
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658dad7ed4ee1df437474d005188535f74875":[3,0,0,0,3,57,0]
 };
