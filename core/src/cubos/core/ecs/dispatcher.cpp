@@ -4,65 +4,65 @@
 
 using namespace cubos::core::ecs;
 
+void Dispatcher::SystemSettings::copyFrom(const SystemSettings* other)
+{
+    std::unique_copy(other->before.tag.begin(), other->before.tag.end(), std::back_inserter(this->before.tag));
+    std::unique_copy(other->after.tag.begin(), other->after.tag.end(), std::back_inserter(this->after.tag));
+    std::unique_copy(other->before.system.begin(), other->before.system.end(), std::back_inserter(this->before.system));
+    std::unique_copy(other->after.system.begin(), other->after.system.end(), std::back_inserter(this->after.system));
+}
+
+Dispatcher::~Dispatcher()
+{
+    for (System* system : systems)
+    {
+        delete system;
+    }
+}
+
 void Dispatcher::addTag(const std::string& tag)
 {
-    if (tagSettings.find(tag) == tagSettings.end())
-    {
-        tagSettings[tag] = std::make_shared<SystemSettings>();
-        currTagSettings = tagSettings[tag].get();
-    }
+    ENSURE_TAG_SETTINGS(tag);
+    currTag = tag;
 }
 
 void Dispatcher::tagInheritTag(const std::string& tag)
 {
     ENSURE_CURR_TAG();
-    addTag(tag);
-    if (std::find(currTagSettings->inherits.begin(), currTagSettings->inherits.end(), tag) !=
-        currTagSettings->inherits.end())
+    ENSURE_TAG_SETTINGS(tag);
+    if (std::find(tagSettings[currTag]->inherits.begin(), tagSettings[currTag]->inherits.end(), tag) !=
+        tagSettings[currTag]->inherits.end())
     {
         CUBOS_INFO("Tag already inherits from '{}'", tag);
     }
-    currTagSettings->inherits.push_back(tag);
+    tagSettings[currTag]->inherits.push_back(tag);
 }
 
 void Dispatcher::tagSetAfterTag(const std::string& tag)
 {
     ENSURE_CURR_TAG();
-    addTag(tag);
+    ENSURE_TAG_SETTINGS(tag);
     // Set curr to run after this tag
-    currTagSettings->after.tag.push_back(tag);
-    // And, if it exists, this tag to run before curr's tag
-    auto settings = currTagSettings;
-    std::map<std::string, std::shared_ptr<SystemSettings>>::iterator it;
-    if ((it = std::find_if(tagSettings.begin(), tagSettings.end(),
-                           [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
-    {
-        tagSettings[tag]->before.tag.push_back(it->first);
-    }
+    tagSettings[currTag]->after.tag.push_back(tag);
+    // And that tag to run before this tag
+    tagSettings[tag]->before.tag.push_back(currTag);
 }
 
 void Dispatcher::tagSetBeforeTag(const std::string& tag)
 {
     ENSURE_CURR_TAG();
-    addTag(tag);
+    ENSURE_TAG_SETTINGS(tag);
     // Set curr to run before this tag
-    currTagSettings->before.tag.push_back(tag);
-    // And, if it exists, this tag to run after curr's tag
-    auto settings = currTagSettings;
-    std::map<std::string, std::shared_ptr<SystemSettings>>::iterator it;
-    if ((it = std::find_if(tagSettings.begin(), tagSettings.end(),
-                           [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
-    {
-        tagSettings[tag]->after.tag.push_back(it->first);
-    }
+    tagSettings[currTag]->before.tag.push_back(tag);
+    // And that tag to run after this tag
+    tagSettings[tag]->after.tag.push_back(currTag);
 }
 
 void Dispatcher::systemSetTag(const std::string& tag)
 {
     ENSURE_CURR_SYSTEM();
-    ENSURE_SYSTEM_SETTINGS(currSystem);
-    addTag(tag);
-    currSystem->settings = tagSettings[tag];
+    ENSURE_TAG_SETTINGS(tag);
+    currSystem->tag = tag;
 }
 
 void Dispatcher::systemSetAfterTag(const std::string& tag)
@@ -72,14 +72,8 @@ void Dispatcher::systemSetAfterTag(const std::string& tag)
     addTag(tag);
     // Set curr to run after this tag
     currSystem->settings->after.tag.push_back(tag);
-    // And, if it exists, this tag to run before curr's tag
-    auto* settings = currSystem->settings.get();
-    std::map<std::string, std::shared_ptr<SystemSettings>>::iterator it;
-    if ((it = std::find_if(tagSettings.begin(), tagSettings.end(),
-                           [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
-    {
-        tagSettings[tag]->before.tag.push_back(it->first);
-    }
+    // And that tag to run before this system tag
+    tagSettings[tag]->before.system.push_back(currSystem);
 }
 
 void Dispatcher::systemSetBeforeTag(const std::string& tag)
@@ -89,23 +83,47 @@ void Dispatcher::systemSetBeforeTag(const std::string& tag)
     addTag(tag);
     // Set curr to run before this tag
     currSystem->settings->before.tag.push_back(tag);
-    // And, if it exists, this tag to run after curr's tag
-    auto* settings = currSystem->settings.get();
-    std::map<std::string, std::shared_ptr<SystemSettings>>::iterator it;
-    if ((it = std::find_if(tagSettings.begin(), tagSettings.end(),
-                           [&settings](auto it) { return it.second.get() == settings; })) != tagSettings.end())
+    // And that tag to run after this system tag
+    tagSettings[tag]->after.system.push_back(currSystem);
+}
+
+void Dispatcher::handleTagInheritance(std::shared_ptr<SystemSettings>& settings)
+{
+    for (auto& parentTag : settings->inherits)
     {
-        tagSettings[tag]->after.tag.push_back(it->first);
+        auto& parentSettings = tagSettings[parentTag];
+        handleTagInheritance(parentSettings);
+        settings->copyFrom(parentSettings.get());
     }
+    settings->inherits.clear();
 }
 
 void Dispatcher::compileChain()
 {
+    // Implement tag inheritance by copying configs from parent tags
+    for (auto& [tag, settings] : tagSettings)
+    {
+        handleTagInheritance(settings);
+    }
+
+    // Implement system tag settings with custom settings
+    for (System* system : pendingSystems)
+    {
+        if (!system->tag.empty())
+        {
+            if (!system->settings)
+            {
+                system->settings = std::make_shared<SystemSettings>();
+            }
+            system->settings->copyFrom(tagSettings[system->tag].get());
+        }
+    }
+
     // Build the system chain
     std::vector<DFSNode> nodes;
-    for (auto& system : pendingSystems)
+    for (System* system : pendingSystems)
     {
-        nodes.push_back(DFSNode{DFSNode::WHITE, &system});
+        nodes.push_back(DFSNode{DFSNode::WHITE, system});
     }
 
     // Keep running while there are unvisited nodes
@@ -147,10 +165,9 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
             // Visit tags first
             for (std::string tag : systemInfo->settings->before.tag)
             {
-                SystemSettings* settings = tagSettings[tag].get();
                 for (auto it = nodes.begin(); it != nodes.end(); it++)
                 {
-                    if (it->s->settings.get() == settings)
+                    if (it->s->tag == tag)
                     {
                         if (dfsVisit(*it, nodes))
                         {
@@ -177,7 +194,7 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
         }
         // All children nodes were visited; mark this node as complete
         node.m = DFSNode::BLACK;
-        systems.push_back(*systemInfo);
+        systems.push_back(systemInfo);
         return false;
     }
     }
@@ -191,13 +208,13 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
     if (!this->prepared)
     {
         for (auto& system : systems)
-            system.system->prepare(world);
+            system->system->prepare(world);
         this->prepared = true;
     }
 
-    for (auto it = systems.begin(); it != systems.end(); it++)
+    for (auto& system : systems)
     {
-        it->system->call(world, cmds);
+        system->system->call(world, cmds);
         // TODO: Check synchronization concerns when this gets multithreaded
         cmds.commit();
     }
