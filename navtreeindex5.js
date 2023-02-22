@@ -1,6 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"env__settings_8hpp.html#a934caabf9b9109a549c088d93cd8d281":[3,0,0,1,3,2],
 "env__settings_8hpp_source.html":[5,0,1,0,0,0,3,1],
 "event_8hpp_source.html":[5,0,0,0,1,0,7],
 "event__pipe_8hpp_source.html":[5,0,0,0,1,0,2,5],
@@ -249,5 +248,6 @@ var NAVTREEINDEX5 =
 "namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88ad7ed4ee1df437474d005188535f74875":[3,0,0,0,3,46,0],
 "namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88adf650699c6df4a63fd0381a132d37f14":[3,0,0,0,3,46,3],
 "namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88af72dbe2436b38a39e5927ed644e6818b":[3,0,0,0,3,46,8],
-"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88afaedf511c99a5461048fd6a3b73da26c":[3,0,0,0,3,46,4]
+"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88afaedf511c99a5461048fd6a3b73da26c":[3,0,0,0,3,46,4],
+"namespacecubos_1_1core_1_1gl.html#a3ed6bf74e81d6d8c3c87716152e69a71":[3,0,0,0,3,36]
 };

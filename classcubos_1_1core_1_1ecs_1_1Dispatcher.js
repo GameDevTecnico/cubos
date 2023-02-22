@@ -1,5 +1,6 @@
 var classcubos_1_1core_1_1ecs_1_1Dispatcher =
 [
+    [ "~Dispatcher", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aebde02bf4fd9df0eb3505a5f69e66899", null ],
     [ "addSystem", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a4783d358e3205382f29cc770cd32b221", null ],
     [ "addTag", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a7d2c9145eed0ea491f309af984c06f52", null ],
     [ "callSystems", "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aa22aeacf0816654953e7967d2ea55d9d", null ],

@@ -1,6 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"structcubos_1_1core_1_1gl_1_1SpotLight.html#ab17456efa59b99dbb85317ee492274b6":[4,0,0,0,3,4,4],
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#add660c3fe9ec956fb8123fad372e6e71":[4,0,0,0,3,4,2],
 "structcubos_1_1core_1_1gl_1_1Texture1DDesc.html":[4,0,0,0,3,14],
 "structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#a02bed8590a9ddf520e58a060059518ec":[4,0,0,0,3,14,4],

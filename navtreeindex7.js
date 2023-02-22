@@ -1,6 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"namespacecubos_1_1core_1_1memory.html#a80481a1d1a192de35c3bdd6e8cd0480b":[3,0,0,0,5,6],
 "namespacecubos_1_1core_1_1memory.html#a912db41bd94a5bc9831669a08891993a":[3,0,0,0,5,4],
 "namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0":[3,0,0,0,5,3],
 "namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0a1a06729125544cab7cee73195fc044f0":[3,0,0,0,5,3,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX7 =
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#a2dfe87f3417747242e8f043dd4f3fb59":[4,0,0,0,3,4,3],
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#a3930d1e8af0848833f4de0e0e9517dca":[4,0,0,0,3,4,5],
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#a4ebe780b81ca4be607e3fa456c0b6160":[4,0,0,0,3,4,6],
-"structcubos_1_1core_1_1gl_1_1SpotLight.html#a90fce7087383bb3f4dd8d67bbc98cd26":[4,0,0,0,3,4,7]
+"structcubos_1_1core_1_1gl_1_1SpotLight.html#a90fce7087383bb3f4dd8d67bbc98cd26":[4,0,0,0,3,4,7],
+"structcubos_1_1core_1_1gl_1_1SpotLight.html#ab17456efa59b99dbb85317ee492274b6":[4,0,0,0,3,4,4]
 };
