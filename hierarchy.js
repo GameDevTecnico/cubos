@@ -1,6 +1,7 @@
 var hierarchy =
 [
     [ "Action", "classcubos_1_1core_1_1io_1_1Action.html", null ],
+    [ "ActiveCamera", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera.html", null ],
     [ "AnySystemWrapper< R >", "classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html", null ],
     [ "AnySystemWrapper< impl::SystemTraits< F >::Return >", "classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html", [
       [ "SystemWrapper< F >", "classcubos_1_1core_1_1ecs_1_1SystemWrapper.html", null ]
@@ -12,6 +13,9 @@ var hierarchy =
     [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", null ],
     [ "AssetManager", "classcubos_1_1engine_1_1data_1_1AssetManager.html", null ],
     [ "AudioDevice", "classcubos_1_1core_1_1al_1_1AudioDevice.html", null ],
+    [ "BaseRenderer", "classcubos_1_1engine_1_1gl_1_1BaseRenderer.html", [
+      [ "Renderer", "classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html", null ]
+    ] ],
     [ "BaseWindow", "classcubos_1_1core_1_1io_1_1BaseWindow.html", null ],
     [ "BlendState", "classcubos_1_1core_1_1gl_1_1impl_1_1BlendState.html", null ],
     [ "BlendStateDesc", "structcubos_1_1core_1_1gl_1_1BlendStateDesc.html", null ],
@@ -19,6 +23,7 @@ var hierarchy =
     [ "BlueprintBuilder", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html", null ],
     [ "Buffer", "classcubos_1_1core_1_1al_1_1impl_1_1Buffer.html", null ],
     [ "Camera", "structcubos_1_1core_1_1gl_1_1Camera.html", null ],
+    [ "Camera", "structcubos_1_1engine_1_1ecs_1_1Camera.html", null ],
     [ "CommandBuffer", "classcubos_1_1core_1_1ecs_1_1CommandBuffer.html", null ],
     [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html", null ],
     [ "ComponentManager", "classcubos_1_1core_1_1ecs_1_1ComponentManager.html", null ],
@@ -127,9 +132,6 @@ var hierarchy =
     [ "ReadStorage< T >", "classcubos_1_1core_1_1ecs_1_1ReadStorage.html", null ],
     [ "Registry", "classcubos_1_1core_1_1ecs_1_1Registry.html", null ],
     [ "RenderDevice", "classcubos_1_1core_1_1gl_1_1RenderDevice.html", null ],
-    [ "Renderer", "classcubos_1_1engine_1_1gl_1_1Renderer.html", [
-      [ "Renderer", "classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html", null ]
-    ] ],
     [ "RendererGrid", "classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html", null ],
     [ "ResizeEvent", "structcubos_1_1core_1_1io_1_1ResizeEvent.html", null ],
     [ "ResourceManager", "classcubos_1_1core_1_1ecs_1_1ResourceManager.html", null ],

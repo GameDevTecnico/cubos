@@ -1,0 +1,4 @@
+<map id="ActiveCamera" name="ActiveCamera">
+<area shape="rect" id="node1" title="Resource to contain the current active camera." alt="" coords="5,95,120,121"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity." alt="" coords="33,5,93,32"/>
+</map>

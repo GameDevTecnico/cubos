@@ -2,7 +2,6 @@ var NAVTREEINDEX0 =
 {
 "":[3,0,0],
 "":[3,0,0,0,0],
-"":[3,0,0,1,3,0],
 "":[3,0,0,1],
 "":[3,0,0,1,0],
 "":[3,0,0,1,0,0],
@@ -11,6 +10,7 @@ var NAVTREEINDEX0 =
 "":[3,0,0,1,2,0],
 "":[3,0,0,1,2,2],
 "":[3,0,0,1,3],
+"":[3,0,0,1,3,0],
 "action_8hpp_source.html":[5,0,0,0,1,0,4,1],
 "annotated.html":[4,0],
 "archive_8hpp_source.html":[5,0,0,0,1,0,1,0],
@@ -32,7 +32,6 @@ var NAVTREEINDEX0 =
 "blueprint_8hpp_source.html":[5,0,0,0,1,0,2,0],
 "buffer__stream_8hpp_source.html":[5,0,0,0,1,0,5,0],
 "button__press_8hpp_source.html":[5,0,0,0,1,0,4,0,0],
-"camera_8hpp_source.html":[5,0,0,0,1,0,3,0],
 "classcubos_1_1core_1_1Event.html":[4,0,0,0,6],
 "classcubos_1_1core_1_1Event.html#a1585bb6d5027a2fbe48727e023b4fcbb":[4,0,0,0,6,3],
 "classcubos_1_1core_1_1Event.html#a2e747bb67cbb1661180bd89d8f58ab19":[4,0,0,0,6,7],
@@ -249,5 +248,6 @@ var NAVTREEINDEX0 =
 "classcubos_1_1core_1_1data_1_1Handle.html#a2c03e1a65aa4ce73b0003718120c346a":[4,0,0,0,1,10,11],
 "classcubos_1_1core_1_1data_1_1Handle.html#a507909de3ceeac3888bf91d869d86842":[4,0,0,0,1,10,14],
 "classcubos_1_1core_1_1data_1_1Handle.html#a5bc2a781be2586924afce4e4a4ea6697":[4,0,0,0,1,10,9],
-"classcubos_1_1core_1_1data_1_1Handle.html#a67b76affb3b5d35fa419ac234144038b":[4,0,0,0,1,10,10]
+"classcubos_1_1core_1_1data_1_1Handle.html#a67b76affb3b5d35fa419ac234144038b":[4,0,0,0,1,10,10],
+"classcubos_1_1core_1_1data_1_1Handle.html#a6c8f4d9fa0f9ad7f107601fd79eea80d":[4,0,0,0,1,10,2]
 };

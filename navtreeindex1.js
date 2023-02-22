@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classcubos_1_1core_1_1data_1_1Handle.html#a6c8f4d9fa0f9ad7f107601fd79eea80d":[4,0,0,0,1,10,2],
 "classcubos_1_1core_1_1data_1_1Handle.html#a735984d41155bc1032e09bece8f8d66d":[4,0,0,0,1,10,12],
 "classcubos_1_1core_1_1data_1_1Handle.html#a763fd8db6bba8fbbbc113ca0d61c47c2":[4,0,0,0,1,10,15],
 "classcubos_1_1core_1_1data_1_1Handle.html#a8a175d4d5327cdaf77cb05ef3013e0da":[4,0,0,0,1,10,13],
@@ -249,5 +248,6 @@ var NAVTREEINDEX1 =
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a1dedadd7a84fbd99582f90de00222fae":[4,0,0,0,2,1,7],
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a2d1fa14292823ae3718f547daeb56928":[4,0,0,0,2,1,8],
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a428789b966ae87499434dc8a91e9befd":[4,0,0,0,2,1,5],
-"classcubos_1_1core_1_1ecs_1_1Blueprint.html#a64337a6ef7507f885ca0cb9e13370879":[4,0,0,0,2,1,2]
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#a64337a6ef7507f885ca0cb9e13370879":[4,0,0,0,2,1,2],
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#a8fde7bdfdc9fa1b44c8f8a3b7995b99a":[4,0,0,0,2,1,6]
 };

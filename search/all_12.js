@@ -37,7 +37,7 @@ var searchData=
   ['setlooping_593',['setLooping',['../classcubos_1_1core_1_1al_1_1impl_1_1Source.html#a85fb98f15108dc9780130c06a45cce8d',1,'cubos::core::al::impl::Source']]],
   ['setmask_594',['setMask',['../classcubos_1_1core_1_1ecs_1_1EntityManager.html#aeefdcde3a2d642b1a6180007952f20d4',1,'cubos::core::ecs::EntityManager']]],
   ['setmousestate_595',['setMouseState',['../classcubos_1_1core_1_1io_1_1BaseWindow.html#ae755d918c3aa83ba31569610f033e769',1,'cubos::core::io::BaseWindow']]],
-  ['setpalette_596',['setPalette',['../classcubos_1_1engine_1_1gl_1_1Renderer.html#adba2df0c8afc09884ecae830486f9f88',1,'cubos::engine::gl::Renderer::setPalette()'],['../classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a1558035fd52b5e8e67be5e9aa60af019',1,'cubos::engine::gl::deferred::Renderer::setPalette()']]],
+  ['setpalette_596',['setPalette',['../classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#adba2df0c8afc09884ecae830486f9f88',1,'cubos::engine::gl::BaseRenderer::setPalette()'],['../classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a1558035fd52b5e8e67be5e9aa60af019',1,'cubos::engine::gl::deferred::Renderer::setPalette()']]],
   ['setpitch_597',['setPitch',['../classcubos_1_1core_1_1al_1_1impl_1_1Source.html#a2489f18d315ddf2edd064ef6dbf6350c',1,'cubos::core::al::impl::Source']]],
   ['setposition_598',['setPosition',['../classcubos_1_1core_1_1al_1_1impl_1_1Source.html#ad49feb558935c6cdb31d42d65821c9b3',1,'cubos::core::al::impl::Source']]],
   ['setrasterstate_599',['setRasterState',['../classcubos_1_1core_1_1gl_1_1RenderDevice.html#a2e71d76d20d98ba156c036810b0b930f',1,'cubos::core::gl::RenderDevice']]],

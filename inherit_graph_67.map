@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structcubos_1_1core_1_1ecs_1_1impl_1_1Index.html" title=" " alt="" coords="5,5,144,32"/>
+<area shape="rect" id="node1" href="$classcubos_1_1core_1_1data_1_1Handle.html" title="A generic handle to a resource." alt="" coords="5,42,73,69"/>
+<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1data_1_1Asset.html" title=" " alt="" coords="121,5,284,47"/>
+<area shape="rect" id="node3" href="$classcubos_1_1engine_1_1data_1_1Asset.html" title=" " alt="" coords="155,71,251,98"/>
 </map>

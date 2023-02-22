@@ -23,13 +23,12 @@ var namespaces_dup =
           [ "IsAsset", "asset_8hpp.html#af4064dca562d488d31e2fb90030644e8", null ]
         ] ],
         [ "ecs", null, [
+          [ "Camera", "structcubos_1_1engine_1_1ecs_1_1Camera.html", "structcubos_1_1engine_1_1ecs_1_1Camera" ],
           [ "Grid", "structcubos_1_1engine_1_1ecs_1_1Grid.html", "structcubos_1_1engine_1_1ecs_1_1Grid" ],
           [ "LocalToWorld", "structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html", "structcubos_1_1engine_1_1ecs_1_1LocalToWorld" ],
           [ "Position", "structcubos_1_1engine_1_1ecs_1_1Position.html", "structcubos_1_1engine_1_1ecs_1_1Position" ],
           [ "Rotation", "structcubos_1_1engine_1_1ecs_1_1Rotation.html", "structcubos_1_1engine_1_1ecs_1_1Rotation" ],
-          [ "Scale", "structcubos_1_1engine_1_1ecs_1_1Scale.html", "structcubos_1_1engine_1_1ecs_1_1Scale" ],
-          [ "drawSystem", "draw__system_8hpp.html#af259df05163719e5e487e6df1e1daa21", null ],
-          [ "transformSystem", "transform__system_8hpp.html#a88a20628228573d6087e0dfb0fd65044", null ]
+          [ "Scale", "structcubos_1_1engine_1_1ecs_1_1Scale.html", "structcubos_1_1engine_1_1ecs_1_1Scale" ]
         ] ],
         [ "gl", null, [
           [ "deferred", null, [
@@ -48,16 +47,20 @@ var namespaces_dup =
             ] ]
           ] ],
           [ "Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html", "classcubos_1_1engine_1_1gl_1_1Frame" ],
-          [ "Renderer", "classcubos_1_1engine_1_1gl_1_1Renderer.html", "classcubos_1_1engine_1_1gl_1_1Renderer" ],
-          [ "RendererGrid", "renderer_8hpp.html#a466baf930bfdebba0d977770dd4d0056", null ]
+          [ "BaseRenderer", "classcubos_1_1engine_1_1gl_1_1BaseRenderer.html", "classcubos_1_1engine_1_1gl_1_1BaseRenderer" ],
+          [ "Renderer", "gl_2renderer_8hpp.html#a2aa920d2f4b088902d1fdcc01760c7c8", null ],
+          [ "RendererGrid", "gl_2renderer_8hpp.html#a466baf930bfdebba0d977770dd4d0056", null ]
         ] ],
         [ "plugins", null, [
           [ "tools", null, [
             [ "settingsInspectorPlugin", "settings__inspector_8hpp.html#af16ebf94aa7e16a57b67174b0addcd48", null ]
           ] ],
+          [ "ActiveCamera", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera.html", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera" ],
           [ "envSettingsPlugin", "env__settings_8hpp.html#a934caabf9b9109a549c088d93cd8d281", null ],
           [ "fileSettingsPlugin", "file__settings_8hpp.html#a5a5954d3de736c0c8026aa1165eaa908", null ],
           [ "imguiPlugin", "engine_2include_2cubos_2engine_2plugins_2imgui_8hpp.html#afb729bcc13bb2c13aa37b602860524dc", null ],
+          [ "rendererPlugin", "plugins_2renderer_8hpp.html#ae4ccf4d20be235e36f5fd3fd14332a6a", null ],
+          [ "transformPlugin", "transform_8hpp.html#a938acb9a6141b200e25a0cc24f3d061e", null ],
           [ "windowPlugin", "engine_2include_2cubos_2engine_2plugins_2window_8hpp.html#afa8146f56bedab5286a623bdbad91054", null ]
         ] ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],

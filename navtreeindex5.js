@@ -1,15 +1,13 @@
 var NAVTREEINDEX5 =
 {
-"engine_2include_2cubos_2engine_2plugins_2window_8hpp_source.html":[5,0,1,0,0,0,3,4],
-"entity__manager_8hpp_source.html":[5,0,0,0,1,0,2,4],
-"env__settings_8hpp.html#a934caabf9b9109a549c088d93cd8d281":[3,0,0,1,3,1],
+"env__settings_8hpp.html#a934caabf9b9109a549c088d93cd8d281":[3,0,0,1,3,2],
 "env__settings_8hpp_source.html":[5,0,1,0,0,0,3,1],
 "event_8hpp_source.html":[5,0,0,0,1,0,7],
 "event__pipe_8hpp_source.html":[5,0,0,0,1,0,2,5],
 "event__reader_8hpp_source.html":[5,0,0,0,1,0,2,6],
 "event__writer_8hpp_source.html":[5,0,0,0,1,0,2,7],
 "file_8hpp_source.html":[5,0,0,0,1,0,1,6],
-"file__settings_8hpp.html#a5a5954d3de736c0c8026aa1165eaa908":[3,0,0,1,3,2],
+"file__settings_8hpp.html#a5a5954d3de736c0c8026aa1165eaa908":[3,0,0,1,3,3],
 "file__settings_8hpp_source.html":[5,0,1,0,0,0,3,2],
 "file__stream_8hpp_source.html":[5,0,0,0,1,0,1,7],
 "file__system_8hpp_source.html":[5,0,0,0,1,0,1,8],
@@ -69,6 +67,10 @@ var NAVTREEINDEX5 =
 "functions_w.html":[4,3,0,22],
 "functions_y.html":[4,3,0,23],
 "functions_z.html":[4,3,0,24],
+"gl_2deferred_2renderer_8hpp_source.html":[5,0,1,0,0,0,2,0,0],
+"gl_2renderer_8hpp.html#a2aa920d2f4b088902d1fdcc01760c7c8":[3,0,0,1,2,5],
+"gl_2renderer_8hpp.html#a466baf930bfdebba0d977770dd4d0056":[3,0,0,1,2,6],
+"gl_2renderer_8hpp_source.html":[5,0,1,0,0,0,2,3],
 "guide-camera-controller.html":[2,2],
 "guide-first-voxels.html":[2,1],
 "guide-hello-world.html":[2,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX5 =
 "namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88ad7ed4ee1df437474d005188535f74875":[3,0,0,0,3,46,0],
 "namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88adf650699c6df4a63fd0381a132d37f14":[3,0,0,0,3,46,3],
 "namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88af72dbe2436b38a39e5927ed644e6818b":[3,0,0,0,3,46,8],
-"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88afaedf511c99a5461048fd6a3b73da26c":[3,0,0,0,3,46,4],
-"namespacecubos_1_1core_1_1gl.html#a3ed6bf74e81d6d8c3c87716152e69a71":[3,0,0,0,3,36],
-"namespacecubos_1_1core_1_1gl.html#a600ed22330adf45ec2fec55faa5beb89":[3,0,0,0,3,39]
+"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88afaedf511c99a5461048fd6a3b73da26c":[3,0,0,0,3,46,4]
 };

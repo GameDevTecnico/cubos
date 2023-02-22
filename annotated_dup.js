@@ -180,6 +180,7 @@ var annotated_dup =
           [ "Scene", "structcubos_1_1engine_1_1data_1_1Scene.html", "structcubos_1_1engine_1_1data_1_1Scene" ]
         ] ],
         [ "ecs", null, [
+          [ "Camera", "structcubos_1_1engine_1_1ecs_1_1Camera.html", "structcubos_1_1engine_1_1ecs_1_1Camera" ],
           [ "Grid", "structcubos_1_1engine_1_1ecs_1_1Grid.html", "structcubos_1_1engine_1_1ecs_1_1Grid" ],
           [ "LocalToWorld", "structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html", "structcubos_1_1engine_1_1ecs_1_1LocalToWorld" ],
           [ "Position", "structcubos_1_1engine_1_1ecs_1_1Position.html", "structcubos_1_1engine_1_1ecs_1_1Position" ],
@@ -200,7 +201,10 @@ var annotated_dup =
             [ "Pass", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass" ]
           ] ],
           [ "Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html", "classcubos_1_1engine_1_1gl_1_1Frame" ],
-          [ "Renderer", "classcubos_1_1engine_1_1gl_1_1Renderer.html", "classcubos_1_1engine_1_1gl_1_1Renderer" ]
+          [ "BaseRenderer", "classcubos_1_1engine_1_1gl_1_1BaseRenderer.html", "classcubos_1_1engine_1_1gl_1_1BaseRenderer" ]
+        ] ],
+        [ "plugins", null, [
+          [ "ActiveCamera", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera.html", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera" ]
         ] ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
         [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", "structcubos_1_1engine_1_1Arguments" ],

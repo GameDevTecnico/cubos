@@ -1,7 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcubos_1_1core_1_1ecs_1_1IStorage.html" title="IStorage is an abstract parent class for all storages." alt="" coords="5,56,81,83"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Storage.html" title="Storage is an abstract container for a certain type with common operations, such as,..." alt="" coords="129,56,240,83"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1ecs_1_1MapStorage.html" title="MapStorage is a Storage implementation that uses a STL unordered_map, this is best for components tha..." alt="" coords="288,5,427,32"/>
-<area shape="rect" id="node4" href="$classcubos_1_1core_1_1ecs_1_1NullStorage.html" title="NullStorage is a Storage implementation that doesn&#39;t keep any data, made for components that don&#39;t ho..." alt="" coords="289,56,425,83"/>
-<area shape="rect" id="node5" href="$classcubos_1_1core_1_1ecs_1_1VecStorage.html" title="VecStorage is a Storage implementation that uses a STL vector, this is best for components that are u..." alt="" coords="291,107,424,133"/>
+<area shape="rect" id="node1" href="$structcubos_1_1core_1_1ecs_1_1impl_1_1Index.html" title=" " alt="" coords="5,5,144,32"/>
 </map>

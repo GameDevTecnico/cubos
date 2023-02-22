@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.9.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: Renderer Class Reference</title>
+    <title>CUBOS.: BaseRenderer Class Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -67,7 +67,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classcubos_1_1engine_1_1gl_1_1Renderer.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classcubos_1_1engine_1_1gl_1_1BaseRenderer.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -90,60 +90,61 @@ $(document).ready(function(){initNavTree('classcubos_1_1engine_1_1gl_1_1Renderer
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="classcubos_1_1engine_1_1gl_1_1Renderer-members.html">List of all members</a>  </div>
+<a href="classcubos_1_1engine_1_1gl_1_1BaseRenderer-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Renderer Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">BaseRenderer Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="renderer_8hpp_source.html">renderer.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="gl_2renderer_8hpp_source.html">renderer.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for Renderer:</div>
+Inheritance diagram for BaseRenderer:</div>
 <div class="dyncontent">
-<div class="center"><img src="classcubos_1_1engine_1_1gl_1_1Renderer__inherit__graph.png" border="0" usemap="#aRenderer_inherit__map" alt="Inheritance graph"/></div>
-<map name="aRenderer_inherit__map" id="aRenderer_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,5,87,32"/>
+<div class="center"><img src="classcubos_1_1engine_1_1gl_1_1BaseRenderer__inherit__graph.png" border="0" usemap="#aBaseRenderer_inherit__map" alt="Inheritance graph"/></div>
+<map name="aBaseRenderer_inherit__map" id="aBaseRenderer_inherit__map">
+<area shape="rect" title=" " alt="" coords="5,5,119,32"/>
+<area shape="rect" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html" title=" " alt="" coords="21,80,103,107"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for Renderer:</div>
+Collaboration diagram for BaseRenderer:</div>
 <div class="dyncontent">
-<div class="center"><img src="classcubos_1_1engine_1_1gl_1_1Renderer__coll__graph.png" border="0" usemap="#aRenderer_coll__map" alt="Collaboration graph"/></div>
-<map name="aRenderer_coll__map" id="aRenderer_coll__map">
-<area shape="rect" title=" " alt="" coords="21,95,103,121"/>
+<div class="center"><img src="classcubos_1_1engine_1_1gl_1_1BaseRenderer__coll__graph.png" border="0" usemap="#aBaseRenderer_coll__map" alt="Collaboration graph"/></div>
+<map name="aBaseRenderer_coll__map" id="aBaseRenderer_coll__map">
+<area shape="rect" title=" " alt="" coords="5,95,119,121"/>
 <area shape="rect" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" title=" " alt="" coords="5,5,119,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a00fd99aa326e3fab146511bed3e357b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a00fd99aa326e3fab146511bed3e357b2">Renderer</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;<a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a6125bde7a31d86b59e8a840ae8438f32">renderDevice</a>, glm::uvec2 size)</td></tr>
-<tr class="separator:a00fd99aa326e3fab146511bed3e357b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f8773f951a66de0e9e63c55f9b4611b"><td class="memItemLeft" align="right" valign="top"><a id="a7f8773f951a66de0e9e63c55f9b4611b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Renderer</b> (const <a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a> &amp;)=delete</td></tr>
-<tr class="separator:a7f8773f951a66de0e9e63c55f9b4611b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0bae44201e9a1e8bbd566cd0418b731"><td class="memItemLeft" align="right" valign="top">virtual RendererGrid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#ae0bae44201e9a1e8bbd566cd0418b731">upload</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a> &amp;grid)=0</td></tr>
+<tr class="memitem:ad698d865f546df076fcd7557f8fd7f8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#ad698d865f546df076fcd7557f8fd7f8a">BaseRenderer</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;<a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#a6125bde7a31d86b59e8a840ae8438f32">renderDevice</a>, glm::uvec2 size)</td></tr>
+<tr class="separator:ad698d865f546df076fcd7557f8fd7f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bf5504582833a84a0e095d9906a288c"><td class="memItemLeft" align="right" valign="top"><a id="a8bf5504582833a84a0e095d9906a288c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>BaseRenderer</b> (const <a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html">BaseRenderer</a> &amp;)=delete</td></tr>
+<tr class="separator:a8bf5504582833a84a0e095d9906a288c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0bae44201e9a1e8bbd566cd0418b731"><td class="memItemLeft" align="right" valign="top">virtual RendererGrid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#ae0bae44201e9a1e8bbd566cd0418b731">upload</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">core::gl::Grid</a> &amp;grid)=0</td></tr>
 <tr class="separator:ae0bae44201e9a1e8bbd566cd0418b731"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adba2df0c8afc09884ecae830486f9f88"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#adba2df0c8afc09884ecae830486f9f88">setPalette</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">core::gl::Palette</a> &amp;palette)=0</td></tr>
+<tr class="memitem:adba2df0c8afc09884ecae830486f9f88"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#adba2df0c8afc09884ecae830486f9f88">setPalette</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">core::gl::Palette</a> &amp;palette)=0</td></tr>
 <tr class="separator:adba2df0c8afc09884ecae830486f9f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecbcb8ca208d69d6e4be496a7924415e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#aecbcb8ca208d69d6e4be496a7924415e">resize</a> (glm::uvec2 size)</td></tr>
+<tr class="memitem:aecbcb8ca208d69d6e4be496a7924415e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#aecbcb8ca208d69d6e4be496a7924415e">resize</a> (glm::uvec2 size)</td></tr>
 <tr class="separator:aecbcb8ca208d69d6e4be496a7924415e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c14211852dc95a4e512c3434019add1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a7c14211852dc95a4e512c3434019add1">render</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a> &amp;camera, const <a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a> &amp;frame, bool usePostProcessing=true, core::gl::Framebuffer target=0)</td></tr>
+<tr class="memitem:a7c14211852dc95a4e512c3434019add1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#a7c14211852dc95a4e512c3434019add1">render</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a> &amp;camera, const <a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a> &amp;frame, bool usePostProcessing=true, core::gl::Framebuffer target=0)</td></tr>
 <tr class="separator:a7c14211852dc95a4e512c3434019add1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5a70588f889dd88124cc121d89fa54d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html">pps::Manager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#af5a70588f889dd88124cc121d89fa54d">pps</a> ()</td></tr>
+<tr class="memitem:af5a70588f889dd88124cc121d89fa54d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html">pps::Manager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#af5a70588f889dd88124cc121d89fa54d">pps</a> ()</td></tr>
 <tr class="separator:af5a70588f889dd88124cc121d89fa54d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a503c765005360d94c570cfc8d9377581"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a503c765005360d94c570cfc8d9377581">onResize</a> (glm::uvec2 size)=0</td></tr>
+<tr class="memitem:a503c765005360d94c570cfc8d9377581"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#a503c765005360d94c570cfc8d9377581">onResize</a> (glm::uvec2 size)=0</td></tr>
 <tr class="separator:a503c765005360d94c570cfc8d9377581"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c727c891c4daf6fba6e7bc69035a57e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a9c727c891c4daf6fba6e7bc69035a57e">onRender</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a> &amp;camera, const <a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a> &amp;frame, core::gl::Framebuffer target)=0</td></tr>
+<tr class="memitem:a9c727c891c4daf6fba6e7bc69035a57e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#a9c727c891c4daf6fba6e7bc69035a57e">onRender</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a> &amp;camera, const <a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html">Frame</a> &amp;frame, core::gl::Framebuffer target)=0</td></tr>
 <tr class="separator:a9c727c891c4daf6fba6e7bc69035a57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a6125bde7a31d86b59e8a840ae8438f32"><td class="memItemLeft" align="right" valign="top"><a id="a6125bde7a31d86b59e8a840ae8438f32"></a>
-<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a6125bde7a31d86b59e8a840ae8438f32">renderDevice</a></td></tr>
+<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#a6125bde7a31d86b59e8a840ae8438f32">renderDevice</a></td></tr>
 <tr class="memdesc:a6125bde7a31d86b59e8a840ae8438f32"><td class="mdescLeft">&#160;</td><td class="mdescRight">The render device being used. <br /></td></tr>
 <tr class="separator:a6125bde7a31d86b59e8a840ae8438f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -151,14 +152,14 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Interface class which abstracts different rendering methods.</p>
 <p>This abstraction allows us to, for example, switch between a raytracing and a deferred rendering method as we need to, without changing the API. This is useful since not all computers support realtime raytracing. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a00fd99aa326e3fab146511bed3e357b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00fd99aa326e3fab146511bed3e357b2">&#9670;&nbsp;</a></span>Renderer()</h2>
+<a id="ad698d865f546df076fcd7557f8fd7f8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad698d865f546df076fcd7557f8fd7f8a">&#9670;&nbsp;</a></span>BaseRenderer()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a> </td>
+          <td class="memname"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html">BaseRenderer</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;&#160;</td>
           <td class="paramname"><em>renderDevice</em>, </td>
@@ -226,7 +227,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Called when <a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html#a7c14211852dc95a4e512c3434019add1">render()</a> is called, before applying post processing effects. <a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a> implementations should implement this function to draw the frame. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Called when <a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#a7c14211852dc95a4e512c3434019add1">render()</a> is called, before applying post processing effects. Renderer implementations should implement this function to draw the frame. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">camera</td><td>The camera to use. </td></tr>
     <tr><td class="paramname">frame</td><td>The frame to draw. </td></tr>
@@ -262,7 +263,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Called when resizze() is called. <a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a> implementations should override this function to resize their framebuffers. </p>
+<p>Called when resizze() is called. Renderer implementations should override this function to resize their framebuffers. </p>
 
 <p>Implemented in <a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a2eaec64f3dd5e0d1c0e57a31107049be">Renderer</a>.</p>
 
@@ -429,7 +430,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>engine/include/cubos/engine/gl/<a class="el" href="renderer_8hpp_source.html">renderer.hpp</a></li>
+<li>engine/include/cubos/engine/gl/<a class="el" href="gl_2renderer_8hpp_source.html">renderer.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -438,7 +439,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>cubos</b></li><li class="navelem"><b>engine</b></li><li class="navelem"><b>gl</b></li><li class="navelem"><a class="el" href="classcubos_1_1engine_1_1gl_1_1Renderer.html">Renderer</a></li>
+    <li class="navelem"><b>cubos</b></li><li class="navelem"><b>engine</b></li><li class="navelem"><b>gl</b></li><li class="navelem"><a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html">BaseRenderer</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.9.1 </li>
   </ul>

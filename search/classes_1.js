@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['baserenderer_784',['BaseRenderer',['../classcubos_1_1engine_1_1gl_1_1BaseRenderer.html',1,'cubos::engine::gl']]],
   ['basewindow_785',['BaseWindow',['../classcubos_1_1core_1_1io_1_1BaseWindow.html',1,'cubos::core::io']]],
   ['binarydeserializer_786',['BinaryDeserializer',['../classcubos_1_1core_1_1data_1_1BinaryDeserializer.html',1,'cubos::core::data']]],
   ['binaryserializer_787',['BinarySerializer',['../classcubos_1_1core_1_1data_1_1BinarySerializer.html',1,'cubos::core::data']]],

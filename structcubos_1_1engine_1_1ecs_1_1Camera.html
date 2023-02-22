@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.9.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: engine/include/cubos/engine/ecs/transform_system.hpp Source File</title>
+    <title>CUBOS.: Camera Struct Reference</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -67,7 +67,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('transform__system_8hpp_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structcubos_1_1engine_1_1ecs_1_1Camera.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -86,34 +86,47 @@ $(document).ready(function(){initNavTree('transform__system_8hpp_source.html',''
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="structcubos_1_1engine_1_1ecs_1_1Camera-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">transform_system.hpp</div>  </div>
+<div class="title">Camera Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_ENGINE_ECS_TRANSFORM_SYSTEM_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_ENGINE_ECS_TRANSFORM_SYSTEM_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/ecs/query.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;components/cubos/local_to_world.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;components/cubos/position.hpp&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;components/cubos/rotation.hpp&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;components/cubos/scale.hpp&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>cubos::engine::ecs</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> transformSystem(core::ecs::Query&lt;LocalToWorld&amp;, const Position*, const Rotation*, const Scale*&gt; query);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;} <span class="comment">// namespace cubos::engine::ecs</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_ENGINE_ECS_TRANSFORM_SYSTEM_HPP</span></div>
-</div><!-- fragment --></div><!-- contents -->
+
+<p>Defines parameters of a camera.  
+ <a href="structcubos_1_1engine_1_1ecs_1_1Camera.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="engine_2include_2cubos_2engine_2ecs_2camera_8hpp_source.html">camera.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:acde2ee33b71592935474b97fc430f2b5"><td class="memItemLeft" align="right" valign="top"><a id="acde2ee33b71592935474b97fc430f2b5"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1engine_1_1ecs_1_1Camera.html#acde2ee33b71592935474b97fc430f2b5">fovY</a></td></tr>
+<tr class="memdesc:acde2ee33b71592935474b97fc430f2b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The vertical field of view in degrees. <br /></td></tr>
+<tr class="separator:acde2ee33b71592935474b97fc430f2b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81d1f238a094dd2b4951321a11bc17c0"><td class="memItemLeft" align="right" valign="top"><a id="a81d1f238a094dd2b4951321a11bc17c0"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1engine_1_1ecs_1_1Camera.html#a81d1f238a094dd2b4951321a11bc17c0">zNear</a></td></tr>
+<tr class="memdesc:a81d1f238a094dd2b4951321a11bc17c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The near clipping plane. <br /></td></tr>
+<tr class="separator:a81d1f238a094dd2b4951321a11bc17c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44be78f8d91a84e8c1fa546dd1e406c0"><td class="memItemLeft" align="right" valign="top"><a id="a44be78f8d91a84e8c1fa546dd1e406c0"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1engine_1_1ecs_1_1Camera.html#a44be78f8d91a84e8c1fa546dd1e406c0">zFar</a></td></tr>
+<tr class="memdesc:a44be78f8d91a84e8c1fa546dd1e406c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The far clipping plane. <br /></td></tr>
+<tr class="separator:a44be78f8d91a84e8c1fa546dd1e406c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Defines parameters of a camera. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>engine/include/cubos/engine/ecs/<a class="el" href="engine_2include_2cubos_2engine_2ecs_2camera_8hpp_source.html">camera.hpp</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_43e067ecca7f58961b2f57e200c1ba65.html">ecs</a></li><li class="navelem"><b>transform_system.hpp</b></li>
+    <li class="navelem"><b>cubos</b></li><li class="navelem"><b>engine</b></li><li class="navelem"><b>ecs</b></li><li class="navelem"><a class="el" href="structcubos_1_1engine_1_1ecs_1_1Camera.html">Camera</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.9.1 </li>
   </ul>

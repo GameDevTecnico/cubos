@@ -1,5 +1,7 @@
 var NAVTREEINDEX7 =
 {
+"namespacecubos_1_1core_1_1memory.html#a80481a1d1a192de35c3bdd6e8cd0480b":[3,0,0,0,5,6],
+"namespacecubos_1_1core_1_1memory.html#a912db41bd94a5bc9831669a08891993a":[3,0,0,0,5,4],
 "namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0":[3,0,0,0,5,3],
 "namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0a1a06729125544cab7cee73195fc044f0":[3,0,0,0,5,3,0],
 "namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0a222a267cc5778206b253be35ee3ddab5":[3,0,0,0,5,3,1],
@@ -29,13 +31,13 @@ var NAVTREEINDEX7 =
 "package_8hpp_source.html":[5,0,0,0,1,0,1,12],
 "pages.html":[],
 "pass_8hpp_source.html":[5,0,1,0,0,0,2,1,3],
+"plugins_2renderer_8hpp.html#ae4ccf4d20be235e36f5fd3fd14332a6a":[3,0,0,1,3,5],
+"plugins_2renderer_8hpp_source.html":[5,0,1,0,0,0,3,4],
 "position_8hpp_source.html":[5,0,1,0,0,0,1,3],
 "qb__parser_8hpp_source.html":[5,0,0,0,1,0,1,13],
 "query_8hpp_source.html":[5,0,0,0,1,0,2,10],
 "registry_8hpp_source.html":[5,0,0,0,1,0,2,11],
 "render__device_8hpp_source.html":[5,0,0,0,1,0,3,6],
-"renderer_8hpp.html#a466baf930bfdebba0d977770dd4d0056":[3,0,0,1,2,5],
-"renderer_8hpp_source.html":[5,0,1,0,0,0,2,3],
 "resource__manager_8hpp_source.html":[5,0,0,0,1,0,2,12],
 "rotation_8hpp_source.html":[5,0,1,0,0,0,1,4],
 "scale_8hpp_source.html":[5,0,1,0,0,0,1,5],
@@ -247,7 +249,5 @@ var NAVTREEINDEX7 =
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#a2dfe87f3417747242e8f043dd4f3fb59":[4,0,0,0,3,4,3],
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#a3930d1e8af0848833f4de0e0e9517dca":[4,0,0,0,3,4,5],
 "structcubos_1_1core_1_1gl_1_1SpotLight.html#a4ebe780b81ca4be607e3fa456c0b6160":[4,0,0,0,3,4,6],
-"structcubos_1_1core_1_1gl_1_1SpotLight.html#a90fce7087383bb3f4dd8d67bbc98cd26":[4,0,0,0,3,4,7],
-"structcubos_1_1core_1_1gl_1_1SpotLight.html#ab17456efa59b99dbb85317ee492274b6":[4,0,0,0,3,4,4],
-"structcubos_1_1core_1_1gl_1_1SpotLight.html#add660c3fe9ec956fb8123fad372e6e71":[4,0,0,0,3,4,2]
+"structcubos_1_1core_1_1gl_1_1SpotLight.html#a90fce7087383bb3f4dd8d67bbc98cd26":[4,0,0,0,3,4,7]
 };

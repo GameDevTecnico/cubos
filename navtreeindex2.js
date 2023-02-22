@@ -1,6 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"classcubos_1_1core_1_1ecs_1_1Blueprint.html#a8fde7bdfdc9fa1b44c8f8a3b7995b99a":[4,0,0,0,2,1,6],
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#aa81023c69347d6a21b3599569ebfbbef":[4,0,0,0,2,1,1],
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#ac8bb3912a3ce86b15842e79d0b421204":[4,0,0,0,2,1,4],
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#ad21389d02b85e61c80602085a3768c4c":[4,0,0,0,2,1,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX2 =
 "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a7b6b7fe2517c7f590fc46e982ea9543e":[4,0,0,0,3,24,32],
 "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a987fdb5848ba59f5854fd0f4345d8389":[4,0,0,0,3,24,0],
 "classcubos_1_1core_1_1gl_1_1RenderDevice.html#aa08fb7bfc77946c968c4684df1d586b5":[4,0,0,0,3,24,27],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#aa3432d090d33f6ec4fa5d6d525ed7bc0":[4,0,0,0,3,24,35]
+"classcubos_1_1core_1_1gl_1_1RenderDevice.html#aa3432d090d33f6ec4fa5d6d525ed7bc0":[4,0,0,0,3,24,35],
+"classcubos_1_1core_1_1gl_1_1RenderDevice.html#aacfdd33855ee0d4494c3b01bb3610f21":[4,0,0,0,3,24,21]
 };

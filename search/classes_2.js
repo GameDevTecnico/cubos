@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['camera_796',['Camera',['../structcubos_1_1core_1_1gl_1_1Camera.html',1,'cubos::core::gl']]],
+  ['camera_796',['Camera',['../structcubos_1_1core_1_1gl_1_1Camera.html',1,'Camera'],['../structcubos_1_1engine_1_1ecs_1_1Camera.html',1,'Camera']]],
   ['commandbuffer_797',['CommandBuffer',['../classcubos_1_1core_1_1ecs_1_1CommandBuffer.html',1,'cubos::core::ecs']]],
   ['commands_798',['Commands',['../classcubos_1_1core_1_1ecs_1_1Commands.html',1,'cubos::core::ecs']]],
   ['componentmanager_799',['ComponentManager',['../classcubos_1_1core_1_1ecs_1_1ComponentManager.html',1,'cubos::core::ecs']]],

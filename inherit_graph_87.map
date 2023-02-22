@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structcubos_1_1core_1_1data_1_1QBMatrix.html" title="Represents the data read from a matrix in a QB file." alt="" coords="5,5,88,32"/>
+<area shape="rect" id="node1" href="$classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html" title=" " alt="" coords="5,31,56,57"/>
+<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html" title=" " alt="" coords="104,5,197,32"/>
+<area shape="rect" id="node3" href="$classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html" title=" " alt="" coords="109,56,193,83"/>
 </map>
