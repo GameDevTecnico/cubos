@@ -65,5 +65,16 @@ int main(int argc, char** argv)
     // Closed loop. This will prevent chain compilation!
     // cubos.startupTag("A").afterTag("C");
 
+    // Conditions, determining system execution
+    auto lambdaCondYes = []() { CUBOS_INFO("System ran with condition true!"); };
+    cubos.startupSystem(lambdaCondYes).runIf([]() { return true; });
+
+    auto lambdaCondNo = []() { CUBOS_INFO("System ran with condition false, you should not be reading this!"); };
+    cubos.startupSystem(lambdaCondNo).runIf([]() { return false; }).runIf([]() { return true; });
+
+    // Conditions can also be inherited by systems and tags
+    cubos.startupTag("conditionInherit").runIf([]() { return false; });
+    cubos.startupSystem(lambdaCondNo).tagged("conditionInherit");
+
     cubos.run();
 }

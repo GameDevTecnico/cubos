@@ -39,6 +39,13 @@ namespace cubos::engine
         /// @param tag The tag to be executed after.
         TagBuilder& afterTag(const std::string& tag);
 
+        /// Adds a condition to the current tag. If this condition returns
+        /// false, systems with this tag will not be executed. For the tagged
+        /// systems to run, all conditions must return true.
+        /// @param func The condition function.
+        template <typename F>
+        TagBuilder& runIf(F func);
+
     private:
         core::ecs::Dispatcher& dispatcher;
         std::vector<std::string>& tags;
@@ -71,6 +78,13 @@ namespace cubos::engine
         /// @param func The system to be executed after.
         template <typename F>
         SystemBuilder& afterSystem(F func);
+
+        /// Adds a condition to the current system. If this condition returns
+        /// false, the system will not be executed. For a system to run, all
+        /// conditions must return true.
+        /// @param func The condition function.
+        template <typename F>
+        SystemBuilder& runIf(F func);
 
     private:
         core::ecs::Dispatcher& dispatcher;
@@ -151,6 +165,13 @@ namespace cubos::engine
     // Implementation.
 
     template <typename F>
+    TagBuilder& TagBuilder::runIf(F func)
+    {
+        dispatcher.tagAddCondition(func);
+        return *this;
+    }
+
+    template <typename F>
     SystemBuilder& SystemBuilder::beforeSystem(F func)
     {
         dispatcher.systemSetBeforeSystem(func);
@@ -161,6 +182,13 @@ namespace cubos::engine
     SystemBuilder& SystemBuilder::afterSystem(F func)
     {
         dispatcher.systemSetAfterSystem(func);
+        return *this;
+    }
+
+    template <typename F>
+    SystemBuilder& SystemBuilder::runIf(F func)
+    {
+        dispatcher.systemAddCondition(func);
         return *this;
     }
 
