@@ -10,6 +10,7 @@ void Dispatcher::SystemSettings::copyFrom(const SystemSettings* other)
     std::unique_copy(other->after.tag.begin(), other->after.tag.end(), std::back_inserter(this->after.tag));
     std::unique_copy(other->before.system.begin(), other->before.system.end(), std::back_inserter(this->before.system));
     std::unique_copy(other->after.system.begin(), other->after.system.end(), std::back_inserter(this->after.system));
+    this->conditions |= other->conditions;
 }
 
 Dispatcher::~Dispatcher()
@@ -208,13 +209,52 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
     if (!this->prepared)
     {
         for (auto& system : systems)
+        {
             system->system->prepare(world);
+        }
+        for (auto& condition : conditions)
+        {
+            condition->prepare(world);
+        }
         this->prepared = true;
     }
 
+    // Clear conditions bitmasks
+    runConditions.reset();
+    retConditions.reset();
+
     for (auto& system : systems)
     {
-        system->system->call(world, cmds);
+        // Query for conditions
+        bool canRun = true;
+        auto conditionsMask = system->settings->conditions;
+        int i = 0;
+        while (conditionsMask.any())
+        {
+            if (conditionsMask.test(0))
+            {
+                // We have a condition, check if it has run already
+                if (!runConditions.test(i))
+                {
+                    runConditions.set(i);
+                    if (conditions[i]->call(world, cmds))
+                    {
+                        retConditions.set(i);
+                    }
+                }
+                // Check if the condition returned true
+                if (!retConditions.test(i))
+                {
+                    canRun = false;
+                    break;
+                }
+            }
+
+            i += 1;
+            conditionsMask >>= 1;
+        }
+        if (canRun)
+            system->system->call(world, cmds);
         // TODO: Check synchronization concerns when this gets multithreaded
         cmds.commit();
     }
