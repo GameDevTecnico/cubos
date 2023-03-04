@@ -24,7 +24,6 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/data/meta.cpp"
     "src/cubos/engine/data/asset_manager.cpp"
-    "src/cubos/engine/data/entity_selector.cpp"
     "src/cubos/engine/data/loader.cpp"
     "src/cubos/engine/data/grid.cpp"
     "src/cubos/engine/data/palette.cpp"

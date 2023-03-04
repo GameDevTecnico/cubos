@@ -7,13 +7,8 @@ namespace cubos::engine::data
 {
     class EntitySelector
     {
-    private:
-        std::shared_ptr<cubos::core::ecs::Entity> selection;
-
     public:
-        void Select(core::ecs::Entity& entity);
-        void Unselect();
-        std::shared_ptr<cubos::core::ecs::Entity> GetSelection();
+        cubos::core::ecs::Entity selection;
     };
 } // namespace cubos::engine::data
 
