@@ -37,7 +37,7 @@ size_t StdStream::tell() const
     return ftell(this->file);
 }
 
-void StdStream::seek(int64_t offset, SeekOrigin origin)
+void StdStream::seek(ptrdiff_t offset, SeekOrigin origin)
 {
     switch (origin)
     {
