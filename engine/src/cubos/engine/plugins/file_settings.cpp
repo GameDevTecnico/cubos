@@ -27,5 +27,5 @@ static void startup(cubos::core::Settings& settings)
 
 void cubos::engine::plugins::fileSettingsPlugin(Cubos& cubos)
 {
-    cubos.startupSystem(startup).tagged("Settings");
+    cubos.startupSystem(startup).tagged("cubos.settings").tagged("cubos.settings.file");
 }
