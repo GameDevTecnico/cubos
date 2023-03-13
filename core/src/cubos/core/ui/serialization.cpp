@@ -141,6 +141,8 @@ static void showStructured(const data::Package& pkg, const std::string& name)
             case Type::Dictionary:
                 showInternal(pkg.dictionary()[i].second, valueToString(pkg.dictionary()[i].first));
                 break;
+            default:
+                abort();
             }
             ImGui::PopID();
         }
@@ -390,6 +392,8 @@ static bool editStructured(data::Package& pkg, const std::string& name)
                 }
 
                 break;
+            default:
+                abort();
             }
 
             ImGui::PopID();
