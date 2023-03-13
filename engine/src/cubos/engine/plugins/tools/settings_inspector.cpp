@@ -1,11 +1,12 @@
 #include <cubos/engine/plugins/tools/settings_inspector.hpp>
-#include <cubos/core/settings.hpp>
 #include <cubos/engine/plugins/imgui.hpp>
-#include <cubos/core/ui/imgui.hpp>
+
+#include <cubos/core/settings.hpp>
 #include <cubos/core/ui/serialization.hpp>
+
 #include <imgui.h>
 
-static void settingsInspectorSystem(cubos::core::Settings& settings)
+static void inspector(cubos::core::Settings& settings)
 {
     ImGui::Begin("Settings Inspector");
 
@@ -32,6 +33,6 @@ static void settingsInspectorSystem(cubos::core::Settings& settings)
 void cubos::engine::plugins::tools::settingsInspectorPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::plugins::imguiPlugin);
-    cubos.tag("SettingsInspector").afterTag("BeginImGuiFrame").beforeTag("EndImGuiFrame");
-    cubos.system(settingsInspectorSystem).tagged("SettingsInspector");
+
+    cubos.system(inspector).tagged("cubos.imgui");
 }
