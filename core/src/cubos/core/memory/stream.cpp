@@ -436,7 +436,6 @@ void Stream::readUntil(std::string& str, const char* terminator)
     str = "";
 
     size_t terminatorI = 0;
-    char c;
 
     for (char c = this->get(); !this->eof() && c != '\0'; c = this->get())
     {
@@ -462,7 +461,6 @@ size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
         terminator = "";
 
     size_t terminatorI = 0, position = 0;
-    char c;
 
     for (char c = this->get(); !this->eof() && c != '\0' && position < size; c = this->get())
     {

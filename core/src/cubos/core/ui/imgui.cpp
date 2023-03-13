@@ -548,7 +548,7 @@ static bool handle(const io::ModifiersEvent& event)
     return io.WantCaptureKeyboard;
 }
 
-static bool handle(auto&& event)
+static bool handle(auto&&)
 {
     return false;
 }
