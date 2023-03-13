@@ -114,8 +114,8 @@ pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size)
 
 pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
                           float softThreshold, float intensity)
-    : Pass(renderDevice), size(size), iterations(iterations), threshold(threshold), softThreshold(softThreshold),
-      intensity(intensity)
+    : Pass(renderDevice), iterations(iterations), threshold(threshold), softThreshold(softThreshold),
+      intensity(intensity), size(size)
 {
     generateTextures();
 
