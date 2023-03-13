@@ -37,13 +37,13 @@ void EmbeddedArchive::registerData(const std::string& name, const Data& data)
     registry.emplace(name, data);
 }
 
-size_t EmbeddedArchive::create(size_t parent, std::string_view name, bool directory)
+size_t EmbeddedArchive::create(size_t, std::string_view, bool)
 {
     // Embedded archive is read-only.
     return 0;
 }
 
-bool EmbeddedArchive::destroy(size_t id)
+bool EmbeddedArchive::destroy(size_t)
 {
     // Embedded archive is read-only.
     return false;
