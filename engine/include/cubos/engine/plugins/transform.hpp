@@ -24,6 +24,6 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void transformPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins
+} // namespace cubos::engine::plugins
 
 #endif // CUBOS_ENGINE_PLUGINS_TRANSFORM_HPP

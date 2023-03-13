@@ -16,6 +16,6 @@ namespace cubos::engine::plugins::tools
     //
     /// @param cubos CUBOS. main class
     void settingsInspectorPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins::tools
+} // namespace cubos::engine::plugins::tools
 
 #endif // CUBOS_ENGINE_PLUGINS_SETTINGS_INSPECTOR_HPP
