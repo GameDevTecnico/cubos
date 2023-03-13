@@ -1139,7 +1139,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         return nullptr;
     }
 
-    for (int i = 0; i < desc.targetCount; ++i)
+    for (uint32_t i = 0; i < desc.targetCount; ++i)
     {
         switch (desc.targets[i].getTargetType())
         {
@@ -1182,7 +1182,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     std::vector<GLenum> drawBuffers;
 
     // Attach targets
-    for (int i = 0; i < desc.targetCount; ++i)
+    for (uint32_t i = 0; i < desc.targetCount; ++i)
     {
         switch (desc.targets[i].getTargetType())
         {
@@ -1895,7 +1895,7 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
 
     // Link elements
     assert(desc.elementCount <= CUBOS_CORE_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT);
-    for (int i = 0; i < desc.elementCount; ++i)
+    for (size_t i = 0; i < desc.elementCount; ++i)
     {
         // Get buffer
         auto vb = std::static_pointer_cast<OGLVertexBuffer>(desc.buffers[desc.elements[i].buffer.index]);
