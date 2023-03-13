@@ -77,7 +77,7 @@ namespace cubos::core::ecs
     template <typename T, unsigned int M>
     bool EventReader<T, M>::matchesMask(decltype(M) eventMask) const
     {
-        return (M == ~0) || (eventMask & M);
+        return (M == ~0u) || (eventMask & M);
     }
 
     template <typename T, unsigned int M>
