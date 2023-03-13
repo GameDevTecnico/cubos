@@ -125,30 +125,22 @@ int main(int argc, char** argv)
     Cubos cubos(argc, argv);
 
     cubos.addPlugin(plugins::envSettingsPlugin);
-    cubos.addPlugin(plugins::windowPlugin);
     cubos.addPlugin(plugins::fileSettingsPlugin);
-
-    cubos.addPlugin(plugins::envSettingsPlugin);
     cubos.addPlugin(plugins::rendererPlugin);
-
-    cubos.addResource<data::AssetManager>().addComponent<Num>().addComponent<Parent>();
-
-    cubos.startupTag("Setup").afterTag("SetRenderer");
-    cubos.startupSystem(setup).tagged("Setup");
-
-    cubos.startupTag("CreateScene").afterTag("Setup");
-    cubos.startupSystem(createScene).tagged("CreateScene");
-    cubos.startupSystem(printStuff).tagged("End");
-
-    // an example of how the imgui plugin can be used to render your own stuff :)
     cubos.addPlugin(plugins::imguiPlugin);
-    cubos.tag("ImGuiExampleWindow").afterTag("BeginImGuiFrame").beforeTag("EndImGuiFrame");
-    cubos.system(imguiExampleWindow).tagged("ImGuiExampleWindow");
-
-    cubos.tag("SetLight").beforeTag("Draw");
-    cubos.system(turnOnLight).tagged("SetLight");
-    // or a tesserato tool!
     cubos.addPlugin(plugins::tools::settingsInspectorPlugin);
+
+    cubos.addResource<data::AssetManager>();
+
+    cubos.addComponent<Num>();
+    cubos.addComponent<Parent>();
+
+    cubos.startupSystem(setup).tagged("setup").afterTag("cubos.renderer.init");
+    cubos.startupSystem(createScene).tagged("create").afterTag("setup");
+    cubos.startupSystem(printStuff).afterTag("create");
+
+    cubos.system(imguiExampleWindow).tagged("cubos.imgui");
+    cubos.system(turnOnLight).beforeTag("cubos.renderer.draw");
 
     cubos.run();
 }
