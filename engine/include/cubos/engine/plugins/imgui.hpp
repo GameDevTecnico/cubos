@@ -5,17 +5,24 @@
 
 namespace cubos::engine::plugins
 {
-    /// Plugin that adds ImGui functionalities and allows ImGui windows to be rendered.
+    /// Plugin to initialize and configure ImGui for CUBOS. Tag your ImGui systems with
+    /// `cubos.imgui`.
     ///
-    /// Startup Stages:
-    /// - InitImGui: Initializes the UI window (after OpenWindow stage).
+    /// @details This plugin adds three systems: one to initialize ImGui, one to start a new
+    /// ImGui frame, and one to end and render the ImGui frame. Between the two ImGui frame
+    /// systems, you can add your own ImGui system, with the tag 'cubos.imgui'.
     ///
-    /// Stages:
-    /// - BeginImGuiFrame: Starts a new ImGui frame (after Poll stage).
-    /// - EndImGuiFrame: Ends the ImGui frame (before SwapBuffers stage).
+    /// Dependencies:
+    /// - `windowPlugin`
     ///
-    /// If you want to render your own ImGui component system, the system should run
-    /// between BeginImGuiFrame and EndImGuiFrame.
+    /// Startup tags:
+    /// - `cubos.imgui.init`: initializes the ImGui, after `cubos.window.init`.
+    ///
+    /// Tags:
+    /// - `cubos.imgui.begin`: starts a new ImGui frame (after `cubos.window.poll`).
+    /// - `cubos.imgui.end`: ends the ImGui frame (before `cubos.window.render`).
+    /// - `cubos.imgui`: runs your own ImGui system (between the previous two tags).
+    ///
     /// @param cubos CUBOS. main class
     void imguiPlugin(Cubos& cubos);
 }; // namespace cubos::engine::plugins
