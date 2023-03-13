@@ -36,7 +36,7 @@ void systemInherit2()
     CUBOS_INFO("[By System] Inheritance 2");
 }
 
-int main(int argc, char** argv)
+int main()
 {
     cubos::engine::Cubos cubos;
 
