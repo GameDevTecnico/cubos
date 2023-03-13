@@ -7,10 +7,11 @@
 #include <components/cubos/scale.hpp>
 #include <components/cubos/local_to_world.hpp>
 
-static void applyTransform(
-    cubos::core::ecs::Query<cubos::engine::ecs::LocalToWorld&, const cubos::engine::ecs::Position*,
-                            const cubos::engine::ecs::Rotation*, const cubos::engine::ecs::Scale*>
-        query)
+using namespace cubos;
+
+static void applyTransform(core::ecs::Query<engine::ecs::LocalToWorld&, const engine::ecs::Position*,
+                                            const engine::ecs::Rotation*, const engine::ecs::Scale*>
+                               query)
 {
     for (auto [entity, localToWorld, position, rotation, scale] : query)
     {
@@ -26,10 +27,10 @@ static void applyTransform(
 
 void cubos::engine::plugins::transformPlugin(Cubos& cubos)
 {
-    cubos.addComponent<ecs::Position>()
-        .addComponent<ecs::Rotation>()
-        .addComponent<ecs::Scale>()
-        .addComponent<ecs::LocalToWorld>();
+    cubos.addComponent<ecs::Position>();
+    cubos.addComponent<ecs::Rotation>();
+    cubos.addComponent<ecs::Scale>();
+    cubos.addComponent<ecs::LocalToWorld>();
 
-    cubos.system(applyTransform).tagged("Transform");
+    cubos.system(applyTransform).tagged("cubos.transform.update");
 }
