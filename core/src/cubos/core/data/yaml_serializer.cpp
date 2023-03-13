@@ -128,7 +128,7 @@ void YAMLSerializer::endObject()
         this->key = true;
 }
 
-void YAMLSerializer::beginArray(size_t length, const char* name)
+void YAMLSerializer::beginArray(size_t, const char* name)
 {
     if (mode.top() == Mode::Object)
         emitter << YAML::Key << (name ? name : ANONYMOUS_FIELD_NAME) << YAML::Value;
@@ -151,7 +151,7 @@ void YAMLSerializer::endArray()
         this->key = true;
 }
 
-void YAMLSerializer::beginDictionary(size_t length, const char* name)
+void YAMLSerializer::beginDictionary(size_t, const char* name)
 {
     if (mode.top() == Mode::Object)
         emitter << YAML::Key << (name ? name : ANONYMOUS_FIELD_NAME) << YAML::Value;

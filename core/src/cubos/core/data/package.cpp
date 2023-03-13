@@ -468,7 +468,7 @@ void impl::Packager::endObject()
     this->stack.pop();
 }
 
-void impl::Packager::beginArray(size_t size, const char* name)
+void impl::Packager::beginArray(size_t, const char* name)
 {
     this->stack.push({this->push(Package::Elements(), name), false});
 }
@@ -479,7 +479,7 @@ void impl::Packager::endArray()
     this->stack.pop();
 }
 
-void impl::Packager::beginDictionary(size_t size, const char* name)
+void impl::Packager::beginDictionary(size_t, const char* name)
 {
     this->stack.push({this->push(Package::Dictionary(), name), true});
 }
