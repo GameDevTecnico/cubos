@@ -58,14 +58,14 @@ public:
         return std::async(std::launch::async, [this, &meta] { return load(meta); });
     }
 
-    virtual void unload(const data::Meta& meta, const void* asset)
+    virtual void unload(const data::Meta&, const void* asset)
     {
         auto a = (const SampleText*)asset;
         delete a;
     }
 };
 
-int main(int argc, char** argv)
+int main()
 {
     core::initializeLogger();
     FileSystem::mount("/assets/", std::make_shared<STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
