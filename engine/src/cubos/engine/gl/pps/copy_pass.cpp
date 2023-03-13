@@ -62,7 +62,7 @@ void pps::CopyPass::resize(glm::uvec2 size)
     this->size = size;
 }
 
-void pps::CopyPass::execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
+void pps::CopyPass::execute(std::map<Input, core::gl::Texture2D>&, core::gl::Texture2D prev,
                             core::gl::Framebuffer out) const
 {
     // Set the framebuffer and state.
