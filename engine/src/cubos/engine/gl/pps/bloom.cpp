@@ -234,7 +234,7 @@ void pps::BloomPass::resize(glm::uvec2 size)
     generateTextures();
 }
 
-void pps::BloomPass::execute(std::map<Input, Texture2D>& inputs, Texture2D prev, Framebuffer out) const
+void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Framebuffer out) const
 {
     // Set the framebuffer and state.
     this->renderDevice.setViewport(0, 0, this->size.x, this->size.y);
