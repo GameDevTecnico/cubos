@@ -87,15 +87,17 @@ void Grid::clear()
 
 uint16_t Grid::get(const glm::ivec3& position) const
 {
-    assert(position.x >= 0 && position.x < this->size.x && position.y >= 0 && position.y < this->size.y &&
-           position.z >= 0 && position.z < this->size.z);
+    assert(position.x >= 0 && position.x < static_cast<int>(this->size.x));
+    assert(position.y >= 0 && position.y < static_cast<int>(this->size.y));
+    assert(position.z >= 0 && position.z < static_cast<int>(this->size.z));
     return this->indices[position.x + position.y * size.x + position.z * size.x * size.y];
 }
 
 void Grid::set(const glm::ivec3& position, uint16_t mat)
 {
-    assert(position.x >= 0 && position.x < this->size.x && position.y >= 0 && position.y < this->size.y &&
-           position.z >= 0 && position.z < this->size.z);
+    assert(position.x >= 0 && position.x < static_cast<int>(this->size.x));
+    assert(position.y >= 0 && position.y < static_cast<int>(this->size.y));
+    assert(position.z >= 0 && position.z < static_cast<int>(this->size.z));
     this->indices[position.x + position.y * size.x + position.z * size.x * size.y] = mat;
 }
 
@@ -145,7 +147,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, gl::Grid& grid)
     deserializer.read(grid.indices);
     deserializer.endObject();
 
-    if (grid.size.x * grid.size.y * grid.size.z != static_cast<int>(grid.indices.size()))
+    if (grid.size.x * grid.size.y * grid.size.z != static_cast<unsigned int>(grid.indices.size()))
     {
         CUBOS_WARN("Grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.", grid.size.x,
                    grid.size.y, grid.size.z, grid.indices.size());

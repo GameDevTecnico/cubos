@@ -326,7 +326,7 @@ void Stream::parse(uint64_t& value, size_t base)
         c = this->peek();
         if (c >= '0' && c <= '9')
         {
-            if (c - '0' >= base)
+            if (c - '0' >= static_cast<char>(base))
             {
                 CUBOS_WARN("'{}' is not a base {} digit, defaulting to 0", c, base);
                 value = 0;
@@ -338,14 +338,14 @@ void Stream::parse(uint64_t& value, size_t base)
             this->get();
         }
         // For bases higher than 10
-        else if (c >= 'a' && c <= 'a' + (base - 10))
+        else if (c >= 'a' && c <= 'a' + static_cast<char>(base - 10))
         {
             v *= base;
             v += c - 'a' + 10;
             this->get();
         }
         // For bases higher than 10
-        else if (c >= 'A' && c <= 'A' + (base - 10))
+        else if (c >= 'A' && c <= 'A' + static_cast<char>(base - 10))
         {
             v *= base;
             v += c - 'A' + 10;
