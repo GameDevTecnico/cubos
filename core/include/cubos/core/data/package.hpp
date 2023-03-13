@@ -88,7 +88,7 @@ namespace cubos::core::data
         {
             Package pkg;
             pkg.set(data, context);
-            return std::move(pkg);
+            return pkg;
         }
 
         /// Packages the specified data into this package. This will change the type of the
