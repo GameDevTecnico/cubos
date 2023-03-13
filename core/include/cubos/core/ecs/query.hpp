@@ -279,7 +279,7 @@ namespace cubos::core::ecs
     }
 
     template <typename Component>
-    Component& impl::QueryFetcher<Component&>::arg(const World& world, Type& lock, Entity entity)
+    Component& impl::QueryFetcher<Component&>::arg(const World&, Type& lock, Entity entity)
     {
         return *lock.get().get(entity.index);
     }
@@ -297,7 +297,7 @@ namespace cubos::core::ecs
     }
 
     template <typename Component>
-    const Component& impl::QueryFetcher<const Component&>::arg(const World& world, Type& lock, Entity entity)
+    const Component& impl::QueryFetcher<const Component&>::arg(const World&, Type& lock, Entity entity)
     {
         return *lock.get().get(entity.index);
     }
