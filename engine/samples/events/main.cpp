@@ -14,7 +14,7 @@ struct State
     int step;
 };
 
-int main(int argc, char** argv)
+int main()
 {
     cubos::engine::Cubos cubos;
     cubos.addResource<State>(State{.step = 0});

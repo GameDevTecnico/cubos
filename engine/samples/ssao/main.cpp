@@ -89,8 +89,6 @@ int main(void)
             frame.clear();
 
             // Draw cube of cubes to the frame.
-            auto axis = glm::vec3(0, 0, 0) * 2.0f + glm::vec3(1);
-
             auto modelMat = glm::mat4(1.0f);
             frame.draw(gpuCube, modelMat);
 
