@@ -24,7 +24,7 @@ namespace cubos::core::data
         virtual size_t read(void* buffer, size_t size) override;
         virtual size_t write(const void* buffer, size_t size) override;
         virtual size_t tell() const override;
-        virtual void seek(int64_t offset, memory::SeekOrigin origin) override;
+        virtual void seek(ptrdiff_t offset, memory::SeekOrigin origin) override;
         virtual bool eof() const override;
         virtual char peek() const override;
 
@@ -73,7 +73,7 @@ namespace cubos::core::data
     }
 
     template <typename T>
-    inline void FileStream<T>::seek(int64_t offset, memory::SeekOrigin origin)
+    inline void FileStream<T>::seek(ptrdiff_t offset, memory::SeekOrigin origin)
     {
         stream.seek(offset, origin);
     }

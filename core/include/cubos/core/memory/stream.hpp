@@ -47,7 +47,7 @@ namespace cubos::core::memory
         /// Seeks to a position in the stream.
         /// @param offset The offset to seek to.
         /// @param origin The origin of the offset.
-        virtual void seek(int64_t offset, SeekOrigin origin) = 0;
+        virtual void seek(ptrdiff_t offset, SeekOrigin origin) = 0;
 
         /// Checks if the stream still has content to read.
         /// @return True if the stream has no more content to read, false otherwise.
