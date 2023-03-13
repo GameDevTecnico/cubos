@@ -45,7 +45,7 @@ SystemBuilder& SystemBuilder::tagged(const std::string& tag)
         CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
                    tag);
     }
-    dispatcher.systemSetTag(tag);
+    dispatcher.systemAddTag(tag);
     return *this;
 }
 

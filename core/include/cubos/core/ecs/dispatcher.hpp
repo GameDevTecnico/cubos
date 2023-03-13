@@ -80,7 +80,7 @@ namespace cubos::core::ecs
 
         /// Sets the tag for the current system.
         /// @param tag The tag to run under.
-        void systemSetTag(const std::string& tag);
+        void systemAddTag(const std::string& tag);
 
         /// Sets the current system to run after the tag.
         /// If the specified tag doesn't exist, it is internally created.
@@ -143,7 +143,7 @@ namespace cubos::core::ecs
         {
             std::shared_ptr<SystemSettings> settings;
             std::shared_ptr<AnySystemWrapper<void>> system;
-            std::string tag;
+            std::vector<std::string> tags;
         };
 
         /// Internal class used to implement a DFS algorithm for call chain compilation
