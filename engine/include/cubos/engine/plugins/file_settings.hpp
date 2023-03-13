@@ -5,10 +5,17 @@
 
 namespace cubos::engine::plugins
 {
-    /// Plugin which loads
+    /// Plugin to load settings, provided via a file.
+    /// Any duplicated setting will be overwritten.
     ///
-    /// Startup Stages:
-    /// - readSettings: fills the settings with the options loaded from a file.
+    /// @details The settings file must be a JSON file, located at the path specified by the
+    /// `settings.path` setting. If the setting is not defined, its assumed to be located at
+    /// `./settings.json`. If the file does not exist, the plugin will abort.
+    ///
+    /// Startup tags:
+    /// - `cubos.settings`: the settings are loaded with this tag.
+    /// - `cubos.settings.file`: the settings are loaded with this tag.
+    ///
     /// @param cubos CUBOS. main class
     void fileSettingsPlugin(Cubos& cubos);
 }; // namespace cubos::engine::plugins
