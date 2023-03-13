@@ -35,7 +35,7 @@ namespace cubos::core::memory
         virtual size_t read(void* data, size_t size) override;
         virtual size_t write(const void* data, size_t size) override;
         virtual size_t tell() const override;
-        virtual void seek(int64_t offset, SeekOrigin origin) override;
+        virtual void seek(ptrdiff_t offset, SeekOrigin origin) override;
         virtual bool eof() const override;
         virtual char peek() const override;
 
