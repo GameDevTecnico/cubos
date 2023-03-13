@@ -10,7 +10,6 @@ using namespace cubos::core;
 struct ImGuiData
 {
     io::Window window;
-    gl::RenderDevice& renderDevice;
 
     std::shared_ptr<io::Cursor> cursors[ImGuiMouseCursor_COUNT];
 
@@ -172,6 +171,7 @@ static void createDeviceObjects()
 {
     auto& io = ImGui::GetIO();
     auto bd = (ImGuiData*)io.BackendPlatformUserData;
+    auto& rd = bd->window->getRenderDevice();
 
     // Setup render states.
 
@@ -179,7 +179,7 @@ static void createDeviceObjects()
     rasterStateDesc.cullEnabled = false;
     rasterStateDesc.rasterMode = gl::RasterMode::Fill;
     rasterStateDesc.scissorEnabled = true;
-    bd->rasterState = bd->renderDevice.createRasterState(rasterStateDesc);
+    bd->rasterState = rd.createRasterState(rasterStateDesc);
 
     gl::BlendStateDesc blendStateDesc;
     blendStateDesc.blendEnabled = true;
@@ -189,15 +189,15 @@ static void createDeviceObjects()
     blendStateDesc.alpha.src = gl::BlendFactor::One;
     blendStateDesc.alpha.dst = gl::BlendFactor::InvSrcAlpha;
     blendStateDesc.alpha.op = gl::BlendOp::Add;
-    bd->blendState = bd->renderDevice.createBlendState(blendStateDesc);
+    bd->blendState = rd.createBlendState(blendStateDesc);
 
     gl::DepthStencilStateDesc depthStencilStateDesc;
     depthStencilStateDesc.depth.enabled = false;
     depthStencilStateDesc.stencil.enabled = false;
-    bd->depthStencilState = bd->renderDevice.createDepthStencilState(depthStencilStateDesc);
+    bd->depthStencilState = rd.createDepthStencilState(depthStencilStateDesc);
 
     // Setup shader pipeline.
-    auto vs = bd->renderDevice.createShaderStage(gl::Stage::Vertex, R"glsl(
+    auto vs = rd.createShaderStage(gl::Stage::Vertex, R"glsl(
 #version 330 core
 
 layout (location = 0) in vec2 position;
@@ -219,7 +219,7 @@ void main()
 }
     )glsl");
 
-    auto ps = bd->renderDevice.createShaderStage(gl::Stage::Pixel, R"glsl(
+    auto ps = rd.createShaderStage(gl::Stage::Pixel, R"glsl(
 #version 330 core
 
 uniform sampler2D tex;
@@ -235,7 +235,7 @@ void main()
 }
     )glsl");
 
-    bd->pipeline = bd->renderDevice.createShaderPipeline(vs, ps);
+    bd->pipeline = rd.createShaderPipeline(vs, ps);
     bd->textureBP = bd->pipeline->getBindingPoint("tex");
     bd->cbBP = bd->pipeline->getBindingPoint("Proj");
 
@@ -252,7 +252,7 @@ void main()
     desc.mipLevelCount = 1;
     desc.format = gl::TextureFormat::RGBA8UNorm;
     desc.usage = gl::Usage::Static;
-    bd->texture = bd->renderDevice.createTexture2D(desc);
+    bd->texture = rd.createTexture2D(desc);
     if (!bd->texture)
     {
         CUBOS_CRITICAL("Failed to create ImGui font texture");
@@ -261,7 +261,7 @@ void main()
     io.Fonts->SetTexID((void*)bd->texture.get());
 
     // Create projection constant buffer.
-    bd->cb = bd->renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
+    bd->cb = rd.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
 
     // Initialize buffer sizes.
     bd->vbSize = 0;
@@ -283,7 +283,8 @@ void ui::initialize(io::Window window)
     }
 
     // Setup back-end capabilities flags
-    ImGuiData* bd = IM_NEW(ImGuiData){window, window->getRenderDevice()};
+    ImGuiData* bd = IM_NEW(ImGuiData)();
+    bd->window = window;
     io.BackendPlatformUserData = (void*)bd;
     io.BackendPlatformName = "imgui_impl_cubos";
 
@@ -376,17 +377,20 @@ void ui::beginFrame()
     ImGui::NewFrame();
 }
 
-static void setupRenderState(ImGuiData* bd)
+static void setupRenderState(ImGuiData* bd, gl::Framebuffer target)
 {
-    bd->renderDevice.setRasterState(bd->rasterState);
-    bd->renderDevice.setBlendState(bd->blendState);
-    bd->renderDevice.setDepthStencilState(bd->depthStencilState);
-    bd->renderDevice.setShaderPipeline(bd->pipeline);
+    auto& rd = bd->window->getRenderDevice();
+    rd.setRasterState(bd->rasterState);
+    rd.setBlendState(bd->blendState);
+    rd.setDepthStencilState(bd->depthStencilState);
+    rd.setShaderPipeline(bd->pipeline);
+    rd.setFramebuffer(target);
 }
 
 void ui::endFrame(gl::Framebuffer target)
 {
     ImGuiData* bd = (ImGuiData*)ImGui::GetIO().BackendPlatformUserData;
+    auto& rd = bd->window->getRenderDevice();
     ImGui::Render();
     auto drawData = ImGui::GetDrawData();
 
@@ -397,8 +401,8 @@ void ui::endFrame(gl::Framebuffer target)
     bd->cb->unmap();
 
     // Set render state.
-    setupRenderState(bd);
-    bd->renderDevice.setViewport(0, 0, drawData->DisplaySize.x, drawData->DisplaySize.y);
+    setupRenderState(bd, target);
+    rd.setViewport(0, 0, drawData->DisplaySize.x, drawData->DisplaySize.y);
 
     // Render command lists.
     ImVec2 clipOff = drawData->DisplayPos;
@@ -407,10 +411,10 @@ void ui::endFrame(gl::Framebuffer target)
         const auto* cmdList = drawData->CmdLists[n];
 
         // Create and grow vertex buffer if needed.
-        if (!bd->vb || bd->vbSize < cmdList->VtxBuffer.Size)
+        if (!bd->vb || bd->vbSize < static_cast<size_t>(cmdList->VtxBuffer.Size))
         {
             bd->vbSize = cmdList->VtxBuffer.Size + 5000;
-            bd->vb = bd->renderDevice.createVertexBuffer(bd->vbSize * sizeof(ImDrawVert), nullptr, gl::Usage::Dynamic);
+            bd->vb = rd.createVertexBuffer(bd->vbSize * sizeof(ImDrawVert), nullptr, gl::Usage::Dynamic);
 
             // Create the vertex array.
             gl::VertexArrayDesc desc;
@@ -435,16 +439,16 @@ void ui::endFrame(gl::Framebuffer target)
             desc.elements[2].buffer.stride = sizeof(ImDrawVert);
             desc.buffers[0] = bd->vb;
             desc.shaderPipeline = bd->pipeline;
-            bd->va = bd->renderDevice.createVertexArray(desc);
+            bd->va = rd.createVertexArray(desc);
         }
 
         // Create and grow index buffer if needed.
-        if (!bd->ib || bd->ibSize < cmdList->IdxBuffer.Size)
+        if (!bd->ib || bd->ibSize < static_cast<size_t>(cmdList->IdxBuffer.Size))
         {
             bd->ibSize = cmdList->IdxBuffer.Size + 10000;
-            bd->ib = bd->renderDevice.createIndexBuffer(
-                bd->ibSize * sizeof(ImDrawIdx), nullptr,
-                sizeof(ImDrawIdx) == 2 ? gl::IndexFormat::UShort : gl::IndexFormat::UInt, gl::Usage::Dynamic);
+            bd->ib = rd.createIndexBuffer(bd->ibSize * sizeof(ImDrawIdx), nullptr,
+                                          sizeof(ImDrawIdx) == 2 ? gl::IndexFormat::UShort : gl::IndexFormat::UInt,
+                                          gl::Usage::Dynamic);
         }
 
         // Upload vertex and index data into vertex buffer.
@@ -455,8 +459,8 @@ void ui::endFrame(gl::Framebuffer target)
         bd->vb->unmap();
         bd->ib->unmap();
 
-        bd->renderDevice.setVertexArray(bd->va);
-        bd->renderDevice.setIndexBuffer(bd->ib);
+        rd.setVertexArray(bd->va);
+        rd.setIndexBuffer(bd->ib);
         bd->textureBP->bind(bd->texture);
         bd->cbBP->bind(bd->cb);
 
@@ -467,9 +471,9 @@ void ui::endFrame(gl::Framebuffer target)
             {
                 if (cmd->UserCallback == ImDrawCallback_ResetRenderState)
                 {
-                    setupRenderState(bd);
-                    bd->renderDevice.setVertexArray(bd->va);
-                    bd->renderDevice.setIndexBuffer(bd->ib);
+                    setupRenderState(bd, target);
+                    rd.setVertexArray(bd->va);
+                    rd.setIndexBuffer(bd->ib);
                     bd->textureBP->bind(bd->texture);
                     bd->cbBP->bind(bd->cb);
                 }
@@ -489,11 +493,11 @@ void ui::endFrame(gl::Framebuffer target)
                 }
 
                 // Apply the scissor/clipping rectangle (with Y flipped)
-                bd->renderDevice.setScissor(clipMin.x, drawData->DisplaySize.y - clipMax.y, clipMax.x - clipMin.x,
-                                            clipMax.y - clipMin.y);
+                rd.setScissor(clipMin.x, drawData->DisplaySize.y - clipMax.y, clipMax.x - clipMin.x,
+                              clipMax.y - clipMin.y);
 
                 // Bind the texture and draw.
-                bd->renderDevice.drawTrianglesIndexed(cmd->IdxOffset, cmd->ElemCount);
+                rd.drawTrianglesIndexed(cmd->IdxOffset, cmd->ElemCount);
             }
         }
     }
