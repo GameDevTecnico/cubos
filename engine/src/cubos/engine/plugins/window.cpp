@@ -1,16 +1,17 @@
 #include <cubos/engine/plugins/window.hpp>
+
 #include <cubos/core/settings.hpp>
 
 using namespace cubos::core;
 
-static void startup(io::Window& window, ShouldQuit& quit, const Settings& settings)
+static void init(io::Window& window, ShouldQuit& quit, const Settings& settings)
 {
     quit.value = false;
     window = io::openWindow(settings.getString("window.title", "Cubos"),
                             {settings.getInteger("window.width", 800), settings.getInteger("window.height", 600)});
 }
 
-static void pollSystem(const io::Window& window, ShouldQuit& quit, ecs::EventWriter<io::WindowEvent> events)
+static void poll(const io::Window& window, ShouldQuit& quit, ecs::EventWriter<io::WindowEvent> events)
 {
     // Send window events to other systems.
     while (auto event = window->pollEvent())
@@ -22,7 +23,7 @@ static void pollSystem(const io::Window& window, ShouldQuit& quit, ecs::EventWri
     }
 }
 
-static void swapBuffersSystem(const io::Window& window)
+static void render(const io::Window& window)
 {
     window->swapBuffers();
 }
@@ -32,9 +33,10 @@ void cubos::engine::plugins::windowPlugin(Cubos& cubos)
     cubos.addResource<io::Window>();
     cubos.addEvent<io::WindowEvent>();
 
-    cubos.startupSystem(startup).tagged("OpenWindow");
+    cubos.startupTag("cubos.window.init").afterTag("cubos.settings");
+    cubos.tag("cubos.window.poll").beforeTag("cubos.window.render");
 
-    cubos.system(pollSystem).tagged("Poll");
-
-    cubos.system(swapBuffersSystem).tagged("SwapBuffers");
+    cubos.startupSystem(init).tagged("cubos.window.init");
+    cubos.system(poll).tagged("cubos.window.poll");
+    cubos.system(render).tagged("cubos.window.render");
 }
