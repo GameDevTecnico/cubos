@@ -208,7 +208,7 @@ File::Handle File::find(std::string_view path)
         return this->shared_from_this();
 
     // If the path is absolute, or if this file isn't a directory, return nullptr.
-    else if (!path.empty() && path[0] == '/' || !this->directory)
+    else if ((!path.empty() && path[0] == '/') || !this->directory)
         return nullptr;
 
     // Get name of the first component in the path.
