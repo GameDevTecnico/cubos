@@ -140,18 +140,18 @@ size_t BufferStream::tell() const
     return this->position;
 }
 
-void BufferStream::seek(int64_t offset, SeekOrigin origin)
+void BufferStream::seek(ptrdiff_t offset, SeekOrigin origin)
 {
     if (origin == SeekOrigin::Current)
     {
-        if (offset < 0 && -offset > this->position)
+        if (offset < 0 && static_cast<size_t>(-offset) > this->position)
             this->position = 0;
         else
             this->position += offset;
     }
     else if (origin == SeekOrigin::End)
     {
-        if (offset < 0 && -offset > this->size)
+        if (offset < 0 && static_cast<size_t>(-offset) > this->size)
             this->position = 0;
         else
             this->position = this->size + offset;
