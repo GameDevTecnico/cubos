@@ -769,8 +769,8 @@ public:
         glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
     }
 
-    GLenum format;
     GLuint id;
+    GLenum format;
     size_t indexSz;
 };
 
