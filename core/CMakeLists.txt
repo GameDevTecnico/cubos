@@ -174,8 +174,14 @@ add_library(cubos-core ${CUBOS_CORE_SOURCE} ${CUBOS_CORE_INCLUDE})
 target_include_directories(cubos-core PUBLIC "include" PRIVATE "src")
 set_property(TARGET cubos-core PROPERTY CXX_STANDARD 20)
 target_compile_features(cubos-core PUBLIC cxx_std_20)
-target_compile_definitions(cubos-core PUBLIC -DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS})
-target_compile_definitions(cubos-core PUBLIC -DCUBOS_CORE_DISPATCHER_MAX_CONDITIONS=${CUBOS_CORE_DISPATCHER_MAX_CONDITIONS})
+target_compile_definitions(cubos-core PUBLIC
+    -DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS}
+    -DCUBOS_CORE_DISPATCHER_MAX_CONDITIONS=${CUBOS_CORE_DISPATCHER_MAX_CONDITIONS}
+)
+target_compile_options(cubos-core PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic -Werror>
+)
 
 # Link dependencies
 
