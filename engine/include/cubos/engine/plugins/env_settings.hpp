@@ -13,7 +13,7 @@ namespace cubos::engine::plugins
     ///
     /// Startup tags:
     /// - `cubos.settings`: the settings are loaded with this tag.
-    /// - `cubos.settings.base`: the settings are loaded after this tag.
+    /// - `cubos.settings.env`: the settings are loaded with this tag.
     ///
     /// @param cubos CUBOS. main class
     void envSettingsPlugin(Cubos& cubos);
