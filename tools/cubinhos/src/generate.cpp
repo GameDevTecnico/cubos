@@ -104,31 +104,6 @@ static std::string trim(std::string str)
     return str.substr(0, static_cast<size_t>(i) + 1);
 }
 
-/// Parses a namespace.
-/// @param line The line to parse.
-/// @param namespaceStr The namespace to fill.
-/// @return True if the namespace was parsed successfully, false otherwise.
-static bool parseNamespace(std::string line, std::string& namespaceStr)
-{
-    // Check if the line is a namespace.
-    line = trim(line);
-    if (line.find("namespace") == 0)
-    {
-        // Get the namespace.
-        std::string name = line.substr(10);
-        name = trim(name);
-        if (!name.empty())
-        {
-            if (namespaceStr.empty())
-                namespaceStr = name;
-            else
-                namespaceStr += "::" + name;
-        }
-    }
-
-    return true;
-}
-
 /// Parses a component attribute.
 /// @param line The line to parse.
 /// @param component The component to fill.
