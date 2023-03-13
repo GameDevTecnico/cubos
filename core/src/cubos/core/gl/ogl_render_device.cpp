@@ -2007,25 +2007,28 @@ void OGLRenderDevice::setVertexArray(VertexArray va)
 
 ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
 {
-    GLenum shader_type;
+    GLenum shaderType;
     switch (stage)
     {
     case Stage::Vertex:
-        shader_type = GL_VERTEX_SHADER;
+        shaderType = GL_VERTEX_SHADER;
         break;
     case Stage::Geometry:
-        shader_type = GL_GEOMETRY_SHADER;
+        shaderType = GL_GEOMETRY_SHADER;
         break;
     case Stage::Pixel:
-        shader_type = GL_FRAGMENT_SHADER;
+        shaderType = GL_FRAGMENT_SHADER;
         break;
     case Stage::Compute:
-        shader_type = GL_COMPUTE_SHADER;
+        shaderType = GL_COMPUTE_SHADER;
         break;
+    default:
+        CUBOS_CRITICAL("Unsupported shader stage type");
+        return nullptr;
     }
 
     // Initialize shader
-    GLuint id = glCreateShader(shader_type);
+    GLuint id = glCreateShader(shaderType);
     glShaderSource(id, 1, (const GLchar* const*)&src, NULL);
     glCompileShader(id);
 

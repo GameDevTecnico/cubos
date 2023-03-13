@@ -175,6 +175,9 @@ void GLFWWindow::setMouseState(MouseState state)
     case MouseState::Hidden:
         cursorState = GLFW_CURSOR_HIDDEN;
         break;
+    default:
+        CUBOS_ERROR("Unknown MouseState, doing nothing");
+        return;
     }
     glfwSetInputMode(handle, GLFW_CURSOR, cursorState);
 #else
@@ -205,7 +208,7 @@ MouseState GLFWWindow::getMouseState() const
 std::shared_ptr<Cursor> GLFWWindow::createCursor(Cursor::Standard standard)
 {
 #ifdef WITH_GLFW
-    GLFWcursor* cursor = nullptr;
+    GLFWcursor* cursor;
     switch (standard)
     {
     case Cursor::Standard::Arrow:
@@ -226,12 +229,11 @@ std::shared_ptr<Cursor> GLFWWindow::createCursor(Cursor::Standard standard)
     case Cursor::Standard::NSResize:
         cursor = glfwCreateStandardCursor(GLFW_VRESIZE_CURSOR);
         break;
+    default:
+        return nullptr;
     }
 
-    if (cursor == nullptr)
-        return nullptr;
-    else
-        return std::shared_ptr<Cursor>(new Cursor(cursor));
+    return std::shared_ptr<Cursor>(new Cursor(cursor));
 #else
     UNSUPPORTED();
 #endif
@@ -270,7 +272,7 @@ const char* GLFWWindow::getClipboard() const
 
 #ifdef WITH_GLFW
 
-static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+static void keyCallback(GLFWwindow* window, int key, int, int action, int mods)
 {
     GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     Key cubosKey = glfwToCubosKey(key);
