@@ -58,11 +58,11 @@ void Dispatcher::tagSetBeforeTag(const std::string& tag)
     tagSettings[tag]->after.tag.push_back(currTag);
 }
 
-void Dispatcher::systemSetTag(const std::string& tag)
+void Dispatcher::systemAddTag(const std::string& tag)
 {
     ENSURE_CURR_SYSTEM();
     ENSURE_TAG_SETTINGS(tag);
-    currSystem->tag = tag;
+    currSystem->tags.push_back(tag);
 }
 
 void Dispatcher::systemSetAfterTag(const std::string& tag)
@@ -109,13 +109,13 @@ void Dispatcher::compileChain()
     // Implement system tag settings with custom settings
     for (System* system : pendingSystems)
     {
-        if (!system->tag.empty())
+        for (auto& tag : system->tags)
         {
             if (!system->settings)
             {
                 system->settings = std::make_shared<SystemSettings>();
             }
-            system->settings->copyFrom(tagSettings[system->tag].get());
+            system->settings->copyFrom(tagSettings[tag].get());
         }
     }
 
@@ -167,7 +167,7 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
             {
                 for (auto it = nodes.begin(); it != nodes.end(); it++)
                 {
-                    if (it->s->tag == tag)
+                    if (std::find(it->s->tags.begin(), it->s->tags.end(), tag) != it->s->tags.end())
                     {
                         if (dfsVisit(*it, nodes))
                         {

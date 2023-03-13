@@ -165,24 +165,24 @@ int main()
     auto cmds = ecs::CommandBuffer(world);
     dispatcher.addTag("Main");
     dispatcher.addSystem(mySystem);
-    dispatcher.systemSetTag("Main");
+    dispatcher.systemAddTag("Main");
 
     dispatcher.addTag("Transform");
     dispatcher.tagSetAfterTag("Main");
     dispatcher.addSystem(printPositions);
-    dispatcher.systemSetTag("Transform");
+    dispatcher.systemAddTag("Transform");
 
     dispatcher.addTag("New");
     dispatcher.tagSetAfterTag("Main");
     dispatcher.addSystem(printPlayerPosition);
-    dispatcher.systemSetTag("New");
+    dispatcher.systemAddTag("New");
 
     dispatcher.addTag("PreProcess");
     dispatcher.tagSetBeforeTag("Main");
     dispatcher.tagSetBeforeTag("Transform");
     dispatcher.addSystem(
         [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; });
-    dispatcher.systemSetTag("PreProcess");
+    dispatcher.systemAddTag("PreProcess");
 
     dispatcher.compileChain();
     // call systems on dispatcher
