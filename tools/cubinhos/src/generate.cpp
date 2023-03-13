@@ -91,17 +91,17 @@ static bool parseArguments(int argc, char** argv, GenerateOptions& options)
 static std::string trim(std::string str)
 {
     // Trim left.
-    size_t i;
-    for (i = 0; i < str.size(); ++i)
+    int64_t i;
+    for (i = 0; i < static_cast<int64_t>(str.size()); ++i)
         if (!isspace(str[i]))
             break;
-    str = str.substr(i);
+    str = str.substr(static_cast<size_t>(i));
 
     // Trim right.
-    for (i = str.size() - 1; i >= 0; --i)
+    for (i = static_cast<int64_t>(str.size()) - 1; i >= 0; --i)
         if (!isspace(str[i]))
             break;
-    return str.substr(0, i + 1);
+    return str.substr(0, static_cast<size_t>(i) + 1);
 }
 
 /// Parses a namespace.
