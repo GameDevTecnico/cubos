@@ -1,35 +1,27 @@
 #include <cubos/engine/plugins/renderer.hpp>
 #include <cubos/engine/plugins/transform.hpp>
 #include <cubos/engine/plugins/window.hpp>
-
-#include <components/cubos/camera.hpp>
-#include <components/cubos/grid.hpp>
-
-#include <cubos/core/ecs/query.hpp>
-
-#include <components/cubos/local_to_world.hpp>
-#include <components/cubos/position.hpp>
-#include <components/cubos/rotation.hpp>
-#include <components/cubos/scale.hpp>
-
 #include <cubos/engine/gl/deferred/renderer.hpp>
 #include <cubos/engine/gl/renderer.hpp>
 #include <cubos/engine/gl/frame.hpp>
 
+#include <cubos/core/ecs/query.hpp>
 #include <cubos/core/gl/camera.hpp>
-
 #include <cubos/core/settings.hpp>
+
+#include <components/cubos/camera.hpp>
+#include <components/cubos/grid.hpp>
+#include <components/cubos/local_to_world.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 
-static void startup(gl::Renderer& renderer, const cubos::core::io::Window& window,
-                    const cubos::core::Settings& settings)
+static void init(gl::Renderer& renderer, const cubos::core::io::Window& window, const cubos::core::Settings& settings)
 {
     auto& renderDevice = window->getRenderDevice();
     renderer = std::make_shared<gl::deferred::Renderer>(renderDevice, window->getFramebufferSize(), settings);
 }
 
-static void buildFrame(
+static void frame(
     gl::Frame& frame,
     cubos::core::ecs::Query<const cubos::engine::ecs::Grid&, const cubos::engine::ecs::LocalToWorld&> query)
 {
@@ -39,8 +31,8 @@ static void buildFrame(
     }
 }
 
-static void render(gl::Renderer& renderer, const plugins::ActiveCamera& activeCamera, gl::Frame& frame,
-                   cubos::core::ecs::Query<const ecs::LocalToWorld&, const ecs::Camera&> query)
+static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& activeCamera, gl::Frame& frame,
+                 cubos::core::ecs::Query<const ecs::LocalToWorld&, const ecs::Camera&> query)
 {
     cubos::core::gl::Camera glCamera;
 
@@ -60,16 +52,21 @@ static void render(gl::Renderer& renderer, const plugins::ActiveCamera& activeCa
 
 void cubos::engine::plugins::rendererPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(transformPlugin)
-        .addPlugin(windowPlugin)
-        .addComponent<ecs::Grid>()
-        .addComponent<ecs::Camera>()
-        .addResource<gl::Frame>()
-        .addResource<gl::Renderer>()
-        .addResource<ActiveCamera>();
+    cubos.addPlugin(transformPlugin);
+    cubos.addPlugin(windowPlugin);
 
-    cubos.startupTag("SetRenderer").afterTag("OpenWindow");
-    cubos.startupSystem(startup).tagged("SetRenderer");
-    cubos.system(buildFrame).tagged("CreateDrawList").afterTag("Transform");
-    cubos.system(render).tagged("Draw").afterTag("CreateDrawList");
+    cubos.addResource<gl::Frame>();
+    cubos.addResource<gl::Renderer>();
+    cubos.addResource<ActiveCamera>();
+
+    cubos.addComponent<ecs::Grid>();
+    cubos.addComponent<ecs::Camera>();
+
+    cubos.startupTag("cubos.renderer.init").afterTag("cubos.window.init");
+    cubos.tag("cubos.renderer.frame").afterTag("cubos.transform.update");
+    cubos.tag("cubos.renderer.render").afterTag("cubos.renderer.frame").beforeTag("cubos.window.render");
+
+    cubos.startupSystem(init).tagged("cubos.renderer.init");
+    cubos.system(frame).tagged("cubos.renderer.frame");
+    cubos.system(draw).tagged("cubos.renderer.draw");
 }
