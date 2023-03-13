@@ -46,7 +46,7 @@ std::type_index ComponentManager::getType(size_t id) const
 
 void ComponentManager::remove(uint32_t id, size_t componentId)
 {
-    this->entries[componentId - 1].storage->erase(componentId);
+    this->entries[componentId - 1].storage->erase(id);
 }
 
 void ComponentManager::removeAll(uint32_t id)
