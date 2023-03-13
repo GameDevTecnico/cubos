@@ -1010,7 +1010,7 @@ public:
         glUniform1ui(loc, val);
     }
 
-    virtual bool queryConstantBufferStructure(ConstantBufferStructure* structure) override
+    virtual bool queryConstantBufferStructure(ConstantBufferStructure*) override
     {
         return false; // TODO
     }

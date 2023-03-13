@@ -31,7 +31,6 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
 {
     // First, merge the maps.
     data::SerializationMap<Entity, std::string> dstMap;
-    auto oldEntityCount = static_cast<uint32_t>(this->map.size());
     for (uint32_t i = 0; i < static_cast<uint32_t>(other.map.size()); ++i)
     {
         auto name = prefix + "." + other.map.getId(Entity(i, 0));
