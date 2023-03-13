@@ -18,6 +18,6 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void fileSettingsPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins
+} // namespace cubos::engine::plugins
 
 #endif // CUBOS_ENGINE_PLUGINS_FILE_SETTINGS_HPP
