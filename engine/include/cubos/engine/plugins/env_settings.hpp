@@ -3,8 +3,6 @@
 
 #include <cubos/engine/cubos.hpp>
 
-using namespace cubos::engine;
-
 namespace cubos::engine::plugins
 {
     /// Plugin to load environment settings, provided via command line.
