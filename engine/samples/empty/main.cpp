@@ -1,6 +1,6 @@
 #include <cubos/engine/cubos.hpp>
 
-int main(int argc, char** argv)
+int main()
 {
     cubos::engine::Cubos().run();
 }
