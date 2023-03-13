@@ -199,7 +199,7 @@ void pps::BloomPass::generateTextures()
 
     bloomTexBuffer.clear();
     bloomTexBuffer.resize(iterations);
-    for (int i = 0; i < iterations; i++)
+    for (unsigned int i = 0; i < iterations; i++)
     {
         texDesc.width /= 2;
         texDesc.height /= 2;
@@ -221,7 +221,7 @@ void pps::BloomPass::generateTextures()
     bloomFBs.clear();
     bloomFBs.resize(iterations);
     fbDesc.targetCount = 1;
-    for (int i = 0; i < iterations; i++)
+    for (unsigned int i = 0; i < iterations; i++)
     {
         fbDesc.targets[0].setTexture2DTarget(bloomTexBuffer[i]);
         bloomFBs[i] = renderDevice.createFramebuffer(fbDesc);
@@ -269,7 +269,7 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Frameb
     // Downscale textures
     this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_DOWNSCALE_PASS);
     float scaling = 2.0f;
-    for (int i = 0; i < iterations; i++)
+    for (unsigned int i = 0; i < iterations; i++)
     {
         this->bloomScalingBP->setConstant(scaling);
         this->renderDevice.setFramebuffer(bloomFBs[i]);
