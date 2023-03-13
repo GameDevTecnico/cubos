@@ -7,10 +7,16 @@ using namespace cubos::engine;
 
 namespace cubos::engine::plugins
 {
-    /// Plugin to handle environment settings, provided via command line.
-    /// Arguments resource needs to have been added, otherwise this will crash.
-    /// For this to happen, the command line arguments argc and argv
-    /// from the main function should be provided to Cubos' constructor.
+    /// Plugin to load environment settings, provided via command line.
+    /// Any duplicated setting will be overwritten.
+    ///
+    /// @details This plugin needs the Arguments resource to be defined. The resouce is defined
+    /// when the command line arguments (argc and argv) are provided to the Cubos constructor.
+    ///
+    /// Startup tags:
+    /// - `cubos.settings`: the settings are loaded with this tag.
+    /// - `cubos.settings.base`: the settings are loaded after this tag.
+    ///
     /// @param cubos CUBOS. main class
     void envSettingsPlugin(Cubos& cubos);
 }; // namespace cubos::engine::plugins
