@@ -42,7 +42,7 @@ using namespace core::data;
 using namespace core::memory;
 using namespace cubos::engine;
 
-void setup(World& world, data::AssetManager& assetManager)
+void setup(data::AssetManager& assetManager)
 {
     CUBOS_INFO("SettingUp");
     FileSystem::mount("/assets/", std::make_shared<STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
