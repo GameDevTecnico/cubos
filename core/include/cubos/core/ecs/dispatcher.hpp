@@ -218,7 +218,7 @@ namespace cubos::core::ecs
     void Dispatcher::addSystem(F func)
     {
         // Wrap the system and put it in the pending queue
-        System* system = new System{nullptr, std::make_shared<SystemWrapper<F>>(func)};
+        System* system = new System{nullptr, std::make_shared<SystemWrapper<F>>(func), ""};
         pendingSystems.push_back(system);
         currSystem = pendingSystems.back();
     }
