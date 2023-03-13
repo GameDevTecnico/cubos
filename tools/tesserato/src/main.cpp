@@ -7,12 +7,12 @@
 #include <cubos/core/ui/serialization.hpp>
 #include <imgui.h>
 
-static void setup(const cubos::core::io::Window& window, ShouldQuit& quit)
+static void setup(const cubos::core::io::Window& window)
 {
     cubos::core::ui::initialize(window);
 }
 
-static void show(const cubos::core::io::Window& window)
+static void show()
 {
     cubos::core::ui::beginFrame();
 
