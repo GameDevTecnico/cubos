@@ -223,7 +223,7 @@ static bool embedFileData(State& state, size_t id)
         {
             char buffer[1024];
             file.read(buffer, sizeof(buffer));
-            for (size_t i = 0; i < file.gcount(); ++i)
+            for (std::streamsize i = 0; i < file.gcount(); ++i)
                 state.out << "0x" << std::hex << static_cast<uint32_t>(buffer[i]) << ", ";
         }
 
