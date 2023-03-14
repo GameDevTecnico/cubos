@@ -60,9 +60,6 @@ int main(void)
         camera.zFar = 1000.0f;
         camera.view = glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0});
 
-        float t = 0;
-        int s = 0;
-
         while (!window->shouldClose())
         {
             while (auto event = window->pollEvent())
@@ -74,18 +71,7 @@ int main(void)
                 }
             }
 
-            // Calculate the delta time.
-            float currentT = window->getTime();
-            float deltaT = 0;
-            if (t != 0)
-            {
-                deltaT = currentT - t;
-                int newS = std::round(t);
-                if (newS != s)
-                    CUBOS_DEBUG("FPS: {}", std::round(1 / deltaT));
-                s = newS;
-            }
-            t = currentT;
+            float time = window->getTime();
 
             // Clear the frame commands.
             frame.clear();
@@ -96,9 +82,9 @@ int main(void)
             frame.draw(gpuCube, modelMat);
 
             // Add lights to the frame.
-            auto spotRotation = glm::quat(glm::vec3(0, t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+            auto spotRotation = glm::quat(glm::vec3(0, time, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
             auto directionalRotation = glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-            auto pointRotation = glm::quat(glm::vec3(0, -t, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
+            auto pointRotation = glm::quat(glm::vec3(0, -time, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
 
             frame.ambient(glm::vec3(0.1f));
             frame.light(SpotLight(spotRotation * glm::vec3(0, 0, -5), spotRotation, glm::vec3(1), 1, 100,
