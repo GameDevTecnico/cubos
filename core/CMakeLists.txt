@@ -98,6 +98,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/memory/std_stream.hpp"
     "include/cubos/core/memory/buffer_stream.hpp"
     "include/cubos/core/memory/endianness.hpp"
+    "include/cubos/core/memory/type_map.hpp"
 
     "include/cubos/core/data/serializer.hpp"
     "include/cubos/core/data/deserializer.hpp"
