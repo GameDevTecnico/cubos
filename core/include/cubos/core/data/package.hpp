@@ -91,22 +91,12 @@ namespace cubos::core::data
         Package& operator=(Package&& rhs) = default;
         Package& operator=(const Package& rhs) = default;
 
-        /// Packages trivially serializable data and returns the result.
+        /// Packages serializable data and returns the result.
         /// @tparam T The type of the data to package.
         /// @param data The data to package.
         template <typename T>
-        requires TriviallySerializable<T>
         static Package from(const T& value);
 
-        /// Packages context serializable data and returns the result.
-        /// @tparam T The type of the data to package.
-        /// @tparam TCtx The type of the context necessary to serialize the data.
-        /// @param data The data to package.
-        /// @param ctx The context to use.
-        template <typename T, typename TCtx>
-        requires(TriviallySerializable<T> || ContextSerializable<T, TCtx>) static Package
-            from(const T& value, TCtx&& ctx);
-
         /// Packages the specified data into this package. This will change
         /// the type of the package. This may be a problem in some cases.
         /// For example, if an uint8_t is packaged, then set to a
@@ -117,22 +107,7 @@ namespace cubos::core::data
         /// @tparam T The type of the data to package.
         /// @param data The data to package.
         template <typename T>
-        requires TriviallySerializable<T>
         void set(const T& data);
-
-        /// Packages the specified data into this package. This will change
-        /// the type of the package. This may be a problem in some cases.
-        /// For example, if an uint8_t is packaged, then set to a
-        /// uint16_t, and then binary serialized, it won't be deserializable
-        /// back to an uint8_t (only to a uint16_t). One way to avoid this
-        /// problem is to use Package::change instead.
-        /// @see Package::change
-        /// @tparam T The type of the data to package.
-        /// @tparam TCtx The type of the context necessary to serialize the data.
-        /// @param data The data to package.
-        /// @param ctx The context to use.
-        template <typename T, typename TCtx>
-        requires(TriviallySerializable<T> || ContextSerializable<T, TCtx>) void set(const T& data, TCtx&& ctx);
 
         /// Packages the specified int64_t into this package, without changing
         /// the type of the package. If the types aren't compatible, this will
@@ -185,20 +160,7 @@ namespace cubos::core::data
         /// @param data The data to write to.
         /// @returns True if the unpackaging succeeded, false otherwise.
         template <typename T>
-        requires TriviallyDeserializable<T>
         bool into(T& data) const;
-
-        /// Unpackages the package into data.
-        /// If there is a field missing or there's a type mismatch, the
-        /// unpackaging may fail. It is guaranteed that unpackaging a package
-        /// created from a certain type to the same type never fails.
-        /// @tparam T The type of the data to unpackage.
-        /// @tparam TCtx The type of the context necessary to serialize the data.
-        /// @param data The data to write to.
-        /// @param ctx The context to use.
-        /// @returns True if the unpackaging succeeded, false otherwise.
-        template <typename T, typename TCtx>
-        requires(TriviallyDeserializable<T> || ContextDeserializable<T, TCtx>) bool into(T& data, TCtx&& ctx) const;
 
         /// Alternative to Package::into for types which are default
         /// constructible. Unpackages the package and returns the data, and
@@ -207,7 +169,7 @@ namespace cubos::core::data
         /// @tparam T The type of the data to unpackage.
         /// @returns The data.
         template <typename T>
-        requires TriviallyDeserializable<T> && std::default_initializable<T> T get()
+        requires std::default_initializable<T> T get()
         const;
 
         /// @returns The type of the packaged data.
@@ -387,7 +349,6 @@ namespace cubos::core::data
     // Implementation.
 
     template <typename T>
-    requires TriviallySerializable<T>
     inline Package Package::from(const T& data)
     {
         Package pkg;
@@ -395,31 +356,13 @@ namespace cubos::core::data
         return std::move(pkg);
     }
 
-    template <typename T, typename TCtx>
-    requires(TriviallySerializable<T> || ContextSerializable<T, TCtx>) inline Package Package::from(const T& data,
-                                                                                                    TCtx&& ctx)
-    {
-        Package pkg;
-        pkg.set(data, ctx);
-        return std::move(pkg);
-    }
-
     template <typename T>
-    requires TriviallySerializable<T>
     inline void Package::set(const T& data)
     {
         impl::Packager(*this).write(data, nullptr);
     }
 
-    template <typename T, typename TCtx>
-    requires(TriviallySerializable<T> || ContextSerializable<T, TCtx>) inline void Package::set(const T& data,
-                                                                                                TCtx&& ctx)
-    {
-        impl::Packager(*this).write(data, ctx, nullptr);
-    }
-
     template <typename T>
-    requires TriviallyDeserializable<T>
     inline bool Package::into(T& data) const
     {
         auto unpackager = impl::Unpackager(*this);
@@ -427,17 +370,8 @@ namespace cubos::core::data
         return !unpackager.failed();
     }
 
-    template <typename T, typename TCtx>
-    requires(TriviallyDeserializable<T> || ContextDeserializable<T, TCtx>) inline bool Package::into(T& data,
-                                                                                                     TCtx&& ctx) const
-    {
-        auto unpackager = impl::Unpackager(*this);
-        unpackager.read(data, ctx);
-        return !unpackager.failed();
-    }
-
     template <typename T>
-    requires TriviallyDeserializable<T> && std::default_initializable<T>
+    requires std::default_initializable<T>
     inline T Package::get() const
     {
         T data;

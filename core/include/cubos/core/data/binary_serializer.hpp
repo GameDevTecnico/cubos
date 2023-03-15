@@ -2,8 +2,7 @@
 #define CUBOS_CORE_DATA_BINARY_SERIALIZER_HPP
 
 #include <cubos/core/data/serializer.hpp>
-
-#include <stack>
+#include <cubos/core/memory/stream.hpp>
 
 namespace cubos::core::data
 {
