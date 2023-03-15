@@ -2,6 +2,7 @@
 #define CUBOS_CORE_DATA_YAML_SERIALIZER_HPP
 
 #include <cubos/core/data/serializer.hpp>
+#include <cubos/core/memory/stream.hpp>
 
 #include <yaml-cpp/emitter.h>
 #include <stack>

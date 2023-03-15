@@ -2,6 +2,7 @@
 #define CUBOS_CORE_DATA_JSON_SERIALIZER_HPP
 
 #include <cubos/core/data/serializer.hpp>
+#include <cubos/core/memory/stream.hpp>
 
 #include <nlohmann/json.hpp>
 #include <stack>
