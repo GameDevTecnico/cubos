@@ -1,6 +1,7 @@
 #ifndef CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP
 #define CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP
 
+#include <cubos/core/memory/stream.hpp>
 #include <cubos/core/data/serializer.hpp>
 
 #include <stack>
