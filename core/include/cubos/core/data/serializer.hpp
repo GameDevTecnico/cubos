@@ -1,6 +1,8 @@
 #ifndef CUBOS_CORE_DATA_SERIALIZER_HPP
 #define CUBOS_CORE_DATA_SERIALIZER_HPP
 
+#include <cubos/core/data/context.hpp>
+
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -154,12 +156,20 @@ namespace cubos::core::data
         /// Checks if the serializer has failed.
         bool failed() const;
 
+        /// @returns The context of the serializer.
+        inline Context& context()
+        {
+            return this->m_context;
+        }
+
     protected:
         bool failBit; ///< Indicates if the serializer failed.
 
     private:
         Serializer(const Serializer&) = delete;
         Serializer& operator=(const Serializer&) = delete;
+
+        Context m_context; ///< The context of the serializer.
     };
 
     /// Concept for serializable objects which define a serialize method.
