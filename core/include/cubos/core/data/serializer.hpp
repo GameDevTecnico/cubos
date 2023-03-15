@@ -125,7 +125,7 @@ namespace cubos::core::data
         template <typename T>
         inline void write(const T& obj, const char* name)
         {
-            serialize<T>(*this, obj, name);
+            serialize(*this, obj, name);
         }
 
         /// Indicates that a object is currently being serialized.
@@ -208,7 +208,7 @@ namespace cubos::core::data
             ser.write(pair.first, nullptr);
             ser.write(pair.second, nullptr);
         }
-        map.endDictionary();
+        ser.endDictionary();
     }
 } // namespace cubos::core::data
 
