@@ -1,5 +1,7 @@
 #include <cubos/core/data/yaml_serializer.hpp>
 
+#include <cassert>
+
 constexpr const char* ANONYMOUS_FIELD_NAME = "anonymous";
 
 using namespace cubos::core::data;
