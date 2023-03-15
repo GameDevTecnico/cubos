@@ -84,14 +84,41 @@ namespace cubos::core::data
         serialize(s, obj, std::get<TCtx>(ctx), name);
     }
 
-    /// Abstract class for serializing data.
+    /// Abstract class for serializing data in a format-agnostic way.
+    /// Each serializer implementation is responsible for implementing its own primitive
+    /// serialization methods: `writeI8`, `writeString`, etc.
+    ///
+    /// @details More complex types can be serialized by implementing a specialization of the
+    /// `cubos::core::data::serialize` function:
+    ///
+    ///     struct MyType
+    ///     {
+    ///         int32_t a;
+    ///     };
+    ///
+    ///     // In the corresponding .cpp file.
+    ///     void cubos::core::data::serialize<MyType>(Serializer& s, const MyType& obj, const char* name)
+    ///     {
+    ///         s.write(obj.a, "a");
+    ///     }
+    ///
+    ///     // Alternatively, the type can define a `serialize` method.
+    ///
+    ///     class MyType
+    ///     {
+    ///     public:
+    ///         void serialize(Serializer& s, const char* name)
+    ///     private:
+    ///         int32_t a;
+    ///     };
     class Serializer
     {
     public:
         Serializer();
         virtual ~Serializer() = default;
 
-        /// Flushes the serializer and writes the data to the stream.
+        /// Flushes the serializer, guaranteeing that all data has already been processed.
+        /// This is automatically called when the serializer is destroyed.
         virtual void flush();
 
         /// Serializes a signed 8 bit integer.
