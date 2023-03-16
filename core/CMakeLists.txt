@@ -48,7 +48,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/std_archive.cpp"
     "src/cubos/core/data/embedded_archive.cpp"
     "src/cubos/core/data/qb_parser.cpp"
-    "src/cubos/core/data/handle.cpp"
     "src/cubos/core/data/context.cpp"
 
     "src/cubos/core/io/window.cpp"
@@ -120,7 +119,6 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/std_archive.hpp"
     "include/cubos/core/data/embedded_archive.hpp"
     "include/cubos/core/data/qb_parser.hpp"
-    "include/cubos/core/data/handle.hpp"
     "include/cubos/core/data/context.hpp"
 
     "include/cubos/core/io/window.hpp"
