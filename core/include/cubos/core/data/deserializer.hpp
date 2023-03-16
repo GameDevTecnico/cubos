@@ -1,6 +1,8 @@
 #ifndef CUBOS_CORE_DATA_DESERIALIZER_HPP
 #define CUBOS_CORE_DATA_DESERIALIZER_HPP
 
+#include <cubos/core/data/context.hpp>
+
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -153,12 +155,20 @@ namespace cubos::core::data
         /// Checks if the deserializer has failed.
         bool failed() const;
 
+        /// @returns The context of the serializer.
+        inline Context& context()
+        {
+            return this->m_context;
+        }
+
     protected:
         bool failBit; ///< Indicates if the deserializer has failed.
 
     private:
         Deserializer(const Deserializer&) = delete;
         Deserializer& operator=(const Deserializer&) = delete;
+
+        Context m_context; ///< The context of the serializer.
     };
 
     /// Concept for deserializable objects which define a deserialize method.
