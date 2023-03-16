@@ -17,7 +17,7 @@ namespace cubos::core::data
     /// @param des The deserializer to use.
     /// @param obj The object to deserialize.
     template <typename T>
-    void deserialize(Serializer& des, T& obj);
+    void deserialize(Deserializer& des, T& obj);
 
     /// Abstract class for deserializing data in a format-agnostic way.
     /// Each deserializer implementation is responsible for implementing its own primitive
@@ -114,11 +114,15 @@ namespace cubos::core::data
         virtual void readString(std::string& value) = 0;
 
         /// Deserializes an object.
+        /// The `cubos::core::data::deserialize` function must be implemented for the given type.
         /// The fail bit is set if the deserialization fails.
         /// @tparam T The type of the object.
         /// @param obj The object to deserialize.
         template <typename T>
-        void read(T& obj);
+        inline void read(T& obj)
+        {
+            deserialize(*this, obj);
+        }
 
         /// Indicates that a object is currently being deserialized.
         /// The fail bit is set on failure.
@@ -157,218 +161,57 @@ namespace cubos::core::data
         Deserializer& operator=(const Deserializer&) = delete;
     };
 
-    // Implementation
-
+    /// Concept for deserializable objects which define a deserialize method.
     template <typename T>
-    requires TriviallyDeserializable<T>
-    void Deserializer::read(T& obj)
+    concept HasDeserializeMethod = requires(Deserializer& des, T& obj)
     {
-        deserialize(*this, obj);
-    }
+        // clang-format off
+        { obj.deserialize(des) } -> std::same_as<void>;
+        // clang-format on
+    };
 
-    template <typename T, typename TCtx>
-    requires(TriviallyDeserializable<T> && !ContextDeserializable<T, TCtx>) void Deserializer::read(T& obj, TCtx&&)
-    {
-        this->read(obj);
-    }
-
-    template <typename T, typename TCtx>
-    requires ContextDeserializable<T, TCtx>
-    void Deserializer::read(T& obj, TCtx&& ctx)
-    {
-        deserialize(*this, obj, ctx);
-    }
-
-    inline void deserialize(Deserializer& d, int8_t& value)
-    {
-        d.readI8(value);
-    }
-
-    inline void deserialize(Deserializer& d, int16_t& value)
-    {
-        d.readI16(value);
-    }
-
-    inline void deserialize(Deserializer& d, int32_t& value)
-    {
-        d.readI32(value);
-    }
-
-    inline void deserialize(Deserializer& d, int64_t& value)
-    {
-        d.readI64(value);
-    }
-
-    inline void deserialize(Deserializer& d, uint8_t& value)
-    {
-        d.readU8(value);
-    }
-
-    inline void deserialize(Deserializer& d, uint16_t& value)
-    {
-        d.readU16(value);
-    }
-
-    inline void deserialize(Deserializer& d, uint32_t& value)
-    {
-        d.readU32(value);
-    }
-
-    inline void deserialize(Deserializer& d, uint64_t& value)
-    {
-        d.readU64(value);
-    }
-
-    inline void deserialize(Deserializer& d, float& value)
-    {
-        d.readF32(value);
-    }
-
-    inline void deserialize(Deserializer& d, double& value)
-    {
-        d.readF64(value);
-    }
-
-    inline void deserialize(Deserializer& d, bool& value)
-    {
-        d.readBool(value);
-    }
-
-    inline void deserialize(Deserializer& d, std::vector<bool>::reference& value)
-    {
-        bool boolean;
-        d.readBool(boolean);
-        value = boolean;
-    }
-
-    inline void deserialize(Deserializer& d, std::string& value)
-    {
-        d.readString(value);
-    }
-
+    /// Overload the serialize function for types which define a serialize method.
     template <typename T>
-    void deserialize(Deserializer& d, glm::tvec2<T>& value)
+    requires HasDeserializeMethod<T>
+    inline void deserialize(Deserializer& des, T& obj)
     {
-        d.beginObject();
-        d.read(value.x);
-        d.read(value.y);
-        d.endObject();
+        obj.deserialize(des);
     }
 
+    /// Overload for deserializing std::vector.
+    /// @tparam T The type of the vector.
+    /// @param des The deserializer.
+    /// @param vec The vector to deserialize.
     template <typename T>
-    void deserialize(Deserializer& d, glm::tvec3<T>& value)
+    inline void deserialize(Deserializer& des, std::vector<T>& vec)
     {
-        d.beginObject();
-        d.read(value.x);
-        d.read(value.y);
-        d.read(value.z);
-        d.endObject();
-    }
-
-    template <typename T>
-    void deserialize(Deserializer& d, glm::tvec4<T>& value)
-    {
-        d.beginObject();
-        d.read(value.x);
-        d.read(value.y);
-        d.read(value.z);
-        d.read(value.w);
-        d.endObject();
-    }
-
-    template <typename T>
-    void deserialize(Deserializer& d, glm::tquat<T>& value)
-    {
-        d.beginObject();
-        d.read(value.x);
-        d.read(value.y);
-        d.read(value.z);
-        d.read(value.w);
-        d.endObject();
-    }
-
-    template <typename T>
-    void deserialize(Deserializer& d, glm::tmat4x4<T>& mat)
-    {
-        d.beginObject();
-        d.read(mat[0]);
-        d.read(mat[1]);
-        d.read(mat[2]);
-        d.read(mat[3]);
-        d.endObject();
-    }
-
-    template <typename T>
-    requires TriviallyDeserializable<T>
-    void deserialize(Deserializer& d, std::vector<T>& vec)
-    {
-        size_t length = d.beginArray();
+        size_t length = des.beginArray();
         vec.resize(length);
         for (size_t i = 0; i < length; ++i)
-            d.read(vec[i]);
-        d.endArray();
+            des.read(vec[i]);
+        des.endArray();
     }
 
-    template <>
-    inline void deserialize(Deserializer& d, std::vector<bool>& vec)
-    {
-        size_t length = d.beginArray();
-        vec.resize(length);
-        for (size_t i = 0; i < length; ++i)
-        {
-            bool val;
-            d.read(val);
-            vec[i] = val;
-        }
-        d.endArray();
-    }
-
+    /// Overload for deserializing std::unordered_map.
+    /// @tparam K The key type of the map.
+    /// @tparam V The value type of the map.
+    /// @param des The deserializer.
+    /// @param map The map to deserialize.
     template <typename K, typename V>
-    requires TriviallyDeserializable<K> && TriviallyDeserializable<V>
-    void deserialize(Deserializer& d, std::unordered_map<K, V>& dic)
+    inline void deserialize(Deserializer& des, std::unordered_map<K, V>& map)
     {
-        size_t length = d.beginDictionary();
-        dic.clear();
-        dic.reserve(length);
+        size_t length = des.beginDictionary();
+        map.clear();
+        map.reserve(length);
         for (size_t i = 0; i < length; ++i)
         {
             K key;
             V value;
-            d.read(key);
-            d.read(value);
-            dic[key] = value;
+            des.read(key);
+            des.read(value);
+            map.emplace(std::move(key), std::move(value));
         }
-        d.endDictionary();
-    }
-
-    template <typename T, typename TCtx>
-    requires ContextDeserializable<T, TCtx>
-    void deserialize(Deserializer& d, std::vector<T>& vec, TCtx&& ctx)
-    {
-        size_t length = d.beginArray();
-        vec.resize(length);
-        for (size_t i = 0; i < length; ++i)
-            d.read(vec[i], ctx);
-        d.endArray();
-    }
-
-    template <typename K, typename V, typename TCtx>
-    requires(TriviallyDeserializable<K> || ContextDeserializable<K, TCtx>) &&
-        (TriviallyDeserializable<V> ||
-         ContextDeserializable<V, TCtx>)void deserialize(Deserializer& d, std::unordered_map<K, V>& dic, TCtx&& ctx)
-    {
-        size_t length = d.beginDictionary();
-        dic.clear();
-        dic.reserve(length);
-        for (size_t i = 0; i < length; ++i)
-        {
-            K key;
-            V value;
-            d.read(key, ctx);
-            d.read(value, ctx);
-            dic[key] = value;
-        }
-        d.endDictionary();
+        des.endDictionary();
     }
 } // namespace cubos::core::data
 
