@@ -26,7 +26,13 @@ namespace cubos::core::data
             this->pushAny(typeid(T), copy, destructor);
         }
 
-        /// Pops the top value from the stack.
+        /// Pushes a new sub-context to the stack.
+        /// The sub-context acts as a group of values associated with a single push.
+        /// The reference must be valid until the sub-context is popped.
+        /// @param context The context to push.
+        void pushSubContext(Context& context);
+
+        /// Pops the top value or sub-context from the stack.
         /// This must be called once for each push.
         void pop();
 
@@ -42,9 +48,10 @@ namespace cubos::core::data
         }
 
     private:
-        /// Data associated with a stored value.
+        /// Data associated with either a stored value, or a sub-context.
         struct Entry
         {
+            Context* subContext;       ///< If nullptr, this is a value, otherwise it's a sub-context.
             std::type_index type;      ///< Type of the data.
             void* data;                ///< Pointer to the data.
             void (*destructor)(void*); ///< Destructor for the data.
@@ -57,8 +64,14 @@ namespace cubos::core::data
 
         /// Aborts if the data is not present.
         /// @param type The type of the data.
-        /// @returns a pointer to the data associated with the given type.
+        /// @returns A pointer to the data associated with the given type.
         void* getAny(std::type_index type);
+
+        /// Tries to get the data associated with the given type.
+        /// @param type The type of the data.
+        /// @returns A pointer to the data associated with the given type, or nullptr if it's not
+        /// present.
+        void* tryGetAny(std::type_index type);
 
         std::vector<Entry> entries; ///< Entries in the context.
     };

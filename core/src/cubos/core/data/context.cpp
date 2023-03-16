@@ -11,9 +11,14 @@ Context::~Context()
     }
 }
 
+void Context::pushSubContext(Context& context)
+{
+    this->entries.push_back({&context, typeid(Context), nullptr, nullptr});
+}
+
 void Context::pushAny(std::type_index type, void* data, void (*destructor)(void*))
 {
-    entries.push_back({type, data, destructor});
+    entries.push_back({nullptr, type, data, destructor});
 }
 
 void Context::pop()
@@ -24,14 +29,33 @@ void Context::pop()
 
 void* Context::getAny(std::type_index type)
 {
+    auto res = this->tryGetAny(type);
+    if (res == nullptr)
+    {
+        CUBOS_CRITICAL("Type '{}' requested in serialization context, but not present", type.name());
+        abort();
+    }
+
+    return res;
+}
+
+void* Context::tryGetAny(std::type_index type)
+{
     for (auto it = entries.rbegin(); it != entries.rend(); ++it)
     {
-        if (it->type == type)
+        if (it->subContext != nullptr)
+        {
+            auto res = it->subContext->tryGetAny(type);
+            if (res != nullptr)
+            {
+                return res;
+            }
+        }
+        else if (it->type == type)
         {
             return it->data;
         }
     }
 
-    CUBOS_CRITICAL("Type '{}' requested in serialization context, but not present", type.name());
-    abort();
+    return nullptr;
 }
