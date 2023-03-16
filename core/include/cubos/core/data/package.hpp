@@ -3,6 +3,7 @@
 
 #include <cubos/core/data/serializer.hpp>
 #include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/log.hpp>
 
 #include <variant>
 #include <stack>
@@ -15,19 +16,6 @@ namespace cubos::core::data
         class Packager;
         class Unpackager;
     } // namespace impl
-
-    class Package;
-
-    /// Serializes a package. It is guaranteed that if a package was packaged
-    /// from a certain type, then its serialized data can be deserialized back
-    /// to that type.
-    ///
-    /// Packages can't be deserialized since there's no way to know what type
-    /// they were serialized from.
-    /// @param serializer The serializer to use.
-    /// @param pkg The package to serialize.
-    /// @param name The name of the package.
-    void serialize(Serializer& serializer, const Package& pkg, const char* name);
 
     /// @brief A utility object which is capable of storing the data of any trivially
     /// serializable object. One way to understand this class is to think of it
@@ -94,20 +82,26 @@ namespace cubos::core::data
         /// Packages serializable data and returns the result.
         /// @tparam T The type of the data to package.
         /// @param data The data to package.
+        /// @param context Optional context to use when packaging the data.
         template <typename T>
-        static Package from(const T& value);
+        static inline Package from(const T& data, Context* context = nullptr)
+        {
+            Package pkg;
+            pkg.set(data, context);
+            return std::move(pkg);
+        }
 
-        /// Packages the specified data into this package. This will change
-        /// the type of the package. This may be a problem in some cases.
-        /// For example, if an uint8_t is packaged, then set to a
-        /// uint16_t, and then binary serialized, it won't be deserializable
-        /// back to an uint8_t (only to a uint16_t). One way to avoid this
-        /// problem is to use Package::change instead.
+        /// Packages the specified data into this package. This will change the type of the
+        /// package. This may be a problem in some cases. For example, if an uint8_t is packaged,
+        /// then set to a uint16_t, and then binary serialized, it won't be deserializable back to
+        /// an uint8_t (only to a uint16_t). One way to avoid this problem is to use
+        /// `Package::change` instead.
         /// @see Package::change
         /// @tparam T The type of the data to package.
         /// @param data The data to package.
+        /// @param context Optional context to use when packaging the data.
         template <typename T>
-        void set(const T& data);
+        inline void set(const T& data, Context* context = nullptr);
 
         /// Packages the specified int64_t into this package, without changing
         /// the type of the package. If the types aren't compatible, this will
@@ -158,19 +152,30 @@ namespace cubos::core::data
         /// created from a certain type to the same type never fails.
         /// @tparam T The type of the data to unpackage.
         /// @param data The data to write to.
+        /// @param context Optional context to use when unpackaging the data.
         /// @returns True if the unpackaging succeeded, false otherwise.
         template <typename T>
-        bool into(T& data) const;
+        inline bool into(T& data, Context* context = nullptr) const;
 
         /// Alternative to Package::into for types which are default
         /// constructible. Unpackages the package and returns the data, and
         /// aborts if the type isn't the expected. Should only be used when
         /// you're sure the type is correct.
         /// @tparam T The type of the data to unpackage.
+        /// @param context Optional context to use when unpackaging the data.
         /// @returns The data.
         template <typename T>
-        requires std::default_initializable<T> T get()
-        const;
+        requires std::default_initializable<T>
+        inline T get(Context* context = nullptr) const
+        {
+            T data;
+            if (!this->into(data, context))
+            {
+                CUBOS_CRITICAL("Couldn't unpack package into type {}", typeid(T).name());
+                abort();
+            }
+            return data;
+        }
 
         /// @returns The type of the packaged data.
         Type type() const;
@@ -349,36 +354,22 @@ namespace cubos::core::data
     // Implementation.
 
     template <typename T>
-    inline Package Package::from(const T& data)
+    inline void Package::set(const T& data, Context* context)
     {
-        Package pkg;
-        pkg.set(data);
-        return std::move(pkg);
+        auto packager = impl::Packager(*this);
+        packager.context().pushSubContext(*context);
+        packager.write(data, nullptr);
     }
 
     template <typename T>
-    inline void Package::set(const T& data)
-    {
-        impl::Packager(*this).write(data, nullptr);
-    }
-
-    template <typename T>
-    inline bool Package::into(T& data) const
+    inline bool Package::into(T& data, Context* context) const
     {
         auto unpackager = impl::Unpackager(*this);
+        unpackager.context().pushSubContext(*context);
         unpackager.read(data);
         return !unpackager.failed();
     }
 
-    template <typename T>
-    requires std::default_initializable<T>
-    inline T Package::get() const
-    {
-        T data;
-        if (!this->into(data))
-            abort();
-        return data;
-    }
 } // namespace cubos::core::data
 
 #endif // CUBOS_CORE_DATA_PACKAGE_HPP
