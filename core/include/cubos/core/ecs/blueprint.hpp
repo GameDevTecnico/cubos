@@ -8,6 +8,8 @@
 #include <cubos/core/data/serialization_map.hpp>
 #include <cubos/core/data/handle.hpp>
 
+#include <cubos/core/memory/buffer_stream.hpp>
+
 namespace cubos::core::ecs
 {
     /// Stores a bundle of entities and their respective components, which can be easily spawned into a world.
