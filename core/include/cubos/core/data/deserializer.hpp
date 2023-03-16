@@ -1,92 +1,52 @@
 #ifndef CUBOS_CORE_DATA_DESERIALIZER_HPP
 #define CUBOS_CORE_DATA_DESERIALIZER_HPP
 
-#include <cubos/core/memory/stream.hpp>
-#include <cubos/core/log.hpp>
-
-#include <string>
 #include <vector>
 #include <unordered_map>
-#include <concepts>
-
-#include <glm/vec2.hpp>
-#include <glm/vec3.hpp>
-#include <glm/vec4.hpp>
-#include <glm/gtc/quaternion.hpp>
+#include <string>
 
 namespace cubos::core::data
 {
     class Deserializer;
 
-    /// Concept for deserializable objects which are trivial to deserialize.
+    /// Deserializes the given object using the given deserializer.
+    /// Deserializable objects must implement a specialization (or overload) of this function.
+    /// An implementation for types with a `deserialize` method is provided.
+    ///
+    /// @tparam T The type of the object to deserialize.
+    /// @param des The deserializer to use.
+    /// @param obj The object to deserialize.
     template <typename T>
-    concept TriviallyDeserializable = requires(Deserializer& s, T& obj)
-    {
-        {
-            deserialize(s, obj)
-            } -> std::same_as<void>;
-    };
+    void deserialize(Serializer& des, T& obj);
 
-    /// Concept for deserializable objects which require a context to be deserialized.
-    template <typename T, typename TCtx>
-    concept ContextDeserializable = requires(Deserializer& s, T& obj, TCtx&& ctx)
-    {
-        {
-            deserialize(s, obj, ctx)
-            } -> std::same_as<void>;
-    };
-
-    /// Concept for deserializable objects which are trivial to deserialize and define a deserialize method.
-    template <typename T>
-    concept TriviallyDeserializableWithMethod = requires(Deserializer& s, T& obj)
-    {
-        {
-            obj.deserialize(s)
-            } -> std::same_as<void>;
-    };
-
-    /// Concept for deserializable objects which require a context to be deserialized and define a deserialize method.
-    template <typename T, typename TCtx>
-    concept ContextDeserializableWithMethod = requires(Deserializer& s, T& obj, TCtx&& ctx)
-    {
-        {
-            obj.deserialize(s, ctx)
-            } -> std::same_as<void>;
-    };
-
-    // Define deserialize functions for trivially deserializable types which define a deserialize method.
-    template <typename T>
-    requires TriviallyDeserializableWithMethod<T>
-    inline void deserialize(Deserializer& s, T& obj)
-    {
-        obj.deserialize(s);
-    }
-
-    // Define deserialize functions for context deserializable types which define a deserialize method.
-    template <typename T, typename TCtx>
-    requires ContextDeserializableWithMethod<T, TCtx>
-    inline void deserialize(Deserializer& s, T& obj, TCtx&& ctx)
-    {
-        obj.deserialize(s, ctx);
-    }
-
-    // Define deserialize functions which requires extracting the context from a tuple.
-    template <typename T, typename TCtx, typename U>
-    requires ContextDeserializable<T, TCtx>
-    inline void deserialize(Deserializer& s, T& obj, std::tuple<TCtx, U> ctx)
-    {
-        deserialize(s, obj, std::get<TCtx>(ctx));
-    }
-
-    // Define deserialize functions which requires extracting the context from a tuple.
-    template <typename T, typename TCtx, typename U>
-    requires ContextDeserializable<T, TCtx>
-    inline void deserialize(Deserializer& s, T& obj, std::tuple<U, TCtx> ctx)
-    {
-        deserialize(s, obj, std::get<TCtx>(ctx));
-    }
-
-    /// Abstract class for deserializing data.
+    /// Abstract class for deserializing data in a format-agnostic way.
+    /// Each deserializer implementation is responsible for implementing its own primitive
+    /// deserialization methods: `readI8`, `readString`, etc.
+    ///
+    /// @details More complex types can be deserialized by implementing a specialization of the
+    /// `cubos::core::data::deserialize` function:
+    ///
+    ///     struct MyType
+    ///     {
+    ///         int32_t a;
+    ///     };
+    ///
+    ///     // In the corresponding .cpp file.
+    ///     void cubos::core::data::deserialize<MyType>(Deserializer& d, MyType& obj)
+    ///     {
+    ///         d.read(obj.a, "a");
+    ///     }
+    ///
+    ///     // Alternatively, the type can define a `deserialize` method.
+    ///
+    ///     class MyType
+    ///     {
+    ///     public:
+    ///         void deserialize(Deserializer& d);
+    ///
+    ///     private:
+    ///         int32_t a;
+    ///     };
     class Deserializer
     {
     public:
@@ -94,95 +54,96 @@ namespace cubos::core::data
         virtual ~Deserializer() = default;
 
         /// Deserializes a signed 8 bit integer.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readI8(int8_t& value) = 0;
 
         /// Deserializes a signed 16 bit integer.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readI16(int16_t& value) = 0;
 
         /// Deserializes a signed 32 bit integer.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readI32(int32_t& value) = 0;
 
         /// Deserializes a signed 64 bit integer.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readI64(int64_t& value) = 0;
 
         /// Deserializes an unsigned 8 bit integer.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readU8(uint8_t& value) = 0;
 
         /// Deserializes an unsigned 16 bit integer.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readU16(uint16_t& value) = 0;
 
         /// Deserializes an unsigned 32 bit integer.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readU32(uint32_t& value) = 0;
 
         /// Deserializes an unsigned 64 bit integer.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readU64(uint64_t& value) = 0;
 
         /// Deserializes a float.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readF32(float& value) = 0;
 
         /// Deserializes a double.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readF64(double& value) = 0;
 
         /// Deserializes a boolean.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readBool(bool& value) = 0;
 
         /// Deserializes a string.
+        /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
         virtual void readString(std::string& value) = 0;
 
-        /// Deserializes a object.
+        /// Deserializes an object.
+        /// The fail bit is set if the deserialization fails.
         /// @tparam T The type of the object.
         /// @param obj The object to deserialize.
         template <typename T>
-        requires TriviallyDeserializable<T>
         void read(T& obj);
 
-        /// Deserializes a object.
-        /// @tparam T The type of the object.
-        /// @tparam TCtx The type of the context.
-        /// @param obj The object to deserialize.
-        /// @param ctx The context required to deserialize.
-        template <typename T, typename TCtx>
-        requires(TriviallyDeserializable<T> && !ContextDeserializable<T, TCtx>) void read(T& obj, TCtx&& ctx);
-
-        /// Deserializes a object.
-        /// @tparam T The type of the object.
-        /// @tparam TCtx The type of the context.
-        /// @param obj The object to deserialize.
-        /// @param ctx The context required to deserialize.
-        template <typename T, typename TCtx>
-        requires ContextDeserializable<T, TCtx>
-        void read(T& obj, TCtx&& ctx);
-
         /// Indicates that a object is currently being deserialized.
+        /// The fail bit is set on failure.
         virtual void beginObject() = 0;
 
         /// Indicates that a object is no longer being deserialized.
+        /// The fail bit is set on failure.
         virtual void endObject() = 0;
 
         /// Indicates that an array is currently being deserialized.
-        /// Returns the length of the array.
+        /// The fail bit is set on failure.
+        /// @returns The length of the array.
         virtual size_t beginArray() = 0;
 
         /// Indicates that an array is no longer being deserialized.
+        /// The fail bit is set on failure.
         virtual void endArray() = 0;
 
         /// Indicates that a dictionary is being deserialized.
-        /// Returns the length of the dictionary.
+        /// The fail bit is set on failure.
+        /// @returns The length of the dictionary (always 0 on failure).
         virtual size_t beginDictionary() = 0;
 
         /// Indicates that a dictionary is no longer being deserialized.
+        /// The fail bit is set on failure.
         virtual void endDictionary() = 0;
 
         /// Checks if the deserializer has failed.
