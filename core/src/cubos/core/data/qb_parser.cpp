@@ -1,6 +1,8 @@
 #include <cubos/core/data/qb_parser.hpp>
 #include <cubos/core/memory/endianness.hpp>
 
+#include <cubos/core/log.hpp>
+
 bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream& stream)
 {
     uint8_t version[4] = {0, 0, 0, 0};
