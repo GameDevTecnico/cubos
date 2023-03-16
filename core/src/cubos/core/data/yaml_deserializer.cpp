@@ -1,5 +1,7 @@
 #include <cubos/core/data/yaml_deserializer.hpp>
 
+#include <cassert>
+
 using namespace cubos::core::data;
 
 YAMLDeserializer::YAMLDeserializer(memory::Stream& stream) : stream(stream)
