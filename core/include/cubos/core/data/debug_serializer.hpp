@@ -1,13 +1,28 @@
 #ifndef CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP
 #define CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP
 
-#include <cubos/core/memory/stream.hpp>
 #include <cubos/core/data/serializer.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
+
+#include <fmt/format.h>
 
 #include <stack>
 
 namespace cubos::core::data
 {
+    /// Used to wrap a value to be printed using the debug serializer.
+    /// @tparam T The type of the value to wrap.
+    template <typename T>
+    struct Debug
+    {
+        /// @param value The value to debug.
+        inline Debug(const T& value) : value(value)
+        {
+        }
+
+        const T& value;
+    };
+
     /// Implementation of the abstract Serializer class for debugging purposes.
     /// This class is used internally by the logging functions.
     class DebugSerializer : public Serializer
@@ -67,5 +82,46 @@ namespace cubos::core::data
         bool typeNames;          ///< Whether to print the type names.
     };
 } // namespace cubos::core::data
+
+// Add a formatter for Debug<T>.
+
+/// @cond
+template <typename T>
+struct fmt::formatter<cubos::core::data::Debug<T>> : formatter<string_view>
+{
+    bool pretty = false; ///< Whether to pretty print the data.
+    bool types = false;  ///< Whether to print the type name.
+
+    inline constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin())
+    {
+        auto it = ctx.begin(), end = ctx.end();
+        while (it != end)
+        {
+            if (*it == 'p')
+                this->pretty = true;
+            else if (*it == 't')
+                this->types = true;
+            else if (*it != '}')
+                throw format_error("invalid format");
+            else
+                break;
+            ++it;
+        }
+        return it;
+    }
+
+    template <typename FormatContext>
+    inline auto format(const cubos::core::data::Debug<T>& dbg, FormatContext& ctx) -> decltype(ctx.out())
+    {
+        auto stream = cubos::core::memory::BufferStream(32);
+        cubos::core::data::DebugSerializer serializer(stream, this->pretty, this->types);
+        serializer.write(dbg.value, nullptr);
+        stream.put('\0');
+        // Skip the '?: ' prefix.
+        auto result = std::string(static_cast<const char*>(stream.getBuffer()) + 3);
+        return formatter<string_view>::format(string_view(result), ctx);
+    }
+};
+/// @endcond
 
 #endif // CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP
