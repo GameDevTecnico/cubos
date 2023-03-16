@@ -70,13 +70,13 @@ void cubos::core::data::deserialize<uint64_t>(Deserializer& des, uint64_t& val)
 template <>
 void cubos::core::data::deserialize<float>(Deserializer& des, float& val)
 {
-    des.readFloat(val);
+    des.readF32(val);
 }
 
 template <>
 void cubos::core::data::deserialize<double>(Deserializer& des, double& val)
 {
-    des.readDouble(val);
+    des.readF64(val);
 }
 
 template <>
