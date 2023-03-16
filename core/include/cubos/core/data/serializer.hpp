@@ -3,9 +3,9 @@
 
 #include <cubos/core/data/context.hpp>
 
+#include <cstdint>
 #include <vector>
 #include <unordered_map>
-#include <string>
 
 namespace cubos::core::data
 {

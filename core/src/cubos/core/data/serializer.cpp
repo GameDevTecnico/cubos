@@ -5,6 +5,8 @@
 #include <glm/vec4.hpp>
 #include <glm/gtc/quaternion.hpp>
 
+#include <string>
+
 using namespace cubos::core::data;
 
 Serializer::Serializer()
@@ -165,6 +167,6 @@ IMPL_SERIALIZE_GLM(uint8_t)
 IMPL_SERIALIZE_GLM(uint16_t)
 IMPL_SERIALIZE_GLM(uint32_t)
 IMPL_SERIALIZE_GLM(uint64_t)
-IMPL_SERIALIZE_GLM(bool)
 IMPL_SERIALIZE_GLM(float)
 IMPL_SERIALIZE_GLM(double)
+IMPL_SERIALIZE_GLM(bool)
