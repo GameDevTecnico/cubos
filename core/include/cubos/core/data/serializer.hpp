@@ -45,7 +45,8 @@ namespace cubos::core::data
     ///     class MyType
     ///     {
     ///     public:
-    ///         void serialize(Serializer& s, const char* name)
+    ///         void serialize(Serializer& s, const char* name);
+    ///
     ///     private:
     ///         int32_t a;
     ///     };
