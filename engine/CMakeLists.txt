@@ -35,6 +35,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/plugins/imgui.cpp"
 
     "src/cubos/engine/plugins/tools/settings_inspector.cpp"
+    "src/cubos/engine/plugins/tools/entity_selector.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -71,6 +72,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/plugins/imgui.hpp"
 
     "include/cubos/engine/plugins/tools/settings_inspector.hpp"
+    "include/cubos/engine/plugins/tools/entity_selector.hpp"
 )
 
 # Create cubos engine
