@@ -190,6 +190,18 @@ namespace cubos::core::data
         obj.serialize(ser, name);
     }
 
+    /// Overload for serializing char arrays.
+    /// Necessary because literal strings are treated as char arrays by the compiler.
+    /// Without this overload, the linker would fail.
+    /// @param ser The serializer.
+    /// @param str The string to serialize.
+    /// @param name The name of the string (optional).
+    template <size_t N>
+    inline void serialize(Serializer& ser, char const (&str)[N], const char* name)
+    {
+        ser.writeString(str, name);
+    }
+
     /// Overload for serializing std::vector.
     /// @tparam T The type of the vector.
     /// @param ser The serializer.
