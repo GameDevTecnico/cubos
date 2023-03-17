@@ -1,10 +1,17 @@
 #include <cubos/core/ecs/entity_manager.hpp>
 
-using namespace cubos::core::ecs;
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serialization_map.hpp>
 
-void cubos::core::data::serialize(Serializer& serializer, const ecs::Entity& entity,
-                                  const SerializationMap<ecs::Entity, std::string>& map, const char* name)
+using namespace cubos::core::ecs;
+using namespace cubos::core::data;
+
+template <>
+void cubos::core::data::serialize<Entity>(Serializer& serializer, const Entity& entity, const char* name)
 {
+    auto& map = serializer.context().get<SerializationMap<Entity, std::string>>();
+
     if (entity.isNull())
     {
         serializer.write("null", name);
@@ -15,9 +22,11 @@ void cubos::core::data::serialize(Serializer& serializer, const ecs::Entity& ent
     }
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, ecs::Entity& entity,
-                                    const SerializationMap<ecs::Entity, std::string>& map)
+template <>
+void cubos::core::data::deserialize<Entity>(Deserializer& deserializer, Entity& entity)
 {
+    auto& map = deserializer.context().get<SerializationMap<Entity, std::string>>();
+
     std::string name;
     deserializer.read(name);
     if (name == "null")
