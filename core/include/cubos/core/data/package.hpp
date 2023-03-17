@@ -242,10 +242,11 @@ namespace cubos::core::data
         /// @returns The string representation of the type.
         static const char* typeToString(Type type);
 
+        void serialize(Serializer& ser, const char* name) const;
+
     private:
         friend impl::Packager;
         friend impl::Unpackager;
-        friend void serialize(Serializer&, const Package&, const char*);
 
         /// The packaged data.
         Data data;
