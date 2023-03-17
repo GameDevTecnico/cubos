@@ -8,41 +8,8 @@
 #include <set>
 #include <unordered_map>
 
-#include <cubos/core/data/serializer.hpp>
-#include <cubos/core/data/deserializer.hpp>
-#include <cubos/core/data/serialization_map.hpp>
-
 namespace cubos::core::ecs
 {
-    class Entity;
-}
-
-namespace cubos::core::data
-{
-    /// Serializes an entity.
-    /// @param serializer The serializer to use.
-    /// @param entity The entity to serialize.
-    /// @param map Map used to convert entity handles to the external representation.
-    /// @param name The name of the entity.
-    void serialize(Serializer& serializer, const ecs::Entity& entity,
-                   const SerializationMap<ecs::Entity, std::string>& map, const char* name);
-
-    /// Deserializes an entity.
-    /// @param deserializer The deserializer to use.
-    /// @param entity The entity to deserialize.
-    /// @param map Map used to convert from the external representation to entity handles.
-    void deserialize(Deserializer& deserializer, ecs::Entity& entity,
-                     const SerializationMap<ecs::Entity, std::string>& map);
-} // namespace cubos::core::data
-
-namespace cubos::core::ecs
-{
-    namespace impl
-    {
-        template <typename T>
-        class QueryFetcher;
-    }
-
     /// Handle used to identify an Entity.
     class Entity
     {
