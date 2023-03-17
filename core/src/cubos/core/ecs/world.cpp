@@ -33,7 +33,7 @@ void World::destroy(Entity entity)
     CUBOS_DEBUG("Destroyed entity {}", entity.index);
 }
 
-data::Package World::pack(Entity entity, data::Handle::SerContext handleCtx) const
+data::Package World::pack(Entity entity, data::Context& context) const
 {
     Entity::Mask mask = this->entityManager.getMask(entity);
 
@@ -43,14 +43,14 @@ data::Package World::pack(Entity entity, data::Handle::SerContext handleCtx) con
         if (mask.test(i))
         {
             auto name = Registry::name(this->componentManager.getType(i));
-            pkg.fields().push_back({name, this->componentManager.pack(entity.index, i, directMap, handleCtx)});
+            pkg.fields().push_back({name, this->componentManager.pack(entity.index, i, context)});
         }
     }
 
     return pkg;
 }
 
-bool World::unpack(Entity entity, const data::Package& package, data::Handle::DesContext handleCtx)
+bool World::unpack(Entity entity, const data::Package& package, data::Context& context)
 {
     if (package.type() != data::Package::Type::Object)
     {
@@ -72,7 +72,7 @@ bool World::unpack(Entity entity, const data::Package& package, data::Handle::De
         }
 
         auto id = this->componentManager.getIDFromIndex(index);
-        if (this->componentManager.unpack(entity.index, id, field.second, directMap, handleCtx))
+        if (this->componentManager.unpack(entity.index, id, field.second, context))
         {
             mask.set(id);
         }
