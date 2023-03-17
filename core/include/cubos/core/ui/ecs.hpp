@@ -7,14 +7,14 @@ namespace cubos::core::ui
 {
     /// ECS system which allows the user to inspect the entities and components in an ECS world.
     /// @param world World to show.
-    /// @param handleCtx Context for serializing handles.
-    void showWorld(const ecs::World& world, data::Handle::SerContext handleCtx);
+    /// @param context Context for serializing the world.
+    void showWorld(const ecs::World& world, data::Context& context);
 
     /// ECS system which allows the user to inspect and edit the entities and components in an ECS world.
     /// @param world World to edit.
-    /// @param handleSerCtx Context for serializing handles.
-    /// @param handleDesCtx Context for deserializing handles.
-    void editWorld(ecs::World& world, data::Handle::SerContext handleSerCtx, data::Handle::DesContext handleDesCtx);
+    /// @param serContext Context for serializing the world.
+    /// @param desContext Context for deserializing the world.
+    void editWorld(ecs::World& world, data::Context& serContext, data::Context& desContext);
 } // namespace cubos::core::ui
 
 #endif // CUBOS_CORE_UI_ECS_HPP
