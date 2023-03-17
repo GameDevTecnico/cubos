@@ -316,77 +316,78 @@ const char* Package::typeToString(Type type)
     }
 }
 
-void cubos::core::data::serialize(Serializer& serializer, const Package& pkg, const char* name)
+void Package::serialize(Serializer& serializer, const char* name) const
 {
-    switch (pkg.type())
+    switch (this->type())
     {
     case Package::Type::None:
         abort(); // Empty packages can't be serialized.
     case Package::Type::I8:
-        serializer.writeI8(std::get<int8_t>(pkg.data), name);
+        serializer.writeI8(std::get<int8_t>(this->data), name);
         break;
     case Package::Type::I16:
-        serializer.writeI16(std::get<int16_t>(pkg.data), name);
+        serializer.writeI16(std::get<int16_t>(this->data), name);
         break;
     case Package::Type::I32:
-        serializer.writeI32(std::get<int32_t>(pkg.data), name);
+        serializer.writeI32(std::get<int32_t>(this->data), name);
         break;
     case Package::Type::I64:
-        serializer.writeI64(std::get<int64_t>(pkg.data), name);
+        serializer.writeI64(std::get<int64_t>(this->data), name);
         break;
     case Package::Type::U8:
-        serializer.writeU8(std::get<uint8_t>(pkg.data), name);
+        serializer.writeU8(std::get<uint8_t>(this->data), name);
         break;
     case Package::Type::U16:
-        serializer.writeU16(std::get<uint16_t>(pkg.data), name);
+        serializer.writeU16(std::get<uint16_t>(this->data), name);
         break;
     case Package::Type::U32:
-        serializer.writeU32(std::get<uint32_t>(pkg.data), name);
+        serializer.writeU32(std::get<uint32_t>(this->data), name);
         break;
     case Package::Type::U64:
-        serializer.writeU64(std::get<uint64_t>(pkg.data), name);
+        serializer.writeU64(std::get<uint64_t>(this->data), name);
         break;
     case Package::Type::F32:
-        serializer.writeF32(std::get<float>(pkg.data), name);
+        serializer.writeF32(std::get<float>(this->data), name);
         break;
     case Package::Type::F64:
-        serializer.writeF64(std::get<double>(pkg.data), name);
+        serializer.writeF64(std::get<double>(this->data), name);
         break;
     case Package::Type::Bool:
-        serializer.writeBool(std::get<bool>(pkg.data), name);
+        serializer.writeBool(std::get<bool>(this->data), name);
         break;
     case Package::Type::String:
-        serializer.writeString(std::get<std::string>(pkg.data).c_str(), name);
+        serializer.writeString(std::get<std::string>(this->data).c_str(), name);
         break;
     case Package::Type::Object: {
-        auto& fields = std::get<Package::Fields>(pkg.data);
+        auto& fields = std::get<Package::Fields>(this->data);
         serializer.beginObject(name);
         for (auto& field : fields)
         {
-            serialize(serializer, field.second, field.first.c_str());
+            serializer.write(field.second, field.first.c_str());
         }
         serializer.endObject();
         break;
     }
     case Package::Type::Array: {
-        auto& elements = std::get<Package::Elements>(pkg.data);
+        auto& elements = std::get<Package::Elements>(this->data);
         serializer.beginArray(elements.size(), name);
         for (auto& element : elements)
         {
-            serialize(serializer, element, nullptr);
+            serializer.write(element, nullptr);
         }
         serializer.endArray();
         break;
     }
     case Package::Type::Dictionary: {
-        auto& dictionary = std::get<Package::Dictionary>(pkg.data);
+        auto& dictionary = std::get<Package::Dictionary>(this->data);
         serializer.beginDictionary(dictionary.size(), name);
         for (auto& entry : dictionary)
         {
-            serialize(serializer, entry.first, nullptr);
-            serialize(serializer, entry.second, nullptr);
+            serializer.write(entry.first, nullptr);
+            serializer.write(entry.second, nullptr);
         }
         serializer.endDictionary();
+        break;
     }
     }
 }
