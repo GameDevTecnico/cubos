@@ -1,6 +1,21 @@
 #include <cubos/core/settings.hpp>
 
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/deserializer.hpp>
+
 using namespace cubos::core;
+
+template <>
+void data::serialize<Settings>(Serializer& ser, const Settings& settings, const char* name)
+{
+    ser.write(settings.getValues(), name);
+}
+
+template <>
+void data::deserialize<Settings>(Deserializer& des, Settings& settings)
+{
+    des.read(settings.getValues());
+}
 
 void Settings::clear()
 {
@@ -67,22 +82,12 @@ void Settings::merge(const Settings& settingsToMerge)
     }
 }
 
-std::unordered_map<std::string, std::string>::iterator Settings::begin()
+const std::unordered_map<std::string, std::string>& Settings::getValues() const
 {
-    return this->values.begin();
+    return this->values;
 }
 
-std::unordered_map<std::string, std::string>::iterator Settings::end()
+std::unordered_map<std::string, std::string>& Settings::getValues()
 {
-    return this->values.end();
-}
-
-void cubos::core::data::serialize(Serializer& serializer, const Settings& settings, const char* name)
-{
-    serializer.write(settings.values, name);
-}
-
-void cubos::core::data::deserialize(Deserializer& deserializer, Settings& settings)
-{
-    deserializer.read(settings.values);
+    return this->values;
 }
