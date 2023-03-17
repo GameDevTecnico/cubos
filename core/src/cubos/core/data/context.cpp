@@ -7,7 +7,10 @@ Context::~Context()
 {
     for (auto& entry : entries)
     {
-        entry.destructor(entry.data);
+        if (entry.subContext == nullptr)
+        {
+            entry.destructor(entry.data);
+        }
     }
 }
 
@@ -27,7 +30,7 @@ void Context::pop()
     entries.pop_back();
 }
 
-void* Context::getAny(std::type_index type)
+void* Context::getAny(std::type_index type) const
 {
     auto res = this->tryGetAny(type);
     if (res == nullptr)
@@ -39,7 +42,7 @@ void* Context::getAny(std::type_index type)
     return res;
 }
 
-void* Context::tryGetAny(std::type_index type)
+void* Context::tryGetAny(std::type_index type) const
 {
     for (auto it = entries.rbegin(); it != entries.rend(); ++it)
     {
