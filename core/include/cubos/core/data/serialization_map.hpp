@@ -16,6 +16,7 @@ namespace cubos::core::data
     public:
         ~SerializationMap() = default;
         SerializationMap(SerializationMap&&) = default;
+        SerializationMap(const SerializationMap&) = default;
 
         inline SerializationMap() : usingFunctions(false)
         {
@@ -122,8 +123,6 @@ namespace cubos::core::data
         }
 
     private:
-        SerializationMap(const SerializationMap&) = delete;
-
         bool usingFunctions;                           ///< True if the map is using functions instead of keeping a map.
         std::function<bool(const R&, I&)> serialize;   ///< Function used to serialize references.
         std::function<bool(R&, const I&)> deserialize; ///< Function used to deserialize references.
