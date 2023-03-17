@@ -3,9 +3,7 @@
 using namespace cubos::core;
 using namespace cubos::core::ecs;
 
-bool Registry::create(const std::string& name, data::Deserializer& des, Blueprint& blueprint,
-                      const data::SerializationMap<Entity, std::string>& map, data::Handle::DesContext handleCtx,
-                      Entity id)
+bool Registry::create(const std::string& name, data::Deserializer& des, Blueprint& blueprint, Entity id)
 {
     auto& creators = Registry::creators();
 
@@ -15,19 +13,19 @@ bool Registry::create(const std::string& name, data::Deserializer& des, Blueprin
         return false;
     }
 
-    return creators.at(name)(des, blueprint, map, handleCtx, id);
+    return creators.at(name)(des, blueprint, id);
 }
 
 const std::string& Registry::name(std::type_index index)
 {
     auto& names = Registry::names();
-    auto it = names.find(index);
-    if (it == names.end())
+    if (auto it = names.at(index))
     {
-        CUBOS_CRITICAL("Component type '{}' not registered", index.name());
-        abort();
+        return *it;
     }
-    return it->second;
+
+    CUBOS_CRITICAL("Component type '{}' not registered", index.name());
+    abort();
 }
 
 std::type_index Registry::index(const std::string& name)
@@ -50,8 +48,8 @@ std::unordered_map<std::string, Registry::Creator>& Registry::creators()
     return creators;
 }
 
-std::unordered_map<std::type_index, std::string>& Registry::names()
+memory::TypeMap<std::string>& Registry::names()
 {
-    static std::unordered_map<std::type_index, std::string> names;
+    static memory::TypeMap<std::string> names;
     return names;
 }
