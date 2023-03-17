@@ -62,8 +62,6 @@ void CommandBuffer::destroy(Entity entity)
     this->destroyed.insert(entity);
 }
 
-#include <iostream>
-
 BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
 {
     data::SerializationMap<Entity, std::string> map;
@@ -72,15 +70,11 @@ BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
         map.add(this->create().entity(), blueprint.map.getId(Entity(i, 0)));
     }
 
-    auto desHandleCtx = [&](data::Deserializer& des, data::Handle& handle) {
-        uint64_t id;
-        des.read(id);
-        handle = blueprint.handles.at(id);
-    };
-
+    data::Context context;
+    context.push(map);
     for (auto& buf : blueprint.buffers)
     {
-        buf.second->addAll(*this, map, desHandleCtx);
+        buf.second->addAll(*this, context);
     }
 
     return BlueprintBuilder(std::move(map), *this);
