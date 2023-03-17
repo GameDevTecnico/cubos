@@ -83,15 +83,14 @@ namespace cubos::core::data
         des.endObject();
     }
 
-    void serialize(Serializer& ser, const Parent& parent, const SerializationMap<ecs::Entity, std::string>& map,
-                   const char* name)
+    void serialize(Serializer& ser, const Parent& parent, const char* name)
     {
-        ser.write(parent.entity, map, name);
+        ser.write(parent.entity, name);
     }
 
-    void deserialize(Deserializer& des, Parent& parent, const SerializationMap<ecs::Entity, std::string>& map)
+    void deserialize(Deserializer& des, Parent& parent)
     {
-        des.read(parent.entity, map);
+        des.read(parent.entity);
     }
 } // namespace cubos::core::data
 
@@ -163,6 +162,10 @@ int main()
 
     ecs::Dispatcher dispatcher;
     auto cmds = ecs::CommandBuffer(world);
+
+    dispatcher.addSystem(spawner);
+    dispatcher.systemSetBeforeTag("PreProcess");
+
     dispatcher.addTag("Main");
     dispatcher.addSystem(mySystem);
     dispatcher.systemAddTag("Main");
