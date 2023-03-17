@@ -1,27 +1,11 @@
 #ifndef CUBOS_CORE_SETTINGS_HPP
 #define CUBOS_CORE_SETTINGS_HPP
 
-#include <cubos/core/data/serializer.hpp>
-#include <cubos/core/data/deserializer.hpp>
+#include <string>
+#include <unordered_map>
 
 namespace cubos::core
 {
-    class Settings;
-
-    namespace data
-    {
-        /// Serializes settings.
-        /// @param serializer The serializer to use.
-        /// @param settings The settings to serialize.
-        /// @param name The name of the settings.
-        void serialize(Serializer& serializer, const Settings& settings, const char* name);
-
-        /// Deserializes settings.
-        /// @param deserializer The deserializer to use.
-        /// @param settings The settings to deserialize.
-        void deserialize(Deserializer& deserializer, Settings& settings);
-    } // namespace data
-
     /// Object used to manage settings.
     class Settings final
     {
@@ -89,16 +73,13 @@ namespace cubos::core
         /// @param settingsToMerge The settings to be merged to this instance.
         void merge(const Settings& settingsToMerge);
 
-        /// Returns an iterator pointing to the first element in the settings list.
-        std::unordered_map<std::string, std::string>::iterator begin();
+        /// @returns The underlying unordered_map with the settings.
+        const std::unordered_map<std::string, std::string>& getValues() const;
 
-        /// Returns an iterator pointing to the last element in the settings list.
-        std::unordered_map<std::string, std::string>::iterator end();
+        /// @returns The underlying unordered_map with the settings.
+        std::unordered_map<std::string, std::string>& getValues();
 
     private:
-        friend void data::serialize(data::Serializer&, const Settings&, const char*);
-        friend void data::deserialize(data::Deserializer&, Settings&);
-
         std::unordered_map<std::string, std::string> values;
     };
 } // namespace cubos::core
