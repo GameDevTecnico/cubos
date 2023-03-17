@@ -3,6 +3,7 @@
 
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/memory/type_map.hpp>
 
 namespace cubos::core::ecs
 {
@@ -17,13 +18,9 @@ namespace cubos::core::ecs
         /// @param name The name of the component.
         /// @param des The deserializer to read the component data from.
         /// @param blueprint The blueprint to instantiate the component into.
-        /// @param map The serialization map to use.
-        /// @param handleCtx The handle context to use.
         /// @param id The id of the entity the component belongs to.
         /// @returns True if the component type was found and successfully instantiated, false otherwise.
-        static bool create(const std::string& name, data::Deserializer& des, Blueprint& blueprint,
-                           const data::SerializationMap<Entity, std::string>& map, data::Handle::DesContext handleCtx,
-                           Entity id);
+        static bool create(const std::string& name, data::Deserializer& des, Blueprint& blueprint, Entity id);
 
         /// Registers a new component type.
         /// @tparam T The component type to register.
@@ -43,15 +40,13 @@ namespace cubos::core::ecs
 
     private:
         /// Function type for creating components from deserializers.
-        using Creator =
-            std::function<bool(data::Deserializer&, Blueprint&, const data::SerializationMap<Entity, std::string>&,
-                               data::Handle::DesContext, Entity)>;
+        using Creator = std::function<bool(data::Deserializer&, Blueprint&, Entity)>;
 
         /// Accesses the global component creator registry.
         static std::unordered_map<std::string, Creator>& creators();
 
         /// Accesses the global component name registry.
-        static std::unordered_map<std::type_index, std::string>& names();
+        static memory::TypeMap<std::string>& names();
     };
 
     // Implementation.
@@ -63,11 +58,9 @@ namespace cubos::core::ecs
         auto& names = Registry::names();
         assert(creators.find(name) == creators.end());
 
-        creators.emplace(name, [](data::Deserializer& des, Blueprint& blueprint,
-                                  const data::SerializationMap<Entity, std::string>& map,
-                                  data::Handle::DesContext handleCtx, Entity id) {
+        creators.emplace(name, [](data::Deserializer& des, Blueprint& blueprint, Entity id) {
             ComponentType comp;
-            des.read(comp, std::forward_as_tuple(map, handleCtx));
+            des.read(comp);
             if (des.failed())
             {
                 return false;
@@ -79,7 +72,7 @@ namespace cubos::core::ecs
             }
         });
 
-        names.emplace(typeid(ComponentType), name);
+        names.set<ComponentType>(name);
     }
 } // namespace cubos::core::ecs
 
