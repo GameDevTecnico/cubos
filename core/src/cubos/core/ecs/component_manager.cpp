@@ -54,16 +54,12 @@ ComponentManager::Entry::Entry(IStorage* storage) : storage(storage)
     this->mutex = std::make_unique<std::shared_mutex>();
 }
 
-data::Package ComponentManager::pack(uint32_t id, size_t componentId,
-                                     const data::SerializationMap<Entity, std::string>& map,
-                                     data::Handle::SerContext handleCtx) const
+data::Package ComponentManager::pack(uint32_t id, size_t componentId, data::Context& context) const
 {
-    return this->entries[componentId - 1].storage->pack(id, map, handleCtx);
+    return this->entries[componentId - 1].storage->pack(id, context);
 }
 
-bool ComponentManager::unpack(uint32_t id, size_t componentId, const data::Package& package,
-                              const data::SerializationMap<Entity, std::string>& map,
-                              data::Handle::DesContext handleCtx)
+bool ComponentManager::unpack(uint32_t id, size_t componentId, const data::Package& package, data::Context& context)
 {
-    return this->entries[componentId - 1].storage->unpack(id, package, map, handleCtx);
+    return this->entries[componentId - 1].storage->unpack(id, package, context);
 }
