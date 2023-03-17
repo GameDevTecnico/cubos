@@ -19,7 +19,7 @@ namespace cubos::core::data
         /// @tparam T The type of the data.
         /// @param data The data to push.
         template <typename T>
-        inline void push(T&& data)
+        inline void push(T data)
         {
             auto copy = new T(std::forward<T>(data));
             auto destructor = [](void* data) { delete static_cast<T*>(data); };
@@ -47,6 +47,15 @@ namespace cubos::core::data
             return *static_cast<T*>(this->getAny(typeid(T)));
         }
 
+        /// Checks if there is data associated with the given type.
+        /// @tparam T The type of the data.
+        /// @returns True if the data is present, false otherwise.
+        template <typename T>
+        inline bool has() const
+        {
+            return this->tryGetAny(typeid(T)) != nullptr;
+        }
+
     private:
         /// Data associated with either a stored value, or a sub-context.
         struct Entry
@@ -65,13 +74,13 @@ namespace cubos::core::data
         /// Aborts if the data is not present.
         /// @param type The type of the data.
         /// @returns A pointer to the data associated with the given type.
-        void* getAny(std::type_index type);
+        void* getAny(std::type_index type) const;
 
         /// Tries to get the data associated with the given type.
         /// @param type The type of the data.
         /// @returns A pointer to the data associated with the given type, or nullptr if it's not
         /// present.
-        void* tryGetAny(std::type_index type);
+        void* tryGetAny(std::type_index type) const;
 
         std::vector<Entry> entries; ///< Entries in the context.
     };
