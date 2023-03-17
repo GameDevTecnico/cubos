@@ -18,51 +18,51 @@ namespace cubos::core::memory
 
         /// @param key The key to identify the value.
         /// @param value The value to store.
-        inline void set(std::type_index key, V&& value)
+        inline void set(std::type_index key, V value)
         {
             this->map.emplace(key, std::move(value));
         }
 
         /// @param key The key to identify the value.
-        /// @returns The value stored in the map, if any.
-        inline std::optional<V&> at(std::type_index key)
+        /// @returns The value stored in the map, or null if no value is stored.
+        inline V* at(std::type_index key)
         {
             auto it = this->map.find(key);
             if (it == this->map.end())
-                return std::nullopt;
-            return it->second;
+                return nullptr;
+            return &it->second;
         }
 
         /// @param key The key to identify the value.
-        /// @returns The value stored in the map, if any.
-        inline std::optional<const V&> at(std::type_index key) const
+        /// @returns The value stored in the map, or null if no value is stored.
+        inline const V* at(std::type_index key) const
         {
             auto it = this->map.find(key);
             if (it == this->map.end())
-                return std::nullopt;
-            return it->second;
+                return nullptr;
+            return &it->second;
         }
 
         /// @tparam K The type of the key.
         /// @param value The value to store.
         template <typename K>
-        inline void set(V&& value)
+        inline void set(V value)
         {
             this->set(std::type_index(typeid(K)), std::move(value));
         }
 
         /// @tparam K The type of the key.
-        /// @returns The value stored in the map, if any.
+        /// @returns The value stored in the map, or null if no value is stored.
         template <typename K>
-        inline std::optional<V&> at()
+        inline V* at()
         {
             return this->at(std::type_index(typeid(K)));
         }
 
         /// @tparam K The type of the key.
-        /// @returns The value stored in the map, if any.
+        /// @returns The value stored in the map, or null if no value is stored.
         template <typename K>
-        inline std::optional<const V&> at() const
+        inline const V* at() const
         {
             return this->at(std::type_index(typeid(K)));
         }
@@ -92,6 +92,18 @@ namespace cubos::core::memory
         inline size_t size() const
         {
             return this->map.size();
+        }
+
+        /// @returns Iterator to the beginning of the map.
+        inline auto begin() const
+        {
+            return this->map.begin();
+        }
+
+        /// @returns Iterator to the end of the map.
+        inline auto end() const
+        {
+            return this->map.end();
         }
 
     private:
