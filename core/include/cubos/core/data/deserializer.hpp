@@ -188,6 +188,11 @@ namespace cubos::core::data
         obj.deserialize(des);
     }
 
+    /// Overload for deserializing std::vector<bool>::reference.
+    /// This is a special case because std::vector<bool> are stored as arrays of bits, and therefore
+    /// need special handling.
+    void deserialize(Deserializer& des, std::vector<bool>::reference val);
+
     /// Overload for deserializing std::vector.
     /// @tparam T The type of the vector.
     /// @param des The deserializer.
@@ -198,7 +203,7 @@ namespace cubos::core::data
         size_t length = des.beginArray();
         vec.resize(length);
         for (size_t i = 0; i < length; ++i)
-            des.read(vec[i]);
+            deserialize(des, vec[i]);
         des.endArray();
     }
 

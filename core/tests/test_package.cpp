@@ -2,7 +2,6 @@
 
 #include <cubos/core/data/package.hpp>
 
-using namespace cubos::core::memory;
 using namespace cubos::core::data;
 
 struct Fruit
