@@ -754,41 +754,36 @@ static bool generate(const GenerateOptions& options)
         file << "#include <cubos/core/ecs/map_storage.hpp>" << std::endl;
         file << "#include <cubos/core/ecs/null_storage.hpp>" << std::endl;
         file << std::endl;
-        file << "namespace cubos::core::data" << std::endl;
-        file << "{" << std::endl;
-        file << "    inline static void serialize(Serializer& ser, const " << id << "& c," << std::endl;
-        file << "                                 std::tuple<const SerializationMap<ecs::Entity, std::string>&, "
-                "Handle::SerContext> ctx,"
-             << std::endl
-             << "                                 const char* name)" << std::endl;
-        file << "    {" << std::endl;
-        if (component.fields.size() == 1)
-            file << "        ser.write(c." << component.fields[0] << ", ctx, name);" << std::endl;
-        else
-        {
-            file << "        ser.beginObject(name);" << std::endl;
-            for (auto& field : component.fields)
-                file << "        ser.write(c." << field << ", ctx, \"" << field << "\");" << std::endl;
-            file << "        ser.endObject();" << std::endl;
-        }
-        file << "    }" << std::endl;
-        file << std::endl;
-        file << "    inline static void deserialize(Deserializer& des, " << id << "& c," << std::endl;
-        file << "                                   std::tuple<const SerializationMap<ecs::Entity, std::string>&, "
-                "Handle::DesContext> ctx)"
+        file << "template <>" << std::endl;
+        file << "inline void cubos::core::data::serialize<" << id << ">(Serializer& ser, const " << id << "& c,"
              << std::endl;
-        file << "    {" << std::endl;
+        file << "                                         const char* name)" << std::endl;
+        file << "{" << std::endl;
         if (component.fields.size() == 1)
-            file << "        des.read(c." << component.fields[0] << ", ctx);" << std::endl;
+            file << "    ser.write(c." << component.fields[0] << ", name);" << std::endl;
         else
         {
-            file << "        des.beginObject();" << std::endl;
+            file << "    ser.beginObject(name);" << std::endl;
             for (auto& field : component.fields)
-                file << "        des.read(c." << field << ", ctx);" << std::endl;
-            file << "        des.endObject();" << std::endl;
+                file << "    ser.write(c." << field << ", \"" << field << "\");" << std::endl;
+            file << "    ser.endObject();" << std::endl;
         }
-        file << "    }" << std::endl;
-        file << "} // namespace cubos::core::data" << std::endl;
+        file << "}" << std::endl;
+        file << std::endl;
+        file << "template <>" << std::endl;
+        file << "inline void cubos::core::data::deserialize<" << id << ">(Deserializer& des, " << id << "& c)"
+             << std::endl;
+        file << "{" << std::endl;
+        if (component.fields.size() == 1)
+            file << "    des.read(c." << component.fields[0] << ");" << std::endl;
+        else
+        {
+            file << "    des.beginObject();" << std::endl;
+            for (auto& field : component.fields)
+                file << "    des.read(c." << field << ");" << std::endl;
+            file << "    des.endObject();" << std::endl;
+        }
+        file << "}" << std::endl;
         file << std::endl;
         file << "namespace cubos::core::ecs" << std::endl;
         file << "{" << std::endl;
