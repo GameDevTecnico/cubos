@@ -191,6 +191,8 @@ namespace cubos::core::data
     /// Overload for deserializing std::vector<bool>::reference.
     /// This is a special case because std::vector<bool> are stored as arrays of bits, and therefore
     /// need special handling.
+    /// @param des The deserializer.
+    /// @param val The value to deserialize.
     void deserialize(Deserializer& des, std::vector<bool>::reference val);
 
     /// Overload for deserializing std::vector.
