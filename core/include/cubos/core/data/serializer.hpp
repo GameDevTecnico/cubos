@@ -190,6 +190,14 @@ namespace cubos::core::data
         obj.serialize(ser, name);
     }
 
+    /// Overload for serializing std::vector<bool>::const_reference.
+    /// This is a special case because std::vector<bool> are stored as arrays of bits, and therefore
+    /// need special handling.
+    /// @param ser The serializer.
+    /// @param val The value to serialize.
+    /// @param name The name of the value (optional).
+    void serialize(Serializer& ser, std::vector<bool>::const_reference val, const char* name);
+
     /// Overload for serializing char arrays.
     /// Necessary because literal strings are treated as char arrays by the compiler.
     /// Without this overload, the linker would fail.
