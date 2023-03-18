@@ -5,7 +5,6 @@
 #include <cubos/core/ecs/event_reader.hpp>
 
 using namespace cubos::core::ecs;
-using namespace cubos::core::memory;
 
 TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
 {
