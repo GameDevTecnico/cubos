@@ -10,19 +10,17 @@ static void inspector(cubos::core::Settings& settings)
 {
     ImGui::Begin("Settings Inspector");
 
-    bool noSettings = settings.begin() == settings.end();
-
-    if (noSettings)
+    const auto& map = settings.getValues();
+    if (map.empty())
     {
         ImGui::Text("No settings found.");
     }
     else
     {
         ImGui::BeginTable("split", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
-        for (const auto& s : settings)
+        for (const auto& setting : map)
         {
-            cubos::core::ui::show(s.second, s.first);
-            noSettings = false;
+            cubos::core::ui::show(setting.second, setting.first);
         }
         ImGui::EndTable();
     }
