@@ -358,7 +358,10 @@ namespace cubos::core::data
     inline void Package::set(const T& data, Context* context)
     {
         auto packager = impl::Packager(*this);
-        packager.context().pushSubContext(*context);
+        if (context != nullptr)
+        {
+            packager.context().pushSubContext(*context);
+        }
         packager.write(data, nullptr);
     }
 
@@ -366,7 +369,10 @@ namespace cubos::core::data
     inline bool Package::into(T& data, Context* context) const
     {
         auto unpackager = impl::Unpackager(*this);
-        unpackager.context().pushSubContext(*context);
+        if (context != nullptr)
+        {
+            unpackager.context().pushSubContext(*context);
+        }
         unpackager.read(data);
         return !unpackager.failed();
     }
