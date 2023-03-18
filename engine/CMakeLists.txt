@@ -59,7 +59,6 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/data/meta.hpp"
     "include/cubos/engine/data/asset.hpp"
     "include/cubos/engine/data/asset_manager.hpp"
-    "include/cubos/engine/data/entity_selector.hpp"
     "include/cubos/engine/data/loader.hpp"
     "include/cubos/engine/data/palette.hpp"
     "include/cubos/engine/data/grid.hpp"
