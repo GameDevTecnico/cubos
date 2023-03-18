@@ -91,12 +91,7 @@ void cubos::core::data::deserialize<std::string>(Deserializer& des, std::string&
     des.readString(val);
 }
 
-// Implementation of deserialize() for std::vector<bool>::reference.
-// This is a special case because std::vector<bool> are stored as arrays of bits, and therefore
-// need special handling.
-
-template <>
-void cubos::core::data::deserialize<std::vector<bool>::reference>(Deserializer& des, std::vector<bool>::reference& val)
+void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::reference val)
 {
     bool boolean;
     des.readBool(boolean);
