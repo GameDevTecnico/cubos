@@ -3,6 +3,9 @@
 #include <cubos/core/data/yaml_serializer.hpp>
 #include <cubos/core/data/serialization_map.hpp>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+
 using namespace cubos::core::memory;
 using namespace cubos::core::data;
 
@@ -15,36 +18,30 @@ struct Human
     std::vector<Human*> children;
 };
 
-namespace cubos::core::data
+template <>
+void cubos::core::data::serialize<Human>(Serializer& s, const Human& human, const char* name)
 {
-    static void serialize(Serializer& s, const Human& human, const char* name)
+    s.beginObject(name);
+    s.write(human.name, "name");
+    s.write(human.age, "age");
+    s.write(human.weight, "weight");
+    s.write(human.dead, "dead");
+    s.beginArray(human.children.size(), "children");
+    for (auto& child : human.children)
     {
-        s.beginObject(name);
-        s.write(human.name, "name");
-        s.write(human.age, "age");
-        s.write(human.weight, "weight");
-        s.write(human.dead, "dead");
-        s.beginArray(human.children.size(), "children");
-        for (auto& child : human.children)
+        if (s.context().has<SerializationMap<Human*, size_t>>())
+        {
+            auto& map = s.context().get<SerializationMap<Human*, size_t>>();
+            s.write(static_cast<uint64_t>(map.getId(child)), "child");
+        }
+        else
+        {
             s.write(*child, "child");
-        s.endArray();
-        s.endObject();
+        }
     }
-
-    static void serialize(Serializer& s, const Human& human, SerializationMap<Human*, size_t>* map, const char* name)
-    {
-        s.beginObject(name);
-        s.write(human.name, "name");
-        s.write(human.age, "age");
-        s.write(human.weight, "weight");
-        s.write(human.dead, "dead");
-        s.beginArray(human.children.size(), "children");
-        for (auto& child : human.children)
-            s.write(static_cast<uint64_t>(map->getId(child)), "child");
-        s.endArray();
-        s.endObject();
-    }
-} // namespace cubos::core::data
+    s.endArray();
+    s.endObject();
+}
 
 TEST(Cubos_Memory_YAML_Serialization, Serialize_Primitives)
 {
@@ -222,7 +219,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_GLM)
     EXPECT_STREQ(expected, buf);
 }
 
-TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom_Serializable)
+TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom)
 {
     using namespace cubos::core::memory;
 
@@ -245,12 +242,13 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom_Serializable)
             map.add(&humans[i], i);
 
         auto serializer = (Serializer*)new YAMLSerializer(stream);
-        serializer->write(humans[0], "trivially_serializable");
-        serializer->beginDictionary(humans.size(), "context_serializable");
+        serializer->write(humans[0], "without_context");
+        serializer->context().push(std::move(map));
+        serializer->beginDictionary(humans.size(), "with_context");
         for (size_t i = 0; i < humans.size(); ++i)
         {
             serializer->write(static_cast<uint64_t>(i), nullptr);
-            serializer->write(humans[i], &map, nullptr);
+            serializer->write(humans[i], nullptr);
         }
         serializer->endDictionary();
         delete serializer;
@@ -258,7 +256,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom_Serializable)
     stream.put('\0');
 
     EXPECT_STREQ("---\n"
-                 "trivially_serializable:\n"
+                 "without_context:\n"
                  "  name: José\n"
                  "  age: 90\n"
                  "  weight: 79\n"
@@ -286,7 +284,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom_Serializable)
                  "              dead: false\n"
                  "              children:\n"
                  "                []\n"
-                 "context_serializable:\n"
+                 "with_context:\n"
                  "  0:\n"
                  "    name: José\n"
                  "    age: 90\n"

@@ -15,43 +15,33 @@ struct Human
     std::vector<Human*> children;
 };
 
-namespace cubos::core::data
+template <>
+void cubos::core::data::deserialize<Human>(Deserializer& s, Human& human)
 {
-    void deserialize(Deserializer& s, Human& human)
+    s.beginObject();
+    s.read(human.name);
+    s.read(human.age);
+    s.read(human.weight);
+    s.read(human.dead);
+    human.children.resize(s.beginArray());
+    for (auto& child : human.children)
     {
-        s.beginObject();
-        s.read(human.name);
-        s.read(human.age);
-        s.read(human.weight);
-        s.read(human.dead);
-        human.children.resize(s.beginArray(), nullptr);
-        for (auto& child : human.children)
+        if (s.context().has<SerializationMap<Human*, size_t>>())
+        {
+            auto& map = s.context().get<SerializationMap<Human*, size_t>>();
+            uint64_t id;
+            s.read(id);
+            child = map.getRef(static_cast<size_t>(id));
+        }
+        else
         {
             child = new Human();
             s.read(*child);
         }
-        s.endArray();
-        s.endObject();
     }
-
-    void deserialize(Deserializer& s, Human& human, SerializationMap<Human*, size_t>* map)
-    {
-        s.beginObject();
-        s.read(human.name);
-        s.read(human.age);
-        s.read(human.weight);
-        s.read(human.dead);
-        human.children.resize(s.beginArray());
-        for (auto& child : human.children)
-        {
-            uint64_t id;
-            s.read(id);
-            child = map->getRef(static_cast<size_t>(id));
-        }
-        s.endArray();
-        s.endObject();
-    }
-} // namespace cubos::core::data
+    s.endArray();
+    s.endObject();
+}
 
 TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Primitives)
 {
@@ -238,7 +228,7 @@ TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Dictionaries)
     delete deserializer;
 }
 
-TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Trivially_Deserializable)
+TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Custom)
 {
     const char* yaml = "---\n"
                        "human:\n"
@@ -305,7 +295,7 @@ TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Trivially_Deserializable)
     delete deserializer;
 }
 
-TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Context_Deserializable)
+TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Custom_With_Context)
 {
     const char* yaml = "humans:\n"
                        "  0:\n"
@@ -355,11 +345,13 @@ TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Context_Deserializable)
     for (size_t i = 0; i < humans.size(); ++i)
         map.add(&humans[i], i);
 
+    deserializer->context().push(std::move(map));
+
     for (size_t i = 0; i < humans.size(); ++i)
     {
         uint64_t id;
         deserializer->read(id);
-        deserializer->read(humans[id], &map);
+        deserializer->read(humans[id]);
     }
 
     EXPECT_EQ(humans.size(), 5u);

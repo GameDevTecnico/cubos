@@ -2,6 +2,7 @@
 #include <cubos/core/ecs/event_pipe.hpp>
 #include <cubos/core/ecs/event_writer.hpp>
 #include <cubos/core/ecs/event_reader.hpp>
+#include <cubos/core/memory/stream.hpp>
 
 using namespace cubos::core::ecs;
 using namespace cubos::core::memory;
