@@ -11,6 +11,14 @@
 namespace cubos::core::data
 {
     /// Used to wrap a value to be printed using the debug serializer.
+    /// Can be pretty-printed using the `p` option. Types can be printed using the `t` option.
+    ///
+    /// @details Example usage:
+    ///
+    ///    CUBOS_ERROR("Cool debug serialized object: {}", Debug(mySerializableObj));
+    ///    CUBOS_INFO("Pretty printed: {:p}", Debug(mySerializableObj));
+    ///    CUBOS_INFO("With types too: {:pt}", Debug(mySerializableObj));
+    ///
     /// @tparam T The type of the value to wrap.
     template <typename T>
     struct Debug
