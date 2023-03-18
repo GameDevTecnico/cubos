@@ -21,7 +21,7 @@ namespace cubos::engine::gl::deferred
     /// The rendering is done in two passes:
     /// - The first pass renders the scene to the GBuffer textures: position, normal and material.
     /// - The second pass takes the GBuffer textures and calculates the color of the pixels with the lighting applied.
-    class Renderer : public gl::Renderer
+    class Renderer : public gl::BaseRenderer
     {
     public:
         /// @param renderDevice The render device to use.

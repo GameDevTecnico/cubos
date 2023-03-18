@@ -11,9 +11,6 @@ message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
 
-    "src/cubos/engine/ecs/draw_system.cpp"
-    "src/cubos/engine/ecs/transform_system.cpp"
-
     "src/cubos/engine/gl/frame.cpp"
     "src/cubos/engine/gl/renderer.cpp"
     "src/cubos/engine/gl/deferred/renderer.cpp"
@@ -30,7 +27,10 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/data/scene.cpp"
 
     "src/cubos/engine/plugins/window.cpp"
+    "src/cubos/engine/plugins/transform.cpp"
+    "src/cubos/engine/plugins/renderer.cpp"
     "src/cubos/engine/plugins/env_settings.cpp"
+
     "src/cubos/engine/plugins/file_settings.cpp"
     "src/cubos/engine/plugins/imgui.cpp"
 
@@ -46,8 +46,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/ecs/scale.hpp"
     "include/cubos/engine/ecs/local_to_world.hpp"
     "include/cubos/engine/ecs/grid.hpp"
-    "include/cubos/engine/ecs/transform_system.hpp"
-    "include/cubos/engine/ecs/draw_system.hpp"
+    "include/cubos/engine/ecs/camera.hpp"
 
     "include/cubos/engine/gl/frame.hpp"
     "include/cubos/engine/gl/renderer.hpp"
@@ -67,7 +66,10 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/data/scene.hpp"
 
     "include/cubos/engine/plugins/window.hpp"
+    "include/cubos/engine/plugins/transform.hpp"
+    "include/cubos/engine/plugins/renderer.hpp"
     "include/cubos/engine/plugins/env_settings.hpp"
+
     "include/cubos/engine/plugins/file_settings.hpp"
     "include/cubos/engine/plugins/imgui.hpp"
 

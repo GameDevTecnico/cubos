@@ -30,9 +30,16 @@ static Key glfwToCubosKey(int key);
         abort();                                                                                                       \
     } while (0)
 
+static void errorCallback(int errorCode, const char* description)
+{
+    CUBOS_ERROR("GLFW Error {}: {}", errorCode, description);
+}
+
 GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 {
 #ifdef WITH_GLFW
+    glfwSetErrorCallback(errorCallback);
+
     if (!glfwInit())
     {
         CUBOS_CRITICAL("glfwInit() failed");

@@ -29,8 +29,7 @@ namespace cubos::engine
     class TagBuilder
     {
     public:
-        TagBuilder(core::ecs::Dispatcher& dispatcher);
-        ~TagBuilder() = delete;
+        TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
 
         /// Sets the current tag to be executed before another tag.
         /// @param tag The tag to be executed before.
@@ -42,14 +41,14 @@ namespace cubos::engine
 
     private:
         core::ecs::Dispatcher& dispatcher;
+        std::vector<std::string>& tags;
     };
 
     /// Used to chain configurations related to systems
     class SystemBuilder
     {
     public:
-        SystemBuilder(core::ecs::Dispatcher& dispatcher);
-        ~SystemBuilder() = delete;
+        SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
 
         /// Sets the current system's tag.
         /// @param tag The tag to be set.
@@ -75,6 +74,7 @@ namespace cubos::engine
 
     private:
         core::ecs::Dispatcher& dispatcher;
+        std::vector<std::string>& tags;
     };
 
     /// Represents the engine itself, and exposes the interface with which the game developer interacts with.
@@ -116,19 +116,19 @@ namespace cubos::engine
         /// Sets the current tag for the main dispatcher. If the tag doesn't exist, it will be created.
         /// @param tag The tag to set.
         /// @return Tag builder used to configure the tag.
-        TagBuilder& tag(const std::string& tag);
+        TagBuilder tag(const std::string& tag);
 
         /// Sets the current tag for the startup dispatcher. If the tag doesn't exist, it will be created.
         /// @param tag The tag to set.
         /// @return Tag builder used to configure the tag.
-        TagBuilder& startupTag(const std::string& tag);
+        TagBuilder startupTag(const std::string& tag);
 
         /// Adds a new system to the engine, which will be executed at every iteration of the main loop.
         /// @tparam F The type of the system function.
         /// @param func The system function.
         /// @return System builder used to configure the system.
         template <typename F>
-        SystemBuilder& system(F func);
+        SystemBuilder system(F func);
 
         /// Adds a new startup system to the engine.
         /// Startup systems are executed only once, before the main loop starts.
@@ -136,7 +136,7 @@ namespace cubos::engine
         /// @param func The system function.
         /// @return System builder used to configure the system.
         template <typename F>
-        SystemBuilder& startupSystem(F func);
+        SystemBuilder startupSystem(F func);
 
         /// Runs the engine.
         void run();
@@ -145,6 +145,7 @@ namespace cubos::engine
         core::ecs::Dispatcher mainDispatcher, startupDispatcher;
         core::ecs::World world;
         std::set<void (*)(Cubos&)> plugins;
+        std::vector<std::string> mainTags, startupTags;
     };
 
     // Implementation.
@@ -186,21 +187,21 @@ namespace cubos::engine
     }
 
     template <typename F>
-    SystemBuilder& Cubos::system(F func)
+    SystemBuilder Cubos::system(F func)
     {
         mainDispatcher.addSystem(func);
-        SystemBuilder* builder = new SystemBuilder(mainDispatcher);
+        SystemBuilder builder(mainDispatcher, startupTags);
 
-        return *builder;
+        return builder;
     }
 
     template <typename F>
-    SystemBuilder& Cubos::startupSystem(F func)
+    SystemBuilder Cubos::startupSystem(F func)
     {
         startupDispatcher.addSystem(func);
-        SystemBuilder* builder = new SystemBuilder(startupDispatcher);
+        SystemBuilder builder(startupDispatcher, mainTags);
 
-        return *builder;
+        return builder;
     }
 } // namespace cubos::engine
 

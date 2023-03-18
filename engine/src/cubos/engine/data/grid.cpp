@@ -7,7 +7,7 @@
 using namespace cubos;
 using namespace cubos::engine::data;
 
-impl::GridLoader::GridLoader(AssetManager* manager, gl::Renderer* renderer) : Loader(manager), renderer(renderer)
+impl::GridLoader::GridLoader(AssetManager* manager, gl::BaseRenderer* renderer) : Loader(manager), renderer(renderer)
 {
     // Do nothing.
 }

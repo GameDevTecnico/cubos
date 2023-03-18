@@ -16,6 +16,7 @@
 namespace cubos::engine::gl
 {
     class Frame;
+    class BaseRenderer;
 
     namespace pps
     {
@@ -30,19 +31,22 @@ namespace cubos::engine::gl
     /// Handle to a grid uploaded to the GPU, to be used for rendering.
     using RendererGrid = std::shared_ptr<impl::RendererGrid>;
 
+    /// Handle to a generic renderer.
+    using Renderer = std::shared_ptr<BaseRenderer>;
+
     /// Interface class which abstracts different rendering methods.
     /// @details This abstraction allows us to, for example, switch between a
     /// raytracing and a deferred rendering method as we need to, without
     /// changing the API. This is useful since not all computers support
     /// realtime raytracing.
-    class Renderer
+    class BaseRenderer
     {
     public:
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
-        Renderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
-        Renderer(const Renderer&) = delete;
-        virtual ~Renderer() = default;
+        BaseRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
+        BaseRenderer(const BaseRenderer&) = delete;
+        virtual ~BaseRenderer() = default;
 
         /// Uploads a grid to the GPU and returns an handle, which can be used to draw it.
         /// @param grid The grid to upload.
