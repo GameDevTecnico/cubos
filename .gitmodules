@@ -25,3 +25,6 @@
 [submodule "core/lib/openal-soft"]
 	path = core/lib/openal-soft
 	url = https://github.com/kcat/openal-soft
+[submodule "core/lib/stduuid"]
+	path = core/lib/stduuid
+	url = https://github.com/mariusbancila/stduuid.git
