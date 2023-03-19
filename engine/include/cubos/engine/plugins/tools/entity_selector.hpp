@@ -13,7 +13,15 @@ namespace cubos::engine::plugins::tools
         cubos::core::ecs::Entity selection;
     };
 
-    /// Plugin that allows having a singular entity be selected for inspection
+    /// Plugin that provides a resource used to identify the currently selected entity in the
+    /// editor or other tools.
+    ///
+    /// @details This plugin only provides the resource. It is used just to avoid duplicating
+    /// the resource definition in multiple plugins.
+    ///
+    /// Resources:
+    /// - `EntitySelector`: the currently selected entity.
+    ///
     /// @param cubos CUBOS. main class
     void entitySelectorPlugin(Cubos& cubos);
 }; // namespace cubos::engine::plugins::tools
