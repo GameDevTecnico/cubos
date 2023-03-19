@@ -36,8 +36,10 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/plugins/tools/settings_inspector.cpp"
     "src/cubos/engine/tools/world_inspector/plugin.cpp"
-    "src/cubos/engine/plugins/tools/entity_selector.cpp"
     "src/cubos/engine/tools/entity_inspector/plugin.cpp"
+    "src/cubos/engine/plugins/tools/entity_selector.cpp"
+
+    "src/cubos/engine/assets/plugin.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -76,8 +78,10 @@ set(CUBOS_ENGINE_INCLUDE
 
     "include/cubos/engine/plugins/tools/settings_inspector.hpp"
     "include/cubos/engine/tools/world_inspector/plugin.hpp"
-    "include/cubos/engine/plugins/tools/entity_selector.hpp"
     "include/cubos/engine/tools/entity_inspector/plugin.hpp"
+    "include/cubos/engine/plugins/tools/entity_selector.hpp"
+
+    "include/cubos/engine/assets/plugin.hpp"
 )
 
 # Create cubos engine
