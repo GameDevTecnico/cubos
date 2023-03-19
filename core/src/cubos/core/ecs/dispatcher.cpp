@@ -62,7 +62,7 @@ void Dispatcher::systemAddTag(const std::string& tag)
 {
     ENSURE_CURR_SYSTEM();
     ENSURE_TAG_SETTINGS(tag);
-    currSystem->tags.push_back(tag);
+    currSystem->tags.insert(tag);
 }
 
 void Dispatcher::systemSetAfterTag(const std::string& tag)

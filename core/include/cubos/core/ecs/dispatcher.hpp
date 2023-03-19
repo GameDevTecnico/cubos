@@ -143,7 +143,7 @@ namespace cubos::core::ecs
         {
             std::shared_ptr<SystemSettings> settings;
             std::shared_ptr<AnySystemWrapper<void>> system;
-            std::vector<std::string> tags;
+            std::unordered_set<std::string> tags;
         };
 
         /// Internal class used to implement a DFS algorithm for call chain compilation
