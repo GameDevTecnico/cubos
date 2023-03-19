@@ -53,6 +53,8 @@ var namespaces_dup =
         ] ],
         [ "plugins", null, [
           [ "tools", null, [
+            [ "EntitySelector", "structcubos_1_1engine_1_1plugins_1_1tools_1_1EntitySelector.html", "structcubos_1_1engine_1_1plugins_1_1tools_1_1EntitySelector" ],
+            [ "entitySelectorPlugin", "entity__selector_8hpp.html#a2ca83b69dae67275394f7bee883e0442", null ],
             [ "settingsInspectorPlugin", "settings__inspector_8hpp.html#af16ebf94aa7e16a57b67174b0addcd48", null ]
           ] ],
           [ "ActiveCamera", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera.html", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera" ],

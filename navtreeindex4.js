@@ -238,6 +238,8 @@ var NAVTREEINDEX4 =
 "engine_2include_2cubos_2engine_2plugins_2window_8hpp.html#afa8146f56bedab5286a623bdbad91054":[3,0,0,1,3,7],
 "engine_2include_2cubos_2engine_2plugins_2window_8hpp_source.html":[5,0,1,0,0,0,3,6],
 "entity__manager_8hpp_source.html":[5,0,0,0,1,0,2,4],
+"entity__selector_8hpp.html#a2ca83b69dae67275394f7bee883e0442":[3,0,0,1,3,0,1],
+"entity__selector_8hpp_source.html":[5,0,1,0,0,0,3,0,0],
 "env__settings_8hpp.html#a934caabf9b9109a549c088d93cd8d281":[3,0,0,1,3,2],
 "env__settings_8hpp_source.html":[5,0,1,0,0,0,3,1],
 "event_8hpp_source.html":[5,0,0,0,1,0,7],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "file_8hpp_source.html":[5,0,0,0,1,0,1,6],
 "file__settings_8hpp.html#a5a5954d3de736c0c8026aa1165eaa908":[3,0,0,1,3,3],
 "file__settings_8hpp_source.html":[5,0,1,0,0,0,3,2],
-"file__stream_8hpp_source.html":[5,0,0,0,1,0,1,7],
-"file__system_8hpp_source.html":[5,0,0,0,1,0,1,8],
-"files.html":[5,0]
+"file__stream_8hpp_source.html":[5,0,0,0,1,0,1,7]
 };

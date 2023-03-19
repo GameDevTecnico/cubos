@@ -204,6 +204,9 @@ var annotated_dup =
           [ "BaseRenderer", "classcubos_1_1engine_1_1gl_1_1BaseRenderer.html", "classcubos_1_1engine_1_1gl_1_1BaseRenderer" ]
         ] ],
         [ "plugins", null, [
+          [ "tools", null, [
+            [ "EntitySelector", "structcubos_1_1engine_1_1plugins_1_1tools_1_1EntitySelector.html", "structcubos_1_1engine_1_1plugins_1_1tools_1_1EntitySelector" ]
+          ] ],
           [ "ActiveCamera", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera.html", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera" ]
         ] ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],

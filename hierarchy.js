@@ -61,6 +61,7 @@ var hierarchy =
     [ "Entity", "classcubos_1_1core_1_1ecs_1_1Entity.html", null ],
     [ "EntityBuilder", "classcubos_1_1core_1_1ecs_1_1EntityBuilder.html", null ],
     [ "EntityManager", "classcubos_1_1core_1_1ecs_1_1EntityManager.html", null ],
+    [ "EntitySelector", "structcubos_1_1engine_1_1plugins_1_1tools_1_1EntitySelector.html", null ],
     [ "EmbeddedArchive::Data::Entry", "structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html", null ],
     [ "Event< TArgs >", "classcubos_1_1core_1_1Event.html", null ],
     [ "EventPipe< T >", "classcubos_1_1core_1_1ecs_1_1EventPipe.html", null ],

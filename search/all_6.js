@@ -48,9 +48,8 @@ var searchData=
   ['getvalue_300',['getValue',['../classcubos_1_1core_1_1io_1_1Context.html#aedd60577b6a6b934b66dc81f2f8b858a',1,'cubos::core::io::Context']]],
   ['graphics_20library_301',['Graphics Library',['../core-gl.html',1,'core']]],
   ['grid_302',['Grid',['../classcubos_1_1core_1_1gl_1_1Grid.html',1,'Grid'],['../structcubos_1_1engine_1_1data_1_1Grid.html',1,'Grid'],['../structcubos_1_1engine_1_1ecs_1_1Grid.html',1,'Grid']]],
-  ['grid_303',['grid',['../structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd.html#ab43053778e7b18fd677851e83b7f35a4',1,'cubos::engine::gl::Frame::DrawCmd']]],
-  ['grid_304',['Grid',['../classcubos_1_1core_1_1gl_1_1Grid.html#abeebe3dedbd14cde0befa83df5afa4cc',1,'cubos::core::gl::Grid::Grid(const glm::uvec3 &amp;size)'],['../classcubos_1_1core_1_1gl_1_1Grid.html#a3d6a9267f8679454c55a0561996a4ee6',1,'cubos::core::gl::Grid::Grid(const glm::uvec3 &amp;size, const std::vector&lt; uint16_t &gt; &amp;indices)']]],
-  ['grid_305',['grid',['../structcubos_1_1engine_1_1data_1_1Grid.html#a24ebc2d3d6890a8149a02fda6b79ed27',1,'cubos::engine::data::Grid::grid()'],['../structcubos_1_1core_1_1data_1_1QBMatrix.html#abb065de194ca3d82ad666861d3b7c1b4',1,'cubos::core::data::QBMatrix::grid()']]],
-  ['gridloader_306',['GridLoader',['../classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html',1,'cubos::engine::data::impl']]],
-  ['guides_307',['Guides',['../guides.html',1,'']]]
+  ['grid_303',['grid',['../structcubos_1_1core_1_1data_1_1QBMatrix.html#abb065de194ca3d82ad666861d3b7c1b4',1,'cubos::core::data::QBMatrix::grid()'],['../structcubos_1_1engine_1_1data_1_1Grid.html#a24ebc2d3d6890a8149a02fda6b79ed27',1,'cubos::engine::data::Grid::grid()'],['../structcubos_1_1engine_1_1gl_1_1Frame_1_1DrawCmd.html#ab43053778e7b18fd677851e83b7f35a4',1,'cubos::engine::gl::Frame::DrawCmd::grid()']]],
+  ['grid_304',['Grid',['../classcubos_1_1core_1_1gl_1_1Grid.html#a3d6a9267f8679454c55a0561996a4ee6',1,'cubos::core::gl::Grid::Grid(const glm::uvec3 &amp;size, const std::vector&lt; uint16_t &gt; &amp;indices)'],['../classcubos_1_1core_1_1gl_1_1Grid.html#abeebe3dedbd14cde0befa83df5afa4cc',1,'cubos::core::gl::Grid::Grid(const glm::uvec3 &amp;size)']]],
+  ['gridloader_305',['GridLoader',['../classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html',1,'cubos::engine::data::impl']]],
+  ['guides_306',['Guides',['../guides.html',1,'']]]
 ];
