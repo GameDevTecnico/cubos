@@ -255,7 +255,8 @@ add_library(imgui STATIC
 
 target_include_directories(imgui PUBLIC "lib/imgui")
 
-target_include_directories(cubos-core PUBLIC "lib/stduuid")
+add_subdirectory(lib/stduuid)
+target_link_libraries(cubos-core PUBLIC stduuid)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
