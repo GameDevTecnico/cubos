@@ -155,6 +155,9 @@ namespace cubos::core::data
         /// Checks if the deserializer has failed.
         bool failed() const;
 
+        /// Sets the fail bit.
+        void fail();
+
         /// @returns The context of the serializer.
         inline Context& context()
         {
