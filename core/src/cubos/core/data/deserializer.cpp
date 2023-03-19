@@ -17,6 +17,11 @@ bool Deserializer::failed() const
     return this->failBit;
 }
 
+void Deserializer::fail()
+{
+    this->failBit = true;
+}
+
 // Implementation of deserialize() for primitive types.
 
 template <>
