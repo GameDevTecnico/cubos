@@ -46,6 +46,9 @@ namespace cubos::engine
         /// @returns Whether the handle is a strong handle.
         bool isStrong() const;
 
+        /// Makes this handle a weak handle.
+        void makeWeak();
+
     private:
         friend class Assets;
 

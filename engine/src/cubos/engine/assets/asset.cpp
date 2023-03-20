@@ -99,3 +99,9 @@ bool Asset::isStrong() const
 {
     return this->refCount != nullptr;
 }
+
+void Asset::makeWeak()
+{
+    decRef(this->refCount);
+    this->refCount = nullptr;
+}
