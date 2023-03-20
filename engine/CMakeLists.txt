@@ -41,6 +41,7 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/assets/plugin.cpp"
     "src/cubos/engine/assets/asset.cpp"
+    "src/cubos/engine/assets/meta.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -84,6 +85,7 @@ set(CUBOS_ENGINE_INCLUDE
 
     "include/cubos/engine/assets/plugin.hpp"
     "include/cubos/engine/assets/asset.hpp"
+    "include/cubos/engine/assets/meta.hpp"
 )
 
 # Create cubos engine
