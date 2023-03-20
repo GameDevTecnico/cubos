@@ -49,20 +49,20 @@ Asset::~Asset()
     decRef(this->refCount);
 }
 
-Asset::Asset(std::nullptr_t ptr) : id(), refCount(nullptr)
+Asset::Asset(std::nullptr_t ptr) : id(), refCount(nullptr), version(-1)
 {
 }
 
-Asset::Asset(uuids::uuid id) : id(id), refCount(nullptr)
+Asset::Asset(uuids::uuid id) : id(id), refCount(nullptr), version(-1)
 {
 }
 
-Asset::Asset(const Asset& other) : id(other.id), refCount(other.refCount)
+Asset::Asset(const Asset& other) : id(other.id), refCount(other.refCount), version(other.version)
 {
     incRef(this->refCount);
 }
 
-Asset::Asset(Asset&& other) : id(other.id), refCount(other.refCount)
+Asset::Asset(Asset&& other) : id(other.id), refCount(other.refCount), version(other.version)
 {
     other.refCount = nullptr;
 }
@@ -72,6 +72,7 @@ Asset& Asset::operator=(const Asset& other)
     decRef(this->refCount);
     this->id = other.id;
     this->refCount = other.refCount;
+    this->version = other.version;
     incRef(this->refCount);
     return *this;
 }
@@ -81,8 +82,14 @@ Asset& Asset::operator=(Asset&& other)
     decRef(this->refCount);
     this->id = other.id;
     this->refCount = other.refCount;
+    this->version = other.version;
     other.refCount = nullptr;
     return *this;
+}
+
+int Asset::getVersion() const
+{
+    return this->version;
 }
 
 uuids::uuid Asset::getId() const

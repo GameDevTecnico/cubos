@@ -37,6 +37,9 @@ namespace cubos::engine
         /// @param other Handle to move.
         Asset& operator=(Asset&& other);
 
+        /// @returns The last known version of the asset.
+        int getVersion() const;
+
         /// @returns The UUID of the asset.
         uuids::uuid getId() const;
 
@@ -54,5 +57,6 @@ namespace cubos::engine
 
         uuids::uuid id; ///< UUID of the asset.
         void* refCount; ///< Void pointer to avoid including <atomic> in the header.
+        int version;    ///< Last known version of the asset.
     };
 } // namespace cubos::engine
