@@ -20,9 +20,10 @@ namespace cubos::engine
         /// Possible statuses for an asset.
         enum class Status
         {
-            Unknown, ///< No metadata is associated with the asset.
-            Loading, ///< The asset is being loaded.
-            Loaded,  ///< The asset is loaded.
+            Unknown,  ///< No metadata is associated with the asset.
+            Unloaded, ///< The asset is not loaded.
+            Loading,  ///< The asset is being loaded.
+            Loaded,   ///< The asset is loaded.
         };
 
         Assets() = default;
@@ -134,10 +135,21 @@ namespace cubos::engine
         }
 
     private:
+        /// Represents a known asset - may or may not be loaded.
+        struct Entry
+        {
+            Status status;             ///< The status of the asset.
+            AssetMeta meta;            ///< The metadata associated with the asset.
+            std::atomic<int> refCount; ///< Number of strong handles referencing the asset.
+            int version;               ///< Number of times the asset has been updated.
+            void* data;                ///< Pointer to the asset data, if loaded. Otherwise, nullptr.
+            std::type_index type;      ///< The type of the asset data - initially typeid(void).
+        };
+
         /// Bridges associated to their supported extensions.
         std::unordered_map<std::string, std::unique_ptr<AssetBridge>> bridges;
 
-        /// Metadata for all known assets - loaded or not.
-        std::unordered_map<uuids::uuid, AssetMeta> metas;
+        /// Info for all known assets.
+        std::unordered_map<uuids::uuid, Entry> entries;
     };
 } // namespace cubos::engine
