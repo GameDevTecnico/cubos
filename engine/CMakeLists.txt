@@ -40,6 +40,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/plugins/tools/entity_selector.cpp"
 
     "src/cubos/engine/assets/plugin.cpp"
+    "src/cubos/engine/assets/asset.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -82,6 +83,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/plugins/tools/entity_selector.hpp"
 
     "include/cubos/engine/assets/plugin.hpp"
+    "include/cubos/engine/assets/asset.hpp"
 )
 
 # Create cubos engine
