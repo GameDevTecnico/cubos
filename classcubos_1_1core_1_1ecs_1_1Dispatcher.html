@@ -113,8 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4783d358e3205382f29cc770cd32b221"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
 <tr class="memitem:a4783d358e3205382f29cc770cd32b221"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a4783d358e3205382f29cc770cd32b221">addSystem</a> (F func)</td></tr>
 <tr class="separator:a4783d358e3205382f29cc770cd32b221"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bc8d7e450db25385f8ca8ec019569a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a2bc8d7e450db25385f8ca8ec019569a9">systemSetTag</a> (const std::string &amp;tag)</td></tr>
-<tr class="separator:a2bc8d7e450db25385f8ca8ec019569a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b321a8424b5dd36a2e39456bb711da6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a2b321a8424b5dd36a2e39456bb711da6">systemAddTag</a> (const std::string &amp;tag)</td></tr>
+<tr class="separator:a2b321a8424b5dd36a2e39456bb711da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75141febdfedc123354e0b0a474eca2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a75141febdfedc123354e0b0a474eca2b">systemSetAfterTag</a> (const std::string &amp;tag)</td></tr>
 <tr class="separator:a75141febdfedc123354e0b0a474eca2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee8c76874a0851870b7ee8d9e10ef742"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
@@ -234,6 +234,30 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a2b321a8424b5dd36a2e39456bb711da6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b321a8424b5dd36a2e39456bb711da6">&#9670;&nbsp;</a></span>systemAddTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void systemAddTag </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tag</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the tag for the current system. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>The tag to run under. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aee8c76874a0851870b7ee8d9e10ef742"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aee8c76874a0851870b7ee8d9e10ef742">&#9670;&nbsp;</a></span>systemSetAfterSystem()</h2>
 
@@ -324,30 +348,6 @@ Public Member Functions</h2></td></tr>
 <p>Sets the current system to run before the tag. If the specified tag doesn't exist, it is internally created. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">tag</td><td>The tag to run before. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a2bc8d7e450db25385f8ca8ec019569a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bc8d7e450db25385f8ca8ec019569a9">&#9670;&nbsp;</a></span>systemSetTag()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void systemSetTag </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>tag</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Sets the tag for the current system. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">tag</td><td>The tag to run under. </td></tr>
   </table>
   </dd>
 </dl>

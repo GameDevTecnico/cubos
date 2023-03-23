@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['package_867',['Package',['../classcubos_1_1core_1_1data_1_1Package.html',1,'cubos::core::data']]],
-  ['packager_868',['Packager',['../classcubos_1_1core_1_1data_1_1impl_1_1Packager.html',1,'cubos::core::data::impl']]],
-  ['palette_869',['Palette',['../classcubos_1_1core_1_1gl_1_1Palette.html',1,'Palette'],['../structcubos_1_1engine_1_1data_1_1Palette.html',1,'Palette']]],
-  ['paletteloader_870',['PaletteLoader',['../classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html',1,'cubos::engine::data::impl']]],
-  ['pass_871',['Pass',['../classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html',1,'cubos::engine::gl::pps']]],
-  ['pointlight_872',['PointLight',['../structcubos_1_1core_1_1gl_1_1PointLight.html',1,'cubos::core::gl']]],
-  ['position_873',['Position',['../structcubos_1_1engine_1_1ecs_1_1Position.html',1,'cubos::engine::ecs']]]
+  ['package_865',['Package',['../classcubos_1_1core_1_1data_1_1Package.html',1,'cubos::core::data']]],
+  ['packager_866',['Packager',['../classcubos_1_1core_1_1data_1_1impl_1_1Packager.html',1,'cubos::core::data::impl']]],
+  ['palette_867',['Palette',['../classcubos_1_1core_1_1gl_1_1Palette.html',1,'Palette'],['../structcubos_1_1engine_1_1data_1_1Palette.html',1,'Palette']]],
+  ['paletteloader_868',['PaletteLoader',['../classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html',1,'cubos::engine::data::impl']]],
+  ['pass_869',['Pass',['../classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html',1,'cubos::engine::gl::pps']]],
+  ['pointlight_870',['PointLight',['../structcubos_1_1core_1_1gl_1_1PointLight.html',1,'cubos::core::gl']]],
+  ['position_871',['Position',['../structcubos_1_1engine_1_1ecs_1_1Position.html',1,'cubos::engine::ecs']]]
 ];
