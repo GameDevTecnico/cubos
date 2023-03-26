@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_JSON_SERIALIZER_HPP
-#define CUBOS_CORE_DATA_JSON_SERIALIZER_HPP
+#pragma once
 
 #include <stack>
 
@@ -66,5 +65,3 @@ namespace cubos::core::data
         int mIndent;               ///< The indentation of the JSON output.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_JSON_SERIALIZER_HPP

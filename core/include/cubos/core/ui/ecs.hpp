@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_UI_ECS_HPP
-#define CUBOS_CORE_UI_ECS_HPP
+#pragma once
 
 #include <cubos/core/ecs/world.hpp>
 
@@ -16,5 +15,3 @@ namespace cubos::core::ui
     /// @param desContext Context for deserializing the world.
     void editWorld(ecs::World& world, data::Context& serContext, data::Context& desContext);
 } // namespace cubos::core::ui
-
-#endif // CUBOS_CORE_UI_ECS_HPP

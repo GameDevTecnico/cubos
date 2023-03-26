@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_GL_FRAME_HPP
-#define CUBOS_ENGINE_GL_FRAME_HPP
+#pragma once
 
 #include <vector>
 
@@ -75,5 +74,3 @@ namespace cubos::engine::gl
         std::vector<core::gl::PointLight> mPointLights;
     };
 } // namespace cubos::engine::gl
-
-#endif // CUBOS_ENGINE_GL_FRAME_HPP

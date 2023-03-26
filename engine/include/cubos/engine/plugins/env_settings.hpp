@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_PLUGINS_ENV_SETTINGS_HPP
-#define CUBOS_ENGINE_PLUGINS_ENV_SETTINGS_HPP
+#pragma once
 
 #include <cubos/engine/cubos.hpp>
 
@@ -17,6 +16,4 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void envSettingsPlugin(Cubos& cubos);
-} // namespace cubos::engine::plugins
-
-#endif // CUBOS_ENGINE_PLUGINS_ENV_SETTINGS_HPP
+}; // namespace cubos::engine::plugins

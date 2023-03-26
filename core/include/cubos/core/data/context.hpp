@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_CONTEXT_HPP
-#define CUBOS_CORE_DATA_CONTEXT_HPP
+#pragma once
 
 #include <typeindex>
 #include <vector>
@@ -85,5 +84,3 @@ namespace cubos::core::data
         std::vector<Entry> mEntries; ///< Entries in the context.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_CONTEXT_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_WINDOW_HPP
-#define CUBOS_CORE_IO_WINDOW_HPP
+#pragma once
 
 #include <deque>
 #include <memory>
@@ -177,5 +176,3 @@ namespace cubos::core::io
         std::deque<WindowEvent> mEvents;
     };
 } // namespace cubos::core::io
-
-#endif // CUBOS_CORE_IO_WINDOW_HPP

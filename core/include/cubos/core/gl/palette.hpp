@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_GL_PALETTE_HPP
-#define CUBOS_CORE_GL_PALETTE_HPP
+#pragma once
 
 #include <vector>
 
@@ -75,5 +74,3 @@ namespace cubos::core::gl
         std::vector<Material> mMaterials; ///< The materials in the palette.
     };
 } // namespace cubos::core::gl
-
-#endif // CUBOS_CORE_GL_PALETTE_HPP

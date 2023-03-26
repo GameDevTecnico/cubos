@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_GL_CAMERA_HPP
-#define CUBOS_CORE_GL_CAMERA_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -16,5 +15,3 @@ namespace cubos::core::gl
         glm::mat4 view; ///< The camera's view matrix.
     };
 } // namespace cubos::core::gl
-
-#endif // CUBOS_CORE_GL_CAMERA_HPP

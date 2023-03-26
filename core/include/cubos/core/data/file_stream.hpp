@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_FILE_STREAM_HPP
-#define CUBOS_CORE_DATA_FILE_STREAM_HPP
+#pragma once
 
 #include <utility>
 
@@ -94,5 +93,3 @@ namespace cubos::core::data
         return mStream.peek();
     }
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_FILE_STREAM_HPP

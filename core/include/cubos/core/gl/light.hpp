@@ -1,6 +1,5 @@
 
-#ifndef CUBOS_CORE_GL_LIGHT_DATA_HPP
-#define CUBOS_CORE_GL_LIGHT_DATA_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
@@ -40,5 +39,3 @@ namespace cubos::core::gl
         PointLight(const glm::vec3& position, const glm::vec3& color, float intensity, float range);
     };
 } // namespace cubos::core::gl
-
-#endif // CUBOS_CORE_GL_LIGHT_DATA_HPP

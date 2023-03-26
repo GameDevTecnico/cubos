@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_EVENT_PIPE_HPP
-#define CUBOS_CORE_ECS_EVENT_PIPE_HPP
+#pragma once
 
 #define DEFAULT_FILTER_MASK ~0u
 #define DEFAULT_PUSH_MASK 0
@@ -143,5 +142,3 @@ namespace cubos::core::ecs
     }
 
 } // namespace cubos::core::ecs
-
-#endif

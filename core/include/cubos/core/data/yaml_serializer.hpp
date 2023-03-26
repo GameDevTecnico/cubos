@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_YAML_SERIALIZER_HPP
-#define CUBOS_CORE_DATA_YAML_SERIALIZER_HPP
+#pragma once
 
 #include <stack>
 
@@ -56,5 +55,3 @@ namespace cubos::core::data
         std::size_t mHead;       ///< The number of characters already flushed.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_YAML_SERIALIZER_HPP

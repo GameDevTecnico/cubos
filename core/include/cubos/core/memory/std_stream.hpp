@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_MEMORY_STD_STREAM_HPP
-#define CUBOS_CORE_MEMORY_STD_STREAM_HPP
+#pragma once
 
 #include <cstdio>
 
@@ -29,5 +28,3 @@ namespace cubos::core::memory
         bool mClose; ///< Should the file be closed when this stream is destructed?
     };
 } // namespace cubos::core::memory
-
-#endif // CUBOS_CORE_MEMORY_STD_STREAM_HPP

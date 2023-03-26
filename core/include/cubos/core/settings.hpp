@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_SETTINGS_HPP
-#define CUBOS_CORE_SETTINGS_HPP
+#pragma once
 
 #include <string>
 #include <unordered_map>
@@ -83,5 +82,3 @@ namespace cubos::core
         std::unordered_map<std::string, std::string> mValues;
     };
 } // namespace cubos::core
-
-#endif // CUBOS_CORE_SETTINGS_HPP

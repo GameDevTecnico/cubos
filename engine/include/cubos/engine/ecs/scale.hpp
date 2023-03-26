@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_ECS_SCALE_HPP
-#define CUBOS_ENGINE_ECS_SCALE_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -11,5 +10,3 @@ namespace cubos::engine::ecs
         float factor; ///< The scale factor of the entity.
     };
 } // namespace cubos::engine::ecs
-
-#endif // CUBOS_ENGINE_ECS_SCALE_HPP
