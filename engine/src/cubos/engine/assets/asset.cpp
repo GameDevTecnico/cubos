@@ -7,19 +7,19 @@
 using namespace cubos::engine;
 
 template <>
-void cubos::core::data::serialize<Asset>(Serializer& ser, const Asset& asset, const char* name)
+void cubos::core::data::serialize<AnyAsset>(Serializer& ser, const AnyAsset& asset, const char* name)
 {
     ser.write(uuids::to_string(asset.getId()), name);
 }
 
 template <>
-void cubos::core::data::deserialize<Asset>(Deserializer& des, Asset& asset)
+void cubos::core::data::deserialize<AnyAsset>(Deserializer& des, AnyAsset& asset)
 {
     std::string str;
     des.read(str);
     if (auto id = uuids::uuid::from_string(str))
     {
-        asset = Asset(id.value());
+        asset = AnyAsset(id.value());
     }
     else
     {
@@ -28,58 +28,54 @@ void cubos::core::data::deserialize<Asset>(Deserializer& des, Asset& asset)
     }
 }
 
-inline static void incRef(void* refCount)
+AnyAsset::~AnyAsset()
 {
-    if (refCount != nullptr)
+    this->decRef();
+}
+
+AnyAsset::AnyAsset(std::nullptr_t ptr) : id(), refCount(nullptr), version(-1)
+{
+}
+
+AnyAsset::AnyAsset(uuids::uuid id) : id(id), refCount(nullptr), version(-1)
+{
+}
+
+AnyAsset::AnyAsset(std::string_view str) : id(), refCount(nullptr), version(-1)
+{
+    if (auto id = uuids::uuid::from_string(str))
     {
-        static_cast<std::atomic<int>*>(refCount)->fetch_add(1);
+        this->id = id.value();
+    }
+    else
+    {
+        CUBOS_ERROR("Could not create asset handle, invalid UUID: \"{}\"", str);
     }
 }
 
-inline static void decRef(void* refCount)
+AnyAsset::AnyAsset(const AnyAsset& other) : id(other.id), refCount(other.refCount), version(other.version)
 {
-    if (refCount != nullptr)
-    {
-        static_cast<std::atomic<int>*>(refCount)->fetch_sub(1);
-    }
+    this->incRef();
 }
 
-Asset::~Asset()
-{
-    decRef(this->refCount);
-}
-
-Asset::Asset(std::nullptr_t ptr) : id(), refCount(nullptr), version(-1)
-{
-}
-
-Asset::Asset(uuids::uuid id) : id(id), refCount(nullptr), version(-1)
-{
-}
-
-Asset::Asset(const Asset& other) : id(other.id), refCount(other.refCount), version(other.version)
-{
-    incRef(this->refCount);
-}
-
-Asset::Asset(Asset&& other) : id(other.id), refCount(other.refCount), version(other.version)
+AnyAsset::AnyAsset(AnyAsset&& other) : id(other.id), refCount(other.refCount), version(other.version)
 {
     other.refCount = nullptr;
 }
 
-Asset& Asset::operator=(const Asset& other)
+AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 {
-    decRef(this->refCount);
+    this->decRef();
     this->id = other.id;
     this->refCount = other.refCount;
     this->version = other.version;
-    incRef(this->refCount);
+    this->incRef();
     return *this;
 }
 
-Asset& Asset::operator=(Asset&& other)
+AnyAsset& AnyAsset::operator=(AnyAsset&& other)
 {
-    decRef(this->refCount);
+    this->decRef();
     this->id = other.id;
     this->refCount = other.refCount;
     this->version = other.version;
@@ -87,28 +83,44 @@ Asset& Asset::operator=(Asset&& other)
     return *this;
 }
 
-int Asset::getVersion() const
+int AnyAsset::getVersion() const
 {
     return this->version;
 }
 
-uuids::uuid Asset::getId() const
+uuids::uuid AnyAsset::getId() const
 {
     return this->id;
 }
 
-bool Asset::isNull() const
+bool AnyAsset::isNull() const
 {
     return this->id.is_nil();
 }
 
-bool Asset::isStrong() const
+bool AnyAsset::isStrong() const
 {
     return this->refCount != nullptr;
 }
 
-void Asset::makeWeak()
+void AnyAsset::makeWeak()
 {
-    decRef(this->refCount);
+    this->decRef();
     this->refCount = nullptr;
+}
+
+void AnyAsset::incRef() const
+{
+    if (this->refCount != nullptr)
+    {
+        static_cast<std::atomic<int>*>(this->refCount)->fetch_add(1);
+    }
+}
+
+void AnyAsset::decRef() const
+{
+    if (this->refCount != nullptr)
+    {
+        static_cast<std::atomic<int>*>(this->refCount)->fetch_sub(1);
+    }
 }
