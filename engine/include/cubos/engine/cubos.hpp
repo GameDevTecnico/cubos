@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_CUBOS_HPP
-#define CUBOS_ENGINE_CUBOS_HPP
+#pragma once
 
 #include <set>
 #include <string>
@@ -237,5 +236,3 @@ namespace cubos::engine
         return {mStartupDispatcher, mMainTags};
     }
 } // namespace cubos::engine
-
-#endif // CUBOS_ENGINE_CUBOS_HPP

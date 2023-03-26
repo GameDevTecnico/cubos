@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_DESERIALIZER_HPP
-#define CUBOS_CORE_DATA_DESERIALIZER_HPP
+#pragma once
 
 #include <string>
 #include <unordered_map>
@@ -236,5 +235,3 @@ namespace cubos::core::data
         des.endDictionary();
     }
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_DESERIALIZER_HPP

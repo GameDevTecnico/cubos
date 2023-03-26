@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_PACKAGE_HPP
-#define CUBOS_CORE_DATA_PACKAGE_HPP
+#pragma once
 
 #include <map>
 #include <stack>
@@ -378,5 +377,3 @@ namespace cubos::core::data
     }
 
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_PACKAGE_HPP

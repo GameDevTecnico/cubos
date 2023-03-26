@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_PLUGINS_SETTINGS_INSPECTOR_HPP
-#define CUBOS_ENGINE_PLUGINS_SETTINGS_INSPECTOR_HPP
+#pragma once
 
 #include <cubos/engine/cubos.hpp>
 
@@ -16,6 +15,4 @@ namespace cubos::engine::plugins::tools
     //
     /// @param cubos CUBOS. main class
     void settingsInspectorPlugin(Cubos& cubos);
-} // namespace cubos::engine::plugins::tools
-
-#endif // CUBOS_ENGINE_PLUGINS_SETTINGS_INSPECTOR_HPP
+}; // namespace cubos::engine::plugins::tools

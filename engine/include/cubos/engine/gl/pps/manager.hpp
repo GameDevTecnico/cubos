@@ -1,6 +1,5 @@
 
-#ifndef CUBOS_ENGINE_GL_PPS_MANAGER_HPP
-#define CUBOS_ENGINE_GL_PPS_MANAGER_HPP
+#pragma once
 
 #include <map>
 
@@ -83,5 +82,3 @@ namespace cubos::engine::gl::pps
         return id;
     }
 } // namespace cubos::engine::gl::pps
-
-#endif // CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP

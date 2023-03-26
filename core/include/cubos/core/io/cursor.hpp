@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_CURSOR_HPP
-#define CUBOS_CORE_IO_CURSOR_HPP
+#pragma once
 
 #ifdef WITH_GLFW
 #define GLFW_INCLUDE_NONE
@@ -39,5 +38,3 @@ namespace cubos::core::io
 #endif
     };
 } // namespace cubos::core::io
-
-#endif // CUBOS_CORE_IO_CURSOR_HPP

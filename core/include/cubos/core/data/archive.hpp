@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_ARCHIVE_HPP
-#define CUBOS_CORE_DATA_ARCHIVE_HPP
+#pragma once
 
 #include <cubos/core/data/file.hpp>
 
@@ -67,5 +66,3 @@ namespace cubos::core::data
         virtual std::unique_ptr<memory::Stream> open(File::Handle file, File::OpenMode mode) = 0;
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_ARCHIVE_HPP

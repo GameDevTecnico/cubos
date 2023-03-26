@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_COMPONENT_MANAGER_HPP
-#define CUBOS_CORE_ECS_COMPONENT_MANAGER_HPP
+#pragma once
 
 #include <cstddef>
 #include <cstdint>
@@ -254,5 +253,3 @@ namespace cubos::core::ecs
         storage->erase(id);
     }
 } // namespace cubos::core::ecs
-
-#endif // CUBOS_CORE_ECS_COMPONENT_MANAGER_HPP

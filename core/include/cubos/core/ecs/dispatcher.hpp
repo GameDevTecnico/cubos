@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_DISPATCHER_HPP
-#define CUBOS_CORE_ECS_DISPATCHER_HPP
+#pragma once
 
 #include <map>
 #include <memory>
@@ -315,4 +314,3 @@ namespace cubos::core::ecs
         return std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>(1) << (mConditions.size() - 1);
     }
 } // namespace cubos::core::ecs
-#endif // CUBOS_CORE_ECS_DISPATCHER_HPP

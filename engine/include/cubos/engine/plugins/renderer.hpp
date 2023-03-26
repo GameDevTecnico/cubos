@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_PLUGINS_RENDERER_HPP
-#define CUBOS_ENGINE_PLUGINS_RENDERER_HPP
+#pragma once
 
 #include <cubos/core/ecs/entity_manager.hpp>
 
@@ -43,6 +42,4 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void rendererPlugin(Cubos& cubos);
-} // namespace cubos::engine::plugins
-
-#endif // CUBOS_ENGINE_PLUGINS_RENDERER_HPP
+}; // namespace cubos::engine::plugins

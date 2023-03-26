@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_EVENT_READER_HPP
-#define CUBOS_CORE_ECS_EVENT_READER_HPP
+#pragma once
 
 #include <optional>
 
@@ -141,5 +140,3 @@ namespace cubos::core::ecs
     }
 
 } // namespace cubos::core::ecs
-
-#endif

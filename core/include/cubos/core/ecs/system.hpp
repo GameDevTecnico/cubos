@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_SYSTEM_HPP
-#define CUBOS_CORE_ECS_SYSTEM_HPP
+#pragma once
 
 #include <functional>
 #include <typeindex>
@@ -532,4 +531,3 @@ namespace cubos::core::ecs
             impl::SystemFetcher<Args>::arg(std::move(std::get<typename impl::SystemFetcher<Args>::Type>(fetched)))...);
     }
 } // namespace cubos::core::ecs
-#endif // CUBOS_CORE_ECS_SYSTEM_HPP

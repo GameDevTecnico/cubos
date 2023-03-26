@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_DOUBLE_AXIS_HPP
-#define CUBOS_CORE_IO_DOUBLE_AXIS_HPP
+#pragma once
 
 #include <list>
 #include <map>
@@ -57,5 +56,3 @@ namespace cubos::core::io
         void handleVerticalAxis(float yPos);
     };
 } // namespace cubos::core::io
-
-#endif // CUBOS_CORE_IO_DOUBLE_AXIS_HPP

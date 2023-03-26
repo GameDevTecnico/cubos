@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_KEYBOARD_HPP
-#define CUBOS_CORE_IO_KEYBOARD_HPP
+#pragma once
 
 namespace cubos::core::io
 {
@@ -144,5 +143,3 @@ namespace cubos::core::io
         return lhs;
     }
 } // namespace cubos::core::io
-
-#endif // CUBOS_CORE_IO_KEYBOARD_HPP

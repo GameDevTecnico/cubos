@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_MEMORY_ENDIANNESS_HPP
-#define CUBOS_CORE_MEMORY_ENDIANNESS_HPP
+#pragma once
 
 namespace cubos::core::memory
 {
@@ -90,5 +89,3 @@ namespace cubos::core::memory
         return isLittleEndian() ? swapBytes(value) : value;
     }
 } // namespace cubos::core::memory
-
-#endif // CUBOS_CORE_MEMORY_ENDIANNESS_HPP

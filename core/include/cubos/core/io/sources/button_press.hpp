@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_BUTTON_PRESS_HPP
-#define CUBOS_CORE_IO_BUTTON_PRESS_HPP
+#pragma once
 
 #include <list>
 #include <map>
@@ -59,4 +58,3 @@ namespace cubos::core::io
         void handleButtonDown();
     };
 } // namespace cubos::core::io
-#endif // CUBOS_CORE_IO_BUTTON_PRESS_HPP

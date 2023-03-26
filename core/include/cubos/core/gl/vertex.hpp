@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_GL_VERTEX_HPP
-#define CUBOS_CORE_GL_VERTEX_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -38,5 +37,3 @@ namespace cubos::core::data
     /// @param vertex The vertex to deserialize.
     void deserialize(Deserializer& deserializer, gl::Vertex& vertex);
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_GL_VERTEX_HPP

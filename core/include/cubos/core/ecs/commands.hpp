@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_COMMANDS_HPP
-#define CUBOS_CORE_ECS_COMMANDS_HPP
+#pragma once
 
 #include <mutex>
 #include <unordered_map>
@@ -369,5 +368,3 @@ namespace cubos::core::ecs
         }
     }
 } // namespace cubos::core::ecs
-
-#endif // CUBOS_CORE_ECS_COMMANDS_HPP
