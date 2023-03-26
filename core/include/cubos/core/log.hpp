@@ -1,6 +1,8 @@
 #ifndef CUBOS_CORE_LOG_HPP
 #define CUBOS_CORE_LOG_HPP
 
+#include <cstdlib>
+
 #ifndef CUBOS_LOG_LEVEL
 #ifndef NDEBUG
 #define CUBOS_LOG_LEVEL 0
@@ -33,6 +35,20 @@
 #define CUBOS_WARN(...) SPDLOG_WARN(__VA_ARGS__)
 #define CUBOS_ERROR(...) SPDLOG_ERROR(__VA_ARGS__)
 #define CUBOS_CRITICAL(...) SPDLOG_CRITICAL(__VA_ARGS__)
+
+#define CUBOS_ASSERT(cond, ...)                                                                                        \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        if (!(cond))                                                                                                   \
+        {                                                                                                              \
+            CUBOS_CRITICAL("Assertion {} failed", #cond);                                                              \
+            if constexpr (sizeof(#__VA_ARGS__) > 1)                                                                    \
+            {                                                                                                          \
+                CUBOS_CRITICAL("" __VA_ARGS__);                                                                           \
+            }                                                                                                          \
+            std::abort();                                                                                              \
+        }                                                                                                              \
+    } while (false)
 
 namespace cubos::core
 {
