@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_FILE_SYSTEM_HPP
-#define CUBOS_CORE_DATA_FILE_SYSTEM_HPP
+#pragma once
 
 #include <cubos/core/data/file.hpp>
 
@@ -73,5 +72,3 @@ namespace cubos::core::data
         static std::unique_ptr<memory::Stream> open(std::string_view path, File::OpenMode mode);
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_FILE_SYSTEM_HPP

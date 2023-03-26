@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_MEMORY_BUFFER_STREAM_HPP
-#define CUBOS_CORE_MEMORY_BUFFER_STREAM_HPP
+#pragma once
 
 #include <cubos/core/memory/stream.hpp>
 
@@ -48,5 +47,3 @@ namespace cubos::core::memory
         bool mOwned;           ///< Whether the buffer is owned by this stream.
     };
 } // namespace cubos::core::memory
-
-#endif // CUBOS_CORE_MEMORY_BUFFER_STREAM_HPP

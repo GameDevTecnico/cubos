@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_GL_RENDERER_HPP
-#define CUBOS_ENGINE_GL_RENDERER_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -111,5 +110,3 @@ namespace cubos::engine::gl
         };
     } // namespace impl
 } // namespace cubos::engine::gl
-
-#endif // CUBOS_ENGINE_GL_RENDERER_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_GL_MATERIAL_HPP
-#define CUBOS_CORE_GL_MATERIAL_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -37,5 +36,3 @@ namespace cubos::core::data
     /// @param mat The material to deserialize.
     void deserialize(Deserializer& deserializer, gl::Material& mat);
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_GL_MATERIAL_HPP

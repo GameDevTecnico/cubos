@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_ENTITY_MANAGER_HPP
-#define CUBOS_CORE_ECS_ENTITY_MANAGER_HPP
+#pragma once
 
 #include <bitset>
 #include <cstdint>
@@ -133,5 +132,3 @@ namespace std
     };
     /// @endcond
 } // namespace std
-
-#endif // CUBOS_CORE_ECS_ENTITY_MANAGER_HPP

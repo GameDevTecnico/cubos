@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_BINARY_SERIALIZER_HPP
-#define CUBOS_CORE_DATA_BINARY_SERIALIZER_HPP
+#pragma once
 
 #include <cubos/core/data/serializer.hpp>
 #include <cubos/core/memory/stream.hpp>
@@ -42,5 +41,3 @@ namespace cubos::core::data
         bool mWriteLittleEndian; ///< Whether to write in little endian or big endian format.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_BINARY_SERIALIZER_HPP

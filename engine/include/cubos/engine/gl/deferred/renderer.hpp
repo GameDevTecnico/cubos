@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP
-#define CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP
+#pragma once
 
 #include <vector>
 
@@ -104,5 +103,3 @@ namespace cubos::engine::gl::deferred
         core::gl::ShaderBindingPoint mSsaoBlurTexBp;
     };
 } // namespace cubos::engine::gl::deferred
-
-#endif // CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP

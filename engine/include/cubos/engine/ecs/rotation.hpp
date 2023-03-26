@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_ECS_ROTATION_HPP
-#define CUBOS_ENGINE_ECS_ROTATION_HPP
+#pragma once
 
 #include <glm/gtx/quaternion.hpp>
 
@@ -11,5 +10,3 @@ namespace cubos::engine::ecs
         glm::quat quat = glm::quat(1.0F, 0.0F, 0.0F, 0.0F); ///< The rotation of the entity.
     };
 } // namespace cubos::engine::ecs
-
-#endif // CUBOS_ENGINE_ECS_ROTATION_HPP

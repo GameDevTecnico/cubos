@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_AL_OAL_AUDIO_DEVICE_HPP
-#define CUBOS_CORE_AL_OAL_AUDIO_DEVICE_HPP
+#pragma once
 
 #include <cubos/core/al/audio_device.hpp>
 
@@ -26,5 +25,3 @@ namespace cubos::core::al
         void setListenerVelocity(const glm::vec3& velocity) override;
     };
 } // namespace cubos::core::al
-
-#endif // CUBOS_CORE_AL_OAL_AUDIO_DEVICE_HPP

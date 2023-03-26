@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_EMBEDDED_ARCHIVE_HPP
-#define CUBOS_CORE_DATA_EMBEDDED_ARCHIVE_HPP
+#pragma once
 
 #include <map>
 #include <vector>
@@ -60,5 +59,3 @@ namespace cubos::core::data
         const Data* mData; ///< The embedded archive data.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_EMBEDDED_ARCHIVE_HPP

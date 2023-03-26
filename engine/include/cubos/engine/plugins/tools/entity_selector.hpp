@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_PLUGINS_ENTITY_SELECTOR_HPP
-#define CUBOS_ENGINE_PLUGINS_ENTITY_SELECTOR_HPP
+#pragma once
 
 #include <cubos/core/ecs/entity_manager.hpp>
 
@@ -24,6 +23,4 @@ namespace cubos::engine::plugins::tools
     ///
     /// @param cubos CUBOS. main class
     void entitySelectorPlugin(Cubos& cubos);
-} // namespace cubos::engine::plugins::tools
-
-#endif // CUBOS_ENGINE_PLUGINS_ENTITY_SELECTOR_HPP
+}; // namespace cubos::engine::plugins::tools

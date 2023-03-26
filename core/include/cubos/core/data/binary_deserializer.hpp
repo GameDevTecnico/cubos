@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP
-#define CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP
+#pragma once
 
 #include <yaml-cpp/yaml.h>
 
@@ -43,5 +42,3 @@ namespace cubos::core::data
         bool mReadLittleEndian;  ///< Whether to write in little endian or big endian format.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_SOURCE_HPP
-#define CUBOS_CORE_IO_SOURCE_HPP
+#pragma once
 
 #include <list>
 #include <map>
@@ -39,4 +38,3 @@ namespace cubos::core::io
         virtual Context createContext() = 0;
     };
 } // namespace cubos::core::io
-#endif // CUBOS_CORE_IO_SOURCE_HPP

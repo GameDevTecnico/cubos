@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_BLUEPRINT_HPP
-#define CUBOS_CORE_ECS_BLUEPRINT_HPP
+#pragma once
 
 #include <cubos/core/data/binary_deserializer.hpp>
 #include <cubos/core/data/binary_serializer.hpp>
@@ -191,5 +190,3 @@ namespace cubos::core::ecs
             ...);
     }
 } // namespace cubos::core::ecs
-
-#endif // CUBOS_CORE_ECS_BLUEPRINT_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_GL_GRID_HPP
-#define CUBOS_CORE_GL_GRID_HPP
+#pragma once
 
 #include <vector>
 
@@ -86,5 +85,3 @@ namespace cubos::core::gl
         std::vector<uint16_t> mIndices; ///< The indices of the grid.
     };
 } // namespace cubos::core::gl
-
-#endif // CUBOS_CORE_GL_GRID_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_SINGLE_AXIS_HPP
-#define CUBOS_CORE_IO_SINGLE_AXIS_HPP
+#pragma once
 
 #include <tuple>
 #include <variant>
@@ -53,5 +52,3 @@ namespace cubos::core::io
         float value = 0;
     };
 } // namespace cubos::core::io
-
-#endif // CUBOS_CORE_IO_SINGLE_AXIS_HPP

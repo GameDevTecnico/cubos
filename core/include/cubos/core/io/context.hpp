@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_CONTEXT_HPP
-#define CUBOS_CORE_IO_CONTEXT_HPP
+#pragma once
 
 #include <variant>
 
@@ -40,5 +39,3 @@ namespace cubos::core::io
         return std::get<T>(this->value);
     }
 } // namespace cubos::core::io
-
-#endif // CUBOS_CORE_IO_CONTEXT_HPP
