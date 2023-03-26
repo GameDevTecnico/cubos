@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_GL_PPS_PASS_HPP
-#define CUBOS_ENGINE_GL_PPS_PASS_HPP
+#pragma once
 
 #include <map>
 
@@ -40,5 +39,3 @@ namespace cubos::engine::gl::pps
         core::gl::RenderDevice& mRenderDevice; ///< The render device to use.
     };
 } // namespace cubos::engine::gl::pps
-
-#endif // CUBOS_ENGINE_GL_PPS_PASS_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_JSON_DESERIALIZER_HPP
-#define CUBOS_CORE_DATA_JSON_DESERIALIZER_HPP
+#pragma once
 
 #include <stack>
 
@@ -58,5 +57,3 @@ namespace cubos::core::data
         nlohmann::ordered_json mJson; ///< The current JSON value being read.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_JSON_DESERIALIZER_HPP

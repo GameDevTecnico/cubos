@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_QUERY_HPP
-#define CUBOS_CORE_ECS_QUERY_HPP
+#pragma once
 
 #include <optional>
 #include <typeindex>
@@ -365,4 +364,3 @@ namespace cubos::core::ecs
     }
 
 } // namespace cubos::core::ecs
-#endif // CUBOS_CORE_ECS_QUERY_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_WORLD_HPP
-#define CUBOS_CORE_ECS_WORLD_HPP
+#pragma once
 
 #include <cassert>
 #include <cstddef>
@@ -236,5 +235,3 @@ namespace cubos::core::ecs
         return mEntityManager.getMask(entity).test(componentId);
     }
 } // namespace cubos::core::ecs
-
-#endif // CUBOS_ECS_WORLD_HPP

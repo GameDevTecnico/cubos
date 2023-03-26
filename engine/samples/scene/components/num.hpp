@@ -1,9 +1,6 @@
-#ifndef COMPONENTS_NUM_HPP
-#define COMPONENTS_NUM_HPP
+#pragma once
 
 struct [[cubos::component("num", VecStorage)]] Num
 {
     int value;
 };
-
-#endif // COMPONENTS_NUM_HPP

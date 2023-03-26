@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_LOG_HPP
-#define CUBOS_CORE_LOG_HPP
+#pragma once
 
 #include <cstdlib>
 
@@ -55,5 +54,3 @@ namespace cubos::core
     /// Initializes the logger, must be called before any logging is done.
     void initializeLogger();
 } // namespace cubos::core
-
-#endif // CUBOS_CORE_LOG_HPP

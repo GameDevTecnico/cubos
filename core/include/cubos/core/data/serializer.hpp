@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_SERIALIZER_HPP
-#define CUBOS_CORE_DATA_SERIALIZER_HPP
+#pragma once
 
 #include <cstdint>
 #include <unordered_map>
@@ -244,5 +243,3 @@ namespace cubos::core::data
         ser.endDictionary();
     }
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_SERIALIZER_HPP

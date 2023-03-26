@@ -1,5 +1,4 @@
-#ifndef CUBINHOS_TOOLS_HPP
-#define CUBINHOS_TOOLS_HPP
+#pragma once
 
 #include <string>
 
@@ -21,5 +20,3 @@ static const Tool Tools[] = {
     {"convert", runConvert},
     {"generate", runGenerate},
 };
-
-#endif // CUBINHOS_TOOLS_HPP

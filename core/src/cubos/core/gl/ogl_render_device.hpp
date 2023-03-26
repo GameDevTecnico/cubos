@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_GL_OGL_RENDER_DEVICE_HPP
-#define CUBOS_CORE_GL_OGL_RENDER_DEVICE_HPP
+#pragma once
 
 #include <cubos/core/gl/render_device.hpp>
 
@@ -61,5 +60,3 @@ namespace cubos::core::gl
         BlendState mDefaultBS;
     };
 } // namespace cubos::core::gl
-
-#endif // CUBOS_CORE_GL_OGL_RENDER_DEVICE_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_RESOURCE_MANAGER_HPP
-#define CUBOS_CORE_ECS_RESOURCE_MANAGER_HPP
+#pragma once
 
 #include <shared_mutex>
 #include <typeindex>
@@ -193,4 +192,3 @@ namespace cubos::core::ecs
         return WriteResource<T>(*static_cast<T*>(resource.data), std::unique_lock(resource.mutex));
     }
 } // namespace cubos::core::ecs
-#endif // CUBOS_CORE_ECS_RESOURCE_MANAGER_HPP

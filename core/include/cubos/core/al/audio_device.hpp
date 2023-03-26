@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_AL_AUDIO_DEVICE_HPP
-#define CUBOS_CORE_AL_AUDIO_DEVICE_HPP
+#pragma once
 
 #include <memory>
 #include <string>
@@ -151,5 +150,3 @@ namespace cubos::core::al
         };
     } // namespace impl
 } // namespace cubos::core::al
-
-#endif // CUBOS_CORE_AL_AUDIO_DEVICE_HPP

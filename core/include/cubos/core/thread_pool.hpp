@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_THREAD_POOL_HPP
-#define CUBOS_CORE_THREAD_POOL_HPP
+#pragma once
 
 #include <condition_variable>
 #include <deque>
@@ -39,5 +38,3 @@ namespace cubos::core
         bool mStop;                         ///< Set to true when the thread pool is being destroyed.
     };
 } // namespace cubos::core
-
-#endif // CUBOS_CORE_THREAD_POOL_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_PLUGINS_WINDOW_HPP
-#define CUBOS_ENGINE_PLUGINS_WINDOW_HPP
+#pragma once
 
 #include <cubos/core/io/window.hpp>
 
@@ -34,6 +33,4 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void windowPlugin(Cubos& cubos);
-} // namespace cubos::engine::plugins
-
-#endif // CUBOS_ENGINE_PLUGINS_WINDOW_HPP
+}; // namespace cubos::engine::plugins

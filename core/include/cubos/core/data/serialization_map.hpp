@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
-#define CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
+#pragma once
 
 #include <functional>
 #include <utility>
@@ -128,5 +127,3 @@ namespace cubos::core::data
         std::unordered_map<I, R> mIdToRef;              ///< Map of serialized IDs to references.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP

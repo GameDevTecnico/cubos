@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_GLFW_WINDOW_HPP
-#define CUBOS_CORE_IO_GLFW_WINDOW_HPP
+#pragma once
 
 #include <deque>
 
@@ -48,5 +47,3 @@ namespace cubos::core::io
 #endif
     };
 } // namespace cubos::core::io
-
-#endif // CUBOS_CORE_IO_GLFW_WINDOW_HPP

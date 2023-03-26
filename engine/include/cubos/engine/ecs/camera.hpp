@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_ECS_CAMERA_HPP
-#define CUBOS_ENGINE_ECS_CAMERA_HPP
+#pragma once
 
 namespace cubos::engine::ecs
 {
@@ -11,5 +10,3 @@ namespace cubos::engine::ecs
         float zFar;  ///< The far clipping plane.
     };
 } // namespace cubos::engine::ecs
-
-#endif // CUBOS_ENGINE_ECS_CAMERA_HPP

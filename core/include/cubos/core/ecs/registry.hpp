@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_REGISTRY_HPP
-#define CUBOS_CORE_ECS_REGISTRY_HPP
+#pragma once
 
 #include <optional>
 
@@ -125,5 +124,3 @@ namespace cubos::core::ecs
                                                                                                                        \
         inline const bool ComponentRegister##type::registered = ComponentRegister##type::registerType();               \
     } // namespace cubos::core::ecs::impl
-
-#endif // CUBOS_CORE_ECS_REGISTRY_HPP

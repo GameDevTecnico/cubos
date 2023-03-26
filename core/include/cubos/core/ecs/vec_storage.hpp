@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_VEC_STORAGE_HPP
-#define CUBOS_CORE_ECS_VEC_STORAGE_HPP
+#pragma once
 
 #include <cubos/core/ecs/storage.hpp>
 
@@ -57,5 +56,3 @@ namespace cubos::core::ecs
         new (&mData[index]) T;
     }
 } // namespace cubos::core::ecs
-
-#endif // ECS_VEC_STORAGE_HPP

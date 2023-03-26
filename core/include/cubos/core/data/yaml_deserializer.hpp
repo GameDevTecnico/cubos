@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_YAML_DESERIALIZER_HPP
-#define CUBOS_CORE_DATA_YAML_DESERIALIZER_HPP
+#pragma once
 
 #include <stack>
 
@@ -66,5 +65,3 @@ namespace cubos::core::data
         YAML::Node mDocument;     ///< The YAML document being deserialized.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_YAML_DESERIALIZER_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_MEMORY_STREAM_HPP
-#define CUBOS_CORE_MEMORY_STREAM_HPP
+#pragma once
 
 #include <cstddef>
 #include <cstdint>
@@ -244,5 +243,3 @@ namespace cubos::core::memory
     }
 
 } // namespace cubos::core::memory
-
-#endif // CUBOS_CORE_MEMORY_STREAM_HPP

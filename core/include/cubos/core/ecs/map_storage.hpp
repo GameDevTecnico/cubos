@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_MAP_STORAGE_HPP
-#define CUBOS_CORE_ECS_MAP_STORAGE_HPP
+#pragma once
 
 #include <cubos/core/ecs/storage.hpp>
 
@@ -48,5 +47,3 @@ namespace cubos::core::ecs
     }
 
 } // namespace cubos::core::ecs
-
-#endif // ECS_MAP_STORAGE_HPP
