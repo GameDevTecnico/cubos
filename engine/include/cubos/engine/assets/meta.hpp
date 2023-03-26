@@ -28,19 +28,21 @@ namespace cubos::engine
         AssetMeta() = default;
         AssetMeta(const AssetMeta&) = default;
         AssetMeta(AssetMeta&&) = default;
+        AssetMeta& operator=(const AssetMeta&) = default;
+        AssetMeta& operator=(AssetMeta&&) = default;
 
         /// @param key Key of the parameter.
         /// @returns The value of the parameter, if the parameter exists.
-        std::optional<std::string> get(const std::string& key) const;
+        std::optional<std::string> get(std::string_view key) const;
 
         /// Sets a parameter for the asset's metadata.
         /// @param key Key of the parameter.
         /// @param value Value of the parameter.
-        void set(const std::string& key, const std::string& value);
+        void set(std::string_view key, std::string_view value);
 
         /// Removes a parameter from the asset's metadata.
         /// @param key Key of the parameter.
-        void remove(const std::string& key);
+        void remove(std::string_view key);
 
         /// @returns Parameters of the asset.
         inline const std::unordered_map<std::string, std::string>& params() const
