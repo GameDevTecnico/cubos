@@ -11,6 +11,9 @@ namespace cubos::engine
     ///
     /// @details Not all bridges need to implement the save method. You could have an asset type
     /// which could be loaded but not saved, for example.
+    ///
+    /// Bridges should take into account that the asset manager calls them from a different thread
+    /// than the one that created them.
     class AssetBridge
     {
     public:
@@ -21,10 +24,10 @@ namespace cubos::engine
         /// When called, the meta data of the given asset should be already present in the asset
         /// manager.
         /// @returns Whether the asset was successfully loaded.
-        virtual bool load(Assets& assets, Asset handle) = 0;
+        virtual bool load(Assets& assets, AnyAsset handle) = 0;
 
         /// Saves an asset from the given asset manager, identified by the given handle.
         /// @returns Whether the asset was successfully saved.
-        virtual bool save(Assets& assets, Asset handle);
+        virtual bool save(const Assets& assets, AnyAsset handle);
     };
 } // namespace cubos::engine
