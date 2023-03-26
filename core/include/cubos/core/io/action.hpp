@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_ACTION_HPP
-#define CUBOS_CORE_IO_ACTION_HPP
+#pragma once
 
 #include <list>
 
@@ -44,5 +43,3 @@ namespace cubos::core::io
         bool enable;
     };
 } // namespace cubos::core::io
-
-#endif // CUBOS_CORE_IO_ACTION_HPP

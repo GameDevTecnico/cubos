@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_GL_PPS_BLOOM_HPP
-#define CUBOS_ENGINE_GL_PPS_BLOOM_HPP
+#pragma once
 
 #include <vector>
 
@@ -93,5 +92,3 @@ namespace cubos::engine::gl::pps
         std::vector<core::gl::Framebuffer> mBloomFBs;     ///< The framebuffers of the bloom effect.
     };
 } // namespace cubos::engine::gl::pps
-
-#endif // CUBOS_ENGINE_GL_PPS_BLOOM_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_QB_PARSER_HPP
-#define CUBOS_CORE_DATA_QB_PARSER_HPP
+#pragma once
 
 #include <vector>
 
@@ -25,5 +24,3 @@ namespace cubos::core::data
     /// @return True if the file was parsed successfully, otherwise false.
     bool parseQB(std::vector<QBMatrix>& matrices, memory::Stream& stream);
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_QB_PARSER_HPP

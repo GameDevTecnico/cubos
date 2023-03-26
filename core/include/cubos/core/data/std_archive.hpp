@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_STD_ARCHIVE_HPP
-#define CUBOS_CORE_DATA_STD_ARCHIVE_HPP
+#pragma once
 
 #include <filesystem>
 #include <unordered_map>
@@ -50,5 +49,3 @@ namespace cubos::core::data
         std::size_t mNextId;                              ///< The next identifier to assign to a file.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_ARCHIVE_HPP

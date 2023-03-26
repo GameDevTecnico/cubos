@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_DISPATCHER_HPP
-#define CUBOS_CORE_ECS_DISPATCHER_HPP
+#pragma once
 
 #include <map>
 #include <memory>
@@ -242,4 +241,3 @@ namespace cubos::core::ecs
         system->settings->after.system.push_back(mCurrSystem);
     }
 } // namespace cubos::core::ecs
-#endif // CUBOS_CORE_ECS_DISPATCHER_HPP

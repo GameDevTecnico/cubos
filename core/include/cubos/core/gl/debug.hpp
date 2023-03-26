@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_GL_DEBUG_HPP
-#define CUBOS_CORE_GL_DEBUG_HPP
+#pragma once
 
 #include <list>
 #include <mutex>
@@ -95,5 +94,3 @@ namespace cubos::core::gl
         static std::mutex debugDrawMutex;
     };
 } // namespace cubos::core::gl
-
-#endif // CUBOS_CORE_GL_DEBUG_HPP

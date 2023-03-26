@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_ECS_LOCAL_TO_WORLD_HPP
-#define CUBOS_ENGINE_ECS_LOCAL_TO_WORLD_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -13,5 +12,3 @@ namespace cubos::engine::ecs
     };
 
 } // namespace cubos::engine::ecs
-
-#endif // CUBOS_ENGINE_ECS_LOCAL_TO_WORLD_HPP

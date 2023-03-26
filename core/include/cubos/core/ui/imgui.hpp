@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_UI_IMGUI_HPP
-#define CUBOS_CORE_UI_IMGUI_HPP
+#pragma once
 
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/window.hpp>
@@ -26,5 +25,3 @@ namespace cubos::core::ui
     /// @return True if the event was consumed by ImGui, false otherwise.
     bool handleEvent(const io::WindowEvent& event);
 } // namespace cubos::core::ui
-
-#endif // CUBOS_CORE_UI_IMGUI_HPP

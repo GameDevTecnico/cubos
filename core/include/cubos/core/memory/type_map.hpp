@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_MEMORY_TYPE_MAP_HPP
-#define CUBOS_CORE_MEMORY_TYPE_MAP_HPP
+#pragma once
 
 #include <optional>
 #include <typeindex>
@@ -115,5 +114,3 @@ namespace cubos::core::memory
         std::unordered_map<std::type_index, V> mMap; ///< The map of values.
     };
 } // namespace cubos::core::memory
-
-#endif // CUBOS_CORE_MEMORY_TYPE_MAP_HPP

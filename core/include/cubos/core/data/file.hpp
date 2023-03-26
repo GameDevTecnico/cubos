@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_FILE_HPP
-#define CUBOS_CORE_DATA_FILE_HPP
+#pragma once
 
 #include <memory>
 #include <mutex>
@@ -168,5 +167,3 @@ namespace cubos::core::data
         std::mutex mMutex; ///< The mutex used to synchronize changing properties of this file.
     };
 } // namespace cubos::core::data
-
-#endif // CUBOS_CORE_DATA_FILE_HPP

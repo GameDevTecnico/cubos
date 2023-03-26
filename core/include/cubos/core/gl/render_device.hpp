@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_GL_RENDER_DEVICE_HPP
-#define CUBOS_CORE_GL_RENDER_DEVICE_HPP
+#pragma once
 
 #include <memory>
 #include <variant>
@@ -1164,5 +1163,3 @@ namespace cubos::core::gl
     }
 
 } // namespace cubos::core::gl
-
-#endif // CUBOS_CORE_GL_RENDER_DEVICE_HPP

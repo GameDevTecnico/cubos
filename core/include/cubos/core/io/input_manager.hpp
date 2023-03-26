@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_IO_INPUT_MANAGER_HPP
-#define CUBOS_CORE_IO_INPUT_MANAGER_HPP
+#pragma once
 
 #include <list>
 #include <map>
@@ -307,5 +306,3 @@ namespace cubos::core::io
         InputManager::mouseAxisCallbacks[mouseAxis]->unregisterCallback<T>(obj, callback);
     }
 } // namespace cubos::core::io
-
-#endif // CUBOS_CORE_IO_INPUT_MANAGER_HPP

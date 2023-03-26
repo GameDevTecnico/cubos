@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_STORAGE_HPP
-#define CUBOS_CORE_ECS_STORAGE_HPP
+#pragma once
 
 #include <cubos/core/data/package.hpp>
 #include <cubos/core/data/serialization_map.hpp>
@@ -81,5 +80,3 @@ namespace cubos::core::ecs
         }
     };
 } // namespace cubos::core::ecs
-
-#endif // ECS_STORAGE_HPP

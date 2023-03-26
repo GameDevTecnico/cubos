@@ -1,6 +1,5 @@
 
-#ifndef CUBOS_CORE_GL_UTIL_HPP
-#define CUBOS_CORE_GL_UTIL_HPP
+#pragma once
 
 #include <cubos/core/gl/render_device.hpp>
 
@@ -15,5 +14,3 @@ namespace cubos::core::gl
     /// @param va Reference in which the quad's VertexArray will be stored.
     void generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pipeline, VertexArray& va);
 } // namespace cubos::core::gl
-
-#endif // CUBOS_CORE_GL_UTIL_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_UI_SERIALIZATION_HPP
-#define CUBOS_CORE_UI_SERIALIZATION_HPP
+#pragma once
 
 #include <cubos/core/data/package.hpp>
 
@@ -57,5 +56,3 @@ namespace cubos::core::ui
         return false;
     }
 } // namespace cubos::core::ui
-
-#endif // CUBOS_CORE_UI_SERIALIZATION_HPP

@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_ECS_EVENT_WRITER_HPP
-#define CUBOS_CORE_ECS_EVENT_WRITER_HPP
+#pragma once
 
 #include <cubos/core/ecs/event_pipe.hpp>
 
@@ -36,5 +35,3 @@ namespace cubos::core::ecs
     }
 
 } // namespace cubos::core::ecs
-
-#endif

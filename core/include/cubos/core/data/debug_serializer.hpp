@@ -1,5 +1,4 @@
-#ifndef CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP
-#define CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP
+#pragma once
 
 #include <stack>
 
@@ -141,5 +140,3 @@ struct fmt::formatter<cubos::core::data::Debug<T>> : formatter<string_view>
     }
 };
 /// @endcond
-
-#endif // CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP

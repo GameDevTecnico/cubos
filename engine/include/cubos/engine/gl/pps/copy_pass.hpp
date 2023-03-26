@@ -1,5 +1,4 @@
-#ifndef CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP
-#define CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -32,5 +31,3 @@ namespace cubos::engine::gl::pps
         core::gl::VertexArray mScreenQuadVa;      ///< The screen quad VA used to render the output.
     };
 } // namespace cubos::engine::gl::pps
-
-#endif // CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP
