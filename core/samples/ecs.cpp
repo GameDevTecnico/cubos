@@ -14,24 +14,20 @@ using namespace cubos::core;
 
 struct Player
 {
-    using Storage = ecs::NullStorage<Player>;
 };
 
 struct Position
 {
-    using Storage = ecs::VecStorage<Position>;
     float x, y, z;
 };
 
 struct Velocity
 {
-    using Storage = ecs::MapStorage<Velocity>;
     float x, y, z;
 };
 
 struct Parent
 {
-    using Storage = ecs::VecStorage<Parent>;
     ecs::Entity entity;
 };
 
@@ -94,10 +90,10 @@ namespace cubos::core::data
     }
 } // namespace cubos::core::data
 
-CUBOS_REGISTER_COMPONENT(Player, "Player");
-CUBOS_REGISTER_COMPONENT(Position, "Position");
-CUBOS_REGISTER_COMPONENT(Velocity, "Velocity");
-CUBOS_REGISTER_COMPONENT(Parent, "Parent");
+CUBOS_REGISTER_COMPONENT(Player, ecs::NullStorage<Player>, "Player");
+CUBOS_REGISTER_COMPONENT(Position, ecs::VecStorage<Position>, "Position");
+CUBOS_REGISTER_COMPONENT(Velocity, ecs::MapStorage<Velocity>, "Velocity");
+CUBOS_REGISTER_COMPONENT(Parent, ecs::VecStorage<Parent>, "Parent");
 
 void spawner(ecs::Commands cmds)
 {
