@@ -3,53 +3,62 @@
 using namespace cubos::core;
 using namespace cubos::core::ecs;
 
-bool Registry::create(const std::string& name, data::Deserializer& des, Blueprint& blueprint, Entity id)
+bool Registry::create(std::string_view name, data::Deserializer& des, Blueprint& blueprint, Entity id)
 {
-    auto& creators = Registry::creators();
-
-    if (creators.find(name) == creators.end())
+    auto& creators = Registry::entriesByName();
+    if (auto it = creators.find(std::string(name)); it != creators.end())
     {
-        CUBOS_ERROR("Component type '{}' not registered", name);
-        return false;
+        return it->second->componentCreator(des, blueprint, id);
     }
 
-    return creators.at(name)(des, blueprint, id);
+    CUBOS_ERROR("Component with name '{}' not registered", name);
+    return false;
 }
 
-const std::string& Registry::name(std::type_index index)
+std::unique_ptr<IStorage> Registry::createStorage(std::type_index type)
 {
-    auto& names = Registry::names();
-    if (auto it = names.at(index))
+    auto& creators = Registry::entriesByType();
+    if (auto it = creators.at(type))
     {
-        return *it;
+        return (*it)->storageCreator();
     }
 
-    CUBOS_CRITICAL("Component type '{}' not registered", index.name());
-    abort();
+    CUBOS_ERROR("Component type '{}' not registered", type.name());
+    return nullptr;
 }
 
-std::type_index Registry::index(const std::string& name)
+std::optional<std::string_view> Registry::name(std::type_index type)
 {
-    auto& names = Registry::names();
-    for (const auto& pair : names)
+    auto& entries = Registry::entriesByType();
+    if (auto it = entries.at(type))
     {
-        if (pair.second == name)
-        {
-            return pair.first;
-        }
+        return (*it)->name;
     }
 
-    return typeid(void);
+    CUBOS_ERROR("Component type '{}' not registered", type.name());
+    return std::nullopt;
 }
 
-std::unordered_map<std::string, Registry::Creator>& Registry::creators()
+std::optional<std::type_index> Registry::type(std::string_view name)
 {
-    static std::unordered_map<std::string, Creator> creators;
-    return creators;
+    auto& entries = Registry::entriesByName();
+    if (auto it = entries.find(std::string(name)); it != entries.end())
+    {
+        return it->second->type;
+    }
+
+    CUBOS_ERROR("Component with name '{}' not registered", name);
+    return std::nullopt;
 }
 
-memory::TypeMap<std::string>& Registry::names()
+memory::TypeMap<std::shared_ptr<Registry::Entry>>& Registry::entriesByType()
 {
-    static memory::TypeMap<std::string> names;
-    return names;
+    static memory::TypeMap<std::shared_ptr<Entry>> entries;
+    return entries;
+}
+
+std::unordered_map<std::string, std::shared_ptr<Registry::Entry>>& Registry::entriesByName()
+{
+    static std::unordered_map<std::string, std::shared_ptr<Entry>> entries;
+    return entries;
 }

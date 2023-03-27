@@ -5,80 +5,110 @@
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/memory/type_map.hpp>
 
+#include <optional>
+
 namespace cubos::core::ecs
 {
-    /// Singleton which stores the global registry of component types, allowing components to be created from
-    /// deserializers.
+    /// Singleton which acts as a global registry for all component types. For each component type,
+    /// associated to its name, it stores a constructor for its storage type and a function for
+    /// instantiating the component from a deserializer into a blueprint.
     class Registry final
     {
     public:
         Registry() = delete;
 
-        /// Instantiates a new component into a blueprint from a deserializer.
+        /// Instantiates a component with the given name from a deserializer into a blueprint.
         /// @param name The name of the component.
         /// @param des The deserializer to read the component data from.
         /// @param blueprint The blueprint to instantiate the component into.
         /// @param id The id of the entity the component belongs to.
         /// @returns True if the component type was found and successfully instantiated, false otherwise.
-        static bool create(const std::string& name, data::Deserializer& des, Blueprint& blueprint, Entity id);
+        static bool create(std::string_view name, data::Deserializer& des, Blueprint& blueprint, Entity id);
+
+        /// Instantiates a component storage for the given component type.
+        /// @param type The type index of the component.
+        /// @returns A pointer to the storage, or nullptr if the component type was not found.
+        static std::unique_ptr<IStorage> createStorage(std::type_index type);
 
         /// Registers a new component type.
         /// @tparam T The component type to register.
+        /// @tparam S The storage type to use for the component.
         /// @param name The name of the component.
-        template <typename ComponentType>
-        static void add(const std::string& name);
+        template <typename T, typename S>
+        static void add(std::string_view name);
 
         /// Gets the name of a component type.
         /// @param index The type index of the component.
-        /// @returns The name of the component.
-        static const std::string& name(std::type_index index);
+        /// @returns The name of the component, or std::nullopt if the component type was not found.
+        static std::optional<std::string_view> name(std::type_index type);
 
         /// Gets the type index of a component type.
         /// @param name The name of the component.
-        /// @returns The type index of the component, or typeid(void) if the component type was not found.
-        static std::type_index index(const std::string& name);
+        /// @returns The type index of the component, or std::nullopt if the component type was not found.
+        static std::optional<std::type_index> type(std::string_view name);
 
     private:
-        /// Function type for creating components from deserializers.
-        using Creator = std::function<bool(data::Deserializer&, Blueprint&, Entity)>;
+        /// An entry in the component registry.
+        struct Entry
+        {
+            std::type_index type; ///< Type index of the component.
+            std::string name;     ///< Name of the component.
 
-        /// Accesses the global component creator registry.
-        static std::unordered_map<std::string, Creator>& creators();
+            /// Function for creating the component from a deserializer.
+            bool (*componentCreator)(data::Deserializer&, Blueprint&, Entity);
 
-        /// Accesses the global component name registry.
-        static memory::TypeMap<std::string>& names();
+            /// Function for creating the storage for the component.
+            std::unique_ptr<IStorage> (*storageCreator)();
+        };
+
+        /// @returns The global entry registry, indexed by type.
+        static memory::TypeMap<std::shared_ptr<Entry>>& entriesByType();
+
+        /// @returns The global entry registry, indexed by name.
+        static std::unordered_map<std::string, std::shared_ptr<Entry>>& entriesByName();
     };
 
     // Implementation.
 
-    template <typename ComponentType>
-    void Registry::add(const std::string& name)
+    template <typename T, typename S>
+    inline void Registry::add(std::string_view name)
     {
-        auto& creators = Registry::creators();
-        auto& names = Registry::names();
-        assert(creators.find(name) == creators.end());
+        static_assert(std::is_base_of_v<Storage<T>, S>, "Component storage for T must be derived from Storage<T>");
 
-        creators.emplace(name, [](data::Deserializer& des, Blueprint& blueprint, Entity id) {
-            ComponentType comp;
-            des.read(comp);
-            if (des.failed())
-            {
-                return false;
-            }
-            else
-            {
-                blueprint.add(id, comp);
-                return true;
-            }
+        auto& byType = Registry::entriesByType();
+        auto& byNames = Registry::entriesByName();
+        assert(byNames.find(std::string(name)) == byNames.end());
+
+        auto entry = std::make_shared<Entry>(Entry {
+            .type = typeid(T),
+            .name = std::string(name),
+            .componentCreator = [](data::Deserializer& des, Blueprint& blueprint, Entity id) {
+                T comp;
+                des.read(comp);
+                if (des.failed())
+                {
+                    return false;
+                }
+                else
+                {
+                    blueprint.add(id, comp);
+                    return true;
+                }
+            },
+            .storageCreator = []() {
+                auto storage = std::make_unique<S>();
+                return std::unique_ptr<IStorage>(storage.release());
+            },
         });
 
-        names.set<ComponentType>(name);
+        byType.set<T>(entry);
+        byNames[std::string(name)] = entry;
     }
 } // namespace cubos::core::ecs
 
-/// Macro used to register a component type so that it can be deserialized from files.
+/// Macro used to register a component type.
 /// An alternative to calling Registry::add() manually.
-#define CUBOS_REGISTER_COMPONENT(type, name)                                                                           \
+#define CUBOS_REGISTER_COMPONENT(type, storageType, name)                                                              \
     namespace cubos::core::ecs::impl                                                                                   \
     {                                                                                                                  \
         class ComponentRegister##type                                                                                  \
@@ -86,7 +116,7 @@ namespace cubos::core::ecs
         private:                                                                                                       \
             static inline bool registerType()                                                                          \
             {                                                                                                          \
-                ::cubos::core::ecs::Registry::add<type>(name);                                                         \
+                ::cubos::core::ecs::Registry::add<type, storageType>(name);                                            \
                 return true;                                                                                           \
             }                                                                                                          \
                                                                                                                        \
