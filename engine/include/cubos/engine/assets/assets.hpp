@@ -215,7 +215,8 @@ namespace cubos::engine
 
         /// Gets a pointer to the asset data associated with the given handle.
         /// If the asset is not loaded, this blocks until it is. If the asset cannot be loaded,
-        /// abort is called.
+        /// abort is called. If this function is called from the loader thread, instead of waiting
+        /// for the asset to load, it will be loaded synchronously.
         /// @tparam Lock The type of the lock guard.
         /// @param handle The handle to get the asset data for.
         /// @param type The expected type of the asset data.
