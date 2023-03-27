@@ -129,7 +129,7 @@ namespace cubos::core::ecs
     template <typename T>
     void World::registerComponent()
     {
-        CUBOS_TRACE("Registered component '{}'", getComponentName<T>());
+        CUBOS_TRACE("Registered component '{}'", getComponentName<T>().value());
         this->componentManager.registerComponent<T>();
     }
 
@@ -163,7 +163,7 @@ namespace cubos::core::ecs
         ([&](auto& component) { this->componentManager.add(entity.index, component); }(components), ...);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
-        std::string componentNames[] = {"'" + getComponentName<ComponentTypes>() + "'" ...};
+        std::string componentNames[] = {"'" + getComponentName<ComponentTypes>().value() + "'" ...};
         CUBOS_DEBUG("Created entity {} with components {}", entity.index, fmt::join(componentNames, ", "));
 #endif
         return entity;
@@ -191,7 +191,7 @@ namespace cubos::core::ecs
         this->entityManager.setMask(entity, mask);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
-        std::string componentNames[] = {"'" + getComponentName<ComponentTypes>() + "'" ...};
+        std::string componentNames[] = {"'" + getComponentName<ComponentTypes>().value() + "'" ...};
         CUBOS_DEBUG("Added components {} to entity {}", fmt::join(componentNames, ", "), entity.index);
 #endif
     }
@@ -218,7 +218,7 @@ namespace cubos::core::ecs
         this->entityManager.setMask(entity, mask);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
-        std::string componentNames[] = {"'" + getComponentName<ComponentTypes>() + "'" ...};
+        std::string componentNames[] = {"'" + getComponentName<ComponentTypes>().value() + "'" ...};
         CUBOS_DEBUG("Removed components {} from entity {}", fmt::join(componentNames, ", "), entity.index);
 #endif
     }
