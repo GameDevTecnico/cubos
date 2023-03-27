@@ -9,9 +9,9 @@
 #include <cubos/core/gl/camera.hpp>
 #include <cubos/core/settings.hpp>
 
-#include <components/cubos/camera.hpp>
-#include <components/cubos/grid.hpp>
-#include <components/cubos/local_to_world.hpp>
+#include <cubos/engine/ecs/camera.hpp>
+#include <cubos/engine/ecs/grid.hpp>
+#include <cubos/engine/ecs/local_to_world.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 
