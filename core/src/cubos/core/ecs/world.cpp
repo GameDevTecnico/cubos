@@ -43,7 +43,7 @@ data::Package World::pack(Entity entity, data::Context& context) const
         if (mask.test(i))
         {
             auto name = Registry::name(this->componentManager.getType(i));
-            pkg.fields().push_back({name, this->componentManager.pack(entity.index, i, context)});
+            pkg.fields().push_back({std::string(name.value()), this->componentManager.pack(entity.index, i, context)});
         }
     }
 
@@ -63,15 +63,15 @@ bool World::unpack(Entity entity, const data::Package& package, data::Context& c
 
     for (const auto& field : package.fields())
     {
-        auto index = Registry::index(field.first);
-        if (index == typeid(void))
+        auto type = Registry::type(field.first);
+        if (!type.has_value())
         {
             CUBOS_ERROR("Unknown component type '{}'", field.first);
             success = false;
             continue;
         }
 
-        auto id = this->componentManager.getIDFromIndex(index);
+        auto id = this->componentManager.getIDFromIndex(*type);
         if (this->componentManager.unpack(entity.index, id, field.second, context))
         {
             mask.set(id);
