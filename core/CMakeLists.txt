@@ -180,7 +180,7 @@ target_compile_definitions(cubos-core PUBLIC
 )
 target_compile_options(cubos-core PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
-    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic -Werror>
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic -Werror -Wno-unknown-attributes>
 )
 
 # Link dependencies
