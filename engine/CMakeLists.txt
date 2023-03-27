@@ -44,6 +44,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/assets/meta.cpp"
 
     "src/cubos/engine/scene/plugin.cpp"
+    "src/cubos/engine/scene/bridge.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -91,6 +92,7 @@ set(CUBOS_ENGINE_INCLUDE
 
     "include/cubos/engine/scene/plugin.hpp"
     "include/cubos/engine/scene/scene.hpp"
+    "include/cubos/engine/scene/bridge.hpp"
 )
 
 # Create cubos engine
