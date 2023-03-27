@@ -737,7 +737,8 @@ static bool generate(const GenerateOptions& options)
                 c = '_';
         }
 
-        std::string id = component.namespaceStr + "::" + component.typeStr;
+        std::string id = "::" + component.namespaceStr + "::" + component.typeStr;
+        std::string storageId = "::cubos::core::ecs::" + component.storage + "<" + id + ">";
 
         file << "#ifndef GEN_COMPONENT_" << macro_name << "_HPP" << std::endl;
         file << "#define GEN_COMPONENT_" << macro_name << "_HPP" << std::endl;
@@ -785,21 +786,13 @@ static bool generate(const GenerateOptions& options)
         }
         file << "}" << std::endl;
         file << std::endl;
-        file << "namespace cubos::core::ecs" << std::endl;
-        file << "{" << std::endl;
-        file << "    template <>" << std::endl;
-        file << "    struct ComponentStorage<" << id << ">" << std::endl;
-        file << "    {" << std::endl;
-        file << "        using Type = " << component.storage << "<" << id << ">;" << std::endl;
-        file << "    };" << std::endl;
-        file << "} // namespace cubos::core::ecs" << std::endl;
-        file << std::endl;
         if (!component.namespaceStr.empty())
         {
             file << "namespace " << component.namespaceStr << std::endl;
             file << "{" << std::endl;
         }
-        file << "    CUBOS_REGISTER_COMPONENT(" << component.typeStr << ", \"" << component.name << "\");" << std::endl;
+        file << "    CUBOS_REGISTER_COMPONENT(" << component.typeStr << ", " << storageId << ", \"" << component.name
+             << "\");" << std::endl;
         if (!component.namespaceStr.empty())
             file << "} // namespace " << component.namespaceStr << std::endl;
         file << std::endl;
