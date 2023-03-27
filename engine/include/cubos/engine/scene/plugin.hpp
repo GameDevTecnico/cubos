@@ -10,6 +10,9 @@ namespace cubos::engine
     /// @details Registers the `SceneBridge` asset bridge with the `.scn` extension. Loads assets
     /// of the `Scene` type.
     ///
+    /// Dependencies:
+    /// - `assetsPlugin`
+    ///
     /// @param cubos CUBOS. main class.
     void scenePlugin(Cubos& cubos);
 } // namespace cubos::engine
