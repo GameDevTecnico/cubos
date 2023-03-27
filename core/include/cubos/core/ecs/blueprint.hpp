@@ -18,6 +18,7 @@ namespace cubos::core::ecs
     {
     public:
         Blueprint() = default;
+        Blueprint(Blueprint&&) = default;
         ~Blueprint();
 
         /// Creates a new entity and returns its identifier.
