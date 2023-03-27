@@ -1,8 +1,6 @@
 #ifndef CUBOS_ENGINE_ECS_ROTATION_HPP
 #define CUBOS_ENGINE_ECS_ROTATION_HPP
 
-#include <components/base.hpp>
-
 #include <glm/gtx/quaternion.hpp>
 
 namespace cubos::engine::ecs
