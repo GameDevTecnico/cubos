@@ -4,16 +4,24 @@
 using namespace cubos::core;
 using namespace cubos::core::ecs;
 
-const std::string& cubos::core::ecs::getComponentName(std::type_index type)
+std::optional<std::string_view> cubos::core::ecs::getComponentName(std::type_index type)
 {
     return Registry::name(type);
 }
 
-ComponentManager::~ComponentManager()
+void ComponentManager::registerComponent(std::type_index type)
 {
-    for (auto& entry : this->entries)
+    if (this->typeToIds.find(type) == this->typeToIds.end())
     {
-        delete entry.storage;
+        auto storage = Registry::createStorage(type);
+        if (storage == nullptr)
+        {
+            CUBOS_CRITICAL("Component type '{}' is not registered in the global registry", type.name());
+            abort();
+        }
+
+        this->typeToIds[type] = this->entries.size() + 1; // Component ids start at 1.
+        this->entries.emplace_back(std::move(storage));
     }
 }
 
@@ -49,7 +57,7 @@ void ComponentManager::removeAll(uint32_t id)
     }
 }
 
-ComponentManager::Entry::Entry(IStorage* storage) : storage(storage)
+ComponentManager::Entry::Entry(std::unique_ptr<IStorage> storage) : storage(std::move(storage))
 {
     this->mutex = std::make_unique<std::shared_mutex>();
 }
