@@ -176,7 +176,7 @@ target_compile_features(cubos-core PUBLIC cxx_std_20)
 target_compile_definitions(cubos-core PUBLIC -DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS})
 target_compile_options(cubos-core PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
-    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic -Werror>
+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic -Werror -Wno-unknown-attributes>
 )
 
 # Link dependencies
