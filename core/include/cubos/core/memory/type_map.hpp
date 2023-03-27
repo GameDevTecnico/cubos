@@ -14,6 +14,7 @@ namespace cubos::core::memory
     {
     public:
         TypeMap() = default;
+        TypeMap(TypeMap&&) = default;
         ~TypeMap() = default;
 
         /// @param key The key to identify the value.
