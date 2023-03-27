@@ -369,11 +369,20 @@ AnyAsset Assets::store(AnyAsset handle, std::type_index type, void* data, void (
     auto assetEntry = this->entry(handle, true);
     if (assetEntry == nullptr)
     {
+        CUBOS_ERROR("Could not store asset");
         return AnyAsset();
     }
 
     // Lock the asset.
     std::unique_lock lock(assetEntry->mutex);
+
+    // If it has associated data, free it.
+    if (assetEntry->data != nullptr)
+    {
+        CUBOS_ASSERT(assetEntry->destructor != nullptr, "No destructor registered for asset type {}",
+                     assetEntry->type.name());
+        assetEntry->destructor(assetEntry->data);
+    }
 
     // Mark it as loaded and set its data.
     assetEntry->status = Status::Loaded;
