@@ -26,17 +26,17 @@
 #include <cubos/engine/tools/world_inspector/plugin.hpp>
 #include <cubos/engine/tools/entity_inspector/plugin.hpp>
 
-#include <components/cubos/position.hpp>
-#include <components/cubos/rotation.hpp>
-#include <components/cubos/scale.hpp>
-#include <components/cubos/local_to_world.hpp>
-#include <components/cubos/grid.hpp>
-#include <components/cubos/camera.hpp>
-
-#include <components/num.hpp>
-#include <components/parent.hpp>
+#include <cubos/engine/ecs/position.hpp
+#include <cubos/engine/ecs/rotation.hpp>
+#include <cubos/engine/ecs/scale.hpp>
+#include <cubos/engine/ecs/local_to_world.hpp>
+#include <cubos/engine/ecs/grid.hpp>
+#include <cubos/engine/ecs/camera.hpp>
 
 #include <imgui.h>
+
+#include "num.hpp"
+#include "parent.hpp"
 
 using namespace cubos;
 using namespace engine;
