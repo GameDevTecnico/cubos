@@ -419,12 +419,15 @@ void* Assets::access(AnyAsset handle, std::type_index type, Lock& lock, bool inc
         CUBOS_ASSERT(bridge != nullptr, "Could not access asset");
 
         // Load the asset - the const_cast is okay since the const qualifiers are only used to make
-        // the interface more readable. The exposed interface is all thread-safe.
+        // the interface more readable. We need to unlock temporarily to avoid a deadlock, since the
+        // bridge will call back into the asset manager.
+        lock.unlock();
         if (!bridge->load(const_cast<Assets&>(*this), handle))
         {
             CUBOS_CRITICAL("Could not load asset {}", core::data::Debug(handle));
             abort();
         }
+        lock.lock();
     }
 
     // Wait until the asset finishes loading.
