@@ -48,7 +48,7 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
 
             for (x[d] = -1; x[d] < int(sz[d]);)
             {
-                int n = 0;
+                size_t n = 0;
 
                 // Create mask
                 for (x[v] = 0; x[v] < int(sz[v]); ++x[v])
@@ -68,19 +68,19 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
                 n = 0;
 
                 // Generate mesh from mask
-                for (int j = 0; j < int(sz[v]); ++j)
+                for (size_t j = 0; j < sz[v]; ++j)
                 {
-                    for (int i = 0; i < int(sz[u]);)
+                    for (size_t i = 0; i < sz[u];)
                     {
                         if (mask[n] != 0)
                         {
-                            int w, h;
-                            for (w = 1; i + w < int(sz[u]) && mask[n + w] == mask[n]; ++w)
+                            size_t w, h;
+                            for (w = 1; i + w < sz[u] && mask[n + w] == mask[n]; ++w)
                                 ;
                             bool done = false;
-                            for (h = 1; j + h < int(sz[v]); ++h)
+                            for (h = 1; j + h < sz[v]; ++h)
                             {
-                                for (int k = 0; k < w; ++k)
+                                for (size_t k = 0; k < w; ++k)
                                     if (mask[n + k + h * sz[u]] == 0 || mask[n + k + h * sz[u]] != mask[n])
                                     {
                                         done = true;
@@ -93,12 +93,12 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
 
                             if (mask[n] != 0)
                             {
-                                x[u] = i;
-                                x[v] = j;
+                                x[u] = static_cast<int>(i);
+                                x[v] = static_cast<int>(j);
 
                                 glm::ivec3 du = {0, 0, 0}, dv = {0, 0, 0};
-                                du[u] = w;
-                                dv[v] = h;
+                                du[u] = static_cast<int>(w);
+                                dv[v] = static_cast<int>(h);
 
                                 auto vi = vertices.size();
                                 vertices.resize(vi + 4, {{}, back_face ? -q : q, mask[n]});
@@ -111,26 +111,26 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
                                 indices.resize(ii + 6);
                                 if (back_face)
                                 {
-                                    indices[ii + 0] = int(vi) + 0;
-                                    indices[ii + 1] = int(vi) + 2;
-                                    indices[ii + 2] = int(vi) + 1;
-                                    indices[ii + 3] = int(vi) + 3;
-                                    indices[ii + 4] = int(vi) + 2;
-                                    indices[ii + 5] = int(vi) + 0;
+                                    indices[ii + 0] = static_cast<uint16_t>(vi) + 0;
+                                    indices[ii + 1] = static_cast<uint16_t>(vi) + 2;
+                                    indices[ii + 2] = static_cast<uint16_t>(vi) + 1;
+                                    indices[ii + 3] = static_cast<uint16_t>(vi) + 3;
+                                    indices[ii + 4] = static_cast<uint16_t>(vi) + 2;
+                                    indices[ii + 5] = static_cast<uint16_t>(vi) + 0;
                                 }
                                 else
                                 {
-                                    indices[ii + 0] = int(vi) + 0;
-                                    indices[ii + 1] = int(vi) + 1;
-                                    indices[ii + 2] = int(vi) + 2;
-                                    indices[ii + 3] = int(vi) + 2;
-                                    indices[ii + 4] = int(vi) + 3;
-                                    indices[ii + 5] = int(vi) + 0;
+                                    indices[ii + 0] = static_cast<uint16_t>(vi) + 0;
+                                    indices[ii + 1] = static_cast<uint16_t>(vi) + 1;
+                                    indices[ii + 2] = static_cast<uint16_t>(vi) + 2;
+                                    indices[ii + 3] = static_cast<uint16_t>(vi) + 2;
+                                    indices[ii + 4] = static_cast<uint16_t>(vi) + 3;
+                                    indices[ii + 5] = static_cast<uint16_t>(vi) + 0;
                                 }
                             }
 
-                            for (int l = 0; l < h; ++l)
-                                for (int k = 0; k < w; ++k)
+                            for (size_t l = 0; l < h; ++l)
+                                for (size_t k = 0; k < w; ++k)
                                     mask[n + k + l * sz[u]] = 0;
 
                             i += w;

@@ -67,7 +67,7 @@ void pps::CopyPass::execute(std::map<Input, core::gl::Texture2D>&, core::gl::Tex
 {
     // Set the framebuffer and state.
     this->renderDevice.setFramebuffer(out);
-    this->renderDevice.setViewport(0, 0, this->size.x, this->size.y);
+    this->renderDevice.setViewport(0, 0, static_cast<int>(this->size.x), static_cast<int>(this->size.y));
     this->renderDevice.setRasterState(nullptr);
     this->renderDevice.setBlendState(nullptr);
     this->renderDevice.setDepthStencilState(nullptr);
