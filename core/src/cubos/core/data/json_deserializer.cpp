@@ -25,13 +25,13 @@ using namespace cubos::core::data;
         }                                                                                                              \
     } while (false)
 
-#define READ_GENERIC(out, fromStr)                                                                                     \
+#define READ_GENERIC(out, type, fromStr)                                                                               \
     CHECK_ERROR(do {                                                                                                   \
         if (this->frame.top().mode == Mode::Dictionary)                                                                \
         {                                                                                                              \
             if (this->frame.top().key)                                                                                 \
             {                                                                                                          \
-                out = fromStr(this->frame.top().iter.key());                                                           \
+                out = static_cast<type>(fromStr(this->frame.top().iter.key()));                                        \
                 this->frame.top().key = false;                                                                         \
             }                                                                                                          \
             else                                                                                                       \
@@ -59,62 +59,62 @@ JSONDeserializer::JSONDeserializer(const std::string& src)
 
 void JSONDeserializer::readI8(int8_t& value)
 {
-    READ_GENERIC(value, std::stoi);
+    READ_GENERIC(value, int8_t, std::stoi);
 }
 
 void JSONDeserializer::readI16(int16_t& value)
 {
-    READ_GENERIC(value, std::stoi);
+    READ_GENERIC(value, int16_t, std::stoi);
 }
 
 void JSONDeserializer::readI32(int32_t& value)
 {
-    READ_GENERIC(value, std::stol);
+    READ_GENERIC(value, int32_t, std::stol);
 }
 
 void JSONDeserializer::readI64(int64_t& value)
 {
-    READ_GENERIC(value, std::stoll);
+    READ_GENERIC(value, int64_t, std::stoll);
 }
 
 void JSONDeserializer::readU8(uint8_t& value)
 {
-    READ_GENERIC(value, std::stoul);
+    READ_GENERIC(value, uint8_t, std::stoul);
 }
 
 void JSONDeserializer::readU16(uint16_t& value)
 {
-    READ_GENERIC(value, std::stoul);
+    READ_GENERIC(value, uint16_t, std::stoul);
 }
 
 void JSONDeserializer::readU32(uint32_t& value)
 {
-    READ_GENERIC(value, std::stoul);
+    READ_GENERIC(value, uint32_t, std::stoul);
 }
 
 void JSONDeserializer::readU64(uint64_t& value)
 {
-    READ_GENERIC(value, std::stoull);
+    READ_GENERIC(value, uint64_t, std::stoull);
 }
 
 void JSONDeserializer::readF32(float& value)
 {
-    READ_GENERIC(value, std::stof);
+    READ_GENERIC(value, float, std::stof);
 }
 
 void JSONDeserializer::readF64(double& value)
 {
-    READ_GENERIC(value, std::stod);
+    READ_GENERIC(value, double, std::stod);
 }
 
 void JSONDeserializer::readBool(bool& value)
 {
-    READ_GENERIC(value, [](const std::string& s) { return s == "true"; });
+    READ_GENERIC(value, bool, [](const std::string& s) { return s == "true"; });
 }
 
 void JSONDeserializer::readString(std::string& value)
 {
-    READ_GENERIC(value, [](const std::string& s) { return s; });
+    READ_GENERIC(value, std::string, [](const std::string& s) { return s; });
 }
 
 void JSONDeserializer::beginObject()

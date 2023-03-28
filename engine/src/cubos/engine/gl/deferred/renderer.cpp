@@ -774,14 +774,14 @@ void deferred::Renderer::createSSAOTextures()
     this->ssaoTex = this->renderDevice.createTexture2D(texDesc);
 
     // Generate noise texture
-    std::uniform_real_distribution<float> randomFloats(0.0, 1.0); // random floats between [0.0, 1.0]
+    std::uniform_real_distribution<float> randomFloats(0.0f, 1.0f); // random floats between [0.0, 1.0]
     std::default_random_engine generator;
     std::vector<glm::vec3> ssaoNoise;
     ssaoNoise.resize(16);
     for (unsigned int i = 0; i < 16; i++)
     {
-        glm::vec3 noise(randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
-                        randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
+        glm::vec3 noise(randomFloats(generator) * 2.0f - 1.0f, // [-1.0, 1.0]
+                        randomFloats(generator) * 2.0f - 1.0f, // [-1.0, 1.0]
                         0.0f);
         ssaoNoise[i] = noise;
     }
@@ -801,19 +801,19 @@ void deferred::Renderer::createSSAOTextures()
 void deferred::Renderer::generateSSAONoise()
 {
     // Generate kernel samples
-    std::uniform_real_distribution<float> randomFloats(0.0, 1.0); // random floats between [0.0, 1.0]
+    std::uniform_real_distribution<float> randomFloats(0.0f, 1.0f); // random floats between [0.0, 1.0]
     std::default_random_engine generator;
 
     this->ssaoKernel.resize(64);
     for (unsigned int i = 0; i < 64; i++)
     {
-        glm::vec3 sample(randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
-                         randomFloats(generator) * 2.0 - 1.0, // [-1.0, 1.0]
-                         randomFloats(generator)              // [ 0.0, 1.0]
+        glm::vec3 sample(randomFloats(generator) * 2.0f - 1.0f, // [-1.0, 1.0]
+                         randomFloats(generator) * 2.0f - 1.0f, // [-1.0, 1.0]
+                         randomFloats(generator)                // [ 0.0, 1.0]
         );
         sample = glm::normalize(sample);
         // sample *= randomFloats(generator);
-        float scale = float(i) / 64.0;
+        float scale = static_cast<float>(i) / 64.0f;
 
         scale = glm::lerp(0.1f, 1.0f, scale * scale);
         sample *= scale;

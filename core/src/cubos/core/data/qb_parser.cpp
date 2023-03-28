@@ -1,6 +1,5 @@
 #include <cubos/core/data/qb_parser.hpp>
 #include <cubos/core/memory/endianness.hpp>
-
 #include <cubos/core/log.hpp>
 
 bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream& stream)
@@ -96,25 +95,25 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
                         // Check if the material is already in the palette.
                         size_t mat;
                         for (mat = 1; mat < nextMat; ++mat)
-                            if (matrices[i].palette.get(mat).color == colorVec)
+                            if (matrices[i].palette.get(static_cast<uint16_t>(mat)).color == colorVec)
                                 break;
                         if (mat == nextMat)
                         {
-                            // Add the material to the palette.
-                            gl::Material desc;
-                            desc.color = colorVec;
-                            matrices[i].palette.set(mat, desc);
-                            nextMat += 1;
-
                             if (mat >= 65536)
                             {
                                 CUBOS_ERROR("Too many materials, max is 65536");
                                 return false;
                             }
+
+                            // Add the material to the palette.
+                            gl::Material desc;
+                            desc.color = colorVec;
+                            matrices[i].palette.set(static_cast<uint16_t>(mat), desc);
+                            nextMat += 1;
                         }
 
                         // Set the voxel.
-                        matrices[i].grid.set(glm::ivec3(x, y, z), mat);
+                        matrices[i].grid.set(glm::ivec3(x, y, z), static_cast<uint16_t>(mat));
                     }
         }
         else

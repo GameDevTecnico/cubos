@@ -59,7 +59,7 @@ uint16_t Palette::find(const Material& material) const
 
 uint16_t Palette::add(const Material& material, float similarity)
 {
-    size_t i = this->find(material);
+    auto i = this->find(material);
     if (this->get(i).similarity(material) >= similarity)
     {
         return i;

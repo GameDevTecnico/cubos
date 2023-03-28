@@ -13,8 +13,8 @@ static const auto directMap = data::SerializationMap<Entity, std::string>(
         auto pos = name.find('#');
         if (pos != std::string::npos)
         {
-            entity.index = std::stoul(name.substr(0, pos));
-            entity.generation = std::stoul(name.substr(pos + 1));
+            entity.index = static_cast<uint32_t>(std::stoul(name.substr(0, pos)));
+            entity.generation = static_cast<uint32_t>(std::stoul(name.substr(pos + 1)));
             return true;
         }
         return false;

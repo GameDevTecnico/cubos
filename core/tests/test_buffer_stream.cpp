@@ -47,12 +47,12 @@ TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Floats)
         auto places = rand() % 10;
 
         auto stream = BufferStream(buf, sizeof(buf));
-        stream.print(x, places);
+        stream.print(x, static_cast<size_t>(places));
         stream.put('\0');
         stream.seek(0, SeekOrigin::Begin);
         stream.parse(y);
 
-        EXPECT_NEAR(x, y, pow(10.0, -places));
+        EXPECT_NEAR(x, y, pow(10.0, static_cast<double>(-places)));
     }
 }
 
