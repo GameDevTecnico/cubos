@@ -88,7 +88,7 @@ static bool parseArguments(int argc, char** argv, GenerateOptions& options)
 /// Trims the string.
 /// @param str The string to trim.
 /// @return The trimmed string.
-static std::string trim(std::string str)
+static std::string_view trim(std::string_view str)
 {
     // Trim left.
     int64_t i;
@@ -109,7 +109,7 @@ static std::string trim(std::string str)
 /// @param component The component to fill.
 /// @param found Set to true if the attribute was found.
 /// @return True if the attribute was parsed successfully, false otherwise.
-bool parseAttribute(std::string line, Component& component, bool& found)
+bool parseAttribute(std::string_view line, Component& component, bool& found)
 {
     // Trim the line.
     line = trim(line);

@@ -15,7 +15,7 @@ namespace cubos::core::ecs
     namespace impl
     {
         template <typename T>
-        class QueryFetcher;
+        struct QueryFetcher;
     }
 
     /// @brief World is used as a container for all of the entity and component data.
@@ -109,7 +109,7 @@ namespace cubos::core::ecs
         template <typename... ComponentTypes>
         friend class Query;
         template <typename T>
-        friend class impl::QueryFetcher;
+        friend struct impl::QueryFetcher;
         friend class CommandBuffer;
 
         ResourceManager resourceManager;
