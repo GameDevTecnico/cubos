@@ -2,6 +2,8 @@
 
 #include <imgui.h>
 
+#include <array>
+
 using namespace cubos::core;
 using namespace cubos::core::ui;
 
@@ -129,7 +131,7 @@ static void showStructured(const data::Package& pkg, const std::string& name)
         for (size_t i = 0; i < pkg.size(); ++i)
         {
             ImGui::TableNextRow();
-            ImGui::PushID(i);
+            ImGui::PushID(static_cast<int>(i));
             switch (pkg.type())
             {
             case Type::Object:
@@ -334,7 +336,7 @@ static bool editStructured(data::Package& pkg, const std::string& name)
             bool shouldErase, shouldDuplicate;
 
             ImGui::TableNextRow();
-            ImGui::PushID(i);
+            ImGui::PushID(static_cast<int>(i));
 
             switch (pkg.type())
             {
@@ -355,7 +357,7 @@ static bool editStructured(data::Package& pkg, const std::string& name)
                 }
                 else if (shouldDuplicate)
                 {
-                    pkg.elements().insert(pkg.elements().begin() + i, pkg.elements()[i]);
+                    pkg.elements().insert(pkg.elements().begin() + static_cast<int>(i), pkg.elements()[i]);
                     changed = true;
                 }
                 break;
@@ -367,7 +369,7 @@ static bool editStructured(data::Package& pkg, const std::string& name)
                 changed |= editInternal(pkg.dictionary()[i].second, valueToString(pkg.dictionary()[i].first));
                 if (shouldErase)
                 {
-                    pkg.dictionary().erase(pkg.dictionary().begin() + i);
+                    pkg.dictionary().erase(pkg.dictionary().begin() + static_cast<int>(i));
                     i -= 1;
                     changed = true;
                 }

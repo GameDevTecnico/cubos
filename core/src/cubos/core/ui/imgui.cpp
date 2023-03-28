@@ -5,6 +5,8 @@
 #include <imgui.h>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <array>
+
 using namespace cubos::core;
 
 struct ImGuiData
@@ -346,9 +348,9 @@ void ui::terminate()
 void ui::beginFrame()
 {
     ImGuiIO& io = ImGui::GetIO();
-    ImGuiData* bd = (ImGuiData*)io.BackendPlatformUserData;
-    io.DisplaySize.x = bd->window->getFramebufferSize().x;
-    io.DisplaySize.y = bd->window->getFramebufferSize().y;
+    auto* bd = (ImGuiData*)io.BackendPlatformUserData;
+    io.DisplaySize.x = static_cast<float>(bd->window->getFramebufferSize().x);
+    io.DisplaySize.y = static_cast<float>(bd->window->getFramebufferSize().y);
     // TODO: handle framebuffer scale
 
     // Setup time step.
@@ -369,7 +371,7 @@ void ui::beginFrame()
         else
         {
             // Show OS mouse cursor.
-            bd->window->setCursor(bd->cursors[imguiCursor]);
+            bd->window->setCursor(bd->cursors[static_cast<size_t>(imguiCursor)]);
             bd->window->setMouseState(io::MouseState::Default);
         }
     }
@@ -402,7 +404,7 @@ void ui::endFrame(gl::Framebuffer target)
 
     // Set render state.
     setupRenderState(bd, target);
-    rd.setViewport(0, 0, drawData->DisplaySize.x, drawData->DisplaySize.y);
+    rd.setViewport(0, 0, static_cast<int>(drawData->DisplaySize.x), static_cast<int>(drawData->DisplaySize.y));
 
     // Render command lists.
     ImVec2 clipOff = drawData->DisplayPos;
@@ -413,7 +415,7 @@ void ui::endFrame(gl::Framebuffer target)
         // Create and grow vertex buffer if needed.
         if (!bd->vb || bd->vbSize < static_cast<size_t>(cmdList->VtxBuffer.Size))
         {
-            bd->vbSize = cmdList->VtxBuffer.Size + 5000;
+            bd->vbSize = static_cast<size_t>(cmdList->VtxBuffer.Size + 5000);
             bd->vb = rd.createVertexBuffer(bd->vbSize * sizeof(ImDrawVert), nullptr, gl::Usage::Dynamic);
 
             // Create the vertex array.
@@ -445,17 +447,17 @@ void ui::endFrame(gl::Framebuffer target)
         // Create and grow index buffer if needed.
         if (!bd->ib || bd->ibSize < static_cast<size_t>(cmdList->IdxBuffer.Size))
         {
-            bd->ibSize = cmdList->IdxBuffer.Size + 10000;
+            bd->ibSize = static_cast<size_t>(cmdList->IdxBuffer.Size + 10000);
             bd->ib = rd.createIndexBuffer(bd->ibSize * sizeof(ImDrawIdx), nullptr,
                                           sizeof(ImDrawIdx) == 2 ? gl::IndexFormat::UShort : gl::IndexFormat::UInt,
                                           gl::Usage::Dynamic);
         }
 
         // Upload vertex and index data into vertex buffer.
-        ImDrawVert* vtxDst = (ImDrawVert*)bd->vb->map();
-        ImDrawIdx* idxDst = (ImDrawIdx*)bd->ib->map();
-        memcpy(vtxDst, cmdList->VtxBuffer.Data, cmdList->VtxBuffer.Size * sizeof(ImDrawVert));
-        memcpy(idxDst, cmdList->IdxBuffer.Data, cmdList->IdxBuffer.Size * sizeof(ImDrawIdx));
+        auto* vtxDst = (ImDrawVert*)bd->vb->map();
+        auto* idxDst = (ImDrawIdx*)bd->ib->map();
+        memcpy(vtxDst, cmdList->VtxBuffer.Data, static_cast<size_t>(cmdList->VtxBuffer.Size) * sizeof(ImDrawVert));
+        memcpy(idxDst, cmdList->IdxBuffer.Data, static_cast<size_t>(cmdList->IdxBuffer.Size) * sizeof(ImDrawIdx));
         bd->vb->unmap();
         bd->ib->unmap();
 
@@ -493,7 +495,7 @@ void ui::endFrame(gl::Framebuffer target)
                 }
 
                 // Apply the scissor/clipping rectangle (with Y flipped)
-                rd.setScissor(clipMin.x, drawData->DisplaySize.y - clipMax.y, clipMax.x - clipMin.x,
+                rd.setScissor(clipMin.x, static_cast<int>(drawData->DisplaySize.y) - clipMax.y, clipMax.x - clipMin.x,
                               clipMax.y - clipMin.y);
 
                 // Bind the texture and draw.

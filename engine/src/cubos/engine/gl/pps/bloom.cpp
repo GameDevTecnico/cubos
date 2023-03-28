@@ -275,16 +275,16 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Frameb
         this->renderDevice.setFramebuffer(bloomFBs[i]);
         this->renderDevice.drawTriangles(0, 6);
         this->bloomInputTexBP->bind(bloomTexBuffer[i]);
-        scaling *= 2;
+        scaling *= 2.0f;
     }
 
     // Upscale textures additively
-    scaling /= 2;
+    scaling /= 2.0f;
     this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_UPSCALE_PASS);
     this->renderDevice.setBlendState(this->blendState);
     for (int i = iterations - 2; i >= 0; i--)
     {
-        scaling /= 2;
+        scaling /= 2.0f;
         this->bloomScalingBP->setConstant(scaling);
         this->renderDevice.setFramebuffer(bloomFBs[i]);
         this->renderDevice.drawTriangles(0, 6);
@@ -292,8 +292,8 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Frameb
     }
 
     // Combine the final bloom effect with source texture
-    scaling /= 2;
-    float linIntensity = pow(this->intensity, 1 / 2.2f); // Converts from gamma to linear space
+    scaling /= 2.0f;
+    float linIntensity = powf(this->intensity, 1.0f / 2.2f); // Converts from gamma to linear space
 
     this->bloomScalingBP->setConstant(scaling);
     this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_COMBINE_PASS);

@@ -35,7 +35,7 @@ void YAMLDeserializer::readI8(int8_t& value)
     if (v < INT8_MIN || v > INT8_MAX)
         value = 0;
     else
-        value = v;
+        value = static_cast<int8_t>(v);
 }
 
 void YAMLDeserializer::readI16(int16_t& value)
@@ -60,7 +60,7 @@ void YAMLDeserializer::readU8(uint8_t& value)
     if (v > UINT8_MAX)
         value = 0;
     else
-        value = v;
+        value = static_cast<uint8_t>(v);
 }
 
 void YAMLDeserializer::readU16(uint16_t& value)
