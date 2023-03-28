@@ -23,25 +23,25 @@ namespace cubos::core::ecs
     };
 
     template <typename T>
-    T* NullStorage<T>::insert(uint32_t index, T value)
+    T* NullStorage<T>::insert(uint32_t, T)
     {
         return &data;
     }
 
     template <typename T>
-    T* NullStorage<T>::get(uint32_t index)
+    T* NullStorage<T>::get(uint32_t)
     {
         return &data;
     }
 
     template <typename T>
-    const T* NullStorage<T>::get(uint32_t index) const
+    const T* NullStorage<T>::get(uint32_t) const
     {
         return &data;
     }
 
     template <typename T>
-    void NullStorage<T>::erase(uint32_t index)
+    void NullStorage<T>::erase(uint32_t)
     {
     }
 

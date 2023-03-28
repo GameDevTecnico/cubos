@@ -126,29 +126,6 @@ TEST(Cubos_Memory_JSON_Deserialization, Deserialize_Array)
 
 TEST(Cubos_Memory_JSON_Deserialization, Deserialize_Dictionaries)
 {
-    const char* yaml = "---\n"
-                       "dict1:\n"
-                       "  key1: value1\n"
-                       "  key2: value2\n"
-                       "  key3: value3\n"
-                       "dict2:\n"
-                       "  key1: value1\n"
-                       "  key2: value2\n"
-                       "  key3: value3\n"
-                       "dictOfDictOfArray:\n"
-                       "  key1:\n"
-                       "    key1:\n"
-                       "      - 1\n"
-                       "      - 2\n"
-                       "      - 3\n"
-                       "      - 4\n"
-                       "      - 5\n"
-                       "    key2:\n"
-                       "      - 6\n"
-                       "  key2:\n"
-                       "    key1:\n"
-                       "      - 7\n";
-
     auto deserializer = JSONDeserializer(R"(
         {
             "dict": {
