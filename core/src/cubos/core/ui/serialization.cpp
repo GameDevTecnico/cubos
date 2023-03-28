@@ -70,7 +70,7 @@ static void showScalar(const data::Package& pkg, const std::string& name)
         ImGui::Text("%d", pkg.get<int32_t>());
         break;
     case Type::I64:
-        ImGui::Text("%ld", pkg.get<int64_t>());
+        ImGui::Text("%lld", static_cast<long long>(pkg.get<int64_t>()));
         break;
     case Type::U8:
         ImGui::Text("%u", pkg.get<uint8_t>());
@@ -82,7 +82,7 @@ static void showScalar(const data::Package& pkg, const std::string& name)
         ImGui::Text("%u", pkg.get<uint32_t>());
         break;
     case Type::U64:
-        ImGui::Text("%lu", pkg.get<uint64_t>());
+        ImGui::Text("%llu", static_cast<unsigned long long>(pkg.get<uint64_t>()));
         break;
     case Type::F32:
         ImGui::Text("%f", pkg.get<float>());
