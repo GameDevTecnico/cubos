@@ -3,6 +3,7 @@
 
 #include <random>
 #include <string>
+#include <array>
 
 TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Integers)
 {
