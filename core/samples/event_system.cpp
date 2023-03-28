@@ -21,7 +21,6 @@ int main()
             ALL = ~0u,            // 1111
         };
 
-        char a;
         int data; // random data member
     };
 
