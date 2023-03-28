@@ -23,6 +23,19 @@ function(cubos_common_target_options target)
             -Werror
             -Wno-unknown-attributes>
     )
+
+    # Enable clang-tidy
+    find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
+    if(CLANG_TIDY_EXE)
+        set(CLANG_TIDY_COMMAND
+            "${CLANG_TIDY_EXE}"
+            "-checks=-*,modernize-*,-modernize-use-trailing-return-type"
+            "-fix"
+            "-fix-errors"
+            "-warnings-as-errors=*"
+        )
+        set_target_properties(${target} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}")
+    endif()
 endfunction()
 
 add_subdirectory(core)
