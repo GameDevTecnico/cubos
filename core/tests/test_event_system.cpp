@@ -15,6 +15,7 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
     std::size_t size = 0;
     for (auto& x : EventReader<int>(pipe, index))
     {
+        (void)x;
         size++;
     }
     EXPECT_EQ(size, 0);
@@ -23,6 +24,7 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
     writer.push(3); // push (3,0)
     for (size = 0; auto& x : EventReader<int>(pipe, index))
     {
+        (void)x;
         size++;
     }
     EXPECT_EQ(size, 1);
@@ -31,6 +33,7 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
     writer.push(3, 5);
     for (size = 0; auto& x : EventReader<int>(pipe, index))
     {
+        (void)x;
         size++;
     }
     EXPECT_EQ(size, 2);
@@ -39,6 +42,7 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
     pipe.clear();
     for (size = 0; auto& x : EventReader<int>(pipe, index))
     {
+        (void)x;
         size++;
     }
     EXPECT_EQ(size, 2);
@@ -117,6 +121,7 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     for (const auto& ev : keyEventReader)
     {
         // this should NOT run, because all KEY_EVENTS from keyEventReader already got read
+        (void)ev;
         FAIL();
     }
     pipe.removeReader();

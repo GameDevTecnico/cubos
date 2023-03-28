@@ -28,8 +28,8 @@ namespace cubos::core::ecs
 
             const T& operator*();
             Iterator& operator++();
-            bool operator==(const Iterator& other);
-            bool operator!=(const Iterator& other);
+            bool operator==(const Iterator& other) const;
+            bool operator!=(const Iterator& other) const;
 
         private:
             EventReader<T, M>& reader;
@@ -123,13 +123,13 @@ namespace cubos::core::ecs
     }
 
     template <typename T, unsigned int M>
-    bool EventReader<T, M>::Iterator::operator==(const Iterator& other)
+    bool EventReader<T, M>::Iterator::operator==(const Iterator& other) const
     {
         return this->end == other.end;
     }
 
     template <typename T, unsigned int M>
-    bool EventReader<T, M>::Iterator::operator!=(const Iterator& other)
+    bool EventReader<T, M>::Iterator::operator!=(const Iterator& other) const
     {
         return !(*this == other);
     }

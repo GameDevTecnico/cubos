@@ -33,12 +33,12 @@ struct Parent
 
 namespace cubos::core::data
 {
-    void serialize(Serializer& ser, const Player& player, const char* name)
+    void serialize(Serializer&, const Player&, const char*)
     {
         // Do nothing.
     }
 
-    void deserialize(Deserializer& des, Player& player)
+    void deserialize(Deserializer&, Player&)
     {
         // Do nothing.
     }

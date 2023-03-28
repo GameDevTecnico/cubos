@@ -12,7 +12,7 @@ TEST(Cubos_Thread_Pool, Thead_Pool_Wait_And_Destroy)
 
     {
         auto pool = ThreadPool(numThreads);
-        for (int i = 0; i < numTasks; i++)
+        for (size_t i = 0; i < numTasks; i++)
         {
             pool.addTask([&]() {
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -24,7 +24,7 @@ TEST(Cubos_Thread_Pool, Thead_Pool_Wait_And_Destroy)
         EXPECT_EQ(done, numTasks);
 
         done = 0;
-        for (int i = 0; i < numTasks; i++)
+        for (size_t i = 0; i < numTasks; i++)
         {
             pool.addTask([&]() {
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
