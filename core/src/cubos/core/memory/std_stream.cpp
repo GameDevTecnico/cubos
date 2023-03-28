@@ -34,7 +34,8 @@ size_t StdStream::write(const void* data, size_t size)
 
 size_t StdStream::tell() const
 {
-    return ftell(this->file);
+    auto pos = ftell(this->file);
+    return pos == -1 ? SIZE_MAX : static_cast<size_t>(pos);
 }
 
 void StdStream::seek(ptrdiff_t offset, SeekOrigin origin)
@@ -42,13 +43,13 @@ void StdStream::seek(ptrdiff_t offset, SeekOrigin origin)
     switch (origin)
     {
     case SeekOrigin::Begin:
-        fseek(this->file, offset, SEEK_SET);
+        fseek(this->file, static_cast<long>(offset), SEEK_SET);
         break;
     case SeekOrigin::Current:
-        fseek(this->file, offset, SEEK_CUR);
+        fseek(this->file, static_cast<long>(offset), SEEK_CUR);
         break;
     case SeekOrigin::End:
-        fseek(this->file, offset, SEEK_END);
+        fseek(this->file, static_cast<long>(offset), SEEK_END);
         break;
     }
 }

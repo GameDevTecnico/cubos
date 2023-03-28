@@ -282,7 +282,7 @@ public:
         if (this->input.starts_with(token))
         {
             this->input.remove_prefix(token.size());
-            this->column += token.size();
+            this->column += static_cast<int>(token.size());
             return true;
         }
         return false;
@@ -296,7 +296,7 @@ public:
             if (this->input.size() <= keyword.size() || !isalnum(this->input[keyword.size()]))
             {
                 this->input.remove_prefix(keyword.size());
-                this->column += keyword.size();
+                this->column += static_cast<int>(keyword.size());
                 return true;
             }
         return false;
@@ -326,7 +326,7 @@ public:
             else if (this->input[i] == '"')
             {
                 this->input.remove_prefix(i + 1);
-                this->column += i + 1;
+                this->column += static_cast<int>(i + 1);
                 return true;
             }
             else
@@ -346,7 +346,7 @@ public:
             start++;
         std::string_view identifier = this->input.substr(0, start);
         this->input.remove_prefix(start);
-        this->column += start;
+        this->column += static_cast<int>(start);
         return identifier;
     }
 
@@ -364,7 +364,7 @@ public:
             while (start < this->input.size() && (isalnum(this->input[start]) || this->input[start] == ':'))
                 start++;
             this->input.remove_prefix(start);
-            this->column += start;
+            this->column += static_cast<int>(start);
         }
         else
         {

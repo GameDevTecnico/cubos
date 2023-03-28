@@ -2,6 +2,7 @@
 
 #include <list>
 #include <vector>
+#include <array>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
@@ -65,26 +66,26 @@ void Debug::initCube()
 
 void Debug::initSphere()
 {
-    int sectorCount = 10;
-    int stackCount = 10;
+    unsigned int sectorCount = 10;
+    unsigned int stackCount = 10;
 
     std::vector<float> vertices;
 
     float x, y, z, xz;
 
-    float sectorStep = (float)(2 * glm::pi<float>() / sectorCount);
-    float stackStep = (float)(glm::pi<float>() / stackCount);
+    auto sectorStep = (float)(2 * glm::pi<float>() / static_cast<float>(sectorCount));
+    auto stackStep = (float)(glm::pi<float>() / static_cast<float>(stackCount));
     float sectorAngle, stackAngle;
 
-    for (int i = 0; i <= stackCount; ++i)
+    for (unsigned int i = 0; i <= stackCount; ++i)
     {
-        stackAngle = (float)(glm::pi<float>() / 2 - i * stackStep);
+        stackAngle = glm::pi<float>() / 2.0f - static_cast<float>(i) * stackStep;
         xz = glm::cos(stackAngle);
         y = glm::sin(stackAngle);
 
-        for (int j = 0; j <= sectorCount; ++j)
+        for (unsigned int j = 0; j <= sectorCount; ++j)
         {
-            sectorAngle = j * sectorStep;
+            sectorAngle = static_cast<float>(j) * sectorStep;
 
             x = xz * glm::cos(sectorAngle);
             z = xz * glm::sin(sectorAngle);
@@ -97,13 +98,13 @@ void Debug::initSphere()
     auto vb = renderDevice->createVertexBuffer(vertices.size() * sizeof(float), &vertices[0], gl::Usage::Static);
 
     std::vector<unsigned int> indices;
-    int k1, k2;
-    for (int i = 0; i < stackCount; ++i)
+    unsigned int k1, k2;
+    for (unsigned int i = 0; i < stackCount; ++i)
     {
         k1 = i * (sectorCount + 1);
         k2 = k1 + sectorCount + 1;
 
-        for (int j = 0; j < sectorCount; ++j, ++k1, ++k2)
+        for (unsigned int j = 0; j < sectorCount; ++j, ++k1, ++k2)
         {
             if (i != 0)
             {

@@ -542,7 +542,8 @@ public:
     virtual void update(size_t x, size_t width, const void* data, size_t level) override
     {
         glBindTexture(GL_TEXTURE_1D, this->id);
-        glTexSubImage1D(GL_TEXTURE_1D, level, x, width, this->format, this->type, data);
+        glTexSubImage1D(GL_TEXTURE_1D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLsizei>(width),
+                        this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
@@ -573,7 +574,8 @@ public:
     virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data, size_t level) override
     {
         glBindTexture(GL_TEXTURE_2D, this->id);
-        glTexSubImage2D(GL_TEXTURE_2D, level, x, y, width, height, this->format, this->type, data);
+        glTexSubImage2D(GL_TEXTURE_2D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
+                        static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
@@ -605,7 +607,9 @@ public:
                         size_t level) override
     {
         glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
-        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, level, x, y, i, width, height, 1, this->format, this->type, data);
+        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
+                        static_cast<GLint>(i), static_cast<GLsizei>(width), static_cast<GLsizei>(height), 1,
+                        this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
@@ -637,7 +641,9 @@ public:
                         size_t level) override
     {
         glBindTexture(GL_TEXTURE_3D, this->id);
-        glTexSubImage3D(GL_TEXTURE_3D, level, x, y, z, width, height, depth, this->format, this->type, data);
+        glTexSubImage3D(GL_TEXTURE_3D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
+                        static_cast<GLint>(z), static_cast<GLsizei>(width), static_cast<GLsizei>(height),
+                        static_cast<GLsizei>(depth), this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
@@ -672,7 +678,8 @@ public:
         cubeFaceToGL(face, glFace);
 
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
-        glTexSubImage2D(glFace, level, x, y, width, height, this->format, this->type, data);
+        glTexSubImage2D(glFace, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
+                        static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
@@ -704,8 +711,9 @@ public:
                         size_t level = 0) override
     {
         glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, this->id);
-        glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, level, x, y, i * 6 + static_cast<int>(face), width, height, 1,
-                        this->format, this->type, data);
+        glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x),
+                        static_cast<GLint>(y), static_cast<GLint>(i) * 6 + static_cast<GLint>(face),
+                        static_cast<GLsizei>(width), static_cast<GLsizei>(height), 1, this->format, this->type, data);
     }
 
     virtual void generateMipmaps() override
@@ -1278,7 +1286,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     }
 
     // Define draw buffers
-    glDrawBuffers(drawBuffers.size(), &drawBuffers[0]);
+    glDrawBuffers(static_cast<GLsizei>(drawBuffers.size()), &drawBuffers[0]);
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1480,7 +1488,7 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
     glSamplerParameteri(id, GL_TEXTURE_MIN_FILTER, minFilter);
     glSamplerParameteri(id, GL_TEXTURE_MAG_FILTER, magFilter);
     if (GL_ARB_texture_filter_anisotropic)
-        glSamplerParameteri(id, GL_TEXTURE_MAX_ANISOTROPY, desc.maxAnisotropy);
+        glSamplerParameteri(id, GL_TEXTURE_MAX_ANISOTROPY, static_cast<GLint>(desc.maxAnisotropy));
     glSamplerParameteri(id, GL_TEXTURE_WRAP_S, addressU);
     glSamplerParameteri(id, GL_TEXTURE_WRAP_T, addressV);
     glSamplerParameteri(id, GL_TEXTURE_WRAP_R, addressW);
@@ -1520,7 +1528,8 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_1D, id);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
-        glTexImage1D(GL_TEXTURE_1D, i, internalFormat, desc.width / div, 0, format, type, desc.data[i]);
+        glTexImage1D(GL_TEXTURE_1D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                     static_cast<GLsizei>(desc.width / div), 0, format, type, desc.data[i]);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -1555,8 +1564,8 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     glBindTexture(GL_TEXTURE_2D, id);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
-        glTexImage2D(GL_TEXTURE_2D, i, internalFormat, desc.width / div, desc.height / div, 0, format, type,
-                     desc.data[i]);
+        glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), internalFormat, static_cast<GLsizei>(desc.width / div),
+                     static_cast<GLsizei>(desc.height / div), 0, format, type, desc.data[i]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -1590,14 +1599,17 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     GLuint id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D_ARRAY, id);
-    glTexStorage3D(GL_TEXTURE_2D_ARRAY, desc.mipLevelCount, internalFormat, desc.width, desc.height, desc.size);
+    glTexStorage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLsizei>(desc.mipLevelCount), internalFormat,
+                   static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height),
+                   static_cast<GLsizei>(desc.size));
     for (size_t i = 0; i < desc.size; ++i)
     {
         for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
         {
             if (desc.data[i][j] != nullptr)
-                glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i, desc.width / div, desc.height / div, 1, format, type,
-                                desc.data[i][j]);
+                glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), 0, 0, static_cast<GLint>(i),
+                                static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 1,
+                                format, type, desc.data[i][j]);
         }
     }
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -1641,8 +1653,9 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_3D, id);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
-        glTexImage3D(GL_TEXTURE_3D, i, internalFormat, desc.width / div, desc.height / div, desc.depth / div, 0, format,
-                     type, desc.data[i]);
+        glTexImage3D(GL_TEXTURE_3D, static_cast<GLint>(i), internalFormat, static_cast<GLsizei>(desc.width / div),
+                     static_cast<GLsizei>(desc.height / div), static_cast<GLsizei>(desc.depth / div), 0, format, type,
+                     desc.data[i]);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -1679,18 +1692,24 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     glBindTexture(GL_TEXTURE_CUBE_MAP, id);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
     {
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, i, internalFormat, desc.width / div, desc.height / div, 0, format,
-                     type, desc.data[static_cast<int>(CubeFace::PositiveX)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, i, internalFormat, desc.width / div, desc.height / div, 0, format,
-                     type, desc.data[static_cast<int>(CubeFace::NegativeX)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, i, internalFormat, desc.width / div, desc.height / div, 0, format,
-                     type, desc.data[static_cast<int>(CubeFace::PositiveY)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, i, internalFormat, desc.width / div, desc.height / div, 0, format,
-                     type, desc.data[static_cast<int>(CubeFace::NegativeY)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, i, internalFormat, desc.width / div, desc.height / div, 0, format,
-                     type, desc.data[static_cast<int>(CubeFace::PositiveZ)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, i, internalFormat, desc.width / div, desc.height / div, 0, format,
-                     type, desc.data[static_cast<int>(CubeFace::NegativeZ)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, static_cast<GLint>(i), internalFormat,
+                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
+                     desc.data[static_cast<int>(CubeFace::PositiveX)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, static_cast<GLint>(i), internalFormat,
+                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
+                     desc.data[static_cast<int>(CubeFace::NegativeX)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, static_cast<GLint>(i), internalFormat,
+                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
+                     desc.data[static_cast<int>(CubeFace::PositiveY)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, static_cast<GLint>(i), internalFormat,
+                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
+                     desc.data[static_cast<int>(CubeFace::NegativeY)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, static_cast<GLint>(i), internalFormat,
+                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
+                     desc.data[static_cast<int>(CubeFace::PositiveZ)][i]);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, static_cast<GLint>(i), internalFormat,
+                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
+                     desc.data[static_cast<int>(CubeFace::NegativeZ)][i]);
     }
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -1725,16 +1744,18 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
     GLuint id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, id);
-    glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, desc.mipLevelCount, internalFormat, desc.width, desc.height,
-                   desc.size * 6);
+    glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, static_cast<GLsizei>(desc.mipLevelCount), internalFormat,
+                   static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height),
+                   static_cast<GLsizei>(desc.size * 6));
     for (size_t i = 0; i < desc.size; ++i)
     {
-        for (int face = 0; face < 6; ++face)
+        for (GLint face = 0; face < 6; ++face)
         {
             for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
             {
                 if (desc.data[i][face][j] != nullptr)
-                    glTexSubImage3D(GL_TEXTURE_2D_ARRAY, j, 0, 0, i * 6 + face, desc.width / div, desc.height / div, 1,
+                    glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), 0, 0, static_cast<GLint>(i) * 6 + face,
+                                    static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 1,
                                     format, type, desc.data[i][face][j]);
             }
         }
@@ -2072,8 +2093,8 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     glGetProgramiv(id, GL_LINK_STATUS, &success);
     if (!success)
     {
-        GLchar infoLog[512];
-        glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        std::array<GLchar, 512> infoLog;
+        glGetProgramInfoLog(id, infoLog.size(), nullptr, infoLog.data());
         glDeleteProgram(id);
         CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
@@ -2109,8 +2130,8 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     glGetProgramiv(id, GL_LINK_STATUS, &success);
     if (!success)
     {
-        GLchar infoLog[512];
-        glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        std::array<GLchar, 512> infoLog;
+        glGetProgramInfoLog(id, infoLog.size(), nullptr, infoLog.data());
         glDeleteProgram(id);
         CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
@@ -2142,8 +2163,8 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _cs)
     glGetProgramiv(id, GL_LINK_STATUS, &success);
     if (!success)
     {
-        GLchar infoLog[512];
-        glGetProgramInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        std::array<GLchar, 512> infoLog;
+        glGetProgramInfoLog(id, infoLog.size(), nullptr, infoLog.data());
         glDeleteProgram(id);
         CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
@@ -2192,29 +2213,31 @@ void OGLRenderDevice::clearStencil(int stencil)
 
 void OGLRenderDevice::drawTriangles(size_t offset, size_t count)
 {
-    glDrawArrays(GL_TRIANGLES, offset, count);
+    glDrawArrays(GL_TRIANGLES, static_cast<GLint>(offset), static_cast<GLsizei>(count));
 }
 
 void OGLRenderDevice::drawTrianglesIndexed(size_t offset, size_t count)
 {
-    glDrawElements(GL_TRIANGLES, count, this->currentIndexFormat,
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count), this->currentIndexFormat,
                    reinterpret_cast<const void*>(offset * this->currentIndexSz));
 }
 
 void OGLRenderDevice::drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount)
 {
-    glDrawArraysInstanced(GL_TRIANGLES, offset, count, instanceCount);
+    glDrawArraysInstanced(GL_TRIANGLES, static_cast<GLint>(offset), static_cast<GLsizei>(count),
+                          static_cast<GLsizei>(instanceCount));
 }
 
 void OGLRenderDevice::drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount)
 {
-    glDrawElementsInstanced(GL_TRIANGLES, count, this->currentIndexFormat,
-                            reinterpret_cast<const void*>(offset * this->currentIndexSz), instanceCount);
+    glDrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(count), this->currentIndexFormat,
+                            reinterpret_cast<const void*>(offset * this->currentIndexSz),
+                            static_cast<GLsizei>(instanceCount));
 }
 
 void OGLRenderDevice::dispatchCompute(size_t x, size_t y, size_t z)
 {
-    glDispatchCompute(x, y, z);
+    glDispatchCompute(static_cast<GLuint>(x), static_cast<GLuint>(y), static_cast<GLuint>(z));
 }
 
 void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
