@@ -6,6 +6,8 @@
 #include <AL/alc.h>
 #endif // WITH_OPENAL
 
+#include <array>
+
 #define UNSUPPORTED()                                                                                                  \
     do                                                                                                                 \
     {                                                                                                                  \
@@ -51,7 +53,7 @@ public:
             break;
         }
 
-        alBufferData(this->id, alFormat, data, size, frequency);
+        alBufferData(this->id, alFormat, data, static_cast<ALsizei>(size), static_cast<ALsizei>(frequency));
     }
 
     ALuint id;
@@ -72,7 +74,7 @@ public:
     virtual void setBuffer(Buffer buffer) override
     {
         auto oalBuffer = std::dynamic_pointer_cast<OALBuffer>(buffer);
-        alSourcei(this->id, AL_BUFFER, oalBuffer->id);
+        alSourcei(this->id, AL_BUFFER, static_cast<ALint>(oalBuffer->id));
     }
 
     virtual void setPosition(const glm::vec3& position) override

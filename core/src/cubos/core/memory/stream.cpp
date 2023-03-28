@@ -4,6 +4,7 @@
 #include <cubos/core/memory/std_stream.hpp>
 
 #include <cctype>
+#include <array>
 
 using namespace cubos::core::memory;
 
@@ -152,8 +153,8 @@ void Stream::print(double value, size_t decimalPlaces)
     else
     {
         // Print the integer part
-        int64_t exponent = static_cast<uint64_t>(floor(log10(value)));
-        double fractional = value / pow(10.0, exponent);
+        auto exponent = static_cast<int64_t>(floor(log10(value)));
+        double fractional = value / pow(10.0, static_cast<double>(exponent));
 
         if (fractional > 10.0)
         {
@@ -334,21 +335,21 @@ void Stream::parse(uint64_t& value, size_t base)
             }
 
             v *= base;
-            v += c - '0';
+            v += static_cast<uint64_t>(c - '0');
             this->get();
         }
         // For bases higher than 10
         else if (c >= 'a' && c <= 'a' + static_cast<char>(base - 10))
         {
             v *= base;
-            v += c - 'a' + 10;
+            v += static_cast<uint64_t>(c - 'a' + 10);
             this->get();
         }
         // For bases higher than 10
         else if (c >= 'A' && c <= 'A' + static_cast<char>(base - 10))
         {
             v *= base;
-            v += c - 'A' + 10;
+            v += static_cast<uint64_t>(c - 'A' + 10);
             this->get();
         }
         else

@@ -41,7 +41,7 @@ namespace cubos::core::memory
         virtual size_t write(const void* data, size_t size) = 0;
 
         /// Gets the current position in the stream.
-        /// @return The current position in the stream.
+        /// @return The current position in the stream, or SIZE_MAX if the position is unknown.
         virtual size_t tell() const = 0;
 
         /// Seeks to a position in the stream.
