@@ -11,18 +11,22 @@ function(cubos_common_target_options target)
     target_compile_features(${target} PRIVATE cxx_std_20)
 
     # Enable all warnings and treat them as errors
-    # -Wno-unknown-attributes is required for the use custom attributes in the engine (e.g, [[cubos::component]])
     target_compile_options(${target} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             /W4
-            /WX>
+            /WX
+            /wd4996  # Disable warning about deprecated functions
+            /wd4458  # Disable warning about shadowing member variables
+            /wd4456  # Disable warning about shadowing local variables
+            /wd5030> # Introduces false positives for [[cubos::component]]
+            
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
             -Wall
             -Wextra
             -pedantic
             -Wconversion
             -Werror
-            -Wno-unknown-attributes>
+            -Wno-unknown-attributes> # Introduces false positives for [[cubos::component]]
     )
 
     # Enable clang-tidy

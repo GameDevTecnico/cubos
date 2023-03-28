@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
+#include <array>
+
 using namespace cubos::core::memory;
 using namespace cubos::core::data;
 
