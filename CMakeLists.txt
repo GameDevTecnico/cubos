@@ -20,6 +20,7 @@ function(cubos_common_target_options target)
             -Wall
             -Wextra
             -pedantic
+            -Wconversion
             -Werror
             -Wno-unknown-attributes>
     )
