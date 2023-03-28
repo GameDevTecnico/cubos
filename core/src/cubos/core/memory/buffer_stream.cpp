@@ -146,22 +146,26 @@ void BufferStream::seek(ptrdiff_t offset, SeekOrigin origin)
     {
         if (offset < 0 && static_cast<size_t>(-offset) > this->position)
             this->position = 0;
+        else if (offset < 0)
+            this->position -= static_cast<size_t>(-offset);
         else
-            this->position += offset;
+            this->position += static_cast<size_t>(offset);
     }
     else if (origin == SeekOrigin::End)
     {
         if (offset < 0 && static_cast<size_t>(-offset) > this->size)
             this->position = 0;
+        else if (offset < 0)
+            this->position = this->size - static_cast<size_t>(-offset);
         else
-            this->position = this->size + offset;
+            this->position = this->size + static_cast<size_t>(offset);
     }
     else
     {
         if (offset < 0)
             this->position = 0;
         else
-            this->position = offset;
+            this->position = static_cast<size_t>(offset);
     }
 
     if (this->position > this->size)

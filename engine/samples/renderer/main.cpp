@@ -68,7 +68,7 @@ int main(void)
                 }
             }
 
-            float time = window->getTime();
+            auto time = static_cast<float>(window->getTime());
 
             // Clear the frame commands.
             frame.clear();

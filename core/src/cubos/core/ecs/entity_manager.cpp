@@ -146,7 +146,7 @@ EntityManager::EntityManager(size_t initialCapacity)
     for (size_t i = 0; i < initialCapacity; ++i)
     {
         this->entities.push_back(EntityData{0, 1});
-        this->availableEntities.push(i);
+        this->availableEntities.push(static_cast<uint32_t>(i));
     }
 }
 
@@ -160,7 +160,7 @@ Entity EntityManager::create(Entity::Mask mask)
         for (size_t i = oldSize; i < oldSize * 2; ++i)
         {
             this->entities.push_back(EntityData{0, 0});
-            this->availableEntities.push(i);
+            this->availableEntities.push(static_cast<uint32_t>(i));
         }
     }
 

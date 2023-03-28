@@ -39,6 +39,8 @@ int main()
 
 #include <cubos/core/data/embedded_archive.hpp>
 
+#include <array>
+
 using namespace cubos::core::data;
 
 static const uint8_t fileData3[] = {

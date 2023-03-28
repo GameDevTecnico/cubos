@@ -39,13 +39,13 @@ int main(void)
 
         // Create and upload a simple grid.
         Grid cube({16, 1, 16});
-        int paletteIdx = 0;
+        uint16_t paletteIdx = 0;
         for (int x = 0; x < 16; x++)
         {
             for (int z = 0; z < 16; z++)
             {
                 cube.set({x, 0, z}, paletteIdx + 1);
-                paletteIdx = (paletteIdx + 1) % 7;
+                paletteIdx = static_cast<uint16_t>((paletteIdx + 1) % 7);
             }
         }
         auto gpuCube = renderer.upload(cube);
@@ -71,7 +71,7 @@ int main(void)
                 }
             }
 
-            float time = window->getTime();
+            auto time = static_cast<float>(window->getTime());
 
             // Clear the frame commands.
             frame.clear();
