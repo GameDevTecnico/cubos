@@ -6,6 +6,25 @@ project(cubos VERSION 0.1.0)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
+# Function which configures a target with the options common to all CUBOS. targets.
+function(cubos_common_target_options target)
+    target_compile_features(${target} PRIVATE cxx_std_20)
+
+    # Enable all warnings and treat them as errors
+    # -Wno-unknown-attributes is required for the use custom attributes in the engine (e.g, [[cubos::component]])
+    target_compile_options(${target} PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:
+            /W4
+            /WX>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
+            -Wall
+            -Wextra
+            -pedantic
+            -Werror
+            -Wno-unknown-attributes>
+    )
+endfunction()
+
 add_subdirectory(core)
 add_subdirectory(tools)
 add_subdirectory(engine)

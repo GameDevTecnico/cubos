@@ -84,12 +84,7 @@ set(CUBOS_ENGINE_INCLUDE
 add_library(cubos-engine ${CUBOS_ENGINE_SOURCE} ${CUBOS_ENGINE_INCLUDE})
 target_include_directories(cubos-engine PUBLIC "include" PRIVATE "src")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
-set_property(TARGET cubos-engine PROPERTY CXX_STANDARD 20)
-target_compile_features(cubos-engine PUBLIC cxx_std_20)
-target_compile_options(cubos-engine PUBLIC
-    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
-    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -pedantic -Werror -Wno-unknown-attributes>
-)
+cubos_common_target_options(cubos-engine)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(cubos-engine PUBLIC -Wno-attributes)
