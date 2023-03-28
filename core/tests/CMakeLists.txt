@@ -19,5 +19,5 @@ set(CUBOS_TESTS_SOURCE
 # Add tests target
 add_executable(cubos-core-tests ${CUBOS_TESTS_SOURCE})
 target_link_libraries(cubos-core-tests cubos-core gtest_main)
-set_property(TARGET cubos-core-tests PROPERTY CXX_STANDARD 20)
+cubos_common_target_options(cubos-core-tests)
 gtest_add_tests(TARGET cubos-core-tests)
