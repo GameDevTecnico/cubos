@@ -85,6 +85,5 @@ std::unique_ptr<memory::Stream> EmbeddedArchive::open(File::Handle file, File::O
         return nullptr;
 
     auto& entry = this->data->entries[file->getId() - 1];
-    return std::make_unique<FileStream<memory::BufferStream>>(file, mode,
-                                                              std::move(memory::BufferStream(entry.data, entry.size)));
+    return std::make_unique<FileStream<memory::BufferStream>>(file, mode, memory::BufferStream(entry.data, entry.size));
 }
