@@ -237,7 +237,7 @@ void pps::BloomPass::resize(glm::uvec2 size)
 void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Framebuffer out) const
 {
     // Set the framebuffer and state.
-    this->renderDevice.setViewport(0, 0, this->size.x, this->size.y);
+    this->renderDevice.setViewport(0, 0, static_cast<int>(this->size.x), static_cast<int>(this->size.y));
     this->renderDevice.setRasterState(nullptr);
     this->renderDevice.setBlendState(nullptr);
     this->renderDevice.setDepthStencilState(nullptr);
@@ -282,13 +282,13 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Frameb
     scaling /= 2.0f;
     this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_UPSCALE_PASS);
     this->renderDevice.setBlendState(this->blendState);
-    for (int i = iterations - 2; i >= 0; i--)
+    for (int i = static_cast<int>(iterations) - 2; i >= 0; i--)
     {
         scaling /= 2.0f;
         this->bloomScalingBP->setConstant(scaling);
-        this->renderDevice.setFramebuffer(bloomFBs[i]);
+        this->renderDevice.setFramebuffer(bloomFBs[static_cast<size_t>(i)]);
         this->renderDevice.drawTriangles(0, 6);
-        this->bloomInputTexBP->bind(bloomTexBuffer[i]);
+        this->bloomInputTexBP->bind(bloomTexBuffer[static_cast<size_t>(i)]);
     }
 
     // Combine the final bloom effect with source texture

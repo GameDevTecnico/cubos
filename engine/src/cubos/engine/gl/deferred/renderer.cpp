@@ -662,7 +662,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     this->lightsBuffer->unmap();
 
     // 3. Set the renderer state.
-    this->renderDevice.setViewport(0, 0, this->size.x, this->size.y);
+    this->renderDevice.setViewport(0, 0, static_cast<int>(this->size.x), static_cast<int>(this->size.y));
 
     // 4. Geometry pass.
     // 4.1. Set the geometry pass state.
@@ -718,7 +718,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         {
             this->ssaoSamplesBP =
                 this->ssaoPipeline->getBindingPoint(std::string("samples[" + std::to_string(i) + "]").c_str());
-            this->ssaoSamplesBP->setConstant(ssaoKernel[i]);
+            this->ssaoSamplesBP->setConstant(ssaoKernel[static_cast<size_t>(i)]);
         }
 
         this->renderDevice.setVertexArray(this->screenQuadVA);

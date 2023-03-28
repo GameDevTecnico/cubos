@@ -49,13 +49,7 @@ Grid::Grid()
     this->indices.resize(1, 0);
 }
 
-Grid& Grid::operator=(const Grid& rhs)
-{
-    this->size = rhs.size;
-    this->indices = rhs.indices;
-
-    return *this;
-}
+Grid& Grid::operator=(const Grid& rhs) = default;
 
 void Grid::setSize(const glm::uvec3& size)
 {
@@ -81,8 +75,10 @@ const glm::uvec3& Grid::getSize() const
 
 void Grid::clear()
 {
-    for (size_t i = 0; i < this->indices.size(); i++)
-        this->indices[i] = 0;
+    for (unsigned short& indice : this->indices)
+    {
+        indice = 0;
+    }
 }
 
 uint16_t Grid::get(const glm::ivec3& position) const
@@ -90,7 +86,8 @@ uint16_t Grid::get(const glm::ivec3& position) const
     assert(position.x >= 0 && position.x < static_cast<int>(this->size.x));
     assert(position.y >= 0 && position.y < static_cast<int>(this->size.y));
     assert(position.z >= 0 && position.z < static_cast<int>(this->size.z));
-    return this->indices[position.x + position.y * size.x + position.z * size.x * size.y];
+    auto index = position.x + position.y * static_cast<int>(size.x) + position.z * static_cast<int>(size.x * size.y);
+    return this->indices[static_cast<size_t>(index)];
 }
 
 void Grid::set(const glm::ivec3& position, uint16_t mat)
@@ -98,7 +95,8 @@ void Grid::set(const glm::ivec3& position, uint16_t mat)
     assert(position.x >= 0 && position.x < static_cast<int>(this->size.x));
     assert(position.y >= 0 && position.y < static_cast<int>(this->size.y));
     assert(position.z >= 0 && position.z < static_cast<int>(this->size.z));
-    this->indices[position.x + position.y * size.x + position.z * size.x * size.y] = mat;
+    auto index = position.x + position.y * static_cast<int>(size.x) + position.z * static_cast<int>(size.x * size.y);
+    this->indices[static_cast<size_t>(index)] = mat;
 }
 
 bool Grid::convert(const Palette& src, const Palette& dst, float min_similarity)
