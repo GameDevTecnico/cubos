@@ -61,9 +61,9 @@ static bool parseArguments(int argc, char** argv, ConvertOptions& options)
 
             if (i + 1 < argc)
             {
-                if (options.grids.find(index) == options.grids.end())
+                if (options.grids.find(static_cast<size_t>(index)) == options.grids.end())
                 {
-                    options.grids[index] = argv[i + 1];
+                    options.grids[static_cast<size_t>(index)] = argv[i + 1];
                 }
                 else
                 {
