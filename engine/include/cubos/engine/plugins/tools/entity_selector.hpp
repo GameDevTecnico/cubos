@@ -24,6 +24,6 @@ namespace cubos::engine::plugins::tools
     ///
     /// @param cubos CUBOS. main class
     void entitySelectorPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins::tools
+} // namespace cubos::engine::plugins::tools
 
 #endif // CUBOS_ENGINE_PLUGINS_ENTITY_SELECTOR_HPP
