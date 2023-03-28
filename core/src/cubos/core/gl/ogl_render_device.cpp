@@ -813,7 +813,7 @@ class OGLVertexArray : public impl::VertexArray
 public:
     OGLVertexArray(GLuint id, const VertexBuffer* buffers) : id(id)
     {
-        for (int i = 0; i < CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
+        for (size_t i = 0; i < CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
             this->buffers[i] = buffers[i];
     }
 
@@ -857,14 +857,14 @@ public:
     virtual void bind(Sampler sampler) override
     {
         if (sampler)
-            glBindSampler(this->tex, std::static_pointer_cast<OGLSampler>(sampler)->id);
+            glBindSampler(static_cast<GLuint>(this->tex), std::static_pointer_cast<OGLSampler>(sampler)->id);
         else
-            glBindSampler(this->tex, 0);
+            glBindSampler(static_cast<GLuint>(this->tex), 0);
     }
 
     virtual void bind(Texture1D tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->tex);
+        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
             glBindTexture(GL_TEXTURE_1D, std::static_pointer_cast<OGLTexture1D>(tex)->id);
         else
@@ -874,7 +874,7 @@ public:
 
     virtual void bind(Texture2D tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->tex);
+        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
             glBindTexture(GL_TEXTURE_2D, std::static_pointer_cast<OGLTexture2D>(tex)->id);
         else
@@ -884,7 +884,7 @@ public:
 
     virtual void bind(Texture2DArray tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->tex);
+        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
             glBindTexture(GL_TEXTURE_2D_ARRAY, std::static_pointer_cast<OGLTexture2DArray>(tex)->id);
         else
@@ -894,7 +894,7 @@ public:
 
     virtual void bind(Texture3D tex) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->tex);
+        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
             glBindTexture(GL_TEXTURE_3D, std::static_pointer_cast<OGLTexture3D>(tex)->id);
         else
@@ -904,7 +904,7 @@ public:
 
     virtual void bind(CubeMap cubeMap) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->tex);
+        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (cubeMap)
             glBindTexture(GL_TEXTURE_CUBE_MAP, std::static_pointer_cast<OGLCubeMap>(cubeMap)->id);
         else
@@ -914,7 +914,7 @@ public:
 
     virtual void bind(CubeMapArray cubeMap) override
     {
-        glActiveTexture(GL_TEXTURE0 + this->tex);
+        glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (cubeMap)
             glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, std::static_pointer_cast<OGLCubeMapArray>(cubeMap)->id);
         else
@@ -925,9 +925,10 @@ public:
     virtual void bind(ConstantBuffer cb) override
     {
         if (cb)
-            glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+            glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc),
+                             std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
         else
-            glBindBufferBase(GL_UNIFORM_BUFFER, this->loc, 0);
+            glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc), 0);
     }
 
     virtual void bind(gl::Texture2D _tex, int level, Access _access) override
@@ -950,7 +951,7 @@ public:
         }
 
         glUniform1i(this->loc, this->tex);
-        glBindImageTexture(this->tex, tex->id, level, GL_TRUE, 0, access, tex->internalFormat);
+        glBindImageTexture(static_cast<GLuint>(this->tex), tex->id, level, GL_TRUE, 0, access, tex->internalFormat);
     }
 
     virtual void setConstant(glm::vec2 val) override
@@ -1076,7 +1077,7 @@ public:
         if (index != GL_INVALID_INDEX)
         {
             auto loc = this->uboCount;
-            glUniformBlockBinding(this->program, index, loc);
+            glUniformBlockBinding(this->program, index, static_cast<GLuint>(loc));
 
             GLenum glErr = glGetError();
             if (glErr != 0)
@@ -1095,7 +1096,7 @@ public:
         if (index != GL_INVALID_INDEX)
         {
             auto loc = this->ssboCount;
-            glShaderStorageBlockBinding(this->program, index, loc);
+            glShaderStorageBlockBinding(this->program, index, static_cast<GLuint>(loc));
 
             GLenum glErr = glGetError();
             if (glErr != 0)
@@ -1187,11 +1188,12 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     glGenFramebuffers(1, &id);
     glBindFramebuffer(GL_FRAMEBUFFER, id);
 
-    std::vector<GLenum> drawBuffers;
-
     // Attach targets
+    std::vector<GLenum> drawBuffers;
     for (uint32_t i = 0; i < desc.targetCount; ++i)
     {
+        drawBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
+
         switch (desc.targets[i].getTargetType())
         {
         case FramebufferDesc::TargetType::CubeMap:
@@ -1199,28 +1201,27 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
             cubeFaceToGL(desc.targets[i].getCubeMapTarget().face, face);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, face,
                                    std::static_pointer_cast<OGLCubeMap>(desc.targets[i].getCubeMapTarget().handle)->id,
-                                   desc.targets[i].mipLevel);
+                                   static_cast<GLint>(desc.targets[i].mipLevel));
             break;
         case FramebufferDesc::TargetType::Texture2D:
             glFramebufferTexture2D(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
                 std::static_pointer_cast<OGLTexture2D>(desc.targets[i].getTexture2DTarget().handle)->id,
-                desc.targets[i].mipLevel);
+                static_cast<GLint>(desc.targets[i].mipLevel));
             break;
         case FramebufferDesc::TargetType::CubeMapArray:
             glFramebufferTexture(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
                 std::static_pointer_cast<OGLCubeMapArray>(desc.targets[i].getCubeMapArrayTarget().handle)->id,
-                desc.targets[i].mipLevel);
+                static_cast<GLint>(desc.targets[i].mipLevel));
             break;
         case FramebufferDesc::TargetType::Texture2DArray:
             glFramebufferTexture(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,
                 std::static_pointer_cast<OGLTexture2DArray>(desc.targets[i].getTexture2DArrayTarget().handle)->id,
-                desc.targets[i].mipLevel);
+                static_cast<GLint>(desc.targets[i].mipLevel));
             break;
         }
-        drawBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
     }
 
     // Attach depth stencil texture
@@ -1230,51 +1231,56 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         switch (desc.depthStencil.getTargetType())
         {
         case FramebufferDesc::TargetType::CubeMap: {
-            auto target = desc.depthStencil.getCubeMapTarget();
+            auto& target = desc.depthStencil.getCubeMapTarget();
             GLenum face;
             cubeFaceToGL(target.face, face);
             auto ds = std::static_pointer_cast<OGLCubeMap>(target.handle);
             if (ds->format == GL_DEPTH_COMPONENT)
-                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, face, ds->id, desc.depthStencil.mipLevel);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, face, ds->id,
+                                       static_cast<GLint>(desc.depthStencil.mipLevel));
             else if (ds->format == GL_DEPTH_STENCIL)
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id,
-                                       desc.depthStencil.mipLevel);
+                                       static_cast<GLint>(desc.depthStencil.mipLevel));
             else
                 formatError = true;
+            break;
         }
-        break;
         case FramebufferDesc::TargetType::Texture2D: {
             auto ds = std::static_pointer_cast<OGLTexture2D>(desc.depthStencil.getTexture2DTarget().handle);
             if (ds->format == GL_DEPTH_COMPONENT)
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id,
-                                       desc.depthStencil.mipLevel);
+                                       static_cast<GLint>(desc.depthStencil.mipLevel));
             else if (ds->format == GL_DEPTH_STENCIL)
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id,
-                                       desc.depthStencil.mipLevel);
+                                       static_cast<GLint>(desc.depthStencil.mipLevel));
             else
                 formatError = true;
+            break;
         }
-        break;
         case FramebufferDesc::TargetType::CubeMapArray: {
             auto ds = std::static_pointer_cast<OGLCubeMapArray>(desc.depthStencil.getCubeMapArrayTarget().handle);
             if (ds->format == GL_DEPTH_COMPONENT)
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id, desc.depthStencil.mipLevel);
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id,
+                                     static_cast<GLint>(desc.depthStencil.mipLevel));
             else if (ds->format == GL_DEPTH_STENCIL)
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id, desc.depthStencil.mipLevel);
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id,
+                                     static_cast<GLint>(desc.depthStencil.mipLevel));
             else
                 formatError = true;
+            break;
         }
-        break;
         case FramebufferDesc::TargetType::Texture2DArray: {
             auto ds = std::static_pointer_cast<OGLTexture2DArray>(desc.depthStencil.getTexture2DArrayTarget().handle);
             if (ds->format == GL_DEPTH_COMPONENT)
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id, desc.depthStencil.mipLevel);
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id,
+                                     static_cast<GLint>(desc.depthStencil.mipLevel));
             else if (ds->format == GL_DEPTH_STENCIL)
-                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id, desc.depthStencil.mipLevel);
+                glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id,
+                                     static_cast<GLint>(desc.depthStencil.mipLevel));
             else
                 formatError = true;
+            break;
         }
-        break;
         }
 
         if (formatError)
@@ -1286,7 +1292,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
     }
 
     // Define draw buffers
-    glDrawBuffers(static_cast<GLsizei>(drawBuffers.size()), &drawBuffers[0]);
+    glDrawBuffers(static_cast<GLsizei>(drawBuffers.size()), drawBuffers.data());
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1396,10 +1402,11 @@ void OGLRenderDevice::setDepthStencilState(DepthStencilState _dss)
     {
         glEnable(GL_STENCIL_TEST);
 
-        glStencilFuncSeparate(GL_FRONT, dss->frontStencilFunc, dss->stencilRef, dss->stencilReadMask);
+        glStencilFuncSeparate(GL_FRONT, dss->frontStencilFunc, static_cast<GLint>(dss->stencilRef),
+                              dss->stencilReadMask);
         glStencilMaskSeparate(GL_FRONT, dss->stencilWriteMask);
         glStencilOpSeparate(GL_FRONT, dss->frontFaceStencilFail, dss->frontFaceDepthFail, dss->frontFaceStencilPass);
-        glStencilFuncSeparate(GL_BACK, dss->backStencilFunc, dss->stencilRef, dss->stencilReadMask);
+        glStencilFuncSeparate(GL_BACK, dss->backStencilFunc, static_cast<GLint>(dss->stencilRef), dss->stencilReadMask);
         glStencilMaskSeparate(GL_BACK, dss->stencilWriteMask);
         glStencilOpSeparate(GL_BACK, dss->backFaceStencilFail, dss->backFaceDepthFail, dss->backFaceStencilPass);
     }
@@ -1485,13 +1492,13 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
     // Initialize sampler
     GLuint id;
     glGenSamplers(1, &id);
-    glSamplerParameteri(id, GL_TEXTURE_MIN_FILTER, minFilter);
-    glSamplerParameteri(id, GL_TEXTURE_MAG_FILTER, magFilter);
+    glSamplerParameteri(id, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(minFilter));
+    glSamplerParameteri(id, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(magFilter));
     if (GL_ARB_texture_filter_anisotropic)
         glSamplerParameteri(id, GL_TEXTURE_MAX_ANISOTROPY, static_cast<GLint>(desc.maxAnisotropy));
-    glSamplerParameteri(id, GL_TEXTURE_WRAP_S, addressU);
-    glSamplerParameteri(id, GL_TEXTURE_WRAP_T, addressV);
-    glSamplerParameteri(id, GL_TEXTURE_WRAP_R, addressW);
+    glSamplerParameteri(id, GL_TEXTURE_WRAP_S, static_cast<GLint>(addressU));
+    glSamplerParameteri(id, GL_TEXTURE_WRAP_T, static_cast<GLint>(addressV));
+    glSamplerParameteri(id, GL_TEXTURE_WRAP_R, static_cast<GLint>(addressW));
     glSamplerParameterfv(id, GL_TEXTURE_BORDER_COLOR, desc.borderColor);
 
     // Check errors
@@ -1564,8 +1571,9 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     glBindTexture(GL_TEXTURE_2D, id);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
-        glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), internalFormat, static_cast<GLsizei>(desc.width / div),
-                     static_cast<GLsizei>(desc.height / div), 0, format, type, desc.data[i]);
+        glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
+                     desc.data[i]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -1653,9 +1661,9 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_3D, id);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
-        glTexImage3D(GL_TEXTURE_3D, static_cast<GLint>(i), internalFormat, static_cast<GLsizei>(desc.width / div),
-                     static_cast<GLsizei>(desc.height / div), static_cast<GLsizei>(desc.depth / div), 0, format, type,
-                     desc.data[i]);
+        glTexImage3D(GL_TEXTURE_3D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
+                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div),
+                     static_cast<GLsizei>(desc.depth / div), 0, format, type, desc.data[i]);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -1692,22 +1700,22 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     glBindTexture(GL_TEXTURE_CUBE_MAP, id);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
     {
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, static_cast<GLint>(i), internalFormat,
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
                      desc.data[static_cast<int>(CubeFace::PositiveX)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, static_cast<GLint>(i), internalFormat,
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
                      desc.data[static_cast<int>(CubeFace::NegativeX)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, static_cast<GLint>(i), internalFormat,
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
                      desc.data[static_cast<int>(CubeFace::PositiveY)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, static_cast<GLint>(i), internalFormat,
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
                      desc.data[static_cast<int>(CubeFace::NegativeY)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, static_cast<GLint>(i), internalFormat,
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
                      desc.data[static_cast<int>(CubeFace::PositiveZ)][i]);
-        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, static_cast<GLint>(i), internalFormat,
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
                      desc.data[static_cast<int>(CubeFace::NegativeZ)][i]);
     }
@@ -1799,7 +1807,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
     GLuint id;
     glGenBuffers(1, &id);
     glBindBuffer(GL_UNIFORM_BUFFER, id);
-    glBufferData(GL_UNIFORM_BUFFER, size, data, glUsage);
+    glBufferData(GL_UNIFORM_BUFFER, static_cast<GLsizeiptr>(size), data, glUsage);
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1848,7 +1856,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
     GLuint id;
     glGenBuffers(1, &id);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, glUsage);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), data, glUsage);
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1866,7 +1874,7 @@ void OGLRenderDevice::setIndexBuffer(IndexBuffer _ib)
 {
     auto ib = std::static_pointer_cast<OGLIndexBuffer>(_ib);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib->id);
-    this->currentIndexFormat = ib->format;
+    this->currentIndexFormat = static_cast<int>(ib->format);
     this->currentIndexSz = ib->indexSz;
 }
 
@@ -1890,7 +1898,7 @@ VertexBuffer OGLRenderDevice::createVertexBuffer(size_t size, const void* data, 
     GLuint id;
     glGenBuffers(1, &id);
     glBindBuffer(GL_ARRAY_BUFFER, id);
-    glBufferData(GL_ARRAY_BUFFER, size, data, glUsage);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(size), data, glUsage);
 
     // Check errors
     GLenum glErr = glGetError();
@@ -2000,12 +2008,13 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
 
         assert(desc.elements[i].size >= 1 && desc.elements[i].size <= 4);
 
-        glEnableVertexAttribArray(loc);
+        glEnableVertexAttribArray(static_cast<GLuint>(loc));
         if (!integer)
-            glVertexAttribPointer(loc, (GLint)desc.elements[i].size, type, normalized,
+            glVertexAttribPointer(static_cast<GLuint>(loc), (GLint)desc.elements[i].size, type, normalized,
                                   (GLsizei)desc.elements[i].buffer.stride, (const void*)desc.elements[i].buffer.offset);
         else
-            glVertexAttribIPointer(loc, (GLint)desc.elements[i].size, type, (GLsizei)desc.elements[i].buffer.stride,
+            glVertexAttribIPointer(static_cast<GLuint>(loc), (GLint)desc.elements[i].size, type,
+                                   (GLsizei)desc.elements[i].buffer.stride,
                                    (const void*)desc.elements[i].buffer.offset);
     }
 
@@ -2218,7 +2227,7 @@ void OGLRenderDevice::drawTriangles(size_t offset, size_t count)
 
 void OGLRenderDevice::drawTrianglesIndexed(size_t offset, size_t count)
 {
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count), this->currentIndexFormat,
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count), static_cast<GLenum>(this->currentIndexFormat),
                    reinterpret_cast<const void*>(offset * this->currentIndexSz));
 }
 
@@ -2230,7 +2239,7 @@ void OGLRenderDevice::drawTrianglesInstanced(size_t offset, size_t count, size_t
 
 void OGLRenderDevice::drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount)
 {
-    glDrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(count), this->currentIndexFormat,
+    glDrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(count), static_cast<GLenum>(this->currentIndexFormat),
                             reinterpret_cast<const void*>(offset * this->currentIndexSz),
                             static_cast<GLsizei>(instanceCount));
 }

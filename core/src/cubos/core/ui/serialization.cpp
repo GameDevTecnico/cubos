@@ -351,7 +351,7 @@ static bool editStructured(data::Package& pkg, const std::string& name)
                 changed |= editInternal(pkg.elements()[i], std::to_string(i));
                 if (shouldErase)
                 {
-                    pkg.elements().erase(pkg.elements().begin() + i);
+                    pkg.elements().erase(pkg.elements().begin() + static_cast<int>(i));
                     i -= 1;
                     changed = true;
                 }

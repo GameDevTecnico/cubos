@@ -93,13 +93,13 @@ static std::string_view trim(std::string_view str)
     // Trim left.
     int64_t i;
     for (i = 0; i < static_cast<int64_t>(str.size()); ++i)
-        if (!isspace(str[i]))
+        if (!isspace(str[static_cast<size_t>(i)]))
             break;
     str = str.substr(static_cast<size_t>(i));
 
     // Trim right.
     for (i = static_cast<int64_t>(str.size()) - 1; i >= 0; --i)
-        if (!isspace(str[i]))
+        if (!isspace(str[static_cast<size_t>(i)]))
             break;
     return str.substr(0, static_cast<size_t>(i) + 1);
 }
