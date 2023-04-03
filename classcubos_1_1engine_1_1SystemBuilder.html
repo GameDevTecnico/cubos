@@ -116,6 +116,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a390c1a30ce75165b9d67607039dbdbda"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
 <tr class="memitem:a390c1a30ce75165b9d67607039dbdbda"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1SystemBuilder.html">SystemBuilder</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1SystemBuilder.html#a390c1a30ce75165b9d67607039dbdbda">afterSystem</a> (F func)</td></tr>
 <tr class="separator:a390c1a30ce75165b9d67607039dbdbda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0a71dd631b6b2f2bb68ba47c79b5ffc"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:ae0a71dd631b6b2f2bb68ba47c79b5ffc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1SystemBuilder.html">SystemBuilder</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1SystemBuilder.html#ae0a71dd631b6b2f2bb68ba47c79b5ffc">runIf</a> (F func)</td></tr>
+<tr class="separator:ae0a71dd631b6b2f2bb68ba47c79b5ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Used to chain configurations related to systems. </p>
@@ -210,6 +213,30 @@ Public Member Functions</h2></td></tr>
 <p>Sets the current system to be executed before another tag. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">tag</td><td>The tag to be executed before. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae0a71dd631b6b2f2bb68ba47c79b5ffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0a71dd631b6b2f2bb68ba47c79b5ffc">&#9670;&nbsp;</a></span>runIf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1engine_1_1SystemBuilder.html">SystemBuilder</a> &amp; runIf </td>
+          <td>(</td>
+          <td class="paramtype">F&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a condition to the current system. If this condition returns false, the system will not be executed. For a system to run, all conditions must return true. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>The condition function. </td></tr>
   </table>
   </dd>
 </dl>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['data_1576',['Data',['../core-data.html',1,'core']]]
+  ['data_1584',['Data',['../core-data.html',1,'core']]]
 ];

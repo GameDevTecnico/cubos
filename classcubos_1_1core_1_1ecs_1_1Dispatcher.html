@@ -110,6 +110,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9d38db2e75885a0e26cc5de13da1a997"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc00cd2ce015e19801d9283da9078f79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#acc00cd2ce015e19801d9283da9078f79">tagSetBeforeTag</a> (const std::string &amp;tag)</td></tr>
 <tr class="separator:acc00cd2ce015e19801d9283da9078f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bead9fc9e57a1feae9a549c5e2db97c"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a0bead9fc9e57a1feae9a549c5e2db97c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a0bead9fc9e57a1feae9a549c5e2db97c">tagAddCondition</a> (F func)</td></tr>
+<tr class="separator:a0bead9fc9e57a1feae9a549c5e2db97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4783d358e3205382f29cc770cd32b221"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
 <tr class="memitem:a4783d358e3205382f29cc770cd32b221"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a4783d358e3205382f29cc770cd32b221">addSystem</a> (F func)</td></tr>
 <tr class="separator:a4783d358e3205382f29cc770cd32b221"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a95800b10344381f6c1f80733bbb85acf"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
 <tr class="memitem:a95800b10344381f6c1f80733bbb85acf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a95800b10344381f6c1f80733bbb85acf">systemSetBeforeSystem</a> (F func)</td></tr>
 <tr class="separator:a95800b10344381f6c1f80733bbb85acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae20d2bd3a5fe3010f642f8a8cc6fbedf"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:ae20d2bd3a5fe3010f642f8a8cc6fbedf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#ae20d2bd3a5fe3010f642f8a8cc6fbedf">systemAddCondition</a> (F func)</td></tr>
+<tr class="separator:ae20d2bd3a5fe3010f642f8a8cc6fbedf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a774d0da4c80e32f9d425e1652d346051"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#a774d0da4c80e32f9d425e1652d346051">compileChain</a> ()</td></tr>
 <tr class="separator:a774d0da4c80e32f9d425e1652d346051"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa22aeacf0816654953e7967d2ea55d9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aa22aeacf0816654953e7967d2ea55d9d">callSystems</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a> &amp;cmds)</td></tr>
@@ -231,6 +237,30 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Compiles a call chain. This takes all pending systems and determines their execution order. This is required before systems can be run. </p>
+
+</div>
+</div>
+<a id="ae20d2bd3a5fe3010f642f8a8cc6fbedf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae20d2bd3a5fe3010f642f8a8cc6fbedf">&#9670;&nbsp;</a></span>systemAddCondition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void systemAddCondition </td>
+          <td>(</td>
+          <td class="paramtype">F&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a condition to the current system. The specified system must exist. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>The condition. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -348,6 +378,30 @@ Public Member Functions</h2></td></tr>
 <p>Sets the current system to run before the tag. If the specified tag doesn't exist, it is internally created. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">tag</td><td>The tag to run before. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0bead9fc9e57a1feae9a549c5e2db97c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bead9fc9e57a1feae9a549c5e2db97c">&#9670;&nbsp;</a></span>tagAddCondition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tagAddCondition </td>
+          <td>(</td>
+          <td class="paramtype">F&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a condition to the current tag. If the specified tag doesn't exist, it is internally created. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>The condition. </td></tr>
   </table>
   </dd>
 </dl>

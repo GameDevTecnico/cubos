@@ -108,6 +108,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5028b8a8c1eb9fe19bd42cba8fc9fd5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20084017d3af8fb348b09cd0adc3573e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1TagBuilder.html">TagBuilder</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1TagBuilder.html#a20084017d3af8fb348b09cd0adc3573e">afterTag</a> (const std::string &amp;tag)</td></tr>
 <tr class="separator:a20084017d3af8fb348b09cd0adc3573e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9062b335d78ebb998543bfc1b26553fb"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a9062b335d78ebb998543bfc1b26553fb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1TagBuilder.html">TagBuilder</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1TagBuilder.html#a9062b335d78ebb998543bfc1b26553fb">runIf</a> (F func)</td></tr>
+<tr class="separator:a9062b335d78ebb998543bfc1b26553fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Used to chain configurations related to tags. </p>
@@ -154,6 +157,30 @@ Public Member Functions</h2></td></tr>
 <p>Sets the current tag to be executed before another tag. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">tag</td><td>The tag to be executed before. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9062b335d78ebb998543bfc1b26553fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9062b335d78ebb998543bfc1b26553fb">&#9670;&nbsp;</a></span>runIf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1engine_1_1TagBuilder.html">TagBuilder</a> &amp; runIf </td>
+          <td>(</td>
+          <td class="paramtype">F&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>The condition function. </td></tr>
   </table>
   </dd>
 </dl>
