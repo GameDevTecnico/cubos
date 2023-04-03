@@ -6,6 +6,10 @@
 
 using namespace cubos::engine;
 
+DeltaTime::DeltaTime(float value) : value(value)
+{
+}
+
 ShouldQuit::ShouldQuit(bool value) : value(value)
 {
 }
@@ -105,6 +109,7 @@ Cubos::Cubos()
 {
     core::initializeLogger();
 
+    addResource<DeltaTime>(0);
     addResource<ShouldQuit>(true);
     addResource<cubos::core::Settings>();
 }
@@ -114,6 +119,7 @@ Cubos::Cubos(int argc, char** argv)
     std::vector<std::string> arguments(argv + 1, argv + argc);
     addResource<Arguments>(arguments);
 
+    addResource<DeltaTime>(0);
     addResource<ShouldQuit>(true);
     addResource<cubos::core::Settings>();
 }
@@ -132,8 +138,13 @@ void Cubos::run()
 
     startupDispatcher.callSystems(world, cmds);
 
+    auto currentTime = std::chrono::steady_clock::now();
+    auto previousTime = std::chrono::steady_clock::now();
     while (!world.read<ShouldQuit>().get().value)
     {
         mainDispatcher.callSystems(world, cmds);
+        currentTime = std::chrono::steady_clock::now();
+        world.write<DeltaTime>().get().value = std::chrono::duration<float>(currentTime-previousTime).count();
+        previousTime = currentTime;
     }
 }

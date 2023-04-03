@@ -11,6 +11,13 @@
 
 namespace cubos::engine
 {
+    /// Resource used for storing delta time
+    struct DeltaTime
+    {
+        DeltaTime(float value);
+        float value;
+    };
+
     /// Resource used as a flag to indicate whether the engine should stop running.
     struct ShouldQuit
     {
