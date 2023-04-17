@@ -7,7 +7,7 @@ namespace cubos::engine
 {
     /// Plugin which adds scenes to CUBOS. Scenes are the asset equivalent to ECS blueprints.
     ///
-    /// @details Registers the `SceneBridge` asset bridge with the `.scn` extension. Loads assets
+    /// @details Registers the `SceneBridge` asset bridge with the `.cubos` extension. Loads assets
     /// of the `Scene` type.
     ///
     /// Dependencies:
