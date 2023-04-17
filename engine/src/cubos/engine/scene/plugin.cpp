@@ -7,8 +7,8 @@ using namespace cubos::engine;
 
 static void bridge(Assets& assets)
 {
-    // Add the bridge to load .scn files.
-    assets.registerBridge(".scn", std::make_unique<SceneBridge>());
+    // Add the bridge to load .cubos files.
+    assets.registerBridge(".cubos", std::make_unique<SceneBridge>());
 }
 
 void cubos::engine::scenePlugin(Cubos& cubos)
