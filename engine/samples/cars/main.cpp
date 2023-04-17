@@ -70,29 +70,32 @@ void setup(Commands cmds, data::AssetManager& assetManager, gl::Renderer& render
 
     // Load car grid.
     assetManager.registerType<data::Grid>(renderer.get());
-    
+
     // Spawn the camera.
-    auto camera = cmds.create(ecs::Camera{60.0f, 0.1f, 1000.0f}, ecs::LocalToWorld{}, ecs::Position{{0.0f, 40.0f, -70.0f}},
-                  ecs::Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})});
-    
+    auto camera =
+        cmds.create(ecs::Camera{60.0f, 0.1f, 1000.0f}, ecs::LocalToWorld{}, ecs::Position{{0.0f, 40.0f, -70.0f}},
+                    ecs::Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})});
+
     activeCamera.entity = camera.entity();
 }
 
-void spawnSystem(Commands cmds, data::AssetManager& assetManager, const DeltaTime& deltaTime) {
+void spawnSystem(Commands cmds, data::AssetManager& assetManager, const DeltaTime& deltaTime)
+{
     static float timer = 0.0f;
     static int x = -2;
     static int y = -1;
     timer += deltaTime.value;
 
-    if (timer >= 2) {
+    if (timer >= 2)
+    {
         auto car = assetManager.load<data::Grid>("car");
-        cmds.create(
-                Car{},
-                ecs::Grid{car, {-float(car->grid.getSize().x) / 2.0f, 0.0f, -float(car->grid.getSize().z) / 2.0f}},
-                ecs::LocalToWorld{}, ecs::Position{{56.0f * x, 0.0f, 56.0f * y}}, ecs::Rotation{});
+        cmds.create(Car{},
+                    ecs::Grid{car, {-float(car->grid.getSize().x) / 2.0f, 0.0f, -float(car->grid.getSize().z) / 2.0f}},
+                    ecs::LocalToWorld{}, ecs::Position{{56.0f * x, 0.0f, 56.0f * y}}, ecs::Rotation{});
         timer = 0;
         x++;
-        if (x == 4) {
+        if (x == 4)
+        {
             y++;
             x = -2;
         }
@@ -108,8 +111,8 @@ static void turnOnLight(gl::Frame& frame)
     frame.light(core::gl::DirectionalLight(directionalLightRotation, glm::vec3(1), 1.0f));
 }
 
-
-void moveSystem(core::ecs::Query<Car&, ecs::Position&, ecs::Rotation&> query, const DeltaTime& deltaTime) {
+void moveSystem(core::ecs::Query<Car&, ecs::Position&, ecs::Rotation&> query, const DeltaTime& deltaTime)
+{
     for (auto [entity, car, position, rotation] : query)
     {
         car.vel = rotation.quat * glm::vec3(2.0f, 0.0f, 2.0f);
@@ -120,7 +123,8 @@ void moveSystem(core::ecs::Query<Car&, ecs::Position&, ecs::Rotation&> query, co
     }
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv)
+{
     auto cubos = Cubos(argc, argv);
 
     cubos.addPlugin(plugins::windowPlugin);

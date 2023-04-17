@@ -144,7 +144,7 @@ void Cubos::run()
     {
         mainDispatcher.callSystems(world, cmds);
         currentTime = std::chrono::steady_clock::now();
-        world.write<DeltaTime>().get().value = std::chrono::duration<float>(currentTime-previousTime).count();
+        world.write<DeltaTime>().get().value = std::chrono::duration<float>(currentTime - previousTime).count();
         previousTime = currentTime;
     }
 }
