@@ -23,7 +23,7 @@
 
 #include <cubos/engine/plugins/tools/settings_inspector.hpp>
 
-#include <cubos/engine/ecs/position.hpp
+#include <cubos/engine/ecs/position.hpp>
 #include <cubos/engine/ecs/rotation.hpp>
 #include <cubos/engine/ecs/scale.hpp>
 #include <cubos/engine/ecs/local_to_world.hpp>
