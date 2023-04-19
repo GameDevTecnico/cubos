@@ -774,8 +774,8 @@ static bool generate(const GenerateOptions& options)
             file << "{" << std::endl;
             file << "    ";
         }
-        file << "CUBOS_REGISTER_COMPONENT(" << component.typeStr << ", " << storageId << ", \"" << component.name << "\");"
-             << std::endl;
+        file << "CUBOS_REGISTER_COMPONENT(" << component.typeStr << ", " << storageId << ", \"" << component.name
+             << "\");" << std::endl;
         if (!component.namespaceStr.empty())
         {
             file << "} // namespace " << component.namespaceStr << std::endl;
