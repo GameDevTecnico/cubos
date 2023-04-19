@@ -21,8 +21,10 @@
 #include <cubos/engine/plugins/file_settings.hpp>
 #include <cubos/engine/plugins/imgui.hpp>
 
+#include <cubos/engine/plugins/tools/entity_selector.hpp>
 #include <cubos/engine/plugins/tools/settings_inspector.hpp>
 #include <cubos/engine/tools/world_inspector/plugin.hpp>
+#include <cubos/engine/tools/entity_inspector/plugin.hpp>
 
 #include <components/cubos/position.hpp>
 #include <components/cubos/rotation.hpp>
@@ -70,7 +72,7 @@ void printStuff(World& world)
 }
 
 void createScene(World& world, data::AssetManager& assetManager, gl::Renderer& renderer,
-                 plugins::ActiveCamera& activeCamera)
+                 plugins::ActiveCamera& activeCamera, plugins::tools::EntitySelector& selector)
 {
     ecs::Camera camera;
     camera.fovY = 60.0f;
@@ -79,7 +81,7 @@ void createScene(World& world, data::AssetManager& assetManager, gl::Renderer& r
     activeCamera.entity =
         world.create(ecs::LocalToWorld{}, ecs::Camera{camera}, ecs::Position{{0.0f, 40.0f, -70.0f}},
                      ecs::Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})});
-
+    selector.selection = activeCamera.entity; // To test entity inspector before world / scene inspectors are made
     auto paletteAsset = assetManager.load<data::Palette>("palette");
     auto palette = paletteAsset->palette;
 
@@ -131,6 +133,7 @@ int main(int argc, char** argv)
     cubos.addPlugin(plugins::imguiPlugin);
     cubos.addPlugin(plugins::tools::settingsInspectorPlugin);
     cubos.addPlugin(tools::worldInspectorPlugin);
+    cubos.addPlugin(tools::entityInspectorPlugin);
 
     cubos.addResource<data::AssetManager>();
 
