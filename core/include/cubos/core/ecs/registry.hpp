@@ -79,26 +79,28 @@ namespace cubos::core::ecs
         auto& byNames = Registry::entriesByName();
         assert(byNames.find(std::string(name)) == byNames.end());
 
-        auto entry = std::make_shared<Entry>(Entry {
+        auto entry = std::make_shared<Entry>(Entry{
             .type = typeid(T),
             .name = std::string(name),
-            .componentCreator = [](data::Deserializer& des, Blueprint& blueprint, Entity id) {
-                T comp;
-                des.read(comp);
-                if (des.failed())
-                {
-                    return false;
-                }
-                else
-                {
-                    blueprint.add(id, comp);
-                    return true;
-                }
-            },
-            .storageCreator = []() {
-                auto storage = std::make_unique<S>();
-                return std::unique_ptr<IStorage>(storage.release());
-            },
+            .componentCreator =
+                [](data::Deserializer& des, Blueprint& blueprint, Entity id) {
+                    T comp;
+                    des.read(comp);
+                    if (des.failed())
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        blueprint.add(id, comp);
+                        return true;
+                    }
+                },
+            .storageCreator =
+                []() {
+                    auto storage = std::make_unique<S>();
+                    return std::unique_ptr<IStorage>(storage.release());
+                },
         });
 
         byType.set<T>(entry);
