@@ -36,6 +36,8 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/plugins/tools/settings_inspector.cpp"
     "src/cubos/engine/plugins/tools/entity_selector.cpp"
+    
+    "src/cubos/engine/collisions/shapes/sphere.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
@@ -74,6 +76,9 @@ set(CUBOS_ENGINE_INCLUDE
 
     "include/cubos/engine/plugins/tools/settings_inspector.hpp"
     "include/cubos/engine/plugins/tools/entity_selector.hpp"
+
+    "include/cubos/engine/collisions/manifold.hpp"
+    "include/cubos/engine/collisions/shapes/sphere.hpp"
 )
 
 # Create cubos engine
