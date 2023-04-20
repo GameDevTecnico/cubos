@@ -44,7 +44,7 @@
             CUBOS_CRITICAL("Assertion {} failed", #cond);                                                              \
             if constexpr (sizeof(#__VA_ARGS__) > 1)                                                                    \
             {                                                                                                          \
-                CUBOS_CRITICAL("" __VA_ARGS__);                                                                           \
+                CUBOS_CRITICAL("" __VA_ARGS__);                                                                        \
             }                                                                                                          \
             std::abort();                                                                                              \
         }                                                                                                              \
