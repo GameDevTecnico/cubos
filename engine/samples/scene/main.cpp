@@ -22,6 +22,7 @@
 #include <cubos/engine/plugins/imgui.hpp>
 
 #include <cubos/engine/plugins/tools/settings_inspector.hpp>
+#include <cubos/engine/tools/world_inspector/plugin.hpp>
 
 #include <components/cubos/position.hpp>
 #include <components/cubos/rotation.hpp>
@@ -129,6 +130,7 @@ int main(int argc, char** argv)
     cubos.addPlugin(plugins::rendererPlugin);
     cubos.addPlugin(plugins::imguiPlugin);
     cubos.addPlugin(plugins::tools::settingsInspectorPlugin);
+    cubos.addPlugin(tools::worldInspectorPlugin);
 
     cubos.addResource<data::AssetManager>();
 
