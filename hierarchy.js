@@ -43,6 +43,7 @@ var hierarchy =
     [ "Cursor", "classcubos_1_1core_1_1io_1_1Cursor.html", null ],
     [ "EmbeddedArchive::Data", "structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html", null ],
     [ "Debug", "classcubos_1_1core_1_1gl_1_1Debug.html", null ],
+    [ "DeltaTime", "structcubos_1_1engine_1_1DeltaTime.html", null ],
     [ "DepthStencilStateDesc::Depth", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Depth.html", null ],
     [ "DepthStencilState", "classcubos_1_1core_1_1gl_1_1impl_1_1DepthStencilState.html", null ],
     [ "DepthStencilStateDesc", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc.html", null ],

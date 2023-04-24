@@ -64,15 +64,15 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"",
-"classcubos_1_1core_1_1data_1_1Handle.html#a735984d41155bc1032e09bece8f8d66d",
-"classcubos_1_1core_1_1ecs_1_1Blueprint.html#aa81023c69347d6a21b3599569ebfbbef",
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#aa08fb7bfc77946c968c4684df1d586b5",
-"classcubos_1_1engine_1_1Cubos.html#a13a43e6d814de94978c515cb084873b1",
-"engine_2include_2cubos_2engine_2plugins_2window_8hpp.html#afa8146f56bedab5286a623bdbad91054",
-"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88ad5c7b7f0102df3f7305c43f73fc3a498",
-"namespacecubos_1_1core_1_1memory.html",
-"structcubos_1_1core_1_1gl_1_1SpotLight.html#a1a6dd1899ef91f547e799986b5fb3753"
+"action_8hpp_source.html",
+"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a127c755ca31f40039297deb214228807",
+"classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#a8d5203f13e6ca9742b5ec75e0498fbf2",
+"classcubos_1_1core_1_1gl_1_1RenderDevice.html#ae502eca7875295d1d7eec572f23ca229",
+"classcubos_1_1engine_1_1SystemBuilder.html",
+"file_8hpp_source.html",
+"namespacecubos_1_1core_1_1gl.html#a66b65d473eb827715dd55f6db93e658da6182913ea7b5c02fe2773ea87177d4f9",
+"namespacecubos_1_1core_1_1memory.html#ad253881fe73b77e302a57b327c3e17b9",
+"structcubos_1_1core_1_1gl_1_1Texture1DDesc.html#ac541b9cb7a75a625df257feb8408a96b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -209,6 +209,7 @@ var annotated_dup =
           ] ],
           [ "ActiveCamera", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera.html", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera" ]
         ] ],
+        [ "DeltaTime", "structcubos_1_1engine_1_1DeltaTime.html", "structcubos_1_1engine_1_1DeltaTime" ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
         [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", "structcubos_1_1engine_1_1Arguments" ],
         [ "TagBuilder", "classcubos_1_1engine_1_1TagBuilder.html", "classcubos_1_1engine_1_1TagBuilder" ],
