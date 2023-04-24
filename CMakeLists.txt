@@ -6,6 +6,9 @@ project(cubos VERSION 0.1.0)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
+# Should clang-tidy errors be automatically fixed?
+option(FIX_CLANG_TIDY_ERRORS OFF)
+
 # Function which configures a target with the options common to all CUBOS. targets.
 function(cubos_common_target_options target)
     target_compile_features(${target} PRIVATE cxx_std_20)
@@ -32,13 +35,10 @@ function(cubos_common_target_options target)
     # Enable clang-tidy
     find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
     if(CLANG_TIDY_EXE)
-        set(CLANG_TIDY_COMMAND
-            "${CLANG_TIDY_EXE}"
-            "-checks=-*,modernize-*,-modernize-use-trailing-return-type"
-            "-fix"
-            "-fix-errors"
-            "-warnings-as-errors=*"
-        )
+        set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}")
+        if(FIX_CLANG_TIDY_ERRORS)
+            set(CLANG_TIDY_COMMAND "${CLANG_TIDY_COMMAND}" "-fix" "-fix-errors")
+        endif()
         set_target_properties(${target} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}")
     endif()
 endfunction()
