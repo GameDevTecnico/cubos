@@ -7,5 +7,21 @@ AccessModifierOffset: -4
 DerivePointerAlignment: false
 PointerAlignment: Left
 AlwaysBreakTemplateDeclarations: Yes
-
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<[a-z_]+>'
+    Priority: 0
+  - Regex: '^<cubos/core/.*>'
+    Priority: 2
+  - Regex: '^<cubos/engine/.*>'
+    Priority: 3
+  - Regex: '^<.+\.h(pp)?>'
+    Priority: 1
+  - Regex: '.*'
+    Priority: 4
+BreakConstructorInitializersBeforeComma: true
+BreakConstructorInitializers: BeforeComma
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ConstructorInitializerIndentWidth: 4
 ...
