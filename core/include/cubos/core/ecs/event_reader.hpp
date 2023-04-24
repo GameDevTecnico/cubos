@@ -1,8 +1,9 @@
 #ifndef CUBOS_CORE_ECS_EVENT_READER_HPP
 #define CUBOS_CORE_ECS_EVENT_READER_HPP
 
-#include <cubos/core/ecs/event_pipe.hpp>
 #include <optional>
+
+#include <cubos/core/ecs/event_pipe.hpp>
 
 namespace cubos::core::ecs
 {
@@ -52,7 +53,9 @@ namespace cubos::core::ecs
     // EventReader implementation.
 
     template <typename T, unsigned int M>
-    EventReader<T, M>::EventReader(const EventPipe<T>& pipe, std::size_t& index) : pipe(pipe), index(index)
+    EventReader<T, M>::EventReader(const EventPipe<T>& pipe, std::size_t& index)
+        : pipe(pipe)
+        , index(index)
     {
         static_assert(M != 0, "Invalid mask.");
     }
@@ -101,7 +104,9 @@ namespace cubos::core::ecs
     template <typename T, unsigned int M>
     EventReader<T, M>::Iterator::Iterator(EventReader<T, M>& r, std::optional<std::reference_wrapper<const T>> ev,
                                           bool e)
-        : reader(r), currentEvent(ev), end(e)
+        : reader(r)
+        , currentEvent(ev)
+        , end(e)
     {
     }
 

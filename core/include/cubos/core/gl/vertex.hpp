@@ -1,10 +1,10 @@
 #ifndef CUBOS_CORE_GL_VERTEX_HPP
 #define CUBOS_CORE_GL_VERTEX_HPP
 
-#include <cubos/core/data/serializer.hpp>
-#include <cubos/core/data/deserializer.hpp>
-
 #include <glm/glm.hpp>
+
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
 
 namespace cubos::core::gl
 {

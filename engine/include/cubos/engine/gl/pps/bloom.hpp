@@ -1,12 +1,13 @@
 #ifndef CUBOS_ENGINE_GL_PPS_BLOOM_HPP
 #define CUBOS_ENGINE_GL_PPS_BLOOM_HPP
 
+#include <vector>
+
+#include <glm/glm.hpp>
+
 #include <cubos/core/gl/render_device.hpp>
 
 #include <cubos/engine/gl/pps/pass.hpp>
-
-#include <glm/glm.hpp>
-#include <vector>
 
 namespace cubos::engine::gl::pps
 {

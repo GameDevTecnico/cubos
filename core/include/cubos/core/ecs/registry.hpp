@@ -1,11 +1,11 @@
 #ifndef CUBOS_CORE_ECS_REGISTRY_HPP
 #define CUBOS_CORE_ECS_REGISTRY_HPP
 
-#include <cubos/core/ecs/blueprint.hpp>
-#include <cubos/core/data/deserializer.hpp>
-#include <cubos/core/memory/type_map.hpp>
-
 #include <optional>
+
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/ecs/blueprint.hpp>
+#include <cubos/core/memory/type_map.hpp>
 
 namespace cubos::core::ecs
 {

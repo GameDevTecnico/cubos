@@ -19,7 +19,7 @@
 
 using namespace cubos;
 
-int main(void)
+int main()
 {
     core::initializeLogger();
     auto window = core::io::openWindow();

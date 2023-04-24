@@ -1,10 +1,11 @@
-#include <cubos/core/data/yaml_deserializer.hpp>
-
 #include <cassert>
+
+#include <cubos/core/data/yaml_deserializer.hpp>
 
 using namespace cubos::core::data;
 
-YAMLDeserializer::YAMLDeserializer(memory::Stream& stream) : stream(stream)
+YAMLDeserializer::YAMLDeserializer(memory::Stream& stream)
+    : stream(stream)
 {
     this->loadDocument();
     this->frame.push({Mode::Object, this->document.begin(), false});

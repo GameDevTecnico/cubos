@@ -1,7 +1,7 @@
-#include <cubos/core/io/input_manager.hpp>
-
 #include <memory>
 #include <variant>
+
+#include <cubos/core/io/input_manager.hpp>
 
 using namespace cubos::core::io;
 

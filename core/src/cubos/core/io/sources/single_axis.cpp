@@ -1,8 +1,8 @@
-#include <cubos/core/io/sources/single_axis.hpp>
-#include <cubos/core/io/input_manager.hpp>
-
 #include <tuple>
 #include <variant>
+
+#include <cubos/core/io/input_manager.hpp>
+#include <cubos/core/io/sources/single_axis.hpp>
 
 using namespace cubos::core::io;
 

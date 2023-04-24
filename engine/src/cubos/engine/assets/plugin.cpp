@@ -1,8 +1,8 @@
-#include <cubos/engine/assets/plugin.hpp>
-
-#include <cubos/core/settings.hpp>
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/data/std_archive.hpp>
+#include <cubos/core/settings.hpp>
+
+#include <cubos/engine/assets/plugin.hpp>
 
 using namespace cubos::engine;
 using namespace cubos::core;

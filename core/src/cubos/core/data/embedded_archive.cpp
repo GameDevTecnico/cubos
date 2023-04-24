@@ -1,7 +1,7 @@
 #include <cubos/core/data/embedded_archive.hpp>
 #include <cubos/core/data/file_stream.hpp>
-#include <cubos/core/memory/buffer_stream.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::data;

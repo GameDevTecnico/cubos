@@ -1,13 +1,13 @@
 #ifndef CUBOS_CORE_ECS_DISPATCHER_HPP
 #define CUBOS_CORE_ECS_DISPATCHER_HPP
 
+#include <map>
+#include <memory>
+#include <string>
+#include <vector>
+
 #include <cubos/core/ecs/system.hpp>
 #include <cubos/core/log.hpp>
-
-#include <map>
-#include <vector>
-#include <string>
-#include <memory>
 
 #define ENSURE_CURR_SYSTEM()                                                                                           \
     do                                                                                                                 \

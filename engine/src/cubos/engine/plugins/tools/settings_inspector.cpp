@@ -1,10 +1,10 @@
-#include <cubos/engine/plugins/tools/settings_inspector.hpp>
-#include <cubos/engine/plugins/imgui.hpp>
+#include <imgui.h>
 
 #include <cubos/core/settings.hpp>
 #include <cubos/core/ui/serialization.hpp>
 
-#include <imgui.h>
+#include <cubos/engine/plugins/imgui.hpp>
+#include <cubos/engine/plugins/tools/settings_inspector.hpp>
 
 static void inspector(cubos::core::Settings& settings)
 {

@@ -1,9 +1,9 @@
 #ifndef CUBOS_CORE_MEMORY_TYPE_MAP_HPP
 #define CUBOS_CORE_MEMORY_TYPE_MAP_HPP
 
-#include <unordered_map>
-#include <typeindex>
 #include <optional>
+#include <typeindex>
+#include <unordered_map>
 
 namespace cubos::core::memory
 {

@@ -1,12 +1,13 @@
-#include <cubos/core/data/yaml_serializer.hpp>
-
 #include <cassert>
+
+#include <cubos/core/data/yaml_serializer.hpp>
 
 constexpr const char* ANONYMOUS_FIELD_NAME = "anonymous";
 
 using namespace cubos::core::data;
 
-YAMLSerializer::YAMLSerializer(memory::Stream& stream) : stream(stream)
+YAMLSerializer::YAMLSerializer(memory::Stream& stream)
+    : stream(stream)
 {
     this->mode.push(Mode::Object);
     this->key = true;
@@ -17,7 +18,7 @@ YAMLSerializer::YAMLSerializer(memory::Stream& stream) : stream(stream)
 YAMLSerializer::~YAMLSerializer()
 {
     this->emitter << YAML::EndMap << YAML::EndDoc;
-    this->flush();
+    YAMLSerializer::flush();
 }
 
 void YAMLSerializer::flush()

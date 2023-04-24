@@ -21,7 +21,8 @@ using namespace cubos::core::al;
 class OALBuffer : public impl::Buffer
 {
 public:
-    OALBuffer(ALuint id) : id(id)
+    OALBuffer(ALuint id)
+        : id(id)
     {
     }
 
@@ -62,7 +63,8 @@ public:
 class OALSource : public impl::Source
 {
 public:
-    OALSource(ALuint id) : id(id)
+    OALSource(ALuint id)
+        : id(id)
     {
     }
 
@@ -148,6 +150,7 @@ OALAudioDevice::OALAudioDevice(std::string specifier)
     auto context = alcCreateContext(device, nullptr);
     alcMakeContextCurrent(context);
 #else
+    (void)specifier;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }
@@ -183,6 +186,7 @@ void OALAudioDevice::enumerateDevices(std::vector<std::string>& devices)
         pointer += s.size() + 1;
     }
 #else
+    (void)devices;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }
@@ -231,6 +235,7 @@ void OALAudioDevice::setListenerPosition(const glm::vec3& position)
 #ifdef WITH_OPENAL
     alListener3f(AL_POSITION, position.x, position.y, position.z);
 #else
+    (void)position;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }
@@ -241,6 +246,8 @@ void OALAudioDevice::setListenerOrientation(const glm::vec3& forward, const glm:
     float orientation[6] = {forward.x, forward.y, forward.z, up.x, up.y, up.z};
     alListenerfv(AL_ORIENTATION, orientation);
 #else
+    (void)forward;
+    (void)up;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }
@@ -250,6 +257,7 @@ void OALAudioDevice::setListenerVelocity(const glm::vec3& velocity)
 #ifdef WITH_OPENAL
     alListener3f(AL_VELOCITY, velocity.x, velocity.y, velocity.z);
 #else
+    (void)velocity;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }

@@ -1,6 +1,6 @@
-#include <cubos/core/ecs/dispatcher.hpp>
-
 #include <algorithm>
+
+#include <cubos/core/ecs/dispatcher.hpp>
 
 using namespace cubos::core::ecs;
 

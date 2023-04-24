@@ -1,14 +1,14 @@
 #ifndef CUBOS_CORE_ECS_WORLD_HPP
 #define CUBOS_CORE_ECS_WORLD_HPP
 
-#include <cubos/core/log.hpp>
-#include <cubos/core/ecs/resource_manager.hpp>
-#include <cubos/core/ecs/entity_manager.hpp>
-#include <cubos/core/ecs/component_manager.hpp>
-
 #include <cassert>
-#include <unordered_map>
 #include <cstddef>
+#include <unordered_map>
+
+#include <cubos/core/ecs/component_manager.hpp>
+#include <cubos/core/ecs/entity_manager.hpp>
+#include <cubos/core/ecs/resource_manager.hpp>
+#include <cubos/core/log.hpp>
 
 namespace cubos::core::ecs
 {

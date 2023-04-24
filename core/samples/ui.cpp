@@ -9,7 +9,7 @@
 
 using namespace cubos::core;
 
-int main(void)
+int main()
 {
     initializeLogger();
     auto window = io::openWindow();

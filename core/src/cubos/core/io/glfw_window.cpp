@@ -1,10 +1,8 @@
-#include <cubos/core/io/glfw_window.hpp>
+#include <glad/glad.h>
 
 #include <cubos/core/gl/ogl_render_device.hpp>
-
+#include <cubos/core/io/glfw_window.hpp>
 #include <cubos/core/log.hpp>
-
-#include <glad/glad.h>
 
 using namespace cubos::core;
 using namespace cubos::core::io;
@@ -274,7 +272,7 @@ const char* GLFWWindow::getClipboard() const
 
 static void keyCallback(GLFWwindow* window, int key, int, int action, int mods)
 {
-    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     Key cubosKey = glfwToCubosKey(key);
     updateMods(handler, mods);
     if (action == GLFW_PRESS || action == GLFW_RELEASE)
@@ -283,13 +281,13 @@ static void keyCallback(GLFWwindow* window, int key, int, int action, int mods)
 
 static void mousePositionCallback(GLFWwindow* window, double xPos, double yPos)
 {
-    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->pushEvent(MouseMoveEvent{.position = glm::ivec2(xPos, yPos)});
 }
 
 static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
-    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     MouseButton cubosButton = glfwToCubosMouseButton(button);
     updateMods(handler, mods);
     if (action == GLFW_PRESS || action == GLFW_RELEASE)
@@ -298,19 +296,19 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
 
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->pushEvent(MouseScrollEvent{.offset = glm::vec2(xoffset, yoffset)});
 }
 
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
-    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->pushEvent(ResizeEvent{.size = glm::ivec2(width, height)});
 }
 
 static void charCallback(GLFWwindow* window, unsigned int codepoint)
 {
-    GLFWWindow* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->pushEvent(TextEvent{.codepoint = static_cast<char32_t>(codepoint)});
 }
 

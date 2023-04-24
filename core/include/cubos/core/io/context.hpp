@@ -1,8 +1,9 @@
 #ifndef CUBOS_CORE_IO_CONTEXT_HPP
 #define CUBOS_CORE_IO_CONTEXT_HPP
 
-#include <glm/glm.hpp>
 #include <variant>
+
+#include <glm/glm.hpp>
 
 namespace cubos::core::io
 {
