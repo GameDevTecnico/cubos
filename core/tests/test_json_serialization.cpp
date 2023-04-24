@@ -50,8 +50,8 @@ TEST(Cubos_Memory_JSON_Serialization, Serialize_Array)
         serializer.beginObject(nullptr);
         serializer.write(vec, "vector");
         serializer.beginArray(3, "strings");
-        for (size_t i = 0; i < 3; ++i)
-            serializer.write(strs[i], nullptr);
+        for (auto & str : strs)
+            serializer.write(str, nullptr);
         serializer.endArray();
         serializer.write(vec3d, "vector3d");
         serializer.endObject();
@@ -115,6 +115,6 @@ TEST(Cubos_Memory_JSON_Serialization, Serialize_Dictionary)
     }
     stream.put('\0');
 
-    const char* expected = "{\"0\":\"one\",\"1\":\"two\",\"2\":\"three\"}";
+    const char* expected = R"({"0":"one","1":"two","2":"three"})";
     EXPECT_STREQ(expected, buf);
 }

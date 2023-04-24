@@ -1,11 +1,11 @@
-#include <cubos/engine/cubos.hpp>
-
-#include <cubos/engine/plugins/window.hpp>
-#include <cubos/engine/plugins/env_settings.hpp>
+#include <imgui.h>
 
 #include <cubos/core/ui/imgui.hpp>
 #include <cubos/core/ui/serialization.hpp>
-#include <imgui.h>
+
+#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/plugins/env_settings.hpp>
+#include <cubos/engine/plugins/window.hpp>
 
 static void setup(const cubos::core::io::Window& window)
 {

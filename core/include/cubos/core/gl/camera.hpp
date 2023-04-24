@@ -1,9 +1,9 @@
 #ifndef CUBOS_CORE_GL_CAMERA_HPP
 #define CUBOS_CORE_GL_CAMERA_HPP
 
-#include <cubos/core/gl/render_device.hpp>
-
 #include <glm/glm.hpp>
+
+#include <cubos/core/gl/render_device.hpp>
 
 namespace cubos::core::gl
 {

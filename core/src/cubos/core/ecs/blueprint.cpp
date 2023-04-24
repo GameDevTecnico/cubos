@@ -21,7 +21,7 @@ Entity Blueprint::entity(const std::string& name) const
 {
     if (!this->map.hasId(name))
     {
-        return Entity();
+        return {};
     }
 
     return this->map.getRef(name);

@@ -1,6 +1,8 @@
+#include <array>
+
 #include <cubos/core/data/qb_parser.hpp>
-#include <cubos/core/memory/endianness.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/memory/endianness.hpp>
 
 bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream& stream)
 {

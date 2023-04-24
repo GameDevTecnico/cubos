@@ -1,8 +1,8 @@
-#include <cubos/engine/assets/asset.hpp>
-
-#include <cubos/core/data/serializer.hpp>
 #include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
 #include <cubos/core/log.hpp>
+
+#include <cubos/engine/assets/asset.hpp>
 
 using namespace cubos::engine;
 
@@ -33,15 +33,24 @@ AnyAsset::~AnyAsset()
     this->decRef();
 }
 
-AnyAsset::AnyAsset(std::nullptr_t ptr) : id(), refCount(nullptr), version(-1)
+AnyAsset::AnyAsset(std::nullptr_t)
+    : id()
+    , refCount(nullptr)
+    , version(-1)
 {
 }
 
-AnyAsset::AnyAsset(uuids::uuid id) : id(id), refCount(nullptr), version(-1)
+AnyAsset::AnyAsset(uuids::uuid id)
+    : id(id)
+    , refCount(nullptr)
+    , version(-1)
 {
 }
 
-AnyAsset::AnyAsset(std::string_view str) : id(), refCount(nullptr), version(-1)
+AnyAsset::AnyAsset(std::string_view str)
+    : id()
+    , refCount(nullptr)
+    , version(-1)
 {
     if (auto id = uuids::uuid::from_string(str))
     {
@@ -53,12 +62,18 @@ AnyAsset::AnyAsset(std::string_view str) : id(), refCount(nullptr), version(-1)
     }
 }
 
-AnyAsset::AnyAsset(const AnyAsset& other) : id(other.id), refCount(other.refCount), version(other.version)
+AnyAsset::AnyAsset(const AnyAsset& other)
+    : id(other.id)
+    , refCount(other.refCount)
+    , version(other.version)
 {
     this->incRef();
 }
 
-AnyAsset::AnyAsset(AnyAsset&& other) : id(other.id), refCount(other.refCount), version(other.version)
+AnyAsset::AnyAsset(AnyAsset&& other)
+    : id(other.id)
+    , refCount(other.refCount)
+    , version(other.version)
 {
     other.refCount = nullptr;
 }

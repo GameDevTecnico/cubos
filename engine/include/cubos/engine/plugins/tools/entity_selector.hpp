@@ -1,9 +1,9 @@
 #ifndef CUBOS_ENGINE_PLUGINS_ENTITY_SELECTOR_HPP
 #define CUBOS_ENGINE_PLUGINS_ENTITY_SELECTOR_HPP
 
-#include <cubos/engine/cubos.hpp>
-
 #include <cubos/core/ecs/entity_manager.hpp>
+
+#include <cubos/engine/cubos.hpp>
 
 namespace cubos::engine::plugins::tools
 {

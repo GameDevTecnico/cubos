@@ -1,9 +1,9 @@
 #ifndef CUBOS_CORE_MEMORY_STD_STREAM_HPP
 #define CUBOS_CORE_MEMORY_STD_STREAM_HPP
 
-#include <cubos/core/memory/stream.hpp>
-
 #include <cstdio>
+
+#include <cubos/core/memory/stream.hpp>
 
 namespace cubos::core::memory
 {

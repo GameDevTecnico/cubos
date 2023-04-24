@@ -21,16 +21,17 @@ using namespace cubos::core::al;
 class OALBuffer : public impl::Buffer
 {
 public:
-    OALBuffer(ALuint id) : id(id)
+    OALBuffer(ALuint id)
+        : id(id)
     {
     }
 
-    virtual ~OALBuffer() override
+    ~OALBuffer() override
     {
         alDeleteBuffers(1, &this->id);
     }
 
-    virtual void fill(Format format, size_t size, const void* data, size_t frequency) override
+    void fill(Format format, size_t size, const void* data, size_t frequency) override
     {
         ALenum alFormat = 0;
 
@@ -62,77 +63,78 @@ public:
 class OALSource : public impl::Source
 {
 public:
-    OALSource(ALuint id) : id(id)
+    OALSource(ALuint id)
+        : id(id)
     {
     }
 
-    virtual ~OALSource() override
+    ~OALSource() override
     {
         alDeleteSources(1, &this->id);
     }
 
-    virtual void setBuffer(Buffer buffer) override
+    void setBuffer(Buffer buffer) override
     {
         auto oalBuffer = std::dynamic_pointer_cast<OALBuffer>(buffer);
         alSourcei(this->id, AL_BUFFER, static_cast<ALint>(oalBuffer->id));
     }
 
-    virtual void setPosition(const glm::vec3& position) override
+    void setPosition(const glm::vec3& position) override
     {
         alSource3f(this->id, AL_POSITION, position.x, position.y, position.z);
     }
 
-    virtual void setVelocity(const glm::vec3& velocity) override
+    void setVelocity(const glm::vec3& velocity) override
     {
         alSource3f(this->id, AL_VELOCITY, velocity.x, velocity.y, velocity.z);
     }
 
-    virtual void setGain(float gain) override
+    void setGain(float gain) override
     {
         alSourcef(this->id, AL_GAIN, gain);
     }
 
-    virtual void setPitch(float pitch) override
+    void setPitch(float pitch) override
     {
         alSourcef(this->id, AL_PITCH, pitch);
     }
 
-    virtual void setLooping(bool looping) override
+    void setLooping(bool looping) override
     {
         alSourcei(this->id, AL_LOOPING, looping);
     }
 
-    virtual void setRelative(bool relative) override
+    void setRelative(bool relative) override
     {
         alSourcei(this->id, AL_SOURCE_RELATIVE, relative);
     }
 
-    virtual void setDistance(float maxDistance) override
+    void setDistance(float maxDistance) override
     {
         alSourcef(this->id, AL_MAX_DISTANCE, maxDistance);
     }
 
-    virtual void setConeAngle(float coneAngle) override
+    void setConeAngle(float coneAngle) override
     {
         alSourcef(this->id, AL_CONE_OUTER_ANGLE, coneAngle);
     }
 
-    virtual void setConeGain(float coneGain) override
+    void setConeGain(float coneGain) override
     {
         alSourcef(this->id, AL_CONE_INNER_ANGLE, coneGain);
     }
 
-    virtual void setConeDirection(const glm::vec3& direction) override
+    void setConeDirection(const glm::vec3& direction) override
     {
         alSource3f(this->id, AL_DIRECTION, direction.x, direction.y, direction.z);
     }
 
-    virtual void setReferenceDistance(float referenceDistance) override
+    void setReferenceDistance(float referenceDistance) override
     {
         alSourcef(this->id, AL_REFERENCE_DISTANCE, referenceDistance);
     }
 
-    virtual void play() override
+    void play() override
     {
         alSourcePlay(this->id);
     }
@@ -148,6 +150,7 @@ OALAudioDevice::OALAudioDevice(std::string specifier)
     auto context = alcCreateContext(device, nullptr);
     alcMakeContextCurrent(context);
 #else
+    (void)specifier;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }
@@ -183,6 +186,7 @@ void OALAudioDevice::enumerateDevices(std::vector<std::string>& devices)
         pointer += s.size() + 1;
     }
 #else
+    (void)devices;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }
@@ -231,6 +235,7 @@ void OALAudioDevice::setListenerPosition(const glm::vec3& position)
 #ifdef WITH_OPENAL
     alListener3f(AL_POSITION, position.x, position.y, position.z);
 #else
+    (void)position;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }
@@ -241,6 +246,8 @@ void OALAudioDevice::setListenerOrientation(const glm::vec3& forward, const glm:
     float orientation[6] = {forward.x, forward.y, forward.z, up.x, up.y, up.z};
     alListenerfv(AL_ORIENTATION, orientation);
 #else
+    (void)forward;
+    (void)up;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }
@@ -250,6 +257,7 @@ void OALAudioDevice::setListenerVelocity(const glm::vec3& velocity)
 #ifdef WITH_OPENAL
     alListener3f(AL_VELOCITY, velocity.x, velocity.y, velocity.z);
 #else
+    (void)velocity;
     UNSUPPORTED();
 #endif // WITH_OPENAL
 }

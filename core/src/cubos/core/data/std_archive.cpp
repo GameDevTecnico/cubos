@@ -1,13 +1,14 @@
-#include <cubos/core/data/std_archive.hpp>
 #include <cubos/core/data/file_stream.hpp>
-#include <cubos/core/memory/std_stream.hpp>
+#include <cubos/core/data/std_archive.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/memory/std_stream.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::data;
 
 STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly)
-    : osPath(osPath), readOnly(readOnly)
+    : osPath(osPath)
+    , readOnly(readOnly)
 {
     // Check if the file/directory exists.
     if (!std::filesystem::exists(osPath))

@@ -1,15 +1,16 @@
 #ifndef CUBOS_CORE_IO_WINDOW_HPP
 #define CUBOS_CORE_IO_WINDOW_HPP
 
-#include <cubos/core/io/keyboard.hpp>
-#include <cubos/core/io/cursor.hpp>
+#include <deque>
+#include <memory>
+#include <optional>
+#include <string>
+#include <variant>
 
 #include <glm/glm.hpp>
-#include <optional>
-#include <variant>
-#include <memory>
-#include <string>
-#include <deque>
+
+#include <cubos/core/io/cursor.hpp>
+#include <cubos/core/io/keyboard.hpp>
 
 namespace cubos::core::gl
 {

@@ -1,11 +1,11 @@
 #ifndef CUBOS_CORE_ECS_RESOURCE_MANAGER_HPP
 #define CUBOS_CORE_ECS_RESOURCE_MANAGER_HPP
 
-#include <cubos/core/ecs/world.hpp>
-
 #include <shared_mutex>
-#include <unordered_map>
 #include <typeindex>
+#include <unordered_map>
+
+#include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs
 {
@@ -93,14 +93,17 @@ namespace cubos::core::ecs
     // Implementation.
 
     template <typename T>
-    ReadResource<T>::ReadResource(ReadResource&& other) : resource(other.resource), lock(std::move(other.lock))
+    ReadResource<T>::ReadResource(ReadResource&& other)
+        : resource(other.resource)
+        , lock(std::move(other.lock))
     {
         // Do nothing.
     }
 
     template <typename T>
     ReadResource<T>::ReadResource(const T& resource, std::shared_lock<std::shared_mutex>&& lock)
-        : resource(resource), lock(std::move(lock))
+        : resource(resource)
+        , lock(std::move(lock))
     {
         // Do nothing.
     }
@@ -112,14 +115,17 @@ namespace cubos::core::ecs
     }
 
     template <typename T>
-    WriteResource<T>::WriteResource(WriteResource&& other) : resource(other.resource), lock(std::move(other.lock))
+    WriteResource<T>::WriteResource(WriteResource&& other)
+        : resource(other.resource)
+        , lock(std::move(other.lock))
     {
         // Do nothing.
     }
 
     template <typename T>
     WriteResource<T>::WriteResource(T& resource, std::unique_lock<std::shared_mutex>&& lock)
-        : resource(resource), lock(std::move(lock))
+        : resource(resource)
+        , lock(std::move(lock))
     {
         // Do nothing.
     }
@@ -139,7 +145,8 @@ namespace cubos::core::ecs
     }
 
     inline ResourceManager::Resource::Resource(void* data, std::function<void(void*)> destroyer)
-        : data(data), destroyer(destroyer)
+        : data(data)
+        , destroyer(destroyer)
     {
         // Do nothing.
     }

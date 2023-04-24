@@ -1,10 +1,10 @@
-#include <cubos/engine/assets/assets.hpp>
-
-#include <cubos/core/data/file_system.hpp>
-#include <cubos/core/data/json_serializer.hpp>
-#include <cubos/core/data/json_deserializer.hpp>
 #include <cubos/core/data/debug_serializer.hpp>
+#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/json_deserializer.hpp>
+#include <cubos/core/data/json_serializer.hpp>
 #include <cubos/core/log.hpp>
+
+#include <cubos/engine/assets/assets.hpp>
 
 using namespace cubos::engine;
 
@@ -193,7 +193,7 @@ AnyAsset Assets::load(AnyAsset handle) const
     if (assetEntry == nullptr)
     {
         CUBOS_ERROR("Could not load asset");
-        return AnyAsset();
+        return {};
     }
 
     // Find a bridge for the asset.
@@ -201,7 +201,7 @@ AnyAsset Assets::load(AnyAsset handle) const
     if (bridge == nullptr)
     {
         CUBOS_ERROR("Could not load asset");
-        return AnyAsset();
+        return {};
     }
 
     // We need to lock this to prevent the asset from being queued twice by a concurrent thread.
@@ -340,7 +340,7 @@ AssetMetaRead Assets::readMeta(AnyAsset handle) const
     CUBOS_ASSERT(assetEntry != nullptr, "Could not access metadata");
 
     auto lock = std::shared_lock(assetEntry->mutex);
-    return AssetMetaRead(assetEntry->meta, std::move(lock));
+    return {assetEntry->meta, std::move(lock)};
 }
 
 AssetMetaWrite Assets::writeMeta(AnyAsset handle)
@@ -349,10 +349,15 @@ AssetMetaWrite Assets::writeMeta(AnyAsset handle)
     CUBOS_ASSERT(assetEntry != nullptr, "Could not access metadata");
 
     auto lock = std::unique_lock(assetEntry->mutex);
-    return AssetMetaWrite(assetEntry->meta, std::move(lock));
+    return {assetEntry->meta, std::move(lock)};
 }
 
-Assets::Entry::Entry() : status(Status::Unloaded), refCount(0), version(0), data(nullptr), type(typeid(void))
+Assets::Entry::Entry()
+    : status(Status::Unloaded)
+    , refCount(0)
+    , version(0)
+    , data(nullptr)
+    , type(typeid(void)) // NOLINT(modernize-redundant-void-arg)
 {
 }
 
@@ -370,7 +375,7 @@ AnyAsset Assets::store(AnyAsset handle, std::type_index type, void* data, void (
     if (assetEntry == nullptr)
     {
         CUBOS_ERROR("Could not store asset");
-        return AnyAsset();
+        return {};
     }
 
     // Lock the asset.

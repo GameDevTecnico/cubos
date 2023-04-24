@@ -1,12 +1,13 @@
-#include <cubos/core/gl/ogl_render_device.hpp>
-#include <cubos/core/log.hpp>
+#include <cassert>
+#include <cstdlib>
+#include <list>
+#include <string>
+#include <utility>
 
 #include <glad/glad.h>
 
-#include <cstdlib>
-#include <cassert>
-#include <list>
-#include <string>
+#include <cubos/core/gl/ogl_render_device.hpp>
+#include <cubos/core/log.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::gl;
@@ -443,11 +444,12 @@ static void blendOpToGL(BlendOp blendOp, GLenum& glBlendOp)
 class OGLFramebuffer : public impl::Framebuffer
 {
 public:
-    OGLFramebuffer(GLuint id) : id(id)
+    OGLFramebuffer(GLuint id)
+        : id(id)
     {
     }
 
-    virtual ~OGLFramebuffer() override
+    ~OGLFramebuffer() override
     {
         glDeleteFramebuffers(1, &this->id);
     }
@@ -459,7 +461,7 @@ class OGLRasterState : public impl::RasterState
 {
 public:
     OGLRasterState() = default;
-    virtual ~OGLRasterState() = default;
+    ~OGLRasterState() override = default;
 
     GLboolean cullEnabled;
     GLboolean scissorEnabled;
@@ -472,7 +474,7 @@ class OGLDepthStencilState : public impl::DepthStencilState
 {
 public:
     OGLDepthStencilState() = default;
-    virtual ~OGLDepthStencilState() = default;
+    ~OGLDepthStencilState() override = default;
 
     GLboolean depthEnabled;
     GLboolean depthWriteEnabled;
@@ -500,7 +502,7 @@ class OGLBlendState : public impl::BlendState
 {
 public:
     OGLBlendState() = default;
-    virtual ~OGLBlendState() = default;
+    ~OGLBlendState() override = default;
 
     GLboolean blendEnabled;
     GLenum srcFactor;
@@ -514,11 +516,12 @@ public:
 class OGLSampler : public impl::Sampler
 {
 public:
-    OGLSampler(GLuint id) : id(id)
+    OGLSampler(GLuint id)
+        : id(id)
     {
     }
 
-    virtual ~OGLSampler() override
+    ~OGLSampler() override
     {
         glDeleteSamplers(1, &this->id);
     }
@@ -530,23 +533,26 @@ class OGLTexture1D : public impl::Texture1D
 {
 public:
     OGLTexture1D(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id), internalFormat(internalFormat), format(format), type(type)
+        : id(id)
+        , internalFormat(internalFormat)
+        , format(format)
+        , type(type)
     {
     }
 
-    virtual ~OGLTexture1D() override
+    ~OGLTexture1D() override
     {
         glDeleteTextures(1, &this->id);
     }
 
-    virtual void update(size_t x, size_t width, const void* data, size_t level) override
+    void update(size_t x, size_t width, const void* data, size_t level) override
     {
         glBindTexture(GL_TEXTURE_1D, this->id);
         glTexSubImage1D(GL_TEXTURE_1D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLsizei>(width),
                         this->format, this->type, data);
     }
 
-    virtual void generateMipmaps() override
+    void generateMipmaps() override
     {
         glBindTexture(GL_TEXTURE_1D, this->id);
         glGenerateMipmap(GL_TEXTURE_1D);
@@ -562,23 +568,26 @@ class OGLTexture2D : public impl::Texture2D
 {
 public:
     OGLTexture2D(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id), internalFormat(internalFormat), format(format), type(type)
+        : id(id)
+        , internalFormat(internalFormat)
+        , format(format)
+        , type(type)
     {
     }
 
-    virtual ~OGLTexture2D() override
+    ~OGLTexture2D() override
     {
         glDeleteTextures(1, &this->id);
     }
 
-    virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data, size_t level) override
+    void update(size_t x, size_t y, size_t width, size_t height, const void* data, size_t level) override
     {
         glBindTexture(GL_TEXTURE_2D, this->id);
         glTexSubImage2D(GL_TEXTURE_2D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
                         static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type, data);
     }
 
-    virtual void generateMipmaps() override
+    void generateMipmaps() override
     {
         glBindTexture(GL_TEXTURE_2D, this->id);
         glGenerateMipmap(GL_TEXTURE_2D);
@@ -594,17 +603,19 @@ class OGLTexture2DArray : public impl::Texture2DArray
 {
 public:
     OGLTexture2DArray(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id), internalFormat(internalFormat), format(format), type(type)
+        : id(id)
+        , internalFormat(internalFormat)
+        , format(format)
+        , type(type)
     {
     }
 
-    virtual ~OGLTexture2DArray() override
+    ~OGLTexture2DArray() override
     {
         glDeleteTextures(1, &this->id);
     }
 
-    virtual void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data,
-                        size_t level) override
+    void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data, size_t level) override
     {
         glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
         glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
@@ -612,7 +623,7 @@ public:
                         this->format, this->type, data);
     }
 
-    virtual void generateMipmaps() override
+    void generateMipmaps() override
     {
         glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
         glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
@@ -628,17 +639,20 @@ class OGLTexture3D : public impl::Texture3D
 {
 public:
     OGLTexture3D(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id), internalFormat(internalFormat), format(format), type(type)
+        : id(id)
+        , internalFormat(internalFormat)
+        , format(format)
+        , type(type)
     {
     }
 
-    virtual ~OGLTexture3D() override
+    ~OGLTexture3D() override
     {
         glDeleteTextures(1, &this->id);
     }
 
-    virtual void update(size_t x, size_t y, size_t z, size_t width, size_t height, size_t depth, const void* data,
-                        size_t level) override
+    void update(size_t x, size_t y, size_t z, size_t width, size_t height, size_t depth, const void* data,
+                size_t level) override
     {
         glBindTexture(GL_TEXTURE_3D, this->id);
         glTexSubImage3D(GL_TEXTURE_3D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
@@ -646,7 +660,7 @@ public:
                         static_cast<GLsizei>(depth), this->format, this->type, data);
     }
 
-    virtual void generateMipmaps() override
+    void generateMipmaps() override
     {
         glBindTexture(GL_TEXTURE_3D, this->id);
         glGenerateMipmap(GL_TEXTURE_3D);
@@ -662,17 +676,19 @@ class OGLCubeMap : public impl::CubeMap
 {
 public:
     OGLCubeMap(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id), internalFormat(internalFormat), format(format), type(type)
+        : id(id)
+        , internalFormat(internalFormat)
+        , format(format)
+        , type(type)
     {
     }
 
-    virtual ~OGLCubeMap() override
+    ~OGLCubeMap() override
     {
         glDeleteTextures(1, &this->id);
     }
 
-    virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data, CubeFace face,
-                        size_t level) override
+    void update(size_t x, size_t y, size_t width, size_t height, const void* data, CubeFace face, size_t level) override
     {
         GLenum glFace;
         cubeFaceToGL(face, glFace);
@@ -682,7 +698,7 @@ public:
                         static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type, data);
     }
 
-    virtual void generateMipmaps() override
+    void generateMipmaps() override
     {
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->id);
         glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
@@ -698,17 +714,20 @@ class OGLCubeMapArray : public impl::CubeMapArray
 {
 public:
     OGLCubeMapArray(GLuint id, GLenum internalFormat, GLenum format, GLenum type)
-        : id(id), internalFormat(internalFormat), format(format), type(type)
+        : id(id)
+        , internalFormat(internalFormat)
+        , format(format)
+        , type(type)
     {
     }
 
-    virtual ~OGLCubeMapArray() override
+    ~OGLCubeMapArray() override
     {
         glDeleteTextures(1, &this->id);
     }
 
-    virtual void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data, CubeFace face,
-                        size_t level = 0) override
+    void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data, CubeFace face,
+                size_t level = 0) override
     {
         glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, this->id);
         glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x),
@@ -716,7 +735,7 @@ public:
                         static_cast<GLsizei>(width), static_cast<GLsizei>(height), 1, this->format, this->type, data);
     }
 
-    virtual void generateMipmaps() override
+    void generateMipmaps() override
     {
         glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, this->id);
         glGenerateMipmap(GL_TEXTURE_CUBE_MAP_ARRAY);
@@ -731,22 +750,23 @@ public:
 class OGLConstantBuffer : public impl::ConstantBuffer
 {
 public:
-    OGLConstantBuffer(GLuint id) : id(id)
+    OGLConstantBuffer(GLuint id)
+        : id(id)
     {
     }
 
-    virtual ~OGLConstantBuffer() override
+    ~OGLConstantBuffer() override
     {
         glDeleteBuffers(1, &this->id);
     }
 
-    virtual void* map() override
+    void* map() override
     {
         glBindBuffer(GL_UNIFORM_BUFFER, this->id);
         return glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
     }
 
-    virtual void unmap() override
+    void unmap() override
     {
         glUnmapBuffer(GL_UNIFORM_BUFFER);
     }
@@ -757,22 +777,25 @@ public:
 class OGLIndexBuffer : public impl::IndexBuffer
 {
 public:
-    OGLIndexBuffer(GLuint id, GLenum format, size_t indexSz) : id(id), format(format), indexSz(indexSz)
+    OGLIndexBuffer(GLuint id, GLenum format, size_t indexSz)
+        : id(id)
+        , format(format)
+        , indexSz(indexSz)
     {
     }
 
-    virtual ~OGLIndexBuffer() override
+    ~OGLIndexBuffer() override
     {
         glDeleteBuffers(1, &this->id);
     }
 
-    virtual void* map() override
+    void* map() override
     {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->id);
         return glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
-    virtual void unmap() override
+    void unmap() override
     {
         glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
     }
@@ -785,22 +808,23 @@ public:
 class OGLVertexBuffer : public impl::VertexBuffer
 {
 public:
-    OGLVertexBuffer(GLuint id) : id(id)
+    OGLVertexBuffer(GLuint id)
+        : id(id)
     {
     }
 
-    virtual ~OGLVertexBuffer() override
+    ~OGLVertexBuffer() override
     {
         glDeleteBuffers(1, &this->id);
     }
 
-    virtual void* map() override
+    void* map() override
     {
         glBindBuffer(GL_ARRAY_BUFFER, this->id);
         return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
-    virtual void unmap() override
+    void unmap() override
     {
         glUnmapBuffer(GL_ARRAY_BUFFER);
     }
@@ -811,13 +835,14 @@ public:
 class OGLVertexArray : public impl::VertexArray
 {
 public:
-    OGLVertexArray(GLuint id, const VertexBuffer* buffers) : id(id)
+    OGLVertexArray(GLuint id, const VertexBuffer* buffers)
+        : id(id)
     {
         for (size_t i = 0; i < CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
             this->buffers[i] = buffers[i];
     }
 
-    virtual ~OGLVertexArray() override
+    ~OGLVertexArray() override
     {
         glDeleteVertexArrays(1, &this->id);
     }
@@ -829,16 +854,18 @@ public:
 class OGLShaderStage : public impl::ShaderStage
 {
 public:
-    OGLShaderStage(Stage type, GLuint shader) : type(type), shader(shader)
+    OGLShaderStage(Stage type, GLuint shader)
+        : type(type)
+        , shader(shader)
     {
     }
 
-    virtual ~OGLShaderStage() override
+    ~OGLShaderStage() override
     {
         glDeleteShader(this->shader);
     }
 
-    virtual Stage getType() override
+    Stage getType() override
     {
         return this->type;
     }
@@ -850,11 +877,14 @@ public:
 class OGLShaderBindingPoint : public impl::ShaderBindingPoint
 {
 public:
-    OGLShaderBindingPoint(const char* name, int loc, int tex = 0) : name(name), loc(loc), tex(tex)
+    OGLShaderBindingPoint(const char* name, int loc, int tex = 0)
+        : name(name)
+        , loc(loc)
+        , tex(tex)
     {
     }
 
-    virtual void bind(Sampler sampler) override
+    void bind(Sampler sampler) override
     {
         if (sampler)
             glBindSampler(static_cast<GLuint>(this->tex), std::static_pointer_cast<OGLSampler>(sampler)->id);
@@ -862,7 +892,7 @@ public:
             glBindSampler(static_cast<GLuint>(this->tex), 0);
     }
 
-    virtual void bind(Texture1D tex) override
+    void bind(Texture1D tex) override
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
@@ -872,7 +902,7 @@ public:
         glUniform1i(this->loc, this->tex);
     }
 
-    virtual void bind(Texture2D tex) override
+    void bind(Texture2D tex) override
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
@@ -882,7 +912,7 @@ public:
         glUniform1i(this->loc, this->tex);
     }
 
-    virtual void bind(Texture2DArray tex) override
+    void bind(Texture2DArray tex) override
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
@@ -892,7 +922,7 @@ public:
         glUniform1i(this->loc, this->tex);
     }
 
-    virtual void bind(Texture3D tex) override
+    void bind(Texture3D tex) override
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
@@ -902,7 +932,7 @@ public:
         glUniform1i(this->loc, this->tex);
     }
 
-    virtual void bind(CubeMap cubeMap) override
+    void bind(CubeMap cubeMap) override
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (cubeMap)
@@ -912,7 +942,7 @@ public:
         glUniform1i(this->loc, this->tex);
     }
 
-    virtual void bind(CubeMapArray cubeMap) override
+    void bind(CubeMapArray cubeMap) override
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (cubeMap)
@@ -922,7 +952,7 @@ public:
         glUniform1i(this->loc, this->tex);
     }
 
-    virtual void bind(ConstantBuffer cb) override
+    void bind(ConstantBuffer cb) override
     {
         if (cb)
             glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc),
@@ -931,7 +961,7 @@ public:
             glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc), 0);
     }
 
-    virtual void bind(gl::Texture2D _tex, int level, Access _access) override
+    void bind(gl::Texture2D _tex, int level, Access _access) override
     {
         auto tex = std::static_pointer_cast<OGLTexture2D>(_tex);
         GLenum access;
@@ -954,72 +984,72 @@ public:
         glBindImageTexture(static_cast<GLuint>(this->tex), tex->id, level, GL_TRUE, 0, access, tex->internalFormat);
     }
 
-    virtual void setConstant(glm::vec2 val) override
+    void setConstant(glm::vec2 val) override
     {
         glUniform2fv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(glm::vec3 val) override
+    void setConstant(glm::vec3 val) override
     {
         glUniform3fv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(glm::vec4 val) override
+    void setConstant(glm::vec4 val) override
     {
         glUniform4fv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(glm::ivec2 val) override
+    void setConstant(glm::ivec2 val) override
     {
         glUniform2iv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(glm::ivec3 val) override
+    void setConstant(glm::ivec3 val) override
     {
         glUniform3iv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(glm::ivec4 val) override
+    void setConstant(glm::ivec4 val) override
     {
         glUniform4iv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(glm::uvec2 val) override
+    void setConstant(glm::uvec2 val) override
     {
         glUniform2uiv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(glm::uvec3 val) override
+    void setConstant(glm::uvec3 val) override
     {
         glUniform3uiv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(glm::uvec4 val) override
+    void setConstant(glm::uvec4 val) override
     {
         glUniform4uiv(loc, 1, &val[0]);
     }
 
-    virtual void setConstant(glm::mat4 val) override
+    void setConstant(glm::mat4 val) override
     {
         glUniformMatrix4fv(loc, 1, GL_FALSE, &val[0][0]);
     }
 
-    virtual void setConstant(float val) override
+    void setConstant(float val) override
     {
         glUniform1f(loc, val);
     }
 
-    virtual void setConstant(int val) override
+    void setConstant(int val) override
     {
         glUniform1i(loc, val);
     }
 
-    virtual void setConstant(unsigned int val) override
+    void setConstant(unsigned int val) override
     {
         glUniform1ui(loc, val);
     }
 
-    virtual bool queryConstantBufferStructure(ConstantBufferStructure*) override
+    bool queryConstantBufferStructure(ConstantBufferStructure*) override
     {
         return false; // TODO
     }
@@ -1031,7 +1061,10 @@ public:
 class OGLShaderPipeline : public impl::ShaderPipeline
 {
 public:
-    OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program) : vs(vs), ps(ps), program(program)
+    OGLShaderPipeline(ShaderStage vs, ShaderStage ps, GLuint program)
+        : vs(std::move(vs))
+        , ps(std::move(ps))
+        , program(program)
     {
         this->texCount = 0;
         this->uboCount = 0;
@@ -1044,19 +1077,21 @@ public:
         this->gs = gs;
     }
 
-    OGLShaderPipeline(ShaderStage cs, GLuint program) : cs(cs), program(program)
+    OGLShaderPipeline(ShaderStage cs, GLuint program)
+        : cs(std::move(cs))
+        , program(program)
     {
         this->texCount = 0;
         this->uboCount = 0;
         this->ssboCount = 0;
     }
 
-    virtual ~OGLShaderPipeline() override
+    ~OGLShaderPipeline() override
     {
         glDeleteProgram(this->program);
     }
 
-    virtual ShaderBindingPoint getBindingPoint(const char* name) override
+    ShaderBindingPoint getBindingPoint(const char* name) override
     {
         // Search for already existing binding point
         for (auto& bp : this->bps)
@@ -1128,9 +1163,9 @@ OGLRenderDevice::OGLRenderDevice()
     glGetString(GL_VERSION);
 
     // Create default states
-    this->defaultRS = this->createRasterState({});
-    this->defaultDSS = this->createDepthStencilState({});
-    this->defaultBS = this->createBlendState({});
+    this->defaultRS = OGLRenderDevice::createRasterState({});
+    this->defaultDSS = OGLRenderDevice::createDepthStencilState({});
+    this->defaultBS = OGLRenderDevice::createBlendState({});
 }
 
 Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
@@ -2059,7 +2094,7 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
 
     // Initialize shader
     GLuint id = glCreateShader(shaderType);
-    glShaderSource(id, 1, (const GLchar* const*)&src, NULL);
+    glShaderSource(id, 1, (const GLchar* const*)&src, nullptr);
     glCompileShader(id);
 
     // Check for errors
@@ -2068,7 +2103,7 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     if (!success)
     {
         GLchar infoLog[512];
-        glGetShaderInfoLog(id, sizeof(infoLog), NULL, infoLog);
+        glGetShaderInfoLog(id, sizeof(infoLog), nullptr, infoLog);
         glDeleteShader(id);
         CUBOS_ERROR("Could not compile shader: {}", infoLog);
         return nullptr;
@@ -2102,8 +2137,8 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     glGetProgramiv(id, GL_LINK_STATUS, &success);
     if (!success)
     {
-        std::array<GLchar, 512> infoLog;
-        glGetProgramInfoLog(id, infoLog.size(), nullptr, infoLog.data());
+        char infoLog[512];
+        glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
         glDeleteProgram(id);
         CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
@@ -2139,8 +2174,8 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
     glGetProgramiv(id, GL_LINK_STATUS, &success);
     if (!success)
     {
-        std::array<GLchar, 512> infoLog;
-        glGetProgramInfoLog(id, infoLog.size(), nullptr, infoLog.data());
+        char infoLog[512];
+        glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
         glDeleteProgram(id);
         CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
@@ -2172,8 +2207,8 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _cs)
     glGetProgramiv(id, GL_LINK_STATUS, &success);
     if (!success)
     {
-        std::array<GLchar, 512> infoLog;
-        glGetProgramInfoLog(id, infoLog.size(), nullptr, infoLog.data());
+        char infoLog[512];
+        glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
         glDeleteProgram(id);
         CUBOS_ERROR("Could not link program (shader pipeline): {}", infoLog);
         return nullptr;
@@ -2205,7 +2240,7 @@ void OGLRenderDevice::clearColor(float r, float g, float b, float a)
 void OGLRenderDevice::clearTargetColor(size_t target, float r, float g, float b, float a)
 {
     float color[] = {r, g, b, a};
-    glClearBufferfv(GL_COLOR, target, color);
+    glClearBufferfv(GL_COLOR, static_cast<GLint>(target), color);
 }
 
 void OGLRenderDevice::clearDepth(float depth)
