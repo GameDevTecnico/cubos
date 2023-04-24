@@ -1,13 +1,13 @@
 #ifndef CUBOS_CORE_DATA_QB_PARSER_HPP
 #define CUBOS_CORE_DATA_QB_PARSER_HPP
 
-#include <cubos/core/memory/stream.hpp>
-#include <cubos/core/gl/grid.hpp>
-#include <cubos/core/gl/palette.hpp>
+#include <vector>
 
 #include <glm/glm.hpp>
 
-#include <vector>
+#include <cubos/core/gl/grid.hpp>
+#include <cubos/core/gl/palette.hpp>
+#include <cubos/core/memory/stream.hpp>
 
 namespace cubos::core::data
 {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <cubos/engine/cubos.hpp>
 #include <cubos/engine/assets/assets.hpp>
+#include <cubos/engine/cubos.hpp>
 
 namespace cubos::engine
 {

@@ -1,9 +1,10 @@
-#include "tools.hpp"
-
 #include <filesystem>
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <utility>
 #include <vector>
+
+#include "tools.hpp"
 
 namespace fs = std::filesystem;
 
@@ -269,7 +270,9 @@ void removeComments(std::string& line, bool& isComment)
 class Parser
 {
 public:
-    Parser(fs::path path, std::string_view input) : path(path), input(input)
+    Parser(fs::path path, std::string_view input)
+        : path(std::move(path))
+        , input(input)
     {
         this->line = 1;
         this->column = 1;

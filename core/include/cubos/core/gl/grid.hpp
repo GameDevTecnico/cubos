@@ -1,11 +1,12 @@
 #ifndef CUBOS_CORE_GL_GRID_HPP
 #define CUBOS_CORE_GL_GRID_HPP
 
-#include <cubos/core/data/serializer.hpp>
-#include <cubos/core/data/deserializer.hpp>
+#include <vector>
 
 #include <glm/glm.hpp>
-#include <vector>
+
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
 
 namespace cubos::core::gl
 {

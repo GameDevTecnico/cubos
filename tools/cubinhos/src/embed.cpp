@@ -1,10 +1,10 @@
-#include "tools.hpp"
-
-#include <filesystem>
-#include <iostream>
-#include <fstream>
-#include <vector>
 #include <array>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <vector>
+
+#include "tools.hpp"
 
 namespace fs = std::filesystem;
 
@@ -94,11 +94,11 @@ static std::string escapeString(const std::string& str)
 {
     // Escape all characters that need to be escaped.
     std::string escaped;
-    for (size_t i = 0; i < str.size(); ++i)
+    for (char i : str)
     {
-        if (str[i] == '\\' || str[i] == '"')
+        if (i == '\\' || i == '"')
             escaped += '\\';
-        escaped += str[i];
+        escaped += i;
     }
 
     return escaped;

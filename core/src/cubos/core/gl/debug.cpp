@@ -1,12 +1,12 @@
-#include <cubos/core/gl/debug.hpp>
-
+#include <array>
 #include <list>
 #include <vector>
-#include <array>
 
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/transform.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <glm/gtx/transform.hpp>
+
+#include <cubos/core/gl/debug.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::gl;

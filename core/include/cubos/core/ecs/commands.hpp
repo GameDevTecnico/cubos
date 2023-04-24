@@ -1,11 +1,11 @@
 #ifndef CUBOS_CORE_ECS_COMMANDS_HPP
 #define CUBOS_CORE_ECS_COMMANDS_HPP
 
-#include <cubos/core/ecs/world.hpp>
-
+#include <mutex>
 #include <unordered_map>
 #include <unordered_set>
-#include <mutex>
+
+#include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs
 {

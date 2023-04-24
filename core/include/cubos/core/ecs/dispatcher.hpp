@@ -1,14 +1,14 @@
 #ifndef CUBOS_CORE_ECS_DISPATCHER_HPP
 #define CUBOS_CORE_ECS_DISPATCHER_HPP
 
+#include <map>
+#include <memory>
+#include <string>
+#include <utility>
+#include <vector>
+
 #include <cubos/core/ecs/system.hpp>
 #include <cubos/core/log.hpp>
-
-#include <map>
-#include <vector>
-#include <string>
-#include <memory>
-#include <utility>
 
 #define ENSURE_CURR_SYSTEM()                                                                                           \
     do                                                                                                                 \
@@ -294,7 +294,8 @@ namespace cubos::core::ecs
         if (it != conditions.end())
         {
             // If it does, return the set bit
-            return std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>(1) << (it - conditions.begin());
+            return std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS>(1)
+                   << static_cast<std::size_t>(it - conditions.begin());
         }
         // If we already reached the condition limit, exit
         if (conditions.size() >= CUBOS_CORE_DISPATCHER_MAX_CONDITIONS)

@@ -1,7 +1,7 @@
-#include <cubos/engine/assets/meta.hpp>
-
-#include <cubos/core/data/serializer.hpp>
 #include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+
+#include <cubos/engine/assets/meta.hpp>
 
 using namespace cubos::engine;
 

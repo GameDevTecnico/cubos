@@ -1,6 +1,6 @@
-#include <cubos/engine/plugins/window.hpp>
-
 #include <cubos/core/settings.hpp>
+
+#include <cubos/engine/plugins/window.hpp>
 
 using namespace cubos::core;
 

@@ -1,12 +1,10 @@
 #ifndef CUBOS_CORE_ECS_BLUEPRINT_HPP
 #define CUBOS_CORE_ECS_BLUEPRINT_HPP
 
-#include <cubos/core/ecs/commands.hpp>
-
-#include <cubos/core/data/binary_serializer.hpp>
 #include <cubos/core/data/binary_deserializer.hpp>
+#include <cubos/core/data/binary_serializer.hpp>
 #include <cubos/core/data/serialization_map.hpp>
-
+#include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
 #include <cubos/core/memory/type_map.hpp>
 
@@ -105,7 +103,7 @@ namespace cubos::core::ecs
                     des.read(type);
                     commands.add(map.getRef(name), std::move(type));
                 }
-                this->stream.seek(pos, memory::SeekOrigin::Begin);
+                this->stream.seek(static_cast<ptrdiff_t>(pos), memory::SeekOrigin::Begin);
                 this->mutex.unlock();
 
                 if (des.failed())
@@ -134,7 +132,7 @@ namespace cubos::core::ecs
                     des.read(type);
                     ser.write(type, "data");
                 }
-                buffer->stream.seek(pos, memory::SeekOrigin::Begin);
+                buffer->stream.seek(static_cast<ptrdiff_t>(pos), memory::SeekOrigin::Begin);
                 buffer->mutex.unlock();
             }
 

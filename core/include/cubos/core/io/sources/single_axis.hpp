@@ -1,11 +1,11 @@
 #ifndef CUBOS_CORE_IO_SINGLE_AXIS_HPP
 #define CUBOS_CORE_IO_SINGLE_AXIS_HPP
 
-#include <cubos/core/io/window.hpp>
-#include <cubos/core/io/sources/source.hpp>
-
-#include <variant>
 #include <tuple>
+#include <variant>
+
+#include <cubos/core/io/sources/source.hpp>
+#include <cubos/core/io/window.hpp>
 
 namespace cubos::core::io
 {

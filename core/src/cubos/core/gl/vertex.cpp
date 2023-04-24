@@ -1,7 +1,7 @@
-#include <cubos/core/gl/vertex.hpp>
-#include <cubos/core/gl/grid.hpp>
-
 #include <vector>
+
+#include <cubos/core/gl/grid.hpp>
+#include <cubos/core/gl/vertex.hpp>
 
 using namespace cubos;
 using namespace cubos::core::gl;

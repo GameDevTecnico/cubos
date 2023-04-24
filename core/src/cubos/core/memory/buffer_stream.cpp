@@ -1,6 +1,6 @@
-#include <cubos/core/memory/buffer_stream.hpp>
-
 #include <cstring>
+
+#include <cubos/core/memory/buffer_stream.hpp>
 
 using namespace cubos::core::memory;
 

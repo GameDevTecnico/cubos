@@ -3,13 +3,7 @@
 
 #include <cubos/core/data/package.hpp>
 #include <cubos/core/data/serialization_map.hpp>
-
 #include <cubos/core/ecs/entity_manager.hpp>
-
-#include <unordered_map>
-#include <vector>
-#include <cstdint>
-#include <typeindex>
 
 namespace cubos::core::ecs
 {

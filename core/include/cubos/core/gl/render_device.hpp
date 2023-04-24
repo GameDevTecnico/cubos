@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <variant>
+
 #include <glm/glm.hpp>
 
 #define CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT 8

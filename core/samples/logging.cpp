@@ -7,7 +7,7 @@
 using namespace cubos::core;
 using data::Debug;
 
-int main(void)
+int main()
 {
     initializeLogger();
 

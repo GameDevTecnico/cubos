@@ -2,11 +2,12 @@
 #ifndef CUBOS_ENGINE_GL_PPS_MANAGER_HPP
 #define CUBOS_ENGINE_GL_PPS_MANAGER_HPP
 
-#include <cubos/core/io/window.hpp>
-#include <cubos/core/gl/render_device.hpp>
+#include <map>
 
 #include <glm/glm.hpp>
-#include <map>
+
+#include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/io/window.hpp>
 
 namespace cubos::engine::gl::pps
 {

@@ -1,8 +1,9 @@
 #ifndef CUBOS_CORE_IO_GLFW_WINDOW_HPP
 #define CUBOS_CORE_IO_GLFW_WINDOW_HPP
 
-#include <glm/glm.hpp>
 #include <deque>
+
+#include <glm/glm.hpp>
 
 #ifdef WITH_GLFW
 #define GLFW_INCLUDE_NONE

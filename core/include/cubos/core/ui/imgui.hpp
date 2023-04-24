@@ -1,8 +1,8 @@
 #ifndef CUBOS_CORE_UI_IMGUI_HPP
 #define CUBOS_CORE_UI_IMGUI_HPP
 
-#include <cubos/core/io/window.hpp>
 #include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/io/window.hpp>
 
 namespace cubos::core::ui
 {

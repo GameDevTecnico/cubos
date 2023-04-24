@@ -1,9 +1,9 @@
-#include <cubos/core/data/deserializer.hpp>
-
+#include <glm/gtc/quaternion.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
-#include <glm/gtc/quaternion.hpp>
+
+#include <cubos/core/data/deserializer.hpp>
 
 using namespace cubos::core::data;
 

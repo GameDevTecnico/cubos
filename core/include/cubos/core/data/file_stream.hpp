@@ -2,8 +2,8 @@
 #define CUBOS_CORE_DATA_FILE_STREAM_HPP
 
 #include <cubos/core/data/file.hpp>
-#include <cubos/core/memory/stream.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/memory/stream.hpp>
 
 namespace cubos::core::data
 {
@@ -38,7 +38,9 @@ namespace cubos::core::data
 
     template <typename T>
     inline FileStream<T>::FileStream(File::Handle file, File::OpenMode mode, T&& stream)
-        : file(file), mode(mode), stream(std::move(stream))
+        : file(file)
+        , mode(mode)
+        , stream(std::move(stream))
     {
     }
 
