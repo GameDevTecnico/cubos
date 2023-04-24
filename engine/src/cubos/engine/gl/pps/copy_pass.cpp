@@ -37,7 +37,9 @@ void main()
 }
 )glsl";
 
-pps::CopyPass::CopyPass(RenderDevice& renderDevice, glm::uvec2 size) : Pass(renderDevice), size(size)
+pps::CopyPass::CopyPass(RenderDevice& renderDevice, glm::uvec2 size)
+    : Pass(renderDevice)
+    , size(size)
 {
     // Create the shader pipeline.
     auto vs = this->renderDevice.createShaderStage(Stage::Vertex, COPY_VS);

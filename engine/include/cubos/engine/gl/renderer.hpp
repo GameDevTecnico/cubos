@@ -1,17 +1,17 @@
 #ifndef CUBOS_ENGINE_GL_RENDERER_HPP
 #define CUBOS_ENGINE_GL_RENDERER_HPP
 
-#include <cubos/core/gl/render_device.hpp>
-#include <cubos/core/gl/grid.hpp>
-#include <cubos/core/gl/vertex.hpp>
-#include <cubos/core/gl/palette.hpp>
+#include <glm/glm.hpp>
+
 #include <cubos/core/gl/camera.hpp>
+#include <cubos/core/gl/grid.hpp>
 #include <cubos/core/gl/light.hpp>
+#include <cubos/core/gl/palette.hpp>
+#include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/gl/pps/manager.hpp>
-
-#include <glm/glm.hpp>
 
 namespace cubos::engine::gl
 {

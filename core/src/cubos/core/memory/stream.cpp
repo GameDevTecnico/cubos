@@ -1,10 +1,9 @@
-#include <cubos/core/memory/stream.hpp>
+#include <array>
+#include <cctype>
 
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/std_stream.hpp>
-
-#include <cctype>
-#include <array>
+#include <cubos/core/memory/stream.hpp>
 
 using namespace cubos::core::memory;
 
@@ -130,7 +129,7 @@ void Stream::print(double value, size_t decimalPlaces)
         size_t len = 0;
 
         // Print the integer part
-        uint64_t integerPart = static_cast<uint64_t>(value);
+        auto integerPart = static_cast<uint64_t>(value);
         this->print(integerPart);
 
         if (decimalPlaces == 0)
@@ -142,7 +141,7 @@ void Stream::print(double value, size_t decimalPlaces)
         for (size_t i = 0; i < decimalPlaces; ++i)
         {
             value *= 10.0;
-            uint64_t decimalPart = static_cast<uint64_t>(value);
+            auto decimalPart = static_cast<uint64_t>(value);
             buffer[len++] = DIGITS[decimalPart];
             value -= static_cast<double>(decimalPart);
         }

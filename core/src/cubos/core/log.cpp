@@ -1,5 +1,6 @@
-#include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
+
 #include <cubos/core/log.hpp>
 
 void cubos::core::initializeLogger()

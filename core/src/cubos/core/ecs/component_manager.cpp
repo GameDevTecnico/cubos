@@ -57,7 +57,8 @@ void ComponentManager::removeAll(uint32_t id)
     }
 }
 
-ComponentManager::Entry::Entry(std::unique_ptr<IStorage> storage) : storage(std::move(storage))
+ComponentManager::Entry::Entry(std::unique_ptr<IStorage> storage)
+    : storage(std::move(storage))
 {
     this->mutex = std::make_unique<std::shared_mutex>();
 }

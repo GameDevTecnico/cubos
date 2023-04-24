@@ -1,10 +1,11 @@
 #ifndef CUBOS_CORE_DATA_JSON_DESERIALIZER_HPP
 #define CUBOS_CORE_DATA_JSON_DESERIALIZER_HPP
 
-#include <cubos/core/data/deserializer.hpp>
+#include <stack>
 
 #include <nlohmann/json.hpp>
-#include <stack>
+
+#include <cubos/core/data/deserializer.hpp>
 
 namespace cubos::core::data
 {

@@ -1,11 +1,11 @@
 #ifndef CUBOS_CORE_THREAD_POOL_HPP
 #define CUBOS_CORE_THREAD_POOL_HPP
 
-#include <functional>
-#include <thread>
-#include <mutex>
-#include <deque>
 #include <condition_variable>
+#include <deque>
+#include <functional>
+#include <mutex>
+#include <thread>
 #include <vector>
 
 namespace cubos::core

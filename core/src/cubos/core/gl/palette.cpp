@@ -1,11 +1,12 @@
-#include <cubos/core/gl/palette.hpp>
-
-#include <cubos/core/log.hpp>
 #include <cstring>
+
+#include <cubos/core/gl/palette.hpp>
+#include <cubos/core/log.hpp>
 
 using namespace cubos::core::gl;
 
-Palette::Palette(std::vector<Material>&& materials) : materials(std::move(materials))
+Palette::Palette(std::vector<Material>&& materials)
+    : materials(std::move(materials))
 {
 }
 

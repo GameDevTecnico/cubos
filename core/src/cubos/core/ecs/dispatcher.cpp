@@ -1,6 +1,6 @@
-#include <cubos/core/ecs/dispatcher.hpp>
-
 #include <algorithm>
+
+#include <cubos/core/ecs/dispatcher.hpp>
 
 using namespace cubos::core::ecs;
 
@@ -228,7 +228,7 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
         // Query for conditions
         bool canRun = true;
         auto conditionsMask = system->settings->conditions;
-        int i = 0;
+        std::size_t i = 0;
         while (conditionsMask.any())
         {
             if (conditionsMask.test(0))
@@ -253,8 +253,12 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
             i += 1;
             conditionsMask >>= 1;
         }
+
         if (canRun)
+        {
             system->system->call(world, cmds);
+        }
+
         // TODO: Check synchronization concerns when this gets multithreaded
         cmds.commit();
     }

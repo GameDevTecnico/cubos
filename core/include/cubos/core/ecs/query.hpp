@@ -1,11 +1,11 @@
 #ifndef CUBOS_CORE_ECS_QUERY_HPP
 #define CUBOS_CORE_ECS_QUERY_HPP
 
-#include <cubos/core/ecs/world.hpp>
-
+#include <optional>
 #include <typeindex>
 #include <unordered_set>
-#include <optional>
+
+#include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs
 {
@@ -220,14 +220,17 @@ namespace cubos::core::ecs
 
     template <typename... ComponentTypes>
     Query<ComponentTypes...>::Iterator::Iterator(const World& world, Fetched& fetched, EntityManager::Iterator it)
-        : world(world), fetched(fetched), it(it)
+        : world(world)
+        , fetched(fetched)
+        , it(it)
     {
         // Nothing to do.
     }
 
     template <typename... ComponentTypes>
     Query<ComponentTypes...>::Query(const World& world)
-        : world(world), fetched(std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::fetch(world)...))
+        : world(world)
+        , fetched(std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::fetch(world)...))
     {
         // We must turn the type from const T& and similar to T before getting the ID.
         size_t ids[] = {

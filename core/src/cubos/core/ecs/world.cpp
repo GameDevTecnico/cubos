@@ -1,5 +1,5 @@
-#include <cubos/core/ecs/world.hpp>
 #include <cubos/core/ecs/registry.hpp>
+#include <cubos/core/ecs/world.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::ecs;
@@ -20,7 +20,8 @@ static const auto directMap = data::SerializationMap<Entity, std::string>(
         return false;
     });
 
-World::World(size_t initialCapacity) : entityManager(initialCapacity)
+World::World(size_t initialCapacity)
+    : entityManager(initialCapacity)
 {
     // Do nothing.
     // Edu: BAH!

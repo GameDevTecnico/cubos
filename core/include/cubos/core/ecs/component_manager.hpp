@@ -1,16 +1,15 @@
 #ifndef CUBOS_CORE_ECS_COMPONENT_MANAGER_HPP
 #define CUBOS_CORE_ECS_COMPONENT_MANAGER_HPP
 
-#include <cubos/core/ecs/storage.hpp>
-
-#include <cstdint>
 #include <cstddef>
-#include <vector>
-#include <shared_mutex>
-#include <typeindex>
+#include <cstdint>
 #include <memory>
 #include <mutex>
 #include <optional>
+#include <shared_mutex>
+#include <typeindex>
+
+#include <cubos/core/ecs/storage.hpp>
 
 namespace cubos::core::ecs
 {
@@ -168,7 +167,9 @@ namespace cubos::core::ecs
     }
 
     template <typename T>
-    ReadStorage<T>::ReadStorage(ReadStorage&& other) : storage(other.storage), lock(std::move(other.lock))
+    ReadStorage<T>::ReadStorage(ReadStorage&& other)
+        : storage(other.storage)
+        , lock(std::move(other.lock))
     {
         // Do nothing.
     }
@@ -181,13 +182,16 @@ namespace cubos::core::ecs
 
     template <typename T>
     ReadStorage<T>::ReadStorage(const Storage<T>& storage, std::shared_lock<std::shared_mutex>&& lock)
-        : storage(storage), lock(std::move(lock))
+        : storage(storage)
+        , lock(std::move(lock))
     {
         // Do nothing.
     }
 
     template <typename T>
-    WriteStorage<T>::WriteStorage(WriteStorage&& other) : storage(other.storage), lock(std::move(other.lock))
+    WriteStorage<T>::WriteStorage(WriteStorage&& other)
+        : storage(other.storage)
+        , lock(std::move(other.lock))
     {
         // Do nothing.
     }
@@ -200,7 +204,8 @@ namespace cubos::core::ecs
 
     template <typename T>
     WriteStorage<T>::WriteStorage(Storage<T>& storage, std::unique_lock<std::shared_mutex>&& lock)
-        : storage(storage), lock(std::move(lock))
+        : storage(storage)
+        , lock(std::move(lock))
     {
         // Do nothing.
     }

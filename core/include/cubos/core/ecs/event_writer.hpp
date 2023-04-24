@@ -24,7 +24,8 @@ namespace cubos::core::ecs
     // EventWriter implementation.
 
     template <typename T>
-    EventWriter<T>::EventWriter(EventPipe<T>& pipe) : pipe(pipe)
+    EventWriter<T>::EventWriter(EventPipe<T>& pipe)
+        : pipe(pipe)
     {
     }
 

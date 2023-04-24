@@ -1,9 +1,11 @@
-#include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/ecs/blueprint.hpp>
+#include <cubos/core/ecs/commands.hpp>
 
 using namespace cubos::core::ecs;
 
-EntityBuilder::EntityBuilder(Entity entity, CommandBuffer& commands) : eEntity(entity), commands(commands)
+EntityBuilder::EntityBuilder(Entity entity, CommandBuffer& commands)
+    : eEntity(entity)
+    , commands(commands)
 {
     // Do nothing.
 }
@@ -14,7 +16,8 @@ Entity EntityBuilder::entity() const
 }
 
 BlueprintBuilder::BlueprintBuilder(data::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands)
-    : map(std::move(map)), commands(commands)
+    : map(std::move(map))
+    , commands(commands)
 {
     // Do nothing.
 }
@@ -30,7 +33,8 @@ Entity BlueprintBuilder::entity(const std::string& name) const
     return this->map.getRef(name);
 }
 
-Commands::Commands(CommandBuffer& buffer) : buffer(buffer)
+Commands::Commands(CommandBuffer& buffer)
+    : buffer(buffer)
 {
     // Do nothing.
 }
@@ -45,7 +49,8 @@ BlueprintBuilder Commands::spawn(const Blueprint& blueprint)
     return this->buffer.spawn(blueprint);
 }
 
-CommandBuffer::CommandBuffer(World& world) : world(world)
+CommandBuffer::CommandBuffer(World& world)
+    : world(world)
 {
     // Do nothing.
 }
@@ -77,7 +82,7 @@ BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
         buf.second->addAll(*this, context);
     }
 
-    return BlueprintBuilder(std::move(map), *this);
+    return {std::move(map), *this};
 }
 
 void CommandBuffer::commit()

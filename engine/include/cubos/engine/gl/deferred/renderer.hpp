@@ -1,13 +1,13 @@
 #ifndef CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP
 #define CUBOS_ENGINE_GL_DEFERRED_RENDERER_HPP
 
-#include <cubos/engine/gl/renderer.hpp>
+#include <vector>
 
-#include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/settings.hpp>
 
-#include <vector>
+#include <cubos/engine/gl/renderer.hpp>
 
 #define CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT 128

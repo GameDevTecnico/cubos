@@ -1,9 +1,9 @@
 #ifndef CUBOS_CORE_GL_PALETTE_HPP
 #define CUBOS_CORE_GL_PALETTE_HPP
 
-#include <cubos/core/gl/material.hpp>
-
 #include <vector>
+
+#include <cubos/core/gl/material.hpp>
 
 namespace cubos::core::gl
 {

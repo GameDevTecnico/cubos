@@ -1,9 +1,9 @@
+#include <cmath>
+
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/gl/pps/bloom.hpp>
-
-#include <math.h>
 
 using namespace cubos;
 using namespace cubos::core::gl;
@@ -114,8 +114,12 @@ pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size)
 
 pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
                           float softThreshold, float intensity)
-    : Pass(renderDevice), iterations(iterations), threshold(threshold), softThreshold(softThreshold),
-      intensity(intensity), size(size)
+    : Pass(renderDevice)
+    , iterations(iterations)
+    , threshold(threshold)
+    , softThreshold(softThreshold)
+    , intensity(intensity)
+    , size(size)
 {
     generateTextures();
 

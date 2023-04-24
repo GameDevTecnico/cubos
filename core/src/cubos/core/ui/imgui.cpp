@@ -1,11 +1,11 @@
-#include <cubos/core/ui/imgui.hpp>
+#include <array>
+
+#include <glm/gtc/matrix_transform.hpp>
+#include <imgui.h>
+
 #include <cubos/core/io/cursor.hpp>
 #include <cubos/core/log.hpp>
-
-#include <imgui.h>
-#include <glm/gtc/matrix_transform.hpp>
-
-#include <array>
+#include <cubos/core/ui/imgui.hpp>
 
 using namespace cubos::core;
 
@@ -285,7 +285,7 @@ void ui::initialize(io::Window window)
     }
 
     // Setup back-end capabilities flags
-    ImGuiData* bd = IM_NEW(ImGuiData)();
+    auto bd = IM_NEW(ImGuiData)();
     bd->window = window;
     io.BackendPlatformUserData = (void*)bd;
     io.BackendPlatformName = "imgui_impl_cubos";
@@ -301,9 +301,15 @@ void ui::initialize(io::Window window)
     bd->cursors[ImGuiMouseCursor_ResizeNWSE] = window->createCursor(io::Cursor::Standard::NWSEResize);
     bd->cursors[ImGuiMouseCursor_Hand] = window->createCursor(io::Cursor::Standard::Hand);
     bd->cursors[ImGuiMouseCursor_NotAllowed] = window->createCursor(io::Cursor::Standard::NotAllowed);
-    for (int i = 0; i < ImGuiMouseCursor_COUNT; i++)
-        if (bd->cursors[i] == nullptr)
-            bd->cursors[i] = bd->cursors[ImGuiMouseCursor_Arrow];
+
+    for (auto& cursor : bd->cursors)
+    {
+        if (cursor == nullptr)
+        {
+            cursor = bd->cursors[ImGuiMouseCursor_Arrow];
+            ;
+        }
+    }
 
     io.SetClipboardTextFn = setClipboardText;
     io.GetClipboardTextFn = getClipboardText;
@@ -318,13 +324,13 @@ void ui::initialize(io::Window window)
 
 void ui::terminate()
 {
-    ImGuiIO& io = ImGui::GetIO();
+    auto& io = ImGui::GetIO();
     IM_ASSERT(io.BackendPlatformUserData != nullptr);
-    ImGuiData* bd = (ImGuiData*)io.BackendPlatformUserData;
+    auto bd = (ImGuiData*)io.BackendPlatformUserData;
 
-    for (int i = 0; i < ImGuiMouseCursor_COUNT; ++i)
+    for (auto& cursor : bd->cursors)
     {
-        bd->cursors[i] = nullptr;
+        cursor = nullptr;
     }
 
     bd->rasterState = nullptr;
@@ -391,7 +397,7 @@ static void setupRenderState(ImGuiData* bd, gl::Framebuffer target)
 
 void ui::endFrame(gl::Framebuffer target)
 {
-    ImGuiData* bd = (ImGuiData*)ImGui::GetIO().BackendPlatformUserData;
+    auto* bd = (ImGuiData*)ImGui::GetIO().BackendPlatformUserData;
     auto& rd = bd->window->getRenderDevice();
     ImGui::Render();
     auto drawData = ImGui::GetDrawData();

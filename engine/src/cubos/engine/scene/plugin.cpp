@@ -1,7 +1,6 @@
-#include <cubos/engine/scene/plugin.hpp>
-
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/scene/bridge.hpp>
+#include <cubos/engine/scene/plugin.hpp>
 
 using namespace cubos::engine;
 

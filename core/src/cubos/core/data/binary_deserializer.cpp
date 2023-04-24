@@ -1,5 +1,4 @@
 #include <cubos/core/data/binary_deserializer.hpp>
-
 #include <cubos/core/memory/endianness.hpp>
 
 using namespace cubos::core;
@@ -14,7 +13,8 @@ static inline T fromEndianness(T val, bool fromLittleEndian)
         return memory::fromBigEndian(val);
 }
 
-BinaryDeserializer::BinaryDeserializer(memory::Stream& stream, bool readLittleEndian) : stream(stream)
+BinaryDeserializer::BinaryDeserializer(memory::Stream& stream, bool readLittleEndian)
+    : stream(stream)
 {
     this->readLittleEndian = readLittleEndian;
 }

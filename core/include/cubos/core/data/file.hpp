@@ -1,11 +1,11 @@
 #ifndef CUBOS_CORE_DATA_FILE_HPP
 #define CUBOS_CORE_DATA_FILE_HPP
 
-#include <cubos/core/memory/stream.hpp>
-
-#include <string_view>
 #include <memory>
 #include <mutex>
+#include <string_view>
+
+#include <cubos/core/memory/stream.hpp>
 
 namespace cubos::core::data
 {

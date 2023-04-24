@@ -1,13 +1,13 @@
 #ifndef CUBOS_ENGINE_CUBOS_HPP
 #define CUBOS_ENGINE_CUBOS_HPP
 
-#include <cubos/core/ecs/event_pipe.hpp>
-#include <cubos/core/ecs/dispatcher.hpp>
-#include <cubos/core/ecs/system.hpp>
-#include <cubos/core/ecs/world.hpp>
-
 #include <set>
 #include <string>
+
+#include <cubos/core/ecs/dispatcher.hpp>
+#include <cubos/core/ecs/event_pipe.hpp>
+#include <cubos/core/ecs/system.hpp>
+#include <cubos/core/ecs/world.hpp>
 
 namespace cubos::engine
 {
@@ -28,7 +28,7 @@ namespace cubos::engine
     /// Resource used for storing program arguments.
     struct Arguments
     {
-        Arguments(const std::vector<std::string>& value);
+        Arguments(std::vector<std::string> value);
         const std::vector<std::string> value;
     };
 
