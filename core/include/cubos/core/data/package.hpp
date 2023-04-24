@@ -1,13 +1,13 @@
 #ifndef CUBOS_CORE_DATA_PACKAGE_HPP
 #define CUBOS_CORE_DATA_PACKAGE_HPP
 
-#include <cubos/core/data/serializer.hpp>
-#include <cubos/core/data/deserializer.hpp>
-#include <cubos/core/log.hpp>
-
-#include <variant>
-#include <stack>
 #include <map>
+#include <stack>
+#include <variant>
+
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/log.hpp>
 
 namespace cubos::core::data
 {

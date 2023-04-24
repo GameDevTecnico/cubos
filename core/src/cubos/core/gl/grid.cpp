@@ -1,8 +1,8 @@
+#include <unordered_map>
+
 #include <cubos/core/gl/grid.hpp>
 #include <cubos/core/gl/palette.hpp>
 #include <cubos/core/log.hpp>
-
-#include <unordered_map>
 
 using namespace cubos::core::gl;
 
@@ -38,7 +38,8 @@ Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
     this->indices = indices;
 }
 
-Grid::Grid(Grid&& other) : size(other.size)
+Grid::Grid(Grid&& other)
+    : size(other.size)
 {
     new (&this->indices) std::vector<uint16_t>(std::move(other.indices));
 }

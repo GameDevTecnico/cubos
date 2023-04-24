@@ -9,7 +9,7 @@ using namespace cubos::core;
 class TextBridge : public AssetBridge
 {
 public:
-    virtual bool load(Assets& assets, AnyAsset handle) override
+    bool load(Assets& assets, AnyAsset handle) override
     {
         // Get the asset's path - guaranteed to be present by the asset manager.
         auto path = assets.readMeta(handle)->get("path").value();

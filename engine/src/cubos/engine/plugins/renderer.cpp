@@ -1,9 +1,7 @@
-#include <cubos/engine/plugins/renderer.hpp>
-#include <cubos/engine/plugins/transform.hpp>
-#include <cubos/engine/plugins/window.hpp>
-#include <cubos/engine/gl/deferred/renderer.hpp>
-#include <cubos/engine/gl/renderer.hpp>
-#include <cubos/engine/gl/frame.hpp>
+#include <components/cubos/camera.hpp>
+#include <components/cubos/grid.hpp>
+#include <components/cubos/local_to_world.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <cubos/core/ecs/query.hpp>
 #include <cubos/core/gl/camera.hpp>
@@ -12,8 +10,6 @@
 #include <cubos/engine/ecs/camera.hpp>
 #include <cubos/engine/ecs/grid.hpp>
 #include <cubos/engine/ecs/local_to_world.hpp>
-
-#include <glm/gtc/matrix_transform.hpp>
 
 static void init(gl::Renderer& renderer, const cubos::core::io::Window& window, const cubos::core::Settings& settings)
 {

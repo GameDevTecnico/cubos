@@ -2,8 +2,8 @@
 #define CUBOS_CORE_EVENT_HPP
 
 #include <functional>
-#include <vector>
 #include <mutex>
+#include <vector>
 
 namespace cubos::core
 {

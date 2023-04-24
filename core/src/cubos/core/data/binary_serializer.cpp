@@ -1,7 +1,7 @@
+#include <cassert>
+
 #include <cubos/core/data/binary_serializer.hpp>
 #include <cubos/core/memory/endianness.hpp>
-
-#include <cassert>
 
 using namespace cubos::core;
 using namespace cubos::core::data;
@@ -15,7 +15,8 @@ static inline T toEndianness(T val, bool toLittleEndian)
         return memory::toBigEndian(val);
 }
 
-BinarySerializer::BinarySerializer(memory::Stream& stream, bool writeLittleEndian) : stream(stream)
+BinarySerializer::BinarySerializer(memory::Stream& stream, bool writeLittleEndian)
+    : stream(stream)
 {
     this->writeLittleEndian = writeLittleEndian;
 }

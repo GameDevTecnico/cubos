@@ -1,17 +1,18 @@
 #ifndef CUBOS_CORE_IO_DOUBLE_AXIS_HPP
 #define CUBOS_CORE_IO_DOUBLE_AXIS_HPP
 
+#include <list>
+#include <map>
+#include <memory>
+#include <string>
+#include <variant>
+
+#include <glm/glm.hpp>
+
 #include <cubos/core/event.hpp>
-#include <cubos/core/io/window.hpp>
 #include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/io/sources/source.hpp>
-
-#include <map>
-#include <string>
-#include <memory>
-#include <variant>
-#include <list>
-#include <glm/glm.hpp>
+#include <cubos/core/io/window.hpp>
 
 namespace cubos::core::io
 {

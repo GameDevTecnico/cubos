@@ -1,11 +1,12 @@
 #ifndef CUBOS_CORE_DATA_YAML_SERIALIZER_HPP
 #define CUBOS_CORE_DATA_YAML_SERIALIZER_HPP
 
-#include <cubos/core/data/serializer.hpp>
-#include <cubos/core/memory/stream.hpp>
+#include <stack>
 
 #include <yaml-cpp/emitter.h>
-#include <stack>
+
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/memory/stream.hpp>
 
 namespace cubos::core::data
 {

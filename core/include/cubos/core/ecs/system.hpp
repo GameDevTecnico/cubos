@@ -1,15 +1,15 @@
 #ifndef CUBOS_CORE_ECS_SYSTEM_HPP
 #define CUBOS_CORE_ECS_SYSTEM_HPP
 
-#include <cubos/core/ecs/world.hpp>
-#include <cubos/core/ecs/query.hpp>
+#include <functional>
+#include <typeindex>
+#include <unordered_set>
+
 #include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/ecs/event_reader.hpp>
 #include <cubos/core/ecs/event_writer.hpp>
-
-#include <functional>
-#include <unordered_set>
-#include <typeindex>
+#include <cubos/core/ecs/query.hpp>
+#include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs
 {
@@ -256,7 +256,8 @@ namespace cubos::core::ecs
     // Implementation.
 
     template <typename R>
-    AnySystemWrapper<R>::AnySystemWrapper(SystemInfo&& info) : m_info(std::move(info))
+    AnySystemWrapper<R>::AnySystemWrapper(SystemInfo&& info)
+        : m_info(std::move(info))
     {
         if (!this->m_info.valid())
         {
@@ -284,7 +285,8 @@ namespace cubos::core::ecs
 
     template <typename F>
     SystemWrapper<F>::SystemWrapper(F system)
-        : AnySystemWrapper<typename impl::SystemTraits<F>::Return>(impl::SystemTraits<F>::info()), system(system)
+        : AnySystemWrapper<typename impl::SystemTraits<F>::Return>(impl::SystemTraits<F>::info())
+        , system(system)
     {
         // Do nothing.
     }

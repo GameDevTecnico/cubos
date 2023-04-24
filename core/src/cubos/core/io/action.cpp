@@ -1,9 +1,9 @@
-#include <cubos/core/io/action.hpp>
-#include <cubos/core/io/input_manager.hpp>
-#include <cubos/core/io/context.hpp>
-#include <cubos/core/io/sources/source.hpp>
-
 #include <string>
+
+#include <cubos/core/io/action.hpp>
+#include <cubos/core/io/context.hpp>
+#include <cubos/core/io/input_manager.hpp>
+#include <cubos/core/io/sources/source.hpp>
 
 using namespace cubos::core::io;
 

@@ -1,9 +1,9 @@
-#include <cubos/engine/scene/bridge.hpp>
-#include <cubos/engine/scene/scene.hpp>
-#include <cubos/engine/assets/assets.hpp>
-
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/data/json_deserializer.hpp>
+
+#include <cubos/engine/assets/assets.hpp>
+#include <cubos/engine/scene/bridge.hpp>
+#include <cubos/engine/scene/scene.hpp>
 
 using namespace cubos::engine;
 using namespace cubos::core;
@@ -115,7 +115,7 @@ bool SceneBridge::load(Assets& assets, AnyAsset handle)
     return true;
 }
 
-bool SceneBridge::save(const Assets& assets, AnyAsset handle)
+bool SceneBridge::save(const Assets&, AnyAsset)
 {
     // TODO: figure out how to do this.
     // One of the problems is finding out exactly what was overriden in sub-scenes.

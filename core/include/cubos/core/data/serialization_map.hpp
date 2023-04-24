@@ -1,9 +1,8 @@
 #ifndef CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
 #define CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
 
-#include <unordered_map>
-#include <functional>
 #include <cassert>
+#include <functional>
 
 namespace cubos::core::data
 {
@@ -18,7 +17,8 @@ namespace cubos::core::data
         SerializationMap(SerializationMap&&) = default;
         SerializationMap(const SerializationMap&) = default;
 
-        inline SerializationMap() : usingFunctions(false)
+        inline SerializationMap()
+            : usingFunctions(false)
         {
         }
 
@@ -27,7 +27,9 @@ namespace cubos::core::data
         /// @param deserialize Function used to deserialize references.
         inline SerializationMap(std::function<bool(const R&, I&)> serialize,
                                 std::function<bool(R&, const I&)> deserialize)
-            : usingFunctions(true), serialize(serialize), deserialize(deserialize)
+            : usingFunctions(true)
+            , serialize(serialize)
+            , deserialize(deserialize)
         {
         }
 

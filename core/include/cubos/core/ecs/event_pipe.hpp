@@ -4,8 +4,8 @@
 #define DEFAULT_FILTER_MASK ~0u
 #define DEFAULT_PUSH_MASK 0
 
-#include <deque>
 #include <atomic>
+#include <deque>
 
 namespace cubos::core::ecs
 {
@@ -53,7 +53,9 @@ namespace cubos::core::ecs
             unsigned int mask;
             mutable std::atomic_size_t readCount{0};
 
-            Event(T e, unsigned int m) : event(e), mask(m)
+            Event(T e, unsigned int m)
+                : event(e)
+                , mask(m)
             {
             }
             Event(const Event& other)

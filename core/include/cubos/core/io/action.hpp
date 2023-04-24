@@ -1,10 +1,10 @@
 #ifndef CUBOS_CORE_IO_ACTION_HPP
 #define CUBOS_CORE_IO_ACTION_HPP
 
+#include <list>
+
 #include <cubos/core/io/context.hpp>
 #include <cubos/core/io/sources/source.hpp>
-
-#include <list>
 
 namespace cubos::core::io
 {

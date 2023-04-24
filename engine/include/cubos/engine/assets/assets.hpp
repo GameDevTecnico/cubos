@@ -1,17 +1,17 @@
 #pragma once
 
-#include <cubos/engine/assets/bridge.hpp>
-#include <cubos/engine/assets/meta.hpp>
-
-#include <cubos/core/memory/type_map.hpp>
-#include <cubos/core/memory/guards.hpp>
-
+#include <condition_variable>
+#include <deque>
 #include <memory>
+#include <shared_mutex>
 #include <string>
 #include <thread>
-#include <condition_variable>
-#include <shared_mutex>
-#include <deque>
+
+#include <cubos/core/memory/guards.hpp>
+#include <cubos/core/memory/type_map.hpp>
+
+#include <cubos/engine/assets/bridge.hpp>
+#include <cubos/engine/assets/meta.hpp>
 
 namespace cubos::engine
 {

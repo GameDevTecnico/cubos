@@ -1,15 +1,15 @@
-#include <cubos/core/gl/vertex.hpp>
-#include <cubos/core/gl/util.hpp>
-#include <cubos/core/log.hpp>
+#include <random>
 
-#include <cubos/engine/gl/frame.hpp>
-#include <cubos/engine/gl/deferred/renderer.hpp>
-
-#include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/compatibility.hpp>
+#include <glm/gtx/quaternion.hpp>
 
-#include <random>
+#include <cubos/core/gl/util.hpp>
+#include <cubos/core/gl/vertex.hpp>
+#include <cubos/core/log.hpp>
+
+#include <cubos/engine/gl/deferred/renderer.hpp>
+#include <cubos/engine/gl/frame.hpp>
 
 using namespace cubos;
 using namespace cubos::core;
@@ -458,7 +458,7 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
 
     // Create the GBuffer.
     this->size = glm::uvec2(0, 0);
-    this->onResize(size);
+    Renderer::onResize(size);
 
     // Check whether SSAO is enabled.
     this->ssaoEnabled = settings.getBool("ssaoEnabled", false);

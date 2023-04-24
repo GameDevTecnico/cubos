@@ -25,7 +25,7 @@ class SampleTextLoader : public data::Loader
 {
 public:
     using data::Loader::Loader;
-    virtual const void* load(const data::Meta& meta)
+    const void* load(const data::Meta& meta) override
     {
         auto path = meta.getParameters().find("path");
         if (path == meta.getParameters().end())
@@ -53,12 +53,12 @@ public:
         return asset;
     }
 
-    virtual std::future<const void*> loadAsync(const data::Meta& meta)
+    std::future<const void*> loadAsync(const data::Meta& meta) override
     {
         return std::async(std::launch::async, [this, &meta] { return load(meta); });
     }
 
-    virtual void unload(const data::Meta&, const void* asset)
+    void unload(const data::Meta&, const void* asset) override
     {
         auto a = (const SampleText*)asset;
         delete a;

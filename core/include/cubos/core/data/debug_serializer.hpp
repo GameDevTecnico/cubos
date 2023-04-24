@@ -1,12 +1,12 @@
 #ifndef CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP
 #define CUBOS_CORE_DATA_DEBUG_SERIALIZER_HPP
 
-#include <cubos/core/data/serializer.hpp>
-#include <cubos/core/memory/buffer_stream.hpp>
+#include <stack>
 
 #include <fmt/format.h>
 
-#include <stack>
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
 
 namespace cubos::core::data
 {
@@ -24,7 +24,8 @@ namespace cubos::core::data
     struct Debug
     {
         /// @param value The value to debug.
-        inline Debug(const T& value) : value(value)
+        inline Debug(const T& value)
+            : value(value)
         {
         }
 

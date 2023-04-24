@@ -1,6 +1,6 @@
-#include <cubos/core/data/package.hpp>
-
 #include <iterator>
+
+#include <cubos/core/data/package.hpp>
 
 using namespace cubos::core::data;
 
@@ -392,7 +392,8 @@ void Package::serialize(Serializer& serializer, const char* name) const
     }
 }
 
-impl::Packager::Packager(Package& pkg) : pkg(pkg)
+impl::Packager::Packager(Package& pkg)
+    : pkg(pkg)
 {
     // Do nothing.
 }
@@ -531,7 +532,8 @@ Package* impl::Packager::push(Package::Data&& data, const char* name)
     }
 }
 
-impl::Unpackager::Unpackager(const Package& pkg) : pkg(pkg)
+impl::Unpackager::Unpackager(const Package& pkg)
+    : pkg(pkg)
 {
     // Do nothing.
 }

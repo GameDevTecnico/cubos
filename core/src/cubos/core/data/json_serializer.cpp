@@ -3,7 +3,9 @@
 
 using namespace cubos::core::data;
 
-JSONSerializer::JSONSerializer(memory::Stream& stream, int indent) : stream(stream), indent(indent)
+JSONSerializer::JSONSerializer(memory::Stream& stream, int indent)
+    : stream(stream)
+    , indent(indent)
 {
     // Do nothing.
 }

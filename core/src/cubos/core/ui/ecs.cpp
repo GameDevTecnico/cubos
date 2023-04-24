@@ -1,7 +1,7 @@
+#include <imgui.h>
+
 #include <cubos/core/ui/ecs.hpp>
 #include <cubos/core/ui/serialization.hpp>
-
-#include <imgui.h>
 
 void cubos::core::ui::showWorld(const ecs::World& world, data::Context& context)
 {

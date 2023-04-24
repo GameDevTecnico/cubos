@@ -1,15 +1,16 @@
-#include <cubos/core/event.hpp>
-#include <cubos/core/io/window.hpp>
-#include <cubos/core/io/keyboard.hpp>
-#include <cubos/core/io/input_manager.hpp>
-#include <cubos/core/io/sources/double_axis.hpp>
-
-#include <map>
-#include <string>
-#include <memory>
-#include <variant>
 #include <list>
+#include <map>
+#include <memory>
+#include <string>
+#include <variant>
+
 #include <glm/glm.hpp>
+
+#include <cubos/core/event.hpp>
+#include <cubos/core/io/input_manager.hpp>
+#include <cubos/core/io/keyboard.hpp>
+#include <cubos/core/io/sources/double_axis.hpp>
+#include <cubos/core/io/window.hpp>
 
 using namespace cubos::core::io;
 

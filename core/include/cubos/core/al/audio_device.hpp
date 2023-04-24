@@ -1,9 +1,10 @@
 #ifndef CUBOS_CORE_AL_AUDIO_DEVICE_HPP
 #define CUBOS_CORE_AL_AUDIO_DEVICE_HPP
 
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
+
 #include <glm/glm.hpp>
 
 namespace cubos::core::al

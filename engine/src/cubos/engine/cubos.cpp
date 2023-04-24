@@ -1,21 +1,26 @@
+#include <utility>
+
+#include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/settings.hpp>
-#include <cubos/core/ecs/commands.hpp>
 
 #include <cubos/engine/cubos.hpp>
 
 using namespace cubos::engine;
 
-ShouldQuit::ShouldQuit(bool value) : value(value)
+ShouldQuit::ShouldQuit(bool value)
+    : value(value)
 {
 }
 
-Arguments::Arguments(const std::vector<std::string>& value) : value(value)
+Arguments::Arguments(std::vector<std::string> value)
+    : value(std::move(value))
 {
 }
 
 TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
-    : dispatcher(dispatcher), tags(tags)
+    : dispatcher(dispatcher)
+    , tags(tags)
 {
 }
 
@@ -34,7 +39,8 @@ TagBuilder& TagBuilder::afterTag(const std::string& tag)
 }
 
 SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
-    : dispatcher(dispatcher), tags(tags)
+    : dispatcher(dispatcher)
+    , tags(tags)
 {
 }
 

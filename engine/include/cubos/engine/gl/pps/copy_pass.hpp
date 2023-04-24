@@ -1,11 +1,11 @@
 #ifndef CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP
 #define CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP
 
+#include <glm/glm.hpp>
+
 #include <cubos/core/gl/render_device.hpp>
 
 #include <cubos/engine/gl/pps/pass.hpp>
-
-#include <glm/glm.hpp>
 
 namespace cubos::engine::gl::pps
 {

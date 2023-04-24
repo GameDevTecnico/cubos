@@ -1,10 +1,10 @@
 #ifndef CUBOS_CORE_DATA_EMBEDDED_ARCHIVE_HPP
 #define CUBOS_CORE_DATA_EMBEDDED_ARCHIVE_HPP
 
-#include <cubos/core/data/archive.hpp>
-
-#include <vector>
 #include <map>
+#include <vector>
+
+#include <cubos/core/data/archive.hpp>
 
 namespace cubos::core::data
 {

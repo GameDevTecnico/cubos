@@ -1,11 +1,10 @@
 #ifndef CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP
 #define CUBOS_CORE_DATA_BINARY_DESERIALIZER_HPP
 
+#include <yaml-cpp/yaml.h>
+
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/memory/stream.hpp>
-
-#include <yaml-cpp/yaml.h>
-#include <stack>
 
 namespace cubos::core::data
 {

@@ -1,8 +1,7 @@
-#include <cubos/core/ecs/entity_manager.hpp>
-
-#include <cubos/core/data/serializer.hpp>
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serialization_map.hpp>
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/ecs/entity_manager.hpp>
 
 using namespace cubos::core::ecs;
 using namespace cubos::core::data;
@@ -45,7 +44,9 @@ Entity::Entity()
     this->generation = UINT32_MAX;
 }
 
-Entity::Entity(uint32_t index, uint32_t generation) : index(index), generation(generation)
+Entity::Entity(uint32_t index, uint32_t generation)
+    : index(index)
+    , generation(generation)
 {
     // Do nothing.
 }
@@ -65,7 +66,9 @@ bool Entity::isNull() const
     return this->index == UINT32_MAX && this->generation == UINT32_MAX;
 }
 
-EntityManager::Iterator::Iterator(const EntityManager& e, const Entity::Mask m) : manager(e), mask(m)
+EntityManager::Iterator::Iterator(const EntityManager& e, const Entity::Mask m)
+    : manager(e)
+    , mask(m)
 {
     if (!m.test(0))
     {
@@ -85,14 +88,15 @@ EntityManager::Iterator::Iterator(const EntityManager& e, const Entity::Mask m) 
     }
 }
 
-EntityManager::Iterator::Iterator(const EntityManager& e) : manager(e)
+EntityManager::Iterator::Iterator(const EntityManager& e)
+    : manager(e)
 {
     this->archetypeIt = this->manager.archetypes.end();
 }
 
 Entity EntityManager::Iterator::operator*() const
 {
-    return Entity(*this->entityIt, this->manager.entities[*this->entityIt].generation);
+    return {*this->entityIt, this->manager.entities[*this->entityIt].generation};
 }
 
 bool EntityManager::Iterator::operator==(const Iterator& other) const
@@ -172,7 +176,7 @@ Entity EntityManager::create(Entity::Mask mask)
         this->archetypes[mask].insert(index);
     }
 
-    return Entity(index, this->entities[index].generation);
+    return {index, this->entities[index].generation};
 }
 
 void EntityManager::destroy(Entity entity)
@@ -206,15 +210,15 @@ bool EntityManager::isValid(Entity entity) const
 
 EntityManager::Iterator EntityManager::begin() const
 {
-    return Iterator(*this, Entity::Mask(1));
+    return {*this, Entity::Mask(1)};
 }
 
 EntityManager::Iterator EntityManager::withMask(Entity::Mask mask) const
 {
-    return Iterator(*this, mask);
+    return {*this, mask};
 }
 
 EntityManager::Iterator EntityManager::end() const
 {
-    return Iterator(*this);
+    return {*this};
 }

@@ -1,7 +1,6 @@
-#include <cubos/core/settings.hpp>
-
-#include <cubos/core/data/serializer.hpp>
 #include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/settings.hpp>
 
 using namespace cubos::core;
 
@@ -76,9 +75,9 @@ double Settings::getDouble(const std::string& key, const double defaultValue) co
 
 void Settings::merge(const Settings& settingsToMerge)
 {
-    for (auto it = settingsToMerge.values.begin(); it != settingsToMerge.values.end(); it++)
+    for (const auto& value : settingsToMerge.values)
     {
-        this->setString(it->first, it->second);
+        this->setString(value.first, value.second);
     }
 }
 

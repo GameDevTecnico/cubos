@@ -1,12 +1,13 @@
 #ifndef CUBOS_ENGINE_GL_PPS_PASS_HPP
 #define CUBOS_ENGINE_GL_PPS_PASS_HPP
 
+#include <map>
+
+#include <glm/glm.hpp>
+
 #include <cubos/core/gl/render_device.hpp>
 
 #include <cubos/engine/gl/pps/manager.hpp>
-
-#include <glm/glm.hpp>
-#include <map>
 
 namespace cubos::engine::gl::pps
 {

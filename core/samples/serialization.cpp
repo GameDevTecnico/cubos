@@ -1,6 +1,6 @@
-#include <cubos/core/data/serializer.hpp>
-#include <cubos/core/data/serialization_map.hpp>
 #include <cubos/core/data/json_serializer.hpp>
+#include <cubos/core/data/serialization_map.hpp>
+#include <cubos/core/data/serializer.hpp>
 
 using namespace cubos::core::memory;
 using namespace cubos::core::data;
@@ -71,7 +71,9 @@ int main()
     auto map = SerializationMap<Human*, int>();
     map.add(nullptr, -1);
     for (size_t i = 0; i < humans.size(); ++i)
-        map.add(&humans[i], i);
+    {
+        map.add(&humans[i], static_cast<int>(i));
+    }
     ser.context().push(std::move(map));
 
     // Serialize the humans array

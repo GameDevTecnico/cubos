@@ -8,6 +8,8 @@ Checks: "\
 WarningsAsErrors: '*'
 FormatStyle: file
 CheckOptions:
+  - key: modernize-loop-convert.UseCxx20ReverseRanges
+    value: false
   - key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp
     value: expr-type
   - key: 'bugprone-argument-comment.StrictMode'

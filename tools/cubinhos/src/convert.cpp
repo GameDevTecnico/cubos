@@ -1,15 +1,15 @@
-#include "tools.hpp"
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <unordered_map>
 
+#include <cubos/core/data/binary_deserializer.hpp>
+#include <cubos/core/data/binary_serializer.hpp>
+#include <cubos/core/data/qb_parser.hpp>
 #include <cubos/core/gl/palette.hpp>
 #include <cubos/core/memory/std_stream.hpp>
-#include <cubos/core/data/qb_parser.hpp>
-#include <cubos/core/data/binary_serializer.hpp>
-#include <cubos/core/data/binary_deserializer.hpp>
 
-#include <filesystem>
-#include <iostream>
-#include <fstream>
-#include <unordered_map>
+#include "tools.hpp"
 
 using namespace cubos::core;
 

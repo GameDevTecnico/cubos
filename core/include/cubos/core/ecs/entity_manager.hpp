@@ -4,9 +4,9 @@
 #include <bitset>
 #include <cstdint>
 #include <queue>
-#include <vector>
 #include <set>
 #include <unordered_map>
+#include <vector>
 
 namespace cubos::core::ecs
 {

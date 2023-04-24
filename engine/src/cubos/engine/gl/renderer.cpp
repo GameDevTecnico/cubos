@@ -4,7 +4,8 @@ using namespace cubos::core::gl;
 using namespace cubos::engine::gl;
 
 BaseRenderer::BaseRenderer(RenderDevice& renderDevice, glm::uvec2 size)
-    : renderDevice(renderDevice), ppsManager(renderDevice, size)
+    : renderDevice(renderDevice)
+    , ppsManager(renderDevice, size)
 {
     this->resizeTex(size);
 }

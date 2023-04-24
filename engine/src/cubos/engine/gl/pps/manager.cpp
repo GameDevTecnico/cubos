@@ -4,7 +4,8 @@
 using namespace cubos::core::gl;
 using namespace cubos::engine::gl;
 
-pps::Manager::Manager(RenderDevice& renderDevice, glm::uvec2 size) : renderDevice(renderDevice)
+pps::Manager::Manager(RenderDevice& renderDevice, glm::uvec2 size)
+    : renderDevice(renderDevice)
 {
     this->nextId = 0;
     this->size = {0, 0};

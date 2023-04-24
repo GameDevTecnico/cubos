@@ -1,9 +1,9 @@
 #ifndef CUBOS_ENGINE_GL_FRAME_HPP
 #define CUBOS_ENGINE_GL_FRAME_HPP
 
-#include <cubos/engine/gl/renderer.hpp>
-
 #include <vector>
+
+#include <cubos/engine/gl/renderer.hpp>
 
 namespace cubos::engine::gl
 {
