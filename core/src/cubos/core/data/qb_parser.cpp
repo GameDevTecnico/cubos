@@ -89,7 +89,7 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
         if (compressed == 0)
         {
             uint8_t color[4];
-            size_t nextMat = 1;
+            std::size_t nextMat = 1;
 
             for (uint32_t z = 0; z < sizeZ; ++z)
             {
@@ -111,7 +111,7 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
                                            static_cast<float>(color[3]) / 255.0F);
 
                         // Check if the material is already in the palette.
-                        size_t mat;
+                        std::size_t mat;
                         for (mat = 1; mat < nextMat; ++mat)
                         {
                             if (matrices[i].palette.get(static_cast<uint16_t>(mat)).color == colorVec)

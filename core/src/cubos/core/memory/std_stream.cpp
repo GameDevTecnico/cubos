@@ -24,20 +24,20 @@ StdStream::~StdStream()
     }
 }
 
-size_t StdStream::read(void* data, size_t size)
+std::size_t StdStream::read(void* data, std::size_t size)
 {
     return fread(data, size, 1, this->file);
 }
 
-size_t StdStream::write(const void* data, size_t size)
+std::size_t StdStream::write(const void* data, std::size_t size)
 {
     return fwrite(data, size, 1, this->file);
 }
 
-size_t StdStream::tell() const
+std::size_t StdStream::tell() const
 {
     auto pos = ftell(this->file);
-    return pos == -1 ? SIZE_MAX : static_cast<size_t>(pos);
+    return pos == -1 ? SIZE_MAX : static_cast<std::size_t>(pos);
 }
 
 void StdStream::seek(ptrdiff_t offset, SeekOrigin origin)

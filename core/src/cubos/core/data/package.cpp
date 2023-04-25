@@ -215,7 +215,7 @@ Package::Type Package::type() const
     return static_cast<Package::Type>(this->data.index());
 }
 
-size_t Package::size() const
+std::size_t Package::size() const
 {
     switch (this->type())
     {
@@ -271,7 +271,7 @@ const Package::Fields& Package::fields() const
     return std::get<Fields>(this->data);
 }
 
-Package& Package::element(size_t index)
+Package& Package::element(std::size_t index)
 {
     auto& elements = this->elements();
     return elements[index];
@@ -491,7 +491,7 @@ void impl::Packager::endObject()
     this->stack.pop();
 }
 
-void impl::Packager::beginArray(size_t /*length*/, const char* name)
+void impl::Packager::beginArray(std::size_t /*length*/, const char* name)
 {
     this->stack.push({this->push(Package::Elements(), name), false});
 }
@@ -502,7 +502,7 @@ void impl::Packager::endArray()
     this->stack.pop();
 }
 
-void impl::Packager::beginDictionary(size_t /*length*/, const char* name)
+void impl::Packager::beginDictionary(std::size_t /*length*/, const char* name)
 {
     this->stack.push({this->push(Package::Dictionary(), name), true});
 }
@@ -742,7 +742,7 @@ void impl::Unpackager::endObject()
     this->stack.pop();
 }
 
-size_t impl::Unpackager::beginArray()
+std::size_t impl::Unpackager::beginArray()
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Array)
@@ -761,7 +761,7 @@ void impl::Unpackager::endArray()
     this->stack.pop();
 }
 
-size_t impl::Unpackager::beginDictionary()
+std::size_t impl::Unpackager::beginDictionary()
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Dictionary)

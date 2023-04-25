@@ -35,9 +35,9 @@ namespace cubos::core::data
         virtual void writeString(const char* value, const char* name) override;
         virtual void beginObject(const char* name) override;
         virtual void endObject() override;
-        virtual void beginArray(size_t length, const char* name) override;
+        virtual void beginArray(std::size_t length, const char* name) override;
         virtual void endArray() override;
-        virtual void beginDictionary(size_t length, const char* name) override;
+        virtual void beginDictionary(std::size_t length, const char* name) override;
         virtual void endDictionary() override;
 
     private:
@@ -53,7 +53,7 @@ namespace cubos::core::data
         std::stack<Mode> mode;  ///< The current mode of the serializer.
         bool key;               ///< Whether the next write is a key or a value (if we are in a dictionary).
         YAML::Emitter emitter;  ///< The YAML emitter.
-        size_t head;            ///< The number of characters already flushed.
+        std::size_t head;            ///< The number of characters already flushed.
     };
 } // namespace cubos::core::data
 

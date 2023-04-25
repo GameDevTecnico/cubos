@@ -22,7 +22,7 @@ struct DeferredGrid : public engine::gl::impl::RendererGrid
 {
     core::gl::VertexArray va;
     core::gl::IndexBuffer ib;
-    size_t indexCount;
+    std::size_t indexCount;
 };
 
 /// Holds the model view matrix sent to the geometry pass pipeline.
@@ -517,7 +517,7 @@ void deferred::Renderer::setPalette(const core::gl::Palette& palette)
     // Get the colors from the palette.
     // Magenta is used for non-existent materials in order to easily identify errors.
     std::vector<glm::vec4> data(65536, {1.0F, 0.0F, 1.0F, 1.0F});
-    for (size_t i = 0; i < palette.getSize(); ++i)
+    for (std::size_t i = 0; i < palette.getSize(); ++i)
     {
         if (palette.getData()[i].similarity(Material::Empty) < 1.0F)
         {
@@ -718,7 +718,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         {
             this->ssaoSamplesBP =
                 this->ssaoPipeline->getBindingPoint(std::string("samples[" + std::to_string(i) + "]").c_str());
-            this->ssaoSamplesBP->setConstant(ssaoKernel[static_cast<size_t>(i)]);
+            this->ssaoSamplesBP->setConstant(ssaoKernel[static_cast<std::size_t>(i)]);
         }
 
         this->renderDevice.setVertexArray(this->screenQuadVA);

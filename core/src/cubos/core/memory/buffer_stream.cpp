@@ -4,7 +4,7 @@
 
 using namespace cubos::core::memory;
 
-BufferStream::BufferStream(void* buffer, size_t size, bool readOnly)
+BufferStream::BufferStream(void* buffer, std::size_t size, bool readOnly)
 {
     this->buffer = buffer;
     this->size = size;
@@ -14,7 +14,7 @@ BufferStream::BufferStream(void* buffer, size_t size, bool readOnly)
     this->owned = false;
 }
 
-BufferStream::BufferStream(const void* buffer, size_t size)
+BufferStream::BufferStream(const void* buffer, std::size_t size)
 {
     // Casting from const void* to void* isn't a problem because the pointer will never be written to: the buffer is set
     // as read-only.
@@ -26,7 +26,7 @@ BufferStream::BufferStream(const void* buffer, size_t size)
     this->owned = false;
 }
 
-BufferStream::BufferStream(size_t size)
+BufferStream::BufferStream(std::size_t size)
 {
     if (size == 0)
     {
@@ -88,9 +88,9 @@ const void* BufferStream::getBuffer() const
     return this->buffer;
 }
 
-size_t BufferStream::read(void* data, size_t size)
+std::size_t BufferStream::read(void* data, std::size_t size)
 {
-    size_t bytesRemaining = this->size - this->position;
+    std::size_t bytesRemaining = this->size - this->position;
     if (size > bytesRemaining)
     {
         size = bytesRemaining;
@@ -101,20 +101,20 @@ size_t BufferStream::read(void* data, size_t size)
     return size;
 }
 
-size_t BufferStream::write(const void* data, size_t size)
+std::size_t BufferStream::write(const void* data, std::size_t size)
 {
     if (this->readOnly)
     {
         return 0;
     }
 
-    size_t bytesRemaining = this->size - this->position;
+    std::size_t bytesRemaining = this->size - this->position;
     if (size > bytesRemaining)
     {
         if (this->owned)
         {
             // Expand the buffer.
-            size_t newSize = this->size * 2;
+            std::size_t newSize = this->size * 2;
             while (newSize < this->position + size)
             {
                 newSize *= 2;
@@ -137,7 +137,7 @@ size_t BufferStream::write(const void* data, size_t size)
     return size;
 }
 
-size_t BufferStream::tell() const
+std::size_t BufferStream::tell() const
 {
     return this->position;
 }
@@ -146,32 +146,32 @@ void BufferStream::seek(ptrdiff_t offset, SeekOrigin origin)
 {
     if (origin == SeekOrigin::Current)
     {
-        if (offset < 0 && static_cast<size_t>(-offset) > this->position)
+        if (offset < 0 && static_cast<std::size_t>(-offset) > this->position)
         {
             this->position = 0;
         }
         else if (offset < 0)
         {
-            this->position -= static_cast<size_t>(-offset);
+            this->position -= static_cast<std::size_t>(-offset);
         }
         else
         {
-            this->position += static_cast<size_t>(offset);
+            this->position += static_cast<std::size_t>(offset);
         }
     }
     else if (origin == SeekOrigin::End)
     {
-        if (offset < 0 && static_cast<size_t>(-offset) > this->size)
+        if (offset < 0 && static_cast<std::size_t>(-offset) > this->size)
         {
             this->position = 0;
         }
         else if (offset < 0)
         {
-            this->position = this->size - static_cast<size_t>(-offset);
+            this->position = this->size - static_cast<std::size_t>(-offset);
         }
         else
         {
-            this->position = this->size + static_cast<size_t>(offset);
+            this->position = this->size + static_cast<std::size_t>(offset);
         }
     }
     else
@@ -182,7 +182,7 @@ void BufferStream::seek(ptrdiff_t offset, SeekOrigin origin)
         }
         else
         {
-            this->position = static_cast<size_t>(offset);
+            this->position = static_cast<std::size_t>(offset);
         }
     }
 

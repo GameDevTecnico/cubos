@@ -100,7 +100,7 @@ void Palette::merge(const Palette& palette, float similarity)
 void cubos::core::data::serialize(Serializer& serializer, const gl::Palette& palette, const char* name)
 {
     // Count non-empty materials.
-    size_t count = 0;
+    std::size_t count = 0;
     for (const auto& material : palette.materials)
     {
         if (material.similarity(Material::Empty) < 1.0F)
@@ -128,8 +128,8 @@ void cubos::core::data::deserialize(Deserializer& deserializer, gl::Palette& pal
     Material mat;
     uint16_t index;
 
-    size_t count = deserializer.beginDictionary();
-    for (size_t i = 0; i < count; i++)
+    std::size_t count = deserializer.beginDictionary();
+    for (std::size_t i = 0; i < count; i++)
     {
         deserializer.read<uint16_t>(index);
         deserializer.read(mat);

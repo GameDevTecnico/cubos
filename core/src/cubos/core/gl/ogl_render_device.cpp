@@ -545,7 +545,7 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(size_t x, size_t width, const void* data, size_t level) override
+    void update(std::size_t x, std::size_t width, const void* data, std::size_t level) override
     {
         glBindTexture(GL_TEXTURE_1D, this->id);
         glTexSubImage1D(GL_TEXTURE_1D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLsizei>(width),
@@ -580,7 +580,7 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(size_t x, size_t y, size_t width, size_t height, const void* data, size_t level) override
+    void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data, std::size_t level) override
     {
         glBindTexture(GL_TEXTURE_2D, this->id);
         glTexSubImage2D(GL_TEXTURE_2D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
@@ -615,7 +615,7 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data, size_t level) override
+    void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data, std::size_t level) override
     {
         glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
         glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
@@ -651,8 +651,8 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(size_t x, size_t y, size_t z, size_t width, size_t height, size_t depth, const void* data,
-                size_t level) override
+    void update(std::size_t x, std::size_t y, std::size_t z, std::size_t width, std::size_t height, std::size_t depth, const void* data,
+                std::size_t level) override
     {
         glBindTexture(GL_TEXTURE_3D, this->id);
         glTexSubImage3D(GL_TEXTURE_3D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
@@ -688,7 +688,7 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(size_t x, size_t y, size_t width, size_t height, const void* data, CubeFace face, size_t level) override
+    void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data, CubeFace face, std::size_t level) override
     {
         GLenum glFace;
         cubeFaceToGL(face, glFace);
@@ -726,8 +726,8 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data, CubeFace face,
-                size_t level = 0) override
+    void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data, CubeFace face,
+                std::size_t level = 0) override
     {
         glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, this->id);
         glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x),
@@ -777,7 +777,7 @@ public:
 class OGLIndexBuffer : public impl::IndexBuffer
 {
 public:
-    OGLIndexBuffer(GLuint id, GLenum format, size_t indexSz)
+    OGLIndexBuffer(GLuint id, GLenum format, std::size_t indexSz)
         : id(id)
         , format(format)
         , indexSz(indexSz)
@@ -802,7 +802,7 @@ public:
 
     GLuint id;
     GLenum format;
-    size_t indexSz;
+    std::size_t indexSz;
 };
 
 class OGLVertexBuffer : public impl::VertexBuffer
@@ -838,7 +838,7 @@ public:
     OGLVertexArray(GLuint id, const VertexBuffer* buffers)
         : id(id)
     {
-        for (size_t i = 0; i < CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
+        for (std::size_t i = 0; i < CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
         {
             this->buffers[i] = buffers[i];
         }
@@ -1673,7 +1673,7 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
     GLuint id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_1D, id);
-    for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+    for (std::size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
     {
         glTexImage1D(GL_TEXTURE_1D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), 0, format, type, desc.data[i]);
@@ -1715,7 +1715,7 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-    for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+    for (std::size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
     {
         glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
@@ -1761,9 +1761,9 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     glTexStorage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLsizei>(desc.mipLevelCount), internalFormat,
                    static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height),
                    static_cast<GLsizei>(desc.size));
-    for (size_t i = 0; i < desc.size; ++i)
+    for (std::size_t i = 0; i < desc.size; ++i)
     {
-        for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
+        for (std::size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
         {
             if (desc.data[i][j] != nullptr)
             {
@@ -1817,7 +1817,7 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     GLuint id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_3D, id);
-    for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+    for (std::size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
     {
         glTexImage3D(GL_TEXTURE_3D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div),
@@ -1861,7 +1861,7 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     GLuint id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_CUBE_MAP, id);
-    for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+    for (std::size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
     {
         glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
@@ -1922,11 +1922,11 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
     glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, static_cast<GLsizei>(desc.mipLevelCount), internalFormat,
                    static_cast<GLsizei>(desc.width), static_cast<GLsizei>(desc.height),
                    static_cast<GLsizei>(desc.size * 6));
-    for (size_t i = 0; i < desc.size; ++i)
+    for (std::size_t i = 0; i < desc.size; ++i)
     {
         for (GLint face = 0; face < 6; ++face)
         {
-            for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
+            for (std::size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
             {
                 if (desc.data[i][face][j] != nullptr)
                 {
@@ -1958,7 +1958,7 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
     return std::make_shared<OGLCubeMapArray>(id, internalFormat, format, type);
 }
 
-ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* data, Usage usage)
+ConstantBuffer OGLRenderDevice::createConstantBuffer(std::size_t size, const void* data, Usage usage)
 {
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
@@ -1998,7 +1998,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
     return std::make_shared<OGLConstantBuffer>(id);
 }
 
-IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage)
+IndexBuffer OGLRenderDevice::createIndexBuffer(std::size_t size, const void* data, IndexFormat format, Usage usage)
 {
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
@@ -2021,7 +2021,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
     }
 
     GLenum glFormat;
-    size_t indexSz;
+    std::size_t indexSz;
     if (format == IndexFormat::UShort)
     {
         glFormat = GL_UNSIGNED_SHORT;
@@ -2063,7 +2063,7 @@ void OGLRenderDevice::setIndexBuffer(IndexBuffer ib)
     this->currentIndexSz = ibImpl->indexSz;
 }
 
-VertexBuffer OGLRenderDevice::createVertexBuffer(size_t size, const void* data, Usage usage)
+VertexBuffer OGLRenderDevice::createVertexBuffer(std::size_t size, const void* data, Usage usage)
 {
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
@@ -2115,7 +2115,7 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
 
     // Link elements
     assert(desc.elementCount <= CUBOS_CORE_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT);
-    for (size_t i = 0; i < desc.elementCount; ++i)
+    for (std::size_t i = 0; i < desc.elementCount; ++i)
     {
         // Get buffer
         auto vb = std::static_pointer_cast<OGLVertexBuffer>(desc.buffers[desc.elements[i].buffer.index]);
@@ -2398,7 +2398,7 @@ void OGLRenderDevice::clearColor(float r, float g, float b, float a)
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void OGLRenderDevice::clearTargetColor(size_t target, float r, float g, float b, float a)
+void OGLRenderDevice::clearTargetColor(std::size_t target, float r, float g, float b, float a)
 {
     float color[] = {r, g, b, a};
     glClearBufferfv(GL_COLOR, static_cast<GLint>(target), color);
@@ -2416,31 +2416,31 @@ void OGLRenderDevice::clearStencil(int stencil)
     glClear(GL_STENCIL_BUFFER_BIT);
 }
 
-void OGLRenderDevice::drawTriangles(size_t offset, size_t count)
+void OGLRenderDevice::drawTriangles(std::size_t offset, std::size_t count)
 {
     glDrawArrays(GL_TRIANGLES, static_cast<GLint>(offset), static_cast<GLsizei>(count));
 }
 
-void OGLRenderDevice::drawTrianglesIndexed(size_t offset, size_t count)
+void OGLRenderDevice::drawTrianglesIndexed(std::size_t offset, std::size_t count)
 {
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count), static_cast<GLenum>(this->currentIndexFormat),
                    reinterpret_cast<const void*>(offset * this->currentIndexSz));
 }
 
-void OGLRenderDevice::drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount)
+void OGLRenderDevice::drawTrianglesInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount)
 {
     glDrawArraysInstanced(GL_TRIANGLES, static_cast<GLint>(offset), static_cast<GLsizei>(count),
                           static_cast<GLsizei>(instanceCount));
 }
 
-void OGLRenderDevice::drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount)
+void OGLRenderDevice::drawTrianglesIndexedInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount)
 {
     glDrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(count), static_cast<GLenum>(this->currentIndexFormat),
                             reinterpret_cast<const void*>(offset * this->currentIndexSz),
                             static_cast<GLsizei>(instanceCount));
 }
 
-void OGLRenderDevice::dispatchCompute(size_t x, size_t y, size_t z)
+void OGLRenderDevice::dispatchCompute(std::size_t x, std::size_t y, std::size_t z)
 {
     glDispatchCompute(static_cast<GLuint>(x), static_cast<GLuint>(y), static_cast<GLuint>(z));
 }

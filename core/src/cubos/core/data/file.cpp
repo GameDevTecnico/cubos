@@ -21,7 +21,7 @@ File::File(Handle parent, std::string_view name)
     }
 }
 
-File::File(Handle parent, const std::shared_ptr<Archive>& archive, size_t id)
+File::File(Handle parent, const std::shared_ptr<Archive>& archive, std::size_t id)
 {
     this->name = archive->getName(id);
     this->directory = archive->isDirectory(id);
@@ -230,7 +230,7 @@ File::Handle File::find(std::string_view path)
     }
 
     // Get name of the first component in the path.
-    size_t i = 0;
+    std::size_t i = 0;
     for (; i < path.size(); i++)
     {
         if (path[i] == '/')
@@ -310,7 +310,7 @@ File::Handle File::create(std::string_view path, bool directory)
     }
 
     // Create the file.
-    size_t id = dir->archive->create(dir->id, name, directory);
+    std::size_t id = dir->archive->create(dir->id, name, directory);
     if (id == 0)
     {
         CUBOS_ERROR("Could not create file at path '{}': internal archive error", dir->path + "/" + std::string(name));
@@ -434,7 +434,7 @@ std::shared_ptr<Archive> File::getArchive() const
     return this->archive;
 }
 
-size_t File::getId() const
+std::size_t File::getId() const
 {
     return this->id;
 }

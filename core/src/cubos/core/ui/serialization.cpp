@@ -128,7 +128,7 @@ static void showStructured(const data::Package& pkg, const std::string& name)
     ImGui::Text("%d %s", static_cast<int>(pkg.size()), elements);
     if (nodeOpen)
     {
-        for (size_t i = 0; i < pkg.size(); ++i)
+        for (std::size_t i = 0; i < pkg.size(); ++i)
         {
             ImGui::TableNextRow();
             ImGui::PushID(static_cast<int>(i));
@@ -331,7 +331,7 @@ static bool editStructured(data::Package& pkg, const std::string& name)
 
     if (nodeOpen)
     {
-        for (size_t i = 0; i < pkg.size(); ++i)
+        for (std::size_t i = 0; i < pkg.size(); ++i)
         {
             bool shouldErase;
             bool shouldDuplicate;

@@ -17,9 +17,9 @@ namespace cubos::core::memory
         StdStream(StdStream&&) noexcept;
         virtual ~StdStream() override;
 
-        virtual size_t read(void* data, size_t size) override;
-        virtual size_t write(const void* data, size_t size) override;
-        virtual size_t tell() const override;
+        virtual std::size_t read(void* data, std::size_t size) override;
+        virtual std::size_t write(const void* data, std::size_t size) override;
+        virtual std::size_t tell() const override;
         virtual void seek(ptrdiff_t offset, SeekOrigin origin) override;
         virtual bool eof() const override;
         virtual char peek() const override;

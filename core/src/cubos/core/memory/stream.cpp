@@ -31,7 +31,7 @@ void Stream::put(char c)
     this->write(&c, sizeof(c));
 }
 
-void Stream::print(int64_t value, size_t base)
+void Stream::print(int64_t value, std::size_t base)
 {
     if (value < 0)
     {
@@ -42,7 +42,7 @@ void Stream::print(int64_t value, size_t base)
     this->print(static_cast<uint64_t>(value), base);
 }
 
-void Stream::print(uint64_t value, size_t base)
+void Stream::print(uint64_t value, std::size_t base)
 {
     // Validate input
     if (base > 16)
@@ -63,7 +63,7 @@ void Stream::print(uint64_t value, size_t base)
     }
 
     char buffer[64]; // 64 is enough for any 64-bit integer.
-    size_t len = 0;  // Number of characters used
+    std::size_t len = 0;  // Number of characters used
 
     // While value is not zero
     while (value > 0)
@@ -73,7 +73,7 @@ void Stream::print(uint64_t value, size_t base)
     }
 
     // Reverse the string
-    for (size_t i = 0; i < len / 2; ++i)
+    for (std::size_t i = 0; i < len / 2; ++i)
     {
         char tmp = buffer[i];
         buffer[i] = buffer[len - i - 1];
@@ -83,14 +83,14 @@ void Stream::print(uint64_t value, size_t base)
     this->print(buffer, len);
 }
 
-void Stream::print(float value, size_t decimalPlaces)
+void Stream::print(float value, std::size_t decimalPlaces)
 {
     this->print(static_cast<double>(value), decimalPlaces);
 }
 
-void Stream::print(double value, size_t decimalPlaces)
+void Stream::print(double value, std::size_t decimalPlaces)
 {
-    constexpr size_t maxDecimalPlaces = 32;
+    constexpr std::size_t maxDecimalPlaces = 32;
 
     if (value < 0.0)
     {
@@ -103,7 +103,7 @@ void Stream::print(double value, size_t decimalPlaces)
         if (decimalPlaces > 0)
         {
             this->put('.');
-            for (size_t i = 0; i < decimalPlaces; ++i)
+            for (std::size_t i = 0; i < decimalPlaces; ++i)
             {
                 this->put('0');
             }
@@ -130,7 +130,7 @@ void Stream::print(double value, size_t decimalPlaces)
     else if (value <= 16777217.0 && log10(value) > -static_cast<double>(decimalPlaces))
     {
         char buffer[maxDecimalPlaces + 1];
-        size_t len = 0;
+        std::size_t len = 0;
 
         // Print the integer part
         auto integerPart = static_cast<uint64_t>(value);
@@ -144,7 +144,7 @@ void Stream::print(double value, size_t decimalPlaces)
         // Print the decimal part
         buffer[len++] = '.';
         value -= static_cast<double>(integerPart);
-        for (size_t i = 0; i < decimalPlaces; ++i)
+        for (std::size_t i = 0; i < decimalPlaces; ++i)
         {
             value *= 10.0;
             auto decimalPart = static_cast<uint64_t>(value);
@@ -193,7 +193,7 @@ void Stream::print(const char* str)
     this->write(str, strlen(str));
 }
 
-void Stream::print(const char* str, size_t size)
+void Stream::print(const char* str, std::size_t size)
 {
     this->write(str, size);
 }
@@ -203,7 +203,7 @@ void Stream::print(const std::string& str)
     this->write(str.c_str(), str.length());
 }
 
-void Stream::parse(int8_t& value, size_t base)
+void Stream::parse(int8_t& value, std::size_t base)
 {
     int64_t v = 0;
     this->parse(v, base);
@@ -218,7 +218,7 @@ void Stream::parse(int8_t& value, size_t base)
     }
 }
 
-void Stream::parse(int16_t& value, size_t base)
+void Stream::parse(int16_t& value, std::size_t base)
 {
     int64_t v = 0;
     this->parse(v, base);
@@ -233,7 +233,7 @@ void Stream::parse(int16_t& value, size_t base)
     }
 }
 
-void Stream::parse(int32_t& value, size_t base)
+void Stream::parse(int32_t& value, std::size_t base)
 {
     int64_t v = 0;
     this->parse(v, base);
@@ -248,7 +248,7 @@ void Stream::parse(int32_t& value, size_t base)
     }
 }
 
-void Stream::parse(int64_t& value, size_t base)
+void Stream::parse(int64_t& value, std::size_t base)
 {
     // Ignore whitespace
     while (isspace(this->peek()) != 0)
@@ -280,7 +280,7 @@ void Stream::parse(int64_t& value, size_t base)
     }
 }
 
-void Stream::parse(uint8_t& value, size_t base)
+void Stream::parse(uint8_t& value, std::size_t base)
 {
     uint64_t v = 0;
     this->parse(v, base);
@@ -295,7 +295,7 @@ void Stream::parse(uint8_t& value, size_t base)
     }
 }
 
-void Stream::parse(uint16_t& value, size_t base)
+void Stream::parse(uint16_t& value, std::size_t base)
 {
     uint64_t v = 0;
     this->parse(v, base);
@@ -310,7 +310,7 @@ void Stream::parse(uint16_t& value, size_t base)
     }
 }
 
-void Stream::parse(uint32_t& value, size_t base)
+void Stream::parse(uint32_t& value, std::size_t base)
 {
     uint64_t v = 0;
     this->parse(v, base);
@@ -325,7 +325,7 @@ void Stream::parse(uint32_t& value, size_t base)
     }
 }
 
-void Stream::parse(uint64_t& value, size_t base)
+void Stream::parse(uint64_t& value, std::size_t base)
 {
     // Validate input
     if (base > 16)
@@ -475,7 +475,7 @@ void Stream::readUntil(std::string& str, const char* terminator)
     }
     str = "";
 
-    size_t terminatorI = 0;
+    std::size_t terminatorI = 0;
 
     for (char c = this->get(); !this->eof() && c != '\0'; c = this->get())
     {
@@ -499,15 +499,15 @@ void Stream::readUntil(std::string& str, const char* terminator)
     }
 }
 
-size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
+std::size_t Stream::readUntil(char* buffer, std::size_t size, const char* terminator)
 {
     if (terminator == nullptr)
     {
         terminator = "";
     }
 
-    size_t terminatorI = 0;
-    size_t position = 0;
+    std::size_t terminatorI = 0;
+    std::size_t position = 0;
 
     for (char c = this->get(); !this->eof() && c != '\0' && position < size; c = this->get())
     {
@@ -543,9 +543,9 @@ size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
     return position;
 }
 
-void Stream::ignore(size_t size)
+void Stream::ignore(std::size_t size)
 {
-    for (size_t i = 0; i < size; ++i)
+    for (std::size_t i = 0; i < size; ++i)
     {
         this->get();
     }

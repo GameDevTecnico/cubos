@@ -142,10 +142,10 @@ EntityManager::Iterator& EntityManager::Iterator::operator++()
     return *this;
 }
 
-EntityManager::EntityManager(size_t initialCapacity)
+EntityManager::EntityManager(std::size_t initialCapacity)
 {
     this->entities.reserve(initialCapacity);
-    for (size_t i = 0; i < initialCapacity; ++i)
+    for (std::size_t i = 0; i < initialCapacity; ++i)
     {
         this->entities.push_back(EntityData{0, 1});
         this->availableEntities.push(static_cast<uint32_t>(i));
@@ -157,9 +157,9 @@ Entity EntityManager::create(Entity::Mask mask)
     if (this->availableEntities.empty())
     {
         // Expand the entity pool.
-        size_t oldSize = this->entities.size();
+        std::size_t oldSize = this->entities.size();
         this->entities.reserve(oldSize * 2);
-        for (size_t i = oldSize; i < oldSize * 2; ++i)
+        for (std::size_t i = oldSize; i < oldSize * 2; ++i)
         {
             this->entities.push_back(EntityData{0, 0});
             this->availableEntities.push(static_cast<uint32_t>(i));

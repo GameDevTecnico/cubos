@@ -31,9 +31,9 @@ void cubos::core::data::serialize<Human>(Serializer& ser, const Human& obj, cons
     ser.beginArray(obj.children.size(), "children");
     for (const auto& child : obj.children)
     {
-        if (ser.context().has<SerializationMap<Human*, size_t>>())
+        if (ser.context().has<SerializationMap<Human*, std::size_t>>())
         {
-            auto& map = ser.context().get<SerializationMap<Human*, size_t>>();
+            auto& map = ser.context().get<SerializationMap<Human*, std::size_t>>();
             ser.write(static_cast<uint64_t>(map.getId(child)), "child");
         }
         else
@@ -137,7 +137,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Dictionary)
         const char* strs[] = {"one", "two", "three"};
 
         serializer->beginDictionary(3, "strings");
-        for (size_t i = 0; i < 3; ++i)
+        for (std::size_t i = 0; i < 3; ++i)
         {
             serializer->write(static_cast<uint64_t>(i), nullptr);
             serializer->write(strs[i], nullptr);
@@ -241,8 +241,8 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom)
         humans[2].children.push_back(&humans[3]);
         humans[2].children.push_back(&humans[4]);
 
-        auto map = SerializationMap<Human*, size_t>();
-        for (size_t i = 0; i < humans.size(); ++i)
+        auto map = SerializationMap<Human*, std::size_t>();
+        for (std::size_t i = 0; i < humans.size(); ++i)
         {
             map.add(&humans[i], i);
         }
@@ -251,7 +251,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom)
         serializer->write(humans[0], "without_context");
         serializer->context().push(std::move(map));
         serializer->beginDictionary(humans.size(), "with_context");
-        for (size_t i = 0; i < humans.size(); ++i)
+        for (std::size_t i = 0; i < humans.size(); ++i)
         {
             serializer->write(static_cast<uint64_t>(i), nullptr);
             serializer->write(humans[i], nullptr);
