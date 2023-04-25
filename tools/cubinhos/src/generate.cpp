@@ -93,22 +93,22 @@ static std::string_view trim(std::string_view str)
     int64_t i;
     for (i = 0; i < static_cast<int64_t>(str.size()); ++i)
     {
-        if (isspace(str[static_cast<size_t>(i)]) == 0)
+        if (isspace(str[static_cast<std::size_t>(i)]) == 0)
         {
             break;
         }
     }
-    str = str.substr(static_cast<size_t>(i));
+    str = str.substr(static_cast<std::size_t>(i));
 
     // Trim right.
     for (i = static_cast<int64_t>(str.size()) - 1; i >= 0; --i)
     {
-        if (isspace(str[static_cast<size_t>(i)]) == 0)
+        if (isspace(str[static_cast<std::size_t>(i)]) == 0)
         {
             break;
         }
     }
-    return str.substr(0, static_cast<size_t>(i) + 1);
+    return str.substr(0, static_cast<std::size_t>(i) + 1);
 }
 
 /// Parses a component attribute.
@@ -129,7 +129,7 @@ bool parseAttribute(std::string_view line, Component& component, bool& found)
 
     // Extract the arguments.
     std::string_view args = line.substr(start.size());
-    size_t end = args.find(")]");
+    std::size_t end = args.find(")]");
     if (end == std::string::npos)
     {
         std::cerr << "Couldn't parse component attribute '" << line << "' at " << component.header << std::endl;
@@ -138,7 +138,7 @@ bool parseAttribute(std::string_view line, Component& component, bool& found)
     args = line.substr(0, end);
 
     // Parse the name and storage.
-    size_t comma = args.find(',');
+    std::size_t comma = args.find(',');
     if (comma == std::string::npos)
     {
         std::cerr << "Couldn't parse component attribute arguments '" << args << "'" << std::endl;
@@ -161,18 +161,18 @@ bool parseAttribute(std::string_view line, Component& component, bool& found)
 bool preprocessFile(std::string& contents)
 {
     // Remove inline comments.
-    size_t pos = 0;
+    std::size_t pos = 0;
     while (pos < contents.size())
     {
         // Find the next comment.
-        size_t commentStart = contents.find("//", pos);
+        std::size_t commentStart = contents.find("//", pos);
         if (commentStart == std::string::npos)
         {
             break;
         }
 
         // Find the end of the comment.
-        size_t commentEnd = contents.find('\n', commentStart);
+        std::size_t commentEnd = contents.find('\n', commentStart);
         if (commentEnd == std::string::npos)
         {
             commentEnd = contents.size();
@@ -187,14 +187,14 @@ bool preprocessFile(std::string& contents)
     while (pos < contents.size())
     {
         // Find the next comment.
-        size_t commentStart = contents.find("/*", pos);
+        std::size_t commentStart = contents.find("/*", pos);
         if (commentStart == std::string::npos)
         {
             break;
         }
 
         // Find the end of the comment.
-        size_t commentEnd = contents.find("*/", commentStart);
+        std::size_t commentEnd = contents.find("*/", commentStart);
         if (commentEnd == std::string::npos)
         {
             std::cerr << "Couldn't find the end of the comment" << std::endl;
@@ -212,8 +212,8 @@ bool preprocessFile(std::string& contents)
         {
             contents[pos] = ' ';
 
-            size_t whitespaceStart = pos;
-            size_t whitespaceEnd = pos;
+            std::size_t whitespaceStart = pos;
+            std::size_t whitespaceEnd = pos;
             while (whitespaceEnd < contents.size() && (isspace(contents[whitespaceEnd]) != 0))
             {
                 whitespaceEnd++;
@@ -250,7 +250,7 @@ void removeComments(std::string& line, bool& isComment)
     // If we're in a comment, check if it ends.
     if (isComment)
     {
-        size_t pos = line.find("*/");
+        std::size_t pos = line.find("*/");
         if (pos != std::string::npos)
         {
             isComment = false;
@@ -264,7 +264,7 @@ void removeComments(std::string& line, bool& isComment)
     }
 
     // Remove single line comments.
-    size_t pos = line.find("//");
+    std::size_t pos = line.find("//");
     if (pos != std::string::npos)
     {
         line = line.substr(0, pos);
@@ -273,10 +273,10 @@ void removeComments(std::string& line, bool& isComment)
     // Remove multi-line comments starting in this line.
     do
     {
-        size_t pos = line.find("/*");
+        std::size_t pos = line.find("/*");
         if (pos != std::string::npos)
         {
-            size_t end = line.find("*/");
+            std::size_t end = line.find("*/");
             if (end != std::string::npos)
             {
                 line = line.substr(0, pos) + line.substr(end + 2);
@@ -345,7 +345,7 @@ public:
         {
             return false;
         }
-        for (size_t i = 1; i < this->m_input.size(); ++i)
+        for (std::size_t i = 1; i < this->m_input.size(); ++i)
         {
             if (this->m_input[i] == '\n')
             {
@@ -375,7 +375,7 @@ public:
     std::string_view extractIdentifier()
     {
         this->skipWS();
-        size_t start = 0;
+        std::size_t start = 0;
         while (start < this->m_input.size() && ((isalnum(this->m_input[start]) != 0) || this->m_input[start] == ':'))
         {
             start++;
@@ -398,7 +398,7 @@ public:
 
         if (isalnum(this->m_input[0]) != 0)
         {
-            size_t start = 1;
+            std::size_t start = 1;
             while (start < this->m_input.size() &&
                    ((isalnum(this->m_input[start]) != 0) || this->m_input[start] == ':'))
             {
@@ -641,7 +641,7 @@ static bool parse(const fs::path& path, std::vector<Component>& components)
                     namespaceScope.pop_back();
                     if (!anonymous)
                     {
-                        size_t pos = namespaceStr.find_last_of("::");
+                        std::size_t pos = namespaceStr.find_last_of("::");
                         if (pos != std::string::npos)
                         {
                             namespaceStr = namespaceStr.substr(0, pos);

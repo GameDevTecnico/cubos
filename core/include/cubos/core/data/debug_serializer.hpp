@@ -59,9 +59,9 @@ namespace cubos::core::data
         virtual void writeString(const char* value, const char* name) override;
         virtual void beginObject(const char* name) override;
         virtual void endObject() override;
-        virtual void beginArray(size_t length, const char* name) override;
+        virtual void beginArray(std::size_t length, const char* name) override;
         virtual void endArray() override;
-        virtual void beginDictionary(size_t length, const char* name) override;
+        virtual void beginDictionary(std::size_t length, const char* name) override;
         virtual void endDictionary() override;
 
     private:

@@ -70,7 +70,7 @@ int main()
     // Prepare context (in this case its a SerializationMap, used to map references to ids)
     auto map = SerializationMap<Human*, int>();
     map.add(nullptr, -1);
-    for (size_t i = 0; i < humans.size(); ++i)
+    for (std::size_t i = 0; i < humans.size(); ++i)
     {
         map.add(&humans[i], static_cast<int>(i));
     }

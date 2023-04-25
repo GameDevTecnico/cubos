@@ -21,9 +21,9 @@ namespace cubos::core::data
         FileStream(File::Handle file, File::OpenMode mode, T&& stream);
         virtual ~FileStream() override = default;
 
-        virtual size_t read(void* buffer, size_t size) override;
-        virtual size_t write(const void* buffer, size_t size) override;
-        virtual size_t tell() const override;
+        virtual std::size_t read(void* buffer, std::size_t size) override;
+        virtual std::size_t write(const void* buffer, std::size_t size) override;
+        virtual std::size_t tell() const override;
         virtual void seek(ptrdiff_t offset, memory::SeekOrigin origin) override;
         virtual bool eof() const override;
         virtual char peek() const override;
@@ -45,7 +45,7 @@ namespace cubos::core::data
     }
 
     template <typename T>
-    inline size_t FileStream<T>::read(void* buffer, size_t size)
+    inline std::size_t FileStream<T>::read(void* buffer, std::size_t size)
     {
         if (this->mode != File::OpenMode::Read)
         {
@@ -57,7 +57,7 @@ namespace cubos::core::data
     }
 
     template <typename T>
-    inline size_t FileStream<T>::write(const void* buffer, size_t size)
+    inline std::size_t FileStream<T>::write(const void* buffer, std::size_t size)
     {
         if (this->mode != File::OpenMode::Write)
         {
@@ -69,7 +69,7 @@ namespace cubos::core::data
     }
 
     template <typename T>
-    inline size_t FileStream<T>::tell() const
+    inline std::size_t FileStream<T>::tell() const
     {
         return stream.tell();
     }

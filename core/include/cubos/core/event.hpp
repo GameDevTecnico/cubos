@@ -23,7 +23,7 @@ namespace cubos::core
     public:
         using Callback = std::function<void(TArgs...)>; ///< Callback type.
 
-        using ID = size_t; ///< Callback identifier.
+        using ID = std::size_t; ///< Callback identifier.
 
         ~Event();
 

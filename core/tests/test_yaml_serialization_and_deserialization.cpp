@@ -30,9 +30,9 @@ void cubos::core::data::serialize<HumanSerDes>(Serializer& ser, const HumanSerDe
     ser.beginArray(obj.children.size(), "children");
     for (const auto& child : obj.children)
     {
-        if (ser.context().has<SerializationMap<HumanSerDes*, size_t>>())
+        if (ser.context().has<SerializationMap<HumanSerDes*, std::size_t>>())
         {
-            auto& map = ser.context().get<SerializationMap<HumanSerDes*, size_t>>();
+            auto& map = ser.context().get<SerializationMap<HumanSerDes*, std::size_t>>();
             ser.write(static_cast<uint64_t>(map.getId(child)), "child");
         }
         else
@@ -55,12 +55,12 @@ void cubos::core::data::deserialize<HumanSerDes>(Deserializer& des, HumanSerDes&
     obj.children.resize(des.beginArray());
     for (auto& child : obj.children)
     {
-        if (des.context().has<SerializationMap<HumanSerDes*, size_t>>())
+        if (des.context().has<SerializationMap<HumanSerDes*, std::size_t>>())
         {
-            auto& map = des.context().get<SerializationMap<HumanSerDes*, size_t>>();
+            auto& map = des.context().get<SerializationMap<HumanSerDes*, std::size_t>>();
             uint64_t id;
             des.read(id);
-            child = map.getRef(static_cast<size_t>(id));
+            child = map.getRef(static_cast<std::size_t>(id));
         }
         else
         {
@@ -141,8 +141,8 @@ TEST(Cubos_Memory_YAML_Serialization_And_Deserialization, With_Context)
     char buf[4096];
 
     {
-        auto map = SerializationMap<HumanSerDes*, size_t>();
-        for (size_t i = 0; i < src.size(); ++i)
+        auto map = SerializationMap<HumanSerDes*, std::size_t>();
+        for (std::size_t i = 0; i < src.size(); ++i)
         {
             map.add(&src[i], i);
         }
@@ -151,7 +151,7 @@ TEST(Cubos_Memory_YAML_Serialization_And_Deserialization, With_Context)
         auto* serializer = (Serializer*)new YAMLSerializer(stream);
         serializer->context().push(std::move(map));
         serializer->beginDictionary(src.size(), "humans");
-        for (size_t i = 0; i < src.size(); ++i)
+        for (std::size_t i = 0; i < src.size(); ++i)
         {
             serializer->write(static_cast<uint64_t>(i), nullptr);
             serializer->write(src[i], nullptr);
@@ -163,16 +163,16 @@ TEST(Cubos_Memory_YAML_Serialization_And_Deserialization, With_Context)
     {
         BufferStream stream(buf, sizeof(buf));
         auto* deserializer = (Deserializer*)new YAMLDeserializer(stream);
-        auto map = SerializationMap<HumanSerDes*, size_t>();
+        auto map = SerializationMap<HumanSerDes*, std::size_t>();
 
         dst.resize(deserializer->beginDictionary());
-        for (size_t i = 0; i < dst.size(); ++i)
+        for (std::size_t i = 0; i < dst.size(); ++i)
         {
             map.add(&dst[i], i);
         }
         deserializer->context().push(std::move(map));
 
-        for (size_t i = 0; i < dst.size(); ++i)
+        for (std::size_t i = 0; i < dst.size(); ++i)
         {
             uint64_t id;
             deserializer->read(id);

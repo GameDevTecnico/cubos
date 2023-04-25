@@ -33,9 +33,9 @@ namespace cubos::core::data
         virtual void readString(std::string& value) override;
         virtual void beginObject() override;
         virtual void endObject() override;
-        virtual size_t beginArray() override;
+        virtual std::size_t beginArray() override;
         virtual void endArray() override;
-        virtual size_t beginDictionary() override;
+        virtual std::size_t beginDictionary() override;
         virtual void endDictionary() override;
 
     private:

@@ -26,12 +26,12 @@ void cubos::core::data::deserialize<Human>(Deserializer& des, Human& obj)
     obj.children.resize(des.beginArray());
     for (auto& child : obj.children)
     {
-        if (des.context().has<SerializationMap<Human*, size_t>>())
+        if (des.context().has<SerializationMap<Human*, std::size_t>>())
         {
-            auto& map = des.context().get<SerializationMap<Human*, size_t>>();
+            auto& map = des.context().get<SerializationMap<Human*, std::size_t>>();
             uint64_t id;
             des.read(id);
-            child = map.getRef(static_cast<size_t>(id));
+            child = map.getRef(static_cast<std::size_t>(id));
         }
         else
         {
@@ -341,15 +341,15 @@ TEST(Cubos_Memory_YAML_Deserialization, Deserialize_Custom_With_Context)
     std::vector<Human> humans;
     humans.resize(deserializer->beginDictionary());
 
-    auto map = SerializationMap<Human*, size_t>();
-    for (size_t i = 0; i < humans.size(); ++i)
+    auto map = SerializationMap<Human*, std::size_t>();
+    for (std::size_t i = 0; i < humans.size(); ++i)
     {
         map.add(&humans[i], i);
     }
 
     deserializer->context().push(std::move(map));
 
-    for (size_t i = 0; i < humans.size(); ++i)
+    for (std::size_t i = 0; i < humans.size(); ++i)
     {
         uint64_t id;
         deserializer->read(id);
