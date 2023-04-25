@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <unordered_map>
 
 #include <cubos/core/gl/grid.hpp>
@@ -84,10 +85,7 @@ const glm::uvec3& Grid::getSize() const
 
 void Grid::clear()
 {
-    for (unsigned short& indice : this->indices)
-    {
-        indice = 0;
-    }
+    std::ranges::fill(this->indices, 0);
 }
 
 uint16_t Grid::get(const glm::ivec3& position) const
