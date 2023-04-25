@@ -254,6 +254,9 @@ namespace cubos::engine
         /// @param lock Locks the asset if true, otherwise assumes the asset is already locked.
         void invalidate(AnyAsset handle, bool lock);
 
+        /// Function run by the loader thread.
+        void loader();
+
         /// Bridges associated to their supported extensions.
         std::unordered_map<std::string, std::shared_ptr<AssetBridge>> bridges;
 

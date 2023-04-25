@@ -111,6 +111,7 @@ void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_refe
 
 // Implementation of serialize() for GLM types.
 // A macro is used to implement for each type without repeating code.
+// NOLINTBEGIN(bugprone-macro-parentheses)
 #define IMPL_SERIALIZE_GLM(T)                                                                                          \
     template <>                                                                                                        \
     void cubos::core::data::serialize<glm::tvec2<T>>(Serializer & ser, const glm::tvec2<T>& val, const char* name)     \
@@ -163,6 +164,7 @@ void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_refe
         ser.write(val[3], "3");                                                                                        \
         ser.endObject();                                                                                               \
     }
+// NOLINTEND(bugprone-macro-parentheses)
 
 IMPL_SERIALIZE_GLM(int8_t)
 IMPL_SERIALIZE_GLM(int16_t)
