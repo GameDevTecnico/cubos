@@ -12,7 +12,9 @@ Checks: "\
   readability-*,\
   -readability-magic-numbers,\
   -readability-function-cognitive-complexity,\
-  -readability-identifier-length"
+  -readability-identifier-length,\
+  performance-*,\
+  -performance-no-int-to-ptr"
 WarningsAsErrors: '*'
 FormatStyle: file
 CheckOptions:
