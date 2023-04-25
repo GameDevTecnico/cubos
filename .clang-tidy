@@ -8,14 +8,16 @@ Checks: "\
   bugprone-*,\
   -bugprone-unhandled-self-assignment,\
   -bugprone-easily-swappable-parameters,\
-  -bugprone-lambda-function-name"
+  -bugprone-lambda-function-name,\
+  readability-*,\
+  -readability-magic-numbers,\
+  -readability-function-cognitive-complexity,\
+  -readability-identifier-length"
 WarningsAsErrors: '*'
 FormatStyle: file
 CheckOptions:
-  - key: modernize-loop-convert.UseCxx20ReverseRanges
+  - key: 'modernize-loop-convert.UseCxx20ReverseRanges'
     value: false
-  - key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp
-    value: expr-type
   - key: 'bugprone-argument-comment.StrictMode'
     value: 'true'
   - key: 'bugprone-misplaced-widening-cast.CheckImplicitCasts'
@@ -24,6 +26,8 @@ CheckOptions:
     value: 'true'
   - key: 'bugprone-suspicious-string-compare.WarnOnLogicalNotComparison'
     value: 'true'
+  - key: 'readability-identifier-naming.TypeTemplateParameterIgnoredRegexp'
+    value: expr-type
   - key: 'readability-simplify-boolean-expr.ChainedConditionalReturn'
     value: 'true'
   - key: 'readability-simplify-boolean-expr.ChainedConditionalAssignment'
