@@ -87,12 +87,25 @@ namespace cubos::engine
     {
     public:
         using AnyAsset::AnyAsset;
-        using AnyAsset::operator=;
 
         /// @returns A generic handle to the same asset.
         inline AnyAsset toAny() const
         {
             return AnyAsset(*this);
+        }
+
+        /// @param other Handle to copy.
+        inline Asset<T>& operator=(const AnyAsset& other)
+        {
+            AnyAsset::operator=(other);
+            return *this;
+        }
+
+        /// @param other Handle to move.
+        inline Asset<T>& operator=(AnyAsset&& other) noexcept
+        {
+            AnyAsset::operator=(std::move(other));
+            return *this;
         }
     };
 
