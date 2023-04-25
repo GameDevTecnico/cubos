@@ -25,6 +25,7 @@ using namespace cubos::core::data;
         }                                                                                                              \
     } while (false)
 
+// NOLINTBEGIN(bugprone-macro-parentheses)
 #define READ_GENERIC(out, type, fromStr)                                                                               \
     CHECK_ERROR(do {                                                                                                   \
         if (this->frame.top().mode == Mode::Dictionary)                                                                \
@@ -47,6 +48,7 @@ using namespace cubos::core::data;
             this->frame.top().iter++;                                                                                  \
         }                                                                                                              \
     } while (false);)
+// NOLINTEND(bugprone-macro-parentheses)
 
 JSONDeserializer::JSONDeserializer(const std::string& src)
 {

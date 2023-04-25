@@ -254,7 +254,7 @@ void removeComments(std::string& line, bool& isComment)
             if (end != std::string::npos)
             {
                 line = line.substr(0, pos) + line.substr(end + 2);
-                continue;
+                break;
             }
             else
             {
