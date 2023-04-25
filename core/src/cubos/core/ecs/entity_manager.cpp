@@ -7,34 +7,34 @@ using namespace cubos::core::ecs;
 using namespace cubos::core::data;
 
 template <>
-void cubos::core::data::serialize<Entity>(Serializer& serializer, const Entity& entity, const char* name)
+void cubos::core::data::serialize<Entity>(Serializer& ser, const Entity& obj, const char* name)
 {
-    auto& map = serializer.context().get<SerializationMap<Entity, std::string>>();
+    auto& map = ser.context().get<SerializationMap<Entity, std::string>>();
 
-    if (entity.isNull())
+    if (obj.isNull())
     {
-        serializer.write("null", name);
+        ser.write("null", name);
     }
     else
     {
-        serializer.write(map.getId(entity), name);
+        ser.write(map.getId(obj), name);
     }
 }
 
 template <>
-void cubos::core::data::deserialize<Entity>(Deserializer& deserializer, Entity& entity)
+void cubos::core::data::deserialize<Entity>(Deserializer& des, Entity& obj)
 {
-    auto& map = deserializer.context().get<SerializationMap<Entity, std::string>>();
+    auto& map = des.context().get<SerializationMap<Entity, std::string>>();
 
     std::string name;
-    deserializer.read(name);
+    des.read(name);
     if (name == "null")
     {
-        entity = Entity();
+        obj = Entity();
     }
     else
     {
-        entity = map.getRef(name);
+        obj = map.getRef(name);
     }
 }
 
@@ -105,10 +105,8 @@ bool EntityManager::Iterator::operator==(const Iterator& other) const
     {
         return this->archetypeIt == this->manager.archetypes.end();
     }
-    else
-    {
-        return this->archetypeIt == other.archetypeIt && this->entityIt == other.entityIt;
-    }
+
+    return this->archetypeIt == other.archetypeIt && this->entityIt == other.entityIt;
 }
 
 bool EntityManager::Iterator::operator!=(const Iterator& other) const
@@ -191,10 +189,14 @@ void EntityManager::setMask(Entity entity, Entity::Mask mask)
     if (this->entities[entity.index].mask != mask)
     {
         if (this->entities[entity.index].mask.any() && this->entities[entity.index].mask.test(0))
+        {
             this->archetypes[this->entities[entity.index].mask].erase(entity.index);
+        }
         this->entities[entity.index].mask = mask;
         if (mask.any() && mask.test(0))
+        {
             this->archetypes[mask].insert(entity.index);
+        }
     }
 }
 

@@ -8,9 +8,10 @@ template <typename T>
 static inline T fromEndianness(T val, bool fromLittleEndian)
 {
     if (fromLittleEndian)
+    {
         return memory::fromLittleEndian(val);
-    else
-        return memory::fromBigEndian(val);
+    }
+    return memory::fromBigEndian(val);
 }
 
 BinaryDeserializer::BinaryDeserializer(memory::Stream& stream, bool readLittleEndian)

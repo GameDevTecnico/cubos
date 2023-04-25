@@ -4,7 +4,7 @@
 using namespace cubos::core;
 using namespace cubos::core::ecs;
 
-static const auto directMap = data::SerializationMap<Entity, std::string>(
+static const auto DirectMap = data::SerializationMap<Entity, std::string>(
     [](const Entity& entity, std::string& name) {
         name = std::to_string(entity.index) + "#" + std::to_string(entity.generation);
         return true;

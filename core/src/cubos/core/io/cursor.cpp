@@ -12,7 +12,9 @@ io::Cursor::Cursor(GLFWcursor* handle)
 io::Cursor::~Cursor()
 {
 #ifdef WITH_GLFW
-    if (this->glfwHandle)
+    if (this->glfwHandle != nullptr)
+    {
         glfwDestroyCursor(this->glfwHandle);
+    }
 #endif
 }

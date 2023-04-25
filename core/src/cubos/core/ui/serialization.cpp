@@ -333,7 +333,8 @@ static bool editStructured(data::Package& pkg, const std::string& name)
     {
         for (size_t i = 0; i < pkg.size(); ++i)
         {
-            bool shouldErase, shouldDuplicate;
+            bool shouldErase;
+            bool shouldDuplicate;
 
             ImGui::TableNextRow();
             ImGui::PushID(static_cast<int>(i));

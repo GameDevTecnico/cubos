@@ -40,7 +40,7 @@ TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Floats)
     {
         double x = static_cast<double>(static_cast<int64_t>(rand()) * static_cast<int64_t>(rand())) /
                    static_cast<double>(static_cast<int64_t>(rand()) * static_cast<int64_t>(rand())) *
-                   ((rand() % 2) ? -1.0 : 1.0);
+                   ((rand() % 2) != 0 ? -1.0 : 1.0);
         double y = 0.0;
 
         // Decimal places between 0 and 9

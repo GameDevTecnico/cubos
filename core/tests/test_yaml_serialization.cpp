@@ -21,28 +21,28 @@ struct Human
 };
 
 template <>
-void cubos::core::data::serialize<Human>(Serializer& s, const Human& human, const char* name)
+void cubos::core::data::serialize<Human>(Serializer& ser, const Human& obj, const char* name)
 {
-    s.beginObject(name);
-    s.write(human.name, "name");
-    s.write(human.age, "age");
-    s.write(human.weight, "weight");
-    s.write(human.dead, "dead");
-    s.beginArray(human.children.size(), "children");
-    for (auto& child : human.children)
+    ser.beginObject(name);
+    ser.write(obj.name, "name");
+    ser.write(obj.age, "age");
+    ser.write(obj.weight, "weight");
+    ser.write(obj.dead, "dead");
+    ser.beginArray(obj.children.size(), "children");
+    for (const auto& child : obj.children)
     {
-        if (s.context().has<SerializationMap<Human*, size_t>>())
+        if (ser.context().has<SerializationMap<Human*, size_t>>())
         {
-            auto& map = s.context().get<SerializationMap<Human*, size_t>>();
-            s.write(static_cast<uint64_t>(map.getId(child)), "child");
+            auto& map = ser.context().get<SerializationMap<Human*, size_t>>();
+            ser.write(static_cast<uint64_t>(map.getId(child)), "child");
         }
         else
         {
-            s.write(*child, "child");
+            ser.write(*child, "child");
         }
     }
-    s.endArray();
-    s.endObject();
+    ser.endArray();
+    ser.endObject();
 }
 
 TEST(Cubos_Memory_YAML_Serialization, Serialize_Primitives)
@@ -53,7 +53,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Primitives)
         auto serializer = YAMLSerializer(stream);
         serializer.write(static_cast<uint8_t>(1), "named_uint8");
         serializer.write(12, "named_integer");
-        serializer.write(0.5f, "named_float");
+        serializer.write(0.5F, "named_float");
         serializer.write(6.5, "named_double");
         serializer.write(true, "named_bool");
         serializer.write("string", "named_string");
@@ -80,7 +80,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Array)
     char buf[2048];
     auto stream = BufferStream(buf, sizeof(buf));
     {
-        auto serializer = (Serializer*)new YAMLSerializer(stream);
+        auto* serializer = (Serializer*)new YAMLSerializer(stream);
 
         std::vector<int64_t> vec = {1, 5, 8, 3};
         std::vector<std::vector<std::vector<int>>> vec3d = {{{1, 2}, {3, 4, 5}}, {{6, 7}, {8}}};
@@ -88,8 +88,10 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Array)
 
         serializer->write(vec, "vector");
         serializer->beginArray(3, "strings");
-        for (auto & str : strs)
+        for (auto& str : strs)
+        {
             serializer->write(str, nullptr);
+        }
         serializer->endArray();
         serializer->write(vec3d, "vector3d");
 
@@ -131,7 +133,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Dictionary)
     char buf[2048];
     auto stream = BufferStream(buf, sizeof(buf));
     {
-        auto serializer = (Serializer*)new YAMLSerializer(stream);
+        auto* serializer = (Serializer*)new YAMLSerializer(stream);
         const char* strs[] = {"one", "two", "three"};
 
         serializer->beginDictionary(3, "strings");
@@ -160,7 +162,7 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_GLM)
     char buf[2048];
     auto stream = BufferStream(buf, sizeof(buf));
     {
-        auto serializer = (Serializer*)new YAMLSerializer(stream);
+        auto* serializer = (Serializer*)new YAMLSerializer(stream);
         serializer->write(glm::vec2(1, 2), "fvec2");
         serializer->write(glm::vec3(1, 2, 3), "fvec3");
         serializer->write(glm::vec4(1, 2, 3, 4), "fvec4");
@@ -241,9 +243,11 @@ TEST(Cubos_Memory_YAML_Serialization, Serialize_Custom)
 
         auto map = SerializationMap<Human*, size_t>();
         for (size_t i = 0; i < humans.size(); ++i)
+        {
             map.add(&humans[i], i);
+        }
 
-        auto serializer = (Serializer*)new YAMLSerializer(stream);
+        auto* serializer = (Serializer*)new YAMLSerializer(stream);
         serializer->write(humans[0], "without_context");
         serializer->context().push(std::move(map));
         serializer->beginDictionary(humans.size(), "with_context");

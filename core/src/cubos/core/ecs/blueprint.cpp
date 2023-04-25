@@ -5,7 +5,7 @@ using namespace cubos::core::ecs;
 
 Blueprint::~Blueprint()
 {
-    for (auto& buffer : this->buffers)
+    for (const auto& buffer : this->buffers)
     {
         delete buffer.second;
     }
@@ -44,9 +44,9 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
     dst.push(dstMap);
 
     /// Then, merge the buffers.
-    for (auto& buffer : other.buffers)
+    for (const auto& buffer : other.buffers)
     {
-        auto ptr = this->buffers.at(buffer.first);
+        auto* ptr = this->buffers.at(buffer.first);
         IBuffer* buf;
         if (ptr == nullptr)
         {
@@ -65,7 +65,7 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
 void Blueprint::clear()
 {
     this->map.clear();
-    for (auto& buffer : this->buffers)
+    for (const auto& buffer : this->buffers)
     {
         delete buffer.second;
     }

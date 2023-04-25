@@ -14,7 +14,7 @@ using namespace cubos::engine::gl;
 #define CUBOS_CORE_GL_PPS_BLOOM_COMBINE_PASS 2
 
 /// The vertex shader of all steps.
-static const char* COMMON_VS = R"glsl(
+static const char* commonVs = R"glsl(
 #version 330 core
 
 in vec4 position;
@@ -30,7 +30,7 @@ void main(void)
 )glsl";
 
 /// The pixel shader of the extraction step.
-static const char* EXTRACTION_PS = R"glsl(
+static const char* extractionPs = R"glsl(
 #version 330 core
 
 #define LUMINANCE vec3(0.2126, 0.7152, 0.0722)
@@ -59,7 +59,7 @@ void main()
 /// to avoid code duplication and for better performance.
 ///
 /// Source: https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom
-static const char* BLOOM_PS = R"glsl(
+static const char* bloomPs = R"glsl(
 #version 330 core
 
 #define DOWNSCALE_PASS 0
@@ -108,7 +108,7 @@ void main(void)
 )glsl";
 
 pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size)
-    : BloomPass(renderDevice, size, 5, 1.0f, 0.5f, 1.0f)
+    : BloomPass(renderDevice, size, 5, 1.0F, 0.5F, 1.0F)
 {
 }
 
@@ -125,15 +125,15 @@ pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned 
 
     // Create the shader pipelines.
     /// Extraction
-    auto vs = this->renderDevice.createShaderStage(Stage::Vertex, COMMON_VS);
-    auto ps = this->renderDevice.createShaderStage(Stage::Pixel, EXTRACTION_PS);
+    auto vs = this->renderDevice.createShaderStage(Stage::Vertex, commonVs);
+    auto ps = this->renderDevice.createShaderStage(Stage::Pixel, extractionPs);
     this->extPipeline = this->renderDevice.createShaderPipeline(vs, ps);
     this->extInputTexBP = this->extPipeline->getBindingPoint("inputTex");
     this->extThresholdFilterBP = this->extPipeline->getBindingPoint("thresholdFilter");
 
     /// Dowscale
-    vs = this->renderDevice.createShaderStage(Stage::Vertex, COMMON_VS);
-    ps = this->renderDevice.createShaderStage(Stage::Pixel, BLOOM_PS);
+    vs = this->renderDevice.createShaderStage(Stage::Vertex, commonVs);
+    ps = this->renderDevice.createShaderStage(Stage::Pixel, bloomPs);
     this->bloomPipeline = this->renderDevice.createShaderPipeline(vs, ps);
     this->bloomInputTexBP = this->bloomPipeline->getBindingPoint("inputTex");
     this->bloomSrcTexBP = this->bloomPipeline->getBindingPoint("srcTex");
@@ -238,7 +238,7 @@ void pps::BloomPass::resize(glm::uvec2 size)
     generateTextures();
 }
 
-void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Framebuffer out) const
+void pps::BloomPass::execute(std::map<Input, Texture2D>& /*inputs*/, Texture2D prev, Framebuffer out) const
 {
     // Set the framebuffer and state.
     this->renderDevice.setViewport(0, 0, static_cast<int>(this->size.x), static_cast<int>(this->size.y));
@@ -254,7 +254,7 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Frameb
     filter.x = threshold;
     filter.y = filter.x - knee;
     filter.z = 2 * knee;
-    filter.w = 0.25f / (knee + 0.00001f);
+    filter.w = 0.25F / (knee + 0.00001F);
 
     // Extraction pipeline, used to extract bright areas
     this->renderDevice.setFramebuffer(extFB);
@@ -272,23 +272,23 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Frameb
 
     // Downscale textures
     this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_DOWNSCALE_PASS);
-    float scaling = 2.0f;
+    float scaling = 2.0F;
     for (unsigned int i = 0; i < iterations; i++)
     {
         this->bloomScalingBP->setConstant(scaling);
         this->renderDevice.setFramebuffer(bloomFBs[i]);
         this->renderDevice.drawTriangles(0, 6);
         this->bloomInputTexBP->bind(bloomTexBuffer[i]);
-        scaling *= 2.0f;
+        scaling *= 2.0F;
     }
 
     // Upscale textures additively
-    scaling /= 2.0f;
+    scaling /= 2.0F;
     this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_UPSCALE_PASS);
     this->renderDevice.setBlendState(this->blendState);
     for (int i = static_cast<int>(iterations) - 2; i >= 0; i--)
     {
-        scaling /= 2.0f;
+        scaling /= 2.0F;
         this->bloomScalingBP->setConstant(scaling);
         this->renderDevice.setFramebuffer(bloomFBs[static_cast<size_t>(i)]);
         this->renderDevice.drawTriangles(0, 6);
@@ -296,8 +296,8 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>&, Texture2D prev, Frameb
     }
 
     // Combine the final bloom effect with source texture
-    scaling /= 2.0f;
-    float linIntensity = powf(this->intensity, 1.0f / 2.2f); // Converts from gamma to linear space
+    scaling /= 2.0F;
+    float linIntensity = powf(this->intensity, 1.0F / 2.2F); // Converts from gamma to linear space
 
     this->bloomScalingBP->setConstant(scaling);
     this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_COMBINE_PASS);

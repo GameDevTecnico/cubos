@@ -215,11 +215,9 @@ bool Assets::saveMeta(AnyAsset handle) const
         serializer.write(*meta, nullptr);
         return true;
     }
-    else
-    {
-        CUBOS_ERROR("Could not save asset: assets without paths cannot be saved");
-        return false;
-    }
+
+    CUBOS_ERROR("Could not save asset: assets without paths cannot be saved");
+    return false;
 }
 
 bool Assets::save(AnyAsset handle) const
@@ -439,11 +437,9 @@ std::shared_lock<std::shared_mutex> Assets::lockRead(AnyAsset handle) const
     {
         return std::shared_lock(entry->mutex);
     }
-    else
-    {
-        CUBOS_CRITICAL("Couldn't lock asset for reading");
-        abort();
-    }
+
+    CUBOS_CRITICAL("Couldn't lock asset for reading");
+    abort();
 }
 
 std::unique_lock<std::shared_mutex> Assets::lockWrite(AnyAsset handle) const
@@ -452,11 +448,9 @@ std::unique_lock<std::shared_mutex> Assets::lockWrite(AnyAsset handle) const
     {
         return std::unique_lock(entry->mutex);
     }
-    else
-    {
-        CUBOS_CRITICAL("Couldn't lock asset for writing");
-        abort();
-    }
+
+    CUBOS_CRITICAL("Couldn't lock asset for writing");
+    abort();
 }
 
 std::shared_ptr<Assets::Entry> Assets::entry(AnyAsset handle) const
@@ -537,7 +531,7 @@ std::shared_ptr<AssetBridge> Assets::bridge(AnyAsset handle) const
         // Get the bridge which has the best match for this asset.
         std::shared_ptr<AssetBridge> best = nullptr;
         size_t bestLen = 0;
-        for (auto& bridge : this->bridges)
+        for (const auto& bridge : this->bridges)
         {
             if (path->ends_with(bridge.first) && bridge.first.length() > bestLen)
             {
@@ -553,11 +547,9 @@ std::shared_ptr<AssetBridge> Assets::bridge(AnyAsset handle) const
 
         return best;
     }
-    else
-    {
-        CUBOS_ERROR("Cannot find a bridge for asset {}: asset does not have a path", core::data::Debug(handle));
-        return nullptr;
-    }
+
+    CUBOS_ERROR("Cannot find a bridge for asset {}: asset does not have a path", core::data::Debug(handle));
+    return nullptr;
 }
 
 void Assets::loader()

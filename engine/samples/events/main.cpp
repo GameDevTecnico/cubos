@@ -22,8 +22,10 @@ int main()
     cubos.startupSystem([](cubos::engine::ShouldQuit& quit) { quit.value = false; });
     cubos
         .system([](ecs::EventReader<MyEvent> reader) {
-            for (auto& event : reader)
+            for (const auto& event : reader)
+            {
                 CUBOS_INFO("A read {}", event.value);
+            }
         })
         .tagged("A")
         .beforeTag("B");
@@ -49,15 +51,19 @@ int main()
         .tagged("B");
     cubos
         .system([](ecs::EventReader<MyEvent> reader) {
-            for (auto& event : reader)
+            for (const auto& event : reader)
+            {
                 CUBOS_INFO("C read {}", event.value);
+            }
         })
         .tagged("C")
         .afterTag("B");
     cubos
         .system([](ecs::EventReader<MyEvent> reader) {
-            for (auto& event : reader)
+            for (const auto& event : reader)
+            {
                 CUBOS_INFO("D read {}", event.value);
+            }
         })
         .tagged("D")
         .afterTag("C");
