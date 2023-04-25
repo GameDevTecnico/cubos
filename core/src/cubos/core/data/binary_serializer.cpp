@@ -103,7 +103,7 @@ void BinarySerializer::endObject()
     // Do nothing.
 }
 
-void BinarySerializer::beginArray(size_t length, const char* name)
+void BinarySerializer::beginArray(std::size_t length, const char* name)
 {
     this->writeU64(static_cast<uint64_t>(length), name);
 }
@@ -113,7 +113,7 @@ void BinarySerializer::endArray()
     // Do nothing.
 }
 
-void BinarySerializer::beginDictionary(size_t length, const char* name)
+void BinarySerializer::beginDictionary(std::size_t length, const char* name)
 {
     this->writeU64(static_cast<uint64_t>(length), name);
 }

@@ -532,7 +532,7 @@ std::shared_ptr<AssetBridge> Assets::bridge(const AnyAsset& handle) const
 
         // Get the bridge which has the best match for this asset.
         std::shared_ptr<AssetBridge> best = nullptr;
-        size_t bestLen = 0;
+        std::size_t bestLen = 0;
         for (const auto& bridge : this->bridges)
         {
             if (path->ends_with(bridge.first) && bridge.first.length() > bestLen)

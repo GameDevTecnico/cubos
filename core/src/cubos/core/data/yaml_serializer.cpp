@@ -133,7 +133,7 @@ void YAMLSerializer::endObject()
     }
 }
 
-void YAMLSerializer::beginArray(size_t /*length*/, const char* name)
+void YAMLSerializer::beginArray(std::size_t /*length*/, const char* name)
 {
     if (mode.top() == Mode::Object)
     {
@@ -160,7 +160,7 @@ void YAMLSerializer::endArray()
     }
 }
 
-void YAMLSerializer::beginDictionary(size_t /*length*/, const char* name)
+void YAMLSerializer::beginDictionary(std::size_t /*length*/, const char* name)
 {
     if (mode.top() == Mode::Object)
     {

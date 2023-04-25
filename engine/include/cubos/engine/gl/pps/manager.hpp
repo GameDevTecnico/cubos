@@ -48,11 +48,11 @@ namespace cubos::engine::gl::pps
         /// @tparam T The type of the pass to add.
         /// @return The ID of the pass.
         template <typename T>
-        size_t addPass();
+        std::size_t addPass();
 
         /// Removes a pass from the manager.
         /// @param id The ID of the pass.
-        void removePass(size_t id);
+        void removePass(std::size_t id);
 
         /// Applies all post processing passes sequentially, and outputs the result to the screen.
         /// The lighting input must have been provided before calling this function, since it acts as the input for the
@@ -61,14 +61,14 @@ namespace cubos::engine::gl::pps
 
         /// Gets the number of passes in the manager.
         /// @return The number of passes.
-        size_t passCount() const;
+        std::size_t passCount() const;
 
     private:
         core::gl::RenderDevice& renderDevice;        ///< The render device to use.
         glm::uvec2 size;                             ///< The current size of the window.
         std::map<Input, core::gl::Texture2D> inputs; ///< The inputs provided to the passes.
-        std::map<size_t, Pass*> passes;              ///< The passes present in the manager.
-        size_t nextId;                               ///< The next ID to use for a pass.
+        std::map<std::size_t, Pass*> passes;              ///< The passes present in the manager.
+        std::size_t nextId;                               ///< The next ID to use for a pass.
         core::gl::Texture2D intermediateTex[2];      ///< Intermediate textures used for the passes.
         core::gl::Framebuffer intermediateFb[2];     ///< Intermediate framebuffers used for the passes.
     };
@@ -76,9 +76,9 @@ namespace cubos::engine::gl::pps
     // Implementation.
 
     template <typename T>
-    size_t Manager::addPass()
+    std::size_t Manager::addPass()
     {
-        size_t id = this->nextId++;
+        std::size_t id = this->nextId++;
         this->passes[id] = new T(this->renderDevice, this->size);
         return id;
     }

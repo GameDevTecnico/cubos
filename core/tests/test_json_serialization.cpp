@@ -108,7 +108,7 @@ TEST(Cubos_Memory_JSON_Serialization, Serialize_Dictionary)
         const char* strs[] = {"one", "two", "three"};
 
         serializer.beginDictionary(3, "strings");
-        for (size_t i = 0; i < 3; ++i)
+        for (std::size_t i = 0; i < 3; ++i)
         {
             serializer.write(static_cast<uint64_t>(i), nullptr);
             serializer.write(strs[i], nullptr);

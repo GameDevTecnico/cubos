@@ -20,7 +20,7 @@ static const auto DirectMap = data::SerializationMap<Entity, std::string>(
         return false;
     });
 
-World::World(size_t initialCapacity)
+World::World(std::size_t initialCapacity)
     : entityManager(initialCapacity)
 {
     // Do nothing.
@@ -39,7 +39,7 @@ data::Package World::pack(Entity entity, data::Context& context) const
     Entity::Mask mask = this->entityManager.getMask(entity);
 
     auto pkg = data::Package(data::Package::Type::Object);
-    for (size_t i = 1; i < mask.size(); ++i)
+    for (std::size_t i = 1; i < mask.size(); ++i)
     {
         if (mask.test(i))
         {

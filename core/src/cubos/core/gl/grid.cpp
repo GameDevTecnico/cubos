@@ -20,7 +20,7 @@ Grid::Grid(const glm::uvec3& size)
         this->size = size;
     }
     this->indices.resize(
-        static_cast<size_t>(this->size.x) * static_cast<size_t>(this->size.y) * static_cast<size_t>(this->size.z), 0);
+        static_cast<std::size_t>(this->size.x) * static_cast<std::size_t>(this->size.y) * static_cast<std::size_t>(this->size.z), 0);
 }
 
 Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
@@ -31,7 +31,7 @@ Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
                    size.y, size.z);
         this->size = {1, 1, 1};
     }
-    else if (indices.size() != static_cast<size_t>(size.x) * static_cast<size_t>(size.y) * static_cast<size_t>(size.z))
+    else if (indices.size() != static_cast<std::size_t>(size.x) * static_cast<std::size_t>(size.y) * static_cast<std::size_t>(size.z))
     {
         CUBOS_WARN("Grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.", size.x, size.y, size.z,
                    indices.size());
@@ -75,7 +75,7 @@ void Grid::setSize(const glm::uvec3& size)
     this->size = size;
     this->indices.clear();
     this->indices.resize(
-        static_cast<size_t>(this->size.x) * static_cast<size_t>(this->size.y) * static_cast<size_t>(this->size.z), 0);
+        static_cast<std::size_t>(this->size.x) * static_cast<std::size_t>(this->size.y) * static_cast<std::size_t>(this->size.z), 0);
 }
 
 const glm::uvec3& Grid::getSize() const
@@ -94,7 +94,7 @@ uint16_t Grid::get(const glm::ivec3& position) const
     assert(position.y >= 0 && position.y < static_cast<int>(this->size.y));
     assert(position.z >= 0 && position.z < static_cast<int>(this->size.z));
     auto index = position.x + position.y * static_cast<int>(size.x) + position.z * static_cast<int>(size.x * size.y);
-    return this->indices[static_cast<size_t>(index)];
+    return this->indices[static_cast<std::size_t>(index)];
 }
 
 void Grid::set(const glm::ivec3& position, uint16_t mat)
@@ -103,7 +103,7 @@ void Grid::set(const glm::ivec3& position, uint16_t mat)
     assert(position.y >= 0 && position.y < static_cast<int>(this->size.y));
     assert(position.z >= 0 && position.z < static_cast<int>(this->size.z));
     auto index = position.x + position.y * static_cast<int>(size.x) + position.z * static_cast<int>(size.x * size.y);
-    this->indices[static_cast<size_t>(index)] = mat;
+    this->indices[static_cast<std::size_t>(index)] = mat;
 }
 
 bool Grid::convert(const Palette& src, const Palette& dst, float minSimilarity)

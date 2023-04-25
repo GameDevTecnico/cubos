@@ -31,7 +31,7 @@ public:
         alDeleteBuffers(1, &this->id);
     }
 
-    virtual void fill(Format format, size_t size, const void* data, size_t frequency) override
+    virtual void fill(Format format, std::size_t size, const void* data, std::size_t frequency) override
     {
         ALenum alFormat = 0;
 

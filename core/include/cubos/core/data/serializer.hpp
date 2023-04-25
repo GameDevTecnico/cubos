@@ -141,7 +141,7 @@ namespace cubos::core::data
         /// Indicates that a array is currently being serialized.
         /// @param length The length of the array.
         /// @param name The name of the array (optional).
-        virtual void beginArray(size_t length, const char* name) = 0;
+        virtual void beginArray(std::size_t length, const char* name) = 0;
 
         /// Indicates that a array is no longer being serialized.
         virtual void endArray() = 0;
@@ -149,7 +149,7 @@ namespace cubos::core::data
         /// Indicates that a dictionary is currently being serialized.
         /// @param length The length of the dictionary.
         /// @param name The name of the dictionary (optional).
-        virtual void beginDictionary(size_t length, const char* name) = 0;
+        virtual void beginDictionary(std::size_t length, const char* name) = 0;
 
         /// Indicates that a dictionary is no longer being serialized.
         virtual void endDictionary() = 0;
@@ -204,7 +204,7 @@ namespace cubos::core::data
     /// @param ser The serializer.
     /// @param str The string to serialize.
     /// @param name The name of the string (optional).
-    template <size_t N>
+    template <std::size_t N>
     inline void serialize(Serializer& ser, char const (&str)[N], const char* name)
     {
         ser.writeString(str, name);

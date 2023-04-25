@@ -27,7 +27,7 @@ struct ImGuiData
     gl::VertexArray va;
     gl::VertexBuffer vb;
     gl::IndexBuffer ib;
-    size_t vbSize, ibSize;
+    std::size_t vbSize, ibSize;
 
     gl::ShaderBindingPoint textureBP;
     gl::ShaderBindingPoint cbBP;
@@ -251,8 +251,8 @@ void main()
     // Upload texture to GPU.
     gl::Texture2DDesc desc;
     desc.data[0] = pixels;
-    desc.width = static_cast<size_t>(width);
-    desc.height = static_cast<size_t>(height);
+    desc.width = static_cast<std::size_t>(width);
+    desc.height = static_cast<std::size_t>(height);
     desc.mipLevelCount = 1;
     desc.format = gl::TextureFormat::RGBA8UNorm;
     desc.usage = gl::Usage::Static;
@@ -379,7 +379,7 @@ void ui::beginFrame()
         else
         {
             // Show OS mouse cursor.
-            bd->window->setCursor(bd->cursors[static_cast<size_t>(imguiCursor)]);
+            bd->window->setCursor(bd->cursors[static_cast<std::size_t>(imguiCursor)]);
             bd->window->setMouseState(io::MouseState::Default);
         }
     }
@@ -421,9 +421,9 @@ void ui::endFrame(const gl::Framebuffer& target)
         const auto* cmdList = drawData->CmdLists[n];
 
         // Create and grow vertex buffer if needed.
-        if (!bd->vb || bd->vbSize < static_cast<size_t>(cmdList->VtxBuffer.Size))
+        if (!bd->vb || bd->vbSize < static_cast<std::size_t>(cmdList->VtxBuffer.Size))
         {
-            bd->vbSize = static_cast<size_t>(cmdList->VtxBuffer.Size) + 5000;
+            bd->vbSize = static_cast<std::size_t>(cmdList->VtxBuffer.Size) + 5000;
             bd->vb = rd.createVertexBuffer(bd->vbSize * sizeof(ImDrawVert), nullptr, gl::Usage::Dynamic);
 
             // Create the vertex array.
@@ -453,9 +453,9 @@ void ui::endFrame(const gl::Framebuffer& target)
         }
 
         // Create and grow index buffer if needed.
-        if (!bd->ib || bd->ibSize < static_cast<size_t>(cmdList->IdxBuffer.Size))
+        if (!bd->ib || bd->ibSize < static_cast<std::size_t>(cmdList->IdxBuffer.Size))
         {
-            bd->ibSize = static_cast<size_t>(cmdList->IdxBuffer.Size) + 10000;
+            bd->ibSize = static_cast<std::size_t>(cmdList->IdxBuffer.Size) + 10000;
             bd->ib = rd.createIndexBuffer(bd->ibSize * sizeof(ImDrawIdx), nullptr,
                                           sizeof(ImDrawIdx) == 2 ? gl::IndexFormat::UShort : gl::IndexFormat::UInt,
                                           gl::Usage::Dynamic);
@@ -464,8 +464,8 @@ void ui::endFrame(const gl::Framebuffer& target)
         // Upload vertex and index data into vertex buffer.
         auto* vtxDst = (ImDrawVert*)bd->vb->map();
         auto* idxDst = (ImDrawIdx*)bd->ib->map();
-        memcpy(vtxDst, cmdList->VtxBuffer.Data, static_cast<size_t>(cmdList->VtxBuffer.Size) * sizeof(ImDrawVert));
-        memcpy(idxDst, cmdList->IdxBuffer.Data, static_cast<size_t>(cmdList->IdxBuffer.Size) * sizeof(ImDrawIdx));
+        memcpy(vtxDst, cmdList->VtxBuffer.Data, static_cast<std::size_t>(cmdList->VtxBuffer.Size) * sizeof(ImDrawVert));
+        memcpy(idxDst, cmdList->IdxBuffer.Data, static_cast<std::size_t>(cmdList->IdxBuffer.Size) * sizeof(ImDrawIdx));
         bd->vb->unmap();
         bd->ib->unmap();
 

@@ -25,12 +25,12 @@ void ComponentManager::registerComponent(std::type_index type)
     }
 }
 
-size_t ComponentManager::getIDFromIndex(std::type_index type) const
+std::size_t ComponentManager::getIDFromIndex(std::type_index type) const
 {
     return this->typeToIds.at(type);
 }
 
-std::type_index ComponentManager::getType(size_t id) const
+std::type_index ComponentManager::getType(std::size_t id) const
 {
     for (const auto& pair : this->typeToIds)
     {
@@ -44,7 +44,7 @@ std::type_index ComponentManager::getType(size_t id) const
     abort();
 }
 
-void ComponentManager::remove(uint32_t id, size_t componentId)
+void ComponentManager::remove(uint32_t id, std::size_t componentId)
 {
     this->entries[componentId - 1].storage->erase(id);
 }
@@ -63,12 +63,12 @@ ComponentManager::Entry::Entry(std::unique_ptr<IStorage> storage)
     this->mutex = std::make_unique<std::shared_mutex>();
 }
 
-data::Package ComponentManager::pack(uint32_t id, size_t componentId, data::Context& context) const
+data::Package ComponentManager::pack(uint32_t id, std::size_t componentId, data::Context& context) const
 {
     return this->entries[componentId - 1].storage->pack(id, context);
 }
 
-bool ComponentManager::unpack(uint32_t id, size_t componentId, const data::Package& package, data::Context& context)
+bool ComponentManager::unpack(uint32_t id, std::size_t componentId, const data::Package& package, data::Context& context)
 {
     return this->entries[componentId - 1].storage->unpack(id, package, context);
 }

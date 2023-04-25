@@ -81,18 +81,18 @@ namespace cubos::core::ecs
         /// Gets the ID of the component type.
         /// @param type The type of the component.
         /// @returns The ID of the component type.
-        size_t getIDFromIndex(std::type_index type) const;
+        std::size_t getIDFromIndex(std::type_index type) const;
 
         /// Gets the ID of the component type.
         /// @tparam T The type of the component.
         /// @returns The ID of the component type.
         template <typename T>
-        size_t getID() const;
+        std::size_t getID() const;
 
         /// Gets the type of the component.
         /// @param id The ID of the component type.
         /// @returns The type of the component.
-        std::type_index getType(size_t id) const;
+        std::type_index getType(std::size_t id) const;
 
         /// Gets the storage of the component type.
         /// @tparam T The type of the component.
@@ -122,7 +122,7 @@ namespace cubos::core::ecs
         /// Removes a component from an entity.
         /// @param id The ID of the entity.
         /// @param componentId The ID of the component.
-        void remove(uint32_t id, size_t componentId);
+        void remove(uint32_t id, std::size_t componentId);
 
         /// Removes all components from an entity.
         /// @param id The ID of the entity.
@@ -133,7 +133,7 @@ namespace cubos::core::ecs
         /// @param componentId Component ID.
         /// @param context Context to use for serialization.
         /// @returns A package containing the component entity.
-        data::Package pack(uint32_t id, size_t componentId, data::Context& context) const;
+        data::Package pack(uint32_t id, std::size_t componentId, data::Context& context) const;
 
         /// @brief Inserts a component into an entity, by unpacking a package.
         /// @param id Entity ID.
@@ -141,7 +141,7 @@ namespace cubos::core::ecs
         /// @param package Package to unpack.
         /// @param context Context to use for deserialization.
         /// @returns True if the package was unpacked successfully, false otherwise.
-        bool unpack(uint32_t id, size_t componentId, const data::Package& package, data::Context& context);
+        bool unpack(uint32_t id, std::size_t componentId, const data::Package& package, data::Context& context);
 
     private:
         struct Entry
@@ -153,7 +153,7 @@ namespace cubos::core::ecs
         };
 
         /// Maps component types to component IDs.
-        std::unordered_map<std::type_index, size_t> typeToIds;
+        std::unordered_map<std::type_index, std::size_t> typeToIds;
 
         std::vector<Entry> entries; ///< The registered component storages.
     };
@@ -217,7 +217,7 @@ namespace cubos::core::ecs
     }
 
     template <typename T>
-    size_t ComponentManager::getID() const
+    std::size_t ComponentManager::getID() const
     {
         return this->getIDFromIndex(typeid(T));
     }
@@ -225,7 +225,7 @@ namespace cubos::core::ecs
     template <typename T>
     ReadStorage<T> ComponentManager::read() const
     {
-        const size_t id = this->getID<T>();
+        const std::size_t id = this->getID<T>();
         return ReadStorage<T>(*static_cast<const Storage<T>*>(this->entries[id - 1].storage.get()),
                               std::shared_lock<std::shared_mutex>(*this->entries[id - 1].mutex));
     }
@@ -233,7 +233,7 @@ namespace cubos::core::ecs
     template <typename T>
     WriteStorage<T> ComponentManager::write() const
     {
-        const size_t id = this->getID<T>();
+        const std::size_t id = this->getID<T>();
         return WriteStorage<T>(*static_cast<Storage<T>*>(this->entries[id - 1].storage.get()),
                                std::unique_lock<std::shared_mutex>(*this->entries[id - 1].mutex));
     }
@@ -241,7 +241,7 @@ namespace cubos::core::ecs
     template <typename T>
     void ComponentManager::add(uint32_t entityId, T value)
     {
-        const size_t id = this->getID<T>();
+        const std::size_t id = this->getID<T>();
         auto storage = static_cast<Storage<T>*>(this->entries[id - 1].storage.get());
         storage->insert(entityId, std::move(value));
     }
@@ -249,7 +249,7 @@ namespace cubos::core::ecs
     template <typename T>
     void ComponentManager::remove(uint32_t entityId)
     {
-        const size_t id = this->getID<T>();
+        const std::size_t id = this->getID<T>();
         auto storage = static_cast<Storage<T>*>(this->entries[id - 1].storage.get());
         storage->erase(entityId);
     }

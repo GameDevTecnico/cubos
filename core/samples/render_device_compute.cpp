@@ -85,8 +85,8 @@ int main()
         auto size = window->getFramebufferSize();
         gl::Texture2DDesc textureDesc;
         textureDesc.format = gl::TextureFormat::RGBA32Float;
-        textureDesc.width = static_cast<size_t>(size.x);
-        textureDesc.height = static_cast<size_t>(size.y);
+        textureDesc.width = static_cast<std::size_t>(size.x);
+        textureDesc.height = static_cast<std::size_t>(size.y);
         auto texture = renderDevice.createTexture2D(textureDesc);
 
         gl::SamplerDesc samplerDesc;
@@ -118,8 +118,8 @@ int main()
         {
             renderDevice.setShaderPipeline(computePp);
             computeTextureBP->bind(texture, 0, gl::Access::Write);
-            renderDevice.dispatchCompute((static_cast<size_t>(size.x) + 15) / 16,
-                                         (static_cast<size_t>(size.y) + 15) / 16, 1);
+            renderDevice.dispatchCompute((static_cast<std::size_t>(size.x) + 15) / 16,
+                                         (static_cast<std::size_t>(size.y) + 15) / 16, 1);
 
             renderDevice.memoryBarrier(gl::MemoryBarriers::TextureAccess);
 

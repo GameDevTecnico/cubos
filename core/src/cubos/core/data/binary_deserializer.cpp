@@ -99,7 +99,7 @@ void BinaryDeserializer::endObject()
     // Do nothing.
 }
 
-size_t BinaryDeserializer::beginArray()
+std::size_t BinaryDeserializer::beginArray()
 {
     uint64_t size;
     this->readU64(size);
@@ -111,7 +111,7 @@ void BinaryDeserializer::endArray()
     // Do nothing.
 }
 
-size_t BinaryDeserializer::beginDictionary()
+std::size_t BinaryDeserializer::beginDictionary()
 {
     uint64_t size;
     this->readU64(size);
