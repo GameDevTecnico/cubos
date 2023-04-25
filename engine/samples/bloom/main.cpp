@@ -8,9 +8,9 @@
 #include <cubos/core/io/window.hpp>
 #include <cubos/core/log.hpp>
 
-#include <cubos/engine/gl/deferred/renderer.hpp>
-#include <cubos/engine/gl/frame.hpp>
-#include <cubos/engine/gl/pps/bloom.hpp>
+#include <cubos/engine/renderer/deferred/renderer.hpp>
+#include <cubos/engine/renderer/frame.hpp>
+#include <cubos/engine/renderer/pps/bloom.hpp>
 
 using namespace cubos;
 

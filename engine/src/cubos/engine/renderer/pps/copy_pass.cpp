@@ -1,6 +1,6 @@
 #include <cubos/core/gl/util.hpp>
 
-#include <cubos/engine/gl/pps/copy_pass.hpp>
+#include <cubos/engine/renderer/pps/copy_pass.hpp>
 
 using namespace cubos::core::gl;
 using namespace cubos::engine::gl;

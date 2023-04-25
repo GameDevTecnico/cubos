@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include <cubos/engine/gl/renderer.hpp>
+#include <cubos/engine/renderer/renderer.hpp>
 
 namespace cubos::engine::gl
 {
