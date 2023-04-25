@@ -11,6 +11,7 @@ YAMLDeserializer::YAMLDeserializer(memory::Stream& stream)
     this->frame.push({Mode::Object, this->document.begin(), false});
 }
 
+// NOLINTBEGIN(bugprone-macro-parentheses)
 #define READ_PRIMITIVE(T, value)                                                                                       \
     do                                                                                                                 \
     {                                                                                                                  \
@@ -28,6 +29,7 @@ YAMLDeserializer::YAMLDeserializer(memory::Stream& stream)
         else                                                                                                           \
             value = iter->as<T>(T());                                                                                  \
     } while (false)
+// NOLINTEND(bugprone-macro-parentheses)
 
 void YAMLDeserializer::readI8(int8_t& value)
 {

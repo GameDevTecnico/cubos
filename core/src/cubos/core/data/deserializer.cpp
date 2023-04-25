@@ -105,6 +105,7 @@ void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::refere
 
 // Implementation of deserialize() for GLM types.
 // A macro is used to implement for each type without repeating code.
+// NOLINTBEGIN(bugprone-macro-parentheses)
 #define IMPL_DESERIALIZE_GLM(T)                                                                                        \
     template <>                                                                                                        \
     void cubos::core::data::deserialize<glm::tvec2<T>>(Deserializer & des, glm::tvec2<T> & val)                        \
@@ -157,6 +158,7 @@ void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::refere
         des.read(val[3]);                                                                                              \
         des.endObject();                                                                                               \
     }
+// NOLINTEND(bugprone-macro-parentheses)
 
 IMPL_DESERIALIZE_GLM(int8_t)
 IMPL_DESERIALIZE_GLM(int16_t)
