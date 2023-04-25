@@ -29,9 +29,9 @@ void Debug::DebugDrawObject::clear()
 void Debug::initCube()
 {
     float verts[] = {// front
-                     -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, 0.5f,
+                     -0.5F, -0.5F, 0.5F, 0.5F, -0.5F, 0.5F, 0.5F, 0.5F, 0.5F, -0.5F, 0.5F, 0.5F,
                      // back
-                     -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f};
+                     -0.5F, -0.5F, -0.5F, 0.5F, -0.5F, -0.5F, 0.5F, 0.5F, -0.5F, -0.5F, 0.5F, -0.5F};
 
     auto vb = renderDevice->createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
 
@@ -71,15 +71,19 @@ void Debug::initSphere()
 
     std::vector<float> vertices;
 
-    float x, y, z, xz;
+    float x;
+    float y;
+    float z;
+    float xz;
 
     auto sectorStep = (float)(2 * glm::pi<float>() / static_cast<float>(sectorCount));
     auto stackStep = (float)(glm::pi<float>() / static_cast<float>(stackCount));
-    float sectorAngle, stackAngle;
+    float sectorAngle;
+    float stackAngle;
 
     for (unsigned int i = 0; i <= stackCount; ++i)
     {
-        stackAngle = glm::pi<float>() / 2.0f - static_cast<float>(i) * stackStep;
+        stackAngle = glm::pi<float>() / 2.0F - static_cast<float>(i) * stackStep;
         xz = glm::cos(stackAngle);
         y = glm::sin(stackAngle);
 
@@ -95,10 +99,11 @@ void Debug::initSphere()
         }
     }
 
-    auto vb = renderDevice->createVertexBuffer(vertices.size() * sizeof(float), &vertices[0], gl::Usage::Static);
+    auto vb = renderDevice->createVertexBuffer(vertices.size() * sizeof(float), vertices.data(), gl::Usage::Static);
 
     std::vector<unsigned int> indices;
-    unsigned int k1, k2;
+    unsigned int k1;
+    unsigned int k2;
     for (unsigned int i = 0; i < stackCount; ++i)
     {
         k1 = i * (sectorCount + 1);
@@ -123,7 +128,7 @@ void Debug::initSphere()
     }
 
     objSphere.numIndices = (unsigned int)indices.size();
-    objSphere.ib = renderDevice->createIndexBuffer(indices.size() * sizeof(unsigned int), &indices[0],
+    objSphere.ib = renderDevice->createIndexBuffer(indices.size() * sizeof(unsigned int), indices.data(),
                                                    gl::IndexFormat::UInt, gl::Usage::Static);
 
     gl::VertexArrayDesc vaDesc;
@@ -244,7 +249,9 @@ void Debug::flush(glm::mat4 vp, double deltaT)
 
         auto current = it++;
         if (current->timeLeft <= 0)
+        {
             requests.erase(current);
+        }
     }
     debugDrawMutex.unlock();
 }

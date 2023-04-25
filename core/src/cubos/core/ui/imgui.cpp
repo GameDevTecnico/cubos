@@ -159,20 +159,20 @@ static int keyToImGuiKey(io::Key key)
 
 static void setClipboardText(void* userData, const char* text)
 {
-    auto bd = static_cast<ImGuiData*>(userData);
+    auto* bd = static_cast<ImGuiData*>(userData);
     bd->window->setClipboard(text);
 }
 
 static const char* getClipboardText(void* userData)
 {
-    auto bd = static_cast<ImGuiData*>(userData);
+    auto* bd = static_cast<ImGuiData*>(userData);
     return bd->window->getClipboard();
 }
 
 static void createDeviceObjects()
 {
     auto& io = ImGui::GetIO();
-    auto bd = (ImGuiData*)io.BackendPlatformUserData;
+    auto* bd = (ImGuiData*)io.BackendPlatformUserData;
     auto& rd = bd->window->getRenderDevice();
 
     // Setup render states.
@@ -243,7 +243,8 @@ void main()
 
     // Build texture atlas.
     unsigned char* pixels;
-    int width, height;
+    int width;
+    int height;
     io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);
 
     // Upload texture to GPU.
@@ -285,7 +286,7 @@ void ui::initialize(io::Window window)
     }
 
     // Setup back-end capabilities flags
-    auto bd = IM_NEW(ImGuiData)();
+    auto* bd = IM_NEW(ImGuiData)();
     bd->window = window;
     io.BackendPlatformUserData = (void*)bd;
     io.BackendPlatformName = "imgui_impl_cubos";
@@ -326,7 +327,7 @@ void ui::terminate()
 {
     auto& io = ImGui::GetIO();
     IM_ASSERT(io.BackendPlatformUserData != nullptr);
-    auto bd = (ImGuiData*)io.BackendPlatformUserData;
+    auto* bd = (ImGuiData*)io.BackendPlatformUserData;
 
     for (auto& cursor : bd->cursors)
     {
@@ -365,7 +366,7 @@ void ui::beginFrame()
     bd->time = time;
 
     // Update cursor.
-    if (!(io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange) &&
+    if (((io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange) == 0) &&
         bd->window->getMouseState() != io::MouseState::Locked)
     {
         ImGuiMouseCursor imguiCursor = ImGui::GetMouseCursor();
@@ -400,7 +401,7 @@ void ui::endFrame(gl::Framebuffer target)
     auto* bd = (ImGuiData*)ImGui::GetIO().BackendPlatformUserData;
     auto& rd = bd->window->getRenderDevice();
     ImGui::Render();
-    auto drawData = ImGui::GetDrawData();
+    auto* drawData = ImGui::GetDrawData();
 
     // Upload projection matrix to constant buffer.
     glm::mat4& proj = *(glm::mat4*)bd->cb->map();
@@ -523,7 +524,9 @@ static bool handle(const io::MouseButtonEvent& event)
     ImGuiIO& io = ImGui::GetIO();
     int button = buttonToImGuiButton(event.button);
     if (button != -1)
+    {
         io.AddMouseButtonEvent(button, event.pressed);
+    }
     return io.WantCaptureMouse;
 }
 
@@ -539,7 +542,9 @@ static bool handle(const io::KeyEvent& event)
     ImGuiIO& io = ImGui::GetIO();
     int key = keyToImGuiKey(event.key);
     if (key != -1)
+    {
         io.AddKeyEvent(key, event.pressed);
+    }
     return io.WantCaptureKeyboard;
 }
 
@@ -560,7 +565,7 @@ static bool handle(const io::ModifiersEvent& event)
     return io.WantCaptureKeyboard;
 }
 
-static bool handle(auto&&)
+static bool handle(auto&& /*unused*/)
 {
     return false;
 }

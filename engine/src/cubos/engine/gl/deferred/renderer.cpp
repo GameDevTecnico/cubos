@@ -28,9 +28,9 @@ struct DeferredGrid : public engine::gl::impl::RendererGrid
 /// Holds the model view matrix sent to the geometry pass pipeline.
 struct MVP
 {
-    glm::mat4 M;
-    glm::mat4 V;
-    glm::mat4 P;
+    glm::mat4 m;
+    glm::mat4 v;
+    glm::mat4 p;
 };
 
 // Holds the data of a spot light, ready to be sent to the lighting pass pipeline.
@@ -77,7 +77,7 @@ struct LightsData
 };
 
 /// The vertex shader of the geometry pass pipeline.
-static const char* GEOMETRY_PASS_VS = R"glsl(
+static const char* geometryPassVs = R"glsl(
 #version 330 core
 
 in uvec3 position;
@@ -111,7 +111,7 @@ void main()
 )glsl";
 
 /// The pixel shader of the geometry pass pipeline.
-static const char* GEOMETRY_PASS_PS = R"glsl(
+static const char* geometryPassPs = R"glsl(
 #version 330 core
 
 in vec3 fragPosition;
@@ -131,7 +131,7 @@ void main()
 )glsl";
 
 /// The vertex shader of the lighting pass pipeline.
-static const char* LIGHTING_PASS_VS = R"glsl(
+static const char* lightingPassVs = R"glsl(
 #version 330 core
 
 in vec4 position;
@@ -147,7 +147,7 @@ void main(void)
 )glsl";
 
 /// The pixel shader of the lighting pass pipeline.
-static const char* LIGHTING_PASS_PS = R"glsl(
+static const char* lightingPassPs = R"glsl(
 #version 330 core
 
 in vec2 fragUv;
@@ -271,7 +271,7 @@ void main()
 )glsl";
 
 /// The vertex shader of the SSAO pass pipeline.
-static const char* SSAO_PASS_VS = R"glsl(
+static const char* ssaoPassVs = R"glsl(
 #version 330 core
 
 in vec4 position;
@@ -287,7 +287,7 @@ void main(void)
 )glsl";
 
 /// The pixel shader of the SSAO pass pipeline.
-static const char* SSAO_PASS_PS = R"glsl(
+static const char* ssaoPassPs = R"glsl(
 #version 330 core
 
 #define KERNEL_SIZE 64
@@ -351,7 +351,7 @@ void main(void)
 )glsl";
 
 // The pixel shader of the SSAO blur pass pipeline.
-static const char* SSAO_BLUR_PS = R"glsl(
+static const char* ssaoBlurPs = R"glsl(
 #version 330 core
 
 in vec2 fragUv;
@@ -394,8 +394,8 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
     this->geometryDepthStencilState = this->renderDevice.createDepthStencilState(depthStencilStateDesc);
 
     // Create the geometry pipeline.
-    auto geometryVS = this->renderDevice.createShaderStage(Stage::Vertex, GEOMETRY_PASS_VS);
-    auto geometryPS = this->renderDevice.createShaderStage(Stage::Pixel, GEOMETRY_PASS_PS);
+    auto geometryVS = this->renderDevice.createShaderStage(Stage::Vertex, geometryPassVs);
+    auto geometryPS = this->renderDevice.createShaderStage(Stage::Pixel, geometryPassPs);
     this->geometryPipeline = this->renderDevice.createShaderPipeline(geometryVS, geometryPS);
     this->mvpBP = this->geometryPipeline->getBindingPoint("MVP");
 
@@ -403,8 +403,8 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
     mvpBuffer = renderDevice.createConstantBuffer(sizeof(MVP), nullptr, Usage::Dynamic);
 
     // Create the lighting pipeline.
-    auto lightingVS = this->renderDevice.createShaderStage(Stage::Vertex, LIGHTING_PASS_VS);
-    auto lightingPS = this->renderDevice.createShaderStage(Stage::Pixel, LIGHTING_PASS_PS);
+    auto lightingVS = this->renderDevice.createShaderStage(Stage::Vertex, lightingPassVs);
+    auto lightingPS = this->renderDevice.createShaderStage(Stage::Pixel, lightingPassPs);
     this->lightingPipeline = this->renderDevice.createShaderPipeline(lightingVS, lightingPS);
     this->positionBP = this->lightingPipeline->getBindingPoint("position");
     this->normalBP = this->lightingPipeline->getBindingPoint("normal");
@@ -415,8 +415,8 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
     this->ssaoTexBP = this->lightingPipeline->getBindingPoint("ssaoTex");
 
     // Create the SSAO pipeline.
-    auto ssaoVS = this->renderDevice.createShaderStage(Stage::Vertex, SSAO_PASS_VS);
-    auto ssaoPS = this->renderDevice.createShaderStage(Stage::Pixel, SSAO_PASS_PS);
+    auto ssaoVS = this->renderDevice.createShaderStage(Stage::Vertex, ssaoPassVs);
+    auto ssaoPS = this->renderDevice.createShaderStage(Stage::Pixel, ssaoPassPs);
     this->ssaoPipeline = this->renderDevice.createShaderPipeline(ssaoVS, ssaoPS);
     this->ssaoPositionBP = this->ssaoPipeline->getBindingPoint("position");
     this->ssaoNormalBP = this->ssaoPipeline->getBindingPoint("normal");
@@ -426,7 +426,7 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
     this->ssaoScreenSizeBP = this->ssaoPipeline->getBindingPoint("screenSize");
 
     // Create the SSAO blur pipeline.
-    auto ssaoBlurPS = this->renderDevice.createShaderStage(Stage::Pixel, SSAO_BLUR_PS);
+    auto ssaoBlurPS = this->renderDevice.createShaderStage(Stage::Pixel, ssaoBlurPs);
     this->ssaoBlurPipeline = this->renderDevice.createShaderPipeline(ssaoVS, ssaoBlurPS);
     this->ssaoBlurTexBP = this->ssaoBlurPipeline->getBindingPoint("ssaoInput");
 
@@ -505,8 +505,8 @@ RendererGrid deferred::Renderer::upload(const Grid& grid)
         this->renderDevice.createVertexBuffer(vertices.size() * sizeof(Vertex), vertices.data(), Usage::Static);
     vaDesc.shaderPipeline = this->geometryPipeline;
     deferredGrid->va = renderDevice.createVertexArray(vaDesc);
-    deferredGrid->ib = renderDevice.createIndexBuffer(indices.size() * sizeof(uint32_t), &indices[0], IndexFormat::UInt,
-                                                      Usage::Static);
+    deferredGrid->ib = renderDevice.createIndexBuffer(indices.size() * sizeof(uint32_t), indices.data(),
+                                                      IndexFormat::UInt, Usage::Static);
     deferredGrid->indexCount = indices.size();
 
     return deferredGrid;
@@ -516,10 +516,10 @@ void deferred::Renderer::setPalette(const core::gl::Palette& palette)
 {
     // Get the colors from the palette.
     // Magenta is used for non-existent materials in order to easily identify errors.
-    std::vector<glm::vec4> data(65536, {1.0f, 0.0f, 1.0f, 1.0f});
+    std::vector<glm::vec4> data(65536, {1.0F, 0.0F, 1.0F, 1.0F});
     for (size_t i = 0; i < palette.getSize(); ++i)
     {
-        if (palette.getData()[i].similarity(Material::Empty) < 1.0f)
+        if (palette.getData()[i].similarity(Material::Empty) < 1.0F)
         {
             data[i + 1] = palette.getData()[i].color;
         }
@@ -589,8 +589,8 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
 
     // 1. Prepare the MVP matrix.
     MVP mvp;
-    mvp.V = camera.view;
-    mvp.P = glm::perspective(glm::radians(camera.fovY), float(this->size.x) / float(this->size.y), camera.zNear,
+    mvp.v = camera.view;
+    mvp.p = glm::perspective(glm::radians(camera.fovY), float(this->size.x) / float(this->size.y), camera.zNear,
                              camera.zFar);
 
     // 2. Fill the light buffer with the light data.
@@ -601,10 +601,10 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     lightData.numPointLights = 0;
 
     // Set the ambient light.
-    lightData.ambientLight = glm::vec4(frame.getAmbient(), 1.0f);
+    lightData.ambientLight = glm::vec4(frame.getAmbient(), 1.0F);
 
     // Spotlights.
-    for (auto& light : frame.getSpotLights())
+    for (const auto& light : frame.getSpotLights())
     {
         if (lightData.numSpotLights >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
         {
@@ -614,9 +614,9 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
             break;
         }
 
-        lightData.spotLights[lightData.numSpotLights].position = glm::vec4(light.position, 1.0f);
+        lightData.spotLights[lightData.numSpotLights].position = glm::vec4(light.position, 1.0F);
         lightData.spotLights[lightData.numSpotLights].rotation = glm::toMat4(light.rotation);
-        lightData.spotLights[lightData.numSpotLights].color = glm::vec4(light.color, 1.0f);
+        lightData.spotLights[lightData.numSpotLights].color = glm::vec4(light.color, 1.0F);
         lightData.spotLights[lightData.numSpotLights].intensity = light.intensity;
         lightData.spotLights[lightData.numSpotLights].range = light.range;
         lightData.spotLights[lightData.numSpotLights].spotCutoff = glm::cos(light.spotAngle);
@@ -625,7 +625,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     }
 
     // Directional lights.
-    for (auto& light : frame.getDirectionalLights())
+    for (const auto& light : frame.getDirectionalLights())
     {
         if (lightData.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
         {
@@ -636,13 +636,13 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         }
 
         lightData.directionalLights[lightData.numDirectionalLights].rotation = glm::toMat4(light.rotation);
-        lightData.directionalLights[lightData.numDirectionalLights].color = glm::vec4(light.color, 1.0f);
+        lightData.directionalLights[lightData.numDirectionalLights].color = glm::vec4(light.color, 1.0F);
         lightData.directionalLights[lightData.numDirectionalLights].intensity = light.intensity;
         lightData.numDirectionalLights += 1;
     }
 
     // Point lights.
-    for (auto& light : frame.getPointLights())
+    for (const auto& light : frame.getPointLights())
     {
         if (lightData.numPointLights >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
         {
@@ -651,8 +651,8 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
                        CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT);
             break;
         }
-        lightData.pointLights[lightData.numPointLights].position = glm::vec4(light.position, 1.0f);
-        lightData.pointLights[lightData.numPointLights].color = glm::vec4(light.color, 1.0f);
+        lightData.pointLights[lightData.numPointLights].position = glm::vec4(light.position, 1.0F);
+        lightData.pointLights[lightData.numPointLights].color = glm::vec4(light.color, 1.0F);
         lightData.pointLights[lightData.numPointLights].intensity = light.intensity;
         lightData.pointLights[lightData.numPointLights].range = light.range;
         lightData.numPointLights += 1;
@@ -674,16 +674,16 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     this->mvpBP->bind(this->mvpBuffer);
 
     // 4.2. Clear the GBuffer.
-    this->renderDevice.clearTargetColor(0, 0.0f, 0.0f, 0.0f, 1.0f);
-    this->renderDevice.clearTargetColor(1, 0.0f, 0.0f, 0.0f, 1.0f);
-    this->renderDevice.clearTargetColor(2, 0.0f, 0.0f, 0.0f, 0.0f);
-    this->renderDevice.clearDepth(1.0f);
+    this->renderDevice.clearTargetColor(0, 0.0F, 0.0F, 0.0F, 1.0F);
+    this->renderDevice.clearTargetColor(1, 0.0F, 0.0F, 0.0F, 1.0F);
+    this->renderDevice.clearTargetColor(2, 0.0F, 0.0F, 0.0F, 0.0F);
+    this->renderDevice.clearDepth(1.0F);
 
     // 4.3. For each draw command:
-    for (auto& drawCmd : frame.getDrawCmds())
+    for (const auto& drawCmd : frame.getDrawCmds())
     {
         // 4.3.1. Update the MVP constant buffer with the model matrix.
-        mvp.M = drawCmd.modelMat;
+        mvp.m = drawCmd.modelMat;
         memcpy(this->mvpBuffer->map(), &mvp, sizeof(MVP));
         this->mvpBuffer->unmap();
 
@@ -709,8 +709,8 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         this->ssaoNormalBP->bind(this->sampler);
         this->ssaoNoiseBP->bind(this->ssaoNoiseTex);
         this->ssaoNoiseBP->bind(this->ssaoNoiseSampler);
-        this->ssaoViewBP->setConstant(mvp.V);
-        this->ssaoProjectionBP->setConstant(mvp.P);
+        this->ssaoViewBP->setConstant(mvp.v);
+        this->ssaoProjectionBP->setConstant(mvp.p);
         this->ssaoScreenSizeBP->setConstant(this->size);
 
         // Samples
@@ -746,8 +746,8 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     this->paletteBP->bind(this->paletteTex);
     this->paletteBP->bind(this->sampler);
     this->lightsBP->bind(this->lightsBuffer);
-    this->ssaoEnabledBP->setConstant(this->ssaoEnabled);
-    if (this->ssaoEnabledBP)
+    this->ssaoEnabledBP->setConstant(static_cast<int>(this->ssaoEnabled));
+    if (this->ssaoEnabledBP != nullptr)
     {
         this->ssaoTexBP->bind(this->ssaoTex);
         this->ssaoTexBP->bind(this->sampler);
@@ -774,15 +774,15 @@ void deferred::Renderer::createSSAOTextures()
     this->ssaoTex = this->renderDevice.createTexture2D(texDesc);
 
     // Generate noise texture
-    std::uniform_real_distribution<float> randomFloats(0.0f, 1.0f); // random floats between [0.0, 1.0]
+    std::uniform_real_distribution<float> randomFloats(0.0F, 1.0F); // random floats between [0.0, 1.0]
     std::default_random_engine generator;
     std::vector<glm::vec3> ssaoNoise;
     ssaoNoise.resize(16);
     for (unsigned int i = 0; i < 16; i++)
     {
-        glm::vec3 noise(randomFloats(generator) * 2.0f - 1.0f, // [-1.0, 1.0]
-                        randomFloats(generator) * 2.0f - 1.0f, // [-1.0, 1.0]
-                        0.0f);
+        glm::vec3 noise(randomFloats(generator) * 2.0F - 1.0F, // [-1.0, 1.0]
+                        randomFloats(generator) * 2.0F - 1.0F, // [-1.0, 1.0]
+                        0.0F);
         ssaoNoise[i] = noise;
     }
 
@@ -801,21 +801,21 @@ void deferred::Renderer::createSSAOTextures()
 void deferred::Renderer::generateSSAONoise()
 {
     // Generate kernel samples
-    std::uniform_real_distribution<float> randomFloats(0.0f, 1.0f); // random floats between [0.0, 1.0]
+    std::uniform_real_distribution<float> randomFloats(0.0F, 1.0F); // random floats between [0.0, 1.0]
     std::default_random_engine generator;
 
     this->ssaoKernel.resize(64);
     for (unsigned int i = 0; i < 64; i++)
     {
-        glm::vec3 sample(randomFloats(generator) * 2.0f - 1.0f, // [-1.0, 1.0]
-                         randomFloats(generator) * 2.0f - 1.0f, // [-1.0, 1.0]
+        glm::vec3 sample(randomFloats(generator) * 2.0F - 1.0F, // [-1.0, 1.0]
+                         randomFloats(generator) * 2.0F - 1.0F, // [-1.0, 1.0]
                          randomFloats(generator)                // [ 0.0, 1.0]
         );
         sample = glm::normalize(sample);
         // sample *= randomFloats(generator);
-        float scale = static_cast<float>(i) / 64.0f;
+        float scale = static_cast<float>(i) / 64.0F;
 
-        scale = glm::lerp(0.1f, 1.0f, scale * scale);
+        scale = glm::lerp(0.1F, 1.0F, scale * scale);
         sample *= scale;
 
         this->ssaoKernel[i] = sample;

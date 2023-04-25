@@ -4,7 +4,7 @@
 #include "tools.hpp"
 
 /// Prints the help message of the program.
-int runHelp(int, char**)
+int runHelp(int /*argc*/, char** /*argv*/)
 {
     std::cerr << "Usage: cubinhos <TOOL>" << std::endl;
     std::cerr << "Tools:" << std::endl;

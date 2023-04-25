@@ -40,7 +40,8 @@ bool SceneBridge::load(Assets& assets, AnyAsset handle)
     for (size_t i = 0; i < len; ++i)
     {
         // Read the import name and asset ID.
-        std::string name, id;
+        std::string name;
+        std::string id;
         deserializer.read(name);
         deserializer.read(id);
 
@@ -115,7 +116,7 @@ bool SceneBridge::load(Assets& assets, AnyAsset handle)
     return true;
 }
 
-bool SceneBridge::save(const Assets&, AnyAsset)
+bool SceneBridge::save(const Assets& /*assets*/, AnyAsset /*handle*/)
 {
     // TODO: figure out how to do this.
     // One of the problems is finding out exactly what was overriden in sub-scenes.

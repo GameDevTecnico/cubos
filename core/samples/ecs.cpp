@@ -33,12 +33,12 @@ struct Parent
 
 namespace cubos::core::data
 {
-    void serialize(Serializer&, const Player&, const char*)
+    void serialize(Serializer& /*unused*/, const Player& /*unused*/, const char* /*unused*/)
     {
         // Do nothing.
     }
 
-    void deserialize(Deserializer&, Player&)
+    void deserialize(Deserializer& /*unused*/, Player& /*unused*/)
     {
         // Do nothing.
     }
@@ -149,7 +149,7 @@ int main()
 {
     initializeLogger();
     ecs::World world;
-    world.registerResource<DeltaTime>(DeltaTime{1.0f});
+    world.registerResource<DeltaTime>(DeltaTime{1.0F});
     world.registerResource<MyResource>(MyResource{0});
     world.registerComponent<Player>();
     world.registerComponent<Position>();

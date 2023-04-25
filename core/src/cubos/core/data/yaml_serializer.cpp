@@ -109,7 +109,9 @@ void YAMLSerializer::writeString(const char* value, const char* name)
 void YAMLSerializer::beginObject(const char* name)
 {
     if (mode.top() == Mode::Object)
-        emitter << YAML::Key << (name ? name : ANONYMOUS_FIELD_NAME) << YAML::Value;
+    {
+        emitter << YAML::Key << (name != nullptr ? name : ANONYMOUS_FIELD_NAME) << YAML::Value;
+    }
     else if (mode.top() == Mode::Dictionary)
     {
         assert(this->key == false); // Objects cannot be used as keys in dictionaries.
@@ -126,13 +128,17 @@ void YAMLSerializer::endObject()
     emitter << YAML::EndMap;
     this->mode.pop();
     if (this->mode.top() == Mode::Dictionary)
+    {
         this->key = true;
+    }
 }
 
-void YAMLSerializer::beginArray(size_t, const char* name)
+void YAMLSerializer::beginArray(size_t /*length*/, const char* name)
 {
     if (mode.top() == Mode::Object)
-        emitter << YAML::Key << (name ? name : ANONYMOUS_FIELD_NAME) << YAML::Value;
+    {
+        emitter << YAML::Key << (name != nullptr ? name : ANONYMOUS_FIELD_NAME) << YAML::Value;
+    }
     else if (mode.top() == Mode::Dictionary)
     {
         assert(this->key == false); // Arrays cannot be used as keys in dictionaries.
@@ -149,13 +155,17 @@ void YAMLSerializer::endArray()
     emitter << YAML::EndSeq;
     this->mode.pop();
     if (this->mode.top() == Mode::Dictionary)
+    {
         this->key = true;
+    }
 }
 
-void YAMLSerializer::beginDictionary(size_t, const char* name)
+void YAMLSerializer::beginDictionary(size_t /*length*/, const char* name)
 {
     if (mode.top() == Mode::Object)
-        emitter << YAML::Key << (name ? name : ANONYMOUS_FIELD_NAME) << YAML::Value;
+    {
+        emitter << YAML::Key << (name != nullptr ? name : ANONYMOUS_FIELD_NAME) << YAML::Value;
+    }
     else if (mode.top() == Mode::Dictionary)
     {
         assert(this->key == false); // Dictionaries cannot be used as keys in dictionaries.
@@ -172,5 +182,7 @@ void YAMLSerializer::endDictionary()
     emitter << YAML::EndMap;
     this->mode.pop();
     if (this->mode.top() == Mode::Dictionary)
+    {
         this->key = true;
+    }
 }

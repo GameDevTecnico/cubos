@@ -6,7 +6,7 @@ using namespace cubos::core::gl;
 using namespace cubos::engine::gl;
 
 /// The vertex shader of the copy pass.
-static const char* COPY_VS = R"glsl(
+static const char* copyVs = R"glsl(
 #version 330 core
 
 in vec4 position;
@@ -22,7 +22,7 @@ void main(void)
 )glsl";
 
 /// The pixel shader of the copy pass.
-static const char* COPY_PS = R"glsl(
+static const char* copyPs = R"glsl(
 #version 330 core
 
 in vec2 fragUv;
@@ -42,8 +42,8 @@ pps::CopyPass::CopyPass(RenderDevice& renderDevice, glm::uvec2 size)
     , size(size)
 {
     // Create the shader pipeline.
-    auto vs = this->renderDevice.createShaderStage(Stage::Vertex, COPY_VS);
-    auto ps = this->renderDevice.createShaderStage(Stage::Pixel, COPY_PS);
+    auto vs = this->renderDevice.createShaderStage(Stage::Vertex, copyVs);
+    auto ps = this->renderDevice.createShaderStage(Stage::Pixel, copyPs);
     this->pipeline = this->renderDevice.createShaderPipeline(vs, ps);
     this->inputTexBP = this->pipeline->getBindingPoint("inputTex");
 
@@ -64,7 +64,7 @@ void pps::CopyPass::resize(glm::uvec2 size)
     this->size = size;
 }
 
-void pps::CopyPass::execute(std::map<Input, core::gl::Texture2D>&, core::gl::Texture2D prev,
+void pps::CopyPass::execute(std::map<Input, core::gl::Texture2D>& /*inputs*/, core::gl::Texture2D prev,
                             core::gl::Framebuffer out) const
 {
     // Set the framebuffer and state.

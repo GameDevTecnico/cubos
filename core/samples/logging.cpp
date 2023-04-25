@@ -18,8 +18,8 @@ int main()
     CUBOS_ERROR("Error message");
     CUBOS_CRITICAL("Critical message");
 
-    CUBOS_INFO("Serializable type: {}", Debug(glm::vec3(0.0f, 1.0f, 2.0f)));
-    CUBOS_INFO("Again, but with type information: {:t}", Debug(glm::vec3(0.0f, 1.0f, 2.0f)));
+    CUBOS_INFO("Serializable type: {}", Debug(glm::vec3(0.0F, 1.0F, 2.0F)));
+    CUBOS_INFO("Again, but with type information: {:t}", Debug(glm::vec3(0.0F, 1.0F, 2.0F)));
     CUBOS_INFO("Since unordered maps are serializable, we can do this: {}",
                Debug((std::unordered_map<int, const char*>{{1, "one"}, {2, "two"}})));
 

@@ -19,7 +19,9 @@ StdStream::StdStream(StdStream&& other)
 StdStream::~StdStream()
 {
     if (this->close)
+    {
         fclose(this->file);
+    }
 }
 
 size_t StdStream::read(void* data, size_t size)
@@ -56,7 +58,7 @@ void StdStream::seek(ptrdiff_t offset, SeekOrigin origin)
 
 bool StdStream::eof() const
 {
-    return feof(this->file);
+    return feof(this->file) != 0;
 }
 
 char StdStream::peek() const

@@ -22,13 +22,15 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
         {
             // Create the file/directory.
             if (isDirectory)
+            {
                 std::filesystem::create_directory(osPath);
+            }
             else
             {
                 // Write an empty file.
                 std::string path = osPath.string();
                 FILE* file = fopen(path.c_str(), "w");
-                if (!file)
+                if (file == nullptr)
                 {
                     CUBOS_CRITICAL("Could not create root file '{}'", path);
                     abort();
@@ -69,7 +71,7 @@ void STDArchive::generate(size_t parent)
     auto& parentInfo = this->files[parent];
 
     // Iterate over all files in the directory.
-    for (auto& entry : std::filesystem::directory_iterator(parentInfo.osPath))
+    for (const auto& entry : std::filesystem::directory_iterator(parentInfo.osPath))
     {
         // Get the path to the file.
         auto osPath = entry.path();
@@ -82,7 +84,9 @@ void STDArchive::generate(size_t parent)
 
         // Recursively add all files in the directory.
         if (directory)
+        {
             this->generate(id);
+        }
     }
 }
 
@@ -90,7 +94,9 @@ size_t STDArchive::create(size_t parent, std::string_view name, bool directory)
 {
     // Make sure that the archive isn't read-only and the parent is a directory.
     if (this->readOnly || parent == 0 || !this->isDirectory(parent))
+    {
         return 0;
+    }
 
     // Create the file/directory in the OS file system.
     auto& parentInfo = this->files.at(parent);
@@ -98,15 +104,19 @@ size_t STDArchive::create(size_t parent, std::string_view name, bool directory)
     if (directory)
     {
         if (!std::filesystem::create_directory(osPath))
-            return false;
+        {
+            return 0U;
+        }
     }
     else
     {
         // Write an empty file.
         std::string path = osPath.string();
         FILE* file = fopen(path.c_str(), "w");
-        if (!file)
-            return false;
+        if (file == nullptr)
+        {
+            return 0U;
+        }
         fclose(file);
     }
 
@@ -120,22 +130,30 @@ size_t STDArchive::create(size_t parent, std::string_view name, bool directory)
 bool STDArchive::destroy(size_t id)
 {
     // Make sure the file isn't read only, that the file exist and that it's not the root.
-    if (this->readOnly || this->files.count(id) == 0 || id == 1)
+    if (this->readOnly || !this->files.contains(id) || id == 1)
+    {
         return false;
+    }
 
     // Make sure the file isn't a non-empty directory.
     const auto& info = this->files.at(id);
     if (info.directory && info.child != 0)
+    {
         return false;
+    }
 
     // Remove the file from the real file system.
     if (!std::filesystem::remove(info.osPath))
+    {
         return false;
+    }
 
     // Remove the file from the tree.
     auto& parentInfo = this->files.at(info.parent);
     if (parentInfo.child == id)
+    {
         parentInfo.child = info.sibling;
+    }
     else
     {
         size_t sibling = parentInfo.child;
@@ -244,8 +262,8 @@ std::unique_ptr<memory::Stream> STDArchive::open(File::Handle file, File::OpenMo
     }
 
     // Open the file.
-    const char* std_mode = mode == File::OpenMode::Write ? "wb" : "rb";
+    const char* stdMode = mode == File::OpenMode::Write ? "wb" : "rb";
     std::string path = it->second.osPath.string();
     return std::make_unique<FileStream<memory::StdStream>>(file, mode,
-                                                           memory::StdStream(fopen(path.c_str(), std_mode), true));
+                                                           memory::StdStream(fopen(path.c_str(), stdMode), true));
 }
