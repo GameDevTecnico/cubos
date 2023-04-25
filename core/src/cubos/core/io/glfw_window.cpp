@@ -15,7 +15,7 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 static void charCallback(GLFWwindow* window, unsigned int codepoint);
-static void updateMods(GLFWWindow* handler, int mods);
+static void updateMods(GLFWWindow* handler, int glfwMods);
 static MouseButton glfwToCubosMouseButton(int button);
 static Key glfwToCubosKey(int key);
 
@@ -38,7 +38,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 #ifdef WITH_GLFW
     glfwSetErrorCallback(errorCallback);
 
-    if (!glfwInit())
+    if (glfwInit() == 0)
     {
         CUBOS_CRITICAL("glfwInit() failed");
         abort();
@@ -53,7 +53,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 
     // TODO: handle mode (fullscreen, ...)
     this->handle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
-    if (!this->handle)
+    if (this->handle == nullptr)
     {
         CUBOS_CRITICAL("glfwCreateWindow() failed");
         abort();
@@ -61,7 +61,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 
     // Create OpenGL render device
     glfwMakeContextCurrent(this->handle);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == 0)
     {
         CUBOS_CRITICAL("OpenGL loader failed");
         abort();
@@ -121,7 +121,8 @@ gl::RenderDevice& GLFWWindow::getRenderDevice() const
 glm::ivec2 GLFWWindow::getSize() const
 {
 #ifdef WITH_GLFW
-    int width, height;
+    int width;
+    int height;
     glfwGetWindowSize(this->handle, &width, &height);
     return {width, height};
 #else
@@ -132,7 +133,8 @@ glm::ivec2 GLFWWindow::getSize() const
 glm::ivec2 GLFWWindow::getFramebufferSize() const
 {
 #ifdef WITH_GLFW
-    int width, height;
+    int width;
+    int height;
     glfwGetFramebufferSize(this->handle, &width, &height);
     return {width, height};
 #else
@@ -143,7 +145,7 @@ glm::ivec2 GLFWWindow::getFramebufferSize() const
 bool GLFWWindow::shouldClose() const
 {
 #ifdef WITH_GLFW
-    return glfwWindowShouldClose(this->handle);
+    return glfwWindowShouldClose(this->handle) != 0;
 #else
     UNSUPPORTED();
 #endif
@@ -241,9 +243,13 @@ void GLFWWindow::setCursor(std::shared_ptr<Cursor> cursor)
 {
 #ifdef WITH_GLFW
     if (cursor == nullptr)
+    {
         glfwSetCursor(this->handle, nullptr);
+    }
     else
+    {
         glfwSetCursor(this->handle, cursor->glfwHandle);
+    }
     this->cursor = cursor;
 #else
     UNSUPPORTED();
@@ -270,59 +276,71 @@ const char* GLFWWindow::getClipboard() const
 
 #ifdef WITH_GLFW
 
-static void keyCallback(GLFWwindow* window, int key, int, int action, int mods)
+static void keyCallback(GLFWwindow* window, int key, int /*unused*/, int action, int mods)
 {
-    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     Key cubosKey = glfwToCubosKey(key);
     updateMods(handler, mods);
     if (action == GLFW_PRESS || action == GLFW_RELEASE)
+    {
         handler->pushEvent(KeyEvent{.key = cubosKey, .pressed = action == GLFW_PRESS});
+    }
 }
 
 static void mousePositionCallback(GLFWwindow* window, double xPos, double yPos)
 {
-    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->pushEvent(MouseMoveEvent{.position = glm::ivec2(xPos, yPos)});
 }
 
 static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
-    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     MouseButton cubosButton = glfwToCubosMouseButton(button);
     updateMods(handler, mods);
     if (action == GLFW_PRESS || action == GLFW_RELEASE)
+    {
         handler->pushEvent(MouseButtonEvent{.button = cubosButton, .pressed = action == GLFW_PRESS});
+    }
 }
 
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->pushEvent(MouseScrollEvent{.offset = glm::vec2(xoffset, yoffset)});
 }
 
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
-    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->pushEvent(ResizeEvent{.size = glm::ivec2(width, height)});
 }
 
 static void charCallback(GLFWwindow* window, unsigned int codepoint)
 {
-    auto handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
+    auto* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->pushEvent(TextEvent{.codepoint = static_cast<char32_t>(codepoint)});
 }
 
 static void updateMods(GLFWWindow* handler, int glfwMods)
 {
     Modifiers mods = Modifiers::None;
-    if (glfwMods & GLFW_MOD_CONTROL)
+    if ((glfwMods & GLFW_MOD_CONTROL) != 0)
+    {
         mods |= Modifiers::Control;
-    if (glfwMods & GLFW_MOD_SHIFT)
+    }
+    if ((glfwMods & GLFW_MOD_SHIFT) != 0)
+    {
         mods |= Modifiers::Shift;
-    if (glfwMods & GLFW_MOD_ALT)
+    }
+    if ((glfwMods & GLFW_MOD_ALT) != 0)
+    {
         mods |= Modifiers::Alt;
-    if (glfwMods & GLFW_MOD_SUPER)
+    }
+    if ((glfwMods & GLFW_MOD_SUPER) != 0)
+    {
         mods |= Modifiers::System;
+    }
     handler->pushEvent(ModifiersEvent{.modifiers = mods});
 }
 

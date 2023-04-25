@@ -27,81 +27,81 @@ bool Serializer::failed() const
 // Implementation of serialize() for primitive types.
 
 template <>
-void cubos::core::data::serialize<int8_t>(Serializer& ser, const int8_t& val, const char* name)
+void cubos::core::data::serialize<int8_t>(Serializer& ser, const int8_t& obj, const char* name)
 {
-    ser.writeI8(val, name);
+    ser.writeI8(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<int16_t>(Serializer& ser, const int16_t& val, const char* name)
+void cubos::core::data::serialize<int16_t>(Serializer& ser, const int16_t& obj, const char* name)
 {
-    ser.writeI16(val, name);
+    ser.writeI16(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<int32_t>(Serializer& ser, const int32_t& val, const char* name)
+void cubos::core::data::serialize<int32_t>(Serializer& ser, const int32_t& obj, const char* name)
 {
-    ser.writeI32(val, name);
+    ser.writeI32(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<int64_t>(Serializer& ser, const int64_t& val, const char* name)
+void cubos::core::data::serialize<int64_t>(Serializer& ser, const int64_t& obj, const char* name)
 {
-    ser.writeI64(val, name);
+    ser.writeI64(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<uint8_t>(Serializer& ser, const uint8_t& val, const char* name)
+void cubos::core::data::serialize<uint8_t>(Serializer& ser, const uint8_t& obj, const char* name)
 {
-    ser.writeU8(val, name);
+    ser.writeU8(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<uint16_t>(Serializer& ser, const uint16_t& val, const char* name)
+void cubos::core::data::serialize<uint16_t>(Serializer& ser, const uint16_t& obj, const char* name)
 {
-    ser.writeU16(val, name);
+    ser.writeU16(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<uint32_t>(Serializer& ser, const uint32_t& val, const char* name)
+void cubos::core::data::serialize<uint32_t>(Serializer& ser, const uint32_t& obj, const char* name)
 {
-    ser.writeU32(val, name);
+    ser.writeU32(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<uint64_t>(Serializer& ser, const uint64_t& val, const char* name)
+void cubos::core::data::serialize<uint64_t>(Serializer& ser, const uint64_t& obj, const char* name)
 {
-    ser.writeU64(val, name);
+    ser.writeU64(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<float>(Serializer& ser, const float& val, const char* name)
+void cubos::core::data::serialize<float>(Serializer& ser, const float& obj, const char* name)
 {
-    ser.writeF32(val, name);
+    ser.writeF32(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<double>(Serializer& ser, const double& val, const char* name)
+void cubos::core::data::serialize<double>(Serializer& ser, const double& obj, const char* name)
 {
-    ser.writeF64(val, name);
+    ser.writeF64(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<bool>(Serializer& ser, const bool& val, const char* name)
+void cubos::core::data::serialize<bool>(Serializer& ser, const bool& obj, const char* name)
 {
-    ser.writeBool(val, name);
+    ser.writeBool(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<const char*>(Serializer& ser, const char* const& val, const char* name)
+void cubos::core::data::serialize<const char*>(Serializer& ser, const char* const& obj, const char* name)
 {
-    ser.writeString(val, name);
+    ser.writeString(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<std::string>(Serializer& ser, const std::string& val, const char* name)
+void cubos::core::data::serialize<std::string>(Serializer& ser, const std::string& obj, const char* name)
 {
-    ser.writeString(val.c_str(), name);
+    ser.writeString(obj.c_str(), name);
 }
 
 void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_reference val, const char* name)
@@ -114,54 +114,54 @@ void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_refe
 // NOLINTBEGIN(bugprone-macro-parentheses)
 #define IMPL_SERIALIZE_GLM(T)                                                                                          \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tvec2<T>>(Serializer & ser, const glm::tvec2<T>& val, const char* name)     \
+    void cubos::core::data::serialize<glm::tvec2<T>>(Serializer & ser, const glm::tvec2<T>& obj, const char* name)     \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
-        ser.write(val.x, "x");                                                                                         \
-        ser.write(val.y, "y");                                                                                         \
+        ser.write(obj.x, "x");                                                                                         \
+        ser.write(obj.y, "y");                                                                                         \
         ser.endObject();                                                                                               \
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tvec3<T>>(Serializer & ser, const glm::tvec3<T>& val, const char* name)     \
+    void cubos::core::data::serialize<glm::tvec3<T>>(Serializer & ser, const glm::tvec3<T>& obj, const char* name)     \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
-        ser.write(val.x, "x");                                                                                         \
-        ser.write(val.y, "y");                                                                                         \
-        ser.write(val.z, "z");                                                                                         \
+        ser.write(obj.x, "x");                                                                                         \
+        ser.write(obj.y, "y");                                                                                         \
+        ser.write(obj.z, "z");                                                                                         \
         ser.endObject();                                                                                               \
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tvec4<T>>(Serializer & ser, const glm::tvec4<T>& val, const char* name)     \
+    void cubos::core::data::serialize<glm::tvec4<T>>(Serializer & ser, const glm::tvec4<T>& obj, const char* name)     \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
-        ser.write(val.x, "x");                                                                                         \
-        ser.write(val.y, "y");                                                                                         \
-        ser.write(val.z, "z");                                                                                         \
-        ser.write(val.w, "w");                                                                                         \
+        ser.write(obj.x, "x");                                                                                         \
+        ser.write(obj.y, "y");                                                                                         \
+        ser.write(obj.z, "z");                                                                                         \
+        ser.write(obj.w, "w");                                                                                         \
         ser.endObject();                                                                                               \
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tquat<T>>(Serializer & ser, const glm::tquat<T>& val, const char* name)     \
+    void cubos::core::data::serialize<glm::tquat<T>>(Serializer & ser, const glm::tquat<T>& obj, const char* name)     \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
-        ser.write(val.w, "w");                                                                                         \
-        ser.write(val.x, "x");                                                                                         \
-        ser.write(val.y, "y");                                                                                         \
-        ser.write(val.z, "z");                                                                                         \
+        ser.write(obj.w, "w");                                                                                         \
+        ser.write(obj.x, "x");                                                                                         \
+        ser.write(obj.y, "y");                                                                                         \
+        ser.write(obj.z, "z");                                                                                         \
         ser.endObject();                                                                                               \
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tmat4x4<T>>(Serializer & ser, const glm::tmat4x4<T>& val, const char* name) \
+    void cubos::core::data::serialize<glm::tmat4x4<T>>(Serializer & ser, const glm::tmat4x4<T>& obj, const char* name) \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
-        ser.write(val[0], "0");                                                                                        \
-        ser.write(val[1], "1");                                                                                        \
-        ser.write(val[2], "2");                                                                                        \
-        ser.write(val[3], "3");                                                                                        \
+        ser.write(obj[0], "0");                                                                                        \
+        ser.write(obj[1], "1");                                                                                        \
+        ser.write(obj[2], "2");                                                                                        \
+        ser.write(obj[3], "3");                                                                                        \
         ser.endObject();                                                                                               \
     }
 // NOLINTEND(bugprone-macro-parentheses)

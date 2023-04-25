@@ -110,7 +110,7 @@ void Dispatcher::compileChain()
     // Implement system tag settings with custom settings
     for (System* system : pendingSystems)
     {
-        for (auto& tag : system->tags)
+        for (const auto& tag : system->tags)
         {
             if (!system->settings)
             {
@@ -212,10 +212,12 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
         {
             system->system->prepare(world);
         }
+
         for (auto& condition : conditions)
         {
             condition->prepare(world);
         }
+
         this->prepared = true;
     }
 

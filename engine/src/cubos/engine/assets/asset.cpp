@@ -7,19 +7,19 @@
 using namespace cubos::engine;
 
 template <>
-void cubos::core::data::serialize<AnyAsset>(Serializer& ser, const AnyAsset& asset, const char* name)
+void cubos::core::data::serialize<AnyAsset>(Serializer& ser, const AnyAsset& obj, const char* name)
 {
-    ser.write(uuids::to_string(asset.getId()), name);
+    ser.write(uuids::to_string(obj.getId()), name);
 }
 
 template <>
-void cubos::core::data::deserialize<AnyAsset>(Deserializer& des, AnyAsset& asset)
+void cubos::core::data::deserialize<AnyAsset>(Deserializer& des, AnyAsset& obj)
 {
     std::string str;
     des.read(str);
     if (auto id = uuids::uuid::from_string(str))
     {
-        asset = AnyAsset(id.value());
+        obj = AnyAsset(id.value());
     }
     else
     {
@@ -34,8 +34,7 @@ AnyAsset::~AnyAsset()
 }
 
 AnyAsset::AnyAsset(std::nullptr_t)
-    : id()
-    , refCount(nullptr)
+    : refCount(nullptr)
     , version(-1)
 {
 }
@@ -48,8 +47,7 @@ AnyAsset::AnyAsset(uuids::uuid id)
 }
 
 AnyAsset::AnyAsset(std::string_view str)
-    : id()
-    , refCount(nullptr)
+    : refCount(nullptr)
     , version(-1)
 {
     if (auto id = uuids::uuid::from_string(str))

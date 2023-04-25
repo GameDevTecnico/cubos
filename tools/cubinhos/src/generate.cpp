@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -52,24 +53,22 @@ static bool parseArguments(int argc, char** argv, GenerateOptions& options)
             options.help = true;
             return true;
         }
+
+        if (foundInput == 0)
+        {
+            options.input = argv[i];
+        }
+        else if (foundInput == 1)
+        {
+            options.output = argv[i];
+        }
         else
         {
-            if (foundInput == 0)
-            {
-                options.input = argv[i];
-            }
-            else if (foundInput == 1)
-            {
-                options.output = argv[i];
-            }
-            else
-            {
-                std::cerr << "Too many arguments." << std::endl;
-                return false;
-            }
-
-            foundInput++;
+            std::cerr << "Too many arguments." << std::endl;
+            return false;
         }
+
+        foundInput++;
     }
 
     if (options.input.empty())
@@ -77,13 +76,12 @@ static bool parseArguments(int argc, char** argv, GenerateOptions& options)
         std::cerr << "Missing input directory." << std::endl;
         return false;
     }
-    else if (options.output.empty())
+    if (options.output.empty())
     {
         std::cerr << "Missing output directory." << std::endl;
         return false;
     }
-    else
-        return true;
+    return true;
 }
 
 /// Trims the string.
@@ -94,14 +92,22 @@ static std::string_view trim(std::string_view str)
     // Trim left.
     int64_t i;
     for (i = 0; i < static_cast<int64_t>(str.size()); ++i)
-        if (!isspace(str[static_cast<size_t>(i)]))
+    {
+        if (isspace(str[static_cast<size_t>(i)]) == 0)
+        {
             break;
+        }
+    }
     str = str.substr(static_cast<size_t>(i));
 
     // Trim right.
     for (i = static_cast<int64_t>(str.size()) - 1; i >= 0; --i)
-        if (!isspace(str[static_cast<size_t>(i)]))
+    {
+        if (isspace(str[static_cast<size_t>(i)]) == 0)
+        {
             break;
+        }
+    }
     return str.substr(0, static_cast<size_t>(i) + 1);
 }
 
@@ -116,7 +122,9 @@ bool parseAttribute(std::string_view line, Component& component, bool& found)
     line = trim(line);
     std::string_view start = "[[cubos::component(";
     if (!line.starts_with(start))
+    {
         return true;
+    }
     found = true;
 
     // Extract the arguments.
@@ -159,12 +167,16 @@ bool preprocessFile(std::string& contents)
         // Find the next comment.
         size_t commentStart = contents.find("//", pos);
         if (commentStart == std::string::npos)
+        {
             break;
+        }
 
         // Find the end of the comment.
         size_t commentEnd = contents.find("\n", commentStart);
         if (commentEnd == std::string::npos)
+        {
             commentEnd = contents.size();
+        }
 
         // Remove the comment.
         contents.erase(commentStart, commentEnd - commentStart);
@@ -177,7 +189,9 @@ bool preprocessFile(std::string& contents)
         // Find the next comment.
         size_t commentStart = contents.find("/*", pos);
         if (commentStart == std::string::npos)
+        {
             break;
+        }
 
         // Find the end of the comment.
         size_t commentEnd = contents.find("*/", commentStart);
@@ -194,25 +208,35 @@ bool preprocessFile(std::string& contents)
     // Remove unnecessary whitespaces.
     for (pos = 0; pos < contents.size(); pos++)
     {
-        if (isspace(contents[pos]))
+        if (isspace(contents[pos]) != 0)
         {
             contents[pos] = ' ';
 
             size_t whitespaceStart = pos;
             size_t whitespaceEnd = pos;
-            while (whitespaceEnd < contents.size() && isspace(contents[whitespaceEnd]))
+            while (whitespaceEnd < contents.size() && (isspace(contents[whitespaceEnd]) != 0))
+            {
                 whitespaceEnd++;
+            }
             if (pos != 0 && pos != contents.size() - 1)
+            {
                 whitespaceStart += 1;
+            }
             if (whitespaceEnd - whitespaceStart >= 1)
+            {
                 contents.erase(whitespaceStart + 1, whitespaceEnd - whitespaceStart);
+            }
         }
         else if (contents[pos] == '{' || contents[pos] == '}')
         {
-            if (pos > 0 && !isspace(contents[pos - 1]))
+            if (pos > 0 && (isspace(contents[pos - 1]) == 0))
+            {
                 contents.insert(pos, " ");
-            if (pos < contents.size() - 1 && !isspace(contents[pos + 1]))
+            }
+            if (pos < contents.size() - 1 && (isspace(contents[pos + 1]) == 0))
+            {
                 contents.insert(pos + 1, " ");
+            }
         }
     }
 
@@ -242,7 +266,9 @@ void removeComments(std::string& line, bool& isComment)
     // Remove single line comments.
     size_t pos = line.find("//");
     if (pos != std::string::npos)
+    {
         line = line.substr(0, pos);
+    }
 
     // Remove multi-line comments starting in this line.
     do
@@ -256,11 +282,9 @@ void removeComments(std::string& line, bool& isComment)
                 line = line.substr(0, pos) + line.substr(end + 2);
                 break;
             }
-            else
-            {
-                line = line.substr(0, pos);
-                isComment = true;
-            }
+
+            line = line.substr(0, pos);
+            isComment = true;
         }
     } while (false);
 }
@@ -271,21 +295,21 @@ class Parser
 {
 public:
     Parser(fs::path path, std::string_view input)
-        : path(std::move(path))
-        , input(input)
+        : m_path(std::move(path))
+        , m_input(input)
     {
-        this->line = 1;
-        this->column = 1;
+        this->m_line = 1;
+        this->m_column = 1;
     }
 
     /// If the next token matches the given punctuation string, it is consumed and true is returned.
     bool acceptPunctuation(std::string_view token)
     {
         this->skipWS();
-        if (this->input.starts_with(token))
+        if (this->m_input.starts_with(token))
         {
-            this->input.remove_prefix(token.size());
-            this->column += static_cast<int>(token.size());
+            this->m_input.remove_prefix(token.size());
+            this->m_column += static_cast<int>(token.size());
             return true;
         }
         return false;
@@ -295,45 +319,52 @@ public:
     bool acceptKeyword(std::string_view keyword)
     {
         this->skipWS();
-        if (this->input.starts_with(keyword))
-            if (this->input.size() <= keyword.size() || !isalnum(this->input[keyword.size()]))
+        if (this->m_input.starts_with(keyword))
+        {
+            if (this->m_input.size() <= keyword.size() || (isalnum(this->m_input[keyword.size()]) == 0))
             {
-                this->input.remove_prefix(keyword.size());
-                this->column += static_cast<int>(keyword.size());
+                this->m_input.remove_prefix(keyword.size());
+                this->m_column += static_cast<int>(keyword.size());
                 return true;
             }
+        }
         return false;
     }
 
     /// Accepts any of the given keywords.
     bool acceptKeywords(std::initializer_list<std::string_view> keywords)
     {
-        for (auto keyword : keywords)
-            if (this->acceptKeyword(keyword))
-                return true;
-        return false;
+        return std::ranges::any_of(keywords, [this](std::string_view keyword) { return this->acceptKeyword(keyword); });
     }
 
     /// Accepts the next token if it is a string literal.
     bool acceptString(std::string& value)
     {
         this->skipWS();
-        if (!this->input.starts_with("\""))
-            return false;
-        for (size_t i = 1; i < this->input.size(); ++i)
+        if (!this->m_input.starts_with("\""))
         {
-            if (this->input[i] == '\n')
-                break;
-            else if (this->input[i] == '\\')
-                value += this->input[i++];
-            else if (this->input[i] == '"')
+            return false;
+        }
+        for (size_t i = 1; i < this->m_input.size(); ++i)
+        {
+            if (this->m_input[i] == '\n')
             {
-                this->input.remove_prefix(i + 1);
-                this->column += static_cast<int>(i + 1);
+                break;
+            }
+            if (this->m_input[i] == '\\')
+            {
+                value += this->m_input[i++];
+            }
+            else if (this->m_input[i] == '"')
+            {
+                this->m_input.remove_prefix(i + 1);
+                this->m_column += static_cast<int>(i + 1);
                 return true;
             }
             else
-                value += this->input[i];
+            {
+                value += this->m_input[i];
+            }
         }
 
         this->error("Unterminated string literal");
@@ -345,11 +376,13 @@ public:
     {
         this->skipWS();
         size_t start = 0;
-        while (start < this->input.size() && (isalnum(this->input[start]) || this->input[start] == ':'))
+        while (start < this->m_input.size() && ((isalnum(this->m_input[start]) != 0) || this->m_input[start] == ':'))
+        {
             start++;
-        std::string_view identifier = this->input.substr(0, start);
-        this->input.remove_prefix(start);
-        this->column += static_cast<int>(start);
+        }
+        std::string_view identifier = this->m_input.substr(0, start);
+        this->m_input.remove_prefix(start);
+        this->m_column += static_cast<int>(start);
         return identifier;
     }
 
@@ -358,34 +391,39 @@ public:
     {
         this->skipWS();
 
-        if (this->input.empty())
+        if (this->m_input.empty())
+        {
             return;
+        }
 
-        if (isalnum(this->input[0]))
+        if (isalnum(this->m_input[0]) != 0)
         {
             size_t start = 1;
-            while (start < this->input.size() && (isalnum(this->input[start]) || this->input[start] == ':'))
+            while (start < this->m_input.size() &&
+                   ((isalnum(this->m_input[start]) != 0) || this->m_input[start] == ':'))
+            {
                 start++;
-            this->input.remove_prefix(start);
-            this->column += static_cast<int>(start);
+            }
+            this->m_input.remove_prefix(start);
+            this->m_column += static_cast<int>(start);
         }
         else
         {
-            this->input.remove_prefix(1);
-            this->column += 1;
+            this->m_input.remove_prefix(1);
+            this->m_column += 1;
         }
     }
 
     /// Checks if end of file has been reached.
     bool eof() const
     {
-        return this->input.empty();
+        return this->m_input.empty();
     }
 
     /// Prints an error message.
     void error(std::string_view msg)
     {
-        std::cerr << msg << " at " << this->path << ":" << this->line << ":" << this->column << std::endl;
+        std::cerr << msg << " at " << this->m_path << ":" << this->m_line << ":" << this->m_column << std::endl;
     }
 
 private:
@@ -395,43 +433,45 @@ private:
         {
             bool skip = false;
 
-            while (!this->input.empty() && isspace(this->input[0]))
+            while (!this->m_input.empty() && (isspace(this->m_input[0]) != 0))
             {
-                this->column += 1;
-                if (this->input[0] == '\n')
+                this->m_column += 1;
+                if (this->m_input[0] == '\n')
                 {
-                    this->line += 1;
-                    this->column = 1;
+                    this->m_line += 1;
+                    this->m_column = 1;
                 }
-                this->input.remove_prefix(1);
+                this->m_input.remove_prefix(1);
                 skip = true;
             }
 
             // Skip comments
-            if (this->input.starts_with("/*"))
+            if (this->m_input.starts_with("/*"))
             {
-                this->input = this->input.substr(this->input.find("*/") + 2);
+                this->m_input = this->m_input.substr(this->m_input.find("*/") + 2);
                 skip = true;
             }
-            else if (this->input.starts_with("//"))
+            else if (this->m_input.starts_with("//"))
             {
-                while (!this->input.empty() && this->input[0] != '\n')
+                while (!this->m_input.empty() && this->m_input[0] != '\n')
                 {
-                    this->input.remove_prefix(1);
-                    this->column += 1;
+                    this->m_input.remove_prefix(1);
+                    this->m_column += 1;
                 }
                 skip = true;
             }
 
             if (!skip)
+            {
                 break;
+            }
         }
     }
 
-    fs::path path;
-    int line;
-    int column;
-    std::string_view input;
+    fs::path m_path;
+    int m_line;
+    int m_column;
+    std::string_view m_input;
 };
 
 /// Parses a component.
@@ -466,7 +506,9 @@ bool parseComponent(Parser& parser, Component& component)
             scope -= 1;
         }
         else
+        {
             consumed = false;
+        }
 
         // Parse statements within the componnet's scope.
         if (scope == 1 && !ignoreUntilOpenBrace)
@@ -481,7 +523,9 @@ bool parseComponent(Parser& parser, Component& component)
             if (!consumed && parser.acceptKeywords({"static", "const", "constexpr", "using"}))
             {
                 while (!parser.acceptPunctuation(";"))
+                {
                     parser.skipToken();
+                }
                 consumed = true;
             }
 
@@ -492,19 +536,29 @@ bool parseComponent(Parser& parser, Component& component)
                 parser.skipToken();
                 auto name = std::string(parser.extractIdentifier());
                 if (parser.acceptPunctuation("="))
+                {
                     while (!parser.acceptPunctuation(";"))
+                    {
                         parser.skipToken();
+                    }
+                }
                 else if (!parser.acceptPunctuation(";"))
+                {
                     isField = false;
+                }
 
                 if (isField)
+                {
                     component.fields.push_back(name);
+                }
                 consumed = true;
             }
         }
 
         if (!consumed)
+        {
             parser.skipToken();
+        }
     }
 
     std::cerr << "Found component '" << component.name << "' ";
@@ -524,7 +578,7 @@ static bool parse(fs::path path, std::vector<Component>& components)
     if (fs::is_directory(path))
     {
         // Recurse into the directory.
-        for (auto& entry : fs::directory_iterator(path))
+        for (const auto& entry : fs::directory_iterator(path))
         {
             if (!parse(entry.path(), components))
             {
@@ -564,14 +618,20 @@ static bool parse(fs::path path, std::vector<Component>& components)
                     scope += 1;
                 }
                 else if (namespaceStr.empty())
+                {
                     namespaceStr = parser.extractIdentifier();
+                }
                 else
+                {
                     namespaceStr += "::" + std::string(parser.extractIdentifier());
+                }
             }
 
             // Update scope level if braces are found.
             else if (parser.acceptPunctuation("{"))
+            {
                 scope += 1;
+            }
             else if (parser.acceptPunctuation("}"))
             {
                 scope -= 1;
@@ -583,12 +643,18 @@ static bool parse(fs::path path, std::vector<Component>& components)
                     {
                         size_t pos = namespaceStr.find_last_of("::");
                         if (pos != std::string::npos)
+                        {
                             namespaceStr = namespaceStr.substr(0, pos);
+                        }
                         else
+                        {
                             namespaceStr.clear();
+                        }
                     }
                     else
+                    {
                         anonymous = false;
+                    }
                 }
             }
 
@@ -596,13 +662,21 @@ static bool parse(fs::path path, std::vector<Component>& components)
             else if (parser.acceptKeyword("struct"))
             {
                 if (!parser.acceptPunctuation("[["))
+                {
                     continue;
+                }
                 if (!parser.acceptKeyword("cubos"))
+                {
                     continue;
+                }
                 if (!parser.acceptPunctuation("::"))
+                {
                     continue;
+                }
                 if (!parser.acceptKeyword("component"))
+                {
                     continue;
+                }
                 if (!parser.acceptPunctuation("("))
                 {
                     parser.error("Expected '(' after 'cubos::component'");
@@ -648,14 +722,18 @@ static bool parse(fs::path path, std::vector<Component>& components)
                 }
 
                 if (!parseComponent(parser, component))
+                {
                     return false;
+                }
 
                 components.push_back(component);
             }
 
             // Skip unknown token.
             else
+            {
                 parser.skipToken();
+            }
         }
     }
 
@@ -669,7 +747,9 @@ static bool generate(const GenerateOptions& options)
 {
     std::vector<Component> components;
     if (!parse(options.input, components))
+    {
         return false;
+    }
 
     fs::create_directories(options.output.parent_path());
     if (std::filesystem::exists(options.output))
@@ -718,30 +798,38 @@ static bool generate(const GenerateOptions& options)
 
         file << std::endl;
         file << "template <>" << std::endl;
-        file << "void cubos::core::data::serialize<" << id << ">(Serializer& ser, const " << id << "& c," << std::endl;
+        file << "void cubos::core::data::serialize<" << id << ">(Serializer& ser, const " << id << "& obj," << std::endl;
         file << "                                         const char* name)" << std::endl;
         file << "{" << std::endl;
         if (component.fields.size() == 1)
-            file << "    ser.write(c." << component.fields[0] << ", name);" << std::endl;
+        {
+            file << "    ser.write(obj." << component.fields[0] << ", name);" << std::endl;
+        }
         else
         {
             file << "    ser.beginObject(name);" << std::endl;
             for (auto& field : component.fields)
-                file << "    ser.write(c." << field << ", \"" << field << "\");" << std::endl;
+            {
+                file << "    ser.write(obj." << field << ", \"" << field << "\");" << std::endl;
+            }
             file << "    ser.endObject();" << std::endl;
         }
         file << "}" << std::endl;
         file << std::endl;
         file << "template <>" << std::endl;
-        file << "void cubos::core::data::deserialize<" << id << ">(Deserializer& des, " << id << "& c)" << std::endl;
+        file << "void cubos::core::data::deserialize<" << id << ">(Deserializer& des, " << id << "& obj)" << std::endl;
         file << "{" << std::endl;
         if (component.fields.size() == 1)
-            file << "    des.read(c." << component.fields[0] << ");" << std::endl;
+        {
+            file << "    des.read(obj." << component.fields[0] << ");" << std::endl;
+        }
         else
         {
             file << "    des.beginObject();" << std::endl;
             for (auto& field : component.fields)
-                file << "    des.read(c." << field << ");" << std::endl;
+            {
+                file << "    des.read(obj." << field << ");" << std::endl;
+            }
             file << "    des.endObject();" << std::endl;
         }
         file << "}" << std::endl;
@@ -772,7 +860,7 @@ int runGenerate(int argc, char** argv)
         printHelp();
         return 1;
     }
-    else if (options.help)
+    if (options.help)
     {
         printHelp();
         return 0;

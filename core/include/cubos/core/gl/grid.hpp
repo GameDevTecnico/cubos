@@ -74,9 +74,9 @@ namespace cubos::core::gl
         /// The conversion fails if no matching index is found.
         /// @param src The original palette.
         /// @param dst The new palette.
-        /// @param min_similarity The minimum similarity between two materials to consider them the same.
+        /// @param minSimilarity The minimum similarity between two materials to consider them the same.
         /// @return Whether the conversion was successful.
-        bool convert(const Palette& src, const Palette& dst, float min_similarity);
+        bool convert(const Palette& src, const Palette& dst, float minSimilarity);
 
     private:
         friend void data::serialize(data::Serializer&, const Grid&, const char*);

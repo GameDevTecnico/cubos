@@ -104,7 +104,9 @@ size_t BufferStream::read(void* data, size_t size)
 size_t BufferStream::write(const void* data, size_t size)
 {
     if (this->readOnly)
+    {
         return 0;
+    }
 
     size_t bytesRemaining = this->size - this->position;
     if (size > bytesRemaining)
@@ -145,31 +147,49 @@ void BufferStream::seek(ptrdiff_t offset, SeekOrigin origin)
     if (origin == SeekOrigin::Current)
     {
         if (offset < 0 && static_cast<size_t>(-offset) > this->position)
+        {
             this->position = 0;
+        }
         else if (offset < 0)
+        {
             this->position -= static_cast<size_t>(-offset);
+        }
         else
+        {
             this->position += static_cast<size_t>(offset);
+        }
     }
     else if (origin == SeekOrigin::End)
     {
         if (offset < 0 && static_cast<size_t>(-offset) > this->size)
+        {
             this->position = 0;
+        }
         else if (offset < 0)
+        {
             this->position = this->size - static_cast<size_t>(-offset);
+        }
         else
+        {
             this->position = this->size + static_cast<size_t>(offset);
+        }
     }
     else
     {
         if (offset < 0)
+        {
             this->position = 0;
+        }
         else
+        {
             this->position = static_cast<size_t>(offset);
+        }
     }
 
     if (this->position > this->size)
+    {
         this->position = this->size;
+    }
 
     this->reachedEof = false;
 }
@@ -182,6 +202,8 @@ bool BufferStream::eof() const
 char BufferStream::peek() const
 {
     if (this->position == this->size)
+    {
         return '\0';
+    }
     return ((char*)this->buffer)[this->position];
 }

@@ -15,7 +15,7 @@ TEST(Cubos_Memory_JSON_Serialization, Serialize_Primitives)
         serializer.beginObject(nullptr);
         serializer.write(static_cast<uint8_t>(1), "uint8");
         serializer.write(12, "integer");
-        serializer.write(0.5f, "float");
+        serializer.write(0.5F, "float");
         serializer.write(6.5, "double");
         serializer.write(true, "bool");
         serializer.write("string", "string");
@@ -50,8 +50,10 @@ TEST(Cubos_Memory_JSON_Serialization, Serialize_Array)
         serializer.beginObject(nullptr);
         serializer.write(vec, "vector");
         serializer.beginArray(3, "strings");
-        for (auto & str : strs)
+        for (auto& str : strs)
+        {
             serializer.write(str, nullptr);
+        }
         serializer.endArray();
         serializer.write(vec3d, "vector3d");
         serializer.endObject();

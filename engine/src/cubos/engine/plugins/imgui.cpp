@@ -18,7 +18,9 @@ static void begin(ecs::EventReader<io::WindowEvent> events)
     //       the mouse is over an ImGui window.
     //       Not sure how we will propagate that information to other systems yet.
     for (auto event : events)
+    {
         ui::handleEvent(event);
+    }
     ui::beginFrame();
 }
 

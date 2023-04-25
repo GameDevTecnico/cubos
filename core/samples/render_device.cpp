@@ -52,7 +52,7 @@ int main()
         auto pp = renderDevice.createShaderPipeline(vs, ps);
 
         float verts[] = {
-            -0.5f, -0.5f, 0.0f, 0.0f, -0.5f, +0.5f, 0.0f, 1.0f, +0.5f, +0.5f, 1.0f, 1.0f, +0.5f, -0.5f, 1.0f, 0.0f,
+            -0.5F, -0.5F, 0.0F, 0.0F, -0.5F, +0.5F, 0.0F, 1.0F, +0.5F, +0.5F, 1.0F, 1.0F, +0.5F, -0.5F, 1.0F, 0.0F,
         };
 
         auto vb = renderDevice.createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
@@ -64,10 +64,10 @@ int main()
         auto ib = renderDevice.createIndexBuffer(sizeof(indices), indices, gl::IndexFormat::UInt, gl::Usage::Static);
 
         auto cb = renderDevice.createConstantBuffer(sizeof(glm::mat4), nullptr, gl::Usage::Dynamic);
-        auto cbBP = pp->getBindingPoint("MVP");
+        auto* cbBP = pp->getBindingPoint("MVP");
 
         float textureData[] = {
-            0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+            0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 1.0F,
         };
 
         gl::Texture2DDesc textureDesc;
@@ -76,7 +76,7 @@ int main()
         textureDesc.width = 2;
         textureDesc.height = 2;
         auto texture = renderDevice.createTexture2D(textureDesc);
-        auto textureBP = pp->getBindingPoint("colorTexture");
+        auto* textureBP = pp->getBindingPoint("colorTexture");
 
         gl::SamplerDesc samplerDesc;
         samplerDesc.minFilter = gl::TextureFilter::Linear;
@@ -107,14 +107,14 @@ int main()
         rsDesc.rasterMode = gl::RasterMode::Wireframe;
         auto rs = renderDevice.createRasterState(rsDesc);
 
-        float t = 0.0f;
+        float t = 0.0F;
 
         while (!window->shouldClose())
         {
             auto sz = window->getFramebufferSize();
             renderDevice.setViewport(0, 0, sz.x, sz.y);
 
-            renderDevice.clearColor(0.894f, 0.592f, 0.141f, 0.0f);
+            renderDevice.clearColor(0.894F, 0.592F, 0.141F, 0.0F);
 
             renderDevice.setShaderPipeline(pp);
             renderDevice.setVertexArray(va);
@@ -126,11 +126,11 @@ int main()
 
             {
                 auto& mvp = *(glm::mat4*)cb->map();
-                mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
-                      glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f},
-                                  glm::vec3{0.0f, 1.0f, 0.0f}) *
-                      glm::translate(glm::mat4(1.0f), glm::vec3{-2.0f, 0.0f, 0.0f}) *
-                      glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
+                mvp = glm::perspective(glm::radians(70.0F), float(sz.x) / float(sz.y), 0.1F, 1000.0F) *
+                      glm::lookAt(glm::vec3{0.0F, 0.0F, -5.0F}, glm::vec3{0.0F, 0.0F, 0.0F},
+                                  glm::vec3{0.0F, 1.0F, 0.0F}) *
+                      glm::translate(glm::mat4(1.0F), glm::vec3{-2.0F, 0.0F, 0.0F}) *
+                      glm::rotate(glm::mat4(1.0F), t, glm::vec3{0.0F, 1.0F, 0.0F});
                 cb->unmap();
             }
 
@@ -139,11 +139,11 @@ int main()
 
             {
                 auto& mvp = *(glm::mat4*)cb->map();
-                mvp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
-                      glm::lookAt(glm::vec3{0.0f, 0.0f, -5.0f}, glm::vec3{0.0f, 0.0f, 0.0f},
-                                  glm::vec3{0.0f, 1.0f, 0.0f}) *
-                      glm::translate(glm::mat4(1.0f), glm::vec3{2.0f, 0.0f, 0.0f}) *
-                      glm::rotate(glm::mat4(1.0f), t, glm::vec3{0.0f, 1.0f, 0.0f});
+                mvp = glm::perspective(glm::radians(70.0F), float(sz.x) / float(sz.y), 0.1F, 1000.0F) *
+                      glm::lookAt(glm::vec3{0.0F, 0.0F, -5.0F}, glm::vec3{0.0F, 0.0F, 0.0F},
+                                  glm::vec3{0.0F, 1.0F, 0.0F}) *
+                      glm::translate(glm::mat4(1.0F), glm::vec3{2.0F, 0.0F, 0.0F}) *
+                      glm::rotate(glm::mat4(1.0F), t, glm::vec3{0.0F, 1.0F, 0.0F});
                 cb->unmap();
             }
 
@@ -152,9 +152,11 @@ int main()
 
             window->swapBuffers();
             while (window->pollEvent().has_value())
+            {
                 ; // Do nothing with events.
+            }
 
-            t += 0.01f;
+            t += 0.01F;
         }
     }
 

@@ -22,25 +22,25 @@ struct Human
 };
 
 template <>
-void cubos::core::data::serialize<Fruit>(Serializer& ser, const Fruit& fruit, const char* name)
+void cubos::core::data::serialize<Fruit>(Serializer& ser, const Fruit& obj, const char* name)
 {
     ser.beginObject(name);
-    ser.write(fruit.name, "name");
-    ser.write(fruit.weight, "weight");
+    ser.write(obj.name, "name");
+    ser.write(obj.weight, "weight");
     ser.endObject();
 }
 
 template <>
-void cubos::core::data::serialize<Human>(Serializer& ser, const Human& human, const char* name)
+void cubos::core::data::serialize<Human>(Serializer& ser, const Human& obj, const char* name)
 {
     // Get necessary context from the serializer.
     auto& map = ser.context().get<SerializationMap<Human*, int>>();
 
     ser.beginObject(name);
-    ser.write(map.getId(human.father), "father");
-    ser.write(map.getId(human.mother), "mother");
-    ser.write(human.age, "age");
-    ser.write(human.name, "name");
+    ser.write(map.getId(obj.father), "father");
+    ser.write(map.getId(obj.mother), "mother");
+    ser.write(obj.age, "age");
+    ser.write(obj.name, "name");
     ser.endObject();
 }
 
@@ -62,7 +62,7 @@ int main()
     // Array to serialize
     std::vector<Human> humans(5);
     humans[0] = {nullptr, nullptr, 43, "John"};
-    humans[1] = {&humans[0], &humans[2], 12, "Alex"};
+    humans[1] = {humans.data(), &humans[2], 12, "Alex"};
     humans[2] = {nullptr, &humans[3], 41, "Jane"};
     humans[3] = {nullptr, nullptr, 82, "Emma"};
     humans[4] = {nullptr, &humans[4], 53, "Oliver"};

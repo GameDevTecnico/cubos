@@ -5,15 +5,15 @@
 using namespace cubos::core;
 
 template <>
-void data::serialize<Settings>(Serializer& ser, const Settings& settings, const char* name)
+void data::serialize<Settings>(Serializer& ser, const Settings& obj, const char* name)
 {
-    ser.write(settings.getValues(), name);
+    ser.write(obj.getValues(), name);
 }
 
 template <>
-void data::deserialize<Settings>(Deserializer& des, Settings& settings)
+void data::deserialize<Settings>(Deserializer& des, Settings& obj)
 {
-    des.read(settings.getValues());
+    des.read(obj.getValues());
 }
 
 void Settings::clear()
@@ -28,10 +28,12 @@ void Settings::setBool(const std::string& key, const bool& value)
 
 bool Settings::getBool(const std::string& key, const bool& defaultValue) const
 {
-    if (this->values.count(key) == 0)
+    if (!this->values.contains(key))
+    {
         return defaultValue;
+    }
 
-    return this->values.at(key) == "true" ? true : false;
+    return this->values.at(key) == "true";
 }
 
 void Settings::setString(const std::string& key, const std::string& value)
@@ -41,8 +43,10 @@ void Settings::setString(const std::string& key, const std::string& value)
 
 std::string Settings::getString(const std::string& key, const std::string& defaultValue) const
 {
-    if (this->values.count(key) == 0)
+    if (!this->values.contains(key))
+    {
         return defaultValue;
+    }
 
     return this->values.at(key);
 }
@@ -54,8 +58,10 @@ void Settings::setInteger(const std::string& key, const int value)
 
 int Settings::getInteger(const std::string& key, const int defaultValue) const
 {
-    if (this->values.count(key) == 0)
+    if (!this->values.contains(key))
+    {
         return defaultValue;
+    }
 
     return std::stoi(this->values.at(key));
 }
@@ -67,8 +73,10 @@ void Settings::setDouble(const std::string& key, const double value)
 
 double Settings::getDouble(const std::string& key, const double defaultValue) const
 {
-    if (this->values.count(key) == 0)
+    if (!this->values.contains(key))
+    {
         return defaultValue;
+    }
 
     return std::stod(this->values.at(key));
 }

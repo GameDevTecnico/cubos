@@ -20,17 +20,19 @@ int main()
     {
         double t = window->getTime();
         if (prevT < 0)
+        {
             prevT = t;
+        }
         double deltaT = t - prevT;
         prevT = t;
 
         auto sz = window->getFramebufferSize();
-        renderDevice.clearColor(0.0, 0.0, 0.0, 0.0f);
+        renderDevice.clearColor(0.0, 0.0, 0.0, 0.0F);
         renderDevice.setViewport(0, 0, sz.x, sz.y);
 
-        auto vp = glm::perspective(glm::radians(70.0f), float(sz.x) / float(sz.y), 0.1f, 1000.0f) *
-                  glm::lookAt(glm::vec3{3 * sinf((float)t), 3, 3 * cosf((float)t)}, glm::vec3{0.0f, 0.0f, 0.0f},
-                              glm::vec3{0.0f, 1.0f, 0.0f});
+        auto vp = glm::perspective(glm::radians(70.0F), float(sz.x) / float(sz.y), 0.1F, 1000.0F) *
+                  glm::lookAt(glm::vec3{3 * sinf((float)t), 3, 3 * cosf((float)t)}, glm::vec3{0.0F, 0.0F, 0.0F},
+                              glm::vec3{0.0F, 1.0F, 0.0F});
 
         gl::Debug::drawWireCube({0.0, 0.0, 0.0}, {1.0, 1.0, 1.0}, 0.0);
         gl::Debug::flush(vp, deltaT);
@@ -41,9 +43,13 @@ int main()
             {
                 auto keyEvent = std::get<io::KeyEvent>(event.value());
                 if (keyEvent.key == io::Key::C && keyEvent.pressed)
+                {
                     gl::Debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
+                }
                 else if (keyEvent.key == io::Key::S && keyEvent.pressed)
+                {
                     gl::Debug::drawWireSphere(glm::vec3(0, 0, 0), 1, 1);
+                }
             }
         }
     }
