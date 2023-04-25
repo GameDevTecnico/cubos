@@ -1,4 +1,4 @@
-#include <cubos/engine/gl/renderer.hpp>
+#include <cubos/engine/renderer/renderer.hpp>
 
 using namespace cubos::core::gl;
 using namespace cubos::engine::gl;

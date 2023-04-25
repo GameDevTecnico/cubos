@@ -8,8 +8,8 @@
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/log.hpp>
 
-#include <cubos/engine/gl/deferred/renderer.hpp>
-#include <cubos/engine/gl/frame.hpp>
+#include <cubos/engine/renderer/deferred/renderer.hpp>
+#include <cubos/engine/renderer/frame.hpp>
 
 using namespace cubos;
 using namespace cubos::core;

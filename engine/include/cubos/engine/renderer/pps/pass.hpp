@@ -6,7 +6,7 @@
 
 #include <cubos/core/gl/render_device.hpp>
 
-#include <cubos/engine/gl/pps/manager.hpp>
+#include <cubos/engine/renderer/pps/manager.hpp>
 
 namespace cubos::engine::gl::pps
 {
