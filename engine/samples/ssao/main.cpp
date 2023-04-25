@@ -1,21 +1,21 @@
-#include <cubos/core/log.hpp>
-#include <cubos/core/io/window.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
+
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/data/std_archive.hpp>
+#include <cubos/core/gl/palette.hpp>
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/gl/vertex.hpp>
-#include <cubos/core/gl/palette.hpp>
+#include <cubos/core/io/window.hpp>
+#include <cubos/core/log.hpp>
 #include <cubos/core/settings.hpp>
 
 #include <cubos/engine/data/asset_manager.hpp>
 #include <cubos/engine/data/grid.hpp>
 #include <cubos/engine/data/palette.hpp>
-#include <cubos/engine/gl/frame.hpp>
 #include <cubos/engine/gl/deferred/renderer.hpp>
-
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include <glm/gtx/quaternion.hpp>
+#include <cubos/engine/gl/frame.hpp>
 
 using namespace cubos;
 

@@ -1,9 +1,10 @@
-#include <gtest/gtest.h>
-#include <cubos/core/memory/buffer_stream.hpp>
-
+#include <array>
 #include <random>
 #include <string>
-#include <array>
+
+#include <gtest/gtest.h>
+
+#include <cubos/core/memory/buffer_stream.hpp>
 
 TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Integers)
 {

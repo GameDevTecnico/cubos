@@ -68,7 +68,8 @@ data::Package ComponentManager::pack(uint32_t id, std::size_t componentId, data:
     return this->entries[componentId - 1].storage->pack(id, context);
 }
 
-bool ComponentManager::unpack(uint32_t id, std::size_t componentId, const data::Package& package, data::Context& context)
+bool ComponentManager::unpack(uint32_t id, std::size_t componentId, const data::Package& package,
+                              data::Context& context)
 {
     return this->entries[componentId - 1].storage->unpack(id, package, context);
 }

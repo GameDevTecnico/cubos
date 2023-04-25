@@ -1,11 +1,11 @@
-#include <cubos/core/log.hpp>
-#include <cubos/core/io/window.hpp>
-#include <cubos/core/gl/render_device.hpp>
+#include <imgui.h>
+
 #include <cubos/core/gl/material.hpp>
+#include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/io/window.hpp>
+#include <cubos/core/log.hpp>
 #include <cubos/core/ui/imgui.hpp>
 #include <cubos/core/ui/serialization.hpp>
-
-#include <imgui.h>
 
 using namespace cubos::core;
 

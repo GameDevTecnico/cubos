@@ -1,10 +1,10 @@
-#include <cubos/core/log.hpp>
-#include <cubos/core/io/window.hpp>
-#include <cubos/core/gl/render_device.hpp>
+#include <cstdio>
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <cstdio>
+#include <cubos/core/gl/render_device.hpp>
+#include <cubos/core/io/window.hpp>
+#include <cubos/core/log.hpp>
 
 using namespace cubos::core;
 

@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
-#include <cubos/core/log.hpp>
+
 #include <cubos/core/ecs/event_pipe.hpp>
-#include <cubos/core/ecs/event_writer.hpp>
 #include <cubos/core/ecs/event_reader.hpp>
+#include <cubos/core/ecs/event_writer.hpp>
+#include <cubos/core/log.hpp>
 
 using namespace cubos::core::ecs;
 
@@ -74,10 +75,10 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     {
         enum Mask
         {
-            KeyEvent = 1 << 0,    // 0001
-            MouseEvent = 1 << 1,  // 0010
-            WheelEvent = 1 << 2,  // 0100
-            ALL = (1 << 3) - 1,   // 0111
+            KeyEvent = 1 << 0,   // 0001
+            MouseEvent = 1 << 1, // 0010
+            WheelEvent = 1 << 2, // 0100
+            ALL = (1 << 3) - 1,  // 0111
         };
 
         int data; // random data member

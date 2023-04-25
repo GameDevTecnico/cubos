@@ -580,7 +580,8 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data, std::size_t level) override
+    void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data,
+                std::size_t level) override
     {
         glBindTexture(GL_TEXTURE_2D, this->id);
         glTexSubImage2D(GL_TEXTURE_2D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
@@ -615,7 +616,8 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data, std::size_t level) override
+    void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data,
+                std::size_t level) override
     {
         glBindTexture(GL_TEXTURE_2D_ARRAY, this->id);
         glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
@@ -651,8 +653,8 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(std::size_t x, std::size_t y, std::size_t z, std::size_t width, std::size_t height, std::size_t depth, const void* data,
-                std::size_t level) override
+    void update(std::size_t x, std::size_t y, std::size_t z, std::size_t width, std::size_t height, std::size_t depth,
+                const void* data, std::size_t level) override
     {
         glBindTexture(GL_TEXTURE_3D, this->id);
         glTexSubImage3D(GL_TEXTURE_3D, static_cast<GLint>(level), static_cast<GLint>(x), static_cast<GLint>(y),
@@ -688,7 +690,8 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data, CubeFace face, std::size_t level) override
+    void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data, CubeFace face,
+                std::size_t level) override
     {
         GLenum glFace;
         cubeFaceToGL(face, glFace);
@@ -726,8 +729,8 @@ public:
         glDeleteTextures(1, &this->id);
     }
 
-    void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data, CubeFace face,
-                std::size_t level = 0) override
+    void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data,
+                CubeFace face, std::size_t level = 0) override
     {
         glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, this->id);
         glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, static_cast<GLint>(level), static_cast<GLint>(x),
@@ -1015,7 +1018,8 @@ public:
         }
 
         glUniform1i(this->loc, this->tex);
-        glBindImageTexture(static_cast<GLuint>(this->tex), texImpl->id, level, GL_TRUE, 0, glAccess, texImpl->internalFormat);
+        glBindImageTexture(static_cast<GLuint>(this->tex), texImpl->id, level, GL_TRUE, 0, glAccess,
+                           texImpl->internalFormat);
     }
 
     void setConstant(glm::vec2 val) override
