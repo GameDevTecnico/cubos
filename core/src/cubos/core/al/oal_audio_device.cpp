@@ -31,7 +31,7 @@ public:
         alDeleteBuffers(1, &this->id);
     }
 
-    void fill(Format format, std::size_t size, const void* data, size_t frequency) override
+    void fill(Format format, std::size_t size, const void* data, std::size_t frequency) override
     {
         ALenum alFormat = 0;
 
@@ -101,12 +101,12 @@ public:
 
     void setLooping(bool looping) override
     {
-        alSourcei(this->id, AL_LOOPING, looping);
+        alSourcei(this->id, AL_LOOPING, static_cast<ALint>(looping));
     }
 
     void setRelative(bool relative) override
     {
-        alSourcei(this->id, AL_SOURCE_RELATIVE, relative);
+        alSourcei(this->id, AL_SOURCE_RELATIVE, static_cast<ALint>(relative));
     }
 
     void setDistance(float maxDistance) override
@@ -146,8 +146,8 @@ public:
 OALAudioDevice::OALAudioDevice(const std::string& specifier)
 {
 #ifdef WITH_OPENAL
-    auto device = alcOpenDevice(specifier.c_str());
-    auto context = alcCreateContext(device, nullptr);
+    auto* device = alcOpenDevice(specifier.c_str());
+    auto* context = alcCreateContext(device, nullptr);
     alcMakeContextCurrent(context);
 #else
     (void)specifier;
@@ -158,8 +158,8 @@ OALAudioDevice::OALAudioDevice(const std::string& specifier)
 OALAudioDevice::~OALAudioDevice()
 {
 #ifdef WITH_OPENAL
-    auto context = alcGetCurrentContext();
-    auto device = alcGetContextsDevice(context);
+    auto* context = alcGetCurrentContext();
+    auto* device = alcGetContextsDevice(context);
     alcMakeContextCurrent(nullptr);
     alcDestroyContext(context);
     alcCloseDevice(device);
