@@ -3,7 +3,7 @@
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/log.hpp>
 
-#include <cubos/engine/gl/pps/bloom.hpp>
+#include <cubos/engine/renderer/pps/bloom.hpp>
 
 using namespace cubos;
 using namespace cubos::core::gl;

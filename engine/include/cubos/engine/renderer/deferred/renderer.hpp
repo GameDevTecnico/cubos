@@ -6,7 +6,7 @@
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/settings.hpp>
 
-#include <cubos/engine/gl/renderer.hpp>
+#include <cubos/engine/renderer/renderer.hpp>
 
 #define CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT 128

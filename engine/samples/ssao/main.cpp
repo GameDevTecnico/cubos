@@ -14,8 +14,8 @@
 #include <cubos/engine/data/asset_manager.hpp>
 #include <cubos/engine/data/grid.hpp>
 #include <cubos/engine/data/palette.hpp>
-#include <cubos/engine/gl/deferred/renderer.hpp>
-#include <cubos/engine/gl/frame.hpp>
+#include <cubos/engine/renderer/deferred/renderer.hpp>
+#include <cubos/engine/renderer/frame.hpp>
 
 using namespace cubos;
 

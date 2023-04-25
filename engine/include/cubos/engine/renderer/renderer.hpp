@@ -10,7 +10,7 @@
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/io/window.hpp>
 
-#include <cubos/engine/gl/pps/manager.hpp>
+#include <cubos/engine/renderer/pps/manager.hpp>
 
 namespace cubos::engine::gl
 {

@@ -1,7 +1,7 @@
 #include <utility>
 
-#include <cubos/engine/gl/pps/manager.hpp>
-#include <cubos/engine/gl/pps/pass.hpp>
+#include <cubos/engine/renderer/pps/manager.hpp>
+#include <cubos/engine/renderer/pps/pass.hpp>
 
 using namespace cubos::core::gl;
 using namespace cubos::engine::gl;

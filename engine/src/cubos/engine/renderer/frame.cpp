@@ -1,6 +1,6 @@
 #include <utility>
 
-#include <cubos/engine/gl/frame.hpp>
+#include <cubos/engine/renderer/frame.hpp>
 
 using namespace cubos::core::gl;
 using namespace cubos::engine::gl;
