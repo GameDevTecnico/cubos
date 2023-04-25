@@ -85,7 +85,7 @@ const glm::uvec3& Grid::getSize() const
 
 void Grid::clear()
 {
-    std::ranges::fill(this->indices, 0);
+    std::fill(this->indices.begin(), this->indices.end(), 0);
 }
 
 uint16_t Grid::get(const glm::ivec3& position) const
