@@ -77,7 +77,7 @@ BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
 
     data::Context context;
     context.push(map);
-    for (auto& buf : blueprint.buffers)
+    for (const auto& buf : blueprint.buffers)
     {
         buf.second->addAll(*this, context);
     }
@@ -118,7 +118,7 @@ void CommandBuffer::commit()
     }
 
     // 4. Entities masks are set.
-    for (auto& entity : this->changed)
+    for (const auto& entity : this->changed)
     {
         // Get the old mask.
         auto mask = this->world.entityManager.getMask(entity);

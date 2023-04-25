@@ -15,10 +15,10 @@ int main()
     {
         enum Mask
         {
-            KEY_EVENT = 1 << 0,   // 0001
-            MOUSE_EVENT = 1 << 1, // 0010
-            WHEEL_EVENT = 1 << 2, // 0100
-            ALL = ~0u,            // 1111
+            KeyEvent = 1 << 0,   // 0001
+            MouseEvent = 1 << 1, // 0010
+            WheelEvent = 1 << 2, // 0100
+            ALL = ~0U,           // 1111
         };
 
         int data; // random data member
@@ -27,10 +27,10 @@ int main()
     auto pipe = EventPipe<MyEvent>();
     auto writer = EventWriter<MyEvent>(pipe);
 
-    writer.push(MyEvent{.data = 4}, MyEvent::Mask::KEY_EVENT);
-    writer.push(MyEvent{.data = 1}, MyEvent::Mask::WHEEL_EVENT);
-    writer.push(MyEvent{.data = 2}, MyEvent::Mask::MOUSE_EVENT);
-    writer.push(MyEvent{.data = 6}, MyEvent::Mask::MOUSE_EVENT);
+    writer.push(MyEvent{.data = 4}, MyEvent::Mask::KeyEvent);
+    writer.push(MyEvent{.data = 1}, MyEvent::Mask::WheelEvent);
+    writer.push(MyEvent{.data = 2}, MyEvent::Mask::MouseEvent);
+    writer.push(MyEvent{.data = 6}, MyEvent::Mask::MouseEvent);
     writer.push(MyEvent{.data = 15});
     writer.push(MyEvent{.data = 11});
 
@@ -39,7 +39,7 @@ int main()
     Stream::stdOut.printf("\n\n### mouse events using .read():");
     while (true)
     {
-        auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
+        auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MouseEvent>(pipe, index);
         auto it = mouseReader.read();
         if (it == std::nullopt)
         {
@@ -51,7 +51,7 @@ int main()
     // range based
 
     index = 0;
-    auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
+    auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MouseEvent>(pipe, index);
     Stream::stdOut.printf("\n\n### mouse events:");
     auto x = mouseReader.read(); // already read one event, the loop will only loop once
     Stream::stdOut.printf("{} , ", x->get().data);
@@ -62,7 +62,7 @@ int main()
 
     index = 0;
     Stream::stdOut.printf("\n\n### wheel + key events:");
-    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::KEY_EVENT | MyEvent::Mask::WHEEL_EVENT>(pipe, index))
+    for (const auto& it : EventReader<MyEvent, MyEvent::Mask::KeyEvent | MyEvent::Mask::WheelEvent>(pipe, index))
     {
         Stream::stdOut.printf(" {} , ", it.data);
     }

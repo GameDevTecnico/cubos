@@ -75,7 +75,7 @@ void JSONSerializer::writeString(const char* value, const char* name)
 
 void JSONSerializer::beginObject(const char* name)
 {
-    this->frames.push({Mode::Object, nlohmann::ordered_json::object(), nullptr, name ? name : ""});
+    this->frames.push({Mode::Object, nlohmann::ordered_json::object(), nullptr, name != nullptr ? name : ""});
 }
 
 void JSONSerializer::endObject()
@@ -87,9 +87,9 @@ void JSONSerializer::endObject()
     this->writeJSON(std::move(json), name.empty() ? nullptr : name.c_str());
 }
 
-void JSONSerializer::beginArray(size_t, const char* name)
+void JSONSerializer::beginArray(size_t /*length*/, const char* name)
 {
-    this->frames.push({Mode::Array, nlohmann::ordered_json::array(), nullptr, name ? name : ""});
+    this->frames.push({Mode::Array, nlohmann::ordered_json::array(), nullptr, name != nullptr ? name : ""});
 }
 
 void JSONSerializer::endArray()
@@ -101,9 +101,9 @@ void JSONSerializer::endArray()
     this->writeJSON(std::move(json), name.empty() ? nullptr : name.c_str());
 }
 
-void JSONSerializer::beginDictionary(size_t, const char* name)
+void JSONSerializer::beginDictionary(size_t /*length*/, const char* name)
 {
-    this->frames.push({Mode::Dictionary, nlohmann::ordered_json::object(), nullptr, name ? name : ""});
+    this->frames.push({Mode::Dictionary, nlohmann::ordered_json::object(), nullptr, name != nullptr ? name : ""});
 }
 
 void JSONSerializer::endDictionary()

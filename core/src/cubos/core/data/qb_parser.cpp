@@ -7,7 +7,11 @@
 bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream& stream)
 {
     uint8_t version[4] = {0, 0, 0, 0};
-    uint32_t colorFormat, zAxisOrientation, compressed, visibilityMaskEncoded, numMatrices;
+    uint32_t colorFormat;
+    uint32_t zAxisOrientation;
+    uint32_t compressed;
+    uint32_t visibilityMaskEncoded;
+    uint32_t numMatrices;
 
     // Parse the version of the file.
     stream.read(version, 4);
@@ -16,7 +20,7 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
         CUBOS_ERROR("Unexpected end of file while reading file version");
         return false;
     }
-    else if (version[0] != 1 || version[1] != 1 || version[2] != 0 || version[3] != 0)
+    if (version[0] != 1 || version[1] != 1 || version[2] != 0 || version[3] != 0)
     {
         CUBOS_ERROR("Unsupported version {}.{}.{}.{}, only 1.1.0.0 is supported", version[0], version[1], version[2],
                     version[3]);
@@ -40,7 +44,7 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
         CUBOS_ERROR("Unexpected end of file while reading file header");
         return false;
     }
-    else if (visibilityMaskEncoded)
+    if (visibilityMaskEncoded != 0U)
     {
         CUBOS_ERROR("Visibility mask encoding is not supported");
         return false;
@@ -51,8 +55,12 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
     for (uint32_t i = 0; i < numMatrices; ++i)
     {
         uint8_t nameLen;
-        uint32_t sizeX, sizeY, sizeZ;
-        int32_t posX, posY, posZ;
+        uint32_t sizeX;
+        uint32_t sizeY;
+        uint32_t sizeZ;
+        int32_t posX;
+        int32_t posY;
+        int32_t posZ;
 
         // Read the matrix name.
         stream.read(&nameLen, 1);
@@ -84,23 +92,33 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
             size_t nextMat = 1;
 
             for (uint32_t z = 0; z < sizeZ; ++z)
+            {
                 for (uint32_t y = 0; y < sizeY; ++y)
+                {
                     for (uint32_t x = 0; x < sizeX; ++x)
                     {
                         stream.read(color, 4);
                         if (color[3] == 0)
+                        {
                             continue;
-                        else if (colorFormat) // BGRA -> RGBA
+                        }
+                        if (colorFormat != 0U)
+                        { // BGRA -> RGBA
                             std::swap(color[0], color[2]);
-                        glm::vec4 colorVec(static_cast<float>(color[0]) / 255.0f, static_cast<float>(color[1]) / 255.0f,
-                                           static_cast<float>(color[2]) / 255.0f,
-                                           static_cast<float>(color[3]) / 255.0f);
+                        }
+                        glm::vec4 colorVec(static_cast<float>(color[0]) / 255.0F, static_cast<float>(color[1]) / 255.0F,
+                                           static_cast<float>(color[2]) / 255.0F,
+                                           static_cast<float>(color[3]) / 255.0F);
 
                         // Check if the material is already in the palette.
                         size_t mat;
                         for (mat = 1; mat < nextMat; ++mat)
+                        {
                             if (matrices[i].palette.get(static_cast<uint16_t>(mat)).color == colorVec)
+                            {
                                 break;
+                            }
+                        }
                         if (mat == nextMat)
                         {
                             if (mat >= 65536)
@@ -119,6 +137,8 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
                         // Set the voxel.
                         matrices[i].grid.set(glm::ivec3(x, y, z), static_cast<uint16_t>(mat));
                     }
+                }
+            }
         }
         else
         {

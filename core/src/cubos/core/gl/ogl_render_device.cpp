@@ -839,7 +839,9 @@ public:
         : id(id)
     {
         for (size_t i = 0; i < CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT; ++i)
+        {
             this->buffers[i] = buffers[i];
+        }
     }
 
     ~OGLVertexArray() override
@@ -887,18 +889,26 @@ public:
     void bind(Sampler sampler) override
     {
         if (sampler)
+        {
             glBindSampler(static_cast<GLuint>(this->tex), std::static_pointer_cast<OGLSampler>(sampler)->id);
+        }
         else
+        {
             glBindSampler(static_cast<GLuint>(this->tex), 0);
+        }
     }
 
     void bind(Texture1D tex) override
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
+        {
             glBindTexture(GL_TEXTURE_1D, std::static_pointer_cast<OGLTexture1D>(tex)->id);
+        }
         else
+        {
             glBindTexture(GL_TEXTURE_1D, 0);
+        }
         glUniform1i(this->loc, this->tex);
     }
 
@@ -906,9 +916,13 @@ public:
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
+        {
             glBindTexture(GL_TEXTURE_2D, std::static_pointer_cast<OGLTexture2D>(tex)->id);
+        }
         else
+        {
             glBindTexture(GL_TEXTURE_2D, 0);
+        }
         glUniform1i(this->loc, this->tex);
     }
 
@@ -916,9 +930,13 @@ public:
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
+        {
             glBindTexture(GL_TEXTURE_2D_ARRAY, std::static_pointer_cast<OGLTexture2DArray>(tex)->id);
+        }
         else
+        {
             glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
+        }
         glUniform1i(this->loc, this->tex);
     }
 
@@ -926,9 +944,13 @@ public:
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (tex)
+        {
             glBindTexture(GL_TEXTURE_3D, std::static_pointer_cast<OGLTexture3D>(tex)->id);
+        }
         else
+        {
             glBindTexture(GL_TEXTURE_3D, 0);
+        }
         glUniform1i(this->loc, this->tex);
     }
 
@@ -936,9 +958,13 @@ public:
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (cubeMap)
+        {
             glBindTexture(GL_TEXTURE_CUBE_MAP, std::static_pointer_cast<OGLCubeMap>(cubeMap)->id);
+        }
         else
+        {
             glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+        }
         glUniform1i(this->loc, this->tex);
     }
 
@@ -946,42 +972,50 @@ public:
     {
         glActiveTexture(GL_TEXTURE0 + static_cast<GLenum>(this->tex));
         if (cubeMap)
+        {
             glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, std::static_pointer_cast<OGLCubeMapArray>(cubeMap)->id);
+        }
         else
+        {
             glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
+        }
         glUniform1i(this->loc, this->tex);
     }
 
     void bind(ConstantBuffer cb) override
     {
         if (cb)
+        {
             glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc),
                              std::static_pointer_cast<OGLConstantBuffer>(cb)->id);
+        }
         else
+        {
             glBindBufferBase(GL_UNIFORM_BUFFER, static_cast<GLuint>(this->loc), 0);
+        }
     }
 
-    void bind(gl::Texture2D _tex, int level, Access _access) override
+    void bind(gl::Texture2D tex, int level, Access access) override
     {
-        auto tex = std::static_pointer_cast<OGLTexture2D>(_tex);
-        GLenum access;
-        switch (_access)
+        auto texImpl = std::static_pointer_cast<OGLTexture2D>(tex);
+        GLenum glAccess;
+        switch (access)
         {
         case Access::Read:
-            access = GL_READ_ONLY;
+            glAccess = GL_READ_ONLY;
             break;
         case Access::Write:
-            access = GL_WRITE_ONLY;
+            glAccess = GL_WRITE_ONLY;
             break;
         case Access::ReadWrite:
-            access = GL_READ_WRITE;
+            glAccess = GL_READ_WRITE;
             break;
         default:
             abort();
         }
 
         glUniform1i(this->loc, this->tex);
-        glBindImageTexture(static_cast<GLuint>(this->tex), tex->id, level, GL_TRUE, 0, access, tex->internalFormat);
+        glBindImageTexture(static_cast<GLuint>(this->tex), texImpl->id, level, GL_TRUE, 0, glAccess, texImpl->internalFormat);
     }
 
     void setConstant(glm::vec2 val) override
@@ -1049,7 +1083,7 @@ public:
         glUniform1ui(loc, val);
     }
 
-    bool queryConstantBufferStructure(ConstantBufferStructure*) override
+    bool queryConstantBufferStructure(ConstantBufferStructure* /*structure*/) override
     {
         return false; // TODO
     }
@@ -1066,9 +1100,9 @@ public:
         , ps(std::move(ps))
         , program(program)
     {
-        this->texCount = 0;
-        this->uboCount = 0;
-        this->ssboCount = 0;
+        this->m_texCount = 0;
+        this->m_uboCount = 0;
+        this->m_ssboCount = 0;
     }
 
     OGLShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps, GLuint program)
@@ -1081,9 +1115,9 @@ public:
         : cs(std::move(cs))
         , program(program)
     {
-        this->texCount = 0;
-        this->uboCount = 0;
-        this->ssboCount = 0;
+        this->m_texCount = 0;
+        this->m_uboCount = 0;
+        this->m_ssboCount = 0;
     }
 
     ~OGLShaderPipeline() override
@@ -1095,15 +1129,19 @@ public:
     {
         // Search for already existing binding point
         for (auto& bp : this->bps)
+        {
             if (bp.name == name)
+            {
                 return &bp;
+            }
+        }
 
         // No existing binding point was found, it must be created first
 
         auto loc = glGetUniformLocation(this->program, name);
         if (loc != -1)
         {
-            bps.emplace_back(name, loc, this->texCount++);
+            bps.emplace_back(name, loc, this->m_texCount++);
             return &bps.back();
         }
 
@@ -1111,7 +1149,7 @@ public:
         auto index = glGetUniformBlockIndex(this->program, name);
         if (index != GL_INVALID_INDEX)
         {
-            auto loc = this->uboCount;
+            auto loc = this->m_uboCount;
             glUniformBlockBinding(this->program, index, static_cast<GLuint>(loc));
 
             GLenum glErr = glGetError();
@@ -1121,7 +1159,7 @@ public:
                 return nullptr;
             }
 
-            this->uboCount += 1;
+            this->m_uboCount += 1;
             bps.emplace_back(name, loc);
             return &bps.back();
         }
@@ -1130,7 +1168,7 @@ public:
         index = glGetProgramResourceIndex(this->program, GL_SHADER_STORAGE_BLOCK, name);
         if (index != GL_INVALID_INDEX)
         {
-            auto loc = this->ssboCount;
+            auto loc = this->m_ssboCount;
             glShaderStorageBlockBinding(this->program, index, static_cast<GLuint>(loc));
 
             GLenum glErr = glGetError();
@@ -1140,7 +1178,7 @@ public:
                 return nullptr;
             }
 
-            this->ssboCount += 1;
+            this->m_ssboCount += 1;
             bps.emplace_back(name, loc);
             return &bps.back();
         }
@@ -1153,9 +1191,9 @@ public:
     std::list<OGLShaderBindingPoint> bps;
 
 private:
-    int texCount;
-    int uboCount;
-    int ssboCount;
+    int m_texCount;
+    int m_uboCount;
+    int m_ssboCount;
 };
 
 OGLRenderDevice::OGLRenderDevice()
@@ -1176,7 +1214,7 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         CUBOS_ERROR("Framebuffer must have at least one render target");
         return nullptr;
     }
-    else if (desc.targetCount > CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT)
+    if (desc.targetCount > CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT)
     {
         CUBOS_ERROR("Framebuffer can only have at most {} render targets",
                     CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT);
@@ -1266,54 +1304,78 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
         switch (desc.depthStencil.getTargetType())
         {
         case FramebufferDesc::TargetType::CubeMap: {
-            auto& target = desc.depthStencil.getCubeMapTarget();
+            const auto& target = desc.depthStencil.getCubeMapTarget();
             GLenum face;
             cubeFaceToGL(target.face, face);
             auto ds = std::static_pointer_cast<OGLCubeMap>(target.handle);
             if (ds->format == GL_DEPTH_COMPONENT)
+            {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, face, ds->id,
                                        static_cast<GLint>(desc.depthStencil.mipLevel));
+            }
             else if (ds->format == GL_DEPTH_STENCIL)
+            {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id,
                                        static_cast<GLint>(desc.depthStencil.mipLevel));
+            }
             else
+            {
                 formatError = true;
+            }
             break;
         }
         case FramebufferDesc::TargetType::Texture2D: {
             auto ds = std::static_pointer_cast<OGLTexture2D>(desc.depthStencil.getTexture2DTarget().handle);
             if (ds->format == GL_DEPTH_COMPONENT)
+            {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, ds->id,
                                        static_cast<GLint>(desc.depthStencil.mipLevel));
+            }
             else if (ds->format == GL_DEPTH_STENCIL)
+            {
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, ds->id,
                                        static_cast<GLint>(desc.depthStencil.mipLevel));
+            }
             else
+            {
                 formatError = true;
+            }
             break;
         }
         case FramebufferDesc::TargetType::CubeMapArray: {
             auto ds = std::static_pointer_cast<OGLCubeMapArray>(desc.depthStencil.getCubeMapArrayTarget().handle);
             if (ds->format == GL_DEPTH_COMPONENT)
+            {
                 glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id,
                                      static_cast<GLint>(desc.depthStencil.mipLevel));
+            }
             else if (ds->format == GL_DEPTH_STENCIL)
+            {
                 glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id,
                                      static_cast<GLint>(desc.depthStencil.mipLevel));
+            }
             else
+            {
                 formatError = true;
+            }
             break;
         }
         case FramebufferDesc::TargetType::Texture2DArray: {
             auto ds = std::static_pointer_cast<OGLTexture2DArray>(desc.depthStencil.getTexture2DArrayTarget().handle);
             if (ds->format == GL_DEPTH_COMPONENT)
+            {
                 glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, ds->id,
                                      static_cast<GLint>(desc.depthStencil.mipLevel));
+            }
             else if (ds->format == GL_DEPTH_STENCIL)
+            {
                 glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, ds->id,
                                      static_cast<GLint>(desc.depthStencil.mipLevel));
+            }
             else
+            {
                 formatError = true;
+            }
             break;
         }
         }
@@ -1352,54 +1414,64 @@ Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
 void OGLRenderDevice::setFramebuffer(Framebuffer fb)
 {
     if (fb)
+    {
         glBindFramebuffer(GL_FRAMEBUFFER, std::static_pointer_cast<OGLFramebuffer>(fb)->id);
+    }
     else
+    {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
 }
 
 RasterState OGLRenderDevice::createRasterState(const RasterStateDesc& desc)
 {
     auto rs = std::make_shared<OGLRasterState>();
-    rs->cullEnabled = desc.cullEnabled;
-    rs->scissorEnabled = desc.scissorEnabled;
+    rs->cullEnabled = static_cast<GLboolean>(desc.cullEnabled);
+    rs->scissorEnabled = static_cast<GLboolean>(desc.scissorEnabled);
     faceToGL(desc.cullFace, rs->cullFace);
     windingToGL(desc.frontFace, rs->frontFace);
     rasterModeToGL(desc.rasterMode, rs->polygonMode);
     return rs;
 }
 
-void OGLRenderDevice::setRasterState(RasterState _rs)
+void OGLRenderDevice::setRasterState(RasterState rs)
 {
-    auto rs = std::static_pointer_cast<OGLRasterState>(_rs ? _rs : this->defaultRS);
+    auto rsImpl = std::static_pointer_cast<OGLRasterState>(rs ? rs : this->defaultRS);
 
-    if (!rs->cullEnabled)
+    if (rsImpl->cullEnabled == 0U)
+    {
         glDisable(GL_CULL_FACE);
+    }
     else
     {
         glEnable(GL_CULL_FACE);
-        glCullFace(rs->cullFace);
+        glCullFace(rsImpl->cullFace);
     }
 
-    if (!rs->scissorEnabled)
+    if (rsImpl->scissorEnabled == 0U)
+    {
         glDisable(GL_SCISSOR_TEST);
+    }
     else
+    {
         glEnable(GL_SCISSOR_TEST);
+    }
 
-    glFrontFace(rs->frontFace);
-    glPolygonMode(GL_FRONT_AND_BACK, rs->polygonMode);
+    glFrontFace(rsImpl->frontFace);
+    glPolygonMode(GL_FRONT_AND_BACK, rsImpl->polygonMode);
 }
 
 DepthStencilState OGLRenderDevice::createDepthStencilState(const DepthStencilStateDesc& desc)
 {
     auto dss = std::make_shared<OGLDepthStencilState>();
 
-    dss->depthEnabled = desc.depth.enabled;
-    dss->depthWriteEnabled = desc.depth.writeEnabled;
+    dss->depthEnabled = static_cast<GLboolean>(desc.depth.enabled);
+    dss->depthWriteEnabled = static_cast<GLboolean>(desc.depth.writeEnabled);
     dss->depthNear = desc.depth.near;
     dss->depthFar = desc.depth.far;
     compareToGL(desc.depth.compare, dss->depthFunc);
 
-    dss->stencilEnabled = desc.stencil.enabled;
+    dss->stencilEnabled = static_cast<GLboolean>(desc.stencil.enabled);
     dss->stencilRef = desc.stencil.ref;
     dss->stencilReadMask = desc.stencil.readMask;
     dss->stencilWriteMask = desc.stencil.writeMask;
@@ -1417,33 +1489,40 @@ DepthStencilState OGLRenderDevice::createDepthStencilState(const DepthStencilSta
     return dss;
 }
 
-void OGLRenderDevice::setDepthStencilState(DepthStencilState _dss)
+void OGLRenderDevice::setDepthStencilState(DepthStencilState dss)
 {
-    auto dss = std::static_pointer_cast<OGLDepthStencilState>(_dss ? _dss : this->defaultDSS);
+    auto dssImpl = std::static_pointer_cast<OGLDepthStencilState>(dss ? dss : this->defaultDSS);
 
-    if (!dss->depthEnabled)
+    if (dssImpl->depthEnabled == 0U)
+    {
         glDisable(GL_DEPTH_TEST);
+    }
     else
     {
         glEnable(GL_DEPTH_TEST);
-        glDepthFunc(dss->depthFunc);
-        glDepthMask(dss->depthWriteEnabled);
-        glDepthRange(dss->depthNear, dss->depthFar);
+        glDepthFunc(dssImpl->depthFunc);
+        glDepthMask(dssImpl->depthWriteEnabled);
+        glDepthRange(dssImpl->depthNear, dssImpl->depthFar);
     }
 
-    if (!dss->stencilEnabled)
+    if (dssImpl->stencilEnabled == 0U)
+    {
         glDisable(GL_STENCIL_TEST);
+    }
     else
     {
         glEnable(GL_STENCIL_TEST);
 
-        glStencilFuncSeparate(GL_FRONT, dss->frontStencilFunc, static_cast<GLint>(dss->stencilRef),
-                              dss->stencilReadMask);
-        glStencilMaskSeparate(GL_FRONT, dss->stencilWriteMask);
-        glStencilOpSeparate(GL_FRONT, dss->frontFaceStencilFail, dss->frontFaceDepthFail, dss->frontFaceStencilPass);
-        glStencilFuncSeparate(GL_BACK, dss->backStencilFunc, static_cast<GLint>(dss->stencilRef), dss->stencilReadMask);
-        glStencilMaskSeparate(GL_BACK, dss->stencilWriteMask);
-        glStencilOpSeparate(GL_BACK, dss->backFaceStencilFail, dss->backFaceDepthFail, dss->backFaceStencilPass);
+        glStencilFuncSeparate(GL_FRONT, dssImpl->frontStencilFunc, static_cast<GLint>(dssImpl->stencilRef),
+                              dssImpl->stencilReadMask);
+        glStencilMaskSeparate(GL_FRONT, dssImpl->stencilWriteMask);
+        glStencilOpSeparate(GL_FRONT, dssImpl->frontFaceStencilFail, dssImpl->frontFaceDepthFail,
+                            dssImpl->frontFaceStencilPass);
+        glStencilFuncSeparate(GL_BACK, dssImpl->backStencilFunc, static_cast<GLint>(dssImpl->stencilRef),
+                              dssImpl->stencilReadMask);
+        glStencilMaskSeparate(GL_BACK, dssImpl->stencilWriteMask);
+        glStencilOpSeparate(GL_BACK, dssImpl->backFaceStencilFail, dssImpl->backFaceDepthFail,
+                            dssImpl->backFaceStencilPass);
     }
 }
 
@@ -1451,7 +1530,7 @@ BlendState OGLRenderDevice::createBlendState(const BlendStateDesc& desc)
 {
     auto bs = std::make_shared<OGLBlendState>();
 
-    bs->blendEnabled = desc.blendEnabled;
+    bs->blendEnabled = static_cast<GLboolean>(desc.blendEnabled);
     blendFactorToGL(desc.alpha.src, bs->srcAlphaFactor);
     blendFactorToGL(desc.alpha.dst, bs->dstAlphaFactor);
     blendOpToGL(desc.alpha.op, bs->alphaBlendOp);
@@ -1462,51 +1541,72 @@ BlendState OGLRenderDevice::createBlendState(const BlendStateDesc& desc)
     return bs;
 }
 
-void OGLRenderDevice::setBlendState(BlendState _bs)
+void OGLRenderDevice::setBlendState(BlendState bs)
 {
-    auto bs = std::static_pointer_cast<OGLBlendState>(_bs ? _bs : this->defaultBS);
+    auto bsImpl = std::static_pointer_cast<OGLBlendState>(bs ? bs : this->defaultBS);
 
-    if (!bs->blendEnabled)
+    if (bsImpl->blendEnabled == 0U)
+    {
         glDisable(GL_BLEND);
+    }
     else
     {
         glEnable(GL_BLEND);
-        glBlendFuncSeparate(bs->srcFactor, bs->dstFactor, bs->srcAlphaFactor, bs->dstAlphaFactor);
-        glBlendEquationSeparate(bs->blendOp, bs->alphaBlendOp);
+        glBlendFuncSeparate(bsImpl->srcFactor, bsImpl->dstFactor, bsImpl->srcAlphaFactor, bsImpl->dstAlphaFactor);
+        glBlendEquationSeparate(bsImpl->blendOp, bsImpl->alphaBlendOp);
     }
 }
 
 Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
 {
-    GLenum addressU, addressV, addressW;
+    GLenum addressU;
+    GLenum addressV;
+    GLenum addressW;
 
     addressToGL(desc.addressU, addressU);
     addressToGL(desc.addressV, addressV);
     addressToGL(desc.addressW, addressW);
 
-    GLenum minFilter, magFilter;
+    GLenum minFilter;
+    GLenum magFilter;
 
     switch (desc.minFilter)
     {
     case TextureFilter::Nearest:
         if (desc.mipmapFilter == TextureFilter::None)
+        {
             minFilter = GL_NEAREST;
+        }
         else if (desc.mipmapFilter == TextureFilter::Nearest)
+        {
             minFilter = GL_NEAREST_MIPMAP_NEAREST;
+        }
         else if (desc.mipmapFilter == TextureFilter::Linear)
+        {
             minFilter = GL_NEAREST_MIPMAP_LINEAR;
+        }
         else
+        {
             abort(); // Invalid enum value
+        }
         break;
     case TextureFilter::Linear:
         if (desc.mipmapFilter == TextureFilter::None)
+        {
             minFilter = GL_LINEAR;
+        }
         else if (desc.mipmapFilter == TextureFilter::Nearest)
+        {
             minFilter = GL_LINEAR_MIPMAP_NEAREST;
+        }
         else if (desc.mipmapFilter == TextureFilter::Linear)
+        {
             minFilter = GL_LINEAR_MIPMAP_LINEAR;
+        }
         else
+        {
             abort(); // Invalid enum value
+        }
         break;
     default:
         abort(); // Invalid enum value
@@ -1530,7 +1630,9 @@ Sampler OGLRenderDevice::createSampler(const SamplerDesc& desc)
     glSamplerParameteri(id, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(minFilter));
     glSamplerParameteri(id, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(magFilter));
     if (GL_ARB_texture_filter_anisotropic)
+    {
         glSamplerParameteri(id, GL_TEXTURE_MAX_ANISOTROPY, static_cast<GLint>(desc.maxAnisotropy));
+    }
     glSamplerParameteri(id, GL_TEXTURE_WRAP_S, static_cast<GLint>(addressU));
     glSamplerParameteri(id, GL_TEXTURE_WRAP_T, static_cast<GLint>(addressV));
     glSamplerParameteri(id, GL_TEXTURE_WRAP_R, static_cast<GLint>(addressW));
@@ -1557,7 +1659,9 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
         return nullptr;
     }
 
-    GLenum internalFormat, format, type;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
@@ -1570,13 +1674,17 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_1D, id);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+    {
         glTexImage1D(GL_TEXTURE_1D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), 0, format, type, desc.data[i]);
+    }
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     if (GL_ARB_texture_filter_anisotropic)
-        glTexParameterf(GL_TEXTURE_1D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+    {
+        glTexParameterf(GL_TEXTURE_1D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+    }
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1592,7 +1700,9 @@ Texture1D OGLRenderDevice::createTexture1D(const Texture1DDesc& desc)
 
 Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
 {
-    GLenum internalFormat, format, type;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
@@ -1606,15 +1716,19 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
     glBindTexture(GL_TEXTURE_2D, id);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+    {
         glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 0, format, type,
                      desc.data[i]);
+    }
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     if (GL_ARB_texture_filter_anisotropic)
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+    {
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+    }
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1630,7 +1744,9 @@ Texture2D OGLRenderDevice::createTexture2D(const Texture2DDesc& desc)
 
 Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& desc)
 {
-    GLenum internalFormat, format, type;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
@@ -1650,9 +1766,11 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
         for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
         {
             if (desc.data[i][j] != nullptr)
+            {
                 glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), 0, 0, static_cast<GLint>(i),
                                 static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 1,
                                 format, type, desc.data[i][j]);
+            }
         }
     }
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -1660,7 +1778,9 @@ Texture2DArray OGLRenderDevice::createTexture2DArray(const Texture2DArrayDesc& d
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     if (GL_ARB_texture_filter_anisotropic)
-        glTexParameterf(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+    {
+        glTexParameterf(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+    }
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1683,7 +1803,9 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
         return nullptr;
     }
 
-    GLenum internalFormat, format, type;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
@@ -1696,16 +1818,20 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_3D, id);
     for (size_t i = 0, div = 1; i < desc.mipLevelCount; ++i, div *= 2)
+    {
         glTexImage3D(GL_TEXTURE_3D, static_cast<GLint>(i), static_cast<GLint>(internalFormat),
                      static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div),
                      static_cast<GLsizei>(desc.depth / div), 0, format, type, desc.data[i]);
+    }
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
     if (GL_ARB_texture_filter_anisotropic)
-        glTexParameterf(GL_TEXTURE_3D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+    {
+        glTexParameterf(GL_TEXTURE_3D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+    }
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1721,7 +1847,9 @@ Texture3D OGLRenderDevice::createTexture3D(const Texture3DDesc& desc)
 
 CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 {
-    GLenum internalFormat, format, type;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
@@ -1759,7 +1887,9 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     if (GL_ARB_texture_filter_anisotropic)
-        glTexParameterf(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+    {
+        glTexParameterf(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+    }
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1775,7 +1905,9 @@ CubeMap OGLRenderDevice::createCubeMap(const CubeMapDesc& desc)
 
 CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
 {
-    GLenum internalFormat, format, type;
+    GLenum internalFormat;
+    GLenum format;
+    GLenum type;
 
     if (!textureFormatToGL(desc.format, internalFormat, format, type))
     {
@@ -1797,9 +1929,11 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
             for (size_t j = 0, div = 1; i < desc.mipLevelCount; ++j, div *= 2)
             {
                 if (desc.data[i][face][j] != nullptr)
+                {
                     glTexSubImage3D(GL_TEXTURE_2D_ARRAY, static_cast<GLint>(j), 0, 0, static_cast<GLint>(i) * 6 + face,
                                     static_cast<GLsizei>(desc.width / div), static_cast<GLsizei>(desc.height / div), 1,
                                     format, type, desc.data[i][face][j]);
+                }
             }
         }
     }
@@ -1808,7 +1942,9 @@ CubeMapArray OGLRenderDevice::createCubeMapArray(const CubeMapArrayDesc& desc)
     glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     if (GL_ARB_texture_filter_anisotropic)
-        glTexParameterf(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0f);
+    {
+        glTexParameterf(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAX_ANISOTROPY_EXT, 1.0F);
+    }
 
     // Check errors
     GLenum glErr = glGetError();
@@ -1826,15 +1962,23 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
 {
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
+    {
         abort();
+    }
 
     GLenum glUsage;
     if (usage == Usage::Default || usage == Usage::Static)
+    {
         glUsage = GL_STATIC_DRAW;
+    }
     else if (usage == Usage::Dynamic)
+    {
         glUsage = GL_DYNAMIC_DRAW;
+    }
     else
+    {
         abort(); // Invalid enum value
+    }
 
     // Initialize buffer
     GLuint id;
@@ -1858,15 +2002,23 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
 {
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
+    {
         abort();
+    }
 
     GLenum glUsage;
     if (usage == Usage::Default || usage == Usage::Static)
+    {
         glUsage = GL_STATIC_DRAW;
+    }
     else if (usage == Usage::Dynamic)
+    {
         glUsage = GL_DYNAMIC_DRAW;
+    }
     else
+    {
         abort(); // Invalid enum value
+    }
 
     GLenum glFormat;
     size_t indexSz;
@@ -1881,7 +2033,9 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
         indexSz = 4;
     }
     else
+    {
         abort(); // Invalid enum value
+    }
 
     // Initialize buffer
     GLuint id;
@@ -1901,27 +2055,35 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
     return std::make_shared<OGLIndexBuffer>(id, glFormat, indexSz);
 }
 
-void OGLRenderDevice::setIndexBuffer(IndexBuffer _ib)
+void OGLRenderDevice::setIndexBuffer(IndexBuffer ib)
 {
-    auto ib = std::static_pointer_cast<OGLIndexBuffer>(_ib);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib->id);
-    this->currentIndexFormat = static_cast<int>(ib->format);
-    this->currentIndexSz = ib->indexSz;
+    auto ibImpl = std::static_pointer_cast<OGLIndexBuffer>(ib);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibImpl->id);
+    this->currentIndexFormat = static_cast<int>(ibImpl->format);
+    this->currentIndexSz = ibImpl->indexSz;
 }
 
 VertexBuffer OGLRenderDevice::createVertexBuffer(size_t size, const void* data, Usage usage)
 {
     // Validate arguments
     if (usage == Usage::Static && data == nullptr)
+    {
         abort();
+    }
 
     GLenum glUsage;
     if (usage == Usage::Default || usage == Usage::Static)
+    {
         glUsage = GL_STATIC_DRAW;
+    }
     else if (usage == Usage::Dynamic)
+    {
         glUsage = GL_DYNAMIC_DRAW;
+    }
     else
+    {
         abort(); // Invalid enum value
+    }
 
     // Initialize buffer
     GLuint id;
@@ -2039,12 +2201,17 @@ VertexArray OGLRenderDevice::createVertexArray(const VertexArrayDesc& desc)
 
         glEnableVertexAttribArray(static_cast<GLuint>(loc));
         if (!integer)
-            glVertexAttribPointer(static_cast<GLuint>(loc), (GLint)desc.elements[i].size, type, normalized,
-                                  (GLsizei)desc.elements[i].buffer.stride, (const void*)desc.elements[i].buffer.offset);
+        {
+            glVertexAttribPointer(static_cast<GLuint>(loc), (GLint)desc.elements[i].size, type,
+                                  static_cast<GLboolean>(normalized), (GLsizei)desc.elements[i].buffer.stride,
+                                  (const void*)desc.elements[i].buffer.offset);
+        }
         else
+        {
             glVertexAttribIPointer(static_cast<GLuint>(loc), (GLint)desc.elements[i].size, type,
                                    (GLsizei)desc.elements[i].buffer.stride,
                                    (const void*)desc.elements[i].buffer.offset);
+        }
     }
 
     // Check errors
@@ -2094,7 +2261,7 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     // Check for errors
     GLint success;
     glGetShaderiv(id, GL_COMPILE_STATUS, &success);
-    if (!success)
+    if (success == 0)
     {
         GLchar infoLog[512];
         glGetShaderInfoLog(id, sizeof(infoLog), nullptr, infoLog);
@@ -2115,21 +2282,21 @@ ShaderStage OGLRenderDevice::createShaderStage(Stage stage, const char* src)
     return std::make_shared<OGLShaderStage>(stage, id);
 }
 
-ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStage _ps)
+ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage ps)
 {
-    auto vs = std::static_pointer_cast<OGLShaderStage>(_vs);
-    auto ps = std::static_pointer_cast<OGLShaderStage>(_ps);
+    auto vsImpl = std::static_pointer_cast<OGLShaderStage>(vs);
+    auto psImpl = std::static_pointer_cast<OGLShaderStage>(ps);
 
     // Initialize program
     auto id = glCreateProgram();
-    glAttachShader(id, vs->shader);
-    glAttachShader(id, ps->shader);
+    glAttachShader(id, vsImpl->shader);
+    glAttachShader(id, psImpl->shader);
     glLinkProgram(id);
 
     // Check for linking errors
     GLint success;
     glGetProgramiv(id, GL_LINK_STATUS, &success);
-    if (!success)
+    if (success == 0)
     {
         char infoLog[512];
         glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
@@ -2147,26 +2314,26 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderPipeline>(vs, ps, id);
+    return std::make_shared<OGLShaderPipeline>(vsImpl, psImpl, id);
 }
 
-ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStage _gs, ShaderStage _ps)
+ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps)
 {
-    auto vs = std::static_pointer_cast<OGLShaderStage>(_vs);
-    auto gs = std::static_pointer_cast<OGLShaderStage>(_gs);
-    auto ps = std::static_pointer_cast<OGLShaderStage>(_ps);
+    auto vsImpl = std::static_pointer_cast<OGLShaderStage>(vs);
+    auto gsImpl = std::static_pointer_cast<OGLShaderStage>(gs);
+    auto psImpl = std::static_pointer_cast<OGLShaderStage>(ps);
 
     // Initialize program
     auto id = glCreateProgram();
-    glAttachShader(id, vs->shader);
-    glAttachShader(id, gs->shader);
-    glAttachShader(id, ps->shader);
+    glAttachShader(id, vsImpl->shader);
+    glAttachShader(id, gsImpl->shader);
+    glAttachShader(id, psImpl->shader);
     glLinkProgram(id);
 
     // Check for linking errors
     GLint success;
     glGetProgramiv(id, GL_LINK_STATUS, &success);
-    if (!success)
+    if (success == 0)
     {
         char infoLog[512];
         glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
@@ -2184,22 +2351,22 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _vs, ShaderStag
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderPipeline>(vs, gs, ps, id);
+    return std::make_shared<OGLShaderPipeline>(vsImpl, gsImpl, psImpl, id);
 }
 
-ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _cs)
+ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage cs)
 {
-    auto cs = std::static_pointer_cast<OGLShaderStage>(_cs);
+    auto csImpl = std::static_pointer_cast<OGLShaderStage>(cs);
 
     // Initialize program
     auto id = glCreateProgram();
-    glAttachShader(id, cs->shader);
+    glAttachShader(id, csImpl->shader);
     glLinkProgram(id);
 
     // Check for linking errors
     GLint success;
     glGetProgramiv(id, GL_LINK_STATUS, &success);
-    if (!success)
+    if (success == 0)
     {
         char infoLog[512];
         glGetProgramInfoLog(id, sizeof(infoLog), nullptr, infoLog);
@@ -2217,7 +2384,7 @@ ShaderPipeline OGLRenderDevice::createShaderPipeline(ShaderStage _cs)
         return nullptr;
     }
 
-    return std::make_shared<OGLShaderPipeline>(cs, id);
+    return std::make_shared<OGLShaderPipeline>(csImpl, id);
 }
 
 void OGLRenderDevice::setShaderPipeline(ShaderPipeline pipeline)
@@ -2282,17 +2449,29 @@ void OGLRenderDevice::memoryBarrier(MemoryBarriers barriers)
 {
     GLbitfield barrier = 0;
     if ((barriers & MemoryBarriers::VertexBuffer) != MemoryBarriers::None)
+    {
         barrier |= GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT;
+    }
     if ((barriers & MemoryBarriers::IndexBuffer) != MemoryBarriers::None)
+    {
         barrier |= GL_ELEMENT_ARRAY_BARRIER_BIT;
+    }
     if ((barriers & MemoryBarriers::ConstantBuffer) != MemoryBarriers::None)
+    {
         barrier |= GL_UNIFORM_BARRIER_BIT;
+    }
     if ((barriers & MemoryBarriers::ImageAccess) != MemoryBarriers::None)
+    {
         barrier |= GL_SHADER_IMAGE_ACCESS_BARRIER_BIT;
+    }
     if ((barriers & MemoryBarriers::TextureAccess) != MemoryBarriers::None)
+    {
         barrier |= GL_TEXTURE_FETCH_BARRIER_BIT;
+    }
     if ((barriers & MemoryBarriers::Framebuffer) != MemoryBarriers::None)
+    {
         barrier |= GL_FRAMEBUFFER_BARRIER_BIT;
+    }
     glMemoryBarrier(barrier);
 }
 
@@ -2308,13 +2487,16 @@ void OGLRenderDevice::setScissor(int x, int y, int w, int h)
 
 int OGLRenderDevice::getProperty(Property prop)
 {
-    GLint major, minor;
+    GLint major;
+    GLint minor;
 
     switch (prop)
     {
     case Property::MaxAnisotropy:
         if (!GL_ARB_texture_filter_anisotropic)
+        {
             return 1;
+        }
         else
         {
             GLfloat val;

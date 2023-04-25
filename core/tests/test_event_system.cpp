@@ -13,7 +13,7 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
     std::size_t index = 0;
 
     std::size_t size = 0;
-    for (auto& x : EventReader<int>(pipe, index))
+    for (const auto& x : EventReader<int>(pipe, index))
     {
         (void)x;
         size++;
@@ -22,7 +22,7 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
 
     index = 0;
     writer.push(3); // push (3,0)
-    for (size = 0; auto& x : EventReader<int>(pipe, index))
+    for (size = 0; const auto& x : EventReader<int>(pipe, index))
     {
         (void)x;
         size++;
@@ -31,7 +31,7 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
 
     index = 0;
     writer.push(3, 5);
-    for (size = 0; auto& x : EventReader<int>(pipe, index))
+    for (size = 0; const auto& x : EventReader<int>(pipe, index))
     {
         (void)x;
         size++;
@@ -40,7 +40,7 @@ TEST(Cubos_Core_Event_System, Event_System_Simple_Test)
 
     index = 0;
     pipe.clear();
-    for (size = 0; auto& x : EventReader<int>(pipe, index))
+    for (size = 0; const auto& x : EventReader<int>(pipe, index))
     {
         (void)x;
         size++;
@@ -74,9 +74,9 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     {
         enum Mask
         {
-            KEY_EVENT = 1 << 0,   // 0001
-            MOUSE_EVENT = 1 << 1, // 0010
-            WHEEL_EVENT = 1 << 2, // 0100
+            KeyEvent = 1 << 0,    // 0001
+            MouseEvent = 1 << 1,  // 0010
+            WheelEvent = 1 << 2,  // 0100
             ALL = (1 << 3) - 1,   // 0111
         };
 
@@ -86,17 +86,17 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     auto pipe = EventPipe<MyEvent>();
     auto writer = EventWriter<MyEvent>(pipe);
 
-    writer.push(MyEvent{.data = 1}, MyEvent::Mask::KEY_EVENT);
-    writer.push(MyEvent{.data = 2}, MyEvent::Mask::WHEEL_EVENT);
-    writer.push(MyEvent{.data = 3}, MyEvent::Mask::MOUSE_EVENT);
-    writer.push(MyEvent{.data = 4}, MyEvent::Mask::MOUSE_EVENT);
+    writer.push(MyEvent{.data = 1}, MyEvent::Mask::KeyEvent);
+    writer.push(MyEvent{.data = 2}, MyEvent::Mask::WheelEvent);
+    writer.push(MyEvent{.data = 3}, MyEvent::Mask::MouseEvent);
+    writer.push(MyEvent{.data = 4}, MyEvent::Mask::MouseEvent);
     writer.push(MyEvent{.data = 5});
     writer.push(MyEvent{.data = 6});
 
     std::size_t index = 0;
 
     std::size_t mouseReaderSize = 0;
-    auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MOUSE_EVENT>(pipe, index);
+    auto mouseReader = EventReader<MyEvent, MyEvent::Mask::MouseEvent>(pipe, index);
     pipe.addReader();
     while (true)
     {
@@ -111,7 +111,7 @@ TEST(Cubos_Core_Event_System, Event_System_Masking_Test)
     pipe.removeReader();
 
     index = 0;
-    auto keyEventReader = EventReader<MyEvent, MyEvent::Mask::KEY_EVENT>(pipe, index);
+    auto keyEventReader = EventReader<MyEvent, MyEvent::Mask::KeyEvent>(pipe, index);
     pipe.addReader();
     for (const auto& ev : keyEventReader)
     {

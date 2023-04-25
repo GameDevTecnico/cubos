@@ -3,197 +3,197 @@
 
 using namespace cubos::core;
 
-const std::string key1 = "key 1";
-const std::string key2 = "key 2";
-const std::string correct_string_value = "right";
-const std::string incorrect_string_value = "wrong";
-const std::string default_string_value = "default";
+const std::string Key1 = "key 1";
+const std::string Key2 = "key 2";
+const std::string CorrectStringValue = "right";
+const std::string IncorrectStringValue = "wrong";
+const std::string DefaultStringValue = "default";
 
-const int correct_integer_value = 10;
-const int incorrect_integer_value = 20;
-const int default_integer_value = 30;
+const int CorrectIntegerValue = 10;
+const int IncorrectIntegerValue = 20;
+const int DefaultIntegerValue = 30;
 
-const double correct_double_value = 1.05;
-const double incorrect_double_value = 2.05;
-const double default_double_value = 3.05;
+const double CorrectDoubleValue = 1.05;
+const double IncorrectDoubleValue = 2.05;
+const double DefaultDoubleValue = 3.05;
 
 TEST(Cubos_String_Settings_Setters_and_Getters_Tests, Get_String_When_Setting_Was_Added)
 {
     auto settings = Settings();
-    settings.setString(key1, correct_string_value);
+    settings.setString(Key1, CorrectStringValue);
 
-    const std::string& returnedValue = settings.getString(key1, "");
-    EXPECT_EQ(returnedValue, correct_string_value);
+    const std::string& returnedValue = settings.getString(Key1, "");
+    EXPECT_EQ(returnedValue, CorrectStringValue);
 }
 
 TEST(Cubos_String_Settings_Setters_and_Getters_Tests, Get_Default_String_When_Setting_Was_Not_Added)
 {
     auto settings = Settings();
 
-    const std::string& returned_value = settings.getString(key1, default_string_value);
+    const std::string& returnedValue = settings.getString(Key1, DefaultStringValue);
 
-    EXPECT_EQ(returned_value, default_string_value);
+    EXPECT_EQ(returnedValue, DefaultStringValue);
 }
 
 TEST(Cubos_String_Settings_Setters_and_Getters_Tests, Get_Last_String_After_Multiple_Sets_With_Same_Key)
 {
     auto settings = Settings();
-    settings.setString(key1, incorrect_string_value);
-    settings.setString(key1, correct_string_value);
+    settings.setString(Key1, IncorrectStringValue);
+    settings.setString(Key1, CorrectStringValue);
 
-    const std::string& returned_value = settings.getString(key1, default_string_value);
+    const std::string& returnedValue = settings.getString(Key1, DefaultStringValue);
 
-    EXPECT_EQ(returned_value, correct_string_value);
+    EXPECT_EQ(returnedValue, CorrectStringValue);
 }
 
 TEST(Cubos_String_Settings_Setters_and_Getters_Tests, Get_Default_String_With_Wrong_Key)
 {
     auto settings = Settings();
-    settings.setString(key1, incorrect_string_value);
+    settings.setString(Key1, IncorrectStringValue);
 
-    const std::string& returned_value = settings.getString(key2, default_string_value);
+    const std::string& returnedValue = settings.getString(Key2, DefaultStringValue);
 
-    EXPECT_EQ(returned_value, default_string_value);
+    EXPECT_EQ(returnedValue, DefaultStringValue);
 }
 
 TEST(Cubos_Integer_Settings_Setters_and_Getters_Tests, Get_String_When_Setting_Was_Added)
 {
     auto settings = Settings();
-    settings.setInteger(key1, correct_integer_value);
+    settings.setInteger(Key1, CorrectIntegerValue);
 
-    const int returnedValue = settings.getInteger(key1, default_integer_value);
+    const int returnedValue = settings.getInteger(Key1, DefaultIntegerValue);
 
-    EXPECT_EQ(returnedValue, correct_integer_value);
+    EXPECT_EQ(returnedValue, CorrectIntegerValue);
 }
 
 TEST(Cubos_Integer_Settings_Setters_and_Getters_Tests, Get_Default_String_When_Setting_Was_Not_Added)
 {
     auto settings = Settings();
 
-    const int returned_value = settings.getInteger(key1, default_integer_value);
+    const int returnedValue = settings.getInteger(Key1, DefaultIntegerValue);
 
-    EXPECT_EQ(returned_value, default_integer_value);
+    EXPECT_EQ(returnedValue, DefaultIntegerValue);
 }
 
 TEST(Cubos_Integer_Settings_Setters_and_Getters_Tests, Get_Last_String_After_Multiple_Sets_With_Same_Key)
 {
     auto settings = Settings();
-    settings.setInteger(key1, incorrect_integer_value);
-    settings.setInteger(key1, correct_integer_value);
+    settings.setInteger(Key1, IncorrectIntegerValue);
+    settings.setInteger(Key1, CorrectIntegerValue);
 
-    const int returned_value = settings.getInteger(key1, default_integer_value);
+    const int returnedValue = settings.getInteger(Key1, DefaultIntegerValue);
 
-    EXPECT_EQ(returned_value, correct_integer_value);
+    EXPECT_EQ(returnedValue, CorrectIntegerValue);
 }
 
 TEST(Cubos_Integer_Settings_Setters_and_Getters_Tests, Get_Default_String_With_Wrong_Key)
 {
     auto settings = Settings();
-    settings.setInteger(key1, incorrect_integer_value);
+    settings.setInteger(Key1, IncorrectIntegerValue);
 
-    const int returned_value = settings.getInteger(key2, default_integer_value);
+    const int returnedValue = settings.getInteger(Key2, DefaultIntegerValue);
 
-    EXPECT_EQ(returned_value, default_integer_value);
+    EXPECT_EQ(returnedValue, DefaultIntegerValue);
 }
 
 TEST(Cubos_Double_Settings_Setters_and_Getters_Tests, Get_String_When_Setting_Was_Added)
 {
     auto settings = Settings();
-    settings.setDouble(key1, correct_double_value);
+    settings.setDouble(Key1, CorrectDoubleValue);
 
-    const double returnedValue = settings.getDouble(key1, default_double_value);
+    const double returnedValue = settings.getDouble(Key1, DefaultDoubleValue);
 
-    EXPECT_EQ(returnedValue, correct_double_value);
+    EXPECT_EQ(returnedValue, CorrectDoubleValue);
 }
 
 TEST(Cubos_Double_Settings_Setters_and_Getters_Tests, Get_Default_String_When_Setting_Was_Not_Added)
 {
     auto settings = Settings();
 
-    const double returned_value = settings.getDouble(key1, default_double_value);
+    const double returnedValue = settings.getDouble(Key1, DefaultDoubleValue);
 
-    EXPECT_EQ(returned_value, default_double_value);
+    EXPECT_EQ(returnedValue, DefaultDoubleValue);
 }
 
 TEST(Cubos_Double_Settings_Setters_and_Getters_Tests, Get_Last_String_After_Multiple_Sets_With_Same_Key)
 {
     auto settings = Settings();
-    settings.setDouble(key1, incorrect_double_value);
-    settings.setDouble(key1, correct_double_value);
+    settings.setDouble(Key1, IncorrectDoubleValue);
+    settings.setDouble(Key1, CorrectDoubleValue);
 
-    const double returned_value = settings.getDouble(key1, default_double_value);
+    const double returnedValue = settings.getDouble(Key1, DefaultDoubleValue);
 
-    EXPECT_EQ(returned_value, correct_double_value);
+    EXPECT_EQ(returnedValue, CorrectDoubleValue);
 }
 
 TEST(Cubos_Double_Settings_Setters_and_Getters_Tests, Get_Default_String_With_Wrong_Key)
 {
     auto settings = Settings();
-    settings.setDouble(key1, incorrect_double_value);
+    settings.setDouble(Key1, IncorrectDoubleValue);
 
-    const double returned_value = settings.getDouble(key2, default_double_value);
+    const double returnedValue = settings.getDouble(Key2, DefaultDoubleValue);
 
-    EXPECT_EQ(returned_value, default_double_value);
+    EXPECT_EQ(returnedValue, DefaultDoubleValue);
 }
 
 TEST(Cubos_Settings_Merge_Tests, Get_Original_Settings_String_After_Merge_With_Empty_Settings)
 {
-    auto original_settings = Settings();
-    auto to_join_settings = Settings();
+    auto originalSettings = Settings();
+    auto toJoinSettings = Settings();
 
-    original_settings.setString(key1, correct_string_value);
-    original_settings.merge(to_join_settings);
+    originalSettings.setString(Key1, CorrectStringValue);
+    originalSettings.merge(toJoinSettings);
 
-    const std::string& returned_value = original_settings.getString(key1, default_string_value);
+    const std::string& returnedValue = originalSettings.getString(Key1, DefaultStringValue);
 
-    EXPECT_EQ(returned_value, correct_string_value);
+    EXPECT_EQ(returnedValue, CorrectStringValue);
 }
 
 TEST(Cubos_Settings_Merge_Tests, Get_New_Settings_String_After_Merge_With_Populated_Settings)
 {
-    auto original_settings = Settings();
-    auto to_join_settings = Settings();
+    auto originalSettings = Settings();
+    auto toJoinSettings = Settings();
 
-    original_settings.setString(key1, incorrect_string_value);
-    to_join_settings.setString(key1, correct_string_value);
+    originalSettings.setString(Key1, IncorrectStringValue);
+    toJoinSettings.setString(Key1, CorrectStringValue);
 
-    original_settings.merge(to_join_settings);
+    originalSettings.merge(toJoinSettings);
 
-    const std::string& returned_value = original_settings.getString(key1, default_string_value);
+    const std::string& returnedValue = originalSettings.getString(Key1, DefaultStringValue);
 
-    EXPECT_EQ(returned_value, correct_string_value);
+    EXPECT_EQ(returnedValue, CorrectStringValue);
 }
 
 TEST(Cubos_Settings_Merge_Tests, Get_Updated_Settings_String_After_Merge_With_Populated_Settings)
 {
-    auto original_settings = Settings();
-    auto to_join_settings = Settings();
+    auto originalSettings = Settings();
+    auto toJoinSettings = Settings();
 
-    original_settings.setString(key1, incorrect_string_value);
-    to_join_settings.setString(key1, incorrect_string_value);
+    originalSettings.setString(Key1, IncorrectStringValue);
+    toJoinSettings.setString(Key1, IncorrectStringValue);
 
-    original_settings.merge(to_join_settings);
+    originalSettings.merge(toJoinSettings);
 
-    original_settings.setString(key1, correct_string_value);
+    originalSettings.setString(Key1, CorrectStringValue);
 
-    const std::string& returned_value = original_settings.getString(key1, default_string_value);
+    const std::string& returnedValue = originalSettings.getString(Key1, DefaultStringValue);
 
-    EXPECT_EQ(returned_value, correct_string_value);
+    EXPECT_EQ(returnedValue, CorrectStringValue);
 }
 
 TEST(Cubos_Settings_Merge_Tests, Get_Merged_Settings_String_After_Changed_Merged_Settings)
 {
-    auto original_settings = Settings();
-    auto to_join_settings = Settings();
+    auto originalSettings = Settings();
+    auto toJoinSettings = Settings();
 
-    original_settings.setString(key1, incorrect_string_value);
-    to_join_settings.setString(key1, correct_string_value);
+    originalSettings.setString(Key1, IncorrectStringValue);
+    toJoinSettings.setString(Key1, CorrectStringValue);
 
-    original_settings.merge(to_join_settings);
+    originalSettings.merge(toJoinSettings);
 
-    to_join_settings.setString(key1, incorrect_string_value);
+    toJoinSettings.setString(Key1, IncorrectStringValue);
 
-    const std::string& returned_value = original_settings.getString(key1, default_string_value);
+    const std::string& returnedValue = originalSettings.getString(Key1, DefaultStringValue);
 
-    EXPECT_EQ(returned_value, correct_string_value);
+    EXPECT_EQ(returnedValue, CorrectStringValue);
 }

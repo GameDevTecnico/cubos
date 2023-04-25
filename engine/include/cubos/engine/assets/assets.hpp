@@ -251,8 +251,8 @@ namespace cubos::engine
 
         /// Forces the given asset to be reloaded.
         /// @param handle The handle to invalidate.
-        /// @param lock Locks the asset if true, otherwise assumes the asset is already locked.
-        void invalidate(AnyAsset handle, bool lock);
+        /// @param shouldLock Locks the asset if true, otherwise assumes the asset is already locked.
+        void invalidate(AnyAsset handle, bool shouldLock);
 
         /// Function run by the loader thread.
         void loader();

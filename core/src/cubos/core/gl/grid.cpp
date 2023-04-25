@@ -15,7 +15,9 @@ Grid::Grid(const glm::uvec3& size)
         this->size = {1, 1, 1};
     }
     else
+    {
         this->size = size;
+    }
     this->indices.resize(
         static_cast<size_t>(this->size.x) * static_cast<size_t>(this->size.y) * static_cast<size_t>(this->size.z), 0);
 }
@@ -35,7 +37,9 @@ Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
         this->size = {1, 1, 1};
     }
     else
+    {
         this->size = size;
+    }
     this->indices = indices;
 }
 
@@ -56,8 +60,10 @@ Grid& Grid::operator=(const Grid& rhs) = default;
 void Grid::setSize(const glm::uvec3& size)
 {
     if (size == this->size)
+    {
         return;
-    else if (size.x < 1 || size.y < 1 || size.z < 1)
+    }
+    if (size.x < 1 || size.y < 1 || size.z < 1)
     {
         CUBOS_WARN("Grid size must be at least 1 in each dimension: preserving original dimensions (tried to set to "
                    "({}, {}, {}))",
@@ -102,14 +108,14 @@ void Grid::set(const glm::ivec3& position, uint16_t mat)
     this->indices[static_cast<size_t>(index)] = mat;
 }
 
-bool Grid::convert(const Palette& src, const Palette& dst, float min_similarity)
+bool Grid::convert(const Palette& src, const Palette& dst, float minSimilarity)
 {
     // Find the mappings for every material in the source palette.
     std::unordered_map<uint16_t, uint16_t> mappings;
     for (uint16_t i = 0; i <= src.getSize(); ++i)
     {
         uint16_t j = dst.find(src.get(i));
-        if (src.get(i).similarity(dst.get(j)) >= min_similarity)
+        if (src.get(i).similarity(dst.get(j)) >= minSimilarity)
         {
             mappings[i] = j;
         }

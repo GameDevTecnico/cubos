@@ -90,7 +90,7 @@ void Stream::print(float value, size_t decimalPlaces)
 
 void Stream::print(double value, size_t decimalPlaces)
 {
-    constexpr size_t MAX_DECIMAL_PLACES = 32;
+    constexpr size_t maxDecimalPlaces = 32;
 
     if (value < 0.0)
     {
@@ -112,20 +112,24 @@ void Stream::print(double value, size_t decimalPlaces)
     }
 
     // Validate input
-    if (decimalPlaces > MAX_DECIMAL_PLACES)
+    if (decimalPlaces > maxDecimalPlaces)
     {
-        decimalPlaces = MAX_DECIMAL_PLACES;
-        CUBOS_WARN("decimalPlaces must be <= {}, defaulting to {}", MAX_DECIMAL_PLACES, MAX_DECIMAL_PLACES);
+        decimalPlaces = maxDecimalPlaces;
+        CUBOS_WARN("decimalPlaces must be <= {}, defaulting to {}", maxDecimalPlaces, maxDecimalPlaces);
     }
 
     if (value == INFINITY)
+    {
         this->print("INF");
+    }
     else if (value != value)
+    {
         this->print("NAN");
     // 16777217 is the last number whose integer part can be represented exactly
+    }
     else if (value <= 16777217.0 && log10(value) > -static_cast<double>(decimalPlaces))
     {
-        char buffer[MAX_DECIMAL_PLACES + 1];
+        char buffer[maxDecimalPlaces + 1];
         size_t len = 0;
 
         // Print the integer part
@@ -133,7 +137,9 @@ void Stream::print(double value, size_t decimalPlaces)
         this->print(integerPart);
 
         if (decimalPlaces == 0)
+        {
             return;
+        }
 
         // Print the decimal part
         buffer[len++] = '.';
@@ -187,9 +193,9 @@ void Stream::print(const char* str)
     this->write(str, strlen(str));
 }
 
-void Stream::print(const char* str, size_t length)
+void Stream::print(const char* str, size_t size)
 {
-    this->write(str, length);
+    this->write(str, size);
 }
 
 void Stream::print(const std::string& str)
@@ -207,7 +213,9 @@ void Stream::parse(int8_t& value, size_t base)
         CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
+    {
         value = static_cast<int8_t>(v);
+    }
 }
 
 void Stream::parse(int16_t& value, size_t base)
@@ -220,7 +228,9 @@ void Stream::parse(int16_t& value, size_t base)
         CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
+    {
         value = static_cast<int16_t>(v);
+    }
 }
 
 void Stream::parse(int32_t& value, size_t base)
@@ -233,19 +243,25 @@ void Stream::parse(int32_t& value, size_t base)
         CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
+    {
         value = static_cast<int32_t>(v);
+    }
 }
 
 void Stream::parse(int64_t& value, size_t base)
 {
     // Ignore whitespace
-    while (isspace(this->peek()))
+    while (isspace(this->peek()) != 0)
+    {
         this->get();
+    }
 
     // Check sign
     bool negative = false;
     if (this->peek() == '-' || this->peek() == '+')
+    {
         negative = this->get() == '-';
+    }
 
     uint64_t v = 0;
     this->parse(v, base);
@@ -255,9 +271,13 @@ void Stream::parse(int64_t& value, size_t base)
         CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else if (negative)
+    {
         value = -static_cast<int64_t>(v);
+    }
     else
+    {
         value = +static_cast<int64_t>(v);
+    }
 }
 
 void Stream::parse(uint8_t& value, size_t base)
@@ -270,7 +290,9 @@ void Stream::parse(uint8_t& value, size_t base)
         CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
+    {
         value = static_cast<uint8_t>(v);
+    }
 }
 
 void Stream::parse(uint16_t& value, size_t base)
@@ -283,7 +305,9 @@ void Stream::parse(uint16_t& value, size_t base)
         CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
+    {
         value = static_cast<uint16_t>(v);
+    }
 }
 
 void Stream::parse(uint32_t& value, size_t base)
@@ -296,7 +320,9 @@ void Stream::parse(uint32_t& value, size_t base)
         CUBOS_WARN("Value {} out of range, defaulting to 0", v);
     }
     else
+    {
         value = static_cast<uint32_t>(v);
+    }
 }
 
 void Stream::parse(uint64_t& value, size_t base)
@@ -314,8 +340,10 @@ void Stream::parse(uint64_t& value, size_t base)
     }
 
     // Ignore whitespace
-    while (isspace(this->peek()))
+    while (isspace(this->peek()) != 0)
+    {
         this->get();
+    }
 
     // Parse the number
     uint64_t v = 0;
@@ -352,7 +380,9 @@ void Stream::parse(uint64_t& value, size_t base)
             this->get();
         }
         else
+        {
             break;
+        }
     }
 
     value = v;
@@ -368,13 +398,17 @@ void Stream::parse(float& value)
 void Stream::parse(double& value)
 {
     // Ignore whitespace
-    while (isspace(this->peek()))
+    while (isspace(this->peek()) != 0)
+    {
         this->get();
+    }
 
     // Check sign
     bool negative = false;
     if (this->peek() == '-' || this->peek() == '+')
+    {
         negative = this->get() == '-';
+    }
 
     // Parse the integer part
     double v = 0.0;
@@ -389,7 +423,9 @@ void Stream::parse(double& value)
             this->get();
         }
         else
+        {
             break;
+        }
     }
 
     // Parse the decimal point
@@ -409,7 +445,9 @@ void Stream::parse(double& value)
                 this->get();
             }
             else
+            {
                 break;
+            }
         }
     }
 
@@ -432,7 +470,9 @@ void Stream::parse(double& value)
 void Stream::readUntil(std::string& str, const char* terminator)
 {
     if (terminator == nullptr)
+    {
         terminator = "";
+    }
     str = "";
 
     size_t terminatorI = 0;
@@ -443,12 +483,16 @@ void Stream::readUntil(std::string& str, const char* terminator)
         {
             ++terminatorI;
             if (terminator[terminatorI] == '\0')
+            {
                 break;
+            }
         }
         else
         {
             if (terminatorI > 0)
+            {
                 str.insert(str.end(), terminator, terminator + terminatorI);
+            }
             str += c;
             terminatorI = 0;
         }
@@ -458,9 +502,12 @@ void Stream::readUntil(std::string& str, const char* terminator)
 size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
 {
     if (terminator == nullptr)
+    {
         terminator = "";
+    }
 
-    size_t terminatorI = 0, position = 0;
+    size_t terminatorI = 0;
+    size_t position = 0;
 
     for (char c = this->get(); !this->eof() && c != '\0' && position < size; c = this->get())
     {
@@ -468,7 +515,9 @@ size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
         {
             ++terminatorI;
             if (terminator[terminatorI] == '\0')
+            {
                 break;
+            }
         }
         else if (terminatorI > 0)
         {
@@ -486,7 +535,9 @@ size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
             terminatorI = 0;
         }
         else
+        {
             buffer[position++] = c;
+        }
     }
 
     return position;
@@ -495,5 +546,7 @@ size_t Stream::readUntil(char* buffer, size_t size, const char* terminator)
 void Stream::ignore(size_t size)
 {
     for (size_t i = 0; i < size; ++i)
+    {
         this->get();
+    }
 }

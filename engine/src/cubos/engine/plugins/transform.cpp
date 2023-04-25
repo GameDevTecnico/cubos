@@ -14,13 +14,19 @@ static void applyTransform(core::ecs::Query<engine::ecs::LocalToWorld&, const en
 {
     for (auto [entity, localToWorld, position, rotation, scale] : query)
     {
-        localToWorld.mat = glm::mat4(1.0f);
+        localToWorld.mat = glm::mat4(1.0F);
         if (position != nullptr)
+        {
             localToWorld.mat = glm::translate(localToWorld.mat, position->vec);
+        }
         if (rotation != nullptr)
+        {
             localToWorld.mat *= glm::toMat4(rotation->quat);
+        }
         if (scale != nullptr)
+        {
             localToWorld.mat = glm::scale(localToWorld.mat, glm::vec3(scale->factor));
+        }
     }
 }
 

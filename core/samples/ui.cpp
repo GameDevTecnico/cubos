@@ -80,12 +80,14 @@ int main()
         renderDevice.setBlendState(nullptr);
         renderDevice.setDepthStencilState(nullptr);
         renderDevice.setViewport(0, 0, sz.x, sz.y);
-        renderDevice.clearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        renderDevice.clearColor(0.0F, 0.0F, 0.0F, 1.0F);
 
         ui::endFrame();
         window->swapBuffers();
         while (auto event = window->pollEvent())
+        {
             ui::handleEvent(event.value());
+        }
     }
 
     ui::terminate();

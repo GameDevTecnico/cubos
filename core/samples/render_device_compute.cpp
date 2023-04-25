@@ -13,7 +13,7 @@ int main()
     auto window = io::openWindow();
     auto& renderDevice = window->getRenderDevice();
 
-    if (!renderDevice.getProperty(gl::Property::ComputeSupported))
+    if (renderDevice.getProperty(gl::Property::ComputeSupported) == 0)
     {
         CUBOS_CRITICAL("Compute shaders are not supported on this device.");
         return 1;
@@ -66,12 +66,12 @@ int main()
         )glsl");
 
         auto drawPp = renderDevice.createShaderPipeline(vs, ps);
-        auto drawTextureBP = drawPp->getBindingPoint("tex");
+        auto* drawTextureBP = drawPp->getBindingPoint("tex");
         auto computePp = renderDevice.createShaderPipeline(cs);
-        auto computeTextureBP = computePp->getBindingPoint("tex");
+        auto* computeTextureBP = computePp->getBindingPoint("tex");
 
         float verts[] = {
-            -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, +1.0f, 0.0f, 1.0f, +1.0f, +1.0f, 1.0f, 1.0f, +1.0f, -1.0f, 1.0f, 0.0f,
+            -1.0F, -1.0F, 0.0F, 0.0F, -1.0F, +1.0F, 0.0F, 1.0F, +1.0F, +1.0F, 1.0F, 1.0F, +1.0F, -1.0F, 1.0F, 0.0F,
         };
 
         auto vb = renderDevice.createVertexBuffer(sizeof(verts), verts, gl::Usage::Static);
@@ -133,7 +133,9 @@ int main()
 
             window->swapBuffers();
             while (window->pollEvent().has_value())
+            {
                 ; // Do nothing with events.
+            }
         }
     }
 
