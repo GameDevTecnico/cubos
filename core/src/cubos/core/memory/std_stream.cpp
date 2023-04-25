@@ -8,7 +8,7 @@ StdStream::StdStream(FILE* file, bool close)
     this->close = close;
 }
 
-StdStream::StdStream(StdStream&& other)
+StdStream::StdStream(StdStream&& other) noexcept
 {
     this->file = other.file;
     this->close = other.close;

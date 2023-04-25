@@ -55,7 +55,7 @@ namespace cubos::engine
         /// Registers a new bridge for the given extension.
         /// @param extension The extension to register the bridge for.
         /// @param bridge The bridge to register.
-        void registerBridge(std::string extension, std::shared_ptr<AssetBridge> bridge);
+        void registerBridge(const std::string& extension, std::shared_ptr<AssetBridge> bridge);
 
         /// Cleans up all assets that are not in use.
         /// Should be called periodically to free up memory.
@@ -79,25 +79,25 @@ namespace cubos::engine
         /// saved.
         /// @param handle The handle identifying the asset to save.
         /// @returns True if the operation successful, false otherwise.
-        bool saveMeta(AnyAsset handle) const;
+        bool saveMeta(const AnyAsset& handle) const;
 
         /// Saves changes made to the asset with the given handle. This function blocks until the
         /// asset is saved.
         /// @param handle The handle identifying the asset to save.
         /// @returns True if the operation successful, false otherwise.
-        bool save(AnyAsset handle) const;
+        bool save(const AnyAsset& handle) const;
 
         /// Gets read-only access to the metadata associated with the given handle.
         /// Aborts if the asset is unknown.
         /// @param handle The handle to get the metadata for.
         /// @returns Reference to the metadata.
-        AssetMetaRead readMeta(AnyAsset handle) const;
+        AssetMetaRead readMeta(const AnyAsset& handle) const;
 
         /// Gets read-write access to the metadata associated with the given handle.
         /// If the asset is unknown, an empty metadata object is returned.
         /// @param handle The handle to get the metadata for.
         /// @returns Reference to the metadata.
-        AssetMetaWrite writeMeta(AnyAsset handle);
+        AssetMetaWrite writeMeta(const AnyAsset& handle);
 
         /// Gets read-only access to the asset data associated with the given handle.
         /// If the asset is not loaded, this blocks until it is. If the asset cannot be loaded,
@@ -134,7 +134,7 @@ namespace cubos::engine
         /// Checks the status of the asset with the given handle.
         /// @param handle The handle to check the status for.
         /// @returns The status of the asset.
-        Status status(AnyAsset handle) const;
+        Status status(const AnyAsset& handle) const;
 
         /// Updates the given handle to the latest version of the asset.
         /// Can be used to provide asset hot-reloading.
@@ -144,7 +144,7 @@ namespace cubos::engine
 
         /// Forces the given asset to be reloaded.
         /// @param handle The handle to reload.
-        void invalidate(AnyAsset handle);
+        void invalidate(const AnyAsset& handle);
 
         /// Creates a new asset with the given data (and empty metadata) and returns an handle to
         /// it. A random UUID is generated for the asset.
@@ -224,35 +224,35 @@ namespace cubos::engine
         /// @param incVersion Whether to increase the asset's version.
         /// @returns A pointer to the asset data.
         template <typename Lock>
-        void* access(AnyAsset handle, std::type_index type, Lock& lock, bool incVersion) const;
+        void* access(const AnyAsset& handle, std::type_index type, Lock& lock, bool incVersion) const;
 
         /// Locks the given asset for reading.
         /// @param handle The handle to lock.
         /// @returns The lock guard.
-        std::shared_lock<std::shared_mutex> lockRead(AnyAsset handle) const;
+        std::shared_lock<std::shared_mutex> lockRead(const AnyAsset& handle) const;
 
         /// Locks the given asset for writing.
         /// @param handle The handle to lock.
         /// @returns The lock guard.
-        std::unique_lock<std::shared_mutex> lockWrite(AnyAsset handle) const;
+        std::unique_lock<std::shared_mutex> lockWrite(const AnyAsset& handle) const;
 
         /// @param handle The handle to get the entry for.
         /// @returns The entry for the given handle, or nullptr if there is no such entry.
-        std::shared_ptr<Entry> entry(AnyAsset handle) const;
+        std::shared_ptr<Entry> entry(const AnyAsset& handle) const;
 
         /// @param handle The handle to get the entry for.
         /// @param create Whether to create the entry if it doesn't exist.
         /// @returns The entry for the given handle, or nullptr if the handle is invalid.
-        std::shared_ptr<Entry> entry(AnyAsset handle, bool create);
+        std::shared_ptr<Entry> entry(const AnyAsset& handle, bool create);
 
         /// @param handle The handle to get the bridge for.
         /// @returns The bridge used for the given asset, or nullptr if there's no bridge.
-        std::shared_ptr<AssetBridge> bridge(AnyAsset handle) const;
+        std::shared_ptr<AssetBridge> bridge(const AnyAsset& handle) const;
 
         /// Forces the given asset to be reloaded.
         /// @param handle The handle to invalidate.
         /// @param shouldLock Locks the asset if true, otherwise assumes the asset is already locked.
-        void invalidate(AnyAsset handle, bool shouldLock);
+        void invalidate(const AnyAsset& handle, bool shouldLock);
 
         /// Function run by the loader thread.
         void loader();

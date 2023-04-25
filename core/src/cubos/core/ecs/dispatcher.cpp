@@ -164,7 +164,7 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
         if (systemInfo->settings)
         {
             // Visit tags first
-            for (std::string tag : systemInfo->settings->before.tag)
+            for (const std::string& tag : systemInfo->settings->before.tag)
             {
                 for (auto it = nodes.begin(); it != nodes.end(); it++)
                 {

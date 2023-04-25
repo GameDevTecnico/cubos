@@ -25,7 +25,7 @@ namespace cubos::core::memory
 
         virtual ~BufferStream() override;
         BufferStream(const BufferStream&);
-        BufferStream(BufferStream&&);
+        BufferStream(BufferStream&&) noexcept;
 
         /// Gets the buffer of this stream.
         const void* getBuffer() const;

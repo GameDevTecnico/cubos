@@ -42,7 +42,7 @@ namespace cubos::core::data
         /// archive mounted at the path, abort() is called.
         /// @param path The path to mount the archive to.
         /// @param archive The archive to mount.
-        static void mount(std::string_view path, std::shared_ptr<Archive> archive);
+        static void mount(std::string_view path, const std::shared_ptr<Archive>& archive);
 
         /// Unmounts an archive from a path in the virtual file system of the engine.
         /// If no archive is mounted at the given path, nothing is done.

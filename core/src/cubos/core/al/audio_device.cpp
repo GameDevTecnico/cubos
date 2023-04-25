@@ -2,7 +2,7 @@
 
 using namespace cubos::core::al;
 
-std::shared_ptr<AudioDevice> AudioDevice::create(std::string specifier)
+std::shared_ptr<AudioDevice> AudioDevice::create(const std::string& specifier)
 {
     return std::make_shared<OALAudioDevice>(specifier);
 }
