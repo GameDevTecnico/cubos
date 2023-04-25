@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -334,7 +333,15 @@ public:
     /// Accepts any of the given keywords.
     bool acceptKeywords(std::initializer_list<std::string_view> keywords)
     {
-        return std::ranges::any_of(keywords, [this](std::string_view keyword) { return this->acceptKeyword(keyword); });
+        for (auto keyword : keywords)
+        {
+            if (this->acceptKeyword(keyword))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /// Accepts the next token if it is a string literal.
@@ -798,7 +805,8 @@ static bool generate(const GenerateOptions& options)
 
         file << std::endl;
         file << "template <>" << std::endl;
-        file << "void cubos::core::data::serialize<" << id << ">(Serializer& ser, const " << id << "& obj," << std::endl;
+        file << "void cubos::core::data::serialize<" << id << ">(Serializer& ser, const " << id << "& obj,"
+             << std::endl;
         file << "                                         const char* name)" << std::endl;
         file << "{" << std::endl;
         if (component.fields.size() == 1)
