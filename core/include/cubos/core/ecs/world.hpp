@@ -28,7 +28,7 @@ namespace cubos::core::ecs
         using Iterator = EntityManager::Iterator;
 
         /// @param initialCapacity The initial capacity of the world.
-        World(size_t initialCapacity = 1024);
+        World(std::size_t initialCapacity = 1024);
 
         /// Registers a new resource type.
         /// Unsafe to call during any reads or writes, should be called at the start of the program.
@@ -148,7 +148,7 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     Entity World::create(ComponentTypes&&... components)
     {
-        size_t ids[] = {
+        std::size_t ids[] = {
             (this->componentManager
                  .getID<std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
 
@@ -182,7 +182,7 @@ namespace cubos::core::ecs
 
         (
             [&]() {
-                size_t componentId = this->componentManager.getID<ComponentTypes>();
+                std::size_t componentId = this->componentManager.getID<ComponentTypes>();
                 mask.set(componentId);
                 this->componentManager.add(entity.index, std::move(components));
             }(),
@@ -209,7 +209,7 @@ namespace cubos::core::ecs
 
         (
             [&]() {
-                size_t componentId = this->componentManager.getID<ComponentTypes>();
+                std::size_t componentId = this->componentManager.getID<ComponentTypes>();
                 mask.set(componentId, false);
                 this->componentManager.remove<ComponentTypes>(entity.index);
             }(),
@@ -232,7 +232,7 @@ namespace cubos::core::ecs
             return false;
         }
 
-        size_t componentId = this->componentManager.getID<T>();
+        std::size_t componentId = this->componentManager.getID<T>();
         return this->entityManager.getMask(entity).test(componentId);
     }
 } // namespace cubos::core::ecs

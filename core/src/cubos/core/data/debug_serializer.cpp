@@ -136,7 +136,7 @@ void DebugSerializer::endObject()
     this->stream.put(')');
 }
 
-void DebugSerializer::beginArray(size_t length, const char* name)
+void DebugSerializer::beginArray(std::size_t length, const char* name)
 {
     if (this->typeNames)
     {
@@ -162,7 +162,7 @@ void DebugSerializer::endArray()
     this->stream.put(']');
 }
 
-void DebugSerializer::beginDictionary(size_t length, const char* name)
+void DebugSerializer::beginDictionary(std::size_t length, const char* name)
 {
     if (this->typeNames)
     {

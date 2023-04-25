@@ -20,7 +20,7 @@ struct ConvertOptions
 {
     fs::path input = "";                        ///< The input file path.
     fs::path palette = "";                      ///< The palette path.
-    std::unordered_map<size_t, fs::path> grids; ///< The output paths of the grids.
+    std::unordered_map<std::size_t, fs::path> grids; ///< The output paths of the grids.
     bool write = false;                         ///< Whether to write to the palette.
     bool verbose = false;                       ///< Enables verbose mode.
     bool force = false;                         ///< Enables force mode.
@@ -61,9 +61,9 @@ static bool parseArguments(int argc, char** argv, ConvertOptions& options)
 
             if (i + 1 < argc)
             {
-                if (options.grids.find(static_cast<size_t>(index)) == options.grids.end())
+                if (options.grids.find(static_cast<std::size_t>(index)) == options.grids.end())
                 {
-                    options.grids[static_cast<size_t>(index)] = argv[i + 1];
+                    options.grids[static_cast<std::size_t>(index)] = argv[i + 1];
                 }
                 else
                 {
@@ -278,7 +278,7 @@ static bool convert(const ConvertOptions& options)
     if (options.verbose)
     {
         std::cerr << "Found " << model.size() << " QB matrices." << std::endl;
-        for (size_t i = 0; i < model.size(); i++)
+        for (std::size_t i = 0; i < model.size(); i++)
         {
             std::cerr << "Matrix " << i << ":" << std::endl;
             std::cerr << "- Position: " << model[i].position.x << " " << model[i].position.y << " "
@@ -301,7 +301,7 @@ static bool convert(const ConvertOptions& options)
     }
 
     // Iterate over the grids which will be exported.
-    for (size_t i = 0; i < model.size(); ++i)
+    for (std::size_t i = 0; i < model.size(); ++i)
     {
         if (options.grids.contains(i))
         {

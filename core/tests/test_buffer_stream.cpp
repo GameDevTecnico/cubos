@@ -12,7 +12,7 @@ TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Integers)
     srand(1); // Seed the number random generation, so that the tests always produce the same results
 
     char buf[256];
-    for (size_t i = 0; i < 1000; ++i)
+    for (std::size_t i = 0; i < 1000; ++i)
     {
         int64_t x = (static_cast<int64_t>(rand()) * static_cast<int64_t>(rand())) -
                     (static_cast<int64_t>(rand()) * static_cast<int64_t>(rand()));
@@ -36,7 +36,7 @@ TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Floats)
     srand(1); // Seed the number random generation, so that the tests always produce the same results
 
     char buf[256];
-    for (size_t i = 0; i < 1000; ++i)
+    for (std::size_t i = 0; i < 1000; ++i)
     {
         double x = static_cast<double>(static_cast<int64_t>(rand()) * static_cast<int64_t>(rand())) /
                    static_cast<double>(static_cast<int64_t>(rand()) * static_cast<int64_t>(rand())) *
@@ -47,7 +47,7 @@ TEST(Cubos_Memory_Buffer_Stream, Parse_Printed_Floats)
         auto places = rand() % 10;
 
         auto stream = BufferStream(buf, sizeof(buf));
-        stream.print(x, static_cast<size_t>(places));
+        stream.print(x, static_cast<std::size_t>(places));
         stream.put('\0');
         stream.seek(0, SeekOrigin::Begin);
         stream.parse(y);

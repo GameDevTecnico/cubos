@@ -119,7 +119,7 @@ namespace cubos::core::data
 
         /// Gets the number of mapped references.
         /// @returns Number of mapped references.
-        inline size_t size() const
+        inline std::size_t size() const
         {
             return this->refToId.size();
         }

@@ -137,7 +137,7 @@ namespace cubos::core::data
         /// Indicates that an array is currently being deserialized.
         /// The fail bit is set on failure.
         /// @returns The length of the array.
-        virtual size_t beginArray() = 0;
+        virtual std::size_t beginArray() = 0;
 
         /// Indicates that an array is no longer being deserialized.
         /// The fail bit is set on failure.
@@ -146,7 +146,7 @@ namespace cubos::core::data
         /// Indicates that a dictionary is being deserialized.
         /// The fail bit is set on failure.
         /// @returns The length of the dictionary (always 0 on failure).
-        virtual size_t beginDictionary() = 0;
+        virtual std::size_t beginDictionary() = 0;
 
         /// Indicates that a dictionary is no longer being deserialized.
         /// The fail bit is set on failure.
@@ -205,9 +205,9 @@ namespace cubos::core::data
     template <typename T>
     inline void deserialize(Deserializer& des, std::vector<T>& vec)
     {
-        size_t length = des.beginArray();
+        std::size_t length = des.beginArray();
         vec.resize(length);
-        for (size_t i = 0; i < length; ++i)
+        for (std::size_t i = 0; i < length; ++i)
             deserialize(des, vec[i]);
         des.endArray();
     }
@@ -220,10 +220,10 @@ namespace cubos::core::data
     template <typename K, typename V>
     inline void deserialize(Deserializer& des, std::unordered_map<K, V>& map)
     {
-        size_t length = des.beginDictionary();
+        std::size_t length = des.beginDictionary();
         map.clear();
         map.reserve(length);
-        for (size_t i = 0; i < length; ++i)
+        for (std::size_t i = 0; i < length; ++i)
         {
             K key;
             V value;

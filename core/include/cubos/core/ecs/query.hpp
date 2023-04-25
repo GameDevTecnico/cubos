@@ -233,14 +233,14 @@ namespace cubos::core::ecs
         , fetched(std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::fetch(world)...))
     {
         // We must turn the type from const T& and similar to T before getting the ID.
-        size_t ids[] = {
+        std::size_t ids[] = {
             (impl::QueryFetcher<ComponentTypes>::IS_OPTIONAL
                  ? SIZE_MAX
                  : this->world.componentManager.template getID<
                        std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
         this->mask.reset();
         this->mask.set(0);
-        for (size_t id : ids)
+        for (std::size_t id : ids)
         {
             if (id != SIZE_MAX)
             {

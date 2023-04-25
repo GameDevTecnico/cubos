@@ -37,24 +37,24 @@ void EmbeddedArchive::registerData(const std::string& name, const Data& data)
     registry.emplace(name, data);
 }
 
-size_t EmbeddedArchive::create(size_t /*parent*/, std::string_view /*name*/, bool /*directory*/)
+std::size_t EmbeddedArchive::create(std::size_t /*parent*/, std::string_view /*name*/, bool /*directory*/)
 {
     // Embedded archive is read-only.
     return 0;
 }
 
-bool EmbeddedArchive::destroy(size_t /*id*/)
+bool EmbeddedArchive::destroy(std::size_t /*id*/)
 {
     // Embedded archive is read-only.
     return false;
 }
 
-std::string EmbeddedArchive::getName(size_t id) const
+std::string EmbeddedArchive::getName(std::size_t id) const
 {
     return this->data->entries[id - 1].name;
 }
 
-bool EmbeddedArchive::isDirectory(size_t id) const
+bool EmbeddedArchive::isDirectory(std::size_t id) const
 {
     return this->data->entries[id - 1].isDirectory;
 }
@@ -64,17 +64,17 @@ bool EmbeddedArchive::isReadOnly() const
     return true;
 }
 
-size_t EmbeddedArchive::getParent(size_t id) const
+std::size_t EmbeddedArchive::getParent(std::size_t id) const
 {
     return this->data->entries[id - 1].parent;
 }
 
-size_t EmbeddedArchive::getSibling(size_t id) const
+std::size_t EmbeddedArchive::getSibling(std::size_t id) const
 {
     return this->data->entries[id - 1].sibling;
 }
 
-size_t EmbeddedArchive::getChild(size_t id) const
+std::size_t EmbeddedArchive::getChild(std::size_t id) const
 {
     return this->data->entries[id - 1].child;
 }

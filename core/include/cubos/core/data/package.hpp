@@ -186,7 +186,7 @@ namespace cubos::core::data
         /// For objects, arrays and dictionaries, this is, respectively, the
         /// field count, the element count and the key-value pair count.
         /// @returns The size of the packaged
-        size_t size() const;
+        std::size_t size() const;
 
         /// Checks if the package is storing a structured data type (object, array or dictionary).
         /// @returns True if the package is storing a structured data type, false otherwise.
@@ -213,7 +213,7 @@ namespace cubos::core::data
         /// If the index is out of bounds, this method will abort.
         /// @param index The index of the element in the array.
         /// @returns A reference to the element.
-        Package& element(size_t index);
+        Package& element(std::size_t index);
 
         /// Gets the array stored in this package.
         /// If the package isn't an array, this method will abort.
@@ -277,9 +277,9 @@ namespace cubos::core::data
             virtual void writeString(const char* value, const char* name) override;
             virtual void beginObject(const char* name) override;
             virtual void endObject() override;
-            virtual void beginArray(size_t length, const char* name) override;
+            virtual void beginArray(std::size_t length, const char* name) override;
             virtual void endArray() override;
-            virtual void beginDictionary(size_t length, const char* name) override;
+            virtual void beginDictionary(std::size_t length, const char* name) override;
             virtual void endDictionary() override;
 
         private:
@@ -326,9 +326,9 @@ namespace cubos::core::data
             virtual void readString(std::string& value) override;
             virtual void beginObject() override;
             virtual void endObject() override;
-            virtual size_t beginArray() override;
+            virtual std::size_t beginArray() override;
             virtual void endArray() override;
-            virtual size_t beginDictionary() override;
+            virtual std::size_t beginDictionary() override;
             virtual void endDictionary() override;
 
         private:
@@ -344,8 +344,8 @@ namespace cubos::core::data
             /// Stack used to keep the state of the package.
             /// The package pointer points to the current
             /// object/array/dictionary being read from.
-            /// The size_t is the index of the next field/element to read.
-            std::stack<std::pair<const Package*, size_t>> stack;
+            /// The std::size_t is the index of the next field/element to read.
+            std::stack<std::pair<const Package*, std::size_t>> stack;
 
             /// The package being read from.
             const Package& pkg;

@@ -301,7 +301,7 @@ namespace cubos::core::ecs
                     it = this->buffers.emplace(typeid(ComponentTypes), new Buffer<ComponentTypes>()).first;
                 }
 
-                size_t componentID = this->world.componentManager.getID<ComponentTypes>();
+                std::size_t componentID = this->world.componentManager.getID<ComponentTypes>();
                 mask.set(componentID);
                 static_cast<Buffer<ComponentTypes>*>(it->second)->components.erase(entity);
                 static_cast<Buffer<ComponentTypes>*>(it->second)->components.emplace(entity, std::move(components));
@@ -318,7 +318,7 @@ namespace cubos::core::ecs
 
         (
             [&]() {
-                size_t componentID = this->world.componentManager.getID<ComponentTypes>();
+                std::size_t componentID = this->world.componentManager.getID<ComponentTypes>();
                 mask.set(componentID);
             }(),
             ...);
@@ -342,7 +342,7 @@ namespace cubos::core::ecs
                     it = this->buffers.emplace(typeid(ComponentTypes), new Buffer<ComponentTypes>()).first;
                 }
 
-                size_t componentID = this->world.componentManager.getID<ComponentTypes>();
+                std::size_t componentID = this->world.componentManager.getID<ComponentTypes>();
                 mask.set(componentID);
                 static_cast<Buffer<ComponentTypes>*>(it->second)->components.erase(entity);
                 static_cast<Buffer<ComponentTypes>*>(it->second)->components.emplace(entity, components);

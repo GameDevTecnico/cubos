@@ -143,7 +143,7 @@ void JSONDeserializer::endObject()
     } while (false););
 }
 
-size_t JSONDeserializer::beginArray()
+std::size_t JSONDeserializer::beginArray()
 {
     assert(!this->frame.top().key); // Arrays can't be used as keys.
 
@@ -171,7 +171,7 @@ void JSONDeserializer::endArray()
     } while (false););
 }
 
-size_t JSONDeserializer::beginDictionary()
+std::size_t JSONDeserializer::beginDictionary()
 {
     assert(!this->frame.top().key); // Dictionaries can't be used as keys.
 

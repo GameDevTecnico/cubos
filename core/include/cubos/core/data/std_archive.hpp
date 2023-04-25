@@ -20,14 +20,14 @@ namespace cubos::core::data
         virtual ~STDArchive() = default;
 
     protected:
-        virtual size_t create(size_t parent, std::string_view name, bool directory = false) override;
-        virtual bool destroy(size_t id) override;
-        virtual std::string getName(size_t id) const override;
-        virtual bool isDirectory(size_t id) const override;
+        virtual std::size_t create(std::size_t parent, std::string_view name, bool directory = false) override;
+        virtual bool destroy(std::size_t id) override;
+        virtual std::string getName(std::size_t id) const override;
+        virtual bool isDirectory(std::size_t id) const override;
         virtual bool isReadOnly() const override;
-        virtual size_t getParent(size_t id) const override;
-        virtual size_t getSibling(size_t id) const override;
-        virtual size_t getChild(size_t id) const override;
+        virtual std::size_t getParent(std::size_t id) const override;
+        virtual std::size_t getSibling(std::size_t id) const override;
+        virtual std::size_t getChild(std::size_t id) const override;
         virtual std::unique_ptr<memory::Stream> open(File::Handle file, File::OpenMode mode) override;
 
     private:
@@ -35,19 +35,19 @@ namespace cubos::core::data
         struct FileInfo
         {
             std::filesystem::path osPath; ///< The path to the file in the real file system.
-            size_t parent;                ///< The identifier of the parent file.
-            size_t sibling;               ///< The identifier of the next sibling file.
-            size_t child;                 ///< The identifier of the first child file.
+            std::size_t parent;                ///< The identifier of the parent file.
+            std::size_t sibling;               ///< The identifier of the next sibling file.
+            std::size_t child;                 ///< The identifier of the first child file.
             bool directory;               ///< True if the file is a directory, false otherwise.
         };
 
         /// Recursively adds all files in the directory to the archive.
-        void generate(size_t parent);
+        void generate(std::size_t parent);
 
         std::filesystem::path osPath;               ///< The path to the directory in the real file system.
         bool readOnly;                              ///< True if the archive is read-only, false otherwise.
-        std::unordered_map<size_t, FileInfo> files; ///< Maps file identifiers to file info.
-        size_t nextId;                              ///< The next identifier to assign to a file.
+        std::unordered_map<std::size_t, FileInfo> files; ///< Maps file identifiers to file info.
+        std::size_t nextId;                              ///< The next identifier to assign to a file.
     };
 } // namespace cubos::core::data
 

@@ -133,7 +133,7 @@ void YAMLDeserializer::endObject()
     this->frame.top().key = true;
 }
 
-size_t YAMLDeserializer::beginArray()
+std::size_t YAMLDeserializer::beginArray()
 {
     auto iter = this->get();
     if (this->frame.top().mode == Mode::Array)
@@ -157,7 +157,7 @@ void YAMLDeserializer::endArray()
     this->frame.top().key = true;
 }
 
-size_t YAMLDeserializer::beginDictionary()
+std::size_t YAMLDeserializer::beginDictionary()
 {
     auto iter = this->get();
     if (this->frame.top().mode == Mode::Array)

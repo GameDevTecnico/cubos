@@ -58,7 +58,7 @@ void pps::Manager::provideInput(Input input, Texture2D texture)
     this->inputs[input] = std::move(texture);
 }
 
-void pps::Manager::removePass(size_t id)
+void pps::Manager::removePass(std::size_t id)
 {
     delete this->passes[id];
     this->passes.erase(id);
@@ -67,7 +67,7 @@ void pps::Manager::removePass(size_t id)
 void pps::Manager::execute(const Framebuffer& out)
 {
     auto prev = this->inputs.at(Input::Lighting);
-    size_t nextI = 0;
+    std::size_t nextI = 0;
 
     for (auto it = this->passes.begin(); it != this->passes.end(); ++it)
     {
@@ -89,7 +89,7 @@ void pps::Manager::execute(const Framebuffer& out)
     }
 }
 
-size_t pps::Manager::passCount() const
+std::size_t pps::Manager::passCount() const
 {
     return this->passes.size();
 }

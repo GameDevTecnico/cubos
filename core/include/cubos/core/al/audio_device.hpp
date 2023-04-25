@@ -80,7 +80,7 @@ namespace cubos::core::al
             /// @param size The size of the buffer in bytes.
             /// @param data The buffer data.
             /// @param frequency The audio frequency.
-            virtual void fill(Format format, size_t size, const void* data, size_t frequency) = 0;
+            virtual void fill(Format format, std::size_t size, const void* data, std::size_t frequency) = 0;
 
         protected:
             Buffer() = default;
