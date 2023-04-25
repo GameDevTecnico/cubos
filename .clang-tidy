@@ -14,7 +14,8 @@ Checks: "\
   -readability-function-cognitive-complexity,\
   -readability-identifier-length,\
   performance-*,\
-  -performance-no-int-to-ptr"
+  -performance-no-int-to-ptr,\
+  misc-redundant-expression"
 WarningsAsErrors: '*'
 FormatStyle: file
 CheckOptions:
