@@ -13,6 +13,7 @@ Checks: "\
   -readability-magic-numbers,\
   -readability-function-cognitive-complexity,\
   -readability-identifier-length,\
+  -readability-use-anyofallof,\
   performance-*,\
   -performance-no-int-to-ptr,\
   misc-redundant-expression,\
