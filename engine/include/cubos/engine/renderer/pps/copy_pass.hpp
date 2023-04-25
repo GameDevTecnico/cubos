@@ -4,7 +4,7 @@
 
 #include <cubos/core/gl/render_device.hpp>
 
-#include <cubos/engine/gl/pps/pass.hpp>
+#include <cubos/engine/renderer/pps/pass.hpp>
 
 namespace cubos::engine::gl::pps
 {

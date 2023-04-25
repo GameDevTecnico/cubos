@@ -11,17 +11,8 @@ message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
 set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
 
-    "src/cubos/engine/gl/frame.cpp"
-    "src/cubos/engine/gl/renderer.cpp"
-    "src/cubos/engine/gl/deferred/renderer.cpp"
-    "src/cubos/engine/gl/pps/bloom.cpp"
-    "src/cubos/engine/gl/pps/copy_pass.cpp"
-    "src/cubos/engine/gl/pps/manager.cpp"
-    "src/cubos/engine/gl/pps/pass.cpp"
-
     "src/cubos/engine/window/plugin.cpp"
     "src/cubos/engine/transform/plugin.cpp"
-    #"src/cubos/engine/renderer/plugin.cpp"
     "src/cubos/engine/env_settings/plugin.cpp"
 
     "src/cubos/engine/file_settings/plugin.cpp"
@@ -38,21 +29,21 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/scene/plugin.cpp"
     "src/cubos/engine/scene/bridge.cpp"
+
+    "src/cubos/engine/renderer/plugin.cpp"
+    "src/cubos/engine/renderer/frame.cpp"
+    "src/cubos/engine/renderer/renderer.cpp"
+    "src/cubos/engine/renderer/deferred/renderer.cpp"
+    "src/cubos/engine/renderer/pps/bloom.cpp"
+    "src/cubos/engine/renderer/pps/copy_pass.cpp"
+    "src/cubos/engine/renderer/pps/manager.cpp"
+    "src/cubos/engine/renderer/pps/pass.cpp"
 )
 
 set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/cubos.hpp"
 
-    #"include/cubos/engine/ecs/grid.hpp"
     "include/cubos/engine/ecs/camera.hpp"
-
-    "include/cubos/engine/gl/frame.hpp"
-    "include/cubos/engine/gl/renderer.hpp"
-    "include/cubos/engine/gl/deferred/renderer.hpp"
-    "include/cubos/engine/gl/pps/bloom.hpp"
-    "include/cubos/engine/gl/pps/copy_pass.hpp"
-    "include/cubos/engine/gl/pps/manager.hpp"
-    "include/cubos/engine/gl/pps/pass.hpp"
 
     "include/cubos/engine/window/plugin.hpp"
     "include/cubos/engine/renderer/plugin.hpp"
@@ -79,6 +70,15 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/scene/plugin.hpp"
     "include/cubos/engine/scene/scene.hpp"
     "include/cubos/engine/scene/bridge.hpp"
+
+    "include/cubos/engine/renderer/plugin.hpp"
+    "include/cubos/engine/renderer/frame.hpp"
+    "include/cubos/engine/renderer/renderer.hpp"
+    "include/cubos/engine/renderer/deferred/renderer.hpp"
+    "include/cubos/engine/renderer/pps/bloom.hpp"
+    "include/cubos/engine/renderer/pps/copy_pass.hpp"
+    "include/cubos/engine/renderer/pps/manager.hpp"
+    "include/cubos/engine/renderer/pps/pass.hpp"
 )
 
 # Create cubos engine
