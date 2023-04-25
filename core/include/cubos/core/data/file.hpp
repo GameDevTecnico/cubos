@@ -96,7 +96,7 @@ namespace cubos::core::data
 
         /// Gets the identifier of this file, used to identify the file in its archive.
         /// @return The identifier of this file, or 0 if the file is not in an archive.
-        size_t getId() const;
+        std::size_t getId() const;
 
         /// Gets the parent directory of this file.
         /// @return A handle to the parent directory, or nullptr if this file is the root file.
@@ -120,7 +120,7 @@ namespace cubos::core::data
         /// @param parent The parent file handle.
         /// @param archive The archive this file is in.
         /// @param id The identifier of this file in its archive.
-        File(Handle parent, const std::shared_ptr<Archive>& archive, size_t id);
+        File(Handle parent, const std::shared_ptr<Archive>& archive, std::size_t id);
 
         /// @param parent The parent file handle.
         /// @param archive The archive mounted on this file.
@@ -157,7 +157,7 @@ namespace cubos::core::data
         bool directory;   ///< Whether this file is a directory.
 
         std::shared_ptr<Archive> archive; ///< The archive this file belongs to.
-        size_t id;                        ///< The id of this file in its archive.
+        std::size_t id;                        ///< The id of this file in its archive.
 
         Handle parent;  ///< The parent file handle.
         Handle sibling; ///< The next sibling file handle.

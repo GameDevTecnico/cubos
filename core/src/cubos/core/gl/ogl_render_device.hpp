@@ -27,10 +27,10 @@ namespace cubos::core::gl
         virtual Texture3D createTexture3D(const Texture3DDesc& desc) override;
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) override;
         virtual CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) override;
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) override;
-        virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage) override;
+        virtual ConstantBuffer createConstantBuffer(std::size_t size, const void* data, Usage usage) override;
+        virtual IndexBuffer createIndexBuffer(std::size_t size, const void* data, IndexFormat format, Usage usage) override;
         virtual void setIndexBuffer(IndexBuffer ib) override;
-        virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage) override;
+        virtual VertexBuffer createVertexBuffer(std::size_t size, const void* data, Usage usage) override;
         virtual VertexArray createVertexArray(const VertexArrayDesc& desc) override;
         virtual void setVertexArray(VertexArray va) override;
         virtual ShaderStage createShaderStage(Stage stage, const char* src) override;
@@ -39,14 +39,14 @@ namespace cubos::core::gl
         virtual ShaderPipeline createShaderPipeline(ShaderStage cs) override;
         virtual void setShaderPipeline(ShaderPipeline pipeline) override;
         virtual void clearColor(float r, float g, float b, float a) override;
-        virtual void clearTargetColor(size_t target, float r, float g, float b, float a) override;
+        virtual void clearTargetColor(std::size_t target, float r, float g, float b, float a) override;
         virtual void clearDepth(float depth) override;
         virtual void clearStencil(int stencil) override;
-        virtual void drawTriangles(size_t offset, size_t count) override;
-        virtual void drawTrianglesIndexed(size_t offset, size_t count) override;
-        virtual void drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount) override;
-        virtual void drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount) override;
-        virtual void dispatchCompute(size_t x, size_t y, size_t z) override;
+        virtual void drawTriangles(std::size_t offset, std::size_t count) override;
+        virtual void drawTrianglesIndexed(std::size_t offset, std::size_t count) override;
+        virtual void drawTrianglesInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount) override;
+        virtual void drawTrianglesIndexedInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount) override;
+        virtual void dispatchCompute(std::size_t x, std::size_t y, std::size_t z) override;
         virtual void memoryBarrier(MemoryBarriers barriers) override;
         virtual void setViewport(int x, int y, int w, int h) override;
         virtual void setScissor(int x, int y, int w, int h) override;
@@ -54,7 +54,7 @@ namespace cubos::core::gl
 
     private:
         int currentIndexFormat;
-        size_t currentIndexSz;
+        std::size_t currentIndexSz;
 
         RasterState defaultRS;
         DepthStencilState defaultDSS;

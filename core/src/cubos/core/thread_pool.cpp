@@ -2,13 +2,13 @@
 
 using namespace cubos::core;
 
-ThreadPool::ThreadPool(size_t numThreads)
+ThreadPool::ThreadPool(std::size_t numThreads)
 {
     this->threads.reserve(numThreads);
     this->numTasks = 0;
     this->stop = false;
 
-    for (size_t i = 0; i < numThreads; i++)
+    for (std::size_t i = 0; i < numThreads; i++)
     {
         this->threads.emplace_back([this]() {
             while (true)

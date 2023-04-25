@@ -113,9 +113,9 @@ struct ScanEntry
     std::string name; ///< The name of the file.
     fs::path path;    ///< The path of the file.
     bool directory;   ///< Whether the file is a directory.
-    size_t parent;    ///< The ID of the parent directory.
-    size_t child;     ///< The ID of the child directory.
-    size_t sibling;   ///< The ID of the next sibling directory.
+    std::size_t parent;    ///< The ID of the parent directory.
+    std::size_t child;     ///< The ID of the child directory.
+    std::size_t sibling;   ///< The ID of the next sibling directory.
 };
 
 /// State required for the embedding process.
@@ -132,7 +132,7 @@ struct State
 /// @param state The state to fill.
 /// @param id The ID of the file to scan.
 /// @return True if the scan was successful, false otherwise.
-static bool scanEntries(State& state, size_t id)
+static bool scanEntries(State& state, std::size_t id)
 {
     // Check if this is the root entry.
     if (id == 0)
@@ -161,7 +161,7 @@ static bool scanEntries(State& state, size_t id)
         }
 
         // Scan the directory entries.
-        size_t lastChildId = 0;
+        std::size_t lastChildId = 0;
         for (fs::directory_iterator it(state.entries[id - 1].path), end; it != end; ++it)
         {
             if (!fs::is_directory(it->path()) && !fs::is_regular_file(it->path()))
@@ -206,12 +206,12 @@ static bool scanEntries(State& state, size_t id)
 /// @param state The state of the embedding process.
 /// @param id The id of the file.
 /// @return True if the file was embedded successfully, false otherwise.
-static bool embedFileData(State& state, size_t id)
+static bool embedFileData(State& state, std::size_t id)
 {
     if (state.entries[id - 1].directory)
     {
         // Embed the child files data.
-        size_t child = state.entries[id - 1].child;
+        std::size_t child = state.entries[id - 1].child;
         while (child != 0)
         {
             if (!embedFileData(state, child))
@@ -243,7 +243,7 @@ static bool embedFileData(State& state, size_t id)
         {
             char buffer[1024];
             file.read(buffer, sizeof(buffer));
-            for (size_t i = 0; i < static_cast<size_t>(file.gcount()); ++i)
+            for (std::size_t i = 0; i < static_cast<std::size_t>(file.gcount()); ++i)
             {
                 state.out << "0x" << std::hex << static_cast<uint32_t>(buffer[i]) << ", ";
             }
@@ -260,7 +260,7 @@ static bool embedFileData(State& state, size_t id)
 /// Embeds a file entry into the output stream.
 /// @param state The state of the embedding process.
 /// @param id The id of the file entry.
-static bool embedFileEntry(State& state, size_t id)
+static bool embedFileEntry(State& state, std::size_t id)
 {
     if (state.options.verbose)
     {
@@ -286,7 +286,7 @@ static bool embedFileEntry(State& state, size_t id)
     if (state.entries[id - 1].directory)
     {
         // Embed the child entries.
-        size_t child = state.entries[id - 1].child;
+        std::size_t child = state.entries[id - 1].child;
         while (child != 0)
         {
             if (!embedFileEntry(state, child))

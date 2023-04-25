@@ -36,8 +36,8 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
     deserializer.beginObject();
 
     // First, read the imports section.
-    size_t len = deserializer.beginDictionary();
-    for (size_t i = 0; i < len; ++i)
+    std::size_t len = deserializer.beginDictionary();
+    for (std::size_t i = 0; i < len; ++i)
     {
         // Read the import name and asset ID.
         std::string name;
@@ -70,7 +70,7 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
     // Then, read the entities section. Here, we may find entities that have already been added
     // by the imports section, in which case we'll just update them.
     len = deserializer.beginDictionary();
-    for (size_t i = 0; i < len; ++i)
+    for (std::size_t i = 0; i < len; ++i)
     {
         // Get the name of the entity and check if its valid or already in the blueprint.
         std::string name;
@@ -93,8 +93,8 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
         }
 
         // Read the components of the entity.
-        size_t componentsLen = deserializer.beginDictionary();
-        for (size_t j = 0; j < componentsLen; ++j)
+        std::size_t componentsLen = deserializer.beginDictionary();
+        for (std::size_t j = 0; j < componentsLen; ++j)
         {
             std::string componentName;
             deserializer.read(componentName);

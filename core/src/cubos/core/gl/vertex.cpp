@@ -45,11 +45,11 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
             glm::ivec3 x = {0, 0, 0};
             glm::ivec3 q = {0, 0, 0};
             q[d] = 1;
-            mask.resize(static_cast<size_t>(sz[u]) * static_cast<size_t>(sz[v]));
+            mask.resize(static_cast<std::size_t>(sz[u]) * static_cast<std::size_t>(sz[v]));
 
             for (x[d] = -1; x[d] < int(sz[d]);)
             {
-                size_t n = 0;
+                std::size_t n = 0;
 
                 // Create mask
                 for (x[v] = 0; x[v] < int(sz[v]); ++x[v])
@@ -79,14 +79,14 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
                 n = 0;
 
                 // Generate mesh from mask
-                for (size_t j = 0; j < sz[v]; ++j)
+                for (std::size_t j = 0; j < sz[v]; ++j)
                 {
-                    for (size_t i = 0; i < sz[u];)
+                    for (std::size_t i = 0; i < sz[u];)
                     {
                         if (mask[n] != 0)
                         {
-                            size_t w;
-                            size_t h;
+                            std::size_t w;
+                            std::size_t h;
                             for (w = 1; i + w < sz[u] && mask[n + w] == mask[n]; ++w)
                             {
                                 ;
@@ -94,7 +94,7 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
                             bool done = false;
                             for (h = 1; j + h < sz[v]; ++h)
                             {
-                                for (size_t k = 0; k < w; ++k)
+                                for (std::size_t k = 0; k < w; ++k)
                                 {
                                     if (mask[n + k + h * sz[u]] == 0 || mask[n + k + h * sz[u]] != mask[n])
                                     {
@@ -148,9 +148,9 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
                                 }
                             }
 
-                            for (size_t l = 0; l < h; ++l)
+                            for (std::size_t l = 0; l < h; ++l)
                             {
-                                for (size_t k = 0; k < w; ++k)
+                                for (std::size_t k = 0; k < w; ++k)
                                 {
                                     mask[n + k + l * sz[u]] = 0;
                                 }

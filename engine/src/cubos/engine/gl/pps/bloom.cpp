@@ -290,9 +290,9 @@ void pps::BloomPass::execute(std::map<Input, Texture2D>& /*inputs*/, Texture2D p
     {
         scaling /= 2.0F;
         this->bloomScalingBP->setConstant(scaling);
-        this->renderDevice.setFramebuffer(bloomFBs[static_cast<size_t>(i)]);
+        this->renderDevice.setFramebuffer(bloomFBs[static_cast<std::size_t>(i)]);
         this->renderDevice.drawTriangles(0, 6);
-        this->bloomInputTexBP->bind(bloomTexBuffer[static_cast<size_t>(i)]);
+        this->bloomInputTexBP->bind(bloomTexBuffer[static_cast<std::size_t>(i)]);
     }
 
     // Combine the final bloom effect with source texture

@@ -92,7 +92,7 @@ void CommandBuffer::commit()
     // 1. Components are removed.
     for (auto& [entity, removed] : this->removed)
     {
-        for (size_t componentId = 1; componentId <= CUBOS_CORE_ECS_MAX_COMPONENTS; ++componentId)
+        for (std::size_t componentId = 1; componentId <= CUBOS_CORE_ECS_MAX_COMPONENTS; ++componentId)
         {
             if (removed.test(componentId))
             {

@@ -451,15 +451,15 @@ namespace cubos::core::gl
         AddressMode addressV = AddressMode::Clamp; ///< Texture adress mode on coordinate V.
         AddressMode addressW = AddressMode::Clamp; ///< Texture adress mode on coordinate W.
 
-        size_t maxAnisotropy = 1; ///< Max anisotropy for filtering. Limited to Property::MaxAnisotropy.
+        std::size_t maxAnisotropy = 1; ///< Max anisotropy for filtering. Limited to Property::MaxAnisotropy.
     };
 
     /// 1D texture description.
     struct Texture1DDesc
     {
         const void* data[CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                                 ///< Number of mip levels.
-        size_t width;                                             ///< Texture width.
+        std::size_t mipLevelCount = 1;                                 ///< Number of mip levels.
+        std::size_t width;                                             ///< Texture width.
         Usage usage;                                              ///< Texture usage mode.
         TextureFormat format;                                     ///< Texture format.
     };
@@ -468,9 +468,9 @@ namespace cubos::core::gl
     struct Texture2DDesc
     {
         const void* data[CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                                 ///< Number of mip levels.
-        size_t width;                                             ///< Texture width.
-        size_t height;                                            ///< Texture height.
+        std::size_t mipLevelCount = 1;                                 ///< Number of mip levels.
+        std::size_t width;                                             ///< Texture width.
+        std::size_t height;                                            ///< Texture height.
         Usage usage;                                              ///< Texture usage mode.
         TextureFormat format;                                     ///< Texture format.
     };
@@ -480,10 +480,10 @@ namespace cubos::core::gl
     {
         const void* data[CUBOS_CORE_GL_MAX_TEXTURE_2D_ARRAY_SIZE][CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] =
             {};                   ///< Optional initial texture data.
-        size_t mipLevelCount = 1; ///< Number of mip levels.
-        size_t width;             ///< Texture width.
-        size_t height;            ///< Texture height.
-        size_t size;              ///< Number of 2D Textures contained in the array.
+        std::size_t mipLevelCount = 1; ///< Number of mip levels.
+        std::size_t width;             ///< Texture width.
+        std::size_t height;            ///< Texture height.
+        std::size_t size;              ///< Number of 2D Textures contained in the array.
         Usage usage;              ///< Texture usage mode.
         TextureFormat format;     ///< Texture format.
     };
@@ -492,10 +492,10 @@ namespace cubos::core::gl
     struct Texture3DDesc
     {
         const void* data[CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] = {}; ///< Optional initial texture data.
-        size_t mipLevelCount = 1;                                 ///< Number of mip levels.
-        size_t width;                                             ///< Texture width.
-        size_t height;                                            ///< Texture height.
-        size_t depth;                                             ///< Texture depth.
+        std::size_t mipLevelCount = 1;                                 ///< Number of mip levels.
+        std::size_t width;                                             ///< Texture width.
+        std::size_t height;                                            ///< Texture height.
+        std::size_t depth;                                             ///< Texture depth.
         Usage usage;                                              ///< Texture usage mode.
         TextureFormat format;                                     ///< Texture format.
     };
@@ -505,9 +505,9 @@ namespace cubos::core::gl
     {
         const void* data[6][CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] =
             {};                   ///< Optional initial cube map data, indexed using CubeFace.
-        size_t mipLevelCount = 1; ///< Number of mip levels.
-        size_t width;             ///< Cube map face width.
-        size_t height;            ///< Cube map face height.
+        std::size_t mipLevelCount = 1; ///< Number of mip levels.
+        std::size_t width;             ///< Cube map face width.
+        std::size_t height;            ///< Cube map face height.
         Usage usage;              ///< Texture usage mode.
         TextureFormat format;     ///< Texture format.
     };
@@ -517,10 +517,10 @@ namespace cubos::core::gl
     {
         const void* data[CUBOS_CORE_GL_MAX_CUBEMAP_ARRAY_SIZE][6][CUBOS_CORE_GL_MAX_MIP_LEVEL_COUNT] =
             {};                   ///< Optional initial cube map data, indexed using CubeFace.
-        size_t mipLevelCount = 1; ///< Number of mip levels.
-        size_t width;             ///< Cube map face width.
-        size_t height;            ///< Cube map face height.
-        size_t size;              ///< Number of cube maps contained in the array.
+        std::size_t mipLevelCount = 1; ///< Number of mip levels.
+        std::size_t width;             ///< Cube map face width.
+        std::size_t height;            ///< Cube map face height.
+        std::size_t size;              ///< Number of cube maps contained in the array.
         Usage usage;              ///< Texture usage mode.
         TextureFormat format;     ///< Texture format.
     };
@@ -530,16 +530,16 @@ namespace cubos::core::gl
     {
         char name[CUBOS_CORE_GL_MAX_CONSTANT_BUFFER_ELEMENT_NAME_SIZE]; ///< Element name.
 
-        size_t offset; ///< Offset of the element in the buffer.
-        size_t size;   ///< Number of values in the element if it is an array. If it isn't, this is set to 1.
-        size_t stride; ///< Stride between each element in the array, if the element is an array.
+        std::size_t offset; ///< Offset of the element in the buffer.
+        std::size_t size;   ///< Number of values in the element if it is an array. If it isn't, this is set to 1.
+        std::size_t stride; ///< Stride between each element in the array, if the element is an array.
     };
 
     /// Constant buffer structure.
     struct ConstantBufferStructure
     {
-        size_t size;         ///< Size of the buffer in bytes.
-        size_t elementCount; ///< Number of elements.
+        std::size_t size;         ///< Size of the buffer in bytes.
+        std::size_t elementCount; ///< Number of elements.
         ConstantBufferElement elements[CUBOS_CORE_GL_MAX_CONSTANT_BUFFER_ELEMENT_COUNT]; ///< Constant buffer elements.
     };
 
@@ -548,20 +548,20 @@ namespace cubos::core::gl
     {
         const char* name;        ///< Element name.
         Type type = Type::Float; ///< Element type.
-        size_t size;             ///< Number of components in the vertex element (1, 2, 3 or 4).
+        std::size_t size;             ///< Number of components in the vertex element (1, 2, 3 or 4).
 
         struct
         {
-            size_t stride = 0; ///< Stride between each element in memory.
-            size_t offset = 0; ///< Offset of the first element in the buffer.
-            size_t index = 0;  ///< Index of the vertex buffer where the element is stored.
+            std::size_t stride = 0; ///< Stride between each element in memory.
+            std::size_t offset = 0; ///< Offset of the first element in the buffer.
+            std::size_t index = 0;  ///< Index of the vertex buffer where the element is stored.
         } buffer;              ///< Vertex buffer description.
     };
 
     /// Vertex array description.
     struct VertexArrayDesc
     {
-        size_t elementCount = 0;                                              ///< Number of vertex elements.
+        std::size_t elementCount = 0;                                              ///< Number of vertex elements.
         VertexElement elements[CUBOS_CORE_GL_MAX_VERTEX_ARRAY_ELEMENT_COUNT]; ///< Vertex elements.
         VertexBuffer buffers[CUBOS_CORE_GL_MAX_VERTEX_ARRAY_BUFFER_COUNT];    ///< Vertex buffers.
         ShaderPipeline shaderPipeline; ///< Shader pipeline used with the vertex array.
@@ -637,7 +637,7 @@ namespace cubos::core::gl
         /// @param data Initial data, can be nullptr.
         /// @param usage The usage which the buffer will have.
         /// @return Constant buffer handle, or nullptr if the creation failed.
-        virtual ConstantBuffer createConstantBuffer(size_t size, const void* data, Usage usage) = 0;
+        virtual ConstantBuffer createConstantBuffer(std::size_t size, const void* data, Usage usage) = 0;
 
         /// Creates a new index buffer.
         /// @param size Size in bytes.
@@ -645,7 +645,7 @@ namespace cubos::core::gl
         /// @param format Index format.
         /// @param usage The usage which the buffer will have.
         /// @return Index buffer handle, or nullptr if the creation failed.
-        virtual IndexBuffer createIndexBuffer(size_t size, const void* data, IndexFormat format, Usage usage) = 0;
+        virtual IndexBuffer createIndexBuffer(std::size_t size, const void* data, IndexFormat format, Usage usage) = 0;
 
         /// Sets the current index buffer.
         virtual void setIndexBuffer(IndexBuffer ib) = 0;
@@ -655,7 +655,7 @@ namespace cubos::core::gl
         /// @param data Initial data, can be nullptr.
         /// @param usage The usage which the buffer will have.
         /// @return Vertex buffer handle, or nullptr if the creation failed.
-        virtual VertexBuffer createVertexBuffer(size_t size, const void* data, Usage usage) = 0;
+        virtual VertexBuffer createVertexBuffer(std::size_t size, const void* data, Usage usage) = 0;
 
         /// Creates a new vertex array.
         /// @return Vertex array handle, or nullptr if the creation failed.
@@ -697,7 +697,7 @@ namespace cubos::core::gl
         virtual void clearColor(float r, float g, float b, float a) = 0;
 
         /// Clears the color buffer of a specific target on the current framebuffer to a specific color.
-        virtual void clearTargetColor(size_t target, float r, float g, float b, float a) = 0;
+        virtual void clearTargetColor(std::size_t target, float r, float g, float b, float a) = 0;
 
         /// Clears the depth buffer bit on the current framebuffer to a specific value.
         virtual void clearDepth(float depth) = 0;
@@ -708,30 +708,30 @@ namespace cubos::core::gl
         /// Draws tringles.
         /// @param offset Index of the first vertex to be drawn.
         /// @param count Number of vertices that will be drawn.
-        virtual void drawTriangles(size_t offset, size_t count) = 0;
+        virtual void drawTriangles(std::size_t offset, std::size_t count) = 0;
 
         /// Draws tringles with an index buffer.
         /// @param offset Index of the first indice to be drawn.
         /// @param count Number of indices that will be drawn.
-        virtual void drawTrianglesIndexed(size_t offset, size_t count) = 0;
+        virtual void drawTrianglesIndexed(std::size_t offset, std::size_t count) = 0;
 
         /// Draws tringles multiple times.
         /// @param offset Index of the first vertex to be drawn.
         /// @param count Number of vertices that will be drawn.
         /// @param instanceCount Number of instances drawn.
-        virtual void drawTrianglesInstanced(size_t offset, size_t count, size_t instanceCount) = 0;
+        virtual void drawTrianglesInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount) = 0;
 
         /// Draws tringles multiple times with an index buffer.
         /// @param offset Index of the first indice to be drawn.
         /// @param count Number of indices that will be drawn.
         /// @param instanceCount Number of instances drawn.
-        virtual void drawTrianglesIndexedInstanced(size_t offset, size_t count, size_t instanceCount) = 0;
+        virtual void drawTrianglesIndexedInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount) = 0;
 
         /// Dispatches a compute pipeline.
         /// @param x X dimension of the work group.
         /// @param y Y dimension of the work group.
         /// @param z Z dimension of the work group.
-        virtual void dispatchCompute(size_t x, size_t y, size_t z) = 0;
+        virtual void dispatchCompute(std::size_t x, std::size_t y, std::size_t z) = 0;
 
         /// Defines a barrier ordering memory transactions.
         /// This ensure that all memory transactions before the barrier are completed before the
@@ -813,7 +813,7 @@ namespace cubos::core::gl
             /// @param width Width of the section which will be updated.
             /// @param data Pointer to the new data.
             /// @param level Mip level to update.
-            virtual void update(size_t x, size_t width, const void* data, size_t level = 0) = 0;
+            virtual void update(std::size_t x, std::size_t width, const void* data, std::size_t level = 0) = 0;
 
             /// Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;
@@ -834,8 +834,8 @@ namespace cubos::core::gl
             /// @param height Height of the section which will be updated.
             /// @param data Pointer to the new data.
             /// @param level Mip level to update.
-            virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data,
-                                size_t level = 0) = 0;
+            virtual void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data,
+                                std::size_t level = 0) = 0;
 
             /// Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;
@@ -857,8 +857,8 @@ namespace cubos::core::gl
             /// @param height Height of the section which will be updated.
             /// @param data Pointer to the new data.
             /// @param level Mip level to update.
-            virtual void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data,
-                                size_t level = 0) = 0;
+            virtual void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data,
+                                std::size_t level = 0) = 0;
 
             /// Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;
@@ -881,8 +881,8 @@ namespace cubos::core::gl
             /// @param depth Depth of the section which will be updated.
             /// @param data Pointer to the new data.
             /// @param level Mip level to update.
-            virtual void update(size_t x, size_t y, size_t z, size_t width, size_t height, size_t depth,
-                                const void* data, size_t level = 0) = 0;
+            virtual void update(std::size_t x, std::size_t y, std::size_t z, std::size_t width, std::size_t height, std::size_t depth,
+                                const void* data, std::size_t level = 0) = 0;
 
             /// Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;
@@ -905,8 +905,8 @@ namespace cubos::core::gl
             /// @param data Pointer to the new data.
             /// @param face Face to update.
             /// @param level Mip level to update.
-            virtual void update(size_t x, size_t y, size_t width, size_t height, const void* data, CubeFace face,
-                                size_t level = 0) = 0;
+            virtual void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data, CubeFace face,
+                                std::size_t level = 0) = 0;
 
             /// Generates mipmaps on this cube map.
             virtual void generateMipmaps() = 0;
@@ -930,8 +930,8 @@ namespace cubos::core::gl
             /// @param data Pointer to the new data.
             /// @param face Face to update.
             /// @param level Mip level to update.
-            virtual void update(size_t x, size_t y, size_t i, size_t width, size_t height, const void* data,
-                                CubeFace face, size_t level = 0) = 0;
+            virtual void update(std::size_t x, std::size_t y, std::size_t i, std::size_t width, std::size_t height, const void* data,
+                                CubeFace face, std::size_t level = 0) = 0;
 
             /// Generates mipmaps on this cube map.
             virtual void generateMipmaps() = 0;

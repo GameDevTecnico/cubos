@@ -16,7 +16,7 @@ namespace cubos::core
     {
     public:
         /// @param numThreads Number of threads to create.
-        ThreadPool(size_t numThreads);
+        ThreadPool(std::size_t numThreads);
         ThreadPool(const ThreadPool&) = delete;
         ThreadPool(ThreadPool&&) = delete;
         ~ThreadPool();
@@ -35,7 +35,7 @@ namespace cubos::core
         std::condition_variable new_task;  ///< Notifies threads when new tasks may be available.
         std::condition_variable task_done; ///< Notifies threads when a task has finished executing.
 
-        std::atomic<size_t> numTasks; ///< Number of tasks currently being executed.
+        std::atomic<std::size_t> numTasks; ///< Number of tasks currently being executed.
         bool stop;                    ///< Set to true when the thread pool is being destroyed.
     };
 } // namespace cubos::core

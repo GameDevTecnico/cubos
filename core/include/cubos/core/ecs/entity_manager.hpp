@@ -65,7 +65,7 @@ namespace cubos::core::ecs
         };
 
         /// @param initialCapacity The initial capacity of the entity manager.
-        EntityManager(size_t initialCapacity);
+        EntityManager(std::size_t initialCapacity);
         ~EntityManager() = default;
 
         /// Creates a new entity with a certain component mask.

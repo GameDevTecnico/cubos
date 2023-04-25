@@ -90,7 +90,7 @@ namespace cubos::core::memory
         }
 
         /// @returns The number of elements in the map.
-        inline size_t size() const
+        inline std::size_t size() const
         {
             return this->map.size();
         }

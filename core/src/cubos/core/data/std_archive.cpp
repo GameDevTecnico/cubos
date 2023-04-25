@@ -66,7 +66,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     }
 }
 
-void STDArchive::generate(size_t parent)
+void STDArchive::generate(std::size_t parent)
 {
     auto& parentInfo = this->files[parent];
 
@@ -78,7 +78,7 @@ void STDArchive::generate(size_t parent)
 
         // Add the file to the tree.
         auto directory = std::filesystem::is_directory(osPath);
-        size_t id = this->nextId++;
+        std::size_t id = this->nextId++;
         this->files[id] = {osPath, parent, parentInfo.child, 0, directory};
         parentInfo.child = id;
 
@@ -90,7 +90,7 @@ void STDArchive::generate(size_t parent)
     }
 }
 
-size_t STDArchive::create(size_t parent, std::string_view name, bool directory)
+std::size_t STDArchive::create(std::size_t parent, std::string_view name, bool directory)
 {
     // Make sure that the archive isn't read-only and the parent is a directory.
     if (this->readOnly || parent == 0 || !this->isDirectory(parent))
@@ -121,13 +121,13 @@ size_t STDArchive::create(size_t parent, std::string_view name, bool directory)
     }
 
     // Add the file to the tree.
-    size_t id = this->nextId++;
+    std::size_t id = this->nextId++;
     this->files[id] = {osPath, parent, parentInfo.child, 0, directory};
     parentInfo.child = id;
     return id;
 }
 
-bool STDArchive::destroy(size_t id)
+bool STDArchive::destroy(std::size_t id)
 {
     // Make sure the file isn't read only, that the file exist and that it's not the root.
     if (this->readOnly || !this->files.contains(id) || id == 1)
@@ -156,7 +156,7 @@ bool STDArchive::destroy(size_t id)
     }
     else
     {
-        size_t sibling = parentInfo.child;
+        std::size_t sibling = parentInfo.child;
         while (sibling != 0)
         {
             auto siblingSibling = this->files.at(sibling).sibling;
@@ -172,7 +172,7 @@ bool STDArchive::destroy(size_t id)
     return true;
 }
 
-std::string STDArchive::getName(size_t id) const
+std::string STDArchive::getName(std::size_t id) const
 {
     auto it = this->files.find(id);
     if (it == this->files.end())
@@ -184,7 +184,7 @@ std::string STDArchive::getName(size_t id) const
     return it->second.osPath.filename().string();
 }
 
-bool STDArchive::isDirectory(size_t id) const
+bool STDArchive::isDirectory(std::size_t id) const
 {
     auto it = this->files.find(id);
     if (it == this->files.end())
@@ -201,7 +201,7 @@ bool STDArchive::isReadOnly() const
     return this->readOnly;
 }
 
-size_t STDArchive::getParent(size_t id) const
+std::size_t STDArchive::getParent(std::size_t id) const
 {
     auto it = this->files.find(id);
     if (it == this->files.end())
@@ -213,7 +213,7 @@ size_t STDArchive::getParent(size_t id) const
     return it->second.parent;
 }
 
-size_t STDArchive::getSibling(size_t id) const
+std::size_t STDArchive::getSibling(std::size_t id) const
 {
     auto it = this->files.find(id);
     if (it == this->files.end())
@@ -225,7 +225,7 @@ size_t STDArchive::getSibling(size_t id) const
     return it->second.sibling;
 }
 
-size_t STDArchive::getChild(size_t id) const
+std::size_t STDArchive::getChild(std::size_t id) const
 {
     auto it = this->files.find(id);
     if (it == this->files.end())

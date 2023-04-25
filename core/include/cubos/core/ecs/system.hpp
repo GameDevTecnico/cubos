@@ -146,8 +146,8 @@ namespace cubos::core::ecs
         template <typename T, unsigned int M>
         struct SystemFetcher<EventReader<T, M>>
         {
-            using Type = std::tuple<size_t&, ReadResource<EventPipe<T>>>;
-            using State = size_t; // Number of events read.
+            using Type = std::tuple<std::size_t&, ReadResource<EventPipe<T>>>;
+            using State = std::size_t; // Number of events read.
 
             static void add(SystemInfo& info);
             static State prepare(World& world);
@@ -455,14 +455,14 @@ namespace cubos::core::ecs
     }
 
     template <typename T, unsigned int M>
-    size_t impl::SystemFetcher<EventReader<T, M>>::prepare(World& world)
+    std::size_t impl::SystemFetcher<EventReader<T, M>>::prepare(World& world)
     {
         world.write<EventPipe<T>>().get().addReader();
         return 0; // Initially we haven't read any events.
     }
 
     template <typename T, unsigned int M>
-    std::tuple<size_t&, ReadResource<EventPipe<T>>> impl::SystemFetcher<EventReader<T, M>>::fetch(World& world,
+    std::tuple<std::size_t&, ReadResource<EventPipe<T>>> impl::SystemFetcher<EventReader<T, M>>::fetch(World& world,
                                                                                                   CommandBuffer&,
                                                                                                   State& state)
     {
@@ -471,7 +471,7 @@ namespace cubos::core::ecs
 
     template <typename T, unsigned int M>
     EventReader<T, M> impl::SystemFetcher<EventReader<T, M>>::arg(
-        std::tuple<size_t&, ReadResource<EventPipe<T>>>&& fetched)
+        std::tuple<std::size_t&, ReadResource<EventPipe<T>>>&& fetched)
     {
         return EventReader<T>(std::get<1>(fetched).get(), std::get<0>(fetched));
     }
