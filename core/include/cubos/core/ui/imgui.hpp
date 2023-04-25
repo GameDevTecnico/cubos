@@ -19,7 +19,7 @@ namespace cubos::core::ui
     void beginFrame();
 
     /// Ends the current ImGui frame, and renders the ImGui draw data to the window.
-    void endFrame(gl::Framebuffer target = 0);
+    void endFrame(const gl::Framebuffer& target = 0);
 
     /// Passes a window event to ImGui.
     /// @param event The event to pass.

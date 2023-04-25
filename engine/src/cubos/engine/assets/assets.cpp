@@ -1,3 +1,5 @@
+#include <utility>
+
 #include <cubos/core/data/debug_serializer.hpp>
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/data/json_deserializer.hpp>
@@ -44,7 +46,7 @@ Assets::~Assets()
     }
 }
 
-void Assets::registerBridge(std::string extension, std::shared_ptr<AssetBridge> bridge)
+void Assets::registerBridge(const std::string& extension, std::shared_ptr<AssetBridge> bridge)
 {
     std::unique_lock lock(this->mutex);
 
@@ -63,7 +65,7 @@ void Assets::cleanup()
 {
     std::shared_lock lock(this->mutex);
 
-    for (auto entry : this->entries)
+    for (const auto& entry : this->entries)
     {
         std::unique_lock assetLock(entry.second->mutex);
 
@@ -195,7 +197,7 @@ AnyAsset Assets::load(AnyAsset handle) const
     return handle;
 }
 
-bool Assets::saveMeta(AnyAsset handle) const
+bool Assets::saveMeta(const AnyAsset& handle) const
 {
     // Get the asset metadata.
     auto meta = this->readMeta(handle);
@@ -220,7 +222,7 @@ bool Assets::saveMeta(AnyAsset handle) const
     return false;
 }
 
-bool Assets::save(AnyAsset handle) const
+bool Assets::save(const AnyAsset& handle) const
 {
     // Save the asset's metadata.
     if (!this->saveMeta(handle))
@@ -241,7 +243,7 @@ bool Assets::save(AnyAsset handle) const
     return bridge->save(*this, handle);
 }
 
-Assets::Status Assets::status(AnyAsset handle) const
+Assets::Status Assets::status(const AnyAsset& handle) const
 {
     std::shared_lock lock(this->mutex);
 
@@ -273,12 +275,12 @@ bool Assets::update(AnyAsset& handle)
     return false;
 }
 
-void Assets::invalidate(AnyAsset handle)
+void Assets::invalidate(const AnyAsset& handle)
 {
     this->invalidate(handle, true);
 }
 
-void Assets::invalidate(AnyAsset handle, bool shouldLock)
+void Assets::invalidate(const AnyAsset& handle, bool shouldLock)
 {
     auto assetEntry = this->entry(handle);
     CUBOS_ASSERT(assetEntry != nullptr, "Could not invalidate asset");
@@ -304,7 +306,7 @@ void Assets::invalidate(AnyAsset handle, bool shouldLock)
     }
 }
 
-AssetMetaRead Assets::readMeta(AnyAsset handle) const
+AssetMetaRead Assets::readMeta(const AnyAsset& handle) const
 {
     auto assetEntry = this->entry(handle);
     CUBOS_ASSERT(assetEntry != nullptr, "Could not access metadata");
@@ -313,7 +315,7 @@ AssetMetaRead Assets::readMeta(AnyAsset handle) const
     return {assetEntry->meta, std::move(lock)};
 }
 
-AssetMetaWrite Assets::writeMeta(AnyAsset handle)
+AssetMetaWrite Assets::writeMeta(const AnyAsset& handle)
 {
     auto assetEntry = this->entry(handle, true);
     CUBOS_ASSERT(assetEntry != nullptr, "Could not access metadata");
@@ -377,7 +379,7 @@ AnyAsset Assets::store(AnyAsset handle, std::type_index type, void* data, void (
 }
 
 template <typename Lock>
-void* Assets::access(AnyAsset handle, std::type_index type, Lock& lock, bool incVersion) const
+void* Assets::access(const AnyAsset& handle, std::type_index type, Lock& lock, bool incVersion) const
 {
     CUBOS_ASSERT(!handle.isNull(), "Could not access asset");
 
@@ -426,12 +428,12 @@ void* Assets::access(AnyAsset handle, std::type_index type, Lock& lock, bool inc
 // Define the explicit instantiations of the access() function, one for each lock type.
 // Necessary because the function is template - would otherwise cause linker errors.
 
-template void* Assets::access<std::shared_lock<std::shared_mutex>>(AnyAsset, std::type_index,
+template void* Assets::access<std::shared_lock<std::shared_mutex>>(const AnyAsset&, std::type_index,
                                                                    std::shared_lock<std::shared_mutex>&, bool) const;
-template void* Assets::access<std::unique_lock<std::shared_mutex>>(AnyAsset, std::type_index,
+template void* Assets::access<std::unique_lock<std::shared_mutex>>(const AnyAsset&, std::type_index,
                                                                    std::unique_lock<std::shared_mutex>&, bool) const;
 
-std::shared_lock<std::shared_mutex> Assets::lockRead(AnyAsset handle) const
+std::shared_lock<std::shared_mutex> Assets::lockRead(const AnyAsset& handle) const
 {
     if (auto entry = this->entry(handle))
     {
@@ -442,7 +444,7 @@ std::shared_lock<std::shared_mutex> Assets::lockRead(AnyAsset handle) const
     abort();
 }
 
-std::unique_lock<std::shared_mutex> Assets::lockWrite(AnyAsset handle) const
+std::unique_lock<std::shared_mutex> Assets::lockWrite(const AnyAsset& handle) const
 {
     if (auto entry = this->entry(handle))
     {
@@ -453,7 +455,7 @@ std::unique_lock<std::shared_mutex> Assets::lockWrite(AnyAsset handle) const
     abort();
 }
 
-std::shared_ptr<Assets::Entry> Assets::entry(AnyAsset handle) const
+std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
 {
     // If the handle is null, we can't access the asset.
     if (handle.isNull())
@@ -476,7 +478,7 @@ std::shared_ptr<Assets::Entry> Assets::entry(AnyAsset handle) const
     return it->second;
 }
 
-std::shared_ptr<Assets::Entry> Assets::entry(AnyAsset handle, bool create)
+std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create)
 {
     // If the handle is null, we can't access the asset.
     if (handle.isNull())
@@ -521,7 +523,7 @@ std::shared_ptr<Assets::Entry> Assets::entry(AnyAsset handle, bool create)
     return it->second;
 }
 
-std::shared_ptr<AssetBridge> Assets::bridge(AnyAsset handle) const
+std::shared_ptr<AssetBridge> Assets::bridge(const AnyAsset& handle) const
 {
     auto meta = this->readMeta(handle);
     if (auto path = meta->get("path"))

@@ -68,7 +68,7 @@ AnyAsset::AnyAsset(const AnyAsset& other)
     this->incRef();
 }
 
-AnyAsset::AnyAsset(AnyAsset&& other)
+AnyAsset::AnyAsset(AnyAsset&& other) noexcept
     : id(other.id)
     , refCount(other.refCount)
     , version(other.version)
@@ -86,7 +86,7 @@ AnyAsset& AnyAsset::operator=(const AnyAsset& other)
     return *this;
 }
 
-AnyAsset& AnyAsset::operator=(AnyAsset&& other)
+AnyAsset& AnyAsset::operator=(AnyAsset&& other) noexcept
 {
     this->decRef();
     this->id = other.id;

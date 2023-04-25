@@ -8,7 +8,7 @@ static void startup(const Arguments& args, cubos::core::Settings& settings)
 {
     for (const auto& arg : args.value)
     {
-        auto token = arg.find("=");
+        auto token = arg.find('=');
         if (token == std::string::npos)
         {
             CUBOS_ERROR("Could not parse settings (missing '=' token)");

@@ -39,7 +39,7 @@ namespace cubos::core::al
         /// Creates an audio device from a given device specifier.
         /// @param specifier The device specifier (empty for default).
         /// @returns The audio device.
-        static std::shared_ptr<AudioDevice> create(std::string specifier = "");
+        static std::shared_ptr<AudioDevice> create(const std::string& specifier = "");
 
         /// Enumerates the available devices.
         /// @param devices The vector to fill with the available devices.
