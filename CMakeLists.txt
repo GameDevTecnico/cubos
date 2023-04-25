@@ -16,6 +16,7 @@ function(cubos_common_target_options target)
     # Enable all warnings and treat them as errors
     target_compile_options(${target} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
+            /Zc:preprocessor # Enable preprocessor conformance mode - required for __VA_ARGS__ to work correctly
             /W4
             /WX
             /wd4996  # Disable warning about deprecated functions
