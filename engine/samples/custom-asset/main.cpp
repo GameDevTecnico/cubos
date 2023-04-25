@@ -1,6 +1,6 @@
-#include <cubos/core/log.hpp>
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/data/std_archive.hpp>
+#include <cubos/core/log.hpp>
 
 #include <cubos/engine/data/asset_manager.hpp>
 

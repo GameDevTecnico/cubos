@@ -26,11 +26,11 @@ namespace cubos::core::data
                 std::size_t child;   ///< The index of the first child.
 
                 const void* data; ///< The data of the file entry.
-                std::size_t size;      ///< The size of the data.
+                std::size_t size; ///< The size of the data.
             };
 
-            const Entry* entries; ///< The entries of the embedded archive.
-            std::size_t entryCount;    ///< The number of entries in the embedded archive.
+            const Entry* entries;   ///< The entries of the embedded archive.
+            std::size_t entryCount; ///< The number of entries in the embedded archive.
         };
 
         /// @param name The name of the data the embedded archive represents.

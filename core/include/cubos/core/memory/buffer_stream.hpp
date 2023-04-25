@@ -40,12 +40,12 @@ namespace cubos::core::memory
         virtual char peek() const override;
 
     private:
-        void* buffer;    ///< Pointer to the buffer being written to/read from.
+        void* buffer;         ///< Pointer to the buffer being written to/read from.
         std::size_t size;     ///< Size of the buffer.
         std::size_t position; ///< Current position in the buffer.
-        bool readOnly;   ///< Whether the buffer is read-only.
-        bool reachedEof; ///< Whether the end of the buffer has been reached.
-        bool owned;      ///< Whether the buffer is owned by this stream.
+        bool readOnly;        ///< Whether the buffer is read-only.
+        bool reachedEof;      ///< Whether the end of the buffer has been reached.
+        bool owned;           ///< Whether the buffer is owned by this stream.
     };
 } // namespace cubos::core::memory
 

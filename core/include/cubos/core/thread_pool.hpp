@@ -36,7 +36,7 @@ namespace cubos::core
         std::condition_variable task_done; ///< Notifies threads when a task has finished executing.
 
         std::atomic<std::size_t> numTasks; ///< Number of tasks currently being executed.
-        bool stop;                    ///< Set to true when the thread pool is being destroyed.
+        bool stop;                         ///< Set to true when the thread pool is being destroyed.
     };
 } // namespace cubos::core
 

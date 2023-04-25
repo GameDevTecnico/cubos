@@ -1,39 +1,30 @@
-#include <cubos/core/log.hpp>
+#include <imgui.h>
+
+#include <cubos/core/data/debug_serializer.hpp>
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/data/std_archive.hpp>
-#include <cubos/core/data/debug_serializer.hpp>
-
-#include <cubos/core/memory/stream.hpp>
-
 #include <cubos/core/gl/light.hpp>
-
-#include <cubos/engine/gl/frame.hpp>
+#include <cubos/core/log.hpp>
+#include <cubos/core/memory/stream.hpp>
 
 #include <cubos/engine/cubos.hpp>
 #include <cubos/engine/data/asset_manager.hpp>
-#include <cubos/engine/data/scene.hpp>
 #include <cubos/engine/data/palette.hpp>
-
-#include <cubos/engine/plugins/transform.hpp>
-#include <cubos/engine/plugins/window.hpp>
-#include <cubos/engine/plugins/renderer.hpp>
-#include <cubos/engine/plugins/env_settings.hpp>
-#include <cubos/engine/plugins/file_settings.hpp>
-#include <cubos/engine/plugins/imgui.hpp>
-
-#include <cubos/engine/plugins/tools/entity_selector.hpp>
-#include <cubos/engine/plugins/tools/settings_inspector.hpp>
-#include <cubos/engine/tools/world_inspector/plugin.hpp>
-#include <cubos/engine/tools/entity_inspector/plugin.hpp>
-
+#include <cubos/engine/data/scene.hpp>
+#include <cubos/engine/ecs/camera.hpp>
+#include <cubos/engine/ecs/grid.hpp>
+#include <cubos/engine/ecs/local_to_world.hpp>
 #include <cubos/engine/ecs/position.hpp>
 #include <cubos/engine/ecs/rotation.hpp>
 #include <cubos/engine/ecs/scale.hpp>
-#include <cubos/engine/ecs/local_to_world.hpp>
-#include <cubos/engine/ecs/grid.hpp>
-#include <cubos/engine/ecs/camera.hpp>
-
-#include <imgui.h>
+#include <cubos/engine/gl/frame.hpp>
+#include <cubos/engine/plugins/env_settings.hpp>
+#include <cubos/engine/plugins/file_settings.hpp>
+#include <cubos/engine/plugins/imgui.hpp>
+#include <cubos/engine/plugins/renderer.hpp>
+#include <cubos/engine/plugins/tools/settings_inspector.hpp>
+#include <cubos/engine/plugins/transform.hpp>
+#include <cubos/engine/plugins/window.hpp>
 
 #include "num.hpp"
 #include "parent.hpp"

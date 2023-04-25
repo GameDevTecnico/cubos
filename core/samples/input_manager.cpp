@@ -1,11 +1,12 @@
-#include <cubos/core/log.hpp>
-#include <cubos/core/io/window.hpp>
+#include <algorithm>
+
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/input_manager.hpp>
 #include <cubos/core/io/sources/button_press.hpp>
-#include <cubos/core/io/sources/single_axis.hpp>
 #include <cubos/core/io/sources/double_axis.hpp>
-#include <algorithm>
+#include <cubos/core/io/sources/single_axis.hpp>
+#include <cubos/core/io/window.hpp>
+#include <cubos/core/log.hpp>
 using namespace cubos::core;
 float red = 0.0f;
 float green = 0.0f;
