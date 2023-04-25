@@ -143,7 +143,7 @@ public:
 };
 #endif // WITH_OPENAL
 
-OALAudioDevice::OALAudioDevice(std::string specifier)
+OALAudioDevice::OALAudioDevice(const std::string& specifier)
 {
 #ifdef WITH_OPENAL
     auto device = alcOpenDevice(specifier.c_str());

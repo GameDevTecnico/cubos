@@ -1,3 +1,5 @@
+#include <utility>
+
 #include <cubos/core/data/file_system.hpp>
 #include <cubos/core/log.hpp>
 
@@ -10,7 +12,7 @@ File::Handle FileSystem::root()
     return root;
 }
 
-void FileSystem::mount(std::string_view path, std::shared_ptr<Archive> archive)
+void FileSystem::mount(std::string_view path, const std::shared_ptr<Archive>& archive)
 {
     if (path.empty() || path[0] != '/')
     {

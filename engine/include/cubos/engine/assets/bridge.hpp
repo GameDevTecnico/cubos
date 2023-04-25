@@ -24,10 +24,10 @@ namespace cubos::engine
         /// When called, the meta data of the given asset should be already present in the asset
         /// manager.
         /// @returns Whether the asset was successfully loaded.
-        virtual bool load(Assets& assets, AnyAsset handle) = 0;
+        virtual bool load(Assets& assets, const AnyAsset& handle) = 0;
 
         /// Saves an asset from the given asset manager, identified by the given handle.
         /// @returns Whether the asset was successfully saved.
-        virtual bool save(const Assets& assets, AnyAsset handle);
+        virtual bool save(const Assets& assets, const AnyAsset& handle);
     };
 } // namespace cubos::engine

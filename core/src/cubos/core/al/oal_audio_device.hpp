@@ -11,7 +11,7 @@ namespace cubos::core::al
     {
     public:
         /// @param specifier Specifies the device to use (empty for default).
-        OALAudioDevice(std::string specifier = "");
+        OALAudioDevice(const std::string& specifier = "");
         virtual ~OALAudioDevice() override;
 
         /// Enumerates the available devices.

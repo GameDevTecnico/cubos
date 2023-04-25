@@ -18,7 +18,7 @@ void BaseRenderer::resize(glm::uvec2 size)
 }
 
 void BaseRenderer::render(const Camera& camera, const Frame& frame, bool usePostProcessing,
-                          core::gl::Framebuffer target)
+                          const core::gl::Framebuffer& target)
 {
     if (usePostProcessing && this->ppsManager.passCount() > 0)
     {

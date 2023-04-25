@@ -1,3 +1,5 @@
+#include <utility>
+
 #include <cubos/engine/gl/pps/manager.hpp>
 #include <cubos/engine/gl/pps/pass.hpp>
 
@@ -53,7 +55,7 @@ void pps::Manager::resize(glm::uvec2 size)
 
 void pps::Manager::provideInput(Input input, Texture2D texture)
 {
-    this->inputs[input] = texture;
+    this->inputs[input] = std::move(texture);
 }
 
 void pps::Manager::removePass(size_t id)
@@ -62,7 +64,7 @@ void pps::Manager::removePass(size_t id)
     this->passes.erase(id);
 }
 
-void pps::Manager::execute(Framebuffer out)
+void pps::Manager::execute(const Framebuffer& out)
 {
     auto prev = this->inputs.at(Input::Lighting);
     size_t nextI = 0;

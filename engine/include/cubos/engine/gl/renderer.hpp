@@ -67,7 +67,7 @@ namespace cubos::engine::gl
         /// @param usePostProcessing Whether to use post processing.
         /// @param target The target framebuffer to draw to.
         void render(const core::gl::Camera& camera, const Frame& frame, bool usePostProcessing = true,
-                    core::gl::Framebuffer target = 0);
+                    const core::gl::Framebuffer& target = 0);
 
         /// Gets a reference to the post processing manager.
         /// @return The post processing manager.

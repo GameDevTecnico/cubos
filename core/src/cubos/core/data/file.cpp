@@ -1,3 +1,5 @@
+#include <utility>
+
 #include <cubos/core/data/archive.hpp>
 #include <cubos/core/data/file.hpp>
 #include <cubos/core/log.hpp>
@@ -11,7 +13,7 @@ File::File(Handle parent, std::string_view name)
     this->directory = true; // Files outside of archives are always directories.
     this->archive = nullptr;
     this->id = 0;
-    this->parent = parent;
+    this->parent = std::move(parent);
     this->destroyed = false;
     if (this->parent)
     {
@@ -19,13 +21,13 @@ File::File(Handle parent, std::string_view name)
     }
 }
 
-File::File(Handle parent, std::shared_ptr<Archive> archive, size_t id)
+File::File(Handle parent, const std::shared_ptr<Archive>& archive, size_t id)
 {
     this->name = archive->getName(id);
     this->directory = archive->isDirectory(id);
     this->archive = archive;
     this->id = id;
-    this->parent = parent;
+    this->parent = std::move(parent);
     this->destroyed = false;
     if (this->parent)
     {
@@ -33,13 +35,13 @@ File::File(Handle parent, std::shared_ptr<Archive> archive, size_t id)
     }
 }
 
-File::File(Handle parent, std::shared_ptr<Archive> archive, std::string_view name)
+File::File(Handle parent, const std::shared_ptr<Archive>& archive, std::string_view name)
 {
     this->name = name;
     this->directory = archive->isDirectory(1);
     this->archive = archive;
     this->id = 1;
-    this->parent = parent;
+    this->parent = std::move(parent);
     this->destroyed = false;
     if (this->parent)
     {
@@ -47,7 +49,7 @@ File::File(Handle parent, std::shared_ptr<Archive> archive, std::string_view nam
     }
 }
 
-void File::mount(std::string_view path, std::shared_ptr<Archive> archive)
+void File::mount(std::string_view path, const std::shared_ptr<Archive>& archive)
 {
     // Remove trailing slashes.
     while (path.ends_with('/'))
@@ -452,13 +454,13 @@ File::Handle File::getChild() const
     return this->child;
 }
 
-void File::addChild(File::Handle child)
+void File::addChild(const File::Handle& child)
 {
     child->sibling = this->child;
     this->child = child;
 }
 
-void File::removeChild(File::Handle child)
+void File::removeChild(const File::Handle& child)
 {
     if (this->child == child)
     {
