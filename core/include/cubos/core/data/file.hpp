@@ -50,7 +50,7 @@ namespace cubos::core::data
         /// archive mounted at the path, abort() is called.
         /// @param path The path to mount the archive to.
         /// @param archive The archive to mount.
-        void mount(std::string_view path, std::shared_ptr<Archive> archive);
+        void mount(std::string_view path, const std::shared_ptr<Archive>& archive);
 
         /// Unmounts an archive from a path relative to this file in the virtual file system of the engine.
         /// If no archive is mounted at the given path, nothing is done.
@@ -120,12 +120,12 @@ namespace cubos::core::data
         /// @param parent The parent file handle.
         /// @param archive The archive this file is in.
         /// @param id The identifier of this file in its archive.
-        File(Handle parent, std::shared_ptr<Archive> archive, size_t id);
+        File(Handle parent, const std::shared_ptr<Archive>& archive, size_t id);
 
         /// @param parent The parent file handle.
         /// @param archive The archive mounted on this file.
         /// @param name The name of this file.
-        File(Handle parent, std::shared_ptr<Archive> archive, std::string_view name);
+        File(Handle parent, const std::shared_ptr<Archive>& archive, std::string_view name);
 
         /// Recursively generates an archive's files to the virtual file system.
         /// Called after the archive has been mounted.
@@ -137,11 +137,11 @@ namespace cubos::core::data
 
         /// Adds a child file to this file.
         /// @param child The child file to add.
-        void addChild(File::Handle child);
+        void addChild(const File::Handle& child);
 
         /// Removes a child file from this file.
         /// @param child The child file to remove.
-        void removeChild(File::Handle child);
+        void removeChild(const File::Handle& child);
 
         /// Finds a child file in this file.
         /// @param name The name of the child file to find.

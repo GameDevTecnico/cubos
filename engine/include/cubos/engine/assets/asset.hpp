@@ -36,13 +36,13 @@ namespace cubos::engine
         AnyAsset(const AnyAsset& other);
 
         /// @param other Handle to move.
-        AnyAsset(AnyAsset&& other);
+        AnyAsset(AnyAsset&& other) noexcept;
 
         /// @param other Handle to copy.
         AnyAsset& operator=(const AnyAsset& other);
 
         /// @param other Handle to move.
-        AnyAsset& operator=(AnyAsset&& other);
+        AnyAsset& operator=(AnyAsset&& other) noexcept;
 
         /// @returns The last known version of the asset.
         int getVersion() const;

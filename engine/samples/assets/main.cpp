@@ -1,7 +1,7 @@
-#include <cubos/engine/assets/plugin.hpp>
-
-#include <cubos/core/settings.hpp>
 #include <cubos/core/data/file_system.hpp>
+#include <cubos/core/settings.hpp>
+
+#include <cubos/engine/assets/plugin.hpp>
 
 using namespace cubos::engine;
 using namespace cubos::core;
@@ -9,7 +9,7 @@ using namespace cubos::core;
 class TextBridge : public AssetBridge
 {
 public:
-    bool load(Assets& assets, AnyAsset handle) override
+    bool load(Assets& assets, const AnyAsset& handle) override
     {
         // Get the asset's path - guaranteed to be present by the asset manager.
         auto path = assets.readMeta(handle)->get("path").value();

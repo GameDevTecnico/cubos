@@ -34,7 +34,7 @@ std::optional<WindowEvent> BaseWindow::pollEvent()
         return std::nullopt;
     }
 
-    WindowEvent event = std::move(this->events.front());
+    WindowEvent event = this->events.front();
     this->events.pop_front();
     return event;
 }

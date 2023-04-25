@@ -57,7 +57,7 @@ namespace cubos::engine::gl::pps
         /// Applies all post processing passes sequentially, and outputs the result to the screen.
         /// The lighting input must have been provided before calling this function, since it acts as the input for the
         /// first pass.
-        void execute(core::gl::Framebuffer out);
+        void execute(const core::gl::Framebuffer& out);
 
         /// Gets the number of passes in the manager.
         /// @return The number of passes.

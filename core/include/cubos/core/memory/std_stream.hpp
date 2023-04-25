@@ -14,7 +14,7 @@ namespace cubos::core::memory
         /// @param file Stdio file to read/write from.
         /// @param close Should the file be closed when this stream is destructed?
         StdStream(FILE* file, bool close = false);
-        StdStream(StdStream&&);
+        StdStream(StdStream&&) noexcept;
         virtual ~StdStream() override;
 
         virtual size_t read(void* data, size_t size) override;

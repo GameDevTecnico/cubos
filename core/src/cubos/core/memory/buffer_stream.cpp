@@ -67,7 +67,7 @@ BufferStream::BufferStream(const BufferStream& other)
     }
 }
 
-BufferStream::BufferStream(BufferStream&& other)
+BufferStream::BufferStream(BufferStream&& other) noexcept
 {
     this->buffer = other.buffer;
     this->size = other.size;

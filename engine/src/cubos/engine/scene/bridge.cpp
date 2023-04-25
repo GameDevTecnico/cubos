@@ -8,7 +8,7 @@
 using namespace cubos::engine;
 using namespace cubos::core;
 
-bool SceneBridge::load(Assets& assets, AnyAsset handle)
+bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
 {
     // Open the scene file.
     auto path = assets.readMeta(handle)->get("path").value();
@@ -116,7 +116,7 @@ bool SceneBridge::load(Assets& assets, AnyAsset handle)
     return true;
 }
 
-bool SceneBridge::save(const Assets& /*assets*/, AnyAsset /*handle*/)
+bool SceneBridge::save(const Assets& /*assets*/, const AnyAsset& /*handle*/)
 {
     // TODO: figure out how to do this.
     // One of the problems is finding out exactly what was overriden in sub-scenes.
