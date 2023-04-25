@@ -138,7 +138,7 @@ bool parseAttribute(std::string_view line, Component& component, bool& found)
     args = line.substr(0, end);
 
     // Parse the name and storage.
-    size_t comma = args.find(",");
+    size_t comma = args.find(',');
     if (comma == std::string::npos)
     {
         std::cerr << "Couldn't parse component attribute arguments '" << args << "'" << std::endl;
@@ -172,7 +172,7 @@ bool preprocessFile(std::string& contents)
         }
 
         // Find the end of the comment.
-        size_t commentEnd = contents.find("\n", commentStart);
+        size_t commentEnd = contents.find('\n', commentStart);
         if (commentEnd == std::string::npos)
         {
             commentEnd = contents.size();
@@ -573,7 +573,7 @@ bool parseComponent(Parser& parser, Component& component)
 /// @param path The path to the file or directory.
 /// @param components The components to fill.
 /// @return True if the file was parsed successfully, false otherwise.
-static bool parse(fs::path path, std::vector<Component>& components)
+static bool parse(const fs::path& path, std::vector<Component>& components)
 {
     if (fs::is_directory(path))
     {

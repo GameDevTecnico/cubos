@@ -1,3 +1,5 @@
+#include <utility>
+
 #include <cubos/engine/gl/frame.hpp>
 
 using namespace cubos::core::gl;
@@ -5,7 +7,7 @@ using namespace cubos::engine::gl;
 
 void Frame::draw(RendererGrid grid, glm::mat4 modelMat)
 {
-    drawCmds.push_back(DrawCmd{grid, modelMat});
+    drawCmds.push_back(DrawCmd{std::move(grid), modelMat});
 }
 
 void Frame::ambient(const glm::vec3& color)

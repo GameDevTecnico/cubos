@@ -74,7 +74,7 @@ void STDArchive::generate(size_t parent)
     for (const auto& entry : std::filesystem::directory_iterator(parentInfo.osPath))
     {
         // Get the path to the file.
-        auto osPath = entry.path();
+        const auto& osPath = entry.path();
 
         // Add the file to the tree.
         auto directory = std::filesystem::is_directory(osPath);

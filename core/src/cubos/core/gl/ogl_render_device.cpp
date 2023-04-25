@@ -1106,9 +1106,9 @@ public:
     }
 
     OGLShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps, GLuint program)
-        : OGLShaderPipeline(vs, ps, program)
+        : OGLShaderPipeline(std::move(vs), std::move(ps), program)
     {
-        this->gs = gs;
+        this->gs = std::move(gs);
     }
 
     OGLShaderPipeline(ShaderStage cs, GLuint program)

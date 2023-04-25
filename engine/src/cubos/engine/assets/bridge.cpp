@@ -4,7 +4,7 @@
 
 using namespace cubos::engine;
 
-bool AssetBridge::save(const Assets& /*unused*/, AnyAsset /*unused*/)
+bool AssetBridge::save(const Assets& /*assets*/, const AnyAsset& /*handle*/)
 {
     CUBOS_ERROR("This asset bridge does not support saving assets");
     return false;

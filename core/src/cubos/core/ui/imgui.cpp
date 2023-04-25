@@ -1,4 +1,5 @@
 #include <array>
+#include <utility>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
@@ -393,10 +394,10 @@ static void setupRenderState(ImGuiData* bd, gl::Framebuffer target)
     rd.setBlendState(bd->blendState);
     rd.setDepthStencilState(bd->depthStencilState);
     rd.setShaderPipeline(bd->pipeline);
-    rd.setFramebuffer(target);
+    rd.setFramebuffer(std::move(target));
 }
 
-void ui::endFrame(gl::Framebuffer target)
+void ui::endFrame(const gl::Framebuffer& target)
 {
     auto* bd = (ImGuiData*)ImGui::GetIO().BackendPlatformUserData;
     auto& rd = bd->window->getRenderDevice();

@@ -44,7 +44,7 @@ Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
     this->indices = indices;
 }
 
-Grid::Grid(Grid&& other)
+Grid::Grid(Grid&& other) noexcept
     : size(other.size)
 {
     new (&this->indices) std::vector<uint16_t>(std::move(other.indices));
