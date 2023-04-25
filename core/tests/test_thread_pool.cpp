@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include <cubos/core/thread_pool.hpp>
 
 using namespace cubos::core;

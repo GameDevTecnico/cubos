@@ -62,8 +62,8 @@ void Stream::print(uint64_t value, std::size_t base)
         return;
     }
 
-    char buffer[64]; // 64 is enough for any 64-bit integer.
-    std::size_t len = 0;  // Number of characters used
+    char buffer[64];     // 64 is enough for any 64-bit integer.
+    std::size_t len = 0; // Number of characters used
 
     // While value is not zero
     while (value > 0)
@@ -125,7 +125,7 @@ void Stream::print(double value, std::size_t decimalPlaces)
     else if (value != value)
     {
         this->print("NAN");
-    // 16777217 is the last number whose integer part can be represented exactly
+        // 16777217 is the last number whose integer part can be represented exactly
     }
     else if (value <= 16777217.0 && log10(value) > -static_cast<double>(decimalPlaces))
     {

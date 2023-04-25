@@ -28,7 +28,8 @@ namespace cubos::core::gl
         virtual CubeMap createCubeMap(const CubeMapDesc& desc) override;
         virtual CubeMapArray createCubeMapArray(const CubeMapArrayDesc& desc) override;
         virtual ConstantBuffer createConstantBuffer(std::size_t size, const void* data, Usage usage) override;
-        virtual IndexBuffer createIndexBuffer(std::size_t size, const void* data, IndexFormat format, Usage usage) override;
+        virtual IndexBuffer createIndexBuffer(std::size_t size, const void* data, IndexFormat format,
+                                              Usage usage) override;
         virtual void setIndexBuffer(IndexBuffer ib) override;
         virtual VertexBuffer createVertexBuffer(std::size_t size, const void* data, Usage usage) override;
         virtual VertexArray createVertexArray(const VertexArrayDesc& desc) override;
@@ -45,7 +46,8 @@ namespace cubos::core::gl
         virtual void drawTriangles(std::size_t offset, std::size_t count) override;
         virtual void drawTrianglesIndexed(std::size_t offset, std::size_t count) override;
         virtual void drawTrianglesInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount) override;
-        virtual void drawTrianglesIndexedInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount) override;
+        virtual void drawTrianglesIndexedInstanced(std::size_t offset, std::size_t count,
+                                                   std::size_t instanceCount) override;
         virtual void dispatchCompute(std::size_t x, std::size_t y, std::size_t z) override;
         virtual void memoryBarrier(MemoryBarriers barriers) override;
         virtual void setViewport(int x, int y, int w, int h) override;

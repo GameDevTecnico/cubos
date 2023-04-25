@@ -18,14 +18,14 @@ namespace fs = std::filesystem;
 /// The input options of the program.
 struct ConvertOptions
 {
-    fs::path input = "";                        ///< The input file path.
-    fs::path palette = "";                      ///< The palette path.
+    fs::path input = "";                             ///< The input file path.
+    fs::path palette = "";                           ///< The palette path.
     std::unordered_map<std::size_t, fs::path> grids; ///< The output paths of the grids.
-    bool write = false;                         ///< Whether to write to the palette.
-    bool verbose = false;                       ///< Enables verbose mode.
-    bool force = false;                         ///< Enables force mode.
-    bool help = false;                          ///< Prints the help message.
-    float similarity = 1.0F;                    ///< The similarity threshold.
+    bool write = false;                              ///< Whether to write to the palette.
+    bool verbose = false;                            ///< Enables verbose mode.
+    bool force = false;                              ///< Enables force mode.
+    bool help = false;                               ///< Prints the help message.
+    float similarity = 1.0F;                         ///< The similarity threshold.
 };
 
 /// Prints the help message of the program.

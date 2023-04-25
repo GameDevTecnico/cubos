@@ -1,8 +1,8 @@
+#include <glm/glm.hpp>
+
+#include <cubos/core/data/debug_serializer.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
-#include <cubos/core/data/debug_serializer.hpp>
-
-#include <glm/glm.hpp>
 
 using namespace cubos::core;
 using data::Debug;
