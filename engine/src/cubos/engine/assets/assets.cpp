@@ -19,35 +19,7 @@ Assets::Assets()
 
     // Spawn the loaded thread.
     this->loaderShouldExit = false;
-    this->loaderThread = std::thread([this]() {
-        for (;;)
-        {
-            // Wait for a new asset to load.
-            std::unique_lock<std::mutex> loaderLock(this->loaderMutex);
-            this->loaderCond.wait(loaderLock,
-                                  [this]() { return !this->loaderQueue.empty() || this->loaderShouldExit; });
-
-            // If the loader thread should exit, exit.
-            if (this->loaderShouldExit)
-            {
-                return;
-            }
-
-            // Get the next asset to load.
-            auto task = this->loaderQueue.front();
-            this->loaderQueue.pop_front();
-            loaderLock.unlock(); // Unlock the mutex before loading the asset.
-
-            if (!task.bridge->load(*this, task.handle))
-            {
-                CUBOS_ERROR("Failed to load asset '{}'", core::data::Debug(task.handle));
-
-                auto assetEntry = this->entry(task.handle);
-                CUBOS_ASSERT(assetEntry != nullptr, "This should never happen");
-                assetEntry->status = Assets::Status::Unloaded;
-            }
-        }
-    });
+    this->loaderThread = std::thread([this]() { this->loader(); });
 }
 
 Assets::~Assets()
@@ -585,5 +557,35 @@ std::shared_ptr<AssetBridge> Assets::bridge(AnyAsset handle) const
     {
         CUBOS_ERROR("Cannot find a bridge for asset {}: asset does not have a path", core::data::Debug(handle));
         return nullptr;
+    }
+}
+
+void Assets::loader()
+{
+    for (;;)
+    {
+        // Wait for a new asset to load.
+        std::unique_lock<std::mutex> loaderLock(this->loaderMutex);
+        this->loaderCond.wait(loaderLock, [this]() { return !this->loaderQueue.empty() || this->loaderShouldExit; });
+
+        // If the loader thread should exit, exit.
+        if (this->loaderShouldExit)
+        {
+            return;
+        }
+
+        // Get the next asset to load.
+        auto task = this->loaderQueue.front();
+        this->loaderQueue.pop_front();
+        loaderLock.unlock(); // Unlock the mutex before loading the asset.
+
+        if (!task.bridge->load(*this, task.handle))
+        {
+            CUBOS_ERROR("Failed to load asset '{}'", core::data::Debug(task.handle));
+
+            auto assetEntry = this->entry(task.handle);
+            CUBOS_ASSERT(assetEntry != nullptr, "This should never happen");
+            assetEntry->status = Assets::Status::Unloaded;
+        }
     }
 }

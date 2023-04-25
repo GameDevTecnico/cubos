@@ -421,7 +421,7 @@ void ui::endFrame(gl::Framebuffer target)
         // Create and grow vertex buffer if needed.
         if (!bd->vb || bd->vbSize < static_cast<size_t>(cmdList->VtxBuffer.Size))
         {
-            bd->vbSize = static_cast<size_t>(cmdList->VtxBuffer.Size + 5000);
+            bd->vbSize = static_cast<size_t>(cmdList->VtxBuffer.Size) + 5000;
             bd->vb = rd.createVertexBuffer(bd->vbSize * sizeof(ImDrawVert), nullptr, gl::Usage::Dynamic);
 
             // Create the vertex array.
@@ -453,7 +453,7 @@ void ui::endFrame(gl::Framebuffer target)
         // Create and grow index buffer if needed.
         if (!bd->ib || bd->ibSize < static_cast<size_t>(cmdList->IdxBuffer.Size))
         {
-            bd->ibSize = static_cast<size_t>(cmdList->IdxBuffer.Size + 10000);
+            bd->ibSize = static_cast<size_t>(cmdList->IdxBuffer.Size) + 10000;
             bd->ib = rd.createIndexBuffer(bd->ibSize * sizeof(ImDrawIdx), nullptr,
                                           sizeof(ImDrawIdx) == 2 ? gl::IndexFormat::UShort : gl::IndexFormat::UInt,
                                           gl::Usage::Dynamic);

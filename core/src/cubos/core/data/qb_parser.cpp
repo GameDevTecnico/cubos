@@ -92,7 +92,9 @@ bool cubos::core::data::parseQB(std::vector<QBMatrix>& matrices, memory::Stream&
                             continue;
                         else if (colorFormat) // BGRA -> RGBA
                             std::swap(color[0], color[2]);
-                        glm::vec4 colorVec(color[0] / 255.0f, color[1] / 255.0f, color[2] / 255.0f, color[3] / 255.0f);
+                        glm::vec4 colorVec(static_cast<float>(color[0]) / 255.0f, static_cast<float>(color[1]) / 255.0f,
+                                           static_cast<float>(color[2]) / 255.0f,
+                                           static_cast<float>(color[3]) / 255.0f);
 
                         // Check if the material is already in the palette.
                         size_t mat;
