@@ -1,8 +1,9 @@
 #ifndef CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
 #define CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
 
-#include <cassert>
 #include <functional>
+
+#include <cubos/core/log.hpp>
 
 namespace cubos::core::data
 {
@@ -38,7 +39,7 @@ namespace cubos::core::data
         /// @param id Serialized identifier to add.
         inline void add(const R& reference, const I& id)
         {
-            assert(!this->usingFunctions);
+            CUBOS_ASSERT(!this->usingFunctions);
             this->refToId.insert({reference, id});
             this->idToRef.insert({id, reference});
         }
@@ -83,7 +84,8 @@ namespace cubos::core::data
             if (this->usingFunctions)
             {
                 R reference;
-                assert(this->deserialize(reference, id));
+                bool success = this->deserialize(reference, id);
+                CUBOS_ASSERT(success);
                 return reference;
             }
             else
@@ -100,7 +102,8 @@ namespace cubos::core::data
             if (this->usingFunctions)
             {
                 I id;
-                assert(this->serialize(reference, id));
+                bool success = this->serialize(reference, id);
+                CUBOS_ASSERT(success);
                 return id;
             }
             else
