@@ -67,8 +67,8 @@ namespace cubos::engine::gl::pps
         core::gl::RenderDevice& renderDevice;        ///< The render device to use.
         glm::uvec2 size;                             ///< The current size of the window.
         std::map<Input, core::gl::Texture2D> inputs; ///< The inputs provided to the passes.
-        std::map<std::size_t, Pass*> passes;              ///< The passes present in the manager.
-        std::size_t nextId;                               ///< The next ID to use for a pass.
+        std::map<std::size_t, Pass*> passes;         ///< The passes present in the manager.
+        std::size_t nextId;                          ///< The next ID to use for a pass.
         core::gl::Texture2D intermediateTex[2];      ///< Intermediate textures used for the passes.
         core::gl::Framebuffer intermediateFb[2];     ///< Intermediate framebuffers used for the passes.
     };

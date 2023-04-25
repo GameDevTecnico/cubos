@@ -1,11 +1,11 @@
+#include <random>
+
 #include <gtest/gtest.h>
 
-#include <cubos/core/memory/buffer_stream.hpp>
-#include <cubos/core/data/yaml_serializer.hpp>
-#include <cubos/core/data/yaml_deserializer.hpp>
 #include <cubos/core/data/serialization_map.hpp>
-
-#include <random>
+#include <cubos/core/data/yaml_deserializer.hpp>
+#include <cubos/core/data/yaml_serializer.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
 
 using namespace cubos::core::data;
 using namespace cubos::core::memory;

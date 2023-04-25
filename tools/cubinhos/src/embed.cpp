@@ -110,12 +110,12 @@ static std::string escapeString(const std::string& str)
 /// Stores info obtained from scanning the input file/directory.
 struct ScanEntry
 {
-    std::string name; ///< The name of the file.
-    fs::path path;    ///< The path of the file.
-    bool directory;   ///< Whether the file is a directory.
-    std::size_t parent;    ///< The ID of the parent directory.
-    std::size_t child;     ///< The ID of the child directory.
-    std::size_t sibling;   ///< The ID of the next sibling directory.
+    std::string name;    ///< The name of the file.
+    fs::path path;       ///< The path of the file.
+    bool directory;      ///< Whether the file is a directory.
+    std::size_t parent;  ///< The ID of the parent directory.
+    std::size_t child;   ///< The ID of the child directory.
+    std::size_t sibling; ///< The ID of the next sibling directory.
 };
 
 /// State required for the embedding process.

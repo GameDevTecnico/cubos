@@ -1,6 +1,7 @@
-#include <cubos/engine/cubos.hpp>
-#include <cubos/core/ecs/event_writer.hpp>
 #include <cubos/core/ecs/event_reader.hpp>
+#include <cubos/core/ecs/event_writer.hpp>
+
+#include <cubos/engine/cubos.hpp>
 
 using namespace cubos::core;
 
