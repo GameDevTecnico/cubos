@@ -25,75 +25,75 @@ void Deserializer::fail()
 // Implementation of deserialize() for primitive types.
 
 template <>
-void cubos::core::data::deserialize<int8_t>(Deserializer& des, int8_t& val)
+void cubos::core::data::deserialize<int8_t>(Deserializer& des, int8_t& obj)
 {
-    des.readI8(val);
+    des.readI8(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<int16_t>(Deserializer& des, int16_t& val)
+void cubos::core::data::deserialize<int16_t>(Deserializer& des, int16_t& obj)
 {
-    des.readI16(val);
+    des.readI16(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<int32_t>(Deserializer& des, int32_t& val)
+void cubos::core::data::deserialize<int32_t>(Deserializer& des, int32_t& obj)
 {
-    des.readI32(val);
+    des.readI32(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<int64_t>(Deserializer& des, int64_t& val)
+void cubos::core::data::deserialize<int64_t>(Deserializer& des, int64_t& obj)
 {
-    des.readI64(val);
+    des.readI64(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<uint8_t>(Deserializer& des, uint8_t& val)
+void cubos::core::data::deserialize<uint8_t>(Deserializer& des, uint8_t& obj)
 {
-    des.readU8(val);
+    des.readU8(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<uint16_t>(Deserializer& des, uint16_t& val)
+void cubos::core::data::deserialize<uint16_t>(Deserializer& des, uint16_t& obj)
 {
-    des.readU16(val);
+    des.readU16(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<uint32_t>(Deserializer& des, uint32_t& val)
+void cubos::core::data::deserialize<uint32_t>(Deserializer& des, uint32_t& obj)
 {
-    des.readU32(val);
+    des.readU32(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<uint64_t>(Deserializer& des, uint64_t& val)
+void cubos::core::data::deserialize<uint64_t>(Deserializer& des, uint64_t& obj)
 {
-    des.readU64(val);
+    des.readU64(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<float>(Deserializer& des, float& val)
+void cubos::core::data::deserialize<float>(Deserializer& des, float& obj)
 {
-    des.readF32(val);
+    des.readF32(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<double>(Deserializer& des, double& val)
+void cubos::core::data::deserialize<double>(Deserializer& des, double& obj)
 {
-    des.readF64(val);
+    des.readF64(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<bool>(Deserializer& des, bool& val)
+void cubos::core::data::deserialize<bool>(Deserializer& des, bool& obj)
 {
-    des.readBool(val);
+    des.readBool(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<std::string>(Deserializer& des, std::string& val)
+void cubos::core::data::deserialize<std::string>(Deserializer& des, std::string& obj)
 {
-    des.readString(val);
+    des.readString(obj);
 }
 
 void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::reference val)
@@ -108,54 +108,54 @@ void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::refere
 // NOLINTBEGIN(bugprone-macro-parentheses)
 #define IMPL_DESERIALIZE_GLM(T)                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tvec2<T>>(Deserializer & des, glm::tvec2<T> & val)                        \
+    void cubos::core::data::deserialize<glm::tvec2<T>>(Deserializer & des, glm::tvec2<T> & obj)                        \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
-        des.read(val.x);                                                                                               \
-        des.read(val.y);                                                                                               \
+        des.read(obj.x);                                                                                               \
+        des.read(obj.y);                                                                                               \
         des.endObject();                                                                                               \
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tvec3<T>>(Deserializer & des, glm::tvec3<T> & val)                        \
+    void cubos::core::data::deserialize<glm::tvec3<T>>(Deserializer & des, glm::tvec3<T> & obj)                        \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
-        des.read(val.x);                                                                                               \
-        des.read(val.y);                                                                                               \
-        des.read(val.z);                                                                                               \
+        des.read(obj.x);                                                                                               \
+        des.read(obj.y);                                                                                               \
+        des.read(obj.z);                                                                                               \
         des.endObject();                                                                                               \
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tvec4<T>>(Deserializer & des, glm::tvec4<T> & val)                        \
+    void cubos::core::data::deserialize<glm::tvec4<T>>(Deserializer & des, glm::tvec4<T> & obj)                        \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
-        des.read(val.x);                                                                                               \
-        des.read(val.y);                                                                                               \
-        des.read(val.z);                                                                                               \
-        des.read(val.w);                                                                                               \
+        des.read(obj.x);                                                                                               \
+        des.read(obj.y);                                                                                               \
+        des.read(obj.z);                                                                                               \
+        des.read(obj.w);                                                                                               \
         des.endObject();                                                                                               \
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tquat<T>>(Deserializer & des, glm::tquat<T> & val)                        \
+    void cubos::core::data::deserialize<glm::tquat<T>>(Deserializer & des, glm::tquat<T> & obj)                        \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
-        des.read(val.w);                                                                                               \
-        des.read(val.x);                                                                                               \
-        des.read(val.y);                                                                                               \
-        des.read(val.z);                                                                                               \
+        des.read(obj.w);                                                                                               \
+        des.read(obj.x);                                                                                               \
+        des.read(obj.y);                                                                                               \
+        des.read(obj.z);                                                                                               \
         des.endObject();                                                                                               \
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tmat4x4<T>>(Deserializer & des, glm::tmat4x4<T> & val)                    \
+    void cubos::core::data::deserialize<glm::tmat4x4<T>>(Deserializer & des, glm::tmat4x4<T> & obj)                    \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
-        des.read(val[0]);                                                                                              \
-        des.read(val[1]);                                                                                              \
-        des.read(val[2]);                                                                                              \
-        des.read(val[3]);                                                                                              \
+        des.read(obj[0]);                                                                                              \
+        des.read(obj[1]);                                                                                              \
+        des.read(obj[2]);                                                                                              \
+        des.read(obj[3]);                                                                                              \
         des.endObject();                                                                                               \
     }
 // NOLINTEND(bugprone-macro-parentheses)

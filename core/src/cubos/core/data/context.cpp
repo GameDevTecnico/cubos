@@ -32,7 +32,7 @@ void Context::pop()
 
 void* Context::getAny(std::type_index type) const
 {
-    auto res = this->tryGetAny(type);
+    auto* res = this->tryGetAny(type);
     if (res == nullptr)
     {
         CUBOS_CRITICAL("Type '{}' requested in serialization context, but not present", type.name());
@@ -48,7 +48,7 @@ void* Context::tryGetAny(std::type_index type) const
     {
         if (it->subContext != nullptr)
         {
-            auto res = it->subContext->tryGetAny(type);
+            auto* res = it->subContext->tryGetAny(type);
             if (res != nullptr)
             {
                 return res;

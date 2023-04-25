@@ -37,13 +37,13 @@ void EmbeddedArchive::registerData(const std::string& name, const Data& data)
     registry.emplace(name, data);
 }
 
-size_t EmbeddedArchive::create(size_t, std::string_view, bool)
+size_t EmbeddedArchive::create(size_t /*parent*/, std::string_view /*name*/, bool /*directory*/)
 {
     // Embedded archive is read-only.
     return 0;
 }
 
-bool EmbeddedArchive::destroy(size_t)
+bool EmbeddedArchive::destroy(size_t /*id*/)
 {
     // Embedded archive is read-only.
     return false;
@@ -82,8 +82,10 @@ size_t EmbeddedArchive::getChild(size_t id) const
 std::unique_ptr<memory::Stream> EmbeddedArchive::open(File::Handle file, File::OpenMode mode)
 {
     if (mode != File::OpenMode::Read)
+    {
         return nullptr;
+    }
 
-    auto& entry = this->data->entries[file->getId() - 1];
+    const auto& entry = this->data->entries[file->getId() - 1];
     return std::make_unique<FileStream<memory::BufferStream>>(file, mode, memory::BufferStream(entry.data, entry.size));
 }

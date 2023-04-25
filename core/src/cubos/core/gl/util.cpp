@@ -7,8 +7,8 @@ void gl::generateScreenQuad(RenderDevice& renderDevice, const ShaderPipeline& pi
 {
     // The vertices of the quad (positions + uvs)
     float screenVerts[] = {
-        -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, +1.0f, 0.0f, 1.0f, +1.0f, +1.0f, 1.0f, 1.0f,
-        +1.0f, +1.0f, 1.0f, 1.0f, +1.0f, -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f,
+        -1.0F, -1.0F, 0.0F, 0.0F, -1.0F, +1.0F, 0.0F, 1.0F, +1.0F, +1.0F, 1.0F, 1.0F,
+        +1.0F, +1.0F, 1.0F, 1.0F, +1.0F, -1.0F, 1.0F, 0.0F, -1.0F, -1.0F, 0.0F, 0.0F,
     };
 
     // Create the array and vertex buffer.

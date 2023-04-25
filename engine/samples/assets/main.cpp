@@ -32,7 +32,7 @@ public:
     }
 };
 
-static const Asset<std::string> TEXT_ASSET = AnyAsset("6f42ae5a-59d1-5df3-8720-83b8df6dd536");
+static const Asset<std::string> TextAsset = AnyAsset("6f42ae5a-59d1-5df3-8720-83b8df6dd536");
 
 static void config(Settings& settings)
 {
@@ -48,7 +48,7 @@ static void bridge(Assets& assets)
 static void load(const Assets& assets)
 {
     // Access the text asset - will be loaded automatically.
-    auto text = assets.read(TEXT_ASSET);
+    auto text = assets.read(TextAsset);
     memory::Stream::stdOut.print(*text);
 }
 

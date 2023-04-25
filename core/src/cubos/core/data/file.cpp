@@ -14,7 +14,9 @@ File::File(Handle parent, std::string_view name)
     this->parent = parent;
     this->destroyed = false;
     if (this->parent)
+    {
         this->path = this->parent->path + "/" + std::string(this->name);
+    }
 }
 
 File::File(Handle parent, std::shared_ptr<Archive> archive, size_t id)
@@ -26,7 +28,9 @@ File::File(Handle parent, std::shared_ptr<Archive> archive, size_t id)
     this->parent = parent;
     this->destroyed = false;
     if (this->parent)
+    {
         this->path = this->parent->path + "/" + std::string(this->name);
+    }
 }
 
 File::File(Handle parent, std::shared_ptr<Archive> archive, std::string_view name)
@@ -38,14 +42,18 @@ File::File(Handle parent, std::shared_ptr<Archive> archive, std::string_view nam
     this->parent = parent;
     this->destroyed = false;
     if (this->parent)
+    {
         this->path = this->parent->path + "/" + std::string(this->name);
+    }
 }
 
 void File::mount(std::string_view path, std::shared_ptr<Archive> archive)
 {
     // Remove trailing slashes.
     while (path.ends_with('/'))
+    {
         path.remove_suffix(1);
+    }
 
     // Split path and find the parent directory.
     auto i = path.find_last_of('/');
@@ -62,7 +70,7 @@ void File::mount(std::string_view path, std::shared_ptr<Archive> archive)
     }
 
     // Lock mutex of the directory.
-    std::lock_guard<std::mutex> dir_lock(dir->mutex);
+    std::lock_guard<std::mutex> dirLock(dir->mutex);
 
     // Mount the archive in the directory itself (must be the root directory).
     if (name.empty())
@@ -112,7 +120,9 @@ void File::mount(std::string_view path, std::shared_ptr<Archive> archive)
 void File::generateArchive()
 {
     if (this->archive == nullptr || !this->directory)
+    {
         return;
+    }
 
     auto child = this->archive->getChild(this->id);
     while (child != 0)
@@ -164,7 +174,7 @@ void File::unmount(std::string_view path)
     if (mountPoint->parent != nullptr)
     {
         // Lock the parent directory mutex.
-        std::lock_guard<std::mutex> dir_lock(mountPoint->parent->mutex);
+        std::lock_guard<std::mutex> dirLock(mountPoint->parent->mutex);
         mountPoint->parent->removeChild(mountPoint);
         mountPoint->parent = nullptr;
     }
@@ -201,27 +211,41 @@ void File::destroyArchive()
 File::Handle File::find(std::string_view path)
 {
     if (path.starts_with("./"))
+    {
         path.remove_prefix(2);
+    }
 
     // If the path is empty, return this file.
     if (path.empty())
+    {
         return this->shared_from_this();
 
     // If the path is absolute, or if this file isn't a directory, return nullptr.
-    else if ((!path.empty() && path[0] == '/') || !this->directory)
+    }
+    if ((!path.empty() && path[0] == '/') || !this->directory)
+    {
         return nullptr;
+    }
 
     // Get name of the first component in the path.
     size_t i = 0;
     for (; i < path.size(); i++)
+    {
         if (path[i] == '/')
+        {
             break;
+        }
+    }
     auto name = path.substr(0, i);
 
     // Remove extra slashes.
     for (; i < path.size(); i++)
+    {
         if (path[i] != '/')
+        {
             break;
+        }
+    }
 
     // Lock the mutex of this file.
     std::lock_guard<std::mutex> lock(this->mutex);
@@ -229,16 +253,19 @@ File::Handle File::find(std::string_view path)
     // Search for the first child with the given name.
     auto child = this->findChild(name);
     if (child)
+    {
         return child->find(path.substr(i));
-    else
-        return nullptr;
+    }
+    return nullptr;
 }
 
 File::Handle File::create(std::string_view path, bool directory)
 {
     // Remove trailing slashes.
     while (path.ends_with('/'))
+    {
         path.remove_suffix(1);
+    }
 
     // Split path and find the parent directory.
     auto i = path.find_last_of('/');
@@ -254,7 +281,7 @@ File::Handle File::create(std::string_view path, bool directory)
     }
 
     // Lock the directory mutex.
-    std::lock_guard<std::mutex> dir_lock(dir->mutex);
+    std::lock_guard<std::mutex> dirLock(dir->mutex);
 
     // Check if the file already exists.
     if (dir->findChild(name) != nullptr)
@@ -298,10 +325,12 @@ File::Handle File::create(std::string_view path, bool directory)
 bool File::destroy()
 {
     // Lock the file mutex.
-    std::lock_guard file_lock(this->mutex);
+    std::lock_guard fileLock(this->mutex);
 
     if (this->destroyed)
+    {
         return true;
+    }
     this->destroyed = true;
 
     if (this->archive == nullptr)
@@ -309,12 +338,12 @@ bool File::destroy()
         CUBOS_ERROR("Could not destroy file '{}': file not mounted", this->path);
         return false;
     }
-    else if (this->archive->isReadOnly())
+    if (this->archive->isReadOnly())
     {
         CUBOS_ERROR("Could not destroy file '{}': archive is read-only", this->path);
         return false;
     }
-    else if (this->id == 1)
+    if (this->id == 1)
     {
         CUBOS_ERROR("Could not destroy file '{}': file is the mount point of an archive", this->path);
         return false;
@@ -328,7 +357,7 @@ bool File::destroy()
     }
 
     // Remove the file from the parent directory.
-    std::lock_guard dir_lock(this->parent->mutex);
+    std::lock_guard dirLock(this->parent->mutex);
     this->parent->removeChild(this->shared_from_this());
     this->parent = nullptr;
 
@@ -339,10 +368,12 @@ bool File::destroy()
 void File::destroyRecursive()
 {
     // Lock the file mutex.
-    std::lock_guard file_lock(this->mutex);
+    std::lock_guard fileLock(this->mutex);
 
     if (this->destroyed)
+    {
         return;
+    }
 
     // Mark the file as destroyed.
     this->destroyed = true;
@@ -359,19 +390,19 @@ void File::destroyRecursive()
 std::unique_ptr<memory::Stream> File::open(OpenMode mode)
 {
     // Lock the file mutex.
-    std::lock_guard file_lock(this->mutex);
+    std::lock_guard fileLock(this->mutex);
 
     if (this->archive == nullptr)
     {
         CUBOS_WARN("Could not open file '{}': it is not mounted", this->path);
         return nullptr;
     }
-    else if (this->archive->isReadOnly() && mode == OpenMode::Write)
+    if (this->archive->isReadOnly() && mode == OpenMode::Write)
     {
         CUBOS_WARN("Could not open file '{}' for writing: archive is read-only", this->path);
         return nullptr;
     }
-    else if (this->directory)
+    if (this->directory)
     {
         CUBOS_WARN("Could not open file '{}: it is a directory", this->path);
         return nullptr;
@@ -430,12 +461,16 @@ void File::addChild(File::Handle child)
 void File::removeChild(File::Handle child)
 {
     if (this->child == child)
+    {
         this->child = child->sibling;
+    }
     else
     {
         auto prev = this->child;
         while (prev->sibling != child)
+        {
             prev = prev->sibling;
+        }
         prev->sibling = child->sibling;
     }
 }
@@ -443,14 +478,22 @@ void File::removeChild(File::Handle child)
 File::Handle File::findChild(std::string_view name) const
 {
     for (auto child = this->child; child != nullptr; child = child->sibling)
+    {
         if (child->name == name)
+        {
             return child;
+        }
+    }
     return nullptr;
 }
 
 File::~File()
 {
     if (this->destroyed && this->archive)
+    {
         if (!this->archive->destroy(this->id))
+        {
             CUBOS_ERROR("Could not destroy file '{}': internal archive error", this->path);
+        }
+    }
 }

@@ -25,7 +25,7 @@ struct ConvertOptions
     bool verbose = false;                       ///< Enables verbose mode.
     bool force = false;                         ///< Enables force mode.
     bool help = false;                          ///< Prints the help message.
-    float similarity = 1.0f;                    ///< The similarity threshold.
+    float similarity = 1.0F;                    ///< The similarity threshold.
 };
 
 /// Prints the help message of the program.
@@ -97,7 +97,7 @@ static bool parseArguments(int argc, char** argv, ConvertOptions& options)
             if (i + 1 < argc)
             {
                 options.similarity = std::stof(argv[i + 1]);
-                if (options.similarity < 0.0f || options.similarity > 1.0f)
+                if (options.similarity < 0.0F || options.similarity > 1.0F)
                 {
                     std::cerr << "Invalid similarity value " << options.similarity << "." << std::endl;
                     return false;
@@ -135,11 +135,9 @@ static bool parseArguments(int argc, char** argv, ConvertOptions& options)
                 std::cerr << "Too many arguments." << std::endl;
                 return false;
             }
-            else
-            {
-                foundInput = true;
-                options.input = argv[i];
-            }
+
+            foundInput = true;
+            options.input = argv[i];
         }
     }
 
@@ -148,13 +146,12 @@ static bool parseArguments(int argc, char** argv, ConvertOptions& options)
         std::cerr << "Missing input file." << std::endl;
         return false;
     }
-    else if (options.palette.empty() && !options.verbose)
+    if (options.palette.empty() && !options.verbose)
     {
         std::cerr << "Missing input palette." << std::endl;
         return false;
     }
-    else
-        return true;
+    return true;
 }
 
 /// Tries to load the palette from the given path.
@@ -162,8 +159,8 @@ static bool parseArguments(int argc, char** argv, ConvertOptions& options)
 /// @param palette The palette to fill.
 static bool loadPalette(const fs::path& path, gl::Palette& palette)
 {
-    auto file = fopen(path.string().c_str(), "rb");
-    if (!file)
+    auto* file = fopen(path.string().c_str(), "rb");
+    if (file == nullptr)
     {
         return false;
     }
@@ -185,8 +182,8 @@ static bool loadPalette(const fs::path& path, gl::Palette& palette)
 /// @param model The model to fill.
 static bool loadQB(const fs::path& path, std::vector<data::QBMatrix>& model)
 {
-    auto file = fopen(path.string().c_str(), "rb");
-    if (!file)
+    auto* file = fopen(path.string().c_str(), "rb");
+    if (file == nullptr)
     {
         return false;
     }
@@ -200,8 +197,8 @@ static bool loadQB(const fs::path& path, std::vector<data::QBMatrix>& model)
 /// @param palette The palette to save.
 static bool savePalette(const fs::path& path, const gl::Palette& palette)
 {
-    auto file = fopen(path.string().c_str(), "wb");
-    if (!file)
+    auto* file = fopen(path.string().c_str(), "wb");
+    if (file == nullptr)
     {
         return false;
     }
@@ -223,8 +220,8 @@ static bool savePalette(const fs::path& path, const gl::Palette& palette)
 /// @param grid The grid to export.
 static bool saveGrid(const fs::path& path, const gl::Grid& grid)
 {
-    auto file = fopen(path.string().c_str(), "wb");
-    if (!file)
+    auto* file = fopen(path.string().c_str(), "wb");
+    if (file == nullptr)
     {
         return false;
     }
@@ -386,7 +383,7 @@ int runConvert(int argc, char** argv)
         printHelp();
         return 1;
     }
-    else if (options.help)
+    if (options.help)
     {
         printHelp();
         return 0;

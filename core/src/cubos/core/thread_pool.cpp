@@ -21,7 +21,9 @@ ThreadPool::ThreadPool(size_t numThreads)
                     // Wait until a task is available, or the thread pool is being destroyed.
                     this->new_task.wait(lock, [this]() { return this->stop || !this->tasks.empty(); });
                     if (this->stop && this->tasks.empty())
+                    {
                         return; // Thread pool is being destroyed, and there are no more tasks to execute.
+                    }
                     task = std::move(this->tasks.front());
                     this->tasks.pop_front();
                     this->numTasks += 1; // A task is being executed.

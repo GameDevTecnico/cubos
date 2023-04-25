@@ -20,21 +20,21 @@ namespace cubos::core::gl
         static void init(RenderDevice& renderDevice);
 
         /// Draw a filled cube that will stay visible for a specified amount of time.
-        /// @param position Position of the cube's center in world space.
+        /// @param center Position of the cube's center in world space.
         /// @param size Size of the cube in the x, y and z dimensions in world space.
         /// @param time How long should the cube be visible for?
         /// @param rotation Rotation of the cube in world space.
         /// @param color Color of the drawn cube.
-        static void drawCube(glm::vec3 position, glm::vec3 size, float time, glm::quat rotation = glm::quat(),
+        static void drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation = glm::quat(),
                              glm::vec3 color = glm::vec3(1));
 
         /// Draw a wireframe cube that will stay visible for a specified amount of time.
-        /// @param position Position of the cube's center in world space.
+        /// @param center Position of the cube's center in world space.
         /// @param size Size of the cube in the x, y and z dimensions in world space.
         /// @param time How long should the cube be visible for?
         /// @param rotation Rotation of the cube in world space.
         /// @param color Color of the drawn cube.
-        static void drawWireCube(glm::vec3 position, glm::vec3 size, float time, glm::quat rotation = glm::quat(),
+        static void drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation = glm::quat(),
                                  glm::vec3 color = glm::vec3(1));
 
         /// Draw a filled sphere that will stay visible for a specified amount of time.

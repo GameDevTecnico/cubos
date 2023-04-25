@@ -11,7 +11,7 @@ namespace fs = std::filesystem;
 /// The input options of the program.
 struct EmbedOptions
 {
-    std::string name = "";  ///< The name of the output data.
+    std::string name;       ///< The name of the output data.
     fs::path input = "";    ///< The input file path.
     bool recursive = false; ///< Whether to recursively embed all files.
     bool verbose = false;   ///< Enables verbose mode.
@@ -55,9 +55,13 @@ static bool parseArguments(int argc, char** argv, EmbedOptions& options)
             }
         }
         else if (std::string(argv[i]) == "-r")
+        {
             options.recursive = true;
+        }
         else if (std::string(argv[i]) == "-v")
+        {
             options.verbose = true;
+        }
         else if (std::string(argv[i]) == "-h")
         {
             options.help = true;
@@ -70,11 +74,9 @@ static bool parseArguments(int argc, char** argv, EmbedOptions& options)
                 std::cerr << "Too many arguments." << std::endl;
                 return false;
             }
-            else
-            {
-                foundInput = true;
-                options.input = argv[i];
-            }
+
+            foundInput = true;
+            options.input = argv[i];
         }
     }
 
@@ -83,8 +85,7 @@ static bool parseArguments(int argc, char** argv, EmbedOptions& options)
         std::cerr << "Missing input file." << std::endl;
         return false;
     }
-    else
-        return true;
+    return true;
 }
 
 /// Escapes a string into valid C++ string content.
@@ -97,7 +98,9 @@ static std::string escapeString(const std::string& str)
     for (char i : str)
     {
         if (i == '\\' || i == '"')
+        {
             escaped += '\\';
+        }
         escaped += i;
     }
 
@@ -145,13 +148,17 @@ static bool scanEntries(State& state, size_t id)
         if (!state.options.recursive)
         {
             if (state.options.verbose)
+            {
                 std::cout << "Ignoring directory contents of '" << state.entries[id - 1].path.string()
                           << "' since the recursive option was not set" << std::endl;
+            }
             return true;
         }
 
         if (state.options.verbose)
+        {
             std::cout << "Scanning directory '" << state.entries[id - 1].path.string() << "'..." << std::endl;
+        }
 
         // Scan the directory entries.
         size_t lastChildId = 0;
@@ -160,8 +167,10 @@ static bool scanEntries(State& state, size_t id)
             if (!fs::is_directory(it->path()) && !fs::is_regular_file(it->path()))
             {
                 if (state.options.verbose)
+                {
                     std::cout << "Ignoring '" << it->path().string() << "' since it is neither a directory nor a file"
                               << std::endl;
+                }
                 continue;
             }
 
@@ -169,14 +178,20 @@ static bool scanEntries(State& state, size_t id)
             bool dir = fs::is_directory(it->path());
             state.entries.push_back({it->path().filename().string(), it->path(), dir, id, 0, 0});
             if (state.entries[id - 1].child == 0)
+            {
                 state.entries[id - 1].child = state.entries.size();
+            }
             if (lastChildId != 0)
+            {
                 state.entries[lastChildId - 1].sibling = state.entries.size();
+            }
             lastChildId = state.entries.size();
 
             // Scan the file recursively.
             if (!scanEntries(state, state.entries.size()))
+            {
                 return false;
+            }
         }
     }
     else if (state.options.verbose)
@@ -200,14 +215,18 @@ static bool embedFileData(State& state, size_t id)
         while (child != 0)
         {
             if (!embedFileData(state, child))
+            {
                 return false;
+            }
             child = state.entries[child - 1].sibling;
         }
     }
     else
     {
         if (state.options.verbose)
+        {
             std::cerr << "Embedding file data of '" << state.entries[id - 1].path.string() << "'" << std::endl;
+        }
 
         // Open the file.
         std::ifstream file(state.entries[id - 1].path, std::ios::binary);
@@ -225,7 +244,9 @@ static bool embedFileData(State& state, size_t id)
             char buffer[1024];
             file.read(buffer, sizeof(buffer));
             for (size_t i = 0; i < static_cast<size_t>(file.gcount()); ++i)
+            {
                 state.out << "0x" << std::hex << static_cast<uint32_t>(buffer[i]) << ", ";
+            }
         }
 
         state.out << "};" << std::endl;
@@ -242,7 +263,9 @@ static bool embedFileData(State& state, size_t id)
 static bool embedFileEntry(State& state, size_t id)
 {
     if (state.options.verbose)
+    {
         std::cerr << "Embedding entry of '" << state.entries[id - 1].path.string() << "'." << std::endl;
+    }
 
     // Embed the file entry.
     state.out << "    { \"" << escapeString(state.entries[id - 1].name) << "\", ";
@@ -251,7 +274,9 @@ static bool embedFileEntry(State& state, size_t id)
     state.out << state.entries[id - 1].sibling << ", ";
     state.out << state.entries[id - 1].child << ", ";
     if (state.entries[id - 1].directory)
+    {
         state.out << "nullptr, 0 }," << std::endl;
+    }
     else
     {
         state.out << "fileData" << id << ", ";
@@ -265,7 +290,9 @@ static bool embedFileEntry(State& state, size_t id)
         while (child != 0)
         {
             if (!embedFileEntry(state, child))
+            {
                 return false;
+            }
             child = state.entries[child - 1].sibling;
         }
     }
@@ -284,7 +311,9 @@ static bool generate(const EmbedOptions& options)
     {
         state.name = fs::path(options.input).filename().string();
         if (options.verbose)
+        {
             std::cerr << "No name specified, using '" << state.name << "'." << std::endl;
+        }
     }
 
     // Scan the input file/directory.
@@ -360,7 +389,7 @@ int runEmbed(int argc, char** argv)
         printHelp();
         return 1;
     }
-    else if (options.help)
+    if (options.help)
     {
         printHelp();
         return 0;

@@ -20,7 +20,9 @@ void FileSystem::mount(std::string_view path, std::shared_ptr<Archive> archive)
 
     // Remove leading slashes.
     while (path.starts_with('/'))
+    {
         path.remove_prefix(1);
+    }
 
     FileSystem::root()->mount(path, archive);
 }
@@ -35,7 +37,9 @@ void FileSystem::unmount(std::string_view path)
 
     // Remove leading slashes.
     while (path.starts_with('/'))
+    {
         path.remove_prefix(1);
+    }
 
     FileSystem::root()->unmount(path);
 }
@@ -50,7 +54,9 @@ File::Handle FileSystem::find(std::string_view path)
 
     // Remove leading slashes.
     while (path.starts_with('/'))
+    {
         path.remove_prefix(1);
+    }
 
     return FileSystem::root()->find(path);
 }
@@ -65,7 +71,9 @@ File::Handle FileSystem::create(std::string_view path, bool directory)
 
     // Remove leading slashes.
     while (path.starts_with('/'))
+    {
         path.remove_prefix(1);
+    }
 
     return FileSystem::root()->create(path, directory);
 }
@@ -80,17 +88,18 @@ bool FileSystem::destroy(std::string_view path)
 
     // Remove leading slashes.
     while (path.starts_with('/'))
+    {
         path.remove_prefix(1);
+    }
 
     // Find the file.
     auto file = FileSystem::root()->find(path);
     if (file)
-        return file->destroy();
-    else
     {
-        CUBOS_WARN("Could not destroy file at path '{}', the file does not exist", path);
-        return false;
+        return file->destroy();
     }
+    CUBOS_WARN("Could not destroy file at path '{}', the file does not exist", path);
+    return false;
 }
 
 std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::OpenMode mode)
@@ -103,15 +112,16 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
 
     // Remove leading slashes.
     while (path.starts_with('/'))
+    {
         path.remove_prefix(1);
+    }
 
     // Find the file.
     auto file = FileSystem::root()->find(path);
     if (file)
-        return file->open(mode);
-    else
     {
-        CUBOS_WARN("Could not open file at path '{}', the file does not exist", path);
-        return nullptr;
+        return file->open(mode);
     }
+    CUBOS_WARN("Could not open file at path '{}', the file does not exist", path);
+    return nullptr;
 }

@@ -79,22 +79,30 @@ bool Package::change(int64_t data)
         return true;
     case Type::U8:
         if (data < 0 || data > UINT8_MAX)
+        {
             return false;
+        }
         this->data = static_cast<uint8_t>(data);
         return true;
     case Type::U16:
         if (data < 0 || data > UINT16_MAX)
+        {
             return false;
+        }
         this->data = static_cast<uint16_t>(data);
         return true;
     case Type::U32:
         if (data < 0 || data > UINT32_MAX)
+        {
             return false;
+        }
         this->data = static_cast<uint32_t>(data);
         return true;
     case Type::U64:
         if (data < 0)
+        {
             return false;
+        }
         this->data = static_cast<uint64_t>(data);
         return true;
     default:
@@ -108,37 +116,51 @@ bool Package::change(uint64_t data)
     {
     case Type::I8:
         if (data > INT8_MAX)
+        {
             return false;
+        }
         this->data = static_cast<int8_t>(data);
         return true;
     case Type::I16:
         if (data > INT16_MAX)
+        {
             return false;
+        }
         this->data = static_cast<int16_t>(data);
         return true;
     case Type::I32:
         if (data > INT32_MAX)
+        {
             return false;
+        }
         this->data = static_cast<int32_t>(data);
         return true;
     case Type::I64:
         if (data > INT64_MAX)
+        {
             return false;
+        }
         this->data = static_cast<int64_t>(data);
         return true;
     case Type::U8:
         if (data > UINT8_MAX)
+        {
             return false;
+        }
         this->data = static_cast<uint8_t>(data);
         return true;
     case Type::U16:
         if (data > UINT16_MAX)
+        {
             return false;
+        }
         this->data = static_cast<uint16_t>(data);
         return true;
     case Type::U32:
         if (data > UINT32_MAX)
+        {
             return false;
+        }
         this->data = static_cast<uint32_t>(data);
         return true;
     case Type::U64:
@@ -316,77 +338,77 @@ const char* Package::typeToString(Type type)
     }
 }
 
-void Package::serialize(Serializer& serializer, const char* name) const
+void Package::serialize(Serializer& ser, const char* name) const
 {
     switch (this->type())
     {
     case Package::Type::None:
         abort(); // Empty packages can't be serialized.
     case Package::Type::I8:
-        serializer.writeI8(std::get<int8_t>(this->data), name);
+        ser.writeI8(std::get<int8_t>(this->data), name);
         break;
     case Package::Type::I16:
-        serializer.writeI16(std::get<int16_t>(this->data), name);
+        ser.writeI16(std::get<int16_t>(this->data), name);
         break;
     case Package::Type::I32:
-        serializer.writeI32(std::get<int32_t>(this->data), name);
+        ser.writeI32(std::get<int32_t>(this->data), name);
         break;
     case Package::Type::I64:
-        serializer.writeI64(std::get<int64_t>(this->data), name);
+        ser.writeI64(std::get<int64_t>(this->data), name);
         break;
     case Package::Type::U8:
-        serializer.writeU8(std::get<uint8_t>(this->data), name);
+        ser.writeU8(std::get<uint8_t>(this->data), name);
         break;
     case Package::Type::U16:
-        serializer.writeU16(std::get<uint16_t>(this->data), name);
+        ser.writeU16(std::get<uint16_t>(this->data), name);
         break;
     case Package::Type::U32:
-        serializer.writeU32(std::get<uint32_t>(this->data), name);
+        ser.writeU32(std::get<uint32_t>(this->data), name);
         break;
     case Package::Type::U64:
-        serializer.writeU64(std::get<uint64_t>(this->data), name);
+        ser.writeU64(std::get<uint64_t>(this->data), name);
         break;
     case Package::Type::F32:
-        serializer.writeF32(std::get<float>(this->data), name);
+        ser.writeF32(std::get<float>(this->data), name);
         break;
     case Package::Type::F64:
-        serializer.writeF64(std::get<double>(this->data), name);
+        ser.writeF64(std::get<double>(this->data), name);
         break;
     case Package::Type::Bool:
-        serializer.writeBool(std::get<bool>(this->data), name);
+        ser.writeBool(std::get<bool>(this->data), name);
         break;
     case Package::Type::String:
-        serializer.writeString(std::get<std::string>(this->data).c_str(), name);
+        ser.writeString(std::get<std::string>(this->data).c_str(), name);
         break;
     case Package::Type::Object: {
-        auto& fields = std::get<Package::Fields>(this->data);
-        serializer.beginObject(name);
-        for (auto& field : fields)
+        const auto& fields = std::get<Package::Fields>(this->data);
+        ser.beginObject(name);
+        for (const auto& field : fields)
         {
-            serializer.write(field.second, field.first.c_str());
+            ser.write(field.second, field.first.c_str());
         }
-        serializer.endObject();
+        ser.endObject();
         break;
     }
     case Package::Type::Array: {
-        auto& elements = std::get<Package::Elements>(this->data);
-        serializer.beginArray(elements.size(), name);
-        for (auto& element : elements)
+        const auto& elements = std::get<Package::Elements>(this->data);
+        ser.beginArray(elements.size(), name);
+        for (const auto& element : elements)
         {
-            serializer.write(element, nullptr);
+            ser.write(element, nullptr);
         }
-        serializer.endArray();
+        ser.endArray();
         break;
     }
     case Package::Type::Dictionary: {
-        auto& dictionary = std::get<Package::Dictionary>(this->data);
-        serializer.beginDictionary(dictionary.size(), name);
-        for (auto& entry : dictionary)
+        const auto& dictionary = std::get<Package::Dictionary>(this->data);
+        ser.beginDictionary(dictionary.size(), name);
+        for (const auto& entry : dictionary)
         {
-            serializer.write(entry.first, nullptr);
-            serializer.write(entry.second, nullptr);
+            ser.write(entry.first, nullptr);
+            ser.write(entry.second, nullptr);
         }
-        serializer.endDictionary();
+        ser.endDictionary();
         break;
     }
     }
@@ -469,7 +491,7 @@ void impl::Packager::endObject()
     this->stack.pop();
 }
 
-void impl::Packager::beginArray(size_t, const char* name)
+void impl::Packager::beginArray(size_t /*length*/, const char* name)
 {
     this->stack.push({this->push(Package::Elements(), name), false});
 }
@@ -480,7 +502,7 @@ void impl::Packager::endArray()
     this->stack.pop();
 }
 
-void impl::Packager::beginDictionary(size_t, const char* name)
+void impl::Packager::beginDictionary(size_t /*length*/, const char* name)
 {
     this->stack.push({this->push(Package::Dictionary(), name), true});
 }
@@ -498,37 +520,35 @@ Package* impl::Packager::push(Package::Data&& data, const char* name)
         this->pkg.data = std::move(data);
         return &this->pkg;
     }
-    else
+
+    auto& [pkg, isKey] = this->stack.top();
+    switch (pkg->type())
     {
-        auto& [pkg, isKey] = this->stack.top();
-        switch (pkg->type())
+    case Package::Type::Object:
+        assert(name != nullptr);
+        pkg->fields().emplace_back(name, Package());
+        pkg->fields().back().second.data = std::move(data);
+        return &pkg->fields().back().second;
+    case Package::Type::Array:
+        pkg->elements().emplace_back();
+        pkg->elements().back().data = std::move(data);
+        return &pkg->elements().back();
+    case Package::Type::Dictionary:
+        if (isKey)
         {
-        case Package::Type::Object:
-            assert(name != nullptr);
-            pkg->fields().emplace_back(name, Package());
-            pkg->fields().back().second.data = std::move(data);
-            return &pkg->fields().back().second;
-        case Package::Type::Array:
-            pkg->elements().emplace_back();
-            pkg->elements().back().data = std::move(data);
-            return &pkg->elements().back();
-        case Package::Type::Dictionary:
-            if (isKey)
-            {
-                isKey = false;
-                pkg->dictionary().push_back({Package(), Package()});
-                pkg->dictionary().back().first.data = std::move(data);
-                return &pkg->dictionary().back().first;
-            }
-            else
-            {
-                isKey = true;
-                pkg->dictionary().back().second.data = std::move(data);
-                return &pkg->dictionary().back().second;
-            }
-        default:
-            abort(); // Unreachable.
+            isKey = false;
+            pkg->dictionary().push_back({Package(), Package()});
+            pkg->dictionary().back().first.data = std::move(data);
+            return &pkg->dictionary().back().first;
         }
+        else
+        {
+            isKey = true;
+            pkg->dictionary().back().second.data = std::move(data);
+            return &pkg->dictionary().back().second;
+        }
+    default:
+        abort(); // Unreachable.
     }
 }
 
@@ -549,119 +569,171 @@ impl::Unpackager::Unpackager(const Package& pkg)
 
 void impl::Unpackager::readI8(int8_t& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I8)
+    {
         TYPE_MISMATCH(Package::Type::I8, d->type());
+    }
     else
+    {
         value = std::get<int8_t>(d->data);
+    }
 }
 
 void impl::Unpackager::readI16(int16_t& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I16)
+    {
         TYPE_MISMATCH(Package::Type::I16, d->type());
+    }
     else
+    {
         value = std::get<int16_t>(d->data);
+    }
 }
 
 void impl::Unpackager::readI32(int32_t& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I32)
+    {
         TYPE_MISMATCH(Package::Type::I32, d->type());
+    }
     else
+    {
         value = std::get<int32_t>(d->data);
+    }
 }
 
 void impl::Unpackager::readI64(int64_t& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I64)
+    {
         TYPE_MISMATCH(Package::Type::I64, d->type());
+    }
     else
+    {
         value = std::get<int64_t>(d->data);
+    }
 }
 
 void impl::Unpackager::readU8(uint8_t& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U8)
+    {
         TYPE_MISMATCH(Package::Type::U8, d->type());
+    }
     else
+    {
         value = std::get<uint8_t>(d->data);
+    }
 }
 
 void impl::Unpackager::readU16(uint16_t& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U16)
+    {
         TYPE_MISMATCH(Package::Type::U16, d->type());
+    }
     else
+    {
         value = std::get<uint16_t>(d->data);
+    }
 }
 
 void impl::Unpackager::readU32(uint32_t& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U32)
+    {
         TYPE_MISMATCH(Package::Type::U32, d->type());
+    }
     else
+    {
         value = std::get<uint32_t>(d->data);
+    }
 }
 
 void impl::Unpackager::readU64(uint64_t& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U64)
+    {
         TYPE_MISMATCH(Package::Type::U64, d->type());
+    }
     else
+    {
         value = std::get<uint64_t>(d->data);
+    }
 }
 
 void impl::Unpackager::readF32(float& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::F32)
+    {
         TYPE_MISMATCH(Package::Type::F32, d->type());
+    }
     else
+    {
         value = std::get<float>(d->data);
+    }
 }
 
 void impl::Unpackager::readF64(double& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::F64)
+    {
         TYPE_MISMATCH(Package::Type::F64, d->type());
+    }
     else
+    {
         value = std::get<double>(d->data);
+    }
 }
 
 void impl::Unpackager::readBool(bool& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Bool)
+    {
         TYPE_MISMATCH(Package::Type::Bool, d->type());
+    }
     else
+    {
         value = std::get<bool>(d->data);
+    }
 }
 
 void impl::Unpackager::readString(std::string& value)
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::String)
+    {
         TYPE_MISMATCH(Package::Type::String, d->type());
+    }
     else
+    {
         value = std::get<std::string>(d->data);
+    }
 }
 
 void impl::Unpackager::beginObject()
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Object)
+    {
         TYPE_MISMATCH(Package::Type::Object, d->type());
+    }
     else
+    {
         this->stack.push({d, 0});
+    }
 }
 
 void impl::Unpackager::endObject()
@@ -672,17 +744,15 @@ void impl::Unpackager::endObject()
 
 size_t impl::Unpackager::beginArray()
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Array)
     {
         TYPE_MISMATCH(Package::Type::Array, d->type());
         return 0;
     }
-    else
-    {
-        this->stack.push({d, 0});
-        return d->elements().size();
-    }
+
+    this->stack.push({d, 0});
+    return d->elements().size();
 }
 
 void impl::Unpackager::endArray()
@@ -693,17 +763,15 @@ void impl::Unpackager::endArray()
 
 size_t impl::Unpackager::beginDictionary()
 {
-    auto d = this->pop();
+    const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Dictionary)
     {
         TYPE_MISMATCH(Package::Type::Dictionary, d->type());
         return 0;
     }
-    else
-    {
-        this->stack.push({d, 0});
-        return d->dictionary().size();
-    }
+
+    this->stack.push({d, 0});
+    return d->dictionary().size();
 }
 
 void impl::Unpackager::endDictionary()
@@ -715,35 +783,46 @@ void impl::Unpackager::endDictionary()
 const Package* impl::Unpackager::pop()
 {
     if (this->stack.empty())
-        return &this->pkg;
-    else
     {
-        auto& [pkg, index] = this->stack.top();
-        switch (pkg->type())
+        return &this->pkg;
+    }
+    auto& [pkg, index] = this->stack.top();
+    switch (pkg->type())
+    {
+    case Package::Type::Object:
+        if (index >= pkg->fields().size())
         {
-        case Package::Type::Object:
-            if (index >= pkg->fields().size())
-                return nullptr;
-            else
-            {
-                auto it = pkg->fields().begin();
-                std::advance(it, index++);
-                return &it->second;
-            }
-        case Package::Type::Array:
-            if (index >= pkg->elements().size())
-                return nullptr;
-            else
-                return &pkg->elements()[index++];
-        case Package::Type::Dictionary:
-            if (index / 2 >= pkg->dictionary().size())
-                return nullptr;
-            else if (index % 2 == 0)
-                return &pkg->dictionary()[(index++) / 2].first;
-            else
-                return &pkg->dictionary()[(index++) / 2].second;
-        default:
-            abort(); // Unreachable.
+            return nullptr;
         }
+        else
+        {
+            auto it = pkg->fields().begin();
+            std::advance(it, index++);
+            return &it->second;
+        }
+    case Package::Type::Array:
+        if (index >= pkg->elements().size())
+        {
+            return nullptr;
+        }
+        else
+        {
+            return &pkg->elements()[index++];
+        }
+    case Package::Type::Dictionary:
+        if (index / 2 >= pkg->dictionary().size())
+        {
+            return nullptr;
+        }
+        else if (index % 2 == 0)
+        {
+            return &pkg->dictionary()[(index++) / 2].first;
+        }
+        else
+        {
+            return &pkg->dictionary()[(index++) / 2].second;
+        }
+    default:
+        abort(); // Unreachable.
     }
 }

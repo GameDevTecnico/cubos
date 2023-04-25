@@ -15,7 +15,9 @@ static void poll(const io::Window& window, ShouldQuit& quit, ecs::EventWriter<io
 {
     // Send window events to other systems.
     while (auto event = window->pollEvent())
+    {
         events.push(event.value());
+    }
 
     if (window->shouldClose())
     {

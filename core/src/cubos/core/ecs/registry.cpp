@@ -18,7 +18,7 @@ bool Registry::create(std::string_view name, data::Deserializer& des, Blueprint&
 std::unique_ptr<IStorage> Registry::createStorage(std::type_index type)
 {
     auto& creators = Registry::entriesByType();
-    if (auto it = creators.at(type))
+    if (auto* it = creators.at(type))
     {
         return (*it)->storageCreator();
     }
@@ -30,7 +30,7 @@ std::unique_ptr<IStorage> Registry::createStorage(std::type_index type)
 std::optional<std::string_view> Registry::name(std::type_index type)
 {
     auto& entries = Registry::entriesByType();
-    if (auto it = entries.at(type))
+    if (auto* it = entries.at(type))
     {
         return (*it)->name;
     }

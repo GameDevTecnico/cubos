@@ -139,9 +139,13 @@ void DebugSerializer::endObject()
 void DebugSerializer::beginArray(size_t length, const char* name)
 {
     if (this->typeNames)
+    {
         GENERIC_WRITE("{}x[", length);
+    }
     else
+    {
         GENERIC_WRITE("[");
+    }
     this->state.push({Mode::Array, false, true});
     this->indent++;
 }
@@ -161,9 +165,13 @@ void DebugSerializer::endArray()
 void DebugSerializer::beginDictionary(size_t length, const char* name)
 {
     if (this->typeNames)
+    {
         GENERIC_WRITE("{}x{", length);
+    }
     else
+    {
         GENERIC_WRITE("{");
+    }
     this->state.push({Mode::Dictionary, true, true});
     this->indent++;
 }
