@@ -4,7 +4,11 @@ Checks: "\
   modernize-*,\
   -modernize-use-nodiscard,\
   -modernize-use-trailing-return-type,\
-  -modernize-avoid-c-arrays"
+  -modernize-avoid-c-arrays,\
+  bugprone-*,\
+  -bugprone-unhandled-self-assignment,\
+  -bugprone-easily-swappable-parameters,\
+  -bugprone-lambda-function-name"
 WarningsAsErrors: '*'
 FormatStyle: file
 CheckOptions:
@@ -13,8 +17,6 @@ CheckOptions:
   - key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp
     value: expr-type
   - key: 'bugprone-argument-comment.StrictMode'
-    value: 'true'
-  - key: 'bugprone-argument-comment.CommentBoolLiterals'
     value: 'true'
   - key: 'bugprone-misplaced-widening-cast.CheckImplicitCasts'
     value: 'true'
