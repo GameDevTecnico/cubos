@@ -90,10 +90,10 @@ namespace cubos::core::data
     }
 } // namespace cubos::core::data
 
-CUBOS_REGISTER_COMPONENT(Player, ecs::NullStorage<Player>, "Player");
-CUBOS_REGISTER_COMPONENT(Position, ecs::VecStorage<Position>, "Position");
-CUBOS_REGISTER_COMPONENT(Velocity, ecs::MapStorage<Velocity>, "Velocity");
-CUBOS_REGISTER_COMPONENT(Parent, ecs::VecStorage<Parent>, "Parent");
+CUBOS_REGISTER_COMPONENT(Player, ecs::NullStorage<Player>, "Player")
+CUBOS_REGISTER_COMPONENT(Position, ecs::VecStorage<Position>, "Position")
+CUBOS_REGISTER_COMPONENT(Velocity, ecs::MapStorage<Velocity>, "Velocity")
+CUBOS_REGISTER_COMPONENT(Parent, ecs::VecStorage<Parent>, "Parent")
 
 void spawner(ecs::Commands cmds)
 {
