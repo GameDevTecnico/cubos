@@ -1,12 +1,12 @@
-#include <gtest/gtest.h>
-#include <cubos/core/memory/buffer_stream.hpp>
-#include <cubos/core/data/yaml_serializer.hpp>
-#include <cubos/core/data/serialization_map.hpp>
+#include <array>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <gtest/gtest.h>
 
-#include <array>
+#include <cubos/core/data/serialization_map.hpp>
+#include <cubos/core/data/yaml_serializer.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
 
 using namespace cubos::core::memory;
 using namespace cubos::core::data;

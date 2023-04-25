@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include <cubos/core/settings.hpp>
 
 using namespace cubos::core;

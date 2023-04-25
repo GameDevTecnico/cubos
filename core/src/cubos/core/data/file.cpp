@@ -222,7 +222,7 @@ File::Handle File::find(std::string_view path)
     {
         return this->shared_from_this();
 
-    // If the path is absolute, or if this file isn't a directory, return nullptr.
+        // If the path is absolute, or if this file isn't a directory, return nullptr.
     }
     if ((!path.empty() && path[0] == '/') || !this->directory)
     {

@@ -157,7 +157,7 @@ namespace cubos::core::data
         bool directory;   ///< Whether this file is a directory.
 
         std::shared_ptr<Archive> archive; ///< The archive this file belongs to.
-        std::size_t id;                        ///< The id of this file in its archive.
+        std::size_t id;                   ///< The id of this file in its archive.
 
         Handle parent;  ///< The parent file handle.
         Handle sibling; ///< The next sibling file handle.

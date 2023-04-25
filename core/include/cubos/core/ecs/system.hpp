@@ -463,8 +463,8 @@ namespace cubos::core::ecs
 
     template <typename T, unsigned int M>
     std::tuple<std::size_t&, ReadResource<EventPipe<T>>> impl::SystemFetcher<EventReader<T, M>>::fetch(World& world,
-                                                                                                  CommandBuffer&,
-                                                                                                  State& state)
+                                                                                                       CommandBuffer&,
+                                                                                                       State& state)
     {
         return std::forward_as_tuple(state, world.read<EventPipe<T>>());
     }
