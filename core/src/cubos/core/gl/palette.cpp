@@ -102,12 +102,12 @@ void cubos::core::data::serialize(Serializer& serializer, const gl::Palette& pal
     // Count non-empty materials.
     size_t count = 0;
     for (const auto& material : palette.materials)
-        if (memcmp(&material, &Material::Empty, sizeof(Material)) != 0)
+        if (material.similarity(Material::Empty) < 1.0f)
             count++;
 
     serializer.beginDictionary(count, name);
     for (uint16_t i = 0; i < static_cast<uint16_t>(palette.materials.size()); i++)
-        if (memcmp(&palette.materials[i], &Material::Empty, sizeof(Material)) != 0)
+        if (palette.materials[i].similarity(Material::Empty) < 1.0f)
         {
             serializer.write<uint16_t>(i + 1, nullptr);
             serializer.write(palette.materials[i], nullptr);

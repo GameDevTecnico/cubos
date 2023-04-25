@@ -44,7 +44,7 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
 
             glm::ivec3 x = {0, 0, 0}, q = {0, 0, 0};
             q[d] = 1;
-            mask.resize(sz[u] * sz[v]);
+            mask.resize(static_cast<size_t>(sz[u]) * static_cast<size_t>(sz[v]));
 
             for (x[d] = -1; x[d] < int(sz[d]);)
             {

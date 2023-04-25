@@ -1829,9 +1829,7 @@ ConstantBuffer OGLRenderDevice::createConstantBuffer(size_t size, const void* da
         abort();
 
     GLenum glUsage;
-    if (usage == Usage::Default)
-        glUsage = GL_STATIC_DRAW;
-    else if (usage == Usage::Static)
+    if (usage == Usage::Default || usage == Usage::Static)
         glUsage = GL_STATIC_DRAW;
     else if (usage == Usage::Dynamic)
         glUsage = GL_DYNAMIC_DRAW;
@@ -1863,9 +1861,7 @@ IndexBuffer OGLRenderDevice::createIndexBuffer(size_t size, const void* data, In
         abort();
 
     GLenum glUsage;
-    if (usage == Usage::Default)
-        glUsage = GL_STATIC_DRAW;
-    else if (usage == Usage::Static)
+    if (usage == Usage::Default || usage == Usage::Static)
         glUsage = GL_STATIC_DRAW;
     else if (usage == Usage::Dynamic)
         glUsage = GL_DYNAMIC_DRAW;
@@ -1920,9 +1916,7 @@ VertexBuffer OGLRenderDevice::createVertexBuffer(size_t size, const void* data, 
         abort();
 
     GLenum glUsage;
-    if (usage == Usage::Default)
-        glUsage = GL_STATIC_DRAW;
-    else if (usage == Usage::Static)
+    if (usage == Usage::Default || usage == Usage::Static)
         glUsage = GL_STATIC_DRAW;
     else if (usage == Usage::Dynamic)
         glUsage = GL_DYNAMIC_DRAW;

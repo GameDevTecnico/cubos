@@ -16,7 +16,8 @@ Grid::Grid(const glm::uvec3& size)
     }
     else
         this->size = size;
-    this->indices.resize(this->size.x * this->size.y * this->size.z, 0);
+    this->indices.resize(
+        static_cast<size_t>(this->size.x) * static_cast<size_t>(this->size.y) * static_cast<size_t>(this->size.z), 0);
 }
 
 Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
@@ -27,7 +28,7 @@ Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
                    size.y, size.z);
         this->size = {1, 1, 1};
     }
-    else if (indices.size() != size.x * size.y * size.z)
+    else if (indices.size() != static_cast<size_t>(size.x) * static_cast<size_t>(size.y) * static_cast<size_t>(size.z))
     {
         CUBOS_WARN("Grid size and indices size mismatch: was ({}, {}, {}), indices size is {}.", size.x, size.y, size.z,
                    indices.size());
@@ -66,7 +67,8 @@ void Grid::setSize(const glm::uvec3& size)
 
     this->size = size;
     this->indices.clear();
-    this->indices.resize(this->size.x * this->size.y * this->size.z, 0);
+    this->indices.resize(
+        static_cast<size_t>(this->size.x) * static_cast<size_t>(this->size.y) * static_cast<size_t>(this->size.z), 0);
 }
 
 const glm::uvec3& Grid::getSize() const

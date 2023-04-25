@@ -34,13 +34,13 @@ void YAMLSerializer::flush()
     {                                                                                                                  \
         if (mode.top() == Mode::Dictionary)                                                                            \
         {                                                                                                              \
-            emitter << (this->key ? YAML::Key : YAML::Value) << value;                                                 \
+            emitter << (this->key ? YAML::Key : YAML::Value) << (value);                                               \
             this->key = !this->key;                                                                                    \
         }                                                                                                              \
         else if (mode.top() == Mode::Array)                                                                            \
-            emitter << value;                                                                                          \
+            emitter << (value);                                                                                        \
         else if (mode.top() == Mode::Object)                                                                           \
-            emitter << YAML::Key << (name ? name : ANONYMOUS_FIELD_NAME) << YAML::Value << value;                      \
+            emitter << YAML::Key << ((name) ? (name) : ANONYMOUS_FIELD_NAME) << YAML::Value << (value);                \
     } while (false)
 
 void YAMLSerializer::writeI8(int8_t value, const char* name)
