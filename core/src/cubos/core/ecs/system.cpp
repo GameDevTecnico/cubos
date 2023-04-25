@@ -1,19 +1,26 @@
-#include <algorithm>
-
 #include <cubos/core/ecs/system.hpp>
 
 using namespace cubos::core::ecs;
 
 bool SystemInfo::valid() const
 {
-    if (std::ranges::any_of(this->resourcesRead,
-                            [this](const auto& comp) { return this->resourcesWritten.contains(comp); }))
+    for (const auto& rsc : this->resourcesRead)
     {
-        return false;
+        if (this->resourcesWritten.contains(rsc))
+        {
+            return false;
+        }
     }
 
-    return !std::ranges::any_of(this->componentsRead,
-                                [this](const auto& comp) { return this->componentsWritten.contains(comp); });
+    for (const auto& comp : this->componentsRead)
+    {
+        if (this->componentsWritten.contains(comp))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool SystemInfo::compatible(const SystemInfo& other) const
@@ -23,24 +30,37 @@ bool SystemInfo::compatible(const SystemInfo& other) const
         return false;
     }
 
-    if (std::ranges::any_of(this->resourcesRead,
-                            [other](const auto& comp) { return other.resourcesWritten.contains(comp); }))
+    for (const auto& rsc : this->resourcesRead)
     {
-        return false;
+        if (other.resourcesWritten.contains(rsc))
+        {
+            return false;
+        }
     }
 
-    if (std::ranges::any_of(this->componentsRead,
-                            [other](const auto& comp) { return other.componentsWritten.contains(comp); }))
+    for (const auto& comp : this->componentsRead)
     {
-        return false;
+        if (other.componentsWritten.contains(comp))
+        {
+            return false;
+        }
     }
 
-    if (std::ranges::any_of(other.resourcesRead,
-                            [this](const auto& comp) { return this->resourcesWritten.contains(comp); }))
+    for (const auto& rsc : other.resourcesRead)
     {
-        return false;
+        if (this->resourcesWritten.contains(rsc))
+        {
+            return false;
+        }
     }
 
-    return !std::ranges::any_of(other.componentsRead,
-                                [this](const auto& comp) { return this->componentsWritten.contains(comp); });
+    for (const auto& comp : other.componentsRead)
+    {
+        if (this->componentsWritten.contains(comp))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
