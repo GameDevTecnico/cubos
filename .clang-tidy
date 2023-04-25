@@ -15,7 +15,8 @@ Checks: "\
   -readability-identifier-length,\
   performance-*,\
   -performance-no-int-to-ptr,\
-  misc-redundant-expression"
+  misc-redundant-expression,\
+  cppcoreguidelines-virtual-class-destructor"
 WarningsAsErrors: '*'
 FormatStyle: file
 CheckOptions:
