@@ -46,27 +46,27 @@ namespace cubos::core
         /// If the setting already exists, overrides its value with the new value.
         /// @param key The setting's key.
         /// @param value The setting's value.
-        void setInteger(const std::string& key, const int value);
+        void setInteger(const std::string& key, int value);
 
         /// Retrieves the integer settings with a specific key.
         /// If no setting exists with such key, returns the default value.
         /// @param key The setting's key.
         /// @param defaultValue The value returned when not setting with the provided key exists.
         /// @return The setting's value.
-        int getInteger(const std::string& key, const int defaultValue) const;
+        int getInteger(const std::string& key, int defaultValue) const;
 
         /// Defines a new double setting.
         /// If the setting already exists, overrides its value with the new value.
         /// @param key The setting's key.
         /// @param value The setting's value.
-        void setDouble(const std::string& key, const double value);
+        void setDouble(const std::string& key, double value);
 
         /// Retrieves the double settings with a specific key.
         /// If no setting exists with such key, returns the default value.
         /// @param key The setting's key.
         /// @param defaultValue The value returned when not setting with the provided key exists.
         /// @return The setting's value.
-        double getDouble(const std::string& key, const double defaultValue) const;
+        double getDouble(const std::string& key, double defaultValue) const;
 
         /// Merges the settings from settingsToMerge.
         /// If a setting from settingsToMerge already exists, overrides its value. @see setString.
@@ -80,7 +80,7 @@ namespace cubos::core
         std::unordered_map<std::string, std::string>& getValues();
 
     private:
-        std::unordered_map<std::string, std::string> values;
+        std::unordered_map<std::string, std::string> mValues;
     };
 } // namespace cubos::core
 

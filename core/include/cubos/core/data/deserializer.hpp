@@ -55,6 +55,9 @@ namespace cubos::core::data
         Deserializer();
         virtual ~Deserializer() = default;
 
+        Deserializer(const Deserializer&) = delete;
+        Deserializer& operator=(const Deserializer&) = delete;
+
         /// Deserializes a signed 8 bit integer.
         /// The fail bit is set if the deserialization fails.
         /// @param value The value to deserialize.
@@ -161,17 +164,14 @@ namespace cubos::core::data
         /// @returns The context of the serializer.
         inline Context& context()
         {
-            return this->m_context;
+            return mContext;
         }
 
     protected:
-        bool failBit; ///< Indicates if the deserializer has failed.
+        bool mFailBit; ///< Indicates if the deserializer has failed.
 
     private:
-        Deserializer(const Deserializer&) = delete;
-        Deserializer& operator=(const Deserializer&) = delete;
-
-        Context m_context; ///< The context of the serializer.
+        Context mContext; ///< The context of the serializer.
     };
 
     /// Concept for deserializable objects which define a deserialize method.
@@ -208,7 +208,9 @@ namespace cubos::core::data
         std::size_t length = des.beginArray();
         vec.resize(length);
         for (std::size_t i = 0; i < length; ++i)
+        {
             deserialize(des, vec[i]);
+        }
         des.endArray();
     }
 

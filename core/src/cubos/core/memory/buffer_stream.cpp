@@ -6,24 +6,24 @@ using namespace cubos::core::memory;
 
 BufferStream::BufferStream(void* buffer, std::size_t size, bool readOnly)
 {
-    this->buffer = buffer;
-    this->size = size;
-    this->position = 0;
-    this->readOnly = readOnly;
-    this->reachedEof = false;
-    this->owned = false;
+    mBuffer = buffer;
+    mSize = size;
+    mPosition = 0;
+    mReadOnly = readOnly;
+    mReachedEof = false;
+    mOwned = false;
 }
 
 BufferStream::BufferStream(const void* buffer, std::size_t size)
 {
     // Casting from const void* to void* isn't a problem because the pointer will never be written to: the buffer is set
     // as read-only.
-    this->buffer = const_cast<void*>(buffer);
-    this->size = size;
-    this->position = 0;
-    this->readOnly = true;
-    this->reachedEof = false;
-    this->owned = false;
+    mBuffer = const_cast<void*>(buffer);
+    mSize = size;
+    mPosition = 0;
+    mReadOnly = true;
+    mReachedEof = false;
+    mOwned = false;
 }
 
 BufferStream::BufferStream(std::size_t size)
@@ -33,177 +33,177 @@ BufferStream::BufferStream(std::size_t size)
         abort();
     }
 
-    this->buffer = new char[size];
-    this->size = size;
-    this->position = 0;
-    this->readOnly = false;
-    this->reachedEof = false;
-    this->owned = true;
+    mBuffer = new char[size];
+    mSize = size;
+    mPosition = 0;
+    mReadOnly = false;
+    mReachedEof = false;
+    mOwned = true;
 }
 
 BufferStream::~BufferStream()
 {
-    if (this->owned)
+    if (mOwned)
     {
-        delete[] static_cast<char*>(this->buffer);
+        delete[] static_cast<char*>(mBuffer);
     }
 }
 
 BufferStream::BufferStream(const BufferStream& other)
 {
-    this->size = other.size;
-    this->position = other.position;
-    this->readOnly = other.readOnly;
-    this->reachedEof = other.reachedEof;
-    this->owned = other.owned;
-    if (this->owned)
+    mSize = other.mSize;
+    mPosition = other.mPosition;
+    mReadOnly = other.mReadOnly;
+    mReachedEof = other.mReachedEof;
+    mOwned = other.mOwned;
+    if (mOwned)
     {
-        this->buffer = new char[this->size];
-        memcpy(this->buffer, other.buffer, this->size);
+        mBuffer = new char[mSize];
+        memcpy(mBuffer, other.mBuffer, mSize);
     }
     else
     {
-        this->buffer = other.buffer;
+        mBuffer = other.mBuffer;
     }
 }
 
 BufferStream::BufferStream(BufferStream&& other) noexcept
 {
-    this->buffer = other.buffer;
-    this->size = other.size;
-    this->position = other.position;
-    this->readOnly = other.readOnly;
-    this->reachedEof = other.reachedEof;
-    this->owned = other.owned;
-    other.buffer = nullptr;
-    other.size = 0;
-    other.position = 0;
-    other.readOnly = true;
-    other.reachedEof = true;
-    other.owned = false;
+    mBuffer = other.mBuffer;
+    mSize = other.mSize;
+    mPosition = other.mPosition;
+    mReadOnly = other.mReadOnly;
+    mReachedEof = other.mReachedEof;
+    mOwned = other.mOwned;
+    other.mBuffer = nullptr;
+    other.mSize = 0;
+    other.mPosition = 0;
+    other.mReadOnly = true;
+    other.mReachedEof = true;
+    other.mOwned = false;
 }
 
 const void* BufferStream::getBuffer() const
 {
-    return this->buffer;
+    return mBuffer;
 }
 
 std::size_t BufferStream::read(void* data, std::size_t size)
 {
-    std::size_t bytesRemaining = this->size - this->position;
+    std::size_t bytesRemaining = mSize - mPosition;
     if (size > bytesRemaining)
     {
         size = bytesRemaining;
-        this->reachedEof = true;
+        mReachedEof = true;
     }
-    memcpy(data, static_cast<char*>(this->buffer) + this->position, size);
-    this->position += size;
+    memcpy(data, static_cast<char*>(mBuffer) + mPosition, size);
+    mPosition += size;
     return size;
 }
 
 std::size_t BufferStream::write(const void* data, std::size_t size)
 {
-    if (this->readOnly)
+    if (mReadOnly)
     {
         return 0;
     }
 
-    std::size_t bytesRemaining = this->size - this->position;
+    std::size_t bytesRemaining = mSize - mPosition;
     if (size > bytesRemaining)
     {
-        if (this->owned)
+        if (mOwned)
         {
             // Expand the buffer.
-            std::size_t newSize = this->size * 2;
-            while (newSize < this->position + size)
+            std::size_t newSize = mSize * 2;
+            while (newSize < mPosition + size)
             {
                 newSize *= 2;
             }
 
             char* newBuffer = new char[newSize];
-            memcpy(newBuffer, static_cast<char*>(this->buffer), this->size);
-            delete[] static_cast<char*>(this->buffer);
-            this->buffer = newBuffer;
-            this->size = newSize;
+            memcpy(newBuffer, static_cast<char*>(mBuffer), mSize);
+            delete[] static_cast<char*>(mBuffer);
+            mBuffer = newBuffer;
+            mSize = newSize;
         }
         else
         {
             size = bytesRemaining;
-            this->reachedEof = true;
+            mReachedEof = true;
         }
     }
-    memcpy(static_cast<char*>(this->buffer) + this->position, data, size);
-    this->position += size;
+    memcpy(static_cast<char*>(mBuffer) + mPosition, data, size);
+    mPosition += size;
     return size;
 }
 
 std::size_t BufferStream::tell() const
 {
-    return this->position;
+    return mPosition;
 }
 
 void BufferStream::seek(ptrdiff_t offset, SeekOrigin origin)
 {
     if (origin == SeekOrigin::Current)
     {
-        if (offset < 0 && static_cast<std::size_t>(-offset) > this->position)
+        if (offset < 0 && static_cast<std::size_t>(-offset) > mPosition)
         {
-            this->position = 0;
+            mPosition = 0;
         }
         else if (offset < 0)
         {
-            this->position -= static_cast<std::size_t>(-offset);
+            mPosition -= static_cast<std::size_t>(-offset);
         }
         else
         {
-            this->position += static_cast<std::size_t>(offset);
+            mPosition += static_cast<std::size_t>(offset);
         }
     }
     else if (origin == SeekOrigin::End)
     {
-        if (offset < 0 && static_cast<std::size_t>(-offset) > this->size)
+        if (offset < 0 && static_cast<std::size_t>(-offset) > mSize)
         {
-            this->position = 0;
+            mPosition = 0;
         }
         else if (offset < 0)
         {
-            this->position = this->size - static_cast<std::size_t>(-offset);
+            mPosition = mSize - static_cast<std::size_t>(-offset);
         }
         else
         {
-            this->position = this->size + static_cast<std::size_t>(offset);
+            mPosition = mSize + static_cast<std::size_t>(offset);
         }
     }
     else
     {
         if (offset < 0)
         {
-            this->position = 0;
+            mPosition = 0;
         }
         else
         {
-            this->position = static_cast<std::size_t>(offset);
+            mPosition = static_cast<std::size_t>(offset);
         }
     }
 
-    if (this->position > this->size)
+    if (mPosition > mSize)
     {
-        this->position = this->size;
+        mPosition = mSize;
     }
 
-    this->reachedEof = false;
+    mReachedEof = false;
 }
 
 bool BufferStream::eof() const
 {
-    return this->reachedEof;
+    return mReachedEof;
 }
 
 char BufferStream::peek() const
 {
-    if (this->position == this->size)
+    if (mPosition == mSize)
     {
         return '\0';
     }
-    return ((char*)this->buffer)[this->position];
+    return ((char*)mBuffer)[mPosition];
 }

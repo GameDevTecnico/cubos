@@ -53,10 +53,8 @@ namespace cubos::core::ui
             pkg.into(object);
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 } // namespace cubos::core::ui
 

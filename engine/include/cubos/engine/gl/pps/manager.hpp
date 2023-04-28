@@ -64,13 +64,13 @@ namespace cubos::engine::gl::pps
         std::size_t passCount() const;
 
     private:
-        core::gl::RenderDevice& renderDevice;        ///< The render device to use.
-        glm::uvec2 size;                             ///< The current size of the window.
-        std::map<Input, core::gl::Texture2D> inputs; ///< The inputs provided to the passes.
-        std::map<std::size_t, Pass*> passes;         ///< The passes present in the manager.
-        std::size_t nextId;                          ///< The next ID to use for a pass.
-        core::gl::Texture2D intermediateTex[2];      ///< Intermediate textures used for the passes.
-        core::gl::Framebuffer intermediateFb[2];     ///< Intermediate framebuffers used for the passes.
+        core::gl::RenderDevice& mRenderDevice;        ///< The render device to use.
+        glm::uvec2 mSize;                             ///< The current size of the window.
+        std::map<Input, core::gl::Texture2D> mInputs; ///< The inputs provided to the passes.
+        std::map<std::size_t, Pass*> mPasses;         ///< The passes present in the manager.
+        std::size_t mNextId;                          ///< The next ID to use for a pass.
+        core::gl::Texture2D mIntermediateTex[2];      ///< Intermediate textures used for the passes.
+        core::gl::Framebuffer mIntermediateFb[2];     ///< Intermediate framebuffers used for the passes.
     };
 
     // Implementation.
@@ -78,8 +78,8 @@ namespace cubos::engine::gl::pps
     template <typename T>
     std::size_t Manager::addPass()
     {
-        std::size_t id = this->nextId++;
-        this->passes[id] = new T(this->renderDevice, this->size);
+        std::size_t id = mNextId++;
+        mPasses[id] = new T(mRenderDevice, mSize);
         return id;
     }
 } // namespace cubos::engine::gl::pps

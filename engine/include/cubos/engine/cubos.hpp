@@ -40,8 +40,8 @@ namespace cubos::engine
         TagBuilder& afterTag(const std::string& tag);
 
     private:
-        core::ecs::Dispatcher& dispatcher;
-        std::vector<std::string>& tags;
+        core::ecs::Dispatcher& mDispatcher;
+        std::vector<std::string>& mTags;
     };
 
     /// Used to chain configurations related to systems
@@ -73,8 +73,8 @@ namespace cubos::engine
         SystemBuilder& afterSystem(F func);
 
     private:
-        core::ecs::Dispatcher& dispatcher;
-        std::vector<std::string>& tags;
+        core::ecs::Dispatcher& mDispatcher;
+        std::vector<std::string>& mTags;
     };
 
     /// Represents the engine itself, and exposes the interface with which the game developer interacts with.
@@ -142,10 +142,12 @@ namespace cubos::engine
         void run();
 
     private:
-        core::ecs::Dispatcher mainDispatcher, startupDispatcher;
-        core::ecs::World world;
-        std::set<void (*)(Cubos&)> plugins;
-        std::vector<std::string> mainTags, startupTags;
+        core::ecs::Dispatcher mMainDispatcher;
+        core::ecs::Dispatcher mStartupDispatcher;
+        core::ecs::World mWorld;
+        std::set<void (*)(Cubos&)> mPlugins;
+        std::vector<std::string> mMainTags;
+        std::vector<std::string> mStartupTags;
     };
 
     // Implementation.
@@ -153,28 +155,28 @@ namespace cubos::engine
     template <typename F>
     SystemBuilder& SystemBuilder::beforeSystem(F func)
     {
-        dispatcher.systemSetBeforeSystem(func);
+        mDispatcher.systemSetBeforeSystem(func);
         return *this;
     }
 
     template <typename F>
     SystemBuilder& SystemBuilder::afterSystem(F func)
     {
-        dispatcher.systemSetAfterSystem(func);
+        mDispatcher.systemSetAfterSystem(func);
         return *this;
     }
 
     template <typename R, typename... TArgs>
     Cubos& Cubos::addResource(TArgs... args)
     {
-        world.registerResource<R>(args...);
+        mWorld.registerResource<R>(args...);
         return *this;
     }
 
     template <typename C>
     Cubos& Cubos::addComponent()
     {
-        world.registerComponent<C>();
+        mWorld.registerComponent<C>();
         return *this;
     }
 
@@ -182,26 +184,22 @@ namespace cubos::engine
     Cubos& Cubos::addEvent()
     {
         // The user could register this manually, but using this method is more convenient.
-        world.registerResource<core::ecs::EventPipe<E>>();
+        mWorld.registerResource<core::ecs::EventPipe<E>>();
         return *this;
     }
 
     template <typename F>
     SystemBuilder Cubos::system(F func)
     {
-        mainDispatcher.addSystem(func);
-        SystemBuilder builder(mainDispatcher, startupTags);
-
-        return builder;
+        mMainDispatcher.addSystem(func);
+        return {mMainDispatcher, mStartupTags};
     }
 
     template <typename F>
     SystemBuilder Cubos::startupSystem(F func)
     {
-        startupDispatcher.addSystem(func);
-        SystemBuilder builder(startupDispatcher, mainTags);
-
-        return builder;
+        mStartupDispatcher.addSystem(func);
+        return {mStartupDispatcher, mMainTags};
     }
 } // namespace cubos::engine
 

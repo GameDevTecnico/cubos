@@ -21,7 +21,7 @@ static const auto DirectMap = data::SerializationMap<Entity, std::string>(
     });
 
 World::World(std::size_t initialCapacity)
-    : entityManager(initialCapacity)
+    : mEntityManager(initialCapacity)
 {
     // Do nothing.
     // Edu: BAH!
@@ -29,22 +29,22 @@ World::World(std::size_t initialCapacity)
 
 void World::destroy(Entity entity)
 {
-    this->entityManager.destroy(entity);
-    this->componentManager.removeAll(entity.index);
+    mEntityManager.destroy(entity);
+    mComponentManager.removeAll(entity.index);
     CUBOS_DEBUG("Destroyed entity {}", entity.index);
 }
 
 data::Package World::pack(Entity entity, data::Context& context) const
 {
-    Entity::Mask mask = this->entityManager.getMask(entity);
+    Entity::Mask mask = mEntityManager.getMask(entity);
 
     auto pkg = data::Package(data::Package::Type::Object);
     for (std::size_t i = 1; i < mask.size(); ++i)
     {
         if (mask.test(i))
         {
-            auto name = Registry::name(this->componentManager.getType(i));
-            pkg.fields().push_back({std::string(name.value()), this->componentManager.pack(entity.index, i, context)});
+            auto name = Registry::name(mComponentManager.getType(i));
+            pkg.fields().push_back({std::string(name.value()), mComponentManager.pack(entity.index, i, context)});
         }
     }
 
@@ -59,7 +59,7 @@ bool World::unpack(Entity entity, const data::Package& package, data::Context& c
         return false;
     }
 
-    Entity::Mask mask = this->entityManager.getMask(entity);
+    Entity::Mask mask = mEntityManager.getMask(entity);
     bool success = true;
 
     for (const auto& field : package.fields())
@@ -72,8 +72,8 @@ bool World::unpack(Entity entity, const data::Package& package, data::Context& c
             continue;
         }
 
-        auto id = this->componentManager.getIDFromIndex(*type);
-        if (this->componentManager.unpack(entity.index, id, field.second, context))
+        auto id = mComponentManager.getIDFromIndex(*type);
+        if (mComponentManager.unpack(entity.index, id, field.second, context))
         {
             mask.set(id);
         }
@@ -84,16 +84,16 @@ bool World::unpack(Entity entity, const data::Package& package, data::Context& c
         }
     }
 
-    this->entityManager.setMask(entity, mask);
+    mEntityManager.setMask(entity, mask);
     return success;
 }
 
 World::Iterator World::begin() const
 {
-    return this->entityManager.begin();
+    return mEntityManager.begin();
 }
 
 World::Iterator World::end() const
 {
-    return this->entityManager.end();
+    return mEntityManager.end();
 }

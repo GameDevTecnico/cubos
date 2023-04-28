@@ -19,70 +19,70 @@ Arguments::Arguments(std::vector<std::string> value)
 }
 
 TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
-    : dispatcher(dispatcher)
-    , tags(tags)
+    : mDispatcher(dispatcher)
+    , mTags(tags)
 {
 }
 
 TagBuilder& TagBuilder::beforeTag(const std::string& tag)
 {
-    tags.push_back(tag);
-    dispatcher.tagSetBeforeTag(tag);
+    mTags.push_back(tag);
+    mDispatcher.tagSetBeforeTag(tag);
     return *this;
 }
 
 TagBuilder& TagBuilder::afterTag(const std::string& tag)
 {
-    tags.push_back(tag);
-    dispatcher.tagSetAfterTag(tag);
+    mTags.push_back(tag);
+    mDispatcher.tagSetAfterTag(tag);
     return *this;
 }
 
 SystemBuilder::SystemBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags)
-    : dispatcher(dispatcher)
-    , tags(tags)
+    : mDispatcher(dispatcher)
+    , mTags(tags)
 {
 }
 
 SystemBuilder& SystemBuilder::tagged(const std::string& tag)
 {
-    if (std::find(tags.begin(), tags.end(), tag) != tags.end())
+    if (std::find(mTags.begin(), mTags.end(), tag) != mTags.end())
     {
         CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
                    tag);
     }
-    dispatcher.systemAddTag(tag);
+    mDispatcher.systemAddTag(tag);
     return *this;
 }
 
 SystemBuilder& SystemBuilder::beforeTag(const std::string& tag)
 {
-    if (std::find(tags.begin(), tags.end(), tag) != tags.end())
+    if (std::find(mTags.begin(), mTags.end(), tag) != mTags.end())
     {
         CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
                    tag);
     }
-    dispatcher.systemSetBeforeTag(tag);
+    mDispatcher.systemSetBeforeTag(tag);
     return *this;
 }
 
 SystemBuilder& SystemBuilder::afterTag(const std::string& tag)
 {
-    if (std::find(tags.begin(), tags.end(), tag) != tags.end())
+    if (std::find(mTags.begin(), mTags.end(), tag) != mTags.end())
     {
         CUBOS_WARN("Tag '{}' was defined on opposite system type (normal/startup), possible tag/startupTag mismatch? ",
                    tag);
     }
-    dispatcher.systemSetAfterTag(tag);
+    mDispatcher.systemSetAfterTag(tag);
     return *this;
 }
 
 Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 {
-    if (!plugins.contains(func))
+    if (!mPlugins.contains(func))
     {
         func(*this);
-        plugins.insert(func);
+        mPlugins.insert(func);
     }
     else
     {
@@ -93,16 +93,16 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 
 TagBuilder Cubos::tag(const std::string& tag)
 {
-    mainDispatcher.addTag(tag);
-    TagBuilder builder(mainDispatcher, mainTags);
+    mMainDispatcher.addTag(tag);
+    TagBuilder builder(mMainDispatcher, mMainTags);
 
     return builder;
 }
 
 TagBuilder Cubos::startupTag(const std::string& tag)
 {
-    startupDispatcher.addTag(tag);
-    TagBuilder builder(startupDispatcher, startupTags);
+    mStartupDispatcher.addTag(tag);
+    TagBuilder builder(mStartupDispatcher, mStartupTags);
 
     return builder;
 }
@@ -126,20 +126,20 @@ Cubos::Cubos(int argc, char** argv)
 
 void Cubos::run()
 {
-    plugins.clear();
-    mainTags.clear();
-    startupTags.clear();
+    mPlugins.clear();
+    mMainTags.clear();
+    mStartupTags.clear();
 
     // Compile execution chain
-    startupDispatcher.compileChain();
-    mainDispatcher.compileChain();
+    mStartupDispatcher.compileChain();
+    mMainDispatcher.compileChain();
 
-    cubos::core::ecs::CommandBuffer cmds(world);
+    cubos::core::ecs::CommandBuffer cmds(mWorld);
 
-    startupDispatcher.callSystems(world, cmds);
+    mStartupDispatcher.callSystems(mWorld, cmds);
 
-    while (!world.read<ShouldQuit>().get().value)
+    while (!mWorld.read<ShouldQuit>().get().value)
     {
-        mainDispatcher.callSystems(world, cmds);
+        mMainDispatcher.callSystems(mWorld, cmds);
     }
 }

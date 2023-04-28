@@ -52,30 +52,30 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 #endif // __APPLE__
 
     // TODO: handle mode (fullscreen, ...)
-    this->handle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
-    if (this->handle == nullptr)
+    mHandle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
+    if (mHandle == nullptr)
     {
         CUBOS_CRITICAL("glfwCreateWindow() failed");
         abort();
     }
 
     // Create OpenGL render device
-    glfwMakeContextCurrent(this->handle);
+    glfwMakeContextCurrent(mHandle);
     if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == 0)
     {
         CUBOS_CRITICAL("OpenGL loader failed");
         abort();
     }
-    this->renderDevice = new gl::OGLRenderDevice();
+    mRenderDevice = new gl::OGLRenderDevice();
 
     // Set input callbacks
-    glfwSetWindowUserPointer(this->handle, (void*)this);
-    glfwSetKeyCallback(this->handle, keyCallback);
-    glfwSetCursorPosCallback(this->handle, mousePositionCallback);
-    glfwSetMouseButtonCallback(this->handle, mouseButtonCallback);
-    glfwSetScrollCallback(this->handle, scrollCallback);
-    glfwSetFramebufferSizeCallback(this->handle, framebufferSizeCallback);
-    glfwSetCharCallback(this->handle, charCallback);
+    glfwSetWindowUserPointer(mHandle, (void*)this);
+    glfwSetKeyCallback(mHandle, keyCallback);
+    glfwSetCursorPosCallback(mHandle, mousePositionCallback);
+    glfwSetMouseButtonCallback(mHandle, mouseButtonCallback);
+    glfwSetScrollCallback(mHandle, scrollCallback);
+    glfwSetFramebufferSizeCallback(mHandle, framebufferSizeCallback);
+    glfwSetCharCallback(mHandle, charCallback);
 #else
     UNSUPPORTED();
 #endif
@@ -84,7 +84,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 GLFWWindow::~GLFWWindow()
 {
 #ifdef WITH_GLFW
-    delete this->renderDevice;
+    delete mRenderDevice;
     glfwTerminate();
 #else
     UNSUPPORTED();
@@ -103,7 +103,7 @@ void GLFWWindow::pollEvents()
 void GLFWWindow::swapBuffers()
 {
 #ifdef WITH_GLFW
-    glfwSwapBuffers(this->handle);
+    glfwSwapBuffers(mHandle);
 #else
     UNSUPPORTED();
 #endif
@@ -112,7 +112,7 @@ void GLFWWindow::swapBuffers()
 gl::RenderDevice& GLFWWindow::getRenderDevice() const
 {
 #ifdef WITH_GLFW
-    return *this->renderDevice;
+    return *mRenderDevice;
 #else
     UNSUPPORTED();
 #endif
@@ -123,7 +123,7 @@ glm::ivec2 GLFWWindow::getSize() const
 #ifdef WITH_GLFW
     int width;
     int height;
-    glfwGetWindowSize(this->handle, &width, &height);
+    glfwGetWindowSize(mHandle, &width, &height);
     return {width, height};
 #else
     UNSUPPORTED();
@@ -135,7 +135,7 @@ glm::ivec2 GLFWWindow::getFramebufferSize() const
 #ifdef WITH_GLFW
     int width;
     int height;
-    glfwGetFramebufferSize(this->handle, &width, &height);
+    glfwGetFramebufferSize(mHandle, &width, &height);
     return {width, height};
 #else
     UNSUPPORTED();
@@ -145,7 +145,7 @@ glm::ivec2 GLFWWindow::getFramebufferSize() const
 bool GLFWWindow::shouldClose() const
 {
 #ifdef WITH_GLFW
-    return glfwWindowShouldClose(this->handle) != 0;
+    return glfwWindowShouldClose(mHandle) != 0;
 #else
     UNSUPPORTED();
 #endif
@@ -179,7 +179,7 @@ void GLFWWindow::setMouseState(MouseState state)
         CUBOS_ERROR("Unknown MouseState, doing nothing");
         return;
     }
-    glfwSetInputMode(handle, GLFW_CURSOR, cursorState);
+    glfwSetInputMode(mHandle, GLFW_CURSOR, cursorState);
 #else
     UNSUPPORTED();
 #endif
@@ -188,7 +188,7 @@ void GLFWWindow::setMouseState(MouseState state)
 MouseState GLFWWindow::getMouseState() const
 {
 #ifdef WITH_GLFW
-    switch (glfwGetInputMode(handle, GLFW_CURSOR))
+    switch (glfwGetInputMode(mHandle, GLFW_CURSOR))
     {
     case GLFW_CURSOR_NORMAL:
         return MouseState::Default;
@@ -244,13 +244,13 @@ void GLFWWindow::setCursor(std::shared_ptr<Cursor> cursor)
 #ifdef WITH_GLFW
     if (cursor == nullptr)
     {
-        glfwSetCursor(this->handle, nullptr);
+        glfwSetCursor(mHandle, nullptr);
     }
     else
     {
-        glfwSetCursor(this->handle, cursor->glfwHandle);
+        glfwSetCursor(mHandle, cursor->mGlfwHandle);
     }
-    this->cursor = cursor;
+    mCursor = cursor;
 #else
     UNSUPPORTED();
 #endif
@@ -259,7 +259,7 @@ void GLFWWindow::setCursor(std::shared_ptr<Cursor> cursor)
 void GLFWWindow::setClipboard(const std::string& text)
 {
 #ifdef WITH_GLFW
-    glfwSetClipboardString(this->handle, text.c_str());
+    glfwSetClipboardString(mHandle, text.c_str());
 #else
     UNSUPPORTED();
 #endif
@@ -268,7 +268,7 @@ void GLFWWindow::setClipboard(const std::string& text)
 const char* GLFWWindow::getClipboard() const
 {
 #ifdef WITH_GLFW
-    return glfwGetClipboardString(this->handle);
+    return glfwGetClipboardString(mHandle);
 #else
     UNSUPPORTED();
 #endif

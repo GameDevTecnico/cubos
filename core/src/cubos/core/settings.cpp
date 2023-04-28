@@ -18,72 +18,72 @@ void data::deserialize<Settings>(Deserializer& des, Settings& obj)
 
 void Settings::clear()
 {
-    this->values.clear();
+    mValues.clear();
 }
 
 void Settings::setBool(const std::string& key, const bool& value)
 {
-    this->values[key] = value ? "true" : "false";
+    mValues[key] = value ? "true" : "false";
 }
 
 bool Settings::getBool(const std::string& key, const bool& defaultValue) const
 {
-    if (!this->values.contains(key))
+    if (!mValues.contains(key))
     {
         return defaultValue;
     }
 
-    return this->values.at(key) == "true";
+    return mValues.at(key) == "true";
 }
 
 void Settings::setString(const std::string& key, const std::string& value)
 {
-    this->values[key] = value;
+    mValues[key] = value;
 }
 
 std::string Settings::getString(const std::string& key, const std::string& defaultValue) const
 {
-    if (!this->values.contains(key))
+    if (!mValues.contains(key))
     {
         return defaultValue;
     }
 
-    return this->values.at(key);
+    return mValues.at(key);
 }
 
 void Settings::setInteger(const std::string& key, const int value)
 {
-    this->values[key] = std::to_string(value);
+    mValues[key] = std::to_string(value);
 }
 
 int Settings::getInteger(const std::string& key, const int defaultValue) const
 {
-    if (!this->values.contains(key))
+    if (!mValues.contains(key))
     {
         return defaultValue;
     }
 
-    return std::stoi(this->values.at(key));
+    return std::stoi(mValues.at(key));
 }
 
 void Settings::setDouble(const std::string& key, const double value)
 {
-    this->values[key] = std::to_string(value);
+    mValues[key] = std::to_string(value);
 }
 
 double Settings::getDouble(const std::string& key, const double defaultValue) const
 {
-    if (!this->values.contains(key))
+    if (!mValues.contains(key))
     {
         return defaultValue;
     }
 
-    return std::stod(this->values.at(key));
+    return std::stod(mValues.at(key));
 }
 
 void Settings::merge(const Settings& settingsToMerge)
 {
-    for (const auto& value : settingsToMerge.values)
+    for (const auto& value : settingsToMerge.mValues)
     {
         this->setString(value.first, value.second);
     }
@@ -91,10 +91,10 @@ void Settings::merge(const Settings& settingsToMerge)
 
 const std::unordered_map<std::string, std::string>& Settings::getValues() const
 {
-    return this->values;
+    return mValues;
 }
 
 std::unordered_map<std::string, std::string>& Settings::getValues()
 {
-    return this->values;
+    return mValues;
 }

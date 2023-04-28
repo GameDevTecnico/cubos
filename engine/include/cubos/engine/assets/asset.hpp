@@ -74,9 +74,9 @@ namespace cubos::engine
         /// Decrements the reference count of the asset.
         void decRef() const;
 
-        uuids::uuid id; ///< UUID of the asset.
-        void* refCount; ///< Void pointer to avoid including <atomic> in the header.
-        int version;    ///< Last known version of the asset.
+        uuids::uuid mId; ///< UUID of the asset.
+        void* mRefCount; ///< Void pointer to avoid including <atomic> in the header.
+        int mVersion;    ///< Last known version of the asset.
     };
 
     /// Handle to an asset of a specific type.
@@ -115,9 +115,9 @@ namespace cubos::engine
     inline AnyAsset::operator Asset<T>() const
     {
         Asset<T> asset;
-        asset.id = this->id;
-        asset.refCount = this->refCount;
-        asset.version = this->version;
+        asset.mId = mId;
+        asset.mRefCount = mRefCount;
+        asset.mVersion = mVersion;
         asset.incRef();
         return asset;
     }

@@ -16,7 +16,7 @@ EmbeddedArchive::EmbeddedArchive(const std::string& name)
         abort();
     }
 
-    data = &it->second;
+    mData = &it->second;
 }
 
 std::map<std::string, const EmbeddedArchive::Data&>& EmbeddedArchive::getRegistry()
@@ -51,12 +51,12 @@ bool EmbeddedArchive::destroy(std::size_t /*id*/)
 
 std::string EmbeddedArchive::getName(std::size_t id) const
 {
-    return this->data->entries[id - 1].name;
+    return mData->entries[id - 1].name;
 }
 
 bool EmbeddedArchive::isDirectory(std::size_t id) const
 {
-    return this->data->entries[id - 1].isDirectory;
+    return mData->entries[id - 1].isDirectory;
 }
 
 bool EmbeddedArchive::isReadOnly() const
@@ -66,17 +66,17 @@ bool EmbeddedArchive::isReadOnly() const
 
 std::size_t EmbeddedArchive::getParent(std::size_t id) const
 {
-    return this->data->entries[id - 1].parent;
+    return mData->entries[id - 1].parent;
 }
 
 std::size_t EmbeddedArchive::getSibling(std::size_t id) const
 {
-    return this->data->entries[id - 1].sibling;
+    return mData->entries[id - 1].sibling;
 }
 
 std::size_t EmbeddedArchive::getChild(std::size_t id) const
 {
-    return this->data->entries[id - 1].child;
+    return mData->entries[id - 1].child;
 }
 
 std::unique_ptr<memory::Stream> EmbeddedArchive::open(File::Handle file, File::OpenMode mode)
@@ -86,6 +86,6 @@ std::unique_ptr<memory::Stream> EmbeddedArchive::open(File::Handle file, File::O
         return nullptr;
     }
 
-    const auto& entry = this->data->entries[file->getId() - 1];
+    const auto& entry = mData->entries[file->getId() - 1];
     return std::make_unique<FileStream<memory::BufferStream>>(file, mode, memory::BufferStream(entry.data, entry.size));
 }

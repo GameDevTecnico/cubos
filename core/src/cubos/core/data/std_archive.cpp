@@ -7,8 +7,8 @@ using namespace cubos::core;
 using namespace cubos::core::data;
 
 STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly)
-    : osPath(osPath)
-    , readOnly(readOnly)
+    : mOsPath(osPath)
+    , mReadOnly(readOnly)
 {
     // Check if the file/directory exists.
     if (!std::filesystem::exists(osPath))
@@ -50,8 +50,8 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
         }
 
         // Add all children files to the archive.
-        this->files[1] = {osPath, 0, 0, 0, true};
-        this->nextId = 2;
+        mFiles[1] = {osPath, 0, 0, 0, true};
+        mNextId = 2;
         this->generate(1);
     }
     else
@@ -62,13 +62,13 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
             abort();
         }
 
-        this->files[1] = {osPath, 0, 0, 0, false};
+        mFiles[1] = {osPath, 0, 0, 0, false};
     }
 }
 
 void STDArchive::generate(std::size_t parent)
 {
-    auto& parentInfo = this->files[parent];
+    auto& parentInfo = mFiles[parent];
 
     // Iterate over all files in the directory.
     for (const auto& entry : std::filesystem::directory_iterator(parentInfo.osPath))
@@ -78,8 +78,8 @@ void STDArchive::generate(std::size_t parent)
 
         // Add the file to the tree.
         auto directory = std::filesystem::is_directory(osPath);
-        std::size_t id = this->nextId++;
-        this->files[id] = {osPath, parent, parentInfo.child, 0, directory};
+        std::size_t id = mNextId++;
+        mFiles[id] = {osPath, parent, parentInfo.child, 0, directory};
         parentInfo.child = id;
 
         // Recursively add all files in the directory.
@@ -93,13 +93,13 @@ void STDArchive::generate(std::size_t parent)
 std::size_t STDArchive::create(std::size_t parent, std::string_view name, bool directory)
 {
     // Make sure that the archive isn't read-only and the parent is a directory.
-    if (this->readOnly || parent == 0 || !this->isDirectory(parent))
+    if (mReadOnly || parent == 0 || !this->isDirectory(parent))
     {
         return 0;
     }
 
     // Create the file/directory in the OS file system.
-    auto& parentInfo = this->files.at(parent);
+    auto& parentInfo = mFiles.at(parent);
     auto osPath = parentInfo.osPath / name;
     if (directory)
     {
@@ -121,8 +121,8 @@ std::size_t STDArchive::create(std::size_t parent, std::string_view name, bool d
     }
 
     // Add the file to the tree.
-    std::size_t id = this->nextId++;
-    this->files[id] = {osPath, parent, parentInfo.child, 0, directory};
+    std::size_t id = mNextId++;
+    mFiles[id] = {osPath, parent, parentInfo.child, 0, directory};
     parentInfo.child = id;
     return id;
 }
@@ -130,13 +130,13 @@ std::size_t STDArchive::create(std::size_t parent, std::string_view name, bool d
 bool STDArchive::destroy(std::size_t id)
 {
     // Make sure the file isn't read only, that the file exist and that it's not the root.
-    if (this->readOnly || !this->files.contains(id) || id == 1)
+    if (mReadOnly || !mFiles.contains(id) || id == 1)
     {
         return false;
     }
 
     // Make sure the file isn't a non-empty directory.
-    const auto& info = this->files.at(id);
+    const auto& info = mFiles.at(id);
     if (info.directory && info.child != 0)
     {
         return false;
@@ -149,7 +149,7 @@ bool STDArchive::destroy(std::size_t id)
     }
 
     // Remove the file from the tree.
-    auto& parentInfo = this->files.at(info.parent);
+    auto& parentInfo = mFiles.at(info.parent);
     if (parentInfo.child == id)
     {
         parentInfo.child = info.sibling;
@@ -159,23 +159,23 @@ bool STDArchive::destroy(std::size_t id)
         std::size_t sibling = parentInfo.child;
         while (sibling != 0)
         {
-            auto siblingSibling = this->files.at(sibling).sibling;
+            auto siblingSibling = mFiles.at(sibling).sibling;
             if (siblingSibling == id)
             {
-                this->files.at(sibling).sibling = info.sibling;
+                mFiles.at(sibling).sibling = info.sibling;
                 break;
             }
             sibling = siblingSibling;
         }
     }
-    this->files.erase(id);
+    mFiles.erase(id);
     return true;
 }
 
 std::string STDArchive::getName(std::size_t id) const
 {
-    auto it = this->files.find(id);
-    if (it == this->files.end())
+    auto it = mFiles.find(id);
+    if (it == mFiles.end())
     {
         CUBOS_CRITICAL("File does not exist");
         abort();
@@ -186,8 +186,8 @@ std::string STDArchive::getName(std::size_t id) const
 
 bool STDArchive::isDirectory(std::size_t id) const
 {
-    auto it = this->files.find(id);
-    if (it == this->files.end())
+    auto it = mFiles.find(id);
+    if (it == mFiles.end())
     {
         CUBOS_CRITICAL("File does not exist");
         abort();
@@ -198,13 +198,13 @@ bool STDArchive::isDirectory(std::size_t id) const
 
 bool STDArchive::isReadOnly() const
 {
-    return this->readOnly;
+    return mReadOnly;
 }
 
 std::size_t STDArchive::getParent(std::size_t id) const
 {
-    auto it = this->files.find(id);
-    if (it == this->files.end())
+    auto it = mFiles.find(id);
+    if (it == mFiles.end())
     {
         CUBOS_CRITICAL("File does not exist");
         abort();
@@ -215,8 +215,8 @@ std::size_t STDArchive::getParent(std::size_t id) const
 
 std::size_t STDArchive::getSibling(std::size_t id) const
 {
-    auto it = this->files.find(id);
-    if (it == this->files.end())
+    auto it = mFiles.find(id);
+    if (it == mFiles.end())
     {
         CUBOS_CRITICAL("File does not exist");
         abort();
@@ -227,8 +227,8 @@ std::size_t STDArchive::getSibling(std::size_t id) const
 
 std::size_t STDArchive::getChild(std::size_t id) const
 {
-    auto it = this->files.find(id);
-    if (it == this->files.end())
+    auto it = mFiles.find(id);
+    if (it == mFiles.end())
     {
         CUBOS_CRITICAL("File does not exist");
         abort();
@@ -240,15 +240,15 @@ std::size_t STDArchive::getChild(std::size_t id) const
 std::unique_ptr<memory::Stream> STDArchive::open(File::Handle file, File::OpenMode mode)
 {
     // Check if the archive is read-only.
-    if (this->readOnly && mode != File::OpenMode::Read)
+    if (mReadOnly && mode != File::OpenMode::Read)
     {
         CUBOS_CRITICAL("Could not open file for writing: archive is read-only");
         abort();
     }
 
     // Check if the file exists.
-    auto it = this->files.find(file->getId());
-    if (it == this->files.end())
+    auto it = mFiles.find(file->getId());
+    if (it == mFiles.end())
     {
         CUBOS_CRITICAL("File does not exist");
         abort();

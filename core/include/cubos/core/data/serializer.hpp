@@ -56,6 +56,9 @@ namespace cubos::core::data
         Serializer();
         virtual ~Serializer() = default;
 
+        Serializer(const Serializer&) = delete;
+        Serializer& operator=(const Serializer&) = delete;
+
         /// Flushes the serializer, guaranteeing that all data has already been processed.
         /// This is automatically called when the serializer is destroyed.
         virtual void flush();
@@ -160,17 +163,14 @@ namespace cubos::core::data
         /// @returns The context of the serializer.
         inline Context& context()
         {
-            return this->m_context;
+            return mContext;
         }
 
     protected:
-        bool failBit; ///< Indicates if the serializer failed.
+        bool mFailBit; ///< Indicates if the serializer failed.
 
     private:
-        Serializer(const Serializer&) = delete;
-        Serializer& operator=(const Serializer&) = delete;
-
-        Context m_context; ///< The context of the serializer.
+        Context mContext; ///< The context of the serializer.
     };
 
     /// Concept for serializable objects which define a serialize method.
@@ -220,7 +220,9 @@ namespace cubos::core::data
     {
         ser.beginArray(vec.size(), name);
         for (const auto& obj : vec)
+        {
             ser.write(obj, nullptr);
+        }
         ser.endArray();
     }
 

@@ -283,9 +283,9 @@ static bool convert(const ConvertOptions& options)
             std::cerr << "Matrix " << i << ":" << std::endl;
             std::cerr << "- Position: " << model[i].position.x << " " << model[i].position.y << " "
                       << model[i].position.z << std::endl;
-            std::cerr << "- Grid size: " << model[i].grid.getSize().x << "x" << model[i].grid.getSize().y << "x"
-                      << model[i].grid.getSize().z << std::endl;
-            std::cerr << "- Palette size: " << model[i].palette.getSize() << std::endl;
+            std::cerr << "- Grid size: " << model[i].grid.size().x << "x" << model[i].grid.size().y << "x"
+                      << model[i].grid.size().z << std::endl;
+            std::cerr << "- Palette size: " << model[i].palette.size() << std::endl;
         }
 
         if (options.palette.empty())
@@ -336,7 +336,7 @@ static bool convert(const ConvertOptions& options)
                 if (options.write)
                 {
                     std::cerr << "The palette is already full, so extra materials will not be added." << std::endl;
-                    assert(palette.getSize() == UINT16_MAX);
+                    assert(palette.size() == UINT16_MAX);
                 }
                 else
                 {
