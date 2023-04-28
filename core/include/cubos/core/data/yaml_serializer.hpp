@@ -50,10 +50,10 @@ namespace cubos::core::data
         };
 
         memory::Stream& mStream; ///< The stream to serialize to.
-        std::stack<Mode> mode;  ///< The current mode of the serializer.
-        bool key;               ///< Whether the next write is a key or a value (if we are in a dictionary).
-        YAML::Emitter emitter;  ///< The YAML emitter.
-        std::size_t mHead;      ///< The number of characters already flushed.
+        std::stack<Mode> mMode;  ///< The current mode of the serializer.
+        bool mKey;               ///< Whether the next write is a key or a value (if we are in a dictionary).
+        YAML::Emitter mEmitter;  ///< The YAML emitter.
+        std::size_t mHead;       ///< The number of characters already flushed.
     };
 } // namespace cubos::core::data
 
