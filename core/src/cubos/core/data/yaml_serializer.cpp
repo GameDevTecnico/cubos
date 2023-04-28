@@ -7,11 +7,11 @@ constexpr const char* ANONYMOUS_FIELD_NAME = "anonymous";
 using namespace cubos::core::data;
 
 YAMLSerializer::YAMLSerializer(memory::Stream& stream)
-    : stream(stream)
+    : mStream(stream)
 {
     this->mode.push(Mode::Object);
     this->key = true;
-    this->head = 0;
+    mHead = 0;
     this->emitter << YAML::BeginDoc << YAML::BeginMap;
 }
 
@@ -23,8 +23,8 @@ YAMLSerializer::~YAMLSerializer()
 
 void YAMLSerializer::flush()
 {
-    this->stream.print(this->emitter.c_str() + this->head);
-    this->head = this->emitter.size();
+    mStream.print(this->emitter.c_str() + mHead);
+    mHead = this->emitter.size();
 }
 
 // Macro used to reduce the amount of code duplication.

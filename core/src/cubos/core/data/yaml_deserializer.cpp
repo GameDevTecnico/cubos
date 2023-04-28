@@ -5,10 +5,10 @@
 using namespace cubos::core::data;
 
 YAMLDeserializer::YAMLDeserializer(memory::Stream& stream)
-    : stream(stream)
+    : mStream(stream)
 {
     this->loadDocument();
-    this->frame.push({Mode::Object, this->document.begin(), false});
+    this->frame.push({Mode::Object, mDocument.begin(), false});
 }
 
 // NOLINTBEGIN(bugprone-macro-parentheses)
@@ -190,17 +190,17 @@ void YAMLDeserializer::endDictionary()
 void YAMLDeserializer::loadDocument()
 {
     std::string content;
-    this->stream.readUntil(content, "...");
-    this->document = YAML::Load(content);
+    mStream.readUntil(content, "...");
+    mDocument = YAML::Load(content);
 }
 
 YAML::const_iterator YAMLDeserializer::get()
 {
     // If this is the top frame and there aren't more elements to read, read another document.
-    if (this->frame.size() == 1 && this->frame.top().iter == this->document.end())
+    if (this->frame.size() == 1 && this->frame.top().iter == mDocument.end())
     {
         this->loadDocument();
-        this->frame.top().iter = this->document.begin();
+        this->frame.top().iter = mDocument.begin();
     }
 
     if (this->frame.top().mode != Mode::Dictionary || !this->frame.top().key)

@@ -47,16 +47,16 @@ namespace cubos::engine
         /// @returns Parameters of the asset.
         inline const std::unordered_map<std::string, std::string>& params() const
         {
-            return this->m_params;
+            return mParams;
         }
 
         /// @returns Parameters of the asset.
         inline std::unordered_map<std::string, std::string>& params()
         {
-            return this->m_params;
+            return mParams;
         }
 
     private:
-        std::unordered_map<std::string, std::string> m_params; ///< Parameters of the asset.
+        std::unordered_map<std::string, std::string> mParams; //< Parameters of the asset.
     };
 } // namespace cubos::engine

@@ -21,30 +21,30 @@ namespace cubos::core::io
     {
     public:
         GLFWWindow(const std::string& title, const glm::ivec2& size);
-        virtual ~GLFWWindow() override;
+        ~GLFWWindow() override;
 
         // Interface implementation.
 
-        virtual void pollEvents() override;
-        virtual void swapBuffers() override;
-        virtual gl::RenderDevice& getRenderDevice() const override;
-        virtual glm::ivec2 getSize() const override;
-        virtual glm::ivec2 getFramebufferSize() const override;
-        virtual bool shouldClose() const override;
-        virtual double getTime() const override;
-        virtual void setMouseState(MouseState state) override;
-        virtual MouseState getMouseState() const override;
-        virtual std::shared_ptr<Cursor> createCursor(Cursor::Standard standard) override;
-        virtual void setCursor(std::shared_ptr<Cursor> cursor) override;
-        virtual void setClipboard(const std::string& text) override;
-        virtual const char* getClipboard() const override;
+        void pollEvents() override;
+        void swapBuffers() override;
+        gl::RenderDevice& getRenderDevice() const override;
+        glm::ivec2 getSize() const override;
+        glm::ivec2 getFramebufferSize() const override;
+        bool shouldClose() const override;
+        double getTime() const override;
+        void setMouseState(MouseState state) override;
+        MouseState getMouseState() const override;
+        std::shared_ptr<Cursor> createCursor(Cursor::Standard standard) override;
+        void setCursor(std::shared_ptr<Cursor> cursor) override;
+        void setClipboard(const std::string& text) override;
+        const char* getClipboard() const override;
 
     private:
-        std::shared_ptr<Cursor> cursor;
+        std::shared_ptr<Cursor> mCursor;
 
 #ifdef WITH_GLFW
-        GLFWwindow* handle;
-        gl::OGLRenderDevice* renderDevice;
+        GLFWwindow* mHandle;
+        gl::OGLRenderDevice* mRenderDevice;
 #endif
     };
 } // namespace cubos::core::io

@@ -152,20 +152,20 @@ namespace cubos::core::data
         /// Called after the file is destroyed.
         void destroyRecursive();
 
-        std::string path; ///< The path of this file.
-        std::string name; ///< The name of this file.
-        bool directory;   ///< Whether this file is a directory.
+        std::string mPath; ///< The path of this file.
+        std::string mName; ///< The name of this file.
+        bool mDirectory;   ///< Whether this file is a directory.
 
-        std::shared_ptr<Archive> archive; ///< The archive this file belongs to.
-        std::size_t id;                   ///< The id of this file in its archive.
+        std::shared_ptr<Archive> mArchive; ///< The archive this file belongs to.
+        std::size_t mId;                   ///< The id of this file in its archive.
 
-        Handle parent;  ///< The parent file handle.
-        Handle sibling; ///< The next sibling file handle.
-        Handle child;   ///< The first child file handle.
+        Handle mParent;  ///< The parent file handle.
+        Handle mSibling; ///< The next sibling file handle.
+        Handle mChild;   ///< The first child file handle.
 
-        bool destroyed; ///< Whether this file has been marked for deletion.
+        bool mDestroyed; ///< Whether this file has been marked for deletion.
 
-        std::mutex mutex; ///< The mutex used to synchronize changing properties of this file.
+        std::mutex mMutex; ///< The mutex used to synchronize changing properties of this file.
     };
 } // namespace cubos::core::data
 

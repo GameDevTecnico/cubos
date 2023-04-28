@@ -5,7 +5,7 @@ using namespace cubos::core::data;
 
 Context::~Context()
 {
-    for (auto& entry : entries)
+    for (auto& entry : mEntries)
     {
         if (entry.subContext == nullptr)
         {
@@ -16,18 +16,18 @@ Context::~Context()
 
 void Context::pushSubContext(Context& context)
 {
-    this->entries.push_back({&context, typeid(Context), nullptr, nullptr});
+    mEntries.push_back({&context, typeid(Context), nullptr, nullptr});
 }
 
 void Context::pushAny(std::type_index type, void* data, void (*destructor)(void*))
 {
-    entries.push_back({nullptr, type, data, destructor});
+    mEntries.push_back({nullptr, type, data, destructor});
 }
 
 void Context::pop()
 {
-    entries.back().destructor(entries.back().data);
-    entries.pop_back();
+    mEntries.back().destructor(mEntries.back().data);
+    mEntries.pop_back();
 }
 
 void* Context::getAny(std::type_index type) const
@@ -44,7 +44,7 @@ void* Context::getAny(std::type_index type) const
 
 void* Context::tryGetAny(std::type_index type) const
 {
-    for (auto it = entries.rbegin(); it != entries.rend(); ++it)
+    for (auto it = mEntries.rbegin(); it != mEntries.rend(); ++it)
     {
         if (it->subContext != nullptr)
         {

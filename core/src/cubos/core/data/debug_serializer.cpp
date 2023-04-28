@@ -4,19 +4,19 @@ using namespace cubos::core;
 using namespace cubos::core::data;
 
 DebugSerializer::DebugSerializer(memory::Stream& stream, bool pretty, bool typeNames)
-    : stream(stream)
+    : mStream(stream)
 {
-    this->indent = 0;
-    this->pretty = pretty;
-    this->typeNames = typeNames;
-    this->state.push(State{Mode::Object, false, true});
+    mIndent = 0;
+    mPretty = pretty;
+    mTypeNames = typeNames;
+    mState.push(State{Mode::Object, false, true});
 }
 
 void DebugSerializer::printIndent()
 {
-    for (int i = 0; i < this->indent * 2; ++i)
+    for (int i = 0; i < mIndent * 2; ++i)
     {
-        this->stream.put(' ');
+        mStream.put(' ');
     }
 }
 
@@ -25,32 +25,32 @@ void DebugSerializer::printIndent()
     do                                                                                                                 \
     {                                                                                                                  \
         /* Print the separator. */                                                                                     \
-        auto& state = this->state.top();                                                                               \
+        auto& state = mState.top();                                                                               \
         if (state.isFirst)                                                                                             \
         {                                                                                                              \
             state.isFirst = false;                                                                                     \
-            if (this->pretty)                                                                                          \
+            if (mPretty)                                                                                          \
             {                                                                                                          \
-                this->stream.put('\n');                                                                                \
+                mStream.put('\n');                                                                                \
                 this->printIndent();                                                                                   \
             }                                                                                                          \
         }                                                                                                              \
         else if (state.mode == Mode::Dictionary && !state.isKey)                                                       \
-            this->stream.print(": ");                                                                                  \
-        else if (this->pretty)                                                                                         \
+            mStream.print(": ");                                                                                  \
+        else if (mPretty)                                                                                         \
         {                                                                                                              \
-            this->stream.print(",\n");                                                                                 \
+            mStream.print(",\n");                                                                                 \
             this->printIndent();                                                                                       \
         }                                                                                                              \
         else                                                                                                           \
-            this->stream.print(", ");                                                                                  \
+            mStream.print(", ");                                                                                  \
                                                                                                                        \
         /* Print the name of the value, if its an object. */                                                           \
         if (state.mode == Mode::Object)                                                                                \
-            this->stream.printf("{}: ", name == nullptr ? "?" : name);                                                 \
+            mStream.printf("{}: ", name == nullptr ? "?" : name);                                                 \
                                                                                                                        \
         /* Print the value, with its type name, if enabled. */                                                         \
-        this->stream.printf(__VA_ARGS__);                                                                              \
+        mStream.printf(__VA_ARGS__);                                                                              \
                                                                                                                        \
         /* If it's a dictionary, flip the isKey flag. */                                                               \
         if (state.mode == Mode::Dictionary)                                                                            \
@@ -59,52 +59,52 @@ void DebugSerializer::printIndent()
 
 void DebugSerializer::writeI8(int8_t value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "i8" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "i8" : "");
 }
 
 void DebugSerializer::writeI16(int16_t value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "i16" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "i16" : "");
 }
 
 void DebugSerializer::writeI32(int32_t value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "i32" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "i32" : "");
 }
 
 void DebugSerializer::writeI64(int64_t value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "i64" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "i64" : "");
 }
 
 void DebugSerializer::writeU8(uint8_t value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "u8" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "u8" : "");
 }
 
 void DebugSerializer::writeU16(uint16_t value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "u16" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "u16" : "");
 }
 
 void DebugSerializer::writeU32(uint32_t value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "u32" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "u32" : "");
 }
 
 void DebugSerializer::writeU64(uint64_t value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "u64" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "u64" : "");
 }
 
 void DebugSerializer::writeF32(float value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "f32" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "f32" : "");
 }
 
 void DebugSerializer::writeF64(double value, const char* name)
 {
-    GENERIC_WRITE("{}{}", value, this->typeNames ? "f64" : "");
+    GENERIC_WRITE("{}{}", value, mTypeNames ? "f64" : "");
 }
 
 void DebugSerializer::writeBool(bool value, const char* name)
@@ -120,25 +120,25 @@ void DebugSerializer::writeString(const char* value, const char* name)
 void DebugSerializer::beginObject(const char* name)
 {
     GENERIC_WRITE("(");
-    this->state.push({Mode::Object, false, true});
-    this->indent++;
+    mState.push({Mode::Object, false, true});
+    mIndent++;
 }
 
 void DebugSerializer::endObject()
 {
-    this->indent--;
-    this->state.pop();
-    if (this->pretty)
+    mIndent--;
+    mState.pop();
+    if (mPretty)
     {
-        this->stream.put('\n');
+        mStream.put('\n');
         this->printIndent();
     }
-    this->stream.put(')');
+    mStream.put(')');
 }
 
 void DebugSerializer::beginArray(std::size_t length, const char* name)
 {
-    if (this->typeNames)
+    if (mTypeNames)
     {
         GENERIC_WRITE("{}x[", length);
     }
@@ -146,25 +146,25 @@ void DebugSerializer::beginArray(std::size_t length, const char* name)
     {
         GENERIC_WRITE("[");
     }
-    this->state.push({Mode::Array, false, true});
-    this->indent++;
+    mState.push({Mode::Array, false, true});
+    mIndent++;
 }
 
 void DebugSerializer::endArray()
 {
-    this->indent--;
-    this->state.pop();
-    if (this->pretty)
+    mIndent--;
+    mState.pop();
+    if (mPretty)
     {
-        this->stream.put('\n');
+        mStream.put('\n');
         this->printIndent();
     }
-    this->stream.put(']');
+    mStream.put(']');
 }
 
 void DebugSerializer::beginDictionary(std::size_t length, const char* name)
 {
-    if (this->typeNames)
+    if (mTypeNames)
     {
         GENERIC_WRITE("{}x{", length);
     }
@@ -172,18 +172,18 @@ void DebugSerializer::beginDictionary(std::size_t length, const char* name)
     {
         GENERIC_WRITE("{");
     }
-    this->state.push({Mode::Dictionary, true, true});
-    this->indent++;
+    mState.push({Mode::Dictionary, true, true});
+    mIndent++;
 }
 
 void DebugSerializer::endDictionary()
 {
-    this->indent--;
-    this->state.pop();
-    if (this->pretty)
+    mIndent--;
+    mState.pop();
+    if (mPretty)
     {
-        this->stream.put('\n');
+        mStream.put('\n');
         this->printIndent();
     }
-    this->stream.put('}');
+    mStream.put('}');
 }

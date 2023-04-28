@@ -34,25 +34,25 @@ AnyAsset::~AnyAsset()
 }
 
 AnyAsset::AnyAsset(std::nullptr_t)
-    : refCount(nullptr)
-    , version(-1)
+    : mRefCount(nullptr)
+    , mVersion(-1)
 {
 }
 
 AnyAsset::AnyAsset(uuids::uuid id)
-    : id(id)
-    , refCount(nullptr)
-    , version(-1)
+    : mId(id)
+    , mRefCount(nullptr)
+    , mVersion(-1)
 {
 }
 
 AnyAsset::AnyAsset(std::string_view str)
-    : refCount(nullptr)
-    , version(-1)
+    : mRefCount(nullptr)
+    , mVersion(-1)
 {
     if (auto id = uuids::uuid::from_string(str))
     {
-        this->id = id.value();
+        mId = id.value();
     }
     else
     {
@@ -61,27 +61,27 @@ AnyAsset::AnyAsset(std::string_view str)
 }
 
 AnyAsset::AnyAsset(const AnyAsset& other)
-    : id(other.id)
-    , refCount(other.refCount)
-    , version(other.version)
+    : mId(other.mId)
+    , mRefCount(other.mRefCount)
+    , mVersion(other.mVersion)
 {
     this->incRef();
 }
 
 AnyAsset::AnyAsset(AnyAsset&& other) noexcept
-    : id(other.id)
-    , refCount(other.refCount)
-    , version(other.version)
+    : mId(other.mId)
+    , mRefCount(other.mRefCount)
+    , mVersion(other.mVersion)
 {
-    other.refCount = nullptr;
+    other.mRefCount = nullptr;
 }
 
 AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 {
     this->decRef();
-    this->id = other.id;
-    this->refCount = other.refCount;
-    this->version = other.version;
+    mId = other.mId;
+    mRefCount = other.mRefCount;
+    mVersion = other.mVersion;
     this->incRef();
     return *this;
 }
@@ -89,51 +89,51 @@ AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 AnyAsset& AnyAsset::operator=(AnyAsset&& other) noexcept
 {
     this->decRef();
-    this->id = other.id;
-    this->refCount = other.refCount;
-    this->version = other.version;
-    other.refCount = nullptr;
+    mId = other.mId;
+    mRefCount = other.mRefCount;
+    mVersion = other.mVersion;
+    other.mRefCount = nullptr;
     return *this;
 }
 
 int AnyAsset::getVersion() const
 {
-    return this->version;
+    return mVersion;
 }
 
 uuids::uuid AnyAsset::getId() const
 {
-    return this->id;
+    return mId;
 }
 
 bool AnyAsset::isNull() const
 {
-    return this->id.is_nil();
+    return mId.is_nil();
 }
 
 bool AnyAsset::isStrong() const
 {
-    return this->refCount != nullptr;
+    return mRefCount != nullptr;
 }
 
 void AnyAsset::makeWeak()
 {
     this->decRef();
-    this->refCount = nullptr;
+    mRefCount = nullptr;
 }
 
 void AnyAsset::incRef() const
 {
-    if (this->refCount != nullptr)
+    if (mRefCount != nullptr)
     {
-        static_cast<std::atomic<int>*>(this->refCount)->fetch_add(1);
+        static_cast<std::atomic<int>*>(mRefCount)->fetch_add(1);
     }
 }
 
 void AnyAsset::decRef() const
 {
-    if (this->refCount != nullptr)
+    if (mRefCount != nullptr)
     {
-        static_cast<std::atomic<int>*>(this->refCount)->fetch_sub(1);
+        static_cast<std::atomic<int>*>(mRefCount)->fetch_sub(1);
     }
 }

@@ -11,7 +11,7 @@ using namespace cubos::core::data;
 
 Serializer::Serializer()
 {
-    this->failBit = false;
+    mFailBit = false;
 }
 
 void Serializer::flush()
@@ -21,7 +21,7 @@ void Serializer::flush()
 
 bool Serializer::failed() const
 {
-    return this->failBit;
+    return mFailBit;
 }
 
 // Implementation of serialize() for primitive types.

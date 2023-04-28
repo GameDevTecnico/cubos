@@ -18,21 +18,21 @@ namespace cubos::core::ecs
         void push(T event, unsigned int mask = DEFAULT_PUSH_MASK);
 
     private:
-        EventPipe<T>& pipe;
+        EventPipe<T>& mPipe;
     };
 
     // EventWriter implementation.
 
     template <typename T>
     EventWriter<T>::EventWriter(EventPipe<T>& pipe)
-        : pipe(pipe)
+        : mPipe(pipe)
     {
     }
 
     template <typename T>
     void EventWriter<T>::push(T event, unsigned int mask)
     {
-        this->pipe.push(event, mask);
+        mPipe.push(event, mask);
     }
 
 } // namespace cubos::core::ecs

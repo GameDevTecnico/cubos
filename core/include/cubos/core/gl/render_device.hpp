@@ -337,7 +337,6 @@ namespace cubos::core::gl
 
         struct FramebufferTarget
         {
-        public:
             uint32_t mipLevel = 0; ///< Mip level of the target which will be set as a render target.
 
             TargetType getTargetType() const;
@@ -360,10 +359,10 @@ namespace cubos::core::gl
             void setCubeMapArrayTarget(const CubeMapArray& handle);
 
         private:
-            bool set = false;
-            TargetType type; ///< Type of the currently set target.
+            bool mSet = false;
+            TargetType mType; ///< Type of the currently set target.
 
-            std::variant<CubeMapTarget, Texture2DTarget, CubeMapArrayTarget, Texture2DArrayTarget> target;
+            std::variant<CubeMapTarget, Texture2DTarget, CubeMapArrayTarget, Texture2DArrayTarget> mTarget;
         } targets[CUBOS_CORE_GL_MAX_FRAMEBUFFER_RENDER_TARGET_COUNT]; ///< Render targets.
 
         uint32_t targetCount = 1;       ///< Number of render targets.
@@ -388,8 +387,8 @@ namespace cubos::core::gl
         {
             bool enabled = false;            ///< Enable depth checks?
             bool writeEnabled = false;       ///< Write to depth?
-            float near = 0.0f;               ///< Depth near value.
-            float far = 1.0f;                ///< Depth far value.
+            float near = 0.0F;               ///< Depth near value.
+            float far = 1.0F;                ///< Depth far value.
             Compare compare = Compare::Less; ///< Depth comparison function.
         };
 
@@ -441,7 +440,7 @@ namespace cubos::core::gl
     /// Sampler description.
     struct SamplerDesc
     {
-        float borderColor[4] = {0.0f}; ///< Border color applied when the address mode is AddressMode::Border.
+        float borderColor[4] = {0.0F}; ///< Border color applied when the address mode is AddressMode::Border.
 
         TextureFilter minFilter = TextureFilter::Nearest; ///< Minifying filter.
         TextureFilter magFilter = TextureFilter::Nearest; ///< Magnifying filter.
@@ -768,47 +767,59 @@ namespace cubos::core::gl
         /// Abstract framebuffer, should not be used directly.
         class Framebuffer
         {
+        public:
+            virtual ~Framebuffer() = default;
+
         protected:
             Framebuffer() = default;
-            virtual ~Framebuffer() = default;
         };
 
         /// Abstract rasterizer state, should not be used directly.
         class RasterState
         {
+        public:
+            virtual ~RasterState() = default;
+
         protected:
             RasterState() = default;
-            virtual ~RasterState() = default;
         };
 
         /// Abstract depth stencil state, should not be used directly.
         class DepthStencilState
         {
+        public:
+            virtual ~DepthStencilState() = default;
+
         protected:
             DepthStencilState() = default;
-            virtual ~DepthStencilState() = default;
         };
 
         /// Abstract blend state, should not be used directly.
         class BlendState
         {
+        public:
+            virtual ~BlendState() = default;
+
         protected:
             BlendState() = default;
-            virtual ~BlendState() = default;
         };
 
         /// Abstract sampler, should not be used directly.
         class Sampler
         {
+        public:
+            virtual ~Sampler() = default;
+
         protected:
             Sampler() = default;
-            virtual ~Sampler() = default;
         };
 
         /// Abstract 1D texture, should not be used directly.
         class Texture1D
         {
         public:
+            virtual ~Texture1D() = default;
+
             /// Updates the texture with new data, which must have the same format used when the texture was created.
             /// @param x Destination X coordinate.
             /// @param width Width of the section which will be updated.
@@ -821,13 +832,14 @@ namespace cubos::core::gl
 
         protected:
             Texture1D() = default;
-            virtual ~Texture1D() = default;
         };
 
         /// Abstract 2D texture, should not be used directly.
         class Texture2D
         {
         public:
+            virtual ~Texture2D() = default;
+
             /// Updates the texture with new data, which must have the same format used when the texture was created.
             /// @param x Destination X coordinate.
             /// @param y Destination Y coordinate.
@@ -843,13 +855,14 @@ namespace cubos::core::gl
 
         protected:
             Texture2D() = default;
-            virtual ~Texture2D() = default;
         };
 
         /// Abstract 2D texture array, should not be used directly.
         class Texture2DArray
         {
         public:
+            virtual ~Texture2DArray() = default;
+
             /// Updates the texture with new data, which must have the same format used when the texture was created.
             /// @param x Destination X coordinate.
             /// @param y Destination Y coordinate.
@@ -866,13 +879,14 @@ namespace cubos::core::gl
 
         protected:
             Texture2DArray() = default;
-            virtual ~Texture2DArray() = default;
         };
 
         /// Abstract 3D texture, should not be used directly.
         class Texture3D
         {
         public:
+            virtual ~Texture3D() = default;
+
             /// Updates the texture with new data, which must have the same format used when the texture was created.
             /// @param x Destination X coordinate.
             /// @param y Destination Y coordinate.
@@ -890,13 +904,14 @@ namespace cubos::core::gl
 
         protected:
             Texture3D() = default;
-            virtual ~Texture3D() = default;
         };
 
         /// Abstract cube map, should not be used directly.
         class CubeMap
         {
         public:
+            virtual ~CubeMap() = default;
+
             /// Updates a cube map's face with new data, which must have the same format used when the cube map was
             /// created.
             /// @param x Destination X coordinate.
@@ -914,13 +929,14 @@ namespace cubos::core::gl
 
         protected:
             CubeMap() = default;
-            virtual ~CubeMap() = default;
         };
 
         /// Abstract cube map, should not be used directly.
         class CubeMapArray
         {
         public:
+            virtual ~CubeMapArray() = default;
+
             /// Updates a cube map's face with new data, which must have the same format used when the cube map was
             /// created.
             /// @param x Destination X coordinate.
@@ -939,13 +955,14 @@ namespace cubos::core::gl
 
         protected:
             CubeMapArray() = default;
-            virtual ~CubeMapArray() = default;
         };
 
         /// Abstract constant buffer, should not be used directly.
         class ConstantBuffer
         {
         public:
+            virtual ~ConstantBuffer() = default;
+
             /// Maps the constant buffer to a region in memory.
             /// @return Pointer to the memory region.
             virtual void* map() = 0;
@@ -955,13 +972,14 @@ namespace cubos::core::gl
 
         protected:
             ConstantBuffer() = default;
-            virtual ~ConstantBuffer() = default;
         };
 
         /// Abstract index buffer, should not be used directly.
         class IndexBuffer
         {
         public:
+            virtual ~IndexBuffer() = default;
+
             /// Maps the index buffer to a region in memory.
             /// @return Pointer to the memory region.
             virtual void* map() = 0;
@@ -971,13 +989,14 @@ namespace cubos::core::gl
 
         protected:
             IndexBuffer() = default;
-            virtual ~IndexBuffer() = default;
         };
 
         /// Abstract vertex buffer, should not be used directly.
         class VertexBuffer
         {
         public:
+            virtual ~VertexBuffer() = default;
+
             /// Maps the vertex buffer to a region in memory.
             /// @return Pointer to the memory region.
             virtual void* map() = 0;
@@ -987,34 +1006,38 @@ namespace cubos::core::gl
 
         protected:
             VertexBuffer() = default;
-            virtual ~VertexBuffer() = default;
         };
 
         /// Abstract vertex array, should not be used directly.
         class VertexArray
         {
+        public:
+            virtual ~VertexArray() = default;
+
         protected:
             VertexArray() = default;
-            virtual ~VertexArray() = default;
         };
 
         /// Abstract shader stage, should not be used directly.
         class ShaderStage
         {
         public:
+            virtual ~ShaderStage() = default;
+
             /// Gets the shader stage type.
             /// @see Stage.
             virtual Stage getType() = 0;
 
         protected:
             ShaderStage() = default;
-            virtual ~ShaderStage() = default;
         };
 
         /// Abstract shader pipeline, should not be used directly.
         class ShaderPipeline
         {
         public:
+            virtual ~ShaderPipeline() = default;
+
             /// Gets a binding point from its name.
             /// @return Returns the binding point, or nullptr if no binding point is found.
             /// @see ShaderBindingPoint.
@@ -1022,13 +1045,14 @@ namespace cubos::core::gl
 
         protected:
             ShaderPipeline() = default;
-            virtual ~ShaderPipeline() = default;
         };
 
         /// Abstract shader binding point, should not be used directly.
         class ShaderBindingPoint
         {
         public:
+            virtual ~ShaderBindingPoint() = default;
+
             /// Binds a sampler to the binding point.
             /// If this binding point doesn't support a sampler, an error is logged and nothing is done.
             virtual void bind(gl::Sampler sampler) = 0;
@@ -1112,7 +1136,6 @@ namespace cubos::core::gl
 
         protected:
             ShaderBindingPoint() = default;
-            virtual ~ShaderBindingPoint() = default;
         };
     } // namespace impl
 

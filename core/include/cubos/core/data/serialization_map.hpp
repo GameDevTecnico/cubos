@@ -2,6 +2,7 @@
 #define CUBOS_CORE_DATA_SERIALIZATION_MAP_HPP
 
 #include <functional>
+#include <utility>
 
 #include <cubos/core/log.hpp>
 
@@ -15,11 +16,11 @@ namespace cubos::core::data
     {
     public:
         ~SerializationMap() = default;
-        SerializationMap(SerializationMap&&) = default;
+        SerializationMap(SerializationMap&&) noexcept = default;
         SerializationMap(const SerializationMap&) = default;
 
         inline SerializationMap()
-            : usingFunctions(false)
+            : mUsingFunctions(false)
         {
         }
 
@@ -28,9 +29,9 @@ namespace cubos::core::data
         /// @param deserialize Function used to deserialize references.
         inline SerializationMap(std::function<bool(const R&, I&)> serialize,
                                 std::function<bool(R&, const I&)> deserialize)
-            : usingFunctions(true)
-            , serialize(serialize)
-            , deserialize(deserialize)
+            : mUsingFunctions(true)
+            , mSerialize(std::move(serialize))
+            , mDeserialize(std::move(deserialize))
         {
         }
 
@@ -39,9 +40,9 @@ namespace cubos::core::data
         /// @param id Serialized identifier to add.
         inline void add(const R& reference, const I& id)
         {
-            CUBOS_ASSERT(!this->usingFunctions);
-            this->refToId.insert({reference, id});
-            this->idToRef.insert({id, reference});
+            CUBOS_ASSERT(!mUsingFunctions);
+            mRefToId.insert({reference, id});
+            mIdToRef.insert({id, reference});
         }
 
         /// Checks if a reference is in the map.
@@ -49,15 +50,13 @@ namespace cubos::core::data
         /// @return True if the reference is in the map, false otherwise.
         inline bool hasRef(const R& reference) const
         {
-            if (this->usingFunctions)
+            if (mUsingFunctions)
             {
                 I i;
-                return this->serialize(reference, i);
+                return mSerialize(reference, i);
             }
-            else
-            {
-                return this->refToId.find(reference) != this->refToId.end();
-            }
+
+            return mRefToId.find(reference) != mRefToId.end();
         }
 
         /// Checks if a serialized identifier is in the map.
@@ -65,15 +64,13 @@ namespace cubos::core::data
         /// @return True if the serialized identifier is in the map, false otherwise.
         inline bool hasId(const I& id) const
         {
-            if (this->usingFunctions)
+            if (mUsingFunctions)
             {
                 R r;
-                return this->deserialize(r, id);
+                return mDeserialize(r, id);
             }
-            else
-            {
-                return this->idToRef.find(id) != this->idToRef.end();
-            }
+
+            return mIdToRef.find(id) != mIdToRef.end();
         }
 
         /// Gets the reference of a serialized identifier.
@@ -81,17 +78,15 @@ namespace cubos::core::data
         /// @returns Reference of the serialized identifier.
         inline R getRef(const I& id) const
         {
-            if (this->usingFunctions)
+            if (mUsingFunctions)
             {
                 R reference;
-                bool success = this->deserialize(reference, id);
+                bool success = mDeserialize(reference, id);
                 CUBOS_ASSERT(success);
                 return reference;
             }
-            else
-            {
-                return this->idToRef.at(id);
-            }
+
+            return mIdToRef.at(id);
         }
 
         /// Gets the serialized identifier of a reference.
@@ -99,40 +94,38 @@ namespace cubos::core::data
         /// @returns Serialized identifier of the reference.
         inline I getId(const R& reference) const
         {
-            if (this->usingFunctions)
+            if (mUsingFunctions)
             {
                 I id;
-                bool success = this->serialize(reference, id);
+                bool success = mSerialize(reference, id);
                 CUBOS_ASSERT(success);
                 return id;
             }
-            else
-            {
-                return this->refToId.at(reference);
-            }
+
+            return mRefToId.at(reference);
         }
 
         /// Clears the map.
         inline void clear()
         {
-            this->usingFunctions = false;
-            this->refToId.clear();
-            this->idToRef.clear();
+            mUsingFunctions = false;
+            mRefToId.clear();
+            mIdToRef.clear();
         }
 
         /// Gets the number of mapped references.
         /// @returns Number of mapped references.
         inline std::size_t size() const
         {
-            return this->refToId.size();
+            return mRefToId.size();
         }
 
     private:
-        bool usingFunctions;                           ///< True if the map is using functions instead of keeping a map.
-        std::function<bool(const R&, I&)> serialize;   ///< Function used to serialize references.
-        std::function<bool(R&, const I&)> deserialize; ///< Function used to deserialize references.
-        std::unordered_map<R, I> refToId;              ///< Map of references to serialized IDs.
-        std::unordered_map<I, R> idToRef;              ///< Map of serialized IDs to references.
+        bool mUsingFunctions;                         ///< True if the map is using functions instead of keeping a map.
+        std::function<bool(const R&, I&)> mSerialize; ///< Function used to serialize references.
+        std::function<bool(R&, const I&)> mDeserialize; ///< Function used to deserialize references.
+        std::unordered_map<R, I> mRefToId;              ///< Map of references to serialized IDs.
+        std::unordered_map<I, R> mIdToRef;              ///< Map of serialized IDs to references.
     };
 } // namespace cubos::core::data
 

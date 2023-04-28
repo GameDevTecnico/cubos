@@ -17,27 +17,27 @@ Assets::Assets()
     auto seedData = std::array<int, std::mt19937::state_size>{};
     std::generate(seedData.begin(), seedData.end(), std::ref(rd));
     std::seed_seq seq(seedData.begin(), seedData.end());
-    this->random = std::mt19937(seq);
+    mRandom = std::mt19937(seq);
 
     // Spawn the loaded thread.
-    this->loaderShouldExit = false;
-    this->loaderThread = std::thread([this]() { this->loader(); });
+    mLoaderShouldExit = false;
+    mLoaderThread = std::thread([this]() { this->loader(); });
 }
 
 Assets::~Assets()
 {
     // Signal the loader thread to exit.
     {
-        std::unique_lock loaderLock(this->loaderMutex);
-        this->loaderShouldExit = true;
-        this->loaderCond.notify_one();
+        std::unique_lock loaderLock(mLoaderMutex);
+        mLoaderShouldExit = true;
+        mLoaderCond.notify_one();
     }
 
     // Wait for the loader thread to exit.
-    this->loaderThread.join();
+    mLoaderThread.join();
 
     // Destroy all assets.
-    for (auto& entry : this->entries)
+    for (auto& entry : mEntries)
     {
         if (entry.second->status == Assets::Status::Loaded)
         {
@@ -48,24 +48,24 @@ Assets::~Assets()
 
 void Assets::registerBridge(const std::string& extension, std::shared_ptr<AssetBridge> bridge)
 {
-    std::unique_lock lock(this->mutex);
+    std::unique_lock lock(mMutex);
 
-    if (this->bridges.contains(extension))
+    if (mBridges.contains(extension))
     {
         CUBOS_ERROR("Can't register asset bridge: extension '{}' already registered", extension);
         return;
     }
 
-    this->bridges.emplace(extension, std::move(bridge));
+    mBridges.emplace(extension, std::move(bridge));
 
     CUBOS_TRACE("Registered asset bridge for extension '{}'", extension);
 }
 
 void Assets::cleanup()
 {
-    std::shared_lock lock(this->mutex);
+    std::shared_lock lock(mMutex);
 
-    for (const auto& entry : this->entries)
+    for (const auto& entry : mEntries)
     {
         std::unique_lock assetLock(entry.second->mutex);
 
@@ -140,7 +140,7 @@ void Assets::loadMeta(std::string_view path)
         if (id.is_nil())
         {
             CUBOS_WARN("Asset metadata at '{}' has an unspecified/invalid UUID, generating a random one", path);
-            id = uuids::uuid_random_generator(this->random.value())();
+            id = uuids::uuid_random_generator(mRandom.value())();
         }
 
         // Update the metadata with the patth and UUID.
@@ -181,19 +181,19 @@ AnyAsset Assets::load(AnyAsset handle) const
     // We need to lock this to prevent the asset from being queued twice by a concurrent thread.
     // We also check if this is being called from the loader thread, in which case we don't need
     // to queue the asset.
-    std::unique_lock lock(this->loaderMutex);
-    if (assetEntry->status == Assets::Status::Unloaded && std::this_thread::get_id() != this->loaderThread.get_id())
+    std::unique_lock lock(mLoaderMutex);
+    if (assetEntry->status == Assets::Status::Unloaded && std::this_thread::get_id() != mLoaderThread.get_id())
     {
         CUBOS_TRACE("Queuing asset {} for loading", core::data::Debug(handle));
         assetEntry->status = Assets::Status::Loading;
-        this->loaderQueue.push_back(Task{handle, bridge});
-        this->loaderCond.notify_one();
+        mLoaderQueue.push_back(Task{handle, bridge});
+        mLoaderCond.notify_one();
     }
     lock.unlock();
 
     // Return a strong handle to the asset.
     assetEntry->refCount += 1;
-    handle.refCount = &assetEntry->refCount;
+    handle.mRefCount = &assetEntry->refCount;
     return handle;
 }
 
@@ -245,11 +245,11 @@ bool Assets::save(const AnyAsset& handle) const
 
 Assets::Status Assets::status(const AnyAsset& handle) const
 {
-    std::shared_lock lock(this->mutex);
+    std::shared_lock lock(mMutex);
 
     // Do not use .entry() here because we don't want to log errors if the asset is unknown.
-    auto it = this->entries.find(handle.getId());
-    if (it == this->entries.end())
+    auto it = mEntries.find(handle.getId());
+    if (it == mEntries.end())
     {
         return Status::Unknown;
     }
@@ -268,7 +268,7 @@ bool Assets::update(AnyAsset& handle)
 
     if (assetEntry->version > handle.getVersion())
     {
-        handle.version = assetEntry->version;
+        handle.mVersion = assetEntry->version;
         return true;
     }
 
@@ -325,10 +325,7 @@ AssetMetaWrite Assets::writeMeta(const AnyAsset& handle)
 }
 
 Assets::Entry::Entry()
-    : status(Status::Unloaded)
-    , refCount(0)
-    , version(0)
-    , data(nullptr)
+    : refCount(0)
     , type(typeid(void)) // NOLINT(modernize-redundant-void-arg)
 {
 }
@@ -336,7 +333,7 @@ Assets::Entry::Entry()
 AnyAsset Assets::create(std::type_index type, void* data, void (*destructor)(void*))
 {
     // Generate a new UUID and store the asset.
-    auto id = uuids::uuid_random_generator(this->random.value())();
+    auto id = uuids::uuid_random_generator(mRandom.value())();
     return this->store(AnyAsset(id), type, data, destructor);
 }
 
@@ -373,8 +370,8 @@ AnyAsset Assets::store(AnyAsset handle, std::type_index type, void* data, void (
 
     // Return a strong handle to the asset.
     assetEntry->refCount.fetch_add(1);
-    handle.refCount = &assetEntry->refCount;
-    handle.version = assetEntry->version;
+    handle.mRefCount = &assetEntry->refCount;
+    handle.mVersion = assetEntry->version;
     return handle;
 }
 
@@ -388,7 +385,7 @@ void* Assets::access(const AnyAsset& handle, std::type_index type, Lock& lock, b
     CUBOS_ASSERT(assetEntry != nullptr, "Could not access asset");
 
     // If this is being called from the loader thread, we should load the asset synchronously.
-    if (std::this_thread::get_id() == this->loaderThread.get_id() && assetEntry->status != Status::Loaded)
+    if (std::this_thread::get_id() == mLoaderThread.get_id() && assetEntry->status != Status::Loaded)
     {
         CUBOS_DEBUG("Loading asset {} as a dependency", core::data::Debug(handle));
 
@@ -465,11 +462,11 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
     }
 
     // Lock the entries map for reading.
-    auto sharedLock = std::shared_lock(this->mutex);
+    auto sharedLock = std::shared_lock(mMutex);
 
     // Search for the entry in the map.
-    auto it = this->entries.find(handle.getId());
-    if (it == this->entries.end())
+    auto it = mEntries.find(handle.getId());
+    if (it == mEntries.end())
     {
         CUBOS_ERROR("No such asset {}", core::data::Debug(handle));
         return nullptr;
@@ -489,8 +486,8 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
 
     // If we're creating the asset, we need to lock the entries map for writing.
     // Otherwise, we can lock it for reading.
-    auto uniqueLock = std::unique_lock(this->mutex, std::defer_lock);
-    auto sharedLock = std::shared_lock(this->mutex, std::defer_lock);
+    auto uniqueLock = std::unique_lock(mMutex, std::defer_lock);
+    auto sharedLock = std::shared_lock(mMutex, std::defer_lock);
     if (create)
     {
         uniqueLock.lock();
@@ -501,8 +498,8 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
     }
 
     // Search for an existing entry for the asset.
-    auto it = this->entries.find(handle.getId());
-    if (it == this->entries.end())
+    auto it = mEntries.find(handle.getId());
+    if (it == mEntries.end())
     {
         // If we're creating the asset, create a new entry for it.
         // Otherwise, return nullptr.
@@ -510,7 +507,7 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
         {
             auto entry = std::make_shared<Entry>();
             entry->meta.set("id", uuids::to_string(handle.getId()));
-            it = this->entries.emplace(handle.getId(), std::move(entry)).first;
+            it = mEntries.emplace(handle.getId(), std::move(entry)).first;
             CUBOS_TRACE("Created new asset entry for {}", core::data::Debug(handle));
         }
         else
@@ -528,12 +525,12 @@ std::shared_ptr<AssetBridge> Assets::bridge(const AnyAsset& handle) const
     auto meta = this->readMeta(handle);
     if (auto path = meta->get("path"))
     {
-        std::shared_lock lock(this->mutex);
+        std::shared_lock lock(mMutex);
 
         // Get the bridge which has the best match for this asset.
         std::shared_ptr<AssetBridge> best = nullptr;
         std::size_t bestLen = 0;
-        for (const auto& bridge : this->bridges)
+        for (const auto& bridge : mBridges)
         {
             if (path->ends_with(bridge.first) && bridge.first.length() > bestLen)
             {
@@ -559,18 +556,18 @@ void Assets::loader()
     for (;;)
     {
         // Wait for a new asset to load.
-        std::unique_lock<std::mutex> loaderLock(this->loaderMutex);
-        this->loaderCond.wait(loaderLock, [this]() { return !this->loaderQueue.empty() || this->loaderShouldExit; });
+        std::unique_lock<std::mutex> loaderLock(mLoaderMutex);
+        mLoaderCond.wait(loaderLock, [this]() { return !mLoaderQueue.empty() || mLoaderShouldExit; });
 
         // If the loader thread should exit, exit.
-        if (this->loaderShouldExit)
+        if (mLoaderShouldExit)
         {
             return;
         }
 
         // Get the next asset to load.
-        auto task = this->loaderQueue.front();
-        this->loaderQueue.pop_front();
+        auto task = mLoaderQueue.front();
+        mLoaderQueue.pop_front();
         loaderLock.unlock(); // Unlock the mutex before loading the asset.
 
         if (!task.bridge->load(*this, task.handle))

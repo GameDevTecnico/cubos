@@ -15,7 +15,7 @@ void Dispatcher::SystemSettings::copyFrom(const SystemSettings* other)
 
 Dispatcher::~Dispatcher()
 {
-    for (System* system : systems)
+    for (System* system : mSystems)
     {
         delete system;
     }
@@ -24,19 +24,19 @@ Dispatcher::~Dispatcher()
 void Dispatcher::addTag(const std::string& tag)
 {
     ENSURE_TAG_SETTINGS(tag);
-    currTag = tag;
+    mCurrTag = tag;
 }
 
 void Dispatcher::tagInheritTag(const std::string& tag)
 {
     ENSURE_CURR_TAG();
     ENSURE_TAG_SETTINGS(tag);
-    if (std::find(tagSettings[currTag]->inherits.begin(), tagSettings[currTag]->inherits.end(), tag) !=
-        tagSettings[currTag]->inherits.end())
+    if (std::find(mTagSettings[mCurrTag]->inherits.begin(), mTagSettings[mCurrTag]->inherits.end(), tag) !=
+        mTagSettings[mCurrTag]->inherits.end())
     {
         CUBOS_INFO("Tag already inherits from '{}'", tag);
     }
-    tagSettings[currTag]->inherits.push_back(tag);
+    mTagSettings[mCurrTag]->inherits.push_back(tag);
 }
 
 void Dispatcher::tagSetAfterTag(const std::string& tag)
@@ -44,9 +44,9 @@ void Dispatcher::tagSetAfterTag(const std::string& tag)
     ENSURE_CURR_TAG();
     ENSURE_TAG_SETTINGS(tag);
     // Set curr to run after this tag
-    tagSettings[currTag]->after.tag.push_back(tag);
+    mTagSettings[mCurrTag]->after.tag.push_back(tag);
     // And that tag to run before this tag
-    tagSettings[tag]->before.tag.push_back(currTag);
+    mTagSettings[tag]->before.tag.push_back(mCurrTag);
 }
 
 void Dispatcher::tagSetBeforeTag(const std::string& tag)
@@ -54,45 +54,45 @@ void Dispatcher::tagSetBeforeTag(const std::string& tag)
     ENSURE_CURR_TAG();
     ENSURE_TAG_SETTINGS(tag);
     // Set curr to run before this tag
-    tagSettings[currTag]->before.tag.push_back(tag);
+    mTagSettings[mCurrTag]->before.tag.push_back(tag);
     // And that tag to run after this tag
-    tagSettings[tag]->after.tag.push_back(currTag);
+    mTagSettings[tag]->after.tag.push_back(mCurrTag);
 }
 
 void Dispatcher::systemAddTag(const std::string& tag)
 {
     ENSURE_CURR_SYSTEM();
     ENSURE_TAG_SETTINGS(tag);
-    currSystem->tags.insert(tag);
+    mCurrSystem->tags.insert(tag);
 }
 
 void Dispatcher::systemSetAfterTag(const std::string& tag)
 {
     ENSURE_CURR_SYSTEM();
-    ENSURE_SYSTEM_SETTINGS(currSystem);
+    ENSURE_SYSTEM_SETTINGS(mCurrSystem);
     addTag(tag);
     // Set curr to run after this tag
-    currSystem->settings->after.tag.push_back(tag);
+    mCurrSystem->settings->after.tag.push_back(tag);
     // And that tag to run before this system tag
-    tagSettings[tag]->before.system.push_back(currSystem);
+    mTagSettings[tag]->before.system.push_back(mCurrSystem);
 }
 
 void Dispatcher::systemSetBeforeTag(const std::string& tag)
 {
     ENSURE_CURR_SYSTEM();
-    ENSURE_SYSTEM_SETTINGS(currSystem);
+    ENSURE_SYSTEM_SETTINGS(mCurrSystem);
     addTag(tag);
     // Set curr to run before this tag
-    currSystem->settings->before.tag.push_back(tag);
+    mCurrSystem->settings->before.tag.push_back(tag);
     // And that tag to run after this system tag
-    tagSettings[tag]->after.system.push_back(currSystem);
+    mTagSettings[tag]->after.system.push_back(mCurrSystem);
 }
 
 void Dispatcher::handleTagInheritance(std::shared_ptr<SystemSettings>& settings)
 {
     for (auto& parentTag : settings->inherits)
     {
-        auto& parentSettings = tagSettings[parentTag];
+        auto& parentSettings = mTagSettings[parentTag];
         handleTagInheritance(parentSettings);
         settings->copyFrom(parentSettings.get());
     }
@@ -102,13 +102,13 @@ void Dispatcher::handleTagInheritance(std::shared_ptr<SystemSettings>& settings)
 void Dispatcher::compileChain()
 {
     // Implement tag inheritance by copying configs from parent tags
-    for (auto& [tag, settings] : tagSettings)
+    for (auto& [tag, settings] : mTagSettings)
     {
         handleTagInheritance(settings);
     }
 
     // Implement system tag settings with custom settings
-    for (System* system : pendingSystems)
+    for (System* system : mPendingSystems)
     {
         for (const auto& tag : system->tags)
         {
@@ -116,13 +116,13 @@ void Dispatcher::compileChain()
             {
                 system->settings = std::make_shared<SystemSettings>();
             }
-            system->settings->copyFrom(tagSettings[tag].get());
+            system->settings->copyFrom(mTagSettings[tag].get());
         }
     }
 
     // Build the system chain
     std::vector<DFSNode> nodes;
-    for (System* system : pendingSystems)
+    for (System* system : mPendingSystems)
     {
         nodes.push_back(DFSNode{DFSNode::WHITE, system});
     }
@@ -141,12 +141,12 @@ void Dispatcher::compileChain()
 
     // The algorithm expects nodes to be added to the head of a list, instead of the back. To save on
     // move operations, just reverse the final list for the same effect.
-    std::reverse(systems.begin(), systems.end());
+    std::reverse(mSystems.begin(), mSystems.end());
 
     CUBOS_INFO("Call chain completed successfully!");
-    pendingSystems.clear();
-    currSystem = nullptr;
-    tagSettings.clear();
+    mPendingSystems.clear();
+    mCurrSystem = nullptr;
+    mTagSettings.clear();
 }
 
 bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
@@ -195,7 +195,7 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
         }
         // All children nodes were visited; mark this node as complete
         node.m = DFSNode::BLACK;
-        systems.push_back(systemInfo);
+        mSystems.push_back(systemInfo);
         return false;
     }
     }
@@ -206,26 +206,26 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
 {
     // If the systems haven't been prepared yet, do so now.
     // We can't multi-thread this as the systems require exclusive access to the world to prepare.
-    if (!this->prepared)
+    if (!mPrepared)
     {
-        for (auto& system : systems)
+        for (auto& system : mSystems)
         {
             system->system->prepare(world);
         }
 
-        for (auto& condition : conditions)
+        for (auto& condition : mConditions)
         {
             condition->prepare(world);
         }
 
-        this->prepared = true;
+        mPrepared = true;
     }
 
     // Clear conditions bitmasks
-    runConditions.reset();
-    retConditions.reset();
+    mRunConditions.reset();
+    mRetConditions.reset();
 
-    for (auto& system : systems)
+    for (auto& system : mSystems)
     {
         // Query for conditions
         bool canRun = true;
@@ -236,16 +236,16 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
             if (conditionsMask.test(0))
             {
                 // We have a condition, check if it has run already
-                if (!runConditions.test(i))
+                if (!mRunConditions.test(i))
                 {
-                    runConditions.set(i);
-                    if (conditions[i]->call(world, cmds))
+                    mRunConditions.set(i);
+                    if (mConditions[i]->call(world, cmds))
                     {
-                        retConditions.set(i);
+                        mRetConditions.set(i);
                     }
                 }
                 // Check if the condition returned true
-                if (!retConditions.test(i))
+                if (!mRetConditions.test(i))
                 {
                     canRun = false;
                     break;

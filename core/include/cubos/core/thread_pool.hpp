@@ -28,15 +28,15 @@ namespace cubos::core
         void wait();
 
     private:
-        std::vector<std::thread> threads;        ///< Threads in the pool.
-        std::deque<std::function<void()>> tasks; ///< Queue of tasks to execute.
+        std::vector<std::thread> mThreads;        ///< Threads in the pool.
+        std::deque<std::function<void()>> mTasks; ///< Queue of tasks to execute.
 
-        std::mutex mutex;                  ///< Protects the tasks vector.
-        std::condition_variable new_task;  ///< Notifies threads when new tasks may be available.
-        std::condition_variable task_done; ///< Notifies threads when a task has finished executing.
+        std::mutex mMutex;                 ///< Protects the tasks vector.
+        std::condition_variable mNewTask;  ///< Notifies threads when new tasks may be available.
+        std::condition_variable mTaskDone; ///< Notifies threads when a task has finished executing.
 
-        std::atomic<std::size_t> numTasks; ///< Number of tasks currently being executed.
-        bool stop;                         ///< Set to true when the thread pool is being destroyed.
+        std::atomic<std::size_t> mNumTasks; ///< Number of tasks currently being executed.
+        bool mStop;                         ///< Set to true when the thread pool is being destroyed.
     };
 } // namespace cubos::core
 

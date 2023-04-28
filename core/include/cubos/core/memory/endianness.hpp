@@ -54,7 +54,9 @@ namespace cubos::core::memory
 
         src.value = value;
         for (std::size_t i = 0; i < sizeof(T); i++)
+        {
             dst.bytes[i] = src.bytes[sizeof(T) - i - 1];
+        }
         return dst.value;
     }
 

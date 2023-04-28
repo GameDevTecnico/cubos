@@ -58,12 +58,12 @@ namespace cubos::core::ecs
 
         // Implementation.
 
-        inline virtual data::Package pack(uint32_t index, data::Context& context) const override
+        inline data::Package pack(uint32_t index, data::Context& context) const override
         {
             return data::Package::from(*this->get(index), &context);
         }
 
-        inline virtual bool unpack(uint32_t index, const data::Package& package, data::Context& context) override
+        inline bool unpack(uint32_t index, const data::Package& package, data::Context& context) override
         {
             T value;
             if (package.into(value, &context))
@@ -75,7 +75,7 @@ namespace cubos::core::ecs
             return false;
         }
 
-        inline virtual std::type_index type() const override
+        inline std::type_index type() const override
         {
             return std::type_index(typeid(T));
         }
