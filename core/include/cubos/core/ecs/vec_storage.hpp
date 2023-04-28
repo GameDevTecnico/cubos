@@ -19,42 +19,42 @@ namespace cubos::core::ecs
         void erase(uint32_t index) override;
 
     private:
-        std::vector<T> data;
+        std::vector<T> mData;
     };
 
     template <typename T>
     T* VecStorage<T>::insert(uint32_t index, T value)
     {
-        if (data.size() <= index)
+        if (mData.size() <= index)
         {
-            data.resize(index);
-            data.push_back(value);
+            mData.resize(index);
+            mData.push_back(value);
         }
         else
         {
-            data[index] = value;
+            mData[index] = value;
         }
 
-        return &data[index];
+        return &mData[index];
     }
 
     template <typename T>
     T* VecStorage<T>::get(uint32_t index)
     {
-        return &data[index];
+        return &mData[index];
     }
 
     template <typename T>
     const T* VecStorage<T>::get(uint32_t index) const
     {
-        return &data[index];
+        return &mData[index];
     }
 
     template <typename T>
     void VecStorage<T>::erase(uint32_t index)
     {
-        data[index].~T();
-        new (&data[index]) T;
+        mData[index].~T();
+        new (&mData[index]) T;
     }
 } // namespace cubos::core::ecs
 

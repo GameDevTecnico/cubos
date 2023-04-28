@@ -19,32 +19,32 @@ namespace cubos::core::ecs
         void erase(uint32_t index) override;
 
     private:
-        std::unordered_map<uint32_t, T> data;
+        std::unordered_map<uint32_t, T> mData;
     };
 
     template <typename T>
     T* MapStorage<T>::insert(uint32_t index, T value)
     {
-        data[index] = value;
-        return &data[index];
+        mData[index] = value;
+        return &mData[index];
     }
 
     template <typename T>
     T* MapStorage<T>::get(uint32_t index)
     {
-        return &data.at(index);
+        return &mData.at(index);
     }
 
     template <typename T>
     const T* MapStorage<T>::get(uint32_t index) const
     {
-        return &data.at(index);
+        return &mData.at(index);
     }
 
     template <typename T>
     void MapStorage<T>::erase(uint32_t index)
     {
-        data.erase(index);
+        mData.erase(index);
     }
 
 } // namespace cubos::core::ecs

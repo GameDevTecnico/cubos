@@ -30,8 +30,8 @@ void cubos::core::data::deserialize<AssetMeta>(Deserializer& des, AssetMeta& obj
 
 std::optional<std::string> AssetMeta::get(std::string_view key) const
 {
-    auto it = this->m_params.find(std::string(key));
-    if (it != this->m_params.end())
+    auto it = mParams.find(std::string(key));
+    if (it != mParams.end())
     {
         return it->second;
     }
@@ -40,10 +40,10 @@ std::optional<std::string> AssetMeta::get(std::string_view key) const
 
 void AssetMeta::set(std::string_view key, std::string_view value)
 {
-    this->m_params[std::string(key)] = value;
+    mParams[std::string(key)] = value;
 }
 
 void AssetMeta::remove(std::string_view key)
 {
-    this->m_params.erase(std::string(key));
+    mParams.erase(std::string(key));
 }

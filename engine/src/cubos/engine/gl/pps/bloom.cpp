@@ -115,34 +115,34 @@ pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size)
 pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
                           float softThreshold, float intensity)
     : Pass(renderDevice)
-    , iterations(iterations)
-    , threshold(threshold)
-    , softThreshold(softThreshold)
-    , intensity(intensity)
-    , size(size)
+    , mIterations(iterations)
+    , mThreshold(threshold)
+    , mSoftThreshold(softThreshold)
+    , mIntensity(intensity)
+    , mSize(size)
 {
     generateTextures();
 
     // Create the shader pipelines.
     /// Extraction
-    auto vs = this->renderDevice.createShaderStage(Stage::Vertex, commonVs);
-    auto ps = this->renderDevice.createShaderStage(Stage::Pixel, extractionPs);
-    this->extPipeline = this->renderDevice.createShaderPipeline(vs, ps);
-    this->extInputTexBP = this->extPipeline->getBindingPoint("inputTex");
-    this->extThresholdFilterBP = this->extPipeline->getBindingPoint("thresholdFilter");
+    auto vs = mRenderDevice.createShaderStage(Stage::Vertex, commonVs);
+    auto ps = mRenderDevice.createShaderStage(Stage::Pixel, extractionPs);
+    mExtPipeline = mRenderDevice.createShaderPipeline(vs, ps);
+    mExtInputTexBp = mExtPipeline->getBindingPoint("inputTex");
+    mExtThresholdFilterBp = mExtPipeline->getBindingPoint("thresholdFilter");
 
     /// Dowscale
-    vs = this->renderDevice.createShaderStage(Stage::Vertex, commonVs);
-    ps = this->renderDevice.createShaderStage(Stage::Pixel, bloomPs);
-    this->bloomPipeline = this->renderDevice.createShaderPipeline(vs, ps);
-    this->bloomInputTexBP = this->bloomPipeline->getBindingPoint("inputTex");
-    this->bloomSrcTexBP = this->bloomPipeline->getBindingPoint("srcTex");
-    this->bloomScalingBP = this->bloomPipeline->getBindingPoint("scaling");
-    this->bloomCurrPassBP = this->bloomPipeline->getBindingPoint("currPass");
-    this->bloomIntensityBP = this->bloomPipeline->getBindingPoint("intensity");
+    vs = mRenderDevice.createShaderStage(Stage::Vertex, commonVs);
+    ps = mRenderDevice.createShaderStage(Stage::Pixel, bloomPs);
+    mBloomPipeline = mRenderDevice.createShaderPipeline(vs, ps);
+    mBloomInputTexBp = mBloomPipeline->getBindingPoint("inputTex");
+    mBloomSrcTexBp = mBloomPipeline->getBindingPoint("srcTex");
+    mBloomScalingBp = mBloomPipeline->getBindingPoint("scaling");
+    mBloomCurrPassBp = mBloomPipeline->getBindingPoint("currPass");
+    mBloomIntensityBp = mBloomPipeline->getBindingPoint("intensity");
 
     // Create the screen quad VA.
-    generateScreenQuad(this->renderDevice, this->bloomPipeline, this->screenQuadVA);
+    generateScreenQuad(mRenderDevice, mBloomPipeline, mScreenQuadVa);
 
     // Create the samplers.
     SamplerDesc samplerDesc;
@@ -150,7 +150,7 @@ pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned 
     samplerDesc.addressV = AddressMode::Clamp;
     samplerDesc.magFilter = TextureFilter::Linear;
     samplerDesc.minFilter = TextureFilter::Linear;
-    this->texSampler = this->renderDevice.createSampler(samplerDesc);
+    mTexSampler = mRenderDevice.createSampler(samplerDesc);
 
     // Create the blending settings
     BlendStateDesc blendDesc;
@@ -158,153 +158,153 @@ pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned 
     blendDesc.color.src = BlendFactor::One;
     blendDesc.color.dst = BlendFactor::One;
     blendDesc.alpha.src = BlendFactor::One;
-    this->blendState = this->renderDevice.createBlendState(blendDesc);
+    mBlendState = mRenderDevice.createBlendState(blendDesc);
 }
 
 float pps::BloomPass::getThreshold() const
 {
-    return threshold;
+    return mThreshold;
 }
 
 float pps::BloomPass::getSoftThreshold() const
 {
-    return softThreshold;
+    return mSoftThreshold;
 }
 
 float pps::BloomPass::getIntensity() const
 {
-    return intensity;
+    return mIntensity;
 }
 
 void pps::BloomPass::setThreshold(float threshold)
 {
-    this->threshold = threshold;
+    mThreshold = threshold;
 }
 
 void pps::BloomPass::setSoftThreshold(float softThreshold)
 {
-    this->softThreshold = softThreshold;
+    mSoftThreshold = softThreshold;
 }
 
 void pps::BloomPass::setIntensity(float intensity)
 {
-    this->intensity = intensity;
+    mIntensity = intensity;
 }
 
 void pps::BloomPass::generateTextures()
 {
     // Generate textures
     Texture2DDesc texDesc;
-    texDesc.width = size.x;
-    texDesc.height = size.y;
+    texDesc.width = mSize.x;
+    texDesc.height = mSize.y;
     texDesc.usage = Usage::Dynamic;
     texDesc.format = TextureFormat::RGBA32Float;
-    extTex = renderDevice.createTexture2D(texDesc);
+    mExtTex = mRenderDevice.createTexture2D(texDesc);
 
-    bloomTexBuffer.clear();
-    bloomTexBuffer.resize(iterations);
-    for (unsigned int i = 0; i < iterations; i++)
+    mBloomTexBuffer.clear();
+    mBloomTexBuffer.resize(mIterations);
+    for (unsigned int i = 0; i < mIterations; i++)
     {
         texDesc.width /= 2;
         texDesc.height /= 2;
         if (texDesc.width == 0 or texDesc.height == 0)
         {
-            iterations = i;
-            bloomTexBuffer.resize(iterations);
+            mIterations = i;
+            mBloomTexBuffer.resize(mIterations);
             break;
         }
-        bloomTexBuffer[i] = renderDevice.createTexture2D(texDesc);
+        mBloomTexBuffer[i] = mRenderDevice.createTexture2D(texDesc);
     }
 
     // Generate framebuffers
     FramebufferDesc fbDesc;
     fbDesc.targetCount = 1;
-    fbDesc.targets[0].setTexture2DTarget(extTex);
-    extFB = renderDevice.createFramebuffer(fbDesc);
+    fbDesc.targets[0].setTexture2DTarget(mExtTex);
+    mExtFb = mRenderDevice.createFramebuffer(fbDesc);
 
-    bloomFBs.clear();
-    bloomFBs.resize(iterations);
+    mBloomFBs.clear();
+    mBloomFBs.resize(mIterations);
     fbDesc.targetCount = 1;
-    for (unsigned int i = 0; i < iterations; i++)
+    for (unsigned int i = 0; i < mIterations; i++)
     {
-        fbDesc.targets[0].setTexture2DTarget(bloomTexBuffer[i]);
-        bloomFBs[i] = renderDevice.createFramebuffer(fbDesc);
+        fbDesc.targets[0].setTexture2DTarget(mBloomTexBuffer[i]);
+        mBloomFBs[i] = mRenderDevice.createFramebuffer(fbDesc);
     }
 }
 
 void pps::BloomPass::resize(glm::uvec2 size)
 {
-    this->size = size;
+    mSize = size;
     generateTextures();
 }
 
 void pps::BloomPass::execute(std::map<Input, Texture2D>& /*inputs*/, Texture2D prev, Framebuffer out) const
 {
     // Set the framebuffer and state.
-    this->renderDevice.setViewport(0, 0, static_cast<int>(this->size.x), static_cast<int>(this->size.y));
-    this->renderDevice.setRasterState(nullptr);
-    this->renderDevice.setBlendState(nullptr);
-    this->renderDevice.setDepthStencilState(nullptr);
-    this->renderDevice.setVertexArray(this->screenQuadVA);
+    mRenderDevice.setViewport(0, 0, static_cast<int>(mSize.x), static_cast<int>(mSize.y));
+    mRenderDevice.setRasterState(nullptr);
+    mRenderDevice.setBlendState(nullptr);
+    mRenderDevice.setDepthStencilState(nullptr);
+    mRenderDevice.setVertexArray(mScreenQuadVa);
 
     // Calculate all needed threshold values and submit packed as a vec4
     // to the shader for optimization.
-    float knee = threshold * softThreshold;
+    float knee = mThreshold * mSoftThreshold;
     glm::vec4 filter;
-    filter.x = threshold;
+    filter.x = mThreshold;
     filter.y = filter.x - knee;
     filter.z = 2 * knee;
     filter.w = 0.25F / (knee + 0.00001F);
 
     // Extraction pipeline, used to extract bright areas
-    this->renderDevice.setFramebuffer(extFB);
-    this->renderDevice.setShaderPipeline(this->extPipeline);
-    this->extInputTexBP->bind(prev);
-    this->extInputTexBP->bind(texSampler);
-    this->extThresholdFilterBP->setConstant(filter);
-    this->renderDevice.clearColor(0, 0, 0, 1);
-    this->renderDevice.drawTriangles(0, 6);
+    mRenderDevice.setFramebuffer(mExtFb);
+    mRenderDevice.setShaderPipeline(mExtPipeline);
+    mExtInputTexBp->bind(prev);
+    mExtInputTexBp->bind(mTexSampler);
+    mExtThresholdFilterBp->setConstant(filter);
+    mRenderDevice.clearColor(0, 0, 0, 1);
+    mRenderDevice.drawTriangles(0, 6);
 
     // Bloom pipeline, contains multiple operations combined for creating the final effect.
-    this->renderDevice.setShaderPipeline(this->bloomPipeline);
-    this->bloomInputTexBP->bind(extTex);
-    this->bloomInputTexBP->bind(texSampler);
+    mRenderDevice.setShaderPipeline(mBloomPipeline);
+    mBloomInputTexBp->bind(mExtTex);
+    mBloomInputTexBp->bind(mTexSampler);
 
     // Downscale textures
-    this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_DOWNSCALE_PASS);
+    mBloomCurrPassBp->setConstant(CUBOS_CORE_GL_PPS_BLOOM_DOWNSCALE_PASS);
     float scaling = 2.0F;
-    for (unsigned int i = 0; i < iterations; i++)
+    for (unsigned int i = 0; i < mIterations; i++)
     {
-        this->bloomScalingBP->setConstant(scaling);
-        this->renderDevice.setFramebuffer(bloomFBs[i]);
-        this->renderDevice.drawTriangles(0, 6);
-        this->bloomInputTexBP->bind(bloomTexBuffer[i]);
+        mBloomScalingBp->setConstant(scaling);
+        mRenderDevice.setFramebuffer(mBloomFBs[i]);
+        mRenderDevice.drawTriangles(0, 6);
+        mBloomInputTexBp->bind(mBloomTexBuffer[i]);
         scaling *= 2.0F;
     }
 
     // Upscale textures additively
     scaling /= 2.0F;
-    this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_UPSCALE_PASS);
-    this->renderDevice.setBlendState(this->blendState);
-    for (int i = static_cast<int>(iterations) - 2; i >= 0; i--)
+    mBloomCurrPassBp->setConstant(CUBOS_CORE_GL_PPS_BLOOM_UPSCALE_PASS);
+    mRenderDevice.setBlendState(mBlendState);
+    for (int i = static_cast<int>(mIterations) - 2; i >= 0; i--)
     {
         scaling /= 2.0F;
-        this->bloomScalingBP->setConstant(scaling);
-        this->renderDevice.setFramebuffer(bloomFBs[static_cast<std::size_t>(i)]);
-        this->renderDevice.drawTriangles(0, 6);
-        this->bloomInputTexBP->bind(bloomTexBuffer[static_cast<std::size_t>(i)]);
+        mBloomScalingBp->setConstant(scaling);
+        mRenderDevice.setFramebuffer(mBloomFBs[static_cast<std::size_t>(i)]);
+        mRenderDevice.drawTriangles(0, 6);
+        mBloomInputTexBp->bind(mBloomTexBuffer[static_cast<std::size_t>(i)]);
     }
 
     // Combine the final bloom effect with source texture
     scaling /= 2.0F;
-    float linIntensity = powf(this->intensity, 1.0F / 2.2F); // Converts from gamma to linear space
+    float linIntensity = powf(mIntensity, 1.0F / 2.2F); // Converts from gamma to linear space
 
-    this->bloomScalingBP->setConstant(scaling);
-    this->bloomCurrPassBP->setConstant(CUBOS_CORE_GL_PPS_BLOOM_COMBINE_PASS);
-    this->bloomIntensityBP->setConstant(linIntensity);
-    this->bloomSrcTexBP->bind(prev);
-    this->bloomSrcTexBP->bind(texSampler);
-    this->renderDevice.setBlendState(nullptr);
-    this->renderDevice.setFramebuffer(out);
-    this->renderDevice.drawTriangles(0, 6);
+    mBloomScalingBp->setConstant(scaling);
+    mBloomCurrPassBp->setConstant(CUBOS_CORE_GL_PPS_BLOOM_COMBINE_PASS);
+    mBloomIntensityBp->setConstant(linIntensity);
+    mBloomSrcTexBp->bind(prev);
+    mBloomSrcTexBp->bind(mTexSampler);
+    mRenderDevice.setBlendState(nullptr);
+    mRenderDevice.setFramebuffer(out);
+    mRenderDevice.drawTriangles(0, 6);
 }

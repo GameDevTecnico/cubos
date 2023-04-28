@@ -20,16 +20,16 @@ namespace cubos::engine::gl::pps
 
         // Interface methods implementation.
 
-        virtual void resize(glm::uvec2 size) override;
-        virtual void execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
-                             core::gl::Framebuffer out) const override;
+        void resize(glm::uvec2 size) override;
+        void execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
+                     core::gl::Framebuffer out) const override;
 
     private:
-        glm::uvec2 size;                         ///< The size of the window.
-        core::gl::ShaderPipeline pipeline;       ///< The shader pipeline to use.
-        core::gl::ShaderBindingPoint inputTexBP; ///< The binding point for the input texture.
-        core::gl::Sampler inputTexSampler;       ///< The sampler to use for the input texture.
-        core::gl::VertexArray screenQuadVA;      ///< The screen quad VA used to render the output.
+        glm::uvec2 mSize;                         ///< The size of the window.
+        core::gl::ShaderPipeline mPipeline;       ///< The shader pipeline to use.
+        core::gl::ShaderBindingPoint mInputTexBp; ///< The binding point for the input texture.
+        core::gl::Sampler mInputTexSampler;       ///< The sampler to use for the input texture.
+        core::gl::VertexArray mScreenQuadVa;      ///< The screen quad VA used to render the output.
     };
 } // namespace cubos::engine::gl::pps
 

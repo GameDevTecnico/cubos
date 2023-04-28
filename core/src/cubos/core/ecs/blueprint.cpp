@@ -5,7 +5,7 @@ using namespace cubos::core::ecs;
 
 Blueprint::~Blueprint()
 {
-    for (const auto& buffer : this->buffers)
+    for (const auto& buffer : mBuffers)
     {
         delete buffer.second;
     }
@@ -19,39 +19,39 @@ bool Blueprint::addFromDeserializer(Entity entity, const std::string& name, data
 
 Entity Blueprint::entity(const std::string& name) const
 {
-    if (!this->map.hasId(name))
+    if (!mMap.hasId(name))
     {
         return {};
     }
 
-    return this->map.getRef(name);
+    return mMap.getRef(name);
 }
 
 void Blueprint::merge(const std::string& prefix, const Blueprint& other)
 {
     // First, merge the maps.
     data::SerializationMap<Entity, std::string> dstMap;
-    for (uint32_t i = 0; i < static_cast<uint32_t>(other.map.size()); ++i)
+    for (uint32_t i = 0; i < static_cast<uint32_t>(other.mMap.size()); ++i)
     {
-        auto name = prefix + "." + other.map.getId(Entity(i, 0));
-        this->map.add(Entity(static_cast<uint32_t>(this->map.size()), 0), name);
+        auto name = prefix + "." + other.mMap.getId(Entity(i, 0));
+        mMap.add(Entity(static_cast<uint32_t>(mMap.size()), 0), name);
         dstMap.add(Entity(i, 0), name);
     }
 
     data::Context src;
     data::Context dst;
-    src.push(this->map);
+    src.push(mMap);
     dst.push(dstMap);
 
     /// Then, merge the buffers.
-    for (const auto& buffer : other.buffers)
+    for (const auto& buffer : other.mBuffers)
     {
-        auto* ptr = this->buffers.at(buffer.first);
+        auto* ptr = mBuffers.at(buffer.first);
         IBuffer* buf;
         if (ptr == nullptr)
         {
             buf = buffer.second->create();
-            this->buffers.set(buffer.first, buf);
+            mBuffers.set(buffer.first, buf);
         }
         else
         {
@@ -64,10 +64,10 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
 
 void Blueprint::clear()
 {
-    this->map.clear();
-    for (const auto& buffer : this->buffers)
+    mMap.clear();
+    for (const auto& buffer : mBuffers)
     {
         delete buffer.second;
     }
-    this->buffers.clear();
+    mBuffers.clear();
 }

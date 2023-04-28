@@ -90,11 +90,9 @@ namespace cubos::core::ecs
                     {
                         return false;
                     }
-                    else
-                    {
-                        blueprint.add(id, comp);
-                        return true;
-                    }
+
+                    blueprint.add(id, comp);
+                    return true;
                 },
             .storageCreator =
                 []() {

@@ -67,46 +67,46 @@ bool Entity::isNull() const
 }
 
 EntityManager::Iterator::Iterator(const EntityManager& e, const Entity::Mask m)
-    : manager(e)
-    , mask(m)
+    : mManager(e)
+    , mMask(m)
 {
     if (!m.test(0))
     {
         abort(); // You can't iterate over invalid entities.
     }
 
-    this->archetypeIt = this->manager.archetypes.begin();
-    while (this->archetypeIt != this->manager.archetypes.end() &&
-           ((this->archetypeIt->first & this->mask) != this->mask || this->archetypeIt->second.empty()))
+    mArchetypeIt = mManager.mArchetypes.begin();
+    while (mArchetypeIt != mManager.mArchetypes.end() &&
+           ((mArchetypeIt->first & mMask) != mMask || mArchetypeIt->second.empty()))
     {
-        ++this->archetypeIt;
+        ++mArchetypeIt;
     }
 
-    if (this->archetypeIt != this->manager.archetypes.end())
+    if (mArchetypeIt != mManager.mArchetypes.end())
     {
-        this->entityIt = this->archetypeIt->second.begin();
+        mEntityIt = mArchetypeIt->second.begin();
     }
 }
 
 EntityManager::Iterator::Iterator(const EntityManager& e)
-    : manager(e)
+    : mManager(e)
 {
-    this->archetypeIt = this->manager.archetypes.end();
+    mArchetypeIt = mManager.mArchetypes.end();
 }
 
 Entity EntityManager::Iterator::operator*() const
 {
-    return {*this->entityIt, this->manager.entities[*this->entityIt].generation};
+    return {*mEntityIt, mManager.mEntities[*mEntityIt].generation};
 }
 
 bool EntityManager::Iterator::operator==(const Iterator& other) const
 {
-    if (other.archetypeIt == this->manager.archetypes.end())
+    if (other.mArchetypeIt == mManager.mArchetypes.end())
     {
-        return this->archetypeIt == this->manager.archetypes.end();
+        return mArchetypeIt == mManager.mArchetypes.end();
     }
 
-    return this->archetypeIt == other.archetypeIt && this->entityIt == other.entityIt;
+    return mArchetypeIt == other.mArchetypeIt && mEntityIt == other.mEntityIt;
 }
 
 bool EntityManager::Iterator::operator!=(const Iterator& other) const
@@ -116,25 +116,25 @@ bool EntityManager::Iterator::operator!=(const Iterator& other) const
 
 EntityManager::Iterator& EntityManager::Iterator::operator++()
 {
-    if (this->archetypeIt != this->manager.archetypes.end())
+    if (mArchetypeIt != mManager.mArchetypes.end())
     {
-        if (this->entityIt != this->archetypeIt->second.end())
+        if (mEntityIt != mArchetypeIt->second.end())
         {
-            ++this->entityIt;
+            ++mEntityIt;
         }
 
-        if (this->entityIt == this->archetypeIt->second.end())
+        if (mEntityIt == mArchetypeIt->second.end())
         {
             // Move to the next archetype.
             do
             {
-                ++this->archetypeIt;
-            } while (this->archetypeIt != this->manager.archetypes.end() &&
-                     ((this->archetypeIt->first & this->mask) != this->mask || this->archetypeIt->second.empty()));
+                ++mArchetypeIt;
+            } while (mArchetypeIt != mManager.mArchetypes.end() &&
+                     ((mArchetypeIt->first & mMask) != mMask || mArchetypeIt->second.empty()));
 
-            if (this->archetypeIt != this->manager.archetypes.end())
+            if (mArchetypeIt != mManager.mArchetypes.end())
             {
-                this->entityIt = this->archetypeIt->second.begin();
+                mEntityIt = mArchetypeIt->second.begin();
             }
         }
     }
@@ -144,70 +144,70 @@ EntityManager::Iterator& EntityManager::Iterator::operator++()
 
 EntityManager::EntityManager(std::size_t initialCapacity)
 {
-    this->entities.reserve(initialCapacity);
+    mEntities.reserve(initialCapacity);
     for (std::size_t i = 0; i < initialCapacity; ++i)
     {
-        this->entities.push_back(EntityData{0, 1});
-        this->availableEntities.push(static_cast<uint32_t>(i));
+        mEntities.push_back(EntityData{0, 1});
+        mAvailableEntities.push(static_cast<uint32_t>(i));
     }
 }
 
 Entity EntityManager::create(Entity::Mask mask)
 {
-    if (this->availableEntities.empty())
+    if (mAvailableEntities.empty())
     {
         // Expand the entity pool.
-        std::size_t oldSize = this->entities.size();
-        this->entities.reserve(oldSize * 2);
+        std::size_t oldSize = mEntities.size();
+        mEntities.reserve(oldSize * 2);
         for (std::size_t i = oldSize; i < oldSize * 2; ++i)
         {
-            this->entities.push_back(EntityData{0, 0});
-            this->availableEntities.push(static_cast<uint32_t>(i));
+            mEntities.push_back(EntityData{0, 0});
+            mAvailableEntities.push(static_cast<uint32_t>(i));
         }
     }
 
-    uint32_t index = this->availableEntities.front();
-    this->availableEntities.pop();
-    this->entities[index].mask = mask;
+    uint32_t index = mAvailableEntities.front();
+    mAvailableEntities.pop();
+    mEntities[index].mask = mask;
     if (mask.any() && mask.test(0))
     {
-        this->archetypes[mask].insert(index);
+        mArchetypes[mask].insert(index);
     }
 
-    return {index, this->entities[index].generation};
+    return {index, mEntities[index].generation};
 }
 
 void EntityManager::destroy(Entity entity)
 {
     this->setMask(entity, 0);
-    this->entities[entity.index].generation += 1;
-    this->availableEntities.push(entity.index);
+    mEntities[entity.index].generation += 1;
+    mAvailableEntities.push(entity.index);
 }
 
 void EntityManager::setMask(Entity entity, Entity::Mask mask)
 {
-    if (this->entities[entity.index].mask != mask)
+    if (mEntities[entity.index].mask != mask)
     {
-        if (this->entities[entity.index].mask.any() && this->entities[entity.index].mask.test(0))
+        if (mEntities[entity.index].mask.any() && mEntities[entity.index].mask.test(0))
         {
-            this->archetypes[this->entities[entity.index].mask].erase(entity.index);
+            mArchetypes[mEntities[entity.index].mask].erase(entity.index);
         }
-        this->entities[entity.index].mask = mask;
+        mEntities[entity.index].mask = mask;
         if (mask.any() && mask.test(0))
         {
-            this->archetypes[mask].insert(entity.index);
+            mArchetypes[mask].insert(entity.index);
         }
     }
 }
 
 const Entity::Mask& EntityManager::getMask(Entity entity) const
 {
-    return this->entities[entity.index].mask;
+    return mEntities[entity.index].mask;
 }
 
 bool EntityManager::isValid(Entity entity) const
 {
-    return entity.index < this->entities.size() && this->entities[entity.index].generation == entity.generation;
+    return entity.index < mEntities.size() && mEntities[entity.index].generation == entity.generation;
 }
 
 EntityManager::Iterator EntityManager::begin() const

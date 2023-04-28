@@ -12,18 +12,18 @@ namespace cubos::core::al
     public:
         /// @param specifier Specifies the device to use (empty for default).
         OALAudioDevice(const std::string& specifier = "");
-        virtual ~OALAudioDevice() override;
+        ~OALAudioDevice() override;
 
         /// Enumerates the available devices.
         /// @param devices The vector to fill with the available devices.
         static void enumerateDevices(std::vector<std::string>& devices);
         static std::string getDefaultDevice();
 
-        virtual Buffer createBuffer() override;
-        virtual Source createSource() override;
-        virtual void setListenerPosition(const glm::vec3& position) override;
-        virtual void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up) override;
-        virtual void setListenerVelocity(const glm::vec3& velocity) override;
+        Buffer createBuffer() override;
+        Source createSource() override;
+        void setListenerPosition(const glm::vec3& position) override;
+        void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up) override;
+        void setListenerVelocity(const glm::vec3& velocity) override;
     };
 } // namespace cubos::core::al
 

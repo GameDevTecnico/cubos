@@ -5,16 +5,16 @@ using namespace cubos::core;
 #ifdef WITH_GLFW
 io::Cursor::Cursor(GLFWcursor* handle)
 {
-    this->glfwHandle = handle;
+    mGlfwHandle = handle;
 }
 #endif
 
 io::Cursor::~Cursor()
 {
 #ifdef WITH_GLFW
-    if (this->glfwHandle != nullptr)
+    if (mGlfwHandle != nullptr)
     {
-        glfwDestroyCursor(this->glfwHandle);
+        glfwDestroyCursor(mGlfwHandle);
     }
 #endif
 }

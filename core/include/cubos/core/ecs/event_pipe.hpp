@@ -72,13 +72,13 @@ namespace cubos::core::ecs
         };
 
         /// List of events that are in the pipe.
-        std::deque<Event> events;
+        std::deque<Event> mEvents;
 
         /// Keeps track of how many readers the event pipe currently has.
-        std::size_t readerCount;
+        std::size_t mReaderCount;
 
         /// Keeps track of how many events were deleted.
-        std::size_t deletedEvents{0};
+        std::size_t mDeletedEvents{0};
     };
 
     // EventPipe implementation.
@@ -86,21 +86,21 @@ namespace cubos::core::ecs
     template <typename T>
     void EventPipe<T>::push(T event, unsigned int mask)
     {
-        this->events.push_back(Event(event, mask));
+        mEvents.push_back(Event(event, mask));
     }
 
     template <typename T>
     unsigned int EventPipe<T>::getEventMask(std::size_t index) const
     {
-        index = index - deletedEvents;
-        return this->events.at(index).mask;
+        index = index - mDeletedEvents;
+        return mEvents.at(index).mask;
     }
 
     template <typename T>
     std::pair<const T&, unsigned int> EventPipe<T>::get(std::size_t index) const
     {
-        index = index - deletedEvents;
-        const Event& ev = this->events.at(index);
+        index = index - mDeletedEvents;
+        const Event& ev = mEvents.at(index);
         ev.readCount++;
         return std::pair<const T&, unsigned int>(ev.event, ev.mask);
     }
@@ -108,36 +108,38 @@ namespace cubos::core::ecs
     template <typename T>
     void EventPipe<T>::clear()
     {
-        while (!this->events.empty() && this->events.front().readCount == this->readerCount)
+        while (!mEvents.empty() && mEvents.front().readCount == mReaderCount)
         {
-            this->events.pop_front();
-            this->deletedEvents++;
+            mEvents.pop_front();
+            mDeletedEvents++;
         }
     }
 
     template <typename T>
     std::size_t EventPipe<T>::sentEvents() const
     {
-        return this->events.size() + deletedEvents;
+        return mEvents.size() + mDeletedEvents;
     }
 
     template <typename T>
     std::size_t EventPipe<T>::size() const
     {
-        return this->events.size();
+        return mEvents.size();
     }
 
     template <typename T>
     void EventPipe<T>::addReader()
     {
-        this->readerCount++;
+        mReaderCount++;
     }
 
     template <typename T>
     void EventPipe<T>::removeReader()
     {
-        if (this->readerCount > 0)
-            this->readerCount--;
+        if (mReaderCount > 0)
+        {
+            mReaderCount--;
+        }
     }
 
 } // namespace cubos::core::ecs

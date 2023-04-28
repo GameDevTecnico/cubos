@@ -28,19 +28,18 @@ namespace cubos::engine::gl::deferred
         /// @param size The size of the window.
         /// @param settings The settings to use.
         Renderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings);
-        virtual ~Renderer() override = default;
+        ~Renderer() override = default;
 
         // Implement interface methods.
 
-        virtual RendererGrid upload(const core::gl::Grid& grid) override;
-        virtual void setPalette(const core::gl::Palette& palette) override;
+        RendererGrid upload(const core::gl::Grid& grid) override;
+        void setPalette(const core::gl::Palette& palette) override;
 
     protected:
         // Implement interface methods.
 
-        virtual void onResize(glm::uvec2 size) override;
-        virtual void onRender(const core::gl::Camera& camera, const Frame& frame,
-                              core::gl::Framebuffer target) override;
+        void onResize(glm::uvec2 size) override;
+        void onRender(const core::gl::Camera& camera, const Frame& frame, core::gl::Framebuffer target) override;
 
     private:
         void createSSAOTextures();
@@ -48,61 +47,61 @@ namespace cubos::engine::gl::deferred
 
         // GBuffer.
 
-        glm::uvec2 size;
-        core::gl::Framebuffer gBuffer;
-        core::gl::Texture2D positionTex;
-        core::gl::Texture2D normalTex;
-        core::gl::Texture2D materialTex;
-        core::gl::Texture2D depthTex;
+        glm::uvec2 mSize;
+        core::gl::Framebuffer mGBuffer;
+        core::gl::Texture2D mPositionTex;
+        core::gl::Texture2D mNormalTex;
+        core::gl::Texture2D mAterialTex;
+        core::gl::Texture2D mDepthTex;
 
         //  Geometry pass pipeline.
 
-        core::gl::ShaderPipeline geometryPipeline;
-        core::gl::ShaderBindingPoint mvpBP;
-        core::gl::ConstantBuffer mvpBuffer;
-        core::gl::RasterState geometryRasterState;
-        core::gl::BlendState geometryBlendState;
-        core::gl::DepthStencilState geometryDepthStencilState;
+        core::gl::ShaderPipeline mGeometryPipeline;
+        core::gl::ShaderBindingPoint mVpBp;
+        core::gl::ConstantBuffer mVpBuffer;
+        core::gl::RasterState mGeometryRasterState;
+        core::gl::BlendState mGeometryBlendState;
+        core::gl::DepthStencilState mGeometryDepthStencilState;
 
         // Lighting pass pipeline.
 
-        core::gl::ShaderPipeline lightingPipeline;
-        core::gl::ShaderBindingPoint paletteBP;
-        core::gl::ShaderBindingPoint positionBP;
-        core::gl::ShaderBindingPoint normalBP;
-        core::gl::ShaderBindingPoint materialBP;
-        core::gl::ShaderBindingPoint lightsBP;
-        core::gl::ShaderBindingPoint ssaoEnabledBP;
-        core::gl::ShaderBindingPoint ssaoTexBP;
-        core::gl::Sampler sampler;
-        core::gl::Texture2D paletteTex;
-        core::gl::ConstantBuffer lightsBuffer;
+        core::gl::ShaderPipeline mLightingPipeline;
+        core::gl::ShaderBindingPoint mPaletteBp;
+        core::gl::ShaderBindingPoint mPositionBp;
+        core::gl::ShaderBindingPoint mNormalBp;
+        core::gl::ShaderBindingPoint mAterialBp;
+        core::gl::ShaderBindingPoint mLightsBp;
+        core::gl::ShaderBindingPoint mSsaoEnabledBp;
+        core::gl::ShaderBindingPoint mSsaoTexBp;
+        core::gl::Sampler mSampler;
+        core::gl::Texture2D mPaletteTex;
+        core::gl::ConstantBuffer mLightsBuffer;
 
         // Screen quad used for the lighting pass.
 
-        core::gl::VertexArray screenQuadVA;
+        core::gl::VertexArray mScreenQuadVa;
 
         // SSAO (Screen-Scrape Ambient Occlusion)
 
-        bool ssaoEnabled = false;
-        std::vector<glm::vec3> ssaoKernel;
+        bool mSsaoEnabled = false;
+        std::vector<glm::vec3> mSsaoKernel;
 
-        core::gl::Framebuffer ssaoFB;
-        core::gl::Texture2D ssaoTex;
-        core::gl::Texture2D ssaoNoiseTex;
-        core::gl::Sampler ssaoNoiseSampler;
+        core::gl::Framebuffer mSsaoFb;
+        core::gl::Texture2D mSsaoTex;
+        core::gl::Texture2D mSsaoNoiseTex;
+        core::gl::Sampler mSsaoNoiseSampler;
 
-        core::gl::ShaderPipeline ssaoPipeline;
-        core::gl::ShaderBindingPoint ssaoPositionBP;
-        core::gl::ShaderBindingPoint ssaoNormalBP;
-        core::gl::ShaderBindingPoint ssaoNoiseBP;
-        core::gl::ShaderBindingPoint ssaoSamplesBP;
-        core::gl::ShaderBindingPoint ssaoViewBP;
-        core::gl::ShaderBindingPoint ssaoProjectionBP;
-        core::gl::ShaderBindingPoint ssaoScreenSizeBP;
+        core::gl::ShaderPipeline mSsaoPipeline;
+        core::gl::ShaderBindingPoint mSsaoPositionBp;
+        core::gl::ShaderBindingPoint mSsaoNormalBp;
+        core::gl::ShaderBindingPoint mSsaoNoiseBp;
+        core::gl::ShaderBindingPoint mSsaoSamplesBp;
+        core::gl::ShaderBindingPoint mSsaoViewBp;
+        core::gl::ShaderBindingPoint mSsaoProjectionBp;
+        core::gl::ShaderBindingPoint mSsaoScreenSizeBp;
 
-        core::gl::ShaderPipeline ssaoBlurPipeline;
-        core::gl::ShaderBindingPoint ssaoBlurTexBP;
+        core::gl::ShaderPipeline mSsaoBlurPipeline;
+        core::gl::ShaderBindingPoint mSsaoBlurTexBp;
     };
 } // namespace cubos::engine::gl::deferred
 

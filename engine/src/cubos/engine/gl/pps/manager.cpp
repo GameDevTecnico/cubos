@@ -7,16 +7,16 @@ using namespace cubos::core::gl;
 using namespace cubos::engine::gl;
 
 pps::Manager::Manager(RenderDevice& renderDevice, glm::uvec2 size)
-    : renderDevice(renderDevice)
+    : mRenderDevice(renderDevice)
 {
-    this->nextId = 0;
-    this->size = {0, 0};
+    mNextId = 0;
+    mSize = {0, 0};
     this->resize(size);
 }
 
 pps::Manager::~Manager()
 {
-    for (auto& pass : this->passes)
+    for (auto& pass : mPasses)
     {
         delete pass.second;
     }
@@ -25,65 +25,65 @@ pps::Manager::~Manager()
 void pps::Manager::resize(glm::uvec2 size)
 {
     // Only resize if the size changed.
-    if (this->size == size)
+    if (mSize == size)
     {
         return;
     }
-    this->size = size;
-    for (auto& pass : this->passes)
+    mSize = size;
+    for (auto& pass : mPasses)
     {
         pass.second->resize(size);
     }
 
     // Create the intermediate texture.
     Texture2DDesc desc;
-    desc.width = this->size.x;
-    desc.height = this->size.y;
+    desc.width = mSize.x;
+    desc.height = mSize.y;
     desc.format = TextureFormat::RGBA32Float;
     desc.usage = Usage::Dynamic;
-    this->intermediateTex[0] = this->renderDevice.createTexture2D(desc);
-    this->intermediateTex[1] = this->renderDevice.createTexture2D(desc);
+    mIntermediateTex[0] = mRenderDevice.createTexture2D(desc);
+    mIntermediateTex[1] = mRenderDevice.createTexture2D(desc);
 
     // Create the intermediate framebuffer.
     FramebufferDesc fbDesc;
     fbDesc.targetCount = 1;
-    fbDesc.targets[0].setTexture2DTarget(this->intermediateTex[0]);
-    this->intermediateFb[0] = this->renderDevice.createFramebuffer(fbDesc);
-    fbDesc.targets[0].setTexture2DTarget(this->intermediateTex[1]);
-    this->intermediateFb[1] = this->renderDevice.createFramebuffer(fbDesc);
+    fbDesc.targets[0].setTexture2DTarget(mIntermediateTex[0]);
+    mIntermediateFb[0] = mRenderDevice.createFramebuffer(fbDesc);
+    fbDesc.targets[0].setTexture2DTarget(mIntermediateTex[1]);
+    mIntermediateFb[1] = mRenderDevice.createFramebuffer(fbDesc);
 }
 
 void pps::Manager::provideInput(Input input, Texture2D texture)
 {
-    this->inputs[input] = std::move(texture);
+    mInputs[input] = std::move(texture);
 }
 
 void pps::Manager::removePass(std::size_t id)
 {
-    delete this->passes[id];
-    this->passes.erase(id);
+    delete mPasses[id];
+    mPasses.erase(id);
 }
 
 void pps::Manager::execute(const Framebuffer& out)
 {
-    auto prev = this->inputs.at(Input::Lighting);
+    auto prev = mInputs.at(Input::Lighting);
     std::size_t nextI = 0;
 
-    for (auto it = this->passes.begin(); it != this->passes.end(); ++it)
+    for (auto it = mPasses.begin(); it != mPasses.end(); ++it)
     {
         auto nextIt = it;
         ++nextIt;
 
-        if (nextIt == this->passes.end())
+        if (nextIt == mPasses.end())
         {
             // If the pass is the last one, render to the output framebuffer.
-            it->second->execute(this->inputs, prev, out);
+            it->second->execute(mInputs, prev, out);
         }
         else
         {
             // Otherwise, render to the intermediate framebuffer.
-            it->second->execute(this->inputs, prev, this->intermediateFb[nextI]);
-            prev = this->intermediateTex[nextI];
+            it->second->execute(mInputs, prev, mIntermediateFb[nextI]);
+            prev = mIntermediateTex[nextI];
             nextI = (nextI + 1) % 2;
         }
     }
@@ -91,5 +91,5 @@ void pps::Manager::execute(const Framebuffer& out)
 
 std::size_t pps::Manager::passCount() const
 {
-    return this->passes.size();
+    return mPasses.size();
 }
