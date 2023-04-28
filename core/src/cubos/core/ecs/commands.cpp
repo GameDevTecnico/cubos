@@ -4,53 +4,53 @@
 using namespace cubos::core::ecs;
 
 EntityBuilder::EntityBuilder(Entity entity, CommandBuffer& commands)
-    : eEntity(entity)
-    , commands(commands)
+    : mEntity(entity)
+    , mCommands(commands)
 {
     // Do nothing.
 }
 
 Entity EntityBuilder::entity() const
 {
-    return this->eEntity;
+    return mEntity;
 }
 
 BlueprintBuilder::BlueprintBuilder(data::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands)
-    : map(std::move(map))
-    , commands(commands)
+    : mMap(std::move(map))
+    , mCommands(commands)
 {
     // Do nothing.
 }
 
 Entity BlueprintBuilder::entity(const std::string& name) const
 {
-    if (!this->map.hasId(name))
+    if (!mMap.hasId(name))
     {
         CUBOS_CRITICAL("No entity with name '{}'", name);
         abort();
     }
 
-    return this->map.getRef(name);
+    return mMap.getRef(name);
 }
 
 Commands::Commands(CommandBuffer& buffer)
-    : buffer(buffer)
+    : mBuffer(buffer)
 {
     // Do nothing.
 }
 
 void Commands::destroy(Entity entity)
 {
-    this->buffer.destroy(entity);
+    mBuffer.destroy(entity);
 }
 
 BlueprintBuilder Commands::spawn(const Blueprint& blueprint)
 {
-    return this->buffer.spawn(blueprint);
+    return mBuffer.spawn(blueprint);
 }
 
 CommandBuffer::CommandBuffer(World& world)
-    : world(world)
+    : mWorld(world)
 {
     // Do nothing.
 }
@@ -62,22 +62,22 @@ CommandBuffer::~CommandBuffer()
 
 void CommandBuffer::destroy(Entity entity)
 {
-    std::lock_guard<std::mutex> lock(this->mutex);
+    std::lock_guard<std::mutex> lock(mMutex);
 
-    this->destroyed.insert(entity);
+    mDestroyed.insert(entity);
 }
 
 BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
 {
     data::SerializationMap<Entity, std::string> map;
-    for (uint32_t i = 0; i < static_cast<uint32_t>(blueprint.map.size()); ++i)
+    for (uint32_t i = 0; i < static_cast<uint32_t>(blueprint.mMap.size()); ++i)
     {
-        map.add(this->create().entity(), blueprint.map.getId(Entity(i, 0)));
+        map.add(this->create().entity(), blueprint.mMap.getId(Entity(i, 0)));
     }
 
     data::Context context;
     context.push(map);
-    for (const auto& buf : blueprint.buffers)
+    for (const auto& buf : blueprint.mBuffers)
     {
         buf.second->addAll(*this, context);
     }
@@ -87,64 +87,64 @@ BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
 
 void CommandBuffer::commit()
 {
-    std::lock_guard<std::mutex> lock(this->mutex);
+    std::lock_guard<std::mutex> lock(mMutex);
 
     // 1. Components are removed.
-    for (auto& [entity, removed] : this->removed)
+    for (auto& [entity, removed] : mRemoved)
     {
         for (std::size_t componentId = 1; componentId <= CUBOS_CORE_ECS_MAX_COMPONENTS; ++componentId)
         {
             if (removed.test(componentId))
             {
-                this->world.componentManager.remove(entity.index, componentId);
+                mWorld.mComponentManager.remove(entity.index, componentId);
             }
         }
     }
 
     // 2. Entities are destroyed.
-    for (auto entity : this->destroyed)
+    for (auto entity : mDestroyed)
     {
-        this->world.componentManager.removeAll(entity.index);
-        this->world.entityManager.destroy(entity);
+        mWorld.mComponentManager.removeAll(entity.index);
+        mWorld.mEntityManager.destroy(entity);
     }
 
     // 3. Components are added.
-    for (auto& [entity, added] : this->added)
+    for (auto& [entity, added] : mAdded)
     {
-        for (auto& buf : this->buffers)
+        for (auto& buf : mBuffers)
         {
-            buf.second->move(entity, this->world.componentManager);
+            buf.second->move(entity, mWorld.mComponentManager);
         }
     }
 
     // 4. Entities masks are set.
-    for (const auto& entity : this->changed)
+    for (const auto& entity : mChanged)
     {
         // Get the old mask.
-        auto mask = this->world.entityManager.getMask(entity);
+        auto mask = mWorld.mEntityManager.getMask(entity);
 
         // Remove the components.
-        auto it = this->removed.find(entity);
-        if (it != this->removed.end())
+        auto it = mRemoved.find(entity);
+        if (it != mRemoved.end())
         {
             mask &= ~it->second;
         }
 
         // Add the new components.
-        it = this->added.find(entity);
-        if (it != this->added.end())
+        it = mAdded.find(entity);
+        if (it != mAdded.end())
         {
             mask |= it->second;
         }
 
         // If its a new entity, set the activation bit.
-        if (this->created.find(entity) != this->created.end())
+        if (mCreated.find(entity) != mCreated.end())
         {
             mask.set(0);
         }
 
         // Update the mask.
-        this->world.entityManager.setMask(entity, mask);
+        mWorld.mEntityManager.setMask(entity, mask);
     }
 
     this->clear();
@@ -152,11 +152,11 @@ void CommandBuffer::commit()
 
 void CommandBuffer::abort()
 {
-    std::lock_guard<std::mutex> lock(this->mutex);
+    std::lock_guard<std::mutex> lock(mMutex);
 
-    for (auto entity : this->created)
+    for (auto entity : mCreated)
     {
-        this->world.entityManager.destroy(entity);
+        mWorld.mEntityManager.destroy(entity);
     }
 
     this->clear();
@@ -164,15 +164,15 @@ void CommandBuffer::abort()
 
 void CommandBuffer::clear()
 {
-    for (auto& buffer : this->buffers)
+    for (auto& buffer : mBuffers)
     {
         delete buffer.second;
     }
 
-    this->buffers.clear();
-    this->created.clear();
-    this->destroyed.clear();
-    this->added.clear();
-    this->removed.clear();
-    this->changed.clear();
+    mBuffers.clear();
+    mCreated.clear();
+    mDestroyed.clear();
+    mAdded.clear();
+    mRemoved.clear();
+    mChanged.clear();
 }

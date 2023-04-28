@@ -35,7 +35,7 @@ namespace cubos::core::io
 
         Cursor(GLFWcursor* handle);
 
-        GLFWcursor* glfwHandle; ///< Handle for the GLFW cursor.
+        GLFWcursor* mGlfwHandle; ///< Handle for the GLFW cursor.
 #endif
     };
 } // namespace cubos::core::io

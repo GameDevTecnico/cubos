@@ -42,8 +42,8 @@ namespace cubos::core::ecs
         /// @param commands The commands object that created this entity.
         EntityBuilder(Entity entity, CommandBuffer& commands);
 
-        Entity eEntity;          ///< The entity being edited.
-        CommandBuffer& commands; ///< The commands object that created this entity.
+        Entity mEntity;           ///< The entity being edited.
+        CommandBuffer& mCommands; ///< The commands object that created this entity.
     };
 
     /// Used to edit an instance of a blueprint spawned by the Commands object.
@@ -75,8 +75,8 @@ namespace cubos::core::ecs
     private:
         friend CommandBuffer;
 
-        data::SerializationMap<Entity, std::string> map; ///< Maps entity names to the instantiated entities.
-        CommandBuffer& commands;                         ///< The commands object that created this entity.
+        data::SerializationMap<Entity, std::string> mMap; ///< Maps entity names to the instantiated entities.
+        CommandBuffer& mCommands;                         ///< The commands object that created this entity.
 
         /// @param map The map of entity names to the instantiated entities.
         /// @param commands The commands object that created this entity.
@@ -122,7 +122,7 @@ namespace cubos::core::ecs
         BlueprintBuilder spawn(const Blueprint& blueprint);
 
     private:
-        CommandBuffer& buffer; ///< The command buffer to write to.
+        CommandBuffer& mBuffer; ///< The command buffer to write to.
     };
 
     /// Object responsible for storing ECS commands to execute them later.
@@ -190,8 +190,8 @@ namespace cubos::core::ecs
         {
             // Interface methods implementation.
 
-            virtual void clear() override;
-            virtual void move(Entity entity, ComponentManager& manager) override;
+            void clear() override;
+            void move(Entity entity, ComponentManager& manager) override;
 
             std::unordered_map<Entity, ComponentType> components; ///< The components in the buffer.
         };
@@ -205,15 +205,15 @@ namespace cubos::core::ecs
         /// Commits the commands to the world.
         void commit();
 
-        std::mutex mutex; ///< Make this thread-safe.
-        World& world;     ///< The world to which the commands will be applied.
+        std::mutex mMutex; ///< Make this thread-safe.
+        World& mWorld;    ///< The world to which the commands will be applied.
 
-        std::unordered_map<std::type_index, IBuffer*> buffers; ///< Component buffers per component type.
-        std::unordered_set<Entity> created;                    ///< The uncommitted created entities.
-        std::unordered_set<Entity> destroyed;                  ///< The uncommitted destroyed entities.
-        std::unordered_map<Entity, Entity::Mask> added;        ///< The mask of the uncommitted added components.
-        std::unordered_map<Entity, Entity::Mask> removed;      ///< The mask of the uncommitted removed components.
-        std::unordered_set<Entity> changed;                    ///< Entities whose mask has changed.
+        std::unordered_map<std::type_index, IBuffer*> mBuffers; ///< Component buffers per component type.
+        std::unordered_set<Entity> mCreated;                    ///< The uncommitted created entities.
+        std::unordered_set<Entity> mDestroyed;                  ///< The uncommitted destroyed entities.
+        std::unordered_map<Entity, Entity::Mask> mAdded;        ///< The mask of the uncommitted added components.
+        std::unordered_map<Entity, Entity::Mask> mRemoved;      ///< The mask of the uncommitted removed components.
+        std::unordered_set<Entity> mChanged;                    ///< Entities whose mask has changed.
     };
 
     // Implementation.
@@ -221,11 +221,11 @@ namespace cubos::core::ecs
     template <typename ComponentType>
     ComponentType& EntityBuilder::get()
     {
-        auto it = this->commands.buffers.find(typeid(ComponentType));
-        if (it != this->commands.buffers.end())
+        auto it = mCommands.mBuffers.find(typeid(ComponentType));
+        if (it != mCommands.mBuffers.end())
         {
             auto buf = static_cast<CommandBuffer::Buffer<ComponentType>*>(it->second);
-            auto it = buf->components.find(this->eEntity);
+            auto it = buf->components.find(mEntity);
             if (it != buf->components.end())
             {
                 return it->second;
@@ -239,15 +239,15 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     EntityBuilder& EntityBuilder::add(ComponentTypes&&... components)
     {
-        this->commands.add(this->eEntity, std::move(components)...);
+        mCommands.add(mEntity, std::move(components)...);
         return *this;
     }
 
     template <typename ComponentType>
     ComponentType& BlueprintBuilder::get(const std::string& name)
     {
-        auto it = this->commands.buffers.find(typeid(ComponentType));
-        if (it != this->commands.buffers.end())
+        auto it = mCommands.mBuffers.find(typeid(ComponentType));
+        if (it != mCommands.mBuffers.end())
         {
             auto buf = static_cast<CommandBuffer::Buffer<ComponentType>*>(it->second);
             auto it = buf->components.find(this->entity(name));
@@ -264,44 +264,44 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     BlueprintBuilder& BlueprintBuilder::add(const std::string& name, ComponentTypes&&... components)
     {
-        this->commands.add(this->entity(name), std::move(components)...);
+        mCommands.add(this->entity(name), std::move(components)...);
         return *this;
     }
 
     template <typename... ComponentTypes>
     void Commands::add(Entity entity, ComponentTypes&&... components)
     {
-        this->buffer.add(entity, std::move(components)...);
+        mBuffer.add(entity, std::move(components)...);
     }
 
     template <typename... ComponentTypes>
     void Commands::remove(Entity entity)
     {
-        this->buffer.remove(entity);
+        mBuffer.remove(entity);
     }
 
     template <typename... ComponentTypes>
     EntityBuilder Commands::create(ComponentTypes&&... components)
     {
-        return this->buffer.create(std::move(components)...);
+        return mBuffer.create(std::move(components)...);
     }
 
     template <typename... ComponentTypes>
     void CommandBuffer::add(Entity entity, ComponentTypes&&... components)
     {
-        std::lock_guard<std::mutex> lock(this->mutex);
-        Entity::Mask& mask = this->added[entity];
-        this->changed.insert(entity);
+        std::lock_guard<std::mutex> lock(mMutex);
+        Entity::Mask& mask = mAdded[entity];
+        mChanged.insert(entity);
 
         (
             [&]() {
-                auto it = this->buffers.find(typeid(ComponentTypes));
-                if (it == this->buffers.end())
+                auto it = mBuffers.find(typeid(ComponentTypes));
+                if (it == mBuffers.end())
                 {
-                    it = this->buffers.emplace(typeid(ComponentTypes), new Buffer<ComponentTypes>()).first;
+                    it = mBuffers.emplace(typeid(ComponentTypes), new Buffer<ComponentTypes>()).first;
                 }
 
-                std::size_t componentID = this->world.componentManager.getID<ComponentTypes>();
+                std::size_t componentID = mWorld.mComponentManager.getID<ComponentTypes>();
                 mask.set(componentID);
                 static_cast<Buffer<ComponentTypes>*>(it->second)->components.erase(entity);
                 static_cast<Buffer<ComponentTypes>*>(it->second)->components.emplace(entity, std::move(components));
@@ -312,13 +312,13 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     void CommandBuffer::remove(Entity entity)
     {
-        std::lock_guard<std::mutex> lock(this->mutex);
-        Entity::Mask& mask = this->removed[entity];
-        this->changed.insert(entity);
+        std::lock_guard<std::mutex> lock(mMutex);
+        Entity::Mask& mask = mRemoved[entity];
+        mChanged.insert(entity);
 
         (
             [&]() {
-                std::size_t componentID = this->world.componentManager.getID<ComponentTypes>();
+                std::size_t componentID = mWorld.mComponentManager.getID<ComponentTypes>();
                 mask.set(componentID);
             }(),
             ...);
@@ -327,29 +327,29 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     EntityBuilder CommandBuffer::create(ComponentTypes&&... components)
     {
-        std::lock_guard<std::mutex> lock(this->mutex);
+        std::lock_guard<std::mutex> lock(mMutex);
 
-        Entity entity = this->world.entityManager.create(0);
-        this->created.insert(entity);
-        this->changed.insert(entity);
-        Entity::Mask& mask = this->added[entity];
+        Entity entity = mWorld.mEntityManager.create(0);
+        mCreated.insert(entity);
+        mChanged.insert(entity);
+        Entity::Mask& mask = mAdded[entity];
 
         (
             [&]() {
-                auto it = this->buffers.find(typeid(ComponentTypes));
-                if (it == this->buffers.end())
+                auto it = mBuffers.find(typeid(ComponentTypes));
+                if (it == mBuffers.end())
                 {
-                    it = this->buffers.emplace(typeid(ComponentTypes), new Buffer<ComponentTypes>()).first;
+                    it = mBuffers.emplace(typeid(ComponentTypes), new Buffer<ComponentTypes>()).first;
                 }
 
-                std::size_t componentID = this->world.componentManager.getID<ComponentTypes>();
+                std::size_t componentID = mWorld.mComponentManager.getID<ComponentTypes>();
                 mask.set(componentID);
                 static_cast<Buffer<ComponentTypes>*>(it->second)->components.erase(entity);
                 static_cast<Buffer<ComponentTypes>*>(it->second)->components.emplace(entity, components);
             }(),
             ...);
 
-        return EntityBuilder(entity, *this);
+        return {entity, *this};
     }
 
     template <typename ComponentType>

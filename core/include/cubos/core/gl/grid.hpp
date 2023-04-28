@@ -46,7 +46,7 @@ namespace cubos::core::gl
         /// @param indices The material indices of the voxels.
         Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices);
 
-        Grid(Grid&&) noexcept;
+        Grid(Grid&& /*other*/) noexcept;
         ~Grid() = default;
 
         Grid& operator=(const Grid& rhs);
@@ -56,7 +56,7 @@ namespace cubos::core::gl
         void setSize(const glm::uvec3& size);
 
         /// @return The size of the grid.
-        const glm::uvec3& getSize() const;
+        const glm::uvec3& size() const;
 
         /// Clears the grid.
         void clear();
@@ -79,11 +79,11 @@ namespace cubos::core::gl
         bool convert(const Palette& src, const Palette& dst, float minSimilarity);
 
     private:
-        friend void data::serialize(data::Serializer&, const Grid&, const char*);
-        friend void data::deserialize(data::Deserializer&, Grid&);
+        friend void data::serialize(data::Serializer& /*serializer*/, const Grid& /*grid*/, const char* /*name*/);
+        friend void data::deserialize(data::Deserializer& /*deserializer*/, Grid& /*grid*/);
 
-        glm::uvec3 size;               ///< The size of the grid.
-        std::vector<uint16_t> indices; ///< The indices of the grid.
+        glm::uvec3 mSize;               ///< The size of the grid.
+        std::vector<uint16_t> mIndices; ///< The indices of the grid.
     };
 } // namespace cubos::core::gl
 

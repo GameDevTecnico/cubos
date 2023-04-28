@@ -37,10 +37,10 @@ namespace cubos::core::gl
         ~Palette() = default;
 
         /// @return Pointer to the array of materials on the palette.
-        const Material* getData() const;
+        const Material* data() const;
 
         /// @return The number of materials in the palette.
-        uint16_t getSize() const;
+        uint16_t size() const;
 
         /// @param index The index of the material to get (1-based, 0 is empty).
         /// @return The material at the given index.
@@ -60,19 +60,19 @@ namespace cubos::core::gl
         /// @param material The material to add.
         /// @param similarity The minimum similarity for a material to be considered similar enough.
         /// @return The index of the material in the palette.
-        uint16_t add(const Material& material, float similarity = 1.0f);
+        uint16_t add(const Material& material, float similarity = 1.0F);
 
         /// Merges another palette into this one. All materials equal to Material::Empty will be considered empty and
         /// may be overwritten.
         /// @param palette The palette to merge.
         /// @param similarity The minimum similarity for two materials to be merged.
-        void merge(const Palette& palette, float similarity = 1.0f);
+        void merge(const Palette& palette, float similarity = 1.0F);
 
     private:
-        friend void data::serialize(data::Serializer&, const Palette&, const char*);
-        friend void data::deserialize(data::Deserializer&, Palette&);
+        friend void data::serialize(data::Serializer& /*serializer*/, const Palette& /*palette*/, const char* /*name*/);
+        friend void data::deserialize(data::Deserializer& /*deserializer*/, Palette& /*palette*/);
 
-        std::vector<Material> materials; ///< The materials in the palette.
+        std::vector<Material> mMaterials; ///< The materials in the palette.
     };
 } // namespace cubos::core::gl
 

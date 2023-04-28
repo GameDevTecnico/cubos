@@ -8,7 +8,7 @@ int runHelp(int /*argc*/, char** /*argv*/)
 {
     std::cerr << "Usage: cubinhos <TOOL>" << std::endl;
     std::cerr << "Tools:" << std::endl;
-    for (const auto& tool : tools)
+    for (const auto& tool : Tools)
     {
         std::cerr << "  " << tool.name << std::endl;
     }
@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     if (argc >= 2)
     {
         // Find the desired tool.
-        for (const auto& tool : tools)
+        for (const auto& tool : Tools)
         {
             if (tool.name == argv[1])
             {

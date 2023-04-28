@@ -294,21 +294,21 @@ class Parser
 {
 public:
     Parser(fs::path path, std::string_view input)
-        : m_path(std::move(path))
-        , m_input(input)
+        : mPath(std::move(path))
+        , mInput(input)
     {
-        this->m_line = 1;
-        this->m_column = 1;
+        mLine = 1;
+        mColumn = 1;
     }
 
     /// If the next token matches the given punctuation string, it is consumed and true is returned.
     bool acceptPunctuation(std::string_view token)
     {
         this->skipWS();
-        if (this->m_input.starts_with(token))
+        if (mInput.starts_with(token))
         {
-            this->m_input.remove_prefix(token.size());
-            this->m_column += static_cast<int>(token.size());
+            mInput.remove_prefix(token.size());
+            mColumn += static_cast<int>(token.size());
             return true;
         }
         return false;
@@ -318,12 +318,12 @@ public:
     bool acceptKeyword(std::string_view keyword)
     {
         this->skipWS();
-        if (this->m_input.starts_with(keyword))
+        if (mInput.starts_with(keyword))
         {
-            if (this->m_input.size() <= keyword.size() || (isalnum(this->m_input[keyword.size()]) == 0))
+            if (mInput.size() <= keyword.size() || (isalnum(mInput[keyword.size()]) == 0))
             {
-                this->m_input.remove_prefix(keyword.size());
-                this->m_column += static_cast<int>(keyword.size());
+                mInput.remove_prefix(keyword.size());
+                mColumn += static_cast<int>(keyword.size());
                 return true;
             }
         }
@@ -348,29 +348,29 @@ public:
     bool acceptString(std::string& value)
     {
         this->skipWS();
-        if (!this->m_input.starts_with("\""))
+        if (!mInput.starts_with("\""))
         {
             return false;
         }
-        for (std::size_t i = 1; i < this->m_input.size(); ++i)
+        for (std::size_t i = 1; i < mInput.size(); ++i)
         {
-            if (this->m_input[i] == '\n')
+            if (mInput[i] == '\n')
             {
                 break;
             }
-            if (this->m_input[i] == '\\')
+            if (mInput[i] == '\\')
             {
-                value += this->m_input[i++];
+                value += mInput[i++];
             }
-            else if (this->m_input[i] == '"')
+            else if (mInput[i] == '"')
             {
-                this->m_input.remove_prefix(i + 1);
-                this->m_column += static_cast<int>(i + 1);
+                mInput.remove_prefix(i + 1);
+                mColumn += static_cast<int>(i + 1);
                 return true;
             }
             else
             {
-                value += this->m_input[i];
+                value += mInput[i];
             }
         }
 
@@ -383,13 +383,13 @@ public:
     {
         this->skipWS();
         std::size_t start = 0;
-        while (start < this->m_input.size() && ((isalnum(this->m_input[start]) != 0) || this->m_input[start] == ':'))
+        while (start < mInput.size() && ((isalnum(mInput[start]) != 0) || mInput[start] == ':'))
         {
             start++;
         }
-        std::string_view identifier = this->m_input.substr(0, start);
-        this->m_input.remove_prefix(start);
-        this->m_column += static_cast<int>(start);
+        std::string_view identifier = mInput.substr(0, start);
+        mInput.remove_prefix(start);
+        mColumn += static_cast<int>(start);
         return identifier;
     }
 
@@ -398,39 +398,38 @@ public:
     {
         this->skipWS();
 
-        if (this->m_input.empty())
+        if (mInput.empty())
         {
             return;
         }
 
-        if (isalnum(this->m_input[0]) != 0)
+        if (isalnum(mInput[0]) != 0)
         {
             std::size_t start = 1;
-            while (start < this->m_input.size() &&
-                   ((isalnum(this->m_input[start]) != 0) || this->m_input[start] == ':'))
+            while (start < mInput.size() && ((isalnum(mInput[start]) != 0) || mInput[start] == ':'))
             {
                 start++;
             }
-            this->m_input.remove_prefix(start);
-            this->m_column += static_cast<int>(start);
+            mInput.remove_prefix(start);
+            mColumn += static_cast<int>(start);
         }
         else
         {
-            this->m_input.remove_prefix(1);
-            this->m_column += 1;
+            mInput.remove_prefix(1);
+            mColumn += 1;
         }
     }
 
     /// Checks if end of file has been reached.
     bool eof() const
     {
-        return this->m_input.empty();
+        return mInput.empty();
     }
 
     /// Prints an error message.
     void error(std::string_view msg)
     {
-        std::cerr << msg << " at " << this->m_path << ":" << this->m_line << ":" << this->m_column << std::endl;
+        std::cerr << msg << " at " << mPath << ":" << mLine << ":" << mColumn << std::endl;
     }
 
 private:
@@ -440,30 +439,30 @@ private:
         {
             bool skip = false;
 
-            while (!this->m_input.empty() && (isspace(this->m_input[0]) != 0))
+            while (!mInput.empty() && (isspace(mInput[0]) != 0))
             {
-                this->m_column += 1;
-                if (this->m_input[0] == '\n')
+                mColumn += 1;
+                if (mInput[0] == '\n')
                 {
-                    this->m_line += 1;
-                    this->m_column = 1;
+                    mLine += 1;
+                    mColumn = 1;
                 }
-                this->m_input.remove_prefix(1);
+                mInput.remove_prefix(1);
                 skip = true;
             }
 
             // Skip comments
-            if (this->m_input.starts_with("/*"))
+            if (mInput.starts_with("/*"))
             {
-                this->m_input = this->m_input.substr(this->m_input.find("*/") + 2);
+                mInput = mInput.substr(mInput.find("*/") + 2);
                 skip = true;
             }
-            else if (this->m_input.starts_with("//"))
+            else if (mInput.starts_with("//"))
             {
-                while (!this->m_input.empty() && this->m_input[0] != '\n')
+                while (!mInput.empty() && mInput[0] != '\n')
                 {
-                    this->m_input.remove_prefix(1);
-                    this->m_column += 1;
+                    mInput.remove_prefix(1);
+                    mColumn += 1;
                 }
                 skip = true;
             }
@@ -475,10 +474,10 @@ private:
         }
     }
 
-    fs::path m_path;
-    int m_line;
-    int m_column;
-    std::string_view m_input;
+    fs::path mPath;
+    int mLine;
+    int mColumn;
+    std::string_view mInput;
 };
 
 /// Parses a component.

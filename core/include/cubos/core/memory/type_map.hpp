@@ -14,23 +14,25 @@ namespace cubos::core::memory
     {
     public:
         TypeMap() = default;
-        TypeMap(TypeMap&&) = default;
+        TypeMap(TypeMap&&) noexcept = default;
         ~TypeMap() = default;
 
         /// @param key The key to identify the value.
         /// @param value The value to store.
         inline void set(std::type_index key, V value)
         {
-            this->map.emplace(key, std::move(value));
+            mMap.emplace(key, std::move(value));
         }
 
         /// @param key The key to identify the value.
         /// @returns The value stored in the map, or null if no value is stored.
         inline V* at(std::type_index key)
         {
-            auto it = this->map.find(key);
-            if (it == this->map.end())
+            auto it = mMap.find(key);
+            if (it == mMap.end())
+            {
                 return nullptr;
+            }
             return &it->second;
         }
 
@@ -38,9 +40,11 @@ namespace cubos::core::memory
         /// @returns The value stored in the map, or null if no value is stored.
         inline const V* at(std::type_index key) const
         {
-            auto it = this->map.find(key);
-            if (it == this->map.end())
+            auto it = mMap.find(key);
+            if (it == mMap.end())
+            {
                 return nullptr;
+            }
             return &it->second;
         }
 
@@ -71,14 +75,14 @@ namespace cubos::core::memory
         /// Removes all elements from the map.
         inline void clear()
         {
-            this->map.clear();
+            mMap.clear();
         }
 
         /// Removes the element with the given key from the map.
         /// @param key The key to identify the value.
         inline void erase(std::type_index key)
         {
-            this->map.erase(key);
+            mMap.erase(key);
         }
 
         /// Removes the element with the given key from the map.
@@ -92,23 +96,23 @@ namespace cubos::core::memory
         /// @returns The number of elements in the map.
         inline std::size_t size() const
         {
-            return this->map.size();
+            return mMap.size();
         }
 
         /// @returns Iterator to the beginning of the map.
         inline auto begin() const
         {
-            return this->map.begin();
+            return mMap.begin();
         }
 
         /// @returns Iterator to the end of the map.
         inline auto end() const
         {
-            return this->map.end();
+            return mMap.end();
         }
 
     private:
-        std::unordered_map<std::type_index, V> map; ///< The map of values.
+        std::unordered_map<std::type_index, V> mMap; ///< The map of values.
     };
 } // namespace cubos::core::memory
 

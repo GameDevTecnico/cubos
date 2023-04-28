@@ -4,6 +4,7 @@
 #include <optional>
 #include <typeindex>
 #include <unordered_set>
+#include <utility>
 
 #include <cubos/core/ecs/world.hpp>
 
@@ -36,7 +37,7 @@ namespace cubos::core::ecs
             using Type = WriteStorage<Component>;
 
             /// Whether the component is optional
-            constexpr static bool IS_OPTIONAL = false;
+            constexpr static bool IsOptional = false;
 
             /// Adds the component to the query info structure.
             /// @param info The query info structure to add to.
@@ -59,7 +60,7 @@ namespace cubos::core::ecs
             using Type = ReadStorage<Component>;
 
             /// Whether the component is optional
-            constexpr static bool IS_OPTIONAL = false;
+            constexpr static bool IsOptional = false;
 
             /// Adds the component to the query info structure.
             /// @param info The query info structure to add to.
@@ -82,7 +83,7 @@ namespace cubos::core::ecs
             using Type = WriteStorage<Component>;
 
             /// Whether the component is optional
-            constexpr static bool IS_OPTIONAL = true;
+            constexpr static bool IsOptional = true;
 
             /// Adds the component to the query info structure.
             /// @param info The query info structure to add to.
@@ -105,7 +106,7 @@ namespace cubos::core::ecs
             using Type = ReadStorage<Component>;
 
             /// Whether the component is optional
-            constexpr static bool IS_OPTIONAL = true;
+            constexpr static bool IsOptional = true;
 
             /// Adds the component to the query info structure.
             /// @param info The query info structure to add to.
@@ -144,16 +145,16 @@ namespace cubos::core::ecs
         {
         public:
             std::tuple<Entity, ComponentTypes...> operator*() const;
-            bool operator==(const Iterator&) const;
-            bool operator!=(const Iterator&) const;
+            bool operator==(const Iterator& /*other*/) const;
+            bool operator!=(const Iterator& /*other*/) const;
             Iterator& operator++();
 
         private:
             friend Query<ComponentTypes...>;
 
-            const World& world;         ///< The world to query from.
-            Fetched& fetched;           ///< The fetched data.
-            EntityManager::Iterator it; ///< The internal entity iterator.
+            const World& mWorld;         ///< The world to query from.
+            Fetched& mFetched;           ///< The fetched data.
+            EntityManager::Iterator mIt; ///< The internal entity iterator.
 
             /// @param world The world to query from.
             /// @param fetched The fetched data.
@@ -181,9 +182,9 @@ namespace cubos::core::ecs
     private:
         friend World;
 
-        const World& world; ///< The world to query.
-        Fetched fetched;    ///< The fetched data.
-        Entity::Mask mask;  ///< The mask of the components to query.
+        const World& mWorld; ///< The world to query.
+        Fetched mFetched;    ///< The fetched data.
+        Entity::Mask mMask;  ///< The mask of the components to query.
     };
 
     // Implementation.
@@ -194,57 +195,57 @@ namespace cubos::core::ecs
 
         // Convert the fetched data into the desired query reference types.
         return std::forward_as_tuple(
-            *this->it,
-            impl::QueryFetcher<ComponentTypes>::arg(
-                this->world, std::get<typename impl::QueryFetcher<ComponentTypes>::Type>(this->fetched), *this->it)...);
+            *mIt, impl::QueryFetcher<ComponentTypes>::arg(
+                            mWorld, std::get<typename impl::QueryFetcher<ComponentTypes>::Type>(mFetched),
+                            *mIt)...);
     }
 
     template <typename... ComponentTypes>
     bool Query<ComponentTypes...>::Iterator::operator==(const Iterator& other) const
     {
-        return this->it == other.it;
+        return mIt == other.mIt;
     }
 
     template <typename... ComponentTypes>
     bool Query<ComponentTypes...>::Iterator::operator!=(const Iterator& other) const
     {
-        return this->it != other.it;
+        return mIt != other.mIt;
     }
 
     template <typename... ComponentTypes>
     typename Query<ComponentTypes...>::Iterator& Query<ComponentTypes...>::Iterator::operator++()
     {
-        ++this->it;
+        ++mIt;
         return *this;
     }
 
     template <typename... ComponentTypes>
     Query<ComponentTypes...>::Iterator::Iterator(const World& world, Fetched& fetched, EntityManager::Iterator it)
-        : world(world)
-        , fetched(fetched)
-        , it(it)
+        : mWorld(world)
+        , mFetched(fetched)
+        , mIt(std::move(it))
     {
         // Nothing to do.
     }
 
     template <typename... ComponentTypes>
     Query<ComponentTypes...>::Query(const World& world)
-        : world(world)
-        , fetched(std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::fetch(world)...))
+        : mWorld(world)
+        , mFetched(std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::fetch(world)...))
     {
         // We must turn the type from const T& and similar to T before getting the ID.
         std::size_t ids[] = {
-            (impl::QueryFetcher<ComponentTypes>::IS_OPTIONAL
+            (impl::QueryFetcher<ComponentTypes>::IsOptional
                  ? SIZE_MAX
-                 : this->world.componentManager.template getID<
+                 : mWorld.mComponentManager.template getID<
                        std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
-        this->mask.reset();
-        this->mask.set(0);
+        mMask.reset();
+        mMask.set(0);
         for (std::size_t id : ids)
         {
             if (id != SIZE_MAX)
             {
-                this->mask.set(id);
+                mMask.set(id);
             }
         }
     }
@@ -252,13 +253,13 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     typename Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::begin()
     {
-        return Iterator(this->world, this->fetched, this->world.entityManager.withMask(this->mask));
+        return Iterator(mWorld, mFetched, mWorld.mEntityManager.withMask(mMask));
     }
 
     template <typename... ComponentTypes>
     typename Query<ComponentTypes...>::Iterator Query<ComponentTypes...>::end()
     {
-        return Iterator(this->world, this->fetched, this->world.entityManager.end());
+        return Iterator(mWorld, mFetched, mWorld.mEntityManager.end());
     }
 
     template <typename... ComponentTypes>
@@ -278,11 +279,11 @@ namespace cubos::core::ecs
     template <typename Component>
     typename impl::QueryFetcher<Component&>::Type impl::QueryFetcher<Component&>::fetch(const World& world)
     {
-        return world.componentManager.write<Component>();
+        return world.mComponentManager.write<Component>();
     }
 
     template <typename Component>
-    Component& impl::QueryFetcher<Component&>::arg(const World&, Type& lock, Entity entity)
+    Component& impl::QueryFetcher<Component&>::arg(const World& /*unused*/, Type& lock, Entity entity)
     {
         return *lock.get().get(entity.index);
     }
@@ -296,11 +297,11 @@ namespace cubos::core::ecs
     template <typename Component>
     typename impl::QueryFetcher<const Component&>::Type impl::QueryFetcher<const Component&>::fetch(const World& world)
     {
-        return world.componentManager.read<Component>();
+        return world.mComponentManager.read<Component>();
     }
 
     template <typename Component>
-    const Component& impl::QueryFetcher<const Component&>::arg(const World&, Type& lock, Entity entity)
+    const Component& impl::QueryFetcher<const Component&>::arg(const World& /*unused*/, Type& lock, Entity entity)
     {
         return *lock.get().get(entity.index);
     }
@@ -314,7 +315,7 @@ namespace cubos::core::ecs
     template <typename Component>
     typename impl::QueryFetcher<Component*>::Type impl::QueryFetcher<Component*>::fetch(const World& world)
     {
-        return world.componentManager.write<Component>();
+        return world.mComponentManager.write<Component>();
     }
 
     template <typename Component>
@@ -324,10 +325,8 @@ namespace cubos::core::ecs
         {
             return lock.get().get(entity);
         }
-        else
-        {
-            return nullptr;
-        }
+
+        return nullptr;
     }
 
     template <typename Component>
@@ -339,7 +338,7 @@ namespace cubos::core::ecs
     template <typename Component>
     typename impl::QueryFetcher<const Component*>::Type impl::QueryFetcher<const Component*>::fetch(const World& world)
     {
-        return world.componentManager.read<Component>();
+        return world.mComponentManager.read<Component>();
     }
 
     template <typename Component>
@@ -349,25 +348,21 @@ namespace cubos::core::ecs
         {
             return lock.get().get(entity.index);
         }
-        else
-        {
-            return nullptr;
-        }
+
+        return nullptr;
     }
 
     template <typename... ComponentTypes>
     std::optional<std::tuple<ComponentTypes...>> Query<ComponentTypes...>::operator[](Entity entity)
     {
-        auto mask = this->world.entityManager.getMask(entity);
-        if ((mask & this->mask) == this->mask)
+        auto mask = mWorld.mEntityManager.getMask(entity);
+        if ((mask & mMask) == mMask)
         {
             return std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::arg(
-                this->world, std::get<typename impl::QueryFetcher<ComponentTypes>::Type>(this->fetched), entity)...);
+                mWorld, std::get<typename impl::QueryFetcher<ComponentTypes>::Type>(mFetched), entity)...);
         }
-        else
-        {
-            return std::nullopt;
-        }
+
+        return std::nullopt;
     }
 
 } // namespace cubos::core::ecs

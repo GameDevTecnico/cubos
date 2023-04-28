@@ -112,9 +112,9 @@ namespace cubos::core::ecs
         friend struct impl::QueryFetcher;
         friend class CommandBuffer;
 
-        ResourceManager resourceManager;
-        EntityManager entityManager;
-        ComponentManager componentManager;
+        ResourceManager mResourceManager;
+        EntityManager mEntityManager;
+        ComponentManager mComponentManager;
     };
 
     // Implementation.
@@ -123,33 +123,33 @@ namespace cubos::core::ecs
     void World::registerResource(TArgs... args)
     {
         CUBOS_TRACE("Registered resource '{}'", typeid(T).name());
-        this->resourceManager.add<T>(args...);
+        mResourceManager.add<T>(args...);
     }
 
     template <typename T>
     void World::registerComponent()
     {
         CUBOS_TRACE("Registered component '{}'", getComponentName<T>().value());
-        this->componentManager.registerComponent<T>();
+        mComponentManager.registerComponent<T>();
     }
 
     template <typename T>
     ReadResource<T> World::read() const
     {
-        return this->resourceManager.read<T>();
+        return mResourceManager.read<T>();
     }
 
     template <typename T>
     WriteResource<T> World::write() const
     {
-        return this->resourceManager.write<T>();
+        return mResourceManager.write<T>();
     }
 
     template <typename... ComponentTypes>
     Entity World::create(ComponentTypes&&... components)
     {
         std::size_t ids[] = {
-            (this->componentManager
+            (mComponentManager
                  .getID<std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
 
         Entity::Mask mask;
@@ -159,8 +159,8 @@ namespace cubos::core::ecs
             mask.set(id);
         }
 
-        auto entity = this->entityManager.create(mask);
-        ([&](auto& component) { this->componentManager.add(entity.index, component); }(components), ...);
+        auto entity = mEntityManager.create(mask);
+        ([&](auto& component) { mComponentManager.add(entity.index, component); }(components), ...);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
         std::string componentNames[] = {"'" + getComponentName<ComponentTypes>().value() + "'" ...};
@@ -172,23 +172,23 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     void World::add(Entity entity, ComponentTypes&&... components)
     {
-        if (!this->entityManager.isValid(entity))
+        if (!mEntityManager.isValid(entity))
         {
             CUBOS_ERROR("Entity {} doesn't exist!", entity.index);
             return;
         }
 
-        auto mask = this->entityManager.getMask(entity);
+        auto mask = mEntityManager.getMask(entity);
 
         (
             [&]() {
-                std::size_t componentId = this->componentManager.getID<ComponentTypes>();
+                std::size_t componentId = mComponentManager.getID<ComponentTypes>();
                 mask.set(componentId);
-                this->componentManager.add(entity.index, std::move(components));
+                mComponentManager.add(entity.index, std::move(components));
             }(),
             ...);
 
-        this->entityManager.setMask(entity, mask);
+        mEntityManager.setMask(entity, mask);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
         std::string componentNames[] = {"'" + getComponentName<ComponentTypes>().value() + "'" ...};
@@ -199,23 +199,23 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     void World::remove(Entity entity)
     {
-        if (!this->entityManager.isValid(entity))
+        if (!mEntityManager.isValid(entity))
         {
             CUBOS_ERROR("Entity {} doesn't exist!", entity.index);
             return;
         }
 
-        auto mask = this->entityManager.getMask(entity);
+        auto mask = mEntityManager.getMask(entity);
 
         (
             [&]() {
-                std::size_t componentId = this->componentManager.getID<ComponentTypes>();
+                std::size_t componentId = mComponentManager.getID<ComponentTypes>();
                 mask.set(componentId, false);
-                this->componentManager.remove<ComponentTypes>(entity.index);
+                mComponentManager.remove<ComponentTypes>(entity.index);
             }(),
             ...);
 
-        this->entityManager.setMask(entity, mask);
+        mEntityManager.setMask(entity, mask);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
         std::string componentNames[] = {"'" + getComponentName<ComponentTypes>().value() + "'" ...};
@@ -226,14 +226,14 @@ namespace cubos::core::ecs
     template <typename T>
     bool World::has(Entity entity) const
     {
-        if (!this->entityManager.isValid(entity))
+        if (!mEntityManager.isValid(entity))
         {
             CUBOS_ERROR("Entity {} doesn't exist!", entity.index);
             return false;
         }
 
-        std::size_t componentId = this->componentManager.getID<T>();
-        return this->entityManager.getMask(entity).test(componentId);
+        std::size_t componentId = mComponentManager.getID<T>();
+        return mEntityManager.getMask(entity).test(componentId);
     }
 } // namespace cubos::core::ecs
 

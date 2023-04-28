@@ -11,7 +11,7 @@ std::optional<std::string_view> cubos::core::ecs::getComponentName(std::type_ind
 
 void ComponentManager::registerComponent(std::type_index type)
 {
-    if (this->typeToIds.find(type) == this->typeToIds.end())
+    if (mTypeToIds.find(type) == mTypeToIds.end())
     {
         auto storage = Registry::createStorage(type);
         if (storage == nullptr)
@@ -20,19 +20,19 @@ void ComponentManager::registerComponent(std::type_index type)
             abort();
         }
 
-        this->typeToIds[type] = this->entries.size() + 1; // Component ids start at 1.
-        this->entries.emplace_back(std::move(storage));
+        mTypeToIds[type] = mEntries.size() + 1; // Component ids start at 1.
+        mEntries.emplace_back(std::move(storage));
     }
 }
 
 std::size_t ComponentManager::getIDFromIndex(std::type_index type) const
 {
-    return this->typeToIds.at(type);
+    return mTypeToIds.at(type);
 }
 
 std::type_index ComponentManager::getType(std::size_t id) const
 {
-    for (const auto& pair : this->typeToIds)
+    for (const auto& pair : mTypeToIds)
     {
         if (pair.second == id)
         {
@@ -46,12 +46,12 @@ std::type_index ComponentManager::getType(std::size_t id) const
 
 void ComponentManager::remove(uint32_t id, std::size_t componentId)
 {
-    this->entries[componentId - 1].storage->erase(id);
+    mEntries[componentId - 1].storage->erase(id);
 }
 
 void ComponentManager::removeAll(uint32_t id)
 {
-    for (auto& entry : this->entries)
+    for (auto& entry : mEntries)
     {
         entry.storage->erase(id);
     }
@@ -65,11 +65,11 @@ ComponentManager::Entry::Entry(std::unique_ptr<IStorage> storage)
 
 data::Package ComponentManager::pack(uint32_t id, std::size_t componentId, data::Context& context) const
 {
-    return this->entries[componentId - 1].storage->pack(id, context);
+    return mEntries[componentId - 1].storage->pack(id, context);
 }
 
 bool ComponentManager::unpack(uint32_t id, std::size_t componentId, const data::Package& package,
                               data::Context& context)
 {
-    return this->entries[componentId - 1].storage->unpack(id, package, context);
+    return mEntries[componentId - 1].storage->unpack(id, package, context);
 }

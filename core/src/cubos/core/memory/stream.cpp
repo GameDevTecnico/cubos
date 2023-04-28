@@ -90,7 +90,7 @@ void Stream::print(float value, std::size_t decimalPlaces)
 
 void Stream::print(double value, std::size_t decimalPlaces)
 {
-    constexpr std::size_t maxDecimalPlaces = 32;
+    constexpr std::size_t MaxDecimalPlaces = 32;
 
     if (value < 0.0)
     {
@@ -112,10 +112,10 @@ void Stream::print(double value, std::size_t decimalPlaces)
     }
 
     // Validate input
-    if (decimalPlaces > maxDecimalPlaces)
+    if (decimalPlaces > MaxDecimalPlaces)
     {
-        decimalPlaces = maxDecimalPlaces;
-        CUBOS_WARN("decimalPlaces must be <= {}, defaulting to {}", maxDecimalPlaces, maxDecimalPlaces);
+        decimalPlaces = MaxDecimalPlaces;
+        CUBOS_WARN("decimalPlaces must be <= {}, defaulting to {}", MaxDecimalPlaces, MaxDecimalPlaces);
     }
 
     if (value == INFINITY)
@@ -129,7 +129,7 @@ void Stream::print(double value, std::size_t decimalPlaces)
     }
     else if (value <= 16777217.0 && log10(value) > -static_cast<double>(decimalPlaces))
     {
-        char buffer[maxDecimalPlaces + 1];
+        char buffer[MaxDecimalPlaces + 1];
         std::size_t len = 0;
 
         // Print the integer part

@@ -24,8 +24,8 @@ namespace cubos::core::ecs
 
         Entity(const Entity&) = default;
         Entity& operator=(const Entity&) = default;
-        bool operator==(const Entity&) const;
-        bool operator!=(const Entity&) const;
+        bool operator==(const Entity& /*entity*/) const;
+        bool operator!=(const Entity& /*entity*/) const;
 
         /// Checks if the entity is 'none' (special value returned on errors).
         bool isNull() const;
@@ -44,24 +44,24 @@ namespace cubos::core::ecs
         {
         public:
             Entity operator*() const;
-            bool operator==(const Iterator&) const;
-            bool operator!=(const Iterator&) const;
+            bool operator==(const Iterator& /*other*/) const;
+            bool operator!=(const Iterator& /*other*/) const;
             Iterator& operator++();
 
         private:
             friend EntityManager;
 
-            const EntityManager& manager; ///< The entity manager being iterated.
-            const Entity::Mask mask;      ///< The mask of the components to be iterated.
+            const EntityManager& mManager; ///< The entity manager being iterated.
+            const Entity::Mask mMask;      ///< The mask of the components to be iterated.
 
             /// @param e The entity manager being iterated.
             /// @param m The mask of the components to be iterated.
-            Iterator(const EntityManager& e, const Entity::Mask m);
+            Iterator(const EntityManager& e, Entity::Mask m);
             Iterator(const EntityManager& e);
 
             std::unordered_map<Entity::Mask, std::set<uint32_t>>::const_iterator
-                archetypeIt;                             ///< The current archetype iterator.
-            std::set<uint32_t>::const_iterator entityIt; ///< The current entity iterator.
+                mArchetypeIt;                             ///< The current archetype iterator.
+            std::set<uint32_t>::const_iterator mEntityIt; ///< The current entity iterator.
         };
 
         /// @param initialCapacity The initial capacity of the entity manager.
@@ -113,9 +113,9 @@ namespace cubos::core::ecs
             Entity::Mask mask;   ///< The component mask of the entity.
         };
 
-        std::vector<EntityData> entities;                                ///< The pool of entities.
-        std::queue<uint32_t> availableEntities;                          ///< Queue with available entity indices.
-        std::unordered_map<Entity::Mask, std::set<uint32_t>> archetypes; ///< Cache archetype entity indices.
+        std::vector<EntityData> mEntities;                                ///< The pool of entities.
+        std::queue<uint32_t> mAvailableEntities;                          ///< Queue with available entity indices.
+        std::unordered_map<Entity::Mask, std::set<uint32_t>> mArchetypes; ///< Cache archetype entity indices.
     };
 } // namespace cubos::core::ecs
 

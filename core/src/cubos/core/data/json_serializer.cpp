@@ -4,8 +4,8 @@
 using namespace cubos::core::data;
 
 JSONSerializer::JSONSerializer(memory::Stream& stream, int indent)
-    : stream(stream)
-    , indent(indent)
+    : mStream(stream)
+    , mIndent(indent)
 {
     // Do nothing.
 }
@@ -75,77 +75,78 @@ void JSONSerializer::writeString(const char* value, const char* name)
 
 void JSONSerializer::beginObject(const char* name)
 {
-    this->frames.push({Mode::Object, nlohmann::ordered_json::object(), nullptr, name != nullptr ? name : ""});
+    mFrames.push({Mode::Object, nlohmann::ordered_json::object(), nullptr, name != nullptr ? name : ""});
 }
 
 void JSONSerializer::endObject()
 {
-    assert(!this->frames.empty() && this->frames.top().mode == Mode::Object); // endObject without matching beginObject.
-    auto json = std::move(this->frames.top().json);
-    auto name = std::move(this->frames.top().name);
-    this->frames.pop();
+    assert(!mFrames.empty() &&
+           mFrames.top().mode == Mode::Object); // endObject without matching beginObject.
+    auto json = std::move(mFrames.top().json);
+    auto name = std::move(mFrames.top().name);
+    mFrames.pop();
     this->writeJSON(std::move(json), name.empty() ? nullptr : name.c_str());
 }
 
 void JSONSerializer::beginArray(std::size_t /*length*/, const char* name)
 {
-    this->frames.push({Mode::Array, nlohmann::ordered_json::array(), nullptr, name != nullptr ? name : ""});
+    mFrames.push({Mode::Array, nlohmann::ordered_json::array(), nullptr, name != nullptr ? name : ""});
 }
 
 void JSONSerializer::endArray()
 {
-    assert(!this->frames.empty() && this->frames.top().mode == Mode::Array); // endArray without matching beginArray.
-    auto json = std::move(this->frames.top().json);
-    auto name = std::move(this->frames.top().name);
-    this->frames.pop();
+    assert(!mFrames.empty() && mFrames.top().mode == Mode::Array); // endArray without matching beginArray.
+    auto json = std::move(mFrames.top().json);
+    auto name = std::move(mFrames.top().name);
+    mFrames.pop();
     this->writeJSON(std::move(json), name.empty() ? nullptr : name.c_str());
 }
 
 void JSONSerializer::beginDictionary(std::size_t /*length*/, const char* name)
 {
-    this->frames.push({Mode::Dictionary, nlohmann::ordered_json::object(), nullptr, name != nullptr ? name : ""});
+    mFrames.push({Mode::Dictionary, nlohmann::ordered_json::object(), nullptr, name != nullptr ? name : ""});
 }
 
 void JSONSerializer::endDictionary()
 {
-    assert(!this->frames.empty() &&
-           this->frames.top().mode == Mode::Dictionary); // endDictionary without matching beginDictionary.
-    auto json = std::move(this->frames.top().json);
-    auto name = std::move(this->frames.top().name);
-    this->frames.pop();
+    assert(!mFrames.empty() &&
+           mFrames.top().mode == Mode::Dictionary); // endDictionary without matching beginDictionary.
+    auto json = std::move(mFrames.top().json);
+    auto name = std::move(mFrames.top().name);
+    mFrames.pop();
     this->writeJSON(std::move(json), name.empty() ? nullptr : name.c_str());
 }
 
 void JSONSerializer::writeJSON(nlohmann::ordered_json&& json, const char* name)
 {
-    if (this->frames.empty())
+    if (mFrames.empty())
     {
-        this->stream.print(json.dump(this->indent));
+        mStream.print(json.dump(mIndent));
     }
-    else if (this->frames.top().mode == Mode::Dictionary)
+    else if (mFrames.top().mode == Mode::Dictionary)
     {
-        if (this->frames.top().key.is_null())
+        if (mFrames.top().key.is_null())
         {
             if (json.is_string())
             {
-                this->frames.top().key = std::move(json);
+                mFrames.top().key = std::move(json);
             }
             else
             {
-                this->frames.top().key = json.dump();
+                mFrames.top().key = json.dump();
             }
         }
         else
         {
-            this->frames.top().json.emplace(std::move(this->frames.top().key), std::move(json));
-            this->frames.top().key = nullptr;
+            mFrames.top().json.emplace(std::move(mFrames.top().key), std::move(json));
+            mFrames.top().key = nullptr;
         }
     }
-    else if (this->frames.top().mode == Mode::Array)
+    else if (mFrames.top().mode == Mode::Array)
     {
-        this->frames.top().json.emplace_back(std::move(json));
+        mFrames.top().json.emplace_back(std::move(json));
     }
-    else if (this->frames.top().mode == Mode::Object)
+    else if (mFrames.top().mode == Mode::Object)
     {
         if (name == nullptr)
         {
@@ -153,6 +154,6 @@ void JSONSerializer::writeJSON(nlohmann::ordered_json&& json, const char* name)
             abort();
         }
 
-        this->frames.top().json.emplace(name, std::move(json));
+        mFrames.top().json.emplace(name, std::move(json));
     }
 }

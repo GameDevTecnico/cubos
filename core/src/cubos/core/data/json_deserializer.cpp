@@ -7,7 +7,7 @@ using namespace cubos::core::data;
 #define CHECK_ERROR(exp)                                                                                               \
     do                                                                                                                 \
     {                                                                                                                  \
-        if (this->failBit)                                                                                             \
+        if (mFailBit)                                                                                            \
         {                                                                                                              \
             CUBOS_WARN("Deserializer fail bit is set");                                                                \
         }                                                                                                              \
@@ -20,7 +20,7 @@ using namespace cubos::core::data;
             catch (nlohmann::json::exception & e)                                                                      \
             {                                                                                                          \
                 CUBOS_ERROR("Caught JSON exception '{}'", e.what());                                                   \
-                this->failBit = true;                                                                                  \
+                mFailBit = true;                                                                                 \
             }                                                                                                          \
         }                                                                                                              \
     } while (false)
@@ -28,24 +28,24 @@ using namespace cubos::core::data;
 // NOLINTBEGIN(bugprone-macro-parentheses)
 #define READ_GENERIC(out, type, fromStr)                                                                               \
     CHECK_ERROR(do {                                                                                                   \
-        if (this->frame.top().mode == Mode::Dictionary)                                                                \
+        if (mFrame.top().mode == Mode::Dictionary)                                                               \
         {                                                                                                              \
-            if (this->frame.top().key)                                                                                 \
+            if (mFrame.top().key)                                                                                \
             {                                                                                                          \
-                out = static_cast<type>(fromStr(this->frame.top().iter.key()));                                        \
-                this->frame.top().key = false;                                                                         \
+                out = static_cast<type>(fromStr(mFrame.top().iter.key()));                                       \
+                mFrame.top().key = false;                                                                        \
             }                                                                                                          \
             else                                                                                                       \
             {                                                                                                          \
-                out = this->frame.top().iter.value();                                                                  \
-                this->frame.top().iter++;                                                                              \
-                this->frame.top().key = true;                                                                          \
+                out = mFrame.top().iter.value();                                                                 \
+                mFrame.top().iter++;                                                                             \
+                mFrame.top().key = true;                                                                         \
             }                                                                                                          \
         }                                                                                                              \
         else                                                                                                           \
         {                                                                                                              \
-            out = this->frame.top().iter.value();                                                                      \
-            this->frame.top().iter++;                                                                                  \
+            out = mFrame.top().iter.value();                                                                     \
+            mFrame.top().iter++;                                                                                 \
         }                                                                                                              \
     } while (false);)
 // NOLINTEND(bugprone-macro-parentheses)
@@ -53,9 +53,9 @@ using namespace cubos::core::data;
 JSONDeserializer::JSONDeserializer(const std::string& src)
 {
     CHECK_ERROR(do {
-        this->json = nlohmann::ordered_json::array();
-        this->json.push_back(nlohmann::ordered_json::parse(src));
-        this->frame.push({Mode::Array, this->json.begin(), false});
+        mJson = nlohmann::ordered_json::array();
+        mJson.push_back(nlohmann::ordered_json::parse(src));
+        mFrame.push({Mode::Array, mJson.begin(), false});
     } while (false););
 }
 
@@ -121,36 +121,36 @@ void JSONDeserializer::readString(std::string& value)
 
 void JSONDeserializer::beginObject()
 {
-    assert(!this->frame.top().key); // Objects can't be used as keys.
+    assert(!mFrame.top().key); // Objects can't be used as keys.
 
     CHECK_ERROR(do {
-        auto iter = this->frame.top().iter.value().begin();
-        this->frame.push({Mode::Object, std::move(iter), false});
+        auto iter = mFrame.top().iter.value().begin();
+        mFrame.push({Mode::Object, std::move(iter), false});
     } while (false););
 }
 
 void JSONDeserializer::endObject()
 {
-    assert(this->frame.size() > 1);
+    assert(mFrame.size() > 1);
 
     CHECK_ERROR(do {
-        this->frame.pop();
-        this->frame.top().iter++;
-        if (this->frame.top().mode == Mode::Dictionary)
+        mFrame.pop();
+        mFrame.top().iter++;
+        if (mFrame.top().mode == Mode::Dictionary)
         {
-            this->frame.top().key = true;
+            mFrame.top().key = true;
         }
     } while (false););
 }
 
 std::size_t JSONDeserializer::beginArray()
 {
-    assert(!this->frame.top().key); // Arrays can't be used as keys.
+    assert(!mFrame.top().key); // Arrays can't be used as keys.
 
     CHECK_ERROR(do {
-        auto iter = this->frame.top().iter.value().begin();
-        auto len = this->frame.top().iter.value().size();
-        this->frame.push({Mode::Array, std::move(iter), false});
+        auto iter = mFrame.top().iter.value().begin();
+        auto len = mFrame.top().iter.value().size();
+        mFrame.push({Mode::Array, std::move(iter), false});
         return len;
     } while (false););
 
@@ -159,26 +159,26 @@ std::size_t JSONDeserializer::beginArray()
 
 void JSONDeserializer::endArray()
 {
-    assert(this->frame.size() > 1);
+    assert(mFrame.size() > 1);
 
     CHECK_ERROR(do {
-        this->frame.pop();
-        this->frame.top().iter++;
-        if (this->frame.top().mode == Mode::Dictionary)
+        mFrame.pop();
+        mFrame.top().iter++;
+        if (mFrame.top().mode == Mode::Dictionary)
         {
-            this->frame.top().key = true;
+            mFrame.top().key = true;
         }
     } while (false););
 }
 
 std::size_t JSONDeserializer::beginDictionary()
 {
-    assert(!this->frame.top().key); // Dictionaries can't be used as keys.
+    assert(!mFrame.top().key); // Dictionaries can't be used as keys.
 
     CHECK_ERROR(do {
-        auto iter = this->frame.top().iter.value().begin();
-        auto len = this->frame.top().iter.value().size();
-        this->frame.push({Mode::Dictionary, std::move(iter), true});
+        auto iter = mFrame.top().iter.value().begin();
+        auto len = mFrame.top().iter.value().size();
+        mFrame.push({Mode::Dictionary, std::move(iter), true});
         return len;
     } while (false););
 
@@ -187,14 +187,14 @@ std::size_t JSONDeserializer::beginDictionary()
 
 void JSONDeserializer::endDictionary()
 {
-    assert(this->frame.size() > 1);
+    assert(mFrame.size() > 1);
 
     CHECK_ERROR(do {
-        this->frame.pop();
-        this->frame.top().iter++;
-        if (this->frame.top().mode == Mode::Dictionary)
+        mFrame.pop();
+        mFrame.top().iter++;
+        if (mFrame.top().mode == Mode::Dictionary)
         {
-            this->frame.top().key = true;
+            mFrame.top().key = true;
         }
     } while (false););
 }

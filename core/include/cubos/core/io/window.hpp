@@ -173,8 +173,8 @@ namespace cubos::core::io
         virtual void pollEvents() = 0;
 
     private:
-        bool polled;
-        std::deque<WindowEvent> events;
+        bool mPolled;
+        std::deque<WindowEvent> mEvents;
     };
 } // namespace cubos::core::io
 

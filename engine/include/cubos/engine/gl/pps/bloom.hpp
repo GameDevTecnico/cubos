@@ -60,37 +60,37 @@ namespace cubos::engine::gl::pps
 
         // Interface methods implementation.
 
-        virtual void resize(glm::uvec2 size) override;
-        virtual void execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
-                             core::gl::Framebuffer out) const override;
+        void resize(glm::uvec2 size) override;
+        void execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
+                     core::gl::Framebuffer out) const override;
 
     private:
-        unsigned int iterations; ///< Number of iterations for downscale/upscale operation
-        float threshold;         ///< Brighness threshold for applying the effect on.
-        float softThreshold;     ///< Soft brightness threshold to include some samples under the upper threshold.
-        float intensity;         ///< Effect intensity
+        unsigned int mIterations; ///< Number of iterations for downscale/upscale operation
+        float mThreshold;         ///< Brighness threshold for applying the effect on.
+        float mSoftThreshold;     ///< Soft brightness threshold to include some samples under the upper threshold.
+        float mIntensity;         ///< Effect intensity
 
-        glm::uvec2 size;                    ///< Size of the window.
-        core::gl::VertexArray screenQuadVA; ///< Screen quad VA used to render the output.
-        core::gl::Sampler texSampler;       ///< Sampler to use for required textures.
-        core::gl::BlendState blendState;    ///< Blend state required for upscaling process.
+        glm::uvec2 mSize;                    ///< Size of the window.
+        core::gl::VertexArray mScreenQuadVa; ///< Screen quad VA used to render the output.
+        core::gl::Sampler mTexSampler;       ///< Sampler to use for required textures.
+        core::gl::BlendState mBlendState;    ///< Blend state required for upscaling process.
 
         // Extraction pipeline
-        core::gl::Framebuffer extFB;                       ///< Framebuffer of the extraction step.
-        core::gl::ShaderPipeline extPipeline;              ///< Shader pipeline of the extraction step.
-        core::gl::ShaderBindingPoint extInputTexBP;        ///< Input texture binding point.
-        core::gl::ShaderBindingPoint extThresholdFilterBP; ///< Threshold information binding point.
-        core::gl::Texture2D extTex;                        ///< Result texture from extraction step
+        core::gl::Framebuffer mExtFb;                       ///< Framebuffer of the extraction step.
+        core::gl::ShaderPipeline mExtPipeline;              ///< Shader pipeline of the extraction step.
+        core::gl::ShaderBindingPoint mExtInputTexBp;        ///< Input texture binding point.
+        core::gl::ShaderBindingPoint mExtThresholdFilterBp; ///< Threshold information binding point.
+        core::gl::Texture2D mExtTex;                        ///< Result texture from extraction step
 
         // Bloom pipeline
-        core::gl::ShaderPipeline bloomPipeline;          ///< Shader pipeline of the bloom effect.
-        core::gl::ShaderBindingPoint bloomInputTexBP;    ///< Input texture binding point.
-        core::gl::ShaderBindingPoint bloomSrcTexBP;      ///< Source texture binding point.
-        core::gl::ShaderBindingPoint bloomScalingBP;     ///< Texture scaling binding point.
-        core::gl::ShaderBindingPoint bloomCurrPassBP;    ///< Current pass binding point.
-        core::gl::ShaderBindingPoint bloomIntensityBP;   ///< Bloom intensity binding point.
-        std::vector<core::gl::Texture2D> bloomTexBuffer; ///< The texture buffer of the bloom effect.
-        std::vector<core::gl::Framebuffer> bloomFBs;     ///< The framebuffers of the bloom effect.
+        core::gl::ShaderPipeline mBloomPipeline;          ///< Shader pipeline of the bloom effect.
+        core::gl::ShaderBindingPoint mBloomInputTexBp;    ///< Input texture binding point.
+        core::gl::ShaderBindingPoint mBloomSrcTexBp;      ///< Source texture binding point.
+        core::gl::ShaderBindingPoint mBloomScalingBp;     ///< Texture scaling binding point.
+        core::gl::ShaderBindingPoint mBloomCurrPassBp;    ///< Current pass binding point.
+        core::gl::ShaderBindingPoint mBloomIntensityBp;   ///< Bloom intensity binding point.
+        std::vector<core::gl::Texture2D> mBloomTexBuffer; ///< The texture buffer of the bloom effect.
+        std::vector<core::gl::Framebuffer> mBloomFBs;     ///< The framebuffers of the bloom effect.
     };
 } // namespace cubos::engine::gl::pps
 
