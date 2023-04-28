@@ -62,7 +62,7 @@ namespace cubos::core::data
         };
 
         memory::Stream& mStream; ///< The stream to deserialize from.
-        std::stack<Frame> frame; ///< The current frame of the deserializer.
+        std::stack<Frame> mFrame; ///< The current frame of the deserializer.
         YAML::Node mDocument;    ///< The YAML document being deserialized.
     };
 } // namespace cubos::core::data
