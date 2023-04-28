@@ -82,7 +82,7 @@ namespace cubos::core::data
         /// present.
         void* tryGetAny(std::type_index type) const;
 
-        std::vector<Entry> entries; ///< Entries in the context.
+        std::vector<Entry> mEntries; ///< Entries in the context.
     };
 } // namespace cubos::core::data
 

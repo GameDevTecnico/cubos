@@ -9,17 +9,17 @@ using namespace cubos::core::data;
 
 Deserializer::Deserializer()
 {
-    this->failBit = false;
+    mFailBit = false;
 }
 
 bool Deserializer::failed() const
 {
-    return this->failBit;
+    return mFailBit;
 }
 
 void Deserializer::fail()
 {
-    this->failBit = true;
+    mFailBit = true;
 }
 
 // Implementation of deserialize() for primitive types.

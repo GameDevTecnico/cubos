@@ -249,7 +249,7 @@ namespace cubos::core::data
         friend impl::Unpackager;
 
         /// The packaged data.
-        Data data;
+        Data mData;
     };
 
     /// Implementation specific classes for the above functions are hidden in
@@ -263,24 +263,24 @@ namespace cubos::core::data
         public:
             // Implement interface methods.
 
-            virtual void writeI8(int8_t value, const char* name) override;
-            virtual void writeI16(int16_t value, const char* name) override;
-            virtual void writeI32(int32_t value, const char* name) override;
-            virtual void writeI64(int64_t value, const char* name) override;
-            virtual void writeU8(uint8_t value, const char* name) override;
-            virtual void writeU16(uint16_t value, const char* name) override;
-            virtual void writeU32(uint32_t value, const char* name) override;
-            virtual void writeU64(uint64_t value, const char* name) override;
-            virtual void writeF32(float value, const char* name) override;
-            virtual void writeF64(double value, const char* name) override;
-            virtual void writeBool(bool value, const char* name) override;
-            virtual void writeString(const char* value, const char* name) override;
-            virtual void beginObject(const char* name) override;
-            virtual void endObject() override;
-            virtual void beginArray(std::size_t length, const char* name) override;
-            virtual void endArray() override;
-            virtual void beginDictionary(std::size_t length, const char* name) override;
-            virtual void endDictionary() override;
+            void writeI8(int8_t value, const char* name) override;
+            void writeI16(int16_t value, const char* name) override;
+            void writeI32(int32_t value, const char* name) override;
+            void writeI64(int64_t value, const char* name) override;
+            void writeU8(uint8_t value, const char* name) override;
+            void writeU16(uint16_t value, const char* name) override;
+            void writeU32(uint32_t value, const char* name) override;
+            void writeU64(uint64_t value, const char* name) override;
+            void writeF32(float value, const char* name) override;
+            void writeF64(double value, const char* name) override;
+            void writeBool(bool value, const char* name) override;
+            void writeString(const char* value, const char* name) override;
+            void beginObject(const char* name) override;
+            void endObject() override;
+            void beginArray(std::size_t length, const char* name) override;
+            void endArray() override;
+            void beginDictionary(std::size_t length, const char* name) override;
+            void endDictionary() override;
 
         private:
             friend Package;
@@ -299,10 +299,10 @@ namespace cubos::core::data
             /// object/array/dictionary being written to.
             /// The bool is true if we're writing to a dictionary and the next
             /// element is a key.
-            std::stack<std::pair<Package*, bool>> stack;
+            std::stack<std::pair<Package*, bool>> mStack;
 
             /// The root package being written to.
-            Package& pkg;
+            Package& mPkg;
         };
 
         /// Responsible for deserializing packages into types.
@@ -312,24 +312,24 @@ namespace cubos::core::data
         public:
             // Implement interface methods.
 
-            virtual void readI8(int8_t& value) override;
-            virtual void readI16(int16_t& value) override;
-            virtual void readI32(int32_t& value) override;
-            virtual void readI64(int64_t& value) override;
-            virtual void readU8(uint8_t& value) override;
-            virtual void readU16(uint16_t& value) override;
-            virtual void readU32(uint32_t& value) override;
-            virtual void readU64(uint64_t& value) override;
-            virtual void readF32(float& value) override;
-            virtual void readF64(double& value) override;
-            virtual void readBool(bool& value) override;
-            virtual void readString(std::string& value) override;
-            virtual void beginObject() override;
-            virtual void endObject() override;
-            virtual std::size_t beginArray() override;
-            virtual void endArray() override;
-            virtual std::size_t beginDictionary() override;
-            virtual void endDictionary() override;
+            void readI8(int8_t& value) override;
+            void readI16(int16_t& value) override;
+            void readI32(int32_t& value) override;
+            void readI64(int64_t& value) override;
+            void readU8(uint8_t& value) override;
+            void readU16(uint16_t& value) override;
+            void readU32(uint32_t& value) override;
+            void readU64(uint64_t& value) override;
+            void readF32(float& value) override;
+            void readF64(double& value) override;
+            void readBool(bool& value) override;
+            void readString(std::string& value) override;
+            void beginObject() override;
+            void endObject() override;
+            std::size_t beginArray() override;
+            void endArray() override;
+            std::size_t beginDictionary() override;
+            void endDictionary() override;
 
         private:
             friend Package;
@@ -345,10 +345,10 @@ namespace cubos::core::data
             /// The package pointer points to the current
             /// object/array/dictionary being read from.
             /// The std::size_t is the index of the next field/element to read.
-            std::stack<std::pair<const Package*, std::size_t>> stack;
+            std::stack<std::pair<const Package*, std::size_t>> mStack;
 
             /// The package being read from.
-            const Package& pkg;
+            const Package& mPkg;
         };
     } // namespace impl
 

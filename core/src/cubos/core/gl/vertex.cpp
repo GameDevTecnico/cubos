@@ -28,7 +28,7 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
 {
     std::vector<uint16_t> mask;
 
-    const auto& sz = grid.getSize();
+    const auto& sz = grid.size();
 
     // For both back and front faces.
     bool backFace = true;

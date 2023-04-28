@@ -4,36 +4,36 @@ using namespace cubos::core;
 
 ThreadPool::ThreadPool(std::size_t numThreads)
 {
-    this->threads.reserve(numThreads);
-    this->numTasks = 0;
-    this->stop = false;
+    mThreads.reserve(numThreads);
+    mNumTasks = 0;
+    mStop = false;
 
     for (std::size_t i = 0; i < numThreads; i++)
     {
-        this->threads.emplace_back([this]() {
+        mThreads.emplace_back([this]() {
             while (true)
             {
                 std::function<void()> task;
 
                 {
-                    std::unique_lock<std::mutex> lock(this->mutex);
+                    std::unique_lock<std::mutex> lock(mMutex);
 
                     // Wait until a task is available, or the thread pool is being destroyed.
-                    this->new_task.wait(lock, [this]() { return this->stop || !this->tasks.empty(); });
-                    if (this->stop && this->tasks.empty())
+                    mNewTask.wait(lock, [this]() { return mStop || !mTasks.empty(); });
+                    if (mStop && mTasks.empty())
                     {
                         return; // Thread pool is being destroyed, and there are no more tasks to execute.
                     }
-                    task = std::move(this->tasks.front());
-                    this->tasks.pop_front();
-                    this->numTasks += 1; // A task is being executed.
+                    task = std::move(mTasks.front());
+                    mTasks.pop_front();
+                    mNumTasks += 1; // A task is being executed.
                 }
 
                 task();
-                this->numTasks -= 1; // Task has finished executing.
+                mNumTasks -= 1; // Task has finished executing.
 
                 // Signal that a thread has finished executing a task.
-                this->task_done.notify_one();
+                mTaskDone.notify_one();
             }
         });
     }
@@ -41,9 +41,9 @@ ThreadPool::ThreadPool(std::size_t numThreads)
 
 ThreadPool::~ThreadPool()
 {
-    this->stop = true;
-    this->new_task.notify_all();
-    for (auto& thread : this->threads)
+    mStop = true;
+    mNewTask.notify_all();
+    for (auto& thread : mThreads)
     {
         thread.join();
     }
@@ -52,14 +52,14 @@ ThreadPool::~ThreadPool()
 void ThreadPool::addTask(std::function<void()> task)
 {
     {
-        std::unique_lock<std::mutex> lock(this->mutex);
-        this->tasks.push_back(std::move(task));
+        std::unique_lock<std::mutex> lock(mMutex);
+        mTasks.push_back(std::move(task));
     }
-    this->new_task.notify_one();
+    mNewTask.notify_one();
 }
 
 void ThreadPool::wait()
 {
-    std::unique_lock<std::mutex> lock(this->mutex);
-    this->task_done.wait(lock, [this]() { return this->numTasks == 0 && this->tasks.empty(); });
+    std::unique_lock<std::mutex> lock(mMutex);
+    mTaskDone.wait(lock, [this]() { return mNumTasks == 0 && mTasks.empty(); });
 }

@@ -1104,9 +1104,9 @@ public:
         , ps(std::move(ps))
         , program(program)
     {
-        this->m_texCount = 0;
-        this->m_uboCount = 0;
-        this->m_ssboCount = 0;
+        mTexCount = 0;
+        mUboCount = 0;
+        mSsboCount = 0;
     }
 
     OGLShaderPipeline(ShaderStage vs, ShaderStage gs, ShaderStage ps, GLuint program)
@@ -1119,9 +1119,9 @@ public:
         : cs(std::move(cs))
         , program(program)
     {
-        this->m_texCount = 0;
-        this->m_uboCount = 0;
-        this->m_ssboCount = 0;
+        mTexCount = 0;
+        mUboCount = 0;
+        mSsboCount = 0;
     }
 
     ~OGLShaderPipeline() override
@@ -1145,7 +1145,7 @@ public:
         auto loc = glGetUniformLocation(this->program, name);
         if (loc != -1)
         {
-            bps.emplace_back(name, loc, this->m_texCount++);
+            bps.emplace_back(name, loc, mTexCount++);
             return &bps.back();
         }
 
@@ -1153,7 +1153,7 @@ public:
         auto index = glGetUniformBlockIndex(this->program, name);
         if (index != GL_INVALID_INDEX)
         {
-            auto loc = this->m_uboCount;
+            auto loc = mUboCount;
             glUniformBlockBinding(this->program, index, static_cast<GLuint>(loc));
 
             GLenum glErr = glGetError();
@@ -1163,7 +1163,7 @@ public:
                 return nullptr;
             }
 
-            this->m_uboCount += 1;
+            mUboCount += 1;
             bps.emplace_back(name, loc);
             return &bps.back();
         }
@@ -1172,7 +1172,7 @@ public:
         index = glGetProgramResourceIndex(this->program, GL_SHADER_STORAGE_BLOCK, name);
         if (index != GL_INVALID_INDEX)
         {
-            auto loc = this->m_ssboCount;
+            auto loc = mSsboCount;
             glShaderStorageBlockBinding(this->program, index, static_cast<GLuint>(loc));
 
             GLenum glErr = glGetError();
@@ -1182,7 +1182,7 @@ public:
                 return nullptr;
             }
 
-            this->m_ssboCount += 1;
+            mSsboCount += 1;
             bps.emplace_back(name, loc);
             return &bps.back();
         }
@@ -1195,9 +1195,9 @@ public:
     std::list<OGLShaderBindingPoint> bps;
 
 private:
-    int m_texCount;
-    int m_uboCount;
-    int m_ssboCount;
+    int mTexCount;
+    int mUboCount;
+    int mSsboCount;
 };
 
 OGLRenderDevice::OGLRenderDevice()
@@ -1205,9 +1205,9 @@ OGLRenderDevice::OGLRenderDevice()
     glGetString(GL_VERSION);
 
     // Create default states
-    this->defaultRS = OGLRenderDevice::createRasterState({});
-    this->defaultDSS = OGLRenderDevice::createDepthStencilState({});
-    this->defaultBS = OGLRenderDevice::createBlendState({});
+    mDefaultRS = OGLRenderDevice::createRasterState({});
+    mDefaultDSS = OGLRenderDevice::createDepthStencilState({});
+    mDefaultBS = OGLRenderDevice::createBlendState({});
 }
 
 Framebuffer OGLRenderDevice::createFramebuffer(const FramebufferDesc& desc)
@@ -1440,7 +1440,7 @@ RasterState OGLRenderDevice::createRasterState(const RasterStateDesc& desc)
 
 void OGLRenderDevice::setRasterState(RasterState rs)
 {
-    auto rsImpl = std::static_pointer_cast<OGLRasterState>(rs ? rs : this->defaultRS);
+    auto rsImpl = std::static_pointer_cast<OGLRasterState>(rs ? rs : mDefaultRS);
 
     if (rsImpl->cullEnabled == 0U)
     {
@@ -1495,7 +1495,7 @@ DepthStencilState OGLRenderDevice::createDepthStencilState(const DepthStencilSta
 
 void OGLRenderDevice::setDepthStencilState(DepthStencilState dss)
 {
-    auto dssImpl = std::static_pointer_cast<OGLDepthStencilState>(dss ? dss : this->defaultDSS);
+    auto dssImpl = std::static_pointer_cast<OGLDepthStencilState>(dss ? dss : mDefaultDSS);
 
     if (dssImpl->depthEnabled == 0U)
     {
@@ -1547,7 +1547,7 @@ BlendState OGLRenderDevice::createBlendState(const BlendStateDesc& desc)
 
 void OGLRenderDevice::setBlendState(BlendState bs)
 {
-    auto bsImpl = std::static_pointer_cast<OGLBlendState>(bs ? bs : this->defaultBS);
+    auto bsImpl = std::static_pointer_cast<OGLBlendState>(bs ? bs : mDefaultBS);
 
     if (bsImpl->blendEnabled == 0U)
     {
@@ -2063,8 +2063,8 @@ void OGLRenderDevice::setIndexBuffer(IndexBuffer ib)
 {
     auto ibImpl = std::static_pointer_cast<OGLIndexBuffer>(ib);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibImpl->id);
-    this->currentIndexFormat = static_cast<int>(ibImpl->format);
-    this->currentIndexSz = ibImpl->indexSz;
+    mCurrentIndexFormat = static_cast<int>(ibImpl->format);
+    mCurrentIndexSz = ibImpl->indexSz;
 }
 
 VertexBuffer OGLRenderDevice::createVertexBuffer(std::size_t size, const void* data, Usage usage)
@@ -2427,8 +2427,8 @@ void OGLRenderDevice::drawTriangles(std::size_t offset, std::size_t count)
 
 void OGLRenderDevice::drawTrianglesIndexed(std::size_t offset, std::size_t count)
 {
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count), static_cast<GLenum>(this->currentIndexFormat),
-                   reinterpret_cast<const void*>(offset * this->currentIndexSz));
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count), static_cast<GLenum>(mCurrentIndexFormat),
+                   reinterpret_cast<const void*>(offset * mCurrentIndexSz));
 }
 
 void OGLRenderDevice::drawTrianglesInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount)
@@ -2439,8 +2439,8 @@ void OGLRenderDevice::drawTrianglesInstanced(std::size_t offset, std::size_t cou
 
 void OGLRenderDevice::drawTrianglesIndexedInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount)
 {
-    glDrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(count), static_cast<GLenum>(this->currentIndexFormat),
-                            reinterpret_cast<const void*>(offset * this->currentIndexSz),
+    glDrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(count), static_cast<GLenum>(mCurrentIndexFormat),
+                            reinterpret_cast<const void*>(offset * mCurrentIndexSz),
                             static_cast<GLsizei>(instanceCount));
 }
 

@@ -19,39 +19,39 @@ namespace cubos::core::memory
         /// @param object The object to guard.
         /// @param lock The lock to use.
         inline ReadGuard(const T& object, Lock&& lock)
-            : object(object)
-            , lock(std::move(lock))
+            : mObject(object)
+            , mLock(std::move(lock))
         {
         }
 
         /// @param other The other guard to move from.
-        inline ReadGuard(ReadGuard&& other)
-            : object(other.object)
-            , lock(std::move(other.lock))
+        inline ReadGuard(ReadGuard&& other) noexcept
+            : mObject(other.object)
+            , mLock(std::move(other.lock))
         {
         }
 
         /// @returns The underlying object.
         inline const T& get() const
         {
-            return this->object;
+            return mObject;
         }
 
         /// @returns The underlying object.
         inline const T& operator*() const
         {
-            return this->object;
+            return mObject;
         }
 
         /// @returns The underlying object.
         inline const T* operator->() const
         {
-            return &this->object;
+            return &mObject;
         }
 
     private:
-        const T& object; ///< Object being guarded.
-        Lock lock;       ///< Lock used to guard the object.
+        const T& mObject; ///< Object being guarded.
+        Lock mLock;       ///< Lock used to guard the object.
     };
 
     /// Utility class to provide safe read-write access to an object using a lock.
@@ -71,56 +71,56 @@ namespace cubos::core::memory
         /// @param object The object to guard.
         /// @param lock The lock to use.
         inline WriteGuard(T& object, Lock&& lock)
-            : object(object)
-            , lock(std::move(lock))
+            : mObject(object)
+            , mLock(std::move(lock))
         {
         }
 
         /// @param other The other guard to move from.
-        inline WriteGuard(WriteGuard&& other)
-            : object(other.object)
-            , lock(std::move(other.lock))
+        inline WriteGuard(WriteGuard&& other) noexcept
+            : mObject(other.object)
+            , mLock(std::move(other.lock))
         {
         }
 
         /// @returns The underlying object.
         inline T& get()
         {
-            return this->object;
+            return mObject;
         }
 
         /// @returns The underlying object.
         inline T& operator*()
         {
-            return this->object;
+            return mObject;
         }
 
         /// @returns The underlying object.
         inline T* operator->()
         {
-            return &this->object;
+            return &mObject;
         }
 
         /// @returns The underlying object.
         inline const T& get() const
         {
-            return this->object;
+            return mObject;
         }
 
         /// @returns The underlying object.
         inline const T& operator*() const
         {
-            return this->object;
+            return mObject;
         }
 
         /// @returns The underlying object.
         inline const T* operator->() const
         {
-            return &this->object;
+            return &mObject;
         }
 
     private:
-        T& object; ///< Object being guarded.
-        Lock lock; ///< Lock used to guard the object.
+        T& mObject; ///< Object being guarded.
+        Lock mLock; ///< Lock used to guard the object.
     };
 } // namespace cubos::core::memory

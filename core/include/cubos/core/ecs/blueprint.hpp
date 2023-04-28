@@ -88,7 +88,7 @@ namespace cubos::core::ecs
         struct Buffer : IBuffer
         {
             // Interface methods implementation.
-            inline virtual void addAll(CommandBuffer& commands, data::Context& context) override
+            inline void addAll(CommandBuffer& commands, data::Context& context) override
             {
                 this->mutex.lock();
                 auto pos = this->stream.tell();
@@ -97,7 +97,7 @@ namespace cubos::core::ecs
                 des.context().pushSubContext(context);
 
                 auto& map = des.context().get<data::SerializationMap<Entity, std::string>>();
-                for (auto name : this->names)
+                for (const auto& name : this->names)
                 {
                     ComponentType type;
                     des.read(type);
@@ -113,8 +113,8 @@ namespace cubos::core::ecs
                 }
             }
 
-            inline virtual void merge(IBuffer* other, const std::string& prefix, data::Context& src,
-                                      data::Context& dst) override
+            inline void merge(IBuffer* other, const std::string& prefix, data::Context& src,
+                              data::Context& dst) override
             {
                 auto buffer = static_cast<Buffer<ComponentType>*>(other);
 
@@ -125,9 +125,12 @@ namespace cubos::core::ecs
                 auto des = data::BinaryDeserializer(buffer->stream);
                 ser.context().pushSubContext(src);
                 des.context().pushSubContext(dst);
-                for (auto name : buffer->names)
+                for (const auto& name : buffer->names)
                 {
-                    this->names.push_back(prefix + "." + name);
+                    std::string path = prefix;
+                    path += '.';
+                    path += name;
+                    this->names.push_back(path);
                     ComponentType type;
                     des.read(type);
                     ser.write(type, "data");
@@ -143,10 +146,10 @@ namespace cubos::core::ecs
         };
 
         /// Stores the entity handles and the associated names.
-        data::SerializationMap<Entity, std::string> map;
+        data::SerializationMap<Entity, std::string> mMap;
 
         /// Buffers which store the serialized components of each type in this blueprint.
-        memory::TypeMap<IBuffer*> buffers;
+        memory::TypeMap<IBuffer*> mBuffers;
     };
 
     // Implementation.
@@ -154,8 +157,8 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     Entity Blueprint::create(const std::string& name, const ComponentTypes&... components)
     {
-        auto entity = Entity(static_cast<uint32_t>(this->map.size()), 0);
-        this->map.add(entity, name);
+        auto entity = Entity(static_cast<uint32_t>(mMap.size()), 0);
+        mMap.add(entity, name);
         this->add(entity, components...);
         return entity;
     }
@@ -163,16 +166,16 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     void Blueprint::add(Entity entity, const ComponentTypes&... components)
     {
-        assert(entity.generation == 0 && this->map.hasRef(entity));
+        assert(entity.generation == 0 && mMap.hasRef(entity));
 
         (
             [&]() {
-                auto ptr = this->buffers.at<ComponentTypes>();
+                auto ptr = mBuffers.at<ComponentTypes>();
                 IBuffer* buf;
                 if (ptr == nullptr)
                 {
                     buf = new Buffer<ComponentTypes>();
-                    this->buffers.set<ComponentTypes>(buf);
+                    mBuffers.set<ComponentTypes>(buf);
                 }
                 else
                 {
@@ -180,9 +183,9 @@ namespace cubos::core::ecs
                 }
 
                 auto ser = data::BinarySerializer(buf->stream);
-                ser.context().push(this->map);
+                ser.context().push(mMap);
                 ser.write(components, "data");
-                buf->names.push_back(this->map.getId(entity));
+                buf->names.push_back(mMap.getId(entity));
             }(),
 
             ...);

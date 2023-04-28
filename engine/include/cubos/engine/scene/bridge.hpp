@@ -37,7 +37,7 @@ namespace cubos::engine
     class SceneBridge : public AssetBridge
     {
     public:
-        virtual bool load(Assets& assets, const AnyAsset& handle) override;
-        virtual bool save(const Assets& assets, const AnyAsset& handle) override;
+        bool load(Assets& assets, const AnyAsset& handle) override;
+        bool save(const Assets& assets, const AnyAsset& handle) override;
     };
 } // namespace cubos::engine

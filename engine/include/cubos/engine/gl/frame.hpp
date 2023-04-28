@@ -68,11 +68,11 @@ namespace cubos::engine::gl
         const std::vector<core::gl::PointLight>& getPointLights() const;
 
     private:
-        glm::vec3 ambientColor;
-        std::vector<DrawCmd> drawCmds;
-        std::vector<core::gl::SpotLight> spotLights;
-        std::vector<core::gl::DirectionalLight> directionalLights;
-        std::vector<core::gl::PointLight> pointLights;
+        glm::vec3 mAmbientColor;
+        std::vector<DrawCmd> mDrawCmds;
+        std::vector<core::gl::SpotLight> mSpotLights;
+        std::vector<core::gl::DirectionalLight> mDirectionalLights;
+        std::vector<core::gl::PointLight> mPointLights;
     };
 } // namespace cubos::engine::gl
 

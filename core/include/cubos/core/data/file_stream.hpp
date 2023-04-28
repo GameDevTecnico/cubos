@@ -1,6 +1,8 @@
 #ifndef CUBOS_CORE_DATA_FILE_STREAM_HPP
 #define CUBOS_CORE_DATA_FILE_STREAM_HPP
 
+#include <utility>
+
 #include <cubos/core/data/file.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/stream.hpp>
@@ -19,77 +21,77 @@ namespace cubos::core::data
         /// @param mode The mode to open the file in.
         /// @param stream The stream to read/write from/to.
         FileStream(File::Handle file, File::OpenMode mode, T&& stream);
-        virtual ~FileStream() override = default;
+        ~FileStream() override = default;
 
-        virtual std::size_t read(void* buffer, std::size_t size) override;
-        virtual std::size_t write(const void* buffer, std::size_t size) override;
-        virtual std::size_t tell() const override;
-        virtual void seek(ptrdiff_t offset, memory::SeekOrigin origin) override;
-        virtual bool eof() const override;
-        virtual char peek() const override;
+        std::size_t read(void* buffer, std::size_t size) override;
+        std::size_t write(const void* buffer, std::size_t size) override;
+        std::size_t tell() const override;
+        void seek(ptrdiff_t offset, memory::SeekOrigin origin) override;
+        bool eof() const override;
+        char peek() const override;
 
     private:
-        File::Handle file;
-        File::OpenMode mode;
-        T stream;
+        File::Handle mFile;
+        File::OpenMode mMode;
+        T mStream;
     };
 
     // Implementation
 
     template <typename T>
     inline FileStream<T>::FileStream(File::Handle file, File::OpenMode mode, T&& stream)
-        : file(file)
-        , mode(mode)
-        , stream(std::move(stream))
+        : mFile(std::move(file))
+        , mMode(mode)
+        , mStream(std::move(stream))
     {
     }
 
     template <typename T>
     inline std::size_t FileStream<T>::read(void* buffer, std::size_t size)
     {
-        if (this->mode != File::OpenMode::Read)
+        if (mMode != File::OpenMode::Read)
         {
             CUBOS_CRITICAL("Can't read from a file stream opened for writing.");
             abort();
         }
 
-        return stream.read(buffer, size);
+        return mStream.read(buffer, size);
     }
 
     template <typename T>
     inline std::size_t FileStream<T>::write(const void* buffer, std::size_t size)
     {
-        if (this->mode != File::OpenMode::Write)
+        if (mMode != File::OpenMode::Write)
         {
             CUBOS_CRITICAL("Can't write to a file stream opened for reading.");
             abort();
         }
 
-        return stream.write(buffer, size);
+        return mStream.write(buffer, size);
     }
 
     template <typename T>
     inline std::size_t FileStream<T>::tell() const
     {
-        return stream.tell();
+        return mStream.tell();
     }
 
     template <typename T>
     inline void FileStream<T>::seek(ptrdiff_t offset, memory::SeekOrigin origin)
     {
-        stream.seek(offset, origin);
+        mStream.seek(offset, origin);
     }
 
     template <typename T>
     inline bool FileStream<T>::eof() const
     {
-        return stream.eof();
+        return mStream.eof();
     }
 
     template <typename T>
     inline char FileStream<T>::peek() const
     {
-        return stream.peek();
+        return mStream.peek();
     }
 } // namespace cubos::core::data
 

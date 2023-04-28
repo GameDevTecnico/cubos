@@ -75,6 +75,8 @@ namespace cubos::core::al
         class Buffer
         {
         public:
+            virtual ~Buffer() = default;
+
             /// Fills the buffer with data.
             /// @param format The audio format.
             /// @param size The size of the buffer in bytes.
@@ -84,13 +86,14 @@ namespace cubos::core::al
 
         protected:
             Buffer() = default;
-            virtual ~Buffer() = default;
         };
 
         /// Abstract audio source, should not be used directly.
         class Source
         {
         public:
+            virtual ~Source() = default;
+
             /// Sets the buffer to be played.
             /// @param buffer The buffer to be played.
             virtual void setBuffer(std::shared_ptr<Buffer> buffer) = 0;
@@ -145,7 +148,6 @@ namespace cubos::core::al
 
         protected:
             Source() = default;
-            virtual ~Source() = default;
         };
     } // namespace impl
 } // namespace cubos::core::al

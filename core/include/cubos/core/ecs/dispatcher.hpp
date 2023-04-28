@@ -12,7 +12,7 @@
 #define ENSURE_CURR_SYSTEM()                                                                                           \
     do                                                                                                                 \
     {                                                                                                                  \
-        if (!currSystem)                                                                                               \
+        if (!mCurrSystem)                                                                                              \
         {                                                                                                              \
             CUBOS_ERROR("No system currently selected!");                                                              \
             return;                                                                                                    \
@@ -21,7 +21,7 @@
 #define ENSURE_CURR_TAG()                                                                                              \
     do                                                                                                                 \
     {                                                                                                                  \
-        if (currTag.empty())                                                                                           \
+        if (mCurrTag.empty())                                                                                          \
         {                                                                                                              \
             CUBOS_ERROR("No tag currently selected!");                                                                 \
             return;                                                                                                    \
@@ -30,17 +30,17 @@
 #define ENSURE_SYSTEM_SETTINGS(obj)                                                                                    \
     do                                                                                                                 \
     {                                                                                                                  \
-        if (!obj->settings)                                                                                            \
+        if (!(obj)->settings)                                                                                          \
         {                                                                                                              \
-            obj->settings = std::make_shared<SystemSettings>();                                                        \
+            (obj)->settings = std::make_shared<SystemSettings>();                                                      \
         }                                                                                                              \
     } while (false)
 #define ENSURE_TAG_SETTINGS(tag)                                                                                       \
     do                                                                                                                 \
     {                                                                                                                  \
-        if (tagSettings.find(tag) == tagSettings.end())                                                                \
+        if (mTagSettings.find(tag) == mTagSettings.end())                                                              \
         {                                                                                                              \
-            tagSettings[tag] = std::make_shared<SystemSettings>();                                                     \
+            mTagSettings[tag] = std::make_shared<SystemSettings>();                                                    \
         }                                                                                                              \
     } while (false)
 
@@ -171,71 +171,75 @@ namespace cubos::core::ecs
         void handleTagInheritance(std::shared_ptr<SystemSettings>& settings);
 
         /// Variables for holding information before call chain is compiled.
-        std::vector<System*> pendingSystems;                                ///< All systems.
-        std::map<std::string, std::shared_ptr<SystemSettings>> tagSettings; ///< All tags.
-        System* currSystem;                                                 ///< Last set system, for changing settings.
-        std::string currTag;                                                ///< Last set tag, for changing settings.
+        std::vector<System*> mPendingSystems;                                ///< All systems.
+        std::map<std::string, std::shared_ptr<SystemSettings>> mTagSettings; ///< All tags.
+        System* mCurrSystem;  ///< Last set system, for changing settings.
+        std::string mCurrTag; ///< Last set tag, for changing settings.
 
         /// Variables for holding information after call chain is compiled.
-        std::vector<System*> systems; ///< Compiled order of running systems.
-        bool prepared = false;        ///< Whether the systems are prepared for execution.
+        std::vector<System*> mSystems; ///< Compiled order of running systems.
+        bool mPrepared = false;        ///< Whether the systems are prepared for execution.
     };
 
     template <typename F>
     void Dispatcher::addSystem(F func)
     {
         // Wrap the system and put it in the pending queue
-        System* system = new System{nullptr, std::make_shared<SystemWrapper<F>>(func), {}};
-        pendingSystems.push_back(system);
-        currSystem = pendingSystems.back();
+        auto* system = new System{nullptr, std::make_shared<SystemWrapper<F>>(func), {}};
+        mPendingSystems.push_back(system);
+        mCurrSystem = mPendingSystems.back();
     }
 
     template <typename F>
     void Dispatcher::systemSetAfterSystem(F func)
     {
-        auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System* system) {
-            SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system->system.get());
+        auto it = std::find_if(mPendingSystems.begin(), mPendingSystems.end(), [&func](const System* system) {
+            auto* wrapper = dynamic_cast<SystemWrapper<F>*>(system->system.get());
             if (!wrapper)
+            {
                 return false;
+            }
             return wrapper->system == func;
         });
-        if (it == pendingSystems.end())
+        if (it == mPendingSystems.end())
         {
             CUBOS_ERROR("Tried to set system after a non-existing system!");
             return;
         }
         ENSURE_CURR_SYSTEM();
-        ENSURE_SYSTEM_SETTINGS(currSystem);
+        ENSURE_SYSTEM_SETTINGS(mCurrSystem);
         System* system = *it;
         ENSURE_SYSTEM_SETTINGS(system);
         // Set curr to run after this system
-        currSystem->settings->after.system.push_back(system);
+        mCurrSystem->settings->after.system.push_back(system);
         // And this system to run before curr
-        system->settings->before.system.push_back(currSystem);
+        system->settings->before.system.push_back(mCurrSystem);
     }
 
     template <typename F>
     void Dispatcher::systemSetBeforeSystem(F func)
     {
-        auto it = std::find_if(pendingSystems.begin(), pendingSystems.end(), [&func](const System* system) {
-            SystemWrapper<F>* wrapper = dynamic_cast<SystemWrapper<F>*>(system->system.get());
+        auto it = std::find_if(mPendingSystems.begin(), mPendingSystems.end(), [&func](const System* system) {
+            auto* wrapper = dynamic_cast<SystemWrapper<F>*>(system->system.get());
             if (!wrapper)
+            {
                 return false;
+            }
             return wrapper->system == func;
         });
-        if (it == pendingSystems.end())
+        if (it == mPendingSystems.end())
         {
             CUBOS_ERROR("Tried to set system before a non-existing system!");
             return;
         }
         ENSURE_CURR_SYSTEM();
-        ENSURE_SYSTEM_SETTINGS(currSystem);
+        ENSURE_SYSTEM_SETTINGS(mCurrSystem);
         System* system = *it;
         ENSURE_SYSTEM_SETTINGS(system);
         // Set curr to run before this system
-        currSystem->settings->before.system.push_back(system);
+        mCurrSystem->settings->before.system.push_back(system);
         // And this system to run after curr
-        system->settings->after.system.push_back(currSystem);
+        system->settings->after.system.push_back(mCurrSystem);
     }
 } // namespace cubos::core::ecs
 #endif // CUBOS_CORE_ECS_DISPATCHER_HPP

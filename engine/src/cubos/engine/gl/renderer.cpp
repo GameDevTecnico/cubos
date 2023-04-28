@@ -4,8 +4,8 @@ using namespace cubos::core::gl;
 using namespace cubos::engine::gl;
 
 BaseRenderer::BaseRenderer(RenderDevice& renderDevice, glm::uvec2 size)
-    : renderDevice(renderDevice)
-    , ppsManager(renderDevice, size)
+    : mRenderDevice(renderDevice)
+    , mPpsManager(renderDevice, size)
 {
     this->resizeTex(size);
 }
@@ -13,18 +13,18 @@ BaseRenderer::BaseRenderer(RenderDevice& renderDevice, glm::uvec2 size)
 void BaseRenderer::resize(glm::uvec2 size)
 {
     this->resizeTex(size);
-    this->ppsManager.resize(size);
+    mPpsManager.resize(size);
     this->onResize(size);
 }
 
 void BaseRenderer::render(const Camera& camera, const Frame& frame, bool usePostProcessing,
                           const core::gl::Framebuffer& target)
 {
-    if (usePostProcessing && this->ppsManager.passCount() > 0)
+    if (usePostProcessing && mPpsManager.passCount() > 0)
     {
-        this->onRender(camera, frame, this->framebuffer);
-        this->ppsManager.provideInput(pps::Input::Lighting, this->texture);
-        this->ppsManager.execute(target);
+        this->onRender(camera, frame, mFramebuffer);
+        mPpsManager.provideInput(pps::Input::Lighting, mTexture);
+        mPpsManager.execute(target);
     }
     else
     {
@@ -34,7 +34,7 @@ void BaseRenderer::render(const Camera& camera, const Frame& frame, bool usePost
 
 pps::Manager& BaseRenderer::pps()
 {
-    return this->ppsManager;
+    return mPpsManager;
 }
 
 void BaseRenderer::resizeTex(glm::uvec2 size)
@@ -43,10 +43,10 @@ void BaseRenderer::resizeTex(glm::uvec2 size)
     textureDesc.format = TextureFormat::RGBA32Float;
     textureDesc.width = size.x;
     textureDesc.height = size.y;
-    this->texture = renderDevice.createTexture2D(textureDesc);
+    mTexture = mRenderDevice.createTexture2D(textureDesc);
 
     FramebufferDesc framebufferDesc;
     framebufferDesc.targetCount = 1;
-    framebufferDesc.targets[0].setTexture2DTarget(this->texture);
-    this->framebuffer = renderDevice.createFramebuffer(framebufferDesc);
+    framebufferDesc.targets[0].setTexture2DTarget(mTexture);
+    mFramebuffer = mRenderDevice.createFramebuffer(framebufferDesc);
 }

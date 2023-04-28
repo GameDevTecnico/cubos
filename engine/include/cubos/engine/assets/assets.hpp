@@ -178,15 +178,15 @@ namespace cubos::engine
         {
             Entry();
 
-            Status status;  ///< The status of the asset.
-            AssetMeta meta; ///< The metadata associated with the asset.
+            Status status{Status::Unloaded}; ///< The status of the asset.
+            AssetMeta meta;                  ///< The metadata associated with the asset.
 
             std::atomic<int> refCount;        ///< Number of strong handles referencing the asset.
-            int version;                      ///< Number of times the asset has been updated.
+            int version{0};                   ///< Number of times the asset has been updated.
             std::shared_mutex mutex;          ///< Mutex for the asset data.
             std::condition_variable_any cond; ///< Triggered when the asset is loaded.
 
-            void* data;                ///< Pointer to the asset data, if loaded. Otherwise, nullptr.
+            void* data{nullptr};       ///< Pointer to the asset data, if loaded. Otherwise, nullptr.
             std::type_index type;      ///< The type of the asset data - initially typeid(void).
             void (*destructor)(void*); ///< The destructor for the asset data - initially nullptr.
         };
@@ -258,22 +258,22 @@ namespace cubos::engine
         void loader();
 
         /// Bridges associated to their supported extensions.
-        std::unordered_map<std::string, std::shared_ptr<AssetBridge>> bridges;
+        std::unordered_map<std::string, std::shared_ptr<AssetBridge>> mBridges;
 
         /// Info for all known assets.
-        std::unordered_map<uuids::uuid, std::shared_ptr<Entry>> entries;
+        std::unordered_map<uuids::uuid, std::shared_ptr<Entry>> mEntries;
 
         /// Merseenne Twister used for random UUID generation.
-        std::optional<std::mt19937> random;
+        std::optional<std::mt19937> mRandom;
 
         /// Read-write lock protecting the bridges and entries maps.
-        mutable std::shared_mutex mutex;
+        mutable std::shared_mutex mMutex;
 
         /// Loader thread for asynchronous loading.
-        std::thread loaderThread;
-        mutable std::deque<Task> loaderQueue;       ///< Queued tasks for the loader thread.
-        mutable std::mutex loaderMutex;             ///< Mutex for the loader queue.
-        mutable std::condition_variable loaderCond; ///< Triggered on queue change or on exit.
-        bool loaderShouldExit;                      ///< Whether the loader thread should exit.
+        std::thread mLoaderThread;
+        mutable std::deque<Task> mLoaderQueue;       ///< Queued tasks for the loader thread.
+        mutable std::mutex mLoaderMutex;             ///< Mutex for the loader queue.
+        mutable std::condition_variable mLoaderCond; ///< Triggered on queue change or on exit.
+        bool mLoaderShouldExit;                      ///< Whether the loader thread should exit.
     };
 } // namespace cubos::engine

@@ -9,52 +9,52 @@ Package::Package(Type type)
     switch (type)
     {
     case Type::None:
-        this->data = std::monostate();
+        mData = std::monostate();
         break;
     case Type::I8:
-        this->data = static_cast<int8_t>(0);
+        mData = static_cast<int8_t>(0);
         break;
     case Type::I16:
-        this->data = static_cast<int16_t>(0);
+        mData = static_cast<int16_t>(0);
         break;
     case Type::I32:
-        this->data = static_cast<int32_t>(0);
+        mData = static_cast<int32_t>(0);
         break;
     case Type::I64:
-        this->data = static_cast<int64_t>(0);
+        mData = static_cast<int64_t>(0);
         break;
     case Type::U8:
-        this->data = static_cast<uint8_t>(0);
+        mData = static_cast<uint8_t>(0);
         break;
     case Type::U16:
-        this->data = static_cast<uint16_t>(0);
+        mData = static_cast<uint16_t>(0);
         break;
     case Type::U32:
-        this->data = static_cast<uint32_t>(0);
+        mData = static_cast<uint32_t>(0);
         break;
     case Type::U64:
-        this->data = static_cast<uint64_t>(0);
+        mData = static_cast<uint64_t>(0);
         break;
     case Type::F32:
-        this->data = static_cast<float>(0);
+        mData = static_cast<float>(0);
         break;
     case Type::F64:
-        this->data = static_cast<double>(0);
+        mData = static_cast<double>(0);
         break;
     case Type::Bool:
-        this->data = false;
+        mData = false;
         break;
     case Type::String:
-        this->data = std::string();
+        mData = std::string();
         break;
     case Type::Object:
-        this->data = Fields();
+        mData = Fields();
         break;
     case Type::Array:
-        this->data = Elements();
+        mData = Elements();
         break;
     case Type::Dictionary:
-        this->data = Dictionary();
+        mData = Dictionary();
         break;
     default:
         abort();
@@ -66,44 +66,44 @@ bool Package::change(int64_t data)
     switch (this->type())
     {
     case Type::I8:
-        this->data = static_cast<int8_t>(data);
+        mData = static_cast<int8_t>(data);
         return true;
     case Type::I16:
-        this->data = static_cast<int16_t>(data);
+        mData = static_cast<int16_t>(data);
         return true;
     case Type::I32:
-        this->data = static_cast<int32_t>(data);
+        mData = static_cast<int32_t>(data);
         return true;
     case Type::I64:
-        this->data = data;
+        mData = data;
         return true;
     case Type::U8:
         if (data < 0 || data > UINT8_MAX)
         {
             return false;
         }
-        this->data = static_cast<uint8_t>(data);
+        mData = static_cast<uint8_t>(data);
         return true;
     case Type::U16:
         if (data < 0 || data > UINT16_MAX)
         {
             return false;
         }
-        this->data = static_cast<uint16_t>(data);
+        mData = static_cast<uint16_t>(data);
         return true;
     case Type::U32:
         if (data < 0 || data > UINT32_MAX)
         {
             return false;
         }
-        this->data = static_cast<uint32_t>(data);
+        mData = static_cast<uint32_t>(data);
         return true;
     case Type::U64:
         if (data < 0)
         {
             return false;
         }
-        this->data = static_cast<uint64_t>(data);
+        mData = static_cast<uint64_t>(data);
         return true;
     default:
         return false;
@@ -119,52 +119,52 @@ bool Package::change(uint64_t data)
         {
             return false;
         }
-        this->data = static_cast<int8_t>(data);
+        mData = static_cast<int8_t>(data);
         return true;
     case Type::I16:
         if (data > INT16_MAX)
         {
             return false;
         }
-        this->data = static_cast<int16_t>(data);
+        mData = static_cast<int16_t>(data);
         return true;
     case Type::I32:
         if (data > INT32_MAX)
         {
             return false;
         }
-        this->data = static_cast<int32_t>(data);
+        mData = static_cast<int32_t>(data);
         return true;
     case Type::I64:
         if (data > INT64_MAX)
         {
             return false;
         }
-        this->data = static_cast<int64_t>(data);
+        mData = static_cast<int64_t>(data);
         return true;
     case Type::U8:
         if (data > UINT8_MAX)
         {
             return false;
         }
-        this->data = static_cast<uint8_t>(data);
+        mData = static_cast<uint8_t>(data);
         return true;
     case Type::U16:
         if (data > UINT16_MAX)
         {
             return false;
         }
-        this->data = static_cast<uint16_t>(data);
+        mData = static_cast<uint16_t>(data);
         return true;
     case Type::U32:
         if (data > UINT32_MAX)
         {
             return false;
         }
-        this->data = static_cast<uint32_t>(data);
+        mData = static_cast<uint32_t>(data);
         return true;
     case Type::U64:
-        this->data = data;
+        mData = data;
         return true;
     default:
         return false;
@@ -176,10 +176,10 @@ bool Package::change(double data)
     switch (this->type())
     {
     case Type::F32:
-        this->data = static_cast<float>(data);
+        mData = static_cast<float>(data);
         return true;
     case Type::F64:
-        this->data = data;
+        mData = data;
         return true;
     default:
         return false;
@@ -191,7 +191,7 @@ bool Package::change(bool data)
     switch (this->type())
     {
     case Type::Bool:
-        this->data = data;
+        mData = data;
         return true;
     default:
         return false;
@@ -203,7 +203,7 @@ bool Package::change(const std::string& data)
     switch (this->type())
     {
     case Type::String:
-        this->data = data;
+        mData = data;
         return true;
     default:
         return false;
@@ -212,7 +212,7 @@ bool Package::change(const std::string& data)
 
 Package::Type Package::type() const
 {
-    return static_cast<Package::Type>(this->data.index());
+    return static_cast<Package::Type>(mData.index());
 }
 
 std::size_t Package::size() const
@@ -222,11 +222,11 @@ std::size_t Package::size() const
     case Type::None:
         return 0;
     case Type::Object:
-        return std::get<Fields>(this->data).size();
+        return std::get<Fields>(mData).size();
     case Type::Array:
-        return std::get<Elements>(this->data).size();
+        return std::get<Elements>(mData).size();
     case Type::Dictionary:
-        return std::get<Dictionary>(this->data).size();
+        return std::get<Dictionary>(mData).size();
     default:
         return 1; // Its a scalar.
     }
@@ -263,12 +263,12 @@ Package& Package::field(const std::string& name)
 
 Package::Fields& Package::fields()
 {
-    return std::get<Fields>(this->data);
+    return std::get<Fields>(mData);
 }
 
 const Package::Fields& Package::fields() const
 {
-    return std::get<Fields>(this->data);
+    return std::get<Fields>(mData);
 }
 
 Package& Package::element(std::size_t index)
@@ -279,22 +279,22 @@ Package& Package::element(std::size_t index)
 
 Package::Elements& Package::elements()
 {
-    return std::get<Elements>(this->data);
+    return std::get<Elements>(mData);
 }
 
 const Package::Elements& Package::elements() const
 {
-    return std::get<Elements>(this->data);
+    return std::get<Elements>(mData);
 }
 
 Package::Dictionary& Package::dictionary()
 {
-    return std::get<Dictionary>(this->data);
+    return std::get<Dictionary>(mData);
 }
 
 const Package::Dictionary& Package::dictionary() const
 {
-    return std::get<Dictionary>(this->data);
+    return std::get<Dictionary>(mData);
 }
 
 const char* Package::typeToString(Type type)
@@ -345,43 +345,43 @@ void Package::serialize(Serializer& ser, const char* name) const
     case Package::Type::None:
         abort(); // Empty packages can't be serialized.
     case Package::Type::I8:
-        ser.writeI8(std::get<int8_t>(this->data), name);
+        ser.writeI8(std::get<int8_t>(mData), name);
         break;
     case Package::Type::I16:
-        ser.writeI16(std::get<int16_t>(this->data), name);
+        ser.writeI16(std::get<int16_t>(mData), name);
         break;
     case Package::Type::I32:
-        ser.writeI32(std::get<int32_t>(this->data), name);
+        ser.writeI32(std::get<int32_t>(mData), name);
         break;
     case Package::Type::I64:
-        ser.writeI64(std::get<int64_t>(this->data), name);
+        ser.writeI64(std::get<int64_t>(mData), name);
         break;
     case Package::Type::U8:
-        ser.writeU8(std::get<uint8_t>(this->data), name);
+        ser.writeU8(std::get<uint8_t>(mData), name);
         break;
     case Package::Type::U16:
-        ser.writeU16(std::get<uint16_t>(this->data), name);
+        ser.writeU16(std::get<uint16_t>(mData), name);
         break;
     case Package::Type::U32:
-        ser.writeU32(std::get<uint32_t>(this->data), name);
+        ser.writeU32(std::get<uint32_t>(mData), name);
         break;
     case Package::Type::U64:
-        ser.writeU64(std::get<uint64_t>(this->data), name);
+        ser.writeU64(std::get<uint64_t>(mData), name);
         break;
     case Package::Type::F32:
-        ser.writeF32(std::get<float>(this->data), name);
+        ser.writeF32(std::get<float>(mData), name);
         break;
     case Package::Type::F64:
-        ser.writeF64(std::get<double>(this->data), name);
+        ser.writeF64(std::get<double>(mData), name);
         break;
     case Package::Type::Bool:
-        ser.writeBool(std::get<bool>(this->data), name);
+        ser.writeBool(std::get<bool>(mData), name);
         break;
     case Package::Type::String:
-        ser.writeString(std::get<std::string>(this->data).c_str(), name);
+        ser.writeString(std::get<std::string>(mData).c_str(), name);
         break;
     case Package::Type::Object: {
-        const auto& fields = std::get<Package::Fields>(this->data);
+        const auto& fields = std::get<Package::Fields>(mData);
         ser.beginObject(name);
         for (const auto& field : fields)
         {
@@ -391,7 +391,7 @@ void Package::serialize(Serializer& ser, const char* name) const
         break;
     }
     case Package::Type::Array: {
-        const auto& elements = std::get<Package::Elements>(this->data);
+        const auto& elements = std::get<Package::Elements>(mData);
         ser.beginArray(elements.size(), name);
         for (const auto& element : elements)
         {
@@ -401,7 +401,7 @@ void Package::serialize(Serializer& ser, const char* name) const
         break;
     }
     case Package::Type::Dictionary: {
-        const auto& dictionary = std::get<Package::Dictionary>(this->data);
+        const auto& dictionary = std::get<Package::Dictionary>(mData);
         ser.beginDictionary(dictionary.size(), name);
         for (const auto& entry : dictionary)
         {
@@ -415,7 +415,7 @@ void Package::serialize(Serializer& ser, const char* name) const
 }
 
 impl::Packager::Packager(Package& pkg)
-    : pkg(pkg)
+    : mPkg(pkg)
 {
     // Do nothing.
 }
@@ -482,69 +482,69 @@ void impl::Packager::writeString(const char* value, const char* name)
 
 void impl::Packager::beginObject(const char* name)
 {
-    this->stack.push({this->push(Package::Fields(), name), false});
+    mStack.push({this->push(Package::Fields(), name), false});
 }
 
 void impl::Packager::endObject()
 {
-    assert(!this->stack.empty());
-    this->stack.pop();
+    assert(!mStack.empty());
+    mStack.pop();
 }
 
 void impl::Packager::beginArray(std::size_t /*length*/, const char* name)
 {
-    this->stack.push({this->push(Package::Elements(), name), false});
+    mStack.push({this->push(Package::Elements(), name), false});
 }
 
 void impl::Packager::endArray()
 {
-    assert(!this->stack.empty());
-    this->stack.pop();
+    assert(!mStack.empty());
+    mStack.pop();
 }
 
 void impl::Packager::beginDictionary(std::size_t /*length*/, const char* name)
 {
-    this->stack.push({this->push(Package::Dictionary(), name), true});
+    mStack.push({this->push(Package::Dictionary(), name), true});
 }
 
 void impl::Packager::endDictionary()
 {
-    assert(!this->stack.empty());
-    this->stack.pop();
+    assert(!mStack.empty());
+    mStack.pop();
 }
 
 Package* impl::Packager::push(Package::Data&& data, const char* name)
 {
-    if (this->stack.empty())
+    if (mStack.empty())
     {
-        this->pkg.data = std::move(data);
-        return &this->pkg;
+        mPkg.mData = std::move(data);
+        return &mPkg;
     }
 
-    auto& [pkg, isKey] = this->stack.top();
+    auto& [pkg, isKey] = mStack.top();
     switch (pkg->type())
     {
     case Package::Type::Object:
         assert(name != nullptr);
         pkg->fields().emplace_back(name, Package());
-        pkg->fields().back().second.data = std::move(data);
+        pkg->fields().back().second.mData = std::move(data);
         return &pkg->fields().back().second;
     case Package::Type::Array:
         pkg->elements().emplace_back();
-        pkg->elements().back().data = std::move(data);
+        pkg->elements().back().mData = std::move(data);
         return &pkg->elements().back();
     case Package::Type::Dictionary:
         if (isKey)
         {
             isKey = false;
             pkg->dictionary().push_back({Package(), Package()});
-            pkg->dictionary().back().first.data = std::move(data);
+            pkg->dictionary().back().first.mData = std::move(data);
             return &pkg->dictionary().back().first;
         }
         else
         {
             isKey = true;
-            pkg->dictionary().back().second.data = std::move(data);
+            pkg->dictionary().back().second.mData = std::move(data);
             return &pkg->dictionary().back().second;
         }
     default:
@@ -553,7 +553,7 @@ Package* impl::Packager::push(Package::Data&& data, const char* name)
 }
 
 impl::Unpackager::Unpackager(const Package& pkg)
-    : pkg(pkg)
+    : mPkg(pkg)
 {
     // Do nothing.
 }
@@ -562,7 +562,7 @@ impl::Unpackager::Unpackager(const Package& pkg)
     do                                                                                                                 \
     {                                                                                                                  \
         CUBOS_ERROR("Expected {}, found {}", expected, found);                                                         \
-        this->failBit = true;                                                                                          \
+        mFailBit = true;                                                                                          \
     } while (0)
 
 #define TYPE_MISMATCH(expected, found) UNEXPECTED(Package::typeToString(expected), Package::typeToString(found))
@@ -576,7 +576,7 @@ void impl::Unpackager::readI8(int8_t& value)
     }
     else
     {
-        value = std::get<int8_t>(d->data);
+        value = std::get<int8_t>(d->mData);
     }
 }
 
@@ -589,7 +589,7 @@ void impl::Unpackager::readI16(int16_t& value)
     }
     else
     {
-        value = std::get<int16_t>(d->data);
+        value = std::get<int16_t>(d->mData);
     }
 }
 
@@ -602,7 +602,7 @@ void impl::Unpackager::readI32(int32_t& value)
     }
     else
     {
-        value = std::get<int32_t>(d->data);
+        value = std::get<int32_t>(d->mData);
     }
 }
 
@@ -615,7 +615,7 @@ void impl::Unpackager::readI64(int64_t& value)
     }
     else
     {
-        value = std::get<int64_t>(d->data);
+        value = std::get<int64_t>(d->mData);
     }
 }
 
@@ -628,7 +628,7 @@ void impl::Unpackager::readU8(uint8_t& value)
     }
     else
     {
-        value = std::get<uint8_t>(d->data);
+        value = std::get<uint8_t>(d->mData);
     }
 }
 
@@ -641,7 +641,7 @@ void impl::Unpackager::readU16(uint16_t& value)
     }
     else
     {
-        value = std::get<uint16_t>(d->data);
+        value = std::get<uint16_t>(d->mData);
     }
 }
 
@@ -654,7 +654,7 @@ void impl::Unpackager::readU32(uint32_t& value)
     }
     else
     {
-        value = std::get<uint32_t>(d->data);
+        value = std::get<uint32_t>(d->mData);
     }
 }
 
@@ -667,7 +667,7 @@ void impl::Unpackager::readU64(uint64_t& value)
     }
     else
     {
-        value = std::get<uint64_t>(d->data);
+        value = std::get<uint64_t>(d->mData);
     }
 }
 
@@ -680,7 +680,7 @@ void impl::Unpackager::readF32(float& value)
     }
     else
     {
-        value = std::get<float>(d->data);
+        value = std::get<float>(d->mData);
     }
 }
 
@@ -693,7 +693,7 @@ void impl::Unpackager::readF64(double& value)
     }
     else
     {
-        value = std::get<double>(d->data);
+        value = std::get<double>(d->mData);
     }
 }
 
@@ -706,7 +706,7 @@ void impl::Unpackager::readBool(bool& value)
     }
     else
     {
-        value = std::get<bool>(d->data);
+        value = std::get<bool>(d->mData);
     }
 }
 
@@ -719,7 +719,7 @@ void impl::Unpackager::readString(std::string& value)
     }
     else
     {
-        value = std::get<std::string>(d->data);
+        value = std::get<std::string>(d->mData);
     }
 }
 
@@ -732,14 +732,14 @@ void impl::Unpackager::beginObject()
     }
     else
     {
-        this->stack.push({d, 0});
+        mStack.push({d, 0});
     }
 }
 
 void impl::Unpackager::endObject()
 {
-    assert(!this->stack.empty());
-    this->stack.pop();
+    assert(!mStack.empty());
+    mStack.pop();
 }
 
 std::size_t impl::Unpackager::beginArray()
@@ -751,14 +751,14 @@ std::size_t impl::Unpackager::beginArray()
         return 0;
     }
 
-    this->stack.push({d, 0});
+    mStack.push({d, 0});
     return d->elements().size();
 }
 
 void impl::Unpackager::endArray()
 {
-    assert(!this->stack.empty());
-    this->stack.pop();
+    assert(!mStack.empty());
+    mStack.pop();
 }
 
 std::size_t impl::Unpackager::beginDictionary()
@@ -770,23 +770,23 @@ std::size_t impl::Unpackager::beginDictionary()
         return 0;
     }
 
-    this->stack.push({d, 0});
+    mStack.push({d, 0});
     return d->dictionary().size();
 }
 
 void impl::Unpackager::endDictionary()
 {
-    assert(!this->stack.empty());
-    this->stack.pop();
+    assert(!mStack.empty());
+    mStack.pop();
 }
 
 const Package* impl::Unpackager::pop()
 {
-    if (this->stack.empty())
+    if (mStack.empty())
     {
-        return &this->pkg;
+        return &mPkg;
     }
-    auto& [pkg, index] = this->stack.top();
+    auto& [pkg, index] = mStack.top();
     switch (pkg->type())
     {
     case Package::Type::Object:
@@ -805,23 +805,21 @@ const Package* impl::Unpackager::pop()
         {
             return nullptr;
         }
-        else
-        {
-            return &pkg->elements()[index++];
-        }
+
+        return &pkg->elements()[index++];
+
     case Package::Type::Dictionary:
         if (index / 2 >= pkg->dictionary().size())
         {
             return nullptr;
         }
-        else if (index % 2 == 0)
+        if (index % 2 == 0)
         {
             return &pkg->dictionary()[(index++) / 2].first;
         }
-        else
-        {
-            return &pkg->dictionary()[(index++) / 2].second;
-        }
+
+        return &pkg->dictionary()[(index++) / 2].second;
+
     default:
         abort(); // Unreachable.
     }

@@ -37,7 +37,7 @@ namespace cubos::engine::gl::pps
                              core::gl::Framebuffer out) const = 0;
 
     protected:
-        core::gl::RenderDevice& renderDevice; ///< Thhe render device to use.
+        core::gl::RenderDevice& mRenderDevice; ///< The render device to use.
     };
 } // namespace cubos::engine::gl::pps
 

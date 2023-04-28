@@ -17,80 +17,80 @@ static inline T toEndianness(T val, bool toLittleEndian)
 }
 
 BinarySerializer::BinarySerializer(memory::Stream& stream, bool writeLittleEndian)
-    : stream(stream)
+    : mStream(stream)
 {
-    this->writeLittleEndian = writeLittleEndian;
+    mWriteLittleEndian = writeLittleEndian;
 }
 
 void BinarySerializer::writeI8(int8_t value, const char* /*name*/)
 {
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeI16(int16_t value, const char* /*name*/)
 {
-    value = toEndianness(value, this->writeLittleEndian);
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    value = toEndianness(value, mWriteLittleEndian);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeI32(int32_t value, const char* /*name*/)
 {
-    value = toEndianness(value, this->writeLittleEndian);
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    value = toEndianness(value, mWriteLittleEndian);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeI64(int64_t value, const char* /*name*/)
 {
-    value = toEndianness(value, this->writeLittleEndian);
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    value = toEndianness(value, mWriteLittleEndian);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeU8(uint8_t value, const char* /*name*/)
 {
-    value = toEndianness(value, this->writeLittleEndian);
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    value = toEndianness(value, mWriteLittleEndian);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeU16(uint16_t value, const char* /*name*/)
 {
-    value = toEndianness(value, this->writeLittleEndian);
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    value = toEndianness(value, mWriteLittleEndian);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeU32(uint32_t value, const char* /*name*/)
 {
-    value = toEndianness(value, this->writeLittleEndian);
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    value = toEndianness(value, mWriteLittleEndian);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeU64(uint64_t value, const char* /*name*/)
 {
-    value = toEndianness(value, this->writeLittleEndian);
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    value = toEndianness(value, mWriteLittleEndian);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeF32(float value, const char* /*name*/)
 {
-    value = toEndianness(value, this->writeLittleEndian);
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    value = toEndianness(value, mWriteLittleEndian);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeF64(double value, const char* /*name*/)
 {
-    value = toEndianness(value, this->writeLittleEndian);
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    value = toEndianness(value, mWriteLittleEndian);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeBool(bool value, const char* /*name*/)
 {
-    this->failBit |= this->stream.write(&value, sizeof(value)) == sizeof(value);
+    mFailBit |= mStream.write(&value, sizeof(value)) == sizeof(value);
 }
 
 void BinarySerializer::writeString(const char* value, const char* /*name*/)
 {
     assert(value != nullptr);
-    this->stream.print(value);
-    this->stream.put('\0');
+    mStream.print(value);
+    mStream.put('\0');
 }
 
 void BinarySerializer::beginObject(const char* /*name*/)

@@ -67,14 +67,14 @@ namespace cubos::engine::gl
         /// @param usePostProcessing Whether to use post processing.
         /// @param target The target framebuffer to draw to.
         void render(const core::gl::Camera& camera, const Frame& frame, bool usePostProcessing = true,
-                    const core::gl::Framebuffer& target = 0);
+                    const core::gl::Framebuffer& target = nullptr);
 
         /// Gets a reference to the post processing manager.
         /// @return The post processing manager.
         pps::Manager& pps();
 
     protected:
-        core::gl::RenderDevice& renderDevice; ///< The render device being used.
+        core::gl::RenderDevice& mRenderDevice; ///< The render device being used.
 
         /// Called when resizze() is called.
         /// Renderer implementations should override this function to resize their framebuffers.
@@ -91,9 +91,9 @@ namespace cubos::engine::gl
         /// Called when the internal texture used for post processing needs to be resized.
         void resizeTex(glm::uvec2 size);
 
-        pps::Manager ppsManager;           ///< The post processing manager.
-        core::gl::Framebuffer framebuffer; ///< The framebuffer where the frame is drawn.
-        core::gl::Texture2D texture;       ///< The texture where the frame is drawn.
+        pps::Manager mPpsManager;           ///< The post processing manager.
+        core::gl::Framebuffer mFramebuffer; ///< The framebuffer where the frame is drawn.
+        core::gl::Texture2D mTexture;       ///< The texture where the frame is drawn.
     };
 
     /// Abstract types are defined inside this namespace, they should be used (derived) only in renderer
@@ -103,9 +103,11 @@ namespace cubos::engine::gl
         /// Represents a grid which was uploaded to the GPU.
         class RendererGrid
         {
+        public:
+            virtual ~RendererGrid() = default;
+
         protected:
             RendererGrid() = default;
-            virtual ~RendererGrid() = default;
         };
     } // namespace impl
 } // namespace cubos::engine::gl

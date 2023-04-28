@@ -383,52 +383,52 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
     rasterStateDesc.frontFace = Winding::CCW;
     rasterStateDesc.cullFace = Face::Back;
     rasterStateDesc.cullEnabled = true;
-    this->geometryRasterState = this->renderDevice.createRasterState(rasterStateDesc);
+    mGeometryRasterState = mRenderDevice.createRasterState(rasterStateDesc);
 
     BlendStateDesc blendStateDesc;
-    this->geometryBlendState = this->renderDevice.createBlendState(blendStateDesc);
+    mGeometryBlendState = mRenderDevice.createBlendState(blendStateDesc);
 
     DepthStencilStateDesc depthStencilStateDesc;
     depthStencilStateDesc.depth.enabled = true;
     depthStencilStateDesc.depth.writeEnabled = true;
-    this->geometryDepthStencilState = this->renderDevice.createDepthStencilState(depthStencilStateDesc);
+    mGeometryDepthStencilState = mRenderDevice.createDepthStencilState(depthStencilStateDesc);
 
     // Create the geometry pipeline.
-    auto geometryVS = this->renderDevice.createShaderStage(Stage::Vertex, geometryPassVs);
-    auto geometryPS = this->renderDevice.createShaderStage(Stage::Pixel, geometryPassPs);
-    this->geometryPipeline = this->renderDevice.createShaderPipeline(geometryVS, geometryPS);
-    this->mvpBP = this->geometryPipeline->getBindingPoint("MVP");
+    auto geometryVS = mRenderDevice.createShaderStage(Stage::Vertex, geometryPassVs);
+    auto geometryPS = mRenderDevice.createShaderStage(Stage::Pixel, geometryPassPs);
+    mGeometryPipeline = mRenderDevice.createShaderPipeline(geometryVS, geometryPS);
+    mVpBp = mGeometryPipeline->getBindingPoint("MVP");
 
     // Create the MVP constant buffer.
-    mvpBuffer = renderDevice.createConstantBuffer(sizeof(MVP), nullptr, Usage::Dynamic);
+    mVpBuffer = renderDevice.createConstantBuffer(sizeof(MVP), nullptr, Usage::Dynamic);
 
     // Create the lighting pipeline.
-    auto lightingVS = this->renderDevice.createShaderStage(Stage::Vertex, lightingPassVs);
-    auto lightingPS = this->renderDevice.createShaderStage(Stage::Pixel, lightingPassPs);
-    this->lightingPipeline = this->renderDevice.createShaderPipeline(lightingVS, lightingPS);
-    this->positionBP = this->lightingPipeline->getBindingPoint("position");
-    this->normalBP = this->lightingPipeline->getBindingPoint("normal");
-    this->materialBP = this->lightingPipeline->getBindingPoint("material");
-    this->paletteBP = this->lightingPipeline->getBindingPoint("palette");
-    this->lightsBP = this->lightingPipeline->getBindingPoint("Lights");
-    this->ssaoEnabledBP = this->lightingPipeline->getBindingPoint("ssaoEnabled");
-    this->ssaoTexBP = this->lightingPipeline->getBindingPoint("ssaoTex");
+    auto lightingVS = mRenderDevice.createShaderStage(Stage::Vertex, lightingPassVs);
+    auto lightingPS = mRenderDevice.createShaderStage(Stage::Pixel, lightingPassPs);
+    mLightingPipeline = mRenderDevice.createShaderPipeline(lightingVS, lightingPS);
+    mPositionBp = mLightingPipeline->getBindingPoint("position");
+    mNormalBp = mLightingPipeline->getBindingPoint("normal");
+    mAterialBp = mLightingPipeline->getBindingPoint("material");
+    mPaletteBp = mLightingPipeline->getBindingPoint("palette");
+    mLightsBp = mLightingPipeline->getBindingPoint("Lights");
+    mSsaoEnabledBp = mLightingPipeline->getBindingPoint("ssaoEnabled");
+    mSsaoTexBp = mLightingPipeline->getBindingPoint("ssaoTex");
 
     // Create the SSAO pipeline.
-    auto ssaoVS = this->renderDevice.createShaderStage(Stage::Vertex, ssaoPassVs);
-    auto ssaoPS = this->renderDevice.createShaderStage(Stage::Pixel, ssaoPassPs);
-    this->ssaoPipeline = this->renderDevice.createShaderPipeline(ssaoVS, ssaoPS);
-    this->ssaoPositionBP = this->ssaoPipeline->getBindingPoint("position");
-    this->ssaoNormalBP = this->ssaoPipeline->getBindingPoint("normal");
-    this->ssaoNoiseBP = this->ssaoPipeline->getBindingPoint("noise");
-    this->ssaoViewBP = this->ssaoPipeline->getBindingPoint("view");
-    this->ssaoProjectionBP = this->ssaoPipeline->getBindingPoint("projection");
-    this->ssaoScreenSizeBP = this->ssaoPipeline->getBindingPoint("screenSize");
+    auto ssaoVS = mRenderDevice.createShaderStage(Stage::Vertex, ssaoPassVs);
+    auto ssaoPS = mRenderDevice.createShaderStage(Stage::Pixel, ssaoPassPs);
+    mSsaoPipeline = mRenderDevice.createShaderPipeline(ssaoVS, ssaoPS);
+    mSsaoPositionBp = mSsaoPipeline->getBindingPoint("position");
+    mSsaoNormalBp = mSsaoPipeline->getBindingPoint("normal");
+    mSsaoNoiseBp = mSsaoPipeline->getBindingPoint("noise");
+    mSsaoViewBp = mSsaoPipeline->getBindingPoint("view");
+    mSsaoProjectionBp = mSsaoPipeline->getBindingPoint("projection");
+    mSsaoScreenSizeBp = mSsaoPipeline->getBindingPoint("screenSize");
 
     // Create the SSAO blur pipeline.
-    auto ssaoBlurPS = this->renderDevice.createShaderStage(Stage::Pixel, ssaoBlurPs);
-    this->ssaoBlurPipeline = this->renderDevice.createShaderPipeline(ssaoVS, ssaoBlurPS);
-    this->ssaoBlurTexBP = this->ssaoBlurPipeline->getBindingPoint("ssaoInput");
+    auto ssaoBlurPS = mRenderDevice.createShaderStage(Stage::Pixel, ssaoBlurPs);
+    mSsaoBlurPipeline = mRenderDevice.createShaderPipeline(ssaoVS, ssaoBlurPS);
+    mSsaoBlurTexBp = mSsaoBlurPipeline->getBindingPoint("ssaoInput");
 
     // Create the sampler used to access the palette and the GBuffer textures in the lighting pipeline.
     SamplerDesc samplerDesc;
@@ -436,11 +436,11 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
     samplerDesc.addressV = AddressMode::Clamp;
     samplerDesc.magFilter = TextureFilter::Nearest;
     samplerDesc.minFilter = TextureFilter::Nearest;
-    this->sampler = this->renderDevice.createSampler(samplerDesc);
+    mSampler = mRenderDevice.createSampler(samplerDesc);
 
     // Create the sampler for the SSAO noise texture
     samplerDesc.addressU = samplerDesc.addressV = samplerDesc.addressW = AddressMode::Repeat;
-    this->ssaoNoiseSampler = this->renderDevice.createSampler(samplerDesc);
+    mSsaoNoiseSampler = mRenderDevice.createSampler(samplerDesc);
 
     // Create the palette texture.
     Texture2DDesc texDesc;
@@ -448,21 +448,21 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
     texDesc.height = 256;
     texDesc.format = TextureFormat::RGBA32Float;
     texDesc.usage = Usage::Default;
-    this->paletteTex = this->renderDevice.createTexture2D(texDesc);
+    mPaletteTex = mRenderDevice.createTexture2D(texDesc);
 
     // Create the lights constant buffer.
-    this->lightsBuffer = this->renderDevice.createConstantBuffer(sizeof(LightsData), nullptr, Usage::Dynamic);
+    mLightsBuffer = mRenderDevice.createConstantBuffer(sizeof(LightsData), nullptr, Usage::Dynamic);
 
     // Generate a screen quad for the lighting pass.
-    generateScreenQuad(this->renderDevice, this->lightingPipeline, this->screenQuadVA);
+    generateScreenQuad(mRenderDevice, mLightingPipeline, mScreenQuadVa);
 
     // Create the GBuffer.
-    this->size = glm::uvec2(0, 0);
+    mSize = glm::uvec2(0, 0);
     Renderer::onResize(size);
 
     // Check whether SSAO is enabled.
-    this->ssaoEnabled = settings.getBool("ssaoEnabled", false);
-    if (this->ssaoEnabled)
+    mSsaoEnabled = settings.getBool("ssaoEnabled", false);
+    if (mSsaoEnabled)
     {
         createSSAOTextures();
         generateSSAONoise();
@@ -502,11 +502,11 @@ RendererGrid deferred::Renderer::upload(const Grid& grid)
     vaDesc.elements[2].buffer.offset = offsetof(Vertex, material);
     vaDesc.elements[2].buffer.stride = sizeof(Vertex);
     vaDesc.buffers[0] =
-        this->renderDevice.createVertexBuffer(vertices.size() * sizeof(Vertex), vertices.data(), Usage::Static);
-    vaDesc.shaderPipeline = this->geometryPipeline;
-    deferredGrid->va = renderDevice.createVertexArray(vaDesc);
-    deferredGrid->ib = renderDevice.createIndexBuffer(indices.size() * sizeof(uint32_t), indices.data(),
-                                                      IndexFormat::UInt, Usage::Static);
+        mRenderDevice.createVertexBuffer(vertices.size() * sizeof(Vertex), vertices.data(), Usage::Static);
+    vaDesc.shaderPipeline = mGeometryPipeline;
+    deferredGrid->va = mRenderDevice.createVertexArray(vaDesc);
+    deferredGrid->ib = mRenderDevice.createIndexBuffer(indices.size() * sizeof(uint32_t), indices.data(),
+                                                       IndexFormat::UInt, Usage::Static);
     deferredGrid->indexCount = indices.size();
 
     return deferredGrid;
@@ -517,55 +517,55 @@ void deferred::Renderer::setPalette(const core::gl::Palette& palette)
     // Get the colors from the palette.
     // Magenta is used for non-existent materials in order to easily identify errors.
     std::vector<glm::vec4> data(65536, {1.0F, 0.0F, 1.0F, 1.0F});
-    for (std::size_t i = 0; i < palette.getSize(); ++i)
+    for (std::size_t i = 0; i < palette.size(); ++i)
     {
-        if (palette.getData()[i].similarity(Material::Empty) < 1.0F)
+        if (palette.data()[i].similarity(Material::Empty) < 1.0F)
         {
-            data[i + 1] = palette.getData()[i].color;
+            data[i + 1] = palette.data()[i].color;
         }
     }
 
     // Update the data on the GPU.
-    this->paletteTex->update(0, 0, 256, 256, data.data());
+    mPaletteTex->update(0, 0, 256, 256, data.data());
 }
 
 void deferred::Renderer::onResize(glm::uvec2 size)
 {
     // Only resize if the size has changed.
-    if (this->size == size)
+    if (mSize == size)
     {
         return;
     }
 
-    this->size = size;
+    mSize = size;
     Texture2DDesc texDesc;
-    texDesc.width = this->size.x;
-    texDesc.height = this->size.y;
+    texDesc.width = mSize.x;
+    texDesc.height = mSize.y;
     texDesc.usage = Usage::Dynamic;
 
     // Create the position and normal textures.
     texDesc.format = TextureFormat::RGB32Float;
-    this->positionTex = this->renderDevice.createTexture2D(texDesc);
-    this->normalTex = this->renderDevice.createTexture2D(texDesc);
+    mPositionTex = mRenderDevice.createTexture2D(texDesc);
+    mNormalTex = mRenderDevice.createTexture2D(texDesc);
 
     // Create the material texture.
     texDesc.format = TextureFormat::R16UInt;
-    this->materialTex = this->renderDevice.createTexture2D(texDesc);
+    mAterialTex = mRenderDevice.createTexture2D(texDesc);
 
     // Create the depth texture.
     texDesc.format = TextureFormat::Depth24Stencil8;
-    this->depthTex = renderDevice.createTexture2D(texDesc);
+    mDepthTex = mRenderDevice.createTexture2D(texDesc);
 
     // Create the framebuffer for the geometry pass.
     FramebufferDesc gBufferDesc;
     gBufferDesc.targetCount = 3;
-    gBufferDesc.targets[0].setTexture2DTarget(this->positionTex);
-    gBufferDesc.targets[1].setTexture2DTarget(this->normalTex);
-    gBufferDesc.targets[2].setTexture2DTarget(this->materialTex);
-    gBufferDesc.depthStencil.setTexture2DTarget(this->depthTex);
-    this->gBuffer = this->renderDevice.createFramebuffer(gBufferDesc);
+    gBufferDesc.targets[0].setTexture2DTarget(mPositionTex);
+    gBufferDesc.targets[1].setTexture2DTarget(mNormalTex);
+    gBufferDesc.targets[2].setTexture2DTarget(mAterialTex);
+    gBufferDesc.depthStencil.setTexture2DTarget(mDepthTex);
+    mGBuffer = mRenderDevice.createFramebuffer(gBufferDesc);
 
-    if (this->ssaoEnabled)
+    if (mSsaoEnabled)
     {
         createSSAOTextures();
     }
@@ -590,12 +590,12 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     // 1. Prepare the MVP matrix.
     MVP mvp;
     mvp.v = camera.view;
-    mvp.p = glm::perspective(glm::radians(camera.fovY), float(this->size.x) / float(this->size.y), camera.zNear,
+    mvp.p = glm::perspective(glm::radians(camera.fovY), float(mSize.x) / float(mSize.y), camera.zNear,
                              camera.zFar);
 
     // 2. Fill the light buffer with the light data.
     // First map the buffer.
-    LightsData& lightData = *static_cast<LightsData*>(this->lightsBuffer->map());
+    LightsData& lightData = *static_cast<LightsData*>(mLightsBuffer->map());
     lightData.numSpotLights = 0;
     lightData.numDirectionalLights = 0;
     lightData.numPointLights = 0;
@@ -659,119 +659,119 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     }
 
     // Unmap the buffer.
-    this->lightsBuffer->unmap();
+    mLightsBuffer->unmap();
 
     // 3. Set the renderer state.
-    this->renderDevice.setViewport(0, 0, static_cast<int>(this->size.x), static_cast<int>(this->size.y));
+    mRenderDevice.setViewport(0, 0, static_cast<int>(mSize.x), static_cast<int>(mSize.y));
 
     // 4. Geometry pass.
     // 4.1. Set the geometry pass state.
-    this->renderDevice.setFramebuffer(this->gBuffer);
-    this->renderDevice.setRasterState(this->geometryRasterState);
-    this->renderDevice.setBlendState(this->geometryBlendState);
-    this->renderDevice.setDepthStencilState(this->geometryDepthStencilState);
-    this->renderDevice.setShaderPipeline(this->geometryPipeline);
-    this->mvpBP->bind(this->mvpBuffer);
+    mRenderDevice.setFramebuffer(mGBuffer);
+    mRenderDevice.setRasterState(mGeometryRasterState);
+    mRenderDevice.setBlendState(mGeometryBlendState);
+    mRenderDevice.setDepthStencilState(mGeometryDepthStencilState);
+    mRenderDevice.setShaderPipeline(mGeometryPipeline);
+    mVpBp->bind(mVpBuffer);
 
     // 4.2. Clear the GBuffer.
-    this->renderDevice.clearTargetColor(0, 0.0F, 0.0F, 0.0F, 1.0F);
-    this->renderDevice.clearTargetColor(1, 0.0F, 0.0F, 0.0F, 1.0F);
-    this->renderDevice.clearTargetColor(2, 0.0F, 0.0F, 0.0F, 0.0F);
-    this->renderDevice.clearDepth(1.0F);
+    mRenderDevice.clearTargetColor(0, 0.0F, 0.0F, 0.0F, 1.0F);
+    mRenderDevice.clearTargetColor(1, 0.0F, 0.0F, 0.0F, 1.0F);
+    mRenderDevice.clearTargetColor(2, 0.0F, 0.0F, 0.0F, 0.0F);
+    mRenderDevice.clearDepth(1.0F);
 
     // 4.3. For each draw command:
     for (const auto& drawCmd : frame.getDrawCmds())
     {
         // 4.3.1. Update the MVP constant buffer with the model matrix.
         mvp.m = drawCmd.modelMat;
-        memcpy(this->mvpBuffer->map(), &mvp, sizeof(MVP));
-        this->mvpBuffer->unmap();
+        memcpy(mVpBuffer->map(), &mvp, sizeof(MVP));
+        mVpBuffer->unmap();
 
         // 4.3.2. Draw the geometry.
         auto grid = std::static_pointer_cast<DeferredGrid>(drawCmd.grid);
-        this->renderDevice.setVertexArray(grid->va);
-        this->renderDevice.setIndexBuffer(grid->ib);
-        this->renderDevice.drawTrianglesIndexed(0, grid->indexCount);
+        mRenderDevice.setVertexArray(grid->va);
+        mRenderDevice.setIndexBuffer(grid->ib);
+        mRenderDevice.drawTrianglesIndexed(0, grid->indexCount);
     }
 
     // 5. SSAO pass.
-    if (ssaoEnabled)
+    if (mSsaoEnabled)
     {
         // 5.1. Set the SSAO pass state.
-        this->renderDevice.setFramebuffer(ssaoFB);
-        this->renderDevice.setRasterState(nullptr);
-        this->renderDevice.setBlendState(nullptr);
-        this->renderDevice.setDepthStencilState(nullptr);
-        this->renderDevice.setShaderPipeline(this->ssaoPipeline);
-        this->ssaoPositionBP->bind(this->positionTex);
-        this->ssaoPositionBP->bind(this->sampler);
-        this->ssaoNormalBP->bind(this->normalTex);
-        this->ssaoNormalBP->bind(this->sampler);
-        this->ssaoNoiseBP->bind(this->ssaoNoiseTex);
-        this->ssaoNoiseBP->bind(this->ssaoNoiseSampler);
-        this->ssaoViewBP->setConstant(mvp.v);
-        this->ssaoProjectionBP->setConstant(mvp.p);
-        this->ssaoScreenSizeBP->setConstant(this->size);
+        mRenderDevice.setFramebuffer(mSsaoFb);
+        mRenderDevice.setRasterState(nullptr);
+        mRenderDevice.setBlendState(nullptr);
+        mRenderDevice.setDepthStencilState(nullptr);
+        mRenderDevice.setShaderPipeline(mSsaoPipeline);
+        mSsaoPositionBp->bind(mPositionTex);
+        mSsaoPositionBp->bind(mSampler);
+        mSsaoNormalBp->bind(mNormalTex);
+        mSsaoNormalBp->bind(mSampler);
+        mSsaoNoiseBp->bind(mSsaoNoiseTex);
+        mSsaoNoiseBp->bind(mSsaoNoiseSampler);
+        mSsaoViewBp->setConstant(mvp.v);
+        mSsaoProjectionBp->setConstant(mvp.p);
+        mSsaoScreenSizeBp->setConstant(mSize);
 
         // Samples
         for (int i = 0; i < 64; i++)
         {
-            this->ssaoSamplesBP =
-                this->ssaoPipeline->getBindingPoint(std::string("samples[" + std::to_string(i) + "]").c_str());
-            this->ssaoSamplesBP->setConstant(ssaoKernel[static_cast<std::size_t>(i)]);
+            mSsaoSamplesBp =
+                mSsaoPipeline->getBindingPoint(std::string("samples[" + std::to_string(i) + "]").c_str());
+            mSsaoSamplesBp->setConstant(mSsaoKernel[static_cast<std::size_t>(i)]);
         }
 
-        this->renderDevice.setVertexArray(this->screenQuadVA);
-        this->renderDevice.drawTriangles(0, 6);
+        mRenderDevice.setVertexArray(mScreenQuadVa);
+        mRenderDevice.drawTriangles(0, 6);
 
         // 5.2. Set the SSAO blur pass state.
-        this->renderDevice.setShaderPipeline(this->ssaoBlurPipeline);
-        this->ssaoBlurTexBP->bind(this->ssaoTex);
-        this->renderDevice.drawTriangles(0, 6);
+        mRenderDevice.setShaderPipeline(mSsaoBlurPipeline);
+        mSsaoBlurTexBp->bind(mSsaoTex);
+        mRenderDevice.drawTriangles(0, 6);
     }
 
     // 6. Lighting pass.
     // 6.1. Set the lighting pass state.
-    this->renderDevice.setFramebuffer(target);
-    this->renderDevice.setRasterState(nullptr);
-    this->renderDevice.setBlendState(nullptr);
-    this->renderDevice.setDepthStencilState(nullptr);
-    this->renderDevice.setShaderPipeline(this->lightingPipeline);
-    this->positionBP->bind(this->positionTex);
-    this->positionBP->bind(this->sampler);
-    this->normalBP->bind(this->normalTex);
-    this->normalBP->bind(this->sampler);
-    this->materialBP->bind(this->materialTex);
-    this->materialBP->bind(this->sampler);
-    this->paletteBP->bind(this->paletteTex);
-    this->paletteBP->bind(this->sampler);
-    this->lightsBP->bind(this->lightsBuffer);
-    this->ssaoEnabledBP->setConstant(static_cast<int>(this->ssaoEnabled));
-    if (this->ssaoEnabledBP != nullptr)
+    mRenderDevice.setFramebuffer(target);
+    mRenderDevice.setRasterState(nullptr);
+    mRenderDevice.setBlendState(nullptr);
+    mRenderDevice.setDepthStencilState(nullptr);
+    mRenderDevice.setShaderPipeline(mLightingPipeline);
+    mPositionBp->bind(mPositionTex);
+    mPositionBp->bind(mSampler);
+    mNormalBp->bind(mNormalTex);
+    mNormalBp->bind(mSampler);
+    mAterialBp->bind(mAterialTex);
+    mAterialBp->bind(mSampler);
+    mPaletteBp->bind(mPaletteTex);
+    mPaletteBp->bind(mSampler);
+    mLightsBp->bind(mLightsBuffer);
+    mSsaoEnabledBp->setConstant(static_cast<int>(mSsaoEnabled));
+    if (mSsaoEnabledBp != nullptr)
     {
-        this->ssaoTexBP->bind(this->ssaoTex);
-        this->ssaoTexBP->bind(this->sampler);
+        mSsaoTexBp->bind(mSsaoTex);
+        mSsaoTexBp->bind(mSampler);
     }
 
     // 6.2. Draw the screen quad.
-    this->renderDevice.setVertexArray(this->screenQuadVA);
-    this->renderDevice.drawTriangles(0, 6);
+    mRenderDevice.setVertexArray(mScreenQuadVa);
+    mRenderDevice.drawTriangles(0, 6);
 
     // Provide custom inputs to the PPS manager.
-    this->pps().provideInput(pps::Input::Position, this->positionTex);
-    this->pps().provideInput(pps::Input::Normal, this->normalTex);
+    this->pps().provideInput(pps::Input::Position, mPositionTex);
+    this->pps().provideInput(pps::Input::Normal, mNormalTex);
 }
 
 void deferred::Renderer::createSSAOTextures()
 {
     Texture2DDesc texDesc;
-    texDesc.width = this->size.x;
-    texDesc.height = this->size.y;
+    texDesc.width = mSize.x;
+    texDesc.height = mSize.y;
     texDesc.usage = Usage::Dynamic;
 
     // Create output texture
     texDesc.format = TextureFormat::R32Float;
-    this->ssaoTex = this->renderDevice.createTexture2D(texDesc);
+    mSsaoTex = mRenderDevice.createTexture2D(texDesc);
 
     // Generate noise texture
     std::uniform_real_distribution<float> randomFloats(0.0F, 1.0F); // random floats between [0.0, 1.0]
@@ -789,13 +789,13 @@ void deferred::Renderer::createSSAOTextures()
     texDesc.width = texDesc.height = 4;
     texDesc.format = TextureFormat::RGB16Float;
     texDesc.data[0] = ssaoNoise.data();
-    this->ssaoNoiseTex = this->renderDevice.createTexture2D(texDesc);
+    mSsaoNoiseTex = mRenderDevice.createTexture2D(texDesc);
 
     // Create the framebuffer
     FramebufferDesc fbDesc;
     fbDesc.targetCount = 1;
-    fbDesc.targets[0].setTexture2DTarget(this->ssaoTex);
-    this->ssaoFB = this->renderDevice.createFramebuffer(fbDesc);
+    fbDesc.targets[0].setTexture2DTarget(mSsaoTex);
+    mSsaoFb = mRenderDevice.createFramebuffer(fbDesc);
 }
 
 void deferred::Renderer::generateSSAONoise()
@@ -804,7 +804,7 @@ void deferred::Renderer::generateSSAONoise()
     std::uniform_real_distribution<float> randomFloats(0.0F, 1.0F); // random floats between [0.0, 1.0]
     std::default_random_engine generator;
 
-    this->ssaoKernel.resize(64);
+    mSsaoKernel.resize(64);
     for (unsigned int i = 0; i < 64; i++)
     {
         glm::vec3 sample(randomFloats(generator) * 2.0F - 1.0F, // [-1.0, 1.0]
@@ -818,6 +818,6 @@ void deferred::Renderer::generateSSAONoise()
         scale = glm::lerp(0.1F, 1.0F, scale * scale);
         sample *= scale;
 
-        this->ssaoKernel[i] = sample;
+        mSsaoKernel[i] = sample;
     }
 }

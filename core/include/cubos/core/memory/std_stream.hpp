@@ -14,19 +14,19 @@ namespace cubos::core::memory
         /// @param file Stdio file to read/write from.
         /// @param close Should the file be closed when this stream is destructed?
         StdStream(FILE* file, bool close = false);
-        StdStream(StdStream&&) noexcept;
-        virtual ~StdStream() override;
+        StdStream(StdStream&& /*other*/) noexcept;
+        ~StdStream() override;
 
-        virtual std::size_t read(void* data, std::size_t size) override;
-        virtual std::size_t write(const void* data, std::size_t size) override;
-        virtual std::size_t tell() const override;
-        virtual void seek(ptrdiff_t offset, SeekOrigin origin) override;
-        virtual bool eof() const override;
-        virtual char peek() const override;
+        std::size_t read(void* data, std::size_t size) override;
+        std::size_t write(const void* data, std::size_t size) override;
+        std::size_t tell() const override;
+        void seek(ptrdiff_t offset, SeekOrigin origin) override;
+        bool eof() const override;
+        char peek() const override;
 
     private:
-        FILE* file; ///< Stdio file to read/write from.
-        bool close; ///< Should the file be closed when this stream is destructed?
+        FILE* mFile; ///< Stdio file to read/write from.
+        bool mClose; ///< Should the file be closed when this stream is destructed?
     };
 } // namespace cubos::core::memory
 
