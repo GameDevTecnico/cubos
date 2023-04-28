@@ -15,7 +15,7 @@
 ## Code Style
 
 - Code must be formatted using [clang format](https://clang.llvm.org/docs/ClangFormat.html).
-- `camelCase` is used for functions, methods, local variables and fields (no underscore prefixing on private fields).
+- `camelCase` is used for functions, methods, local variables and fields (prefixed with 'm' on private fields).
 - `PascalCase` is used for class names and constants.
 - `UPPER_CASE` is used for macros.
 - `snake_case` is used for namespaces, folders and files.
