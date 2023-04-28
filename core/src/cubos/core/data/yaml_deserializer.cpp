@@ -8,7 +8,7 @@ YAMLDeserializer::YAMLDeserializer(memory::Stream& stream)
     : mStream(stream)
 {
     this->loadDocument();
-    this->frame.push({Mode::Object, mDocument.begin(), false});
+    mFrame.push({Mode::Object, mDocument.begin(), false});
 }
 
 // NOLINTBEGIN(bugprone-macro-parentheses)
@@ -16,15 +16,15 @@ YAMLDeserializer::YAMLDeserializer(memory::Stream& stream)
     do                                                                                                                 \
     {                                                                                                                  \
         auto iter = this->get();                                                                                       \
-        if (this->frame.top().mode == Mode::Dictionary)                                                                \
+        if (mFrame.top().mode == Mode::Dictionary)                                                                     \
         {                                                                                                              \
-            if (this->frame.top().key)                                                                                 \
+            if (mFrame.top().key)                                                                                      \
                 value = iter->first.as<T>(T());                                                                        \
             else                                                                                                       \
                 value = iter->second.as<T>(T());                                                                       \
-            this->frame.top().key = !this->frame.top().key;                                                            \
+            mFrame.top().key = !mFrame.top().key;                                                                      \
         }                                                                                                              \
-        else if (this->frame.top().mode == Mode::Object)                                                               \
+        else if (mFrame.top().mode == Mode::Object)                                                                    \
             value = iter->second.as<T>(T());                                                                           \
         else                                                                                                           \
             value = iter->as<T>(T());                                                                                  \
@@ -112,79 +112,79 @@ void YAMLDeserializer::readString(std::string& value)
 void YAMLDeserializer::beginObject()
 {
     auto iter = this->get();
-    if (this->frame.top().mode == Mode::Array)
+    if (mFrame.top().mode == Mode::Array)
     {
         assert(iter->IsMap());
-        this->frame.push({Mode::Object, iter->begin(), false});
+        mFrame.push({Mode::Object, iter->begin(), false});
     }
     else
     {
         // Objects can't be used as keys in dictionaries.
-        assert(this->frame.top().mode != Mode::Dictionary || !this->frame.top().key);
+        assert(mFrame.top().mode != Mode::Dictionary || !mFrame.top().key);
         assert(iter->second.IsMap());
-        this->frame.push({Mode::Object, iter->second.begin(), false});
+        mFrame.push({Mode::Object, iter->second.begin(), false});
     }
 }
 
 void YAMLDeserializer::endObject()
 {
-    assert(this->frame.size() > 1);
-    this->frame.pop();
-    this->frame.top().key = true;
+    assert(mFrame.size() > 1);
+    mFrame.pop();
+    mFrame.top().key = true;
 }
 
 std::size_t YAMLDeserializer::beginArray()
 {
     auto iter = this->get();
-    if (this->frame.top().mode == Mode::Array)
+    if (mFrame.top().mode == Mode::Array)
     {
         assert(iter->IsSequence());
-        this->frame.push({Mode::Array, iter->begin(), false});
+        mFrame.push({Mode::Array, iter->begin(), false});
         return iter->size();
     }
 
     // Arrays can't be used as keys in dictionaries.
-    assert(this->frame.top().mode != Mode::Dictionary || !this->frame.top().key);
+    assert(mFrame.top().mode != Mode::Dictionary || !mFrame.top().key);
     assert(iter->second.IsSequence());
-    this->frame.push({Mode::Array, iter->second.begin(), false});
+    mFrame.push({Mode::Array, iter->second.begin(), false});
     return iter->second.size();
 }
 
 void YAMLDeserializer::endArray()
 {
-    assert(this->frame.size() > 1);
-    this->frame.pop();
-    this->frame.top().key = true;
+    assert(mFrame.size() > 1);
+    mFrame.pop();
+    mFrame.top().key = true;
 }
 
 std::size_t YAMLDeserializer::beginDictionary()
 {
     auto iter = this->get();
-    if (this->frame.top().mode == Mode::Array)
+    if (mFrame.top().mode == Mode::Array)
     {
         assert(iter->IsMap());
-        this->frame.push({Mode::Dictionary, iter->begin(), true});
+        mFrame.push({Mode::Dictionary, iter->begin(), true});
         return iter->size();
     }
 
     // Dictionaries can't be used as keys in dictionaries.
-    assert(this->frame.top().mode != Mode::Dictionary || !this->frame.top().key);
+    assert(mFrame.top().mode != Mode::Dictionary || !mFrame.top().key);
     if (iter->second.IsNull())
     {
-        this->frame.push({Mode::Dictionary, iter->second.begin(), true});
+        mFrame.push({Mode::Dictionary, iter->second.begin(), true});
         return 0;
     }
 
     assert(iter->second.IsMap());
-    this->frame.push({Mode::Dictionary, iter->second.begin(), true});
+    mFrame.push({Mode::Dictionary, iter->second.begin(), true});
     return iter->second.size();
 }
 
 void YAMLDeserializer::endDictionary()
 {
-    assert(this->frame.size() > 1);
-    this->frame.pop();
-    this->frame.top().key = true;
+    assert(mFrame.size() > 1);
+    mFrame.pop();
+    mFrame.top().key = true;
 }
 
 void YAMLDeserializer::loadDocument()
@@ -197,15 +197,15 @@ void YAMLDeserializer::loadDocument()
 YAML::const_iterator YAMLDeserializer::get()
 {
     // If this is the top frame and there aren't more elements to read, read another document.
-    if (this->frame.size() == 1 && this->frame.top().iter == mDocument.end())
+    if (mFrame.size() == 1 && mFrame.top().iter == mDocument.end())
     {
         this->loadDocument();
-        this->frame.top().iter = mDocument.begin();
+        mFrame.top().iter = mDocument.begin();
     }
 
-    if (this->frame.top().mode != Mode::Dictionary || !this->frame.top().key)
+    if (mFrame.top().mode != Mode::Dictionary || !mFrame.top().key)
     {
-        return this->frame.top().iter++;
+        return mFrame.top().iter++;
     }
-    return this->frame.top().iter;
+    return mFrame.top().iter;
 }
