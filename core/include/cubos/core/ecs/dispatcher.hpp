@@ -199,7 +199,7 @@ namespace cubos::core::ecs
             {
                 return false;
             }
-            return wrapper->system == func;
+            return wrapper->mSystem == func;
         });
         if (it == mPendingSystems.end())
         {
@@ -225,7 +225,7 @@ namespace cubos::core::ecs
             {
                 return false;
             }
-            return wrapper->system == func;
+            return wrapper->mSystem == func;
         });
         if (it == mPendingSystems.end())
         {
