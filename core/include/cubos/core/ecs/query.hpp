@@ -196,8 +196,7 @@ namespace cubos::core::ecs
         // Convert the fetched data into the desired query reference types.
         return std::forward_as_tuple(
             *mIt, impl::QueryFetcher<ComponentTypes>::arg(
-                            mWorld, std::get<typename impl::QueryFetcher<ComponentTypes>::Type>(mFetched),
-                            *mIt)...);
+                      mWorld, std::get<typename impl::QueryFetcher<ComponentTypes>::Type>(mFetched), *mIt)...);
     }
 
     template <typename... ComponentTypes>

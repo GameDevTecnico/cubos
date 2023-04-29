@@ -7,7 +7,7 @@ using namespace cubos::core::data;
 #define CHECK_ERROR(exp)                                                                                               \
     do                                                                                                                 \
     {                                                                                                                  \
-        if (mFailBit)                                                                                            \
+        if (mFailBit)                                                                                                  \
         {                                                                                                              \
             CUBOS_WARN("Deserializer fail bit is set");                                                                \
         }                                                                                                              \
@@ -20,7 +20,7 @@ using namespace cubos::core::data;
             catch (nlohmann::json::exception & e)                                                                      \
             {                                                                                                          \
                 CUBOS_ERROR("Caught JSON exception '{}'", e.what());                                                   \
-                mFailBit = true;                                                                                 \
+                mFailBit = true;                                                                                       \
             }                                                                                                          \
         }                                                                                                              \
     } while (false)
@@ -28,24 +28,24 @@ using namespace cubos::core::data;
 // NOLINTBEGIN(bugprone-macro-parentheses)
 #define READ_GENERIC(out, type, fromStr)                                                                               \
     CHECK_ERROR(do {                                                                                                   \
-        if (mFrame.top().mode == Mode::Dictionary)                                                               \
+        if (mFrame.top().mode == Mode::Dictionary)                                                                     \
         {                                                                                                              \
-            if (mFrame.top().key)                                                                                \
+            if (mFrame.top().key)                                                                                      \
             {                                                                                                          \
-                out = static_cast<type>(fromStr(mFrame.top().iter.key()));                                       \
-                mFrame.top().key = false;                                                                        \
+                out = static_cast<type>(fromStr(mFrame.top().iter.key()));                                             \
+                mFrame.top().key = false;                                                                              \
             }                                                                                                          \
             else                                                                                                       \
             {                                                                                                          \
-                out = mFrame.top().iter.value();                                                                 \
-                mFrame.top().iter++;                                                                             \
-                mFrame.top().key = true;                                                                         \
+                out = mFrame.top().iter.value();                                                                       \
+                mFrame.top().iter++;                                                                                   \
+                mFrame.top().key = true;                                                                               \
             }                                                                                                          \
         }                                                                                                              \
         else                                                                                                           \
         {                                                                                                              \
-            out = mFrame.top().iter.value();                                                                     \
-            mFrame.top().iter++;                                                                                 \
+            out = mFrame.top().iter.value();                                                                           \
+            mFrame.top().iter++;                                                                                       \
         }                                                                                                              \
     } while (false);)
 // NOLINTEND(bugprone-macro-parentheses)
