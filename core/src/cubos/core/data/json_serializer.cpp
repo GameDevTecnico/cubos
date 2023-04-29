@@ -80,8 +80,7 @@ void JSONSerializer::beginObject(const char* name)
 
 void JSONSerializer::endObject()
 {
-    assert(!mFrames.empty() &&
-           mFrames.top().mode == Mode::Object); // endObject without matching beginObject.
+    assert(!mFrames.empty() && mFrames.top().mode == Mode::Object); // endObject without matching beginObject.
     auto json = std::move(mFrames.top().json);
     auto name = std::move(mFrames.top().name);
     mFrames.pop();

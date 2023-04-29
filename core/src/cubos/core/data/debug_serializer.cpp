@@ -25,32 +25,32 @@ void DebugSerializer::printIndent()
     do                                                                                                                 \
     {                                                                                                                  \
         /* Print the separator. */                                                                                     \
-        auto& state = mState.top();                                                                               \
+        auto& state = mState.top();                                                                                    \
         if (state.isFirst)                                                                                             \
         {                                                                                                              \
             state.isFirst = false;                                                                                     \
-            if (mPretty)                                                                                          \
+            if (mPretty)                                                                                               \
             {                                                                                                          \
-                mStream.put('\n');                                                                                \
+                mStream.put('\n');                                                                                     \
                 this->printIndent();                                                                                   \
             }                                                                                                          \
         }                                                                                                              \
         else if (state.mode == Mode::Dictionary && !state.isKey)                                                       \
-            mStream.print(": ");                                                                                  \
-        else if (mPretty)                                                                                         \
+            mStream.print(": ");                                                                                       \
+        else if (mPretty)                                                                                              \
         {                                                                                                              \
-            mStream.print(",\n");                                                                                 \
+            mStream.print(",\n");                                                                                      \
             this->printIndent();                                                                                       \
         }                                                                                                              \
         else                                                                                                           \
-            mStream.print(", ");                                                                                  \
+            mStream.print(", ");                                                                                       \
                                                                                                                        \
         /* Print the name of the value, if its an object. */                                                           \
         if (state.mode == Mode::Object)                                                                                \
-            mStream.printf("{}: ", name == nullptr ? "?" : name);                                                 \
+            mStream.printf("{}: ", name == nullptr ? "?" : name);                                                      \
                                                                                                                        \
         /* Print the value, with its type name, if enabled. */                                                         \
-        mStream.printf(__VA_ARGS__);                                                                              \
+        mStream.printf(__VA_ARGS__);                                                                                   \
                                                                                                                        \
         /* If it's a dictionary, flip the isKey flag. */                                                               \
         if (state.mode == Mode::Dictionary)                                                                            \
