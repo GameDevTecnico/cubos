@@ -590,8 +590,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
     // 1. Prepare the MVP matrix.
     MVP mvp;
     mvp.v = camera.view;
-    mvp.p = glm::perspective(glm::radians(camera.fovY), float(mSize.x) / float(mSize.y), camera.zNear,
-                             camera.zFar);
+    mvp.p = glm::perspective(glm::radians(camera.fovY), float(mSize.x) / float(mSize.y), camera.zNear, camera.zFar);
 
     // 2. Fill the light buffer with the light data.
     // First map the buffer.
@@ -716,8 +715,7 @@ void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Fram
         // Samples
         for (int i = 0; i < 64; i++)
         {
-            mSsaoSamplesBp =
-                mSsaoPipeline->getBindingPoint(std::string("samples[" + std::to_string(i) + "]").c_str());
+            mSsaoSamplesBp = mSsaoPipeline->getBindingPoint(std::string("samples[" + std::to_string(i) + "]").c_str());
             mSsaoSamplesBp->setConstant(mSsaoKernel[static_cast<std::size_t>(i)]);
         }
 

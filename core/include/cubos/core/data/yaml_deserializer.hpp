@@ -61,9 +61,9 @@ namespace cubos::core::data
             bool key;                  ///< Whether the current node is a key.
         };
 
-        memory::Stream& mStream; ///< The stream to deserialize from.
+        memory::Stream& mStream;  ///< The stream to deserialize from.
         std::stack<Frame> mFrame; ///< The current frame of the deserializer.
-        YAML::Node mDocument;    ///< The YAML document being deserialized.
+        YAML::Node mDocument;     ///< The YAML document being deserialized.
     };
 } // namespace cubos::core::data
 
