@@ -206,7 +206,7 @@ namespace cubos::core::ecs
         void commit();
 
         std::mutex mMutex; ///< Make this thread-safe.
-        World& mWorld;    ///< The world to which the commands will be applied.
+        World& mWorld;     ///< The world to which the commands will be applied.
 
         std::unordered_map<std::type_index, IBuffer*> mBuffers; ///< Component buffers per component type.
         std::unordered_set<Entity> mCreated;                    ///< The uncommitted created entities.

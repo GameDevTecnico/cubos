@@ -562,7 +562,7 @@ impl::Unpackager::Unpackager(const Package& pkg)
     do                                                                                                                 \
     {                                                                                                                  \
         CUBOS_ERROR("Expected {}, found {}", expected, found);                                                         \
-        mFailBit = true;                                                                                          \
+        mFailBit = true;                                                                                               \
     } while (0)
 
 #define TYPE_MISMATCH(expected, found) UNEXPECTED(Package::typeToString(expected), Package::typeToString(found))
