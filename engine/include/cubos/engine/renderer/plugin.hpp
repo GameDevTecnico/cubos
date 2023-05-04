@@ -1,19 +1,35 @@
 #pragma once
 
-#include <cubos/core/ecs/entity_manager.hpp>
+#include <cubos/core/gl/grid.hpp>
 
-#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/assets/plugin.hpp>
 
 namespace cubos::engine
 {
-    /// Resource to identify the entity which represents the active camera.
+    /// Component which makes a voxel grid be rendered by the renderer plugin.
+    /// Must be used with `LocalToWorld`, which provides the transformation matrix of the grid.
+    struct [[cubos::component("cubos/renderable-grid", VecStorage)]] RenderableGrid
+    {
+        Asset<core::gl::Grid> asset; ///< Handle to the grid asset to be rendered.
+    };
+
+    /// Component which defines parameters of a camera used to render the world.
+    struct [[cubos::component("cubos/camera", VecStorage)]] Camera
+    {
+        float fovY;  ///< The vertical field of view in degrees.
+        float zNear; ///< The near clipping plane.
+        float zFar;  ///< The far clipping plane.
+    };
+
+    /// Resource which identifies the entity which is the current active camera.
+    /// The entity referenced by this resource must have a `Camera` component.
     struct ActiveCamera
     {
-        core::ecs::Entity entity;
+        core::ecs::Entity entity; ///< The entity which is the active camera.
     };
 
     /// Plugin to create and handle the lifecycle of a renderer. It renders all entities with a
-    /// `Grid` and `LocalToWorld` components.
+    /// `RenderableGrid` and `LocalToWorld` components.
     ///
     /// @details This plugin adds three systems: one to initialize the renderer, one to collect the
     /// frame information and one to draw the frame.
@@ -24,7 +40,7 @@ namespace cubos::engine
     ///
     /// Resources:
     /// - `Renderer`: handle to the renderer.
-    /// - `Frame`: holds the current frame information.
+    /// - `RendererFrame`: holds the current frame information.
     /// - `ActiveCamera`: the entity which represents the active camera.
     ///
     /// Components:
@@ -42,4 +58,4 @@ namespace cubos::engine
     ///
     /// @param cubos CUBOS. main class
     void rendererPlugin(Cubos& cubos);
-}; // namespace cubos::engine
+} // namespace cubos::engine
