@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -792,9 +793,14 @@ static bool generate(const GenerateOptions& options)
     file << std::endl;
 
     // Include all the component headers.
+    std::unordered_set<std::string> includedHeaders; // Used to prevent duplicate includes.
     for (auto& component : components)
     {
-        file << "#include " << fs::absolute(component.header) << std::endl;
+        auto absolutePath = fs::absolute(component.header);
+        if (includedHeaders.insert(absolutePath).second)
+        {
+            file << "#include " << absolutePath << std::endl;
+        }
     }
 
     for (auto& component : components)
