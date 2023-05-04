@@ -1,34 +1,41 @@
-#include <components/cubos/camera.hpp>
-#include <components/cubos/grid.hpp>
-#include <components/cubos/local_to_world.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <cubos/core/ecs/query.hpp>
 #include <cubos/core/gl/camera.hpp>
 #include <cubos/core/settings.hpp>
 
-#include <cubos/engine/ecs/camera.hpp>
-#include <cubos/engine/ecs/grid.hpp>
-#include <cubos/engine/transform/local_to_world.hpp>
+#include <cubos/engine/renderer/deferred/renderer.hpp>
+#include <cubos/engine/renderer/frame.hpp>
+#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
-static void init(gl::Renderer& renderer, const cubos::core::io::Window& window, const cubos::core::Settings& settings)
+using cubos::core::Settings;
+using cubos::core::ecs::Query;
+using cubos::core::io::Window;
+using namespace cubos::engine;
+
+static void init(Renderer& renderer, const Window& window, const Settings& settings)
 {
     auto& renderDevice = window->getRenderDevice();
-    renderer = std::make_shared<gl::deferred::Renderer>(renderDevice, window->getFramebufferSize(), settings);
+    renderer =
+        std::make_shared<cubos::engine::gl::deferred::Renderer>(renderDevice, window->getFramebufferSize(), settings);
 }
 
-static void frame(
-    gl::Frame& frame,
-    cubos::core::ecs::Query<const cubos::engine::ecs::Grid&, const cubos::engine::ecs::LocalToWorld&> query)
+static void frame(RendererFrame& frame, Query<const RenderableGrid&, const LocalToWorld&> query)
 {
+    (void)frame;
     for (auto [entity, grid, localToWorld] : query)
     {
-        frame.draw(grid.handle->rendererGrid, localToWorld.mat * glm::translate(glm::mat4(1.0f), grid.modelOffset));
+        (void)entity;
+        (void)grid;
+        (void)localToWorld;
+        // frame.draw(grid.asset->rendererGrid, localToWorld.mat);
     }
 }
 
-static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& activeCamera, gl::Frame& frame,
-                 cubos::core::ecs::Query<const ecs::LocalToWorld&, const ecs::Camera&> query)
+static void draw(Renderer& renderer, const ActiveCamera& activeCamera, RendererFrame& frame,
+                 Query<const LocalToWorld&, const Camera&> query)
 {
     cubos::core::gl::Camera glCamera;
 
@@ -38,7 +45,6 @@ static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& activeCame
         glCamera.fovY = camera.fovY;
         glCamera.zNear = camera.zNear;
         glCamera.zFar = camera.zFar;
-
         glCamera.view = glm::inverse(localToWorld.mat);
     }
 
@@ -51,12 +57,12 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.addPlugin(transformPlugin);
     cubos.addPlugin(windowPlugin);
 
-    cubos.addResource<gl::Frame>();
-    cubos.addResource<gl::Renderer>();
+    cubos.addResource<RendererFrame>();
+    cubos.addResource<Renderer>();
     cubos.addResource<ActiveCamera>();
 
-    cubos.addComponent<ecs::Grid>();
-    cubos.addComponent<ecs::Camera>();
+    cubos.addComponent<RenderableGrid>();
+    cubos.addComponent<Camera>();
 
     cubos.startupTag("cubos.renderer.init").afterTag("cubos.window.init");
     cubos.tag("cubos.renderer.frame").afterTag("cubos.transform.update");

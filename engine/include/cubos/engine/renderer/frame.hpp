@@ -4,16 +4,16 @@
 
 #include <cubos/engine/renderer/renderer.hpp>
 
-namespace cubos::engine::gl
+namespace cubos::engine
 {
     /// Contains all scene data needed to draw a frame.
     /// For each frame, the engine will generate a frame object with data fetched from the scene, and then, provide it
     /// to the renderer. The renderer is responsible for showing this data on the screen.
-    class Frame final
+    class RendererFrame final
     {
     public:
-        Frame() = default;
-        ~Frame() = default;
+        RendererFrame() = default;
+        ~RendererFrame() = default;
 
         /// Data of a single draw command.
         struct DrawCmd
@@ -73,4 +73,4 @@ namespace cubos::engine::gl
         std::vector<core::gl::DirectionalLight> mDirectionalLights;
         std::vector<core::gl::PointLight> mPointLights;
     };
-} // namespace cubos::engine::gl
+} // namespace cubos::engine

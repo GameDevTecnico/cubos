@@ -18,7 +18,7 @@ using namespace cubos::engine;
 using namespace cubos::engine::gl;
 
 /// Deferred renderer grid implementation.
-struct DeferredGrid : public engine::gl::impl::RendererGrid
+struct DeferredGrid : public engine::impl::RendererGrid
 {
     core::gl::VertexArray va;
     core::gl::IndexBuffer ib;
@@ -376,7 +376,7 @@ void main() {
 )glsl";
 
 deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings)
-    : gl::BaseRenderer(renderDevice, size)
+    : BaseRenderer(renderDevice, size)
 {
     // Create the states.
     RasterStateDesc rasterStateDesc;
@@ -571,7 +571,7 @@ void deferred::Renderer::onResize(glm::uvec2 size)
     }
 }
 
-void deferred::Renderer::onRender(const Camera& camera, const Frame& frame, Framebuffer target)
+void deferred::Renderer::onRender(const Camera& camera, const RendererFrame& frame, Framebuffer target)
 {
     // Steps:
     // 1. Prepare the MVP matrix.

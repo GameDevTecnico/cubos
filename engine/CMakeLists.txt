@@ -45,8 +45,6 @@ set(CUBOS_ENGINE_SOURCE
 set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/cubos.hpp"
 
-    "include/cubos/engine/ecs/camera.hpp"
-
     "include/cubos/engine/window/plugin.hpp"
     "include/cubos/engine/renderer/plugin.hpp"
     "include/cubos/engine/env_settings/plugin.hpp"
