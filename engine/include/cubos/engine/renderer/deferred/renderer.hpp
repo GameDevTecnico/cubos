@@ -20,7 +20,7 @@ namespace cubos::engine::gl::deferred
     /// The rendering is done in two passes:
     /// - The first pass renders the scene to the GBuffer textures: position, normal and material.
     /// - The second pass takes the GBuffer textures and calculates the color of the pixels with the lighting applied.
-    class Renderer : public gl::BaseRenderer
+    class Renderer : public BaseRenderer
     {
     public:
         /// @param renderDevice The render device to use.
@@ -38,7 +38,7 @@ namespace cubos::engine::gl::deferred
         // Implement interface methods.
 
         void onResize(glm::uvec2 size) override;
-        void onRender(const core::gl::Camera& camera, const Frame& frame, core::gl::Framebuffer target) override;
+        void onRender(const core::gl::Camera& camera, const RendererFrame& frame, core::gl::Framebuffer target) override;
 
     private:
         void createSSAOTextures();
