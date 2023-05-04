@@ -2,35 +2,38 @@
 
 #include <cubos/engine/renderer/frame.hpp>
 
-using namespace cubos::core::gl;
-using namespace cubos::engine::gl;
+using cubos::core::gl::DirectionalLight;
+using cubos::core::gl::PointLight;
+using cubos::core::gl::SpotLight;
+using cubos::engine::RendererFrame;
+using cubos::engine::RendererGrid;
 
-void Frame::draw(RendererGrid grid, glm::mat4 modelMat)
+void RendererFrame::draw(RendererGrid grid, glm::mat4 modelMat)
 {
     mDrawCmds.push_back(DrawCmd{std::move(grid), modelMat});
 }
 
-void Frame::ambient(const glm::vec3& color)
+void RendererFrame::ambient(const glm::vec3& color)
 {
     mAmbientColor = color;
 }
 
-void Frame::light(const SpotLight& light)
+void RendererFrame::light(const SpotLight& light)
 {
     mSpotLights.push_back(light);
 }
 
-void Frame::light(const DirectionalLight& light)
+void RendererFrame::light(const DirectionalLight& light)
 {
     mDirectionalLights.push_back(light);
 }
 
-void Frame::light(const PointLight& light)
+void RendererFrame::light(const PointLight& light)
 {
     mPointLights.push_back(light);
 }
 
-void Frame::clear()
+void RendererFrame::clear()
 {
     mDrawCmds.clear();
     mSpotLights.clear();
@@ -38,27 +41,27 @@ void Frame::clear()
     mPointLights.clear();
 }
 
-const std::vector<Frame::DrawCmd>& Frame::getDrawCmds() const
+const std::vector<RendererFrame::DrawCmd>& RendererFrame::getDrawCmds() const
 {
     return mDrawCmds;
 }
 
-const glm::vec3& Frame::getAmbient() const
+const glm::vec3& RendererFrame::getAmbient() const
 {
     return mAmbientColor;
 }
 
-const std::vector<SpotLight>& Frame::getSpotLights() const
+const std::vector<SpotLight>& RendererFrame::getSpotLights() const
 {
     return mSpotLights;
 }
 
-const std::vector<DirectionalLight>& Frame::getDirectionalLights() const
+const std::vector<DirectionalLight>& RendererFrame::getDirectionalLights() const
 {
     return mDirectionalLights;
 }
 
-const std::vector<PointLight>& Frame::getPointLights() const
+const std::vector<PointLight>& RendererFrame::getPointLights() const
 {
     return mPointLights;
 }

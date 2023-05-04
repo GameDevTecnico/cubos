@@ -12,12 +12,12 @@
 
 #include <cubos/engine/renderer/pps/manager.hpp>
 
-namespace cubos::engine::gl
+namespace cubos::engine
 {
-    class Frame;
+    class RendererFrame;
     class BaseRenderer;
 
-    namespace pps
+    namespace gl::pps
     {
         class Pass;
     }
@@ -65,12 +65,12 @@ namespace cubos::engine::gl
         /// @param frame The frame to draw.
         /// @param usePostProcessing Whether to use post processing.
         /// @param target The target framebuffer to draw to.
-        void render(const core::gl::Camera& camera, const Frame& frame, bool usePostProcessing = true,
+        void render(const core::gl::Camera& camera, const RendererFrame& frame, bool usePostProcessing = true,
                     const core::gl::Framebuffer& target = nullptr);
 
         /// Gets a reference to the post processing manager.
         /// @return The post processing manager.
-        pps::Manager& pps();
+        gl::pps::Manager& pps();
 
     protected:
         core::gl::RenderDevice& mRenderDevice; ///< The render device being used.
@@ -84,13 +84,14 @@ namespace cubos::engine::gl
         /// @param camera The camera to use.
         /// @param frame The frame to draw.
         /// @param target The target framebuffer. If postprocessing is enabled, it won't be the camera's target.
-        virtual void onRender(const core::gl::Camera& camera, const Frame& frame, core::gl::Framebuffer target) = 0;
+        virtual void onRender(const core::gl::Camera& camera, const RendererFrame& frame,
+                              core::gl::Framebuffer target) = 0;
 
     private:
         /// Called when the internal texture used for post processing needs to be resized.
         void resizeTex(glm::uvec2 size);
 
-        pps::Manager mPpsManager;           ///< The post processing manager.
+        gl::pps::Manager mPpsManager;       ///< The post processing manager.
         core::gl::Framebuffer mFramebuffer; ///< The framebuffer where the frame is drawn.
         core::gl::Texture2D mTexture;       ///< The texture where the frame is drawn.
     };
@@ -109,4 +110,4 @@ namespace cubos::engine::gl
             RendererGrid() = default;
         };
     } // namespace impl
-} // namespace cubos::engine::gl
+} // namespace cubos::engine
