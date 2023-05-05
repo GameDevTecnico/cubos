@@ -5,9 +5,8 @@
 
 #include <cubos/engine/renderer/pps/bloom.hpp>
 
-using namespace cubos;
 using namespace cubos::core::gl;
-using namespace cubos::engine::gl;
+using cubos::engine::PostProcessingBloom;
 
 #define CUBOS_CORE_GL_PPS_BLOOM_DOWNSCALE_PASS 0
 #define CUBOS_CORE_GL_PPS_BLOOM_UPSCALE_PASS 1
@@ -107,14 +106,14 @@ void main(void)
 }
 )glsl";
 
-pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size)
-    : BloomPass(renderDevice, size, 5, 1.0F, 0.5F, 1.0F)
+PostProcessingBloom::PostProcessingBloom(RenderDevice& renderDevice, glm::uvec2 size)
+    : PostProcessingBloom(renderDevice, size, 5, 1.0F, 0.5F, 1.0F)
 {
 }
 
-pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
-                          float softThreshold, float intensity)
-    : Pass(renderDevice)
+PostProcessingBloom::PostProcessingBloom(RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations,
+                                         float threshold, float softThreshold, float intensity)
+    : PostProcessingPass(renderDevice)
     , mIterations(iterations)
     , mThreshold(threshold)
     , mSoftThreshold(softThreshold)
@@ -161,37 +160,37 @@ pps::BloomPass::BloomPass(RenderDevice& renderDevice, glm::uvec2 size, unsigned 
     mBlendState = mRenderDevice.createBlendState(blendDesc);
 }
 
-float pps::BloomPass::getThreshold() const
+float PostProcessingBloom::getThreshold() const
 {
     return mThreshold;
 }
 
-float pps::BloomPass::getSoftThreshold() const
+float PostProcessingBloom::getSoftThreshold() const
 {
     return mSoftThreshold;
 }
 
-float pps::BloomPass::getIntensity() const
+float PostProcessingBloom::getIntensity() const
 {
     return mIntensity;
 }
 
-void pps::BloomPass::setThreshold(float threshold)
+void PostProcessingBloom::setThreshold(float threshold)
 {
     mThreshold = threshold;
 }
 
-void pps::BloomPass::setSoftThreshold(float softThreshold)
+void PostProcessingBloom::setSoftThreshold(float softThreshold)
 {
     mSoftThreshold = softThreshold;
 }
 
-void pps::BloomPass::setIntensity(float intensity)
+void PostProcessingBloom::setIntensity(float intensity)
 {
     mIntensity = intensity;
 }
 
-void pps::BloomPass::generateTextures()
+void PostProcessingBloom::generateTextures()
 {
     // Generate textures
     Texture2DDesc texDesc;
@@ -232,13 +231,14 @@ void pps::BloomPass::generateTextures()
     }
 }
 
-void pps::BloomPass::resize(glm::uvec2 size)
+void PostProcessingBloom::resize(glm::uvec2 size)
 {
     mSize = size;
     generateTextures();
 }
 
-void pps::BloomPass::execute(std::map<Input, Texture2D>& /*inputs*/, Texture2D prev, Framebuffer out) const
+void PostProcessingBloom::execute(std::map<PostProcessingInput, Texture2D>& /*inputs*/, Texture2D prev,
+                                  Framebuffer out) const
 {
     // Set the framebuffer and state.
     mRenderDevice.setViewport(0, 0, static_cast<int>(mSize.x), static_cast<int>(mSize.y));

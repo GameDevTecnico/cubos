@@ -4,9 +4,10 @@
 #include <cubos/engine/renderer/pps/pass.hpp>
 
 using namespace cubos::core::gl;
-using namespace cubos::engine::gl;
+using cubos::engine::PostProcessingInput;
+using cubos::engine::PostProcessingManager;
 
-pps::Manager::Manager(RenderDevice& renderDevice, glm::uvec2 size)
+PostProcessingManager::PostProcessingManager(RenderDevice& renderDevice, glm::uvec2 size)
     : mRenderDevice(renderDevice)
 {
     mNextId = 0;
@@ -14,7 +15,7 @@ pps::Manager::Manager(RenderDevice& renderDevice, glm::uvec2 size)
     this->resize(size);
 }
 
-pps::Manager::~Manager()
+PostProcessingManager::~PostProcessingManager()
 {
     for (auto& pass : mPasses)
     {
@@ -22,7 +23,7 @@ pps::Manager::~Manager()
     }
 }
 
-void pps::Manager::resize(glm::uvec2 size)
+void PostProcessingManager::resize(glm::uvec2 size)
 {
     // Only resize if the size changed.
     if (mSize == size)
@@ -53,20 +54,20 @@ void pps::Manager::resize(glm::uvec2 size)
     mIntermediateFb[1] = mRenderDevice.createFramebuffer(fbDesc);
 }
 
-void pps::Manager::provideInput(Input input, Texture2D texture)
+void PostProcessingManager::provideInput(PostProcessingInput input, Texture2D texture)
 {
     mInputs[input] = std::move(texture);
 }
 
-void pps::Manager::removePass(std::size_t id)
+void PostProcessingManager::removePass(std::size_t id)
 {
     delete mPasses[id];
     mPasses.erase(id);
 }
 
-void pps::Manager::execute(const Framebuffer& out)
+void PostProcessingManager::execute(const Framebuffer& out)
 {
-    auto prev = mInputs.at(Input::Lighting);
+    auto prev = mInputs.at(PostProcessingInput::Lighting);
     std::size_t nextI = 0;
 
     for (auto it = mPasses.begin(); it != mPasses.end(); ++it)
@@ -89,7 +90,7 @@ void pps::Manager::execute(const Framebuffer& out)
     }
 }
 
-std::size_t pps::Manager::passCount() const
+std::size_t PostProcessingManager::passCount() const
 {
     return mPasses.size();
 }
