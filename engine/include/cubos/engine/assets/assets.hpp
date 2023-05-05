@@ -140,7 +140,7 @@ namespace cubos::engine
         /// Can be used to provide asset hot-reloading.
         /// @param handle The handle to update.
         /// @returns Whether the version was updated.
-        bool update(AnyAsset& handle);
+        bool update(AnyAsset& handle) const;
 
         /// Forces the given asset to be reloaded.
         /// @param handle The handle to reload.
