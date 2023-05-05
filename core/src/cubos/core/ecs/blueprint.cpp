@@ -30,18 +30,24 @@ Entity Blueprint::entity(const std::string& name) const
 void Blueprint::merge(const std::string& prefix, const Blueprint& other)
 {
     // First, merge the maps.
-    data::SerializationMap<Entity, std::string> dstMap;
+    data::SerializationMap<Entity, std::string> srcMap;
     for (uint32_t i = 0; i < static_cast<uint32_t>(other.mMap.size()); ++i)
     {
-        auto name = prefix + "." + other.mMap.getId(Entity(i, 0));
-        mMap.add(Entity(static_cast<uint32_t>(mMap.size()), 0), name);
-        dstMap.add(Entity(i, 0), name);
+        // Deserialize from the source buffer using the original entity names.
+        // Serialize into the destination buffer using the prefixed entity names.
+
+        auto srcName = other.mMap.getId(Entity(i, 0));
+        auto dstName = prefix + ".";
+        dstName += srcName;
+
+        srcMap.add(Entity(static_cast<uint32_t>(mMap.size()), 0), srcName);
+        mMap.add(Entity(static_cast<uint32_t>(mMap.size()), 0), dstName);
     }
 
     data::Context src;
     data::Context dst;
-    src.push(mMap);
-    dst.push(dstMap);
+    src.push(srcMap);
+    dst.push(mMap);
 
     /// Then, merge the buffers.
     for (const auto& buffer : other.mBuffers)
