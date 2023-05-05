@@ -805,7 +805,14 @@ static bool generate(const GenerateOptions& options)
 
     for (auto& component : components)
     {
-        std::string id = "::" + component.namespaceStr + "::" + component.typeStr;
+        std::string id = "::";
+        if (!component.namespaceStr.empty())
+        {
+            id += component.namespaceStr;
+            id += "::";
+        }
+        id += component.typeStr;
+
         std::string storageId = "::cubos::core::ecs::" + component.storage + "<" + id + ">";
 
         file << std::endl;
