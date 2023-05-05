@@ -257,7 +257,7 @@ Assets::Status Assets::status(const AnyAsset& handle) const
     return it->second->status;
 }
 
-bool Assets::update(AnyAsset& handle)
+bool Assets::update(AnyAsset& handle) const
 {
     auto assetEntry = this->entry(handle);
     if (assetEntry == nullptr)
