@@ -8,18 +8,18 @@
 
 #include <cubos/engine/renderer/pps/pass.hpp>
 
-namespace cubos::engine::gl::pps
+namespace cubos::engine
 {
     /// A post processing pass that adds a "bloom" effect to any bright objects
     /// in the scene.
     ///
     /// Source: https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom
-    class BloomPass : public Pass
+    class PostProcessingBloom : public PostProcessingPass
     {
     public:
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
-        BloomPass(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
+        PostProcessingBloom(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
 
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
@@ -27,7 +27,7 @@ namespace cubos::engine::gl::pps
         /// @param threshold Pixel brightness threshold to be considered for bloom effect
         /// @param softThreshold Ratio for including pixels that don't pass the threshold test
         /// @param intensity The intensity of the bloom effect.
-        BloomPass(core::gl::RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
+        PostProcessingBloom(core::gl::RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
                   float softThreshold, float intensity);
 
         /// Gets the threshold for the bloom effect.
@@ -60,7 +60,7 @@ namespace cubos::engine::gl::pps
         // Interface methods implementation.
 
         void resize(glm::uvec2 size) override;
-        void execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
+        void execute(std::map<PostProcessingInput, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
                      core::gl::Framebuffer out) const override;
 
     private:
@@ -91,4 +91,4 @@ namespace cubos::engine::gl::pps
         std::vector<core::gl::Texture2D> mBloomTexBuffer; ///< The texture buffer of the bloom effect.
         std::vector<core::gl::Framebuffer> mBloomFBs;     ///< The framebuffers of the bloom effect.
     };
-} // namespace cubos::engine::gl::pps
+} // namespace cubos::engine

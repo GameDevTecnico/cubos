@@ -3,7 +3,8 @@
 #include <cubos/engine/renderer/pps/copy_pass.hpp>
 
 using namespace cubos::core::gl;
-using namespace cubos::engine::gl;
+using cubos::engine::PostProcessingCopy;
+using cubos::engine::PostProcessingInput;
 
 /// The vertex shader of the copy pass.
 static const char* copyVs = R"glsl(
@@ -37,8 +38,8 @@ void main()
 }
 )glsl";
 
-pps::CopyPass::CopyPass(RenderDevice& renderDevice, glm::uvec2 size)
-    : Pass(renderDevice)
+PostProcessingCopy::PostProcessingCopy(RenderDevice& renderDevice, glm::uvec2 size)
+    : PostProcessingPass(renderDevice)
     , mSize(size)
 {
     // Create the shader pipeline.
@@ -59,13 +60,13 @@ pps::CopyPass::CopyPass(RenderDevice& renderDevice, glm::uvec2 size)
     mInputTexSampler = mRenderDevice.createSampler(samplerDesc);
 }
 
-void pps::CopyPass::resize(glm::uvec2 size)
+void PostProcessingCopy::resize(glm::uvec2 size)
 {
     mSize = size;
 }
 
-void pps::CopyPass::execute(std::map<Input, core::gl::Texture2D>& /*inputs*/, core::gl::Texture2D prev,
-                            core::gl::Framebuffer out) const
+void PostProcessingCopy::execute(std::map<PostProcessingInput, core::gl::Texture2D>& /*inputs*/,
+                                 core::gl::Texture2D prev, core::gl::Framebuffer out) const
 {
     // Set the framebuffer and state.
     mRenderDevice.setFramebuffer(out);

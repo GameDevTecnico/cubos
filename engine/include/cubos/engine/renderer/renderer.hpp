@@ -16,11 +16,7 @@ namespace cubos::engine
 {
     class RendererFrame;
     class BaseRenderer;
-
-    namespace gl::pps
-    {
-        class Pass;
-    }
+    class PostProcessingPass;
 
     namespace impl
     {
@@ -70,7 +66,7 @@ namespace cubos::engine
 
         /// Gets a reference to the post processing manager.
         /// @return The post processing manager.
-        gl::pps::Manager& pps();
+        PostProcessingManager& pps();
 
     protected:
         core::gl::RenderDevice& mRenderDevice; ///< The render device being used.
@@ -91,7 +87,7 @@ namespace cubos::engine
         /// Called when the internal texture used for post processing needs to be resized.
         void resizeTex(glm::uvec2 size);
 
-        gl::pps::Manager mPpsManager;       ///< The post processing manager.
+        PostProcessingManager mPpsManager;  ///< The post processing manager.
         core::gl::Framebuffer mFramebuffer; ///< The framebuffer where the frame is drawn.
         core::gl::Texture2D mTexture;       ///< The texture where the frame is drawn.
     };
