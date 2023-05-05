@@ -3,7 +3,6 @@
 #include <cubos/core/settings.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
-#include <cubos/engine/env_settings/plugin.hpp>
 #include <cubos/engine/scene/plugin.hpp>
 
 #include "components.hpp"
@@ -56,7 +55,6 @@ int main(int argc, char** argv)
 {
     Cubos cubos(argc, argv);
 
-    cubos.addPlugin(envSettingsPlugin);
     cubos.addPlugin(scenePlugin);
 
     cubos.addComponent<Num>();
