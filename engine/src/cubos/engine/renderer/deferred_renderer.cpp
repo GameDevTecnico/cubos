@@ -11,10 +11,8 @@
 #include <cubos/engine/renderer/deferred_renderer.hpp>
 #include <cubos/engine/renderer/frame.hpp>
 
-using namespace cubos;
-using namespace cubos::core;
 using namespace cubos::core::gl;
-using namespace cubos::engine;
+using cubos::engine::DeferredRenderer;
 
 /// Deferred renderer grid implementation.
 struct DeferredGrid : public engine::impl::RendererGrid
@@ -755,8 +753,8 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     mRenderDevice.drawTriangles(0, 6);
 
     // Provide custom inputs to the PPS manager.
-    this->pps().provideInput(gl::pps::Input::Position, mPositionTex);
-    this->pps().provideInput(gl::pps::Input::Normal, mNormalTex);
+    this->pps().provideInput(PostProcessingInput::Position, mPositionTex);
+    this->pps().provideInput(PostProcessingInput::Normal, mNormalTex);
 }
 
 void DeferredRenderer::createSSAOTextures()

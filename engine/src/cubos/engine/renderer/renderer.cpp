@@ -23,7 +23,7 @@ void BaseRenderer::render(const core::gl::Camera& camera, const RendererFrame& f
     if (usePostProcessing && mPpsManager.passCount() > 0)
     {
         this->onRender(camera, frame, mFramebuffer);
-        mPpsManager.provideInput(gl::pps::Input::Lighting, mTexture);
+        mPpsManager.provideInput(PostProcessingInput::Lighting, mTexture);
         mPpsManager.execute(target);
     }
     else
@@ -32,7 +32,7 @@ void BaseRenderer::render(const core::gl::Camera& camera, const RendererFrame& f
     }
 }
 
-cubos::engine::gl::pps::Manager& BaseRenderer::pps()
+cubos::engine::PostProcessingManager& BaseRenderer::pps()
 {
     return mPpsManager;
 }
