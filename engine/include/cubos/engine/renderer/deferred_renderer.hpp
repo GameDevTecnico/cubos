@@ -12,7 +12,7 @@
 #define CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT 128
 
-namespace cubos::engine::gl::deferred
+namespace cubos::engine
 {
     /// Renderer implementation which uses deferred rendering.
     ///
@@ -20,14 +20,14 @@ namespace cubos::engine::gl::deferred
     /// The rendering is done in two passes:
     /// - The first pass renders the scene to the GBuffer textures: position, normal and material.
     /// - The second pass takes the GBuffer textures and calculates the color of the pixels with the lighting applied.
-    class Renderer : public BaseRenderer
+    class DeferredRenderer : public BaseRenderer
     {
     public:
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
         /// @param settings The settings to use.
-        Renderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings);
-        ~Renderer() override = default;
+        DeferredRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings);
+        ~DeferredRenderer() override = default;
 
         // Implement interface methods.
 
@@ -102,4 +102,4 @@ namespace cubos::engine::gl::deferred
         core::gl::ShaderPipeline mSsaoBlurPipeline;
         core::gl::ShaderBindingPoint mSsaoBlurTexBp;
     };
-} // namespace cubos::engine::gl::deferred
+} // namespace cubos::engine

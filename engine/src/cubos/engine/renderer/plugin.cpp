@@ -4,7 +4,7 @@
 #include <cubos/core/gl/camera.hpp>
 #include <cubos/core/settings.hpp>
 
-#include <cubos/engine/renderer/deferred/renderer.hpp>
+#include <cubos/engine/renderer/deferred_renderer.hpp>
 #include <cubos/engine/renderer/frame.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
@@ -18,8 +18,7 @@ using namespace cubos::engine;
 static void init(Renderer& renderer, const Window& window, const Settings& settings)
 {
     auto& renderDevice = window->getRenderDevice();
-    renderer =
-        std::make_shared<cubos::engine::gl::deferred::Renderer>(renderDevice, window->getFramebufferSize(), settings);
+    renderer = std::make_shared<DeferredRenderer>(renderDevice, window->getFramebufferSize(), settings);
 }
 
 static void frame(RendererFrame& frame, Query<const RenderableGrid&, const LocalToWorld&> query)
