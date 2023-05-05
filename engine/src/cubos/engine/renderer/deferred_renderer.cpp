@@ -8,14 +8,13 @@
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/log.hpp>
 
-#include <cubos/engine/renderer/deferred/renderer.hpp>
+#include <cubos/engine/renderer/deferred_renderer.hpp>
 #include <cubos/engine/renderer/frame.hpp>
 
 using namespace cubos;
 using namespace cubos::core;
 using namespace cubos::core::gl;
 using namespace cubos::engine;
-using namespace cubos::engine::gl;
 
 /// Deferred renderer grid implementation.
 struct DeferredGrid : public engine::impl::RendererGrid
@@ -375,7 +374,7 @@ void main() {
 }
 )glsl";
 
-deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings)
+DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings)
     : BaseRenderer(renderDevice, size)
 {
     // Create the states.
@@ -458,7 +457,7 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
 
     // Create the GBuffer.
     mSize = glm::uvec2(0, 0);
-    Renderer::onResize(size);
+    DeferredRenderer::onResize(size);
 
     // Check whether SSAO is enabled.
     mSsaoEnabled = settings.getBool("ssaoEnabled", false);
@@ -469,7 +468,7 @@ deferred::Renderer::Renderer(RenderDevice& renderDevice, glm::uvec2 size, const 
     }
 }
 
-RendererGrid deferred::Renderer::upload(const Grid& grid)
+RendererGrid DeferredRenderer::upload(const Grid& grid)
 {
     auto deferredGrid = std::make_shared<DeferredGrid>();
 
@@ -512,7 +511,7 @@ RendererGrid deferred::Renderer::upload(const Grid& grid)
     return deferredGrid;
 }
 
-void deferred::Renderer::setPalette(const core::gl::Palette& palette)
+void DeferredRenderer::setPalette(const core::gl::Palette& palette)
 {
     // Get the colors from the palette.
     // Magenta is used for non-existent materials in order to easily identify errors.
@@ -529,7 +528,7 @@ void deferred::Renderer::setPalette(const core::gl::Palette& palette)
     mPaletteTex->update(0, 0, 256, 256, data.data());
 }
 
-void deferred::Renderer::onResize(glm::uvec2 size)
+void DeferredRenderer::onResize(glm::uvec2 size)
 {
     // Only resize if the size has changed.
     if (mSize == size)
@@ -571,7 +570,7 @@ void deferred::Renderer::onResize(glm::uvec2 size)
     }
 }
 
-void deferred::Renderer::onRender(const Camera& camera, const RendererFrame& frame, Framebuffer target)
+void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame, Framebuffer target)
 {
     // Steps:
     // 1. Prepare the MVP matrix.
@@ -756,11 +755,11 @@ void deferred::Renderer::onRender(const Camera& camera, const RendererFrame& fra
     mRenderDevice.drawTriangles(0, 6);
 
     // Provide custom inputs to the PPS manager.
-    this->pps().provideInput(pps::Input::Position, mPositionTex);
-    this->pps().provideInput(pps::Input::Normal, mNormalTex);
+    this->pps().provideInput(gl::pps::Input::Position, mPositionTex);
+    this->pps().provideInput(gl::pps::Input::Normal, mNormalTex);
 }
 
-void deferred::Renderer::createSSAOTextures()
+void DeferredRenderer::createSSAOTextures()
 {
     Texture2DDesc texDesc;
     texDesc.width = mSize.x;
@@ -796,7 +795,7 @@ void deferred::Renderer::createSSAOTextures()
     mSsaoFb = mRenderDevice.createFramebuffer(fbDesc);
 }
 
-void deferred::Renderer::generateSSAONoise()
+void DeferredRenderer::generateSSAONoise()
 {
     // Generate kernel samples
     std::uniform_real_distribution<float> randomFloats(0.0F, 1.0F); // random floats between [0.0, 1.0]
