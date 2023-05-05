@@ -122,8 +122,8 @@ namespace cubos::core::ecs
                 buffer->stream.seek(0, memory::SeekOrigin::Begin);
                 auto ser = data::BinarySerializer(this->stream);
                 auto des = data::BinaryDeserializer(buffer->stream);
-                ser.context().pushSubContext(src);
-                des.context().pushSubContext(dst);
+                ser.context().pushSubContext(dst);
+                des.context().pushSubContext(src);
                 for (const auto& name : buffer->names)
                 {
                     std::string path = prefix;
