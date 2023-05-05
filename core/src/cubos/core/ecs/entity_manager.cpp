@@ -32,9 +32,14 @@ void cubos::core::data::deserialize<Entity>(Deserializer& des, Entity& obj)
     {
         obj = Entity();
     }
-    else
+    else if (map.hasId(name))
     {
         obj = map.getRef(name);
+    }
+    else
+    {
+        CUBOS_WARN("No such entity '{}'", name);
+        des.fail();
     }
 }
 
