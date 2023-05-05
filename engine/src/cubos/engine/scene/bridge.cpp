@@ -8,6 +8,9 @@
 using namespace cubos::engine;
 using namespace cubos::core;
 
+using cubos::core::data::SerializationMap;
+using cubos::core::ecs::Entity;
+
 bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
 {
     // Open the scene file.
@@ -33,6 +36,16 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
     }
 
     auto scene = Scene();
+
+    // Add a SerializationMap for entity handle deserialization.
+    deserializer.context().push(SerializationMap<Entity, std::string>{[&](const Entity&, std::string&) {
+                                                                          return false; // Serialization not needed.
+                                                                      },
+                                                                      [&](Entity& entity, const std::string& string) {
+                                                                          entity = scene.blueprint.entity(string);
+                                                                          return !entity.isNull();
+                                                                      }});
+
     deserializer.beginObject();
 
     // First, read the imports section.
