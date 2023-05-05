@@ -8,12 +8,12 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/window.hpp>
 
-namespace cubos::engine::gl::pps
+namespace cubos::engine
 {
-    class Pass;
+    class PostProcessingPass;
 
     /// Possible renderer outputs which can then be used as input for a post processing pass.
-    enum class Input
+    enum class PostProcessingInput
     {
         Lighting, ///< Renderer output with lighting applied.
         Position, ///< GBuffer texture with the world position of the pixels.
@@ -26,13 +26,13 @@ namespace cubos::engine::gl::pps
     /// Passes are executed in the order they are added, and take as input the output of the previous pass and the
     /// outputs of the renderer.
     /// @see Pass
-    class Manager final
+    class PostProcessingManager final
     {
     public:
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
-        Manager(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
-        ~Manager();
+        PostProcessingManager(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
+        ~PostProcessingManager();
 
         /// Called when the window framebuffer size changes.
         /// @param size The new size of the window.
@@ -41,7 +41,7 @@ namespace cubos::engine::gl::pps
         /// Provides a texture input to be used by the passes.
         /// @param input The input identifier.
         /// @param texture The texture to provide.
-        void provideInput(Input input, core::gl::Texture2D texture);
+        void provideInput(PostProcessingInput input, core::gl::Texture2D texture);
 
         /// Adds a pass to the manager.
         /// @tparam T The type of the pass to add.
@@ -65,8 +65,8 @@ namespace cubos::engine::gl::pps
     private:
         core::gl::RenderDevice& mRenderDevice;        ///< The render device to use.
         glm::uvec2 mSize;                             ///< The current size of the window.
-        std::map<Input, core::gl::Texture2D> mInputs; ///< The inputs provided to the passes.
-        std::map<std::size_t, Pass*> mPasses;         ///< The passes present in the manager.
+        std::map<PostProcessingInput, core::gl::Texture2D> mInputs; ///< The inputs provided to the passes.
+        std::map<std::size_t, PostProcessingPass*> mPasses;         ///< The passes present in the manager.
         std::size_t mNextId;                          ///< The next ID to use for a pass.
         core::gl::Texture2D mIntermediateTex[2];      ///< Intermediate textures used for the passes.
         core::gl::Framebuffer mIntermediateFb[2];     ///< Intermediate framebuffers used for the passes.
@@ -75,10 +75,10 @@ namespace cubos::engine::gl::pps
     // Implementation.
 
     template <typename T>
-    std::size_t Manager::addPass()
+    std::size_t PostProcessingManager::addPass()
     {
         std::size_t id = mNextId++;
         mPasses[id] = new T(mRenderDevice, mSize);
         return id;
     }
-} // namespace cubos::engine::gl::pps
+} // namespace cubos::engine

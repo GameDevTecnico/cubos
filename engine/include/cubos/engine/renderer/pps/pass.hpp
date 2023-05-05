@@ -8,20 +8,20 @@
 
 #include <cubos/engine/renderer/pps/manager.hpp>
 
-namespace cubos::engine::gl::pps
+namespace cubos::engine
 {
     /// A generic post processing pass.
     /// All passes must have the same constructor arguments: the render device and the size of the window.
-    /// They should never be constructed directly, and instead should be created using the Manager.
+    /// They should never be constructed directly, and instead should be created using the PostProcessingManager.
     ///
-    /// @see Manager
-    class Pass
+    /// @see PostProcessingManager
+    class PostProcessingPass
     {
     public:
         /// @param renderDevice The render device to use.
-        Pass(core::gl::RenderDevice& renderDevice);
-        Pass(const Pass&) = delete;
-        virtual ~Pass() = default;
+        PostProcessingPass(core::gl::RenderDevice& renderDevice);
+        PostProcessingPass(const PostProcessingPass&) = delete;
+        virtual ~PostProcessingPass() = default;
 
         /// Called when the window framebuffer size changes.
         /// @param size The new size of the window.
@@ -32,10 +32,10 @@ namespace cubos::engine::gl::pps
         /// own inputs.
         /// @param prev The resulting texture of the previous pass.
         /// @param out The framebuffer where the pass will render to.
-        virtual void execute(std::map<Input, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
+        virtual void execute(std::map<PostProcessingInput, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
                              core::gl::Framebuffer out) const = 0;
 
     protected:
         core::gl::RenderDevice& mRenderDevice; ///< The render device to use.
     };
-} // namespace cubos::engine::gl::pps
+} // namespace cubos::engine
