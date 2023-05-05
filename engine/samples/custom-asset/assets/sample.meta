@@ -1,8 +1,0 @@
----
-metas:
-  - id: sample-text
-    type: SampleText
-    usage: Static
-    params:
-      path: /assets/sample.txt   
-...
