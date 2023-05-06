@@ -762,18 +762,23 @@ static bool generate(const GenerateOptions& options)
     if (std::filesystem::exists(options.output))
     {
         // Check if any of the components are out of date.
+        bool outdated = false;
         auto writeTime = std::filesystem::last_write_time(options.output);
         for (auto& component : components)
         {
             if (std::filesystem::last_write_time(component.header) > writeTime)
             {
+                outdated = true;
                 break;
             }
         }
 
-        // If none of the components are out of date, skip the generation.
-        std::cerr << "Skipping generation because it's up to date" << std::endl;
-        return true;
+        if (!outdated)
+        {
+            // If none of the components are out of date, skip the generation.
+            std::cerr << "Skipping generation because it's up to date" << std::endl;
+            return true;
+        }
     }
 
     std::ofstream file(options.output);
