@@ -1,10 +1,6 @@
 #include <cubos/core/settings.hpp>
 
-#include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/transform/plugin.hpp>
-#include <cubos/engine/transform/position.hpp>
-#include <cubos/engine/transform/rotation.hpp>
-#include <cubos/engine/transform/scale.hpp>
 
 using cubos::core::ecs::Query;
 using namespace cubos::engine;
