@@ -5,9 +5,7 @@
 using cubos::core::ecs::Query;
 using namespace cubos::engine;
 
-static void applyTransform(
-    Query<LocalToWorld&, const Position*, const Rotation*, const Scale*>
-        query)
+static void applyTransform(Query<LocalToWorld&, const Position*, const Rotation*, const Scale*> query)
 {
     for (auto [entity, localToWorld, position, rotation, scale] : query)
     {
