@@ -12,5 +12,5 @@ function(cubinhos_generate target source_dir)
     add_custom_target(${target}-generate DEPENDS ${binary_dir}/${target}-components.cpp)
     add_dependencies(${target} ${target}-generate)
 
-    target_sources(${target} PRIVATE ${binary_dir}/${target}-components.cpp)
+    target_sources(${target} PUBLIC ${binary_dir}/${target}-components.cpp)
 endfunction()    
