@@ -8,7 +8,7 @@ namespace cubos::engine
 {
     /// Component which makes a voxel grid be rendered by the renderer plugin.
     /// Must be used with `LocalToWorld`, which provides the transformation matrix of the grid.
-    struct [[cubos::component("cubos/renderable-grid", VecStorage)]] RenderableGrid
+    struct [[cubos::component("cubos/renderable_grid", VecStorage)]] RenderableGrid
     {
         Asset<core::gl::Grid> asset; ///< Handle to the grid asset to be rendered.
     };
