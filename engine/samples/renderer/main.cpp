@@ -1,113 +1,63 @@
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include <glm/gtx/quaternion.hpp>
+#include <cubos/core/data/debug_serializer.hpp>
+#include <cubos/core/memory/stream.hpp>
+#include <cubos/core/settings.hpp>
 
-#include <cubos/core/gl/palette.hpp>
-#include <cubos/core/gl/render_device.hpp>
-#include <cubos/core/gl/vertex.hpp>
-#include <cubos/core/io/window.hpp>
-#include <cubos/core/log.hpp>
+#include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/renderer/light.hpp>
+#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/renderer/renderer.hpp>
 
-#include <cubos/engine/renderer/deferred/renderer.hpp>
-#include <cubos/engine/renderer/frame.hpp>
-#include <cubos/engine/renderer/pps/copy_pass.hpp>
+using cubos::core::Settings;
+using cubos::core::ecs::Commands;
+using cubos::core::ecs::Entity;
+using cubos::core::ecs::World;
+using namespace cubos::engine;
 
-using namespace cubos;
-
-int main()
+static void settings(Settings& settings)
 {
-    core::initializeLogger();
-    auto window = core::io::openWindow();
-    auto& renderDevice = window->getRenderDevice();
+    settings.setString("assets.path", ""); // Disable assets file IO
+}
 
-    {
-        using namespace core::gl;
-        using namespace engine::gl;
+static void setupScene(Commands commands, Assets& assets, ActiveCamera& camera, Renderer& renderer)
+{
+    using cubos::core::gl::Grid;
+    using cubos::core::gl::Palette;
 
-        auto renderer = deferred::Renderer(renderDevice, window->getFramebufferSize(), core::Settings());
-        auto frame = Frame();
+    // Create a simple palette with 3 materials (red, green and blue).
+    renderer->setPalette(Palette{{
+        {{1, 0, 0, 1}},
+        {{0, 1, 0, 1}},
+        {{0, 0, 1, 1}},
+    }});
 
-        // Set the palette.
-        Palette palette({
-            {{1, 0, 0, 1}},
-            {{0, 1, 0, 1}},
-            {{0, 0, 1, 1}},
-        });
-        renderer.setPalette(palette);
+    // Create a 2x2x2 grid whose voxels alternate between the materials defined above.
+    auto gridAsset = assets.create(Grid{{2, 2, 2}, {1, 2, 3, 1, 2, 3, 1, 2}});
 
-        // Create and upload a simple grid.
-        Grid cube({2, 2, 2});
-        cube.set({0, 0, 0}, 1);
-        cube.set({0, 0, 1}, 2);
-        cube.set({0, 1, 0}, 3);
-        cube.set({0, 1, 1}, 1);
-        cube.set({1, 0, 0}, 2);
-        cube.set({1, 0, 1}, 3);
-        cube.set({1, 1, 0}, 1);
-        cube.set({1, 1, 1}, 2);
-        auto gpuCube = renderer.upload(cube);
+    // Spawn an entity with a renderable grid component and a identity transform.
+    commands.create(RenderableGrid{gridAsset}, LocalToWorld{});
 
-        // Add a copy pass to the post processing stack.
-        renderer.pps().addPass<pps::CopyPass>();
+    // Spawn the camera entity.
+    camera.entity = commands.create()
+                        .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+                        .add(LocalToWorld{})
+                        .add(Position{{5.0F, 5.0F, -10.0F}})
+                        .add(Rotation{glm::quatLookAt(glm::vec3{0.0F, 0.0F, 1.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
+                        .entity();
 
-        // Initialize the camera.
-        Camera camera;
-        camera.fovY = 20.0f;
-        camera.zNear = 0.1f;
-        camera.zFar = 1000.0f;
-        camera.view = glm::lookAt(glm::vec3{7, 7, 7}, glm::vec3{0, 0, 0}, glm::vec3{0, 1, 0});
+    // Spawn a point light.
+    commands.create()
+        .add(PointLight{.color = {1.0F, 1.0F, 1.0F}, .intensity = 1.0F, .range = 10.0F})
+        .add(LocalToWorld{})
+        .add(Position{{1.0F, 3.0F, -2.0F}});
+}
 
-        while (!window->shouldClose())
-        {
-            while (auto event = window->pollEvent())
-            {
-                if (std::holds_alternative<core::io::ResizeEvent>(event.value()))
-                {
-                    auto resizeEvent = std::get<core::io::ResizeEvent>(event.value());
-                    renderer.resize(resizeEvent.size);
-                }
-            }
+int main(int argc, char** argv)
+{
+    Cubos cubos(argc, argv);
 
-            auto time = static_cast<float>(window->getTime());
+    cubos.addPlugin(rendererPlugin);
 
-            // Clear the frame commands.
-            frame.clear();
-
-            // Draw cube of cubes to the frame.
-            for (int x = -1; x < 1; x++)
-            {
-                for (int y = -1; y < 1; y++)
-                {
-                    for (int z = -1; z < 1; z++)
-                    {
-                        auto axis = glm::vec3(x, y, z) * 2.0f + glm::vec3(1);
-
-                        auto modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z)) *
-                                        glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f)) *
-                                        glm::rotate(glm::mat4(1.0f), glm::radians(time), axis) *
-                                        glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, -0.5f, -0.5f)) *
-                                        glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
-                        frame.draw(gpuCube, modelMat);
-                    }
-                }
-            }
-
-            // Add lights to the frame.
-            auto spotRotation = glm::quat(glm::vec3(0, time, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-            auto directionalRotation = glm::quat(glm::vec3(0, 90, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-            auto pointRotation = glm::quat(glm::vec3(0, -time, 0)) * glm::quat(glm::vec3(glm::radians(45.0f), 0, 0));
-
-            frame.ambient(glm::vec3(0.1f));
-            frame.light(SpotLight(spotRotation * glm::vec3(0, 0, -5), spotRotation, glm::vec3(1), 1, 100,
-                                  glm::radians(10.0f), glm::radians(9.0f)));
-            frame.light(DirectionalLight(directionalRotation, glm::vec3(1), 0.5f));
-            frame.light(PointLight(pointRotation * glm::vec3(0, 0, -2), glm::vec3(1), 1, 10));
-
-            // Render the frame.
-            renderer.render(camera, frame);
-            window->swapBuffers();
-        }
-    }
-
-    return 0;
+    cubos.startupSystem(settings).tagged("cubos.settings");
+    cubos.startupSystem(setupScene).afterTag("cubos.renderer.init");
+    cubos.run();
 }
