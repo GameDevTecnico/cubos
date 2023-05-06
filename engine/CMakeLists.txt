@@ -45,10 +45,6 @@ set(CUBOS_ENGINE_SOURCE
 set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/cubos.hpp"
 
-    "include/cubos/engine/ecs/position.hpp"
-    "include/cubos/engine/ecs/rotation.hpp"
-    "include/cubos/engine/ecs/scale.hpp"
-    "include/cubos/engine/ecs/local_to_world.hpp"
     #"include/cubos/engine/ecs/grid.hpp"
     "include/cubos/engine/ecs/camera.hpp"
 
@@ -61,7 +57,6 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/gl/pps/pass.hpp"
 
     "include/cubos/engine/window/plugin.hpp"
-    "include/cubos/engine/transform/plugin.hpp"
     "include/cubos/engine/renderer/plugin.hpp"
     "include/cubos/engine/env_settings/plugin.hpp"
 
@@ -72,6 +67,12 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/tools/entity_selector/plugin.hpp"
     "include/cubos/engine/tools/world_inspector/plugin.hpp"
     "include/cubos/engine/tools/entity_inspector/plugin.hpp"
+
+    "include/cubos/engine/transform/position.hpp"
+    "include/cubos/engine/transform/rotation.hpp"
+    "include/cubos/engine/transform/scale.hpp"
+    "include/cubos/engine/transform/local_to_world.hpp"
+    "include/cubos/engine/transform/plugin.hpp"
 
     "include/cubos/engine/assets/plugin.hpp"
     "include/cubos/engine/assets/assets.hpp"
