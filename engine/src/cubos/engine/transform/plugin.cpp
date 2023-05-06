@@ -30,7 +30,7 @@ static void applyTransform(core::ecs::Query<engine::ecs::LocalToWorld&, const en
     }
 }
 
-void cubos::engine::plugins::transformPlugin(Cubos& cubos)
+void cubos::engine::transformPlugin(Cubos& cubos)
 {
     cubos.addComponent<ecs::Position>();
     cubos.addComponent<ecs::Rotation>();

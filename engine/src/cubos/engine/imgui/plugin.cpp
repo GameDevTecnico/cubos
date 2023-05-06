@@ -29,9 +29,9 @@ static void end()
     ui::endFrame();
 }
 
-void cubos::engine::plugins::imguiPlugin(Cubos& cubos)
+void cubos::engine::imguiPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::plugins::windowPlugin);
+    cubos.addPlugin(cubos::engine::windowPlugin);
 
     cubos.startupTag("cubos.imgui.init").afterTag("cubos.window.init");
     cubos.tag("cubos.imgui.begin").afterTag("cubos.window.poll");
