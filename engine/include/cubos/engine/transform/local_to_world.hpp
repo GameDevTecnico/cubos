@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-namespace cubos::engine::ecs
+namespace cubos::engine
 {
     /// A matrix calculated from the position, rotation and scale of an entity.
     /// This matrix should
@@ -11,4 +11,4 @@ namespace cubos::engine::ecs
         glm::mat4 mat = glm::mat4(1.0F); ///< The local to world matrix.
     };
 
-} // namespace cubos::engine::ecs
+} // namespace cubos::engine
