@@ -1,8 +1,10 @@
 #pragma once
 
 #include <cubos/core/gl/grid.hpp>
+#include <cubos/core/gl/palette.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/renderer/renderer.hpp>
 
 namespace cubos::engine
 {
@@ -10,7 +12,8 @@ namespace cubos::engine
     /// Must be used with `LocalToWorld`, which provides the transformation matrix of the grid.
     struct [[cubos::component("cubos/renderable_grid", VecStorage)]] RenderableGrid
     {
-        Asset<core::gl::Grid> asset; ///< Handle to the grid asset to be rendered.
+        Asset<core::gl::Grid> asset;                     ///< Handle to the grid asset to be rendered.
+        [[cubos::ignore]] RendererGrid handle = nullptr; ///< Handle to the uploaded grid - set automatically.
     };
 
     /// Component which defines parameters of a camera used to render the world.
@@ -37,6 +40,7 @@ namespace cubos::engine
     /// Dependencies:
     /// - `windowPlugin`
     /// - `transformPlugin`
+    /// - `assetsPlugin`
     ///
     /// Resources:
     /// - `Renderer`: handle to the renderer.
@@ -44,12 +48,13 @@ namespace cubos::engine
     /// - `ActiveCamera`: the entity which represents the active camera.
     ///
     /// Components:
-    /// - `Grid`: a grid to be rendered. Must be used with `LocalToWorld`.
+    /// - `RenderableGrid`: a grid to be rendered. Must be used with `LocalToWorld`.
     /// - `Camera`: holds camera information. The entity pointed to by `ActiveCamera` must have
     ///   this component.
     ///
     /// Startup tags:
     /// - `cubos.renderer.init`: initializes the renderer, after `cubos.window.init`.
+    /// - `cubos.renderer.ssao.enabled`: whether SSAO is enabled.
     ///
     /// Tags:
     /// - `cubos.renderer.frame`: collects the frame information, after `cubos.transform.update`.
