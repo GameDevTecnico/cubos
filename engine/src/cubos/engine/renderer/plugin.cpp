@@ -46,7 +46,7 @@ static void draw(gl::Renderer& renderer, const plugins::ActiveCamera& activeCame
     frame.clear();
 }
 
-void cubos::engine::plugins::rendererPlugin(Cubos& cubos)
+void cubos::engine::rendererPlugin(Cubos& cubos)
 {
     cubos.addPlugin(transformPlugin);
     cubos.addPlugin(windowPlugin);
