@@ -170,26 +170,29 @@ AnyAsset Assets::load(AnyAsset handle) const
         return {};
     }
 
-    // Find a bridge for the asset.
-    auto bridge = this->bridge(handle);
-    if (bridge == nullptr)
+    if (assetEntry->status != Assets::Status::Loaded)
     {
-        CUBOS_ERROR("Could not load asset");
-        return {};
-    }
+        // Find a bridge for the asset.
+        auto bridge = this->bridge(handle);
+        if (bridge == nullptr)
+        {
+            CUBOS_ERROR("Could not load asset");
+            return {};
+        }
 
-    // We need to lock this to prevent the asset from being queued twice by a concurrent thread.
-    // We also check if this is being called from the loader thread, in which case we don't need
-    // to queue the asset.
-    std::unique_lock lock(mLoaderMutex);
-    if (assetEntry->status == Assets::Status::Unloaded && std::this_thread::get_id() != mLoaderThread.get_id())
-    {
-        CUBOS_TRACE("Queuing asset {} for loading", core::data::Debug(handle));
-        assetEntry->status = Assets::Status::Loading;
-        mLoaderQueue.push_back(Task{handle, bridge});
-        mLoaderCond.notify_one();
+        // We need to lock this to prevent the asset from being queued twice by a concurrent thread.
+        // We also check if this is being called from the loader thread, in which case we don't need
+        // to queue the asset.
+        std::unique_lock lock(mLoaderMutex);
+        if (assetEntry->status == Assets::Status::Unloaded && std::this_thread::get_id() != mLoaderThread.get_id())
+        {
+            CUBOS_TRACE("Queuing asset {} for loading", core::data::Debug(handle));
+            assetEntry->status = Assets::Status::Loading;
+            mLoaderQueue.push_back(Task{handle, bridge});
+            mLoaderCond.notify_one();
+        }
+        lock.unlock();
     }
-    lock.unlock();
 
     // Return a strong handle to the asset.
     assetEntry->refCount += 1;
