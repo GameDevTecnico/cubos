@@ -19,16 +19,16 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/gl/pps/manager.cpp"
     "src/cubos/engine/gl/pps/pass.cpp"
 
-    "src/cubos/engine/plugins/window.cpp"
-    "src/cubos/engine/plugins/transform.cpp"
-    #"src/cubos/engine/plugins/renderer.cpp"
-    "src/cubos/engine/plugins/env_settings.cpp"
+    "src/cubos/engine/window/plugin.cpp"
+    "src/cubos/engine/transform/plugin.cpp"
+    #"src/cubos/engine/renderer/plugin.cpp"
+    "src/cubos/engine/env_settings/plugin.cpp"
 
-    "src/cubos/engine/plugins/file_settings.cpp"
-    "src/cubos/engine/plugins/imgui.cpp"
+    "src/cubos/engine/file_settings/plugin.cpp"
+    "src/cubos/engine/imgui/plugin.cpp"
 
-    "src/cubos/engine/plugins/tools/settings_inspector.cpp"
-    "src/cubos/engine/plugins/tools/entity_selector.cpp"
+    "src/cubos/engine/tools/settings_inspector/plugin.cpp"
+    "src/cubos/engine/tools/entity_selector/plugin.cpp"
 
     "src/cubos/engine/assets/plugin.cpp"
     "src/cubos/engine/assets/assets.cpp"
@@ -58,16 +58,16 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/gl/pps/manager.hpp"
     "include/cubos/engine/gl/pps/pass.hpp"
 
-    "include/cubos/engine/plugins/window.hpp"
-    "include/cubos/engine/plugins/transform.hpp"
-    "include/cubos/engine/plugins/renderer.hpp"
-    "include/cubos/engine/plugins/env_settings.hpp"
+    "include/cubos/engine/window/plugin.hpp"
+    "include/cubos/engine/transform/plugin.hpp"
+    "include/cubos/engine/renderer/plugin.hpp"
+    "include/cubos/engine/env_settings/plugin.hpp"
 
-    "include/cubos/engine/plugins/file_settings.hpp"
-    "include/cubos/engine/plugins/imgui.hpp"
+    "include/cubos/engine/file_settings/plugin.hpp"
+    "include/cubos/engine/imgui/plugin.hpp"
 
-    "include/cubos/engine/plugins/tools/settings_inspector.hpp"
-    "include/cubos/engine/plugins/tools/entity_selector.hpp"
+    "include/cubos/engine/tools/settings_inspector/plugin.hpp"
+    "include/cubos/engine/tools/entity_selector/plugin.hpp"
 
     "include/cubos/engine/assets/plugin.hpp"
     "include/cubos/engine/assets/assets.hpp"
