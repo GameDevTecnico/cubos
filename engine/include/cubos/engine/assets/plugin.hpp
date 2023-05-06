@@ -6,6 +6,7 @@
 namespace cubos::engine
 {
     /// Plugin which adds asset management to CUBOS.
+    /// If the `assets.path` setting is set to an empty string, no file IO will be done.
     ///
     /// @details
     ///
