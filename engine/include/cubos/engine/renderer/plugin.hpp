@@ -51,6 +51,9 @@ namespace cubos::engine
     /// - `RenderableGrid`: a grid to be rendered. Must be used with `LocalToWorld`.
     /// - `Camera`: holds camera information. The entity pointed to by `ActiveCamera` must have
     ///   this component.
+    /// - `SpotLight`
+    /// - `DirectionalLight`
+    /// - `PointLight`
     ///
     /// Startup tags:
     /// - `cubos.renderer.init`: initializes the renderer, after `cubos.window.init`.
