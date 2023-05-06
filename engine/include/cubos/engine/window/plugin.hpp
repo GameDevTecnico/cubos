@@ -4,9 +4,7 @@
 
 #include <cubos/engine/cubos.hpp>
 
-using namespace cubos::engine;
-
-namespace cubos::engine::plugins
+namespace cubos::engine
 {
     /// Plugin to create and handle the lifecycle of a window. This is required for showing any
     /// visual output to the user.
@@ -33,4 +31,4 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void windowPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins
+}; // namespace cubos::engine

@@ -2,7 +2,7 @@
 
 #include <cubos/engine/cubos.hpp>
 
-namespace cubos::engine::plugins
+namespace cubos::engine
 {
     /// Plugin to initialize and configure ImGui for CUBOS. Tag your ImGui systems with
     /// `cubos.imgui`.
@@ -24,4 +24,4 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void imguiPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins
+}; // namespace cubos::engine

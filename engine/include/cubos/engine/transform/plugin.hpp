@@ -2,7 +2,7 @@
 
 #include <cubos/engine/cubos.hpp>
 
-namespace cubos::engine::plugins
+namespace cubos::engine
 {
     /// Plugin which adds components to represent the transform of an entity.
     ///
@@ -23,4 +23,4 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void transformPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins
+}; // namespace cubos::engine

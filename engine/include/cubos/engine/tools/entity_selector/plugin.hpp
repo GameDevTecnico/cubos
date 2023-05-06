@@ -4,7 +4,7 @@
 
 #include <cubos/engine/cubos.hpp>
 
-namespace cubos::engine::plugins::tools
+namespace cubos::engine::tools
 {
     /// Resource used to identify the currently selected entity. Used by multiple editor plugins.
     struct EntitySelector
@@ -23,4 +23,4 @@ namespace cubos::engine::plugins::tools
     ///
     /// @param cubos CUBOS. main class
     void entitySelectorPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins::tools
+}; // namespace cubos::engine::tools

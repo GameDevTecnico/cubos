@@ -27,7 +27,7 @@ static void startup(const Arguments& args, cubos::core::Settings& settings)
     }
 }
 
-void cubos::engine::plugins::envSettingsPlugin(Cubos& cubos)
+void cubos::engine::envSettingsPlugin(Cubos& cubos)
 {
     cubos.startupSystem(startup).tagged("cubos.settings").tagged("cubos.settings.env");
 }

@@ -2,7 +2,7 @@
 
 #include <cubos/engine/cubos.hpp>
 
-namespace cubos::engine::plugins
+namespace cubos::engine
 {
     /// Plugin to load environment settings, provided via command line.
     /// Any duplicated setting will be overwritten.
@@ -16,4 +16,4 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void envSettingsPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins
+}; // namespace cubos::engine
