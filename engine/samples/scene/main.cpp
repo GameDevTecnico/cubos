@@ -13,17 +13,17 @@
 #include <cubos/engine/data/scene.hpp>
 #include <cubos/engine/ecs/camera.hpp>
 #include <cubos/engine/ecs/grid.hpp>
-#include <cubos/engine/ecs/local_to_world.hpp>
-#include <cubos/engine/ecs/position.hpp>
-#include <cubos/engine/ecs/rotation.hpp>
-#include <cubos/engine/ecs/scale.hpp>
 #include <cubos/engine/env_settings/plugin.hpp>
 #include <cubos/engine/file_settings/plugin.hpp>
 #include <cubos/engine/gl/frame.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
+#include <cubos/engine/transform/local_to_world.hpp>
 #include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/transform/position.hpp>
+#include <cubos/engine/transform/rotation.hpp>
+#include <cubos/engine/transform/scale.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
 #include "num.hpp"
@@ -70,8 +70,8 @@ void createScene(World& world, data::AssetManager& assetManager, gl::Renderer& r
     camera.zNear = 0.1f;
     camera.zFar = 1000.0f;
     activeCamera.entity =
-        world.create(ecs::LocalToWorld{}, ecs::Camera{camera}, ecs::Position{{0.0f, 40.0f, -70.0f}},
-                     ecs::Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})});
+        world.create(LocalToWorld{}, ecs::Camera{camera}, Position{{0.0f, 40.0f, -70.0f}},
+                     Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})});
 
     auto paletteAsset = assetManager.load<data::Palette>("palette");
     auto palette = paletteAsset->palette;
@@ -95,7 +95,7 @@ void createScene(World& world, data::AssetManager& assetManager, gl::Renderer& r
                                                     .rendererGrid = floorRendererGrid,
                                                 });
 
-    world.create(ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, ecs::LocalToWorld{}, ecs::Position{}, ecs::Scale{4.0f});
+    world.create(ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, LocalToWorld{}, Position{}, Scale{4.0f});
 }
 
 static void turnOnLight(gl::Frame& frame)

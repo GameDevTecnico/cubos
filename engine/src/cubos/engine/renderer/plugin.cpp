@@ -9,7 +9,7 @@
 
 #include <cubos/engine/ecs/camera.hpp>
 #include <cubos/engine/ecs/grid.hpp>
-#include <cubos/engine/ecs/local_to_world.hpp>
+#include <cubos/engine/transform/local_to_world.hpp>
 
 static void init(gl::Renderer& renderer, const cubos::core::io::Window& window, const cubos::core::Settings& settings)
 {
