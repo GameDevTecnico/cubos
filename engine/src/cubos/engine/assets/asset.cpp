@@ -6,28 +6,6 @@
 
 using namespace cubos::engine;
 
-template <>
-void cubos::core::data::serialize<AnyAsset>(Serializer& ser, const AnyAsset& obj, const char* name)
-{
-    ser.write(uuids::to_string(obj.getId()), name);
-}
-
-template <>
-void cubos::core::data::deserialize<AnyAsset>(Deserializer& des, AnyAsset& obj)
-{
-    std::string str;
-    des.read(str);
-    if (auto id = uuids::uuid::from_string(str))
-    {
-        obj = AnyAsset(id.value());
-    }
-    else
-    {
-        CUBOS_ERROR("Could not deserialize asset handle, invalid UUID: \"{}\"", str);
-        des.fail();
-    }
-}
-
 AnyAsset::~AnyAsset()
 {
     this->decRef();
@@ -135,5 +113,28 @@ void AnyAsset::decRef() const
     if (mRefCount != nullptr)
     {
         static_cast<std::atomic<int>*>(mRefCount)->fetch_sub(1);
+    }
+}
+
+void AnyAsset::serialize(core::data::Serializer& ser, const char* name) const
+{
+    ser.write(uuids::to_string(this->getId()), name);
+}
+
+void AnyAsset::deserialize(core::data::Deserializer& des)
+{
+    std::string str;
+    des.read(str);
+    if (auto id = uuids::uuid::from_string(str))
+    {
+        this->decRef();
+        mId = id.value();
+        mRefCount = nullptr;
+        mVersion = -1;
+    }
+    else
+    {
+        CUBOS_ERROR("Could not deserialize asset handle, invalid UUID: \"{}\"", str);
+        des.fail();
     }
 }
