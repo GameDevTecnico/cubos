@@ -3,8 +3,8 @@
 #include <cubos/core/settings.hpp>
 #include <cubos/core/ui/serialization.hpp>
 
-#include <cubos/engine/plugins/imgui.hpp>
-#include <cubos/engine/plugins/tools/settings_inspector.hpp>
+#include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/tools/settings_inspector/plugin.hpp>
 
 static void inspector(cubos::core::Settings& settings)
 {

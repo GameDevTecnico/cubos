@@ -4,7 +4,7 @@
 #include <cubos/engine/ecs/position.hpp>
 #include <cubos/engine/ecs/rotation.hpp>
 #include <cubos/engine/ecs/scale.hpp>
-#include <cubos/engine/plugins/transform.hpp>
+#include <cubos/engine/transform/plugin.hpp>
 
 using namespace cubos;
 

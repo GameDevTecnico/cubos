@@ -1,4 +1,4 @@
-#include <cubos/engine/plugins/tools/entity_selector.hpp>
+#include <cubos/engine/tools/entity_selector/plugin.hpp>
 
 void cubos::engine::plugins::tools::entitySelectorPlugin(Cubos& cubos)
 {
