@@ -527,7 +527,7 @@ bool parseComponent(Parser& parser, Component& component)
             }
 
             // Skip some non-field statements.
-            if (!consumed && parser.acceptKeywords({"static", "const", "constexpr", "using"}))
+            if (!consumed && parser.acceptKeywords({"static", "const", "constexpr", "using", "[[cubos::ignore]]"}))
             {
                 while (!parser.acceptPunctuation(";"))
                 {
