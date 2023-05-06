@@ -15,10 +15,10 @@ using namespace cubos::core::gl;
 using cubos::engine::DeferredRenderer;
 
 /// Deferred renderer grid implementation.
-struct DeferredGrid : public engine::impl::RendererGrid
+struct DeferredGrid : public cubos::engine::impl::RendererGrid
 {
-    core::gl::VertexArray va;
-    core::gl::IndexBuffer ib;
+    VertexArray va;
+    IndexBuffer ib;
     std::size_t indexCount;
 };
 
@@ -405,7 +405,7 @@ DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, 
     mLightingPipeline = mRenderDevice.createShaderPipeline(lightingVS, lightingPS);
     mPositionBp = mLightingPipeline->getBindingPoint("position");
     mNormalBp = mLightingPipeline->getBindingPoint("normal");
-    mAterialBp = mLightingPipeline->getBindingPoint("material");
+    mMaterialBp = mLightingPipeline->getBindingPoint("material");
     mPaletteBp = mLightingPipeline->getBindingPoint("palette");
     mLightsBp = mLightingPipeline->getBindingPoint("Lights");
     mSsaoEnabledBp = mLightingPipeline->getBindingPoint("ssaoEnabled");
@@ -458,7 +458,7 @@ DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, 
     DeferredRenderer::onResize(size);
 
     // Check whether SSAO is enabled.
-    mSsaoEnabled = settings.getBool("ssaoEnabled", false);
+    mSsaoEnabled = settings.getBool("renderer.ssao.enabled", false);
     if (mSsaoEnabled)
     {
         createSSAOTextures();
@@ -466,7 +466,7 @@ DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, 
     }
 }
 
-RendererGrid DeferredRenderer::upload(const Grid& grid)
+cubos::engine::RendererGrid DeferredRenderer::upload(const Grid& grid)
 {
     auto deferredGrid = std::make_shared<DeferredGrid>();
 
@@ -547,7 +547,7 @@ void DeferredRenderer::onResize(glm::uvec2 size)
 
     // Create the material texture.
     texDesc.format = TextureFormat::R16UInt;
-    mAterialTex = mRenderDevice.createTexture2D(texDesc);
+    mMaterialTex = mRenderDevice.createTexture2D(texDesc);
 
     // Create the depth texture.
     texDesc.format = TextureFormat::Depth24Stencil8;
@@ -558,7 +558,7 @@ void DeferredRenderer::onResize(glm::uvec2 size)
     gBufferDesc.targetCount = 3;
     gBufferDesc.targets[0].setTexture2DTarget(mPositionTex);
     gBufferDesc.targets[1].setTexture2DTarget(mNormalTex);
-    gBufferDesc.targets[2].setTexture2DTarget(mAterialTex);
+    gBufferDesc.targets[2].setTexture2DTarget(mMaterialTex);
     gBufferDesc.depthStencil.setTexture2DTarget(mDepthTex);
     mGBuffer = mRenderDevice.createFramebuffer(gBufferDesc);
 
@@ -707,7 +707,7 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
         mSsaoNoiseBp->bind(mSsaoNoiseSampler);
         mSsaoViewBp->setConstant(mvp.v);
         mSsaoProjectionBp->setConstant(mvp.p);
-        mSsaoScreenSizeBp->setConstant(mSize);
+        mSsaoScreenSizeBp->setConstant(glm::vec2(mSize));
 
         // Samples
         for (int i = 0; i < 64; i++)
@@ -736,8 +736,8 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     mPositionBp->bind(mSampler);
     mNormalBp->bind(mNormalTex);
     mNormalBp->bind(mSampler);
-    mAterialBp->bind(mAterialTex);
-    mAterialBp->bind(mSampler);
+    mMaterialBp->bind(mMaterialTex);
+    mMaterialBp->bind(mSampler);
     mPaletteBp->bind(mPaletteTex);
     mPaletteBp->bind(mSampler);
     mLightsBp->bind(mLightsBuffer);
@@ -748,7 +748,7 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
         mSsaoTexBp->bind(mSampler);
     }
 
-    // 6.2. Draw the screen quad.
+    // 6.3. Draw the screen quad.
     mRenderDevice.setVertexArray(mScreenQuadVa);
     mRenderDevice.drawTriangles(0, 6);
 
