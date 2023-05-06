@@ -4,7 +4,7 @@
 
 #include <cubos/engine/cubos.hpp>
 
-namespace cubos::engine::plugins
+namespace cubos::engine
 {
     /// Resource to identify the entity which represents the active camera.
     struct ActiveCamera
@@ -42,4 +42,4 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void rendererPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins
+}; // namespace cubos::engine

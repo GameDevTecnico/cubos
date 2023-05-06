@@ -2,9 +2,7 @@
 
 #include <cubos/engine/cubos.hpp>
 
-using namespace cubos::engine;
-
-namespace cubos::engine::plugins::tools
+namespace cubos::engine::tools
 {
     /// Plugin that allows inspecting the current settings through a ImGui window.
     ///
@@ -15,4 +13,4 @@ namespace cubos::engine::plugins::tools
     //
     /// @param cubos CUBOS. main class
     void settingsInspectorPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins::tools
+}; // namespace cubos::engine::tools

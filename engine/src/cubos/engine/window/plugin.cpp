@@ -3,6 +3,7 @@
 #include <cubos/engine/window/plugin.hpp>
 
 using namespace cubos::core;
+using namespace cubos::engine;
 
 static void init(io::Window& window, ShouldQuit& quit, const Settings& settings)
 {
@@ -30,7 +31,7 @@ static void render(const io::Window& window)
     window->swapBuffers();
 }
 
-void cubos::engine::plugins::windowPlugin(Cubos& cubos)
+void cubos::engine::windowPlugin(Cubos& cubos)
 {
     cubos.addResource<io::Window>();
     cubos.addEvent<io::WindowEvent>();

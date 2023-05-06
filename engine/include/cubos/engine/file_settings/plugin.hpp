@@ -2,7 +2,7 @@
 
 #include <cubos/engine/cubos.hpp>
 
-namespace cubos::engine::plugins
+namespace cubos::engine
 {
     /// Plugin to load settings, provided via a file.
     /// Any duplicated setting will be overwritten.
@@ -17,4 +17,4 @@ namespace cubos::engine::plugins
     ///
     /// @param cubos CUBOS. main class
     void fileSettingsPlugin(Cubos& cubos);
-}; // namespace cubos::engine::plugins
+}; // namespace cubos::engine
