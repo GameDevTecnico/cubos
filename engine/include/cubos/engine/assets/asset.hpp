@@ -2,6 +2,12 @@
 
 #include <uuid.h>
 
+namespace cubos::core::data
+{
+    class Serializer;
+    class Deserializer;
+} // namespace cubos::core::data
+
 namespace cubos::engine
 {
     template <typename T>
@@ -64,6 +70,13 @@ namespace cubos::engine
         /// @returns A handle to the same asset, but of the specified type.
         template <typename T>
         inline operator Asset<T>() const;
+
+        /// @param ser The serializer to use.
+        /// @param name The name of the object.
+        void serialize(core::data::Serializer& ser, const char* name) const;
+
+        /// @param des The deserializer to use.
+        void deserialize(core::data::Deserializer& des);
 
     private:
         friend class Assets;
