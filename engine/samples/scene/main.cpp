@@ -17,14 +17,14 @@
 #include <cubos/engine/ecs/position.hpp>
 #include <cubos/engine/ecs/rotation.hpp>
 #include <cubos/engine/ecs/scale.hpp>
+#include <cubos/engine/env_settings/plugin.hpp>
+#include <cubos/engine/file_settings/plugin.hpp>
 #include <cubos/engine/gl/frame.hpp>
-#include <cubos/engine/plugins/env_settings.hpp>
-#include <cubos/engine/plugins/file_settings.hpp>
-#include <cubos/engine/plugins/imgui.hpp>
-#include <cubos/engine/plugins/renderer.hpp>
-#include <cubos/engine/plugins/tools/settings_inspector.hpp>
-#include <cubos/engine/plugins/transform.hpp>
-#include <cubos/engine/plugins/window.hpp>
+#include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/tools/settings_inspector/plugin.hpp>
+#include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 #include "num.hpp"
 #include "parent.hpp"

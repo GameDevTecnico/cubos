@@ -1,7 +1,7 @@
 #include <cubos/core/ui/imgui.hpp>
 
-#include <cubos/engine/plugins/imgui.hpp>
-#include <cubos/engine/plugins/window.hpp>
+#include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 using namespace cubos::core;
 
