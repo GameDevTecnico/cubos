@@ -11,8 +11,11 @@
 #include <cubos/engine/window/plugin.hpp>
 
 using cubos::core::Settings;
+using cubos::core::ecs::EventReader;
 using cubos::core::ecs::Query;
+using cubos::core::io::ResizeEvent;
 using cubos::core::io::Window;
+using cubos::core::io::WindowEvent;
 using namespace cubos::engine;
 
 static void init(Renderer& renderer, const Window& window, const Settings& settings)
@@ -21,15 +24,30 @@ static void init(Renderer& renderer, const Window& window, const Settings& setti
     renderer = std::make_shared<DeferredRenderer>(renderDevice, window->getFramebufferSize(), settings);
 }
 
-static void frame(RendererFrame& frame, Query<const RenderableGrid&, const LocalToWorld&> query)
+static void resize(Renderer& renderer, EventReader<WindowEvent> evs)
 {
-    (void)frame;
+    for (auto& ev : evs)
+    {
+        if (auto* resizeEv = std::get_if<ResizeEvent>(&ev))
+        {
+            renderer->resize(resizeEv->size);
+        }
+    }
+}
+
+static void frame(const Assets& assets, Renderer& renderer, RendererFrame& frame,
+                  Query<RenderableGrid&, const LocalToWorld&> query)
+{
     for (auto [entity, grid, localToWorld] : query)
     {
-        (void)entity;
-        (void)grid;
-        (void)localToWorld;
-        // frame.draw(grid.asset->rendererGrid, localToWorld.mat);
+        if (grid.handle == nullptr || assets.update(grid.asset))
+        {
+            // If the grid wasn't already uploaded, we need to upload it now.
+            auto gridRead = assets.read(grid.asset);
+            grid.handle = renderer->upload(gridRead.get());
+        }
+
+        frame.draw(grid.handle, localToWorld.mat);
     }
 }
 
@@ -55,6 +73,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
 {
     cubos.addPlugin(transformPlugin);
     cubos.addPlugin(windowPlugin);
+    cubos.addPlugin(assetsPlugin);
 
     cubos.addResource<RendererFrame>();
     cubos.addResource<Renderer>();
@@ -70,4 +89,5 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.startupSystem(init).tagged("cubos.renderer.init");
     cubos.system(frame).tagged("cubos.renderer.frame");
     cubos.system(draw).tagged("cubos.renderer.draw");
+    cubos.system(resize).afterTag("cubos.window.poll").beforeTag("cubos.renderer.draw");
 }
