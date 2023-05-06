@@ -3,7 +3,7 @@
 #include <cubos/core/data/std_archive.hpp>
 #include <cubos/core/settings.hpp>
 
-#include <cubos/engine/plugins/file_settings.hpp>
+#include <cubos/engine/file_settings/plugin.hpp>
 
 using namespace cubos::core::data;
 

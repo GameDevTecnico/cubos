@@ -4,8 +4,8 @@
 #include <cubos/core/ui/serialization.hpp>
 
 #include <cubos/engine/cubos.hpp>
-#include <cubos/engine/plugins/env_settings.hpp>
-#include <cubos/engine/plugins/window.hpp>
+#include <cubos/engine/env_settings/plugin.hpp>
+#include <cubos/engine/window/plugin.hpp>
 
 static void setup(const cubos::core::io::Window& window)
 {
