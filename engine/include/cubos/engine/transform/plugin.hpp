@@ -1,6 +1,10 @@
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
+#include <cubos/engine/transform/local_to_world.hpp>
+#include <cubos/engine/transform/position.hpp>
+#include <cubos/engine/transform/rotation.hpp>
+#include <cubos/engine/transform/scale.hpp>
 
 namespace cubos::engine
 {
