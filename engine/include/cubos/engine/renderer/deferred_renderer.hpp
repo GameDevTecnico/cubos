@@ -50,7 +50,7 @@ namespace cubos::engine
         core::gl::Framebuffer mGBuffer;
         core::gl::Texture2D mPositionTex;
         core::gl::Texture2D mNormalTex;
-        core::gl::Texture2D mAterialTex;
+        core::gl::Texture2D mMaterialTex;
         core::gl::Texture2D mDepthTex;
 
         //  Geometry pass pipeline.
@@ -68,7 +68,7 @@ namespace cubos::engine
         core::gl::ShaderBindingPoint mPaletteBp;
         core::gl::ShaderBindingPoint mPositionBp;
         core::gl::ShaderBindingPoint mNormalBp;
-        core::gl::ShaderBindingPoint mAterialBp;
+        core::gl::ShaderBindingPoint mMaterialBp;
         core::gl::ShaderBindingPoint mLightsBp;
         core::gl::ShaderBindingPoint mSsaoEnabledBp;
         core::gl::ShaderBindingPoint mSsaoTexBp;
