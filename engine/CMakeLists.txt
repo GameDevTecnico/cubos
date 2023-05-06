@@ -73,6 +73,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/renderer/frame.hpp"
     "include/cubos/engine/renderer/renderer.hpp"
     "include/cubos/engine/renderer/deferred_renderer.hpp"
+    "include/cubos/engine/renderer/light.hpp"
     "include/cubos/engine/renderer/pps/bloom.hpp"
     "include/cubos/engine/renderer/pps/copy_pass.hpp"
     "include/cubos/engine/renderer/pps/manager.hpp"

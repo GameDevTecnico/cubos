@@ -1,4 +1,5 @@
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
 
 #include <cubos/core/ecs/query.hpp>
 #include <cubos/core/gl/camera.hpp>
@@ -6,6 +7,7 @@
 
 #include <cubos/engine/renderer/deferred_renderer.hpp>
 #include <cubos/engine/renderer/frame.hpp>
+#include <cubos/engine/renderer/light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
@@ -35,8 +37,8 @@ static void resize(Renderer& renderer, EventReader<WindowEvent> evs)
     }
 }
 
-static void frame(const Assets& assets, Renderer& renderer, RendererFrame& frame,
-                  Query<RenderableGrid&, const LocalToWorld&> query)
+static void frameGrids(const Assets& assets, Renderer& renderer, RendererFrame& frame,
+                       Query<RenderableGrid&, const LocalToWorld&> query)
 {
     for (auto [entity, grid, localToWorld] : query)
     {
@@ -48,6 +50,49 @@ static void frame(const Assets& assets, Renderer& renderer, RendererFrame& frame
         }
 
         frame.draw(grid.handle, localToWorld.mat);
+    }
+}
+
+static void frameSpotLights(RendererFrame& frame, Query<const SpotLight&, const LocalToWorld&> query)
+{
+    for (auto [entity, light, localToWorld] : query)
+    {
+        auto position = localToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
+        frame.light(cubos::core::gl::SpotLight{
+            {position.x, position.y, position.z},
+            glm::quat_cast(localToWorld.mat),
+            light.color,
+            light.intensity,
+            light.range,
+            light.spotAngle,
+            light.innerSpotAngle,
+        });
+    }
+}
+
+static void frameDirectionalLights(RendererFrame& frame, Query<const DirectionalLight&, const LocalToWorld&> query)
+{
+    for (auto [entity, light, localToWorld] : query)
+    {
+        frame.light(cubos::core::gl::DirectionalLight{
+            glm::quat_cast(localToWorld.mat),
+            light.color,
+            light.intensity,
+        });
+    }
+}
+
+static void framePointLights(RendererFrame& frame, Query<const PointLight&, const LocalToWorld&> query)
+{
+    for (auto [entity, light, localToWorld] : query)
+    {
+        auto position = localToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
+        frame.light(cubos::core::gl::PointLight{
+            {position.x, position.y, position.z},
+            light.color,
+            light.intensity,
+            light.range,
+        });
     }
 }
 
@@ -65,6 +110,7 @@ static void draw(Renderer& renderer, const ActiveCamera& activeCamera, RendererF
         glCamera.view = glm::inverse(localToWorld.mat);
     }
 
+    frame.ambient({0.5F, 0.5F, 0.5F});
     renderer->render(glCamera, frame);
     frame.clear();
 }
@@ -81,13 +127,19 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
 
     cubos.addComponent<RenderableGrid>();
     cubos.addComponent<Camera>();
+    cubos.addComponent<SpotLight>();
+    cubos.addComponent<DirectionalLight>();
+    cubos.addComponent<PointLight>();
 
     cubos.startupTag("cubos.renderer.init").afterTag("cubos.window.init");
     cubos.tag("cubos.renderer.frame").afterTag("cubos.transform.update");
     cubos.tag("cubos.renderer.render").afterTag("cubos.renderer.frame").beforeTag("cubos.window.render");
 
     cubos.startupSystem(init).tagged("cubos.renderer.init");
-    cubos.system(frame).tagged("cubos.renderer.frame");
+    cubos.system(frameGrids).tagged("cubos.renderer.frame");
+    cubos.system(frameSpotLights).tagged("cubos.renderer.frame");
+    cubos.system(frameDirectionalLights).tagged("cubos.renderer.frame");
+    cubos.system(framePointLights).tagged("cubos.renderer.frame");
     cubos.system(draw).tagged("cubos.renderer.draw");
     cubos.system(resize).afterTag("cubos.window.poll").beforeTag("cubos.renderer.draw");
 }
