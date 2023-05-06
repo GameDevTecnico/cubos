@@ -11,14 +11,17 @@ static void init(Assets& assets, const Settings& settings)
 {
     // Get the relevant settings.
     std::filesystem::path path = settings.getString("assets.path", "assets/");
-    bool readOnly = settings.getBool("assets.readOnly", true);
+    if (!path.empty())
+    {
+        bool readOnly = settings.getBool("assets.readOnly", true);
 
-    // Create a standard archive for the assets directory and mount it.
-    auto archive = std::make_shared<data::STDArchive>(path, true, readOnly);
-    data::FileSystem::mount("/assets/", archive);
+        // Create a standard archive for the assets directory and mount it.
+        auto archive = std::make_shared<data::STDArchive>(path, true, readOnly);
+        data::FileSystem::mount("/assets/", archive);
 
-    // Load the meta files on the assets directory.
-    assets.loadMeta("/assets/");
+        // Load the meta files on the assets directory.
+        assets.loadMeta("/assets/");
+    }
 }
 
 static void cleanup(Assets& assets)
