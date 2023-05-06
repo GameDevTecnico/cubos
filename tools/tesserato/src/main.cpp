@@ -7,6 +7,8 @@
 #include <cubos/engine/env_settings/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
+using namespace cubos::engine;
+
 static void setup(const cubos::core::io::Window& window)
 {
     cubos::core::ui::initialize(window);
@@ -25,7 +27,7 @@ static void show()
 int main(int argc, char** argv)
 {
     // FIXME: this will change once we have the imgui/editor plugin!!!
-    cubos::engine::Cubos cubos(argc, argv);
+    Cubos cubos(argc, argv);
 
     cubos.addPlugin(cubos::engine::windowPlugin);
 
