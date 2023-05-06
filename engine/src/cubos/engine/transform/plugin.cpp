@@ -6,10 +6,11 @@
 #include <cubos/engine/transform/rotation.hpp>
 #include <cubos/engine/transform/scale.hpp>
 
-using namespace cubos;
+using cubos::core::ecs::Query;
+using namespace cubos::engine;
 
 static void applyTransform(
-    core::ecs::Query<engine::LocalToWorld&, const engine::Position*, const engine::Rotation*, const engine::Scale*>
+    Query<LocalToWorld&, const Position*, const Rotation*, const Scale*>
         query)
 {
     for (auto [entity, localToWorld, position, rotation, scale] : query)
