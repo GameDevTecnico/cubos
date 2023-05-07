@@ -110,7 +110,6 @@ static void draw(Renderer& renderer, const ActiveCamera& activeCamera, RendererF
         glCamera.view = glm::inverse(localToWorld.mat);
     }
 
-    frame.ambient({0.5F, 0.5F, 0.5F});
     renderer->render(glCamera, frame);
     frame.clear();
 }
