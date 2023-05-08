@@ -24,6 +24,7 @@
             doxygen
             graphviz
             clang_14
+            doctest
           ];
         };
       });
