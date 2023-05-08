@@ -24,6 +24,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/assets/plugin.cpp"
     "src/cubos/engine/assets/assets.cpp"
     "src/cubos/engine/assets/bridge.cpp"
+    "src/cubos/engine/assets/binary_bridge.cpp"
     "src/cubos/engine/assets/asset.cpp"
     "src/cubos/engine/assets/meta.cpp"
 
@@ -64,6 +65,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/assets/plugin.hpp"
     "include/cubos/engine/assets/assets.hpp"
     "include/cubos/engine/assets/bridge.hpp"
+    "include/cubos/engine/assets/binary_bridge.hpp"
     "include/cubos/engine/assets/asset.hpp"
     "include/cubos/engine/assets/meta.hpp"
 
