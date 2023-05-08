@@ -7,9 +7,6 @@
 [submodule "core/lib/yaml-cpp"]
 	path = core/lib/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp/
-[submodule "core/lib/googletest"]
-	path = core/lib/googletest
-	url = https://github.com/google/googletest.git
 [submodule "core/lib/spdlog"]
 	path = core/lib/spdlog
 	url = https://github.com/gabime/spdlog
@@ -28,3 +25,6 @@
 [submodule "core/lib/stduuid"]
 	path = core/lib/stduuid
 	url = https://github.com/mariusbancila/stduuid.git
+[submodule "core/lib/doctest"]
+	path = core/lib/doctest
+	url = https://github.com/doctest/doctest
