@@ -109,12 +109,12 @@ a function):
 
 ```cpp
 void velocitySystem(
-    const DeltaTime& dt,
-    core::ecs::Query<Position&, const Velocity&> query)
+    Read<DeltaTime> dt,
+    Query<Write<Position>, Read<Velocity>> query)
 {
     for (auto [entity, position, velocity] : query)
     {
-        position.vec += velocity.vec * dt.value;
+        position->vec += velocity->vec * dt->value;
     }
 }
 ```
@@ -164,13 +164,13 @@ its safe to do so. A possible spawner system could look like this:
 
 ```cpp
 void spawnerSystem(
-    core::ecs::Commands& commands,
-    core::ecs::Query<const Spawner&, const Position&> spawners)
+    Commands commands,
+    Query<Read<Spawner>, Read<Position>> spawners)
 {
     for (auto [entity, spawner, position] : spawners)
     {
         commands.create(
-            Position { position.vec },
+            Position { position->vec },
             Velocity { glm::vec3(0.0f, 0.0f, 1.0f )}
         );
         commands.destroy(entity);
