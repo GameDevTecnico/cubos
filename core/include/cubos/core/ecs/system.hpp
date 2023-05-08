@@ -84,7 +84,7 @@ namespace cubos::core::ecs
         };
 
         template <typename R>
-        struct SystemFetcher<R&>
+        struct SystemFetcher<Write<R>>
         {
             using Type = WriteResource<R>;
             using State = std::monostate;
@@ -92,11 +92,11 @@ namespace cubos::core::ecs
             static void add(SystemInfo& info);
             static State prepare(World& world);
             static Type fetch(World& world, CommandBuffer& commands, State& state);
-            static R& arg(Type&& lock);
+            static Write<R> arg(Type&& lock);
         };
 
         template <typename R>
-        struct SystemFetcher<const R&>
+        struct SystemFetcher<Read<R>>
         {
             using Type = ReadResource<R>;
             using State = std::monostate;
@@ -104,7 +104,7 @@ namespace cubos::core::ecs
             static void add(SystemInfo& info);
             static State prepare(World& world);
             static Type fetch(World& world, CommandBuffer& commands, State& state);
-            static const R& arg(Type&& lock);
+            static Read<R> arg(Type&& lock);
         };
 
         template <typename... ComponentTypes>
@@ -120,7 +120,7 @@ namespace cubos::core::ecs
         };
 
         template <>
-        struct SystemFetcher<World&>
+        struct SystemFetcher<Write<World>>
         {
             using Type = World*;
             using State = std::monostate;
@@ -128,7 +128,7 @@ namespace cubos::core::ecs
             static void add(SystemInfo& info);
             static State prepare(World& world);
             static Type fetch(World& world, CommandBuffer& commands, State& state);
-            static World& arg(Type fetched);
+            static Write<World> arg(Type fetched);
         };
 
         template <>
@@ -327,51 +327,51 @@ namespace cubos::core::ecs
     }
 
     template <typename R>
-    void impl::SystemFetcher<R&>::add(SystemInfo& info)
+    void impl::SystemFetcher<Write<R>>::add(SystemInfo& info)
     {
         info.resourcesWritten.insert(typeid(R));
     }
 
     template <typename R>
-    std::monostate impl::SystemFetcher<R&>::prepare(World& /*unused*/)
+    std::monostate impl::SystemFetcher<Write<R>>::prepare(World& /*unused*/)
     {
         return {};
     }
 
     template <typename R>
-    WriteResource<R> impl::SystemFetcher<R&>::fetch(World& world, CommandBuffer& /*unused*/, State& /*unused*/)
+    WriteResource<R> impl::SystemFetcher<Write<R>>::fetch(World& world, CommandBuffer& /*unused*/, State& /*unused*/)
     {
         return world.write<R>();
     }
 
     template <typename R>
-    R& impl::SystemFetcher<R&>::arg(WriteResource<R>&& lock)
+    Write<R> impl::SystemFetcher<Write<R>>::arg(WriteResource<R>&& lock)
     {
-        return lock.get();
+        return {lock.get()};
     }
 
     template <typename R>
-    void impl::SystemFetcher<const R&>::add(SystemInfo& info)
+    void impl::SystemFetcher<Read<R>>::add(SystemInfo& info)
     {
         info.resourcesRead.insert(typeid(R));
     }
 
     template <typename R>
-    std::monostate impl::SystemFetcher<const R&>::prepare(World& /*unused*/)
+    std::monostate impl::SystemFetcher<Read<R>>::prepare(World& /*unused*/)
     {
         return {};
     }
 
     template <typename R>
-    ReadResource<R> impl::SystemFetcher<const R&>::fetch(World& world, CommandBuffer& /*unused*/, State& /*unused*/)
+    ReadResource<R> impl::SystemFetcher<Read<R>>::fetch(World& world, CommandBuffer& /*unused*/, State& /*unused*/)
     {
         return world.read<R>();
     }
 
     template <typename R>
-    const R& impl::SystemFetcher<const R&>::arg(ReadResource<R>&& lock)
+    Read<R> impl::SystemFetcher<Read<R>>::arg(ReadResource<R>&& lock)
     {
-        return lock.get();
+        return {lock.get()};
     }
 
     template <typename... ComponentTypes>
@@ -410,24 +410,24 @@ namespace cubos::core::ecs
         return std::move(fetched);
     }
 
-    inline void impl::SystemFetcher<World&>::add(SystemInfo& info)
+    inline void impl::SystemFetcher<Write<World>>::add(SystemInfo& info)
     {
         info.usesWorld = true;
     }
 
-    inline std::monostate impl::SystemFetcher<World&>::prepare(World& /*unused*/)
+    inline std::monostate impl::SystemFetcher<Write<World>>::prepare(World& /*unused*/)
     {
         return {};
     }
 
-    inline World* impl::SystemFetcher<World&>::fetch(World& world, CommandBuffer& /*unused*/, State& /*unused*/)
+    inline World* impl::SystemFetcher<Write<World>>::fetch(World& world, CommandBuffer& /*unused*/, State& /*unused*/)
     {
         return &world;
     }
 
-    inline World& impl::SystemFetcher<World&>::arg(World* fetched)
+    inline Write<World> impl::SystemFetcher<Write<World>>::arg(World* fetched)
     {
-        return *fetched;
+        return {*fetched};
     }
 
     inline void impl::SystemFetcher<Commands>::add(SystemInfo& info)
