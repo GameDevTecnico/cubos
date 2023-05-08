@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cubos/core/log.hpp>
+
 namespace cubos::core::ecs
 {
     /// System argument which provides read access to the given resource or component.
@@ -98,7 +100,7 @@ namespace cubos::core::ecs
         }
 
         /// @returns A reference to the resource or component.
-        inline T& get()
+        inline const T& get() const
         {
             CUBOS_ASSERT(this->ref != nullptr, "Attempted to access a null optional resource or component");
             return *this->ref;
