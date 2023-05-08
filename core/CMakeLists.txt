@@ -9,7 +9,7 @@ endif ()
 option(WITH_OPENAL "With OpenAL?" ON)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
-option(GOOGLETEST_USE_SUBMODULE "Compile Google Test from source?" ON)
+option(DOCTEST_USE_SUBMODULE "Compile doctest from source?" ON)
 option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source?" ON)
 option(FMT_USE_SUBMODULE "Compile FMT from source?" ON)
 
@@ -224,13 +224,8 @@ else ()
     find_package(yaml-cpp REQUIRED)
 endif ()
 
-if (GOOGLETEST_USE_SUBMODULE)
-    if (WIN32)
-        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    endif ()
-    add_subdirectory(lib/googletest)
-else ()
-    find_package(googletest REQUIRED)
+if (DOCTEST_USE_SUBMODULE)
+    add_subdirectory(lib/doctest)
 endif ()
 
 if (FMT_USE_SUBMODULE)
@@ -271,10 +266,6 @@ target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 # Add core tests
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_CORE_TESTS)
-    include(CTest)
-    enable_testing()
-
-    include(GoogleTest)
     add_subdirectory(tests)
 endif ()
 
