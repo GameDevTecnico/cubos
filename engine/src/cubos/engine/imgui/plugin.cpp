@@ -3,14 +3,18 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
-using namespace cubos::core;
+using cubos::core::ecs::EventReader;
+using cubos::core::ecs::Read;
+using cubos::core::io::Window;
+using cubos::core::io::WindowEvent;
+namespace ui = cubos::core::ui;
 
-static void init(const io::Window& window)
+static void init(Read<Window> window)
 {
-    ui::initialize(window);
+    ui::initialize(*window);
 }
 
-static void begin(ecs::EventReader<io::WindowEvent> events)
+static void begin(EventReader<WindowEvent> events)
 {
     // Pass window events to ImGui.
     // TODO: handleEvent returns a bool indicating if the event was handled or not.
@@ -21,6 +25,7 @@ static void begin(ecs::EventReader<io::WindowEvent> events)
     {
         ui::handleEvent(event);
     }
+
     ui::beginFrame();
 }
 

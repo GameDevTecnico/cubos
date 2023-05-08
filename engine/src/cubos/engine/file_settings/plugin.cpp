@@ -5,12 +5,17 @@
 
 #include <cubos/engine/file_settings/plugin.hpp>
 
-using namespace cubos::core::data;
+using cubos::core::Settings;
+using cubos::core::data::File;
+using cubos::core::data::FileSystem;
+using cubos::core::data::JSONDeserializer;
+using cubos::core::data::STDArchive;
+using cubos::core::ecs::Write;
 
-static void startup(cubos::core::Settings& settings)
+static void startup(Write<Settings> settings)
 {
     // Get the path of the real settings file, mount an archive on it.
-    auto path = settings.getString("settings.path", "settings.json");
+    auto path = settings->getString("settings.path", "settings.json");
     FileSystem::mount("/settings.json", std::make_shared<STDArchive>(path, false, false));
 
     std::string contents;
@@ -18,10 +23,10 @@ static void startup(cubos::core::Settings& settings)
     stream->readUntil(contents, nullptr);
     if (!contents.empty())
     {
-        cubos::core::Settings newSettings;
+        Settings newSettings;
         auto deserializer = JSONDeserializer(contents);
         deserializer.read(newSettings);
-        settings.merge(newSettings);
+        settings->merge(newSettings);
     }
 }
 
