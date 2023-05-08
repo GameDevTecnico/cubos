@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include <utility>
 
+#include <cubos/core/ecs/accessors.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs
@@ -31,7 +32,7 @@ namespace cubos::core::ecs
 
         /// @tparam Component The type of the component to fetch.
         template <typename Component>
-        struct QueryFetcher<Component&>
+        struct QueryFetcher<Write<Component>>
         {
             using Type = WriteStorage<Component>;
 
@@ -49,12 +50,12 @@ namespace cubos::core::ecs
             /// @param lock The component lock to get the reference from.
             /// @param entity The entity to get the component from.
             /// @returns The requested component reference.
-            static Component& arg(const World& world, Type& lock, Entity entity);
+            static Write<Component> arg(const World& world, Type& lock, Entity entity);
         };
 
         /// @tparam Component The type of the component to fetch.
         template <typename Component>
-        struct QueryFetcher<const Component&>
+        struct QueryFetcher<Read<Component>>
         {
             using Type = ReadStorage<Component>;
 
@@ -72,12 +73,12 @@ namespace cubos::core::ecs
             /// @param lock The component lock to get the reference from.
             /// @param entity The entity to get the component from.
             /// @returns The requested component reference.
-            static const Component& arg(const World& world, Type& lock, Entity entity);
+            static Read<Component> arg(const World& world, Type& lock, Entity entity);
         };
 
         /// @tparam Component The type of the component to fetch.
         template <typename Component>
-        struct QueryFetcher<Component*>
+        struct QueryFetcher<OptWrite<Component>>
         {
             using Type = WriteStorage<Component>;
 
@@ -95,12 +96,12 @@ namespace cubos::core::ecs
             /// @param lock The component lock to get the pointer from.
             /// @param entity The entity to get the component from.
             /// @returns The requested component pointer.
-            static Component* arg(const World& world, Type& lock, Entity entity);
+            static OptWrite<Component> arg(const World& world, Type& lock, Entity entity);
         };
 
         /// @tparam Component The type of the component to fetch.
         template <typename Component>
-        struct QueryFetcher<const Component*>
+        struct QueryFetcher<OptRead<Component>>
         {
             using Type = ReadStorage<Component>;
 
@@ -118,7 +119,7 @@ namespace cubos::core::ecs
             /// @param lock The component lock to get the pointer from.
             /// @param entity The entity to get the component from.
             /// @returns The requested component pointer.
-            static const Component* arg(const World& world, Type& lock, Entity entity);
+            static OptRead<Component> arg(const World& world, Type& lock, Entity entity);
         };
     } // namespace impl
 
@@ -126,13 +127,13 @@ namespace cubos::core::ecs
     ///
     /// An example of a valid query is:
     ///
-    ///     Query<Position&, const Velocity&, Rotation*, const Scale*>
+    ///     Query<Write<Position>, Read<Velocity>, OptWrite<Rotation>, OptRead<Scale>>
     ///
-    /// This query will return all entities with a Position and Velocity component. Pointers to Rotation and Scale
+    /// This query will return all entities with a Position and Velocity component. Accessors to Rotation and Scale
     /// components are also passed but may be null, if the component is not present in the entity. Whenever mutability
-    /// is not needed, a const reference/pointer should be used.
+    /// is not needed, Read/OptRead should be used.
     ///
-    /// @tparam ComponentTypes The types of the component references to be queried.
+    /// @tparam ComponentTypes The types of the component accessors to be queried.
     template <typename... ComponentTypes>
     class Query
     {
@@ -269,85 +270,87 @@ namespace cubos::core::ecs
     }
 
     template <typename Component>
-    void impl::QueryFetcher<Component&>::add(QueryInfo& info)
+    void impl::QueryFetcher<Write<Component>>::add(QueryInfo& info)
     {
         info.written.insert(typeid(Component));
     }
 
     template <typename Component>
-    typename impl::QueryFetcher<Component&>::Type impl::QueryFetcher<Component&>::fetch(const World& world)
+    typename impl::QueryFetcher<Write<Component>>::Type impl::QueryFetcher<Write<Component>>::fetch(const World& world)
     {
         return world.mComponentManager.write<Component>();
     }
 
     template <typename Component>
-    Component& impl::QueryFetcher<Component&>::arg(const World& /*unused*/, Type& lock, Entity entity)
+    Write<Component> impl::QueryFetcher<Write<Component>>::arg(const World& /*unused*/, Type& lock, Entity entity)
     {
-        return *lock.get().get(entity.index);
+        return {*lock.get().get(entity.index)};
     }
 
     template <typename Component>
-    void impl::QueryFetcher<const Component&>::add(QueryInfo& info)
+    void impl::QueryFetcher<Read<Component>>::add(QueryInfo& info)
     {
         info.read.insert(typeid(Component));
     }
 
     template <typename Component>
-    typename impl::QueryFetcher<const Component&>::Type impl::QueryFetcher<const Component&>::fetch(const World& world)
+    typename impl::QueryFetcher<Read<Component>>::Type impl::QueryFetcher<Read<Component>>::fetch(const World& world)
     {
         return world.mComponentManager.read<Component>();
     }
 
     template <typename Component>
-    const Component& impl::QueryFetcher<const Component&>::arg(const World& /*unused*/, Type& lock, Entity entity)
+    Read<Component> impl::QueryFetcher<Read<Component>>::arg(const World& /*unused*/, Type& lock, Entity entity)
     {
-        return *lock.get().get(entity.index);
+        return {*lock.get().get(entity.index)};
     }
 
     template <typename Component>
-    void impl::QueryFetcher<Component*>::add(QueryInfo& info)
+    void impl::QueryFetcher<OptWrite<Component>>::add(QueryInfo& info)
     {
         info.written.insert(typeid(Component));
     }
 
     template <typename Component>
-    typename impl::QueryFetcher<Component*>::Type impl::QueryFetcher<Component*>::fetch(const World& world)
+    typename impl::QueryFetcher<OptWrite<Component>>::Type impl::QueryFetcher<OptWrite<Component>>::fetch(
+        const World& world)
     {
         return world.mComponentManager.write<Component>();
     }
 
     template <typename Component>
-    Component* impl::QueryFetcher<Component*>::arg(const World& world, Type& lock, Entity entity)
+    OptWrite<Component> impl::QueryFetcher<OptWrite<Component>>::arg(const World& world, Type& lock, Entity entity)
     {
         if (world.has<Component>(entity))
         {
-            return lock.get().get(entity);
+            return {lock.get().get(entity)};
         }
 
-        return nullptr;
+        return {nullptr};
     }
 
     template <typename Component>
-    void impl::QueryFetcher<const Component*>::add(QueryInfo& info)
+    void impl::QueryFetcher<OptRead<Component>>::add(QueryInfo& info)
     {
         info.read.insert(typeid(Component));
     }
 
     template <typename Component>
-    typename impl::QueryFetcher<const Component*>::Type impl::QueryFetcher<const Component*>::fetch(const World& world)
+    typename impl::QueryFetcher<OptRead<Component>>::Type impl::QueryFetcher<OptRead<Component>>::fetch(
+        const World& world)
     {
         return world.mComponentManager.read<Component>();
     }
 
     template <typename Component>
-    const Component* impl::QueryFetcher<const Component*>::arg(const World& world, Type& lock, Entity entity)
+    OptRead<Component> impl::QueryFetcher<OptRead<Component>>::arg(const World& world, Type& lock, Entity entity)
     {
         if (world.has<Component>(entity))
         {
-            return lock.get().get(entity.index);
+            return {lock.get().get(entity.index)};
         }
 
-        return nullptr;
+        return {nullptr};
     }
 
     template <typename... ComponentTypes>
