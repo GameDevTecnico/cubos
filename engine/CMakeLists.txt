@@ -78,6 +78,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/scene/bridge.hpp"
 
     "include/cubos/engine/voxels/plugin.hpp"
+    "include/cubos/engine/voxels/grid_bridge.hpp"
 
     "include/cubos/engine/renderer/plugin.hpp"
     "include/cubos/engine/renderer/frame.hpp"
