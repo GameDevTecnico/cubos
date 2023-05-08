@@ -26,7 +26,11 @@ void Context::pushAny(std::type_index type, void* data, void (*destructor)(void*
 
 void Context::pop()
 {
-    mEntries.back().destructor(mEntries.back().data);
+    if (mEntries.back().subContext == nullptr)
+    {
+        mEntries.back().destructor(mEntries.back().data);
+    }
+
     mEntries.pop_back();
 }
 
