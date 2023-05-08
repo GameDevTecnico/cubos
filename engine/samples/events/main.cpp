@@ -20,7 +20,7 @@ int main()
     cubos::engine::Cubos cubos;
     cubos.addResource<State>(State{.step = 0});
     cubos.addEvent<MyEvent>();
-    cubos.startupSystem([](cubos::engine::ShouldQuit& quit) { quit.value = false; });
+    cubos.startupSystem([](ecs::Write<cubos::engine::ShouldQuit> quit) { quit->value = false; });
     cubos
         .system([](ecs::EventReader<MyEvent> reader) {
             for (const auto& event : reader)
@@ -31,18 +31,18 @@ int main()
         .tagged("A")
         .beforeTag("B");
     cubos
-        .system([](ecs::EventWriter<MyEvent> writer, State& state, cubos::engine::ShouldQuit& quit) {
-            state.step += 1;
-            if (state.step == 1) // Write 1 2 3 on first run.
+        .system([](ecs::EventWriter<MyEvent> writer, ecs::Write<State> state, ecs::Write<cubos::engine::ShouldQuit> quit) {
+            state->step += 1;
+            if (state->step == 1) // Write 1 2 3 on first run.
             {
                 writer.push({1});
                 writer.push({2});
                 writer.push({3});
                 CUBOS_INFO("B wrote 1 2 3");
             }
-            else if (state.step == 2)
+            else if (state->step == 2)
             {
-                quit.value = true; // Stop the loop.
+                quit->value = true; // Stop the loop.
                 writer.push({4});
                 writer.push({5});
                 writer.push({6});

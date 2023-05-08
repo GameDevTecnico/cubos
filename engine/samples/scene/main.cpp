@@ -10,23 +10,25 @@
 using cubos::core::Settings;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
+using cubos::core::ecs::Read;
 using cubos::core::ecs::World;
+using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 static const Asset<Scene> SceneAsset = AnyAsset("f0d86ba8-5f34-440f-a180-d9d12c8e8b91");
 
-static void settings(Settings& settings)
+static void settings(Write<Settings> settings)
 {
-    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
-static void spawnScene(Commands commands, const Assets& assets)
+static void spawnScene(Commands commands, Read<Assets> assets)
 {
-    auto sceneRead = assets.read(SceneAsset);
+    auto sceneRead = assets->read(SceneAsset);
     commands.spawn(sceneRead->blueprint);
 }
 
-static void printStuff(World& world)
+static void printStuff(Read<World> world)
 {
     using cubos::core::data::Context;
     using cubos::core::data::DebugSerializer;
@@ -41,11 +43,11 @@ static void printStuff(World& world)
                                                        },
                                                        [](Entity&, const std::string&) { return false; }});
 
-    for (auto entity : world)
+    for (auto entity : *world)
     {
         auto name = std::to_string(entity.index);
         auto ser = DebugSerializer(Stream::stdOut);
-        auto pkg = world.pack(entity, context);
+        auto pkg = world->pack(entity, context);
         ser.write(pkg, name.c_str());
         Stream::stdOut.put('\n');
     }
