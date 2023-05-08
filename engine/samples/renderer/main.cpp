@@ -11,33 +11,34 @@ using cubos::core::Settings;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
+using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
-static void settings(Settings& settings)
+static void settings(Write<Settings> settings)
 {
-    settings.setBool("assets.io.enabled", false);
+    settings->setBool("assets.io.enabled", false);
 }
 
-static void setupScene(Commands commands, Assets& assets, ActiveCamera& camera, Renderer& renderer)
+static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCamera> camera, Write<Renderer> renderer)
 {
     using cubos::core::gl::Grid;
     using cubos::core::gl::Palette;
 
     // Create a simple palette with 3 materials (red, green and blue).
-    renderer->setPalette(Palette{{
+    (*renderer)->setPalette(Palette{{
         {{1, 0, 0, 1}},
         {{0, 1, 0, 1}},
         {{0, 0, 1, 1}},
     }});
 
     // Create a 2x2x2 grid whose voxels alternate between the materials defined above.
-    auto gridAsset = assets.create(Grid{{2, 2, 2}, {1, 2, 3, 1, 2, 3, 1, 2}});
+    auto gridAsset = assets->create(Grid{{2, 2, 2}, {1, 2, 3, 1, 2, 3, 1, 2}});
 
     // Spawn an entity with a renderable grid component and a identity transform.
     commands.create(RenderableGrid{gridAsset}, LocalToWorld{});
 
     // Spawn the camera entity.
-    camera.entity = commands.create()
+    camera->entity = commands.create()
                         .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
                         .add(LocalToWorld{})
                         .add(Position{{5.0F, 5.0F, -10.0F}})
