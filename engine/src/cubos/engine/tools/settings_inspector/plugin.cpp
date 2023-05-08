@@ -6,13 +6,15 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
 
+using cubos::core::Settings;
+using cubos::core::ecs::Read;
 using namespace cubos::engine;
 
-static void inspector(cubos::core::Settings& settings)
+static void inspector(Read<Settings> settings)
 {
     ImGui::Begin("Settings Inspector");
 
-    const auto& map = settings.getValues();
+    const auto& map = settings->getValues();
     if (map.empty())
     {
         ImGui::Text("No settings found.");
