@@ -3,8 +3,13 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 
+using cubos::core::Settings;
+using cubos::core::data::File;
+using cubos::core::data::FileSystem;
+using cubos::core::ecs::Read;
+using cubos::core::ecs::Write;
+using cubos::core::memory::Stream;
 using namespace cubos::engine;
-using namespace cubos::core;
 
 class TextBridge : public AssetBridge
 {
@@ -15,7 +20,7 @@ public:
         auto path = assets.readMeta(handle)->get("path").value();
 
         // Open the asset's file.
-        auto stream = data::FileSystem::open(path, data::File::OpenMode::Read);
+        auto stream = FileSystem::open(path, File::OpenMode::Read);
         if (stream == nullptr)
         {
             CUBOS_ERROR("Could not find file: {}", path);
@@ -34,22 +39,22 @@ public:
 
 static const Asset<std::string> TextAsset = AnyAsset("6f42ae5a-59d1-5df3-8720-83b8df6dd536");
 
-static void config(Settings& settings)
+static void config(Write<Settings> settings)
 {
-    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
-static void bridge(Assets& assets)
+static void bridge(Write<Assets> assets)
 {
     // Add a custom bridge to load .txt files.
-    assets.registerBridge(".txt", std::make_unique<TextBridge>());
+    assets->registerBridge(".txt", std::make_unique<TextBridge>());
 }
 
-static void load(const Assets& assets)
+static void load(Read<Assets> assets)
 {
     // Access the text asset - will be loaded automatically.
-    auto text = assets.read(TextAsset);
-    memory::Stream::stdOut.print(*text);
+    auto text = assets->read(TextAsset);
+    Stream::stdOut.print(*text);
 }
 
 int main()
