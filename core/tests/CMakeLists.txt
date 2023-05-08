@@ -8,6 +8,7 @@ find_package(doctest REQUIRED)
 add_executable(
     cubos-core-tests
     main.cpp
+    data/context.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
