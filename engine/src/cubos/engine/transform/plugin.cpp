@@ -2,25 +2,29 @@
 
 #include <cubos/engine/transform/plugin.hpp>
 
+using cubos::core::ecs::OptRead;
 using cubos::core::ecs::Query;
+using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
-static void applyTransform(Query<LocalToWorld&, const Position*, const Rotation*, const Scale*> query)
+static void applyTransform(Query<Write<LocalToWorld>, OptRead<Position>, OptRead<Rotation>, OptRead<Scale>> query)
 {
     for (auto [entity, localToWorld, position, rotation, scale] : query)
     {
-        localToWorld.mat = glm::mat4(1.0F);
-        if (position != nullptr)
+        localToWorld->mat = glm::mat4(1.0F);
+        if (position)
         {
-            localToWorld.mat = glm::translate(localToWorld.mat, position->vec);
+            localToWorld->mat = glm::translate(localToWorld->mat, position->vec);
         }
-        if (rotation != nullptr)
+
+        if (rotation)
         {
-            localToWorld.mat *= glm::toMat4(rotation->quat);
+            localToWorld->mat *= glm::toMat4(rotation->quat);
         }
-        if (scale != nullptr)
+
+        if (scale)
         {
-            localToWorld.mat = glm::scale(localToWorld.mat, glm::vec3(scale->factor));
+            localToWorld->mat = glm::scale(localToWorld->mat, glm::vec3(scale->factor));
         }
     }
 }

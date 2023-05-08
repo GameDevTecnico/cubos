@@ -2,11 +2,14 @@
 
 #include <cubos/engine/env_settings/plugin.hpp>
 
+using cubos::core::Settings;
+using cubos::core::ecs::Read;
+using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
-static void startup(const Arguments& args, cubos::core::Settings& settings)
+static void startup(Read<Arguments> args, Write<Settings> settings)
 {
-    for (const auto& arg : args.value)
+    for (const auto& arg : args->value)
     {
         auto token = arg.find('=');
         if (token == std::string::npos)
@@ -23,7 +26,7 @@ static void startup(const Arguments& args, cubos::core::Settings& settings)
             return;
         }
 
-        settings.setString(settingName, settingValue);
+        settings->setString(settingName, settingValue);
     }
 }
 
