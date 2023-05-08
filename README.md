@@ -54,17 +54,18 @@ on the [releases](https://github.com/GameDevTecnico/cubos/releases) page.-->
 
 The following dependencies are used to compile **CUBOS.**:
 
-| Name                                               | Importance         | Submodule Path        | Installed Separately |
-| -------------------------------------------------- | ------------------ | --------------------- | -------------------- |
-| [CMake](https://cmake.org/)                        | Essential          | -                     | Yes                  |
-| [json](https://github.com/nlohmann/json)           | Essential          | -                     | No                   |
-| [glad](https://github.com/Dav1dde/glad)            | Essential          | -                     | No                   |
-| [glfw](https://github.com/glfw/glfw)               | Essential          | `core/lib/glfw`       | Optionally           |
-| [glm](https://github.com/g-truc/glm)               | Essential          | `core/lib/glm`        | Optionally           |
-| [fmt](https://github.com/fmtlib/fmt)               | Essential          | `core/lib/fmt`        | Optionally           |
-| [spdlog](https://github.com/gabime/spdlog)         | Essential          | `core/lib/spdlog`     | Optionally           |
-| [yaml-cpp](https://github.com/jbeder/yaml-cpp)     | Essential          | `core/lib/yaml-cpp`   | Optionally           |
-| [googletest](https://github.com/google/googletest) | Required for tests | `core/lib/googletest` | Optionally           |
+| Name                                                | Importance         | Submodule Path      | Installed Separately |
+| --------------------------------------------------- | ------------------ | ------------------- | -------------------- |
+| [CMake](https://cmake.org/)                         | Essential          | -                   | Yes                  |
+| [json](https://github.com/nlohmann/json)            | Essential          | -                   | No                   |
+| [glad](https://github.com/Dav1dde/glad)             | Essential          | -                   | No                   |
+| [glfw](https://github.com/glfw/glfw)                | Essential          | `core/lib/glfw`     | Optionally           |
+| [glm](https://github.com/g-truc/glm)                | Essential          | `core/lib/glm`      | Optionally           |
+| [fmt](https://github.com/fmtlib/fmt)                | Essential          | `core/lib/fmt`      | Optionally           |
+| [spdlog](https://github.com/gabime/spdlog)          | Essential          | `core/lib/spdlog`   | Optionally           |
+| [yaml-cpp](https://github.com/jbeder/yaml-cpp)      | Essential          | `core/lib/yaml-cpp` | Optionally           |
+| [stduuid](https://github.com/mariusbancila/stduuid) | Essential          | `core/lib/stduuid`  | No                   |
+| [doctest](https://github.com/doctest/doctest)       | Required for tests | `core/lib/doctest`  | Optionally           |
 
 Dependencies marked as *Essential* are required to compile the engine.
 **CUBOS.** uses [CMake](https://cmake.org/) as its build system, so you must
@@ -93,7 +94,6 @@ The following is a list of all the options available to configure the engine:
 | `GLFW_USE_SUBMODULE`       | Compile glfw from source?          |
 | `GLM_USE_SUBMODULE`        | Compile glm from source?           |
 | `YAMLCPP_USE_SUBMODULE`    | Compile yaml-cpp from source?      |
-| `GOOGLETEST_USE_SUBMODULE` | Compile GoogleTest from source?    |
 | `SPDLOG_USE_SUBMODULE`     | Compile spdlog from source?        |
 | `FMT_USE_SUBMODULE`        | Compile fmt from source?           |
 | `BUILD_CORE_SAMPLES`       | Build **CUBOS.** `core` samples?   |
@@ -107,7 +107,7 @@ idea of how the engine works.
 
 ### Testing
 
-**CUBOS.** uses GoogleTest for unit testing the engine.
+**CUBOS.** uses *doctest* for unit testing the engine.
 To test the engine's core you can use the following
 command: `cd build/core && ctest`.
 
