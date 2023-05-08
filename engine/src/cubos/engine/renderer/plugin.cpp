@@ -15,103 +15,105 @@
 using cubos::core::Settings;
 using cubos::core::ecs::EventReader;
 using cubos::core::ecs::Query;
+using cubos::core::ecs::Read;
+using cubos::core::ecs::Write;
 using cubos::core::io::ResizeEvent;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 using namespace cubos::engine;
 
-static void init(Renderer& renderer, const Window& window, const Settings& settings)
+static void init(Write<Renderer> renderer, Read<Window> window, Read<Settings> settings)
 {
-    auto& renderDevice = window->getRenderDevice();
-    renderer = std::make_shared<DeferredRenderer>(renderDevice, window->getFramebufferSize(), settings);
+    auto& renderDevice = (*window)->getRenderDevice();
+    *renderer = std::make_shared<DeferredRenderer>(renderDevice, (*window)->getFramebufferSize(), *settings);
 }
 
-static void resize(Renderer& renderer, EventReader<WindowEvent> evs)
+static void resize(Write<Renderer> renderer, EventReader<WindowEvent> evs)
 {
     for (auto& ev : evs)
     {
         if (auto* resizeEv = std::get_if<ResizeEvent>(&ev))
         {
-            renderer->resize(resizeEv->size);
+            (*renderer)->resize(resizeEv->size);
         }
     }
 }
 
-static void frameGrids(const Assets& assets, Renderer& renderer, RendererFrame& frame,
-                       Query<RenderableGrid&, const LocalToWorld&> query)
+static void frameGrids(Read<Assets> assets, Write<Renderer> renderer, Write<RendererFrame> frame,
+                       Query<Write<RenderableGrid>, Read<LocalToWorld>> query)
 {
     for (auto [entity, grid, localToWorld] : query)
     {
-        if (grid.handle == nullptr || assets.update(grid.asset))
+        if (grid->handle == nullptr || assets->update(grid->asset))
         {
             // If the grid wasn't already uploaded, we need to upload it now.
-            auto gridRead = assets.read(grid.asset);
-            grid.handle = renderer->upload(gridRead.get());
+            auto gridRead = assets->read(grid->asset);
+            grid->handle = (*renderer)->upload(gridRead.get());
         }
 
-        frame.draw(grid.handle, localToWorld.mat);
+        frame->draw(grid->handle, localToWorld->mat);
     }
 }
 
-static void frameSpotLights(RendererFrame& frame, Query<const SpotLight&, const LocalToWorld&> query)
+static void frameSpotLights(Write<RendererFrame> frame, Query<Read<SpotLight>, Read<LocalToWorld>> query)
 {
     for (auto [entity, light, localToWorld] : query)
     {
-        auto position = localToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-        frame.light(cubos::core::gl::SpotLight{
+        auto position = localToWorld->mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
+        frame->light(cubos::core::gl::SpotLight{
             {position.x, position.y, position.z},
-            glm::quat_cast(localToWorld.mat),
-            light.color,
-            light.intensity,
-            light.range,
-            light.spotAngle,
-            light.innerSpotAngle,
+            glm::quat_cast(localToWorld->mat),
+            light->color,
+            light->intensity,
+            light->range,
+            light->spotAngle,
+            light->innerSpotAngle,
         });
     }
 }
 
-static void frameDirectionalLights(RendererFrame& frame, Query<const DirectionalLight&, const LocalToWorld&> query)
+static void frameDirectionalLights(Write<RendererFrame> frame, Query<Read<DirectionalLight>, Read<LocalToWorld>> query)
 {
     for (auto [entity, light, localToWorld] : query)
     {
-        frame.light(cubos::core::gl::DirectionalLight{
-            glm::quat_cast(localToWorld.mat),
-            light.color,
-            light.intensity,
+        frame->light(cubos::core::gl::DirectionalLight{
+            glm::quat_cast(localToWorld->mat),
+            light->color,
+            light->intensity,
         });
     }
 }
 
-static void framePointLights(RendererFrame& frame, Query<const PointLight&, const LocalToWorld&> query)
+static void framePointLights(Write<RendererFrame> frame, Query<Read<PointLight>, Read<LocalToWorld>> query)
 {
     for (auto [entity, light, localToWorld] : query)
     {
-        auto position = localToWorld.mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-        frame.light(cubos::core::gl::PointLight{
+        auto position = localToWorld->mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
+        frame->light(cubos::core::gl::PointLight{
             {position.x, position.y, position.z},
-            light.color,
-            light.intensity,
-            light.range,
+            light->color,
+            light->intensity,
+            light->range,
         });
     }
 }
 
-static void draw(Renderer& renderer, const ActiveCamera& activeCamera, RendererFrame& frame,
-                 Query<const LocalToWorld&, const Camera&> query)
+static void draw(Write<Renderer> renderer, Read<ActiveCamera> activeCamera, Write<RendererFrame> frame,
+                 Query<Read<LocalToWorld>, Read<Camera>> query)
 {
     cubos::core::gl::Camera glCamera;
 
-    if (auto components = query[activeCamera.entity])
+    if (auto components = query[activeCamera->entity])
     {
         auto [localToWorld, camera] = *components;
-        glCamera.fovY = camera.fovY;
-        glCamera.zNear = camera.zNear;
-        glCamera.zFar = camera.zFar;
-        glCamera.view = glm::inverse(localToWorld.mat);
+        glCamera.fovY = camera->fovY;
+        glCamera.zNear = camera->zNear;
+        glCamera.zFar = camera->zFar;
+        glCamera.view = glm::inverse(localToWorld->mat);
     }
 
-    renderer->render(glCamera, frame);
-    frame.clear();
+    (*renderer)->render(glCamera, *frame);
+    frame->clear();
 }
 
 void cubos::engine::rendererPlugin(Cubos& cubos)

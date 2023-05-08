@@ -4,30 +4,34 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 
+using cubos::core::Settings;
+using cubos::core::data::FileSystem;
+using cubos::core::data::STDArchive;
+using cubos::core::ecs::Read;
+using cubos::core::ecs::Write;
 using namespace cubos::engine;
-using namespace cubos::core;
 
-static void init(Assets& assets, const Settings& settings)
+static void init(Write<Assets> assets, Read<Settings> settings)
 {
     // Get the relevant settings.
-    if (settings.getBool("assets.io.enabled", true))
+    if (settings->getBool("assets.io.enabled", true))
     {
-        std::filesystem::path path = settings.getString("assets.io.path", "assets/");
-        bool readOnly = settings.getBool("assets.io.readOnly", true);
+        std::filesystem::path path = settings->getString("assets.io.path", "assets/");
+        bool readOnly = settings->getBool("assets.io.readOnly", true);
 
         // Create a standard archive for the assets directory and mount it.
-        auto archive = std::make_shared<data::STDArchive>(path, true, readOnly);
-        data::FileSystem::mount("/assets/", archive);
+        auto archive = std::make_shared<STDArchive>(path, true, readOnly);
+        FileSystem::mount("/assets/", archive);
 
         // Load the meta files on the assets directory.
-        assets.loadMeta("/assets/");
+        assets->loadMeta("/assets/");
     }
 }
 
-static void cleanup(Assets& assets)
+static void cleanup(Write<Assets> assets)
 {
     // TODO: maybe don't do this every frame?
-    assets.cleanup();
+    assets->cleanup();
 }
 
 void cubos::engine::assetsPlugin(Cubos& cubos)
