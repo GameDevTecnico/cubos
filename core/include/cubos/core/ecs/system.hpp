@@ -132,6 +132,18 @@ namespace cubos::core::ecs
         };
 
         template <>
+        struct SystemFetcher<Read<World>>
+        {
+            using Type = const World*;
+            using State = std::monostate;
+
+            static void add(SystemInfo& info);
+            static State prepare(World& world);
+            static Type fetch(World& world, CommandBuffer& commands, State& state);
+            static Read<World> arg(Type fetched);
+        };
+
+        template <>
         struct SystemFetcher<Commands>
         {
             using Type = CommandBuffer*;
@@ -426,6 +438,26 @@ namespace cubos::core::ecs
     }
 
     inline Write<World> impl::SystemFetcher<Write<World>>::arg(World* fetched)
+    {
+        return {*fetched};
+    }
+
+    inline void impl::SystemFetcher<Read<World>>::add(SystemInfo& info)
+    {
+        info.usesWorld = true;
+    }
+
+    inline std::monostate impl::SystemFetcher<Read<World>>::prepare(World& /*unused*/)
+    {
+        return {};
+    }
+
+    inline const World* impl::SystemFetcher<Read<World>>::fetch(World& world, CommandBuffer& /*unused*/, State& /*unused*/)
+    {
+        return &world;
+    }
+
+    inline Read<World> impl::SystemFetcher<Read<World>>::arg(const World* fetched)
     {
         return {*fetched};
     }
