@@ -122,27 +122,27 @@ struct MyResource
     int val;
 };
 
-void printPositions(ecs::Query<Position&, const Velocity&> query)
+void printPositions(ecs::Query<ecs::Write<Position>, ecs::Read<Velocity>> query)
 {
     std::cout << "positions w/velocity:" << std::endl;
     for (auto [entity, position, velocity] : query)
     {
-        std::cout << position.x << ' ' << position.y << ' ' << position.z << std::endl;
+        std::cout << position->x << ' ' << position->y << ' ' << position->z << std::endl;
     }
 }
 
-void printPlayerPosition(ecs::Query<const Player&, Position&> query)
+void printPlayerPosition(ecs::Query<ecs::Read<Player>, ecs::Write<Position>> query)
 {
     std::cout << "player positions:" << std::endl;
     for (auto [entity, player, position] : query)
     {
-        std::cout << position.x << ' ' << position.y << ' ' << position.z << std::endl;
+        std::cout << position->x << ' ' << position->y << ' ' << position->z << std::endl;
     }
 }
 
-void mySystem(DeltaTime& dt, const MyResource& res)
+void mySystem(ecs::Write<DeltaTime> dt, ecs::Read<MyResource> res)
 {
-    std::cout << "mySystem: " << dt.dt << " " << res.val << std::endl;
+    std::cout << "mySystem: " << dt->dt << " " << res->val << std::endl;
 }
 
 int main()
@@ -179,8 +179,9 @@ int main()
     dispatcher.addTag("PreProcess");
     dispatcher.tagSetBeforeTag("Main");
     dispatcher.tagSetBeforeTag("Transform");
-    dispatcher.addSystem(
-        [](const DeltaTime& dt, MyResource& res) { std::cout << "lambda: " << dt.dt << " " << res.val << std::endl; });
+    dispatcher.addSystem([](ecs::Read<DeltaTime> dt, ecs::Write<MyResource> res) {
+        std::cout << "lambda: " << dt->dt << " " << res->val << std::endl;
+    });
     dispatcher.systemAddTag("PreProcess");
 
     dispatcher.compileChain();
