@@ -15,7 +15,7 @@ using namespace cubos::engine;
 
 static void settings(Settings& settings)
 {
-    settings.setString("assets.path", ""); // Disable assets file IO
+    settings.setBool("assets.io.enabled", false);
 }
 
 static void setupScene(Commands commands, Assets& assets, ActiveCamera& camera, Renderer& renderer)
