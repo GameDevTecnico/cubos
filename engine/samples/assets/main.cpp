@@ -36,7 +36,7 @@ static const Asset<std::string> TextAsset = AnyAsset("6f42ae5a-59d1-5df3-8720-83
 
 static void config(Settings& settings)
 {
-    settings.setString("assets.path", SAMPLE_ASSETS_FOLDER);
+    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
 static void bridge(Assets& assets)

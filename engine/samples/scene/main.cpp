@@ -17,7 +17,7 @@ static const Asset<Scene> SceneAsset = AnyAsset("f0d86ba8-5f34-440f-a180-d9d12c8
 
 static void settings(Settings& settings)
 {
-    settings.setString("assets.path", SAMPLE_ASSETS_FOLDER);
+    settings.setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
 static void spawnScene(Commands commands, const Assets& assets)

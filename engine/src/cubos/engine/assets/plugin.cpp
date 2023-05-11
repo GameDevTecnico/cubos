@@ -10,10 +10,10 @@ using namespace cubos::core;
 static void init(Assets& assets, const Settings& settings)
 {
     // Get the relevant settings.
-    std::filesystem::path path = settings.getString("assets.path", "assets/");
-    if (!path.empty())
+    if (settings.getBool("assets.io.enabled", true))
     {
-        bool readOnly = settings.getBool("assets.readOnly", true);
+        std::filesystem::path path = settings.getString("assets.io.path", "assets/");
+        bool readOnly = settings.getBool("assets.io.readOnly", true);
 
         // Create a standard archive for the assets directory and mount it.
         auto archive = std::make_shared<data::STDArchive>(path, true, readOnly);
