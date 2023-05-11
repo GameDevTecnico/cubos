@@ -38,7 +38,8 @@ namespace cubos::engine
         // Implement interface methods.
 
         void onResize(glm::uvec2 size) override;
-        void onRender(const core::gl::Camera& camera, const RendererFrame& frame, core::gl::Framebuffer target) override;
+        void onRender(const core::gl::Camera& camera, const RendererFrame& frame,
+                      core::gl::Framebuffer target) override;
 
     private:
         void createSSAOTextures();

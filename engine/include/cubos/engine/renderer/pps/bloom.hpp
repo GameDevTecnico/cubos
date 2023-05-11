@@ -27,8 +27,8 @@ namespace cubos::engine
         /// @param threshold Pixel brightness threshold to be considered for bloom effect
         /// @param softThreshold Ratio for including pixels that don't pass the threshold test
         /// @param intensity The intensity of the bloom effect.
-        PostProcessingBloom(core::gl::RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations, float threshold,
-                  float softThreshold, float intensity);
+        PostProcessingBloom(core::gl::RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations,
+                            float threshold, float softThreshold, float intensity);
 
         /// Gets the threshold for the bloom effect.
         /// @return The threshold for the bloom effect.
