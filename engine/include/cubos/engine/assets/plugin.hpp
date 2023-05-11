@@ -6,13 +6,13 @@
 namespace cubos::engine
 {
     /// Plugin which adds asset management to CUBOS.
-    /// If the `assets.path` setting is set to an empty string, no file IO will be done.
     ///
     /// @details
     ///
     /// Settings:
-    /// - `assets.path`: path to the assets directory - will be mounted to `/assets/` (default: `assets/`)
-    /// - `assets.readOnly`: if true, the assets directory will be mounted as read-only (default: `true`)
+    /// - `assets.io.enabled`: whether asset I/O should be done (default: `true`).
+    /// - `assets.io.path`: path to the assets directory - will be mounted to `/assets/` (default: `assets/`)
+    /// - `assets.io.readOnly`: if true, the assets directory will be mounted as read-only (default: `true`)
     ///
     /// Events:
     /// - `AssetEvent`: emitted when an asset is either loaded, modified or unloaded.
