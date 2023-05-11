@@ -63,13 +63,13 @@ namespace cubos::engine
         std::size_t passCount() const;
 
     private:
-        core::gl::RenderDevice& mRenderDevice;        ///< The render device to use.
-        glm::uvec2 mSize;                             ///< The current size of the window.
+        core::gl::RenderDevice& mRenderDevice;                      ///< The render device to use.
+        glm::uvec2 mSize;                                           ///< The current size of the window.
         std::map<PostProcessingInput, core::gl::Texture2D> mInputs; ///< The inputs provided to the passes.
         std::map<std::size_t, PostProcessingPass*> mPasses;         ///< The passes present in the manager.
-        std::size_t mNextId;                          ///< The next ID to use for a pass.
-        core::gl::Texture2D mIntermediateTex[2];      ///< Intermediate textures used for the passes.
-        core::gl::Framebuffer mIntermediateFb[2];     ///< Intermediate framebuffers used for the passes.
+        std::size_t mNextId;                                        ///< The next ID to use for a pass.
+        core::gl::Texture2D mIntermediateTex[2];                    ///< Intermediate textures used for the passes.
+        core::gl::Framebuffer mIntermediateFb[2];                   ///< Intermediate framebuffers used for the passes.
     };
 
     // Implementation.
