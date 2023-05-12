@@ -15,7 +15,7 @@ static void init(Write<Window> window, Write<ShouldQuit> quit, Read<Settings> se
 {
     quit->value = false;
     *window = openWindow(settings->getString("window.title", "Cubos"),
-                        {settings->getInteger("window.width", 800), settings->getInteger("window.height", 600)});
+                         {settings->getInteger("window.width", 800), settings->getInteger("window.height", 600)});
 }
 
 static void poll(Read<Window> window, Write<ShouldQuit> quit, EventWriter<WindowEvent> events)

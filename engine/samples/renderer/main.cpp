@@ -39,11 +39,11 @@ static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCame
 
     // Spawn the camera entity.
     camera->entity = commands.create()
-                        .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
-                        .add(LocalToWorld{})
-                        .add(Position{{5.0F, 5.0F, -10.0F}})
-                        .add(Rotation{glm::quatLookAt(glm::vec3{0.0F, 0.0F, 1.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
-                        .entity();
+                         .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+                         .add(LocalToWorld{})
+                         .add(Position{{5.0F, 5.0F, -10.0F}})
+                         .add(Rotation{glm::quatLookAt(glm::vec3{0.0F, 0.0F, 1.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
+                         .entity();
 
     // Spawn a point light.
     commands.create()

@@ -1,31 +1,26 @@
-#include <cubos/core/data/file_system.hpp>
-#include <cubos/core/data/std_archive.hpp>
-
-#include <cubos/engine/gl/frame.hpp>
-
-#include <cubos/core/gl/grid.hpp>
-#include <cubos/core/ecs/commands.hpp>
-
-#include <cubos/engine/cubos.hpp>
-
-#include <cubos/engine/data/grid.hpp>
-#include <cubos/engine/data/palette.hpp>
-#include <cubos/engine/data/asset_manager.hpp>
-
-#include <cubos/engine/gl/renderer.hpp>
-#include <cubos/engine/gl/deferred/renderer.hpp>
-
 #include <components/car.hpp>
-#include <components/cubos/grid.hpp>
-#include <components/cubos/scale.hpp>
 #include <components/cubos/camera.hpp>
+#include <components/cubos/grid.hpp>
+#include <components/cubos/local_to_world.hpp>
 #include <components/cubos/position.hpp>
 #include <components/cubos/rotation.hpp>
-#include <components/cubos/local_to_world.hpp>
+#include <components/cubos/scale.hpp>
 
-#include <cubos/engine/plugins/window.hpp>
-#include <cubos/engine/plugins/renderer.hpp>
+#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/std_archive.hpp>
+#include <cubos/core/ecs/commands.hpp>
+#include <cubos/core/gl/grid.hpp>
+
+#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/data/asset_manager.hpp>
+#include <cubos/engine/data/grid.hpp>
+#include <cubos/engine/data/palette.hpp>
+#include <cubos/engine/gl/deferred/renderer.hpp>
+#include <cubos/engine/gl/frame.hpp>
+#include <cubos/engine/gl/renderer.hpp>
 #include <cubos/engine/plugins/file_settings.hpp>
+#include <cubos/engine/plugins/renderer.hpp>
+#include <cubos/engine/plugins/window.hpp>
 
 using namespace cubos;
 using namespace engine;

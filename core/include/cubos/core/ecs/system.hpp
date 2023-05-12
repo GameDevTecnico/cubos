@@ -452,7 +452,8 @@ namespace cubos::core::ecs
         return {};
     }
 
-    inline const World* impl::SystemFetcher<Read<World>>::fetch(World& world, CommandBuffer& /*unused*/, State& /*unused*/)
+    inline const World* impl::SystemFetcher<Read<World>>::fetch(World& world, CommandBuffer& /*unused*/,
+                                                                State& /*unused*/)
     {
         return &world;
     }
