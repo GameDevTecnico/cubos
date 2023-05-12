@@ -13,30 +13,30 @@ namespace cubos::core::ecs
         /// Creates a new read argument.
         /// @param ref Reference to the resource or component.
         inline Read(const T& ref)
-            : ref(ref)
+            : mRef(ref)
         {
         }
 
         /// @returns A pointer to the resource or component.
         inline const T* operator->() const
         {
-            return &this->ref;
+            return &mRef;
         }
 
         /// @returns A reference to the resource or component.
         inline const T& operator*() const
         {
-            return this->ref;
+            return mRef;
         }
 
         /// @returns A reference to the resource or component.
         inline const T& get() const
         {
-            return this->ref;
+            return mRef;
         }
 
     private:
-        const T& ref; ///< Reference to the resource or component.
+        const T& mRef; ///< Reference to the resource or component.
     };
 
     /// System argument which provides write access to the given resource or component.
@@ -48,30 +48,30 @@ namespace cubos::core::ecs
         /// Creates a new write argument.
         /// @param ref Reference to the resource or component.
         inline Write(T& ref)
-            : ref(ref)
+            : mRef(ref)
         {
         }
 
         /// @returns A pointer to the resource or component.
         inline T* operator->()
         {
-            return &this->ref;
+            return &mRef;
         }
 
         /// @returns A reference to the resource or component.
         inline T& operator*()
         {
-            return this->ref;
+            return mRef;
         }
 
         /// @returns A reference to the resource or component.
         inline T& get()
         {
-            return this->ref;
+            return mRef;
         }
 
     private:
-        T& ref; ///< Reference to the resource or component.
+        T& mRef; ///< Reference to the resource or component.
     };
 
     /// System argument which provides optional read access to the given resource or component, if it exists.
@@ -81,9 +81,9 @@ namespace cubos::core::ecs
     {
     public:
         /// Creates a new optional read argument.
-        /// @param ref Reference to the resource or component.
-        inline OptRead(const T* ref)
-            : ref(ref)
+        /// @param ptr Pointer to the resource or component.
+        inline OptRead(const T* ptr)
+            : mPtr(ptr)
         {
         }
 
@@ -102,19 +102,19 @@ namespace cubos::core::ecs
         /// @returns A reference to the resource or component.
         inline const T& get() const
         {
-            CUBOS_ASSERT(this->ref != nullptr, "Attempted to access a null optional resource or component");
-            return *this->ref;
+            CUBOS_ASSERT(mPtr != nullptr, "Attempted to access a null optional resource or component");
+            return *mPtr;
         }
 
         /// Checks if the resource or component exists.
         /// @returns True if the resource or component exists, false otherwise.
         inline operator bool() const
         {
-            return this->ref != nullptr;
+            return mPtr != nullptr;
         }
 
     private:
-        const T* ref; ///< Reference to the resource or component.
+        const T* mPtr; ///< Pointer to the resource or component.
     };
 
     /// System argument which provides optional write access to the given resource or component, if it exists.
@@ -124,9 +124,9 @@ namespace cubos::core::ecs
     {
     public:
         /// Creates a new optional write argument.
-        /// @param ref Reference to the resource or component.
-        inline OptWrite(T* ref)
-            : ref(ref)
+        /// @param ptr Pointer to the resource or component.
+        inline OptWrite(T* ptr)
+            : mPtr(ptr)
         {
         }
 
@@ -145,18 +145,18 @@ namespace cubos::core::ecs
         /// @returns A reference to the resource or component.
         inline T& get()
         {
-            CUBOS_ASSERT(this->ref != nullptr, "Attempted to access a null optional resource or component");
-            return *this->ref;
+            CUBOS_ASSERT(mPtr != nullptr, "Attempted to access a null optional resource or component");
+            return *mPtr;
         }
 
         /// Checks if the resource or component exists.
         /// @returns True if the resource or component exists, false otherwise.
         inline operator bool() const
         {
-            return this->ref != nullptr;
+            return mPtr != nullptr;
         }
 
     private:
-        T* ref; ///< Reference to the resource or component.
+        T* mPtr; ///< Pointer to the resource or component.
     };
 } // namespace cubos::core::ecs
