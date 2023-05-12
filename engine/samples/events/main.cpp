@@ -31,24 +31,25 @@ int main()
         .tagged("A")
         .beforeTag("B");
     cubos
-        .system([](ecs::EventWriter<MyEvent> writer, ecs::Write<State> state, ecs::Write<cubos::engine::ShouldQuit> quit) {
-            state->step += 1;
-            if (state->step == 1) // Write 1 2 3 on first run.
-            {
-                writer.push({1});
-                writer.push({2});
-                writer.push({3});
-                CUBOS_INFO("B wrote 1 2 3");
-            }
-            else if (state->step == 2)
-            {
-                quit->value = true; // Stop the loop.
-                writer.push({4});
-                writer.push({5});
-                writer.push({6});
-                CUBOS_INFO("B wrote 4 5 6");
-            }
-        })
+        .system(
+            [](ecs::EventWriter<MyEvent> writer, ecs::Write<State> state, ecs::Write<cubos::engine::ShouldQuit> quit) {
+                state->step += 1;
+                if (state->step == 1) // Write 1 2 3 on first run.
+                {
+                    writer.push({1});
+                    writer.push({2});
+                    writer.push({3});
+                    CUBOS_INFO("B wrote 1 2 3");
+                }
+                else if (state->step == 2)
+                {
+                    quit->value = true; // Stop the loop.
+                    writer.push({4});
+                    writer.push({5});
+                    writer.push({6});
+                    CUBOS_INFO("B wrote 4 5 6");
+                }
+            })
         .tagged("B");
     cubos
         .system([](ecs::EventReader<MyEvent> reader) {

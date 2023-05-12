@@ -2,7 +2,6 @@
 #define COMPONENTS_CAR_HPP
 
 #include <components/base.hpp>
-
 #include <glm/glm.hpp>
 
 struct [[cubos::component("car", VecStorage)]] Car
