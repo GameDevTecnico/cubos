@@ -35,6 +35,7 @@ namespace cubos::core::ecs
         struct QueryFetcher<Write<Component>>
         {
             using Type = WriteStorage<Component>;
+            using InnerType = Component;
 
             /// Whether the component is optional
             constexpr static bool IsOptional = false;
@@ -58,6 +59,7 @@ namespace cubos::core::ecs
         struct QueryFetcher<Read<Component>>
         {
             using Type = ReadStorage<Component>;
+            using InnerType = Component;
 
             /// Whether the component is optional
             constexpr static bool IsOptional = false;
@@ -81,6 +83,7 @@ namespace cubos::core::ecs
         struct QueryFetcher<OptWrite<Component>>
         {
             using Type = WriteStorage<Component>;
+            using InnerType = Component;
 
             /// Whether the component is optional
             constexpr static bool IsOptional = true;
@@ -104,6 +107,7 @@ namespace cubos::core::ecs
         struct QueryFetcher<OptRead<Component>>
         {
             using Type = ReadStorage<Component>;
+            using InnerType = Component;
 
             /// Whether the component is optional
             constexpr static bool IsOptional = true;
@@ -232,12 +236,11 @@ namespace cubos::core::ecs
         : mWorld(world)
         , mFetched(std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::fetch(world)...))
     {
-        // We must turn the type from const T& and similar to T before getting the ID.
-        std::size_t ids[] = {
-            (impl::QueryFetcher<ComponentTypes>::IsOptional
-                 ? SIZE_MAX
-                 : mWorld.mComponentManager.template getID<
-                       std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
+        // We must turn the type from Read<T> and similar to T before getting the ID.
+        std::size_t ids[] = {(impl::QueryFetcher<ComponentTypes>::IsOptional
+                                  ? SIZE_MAX
+                                  : mWorld.mComponentManager
+                                        .template getID<typename impl::QueryFetcher<ComponentTypes>::InnerType>())...};
         mMask.reset();
         mMask.set(0);
         for (std::size_t id : ids)
