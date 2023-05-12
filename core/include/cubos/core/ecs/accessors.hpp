@@ -29,12 +29,6 @@ namespace cubos::core::ecs
             return mRef;
         }
 
-        /// @returns A reference to the resource or component.
-        inline const T& get() const
-        {
-            return mRef;
-        }
-
     private:
         const T& mRef; ///< Reference to the resource or component.
     };
@@ -60,12 +54,6 @@ namespace cubos::core::ecs
 
         /// @returns A reference to the resource or component.
         inline T& operator*()
-        {
-            return mRef;
-        }
-
-        /// @returns A reference to the resource or component.
-        inline T& get()
         {
             return mRef;
         }
@@ -99,13 +87,6 @@ namespace cubos::core::ecs
             return this->get();
         }
 
-        /// @returns A reference to the resource or component.
-        inline const T& get() const
-        {
-            CUBOS_ASSERT(mPtr != nullptr, "Attempted to access a null optional resource or component");
-            return *mPtr;
-        }
-
         /// Checks if the resource or component exists.
         /// @returns True if the resource or component exists, false otherwise.
         inline operator bool() const
@@ -115,6 +96,13 @@ namespace cubos::core::ecs
 
     private:
         const T* mPtr; ///< Pointer to the resource or component.
+
+        /// @returns A reference to the resource or component.
+        inline const T& get() const
+        {
+            CUBOS_ASSERT(mPtr != nullptr, "Attempted to access a null optional resource or component");
+            return *mPtr;
+        }
     };
 
     /// System argument which provides optional write access to the given resource or component, if it exists.
@@ -142,13 +130,6 @@ namespace cubos::core::ecs
             return this->get();
         }
 
-        /// @returns A reference to the resource or component.
-        inline T& get()
-        {
-            CUBOS_ASSERT(mPtr != nullptr, "Attempted to access a null optional resource or component");
-            return *mPtr;
-        }
-
         /// Checks if the resource or component exists.
         /// @returns True if the resource or component exists, false otherwise.
         inline operator bool() const
@@ -158,5 +139,12 @@ namespace cubos::core::ecs
 
     private:
         T* mPtr; ///< Pointer to the resource or component.
+
+        /// @returns A reference to the resource or component.
+        inline T& get()
+        {
+            CUBOS_ASSERT(mPtr != nullptr, "Attempted to access a null optional resource or component");
+            return *mPtr;
+        }
     };
 } // namespace cubos::core::ecs
