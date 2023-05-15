@@ -65,6 +65,9 @@ var namespaces_dup =
           [ "transformPlugin", "transform_8hpp.html#a938acb9a6141b200e25a0cc24f3d061e", null ],
           [ "windowPlugin", "engine_2include_2cubos_2engine_2plugins_2window_8hpp.html#afa8146f56bedab5286a623bdbad91054", null ]
         ] ],
+        [ "tools", null, [
+          [ "worldInspectorPlugin", "plugin_8hpp.html#ac8b9b3aa35b07c7af5974747c6529ffb", null ]
+        ] ],
         [ "DeltaTime", "structcubos_1_1engine_1_1DeltaTime.html", "structcubos_1_1engine_1_1DeltaTime" ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
         [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", "structcubos_1_1engine_1_1Arguments" ],

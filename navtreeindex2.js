@@ -1,5 +1,17 @@
 var NAVTREEINDEX2 =
 {
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#a8fde7bdfdc9fa1b44c8f8a3b7995b99a":[4,0,0,0,2,1,6],
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#aa81023c69347d6a21b3599569ebfbbef":[4,0,0,0,2,1,1],
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#ac8bb3912a3ce86b15842e79d0b421204":[4,0,0,0,2,1,4],
+"classcubos_1_1core_1_1ecs_1_1Blueprint.html#ad21389d02b85e61c80602085a3768c4c":[4,0,0,0,2,1,0],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html":[4,0,0,0,2,3],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html#a4febf71417f599239ec10030e8f7f0d0":[4,0,0,0,2,3,3],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html#a579a10387517c9bb8befc1b14a9660b3":[4,0,0,0,2,3,1],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html#a8fde7bdfdc9fa1b44c8f8a3b7995b99a":[4,0,0,0,2,3,2],
+"classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html#ac1835c1144f147336bc72faf11a2a31b":[4,0,0,0,2,3,0],
+"classcubos_1_1core_1_1ecs_1_1CommandBuffer.html":[4,0,0,0,2,5],
+"classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#a4eaf0e751e5f813a14c33957a0b3dcf7":[4,0,0,0,2,5,4],
+"classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#a5c0d0acbf6a8ee186682ba2ef65eb385":[4,0,0,0,2,5,1],
 "classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#a8d5203f13e6ca9742b5ec75e0498fbf2":[4,0,0,0,2,5,6],
 "classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#abf69fbc9a95edcdeef2c2d026f12ab55":[4,0,0,0,2,5,3],
 "classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#ad74604f754f1611f51217a01eb8db738":[4,0,0,0,2,5,0],
@@ -237,17 +249,5 @@ var NAVTREEINDEX2 =
 "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a585d34ff2838e70ca59631f8d650993b":[4,0,0,0,3,24,15],
 "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a5da298abdd369c4de3540d6100464b41":[4,0,0,0,3,24,4],
 "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a7b14f8c86d90a68e137c268953952c32":[4,0,0,0,3,24,39],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#a7b6b7fe2517c7f590fc46e982ea9543e":[4,0,0,0,3,24,32],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#a987fdb5848ba59f5854fd0f4345d8389":[4,0,0,0,3,24,0],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#aa08fb7bfc77946c968c4684df1d586b5":[4,0,0,0,3,24,27],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#aa3432d090d33f6ec4fa5d6d525ed7bc0":[4,0,0,0,3,24,35],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#aacfdd33855ee0d4494c3b01bb3610f21":[4,0,0,0,3,24,21],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#ab0f259cd301d5d76621c98d2f967d053":[4,0,0,0,3,24,23],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#abe209843e9eee20daa72052f99f375c7":[4,0,0,0,3,24,17],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#ac443a6996ccc82cf2e65c9ce3a0195de":[4,0,0,0,3,24,8],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#ad54c33408889cf3ec2926fa41636191b":[4,0,0,0,3,24,31],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#ae0b51b3382adce8ed21a834b7d2baea2":[4,0,0,0,3,24,24],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#ae2b0de8ce8cafdb6ee7dccdde09291c7":[4,0,0,0,3,24,30],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#ae40bb9425a0382bd82d8bfef36a7122b":[4,0,0,0,3,24,1],
-"classcubos_1_1core_1_1gl_1_1RenderDevice.html#ae41eaf09a1f2407c3a18fcf54a09e193":[4,0,0,0,3,24,18]
+"classcubos_1_1core_1_1gl_1_1RenderDevice.html#a7b6b7fe2517c7f590fc46e982ea9543e":[4,0,0,0,3,24,32]
 };
