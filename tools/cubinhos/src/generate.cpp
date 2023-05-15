@@ -802,9 +802,9 @@ static bool generate(const GenerateOptions& options)
     for (auto& component : components)
     {
         auto absolutePath = fs::absolute(component.header);
-        if (includedHeaders.insert(absolutePath).second)
+        if (includedHeaders.insert(absolutePath.string()).second)
         {
-            file << "#include " << absolutePath << std::endl;
+            file << "#include " << absolutePath.string() << std::endl;
         }
     }
 
