@@ -31,4 +31,4 @@ namespace cubos::engine
     ///
     /// @param cubos CUBOS. main class
     void windowPlugin(Cubos& cubos);
-}; // namespace cubos::engine
+} // namespace cubos::engine
