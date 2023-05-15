@@ -30,9 +30,9 @@ static void init(Write<Renderer> renderer, Read<Window> window, Read<Settings> s
 
 static void resize(Write<Renderer> renderer, EventReader<WindowEvent> evs)
 {
-    for (auto& ev : evs)
+    for (const auto& ev : evs)
     {
-        if (auto* resizeEv = std::get_if<ResizeEvent>(&ev))
+        if (const auto* resizeEv = std::get_if<ResizeEvent>(&ev))
         {
             (*renderer)->resize(resizeEv->size);
         }
