@@ -12,5 +12,14 @@ function(cubinhos_generate target source_dir)
     add_custom_target(${target}-generate DEPENDS ${binary_dir}/${target}-components.cpp)
     add_dependencies(${target} ${target}-generate)
 
-    target_sources(${target} PUBLIC ${binary_dir}/${target}-components.cpp)
+    # Link the generated source file with either:
+    # - the passed target, if it is an executable (PRIVATE).
+    # - the targets which link to the passed target, if it is a library (INTERFACE).
+    # See #378
+    get_target_property(target_type ${target} TYPE)
+    if(target_type STREQUAL "EXECUTABLE")
+        target_sources(${target} PRIVATE ${binary_dir}/${target}-components.cpp)
+    else()
+        target_sources(${target} INTERFACE ${binary_dir}/${target}-components.cpp)
+    endif()
 endfunction()    
