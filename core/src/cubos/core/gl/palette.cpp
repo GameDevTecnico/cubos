@@ -136,7 +136,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, gl::Palette& pal
 
         if (index == 0)
         {
-            CUBOS_WARN("Invalid palette material index 0: reserved for empty voxels");
+            CUBOS_WARN("Skipping invalid palette material index 0: reserved for empty voxels");
             continue;
         }
         if (index > palette.mMaterials.size())
@@ -145,4 +145,5 @@ void cubos::core::data::deserialize(Deserializer& deserializer, gl::Palette& pal
         }
         palette.mMaterials[index - 1] = mat;
     }
+    deserializer.endDictionary();
 }
