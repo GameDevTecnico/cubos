@@ -47,11 +47,12 @@ static void frameGrids(Read<Assets> assets, Write<Renderer> renderer, Write<Rend
         if (grid->handle == nullptr || assets->update(grid->asset))
         {
             // If the grid wasn't already uploaded, we need to upload it now.
+            grid->asset = assets->load(grid->asset);
             auto gridRead = assets->read(grid->asset);
             grid->handle = (*renderer)->upload(gridRead.get());
         }
 
-        frame->draw(grid->handle, localToWorld->mat);
+        frame->draw(grid->handle, glm::translate(glm::mat4(1.0F), grid->offset) * localToWorld->mat);
     }
 }
 
