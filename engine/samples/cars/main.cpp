@@ -1,49 +1,49 @@
-#include <components/car.hpp>
-#include <components/cubos/camera.hpp>
-#include <components/cubos/grid.hpp>
-#include <components/cubos/local_to_world.hpp>
-#include <components/cubos/position.hpp>
-#include <components/cubos/rotation.hpp>
-#include <components/cubos/scale.hpp>
+#include <cubos/core/settings.hpp>
 
-#include <cubos/core/data/file_system.hpp>
-#include <cubos/core/data/std_archive.hpp>
-#include <cubos/core/ecs/commands.hpp>
-#include <cubos/core/gl/grid.hpp>
+#include <cubos/engine/env_settings/plugin.hpp>
+#include <cubos/engine/renderer/light.hpp>
+#include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/transform/plugin.hpp>
+#include <cubos/engine/voxels/plugin.hpp>
 
-#include <cubos/engine/cubos.hpp>
-#include <cubos/engine/data/asset_manager.hpp>
-#include <cubos/engine/data/grid.hpp>
-#include <cubos/engine/data/palette.hpp>
-#include <cubos/engine/gl/deferred/renderer.hpp>
-#include <cubos/engine/gl/frame.hpp>
-#include <cubos/engine/gl/renderer.hpp>
-#include <cubos/engine/plugins/file_settings.hpp>
-#include <cubos/engine/plugins/renderer.hpp>
-#include <cubos/engine/plugins/window.hpp>
+#include "components.hpp"
 
-using namespace cubos;
-using namespace engine;
-using namespace core::ecs;
-using namespace core::data;
+using cubos::core::Settings;
+using cubos::core::ecs::Commands;
+using cubos::core::ecs::Query;
+using cubos::core::ecs::Read;
+using cubos::core::ecs::Write;
+using cubos::core::gl::Grid;
+using cubos::core::gl::Palette;
 using namespace cubos::engine;
 
-void setup(Commands cmds, data::AssetManager& assetManager, gl::Renderer& renderer, plugins::ActiveCamera& activeCamera)
+static const Asset<Grid> CarAsset = AnyAsset("059c16e7-a439-44c7-9bdc-6e069dba0c75");
+static const Asset<Palette> PaletteAsset = AnyAsset("1aa5e234-28cb-4386-99b4-39386b0fc215");
+
+struct Spawner
 {
-    FileSystem::mount("/assets/", std::make_shared<STDArchive>(SAMPLE_ASSETS_FOLDER, true, true));
+    float timer = 0.0F;
+    int x = -1;
+    int y = -1;
+};
 
-    // Import meta.
-    assetManager.registerType<data::Palette>();
-    assetManager.importMeta(FileSystem::find("/assets/"));
+static void settings(Write<Settings> settings)
+{
+    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
+}
 
-    // Get the palette.
-    auto paletteAsset = assetManager.load<data::Palette>("palette");
-    auto palette = paletteAsset->palette;
+static void setup(Commands cmds, Write<Assets> assets, Write<Renderer> renderer, Write<ActiveCamera> activeCamera)
+{
+    // Load the palette asset and add two colors to it.
+    auto palette = assets->write(PaletteAsset);
+    auto black = palette->add({{0.1F, 0.1F, 0.1F, 1.0F}});
+    auto white = palette->add({{0.9F, 0.9F, 0.9F, 1.0F}});
 
-    // Generate the floor's grid.
-    auto black = palette.add({{0.1f, 0.1f, 0.1f, 1.0f}});
-    auto white = palette.add({{0.9f, 0.9f, 0.9f, 1.0f}});
-    auto floorGrid = core::gl::Grid({256, 1, 256});
+    // Set the renderer's palette to the one we just modified.
+    (*renderer)->setPalette(*palette);
+
+    // Generate a new grid asset for the floor.
+    auto floorGrid = Grid({256, 1, 256});
     for (int x = 0; x < 256; ++x)
     {
         for (int z = 0; z < 256; ++z)
@@ -51,96 +51,74 @@ void setup(Commands cmds, data::AssetManager& assetManager, gl::Renderer& render
             floorGrid.set({x, 0, z}, (x + z) % 2 == 0 ? black : white);
         }
     }
-    renderer->setPalette(palette);
+    auto floorOffset = glm::vec3(floorGrid.size().x, 0.0F, floorGrid.size().z) / -2.0F;
+    floorOffset.y = -1.0F;
 
-    auto floorRendererGrid = renderer->upload(floorGrid);
-    auto floor = assetManager.store<data::Grid>("floor", data::Usage::Static,
-                                                data::Grid{
-                                                    .grid = std::move(floorGrid),
-                                                    .rendererGrid = floorRendererGrid,
-                                                });
+    auto floorAsset = assets->create(std::move(floorGrid));
 
-    // Spawn the floor.
-    cmds.create(ecs::Grid{floor, {-128.0f, -1.0f, -128.0f}}, ecs::LocalToWorld{}, ecs::Position{}, ecs::Scale{4.0f});
+    // Spawn the floor entity.
 
-    // Load car grid.
-    assetManager.registerType<data::Grid>(renderer.get());
+    cmds.create(RenderableGrid{floorAsset, floorOffset}, LocalToWorld{}, Scale{4.0F});
 
-    // Spawn the camera.
-    auto camera =
-        cmds.create(ecs::Camera{60.0f, 0.1f, 1000.0f}, ecs::LocalToWorld{}, ecs::Position{{0.0f, 40.0f, -70.0f}},
-                    ecs::Rotation{glm::quatLookAt(glm::vec3{0.0f, 0.0f, 1.0f}, glm::vec3{0.0f, 1.0f, 0.0f})});
+    // Spawn the camera entity.
+    activeCamera->entity =
+        cmds.create(Camera{60.0F, 0.1F, 1000.0F}, LocalToWorld{})
+            .add(Position{{0.0F, 120.0F, -200.0F}})
+            .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{0.0F, -1.0F, 1.0F}), glm::vec3{0.0F, 1.0F, 0.0F})})
+            .entity();
 
-    activeCamera.entity = camera.entity();
+    // Spawn the sun.
+    cmds.create(DirectionalLight{glm::vec3(1.0F), 1.0F}, LocalToWorld{},
+                Rotation{glm::quat(glm::vec3(glm::radians(45.0F), glm::radians(45.0F), 0))});
 }
 
-void spawnSystem(Commands cmds, data::AssetManager& assetManager, const DeltaTime& deltaTime)
+static void spawn(Commands cmds, Write<Spawner> spawner, Read<DeltaTime> deltaTime, Read<Assets> assets)
 {
-    static float timer = 0.0f;
-    static int x = -2;
-    static int y = -1;
-    timer += deltaTime.value;
-
-    if (timer >= 2)
+    spawner->timer += deltaTime->value;
+    if (spawner->timer >= 1.0F && spawner->y < 2)
     {
-        auto car = assetManager.load<data::Grid>("car");
-        cmds.create(Car{},
-                    ecs::Grid{car, {-float(car->grid.getSize().x) / 2.0f, 0.0f, -float(car->grid.getSize().z) / 2.0f}},
-                    ecs::LocalToWorld{}, ecs::Position{{56.0f * x, 0.0f, 56.0f * y}}, ecs::Rotation{});
-        timer = 0;
-        x++;
-        if (x == 4)
+        auto car = assets->read(CarAsset);
+        glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;
+
+        cmds.create(Car{}, RenderableGrid{CarAsset, offset}, LocalToWorld{})
+            .add(Position{{80.0F * static_cast<float>(spawner->x), 0.0F, 80.0F * static_cast<float>(spawner->y)}})
+            .add(Rotation{});
+
+        spawner->timer = 0;
+        spawner->x += 1;
+        if (spawner->x == 2)
         {
-            y++;
-            x = -2;
+            spawner->y++;
+            spawner->x = -1;
         }
     }
 }
 
-static void turnOnLight(gl::Frame& frame)
-{
-    frame.ambient({0.1f, 0.1f, 0.1f});
-
-    // Add a directional light to the frame.
-    glm::quat directionalLightRotation = glm::quat(glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0));
-    frame.light(core::gl::DirectionalLight(directionalLightRotation, glm::vec3(1), 1.0f));
-}
-
-void moveSystem(core::ecs::Query<Car&, ecs::Position&, ecs::Rotation&> query, const DeltaTime& deltaTime)
+static void move(Query<Write<Car>, Write<Position>, Write<Rotation>> query, Read<DeltaTime> deltaTime)
 {
     for (auto [entity, car, position, rotation] : query)
     {
-        car.vel = rotation.quat * glm::vec3(2.0f, 0.0f, 2.0f);
-        car.angVel = 0.3f;
+        car->vel = rotation->quat * glm::vec3(0.0F, 0.0F, 50.0F);
+        car->angVel = 3.0F;
 
-        position.vec += deltaTime.value * car.vel;
-        rotation.quat = glm::angleAxis(deltaTime.value * car.angVel, glm::vec3(0.0f, 1.0f, 0.0f)) * rotation.quat;
+        position->vec += deltaTime->value * car->vel;
+        rotation->quat = glm::angleAxis(deltaTime->value * car->angVel, glm::vec3(0.0F, 1.0F, 0.0F)) * rotation->quat;
     }
 }
 
 int main(int argc, char** argv)
 {
-    auto cubos = Cubos(argc, argv);
+    Cubos cubos{argc, argv};
+    cubos.addPlugin(envSettingsPlugin);
+    cubos.addPlugin(rendererPlugin);
+    cubos.addPlugin(voxelsPlugin);
+    cubos.addComponent<Car>();
+    cubos.addResource<Spawner>();
 
-    cubos.addPlugin(plugins::windowPlugin);
-    cubos.addPlugin(plugins::rendererPlugin);
-    cubos.addPlugin(plugins::fileSettingsPlugin);
-
-    cubos.addResource<data::AssetManager>()
-        .addComponent<ecs::LocalToWorld>()
-        .addComponent<ecs::Position>()
-        .addComponent<ecs::Rotation>()
-        .addComponent<ecs::Scale>()
-        .addComponent<ecs::Grid>()
-        .addComponent<Car>();
-
-    cubos.startupSystem(setup).tagged("setup").afterTag("cubos.renderer.init");
-
-    cubos.tag("SpawnSystem").beforeTag("MoveSystem");
-    cubos.system(spawnSystem).tagged("SpawnSystem");
-    cubos.system(moveSystem).tagged("MoveSystem");
-
-    cubos.system(turnOnLight).beforeTag("cubos.renderer.draw");
+    cubos.startupSystem(settings).tagged("cubos.settings");
+    cubos.startupSystem(setup).tagged("cubos.assets").afterTag("cubos.renderer.init");
+    cubos.system(spawn);
+    cubos.system(move);
 
     cubos.run();
 }

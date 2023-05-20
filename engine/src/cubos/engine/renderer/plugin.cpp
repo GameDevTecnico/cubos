@@ -52,7 +52,7 @@ static void frameGrids(Read<Assets> assets, Write<Renderer> renderer, Write<Rend
             grid->handle = (*renderer)->upload(gridRead.get());
         }
 
-        frame->draw(grid->handle, glm::translate(glm::mat4(1.0F), grid->offset) * localToWorld->mat);
+        frame->draw(grid->handle, localToWorld->mat * glm::translate(glm::mat4(1.0F), grid->offset));
     }
 }
 
