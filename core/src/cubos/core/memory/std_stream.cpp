@@ -26,12 +26,12 @@ StdStream::~StdStream()
 
 std::size_t StdStream::read(void* data, std::size_t size)
 {
-    return fread(data, size, 1, mFile);
+    return fread(data, 1, size, mFile);
 }
 
 std::size_t StdStream::write(const void* data, std::size_t size)
 {
-    return fwrite(data, size, 1, mFile);
+    return fwrite(data, 1, size, mFile);
 }
 
 std::size_t StdStream::tell() const
