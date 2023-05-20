@@ -229,31 +229,35 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
     {
         // Query for conditions
         bool canRun = true;
-        auto conditionsMask = system->settings->conditions;
-        std::size_t i = 0;
-        while (conditionsMask.any())
+
+        if (system->settings != nullptr)
         {
-            if (conditionsMask.test(0))
+            auto conditionsMask = system->settings->conditions;
+            std::size_t i = 0;
+            while (conditionsMask.any())
             {
-                // We have a condition, check if it has run already
-                if (!mRunConditions.test(i))
+                if (conditionsMask.test(0))
                 {
-                    mRunConditions.set(i);
-                    if (mConditions[i]->call(world, cmds))
+                    // We have a condition, check if it has run already
+                    if (!mRunConditions.test(i))
                     {
-                        mRetConditions.set(i);
+                        mRunConditions.set(i);
+                        if (mConditions[i]->call(world, cmds))
+                        {
+                            mRetConditions.set(i);
+                        }
+                    }
+                    // Check if the condition returned true
+                    if (!mRetConditions.test(i))
+                    {
+                        canRun = false;
+                        break;
                     }
                 }
-                // Check if the condition returned true
-                if (!mRetConditions.test(i))
-                {
-                    canRun = false;
-                    break;
-                }
-            }
 
-            i += 1;
-            conditionsMask >>= 1;
+                i += 1;
+                conditionsMask >>= 1;
+            }
         }
 
         if (canRun)
