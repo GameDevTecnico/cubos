@@ -130,21 +130,21 @@ void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertice
                                 indices.resize(ii + 6);
                                 if (backFace)
                                 {
-                                    indices[ii + 0] = static_cast<uint16_t>(vi) + 0;
-                                    indices[ii + 1] = static_cast<uint16_t>(vi) + 2;
-                                    indices[ii + 2] = static_cast<uint16_t>(vi) + 1;
-                                    indices[ii + 3] = static_cast<uint16_t>(vi) + 3;
-                                    indices[ii + 4] = static_cast<uint16_t>(vi) + 2;
-                                    indices[ii + 5] = static_cast<uint16_t>(vi) + 0;
+                                    indices[ii + 0] = static_cast<uint32_t>(vi) + 0;
+                                    indices[ii + 1] = static_cast<uint32_t>(vi) + 2;
+                                    indices[ii + 2] = static_cast<uint32_t>(vi) + 1;
+                                    indices[ii + 3] = static_cast<uint32_t>(vi) + 3;
+                                    indices[ii + 4] = static_cast<uint32_t>(vi) + 2;
+                                    indices[ii + 5] = static_cast<uint32_t>(vi) + 0;
                                 }
                                 else
                                 {
-                                    indices[ii + 0] = static_cast<uint16_t>(vi) + 0;
-                                    indices[ii + 1] = static_cast<uint16_t>(vi) + 1;
-                                    indices[ii + 2] = static_cast<uint16_t>(vi) + 2;
-                                    indices[ii + 3] = static_cast<uint16_t>(vi) + 2;
-                                    indices[ii + 4] = static_cast<uint16_t>(vi) + 3;
-                                    indices[ii + 5] = static_cast<uint16_t>(vi) + 0;
+                                    indices[ii + 0] = static_cast<uint32_t>(vi) + 0;
+                                    indices[ii + 1] = static_cast<uint32_t>(vi) + 1;
+                                    indices[ii + 2] = static_cast<uint32_t>(vi) + 2;
+                                    indices[ii + 3] = static_cast<uint32_t>(vi) + 2;
+                                    indices[ii + 4] = static_cast<uint32_t>(vi) + 3;
+                                    indices[ii + 5] = static_cast<uint32_t>(vi) + 0;
                                 }
                             }
 
