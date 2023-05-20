@@ -804,7 +804,7 @@ static bool generate(const GenerateOptions& options)
         auto absolutePath = fs::absolute(component.header);
         if (includedHeaders.insert(absolutePath.string()).second)
         {
-            file << "#include " << absolutePath.string() << std::endl;
+            file << "#include \"" << absolutePath.string() << "\"" << std::endl;
         }
     }
 
