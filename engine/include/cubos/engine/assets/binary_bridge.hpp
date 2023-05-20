@@ -55,7 +55,7 @@ namespace cubos::engine
         {
             // Read the data from the asset.
             auto data = assets.read<T>(handle);
-            serializer.write(data, nullptr); // Binary serializer does not use names.
+            serializer.write(*data, nullptr); // Binary serializer does not use names.
         }
     };
 } // namespace cubos::engine
