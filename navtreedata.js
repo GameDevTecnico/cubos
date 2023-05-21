@@ -69,10 +69,10 @@ var NAVTREEINDEX =
 "classcubos_1_1core_1_1ecs_1_1Blueprint.html#a8fde7bdfdc9fa1b44c8f8a3b7995b99a",
 "classcubos_1_1core_1_1gl_1_1RenderDevice.html#a987fdb5848ba59f5854fd0f4345d8389",
 "classcubos_1_1engine_1_1Cubos.html#a00e8b1677b757b484c896a6678b210bd",
-"engine_2include_2cubos_2engine_2ecs_2grid_8hpp_source.html",
-"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88a2d84c6ea0bf24bc641d65e1eafc32135",
-"namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711ab1ca34f82e83c52b010f86955f264e05",
-"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a76bf897a4812515bdcfd98034601c4da"
+"engine_2include_2cubos_2engine_2ecs_2camera_8hpp_source.html",
+"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88",
+"namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711a83dca46dd08ad782e968d586375715e1",
+"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a67da04ceb5af5baf9df55bdad3970651"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

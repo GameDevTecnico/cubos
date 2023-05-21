@@ -1,10 +1,13 @@
 var NAVTREEINDEX5 =
 {
+"engine_2include_2cubos_2engine_2ecs_2camera_8hpp_source.html":[5,0,1,0,0,0,1,0],
 "engine_2include_2cubos_2engine_2ecs_2grid_8hpp_source.html":[5,0,1,0,0,0,1,1],
 "engine_2include_2cubos_2engine_2plugins_2imgui_8hpp.html#afb729bcc13bb2c13aa37b602860524dc":[3,0,0,1,3,4],
 "engine_2include_2cubos_2engine_2plugins_2imgui_8hpp_source.html":[5,0,1,0,0,0,3,3],
 "engine_2include_2cubos_2engine_2plugins_2window_8hpp.html#afa8146f56bedab5286a623bdbad91054":[3,0,0,1,3,7],
 "engine_2include_2cubos_2engine_2plugins_2window_8hpp_source.html":[5,0,1,0,0,0,3,6],
+"entity__inspector_2plugin_8hpp.html#a4232eae931be7b56053b6fd93942c452":[3,0,0,1,4,0],
+"entity__inspector_2plugin_8hpp_source.html":[5,0,1,0,0,0,4,0,0],
 "entity__manager_8hpp_source.html":[5,0,0,0,1,0,2,4],
 "entity__selector_8hpp.html#a2ca83b69dae67275394f7bee883e0442":[3,0,0,1,3,0,1],
 "entity__selector_8hpp_source.html":[5,0,1,0,0,0,3,0,0],
@@ -88,8 +91,8 @@ var NAVTREEINDEX5 =
 "guides.html":[2],
 "handle_8hpp_source.html":[5,0,0,0,1,0,1,9],
 "hierarchy.html":[4,2],
-"index.html":[],
 "index.html":[0],
+"index.html":[],
 "index.html#autotoc_md45":[0,0],
 "index.html#autotoc_md46":[0,0,0],
 "index.html#autotoc_md47":[0,0,1],
@@ -246,8 +249,5 @@ var NAVTREEINDEX5 =
 "namespacecubos_1_1core_1_1gl.html#a36eef9740a33a6c29292704bd027bebaa08825280e3f8137556325061ba67ff8c":[3,0,0,0,3,45,2],
 "namespacecubos_1_1core_1_1gl.html#a36eef9740a33a6c29292704bd027bebaa2403def5083f02105e7802b3b315681e":[3,0,0,0,3,45,1],
 "namespacecubos_1_1core_1_1gl.html#a36eef9740a33a6c29292704bd027bebaa7020426cfb0a204051be4b3053d2acc8":[3,0,0,0,3,45,0],
-"namespacecubos_1_1core_1_1gl.html#a371f2a2eb7b3f61d182eda790c4b7bcb":[3,0,0,0,3,27],
-"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88":[3,0,0,0,3,46],
-"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88a06c2cea18679d64399783748fa367bdd":[3,0,0,0,3,46,1],
-"namespacecubos_1_1core_1_1gl.html#a39e43a2b0694d3f59c3ae3b942651d88a2ad714e29d37896d79187312086bc6fe":[3,0,0,0,3,46,2]
+"namespacecubos_1_1core_1_1gl.html#a371f2a2eb7b3f61d182eda790c4b7bcb":[3,0,0,0,3,27]
 };

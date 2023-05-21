@@ -1,5 +1,8 @@
 var NAVTREEINDEX7 =
 {
+"namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711a83dca46dd08ad782e968d586375715e1":[3,0,0,0,4,21,5],
+"namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711a92b09c7c48c520c3c55e497875da437c":[3,0,0,0,4,21,2],
+"namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711a945d5e233cf7d6240f6b783b36a374ff":[3,0,0,0,4,21,1],
 "namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711ab1ca34f82e83c52b010f86955f264e05":[3,0,0,0,4,21,3],
 "namespacecubos_1_1core_1_1io.html#aebb756382df4f6bc3b84830e81ff34b2":[3,0,0,0,4,26],
 "namespacecubos_1_1core_1_1io.html#aefe65608166a28922f14953566ff8b8d":[3,0,0,0,4,25],
@@ -39,8 +42,6 @@ var NAVTREEINDEX7 =
 "package_8hpp_source.html":[5,0,0,0,1,0,1,12],
 "pages.html":[],
 "pass_8hpp_source.html":[5,0,1,0,0,0,2,1,3],
-"plugin_8hpp.html#ac8b9b3aa35b07c7af5974747c6529ffb":[3,0,0,1,4,0],
-"plugin_8hpp_source.html":[5,0,1,0,0,0,4,0,0],
 "plugins_2renderer_8hpp.html#ae4ccf4d20be235e36f5fd3fd14332a6a":[3,0,0,1,3,5],
 "plugins_2renderer_8hpp_source.html":[5,0,1,0,0,0,3,4],
 "position_8hpp_source.html":[5,0,1,0,0,0,1,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX7 =
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a47616bef639f142cd16b76ae9d29f919":[4,0,0,0,3,13,0],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a48f5bb45f9870b7033e8845e1b173245":[4,0,0,0,3,13,2],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a561bb27857e732974173e8a15f2b0738":[4,0,0,0,3,13,1],
-"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a60b730bd9ed3db31bc2f38bd1b8657ec":[4,0,0,0,3,13,4],
-"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a67da04ceb5af5baf9df55bdad3970651":[4,0,0,0,3,13,6]
+"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a60b730bd9ed3db31bc2f38bd1b8657ec":[4,0,0,0,3,13,4]
 };

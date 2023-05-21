@@ -1,5 +1,6 @@
 var NAVTREEINDEX8 =
 {
+"structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a67da04ceb5af5baf9df55bdad3970651":[4,0,0,0,3,13,6],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a76bf897a4812515bdcfd98034601c4da":[4,0,0,0,3,13,5],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#a88275efef5168c517532f64522d72e3c":[4,0,0,0,3,13,7],
 "structcubos_1_1core_1_1gl_1_1SamplerDesc.html#af1d6e2fd60e18d3b3722f361c178ab40":[4,0,0,0,3,13,3],
@@ -124,6 +125,8 @@ var NAVTREEINDEX8 =
 "vec__storage_8hpp_source.html":[5,0,0,0,1,0,2,15],
 "vertex_8hpp_source.html":[5,0,0,0,1,0,3,8],
 "world_8hpp_source.html":[5,0,0,0,1,0,2,16],
+"world__inspector_2plugin_8hpp.html#ac8b9b3aa35b07c7af5974747c6529ffb":[3,0,0,1,4,1],
+"world__inspector_2plugin_8hpp_source.html":[5,0,1,0,0,0,4,1,0],
 "yaml__deserializer_8hpp_source.html":[5,0,0,0,1,0,1,17],
 "yaml__serializer_8hpp_source.html":[5,0,0,0,1,0,1,18]
 };
