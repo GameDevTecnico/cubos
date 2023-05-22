@@ -1,28 +1,31 @@
 #include <cubos/engine/tools/world_inspector/plugin.hpp>
 #include <imgui.h>
 
-#include <cubos/engine/plugins/imgui.hpp>
-#include <cubos/engine/plugins/tools/entity_selector.hpp>
+#include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/tools/entity_selector/plugin.hpp>
 
+using cubos::core::ecs::Write;
 using cubos::core::ecs::World;
-using cubos::engine::plugins::tools::EntitySelector;
+using namespace cubos::engine;
 
-static void inspectWorld(World& world, EntitySelector& selector)
+static void inspectWorld(Write<World> world)
 {
+    auto selector = world->write<tools::EntitySelector>();
+
     ImGui::Begin("World Inspector");
     if (!ImGui::IsWindowCollapsed())
     {
         int n = 0;
-        for (auto entity : world)
+        for (auto entity : *world)
         {
             ImGui::PushID(n);
 
-            ImGui::BulletText(std::to_string(n).c_str());
+            ImGui::BulletText("%s", std::to_string(n).c_str());
 
             ImGui::SameLine();
             if (ImGui::Button("Select"))
             {
-                selector.selection = entity;
+                selector.get().selection = entity;
             }
 
             n++;
@@ -34,8 +37,8 @@ static void inspectWorld(World& world, EntitySelector& selector)
 
 void cubos::engine::tools::worldInspectorPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::plugins::imguiPlugin);
-    cubos.addPlugin(cubos::engine::plugins::tools::entitySelectorPlugin);
+    cubos.addPlugin(imguiPlugin);
+    cubos.addPlugin(tools::entitySelectorPlugin);
 
     cubos.system(inspectWorld).tagged("cubos.imgui");
 }
