@@ -1,11 +1,11 @@
-#include <cubos/engine/tools/world_inspector/plugin.hpp>
 #include <imgui.h>
 
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/entity_selector/plugin.hpp>
+#include <cubos/engine/tools/world_inspector/plugin.hpp>
 
-using cubos::core::ecs::Write;
 using cubos::core::ecs::World;
+using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 static void inspectWorld(Write<World> world)
