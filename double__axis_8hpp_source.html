@@ -90,20 +90,20 @@ $(document).ready(function(){initNavTree('double__axis_8hpp_source.html',''); in
 <div class="title">double_axis.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_IO_DOUBLE_AXIS_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_IO_DOUBLE_AXIS_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/event.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/window.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/keyboard.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/sources/source.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;cubos/core/event.hpp&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/keyboard.hpp&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/sources/source.hpp&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/window.hpp&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
@@ -131,8 +131,6 @@ $(document).ready(function(){initNavTree('double__axis_8hpp_source.html',''); in
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">void</span> handleVerticalAxis(<span class="keywordtype">float</span> yPos);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    };</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_IO_DOUBLE_AXIS_HPP</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:13</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1DoubleAxis_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1DoubleAxis.html">cubos::core::io::DoubleAxis</a></div><div class="ttdef"><b>Definition:</b> double_axis.hpp:24</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1DoubleAxis_html_a13064fc65c4c3537b86e189f14c04565"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1DoubleAxis.html#a13064fc65c4c3537b86e189f14c04565">cubos::core::io::DoubleAxis::unsubscribeEvents</a></div><div class="ttdeci">void unsubscribeEvents() override</div></div>
@@ -140,8 +138,8 @@ $(document).ready(function(){initNavTree('double__axis_8hpp_source.html',''); in
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1DoubleAxis_html_a436d808a1195428ddd9ee0e577fa0348"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1DoubleAxis.html#a436d808a1195428ddd9ee0e577fa0348">cubos::core::io::DoubleAxis::DoubleAxis</a></div><div class="ttdeci">DoubleAxis(cubos::core::io::MouseAxis horizontalAxis, cubos::core::io::MouseAxis verticalAxis)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1DoubleAxis_html_aae87450ddb504d187d7f686671296b98"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1DoubleAxis.html#aae87450ddb504d187d7f686671296b98">cubos::core::io::DoubleAxis::subscribeEvents</a></div><div class="ttdeci">void subscribeEvents() override</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1DoubleAxis_html_ad544c77ef234e9c6d5e0982de065b668"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1DoubleAxis.html#ad544c77ef234e9c6d5e0982de065b668">cubos::core::io::DoubleAxis::createContext</a></div><div class="ttdeci">Context createContext() override</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:21</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1io_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div><div class="ttdoc">Contains input/output related code, such as window management and the input manager.</div><div class="ttdef"><b>Definition:</b> action.hpp:10</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:22</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1io_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div><div class="ttdoc">Contains input/output related code, such as window management and the input manager.</div><div class="ttdef"><b>Definition:</b> action.hpp:9</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1io_html_a6b196833b703dde536f52ce737121523"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html#a6b196833b703dde536f52ce737121523">cubos::core::io::MouseAxis</a></div><div class="ttdeci">MouseAxis</div><div class="ttdoc">IDs of mouse axes.</div><div class="ttdef"><b>Definition:</b> window.hpp:37</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

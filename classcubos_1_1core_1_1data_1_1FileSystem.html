@@ -102,8 +102,8 @@ Static Public Member Functions</h2></td></tr>
 static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#af8a83c3e003a35bcc308f2b9f4a7b3a4">root</a> ()</td></tr>
 <tr class="memdesc:af8a83c3e003a35bcc308f2b9f4a7b3a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a handle to the root file. <br /></td></tr>
 <tr class="separator:af8a83c3e003a35bcc308f2b9f4a7b3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24316e70715c3ebe4e53e13f2d01f909"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">mount</a> (std::string_view path, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; archive)</td></tr>
-<tr class="separator:a24316e70715c3ebe4e53e13f2d01f909"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac7d7493f14704df36b00242d15cbf07"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">mount</a> (std::string_view path, const std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; &amp;archive)</td></tr>
+<tr class="separator:aac7d7493f14704df36b00242d15cbf07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab21b1dd5440a253dba0162c40588760c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab21b1dd5440a253dba0162c40588760c">unmount</a> (std::string_view path)</td></tr>
 <tr class="separator:ab21b1dd5440a253dba0162c40588760c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7279dfd43000746d763c53e72623e5e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab7279dfd43000746d763c53e72623e5e">find</a> (std::string_view path)</td></tr>
@@ -117,8 +117,8 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the virtual file system of the engine. This class is never instantiated, and is only used to provide static methods.</p>
-<p>Example 1: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">FileSystem::mount</a>("/assets", ...); ... auto modelsDir = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab7279dfd43000746d763c53e72623e5e">FileSystem::find</a>("/assets/models"); if (modelsDir != nullptr &amp;&amp; modelsDir-&gt;isDirectory()) for (auto model = modelsDir-&gt;getChild(); model != nullptr; model = model-&gt;getSibling()) loadModel(*model-&gt;open(File::OpenMode::Read)); ... <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab21b1dd5440a253dba0162c40588760c">FileSystem::unmount</a>("/assets");</p>
-<p>Example 2: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">FileSystem::mount</a>("/settings.yaml", ...); ... auto settingsFile = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#af8a83c3e003a35bcc308f2b9f4a7b3a4" title="Gets a handle to the root file.">FileSystem::root()</a>-&gt;find("settings.yaml"); if (settingsFile) loadSettings(*model-&gt;open(File::OpenMode::Read)); ... </p>
+<p>Example 1: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">FileSystem::mount</a>("/assets", ...); ... auto modelsDir = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab7279dfd43000746d763c53e72623e5e">FileSystem::find</a>("/assets/models"); if (modelsDir != nullptr &amp;&amp; modelsDir-&gt;isDirectory()) for (auto model = modelsDir-&gt;getChild(); model != nullptr; model = model-&gt;getSibling()) loadModel(*model-&gt;open(File::OpenMode::Read)); ... <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab21b1dd5440a253dba0162c40588760c">FileSystem::unmount</a>("/assets");</p>
+<p>Example 2: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">FileSystem::mount</a>("/settings.yaml", ...); ... auto settingsFile = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#af8a83c3e003a35bcc308f2b9f4a7b3a4" title="Gets a handle to the root file.">FileSystem::root()</a>-&gt;find("settings.yaml"); if (settingsFile) loadSettings(*model-&gt;open(File::OpenMode::Read)); ... </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a26e860389d6238e316234d6953ede4c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26e860389d6238e316234d6953ede4c2">&#9670;&nbsp;</a></span>create()</h2>
@@ -230,8 +230,8 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
 
 </div>
 </div>
-<a id="a24316e70715c3ebe4e53e13f2d01f909"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24316e70715c3ebe4e53e13f2d01f909">&#9670;&nbsp;</a></span>mount()</h2>
+<a id="aac7d7493f14704df36b00242d15cbf07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac7d7493f14704df36b00242d15cbf07">&#9670;&nbsp;</a></span>mount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +248,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt;&#160;</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>archive</em>&#160;</td>
         </tr>
         <tr>

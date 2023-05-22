@@ -89,14 +89,24 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 &#160;
 
 <h3><a id="index_s"></a>- s -</h3><ul>
-<li>SceneLoader()
-: <a class="el" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aa0fa0ec2a2e01b3af4ba548c4c1f8eea">SceneLoader</a>
+<li>save()
+: <a class="el" href="classcubos_1_1engine_1_1AssetBridge.html#a4fc026a4c0f9e9c16adf38eb18029bb6">AssetBridge</a>
+, <a class="el" href="classcubos_1_1engine_1_1Assets.html#a8cf5f6f5671effbeb9239bc756bc7df4">Assets</a>
+, <a class="el" href="classcubos_1_1engine_1_1BinaryBridge.html#a864fa21dfb8e97589c320d03e233a506">BinaryBridge</a>
+, <a class="el" href="classcubos_1_1engine_1_1SceneBridge.html#a864fa21dfb8e97589c320d03e233a506">SceneBridge</a>
+</li>
+<li>saveImpl()
+: <a class="el" href="classcubos_1_1engine_1_1BinaryBridge.html#a325d3d8e009777c602ddaeca42d13332">BinaryBridge</a>
+, <a class="el" href="classcubos_1_1engine_1_1BinaryBridgeImpl.html#a29da97bb745f53dc16558f3af50a618c">BinaryBridgeImpl&lt; T &gt;</a>
+</li>
+<li>saveMeta()
+: <a class="el" href="classcubos_1_1engine_1_1Assets.html#aaadc707c66b4bfa97280186cd80b9481">Assets</a>
 </li>
 <li>seek()
-: <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#ab352962a890b7e5f200c1e358e7fe68a">FileStream&lt; T &gt;</a>
-, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#af76e1bca26a37182b365e301bc89948c">BufferStream</a>
-, <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#af76e1bca26a37182b365e301bc89948c">StdStream</a>
-, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a4ddf65066424646759a2f892d37d3671">Stream</a>
+: <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a781611b932fe670f66e0868bc4c38b0b">FileStream&lt; T &gt;</a>
+, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a4338d5b9e7520b6910f20717ee2f3efc">BufferStream</a>
+, <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#a4338d5b9e7520b6910f20717ee2f3efc">StdStream</a>
+, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a2d33cac0d0a3d23a0b46687cb17d535f">Stream</a>
 </li>
 <li>sentEvents()
 : <a class="el" href="classcubos_1_1core_1_1ecs_1_1EventPipe.html#a6c5a868fa0b92b47f145afe53827d444">EventPipe&lt; T &gt;</a>
@@ -104,10 +114,15 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <li>SerializationMap()
 : <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#a95978f495ac80c9ca73a8a504dbe4d3a">SerializationMap&lt; R, I &gt;</a>
 </li>
+<li>serialize()
+: <a class="el" href="classcubos_1_1engine_1_1AnyAsset.html#afba146cf19eff37d1289bad525123f73">AnyAsset</a>
+</li>
 <li>set()
-: <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a0c228d7960217dd3570fec14355fbae4">Package</a>
+: <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a28a43650b75b85b440a5f17fc2d010b6">Package</a>
 , <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html#a6b4abd85b9e98611180fca930cf29a40">Grid</a>
 , <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a8ee5ca8b838cd52afb4d9ab4867dd819">Palette</a>
+, <a class="el" href="classcubos_1_1core_1_1memory_1_1TypeMap.html#ab7ed1e4a0561c57bb0c5812bf0ce4900">TypeMap&lt; V &gt;</a>
+, <a class="el" href="classcubos_1_1engine_1_1AssetMeta.html#aecd5a4d1b997832ee73865b38e9eb4ed">AssetMeta</a>
 </li>
 <li>setBlendState()
 : <a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#ae502eca7875295d1d7eec572f23ca229">RenderDevice</a>
@@ -131,7 +146,7 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html#a43aa8689397f09898bbdc5da61424b5b">Source</a>
 </li>
 <li>setConstant()
-: <a class="el" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#adedf38901bbf2f951b95db2a8e751bee">ShaderBindingPoint</a>
+: <a class="el" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a59b56002d04e03afd8a175dc9999e50f">ShaderBindingPoint</a>
 </li>
 <li>setCursor()
 : <a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#af71b82ff56ebcb815679ed01bda61561">BaseWindow</a>
@@ -143,7 +158,7 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html#a33936403d09ca7e0b35eac75586e0675">Source</a>
 </li>
 <li>setDouble()
-: <a class="el" href="classcubos_1_1core_1_1Settings.html#ad810cc89fe207b4e8b52e7c4fc1b950c">Settings</a>
+: <a class="el" href="classcubos_1_1core_1_1Settings.html#a62e296a550892085b4e7583a9f0d734a">Settings</a>
 </li>
 <li>setFramebuffer()
 : <a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#aa3432d090d33f6ec4fa5d6d525ed7bc0">RenderDevice</a>
@@ -155,10 +170,10 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html#aef651e0fd3db2a9e44d8c5e85d8bef5e">RenderDevice</a>
 </li>
 <li>setInteger()
-: <a class="el" href="classcubos_1_1core_1_1Settings.html#abafa96dfd6ec5b7713a67a015f0d15cd">Settings</a>
+: <a class="el" href="classcubos_1_1core_1_1Settings.html#a73d145a4d2d91341621b81d9703c26ab">Settings</a>
 </li>
 <li>setIntensity()
-: <a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html#ace02325cb6289c007d569c193641c468">BloomPass</a>
+: <a class="el" href="classcubos_1_1engine_1_1PostProcessingBloom.html#ace02325cb6289c007d569c193641c468">PostProcessingBloom</a>
 </li>
 <li>setListenerOrientation()
 : <a class="el" href="classcubos_1_1core_1_1al_1_1AudioDevice.html#aa63252b687fef8aec997c8770f628165">AudioDevice</a>
@@ -179,8 +194,8 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="classcubos_1_1core_1_1io_1_1BaseWindow.html#ae755d918c3aa83ba31569610f033e769">BaseWindow</a>
 </li>
 <li>setPalette()
-: <a class="el" href="classcubos_1_1engine_1_1gl_1_1BaseRenderer.html#adba2df0c8afc09884ecae830486f9f88">BaseRenderer</a>
-, <a class="el" href="classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html#a1558035fd52b5e8e67be5e9aa60af019">Renderer</a>
+: <a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#adba2df0c8afc09884ecae830486f9f88">BaseRenderer</a>
+, <a class="el" href="classcubos_1_1engine_1_1DeferredRenderer.html#a1ed8acc3c29501eb563385335d82bf93">DeferredRenderer</a>
 </li>
 <li>setPitch()
 : <a class="el" href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html#a2489f18d315ddf2edd064ef6dbf6350c">Source</a>
@@ -207,13 +222,13 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html#aa601561f8dc305111638f9b044474531">Grid</a>
 </li>
 <li>setSoftThreshold()
-: <a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html#aa2b0010576884b2e4e80384758387ea5">BloomPass</a>
+: <a class="el" href="classcubos_1_1engine_1_1PostProcessingBloom.html#aa2b0010576884b2e4e80384758387ea5">PostProcessingBloom</a>
 </li>
 <li>setString()
 : <a class="el" href="classcubos_1_1core_1_1Settings.html#a956032bac7aa99aef8d20546f12f9c03">Settings</a>
 </li>
 <li>setThreshold()
-: <a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html#a91971f157f5cf53c774f5cc8fbbc18b5">BloomPass</a>
+: <a class="el" href="classcubos_1_1engine_1_1PostProcessingBloom.html#a91971f157f5cf53c774f5cc8fbbc18b5">PostProcessingBloom</a>
 </li>
 <li>setVelocity()
 : <a class="el" href="classcubos_1_1core_1_1al_1_1impl_1_1Source.html#a9d1f6992c2a3d0b712ec950172612125">Source</a>
@@ -234,9 +249,12 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="classcubos_1_1core_1_1io_1_1SingleAxis.html#adcb91e4dd3690e19a26ebbed00fff42f">SingleAxis</a>
 </li>
 <li>size()
-: <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a259cb5a711406a8c3e5d937eb9350cca">Package</a>
-, <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#a259cb5a711406a8c3e5d937eb9350cca">SerializationMap&lt; R, I &gt;</a>
+: <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#ade1601ccf1fa3bcf050867f0852ca4e5">Package</a>
+, <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#ade1601ccf1fa3bcf050867f0852ca4e5">SerializationMap&lt; R, I &gt;</a>
 , <a class="el" href="classcubos_1_1core_1_1ecs_1_1EventPipe.html#ade1601ccf1fa3bcf050867f0852ca4e5">EventPipe&lt; T &gt;</a>
+, <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html#a6b18818b692e14be2ca88e27c1ff45d4">Grid</a>
+, <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a0b9925c1bf7886521162558475fd1ceb">Palette</a>
+, <a class="el" href="classcubos_1_1core_1_1memory_1_1TypeMap.html#ade1601ccf1fa3bcf050867f0852ca4e5">TypeMap&lt; V &gt;</a>
 </li>
 <li>spawn()
 : <a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#a8d5203f13e6ca9742b5ec75e0498fbf2">CommandBuffer</a>
@@ -248,6 +266,9 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <li>startupTag()
 : <a class="el" href="classcubos_1_1engine_1_1Cubos.html#ab7ab4149abba32748f1c3904f0b41664">Cubos</a>
 </li>
+<li>status()
+: <a class="el" href="classcubos_1_1engine_1_1Assets.html#ad9afe67ec81cf4963a7a08d409d24a1c">Assets</a>
+</li>
 <li>STDArchive()
 : <a class="el" href="classcubos_1_1core_1_1data_1_1STDArchive.html#ae9b2de0f347d11c46a7906745de20c5e">STDArchive</a>
 </li>
@@ -255,7 +276,7 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#ad5e92079633e252784b8312983e9db78">StdStream</a>
 </li>
 <li>store()
-: <a class="el" href="classcubos_1_1engine_1_1data_1_1AssetManager.html#a17d3aea96af5b712dd9df5a64b173ab3">AssetManager</a>
+: <a class="el" href="classcubos_1_1engine_1_1Assets.html#a4cc6d4ebebfe0f91743cd23e016d48d4">Assets</a>
 </li>
 <li>subscribeEvents()
 : <a class="el" href="classcubos_1_1core_1_1io_1_1ButtonPress.html#aae87450ddb504d187d7f686671296b98">ButtonPress</a>

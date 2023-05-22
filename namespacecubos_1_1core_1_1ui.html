@@ -98,10 +98,10 @@ $(document).ready(function(){initNavTree('namespacecubos_1_1core_1_1ui.html','')
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afec9af589c188eb6c913fa877c29d7d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#afec9af589c188eb6c913fa877c29d7d7">showWorld</a> (const <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">ecs::World</a> &amp;world, data::Handle::SerContext handleCtx)</td></tr>
-<tr class="separator:afec9af589c188eb6c913fa877c29d7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8feca199f9895e310e114fbe26fe42c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#ab8feca199f9895e310e114fbe26fe42c">editWorld</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">ecs::World</a> &amp;world, data::Handle::SerContext handleSerCtx, data::Handle::DesContext handleDesCtx)</td></tr>
-<tr class="separator:ab8feca199f9895e310e114fbe26fe42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04bd9415bedddac10447e3e8d0a6e9e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a04bd9415bedddac10447e3e8d0a6e9e4">showWorld</a> (const <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;context)</td></tr>
+<tr class="separator:a04bd9415bedddac10447e3e8d0a6e9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a409733146bc45968a32058fa65332a22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a409733146bc45968a32058fa65332a22">editWorld</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;serContext, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;desContext)</td></tr>
+<tr class="separator:a409733146bc45968a32058fa65332a22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdef4dee46ee75856196dc27a1bad855"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#abdef4dee46ee75856196dc27a1bad855">initialize</a> (<a class="el" href="namespacecubos_1_1core_1_1io.html#a373938cb890b16a010475e7a68557737">io::Window</a> window)</td></tr>
 <tr class="separator:abdef4dee46ee75856196dc27a1bad855"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8ed978d758b063ff778f65cc761a932"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#af8ed978d758b063ff778f65cc761a932">terminate</a> ()</td></tr>
@@ -110,34 +110,37 @@ Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a00d2e0adc5245a734361b6e5f5fb6fa6">beginFrame</a> ()</td></tr>
 <tr class="memdesc:a00d2e0adc5245a734361b6e5f5fb6fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begins a new ImGui frame. <br /></td></tr>
 <tr class="separator:a00d2e0adc5245a734361b6e5f5fb6fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad92cb427eeda20114418ef1baf422bcb"><td class="memItemLeft" align="right" valign="top"><a id="ad92cb427eeda20114418ef1baf422bcb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#ad92cb427eeda20114418ef1baf422bcb">endFrame</a> (gl::Framebuffer target=0)</td></tr>
-<tr class="memdesc:ad92cb427eeda20114418ef1baf422bcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the current ImGui frame, and renders the ImGui draw data to the window. <br /></td></tr>
-<tr class="separator:ad92cb427eeda20114418ef1baf422bcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb1cffd1f7ecddba7037c6df8ff2a33"><td class="memItemLeft" align="right" valign="top"><a id="a0cb1cffd1f7ecddba7037c6df8ff2a33"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a0cb1cffd1f7ecddba7037c6df8ff2a33">endFrame</a> (const gl::Framebuffer &amp;target=nullptr)</td></tr>
+<tr class="memdesc:a0cb1cffd1f7ecddba7037c6df8ff2a33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the current ImGui frame, and renders the ImGui draw data to the window. <br /></td></tr>
+<tr class="separator:a0cb1cffd1f7ecddba7037c6df8ff2a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31fdceab5f801da6c1861e7e9b89f5e7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a31fdceab5f801da6c1861e7e9b89f5e7">handleEvent</a> (const <a class="el" href="namespacecubos_1_1core_1_1io.html#a17a64c7d8c1e2b747322f79bf21b3934">io::WindowEvent</a> &amp;event)</td></tr>
 <tr class="separator:a31fdceab5f801da6c1861e7e9b89f5e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1daa051dd0b9cab502bdf33ecff4fa1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ad1daa051dd0b9cab502bdf33ecff4fa1"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">data::TriviallySerializable</a>&lt; T &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#ad1daa051dd0b9cab502bdf33ecff4fa1">show</a> (const T &amp;object, const std::string &amp;name)</td></tr>
-<tr class="separator:ad1daa051dd0b9cab502bdf33ecff4fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a966ee930dde3d209514a521967e3d3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a8a966ee930dde3d209514a521967e3d3"><td class="memTemplItemLeft" align="right" valign="top">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">data::TriviallySerializable</a>&lt; T &gt; &amp;&amp;<a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">data::TriviallyDeserializable</a>&lt; T &gt; bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a8a966ee930dde3d209514a521967e3d3">edit</a> (T &amp;object, const std::string &amp;name)</td></tr>
-<tr class="separator:a8a966ee930dde3d209514a521967e3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cc812c329eab0ddf0116d0944df9e16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a9cc812c329eab0ddf0116d0944df9e16">showPackage</a> (const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;pkg, const std::string &amp;name)</td></tr>
 <tr class="separator:a9cc812c329eab0ddf0116d0944df9e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8904bc96ce2ff05ef698f88e0d107290"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a8904bc96ce2ff05ef698f88e0d107290">editPackage</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;pkg, const std::string &amp;name)</td></tr>
 <tr class="separator:a8904bc96ce2ff05ef698f88e0d107290"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71f006c1e0a23b24f6c2a7cc225fc88b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a71f006c1e0a23b24f6c2a7cc225fc88b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a71f006c1e0a23b24f6c2a7cc225fc88b">show</a> (const T &amp;object, const std::string &amp;name)</td></tr>
+<tr class="separator:a71f006c1e0a23b24f6c2a7cc225fc88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd0b501b4ef70633c7f39098d555de1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7dd0b501b4ef70633c7f39098d555de1"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a7dd0b501b4ef70633c7f39098d555de1">edit</a> (T &amp;object, const std::string &amp;name)</td></tr>
+<tr class="separator:a7dd0b501b4ef70633c7f39098d555de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains user interface related utilities. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a8a966ee930dde3d209514a521967e3d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a966ee930dde3d209514a521967e3d3">&#9670;&nbsp;</a></span>edit()</h2>
+<a id="a7dd0b501b4ef70633c7f39098d555de1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd0b501b4ef70633c7f39098d555de1">&#9670;&nbsp;</a></span>edit()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">data::TriviallySerializable</a>&lt; T &gt; &amp;&amp;<a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">data::TriviallyDeserializable</a>&lt; T &gt; bool edit </td>
+          <td class="memname">bool cubos::core::ui::edit </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>object</em>, </td>
@@ -154,6 +157,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Shows a serializable and deserializable object's properties in the UI, allowing the user to edit the object. If any of the properties is edited, the object's deserialize() method is called. Should be called inside a ImGui::BeginTable(3)/ImGui::EndTable() block. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -209,8 +217,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 </div>
 </div>
-<a id="ab8feca199f9895e310e114fbe26fe42c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8feca199f9895e310e114fbe26fe42c">&#9670;&nbsp;</a></span>editWorld()</h2>
+<a id="a409733146bc45968a32058fa65332a22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a409733146bc45968a32058fa65332a22">&#9670;&nbsp;</a></span>editWorld()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,14 +232,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">data::Handle::SerContext&#160;</td>
-          <td class="paramname"><em>handleSerCtx</em>, </td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
+          <td class="paramname"><em>serContext</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">data::Handle::DesContext&#160;</td>
-          <td class="paramname"><em>handleDesCtx</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
+          <td class="paramname"><em>desContext</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -243,8 +251,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>ECS system which allows the user to inspect and edit the entities and components in an ECS world. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">world</td><td>World to edit. </td></tr>
-    <tr><td class="paramname">handleSerCtx</td><td>Context for serializing handles. </td></tr>
-    <tr><td class="paramname">handleDesCtx</td><td>Context for deserializing handles. </td></tr>
+    <tr><td class="paramname">serContext</td><td>Context for serializing the world. </td></tr>
+    <tr><td class="paramname">desContext</td><td>Context for deserializing the world. </td></tr>
   </table>
   </dd>
 </dl>
@@ -300,14 +308,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 </div>
 </div>
-<a id="ad1daa051dd0b9cab502bdf33ecff4fa1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1daa051dd0b9cab502bdf33ecff4fa1">&#9670;&nbsp;</a></span>show()</h2>
+<a id="a71f006c1e0a23b24f6c2a7cc225fc88b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71f006c1e0a23b24f6c2a7cc225fc88b">&#9670;&nbsp;</a></span>show()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">requires <a class="el" href="namespacecubos_1_1core_1_1data.html#af4616a179c03fe1fc8bd7f554db6c03a">data::TriviallySerializable</a>&lt; T &gt; void show </td>
+          <td class="memname">void cubos::core::ui::show </td>
           <td>(</td>
           <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>object</em>, </td>
@@ -324,6 +335,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Shows a serializable object's properties in the UI. Should be called inside a ImGui::BeginTable(2)/ImGui::EndTable() block. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -377,8 +393,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 </div>
 </div>
-<a id="afec9af589c188eb6c913fa877c29d7d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afec9af589c188eb6c913fa877c29d7d7">&#9670;&nbsp;</a></span>showWorld()</h2>
+<a id="a04bd9415bedddac10447e3e8d0a6e9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04bd9415bedddac10447e3e8d0a6e9e4">&#9670;&nbsp;</a></span>showWorld()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -392,8 +408,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">data::Handle::SerContext&#160;</td>
-          <td class="paramname"><em>handleCtx</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -405,7 +421,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>ECS system which allows the user to inspect the entities and components in an ECS world. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">world</td><td>World to show. </td></tr>
-    <tr><td class="paramname">handleCtx</td><td>Context for serializing handles. </td></tr>
+    <tr><td class="paramname">context</td><td>Context for serializing the world. </td></tr>
   </table>
   </dd>
 </dl>

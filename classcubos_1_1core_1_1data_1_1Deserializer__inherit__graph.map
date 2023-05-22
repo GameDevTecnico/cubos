@@ -1,5 +1,5 @@
 <map id="Deserializer" name="Deserializer">
-<area shape="rect" id="node1" title="Abstract class for deserializing data." alt="" coords="267,5,367,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="267,5,367,32"/>
 <area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinaryDeserializer.html" title=" " alt="" coords="5,80,148,107"/>
 <area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1JSONDeserializer.html" title="Implementation of the abstract Deserializer class for deserializing from JSON." alt="" coords="172,80,304,107"/>
 <area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1YAMLDeserializer.html" title="Implementation of the abstract Deserializer class for deserializng from YAML." alt="" coords="328,80,463,107"/>

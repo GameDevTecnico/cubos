@@ -90,43 +90,43 @@ $(document).ready(function(){initNavTree('source_8hpp_source.html',''); initResi
 <div class="title">source.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_IO_SOURCE_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_IO_SOURCE_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/event.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/window.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/keyboard.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">class </span>Context;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html">   20</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1io_1_1Source.html">Source</a></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html#acc130e179c4e465e620c22bc663af302">   25</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#acc130e179c4e465e620c22bc663af302">subscribeEvents</a>() = 0;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html#a6c110b2f5f89e2705c574899c1f3262e">   29</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#a6c110b2f5f89e2705c574899c1f3262e">unsubscribeEvents</a>() = 0;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html#afeece9efb1f71cb931e8977eefcd0be3">   33</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#afeece9efb1f71cb931e8977eefcd0be3">isTriggered</a>() = 0;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html#acc3c401b97e83bab1138be5d9d7c80a8">   37</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#acc3c401b97e83bab1138be5d9d7c80a8">createContext</a>() = 0;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    };</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_IO_SOURCE_HPP</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;cubos/core/event.hpp&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/keyboard.hpp&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/window.hpp&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">class </span>Context;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html">   21</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1io_1_1Source.html">Source</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html#acc130e179c4e465e620c22bc663af302">   26</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#acc130e179c4e465e620c22bc663af302">subscribeEvents</a>() = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html#a6c110b2f5f89e2705c574899c1f3262e">   30</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#a6c110b2f5f89e2705c574899c1f3262e">unsubscribeEvents</a>() = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html#afeece9efb1f71cb931e8977eefcd0be3">   34</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#afeece9efb1f71cb931e8977eefcd0be3">isTriggered</a>() = 0;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Source.html#acc3c401b97e83bab1138be5d9d7c80a8">   38</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a> <a class="code" href="classcubos_1_1core_1_1io_1_1Source.html#acc3c401b97e83bab1138be5d9d7c80a8">createContext</a>() = 0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    };</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:13</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:21</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:22</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html_a6c110b2f5f89e2705c574899c1f3262e"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html#a6c110b2f5f89e2705c574899c1f3262e">cubos::core::io::Source::unsubscribeEvents</a></div><div class="ttdeci">virtual void unsubscribeEvents()=0</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html_acc130e179c4e465e620c22bc663af302"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html#acc130e179c4e465e620c22bc663af302">cubos::core::io::Source::subscribeEvents</a></div><div class="ttdeci">virtual void subscribeEvents()=0</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html_acc3c401b97e83bab1138be5d9d7c80a8"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html#acc3c401b97e83bab1138be5d9d7c80a8">cubos::core::io::Source::createContext</a></div><div class="ttdeci">virtual Context createContext()=0</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html_afeece9efb1f71cb931e8977eefcd0be3"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html#afeece9efb1f71cb931e8977eefcd0be3">cubos::core::io::Source::isTriggered</a></div><div class="ttdeci">virtual bool isTriggered()=0</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1io_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div><div class="ttdoc">Contains input/output related code, such as window management and the input manager.</div><div class="ttdef"><b>Definition:</b> action.hpp:10</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1io_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div><div class="ttdoc">Contains input/output related code, such as window management and the input manager.</div><div class="ttdef"><b>Definition:</b> action.hpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->

@@ -127,8 +127,8 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a436a2f52e5fa2a16964e4531abc1b10b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a436a2f52e5fa2a16964e4531abc1b10b">mount</a> (std::string_view path, std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; archive)</td></tr>
-<tr class="separator:a436a2f52e5fa2a16964e4531abc1b10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2594bad0f3d19be9e23f3474032916b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2594bad0f3d19be9e23f3474032916b9">mount</a> (std::string_view path, const std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; &amp;archive)</td></tr>
+<tr class="separator:a2594bad0f3d19be9e23f3474032916b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46b80ac135c8f8405e27e9cc06c6c9c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a46b80ac135c8f8405e27e9cc06c6c9c4">unmount</a> (std::string_view path)</td></tr>
 <tr class="separator:a46b80ac135c8f8405e27e9cc06c6c9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a84a1dfbe9a41f5792ce118d05f8af6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2a84a1dfbe9a41f5792ce118d05f8af6">find</a> (std::string_view path)</td></tr>
@@ -153,8 +153,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:aa202a4bc61612fc6a7fcf7682449c419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8a373aeb7bc6ec0d5610476a1346bac"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ac8a373aeb7bc6ec0d5610476a1346bac">getArchive</a> () const</td></tr>
 <tr class="separator:ac8a373aeb7bc6ec0d5610476a1346bac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a485179abeb0f12bc216ab090f43704b2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a485179abeb0f12bc216ab090f43704b2">getId</a> () const</td></tr>
-<tr class="separator:a485179abeb0f12bc216ab090f43704b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4f0cbc5a32f9002336e568978545321"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#aa4f0cbc5a32f9002336e568978545321">getId</a> () const</td></tr>
+<tr class="separator:aa4f0cbc5a32f9002336e568978545321"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff1862f096953398a603e8e671291fb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#aff1862f096953398a603e8e671291fb7">getParent</a> () const</td></tr>
 <tr class="separator:aff1862f096953398a603e8e671291fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0c54134b2af7da695ef0baeaf13bfd6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ab0c54134b2af7da695ef0baeaf13bfd6">getSibling</a> () const</td></tr>
@@ -164,7 +164,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a file in the virtual file system of the engine. The virtual file system is a tree of files where you can mount archives. Examples of possible archive types are a simple single file archive or a zipped archive. Files which are not in an archive must be directories.</p>
-<p>Usage example: <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a436a2f52e5fa2a16964e4531abc1b10b">File::mount</a>("/", ...); <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a436a2f52e5fa2a16964e4531abc1b10b">File::mount</a>("/assets", ...); ... auto settingsStream = root-&gt;find("./settings.yaml")-&gt;open(File::OpenMode::Read); ... auto cubeStream = root-&gt;find("/assets/models/cube.obj")-&gt;open(File::OpenMode::Read);</p>
+<p>Usage example: <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2594bad0f3d19be9e23f3474032916b9">File::mount</a>("/", ...); <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2594bad0f3d19be9e23f3474032916b9">File::mount</a>("/assets", ...); ... auto settingsStream = root-&gt;find("./settings.yaml")-&gt;open(File::OpenMode::Read); ... auto cubeStream = root-&gt;find("/assets/models/cube.obj")-&gt;open(File::OpenMode::Read);</p>
 <p>Paths must not have a trailing slash. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a853ec24a9344437904cebfd7831effb4"></a>
@@ -178,7 +178,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="classcubos_1_1core_1_1data_1_1Handle.html" title="A generic handle to a resource.">Handle</a> to a file. This is a smart shared pointer, so that the file won't be deleted while it is still in use. </p>
+<p>Handle to a file. This is a smart shared pointer, so that the file won't be deleted while it is still in use. </p>
 
 </div>
 </div>
@@ -329,14 +329,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a485179abeb0f12bc216ab090f43704b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a485179abeb0f12bc216ab090f43704b2">&#9670;&nbsp;</a></span>getId()</h2>
+<a id="aa4f0cbc5a32f9002336e568978545321"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4f0cbc5a32f9002336e568978545321">&#9670;&nbsp;</a></span>getId()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t getId </td>
+          <td class="memname">std::size_t getId </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -383,8 +383,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a436a2f52e5fa2a16964e4531abc1b10b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a436a2f52e5fa2a16964e4531abc1b10b">&#9670;&nbsp;</a></span>mount()</h2>
+<a id="a2594bad0f3d19be9e23f3474032916b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2594bad0f3d19be9e23f3474032916b9">&#9670;&nbsp;</a></span>mount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -398,7 +398,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt;&#160;</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>archive</em>&#160;</td>
         </tr>
         <tr>

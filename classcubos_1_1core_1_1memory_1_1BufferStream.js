@@ -1,16 +1,16 @@
 var classcubos_1_1core_1_1memory_1_1BufferStream =
 [
-    [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#aee31f5e58d6718fbfc9ec19a9e5d95e1", null ],
-    [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a6676aaa408a193b90333b6dffe76c679", null ],
-    [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#af472001fad70573f07bdae96b514f07e", null ],
-    [ "~BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#ad17a2fe30dcb1fad88dc6ebde3e96b77", null ],
+    [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#acbe6d6e2f3f0f41cbfb23ce822540dc4", null ],
+    [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a6c8a01b9be8eba51ae234322e2fab5f3", null ],
+    [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a67cf37bffe2e13384ab7fefa14e9862b", null ],
+    [ "~BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a0d0b19baf8589f270a600823a643a5e9", null ],
     [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a9e246fa13b35f17473cab8d3a83c3e93", null ],
-    [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a93140831a286a65b1a64dda4aac8f33f", null ],
-    [ "eof", "classcubos_1_1core_1_1memory_1_1BufferStream.html#affe5c497f81f4cbc7bc3a75991700fbc", null ],
+    [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html#aa8f468e7b1825ae73a6d9a0d23f8bddb", null ],
+    [ "eof", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a73d5f601b6343f8c2e7fb687ef60d086", null ],
     [ "getBuffer", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a03b7df824bced12df8bf940ab18f0717", null ],
-    [ "peek", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a47ed38c5e124120381042fcde7f6691d", null ],
-    [ "read", "classcubos_1_1core_1_1memory_1_1BufferStream.html#aaf49dbbcd7f00ceb72013702ab022c40", null ],
-    [ "seek", "classcubos_1_1core_1_1memory_1_1BufferStream.html#af76e1bca26a37182b365e301bc89948c", null ],
-    [ "tell", "classcubos_1_1core_1_1memory_1_1BufferStream.html#ad282283aa58d8a575ba0dc140a2ec38a", null ],
-    [ "write", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a7b9eff743c3caefd1c2d1270009643f4", null ]
+    [ "peek", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a3013ec4f106910640106e7b5b08dd6fe", null ],
+    [ "read", "classcubos_1_1core_1_1memory_1_1BufferStream.html#adad93d726cd6c6035c90765ff4ab352a", null ],
+    [ "seek", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a4338d5b9e7520b6910f20717ee2f3efc", null ],
+    [ "tell", "classcubos_1_1core_1_1memory_1_1BufferStream.html#abda1340bc744d918f57ae7d90e11463c", null ],
+    [ "write", "classcubos_1_1core_1_1memory_1_1BufferStream.html#a29e16b5d12d3bc24e1fc8adc85699ead", null ]
 ];

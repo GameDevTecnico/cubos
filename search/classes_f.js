@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['qbmatrix_879',['QBMatrix',['../structcubos_1_1core_1_1data_1_1QBMatrix.html',1,'cubos::core::data']]],
-  ['query_880',['Query',['../classcubos_1_1core_1_1ecs_1_1Query.html',1,'cubos::core::ecs']]],
-  ['queryfetcher_881',['QueryFetcher',['../classcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher.html',1,'cubos::core::ecs::impl']]],
-  ['queryfetcher_3c_20component_20_26_20_3e_882',['QueryFetcher&lt; Component &amp; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_6_01_4.html',1,'cubos::core::ecs::impl']]],
-  ['queryfetcher_3c_20component_20_2a_20_3e_883',['QueryFetcher&lt; Component * &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_5_01_4.html',1,'cubos::core::ecs::impl']]],
-  ['queryfetcher_3c_20const_20component_20_26_20_3e_884',['QueryFetcher&lt; const Component &amp; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html',1,'cubos::core::ecs::impl']]],
-  ['queryfetcher_3c_20const_20component_20_2a_20_3e_885',['QueryFetcher&lt; const Component * &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_5_01_4.html',1,'cubos::core::ecs::impl']]],
-  ['queryinfo_886',['QueryInfo',['../structcubos_1_1core_1_1ecs_1_1QueryInfo.html',1,'cubos::core::ecs']]]
+  ['qbmatrix_899',['QBMatrix',['../structcubos_1_1core_1_1data_1_1QBMatrix.html',1,'cubos::core::data']]],
+  ['query_900',['Query',['../classcubos_1_1core_1_1ecs_1_1Query.html',1,'cubos::core::ecs']]],
+  ['queryfetcher_901',['QueryFetcher',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20optread_3c_20component_20_3e_20_3e_902',['QueryFetcher&lt; OptRead&lt; Component &gt; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptRead_3_01Component_01_4_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20optwrite_3c_20component_20_3e_20_3e_903',['QueryFetcher&lt; OptWrite&lt; Component &gt; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptWrite_3_01Component_01_4_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20read_3c_20component_20_3e_20_3e_904',['QueryFetcher&lt; Read&lt; Component &gt; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Read_3_01Component_01_4_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryfetcher_3c_20write_3c_20component_20_3e_20_3e_905',['QueryFetcher&lt; Write&lt; Component &gt; &gt;',['../structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Write_3_01Component_01_4_01_4.html',1,'cubos::core::ecs::impl']]],
+  ['queryinfo_906',['QueryInfo',['../structcubos_1_1core_1_1ecs_1_1QueryInfo.html',1,'cubos::core::ecs']]]
 ];

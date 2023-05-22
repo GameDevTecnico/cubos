@@ -108,7 +108,7 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a761a4e1f1636a96163ba2945797ea7c7"><td class="memItemLeft" align="right" valign="top"><a id="a761a4e1f1636a96163ba2945797ea7c7"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Fetched</b> = std::tuple&lt; typename <a class="el" href="classcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher.html">impl::QueryFetcher</a>&lt; ComponentTypes &gt;::Type... &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Fetched</b> = std::tuple&lt; typename <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher.html">impl::QueryFetcher</a>&lt; ComponentTypes &gt;::Type... &gt;</td></tr>
 <tr class="separator:a761a4e1f1636a96163ba2945797ea7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -132,11 +132,11 @@ Static Public Member Functions</h2></td></tr>
 class cubos::core::ecs::Query&lt; ComponentTypes &gt;</h3>
 
 <p>Contains the result of a query over all entities with some given components.</p>
-<p>An example of a valid query is: </p><pre class="fragment">Query&lt;Position&amp;, const Velocity&amp;, Rotation*, const Scale*&gt;
-</pre><p> This query will return all entities with a Position and Velocity component. Pointers to Rotation and Scale components are also passed but may be null, if the component is not present in the entity. Whenever mutability is not needed, a const reference/pointer should be used.</p>
+<p>An example of a valid query is: </p><pre class="fragment">Query&lt;Write&lt;Position&gt;, Read&lt;Velocity&gt;, OptWrite&lt;Rotation&gt;, OptRead&lt;Scale&gt;&gt;
+</pre><p> This query will return all entities with a Position and Velocity component. Accessors to Rotation and Scale components are also passed but may be null, if the component is not present in the entity. Whenever mutability is not needed, Read/OptRead should be used.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">ComponentTypes</td><td>The types of the component references to be queried. </td></tr>
+    <tr><td class="paramname">ComponentTypes</td><td>The types of the component accessors to be queried. </td></tr>
   </table>
   </dd>
 </dl>

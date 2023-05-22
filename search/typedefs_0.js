@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['callback_1456',['Callback',['../classcubos_1_1core_1_1Event.html#aca9ece8ae31e919ff79f5b12419a4a6d',1,'cubos::core::Event']]]
+  ['data_1497',['Data',['../classcubos_1_1core_1_1data_1_1Package.html#acb57915a47c3e2f4c83b11800c471109',1,'cubos::core::data::Package']]],
+  ['dictionary_1498',['Dictionary',['../classcubos_1_1core_1_1data_1_1Package.html#a906035fe329428069bcfbbdb82cf0f56',1,'cubos::core::data::Package']]]
 ];

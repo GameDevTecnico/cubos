@@ -106,10 +106,10 @@ Static Public Member Functions</h2></td></tr>
 static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a6b6586609941c46a9d473c1a3a1093fe">init</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a> &amp;renderDevice)</td></tr>
 <tr class="memdesc:a6b6586609941c46a9d473c1a3a1093fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the debug rendering system. <br /></td></tr>
 <tr class="separator:a6b6586609941c46a9d473c1a3a1093fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63111fd12b694bfebef99a9bed8120fb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a63111fd12b694bfebef99a9bed8120fb">drawCube</a> (glm::vec3 position, glm::vec3 size, float time, glm::quat rotation=glm::quat(), glm::vec3 color=glm::vec3(1))</td></tr>
-<tr class="separator:a63111fd12b694bfebef99a9bed8120fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3e8ae30312a2225f245726886edfdbe"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#ac3e8ae30312a2225f245726886edfdbe">drawWireCube</a> (glm::vec3 position, glm::vec3 size, float time, glm::quat rotation=glm::quat(), glm::vec3 color=glm::vec3(1))</td></tr>
-<tr class="separator:ac3e8ae30312a2225f245726886edfdbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93734986026d2c2af743fa2eb10b0c11"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a93734986026d2c2af743fa2eb10b0c11">drawCube</a> (glm::vec3 center, glm::vec3 size, float time, glm::quat rotation=glm::quat(), glm::vec3 color=glm::vec3(1))</td></tr>
+<tr class="separator:a93734986026d2c2af743fa2eb10b0c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fb80a02aa53a8a86cc7285bb1c749ae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a5fb80a02aa53a8a86cc7285bb1c749ae">drawWireCube</a> (glm::vec3 center, glm::vec3 size, float time, glm::quat rotation=glm::quat(), glm::vec3 color=glm::vec3(1))</td></tr>
+<tr class="separator:a5fb80a02aa53a8a86cc7285bb1c749ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d0f308677491961ffac1b5c19b1ba29"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a2d0f308677491961ffac1b5c19b1ba29">drawSphere</a> (glm::vec3 center, float radius, float time, glm::vec3 color=glm::vec3(1))</td></tr>
 <tr class="separator:a2d0f308677491961ffac1b5c19b1ba29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79932d8925d36453eeebc3c8713e78a2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a79932d8925d36453eeebc3c8713e78a2">drawWireSphere</a> (glm::vec3 center, float radius, float time, glm::vec3 color=glm::vec3(1))</td></tr>
@@ -124,8 +124,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class includes static methods to draw basic objects on screen for debugging purposes. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a63111fd12b694bfebef99a9bed8120fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63111fd12b694bfebef99a9bed8120fb">&#9670;&nbsp;</a></span>drawCube()</h2>
+<a id="a93734986026d2c2af743fa2eb10b0c11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93734986026d2c2af743fa2eb10b0c11">&#9670;&nbsp;</a></span>drawCube()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -137,7 +137,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
           <td class="memname">static void drawCube </td>
           <td>(</td>
           <td class="paramtype">glm::vec3&#160;</td>
-          <td class="paramname"><em>position</em>, </td>
+          <td class="paramname"><em>center</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -177,7 +177,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </div><div class="memdoc">
 <p>Draw a filled cube that will stay visible for a specified amount of time. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">position</td><td>Position of the cube's center in world space. </td></tr>
+    <tr><td class="paramname">center</td><td>Position of the cube's center in world space. </td></tr>
     <tr><td class="paramname">size</td><td>Size of the cube in the x, y and z dimensions in world space. </td></tr>
     <tr><td class="paramname">time</td><td>How long should the cube be visible for? </td></tr>
     <tr><td class="paramname">rotation</td><td>Rotation of the cube in world space. </td></tr>
@@ -245,8 +245,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 </div>
 </div>
-<a id="ac3e8ae30312a2225f245726886edfdbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3e8ae30312a2225f245726886edfdbe">&#9670;&nbsp;</a></span>drawWireCube()</h2>
+<a id="a5fb80a02aa53a8a86cc7285bb1c749ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fb80a02aa53a8a86cc7285bb1c749ae">&#9670;&nbsp;</a></span>drawWireCube()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +258,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
           <td class="memname">static void drawWireCube </td>
           <td>(</td>
           <td class="paramtype">glm::vec3&#160;</td>
-          <td class="paramname"><em>position</em>, </td>
+          <td class="paramname"><em>center</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -298,7 +298,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </div><div class="memdoc">
 <p>Draw a wireframe cube that will stay visible for a specified amount of time. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">position</td><td>Position of the cube's center in world space. </td></tr>
+    <tr><td class="paramname">center</td><td>Position of the cube's center in world space. </td></tr>
     <tr><td class="paramname">size</td><td>Size of the cube in the x, y and z dimensions in world space. </td></tr>
     <tr><td class="paramname">time</td><td>How long should the cube be visible for? </td></tr>
     <tr><td class="paramname">rotation</td><td>Rotation of the cube in world space. </td></tr>

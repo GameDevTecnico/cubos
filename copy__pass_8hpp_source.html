@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.9.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: engine/include/cubos/engine/gl/pps/copy_pass.hpp Source File</title>
+    <title>CUBOS.: engine/include/cubos/engine/renderer/pps/copy_pass.hpp Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -90,46 +90,42 @@ $(document).ready(function(){initNavTree('copy__pass_8hpp_source.html',''); init
 <div class="title">copy_pass.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/gl/render_device.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cubos/engine/gl/pps/pass.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>cubos::engine::gl::pps</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html">CopyPass</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">Pass</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#a1aed58eb590ec178237672d0b1ecaf35">   19</a></span>&#160;        <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#a1aed58eb590ec178237672d0b1ecaf35">CopyPass</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#a6125bde7a31d86b59e8a840ae8438f32">renderDevice</a>, glm::uvec2 size);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="comment">// Interface methods implementation.</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#a1b15f2eeafcd4dbf66500dd423f1d6a6">   23</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#a1b15f2eeafcd4dbf66500dd423f1d6a6">resize</a>(glm::uvec2 size) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#ad8720cf5ffa87b3d1f0a6d208a7dc132">   24</a></span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#ad8720cf5ffa87b3d1f0a6d208a7dc132">execute</a>(std::map&lt;Input, core::gl::Texture2D&gt;&amp; inputs, core::gl::Texture2D prev,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                             core::gl::Framebuffer out) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        glm::uvec2 size;                         </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        core::gl::ShaderPipeline pipeline;       </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> inputTexBP; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        core::gl::Sampler inputTexSampler;       </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        core::gl::VertexArray screenQuadVA;      </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    };</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;} <span class="comment">// namespace cubos::engine::gl::pps</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_ENGINE_GL_PPS_COPY_PASS_HPP</span></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:572</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">cubos::core::gl::impl::ShaderBindingPoint</a></div><div class="ttdoc">Abstract shader binding point, should not be used directly.</div><div class="ttdef"><b>Definition:</b> render_device.hpp:1028</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html">cubos::engine::gl::pps::CopyPass</a></div><div class="ttdef"><b>Definition:</b> copy_pass.hpp:15</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_html_a1aed58eb590ec178237672d0b1ecaf35"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#a1aed58eb590ec178237672d0b1ecaf35">cubos::engine::gl::pps::CopyPass::CopyPass</a></div><div class="ttdeci">CopyPass(core::gl::RenderDevice &amp;renderDevice, glm::uvec2 size)</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_html_a1b15f2eeafcd4dbf66500dd423f1d6a6"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#a1b15f2eeafcd4dbf66500dd423f1d6a6">cubos::engine::gl::pps::CopyPass::resize</a></div><div class="ttdeci">virtual void resize(glm::uvec2 size) override</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1CopyPass_html_ad8720cf5ffa87b3d1f0a6d208a7dc132"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html#ad8720cf5ffa87b3d1f0a6d208a7dc132">cubos::engine::gl::pps::CopyPass::execute</a></div><div class="ttdeci">virtual void execute(std::map&lt; Input, core::gl::Texture2D &gt; &amp;inputs, core::gl::Texture2D prev, core::gl::Framebuffer out) const override</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Pass_html"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html">cubos::engine::gl::pps::Pass</a></div><div class="ttdef"><b>Definition:</b> pass.hpp:19</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1gl_1_1pps_1_1Pass_html_a6125bde7a31d86b59e8a840ae8438f32"><div class="ttname"><a href="classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html#a6125bde7a31d86b59e8a840ae8438f32">cubos::engine::gl::pps::Pass::renderDevice</a></div><div class="ttdeci">core::gl::RenderDevice &amp; renderDevice</div><div class="ttdoc">Thhe render device to use.</div><div class="ttdef"><b>Definition:</b> pass.hpp:39</div></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/gl/render_device.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cubos/engine/renderer/pps/pass.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>cubos::engine</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1PostProcessingCopy.html">   13</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1PostProcessingCopy.html">PostProcessingCopy</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1engine_1_1PostProcessingPass.html">PostProcessingPass</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1PostProcessingCopy.html#a79887c2403a3af8657ab65374cd5fd48">   18</a></span>&#160;        <a class="code" href="classcubos_1_1engine_1_1PostProcessingCopy.html#a79887c2403a3af8657ab65374cd5fd48">PostProcessingCopy</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a>&amp; renderDevice, glm::uvec2 size);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="comment">// Interface methods implementation.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1PostProcessingCopy.html#ac402dc6997fe32ed7b04fefdfcd4635d">   22</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1PostProcessingCopy.html#ac402dc6997fe32ed7b04fefdfcd4635d">resize</a>(glm::uvec2 size) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1PostProcessingCopy.html#acc1a64287ce68f038abab9d4a403373f">   23</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1PostProcessingCopy.html#acc1a64287ce68f038abab9d4a403373f">execute</a>(std::map&lt;PostProcessingInput, core::gl::Texture2D&gt;&amp; inputs, core::gl::Texture2D prev,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                     core::gl::Framebuffer out) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        glm::uvec2 mSize;                         </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        core::gl::ShaderPipeline mPipeline;       </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">core::gl::ShaderBindingPoint</a> mInputTexBp; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        core::gl::Sampler mInputTexSampler;       </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        core::gl::VertexArray mScreenQuadVa;      </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    };</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;} <span class="comment">// namespace cubos::engine</span></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:571</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">cubos::core::gl::impl::ShaderBindingPoint</a></div><div class="ttdoc">Abstract shader binding point, should not be used directly.</div><div class="ttdef"><b>Definition:</b> render_device.hpp:1051</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1PostProcessingCopy_html"><div class="ttname"><a href="classcubos_1_1engine_1_1PostProcessingCopy.html">cubos::engine::PostProcessingCopy</a></div><div class="ttdef"><b>Definition:</b> copy_pass.hpp:14</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1PostProcessingCopy_html_a79887c2403a3af8657ab65374cd5fd48"><div class="ttname"><a href="classcubos_1_1engine_1_1PostProcessingCopy.html#a79887c2403a3af8657ab65374cd5fd48">cubos::engine::PostProcessingCopy::PostProcessingCopy</a></div><div class="ttdeci">PostProcessingCopy(core::gl::RenderDevice &amp;renderDevice, glm::uvec2 size)</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1PostProcessingCopy_html_ac402dc6997fe32ed7b04fefdfcd4635d"><div class="ttname"><a href="classcubos_1_1engine_1_1PostProcessingCopy.html#ac402dc6997fe32ed7b04fefdfcd4635d">cubos::engine::PostProcessingCopy::resize</a></div><div class="ttdeci">void resize(glm::uvec2 size) override</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1PostProcessingCopy_html_acc1a64287ce68f038abab9d4a403373f"><div class="ttname"><a href="classcubos_1_1engine_1_1PostProcessingCopy.html#acc1a64287ce68f038abab9d4a403373f">cubos::engine::PostProcessingCopy::execute</a></div><div class="ttdeci">void execute(std::map&lt; PostProcessingInput, core::gl::Texture2D &gt; &amp;inputs, core::gl::Texture2D prev, core::gl::Framebuffer out) const override</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1PostProcessingPass_html"><div class="ttname"><a href="classcubos_1_1engine_1_1PostProcessingPass.html">cubos::engine::PostProcessingPass</a></div><div class="ttdef"><b>Definition:</b> pass.hpp:19</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
@@ -137,7 +133,7 @@ $(document).ready(function(){initNavTree('copy__pass_8hpp_source.html',''); init
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_8c0082e380c30d62d95dd2a7c13ee90b.html">gl</a></li><li class="navelem"><a class="el" href="dir_83a9c0d4f0a910d32e23e4bdb19928e6.html">pps</a></li><li class="navelem"><b>copy_pass.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_87a7847ee77970235330560d79c37ce0.html">renderer</a></li><li class="navelem"><a class="el" href="dir_672562f1eb3ea0be7f3aa3e89e72ecd2.html">pps</a></li><li class="navelem"><b>copy_pass.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.9.1 </li>
   </ul>

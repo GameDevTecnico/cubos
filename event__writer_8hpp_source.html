@@ -90,45 +90,43 @@ $(document).ready(function(){initNavTree('event__writer_8hpp_source.html',''); i
 <div class="title">event_writer.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_ECS_EVENT_WRITER_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_ECS_EVENT_WRITER_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/ecs/event_pipe.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">    9</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">EventWriter</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">EventWriter</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1EventPipe.html">EventPipe&lt;T&gt;</a>&amp; pipe);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html#a9913ce0af1a8ffba663d5dfdd99553f8">push</a>(T event, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mask = DEFAULT_PUSH_MASK);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1EventPipe.html">EventPipe&lt;T&gt;</a>&amp; pipe;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    };</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// EventWriter implementation.</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">EventWriter&lt;T&gt;::EventWriter</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1EventPipe.html">EventPipe&lt;T&gt;</a>&amp; pipe) : pipe(pipe)</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;cubos/core/ecs/event_pipe.hpp&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">    8</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">EventWriter</a></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">EventWriter</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1EventPipe.html">EventPipe&lt;T&gt;</a>&amp; pipe);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html#a9913ce0af1a8ffba663d5dfdd99553f8">push</a>(T event, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mask = DEFAULT_PUSH_MASK);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1EventPipe.html">EventPipe&lt;T&gt;</a>&amp; mPipe;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    };</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">// EventWriter implementation.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">EventWriter&lt;T&gt;::EventWriter</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1EventPipe.html">EventPipe&lt;T&gt;</a>&amp; pipe)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        : mPipe(pipe)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html#a9913ce0af1a8ffba663d5dfdd99553f8">   32</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1EventWriter.html#a9913ce0af1a8ffba663d5dfdd99553f8">EventWriter&lt;T&gt;::push</a>(T event, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mask)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        this-&gt;pipe.push(event, mask);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        mPipe.push(event, mask);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;} <span class="comment">// namespace cubos::core::ecs</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1EventPipe_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html">cubos::core::ecs::EventPipe</a></div><div class="ttdef"><b>Definition:</b> event_pipe.hpp:16</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1EventWriter_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">cubos::core::ecs::EventWriter</a></div><div class="ttdef"><b>Definition:</b> event_writer.hpp:10</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1EventPipe_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html">cubos::core::ecs::EventPipe</a></div><div class="ttdef"><b>Definition:</b> event_pipe.hpp:15</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1EventWriter_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html">cubos::core::ecs::EventWriter</a></div><div class="ttdef"><b>Definition:</b> event_writer.hpp:9</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1EventWriter_html_a9913ce0af1a8ffba663d5dfdd99553f8"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html#a9913ce0af1a8ffba663d5dfdd99553f8">cubos::core::ecs::EventWriter::push</a></div><div class="ttdeci">void push(T event, unsigned int mask=DEFAULT_PUSH_MASK)</div><div class="ttdef"><b>Definition:</b> event_writer.hpp:32</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> blueprint.hpp:12</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> accessors.hpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->

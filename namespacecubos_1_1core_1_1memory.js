@@ -1,8 +1,11 @@
 var namespacecubos_1_1core_1_1memory =
 [
     [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html", "classcubos_1_1core_1_1memory_1_1BufferStream" ],
+    [ "ReadGuard", "classcubos_1_1core_1_1memory_1_1ReadGuard.html", "classcubos_1_1core_1_1memory_1_1ReadGuard" ],
+    [ "WriteGuard", "classcubos_1_1core_1_1memory_1_1WriteGuard.html", "classcubos_1_1core_1_1memory_1_1WriteGuard" ],
     [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html", "classcubos_1_1core_1_1memory_1_1StdStream" ],
     [ "Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", "classcubos_1_1core_1_1memory_1_1Stream" ],
+    [ "TypeMap", "classcubos_1_1core_1_1memory_1_1TypeMap.html", "classcubos_1_1core_1_1memory_1_1TypeMap" ],
     [ "SeekOrigin", "namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0", [
       [ "Begin", "namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0a1a06729125544cab7cee73195fc044f0", null ],
       [ "Current", "namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0a222a267cc5778206b253be35ee3ddab5", null ],

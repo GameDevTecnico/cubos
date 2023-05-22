@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['id_1462',['ID',['../classcubos_1_1core_1_1Event.html#ae273d2202bff0b49a83c92326b020543',1,'cubos::core::Event']]],
-  ['iterator_1463',['Iterator',['../classcubos_1_1core_1_1ecs_1_1World.html#a6ae6b2f3107538ada39d2717b3173d7d',1,'cubos::core::ecs::World']]]
+  ['window_1503',['Window',['../namespacecubos_1_1core_1_1io.html#a373938cb890b16a010475e7a68557737',1,'cubos::core::io']]],
+  ['windowevent_1504',['WindowEvent',['../namespacecubos_1_1core_1_1io.html#a17a64c7d8c1e2b747322f79bf21b3934',1,'cubos::core::io']]]
 ];

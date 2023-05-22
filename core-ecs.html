@@ -149,12 +149,12 @@ How do we use it?</h2>
 <div class="line">};</div>
 </div><!-- fragment --><p>So, where does the <code>update</code> logic belong? We put it in a system (which is just a function):</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> velocitySystem(</div>
-<div class="line">    <span class="keyword">const</span> DeltaTime&amp; dt,</div>
-<div class="line">    core::ecs::Query&lt;Position&amp;, const Velocity&amp;&gt; query)</div>
+<div class="line">    Read&lt;DeltaTime&gt; dt,</div>
+<div class="line">    Query&lt;Write&lt;Position&gt;, Read&lt;Velocity&gt;&gt; query)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> [entity, position, velocity] : query)</div>
 <div class="line">    {</div>
-<div class="line">        position.vec += velocity.vec * dt.value;</div>
+<div class="line">        position-&gt;vec += velocity-&gt;vec * dt-&gt;value;</div>
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>In this system we take two arguments: the delta time we want to read and a query over all entities with both positions and velocities. We request mutable reference to positions and constant references to velocities, since we only need to modify the positions.</p>
@@ -176,13 +176,13 @@ Commands</h2>
 </div><!-- fragment --><p>What if you want to create, for example, a spawner system which creates new entities? You're probably thinking that we could just pass the world to the system. This isn't allowed, since it would give 'too much' power to the system and we wouldn't be able to determine exactly its requirements and effects. So, how do we do it?</p>
 <p>Until now we've seen systems which operate only on resources and queries. Systems may also receive a third type of argument: <code>Commands</code>. <code>Commands</code> objects store <em>ECS</em> commands to be executed at a later time, when its safe to do so. A possible spawner system could look like this:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> spawnerSystem(</div>
-<div class="line">    core::ecs::Commands&amp; commands,</div>
-<div class="line">    core::ecs::Query&lt;const Spawner&amp;, const Position&amp;&gt; spawners)</div>
+<div class="line">    Commands commands,</div>
+<div class="line">    Query&lt;Read&lt;Spawner&gt;, Read&lt;Position&gt;&gt; spawners)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> [entity, spawner, position] : spawners)</div>
 <div class="line">    {</div>
 <div class="line">        commands.create(</div>
-<div class="line">            Position { position.vec },</div>
+<div class="line">            Position { position-&gt;vec },</div>
 <div class="line">            Velocity { glm::vec3(0.0f, 0.0f, 1.0f )}</div>
 <div class="line">        );</div>
 <div class="line">        commands.destroy(entity);</div>

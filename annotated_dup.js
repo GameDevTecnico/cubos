@@ -17,13 +17,14 @@ var annotated_dup =
           [ "Archive", "classcubos_1_1core_1_1data_1_1Archive.html", "classcubos_1_1core_1_1data_1_1Archive" ],
           [ "BinaryDeserializer", "classcubos_1_1core_1_1data_1_1BinaryDeserializer.html", "classcubos_1_1core_1_1data_1_1BinaryDeserializer" ],
           [ "BinarySerializer", "classcubos_1_1core_1_1data_1_1BinarySerializer.html", "classcubos_1_1core_1_1data_1_1BinarySerializer" ],
+          [ "Context", "classcubos_1_1core_1_1data_1_1Context.html", "classcubos_1_1core_1_1data_1_1Context" ],
+          [ "Debug", "structcubos_1_1core_1_1data_1_1Debug.html", "structcubos_1_1core_1_1data_1_1Debug" ],
           [ "DebugSerializer", "classcubos_1_1core_1_1data_1_1DebugSerializer.html", "classcubos_1_1core_1_1data_1_1DebugSerializer" ],
           [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html", "classcubos_1_1core_1_1data_1_1Deserializer" ],
           [ "EmbeddedArchive", "classcubos_1_1core_1_1data_1_1EmbeddedArchive.html", "classcubos_1_1core_1_1data_1_1EmbeddedArchive" ],
           [ "File", "classcubos_1_1core_1_1data_1_1File.html", "classcubos_1_1core_1_1data_1_1File" ],
           [ "FileStream", "classcubos_1_1core_1_1data_1_1FileStream.html", "classcubos_1_1core_1_1data_1_1FileStream" ],
           [ "FileSystem", "classcubos_1_1core_1_1data_1_1FileSystem.html", "classcubos_1_1core_1_1data_1_1FileSystem" ],
-          [ "Handle", "classcubos_1_1core_1_1data_1_1Handle.html", "classcubos_1_1core_1_1data_1_1Handle" ],
           [ "JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", "classcubos_1_1core_1_1data_1_1JSONDeserializer" ],
           [ "JSONSerializer", "classcubos_1_1core_1_1data_1_1JSONSerializer.html", "classcubos_1_1core_1_1data_1_1JSONSerializer" ],
           [ "Package", "classcubos_1_1core_1_1data_1_1Package.html", "classcubos_1_1core_1_1data_1_1Package" ],
@@ -36,16 +37,17 @@ var annotated_dup =
         ] ],
         [ "ecs", "namespacecubos_1_1core_1_1ecs.html", [
           [ "impl", "namespacecubos_1_1core_1_1ecs_1_1impl.html", [
-            [ "QueryFetcher", "classcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher.html", null ],
-            [ "QueryFetcher< Component & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_6_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_6_01_4" ],
-            [ "QueryFetcher< const Component & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4" ],
-            [ "QueryFetcher< Component * >", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_5_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_5_01_4" ],
-            [ "QueryFetcher< const Component * >", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_5_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_5_01_4" ],
+            [ "QueryFetcher", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher.html", null ],
+            [ "QueryFetcher< Write< Component > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Write_3_01Component_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Write_3_01Component_01_4_01_4" ],
+            [ "QueryFetcher< Read< Component > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Read_3_01Component_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Read_3_01Component_01_4_01_4" ],
+            [ "QueryFetcher< OptWrite< Component > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptWrite_3_01Component_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptWrite_3_01Component_01_4_01_4" ],
+            [ "QueryFetcher< OptRead< Component > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptRead_3_01Component_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptRead_3_01Component_01_4_01_4" ],
             [ "SystemFetcher", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html", null ],
-            [ "SystemFetcher< R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01R_01_6_01_4" ],
-            [ "SystemFetcher< const R & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01const_01R_01_6_01_4" ],
+            [ "SystemFetcher< Write< R > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Write_3_01R_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Write_3_01R_01_4_01_4" ],
+            [ "SystemFetcher< Read< R > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Read_3_01R_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Read_3_01R_01_4_01_4" ],
             [ "SystemFetcher< Query< ComponentTypes... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Query_3_01ComponentTypes_8_8_8_01_4_01_4" ],
-            [ "SystemFetcher< World & >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01World_01_6_01_4" ],
+            [ "SystemFetcher< Write< World > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Write_3_01World_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Write_3_01World_01_4_01_4" ],
+            [ "SystemFetcher< Read< World > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Read_3_01World_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Read_3_01World_01_4_01_4" ],
             [ "SystemFetcher< Commands >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01Commands_01_4" ],
             [ "SystemFetcher< EventReader< T, M > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01EventReader_3_01T_00_01M_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01EventReader_3_01T_00_01M_01_4_01_4" ],
             [ "SystemFetcher< EventWriter< T > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01EventWriter_3_01T_01_4_01_4.html", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher_3_01EventWriter_3_01T_01_4_01_4" ],
@@ -58,13 +60,15 @@ var annotated_dup =
             [ "Index< T, std::tuple< T, Types... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1Index_3_01T_00_01std_1_1tuple_3_01T_00_01Types_8_8_8_01_4_01_4.html", null ],
             [ "Index< T, std::tuple< U, Types... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1Index_3_01T_00_01std_1_1tuple_3_01U_00_01Types_8_8_8_01_4_01_4.html", null ]
           ] ],
+          [ "Read", "classcubos_1_1core_1_1ecs_1_1Read.html", "classcubos_1_1core_1_1ecs_1_1Read" ],
+          [ "Write", "classcubos_1_1core_1_1ecs_1_1Write.html", "classcubos_1_1core_1_1ecs_1_1Write" ],
+          [ "OptRead", "classcubos_1_1core_1_1ecs_1_1OptRead.html", "classcubos_1_1core_1_1ecs_1_1OptRead" ],
+          [ "OptWrite", "classcubos_1_1core_1_1ecs_1_1OptWrite.html", "classcubos_1_1core_1_1ecs_1_1OptWrite" ],
           [ "Blueprint", "classcubos_1_1core_1_1ecs_1_1Blueprint.html", "classcubos_1_1core_1_1ecs_1_1Blueprint" ],
           [ "EntityBuilder", "classcubos_1_1core_1_1ecs_1_1EntityBuilder.html", "classcubos_1_1core_1_1ecs_1_1EntityBuilder" ],
           [ "BlueprintBuilder", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder" ],
           [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html", "classcubos_1_1core_1_1ecs_1_1Commands" ],
           [ "CommandBuffer", "classcubos_1_1core_1_1ecs_1_1CommandBuffer.html", "classcubos_1_1core_1_1ecs_1_1CommandBuffer" ],
-          [ "ComponentStorage", "structcubos_1_1core_1_1ecs_1_1ComponentStorage.html", null ],
-          [ "ComponentStorage< T >", "structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4.html", "structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4" ],
           [ "ReadStorage", "classcubos_1_1core_1_1ecs_1_1ReadStorage.html", "classcubos_1_1core_1_1ecs_1_1ReadStorage" ],
           [ "WriteStorage", "classcubos_1_1core_1_1ecs_1_1WriteStorage.html", "classcubos_1_1core_1_1ecs_1_1WriteStorage" ],
           [ "ComponentManager", "classcubos_1_1core_1_1ecs_1_1ComponentManager.html", "classcubos_1_1core_1_1ecs_1_1ComponentManager" ],
@@ -157,64 +161,56 @@ var annotated_dup =
         ] ],
         [ "memory", "namespacecubos_1_1core_1_1memory.html", [
           [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html", "classcubos_1_1core_1_1memory_1_1BufferStream" ],
+          [ "ReadGuard", "classcubos_1_1core_1_1memory_1_1ReadGuard.html", "classcubos_1_1core_1_1memory_1_1ReadGuard" ],
+          [ "WriteGuard", "classcubos_1_1core_1_1memory_1_1WriteGuard.html", "classcubos_1_1core_1_1memory_1_1WriteGuard" ],
           [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html", "classcubos_1_1core_1_1memory_1_1StdStream" ],
-          [ "Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", "classcubos_1_1core_1_1memory_1_1Stream" ]
+          [ "Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", "classcubos_1_1core_1_1memory_1_1Stream" ],
+          [ "TypeMap", "classcubos_1_1core_1_1memory_1_1TypeMap.html", "classcubos_1_1core_1_1memory_1_1TypeMap" ]
         ] ],
-        [ "Event", "classcubos_1_1core_1_1Event.html", "classcubos_1_1core_1_1Event" ],
         [ "Settings", "classcubos_1_1core_1_1Settings.html", "classcubos_1_1core_1_1Settings" ],
         [ "ThreadPool", "classcubos_1_1core_1_1ThreadPool.html", "classcubos_1_1core_1_1ThreadPool" ]
       ] ],
       [ "engine", null, [
-        [ "data", null, [
-          [ "impl", null, [
-            [ "GridLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1GridLoader" ],
-            [ "PaletteLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1PaletteLoader" ],
-            [ "SceneLoader", "classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html", "classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader" ]
-          ] ],
-          [ "Asset", "classcubos_1_1engine_1_1data_1_1Asset.html", "classcubos_1_1engine_1_1data_1_1Asset" ],
-          [ "AssetManager", "classcubos_1_1engine_1_1data_1_1AssetManager.html", "classcubos_1_1engine_1_1data_1_1AssetManager" ],
-          [ "Grid", "structcubos_1_1engine_1_1data_1_1Grid.html", "structcubos_1_1engine_1_1data_1_1Grid" ],
-          [ "Loader", "classcubos_1_1engine_1_1data_1_1Loader.html", "classcubos_1_1engine_1_1data_1_1Loader" ],
-          [ "Meta", "classcubos_1_1engine_1_1data_1_1Meta.html", "classcubos_1_1engine_1_1data_1_1Meta" ],
-          [ "Palette", "structcubos_1_1engine_1_1data_1_1Palette.html", "structcubos_1_1engine_1_1data_1_1Palette" ],
-          [ "Scene", "structcubos_1_1engine_1_1data_1_1Scene.html", "structcubos_1_1engine_1_1data_1_1Scene" ]
+        [ "impl", "namespacecubos_1_1engine_1_1impl.html", [
+          [ "RendererGrid", "classcubos_1_1engine_1_1impl_1_1RendererGrid.html", "classcubos_1_1engine_1_1impl_1_1RendererGrid" ]
         ] ],
-        [ "ecs", null, [
-          [ "Camera", "structcubos_1_1engine_1_1ecs_1_1Camera.html", "structcubos_1_1engine_1_1ecs_1_1Camera" ],
-          [ "Grid", "structcubos_1_1engine_1_1ecs_1_1Grid.html", "structcubos_1_1engine_1_1ecs_1_1Grid" ],
-          [ "LocalToWorld", "structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html", "structcubos_1_1engine_1_1ecs_1_1LocalToWorld" ],
-          [ "Position", "structcubos_1_1engine_1_1ecs_1_1Position.html", "structcubos_1_1engine_1_1ecs_1_1Position" ],
-          [ "Rotation", "structcubos_1_1engine_1_1ecs_1_1Rotation.html", "structcubos_1_1engine_1_1ecs_1_1Rotation" ],
-          [ "Scale", "structcubos_1_1engine_1_1ecs_1_1Scale.html", "structcubos_1_1engine_1_1ecs_1_1Scale" ]
+        [ "tools", null, [
+          [ "EntitySelector", "structcubos_1_1engine_1_1tools_1_1EntitySelector.html", "structcubos_1_1engine_1_1tools_1_1EntitySelector" ]
         ] ],
-        [ "gl", null, [
-          [ "deferred", null, [
-            [ "Renderer", "classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer.html", "classcubos_1_1engine_1_1gl_1_1deferred_1_1Renderer" ]
-          ] ],
-          [ "impl", "namespacecubos_1_1engine_1_1gl_1_1impl.html", [
-            [ "RendererGrid", "classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid.html", "classcubos_1_1engine_1_1gl_1_1impl_1_1RendererGrid" ]
-          ] ],
-          [ "pps", null, [
-            [ "BloomPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1BloomPass" ],
-            [ "CopyPass", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1CopyPass" ],
-            [ "Manager", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1Manager" ],
-            [ "Pass", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass.html", "classcubos_1_1engine_1_1gl_1_1pps_1_1Pass" ]
-          ] ],
-          [ "Frame", "classcubos_1_1engine_1_1gl_1_1Frame.html", "classcubos_1_1engine_1_1gl_1_1Frame" ],
-          [ "BaseRenderer", "classcubos_1_1engine_1_1gl_1_1BaseRenderer.html", "classcubos_1_1engine_1_1gl_1_1BaseRenderer" ]
-        ] ],
-        [ "plugins", null, [
-          [ "tools", null, [
-            [ "EntitySelector", "structcubos_1_1engine_1_1plugins_1_1tools_1_1EntitySelector.html", "structcubos_1_1engine_1_1plugins_1_1tools_1_1EntitySelector" ]
-          ] ],
-          [ "ActiveCamera", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera.html", "structcubos_1_1engine_1_1plugins_1_1ActiveCamera" ]
-        ] ],
+        [ "Asset", "classcubos_1_1engine_1_1Asset.html", "classcubos_1_1engine_1_1Asset" ],
+        [ "AnyAsset", "classcubos_1_1engine_1_1AnyAsset.html", "classcubos_1_1engine_1_1AnyAsset" ],
+        [ "Assets", "classcubos_1_1engine_1_1Assets.html", "classcubos_1_1engine_1_1Assets" ],
+        [ "BinaryBridge", "classcubos_1_1engine_1_1BinaryBridge.html", "classcubos_1_1engine_1_1BinaryBridge" ],
+        [ "BinaryBridgeImpl", "classcubos_1_1engine_1_1BinaryBridgeImpl.html", "classcubos_1_1engine_1_1BinaryBridgeImpl" ],
+        [ "AssetBridge", "classcubos_1_1engine_1_1AssetBridge.html", "classcubos_1_1engine_1_1AssetBridge" ],
+        [ "AssetMeta", "classcubos_1_1engine_1_1AssetMeta.html", "classcubos_1_1engine_1_1AssetMeta" ],
         [ "DeltaTime", "structcubos_1_1engine_1_1DeltaTime.html", "structcubos_1_1engine_1_1DeltaTime" ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
         [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", "structcubos_1_1engine_1_1Arguments" ],
         [ "TagBuilder", "classcubos_1_1engine_1_1TagBuilder.html", "classcubos_1_1engine_1_1TagBuilder" ],
         [ "SystemBuilder", "classcubos_1_1engine_1_1SystemBuilder.html", "classcubos_1_1engine_1_1SystemBuilder" ],
-        [ "Cubos", "classcubos_1_1engine_1_1Cubos.html", "classcubos_1_1engine_1_1Cubos" ]
+        [ "Cubos", "classcubos_1_1engine_1_1Cubos.html", "classcubos_1_1engine_1_1Cubos" ],
+        [ "DeferredRenderer", "classcubos_1_1engine_1_1DeferredRenderer.html", "classcubos_1_1engine_1_1DeferredRenderer" ],
+        [ "RendererFrame", "classcubos_1_1engine_1_1RendererFrame.html", "classcubos_1_1engine_1_1RendererFrame" ],
+        [ "SpotLight", "structcubos_1_1engine_1_1SpotLight.html", "structcubos_1_1engine_1_1SpotLight" ],
+        [ "DirectionalLight", "structcubos_1_1engine_1_1DirectionalLight.html", "structcubos_1_1engine_1_1DirectionalLight" ],
+        [ "PointLight", "structcubos_1_1engine_1_1PointLight.html", "structcubos_1_1engine_1_1PointLight" ],
+        [ "RenderableGrid", "structcubos_1_1engine_1_1RenderableGrid.html", "structcubos_1_1engine_1_1RenderableGrid" ],
+        [ "Camera", "structcubos_1_1engine_1_1Camera.html", "structcubos_1_1engine_1_1Camera" ],
+        [ "ActiveCamera", "structcubos_1_1engine_1_1ActiveCamera.html", "structcubos_1_1engine_1_1ActiveCamera" ],
+        [ "PostProcessingBloom", "classcubos_1_1engine_1_1PostProcessingBloom.html", "classcubos_1_1engine_1_1PostProcessingBloom" ],
+        [ "PostProcessingCopy", "classcubos_1_1engine_1_1PostProcessingCopy.html", "classcubos_1_1engine_1_1PostProcessingCopy" ],
+        [ "PostProcessingManager", "classcubos_1_1engine_1_1PostProcessingManager.html", "classcubos_1_1engine_1_1PostProcessingManager" ],
+        [ "PostProcessingPass", "classcubos_1_1engine_1_1PostProcessingPass.html", "classcubos_1_1engine_1_1PostProcessingPass" ],
+        [ "BaseRenderer", "classcubos_1_1engine_1_1BaseRenderer.html", "classcubos_1_1engine_1_1BaseRenderer" ],
+        [ "SceneBridge", "classcubos_1_1engine_1_1SceneBridge.html", "classcubos_1_1engine_1_1SceneBridge" ],
+        [ "Scene", "structcubos_1_1engine_1_1Scene.html", "structcubos_1_1engine_1_1Scene" ],
+        [ "LocalToWorld", "structcubos_1_1engine_1_1LocalToWorld.html", "structcubos_1_1engine_1_1LocalToWorld" ],
+        [ "Position", "structcubos_1_1engine_1_1Position.html", "structcubos_1_1engine_1_1Position" ],
+        [ "Rotation", "structcubos_1_1engine_1_1Rotation.html", "structcubos_1_1engine_1_1Rotation" ],
+        [ "Scale", "structcubos_1_1engine_1_1Scale.html", "structcubos_1_1engine_1_1Scale" ],
+        [ "GridBridge", "classcubos_1_1engine_1_1GridBridge.html", null ],
+        [ "PaletteBridge", "classcubos_1_1engine_1_1PaletteBridge.html", null ]
       ] ]
     ] ]
 ];

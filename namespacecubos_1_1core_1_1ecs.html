@@ -89,8 +89,7 @@ $(document).ready(function(){initNavTree('namespacecubos_1_1core_1_1ecs.html',''
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">cubos::core::ecs Namespace Reference</div>  </div>
 </div><!--header-->
@@ -106,6 +105,14 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Read.html">Read</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Write.html">Write</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1OptRead.html">OptRead</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1OptWrite.html">OptWrite</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Blueprint.html">Blueprint</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html">EntityBuilder</a></td></tr>
@@ -118,10 +125,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html">CommandBuffer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object responsible for storing ECS commands to execute them later.  <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1ComponentStorage.html">ComponentStorage</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4.html">ComponentStorage&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ReadStorage.html">ReadStorage</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility struct used to reference component storages for reading.  <a href="classcubos_1_1core_1_1ecs_1_1ReadStorage.html#details">More...</a><br /></td></tr>
@@ -189,29 +192,23 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9e81f6d785dcfa68dcb144999aeccbf9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a9e81f6d785dcfa68dcb144999aeccbf9"><td class="memTemplItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ecs.html#a9e81f6d785dcfa68dcb144999aeccbf9">getComponentName</a> ()</td></tr>
-<tr class="separator:a9e81f6d785dcfa68dcb144999aeccbf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a458c164d4dfe1f31240bea7a3bc7330d"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ecs.html#a458c164d4dfe1f31240bea7a3bc7330d">getComponentName</a> (std::type_index type)</td></tr>
-<tr class="separator:a458c164d4dfe1f31240bea7a3bc7330d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a0d2f4625a3a355f8c7b59782980a0230"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a0d2f4625a3a355f8c7b59782980a0230"><td class="memTemplItemLeft" align="right" valign="top">concept&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ComponentUsingStorage</b></td></tr>
-<tr class="separator:a0d2f4625a3a355f8c7b59782980a0230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a434725f95682987f03cf10fedb197adb"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a434725f95682987f03cf10fedb197adb"><td class="memTemplItemLeft" align="right" valign="top">std::optional&lt; std::string_view &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ecs.html#a434725f95682987f03cf10fedb197adb">getComponentName</a> ()</td></tr>
+<tr class="separator:a434725f95682987f03cf10fedb197adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c0b7f1425b4566c283cb721bea3862a"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::string_view &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ecs.html#a8c0b7f1425b4566c283cb721bea3862a">getComponentName</a> (std::type_index type)</td></tr>
+<tr class="separator:a8c0b7f1425b4566c283cb721bea3862a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains the Entity-Component-System framework. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a9e81f6d785dcfa68dcb144999aeccbf9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e81f6d785dcfa68dcb144999aeccbf9">&#9670;&nbsp;</a></span>getComponentName() <span class="overload">[1/2]</span></h2>
+<a id="a434725f95682987f03cf10fedb197adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a434725f95682987f03cf10fedb197adb">&#9670;&nbsp;</a></span>getComponentName() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const std::string &amp; getComponentName </td>
+          <td class="memname">std::optional&lt; std::string_view &gt; getComponentName </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -228,14 +225,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a458c164d4dfe1f31240bea7a3bc7330d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a458c164d4dfe1f31240bea7a3bc7330d">&#9670;&nbsp;</a></span>getComponentName() <span class="overload">[2/2]</span></h2>
+<a id="a8c0b7f1425b4566c283cb721bea3862a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c0b7f1425b4566c283cb721bea3862a">&#9670;&nbsp;</a></span>getComponentName() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const std::string&amp; cubos::core::ecs::getComponentName </td>
+          <td class="memname">std::optional&lt;std::string_view&gt; cubos::core::ecs::getComponentName </td>
           <td>(</td>
           <td class="paramtype">std::type_index&#160;</td>
           <td class="paramname"><em>type</em></td><td>)</td>
@@ -251,25 +248,6 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The registered name of the component type. </dd></dl>
 
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a0d2f4625a3a355f8c7b59782980a0230"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d2f4625a3a355f8c7b59782980a0230">&#9670;&nbsp;</a></span>ComponentUsingStorage</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">concept ComponentUsingStorage</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= requires</div>
-<div class="line">    {</div>
-<div class="line">        <span class="keyword">typename</span> T::Storage;</div>
-<div class="line">    }</div>
-</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

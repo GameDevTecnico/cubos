@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.9.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: engine/include/cubos/engine/ecs/local_to_world.hpp Source File</title>
+    <title>CUBOS.: engine/include/cubos/engine/transform/local_to_world.hpp Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -90,24 +90,19 @@ $(document).ready(function(){initNavTree('local__to__world_8hpp_source.html','')
 <div class="title">local_to_world.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_ENGINE_ECS_LOCAL_TO_WORLD_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_ENGINE_ECS_LOCAL_TO_WORLD_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;components/base.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>cubos::engine::ecs</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html">   12</a></span>&#160;    <span class="keyword">struct </span>[[cubos::component(&quot;cubos/local_to_world&quot;, VecStorage)]] <a class="code" href="structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html">LocalToWorld</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html#adc68cc75fb10fc123468ad032281061a">   14</a></span>&#160;        glm::mat4 mat = glm::mat4(1.0f); </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    };</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;} <span class="comment">// namespace cubos::engine::ecs</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_ENGINE_ECS_LOCAL_TO_WORLD_HPP</span></div>
-<div class="ttc" id="astructcubos_1_1engine_1_1ecs_1_1LocalToWorld_html"><div class="ttname"><a href="structcubos_1_1engine_1_1ecs_1_1LocalToWorld.html">cubos::engine::ecs::LocalToWorld</a></div><div class="ttdef"><b>Definition:</b> local_to_world.hpp:13</div></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span>cubos::engine</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1LocalToWorld.html">    9</a></span>&#160;    <span class="keyword">struct </span>[[cubos::component(&quot;cubos/local_to_world&quot;, VecStorage)]] <a class="code" href="structcubos_1_1engine_1_1LocalToWorld.html">LocalToWorld</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    {</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1LocalToWorld.html#adc68cc75fb10fc123468ad032281061a">   11</a></span>&#160;        glm::mat4 mat = glm::mat4(1.0F); </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    };</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;} <span class="comment">// namespace cubos::engine</span></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1LocalToWorld_html"><div class="ttname"><a href="structcubos_1_1engine_1_1LocalToWorld.html">cubos::engine::LocalToWorld</a></div><div class="ttdef"><b>Definition:</b> local_to_world.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
@@ -115,7 +110,7 @@ $(document).ready(function(){initNavTree('local__to__world_8hpp_source.html','')
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_43e067ecca7f58961b2f57e200c1ba65.html">ecs</a></li><li class="navelem"><b>local_to_world.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_5f701044e65d6c264a6c1dc66b1052c2.html">transform</a></li><li class="navelem"><b>local_to_world.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.9.1 </li>
   </ul>

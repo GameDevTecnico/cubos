@@ -98,26 +98,26 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1gl_1_1Palette.ht
 <p>Represents a palette of materials. Supports up to 65535 materials.  
  <a href="classcubos_1_1core_1_1gl_1_1Palette.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="core_2include_2cubos_2core_2gl_2palette_8hpp_source.html">palette.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="palette_8hpp_source.html">palette.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a99a3c13282acbe86e8f6e196eb0b52ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a99a3c13282acbe86e8f6e196eb0b52ab">Palette</a> (std::vector&lt; <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a> &gt; &amp;&amp;materials)</td></tr>
 <tr class="separator:a99a3c13282acbe86e8f6e196eb0b52ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55bd742c315cc7a292eb2a83ce86ae73"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a55bd742c315cc7a292eb2a83ce86ae73">getData</a> () const</td></tr>
-<tr class="separator:a55bd742c315cc7a292eb2a83ce86ae73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2935e02624493a655bf6933d816202a1"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a2935e02624493a655bf6933d816202a1">getSize</a> () const</td></tr>
-<tr class="separator:a2935e02624493a655bf6933d816202a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27ebbf355914305153588b49acbc4988"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a27ebbf355914305153588b49acbc4988">data</a> () const</td></tr>
+<tr class="separator:a27ebbf355914305153588b49acbc4988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b9925c1bf7886521162558475fd1ceb"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a0b9925c1bf7886521162558475fd1ceb">size</a> () const</td></tr>
+<tr class="separator:a0b9925c1bf7886521162558475fd1ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c1b99da06076688c4c4c1ae1aa267e6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a0c1b99da06076688c4c4c1ae1aa267e6">get</a> (uint16_t index) const</td></tr>
 <tr class="separator:a0c1b99da06076688c4c4c1ae1aa267e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ee5ca8b838cd52afb4d9ab4867dd819"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a8ee5ca8b838cd52afb4d9ab4867dd819">set</a> (uint16_t index, const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a> &amp;material)</td></tr>
 <tr class="separator:a8ee5ca8b838cd52afb4d9ab4867dd819"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4313ab656cfe138ac43679e867fa846"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#ae4313ab656cfe138ac43679e867fa846">find</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a> &amp;material) const</td></tr>
 <tr class="separator:ae4313ab656cfe138ac43679e867fa846"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae00e769dc3481d21d02adcb4127c5a9d"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#ae00e769dc3481d21d02adcb4127c5a9d">add</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a> &amp;material, float similarity=1.0f)</td></tr>
-<tr class="separator:ae00e769dc3481d21d02adcb4127c5a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48251d037f55b4bfb8a7cfc5f0ddf8bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a48251d037f55b4bfb8a7cfc5f0ddf8bf">merge</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a> &amp;palette, float similarity=1.0f)</td></tr>
-<tr class="separator:a48251d037f55b4bfb8a7cfc5f0ddf8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30763c771b71ba596f27ae8f609152b0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a30763c771b71ba596f27ae8f609152b0">add</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a> &amp;material, float similarity=1.0F)</td></tr>
+<tr class="separator:a30763c771b71ba596f27ae8f609152b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad1b295cd4e56d3529e2dc1286ab1d52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#aad1b295cd4e56d3529e2dc1286ab1d52">merge</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">Palette</a> &amp;palette, float similarity=1.0F)</td></tr>
+<tr class="separator:aad1b295cd4e56d3529e2dc1286ab1d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -156,8 +156,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae00e769dc3481d21d02adcb4127c5a9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae00e769dc3481d21d02adcb4127c5a9d">&#9670;&nbsp;</a></span>add()</h2>
+<a id="a30763c771b71ba596f27ae8f609152b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30763c771b71ba596f27ae8f609152b0">&#9670;&nbsp;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,7 +172,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>similarity</em> = <code>1.0f</code>&#160;</td>
+          <td class="paramname"><em>similarity</em> = <code>1.0F</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -189,6 +189,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The index of the material in the palette. </dd></dl>
+
+</div>
+</div>
+<a id="a27ebbf355914305153588b49acbc4988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27ebbf355914305153588b49acbc4988">&#9670;&nbsp;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a>* data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the array of materials on the palette. </dd></dl>
 
 </div>
 </div>
@@ -242,44 +260,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b>
 
 </div>
 </div>
-<a id="a55bd742c315cc7a292eb2a83ce86ae73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55bd742c315cc7a292eb2a83ce86ae73">&#9670;&nbsp;</a></span>getData()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structcubos_1_1core_1_1gl_1_1Material.html">Material</a>* getData </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the array of materials on the palette. </dd></dl>
-
-</div>
-</div>
-<a id="a2935e02624493a655bf6933d816202a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2935e02624493a655bf6933d816202a1">&#9670;&nbsp;</a></span>getSize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t getSize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>The number of materials in the palette. </dd></dl>
-
-</div>
-</div>
-<a id="a48251d037f55b4bfb8a7cfc5f0ddf8bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48251d037f55b4bfb8a7cfc5f0ddf8bf">&#9670;&nbsp;</a></span>merge()</h2>
+<a id="aad1b295cd4e56d3529e2dc1286ab1d52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad1b295cd4e56d3529e2dc1286ab1d52">&#9670;&nbsp;</a></span>merge()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -294,7 +276,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>similarity</em> = <code>1.0f</code>&#160;</td>
+          <td class="paramname"><em>similarity</em> = <code>1.0F</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -348,8 +330,26 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>data::deserialize</b>
 
 </div>
 </div>
+<a id="a0b9925c1bf7886521162558475fd1ceb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b9925c1bf7886521162558475fd1ceb">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The number of materials in the palette. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>core/include/cubos/core/gl/<a class="el" href="core_2include_2cubos_2core_2gl_2palette_8hpp_source.html">palette.hpp</a></li>
+<li>core/include/cubos/core/gl/<a class="el" href="palette_8hpp_source.html">palette.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

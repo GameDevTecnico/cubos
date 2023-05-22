@@ -90,20 +90,20 @@ $(document).ready(function(){initNavTree('button__press_8hpp_source.html',''); i
 <div class="title">button_press.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_IO_BUTTON_PRESS_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_IO_BUTTON_PRESS_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/event.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/window.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/keyboard.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/sources/source.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;cubos/core/event.hpp&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/keyboard.hpp&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/sources/source.hpp&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/window.hpp&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
@@ -131,7 +131,6 @@ $(document).ready(function(){initNavTree('button__press_8hpp_source.html',''); i
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">void</span> handleButtonDown();</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    };</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_IO_BUTTON_PRESS_HPP</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html">cubos::core::io::ButtonPress</a></div><div class="ttdef"><b>Definition:</b> button_press.hpp:25</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html_a13064fc65c4c3537b86e189f14c04565"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html#a13064fc65c4c3537b86e189f14c04565">cubos::core::io::ButtonPress::unsubscribeEvents</a></div><div class="ttdeci">void unsubscribeEvents() override</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html_a263b0e241578334737ad0c1e8eb2820e"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html#a263b0e241578334737ad0c1e8eb2820e">cubos::core::io::ButtonPress::ButtonPress</a></div><div class="ttdeci">ButtonPress(cubos::core::io::Key key)</div></div>
@@ -140,9 +139,9 @@ $(document).ready(function(){initNavTree('button__press_8hpp_source.html',''); i
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html_aae87450ddb504d187d7f686671296b98"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html#aae87450ddb504d187d7f686671296b98">cubos::core::io::ButtonPress::subscribeEvents</a></div><div class="ttdeci">void subscribeEvents() override</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1ButtonPress_html_ad544c77ef234e9c6d5e0982de065b668"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1ButtonPress.html#ad544c77ef234e9c6d5e0982de065b668">cubos::core::io::ButtonPress::createContext</a></div><div class="ttdeci">Context createContext() override</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:13</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:21</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1io_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div><div class="ttdoc">Contains input/output related code, such as window management and the input manager.</div><div class="ttdef"><b>Definition:</b> action.hpp:10</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1io_html_ab3c7af4820830f9166ede9e5623c4e73"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a></div><div class="ttdeci">Key</div><div class="ttdoc">Keyboard key codes enum.</div><div class="ttdef"><b>Definition:</b> keyboard.hpp:8</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:22</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1io_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div><div class="ttdoc">Contains input/output related code, such as window management and the input manager.</div><div class="ttdef"><b>Definition:</b> action.hpp:9</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1io_html_ab3c7af4820830f9166ede9e5623c4e73"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html#ab3c7af4820830f9166ede9e5623c4e73">cubos::core::io::Key</a></div><div class="ttdeci">Key</div><div class="ttdoc">Keyboard key codes enum.</div><div class="ttdef"><b>Definition:</b> keyboard.hpp:7</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1io_html_ac1ec3647c005eacad401b06e7e18f711"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html#ac1ec3647c005eacad401b06e7e18f711">cubos::core::io::MouseButton</a></div><div class="ttdeci">MouseButton</div><div class="ttdoc">Mouse button codes enum.</div><div class="ttdef"><b>Definition:</b> window.hpp:25</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

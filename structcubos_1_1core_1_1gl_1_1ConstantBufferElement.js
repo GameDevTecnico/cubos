@@ -1,7 +1,7 @@
 var structcubos_1_1core_1_1gl_1_1ConstantBufferElement =
 [
     [ "name", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html#a1561527e577ef66cb4c747438e7efd3b", null ],
-    [ "offset", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html#aadb6d6eb83e646653a1402032e45dcab", null ],
-    [ "size", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html#a854352f53b148adc24983a58a1866d66", null ],
-    [ "stride", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html#a3f19cd85df5258a38e4618a89bd5ff46", null ]
+    [ "offset", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html#afe4250469344e85893111b93fddc96ca", null ],
+    [ "size", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html#a15be4f36d9c953254b9d6d64bbc8590e", null ],
+    [ "stride", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html#aae4b42a5bc0f8441bf3cb20ba767e99c", null ]
 ];

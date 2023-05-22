@@ -90,14 +90,14 @@ $(document).ready(function(){initNavTree('resource__manager_8hpp_source.html',''
 <div class="title">resource_manager.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_ECS_RESOURCE_MANAGER_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_CORE_ECS_RESOURCE_MANAGER_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/ecs/world.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;shared_mutex&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;typeindex&gt;</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;shared_mutex&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;typeindex&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;cubos/core/ecs/world.hpp&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('resource__manager_8hpp_source.html',''
 <div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a>&amp;&amp;);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a>&amp;&amp; <span class="comment">/*other*/</span>) noexcept;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">const</span> T&amp; <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html#a9681b4de0a8572cf68ac6025484bfcef">get</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
@@ -114,15 +114,15 @@ $(document).ready(function(){initNavTree('resource__manager_8hpp_source.html',''
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a>(<span class="keyword">const</span> T&amp; resource, std::shared_lock&lt;std::shared_mutex&gt;&amp;&amp; lock);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">const</span> T&amp; resource;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        std::shared_lock&lt;std::shared_mutex&gt; lock;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">const</span> T&amp; mResource;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        std::shared_lock&lt;std::shared_mutex&gt; mLock;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    };</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">   33</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a>&amp;&amp;);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a>&amp;&amp; <span class="comment">/*other*/</span>) noexcept;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        T&amp; <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html#ae2893386dcb56aa821ef423abd25817d">get</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
@@ -131,8 +131,8 @@ $(document).ready(function(){initNavTree('resource__manager_8hpp_source.html',''
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a>(T&amp; resource, std::unique_lock&lt;std::shared_mutex&gt;&amp;&amp; lock);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        T&amp; resource;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        std::unique_lock&lt;std::shared_mutex&gt; lock;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        T&amp; mResource;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        std::unique_lock&lt;std::shared_mutex&gt; mLock;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    };</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html">   52</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html">ResourceManager</a> final</div>
@@ -160,114 +160,120 @@ $(document).ready(function(){initNavTree('resource__manager_8hpp_source.html',''
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            Resource(<span class="keywordtype">void</span>* data, std::function&lt;<span class="keywordtype">void</span>(<span class="keywordtype">void</span>*)&gt; destroyer);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        };</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        std::unordered_map&lt;std::type_index, Resource&gt; resources;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        std::unordered_map&lt;std::type_index, Resource&gt; mResources;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    };</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">// Implementation.</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource&lt;T&gt;::ReadResource</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a>&amp;&amp; other) : resource(other.resource), lock(std::move(other.lock))</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="comment">// Do nothing.</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    ReadResource&lt;T&gt;::ReadResource(<span class="keyword">const</span> T&amp; resource, std::shared_lock&lt;std::shared_mutex&gt;&amp;&amp; lock)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        : resource(resource), lock(std::move(lock))</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="comment">// Do nothing.</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html#a9681b4de0a8572cf68ac6025484bfcef">  109</a></span>&#160;    <span class="keyword">const</span> T&amp; <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html#a9681b4de0a8572cf68ac6025484bfcef">ReadResource&lt;T&gt;::get</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">return</span> this-&gt;resource;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource&lt;T&gt;::WriteResource</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a>&amp;&amp; other) : resource(other.resource), lock(std::move(other.lock))</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="comment">// Do nothing.</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    WriteResource&lt;T&gt;::WriteResource(T&amp; resource, std::unique_lock&lt;std::shared_mutex&gt;&amp;&amp; lock)</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        : resource(resource), lock(std::move(lock))</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    {</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="comment">// Do nothing.</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html#ae2893386dcb56aa821ef423abd25817d">  128</a></span>&#160;    T&amp; <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html#ae2893386dcb56aa821ef423abd25817d">WriteResource&lt;T&gt;::get</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">return</span> this-&gt;resource;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource&lt;T&gt;::ReadResource</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        : mResource(other.mResource)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        , mLock(std::move(other.mLock))</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="comment">// Do nothing.</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    ReadResource&lt;T&gt;::ReadResource(<span class="keyword">const</span> T&amp; resource, std::shared_lock&lt;std::shared_mutex&gt;&amp;&amp; lock)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        : mResource(resource)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        , mLock(std::move(lock))</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="comment">// Do nothing.</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html#a9681b4de0a8572cf68ac6025484bfcef">  112</a></span>&#160;    <span class="keyword">const</span> T&amp; <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html#a9681b4de0a8572cf68ac6025484bfcef">ReadResource&lt;T&gt;::get</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordflow">return</span> mResource;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource&lt;T&gt;::WriteResource</a>(<a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource</a>&amp;&amp; other) noexcept</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        : mResource(other.mResource)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        , mLock(std::move(other.mLock))</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    {</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="comment">// Do nothing.</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    WriteResource&lt;T&gt;::WriteResource(T&amp; resource, std::unique_lock&lt;std::shared_mutex&gt;&amp;&amp; lock)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        : mResource(resource)</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        , mLock(std::move(lock))</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="comment">// Do nothing.</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    }</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keyword">inline</span> ResourceManager::~ResourceManager()</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; [type, resource] : this-&gt;resources)</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        {</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            resource.destroyer(resource.data);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keyword">inline</span> ResourceManager::Resource::Resource(<span class="keywordtype">void</span>* data, std::function&lt;<span class="keywordtype">void</span>(<span class="keywordtype">void</span>*)&gt; destroyer)</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        : data(data), destroyer(destroyer)</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="comment">// Do nothing.</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html#ae2893386dcb56aa821ef423abd25817d">  134</a></span>&#160;    T&amp; <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html#ae2893386dcb56aa821ef423abd25817d">WriteResource&lt;T&gt;::get</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordflow">return</span> mResource;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    }</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keyword">inline</span> ResourceManager::~ResourceManager()</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; [type, resource] : mResources)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            resource.destroyer(resource.data);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        }</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    }</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... TArgs&gt;</div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a9a381b74eaa5a1560ef5728c8efb91aa">  148</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a9a381b74eaa5a1560ef5728c8efb91aa">ResourceManager::add</a>(TArgs... args)</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    {</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keyword">auto</span> it = resources.find(<span class="keyword">typeid</span>(T));</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">if</span> (it != resources.end())</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        {</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not register resource of type {}: already registered&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            abort();</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        }</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        this-&gt;resources.try_emplace(<span class="keyword">typeid</span>(T), <span class="keyword">new</span> T(args...), [](<span class="keywordtype">void</span>* data) { delete static_cast&lt;T*&gt;(data); });</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    }</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a0995a3af0aad2206c95a203e3d26072e">  161</a></span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource&lt;T&gt;</a> <a class="code" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a0995a3af0aad2206c95a203e3d26072e">ResourceManager::read</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keyword">auto</span> it = resources.find(<span class="keyword">typeid</span>(T));</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordflow">if</span> (it == resources.end())</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        {</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not find resource of type {}&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            abort();</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        }</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keyword">auto</span>&amp; resource = it-&gt;second;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource&lt;T&gt;</a>(*<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(resource.data), std::shared_lock(resource.mutex));</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    }</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a63c629b6a68bb93e7ec76a63029282cd">  175</a></span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource&lt;T&gt;</a> <a class="code" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a63c629b6a68bb93e7ec76a63029282cd">ResourceManager::write</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keyword">auto</span> it = resources.find(<span class="keyword">typeid</span>(T));</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keywordflow">if</span> (it == resources.end())</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        {</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not find resource of type {}&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            abort();</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keyword">auto</span>&amp; resource = it-&gt;second;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource&lt;T&gt;</a>(*<span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(resource.data), std::unique_lock(resource.mutex));</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;} <span class="comment">// namespace cubos::core::ecs</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_ECS_RESOURCE_MANAGER_HPP</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keyword">inline</span> ResourceManager::Resource::Resource(<span class="keywordtype">void</span>* data, std::function&lt;<span class="keywordtype">void</span>(<span class="keywordtype">void</span>*)&gt; destroyer)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        : data(data)</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        , destroyer(std::move(std::move(destroyer)))</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="comment">// Do nothing.</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... TArgs&gt;</div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a9a381b74eaa5a1560ef5728c8efb91aa">  155</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a9a381b74eaa5a1560ef5728c8efb91aa">ResourceManager::add</a>(TArgs... args)</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keyword">auto</span> it = mResources.find(<span class="keyword">typeid</span>(T));</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keywordflow">if</span> (it != mResources.end())</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not register resource of type {}: already registered&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            abort();</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        mResources.try_emplace(<span class="keyword">typeid</span>(T), <span class="keyword">new</span> T(args...), [](<span class="keywordtype">void</span>* data) { delete static_cast&lt;T*&gt;(data); });</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a0995a3af0aad2206c95a203e3d26072e">  168</a></span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource&lt;T&gt;</a> <a class="code" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a0995a3af0aad2206c95a203e3d26072e">ResourceManager::read</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keyword">auto</span> it = mResources.find(<span class="keyword">typeid</span>(T));</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">if</span> (it == mResources.end())</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not find resource of type {}&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            abort();</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; resource = it-&gt;second;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">ReadResource&lt;T&gt;</a>(*<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(resource.data), std::shared_lock(resource.mutex));</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    }</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a63c629b6a68bb93e7ec76a63029282cd">  182</a></span>&#160;    <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource&lt;T&gt;</a> <a class="code" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a63c629b6a68bb93e7ec76a63029282cd">ResourceManager::write</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keyword">auto</span> it = mResources.find(<span class="keyword">typeid</span>(T));</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">if</span> (it == mResources.end())</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            CUBOS_CRITICAL(<span class="stringliteral">&quot;Could not find resource of type {}&quot;</span>, <span class="keyword">typeid</span>(T).name());</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            abort();</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; resource = it-&gt;second;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">WriteResource&lt;T&gt;</a>(*<span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(resource.data), std::unique_lock(resource.mutex));</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    }</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;} <span class="comment">// namespace cubos::core::ecs</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ReadResource_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html">cubos::core::ecs::ReadResource</a></div><div class="ttdoc">Utility struct used to reference resources for reading.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:15</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ReadResource_html_a9681b4de0a8572cf68ac6025484bfcef"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html#a9681b4de0a8572cf68ac6025484bfcef">cubos::core::ecs::ReadResource::get</a></div><div class="ttdeci">const T &amp; get() const</div><div class="ttdoc">Gets the underlying resource reference.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:109</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ReadResource_html_a9681b4de0a8572cf68ac6025484bfcef"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html#a9681b4de0a8572cf68ac6025484bfcef">cubos::core::ecs::ReadResource::get</a></div><div class="ttdeci">const T &amp; get() const</div><div class="ttdoc">Gets the underlying resource reference.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:112</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ResourceManager_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html">cubos::core::ecs::ResourceManager</a></div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:53</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ResourceManager_html_a0995a3af0aad2206c95a203e3d26072e"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a0995a3af0aad2206c95a203e3d26072e">cubos::core::ecs::ResourceManager::read</a></div><div class="ttdeci">ReadResource&lt; T &gt; read() const</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:161</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ResourceManager_html_a63c629b6a68bb93e7ec76a63029282cd"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a63c629b6a68bb93e7ec76a63029282cd">cubos::core::ecs::ResourceManager::write</a></div><div class="ttdeci">WriteResource&lt; T &gt; write() const</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:175</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ResourceManager_html_a9a381b74eaa5a1560ef5728c8efb91aa"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a9a381b74eaa5a1560ef5728c8efb91aa">cubos::core::ecs::ResourceManager::add</a></div><div class="ttdeci">void add(TArgs... args)</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:148</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ResourceManager_html_a0995a3af0aad2206c95a203e3d26072e"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a0995a3af0aad2206c95a203e3d26072e">cubos::core::ecs::ResourceManager::read</a></div><div class="ttdeci">ReadResource&lt; T &gt; read() const</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:168</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ResourceManager_html_a63c629b6a68bb93e7ec76a63029282cd"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a63c629b6a68bb93e7ec76a63029282cd">cubos::core::ecs::ResourceManager::write</a></div><div class="ttdeci">WriteResource&lt; T &gt; write() const</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:182</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1ResourceManager_html_a9a381b74eaa5a1560ef5728c8efb91aa"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a9a381b74eaa5a1560ef5728c8efb91aa">cubos::core::ecs::ResourceManager::add</a></div><div class="ttdeci">void add(TArgs... args)</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:155</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1WriteResource_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html">cubos::core::ecs::WriteResource</a></div><div class="ttdoc">Utility struct used to reference resources for writing.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:34</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1WriteResource_html_ae2893386dcb56aa821ef423abd25817d"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html#ae2893386dcb56aa821ef423abd25817d">cubos::core::ecs::WriteResource::get</a></div><div class="ttdeci">T &amp; get() const</div><div class="ttdoc">Gets the underlying resource reference.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:128</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> blueprint.hpp:12</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1WriteResource_html_ae2893386dcb56aa821ef423abd25817d"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html#ae2893386dcb56aa821ef423abd25817d">cubos::core::ecs::WriteResource::get</a></div><div class="ttdeci">T &amp; get() const</div><div class="ttdoc">Gets the underlying resource reference.</div><div class="ttdef"><b>Definition:</b> resource_manager.hpp:134</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> accessors.hpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->

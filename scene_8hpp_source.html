@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.9.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: engine/include/cubos/engine/data/scene.hpp Source File</title>
+    <title>CUBOS.: engine/include/cubos/engine/scene/scene.hpp Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -90,56 +90,27 @@ $(document).ready(function(){initNavTree('scene_8hpp_source.html',''); initResiz
 <div class="title">scene.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_ENGINE_DATA_SCENE_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_ENGINE_DATA_SCENE_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/engine/data/loader.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cubos/core/ecs/blueprint.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>cubos::engine::data</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">namespace </span>impl</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keyword">class </span>SceneLoader;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    } <span class="comment">// namespace impl</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1data_1_1Scene.html">   15</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structcubos_1_1engine_1_1data_1_1Scene.html">Scene</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">static</span> constexpr <span class="keyword">const</span> <span class="keywordtype">char</span>* TypeName = <span class="stringliteral">&quot;Scene&quot;</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">using</span> <a class="code" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html">Loader</a> = <a class="code" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html">impl::SceneLoader</a>;</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/ecs/blueprint.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cubos/engine/assets/asset.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>cubos::engine</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1Scene.html">   14</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structcubos_1_1engine_1_1Scene.html">Scene</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1Scene.html#a99fc37eebd43a75ccc74da7e8ae30b93">   18</a></span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1Blueprint.html">core::ecs::Blueprint</a> <a class="code" href="structcubos_1_1engine_1_1Scene.html#a99fc37eebd43a75ccc74da7e8ae30b93">blueprint</a>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1data_1_1Scene.html#a99fc37eebd43a75ccc74da7e8ae30b93">   20</a></span>&#160;        <a class="code" href="classcubos_1_1core_1_1ecs_1_1Blueprint.html">core::ecs::Blueprint</a> <a class="code" href="structcubos_1_1engine_1_1data_1_1Scene.html#a99fc37eebd43a75ccc74da7e8ae30b93">blueprint</a>; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    };</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">namespace </span>impl</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html">   26</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html">SceneLoader</a> : <span class="keyword">public</span> <a class="code" href="classcubos_1_1engine_1_1data_1_1Loader.html">Loader</a></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aa0fa0ec2a2e01b3af4ba548c4c1f8eea">   30</a></span>&#160;            <a class="code" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aa0fa0ec2a2e01b3af4ba548c4c1f8eea">SceneLoader</a>(<a class="code" href="classcubos_1_1engine_1_1data_1_1AssetManager.html">AssetManager</a>* <a class="code" href="classcubos_1_1engine_1_1data_1_1Loader.html#abd8717c36d3e35c3d550647076e15ab4">manager</a>);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keyword">virtual</span> ~<a class="code" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html">SceneLoader</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aa1a12f27a4b8bae12d35ef446d32aae9">   33</a></span>&#160;            <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">void</span>* <a class="code" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aa1a12f27a4b8bae12d35ef446d32aae9">load</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>&amp; meta) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aca0389c82d9edfb5e9285719f6483c76">   34</a></span>&#160;            <span class="keyword">virtual</span> std::future&lt;const void*&gt; <a class="code" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aca0389c82d9edfb5e9285719f6483c76">loadAsync</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>&amp; meta) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#a8349bd7e3f1e7ddb09c35536fc244c44">   35</a></span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#a8349bd7e3f1e7ddb09c35536fc244c44">unload</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>&amp; meta, <span class="keyword">const</span> <span class="keywordtype">void</span>* asset) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        };</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    } <span class="comment">// namespace impl</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;} <span class="comment">// namespace cubos::engine::data</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_ENGINE_DATA_SCENE_HPP</span></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Blueprint_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html">cubos::core::ecs::Blueprint</a></div><div class="ttdef"><b>Definition:</b> blueprint.hpp:16</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1AssetManager_html"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1AssetManager.html">cubos::engine::data::AssetManager</a></div><div class="ttdef"><b>Definition:</b> asset_manager.hpp:20</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Loader_html"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Loader.html">cubos::engine::data::Loader</a></div><div class="ttdoc">Base class of all asset loaders.</div><div class="ttdef"><b>Definition:</b> loader.hpp:15</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Loader_html_abd8717c36d3e35c3d550647076e15ab4"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Loader.html#abd8717c36d3e35c3d550647076e15ab4">cubos::engine::data::Loader::manager</a></div><div class="ttdeci">AssetManager * manager</div><div class="ttdoc">Asset manager that owns this loader.</div><div class="ttdef"><b>Definition:</b> loader.hpp:37</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Meta_html"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Meta.html">cubos::engine::data::Meta</a></div><div class="ttdef"><b>Definition:</b> meta.hpp:42</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1impl_1_1SceneLoader_html"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html">cubos::engine::data::impl::SceneLoader</a></div><div class="ttdoc">Loader for Scene assets.</div><div class="ttdef"><b>Definition:</b> scene.hpp:27</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1impl_1_1SceneLoader_html_a8349bd7e3f1e7ddb09c35536fc244c44"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#a8349bd7e3f1e7ddb09c35536fc244c44">cubos::engine::data::impl::SceneLoader::unload</a></div><div class="ttdeci">virtual void unload(const Meta &amp;meta, const void *asset) override</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1impl_1_1SceneLoader_html_aa0fa0ec2a2e01b3af4ba548c4c1f8eea"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aa0fa0ec2a2e01b3af4ba548c4c1f8eea">cubos::engine::data::impl::SceneLoader::SceneLoader</a></div><div class="ttdeci">SceneLoader(AssetManager *manager)</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1impl_1_1SceneLoader_html_aa1a12f27a4b8bae12d35ef446d32aae9"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aa1a12f27a4b8bae12d35ef446d32aae9">cubos::engine::data::impl::SceneLoader::load</a></div><div class="ttdeci">virtual const void * load(const Meta &amp;meta) override</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1impl_1_1SceneLoader_html_aca0389c82d9edfb5e9285719f6483c76"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1impl_1_1SceneLoader.html#aca0389c82d9edfb5e9285719f6483c76">cubos::engine::data::impl::SceneLoader::loadAsync</a></div><div class="ttdeci">virtual std::future&lt; const void * &gt; loadAsync(const Meta &amp;meta) override</div></div>
-<div class="ttc" id="astructcubos_1_1engine_1_1data_1_1Scene_html"><div class="ttname"><a href="structcubos_1_1engine_1_1data_1_1Scene.html">cubos::engine::data::Scene</a></div><div class="ttdef"><b>Definition:</b> scene.hpp:16</div></div>
-<div class="ttc" id="astructcubos_1_1engine_1_1data_1_1Scene_html_a99fc37eebd43a75ccc74da7e8ae30b93"><div class="ttname"><a href="structcubos_1_1engine_1_1data_1_1Scene.html#a99fc37eebd43a75ccc74da7e8ae30b93">cubos::engine::data::Scene::blueprint</a></div><div class="ttdeci">core::ecs::Blueprint blueprint</div><div class="ttdoc">Blueprint of the scene.</div><div class="ttdef"><b>Definition:</b> scene.hpp:20</div></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1Scene.html#ab170ceadb0683a7c7831c4066508c549">   22</a></span>&#160;        std::unordered_map&lt;std::string, Asset&lt;Scene&gt;&gt; <a class="code" href="structcubos_1_1engine_1_1Scene.html#ab170ceadb0683a7c7831c4066508c549">imports</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    };</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;} <span class="comment">// namespace cubos::engine</span></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Blueprint_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html">cubos::core::ecs::Blueprint</a></div><div class="ttdef"><b>Definition:</b> blueprint.hpp:15</div></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1Scene_html"><div class="ttname"><a href="structcubos_1_1engine_1_1Scene.html">cubos::engine::Scene</a></div><div class="ttdef"><b>Definition:</b> scene.hpp:15</div></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1Scene_html_a99fc37eebd43a75ccc74da7e8ae30b93"><div class="ttname"><a href="structcubos_1_1engine_1_1Scene.html#a99fc37eebd43a75ccc74da7e8ae30b93">cubos::engine::Scene::blueprint</a></div><div class="ttdeci">core::ecs::Blueprint blueprint</div><div class="ttdef"><b>Definition:</b> scene.hpp:18</div></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1Scene_html_ab170ceadb0683a7c7831c4066508c549"><div class="ttname"><a href="structcubos_1_1engine_1_1Scene.html#ab170ceadb0683a7c7831c4066508c549">cubos::engine::Scene::imports</a></div><div class="ttdeci">std::unordered_map&lt; std::string, Asset&lt; Scene &gt; &gt; imports</div><div class="ttdef"><b>Definition:</b> scene.hpp:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
@@ -147,7 +118,7 @@ $(document).ready(function(){initNavTree('scene_8hpp_source.html',''); initResiz
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_7c9ef2eb700fb078862164d1aa7d90b1.html">data</a></li><li class="navelem"><b>scene.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_38e9fb064544086d3594e70a41f6b257.html">scene</a></li><li class="navelem"><b>scene.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.9.1 </li>
   </ul>

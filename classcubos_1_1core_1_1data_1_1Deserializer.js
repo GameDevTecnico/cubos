@@ -2,15 +2,18 @@ var classcubos_1_1core_1_1data_1_1Deserializer =
 [
     [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html#a43e0ec855f3a7ebf9f98fbee5321edcf", null ],
     [ "~Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html#a95493d1d63c87ff4c906939b12bbefd9", null ],
-    [ "beginArray", "classcubos_1_1core_1_1data_1_1Deserializer.html#ada492ed36f89370e9aef098a9c572bc0", null ],
-    [ "beginDictionary", "classcubos_1_1core_1_1data_1_1Deserializer.html#aca644625c3d1b4e1a0ed8bc238366a5e", null ],
+    [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html#ae25ec5a2ddd2e1cc7be69f924e504231", null ],
+    [ "beginArray", "classcubos_1_1core_1_1data_1_1Deserializer.html#a1941960186bc1df6331fd22a6b75dd56", null ],
+    [ "beginDictionary", "classcubos_1_1core_1_1data_1_1Deserializer.html#af4e39592f9f384c0e8e6d4261f04ac98", null ],
     [ "beginObject", "classcubos_1_1core_1_1data_1_1Deserializer.html#af28e6ddb0fd64677a2d6e89b83f66e15", null ],
+    [ "context", "classcubos_1_1core_1_1data_1_1Deserializer.html#ac0f94dfdce5575a205c5027cf5076d7d", null ],
     [ "endArray", "classcubos_1_1core_1_1data_1_1Deserializer.html#a485a91b8b038e64a48a1e4d81d5c598c", null ],
     [ "endDictionary", "classcubos_1_1core_1_1data_1_1Deserializer.html#ac91da475750ef1d19448c1b7085470ba", null ],
     [ "endObject", "classcubos_1_1core_1_1data_1_1Deserializer.html#a95438b8f87d1556b089859c225005b1e", null ],
+    [ "fail", "classcubos_1_1core_1_1data_1_1Deserializer.html#a664ea16a5976db852d277f2eeac2a57d", null ],
     [ "failed", "classcubos_1_1core_1_1data_1_1Deserializer.html#a03c20ddaa381f1926a24672f545b70eb", null ],
-    [ "read", "classcubos_1_1core_1_1data_1_1Deserializer.html#a2628f0d35c899f2da2faaf87c70dbf01", null ],
-    [ "read", "classcubos_1_1core_1_1data_1_1Deserializer.html#ac77c1ee1ad8408437888f662d7504119", null ],
+    [ "operator=", "classcubos_1_1core_1_1data_1_1Deserializer.html#ab59a8d409c3c8a131acee4a399463273", null ],
+    [ "read", "classcubos_1_1core_1_1data_1_1Deserializer.html#a8bf54fcfa723c437dd819e3a473d969c", null ],
     [ "readBool", "classcubos_1_1core_1_1data_1_1Deserializer.html#a77b3ce8b74d460d535e774cb20a074f0", null ],
     [ "readF32", "classcubos_1_1core_1_1data_1_1Deserializer.html#a2cd4a085363bec6624b6259214f9121c", null ],
     [ "readF64", "classcubos_1_1core_1_1data_1_1Deserializer.html#a86fbd6062050f7fb80354667a94b685f", null ],
@@ -23,7 +26,5 @@ var classcubos_1_1core_1_1data_1_1Deserializer =
     [ "readU32", "classcubos_1_1core_1_1data_1_1Deserializer.html#ac66fa3e7f3443d54a5e16ef9281eb13b", null ],
     [ "readU64", "classcubos_1_1core_1_1data_1_1Deserializer.html#aee576d59dd5c2b3a0ba74324d53e13f9", null ],
     [ "readU8", "classcubos_1_1core_1_1data_1_1Deserializer.html#aecd60dc90b98278499f6c2276ab38800", null ],
-    [ "requires", "classcubos_1_1core_1_1data_1_1Deserializer.html#a5d3016b17c69ea1b5319702cd26c42f3", null ],
-    [ "ctx", "classcubos_1_1core_1_1data_1_1Deserializer.html#a77a7bca430192d96db974b9355f7f0ea", null ],
-    [ "failBit", "classcubos_1_1core_1_1data_1_1Deserializer.html#aecea87bd5594b8a5085798d70d9cf566", null ]
+    [ "mFailBit", "classcubos_1_1core_1_1data_1_1Deserializer.html#ac5c08fd1cea9f5bf42a45e1fdd44211e", null ]
 ];

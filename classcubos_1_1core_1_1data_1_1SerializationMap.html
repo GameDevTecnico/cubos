@@ -98,10 +98,13 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1data_1_1Serializ
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4d7534ab00387a033d16662dc09cc585"><td class="memItemLeft" align="right" valign="top"><a id="a4d7534ab00387a033d16662dc09cc585"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SerializationMap</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:a4d7534ab00387a033d16662dc09cc585"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95978f495ac80c9ca73a8a504dbe4d3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#a95978f495ac80c9ca73a8a504dbe4d3a">SerializationMap</a> (std::function&lt; bool(const R &amp;, I &amp;)&gt; serialize, std::function&lt; bool(R &amp;, const I &amp;)&gt; deserialize)</td></tr>
+<tr class="memitem:a4fb53fed5da0adb9e1fc3854c3616f4e"><td class="memItemLeft" align="right" valign="top"><a id="a4fb53fed5da0adb9e1fc3854c3616f4e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SerializationMap</b> (<a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a> &amp;&amp;) noexcept=default</td></tr>
+<tr class="separator:a4fb53fed5da0adb9e1fc3854c3616f4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ce480bfbb02699c8e3af6c2fba580d8"><td class="memItemLeft" align="right" valign="top"><a id="a4ce480bfbb02699c8e3af6c2fba580d8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SerializationMap</b> (const <a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a> &amp;)=default</td></tr>
+<tr class="separator:a4ce480bfbb02699c8e3af6c2fba580d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95978f495ac80c9ca73a8a504dbe4d3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#a95978f495ac80c9ca73a8a504dbe4d3a">SerializationMap</a> (std::function&lt; bool(const R &amp;, I &amp;)&gt; <a class="el" href="namespacecubos_1_1core_1_1data.html#a9adc8a44a1124cfbf965caef44d4982c">serialize</a>, std::function&lt; bool(R &amp;, const I &amp;)&gt; <a class="el" href="namespacecubos_1_1core_1_1data.html#a2786b82b9c750a9c74aff52855b60558">deserialize</a>)</td></tr>
 <tr class="separator:a95978f495ac80c9ca73a8a504dbe4d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8583b009c0eefd4aa76cb32ac207de30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#a8583b009c0eefd4aa76cb32ac207de30">add</a> (const R &amp;reference, const I &amp;id)</td></tr>
 <tr class="separator:a8583b009c0eefd4aa76cb32ac207de30"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,8 +120,8 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the map. <br /></td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a259cb5a711406a8c3e5d937eb9350cca"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#a259cb5a711406a8c3e5d937eb9350cca">size</a> () const</td></tr>
-<tr class="separator:a259cb5a711406a8c3e5d937eb9350cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade1601ccf1fa3bcf050867f0852ca4e5"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html#ade1601ccf1fa3bcf050867f0852ca4e5">size</a> () const</td></tr>
+<tr class="separator:ade1601ccf1fa3bcf050867f0852ca4e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename R, typename I&gt;<br />
@@ -137,6 +140,9 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classcubos_1_1core_1_1data_1_1SerializationMap.html">SerializationMap</a> </td>
@@ -156,6 +162,11 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Makes the serialization map use functions instead of keeping a map. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -173,6 +184,9 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void add </td>
@@ -192,6 +206,11 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Adds a reference &lt;-&gt; serialized identifier pair. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -208,6 +227,9 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">I getId </td>
@@ -217,6 +239,11 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Gets the serialized identifier of a reference. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -233,6 +260,9 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">R getRef </td>
@@ -242,6 +272,11 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Gets the reference of a serialized identifier. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -258,6 +293,9 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool hasId </td>
@@ -267,6 +305,11 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Checks if a serialized identifier is in the map. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -283,6 +326,9 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool hasRef </td>
@@ -292,6 +338,11 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Checks if a reference is in the map. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -303,16 +354,27 @@ class cubos::core::data::SerializationMap&lt; R, I &gt;</h3>
 
 </div>
 </div>
-<a id="a259cb5a711406a8c3e5d937eb9350cca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a259cb5a711406a8c3e5d937eb9350cca">&#9670;&nbsp;</a></span>size()</h2>
+<a id="ade1601ccf1fa3bcf050867f0852ca4e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade1601ccf1fa3bcf050867f0852ca4e5">&#9670;&nbsp;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t size</td>
+          <td class="memname">std::size_t size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Gets the number of mapped references. </p><dl class="section return"><dt>Returns</dt><dd>Number of mapped references. </dd></dl>
 

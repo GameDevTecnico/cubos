@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['handle_1461',['Handle',['../classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4',1,'cubos::core::data::File']]]
+  ['iterator_1502',['Iterator',['../classcubos_1_1core_1_1ecs_1_1World.html#a6ae6b2f3107538ada39d2717b3173d7d',1,'cubos::core::ecs::World']]]
 ];

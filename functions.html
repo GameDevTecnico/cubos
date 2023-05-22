@@ -100,14 +100,14 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 , <a class="el" href="classcubos_1_1core_1_1ecs_1_1Commands.html#ad8a2aba82414b6d0397c3ce08ce3357a">Commands</a>
 , <a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a58e9723ccf5ae15c6683141b4d8902d9">ComponentManager</a>
 , <a class="el" href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html#acca1109210ce87b35336b4b9ab108450">EntityBuilder</a>
-, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_6_01_4.html#af3ef6e6e0f420847acc7b7f478e423ee">QueryFetcher&lt; Component &amp; &gt;</a>
-, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_5_01_4.html#af3ef6e6e0f420847acc7b7f478e423ee">QueryFetcher&lt; Component * &gt;</a>
-, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html#af3ef6e6e0f420847acc7b7f478e423ee">QueryFetcher&lt; const Component &amp; &gt;</a>
-, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_5_01_4.html#af3ef6e6e0f420847acc7b7f478e423ee">QueryFetcher&lt; const Component * &gt;</a>
-, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#aa36c2177d7575278e7d4554901d07775">Registry</a>
+, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptRead_3_01Component_01_4_01_4.html#af3ef6e6e0f420847acc7b7f478e423ee">QueryFetcher&lt; OptRead&lt; Component &gt; &gt;</a>
+, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptWrite_3_01Component_01_4_01_4.html#af3ef6e6e0f420847acc7b7f478e423ee">QueryFetcher&lt; OptWrite&lt; Component &gt; &gt;</a>
+, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Read_3_01Component_01_4_01_4.html#af3ef6e6e0f420847acc7b7f478e423ee">QueryFetcher&lt; Read&lt; Component &gt; &gt;</a>
+, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Write_3_01Component_01_4_01_4.html#af3ef6e6e0f420847acc7b7f478e423ee">QueryFetcher&lt; Write&lt; Component &gt; &gt;</a>
+, <a class="el" href="classcubos_1_1core_1_1ecs_1_1Registry.html#a7b766a9f56e60ec30fd3c9a178d886c9">Registry</a>
 , <a class="el" href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html#a9a381b74eaa5a1560ef5728c8efb91aa">ResourceManager</a>
 , <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html#ad8a2aba82414b6d0397c3ce08ce3357a">World</a>
-, <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#ae00e769dc3481d21d02adcb4127c5a9d">Palette</a>
+, <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html#a30763c771b71ba596f27ae8f609152b0">Palette</a>
 </li>
 <li>addBinding()
 : <a class="el" href="classcubos_1_1core_1_1io_1_1Action.html#adb8ff2c6385086ba551bdec931f4f131">Action</a>
@@ -119,10 +119,10 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="classcubos_1_1engine_1_1Cubos.html#a6a3799d91bf6546dedb10f6b48d327c1">Cubos</a>
 </li>
 <li>addFromDeserializer()
-: <a class="el" href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a0f72c3faca10c1accf18592523db0fdc">Blueprint</a>
+: <a class="el" href="classcubos_1_1core_1_1ecs_1_1Blueprint.html#a57947a3630592bef6e7bd56285119086">Blueprint</a>
 </li>
 <li>addPass()
-: <a class="el" href="classcubos_1_1engine_1_1gl_1_1pps_1_1Manager.html#a463e06aa04938848b6f6a75b3ebc59d1">Manager</a>
+: <a class="el" href="classcubos_1_1engine_1_1PostProcessingManager.html#a96d5d716d20af5137d340c07f9c674a7">PostProcessingManager</a>
 </li>
 <li>addPlugin()
 : <a class="el" href="classcubos_1_1engine_1_1Cubos.html#a3ae5c8ca2befeead8f2fff5b7e0f340b">Cubos</a>
@@ -165,13 +165,23 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 : <a class="el" href="structcubos_1_1core_1_1gl_1_1BlendStateDesc.html#a19a581d5c3b93bbe4fea5e566ec66397">BlendStateDesc</a>
 </li>
 <li>ambient()
-: <a class="el" href="classcubos_1_1engine_1_1gl_1_1Frame.html#ab52d5adbd45b002614745dd4e75575a1">Frame</a>
+: <a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#ab52d5adbd45b002614745dd4e75575a1">RendererFrame</a>
+</li>
+<li>AnyAsset()
+: <a class="el" href="classcubos_1_1engine_1_1AnyAsset.html#aa569969dd177df90d40dd8f3ddf10cef">AnyAsset</a>
+, <a class="el" href="classcubos_1_1engine_1_1Asset.html#aa569969dd177df90d40dd8f3ddf10cef">Asset&lt; T &gt;</a>
 </li>
 <li>arg()
-: <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_6_01_4.html#acfc503cec6064b883e8c9019359ccebc">QueryFetcher&lt; Component &amp; &gt;</a>
-, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Component_01_5_01_4.html#a33add0e51e3b4ec1e753e15db570e4e3">QueryFetcher&lt; Component * &gt;</a>
-, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_6_01_4.html#a6a3324e73689e01210fd80476b851c75">QueryFetcher&lt; const Component &amp; &gt;</a>
-, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01const_01Component_01_5_01_4.html#abe0f399b2516d7a55c8db4effb29fd28">QueryFetcher&lt; const Component * &gt;</a>
+: <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptRead_3_01Component_01_4_01_4.html#af93c39bd0e97c3169edf4a4feccbb011">QueryFetcher&lt; OptRead&lt; Component &gt; &gt;</a>
+, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01OptWrite_3_01Component_01_4_01_4.html#a22648e8e07427ccbe88b1a23b086fb93">QueryFetcher&lt; OptWrite&lt; Component &gt; &gt;</a>
+, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Read_3_01Component_01_4_01_4.html#a4e869f7f2d5e597d723367f27e8ace3a">QueryFetcher&lt; Read&lt; Component &gt; &gt;</a>
+, <a class="el" href="structcubos_1_1core_1_1ecs_1_1impl_1_1QueryFetcher_3_01Write_3_01Component_01_4_01_4.html#a0e891523e5fbe8f9fc4025cf12eff48c">QueryFetcher&lt; Write&lt; Component &gt; &gt;</a>
+</li>
+<li>asset
+: <a class="el" href="structcubos_1_1engine_1_1RenderableGrid.html#a2d1642b0a86f255067d882ffb7966faf">RenderableGrid</a>
+</li>
+<li>at()
+: <a class="el" href="classcubos_1_1core_1_1memory_1_1TypeMap.html#a74a1c4e4100fb38211d52fb4714e69db">TypeMap&lt; V &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->

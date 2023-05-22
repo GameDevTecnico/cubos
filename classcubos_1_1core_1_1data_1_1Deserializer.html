@@ -88,7 +88,6 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1data_1_1Deserial
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classcubos_1_1core_1_1data_1_1Deserializer-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -96,16 +95,13 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1data_1_1Deserial
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract class for deserializing data.  
- <a href="classcubos_1_1core_1_1data_1_1Deserializer.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="deserializer_8hpp_source.html">deserializer.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Deserializer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcubos_1_1core_1_1data_1_1Deserializer__inherit__graph.png" border="0" usemap="#aDeserializer_inherit__map" alt="Inheritance graph"/></div>
 <map name="aDeserializer_inherit__map" id="aDeserializer_inherit__map">
-<area shape="rect" title="Abstract class for deserializing data." alt="" coords="267,5,367,32"/>
+<area shape="rect" title=" " alt="" coords="267,5,367,32"/>
 <area shape="rect" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html" title=" " alt="" coords="5,80,148,107"/>
 <area shape="rect" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html" title="Implementation of the abstract Deserializer class for deserializing from JSON." alt="" coords="172,80,304,107"/>
 <area shape="rect" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html" title="Implementation of the abstract Deserializer class for deserializng from YAML." alt="" coords="328,80,463,107"/>
@@ -115,6 +111,12 @@ Inheritance diagram for Deserializer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ae25ec5a2ddd2e1cc7be69f924e504231"><td class="memItemLeft" align="right" valign="top"><a id="ae25ec5a2ddd2e1cc7be69f924e504231"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Deserializer</b> (const <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;)=delete</td></tr>
+<tr class="separator:ae25ec5a2ddd2e1cc7be69f924e504231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab59a8d409c3c8a131acee4a399463273"><td class="memItemLeft" align="right" valign="top"><a id="ab59a8d409c3c8a131acee4a399463273"></a>
+<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;)=delete</td></tr>
+<tr class="separator:ab59a8d409c3c8a131acee4a399463273"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29824facaa52f14d4ca7b78fdba94322"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a29824facaa52f14d4ca7b78fdba94322">readI8</a> (int8_t &amp;value)=0</td></tr>
 <tr class="separator:a29824facaa52f14d4ca7b78fdba94322"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa03bf969fca0bdbbb076fd19394e9e49"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#aa03bf969fca0bdbbb076fd19394e9e49">readI16</a> (int16_t &amp;value)=0</td></tr>
@@ -139,58 +141,65 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a77b3ce8b74d460d535e774cb20a074f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af56e07a6ae743136a3cf42326a4250a1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#af56e07a6ae743136a3cf42326a4250a1">readString</a> (std::string &amp;value)=0</td></tr>
 <tr class="separator:af56e07a6ae743136a3cf42326a4250a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2628f0d35c899f2da2faaf87c70dbf01"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a2628f0d35c899f2da2faaf87c70dbf01"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a5d3016b17c69ea1b5319702cd26c42f3">requires</a> <a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; T &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a2628f0d35c899f2da2faaf87c70dbf01">read</a> (T &amp;obj)</td></tr>
-<tr class="separator:a2628f0d35c899f2da2faaf87c70dbf01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d3016b17c69ea1b5319702cd26c42f3"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TCtx &gt; </td></tr>
-<tr class="memitem:a5d3016b17c69ea1b5319702cd26c42f3"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a5d3016b17c69ea1b5319702cd26c42f3">requires</a> (<a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; T &gt; &amp;&amp;!<a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt;) void <a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a2628f0d35c899f2da2faaf87c70dbf01">read</a>(T &amp;obj</td></tr>
-<tr class="separator:a5d3016b17c69ea1b5319702cd26c42f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac77c1ee1ad8408437888f662d7504119"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TCtx &gt; </td></tr>
-<tr class="memitem:ac77c1ee1ad8408437888f662d7504119"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a5d3016b17c69ea1b5319702cd26c42f3">requires</a> <a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt; void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#ac77c1ee1ad8408437888f662d7504119">read</a> (T &amp;obj, TCtx &amp;&amp;ctx)</td></tr>
-<tr class="separator:ac77c1ee1ad8408437888f662d7504119"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af28e6ddb0fd64677a2d6e89b83f66e15"><td class="memItemLeft" align="right" valign="top"><a id="af28e6ddb0fd64677a2d6e89b83f66e15"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#af28e6ddb0fd64677a2d6e89b83f66e15">beginObject</a> ()=0</td></tr>
-<tr class="memdesc:af28e6ddb0fd64677a2d6e89b83f66e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates that a object is currently being deserialized. <br /></td></tr>
+<tr class="memitem:a8bf54fcfa723c437dd819e3a473d969c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a8bf54fcfa723c437dd819e3a473d969c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a8bf54fcfa723c437dd819e3a473d969c">read</a> (T &amp;obj)</td></tr>
+<tr class="separator:a8bf54fcfa723c437dd819e3a473d969c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af28e6ddb0fd64677a2d6e89b83f66e15"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#af28e6ddb0fd64677a2d6e89b83f66e15">beginObject</a> ()=0</td></tr>
 <tr class="separator:af28e6ddb0fd64677a2d6e89b83f66e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95438b8f87d1556b089859c225005b1e"><td class="memItemLeft" align="right" valign="top"><a id="a95438b8f87d1556b089859c225005b1e"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a95438b8f87d1556b089859c225005b1e">endObject</a> ()=0</td></tr>
-<tr class="memdesc:a95438b8f87d1556b089859c225005b1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates that a object is no longer being deserialized. <br /></td></tr>
+<tr class="memitem:a95438b8f87d1556b089859c225005b1e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a95438b8f87d1556b089859c225005b1e">endObject</a> ()=0</td></tr>
 <tr class="separator:a95438b8f87d1556b089859c225005b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada492ed36f89370e9aef098a9c572bc0"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#ada492ed36f89370e9aef098a9c572bc0">beginArray</a> ()=0</td></tr>
-<tr class="separator:ada492ed36f89370e9aef098a9c572bc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a485a91b8b038e64a48a1e4d81d5c598c"><td class="memItemLeft" align="right" valign="top"><a id="a485a91b8b038e64a48a1e4d81d5c598c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a485a91b8b038e64a48a1e4d81d5c598c">endArray</a> ()=0</td></tr>
-<tr class="memdesc:a485a91b8b038e64a48a1e4d81d5c598c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates that an array is no longer being deserialized. <br /></td></tr>
+<tr class="memitem:a1941960186bc1df6331fd22a6b75dd56"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a1941960186bc1df6331fd22a6b75dd56">beginArray</a> ()=0</td></tr>
+<tr class="separator:a1941960186bc1df6331fd22a6b75dd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a485a91b8b038e64a48a1e4d81d5c598c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a485a91b8b038e64a48a1e4d81d5c598c">endArray</a> ()=0</td></tr>
 <tr class="separator:a485a91b8b038e64a48a1e4d81d5c598c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca644625c3d1b4e1a0ed8bc238366a5e"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#aca644625c3d1b4e1a0ed8bc238366a5e">beginDictionary</a> ()=0</td></tr>
-<tr class="separator:aca644625c3d1b4e1a0ed8bc238366a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac91da475750ef1d19448c1b7085470ba"><td class="memItemLeft" align="right" valign="top"><a id="ac91da475750ef1d19448c1b7085470ba"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#ac91da475750ef1d19448c1b7085470ba">endDictionary</a> ()=0</td></tr>
-<tr class="memdesc:ac91da475750ef1d19448c1b7085470ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates that a dictionary is no longer being deserialized. <br /></td></tr>
+<tr class="memitem:af4e39592f9f384c0e8e6d4261f04ac98"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#af4e39592f9f384c0e8e6d4261f04ac98">beginDictionary</a> ()=0</td></tr>
+<tr class="separator:af4e39592f9f384c0e8e6d4261f04ac98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac91da475750ef1d19448c1b7085470ba"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#ac91da475750ef1d19448c1b7085470ba">endDictionary</a> ()=0</td></tr>
 <tr class="separator:ac91da475750ef1d19448c1b7085470ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c20ddaa381f1926a24672f545b70eb"><td class="memItemLeft" align="right" valign="top"><a id="a03c20ddaa381f1926a24672f545b70eb"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a03c20ddaa381f1926a24672f545b70eb">failed</a> () const</td></tr>
 <tr class="memdesc:a03c20ddaa381f1926a24672f545b70eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the deserializer has failed. <br /></td></tr>
 <tr class="separator:a03c20ddaa381f1926a24672f545b70eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a77a7bca430192d96db974b9355f7f0ea"><td class="memItemLeft" align="right" valign="top"><a id="a77a7bca430192d96db974b9355f7f0ea"></a>
-TCtx &amp;&amp;&#160;</td><td class="memItemRight" valign="bottom"><b>ctx</b></td></tr>
-<tr class="separator:a77a7bca430192d96db974b9355f7f0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a664ea16a5976db852d277f2eeac2a57d"><td class="memItemLeft" align="right" valign="top"><a id="a664ea16a5976db852d277f2eeac2a57d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a664ea16a5976db852d277f2eeac2a57d">fail</a> ()</td></tr>
+<tr class="memdesc:a664ea16a5976db852d277f2eeac2a57d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the fail bit. <br /></td></tr>
+<tr class="separator:a664ea16a5976db852d277f2eeac2a57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0f94dfdce5575a205c5027cf5076d7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">Context</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#ac0f94dfdce5575a205c5027cf5076d7d">context</a> ()</td></tr>
+<tr class="separator:ac0f94dfdce5575a205c5027cf5076d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aecea87bd5594b8a5085798d70d9cf566"><td class="memItemLeft" align="right" valign="top"><a id="aecea87bd5594b8a5085798d70d9cf566"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#aecea87bd5594b8a5085798d70d9cf566">failBit</a></td></tr>
-<tr class="memdesc:aecea87bd5594b8a5085798d70d9cf566"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if the deserializer has failed. <br /></td></tr>
-<tr class="separator:aecea87bd5594b8a5085798d70d9cf566"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c08fd1cea9f5bf42a45e1fdd44211e"><td class="memItemLeft" align="right" valign="top"><a id="ac5c08fd1cea9f5bf42a45e1fdd44211e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#ac5c08fd1cea9f5bf42a45e1fdd44211e">mFailBit</a></td></tr>
+<tr class="memdesc:ac5c08fd1cea9f5bf42a45e1fdd44211e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if the deserializer has failed. <br /></td></tr>
+<tr class="separator:ac5c08fd1cea9f5bf42a45e1fdd44211e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract class for deserializing data. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ada492ed36f89370e9aef098a9c572bc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada492ed36f89370e9aef098a9c572bc0">&#9670;&nbsp;</a></span>beginArray()</h2>
+<div class="textblock"><p>Abstract class for deserializing data in a format-agnostic way. Each deserializer implementation is responsible for implementing its own primitive deserialization methods: <code>readI8</code>, <code>readString</code>, etc.</p>
+<p>More complex types can be deserialized by implementing a specialization of the <code><a class="el" href="namespacecubos_1_1core_1_1data.html#a2786b82b9c750a9c74aff52855b60558" title="Overload the serialize function for types which define a serialize method.">cubos::core::data::deserialize</a></code> function: </p><pre class="fragment">struct MyType
+{
+    int32_t a;
+};
+
+// In the corresponding .cpp file.
+void cubos::core::data::deserialize&lt;MyType&gt;(Deserializer&amp; d, MyType&amp; obj)
+{
+    d.read(obj.a, "a");
+}
+
+// Alternatively, the type can define a `deserialize` method.
+
+class MyType
+{
+public:
+    void deserialize(Deserializer&amp; d);
+
+private:
+    int32_t a;
+}; 
+</pre> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1941960186bc1df6331fd22a6b75dd56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1941960186bc1df6331fd22a6b75dd56">&#9670;&nbsp;</a></span>beginArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,7 +208,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t beginArray </td>
+          <td class="memname">virtual std::size_t beginArray </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -211,14 +220,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Indicates that an array is currently being deserialized. Returns the length of the array. </p>
+<p>Indicates that an array is currently being deserialized. The fail bit is set on failure. </p><dl class="section return"><dt>Returns</dt><dd>The length of the array. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a34200511422669a72eba1b70011b667d">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a34200511422669a72eba1b70011b667d">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a34200511422669a72eba1b70011b667d">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a34200511422669a72eba1b70011b667d">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a7862064828fec1b2914d66604e7999b8">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a7862064828fec1b2914d66604e7999b8">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a7862064828fec1b2914d66604e7999b8">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a7862064828fec1b2914d66604e7999b8">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
-<a id="aca644625c3d1b4e1a0ed8bc238366a5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca644625c3d1b4e1a0ed8bc238366a5e">&#9670;&nbsp;</a></span>beginDictionary()</h2>
+<a id="af4e39592f9f384c0e8e6d4261f04ac98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4e39592f9f384c0e8e6d4261f04ac98">&#9670;&nbsp;</a></span>beginDictionary()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +236,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t beginDictionary </td>
+          <td class="memname">virtual std::size_t beginDictionary </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -239,28 +248,174 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Indicates that a dictionary is being deserialized. Returns the length of the dictionary. </p>
+<p>Indicates that a dictionary is being deserialized. The fail bit is set on failure. </p><dl class="section return"><dt>Returns</dt><dd>The length of the dictionary (always 0 on failure). </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a39f5ecbd46daea03eb23da1010b39f08">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a39f5ecbd46daea03eb23da1010b39f08">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a39f5ecbd46daea03eb23da1010b39f08">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a39f5ecbd46daea03eb23da1010b39f08">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a9023dbd005cf098b191018f8b3b76c7a">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a9023dbd005cf098b191018f8b3b76c7a">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a9023dbd005cf098b191018f8b3b76c7a">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a9023dbd005cf098b191018f8b3b76c7a">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
-<a id="a2628f0d35c899f2da2faaf87c70dbf01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2628f0d35c899f2da2faaf87c70dbf01">&#9670;&nbsp;</a></span>read() <span class="overload">[1/2]</span></h2>
+<a id="af28e6ddb0fd64677a2d6e89b83f66e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af28e6ddb0fd64677a2d6e89b83f66e15">&#9670;&nbsp;</a></span>beginObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a5d3016b17c69ea1b5319702cd26c42f3">requires</a> <a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; T &gt; void read </td>
+          <td class="memname">virtual void beginObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Indicates that a object is currently being deserialized. The fail bit is set on failure. </p>
+
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a75a9a0a16b8aa90555e4f58c3bcdf85a">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a75a9a0a16b8aa90555e4f58c3bcdf85a">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a75a9a0a16b8aa90555e4f58c3bcdf85a">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a75a9a0a16b8aa90555e4f58c3bcdf85a">BinaryDeserializer</a>.</p>
+
+</div>
+</div>
+<a id="ac0f94dfdce5575a205c5027cf5076d7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0f94dfdce5575a205c5027cf5076d7d">&#9670;&nbsp;</a></span>context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">Context</a>&amp; context </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The context of the serializer. </dd></dl>
+
+</div>
+</div>
+<a id="a485a91b8b038e64a48a1e4d81d5c598c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a485a91b8b038e64a48a1e4d81d5c598c">&#9670;&nbsp;</a></span>endArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void endArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Indicates that an array is no longer being deserialized. The fail bit is set on failure. </p>
+
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a16b4276dff6151ff189200145de70ec6">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a16b4276dff6151ff189200145de70ec6">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a16b4276dff6151ff189200145de70ec6">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a16b4276dff6151ff189200145de70ec6">BinaryDeserializer</a>.</p>
+
+</div>
+</div>
+<a id="ac91da475750ef1d19448c1b7085470ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac91da475750ef1d19448c1b7085470ba">&#9670;&nbsp;</a></span>endDictionary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void endDictionary </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Indicates that a dictionary is no longer being deserialized. The fail bit is set on failure. </p>
+
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a0b0426726478336768b7d0600b487521">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a0b0426726478336768b7d0600b487521">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a0b0426726478336768b7d0600b487521">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a0b0426726478336768b7d0600b487521">BinaryDeserializer</a>.</p>
+
+</div>
+</div>
+<a id="a95438b8f87d1556b089859c225005b1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95438b8f87d1556b089859c225005b1e">&#9670;&nbsp;</a></span>endObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void endObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Indicates that a object is no longer being deserialized. The fail bit is set on failure. </p>
+
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#aad0c31015def196159504c6b067831db">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#aad0c31015def196159504c6b067831db">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#aad0c31015def196159504c6b067831db">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#aad0c31015def196159504c6b067831db">BinaryDeserializer</a>.</p>
+
+</div>
+</div>
+<a id="a8bf54fcfa723c437dd819e3a473d969c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bf54fcfa723c437dd819e3a473d969c">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void read </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p>Deserializes a object. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Deserializes an object. The <code><a class="el" href="namespacecubos_1_1core_1_1data.html#a2786b82b9c750a9c74aff52855b60558" title="Overload the serialize function for types which define a serialize method.">cubos::core::data::deserialize</a></code> function must be implemented for the given type. The fail bit is set if the deserialization fails. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The type of the object. </td></tr>
   </table>
@@ -269,48 +424,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">obj</td><td>The object to deserialize. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ac77c1ee1ad8408437888f662d7504119"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac77c1ee1ad8408437888f662d7504119">&#9670;&nbsp;</a></span>read() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a5d3016b17c69ea1b5319702cd26c42f3">requires</a> <a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt; void read </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>obj</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TCtx &amp;&amp;&#160;</td>
-          <td class="paramname"><em>ctx</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Deserializes a object. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of the object. </td></tr>
-    <tr><td class="paramname">TCtx</td><td>The type of the context. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">obj</td><td>The object to deserialize. </td></tr>
-    <tr><td class="paramname">ctx</td><td>The context required to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
@@ -340,14 +453,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes a boolean. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes a boolean. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#addd50684ec1063ad96c5a412ed446255">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#addd50684ec1063ad96c5a412ed446255">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#addd50684ec1063ad96c5a412ed446255">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#addd50684ec1063ad96c5a412ed446255">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a189ecb253da8b162520080546cfc7c92">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a189ecb253da8b162520080546cfc7c92">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a189ecb253da8b162520080546cfc7c92">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a189ecb253da8b162520080546cfc7c92">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -374,14 +487,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes a float. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes a float. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#ab081b6125f63633200ee388f9d9cba5d">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#ab081b6125f63633200ee388f9d9cba5d">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#ab081b6125f63633200ee388f9d9cba5d">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#ab081b6125f63633200ee388f9d9cba5d">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a5bc7518dcc82974f2ce3fa9db924e72c">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a5bc7518dcc82974f2ce3fa9db924e72c">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a5bc7518dcc82974f2ce3fa9db924e72c">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a5bc7518dcc82974f2ce3fa9db924e72c">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -408,14 +521,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes a double. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes a double. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a81c8fc709b658bb90edee4bae9b6b5e5">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a81c8fc709b658bb90edee4bae9b6b5e5">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a81c8fc709b658bb90edee4bae9b6b5e5">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a81c8fc709b658bb90edee4bae9b6b5e5">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#af7a6152da4039adcc8bb2a2ae12f2f07">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#af7a6152da4039adcc8bb2a2ae12f2f07">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#af7a6152da4039adcc8bb2a2ae12f2f07">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#af7a6152da4039adcc8bb2a2ae12f2f07">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -442,14 +555,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes a signed 16 bit integer. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes a signed 16 bit integer. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#aac96809c20f27b12fac13abdafa40ec8">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#aac96809c20f27b12fac13abdafa40ec8">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#aac96809c20f27b12fac13abdafa40ec8">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#aac96809c20f27b12fac13abdafa40ec8">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a5d803a0d65a6613df7fcdaa6b490de83">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a5d803a0d65a6613df7fcdaa6b490de83">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a5d803a0d65a6613df7fcdaa6b490de83">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a5d803a0d65a6613df7fcdaa6b490de83">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -476,14 +589,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes a signed 32 bit integer. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes a signed 32 bit integer. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a10410746d95c9d9aa2cc2799782348f4">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a10410746d95c9d9aa2cc2799782348f4">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a10410746d95c9d9aa2cc2799782348f4">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a10410746d95c9d9aa2cc2799782348f4">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#ad1b7668e705333f87f5a7a0fe8573601">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#ad1b7668e705333f87f5a7a0fe8573601">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#ad1b7668e705333f87f5a7a0fe8573601">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#ad1b7668e705333f87f5a7a0fe8573601">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -510,14 +623,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes a signed 64 bit integer. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes a signed 64 bit integer. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a30309eb84c8bfbcfc93f92e400a237c8">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a30309eb84c8bfbcfc93f92e400a237c8">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a30309eb84c8bfbcfc93f92e400a237c8">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a30309eb84c8bfbcfc93f92e400a237c8">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a2c85237843ed460ab1aa3b67c7f9011a">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a2c85237843ed460ab1aa3b67c7f9011a">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a2c85237843ed460ab1aa3b67c7f9011a">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a2c85237843ed460ab1aa3b67c7f9011a">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -544,14 +657,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes a signed 8 bit integer. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes a signed 8 bit integer. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a947e4017fccd317e518415641e221e4e">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a947e4017fccd317e518415641e221e4e">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a947e4017fccd317e518415641e221e4e">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a947e4017fccd317e518415641e221e4e">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#ad0fe889dcc570d86bb3c28bbbe7e0a04">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#ad0fe889dcc570d86bb3c28bbbe7e0a04">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#ad0fe889dcc570d86bb3c28bbbe7e0a04">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#ad0fe889dcc570d86bb3c28bbbe7e0a04">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -578,14 +691,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes a string. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes a string. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#ab963929ab0c4cfdd82ade3bdf1fe1eec">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#ab963929ab0c4cfdd82ade3bdf1fe1eec">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#ab963929ab0c4cfdd82ade3bdf1fe1eec">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#ab963929ab0c4cfdd82ade3bdf1fe1eec">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#ae9fe3c7efa053fbcc3e862878ab2a585">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#ae9fe3c7efa053fbcc3e862878ab2a585">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#ae9fe3c7efa053fbcc3e862878ab2a585">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#ae9fe3c7efa053fbcc3e862878ab2a585">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -612,14 +725,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes an unsigned 16 bit integer. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes an unsigned 16 bit integer. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a127c755ca31f40039297deb214228807">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a127c755ca31f40039297deb214228807">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a127c755ca31f40039297deb214228807">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a127c755ca31f40039297deb214228807">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a6be372ff49bb7cbdd067d47ece8608de">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a6be372ff49bb7cbdd067d47ece8608de">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a6be372ff49bb7cbdd067d47ece8608de">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a6be372ff49bb7cbdd067d47ece8608de">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -646,14 +759,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes an unsigned 32 bit integer. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes an unsigned 32 bit integer. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#ae82a6aab4d4a305c6ca1ee5fb9b2fb41">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#ae82a6aab4d4a305c6ca1ee5fb9b2fb41">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#ae82a6aab4d4a305c6ca1ee5fb9b2fb41">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#ae82a6aab4d4a305c6ca1ee5fb9b2fb41">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#ab81bb2911ed0d66aa7b371202784f54e">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#ab81bb2911ed0d66aa7b371202784f54e">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#ab81bb2911ed0d66aa7b371202784f54e">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#ab81bb2911ed0d66aa7b371202784f54e">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -680,14 +793,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes an unsigned 64 bit integer. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes an unsigned 64 bit integer. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#ae384b1187e0aee6b7e7efee8c15854b8">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#ae384b1187e0aee6b7e7efee8c15854b8">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#ae384b1187e0aee6b7e7efee8c15854b8">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#ae384b1187e0aee6b7e7efee8c15854b8">BinaryDeserializer</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a586b79eba00da04d0f15d495a754590f">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a586b79eba00da04d0f15d495a754590f">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a586b79eba00da04d0f15d495a754590f">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a586b79eba00da04d0f15d495a754590f">BinaryDeserializer</a>.</p>
 
 </div>
 </div>
@@ -714,46 +827,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Deserializes an unsigned 8 bit integer. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deserializes an unsigned 8 bit integer. The fail bit is set if the deserialization fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The value to deserialize. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a8dab71034ccbe83c9e0cc5eb7992acc2">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a8dab71034ccbe83c9e0cc5eb7992acc2">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a8dab71034ccbe83c9e0cc5eb7992acc2">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a8dab71034ccbe83c9e0cc5eb7992acc2">BinaryDeserializer</a>.</p>
-
-</div>
-</div>
-<a id="a5d3016b17c69ea1b5319702cd26c42f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d3016b17c69ea1b5319702cd26c42f3">&#9670;&nbsp;</a></span>requires()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">requires </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespacecubos_1_1core_1_1data.html#a78b2850a56b74d69b8984a5ccc060dba">TriviallyDeserializable</a>&lt; T &gt; &amp;&amp;!<a class="el" href="namespacecubos_1_1core_1_1data.html#a6c5f870db3ff0d0b463dd3e5b4c89d96">ContextDeserializable</a>&lt; T, TCtx &gt;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> &amp;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Deserializes a object. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type of the object. </td></tr>
-    <tr><td class="paramname">TCtx</td><td>The type of the context. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">obj</td><td>The object to deserialize. </td></tr>
-    <tr><td class="paramname">ctx</td><td>The context required to deserialize. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a3a1f05c411448cace664894d89399afb">YAMLDeserializer</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html#a3a1f05c411448cace664894d89399afb">Unpackager</a>, <a class="el" href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a3a1f05c411448cace664894d89399afb">JSONDeserializer</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html#a3a1f05c411448cace664894d89399afb">BinaryDeserializer</a>.</p>
 
 </div>
 </div>

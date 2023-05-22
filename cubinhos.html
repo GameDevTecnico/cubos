@@ -152,14 +152,14 @@ Usage</h2>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a>;</div>
 <div class="line"> </div>
-<div class="line">    <a class="code" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">FileSystem::mount</a>(<span class="stringliteral">&quot;/logo.png&quot;</span>, std::make_shared&lt;EmbeddedArchive&gt;(<span class="stringliteral">&quot;logo.png&quot;</span>));</div>
+<div class="line">    <a class="code" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">FileSystem::mount</a>(<span class="stringliteral">&quot;/logo.png&quot;</span>, std::make_shared&lt;EmbeddedArchive&gt;(<span class="stringliteral">&quot;logo.png&quot;</span>));</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasscubos_1_1core_1_1data_1_1FileSystem_html_a24316e70715c3ebe4e53e13f2d01f909"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1FileSystem.html#a24316e70715c3ebe4e53e13f2d01f909">cubos::core::data::FileSystem::mount</a></div><div class="ttdeci">static void mount(std::string_view path, std::shared_ptr&lt; Archive &gt; archive)</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> archive.hpp:7</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1data_1_1FileSystem_html_aac7d7493f14704df36b00242d15cbf07"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">cubos::core::data::FileSystem::mount</a></div><div class="ttdeci">static void mount(std::string_view path, const std::shared_ptr&lt; Archive &gt; &amp;archive)</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>
 </div><!-- fragment --><p>It's also possible to embed a whole directory, in which case you will need to use the <code>-r</code> flag. This will recursively embed all files in the directory.</p>
 <p>Checkout the <code>embedded_archive</code> sample for a complete example.</p>
 <h1><a class="anchor" id="autotoc_md40"></a>
@@ -180,7 +180,7 @@ Generate</h1>
 <div class="line"><span class="comment">// The serialization functions must be defined in this namespace.</span></div>
 <div class="line"><span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div>
 <div class="line">{</div>
-<div class="line">    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> MyComponent&amp; c, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
+<div class="line">    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a9adc8a44a1124cfbf965caef44d4982c">serialize</a>(Serializer&amp; s, <span class="keyword">const</span> MyComponent&amp; c, <span class="keyword">const</span> <span class="keywordtype">char</span>* name)</div>
 <div class="line">    {</div>
 <div class="line">        s.beginObject(name);</div>
 <div class="line">        s.write(c.x);</div>
@@ -189,7 +189,7 @@ Generate</h1>
 <div class="line">        s.endObject();</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> deserialize(Deserializer&amp; d, MyComponent&amp; c)</div>
+<div class="line">    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a2786b82b9c750a9c74aff52855b60558">deserialize</a>(Deserializer&amp; d, MyComponent&amp; c)</div>
 <div class="line">    {</div>
 <div class="line">        d.beginObject();</div>
 <div class="line">        d.read(c.x);</div>
@@ -210,8 +210,9 @@ Generate</h1>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">CUBOS_REGISTER_COMPONENT(MyComponent, <span class="stringliteral">&quot;my_component&quot;</span>);</div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a2162914e6d40f7ce4f2f7bc3a18b074f"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Handle &amp;handle, Handle::SerContext ctx, const char *name)</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> blueprint.hpp:12</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a2786b82b9c750a9c74aff52855b60558"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a2786b82b9c750a9c74aff52855b60558">cubos::core::data::deserialize</a></div><div class="ttdeci">void deserialize(Deserializer &amp;des, T &amp;obj)</div><div class="ttdoc">Overload the serialize function for types which define a serialize method.</div><div class="ttdef"><b>Definition:</b> deserializer.hpp:188</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a9adc8a44a1124cfbf965caef44d4982c"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a9adc8a44a1124cfbf965caef44d4982c">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;ser, const T &amp;obj, const char *name)</div><div class="ttdoc">Overload the serialize function for types which define a serialize method.</div><div class="ttdef"><b>Definition:</b> serializer.hpp:187</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> accessors.hpp:6</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1gl_html_a1d1cfd8ffb84e947f82999c682b666a7"><div class="ttname"><a href="namespacecubos_1_1core_1_1gl.html#a1d1cfd8ffb84e947f82999c682b666a7">cubos::core::gl::Type</a></div><div class="ttdeci">Type</div><div class="ttdoc">Data type.</div><div class="ttdef"><b>Definition:</b> render_device.hpp:84</div></div>
 </div><!-- fragment --><p>This amount of boilerplate is not acceptable, specially for user-facing code. The <code>cubinhos generate</code> command makes use of a recent C++ feature called <a href="https://en.cppreference.com/w/cpp/language/attributes">attributes</a>. Attributes are usually used to provide hints to the compiler. However, on our case, we're using them to mark types as components.</p>
 <p>With <code>cubinhos generate</code>, the same component definition can be written as:</p>

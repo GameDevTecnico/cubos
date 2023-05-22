@@ -91,19 +91,16 @@ $(document).ready(function(){initNavTree('util_8hpp_source.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef CUBOS_CORE_GL_UTIL_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#define CUBOS_CORE_GL_UTIL_HPP</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/gl/render_device.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1gl.html">cubos::core::gl</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="namespacecubos_1_1core_1_1gl.html#afe8cfc6527c53b5ed688e88796077a4f">   16</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1gl.html#afe8cfc6527c53b5ed688e88796077a4f">generateScreenQuad</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a>&amp; renderDevice, <span class="keyword">const</span> ShaderPipeline&amp; pipeline, VertexArray&amp; va);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_CORE_GL_UTIL_HPP</span></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:572</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1gl_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1gl.html">cubos::core::gl</a></div><div class="ttdoc">Contains the low-level graphics API used by the engine (RenderDevice). Also contains voxel related ut...</div><div class="ttdef"><b>Definition:</b> camera.hpp:9</div></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/gl/render_device.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1gl.html">cubos::core::gl</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespacecubos_1_1core_1_1gl.html#afe8cfc6527c53b5ed688e88796077a4f">   15</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1gl.html#afe8cfc6527c53b5ed688e88796077a4f">generateScreenQuad</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a>&amp; renderDevice, <span class="keyword">const</span> ShaderPipeline&amp; pipeline, VertexArray&amp; va);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:571</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1gl_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1gl.html">cubos::core::gl</a></div><div class="ttdoc">Contains the low-level graphics API used by the engine (RenderDevice). Also contains voxel related ut...</div><div class="ttdef"><b>Definition:</b> camera.hpp:8</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1gl_html_afe8cfc6527c53b5ed688e88796077a4f"><div class="ttname"><a href="namespacecubos_1_1core_1_1gl.html#afe8cfc6527c53b5ed688e88796077a4f">cubos::core::gl::generateScreenQuad</a></div><div class="ttdeci">void generateScreenQuad(RenderDevice &amp;renderDevice, const ShaderPipeline &amp;pipeline, VertexArray &amp;va)</div><div class="ttdoc">Creates the resources required to draw a quad that fills the screen and returns its VertexArray.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

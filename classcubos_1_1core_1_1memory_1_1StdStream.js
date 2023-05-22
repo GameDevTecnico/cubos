@@ -1,12 +1,12 @@
 var classcubos_1_1core_1_1memory_1_1StdStream =
 [
     [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html#ad5e92079633e252784b8312983e9db78", null ],
-    [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html#a478c803d58a4e6770258bc0a72242c7f", null ],
-    [ "~StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html#a36a61cfe34d8a4aa6a71b85e520f3dff", null ],
-    [ "eof", "classcubos_1_1core_1_1memory_1_1StdStream.html#affe5c497f81f4cbc7bc3a75991700fbc", null ],
-    [ "peek", "classcubos_1_1core_1_1memory_1_1StdStream.html#a47ed38c5e124120381042fcde7f6691d", null ],
-    [ "read", "classcubos_1_1core_1_1memory_1_1StdStream.html#aaf49dbbcd7f00ceb72013702ab022c40", null ],
-    [ "seek", "classcubos_1_1core_1_1memory_1_1StdStream.html#af76e1bca26a37182b365e301bc89948c", null ],
-    [ "tell", "classcubos_1_1core_1_1memory_1_1StdStream.html#ad282283aa58d8a575ba0dc140a2ec38a", null ],
-    [ "write", "classcubos_1_1core_1_1memory_1_1StdStream.html#a7b9eff743c3caefd1c2d1270009643f4", null ]
+    [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html#aa0b3765e25170bd5c343be525c78b02a", null ],
+    [ "~StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html#a989979a4dd4c47f3d8091d9498aa9fb3", null ],
+    [ "eof", "classcubos_1_1core_1_1memory_1_1StdStream.html#a73d5f601b6343f8c2e7fb687ef60d086", null ],
+    [ "peek", "classcubos_1_1core_1_1memory_1_1StdStream.html#a3013ec4f106910640106e7b5b08dd6fe", null ],
+    [ "read", "classcubos_1_1core_1_1memory_1_1StdStream.html#adad93d726cd6c6035c90765ff4ab352a", null ],
+    [ "seek", "classcubos_1_1core_1_1memory_1_1StdStream.html#a4338d5b9e7520b6910f20717ee2f3efc", null ],
+    [ "tell", "classcubos_1_1core_1_1memory_1_1StdStream.html#abda1340bc744d918f57ae7d90e11463c", null ],
+    [ "write", "classcubos_1_1core_1_1memory_1_1StdStream.html#a29e16b5d12d3bc24e1fc8adc85699ead", null ]
 ];

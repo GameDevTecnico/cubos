@@ -1,7 +1,7 @@
 var classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint =
 [
-    [ "ShaderBindingPoint", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#ac3fb6b7f8804b9d7ff8ab18b0be2c5ad", null ],
     [ "~ShaderBindingPoint", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a7427a243dbd80794a00e4781755b94d6", null ],
+    [ "ShaderBindingPoint", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#ac3fb6b7f8804b9d7ff8ab18b0be2c5ad", null ],
     [ "bind", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#adc1455084700e7c459c20fc60f4f2ad7", null ],
     [ "bind", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a64a1e74a78863443c950eae63b3e0625", null ],
     [ "bind", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html#a2a7d0988416775427e91635f79be8b39", null ],

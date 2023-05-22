@@ -2,18 +2,18 @@ var classcubos_1_1core_1_1data_1_1Serializer =
 [
     [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html#acfe31ff4a22ef53fea1094a082321dc7", null ],
     [ "~Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html#a3007d8e543ed121767b965c4920f14a7", null ],
-    [ "beginArray", "classcubos_1_1core_1_1data_1_1Serializer.html#a07891e9caacef463c45a1587bcdd7fe8", null ],
-    [ "beginDictionary", "classcubos_1_1core_1_1data_1_1Serializer.html#acbeafb69185cfd5e5be739606e49bcd1", null ],
+    [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html#a671833651346535b186f22561b183698", null ],
+    [ "beginArray", "classcubos_1_1core_1_1data_1_1Serializer.html#a0d6429422b1b59f4f93891a5d7c647c9", null ],
+    [ "beginDictionary", "classcubos_1_1core_1_1data_1_1Serializer.html#a6f13571221e782abbce13e4e5caad7fe", null ],
     [ "beginObject", "classcubos_1_1core_1_1data_1_1Serializer.html#a60d39b05c7b703ae5c01d2179a389314", null ],
+    [ "context", "classcubos_1_1core_1_1data_1_1Serializer.html#ac0f94dfdce5575a205c5027cf5076d7d", null ],
     [ "endArray", "classcubos_1_1core_1_1data_1_1Serializer.html#a485a91b8b038e64a48a1e4d81d5c598c", null ],
     [ "endDictionary", "classcubos_1_1core_1_1data_1_1Serializer.html#ac91da475750ef1d19448c1b7085470ba", null ],
     [ "endObject", "classcubos_1_1core_1_1data_1_1Serializer.html#a95438b8f87d1556b089859c225005b1e", null ],
     [ "failed", "classcubos_1_1core_1_1data_1_1Serializer.html#a03c20ddaa381f1926a24672f545b70eb", null ],
     [ "flush", "classcubos_1_1core_1_1data_1_1Serializer.html#ad3aed50bc3b4459454ccb8c64f5ced5a", null ],
-    [ "requires", "classcubos_1_1core_1_1data_1_1Serializer.html#af74bf8f4ad07e115e3c3b852ee91ff1b", null ],
-    [ "write", "classcubos_1_1core_1_1data_1_1Serializer.html#a5f152aac97f3df1ea0b11483a472a869", null ],
-    [ "write", "classcubos_1_1core_1_1data_1_1Serializer.html#a6dd81a7333e8c0fed3ff99352bb1d566", null ],
-    [ "write", "classcubos_1_1core_1_1data_1_1Serializer.html#a48de1b3c29de61ef1d9498b31c8b52ac", null ],
+    [ "operator=", "classcubos_1_1core_1_1data_1_1Serializer.html#aa6cfb82796bd99ae286bbc5cd6353b7c", null ],
+    [ "write", "classcubos_1_1core_1_1data_1_1Serializer.html#a92dc88865a2a2066bd945632ebb5b7b4", null ],
     [ "writeBool", "classcubos_1_1core_1_1data_1_1Serializer.html#a0e9412ba97972ec25945b835a58cf934", null ],
     [ "writeF32", "classcubos_1_1core_1_1data_1_1Serializer.html#aa67ce288dfc9aac7c9ea24c9f2718954", null ],
     [ "writeF64", "classcubos_1_1core_1_1data_1_1Serializer.html#a60e1da8c2f15c1bce1b6231f2a2b5d3a", null ],
@@ -26,7 +26,5 @@ var classcubos_1_1core_1_1data_1_1Serializer =
     [ "writeU32", "classcubos_1_1core_1_1data_1_1Serializer.html#a6120d44a4639dacc9f9545203a915895", null ],
     [ "writeU64", "classcubos_1_1core_1_1data_1_1Serializer.html#ae6b41d0739efef8ba87244a63a58e1bf", null ],
     [ "writeU8", "classcubos_1_1core_1_1data_1_1Serializer.html#a8c50ac3fdc809dbeb3fe350b7aec94dd", null ],
-    [ "ctx", "classcubos_1_1core_1_1data_1_1Serializer.html#a77a7bca430192d96db974b9355f7f0ea", null ],
-    [ "failBit", "classcubos_1_1core_1_1data_1_1Serializer.html#aecea87bd5594b8a5085798d70d9cf566", null ],
-    [ "name", "classcubos_1_1core_1_1data_1_1Serializer.html#a6da80aacb70b4e55f88b745ca6fcfb5d", null ]
+    [ "mFailBit", "classcubos_1_1core_1_1data_1_1Serializer.html#ac5c08fd1cea9f5bf42a45e1fdd44211e", null ]
 ];

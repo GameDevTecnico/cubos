@@ -1,13 +1,15 @@
 var namespacecubos_1_1core_1_1ecs =
 [
     [ "impl", "namespacecubos_1_1core_1_1ecs_1_1impl.html", "namespacecubos_1_1core_1_1ecs_1_1impl" ],
+    [ "Read", "classcubos_1_1core_1_1ecs_1_1Read.html", "classcubos_1_1core_1_1ecs_1_1Read" ],
+    [ "Write", "classcubos_1_1core_1_1ecs_1_1Write.html", "classcubos_1_1core_1_1ecs_1_1Write" ],
+    [ "OptRead", "classcubos_1_1core_1_1ecs_1_1OptRead.html", "classcubos_1_1core_1_1ecs_1_1OptRead" ],
+    [ "OptWrite", "classcubos_1_1core_1_1ecs_1_1OptWrite.html", "classcubos_1_1core_1_1ecs_1_1OptWrite" ],
     [ "Blueprint", "classcubos_1_1core_1_1ecs_1_1Blueprint.html", "classcubos_1_1core_1_1ecs_1_1Blueprint" ],
     [ "EntityBuilder", "classcubos_1_1core_1_1ecs_1_1EntityBuilder.html", "classcubos_1_1core_1_1ecs_1_1EntityBuilder" ],
     [ "BlueprintBuilder", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html", "classcubos_1_1core_1_1ecs_1_1BlueprintBuilder" ],
     [ "Commands", "classcubos_1_1core_1_1ecs_1_1Commands.html", "classcubos_1_1core_1_1ecs_1_1Commands" ],
     [ "CommandBuffer", "classcubos_1_1core_1_1ecs_1_1CommandBuffer.html", "classcubos_1_1core_1_1ecs_1_1CommandBuffer" ],
-    [ "ComponentStorage", "structcubos_1_1core_1_1ecs_1_1ComponentStorage.html", null ],
-    [ "ComponentStorage< T >", "structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4.html", "structcubos_1_1core_1_1ecs_1_1ComponentStorage_3_01T_01_4" ],
     [ "ReadStorage", "classcubos_1_1core_1_1ecs_1_1ReadStorage.html", "classcubos_1_1core_1_1ecs_1_1ReadStorage" ],
     [ "WriteStorage", "classcubos_1_1core_1_1ecs_1_1WriteStorage.html", "classcubos_1_1core_1_1ecs_1_1WriteStorage" ],
     [ "ComponentManager", "classcubos_1_1core_1_1ecs_1_1ComponentManager.html", "classcubos_1_1core_1_1ecs_1_1ComponentManager" ],
@@ -32,7 +34,6 @@ var namespacecubos_1_1core_1_1ecs =
     [ "SystemWrapper", "classcubos_1_1core_1_1ecs_1_1SystemWrapper.html", "classcubos_1_1core_1_1ecs_1_1SystemWrapper" ],
     [ "VecStorage", "classcubos_1_1core_1_1ecs_1_1VecStorage.html", "classcubos_1_1core_1_1ecs_1_1VecStorage" ],
     [ "World", "classcubos_1_1core_1_1ecs_1_1World.html", "classcubos_1_1core_1_1ecs_1_1World" ],
-    [ "getComponentName", "namespacecubos_1_1core_1_1ecs.html#a9e81f6d785dcfa68dcb144999aeccbf9", null ],
-    [ "getComponentName", "namespacecubos_1_1core_1_1ecs.html#a458c164d4dfe1f31240bea7a3bc7330d", null ],
-    [ "ComponentUsingStorage", "namespacecubos_1_1core_1_1ecs.html#a0d2f4625a3a355f8c7b59782980a0230", null ]
+    [ "getComponentName", "namespacecubos_1_1core_1_1ecs.html#a434725f95682987f03cf10fedb197adb", null ],
+    [ "getComponentName", "namespacecubos_1_1core_1_1ecs.html#a8c0b7f1425b4566c283cb721bea3862a", null ]
 ];

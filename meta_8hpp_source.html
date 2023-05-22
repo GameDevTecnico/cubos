@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.9.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: engine/include/cubos/engine/data/meta.hpp Source File</title>
+    <title>CUBOS.: engine/include/cubos/engine/assets/meta.hpp Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -90,77 +90,58 @@ $(document).ready(function(){initNavTree('meta_8hpp_source.html',''); initResiza
 <div class="title">meta.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CUBOS_ENGINE_DATA_META_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CUBOS_ENGINE_DATA_META_HPP</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cubos/core/data/serializer.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/data/deserializer.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>cubos::engine::data</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">class </span>Meta;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="namespacecubos_1_1core_1_1data.html#afa77a56485be6b9757f17780f2734059">   22</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">serialize</a>(<a class="code" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a>&amp; serializer, <span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">engine::data::Meta</a>&amp; meta, <span class="keyword">const</span> <span class="keywordtype">char</span>* name);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="namespacecubos_1_1core_1_1data.html#ae14a322ae8e18a98eaa54c3df7797729">   27</a></span>&#160;    <span class="keywordtype">void</span> deserialize(<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a>&amp; deserializer, <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">engine::data::Meta</a>&amp; meta);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span>cubos::engine::data</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">enum class</span> Usage</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        Static,  </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        Dynamic, </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    };</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1Meta.html">   41</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a> final</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>(<span class="keyword">const</span> std::string&amp; <span class="keywordtype">id</span>, <span class="keyword">const</span> std::string&amp; type, Usage usage);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>(<a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>&amp;&amp; rhs);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        ~<a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1Meta.html#aa28a6e41d0c530d873dd778c2c7ae079">   51</a></span>&#160;        <span class="keyword">const</span> std::string&amp; <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html#aa28a6e41d0c530d873dd778c2c7ae079">getId</a>() <span class="keyword">const</span>;</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;optional&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>cubos::engine</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1AssetMeta.html">   17</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a> final</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1AssetMeta_1_1Exclude.html">   21</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structcubos_1_1engine_1_1AssetMeta_1_1Exclude.html">Exclude</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        {</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1AssetMeta_1_1Exclude.html#aa97499ee2d1b88d53a6da452d4e5029a">   24</a></span>&#160;            std::vector&lt;std::string&gt; <a class="code" href="structcubos_1_1engine_1_1AssetMeta_1_1Exclude.html#aa97499ee2d1b88d53a6da452d4e5029a">keys</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        };</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        ~<a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>(<span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>(<a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>&amp; operator=(<a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1AssetMeta.html#a80219b29ecb873cbae5ff86e0322473d">   36</a></span>&#160;        std::optional&lt;std::string&gt; <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html#a80219b29ecb873cbae5ff86e0322473d">get</a>(std::string_view key) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1AssetMeta.html#aecd5a4d1b997832ee73865b38e9eb4ed">   41</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html#aecd5a4d1b997832ee73865b38e9eb4ed">set</a>(std::string_view key, std::string_view value);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1AssetMeta.html#ad5fd19a4e1529b7f905b1927efc9ecf6">   45</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html#ad5fd19a4e1529b7f905b1927efc9ecf6">remove</a>(std::string_view key);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1AssetMeta.html#af62a605cc2ef5354a67b98a4d97ffb99">   48</a></span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> std::unordered_map&lt;std::string, std::string&gt;&amp; <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html#af62a605cc2ef5354a67b98a4d97ffb99">params</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> mParams;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1Meta.html#a2052e1d767235fb0a5f759a9a2470b73">   55</a></span>&#160;        <span class="keyword">const</span> std::string&amp; <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html#a2052e1d767235fb0a5f759a9a2470b73">getType</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1Meta.html#a9f7843a249fb4718a1db93d52a17f8a5">   59</a></span>&#160;        Usage <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html#a9f7843a249fb4718a1db93d52a17f8a5">getUsage</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1Meta.html#a958962ddbf4ff553e9de45a38224418c">   63</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html#a958962ddbf4ff553e9de45a38224418c">isStored</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1data_1_1Meta.html#a6bcad3f9fa134cb9645c11a3e0b58b21">   67</a></span>&#160;        <span class="keyword">const</span> std::unordered_map&lt;std::string, std::string&gt;&amp; <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html#a6bcad3f9fa134cb9645c11a3e0b58b21">getParameters</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">core::data::serialize</a>(<a class="code" href="classcubos_1_1core_1_1data_1_1Serializer.html">core::data::Serializer</a>&amp;, <span class="keyword">const</span> <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>&amp;, <span class="keyword">const</span> <span class="keywordtype">char</span>*);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">void</span> core::data::deserialize(<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html">core::data::Deserializer</a>&amp;, <a class="code" href="classcubos_1_1engine_1_1data_1_1Meta.html">Meta</a>&amp;);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        std::string id;                                          </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        std::string type;                                        </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        Usage usage;                                             </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">bool</span> stored;                                             </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        std::unordered_map&lt;std::string, std::string&gt; parameters; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    };</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;} <span class="comment">// namespace cubos::engine::data</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// CUBOS_ENGINE_DATA_META_HPP</span></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Deserializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html">cubos::core::data::Deserializer</a></div><div class="ttdoc">Abstract class for deserializing data.</div><div class="ttdef"><b>Definition:</b> deserializer.hpp:91</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Serializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Serializer.html">cubos::core::data::Serializer</a></div><div class="ttdoc">Abstract class for serializing data.</div><div class="ttdef"><b>Definition:</b> serializer.hpp:89</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Meta_html"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Meta.html">cubos::engine::data::Meta</a></div><div class="ttdef"><b>Definition:</b> meta.hpp:42</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Meta_html_a2052e1d767235fb0a5f759a9a2470b73"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Meta.html#a2052e1d767235fb0a5f759a9a2470b73">cubos::engine::data::Meta::getType</a></div><div class="ttdeci">const std::string &amp; getType() const</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Meta_html_a6bcad3f9fa134cb9645c11a3e0b58b21"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Meta.html#a6bcad3f9fa134cb9645c11a3e0b58b21">cubos::engine::data::Meta::getParameters</a></div><div class="ttdeci">const std::unordered_map&lt; std::string, std::string &gt; &amp; getParameters() const</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Meta_html_a958962ddbf4ff553e9de45a38224418c"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Meta.html#a958962ddbf4ff553e9de45a38224418c">cubos::engine::data::Meta::isStored</a></div><div class="ttdeci">bool isStored() const</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Meta_html_a9f7843a249fb4718a1db93d52a17f8a5"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Meta.html#a9f7843a249fb4718a1db93d52a17f8a5">cubos::engine::data::Meta::getUsage</a></div><div class="ttdeci">Usage getUsage() const</div></div>
-<div class="ttc" id="aclasscubos_1_1engine_1_1data_1_1Meta_html_aa28a6e41d0c530d873dd778c2c7ae079"><div class="ttname"><a href="classcubos_1_1engine_1_1data_1_1Meta.html#aa28a6e41d0c530d873dd778c2c7ae079">cubos::engine::data::Meta::getId</a></div><div class="ttdeci">const std::string &amp; getId() const</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> archive.hpp:7</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1data_html_a2162914e6d40f7ce4f2f7bc3a18b074f"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html#a2162914e6d40f7ce4f2f7bc3a18b074f">cubos::core::data::serialize</a></div><div class="ttdeci">void serialize(Serializer &amp;serializer, const Handle &amp;handle, Handle::SerContext ctx, const char *name)</div></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1AssetMeta.html#aca43dd151a1b325f5554374f7c353533">   54</a></span>&#160;        <span class="keyword">inline</span> std::unordered_map&lt;std::string, std::string&gt;&amp; <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html#aca43dd151a1b325f5554374f7c353533">params</a>()</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">return</span> mParams;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        std::unordered_map&lt;std::string, std::string&gt; mParams; <span class="comment">//&lt; Parameters of the asset.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    };</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">// namespace cubos::engine</span></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1AssetMeta_html"><div class="ttname"><a href="classcubos_1_1engine_1_1AssetMeta.html">cubos::engine::AssetMeta</a></div><div class="ttdef"><b>Definition:</b> meta.hpp:18</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1AssetMeta_html_a80219b29ecb873cbae5ff86e0322473d"><div class="ttname"><a href="classcubos_1_1engine_1_1AssetMeta.html#a80219b29ecb873cbae5ff86e0322473d">cubos::engine::AssetMeta::get</a></div><div class="ttdeci">std::optional&lt; std::string &gt; get(std::string_view key) const</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1AssetMeta_html_aca43dd151a1b325f5554374f7c353533"><div class="ttname"><a href="classcubos_1_1engine_1_1AssetMeta.html#aca43dd151a1b325f5554374f7c353533">cubos::engine::AssetMeta::params</a></div><div class="ttdeci">std::unordered_map&lt; std::string, std::string &gt; &amp; params()</div><div class="ttdef"><b>Definition:</b> meta.hpp:54</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1AssetMeta_html_ad5fd19a4e1529b7f905b1927efc9ecf6"><div class="ttname"><a href="classcubos_1_1engine_1_1AssetMeta.html#ad5fd19a4e1529b7f905b1927efc9ecf6">cubos::engine::AssetMeta::remove</a></div><div class="ttdeci">void remove(std::string_view key)</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1AssetMeta_html_aecd5a4d1b997832ee73865b38e9eb4ed"><div class="ttname"><a href="classcubos_1_1engine_1_1AssetMeta.html#aecd5a4d1b997832ee73865b38e9eb4ed">cubos::engine::AssetMeta::set</a></div><div class="ttdeci">void set(std::string_view key, std::string_view value)</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1AssetMeta_html_af62a605cc2ef5354a67b98a4d97ffb99"><div class="ttname"><a href="classcubos_1_1engine_1_1AssetMeta.html#af62a605cc2ef5354a67b98a4d97ffb99">cubos::engine::AssetMeta::params</a></div><div class="ttdeci">const std::unordered_map&lt; std::string, std::string &gt; &amp; params() const</div><div class="ttdef"><b>Definition:</b> meta.hpp:48</div></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1AssetMeta_1_1Exclude_html"><div class="ttname"><a href="structcubos_1_1engine_1_1AssetMeta_1_1Exclude.html">cubos::engine::AssetMeta::Exclude</a></div><div class="ttdoc">Used as context to exclude parameters from being serialized.</div><div class="ttdef"><b>Definition:</b> meta.hpp:22</div></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1AssetMeta_1_1Exclude_html_aa97499ee2d1b88d53a6da452d4e5029a"><div class="ttname"><a href="structcubos_1_1engine_1_1AssetMeta_1_1Exclude.html#aa97499ee2d1b88d53a6da452d4e5029a">cubos::engine::AssetMeta::Exclude::keys</a></div><div class="ttdeci">std::vector&lt; std::string &gt; keys</div><div class="ttdoc">Keys of the parameters to exclude when serializing.</div><div class="ttdef"><b>Definition:</b> meta.hpp:24</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
@@ -168,7 +149,7 @@ $(document).ready(function(){initNavTree('meta_8hpp_source.html',''); initResiza
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_7c9ef2eb700fb078862164d1aa7d90b1.html">data</a></li><li class="navelem"><b>meta.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_0835e003fa277f66ce5cf543d578f6a2.html">assets</a></li><li class="navelem"><b>meta.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.9.1 </li>
   </ul>
