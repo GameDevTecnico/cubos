@@ -27,4 +27,4 @@ namespace cubos::engine
     ///
     /// @param cubos CUBOS. main class
     void transformPlugin(Cubos& cubos);
-}; // namespace cubos::engine
+} // namespace cubos::engine

@@ -13,4 +13,4 @@ namespace cubos::engine::tools
     //
     /// @param cubos CUBOS. main class
     void settingsInspectorPlugin(Cubos& cubos);
-}; // namespace cubos::engine::tools
+} // namespace cubos::engine::tools
