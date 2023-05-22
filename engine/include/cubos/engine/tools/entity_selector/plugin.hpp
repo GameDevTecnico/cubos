@@ -23,4 +23,4 @@ namespace cubos::engine::tools
     ///
     /// @param cubos CUBOS. main class
     void entitySelectorPlugin(Cubos& cubos);
-}; // namespace cubos::engine::tools
+} // namespace cubos::engine::tools

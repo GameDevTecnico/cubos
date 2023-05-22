@@ -8,4 +8,4 @@ namespace cubos::engine::tools
     ///
     /// @param cubos CUBOS. main class
     void entityInspectorPlugin(Cubos& cubos);
-}; // namespace cubos::engine::tools
+} // namespace cubos::engine::tools

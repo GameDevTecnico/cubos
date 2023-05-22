@@ -17,4 +17,4 @@ namespace cubos::engine
     ///
     /// @param cubos CUBOS. main class
     void fileSettingsPlugin(Cubos& cubos);
-}; // namespace cubos::engine
+} // namespace cubos::engine

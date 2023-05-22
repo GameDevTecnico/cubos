@@ -24,4 +24,4 @@ namespace cubos::engine
     ///
     /// @param cubos CUBOS. main class
     void imguiPlugin(Cubos& cubos);
-}; // namespace cubos::engine
+} // namespace cubos::engine
