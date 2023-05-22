@@ -165,6 +165,7 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     void Blueprint::add(Entity entity, const ComponentTypes&... components)
     {
+        (void)entity;
         assert(entity.generation == 0 && mMap.hasRef(entity));
 
         (
