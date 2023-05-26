@@ -73,14 +73,13 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/assets/meta.hpp"
     "include/cubos/engine/assets/bridges/file.hpp"
     "include/cubos/engine/assets/bridges/json.hpp"
+    "include/cubos/engine/assets/bridges/binary.hpp"
 
     "include/cubos/engine/scene/plugin.hpp"
     "include/cubos/engine/scene/scene.hpp"
     "include/cubos/engine/scene/bridge.hpp"
 
     "include/cubos/engine/voxels/plugin.hpp"
-    "include/cubos/engine/voxels/grid_bridge.hpp"
-    "include/cubos/engine/voxels/palette_bridge.hpp"
 
     "include/cubos/engine/renderer/plugin.hpp"
     "include/cubos/engine/renderer/frame.hpp"
