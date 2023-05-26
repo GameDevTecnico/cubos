@@ -10,6 +10,7 @@
 
 #include <vector>
 
+#include <cubos/core/data/file_system.hpp>
 #include <cubos/core/settings.hpp>
 
 #include <cubos/engine/assets/bridges/json.hpp>
@@ -17,6 +18,7 @@
 
 using cubos::core::Settings;
 using cubos::core::data::Deserializer;
+using cubos::core::data::FileSystem;
 using cubos::core::data::Serializer;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
@@ -77,7 +79,7 @@ static void save_and_load(Write<Assets> assets)
     // Set a path for the asset - necessary for the JSONBridge to know where to save the asset.
     // It is important to set the correct extension, so that the asset manager knows which bridge
     // to use.
-    assets->writeMeta(handle)->set("path", "/assets/sample.my");
+    assets->writeMeta(handle)->set("path", "/assets/sample/asset.my");
 
     // Save the asset.
     assets->save(handle);
@@ -98,11 +100,11 @@ static void save_and_load(Write<Assets> assets)
     }
 
     // Wait for input before exiting.
-    Stream::stdOut.printf("Press enter to exit...");
+    Stream::stdOut.print("You can now check the contents of the file!\nPress enter to exit...");
     Stream::stdIn.get();
 
-    // Cleanup and exit.
-    // TODO
+    // Cleanup the created asset.
+    FileSystem::destroy("/assets/sample");
 }
 
 int main()
