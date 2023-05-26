@@ -17,7 +17,13 @@ bool FileBridge::load(Assets& assets, const AnyAsset& handle)
         return false;
     }
 
-    return this->loadFromFile(assets, handle, *stream);
+    if (!this->loadFromFile(assets, handle, *stream))
+    {
+        CUBOS_ERROR("Could not load asset from file '{}'", path);
+        return false;
+    }
+
+    return true;
 }
 
 bool FileBridge::save(const Assets& assets, const AnyAsset& handle)
@@ -30,5 +36,11 @@ bool FileBridge::save(const Assets& assets, const AnyAsset& handle)
         return false;
     }
 
-    return this->saveToFile(assets, handle, *stream);
+    if (!this->saveToFile(assets, handle, *stream))
+    {
+        CUBOS_ERROR("Could not save asset to file '{}'", path);
+        return false;
+    }
+
+    return true;
 }

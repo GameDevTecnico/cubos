@@ -31,7 +31,7 @@ namespace cubos::engine
             deserializer.read(data);
             if (deserializer.failed())
             {
-                CUBOS_ERROR("Could not deserialize JSON file '{}'", path);
+                CUBOS_ERROR("Could not deserialize asset from JSON file");
                 return false;
             }
 
@@ -49,7 +49,7 @@ namespace cubos::engine
             serializer.write(*data, nullptr); // JSON serializer does not use names.
             if (serializer.failed())
             {
-                CUBOS_ERROR("Could not serialize asset to JSON file '{}'", path);
+                CUBOS_ERROR("Could not serialize asset to JSON file");
                 return false;
             }
 
