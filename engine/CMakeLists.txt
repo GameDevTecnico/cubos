@@ -72,6 +72,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/assets/asset.hpp"
     "include/cubos/engine/assets/meta.hpp"
     "include/cubos/engine/assets/bridges/file.hpp"
+    "include/cubos/engine/assets/bridges/json.hpp"
 
     "include/cubos/engine/scene/plugin.hpp"
     "include/cubos/engine/scene/scene.hpp"
