@@ -226,6 +226,8 @@ endif ()
 
 if (DOCTEST_USE_SUBMODULE)
     add_subdirectory(lib/doctest)
+else ()
+    find_package(doctest REQUIRED)
 endif ()
 
 if (FMT_USE_SUBMODULE)
