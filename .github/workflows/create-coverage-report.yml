@@ -1,0 +1,31 @@
+name: 📃 Create Coverage Report
+
+on: [push]
+
+env:
+  BUILD_TYPE: Debug
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11 lcov
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_COVERAGE=ON -DBUILD_CORE_TESTS=ON
+      shell: bash
+      env:
+        CC:   gcc-11
+        CXX:  g++-11
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target coverage-core
+      
