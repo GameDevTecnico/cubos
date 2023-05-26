@@ -62,8 +62,8 @@ namespace cubos::core::data
         Handle find(std::string_view path);
 
         /// Creates a new file relative to this file in the virtual file system. The given path must be within a mounted
-        /// writable archive. If the file already exists, or if the path is absolute, or if the directory doesn't exist,
-        /// the function returns nullptr.
+        /// writable archive. If the file already exists, it is returned. If the path is absolute, or if the directory
+        /// doesn't exist, the function returns nullptr.
         /// @param path The relative path to the file.
         /// @param directory Whether the file is a directory.
         /// @return A handle to the file, or nullptr if the creation failed.

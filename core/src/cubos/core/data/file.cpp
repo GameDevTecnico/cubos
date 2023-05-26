@@ -272,7 +272,7 @@ File::Handle File::create(std::string_view path, bool directory)
     // Split path and find the parent directory.
     auto i = path.find_last_of('/');
     auto dir = this->find(i == std::string::npos ? "" : path.substr(0, i));
-    auto name = i == std::string::npos ? path : path.substr(i);
+    auto name = i == std::string::npos ? path : path.substr(i + 1);
 
     // Check if the directory exists.
     if (dir == nullptr)
@@ -286,11 +286,9 @@ File::Handle File::create(std::string_view path, bool directory)
     std::lock_guard<std::mutex> dirLock(dir->mMutex);
 
     // Check if the file already exists.
-    if (dir->findChild(name) != nullptr)
+    if (auto file = dir->findChild(name); file != nullptr)
     {
-        CUBOS_ERROR("Could not create file at path '{}': a file already exists at that path",
-                    dir->mPath + "/" + std::string(name));
-        return nullptr;
+        return file;
     }
 
     // Check if the directory is mounted on an archive.
