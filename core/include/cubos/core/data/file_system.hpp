@@ -18,9 +18,9 @@ namespace cubos::core::data
     ///     FileSystem::unmount("/assets");
     ///
     /// Example 2:
-    ///     FileSystem::mount("/settings.yaml", ...);
+    ///     FileSystem::mount("/settings.json", ...);
     ///     ...
-    ///     auto settingsFile = FileSystem::root()->find("settings.yaml");
+    ///     auto settingsFile = FileSystem::root()->find("settings.json");
     ///     if (settingsFile)
     ///         loadSettings(*model->open(File::OpenMode::Read));
     ///     ...

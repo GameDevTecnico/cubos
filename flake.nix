@@ -18,7 +18,6 @@
             gcc
             glfw
             glm
-            libyamlcpp
             spdlog
             clang-tools
             doxygen

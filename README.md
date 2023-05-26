@@ -63,7 +63,6 @@ The following dependencies are used to compile **CUBOS.**:
 | [glm](https://github.com/g-truc/glm)                | Essential          | `core/lib/glm`      | Optionally           |
 | [fmt](https://github.com/fmtlib/fmt)                | Essential          | `core/lib/fmt`      | Optionally           |
 | [spdlog](https://github.com/gabime/spdlog)          | Essential          | `core/lib/spdlog`   | Optionally           |
-| [yaml-cpp](https://github.com/jbeder/yaml-cpp)      | Essential          | `core/lib/yaml-cpp` | Optionally           |
 | [stduuid](https://github.com/mariusbancila/stduuid) | Essential          | `core/lib/stduuid`  | No                   |
 | [doctest](https://github.com/doctest/doctest)       | Required for tests | `core/lib/doctest`  | Optionally           |
 
@@ -83,7 +82,7 @@ If you chose to install some dependencies separately, you must pass the
 corresponding `-D` flag to CMake. For example, if you installed GLFW, GLM and
 CMake separetely you would pass the following flags to CMake:
 
-`cmake -H. -Bbuild -DGLFW_USE_SUBMODULE=OFF -DGLM_USE_SUBMODULE=OFF -DYAMLCPP_USE_SUBMODULE=OFF`
+`cmake -H. -Bbuild -DGLFW_USE_SUBMODULE=OFF -DGLM_USE_SUBMODULE=OFF`
 
 The following is a list of all the options available to configure the engine:
 
@@ -93,7 +92,6 @@ The following is a list of all the options available to configure the engine:
 | `WITH_OPENGL`              | Use OpenGL? (Required for now)     |
 | `GLFW_USE_SUBMODULE`       | Compile glfw from source?          |
 | `GLM_USE_SUBMODULE`        | Compile glm from source?           |
-| `YAMLCPP_USE_SUBMODULE`    | Compile yaml-cpp from source?      |
 | `DOCTEST_USE_SUBMODULE`    | Compile doctest from source?       |
 | `SPDLOG_USE_SUBMODULE`     | Compile spdlog from source?        |
 | `FMT_USE_SUBMODULE`        | Compile fmt from source?           |
