@@ -36,7 +36,7 @@ namespace cubos::engine
             deserializer.read(data);
             if (deserializer.failed())
             {
-                CUBOS_ERROR("Could not deserialize binary file '{}'", path);
+                CUBOS_ERROR("Could not deserialize asset from binary file");
                 return false;
             }
 
@@ -47,14 +47,14 @@ namespace cubos::engine
         bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override
         {
             // Initialize a binary serializer with the file stream.
-            core::data::BinarySerializer serializer{*stream, mLittleEndian};
+            core::data::BinarySerializer serializer{stream, mLittleEndian};
 
             // Read the asset from the asset manager and serialize it to the file stream.
             auto data = assets.read<T>(handle);
             serializer.write(*data, nullptr); // Binary serializer does not use names.
             if (serializer.failed())
             {
-                CUBOS_ERROR("Could not serialize asset to binary file '{}'", path);
+                CUBOS_ERROR("Could not serialize asset to binary file");
                 return false;
             }
 
