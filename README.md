@@ -94,6 +94,7 @@ The following is a list of all the options available to configure the engine:
 | `GLFW_USE_SUBMODULE`       | Compile glfw from source?          |
 | `GLM_USE_SUBMODULE`        | Compile glm from source?           |
 | `YAMLCPP_USE_SUBMODULE`    | Compile yaml-cpp from source?      |
+| `DOCTEST_USE_SUBMODULE`    | Compile doctest from source?       |
 | `SPDLOG_USE_SUBMODULE`     | Compile spdlog from source?        |
 | `FMT_USE_SUBMODULE`        | Compile fmt from source?           |
 | `BUILD_CORE_SAMPLES`       | Build **CUBOS.** `core` samples?   |
