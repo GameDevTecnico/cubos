@@ -1,8 +1,6 @@
 # core/tests/CMakeLists.txt
 # Core tests build configuration
 
-include(CTest)
-
 add_executable(
     cubos-core-tests
     main.cpp
