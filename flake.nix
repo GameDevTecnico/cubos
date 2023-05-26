@@ -25,6 +25,7 @@
             graphviz
             clang_14
             doctest
+            lcov
           ];
         };
       });
