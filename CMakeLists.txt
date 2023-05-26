@@ -9,6 +9,23 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 # Should clang-tidy errors be automatically fixed?
 option(FIX_CLANG_TIDY_ERRORS OFF)
 
+# Enable coverage reports
+option(ENABLE_COVERAGE OFF)
+if(ENABLE_COVERAGE)
+    include(CodeCoverage)
+    append_coverage_compiler_flags()
+
+    setup_target_for_coverage_lcov(
+        NAME coverage-core
+        EXECUTABLE core/tests/cubos-core-tests
+        DEPENDENCIES cubos-core-tests
+
+        EXCLUDE "core/lib/*" "core/tests/*"
+
+        LCOV_ARGS "--no-external"
+    )
+endif()
+
 # Function which configures a target with the options common to all CUBOS. targets.
 function(cubos_common_target_options target)
     target_compile_features(${target} PRIVATE cxx_std_20)
