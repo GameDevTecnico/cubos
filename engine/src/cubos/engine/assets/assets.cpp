@@ -208,7 +208,14 @@ bool Assets::saveMeta(const AnyAsset& handle) const
     {
         CUBOS_DEBUG("Saving metadata for asset {}", core::data::Debug(handle));
 
-        auto stream = core::data::FileSystem::open(*path + ".meta", core::data::File::OpenMode::Write);
+        auto file = core::data::FileSystem::create(*path + ".meta");
+        if (file == nullptr)
+        {
+            CUBOS_ERROR("Could not save asset: could not create file '{}.meta'", *path);
+            return false;
+        }
+
+        auto stream = file->open(core::data::File::OpenMode::Write);
         if (stream == nullptr)
         {
             CUBOS_ERROR("Could not save asset: could not open file '{}.meta'", *path);
@@ -580,6 +587,7 @@ void Assets::loader()
             auto assetEntry = this->entry(task.handle);
             CUBOS_ASSERT(assetEntry != nullptr, "This should never happen");
             assetEntry->status = Assets::Status::Unloaded;
+            assetEntry->cond.notify_all();
         }
     }
 }

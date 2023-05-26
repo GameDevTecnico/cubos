@@ -29,7 +29,14 @@ bool FileBridge::load(Assets& assets, const AnyAsset& handle)
 bool FileBridge::save(const Assets& assets, const AnyAsset& handle)
 {
     auto path = assets.readMeta(handle)->get("path").value();
-    auto stream = FileSystem::open(path, File::OpenMode::Write);
+    auto file = FileSystem::create(path);
+    if (file == nullptr)
+    {
+        CUBOS_ERROR("Could not create file '{}'", path);
+        return false;
+    }
+
+    auto stream = file->open(File::OpenMode::Write);
     if (stream == nullptr)
     {
         CUBOS_ERROR("Could not open file '{}'", path);
