@@ -18,6 +18,14 @@ namespace cubos::engine
     template <typename T>
     class JSONBridge : public FileBridge
     {
+    public:
+        /// @param indentation The indentation level to use when saving the JSON file. Set to -1 to
+        /// remove all whitespace.
+        JSONBridge(int indentation = 4)
+            : mIndentation{indentation}
+        {
+        }
+
     protected:
         bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override
         {
@@ -42,7 +50,7 @@ namespace cubos::engine
         bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override
         {
             // Initialize a JSON serializer with the file stream.
-            core::data::JSONSerializer serializer{*stream};
+            core::data::JSONSerializer serializer{stream, mIndentation};
 
             // Read the asset from the asset manager and serialize it to the file stream.
             auto data = assets.read<T>(handle);
@@ -55,5 +63,8 @@ namespace cubos::engine
 
             return true;
         }
+
+    private:
+        int mIndentation;
     };
 } // namespace cubos::engine
