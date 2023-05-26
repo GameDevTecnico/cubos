@@ -221,9 +221,9 @@ File::Handle File::find(std::string_view path)
     if (path.empty())
     {
         return this->shared_from_this();
-
-        // If the path is absolute, or if this file isn't a directory, return nullptr.
     }
+
+    // If the path is absolute, or if this file isn't a directory, return nullptr.
     if ((!path.empty() && path[0] == '/') || !mDirectory)
     {
         return nullptr;
@@ -263,63 +263,83 @@ File::Handle File::find(std::string_view path)
 
 File::Handle File::create(std::string_view path, bool directory)
 {
-    // Remove trailing slashes.
-    while (path.ends_with('/'))
+    if (path.starts_with("./"))
     {
-        path.remove_suffix(1);
+        path.remove_prefix(2);
     }
 
-    // Split path and find the parent directory.
-    auto i = path.find_last_of('/');
-    auto dir = this->find(i == std::string::npos ? "" : path.substr(0, i));
-    auto name = i == std::string::npos ? path : path.substr(i + 1);
-
-    // Check if the directory exists.
-    if (dir == nullptr)
+    // If the path is empty, return this file.
+    if (path.empty())
     {
-        CUBOS_ERROR("Could not create file at path '{}' relative to '{}': the parent directory '{}' does not exist",
-                    path, mPath, path.substr(0, i));
+        return this->shared_from_this();
+    }
+
+    // If the path is absolute, or if this file isn't a directory, return nullptr.
+    if ((!path.empty() && path[0] == '/') || !mDirectory)
+    {
         return nullptr;
     }
 
-    // Lock the directory mutex.
-    std::lock_guard<std::mutex> dirLock(dir->mMutex);
-
-    // Check if the file already exists.
-    if (auto file = dir->findChild(name); file != nullptr)
+    // Get name of the first component in the path.
+    std::size_t i = 0;
+    for (; i < path.size(); i++)
     {
-        return file;
+        if (path[i] == '/')
+        {
+            break;
+        }
+    }
+    auto name = path.substr(0, i);
+
+    // Remove extra slashes.
+    for (; i < path.size(); i++)
+    {
+        if (path[i] != '/')
+        {
+            break;
+        }
     }
 
-    // Check if the directory is mounted on an archive.
-    if (dir->mArchive == nullptr)
+    // Lock the mutex of this file.
+    std::lock_guard<std::mutex> lock(mMutex);
+    auto child = this->findChild(name);
+    if (child == nullptr)
     {
-        CUBOS_ERROR("Could not create file at path '{}': parent directory must be mounted on an archive",
-                    dir->mPath + "/" + std::string(name));
-        return nullptr;
+        // Check if the directory is mounted on an archive.
+        if (mArchive == nullptr)
+        {
+            CUBOS_ERROR("Could not create file at path '{}': parent directory must be mounted on an archive",
+                        mPath + "/" + std::string(name));
+            return nullptr;
+        }
+
+        // Check if the archive is read-only.
+        if (mArchive->isReadOnly())
+        {
+            CUBOS_ERROR("Could not create file at path '{}': parent directory is mounted on a read-only archive",
+                        mPath + "/" + std::string(name));
+            return nullptr;
+        }
+
+        // Will the new file be a directory?
+        bool childDirectory = path.size() > i || directory;
+
+        // Create the file.
+        std::size_t id = mArchive->create(mId, name, childDirectory);
+        if (id == 0)
+        {
+            CUBOS_ERROR("Could not create file at path '{}': internal archive error",
+                        mPath + "/" + std::string(name));
+            return nullptr;
+        }
+
+        // Add the file to this directory.
+        child = std::shared_ptr<File>(new File(this->shared_from_this(), mArchive, id));
+        this->addChild(child);
+        CUBOS_TRACE("Created {} at path '{}'", childDirectory ? "directory" : "file", child->mPath);
     }
 
-    // Check if the archive is read-only.
-    if (dir->mArchive->isReadOnly())
-    {
-        CUBOS_ERROR("Could not create file at path '{}': parent directory is mounted on a read-only archive",
-                    dir->mPath + "/" + std::string(name));
-        return nullptr;
-    }
-
-    // Create the file.
-    std::size_t id = dir->mArchive->create(dir->mId, name, directory);
-    if (id == 0)
-    {
-        CUBOS_ERROR("Could not create file at path '{}': internal archive error", dir->mPath + "/" + std::string(name));
-        return nullptr;
-    }
-
-    // Add the file to the parent directory.
-    auto file = std::shared_ptr<File>(new File(dir, dir->mArchive, id));
-    this->addChild(file);
-    CUBOS_TRACE("Created {} at path '{}' relative to '{}'", directory ? "directory" : "file", file->mPath, mPath);
-    return file;
+    return child->create(path.substr(i), directory);
 }
 
 bool File::destroy()
