@@ -7,8 +7,9 @@ namespace cubos::engine
 {
     /// Plugin which adds grid and palette asset bridges to CUBOS.
     ///
-    /// @details Registers the `GridBridge` and `PaletteBridge` asset bridges with the `.grd` and
-    /// `.pal` extensions, which load assets of the `Grid` and `Palette` types, respectively.
+    /// @details Registers asset bridges for files with `.grd` and `.pal` extensions, which load
+    /// assets of the `Grid` and `Palette` types, respectively. Both assets are stored as binary
+    /// serialized files.
     ///
     /// Dependencies:
     /// - `assetsPlugin`
