@@ -8,7 +8,6 @@ if (WITH_GLFW)
 endif ()
 option(WITH_OPENAL "With OpenAL?" ON)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
-option(YAMLCPP_USE_SUBMODULE "Compile YAML CPP from source?" ON)
 option(DOCTEST_USE_SUBMODULE "Compile doctest from source?" ON)
 option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source?" ON)
 option(FMT_USE_SUBMODULE "Compile FMT from source?" ON)
@@ -36,8 +35,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/serializer.cpp"
     "src/cubos/core/data/deserializer.cpp"
     "src/cubos/core/data/debug_serializer.cpp"
-    "src/cubos/core/data/yaml_serializer.cpp"
-    "src/cubos/core/data/yaml_deserializer.cpp"
     "src/cubos/core/data/json_serializer.cpp"
     "src/cubos/core/data/json_deserializer.cpp"
     "src/cubos/core/data/binary_serializer.cpp"
@@ -105,8 +102,6 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/serializer.hpp"
     "include/cubos/core/data/deserializer.hpp"
     "include/cubos/core/data/debug_serializer.hpp"
-    "include/cubos/core/data/yaml_serializer.hpp"
-    "include/cubos/core/data/yaml_deserializer.hpp"
     "include/cubos/core/data/json_serializer.hpp"
     "include/cubos/core/data/json_deserializer.hpp"
     "include/cubos/core/data/binary_serializer.hpp"
@@ -217,13 +212,6 @@ else ()
     find_package(glm REQUIRED)
 endif ()
 
-if (YAMLCPP_USE_SUBMODULE)
-    set(YAML_CPP_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
-    add_subdirectory(lib/yaml-cpp)
-else ()
-    find_package(yaml-cpp REQUIRED)
-endif ()
-
 if (DOCTEST_USE_SUBMODULE)
     add_subdirectory(lib/doctest)
 else ()
@@ -262,7 +250,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 target_compile_definitions(cubos-core PUBLIC GLM_FORCE_SILENT_WARNINGS) # Needed for compilation to succeed on MSVC
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog yaml-cpp imgui fmt::fmt json ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog imgui fmt::fmt json ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests

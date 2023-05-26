@@ -20,7 +20,7 @@ namespace cubos::core::data
     ///     File::mount("/", ...);
     ///     File::mount("/assets", ...);
     ///     ...
-    ///     auto settingsStream = root->find("./settings.yaml")->open(File::OpenMode::Read);
+    ///     auto settingsStream = root->find("./settings.json")->open(File::OpenMode::Read);
     ///     ...
     ///     auto cubeStream = root->find("/assets/models/cube.obj")->open(File::OpenMode::Read);
     ///

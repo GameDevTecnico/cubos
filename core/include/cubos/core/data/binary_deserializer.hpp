@@ -1,7 +1,5 @@
 #pragma once
 
-#include <yaml-cpp/yaml.h>
-
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/memory/stream.hpp>
 
