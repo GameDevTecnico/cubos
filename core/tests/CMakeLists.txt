@@ -3,8 +3,6 @@
 
 include(CTest)
 
-find_package(doctest REQUIRED)
-
 add_executable(
     cubos-core-tests
     main.cpp
