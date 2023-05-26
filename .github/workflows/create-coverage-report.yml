@@ -28,4 +28,7 @@ jobs:
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target coverage
+
+    - name: Upload
+      run: bash <(curl -s https://codecov.io/bash) -f ${{github.workspace}}/build/coverage.info
       
