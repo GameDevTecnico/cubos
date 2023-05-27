@@ -16,7 +16,7 @@ TEST_CASE("ecs::Commands")
     setupWorld(world);
 
     // Create an entity.
-    auto foo = cmds.create().add(IntegerComponent(0)).entity();
+    auto foo = cmds.create().add(IntegerComponent{0}).entity();
     CHECK_FALSE(foo.isNull());
     CHECK_FALSE(world.isAlive(foo)); // Still hasn't been committed.
     cmdBuffer.commit();
