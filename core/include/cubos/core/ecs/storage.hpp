@@ -18,16 +18,16 @@ namespace cubos::core::ecs
 
         /// @brief Packages a value. If the value doesn't exist, undefined behavior will occur.
         /// @param index The index of the value to package.
-        /// @param context Context used for serialization.
+        /// @param context Optional context used for serialization.
         /// @returns The packaged value.
-        virtual data::Package pack(uint32_t index, data::Context& context) const = 0;
+        virtual data::Package pack(uint32_t index, data::Context* context) const = 0;
 
         /// @brief Unpackages a value.
         /// @param index The index of the value to unpackage.
         /// @param package The package to unpackage.
-        /// @param context Context used for deserialization.
+        /// @param context Optional context used for deserialization.
         /// @returns True if the value was unpackaged successfully, false otherwise.
-        virtual bool unpack(uint32_t index, const data::Package& package, data::Context& context) = 0;
+        virtual bool unpack(uint32_t index, const data::Package& package, data::Context* context) = 0;
 
         /// @brief Gets the type the components being stored here.
         virtual std::type_index type() const = 0;
@@ -57,15 +57,15 @@ namespace cubos::core::ecs
 
         // Implementation.
 
-        inline data::Package pack(uint32_t index, data::Context& context) const override
+        inline data::Package pack(uint32_t index, data::Context* context) const override
         {
-            return data::Package::from(*this->get(index), &context);
+            return data::Package::from(*this->get(index), context);
         }
 
-        inline bool unpack(uint32_t index, const data::Package& package, data::Context& context) override
+        inline bool unpack(uint32_t index, const data::Package& package, data::Context* context) override
         {
             T value;
-            if (package.into(value, &context))
+            if (package.into(value, context))
             {
                 this->insert(index, value);
                 return true;

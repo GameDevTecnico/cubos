@@ -4,22 +4,6 @@
 using namespace cubos::core;
 using namespace cubos::core::ecs;
 
-static const auto DirectMap = data::SerializationMap<Entity, std::string>(
-    [](const Entity& entity, std::string& name) {
-        name = std::to_string(entity.index) + "#" + std::to_string(entity.generation);
-        return true;
-    },
-    [](Entity& entity, const std::string& name) {
-        auto pos = name.find('#');
-        if (pos != std::string::npos)
-        {
-            entity.index = static_cast<uint32_t>(std::stoul(name.substr(0, pos)));
-            entity.generation = static_cast<uint32_t>(std::stoul(name.substr(pos + 1)));
-            return true;
-        }
-        return false;
-    });
-
 World::World(std::size_t initialCapacity)
     : mEntityManager(initialCapacity)
 {
@@ -34,7 +18,7 @@ void World::destroy(Entity entity)
     CUBOS_DEBUG("Destroyed entity {}", entity.index);
 }
 
-data::Package World::pack(Entity entity, data::Context& context) const
+data::Package World::pack(Entity entity, data::Context* context) const
 {
     Entity::Mask mask = mEntityManager.getMask(entity);
 
@@ -51,7 +35,7 @@ data::Package World::pack(Entity entity, data::Context& context) const
     return pkg;
 }
 
-bool World::unpack(Entity entity, const data::Package& package, data::Context& context)
+bool World::unpack(Entity entity, const data::Package& package, data::Context* context)
 {
     if (package.type() != data::Package::Type::Object)
     {

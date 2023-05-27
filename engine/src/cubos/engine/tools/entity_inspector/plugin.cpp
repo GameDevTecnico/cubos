@@ -25,16 +25,7 @@ static void inspectEntity(Write<World> world)
 
         if (!selection.isNull())
         {
-            // Setup a context with a serialization map which simply converts the entity indices to a string.
-            // TODO: maybe there should be a global serialization map for this, since its such a common behaviour?
-            Context context{};
-            context.push(SerializationMap<Entity, std::string>{[](const Entity& entity, std::string& string) {
-                                                                   string = std::to_string(entity.index);
-                                                                   return true;
-                                                               },
-                                                               [](Entity&, const std::string&) { return false; }});
-
-            auto pkg = world->pack(selection, context);
+            auto pkg = world->pack(selection);
             showPackage(pkg, std::to_string(selection.index));
         }
         ImGui::EndTable();

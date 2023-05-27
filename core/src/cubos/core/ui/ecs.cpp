@@ -3,7 +3,7 @@
 #include <cubos/core/ui/ecs.hpp>
 #include <cubos/core/ui/serialization.hpp>
 
-void cubos::core::ui::showWorld(const ecs::World& world, data::Context& context)
+void cubos::core::ui::showWorld(const ecs::World& world, data::Context* context)
 {
     ImGui::BeginTable("showWorld", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
 
@@ -15,7 +15,7 @@ void cubos::core::ui::showWorld(const ecs::World& world, data::Context& context)
     ImGui::EndTable();
 }
 
-void cubos::core::ui::editWorld(ecs::World& world, data::Context& serContext, data::Context& desContext)
+void cubos::core::ui::editWorld(ecs::World& world, data::Context* serContext, data::Context* desContext)
 {
     ImGui::BeginTable("editWorld", 3, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
     for (auto entity : world)
