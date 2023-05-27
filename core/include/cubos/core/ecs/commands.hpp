@@ -161,6 +161,12 @@ namespace cubos::core::ecs
         /// @returns Blueprint builder which allows components to be overridden.
         BlueprintBuilder spawn(const Blueprint& blueprint);
 
+        /// Aborts the commands, rolling back any changes made.
+        void abort();
+
+        /// Commits the commands to the world.
+        void commit();
+
     private:
         friend EntityBuilder;
         friend BlueprintBuilder;
@@ -195,14 +201,8 @@ namespace cubos::core::ecs
             std::unordered_map<Entity, ComponentType> components; ///< The components in the buffer.
         };
 
-        /// Aborts the commands, rolling back any changes made.
-        void abort();
-
         /// Clears the commands.
         void clear();
-
-        /// Commits the commands to the world.
-        void commit();
 
         std::mutex mMutex; ///< Make this thread-safe.
         World& mWorld;     ///< The world to which the commands will be applied.
