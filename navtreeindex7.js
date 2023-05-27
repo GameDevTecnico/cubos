@@ -1,9 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a6fbbcd2dbd0ec4e2bc35538d2f84a2d9":[4,0,0,0,1,8,0,0,0],
-"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a8f8f80d37794cde9472343e4487ba3eb":[4,0,0,0,1,8,0,0,3],
-"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#ac0c4527a31db9b2a4c97cc4ca6bd40c3":[4,0,0,0,1,8,0,0,4],
-"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#ae1bc8edac02bd4197d4845dbc81e0a4c":[4,0,0,0,1,8,0,0,5],
 "structcubos_1_1core_1_1data_1_1QBMatrix.html":[4,0,0,0,1,15],
 "structcubos_1_1core_1_1data_1_1QBMatrix.html#a34cc55836c0a80298fc5df484563404a":[4,0,0,0,1,15,2],
 "structcubos_1_1core_1_1data_1_1QBMatrix.html#a5ad9be7bcf3759d6f866c7f0fbc0640b":[4,0,0,0,1,15,1],
@@ -249,5 +245,9 @@ var NAVTREEINDEX7 =
 "structcubos_1_1core_1_1io_1_1ModifiersEvent.html#a42b465b57abcbac7a73dcc8cd147baed":[4,0,0,0,4,9,0],
 "structcubos_1_1core_1_1io_1_1MouseButtonEvent.html":[4,0,0,0,4,10],
 "structcubos_1_1core_1_1io_1_1MouseButtonEvent.html#a132ba96da5ba28448b61e42c019312a9":[4,0,0,0,4,10,1],
-"structcubos_1_1core_1_1io_1_1MouseButtonEvent.html#a26b9a03c639a856e34c2d8bec26ce611":[4,0,0,0,4,10,0]
+"structcubos_1_1core_1_1io_1_1MouseButtonEvent.html#a26b9a03c639a856e34c2d8bec26ce611":[4,0,0,0,4,10,0],
+"structcubos_1_1core_1_1io_1_1MouseMoveEvent.html":[4,0,0,0,4,11],
+"structcubos_1_1core_1_1io_1_1MouseMoveEvent.html#a496ccab8ba87881fd4994f4d4dc38bde":[4,0,0,0,4,11,0],
+"structcubos_1_1core_1_1io_1_1MouseScrollEvent.html":[4,0,0,0,4,12],
+"structcubos_1_1core_1_1io_1_1MouseScrollEvent.html#a9a7e96ac8ca71ff37cbd95aba86610ca":[4,0,0,0,4,12,0]
 };

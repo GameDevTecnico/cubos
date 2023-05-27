@@ -1,9 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classcubos_1_1engine_1_1Asset.html#a491e4a514375196873577df4d9957065":[4,0,0,1,2,7],
-"classcubos_1_1engine_1_1Asset.html#a73aae9bce02276588c290546be0951a2":[4,0,0,1,2,6],
-"classcubos_1_1engine_1_1Asset.html#a85c3c33d3eba3953108f5740afeda441":[4,0,0,1,2,5],
-"classcubos_1_1engine_1_1Asset.html#aa569969dd177df90d40dd8f3ddf10cef":[4,0,0,1,2,2],
 "classcubos_1_1engine_1_1Asset.html#ac02e011b77d6bcc990719b93a78fe6c3":[4,0,0,1,2,4],
 "classcubos_1_1engine_1_1AssetBridge.html":[4,0,0,1,5],
 "classcubos_1_1engine_1_1AssetBridge.html#a110b838738e4fa3c89116b5c0c34d478":[4,0,0,1,5,0],
@@ -249,5 +245,9 @@ var NAVTREEINDEX4 =
 "embedded__archive_8hpp_source.html":[5,0,0,0,0,0,1,6],
 "endianness_8hpp_source.html":[5,0,0,0,0,0,5,1],
 "engine.html":[1,1],
-"engine_2include_2cubos_2engine_2assets_2bridges_2file_8hpp_source.html":[5,0,1,0,0,0,0,0,1]
+"engine_2include_2cubos_2engine_2assets_2bridges_2file_8hpp_source.html":[5,0,1,0,0,0,0,0,1],
+"engine_2include_2cubos_2engine_2renderer_2light_8hpp_source.html":[5,0,1,0,0,0,4,3],
+"entity__manager_8hpp_source.html":[5,0,0,0,0,0,2,5],
+"env__settings_2plugin_8hpp.html#a5b186de8c0e9389e9b8ef6f0d8c91b13":[3,0,0,1,43],
+"env__settings_2plugin_8hpp_source.html":[5,0,1,0,0,0,1,0]
 };
