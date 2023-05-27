@@ -328,8 +328,7 @@ File::Handle File::create(std::string_view path, bool directory)
         std::size_t id = mArchive->create(mId, name, childDirectory);
         if (id == 0)
         {
-            CUBOS_ERROR("Could not create file at path '{}': internal archive error",
-                        mPath + "/" + std::string(name));
+            CUBOS_ERROR("Could not create file at path '{}': internal archive error", mPath + "/" + std::string(name));
             return nullptr;
         }
 
