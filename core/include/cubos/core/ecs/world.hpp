@@ -95,6 +95,7 @@ namespace cubos::core::ecs
         data::Package pack(Entity entity, data::Context* context = nullptr) const;
 
         /// @brief Unpacks components specified in a package into an entity.
+        /// Removes any components that are already present in the entity.
         /// @param entity Entity ID.
         /// @param package Package to unpack.
         /// @param context Optional context for deserializing the components.
@@ -153,11 +154,10 @@ namespace cubos::core::ecs
     Entity World::create(ComponentTypes&&... components)
     {
         std::size_t ids[] = {
-            (mComponentManager
-                 .getID<std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
+            0, (mComponentManager
+                    .getID<std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
 
-        Entity::Mask mask;
-        mask.set(0);
+        Entity::Mask mask{};
         for (auto id : ids)
         {
             mask.set(id);
@@ -167,8 +167,12 @@ namespace cubos::core::ecs
         ([&](auto& component) { mComponentManager.add(entity.index, component); }(components), ...);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
-        std::string componentNames[] = {"'" + getComponentName<ComponentTypes>().value() + "'" ...};
-        CUBOS_DEBUG("Created entity {} with components {}", entity.index, fmt::join(componentNames, ", "));
+        // Get the number of components being added.
+        constexpr std::size_t componentCount = sizeof...(ComponentTypes);
+
+        std::string componentNames[] = {"", "'" + std::string{getComponentName<ComponentTypes>().value()} + "'" ...};
+        CUBOS_DEBUG("Created entity {} with components {}", entity.index,
+                    fmt::join(componentNames + 1, componentNames + componentCount + 1, ", "));
 #endif
         return entity;
     }
@@ -195,7 +199,7 @@ namespace cubos::core::ecs
         mEntityManager.setMask(entity, mask);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
-        std::string componentNames[] = {"'" + getComponentName<ComponentTypes>().value() + "'" ...};
+        std::string componentNames[] = {"'" + std::string{getComponentName<ComponentTypes>().value()} + "'" ...};
         CUBOS_DEBUG("Added components {} to entity {}", fmt::join(componentNames, ", "), entity.index);
 #endif
     }
@@ -222,7 +226,7 @@ namespace cubos::core::ecs
         mEntityManager.setMask(entity, mask);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
-        std::string componentNames[] = {"'" + getComponentName<ComponentTypes>().value() + "'" ...};
+        std::string componentNames[] = {"'" + std::string{getComponentName<ComponentTypes>().value()} + "'" ...};
         CUBOS_DEBUG("Removed components {} from entity {}", fmt::join(componentNames, ", "), entity.index);
 #endif
     }

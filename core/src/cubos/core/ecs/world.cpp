@@ -25,6 +25,8 @@ bool World::isAlive(Entity entity) const
 
 data::Package World::pack(Entity entity, data::Context* context) const
 {
+    CUBOS_ASSERT(this->isAlive(entity), "Entity is not alive");
+
     Entity::Mask mask = mEntityManager.getMask(entity);
 
     auto pkg = data::Package(data::Package::Type::Object);
@@ -48,7 +50,10 @@ bool World::unpack(Entity entity, const data::Package& package, data::Context* c
         return false;
     }
 
-    Entity::Mask mask = mEntityManager.getMask(entity);
+    // Remove all existing components.
+    mComponentManager.removeAll(entity.index);
+
+    Entity::Mask mask{1};
     bool success = true;
 
     for (const auto& field : package.fields())
