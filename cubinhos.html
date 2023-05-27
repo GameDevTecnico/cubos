@@ -96,11 +96,11 @@ $(document).ready(function(){initNavTree('cubinhos.html',''); initResizable(); }
 <li><code>cubinhos embed</code>: utility used to embed files directly into an executable for use with the <code>EmbeddedArchive</code>.</li>
 <li><code>cubinhos generate</code>: generates component definition boilerplate code.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md32"></a>
+<h1><a class="anchor" id="autotoc_md24"></a>
 Convert</h1>
 <p>The need for this tool arose from the fact that <b>CUBOS.</b> works with a single palette of voxel materials, and voxel objects refer to specific materials by their index in this palette. For example, if we had a single voxel red object, the red color wouldn't be specified in the voxel object. Instead, this object would specify that its material is <code>1</code>, and the palette would specify that the material <code>1</code> is red.</p>
 <p>The issue is, voxel formats like <code>.qb</code> and <code>.vox</code> are not designed to store only the indices of materials, but the whole material definition, per voxel. This conflicts with the way <b>CUBOS.</b> works, so we need to convert these formats into the internal format used by <b>CUBOS.</b>. This is where <code>cubinhos convert</code> comes in. It takes a <code>.qb</code> voxel file and splits it into a palette (<code>.pal</code>), and one or more voxel grids (<code>.grd</code>).</p>
-<h2><a class="anchor" id="autotoc_md33"></a>
+<h2><a class="anchor" id="autotoc_md25"></a>
 Usage</h2>
 <p>This guide will be based on four use cases:</p><ol type="1">
 <li>loading a <code>.qb</code> file and creating a new <code>.pal</code>;</li>
@@ -108,17 +108,17 @@ Usage</h2>
 <li>loading a <code>.qb</code> file and using, without editing, an existing <code>.pal</code>;</li>
 <li>querying the contents of <code>.qb</code> model;</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md34"></a>
+<h3><a class="anchor" id="autotoc_md26"></a>
 Example 1: Creating a new palette</h3>
 <p>This use case is most common when importing the first <code>.qb</code> file for a new project. There is no palette file yet, so we need to create one. Lets say the model we want to convert is a <code>car.qb</code>, which contains a single voxel object.</p>
 <div class="fragment"><div class="line">$ cubinhos convert car.qb -p main.pal -g car.grd -w</div>
 </div><!-- fragment --><p>First, we specify the <code>.qb</code> file to convert. Then, we specify the name of the palette we will be outputting. We also need to specify the output file for the voxel grid. Finally, we pass the <code>-w</code> flag which allows us to write to the palette file (which is necessary since there is none at the moment).</p>
-<h3><a class="anchor" id="autotoc_md35"></a>
+<h3><a class="anchor" id="autotoc_md27"></a>
 Example 2: Updating an existing palette</h3>
 <p>Lets say we now want to import a <code>street.qb</code> model which contains two voxel grids: the first one is a road and the second one is a tree. Since we already have a palette, we want to add any new materials to it.</p>
 <div class="fragment"><div class="line">$ cubinhos convert street.qb -p main.pal -g0 road.grd -g1 tree.grd -w</div>
 </div><!-- fragment --><p>Once again, we first specify the <code>.qb</code> file to convert. Then, we specify the name of the palette we will be using, which is the same as the one we created in the previous example. This time, we have two grids in the <code>.qb</code> file, so we need to specify the output files for both. This is done by adding an index in front of <code>-g</code> (e.g. <code>-g0</code> for the first grid, <code>-g1</code> for the second). Finally, we once again pass the <code>-w</code> flag which allows the palette file to be updated.</p>
-<h3><a class="anchor" id="autotoc_md36"></a>
+<h3><a class="anchor" id="autotoc_md28"></a>
 Example 3: Using an existing palette</h3>
 <p>What if we want to add another car model, but without adding materials to the palette? To do this, we will need to ommit the <code>-w</code> flag. This way, the palette will be read, and the most similar materials found will be used. By default, this will only succeed if the materials match exactly.</p>
 <div class="fragment"><div class="line">$ cubinhos convert car2.qb -p main.pal -g car2.grd</div>
@@ -126,7 +126,7 @@ Example 3: Using an existing palette</h3>
 <div class="fragment"><div class="line">Failed to convert grid 0 from its palette to the palette chosen.</div>
 </div><!-- fragment --><p>One work around is lowering the threshold for material matching. If you want to allow for slightly different materials to be considered as the same, you can pass the <code>-s &lt;SIMILARITY&gt;</code> option. This value is a number from <code>0</code> to <code>1</code>, where <code>0</code> is completely different and <code>1</code> is completely the same. It represents the minimum similarity between two materials to consider them the same (default is <code>1</code>).</p>
 <p>So, if the materials which aren't matching are very similar, you could add, for example, <code>-s 0.9</code> to the previous command. This way, the material chosen from the palette will have a similarity of at least <code>0.9</code> with the material in the original model.</p>
-<h3><a class="anchor" id="autotoc_md37"></a>
+<h3><a class="anchor" id="autotoc_md29"></a>
 Example 4: Querying the contents of a model</h3>
 <p>You may want to check the contents of a <code>.qb</code> file before converting it. One easy way to do this is to use the <code>-v</code> (verbose) flag. This can be added to any of the previous commands to get extra information about what is going on.</p>
 <p>It can also be used without any other options, in which case the program will just print the contents of the <code>.qb</code> file. For example:</p>
@@ -137,10 +137,10 @@ Example 4: Querying the contents of a model</h3>
 <div class="line">- Grid size: 15x11x32</div>
 <div class="line">- Palette size: 10</div>
 </div><!-- fragment --><p>This tells us that the <code>car.qb</code> model contains exactly one voxel grid, that its position within the model is <code>(-7, -5, -16)</code>, that its size is <code>15x11x32</code>, and that it uses <code>10</code> different materials.</p>
-<h1><a class="anchor" id="autotoc_md38"></a>
+<h1><a class="anchor" id="autotoc_md30"></a>
 Embed</h1>
 <p>The <code>cubinhos embed</code> tool is used to embed files directly into an executable for use with the <code>EmbeddedArchive</code>. This is useful for example when you want to ship a game with a set of assets, but don't want to have to distribute them as separate files. This way, you are able to ship a single executable file.</p>
-<h2><a class="anchor" id="autotoc_md39"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 Usage</h2>
 <p>This tool takes a file and generates a C++ source file which registers a new <code>EmbeddedArchive</code>, outputting it to the standard output. This source file can then be compiled and linked with your executable.</p>
 <p>If no name for the archive is specified, the name of the file will be used. For example, if you run <code>cubinhos embed logo.png &gt; logo.cpp</code>, the name of the archive will be <code>logo.png</code>.</p>
@@ -162,7 +162,7 @@ Usage</h2>
 <div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>
 </div><!-- fragment --><p>It's also possible to embed a whole directory, in which case you will need to use the <code>-r</code> flag. This will recursively embed all files in the directory.</p>
 <p>Checkout the <code>embedded_archive</code> sample for a complete example.</p>
-<h1><a class="anchor" id="autotoc_md40"></a>
+<h1><a class="anchor" id="autotoc_md32"></a>
 Generate</h1>
 <p>For a type to be usable as a component, it must satisfy the following requirements:</p><ul>
 <li>it must be (de)serializable, taking optionally some context necessary (such as the mapping between <code>Entity</code>s and their IDs, or a function to read or write handles).</li>
@@ -228,7 +228,7 @@ Generate</h1>
 </div><!-- fragment --><p>This tool then searches for all types marked with the <code>cubos::component</code> and generates a header file for each one. In this case, a header file would be generated which could be included with <code>#include &lt;components/my_component.hpp&gt;</code>.</p>
 <p>When using the component, the user must include the generated header file, and not the original one. Otherwise, the compiler won't see the generated code.</p>
 <p>If the component is identified with a slash, as, for example, <code>game/my_component</code>, the generated header file will be placed in the <code>components/game</code> directory. This is useful for organizing components into different modules. For example, <code>cubos-engine</code> names all its components with the <code>cubos/</code> directory.</p>
-<h2><a class="anchor" id="autotoc_md41"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 CMake</h2>
 <p>This tool can be configured to run automatically when building the project. To do this, you can include the <code>CubinhosGenerate</code> module in your <code>CMakeLists.txt</code> and call the <code>cubinhos_generate</code> function with your target and the directory where the base component headers are located.</p>
 <div class="fragment"><div class="line">include(CubinhosGenerate)</div>

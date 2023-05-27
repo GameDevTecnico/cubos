@@ -16,14 +16,9 @@ var hierarchy =
     ] ],
     [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", null ],
     [ "AssetBridge", "classcubos_1_1engine_1_1AssetBridge.html", [
-      [ "BinaryBridge", "classcubos_1_1engine_1_1BinaryBridge.html", [
-        [ "BinaryBridgeImpl< core::gl::Palette >", "classcubos_1_1engine_1_1BinaryBridgeImpl.html", [
-          [ "PaletteBridge", "classcubos_1_1engine_1_1PaletteBridge.html", null ]
-        ] ],
-        [ "BinaryBridgeImpl< core::gl::Grid >", "classcubos_1_1engine_1_1BinaryBridgeImpl.html", [
-          [ "GridBridge", "classcubos_1_1engine_1_1GridBridge.html", null ]
-        ] ],
-        [ "BinaryBridgeImpl< T >", "classcubos_1_1engine_1_1BinaryBridgeImpl.html", null ]
+      [ "FileBridge", "classcubos_1_1engine_1_1FileBridge.html", [
+        [ "BinaryBridge< T >", "classcubos_1_1engine_1_1BinaryBridge.html", null ],
+        [ "JSONBridge< T >", "classcubos_1_1engine_1_1JSONBridge.html", null ]
       ] ],
       [ "SceneBridge", "classcubos_1_1engine_1_1SceneBridge.html", null ]
     ] ],
@@ -67,7 +62,6 @@ var hierarchy =
     [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html", [
       [ "BinaryDeserializer", "classcubos_1_1core_1_1data_1_1BinaryDeserializer.html", null ],
       [ "JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", null ],
-      [ "YAMLDeserializer", "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html", null ],
       [ "Unpackager", "classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html", null ]
     ] ],
     [ "DirectionalLight", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html", null ],
@@ -159,7 +153,6 @@ var hierarchy =
       [ "BinarySerializer", "classcubos_1_1core_1_1data_1_1BinarySerializer.html", null ],
       [ "DebugSerializer", "classcubos_1_1core_1_1data_1_1DebugSerializer.html", null ],
       [ "JSONSerializer", "classcubos_1_1core_1_1data_1_1JSONSerializer.html", null ],
-      [ "YAMLSerializer", "classcubos_1_1core_1_1data_1_1YAMLSerializer.html", null ],
       [ "Packager", "classcubos_1_1core_1_1data_1_1impl_1_1Packager.html", null ]
     ] ],
     [ "Settings", "classcubos_1_1core_1_1Settings.html", null ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['structure_1640',['Structure',['../structure.html',1,'']]]
+  ['user_20interface_1635',['User Interface',['../core-ui.html',1,'core']]]
 ];

@@ -1,7 +1,6 @@
 var classcubos_1_1engine_1_1BinaryBridge =
 [
-    [ "load", "classcubos_1_1engine_1_1BinaryBridge.html#aed34a3f444bfc7c56625a0d05f61b8bf", null ],
-    [ "loadImpl", "classcubos_1_1engine_1_1BinaryBridge.html#af6a71bac6be7b4275628c0d25a25156f", null ],
-    [ "save", "classcubos_1_1engine_1_1BinaryBridge.html#a864fa21dfb8e97589c320d03e233a506", null ],
-    [ "saveImpl", "classcubos_1_1engine_1_1BinaryBridge.html#a325d3d8e009777c602ddaeca42d13332", null ]
+    [ "BinaryBridge", "classcubos_1_1engine_1_1BinaryBridge.html#aa51cc7ae96281d78679302ffbcf2fdfa", null ],
+    [ "loadFromFile", "classcubos_1_1engine_1_1BinaryBridge.html#ad82498e42e16dc101ba909317589739c", null ],
+    [ "saveToFile", "classcubos_1_1engine_1_1BinaryBridge.html#aaae5dc035d8310534dc8af4a42f78e0d", null ]
 ];

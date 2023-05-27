@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1data_1_1File.htm
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="file_8hpp_source.html">file.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="core_2include_2cubos_2core_2data_2file_8hpp_source.html">file.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for File:</div>
 <div class="dyncontent">
@@ -164,7 +164,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a file in the virtual file system of the engine. The virtual file system is a tree of files where you can mount archives. Examples of possible archive types are a simple single file archive or a zipped archive. Files which are not in an archive must be directories.</p>
-<p>Usage example: <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2594bad0f3d19be9e23f3474032916b9">File::mount</a>("/", ...); <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2594bad0f3d19be9e23f3474032916b9">File::mount</a>("/assets", ...); ... auto settingsStream = root-&gt;find("./settings.yaml")-&gt;open(File::OpenMode::Read); ... auto cubeStream = root-&gt;find("/assets/models/cube.obj")-&gt;open(File::OpenMode::Read);</p>
+<p>Usage example: <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2594bad0f3d19be9e23f3474032916b9">File::mount</a>("/", ...); <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2594bad0f3d19be9e23f3474032916b9">File::mount</a>("/assets", ...); ... auto settingsStream = root-&gt;find("./settings.json")-&gt;open(File::OpenMode::Read); ... auto cubeStream = root-&gt;find("/assets/models/cube.obj")-&gt;open(File::OpenMode::Read);</p>
 <p>Paths must not have a trailing slash. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a853ec24a9344437904cebfd7831effb4"></a>
@@ -239,7 +239,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Creates a new file relative to this file in the virtual file system. The given path must be within a mounted writable archive. If the file already exists, or if the path is absolute, or if the directory doesn't exist, the function returns nullptr. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Creates a new file relative to this file in the virtual file system, and any parent directories that may be necessary. The given path must be within a mounted writable archive. If the file already exists, it is returned. If the path is absolute, or if the directory doesn't exist, the function returns nullptr. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>The relative path to the file. </td></tr>
     <tr><td class="paramname">directory</td><td>Whether the file is a directory. </td></tr>
@@ -469,7 +469,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>core/include/cubos/core/data/<a class="el" href="file_8hpp_source.html">file.hpp</a></li>
+<li>core/include/cubos/core/data/<a class="el" href="core_2include_2cubos_2core_2data_2file_8hpp_source.html">file.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

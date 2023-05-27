@@ -19,8 +19,6 @@ var namespacecubos_1_1core_1_1data =
     [ "SerializationMap", "classcubos_1_1core_1_1data_1_1SerializationMap.html", "classcubos_1_1core_1_1data_1_1SerializationMap" ],
     [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", "classcubos_1_1core_1_1data_1_1Serializer" ],
     [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", "classcubos_1_1core_1_1data_1_1STDArchive" ],
-    [ "YAMLDeserializer", "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html", "classcubos_1_1core_1_1data_1_1YAMLDeserializer" ],
-    [ "YAMLSerializer", "classcubos_1_1core_1_1data_1_1YAMLSerializer.html", "classcubos_1_1core_1_1data_1_1YAMLSerializer" ],
     [ "deserialize", "namespacecubos_1_1core_1_1data.html#a7f695d4a7b19355ac746e141f2059f75", null ],
     [ "deserialize", "namespacecubos_1_1core_1_1data.html#afda58c117b12b006216c201aa3134547", null ],
     [ "deserialize", "namespacecubos_1_1core_1_1data.html#af48a3ff32a66ba7598a527aa1c913835", null ],

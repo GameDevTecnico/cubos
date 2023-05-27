@@ -91,13 +91,13 @@ $(document).ready(function(){initNavTree('core-gl.html',''); initResizable(); })
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_docs_1_structure_1_core_3_gl"></a> The namespace <a class="el" href="namespacecubos_1_1core_1_1gl.html">cubos::core::gl</a> provides graphics related utilities, such as an abstract graphics API (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a>), voxel objects and tools, and other graphics related utilities.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Render Device</h1>
 <p>The <a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a> is an abstract interface for a graphics API. This way, we never use <em>OpenGL</em> directly and instead we use our own graphics API.</p>
 <p>This allows us to use different graphics APIs beneath our own, such as <em>Vulkan</em>, <em>D3D</em>, <em>Metal</em>, <em>OpenGL ES</em>, etc, without having to change all of the rendering code.</p>
 <p>At the time of writing, the only <a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a> implementation uses OpenGL internally (3.3+). Render devices are never created directly, and instead are created by the <a class="el" href="namespacecubos_1_1core_1_1io.html#a373938cb890b16a010475e7a68557737">io::Window</a>.</p>
 <p>You can check the <a class="el" href="core.html">Core</a> <code>render_device.cpp</code> sample for an example of how to use the <a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a>.</p>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Palettes and Grids</h1>
 <p>In <b>CUBOS.</b> we use palettes to store information about the types of voxels in the grids, instead of storing the voxel data directly on the grids. For example, a voxel object comprised of a single red voxel won't store its color directly. Instead, it will store the index of a material in the palette which is red.</p>
 <p>This greatly reduces the amount of data we need to store in the grids. Let's suppose that each voxel material stores RGBA data as four floats (we will probably add other properties).</p>

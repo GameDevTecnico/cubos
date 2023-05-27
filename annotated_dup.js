@@ -31,9 +31,7 @@ var annotated_dup =
           [ "QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", "structcubos_1_1core_1_1data_1_1QBMatrix" ],
           [ "SerializationMap", "classcubos_1_1core_1_1data_1_1SerializationMap.html", "classcubos_1_1core_1_1data_1_1SerializationMap" ],
           [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", "classcubos_1_1core_1_1data_1_1Serializer" ],
-          [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", "classcubos_1_1core_1_1data_1_1STDArchive" ],
-          [ "YAMLDeserializer", "classcubos_1_1core_1_1data_1_1YAMLDeserializer.html", "classcubos_1_1core_1_1data_1_1YAMLDeserializer" ],
-          [ "YAMLSerializer", "classcubos_1_1core_1_1data_1_1YAMLSerializer.html", "classcubos_1_1core_1_1data_1_1YAMLSerializer" ]
+          [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", "classcubos_1_1core_1_1data_1_1STDArchive" ]
         ] ],
         [ "ecs", "namespacecubos_1_1core_1_1ecs.html", [
           [ "impl", "namespacecubos_1_1core_1_1ecs_1_1impl.html", [
@@ -180,9 +178,10 @@ var annotated_dup =
         [ "Asset", "classcubos_1_1engine_1_1Asset.html", "classcubos_1_1engine_1_1Asset" ],
         [ "AnyAsset", "classcubos_1_1engine_1_1AnyAsset.html", "classcubos_1_1engine_1_1AnyAsset" ],
         [ "Assets", "classcubos_1_1engine_1_1Assets.html", "classcubos_1_1engine_1_1Assets" ],
-        [ "BinaryBridge", "classcubos_1_1engine_1_1BinaryBridge.html", "classcubos_1_1engine_1_1BinaryBridge" ],
-        [ "BinaryBridgeImpl", "classcubos_1_1engine_1_1BinaryBridgeImpl.html", "classcubos_1_1engine_1_1BinaryBridgeImpl" ],
         [ "AssetBridge", "classcubos_1_1engine_1_1AssetBridge.html", "classcubos_1_1engine_1_1AssetBridge" ],
+        [ "BinaryBridge", "classcubos_1_1engine_1_1BinaryBridge.html", "classcubos_1_1engine_1_1BinaryBridge" ],
+        [ "FileBridge", "classcubos_1_1engine_1_1FileBridge.html", "classcubos_1_1engine_1_1FileBridge" ],
+        [ "JSONBridge", "classcubos_1_1engine_1_1JSONBridge.html", "classcubos_1_1engine_1_1JSONBridge" ],
         [ "AssetMeta", "classcubos_1_1engine_1_1AssetMeta.html", "classcubos_1_1engine_1_1AssetMeta" ],
         [ "DeltaTime", "structcubos_1_1engine_1_1DeltaTime.html", "structcubos_1_1engine_1_1DeltaTime" ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
@@ -208,9 +207,7 @@ var annotated_dup =
         [ "LocalToWorld", "structcubos_1_1engine_1_1LocalToWorld.html", "structcubos_1_1engine_1_1LocalToWorld" ],
         [ "Position", "structcubos_1_1engine_1_1Position.html", "structcubos_1_1engine_1_1Position" ],
         [ "Rotation", "structcubos_1_1engine_1_1Rotation.html", "structcubos_1_1engine_1_1Rotation" ],
-        [ "Scale", "structcubos_1_1engine_1_1Scale.html", "structcubos_1_1engine_1_1Scale" ],
-        [ "GridBridge", "classcubos_1_1engine_1_1GridBridge.html", null ],
-        [ "PaletteBridge", "classcubos_1_1engine_1_1PaletteBridge.html", null ]
+        [ "Scale", "structcubos_1_1engine_1_1Scale.html", "structcubos_1_1engine_1_1Scale" ]
       ] ]
     ] ]
 ];

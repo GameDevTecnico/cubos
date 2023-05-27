@@ -91,12 +91,12 @@ $(document).ready(function(){initNavTree('core-ui.html',''); initResizable(); })
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_docs_1_structure_1_core_5_ui"></a> The namespace <a class="el" href="namespacecubos_1_1core_1_1ui.html">cubos::core::ui</a> provides UI related utilities. <b>CUBOS.</b> UI support is built on top of <a href="https://github.com/ocornut/imgui"><em>Dear ImGui</em></a>.</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 ImGui integration</h1>
 <p>To start using <em>ImGui</em> on a <b>CUBOS.</b> window, you must first call the <a class="el" href="namespacecubos_1_1core_1_1ui.html#abdef4dee46ee75856196dc27a1bad855">initialize</a> function, passing the window handle. This will initialize <em>ImGui</em> and create the necessary resources.</p>
 <p>At the end of the program, you should call the <a class="el" href="namespacecubos_1_1core_1_1ui.html#af8ed978d758b063ff778f65cc761a932">terminate</a> function to release the resources.</p>
 <p>For each frame, you must call the <a class="el" href="namespacecubos_1_1core_1_1ui.html#a00d2e0adc5245a734361b6e5f5fb6fa6">beginFrame</a> function before any <em>ImGui</em> calls, and the <a class="el" href="namespacecubos_1_1core_1_1ui.html#a0cb1cffd1f7ecddba7037c6df8ff2a33">endFrame</a> function after all <em>ImGui</em> calls, to render the UI.</p>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Showing objects on the UI</h1>
 <p>The <a class="el" href="namespacecubos_1_1core_1_1ui.html#a71f006c1e0a23b24f6c2a7cc225fc88b">show</a> function can be used to show any serializable object on the UI. It will show the object's properties on a <em>ImGui</em> table. There's also the <a class="el" href="namespacecubos_1_1core_1_1ui.html#a7dd0b501b4ef70633c7f39098d555de1">edit</a> function, which is similar to <a class="el" href="namespacecubos_1_1core_1_1ui.html#a71f006c1e0a23b24f6c2a7cc225fc88b">show</a>, but allows editing the object's properties, in case it is deserializable. </p>
 </div></div><!-- contents -->

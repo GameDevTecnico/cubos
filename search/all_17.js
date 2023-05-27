@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['yamldeserializer_788',['YAMLDeserializer',['../classcubos_1_1core_1_1data_1_1YAMLDeserializer.html',1,'YAMLDeserializer'],['../classcubos_1_1core_1_1data_1_1YAMLDeserializer.html#a2321b8f0cd5239f6170fd1f1ea4e8a6a',1,'cubos::core::data::YAMLDeserializer::YAMLDeserializer()']]],
-  ['yamlserializer_789',['YAMLSerializer',['../classcubos_1_1core_1_1data_1_1YAMLSerializer.html',1,'YAMLSerializer'],['../classcubos_1_1core_1_1data_1_1YAMLSerializer.html#a03447fb190ae12e6670acba36aa291cf',1,'cubos::core::data::YAMLSerializer::YAMLSerializer()']]]
+  ['zfar_789',['zFar',['../structcubos_1_1core_1_1gl_1_1Camera.html#a44be78f8d91a84e8c1fa546dd1e406c0',1,'cubos::core::gl::Camera::zFar()'],['../structcubos_1_1engine_1_1Camera.html#a44be78f8d91a84e8c1fa546dd1e406c0',1,'cubos::engine::Camera::zFar()']]],
+  ['znear_790',['zNear',['../structcubos_1_1core_1_1gl_1_1Camera.html#a81d1f238a094dd2b4951321a11bc17c0',1,'cubos::core::gl::Camera::zNear()'],['../structcubos_1_1engine_1_1Camera.html#a81d1f238a094dd2b4951321a11bc17c0',1,'cubos::engine::Camera::zNear()']]]
 ];

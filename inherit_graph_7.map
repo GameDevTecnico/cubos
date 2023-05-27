@@ -1,10 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcubos_1_1engine_1_1AssetBridge.html" title=" " alt="" coords="5,103,105,130"/>
-<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1BinaryBridge.html" title=" " alt="" coords="153,78,260,105"/>
-<area shape="rect" id="node8" href="$classcubos_1_1engine_1_1SceneBridge.html" title=" " alt="" coords="155,129,258,155"/>
-<area shape="rect" id="node3" href="$classcubos_1_1engine_1_1BinaryBridgeImpl.html" title=" " alt="" coords="308,5,487,47"/>
-<area shape="rect" id="node5" href="$classcubos_1_1engine_1_1BinaryBridgeImpl.html" title=" " alt="" coords="308,71,487,112"/>
-<area shape="rect" id="node7" href="$classcubos_1_1engine_1_1BinaryBridgeImpl.html" title=" " alt="" coords="311,137,484,163"/>
-<area shape="rect" id="node4" href="$classcubos_1_1engine_1_1PaletteBridge.html" title="A bridge to load and save Palette assets." alt="" coords="535,13,644,39"/>
-<area shape="rect" id="node6" href="$classcubos_1_1engine_1_1GridBridge.html" title="A bridge to load and save Grid assets." alt="" coords="544,78,635,105"/>
+<area shape="rect" id="node1" href="$classcubos_1_1engine_1_1AssetBridge.html" title=" " alt="" coords="5,56,105,83"/>
+<area shape="rect" id="node2" href="$classcubos_1_1engine_1_1FileBridge.html" title=" " alt="" coords="161,31,248,57"/>
+<area shape="rect" id="node5" href="$classcubos_1_1engine_1_1SceneBridge.html" title=" " alt="" coords="153,81,256,108"/>
+<area shape="rect" id="node3" href="$classcubos_1_1engine_1_1BinaryBridge.html" title=" " alt="" coords="304,5,448,32"/>
+<area shape="rect" id="node4" href="$classcubos_1_1engine_1_1JSONBridge.html" title=" " alt="" coords="309,56,443,83"/>
 </map>

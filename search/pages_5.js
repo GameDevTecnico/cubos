@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['hello_20world_1636',['Hello World',['../guide-hello-world.html',1,'guides']]]
+  ['input_20output_1631',['Input Output',['../core-io.html',1,'core']]],
+  ['introduction_1632',['Introduction',['../index.html',1,'']]]
 ];
