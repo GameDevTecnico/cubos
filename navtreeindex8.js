@@ -1,5 +1,9 @@
 var NAVTREEINDEX8 =
 {
+"structcubos_1_1core_1_1io_1_1MouseMoveEvent.html":[4,0,0,0,4,11],
+"structcubos_1_1core_1_1io_1_1MouseMoveEvent.html#a496ccab8ba87881fd4994f4d4dc38bde":[4,0,0,0,4,11,0],
+"structcubos_1_1core_1_1io_1_1MouseScrollEvent.html":[4,0,0,0,4,12],
+"structcubos_1_1core_1_1io_1_1MouseScrollEvent.html#a9a7e96ac8ca71ff37cbd95aba86610ca":[4,0,0,0,4,12,0],
 "structcubos_1_1core_1_1io_1_1ResizeEvent.html":[4,0,0,0,4,13],
 "structcubos_1_1core_1_1io_1_1ResizeEvent.html#ac26701b492f4337651a58aea005f2483":[4,0,0,0,4,13,0],
 "structcubos_1_1core_1_1io_1_1TextEvent.html":[4,0,0,0,4,14],
@@ -76,9 +80,5 @@ var NAVTREEINDEX8 =
 "window_2plugin_8hpp.html#adc9a1652e325fc1d1b29eb9467e8995e":[3,0,0,1,50],
 "window_2plugin_8hpp_source.html":[5,0,1,0,0,0,9,0],
 "window_8hpp_source.html":[5,0,0,0,0,0,4,6],
-"world_8hpp_source.html":[5,0,0,0,0,0,2,17],
-"":[3,0,0],
-"":[3,0,0,0,0],
-"":[3,0,0,1,1],
-"":[3,0,0,1]
+"world_8hpp_source.html":[5,0,0,0,0,0,2,17]
 };
