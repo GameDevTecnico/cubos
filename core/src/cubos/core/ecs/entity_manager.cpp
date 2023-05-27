@@ -9,37 +9,56 @@ using namespace cubos::core::data;
 template <>
 void cubos::core::data::serialize<Entity>(Serializer& ser, const Entity& obj, const char* name)
 {
-    auto& map = ser.context().get<SerializationMap<Entity, std::string>>();
-
-    if (obj.isNull())
+    if (ser.context().has<SerializationMap<Entity, std::string>>())
     {
-        ser.write("null", name);
+        if (obj.isNull())
+        {
+            ser.write("null", name);
+            return;
+        }
+
+        auto& map = ser.context().get<SerializationMap<Entity, std::string>>();
+        ser.write(map.getId(obj), name);
     }
     else
     {
-        ser.write(map.getId(obj), name);
+        ser.beginObject(name);
+        ser.write(obj.index, "index");
+        ser.write(obj.generation, "generation");
+        ser.endObject();
     }
 }
 
 template <>
 void cubos::core::data::deserialize<Entity>(Deserializer& des, Entity& obj)
 {
-    auto& map = des.context().get<SerializationMap<Entity, std::string>>();
+    if (des.context().has<SerializationMap<Entity, std::string>>())
+    {
+        std::string name;
+        des.read(name);
+        if (name == "null")
+        {
+            obj = Entity();
+            return;
+        }
 
-    std::string name;
-    des.read(name);
-    if (name == "null")
-    {
-        obj = Entity();
-    }
-    else if (map.hasId(name))
-    {
-        obj = map.getRef(name);
+        auto& map = des.context().get<SerializationMap<Entity, std::string>>();
+        if (map.hasId(name))
+        {
+            obj = map.getRef(name);
+        }
+        else
+        {
+            CUBOS_WARN("No such entity '{}'", name);
+            des.fail();
+        }
     }
     else
     {
-        CUBOS_WARN("No such entity '{}'", name);
-        des.fail();
+        des.beginObject();
+        des.read(obj.index);
+        des.read(obj.generation);
+        des.endObject();
     }
 }
 

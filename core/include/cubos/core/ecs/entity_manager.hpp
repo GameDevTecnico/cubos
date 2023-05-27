@@ -9,7 +9,12 @@
 
 namespace cubos::core::ecs
 {
-    /// Handle used to identify an Entity.
+    /// Identifies an entity.
+    ///
+    /// When serializing/deserializing, if there's a SerializationMap<Entity, std::string> in the
+    /// context, it will be used to (de)serialize strings representing the entities. Otherwise,
+    /// the identifiers will be (de)serialized as objects with two fields: their index and their
+    /// generation.
     class Entity
     {
     public:
