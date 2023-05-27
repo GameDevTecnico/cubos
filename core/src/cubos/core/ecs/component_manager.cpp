@@ -63,13 +63,13 @@ ComponentManager::Entry::Entry(std::unique_ptr<IStorage> storage)
     this->mutex = std::make_unique<std::shared_mutex>();
 }
 
-data::Package ComponentManager::pack(uint32_t id, std::size_t componentId, data::Context& context) const
+data::Package ComponentManager::pack(uint32_t id, std::size_t componentId, data::Context* context) const
 {
     return mEntries[componentId - 1].storage->pack(id, context);
 }
 
 bool ComponentManager::unpack(uint32_t id, std::size_t componentId, const data::Package& package,
-                              data::Context& context)
+                              data::Context* context)
 {
     return mEntries[componentId - 1].storage->unpack(id, package, context);
 }

@@ -85,16 +85,16 @@ namespace cubos::core::ecs
 
         /// @brief Creates a package from the components of an entity.
         /// @param entity Entity ID.
-        /// @param context Context for serializing the components.
+        /// @param context Optional context for serializing the components.
         /// @returns A package containing the components of the entity.
-        data::Package pack(Entity entity, data::Context& context) const;
+        data::Package pack(Entity entity, data::Context* context = nullptr) const;
 
         /// @brief Unpacks components specified in a package into an entity.
         /// @param entity Entity ID.
         /// @param package Package to unpack.
-        /// @param context Context for deserializing the components.
+        /// @param context Optional context for deserializing the components.
         /// @returns True if the package was unpacked successfully, false otherwise.
-        bool unpack(Entity entity, const data::Package& package, data::Context& context);
+        bool unpack(Entity entity, const data::Package& package, data::Context* context = nullptr);
 
         /// Returns an iterator which points to the first entity of the world.
         /// @return An iterator.

@@ -35,19 +35,11 @@ static void printStuff(Read<World> world)
     using cubos::core::data::SerializationMap;
     using cubos::core::memory::Stream;
 
-    // Setup a context with a serialization map which simply converts the entity indices to a string.
-    Context context{};
-    context.push(SerializationMap<Entity, std::string>{[](const Entity& entity, std::string& string) {
-                                                           string = std::to_string(entity.index);
-                                                           return true;
-                                                       },
-                                                       [](Entity&, const std::string&) { return false; }});
-
     for (auto entity : *world)
     {
         auto name = std::to_string(entity.index);
         auto ser = DebugSerializer(Stream::stdOut);
-        auto pkg = world->pack(entity, context);
+        auto pkg = world->pack(entity);
         ser.write(pkg, name.c_str());
         Stream::stdOut.put('\n');
     }
