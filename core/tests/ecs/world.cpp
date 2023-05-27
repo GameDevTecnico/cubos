@@ -40,7 +40,7 @@ TEST_CASE("ecs::World")
 
     // Change the value of the integer component and remove the parent component.
     pkg.field("integer").set<int>(1);
-    pkg.fields().erase(pkg.fields().begin() + (pkg.fields()[0].first == "parent" ? 0 : 1));
+    pkg.removeField("parent");
     CHECK(world.unpack(foo, pkg));
 
     // The entity should still have the integer component, but not the parent component.

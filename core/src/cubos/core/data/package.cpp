@@ -271,6 +271,22 @@ const Package::Fields& Package::fields() const
     return std::get<Fields>(mData);
 }
 
+Package Package::removeField(std::string_view name)
+{
+    auto& fields = this->fields();
+    for (size_t i = 0; i < fields.size(); ++i)
+    {
+        if (fields[i].first == name)
+        {
+            auto field = std::move(fields[i].second);
+            fields.erase(fields.begin() + static_cast<ptrdiff_t>(i));
+            return field;
+        }
+    }
+
+    return {};
+}
+
 Package& Package::element(std::size_t index)
 {
     auto& elements = this->elements();

@@ -208,6 +208,11 @@ namespace cubos::core::data
         /// @returns A map associating the field name to the field package.
         const Fields& fields() const;
 
+        /// Removes a field from this package.
+        /// @param name The name of the field.
+        /// @returns The removed field, or an empty package if the field didn't exist.
+        Package removeField(std::string_view name);
+
         /// Gets an element of the array stored in this package.
         /// If the package isn't an array, this method will abort.
         /// If the index is out of bounds, this method will abort.
