@@ -65,6 +65,11 @@ namespace cubos::core::ecs
         /// @param entity Entity ID.
         void destroy(Entity entity);
 
+        /// @brief Checks if an entity is still alive.
+        /// @param entity Entity identifier.
+        /// @returns True if the entity is alive, false otherwise.
+        bool isAlive(Entity entity) const;
+
         /// @brief Adds components to an entity.
         /// @tparam ComponentTypes The types of the components to be added.
         /// @param components The initial values for the components.

@@ -234,6 +234,11 @@ bool EntityManager::isValid(Entity entity) const
     return entity.index < mEntities.size() && mEntities[entity.index].generation == entity.generation;
 }
 
+bool EntityManager::isAlive(Entity entity) const
+{
+    return this->isValid(entity) && mEntities[entity.index].mask.test(0);
+}
+
 EntityManager::Iterator EntityManager::begin() const
 {
     return {*this, Entity::Mask(1)};

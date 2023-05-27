@@ -91,10 +91,16 @@ namespace cubos::core::ecs
         /// @returns The component mask of the entity.
         const Entity::Mask& getMask(Entity entity) const;
 
-        /// Checks if an entity is still valid.
+        /// Checks if an entity is still valid. Different from isAlive, as it will return true for
+        /// entities which still have not been commited.
         /// @param entity The entity to check.
         /// @returns True if the entity is still valid, false otherwise.
         bool isValid(Entity entity) const;
+
+        /// Checks if an entity is alive.
+        /// @param entity The entity to check.
+        /// @returns True if the entity is alive, false otherwise.
+        bool isAlive(Entity entity) const;
 
         /// Returns an iterator over all entities.
         /// @returns An iterator over all entities.

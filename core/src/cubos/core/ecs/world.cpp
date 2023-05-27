@@ -18,6 +18,11 @@ void World::destroy(Entity entity)
     CUBOS_DEBUG("Destroyed entity {}", entity.index);
 }
 
+bool World::isAlive(Entity entity) const
+{
+    return mEntityManager.isAlive(entity);
+}
+
 data::Package World::pack(Entity entity, data::Context* context) const
 {
     Entity::Mask mask = mEntityManager.getMask(entity);
