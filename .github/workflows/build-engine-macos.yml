@@ -26,12 +26,21 @@ jobs:
       run: |
         brew install glfw llvm@14 ccache
 
+    - name: Get timestamp
+      shell: bash
+      id: ccache_vars
+      run: |
+        echo "timestamp=$(date +%s)" >> $GITHUB_OUTPUT
+
     - uses: actions/cache@v3
       with:
         path: ${{ env.CCACHE_DIR }}
-        key: ccache-${{ env.CCACHE_COMPILERTYPE }}-${{ env.BUILD_TYPE }}-${{ github.ref }}
+        key: ccache-${{ env.CCACHE_COMPILERTYPE }}-${{ env.BUILD_TYPE }}-${{ github.ref }}-${{ steps.ccache_vars.outputs.timestamp }}
         restore-keys: |
-          ccache-${{ env.CCACHE_COMPILERTYPE }}-${{ env.BUILD_TYPE }}
+          ccache-${{ env.CCACHE_COMPILERTYPE }}-${{ env.BUILD_TYPE }}-${{ github.ref }}-
+          ccache-${{ env.CCACHE_COMPILERTYPE }}-${{ env.BUILD_TYPE }}-
+          ccache-${{ env.CCACHE_COMPILERTYPE }}-
+          ccache-
 
     - name: Configure CMake
       run: CC=$(brew --prefix llvm@14)/bin/clang CXX=$(brew --prefix llvm@14)/bin/clang++ cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DGLFW_USE_SUBMODULE=OFF -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON -DBUILD_ENGINE_SAMPLES=ON -DUSE_CLANG_TIDY=OFF
