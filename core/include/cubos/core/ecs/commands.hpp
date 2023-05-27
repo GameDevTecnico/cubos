@@ -276,7 +276,7 @@ namespace cubos::core::ecs
     template <typename... ComponentTypes>
     void Commands::remove(Entity entity)
     {
-        mBuffer.remove(entity);
+        mBuffer.remove<ComponentTypes...>(entity);
     }
 
     template <typename... ComponentTypes>
