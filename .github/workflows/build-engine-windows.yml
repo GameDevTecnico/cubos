@@ -21,19 +21,13 @@ jobs:
     - uses: actions/checkout@v3
       with:
         submodules: recursive
+        
+    - name: Install dependencies
+      run: |
+        choco install ccache
 
     - name: Create Build Env
       run: cmake -E make_directory ${{github.workspace}}\build
-
-    - name: Download ccache
-      shell: cmake -P {0}
-      run: |
-        set(ccache_url "https://github.com/cristianadam/ccache/releases/download/v${{ env.ccache_version }}/${{ runner.os }}.tar.xz")
-        file(DOWNLOAD "${ccache_url}" ./ccache.tar.xz SHOW_PROGRESS)
-        execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ./ccache.tar.xz)
-        if(ret AND NOT ret EQUAL 0)
-          message( FATAL_ERROR "Bad exit status")
-        endif()
 
     - uses: actions/cache@v3
       with:
