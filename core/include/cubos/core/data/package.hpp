@@ -13,8 +13,9 @@ namespace cubos::core::data
     namespace impl
     {
         class Packager;
-        class Unpackager;
     } // namespace impl
+
+    class Unpackager;
 
     /// @brief A utility object which is capable of storing the data of any trivially
     /// serializable object. One way to understand this class is to think of it
@@ -245,10 +246,55 @@ namespace cubos::core::data
 
     private:
         friend impl::Packager;
-        friend impl::Unpackager;
+        friend Unpackager;
 
         /// The packaged data.
         Data mData;
+    };
+
+    /// Responsible for deserializing packages into types.
+    class Unpackager : public Deserializer
+    {
+    public:
+        /// @param pkg The package to read from.
+        Unpackager(const Package& pkg);
+
+        // Implement interface methods.
+
+        void readI8(int8_t& value) override;
+        void readI16(int16_t& value) override;
+        void readI32(int32_t& value) override;
+        void readI64(int64_t& value) override;
+        void readU8(uint8_t& value) override;
+        void readU16(uint16_t& value) override;
+        void readU32(uint32_t& value) override;
+        void readU64(uint64_t& value) override;
+        void readF32(float& value) override;
+        void readF64(double& value) override;
+        void readBool(bool& value) override;
+        void readString(std::string& value) override;
+        void beginObject() override;
+        void endObject() override;
+        std::size_t beginArray() override;
+        void endArray() override;
+        std::size_t beginDictionary() override;
+        void endDictionary() override;
+
+    private:
+        friend Package;
+
+        /// Pops data from the current package.
+        /// @returns Pointer to the popped data.
+        const Package* pop();
+
+        /// Stack used to keep the state of the package.
+        /// The package pointer points to the current
+        /// object/array/dictionary being read from.
+        /// The std::size_t is the index of the next field/element to read.
+        std::stack<std::pair<const Package*, std::size_t>> mStack;
+
+        /// The package being read from.
+        const Package& mPkg;
     };
 
     /// Implementation specific classes for the above functions are hidden in
@@ -303,52 +349,6 @@ namespace cubos::core::data
             /// The root package being written to.
             Package& mPkg;
         };
-
-        /// Responsible for deserializing packages into types.
-        /// Should never be used directly.
-        class Unpackager : public Deserializer
-        {
-        public:
-            // Implement interface methods.
-
-            void readI8(int8_t& value) override;
-            void readI16(int16_t& value) override;
-            void readI32(int32_t& value) override;
-            void readI64(int64_t& value) override;
-            void readU8(uint8_t& value) override;
-            void readU16(uint16_t& value) override;
-            void readU32(uint32_t& value) override;
-            void readU64(uint64_t& value) override;
-            void readF32(float& value) override;
-            void readF64(double& value) override;
-            void readBool(bool& value) override;
-            void readString(std::string& value) override;
-            void beginObject() override;
-            void endObject() override;
-            std::size_t beginArray() override;
-            void endArray() override;
-            std::size_t beginDictionary() override;
-            void endDictionary() override;
-
-        private:
-            friend Package;
-
-            /// @param pkg The package to read from.
-            Unpackager(const Package& pkg);
-
-            /// Pops data from the current package.
-            /// @returns Pointer to the popped data.
-            const Package* pop();
-
-            /// Stack used to keep the state of the package.
-            /// The package pointer points to the current
-            /// object/array/dictionary being read from.
-            /// The std::size_t is the index of the next field/element to read.
-            std::stack<std::pair<const Package*, std::size_t>> mStack;
-
-            /// The package being read from.
-            const Package& mPkg;
-        };
     } // namespace impl
 
     // Implementation.
@@ -367,7 +367,7 @@ namespace cubos::core::data
     template <typename T>
     inline bool Package::into(T& data, Context* context) const
     {
-        auto unpackager = impl::Unpackager(*this);
+        auto unpackager = Unpackager(*this);
         if (context != nullptr)
         {
             unpackager.context().pushSubContext(*context);

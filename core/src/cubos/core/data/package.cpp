@@ -552,7 +552,7 @@ Package* impl::Packager::push(Package::Data&& data, const char* name)
     }
 }
 
-impl::Unpackager::Unpackager(const Package& pkg)
+Unpackager::Unpackager(const Package& pkg)
     : mPkg(pkg)
 {
     // Do nothing.
@@ -567,7 +567,7 @@ impl::Unpackager::Unpackager(const Package& pkg)
 
 #define TYPE_MISMATCH(expected, found) UNEXPECTED(Package::typeToString(expected), Package::typeToString(found))
 
-void impl::Unpackager::readI8(int8_t& value)
+void Unpackager::readI8(int8_t& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I8)
@@ -580,7 +580,7 @@ void impl::Unpackager::readI8(int8_t& value)
     }
 }
 
-void impl::Unpackager::readI16(int16_t& value)
+void Unpackager::readI16(int16_t& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I16)
@@ -593,7 +593,7 @@ void impl::Unpackager::readI16(int16_t& value)
     }
 }
 
-void impl::Unpackager::readI32(int32_t& value)
+void Unpackager::readI32(int32_t& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I32)
@@ -606,7 +606,7 @@ void impl::Unpackager::readI32(int32_t& value)
     }
 }
 
-void impl::Unpackager::readI64(int64_t& value)
+void Unpackager::readI64(int64_t& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::I64)
@@ -619,7 +619,7 @@ void impl::Unpackager::readI64(int64_t& value)
     }
 }
 
-void impl::Unpackager::readU8(uint8_t& value)
+void Unpackager::readU8(uint8_t& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U8)
@@ -632,7 +632,7 @@ void impl::Unpackager::readU8(uint8_t& value)
     }
 }
 
-void impl::Unpackager::readU16(uint16_t& value)
+void Unpackager::readU16(uint16_t& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U16)
@@ -645,7 +645,7 @@ void impl::Unpackager::readU16(uint16_t& value)
     }
 }
 
-void impl::Unpackager::readU32(uint32_t& value)
+void Unpackager::readU32(uint32_t& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U32)
@@ -658,7 +658,7 @@ void impl::Unpackager::readU32(uint32_t& value)
     }
 }
 
-void impl::Unpackager::readU64(uint64_t& value)
+void Unpackager::readU64(uint64_t& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::U64)
@@ -671,7 +671,7 @@ void impl::Unpackager::readU64(uint64_t& value)
     }
 }
 
-void impl::Unpackager::readF32(float& value)
+void Unpackager::readF32(float& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::F32)
@@ -684,7 +684,7 @@ void impl::Unpackager::readF32(float& value)
     }
 }
 
-void impl::Unpackager::readF64(double& value)
+void Unpackager::readF64(double& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::F64)
@@ -697,7 +697,7 @@ void impl::Unpackager::readF64(double& value)
     }
 }
 
-void impl::Unpackager::readBool(bool& value)
+void Unpackager::readBool(bool& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Bool)
@@ -710,7 +710,7 @@ void impl::Unpackager::readBool(bool& value)
     }
 }
 
-void impl::Unpackager::readString(std::string& value)
+void Unpackager::readString(std::string& value)
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::String)
@@ -723,7 +723,7 @@ void impl::Unpackager::readString(std::string& value)
     }
 }
 
-void impl::Unpackager::beginObject()
+void Unpackager::beginObject()
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Object)
@@ -736,13 +736,13 @@ void impl::Unpackager::beginObject()
     }
 }
 
-void impl::Unpackager::endObject()
+void Unpackager::endObject()
 {
     assert(!mStack.empty());
     mStack.pop();
 }
 
-std::size_t impl::Unpackager::beginArray()
+std::size_t Unpackager::beginArray()
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Array)
@@ -755,13 +755,13 @@ std::size_t impl::Unpackager::beginArray()
     return d->elements().size();
 }
 
-void impl::Unpackager::endArray()
+void Unpackager::endArray()
 {
     assert(!mStack.empty());
     mStack.pop();
 }
 
-std::size_t impl::Unpackager::beginDictionary()
+std::size_t Unpackager::beginDictionary()
 {
     const auto* d = this->pop();
     if (d == nullptr || d->type() != Package::Type::Dictionary)
@@ -774,13 +774,13 @@ std::size_t impl::Unpackager::beginDictionary()
     return d->dictionary().size();
 }
 
-void impl::Unpackager::endDictionary()
+void Unpackager::endDictionary()
 {
     assert(!mStack.empty());
     mStack.pop();
 }
 
-const Package* impl::Unpackager::pop()
+const Package* Unpackager::pop()
 {
     if (mStack.empty())
     {
