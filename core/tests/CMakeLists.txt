@@ -8,6 +8,7 @@ add_executable(
     main.cpp
     data/context.cpp
     ecs/blueprint.cpp
+    ecs/commands.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)

@@ -16,7 +16,8 @@ TEST_CASE("ecs::Blueprint")
 {
     Blueprint blueprint{};
     World world{};
-    CommandBuffer cmds{world};
+    CommandBuffer cmdBuffer{world};
+    Commands cmds{cmdBuffer};
     setupWorld(world);
 
     SUBCASE("create an entity and clear the blueprint immediately")
@@ -55,7 +56,7 @@ TEST_CASE("ecs::Blueprint")
         auto spawned = cmds.spawn(blueprint);
         auto spawnedBar = spawned.entity("bar");
         auto spawnedBaz = spawned.entity("baz");
-        cmds.commit();
+        cmdBuffer.commit();
 
         // Package the entities to make sure they were properly spawned.
         auto barPkg = world.pack(spawnedBar);
@@ -91,7 +92,7 @@ TEST_CASE("ecs::Blueprint")
         auto spawnedFoo = spawned.entity("foo");
         auto spawnedBar = spawned.entity("sub.bar");
         auto spawnedBaz = spawned.entity("sub.baz");
-        cmds.commit();
+        cmdBuffer.commit();
 
         // Package the entities to make sure they were properly spawned.
         auto fooPkg = world.pack(spawnedFoo);
