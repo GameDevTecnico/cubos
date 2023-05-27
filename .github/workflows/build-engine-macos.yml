@@ -18,7 +18,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: recursive
         
@@ -34,7 +34,7 @@ jobs:
         echo "::set-output name=timestamp::$(date '+%Y-%m-%dT%H.%M.%S')"
 
     - name: Cache-op for build-cache through ccache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ env.CCACHE_DIR }}
         key: ccache-${{ matrix.identifier }}-${{ steps.ccache_vars.outputs.hash }}-${{ github.ref }}-${{ steps.ccache_vars.outputs.timestamp }}
