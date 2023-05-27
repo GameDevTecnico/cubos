@@ -47,6 +47,7 @@ function(cubos_common_target_options target)
             -pedantic
             -Wconversion
             -Werror
+            -Wno-attributes
             -Wno-unknown-attributes> # Introduces false positives for [[cubos::component]]
     )
 
