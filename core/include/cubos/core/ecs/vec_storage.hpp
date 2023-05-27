@@ -52,7 +52,10 @@ namespace cubos::core::ecs
     template <typename T>
     void VecStorage<T>::erase(uint32_t index)
     {
-        mData[index].~T();
-        new (&mData[index]) T;
+        if (static_cast<size_t>(index) < mData.size())
+        {
+            mData[index].~T();
+            new (&mData[index]) T;
+        }
     }
 } // namespace cubos::core::ecs
