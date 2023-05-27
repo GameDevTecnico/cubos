@@ -26,6 +26,18 @@ if(ENABLE_COVERAGE)
     )
 endif()
 
+# Enable CCache
+find_program(CCACHE_EXE NAMES "ccache")
+if(CCACHE_EXE)
+    option(USE_CCACHE "Enable CCache" ON)
+    if(USE_CCACHE)
+        set(ENV{CCACHE_COMPRESS} true)
+        set(ENV{CCACHE_COMPRESSLEVEL} 5)
+        set(ENV{CCACHE_COMPILERCHECK} content)
+        set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_EXE}")
+    endif()
+endif()
+
 # Function which configures a target with the options common to all CUBOS. targets.
 function(cubos_common_target_options target)
     target_compile_features(${target} PRIVATE cxx_std_20)
