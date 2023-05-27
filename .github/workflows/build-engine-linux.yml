@@ -9,6 +9,9 @@ on:
 
 env:
   BUILD_TYPE: Release
+  CCACHE_BASEDIR: ${{ github.workspace }}
+  CCACHE_DIR: "${{ github.workspace }}/.ccache"
+  CCACHE_COMPILERCHECK: content
 
 jobs:
   build:
@@ -22,7 +25,24 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11
+        sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11 ccache
+
+    - name: Generate ccache_vars for ccache based on machine
+      shell: bash
+      id: ccache_vars
+      run: |-
+        echo "::set-output name=hash::$(echo ${{ env.CCACHE_COMPILERCHECK }})"
+        echo "::set-output name=timestamp::$(date '+%Y-%m-%dT%H.%M.%S')"
+
+    - name: Cache-op for build-cache through ccache
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.CCACHE_DIR }}
+        key: ccache-${{ matrix.identifier }}-${{ steps.ccache_vars.outputs.hash }}-${{ github.ref }}-${{ steps.ccache_vars.outputs.timestamp }}
+        restore-keys: |-
+          ccache-${{ matrix.identifier }}-${{ steps.ccache_vars.outputs.hash }}-${{ github.ref }}
+          ccache-${{ matrix.identifier }}-${{ steps.ccache_vars.outputs.hash }}
+          ccache-${{ matrix.identifier }} 
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON -DBUILD_ENGINE_SAMPLES=ON -DUSE_CLANG_TIDY=OFF
@@ -31,8 +51,17 @@ jobs:
         CC:   gcc-11
         CXX:  g++-11
 
+    - name: ccache prolog
+      run: |-
+        ccache -s # Print current cache stats
+        ccache -z # Zero cache entry
+
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target all
+
+    - name: ccache epilog
+      run: |
+        ccache -s # Print current cache stats
 
     - name: Test
       working-directory: ${{github.workspace}}/build/core/tests
