@@ -5,6 +5,7 @@
 #include "utils.hpp"
 
 using cubos::core::data::Package;
+using cubos::core::data::Unpackager;
 using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Commands;
@@ -34,11 +35,44 @@ TEST_CASE("ecs::Blueprint")
     // return a null identifier.
     CHECK(blueprint.entity("foo").isNull());
 
-    // Create an entity on the blueprint which references another entity.
+    // Create two entities on the blueprint.
     auto bar = blueprint.create("bar");
-    blueprint.create("baz", ParentComponent{bar});
+    auto baz = blueprint.create("baz", IntegerComponent{2});
 
-    SUBCASE("merge one blueprint into another blueprint")
+    // Add a ParentComponent to "baz" with id = "bar", using a deserializer.
+    {
+        // Pack the identifier of "bar".
+        auto barPkg = Package::from(bar);
+
+        // Unpack the identifier of "bar" into a ParentComponent.
+        Unpackager unpackager{barPkg};
+        blueprint.addFromDeserializer(baz, "parent", unpackager);
+    }
+
+    SUBCASE("spawn the blueprint")
+    {
+        // Spawn the blueprint into the world and get the identifiers of the spawned entities.
+        auto spawned = cmds.spawn(blueprint);
+        auto spawnedBar = spawned.entity("bar");
+        auto spawnedBaz = spawned.entity("baz");
+        cmds.commit();
+
+        // Package the entities to make sure they were properly spawned.
+        auto barPkg = world.pack(spawnedBar);
+        auto bazPkg = world.pack(spawnedBaz);
+
+        // "bar" has no components.
+        CHECK(barPkg.type() == Package::Type::Object);
+        CHECK(barPkg.fields().size() == 0);
+
+        // "baz" has a ParentComponent with parent = "bar" and an IntegerComponent with integer = 2.
+        CHECK(bazPkg.type() == Package::Type::Object);
+        CHECK(bazPkg.fields().size() == 2);
+        CHECK(bazPkg.field("parent").get<Entity>() == spawnedBar);
+        CHECK(bazPkg.field("integer").get<int>() == 2);
+    }
+
+    SUBCASE("merge one blueprint into another blueprint and then spawn it")
     {
         // Create another blueprint with one entity.
         Blueprint merged{};
@@ -73,9 +107,10 @@ TEST_CASE("ecs::Blueprint")
         CHECK(barPkg.type() == Package::Type::Object);
         CHECK(barPkg.fields().size() == 0);
 
-        // "baz" has a ParentComponent with parent = "bar".
+        // "baz" has a ParentComponent with parent = "bar" and an IntegerComponent with value = 2.
         CHECK(bazPkg.type() == Package::Type::Object);
-        CHECK(bazPkg.fields().size() == 1);
+        CHECK(bazPkg.fields().size() == 2);
         CHECK(bazPkg.field("parent").get<Entity>() == spawnedBar);
+        CHECK(bazPkg.field("integer").get<int>() == 2);
     }
 }
