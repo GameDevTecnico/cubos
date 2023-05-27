@@ -166,7 +166,7 @@ namespace cubos::core::ecs
     void Blueprint::add(Entity entity, const ComponentTypes&... components)
     {
         (void)entity;
-        assert(entity.generation == 0 && mMap.hasRef(entity));
+        CUBOS_ASSERT(entity.generation == 0 && mMap.hasRef(entity), "Entity does not belong to blueprint");
 
         (
             [&]() {
