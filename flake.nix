@@ -24,6 +24,7 @@
             graphviz
             clang_14
             doctest
+	    ccache
             lcov
             (python3.withPackages (ps: with ps; [
               jinja2
