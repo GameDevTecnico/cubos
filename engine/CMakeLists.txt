@@ -35,6 +35,8 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/voxels/plugin.cpp"
 
+    "src/cubos/engine/input/plugin.cpp"
+
     "src/cubos/engine/renderer/plugin.cpp"
     "src/cubos/engine/renderer/frame.cpp"
     "src/cubos/engine/renderer/renderer.cpp"
@@ -80,6 +82,9 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/scene/bridge.hpp"
 
     "include/cubos/engine/voxels/plugin.hpp"
+
+    "include/cubos/engine/input/plugin.hpp"
+    "include/cubos/engine/input/bindings.hpp"
 
     "include/cubos/engine/renderer/plugin.hpp"
     "include/cubos/engine/renderer/frame.hpp"
