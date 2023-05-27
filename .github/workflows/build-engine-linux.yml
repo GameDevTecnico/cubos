@@ -27,15 +27,14 @@ jobs:
         sudo apt-get update
         sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11 ccache
 
-    - name: Generate ccache_vars for ccache based on machine
+    - name: Generate ccache_vars
       shell: bash
       id: ccache_vars
       run: |-
         echo "hash=$(echo ${{ env.CCACHE_COMPILERCHECK }})" >> $GITHUB_OUTPUT
         echo "timestamp=$(date '+%Y-%m-%dT%H.%M.%S')" >> $GITHUB_OUTPUT
 
-    - name: Cache-op for build-cache through ccache
-      uses: actions/cache@v3
+    - uses: actions/cache@v3
       with:
         path: ${{ env.CCACHE_DIR }}
         key: ccache-${{ matrix.identifier }}-${{ steps.ccache_vars.outputs.hash }}-${{ github.ref }}-${{ steps.ccache_vars.outputs.timestamp }}
@@ -51,7 +50,7 @@ jobs:
         CC:   gcc-11
         CXX:  g++-11
 
-    - name: ccache prolog
+    - name: CCache Prolog
       run: |-
         ccache -s # Print current cache stats
         ccache -z # Zero cache entry
@@ -59,7 +58,7 @@ jobs:
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target all
 
-    - name: ccache epilog
+    - name: CCache Epilog
       run: |
         ccache -s # Print current cache stats
 
