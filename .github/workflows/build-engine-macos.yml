@@ -30,8 +30,8 @@ jobs:
       shell: bash
       id: ccache_vars
       run: |-
-        echo "::set-output name=hash::$(echo ${{ env.CCACHE_COMPILERCHECK }})"
-        echo "::set-output name=timestamp::$(date '+%Y-%m-%dT%H.%M.%S')"
+        echo "hash=$(echo ${{ env.CCACHE_COMPILERCHECK }})" >> $GITHUB_OUTPUT
+        echo "timestamp=$(date '+%Y-%m-%dT%H.%M.%S')" >> $GITHUB_OUTPUT
 
     - name: Cache-op for build-cache through ccache
       uses: actions/cache@v3
