@@ -20,7 +20,7 @@ if(ENABLE_COVERAGE)
         EXECUTABLE core/tests/cubos-core-tests
         DEPENDENCIES cubos-core-tests
 
-        EXCLUDE "core/lib/*" "core/tests/*"
+        EXCLUDE "core/lib/*" "core/tests/*" "*-components.cpp"
 
         LCOV_ARGS "--no-external"
     )
