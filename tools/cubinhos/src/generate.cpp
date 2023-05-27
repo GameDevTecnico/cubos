@@ -707,18 +707,20 @@ static bool parse(const fs::path& path, std::vector<Component>& components)
                     return false;
                 }
 
-                if (!parser.acceptPunctuation(","))
-                {
-                    parser.error("Expected ',' after component name");
-                    return false;
-                }
-
                 // Parse the component storage type.
-                component.storage = parser.extractIdentifier();
+                if (parser.acceptPunctuation(","))
+                {
+                    // Parse the component storage type.
+                    component.storage = parser.extractIdentifier();
+                }
+                else
+                {
+                    component.storage = "VecStorage";
+                }
 
                 if (!parser.acceptPunctuation(")"))
                 {
-                    parser.error("Expected ')' after component storage type");
+                    parser.error("Expected ')' after component name or storage type");
                     return false;
                 }
 
