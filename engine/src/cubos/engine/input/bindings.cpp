@@ -98,7 +98,29 @@ std::string Axis::toString() const
     return ss.str();
 }
 
-const std::unordered_map<std::string, std::vector<KeyWithModifier>>& Bindings::getActions() const
+const std::vector<KeyWithModifier>& Action::getKeys() const
+{
+    return mKeys;
+}
+
+std::vector<KeyWithModifier>& Action::getKeys()
+{
+    return mKeys;
+}
+
+std::string Action::toString() const
+{
+    std::stringstream ss;
+    ss << "Keys: { ";
+    for (const auto& key : mKeys)
+    {
+        ss << key.toString() << ", ";
+    }
+    ss << "}";
+    return ss.str();
+}
+
+const std::unordered_map<std::string, Action>& Bindings::getActions() const
 {
     return mActions;
 }
@@ -108,7 +130,7 @@ const std::unordered_map<std::string, Axis>& Bindings::getAxes() const
     return mAxes;
 }
 
-std::unordered_map<std::string, std::vector<KeyWithModifier>>& Bindings::getActions()
+std::unordered_map<std::string, Action>& Bindings::getActions()
 {
     return mActions;
 }
@@ -122,14 +144,9 @@ std::string Bindings::toString() const
 {
     std::stringstream ss;
     ss << "Actions: { ";
-    for (const auto& [name, keys] : mActions)
+    for (const auto& [name, action] : mActions)
     {
-        ss << name << ": { ";
-        for (const auto& key : keys)
-        {
-            ss << key.toString() << ", ";
-        }
-        ss << "}, ";
+        ss << name << ": { " << action.toString() << "}, ";
     }
     ss << "}, Axes: { ";
     for (const auto& [name, axis] : mAxes)
@@ -147,7 +164,7 @@ void cubos::core::data::serialize<Bindings>(Serializer& ser, const Bindings& obj
     ser.beginDictionary(obj.getActions().size(), "action");
     for (const auto& [name, action] : obj.getActions())
     {
-        ser.write(action, name.c_str());
+        ser.write(action.getKeys(), name.c_str());
     }
     ser.endDictionary();
     ser.beginDictionary(obj.getAxes().size(), "axis");
@@ -176,7 +193,7 @@ void cubos::core::data::deserialize<Bindings>(Deserializer& des, Bindings& obj)
         std::vector<KeyWithModifier> keys;
         des.read(keys);
 
-        obj.getActions()[action] = keys;
+        obj.getActions()[action] = Action(keys);
     }
     des.endDictionary();
 
