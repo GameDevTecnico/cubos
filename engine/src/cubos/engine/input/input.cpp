@@ -18,7 +18,7 @@ void Input::clear(int player)
     CUBOS_DEBUG("Input cleared for player {}", player);
 }
 
-void Input::setBindings(int player, const Bindings& bindings)
+void Input::setBindings(int player, const InputBindings& bindings)
 {
     // TODO: Register to all the events for this player
     mBindings[player] = std::move(bindings);
@@ -63,7 +63,7 @@ float Input::axis(int player, const std::string& axisName) const
     return aIt->second.getValue();
 }
 
-const std::unordered_map<int, Bindings>& Input::getBindings() const
+const std::unordered_map<int, InputBindings>& Input::getBindings() const
 {
     return mBindings;
 }

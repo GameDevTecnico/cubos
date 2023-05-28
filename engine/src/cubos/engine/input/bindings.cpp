@@ -62,32 +62,32 @@ std::string KeyWithModifier::toString() const
     return ss.str();
 }
 
-const std::vector<KeyWithModifier>& Axis::getPositive() const
+const std::vector<KeyWithModifier>& InputAxis::getPositive() const
 {
     return mPositive;
 }
 
-const std::vector<KeyWithModifier>& Axis::getNegative() const
+const std::vector<KeyWithModifier>& InputAxis::getNegative() const
 {
     return mNegative;
 }
 
-std::vector<KeyWithModifier>& Axis::getPositive()
+std::vector<KeyWithModifier>& InputAxis::getPositive()
 {
     return mPositive;
 }
 
-std::vector<KeyWithModifier>& Axis::getNegative()
+std::vector<KeyWithModifier>& InputAxis::getNegative()
 {
     return mNegative;
 }
 
-float Axis::getValue() const
+float InputAxis::getValue() const
 {
     return mValue;
 }
 
-void Axis::setValue(float value)
+void InputAxis::setValue(float value)
 {
     if (std::abs(value) > 1.0f)
     {
@@ -96,7 +96,7 @@ void Axis::setValue(float value)
     mValue = std::clamp(value, -1.0f, 1.0f);
 }
 
-std::string Axis::toString() const
+std::string InputAxis::toString() const
 {
     std::stringstream ss;
     ss << "Positive: { ";
@@ -113,27 +113,27 @@ std::string Axis::toString() const
     return ss.str();
 }
 
-const std::vector<KeyWithModifier>& Action::getKeys() const
+const std::vector<KeyWithModifier>& InputAction::getKeys() const
 {
     return mKeys;
 }
 
-std::vector<KeyWithModifier>& Action::getKeys()
+std::vector<KeyWithModifier>& InputAction::getKeys()
 {
     return mKeys;
 }
 
-bool Action::isPressed() const
+bool InputAction::isPressed() const
 {
     return mPressed;
 }
 
-void Action::setPressed(bool pressed)
+void InputAction::setPressed(bool pressed)
 {
     mPressed = pressed;
 }
 
-std::string Action::toString() const
+std::string InputAction::toString() const
 {
     std::stringstream ss;
     ss << "Keys: { ";
@@ -145,27 +145,27 @@ std::string Action::toString() const
     return ss.str();
 }
 
-const std::unordered_map<std::string, Action>& Bindings::getActions() const
+const std::unordered_map<std::string, InputAction>& InputBindings::getActions() const
 {
     return mActions;
 }
 
-const std::unordered_map<std::string, Axis>& Bindings::getAxes() const
+const std::unordered_map<std::string, InputAxis>& InputBindings::getAxes() const
 {
     return mAxes;
 }
 
-std::unordered_map<std::string, Action>& Bindings::getActions()
+std::unordered_map<std::string, InputAction>& InputBindings::getActions()
 {
     return mActions;
 }
 
-std::unordered_map<std::string, Axis>& Bindings::getAxes()
+std::unordered_map<std::string, InputAxis>& InputBindings::getAxes()
 {
     return mAxes;
 }
 
-std::string Bindings::toString() const
+std::string InputBindings::toString() const
 {
     std::stringstream ss;
     ss << "Actions: { ";
@@ -183,7 +183,7 @@ std::string Bindings::toString() const
 }
 
 template <>
-void cubos::core::data::serialize<Bindings>(Serializer& ser, const Bindings& obj, const char* name)
+void cubos::core::data::serialize<InputBindings>(Serializer& ser, const InputBindings& obj, const char* name)
 {
     ser.beginObject(name);
     ser.beginDictionary(obj.getActions().size(), "action");
@@ -207,7 +207,7 @@ void cubos::core::data::serialize<Bindings>(Serializer& ser, const Bindings& obj
 }
 
 template <>
-void cubos::core::data::deserialize<Bindings>(Deserializer& des, Bindings& obj)
+void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindings& obj)
 {
     des.beginObject();
 
@@ -220,7 +220,7 @@ void cubos::core::data::deserialize<Bindings>(Deserializer& des, Bindings& obj)
         std::vector<KeyWithModifier> keys;
         des.read(keys);
 
-        obj.getActions()[action] = Action(keys);
+        obj.getActions()[action] = InputAction(keys);
     }
     des.endDictionary();
 
@@ -245,7 +245,7 @@ void cubos::core::data::deserialize<Bindings>(Deserializer& des, Bindings& obj)
 
         des.endDictionary();
 
-        obj.getAxes()[axis] = Axis(pos, neg);
+        obj.getAxes()[axis] = InputAxis(pos, neg);
     }
     des.endDictionary();
 

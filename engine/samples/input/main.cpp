@@ -10,7 +10,7 @@ using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
-static const Asset<Bindings> bindingsAsset = AnyAsset("bf49ba61-5103-41bc-92e0-8a442d7842c3");
+static const Asset<InputBindings> bindingsAsset = AnyAsset("bf49ba61-5103-41bc-92e0-8a442d7842c3");
 
 static void config(Write<Settings> settings)
 {
@@ -19,7 +19,7 @@ static void config(Write<Settings> settings)
 
 static void init(Read<Assets> assets, Write<Input> input)
 {
-    auto bindings = assets->read<Bindings>(bindingsAsset);
+    auto bindings = assets->read<InputBindings>(bindingsAsset);
     input->setBindings(0, *bindings);
     CUBOS_INFO("{}", input->getBindings().at(0).toString());
 }
