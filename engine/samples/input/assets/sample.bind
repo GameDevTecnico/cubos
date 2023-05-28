@@ -1,5 +1,5 @@
 {
-    "action": {
+    "actions": {
         "a-or-b": [
             "a",
             "b"
@@ -17,7 +17,7 @@
             "C-S-a"
         ]
     },
-    "axis": {
+    "axes": {
         "up": {
             "pos": [
                 "w",

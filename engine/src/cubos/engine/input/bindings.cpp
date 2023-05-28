@@ -186,14 +186,14 @@ template <>
 void cubos::core::data::serialize<InputBindings>(Serializer& ser, const InputBindings& obj, const char* name)
 {
     ser.beginObject(name);
-    ser.beginDictionary(obj.actions().size(), "action");
+    ser.beginDictionary(obj.actions().size(), "actions");
     for (const auto& [actionName, action] : obj.actions())
     {
         ser.write(actionName, nullptr);
         ser.write(action.keys(), nullptr);
     }
     ser.endDictionary();
-    ser.beginDictionary(obj.axes().size(), "axis");
+    ser.beginDictionary(obj.axes().size(), "axes");
     for (const auto& [axisName, axis] : obj.axes())
     {
         ser.write(axisName, nullptr);
