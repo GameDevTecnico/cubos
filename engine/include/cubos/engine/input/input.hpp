@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cubos/core/io/keyboard.hpp>
+
 #include <cubos/engine/input/bindings.hpp>
 
 namespace cubos::engine
@@ -39,6 +41,19 @@ namespace cubos::engine
         const std::unordered_map<int, InputBindings>& bindings() const;
 
     private:
+        struct BindingIndex
+        {
+            std::string name;
+            int player;
+            bool negative = false;
+        };
+
+        void removeBoundPlayer(std::vector<BindingIndex>& boundKeys, int player);
+
         std::unordered_map<int, InputBindings> mBindings;
+
+        // core::io::Modifiers mModifiers = core::io::Modifiers::None;
+        std::unordered_map<core::io::Key, std::vector<BindingIndex>> mBoundActions;
+        std::unordered_map<core::io::Key, std::vector<BindingIndex>> mBoundAxes;
     };
 } // namespace cubos::engine
