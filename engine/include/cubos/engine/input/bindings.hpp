@@ -55,11 +55,17 @@ namespace cubos::engine
         std::vector<KeyWithModifier>& getPositive();
         std::vector<KeyWithModifier>& getNegative();
 
+        float getValue() const;
+        void setValue(float value);
+
         std::string toString() const;
 
     private:
         std::vector<KeyWithModifier> mPositive;
         std::vector<KeyWithModifier> mNegative;
+
+        // Not serialized
+        float mValue;
     };
 
     class Action final
@@ -76,10 +82,16 @@ namespace cubos::engine
         const std::vector<KeyWithModifier>& getKeys() const;
         std::vector<KeyWithModifier>& getKeys();
 
+        bool isPressed() const;
+        void setPressed(bool pressed);
+
         std::string toString() const;
 
     private:
         std::vector<KeyWithModifier> mKeys;
+
+        // Not serialized
+        bool mPressed;
     };
 
     class Bindings final
