@@ -835,9 +835,16 @@ static bool generate(const GenerateOptions& options)
         else
         {
             file << "    ser.beginObject(name);" << std::endl;
-            for (auto& field : component.fields)
+            if (component.fields.size() == 0)
             {
-                file << "    ser.write(obj." << field << ", \"" << field << "\");" << std::endl;
+                file << "    (void)obj;" << std::endl;
+            }
+            else
+            {
+                for (auto& field : component.fields)
+                {
+                    file << "    ser.write(obj." << field << ", \"" << field << "\");" << std::endl;
+                }
             }
             file << "    ser.endObject();" << std::endl;
         }
@@ -853,9 +860,16 @@ static bool generate(const GenerateOptions& options)
         else
         {
             file << "    des.beginObject();" << std::endl;
-            for (auto& field : component.fields)
+            if (component.fields.size() == 0)
             {
-                file << "    des.read(obj." << field << ");" << std::endl;
+                file << "    (void)obj;" << std::endl;
+            }
+            else
+            {
+                for (auto& field : component.fields)
+                {
+                    file << "    des.read(obj." << field << ");" << std::endl;
+                }
             }
             file << "    des.endObject();" << std::endl;
         }
