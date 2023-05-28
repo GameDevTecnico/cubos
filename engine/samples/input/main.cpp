@@ -1,3 +1,4 @@
+#include <cubos/core/data/debug_serializer.hpp>
 #include <cubos/core/settings.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
@@ -5,6 +6,7 @@
 #include <cubos/engine/input/plugin.hpp>
 
 using cubos::core::Settings;
+using cubos::core::data::Debug;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using namespace cubos::engine;
@@ -20,7 +22,7 @@ static void init(Read<Assets> assets, Write<Input> input)
 {
     auto bindings = assets->read<InputBindings>(bindingsAsset);
     input->bind(0, *bindings);
-    CUBOS_INFO("{}", input->bindings().at(0).toString());
+    CUBOS_INFO("{}", Debug(input->bindings().at(0)));
 }
 
 int main()
