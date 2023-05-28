@@ -18,21 +18,21 @@ namespace cubos::engine
         void clear(int player);
 
         /// Sets the bindings for a specific player
-        /// @param player The player whose bindings will be set
         /// @param bindings The bindings to set
-        void bind(int player, const InputBindings& bindings);
+        /// @param player The player whose bindings will be set
+        void bind(const InputBindings& bindings, int player = 0);
 
         /// Gets an action state for a specific player
-        /// @param player The player whose action state will be retrieved
         /// @param actionName The name of the action
+        /// @param player The player whose action state will be retrieved
         /// @return True if the action exists and is pressed, false otherwise.
-        bool pressed(int player, const std::string& actionName) const;
+        bool pressed(const std::string& actionName, int player = 0) const;
 
         /// Gets an axis value for a specific player
-        /// @param player The player whose axis value will be retrieved
         /// @param axisName The name of the axis
+        /// @param player The player whose axis value will be retrieved
         /// @return The axis value if the axis exists, 0.0 otherwise.
-        float axis(int player, const std::string& axisName) const;
+        float axis(const std::string& axisName, int player = 0) const;
 
         /// Gets the bindings
         /// @return The bindings
