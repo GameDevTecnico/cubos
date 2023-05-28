@@ -12,7 +12,7 @@ using namespace cubos::engine;
 
 static void bridge(Write<Assets> assets)
 {
-    assets->registerBridge(".bind", std::make_unique<JSONBridge<Bindings>>());
+    assets->registerBridge(".bind", std::make_unique<JSONBridge<InputBindings>>());
 }
 
 void cubos::engine::inputPlugin(Cubos& cubos)

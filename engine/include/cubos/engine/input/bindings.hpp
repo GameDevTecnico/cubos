@@ -37,17 +37,17 @@ namespace cubos::engine
         cubos::core::io::Modifiers mModifiers = cubos::core::io::Modifiers::None;
     };
 
-    class Axis final
+    class InputAxis final
     {
     public:
-        Axis() = default;
-        Axis(std::vector<KeyWithModifier> positive, std::vector<KeyWithModifier> negative)
+        InputAxis() = default;
+        InputAxis(std::vector<KeyWithModifier> positive, std::vector<KeyWithModifier> negative)
             : mPositive(positive)
             , mNegative(negative)
         {
         }
 
-        ~Axis() = default;
+        ~InputAxis() = default;
 
         const std::vector<KeyWithModifier>& getPositive() const;
         const std::vector<KeyWithModifier>& getNegative() const;
@@ -68,16 +68,16 @@ namespace cubos::engine
         float mValue;
     };
 
-    class Action final
+    class InputAction final
     {
     public:
-        Action() = default;
-        Action(std::vector<KeyWithModifier> keys)
+        InputAction() = default;
+        InputAction(std::vector<KeyWithModifier> keys)
             : mKeys(keys)
         {
         }
 
-        ~Action() = default;
+        ~InputAction() = default;
 
         const std::vector<KeyWithModifier>& getKeys() const;
         std::vector<KeyWithModifier>& getKeys();
@@ -94,22 +94,22 @@ namespace cubos::engine
         bool mPressed;
     };
 
-    class Bindings final
+    class InputBindings final
     {
     public:
-        Bindings() = default;
-        ~Bindings() = default;
+        InputBindings() = default;
+        ~InputBindings() = default;
 
-        const std::unordered_map<std::string, Action>& getActions() const;
-        const std::unordered_map<std::string, Axis>& getAxes() const;
+        const std::unordered_map<std::string, InputAction>& getActions() const;
+        const std::unordered_map<std::string, InputAxis>& getAxes() const;
 
-        std::unordered_map<std::string, Action>& getActions();
-        std::unordered_map<std::string, Axis>& getAxes();
+        std::unordered_map<std::string, InputAction>& getActions();
+        std::unordered_map<std::string, InputAxis>& getAxes();
 
         std::string toString() const;
 
     private:
-        std::unordered_map<std::string, Action> mActions;
-        std::unordered_map<std::string, Axis> mAxes;
+        std::unordered_map<std::string, InputAction> mActions;
+        std::unordered_map<std::string, InputAxis> mAxes;
     };
 } // namespace cubos::engine
