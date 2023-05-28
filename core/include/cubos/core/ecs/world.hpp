@@ -59,7 +59,7 @@ namespace cubos::core::ecs
         /// @tparam ComponentTypes The types of the components to be added when the entity is created.
         /// @param components The initial values for the components.
         template <typename... ComponentTypes>
-        Entity create(ComponentTypes&&... components);
+        Entity create(ComponentTypes... components);
 
         /// @brief Removes an entity.
         /// @param entity Entity ID.
@@ -151,7 +151,7 @@ namespace cubos::core::ecs
     }
 
     template <typename... ComponentTypes>
-    Entity World::create(ComponentTypes&&... components)
+    Entity World::create(ComponentTypes... components)
     {
         std::size_t ids[] = {
             0, (mComponentManager
@@ -164,7 +164,8 @@ namespace cubos::core::ecs
         }
 
         auto entity = mEntityManager.create(mask);
-        ([&](auto& component) { mComponentManager.add(entity.index, component); }(components), ...);
+        ([&](auto component) { mComponentManager.add(entity.index, std::move(component)); }(std::move(components)),
+         ...);
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
         // Get the number of components being added.

@@ -67,7 +67,7 @@ namespace cubos::core::ecs
             T value;
             if (package.into(value, context))
             {
-                this->insert(index, value);
+                this->insert(index, std::move(value));
                 return true;
             }
 
