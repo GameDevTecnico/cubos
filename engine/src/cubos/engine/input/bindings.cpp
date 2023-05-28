@@ -8,9 +8,10 @@
 
 using cubos::core::data::Deserializer;
 using cubos::core::data::Serializer;
+using cubos::core::io::Key;
 using cubos::core::io::keyToString;
+using cubos::core::io::Modifiers;
 using cubos::core::io::stringToKey;
-
 using namespace cubos::engine;
 
 const Key& KeyWithModifier::getKey() const
