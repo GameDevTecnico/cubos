@@ -10,16 +10,13 @@
 
 #include <cubos/core/io/keyboard.hpp>
 
-using cubos::core::io::Key;
-using cubos::core::io::Modifiers;
-
 namespace cubos::engine
 {
     class KeyWithModifier final
     {
     public:
         KeyWithModifier() = default;
-        KeyWithModifier(Key key, Modifiers modifiers)
+        KeyWithModifier(cubos::core::io::Key key, cubos::core::io::Modifiers modifiers)
             : mKey(key)
             , mModifiers(modifiers)
         {
@@ -27,17 +24,17 @@ namespace cubos::engine
 
         ~KeyWithModifier() = default;
 
-        const Key& getKey() const;
-        const Modifiers& getModifiers() const;
+        const cubos::core::io::Key& getKey() const;
+        const cubos::core::io::Modifiers& getModifiers() const;
 
-        Key& getKey();
-        Modifiers& getModifiers();
+        cubos::core::io::Key& getKey();
+        cubos::core::io::Modifiers& getModifiers();
 
         std::string toString() const;
 
     private:
-        Key mKey;
-        Modifiers mModifiers;
+        cubos::core::io::Key mKey;
+        cubos::core::io::Modifiers mModifiers;
     };
 
     class Axis final
