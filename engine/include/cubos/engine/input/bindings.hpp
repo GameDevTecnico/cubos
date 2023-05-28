@@ -33,8 +33,8 @@ namespace cubos::engine
         std::string toString() const;
 
     private:
-        cubos::core::io::Key mKey;
-        cubos::core::io::Modifiers mModifiers;
+        cubos::core::io::Key mKey = cubos::core::io::Key::Invalid;
+        cubos::core::io::Modifiers mModifiers = cubos::core::io::Modifiers::None;
     };
 
     class Axis final
