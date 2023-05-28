@@ -1,0 +1,52 @@
+{
+    "action": {
+        "a-or-b": [
+            "a",
+            "b"
+        ],
+        "shift-a": [
+            "S-a"
+        ],
+        "alt-a": [
+            "M-a"
+        ],
+        "ctrl-a": [
+            "C-a"
+        ],
+        "ctrl-shift-a": [
+            "C-S-a"
+        ]
+    },
+    "axis": {
+        "up": {
+            "pos": [
+                "w",
+                "Up"
+            ],
+            "neg": [
+                "s",
+                "Down"
+            ]
+        },
+        "left": {
+            "pos": [
+                "a",
+                "Left"
+            ],
+            "neg": [
+                "d",
+                "Right"
+            ]
+        },
+        "shift-up": {
+            "pos": [
+                "S-w",
+                "S-Up"
+            ],
+            "neg": [
+                "S-s",
+                "S-Down"
+            ]
+        }
+    }
+}

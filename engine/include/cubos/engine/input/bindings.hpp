@@ -3,32 +3,84 @@
 
 #pragma once
 
-#include <cubos/core/data/serializer.hpp>
+#include <optional>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
-using cubos::core::data::Deserializer;
-using cubos::core::data::Serializer;
+#include <cubos/core/io/keyboard.hpp>
+
+using cubos::core::io::Key;
+using cubos::core::io::Modifiers;
 
 namespace cubos::engine
 {
-    struct Bindings final
+    class KeyWithModifier final
     {
-        int an_integer;
+    public:
+        KeyWithModifier() = default;
+        KeyWithModifier(Key key, Modifiers modifiers)
+            : mKey(key)
+            , mModifiers(modifiers)
+        {
+        }
+
+        ~KeyWithModifier() = default;
+
+        const Key& getKey() const;
+        const Modifiers& getModifiers() const;
+
+        Key& getKey();
+        Modifiers& getModifiers();
+
+        std::string toString() const;
+
+    private:
+        Key mKey;
+        Modifiers mModifiers;
+    };
+
+    class Axis final
+    {
+    public:
+        Axis() = default;
+        Axis(std::vector<KeyWithModifier> positive, std::vector<KeyWithModifier> negative)
+            : mPositive(positive)
+            , mNegative(negative)
+        {
+        }
+
+        ~Axis() = default;
+
+        const std::vector<KeyWithModifier>& getPositive() const;
+        const std::vector<KeyWithModifier>& getNegative() const;
+
+        std::vector<KeyWithModifier>& getPositive();
+        std::vector<KeyWithModifier>& getNegative();
+
+        std::string toString() const;
+
+    private:
+        std::vector<KeyWithModifier> mPositive;
+        std::vector<KeyWithModifier> mNegative;
+    };
+
+    class Bindings final
+    {
+    public:
+        Bindings() = default;
+        ~Bindings() = default;
+
+        const std::unordered_map<std::string, std::vector<KeyWithModifier>>& getActions() const;
+        const std::unordered_map<std::string, Axis>& getAxes() const;
+
+        std::unordered_map<std::string, std::vector<KeyWithModifier>>& getActions();
+        std::unordered_map<std::string, Axis>& getAxes();
+
+        std::string toString() const;
+
+    private:
+        std::unordered_map<std::string, std::vector<KeyWithModifier>> mActions;
+        std::unordered_map<std::string, Axis> mAxes;
     };
 } // namespace cubos::engine
-
-template <>
-void cubos::core::data::serialize<cubos::engine::Bindings>(Serializer& ser, const cubos::engine::Bindings& obj,
-                                                           const char* name)
-{
-    ser.beginObject(name);
-    ser.write(obj.an_integer, "an_integer");
-    ser.endObject();
-}
-
-template <>
-void cubos::core::data::deserialize<cubos::engine::Bindings>(Deserializer& des, cubos::engine::Bindings& obj)
-{
-    des.beginObject();
-    des.read(obj.an_integer);
-    des.endObject();
-}
