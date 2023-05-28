@@ -64,7 +64,7 @@ namespace cubos::engine
         std::vector<KeyWithModifier> mPositive;
         std::vector<KeyWithModifier> mNegative;
 
-        // Not serialized
+        /// Not serialized.
         float mValue;
     };
 
@@ -90,7 +90,7 @@ namespace cubos::engine
     private:
         std::vector<KeyWithModifier> mKeys;
 
-        // Not serialized
+        /// Not serialized.
         bool mPressed;
     };
 
