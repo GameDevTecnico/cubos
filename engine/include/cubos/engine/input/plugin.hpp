@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
+#include <cubos/engine/input/input.hpp>
 
 namespace cubos::engine
 {

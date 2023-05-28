@@ -2,7 +2,6 @@
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/input/bindings.hpp>
-#include <cubos/engine/input/input.hpp>
 #include <cubos/engine/input/plugin.hpp>
 
 using cubos::core::Settings;
