@@ -36,6 +36,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/voxels/plugin.cpp"
 
     "src/cubos/engine/input/plugin.cpp"
+    "src/cubos/engine/input/bindings.cpp"
 
     "src/cubos/engine/renderer/plugin.cpp"
     "src/cubos/engine/renderer/frame.cpp"
