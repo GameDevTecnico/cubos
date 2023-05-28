@@ -21,7 +21,7 @@ static void config(Write<Settings> settings)
 static void init(Read<Assets> assets, Write<Input> input)
 {
     auto bindings = assets->read<InputBindings>(bindingsAsset);
-    input->bind(0, *bindings);
+    input->bind(*bindings);
     CUBOS_INFO("{}", Debug(input->bindings().at(0)));
 }
 
