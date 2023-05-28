@@ -82,6 +82,20 @@ std::vector<KeyWithModifier>& Axis::getNegative()
     return mNegative;
 }
 
+float Axis::getValue() const
+{
+    return mValue;
+}
+
+void Axis::setValue(float value)
+{
+    if (std::abs(value) > 1.0f)
+    {
+        CUBOS_WARN("Axis value out of range: {}", value);
+    }
+    mValue = std::clamp(value, -1.0f, 1.0f);
+}
+
 std::string Axis::toString() const
 {
     std::stringstream ss;
@@ -107,6 +121,16 @@ const std::vector<KeyWithModifier>& Action::getKeys() const
 std::vector<KeyWithModifier>& Action::getKeys()
 {
     return mKeys;
+}
+
+bool Action::isPressed() const
+{
+    return mPressed;
+}
+
+void Action::setPressed(bool pressed)
+{
+    mPressed = pressed;
 }
 
 std::string Action::toString() const
