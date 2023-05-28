@@ -247,7 +247,6 @@ bool Package::isStructured() const
 
 Package& Package::field(const std::string& name)
 {
-    // If the field already exists, return it, otherwise create it and return it.
     auto& fields = this->fields();
     for (auto& field : fields)
     {

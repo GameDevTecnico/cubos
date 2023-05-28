@@ -4,6 +4,7 @@
 
 #include "utils.hpp"
 
+using cubos::core::data::Package;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
 
@@ -12,50 +13,98 @@ TEST_CASE("ecs::World")
     World world{};
     setupWorld(world);
 
-    // Null identifiers should never be alive.
-    CHECK_FALSE(world.isAlive({}));
+    SUBCASE("create an entity and then destroy it")
+    {
+        // Null identifiers should never be alive.
+        CHECK_FALSE(world.isAlive({}));
 
-    // The world should be empty.
-    CHECK(world.begin() == world.end());
+        // The world should be empty.
+        CHECK(world.begin() == world.end());
 
-    // Create an entity.
-    auto foo = world.create();
-    CHECK_FALSE(foo.isNull());
-    CHECK(world.isAlive(foo));
+        // Create an entity.
+        auto foo = world.create();
+        CHECK_FALSE(foo.isNull());
+        CHECK(world.isAlive(foo));
 
-    // It should be the first entity in the world (and last).
-    CHECK(*world.begin() == foo);
-    CHECK(++world.begin() == world.end());
+        // It should be the first entity in the world (and last).
+        CHECK(*world.begin() == foo);
+        CHECK(++world.begin() == world.end());
 
-    // Add components to the entity.
-    world.add(foo, IntegerComponent{0}, ParentComponent{});
-    CHECK(world.has<IntegerComponent>(foo));
-    CHECK(world.has<ParentComponent>(foo));
+        // Remove the entity.
+        world.destroy(foo);
+        CHECK_FALSE(world.isAlive(foo));
 
-    // Pack the entity and check if the values are correct.
-    auto pkg = world.pack(foo);
-    CHECK(pkg.fields().size() == 2);
-    CHECK(pkg.field("integer").get<int>() == 0);
-    CHECK(pkg.field("parent").get<Entity>().isNull());
+        // The world should be empty again.
+        CHECK(world.begin() == world.end());
+    }
 
-    // Change the value of the integer component and remove the parent component.
-    pkg.field("integer").set<int>(1);
-    pkg.removeField("parent");
-    CHECK(world.unpack(foo, pkg));
+    SUBCASE("add and remove components")
+    {
+        // Create an entity with an integer component.
+        auto foo = world.create(IntegerComponent{0});
+        CHECK(world.has<IntegerComponent>(foo));
+        CHECK_FALSE(world.has<ParentComponent>(foo));
 
-    // The entity should still have the integer component, but not the parent component.
-    CHECK(world.has<IntegerComponent>(foo));
-    CHECK_FALSE(world.has<ParentComponent>(foo));
+        // Add a parent component.
+        world.add(foo, ParentComponent{});
+        CHECK(world.has<IntegerComponent>(foo));
+        CHECK(world.has<ParentComponent>(foo));
 
-    // Pack the entity again and check if the value was changed.
-    pkg = world.pack(foo);
-    CHECK(pkg.fields().size() == 1);
-    CHECK(pkg.field("integer").get<int>() == 1);
+        // Remove the integer component.
+        world.remove<IntegerComponent>(foo);
+        CHECK_FALSE(world.has<IntegerComponent>(foo));
+        CHECK(world.has<ParentComponent>(foo));
+    }
 
-    // Remove the entity.
-    world.destroy(foo);
-    CHECK_FALSE(world.isAlive(foo));
+    SUBCASE("add and remove components through pack and unpack")
+    {
+        // Create an entity.
+        auto foo = world.create();
 
-    // The world should be empty again.
-    CHECK(world.begin() == world.end());
+        // Add an integer component.
+        auto pkg = world.pack(foo);
+        pkg.fields().emplace_back("integer", Package::from(1));
+        CHECK(world.unpack(foo, pkg));
+        CHECK(world.has<IntegerComponent>(foo));
+        CHECK_FALSE(world.has<ParentComponent>(foo));
+
+        // Check if the component was added.
+        pkg = world.pack(foo);
+        CHECK(pkg.fields().size() == 1);
+        CHECK(pkg.field("integer").get<int>() == 1);
+
+        // Remove the integer component and add a parent component.
+        pkg.removeField("integer");
+        pkg.fields().emplace_back("parent", Package::from(Entity{}));
+        CHECK(world.unpack(foo, pkg));
+        CHECK_FALSE(world.has<IntegerComponent>(foo));
+        CHECK(world.has<ParentComponent>(foo));
+
+        // Check if the component was added.
+        pkg = world.pack(foo);
+        CHECK(pkg.fields().size() == 1);
+        CHECK(pkg.field("parent").get<Entity>().isNull());
+    }
+
+    SUBCASE("change a component through pack and unpack")
+    {
+        // Create an entity which has an integer component and a parent component.
+        auto bar = world.create();
+        auto foo = world.create(IntegerComponent{0}, ParentComponent{bar});
+        CHECK(world.has<IntegerComponent>(foo));
+        CHECK(world.has<ParentComponent>(foo));
+
+        // Change the value of the integer component.
+        auto pkg = world.pack(foo);
+        pkg.field("integer").set<int>(1);
+        CHECK(world.unpack(foo, pkg));
+        CHECK(world.has<IntegerComponent>(foo));
+        CHECK(world.has<ParentComponent>(foo));
+
+        // Check if the value was changed.
+        pkg = world.pack(foo);
+        CHECK(pkg.fields().size() == 2);
+        CHECK(pkg.field("integer").get<int>() == 1);
+        CHECK(pkg.field("parent").get<Entity>() == bar);
+    }
 }
