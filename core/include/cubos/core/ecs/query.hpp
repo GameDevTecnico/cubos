@@ -176,7 +176,7 @@ namespace cubos::core::ecs
         Iterator end();
 
         /// @param entity The entity to get the components from.
-        /// @returns The requested components.
+        /// @returns The requested components, or std::nullopt if the entity does not match the query.
         std::optional<std::tuple<ComponentTypes...>> operator[](Entity entity);
 
         /// Gets information about the query.
@@ -237,12 +237,12 @@ namespace cubos::core::ecs
         , mFetched(std::forward_as_tuple(impl::QueryFetcher<ComponentTypes>::fetch(world)...))
     {
         // We must turn the type from Read<T> and similar to T before getting the ID.
-        std::size_t ids[] = {(impl::QueryFetcher<ComponentTypes>::IsOptional
+        std::size_t ids[] = {0,
+                             (impl::QueryFetcher<ComponentTypes>::IsOptional
                                   ? SIZE_MAX
                                   : mWorld.mComponentManager
                                         .template getID<typename impl::QueryFetcher<ComponentTypes>::InnerType>())...};
         mMask.reset();
-        mMask.set(0);
         for (std::size_t id : ids)
         {
             if (id != SIZE_MAX)
@@ -326,7 +326,7 @@ namespace cubos::core::ecs
     {
         if (world.has<Component>(entity))
         {
-            return {lock.get().get(entity)};
+            return {lock.get().get(entity.index)};
         }
 
         return {nullptr};

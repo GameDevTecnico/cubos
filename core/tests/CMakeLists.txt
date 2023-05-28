@@ -6,10 +6,13 @@ include(CubinhosGenerate)
 add_executable(
     cubos-core-tests
     main.cpp
+
     data/context.cpp
+
+    ecs/world.cpp
+    ecs/query.cpp
     ecs/blueprint.cpp
     ecs/commands.cpp
-    ecs/world.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
