@@ -51,6 +51,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/io/cursor.cpp"
     "src/cubos/core/io/glfw_window.hpp"
     "src/cubos/core/io/glfw_window.cpp"
+    "src/cubos/core/io/keyboard.cpp"
 
     "src/cubos/core/gl/debug.cpp"
     "src/cubos/core/gl/render_device.cpp"
