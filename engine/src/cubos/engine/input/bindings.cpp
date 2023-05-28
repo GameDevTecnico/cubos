@@ -14,27 +14,27 @@ using cubos::core::io::Modifiers;
 using cubos::core::io::stringToKey;
 using namespace cubos::engine;
 
-const Key& KeyWithModifier::key() const
+const Key& KeyWithModifiers::key() const
 {
     return mKey;
 }
 
-const Modifiers& KeyWithModifier::modifiers() const
+const Modifiers& KeyWithModifiers::modifiers() const
 {
     return mModifiers;
 }
 
-Key& KeyWithModifier::key()
+Key& KeyWithModifiers::key()
 {
     return mKey;
 }
 
-Modifiers& KeyWithModifier::modifiers()
+Modifiers& KeyWithModifiers::modifiers()
 {
     return mModifiers;
 }
 
-std::string KeyWithModifier::toString() const
+std::string KeyWithModifiers::toString() const
 {
     std::stringstream ss;
     ss << keyToString(mKey);
@@ -62,22 +62,22 @@ std::string KeyWithModifier::toString() const
     return ss.str();
 }
 
-const std::vector<KeyWithModifier>& InputAxis::positive() const
+const std::vector<KeyWithModifiers>& InputAxis::positive() const
 {
     return mPositive;
 }
 
-const std::vector<KeyWithModifier>& InputAxis::negative() const
+const std::vector<KeyWithModifiers>& InputAxis::negative() const
 {
     return mNegative;
 }
 
-std::vector<KeyWithModifier>& InputAxis::positive()
+std::vector<KeyWithModifiers>& InputAxis::positive()
 {
     return mPositive;
 }
 
-std::vector<KeyWithModifier>& InputAxis::negative()
+std::vector<KeyWithModifiers>& InputAxis::negative()
 {
     return mNegative;
 }
@@ -113,12 +113,12 @@ std::string InputAxis::toString() const
     return ss.str();
 }
 
-const std::vector<KeyWithModifier>& InputAction::keys() const
+const std::vector<KeyWithModifiers>& InputAction::keys() const
 {
     return mKeys;
 }
 
-std::vector<KeyWithModifier>& InputAction::keys()
+std::vector<KeyWithModifiers>& InputAction::keys()
 {
     return mKeys;
 }
@@ -217,7 +217,7 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
         std::string action;
         des.read(action);
 
-        std::vector<KeyWithModifier> keys;
+        std::vector<KeyWithModifiers> keys;
         des.read(keys);
 
         obj.actions()[action] = InputAction(keys);
@@ -235,12 +235,12 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
         std::string tmp;
         des.read(tmp);
         CUBOS_ASSERT(tmp == "pos", "Expected 'pos' in axis dictionary");
-        std::vector<KeyWithModifier> pos;
+        std::vector<KeyWithModifiers> pos;
         des.read(pos);
 
         des.read(tmp);
         CUBOS_ASSERT(tmp == "neg", "Expected 'neg' in axis dictionary");
-        std::vector<KeyWithModifier> neg;
+        std::vector<KeyWithModifiers> neg;
         des.read(neg);
 
         des.endDictionary();
@@ -253,7 +253,7 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
 }
 
 template <>
-void cubos::core::data::serialize<KeyWithModifier>(Serializer& ser, const KeyWithModifier& obj, const char* name)
+void cubos::core::data::serialize<KeyWithModifiers>(Serializer& ser, const KeyWithModifiers& obj, const char* name)
 {
     std::stringstream ss;
 
@@ -276,7 +276,7 @@ void cubos::core::data::serialize<KeyWithModifier>(Serializer& ser, const KeyWit
 }
 
 template <>
-void cubos::core::data::deserialize<KeyWithModifier>(Deserializer& des, KeyWithModifier& obj)
+void cubos::core::data::deserialize<KeyWithModifiers>(Deserializer& des, KeyWithModifiers& obj)
 {
     std::string str;
     des.readString(str);
@@ -312,5 +312,5 @@ void cubos::core::data::deserialize<KeyWithModifier>(Deserializer& des, KeyWithM
 
     CUBOS_ASSERT(ss.eof(), "Invalid key format: Key must be the last part of the string");
 
-    obj = KeyWithModifier(key, modifiers);
+    obj = KeyWithModifiers(key, modifiers);
 }
