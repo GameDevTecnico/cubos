@@ -145,6 +145,9 @@ namespace cubos::core::io
         return lhs;
     }
 
+    std::string modifiersToString(Modifiers modifiers);
+    Modifiers stringToModifiers(const std::string& str);
+
     std::string keyToString(Key key);
     Key stringToKey(const std::string& str);
 } // namespace cubos::core::io

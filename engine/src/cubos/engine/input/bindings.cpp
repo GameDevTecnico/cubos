@@ -1,5 +1,3 @@
-#include <sstream>
-
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serializer.hpp>
 #include <cubos/core/log.hpp>
@@ -11,7 +9,9 @@ using cubos::core::data::Serializer;
 using cubos::core::io::Key;
 using cubos::core::io::keyToString;
 using cubos::core::io::Modifiers;
+using cubos::core::io::modifiersToString;
 using cubos::core::io::stringToKey;
+using cubos::core::io::stringToModifiers;
 using namespace cubos::engine;
 
 const Key& KeyWithModifiers::key() const
@@ -32,34 +32,6 @@ Key& KeyWithModifiers::key()
 Modifiers& KeyWithModifiers::modifiers()
 {
     return mModifiers;
-}
-
-std::string KeyWithModifiers::toString() const
-{
-    std::stringstream ss;
-    ss << keyToString(mKey);
-
-    if ((mModifiers & Modifiers::Shift) != Modifiers::None)
-    {
-        ss << "+Shift";
-    }
-
-    if ((mModifiers & Modifiers::Control) != Modifiers::None)
-    {
-        ss << "+Control";
-    }
-
-    if ((mModifiers & Modifiers::Alt) != Modifiers::None)
-    {
-        ss << "+Alt";
-    }
-
-    if ((mModifiers & Modifiers::System) != Modifiers::None)
-    {
-        ss << "+System";
-    }
-
-    return ss.str();
 }
 
 const std::vector<KeyWithModifiers>& InputAxis::positive() const
@@ -96,23 +68,6 @@ void InputAxis::value(float value)
     mValue = std::clamp(value, -1.0f, 1.0f);
 }
 
-std::string InputAxis::toString() const
-{
-    std::stringstream ss;
-    ss << "Positive: { ";
-    for (const auto& key : mPositive)
-    {
-        ss << key.toString() << ", ";
-    }
-    ss << "}, Negative: { ";
-    for (const auto& key : mNegative)
-    {
-        ss << key.toString() << ", ";
-    }
-    ss << "}";
-    return ss.str();
-}
-
 const std::vector<KeyWithModifiers>& InputAction::keys() const
 {
     return mKeys;
@@ -133,18 +88,6 @@ void InputAction::pressed(bool pressed)
     mPressed = pressed;
 }
 
-std::string InputAction::toString() const
-{
-    std::stringstream ss;
-    ss << "Keys: { ";
-    for (const auto& key : mKeys)
-    {
-        ss << key.toString() << ", ";
-    }
-    ss << "}";
-    return ss.str();
-}
-
 const std::unordered_map<std::string, InputAction>& InputBindings::actions() const
 {
     return mActions;
@@ -163,23 +106,6 @@ std::unordered_map<std::string, InputAction>& InputBindings::actions()
 std::unordered_map<std::string, InputAxis>& InputBindings::axes()
 {
     return mAxes;
-}
-
-std::string InputBindings::toString() const
-{
-    std::stringstream ss;
-    ss << "Actions: { ";
-    for (const auto& [name, action] : mActions)
-    {
-        ss << name << ": { " << action.toString() << "}, ";
-    }
-    ss << "}, Axes: { ";
-    for (const auto& [name, axis] : mAxes)
-    {
-        ss << name << ": { " << axis.toString() << "}, ";
-    }
-    ss << "}";
-    return ss.str();
 }
 
 template <>
@@ -255,24 +181,7 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
 template <>
 void cubos::core::data::serialize<KeyWithModifiers>(Serializer& ser, const KeyWithModifiers& obj, const char* name)
 {
-    std::stringstream ss;
-
-    Modifiers modifiers = obj.modifiers();
-    if ((modifiers & Modifiers::System) != Modifiers::None)
-        ss << "D-";
-
-    if ((modifiers & Modifiers::Alt) != Modifiers::None)
-        ss << "M-";
-
-    if ((modifiers & Modifiers::Shift) != Modifiers::None)
-        ss << "S-";
-
-    if ((modifiers & Modifiers::Control) != Modifiers::None)
-        ss << "C-";
-
-    ss << keyToString(obj.key());
-
-    ser.writeString(ss.str().c_str(), name);
+    ser.write(modifiersToString(obj.modifiers()) + keyToString(obj.key()), name);
 }
 
 template <>
@@ -280,37 +189,14 @@ void cubos::core::data::deserialize<KeyWithModifiers>(Deserializer& des, KeyWith
 {
     std::string str;
     des.readString(str);
-    std::stringstream ss(str);
 
-    Modifiers modifiers = Modifiers::None;
-
-    std::string token;
-    while (std::getline(ss, token, '-') && !ss.eof())
+    size_t split = str.find_last_of('-');
+    if (split == std::string::npos)
     {
-        CUBOS_ASSERT(token.size() == 1, "Invalid key format: Modifier must be a single character");
-
-        switch (token[0])
-        {
-        case 'D':
-            modifiers |= Modifiers::System;
-            break;
-        case 'M':
-            modifiers |= Modifiers::Alt;
-            break;
-        case 'S':
-            modifiers |= Modifiers::Shift;
-            break;
-        case 'C':
-            modifiers |= Modifiers::Control;
-            break;
-        default:
-            CUBOS_ERROR("Invalid key format: {} is not a valid modifier", token[0]);
-        }
+        obj = KeyWithModifiers(stringToKey(str), Modifiers::None);
     }
-
-    Key key = stringToKey(token);
-
-    CUBOS_ASSERT(ss.eof(), "Invalid key format: Key must be the last part of the string");
-
-    obj = KeyWithModifiers(key, modifiers);
+    else
+    {
+        obj = KeyWithModifiers(stringToKey(str.substr(split + 1)), stringToModifiers(str.substr(0, split + 1)));
+    }
 }
