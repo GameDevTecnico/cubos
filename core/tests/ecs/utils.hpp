@@ -19,9 +19,16 @@ struct [[cubos::component("parent")]] ParentComponent
     cubos::core::ecs::Entity id;
 };
 
+/// A component used to test if components are destructed properly.
+struct [[cubos::component("detect_destructor")]] DetectDestructorComponent
+{
+    [[cubos::ignore]] DetectDestructor detect;
+};
+
 /// Adds the utility components to a world.
 inline void setupWorld(cubos::core::ecs::World& world)
 {
     world.registerComponent<IntegerComponent>();
     world.registerComponent<ParentComponent>();
+    world.registerComponent<DetectDestructorComponent>();
 }
