@@ -187,15 +187,15 @@ void cubos::core::data::serialize<Bindings>(Serializer& ser, const Bindings& obj
 {
     ser.beginObject(name);
     ser.beginDictionary(obj.getActions().size(), "action");
-    for (const auto& [name, action] : obj.getActions())
+    for (const auto& [actionName, action] : obj.getActions())
     {
-        ser.write(action.getKeys(), name.c_str());
+        ser.write(action.getKeys(), actionName.c_str());
     }
     ser.endDictionary();
     ser.beginDictionary(obj.getAxes().size(), "axis");
-    for (const auto& [name, axis] : obj.getAxes())
+    for (const auto& [axisName, axis] : obj.getAxes())
     {
-        ser.beginDictionary(2, name.c_str());
+        ser.beginDictionary(2, axisName.c_str());
         ser.write(axis.getPositive(), "pos");
         ser.write(axis.getNegative(), "neg");
         ser.endDictionary();
