@@ -16,7 +16,7 @@ namespace cubos::engine
     {
     public:
         KeyWithModifier() = default;
-        KeyWithModifier(cubos::core::io::Key key, cubos::core::io::Modifiers modifiers)
+        KeyWithModifier(core::io::Key key, core::io::Modifiers modifiers)
             : mKey(key)
             , mModifiers(modifiers)
         {
@@ -24,17 +24,17 @@ namespace cubos::engine
 
         ~KeyWithModifier() = default;
 
-        const cubos::core::io::Key& getKey() const;
-        const cubos::core::io::Modifiers& getModifiers() const;
+        const core::io::Key& getKey() const;
+        const core::io::Modifiers& getModifiers() const;
 
-        cubos::core::io::Key& getKey();
-        cubos::core::io::Modifiers& getModifiers();
+        core::io::Key& getKey();
+        core::io::Modifiers& getModifiers();
 
         std::string toString() const;
 
     private:
-        cubos::core::io::Key mKey = cubos::core::io::Key::Invalid;
-        cubos::core::io::Modifiers mModifiers = cubos::core::io::Modifiers::None;
+        core::io::Key mKey = core::io::Key::Invalid;
+        core::io::Modifiers mModifiers = core::io::Modifiers::None;
     };
 
     class InputAxis final
