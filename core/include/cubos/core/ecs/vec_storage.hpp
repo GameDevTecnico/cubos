@@ -27,11 +27,12 @@ namespace cubos::core::ecs
         if (mData.size() <= index)
         {
             mData.resize(index);
-            mData.push_back(value);
+            mData.emplace_back(std::move(value));
         }
         else
         {
-            mData[index] = value;
+            mData[index].~T();
+            new (&mData[index]) T(std::move(value));
         }
 
         return &mData[index];

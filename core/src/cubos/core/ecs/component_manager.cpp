@@ -27,7 +27,13 @@ void ComponentManager::registerComponent(std::type_index type)
 
 std::size_t ComponentManager::getIDFromIndex(std::type_index type) const
 {
-    return mTypeToIds.at(type);
+    if (auto it = mTypeToIds.find(type); it != mTypeToIds.end())
+    {
+        return it->second;
+    }
+
+    CUBOS_CRITICAL("Component type '{}' is not registered in the component manager", type.name());
+    abort();
 }
 
 std::type_index ComponentManager::getType(std::size_t id) const
