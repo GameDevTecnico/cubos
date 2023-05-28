@@ -18,14 +18,14 @@ void Input::clear(int player)
     CUBOS_DEBUG("Input cleared for player {}", player);
 }
 
-void Input::setBindings(int player, const InputBindings& bindings)
+void Input::bind(int player, const InputBindings& bindings)
 {
     // TODO: Register to all the events for this player
     mBindings[player] = std::move(bindings);
     CUBOS_DEBUG("Input bindings set for player {}", player);
 }
 
-bool Input::isPressed(int player, const std::string& actionName) const
+bool Input::pressed(int player, const std::string& actionName) const
 {
     auto pIt = mBindings.find(player);
     if (pIt == mBindings.end())
@@ -34,14 +34,14 @@ bool Input::isPressed(int player, const std::string& actionName) const
         return false;
     }
 
-    auto aIt = pIt->second.getActions().find(actionName);
-    if (aIt == pIt->second.getActions().end())
+    auto aIt = pIt->second.actions().find(actionName);
+    if (aIt == pIt->second.actions().end())
     {
         CUBOS_WARN("Action {} does not exist", actionName);
         return false;
     }
 
-    return aIt->second.isPressed();
+    return aIt->second.pressed();
 }
 
 float Input::axis(int player, const std::string& axisName) const
@@ -53,17 +53,17 @@ float Input::axis(int player, const std::string& axisName) const
         return 0.0f;
     }
 
-    auto aIt = pIt->second.getAxes().find(axisName);
-    if (aIt == pIt->second.getAxes().end())
+    auto aIt = pIt->second.axes().find(axisName);
+    if (aIt == pIt->second.axes().end())
     {
         CUBOS_WARN("Axis {} does not exist", axisName);
         return 0.0f;
     }
 
-    return aIt->second.getValue();
+    return aIt->second.value();
 }
 
-const std::unordered_map<int, InputBindings>& Input::getBindings() const
+const std::unordered_map<int, InputBindings>& Input::bindings() const
 {
     return mBindings;
 }
