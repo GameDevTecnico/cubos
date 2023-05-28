@@ -20,8 +20,8 @@ static void config(Write<Settings> settings)
 static void init(Read<Assets> assets, Write<Input> input)
 {
     auto bindings = assets->read<InputBindings>(bindingsAsset);
-    input->setBindings(0, *bindings);
-    CUBOS_INFO("{}", input->getBindings().at(0).toString());
+    input->bind(0, *bindings);
+    CUBOS_INFO("{}", input->bindings().at(0).toString());
 }
 
 int main()

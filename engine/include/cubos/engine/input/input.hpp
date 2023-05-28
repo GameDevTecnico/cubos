@@ -20,13 +20,13 @@ namespace cubos::engine
         /// Sets the bindings for a specific player
         /// @param player The player whose bindings will be set
         /// @param bindings The bindings to set
-        void setBindings(int player, const InputBindings& bindings);
+        void bind(int player, const InputBindings& bindings);
 
         /// Gets an action state for a specific player
         /// @param player The player whose action state will be retrieved
         /// @param actionName The name of the action
         /// @return True if the action exists and is pressed, false otherwise.
-        bool isPressed(int player, const std::string& actionName) const;
+        bool pressed(int player, const std::string& actionName) const;
 
         /// Gets an axis value for a specific player
         /// @param player The player whose axis value will be retrieved
@@ -36,7 +36,7 @@ namespace cubos::engine
 
         /// Gets the bindings
         /// @return The bindings
-        const std::unordered_map<int, InputBindings>& getBindings() const;
+        const std::unordered_map<int, InputBindings>& bindings() const;
 
     private:
         std::unordered_map<int, InputBindings> mBindings;

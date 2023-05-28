@@ -24,11 +24,11 @@ namespace cubos::engine
 
         ~KeyWithModifier() = default;
 
-        const core::io::Key& getKey() const;
-        const core::io::Modifiers& getModifiers() const;
+        const core::io::Key& key() const;
+        const core::io::Modifiers& modifiers() const;
 
-        core::io::Key& getKey();
-        core::io::Modifiers& getModifiers();
+        core::io::Key& key();
+        core::io::Modifiers& modifiers();
 
         std::string toString() const;
 
@@ -49,14 +49,14 @@ namespace cubos::engine
 
         ~InputAxis() = default;
 
-        const std::vector<KeyWithModifier>& getPositive() const;
-        const std::vector<KeyWithModifier>& getNegative() const;
+        const std::vector<KeyWithModifier>& positive() const;
+        const std::vector<KeyWithModifier>& negative() const;
 
-        std::vector<KeyWithModifier>& getPositive();
-        std::vector<KeyWithModifier>& getNegative();
+        std::vector<KeyWithModifier>& positive();
+        std::vector<KeyWithModifier>& negative();
 
-        float getValue() const;
-        void setValue(float value);
+        float value() const;
+        void value(float value);
 
         std::string toString() const;
 
@@ -79,11 +79,11 @@ namespace cubos::engine
 
         ~InputAction() = default;
 
-        const std::vector<KeyWithModifier>& getKeys() const;
-        std::vector<KeyWithModifier>& getKeys();
+        const std::vector<KeyWithModifier>& keys() const;
+        std::vector<KeyWithModifier>& keys();
 
-        bool isPressed() const;
-        void setPressed(bool pressed);
+        bool pressed() const;
+        void pressed(bool pressed);
 
         std::string toString() const;
 
@@ -100,11 +100,11 @@ namespace cubos::engine
         InputBindings() = default;
         ~InputBindings() = default;
 
-        const std::unordered_map<std::string, InputAction>& getActions() const;
-        const std::unordered_map<std::string, InputAxis>& getAxes() const;
+        const std::unordered_map<std::string, InputAction>& actions() const;
+        const std::unordered_map<std::string, InputAxis>& axes() const;
 
-        std::unordered_map<std::string, InputAction>& getActions();
-        std::unordered_map<std::string, InputAxis>& getAxes();
+        std::unordered_map<std::string, InputAction>& actions();
+        std::unordered_map<std::string, InputAxis>& axes();
 
         std::string toString() const;
 

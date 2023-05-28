@@ -14,22 +14,22 @@ using cubos::core::io::Modifiers;
 using cubos::core::io::stringToKey;
 using namespace cubos::engine;
 
-const Key& KeyWithModifier::getKey() const
+const Key& KeyWithModifier::key() const
 {
     return mKey;
 }
 
-const Modifiers& KeyWithModifier::getModifiers() const
+const Modifiers& KeyWithModifier::modifiers() const
 {
     return mModifiers;
 }
 
-Key& KeyWithModifier::getKey()
+Key& KeyWithModifier::key()
 {
     return mKey;
 }
 
-Modifiers& KeyWithModifier::getModifiers()
+Modifiers& KeyWithModifier::modifiers()
 {
     return mModifiers;
 }
@@ -62,32 +62,32 @@ std::string KeyWithModifier::toString() const
     return ss.str();
 }
 
-const std::vector<KeyWithModifier>& InputAxis::getPositive() const
+const std::vector<KeyWithModifier>& InputAxis::positive() const
 {
     return mPositive;
 }
 
-const std::vector<KeyWithModifier>& InputAxis::getNegative() const
+const std::vector<KeyWithModifier>& InputAxis::negative() const
 {
     return mNegative;
 }
 
-std::vector<KeyWithModifier>& InputAxis::getPositive()
+std::vector<KeyWithModifier>& InputAxis::positive()
 {
     return mPositive;
 }
 
-std::vector<KeyWithModifier>& InputAxis::getNegative()
+std::vector<KeyWithModifier>& InputAxis::negative()
 {
     return mNegative;
 }
 
-float InputAxis::getValue() const
+float InputAxis::value() const
 {
     return mValue;
 }
 
-void InputAxis::setValue(float value)
+void InputAxis::value(float value)
 {
     if (std::abs(value) > 1.0f)
     {
@@ -113,22 +113,22 @@ std::string InputAxis::toString() const
     return ss.str();
 }
 
-const std::vector<KeyWithModifier>& InputAction::getKeys() const
+const std::vector<KeyWithModifier>& InputAction::keys() const
 {
     return mKeys;
 }
 
-std::vector<KeyWithModifier>& InputAction::getKeys()
+std::vector<KeyWithModifier>& InputAction::keys()
 {
     return mKeys;
 }
 
-bool InputAction::isPressed() const
+bool InputAction::pressed() const
 {
     return mPressed;
 }
 
-void InputAction::setPressed(bool pressed)
+void InputAction::pressed(bool pressed)
 {
     mPressed = pressed;
 }
@@ -145,22 +145,22 @@ std::string InputAction::toString() const
     return ss.str();
 }
 
-const std::unordered_map<std::string, InputAction>& InputBindings::getActions() const
+const std::unordered_map<std::string, InputAction>& InputBindings::actions() const
 {
     return mActions;
 }
 
-const std::unordered_map<std::string, InputAxis>& InputBindings::getAxes() const
+const std::unordered_map<std::string, InputAxis>& InputBindings::axes() const
 {
     return mAxes;
 }
 
-std::unordered_map<std::string, InputAction>& InputBindings::getActions()
+std::unordered_map<std::string, InputAction>& InputBindings::actions()
 {
     return mActions;
 }
 
-std::unordered_map<std::string, InputAxis>& InputBindings::getAxes()
+std::unordered_map<std::string, InputAxis>& InputBindings::axes()
 {
     return mAxes;
 }
@@ -186,20 +186,20 @@ template <>
 void cubos::core::data::serialize<InputBindings>(Serializer& ser, const InputBindings& obj, const char* name)
 {
     ser.beginObject(name);
-    ser.beginDictionary(obj.getActions().size(), "action");
-    for (const auto& [actionName, action] : obj.getActions())
+    ser.beginDictionary(obj.actions().size(), "action");
+    for (const auto& [actionName, action] : obj.actions())
     {
         ser.write(actionName, nullptr);
-        ser.write(action.getKeys(), nullptr);
+        ser.write(action.keys(), nullptr);
     }
     ser.endDictionary();
-    ser.beginDictionary(obj.getAxes().size(), "axis");
-    for (const auto& [axisName, axis] : obj.getAxes())
+    ser.beginDictionary(obj.axes().size(), "axis");
+    for (const auto& [axisName, axis] : obj.axes())
     {
         ser.write(axisName, nullptr);
         ser.beginObject(nullptr);
-        ser.write(axis.getPositive(), "pos");
-        ser.write(axis.getNegative(), "neg");
+        ser.write(axis.positive(), "pos");
+        ser.write(axis.negative(), "neg");
         ser.endObject();
     }
     ser.endDictionary();
@@ -220,7 +220,7 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
         std::vector<KeyWithModifier> keys;
         des.read(keys);
 
-        obj.getActions()[action] = InputAction(keys);
+        obj.actions()[action] = InputAction(keys);
     }
     des.endDictionary();
 
@@ -245,7 +245,7 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
 
         des.endDictionary();
 
-        obj.getAxes()[axis] = InputAxis(pos, neg);
+        obj.axes()[axis] = InputAxis(pos, neg);
     }
     des.endDictionary();
 
@@ -257,7 +257,7 @@ void cubos::core::data::serialize<KeyWithModifier>(Serializer& ser, const KeyWit
 {
     std::stringstream ss;
 
-    Modifiers modifiers = obj.getModifiers();
+    Modifiers modifiers = obj.modifiers();
     if ((modifiers & Modifiers::System) != Modifiers::None)
         ss << "D-";
 
@@ -270,7 +270,7 @@ void cubos::core::data::serialize<KeyWithModifier>(Serializer& ser, const KeyWit
     if ((modifiers & Modifiers::Control) != Modifiers::None)
         ss << "C-";
 
-    ss << keyToString(obj.getKey());
+    ss << keyToString(obj.key());
 
     ser.writeString(ss.str().c_str(), name);
 }
