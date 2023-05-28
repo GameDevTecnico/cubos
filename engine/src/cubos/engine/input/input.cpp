@@ -21,7 +21,7 @@ void Input::clear(int player)
 void Input::bind(int player, const InputBindings& bindings)
 {
     // TODO: Register to all the events for this player
-    mBindings[player] = std::move(bindings);
+    mBindings[player] = bindings;
     CUBOS_DEBUG("Input bindings set for player {}", player);
 }
 
