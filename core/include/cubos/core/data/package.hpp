@@ -209,6 +209,7 @@ namespace cubos::core::data
         const Fields& fields() const;
 
         /// Removes a field from this package.
+        /// If the package isn't storing an object, this method will abort.
         /// @param name The name of the field.
         /// @returns The removed field, or an empty package if the field didn't exist.
         Package removeField(std::string_view name);
