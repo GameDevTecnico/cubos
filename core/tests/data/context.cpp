@@ -55,8 +55,8 @@ TEST_CASE("data::Context")
         bool first = false;
         bool second = false;
         Context context{};
-        context.push(DetectDestructor{first});
-        context.push(DetectDestructor{second});
+        context.push(DetectDestructor{&first});
+        context.push(DetectDestructor{&second});
 
         CHECK(first == false);
         CHECK(second == false);
@@ -75,7 +75,7 @@ TEST_CASE("data::Context")
 
         {
             Context context{};
-            context.push(DetectDestructor{destroyed});
+            context.push(DetectDestructor{&destroyed});
 
             CHECK(destroyed == false);
         }

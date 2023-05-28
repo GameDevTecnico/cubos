@@ -5,28 +5,25 @@
 class DetectDestructor
 {
 public:
-    DetectDestructor(bool& destructed)
+    DetectDestructor(bool* destructed = nullptr)
         : mDestructed(destructed)
-        , mMoved(false)
     {
     }
 
     DetectDestructor(DetectDestructor&& other)
         : mDestructed(other.mDestructed)
-        , mMoved(false)
     {
-        other.mMoved = true;
+        other.mDestructed = nullptr;
     }
 
     ~DetectDestructor()
     {
-        if (!mMoved)
+        if (mDestructed != nullptr)
         {
-            mDestructed = true;
+            *mDestructed = true;
         }
     }
 
 private:
-    bool& mDestructed;
-    bool mMoved; ///< Needed to prevent detecting destructor calls on moved values.
+    bool* mDestructed;
 };
