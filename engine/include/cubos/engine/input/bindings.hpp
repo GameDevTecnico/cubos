@@ -12,17 +12,17 @@
 
 namespace cubos::engine
 {
-    class KeyWithModifier final
+    class KeyWithModifiers final
     {
     public:
-        KeyWithModifier() = default;
-        KeyWithModifier(core::io::Key key, core::io::Modifiers modifiers)
+        KeyWithModifiers() = default;
+        KeyWithModifiers(core::io::Key key, core::io::Modifiers modifiers)
             : mKey(key)
             , mModifiers(modifiers)
         {
         }
 
-        ~KeyWithModifier() = default;
+        ~KeyWithModifiers() = default;
 
         const core::io::Key& key() const;
         const core::io::Modifiers& modifiers() const;
@@ -41,7 +41,7 @@ namespace cubos::engine
     {
     public:
         InputAxis() = default;
-        InputAxis(std::vector<KeyWithModifier> positive, std::vector<KeyWithModifier> negative)
+        InputAxis(std::vector<KeyWithModifiers> positive, std::vector<KeyWithModifiers> negative)
             : mPositive(positive)
             , mNegative(negative)
         {
@@ -49,11 +49,11 @@ namespace cubos::engine
 
         ~InputAxis() = default;
 
-        const std::vector<KeyWithModifier>& positive() const;
-        const std::vector<KeyWithModifier>& negative() const;
+        const std::vector<KeyWithModifiers>& positive() const;
+        const std::vector<KeyWithModifiers>& negative() const;
 
-        std::vector<KeyWithModifier>& positive();
-        std::vector<KeyWithModifier>& negative();
+        std::vector<KeyWithModifiers>& positive();
+        std::vector<KeyWithModifiers>& negative();
 
         float value() const;
         void value(float value);
@@ -61,8 +61,8 @@ namespace cubos::engine
         std::string toString() const;
 
     private:
-        std::vector<KeyWithModifier> mPositive;
-        std::vector<KeyWithModifier> mNegative;
+        std::vector<KeyWithModifiers> mPositive;
+        std::vector<KeyWithModifiers> mNegative;
 
         /// Not serialized.
         float mValue;
@@ -72,15 +72,15 @@ namespace cubos::engine
     {
     public:
         InputAction() = default;
-        InputAction(std::vector<KeyWithModifier> keys)
+        InputAction(std::vector<KeyWithModifiers> keys)
             : mKeys(keys)
         {
         }
 
         ~InputAction() = default;
 
-        const std::vector<KeyWithModifier>& keys() const;
-        std::vector<KeyWithModifier>& keys();
+        const std::vector<KeyWithModifiers>& keys() const;
+        std::vector<KeyWithModifiers>& keys();
 
         bool pressed() const;
         void pressed(bool pressed);
@@ -88,7 +88,7 @@ namespace cubos::engine
         std::string toString() const;
 
     private:
-        std::vector<KeyWithModifier> mKeys;
+        std::vector<KeyWithModifiers> mKeys;
 
         /// Not serialized.
         bool mPressed;
