@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include <cubos/engine/input/key_with_modifiers.hpp>
+#include <cubos/core/io/keyboard.hpp>
 
 namespace cubos::engine
 {
@@ -15,7 +15,8 @@ namespace cubos::engine
     {
     public:
         InputAxis() = default;
-        InputAxis(std::vector<KeyWithModifiers> positive, std::vector<KeyWithModifiers> negative)
+        InputAxis(std::vector<std::pair<core::io::Key, core::io::Modifiers>> positive,
+                  std::vector<std::pair<core::io::Key, core::io::Modifiers>> negative)
             : mPositive(positive)
             , mNegative(negative)
         {
@@ -24,16 +25,16 @@ namespace cubos::engine
         ~InputAxis() = default;
 
         /// @return The vector of positive keys.
-        const std::vector<KeyWithModifiers>& positive() const;
+        const std::vector<std::pair<core::io::Key, core::io::Modifiers>>& positive() const;
 
         /// @return The vector of negative keys.
-        const std::vector<KeyWithModifiers>& negative() const;
+        const std::vector<std::pair<core::io::Key, core::io::Modifiers>>& negative() const;
 
         /// @return The vector of positive keys.
-        std::vector<KeyWithModifiers>& positive();
+        std::vector<std::pair<core::io::Key, core::io::Modifiers>>& positive();
 
         /// @return The vector of negative keys.
-        std::vector<KeyWithModifiers>& negative();
+        std::vector<std::pair<core::io::Key, core::io::Modifiers>>& negative();
 
         /// @return The value of this axis.
         float value() const;
@@ -43,8 +44,8 @@ namespace cubos::engine
         void value(float value);
 
     private:
-        std::vector<KeyWithModifiers> mPositive;
-        std::vector<KeyWithModifiers> mNegative;
+        std::vector<std::pair<core::io::Key, core::io::Modifiers>> mPositive;
+        std::vector<std::pair<core::io::Key, core::io::Modifiers>> mNegative;
 
         /// Not serialized.
         float mValue;

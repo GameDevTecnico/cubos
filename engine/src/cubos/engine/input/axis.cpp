@@ -1,25 +1,29 @@
+#include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/input/axis.hpp>
 
+using cubos::core::io::Key;
+using cubos::core::io::Modifiers;
+
 using namespace cubos::engine;
 
-const std::vector<KeyWithModifiers>& InputAxis::positive() const
+const std::vector<std::pair<Key, Modifiers>>& InputAxis::positive() const
 {
     return mPositive;
 }
 
-const std::vector<KeyWithModifiers>& InputAxis::negative() const
+const std::vector<std::pair<Key, Modifiers>>& InputAxis::negative() const
 {
     return mNegative;
 }
 
-std::vector<KeyWithModifiers>& InputAxis::positive()
+std::vector<std::pair<Key, Modifiers>>& InputAxis::positive()
 {
     return mPositive;
 }
 
-std::vector<KeyWithModifiers>& InputAxis::negative()
+std::vector<std::pair<Key, Modifiers>>& InputAxis::negative()
 {
     return mNegative;
 }
