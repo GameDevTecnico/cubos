@@ -25,7 +25,7 @@ std::string io::modifiersToString(Modifiers modifiers)
 }
 
 template <>
-void cubos::core::data::serialize<Modifiers>(Serializer& ser, const Modifiers& obj, const char* name)
+void data::serialize<Modifiers>(Serializer& ser, const Modifiers& obj, const char* name)
 {
     ser.write(io::modifiersToString(obj), name);
 }
@@ -47,7 +47,7 @@ Modifiers io::stringToModifiers(const std::string& str)
 }
 
 template <>
-void cubos::core::data::deserialize<Modifiers>(Deserializer& des, Modifiers& obj)
+void data::deserialize<Modifiers>(Deserializer& des, Modifiers& obj)
 {
     std::string str;
     des.read(str);
@@ -125,7 +125,7 @@ std::string io::keyToString(Key key)
 }
 
 template <>
-void cubos::core::data::serialize<Key>(Serializer& ser, const Key& obj, const char* name)
+void data::serialize<Key>(Serializer& ser, const Key& obj, const char* name)
 {
     ser.write(io::keyToString(obj), name);
 }
@@ -198,7 +198,7 @@ Key io::stringToKey(const std::string& str)
 }
 
 template <>
-void cubos::core::data::deserialize<Key>(Deserializer& des, Key& obj)
+void data::deserialize<Key>(Deserializer& des, Key& obj)
 {
     std::string str;
     des.read(str);
