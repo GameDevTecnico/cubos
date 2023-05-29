@@ -2,7 +2,6 @@
 /// @brief Contains the Input class.
 #pragma once
 
-#include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/input/bindings.hpp>
