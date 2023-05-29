@@ -14,6 +14,7 @@ add_executable(
     ecs/query.cpp
     ecs/blueprint.cpp
     ecs/commands.cpp
+    ecs/system.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
