@@ -161,7 +161,7 @@ void Input::handle(const KeyEvent& event)
         if (action.pressed() != pressed)
         {
             action.pressed(pressed);
-            CUBOS_INFO("Action {} was {}", boundAction.name, pressed ? "pressed" : "released");
+            CUBOS_TRACE("Action {} was {}", boundAction.name, pressed ? "pressed" : "released");
         }
     }
 
@@ -190,7 +190,7 @@ void Input::handle(const KeyEvent& event)
         if (axis.value() != value)
         {
             axis.value(value);
-            CUBOS_INFO("Axis {} value is {}", boundAxis.name, value);
+            CUBOS_TRACE("Axis {} value is {}", boundAxis.name, value);
         }
     }
 }
