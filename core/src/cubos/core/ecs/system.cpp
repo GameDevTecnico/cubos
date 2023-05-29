@@ -4,6 +4,12 @@ using namespace cubos::core::ecs;
 
 bool SystemInfo::valid() const
 {
+    if (this->usesWorld)
+    {
+        return !this->usesCommands && this->resourcesRead.empty() && this->resourcesWritten.empty() &&
+               this->componentsRead.empty() && this->componentsWritten.empty();
+    }
+
     for (const auto& rsc : this->resourcesRead)
     {
         if (this->resourcesWritten.contains(rsc))
@@ -46,17 +52,17 @@ bool SystemInfo::compatible(const SystemInfo& other) const
         }
     }
 
-    for (const auto& rsc : other.resourcesRead)
+    for (const auto& rsc : this->resourcesWritten)
     {
-        if (this->resourcesWritten.contains(rsc))
+        if (other.resourcesRead.contains(rsc) || other.resourcesWritten.contains(rsc))
         {
             return false;
         }
     }
 
-    for (const auto& comp : other.componentsRead)
+    for (const auto& comp : this->componentsWritten)
     {
-        if (this->componentsWritten.contains(comp))
+        if (other.componentsRead.contains(comp) || other.componentsWritten.contains(comp))
         {
             return false;
         }
