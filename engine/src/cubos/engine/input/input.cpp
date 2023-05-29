@@ -91,6 +91,16 @@ bool Input::pressed(const char* actionName, int player) const
     return aIt->second.pressed();
 }
 
+bool Input::pressed(Input::Key key, Modifiers modifiers) const
+{
+    auto it = mPressedKeys.find(key);
+    if (it != mPressedKeys.end())
+    {
+        return it->second && modifiers == mModifiers;
+    }
+    return false;
+}
+
 float Input::axis(const char* axisName, int player) const
 {
     auto pIt = mBindings.find(player);
@@ -110,45 +120,27 @@ float Input::axis(const char* axisName, int player) const
     return aIt->second.value();
 }
 
-void Input::handleKeys(std::vector<KeyWithModifiers>& keys, const KeyEvent& event)
+bool Input::anyPressed(const std::vector<KeyWithModifiers>& keys) const
 {
     for (auto& key : keys)
     {
-        if (event.key == key.key() && mModifiers == key.modifiers())
-        {
-            key.pressed(event.pressed);
-        }
-        else if (!event.pressed && event.key == key.key())
-        {
-            /// Release even if the modifier is different.
-            key.pressed(false);
-        }
-    }
-}
-
-bool Input::anyPressed(std::vector<KeyWithModifiers>& keys) const
-{
-    for (auto& key : keys)
-    {
-        if (key.pressed())
+        if (this->pressed(key.key(), key.modifiers()))
         {
             return true;
         }
     }
-
     return false;
 }
 
 void Input::handle(const KeyEvent& event)
 {
+    mPressedKeys.insert_or_assign(event.key, event.pressed);
+
     for (const auto& boundAction : mBoundActions[event.key])
     {
         auto& action = mBindings[boundAction.player].actions()[boundAction.name];
 
-        handleKeys(action.keys(), event);
-
-        bool pressed = anyPressed(action.keys());
-        if (action.pressed() != pressed)
+        if (auto pressed = anyPressed(action.keys()); action.pressed() != pressed)
         {
             action.pressed(pressed);
             CUBOS_TRACE("Action {} was {}", boundAction.name, pressed ? "pressed" : "released");
@@ -158,23 +150,15 @@ void Input::handle(const KeyEvent& event)
     for (const auto& boundAxis : mBoundAxes[event.key])
     {
         auto& axis = mBindings[boundAxis.player].axes()[boundAxis.name];
-        if (boundAxis.negative)
-        {
-            handleKeys(axis.negative(), event);
-        }
-        else
-        {
-            handleKeys(axis.positive(), event);
-        }
 
         float value = 0.0f;
-        if (anyPressed(axis.positive()))
-        {
-            value += 1.0f;
-        }
         if (anyPressed(axis.negative()))
         {
             value -= 1.0f;
+        }
+        if (anyPressed(axis.positive()))
+        {
+            value += 1.0f;
         }
 
         if (axis.value() != value)

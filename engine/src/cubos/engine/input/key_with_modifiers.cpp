@@ -33,16 +33,6 @@ Modifiers& KeyWithModifiers::modifiers()
     return mModifiers;
 }
 
-bool KeyWithModifiers::pressed() const
-{
-    return mPressed;
-}
-
-void KeyWithModifiers::pressed(bool pressed)
-{
-    mPressed = pressed;
-}
-
 template <>
 void cubos::core::data::serialize<KeyWithModifiers>(Serializer& ser, const KeyWithModifiers& obj, const char* name)
 {

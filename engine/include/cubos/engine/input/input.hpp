@@ -13,6 +13,9 @@ namespace cubos::engine
     class Input final
     {
     public:
+        using Key = core::io::Key;
+        using Modifiers = core::io::Modifiers;
+
         Input() = default;
         ~Input() = default;
 
@@ -33,6 +36,12 @@ namespace cubos::engine
         /// @param player The player whose action state will be retrieved
         /// @return True if the action exists and is pressed, false otherwise.
         bool pressed(const char* actionName, int player = 0) const;
+
+        /// Gets a key state
+        /// @param Key The key
+        /// @param modifiers The modifiers (optional)
+        /// @return True if the key is pressed, false otherwise.
+        bool pressed(Key key, Modifiers modifiers = Modifiers::None) const;
 
         /// Gets an axis value for a specific player
         /// @param axisName The name of the axis
@@ -66,13 +75,14 @@ namespace cubos::engine
             bool negative = false; ///< Whether the pressed key is a negative axis key.
         };
 
-        void handleKeys(std::vector<KeyWithModifiers>& keys, const core::io::KeyEvent& event);
-        bool anyPressed(std::vector<KeyWithModifiers>& keys) const;
+        bool anyPressed(const std::vector<KeyWithModifiers>& keys) const;
 
         std::unordered_map<int, InputBindings> mBindings;
 
-        core::io::Modifiers mModifiers = core::io::Modifiers::None;
-        std::unordered_map<core::io::Key, std::vector<BindingIndex>> mBoundActions;
-        std::unordered_map<core::io::Key, std::vector<BindingIndex>> mBoundAxes;
+        Modifiers mModifiers = Modifiers::None;
+        std::unordered_map<Key, bool> mPressedKeys;
+
+        std::unordered_map<Key, std::vector<BindingIndex>> mBoundActions;
+        std::unordered_map<Key, std::vector<BindingIndex>> mBoundAxes;
     };
 } // namespace cubos::engine
