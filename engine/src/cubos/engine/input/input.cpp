@@ -82,7 +82,7 @@ void Input::bind(const InputBindings& bindings, int player)
     CUBOS_DEBUG("Input bindings set for player {}", player);
 }
 
-bool Input::pressed(const std::string& actionName, int player) const
+bool Input::pressed(const char* actionName, int player) const
 {
     auto pIt = mBindings.find(player);
     if (pIt == mBindings.end())
@@ -101,7 +101,7 @@ bool Input::pressed(const std::string& actionName, int player) const
     return aIt->second.pressed();
 }
 
-float Input::axis(const std::string& axisName, int player) const
+float Input::axis(const char* axisName, int player) const
 {
     auto pIt = mBindings.find(player);
     if (pIt == mBindings.end())
