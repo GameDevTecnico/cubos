@@ -48,6 +48,8 @@ void Input::clear(int player)
 
 void Input::bind(const InputBindings& bindings, int player)
 {
+    clear(player);
+
     for (const auto& action : bindings.actions())
     {
         for (const auto& key : action.second.keys())
