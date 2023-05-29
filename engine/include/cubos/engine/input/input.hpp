@@ -75,7 +75,7 @@ namespace cubos::engine
             bool negative = false; ///< Whether the pressed key is a negative axis key.
         };
 
-        bool anyPressed(const std::vector<KeyWithModifiers>& keys) const;
+        bool anyPressed(const std::vector<std::pair<Key, Modifiers>>& keys) const;
 
         std::unordered_map<int, InputBindings> mBindings;
 

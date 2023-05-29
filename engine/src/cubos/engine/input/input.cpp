@@ -22,7 +22,7 @@ void Input::clear(int player)
     {
         for (const auto& key : action.second.keys())
         {
-            std::erase_if(mBoundActions[key.key()], [player](const auto& idx) { return idx.player == player; });
+            std::erase_if(mBoundActions[key.first], [player](const auto& idx) { return idx.player == player; });
         }
     }
 
@@ -30,12 +30,12 @@ void Input::clear(int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            std::erase_if(mBoundAxes[pos.key()], [player](const auto& idx) { return idx.player == player; });
+            std::erase_if(mBoundAxes[pos.first], [player](const auto& idx) { return idx.player == player; });
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            std::erase_if(mBoundAxes[neg.key()], [player](const auto& idx) { return idx.player == player; });
+            std::erase_if(mBoundAxes[neg.first], [player](const auto& idx) { return idx.player == player; });
         }
     }
 
@@ -51,7 +51,7 @@ void Input::bind(const InputBindings& bindings, int player)
     {
         for (const auto& key : action.second.keys())
         {
-            mBoundActions[key.key()].push_back(BindingIndex{action.first, player});
+            mBoundActions[key.first].push_back(BindingIndex{action.first, player});
         }
     }
 
@@ -59,12 +59,12 @@ void Input::bind(const InputBindings& bindings, int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            mBoundAxes[pos.key()].push_back(BindingIndex{axis.first, player, false});
+            mBoundAxes[pos.first].push_back(BindingIndex{axis.first, player, false});
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            mBoundAxes[neg.key()].push_back(BindingIndex{axis.first, player, true});
+            mBoundAxes[neg.first].push_back(BindingIndex{axis.first, player, true});
         }
     }
 
@@ -120,11 +120,11 @@ float Input::axis(const char* axisName, int player) const
     return aIt->second.value();
 }
 
-bool Input::anyPressed(const std::vector<KeyWithModifiers>& keys) const
+bool Input::anyPressed(const std::vector<std::pair<Key, Modifiers>>& keys) const
 {
     for (auto& key : keys)
     {
-        if (this->pressed(key.key(), key.modifiers()))
+        if (this->pressed(key.first, key.second))
         {
             return true;
         }

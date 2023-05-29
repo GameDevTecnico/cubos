@@ -5,7 +5,7 @@
 
 #include <vector>
 
-#include <cubos/engine/input/key_with_modifiers.hpp>
+#include <cubos/core/io/keyboard.hpp>
 
 namespace cubos::engine
 {
@@ -15,7 +15,7 @@ namespace cubos::engine
     {
     public:
         InputAction() = default;
-        InputAction(std::vector<KeyWithModifiers> keys)
+        InputAction(std::vector<std::pair<core::io::Key, core::io::Modifiers>> keys)
             : mKeys(keys)
         {
         }
@@ -23,10 +23,10 @@ namespace cubos::engine
         ~InputAction() = default;
 
         /// @return The vector of keys.
-        const std::vector<KeyWithModifiers>& keys() const;
+        const std::vector<std::pair<core::io::Key, core::io::Modifiers>>& keys() const;
 
         /// @return The vector of keys.
-        std::vector<KeyWithModifiers>& keys();
+        std::vector<std::pair<core::io::Key, core::io::Modifiers>>& keys();
 
         /// @return Whether this action is pressed.
         bool pressed() const;
@@ -36,7 +36,7 @@ namespace cubos::engine
         void pressed(bool pressed);
 
     private:
-        std::vector<KeyWithModifiers> mKeys;
+        std::vector<std::pair<core::io::Key, core::io::Modifiers>> mKeys;
 
         /// Not serialized.
         bool mPressed;

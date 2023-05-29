@@ -1,13 +1,15 @@
 #include "cubos/engine/input/action.hpp"
 
+using cubos::core::io::Key;
+using cubos::core::io::Modifiers;
 using namespace cubos::engine;
 
-const std::vector<KeyWithModifiers>& InputAction::keys() const
+const std::vector<std::pair<Key, Modifiers>>& InputAction::keys() const
 {
     return mKeys;
 }
 
-std::vector<KeyWithModifiers>& InputAction::keys()
+std::vector<std::pair<Key, Modifiers>>& InputAction::keys()
 {
     return mKeys;
 }
