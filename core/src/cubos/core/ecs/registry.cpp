@@ -11,7 +11,6 @@ bool Registry::create(std::string_view name, data::Deserializer& des, Blueprint&
         return it->second->componentCreator(des, blueprint, id);
     }
 
-    CUBOS_ERROR("Component with name '{}' not registered", name);
     return false;
 }
 
@@ -23,7 +22,6 @@ std::unique_ptr<IStorage> Registry::createStorage(std::type_index type)
         return (*it)->storageCreator();
     }
 
-    CUBOS_ERROR("Component type '{}' not registered", type.name());
     return nullptr;
 }
 
@@ -35,7 +33,6 @@ std::optional<std::string_view> Registry::name(std::type_index type)
         return (*it)->name;
     }
 
-    CUBOS_ERROR("Component type '{}' not registered", type.name());
     return std::nullopt;
 }
 
@@ -47,7 +44,6 @@ std::optional<std::type_index> Registry::type(std::string_view name)
         return it->second->type;
     }
 
-    CUBOS_ERROR("Component with name '{}' not registered", name);
     return std::nullopt;
 }
 
