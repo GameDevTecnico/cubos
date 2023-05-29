@@ -52,7 +52,7 @@ void Input::bind(const InputBindings& bindings, int player)
     {
         for (const auto& key : action.second.keys())
         {
-            mBoundActions[key.key()] = {BindingIndex{action.first, player}};
+            mBoundActions[key.key()].push_back(BindingIndex{action.first, player});
         }
     }
 
@@ -60,12 +60,12 @@ void Input::bind(const InputBindings& bindings, int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            mBoundAxes[pos.key()] = {BindingIndex{axis.first, player, false}};
+            mBoundAxes[pos.key()].push_back(BindingIndex{axis.first, player, false});
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            mBoundAxes[neg.key()] = {BindingIndex{axis.first, player, true}};
+            mBoundAxes[neg.key()].push_back(BindingIndex{axis.first, player, true});
         }
     }
 
