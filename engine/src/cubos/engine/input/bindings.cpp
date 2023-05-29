@@ -156,20 +156,15 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
         std::string axis;
         des.read(axis);
 
-        CUBOS_ASSERT(des.beginDictionary() == 2, "Expected 2 elements in axis dictionary");
+        des.beginObject();
 
-        std::string tmp;
-        des.read(tmp);
-        CUBOS_ASSERT(tmp == "pos", "Expected 'pos' in axis dictionary");
         std::vector<KeyWithModifiers> pos;
         des.read(pos);
 
-        des.read(tmp);
-        CUBOS_ASSERT(tmp == "neg", "Expected 'neg' in axis dictionary");
         std::vector<KeyWithModifiers> neg;
         des.read(neg);
 
-        des.endDictionary();
+        des.endObject();
 
         obj.axes()[axis] = InputAxis(pos, neg);
     }
