@@ -22,10 +22,14 @@ namespace cubos::engine
         core::io::Key& key();
         core::io::Modifiers& modifiers();
 
-        std::string toString() const;
+        bool pressed() const;
+        void pressed(bool pressed);
 
     private:
         core::io::Key mKey = core::io::Key::Invalid;
         core::io::Modifiers mModifiers = core::io::Modifiers::None;
+
+        /// Not serialized.
+        bool mPressed = false;
     };
 } // namespace cubos::engine

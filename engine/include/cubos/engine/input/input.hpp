@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cubos/core/io/keyboard.hpp>
+#include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/input/bindings.hpp>
 
@@ -36,6 +37,21 @@ namespace cubos::engine
         /// @return The axis value if the axis exists, 0.0 otherwise.
         float axis(const std::string& axisName, int player = 0) const;
 
+        /// Handle a key event
+        /// @param event The key event
+        void handle(const core::io::KeyEvent& event);
+
+        /// Handle a modifiers event
+        /// @param event The modifiers event
+        void handle(const core::io::ModifiersEvent& event);
+
+        /// Discard remaining events.
+        /// @param event The event to discard
+        inline void handle(const core::io::WindowEvent& event)
+        {
+            (void)event;
+        }
+
         /// Gets the bindings
         /// @return The bindings
         const std::unordered_map<int, InputBindings>& bindings() const;
@@ -49,10 +65,12 @@ namespace cubos::engine
         };
 
         void removeBoundPlayer(std::vector<BindingIndex>& boundKeys, int player);
+        void handleKeys(std::vector<KeyWithModifiers>& keys, const core::io::KeyEvent& event);
+        bool anyPressed(std::vector<KeyWithModifiers>& keys) const;
 
         std::unordered_map<int, InputBindings> mBindings;
 
-        // core::io::Modifiers mModifiers = core::io::Modifiers::None;
+        core::io::Modifiers mModifiers = core::io::Modifiers::None;
         std::unordered_map<core::io::Key, std::vector<BindingIndex>> mBoundActions;
         std::unordered_map<core::io::Key, std::vector<BindingIndex>> mBoundAxes;
     };

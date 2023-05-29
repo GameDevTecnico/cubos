@@ -1,5 +1,6 @@
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serializer.hpp>
+#include <cubos/core/log.hpp>
 
 #include <cubos/engine/input/key_with_modifiers.hpp>
 
@@ -30,6 +31,20 @@ Key& KeyWithModifiers::key()
 Modifiers& KeyWithModifiers::modifiers()
 {
     return mModifiers;
+}
+
+bool KeyWithModifiers::pressed() const
+{
+    return mPressed;
+}
+
+void KeyWithModifiers::pressed(bool pressed)
+{
+    if (mPressed == pressed)
+        return;
+
+    mPressed = pressed;
+    CUBOS_DEBUG("Key {} was {}", modifiersToString(mModifiers) + keyToString(mKey), pressed ? "pressed" : "released");
 }
 
 template <>
