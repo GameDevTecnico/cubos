@@ -121,8 +121,6 @@ namespace cubos::core::io
         System = 8,
     };
 
-    // Operator overloads for Modifiers.
-
     inline Modifiers operator|(Modifiers lhs, Modifiers rhs)
     {
         return static_cast<Modifiers>(static_cast<int>(lhs) | static_cast<int>(rhs));
@@ -145,9 +143,23 @@ namespace cubos::core::io
         return lhs;
     }
 
+    /// Convert a Modifiers enum to a string.
+    /// @param modifiers The Modifiers enum to convert.
+    /// @return The string representation of the Modifiers enum.
     std::string modifiersToString(Modifiers modifiers);
+
+    /// Convert a string to a Modifiers enum.
+    /// @param str The string to convert.
+    /// @return The Modifiers enum represented by the string.
     Modifiers stringToModifiers(const std::string& str);
 
+    /// Convert a Key enum to a string.
+    /// @param key The Key enum to convert.
+    /// @return The string representation of the Key enum.
     std::string keyToString(Key key);
+
+    /// Convert a string to a Key enum.
+    /// @param str The string to convert.
+    /// @return The Key enum represented by the string.
     Key stringToKey(const std::string& str);
 } // namespace cubos::core::io

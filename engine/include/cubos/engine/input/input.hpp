@@ -1,4 +1,5 @@
 /// @file
+/// @brief Contains the Input class.
 #pragma once
 
 #include <cubos/core/io/keyboard.hpp>
@@ -8,6 +9,7 @@
 
 namespace cubos::engine
 {
+    /// Used to store the input bindings for multiple players and update its state accordingly as events are received.
     class Input final
     {
     public:
@@ -60,9 +62,9 @@ namespace cubos::engine
     private:
         struct BindingIndex
         {
-            std::string name;
-            int player;
-            bool negative = false;
+            std::string name;      ///< The name of the action or axis.
+            int player;            ///< The player index.
+            bool negative = false; ///< Whether the pressed key is a negative axis key.
         };
 
         void removeBoundPlayer(std::vector<BindingIndex>& boundKeys, int player);
