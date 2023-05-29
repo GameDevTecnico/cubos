@@ -80,14 +80,14 @@ bool Input::pressed(const std::string& actionName, int player) const
     auto pIt = mBindings.find(player);
     if (pIt == mBindings.end())
     {
-        CUBOS_WARN("Player {} does not exist", player);
+        CUBOS_WARN("Player {} does not have any associated input bindings", player);
         return false;
     }
 
     auto aIt = pIt->second.actions().find(actionName);
     if (aIt == pIt->second.actions().end())
     {
-        CUBOS_WARN("Action {} does not exist", actionName);
+        CUBOS_WARN("Action {} is not bound to any input for player {}", actionName, player);
         return false;
     }
 
@@ -99,14 +99,14 @@ float Input::axis(const std::string& axisName, int player) const
     auto pIt = mBindings.find(player);
     if (pIt == mBindings.end())
     {
-        CUBOS_WARN("Player {} does not exist", player);
+        CUBOS_WARN("Player {} does not have any associated input bindings", player);
         return 0.0f;
     }
 
     auto aIt = pIt->second.axes().find(axisName);
     if (aIt == pIt->second.axes().end())
     {
-        CUBOS_WARN("Axis {} does not exist", axisName);
+        CUBOS_WARN("Axis {} is not bound to any input for player {}", axisName, player);
         return 0.0f;
     }
 
