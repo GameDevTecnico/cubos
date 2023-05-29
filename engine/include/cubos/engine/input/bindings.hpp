@@ -1,6 +1,4 @@
 /// @file
-/// @brief
-
 #pragma once
 
 #include <unordered_map>

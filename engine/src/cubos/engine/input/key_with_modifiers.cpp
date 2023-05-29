@@ -1,3 +1,4 @@
+/// @file
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serializer.hpp>
 #include <cubos/core/log.hpp>

@@ -1,6 +1,4 @@
 /// @file
-/// @brief Input plugin entrypoint, registers the input bindings bridge.
-
 #include <cubos/engine/assets/bridges/json.hpp>
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/input/bindings.hpp>
