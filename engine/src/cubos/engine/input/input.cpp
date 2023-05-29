@@ -1,7 +1,11 @@
+#include <cubos/core/data/debug_serializer.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/input/input.hpp>
 
+using cubos::core::data::Debug;
+using cubos::core::io::KeyEvent;
+using cubos::core::io::ModifiersEvent;
 using namespace cubos::engine;
 
 void Input::clear()
@@ -111,6 +115,80 @@ float Input::axis(const std::string& axisName, int player) const
     }
 
     return aIt->second.value();
+}
+
+void Input::handleKeys(std::vector<KeyWithModifiers>& keys, const KeyEvent& event)
+{
+    for (auto& key : keys)
+    {
+        if (event.key == key.key() && mModifiers == key.modifiers())
+        {
+            key.pressed(event.pressed);
+        }
+        else if (!event.pressed && event.key == key.key())
+        {
+            /// Release even if the modifier is different.
+            key.pressed(false);
+        }
+    }
+}
+
+bool Input::anyPressed(std::vector<KeyWithModifiers>& keys) const
+{
+    for (auto& key : keys)
+    {
+        if (key.pressed())
+            return true;
+    }
+
+    return false;
+}
+
+void Input::handle(const KeyEvent& event)
+{
+    for (const auto& boundAction : mBoundActions[event.key])
+    {
+        auto& action = mBindings[boundAction.player].actions()[boundAction.name];
+
+        handleKeys(action.keys(), event);
+
+        bool pressed = anyPressed(action.keys());
+        if (action.pressed() != pressed)
+        {
+            action.pressed(pressed);
+            CUBOS_INFO("Action {} was {}", boundAction.name, pressed ? "pressed" : "released");
+        }
+    }
+
+    for (const auto& boundAxis : mBoundAxes[event.key])
+    {
+        auto& axis = mBindings[boundAxis.player].axes()[boundAxis.name];
+        if (boundAxis.negative)
+        {
+            handleKeys(axis.negative(), event);
+        }
+        else
+        {
+            handleKeys(axis.positive(), event);
+        }
+
+        float value = 0.0f;
+        if (anyPressed(axis.positive()))
+            value += 1.0f;
+        if (anyPressed(axis.negative()))
+            value -= 1.0f;
+
+        if (axis.value() != value)
+        {
+            axis.value(value);
+            CUBOS_INFO("Axis {} value is {}", boundAxis.name, value);
+        }
+    }
+}
+
+void Input::handle(const ModifiersEvent& event)
+{
+    mModifiers = event.modifiers;
 }
 
 const std::unordered_map<int, InputBindings>& Input::bindings() const
