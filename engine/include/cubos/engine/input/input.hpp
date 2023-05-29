@@ -66,7 +66,6 @@ namespace cubos::engine
             bool negative = false; ///< Whether the pressed key is a negative axis key.
         };
 
-        void removeBoundPlayer(std::vector<BindingIndex>& boundKeys, int player);
         void handleKeys(std::vector<KeyWithModifiers>& keys, const core::io::KeyEvent& event);
         bool anyPressed(std::vector<KeyWithModifiers>& keys) const;
 
