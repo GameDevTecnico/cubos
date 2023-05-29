@@ -59,11 +59,7 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
     {
         std::string action;
         des.read(action);
-
-        std::vector<KeyWithModifiers> keys;
-        des.read(keys);
-
-        obj.actions()[action] = InputAction(keys);
+        des.read(obj.actions()[action].keys());
     }
     des.endDictionary();
 
@@ -72,18 +68,10 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
     {
         std::string axis;
         des.read(axis);
-
         des.beginObject();
-
-        std::vector<KeyWithModifiers> pos;
-        des.read(pos);
-
-        std::vector<KeyWithModifiers> neg;
-        des.read(neg);
-
+        des.read(obj.axes()[axis].positive());
+        des.read(obj.axes()[axis].negative());
         des.endObject();
-
-        obj.axes()[axis] = InputAxis(pos, neg);
     }
     des.endDictionary();
 
