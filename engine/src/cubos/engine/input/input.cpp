@@ -30,7 +30,7 @@ void Input::clear(int player)
     {
         for (const auto& key : action.second.keys())
         {
-            removeBoundPlayer(mBoundActions[key.key()], player);
+            this->removeBoundPlayer(mBoundActions[key.key()], player);
         }
     }
 
@@ -38,12 +38,12 @@ void Input::clear(int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            removeBoundPlayer(mBoundAxes[pos.key()], player);
+            this->removeBoundPlayer(mBoundAxes[pos.key()], player);
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            removeBoundPlayer(mBoundAxes[neg.key()], player);
+            this->removeBoundPlayer(mBoundAxes[neg.key()], player);
         }
     }
 
@@ -53,7 +53,7 @@ void Input::clear(int player)
 
 void Input::bind(const InputBindings& bindings, int player)
 {
-    clear(player);
+    this->clear(player);
 
     for (const auto& action : bindings.actions())
     {
@@ -139,7 +139,9 @@ bool Input::anyPressed(std::vector<KeyWithModifiers>& keys) const
     for (auto& key : keys)
     {
         if (key.pressed())
+        {
             return true;
+        }
     }
 
     return false;
@@ -175,9 +177,13 @@ void Input::handle(const KeyEvent& event)
 
         float value = 0.0f;
         if (anyPressed(axis.positive()))
+        {
             value += 1.0f;
+        }
         if (anyPressed(axis.negative()))
+        {
             value -= 1.0f;
+        }
 
         if (axis.value() != value)
         {

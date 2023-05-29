@@ -63,10 +63,10 @@ void cubos::core::data::deserialize<KeyWithModifiers>(Deserializer& des, KeyWith
     std::size_t split = str.find_last_of('-');
     if (split == std::string::npos)
     {
-        obj = KeyWithModifiers(stringToKey(str), Modifiers::None);
+        obj = KeyWithModifiers{stringToKey(str), Modifiers::None};
     }
     else
     {
-        obj = KeyWithModifiers(stringToKey(str.substr(split + 1)), stringToModifiers(str.substr(0, split + 1)));
+        obj = KeyWithModifiers{stringToKey(str.substr(split + 1)), stringToModifiers(str.substr(0, split + 1))};
     }
 }
