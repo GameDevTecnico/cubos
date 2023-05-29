@@ -22,9 +22,7 @@ void Input::clear(int player)
     {
         for (const auto& key : action.second.keys())
         {
-            auto& boundKeys = mBoundActions[key.key()];
-            std::remove_if(boundKeys.begin(), boundKeys.end(),
-                           [player](const auto& idx) { return idx.player == player; });
+            std::erase_if(mBoundActions[key.key()], [player](const auto& idx) { return idx.player == player; });
         }
     }
 
@@ -32,16 +30,12 @@ void Input::clear(int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            auto& boundKeys = mBoundAxes[pos.key()];
-            std::remove_if(boundKeys.begin(), boundKeys.end(),
-                           [player](const auto& idx) { return idx.player == player; });
+            std::erase_if(mBoundAxes[pos.key()], [player](const auto& idx) { return idx.player == player; });
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            auto& boundKeys = mBoundAxes[neg.key()];
-            std::remove_if(boundKeys.begin(), boundKeys.end(),
-                           [player](const auto& idx) { return idx.player == player; });
+            std::erase_if(mBoundAxes[neg.key()], [player](const auto& idx) { return idx.player == player; });
         }
     }
 
