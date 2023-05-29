@@ -16,10 +16,10 @@ using cubos::core::ecs::Write;
 /// @tparam Args The component types to query for.
 /// @param query The query to use.
 template <typename... Args>
-static size_t queryCount(World& world)
+static std::size_t queryCount(World& world)
 {
     auto query = Query<Args...>(world);
-    size_t counter = 0;
+    std::size_t counter = 0;
     for (auto entity : query)
     {
         (void)entity;

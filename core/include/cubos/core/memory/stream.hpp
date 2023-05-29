@@ -31,17 +31,17 @@ namespace cubos::core::memory
         /// @param data The buffer to read data into.
         /// @param size The size of the buffer.
         /// @return The number of bytes read.
-        virtual size_t read(void* data, size_t size) = 0;
+        virtual std::size_t read(void* data, std::size_t size) = 0;
 
         /// Writes data to the stream.
         /// @param data The buffer to write data from.
         /// @param size The size of the buffer.
         /// @return The number of bytes written.
-        virtual size_t write(const void* data, size_t size) = 0;
+        virtual std::size_t write(const void* data, std::size_t size) = 0;
 
         /// Gets the current position in the stream.
         /// @return The current position in the stream, or SIZE_MAX if the position is unknown.
-        virtual size_t tell() const = 0;
+        virtual std::size_t tell() const = 0;
 
         /// Seeks to a position in the stream.
         /// @param offset The offset to seek to.
@@ -69,34 +69,34 @@ namespace cubos::core::memory
         /// @param value The value to print.
         /// @param base The base to use.
         template <typename T>
-        requires(::std::is_integral_v<T>&& ::std::is_signed_v<T>) void print(T value, size_t base = 10);
+        requires(::std::is_integral_v<T>&& ::std::is_signed_v<T>) void print(T value, std::size_t base = 10);
 
         /// Prints a signed integer to the stream.
         /// @tparam T The type of the integer.
         /// @param value The value to print.
         /// @param base The base to use.
         template <typename T>
-        requires(::std::is_integral_v<T> && !::std::is_signed_v<T>) inline void print(T value, size_t base = 10);
+        requires(::std::is_integral_v<T> && !::std::is_signed_v<T>) inline void print(T value, std::size_t base = 10);
 
         /// Prints a 64 bit signed integer to the stream.
         /// @param value The value to print.
         /// @param base The base to use.
-        void print(int64_t value, size_t base = 10);
+        void print(int64_t value, std::size_t base = 10);
 
         /// Prints a 64 bit unsigned integer to the stream.
         /// @param value The value to print.
         /// @param base The base to use.
-        void print(uint64_t value, size_t base = 10);
+        void print(uint64_t value, std::size_t base = 10);
 
         /// Prints a float to the stream.
         /// @param value The value to print.
         /// @param decimalPlaces The number of decimal places to print.
-        void print(float value, size_t decimalPlaces = 4);
+        void print(float value, std::size_t decimalPlaces = 4);
 
         /// Prints a double to the stream.
         /// @param value The value to print.
         /// @param decimalPlaces The number of decimal places to print.
-        void print(double value, size_t decimalPlaces = 4);
+        void print(double value, std::size_t decimalPlaces = 4);
 
         /// Prints a string to the stream.
         /// @param str The value to print.
@@ -105,7 +105,7 @@ namespace cubos::core::memory
         /// Prints a string to the stream.
         /// @param str The string to print.
         /// @param size The size of the string.
-        void print(const char* str, size_t size);
+        void print(const char* str, std::size_t size);
 
         /// Prints a string to the stream.
         /// @param str The value to print.
@@ -132,42 +132,42 @@ namespace cubos::core::memory
         /// Parses a 8 bit signed integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
-        void parse(int8_t& value, size_t base = 10);
+        void parse(int8_t& value, std::size_t base = 10);
 
         /// Parses a 16 bit signed integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
-        void parse(int16_t& value, size_t base = 10);
+        void parse(int16_t& value, std::size_t base = 10);
 
         /// Parses a 32 bit signed integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
-        void parse(int32_t& value, size_t base = 10);
+        void parse(int32_t& value, std::size_t base = 10);
 
         /// Parses a 64 bit signed integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
-        void parse(int64_t& value, size_t base = 10);
+        void parse(int64_t& value, std::size_t base = 10);
 
         /// Parses a 8 bit unsigned integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
-        void parse(uint8_t& value, size_t base = 10);
+        void parse(uint8_t& value, std::size_t base = 10);
 
         /// Parses a 16 bit unsigned integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
-        void parse(uint16_t& value, size_t base = 10);
+        void parse(uint16_t& value, std::size_t base = 10);
 
         /// Parses a 32 bit unsigned integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
-        void parse(uint32_t& value, size_t base = 10);
+        void parse(uint32_t& value, std::size_t base = 10);
 
         /// Parses a 64 bit unsigned integer from the stream.
         /// @param value Parsed value.
         /// @param base The base to use.
-        void parse(uint64_t& value, size_t base = 10);
+        void parse(uint64_t& value, std::size_t base = 10);
 
         /// Parses a float from the stream.
         /// @param value Parsed value.
