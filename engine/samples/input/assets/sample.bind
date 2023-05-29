@@ -1,24 +1,40 @@
 {
     "actions": {
-        "a-or-b": [
-            "a",
-            "b"
+        "next_showcase": [
+            "Return"
         ],
-        "shift-a": [
-            "S-a"
+        "x-or-z": [
+            "x",
+            "z"
         ],
-        "alt-a": [
-            "M-a"
+        "shift-space": [
+            "S-Space"
         ],
-        "ctrl-a": [
-            "C-a"
+        "alt-space": [
+            "M-Space"
         ],
-        "ctrl-shift-a": [
-            "C-S-a"
+        "ctrl-space": [
+            "C-Space"
+        ],
+        "system-space": [
+            "D-Space"
+        ],
+        "ctrl-shift-space": [
+            "C-S-Space"
+        ],
+        "ctrl": [
+            "LControl",
+            "RControl"
+        ],
+        "ctrl-shift": [
+            "C-LShift",
+            "C-RShift",
+            "S-LControl",
+            "S-RControl"
         ]
     },
     "axes": {
-        "up": {
+        "vertical": {
             "pos": [
                 "w",
                 "Up"
@@ -28,17 +44,17 @@
                 "Down"
             ]
         },
-        "left": {
+        "horizontal": {
             "pos": [
-                "a",
-                "Left"
-            ],
-            "neg": [
                 "d",
                 "Right"
+            ],
+            "neg": [
+                "a",
+                "Left"
             ]
         },
-        "shift-up": {
+        "shift-vertical": {
             "pos": [
                 "S-w",
                 "S-Up"
