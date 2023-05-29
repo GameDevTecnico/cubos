@@ -32,13 +32,13 @@ namespace cubos::engine
         /// @param actionName The name of the action
         /// @param player The player whose action state will be retrieved
         /// @return True if the action exists and is pressed, false otherwise.
-        bool pressed(const std::string& actionName, int player = 0) const;
+        bool pressed(const char* actionName, int player = 0) const;
 
         /// Gets an axis value for a specific player
         /// @param axisName The name of the axis
         /// @param player The player whose axis value will be retrieved
         /// @return The axis value if the axis exists, 0.0 otherwise.
-        float axis(const std::string& axisName, int player = 0) const;
+        float axis(const char* axisName, int player = 0) const;
 
         /// Handle a key event
         /// @param event The key event
