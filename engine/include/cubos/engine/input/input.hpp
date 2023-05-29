@@ -64,7 +64,7 @@ namespace cubos::engine
             (void)event;
         }
 
-        /// @return The bindings.
+        /// @return The bindings for each player.
         const std::unordered_map<int, InputBindings>& bindings() const;
 
     private:
