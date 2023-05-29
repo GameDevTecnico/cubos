@@ -1,5 +1,6 @@
 /// @file
 /// @brief Contains the KeyWithModifiers class.
+
 #pragma once
 
 #include <cubos/core/io/keyboard.hpp>

@@ -1,5 +1,6 @@
 /// @file
 /// @brief Contains the InputBindings class.
+
 #pragma once
 
 #include <unordered_map>

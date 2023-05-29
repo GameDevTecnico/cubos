@@ -1,5 +1,6 @@
 /// @file
 /// @brief Contains the InputAction class.
+
 #pragma once
 
 #include <vector>

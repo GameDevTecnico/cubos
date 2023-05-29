@@ -1,5 +1,6 @@
 /// @file
 /// @brief Contains the Input class.
+
 #pragma once
 
 #include <cubos/core/io/window.hpp>

@@ -1,5 +1,6 @@
 /// @file
 /// @brief Contains the InputAxis class.
+
 #pragma once
 
 #include <vector>

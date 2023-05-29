@@ -1,5 +1,6 @@
 /// @file
 /// @brief Input plugin entry point.
+
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
@@ -19,6 +20,9 @@ namespace cubos::engine
     ///
     /// Resources:
     /// - `Input`: stateful input manager, used to query the input state.
+    ///
+    /// Tags:
+    /// - `cubos.input.update`: updates the input state.
     ///
     /// Dependencies:
     /// - `assetsPlugin`
