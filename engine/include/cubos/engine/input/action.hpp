@@ -1,4 +1,5 @@
 /// @file
+/// @brief Contains the InputAction class.
 #pragma once
 
 #include <vector>
@@ -7,6 +8,8 @@
 
 namespace cubos::engine
 {
+    /// Used to represent a single input action, such as "jump" or "attack".
+    /// It can be bound to multiple keys, and will be considered "pressed" if any of them are pressed.
     class InputAction final
     {
     public:
@@ -18,13 +21,21 @@ namespace cubos::engine
 
         ~InputAction() = default;
 
+        /// Gets the keys that will trigger this action.
+        /// @return The vector of keys.
         const std::vector<KeyWithModifiers>& keys() const;
+
+        /// Gets the keys that will trigger this action.
+        /// @return The vector of keys.
         std::vector<KeyWithModifiers>& keys();
 
+        /// Gets whether this action is pressed.
+        /// @return Whether this action is pressed.
         bool pressed() const;
-        void pressed(bool pressed);
 
-        std::string toString() const;
+        /// Sets whether this action is pressed.
+        /// @param pressed The new pressed state.
+        void pressed(bool pressed);
 
     private:
         std::vector<KeyWithModifiers> mKeys;

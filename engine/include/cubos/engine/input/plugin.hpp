@@ -1,4 +1,5 @@
 /// @file
+/// @brief Input plugin entry point.
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
@@ -11,13 +12,14 @@ namespace cubos::engine
     /// @details
     ///
     /// Events:
-    /// - `InputEvent`: emitted when an input event occurs.
+    /// - `InputEvent`: emitted when an input event occurs. (TODO)
     ///
     /// Resources:
     /// - `Input`: stateful input manager, used to query the input state.
     ///
     /// Dependencies:
     /// - `assetsPlugin`
+    /// - `windowPlugin`
     ///
     /// @param cubos CUBOS. main class.
     void inputPlugin(Cubos& cubos);

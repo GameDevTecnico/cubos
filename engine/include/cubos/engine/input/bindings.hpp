@@ -1,4 +1,5 @@
 /// @file
+/// @brief Contains the InputBindings class.
 #pragma once
 
 #include <unordered_map>
@@ -8,20 +9,29 @@
 
 namespace cubos::engine
 {
-
+    /// Used to store the input bindings for a single player.
+    /// It contains a map of input actions and a map of input axes.
     class InputBindings final
     {
     public:
         InputBindings() = default;
         ~InputBindings() = default;
 
+        /// Gets the input actions map.
+        /// @return The input actions map.
         const std::unordered_map<std::string, InputAction>& actions() const;
+
+        /// Gets the input axes map.
+        /// @return The input axes map.
         const std::unordered_map<std::string, InputAxis>& axes() const;
 
+        /// Gets the input actions map.
+        /// @return The input actions map.
         std::unordered_map<std::string, InputAction>& actions();
-        std::unordered_map<std::string, InputAxis>& axes();
 
-        std::string toString() const;
+        /// Gets the input axes map.
+        /// @return The input axes map.
+        std::unordered_map<std::string, InputAxis>& axes();
 
     private:
         std::unordered_map<std::string, InputAction> mActions;
