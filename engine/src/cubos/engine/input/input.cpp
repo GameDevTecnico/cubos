@@ -19,9 +19,11 @@ void Input::clear()
 
 void Input::removeBoundPlayer(std::vector<BindingIndex>& boundKeys, int player)
 {
-    boundKeys.erase(
-        std::remove_if(boundKeys.begin(), boundKeys.end(), [player](const auto& idx) { return idx.player == player; }),
-        boundKeys.end());
+    auto remover =
+        std::remove_if(boundKeys.begin(), boundKeys.end(), [player](const auto& idx) { return idx.player == player; });
+
+    /// Erase all bound keys where the player matches.
+    boundKeys.erase(remover, boundKeys.end());
 }
 
 void Input::clear(int player)
