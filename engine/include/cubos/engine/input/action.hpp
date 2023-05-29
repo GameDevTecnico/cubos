@@ -21,15 +21,12 @@ namespace cubos::engine
 
         ~InputAction() = default;
 
-        /// Gets the keys that will trigger this action.
         /// @return The vector of keys.
         const std::vector<KeyWithModifiers>& keys() const;
 
-        /// Gets the keys that will trigger this action.
         /// @return The vector of keys.
         std::vector<KeyWithModifiers>& keys();
 
-        /// Gets whether this action is pressed.
         /// @return Whether this action is pressed.
         bool pressed() const;
 

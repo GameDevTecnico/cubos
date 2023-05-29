@@ -17,19 +17,15 @@ namespace cubos::engine
         InputBindings() = default;
         ~InputBindings() = default;
 
-        /// Gets the input actions map.
         /// @return The input actions map.
         const std::unordered_map<std::string, InputAction>& actions() const;
 
-        /// Gets the input axes map.
         /// @return The input axes map.
         const std::unordered_map<std::string, InputAxis>& axes() const;
 
-        /// Gets the input actions map.
         /// @return The input actions map.
         std::unordered_map<std::string, InputAction>& actions();
 
-        /// Gets the input axes map.
         /// @return The input axes map.
         std::unordered_map<std::string, InputAxis>& axes();
 
