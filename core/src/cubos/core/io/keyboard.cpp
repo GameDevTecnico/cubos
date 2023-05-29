@@ -56,16 +56,61 @@ void cubos::core::data::deserialize<Modifiers>(Deserializer& des, Modifiers& obj
 
 std::string io::keyToString(Key key)
 {
-    char key_char = static_cast<char>(key);
-
-    if (key_char >= 0 && key_char <= 25)
-    {
-        return std::string(1, key_char + 'a');
-    }
-
     // TODO: Add more keys.
     switch (key)
     {
+    case Key::A:
+        return "a";
+    case Key::B:
+        return "b";
+    case Key::C:
+        return "c";
+    case Key::D:
+        return "d";
+    case Key::E:
+        return "e";
+    case Key::F:
+        return "f";
+    case Key::G:
+        return "g";
+    case Key::H:
+        return "h";
+    case Key::I:
+        return "i";
+    case Key::J:
+        return "j";
+    case Key::K:
+        return "k";
+    case Key::L:
+        return "l";
+    case Key::M:
+        return "m";
+    case Key::N:
+        return "n";
+    case Key::O:
+        return "o";
+    case Key::P:
+        return "p";
+    case Key::Q:
+        return "q";
+    case Key::R:
+        return "r";
+    case Key::S:
+        return "s";
+    case Key::T:
+        return "t";
+    case Key::U:
+        return "u";
+    case Key::V:
+        return "v";
+    case Key::W:
+        return "w";
+    case Key::X:
+        return "x";
+    case Key::Y:
+        return "y";
+    case Key::Z:
+        return "z";
     case Key::Up:
         return "Up";
     case Key::Down:
@@ -87,18 +132,60 @@ void cubos::core::data::serialize<Key>(Serializer& ser, const Key& obj, const ch
 
 Key io::stringToKey(const std::string& str)
 {
-    if (str.size() == 1)
-    {
-        char key_char = str[0];
-
-        if (key_char >= 'a' && key_char <= 'z')
-        {
-            return static_cast<Key>(key_char - 'a');
-        }
-    }
-
     // TODO: Add more keys.
-    if (str == "Up")
+    if (str == "a")
+        return Key::A;
+    else if (str == "b")
+        return Key::B;
+    else if (str == "c")
+        return Key::C;
+    else if (str == "d")
+        return Key::D;
+    else if (str == "e")
+        return Key::E;
+    else if (str == "f")
+        return Key::F;
+    else if (str == "g")
+        return Key::G;
+    else if (str == "h")
+        return Key::H;
+    else if (str == "i")
+        return Key::I;
+    else if (str == "j")
+        return Key::J;
+    else if (str == "k")
+        return Key::K;
+    else if (str == "l")
+        return Key::L;
+    else if (str == "m")
+        return Key::M;
+    else if (str == "n")
+        return Key::N;
+    else if (str == "o")
+        return Key::O;
+    else if (str == "p")
+        return Key::P;
+    else if (str == "q")
+        return Key::Q;
+    else if (str == "r")
+        return Key::R;
+    else if (str == "s")
+        return Key::S;
+    else if (str == "t")
+        return Key::T;
+    else if (str == "u")
+        return Key::U;
+    else if (str == "v")
+        return Key::V;
+    else if (str == "w")
+        return Key::W;
+    else if (str == "x")
+        return Key::X;
+    else if (str == "y")
+        return Key::Y;
+    else if (str == "z")
+        return Key::Z;
+    else if (str == "Up")
         return Key::Up;
     else if (str == "Down")
         return Key::Down;
