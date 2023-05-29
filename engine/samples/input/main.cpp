@@ -30,7 +30,7 @@ static void explain(bool& explained)
     }
 }
 
-static void showcaseXZ(Read<Input> input, bool& explained)
+static void showcaseXZ(const Input& input, bool& explained)
 {
     if (!explained)
     {
@@ -39,13 +39,13 @@ static void showcaseXZ(Read<Input> input, bool& explained)
         explained = true;
     }
 
-    if (input->pressed("x-or-z"))
+    if (input.pressed("x-or-z"))
     {
         CUBOS_INFO("X or Z");
     }
 }
 
-static void showcaseModifiers(Read<Input> input, bool& explained)
+static void showcaseModifiers(const Input& input, bool& explained)
 {
     if (!explained)
     {
@@ -55,28 +55,28 @@ static void showcaseModifiers(Read<Input> input, bool& explained)
         explained = true;
     }
 
-    if (input->pressed("shift-space"))
+    if (input.pressed("shift-space"))
     {
         CUBOS_INFO("Shift");
     }
 
-    if (input->pressed("alt-space"))
+    if (input.pressed("alt-space"))
     {
         CUBOS_INFO("Alt");
     }
 
-    if (input->pressed("ctrl-space"))
+    if (input.pressed("ctrl-space"))
     {
         CUBOS_INFO("Ctrl");
     }
 
-    if (input->pressed("system-space"))
+    if (input.pressed("system-space"))
     {
         CUBOS_INFO("System");
     }
 }
 
-static void showcaseMultipleModifiers(Read<Input> input, bool& explained)
+static void showcaseMultipleModifiers(const Input& input, bool& explained)
 {
     if (!explained)
     {
@@ -85,13 +85,13 @@ static void showcaseMultipleModifiers(Read<Input> input, bool& explained)
         explained = true;
     }
 
-    if (input->pressed("ctrl-shift-space"))
+    if (input.pressed("ctrl-shift-space"))
     {
         CUBOS_INFO("Ctrl Shift");
     }
 }
 
-static void showcaseModifierKeys(Read<Input> input, bool& explained)
+static void showcaseModifierKeys(const Input& input, bool& explained)
 {
     if (!explained)
     {
@@ -100,18 +100,18 @@ static void showcaseModifierKeys(Read<Input> input, bool& explained)
         explained = true;
     }
 
-    if (input->pressed("ctrl"))
+    if (input.pressed("ctrl"))
     {
         CUBOS_INFO("Ctrl");
     }
 
-    if (input->pressed("ctrl-shift"))
+    if (input.pressed("ctrl-shift"))
     {
         CUBOS_INFO("Ctrl Shift");
     }
 }
 
-static void showcaseAxis(Read<Input> input, bool& explained)
+static void showcaseAxis(const Input& input, bool& explained)
 {
     if (!explained)
     {
@@ -121,13 +121,13 @@ static void showcaseAxis(Read<Input> input, bool& explained)
         explained = true;
     }
 
-    if (input->axis("horizontal") != 0.0f || input->axis("vertical") != 0.0f)
+    if (input.axis("horizontal") != 0.0f || input.axis("vertical") != 0.0f)
     {
-        CUBOS_INFO("horizontal: {}, vertical: {}", input->axis("horizontal"), input->axis("vertical"));
+        CUBOS_INFO("horizontal: {}, vertical: {}", input.axis("horizontal"), input.axis("vertical"));
     }
 }
 
-static void showcaseModifierAxis(Read<Input> input, bool& explained)
+static void showcaseModifierAxis(const Input& input, bool& explained)
 {
     if (!explained)
     {
@@ -137,9 +137,9 @@ static void showcaseModifierAxis(Read<Input> input, bool& explained)
         explained = true;
     }
 
-    if (input->axis("shift-vertical") != 0.0f)
+    if (input.axis("shift-vertical") != 0.0f)
     {
-        CUBOS_INFO("shift-vertical: {}", input->axis("shift-vertical"));
+        CUBOS_INFO("shift-vertical: {}", input.axis("shift-vertical"));
     }
 }
 
@@ -162,17 +162,17 @@ static void update(Read<Input> input, Write<State> state, Write<ShouldQuit> shou
     case 0:
         return explain(state->explained);
     case 1:
-        return showcaseXZ(input, state->explained);
+        return showcaseXZ(*input, state->explained);
     case 2:
-        return showcaseModifiers(input, state->explained);
+        return showcaseModifiers(*input, state->explained);
     case 3:
-        return showcaseMultipleModifiers(input, state->explained);
+        return showcaseMultipleModifiers(*input, state->explained);
     case 4:
-        return showcaseModifierKeys(input, state->explained);
+        return showcaseModifierKeys(*input, state->explained);
     case 5:
-        return showcaseAxis(input, state->explained);
+        return showcaseAxis(*input, state->explained);
     case 6:
-        return showcaseModifierAxis(input, state->explained);
+        return showcaseModifierAxis(*input, state->explained);
     default:
         shouldQuit->value = true;
     }
