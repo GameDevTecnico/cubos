@@ -9,6 +9,7 @@ add_executable(
 
     data/context.cpp
 
+    ecs/registry.cpp
     ecs/world.cpp
     ecs/query.cpp
     ecs/blueprint.cpp
