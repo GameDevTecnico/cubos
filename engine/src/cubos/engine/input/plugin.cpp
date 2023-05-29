@@ -30,8 +30,6 @@ void cubos::engine::inputPlugin(Cubos& cubos)
 
     cubos.addResource<Input>();
 
-    cubos.tag("cubos.input.update").afterTag("cubos.window.poll");
-
     cubos.startupSystem(bridge).tagged("cubos.assets.bridge");
-    cubos.system(update).tagged("cubos.input.update");
+    cubos.system(update).tagged("cubos.input.update").afterTag("cubos.window.poll");
 }
