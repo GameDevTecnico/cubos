@@ -9,6 +9,8 @@ using cubos::core::Settings;
 using cubos::core::data::Debug;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
+using cubos::core::io::Key;
+using cubos::core::io::Modifiers;
 using namespace cubos::engine;
 
 static const Asset<InputBindings> bindingsAsset = AnyAsset("bf49ba61-5103-41bc-92e0-8a442d7842c3");
@@ -143,6 +145,21 @@ static void showcaseModifierAxis(const Input& input, bool& explained)
     }
 }
 
+static void showcaseUnbound(const Input& input, bool& explained)
+{
+    if (!explained)
+    {
+        CUBOS_WARN("Direct access is supported. This showcase will print `Unbound` when Ctrl+Shift+Y is pressed. Note "
+                   "that Ctrl+Shift+Y is not bound in sample.bind. Press Enter to advance to the next showcase.");
+        explained = true;
+    }
+
+    if (input.pressed(Input::Key::Y, Modifiers::Shift | Input::Modifiers::Control))
+    {
+        CUBOS_INFO("Unbound");
+    }
+}
+
 static void update(Read<Input> input, Write<State> state, Write<ShouldQuit> shouldQuit)
 {
     // FIXME: This is an hack to have one-shot actions while we don't have input events.
@@ -173,6 +190,8 @@ static void update(Read<Input> input, Write<State> state, Write<ShouldQuit> shou
         return showcaseAxis(*input, state->explained);
     case 6:
         return showcaseModifierAxis(*input, state->explained);
+    case 7:
+        return showcaseUnbound(*input, state->explained);
     default:
         shouldQuit->value = true;
     }

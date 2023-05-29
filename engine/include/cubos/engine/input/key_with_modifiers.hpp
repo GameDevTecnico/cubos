@@ -32,18 +32,8 @@ namespace cubos::engine
         /// @return The modifiers.
         core::io::Modifiers& modifiers();
 
-        /// @return Whether the key with modifiers is pressed.
-        bool pressed() const;
-
-        /// Sets whether the key with modifiers is pressed.
-        /// @param pressed The new pressed state.
-        void pressed(bool pressed);
-
     private:
         core::io::Key mKey = core::io::Key::Invalid;
         core::io::Modifiers mModifiers = core::io::Modifiers::None;
-
-        /// Not serialized.
-        bool mPressed = false;
     };
 } // namespace cubos::engine
