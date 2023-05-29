@@ -12,11 +12,15 @@ using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 static const Asset<InputBindings> bindingsAsset = AnyAsset("bf49ba61-5103-41bc-92e0-8a442d7842c3");
-int showcase = 0;
-bool nextPressed = false;
-bool explained = false;
 
-static void explain()
+struct State
+{
+    int showcase = 0;
+    bool nextPressed = false;
+    bool explained = false;
+};
+
+static void explain(bool& explained)
 {
     if (!explained)
     {
@@ -26,7 +30,7 @@ static void explain()
     }
 }
 
-static void showcaseXZ(Read<Input> input)
+static void showcaseXZ(Read<Input> input, bool& explained)
 {
     if (!explained)
     {
@@ -41,7 +45,7 @@ static void showcaseXZ(Read<Input> input)
     }
 }
 
-static void showcaseModifiers(Read<Input> input)
+static void showcaseModifiers(Read<Input> input, bool& explained)
 {
     if (!explained)
     {
@@ -72,7 +76,7 @@ static void showcaseModifiers(Read<Input> input)
     }
 }
 
-static void showcaseMultipleModifiers(Read<Input> input)
+static void showcaseMultipleModifiers(Read<Input> input, bool& explained)
 {
     if (!explained)
     {
@@ -87,7 +91,7 @@ static void showcaseMultipleModifiers(Read<Input> input)
     }
 }
 
-static void showcaseModifierKeys(Read<Input> input)
+static void showcaseModifierKeys(Read<Input> input, bool& explained)
 {
     if (!explained)
     {
@@ -107,7 +111,7 @@ static void showcaseModifierKeys(Read<Input> input)
     }
 }
 
-static void showcaseAxis(Read<Input> input)
+static void showcaseAxis(Read<Input> input, bool& explained)
 {
     if (!explained)
     {
@@ -123,7 +127,7 @@ static void showcaseAxis(Read<Input> input)
     }
 }
 
-static void showcaseModifierAxis(Read<Input> input)
+static void showcaseModifierAxis(Read<Input> input, bool& explained)
 {
     if (!explained)
     {
@@ -139,36 +143,36 @@ static void showcaseModifierAxis(Read<Input> input)
     }
 }
 
-static void update(Read<Input> input, Write<ShouldQuit> shouldQuit)
+static void update(Read<Input> input, Write<State> state, Write<ShouldQuit> shouldQuit)
 {
     // FIXME: This is an hack to have one-shot actions while we don't have input events.
     if (input->pressed("next_showcase"))
     {
-        nextPressed = true;
+        state->nextPressed = true;
     }
-    else if (nextPressed)
+    else if (state->nextPressed)
     {
-        nextPressed = false;
-        explained = false;
-        showcase++;
+        state->nextPressed = false;
+        state->explained = false;
+        state->showcase++;
     }
 
-    switch (showcase)
+    switch (state->showcase)
     {
     case 0:
-        return explain();
+        return explain(state->explained);
     case 1:
-        return showcaseXZ(input);
+        return showcaseXZ(input, state->explained);
     case 2:
-        return showcaseModifiers(input);
+        return showcaseModifiers(input, state->explained);
     case 3:
-        return showcaseMultipleModifiers(input);
+        return showcaseMultipleModifiers(input, state->explained);
     case 4:
-        return showcaseModifierKeys(input);
+        return showcaseModifierKeys(input, state->explained);
     case 5:
-        return showcaseAxis(input);
+        return showcaseAxis(input, state->explained);
     case 6:
-        return showcaseModifierAxis(input);
+        return showcaseModifierAxis(input, state->explained);
     default:
         shouldQuit->value = true;
     }
@@ -189,10 +193,16 @@ static void init(Read<Assets> assets, Write<Input> input)
 int main()
 {
     auto cubos = Cubos();
+
     cubos.addPlugin(inputPlugin);
+
+    cubos.addResource<State>();
+
     cubos.startupSystem(config).tagged("cubos.settings");
     cubos.startupSystem(init).tagged("cubos.assets");
+
     cubos.system(update).afterTag("cubos.input.update");
+
     cubos.run();
     return 0;
 }
