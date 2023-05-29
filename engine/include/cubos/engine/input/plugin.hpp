@@ -1,3 +1,4 @@
+/// @file
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
