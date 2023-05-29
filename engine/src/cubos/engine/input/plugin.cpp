@@ -1,4 +1,3 @@
-/// @file
 #include <cubos/engine/assets/bridges/json.hpp>
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/input/bindings.hpp>

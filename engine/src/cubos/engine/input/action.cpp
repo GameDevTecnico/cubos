@@ -1,4 +1,3 @@
-/// @file
 #include "cubos/engine/input/action.hpp"
 
 using namespace cubos::engine;

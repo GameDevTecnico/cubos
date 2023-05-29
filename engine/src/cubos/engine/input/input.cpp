@@ -1,4 +1,3 @@
-/// @file
 #include <cubos/core/data/debug_serializer.hpp>
 #include <cubos/core/log.hpp>
 

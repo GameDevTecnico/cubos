@@ -1,4 +1,3 @@
-/// @file
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/input/axis.hpp>

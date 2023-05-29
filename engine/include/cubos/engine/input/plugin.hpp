@@ -11,6 +11,9 @@ namespace cubos::engine
     ///
     /// @details
     ///
+    /// Bridges:
+    /// - `JSONBridge<InputBindings>`: registered with the `.bind` extension.
+    ///
     /// Events:
     /// - `InputEvent`: emitted when an input event occurs. (TODO)
     ///

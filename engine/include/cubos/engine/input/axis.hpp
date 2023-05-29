@@ -22,23 +22,18 @@ namespace cubos::engine
 
         ~InputAxis() = default;
 
-        /// Gets the keys that will increase the value of this axis.
         /// @return The vector of positive keys.
         const std::vector<KeyWithModifiers>& positive() const;
 
-        /// Gets the keys that will decrease the value of this axis.
         /// @return The vector of negative keys.
         const std::vector<KeyWithModifiers>& negative() const;
 
-        /// Gets the keys that will increase the value of this axis.
         /// @return The vector of positive keys.
         std::vector<KeyWithModifiers>& positive();
 
-        /// Gets the keys that will decrease the value of this axis.
         /// @return The vector of negative keys.
         std::vector<KeyWithModifiers>& negative();
 
-        /// Gets the value of this axis.
         /// @return The value of this axis.
         float value() const;
 

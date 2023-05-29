@@ -55,8 +55,7 @@ namespace cubos::engine
             (void)event;
         }
 
-        /// Gets the bindings
-        /// @return The bindings
+           /// @return The bindings
         const std::unordered_map<int, InputBindings>& bindings() const;
 
     private:

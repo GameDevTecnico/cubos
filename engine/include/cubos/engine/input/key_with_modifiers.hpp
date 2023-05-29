@@ -19,23 +19,18 @@ namespace cubos::engine
 
         ~KeyWithModifiers() = default;
 
-        /// Gets the key.
         /// @return The key.
         const core::io::Key& key() const;
 
-        /// Gets the modifiers.
         /// @return The modifiers.
         const core::io::Modifiers& modifiers() const;
 
-        /// Gets the key.
         /// @return The key.
         core::io::Key& key();
 
-        /// Gets the modifiers.
         /// @return The modifiers.
         core::io::Modifiers& modifiers();
 
-        /// Gets whether the key with modifiers is pressed.
         /// @return Whether the key with modifiers is pressed.
         bool pressed() const;
 
