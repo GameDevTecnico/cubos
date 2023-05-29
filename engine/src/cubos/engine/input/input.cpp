@@ -16,22 +16,15 @@ void Input::clear()
     CUBOS_DEBUG("Input bindings cleared");
 }
 
-void Input::removeBoundPlayer(std::vector<BindingIndex>& boundKeys, int player)
-{
-    auto remover =
-        std::remove_if(boundKeys.begin(), boundKeys.end(), [player](const auto& idx) { return idx.player == player; });
-
-    /// Erase all bound keys where the player matches.
-    boundKeys.erase(remover, boundKeys.end());
-}
-
 void Input::clear(int player)
 {
     for (const auto& action : mBindings[player].actions())
     {
         for (const auto& key : action.second.keys())
         {
-            this->removeBoundPlayer(mBoundActions[key.key()], player);
+            auto& boundKeys = mBoundActions[key.key()];
+            std::remove_if(boundKeys.begin(), boundKeys.end(),
+                           [player](const auto& idx) { return idx.player == player; });
         }
     }
 
@@ -39,12 +32,16 @@ void Input::clear(int player)
     {
         for (const auto& pos : axis.second.positive())
         {
-            this->removeBoundPlayer(mBoundAxes[pos.key()], player);
+            auto& boundKeys = mBoundAxes[pos.key()];
+            std::remove_if(boundKeys.begin(), boundKeys.end(),
+                           [player](const auto& idx) { return idx.player == player; });
         }
 
         for (const auto& neg : axis.second.negative())
         {
-            this->removeBoundPlayer(mBoundAxes[neg.key()], player);
+            auto& boundKeys = mBoundAxes[neg.key()];
+            std::remove_if(boundKeys.begin(), boundKeys.end(),
+                           [player](const auto& idx) { return idx.player == player; });
         }
     }
 
