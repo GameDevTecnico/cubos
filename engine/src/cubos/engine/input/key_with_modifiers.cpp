@@ -41,11 +41,7 @@ bool KeyWithModifiers::pressed() const
 
 void KeyWithModifiers::pressed(bool pressed)
 {
-    if (mPressed == pressed)
-        return;
-
     mPressed = pressed;
-    CUBOS_DEBUG("Key {} was {}", modifiersToString(mModifiers) + keyToString(mKey), pressed ? "pressed" : "released");
 }
 
 template <>
