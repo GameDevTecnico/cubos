@@ -234,4 +234,18 @@ namespace cubos::core::data
         }
         des.endDictionary();
     }
+
+    /// Overload for serializing std::pair.
+    /// @tparam T The type of the first value.
+    /// @tparam U The type of the second value.
+    /// @param des The deserializer.
+    /// @param pair The pair to deserialize.
+    template <typename T, typename U>
+    inline void deserialize(Deserializer& des, std::pair<T, U>& pair)
+    {
+        des.beginObject();
+        des.read(pair.first);
+        des.read(pair.second);
+        des.endObject();
+    }
 } // namespace cubos::core::data

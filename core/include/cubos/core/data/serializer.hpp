@@ -242,4 +242,19 @@ namespace cubos::core::data
         }
         ser.endDictionary();
     }
+
+    /// Overload for serializing std::pair.
+    /// @tparam T The type of the first value.
+    /// @tparam U The type of the second value.
+    /// @param ser The serializer.
+    /// @param pair The pair to serialize.
+    /// @param name The name of the pair (optional).
+    template <typename T, typename U>
+    inline void serialize(Serializer& ser, const std::pair<T, U>& pair, const char* name)
+    {
+        ser.beginObject(name);
+        ser.write(pair.first, "first");
+        ser.write(pair.second, "second");
+        ser.endObject();
+    }
 } // namespace cubos::core::data
