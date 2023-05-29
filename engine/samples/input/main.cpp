@@ -26,7 +26,7 @@ static void explain()
     }
 }
 
-static void showcase_x_or_z(Read<Input> input)
+static void showcaseXZ(Read<Input> input)
 {
     if (!explained)
     {
@@ -41,7 +41,7 @@ static void showcase_x_or_z(Read<Input> input)
     }
 }
 
-static void showcase_modifiers(Read<Input> input)
+static void showcaseModifiers(Read<Input> input)
 {
     if (!explained)
     {
@@ -72,7 +72,7 @@ static void showcase_modifiers(Read<Input> input)
     }
 }
 
-static void showcase_multiple_modifiers(Read<Input> input)
+static void showcaseMultipleModifiers(Read<Input> input)
 {
     if (!explained)
     {
@@ -87,7 +87,7 @@ static void showcase_multiple_modifiers(Read<Input> input)
     }
 }
 
-static void showcase_modifier_keys(Read<Input> input)
+static void showcaseModifierKeys(Read<Input> input)
 {
     if (!explained)
     {
@@ -107,7 +107,7 @@ static void showcase_modifier_keys(Read<Input> input)
     }
 }
 
-static void showcase_axis(Read<Input> input)
+static void showcaseAxis(Read<Input> input)
 {
     if (!explained)
     {
@@ -123,7 +123,7 @@ static void showcase_axis(Read<Input> input)
     }
 }
 
-static void showcase_modifier_axis(Read<Input> input)
+static void showcaseModifierAxis(Read<Input> input)
 {
     if (!explained)
     {
@@ -158,17 +158,17 @@ static void update(Read<Input> input, Write<ShouldQuit> shouldQuit)
     case 0:
         return explain();
     case 1:
-        return showcase_x_or_z(input);
+        return showcaseXZ(input);
     case 2:
-        return showcase_modifiers(input);
+        return showcaseModifiers(input);
     case 3:
-        return showcase_multiple_modifiers(input);
+        return showcaseMultipleModifiers(input);
     case 4:
-        return showcase_modifier_keys(input);
+        return showcaseModifierKeys(input);
     case 5:
-        return showcase_axis(input);
+        return showcaseAxis(input);
     case 6:
-        return showcase_modifier_axis(input);
+        return showcaseModifierAxis(input);
     default:
         shouldQuit->value = true;
     }
