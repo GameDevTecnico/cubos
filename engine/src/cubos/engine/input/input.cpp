@@ -93,8 +93,7 @@ bool Input::pressed(const char* actionName, int player) const
 
 bool Input::pressed(Input::Key key, Modifiers modifiers) const
 {
-    auto it = mPressedKeys.find(key);
-    if (it != mPressedKeys.end())
+    if (auto it = mPressedKeys.find(key); it != mPressedKeys.end())
     {
         return it->second && modifiers == mModifiers;
     }
