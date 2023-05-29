@@ -137,8 +137,8 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
 {
     des.beginObject();
 
-    size_t actions_sz = des.beginDictionary();
-    for (size_t i = 0; i < actions_sz; ++i)
+    std::size_t actions_sz = des.beginDictionary();
+    for (std::size_t i = 0; i < actions_sz; ++i)
     {
         std::string action;
         des.read(action);
@@ -150,8 +150,8 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
     }
     des.endDictionary();
 
-    size_t axes_sz = des.beginDictionary();
-    for (size_t i = 0; i < axes_sz; ++i)
+    std::size_t axes_sz = des.beginDictionary();
+    for (std::size_t i = 0; i < axes_sz; ++i)
     {
         std::string axis;
         des.read(axis);
@@ -185,7 +185,7 @@ void cubos::core::data::deserialize<KeyWithModifiers>(Deserializer& des, KeyWith
     std::string str;
     des.readString(str);
 
-    size_t split = str.find_last_of('-');
+    std::size_t split = str.find_last_of('-');
     if (split == std::string::npos)
     {
         obj = KeyWithModifiers(stringToKey(str), Modifiers::None);
