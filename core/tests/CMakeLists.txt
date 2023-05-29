@@ -15,6 +15,7 @@ add_executable(
     ecs/blueprint.cpp
     ecs/commands.cpp
     ecs/system.cpp
+    ecs/dispatcher.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
