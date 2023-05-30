@@ -37,12 +37,6 @@ namespace cubos::engine
         /// @return True if the action exists and is pressed, false otherwise.
         bool pressed(const char* actionName, int player = 0) const;
 
-        /// Gets a key state.
-        /// @param Key The key.
-        /// @param modifiers The modifiers (optional).
-        /// @return True if the key is pressed, false otherwise.
-        bool pressed(Key key, Modifiers modifiers = Modifiers::None) const;
-
         /// Gets an axis value for a specific player.
         /// @param axisName The name of the axis.
         /// @param player The player whose axis value will be retrieved.
@@ -50,17 +44,16 @@ namespace cubos::engine
         float axis(const char* axisName, int player = 0) const;
 
         /// Handle a key event.
+        /// @param window The window that received the event.
         /// @param event The key event.
-        void handle(const core::io::KeyEvent& event);
-
-        /// Handle a modifiers event.
-        /// @param event The modifiers event.
-        void handle(const core::io::ModifiersEvent& event);
+        void handle(const core::io::Window& window, const core::io::KeyEvent& event);
 
         /// Discard remaining events.
+        /// @param window The window that received the event.
         /// @param event The event to discard.
-        inline void handle(const core::io::WindowEvent& event)
+        inline void handle(const core::io::Window& window, const core::io::WindowEvent& event)
         {
+            (void)window;
             (void)event;
         }
 
@@ -75,12 +68,9 @@ namespace cubos::engine
             bool negative = false; ///< Whether the pressed key is a negative axis key.
         };
 
-        bool anyPressed(const std::vector<std::pair<Key, Modifiers>>& keys) const;
+        bool anyPressed(const core::io::Window& window, const std::vector<std::pair<Key, Modifiers>>& keys) const;
 
         std::unordered_map<int, InputBindings> mBindings;
-
-        Modifiers mModifiers = Modifiers::None;
-        std::unordered_map<Key, bool> mPressedKeys;
 
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundActions;
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundAxes;

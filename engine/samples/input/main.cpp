@@ -11,6 +11,7 @@ using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;
+using cubos::core::io::Window;
 using namespace cubos::engine;
 
 static const Asset<InputBindings> bindingsAsset = AnyAsset("bf49ba61-5103-41bc-92e0-8a442d7842c3");
@@ -145,7 +146,7 @@ static void showcaseModifierAxis(const Input& input, bool& explained)
     }
 }
 
-static void showcaseUnbound(const Input& input, bool& explained)
+static void showcaseUnbound(const Window& window, bool& explained)
 {
     if (!explained)
     {
@@ -154,13 +155,14 @@ static void showcaseUnbound(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.pressed(Input::Key::Y, Modifiers::Shift | Input::Modifiers::Control))
+    /// When no action is bound to a key, its state can still be accessed directly through the Window.
+    if (window->keyPressed(Input::Key::Y, Modifiers::Shift | Input::Modifiers::Control))
     {
         CUBOS_INFO("Unbound");
     }
 }
 
-static void update(Read<Input> input, Write<State> state, Write<ShouldQuit> shouldQuit)
+static void update(Read<Input> input, Read<Window> window, Write<State> state, Write<ShouldQuit> shouldQuit)
 {
     // FIXME: This is an hack to have one-shot actions while we don't have input events.
     if (input->pressed("next_showcase"))
@@ -191,7 +193,7 @@ static void update(Read<Input> input, Write<State> state, Write<ShouldQuit> shou
     case 6:
         return showcaseModifierAxis(*input, state->explained);
     case 7:
-        return showcaseUnbound(*input, state->explained);
+        return showcaseUnbound(*window, state->explained);
     default:
         shouldQuit->value = true;
     }

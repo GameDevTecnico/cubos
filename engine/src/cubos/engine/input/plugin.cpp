@@ -6,7 +6,9 @@
 #include <cubos/engine/window/plugin.hpp>
 
 using cubos::core::ecs::EventReader;
+using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
+using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 using namespace cubos::engine;
 
@@ -15,11 +17,11 @@ static void bridge(Write<Assets> assets)
     assets->registerBridge(".bind", std::make_unique<JSONBridge<InputBindings>>());
 }
 
-static void update(Write<Input> input, EventReader<WindowEvent> events)
+static void update(Read<Window> window, Write<Input> input, EventReader<WindowEvent> events)
 {
     for (auto event : events)
     {
-        std::visit([&input](auto e) { input->handle(e); }, event);
+        std::visit([window, &input](auto e) { input->handle(*window, e); }, event);
     }
 }
 
