@@ -37,9 +37,9 @@ namespace cubos::core::io
         void cursor(std::shared_ptr<Cursor> cursor) override;
         void clipboard(const std::string& text) override;
         const char* clipboard() const override;
+        Modifiers modifiers() const override;
         bool pressed(Key key, Modifiers modifiers = Modifiers::None) const override;
 
-        Modifiers modifiers() const;
         void modifiers(Modifiers modifiers);
 
     private:

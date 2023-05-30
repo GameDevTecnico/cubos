@@ -165,6 +165,9 @@ namespace cubos::core::io
         /// @return Text from the clipboard. Guaranteed to be valid until the next call.
         virtual const char* clipboard() const = 0;
 
+        /// @return The active keyboard modifiers.
+        virtual Modifiers modifiers() const = 0;
+
         /// @param key Key to check.
         /// @param modifiers Modifiers to check.
         /// @return Whether the key and modifiers are currently pressed.
