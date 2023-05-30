@@ -126,27 +126,27 @@ namespace cubos::core::io
         /// Swaps the window buffers.
         virtual void swapBuffers() = 0;
 
-        /// Returns the window render device.
-        virtual gl::RenderDevice& getRenderDevice() const = 0;
+        /// @return The render device associated with this window.
+        virtual gl::RenderDevice& renderDevice() const = 0;
 
-        /// Returns the window size, in screen coordinates.
-        /// May differ from the framebuffer size in some displays.
-        virtual glm::ivec2 getSize() const = 0;
+        /// @return The window size, in screen coordinates. May differ from the framebuffer size.
+        virtual glm::ivec2 size() const = 0;
 
-        /// Returns the window framebuffer size in pixels.
-        virtual glm::ivec2 getFramebufferSize() const = 0;
+        /// @return The window framebuffer size, in pixels.
+        virtual glm::ivec2 framebufferSize() const = 0;
 
-        /// Should the window close?
+        /// @return Whether the window should close.
         virtual bool shouldClose() const = 0;
 
-        /// Current time since the window was created.
-        virtual double getTime() const = 0;
+        /// @return The time since the window was created, in seconds.
+        virtual double time() const = 0;
 
         /// Set the mouse state when the window is focused.
-        virtual void setMouseState(MouseState state) = 0;
+        /// @param state The new mouse state.
+        virtual void mouseState(MouseState state) = 0;
 
-        /// Gets the mouse state when the window is focused.
-        virtual MouseState getMouseState() const = 0;
+        /// @return The mouse state when the window is focused.
+        virtual MouseState mouseState() const = 0;
 
         /// Creates a new cursor with a standard shape.
         /// In the future custom cursors should also be supported.
@@ -155,23 +155,20 @@ namespace cubos::core::io
         virtual std::shared_ptr<Cursor> createCursor(Cursor::Standard standard) = 0;
 
         /// Sets the current cursor. If the cursor is nullptr, the default cursor will be used.
-        /// @param cursor Cursor to set.
-        virtual void setCursor(std::shared_ptr<Cursor> cursor) = 0;
+        /// @param cursor The new cursor.
+        virtual void cursor(std::shared_ptr<Cursor> cursor) = 0;
 
         /// Sets the content of the clipboard.
-        /// @param text Text to set.
-        virtual void setClipboard(const std::string& text) = 0;
+        /// @param text The new clipboard text.
+        virtual void clipboard(const std::string& text) = 0;
 
-        /// Gets the content of the clipboard. This string is guaranteed to be valid until the next call to
-        /// getClipboard().
-        /// @return Text from the clipboard.
-        virtual const char* getClipboard() const = 0;
+        /// @return Text from the clipboard. Guaranteed to be valid until the next call.
+        virtual const char* clipboard() const = 0;
 
-        /// Checks if a key is currently pressed.
         /// @param key Key to check.
         /// @param modifiers Modifiers to check.
         /// @return Whether the key and modifiers are currently pressed.
-        virtual bool keyPressed(Key key, Modifiers modifiers = Modifiers::None) const = 0;
+        virtual bool pressed(Key key, Modifiers modifiers = Modifiers::None) const = 0;
 
     protected:
         /// Asks the implementation to fill the event queue with new events.

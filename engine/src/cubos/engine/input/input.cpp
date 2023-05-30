@@ -114,7 +114,7 @@ bool Input::anyPressed(const Window& window, const std::vector<std::pair<Key, Mo
 {
     for (auto& key : keys)
     {
-        if (window->keyPressed(key.first, key.second))
+        if (window->pressed(key.first, key.second))
         {
             return true;
         }

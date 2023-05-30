@@ -24,8 +24,8 @@ using namespace cubos::engine;
 
 static void init(Write<Renderer> renderer, Read<Window> window, Read<Settings> settings)
 {
-    auto& renderDevice = (*window)->getRenderDevice();
-    *renderer = std::make_shared<DeferredRenderer>(renderDevice, (*window)->getFramebufferSize(), *settings);
+    auto& renderDevice = (*window)->renderDevice();
+    *renderer = std::make_shared<DeferredRenderer>(renderDevice, (*window)->framebufferSize(), *settings);
 }
 
 static void resize(Write<Renderer> renderer, EventReader<WindowEvent> evs)

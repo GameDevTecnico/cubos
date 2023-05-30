@@ -156,7 +156,7 @@ static void showcaseUnbound(const Window& window, bool& explained)
     }
 
     /// When no action is bound to a key, its state can still be accessed directly through the Window.
-    if (window->keyPressed(Input::Key::Y, Modifiers::Shift | Input::Modifiers::Control))
+    if (window->pressed(Input::Key::Y, Modifiers::Shift | Input::Modifiers::Control))
     {
         CUBOS_INFO("Unbound");
     }

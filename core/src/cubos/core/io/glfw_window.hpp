@@ -26,18 +26,18 @@ namespace cubos::core::io
 
         void pollEvents() override;
         void swapBuffers() override;
-        gl::RenderDevice& getRenderDevice() const override;
-        glm::ivec2 getSize() const override;
-        glm::ivec2 getFramebufferSize() const override;
+        gl::RenderDevice& renderDevice() const override;
+        glm::ivec2 size() const override;
+        glm::ivec2 framebufferSize() const override;
         bool shouldClose() const override;
-        double getTime() const override;
-        void setMouseState(MouseState state) override;
-        MouseState getMouseState() const override;
+        double time() const override;
+        void mouseState(MouseState state) override;
+        MouseState mouseState() const override;
         std::shared_ptr<Cursor> createCursor(Cursor::Standard standard) override;
-        void setCursor(std::shared_ptr<Cursor> cursor) override;
-        void setClipboard(const std::string& text) override;
-        const char* getClipboard() const override;
-        bool keyPressed(Key key, Modifiers modifiers = Modifiers::None) const override;
+        void cursor(std::shared_ptr<Cursor> cursor) override;
+        void clipboard(const std::string& text) override;
+        const char* clipboard() const override;
+        bool pressed(Key key, Modifiers modifiers = Modifiers::None) const override;
 
         Modifiers modifiers() const;
         void modifiers(Modifiers modifiers);

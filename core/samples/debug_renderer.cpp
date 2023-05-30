@@ -11,14 +11,14 @@ int main()
 {
     initializeLogger();
     auto window = io::openWindow();
-    auto& renderDevice = window->getRenderDevice();
+    auto& renderDevice = window->renderDevice();
     gl::Debug::init(renderDevice);
 
     double prevT = -1;
 
     while (!window->shouldClose())
     {
-        double t = window->getTime();
+        double t = window->time();
         if (prevT < 0)
         {
             prevT = t;
@@ -26,7 +26,7 @@ int main()
         double deltaT = t - prevT;
         prevT = t;
 
-        auto sz = window->getFramebufferSize();
+        auto sz = window->framebufferSize();
         renderDevice.clearColor(0.0, 0.0, 0.0, 0.0F);
         renderDevice.setViewport(0, 0, sz.x, sz.y);
 

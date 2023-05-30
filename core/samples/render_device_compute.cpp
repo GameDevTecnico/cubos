@@ -11,7 +11,7 @@ int main()
 {
     initializeLogger();
     auto window = io::openWindow();
-    auto& renderDevice = window->getRenderDevice();
+    auto& renderDevice = window->renderDevice();
 
     if (renderDevice.getProperty(gl::Property::ComputeSupported) == 0)
     {
@@ -82,7 +82,7 @@ int main()
 
         auto ib = renderDevice.createIndexBuffer(sizeof(indices), indices, gl::IndexFormat::UInt, gl::Usage::Static);
 
-        auto size = window->getFramebufferSize();
+        auto size = window->framebufferSize();
         gl::Texture2DDesc textureDesc;
         textureDesc.format = gl::TextureFormat::RGBA32Float;
         textureDesc.width = static_cast<std::size_t>(size.x);
