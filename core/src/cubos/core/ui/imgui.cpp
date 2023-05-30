@@ -161,20 +161,20 @@ static int keyToImGuiKey(io::Key key)
 static void setClipboardText(void* userData, const char* text)
 {
     auto* bd = static_cast<ImGuiData*>(userData);
-    bd->window->setClipboard(text);
+    bd->window->clipboard(text);
 }
 
 static const char* getClipboardText(void* userData)
 {
     auto* bd = static_cast<ImGuiData*>(userData);
-    return bd->window->getClipboard();
+    return bd->window->clipboard();
 }
 
 static void createDeviceObjects()
 {
     auto& io = ImGui::GetIO();
     auto* bd = (ImGuiData*)io.BackendPlatformUserData;
-    auto& rd = bd->window->getRenderDevice();
+    auto& rd = bd->window->renderDevice();
 
     // Setup render states.
 
@@ -317,7 +317,7 @@ void ui::initialize(io::Window window)
     io.GetClipboardTextFn = getClipboardText;
     io.ClipboardUserData = (void*)&window;
 
-    bd->time = window->getTime();
+    bd->time = window->time();
 
     createDeviceObjects();
 
@@ -357,30 +357,30 @@ void ui::beginFrame()
 {
     ImGuiIO& io = ImGui::GetIO();
     auto* bd = (ImGuiData*)io.BackendPlatformUserData;
-    io.DisplaySize.x = static_cast<float>(bd->window->getFramebufferSize().x);
-    io.DisplaySize.y = static_cast<float>(bd->window->getFramebufferSize().y);
+    io.DisplaySize.x = static_cast<float>(bd->window->framebufferSize().x);
+    io.DisplaySize.y = static_cast<float>(bd->window->framebufferSize().y);
     // TODO: handle framebuffer scale
 
     // Setup time step.
-    double time = bd->window->getTime();
+    double time = bd->window->time();
     io.DeltaTime = static_cast<float>(time - bd->time);
     bd->time = time;
 
     // Update cursor.
     if (((io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange) == 0) &&
-        bd->window->getMouseState() != io::MouseState::Locked)
+        bd->window->mouseState() != io::MouseState::Locked)
     {
         ImGuiMouseCursor imguiCursor = ImGui::GetMouseCursor();
         if (imguiCursor == ImGuiMouseCursor_None || io.MouseDrawCursor)
         {
             // Hide OS mouse cursor.
-            bd->window->setMouseState(io::MouseState::Hidden);
+            bd->window->mouseState(io::MouseState::Hidden);
         }
         else
         {
             // Show OS mouse cursor.
-            bd->window->setCursor(bd->cursors[static_cast<std::size_t>(imguiCursor)]);
-            bd->window->setMouseState(io::MouseState::Default);
+            bd->window->cursor(bd->cursors[static_cast<std::size_t>(imguiCursor)]);
+            bd->window->mouseState(io::MouseState::Default);
         }
     }
 
@@ -389,7 +389,7 @@ void ui::beginFrame()
 
 static void setupRenderState(ImGuiData* bd, gl::Framebuffer target)
 {
-    auto& rd = bd->window->getRenderDevice();
+    auto& rd = bd->window->renderDevice();
     rd.setRasterState(bd->rasterState);
     rd.setBlendState(bd->blendState);
     rd.setDepthStencilState(bd->depthStencilState);
@@ -400,7 +400,7 @@ static void setupRenderState(ImGuiData* bd, gl::Framebuffer target)
 void ui::endFrame(const gl::Framebuffer& target)
 {
     auto* bd = (ImGuiData*)ImGui::GetIO().BackendPlatformUserData;
-    auto& rd = bd->window->getRenderDevice();
+    auto& rd = bd->window->renderDevice();
     ImGui::Render();
     auto* drawData = ImGui::GetDrawData();
 

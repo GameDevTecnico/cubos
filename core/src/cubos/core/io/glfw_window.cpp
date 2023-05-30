@@ -110,7 +110,7 @@ void GLFWWindow::swapBuffers()
 #endif
 }
 
-gl::RenderDevice& GLFWWindow::getRenderDevice() const
+gl::RenderDevice& GLFWWindow::renderDevice() const
 {
 #ifdef WITH_GLFW
     return *mRenderDevice;
@@ -119,7 +119,7 @@ gl::RenderDevice& GLFWWindow::getRenderDevice() const
 #endif
 }
 
-glm::ivec2 GLFWWindow::getSize() const
+glm::ivec2 GLFWWindow::size() const
 {
 #ifdef WITH_GLFW
     int width;
@@ -131,7 +131,7 @@ glm::ivec2 GLFWWindow::getSize() const
 #endif
 }
 
-glm::ivec2 GLFWWindow::getFramebufferSize() const
+glm::ivec2 GLFWWindow::framebufferSize() const
 {
 #ifdef WITH_GLFW
     int width;
@@ -152,7 +152,7 @@ bool GLFWWindow::shouldClose() const
 #endif
 }
 
-double GLFWWindow::getTime() const
+double GLFWWindow::time() const
 {
 #ifdef WITH_GLFW
     return glfwGetTime();
@@ -161,7 +161,7 @@ double GLFWWindow::getTime() const
 #endif
 }
 
-void GLFWWindow::setMouseState(MouseState state)
+void GLFWWindow::mouseState(MouseState state)
 {
 #ifdef WITH_GLFW
     int cursorState;
@@ -186,7 +186,7 @@ void GLFWWindow::setMouseState(MouseState state)
 #endif
 }
 
-MouseState GLFWWindow::getMouseState() const
+MouseState GLFWWindow::mouseState() const
 {
 #ifdef WITH_GLFW
     switch (glfwGetInputMode(mHandle, GLFW_CURSOR))
@@ -240,7 +240,7 @@ std::shared_ptr<Cursor> GLFWWindow::createCursor(Cursor::Standard standard)
 #endif
 }
 
-void GLFWWindow::setCursor(std::shared_ptr<Cursor> cursor)
+void GLFWWindow::cursor(std::shared_ptr<Cursor> cursor)
 {
 #ifdef WITH_GLFW
     if (cursor == nullptr)
@@ -257,7 +257,7 @@ void GLFWWindow::setCursor(std::shared_ptr<Cursor> cursor)
 #endif
 }
 
-void GLFWWindow::setClipboard(const std::string& text)
+void GLFWWindow::clipboard(const std::string& text)
 {
 #ifdef WITH_GLFW
     glfwSetClipboardString(mHandle, text.c_str());
@@ -266,7 +266,7 @@ void GLFWWindow::setClipboard(const std::string& text)
 #endif
 }
 
-const char* GLFWWindow::getClipboard() const
+const char* GLFWWindow::clipboard() const
 {
 #ifdef WITH_GLFW
     return glfwGetClipboardString(mHandle);
@@ -275,7 +275,7 @@ const char* GLFWWindow::getClipboard() const
 #endif
 }
 
-bool GLFWWindow::keyPressed(Key key, Modifiers modifiers) const
+bool GLFWWindow::pressed(Key key, Modifiers modifiers) const
 {
 #ifdef WITH_GLFW
     return glfwGetKey(mHandle, cubosToGlfwKey(key)) == GLFW_PRESS && this->modifiers() == modifiers;

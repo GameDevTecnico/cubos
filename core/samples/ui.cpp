@@ -13,7 +13,7 @@ int main()
 {
     initializeLogger();
     auto window = io::openWindow();
-    auto& renderDevice = window->getRenderDevice();
+    auto& renderDevice = window->renderDevice();
     ui::initialize(window);
 
     std::vector<std::unordered_map<std::string, gl::Material>> matDictArray = {
@@ -75,7 +75,7 @@ int main()
 
         ImGui::ShowDemoWindow();
 
-        auto sz = window->getFramebufferSize();
+        auto sz = window->framebufferSize();
         renderDevice.setRasterState(nullptr);
         renderDevice.setBlendState(nullptr);
         renderDevice.setDepthStencilState(nullptr);

@@ -12,7 +12,7 @@ int main()
 {
     initializeLogger();
     auto window = io::openWindow();
-    auto& renderDevice = window->getRenderDevice();
+    auto& renderDevice = window->renderDevice();
 
     {
         auto vs = renderDevice.createShaderStage(gl::Stage::Vertex, R"(
@@ -111,7 +111,7 @@ int main()
 
         while (!window->shouldClose())
         {
-            auto sz = window->getFramebufferSize();
+            auto sz = window->framebufferSize();
             renderDevice.setViewport(0, 0, sz.x, sz.y);
 
             renderDevice.clearColor(0.894F, 0.592F, 0.141F, 0.0F);
