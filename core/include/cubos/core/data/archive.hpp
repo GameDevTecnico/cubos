@@ -1,3 +1,6 @@
+/// @file
+/// @brief Defines the Archive interface class.
+
 #pragma once
 
 #include <cubos/core/data/file.hpp>
@@ -21,6 +24,9 @@ namespace cubos::core::data
     ///
     /// This class is not meant to be thread-safe - it is the responsibility of the File class to
     /// ensure that the same file is not accessed or modified by multiple threads at the same time.
+    ///
+    /// Implementations should crash when called with invalid arguments - since they're only called
+    /// by File, its okay to assume they're correct.
     ///
     /// @see File FileSystem
     class Archive
@@ -66,7 +72,7 @@ namespace cubos::core::data
         /// @return Identifier of the first child, or 0 if the file is not a directory or is empty.
         virtual std::size_t child(std::size_t id) const = 0;
 
-        /// Opens a file in the archive. If the file does not exist, or the archive is read-only, nullptr is returned.
+        /// Opens a file in the archive.
         /// @param file Handle of the file.
         /// @param mode Mode to open the file in.
         /// @return A file stream, or nullptr if the file could not be opened.

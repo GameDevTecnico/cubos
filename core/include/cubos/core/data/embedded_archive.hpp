@@ -1,3 +1,6 @@
+/// @file
+/// @brief Defines the EmbeddedArchive class, which implements the Archive interface class.
+
 #pragma once
 
 #include <map>
@@ -7,32 +10,44 @@
 
 namespace cubos::core::data
 {
-    /// Archive implementation used to load data embedded in the executable.
+    /// @brief Archive implementation which allows reading from data embedded in the application as
+    /// if it was a regular file or directory. Meant to be used with the `cubinhos embed` tool.
+    ///
+    /// @details This archive works by provide a global map of data, where embedded data can be
+    /// registered with a given name. Then, to access that data, an instance of this archive should
+    /// be created with the same name, and then mounted anywhere on the file system.
+    ///
+    /// The embed tool works by by generating source files which define and register that data. By
+    /// linking those files into your application, your making the data available to be accessed
+    /// through an instance of this archive.
+    ///
+    /// @see Archive
     class EmbeddedArchive : public Archive
     {
     public:
-        /// Structure of the data embedded in the executable.
+        /// @brief Describes the structure of the embedded data.
         struct Data
         {
-            /// Represents a file entry in the embedded archive.
+            /// @brief Describes a file entry in the embedded data.
             struct Entry
             {
-                const char* name; ///< The name of the file entry.
+                const char* name; ///< Name of the file entry.
                 bool isDirectory; ///< Whether the entry is a directory.
 
-                std::size_t parent;  ///< The index of the parent directory.
-                std::size_t sibling; ///< The index of the next sibling.
-                std::size_t child;   ///< The index of the first child.
+                std::size_t parent;  ///< Index of the parent directory.
+                std::size_t sibling; ///< Index of the next sibling.
+                std::size_t child;   ///< Index of the first child.
 
-                const void* data; ///< The data of the file entry.
-                std::size_t size; ///< The size of the data.
+                const void* data; ///< Data of the file entry.
+                std::size_t size; ///< Size of the data.
             };
 
-            const Entry* entries;   ///< The entries of the embedded archive.
-            std::size_t entryCount; ///< The number of entries in the embedded archive.
+            const Entry* entries;   ///< Entries of the embedded archive.
+            std::size_t entryCount; ///< Number of entries in the embedded archive.
         };
 
-        /// @param name The name of the data the embedded archive represents.
+        /// @param name Name of the data the embedded archive represents. Must match a registered
+        /// data instance - aborts otherwise.
         EmbeddedArchive(const std::string& name);
         ~EmbeddedArchive() override = default;
 
@@ -53,8 +68,8 @@ namespace cubos::core::data
         std::unique_ptr<memory::Stream> open(File::Handle file, File::OpenMode mode) override;
 
     private:
-        /// Returns the registry of embedded archive data.
-        static std::map<std::string, const Data&>& getRegistry();
+        /// @returns Registry of embedded archive data.
+        static std::map<std::string, const Data&>& registry();
 
         const Data* mData; ///< The embedded archive data.
     };

@@ -1,3 +1,6 @@
+/// @file
+/// @brief Defines the STDArchive class, which implements the Archive interface class.
+
 #pragma once
 
 #include <filesystem>
@@ -7,8 +10,16 @@
 
 namespace cubos::core::data
 {
-    /// Archive implementation which represents a file/directory in the OS file system, implemented with the standard
-    /// library.
+    /// @brief Archive implementation which allows reading and writing into a file in the OS file
+    /// system, using the standard library.
+    ///
+    /// @details Can interface with both regular and directory files. If the archive is not
+    /// read-only and the target file is not found on the OS file system, then it is created.
+    ///
+    /// This implementation does not detect changes in the file system made without the
+    /// File and FileSystem classes (see #263).
+    ///
+    /// @see Archive
     class STDArchive : public Archive
     {
     public:
