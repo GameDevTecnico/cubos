@@ -3,8 +3,18 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/std_stream.hpp>
 
-using namespace cubos::core;
-using namespace cubos::core::data;
+using cubos::core::data::STDArchive;
+using cubos::core::memory::Stream;
+
+#define INIT_OR_RETURN(ret)                                                                                            \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        if (mFiles.empty())                                                                                            \
+        {                                                                                                              \
+            CUBOS_ERROR("Archive was not initialized successfully");                                                   \
+            return (ret);                                                                                              \
+        }                                                                                                              \
+    } while (false)
 
 STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly)
     : mOsPath(osPath)
@@ -15,15 +25,21 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     {
         if (readOnly)
         {
-            CUBOS_CRITICAL("File/directory '{}' does not exist", osPath.string());
-            abort();
+            CUBOS_ERROR("File/directory '{}' does not exist on the host file system", osPath.string());
+            return;
         }
         else
         {
             // Create the file/directory.
             if (isDirectory)
             {
-                std::filesystem::create_directory(osPath);
+                std::error_code err;
+                if (!std::filesystem::create_directory(osPath, err))
+                {
+                    CUBOS_ERROR("std::filesystem::create_directory() failed: {}", err.message());
+                    CUBOS_ERROR("Could not create root directory '{}' on the host file system", osPath.string());
+                    return;
+                }
             }
             else
             {
@@ -32,8 +48,9 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
                 FILE* file = fopen(path.c_str(), "w");
                 if (file == nullptr)
                 {
-                    CUBOS_CRITICAL("Could not create root file '{}'", path);
-                    abort();
+                    CUBOS_ERROR("fopen() failed: {}", strerror(errno));
+                    CUBOS_ERROR("Could not create root file '{}' on the host file system", path);
+                    return;
                 }
                 fclose(file);
             }
@@ -45,8 +62,8 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     {
         if (!isDirectory)
         {
-            CUBOS_CRITICAL("Expected file at '{}', found directory", osPath.string());
-            abort();
+            CUBOS_ERROR("Expected regular file at '{}' on the host file system, found a directory", osPath.string());
+            return;
         }
 
         // Add all children files to the archive.
@@ -58,8 +75,8 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     {
         if (isDirectory)
         {
-            CUBOS_CRITICAL("Expected directory at '{}', found file", osPath.string());
-            abort();
+            CUBOS_ERROR("Expected directory at '{}' on the host file system, found a regular file", osPath.string());
+            return;
         }
 
         mFiles[1] = {osPath, 0, 0, 0, false};
@@ -92,19 +109,19 @@ void STDArchive::generate(std::size_t parent)
 
 std::size_t STDArchive::create(std::size_t parent, std::string_view name, bool directory)
 {
-    // Make sure that the archive isn't read-only and the parent is a directory.
-    if (mReadOnly || parent == 0 || !this->directory(parent))
-    {
-        return 0;
-    }
+    INIT_OR_RETURN(0);
+    CUBOS_DEBUG_ASSERT(!mReadOnly);
+    CUBOS_DEBUG_ASSERT(this->directory(parent));
 
     // Create the file/directory in the OS file system.
     auto& parentInfo = mFiles.at(parent);
     auto osPath = parentInfo.osPath / name;
     if (directory)
     {
-        if (!std::filesystem::create_directory(osPath))
+        std::error_code err;
+        if (!std::filesystem::create_directory(osPath, err))
         {
+            CUBOS_ERROR("std::filesystem::create_directory() failed: {}", err.message());
             return 0U;
         }
     }
@@ -115,6 +132,7 @@ std::size_t STDArchive::create(std::size_t parent, std::string_view name, bool d
         FILE* file = fopen(path.c_str(), "w");
         if (file == nullptr)
         {
+            CUBOS_ERROR("fopen() failed: {}", strerror(errno));
             return 0U;
         }
         fclose(file);
@@ -129,22 +147,20 @@ std::size_t STDArchive::create(std::size_t parent, std::string_view name, bool d
 
 bool STDArchive::destroy(std::size_t id)
 {
-    // Make sure the file isn't read only, that the file exist and that it's not the root.
-    if (mReadOnly || !mFiles.contains(id) || id == 1)
-    {
-        return false;
-    }
+    INIT_OR_RETURN(false);
+    CUBOS_DEBUG_ASSERT(!mReadOnly);
+    CUBOS_DEBUG_ASSERT(mFiles.contains(id));
+    CUBOS_DEBUG_ASSERT(id != 1);
 
     // Make sure the file isn't a non-empty directory.
     const auto& info = mFiles.at(id);
-    if (info.directory && info.child != 0)
-    {
-        return false;
-    }
+    CUBOS_DEBUG_ASSERT(!info.directory || info.child == 0);
 
     // Remove the file from the real file system.
-    if (!std::filesystem::remove(info.osPath))
+    std::error_code err;
+    if (!std::filesystem::remove(info.osPath, err))
     {
+        CUBOS_ERROR("std::filesystem::remove() failed: {}", err.message());
         return false;
     }
 
@@ -174,25 +190,19 @@ bool STDArchive::destroy(std::size_t id)
 
 std::string STDArchive::name(std::size_t id) const
 {
-    auto it = mFiles.find(id);
-    if (it == mFiles.end())
-    {
-        CUBOS_CRITICAL("File does not exist");
-        abort();
-    }
+    INIT_OR_RETURN("<invalid>");
 
+    auto it = mFiles.find(id);
+    CUBOS_DEBUG_ASSERT(it != mFiles.end());
     return it->second.osPath.filename().string();
 }
 
 bool STDArchive::directory(std::size_t id) const
 {
-    auto it = mFiles.find(id);
-    if (it == mFiles.end())
-    {
-        CUBOS_CRITICAL("File does not exist");
-        abort();
-    }
+    INIT_OR_RETURN(false);
 
+    auto it = mFiles.find(id);
+    CUBOS_DEBUG_ASSERT(it != mFiles.end());
     return it->second.directory;
 }
 
@@ -203,67 +213,49 @@ bool STDArchive::readOnly() const
 
 std::size_t STDArchive::parent(std::size_t id) const
 {
-    auto it = mFiles.find(id);
-    if (it == mFiles.end())
-    {
-        CUBOS_CRITICAL("File does not exist");
-        abort();
-    }
+    INIT_OR_RETURN(0);
 
+    auto it = mFiles.find(id);
+    CUBOS_DEBUG_ASSERT(it != mFiles.end());
     return it->second.parent;
 }
 
 std::size_t STDArchive::sibling(std::size_t id) const
 {
-    auto it = mFiles.find(id);
-    if (it == mFiles.end())
-    {
-        CUBOS_CRITICAL("File does not exist");
-        abort();
-    }
+    INIT_OR_RETURN(0);
 
+    auto it = mFiles.find(id);
+    CUBOS_DEBUG_ASSERT(it != mFiles.end());
     return it->second.sibling;
 }
 
 std::size_t STDArchive::child(std::size_t id) const
 {
-    auto it = mFiles.find(id);
-    if (it == mFiles.end())
-    {
-        CUBOS_CRITICAL("File does not exist");
-        abort();
-    }
+    INIT_OR_RETURN(0);
 
+    auto it = mFiles.find(id);
+    CUBOS_DEBUG_ASSERT(it != mFiles.end());
     return it->second.child;
 }
 
-std::unique_ptr<memory::Stream> STDArchive::open(File::Handle file, File::OpenMode mode)
+std::unique_ptr<Stream> STDArchive::open(File::Handle file, File::OpenMode mode)
 {
-    // Check if the archive is read-only.
-    if (mReadOnly && mode != File::OpenMode::Read)
-    {
-        CUBOS_CRITICAL("Could not open file for writing: archive is read-only");
-        abort();
-    }
+    INIT_OR_RETURN(nullptr);
+    CUBOS_DEBUG_ASSERT(file->archive().get() == this);
+    CUBOS_DEBUG_ASSERT(!mReadOnly || mode == File::OpenMode::Read);
 
-    // Check if the file exists.
     auto it = mFiles.find(file->id());
-    if (it == mFiles.end())
-    {
-        CUBOS_CRITICAL("File does not exist");
-        abort();
-    }
+    CUBOS_DEBUG_ASSERT(it != mFiles.end());
+    CUBOS_DEBUG_ASSERT(!it->second.directory);
 
-    // Check if the file is a directory.
-    if (it->second.directory)
-    {
-        CUBOS_CRITICAL("Could not open file: is directory");
-        abort();
-    }
-
-    // Open the file.
     const char* stdMode = mode == File::OpenMode::Write ? "wb" : "rb";
     std::string path = it->second.osPath.string();
-    return std::make_unique<FileStream<memory::StdStream>>(file, mode,
-                                                           memory::StdStream(fopen(path.c_str(), stdMode), true));
+    auto fd = fopen(path.c_str(), stdMode);
+    if (fd == nullptr)
+    {
+        CUBOS_ERROR("fopen() failed: {}", strerror(errno));
+        return nullptr;
+    }
+
+    return std::make_unique<FileStream<memory::StdStream>>(file, mode, memory::StdStream(fd, true));
 }

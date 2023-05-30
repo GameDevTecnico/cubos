@@ -8,18 +8,13 @@ using namespace cubos::core::data;
 
 EmbeddedArchive::EmbeddedArchive(const std::string& name)
 {
-    auto& registry = EmbeddedArchive::getRegistry();
+    auto& registry = EmbeddedArchive::registry();
     auto it = registry.find(name);
-    if (it == registry.end())
-    {
-        CUBOS_CRITICAL("No embedded archive with name '{}' found", name);
-        abort();
-    }
-
+    CUBOS_ASSERT(it != registry.end(), "No embedded archive with name '{}' found", name);
     mData = &it->second;
 }
 
-std::map<std::string, const EmbeddedArchive::Data&>& EmbeddedArchive::getRegistry()
+std::map<std::string, const EmbeddedArchive::Data&>& EmbeddedArchive::registry()
 {
     static std::map<std::string, const EmbeddedArchive::Data&> registry;
     return registry;
@@ -27,35 +22,30 @@ std::map<std::string, const EmbeddedArchive::Data&>& EmbeddedArchive::getRegistr
 
 void EmbeddedArchive::registerData(const std::string& name, const Data& data)
 {
-    auto& registry = EmbeddedArchive::getRegistry();
-    if (registry.find(name) != registry.end())
-    {
-        CUBOS_CRITICAL("Embedded archive with name '{}' already registered", name);
-        abort();
-    }
-
+    auto& registry = EmbeddedArchive::registry();
+    CUBOS_ASSERT(registry.find(name) == registry.end(), "Embedded archive with name '{}' already registered", name);
     registry.emplace(name, data);
 }
 
 std::size_t EmbeddedArchive::create(std::size_t /*parent*/, std::string_view /*name*/, bool /*directory*/)
 {
-    // Embedded archive is read-only.
-    return 0;
+    CUBOS_UNREACHABLE("Embedded archive is read-only");
 }
 
 bool EmbeddedArchive::destroy(std::size_t /*id*/)
 {
-    // Embedded archive is read-only.
-    return false;
+    CUBOS_UNREACHABLE("Embedded archive is read-only");
 }
 
 std::string EmbeddedArchive::name(std::size_t id) const
 {
+    CUBOS_DEBUG_ASSERT(id > 0);
     return mData->entries[id - 1].name;
 }
 
 bool EmbeddedArchive::directory(std::size_t id) const
 {
+    CUBOS_DEBUG_ASSERT(id > 0);
     return mData->entries[id - 1].isDirectory;
 }
 
@@ -66,25 +56,26 @@ bool EmbeddedArchive::readOnly() const
 
 std::size_t EmbeddedArchive::parent(std::size_t id) const
 {
+    CUBOS_DEBUG_ASSERT(id > 0);
     return mData->entries[id - 1].parent;
 }
 
 std::size_t EmbeddedArchive::sibling(std::size_t id) const
 {
+    CUBOS_DEBUG_ASSERT(id > 0);
     return mData->entries[id - 1].sibling;
 }
 
 std::size_t EmbeddedArchive::child(std::size_t id) const
 {
+    CUBOS_DEBUG_ASSERT(id > 0);
     return mData->entries[id - 1].child;
 }
 
 std::unique_ptr<memory::Stream> EmbeddedArchive::open(File::Handle file, File::OpenMode mode)
 {
-    if (mode != File::OpenMode::Read)
-    {
-        return nullptr;
-    }
+    CUBOS_DEBUG_ASSERT(mode == File::OpenMode::Read);
+    CUBOS_DEBUG_ASSERT(file->archive().get() == this);
 
     const auto& entry = mData->entries[file->id() - 1];
     return std::make_unique<FileStream<memory::BufferStream>>(file, mode, memory::BufferStream(entry.data, entry.size));
