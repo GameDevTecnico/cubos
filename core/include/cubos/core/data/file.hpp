@@ -1,3 +1,6 @@
+/// @file
+/// @brief Defines the File class, which represents a node in the virtual file system.
+
 #pragma once
 
 #include <memory>
@@ -11,28 +14,33 @@ namespace cubos::core::data
     class Archive;
     class FileSystem;
 
-    /// Represents a file in the virtual file system of the engine.
-    /// The virtual file system is a tree of files where you can mount archives.
-    /// Examples of possible archive types are a simple single file archive or a zipped archive.
-    /// Files which are not in an archive must be directories.
+    /// @brief Represents a file in the virtual file system of the engine. Should always be held
+    /// through a File::Handle, which is just a smart shared pointer. All operations on files
+    /// through this class are done with relative paths, and are equivalent to the same operations
+    /// on FileSystem, with absolute paths.
     ///
-    /// Usage example:
-    ///     File::mount("/", ...);
-    ///     File::mount("/assets", ...);
-    ///     ...
-    ///     auto settingsStream = root->find("./settings.json")->open(File::OpenMode::Read);
-    ///     ...
-    ///     auto cubeStream = root->find("/assets/models/cube.obj")->open(File::OpenMode::Read);
+    /// @details Files may be directories, in which case they can have children files, but no data.
+    /// Regular files are only allowed inside archives, since they must have data associated with
+    /// them, while the directories are just a way to organize the files.
     ///
-    /// Paths must not have a trailing slash.
+    /// Archives are mounted to files, such that the file and all its children are in the archive.
+    /// Archives can be either single-file archives, in which case their mount point is the file
+    /// itself, or they can be directories, in which case their mount point is a directory.
+    ///
+    /// The FileSystem object should be used to access files from absolute paths - all operations
+    /// on files are done with relative paths, which must not have leading or trailing slashes.
+    /// For example, the following paths are valid relative paths: "foo/bar", "foo", "".
+    /// The following paths are invalid relative paths: "/foo/bar", "foo/bar/", "/".
+    ///
+    /// @see FileSystem Archive
     class File final : public std::enable_shared_from_this<File>
     {
     public:
-        /// Handle to a file. This is a smart shared pointer, so that the file won't be deleted while it is still in
-        /// use.
+        /// @brief Smart shared pointer, used to prevent files from being deleted while it is still
+        /// in use.
         using Handle = std::shared_ptr<File>;
 
-        /// The possible modes to open files in.
+        /// @brief Possible modes to open files in.
         enum class OpenMode
         {
             Read,  ///< Open the file for reading.
@@ -41,73 +49,111 @@ namespace cubos::core::data
 
         ~File();
 
-        /// Mounts an archive to a path relative to this file in the virtual file system of the engine.
-        /// The directory which contains the path must exist, but the path itself must not (unless it is the root).
-        /// Archives can be mounted to the root path ("/") or to any other path.
+        /// @brief Mounts an archive to a path relative to this file. Parent directories must
+        /// exist, but the file where the archive is mounted must not, except if it is the root
+        /// file of the virtual file system.
         ///
-        /// If the path isn't relative, or if the parent directory of the path doesn't exist, or if there's already an
-        /// archive mounted at the path, abort() is called.
-        /// @param path The path to mount the archive to.
-        /// @param archive The archive to mount.
-        void mount(std::string_view path, const std::shared_ptr<Archive>& archive);
+        /// @details This method fails on the following conditions:
+        /// - path is absolute or invalid.
+        /// - a parent directory in the path does not exist.
+        /// - a non-root file already exists at the mount point.
+        /// - the mount point is the root file, but the archive is not a directory archive.
+        /// - the mount point is the root file, but another archive is already mounted to the root.
+        ///
+        /// @param path Path relative to this file to mount the archive on.
+        /// @param archive Archive to mount.
+        /// @return Whether the archive was successfully mounted.
+        bool mount(std::string_view path, std::unique_ptr<Archive> archive);
 
-        /// Unmounts an archive from a path relative to this file in the virtual file system of the engine.
-        /// If no archive is mounted at the given path, nothing is done.
-        /// @param path The path to unmount the archive from.
-        void unmount(std::string_view path);
+        /// @brief Unmounts an archive from a path relative to this file.
+        ///
+        /// @details This method fails on the following conditions:
+        /// - path is absolute or invalid.
+        /// - any of the files in the path do not exist.
+        /// - the target path is not the mount point for an archive.
+        ///
+        /// If an archive is mounted on a subdirectory of another archive, when the parent archive
+        /// is unmounted, the child archive remains mounted, but the directories in its path no
+        /// longer refer to real files in the unmounted archive.
+        ///
+        /// @param path Path relative to this file to unmount the archive from.
+        /// @return Whether the archive was successfully unmounted.
+        bool unmount(std::string_view path);
 
-        /// Searches for a file relative to this file in the virtual file system.
-        /// @param path The path to the file (relative to this file).
-        /// @return A handle to the file, or nullptr if the file does not exist or if the path is not relative.
+        /// @brief Gets a handle to a file relative to this file. Fails if the file does not exist
+        /// or if the path is absolute or invalid.
+        /// @param path Path relative to this file to get the file from.
+        /// @return A handle to the file, or nullptr if the search failed.
         Handle find(std::string_view path);
 
-        /// Creates a new file relative to this file in the virtual file system, and any parent directories that may be
-        /// necessary. The given path must be within a mounted writable archive. If the file already exists, it is
-        /// returned. If the path is absolute, or if the directory doesn't exist, the function returns nullptr.
+        /// @brief Creates a new file on a path relative to this file. The destination location
+        /// must be writeable - that is, it must be under a mounted writeable archive. If a file at
+        /// the given path already exists, it is returned instead. Any parent directories that may
+        /// be necessary are created.
+        ///
+        /// @details This method fails on the following conditions:
+        /// - path is absolute or invalid.
+        /// - a parent directory in the path does not exist and cannot be created.
+        /// - a parent directory in the path already exists as a regular file.
+        /// - a file of a different type already exists at the destination.
+        ///
         /// @param path The relative path to the file.
-        /// @param directory Whether the file is a directory.
+        /// @param directory Whether the new file should be a directory.
         /// @return A handle to the file, or nullptr if the creation failed.
         Handle create(std::string_view path, bool directory = false);
 
-        /// Marks this file for destruction. The file will be deleted when no more references to it are held.
-        /// All children of this file will be marked for deletion as well.
-        /// @return True if the file was marked for destroyed, false if it couldn't be destroyed.
+        /// @brief Marks this file for destruction. The file will only be deleted when no more
+        /// references to it exist. The file is immediatelly removed from its parent directory and
+        /// this method is called recursively on all its children.
+        ///
+        /// @details This method fails on the following conditions:
+        /// - this is the root file of the virtual file system.
+        /// - this file is the mount point of an archive.
+        /// - this file belongs to a read-only archive.
+        ///
+        /// The reason this method does not immediately delete the file is to prevent
+        /// files from being deleted while they are open. Since files are removed from the
+        /// tree immediately, it is no longer possible to reach them, but there may be other
+        /// threads operating on them. After every thread is done with the file, it is deleted.
+        ///
+        /// @return Whether the file was successfully marked for destruction.
         bool destroy();
 
-        /// Opens this file for reading or writing.
+        /// @brief Opens this file for reading or writing. If the file is being written to, blocks
+        /// until the other threads are done with the file.
+        ///
+        /// @details This method fails on the following conditions:
+        /// - this file is a directory.
+        /// - this file belongs to a read-only archive and the mode is OpenMode::Write.
+        ///
         /// If the archive where the file is is read-only, or if the file is a directory, nullptr is returned.
         /// @param mode The mode to open the file in.
         /// @return A handle to a file stream, or nullptr if the file could not be opened.
         std::unique_ptr<memory::Stream> open(OpenMode mode);
 
-        /// Gets the name of this file.
-        std::string_view getName() const;
+        /// @return The name of this file.
+        std::string_view name() const;
 
-        /// Gets the path of this file.
-        std::string_view getPath() const;
+        /// @return The absolute path of this file.
+        std::string_view path() const;
 
-        /// Checks if this file is a directory.
-        bool isDirectory() const;
+        /// @return Whether this file is a directory.
+        bool directory() const;
 
-        /// Gets the archive this file is in.
         /// @return The archive this file is in, or nullptr if the file is not in an archive.
-        std::shared_ptr<Archive> getArchive() const;
+        const Archive* archive() const;
 
-        /// Gets the identifier of this file, used to identify the file in its archive.
-        /// @return The identifier of this file, or 0 if the file is not in an archive.
-        std::size_t getId() const;
+        /// @return The identifier of this file on its archive, or 0 if it is not in an archive.
+        std::size_t id() const;
 
-        /// Gets the parent directory of this file.
-        /// @return A handle to the parent directory, or nullptr if this file is the root file.
-        Handle getParent() const;
+        /// @return The file's parent directory, or nullptr if there isn't one.
+        Handle parent() const;
 
-        /// Gets the next sibling of this file.
-        /// @return A handle to the next sibling, or nullptr if this file is the last child of its parent.
-        Handle getSibling() const;
+        /// @return The next sibling, or nullptr if this file is the last child of its parent.
+        Handle next() const;
 
-        /// Gets the first child of this directory.
-        /// @return A handle to the first child, or nullptr if this file is not a directory or if it is empty.
-        Handle getChild() const;
+        /// @return The first child, or nullptr if this file is not a directory or if it is empty.
+        Handle child() const;
 
     private:
         friend FileSystem;
