@@ -35,19 +35,35 @@
 #define CUBOS_ERROR(...) SPDLOG_ERROR(__VA_ARGS__)
 #define CUBOS_CRITICAL(...) SPDLOG_CRITICAL(__VA_ARGS__)
 
+#define CUBOS_FAIL(...)                                                                                                \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        if constexpr (sizeof(#__VA_ARGS__) > 1)                                                                        \
+        {                                                                                                              \
+            CUBOS_CRITICAL("" __VA_ARGS__);                                                                            \
+        }                                                                                                              \
+        std::abort();                                                                                                  \
+    } while (false)
+
+#define CUBOS_UNREACHABLE(...)                                                                                         \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        CUBOS_CRITICAL("Reached unreachable code");                                                                    \
+        CUBOS_FAIL(__VA_ARGS__);                                                                                       \
+    } while (false)
+
 #define CUBOS_ASSERT(cond, ...)                                                                                        \
     do                                                                                                                 \
     {                                                                                                                  \
         if (!(cond))                                                                                                   \
         {                                                                                                              \
             CUBOS_CRITICAL("Assertion {} failed", #cond);                                                              \
-            if constexpr (sizeof(#__VA_ARGS__) > 1)                                                                    \
-            {                                                                                                          \
-                CUBOS_CRITICAL("" __VA_ARGS__);                                                                        \
-            }                                                                                                          \
-            std::abort();                                                                                              \
+            CUBOS_FAIL(__VA_ARGS__);                                                                                   \
         }                                                                                                              \
     } while (false)
+
+// FIXME: this should compiled out when some option is set to false
+#define CUBOS_DEBUG_ASSERT(cond, ...) CUBOS_ASSERT(cond)
 
 namespace cubos::core
 {
