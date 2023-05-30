@@ -27,6 +27,7 @@ namespace cubos::core::data
         /// - a non-root file already exists at the mount point.
         /// - the mount point is the root file, but the archive is not a directory archive.
         /// - the mount point is the root file, but another archive is already mounted to the root.
+        /// - the mount point is the root file, but the root is not empty.
         ///
         /// @see File::mount
         /// @param path Absolute path to mount the archive on.
@@ -76,6 +77,7 @@ namespace cubos::core::data
         ///
         /// @details This method fails on the following conditions:
         /// - path is relative or invalid.
+        /// - the file does not exist.
         /// - the file is the root file.
         /// - the file is the mount point of an archive.
         /// - the file belongs to a read-only archive.
