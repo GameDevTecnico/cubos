@@ -170,7 +170,7 @@ namespace cubos::core::io
 
         /// @param key Key to check.
         /// @param modifiers Modifiers to check.
-        /// @return Whether the key and modifiers are currently pressed.
+        /// @return Whether the key and modifiers (or a superset of) are currently pressed.
         virtual bool pressed(Key key, Modifiers modifiers = Modifiers::None) const = 0;
 
     protected:

@@ -114,7 +114,10 @@ bool Input::anyPressed(const Window& window, const std::vector<std::pair<Key, Mo
 {
     for (auto& key : keys)
     {
-        if (window->pressed(key.first, key.second))
+        // window->pressed() returns true when more modifiers than the specified are active, so we need to check that
+        // the modifiers are exactly the same as the ones specified in the binding.
+
+        if (window->pressed(key.first, key.second) && window->modifiers() == key.second)
         {
             return true;
         }
