@@ -1,5 +1,5 @@
 /// @file
-/// @brief Defines the File class, which represents a node in the virtual file system.
+/// @brief Defines the File class.
 
 #pragma once
 

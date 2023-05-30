@@ -1,3 +1,6 @@
+/// @file
+/// @brief Defines the FileSystem singleton class.
+
 #pragma once
 
 #include <cubos/core/data/file.hpp>
