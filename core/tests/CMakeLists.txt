@@ -7,6 +7,7 @@ add_executable(
     cubos-core-tests
     main.cpp
 
+    data/embedded_archive.cpp
     data/context.cpp
 
     ecs/registry.cpp
