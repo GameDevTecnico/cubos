@@ -5,7 +5,7 @@
 
 using cubos::core::data::Debug;
 using cubos::core::io::KeyEvent;
-using cubos::core::io::ModifiersEvent;
+using cubos::core::io::Window;
 using namespace cubos::engine;
 
 void Input::clear()
@@ -91,15 +91,6 @@ bool Input::pressed(const char* actionName, int player) const
     return aIt->second.pressed();
 }
 
-bool Input::pressed(Input::Key key, Modifiers modifiers) const
-{
-    if (auto it = mPressedKeys.find(key); it != mPressedKeys.end())
-    {
-        return it->second && modifiers == mModifiers;
-    }
-    return false;
-}
-
 float Input::axis(const char* axisName, int player) const
 {
     auto pIt = mBindings.find(player);
@@ -119,11 +110,11 @@ float Input::axis(const char* axisName, int player) const
     return aIt->second.value();
 }
 
-bool Input::anyPressed(const std::vector<std::pair<Key, Modifiers>>& keys) const
+bool Input::anyPressed(const Window& window, const std::vector<std::pair<Key, Modifiers>>& keys) const
 {
     for (auto& key : keys)
     {
-        if (this->pressed(key.first, key.second))
+        if (window->keyPressed(key.first, key.second))
         {
             return true;
         }
@@ -131,15 +122,13 @@ bool Input::anyPressed(const std::vector<std::pair<Key, Modifiers>>& keys) const
     return false;
 }
 
-void Input::handle(const KeyEvent& event)
+void Input::handle(const Window& window, const KeyEvent& event)
 {
-    mPressedKeys.insert_or_assign(event.key, event.pressed);
-
     for (const auto& boundAction : mBoundActions[event.key])
     {
         auto& action = mBindings[boundAction.player].actions()[boundAction.name];
 
-        if (auto pressed = anyPressed(action.keys()); action.pressed() != pressed)
+        if (auto pressed = anyPressed(window, action.keys()); action.pressed() != pressed)
         {
             action.pressed(pressed);
             CUBOS_TRACE("Action {} was {}", boundAction.name, pressed ? "pressed" : "released");
@@ -151,11 +140,11 @@ void Input::handle(const KeyEvent& event)
         auto& axis = mBindings[boundAxis.player].axes()[boundAxis.name];
 
         float value = 0.0f;
-        if (anyPressed(axis.negative()))
+        if (anyPressed(window, axis.negative()))
         {
             value -= 1.0f;
         }
-        if (anyPressed(axis.positive()))
+        if (anyPressed(window, axis.positive()))
         {
             value += 1.0f;
         }
@@ -166,11 +155,6 @@ void Input::handle(const KeyEvent& event)
             CUBOS_TRACE("Axis {} value is {}", boundAxis.name, value);
         }
     }
-}
-
-void Input::handle(const ModifiersEvent& event)
-{
-    mModifiers = event.modifiers;
 }
 
 const std::unordered_map<int, InputBindings>& Input::bindings() const
