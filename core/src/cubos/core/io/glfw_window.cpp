@@ -278,7 +278,9 @@ const char* GLFWWindow::clipboard() const
 bool GLFWWindow::pressed(Key key, Modifiers modifiers) const
 {
 #ifdef WITH_GLFW
-    return glfwGetKey(mHandle, cubosToGlfwKey(key)) == GLFW_PRESS && this->modifiers() == modifiers;
+    // Returns true even if a superset of modifiers is active.
+
+    return glfwGetKey(mHandle, cubosToGlfwKey(key)) == GLFW_PRESS && (modifiers & this->modifiers()) == modifiers;
 #else
     UNSUPPORTED();
 #endif
@@ -286,7 +288,11 @@ bool GLFWWindow::pressed(Key key, Modifiers modifiers) const
 
 Modifiers GLFWWindow::modifiers() const
 {
+#ifdef WITH_GLFW
     return mModifiers;
+#else
+    UNSUPPORTED();
+#endif
 }
 
 void GLFWWindow::modifiers(Modifiers mods)
