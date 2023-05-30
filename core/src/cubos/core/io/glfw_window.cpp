@@ -275,19 +275,10 @@ const char* GLFWWindow::getClipboard() const
 #endif
 }
 
-bool GLFWWindow::keyPressed(Key key) const
-{
-#ifdef WITH_GLFW
-    return glfwGetKey(mHandle, cubosToGlfwKey(key)) == GLFW_PRESS;
-#else
-    UNSUPPORTED();
-#endif
-}
-
 bool GLFWWindow::keyPressed(Key key, Modifiers modifiers) const
 {
 #ifdef WITH_GLFW
-    return this->keyPressed(key) && this->modifiers() == modifiers;
+    return glfwGetKey(mHandle, cubosToGlfwKey(key)) == GLFW_PRESS && this->modifiers() == modifiers;
 #else
     UNSUPPORTED();
 #endif

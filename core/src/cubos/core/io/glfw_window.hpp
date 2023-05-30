@@ -37,8 +37,7 @@ namespace cubos::core::io
         void setCursor(std::shared_ptr<Cursor> cursor) override;
         void setClipboard(const std::string& text) override;
         const char* getClipboard() const override;
-        bool keyPressed(Key key) const override;
-        bool keyPressed(Key key, Modifiers modifiers) const override;
+        bool keyPressed(Key key, Modifiers modifiers = Modifiers::None) const override;
 
         Modifiers modifiers() const;
         void modifiers(Modifiers modifiers);
