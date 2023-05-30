@@ -2,7 +2,7 @@
 
 #include <cubos/core/data/embedded_archive.hpp>
 
-#include "../utils.hpp"
+#include "utils.hpp"
 
 using cubos::core::data::EmbeddedArchive;
 using cubos::core::data::File;
@@ -28,14 +28,6 @@ static const EmbeddedArchive::Data::Entry multipleEntries[] = {
 };
 static const EmbeddedArchive::Data multipleData = {multipleEntries,
                                                    sizeof(multipleEntries) / sizeof(multipleEntries[0])};
-
-/// Dumps the contents of a stream into a string.
-static std::string dump(Stream& stream)
-{
-    std::string contents;
-    stream.readUntil(contents, nullptr);
-    return contents;
-}
 
 TEST_CASE("data::EmbeddedArchive")
 {

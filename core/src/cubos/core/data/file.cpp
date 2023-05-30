@@ -453,7 +453,7 @@ std::unique_ptr<memory::Stream> File::open(OpenMode mode)
         return nullptr;
     }
 
-    if (mArchive->readOnly() && mode == OpenMode::Write)
+    if (mArchive->readOnly() && mode != OpenMode::Read)
     {
         CUBOS_ERROR("Could not open file '{}' for writing: file is on a read-only archive", mPath);
         return nullptr;

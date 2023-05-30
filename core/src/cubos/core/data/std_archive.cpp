@@ -247,7 +247,22 @@ std::unique_ptr<Stream> STDArchive::open(std::size_t id, File::Handle file, File
     CUBOS_DEBUG_ASSERT(it != mFiles.end());
     CUBOS_DEBUG_ASSERT(!it->second.directory);
 
-    const char* stdMode = mode == File::OpenMode::Write ? "wb" : "rb";
+    const char* stdMode;
+    switch (mode)
+    {
+    case File::OpenMode::Read:
+        stdMode = "rb";
+        break;
+    case File::OpenMode::Write:
+        stdMode = "wb";
+        break;
+    case File::OpenMode::ReadWrite:
+        stdMode = "r+b";
+        break;
+    default:
+        CUBOS_UNREACHABLE();
+    }
+
     std::string path = it->second.osPath.string();
     auto fd = fopen(path.c_str(), stdMode);
     if (fd == nullptr)

@@ -54,14 +54,14 @@ namespace cubos::core::data
     template <typename T>
     inline std::size_t FileStream<T>::read(void* buffer, std::size_t size)
     {
-        CUBOS_ASSERT(mMode == File::OpenMode::Read, "Must not read from a file stream opened for writing");
+        CUBOS_ASSERT(mMode != File::OpenMode::Write, "Must not read from a file stream opened for writing");
         return mStream.read(buffer, size);
     }
 
     template <typename T>
     inline std::size_t FileStream<T>::write(const void* buffer, std::size_t size)
     {
-        CUBOS_ASSERT(mMode == File::OpenMode::Write, "Must not write to a file stream opened for reading");
+        CUBOS_ASSERT(mMode != File::OpenMode::Read, "Must not write to a file stream opened for reading");
         return mStream.write(buffer, size);
     }
 

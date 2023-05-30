@@ -43,8 +43,9 @@ namespace cubos::core::data
         /// @brief Possible modes to open files in.
         enum class OpenMode
         {
-            Read,  ///< Open the file for reading.
-            Write, ///< Open the file for writing.
+            Read,      ///< Open the file for reading.
+            Write,     ///< Open the file for writing, overwriting any previous changes.
+            ReadWrite, ///< Open the file for reading or writing data.
         };
 
         ~File();
@@ -125,7 +126,7 @@ namespace cubos::core::data
         ///
         /// @details This method fails on the following conditions:
         /// - this file is a directory.
-        /// - this file belongs to a read-only archive and the mode is OpenMode::Write.
+        /// - this file belongs to a read-only archive and the mode is not OpenMode::Read.
         ///
         /// If the archive where the file is is read-only, or if the file is a directory, nullptr is returned.
         /// @param mode The mode to open the file in.
@@ -204,9 +205,9 @@ namespace cubos::core::data
         std::shared_ptr<Archive> mArchive = nullptr; ///< The archive this file belongs to.
         std::size_t mId = 0;                         ///< The id of this file in its archive.
 
-        Handle mParent = nullptr; ///< The parent file handle.
-        Handle mSibling = nullptr;   ///< The next sibling file handle.
-        Handle mChild = nullptr;  ///< The first child file handle.
+        Handle mParent = nullptr;  ///< The parent file handle.
+        Handle mSibling = nullptr; ///< The next sibling file handle.
+        Handle mChild = nullptr;   ///< The first child file handle.
 
         bool mDestroyed = false; ///< Whether this file has been marked for deletion.
 
