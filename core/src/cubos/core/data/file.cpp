@@ -459,7 +459,7 @@ std::unique_ptr<memory::Stream> File::open(OpenMode mode)
         return nullptr;
     }
 
-    return mArchive->open(this->shared_from_this(), mode);
+    return mArchive->open(mId, this->shared_from_this(), mode);
 }
 
 std::string_view File::name() const

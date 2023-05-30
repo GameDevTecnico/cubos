@@ -1,3 +1,6 @@
+/// @file
+/// @brief Defines the FileStream implementation of the Stream interface class.
+
 #pragma once
 
 #include <utility>
@@ -8,17 +11,20 @@
 
 namespace cubos::core::data
 {
-    /// Represents a stream of data from/to a file.
-    /// Acts as a wrapper around a specific file stream, while maintaining a reference to the file so that it
-    /// can be destroyed automatically when the stream is destroyed.
-    /// @tparam T The type of internal stream in the stream.
+    /// @brief Wrapper around a specific file stream which maintains a reference to the file,
+    /// preventing it from being destroyed while the stream is still in use. Should not be used
+    /// directly - it is meant to be created by Archive implementations and then accessed by the
+    /// user through an abstract Stream interface.
+    ///
+    /// @see File Archive memory::Stream
+    /// @tparam T Inner stream type.
     template <typename T>
     class FileStream final : public memory::Stream
     {
     public:
-        /// @param file The file which the stream is reading/writing from/to.
-        /// @param mode The mode to open the file in.
-        /// @param stream The stream to read/write from/to.
+        /// @param file File which the stream is reading/writing from/to.
+        /// @param mode Mode to open the file in.
+        /// @param stream Stream to read/write from/to.
         FileStream(File::Handle file, File::OpenMode mode, T&& stream);
         ~FileStream() override = default;
 
@@ -48,24 +54,14 @@ namespace cubos::core::data
     template <typename T>
     inline std::size_t FileStream<T>::read(void* buffer, std::size_t size)
     {
-        if (mMode != File::OpenMode::Read)
-        {
-            CUBOS_CRITICAL("Can't read from a file stream opened for writing.");
-            abort();
-        }
-
+        CUBOS_ASSERT(mMode == File::OpenMode::Read, "Must not read from a file stream opened for writing");
         return mStream.read(buffer, size);
     }
 
     template <typename T>
     inline std::size_t FileStream<T>::write(const void* buffer, std::size_t size)
     {
-        if (mMode != File::OpenMode::Write)
-        {
-            CUBOS_CRITICAL("Can't write to a file stream opened for reading.");
-            abort();
-        }
-
+        CUBOS_ASSERT(mMode == File::OpenMode::Write, "Must not write to a file stream opened for reading");
         return mStream.write(buffer, size);
     }
 
