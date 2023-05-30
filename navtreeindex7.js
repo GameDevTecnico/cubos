@@ -1,5 +1,16 @@
 var NAVTREEINDEX7 =
 {
+"stream_8hpp_source.html":[5,0,0,0,0,0,5,4],
+"structcubos_1_1core_1_1data_1_1Debug.html":[4,0,0,0,1,5],
+"structcubos_1_1core_1_1data_1_1Debug.html#a0b6f3694312803de4bea1fe97896294f":[4,0,0,0,1,5,1],
+"structcubos_1_1core_1_1data_1_1Debug.html#a8a3f45f2feed5d37248979ee2991cd35":[4,0,0,0,1,5,0],
+"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html":[4,0,0,0,1,8,0],
+"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html#a70eedc6621fae1e5ae1b82970618673a":[4,0,0,0,1,8,0,2],
+"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html#ab787e2b55d357c5749e6c659b656fb79":[4,0,0,0,1,8,0,1],
+"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html":[4,0,0,0,1,8,0,0],
+"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a0d49d74db4c035719c3867723cf7e779":[4,0,0,0,1,8,0,0,1],
+"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a15be4f36d9c953254b9d6d64bbc8590e":[4,0,0,0,1,8,0,0,6],
+"structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a4fb5a44526bad5d96941731c08ff97dd":[4,0,0,0,1,8,0,0,2],
 "structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a6fbbcd2dbd0ec4e2bc35538d2f84a2d9":[4,0,0,0,1,8,0,0,0],
 "structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#a8f8f80d37794cde9472343e4487ba3eb":[4,0,0,0,1,8,0,0,3],
 "structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html#ac0c4527a31db9b2a4c97cc4ca6bd40c3":[4,0,0,0,1,8,0,0,4],
@@ -238,16 +249,5 @@ var NAVTREEINDEX7 =
 "structcubos_1_1core_1_1gl_1_1VertexElement.html#a15be4f36d9c953254b9d6d64bbc8590e":[4,0,0,0,3,22,4],
 "structcubos_1_1core_1_1gl_1_1VertexElement.html#a8f8f80d37794cde9472343e4487ba3eb":[4,0,0,0,3,22,2],
 "structcubos_1_1core_1_1gl_1_1VertexElement.html#a900fefd49b36ef78c82fc53c05cf0a6a":[4,0,0,0,3,22,0],
-"structcubos_1_1core_1_1gl_1_1VertexElement.html#aae4b42a5bc0f8441bf3cb20ba767e99c":[4,0,0,0,3,22,5],
-"structcubos_1_1core_1_1gl_1_1VertexElement.html#ab6f4e6d3fde00ce906e46494f60dfe7a":[4,0,0,0,3,22,6],
-"structcubos_1_1core_1_1gl_1_1VertexElement.html#ac28efa16fb8062e271f8b7a373cc1734":[4,0,0,0,3,22,1],
-"structcubos_1_1core_1_1gl_1_1VertexElement.html#afe4250469344e85893111b93fddc96ca":[4,0,0,0,3,22,3],
-"structcubos_1_1core_1_1io_1_1KeyEvent.html":[4,0,0,0,4,8],
-"structcubos_1_1core_1_1io_1_1KeyEvent.html#a132ba96da5ba28448b61e42c019312a9":[4,0,0,0,4,8,1],
-"structcubos_1_1core_1_1io_1_1KeyEvent.html#a96313403719d705d2df812e3ba166772":[4,0,0,0,4,8,0],
-"structcubos_1_1core_1_1io_1_1ModifiersEvent.html":[4,0,0,0,4,9],
-"structcubos_1_1core_1_1io_1_1ModifiersEvent.html#a42b465b57abcbac7a73dcc8cd147baed":[4,0,0,0,4,9,0],
-"structcubos_1_1core_1_1io_1_1MouseButtonEvent.html":[4,0,0,0,4,10],
-"structcubos_1_1core_1_1io_1_1MouseButtonEvent.html#a132ba96da5ba28448b61e42c019312a9":[4,0,0,0,4,10,1],
-"structcubos_1_1core_1_1io_1_1MouseButtonEvent.html#a26b9a03c639a856e34c2d8bec26ce611":[4,0,0,0,4,10,0]
+"structcubos_1_1core_1_1gl_1_1VertexElement.html#aae4b42a5bc0f8441bf3cb20ba767e99c":[4,0,0,0,3,22,5]
 };

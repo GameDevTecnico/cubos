@@ -1,0 +1,9 @@
+<map id="engine/include/cubos/engine/input/bindings.hpp" name="engine/include/cubos/engine/input/bindings.hpp">
+<area shape="rect" id="node1" title="Contains the InputBindings class." alt="" coords="129,5,323,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,102,129,129"/>
+<area shape="rect" id="node3" href="$action_8hpp.html" title="Contains the InputAction class." alt="" coords="323,95,468,136"/>
+<area shape="rect" id="node7" href="$axis_8hpp.html" title="Contains the InputAxis class." alt="" coords="153,95,299,136"/>
+<area shape="rect" id="node4" title=" " alt="" coords="199,184,261,211"/>
+<area shape="rect" id="node5" href="$keyboard_8hpp_source.html" title=" " alt="" coords="291,184,491,211"/>
+<area shape="rect" id="node6" title=" " alt="" coords="362,259,421,285"/>
+</map>

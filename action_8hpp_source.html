@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.9.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CUBOS.: core/include/cubos/core/io/action.hpp Source File</title>
+    <title>CUBOS.: engine/include/cubos/engine/input/action.hpp Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -90,44 +90,45 @@ $(document).ready(function(){initNavTree('action_8hpp_source.html',''); initResi
 <div class="title">action.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/context.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/sources/source.hpp&gt;</span></div>
+<a href="action_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="namespacecubos_1_1core_1_1io.html">    8</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Action.html">   17</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1io_1_1Action.html">Action</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Action.html#ab16eeae2337110818b2a822969f0f6db">   22</a></span>&#160;        <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#ab16eeae2337110818b2a822969f0f6db">Action</a>(std::string name);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Action.html#a8a60438a5b55d0b2ceb35c8674b9d8c5">   25</a></span>&#160;        std::string <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#a8a60438a5b55d0b2ceb35c8674b9d8c5">getName</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Action.html#a6aeb82c72ec1d82140694166a0ed5c10">   29</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#a6aeb82c72ec1d82140694166a0ed5c10">addSource</a>(<a class="code" href="classcubos_1_1core_1_1io_1_1Source.html">Source</a>* source);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;cubos/core/io/keyboard.hpp&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>cubos::engine</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1InputAction.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1engine_1_1InputAction.html">InputAction</a> final</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1InputAction.html">InputAction</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="code" href="classcubos_1_1engine_1_1InputAction.html">InputAction</a>(std::vector&lt;std::pair&lt;core::io::Key, core::io::Modifiers&gt;&gt; <a class="code" href="classcubos_1_1engine_1_1InputAction.html#a920c1e5cc009be74bc6d802ba98d4861">keys</a>)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            : mKeys(<a class="code" href="classcubos_1_1engine_1_1InputAction.html#a920c1e5cc009be74bc6d802ba98d4861">keys</a>)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        }</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        ~<a class="code" href="classcubos_1_1engine_1_1InputAction.html">InputAction</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1InputAction.html#a920c1e5cc009be74bc6d802ba98d4861">   26</a></span>&#160;        <span class="keyword">const</span> std::vector&lt;std::pair&lt;core::io::Key, core::io::Modifiers&gt;&gt;&amp; <a class="code" href="classcubos_1_1engine_1_1InputAction.html#a920c1e5cc009be74bc6d802ba98d4861">keys</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1InputAction.html#a5fc69ffedcc5111ae2305f871012c0a8">   29</a></span>&#160;        std::vector&lt;std::pair&lt;core::io::Key, core::io::Modifiers&gt;&gt;&amp; <a class="code" href="classcubos_1_1engine_1_1InputAction.html#a5fc69ffedcc5111ae2305f871012c0a8">keys</a>();</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Action.html#adb8ff2c6385086ba551bdec931f4f131">   33</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#adb8ff2c6385086ba551bdec931f4f131">addBinding</a>(std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a>)&gt; binding);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1io_1_1Action.html#a3545664e5458738c11aeeb82e85d7f4f">   37</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1io_1_1Action.html#a3545664e5458738c11aeeb82e85d7f4f">processSources</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        std::string name;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        std::list&lt;Source*&gt; inputSources;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::list&lt;std::function&lt;void(<a class="code" href="classcubos_1_1core_1_1io_1_1Context.html">Context</a>)&gt;&gt; functionBindings;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">bool</span> enable;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <span class="comment">// namespace cubos::core::io</span></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html">cubos::core::io::Action</a></div><div class="ttdef"><b>Definition:</b> action.hpp:18</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_a3545664e5458738c11aeeb82e85d7f4f"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#a3545664e5458738c11aeeb82e85d7f4f">cubos::core::io::Action::processSources</a></div><div class="ttdeci">void processSources()</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_a6aeb82c72ec1d82140694166a0ed5c10"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#a6aeb82c72ec1d82140694166a0ed5c10">cubos::core::io::Action::addSource</a></div><div class="ttdeci">void addSource(Source *source)</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_a8a60438a5b55d0b2ceb35c8674b9d8c5"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#a8a60438a5b55d0b2ceb35c8674b9d8c5">cubos::core::io::Action::getName</a></div><div class="ttdeci">std::string getName() const</div><div class="ttdoc">Gets the name of the action.</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_ab16eeae2337110818b2a822969f0f6db"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#ab16eeae2337110818b2a822969f0f6db">cubos::core::io::Action::Action</a></div><div class="ttdeci">Action(std::string name)</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Action_html_adb8ff2c6385086ba551bdec931f4f131"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Action.html#adb8ff2c6385086ba551bdec931f4f131">cubos::core::io::Action::addBinding</a></div><div class="ttdeci">void addBinding(std::function&lt; void(Context)&gt; binding)</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Context.html">cubos::core::io::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:13</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1io_1_1Source_html"><div class="ttname"><a href="classcubos_1_1core_1_1io_1_1Source.html">cubos::core::io::Source</a></div><div class="ttdef"><b>Definition:</b> source.hpp:22</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1io_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1io.html">cubos::core::io</a></div><div class="ttdoc">Contains input/output related code, such as window management and the input manager.</div><div class="ttdef"><b>Definition:</b> action.hpp:9</div></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1InputAction.html#acdbc497b551d0541aaa2bf152492f6fe">   32</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1engine_1_1InputAction.html#acdbc497b551d0541aaa2bf152492f6fe">pressed</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1InputAction.html#accae854bc7c777502314b19616d9ae17">   36</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1InputAction.html#accae854bc7c777502314b19616d9ae17">pressed</a>(<span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1engine_1_1InputAction.html#acdbc497b551d0541aaa2bf152492f6fe">pressed</a>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        std::vector&lt;std::pair&lt;core::io::Key, core::io::Modifiers&gt;&gt; mKeys;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">bool</span> mPressed;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;} <span class="comment">// namespace cubos::engine</span></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1InputAction_html"><div class="ttname"><a href="classcubos_1_1engine_1_1InputAction.html">cubos::engine::InputAction</a></div><div class="ttdef"><b>Definition:</b> action.hpp:15</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1InputAction_html_a5fc69ffedcc5111ae2305f871012c0a8"><div class="ttname"><a href="classcubos_1_1engine_1_1InputAction.html#a5fc69ffedcc5111ae2305f871012c0a8">cubos::engine::InputAction::keys</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; core::io::Key, core::io::Modifiers &gt; &gt; &amp; keys()</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1InputAction_html_a920c1e5cc009be74bc6d802ba98d4861"><div class="ttname"><a href="classcubos_1_1engine_1_1InputAction.html#a920c1e5cc009be74bc6d802ba98d4861">cubos::engine::InputAction::keys</a></div><div class="ttdeci">const std::vector&lt; std::pair&lt; core::io::Key, core::io::Modifiers &gt; &gt; &amp; keys() const</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1InputAction_html_accae854bc7c777502314b19616d9ae17"><div class="ttname"><a href="classcubos_1_1engine_1_1InputAction.html#accae854bc7c777502314b19616d9ae17">cubos::engine::InputAction::pressed</a></div><div class="ttdeci">void pressed(bool pressed)</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1InputAction_html_acdbc497b551d0541aaa2bf152492f6fe"><div class="ttname"><a href="classcubos_1_1engine_1_1InputAction.html#acdbc497b551d0541aaa2bf152492f6fe">cubos::engine::InputAction::pressed</a></div><div class="ttdeci">bool pressed() const</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
@@ -135,7 +136,7 @@ $(document).ready(function(){initNavTree('action_8hpp_source.html',''); initResi
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a class="el" href="dir_24d671cfcbc5d5238a6bd565a49d198f.html">include</a></li><li class="navelem"><a class="el" href="dir_f478c07aba78138ba98c84c32278121e.html">cubos</a></li><li class="navelem"><a class="el" href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a></li><li class="navelem"><a class="el" href="dir_7376bacbd9e6243f425bd4c56d48edd9.html">io</a></li><li class="navelem"><b>action.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_996f45160da62e1a3d7f6046fad68f51.html">engine</a></li><li class="navelem"><a class="el" href="dir_bafa501d493553e442f19f5f8dd7b29c.html">include</a></li><li class="navelem"><a class="el" href="dir_5fce6390ceaaab0097cb1a9c40826974.html">cubos</a></li><li class="navelem"><a class="el" href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a></li><li class="navelem"><a class="el" href="dir_8e5f84d20b1aa89c94160461e78e26c4.html">input</a></li><li class="navelem"><a class="el" href="action_8hpp.html">action.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer"
           src="doxygen.svg" width="104" height="31" alt="doxygen" /></a> 1.9.1 </li>
   </ul>

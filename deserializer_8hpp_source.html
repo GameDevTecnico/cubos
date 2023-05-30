@@ -217,7 +217,16 @@ $(document).ready(function(){initNavTree('deserializer_8hpp_source.html',''); in
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        }</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        des.<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html#ac91da475750ef1d19448c1b7085470ba">endDictionary</a>();</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    }</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a name="l00244"></a><span class="lineno"><a class="line" href="namespacecubos_1_1core_1_1data.html#afdda2d9390811dba793d751df03c580d">  244</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core_1_1data.html#a2786b82b9c750a9c74aff52855b60558">deserialize</a>(<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a>&amp; des, std::pair&lt;T, U&gt;&amp; pair)</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        des.<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html#af28e6ddb0fd64677a2d6e89b83f66e15">beginObject</a>();</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        des.<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a8bf54fcfa723c437dd819e3a473d969c">read</a>(pair.first);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        des.<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a8bf54fcfa723c437dd819e3a473d969c">read</a>(pair.second);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        des.<a class="code" href="classcubos_1_1core_1_1data_1_1Deserializer.html#a95438b8f87d1556b089859c225005b1e">endObject</a>();</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    }</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;} <span class="comment">// namespace cubos::core::data</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Context_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Context.html">cubos::core::data::Context</a></div><div class="ttdef"><b>Definition:</b> context.hpp:12</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Deserializer_html"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html">cubos::core::data::Deserializer</a></div><div class="ttdef"><b>Definition:</b> deserializer.hpp:52</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1data_1_1Deserializer_html_a03c20ddaa381f1926a24672f545b70eb"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html#a03c20ddaa381f1926a24672f545b70eb">cubos::core::data::Deserializer::failed</a></div><div class="ttdeci">bool failed() const</div><div class="ttdoc">Checks if the deserializer has failed.</div></div>

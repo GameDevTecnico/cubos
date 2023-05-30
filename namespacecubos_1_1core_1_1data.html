@@ -165,6 +165,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a7f695d4a7b19355ac746e141f2059f75"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
 <tr class="memitem:a7f695d4a7b19355ac746e141f2059f75"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a7f695d4a7b19355ac746e141f2059f75">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;des, std::unordered_map&lt; K, V &gt; &amp;map)</td></tr>
 <tr class="separator:a7f695d4a7b19355ac746e141f2059f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdda2d9390811dba793d751df03c580d"><td class="memTemplParams" colspan="2">template&lt;typename T , typename U &gt; </td></tr>
+<tr class="memitem:afdda2d9390811dba793d751df03c580d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#afdda2d9390811dba793d751df03c580d">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;des, std::pair&lt; T, U &gt; &amp;pair)</td></tr>
+<tr class="separator:afdda2d9390811dba793d751df03c580d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab433d1a4ac859ebbdfb7c64f97348368"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#ab433d1a4ac859ebbdfb7c64f97348368">parseQB</a> (std::vector&lt; <a class="el" href="structcubos_1_1core_1_1data_1_1QBMatrix.html">QBMatrix</a> &gt; &amp;matrices, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &amp;stream)</td></tr>
 <tr class="separator:ab433d1a4ac859ebbdfb7c64f97348368"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9adc8a44a1124cfbf965caef44d4982c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -186,6 +189,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a04a633e22e5cb55ebb9364e3b3e85e71"><td class="memTemplParams" colspan="2">template&lt;typename K , typename V &gt; </td></tr>
 <tr class="memitem:a04a633e22e5cb55ebb9364e3b3e85e71"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a04a633e22e5cb55ebb9364e3b3e85e71">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;ser, const std::unordered_map&lt; K, V &gt; &amp;map, const char *name)</td></tr>
 <tr class="separator:a04a633e22e5cb55ebb9364e3b3e85e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbeb826efc5eb88997660a1fa104a3e5"><td class="memTemplParams" colspan="2">template&lt;typename T , typename U &gt; </td></tr>
+<tr class="memitem:abbeb826efc5eb88997660a1fa104a3e5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#abbeb826efc5eb88997660a1fa104a3e5">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;ser, const std::pair&lt; T, U &gt; &amp;pair, const char *name)</td></tr>
+<tr class="separator:abbeb826efc5eb88997660a1fa104a3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a827286054d3615075443c1cd3941ea7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a827286054d3615075443c1cd3941ea7f">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;serializer, const <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">gl::Grid</a> &amp;grid, const char *name)</td></tr>
 <tr class="separator:a827286054d3615075443c1cd3941ea7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9135006950d4bd8826c8babe6c027f2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a9135006950d4bd8826c8babe6c027f2f">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;deserializer, <a class="el" href="classcubos_1_1core_1_1gl_1_1Grid.html">gl::Grid</a> &amp;grid)</td></tr>
@@ -217,8 +223,58 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains the virtual file and serialization systems, and other data related utilities. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="afdda2d9390811dba793d751df03c580d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdda2d9390811dba793d751df03c580d">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[1/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::data::deserialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;&#160;</td>
+          <td class="paramname"><em>des</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::pair&lt; T, U &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pair</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Overload for serializing std::pair. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the first value. </td></tr>
+    <tr><td class="paramname">U</td><td>The type of the second value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">des</td><td>The deserializer. </td></tr>
+    <tr><td class="paramname">pair</td><td>The pair to deserialize. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7f695d4a7b19355ac746e141f2059f75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f695d4a7b19355ac746e141f2059f75">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[1/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f695d4a7b19355ac746e141f2059f75">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[2/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -268,7 +324,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="afda58c117b12b006216c201aa3134547"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afda58c117b12b006216c201aa3134547">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[2/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afda58c117b12b006216c201aa3134547">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[3/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -303,7 +359,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="af48a3ff32a66ba7598a527aa1c913835"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af48a3ff32a66ba7598a527aa1c913835">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[3/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af48a3ff32a66ba7598a527aa1c913835">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[4/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -352,7 +408,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a2786b82b9c750a9c74aff52855b60558"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2786b82b9c750a9c74aff52855b60558">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[4/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2786b82b9c750a9c74aff52855b60558">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[5/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -404,7 +460,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="ada7e8d38319f85fac98a78445d5c7b81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada7e8d38319f85fac98a78445d5c7b81">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[5/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ada7e8d38319f85fac98a78445d5c7b81">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[6/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -456,7 +512,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a9135006950d4bd8826c8babe6c027f2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9135006950d4bd8826c8babe6c027f2f">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[6/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9135006950d4bd8826c8babe6c027f2f">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[7/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -491,7 +547,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a0c5e3540e2d531a1498c885183d14e68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c5e3540e2d531a1498c885183d14e68">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[7/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c5e3540e2d531a1498c885183d14e68">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[8/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -526,7 +582,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a2dc080f6aab288573be5d4259f9717e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dc080f6aab288573be5d4259f9717e0">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[8/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc080f6aab288573be5d4259f9717e0">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[9/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -561,7 +617,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a65ac97ec94c250cc0eb77c6a4ce6ef1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65ac97ec94c250cc0eb77c6a4ce6ef1b">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[9/9]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a65ac97ec94c250cc0eb77c6a4ce6ef1b">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[10/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -632,7 +688,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="af3e457a60d8144ec7f8574f1afb4276d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3e457a60d8144ec7f8574f1afb4276d">&#9670;&nbsp;</a></span>serialize() <span class="overload">[1/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af3e457a60d8144ec7f8574f1afb4276d">&#9670;&nbsp;</a></span>serialize() <span class="overload">[1/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -681,8 +737,65 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="abbeb826efc5eb88997660a1fa104a3e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbeb826efc5eb88997660a1fa104a3e5">&#9670;&nbsp;</a></span>serialize() <span class="overload">[2/11]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::data::serialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;&#160;</td>
+          <td class="paramname"><em>ser</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::pair&lt; T, U &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pair</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Overload for serializing std::pair. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The type of the first value. </td></tr>
+    <tr><td class="paramname">U</td><td>The type of the second value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ser</td><td>The serializer. </td></tr>
+    <tr><td class="paramname">pair</td><td>The pair to serialize. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the pair (optional). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a04a633e22e5cb55ebb9364e3b3e85e71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04a633e22e5cb55ebb9364e3b3e85e71">&#9670;&nbsp;</a></span>serialize() <span class="overload">[2/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a04a633e22e5cb55ebb9364e3b3e85e71">&#9670;&nbsp;</a></span>serialize() <span class="overload">[3/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -739,7 +852,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a7f4f366f44c5a6ce9eeef04cae2f6361"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f4f366f44c5a6ce9eeef04cae2f6361">&#9670;&nbsp;</a></span>serialize() <span class="overload">[3/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f4f366f44c5a6ce9eeef04cae2f6361">&#9670;&nbsp;</a></span>serialize() <span class="overload">[4/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -795,7 +908,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a9adc8a44a1124cfbf965caef44d4982c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9adc8a44a1124cfbf965caef44d4982c">&#9670;&nbsp;</a></span>serialize() <span class="overload">[4/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9adc8a44a1124cfbf965caef44d4982c">&#9670;&nbsp;</a></span>serialize() <span class="overload">[5/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -854,7 +967,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="aed7a06cb7739016e50e8661dc0a592c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed7a06cb7739016e50e8661dc0a592c4">&#9670;&nbsp;</a></span>serialize() <span class="overload">[5/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aed7a06cb7739016e50e8661dc0a592c4">&#9670;&nbsp;</a></span>serialize() <span class="overload">[6/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -913,7 +1026,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="aa29e4630d9d6443693c840941ef41104"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa29e4630d9d6443693c840941ef41104">&#9670;&nbsp;</a></span>serialize() <span class="overload">[6/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa29e4630d9d6443693c840941ef41104">&#9670;&nbsp;</a></span>serialize() <span class="overload">[7/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -955,7 +1068,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a827286054d3615075443c1cd3941ea7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a827286054d3615075443c1cd3941ea7f">&#9670;&nbsp;</a></span>serialize() <span class="overload">[7/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a827286054d3615075443c1cd3941ea7f">&#9670;&nbsp;</a></span>serialize() <span class="overload">[8/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -997,7 +1110,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a24bcb0612242d6f862c0673496fbe3cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24bcb0612242d6f862c0673496fbe3cd">&#9670;&nbsp;</a></span>serialize() <span class="overload">[8/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24bcb0612242d6f862c0673496fbe3cd">&#9670;&nbsp;</a></span>serialize() <span class="overload">[9/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1039,7 +1152,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a3e50c0d181734038683dfed8a6c1ad47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e50c0d181734038683dfed8a6c1ad47">&#9670;&nbsp;</a></span>serialize() <span class="overload">[9/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e50c0d181734038683dfed8a6c1ad47">&#9670;&nbsp;</a></span>serialize() <span class="overload">[10/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1081,7 +1194,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="adb8cafb39417f95a63ca4c6d264b5c44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb8cafb39417f95a63ca4c6d264b5c44">&#9670;&nbsp;</a></span>serialize() <span class="overload">[10/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adb8cafb39417f95a63ca4c6d264b5c44">&#9670;&nbsp;</a></span>serialize() <span class="overload">[11/11]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

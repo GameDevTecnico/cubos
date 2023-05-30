@@ -1,6 +1,5 @@
 var hierarchy =
 [
-    [ "Action", "classcubos_1_1core_1_1io_1_1Action.html", null ],
     [ "ActiveCamera", "structcubos_1_1engine_1_1ActiveCamera.html", null ],
     [ "AnyAsset", "classcubos_1_1engine_1_1AnyAsset.html", [
       [ "Asset< cubos::core::gl::Grid >", "classcubos_1_1engine_1_1Asset.html", null ],
@@ -43,7 +42,6 @@ var hierarchy =
     [ "ConstantBufferElement", "structcubos_1_1core_1_1gl_1_1ConstantBufferElement.html", null ],
     [ "ConstantBufferStructure", "structcubos_1_1core_1_1gl_1_1ConstantBufferStructure.html", null ],
     [ "Context", "classcubos_1_1core_1_1data_1_1Context.html", null ],
-    [ "Context", "classcubos_1_1core_1_1io_1_1Context.html", null ],
     [ "CubeMap", "classcubos_1_1core_1_1gl_1_1impl_1_1CubeMap.html", null ],
     [ "CubeMapArray", "classcubos_1_1core_1_1gl_1_1impl_1_1CubeMapArray.html", null ],
     [ "CubeMapArrayDesc", "structcubos_1_1core_1_1gl_1_1CubeMapArrayDesc.html", null ],
@@ -91,7 +89,10 @@ var hierarchy =
     [ "Index< T, std::tuple< T, Types... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1Index_3_01T_00_01std_1_1tuple_3_01T_00_01Types_8_8_8_01_4_01_4.html", null ],
     [ "Index< T, std::tuple< U, Types... > >", "structcubos_1_1core_1_1ecs_1_1impl_1_1Index_3_01T_00_01std_1_1tuple_3_01U_00_01Types_8_8_8_01_4_01_4.html", null ],
     [ "IndexBuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1IndexBuffer.html", null ],
-    [ "InputManager", "classcubos_1_1core_1_1io_1_1InputManager.html", null ],
+    [ "Input", "classcubos_1_1engine_1_1Input.html", null ],
+    [ "InputAction", "classcubos_1_1engine_1_1InputAction.html", null ],
+    [ "InputAxis", "classcubos_1_1engine_1_1InputAxis.html", null ],
+    [ "InputBindings", "classcubos_1_1engine_1_1InputBindings.html", null ],
     [ "IStorage", "classcubos_1_1core_1_1ecs_1_1IStorage.html", [
       [ "Storage< T >", "classcubos_1_1core_1_1ecs_1_1Storage.html", [
         [ "MapStorage< T >", "classcubos_1_1core_1_1ecs_1_1MapStorage.html", null ],
@@ -161,11 +162,6 @@ var hierarchy =
     [ "ShaderStage", "classcubos_1_1core_1_1gl_1_1impl_1_1ShaderStage.html", null ],
     [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", null ],
     [ "Source", "classcubos_1_1core_1_1al_1_1impl_1_1Source.html", null ],
-    [ "Source", "classcubos_1_1core_1_1io_1_1Source.html", [
-      [ "ButtonPress", "classcubos_1_1core_1_1io_1_1ButtonPress.html", null ],
-      [ "DoubleAxis", "classcubos_1_1core_1_1io_1_1DoubleAxis.html", null ],
-      [ "SingleAxis", "classcubos_1_1core_1_1io_1_1SingleAxis.html", null ]
-    ] ],
     [ "SpotLight", "structcubos_1_1core_1_1gl_1_1SpotLight.html", null ],
     [ "SpotLight", "structcubos_1_1engine_1_1SpotLight.html", null ],
     [ "DepthStencilStateDesc::Stencil", "structcubos_1_1core_1_1gl_1_1DepthStencilStateDesc_1_1Stencil.html", null ],

@@ -1,13 +1,6 @@
 var namespacecubos_1_1core_1_1io =
 [
-    [ "Action", "classcubos_1_1core_1_1io_1_1Action.html", "classcubos_1_1core_1_1io_1_1Action" ],
-    [ "Context", "classcubos_1_1core_1_1io_1_1Context.html", "classcubos_1_1core_1_1io_1_1Context" ],
     [ "Cursor", "classcubos_1_1core_1_1io_1_1Cursor.html", "classcubos_1_1core_1_1io_1_1Cursor" ],
-    [ "InputManager", "classcubos_1_1core_1_1io_1_1InputManager.html", null ],
-    [ "ButtonPress", "classcubos_1_1core_1_1io_1_1ButtonPress.html", "classcubos_1_1core_1_1io_1_1ButtonPress" ],
-    [ "DoubleAxis", "classcubos_1_1core_1_1io_1_1DoubleAxis.html", "classcubos_1_1core_1_1io_1_1DoubleAxis" ],
-    [ "SingleAxis", "classcubos_1_1core_1_1io_1_1SingleAxis.html", "classcubos_1_1core_1_1io_1_1SingleAxis" ],
-    [ "Source", "classcubos_1_1core_1_1io_1_1Source.html", "classcubos_1_1core_1_1io_1_1Source" ],
     [ "KeyEvent", "structcubos_1_1core_1_1io_1_1KeyEvent.html", "structcubos_1_1core_1_1io_1_1KeyEvent" ],
     [ "ModifiersEvent", "structcubos_1_1core_1_1io_1_1ModifiersEvent.html", "structcubos_1_1core_1_1io_1_1ModifiersEvent" ],
     [ "MouseButtonEvent", "structcubos_1_1core_1_1io_1_1MouseButtonEvent.html", "structcubos_1_1core_1_1io_1_1MouseButtonEvent" ],
@@ -145,9 +138,13 @@ var namespacecubos_1_1core_1_1io =
       [ "Locked", "namespacecubos_1_1core_1_1io.html#a3fe1dc281e20599dff9635c050a28b8cad0f2e5376298c880665077b565ffd7dd", null ],
       [ "Hidden", "namespacecubos_1_1core_1_1io.html#a3fe1dc281e20599dff9635c050a28b8ca7acdf85c69cc3c5305456a293524386e", null ]
     ] ],
+    [ "keyToString", "namespacecubos_1_1core_1_1io.html#a6977e2dca03628b7b7d62c7c3ed8d461", null ],
+    [ "modifiersToString", "namespacecubos_1_1core_1_1io.html#aba975a725a92abf473fef4a82277fd90", null ],
     [ "openWindow", "namespacecubos_1_1core_1_1io.html#a79a5c02b2ce9bb5815f8c93dcef87c0b", null ],
     [ "operator&", "namespacecubos_1_1core_1_1io.html#aa0b31821d999f54e7cb559df86c95311", null ],
     [ "operator&=", "namespacecubos_1_1core_1_1io.html#aefe65608166a28922f14953566ff8b8d", null ],
     [ "operator|", "namespacecubos_1_1core_1_1io.html#aebb756382df4f6bc3b84830e81ff34b2", null ],
-    [ "operator|=", "namespacecubos_1_1core_1_1io.html#aa4857e78fe8b139aeef604ef630b7512", null ]
+    [ "operator|=", "namespacecubos_1_1core_1_1io.html#aa4857e78fe8b139aeef604ef630b7512", null ],
+    [ "stringToKey", "namespacecubos_1_1core_1_1io.html#a03f44de43c5a5cff009349d2ec7c53f9", null ],
+    [ "stringToModifiers", "namespacecubos_1_1core_1_1io.html#abc0d19fb4c86595a83c2ab5e6bdd86fc", null ]
 ];
