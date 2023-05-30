@@ -37,9 +37,15 @@ namespace cubos::core::io
         void setCursor(std::shared_ptr<Cursor> cursor) override;
         void setClipboard(const std::string& text) override;
         const char* getClipboard() const override;
+        bool keyPressed(Key key) const override;
+        bool keyPressed(Key key, Modifiers modifiers) const override;
+
+        Modifiers modifiers() const;
+        void modifiers(Modifiers modifiers);
 
     private:
         std::shared_ptr<Cursor> mCursor;
+        Modifiers mModifiers;
 
 #ifdef WITH_GLFW
         GLFWwindow* mHandle;

@@ -18,6 +18,7 @@ static void charCallback(GLFWwindow* window, unsigned int codepoint);
 static void updateMods(GLFWWindow* handler, int glfwMods);
 static MouseButton glfwToCubosMouseButton(int button);
 static Key glfwToCubosKey(int key);
+static int cubosToGlfwKey(Key key);
 
 #endif // WITH_GLFW
 
@@ -274,6 +275,34 @@ const char* GLFWWindow::getClipboard() const
 #endif
 }
 
+bool GLFWWindow::keyPressed(Key key) const
+{
+#ifdef WITH_GLFW
+    return glfwGetKey(mHandle, cubosToGlfwKey(key)) == GLFW_PRESS;
+#else
+    UNSUPPORTED();
+#endif
+}
+
+bool GLFWWindow::keyPressed(Key key, Modifiers modifiers) const
+{
+#ifdef WITH_GLFW
+    return this->keyPressed(key) && this->modifiers() == modifiers;
+#else
+    UNSUPPORTED();
+#endif
+}
+
+Modifiers GLFWWindow::modifiers() const
+{
+    return mModifiers;
+}
+
+void GLFWWindow::modifiers(Modifiers mods)
+{
+    mModifiers = mods;
+}
+
 #ifdef WITH_GLFW
 
 static void keyCallback(GLFWwindow* window, int key, int /*unused*/, int action, int mods)
@@ -341,6 +370,7 @@ static void updateMods(GLFWWindow* handler, int glfwMods)
     {
         mods |= Modifiers::System;
     }
+    handler->modifiers(mods);
     handler->pushEvent(ModifiersEvent{.modifiers = mods});
 }
 
@@ -468,6 +498,116 @@ static Key glfwToCubosKey(int key)
         MAP_KEY(PAUSE, Pause)
     default:
         return Key::Invalid;
+    }
+#undef MAP_KEY
+}
+
+static int cubosToGlfwKey(Key key)
+{
+#define MAP_KEY(cubos, glfw)                                                                                           \
+    case Key::cubos:                                                                                                   \
+        return GLFW_KEY_##glfw;
+    switch (key)
+    {
+        MAP_KEY(A, A)
+        MAP_KEY(B, B)
+        MAP_KEY(C, C)
+        MAP_KEY(D, D)
+        MAP_KEY(E, E)
+        MAP_KEY(F, F)
+        MAP_KEY(G, G)
+        MAP_KEY(H, H)
+        MAP_KEY(I, I)
+        MAP_KEY(J, J)
+        MAP_KEY(K, K)
+        MAP_KEY(L, L)
+        MAP_KEY(M, M)
+        MAP_KEY(N, N)
+        MAP_KEY(O, O)
+        MAP_KEY(P, P)
+        MAP_KEY(Q, Q)
+        MAP_KEY(R, R)
+        MAP_KEY(S, S)
+        MAP_KEY(T, T)
+        MAP_KEY(U, U)
+        MAP_KEY(V, V)
+        MAP_KEY(W, W)
+        MAP_KEY(X, X)
+        MAP_KEY(Y, Y)
+        MAP_KEY(Z, Z)
+        MAP_KEY(Num0, 0)
+        MAP_KEY(Num1, 1)
+        MAP_KEY(Num2, 2)
+        MAP_KEY(Num3, 3)
+        MAP_KEY(Num4, 4)
+        MAP_KEY(Num5, 5)
+        MAP_KEY(Num6, 6)
+        MAP_KEY(Num7, 7)
+        MAP_KEY(Num8, 8)
+        MAP_KEY(Num9, 9)
+        MAP_KEY(Escape, ESCAPE)
+        MAP_KEY(LControl, LEFT_CONTROL)
+        MAP_KEY(LShift, LEFT_SHIFT)
+        MAP_KEY(LAlt, LEFT_ALT)
+        MAP_KEY(LSystem, LEFT_SUPER)
+        MAP_KEY(RControl, RIGHT_CONTROL)
+        MAP_KEY(RShift, RIGHT_SHIFT)
+        MAP_KEY(RAlt, RIGHT_ALT)
+        MAP_KEY(RSystem, RIGHT_SUPER)
+        MAP_KEY(Menu, MENU)
+        MAP_KEY(LBracket, LEFT_BRACKET)
+        MAP_KEY(RBracket, RIGHT_BRACKET)
+        MAP_KEY(SemiColon, SEMICOLON)
+        MAP_KEY(Comma, COMMA)
+        MAP_KEY(Period, PERIOD)
+        MAP_KEY(Quote, APOSTROPHE)
+        MAP_KEY(Slash, SLASH)
+        MAP_KEY(BackSlash, BACKSLASH)
+        MAP_KEY(Equal, EQUAL)
+        MAP_KEY(Dash, MINUS)
+        MAP_KEY(Space, SPACE)
+        MAP_KEY(Return, ENTER)
+        MAP_KEY(BackSpace, BACKSPACE)
+        MAP_KEY(Tab, TAB)
+        MAP_KEY(PageUp, PAGE_UP)
+        MAP_KEY(PageDown, PAGE_DOWN)
+        MAP_KEY(End, END)
+        MAP_KEY(Home, HOME)
+        MAP_KEY(Insert, INSERT)
+        MAP_KEY(Delete, DELETE)
+        MAP_KEY(Add, KP_ADD)
+        MAP_KEY(Subtract, KP_SUBTRACT)
+        MAP_KEY(Multiply, KP_MULTIPLY)
+        MAP_KEY(Divide, KP_DIVIDE)
+        MAP_KEY(Left, LEFT)
+        MAP_KEY(Right, RIGHT)
+        MAP_KEY(Up, UP)
+        MAP_KEY(Down, DOWN)
+        MAP_KEY(Numpad0, KP_0)
+        MAP_KEY(Numpad1, KP_1)
+        MAP_KEY(Numpad2, KP_2)
+        MAP_KEY(Numpad3, KP_3)
+        MAP_KEY(Numpad4, KP_4)
+        MAP_KEY(Numpad5, KP_5)
+        MAP_KEY(Numpad6, KP_6)
+        MAP_KEY(Numpad7, KP_7)
+        MAP_KEY(Numpad8, KP_8)
+        MAP_KEY(Numpad9, KP_9)
+        MAP_KEY(F1, F1)
+        MAP_KEY(F2, F2)
+        MAP_KEY(F3, F3)
+        MAP_KEY(F4, F4)
+        MAP_KEY(F5, F5)
+        MAP_KEY(F6, F6)
+        MAP_KEY(F7, F7)
+        MAP_KEY(F8, F8)
+        MAP_KEY(F9, F9)
+        MAP_KEY(F10, F10)
+        MAP_KEY(F11, F11)
+        MAP_KEY(F12, F12)
+        MAP_KEY(Pause, PAUSE)
+    default:
+        return GLFW_KEY_UNKNOWN;
     }
 #undef MAP_KEY
 }
