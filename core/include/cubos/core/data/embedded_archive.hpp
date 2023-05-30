@@ -44,12 +44,12 @@ namespace cubos::core::data
     protected:
         std::size_t create(std::size_t parent, std::string_view name, bool directory = false) override;
         bool destroy(std::size_t id) override;
-        std::string getName(std::size_t id) const override;
-        bool isDirectory(std::size_t id) const override;
-        bool isReadOnly() const override;
-        std::size_t getParent(std::size_t id) const override;
-        std::size_t getSibling(std::size_t id) const override;
-        std::size_t getChild(std::size_t id) const override;
+        std::string name(std::size_t id) const override;
+        bool directory(std::size_t id) const override;
+        bool readOnly() const override;
+        std::size_t parent(std::size_t id) const override;
+        std::size_t sibling(std::size_t id) const override;
+        std::size_t child(std::size_t id) const override;
         std::unique_ptr<memory::Stream> open(File::Handle file, File::OpenMode mode) override;
 
     private:

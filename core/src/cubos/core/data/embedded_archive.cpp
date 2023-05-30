@@ -49,32 +49,32 @@ bool EmbeddedArchive::destroy(std::size_t /*id*/)
     return false;
 }
 
-std::string EmbeddedArchive::getName(std::size_t id) const
+std::string EmbeddedArchive::name(std::size_t id) const
 {
     return mData->entries[id - 1].name;
 }
 
-bool EmbeddedArchive::isDirectory(std::size_t id) const
+bool EmbeddedArchive::directory(std::size_t id) const
 {
     return mData->entries[id - 1].isDirectory;
 }
 
-bool EmbeddedArchive::isReadOnly() const
+bool EmbeddedArchive::readOnly() const
 {
     return true;
 }
 
-std::size_t EmbeddedArchive::getParent(std::size_t id) const
+std::size_t EmbeddedArchive::parent(std::size_t id) const
 {
     return mData->entries[id - 1].parent;
 }
 
-std::size_t EmbeddedArchive::getSibling(std::size_t id) const
+std::size_t EmbeddedArchive::sibling(std::size_t id) const
 {
     return mData->entries[id - 1].sibling;
 }
 
-std::size_t EmbeddedArchive::getChild(std::size_t id) const
+std::size_t EmbeddedArchive::child(std::size_t id) const
 {
     return mData->entries[id - 1].child;
 }
