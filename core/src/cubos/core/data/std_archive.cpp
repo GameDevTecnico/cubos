@@ -247,7 +247,7 @@ std::unique_ptr<memory::Stream> STDArchive::open(File::Handle file, File::OpenMo
     }
 
     // Check if the file exists.
-    auto it = mFiles.find(file->getId());
+    auto it = mFiles.find(file->id());
     if (it == mFiles.end())
     {
         CUBOS_CRITICAL("File does not exist");

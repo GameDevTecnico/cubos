@@ -88,16 +88,16 @@ void Assets::loadMeta(std::string_view path)
         return;
     }
 
-    if (file->isDirectory())
+    if (file->directory())
     {
-        auto child = file->getChild();
+        auto child = file->child();
         while (child != nullptr)
         {
-            this->loadMeta(child->getPath());
-            child = child->getSibling();
+            this->loadMeta(child->path());
+            child = child->sibling();
         }
     }
-    else if (file->getName().ends_with(".meta"))
+    else if (file->name().ends_with(".meta"))
     {
         CUBOS_DEBUG("Loading asset metadata from '{}'", path);
 

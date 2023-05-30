@@ -16,15 +16,14 @@ static void init(Write<Assets> assets, Read<Settings> settings)
     // Get the relevant settings.
     if (settings->getBool("assets.io.enabled", true))
     {
-        std::filesystem::path path = settings->getString("assets.io.path", "assets/");
+        std::filesystem::path path = settings->getString("assets.io.path", "assets");
         bool readOnly = settings->getBool("assets.io.readOnly", true);
 
         // Create a standard archive for the assets directory and mount it.
-        auto archive = std::make_shared<STDArchive>(path, true, readOnly);
-        FileSystem::mount("/assets/", archive);
+        FileSystem::mount("/assets", std::make_unique<STDArchive>(path, true, readOnly));
 
         // Load the meta files on the assets directory.
-        assets->loadMeta("/assets/");
+        assets->loadMeta("/assets");
     }
 }
 

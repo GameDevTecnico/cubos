@@ -16,7 +16,7 @@ static void startup(Write<Settings> settings)
 {
     // Get the path of the real settings file, mount an archive on it.
     auto path = settings->getString("settings.path", "settings.json");
-    FileSystem::mount("/settings.json", std::make_shared<STDArchive>(path, false, false));
+    FileSystem::mount("/settings.json", std::make_unique<STDArchive>(path, false, false));
 
     std::string contents;
     auto stream = FileSystem::open("/settings.json", File::OpenMode::Read);

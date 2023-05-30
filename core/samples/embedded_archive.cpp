@@ -8,7 +8,7 @@ int main()
 
     // The name passed to the constructor of the embedded archive must be the same as the name used when embedding the
     // data. In this case, since the name wasn't specified, the name of the root directory was used.
-    FileSystem::mount("/", std::make_shared<EmbeddedArchive>("assets"));
+    FileSystem::mount("/", std::make_unique<EmbeddedArchive>("assets"));
 
     // The file system will now be able to access the embedded archive.
     std::string contents;

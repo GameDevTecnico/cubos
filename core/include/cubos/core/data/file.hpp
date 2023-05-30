@@ -59,6 +59,7 @@ namespace cubos::core::data
         /// - a non-root file already exists at the mount point.
         /// - the mount point is the root file, but the archive is not a directory archive.
         /// - the mount point is the root file, but another archive is already mounted to the root.
+        /// - the mount point is the root file, but the root is not empty.
         ///
         /// @param path Path relative to this file to mount the archive on.
         /// @param archive Archive to mount.
@@ -141,7 +142,7 @@ namespace cubos::core::data
         bool directory() const;
 
         /// @return The archive this file is in, or nullptr if the file is not in an archive.
-        const Archive* archive() const;
+        const std::shared_ptr<Archive>& archive() const;
 
         /// @return The identifier of this file on its archive, or 0 if it is not in an archive.
         std::size_t id() const;
@@ -150,7 +151,7 @@ namespace cubos::core::data
         Handle parent() const;
 
         /// @return The next sibling, or nullptr if this file is the last child of its parent.
-        Handle next() const;
+        Handle sibling() const;
 
         /// @return The first child, or nullptr if this file is not a directory or if it is empty.
         Handle child() const;
@@ -158,27 +159,23 @@ namespace cubos::core::data
     private:
         friend FileSystem;
 
-        /// @param parent The parent file handle.
-        /// @param name The name of the file.
+        /// @brief Construtor for directories outside archives.
         File(Handle parent, std::string_view name);
 
-        /// @param parent The parent file handle.
-        /// @param archive The archive this file is in.
-        /// @param id The identifier of this file in its archive.
-        File(Handle parent, const std::shared_ptr<Archive>& archive, std::size_t id);
+        /// @brief Construtor for archive files.
+        File(Handle parent, std::shared_ptr<Archive> archive, std::size_t id);
 
-        /// @param parent The parent file handle.
-        /// @param archive The archive mounted on this file.
-        /// @param name The name of this file.
-        File(Handle parent, const std::shared_ptr<Archive>& archive, std::string_view name);
+        /// @brief Constructor for archive roots.
+        File(Handle parent, std::shared_ptr<Archive> archive, std::string_view name);
 
-        /// Recursively generates an archive's files to the virtual file system.
+        /// Recursively add an archive's files to the virtual file system.
         /// Called after the archive has been mounted.
-        void generateArchive();
+        void addArchive();
 
-        /// Recursively destroys the archive's files from the virtual file system.
+        /// Recursively removes the archive's files from the virtual file system.
         /// Called after the archive is unmounted.
-        void destroyArchive();
+        /// @return Whether the file should be kept in the tree without an associated archive.
+        bool removeArchive();
 
         /// Adds a child file to this file.
         /// @param child The child file to add.
@@ -195,20 +192,23 @@ namespace cubos::core::data
 
         /// Recursively destroys a file and its children from the virtual file system.
         /// Called after the file is destroyed.
-        void destroyRecursive();
+        /// If this is called on an archive root, true is returned to keep the file and its parents
+        /// in the tree.
+        /// @return Whether the file should not be removed from the tree.
+        bool destroyRecursive();
 
-        std::string mPath; ///< The path of this file.
-        std::string mName; ///< The name of this file.
-        bool mDirectory;   ///< Whether this file is a directory.
+        std::string mPath;       ///< The path of this file.
+        std::string mName;       ///< The name of this file.
+        bool mDirectory = false; ///< Whether this file is a directory.
 
-        std::shared_ptr<Archive> mArchive; ///< The archive this file belongs to.
-        std::size_t mId;                   ///< The id of this file in its archive.
+        std::shared_ptr<Archive> mArchive = nullptr; ///< The archive this file belongs to.
+        std::size_t mId = 0;                         ///< The id of this file in its archive.
 
-        Handle mParent;  ///< The parent file handle.
-        Handle mSibling; ///< The next sibling file handle.
-        Handle mChild;   ///< The first child file handle.
+        Handle mParent = nullptr; ///< The parent file handle.
+        Handle mSibling = nullptr;   ///< The next sibling file handle.
+        Handle mChild = nullptr;  ///< The first child file handle.
 
-        bool mDestroyed; ///< Whether this file has been marked for deletion.
+        bool mDestroyed = false; ///< Whether this file has been marked for deletion.
 
         std::mutex mMutex; ///< The mutex used to synchronize changing properties of this file.
     };
