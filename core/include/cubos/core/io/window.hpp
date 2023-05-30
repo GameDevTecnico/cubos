@@ -167,6 +167,12 @@ namespace cubos::core::io
         /// @return Text from the clipboard.
         virtual const char* getClipboard() const = 0;
 
+        /// @return Whether the key is currently pressed.
+        virtual bool keyPressed(Key key) const = 0;
+
+        /// @return Whether the key and modifiers are currently pressed.
+        virtual bool keyPressed(Key key, Modifiers modifiers) const = 0;
+
     protected:
         /// Asks the implementation to fill the event queue with new events.
         virtual void pollEvents() = 0;
