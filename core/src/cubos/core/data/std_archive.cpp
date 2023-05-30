@@ -238,13 +238,12 @@ std::size_t STDArchive::child(std::size_t id) const
     return it->second.child;
 }
 
-std::unique_ptr<Stream> STDArchive::open(File::Handle file, File::OpenMode mode)
+std::unique_ptr<Stream> STDArchive::open(std::size_t id, File::Handle file, File::OpenMode mode)
 {
     INIT_OR_RETURN(nullptr);
-    CUBOS_DEBUG_ASSERT(file->archive().get() == this);
     CUBOS_DEBUG_ASSERT(!mReadOnly || mode == File::OpenMode::Read);
 
-    auto it = mFiles.find(file->id());
+    auto it = mFiles.find(id);
     CUBOS_DEBUG_ASSERT(it != mFiles.end());
     CUBOS_DEBUG_ASSERT(!it->second.directory);
 

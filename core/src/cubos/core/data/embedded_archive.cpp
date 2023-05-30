@@ -72,11 +72,10 @@ std::size_t EmbeddedArchive::child(std::size_t id) const
     return mData->entries[id - 1].child;
 }
 
-std::unique_ptr<memory::Stream> EmbeddedArchive::open(File::Handle file, File::OpenMode mode)
+std::unique_ptr<memory::Stream> EmbeddedArchive::open(std::size_t id, File::Handle handle, File::OpenMode mode)
 {
     CUBOS_DEBUG_ASSERT(mode == File::OpenMode::Read);
-    CUBOS_DEBUG_ASSERT(file->archive().get() == this);
 
-    const auto& entry = mData->entries[file->id() - 1];
-    return std::make_unique<FileStream<memory::BufferStream>>(file, mode, memory::BufferStream(entry.data, entry.size));
+    const auto& entry = mData->entries[id - 1];
+    return std::make_unique<FileStream<memory::BufferStream>>(handle, mode, memory::BufferStream(entry.data, entry.size));
 }

@@ -29,7 +29,6 @@ namespace cubos::core::data
         STDArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly);
         ~STDArchive() override = default;
 
-    protected:
         std::size_t create(std::size_t parent, std::string_view name, bool directory = false) override;
         bool destroy(std::size_t id) override;
         std::string name(std::size_t id) const override;
@@ -38,7 +37,7 @@ namespace cubos::core::data
         std::size_t parent(std::size_t id) const override;
         std::size_t sibling(std::size_t id) const override;
         std::size_t child(std::size_t id) const override;
-        std::unique_ptr<memory::Stream> open(File::Handle file, File::OpenMode mode) override;
+        std::unique_ptr<memory::Stream> open(std::size_t id, File::Handle handle, File::OpenMode mode) override;
 
     private:
         /// Information about a file in the directory.

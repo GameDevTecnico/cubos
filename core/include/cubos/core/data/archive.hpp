@@ -35,9 +35,6 @@ namespace cubos::core::data
         Archive() = default;
         virtual ~Archive() = default;
 
-    protected:
-        friend File;
-
         /// Creates a new file in the archive.
         /// @param parent Parent directory of the new file.
         /// @param name Name of the new file.
@@ -73,9 +70,11 @@ namespace cubos::core::data
         virtual std::size_t child(std::size_t id) const = 0;
 
         /// Opens a file in the archive.
-        /// @param file Handle of the file.
+        /// @param id Identifier of the file.
+        /// @param handle Handle to increase the reference count of the file, preventing it from
+        /// being destroyed while the stream is open.
         /// @param mode Mode to open the file in.
         /// @return A file stream, or nullptr if the file could not be opened.
-        virtual std::unique_ptr<memory::Stream> open(File::Handle file, File::OpenMode mode) = 0;
+        virtual std::unique_ptr<memory::Stream> open(std::size_t id, File::Handle handle, File::OpenMode mode) = 0;
     };
 } // namespace cubos::core::data
