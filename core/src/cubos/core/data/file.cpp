@@ -23,8 +23,8 @@ File::File(Handle parent, std::shared_ptr<Archive> archive, std::size_t id)
     , mId(id)
     , mParent(std::move(parent))
 {
-    mName = mArchive->getName(id);
-    mDirectory = mArchive->isDirectory(id);
+    mName = mArchive->name(id);
+    mDirectory = mArchive->directory(id);
     mPath = mParent->mPath + "/" + std::string(mName);
 }
 
@@ -34,7 +34,7 @@ File::File(Handle parent, std::shared_ptr<Archive> archive, std::string_view nam
     , mId(1)
     , mParent(std::move(parent))
 {
-    mDirectory = mArchive->isDirectory(1);
+    mDirectory = mArchive->directory(1);
     mPath = mParent->mPath + "/" + std::string(mName);
 }
 
@@ -84,7 +84,7 @@ bool File::mount(std::string_view path, std::unique_ptr<Archive> archive)
             return false;
         }
 
-        if (!archive->isDirectory(1))
+        if (!archive->directory(1))
         {
             CUBOS_ERROR("Could not mount archive at root: root mounted archives must be directory archives");
             return false;
@@ -132,7 +132,7 @@ void File::addArchive()
     CUBOS_ASSERT(mChild == nullptr);
 
     // Create a child file for each child found in the archive.
-    for (auto child = mArchive->getChild(mId); child != 0; child = mArchive->getSibling(child))
+    for (auto child = mArchive->child(mId); child != 0; child = mArchive->sibling(child))
     {
         auto file = std::shared_ptr<File>(new File(this->shared_from_this(), mArchive, child));
         file->mSibling = mChild;
@@ -319,7 +319,7 @@ File::Handle File::create(std::string_view path, bool directory)
         }
 
         // Check if the archive is read-only.
-        if (mArchive->isReadOnly())
+        if (mArchive->readOnly())
         {
             CUBOS_ERROR("Could not create file at '{}/{}': parent directory is on a read-only archive", mPath,
                         childName);
@@ -364,7 +364,7 @@ bool File::destroy()
         return false;
     }
 
-    if (mArchive->isReadOnly())
+    if (mArchive->readOnly())
     {
         CUBOS_ERROR("Could not destroy file '{}': file is on a read-only archive", mPath);
         return false;
@@ -453,7 +453,7 @@ std::unique_ptr<memory::Stream> File::open(OpenMode mode)
         return nullptr;
     }
 
-    if (mArchive->isReadOnly() && mode == OpenMode::Write)
+    if (mArchive->readOnly() && mode == OpenMode::Write)
     {
         CUBOS_ERROR("Could not open file '{}' for writing: file is on a read-only archive", mPath);
         return nullptr;
