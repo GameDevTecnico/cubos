@@ -9,8 +9,6 @@ using cubos::core::Settings;
 using cubos::core::data::Debug;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
-using cubos::core::io::Key;
-using cubos::core::io::Modifiers;
 using cubos::core::io::Window;
 using namespace cubos::engine;
 
@@ -156,7 +154,7 @@ static void showcaseUnbound(const Window& window, bool& explained)
     }
 
     /// When no action is bound to a key, its state can still be accessed directly through the Window.
-    if (window->pressed(Input::Key::Y, Modifiers::Shift | Input::Modifiers::Control))
+    if (window->pressed(Input::Key::Y, Input::Modifiers::Shift | Input::Modifiers::Control))
     {
         CUBOS_INFO("Unbound");
     }
