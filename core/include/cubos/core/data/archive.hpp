@@ -36,12 +36,15 @@ namespace cubos::core::data
         virtual ~Archive() = default;
 
         /// Creates a new file in the archive.
+        /// The first child of the parent will have its sibling set to the new file and then be
+        /// replaced by the new file.
         /// @param parent Parent directory of the new file.
         /// @param name Name of the new file.
         /// @return Identifier of the file, or 0 if the file could not be created.
         virtual std::size_t create(std::size_t parent, std::string_view name, bool directory = false) = 0;
 
         /// Destroys a regular file or empty directory in the archive.
+        /// Will be replaced in the tree its next sibling.
         /// @param id Identifier of the file.
         /// @return Whether the file was destroyed successfully.
         virtual bool destroy(std::size_t id) = 0;

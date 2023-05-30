@@ -2,7 +2,7 @@
 
 #include <cubos/core/data/context.hpp>
 
-#include "../utils.hpp"
+#include "utils.hpp"
 
 using cubos::core::data::Context;
 

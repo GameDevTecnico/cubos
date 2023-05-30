@@ -8,6 +8,7 @@ add_executable(
     main.cpp
 
     data/embedded_archive.cpp
+    data/std_archive.cpp
     data/context.cpp
 
     ecs/registry.cpp
