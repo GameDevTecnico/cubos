@@ -69,6 +69,8 @@ namespace cubos::engine
         };
 
         bool anyPressed(const core::io::Window& window, const std::vector<std::pair<Key, Modifiers>>& keys) const;
+        void handleActions(const core::io::Window& window, const std::vector<BindingIndex>& boundActions);
+        void handleAxes(const core::io::Window& window, const std::vector<BindingIndex>& boundAxes);
 
         std::unordered_map<int, InputBindings> mBindings;
 
