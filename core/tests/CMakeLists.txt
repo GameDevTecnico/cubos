@@ -9,6 +9,7 @@ add_executable(
 
     data/embedded_archive.cpp
     data/std_archive.cpp
+    data/file_system.cpp
     data/context.cpp
 
     ecs/registry.cpp
