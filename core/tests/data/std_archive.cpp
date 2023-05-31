@@ -24,12 +24,7 @@ static void assertInitializationFailed(STDArchive& archive)
 
 TEST_CASE("data::STDArchive")
 {
-    // Get a temporary file/directory path.
-    auto tmp = std::filesystem::temp_directory_path();
-    auto path = tmp / "cubos-core-tests-std-archive";
-
-    // Make sure the file/directory does not exist.
-    std::filesystem::remove_all(path);
+    auto path = genTempPath();
 
     SUBCASE("single file archive works correctly")
     {
