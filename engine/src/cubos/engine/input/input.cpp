@@ -1,9 +1,7 @@
-#include <cubos/core/data/debug_serializer.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/input/input.hpp>
 
-using cubos::core::data::Debug;
 using cubos::core::io::KeyEvent;
 using cubos::core::io::Window;
 using namespace cubos::engine;
@@ -125,9 +123,9 @@ bool Input::anyPressed(const Window& window, const std::vector<std::pair<Key, Mo
     return false;
 }
 
-void Input::handle(const Window& window, const KeyEvent& event)
+void Input::handleActions(const Window& window, const std::vector<BindingIndex>& boundActions)
 {
-    for (const auto& boundAction : mBoundActions[event.key])
+    for (const auto& boundAction : boundActions)
     {
         auto& action = mBindings[boundAction.player].actions()[boundAction.name];
 
@@ -137,8 +135,11 @@ void Input::handle(const Window& window, const KeyEvent& event)
             CUBOS_TRACE("Action {} was {}", boundAction.name, pressed ? "pressed" : "released");
         }
     }
+}
 
-    for (const auto& boundAxis : mBoundAxes[event.key])
+void Input::handleAxes(const Window& window, const std::vector<BindingIndex>& boundAxes)
+{
+    for (const auto& boundAxis : boundAxes)
     {
         auto& axis = mBindings[boundAxis.player].axes()[boundAxis.name];
 
@@ -158,6 +159,12 @@ void Input::handle(const Window& window, const KeyEvent& event)
             CUBOS_TRACE("Axis {} value is {}", boundAxis.name, value);
         }
     }
+}
+
+void Input::handle(const Window& window, const KeyEvent& event)
+{
+    this->handleActions(window, mBoundActions[event.key]);
+    this->handleAxes(window, mBoundAxes[event.key]);
 }
 
 const std::unordered_map<int, InputBindings>& Input::bindings() const
