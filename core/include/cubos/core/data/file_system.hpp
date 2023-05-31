@@ -21,16 +21,14 @@ namespace cubos::core::data
         /// @return The root file of the virtual file system.
         static File::Handle root();
 
-        /// @brief Mounts an archive to an absolute path. The directory which contains the path
-        /// must exist, but the path itself must not (unless it is the root).
+        /// @brief Mounts an archive to an absolute path. Creates any parent directories that may
+        /// be necessary, but the mount point itself must not already exist.
         ///
         /// @details This method fails on the following conditions:
         /// - path is relative or invalid.
-        /// - a parent directory in the path does not exist.
-        /// - a non-root file already exists at the mount point.
-        /// - the mount point is the root file, but the archive is not a directory archive.
-        /// - the mount point is the root file, but another archive is already mounted to the root.
-        /// - the mount point is the root file, but the root is not empty.
+        /// - a parent file in the path exists and is not a directory.
+        /// - a parent directory in the path belongs to an archive.
+        /// - a file already exists at the mount point.
         ///
         /// @see File::mount
         /// @param path Absolute path to mount the archive on.
@@ -38,7 +36,8 @@ namespace cubos::core::data
         /// @return Whether the archive was successfully mounted.
         static bool mount(std::string_view path, std::unique_ptr<Archive> archive);
 
-        /// @brief Unmounts an archive from an absolute path.
+        /// @brief Unmounts an archive from an absolute path. Removes all of the archive's files
+        /// from the virtual file system.
         ///
         /// @details This method fails on the following conditions:
         /// - path is relative or invalid.
@@ -81,8 +80,8 @@ namespace cubos::core::data
         /// @details This method fails on the following conditions:
         /// - path is relative or invalid.
         /// - the file does not exist.
-        /// - the file is the root file.
         /// - the file is the mount point of an archive.
+        /// - the file does not belong to an archive.
         /// - the file belongs to a read-only archive.
         ///
         /// @see File::destroy
