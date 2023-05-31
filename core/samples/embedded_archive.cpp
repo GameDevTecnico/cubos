@@ -8,19 +8,19 @@ int main()
 
     // The name passed to the constructor of the embedded archive must be the same as the name used when embedding the
     // data. In this case, since the name wasn't specified, the name of the root directory was used.
-    FileSystem::mount("/", std::make_unique<EmbeddedArchive>("assets"));
+    FileSystem::mount("/data", std::make_unique<EmbeddedArchive>("assets"));
 
     // The file system will now be able to access the embedded archive.
     std::string contents;
-    auto stream = FileSystem::open("/foo.txt", File::OpenMode::Read);
+    auto stream = FileSystem::open("/data/foo.txt", File::OpenMode::Read);
     stream->readUntil(contents, nullptr);
-    memory::Stream::stdOut.printf("Read \"{}\" from '/foo.txt'.\n", contents);
+    memory::Stream::stdOut.printf("Read \"{}\" from '/data/foo.txt'.\n", contents);
 
-    stream = FileSystem::open("/bar/baz.txt", File::OpenMode::Read);
+    stream = FileSystem::open("/data/bar/baz.txt", File::OpenMode::Read);
     stream->readUntil(contents, nullptr);
-    memory::Stream::stdOut.printf("Read \"{}\" from '/bar/baz.txt'.\n", contents);
+    memory::Stream::stdOut.printf("Read \"{}\" from '/data/bar/baz.txt'.\n", contents);
 
-    FileSystem::unmount("/");
+    FileSystem::unmount("/data");
 
     return 0;
 }

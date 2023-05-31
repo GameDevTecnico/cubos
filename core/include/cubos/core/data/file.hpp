@@ -50,33 +50,27 @@ namespace cubos::core::data
 
         ~File();
 
-        /// @brief Mounts an archive to a path relative to this file. Parent directories must
-        /// exist, but the file where the archive is mounted must not, except if it is the root
-        /// file of the virtual file system.
+        /// @brief Mounts an archive to a path relative to this file. Creates any parent
+        /// directories that may be necessary, but the mount point itself must not already exist.
         ///
         /// @details This method fails on the following conditions:
         /// - path is absolute or invalid.
-        /// - a parent directory in the path does not exist.
-        /// - a non-root file already exists at the mount point.
-        /// - the mount point is the root file, but the archive is not a directory archive.
-        /// - the mount point is the root file, but another archive is already mounted to the root.
-        /// - the mount point is the root file, but the root is not empty.
+        /// - a parent file in the path exists and is not a directory.
+        /// - a parent directory in the path belongs to an archive.
+        /// - a file already exists at the mount point.
         ///
         /// @param path Path relative to this file to mount the archive on.
         /// @param archive Archive to mount.
         /// @return Whether the archive was successfully mounted.
         bool mount(std::string_view path, std::unique_ptr<Archive> archive);
 
-        /// @brief Unmounts an archive from a path relative to this file.
+        /// @brief Unmounts an archive from a path relative to this file. Removes all of the
+        /// archive's files from the virtual file system.
         ///
         /// @details This method fails on the following conditions:
         /// - path is absolute or invalid.
         /// - any of the files in the path do not exist.
         /// - the target path is not the mount point for an archive.
-        ///
-        /// If an archive is mounted on a subdirectory of another archive, when the parent archive
-        /// is unmounted, the child archive remains mounted, but the directories in its path no
-        /// longer refer to real files in the unmounted archive.
         ///
         /// @param path Path relative to this file to unmount the archive from.
         /// @return Whether the archive was successfully unmounted.
@@ -109,8 +103,8 @@ namespace cubos::core::data
         /// this method is called recursively on all its children.
         ///
         /// @details This method fails on the following conditions:
-        /// - this is the root file of the virtual file system.
         /// - this file is the mount point of an archive.
+        /// - this file does not belong to an archive.
         /// - this file belongs to a read-only archive.
         ///
         /// The reason this method does not immediately delete the file is to prevent
@@ -169,15 +163,6 @@ namespace cubos::core::data
         /// @brief Constructor for archive roots.
         File(Handle parent, std::shared_ptr<Archive> archive, std::string_view name);
 
-        /// Recursively add an archive's files to the virtual file system.
-        /// Called after the archive has been mounted.
-        void addArchive();
-
-        /// Recursively removes the archive's files from the virtual file system.
-        /// Called after the archive is unmounted.
-        /// @return Whether the file should be kept in the tree without an associated archive.
-        bool removeArchive();
-
         /// Adds a child file to this file.
         /// @param child The child file to add.
         void addChild(const File::Handle& child);
@@ -191,12 +176,17 @@ namespace cubos::core::data
         /// @return A handle to the child file, or nullptr if the child file does not exist.
         File::Handle findChild(std::string_view name) const;
 
+        /// Recursively add an archive's files to the virtual file system.
+        /// Called after the archive has been mounted.
+        void addArchive();
+
+        /// Recursively removes the archive's files from the virtual file system.
+        /// Called after the archive is unmounted.
+        void removeArchive();
+
         /// Recursively destroys a file and its children from the virtual file system.
         /// Called after the file is destroyed.
-        /// If this is called on an archive root, true is returned to keep the file and its parents
-        /// in the tree.
-        /// @return Whether the file should not be removed from the tree.
-        bool destroyRecursive();
+        void destroyRecursive();
 
         std::string mPath;       ///< The path of this file.
         std::string mName;       ///< The name of this file.
@@ -211,6 +201,6 @@ namespace cubos::core::data
 
         bool mDestroyed = false; ///< Whether this file has been marked for deletion.
 
-        std::mutex mMutex; ///< The mutex used to synchronize changing properties of this file.
+        mutable std::mutex mMutex; ///< The mutex used to synchronize changing properties of this file.
     };
 } // namespace cubos::core::data
