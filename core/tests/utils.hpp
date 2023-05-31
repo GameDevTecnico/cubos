@@ -1,5 +1,19 @@
 #pragma once
 
+/// Utility macro which adds two subcases to the current test case, one for true and one for false.
+#define PARAMETRIZE_TRUE_OR_FALSE(what, var)                                                                           \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        SUBCASE(what "is true")                                                                                        \
+        {                                                                                                              \
+            var = true;                                                                                                \
+        }                                                                                                              \
+        SUBCASE(what "is false")                                                                                       \
+        {                                                                                                              \
+            var = false;                                                                                               \
+        }                                                                                                              \
+    } while (false)
+
 /// Utility type to check if its destructor is called.
 /// Useful for testing data structures.
 class DetectDestructor

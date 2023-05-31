@@ -11,9 +11,27 @@ using cubos::core::data::STDArchive;
 using cubos::core::memory::SeekOrigin;
 using cubos::core::memory::Stream;
 
+/// Asserts that every call to the given archive fails.
+/// Used for checking if the archive is handling failed initialization correctly.
+static void assertInitializationFailed(STDArchive& archive)
+{
+    REQUIRE_FALSE(archive.directory(1)); // Independently of it was created as a directory or not.
+    REQUIRE(archive.parent(1) == 0);
+    REQUIRE(archive.sibling(1) == 0);
+    REQUIRE(archive.child(1) == 0);
+    REQUIRE(archive.open(1, nullptr, File::OpenMode::Read) == nullptr);
+}
+
 TEST_CASE("data::STDArchive")
 {
-    SUBCASE("single file")
+    // Get a temporary file/directory path.
+    auto tmp = std::filesystem::temp_directory_path();
+    auto path = tmp / "cubos-core-tests-std-archive";
+
+    // Make sure the file/directory does not exist.
+    std::filesystem::remove_all(path);
+
+    SUBCASE("single file archive works correctly")
     {
         bool readOnly;
         bool preCreateFile;
@@ -39,21 +57,12 @@ TEST_CASE("data::STDArchive")
             }
         }
 
-        // Get a temporary file path.
-        auto tmp = std::filesystem::temp_directory_path();
-        auto path = tmp / "cubos-core-tests-std-archive-single-file.txt";
-
         // Pre-create the file if necessary.
         if (preCreateFile)
         {
             std::ofstream file{path};
             file << "ab";
             file.close();
-        }
-        else
-        {
-            // Make sure the file does not exist.
-            std::filesystem::remove(path);
         }
 
         STDArchive archive{path, false, readOnly};
@@ -123,14 +132,91 @@ TEST_CASE("data::STDArchive")
         }
     }
 
-    SUBCASE("multiple files")
+    SUBCASE("directory archive works correctly")
     {
-        // Get a temporary directory path.
-        auto tmp = std::filesystem::temp_directory_path();
-        auto path = tmp / "cubos-core-tests-std-archive-multiple-files";
+        std::unique_ptr<STDArchive> archive;
+        std::size_t foo;
+        std::size_t bar;
 
-        // Erase any previously existing directory.
-        std::filesystem::remove_all(path);
+        SUBCASE("generated with an archive")
+        {
+            archive = std::make_unique<STDArchive>(path, true, false);
+            CHECK_FALSE(archive->readOnly());
+
+            // Check initial structure.
+            CHECK(archive->parent(1) == 0);
+            CHECK(archive->sibling(1) == 0);
+            CHECK(archive->child(1) == 0);
+            REQUIRE(archive->directory(1));
+            REQUIRE(std::filesystem::is_directory(path));
+
+            // Add a file "trash" under the root.
+            auto trash = archive->create(1, "trash");
+            CHECK(archive->child(1) == trash);
+            CHECK(archive->parent(trash) == 1);
+            CHECK(archive->sibling(trash) == 0);
+            CHECK(archive->child(trash) == 0);
+            CHECK(archive->name(trash) == "trash");
+            REQUIRE_FALSE(archive->directory(trash));
+
+            // Add a file "foo" under the root.
+            foo = archive->create(1, "foo");
+            CHECK(archive->child(1) == foo);
+            CHECK(archive->parent(foo) == 1);
+            CHECK(archive->sibling(foo) == trash);
+            CHECK(archive->child(foo) == 0);
+            CHECK(archive->name(foo) == "foo");
+            REQUIRE_FALSE(archive->directory(foo));
+            REQUIRE(std::filesystem::is_regular_file(path / "foo"));
+
+            // Remove "trash".
+            REQUIRE(archive->destroy(trash));
+            REQUIRE(archive->sibling(foo) == 0);
+
+            // Add a directory "bar" under the root.
+            bar = archive->create(1, "bar", true);
+            CHECK(archive->child(1) == bar);
+            CHECK(archive->parent(bar) == 1);
+            CHECK(archive->sibling(bar) == foo);
+            CHECK(archive->child(bar) == 0);
+            CHECK(archive->sibling(foo) == 0);
+            CHECK(archive->name(bar) == "bar");
+            REQUIRE(archive->directory(bar));
+            REQUIRE(std::filesystem::is_directory(path / "bar"));
+
+            // Add a file "baz" under "bar".
+            auto baz = archive->create(bar, "baz");
+            CHECK(archive->child(bar) == baz);
+            CHECK(archive->parent(baz) == bar);
+            CHECK(archive->sibling(baz) == 0);
+            CHECK(archive->child(baz) == 0);
+            CHECK(archive->name(baz) == "baz");
+            REQUIRE_FALSE(archive->directory(baz));
+            REQUIRE(std::filesystem::is_regular_file(path / "bar" / "baz"));
+
+            // Add a file "trash" under "bar".
+            trash = archive->create(bar, "trash");
+            CHECK(archive->child(bar) == trash);
+            CHECK(archive->parent(trash) == bar);
+            CHECK(archive->sibling(trash) == baz);
+            CHECK(archive->child(trash) == 0);
+            CHECK(archive->name(trash) == "trash");
+            REQUIRE_FALSE(archive->directory(trash));
+            REQUIRE(std::filesystem::is_regular_file(path / "bar" / "trash"));
+
+            // Destroy "trash".
+            REQUIRE(archive->destroy(trash));
+            CHECK(archive->child(bar) == baz);
+            CHECK(archive->sibling(baz) == 0);
+            REQUIRE_FALSE(std::filesystem::exists(path / "bar" / "trash"));
+
+            // Write to "foo" to "foo".
+            auto stream = archive->open(foo, nullptr, File::OpenMode::Write);
+            stream->print("foo");
+            CHECK(stream->tell() == 3);
+
+            // Keep "baz" empty.
+        }
 
         SUBCASE("generated with std")
         {
@@ -138,123 +224,101 @@ TEST_CASE("data::STDArchive")
             std::filesystem::create_directory(path / "bar");
             std::ofstream{path / "foo"} << "foo";
             std::ofstream{path / "bar" / "baz"}; // Don't write anything to "baz", but create it.
+
+            // Create a read-only archive on the generated directory.
+            archive = std::make_unique<STDArchive>(path, true, true);
+            CHECK(archive->readOnly());
+
+            // Check root.
+            CHECK(archive->directory(1));
+            CHECK(archive->parent(1) == 0);
+            CHECK(archive->sibling(1) == 0);
+            REQUIRE(archive->child(1) != 0);
+            REQUIRE(archive->sibling(archive->child(1)) != 0);
+            REQUIRE(archive->sibling(archive->sibling(archive->child(1))) == 0); // 2 children.
+
+            // Figure out which of the children of the root is which.
+            if (archive->name(archive->child(1)) == "foo")
+            {
+                foo = archive->child(1);
+                bar = archive->sibling(foo);
+            }
+            else
+            {
+                bar = archive->child(1);
+                foo = archive->sibling(bar);
+            }
         }
-
-        SUBCASE("generated with an archive")
-        {
-            // Check initial structure.
-            STDArchive archive{path, true, false};
-            CHECK(archive.readOnly() == false);
-            CHECK(archive.parent(1) == 0);
-            CHECK(archive.sibling(1) == 0);
-            CHECK(archive.child(1) == 0);
-            REQUIRE(archive.directory(1));
-            REQUIRE(std::filesystem::is_directory(path));
-
-            // Add a file "foo" under the root.
-            auto foo = archive.create(1, "foo");
-            CHECK(archive.child(1) == foo);
-            CHECK(archive.parent(foo) == 1);
-            CHECK(archive.sibling(foo) == 0);
-            CHECK(archive.child(foo) == 0);
-            CHECK(archive.name(foo) == "foo");
-            REQUIRE_FALSE(archive.directory(foo));
-            REQUIRE(std::filesystem::is_regular_file(path / "foo"));
-
-            // Add a directory "bar" under the root.
-            auto bar = archive.create(1, "bar", true);
-            CHECK(archive.child(1) == bar);
-            CHECK(archive.parent(bar) == 1);
-            CHECK(archive.sibling(bar) == foo);
-            CHECK(archive.child(bar) == 0);
-            CHECK(archive.sibling(foo) == 0);
-            CHECK(archive.name(bar) == "bar");
-            REQUIRE(archive.directory(bar));
-            REQUIRE(std::filesystem::is_directory(path / "bar"));
-
-            // Add a file "baz" under "bar".
-            auto baz = archive.create(bar, "baz");
-            CHECK(archive.child(bar) == baz);
-            CHECK(archive.parent(baz) == bar);
-            CHECK(archive.sibling(baz) == 0);
-            CHECK(archive.child(baz) == 0);
-            CHECK(archive.name(baz) == "baz");
-            REQUIRE_FALSE(archive.directory(baz));
-            REQUIRE(std::filesystem::is_regular_file(path / "bar" / "baz"));
-
-            // Add a file "trash" under "bar".
-            auto trash = archive.create(bar, "trash");
-            CHECK(archive.child(bar) == trash);
-            CHECK(archive.parent(trash) == bar);
-            CHECK(archive.sibling(trash) == baz);
-            CHECK(archive.child(trash) == 0);
-            CHECK(archive.name(trash) == "trash");
-            REQUIRE_FALSE(archive.directory(trash));
-            REQUIRE(std::filesystem::is_regular_file(path / "bar" / "trash"));
-
-            // Destroy "trash".
-            archive.destroy(trash);
-            CHECK(archive.child(bar) == baz);
-            CHECK(archive.sibling(baz) == 0);
-            REQUIRE_FALSE(std::filesystem::exists(path / "bar" / "trash"));
-
-            // Write to "foo" to "foo".
-            auto stream = archive.open(foo, nullptr, File::OpenMode::Write);
-            stream->print("foo");
-            CHECK(stream->tell() == 3);
-
-            // Keep "baz" empty.
-        }
-
-        // Create a read-only archive on the generated directory.
-        STDArchive archive{path, true, true};
-
-        // Check structure.
-        CHECK(archive.readOnly());
-        CHECK(archive.parent(1) == 0);
-        CHECK(archive.sibling(1) == 0);
-        REQUIRE(archive.child(1) != 0);
-        REQUIRE(archive.directory(1));
-        REQUIRE(archive.sibling(archive.child(1)) != 0);
-        REQUIRE(archive.sibling(archive.sibling(archive.child(1))) == 0);
-
-        // Figure out which of the children is which.
-        auto child = archive.child(1);
-        auto foo = archive.name(child) == "foo" ? child : archive.sibling(child);
-        auto bar = archive.name(child) == "bar" ? child : archive.sibling(child);
-        REQUIRE(foo != bar);
-        REQUIRE_FALSE(archive.directory(foo));
-        REQUIRE(archive.directory(bar));
 
         // Check if "foo" is correct.
-        CHECK(archive.parent(foo) == 1);
-        if (archive.sibling(foo) != bar)
-        {
-            CHECK(archive.sibling(foo) == 0);
-        }
-        CHECK(archive.child(foo) == 0);
-        REQUIRE_FALSE(archive.directory(foo));
+        REQUIRE_FALSE(archive->directory(foo));
+        CHECK(archive->parent(foo) == 1);
+        CHECK(archive->child(foo) == 0);
+        CHECK(archive->name(foo) == "foo");
 
         // Check if "bar" is correct.
-        CHECK(archive.parent(bar) == 1);
-        if (archive.sibling(bar) != foo)
-        {
-            CHECK(archive.sibling(bar) == 0);
-        }
-        auto baz = archive.child(bar);
-        REQUIRE(baz != 0);
-        REQUIRE(archive.directory(bar));
+        REQUIRE(archive->directory(bar));
+        CHECK(archive->parent(bar) == 1);
+        auto baz = archive->child(bar);
+        CHECK(baz != 0);
+        CHECK(archive->name(bar) == "bar");
 
         // Check if "baz" is correct.
-        CHECK(archive.name(baz) == "baz");
-        REQUIRE_FALSE(archive.directory(baz));
+        REQUIRE_FALSE(archive->directory(baz));
+        CHECK(archive->parent(baz) == bar);
+        CHECK(archive->sibling(baz) == 0);
+        CHECK(archive->child(baz) == 0);
+        CHECK(archive->name(baz) == "baz");
 
         // Check if "foo" has "foo" written on it.
-        auto stream = archive.open(foo, nullptr, File::OpenMode::Read);
+        auto stream = archive->open(foo, nullptr, File::OpenMode::Read);
+        CHECK(stream->peek() == 'f');
         CHECK(dump(*stream) == "foo");
 
         // Check if "baz" is empty.
-        stream = archive.open(baz, nullptr, File::OpenMode::Read);
+        stream = archive->open(baz, nullptr, File::OpenMode::Read);
         CHECK(dump(*stream) == "");
+    }
+
+    SUBCASE("read-only archive on non existing file fails")
+    {
+        bool wantedDir;
+        PARAMETRIZE_TRUE_OR_FALSE("wanted directory", wantedDir);
+
+        // Initialization will fail since 'path' doesn't exist and this is read-only.
+        STDArchive archive{path, wantedDir, true};
+        REQUIRE(archive.readOnly());
+        assertInitializationFailed(archive);
+    }
+
+    SUBCASE("creating an archive on a directory which does not exist fails")
+    {
+        bool wantedDir;
+        PARAMETRIZE_TRUE_OR_FALSE("wanted directory", wantedDir);
+
+        // Initialization will fail since 'path' doesn't exist.
+        STDArchive archive{path / "archive", wantedDir, false};
+        REQUIRE_FALSE(archive.readOnly());
+        assertInitializationFailed(archive);
+    }
+
+    SUBCASE("creating an archive on a file which doesn't match the expected type")
+    {
+        // If we're expecting a directory, create a regular file and vice versa.
+        bool wantedDir;
+        PARAMETRIZE_TRUE_OR_FALSE("wanted directory", wantedDir);
+        if (wantedDir)
+        {
+            std::ofstream{path}; // Create regular file.
+        }
+        else
+        {
+            std::filesystem::create_directory(path); // Create directory.
+        }
+
+        // Initialization will fail since 'path' is not the expected type.
+        STDArchive archive{path, wantedDir, true};
+        REQUIRE(archive.readOnly());
+        assertInitializationFailed(archive);
     }
 }
