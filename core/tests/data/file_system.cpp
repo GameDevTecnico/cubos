@@ -1,193 +1,369 @@
 #include <doctest/doctest.h>
 
+#include <cubos/core/data/archive.hpp>
 #include <cubos/core/data/file_system.hpp>
-#include <cubos/core/data/std_archive.hpp>
+#include <cubos/core/memory/buffer_stream.hpp>
 
 #include "utils.hpp"
 
+using cubos::core::data::Archive;
 using cubos::core::data::File;
 using cubos::core::data::FileSystem;
-using cubos::core::data::STDArchive;
+using cubos::core::memory::BufferStream;
 using cubos::core::memory::SeekOrigin;
+using cubos::core::memory::Stream;
 
-/// Returns an archive to a temporary location to use for testing.
-static std::unique_ptr<STDArchive> genTempArchive(bool directory, std::string name = "")
+/// Mock implementation of the Archive interface class.
+class MockArchive : public Archive
 {
-    return std::make_unique<STDArchive>(genTempPath(name), directory, false);
+public:
+    MOCK_OVERRIDE(std::size_t, create, std::size_t, std::string_view, bool)
+    MOCK_OVERRIDE(bool, destroy, std::size_t)
+    MOCK_CONST_OVERRIDE(std::string, name, std::size_t)
+    MOCK_CONST_OVERRIDE(bool, directory, std::size_t)
+    MOCK_CONST_OVERRIDE(bool, readOnly)
+    MOCK_CONST_OVERRIDE(std::size_t, parent, std::size_t)
+    MOCK_CONST_OVERRIDE(std::size_t, sibling, std::size_t)
+    MOCK_CONST_OVERRIDE(std::size_t, child, std::size_t)
+    MOCK_OVERRIDE(std::unique_ptr<Stream>, open, std::size_t, File::Handle, File::OpenMode)
+};
+
+/// Returns a dummy Archive which fails on all operations.
+inline auto dummyArchive()
+{
+    return std::make_unique<MockArchive>();
 }
 
-/// Runs tests on a file.
-static void testFile(std::string_view path)
+/// Returns a mocked archive with the given read-only state.
+inline auto mockArchive(bool readOnly)
 {
-    // Get the path of the parent directory and the name of the file.
-    auto parentPath = path.substr(0, path.find_last_of('/'));
-    if (parentPath.empty())
-    {
-        parentPath = "/";
-    }
-    auto name = path.substr(path.find_last_of('/') + 1);
-
-    // Check if the file exists and has the correct properties.
-    auto file = FileSystem::find(path);
-    REQUIRE(file != nullptr);
-    CHECK(file->name() == name);
-    CHECK(file->path() == path);
-    CHECK_FALSE(file->directory());
-    CHECK(file->archive() != nullptr);
-    CHECK(file->parent() == FileSystem::find(parentPath));
-    CHECK(file->child() == nullptr);
-
-    // Check if the file can be opened and written to.
-    auto stream = FileSystem::open(path, File::OpenMode::Write);
-    REQUIRE(stream != nullptr);
-    stream->print("bar");
-    stream->seek(2, SeekOrigin::Begin);
-    stream->print("z");
-    CHECK(stream->tell() == 3);
-
-    // Check if the file can be read from.
-    stream = FileSystem::open(path, File::OpenMode::Read);
-    REQUIRE(stream != nullptr);
-    CHECK(stream->peek() == 'b');
-    CHECK(dump(*stream) == "baz");
-    CHECK(stream->tell() == 3);
-
-    // Make sure that you cannot create a file under a regular file.
-    CHECK(FileSystem::create(std::string(path) + "/foo") == nullptr);
+    auto archive = dummyArchive();
+    archive->readOnlyWhen = [readOnly]() { return readOnly; };
+    return archive;
 }
 
-static void testDirectory(std::string_view path)
+/// Resets the file system to its initial state.
+inline void unmountAll(File::Handle handle)
 {
-    // Get the path of the parent directory and the name of the directory.
-    auto parentPath = path.substr(0, path.find_last_of('/'));
-    if (parentPath.empty())
+    while (handle->child() != nullptr)
     {
-        parentPath = "/";
+        if (handle->child()->archive() != nullptr)
+        {
+            handle->unmount(handle->child()->name());
+        }
+        else
+        {
+            unmountAll(handle->child());
+        }
     }
-    auto name = path.substr(path.find_last_of('/') + 1);
-
-    // Check if the directory exists and has the correct properties.
-    auto dir = FileSystem::find(path);
-    REQUIRE(dir != nullptr);
-    CHECK(dir->name() == name);
-    CHECK(dir->path() == path);
-    CHECK(dir->directory());
-    CHECK(dir->archive() != nullptr);
-    CHECK(dir->parent() == FileSystem::find(parentPath));
-    REQUIRE(dir->child() == nullptr); // We haven't created any files yet.
-
-    // Directories cannot be opened.
-    CHECK(FileSystem::open(path, File::OpenMode::Read) == nullptr);
-
-    // Try creating a file with an invalid path in the directory, and check if anything changed.
-    REQUIRE(FileSystem::create(std::string(path) + "/foo//bar") == nullptr);
-    REQUIRE(dir->child() == nullptr);
-
-    // Create a new file in the directory.
-    auto stream = FileSystem::open(std::string(path) + "/foo", File::OpenMode::Write);
-    REQUIRE(stream != nullptr);
-    stream = nullptr;
-
-    // Check if the file exists and has the correct properties.
-    testFile(std::string(path) + "/foo");
-
-    // Create a new directory in the directory, and a file in that directory.
-    REQUIRE(FileSystem::create(std::string(path) + "/bar", true) != nullptr);
-    REQUIRE(FileSystem::create(std::string(path) + "/bar/baz") != nullptr);
-
-    // Check if the file exists and has the correct properties.
-    testFile(std::string(path) + "/bar/baz");
-
-    // Remove bar.
-    REQUIRE(FileSystem::destroy(std::string(path) + "/bar"));
-    CHECK(FileSystem::find(std::string(path) + "/bar") == nullptr);
 }
 
 TEST_CASE("data::FileSystem")
 {
+    unmountAll(FileSystem::root());
+
     SUBCASE("without anything mounted")
     {
-        // Try executing operations with a non-absolute path.
-        CHECK(FileSystem::find("foo") == nullptr);
-        CHECK(FileSystem::create("foo") == nullptr);
-        CHECK_FALSE(FileSystem::mount("foo", nullptr));
-        CHECK_FALSE(FileSystem::unmount("foo"));
-        CHECK_FALSE(FileSystem::destroy("foo"));
-        CHECK(FileSystem::open("foo", File::OpenMode::Read) == nullptr);
-
-        // Try executing operations on the root with a non-relative path.
+        // Initially the root directory exists and is empty.
         auto root = FileSystem::root();
-        REQUIRE(root != nullptr);
-        CHECK(root->find("/foo") == nullptr);
-        CHECK(root->create("/foo") == nullptr);
-        CHECK_FALSE(root->mount("/foo", nullptr));
-        CHECK_FALSE(root->unmount("/foo"));
+        REQUIRE(FileSystem::find("/") == root);
+        REQUIRE(root->name() == "");
+        REQUIRE(root->path() == "");
+        REQUIRE(root->directory());
+        REQUIRE(root->archive() == nullptr);
+        REQUIRE(root->id() == 0);
+        REQUIRE(root->parent() == nullptr);
+        REQUIRE(root->sibling() == nullptr);
+        REQUIRE(root->child() == nullptr);
 
-        // Try creating a file outside of an archive.
-        CHECK(FileSystem::find("/foo") == nullptr);
-        CHECK(FileSystem::create("/foo") == nullptr);
-        CHECK(FileSystem::find("/foo") == nullptr); // Create did not do anything.
+        // It cannot be destroyed.
+        REQUIRE_FALSE(root->destroy());
+        REQUIRE_FALSE(FileSystem::destroy("/"));
 
-        // Try executing operations on a file that does not exist.
-        CHECK_FALSE(FileSystem::unmount("/foo"));
-        CHECK_FALSE(FileSystem::destroy("/foo"));
-        CHECK(FileSystem::open("/foo", File::OpenMode::Read) == nullptr);
-        CHECK(FileSystem::open("/foo", File::OpenMode::Write) == nullptr);
+        // Files cannot be created under it (files must be created under archives).
+        REQUIRE_FALSE(root->create("foo", false));
+        REQUIRE_FALSE(FileSystem::create("/foo", true));
+        REQUIRE(FileSystem::find("/foo") == nullptr);
 
-        // Try mounting an archive to the root.
-        REQUIRE_FALSE(FileSystem::mount("/", genTempArchive(true)));
+        // Cannot create files on non-absolute paths.
+        REQUIRE_FALSE(FileSystem::create("foo", false));
 
-        // Try unmounting the root.
-        CHECK_FALSE(FileSystem::unmount("/"));
+        // Cannot destroy files that do not exist.
+        REQUIRE_FALSE(FileSystem::destroy("/foo"));
+
+        // Cannot destroy files on non-absolute paths.
+        REQUIRE_FALSE(FileSystem::destroy("foo"));
+
+        // Cannot open invalid paths, the root or files that do not exist.
+        REQUIRE(FileSystem::open("", File::OpenMode::Read) == nullptr);
+        REQUIRE(FileSystem::open("foo/", File::OpenMode::Read) == nullptr);
+        REQUIRE(FileSystem::open("/", File::OpenMode::Read) == nullptr);
+        REQUIRE(FileSystem::open("/foo", File::OpenMode::Read) == nullptr);
+
+        // Cannot open and create files on paths which are not within archives.
+        REQUIRE(FileSystem::open("/foo", File::OpenMode::Write) == nullptr);
+
+        // Cannot mount archives on invalid paths - nothing should change.
+        REQUIRE_FALSE(FileSystem::mount("", dummyArchive()));
+        REQUIRE_FALSE(FileSystem::mount("/foo//bar", dummyArchive()));
+        REQUIRE(FileSystem::find("/foo") == nullptr);
+
+        // Cannot mount archives on the root file.
+        REQUIRE_FALSE(FileSystem::mount("/", dummyArchive()));
+
+        // Cannot unmount archives from invalid paths or non-mount points.
+        REQUIRE_FALSE(FileSystem::unmount(""));
+        REQUIRE_FALSE(FileSystem::unmount("/"));
+        REQUIRE_FALSE(FileSystem::unmount("/foo"));
     }
 
-    SUBCASE("with an archive mounted on a directory")
+    SUBCASE("with an archive mounted as a regular file")
     {
-        REQUIRE(FileSystem::mount("/dir/sub", genTempArchive(true)));
+        bool readOnly;
+        PARAMETRIZE_TRUE_OR_FALSE("read-only", readOnly);
 
-        // An archive cannot be mounted on a already existing file - even if it isn't part of an
-        // archive.
-        REQUIRE_FALSE(FileSystem::mount("/dir", genTempArchive(false, "failed")));
+        auto root = FileSystem::root();
 
-        // An archive cannot be mounted on the same path as another archive.
-        REQUIRE_FALSE(FileSystem::mount("/dir/sub", genTempArchive(true, "failed")));
+        // Mount a single file archive on /foo.
+        char buf[5] = "text";
+        auto archive = mockArchive(readOnly);
+        archive->directoryWhen = [](auto) { return false; };
+        archive->childWhen = [](auto) { return 0; };
+        archive->openWhen = [&buf](auto, auto, auto) { return std::make_unique<BufferStream>(buf, 4); };
+        REQUIRE(FileSystem::mount("/foo", std::move(archive)));
 
-        // An archive cannot be mounted on a path that is already part of another archive.
-        REQUIRE_FALSE(FileSystem::mount("/dir/sub/abc", genTempArchive(true, "failed")));
+        // Mounting another archive on the same path should fail.
+        REQUIRE_FALSE(FileSystem::mount("/foo", dummyArchive()));
 
-        // Test operations on the directory.
-        testDirectory("/dir/sub");
+        // To get the file we must use an absolute and correct path.
+        REQUIRE(FileSystem::find("foo") == nullptr);
+        REQUIRE(FileSystem::find("/fo") == nullptr);
+        REQUIRE(FileSystem::find("/foo/") == nullptr);
 
-        SUBCASE("unmounted the only archive beneath /dir")
+        // The archive should be mounted on /foo.
+        auto foo = FileSystem::find("/foo");
+        REQUIRE(foo != nullptr);
+        REQUIRE(foo->name() == "foo");
+        REQUIRE(foo->path() == "/foo");
+        REQUIRE_FALSE(foo->directory());
+        REQUIRE(foo->archive() != nullptr);
+        REQUIRE(foo->id() == 1);
+        REQUIRE(foo->parent() == root);
+        REQUIRE(foo->sibling() == nullptr);
+        REQUIRE(foo->child() == nullptr);
+
+        // File can be read.
+        auto stream = FileSystem::open("/foo", File::OpenMode::Read);
+        REQUIRE(stream != nullptr);
+        REQUIRE(dump(*stream) == "text");
+        stream = nullptr; // Close the file.
+
+        if (readOnly)
         {
-            // Unmount the archive - this should remove both files from the file system, as there
-            // are lno other files below them.
-            REQUIRE(FileSystem::unmount("/dir/sub"));
-            CHECK(FileSystem::find("/dir") == nullptr);
+            // But not written.
+            REQUIRE(foo->open(File::OpenMode::Write) == nullptr);
+            REQUIRE(foo->open(File::OpenMode::ReadWrite) == nullptr);
+        }
+        else
+        {
+            // And written.
+            stream = foo->open(File::OpenMode::Write);
+            REQUIRE(stream != nullptr);
+            stream->print("abcd");
+            stream = nullptr; // Close the file.
+
+            stream = FileSystem::open("/foo", File::OpenMode::ReadWrite);
+            REQUIRE(stream != nullptr);
+            REQUIRE(dump(*stream) == "abcd");
+            stream->seek(0, SeekOrigin::Begin);
+            stream->print("text");
+            stream = nullptr; // Close the file.
         }
 
-        SUBCASE("there is another archive beneath /dir")
-        {
-            // Mount another archive beneath the directory.
-            REQUIRE(FileSystem::mount("/dir/other", genTempArchive(false)));
+        // Creating a file with the same name and type should return the same file.
+        REQUIRE(FileSystem::create("/foo", false) == foo);
 
-            // Unmount the archive - this should only remove the file from the file system, as there
-            // is another file below it.
-            REQUIRE(FileSystem::unmount("/dir/sub"));
-            CHECK(FileSystem::find("/dir/sub") == nullptr);
-            CHECK(FileSystem::find("/dir") != nullptr);
+        // Creating a file with the same name but different type should fail.
+        REQUIRE(FileSystem::create("/foo", true) == nullptr);
 
-            // Unmount the other archive - now the directory should be removed as well.
-            REQUIRE(FileSystem::unmount("/dir/other"));
-            CHECK(FileSystem::find("/dir") == nullptr);
-        }
+        // Cannot create a file under a regular file.
+        REQUIRE(FileSystem::create("/foo/bar", false) == nullptr);
+
+        // Cannot unmount the archive with an invalid path or non-mount point.
+        REQUIRE_FALSE(FileSystem::unmount("/"));
+        REQUIRE_FALSE(FileSystem::unmount("/fo"));
+        REQUIRE_FALSE(FileSystem::unmount("/foo/"));
+        REQUIRE_FALSE(FileSystem::unmount("/foo/bar"));
+
+        // File cannot be destroyed, but can be unmounted.
+        REQUIRE_FALSE(foo->destroy());
+        REQUIRE_FALSE(FileSystem::destroy("/foo"));
+        REQUIRE(FileSystem::unmount("/foo"));
+        REQUIRE(FileSystem::find("/foo") == nullptr);
+        REQUIRE(root->child() == nullptr);
+        REQUIRE(foo->parent() == nullptr);
+
+        // Even after unmounting, since there is still a handle to the file, it should still be readable.
+        // However, it will not be out of the tree.
+        stream = foo->open(File::OpenMode::Read);
+        REQUIRE(stream != nullptr);
+        REQUIRE(dump(*stream) == "text");
+        stream = nullptr; // Close the file.
+
+        foo = nullptr; // Only now is the file really inaccessible.
     }
 
-    SUBCASE("with an archive mounted on a regular file")
+    SUBCASE("with an archive mounted as a directory")
     {
-        REQUIRE(FileSystem::mount("/file", genTempArchive(false)));
-        REQUIRE_FALSE(FileSystem::destroy("/file"));
-        testFile("/file");
-        REQUIRE(FileSystem::unmount("/file"));
+        bool readOnly;
+        PARAMETRIZE_TRUE_OR_FALSE("read-only", readOnly);
+
+        // Prepare a mock archive with the following structure:
+        // 1: /        (directory)
+        // 2: /bar     (directory)
+        // 3: /foo     (file)
+        // 4: /bar/baz (file)
+        bool directories[] = {true, true, false, false};
+        std::string names[] = {"", "bar", "foo", "baz", "qux"};
+        std::size_t parents[] = {0, 1, 1, 2, 2};
+        std::size_t siblings[] = {0, 3, 0, 0, 4};
+        std::size_t children[] = {2, 4, 0, 0, 0};
+
+        auto archive = mockArchive(readOnly);
+        archive->directoryWhen = [directories](std::size_t id) { return directories[id - 1]; };
+        archive->nameWhen = [names](std::size_t id) { return names[id - 1]; };
+        archive->parentWhen = [parents](std::size_t id) { return parents[id - 1]; };
+        archive->siblingWhen = [siblings](std::size_t id) { return siblings[id - 1]; };
+        archive->childWhen = [children](std::size_t id) { return children[id - 1]; };
+        archive->createWhen = [&children](std::size_t parent, std::string_view name, bool directory) {
+            // Should only be called for creating "qux" under "bar"
+            REQUIRE(parent == 2);
+            REQUIRE(name == "qux");
+            REQUIRE_FALSE(directory);
+            children[2] = 5;
+            return 5;
+        };
+        archive->openWhen = [](std::size_t id, auto, auto) {
+            REQUIRE(id == 5);
+            return std::make_unique<BufferStream>(nullptr, 0, false);
+        };
+        archive->destroyWhen = [](auto) { return true; };
+
+        // Mount it on /dir/sub/arc
+        REQUIRE(FileSystem::mount("/dir/sub/arc", std::move(archive)));
+        REQUIRE(FileSystem::find("/dir/sub") != nullptr);
+        REQUIRE(FileSystem::find("/dir/sub")->archive() == nullptr);
+        REQUIRE(FileSystem::find("/dir/sub")->directory());
+
+        // The directory exists and is not empty.
+        auto arc = FileSystem::find("/dir/sub/arc");
+        REQUIRE(arc != nullptr);
+        REQUIRE(arc->name() == "arc");
+        REQUIRE(arc->path() == "/dir/sub/arc");
+        REQUIRE(arc->directory());
+        REQUIRE(arc->archive() != nullptr);
+        REQUIRE(arc->id() == 1);
+        REQUIRE(arc->parent() == FileSystem::find("/dir/sub"));
+        REQUIRE(arc->sibling() == nullptr);
+        auto bar = arc->child();
+        REQUIRE(bar != nullptr);
+
+        // Figure out which one is really "bar" and which one is "foo".
+        auto foo = bar->sibling();
+        REQUIRE(foo != nullptr);
+        REQUIRE(foo->sibling() == nullptr);
+        if (bar->name() == "foo")
+        {
+            std::swap(bar, foo);
+        }
+
+        // "bar" is a directory and contains a file.
+        REQUIRE(bar->name() == "bar");
+        REQUIRE(bar->path() == "/dir/sub/arc/bar");
+        REQUIRE(bar->directory());
+        REQUIRE(bar->archive() != nullptr);
+        REQUIRE(bar->id() == 2);
+        REQUIRE(bar->parent() == arc);
+        auto baz = bar->child();
+        REQUIRE(baz != nullptr);
+
+        // "foo" is a file.
+        REQUIRE(foo->name() == "foo");
+        REQUIRE(foo->path() == "/dir/sub/arc/foo");
+        REQUIRE_FALSE(foo->directory());
+        REQUIRE(foo->archive() != nullptr);
+        REQUIRE(foo->id() == 3);
+        REQUIRE(foo->parent() == arc);
+        REQUIRE(foo->child() == nullptr);
+
+        // "baz" is a file.
+        REQUIRE(baz->name() == "baz");
+        REQUIRE(baz->path() == "/dir/sub/arc/bar/baz");
+        REQUIRE_FALSE(baz->directory());
+        REQUIRE(baz->archive() != nullptr);
+        REQUIRE(baz->id() == 4);
+        REQUIRE(baz->parent() == bar);
+        REQUIRE(baz->sibling() == nullptr);
+        REQUIRE(baz->child() == nullptr);
+
+        if (readOnly)
+        {
+            // Cannot create a file under a read-only archive.
+            REQUIRE(FileSystem::create("/dir/sub/arc/bar/qux", false) == nullptr);
+            REQUIRE(FileSystem::open("/dir/sub/arc/bar/qux", File::OpenMode::Write) == nullptr);
+        }
+        else
+        {
+            // Cannot create a file with an invalid path.
+            REQUIRE(bar->create("/qux", false) == nullptr);
+
+            // Open "qux" for writing under "bar", creating it.
+            REQUIRE(FileSystem::open("/dir/sub/arc/bar/qux", File::OpenMode::Write) != nullptr);
+
+            // Check that "qux" was created correctly.
+            auto qux = FileSystem::find("/dir/sub/arc/bar/qux");
+            REQUIRE(qux != nullptr);
+            REQUIRE(qux->name() == "qux");
+            REQUIRE(qux->path() == "/dir/sub/arc/bar/qux");
+            REQUIRE_FALSE(qux->directory());
+            REQUIRE(qux->archive() != nullptr);
+            REQUIRE(qux->id() == 5);
+            REQUIRE(qux->parent() == bar);
+            REQUIRE(qux->sibling() == baz);
+            REQUIRE(qux->child() == nullptr);
+            REQUIRE(bar->child() == qux);
+            REQUIRE(baz->sibling() == nullptr);
+
+            // Destroy "bar" and check that "qux" and "baz" are gone.
+            REQUIRE(FileSystem::destroy("/dir/sub/arc/bar"));
+            REQUIRE(FileSystem::find("/dir/sub/arc/bar") == nullptr);
+            REQUIRE(FileSystem::find("/dir/sub/arc/bar/baz") == nullptr);
+            REQUIRE(FileSystem::find("/dir/sub/arc/bar/qux") == nullptr);
+            REQUIRE(bar->destroy()); // Should be a no-op.
+
+            // Check that "qux" can still be accessed.
+            REQUIRE(qux->open(File::OpenMode::Read) != nullptr);
+        }
+
+        // Mount another archive under "/dir".
+        archive = mockArchive(readOnly);
+        archive->directoryWhen = [](auto) { return false; };
+        archive->childWhen = [](auto) { return 0; };
+        REQUIRE(FileSystem::mount("/dir/other", std::move(archive)));
+
+        // Try to unmount the archive not from its root.
+        REQUIRE_FALSE(FileSystem::unmount("/dir/sub/arc/bar"));
+
+        // Unmount the archive.
+        REQUIRE(FileSystem::unmount("/dir/sub/arc"));
+
+        // "/dir/sub" should no longer exist, but "/dir" should.
+        REQUIRE(FileSystem::find("/dir/sub") == nullptr);
+        REQUIRE(FileSystem::find("/dir") != nullptr);
+
+        // After unmounting, "/dir/other", "/dir" should no longer exist.
+        REQUIRE(FileSystem::unmount("/dir/other"));
+        REQUIRE(FileSystem::find("/dir") == nullptr);
+        REQUIRE(FileSystem::root()->child() == nullptr);
     }
 }
