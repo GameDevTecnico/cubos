@@ -2,6 +2,7 @@
 
 #include <cubos/core/data/archive.hpp>
 #include <cubos/core/data/file_system.hpp>
+#include <cubos/core/log.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
 
 #include "utils.hpp"
@@ -60,6 +61,7 @@ inline void unmountAll(File::Handle handle)
 
 TEST_CASE("data::FileSystem")
 {
+    cubos::core::disableLogging();
     unmountAll(FileSystem::root());
 
     SUBCASE("without anything mounted")
