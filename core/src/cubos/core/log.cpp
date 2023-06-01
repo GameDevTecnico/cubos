@@ -19,3 +19,8 @@ void cubos::core::initializeLogger()
     logger->flush_on(spdlog::level::trace);
     spdlog::set_default_logger(logger);
 }
+
+void cubos::core::disableLogging()
+{
+    spdlog::set_level(spdlog::level::critical);
+}

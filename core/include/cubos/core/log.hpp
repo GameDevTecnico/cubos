@@ -69,4 +69,7 @@ namespace cubos::core
 {
     /// Initializes the logger, must be called before any logging is done.
     void initializeLogger();
+
+    /// Disables all logging except for critical errors.
+    void disableLogging();
 } // namespace cubos::core
