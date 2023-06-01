@@ -9,25 +9,30 @@ using namespace cubos::core::data;
 
 static bool validateRelativePath(std::string_view path)
 {
+    if (path.empty())
+    {
+        return true;
+    }
+
     auto remPath = path;
     while (!remPath.empty())
     {
         auto i = remPath.find_first_of('/');
         if (i == std::string::npos)
         {
-            break;
+            return true;
         }
 
         if (i == 0)
         {
-            CUBOS_ERROR("Invalid relative path '{}': cannot have leading, trailing or consecutive slashes", path);
-            return false;
+            break;
         }
 
         remPath = remPath.substr(i + 1);
     }
 
-    return true;
+    CUBOS_ERROR("Invalid relative path '{}': cannot have leading, trailing or consecutive slashes", path);
+    return false;
 }
 
 File::File(Handle parent, std::string_view name)
@@ -164,9 +169,6 @@ bool File::unmount(std::string_view path)
         file->mChild->removeArchive();
         file->removeChild(file->mChild);
     }
-
-    file->mArchive = nullptr;
-    file->mId = 0;
 
     // Remove the mount point and any of its non-root parent directories which become empty.
     while (file->mParent != nullptr && file->mChild == nullptr)
@@ -369,12 +371,6 @@ void File::destroyRecursive()
     // Lock the file mutex.
     std::lock_guard fileLock(mMutex);
 
-    if (mDestroyed)
-    {
-        // If the file has already been marked as destroyed, do nothing.
-        return;
-    }
-
     // Mark the file as destroyed.
     mDestroyed = true;
 
@@ -399,11 +395,7 @@ std::unique_ptr<memory::Stream> File::open(OpenMode mode)
         return nullptr;
     }
 
-    if (mArchive == nullptr)
-    {
-        CUBOS_ERROR("Could not open file '{}': file is not on an archive", mPath);
-        return nullptr;
-    }
+    CUBOS_ASSERT(mArchive != nullptr, "Regular files must be on an archive");
 
     if (mArchive->readOnly() && mode != OpenMode::Read)
     {
