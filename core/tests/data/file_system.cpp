@@ -121,7 +121,7 @@ TEST_CASE("data::FileSystem")
 
     SUBCASE("with an archive mounted as a regular file")
     {
-        bool readOnly;
+        bool readOnly = false;
         PARAMETRIZE_TRUE_OR_FALSE("read-only", readOnly);
 
         auto root = FileSystem::root();
@@ -217,7 +217,7 @@ TEST_CASE("data::FileSystem")
 
     SUBCASE("with an archive mounted as a directory")
     {
-        bool readOnly;
+        bool readOnly = false;
         PARAMETRIZE_TRUE_OR_FALSE("read-only", readOnly);
 
         // Prepare a mock archive with the following structure:

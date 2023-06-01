@@ -28,27 +28,23 @@ TEST_CASE("data::STDArchive")
 
     SUBCASE("single file archive works correctly")
     {
-        bool readOnly;
-        bool preCreateFile;
+        bool readOnly = false;
+        bool preCreateFile = true;
 
         SUBCASE("read-only")
         {
             readOnly = true;
-            preCreateFile = true;
         }
 
         SUBCASE("writeable")
         {
-            readOnly = false;
+            SUBCASE("with pre-existing file")
+            {
+            }
 
             SUBCASE("without pre-existing file")
             {
                 preCreateFile = false;
-            }
-
-            SUBCASE("with pre-existing file")
-            {
-                preCreateFile = true;
             }
         }
 
@@ -129,9 +125,9 @@ TEST_CASE("data::STDArchive")
 
     SUBCASE("directory archive works correctly")
     {
-        std::unique_ptr<STDArchive> archive;
-        std::size_t foo;
-        std::size_t bar;
+        std::unique_ptr<STDArchive> archive = nullptr;
+        std::size_t foo = 0;
+        std::size_t bar = 0;
 
         SUBCASE("generated with an archive")
         {
@@ -277,7 +273,7 @@ TEST_CASE("data::STDArchive")
 
     SUBCASE("read-only archive on non existing file fails")
     {
-        bool wantedDir;
+        bool wantedDir = false;
         PARAMETRIZE_TRUE_OR_FALSE("wanted directory", wantedDir);
 
         // Initialization will fail since 'path' doesn't exist and this is read-only.
@@ -288,7 +284,7 @@ TEST_CASE("data::STDArchive")
 
     SUBCASE("creating an archive on a directory which does not exist fails")
     {
-        bool wantedDir;
+        bool wantedDir = false;
         PARAMETRIZE_TRUE_OR_FALSE("wanted directory", wantedDir);
 
         // Initialization will fail since 'path' doesn't exist.
@@ -300,7 +296,7 @@ TEST_CASE("data::STDArchive")
     SUBCASE("creating an archive on a file which doesn't match the expected type")
     {
         // If we're expecting a directory, create a regular file and vice versa.
-        bool wantedDir;
+        bool wantedDir = false;
         PARAMETRIZE_TRUE_OR_FALSE("wanted directory", wantedDir);
         if (wantedDir)
         {
