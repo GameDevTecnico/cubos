@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/data/embedded_archive.hpp>
+#include <cubos/core/log.hpp>
 
 #include "utils.hpp"
 
@@ -31,6 +32,8 @@ static const EmbeddedArchive::Data multipleData = {multipleEntries,
 
 TEST_CASE("data::EmbeddedArchive")
 {
+    cubos::core::disableLogging();
+
     // Must use static since there are multiple subcases.
     static bool registered = false;
     if (!registered)
