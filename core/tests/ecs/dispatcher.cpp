@@ -198,4 +198,22 @@ TEST_CASE("ecs::Dispatcher")
         singleDispatch(dispatcher, world, cmdBuffer);
         assertOrder(world, {8, 9, 2, 3, 11});
     }
+
+    SUBCASE("constraints are transitive on tags without systems")
+    {
+        // Tests if #413 has been fixed.
+        dispatcher.addSystem(pushToOrder<1>);
+        dispatcher.systemSetBeforeTag("a");
+        dispatcher.addTag("a");
+        dispatcher.tagSetBeforeTag("b");
+        dispatcher.addSystem(pushToOrder<3>);
+        dispatcher.systemAddTag("b");
+
+        // 1 runs before tag "a".
+        // tag "a" runs before tag "b".
+        // 3 is tagged with "b".
+        // Therefore, 1 must run before 3.
+        singleDispatch(dispatcher, world, cmdBuffer);
+        assertOrder(world, {1, 3});
+    }
 }
