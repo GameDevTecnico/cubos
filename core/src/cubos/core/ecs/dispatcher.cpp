@@ -124,7 +124,12 @@ void Dispatcher::compileChain()
     std::vector<DFSNode> nodes;
     for (System* system : mPendingSystems)
     {
-        nodes.push_back(DFSNode{DFSNode::WHITE, system});
+        nodes.push_back(DFSNode{DFSNode::WHITE, system, "", system->settings});
+    }
+
+    for (auto& [tag, settings] : mTagSettings)
+    {
+        nodes.push_back(DFSNode{DFSNode::WHITE, nullptr, tag, settings});
     }
 
     // Keep running while there are unvisited nodes
@@ -160,30 +165,44 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
     case DFSNode::WHITE: // Node is unexplored.
     {
         node.m = DFSNode::GRAY;
-        System* systemInfo = node.s;
-        if (systemInfo->settings)
+        if (node.settings)
         {
             // Visit tags first
-            for (const std::string& tag : systemInfo->settings->before.tag)
+            for (const std::string& tag : node.settings->before.tag)
             {
                 for (auto it = nodes.begin(); it != nodes.end(); it++)
                 {
-                    if (std::find(it->s->tags.begin(), it->s->tags.end(), tag) != it->s->tags.end())
+                    if (it->s != nullptr)
                     {
-                        if (dfsVisit(*it, nodes))
+                        if (std::find(it->s->tags.begin(), it->s->tags.end(), tag) != it->s->tags.end())
                         {
-                            return true;
+                            if (dfsVisit(*it, nodes))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (tag == it->t || std::find(it->settings->inherits.begin(), it->settings->inherits.end(),
+                                                      tag) != it->settings->inherits.end())
+                        {
+                            if (dfsVisit(*it, nodes))
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
             }
+
             // Now visit systems
-            for (System* system : systemInfo->settings->before.system)
+            for (System* system : node.settings->before.system)
             {
                 SystemSettings* settings = system->settings.get();
                 for (auto it = nodes.begin(); it != nodes.end(); it++)
                 {
-                    if (it->s->settings.get() == settings)
+                    if (it->settings.get() == settings)
                     {
                         if (dfsVisit(*it, nodes))
                         {
@@ -193,9 +212,13 @@ bool Dispatcher::dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes)
                 }
             }
         }
+
         // All children nodes were visited; mark this node as complete
         node.m = DFSNode::BLACK;
-        mSystems.push_back(systemInfo);
+        if (node.s != nullptr)
+        {
+            mSystems.push_back(node.s);
+        }
         return false;
     }
     }

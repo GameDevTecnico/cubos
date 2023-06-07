@@ -169,6 +169,8 @@ namespace cubos::core::ecs
                 BLACK
             } m;
             System* s;
+            std::string t;
+            std::shared_ptr<SystemSettings> settings;
         };
 
         /// Visits a DFSNode to create a topological order.
