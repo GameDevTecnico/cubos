@@ -96,9 +96,6 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1ecs_1_1Entity.ht
 </div><!--header-->
 <div class="contents">
 
-<p>Handle used to identify an <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a>.  
- <a href="classcubos_1_1core_1_1ecs_1_1Entity.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="entity__manager_8hpp_source.html">entity_manager.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -140,7 +137,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="separator:a240945185669680bcfcd13289bd5376a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Handle used to identify an <a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a>. </p>
+<div class="textblock"><p>Identifies an entity.</p>
+<p>When serializing/deserializing, if there's a SerializationMap&lt;Entity, std::string&gt; in the context, it will be used to (de)serialize strings representing the entities. Otherwise, the identifiers will be (de)serialized as objects with two fields: their index and their generation. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad14ceaf6ca9c2b25b233e841d7295972"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad14ceaf6ca9c2b25b233e841d7295972">&#9670;&nbsp;</a></span>Entity()</h2>

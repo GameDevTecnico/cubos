@@ -11,8 +11,7 @@ var annotated_dup =
         ] ],
         [ "data", "namespacecubos_1_1core_1_1data.html", [
           [ "impl", "namespacecubos_1_1core_1_1data_1_1impl.html", [
-            [ "Packager", "classcubos_1_1core_1_1data_1_1impl_1_1Packager.html", "classcubos_1_1core_1_1data_1_1impl_1_1Packager" ],
-            [ "Unpackager", "classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html", "classcubos_1_1core_1_1data_1_1impl_1_1Unpackager" ]
+            [ "Packager", "classcubos_1_1core_1_1data_1_1impl_1_1Packager.html", "classcubos_1_1core_1_1data_1_1impl_1_1Packager" ]
           ] ],
           [ "Archive", "classcubos_1_1core_1_1data_1_1Archive.html", "classcubos_1_1core_1_1data_1_1Archive" ],
           [ "BinaryDeserializer", "classcubos_1_1core_1_1data_1_1BinaryDeserializer.html", "classcubos_1_1core_1_1data_1_1BinaryDeserializer" ],
@@ -28,6 +27,7 @@ var annotated_dup =
           [ "JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", "classcubos_1_1core_1_1data_1_1JSONDeserializer" ],
           [ "JSONSerializer", "classcubos_1_1core_1_1data_1_1JSONSerializer.html", "classcubos_1_1core_1_1data_1_1JSONSerializer" ],
           [ "Package", "classcubos_1_1core_1_1data_1_1Package.html", "classcubos_1_1core_1_1data_1_1Package" ],
+          [ "Unpackager", "classcubos_1_1core_1_1data_1_1Unpackager.html", "classcubos_1_1core_1_1data_1_1Unpackager" ],
           [ "QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", "structcubos_1_1core_1_1data_1_1QBMatrix" ],
           [ "SerializationMap", "classcubos_1_1core_1_1data_1_1SerializationMap.html", "classcubos_1_1core_1_1data_1_1SerializationMap" ],
           [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", "classcubos_1_1core_1_1data_1_1Serializer" ],

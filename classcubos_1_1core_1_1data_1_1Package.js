@@ -44,6 +44,7 @@ var classcubos_1_1core_1_1data_1_1Package =
     [ "isStructured", "classcubos_1_1core_1_1data_1_1Package.html#a0df96404d3d5b00129803ff563198aa5", null ],
     [ "operator=", "classcubos_1_1core_1_1data_1_1Package.html#a4b92b86615255c6fee15560685c2f56d", null ],
     [ "operator=", "classcubos_1_1core_1_1data_1_1Package.html#af7d69a19e1250f9d0a0c21c2cbb7aa21", null ],
+    [ "removeField", "classcubos_1_1core_1_1data_1_1Package.html#a9092764be050a0c1d220f52be9ea5308", null ],
     [ "serialize", "classcubos_1_1core_1_1data_1_1Package.html#aa3da9f1601203bba398461f731cad94d", null ],
     [ "set", "classcubos_1_1core_1_1data_1_1Package.html#a28a43650b75b85b440a5f17fc2d010b6", null ],
     [ "size", "classcubos_1_1core_1_1data_1_1Package.html#ade1601ccf1fa3bcf050867f0852ca4e5", null ],

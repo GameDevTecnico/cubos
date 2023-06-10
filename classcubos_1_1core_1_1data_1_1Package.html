@@ -190,6 +190,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac25a286817641fbe449e48d68c162283"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b85df1c24befece32b89019f54551a1"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a9cd6f12580e96726c8aac2c78d23198f">Fields</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a1b85df1c24befece32b89019f54551a1">fields</a> () const</td></tr>
 <tr class="separator:a1b85df1c24befece32b89019f54551a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9092764be050a0c1d220f52be9ea5308"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">Package</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a9092764be050a0c1d220f52be9ea5308">removeField</a> (std::string_view name)</td></tr>
+<tr class="separator:a9092764be050a0c1d220f52be9ea5308"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a866ac062aaf85113f20a2c419287559c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">Package</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#a866ac062aaf85113f20a2c419287559c">element</a> (std::size_t index)</td></tr>
 <tr class="separator:a866ac062aaf85113f20a2c419287559c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8da047154aebe8174991176ea2a3466"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#ab0be26e13852464bd5c2201c00164a54">Elements</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html#ad8da047154aebe8174991176ea2a3466">elements</a> ()</td></tr>
@@ -739,6 +741,31 @@ pkg.into(myDeserializableObject);
       </table>
 </div><div class="memdoc">
 <p>Checks if the package is storing a structured data type (object, array or dictionary). </p><dl class="section return"><dt>Returns</dt><dd>True if the package is storing a structured data type, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a9092764be050a0c1d220f52be9ea5308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9092764be050a0c1d220f52be9ea5308">&#9670;&nbsp;</a></span>removeField()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">Package</a> removeField </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Removes a field from this package. If the package isn't storing an object, this method will abort. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the field. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The removed field, or an empty package if the field didn't exist. </dd></dl>
 
 </div>
 </div>

@@ -116,40 +116,44 @@ $(document).ready(function(){initNavTree('vec__storage_8hpp_source.html',''); in
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">if</span> (mData.size() &lt;= index)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            mData.resize(index);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            mData.push_back(value);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            mData.emplace_back(std::move(value));</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        }</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            mData[index] = value;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> &amp;mData[index];</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a00f2f0c8f38e90a91fb4157c44872ecc">   41</a></span>&#160;    T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a00f2f0c8f38e90a91fb4157c44872ecc">VecStorage&lt;T&gt;::get</a>(uint32_t index)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> &amp;mData[index];</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#aa107a99750a791fbe7ea47b0e7aa21f4">   47</a></span>&#160;    <span class="keyword">const</span> T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a00f2f0c8f38e90a91fb4157c44872ecc">VecStorage&lt;T&gt;::get</a>(uint32_t index)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">return</span> &amp;mData[index];</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a764df9d21523541086f0b45aed83068a">   53</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a764df9d21523541086f0b45aed83068a">VecStorage&lt;T&gt;::erase</a>(uint32_t index)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        mData[index].~T();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">new</span> (&amp;mData[index]) T;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// namespace cubos::core::ecs</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            mData[index].~T();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keyword">new</span> (&amp;mData[index]) T(std::move(value));</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">return</span> &amp;mData[index];</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a00f2f0c8f38e90a91fb4157c44872ecc">   42</a></span>&#160;    T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a00f2f0c8f38e90a91fb4157c44872ecc">VecStorage&lt;T&gt;::get</a>(uint32_t index)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> &amp;mData[index];</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#aa107a99750a791fbe7ea47b0e7aa21f4">   48</a></span>&#160;    <span class="keyword">const</span> T* <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a00f2f0c8f38e90a91fb4157c44872ecc">VecStorage&lt;T&gt;::get</a>(uint32_t index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> &amp;mData[index];</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a764df9d21523541086f0b45aed83068a">   54</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a764df9d21523541086f0b45aed83068a">VecStorage&lt;T&gt;::erase</a>(uint32_t index)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(index) &lt; mData.size())</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            mData[index].~T();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">new</span> (&amp;mData[index]) T;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">// namespace cubos::core::ecs</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1Storage_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1Storage.html">cubos::core::ecs::Storage</a></div><div class="ttdoc">Storage is an abstract container for a certain type with common operations, such as,...</div><div class="ttdef"><b>Definition:</b> storage.hpp:41</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html">cubos::core::ecs::VecStorage</a></div><div class="ttdoc">VecStorage is a Storage implementation that uses a STL vector, this is best for components that are u...</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:13</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_a00f2f0c8f38e90a91fb4157c44872ecc"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a00f2f0c8f38e90a91fb4157c44872ecc">cubos::core::ecs::VecStorage::get</a></div><div class="ttdeci">T * get(uint32_t index) override</div><div class="ttdoc">Gets a value from the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:41</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_a00f2f0c8f38e90a91fb4157c44872ecc"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a00f2f0c8f38e90a91fb4157c44872ecc">cubos::core::ecs::VecStorage::get</a></div><div class="ttdeci">T * get(uint32_t index) override</div><div class="ttdoc">Gets a value from the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:42</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_a60a1d0177fd324dfcbc392130532fc75"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a60a1d0177fd324dfcbc392130532fc75">cubos::core::ecs::VecStorage::insert</a></div><div class="ttdeci">T * insert(uint32_t index, T value) override</div><div class="ttdoc">Inserts a value into the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:25</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_a764df9d21523541086f0b45aed83068a"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a764df9d21523541086f0b45aed83068a">cubos::core::ecs::VecStorage::erase</a></div><div class="ttdeci">void erase(uint32_t index) override</div><div class="ttdoc">Remove a value from the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:53</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1ecs_1_1VecStorage_html_a764df9d21523541086f0b45aed83068a"><div class="ttname"><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html#a764df9d21523541086f0b45aed83068a">cubos::core::ecs::VecStorage::erase</a></div><div class="ttdeci">void erase(uint32_t index) override</div><div class="ttdoc">Remove a value from the storage.</div><div class="ttdef"><b>Definition:</b> vec_storage.hpp:54</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1ecs_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1ecs.html">cubos::core::ecs</a></div><div class="ttdoc">Contains the Entity-Component-System framework.</div><div class="ttdef"><b>Definition:</b> accessors.hpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

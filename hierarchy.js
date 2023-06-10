@@ -60,7 +60,7 @@ var hierarchy =
     [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html", [
       [ "BinaryDeserializer", "classcubos_1_1core_1_1data_1_1BinaryDeserializer.html", null ],
       [ "JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", null ],
-      [ "Unpackager", "classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html", null ]
+      [ "Unpackager", "classcubos_1_1core_1_1data_1_1Unpackager.html", null ]
     ] ],
     [ "DirectionalLight", "structcubos_1_1core_1_1gl_1_1DirectionalLight.html", null ],
     [ "DirectionalLight", "structcubos_1_1engine_1_1DirectionalLight.html", null ],

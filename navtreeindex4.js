@@ -1,5 +1,15 @@
 var NAVTREEINDEX4 =
 {
+"classcubos_1_1engine_1_1Assets.html#a15ec95ca9dd397c2f3d3034d2a64874f":[4,0,0,1,4,6],
+"classcubos_1_1engine_1_1Assets.html#a34db49a54bf9ab921cbb8471ff62e70e":[4,0,0,1,4,19],
+"classcubos_1_1engine_1_1Assets.html#a3d9e74923a7c55d6a679f9cde5143d34":[4,0,0,1,4,18],
+"classcubos_1_1engine_1_1Assets.html#a4b66d5e31b5dc18b314c8a68163263bd":[4,0,0,1,4,5],
+"classcubos_1_1engine_1_1Assets.html#a4cc6d4ebebfe0f91743cd23e016d48d4":[4,0,0,1,4,16],
+"classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70b":[4,0,0,1,4,0],
+"classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba16bfbf9c462762cf1cba4134ec53c504":[4,0,0,1,4,0,2],
+"classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba7381d487d18845b379422325c0a768d6":[4,0,0,1,4,0,3],
+"classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba88183b946cc5f0e8c96b2e66e1c74a7e":[4,0,0,1,4,0,0],
+"classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70baa5ae20aa7fda5bd38bf0dce98e65bd2d":[4,0,0,1,4,0,1],
 "classcubos_1_1engine_1_1Assets.html#a8cf5f6f5671effbeb9239bc756bc7df4":[4,0,0,1,4,13],
 "classcubos_1_1engine_1_1Assets.html#a9ffb751c096a485b21d06b551a1e33b6":[4,0,0,1,4,2],
 "classcubos_1_1engine_1_1Assets.html#aaadc707c66b4bfa97280186cd80b9481":[4,0,0,1,4,14],
@@ -239,15 +249,5 @@ var NAVTREEINDEX4 =
 "dir_bafb7af0e03e95b24a45ff63060ab57b.html":[5,0,1,0,0,0],
 "dir_bd9be39c2ccf4132268583193b02b48c.html":[5,0,1,0,0,0,0,0],
 "dir_c185369e92e3603c6d00fa8343148da7.html":[5,0,1,0,0,0,7],
-"dir_c4311188e9cc606330f5e3e0b9dd5059.html":[5,0,0,0,0,0,3],
-"dir_d0ac2003a3c19c21d7ab7ff2f06fbec3.html":[5,0,1,0,0,0,7,0],
-"dir_e3da6a0d695fa4fab64ff7a1dec1a4bb.html":[5,0,1,0,0,0,2],
-"dir_e42c9d7813efab99826f1cb60398c3fa.html":[5,0,1,0,0,0,7,2],
-"dir_f478c07aba78138ba98c84c32278121e.html":[5,0,0,0,0],
-"dir_f556bbe30cd07922836d0e9d7f5fa0a5.html":[5,0,0,0,0,0,6],
-"dir_f6f65ff657bd34b22e5078310628f4e7.html":[5,0,0,0,0,0,0],
-"dispatcher_8hpp_source.html":[5,0,0,0,0,0,2,4],
-"ecs_8hpp_source.html":[5,0,0,0,0,0,6,0],
-"embedded__archive_8hpp_source.html":[5,0,0,0,0,0,1,6],
-"endianness_8hpp_source.html":[5,0,0,0,0,0,5,1]
+"dir_c4311188e9cc606330f5e3e0b9dd5059.html":[5,0,0,0,0,0,3]
 };

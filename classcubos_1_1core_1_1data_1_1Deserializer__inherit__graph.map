@@ -2,5 +2,5 @@
 <area shape="rect" id="node1" title=" " alt="" coords="188,5,288,32"/>
 <area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinaryDeserializer.html" title=" " alt="" coords="5,80,148,107"/>
 <area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1JSONDeserializer.html" title="Implementation of the abstract Deserializer class for deserializing from JSON." alt="" coords="172,80,304,107"/>
-<area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1impl_1_1Unpackager.html" title=" " alt="" coords="329,80,427,107"/>
+<area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1Unpackager.html" title="Responsible for deserializing packages into types." alt="" coords="329,80,427,107"/>
 </map>

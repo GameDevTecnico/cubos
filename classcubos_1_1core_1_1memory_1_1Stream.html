@@ -128,12 +128,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a441dcaebaaec86f15c520874e77b7c42"><td class="memItemLeft" align="right" valign="top"><a id="a441dcaebaaec86f15c520874e77b7c42"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Stream</b> (const <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</a> &amp;)=delete</td></tr>
 <tr class="separator:a441dcaebaaec86f15c520874e77b7c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a541c33b0620700a2f9bdc3ee25c3b317"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a541c33b0620700a2f9bdc3ee25c3b317">read</a> (void *data, size_t size)=0</td></tr>
-<tr class="separator:a541c33b0620700a2f9bdc3ee25c3b317"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8d1e62670e063f3506baea1434dd533"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa8d1e62670e063f3506baea1434dd533">write</a> (const void *data, size_t size)=0</td></tr>
-<tr class="separator:aa8d1e62670e063f3506baea1434dd533"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77e82a9e9af7e9f4951cdeadc80156ce"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a77e82a9e9af7e9f4951cdeadc80156ce">tell</a> () const =0</td></tr>
-<tr class="separator:a77e82a9e9af7e9f4951cdeadc80156ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdeb467eb6e1a00e3b112f74b6d2ef22"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#acdeb467eb6e1a00e3b112f74b6d2ef22">read</a> (void *data, std::size_t size)=0</td></tr>
+<tr class="separator:acdeb467eb6e1a00e3b112f74b6d2ef22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadabc45141814b30b3c7a7ad3331b7eb"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aadabc45141814b30b3c7a7ad3331b7eb">write</a> (const void *data, std::size_t size)=0</td></tr>
+<tr class="separator:aadabc45141814b30b3c7a7ad3331b7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7d060badddcadf390f2c33ab3800910"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa7d060badddcadf390f2c33ab3800910">tell</a> () const =0</td></tr>
+<tr class="separator:aa7d060badddcadf390f2c33ab3800910"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d33cac0d0a3d23a0b46687cb17d535f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a2d33cac0d0a3d23a0b46687cb17d535f">seek</a> (ptrdiff_t offset, <a class="el" href="namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0">SeekOrigin</a> origin)=0</td></tr>
 <tr class="separator:a2d33cac0d0a3d23a0b46687cb17d535f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae031f4f3385def1d4ae5e8b786da3660"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ae031f4f3385def1d4ae5e8b786da3660">eof</a> () const =0</td></tr>
@@ -145,23 +145,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a30ac9d6ab47903731da84bf97172b0d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a30ac9d6ab47903731da84bf97172b0d0">put</a> (char c)</td></tr>
 <tr class="separator:a30ac9d6ab47903731da84bf97172b0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07d1c8a528fd6c9b21fdb30f8e726f72"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a07d1c8a528fd6c9b21fdb30f8e726f72"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a07d1c8a528fd6c9b21fdb30f8e726f72">requires</a> (::std::is_integral_v&lt; T &gt; &amp;&amp;::std::is_signed_v&lt; T &gt;) void <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ac9dc6de3b4db890ffbabd12e287a3b75">print</a>(T value</td></tr>
+<tr class="memitem:a07d1c8a528fd6c9b21fdb30f8e726f72"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a07d1c8a528fd6c9b21fdb30f8e726f72">requires</a> (::std::is_integral_v&lt; T &gt; &amp;&amp;::std::is_signed_v&lt; T &gt;) void <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a64652d749535bc299a43dc9e4e57ae39">print</a>(T value</td></tr>
 <tr class="separator:a07d1c8a528fd6c9b21fdb30f8e726f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1774c8e94a43137fd7ddb64d1e211600"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a1774c8e94a43137fd7ddb64d1e211600"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a1774c8e94a43137fd7ddb64d1e211600">requires</a> (::std::is_integral_v&lt; T &gt; &amp;&amp;!::std::is_signed_v&lt; T &gt;) inline void <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ac9dc6de3b4db890ffbabd12e287a3b75">print</a>(T value</td></tr>
+<tr class="memitem:a1774c8e94a43137fd7ddb64d1e211600"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a1774c8e94a43137fd7ddb64d1e211600">requires</a> (::std::is_integral_v&lt; T &gt; &amp;&amp;!::std::is_signed_v&lt; T &gt;) inline void <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a64652d749535bc299a43dc9e4e57ae39">print</a>(T value</td></tr>
 <tr class="separator:a1774c8e94a43137fd7ddb64d1e211600"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9dc6de3b4db890ffbabd12e287a3b75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ac9dc6de3b4db890ffbabd12e287a3b75">print</a> (int64_t value, size_t base=10)</td></tr>
-<tr class="separator:ac9dc6de3b4db890ffbabd12e287a3b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0627b1c0170dba1b232e65c8386a5e50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a0627b1c0170dba1b232e65c8386a5e50">print</a> (uint64_t value, size_t base=10)</td></tr>
-<tr class="separator:a0627b1c0170dba1b232e65c8386a5e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a857b4c9a351fe3e6dae45c412ca03303"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a857b4c9a351fe3e6dae45c412ca03303">print</a> (float value, size_t decimalPlaces=4)</td></tr>
-<tr class="separator:a857b4c9a351fe3e6dae45c412ca03303"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01b9debf643045a58210c0d7b61ceecb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a01b9debf643045a58210c0d7b61ceecb">print</a> (double value, size_t decimalPlaces=4)</td></tr>
-<tr class="separator:a01b9debf643045a58210c0d7b61ceecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64652d749535bc299a43dc9e4e57ae39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a64652d749535bc299a43dc9e4e57ae39">print</a> (int64_t value, std::size_t base=10)</td></tr>
+<tr class="separator:a64652d749535bc299a43dc9e4e57ae39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43926c098dc44d5dd843bb3e00ef6435"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a43926c098dc44d5dd843bb3e00ef6435">print</a> (uint64_t value, std::size_t base=10)</td></tr>
+<tr class="separator:a43926c098dc44d5dd843bb3e00ef6435"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe972e5742d120953aff6080d4110e84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#abe972e5742d120953aff6080d4110e84">print</a> (float value, std::size_t decimalPlaces=4)</td></tr>
+<tr class="separator:abe972e5742d120953aff6080d4110e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f5c59428dce7a329985d5b0d7a5bf37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a7f5c59428dce7a329985d5b0d7a5bf37">print</a> (double value, std::size_t decimalPlaces=4)</td></tr>
+<tr class="separator:a7f5c59428dce7a329985d5b0d7a5bf37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85d50a09cb925cd08d803c5a8fd01da7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a85d50a09cb925cd08d803c5a8fd01da7">print</a> (const char *str)</td></tr>
 <tr class="separator:a85d50a09cb925cd08d803c5a8fd01da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a095df3bbcf31d7ea914c6b150ed04bb4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a095df3bbcf31d7ea914c6b150ed04bb4">print</a> (const char *str, size_t size)</td></tr>
-<tr class="separator:a095df3bbcf31d7ea914c6b150ed04bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84bdc3343c6fc3d92174c73e90eb4a5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a84bdc3343c6fc3d92174c73e90eb4a5f">print</a> (const char *str, std::size_t size)</td></tr>
+<tr class="separator:a84bdc3343c6fc3d92174c73e90eb4a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace5836016d580f1d5b6af52327aabc2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ace5836016d580f1d5b6af52327aabc2a">print</a> (const ::std::string &amp;str)</td></tr>
 <tr class="separator:ace5836016d580f1d5b6af52327aabc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72acf1923e8002a39c0a510e88a51a10"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... TArgs&gt; </td></tr>
@@ -169,22 +169,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a72acf1923e8002a39c0a510e88a51a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0936ac00aaf07b3bc73b68b8a9687388"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a0936ac00aaf07b3bc73b68b8a9687388">printf</a> (const char *fmt)</td></tr>
 <tr class="separator:a0936ac00aaf07b3bc73b68b8a9687388"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae30bca4760a8f3ed8b95a11a0f6cafc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ae30bca4760a8f3ed8b95a11a0f6cafc8">parse</a> (int8_t &amp;value, size_t base=10)</td></tr>
-<tr class="separator:ae30bca4760a8f3ed8b95a11a0f6cafc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42ff70891c74870e86d3869773e9b47e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a42ff70891c74870e86d3869773e9b47e">parse</a> (int16_t &amp;value, size_t base=10)</td></tr>
-<tr class="separator:a42ff70891c74870e86d3869773e9b47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55bdd936ff1890cc0134bc583de67082"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a55bdd936ff1890cc0134bc583de67082">parse</a> (int32_t &amp;value, size_t base=10)</td></tr>
-<tr class="separator:a55bdd936ff1890cc0134bc583de67082"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa7a8958202ddecfdd4fa5e20ae361d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aaa7a8958202ddecfdd4fa5e20ae361d0">parse</a> (int64_t &amp;value, size_t base=10)</td></tr>
-<tr class="separator:aaa7a8958202ddecfdd4fa5e20ae361d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec14ab3c2f3411f8bd3dae22de75aedc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aec14ab3c2f3411f8bd3dae22de75aedc">parse</a> (uint8_t &amp;value, size_t base=10)</td></tr>
-<tr class="separator:aec14ab3c2f3411f8bd3dae22de75aedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38f151b1b80ea6c9025d69e1f32bedec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a38f151b1b80ea6c9025d69e1f32bedec">parse</a> (uint16_t &amp;value, size_t base=10)</td></tr>
-<tr class="separator:a38f151b1b80ea6c9025d69e1f32bedec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae095c1e9a609cc7563a50b0ced0b71b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ae095c1e9a609cc7563a50b0ced0b71b4">parse</a> (uint32_t &amp;value, size_t base=10)</td></tr>
-<tr class="separator:ae095c1e9a609cc7563a50b0ced0b71b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebe3e497a26061e4ed4a38f1c2e11edd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aebe3e497a26061e4ed4a38f1c2e11edd">parse</a> (uint64_t &amp;value, size_t base=10)</td></tr>
-<tr class="separator:aebe3e497a26061e4ed4a38f1c2e11edd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af22ce198f3c1e25bc0510f8f80cd1d7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#af22ce198f3c1e25bc0510f8f80cd1d7e">parse</a> (int8_t &amp;value, std::size_t base=10)</td></tr>
+<tr class="separator:af22ce198f3c1e25bc0510f8f80cd1d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c58bb0ec1acc49378ecf4ff35e854b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a3c58bb0ec1acc49378ecf4ff35e854b4">parse</a> (int16_t &amp;value, std::size_t base=10)</td></tr>
+<tr class="separator:a3c58bb0ec1acc49378ecf4ff35e854b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a664f3fca479fe945ac69e6d33f4f05b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a664f3fca479fe945ac69e6d33f4f05b8">parse</a> (int32_t &amp;value, std::size_t base=10)</td></tr>
+<tr class="separator:a664f3fca479fe945ac69e6d33f4f05b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a457565396e21c6734253c71e5315d060"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a457565396e21c6734253c71e5315d060">parse</a> (int64_t &amp;value, std::size_t base=10)</td></tr>
+<tr class="separator:a457565396e21c6734253c71e5315d060"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad83a83244c91dcd6996567531e33d3a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ad83a83244c91dcd6996567531e33d3a3">parse</a> (uint8_t &amp;value, std::size_t base=10)</td></tr>
+<tr class="separator:ad83a83244c91dcd6996567531e33d3a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42d7aaf02968ef585b5dd9875807d726"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a42d7aaf02968ef585b5dd9875807d726">parse</a> (uint16_t &amp;value, std::size_t base=10)</td></tr>
+<tr class="separator:a42d7aaf02968ef585b5dd9875807d726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78c6179390ea3941af8abcda66fde90e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a78c6179390ea3941af8abcda66fde90e">parse</a> (uint32_t &amp;value, std::size_t base=10)</td></tr>
+<tr class="separator:a78c6179390ea3941af8abcda66fde90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbe17437ad1b900c176ff4b20241f214"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#adbe17437ad1b900c176ff4b20241f214">parse</a> (uint64_t &amp;value, std::size_t base=10)</td></tr>
+<tr class="separator:adbe17437ad1b900c176ff4b20241f214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae171e4b78cda9ef219a714a07a9ecd0f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#ae171e4b78cda9ef219a714a07a9ecd0f">parse</a> (float &amp;value)</td></tr>
 <tr class="separator:ae171e4b78cda9ef219a714a07a9ecd0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7816ea6345751ab5ead095367aef3175"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a7816ea6345751ab5ead095367aef3175">parse</a> (double &amp;value)</td></tr>
@@ -198,9 +198,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa9dcdfd7d7548047c8da1d27d21f5d73"><td class="memItemLeft" align="right" valign="top"><a id="aa9dcdfd7d7548047c8da1d27d21f5d73"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>base</b> = 10)</td></tr>
-<tr class="separator:aa9dcdfd7d7548047c8da1d27d21f5d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d15a078cb0110a27edc483b82c54127"><td class="memItemLeft" align="right" valign="top"><a id="a8d15a078cb0110a27edc483b82c54127"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>base</b> = 10)</td></tr>
+<tr class="separator:a8d15a078cb0110a27edc483b82c54127"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -338,8 +338,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="a42ff70891c74870e86d3869773e9b47e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42ff70891c74870e86d3869773e9b47e">&#9670;&nbsp;</a></span>parse() <span class="overload">[3/10]</span></h2>
+<a id="a3c58bb0ec1acc49378ecf4ff35e854b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c58bb0ec1acc49378ecf4ff35e854b4">&#9670;&nbsp;</a></span>parse() <span class="overload">[3/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -353,7 +353,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -373,8 +373,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="a55bdd936ff1890cc0134bc583de67082"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55bdd936ff1890cc0134bc583de67082">&#9670;&nbsp;</a></span>parse() <span class="overload">[4/10]</span></h2>
+<a id="a664f3fca479fe945ac69e6d33f4f05b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a664f3fca479fe945ac69e6d33f4f05b8">&#9670;&nbsp;</a></span>parse() <span class="overload">[4/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -388,7 +388,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -408,8 +408,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="aaa7a8958202ddecfdd4fa5e20ae361d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa7a8958202ddecfdd4fa5e20ae361d0">&#9670;&nbsp;</a></span>parse() <span class="overload">[5/10]</span></h2>
+<a id="a457565396e21c6734253c71e5315d060"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a457565396e21c6734253c71e5315d060">&#9670;&nbsp;</a></span>parse() <span class="overload">[5/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -423,7 +423,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -443,8 +443,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="ae30bca4760a8f3ed8b95a11a0f6cafc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae30bca4760a8f3ed8b95a11a0f6cafc8">&#9670;&nbsp;</a></span>parse() <span class="overload">[6/10]</span></h2>
+<a id="af22ce198f3c1e25bc0510f8f80cd1d7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af22ce198f3c1e25bc0510f8f80cd1d7e">&#9670;&nbsp;</a></span>parse() <span class="overload">[6/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -458,7 +458,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -478,8 +478,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="a38f151b1b80ea6c9025d69e1f32bedec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38f151b1b80ea6c9025d69e1f32bedec">&#9670;&nbsp;</a></span>parse() <span class="overload">[7/10]</span></h2>
+<a id="a42d7aaf02968ef585b5dd9875807d726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42d7aaf02968ef585b5dd9875807d726">&#9670;&nbsp;</a></span>parse() <span class="overload">[7/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -493,7 +493,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -513,8 +513,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="ae095c1e9a609cc7563a50b0ced0b71b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae095c1e9a609cc7563a50b0ced0b71b4">&#9670;&nbsp;</a></span>parse() <span class="overload">[8/10]</span></h2>
+<a id="a78c6179390ea3941af8abcda66fde90e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78c6179390ea3941af8abcda66fde90e">&#9670;&nbsp;</a></span>parse() <span class="overload">[8/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -528,7 +528,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -548,8 +548,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="aebe3e497a26061e4ed4a38f1c2e11edd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebe3e497a26061e4ed4a38f1c2e11edd">&#9670;&nbsp;</a></span>parse() <span class="overload">[9/10]</span></h2>
+<a id="adbe17437ad1b900c176ff4b20241f214"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbe17437ad1b900c176ff4b20241f214">&#9670;&nbsp;</a></span>parse() <span class="overload">[9/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -563,7 +563,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -583,8 +583,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="aec14ab3c2f3411f8bd3dae22de75aedc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec14ab3c2f3411f8bd3dae22de75aedc">&#9670;&nbsp;</a></span>parse() <span class="overload">[10/10]</span></h2>
+<a id="ad83a83244c91dcd6996567531e33d3a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad83a83244c91dcd6996567531e33d3a3">&#9670;&nbsp;</a></span>parse() <span class="overload">[10/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -598,7 +598,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -694,8 +694,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="a095df3bbcf31d7ea914c6b150ed04bb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a095df3bbcf31d7ea914c6b150ed04bb4">&#9670;&nbsp;</a></span>print() <span class="overload">[3/7]</span></h2>
+<a id="a84bdc3343c6fc3d92174c73e90eb4a5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84bdc3343c6fc3d92174c73e90eb4a5f">&#9670;&nbsp;</a></span>print() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -709,7 +709,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
@@ -729,8 +729,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="a01b9debf643045a58210c0d7b61ceecb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01b9debf643045a58210c0d7b61ceecb">&#9670;&nbsp;</a></span>print() <span class="overload">[4/7]</span></h2>
+<a id="a7f5c59428dce7a329985d5b0d7a5bf37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f5c59428dce7a329985d5b0d7a5bf37">&#9670;&nbsp;</a></span>print() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -744,7 +744,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>decimalPlaces</em> = <code>4</code>&#160;</td>
         </tr>
         <tr>
@@ -764,8 +764,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="a857b4c9a351fe3e6dae45c412ca03303"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a857b4c9a351fe3e6dae45c412ca03303">&#9670;&nbsp;</a></span>print() <span class="overload">[5/7]</span></h2>
+<a id="abe972e5742d120953aff6080d4110e84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe972e5742d120953aff6080d4110e84">&#9670;&nbsp;</a></span>print() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -779,7 +779,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>decimalPlaces</em> = <code>4</code>&#160;</td>
         </tr>
         <tr>
@@ -799,8 +799,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="ac9dc6de3b4db890ffbabd12e287a3b75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9dc6de3b4db890ffbabd12e287a3b75">&#9670;&nbsp;</a></span>print() <span class="overload">[6/7]</span></h2>
+<a id="a64652d749535bc299a43dc9e4e57ae39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64652d749535bc299a43dc9e4e57ae39">&#9670;&nbsp;</a></span>print() <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -814,7 +814,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -834,8 +834,8 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 
 </div>
 </div>
-<a id="a0627b1c0170dba1b232e65c8386a5e50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0627b1c0170dba1b232e65c8386a5e50">&#9670;&nbsp;</a></span>print() <span class="overload">[7/7]</span></h2>
+<a id="a43926c098dc44d5dd843bb3e00ef6435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43926c098dc44d5dd843bb3e00ef6435">&#9670;&nbsp;</a></span>print() <span class="overload">[7/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -849,7 +849,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
         </tr>
         <tr>
@@ -976,8 +976,8 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
 
 </div>
 </div>
-<a id="a541c33b0620700a2f9bdc3ee25c3b317"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a541c33b0620700a2f9bdc3ee25c3b317">&#9670;&nbsp;</a></span>read()</h2>
+<a id="acdeb467eb6e1a00e3b112f74b6d2ef22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdeb467eb6e1a00e3b112f74b6d2ef22">&#9670;&nbsp;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -986,7 +986,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t read </td>
+          <td class="memname">virtual std::size_t read </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -994,7 +994,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
@@ -1017,6 +1017,8 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of bytes read. </dd></dl>
+
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#adad93d726cd6c6035c90765ff4ab352a">StdStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#adad93d726cd6c6035c90765ff4ab352a">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a8ca6715172d1eb2a6dc4059a62a5e43e">FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -1205,8 +1207,8 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
 
 </div>
 </div>
-<a id="a77e82a9e9af7e9f4951cdeadc80156ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77e82a9e9af7e9f4951cdeadc80156ce">&#9670;&nbsp;</a></span>tell()</h2>
+<a id="aa7d060badddcadf390f2c33ab3800910"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7d060badddcadf390f2c33ab3800910">&#9670;&nbsp;</a></span>tell()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1215,7 +1217,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t tell </td>
+          <td class="memname">virtual std::size_t tell </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1233,8 +1235,8 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
 
 </div>
 </div>
-<a id="aa8d1e62670e063f3506baea1434dd533"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8d1e62670e063f3506baea1434dd533">&#9670;&nbsp;</a></span>write()</h2>
+<a id="aadabc45141814b30b3c7a7ad3331b7eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadabc45141814b30b3c7a7ad3331b7eb">&#9670;&nbsp;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1243,7 +1245,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t write </td>
+          <td class="memname">virtual std::size_t write </td>
           <td>(</td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
@@ -1251,7 +1253,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
         <tr>
@@ -1274,6 +1276,8 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of bytes written. </dd></dl>
+
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#a29e16b5d12d3bc24e1fc8adc85699ead">StdStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a29e16b5d12d3bc24e1fc8adc85699ead">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a9a7bd5f13be9ab027d1b20e976ed4436">FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>

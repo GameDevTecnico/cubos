@@ -1,4 +1,4 @@
 <map id="Unpackager" name="Unpackager">
-<area shape="rect" id="node1" title=" " alt="" coords="6,80,105,107"/>
+<area shape="rect" id="node1" title="Responsible for deserializing packages into types." alt="" coords="6,80,105,107"/>
 <area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1Deserializer.html" title=" " alt="" coords="5,5,105,32"/>
 </map>

@@ -126,7 +126,7 @@ Using a stream</h2>
 <div class="line">helloWorld(stream);</div>
 <div class="line">stream.put(<span class="charliteral">&#39;\0&#39;</span>); <span class="comment">// Add a null terminator.</span></div>
 <div class="line"><span class="comment">// Now we can use buf as a string.</span></div>
-</div><!-- fragment --><p>One of the common mistakes to be aware of is forgetting to handle different <a href="https://en.wikipedia.org/wiki/Endianness">endianness</a> when writing binary data (e.g.: using <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa8d1e62670e063f3506baea1434dd533">Stream::write</a> directly). <b>CUBOS.</b> provides utility endianness functions in <code><a class="el" href="endianness_8hpp_source.html">cubos/core/memory/endianness.hpp</a></code>, such as:</p><ul>
+</div><!-- fragment --><p>One of the common mistakes to be aware of is forgetting to handle different <a href="https://en.wikipedia.org/wiki/Endianness">endianness</a> when writing binary data (e.g.: using <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aadabc45141814b30b3c7a7ad3331b7eb">Stream::write</a> directly). <b>CUBOS.</b> provides utility endianness functions in <code><a class="el" href="endianness_8hpp_source.html">cubos/core/memory/endianness.hpp</a></code>, such as:</p><ul>
 <li><a class="el" href="namespacecubos_1_1core_1_1memory.html#a2033ec239d66ac5dfa4ee8f84d67934d">toBigEndian</a> - converts a value from the host endianness to big endian.</li>
 <li><a class="el" href="namespacecubos_1_1core_1_1memory.html#a411a446a87f0d75b75624a27ea736ea1">toLittleEndian</a> - converts a value from the host endianness to little endian.</li>
 <li>and so on.</li>

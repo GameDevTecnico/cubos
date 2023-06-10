@@ -1,4 +1,4 @@
 <map id="EntitySelector" name="EntitySelector">
 <area shape="rect" id="node1" title="Resource used to identify the currently selected entity. Used by multiple editor plugins." alt="" coords="5,95,119,121"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity." alt="" coords="32,5,92,32"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Entity.html" title=" " alt="" coords="32,5,92,32"/>
 </map>

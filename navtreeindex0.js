@@ -1,5 +1,9 @@
 var NAVTREEINDEX0 =
 {
+"":[3,0,0],
+"":[3,0,0,0,0],
+"":[3,0,0,1],
+"":[3,0,0,1,1],
 "accessors_8hpp_source.html":[5,0,0,0,0,0,2,0],
 "action_8hpp.html":[5,0,1,0,0,0,4,0],
 "action_8hpp_source.html":[5,0,1,0,0,0,4,0],
@@ -245,9 +249,5 @@ var NAVTREEINDEX0 =
 "classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a189ecb253da8b162520080546cfc7c92":[4,0,0,0,1,12,7],
 "classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a2c85237843ed460ab1aa3b67c7f9011a":[4,0,0,0,1,12,12],
 "classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a35de07b8d8386c1432be44cec222b17a":[4,0,0,0,1,12,0],
-"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a3a1f05c411448cace664894d89399afb":[4,0,0,0,1,12,18],
-"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a586b79eba00da04d0f15d495a754590f":[4,0,0,0,1,12,17],
-"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a5bc7518dcc82974f2ce3fa9db924e72c":[4,0,0,0,1,12,8],
-"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a5d803a0d65a6613df7fcdaa6b490de83":[4,0,0,0,1,12,10],
-"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a6be372ff49bb7cbdd067d47ece8608de":[4,0,0,0,1,12,15]
+"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a3a1f05c411448cace664894d89399afb":[4,0,0,0,1,12,18]
 };

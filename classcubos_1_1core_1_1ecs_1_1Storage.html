@@ -138,12 +138,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad4d71516541b61ffb81f28ba62f31e6a"><td class="memItemLeft" align="right" valign="top">virtual const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#ad4d71516541b61ffb81f28ba62f31e6a">get</a> (uint32_t index) const =0</td></tr>
 <tr class="memdesc:ad4d71516541b61ffb81f28ba62f31e6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a value from the storage.  <a href="classcubos_1_1core_1_1ecs_1_1Storage.html#ad4d71516541b61ffb81f28ba62f31e6a">More...</a><br /></td></tr>
 <tr class="separator:ad4d71516541b61ffb81f28ba62f31e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44e634624e88a3bf65dde2074d202119"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#a44e634624e88a3bf65dde2074d202119">pack</a> (uint32_t index, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;context) const override</td></tr>
-<tr class="memdesc:a44e634624e88a3bf65dde2074d202119"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packages a value. If the value doesn't exist, undefined behavior will occur.  <a href="classcubos_1_1core_1_1ecs_1_1Storage.html#a44e634624e88a3bf65dde2074d202119">More...</a><br /></td></tr>
-<tr class="separator:a44e634624e88a3bf65dde2074d202119"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad14c8589b104be43315490c34e550fbd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#ad14c8589b104be43315490c34e550fbd">unpack</a> (uint32_t index, const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;package, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;context) override</td></tr>
-<tr class="memdesc:ad14c8589b104be43315490c34e550fbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpackages a value.  <a href="classcubos_1_1core_1_1ecs_1_1Storage.html#ad14c8589b104be43315490c34e550fbd">More...</a><br /></td></tr>
-<tr class="separator:ad14c8589b104be43315490c34e550fbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e81aa98f454b786808df9eff4ca8baf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#a6e81aa98f454b786808df9eff4ca8baf">pack</a> (uint32_t index, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *context) const override</td></tr>
+<tr class="memdesc:a6e81aa98f454b786808df9eff4ca8baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packages a value. If the value doesn't exist, undefined behavior will occur.  <a href="classcubos_1_1core_1_1ecs_1_1Storage.html#a6e81aa98f454b786808df9eff4ca8baf">More...</a><br /></td></tr>
+<tr class="separator:a6e81aa98f454b786808df9eff4ca8baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ff757894597d45de8cc139f7ff38d11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#a7ff757894597d45de8cc139f7ff38d11">unpack</a> (uint32_t index, const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;package, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *context) override</td></tr>
+<tr class="memdesc:a7ff757894597d45de8cc139f7ff38d11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpackages a value.  <a href="classcubos_1_1core_1_1ecs_1_1Storage.html#a7ff757894597d45de8cc139f7ff38d11">More...</a><br /></td></tr>
+<tr class="separator:a7ff757894597d45de8cc139f7ff38d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ae0bea70e9faed49b712e291650bdde"><td class="memItemLeft" align="right" valign="top"><a id="a8ae0bea70e9faed49b712e291650bdde"></a>
 std::type_index&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Storage.html#a8ae0bea70e9faed49b712e291650bdde">type</a> () const override</td></tr>
 <tr class="memdesc:a8ae0bea70e9faed49b712e291650bdde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type the components being stored here. <br /></td></tr>
@@ -284,8 +284,8 @@ class cubos::core::ecs::Storage&lt; T &gt;</h3>
 
 </div>
 </div>
-<a id="a44e634624e88a3bf65dde2074d202119"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44e634624e88a3bf65dde2074d202119">&#9670;&nbsp;</a></span>pack()</h2>
+<a id="a6e81aa98f454b786808df9eff4ca8baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e81aa98f454b786808df9eff4ca8baf">&#9670;&nbsp;</a></span>pack()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,7 +302,7 @@ class cubos::core::ecs::Storage&lt; T &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *&#160;</td>
           <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
@@ -322,18 +322,18 @@ class cubos::core::ecs::Storage&lt; T &gt;</h3>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">index</td><td>The index of the value to package. </td></tr>
-    <tr><td class="paramname">context</td><td>Context used for serialization. </td></tr>
+    <tr><td class="paramname">context</td><td>Optional context used for serialization. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The packaged value. </dd></dl>
 
-<p>Implements <a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html#a52d04f3e68d11ec5001ee5d90d623693">IStorage</a>.</p>
+<p>Implements <a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html#a54076db94787cbf8955a76f4da93a7dd">IStorage</a>.</p>
 
 </div>
 </div>
-<a id="ad14c8589b104be43315490c34e550fbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad14c8589b104be43315490c34e550fbd">&#9670;&nbsp;</a></span>unpack()</h2>
+<a id="a7ff757894597d45de8cc139f7ff38d11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ff757894597d45de8cc139f7ff38d11">&#9670;&nbsp;</a></span>unpack()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -356,7 +356,7 @@ class cubos::core::ecs::Storage&lt; T &gt;</h3>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *&#160;</td>
           <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
@@ -377,13 +377,13 @@ class cubos::core::ecs::Storage&lt; T &gt;</h3>
   <table class="params">
     <tr><td class="paramname">index</td><td>The index of the value to unpackage. </td></tr>
     <tr><td class="paramname">package</td><td>The package to unpackage. </td></tr>
-    <tr><td class="paramname">context</td><td>Context used for deserialization. </td></tr>
+    <tr><td class="paramname">context</td><td>Optional context used for deserialization. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the value was unpackaged successfully, false otherwise. </dd></dl>
 
-<p>Implements <a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html#afec8c851eb6ae2f0c4330d596c5cd1d8">IStorage</a>.</p>
+<p>Implements <a class="el" href="classcubos_1_1core_1_1ecs_1_1IStorage.html#a6b687f5b8f0bbea499b2a19ea3df2dcf">IStorage</a>.</p>
 
 </div>
 </div>

@@ -117,6 +117,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abfe458d374c0e76ce0fb09ce86159ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35d574212c1b57a14c3134dc29ac363a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1EntityManager.html#a35d574212c1b57a14c3134dc29ac363a">isValid</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity) const</td></tr>
 <tr class="separator:a35d574212c1b57a14c3134dc29ac363a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5ed8c99c67f56f62f11d1d478a895ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1EntityManager.html#ab5ed8c99c67f56f62f11d1d478a895ed">isAlive</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> entity) const</td></tr>
+<tr class="separator:ab5ed8c99c67f56f62f11d1d478a895ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09dd208593b9721a30a83ed978ede577"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1EntityManager.html#a09dd208593b9721a30a83ed978ede577">begin</a> () const</td></tr>
 <tr class="separator:a09dd208593b9721a30a83ed978ede577"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82c64386bc590b54f09bdaa7f885a061"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1EntityManager.html#a82c64386bc590b54f09bdaa7f885a061">withMask</a> (Entity::Mask mask) const</td></tr>
@@ -262,6 +264,31 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ab5ed8c99c67f56f62f11d1d478a895ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5ed8c99c67f56f62f11d1d478a895ed">&#9670;&nbsp;</a></span>isAlive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isAlive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks if an entity is alive. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>The entity to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the entity is alive, false otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="a35d574212c1b57a14c3134dc29ac363a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a35d574212c1b57a14c3134dc29ac363a">&#9670;&nbsp;</a></span>isValid()</h2>
 
@@ -277,7 +304,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Checks if an entity is still valid. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Checks if an entity is still valid. Different from isAlive, as it will return true for entities which still have not been commited. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entity</td><td>The entity to check. </td></tr>
   </table>

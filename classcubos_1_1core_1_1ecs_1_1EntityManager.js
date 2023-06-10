@@ -8,6 +8,7 @@ var classcubos_1_1core_1_1ecs_1_1EntityManager =
     [ "destroy", "classcubos_1_1core_1_1ecs_1_1EntityManager.html#a4eaf0e751e5f813a14c33957a0b3dcf7", null ],
     [ "end", "classcubos_1_1core_1_1ecs_1_1EntityManager.html#a62469461ed7c932afba3808f4da0fe3d", null ],
     [ "getMask", "classcubos_1_1core_1_1ecs_1_1EntityManager.html#abfe458d374c0e76ce0fb09ce86159ac3", null ],
+    [ "isAlive", "classcubos_1_1core_1_1ecs_1_1EntityManager.html#ab5ed8c99c67f56f62f11d1d478a895ed", null ],
     [ "isValid", "classcubos_1_1core_1_1ecs_1_1EntityManager.html#a35d574212c1b57a14c3134dc29ac363a", null ],
     [ "setMask", "classcubos_1_1core_1_1ecs_1_1EntityManager.html#aeefdcde3a2d642b1a6180007952f20d4", null ],
     [ "withMask", "classcubos_1_1core_1_1ecs_1_1EntityManager.html#a82c64386bc590b54f09bdaa7f885a061", null ]

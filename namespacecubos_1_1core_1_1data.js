@@ -15,6 +15,7 @@ var namespacecubos_1_1core_1_1data =
     [ "JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", "classcubos_1_1core_1_1data_1_1JSONDeserializer" ],
     [ "JSONSerializer", "classcubos_1_1core_1_1data_1_1JSONSerializer.html", "classcubos_1_1core_1_1data_1_1JSONSerializer" ],
     [ "Package", "classcubos_1_1core_1_1data_1_1Package.html", "classcubos_1_1core_1_1data_1_1Package" ],
+    [ "Unpackager", "classcubos_1_1core_1_1data_1_1Unpackager.html", "classcubos_1_1core_1_1data_1_1Unpackager" ],
     [ "QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", "structcubos_1_1core_1_1data_1_1QBMatrix" ],
     [ "SerializationMap", "classcubos_1_1core_1_1data_1_1SerializationMap.html", "classcubos_1_1core_1_1data_1_1SerializationMap" ],
     [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", "classcubos_1_1core_1_1data_1_1Serializer" ],

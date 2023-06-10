@@ -98,10 +98,10 @@ $(document).ready(function(){initNavTree('namespacecubos_1_1core_1_1ui.html','')
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a04bd9415bedddac10447e3e8d0a6e9e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a04bd9415bedddac10447e3e8d0a6e9e4">showWorld</a> (const <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;context)</td></tr>
-<tr class="separator:a04bd9415bedddac10447e3e8d0a6e9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a409733146bc45968a32058fa65332a22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a409733146bc45968a32058fa65332a22">editWorld</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;serContext, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;desContext)</td></tr>
-<tr class="separator:a409733146bc45968a32058fa65332a22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf0a593e2f7059b016ea0c5134b3026f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#acf0a593e2f7059b016ea0c5134b3026f">showWorld</a> (const <a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *context=nullptr)</td></tr>
+<tr class="separator:acf0a593e2f7059b016ea0c5134b3026f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a177513222dee710b3312defacb551f4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#a177513222dee710b3312defacb551f4b">editWorld</a> (<a class="el" href="classcubos_1_1core_1_1ecs_1_1World.html">ecs::World</a> &amp;world, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *serContext=nullptr, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *desContext=nullptr)</td></tr>
+<tr class="separator:a177513222dee710b3312defacb551f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdef4dee46ee75856196dc27a1bad855"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#abdef4dee46ee75856196dc27a1bad855">initialize</a> (<a class="el" href="namespacecubos_1_1core_1_1io.html#a373938cb890b16a010475e7a68557737">io::Window</a> window)</td></tr>
 <tr class="separator:abdef4dee46ee75856196dc27a1bad855"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8ed978d758b063ff778f65cc761a932"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1ui.html#af8ed978d758b063ff778f65cc761a932">terminate</a> ()</td></tr>
@@ -217,8 +217,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 </div>
 </div>
-<a id="a409733146bc45968a32058fa65332a22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a409733146bc45968a32058fa65332a22">&#9670;&nbsp;</a></span>editWorld()</h2>
+<a id="a177513222dee710b3312defacb551f4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a177513222dee710b3312defacb551f4b">&#9670;&nbsp;</a></span>editWorld()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -232,14 +232,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
-          <td class="paramname"><em>serContext</em>, </td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *&#160;</td>
+          <td class="paramname"><em>serContext</em> = <code>nullptr</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
-          <td class="paramname"><em>desContext</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *&#160;</td>
+          <td class="paramname"><em>desContext</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -251,8 +251,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>ECS system which allows the user to inspect and edit the entities and components in an ECS world. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">world</td><td>World to edit. </td></tr>
-    <tr><td class="paramname">serContext</td><td>Context for serializing the world. </td></tr>
-    <tr><td class="paramname">desContext</td><td>Context for deserializing the world. </td></tr>
+    <tr><td class="paramname">serContext</td><td>Optional context for serializing the world. </td></tr>
+    <tr><td class="paramname">desContext</td><td>Optional context for deserializing the world. </td></tr>
   </table>
   </dd>
 </dl>
@@ -393,8 +393,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 
 </div>
 </div>
-<a id="a04bd9415bedddac10447e3e8d0a6e9e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04bd9415bedddac10447e3e8d0a6e9e4">&#9670;&nbsp;</a></span>showWorld()</h2>
+<a id="acf0a593e2f7059b016ea0c5134b3026f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf0a593e2f7059b016ea0c5134b3026f">&#9670;&nbsp;</a></span>showWorld()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -408,8 +408,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
-          <td class="paramname"><em>context</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *&#160;</td>
+          <td class="paramname"><em>context</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -421,7 +421,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>ECS system which allows the user to inspect the entities and components in an ECS world. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">world</td><td>World to show. </td></tr>
-    <tr><td class="paramname">context</td><td>Context for serializing the world. </td></tr>
+    <tr><td class="paramname">context</td><td>Optional context for serializing the world. </td></tr>
   </table>
   </dd>
 </dl>

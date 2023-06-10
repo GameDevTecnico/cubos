@@ -125,12 +125,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9c390a8c65b724d8ff06869d3bcceac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a331a7378b8fec94b581a94c732a1b0a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a331a7378b8fec94b581a94c732a1b0a1">removeAll</a> (uint32_t id)</td></tr>
 <tr class="separator:a331a7378b8fec94b581a94c732a1b0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafbeb6b1f1c3e3be56e77128c29fb1c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#aafbeb6b1f1c3e3be56e77128c29fb1c4">pack</a> (uint32_t id, std::size_t componentId, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;context) const</td></tr>
-<tr class="memdesc:aafbeb6b1f1c3e3be56e77128c29fb1c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a package from a component of an entity.  <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#aafbeb6b1f1c3e3be56e77128c29fb1c4">More...</a><br /></td></tr>
-<tr class="separator:aafbeb6b1f1c3e3be56e77128c29fb1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2233c39e238383f665a79768758164ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a2233c39e238383f665a79768758164ed">unpack</a> (uint32_t id, std::size_t componentId, const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;package, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;context)</td></tr>
-<tr class="memdesc:a2233c39e238383f665a79768758164ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a component into an entity, by unpacking a package.  <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a2233c39e238383f665a79768758164ed">More...</a><br /></td></tr>
-<tr class="separator:a2233c39e238383f665a79768758164ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45cf1b9345d6b746cf78116754e64fc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a45cf1b9345d6b746cf78116754e64fc9">pack</a> (uint32_t id, std::size_t componentId, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *context) const</td></tr>
+<tr class="memdesc:a45cf1b9345d6b746cf78116754e64fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a package from a component of an entity.  <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a45cf1b9345d6b746cf78116754e64fc9">More...</a><br /></td></tr>
+<tr class="separator:a45cf1b9345d6b746cf78116754e64fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a901a201b24011929421e07b833cba49a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a901a201b24011929421e07b833cba49a">unpack</a> (uint32_t id, std::size_t componentId, const <a class="el" href="classcubos_1_1core_1_1data_1_1Package.html">data::Package</a> &amp;package, <a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *context)</td></tr>
+<tr class="memdesc:a901a201b24011929421e07b833cba49a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a component into an entity, by unpacking a package.  <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html#a901a201b24011929421e07b833cba49a">More...</a><br /></td></tr>
+<tr class="separator:a901a201b24011929421e07b833cba49a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a58e9723ccf5ae15c6683141b4d8902d9"></a>
@@ -245,8 +245,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aafbeb6b1f1c3e3be56e77128c29fb1c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafbeb6b1f1c3e3be56e77128c29fb1c4">&#9670;&nbsp;</a></span>pack()</h2>
+<a id="a45cf1b9345d6b746cf78116754e64fc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45cf1b9345d6b746cf78116754e64fc9">&#9670;&nbsp;</a></span>pack()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +266,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *&#160;</td>
           <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
@@ -280,9 +280,9 @@ Public Member Functions</h2></td></tr>
 <p>Creates a package from a component of an entity. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a> ID. </td></tr>
+    <tr><td class="paramname">id</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> ID. </td></tr>
     <tr><td class="paramname">componentId</td><td>Component ID. </td></tr>
-    <tr><td class="paramname">context</td><td>Context to use for serialization. </td></tr>
+    <tr><td class="paramname">context</td><td>Optional context to use for serialization. </td></tr>
   </table>
   </dd>
 </dl>
@@ -444,8 +444,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2233c39e238383f665a79768758164ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2233c39e238383f665a79768758164ed">&#9670;&nbsp;</a></span>unpack()</h2>
+<a id="a901a201b24011929421e07b833cba49a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a901a201b24011929421e07b833cba49a">&#9670;&nbsp;</a></span>unpack()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -471,7 +471,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Context.html">data::Context</a> *&#160;</td>
           <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
@@ -485,10 +485,10 @@ Public Member Functions</h2></td></tr>
 <p>Inserts a component into an entity, by unpacking a package. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html" title="Handle used to identify an Entity.">Entity</a> ID. </td></tr>
+    <tr><td class="paramname">id</td><td><a class="el" href="classcubos_1_1core_1_1ecs_1_1Entity.html">Entity</a> ID. </td></tr>
     <tr><td class="paramname">componentId</td><td>Component ID. </td></tr>
     <tr><td class="paramname">package</td><td>Package to unpack. </td></tr>
-    <tr><td class="paramname">context</td><td>Context to use for deserialization. </td></tr>
+    <tr><td class="paramname">context</td><td>Optional context to use for deserialization. </td></tr>
   </table>
   </dd>
 </dl>
