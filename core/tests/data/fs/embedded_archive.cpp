@@ -3,7 +3,7 @@
 #include <cubos/core/data/fs/embedded_archive.hpp>
 #include <cubos/core/log.hpp>
 
-#include "utils.hpp"
+#include "../utils.hpp"
 
 using cubos::core::data::EmbeddedArchive;
 using cubos::core::data::File;

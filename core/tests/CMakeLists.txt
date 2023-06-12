@@ -7,9 +7,9 @@ add_executable(
     cubos-core-tests
     main.cpp
 
-    data/embedded_archive.cpp
-    data/standard_archive.cpp
-    data/file_system.cpp
+    data/fs/embedded_archive.cpp
+    data/fs/standard_archive.cpp
+    data/fs/file_system.cpp
     data/context.cpp
 
     ecs/registry.cpp
