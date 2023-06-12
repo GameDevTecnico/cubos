@@ -1,9 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"scene_2plugin_8hpp.html#ab02d0813f14d8d47fdfb623243e88624":[3,0,0,1,52],
-"scene_2plugin_8hpp_source.html":[5,0,1,0,0,0,6,1],
-"scene_8hpp_source.html":[5,0,1,0,0,0,6,2],
-"serialization_8hpp_source.html":[5,0,0,0,0,0,6,2],
 "serialization__map_8hpp_source.html":[5,0,0,0,0,0,1,14],
 "serializer_8hpp_source.html":[5,0,0,0,0,0,1,15],
 "settings_8hpp_source.html":[5,0,0,0,0,0,8],
@@ -249,5 +245,9 @@ var NAVTREEINDEX7 =
 "structcubos_1_1core_1_1gl_1_1Vertex.html":[4,0,0,0,3,25],
 "structcubos_1_1core_1_1gl_1_1Vertex.html#a1238e9b3cd0f55a4452559d360fb944b":[4,0,0,0,3,25,2],
 "structcubos_1_1core_1_1gl_1_1Vertex.html#a8e13f2bdbadc8fa553bd9eac5f0644d8":[4,0,0,0,3,25,1],
-"structcubos_1_1core_1_1gl_1_1Vertex.html#a9cb7b0d4d34f806700fde6324d30aeaf":[4,0,0,0,3,25,0]
+"structcubos_1_1core_1_1gl_1_1Vertex.html#a9cb7b0d4d34f806700fde6324d30aeaf":[4,0,0,0,3,25,0],
+"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html":[4,0,0,0,3,23],
+"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#a201f0615189a0c50a5ea77f622fe8399":[4,0,0,0,3,23,3],
+"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#a8cae9ceb51c72700311fba791be5ef3d":[4,0,0,0,3,23,0],
+"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#a9f65276cc169479c72bca5658b211bc0":[4,0,0,0,3,23,2]
 };

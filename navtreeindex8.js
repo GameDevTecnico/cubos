@@ -1,9 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html":[4,0,0,0,3,23],
-"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#a201f0615189a0c50a5ea77f622fe8399":[4,0,0,0,3,23,3],
-"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#a8cae9ceb51c72700311fba791be5ef3d":[4,0,0,0,3,23,0],
-"structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#a9f65276cc169479c72bca5658b211bc0":[4,0,0,0,3,23,2],
 "structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html#abecae1f7ee43af0097d80bf1a43abc35":[4,0,0,0,3,23,1],
 "structcubos_1_1core_1_1gl_1_1VertexElement.html":[4,0,0,0,3,22],
 "structcubos_1_1core_1_1gl_1_1VertexElement.html#a15be4f36d9c953254b9d6d64bbc8590e":[4,0,0,0,3,22,4],
@@ -101,5 +97,9 @@ var NAVTREEINDEX8 =
 "window_2plugin_8hpp.html#adc9a1652e325fc1d1b29eb9467e8995e":[3,0,0,1,55],
 "window_2plugin_8hpp_source.html":[5,0,1,0,0,0,10,0],
 "window_8hpp_source.html":[5,0,0,0,0,0,4,2],
-"world_8hpp_source.html":[5,0,0,0,0,0,2,17]
+"world_8hpp_source.html":[5,0,0,0,0,0,2,17],
+"":[3,0,0,1],
+"":[3,0,0],
+"":[3,0,0,1,1],
+"":[3,0,0,0,0]
 };

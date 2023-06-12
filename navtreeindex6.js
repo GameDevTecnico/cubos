@@ -1,9 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"namespacecubos_1_1core_1_1gl.html#ac4b92e6b8c820ded95490092f8bfff74a6adf97f83acf6453d4a6a4b1070f3754":[3,0,0,0,3,58,0],
-"namespacecubos_1_1core_1_1gl.html#ac94c861bd62e269ba559c304673245b0":[3,0,0,0,3,68],
-"namespacecubos_1_1core_1_1gl.html#aca8133200c1122e29b87b314d82604eb":[3,0,0,0,3,56],
-"namespacecubos_1_1core_1_1gl.html#aca8133200c1122e29b87b314d82604eba08822b3ae4e2aede0afe08abe600e9c0":[3,0,0,0,3,56,2],
 "namespacecubos_1_1core_1_1gl.html#aca8133200c1122e29b87b314d82604ebaa623a8d0366bf079411aa30be45b2d10":[3,0,0,0,3,56,3],
 "namespacecubos_1_1core_1_1gl.html#aca8133200c1122e29b87b314d82604ebab22b929ba52471a02d18bb3a4e4472e6":[3,0,0,0,3,56,0],
 "namespacecubos_1_1core_1_1gl.html#aca8133200c1122e29b87b314d82604ebad9c6333623e6357515fcbf17be806273":[3,0,0,0,3,56,1],
@@ -249,5 +245,9 @@ var NAVTREEINDEX6 =
 "resource__manager_8hpp_source.html":[5,0,0,0,0,0,2,13],
 "rotation_8hpp_source.html":[5,0,1,0,0,0,8,3],
 "scale_8hpp_source.html":[5,0,1,0,0,0,8,4],
-"scene_2bridge_8hpp_source.html":[5,0,1,0,0,0,6,0]
+"scene_2bridge_8hpp_source.html":[5,0,1,0,0,0,6,0],
+"scene_2plugin_8hpp.html#ab02d0813f14d8d47fdfb623243e88624":[3,0,0,1,52],
+"scene_2plugin_8hpp_source.html":[5,0,1,0,0,0,6,1],
+"scene_8hpp_source.html":[5,0,1,0,0,0,6,2],
+"serialization_8hpp_source.html":[5,0,0,0,0,0,6,2]
 };
