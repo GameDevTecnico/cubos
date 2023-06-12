@@ -1,4 +1,4 @@
-#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>

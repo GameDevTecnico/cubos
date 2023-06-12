@@ -1,6 +1,6 @@
 #include <doctest/doctest.h>
 
-#include <cubos/core/data/embedded_archive.hpp>
+#include <cubos/core/data/fs/embedded_archive.hpp>
 #include <cubos/core/log.hpp>
 
 #include "utils.hpp"

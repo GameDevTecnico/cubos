@@ -1,7 +1,7 @@
 #include <utility>
 
-#include <cubos/core/data/archive.hpp>
-#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/fs/archive.hpp>
+#include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/log.hpp>
 
 using namespace cubos::core;

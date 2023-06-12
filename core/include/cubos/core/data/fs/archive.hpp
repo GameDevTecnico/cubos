@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <cubos/core/data/file.hpp>
+#include <cubos/core/data/fs/file.hpp>
 
 namespace cubos::core::data
 {

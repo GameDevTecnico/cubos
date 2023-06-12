@@ -1,5 +1,5 @@
-#include <cubos/core/data/file_system.hpp>
-#include <cubos/core/data/standard_archive.hpp>
+#include <cubos/core/data/fs/file_system.hpp>
+#include <cubos/core/data/fs/standard_archive.hpp>
 #include <cubos/core/settings.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>

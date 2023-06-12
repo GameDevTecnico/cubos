@@ -6,7 +6,7 @@
 #include <filesystem>
 #include <unordered_map>
 
-#include <cubos/core/data/archive.hpp>
+#include <cubos/core/data/fs/archive.hpp>
 
 namespace cubos::core::data
 {

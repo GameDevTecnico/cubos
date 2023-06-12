@@ -1,4 +1,4 @@
-#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/json_deserializer.hpp>
 
 #include <cubos/engine/assets/assets.hpp>

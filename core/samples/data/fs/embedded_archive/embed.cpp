@@ -6,12 +6,12 @@
 // use it in an EmbeddedArchive, you just need to construct
 // an EmbeddedArchive with the data name 'assets'
 
-#include <cubos/core/data/embedded_archive.hpp>
+#include <cubos/core/data/fs/embedded_archive.hpp>
 
 using cubos::core::data::EmbeddedArchive;
 
-static const uint8_t fileData3[] = { 0x62, 0x61, 0x7a, 0xa, };
-static const uint8_t fileData4[] = { 0x66, 0x6f, 0x6f, 0xa, };
+static const uint8_t fileData3[] = { 0x62, 0x61, 0x7a, };
+static const uint8_t fileData4[] = { 0x66, 0x6f, 0x6f, };
 
 static const EmbeddedArchive::Data::Entry entries[] = {
     { "", true, 0, 0, 2, nullptr, 0 },

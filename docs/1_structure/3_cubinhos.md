@@ -136,8 +136,8 @@ archive will be `logo.png`.
 The resulting archive can then be mounted like this:
 
 ```cpp
-#include <cubos/core/data/file_system.hpp>
-#include <cubos/core/data/embedded_archive.hpp>
+#include <cubos/core/data/fs/file_system.hpp>
+#include <cubos/core/data/fs/embedded_archive.hpp>
 
 int main()
 {

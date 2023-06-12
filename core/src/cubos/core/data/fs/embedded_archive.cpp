@@ -1,5 +1,5 @@
-#include <cubos/core/data/embedded_archive.hpp>
-#include <cubos/core/data/file_stream.hpp>
+#include <cubos/core/data/fs/embedded_archive.hpp>
+#include <cubos/core/data/fs/file_stream.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
 
