@@ -39,6 +39,7 @@ set(CORE_SAMPLES_SOURCES
 )
 
 make_sample(DIR "data/fs/embedded_archive" SOURCES "embed.cpp")
+make_sample(DIR "data/fs/standard_archive")
 
 # For each sample file, create a target named after the file but without the
 # file extension
