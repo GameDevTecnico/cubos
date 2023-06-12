@@ -3,7 +3,7 @@ var namespacecubos_1_1core_1_1memory =
     [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html", "classcubos_1_1core_1_1memory_1_1BufferStream" ],
     [ "ReadGuard", "classcubos_1_1core_1_1memory_1_1ReadGuard.html", "classcubos_1_1core_1_1memory_1_1ReadGuard" ],
     [ "WriteGuard", "classcubos_1_1core_1_1memory_1_1WriteGuard.html", "classcubos_1_1core_1_1memory_1_1WriteGuard" ],
-    [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html", "classcubos_1_1core_1_1memory_1_1StdStream" ],
+    [ "StandardStream", "classcubos_1_1core_1_1memory_1_1StandardStream.html", "classcubos_1_1core_1_1memory_1_1StandardStream" ],
     [ "Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", "classcubos_1_1core_1_1memory_1_1Stream" ],
     [ "TypeMap", "classcubos_1_1core_1_1memory_1_1TypeMap.html", "classcubos_1_1core_1_1memory_1_1TypeMap" ],
     [ "SeekOrigin", "namespacecubos_1_1core_1_1memory.html#ab40796a2fafb5d9d3fda7510d7aea5b0", [

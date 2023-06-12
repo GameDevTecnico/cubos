@@ -32,5 +32,6 @@ var namespacecubos_1_1core =
     ] ],
     [ "Settings", "classcubos_1_1core_1_1Settings.html", "classcubos_1_1core_1_1Settings" ],
     [ "ThreadPool", "classcubos_1_1core_1_1ThreadPool.html", "classcubos_1_1core_1_1ThreadPool" ],
+    [ "disableLogging", "namespacecubos_1_1core.html#a0f297b68d596e1ddbe1d2cfea349197c", null ],
     [ "initializeLogger", "namespacecubos_1_1core.html#ab23801234b8ff1ec70506039c7dc453a", null ]
 ];

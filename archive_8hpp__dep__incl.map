@@ -1,0 +1,5 @@
+<map id="core/include/cubos/core/data/fs/archive.hpp" name="core/include/cubos/core/data/fs/archive.hpp">
+<area shape="rect" id="node1" title="Defines the Archive interface class." alt="" coords="99,5,282,47"/>
+<area shape="rect" id="node2" href="$embedded__archive_8hpp.html" title="Defines the EmbeddedArchive class, which implements the Archive interface class." alt="" coords="5,95,181,151"/>
+<area shape="rect" id="node3" href="$standard__archive_8hpp.html" title="Defines the StandardArchive class, which implements the Archive interface class." alt="" coords="206,95,370,151"/>
+</map>

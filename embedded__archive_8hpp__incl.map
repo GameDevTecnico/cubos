@@ -1,0 +1,14 @@
+<map id="core/include/cubos/core/data/fs/embedded_archive.hpp" name="core/include/cubos/core/data/fs/embedded_archive.hpp">
+<area shape="rect" id="node1" title="Defines the EmbeddedArchive class, which implements the Archive interface class." alt="" coords="24,5,200,61"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,117,56,143"/>
+<area shape="rect" id="node3" title=" " alt="" coords="81,117,143,143"/>
+<area shape="rect" id="node4" href="$archive_8hpp.html" title="Defines the Archive interface class." alt="" coords="168,109,309,151"/>
+<area shape="rect" id="node5" href="$core_2include_2cubos_2core_2data_2fs_2file_8hpp.html" title="Defines the File class." alt="" coords="168,199,309,240"/>
+<area shape="rect" id="node6" title=" " alt="" coords="53,288,131,315"/>
+<area shape="rect" id="node7" title=" " alt="" coords="155,288,219,315"/>
+<area shape="rect" id="node8" title=" " alt="" coords="243,288,341,315"/>
+<area shape="rect" id="node9" href="$stream_8hpp_source.html" title=" " alt="" coords="365,288,595,315"/>
+<area shape="rect" id="node10" title=" " alt="" coords="351,363,422,389"/>
+<area shape="rect" id="node11" title=" " alt="" coords="447,363,513,389"/>
+<area shape="rect" id="node12" title=" " alt="" coords="537,363,596,389"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="StandardArchive" name="StandardArchive">
+<area shape="rect" id="node1" title="Archive implementation which allows reading and writing into a file in the OS file system,..." alt="" coords="5,80,135,107"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1Archive.html" title="Acts as a bridge between the virtual file system and some place where data is actually stored,..." alt="" coords="35,5,105,32"/>
+</map>

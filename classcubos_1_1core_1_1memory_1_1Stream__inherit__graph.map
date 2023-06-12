@@ -1,6 +1,6 @@
 <map id="Stream" name="Stream">
 <area shape="rect" id="node1" title="Abstract class for memory streams." alt="" coords="180,5,249,32"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1FileStream.html" title=" " alt="" coords="5,80,136,107"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1FileStream.html" title="Wrapper around a specific file stream which maintains a reference to the file, preventing it from bei..." alt="" coords="5,80,136,107"/>
 <area shape="rect" id="node3" href="$classcubos_1_1core_1_1memory_1_1BufferStream.html" title="Implements a stream that writes to/reads from a buffer." alt="" coords="161,80,269,107"/>
-<area shape="rect" id="node4" href="$classcubos_1_1core_1_1memory_1_1StdStream.html" title="Stream implementation for stdio." alt="" coords="293,80,384,107"/>
+<area shape="rect" id="node4" href="$classcubos_1_1core_1_1memory_1_1StandardStream.html" title="Stream implementation for stdio." alt="" coords="293,80,419,107"/>
 </map>

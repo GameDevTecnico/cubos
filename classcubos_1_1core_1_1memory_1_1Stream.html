@@ -106,9 +106,9 @@ Inheritance diagram for Stream:</div>
 <div class="center"><img src="classcubos_1_1core_1_1memory_1_1Stream__inherit__graph.png" border="0" usemap="#aStream_inherit__map" alt="Inheritance graph"/></div>
 <map name="aStream_inherit__map" id="aStream_inherit__map">
 <area shape="rect" title="Abstract class for memory streams." alt="" coords="180,5,249,32"/>
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1FileStream.html" title=" " alt="" coords="5,80,136,107"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1FileStream.html" title="Wrapper around a specific file stream which maintains a reference to the file, preventing it from bei..." alt="" coords="5,80,136,107"/>
 <area shape="rect" href="classcubos_1_1core_1_1memory_1_1BufferStream.html" title="Implements a stream that writes to/reads from a buffer." alt="" coords="161,80,269,107"/>
-<area shape="rect" href="classcubos_1_1core_1_1memory_1_1StdStream.html" title="Stream implementation for stdio." alt="" coords="293,80,384,107"/>
+<area shape="rect" href="classcubos_1_1core_1_1memory_1_1StandardStream.html" title="Stream implementation for stdio." alt="" coords="293,80,419,107"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -244,7 +244,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 </div><div class="memdoc">
 <p>Checks if the stream still has content to read. </p><dl class="section return"><dt>Returns</dt><dd>True if the stream has no more content to read, false otherwise. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#a73d5f601b6343f8c2e7fb687ef60d086">StdStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a73d5f601b6343f8c2e7fb687ef60d086">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a73d5f601b6343f8c2e7fb687ef60d086">FileStream&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StandardStream.html#a73d5f601b6343f8c2e7fb687ef60d086">StandardStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a73d5f601b6343f8c2e7fb687ef60d086">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a73d5f601b6343f8c2e7fb687ef60d086">FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -642,7 +642,7 @@ static <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</
 </div><div class="memdoc">
 <p>Peeks one byte from the stream. </p><dl class="section return"><dt>Returns</dt><dd>The byte peeked. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#a3013ec4f106910640106e7b5b08dd6fe">StdStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a3013ec4f106910640106e7b5b08dd6fe">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a3013ec4f106910640106e7b5b08dd6fe">FileStream&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StandardStream.html#a3013ec4f106910640106e7b5b08dd6fe">StandardStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a3013ec4f106910640106e7b5b08dd6fe">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a3013ec4f106910640106e7b5b08dd6fe">FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -1018,7 +1018,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of bytes read. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#adad93d726cd6c6035c90765ff4ab352a">StdStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#adad93d726cd6c6035c90765ff4ab352a">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a8ca6715172d1eb2a6dc4059a62a5e43e">FileStream&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StandardStream.html#adad93d726cd6c6035c90765ff4ab352a">StandardStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#adad93d726cd6c6035c90765ff4ab352a">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a8ca6715172d1eb2a6dc4059a62a5e43e">FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -1203,7 +1203,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#a4338d5b9e7520b6910f20717ee2f3efc">StdStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a4338d5b9e7520b6910f20717ee2f3efc">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a781611b932fe670f66e0868bc4c38b0b">FileStream&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StandardStream.html#a4338d5b9e7520b6910f20717ee2f3efc">StandardStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a4338d5b9e7520b6910f20717ee2f3efc">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a781611b932fe670f66e0868bc4c38b0b">FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -1231,7 +1231,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
 </div><div class="memdoc">
 <p>Gets the current position in the stream. </p><dl class="section return"><dt>Returns</dt><dd>The current position in the stream, or SIZE_MAX if the position is unknown. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#abda1340bc744d918f57ae7d90e11463c">StdStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#abda1340bc744d918f57ae7d90e11463c">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#abda1340bc744d918f57ae7d90e11463c">FileStream&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StandardStream.html#abda1340bc744d918f57ae7d90e11463c">StandardStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#abda1340bc744d918f57ae7d90e11463c">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#abda1340bc744d918f57ae7d90e11463c">FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -1277,7 +1277,7 @@ stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of bytes written. </dd></dl>
 
-<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html#a29e16b5d12d3bc24e1fc8adc85699ead">StdStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a29e16b5d12d3bc24e1fc8adc85699ead">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a9a7bd5f13be9ab027d1b20e976ed4436">FileStream&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classcubos_1_1core_1_1memory_1_1StandardStream.html#a29e16b5d12d3bc24e1fc8adc85699ead">StandardStream</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html#a29e16b5d12d3bc24e1fc8adc85699ead">BufferStream</a>, and <a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html#a9a7bd5f13be9ab027d1b20e976ed4436">FileStream&lt; T &gt;</a>.</p>
 
 </div>
 </div>

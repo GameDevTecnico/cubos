@@ -100,7 +100,7 @@ Streams</h1>
 </ol>
 <p>With this in mind, it makes sense to have an abstract <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</a> interface. Examples of stream implementations are:</p><ul>
 <li><a class="el" href="classcubos_1_1core_1_1memory_1_1BufferStream.html">BufferStream</a> - a stream which reads/writes data from/to a buffer.</li>
-<li><a class="el" href="classcubos_1_1core_1_1memory_1_1StdStream.html">StdStream</a> - a stream which reads/writes data from/to a standard C stream (basically, a <code>FILE*</code> wrapper).</li>
+<li><a class="el" href="classcubos_1_1core_1_1memory_1_1StandardStream.html">StandardStream</a> - a stream which reads/writes data from/to a standard C stream (basically, a <code>FILE*</code> wrapper).</li>
 <li><a class="el" href="classcubos_1_1core_1_1data_1_1FileStream.html">FileStream</a> - a stream which reads/writes data from/to a virtual file.</li>
 </ul>
 <p>Sometimes its useful to have a <b>CUBOS.</b> stream connected to either <code>stdin</code>, <code>stdout</code> or <code>stderr</code>. For this reason, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">Stream</a> provides the static members <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a3aa3dbec6fae127914becb6f66c309d4">Stream::stdIn</a>, <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#aa28b8b5cd53eed1267b62da87e053a76">Stream::stdOut</a> and <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html#a97c021d9768bdfb6530d0f4510d63ad1">Stream::stdErr</a>.</p>

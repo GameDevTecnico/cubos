@@ -1,4 +1,4 @@
 <map id="EmbeddedArchive" name="EmbeddedArchive">
-<area shape="rect" id="node1" title="Archive implementation used to load data embedded in the executable." alt="" coords="5,80,145,107"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1Archive.html" title=" " alt="" coords="40,5,111,32"/>
+<area shape="rect" id="node1" title="Archive implementation which allows reading from data embedded in the application as if it was a regu..." alt="" coords="5,80,145,107"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1Archive.html" title="Acts as a bridge between the virtual file system and some place where data is actually stored,..." alt="" coords="40,5,111,32"/>
 </map>

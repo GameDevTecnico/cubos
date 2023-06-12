@@ -1,0 +1,4 @@
+<map id="StandardStream" name="StandardStream">
+<area shape="rect" id="node1" title="Stream implementation for stdio." alt="" coords="5,99,132,125"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1memory_1_1Stream.html" title="Abstract class for memory streams." alt="" coords="34,14,103,41"/>
+</map>

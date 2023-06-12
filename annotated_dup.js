@@ -13,25 +13,25 @@ var annotated_dup =
           [ "impl", "namespacecubos_1_1core_1_1data_1_1impl.html", [
             [ "Packager", "classcubos_1_1core_1_1data_1_1impl_1_1Packager.html", "classcubos_1_1core_1_1data_1_1impl_1_1Packager" ]
           ] ],
-          [ "Archive", "classcubos_1_1core_1_1data_1_1Archive.html", "classcubos_1_1core_1_1data_1_1Archive" ],
           [ "BinaryDeserializer", "classcubos_1_1core_1_1data_1_1BinaryDeserializer.html", "classcubos_1_1core_1_1data_1_1BinaryDeserializer" ],
           [ "BinarySerializer", "classcubos_1_1core_1_1data_1_1BinarySerializer.html", "classcubos_1_1core_1_1data_1_1BinarySerializer" ],
           [ "Context", "classcubos_1_1core_1_1data_1_1Context.html", "classcubos_1_1core_1_1data_1_1Context" ],
           [ "Debug", "structcubos_1_1core_1_1data_1_1Debug.html", "structcubos_1_1core_1_1data_1_1Debug" ],
           [ "DebugSerializer", "classcubos_1_1core_1_1data_1_1DebugSerializer.html", "classcubos_1_1core_1_1data_1_1DebugSerializer" ],
           [ "Deserializer", "classcubos_1_1core_1_1data_1_1Deserializer.html", "classcubos_1_1core_1_1data_1_1Deserializer" ],
+          [ "Archive", "classcubos_1_1core_1_1data_1_1Archive.html", "classcubos_1_1core_1_1data_1_1Archive" ],
           [ "EmbeddedArchive", "classcubos_1_1core_1_1data_1_1EmbeddedArchive.html", "classcubos_1_1core_1_1data_1_1EmbeddedArchive" ],
           [ "File", "classcubos_1_1core_1_1data_1_1File.html", "classcubos_1_1core_1_1data_1_1File" ],
           [ "FileStream", "classcubos_1_1core_1_1data_1_1FileStream.html", "classcubos_1_1core_1_1data_1_1FileStream" ],
           [ "FileSystem", "classcubos_1_1core_1_1data_1_1FileSystem.html", "classcubos_1_1core_1_1data_1_1FileSystem" ],
+          [ "StandardArchive", "classcubos_1_1core_1_1data_1_1StandardArchive.html", "classcubos_1_1core_1_1data_1_1StandardArchive" ],
           [ "JSONDeserializer", "classcubos_1_1core_1_1data_1_1JSONDeserializer.html", "classcubos_1_1core_1_1data_1_1JSONDeserializer" ],
           [ "JSONSerializer", "classcubos_1_1core_1_1data_1_1JSONSerializer.html", "classcubos_1_1core_1_1data_1_1JSONSerializer" ],
           [ "Package", "classcubos_1_1core_1_1data_1_1Package.html", "classcubos_1_1core_1_1data_1_1Package" ],
           [ "Unpackager", "classcubos_1_1core_1_1data_1_1Unpackager.html", "classcubos_1_1core_1_1data_1_1Unpackager" ],
           [ "QBMatrix", "structcubos_1_1core_1_1data_1_1QBMatrix.html", "structcubos_1_1core_1_1data_1_1QBMatrix" ],
           [ "SerializationMap", "classcubos_1_1core_1_1data_1_1SerializationMap.html", "classcubos_1_1core_1_1data_1_1SerializationMap" ],
-          [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", "classcubos_1_1core_1_1data_1_1Serializer" ],
-          [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", "classcubos_1_1core_1_1data_1_1STDArchive" ]
+          [ "Serializer", "classcubos_1_1core_1_1data_1_1Serializer.html", "classcubos_1_1core_1_1data_1_1Serializer" ]
         ] ],
         [ "ecs", "namespacecubos_1_1core_1_1ecs.html", [
           [ "impl", "namespacecubos_1_1core_1_1ecs_1_1impl.html", [
@@ -154,7 +154,7 @@ var annotated_dup =
           [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html", "classcubos_1_1core_1_1memory_1_1BufferStream" ],
           [ "ReadGuard", "classcubos_1_1core_1_1memory_1_1ReadGuard.html", "classcubos_1_1core_1_1memory_1_1ReadGuard" ],
           [ "WriteGuard", "classcubos_1_1core_1_1memory_1_1WriteGuard.html", "classcubos_1_1core_1_1memory_1_1WriteGuard" ],
-          [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html", "classcubos_1_1core_1_1memory_1_1StdStream" ],
+          [ "StandardStream", "classcubos_1_1core_1_1memory_1_1StandardStream.html", "classcubos_1_1core_1_1memory_1_1StandardStream" ],
           [ "Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", "classcubos_1_1core_1_1memory_1_1Stream" ],
           [ "TypeMap", "classcubos_1_1core_1_1memory_1_1TypeMap.html", "classcubos_1_1core_1_1memory_1_1TypeMap" ]
         ] ],

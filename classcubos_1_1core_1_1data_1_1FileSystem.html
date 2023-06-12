@@ -94,31 +94,36 @@ $(document).ready(function(){initNavTree('classcubos_1_1core_1_1data_1_1FileSyst
 </div><!--header-->
 <div class="contents">
 
+<p>Singleton class which represents the virtual file system of the engine. All operations on files through this class are done with absolute paths, and are equivalent to the same operations on the root file, with relative paths.  
+ <a href="classcubos_1_1core_1_1data_1_1FileSystem.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="file__system_8hpp_source.html">file_system.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af8a83c3e003a35bcc308f2b9f4a7b3a4"><td class="memItemLeft" align="right" valign="top"><a id="af8a83c3e003a35bcc308f2b9f4a7b3a4"></a>
-static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#af8a83c3e003a35bcc308f2b9f4a7b3a4">root</a> ()</td></tr>
-<tr class="memdesc:af8a83c3e003a35bcc308f2b9f4a7b3a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a handle to the root file. <br /></td></tr>
+<tr class="memitem:af8a83c3e003a35bcc308f2b9f4a7b3a4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#af8a83c3e003a35bcc308f2b9f4a7b3a4">root</a> ()</td></tr>
 <tr class="separator:af8a83c3e003a35bcc308f2b9f4a7b3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac7d7493f14704df36b00242d15cbf07"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">mount</a> (std::string_view path, const std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; &amp;archive)</td></tr>
-<tr class="separator:aac7d7493f14704df36b00242d15cbf07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab21b1dd5440a253dba0162c40588760c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab21b1dd5440a253dba0162c40588760c">unmount</a> (std::string_view path)</td></tr>
-<tr class="separator:ab21b1dd5440a253dba0162c40588760c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a3ca08cd92cf8949c8db10c2810d180"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a2a3ca08cd92cf8949c8db10c2810d180">mount</a> (std::string_view path, std::unique_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; archive)</td></tr>
+<tr class="memdesc:a2a3ca08cd92cf8949c8db10c2810d180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mounts an archive to an absolute path. Creates any parent directories that may be necessary, but the mount point itself must not already exist.  <a href="classcubos_1_1core_1_1data_1_1FileSystem.html#a2a3ca08cd92cf8949c8db10c2810d180">More...</a><br /></td></tr>
+<tr class="separator:a2a3ca08cd92cf8949c8db10c2810d180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86754cd27b44a9c7cf5a51a585018c2f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a86754cd27b44a9c7cf5a51a585018c2f">unmount</a> (std::string_view path)</td></tr>
+<tr class="memdesc:a86754cd27b44a9c7cf5a51a585018c2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unmounts an archive from an absolute path. Removes all of the archive's files from the virtual file system.  <a href="classcubos_1_1core_1_1data_1_1FileSystem.html#a86754cd27b44a9c7cf5a51a585018c2f">More...</a><br /></td></tr>
+<tr class="separator:a86754cd27b44a9c7cf5a51a585018c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7279dfd43000746d763c53e72623e5e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab7279dfd43000746d763c53e72623e5e">find</a> (std::string_view path)</td></tr>
+<tr class="memdesc:ab7279dfd43000746d763c53e72623e5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a handle to a file. Fails if the file does not exist or the path is relative or invalid.  <a href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab7279dfd43000746d763c53e72623e5e">More...</a><br /></td></tr>
 <tr class="separator:ab7279dfd43000746d763c53e72623e5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26e860389d6238e316234d6953ede4c2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a26e860389d6238e316234d6953ede4c2">create</a> (std::string_view path, bool directory=false)</td></tr>
+<tr class="memdesc:a26e860389d6238e316234d6953ede4c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new file at the specified absolute path. The destination location must be writeable - that is, it must be under a mounted writeable archive. If a file at the specified path already exists, it is returned instead. Any parent directories that may be necessary are created.  <a href="classcubos_1_1core_1_1data_1_1FileSystem.html#a26e860389d6238e316234d6953ede4c2">More...</a><br /></td></tr>
 <tr class="separator:a26e860389d6238e316234d6953ede4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2c5d4d05a30324600358e22726891e4"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aa2c5d4d05a30324600358e22726891e4">destroy</a> (std::string_view path)</td></tr>
+<tr class="memdesc:aa2c5d4d05a30324600358e22726891e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks a file for destruction. The file will only be deleted when no more references to it exist. The file is immediately removed from its parent directory and any children of the file are also marked for destruction.  <a href="classcubos_1_1core_1_1data_1_1FileSystem.html#aa2c5d4d05a30324600358e22726891e4">More...</a><br /></td></tr>
 <tr class="separator:aa2c5d4d05a30324600358e22726891e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7158894929ee9241b715fc243cc07eec"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="classcubos_1_1core_1_1memory_1_1Stream.html">memory::Stream</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a7158894929ee9241b715fc243cc07eec">open</a> (std::string_view path, <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a3a70f8b621474c9885f80fe709e2dca2">File::OpenMode</a> mode)</td></tr>
 <tr class="separator:a7158894929ee9241b715fc243cc07eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents the virtual file system of the engine. This class is never instantiated, and is only used to provide static methods.</p>
-<p>Example 1: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">FileSystem::mount</a>("/assets", ...); ... auto modelsDir = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab7279dfd43000746d763c53e72623e5e">FileSystem::find</a>("/assets/models"); if (modelsDir != nullptr &amp;&amp; modelsDir-&gt;isDirectory()) for (auto model = modelsDir-&gt;getChild(); model != nullptr; model = model-&gt;getSibling()) loadModel(*model-&gt;open(File::OpenMode::Read)); ... <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#ab21b1dd5440a253dba0162c40588760c">FileSystem::unmount</a>("/assets");</p>
-<p>Example 2: <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">FileSystem::mount</a>("/settings.json", ...); ... auto settingsFile = <a class="el" href="classcubos_1_1core_1_1data_1_1FileSystem.html#af8a83c3e003a35bcc308f2b9f4a7b3a4" title="Gets a handle to the root file.">FileSystem::root()</a>-&gt;find("settings.json"); if (settingsFile) loadSettings(*model-&gt;open(File::OpenMode::Read)); ... </p>
+<div class="textblock"><p>Singleton class which represents the virtual file system of the engine. All operations on files through this class are done with absolute paths, and are equivalent to the same operations on the root file, with relative paths. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1core_1_1data_1_1File.html" title="Represents a file in the virtual file system of the engine. Should always be held through a File::Han...">File</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a26e860389d6238e316234d6953ede4c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26e860389d6238e316234d6953ede4c2">&#9670;&nbsp;</a></span>create()</h2>
@@ -153,14 +158,23 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Creates a new file in the virtual file system. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Creates a new file at the specified absolute path. The destination location must be writeable - that is, it must be under a mounted writeable archive. If a file at the specified path already exists, it is returned instead. Any parent directories that may be necessary are created. </p>
+<p>This method fails on the following conditions:</p><ul>
+<li>path is relative or invalid.</li>
+<li>a parent directory in the path does not exist and cannot be created.</li>
+<li>a parent directory in the path already exists as a regular file.</li>
+<li>a file of a different type already exists at the destination.</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a18355e79099e5d2bbff777b70c177d8e" title="Creates a new file on a path relative to this file. The destination location must be writeable - that...">File::create</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>The absolute path to the file. </td></tr>
-    <tr><td class="paramname">directory</td><td>True if the file should be a directory, false otherwise. </td></tr>
+    <tr><td class="paramname">directory</td><td>Whether the new file should be a directory. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A handle to the file, or nullptr if the file could not be created or the path is relative. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The file or nullptr if the creation failed. </dd></dl>
 
 </div>
 </div>
@@ -187,13 +201,23 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Destroys a file in the virtual file system. If the file is a directory, all children of the directory are destroyed as well. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Marks a file for destruction. The file will only be deleted when no more references to it exist. The file is immediately removed from its parent directory and any children of the file are also marked for destruction. </p>
+<p>This method fails on the following conditions:</p><ul>
+<li>path is relative or invalid.</li>
+<li>the file does not exist.</li>
+<li>the file is the mount point of an archive.</li>
+<li>the file does not belong to an archive.</li>
+<li>the file belongs to a read-only archive.</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a7bffc6f6c447af261125c1a2a45e85af" title="Marks this file for destruction. The file will only be deleted when no more references to it exist....">File::destroy</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>The absolute path of the file to destroy. </td></tr>
+    <tr><td class="paramname">path</td><td>Absolute path of the file to destroy. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the file was marked for destruction, false otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the file was successfully marked for destruction. </dd></dl>
 
 </div>
 </div>
@@ -220,18 +244,21 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Finds a file in the virtual file system, given its absolute path. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Gets a handle to a file. Fails if the file does not exist or the path is relative or invalid. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a2a84a1dfbe9a41f5792ce118d05f8af6" title="Gets a handle to a file relative to this file. Fails if the file does not exist or if the path is abs...">File::find</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>The absolute path to the file. </td></tr>
+    <tr><td class="paramname">path</td><td>Absolute path to the file. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A handle to the file, or nullptr if the file does not exist or the path is relative. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The file or nullptr if the search failed. </dd></dl>
 
 </div>
 </div>
-<a id="aac7d7493f14704df36b00242d15cbf07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac7d7493f14704df36b00242d15cbf07">&#9670;&nbsp;</a></span>mount()</h2>
+<a id="a2a3ca08cd92cf8949c8db10c2810d180"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a3ca08cd92cf8949c8db10c2810d180">&#9670;&nbsp;</a></span>mount()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,7 +267,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void mount </td>
+          <td class="memname">static bool mount </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>path</em>, </td>
@@ -248,7 +275,7 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html">Archive</a> &gt;&#160;</td>
           <td class="paramname"><em>archive</em>&#160;</td>
         </tr>
         <tr>
@@ -263,14 +290,23 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Mounts an archive to a path in the virtual file system of the engine. The directory which contains the path must exist, but the path itself must not (unless it is the root). Archives can be mounted to the root path ("/") or to any other path.</p>
-<p>If the path isn't absolute, or if the parent directory of the path doesn't exist, or if there's already an archive mounted at the path, abort() is called. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Mounts an archive to an absolute path. Creates any parent directories that may be necessary, but the mount point itself must not already exist. </p>
+<p>This method fails on the following conditions:</p><ul>
+<li>path is relative or invalid.</li>
+<li>a parent file in the path exists and is not a directory.</li>
+<li>a parent directory in the path belongs to an archive.</li>
+<li>a file already exists at the mount point.</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#ab2058f4f578cb1bf12dfd9c995d3535e" title="Mounts an archive to a path relative to this file. Creates any parent directories that may be necessa...">File::mount</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>The path to mount the archive to. </td></tr>
-    <tr><td class="paramname">archive</td><td>The archive to mount. </td></tr>
+    <tr><td class="paramname">path</td><td>Absolute path to mount the archive on. </td></tr>
+    <tr><td class="paramname">archive</td><td><a class="el" href="classcubos_1_1core_1_1data_1_1Archive.html" title="Acts as a bridge between the virtual file system and some place where data is actually stored,...">Archive</a> to mount. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the archive was successfully mounted. </dd></dl>
 
 </div>
 </div>
@@ -307,19 +343,24 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Opens a file in the virtual file system. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Opens a file in the virtual file system.</p>
+<p>This method fails on the following conditions:</p><ul>
+<li>FileSystem::find(path) fails.</li>
+<li>file-&gt;open(mode) fails.</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>The absolute path to the file. </td></tr>
-    <tr><td class="paramname">mode</td><td>The mode to open the file in. </td></tr>
+    <tr><td class="paramname">path</td><td>Absolute path of the file. </td></tr>
+    <tr><td class="paramname">mode</td><td>Mode to open the file in. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A handle to the file stream, or nullptr if an error occurred. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The file stream, or nullptr if an error occurred. </dd></dl>
 
 </div>
 </div>
-<a id="ab21b1dd5440a253dba0162c40588760c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab21b1dd5440a253dba0162c40588760c">&#9670;&nbsp;</a></span>unmount()</h2>
+<a id="af8a83c3e003a35bcc308f2b9f4a7b3a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8a83c3e003a35bcc308f2b9f4a7b3a4">&#9670;&nbsp;</a></span>root()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -328,7 +369,33 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void unmount </td>
+          <td class="memname">static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344437904cebfd7831effb4">File::Handle</a> root </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The root file of the virtual file system. </dd></dl>
+
+</div>
+</div>
+<a id="a86754cd27b44a9c7cf5a51a585018c2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86754cd27b44a9c7cf5a51a585018c2f">&#9670;&nbsp;</a></span>unmount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool unmount </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -341,17 +408,26 @@ static <a class="el" href="classcubos_1_1core_1_1data_1_1File.html#a853ec24a9344
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Unmounts an archive from a path in the virtual file system of the engine. If no archive is mounted at the given path, nothing is done. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Unmounts an archive from an absolute path. Removes all of the archive's files from the virtual file system. </p>
+<p>This method fails on the following conditions:</p><ul>
+<li>path is relative or invalid.</li>
+<li>any of the files in the path do not exist.</li>
+<li>the target path is not the mount point of an archive.</li>
+</ul>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classcubos_1_1core_1_1data_1_1File.html#acea88be3a06be9c77adcf3fd25863f1e" title="Unmounts an archive from a path relative to this file. Removes all of the archive&#39;s files from the vi...">File::unmount</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>The path to unmount the archive from. </td></tr>
+    <tr><td class="paramname">path</td><td>Path to unmount the archive from. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the archive was successfully unmounted. </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>core/include/cubos/core/data/<a class="el" href="file__system_8hpp_source.html">file_system.hpp</a></li>
+<li>core/include/cubos/core/data/fs/<a class="el" href="file__system_8hpp_source.html">file_system.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

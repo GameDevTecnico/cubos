@@ -11,7 +11,7 @@ var hierarchy =
     ] ],
     [ "Archive", "classcubos_1_1core_1_1data_1_1Archive.html", [
       [ "EmbeddedArchive", "classcubos_1_1core_1_1data_1_1EmbeddedArchive.html", null ],
-      [ "STDArchive", "classcubos_1_1core_1_1data_1_1STDArchive.html", null ]
+      [ "StandardArchive", "classcubos_1_1core_1_1data_1_1StandardArchive.html", null ]
     ] ],
     [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", null ],
     [ "AssetBridge", "classcubos_1_1engine_1_1AssetBridge.html", [
@@ -168,7 +168,7 @@ var hierarchy =
     [ "Stream", "classcubos_1_1core_1_1memory_1_1Stream.html", [
       [ "FileStream< T >", "classcubos_1_1core_1_1data_1_1FileStream.html", null ],
       [ "BufferStream", "classcubos_1_1core_1_1memory_1_1BufferStream.html", null ],
-      [ "StdStream", "classcubos_1_1core_1_1memory_1_1StdStream.html", null ]
+      [ "StandardStream", "classcubos_1_1core_1_1memory_1_1StandardStream.html", null ]
     ] ],
     [ "SystemBuilder", "classcubos_1_1engine_1_1SystemBuilder.html", null ],
     [ "SystemFetcher< T >", "structcubos_1_1core_1_1ecs_1_1impl_1_1SystemFetcher.html", null ],

@@ -118,9 +118,9 @@ $(document).ready(function(){initNavTree('hierarchy.html',''); initResizable(); 
 </td></tr>
 <tr><td><img src="inherit_graph_4.png" border="0" usemap="#aArchive" alt=""/>
 <map name="aArchive" id="aArchive">
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1Archive.html" title=" " alt="" coords="5,31,76,57"/>
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" title="Archive implementation used to load data embedded in the executable." alt="" coords="124,5,264,32"/>
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1STDArchive.html" title=" " alt="" coords="145,56,243,83"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1Archive.html" title="Acts as a bridge between the virtual file system and some place where data is actually stored,..." alt="" coords="5,31,76,57"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" title="Archive implementation which allows reading from data embedded in the application as if it was a regu..." alt="" coords="124,5,264,32"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1StandardArchive.html" title="Archive implementation which allows reading and writing into a file in the OS file system,..." alt="" coords="129,56,259,83"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_5.png" border="0" usemap="#aArguments" alt=""/>
@@ -333,12 +333,12 @@ $(document).ready(function(){initNavTree('hierarchy.html',''); initResizable(); 
 </td></tr>
 <tr><td><img src="inherit_graph_45.png" border="0" usemap="#aEmbeddedArchive_1_1Data" alt=""/>
 <map name="aEmbeddedArchive_1_1Data" id="aEmbeddedArchive_1_1Data">
-<area shape="rect" href="structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html" title="Structure of the data embedded in the executable." alt="" coords="5,5,184,32"/>
+<area shape="rect" href="structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html" title="Describes the structure of the embedded data." alt="" coords="5,5,184,32"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_46.png" border="0" usemap="#aEmbeddedArchive_1_1Data_1_1Entry" alt=""/>
 <map name="aEmbeddedArchive_1_1Data_1_1Entry" id="aEmbeddedArchive_1_1Data_1_1Entry">
-<area shape="rect" href="structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html" title="Represents a file entry in the embedded archive." alt="" coords="5,5,184,47"/>
+<area shape="rect" href="structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data_1_1Entry.html" title="Describes a file entry in the embedded data." alt="" coords="5,5,184,47"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_47.png" border="0" usemap="#aEntity" alt=""/>
@@ -394,12 +394,12 @@ $(document).ready(function(){initNavTree('hierarchy.html',''); initResizable(); 
 <tr><td><img src="inherit_graph_57.png" border="0" usemap="#aFile" alt=""/>
 <map name="aFile" id="aFile">
 <area shape="rect" title=" " alt="" coords="5,5,192,32"/>
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1File.html" title=" " alt="" coords="240,5,285,32"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1File.html" title="Represents a file in the virtual file system of the engine. Should always be held through a File::Han..." alt="" coords="240,5,285,32"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_58.png" border="0" usemap="#aFileSystem" alt=""/>
 <map name="aFileSystem" id="aFileSystem">
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1FileSystem.html" title=" " alt="" coords="5,5,100,32"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1FileSystem.html" title="Singleton class which represents the virtual file system of the engine. All operations on files throu..." alt="" coords="5,5,100,32"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_59.png" border="0" usemap="#aFramebuffer" alt=""/>
@@ -775,9 +775,9 @@ $(document).ready(function(){initNavTree('hierarchy.html',''); initResizable(); 
 <tr><td><img src="inherit_graph_131.png" border="0" usemap="#aStream" alt=""/>
 <map name="aStream" id="aStream">
 <area shape="rect" href="classcubos_1_1core_1_1memory_1_1Stream.html" title="Abstract class for memory streams." alt="" coords="5,56,75,83"/>
-<area shape="rect" href="classcubos_1_1core_1_1data_1_1FileStream.html" title=" " alt="" coords="123,5,253,32"/>
+<area shape="rect" href="classcubos_1_1core_1_1data_1_1FileStream.html" title="Wrapper around a specific file stream which maintains a reference to the file, preventing it from bei..." alt="" coords="123,5,253,32"/>
 <area shape="rect" href="classcubos_1_1core_1_1memory_1_1BufferStream.html" title="Implements a stream that writes to/reads from a buffer." alt="" coords="134,56,242,83"/>
-<area shape="rect" href="classcubos_1_1core_1_1memory_1_1StdStream.html" title="Stream implementation for stdio." alt="" coords="143,107,233,133"/>
+<area shape="rect" href="classcubos_1_1core_1_1memory_1_1StandardStream.html" title="Stream implementation for stdio." alt="" coords="125,107,251,133"/>
 </map>
 </td></tr>
 <tr><td><img src="inherit_graph_132.png" border="0" usemap="#aSystemBuilder" alt=""/>

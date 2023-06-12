@@ -127,25 +127,44 @@ $(document).ready(function(){initNavTree('log_8hpp_source.html',''); initResizab
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#define CUBOS_ERROR(...) SPDLOG_ERROR(__VA_ARGS__)</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#define CUBOS_CRITICAL(...) SPDLOG_CRITICAL(__VA_ARGS__)</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#define CUBOS_ASSERT(cond, ...)                                                                                        \</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#define CUBOS_FAIL(...)                                                                                                \</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">    do                                                                                                                 \</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">    {                                                                                                                  \</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">        if (!(cond))                                                                                                   \</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">        if constexpr (sizeof(#__VA_ARGS__) &gt; 1)                                                                        \</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">        {                                                                                                              \</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">            CUBOS_CRITICAL(&quot;Assertion {} failed&quot;</span>, #cond);                                                              \</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            if constexpr (sizeof(#__VA_ARGS__) &gt; 1)                                                                    \</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            {                                                                                                          \</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                CUBOS_CRITICAL(&quot;&quot; __VA_ARGS__);                                                                        \</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            }                                                                                                          \</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            std::abort();                                                                                              \</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }                                                                                                              \</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    } while (false)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core.html">cubos::core</a></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="namespacecubos_1_1core.html#ab23801234b8ff1ec70506039c7dc453a">   55</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core.html#ab23801234b8ff1ec70506039c7dc453a">initializeLogger</a>();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;} <span class="comment">// namespace cubos::core</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">            CUBOS_CRITICAL(&quot;&quot;</span> __VA_ARGS__);                                                                            \</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        }                                                                                                              \</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        std::abort();                                                                                                  \</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    } while (false)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#define CUBOS_UNREACHABLE(...)                                                                                         \</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">    do                                                                                                                 \</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">    {                                                                                                                  \</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">        CUBOS_CRITICAL(&quot;Reached unreachable code&quot;</span>);                                                                    \</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        CUBOS_FAIL(__VA_ARGS__);                                                                                       \</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    } while (false)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define CUBOS_ASSERT(cond, ...)                                                                                        \</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">    do                                                                                                                 \</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">    {                                                                                                                  \</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">        if (!(cond))                                                                                                   \</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">        {                                                                                                              \</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">            CUBOS_CRITICAL(&quot;Assertion {} failed&quot;</span>, #cond);                                                              \</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            CUBOS_FAIL(__VA_ARGS__);                                                                                   \</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }                                                                                                              \</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    } while (false)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">// FIXME: this should compiled out when some option is set to false</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#define CUBOS_DEBUG_ASSERT(cond, ...) CUBOS_ASSERT(cond)</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core.html">cubos::core</a></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="namespacecubos_1_1core.html#ab23801234b8ff1ec70506039c7dc453a">   71</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core.html#ab23801234b8ff1ec70506039c7dc453a">initializeLogger</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="namespacecubos_1_1core.html#a0f297b68d596e1ddbe1d2cfea349197c">   74</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacecubos_1_1core.html#a0f297b68d596e1ddbe1d2cfea349197c">disableLogging</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;} <span class="comment">// namespace cubos::core</span></div>
 <div class="ttc" id="anamespacecubos_1_1core_html"><div class="ttname"><a href="namespacecubos_1_1core.html">cubos::core</a></div><div class="ttdoc">Namespace of the CUBOS. core library.</div><div class="ttdef"><b>Definition:</b> audio_device.hpp:10</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_html_a0f297b68d596e1ddbe1d2cfea349197c"><div class="ttname"><a href="namespacecubos_1_1core.html#a0f297b68d596e1ddbe1d2cfea349197c">cubos::core::disableLogging</a></div><div class="ttdeci">void disableLogging()</div><div class="ttdoc">Disables all logging except for critical errors.</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_html_ab23801234b8ff1ec70506039c7dc453a"><div class="ttname"><a href="namespacecubos_1_1core.html#ab23801234b8ff1ec70506039c7dc453a">cubos::core::initializeLogger</a></div><div class="ttdeci">void initializeLogger()</div><div class="ttdoc">Initializes the logger, must be called before any logging is done.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

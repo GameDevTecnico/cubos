@@ -145,21 +145,23 @@ Usage</h2>
 <p>This tool takes a file and generates a C++ source file which registers a new <code>EmbeddedArchive</code>, outputting it to the standard output. This source file can then be compiled and linked with your executable.</p>
 <p>If no name for the archive is specified, the name of the file will be used. For example, if you run <code>cubinhos embed logo.png &gt; logo.cpp</code>, the name of the archive will be <code>logo.png</code>.</p>
 <p>The resulting archive can then be mounted like this:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;cubos/core/data/file_system.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;cubos/core/data/embedded_archive.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="file__system_8hpp.html">cubos/core/data/fs/file_system.hpp</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="embedded__archive_8hpp.html">cubos/core/data/fs/embedded_archive.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a>;</div>
 <div class="line"> </div>
-<div class="line">    <a class="code" href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">FileSystem::mount</a>(<span class="stringliteral">&quot;/logo.png&quot;</span>, std::make_shared&lt;EmbeddedArchive&gt;(<span class="stringliteral">&quot;logo.png&quot;</span>));</div>
+<div class="line">    <a class="code" href="classcubos_1_1core_1_1data_1_1FileSystem.html#a2a3ca08cd92cf8949c8db10c2810d180">FileSystem::mount</a>(<span class="stringliteral">&quot;/logo.png&quot;</span>, std::make_shared&lt;EmbeddedArchive&gt;(<span class="stringliteral">&quot;logo.png&quot;</span>));</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// ...</span></div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasscubos_1_1core_1_1data_1_1FileSystem_html_aac7d7493f14704df36b00242d15cbf07"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1FileSystem.html#aac7d7493f14704df36b00242d15cbf07">cubos::core::data::FileSystem::mount</a></div><div class="ttdeci">static void mount(std::string_view path, const std::shared_ptr&lt; Archive &gt; &amp;archive)</div></div>
-<div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> archive.hpp:6</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1data_1_1FileSystem_html_a2a3ca08cd92cf8949c8db10c2810d180"><div class="ttname"><a href="classcubos_1_1core_1_1data_1_1FileSystem.html#a2a3ca08cd92cf8949c8db10c2810d180">cubos::core::data::FileSystem::mount</a></div><div class="ttdeci">static bool mount(std::string_view path, std::unique_ptr&lt; Archive &gt; archive)</div><div class="ttdoc">Mounts an archive to an absolute path. Creates any parent directories that may be necessary,...</div></div>
+<div class="ttc" id="aembedded__archive_8hpp_html"><div class="ttname"><a href="embedded__archive_8hpp.html">embedded_archive.hpp</a></div><div class="ttdoc">Defines the EmbeddedArchive class, which implements the Archive interface class.</div></div>
+<div class="ttc" id="afile__system_8hpp_html"><div class="ttname"><a href="file__system_8hpp.html">file_system.hpp</a></div><div class="ttdoc">Defines the FileSystem singleton class.</div></div>
+<div class="ttc" id="anamespacecubos_1_1core_1_1data_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1data.html">cubos::core::data</a></div><div class="ttdoc">Contains the virtual file and serialization systems, and other data related utilities.</div><div class="ttdef"><b>Definition:</b> binary_deserializer.hpp:7</div></div>
 </div><!-- fragment --><p>It's also possible to embed a whole directory, in which case you will need to use the <code>-r</code> flag. This will recursively embed all files in the directory.</p>
 <p>Checkout the <code>embedded_archive</code> sample for a complete example.</p>
 <h1><a class="anchor" id="autotoc_md32"></a>
