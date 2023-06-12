@@ -2,18 +2,18 @@
 
 #include <doctest/doctest.h>
 
-#include <cubos/core/data/std_archive.hpp>
+#include <cubos/core/data/standard_archive.hpp>
 
 #include "utils.hpp"
 
 using cubos::core::data::File;
-using cubos::core::data::STDArchive;
+using cubos::core::data::StandardArchive;
 using cubos::core::memory::SeekOrigin;
 using cubos::core::memory::Stream;
 
 /// Asserts that every call to the given archive fails.
 /// Used for checking if the archive is handling failed initialization correctly.
-static void assertInitializationFailed(STDArchive& archive)
+static void assertInitializationFailed(StandardArchive& archive)
 {
     REQUIRE_FALSE(archive.directory(1)); // Independently of it was created as a directory or not.
     REQUIRE(archive.parent(1) == 0);
@@ -22,7 +22,7 @@ static void assertInitializationFailed(STDArchive& archive)
     REQUIRE(archive.open(1, nullptr, File::OpenMode::Read) == nullptr);
 }
 
-TEST_CASE("data::STDArchive")
+TEST_CASE("data::StandardArchive")
 {
     auto path = genTempPath();
 
@@ -56,7 +56,7 @@ TEST_CASE("data::STDArchive")
             file.close();
         }
 
-        STDArchive archive{path, false, readOnly};
+        StandardArchive archive{path, false, readOnly};
         REQUIRE(std::filesystem::exists(path));
         REQUIRE(std::filesystem::is_regular_file(path));
 
@@ -125,13 +125,13 @@ TEST_CASE("data::STDArchive")
 
     SUBCASE("directory archive works correctly")
     {
-        std::unique_ptr<STDArchive> archive = nullptr;
+        std::unique_ptr<StandardArchive> archive = nullptr;
         std::size_t foo = 0;
         std::size_t bar = 0;
 
         SUBCASE("generated with an archive")
         {
-            archive = std::make_unique<STDArchive>(path, true, false);
+            archive = std::make_unique<StandardArchive>(path, true, false);
             CHECK_FALSE(archive->readOnly());
 
             // Check initial structure.
@@ -217,7 +217,7 @@ TEST_CASE("data::STDArchive")
             std::ofstream{path / "bar" / "baz"}; // Don't write anything to "baz", but create it.
 
             // Create a read-only archive on the generated directory.
-            archive = std::make_unique<STDArchive>(path, true, true);
+            archive = std::make_unique<StandardArchive>(path, true, true);
             CHECK(archive->readOnly());
 
             // Check root.
@@ -277,7 +277,7 @@ TEST_CASE("data::STDArchive")
         PARAMETRIZE_TRUE_OR_FALSE("wanted directory", wantedDir);
 
         // Initialization will fail since 'path' doesn't exist and this is read-only.
-        STDArchive archive{path, wantedDir, true};
+        StandardArchive archive{path, wantedDir, true};
         REQUIRE(archive.readOnly());
         assertInitializationFailed(archive);
     }
@@ -288,7 +288,7 @@ TEST_CASE("data::STDArchive")
         PARAMETRIZE_TRUE_OR_FALSE("wanted directory", wantedDir);
 
         // Initialization will fail since 'path' doesn't exist.
-        STDArchive archive{path / "archive", wantedDir, false};
+        StandardArchive archive{path / "archive", wantedDir, false};
         REQUIRE_FALSE(archive.readOnly());
         assertInitializationFailed(archive);
     }
@@ -308,7 +308,7 @@ TEST_CASE("data::STDArchive")
         }
 
         // Initialization will fail since 'path' is not the expected type.
-        STDArchive archive{path, wantedDir, true};
+        StandardArchive archive{path, wantedDir, true};
         REQUIRE(archive.readOnly());
         assertInitializationFailed(archive);
     }

@@ -7,7 +7,7 @@
 #include <cubos/core/data/binary_serializer.hpp>
 #include <cubos/core/data/qb_parser.hpp>
 #include <cubos/core/gl/palette.hpp>
-#include <cubos/core/memory/std_stream.hpp>
+#include <cubos/core/memory/standard_stream.hpp>
 
 #include "tools.hpp"
 
@@ -165,7 +165,7 @@ static bool loadPalette(const fs::path& path, gl::Palette& palette)
         return false;
     }
 
-    auto stream = memory::StdStream(file, true);
+    auto stream = memory::StandardStream(file, true);
     auto deserializer = data::BinaryDeserializer(stream);
     deserializer.read(palette);
     if (deserializer.failed())
@@ -188,7 +188,7 @@ static bool loadQB(const fs::path& path, std::vector<data::QBMatrix>& model)
         return false;
     }
 
-    auto stream = memory::StdStream(file, true);
+    auto stream = memory::StandardStream(file, true);
     return data::parseQB(model, stream);
 }
 
@@ -203,7 +203,7 @@ static bool savePalette(const fs::path& path, const gl::Palette& palette)
         return false;
     }
 
-    auto stream = memory::StdStream(file, true);
+    auto stream = memory::StandardStream(file, true);
     auto serializer = data::BinarySerializer(stream);
     serializer.write(palette, nullptr);
     if (serializer.failed())
@@ -226,7 +226,7 @@ static bool saveGrid(const fs::path& path, const gl::Grid& grid)
         return false;
     }
 
-    auto stream = memory::StdStream(file, true);
+    auto stream = memory::StandardStream(file, true);
     auto serializer = data::BinarySerializer(stream);
     serializer.write(grid, nullptr);
     if (serializer.failed())

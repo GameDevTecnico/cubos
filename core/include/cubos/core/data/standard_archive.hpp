@@ -1,5 +1,5 @@
 /// @file
-/// @brief Defines the STDArchive class, which implements the Archive interface class.
+/// @brief Defines the StandardArchive class, which implements the Archive interface class.
 
 #pragma once
 
@@ -20,14 +20,14 @@ namespace cubos::core::data
     /// File and FileSystem classes (see #263).
     ///
     /// @see Archive
-    class STDArchive : public Archive
+    class StandardArchive : public Archive
     {
     public:
         /// @param osPath The path to the file/directory in the real file system.
         /// @param isDirectory Whether the path is a directory or a file.
         /// @param readOnly True if the archive is read-only, false otherwise.
-        STDArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly);
-        ~STDArchive() override = default;
+        StandardArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly);
+        ~StandardArchive() override = default;
 
         std::size_t create(std::size_t parent, std::string_view name, bool directory = false) override;
         bool destroy(std::size_t id) override;

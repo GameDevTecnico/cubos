@@ -29,7 +29,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/thread_pool.cpp"
 
     "src/cubos/core/memory/stream.cpp"
-    "src/cubos/core/memory/std_stream.cpp"
+    "src/cubos/core/memory/standard_stream.cpp"
     "src/cubos/core/memory/buffer_stream.cpp"
 
     "src/cubos/core/data/serializer.cpp"
@@ -42,7 +42,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/package.cpp"
     "src/cubos/core/data/file.cpp"
     "src/cubos/core/data/file_system.cpp"
-    "src/cubos/core/data/std_archive.cpp"
+    "src/cubos/core/data/standard_archive.cpp"
     "src/cubos/core/data/embedded_archive.cpp"
     "src/cubos/core/data/qb_parser.cpp"
     "src/cubos/core/data/context.cpp"
@@ -88,7 +88,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/thread_pool.hpp"
 
     "include/cubos/core/memory/stream.hpp"
-    "include/cubos/core/memory/std_stream.hpp"
+    "include/cubos/core/memory/standard_stream.hpp"
     "include/cubos/core/memory/buffer_stream.hpp"
     "include/cubos/core/memory/endianness.hpp"
     "include/cubos/core/memory/type_map.hpp"
@@ -107,7 +107,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/file_stream.hpp"
     "include/cubos/core/data/file_system.hpp"
     "include/cubos/core/data/archive.hpp"
-    "include/cubos/core/data/std_archive.hpp"
+    "include/cubos/core/data/standard_archive.hpp"
     "include/cubos/core/data/embedded_archive.hpp"
     "include/cubos/core/data/qb_parser.hpp"
     "include/cubos/core/data/context.hpp"

@@ -7,14 +7,14 @@
 namespace cubos::core::memory
 {
     /// Stream implementation for stdio.
-    class StdStream : public Stream
+    class StandardStream : public Stream
     {
     public:
         /// @param file Stdio file to read/write from.
         /// @param close Should the file be closed when this stream is destructed?
-        StdStream(FILE* file, bool close = false);
-        StdStream(StdStream&& /*other*/) noexcept;
-        ~StdStream() override;
+        StandardStream(FILE* file, bool close = false);
+        StandardStream(StandardStream&& /*other*/) noexcept;
+        ~StandardStream() override;
 
         std::size_t read(void* data, std::size_t size) override;
         std::size_t write(const void* data, std::size_t size) override;

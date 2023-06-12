@@ -1,14 +1,14 @@
-#include <cubos/core/memory/std_stream.hpp>
+#include <cubos/core/memory/standard_stream.hpp>
 
 using namespace cubos::core::memory;
 
-StdStream::StdStream(FILE* file, bool close)
+StandardStream::StandardStream(FILE* file, bool close)
 {
     mFile = file;
     mClose = close;
 }
 
-StdStream::StdStream(StdStream&& other) noexcept
+StandardStream::StandardStream(StandardStream&& other) noexcept
 {
     mFile = other.mFile;
     mClose = other.mClose;
@@ -16,7 +16,7 @@ StdStream::StdStream(StdStream&& other) noexcept
     other.mClose = false;
 }
 
-StdStream::~StdStream()
+StandardStream::~StandardStream()
 {
     if (mClose)
     {
@@ -24,23 +24,23 @@ StdStream::~StdStream()
     }
 }
 
-std::size_t StdStream::read(void* data, std::size_t size)
+std::size_t StandardStream::read(void* data, std::size_t size)
 {
     return fread(data, 1, size, mFile);
 }
 
-std::size_t StdStream::write(const void* data, std::size_t size)
+std::size_t StandardStream::write(const void* data, std::size_t size)
 {
     return fwrite(data, 1, size, mFile);
 }
 
-std::size_t StdStream::tell() const
+std::size_t StandardStream::tell() const
 {
     auto pos = ftell(mFile);
     return pos == -1 ? SIZE_MAX : static_cast<std::size_t>(pos);
 }
 
-void StdStream::seek(ptrdiff_t offset, SeekOrigin origin)
+void StandardStream::seek(ptrdiff_t offset, SeekOrigin origin)
 {
     switch (origin)
     {
@@ -56,12 +56,12 @@ void StdStream::seek(ptrdiff_t offset, SeekOrigin origin)
     }
 }
 
-bool StdStream::eof() const
+bool StandardStream::eof() const
 {
     return feof(mFile) != 0;
 }
 
-char StdStream::peek() const
+char StandardStream::peek() const
 {
     auto c = fgetc(mFile);
     ungetc(c, mFile);

@@ -2,7 +2,7 @@
 #include <cctype>
 
 #include <cubos/core/log.hpp>
-#include <cubos/core/memory/std_stream.hpp>
+#include <cubos/core/memory/standard_stream.hpp>
 #include <cubos/core/memory/stream.hpp>
 
 using namespace cubos::core::memory;
@@ -12,9 +12,9 @@ static const char* const DIGITS = "0123456789ABCDEF";
 
 // Standard streams
 
-static StdStream stdInI(stdin);
-static StdStream stdOutI(stdout);
-static StdStream stdErrI(stderr);
+static StandardStream stdInI(stdin);
+static StandardStream stdOutI(stdout);
+static StandardStream stdErrI(stderr);
 Stream& Stream::stdIn = stdInI;
 Stream& Stream::stdOut = stdOutI;
 Stream& Stream::stdErr = stdErrI;
