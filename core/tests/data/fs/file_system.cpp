@@ -5,7 +5,7 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
 
-#include "utils.hpp"
+#include "../utils.hpp"
 
 using cubos::core::data::Archive;
 using cubos::core::data::File;

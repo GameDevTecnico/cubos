@@ -4,7 +4,7 @@
 
 #include <cubos/core/data/fs/standard_archive.hpp>
 
-#include "utils.hpp"
+#include "../utils.hpp"
 
 using cubos::core::data::File;
 using cubos::core::data::StandardArchive;
