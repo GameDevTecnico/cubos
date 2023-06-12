@@ -2,7 +2,7 @@
 
 #include <doctest/doctest.h>
 
-#include <cubos/core/data/standard_archive.hpp>
+#include <cubos/core/data/fs/standard_archive.hpp>
 
 #include "utils.hpp"
 

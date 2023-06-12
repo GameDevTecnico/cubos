@@ -38,7 +38,7 @@ set(CORE_SAMPLES_SOURCES
     "event_system.cpp"
 )
 
-make_sample(DIR "data/embedded_archive" SOURCES "embed.cpp")
+make_sample(DIR "data/fs/embedded_archive" SOURCES "embed.cpp")
 
 # For each sample file, create a target named after the file but without the
 # file extension

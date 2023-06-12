@@ -332,7 +332,7 @@ static bool generate(const EmbedOptions& options)
     state.out << "// use it in an EmbeddedArchive, you just need to construct" << std::endl;
     state.out << "// an EmbeddedArchive with the data name '" << state.name << "'" << std::endl;
     state.out << std::endl;
-    state.out << "#include <cubos/core/data/embedded_archive.hpp>" << std::endl;
+    state.out << "#include <cubos/core/data/fs/embedded_archive.hpp>" << std::endl;
     state.out << std::endl;
     state.out << "using cubos::core::data::EmbeddedArchive;" << std::endl;
     state.out << std::endl;

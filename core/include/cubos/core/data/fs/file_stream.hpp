@@ -5,7 +5,7 @@
 
 #include <utility>
 
-#include <cubos/core/data/file.hpp>
+#include <cubos/core/data/fs/file.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/stream.hpp>
 

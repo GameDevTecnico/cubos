@@ -1,7 +1,7 @@
 #include <doctest/doctest.h>
 
-#include <cubos/core/data/archive.hpp>
-#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/fs/archive.hpp>
+#include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
 

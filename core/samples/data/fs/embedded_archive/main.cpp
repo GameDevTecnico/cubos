@@ -5,8 +5,8 @@
 /// `embed.cpp` using the command `cubinhos embed -r assets > embed.cpp`. Since no further options
 /// were specified, `cubinhos` registered the data with the name of the embedded file - `assets`.
 
-#include <cubos/core/data/embedded_archive.hpp>
-#include <cubos/core/data/file_system.hpp>
+#include <cubos/core/data/fs/embedded_archive.hpp>
+#include <cubos/core/data/fs/file_system.hpp>
 
 using cubos::core::data::EmbeddedArchive;
 using cubos::core::data::File;
@@ -20,15 +20,15 @@ int main()
 
     // Now we can read the embedded data as if they were normal files.
     std::string contents;
-    auto stream = FileSystem::open("/data/foo.txt", File::OpenMode::Read);
+    auto stream = FileSystem::open("/assets/foo.txt", File::OpenMode::Read);
     stream->readUntil(contents, nullptr);
-    Stream::stdOut.printf("Read \"{}\" from '/data/foo.txt'.\n", contents);
+    Stream::stdOut.printf("Read \"{}\" from '/assets/foo.txt'.\n", contents);
 
-    stream = FileSystem::open("/data/bar/baz.txt", File::OpenMode::Read);
+    stream = FileSystem::open("/assets/bar/baz.txt", File::OpenMode::Read);
     stream->readUntil(contents, nullptr);
-    Stream::stdOut.printf("Read \"{}\" from '/data/bar/baz.txt'.\n", contents);
+    Stream::stdOut.printf("Read \"{}\" from '/assets/bar/baz.txt'.\n", contents);
 
-    FileSystem::unmount("/data");
+    FileSystem::unmount("/assets");
 
     return 0;
 }
