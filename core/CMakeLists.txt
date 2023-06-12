@@ -28,6 +28,13 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/settings.cpp"
     "src/cubos/core/thread_pool.cpp"
 
+    "src/cubos/core/reflection/type.cpp"
+    "src/cubos/core/reflection/primitive.cpp"
+    "src/cubos/core/reflection/object.cpp"
+    "src/cubos/core/reflection/variant.cpp"
+    "src/cubos/core/reflection/array.cpp"
+    "src/cubos/core/reflection/dictionary.cpp"
+
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/standard_stream.cpp"
     "src/cubos/core/memory/buffer_stream.cpp"
@@ -86,6 +93,14 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/log.hpp"
     "include/cubos/core/settings.hpp"
     "include/cubos/core/thread_pool.hpp"
+
+    "include/cubos/core/reflection/type.hpp"
+    "include/cubos/core/reflection/visitor.hpp"
+    "include/cubos/core/reflection/primitive.hpp"
+    "include/cubos/core/reflection/object.hpp"
+    "include/cubos/core/reflection/variant.hpp"
+    "include/cubos/core/reflection/array.hpp"
+    "include/cubos/core/reflection/dictionary.hpp"
 
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/standard_stream.hpp"
