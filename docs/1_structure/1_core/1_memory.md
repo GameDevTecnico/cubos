@@ -19,7 +19,7 @@ With this in mind, it makes sense to have an abstract
 implementations are:
 - \ref cubos::core::memory::BufferStream "BufferStream" - a stream which
 reads/writes data from/to a buffer.
-- \ref cubos::core::memory::StdStream "StdStream" - a stream which reads/writes
+- \ref cubos::core::memory::StandardStream "StandardStream" - a stream which reads/writes
 data from/to a standard C stream (basically, a `FILE*` wrapper).
 - \ref cubos::core::data::FileStream "FileStream" - a stream which reads/writes
 data from/to a virtual file.

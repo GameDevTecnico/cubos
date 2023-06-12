@@ -8,7 +8,7 @@ add_executable(
     main.cpp
 
     data/embedded_archive.cpp
-    data/std_archive.cpp
+    data/standard_archive.cpp
     data/file_system.cpp
     data/context.cpp
 

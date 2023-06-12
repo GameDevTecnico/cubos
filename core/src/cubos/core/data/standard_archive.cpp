@@ -1,9 +1,9 @@
 #include <cubos/core/data/file_stream.hpp>
-#include <cubos/core/data/std_archive.hpp>
+#include <cubos/core/data/standard_archive.hpp>
 #include <cubos/core/log.hpp>
-#include <cubos/core/memory/std_stream.hpp>
+#include <cubos/core/memory/standard_stream.hpp>
 
-using cubos::core::data::STDArchive;
+using cubos::core::data::StandardArchive;
 using cubos::core::memory::Stream;
 
 #define INIT_OR_RETURN(ret)                                                                                            \
@@ -16,7 +16,7 @@ using cubos::core::memory::Stream;
         }                                                                                                              \
     } while (false)
 
-STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly)
+StandardArchive::StandardArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly)
     : mOsPath(osPath)
     , mReadOnly(readOnly)
 {
@@ -83,7 +83,7 @@ STDArchive::STDArchive(const std::filesystem::path& osPath, bool isDirectory, bo
     }
 }
 
-void STDArchive::generate(std::size_t parent)
+void StandardArchive::generate(std::size_t parent)
 {
     auto& parentInfo = mFiles[parent];
 
@@ -107,7 +107,7 @@ void STDArchive::generate(std::size_t parent)
     }
 }
 
-std::size_t STDArchive::create(std::size_t parent, std::string_view name, bool directory)
+std::size_t StandardArchive::create(std::size_t parent, std::string_view name, bool directory)
 {
     INIT_OR_RETURN(0);
     CUBOS_DEBUG_ASSERT(!mReadOnly);
@@ -145,7 +145,7 @@ std::size_t STDArchive::create(std::size_t parent, std::string_view name, bool d
     return id;
 }
 
-bool STDArchive::destroy(std::size_t id)
+bool StandardArchive::destroy(std::size_t id)
 {
     INIT_OR_RETURN(false);
     CUBOS_DEBUG_ASSERT(!mReadOnly);
@@ -188,7 +188,7 @@ bool STDArchive::destroy(std::size_t id)
     return true;
 }
 
-std::string STDArchive::name(std::size_t id) const
+std::string StandardArchive::name(std::size_t id) const
 {
     INIT_OR_RETURN("<invalid>");
 
@@ -197,7 +197,7 @@ std::string STDArchive::name(std::size_t id) const
     return it->second.osPath.filename().string();
 }
 
-bool STDArchive::directory(std::size_t id) const
+bool StandardArchive::directory(std::size_t id) const
 {
     INIT_OR_RETURN(false);
 
@@ -206,12 +206,12 @@ bool STDArchive::directory(std::size_t id) const
     return it->second.directory;
 }
 
-bool STDArchive::readOnly() const
+bool StandardArchive::readOnly() const
 {
     return mReadOnly;
 }
 
-std::size_t STDArchive::parent(std::size_t id) const
+std::size_t StandardArchive::parent(std::size_t id) const
 {
     INIT_OR_RETURN(0);
 
@@ -220,7 +220,7 @@ std::size_t STDArchive::parent(std::size_t id) const
     return it->second.parent;
 }
 
-std::size_t STDArchive::sibling(std::size_t id) const
+std::size_t StandardArchive::sibling(std::size_t id) const
 {
     INIT_OR_RETURN(0);
 
@@ -229,7 +229,7 @@ std::size_t STDArchive::sibling(std::size_t id) const
     return it->second.sibling;
 }
 
-std::size_t STDArchive::child(std::size_t id) const
+std::size_t StandardArchive::child(std::size_t id) const
 {
     INIT_OR_RETURN(0);
 
@@ -238,7 +238,7 @@ std::size_t STDArchive::child(std::size_t id) const
     return it->second.child;
 }
 
-std::unique_ptr<Stream> STDArchive::open(std::size_t id, File::Handle file, File::OpenMode mode)
+std::unique_ptr<Stream> StandardArchive::open(std::size_t id, File::Handle file, File::OpenMode mode)
 {
     INIT_OR_RETURN(nullptr);
     CUBOS_DEBUG_ASSERT(!mReadOnly || mode == File::OpenMode::Read);
@@ -271,5 +271,5 @@ std::unique_ptr<Stream> STDArchive::open(std::size_t id, File::Handle file, File
         return nullptr;
     }
 
-    return std::make_unique<FileStream<memory::StdStream>>(file, mode, memory::StdStream(fd, true));
+    return std::make_unique<FileStream<memory::StandardStream>>(file, mode, memory::StandardStream(fd, true));
 }

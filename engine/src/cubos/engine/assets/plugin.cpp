@@ -1,12 +1,12 @@
 #include <cubos/core/data/file_system.hpp>
-#include <cubos/core/data/std_archive.hpp>
+#include <cubos/core/data/standard_archive.hpp>
 #include <cubos/core/settings.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 
 using cubos::core::Settings;
 using cubos::core::data::FileSystem;
-using cubos::core::data::STDArchive;
+using cubos::core::data::StandardArchive;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using namespace cubos::engine;
@@ -20,7 +20,7 @@ static void init(Write<Assets> assets, Read<Settings> settings)
         bool readOnly = settings->getBool("assets.io.readOnly", true);
 
         // Create a standard archive for the assets directory and mount it.
-        FileSystem::mount("/assets", std::make_unique<STDArchive>(path, true, readOnly));
+        FileSystem::mount("/assets", std::make_unique<StandardArchive>(path, true, readOnly));
 
         // Load the meta files on the assets directory.
         assets->loadMeta("/assets");
