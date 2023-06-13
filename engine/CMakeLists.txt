@@ -89,6 +89,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/voxels/plugin.hpp"
 
     "include/cubos/engine/collisions/plugin.hpp"
+    "include/cubos/engine/collisions/broad_phase_collisions.hpp"
     "include/cubos/engine/collisions/colliders/box.hpp"
     "include/cubos/engine/collisions/colliders/capsule.hpp"
     "include/cubos/engine/collisions/colliders/plane.hpp"
