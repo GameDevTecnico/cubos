@@ -6,8 +6,8 @@ namespace cubos::core::geom
 {
     struct Capsule
     {
-        float radius;        ///< The radius of the capsule.
-        float lenght = 0.0f; ///< The lenght of the capsule.
+        const float radius;        ///< The radius of the capsule.
+        const float lenght = 0.0f; ///< The lenght of the capsule.
 
         /// @return The height of the capsule.
         float height() const

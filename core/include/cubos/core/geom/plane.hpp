@@ -6,6 +6,6 @@ namespace cubos::core::geom
 {
     struct Plane
     {
-        glm::vec3 normal; ///< The normal of the plane.
+        const glm::vec3 normal; ///< The normal of the plane.
     };
 } // namespace cubos::core::geom
