@@ -117,6 +117,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/cursor.hpp"
 
     "include/cubos/core/geom/box.hpp"
+    "include/cubos/core/geom/capsule.hpp"
     
     "include/cubos/core/gl/debug.hpp"
     "include/cubos/core/gl/render_device.hpp"
