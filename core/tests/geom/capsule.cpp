@@ -6,17 +6,18 @@ using cubos::core::geom::Capsule;
 
 TEST_CASE("geom::Capsule")
 {
-    Capsule capsule{1.0f, 2.0f};
+    auto r = 1.0f;
+    auto l = 2.0f;
+    Capsule capsule{r, l};
 
     SUBCASE("height")
     {
-        CHECK_EQ(capsule.height(), 4.0f);
+        CHECK_EQ(capsule.height(), 2 * r + l);
     }
 
     SUBCASE("sphere")
     {
-        Capsule sphere{1.0f};
-
-        CHECK_EQ(sphere.height(), 2.0f);
+        auto sphere = Capsule::sphere(1.0f);
+        CHECK_EQ(sphere.height(), 2 * r);
     }
 }
