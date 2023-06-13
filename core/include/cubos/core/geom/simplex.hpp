@@ -8,7 +8,9 @@ namespace cubos::core::geom
 {
     struct Simplex
     {
-        // TODO: We should implement something like boost::static_vector for this.
+        // TODO: We should implement something like boost::static_vector for this. See
+        // https://github.com/GameDevTecnico/cubos/issues/419
+
         const std::vector<glm::vec3> points; ///< The points of the simplex.
 
         static const Simplex empty()
