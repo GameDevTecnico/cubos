@@ -35,6 +35,8 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/voxels/plugin.cpp"
 
+    "src/cubos/engine/collisions/plugin.cpp"
+
     "src/cubos/engine/input/plugin.cpp"
     "src/cubos/engine/input/input.cpp"
     "src/cubos/engine/input/bindings.cpp"
@@ -87,6 +89,7 @@ set(CUBOS_ENGINE_INCLUDE
 
     "include/cubos/engine/voxels/plugin.hpp"
 
+    "include/cubos/engine/collisions/plugin.hpp"
     "include/cubos/engine/collisions/colliders/box.hpp"
     "include/cubos/engine/collisions/colliders/capsule.hpp"
     "include/cubos/engine/collisions/colliders/plane.hpp"
