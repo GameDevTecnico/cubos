@@ -6,7 +6,7 @@ namespace cubos::core::geom
 {
     struct Ray
     {
-        glm::vec3 direction;        ///< The direction of the ray.
-        bool bidirectional = false; ///< Whether the ray is bidirectional.
+        const glm::vec3 direction;        ///< The direction of the ray.
+        const bool bidirectional = false; ///< Whether the ray is bidirectional.
     };
 } // namespace cubos::core::geom
