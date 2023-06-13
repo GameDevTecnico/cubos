@@ -19,6 +19,8 @@ add_executable(
     ecs/commands.cpp
     ecs/system.cpp
     ecs/dispatcher.cpp
+
+    geom/box.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
