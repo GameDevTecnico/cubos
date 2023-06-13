@@ -118,6 +118,9 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/geom/box.hpp"
     "include/cubos/core/geom/capsule.hpp"
+    "include/cubos/core/geom/simplex.hpp"
+    "include/cubos/core/geom/ray.hpp"
+    "include/cubos/core/geom/plane.hpp"
     
     "include/cubos/core/gl/debug.hpp"
     "include/cubos/core/gl/render_device.hpp"
