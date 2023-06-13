@@ -1,3 +1,13 @@
-#include <glm/gtx/string_cast.hpp>
+#include <sstream>
 
-#define CHECK_GLM_EQ(a, ...) CHECK_MESSAGE((a == __VA_ARGS__), glm::to_string(a), " != ", glm::to_string(__VA_ARGS__))
+#include <glm/gtx/io.hpp>
+
+#define CHECK_GLM_EQ(a, ...) CHECK_MESSAGE((a == __VA_ARGS__), to_string(a), " != ", to_string(__VA_ARGS__))
+
+template <typename T>
+std::string to_string(const T& t)
+{
+    std::stringstream ss;
+    ss << t;
+    return ss.str();
+}
