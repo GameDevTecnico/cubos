@@ -28,26 +28,26 @@ void BroadPhaseCollisions::updateMarkers(F position)
 const std::vector<std::unordered_map<Entity, std::vector<Entity>>>& BroadPhaseCollisions::sweep()
 {
     mSweepOverlapMaps.clear();
-    auto active = std::unordered_set<Entity>{};
+    auto active = std::unordered_set<size_t>{};
 
     for (size_t axis = 0; axis < 3; axis++)
     {
         for (auto& marker : mMarkersPerAxis[axis])
         {
-            auto& entity = mEntities[marker.entityIndex];
-
             if (marker.isMin)
             {
-                for (auto& other : active)
+                auto entity = mEntities[marker.entityIndex].entity;
+                for (auto& otherIndex : active)
                 {
+                    auto other = mEntities[otherIndex].entity;
                     mSweepOverlapMaps[axis][entity].push_back(other);
                 }
 
-                active.insert(entity.entity);
+                active.insert(marker.entityIndex);
             }
             else
             {
-                active.erase(entity.entity);
+                active.erase(marker.entityIndex);
             }
         }
     }
