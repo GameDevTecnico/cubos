@@ -3,11 +3,9 @@
 
 #pragma once
 
-#include <memory>
 #include <vector>
 
-#include <cubos/core/log.hpp>
-#include <cubos/core/reflection/type.hpp>
+#include <cubos/core/reflection/hints.hpp>
 
 namespace cubos::core::reflection
 {
@@ -33,6 +31,13 @@ namespace cubos::core::reflection
             /// @brief Gets the type of the field.
             /// @return Type of the field.
             const Type& type() const;
+
+            /// @brief Gets the hints of the field.
+            /// @return Hints of the field.
+            /// @{
+            const Hints& hints() const;
+            Hints& hints();
+            /// @}
 
             /// @name Getters to the field of an instance of the type.
             /// @brief Gets a pointer or reference to the this field of the given instance of the
@@ -63,6 +68,7 @@ namespace cubos::core::reflection
         private:
             std::string mName;
             const Type& mType;
+            Hints mHints;
         };
 
     private:
@@ -111,14 +117,16 @@ namespace cubos::core::reflection
             /// a member of the class of instances of the type, otherwise, undefined behavior occurs.
             /// @tparam T Type of the field.
             /// @tparam C Type of the class which contains the field.
+            /// @tparam Hs Types of the hints of the field.
             /// @param name Name of the field.
             /// @param field Pointer to the field.
             /// @return Type to which the field was added.
-            template <typename T, typename C>
-            Builder& field(std::string name, T C::*field)
+            template <typename T, typename C, typename... Hs>
+            Builder& field(std::string name, T C::*field, Hs&&... hints)
             {
-                mType.mFields.emplace_back(
-                    std::make_unique<FieldPointerToMember<T, C>>(std::move(name), reflect<T>(), field));
+                auto ptr = std::make_unique<FieldPointerToMember<T, C>>(std::move(name), reflect<T>(), field);
+                (ptr->hints().add(std::forward<Hs>(hints)), ...);
+                mType.mFields.emplace_back(std::move(ptr));
                 return *this;
             }
 
