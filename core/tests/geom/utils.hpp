@@ -1,13 +1,12 @@
 #include <sstream>
 
-#include <glm/gtx/io.hpp>
+#include <glm/glm.hpp>
 
-#define CHECK_GLM_EQ(a, ...) CHECK_MESSAGE((a == __VA_ARGS__), to_string(a), " != ", to_string(__VA_ARGS__))
+#define CHECK_VEC3_EQ(a, ...) CHECK_MESSAGE((a == __VA_ARGS__), vec_to_string(a), " != ", vec_to_string(__VA_ARGS__))
 
-template <typename T>
-std::string to_string(const T& t)
+std::string vec_to_string(const glm::vec3& v)
 {
     std::stringstream ss;
-    ss << t;
+    ss << "(" << v.x << ", " << v.y << ", " << v.z << ")";
     return ss.str();
 }
