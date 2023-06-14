@@ -92,10 +92,10 @@ namespace cubos::engine
         /// List of ordered sweep markers for each axis. Stores the index of the marker in mMarkers.
         std::vector<std::vector<SweepMarker>> mMarkersPerAxis{3};
 
-        /// Maps of overlapping entities for each axis.
+        /// Maps of overlapping entities for each axis calculated by sweep and prune.
         /// For each each map, the key is an entity and the value is a list of entities that overlap with the key.
         /// Symmetrical pairs are not stored.
-        std::vector<std::unordered_map<Entity, std::vector<Entity>>> mOverlapMaps;
+        std::vector<std::unordered_map<Entity, std::vector<Entity>>> mSweepOverlapMaps;
 
         /// List of collision candidates for each collision type. The index of the vector is the collision type.
         std::vector<std::vector<Candidate>> mCandidatesPerType{static_cast<size_t>(CollisionType::AMOUNT)};
