@@ -13,7 +13,7 @@ namespace cubos::core::geom
     /// @brief Box shape.
     struct Box
     {
-        glm::vec3 halfSize{0.0f}; ///< The half size of the box.
+        glm::vec3 halfSize{0.5f}; ///< The half size of the box.
 
         /// @brief Computes two opposite corners of the box.
         /// @param corners The array to store the two corners in.

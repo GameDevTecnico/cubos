@@ -11,8 +11,8 @@ namespace cubos::core::geom
     /// @brief Capsule shape, which can also represent a sphere.
     struct Capsule
     {
-        float radius; ///< The radius of the capsule.
-        float length; ///< The length of the capsule.
+        float radius = 1.0f; ///< The radius of the capsule.
+        float length = 0.0f; ///< The length of the capsule.
 
         /// @brief Constructs a sphere.
         /// @param radius The radius of the sphere.
