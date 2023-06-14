@@ -13,7 +13,7 @@ namespace cubos::core::geom
     /// @brief Plane shape.
     struct Plane
     {
-        glm::vec3 normal{0.0f}; ///< The normal of the plane.
+        glm::vec3 normal{0.0f, 1.0f, 0.0f}; ///< The normal of the plane.
     };
 } // namespace cubos::core::geom
 
