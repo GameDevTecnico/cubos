@@ -1,9 +1,13 @@
+/// @file
+/// @brief Contains the class for the Box shape.
+
 #pragma once
 
 #include <glm/glm.hpp>
 
 namespace cubos::core::geom
 {
+    /// @brief Box shape.
     struct Box
     {
         const glm::vec3 halfSize; ///< The half size of the box.
