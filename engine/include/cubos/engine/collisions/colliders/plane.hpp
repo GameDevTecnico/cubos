@@ -8,6 +8,9 @@
 namespace cubos::engine
 {
     /// @brief Plane Collider.
+    ///
+    /// @details
+    /// - Zero thickness: Not suitable for dynamic objects, but can be used for static objects.
     struct [[cubos::component("cubos/plane_collider", VecStorage)]] PlaneCollider
     {
         glm::vec3 offset{0.0f};         ///< The offset of the collider.
