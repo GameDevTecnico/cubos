@@ -15,7 +15,7 @@ namespace cubos::engine
     class BroadPhaseCollisions final
     {
     public:
-        using CollisionCandidate = std::pair<Entity, Entity>;
+        using Candidate = std::pair<Entity, Entity>;
 
         BroadPhaseCollisions() = default;
         ~BroadPhaseCollisions() = default;
@@ -40,20 +40,14 @@ namespace cubos::engine
         /// Adds a collision candidate to the list of candidates for a specific collision type.
         /// @param type The collision type.
         /// @param candidate The collision candidate.
-        inline void addCandidate(CollisionType type, CollisionCandidate candidate)
-        {
-            mCandidatesPerType[static_cast<size_t>(type)].push_back(candidate);
-        }
+        void addCandidate(CollisionType type, Candidate candidate);
 
         /// @return The collision candidates for a specific collision type.
         /// @param type The collision type.
-        inline const std::vector<CollisionCandidate>& getCandidates(CollisionType type) const
-        {
-            return mCandidatesPerType[static_cast<size_t>(type)];
-        }
+        const std::vector<Candidate>& getCandidates(CollisionType type) const;
 
     private:
         /// List of collision candidates for each collision type. The index of the vector is the collision type.
-        std::vector<std::vector<CollisionCandidate>> mCandidatesPerType{static_cast<size_t>(CollisionType::AMOUNT)};
+        std::vector<std::vector<Candidate>> mCandidatesPerType{static_cast<size_t>(CollisionType::AMOUNT)};
     };
 } // namespace cubos::engine
