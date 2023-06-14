@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['plane_2ehpp_1024',['plane.hpp',['../plane_8hpp.html',1,'']]],
-  ['plugin_2ehpp_1025',['plugin.hpp',['../input_2plugin_8hpp.html',1,'']]]
+  ['plane_2ehpp_1035',['plane.hpp',['../core_2include_2cubos_2core_2geom_2plane_8hpp.html',1,'(Global Namespace)'],['../engine_2include_2cubos_2engine_2collisions_2colliders_2plane_8hpp.html',1,'(Global Namespace)']]],
+  ['plugin_2ehpp_1036',['plugin.hpp',['../collisions_2plugin_8hpp.html',1,'(Global Namespace)'],['../input_2plugin_8hpp.html',1,'(Global Namespace)']]]
 ];

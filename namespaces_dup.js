@@ -19,6 +19,10 @@ var namespaces_dup =
         [ "FileBridge", "classcubos_1_1engine_1_1FileBridge.html", "classcubos_1_1engine_1_1FileBridge" ],
         [ "JSONBridge", "classcubos_1_1engine_1_1JSONBridge.html", "classcubos_1_1engine_1_1JSONBridge" ],
         [ "AssetMeta", "classcubos_1_1engine_1_1AssetMeta.html", "classcubos_1_1engine_1_1AssetMeta" ],
+        [ "BoxCollider", "structcubos_1_1engine_1_1BoxCollider.html", "structcubos_1_1engine_1_1BoxCollider" ],
+        [ "CapsuleCollider", "structcubos_1_1engine_1_1CapsuleCollider.html", "structcubos_1_1engine_1_1CapsuleCollider" ],
+        [ "PlaneCollider", "structcubos_1_1engine_1_1PlaneCollider.html", "structcubos_1_1engine_1_1PlaneCollider" ],
+        [ "SimplexCollider", "structcubos_1_1engine_1_1SimplexCollider.html", "structcubos_1_1engine_1_1SimplexCollider" ],
         [ "DeltaTime", "structcubos_1_1engine_1_1DeltaTime.html", "structcubos_1_1engine_1_1DeltaTime" ],
         [ "ShouldQuit", "structcubos_1_1engine_1_1ShouldQuit.html", "structcubos_1_1engine_1_1ShouldQuit" ],
         [ "Arguments", "structcubos_1_1engine_1_1Arguments.html", "structcubos_1_1engine_1_1Arguments" ],
@@ -60,6 +64,7 @@ var namespaces_dup =
           [ "Normal", "manager_8hpp.html#a483005c1e14686e494369612d6d94383a960b44c579bc2f6818d2daaf9e4c16f0", null ]
         ] ],
         [ "assetsPlugin", "assets_2plugin_8hpp.html#ad4b3f1b0d0d3fa8c8951129860b5f0d1", null ],
+        [ "collisionsPlugin", "collisions_2plugin_8hpp.html#a9a5e69018500e5d53b1e3d61bb7985bf", null ],
         [ "envSettingsPlugin", "env__settings_2plugin_8hpp.html#a5b186de8c0e9389e9b8ef6f0d8c91b13", null ],
         [ "fileSettingsPlugin", "file__settings_2plugin_8hpp.html#ab45d49ce04c1f7b187af9fa1a1d7d48f", null ],
         [ "imguiPlugin", "imgui_2plugin_8hpp.html#ae657719db6afb7e3b4afd5484789b194", null ],

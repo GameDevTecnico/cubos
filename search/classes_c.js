@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nullstorage_905',['NullStorage',['../classcubos_1_1core_1_1ecs_1_1NullStorage.html',1,'cubos::core::ecs']]]
+  ['nullstorage_914',['NullStorage',['../classcubos_1_1core_1_1ecs_1_1NullStorage.html',1,'cubos::core::ecs']]]
 ];

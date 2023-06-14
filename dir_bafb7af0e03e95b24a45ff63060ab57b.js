@@ -1,6 +1,7 @@
 var dir_bafb7af0e03e95b24a45ff63060ab57b =
 [
     [ "assets", "dir_0835e003fa277f66ce5cf543d578f6a2.html", "dir_0835e003fa277f66ce5cf543d578f6a2" ],
+    [ "collisions", "dir_db86702e1371d7558db3699dd3786a14.html", "dir_db86702e1371d7558db3699dd3786a14" ],
     [ "env_settings", "dir_6c35851ea5afe98a2e16bb1923c0c18a.html", "dir_6c35851ea5afe98a2e16bb1923c0c18a" ],
     [ "file_settings", "dir_e3da6a0d695fa4fab64ff7a1dec1a4bb.html", "dir_e3da6a0d695fa4fab64ff7a1dec1a4bb" ],
     [ "imgui", "dir_459dda10180a6131eb62bc74e02d0b6e.html", "dir_459dda10180a6131eb62bc74e02d0b6e" ],
