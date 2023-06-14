@@ -27,7 +27,7 @@ void BroadPhaseCollisions::updateMarkers(F position)
 
 const std::vector<std::unordered_map<Entity, std::vector<Entity>>>& BroadPhaseCollisions::sweep()
 {
-    mOverlapMaps.clear();
+    mSweepOverlapMaps.clear();
     auto active = std::unordered_set<Entity>{};
 
     for (size_t axis = 0; axis < 3; axis++)
@@ -40,7 +40,7 @@ const std::vector<std::unordered_map<Entity, std::vector<Entity>>>& BroadPhaseCo
             {
                 for (auto& other : active)
                 {
-                    mOverlapMaps[axis][entity.entity].push_back(other);
+                    mSweepOverlapMaps[axis][entity].push_back(other);
                 }
 
                 active.insert(entity.entity);
@@ -52,7 +52,7 @@ const std::vector<std::unordered_map<Entity, std::vector<Entity>>>& BroadPhaseCo
         }
     }
 
-    return mOverlapMaps;
+    return mSweepOverlapMaps;
 }
 
 void BroadPhaseCollisions::addEntity(Entity entity)
