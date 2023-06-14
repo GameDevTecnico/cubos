@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 namespace cubos::core::geom
 {
     struct Capsule
