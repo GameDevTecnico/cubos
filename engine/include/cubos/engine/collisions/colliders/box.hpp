@@ -1,5 +1,5 @@
 /// @file
-/// Contains the class for the Box Collider component.
+/// @brief Contains the class for the Box Collider component.
 
 #pragma once
 

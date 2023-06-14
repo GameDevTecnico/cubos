@@ -23,7 +23,7 @@ namespace cubos::engine
         BroadPhaseCollisions() = default;
         ~BroadPhaseCollisions() = default;
 
-        /// Collision type for each pair of colliders.
+        /// @brief Collision type for each pair of colliders.
         enum class CollisionType
         {
             BoxBox = 0,
@@ -79,7 +79,7 @@ namespace cubos::engine
             glm::vec3 max; ///< The maximum position of the entity.
         };
 
-        /// Marker used for sweep and prune.
+        /// @brief Marker used for sweep and prune.
         struct SweepMarker
         {
             size_t entityIndex; ///< Index of the entity in mEntities.
