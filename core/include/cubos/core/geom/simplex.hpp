@@ -9,8 +9,7 @@
 
 namespace cubos::core::geom
 {
-    /// @brief A simplex.
-    /// Can be an empty, a point, a line, a triangle or a tetrahedron.
+    /// @brief A simplex shape - may either be empty, a point, a line, a triangle or a tetrahedron.
     struct Simplex
     {
         // TODO: We should implement something like boost::static_vector for this. See
@@ -18,14 +17,14 @@ namespace cubos::core::geom
 
         const std::vector<glm::vec3> points; ///< The points of the simplex.
 
-        /// Constructs an empty simplex.
+        /// @brief Constructs an empty simplex.
         /// @returns The empty simplex.
         static Simplex empty()
         {
             return {{}};
         }
 
-        /// Constructs a point simplex.
+        /// @brief Constructs a point simplex.
         /// @param p The point.
         /// @returns The point simplex.
         static Simplex point(const glm::vec3& p)
@@ -33,7 +32,7 @@ namespace cubos::core::geom
             return {{p}};
         }
 
-        /// Constructs a line simplex.
+        /// @brief Constructs a line simplex.
         /// @param p1 The first point.
         /// @param p2 The second point.
         /// @returns The line simplex.
@@ -42,7 +41,7 @@ namespace cubos::core::geom
             return {{p1, p2}};
         }
 
-        /// Constructs a triangle simplex.
+        /// @brief Constructs a triangle simplex.
         /// @param p1 The first point.
         /// @param p2 The second point.
         /// @param p3 The third point.
@@ -52,7 +51,7 @@ namespace cubos::core::geom
             return {{p1, p2, p3}};
         }
 
-        /// Constructs a tetrahedron simplex.
+        /// @brief Constructs a tetrahedron simplex.
         /// @param p1 The first point.
         /// @param p2 The second point.
         /// @param p3 The third point.
