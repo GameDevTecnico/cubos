@@ -12,7 +12,7 @@ namespace cubos::core::geom
     {
         const glm::vec3 halfSize; ///< The half size of the box.
 
-        /// Computes two opposite corners of the box.
+        /// @brief Computes two opposite corners of the box.
         /// @param corners The array to store the two corners in.
         void corners2(glm::vec3 corners[2]) const
         {
@@ -20,7 +20,7 @@ namespace cubos::core::geom
             corners[1] = {halfSize.x, halfSize.y, halfSize.z};
         }
 
-        /// Computes six opposite corners of the box. Opposite corners are adjacent in the array.
+        /// @brief Computes six opposite corners of the box. Opposite corners are adjacent in the array.
         /// @param corners The array to store the six corners in.
         void corners6(glm::vec3 corners[6]) const
         {
@@ -32,7 +32,7 @@ namespace cubos::core::geom
             corners[5] = {halfSize.x, -halfSize.y, halfSize.z};
         }
 
-        /// Computes the eight corners of the box. Opposite corners are adjacent in the array.
+        /// @brief Computes the eight corners of the box. Opposite corners are adjacent in the array.
         /// @param corners The array to store the eight corners in.
         void corners(glm::vec3 corners[8]) const
         {
