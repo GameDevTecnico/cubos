@@ -37,7 +37,7 @@ namespace cubos::engine
             PlaneSimplex,
             SimplexSimplex,
 
-            AMOUNT ///< Used to get the amount of collision types.
+            Count ///< Used to get the amount of collision types.
         };
 
         /// Updates and sorts the markers for sweep and prune.
@@ -98,6 +98,6 @@ namespace cubos::engine
         std::vector<std::unordered_map<Entity, std::vector<Entity>>> mSweepOverlapMaps;
 
         /// List of collision candidates for each collision type. The index of the vector is the collision type.
-        std::vector<std::vector<Candidate>> mCandidatesPerType{static_cast<size_t>(CollisionType::AMOUNT)};
+        std::vector<std::vector<Candidate>> candidatesPerType{static_cast<size_t>(CollisionType::Count)};
     };
 } // namespace cubos::engine
