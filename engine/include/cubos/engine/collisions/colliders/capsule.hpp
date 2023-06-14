@@ -10,7 +10,7 @@ namespace cubos::engine
     /// @brief Capsule Collider.
     struct [[cubos::component("cubos/capsule_collider", VecStorage)]] CapsuleCollider
     {
-        glm::mat4 transform;              ///< The transform of the collider.
+        glm::mat4 transform{1.0f};        ///< The transform of the collider.
         cubos::core::geom::Capsule shape; ///< The capsule shape of the collider.
     };
 }

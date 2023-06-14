@@ -10,7 +10,7 @@ namespace cubos::engine
     /// @brief Plane Collider.
     struct [[cubos::component("cubos/plane_collider", VecStorage)]] PlaneCollider
     {
-        glm::vec3 offset;               ///< The offset of the collider.
+        glm::vec3 offset{0.0f};         ///< The offset of the collider.
         cubos::core::geom::Plane shape; ///< The plane shape of the collider.
     };
 }
