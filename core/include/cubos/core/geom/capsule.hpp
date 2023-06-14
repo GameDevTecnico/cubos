@@ -7,7 +7,7 @@ namespace cubos::core::geom
         const float radius; ///< The radius of the capsule.
         const float lenght; ///< The lenght of the capsule.
 
-        static const Capsule sphere(float radius)
+        static Capsule sphere(float radius)
         {
             return {radius, 0.0f};
         }
