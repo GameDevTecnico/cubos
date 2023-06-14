@@ -95,6 +95,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/settings.hpp"
     "include/cubos/core/thread_pool.hpp"
 
+    "include/cubos/core/reflection/reflect.hpp"
     "include/cubos/core/reflection/type.hpp"
     "include/cubos/core/reflection/type_map.hpp"
     "include/cubos/core/reflection/hints.hpp"
