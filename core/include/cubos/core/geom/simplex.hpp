@@ -7,6 +7,9 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+
 namespace cubos::core::geom
 {
     /// @brief A simplex shape - may either be empty, a point, a line, a triangle or a tetrahedron.
@@ -15,7 +18,7 @@ namespace cubos::core::geom
         // TODO: We should implement something like boost::static_vector for this. See
         // https://github.com/GameDevTecnico/cubos/issues/419
 
-        const std::vector<glm::vec3> points; ///< The points of the simplex.
+        std::vector<glm::vec3> points{}; ///< The points of the simplex.
 
         /// @brief Constructs an empty simplex.
         /// @returns The empty simplex.
@@ -63,3 +66,23 @@ namespace cubos::core::geom
         }
     };
 } // namespace cubos::core::geom
+
+namespace cubos::core::data
+{
+    /// Serializes a simplex.
+    /// @param ser The serializer to use.
+    /// @param simplex The simplex to serialize.
+    /// @param name The name of the simplex.
+    void serialize(Serializer& ser, const geom::Simplex& simplex, const char* name)
+    {
+        ser.write(simplex.points, name);
+    }
+
+    /// Deserializes a simplex.
+    /// @param des The deserializer to use.
+    /// @param simplex The simplex to deserialize.
+    void deserialize(Deserializer& des, geom::Simplex& simplex)
+    {
+        des.read(simplex.points);
+    }
+} // namespace cubos::core::data

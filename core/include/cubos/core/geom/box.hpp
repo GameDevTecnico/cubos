@@ -5,12 +5,15 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+
 namespace cubos::core::geom
 {
     /// @brief Box shape.
     struct Box
     {
-        const glm::vec3 halfSize; ///< The half size of the box.
+        glm::vec3 halfSize{0.0f}; ///< The half size of the box.
 
         /// @brief Computes two opposite corners of the box.
         /// @param corners The array to store the two corners in.
@@ -47,3 +50,27 @@ namespace cubos::core::geom
         }
     };
 } // namespace cubos::core::geom
+
+namespace cubos::core::data
+{
+    /// Serializes a box.
+    /// @param ser The serializer to use.
+    /// @param box The box to serialize.
+    /// @param name The name of the plane.
+    void serialize(Serializer& ser, const geom::Box& box, const char* name)
+    {
+        ser.beginObject(name);
+        ser.write(box.halfSize, "halfSize");
+        ser.endObject();
+    }
+
+    /// Deserializes a box.
+    /// @param des The deserializer to use.
+    /// @param box The box to deserialize.
+    void deserialize(Deserializer& des, geom::Box& box)
+    {
+        des.beginObject();
+        des.read(box.halfSize);
+        des.endObject();
+    }
+} // namespace cubos::core::data
