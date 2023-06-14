@@ -1,80 +1,15 @@
 /// @file
-/// @brief Defines the Type abstract class, the reflect() function and reflection macros.
+/// @brief Defines the Type abstract class.
 
 #pragma once
 
 #include <string>
 
 #include <cubos/core/log.hpp>
-
-/// @brief Helper macro used to pass arguments with commas to other macros, wrapped in parentheses.
-/// @code
-/// #define FOO(T) T foo;
-/// FOO(int); // expands to int foo;
-/// FOO(std::map<int, int>); // error: too many arguments to macro 'FOO'
-///
-/// // Instead, use CUBOS_PACK:
-/// #define FOO(T) CUBOS_PACK T foo;
-/// FOO((int)); // expands to PACK(int) foo, which expands to int foo;
-/// FOO((std::map<int, int>)); // expands to PACK(std::map<int, int>) foo, which expands to std::map<int, int> foo;
-/// @endcode
-#define CUBOS_PACK(...) __VA_ARGS__
-
-/// @brief Declares a reflection method. Can either be used with the CUBOS_REFLECT_IMPL macro or
-/// defined immediately after this macro.
-/// @see CUBOS_REFLECT_IMPL
-#define CUBOS_REFLECT static const cubos::core::reflection::Type* reflect()
-
-/// @brief Defines a reflection method declared with CUBOS_REFLECT. Should be followed by the
-/// definition of the method, which should return a Type object.
-/// @param T Type to reflect.
-/// @see CUBOS_REFLECT_DECL
-#define CUBOS_REFLECT_IMPL(T) const cubos::core::reflection::Type* T::reflect()
-
-/// @brief Defines a specialization of the Reflect class for a type. Should be used with the
-/// CUBOS_REFLECT_EXTERNAL_IMPL macro.
-/// @param args Template parameters wrapped in parentheses.
-/// @param T Type to reflect.
-/// @see CUBOS_REFLECT_EXTERNAL_IMPL
-#define CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(args, T)                                                                  \
-    template <CUBOS_PACK args>                                                                                         \
-    struct cubos::core::reflection::Reflect<T>                                                                         \
-    {                                                                                                                  \
-        static const cubos::core::reflection::Type* type();                                                            \
-    }
-
-/// @brief Defines a specialization of the Reflect class for a type. Should be used with the
-/// CUBOS_REFLECT_EXTERNAL_IMPL macro.
-/// @param T Type to reflect.
-/// @see CUBOS_REFLECT_EXTERNAL_IMPL
-#define CUBOS_REFLECT_EXTERNAL_DECL(T) CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE((), T)
-
-/// @brief Implements the specialization of the Reflect class for a type declared with the
-/// CUBOS_REFLECT_EXTERNAL_DECL or CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE macros.
-/// @param T Type to reflect.
-/// @see CUBOS_REFLECT_EXTERNAL_DECL CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE
-#define CUBOS_REFLECT_EXTERNAL_IMPL(T) const cubos::core::reflection::Type* cubos::core::reflection::Reflect<T>::type()
-
-/// @brief Defines a specialization of the Reflect class for a type with template parameters.
-/// @param args Template parameters, wrapped in parentheses.
-/// @param T Type to reflect, wrapped in parentheses.
-#define CUBOS_REFLECT_EXTERNAL_TEMPLATE(args, T)                                                                       \
-    CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE(args, CUBOS_PACK T);                                                          \
-    template <CUBOS_PACK args>                                                                                         \
-    CUBOS_REFLECT_EXTERNAL_IMPL(CUBOS_PACK T)
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::reflection
 {
-    /// @brief Returns the reflection data for the given type. Fails to compile if the type does
-    /// not implement reflection.
-    /// @details Internally, this function stores a static instance of the reflection data for the
-    /// given type. This means that the reflection data is only initialized once. This data is
-    /// initialized by calling Reflect<T>::type().
-    /// @tparam T Type to reflect.
-    /// @return Reflection data for the given type.
-    template <typename T>
-    const class Type& reflect();
-
     /// @brief Abstract class for classes which contains the reflection data for types.
     class Type
     {
@@ -203,95 +138,4 @@ namespace cubos::core::reflection
         DefaultConstructor mDefaultConstructor;
         Destructor mDestructor;
     };
-
-    /// @brief Specifies the reflection function for the given type. By default, this function is
-    /// the static member function `static const Type& reflect()` of the type.
-    ///
-    /// @details To implement reflection for a type, you can either add a static member function
-    /// `static const Type& reflect()` to the type, or specialize this struct for the type. For
-    /// example, the first option would look like:
-    ///
-    /// @code
-    /// // my_type.hpp
-    /// struct MyType
-    /// {
-    ///     static const Type& reflect();
-    /// };
-    ///
-    /// // my_type.cpp
-    /// const Type& MyType::reflect()
-    /// {
-    ///     static auto type = PrimitiveType{"MyType"};
-    ///     return type;
-    /// }
-    /// @endcode
-    ///
-    /// The second option would look like:
-    ///
-    /// @code
-    /// // my_type.hpp
-    /// struct cubos::core::reflection::Reflect<MyType>
-    /// {
-    ///     static const Type& type();
-    /// };
-    ///
-    /// // my_type.cpp
-    /// const Type& cubos::core::reflection::Reflect<MyType>::type()
-    /// {
-    ///     static auto type = PrimitiveType{"MyType"};
-    ///     return type;
-    /// }
-    /// @endcode
-    ///
-    /// The first option is preferred, as it is less verbose. However, the second option is
-    /// necessary if you do cannot modify the type (e.g. if it is a type from a third-party
-    /// library or the standard library).
-    ///
-    /// The first option can be shortened by using the `CUBOS_REFLECT_DECL` and
-    /// `CUBOS_REFLECT_IMPL` macros:
-    ///
-    /// @code
-    /// // my_type.hpp
-    /// struct MyType
-    /// {
-    ///     CUBOS_REFLECT_DECL;
-    /// };
-    ///
-    /// // my_type.cpp
-    /// CUBOS_REFLECT_IMPL(MyType, PrimitiveType{"MyType"});
-    /// @endcode
-    ///
-    /// The second option can be shortened by using the `CUBOS_REFLECT_EXTERNAL_DECL` macro and
-    /// `CUBOS_REFLECT_EXTERNAL_IMPL` macros:
-    ///
-    /// @code
-    /// // my_type.hpp
-    /// struct MyType {};
-    /// CUBOS_REFLECT_EXTERNAL_DECL(MyType);
-    ///
-    /// // my_type.cpp
-    /// CUBOS_REFLECT_EXTERNAL_IMPL(MyType, PrimitiveType{"MyType"});
-    /// @endcode
-    ///
-    /// @tparam T Type to reflect.
-    template <typename T>
-    struct Reflect
-    {
-        // If you get a compiler error here, you need to implement reflection for the type. Either:
-        // 1. Include the a file which implements reflection for the type, or
-        // 2. Specialize this struct for the type, or
-        // 3. Add a static member function `static Type reflect()` to the type.
-        // Refer to the documentation above for more information.
-        static const Type* type()
-        {
-            return T::reflect(); // Read the comment above if you get a compiler error here.
-        }
-    };
-
-    template <typename T>
-    const Type& reflect()
-    {
-        static const auto* type = Reflect<T>::type();
-        return *type;
-    }
 } // namespace cubos::core::reflection
