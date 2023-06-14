@@ -36,6 +36,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/voxels/plugin.cpp"
 
     "src/cubos/engine/collisions/plugin.cpp"
+    "src/cubos/engine/collisions/broad_phase_collisions.cpp"
 
     "src/cubos/engine/input/plugin.cpp"
     "src/cubos/engine/input/input.cpp"
