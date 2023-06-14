@@ -17,4 +17,4 @@ namespace cubos::engine
         glm::mat4 transform{1.0f};        ///< The transform of the collider.
         cubos::core::geom::Capsule shape; ///< The capsule shape of the collider.
     };
-}
+} // namespace cubos::engine

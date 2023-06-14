@@ -25,4 +25,4 @@ namespace cubos::engine
         /// Shouldn't be changed without good reason, it's preferable to move the simplex corners to account for it.
         float margin = 0.04f;
     };
-}
+} // namespace cubos::engine
