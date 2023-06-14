@@ -3,13 +3,16 @@
 
 #pragma once
 
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+
 namespace cubos::core::geom
 {
     /// @brief Capsule shape, which can also represent a sphere.
     struct Capsule
     {
-        const float radius; ///< The radius of the capsule.
-        const float length; ///< The length of the capsule.
+        float radius; ///< The radius of the capsule.
+        float length; ///< The length of the capsule.
 
         /// @brief Constructs a sphere.
         /// @param radius The radius of the sphere.
@@ -26,3 +29,29 @@ namespace cubos::core::geom
         }
     };
 } // namespace cubos::core::geom
+
+namespace cubos::core::data
+{
+    /// Serializes a capsule.
+    /// @param ser The serializer to use.
+    /// @param capsule The capsule to serialize.
+    /// @param name The name of the capsule.
+    void serialize(Serializer& ser, const geom::Capsule& capsule, const char* name)
+    {
+        ser.beginObject(name);
+        ser.write(capsule.radius, "radius");
+        ser.write(capsule.length, "length");
+        ser.endObject();
+    }
+
+    /// Deserializes a capsule.
+    /// @param des The deserializer to use.
+    /// @param capsule The capsule to deserialize.
+    void deserialize(Deserializer& des, geom::Capsule& capsule)
+    {
+        des.beginObject();
+        des.read(capsule.radius);
+        des.read(capsule.length);
+        des.endObject();
+    }
+} // namespace cubos::core::data
