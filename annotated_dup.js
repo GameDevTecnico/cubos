@@ -92,6 +92,12 @@ var annotated_dup =
           [ "VecStorage", "classcubos_1_1core_1_1ecs_1_1VecStorage.html", "classcubos_1_1core_1_1ecs_1_1VecStorage" ],
           [ "World", "classcubos_1_1core_1_1ecs_1_1World.html", "classcubos_1_1core_1_1ecs_1_1World" ]
         ] ],
+        [ "geom", null, [
+          [ "Box", "structcubos_1_1core_1_1geom_1_1Box.html", "structcubos_1_1core_1_1geom_1_1Box" ],
+          [ "Capsule", "structcubos_1_1core_1_1geom_1_1Capsule.html", "structcubos_1_1core_1_1geom_1_1Capsule" ],
+          [ "Plane", "structcubos_1_1core_1_1geom_1_1Plane.html", "structcubos_1_1core_1_1geom_1_1Plane" ],
+          [ "Simplex", "structcubos_1_1core_1_1geom_1_1Simplex.html", "structcubos_1_1core_1_1geom_1_1Simplex" ]
+        ] ],
         [ "gl", "namespacecubos_1_1core_1_1gl.html", [
           [ "impl", "namespacecubos_1_1core_1_1gl_1_1impl.html", [
             [ "Framebuffer", "classcubos_1_1core_1_1gl_1_1impl_1_1Framebuffer.html", "classcubos_1_1core_1_1gl_1_1impl_1_1Framebuffer" ],

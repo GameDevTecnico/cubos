@@ -14,6 +14,12 @@ var namespacecubos_1_1core =
     ] ],
     [ "data", "namespacecubos_1_1core_1_1data.html", "namespacecubos_1_1core_1_1data" ],
     [ "ecs", "namespacecubos_1_1core_1_1ecs.html", "namespacecubos_1_1core_1_1ecs" ],
+    [ "geom", null, [
+      [ "Box", "structcubos_1_1core_1_1geom_1_1Box.html", "structcubos_1_1core_1_1geom_1_1Box" ],
+      [ "Capsule", "structcubos_1_1core_1_1geom_1_1Capsule.html", "structcubos_1_1core_1_1geom_1_1Capsule" ],
+      [ "Plane", "structcubos_1_1core_1_1geom_1_1Plane.html", "structcubos_1_1core_1_1geom_1_1Plane" ],
+      [ "Simplex", "structcubos_1_1core_1_1geom_1_1Simplex.html", "structcubos_1_1core_1_1geom_1_1Simplex" ]
+    ] ],
     [ "gl", "namespacecubos_1_1core_1_1gl.html", "namespacecubos_1_1core_1_1gl" ],
     [ "io", "namespacecubos_1_1core_1_1io.html", "namespacecubos_1_1core_1_1io" ],
     [ "memory", "namespacecubos_1_1core_1_1memory.html", "namespacecubos_1_1core_1_1memory" ],
