@@ -29,6 +29,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/thread_pool.cpp"
 
     "src/cubos/core/reflection/type.cpp"
+    "src/cubos/core/reflection/hints.cpp"
     "src/cubos/core/reflection/primitive.cpp"
     "src/cubos/core/reflection/object.cpp"
     "src/cubos/core/reflection/variant.cpp"
@@ -95,6 +96,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/thread_pool.hpp"
 
     "include/cubos/core/reflection/type.hpp"
+    "include/cubos/core/reflection/type_map.hpp"
+    "include/cubos/core/reflection/hints.hpp"
     "include/cubos/core/reflection/visitor.hpp"
     "include/cubos/core/reflection/primitive.hpp"
     "include/cubos/core/reflection/object.hpp"

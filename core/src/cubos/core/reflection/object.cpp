@@ -1,6 +1,7 @@
 #include <cubos/core/reflection/object.hpp>
 #include <cubos/core/reflection/visitor.hpp>
 
+using cubos::core::reflection::Hints;
 using cubos::core::reflection::ObjectType;
 using cubos::core::reflection::Type;
 
@@ -18,6 +19,16 @@ const std::string& ObjectType::Field::name() const
 const Type& ObjectType::Field::type() const
 {
     return mType;
+}
+
+const Hints& ObjectType::Field::hints() const
+{
+    return mHints;
+}
+
+Hints& ObjectType::Field::hints()
+{
+    return mHints;
 }
 
 ObjectType::Builder::Builder(ObjectType& type)
