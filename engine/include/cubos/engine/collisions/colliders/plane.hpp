@@ -16,4 +16,4 @@ namespace cubos::engine
         glm::vec3 offset{0.0f};         ///< The offset of the collider.
         cubos::core::geom::Plane shape; ///< The plane shape of the collider.
     };
-}
+} // namespace cubos::engine
