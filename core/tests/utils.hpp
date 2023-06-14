@@ -6,11 +6,11 @@
 #define PARAMETRIZE_TRUE_OR_FALSE(what, var)                                                                           \
     do                                                                                                                 \
     {                                                                                                                  \
-        SUBCASE(what " is true")                                                                                        \
+        SUBCASE(what " is true")                                                                                       \
         {                                                                                                              \
             var = true;                                                                                                \
         }                                                                                                              \
-        SUBCASE(what " is false")                                                                                       \
+        SUBCASE(what " is false")                                                                                      \
         {                                                                                                              \
             var = false;                                                                                               \
         }                                                                                                              \

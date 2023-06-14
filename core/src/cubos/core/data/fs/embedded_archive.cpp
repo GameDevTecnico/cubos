@@ -77,5 +77,6 @@ std::unique_ptr<memory::Stream> EmbeddedArchive::open(std::size_t id, File::Hand
     CUBOS_DEBUG_ASSERT(mode == File::OpenMode::Read);
 
     const auto& entry = mData->entries[id - 1];
-    return std::make_unique<FileStream<memory::BufferStream>>(handle, mode, memory::BufferStream(entry.data, entry.size));
+    return std::make_unique<FileStream<memory::BufferStream>>(handle, mode,
+                                                              memory::BufferStream(entry.data, entry.size));
 }

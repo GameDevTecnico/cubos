@@ -10,14 +10,22 @@
 
 using cubos::core::data::EmbeddedArchive;
 
-static const uint8_t fileData3[] = { 0x62, 0x61, 0x7a, };
-static const uint8_t fileData4[] = { 0x66, 0x6f, 0x6f, };
+static const uint8_t fileData3[] = {
+    0x62,
+    0x61,
+    0x7a,
+};
+static const uint8_t fileData4[] = {
+    0x66,
+    0x6f,
+    0x6f,
+};
 
 static const EmbeddedArchive::Data::Entry entries[] = {
-    { "", true, 0, 0, 2, nullptr, 0 },
-    { "bar", true, 1, 4, 3, nullptr, 0 },
-    { "baz.txt", false, 2, 0, 0, fileData3, sizeof(fileData3) },
-    { "foo.txt", false, 1, 0, 0, fileData4, sizeof(fileData4) },
+    {"", true, 0, 0, 2, nullptr, 0},
+    {"bar", true, 1, 4, 3, nullptr, 0},
+    {"baz.txt", false, 2, 0, 0, fileData3, sizeof(fileData3)},
+    {"foo.txt", false, 1, 0, 0, fileData4, sizeof(fileData4)},
 };
 
 static const EmbeddedArchive::Data embeddedArchiveData = {
