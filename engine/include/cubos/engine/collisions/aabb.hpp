@@ -5,6 +5,9 @@
 
 #include <glm/glm.hpp>
 
+#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/serializer.hpp>
+
 #include <cubos/core/geom/simplex.hpp>
 #include <cubos/core/log.hpp>
 
@@ -47,3 +50,24 @@ namespace cubos::engine
         }
     };
 } // namespace cubos::engine
+
+
+namespace cubos::core::data
+{
+    /// Serializes an AABB.
+    /// @param ser The serializer to use.
+    /// @param aabb The AABB to serialize.
+    /// @param name The name of the AABB.
+    void serialize(Serializer& ser, const engine::ColliderAABB& aabb, const char* name)
+    {
+        ser.write(aabb.diag, name);
+    }
+
+    /// Deserializes a AABB.
+    /// @param des The deserializer to use.
+    /// @param aabb The AABB to deserialize.
+    void deserialize(Deserializer& des, engine::ColliderAABB& aabb)
+    {
+        des.read(aabb.diag);
+    }
+} // namespace cubos::core::data
