@@ -43,27 +43,6 @@ const std::vector<Candidate>& BroadPhaseCollisions::getCandidates(CollisionType 
     return candidatesPerType[static_cast<std::size_t>(type)];
 }
 
-// template <typename F>
-// void BroadPhaseCollisions::updateMarkers(F position)
-// {
-//     for (auto& entity : entities)
-//     {
-//         auto [min, max] = bounds(entity.entity);
-//         entity.min = min;
-//         entity.max = max;
-//     }
-
-//     for (size_t axis = 0; axis < 3; axis++)
-//     {
-//         std::sort(markersPerAxis[axis].begin(), markersPerAxis[axis].end(),
-//                   [this, axis](const SweepMarker& a, const SweepMarker& b) {
-//                       auto a = entities[a.entityIndex];
-//                       auto b = entities[b.entityIndex];
-//                       return (a.isMin ? a.min : a.max)[axis] < (b.isMin ? b.min : b.max)[axis];
-//                   });
-//     }
-// }
-
 // const std::vector<std::unordered_map<Entity, std::vector<Entity>>>& BroadPhaseCollisions::sweep()
 // {
 //     mSweepOverlapMaps.clear();
