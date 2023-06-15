@@ -50,7 +50,7 @@ namespace cubos::engine
         std::vector<std::unordered_map<Entity, std::vector<Entity>>> sweepOverlapMaps;
 
         /// List of collision candidates for each collision type. The index of the vector is the collision type.
-        std::vector<std::vector<Candidate>> candidatesPerType{static_cast<size_t>(CollisionType::Count)};
+        std::vector<std::vector<Candidate>> candidatesPerType{static_cast<std::size_t>(CollisionType::Count)};
 
         /// Adds an entity to the list of entities tracked by sweep and prune.
         /// @param entity The entity to add.

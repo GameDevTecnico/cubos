@@ -7,7 +7,7 @@ using SweepMarker = cubos::engine::BroadPhaseCollisions::SweepMarker;
 
 void BroadPhaseCollisions::addEntity(Entity entity)
 {
-    for (size_t axis = 0; axis < 3; axis++)
+    for (std::size_t axis = 0; axis < 3; axis++)
     {
         markersPerAxis[axis].push_back({entity, true});
         markersPerAxis[axis].push_back({entity, false});
@@ -16,7 +16,7 @@ void BroadPhaseCollisions::addEntity(Entity entity)
 
 void BroadPhaseCollisions::removeEntity(Entity entity)
 {
-    for (size_t axis = 0; axis < 3; axis++)
+    for (std::size_t axis = 0; axis < 3; axis++)
     {
         auto& markers = markersPerAxis[axis];
         markers.erase(std::remove_if(markers.begin(), markers.end(),
@@ -27,7 +27,7 @@ void BroadPhaseCollisions::removeEntity(Entity entity)
 
 void BroadPhaseCollisions::clearEntities()
 {
-    for (size_t axis = 0; axis < 3; axis++)
+    for (std::size_t axis = 0; axis < 3; axis++)
     {
         markersPerAxis[axis].clear();
     }
@@ -35,12 +35,12 @@ void BroadPhaseCollisions::clearEntities()
 
 void BroadPhaseCollisions::addCandidate(CollisionType type, Candidate candidate)
 {
-    candidatesPerType[static_cast<size_t>(type)].push_back(candidate);
+    candidatesPerType[static_cast<std::size_t>(type)].push_back(candidate);
 }
 
 const std::vector<Candidate>& BroadPhaseCollisions::getCandidates(CollisionType type)
 {
-    return candidatesPerType[static_cast<size_t>(type)];
+    return candidatesPerType[static_cast<std::size_t>(type)];
 }
 
 // template <typename F>
