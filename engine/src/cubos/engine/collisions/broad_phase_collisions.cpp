@@ -3,46 +3,30 @@
 using cubos::engine::BroadPhaseCollisions;
 using Candidate = cubos::engine::BroadPhaseCollisions::Candidate;
 using CollisionType = cubos::engine::BroadPhaseCollisions::CollisionType;
-using SweepEntity = cubos::engine::BroadPhaseCollisions::SweepEntity;
 using SweepMarker = cubos::engine::BroadPhaseCollisions::SweepMarker;
 
 void BroadPhaseCollisions::addEntity(Entity entity)
 {
-    entities.push_back({entity, AABB{}});
-
     for (size_t axis = 0; axis < 3; axis++)
     {
-        markersPerAxis[axis].push_back({entities.size() - 1, true});
-        markersPerAxis[axis].push_back({entities.size() - 1, false});
+        markersPerAxis[axis].push_back({entity, true});
+        markersPerAxis[axis].push_back({entity, false});
     }
 }
 
 void BroadPhaseCollisions::removeEntity(Entity entity)
 {
-    size_t index;
-    for (index = 0; index < entities.size(); index++)
-    {
-        if (entities[index].entity == entity)
-            break;
-    }
-
-    if (index == entities.size())
-        return;
-
-    entities.erase(entities.begin() + index);
-
     for (size_t axis = 0; axis < 3; axis++)
     {
         auto& markers = markersPerAxis[axis];
         markers.erase(std::remove_if(markers.begin(), markers.end(),
-                                     [index](const SweepMarker& m) { return m.entityIndex == index; }),
+                                     [entity](const SweepMarker& m) { return m.entity == entity; }),
                       markers.end());
     }
 }
 
 void BroadPhaseCollisions::clearEntities()
 {
-    entities.clear();
     for (size_t axis = 0; axis < 3; axis++)
     {
         markersPerAxis[axis].clear();
