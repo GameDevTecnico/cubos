@@ -11,10 +11,10 @@
 namespace cubos::engine
 {
     /// @brief The AABB of a collider.
-    struct [[cubos::component("cubos/aabb", VecStorage)]] AABB
+    struct [[cubos::component("cubos/aabb", VecStorage)]] ColliderAABB
     {
         /// The diagonal of the AABB.
-        cubos::core::geom::Simplex diag = cubos::core::geom::Simplex::line(glm::vec3{-INFINITY}, glm::vec3{INFINITY});
+        core::geom::Simplex diag = core::geom::Simplex::line(glm::vec3{-INFINITY}, glm::vec3{INFINITY});
 
         /// Sets the minimum point of the AABB.
         /// @param min The new minimum point.
