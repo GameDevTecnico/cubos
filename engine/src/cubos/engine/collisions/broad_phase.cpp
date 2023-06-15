@@ -41,7 +41,30 @@ void updateMarkers(Query<Read<ColliderAABB>> query, Write<BroadPhaseCollisions> 
 
 void sweep(Write<BroadPhaseCollisions> collisions)
 {
-    (void)collisions;
+    // TODO: This is parallelizable.
+    for (glm::length_t axis = 0; axis < 3; axis++)
+    {
+        CUBOS_ASSERT(collisions->activePerAxis[axis].empty(), "Last sweep entered an entity but never exited");
+
+        collisions->sweepOverlapMaps[axis].clear();
+
+        for (auto& marker : collisions->markersPerAxis[axis])
+        {
+            if (marker.isMin)
+            {
+                for (auto& other : collisions->activePerAxis[axis])
+                {
+                    collisions->sweepOverlapMaps[axis][marker.entity].push_back(other);
+                }
+
+                collisions->activePerAxis[axis].insert(marker.entity);
+            }
+            else
+            {
+                collisions->activePerAxis[axis].erase(marker.entity);
+            }
+        }
+    }
 }
 
 void findPairs(Write<BroadPhaseCollisions> collisions)
