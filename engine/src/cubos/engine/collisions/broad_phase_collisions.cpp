@@ -42,33 +42,3 @@ const std::vector<Candidate>& BroadPhaseCollisions::getCandidates(CollisionType 
 {
     return candidatesPerType[static_cast<std::size_t>(type)];
 }
-
-// const std::vector<std::unordered_map<Entity, std::vector<Entity>>>& BroadPhaseCollisions::sweep()
-// {
-//     mSweepOverlapMaps.clear();
-//     auto active = std::unordered_set<size_t>{};
-
-//     for (size_t axis = 0; axis < 3; axis++)
-//     {
-//         for (auto& marker : markersPerAxis[axis])
-//         {
-//             if (marker.isMin)
-//             {
-//                 auto entity = entities[marker.entityIndex].entity;
-//                 for (auto& otherIndex : active)
-//                 {
-//                     auto other = entities[otherIndex].entity;
-//                     mSweepOverlapMaps[axis][entity].push_back(other);
-//                 }
-
-//                 active.insert(marker.entityIndex);
-//             }
-//             else
-//             {
-//                 active.erase(marker.entityIndex);
-//             }
-//         }
-//     }
-
-//     return mSweepOverlapMaps;
-// }

@@ -4,6 +4,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include <cubos/core/ecs/entity_manager.hpp>
@@ -48,6 +49,9 @@ namespace cubos::engine
         /// For each each map, the key is an entity and the value is a list of entities that overlap with the key.
         /// Symmetrical pairs are not stored.
         std::unordered_map<Entity, std::vector<Entity>> sweepOverlapMaps[3];
+
+        /// Set of active entities during sweep for each axis.
+        std::unordered_set<Entity> activePerAxis[3];
 
         /// List of collision candidates for each collision type. The index of the vector is the collision type.
         std::vector<std::vector<Candidate>> candidatesPerType{static_cast<std::size_t>(CollisionType::Count)};
