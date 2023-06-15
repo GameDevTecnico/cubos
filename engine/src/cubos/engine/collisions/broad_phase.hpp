@@ -31,8 +31,15 @@ using cubos::engine::SimplexCollider;
 template <typename C>
 void addMissingAABBs(Query<Read<C>, OptRead<ColliderAABB>> query, Commands commands)
 {
-    (void)query;
-    (void)commands;
+    // TODO: This query should eventually be replaced by Query<With<C>, Without<ColliderAABB>>
+
+    for (auto [entity, collider, aabb] : query)
+    {
+        if (!aabb)
+        {
+            commands.add(entity, ColliderAABB{});
+        }
+    }
 }
 
 /// @brief Updates the AABBs of all box colliders.
