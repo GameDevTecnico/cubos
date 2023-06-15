@@ -4,7 +4,39 @@
 
 void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderAABB>> query)
 {
-    (void)query;
+    for (auto [entity, localToWorld, collider, aabb] : query)
+    {
+        // Get the 3 points of the collider.
+        glm::vec3 corners[3];
+        collider->shape.corners3(corners);
+
+        // Pack the 3 points of the collider into a matrix.
+        auto points =
+            glm::mat3x4{glm::vec4{corners[0], 0.0f}, glm::vec4{corners[1], 0.0f}, glm::vec4{corners[2], 0.0f}};
+
+        // Transforms collider space to world space.
+        auto transform = localToWorld->mat * collider->transform;
+
+        // Only want scale and rotation, extract translation and remove it.
+        auto translation = glm::vec3{transform[3]};
+        transform[3] = glm::vec4{0.0f, 0.0f, 0.0f, 1.0f};
+
+        // Rotate and scale corners.
+        auto rotatedCorners = glm::mat3{transform * glm::mat3x4{points}};
+
+        // Get the extents of the rotated corners.
+        auto max = glm::max(glm::abs(rotatedCorners[0]), glm::abs(rotatedCorners[1]));
+        max = glm::max(max, glm::abs(rotatedCorners[2]));
+        auto min = -max;
+
+        // Add translation back in.
+        max += translation;
+        min += translation;
+
+        // Set the AABB.
+        aabb->max(max);
+        aabb->min(min);
+    }
 }
 
 void updateCapsuleAABBs(Query<Read<LocalToWorld>, Read<CapsuleCollider>, Write<ColliderAABB>> query,
