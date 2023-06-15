@@ -13,24 +13,21 @@ TEST_CASE("geom::Box")
     auto z = 3.0f;
     Box box{{x, y, z}};
 
-    SUBCASE("two corners")
+    SUBCASE("diagonal")
     {
         glm::vec3 corners[2];
-        box.corners2(corners);
+        box.diag(corners);
         CHECK_VEC3_EQ(corners[0], glm::vec3{-x, -y, -z});
         CHECK_VEC3_EQ(corners[1], glm::vec3{x, y, z});
     }
 
-    SUBCASE("six corners")
+    SUBCASE("three corners")
     {
-        glm::vec3 corners[6];
-        box.corners6(corners);
-        CHECK_VEC3_EQ(corners[0], glm::vec3{-x, -y, -z});
-        CHECK_VEC3_EQ(corners[1], glm::vec3{x, y, z});
+        glm::vec3 corners[3];
+        box.corners3(corners);
+        CHECK_VEC3_EQ(corners[0], glm::vec3{x, -y, -z});
+        CHECK_VEC3_EQ(corners[1], glm::vec3{-x, y, -z});
         CHECK_VEC3_EQ(corners[2], glm::vec3{-x, -y, z});
-        CHECK_VEC3_EQ(corners[3], glm::vec3{x, y, -z});
-        CHECK_VEC3_EQ(corners[4], glm::vec3{-x, y, -z});
-        CHECK_VEC3_EQ(corners[5], glm::vec3{x, -y, z});
     }
 
     SUBCASE("eight corners")

@@ -14,7 +14,7 @@ namespace cubos::engine
     /// - Positive margin: Requires a positive margin to round off sharp corners. Defined in physics-space units.
     struct [[cubos::component("cubos/box_collider", VecStorage)]] BoxCollider
     {
-        glm::mat4 transform{1.0f};    ///< The transform of the collider.
+        glm::mat4 transform;          ///< The transform of the collider.
         cubos::core::geom::Box shape; ///< The box shape of the collider.
 
         /// @brief The margin of the collider. Needed for collision stability.
