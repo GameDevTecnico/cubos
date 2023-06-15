@@ -35,6 +35,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/reflection/variant.cpp"
     "src/cubos/core/reflection/array.cpp"
     "src/cubos/core/reflection/dictionary.cpp"
+    "src/cubos/core/reflection/external/primitives.cpp"
+    "src/cubos/core/reflection/external/string.cpp"
 
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/standard_stream.cpp"
@@ -105,6 +107,8 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/reflection/variant.hpp"
     "include/cubos/core/reflection/array.hpp"
     "include/cubos/core/reflection/dictionary.hpp"
+    "include/cubos/core/reflection/external/primitives.hpp"
+    "include/cubos/core/reflection/external/string.hpp"
 
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/standard_stream.hpp"

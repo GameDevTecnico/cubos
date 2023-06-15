@@ -63,7 +63,7 @@ namespace cubos::core::reflection
     {
         // If you get a compiler error here, either you:
         // 1. Are trying to reflect an external type and have not included the file which declares
-        //    the type to be reflectable, or
+        //    the type to be reflectable (take a look at the external/ subdir), or
         // 2. Have not implemented reflection for the external type.
         // 3. Have not implemented reflection for your type.
         //
