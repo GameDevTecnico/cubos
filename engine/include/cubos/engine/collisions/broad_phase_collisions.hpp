@@ -8,8 +8,6 @@
 
 #include <cubos/core/ecs/entity_manager.hpp>
 
-#include <cubos/engine/collisions/aabb.hpp>
-
 using cubos::core::ecs::Entity;
 
 namespace cubos::engine
@@ -36,22 +34,12 @@ namespace cubos::engine
             Count ///< Used to get the amount of collision types.
         };
 
-        /// Entity tracked by sweep and prune.
-        struct SweepEntity
-        {
-            Entity entity; ///< The entity.
-            AABB aabb;     ///< The AABB of the entity.
-        };
-
         /// @brief Marker used for sweep and prune.
         struct SweepMarker
         {
-            size_t entityIndex; ///< Index of the entity in mEntities.
-            bool isMin;         ///< Whether the marker is a min or max marker.
+            Entity entity; ///< Entity referenced by the marker.
+            bool isMin;    ///< Whether the marker is a min or max marker.
         };
-
-        /// List of entities tracked by sweep and prune.
-        std::vector<SweepEntity> entities;
 
         /// List of ordered sweep markers for each axis. Stores the index of the marker in mMarkers.
         std::vector<std::vector<SweepMarker>> markersPerAxis{3};
