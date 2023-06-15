@@ -3,10 +3,6 @@
 
 #pragma once
 
-#include <cubos/engine/collisions/colliders/box.hpp>
-#include <cubos/engine/collisions/colliders/capsule.hpp>
-#include <cubos/engine/collisions/colliders/plane.hpp>
-#include <cubos/engine/collisions/colliders/simplex.hpp>
 #include <cubos/engine/cubos.hpp>
 
 namespace cubos::engine
@@ -29,9 +25,11 @@ namespace cubos::engine
     /// - `BroadPhaseCollisions`: Stores broad phase collision data.
     ///
     /// Tags:
+    /// - `cubos.collisions.broad.missing-aabb`: missing aabb colliders have been added.
     /// - `cubos.collisions.broad.aabb`: collider aabbs have been updated.
-    /// - `cubos.collisions.broad.pairs`: broad phase collision pairs have been found.
-    /// - `cubos.collisions.broad`: broad phase has ended.
+    /// - `cubos.collisions.broad.markers`: sweep markers have been updated.
+    /// - `cubos.collisions.broad.sweep`: sweep has been performed.
+    /// - `cubos.collisions.broad`: broad phase collision pairs have been found and broad phase has ended.
     /// - `cubos.collisions`: collisions have been resolved.
     ///
     /// Dependencies:
