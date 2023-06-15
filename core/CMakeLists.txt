@@ -109,6 +109,9 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/reflection/dictionary.hpp"
     "include/cubos/core/reflection/external/primitives.hpp"
     "include/cubos/core/reflection/external/string.hpp"
+    "include/cubos/core/reflection/external/variant.hpp"
+    "include/cubos/core/reflection/external/vector.hpp"
+    "include/cubos/core/reflection/external/unordered_map.hpp"
 
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/standard_stream.hpp"
