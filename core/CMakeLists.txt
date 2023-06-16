@@ -37,6 +37,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/reflection/dictionary.cpp"
     "src/cubos/core/reflection/external/primitives.cpp"
     "src/cubos/core/reflection/external/string.cpp"
+    "src/cubos/core/reflection/external/glm.cpp"
 
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/standard_stream.cpp"
@@ -112,6 +113,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/reflection/external/variant.hpp"
     "include/cubos/core/reflection/external/vector.hpp"
     "include/cubos/core/reflection/external/unordered_map.hpp"
+    "include/cubos/core/reflection/external/glm.hpp"
 
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/standard_stream.hpp"

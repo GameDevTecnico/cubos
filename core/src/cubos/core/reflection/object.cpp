@@ -31,10 +31,32 @@ Hints& ObjectType::Field::hints()
     return mHints;
 }
 
+ObjectType::FieldGetter::FieldGetter(std::string name, const Type& type, Getter getter)
+    : Field(name, type)
+    , mGetter(getter)
+{
+}
+
+const void* ObjectType::FieldGetter::get(const void* object) const
+{
+    return reinterpret_cast<const void*>(mGetter(object));
+}
+
+void* ObjectType::FieldGetter::get(void* object) const
+{
+    return reinterpret_cast<void*>(mGetter(object));
+}
+
 ObjectType::Builder::Builder(ObjectType& type)
     : Type::Builder(type)
     , mType(type)
 {
+}
+
+ObjectType::Builder& ObjectType::Builder::field(std::string name, const Type& type, FieldGetter::Getter getter)
+{
+    mType.mFields.emplace_back(std::make_unique<const FieldGetter>(std::move(name), type, getter));
+    return *this;
 }
 
 ObjectType::Builder ObjectType::build(std::string name)
