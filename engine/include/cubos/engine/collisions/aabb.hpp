@@ -58,7 +58,7 @@ namespace cubos::core::data
     /// @param ser The serializer to use.
     /// @param aabb The AABB to serialize.
     /// @param name The name of the AABB.
-    void serialize(Serializer& ser, const engine::ColliderAABB& aabb, const char* name)
+    inline void serialize(Serializer& ser, const engine::ColliderAABB& aabb, const char* name)
     {
         ser.write(aabb.diag, name);
     }
@@ -66,7 +66,7 @@ namespace cubos::core::data
     /// Deserializes a AABB.
     /// @param des The deserializer to use.
     /// @param aabb The AABB to deserialize.
-    void deserialize(Deserializer& des, engine::ColliderAABB& aabb)
+    inline void deserialize(Deserializer& des, engine::ColliderAABB& aabb)
     {
         des.read(aabb.diag);
     }
