@@ -7,6 +7,8 @@ add_executable(
     cubos-core-tests
     main.cpp
 
+    reflection/external/primitives_and_string.cpp
+
     data/fs/embedded_archive.cpp
     data/fs/standard_archive.cpp
     data/fs/file_system.cpp
