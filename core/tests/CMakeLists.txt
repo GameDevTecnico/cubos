@@ -8,6 +8,7 @@ add_executable(
     main.cpp
 
     reflection/external/primitives_and_string.cpp
+    reflection/external/variant.cpp
 
     data/fs/embedded_archive.cpp
     data/fs/standard_archive.cpp
