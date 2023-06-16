@@ -104,6 +104,26 @@ namespace cubos::core::reflection
             T C::*mField;
         };
 
+        /// @brief Implementation of Field which calls a getter function to get the address of the
+        /// field of an instance of the type.
+        class FieldGetter : public Field
+        {
+        public:
+            using Getter = uintptr_t (*)(const void*);
+
+            /// @brief Construct a new FieldGetter object.
+            /// @param name Name of the field.
+            /// @param type Type of the field.
+            /// @param getter Getter function.
+            FieldGetter(std::string name, const Type& type, Getter getter);
+
+            virtual const void* get(const void* object) const override;
+            virtual void* get(void* object) const override;
+
+        private:
+            Getter mGetter;
+        };
+
     public:
         /// @brief Builder for creating ObjectType's.
         class Builder final : public Type::Builder
@@ -120,7 +140,7 @@ namespace cubos::core::reflection
             /// @tparam Hs Types of the hints of the field.
             /// @param name Name of the field.
             /// @param field Pointer to the field.
-            /// @return Type to which the field was added.
+            /// @return Builder for the type.
             template <typename T, typename C, typename... Hs>
             Builder& field(std::string name, T C::*field, Hs&&... hints)
             {
@@ -129,6 +149,13 @@ namespace cubos::core::reflection
                 mType.mFields.emplace_back(std::move(ptr));
                 return *this;
             }
+
+            /// @brief Adds a field to the type so that it is accessed by calling the given getter.
+            /// @param name Name of the field.
+            /// @param type Type of the field.
+            /// @param getter Getter function which returns the address of the field of an instance.
+            /// @return Builder for the type.
+            Builder& field(std::string name, const Type& type, FieldGetter::Getter getter);
 
         private:
             ObjectType& mType;
