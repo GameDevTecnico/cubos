@@ -22,10 +22,11 @@ void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderA
         transform[3] = glm::vec4{0.0f, 0.0f, 0.0f, 1.0f};
 
         // Rotate and scale corners.
-        auto rotatedCorners = glm::mat3{transform * glm::mat3x4{points}};
+        auto rotatedCorners = glm::mat3{transform * points};
 
         // Get the extents of the rotated corners.
-        auto max = glm::max(glm::abs(rotatedCorners[0]), glm::abs(rotatedCorners[1]));
+        auto max = glm::abs(rotatedCorners[0]);
+        max = glm::max(max, glm::abs(rotatedCorners[1]));
         max = glm::max(max, glm::abs(rotatedCorners[2]));
         auto min = -max;
 
