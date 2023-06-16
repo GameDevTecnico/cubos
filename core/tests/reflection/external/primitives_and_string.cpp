@@ -1,8 +1,8 @@
-#include <doctest/doctest.h>
-
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/primitive.hpp>
+
+#include "../utils.hpp"
 
 using cubos::core::reflection::PrimitiveType;
 using cubos::core::reflection::reflect;
@@ -10,16 +10,8 @@ using cubos::core::reflection::reflect;
 template <typename T>
 static void test(const char* name)
 {
-    auto& t = reflect<T>();
-    CHECK(t.template isKind<PrimitiveType>());
-    CHECK(t.template is<T>());
-    CHECK(t.name() == name);
-    CHECK(t.shortName() == name);
-
-    // Check if the default constructor really creates a default instance of the type.
-    auto* instance = t.defaultConstruct();
-    CHECK(*static_cast<T*>(instance) == T{});
-    t.destroy(instance);
+    testTypeGetters<T, PrimitiveType>(name, name);
+    testTypeDefaultConstructor<T>();
 }
 
 TEST_CASE("reflection::reflect<(external/primitives)>()")
