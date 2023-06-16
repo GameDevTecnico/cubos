@@ -144,11 +144,11 @@ void Cubos::run()
 
     auto currentTime = std::chrono::steady_clock::now();
     auto previousTime = std::chrono::steady_clock::now();
-    while (!mWorld.read<ShouldQuit>().get().value)
+    do
     {
         mMainDispatcher.callSystems(mWorld, cmds);
         currentTime = std::chrono::steady_clock::now();
         mWorld.write<DeltaTime>().get().value = std::chrono::duration<float>(currentTime - previousTime).count();
         previousTime = currentTime;
-    }
+    } while (!mWorld.read<ShouldQuit>().get().value);
 }
