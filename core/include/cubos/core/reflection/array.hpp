@@ -80,10 +80,32 @@ namespace cubos::core::reflection
         /// behavior occurs.
         /// @param array Pointer to the array.
         /// @param index Index of the element.
-        /// @return Address of the element.
+        /// @return Pointer to the element.
         /// @{
         const void* element(const void* array, std::size_t index) const;
         void* element(void* array, std::size_t index) const;
+        /// @}
+
+        /// @name Templated element access methods.
+        /// @brief Gets the element at the given index. Aborts if the element getter function is
+        /// not set. The given array must be a valid instance of this type, and T must match the
+        /// element type of the array, otherwise, undefined behaviour occurs.
+        /// @tparam T
+        /// @param array Pointer to the array.
+        /// @param index Index of the element.
+        /// @return Reference to the element.
+        /// @{
+        template <typename T>
+        const T& element(const void* array, std::size_t index) const
+        {
+            return *static_cast<const T*>(this->element(array, index));
+        }
+
+        template <typename T>
+        T& element(void* array, std::size_t index) const
+        {
+            return *static_cast<T*>(this->element(array, index));
+        }
         /// @}
 
         /// @brief Resizes the array to the given length. Aborts if the resize function is not
