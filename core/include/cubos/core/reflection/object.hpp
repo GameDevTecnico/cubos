@@ -23,6 +23,7 @@ namespace cubos::core::reflection
             /// @param name Name of the field.
             /// @param type Type of the field.
             Field(std::string name, const Type& type);
+            virtual ~Field() = default;
 
             /// @brief Gets the name of the field.
             /// @return Name of the field.
@@ -90,6 +91,8 @@ namespace cubos::core::reflection
             {
             }
 
+            ~FieldPointerToMember() override = default;
+
             virtual const void* get(const void* object) const override
             {
                 return &(static_cast<const C*>(object)->*mField);
@@ -116,6 +119,7 @@ namespace cubos::core::reflection
             /// @param type Type of the field.
             /// @param getter Getter function.
             FieldGetter(std::string name, const Type& type, Getter getter);
+            ~FieldGetter() override = default;
 
             virtual const void* get(const void* object) const override;
             virtual void* get(void* object) const override;
