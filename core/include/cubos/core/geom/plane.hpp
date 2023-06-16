@@ -23,7 +23,7 @@ namespace cubos::core::data
     /// @param ser The serializer to use.
     /// @param plane The plane to serialize.
     /// @param name The name of the plane.
-    void serialize(Serializer& ser, const geom::Plane& plane, const char* name)
+    inline void serialize(Serializer& ser, const geom::Plane& plane, const char* name)
     {
         ser.beginObject(name);
         ser.write(plane.normal, "normal");
@@ -33,7 +33,7 @@ namespace cubos::core::data
     /// Deserializes a plane.
     /// @param des The deserializer to use.
     /// @param plane The plane to deserialize.
-    void deserialize(Deserializer& des, geom::Plane& plane)
+    inline void deserialize(Deserializer& des, geom::Plane& plane)
     {
         des.beginObject();
         des.read(plane.normal);
