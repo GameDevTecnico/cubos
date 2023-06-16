@@ -4,8 +4,10 @@
 include(CubinhosGenerate)
 
 option(BUILD_ENGINE_SAMPLES "Build cubos engine samples" OFF)
+option(BUILD_ENGINE_TESTS "Build cubos engine tests?" OFF)
 
 message("# Building engine samples: " ${BUILD_ENGINE_SAMPLES})
+message("# Building engine tests: " ${BUILD_ENGINE_TESTS})
 
 # Set engine source files
 set(CUBOS_ENGINE_SOURCE
@@ -128,6 +130,11 @@ endif()
 
 # Generate component headers
 cubinhos_generate(cubos-engine ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+# Add engine tests
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_ENGINE_TESTS)
+    add_subdirectory(tests)
+endif()
 
 # Add engine samples
 if(BUILD_ENGINE_SAMPLES)

@@ -98,6 +98,7 @@ The following is a list of all the options available to configure the engine:
 | `BUILD_CORE_SAMPLES`       | Build **CUBOS.** `core` samples?   |
 | `BUILD_CORE_TESTS`         | Build **CUBOS.** `core` tests?     |
 | `BUILD_ENGINE_SAMPLES`     | Build **CUBOS.** `engine` samples? |
+| `BUILD_ENGINE_TESTS`       | Build **CUBOS.** `engine` tests?   |
 
 ### Samples
 
