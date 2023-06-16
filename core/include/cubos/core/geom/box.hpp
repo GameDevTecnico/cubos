@@ -54,7 +54,7 @@ namespace cubos::core::data
     /// @param ser The serializer to use.
     /// @param box The box to serialize.
     /// @param name The name of the plane.
-    void serialize(Serializer& ser, const geom::Box& box, const char* name)
+    inline void serialize(Serializer& ser, const geom::Box& box, const char* name)
     {
         ser.beginObject(name);
         ser.write(box.halfSize, "halfSize");
@@ -64,7 +64,7 @@ namespace cubos::core::data
     /// Deserializes a box.
     /// @param des The deserializer to use.
     /// @param box The box to deserialize.
-    void deserialize(Deserializer& des, geom::Box& box)
+    inline void deserialize(Deserializer& des, geom::Box& box)
     {
         des.beginObject();
         des.read(box.halfSize);

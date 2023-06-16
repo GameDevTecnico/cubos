@@ -73,7 +73,7 @@ namespace cubos::core::data
     /// @param ser The serializer to use.
     /// @param simplex The simplex to serialize.
     /// @param name The name of the simplex.
-    void serialize(Serializer& ser, const geom::Simplex& simplex, const char* name)
+    inline void serialize(Serializer& ser, const geom::Simplex& simplex, const char* name)
     {
         ser.write(simplex.points, name);
     }
@@ -81,7 +81,7 @@ namespace cubos::core::data
     /// Deserializes a simplex.
     /// @param des The deserializer to use.
     /// @param simplex The simplex to deserialize.
-    void deserialize(Deserializer& des, geom::Simplex& simplex)
+    inline void deserialize(Deserializer& des, geom::Simplex& simplex)
     {
         des.read(simplex.points);
     }

@@ -36,7 +36,7 @@ namespace cubos::core::data
     /// @param ser The serializer to use.
     /// @param capsule The capsule to serialize.
     /// @param name The name of the capsule.
-    void serialize(Serializer& ser, const geom::Capsule& capsule, const char* name)
+    inline void serialize(Serializer& ser, const geom::Capsule& capsule, const char* name)
     {
         ser.beginObject(name);
         ser.write(capsule.radius, "radius");
@@ -47,7 +47,7 @@ namespace cubos::core::data
     /// Deserializes a capsule.
     /// @param des The deserializer to use.
     /// @param capsule The capsule to deserialize.
-    void deserialize(Deserializer& des, geom::Capsule& capsule)
+    inline void deserialize(Deserializer& des, geom::Capsule& capsule)
     {
         des.beginObject();
         des.read(capsule.radius);
