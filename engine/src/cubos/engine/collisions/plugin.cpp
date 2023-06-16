@@ -16,18 +16,18 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
     cubos.addComponent<CapsuleCollider>();
     cubos.addComponent<PlaneCollider>();
 
-    cubos.system(addMissingAABBs<BoxCollider>).tagged("cubos.collisions.broad.missing-aabb");
-    cubos.system(addMissingAABBs<SimplexCollider>).tagged("cubos.collisions.broad.missing-aabb");
-    cubos.system(addMissingAABBs<CapsuleCollider>).tagged("cubos.collisions.broad.missing-aabb");
-    cubos.system(addMissingAABBs<PlaneCollider>).tagged("cubos.collisions.broad.missing-aabb");
-    cubos.tag("cubos.collisions.broad.missing-aabb").beforeTag("cubos.collisions.broad.aabb");
+    cubos.system(addMissingAABBs<BoxCollider>).tagged("cubos.collisions.aabb.missing");
+    cubos.system(addMissingAABBs<SimplexCollider>).tagged("cubos.collisions.aabb.missing");
+    cubos.system(addMissingAABBs<CapsuleCollider>).tagged("cubos.collisions.aabb.missing");
+    cubos.system(addMissingAABBs<PlaneCollider>).tagged("cubos.collisions.aabb.missing");
+    cubos.tag("cubos.collisions.aabb.missing").beforeTag("cubos.collisions.aabb");
 
-    cubos.system(updateBoxAABBs).tagged("cubos.collisions.broad.aabb");
-    cubos.system(updateCapsuleAABBs).tagged("cubos.collisions.broad.aabb");
-    cubos.system(updateSimplexAABBs).tagged("cubos.collisions.broad.aabb");
-    cubos.tag("cubos.collisions.broad.aabb").afterTag("cubos.transform.update");
+    cubos.system(updateBoxAABBs).tagged("cubos.collisions.aabb");
+    cubos.system(updateCapsuleAABBs).tagged("cubos.collisions.aabb");
+    cubos.system(updateSimplexAABBs).tagged("cubos.collisions.aabb");
+    cubos.tag("cubos.collisions.aabb").afterTag("cubos.transform.update");
 
-    cubos.system(updateMarkers).tagged("cubos.collisions.broad.markers").afterTag("cubos.collisions.broad.aabb");
+    cubos.system(updateMarkers).tagged("cubos.collisions.broad.markers").afterTag("cubos.collisions.aabb");
     cubos.system(sweep).tagged("cubos.collisions.broad.sweep").afterTag("cubos.collisions.broad.markers");
     cubos.system(findPairs).tagged("cubos.collisions.broad").afterTag("cubos.collisions.broad.sweep");
 

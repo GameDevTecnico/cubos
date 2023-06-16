@@ -25,8 +25,8 @@ namespace cubos::engine
     /// - `BroadPhaseCollisions`: Stores broad phase collision data.
     ///
     /// Tags:
-    /// - `cubos.collisions.broad.missing-aabb`: missing aabb colliders have been added.
-    /// - `cubos.collisions.broad.aabb`: collider aabbs have been updated.
+    /// - `cubos.collisions.aabb.missing`: missing aabb colliders have been added.
+    /// - `cubos.collisions.aabb`: collider aabbs have been updated.
     /// - `cubos.collisions.broad.markers`: sweep markers have been updated.
     /// - `cubos.collisions.broad.sweep`: sweep has been performed.
     /// - `cubos.collisions.broad`: broad phase collision pairs have been found and broad phase has ended.
