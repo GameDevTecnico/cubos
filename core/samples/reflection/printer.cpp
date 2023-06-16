@@ -38,9 +38,9 @@ void Printer::visit(const cubos::core::reflection::ObjectType& type)
         // Print the field name, its hints and its type.
         indent(mStream, mLevel);
         mStream.print(field->name());
-        for (auto [type, hint] : field->hints())
+        for (auto [hintType, hint] : field->hints())
         {
-            mStream.printf(" [hint {}]", type->name());
+            mStream.printf(" [hint {}]", hintType->name());
         }
         mStream.print(": ");
         field->type().accept(*this);
