@@ -4,9 +4,7 @@
 
 #include "broad_phase.hpp"
 
-using namespace cubos::engine;
-
-void collisionsPlugin(Cubos& cubos)
+void cubos::engine::collisionsPlugin(Cubos& cubos)
 {
     cubos.addPlugin(transformPlugin);
 
