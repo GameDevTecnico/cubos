@@ -23,12 +23,12 @@ namespace cubos::engine
         {
             BoxBox = 0,
             BoxCapsule,
-            CapsuleCapsule,
             BoxPlane,
-            CapsulePlane,
-            PlanePlane,
             BoxSimplex,
+            CapsuleCapsule,
+            CapsulePlane,
             CapsuleSimplex,
+            PlanePlane,
             PlaneSimplex,
             SimplexSimplex,
 
