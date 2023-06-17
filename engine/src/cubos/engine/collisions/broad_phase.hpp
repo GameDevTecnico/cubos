@@ -60,4 +60,11 @@ void updateMarkers(Query<Read<ColliderAABB>> query, Write<BroadPhaseCollisions> 
 void sweep(Write<BroadPhaseCollisions> collisions);
 
 /// @brief Finds all pairs of colliders which may be colliding.
-void findPairs(Write<BroadPhaseCollisions> collisions);
+///
+/// @details
+/// TODO: This query is disgusting. We need a way to find if a component is present without reading it.
+/// Maybe something like Commands but for reads?
+void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, OptRead<PlaneCollider>, OptRead<SimplexCollider>,
+                     Read<ColliderAABB>>
+                   query,
+               Write<BroadPhaseCollisions> collisions);
