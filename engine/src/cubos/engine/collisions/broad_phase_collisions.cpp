@@ -1,9 +1,10 @@
 #include <cubos/engine/collisions/broad_phase_collisions.hpp>
 
 using cubos::engine::BroadPhaseCollisions;
-using Candidate = cubos::engine::BroadPhaseCollisions::Candidate;
-using CollisionType = cubos::engine::BroadPhaseCollisions::CollisionType;
-using SweepMarker = cubos::engine::BroadPhaseCollisions::SweepMarker;
+
+using Candidate = BroadPhaseCollisions::Candidate;
+using CollisionType = BroadPhaseCollisions::CollisionType;
+using SweepMarker = BroadPhaseCollisions::SweepMarker;
 
 void BroadPhaseCollisions::addEntity(Entity entity)
 {
