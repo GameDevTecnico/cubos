@@ -68,5 +68,6 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::unordered_map<K,
             return false;
         })
         .iteratorDelete([](void* iterator) { delete static_cast<Iterator*>(iterator); })
+        .template defaultConstructible<std::unordered_map<K, V>>()
         .get();
 }

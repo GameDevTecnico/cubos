@@ -10,6 +10,7 @@ add_executable(
     reflection/external/primitives_and_string.cpp
     reflection/external/variant.cpp
     reflection/external/vector.cpp
+    reflection/external/unordered_map.cpp
 
     data/fs/embedded_archive.cpp
     data/fs/standard_archive.cpp
