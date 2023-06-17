@@ -62,13 +62,47 @@ namespace cubos::core::reflection
             /// @return Key which the iterator is currently pointing to.
             const void* key(const void* dictionary) const;
 
+            /// @brief Gets the key which the iterator is currently pointing to. Aborts if the
+            /// iterator is at the end of the dictionary. If K does not match the key type of the
+            /// dictionary, the behaviour is undefined.
+            /// @tparam K Type of the key.
+            /// @param dictionary Instance of the dictionary.
+            /// @return Key which the iterator is currently pointing to.
+            template <typename K>
+            const K& key(const void* dictionary) const
+            {
+                return *static_cast<const K*>(this->key(dictionary));
+            }
+
             /// @name Getters for the value which the iterator is currently pointing to.
-            /// @brief Gets the value which the iterator is currently pointing to.
+            /// @brief Gets the value which the iterator is currently pointing to. Aborts if the
+            /// iterator is at the end of the dictionary.
             /// @param dictionary Instance of the dictionary.
             /// @return Value which the iterator is currently pointing to.
             /// @{
             const void* value(const void* dictionary) const;
             void* value(void* dictionary) const;
+            /// @}
+
+            /// @name Template getters for the value which the iterator is currently pointing to.
+            /// @brief Gets the value which the iterator is currently pointing to. Aborts if the
+            /// iterator is at the end of the dictionary. If T does not match the value type of the
+            /// dictionary, the behaviour is undefined.
+            /// @tparam V Type of the value.
+            /// @param dictionary Instance of the dictionary.
+            /// @return Value which the iterator is currently pointing to.
+            /// @{
+            template <typename V>
+            const V& value(const void* dictionary) const
+            {
+                return *static_cast<const V*>(this->value(dictionary));
+            }
+
+            template <typename V>
+            V& value(void* dictionary) const
+            {
+                return *static_cast<V*>(this->value(dictionary));
+            }
             /// @}
 
             /// @brief Increments the iterator.
@@ -181,10 +215,34 @@ namespace cubos::core::reflection
         /// instance of this type, otherwise, undefined behavior occurs.
         /// @param dictionary Pointer to the dictionary.
         /// @param key Instance of the key type to get the value for.
-        /// @return Address of the value, or `nullptr` if the key does not exist.
+        /// @return Pointer to the value, or `nullptr` if the key does not exist.
         /// @{
         const void* value(const void* dictionary, const void* key) const;
         void* value(void* dictionary, const void* key) const;
+        /// @}
+
+        /// @name Templated value access methods.
+        /// @brief Gets the value with the given key, or `nullptr` if the key does not exist.
+        /// Aborts if the value getter function is not set. The given dictionary must be a valid
+        /// instance of this type and K and V must match the key and value types of the dictionary,
+        /// otherwise, undefined behaviour occurs.
+        /// @tparam K Type of the keys.
+        /// @tparam V Type of the values.
+        /// @param dictionary Pointer to the dictionary.
+        /// @param key Instance of the key to get the value for.
+        /// @return Pointer to the vlaue, or `nullptr` if the key does not exist.
+        /// @{
+        template <typename K, typename V>
+        const V* value(const void* dictionary, const K& key) const
+        {
+            return static_cast<const V*>(this->value(dictionary, &key));
+        }
+
+        template <typename K, typename V>
+        V* value(void* dictionary, const K& key) const
+        {
+            return static_cast<V*>(this->value(dictionary, &key));
+        }
         /// @}
 
         /// @brief Inserts the given key into the dictionary, with a default constructed value.
@@ -196,6 +254,22 @@ namespace cubos::core::reflection
         /// @return Address of the value.
         void* insert(void* dictionary, const void* key) const;
 
+        /// @brief Inserts the given key into the dictionary, with a default constructed value.
+        /// If the key already exists, the value is not changed and its address is returned.
+        /// Aborts if the insert function is not set. The given dictionary must be a valid instance
+        /// of this type and K must match the key type of the dictionary, otherwise, undefined
+        /// behavior occurs.
+        /// @tparam K Type of the keys.
+        /// @tparam V Type of the values.
+        /// @param dictionary Pointer to the dictionary.
+        /// @param key Instance of the key type to insert.
+        /// @return Address of the value.
+        template <typename K, typename V>
+        V& insert(void* dictionary, const K& key) const
+        {
+            return *static_cast<V*>(this->insert(dictionary, static_cast<const void*>(&key)));
+        }
+
         /// @brief Removes the value with the given key from the dictionary.
         /// Aborts if the remove function is not set. The given dictionary must be a valid instance
         /// of this type, otherwise, undefined behavior occurs.
@@ -203,6 +277,20 @@ namespace cubos::core::reflection
         /// @param key Instance of the key type to remove.
         /// @return `true` if the key existed and was removed, `false` otherwise.
         bool remove(void* dictionary, const void* key) const;
+
+        /// @brief Removes the value with the given key from the dictionary.
+        /// Aborts if the remove function is not set. The given dictionary must be a valid instance
+        /// of this type and K must match the key type of the dictionary, otherwise, undefined
+        /// behavior occurs.
+        /// @tparam K Type of the keys.
+        /// @param dictionary Pointer to the dictionary.
+        /// @param key Instance of the key type to remove.
+        /// @return `true` if the key existed and was removed, `false` otherwise.
+        template <typename K>
+        bool remove(void* dictionary, const K& key) const
+        {
+            return this->remove(dictionary, static_cast<const void*>(&key));
+        }
 
         /// @brief Creates an iterator for the given dictionary.
         /// Aborts if hasIterator() returns `false`. The given dictionary must be a valid instance

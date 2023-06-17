@@ -34,6 +34,13 @@ const void* DictionaryType::Iterator::value(const void* dictionary) const
     return reinterpret_cast<const void*>(mType.mIteratorValue(dictionary, mIterator));
 }
 
+void* DictionaryType::Iterator::value(void* dictionary) const
+{
+    CUBOS_ASSERT(mIterator, "Iterator has already reached the end");
+    CUBOS_ASSERT(mType.mIteratorValue);
+    return reinterpret_cast<void*>(mType.mIteratorValue(dictionary, mIterator));
+}
+
 void DictionaryType::Iterator::increment(const void* dictionary)
 {
     CUBOS_ASSERT(mIterator, "Iterator has already reached the end");
