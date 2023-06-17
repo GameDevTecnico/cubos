@@ -2,6 +2,7 @@
 #include <cubos/core/memory/stream.hpp>
 #include <cubos/core/settings.hpp>
 
+#include <cubos/engine/renderer/environment.hpp>
 #include <cubos/engine/renderer/light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/renderer/renderer.hpp>
@@ -19,7 +20,8 @@ static void settings(Write<Settings> settings)
     settings->setBool("assets.io.enabled", false);
 }
 
-static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCameras> camera, Write<Renderer> renderer)
+static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCameras> camera, Write<Renderer> renderer,
+                       Write<RendererEnvironment> env)
 {
     using cubos::core::gl::Grid;
     using cubos::core::gl::Palette;
@@ -38,12 +40,13 @@ static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCame
     commands.create(RenderableGrid{gridAsset, {-1.0F, 0.0F, -1.0F}}, LocalToWorld{});
 
     // Spawn the left camera entity.
-    camera->entities[0] = commands.create()
-                              .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
-                              .add(LocalToWorld{})
-                              .add(Position{{0, 1.0F, -3.0F}})
-                              .add(Rotation{glm::quatLookAt(glm::vec3{0.0F, 0.0F, 1.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
-                              .entity();
+    camera->entities[0] =
+        commands.create()
+            .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+            .add(LocalToWorld{})
+            .add(Position{{-3.0, 1.0F, -3.0F}})
+            .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{1.0F, 0.0F, 1.0F}), glm::vec3{0.0F, 1.0F, 0.0F})})
+            .entity();
 
     // Split the screen but use the same camera.
     camera->entities[1] = camera->entities[0];
@@ -53,6 +56,9 @@ static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCame
         .add(PointLight{.color = {1.0F, 1.0F, 1.0F}, .intensity = 1.0F, .range = 10.0F})
         .add(LocalToWorld{})
         .add(Position{{1.0F, 3.0F, -2.0F}});
+
+    // Set the ambient light.
+    env->ambient = {0.2F, 0.2F, 0.2F};
 }
 
 int main(int argc, char** argv)

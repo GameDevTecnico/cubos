@@ -5,6 +5,12 @@
 
 namespace cubos::engine
 {
+    /// @brief Resource which stores the ambient light.
+    struct AmbientLight
+    {
+        glm::vec3 color;
+    };
+
     /// Component which makes an entity behave like a spot light.
     /// Should be used with `LocalToWorld`.
     struct [[cubos::component("cubos/spot_light", VecStorage)]] SpotLight

@@ -57,7 +57,6 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/cubos.hpp"
 
     "include/cubos/engine/window/plugin.hpp"
-    "include/cubos/engine/renderer/plugin.hpp"
     "include/cubos/engine/env_settings/plugin.hpp"
 
     "include/cubos/engine/file_settings/plugin.hpp"
@@ -105,6 +104,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/renderer/frame.hpp"
     "include/cubos/engine/renderer/renderer.hpp"
     "include/cubos/engine/renderer/deferred_renderer.hpp"
+    "include/cubos/engine/renderer/environment.hpp"
     "include/cubos/engine/renderer/light.hpp"
     "include/cubos/engine/renderer/pps/bloom.hpp"
     "include/cubos/engine/renderer/pps/copy_pass.hpp"
