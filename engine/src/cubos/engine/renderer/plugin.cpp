@@ -102,18 +102,50 @@ static void framePointLights(Write<RendererFrame> frame, Query<Read<PointLight>,
 static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Write<RendererFrame> frame,
                  Query<Read<LocalToWorld>, Read<Camera>> query)
 {
-    cubos::core::gl::Camera glCamera;
+    cubos::core::gl::Camera cameras[2]{};
+    int cameraCount = 0;
+    glm::ivec2 size = (*renderer)->size();
 
-    if (auto components = query[activeCameras->entities[0]])
+    for (int i = 0; i < 2; ++i)
     {
-        auto [localToWorld, camera] = *components;
-        glCamera.fovY = camera->fovY;
-        glCamera.zNear = camera->zNear;
-        glCamera.zFar = camera->zFar;
-        glCamera.view = glm::inverse(localToWorld->mat);
+        if (activeCameras->entities[i].isNull())
+        {
+            continue;
+        }
+
+        if (auto components = query[activeCameras->entities[i]])
+        {
+            auto [localToWorld, camera] = *components;
+            cameras[cameraCount].fovY = camera->fovY;
+            cameras[cameraCount].zNear = camera->zNear;
+            cameras[cameraCount].zFar = camera->zFar;
+            cameras[cameraCount].view = glm::inverse(localToWorld->mat);
+            cameraCount += 1;
+        }
     }
 
-    (*renderer)->render(glCamera, *frame);
+    if (cameraCount == 0)
+    {
+        CUBOS_WARN("No active camera set - renderer skipping frame");
+    }
+    else if (cameraCount == 1)
+    {
+        cameras[0].viewportPosition = {0, 0};
+        cameras[0].viewportSize = size;
+    }
+    else if (cameraCount == 2)
+    {
+        cameras[0].viewportPosition = {0, 0};
+        cameras[0].viewportSize = {size.x / 2, size.y};
+        cameras[1].viewportPosition = {size.x / 2, 0};
+        cameras[1].viewportSize = {size.x / 2, size.y};
+    }
+
+    for (int i = 0; i < cameraCount; ++i)
+    {
+        (*renderer)->render(cameras[i], *frame);
+    }
+
     frame->clear();
 }
 

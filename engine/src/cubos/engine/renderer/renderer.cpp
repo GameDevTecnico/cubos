@@ -6,15 +6,22 @@ using cubos::engine::BaseRenderer;
 BaseRenderer::BaseRenderer(RenderDevice& renderDevice, glm::uvec2 size)
     : mRenderDevice(renderDevice)
     , mPpsManager(renderDevice, size)
+    , mSize(size)
 {
     this->resizeTex(size);
 }
 
 void BaseRenderer::resize(glm::uvec2 size)
 {
+    mSize = size;
     this->resizeTex(size);
     mPpsManager.resize(size);
     this->onResize(size);
+}
+
+glm::uvec2 BaseRenderer::size() const
+{
+    return mSize;
 }
 
 void BaseRenderer::render(const core::gl::Camera& camera, const RendererFrame& frame, bool usePostProcessing,

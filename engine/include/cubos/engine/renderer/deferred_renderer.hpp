@@ -73,6 +73,8 @@ namespace cubos::engine
         core::gl::ShaderBindingPoint mLightsBp;
         core::gl::ShaderBindingPoint mSsaoEnabledBp;
         core::gl::ShaderBindingPoint mSsaoTexBp;
+        core::gl::ShaderBindingPoint mUVScale;
+        core::gl::ShaderBindingPoint mUVOffset;
         core::gl::Sampler mSampler;
         core::gl::Texture2D mPaletteTex;
         core::gl::ConstantBuffer mLightsBuffer;

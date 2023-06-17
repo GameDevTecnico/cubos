@@ -56,6 +56,10 @@ namespace cubos::engine
         /// @param size The new size of the window.
         void resize(glm::uvec2 size);
 
+        /// @brief Gets the current size of the renderer's framebuffers.
+        /// @returns The current size of the renderer's framebuffer.
+        glm::uvec2 size() const;
+
         /// Draws a frame, with post processing.
         /// @param camera The camera to use.
         /// @param frame The frame to draw.
@@ -90,6 +94,7 @@ namespace cubos::engine
         PostProcessingManager mPpsManager;  ///< The post processing manager.
         core::gl::Framebuffer mFramebuffer; ///< The framebuffer where the frame is drawn.
         core::gl::Texture2D mTexture;       ///< The texture where the frame is drawn.
+        glm::uvec2 mSize;
     };
 
     /// Abstract types are defined inside this namespace, they should be used (derived) only in renderer
