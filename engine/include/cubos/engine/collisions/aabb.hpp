@@ -48,6 +48,34 @@ namespace cubos::engine
         {
             return diag.points[1];
         }
+
+        /// @return Whether the AABB overlaps with another AABB on the X axis.
+        /// @param other The other AABB.
+        bool overlapsX(const ColliderAABB& other) const
+        {
+            return diag.points[0].x <= other.diag.points[1].x && diag.points[1].x >= other.diag.points[0].x;
+        }
+
+        /// @return Whether the AABB overlaps with another AABB on the Y axis.
+        /// @param other The other AABB.
+        bool overlapsY(const ColliderAABB& other) const
+        {
+            return diag.points[0].y <= other.diag.points[1].y && diag.points[1].y >= other.diag.points[0].y;
+        }
+
+        /// @return Whether the AABB overlaps with another AABB on the Z axis.
+        /// @param other The other AABB.
+        bool overlapsZ(const ColliderAABB& other) const
+        {
+            return diag.points[0].z <= other.diag.points[1].z && diag.points[1].z >= other.diag.points[0].z;
+        }
+
+        /// @return Whether the AABB overlaps with another AABB.
+        /// @param other The other AABB.
+        bool overlaps(const ColliderAABB& other) const
+        {
+            return overlapsX(other) && overlapsY(other) && overlapsZ(other);
+        }
     };
 } // namespace cubos::engine
 
