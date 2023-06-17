@@ -34,6 +34,11 @@ void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderA
         max += translation;
         min += translation;
 
+        // Add the collider's margin.
+        auto margin = glm::vec3{collider->margin};
+        max += margin;
+        min -= margin;
+
         // Set the AABB.
         aabb->max(max);
         aabb->min(min);
