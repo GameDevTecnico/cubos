@@ -6,6 +6,7 @@
 #include <cubos/core/settings.hpp>
 
 #include <cubos/engine/renderer/deferred_renderer.hpp>
+#include <cubos/engine/renderer/environment.hpp>
 #include <cubos/engine/renderer/frame.hpp>
 #include <cubos/engine/renderer/light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
@@ -99,6 +100,11 @@ static void framePointLights(Write<RendererFrame> frame, Query<Read<PointLight>,
     }
 }
 
+static void frameEnvironment(Write<RendererFrame> frame, Read<RendererEnvironment> env)
+{
+    frame->ambient(env->ambient);
+}
+
 static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Write<RendererFrame> frame,
                  Query<Read<LocalToWorld>, Read<Camera>> query)
 {
@@ -158,6 +164,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.addResource<RendererFrame>();
     cubos.addResource<Renderer>();
     cubos.addResource<ActiveCameras>();
+    cubos.addResource<RendererEnvironment>();
 
     cubos.addComponent<RenderableGrid>();
     cubos.addComponent<Camera>();
@@ -174,6 +181,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.system(frameSpotLights).tagged("cubos.renderer.frame");
     cubos.system(frameDirectionalLights).tagged("cubos.renderer.frame");
     cubos.system(framePointLights).tagged("cubos.renderer.frame");
+    cubos.system(frameEnvironment).tagged("cubos.renderer.frame");
     cubos.system(draw).tagged("cubos.renderer.draw");
     cubos.system(resize).afterTag("cubos.window.poll").beforeTag("cubos.renderer.draw");
 }

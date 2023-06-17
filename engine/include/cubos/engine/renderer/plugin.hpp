@@ -47,6 +47,7 @@ namespace cubos::engine
     /// Resources:
     /// - `Renderer`: handle to the renderer.
     /// - `RendererFrame`: holds the current frame information.
+    /// - `RendererEnvironment`: holds the environment information (ambient light, sky gradient).
     /// - `ActiveCameras`: the entity which represents the active camera.
     ///
     /// Components:

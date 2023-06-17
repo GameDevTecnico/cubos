@@ -244,7 +244,7 @@ void main()
 {
     uint m = texture(material, fragUv).r;
     if (m == 0u) {
-        color = vec4(0.0, 0.0, 0.0, 1.0);
+        color = ambientLight;
     } else {
         vec3 albedo = fetchAlbedo(m).rgb;
         vec3 lighting = ambientLight.rgb;
