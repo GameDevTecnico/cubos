@@ -59,6 +59,8 @@ static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCame
 
     // Set the ambient light.
     env->ambient = {0.2F, 0.2F, 0.2F};
+    env->skyGradient[0] = {0.1F, 0.2F, 0.4F};
+    env->skyGradient[1] = {0.6F, 0.6F, 0.8F};
 }
 
 int main(int argc, char** argv)

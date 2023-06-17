@@ -22,7 +22,7 @@ struct DeferredGrid : public cubos::engine::impl::RendererGrid
     std::size_t indexCount;
 };
 
-/// Holds the model view matrix sent to the geometry pass pipeline.
+/// Holds the model view matrix sent to the GPU.
 struct MVP
 {
     glm::mat4 m;
@@ -160,6 +160,12 @@ uniform usampler2D material;
 uniform bool ssaoEnabled;
 uniform sampler2D ssaoTex;
 
+uniform vec3 skyGradient[2];
+uniform vec2 uvScale;
+uniform vec2 uvOffset;
+uniform mat4 invV;
+uniform mat4 invP;
+
 struct SpotLight
 {
     vec4 position;
@@ -240,11 +246,23 @@ vec4 fetchAlbedo(uint material)
     return texelFetch(palette, ivec2(mod(material, 256u), material / 256u), 0);
 }
 
+vec3 rayDir(vec2 uv)
+{
+    // Convert fragment coords to normalized device space.
+    vec4 pointNDS = vec4(uv * 2.0 - 1.0, -1.0, 1.0);
+    // Get the point in view space.
+    vec3 pointView = (invP * pointNDS).xyz;
+    // Get the direction in world space.
+    vec3 dir = (invV * vec4(pointView, 0.0)).xyz;
+    return normalize(dir);
+}
+
 void main()
 {
     uint m = texture(material, fragUv).r;
     if (m == 0u) {
-        color = ambientLight;
+        vec3 dir = rayDir((fragUv - uvOffset) / uvScale);
+        color = vec4(mix(skyGradient[0], skyGradient[1], clamp(dir.y * 0.5 + 0.5, 0.0, 1.0)), 1.0);
     } else {
         vec3 albedo = fetchAlbedo(m).rgb;
         vec3 lighting = ambientLight.rgb;
@@ -413,8 +431,12 @@ DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, 
     mLightsBp = mLightingPipeline->getBindingPoint("Lights");
     mSsaoEnabledBp = mLightingPipeline->getBindingPoint("ssaoEnabled");
     mSsaoTexBp = mLightingPipeline->getBindingPoint("ssaoTex");
-    mUVScale = mLightingPipeline->getBindingPoint("uvScale");
-    mUVOffset = mLightingPipeline->getBindingPoint("uvOffset");
+    mUVScaleBp = mLightingPipeline->getBindingPoint("uvScale");
+    mUVOffsetBp = mLightingPipeline->getBindingPoint("uvOffset");
+    mSkyGradientBottomBp = mLightingPipeline->getBindingPoint("skyGradient[0]");
+    mSkyGradientTopBp = mLightingPipeline->getBindingPoint("skyGradient[1]");
+    mInvVBp = mLightingPipeline->getBindingPoint("invV");
+    mInvPBp = mLightingPipeline->getBindingPoint("invP");
 
     // Create the SSAO pipeline.
     auto ssaoVS = mRenderDevice.createShaderStage(Stage::Vertex, ssaoPassVs);
@@ -603,10 +625,10 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     lightData.numPointLights = 0;
 
     // Set the ambient light.
-    lightData.ambientLight = glm::vec4(frame.getAmbient(), 1.0F);
+    lightData.ambientLight = glm::vec4(frame.ambient(), 1.0F);
 
     // Spotlights.
-    for (const auto& light : frame.getSpotLights())
+    for (const auto& light : frame.spotLights())
     {
         if (lightData.numSpotLights >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
         {
@@ -627,7 +649,7 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     }
 
     // Directional lights.
-    for (const auto& light : frame.getDirectionalLights())
+    for (const auto& light : frame.directionalLights())
     {
         if (lightData.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
         {
@@ -644,7 +666,7 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     }
 
     // Point lights.
-    for (const auto& light : frame.getPointLights())
+    for (const auto& light : frame.pointLights())
     {
         if (lightData.numPointLights >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
         {
@@ -683,7 +705,7 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     mRenderDevice.clearDepth(1.0F);
 
     // 4.3. For each draw command:
-    for (const auto& drawCmd : frame.getDrawCmds())
+    for (const auto& drawCmd : frame.drawCmds())
     {
         // 4.3.1. Update the MVP constant buffer with the model matrix.
         mvp.m = drawCmd.modelMat;
@@ -754,10 +776,14 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
         mSsaoTexBp->bind(mSsaoTex);
         mSsaoTexBp->bind(mSampler);
     }
-    mUVScale->setConstant(
+    mUVScaleBp->setConstant(
         glm::vec2((float)camera.viewportSize.x / (float)mSize.x, (float)camera.viewportSize.y / (float)mSize.y));
-    mUVOffset->setConstant(glm::vec2((float)camera.viewportPosition.x / (float)mSize.x,
-                                     (float)camera.viewportPosition.y / (float)mSize.y));
+    mUVOffsetBp->setConstant(glm::vec2((float)camera.viewportPosition.x / (float)mSize.x,
+                                       (float)camera.viewportPosition.y / (float)mSize.y));
+    mSkyGradientBottomBp->setConstant(frame.skyGradient(0));
+    mSkyGradientTopBp->setConstant(frame.skyGradient(1));
+    mInvVBp->setConstant(glm::inverse(mvp.v));
+    mInvPBp->setConstant(glm::inverse(mvp.p));
 
     // 6.3. Draw the screen quad.
     mRenderDevice.setVertexArray(mScreenQuadVa);
