@@ -18,6 +18,12 @@ void RendererFrame::ambient(const glm::vec3& color)
     mAmbientColor = color;
 }
 
+void RendererFrame::skyGradient(glm::vec3 bottom, glm::vec3 top)
+{
+    mSkyGradient[0] = bottom;
+    mSkyGradient[1] = top;
+}
+
 void RendererFrame::light(const SpotLight& light)
 {
     mSpotLights.push_back(light);
@@ -41,27 +47,32 @@ void RendererFrame::clear()
     mPointLights.clear();
 }
 
-const std::vector<RendererFrame::DrawCmd>& RendererFrame::getDrawCmds() const
+const std::vector<RendererFrame::DrawCmd>& RendererFrame::drawCmds() const
 {
     return mDrawCmds;
 }
 
-const glm::vec3& RendererFrame::getAmbient() const
+const glm::vec3& RendererFrame::ambient() const
 {
     return mAmbientColor;
 }
 
-const std::vector<SpotLight>& RendererFrame::getSpotLights() const
+const glm::vec3& RendererFrame::skyGradient(int i) const
+{
+    return mSkyGradient[i];
+}
+
+const std::vector<SpotLight>& RendererFrame::spotLights() const
 {
     return mSpotLights;
 }
 
-const std::vector<DirectionalLight>& RendererFrame::getDirectionalLights() const
+const std::vector<DirectionalLight>& RendererFrame::directionalLights() const
 {
     return mDirectionalLights;
 }
 
-const std::vector<PointLight>& RendererFrame::getPointLights() const
+const std::vector<PointLight>& RendererFrame::pointLights() const
 {
     return mPointLights;
 }

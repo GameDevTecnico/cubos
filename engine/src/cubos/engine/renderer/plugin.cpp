@@ -103,6 +103,7 @@ static void framePointLights(Write<RendererFrame> frame, Query<Read<PointLight>,
 static void frameEnvironment(Write<RendererFrame> frame, Read<RendererEnvironment> env)
 {
     frame->ambient(env->ambient);
+    frame->skyGradient(env->skyGradient[0], env->skyGradient[1]);
 }
 
 static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Write<RendererFrame> frame,
