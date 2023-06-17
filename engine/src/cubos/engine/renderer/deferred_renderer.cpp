@@ -136,10 +136,13 @@ in vec2 uv;
 
 out vec2 fragUv;
 
+uniform vec2 uvScale;
+uniform vec2 uvOffset;
+
 void main(void)
 {
     gl_Position = position;
-    fragUv = uv;
+    fragUv = uv * uvScale + uvOffset;
 }
 )glsl";
 
@@ -410,6 +413,8 @@ DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, 
     mLightsBp = mLightingPipeline->getBindingPoint("Lights");
     mSsaoEnabledBp = mLightingPipeline->getBindingPoint("ssaoEnabled");
     mSsaoTexBp = mLightingPipeline->getBindingPoint("ssaoTex");
+    mUVScale = mLightingPipeline->getBindingPoint("uvScale");
+    mUVOffset = mLightingPipeline->getBindingPoint("uvOffset");
 
     // Create the SSAO pipeline.
     auto ssaoVS = mRenderDevice.createShaderStage(Stage::Vertex, ssaoPassVs);
@@ -587,7 +592,8 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     // 1. Prepare the MVP matrix.
     MVP mvp;
     mvp.v = camera.view;
-    mvp.p = glm::perspective(glm::radians(camera.fovY), float(mSize.x) / float(mSize.y), camera.zNear, camera.zFar);
+    mvp.p = glm::perspective(glm::radians(camera.fovY), float(camera.viewportSize.x) / float(camera.viewportSize.y),
+                             camera.zNear, camera.zFar);
 
     // 2. Fill the light buffer with the light data.
     // First map the buffer.
@@ -658,7 +664,8 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     mLightsBuffer->unmap();
 
     // 3. Set the renderer state.
-    mRenderDevice.setViewport(0, 0, static_cast<int>(mSize.x), static_cast<int>(mSize.y));
+    mRenderDevice.setViewport(camera.viewportPosition.x, camera.viewportPosition.y, camera.viewportSize.x,
+                              camera.viewportSize.y);
 
     // 4. Geometry pass.
     // 4.1. Set the geometry pass state.
@@ -747,6 +754,10 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
         mSsaoTexBp->bind(mSsaoTex);
         mSsaoTexBp->bind(mSampler);
     }
+    mUVScale->setConstant(
+        glm::vec2((float)camera.viewportSize.x / (float)mSize.x, (float)camera.viewportSize.y / (float)mSize.y));
+    mUVOffset->setConstant(glm::vec2((float)camera.viewportPosition.x / (float)mSize.x,
+                                     (float)camera.viewportPosition.y / (float)mSize.y));
 
     // 6.3. Draw the screen quad.
     mRenderDevice.setVertexArray(mScreenQuadVa);
