@@ -2,6 +2,8 @@
 
 #include <cubos/core/log.hpp>
 
+using CollisionType = BroadPhaseCollisions::CollisionType;
+
 void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderAABB>> query)
 {
     for (auto [entity, localToWorld, collider, aabb] : query)
@@ -105,7 +107,63 @@ void sweep(Write<BroadPhaseCollisions> collisions)
     }
 }
 
-void findPairs(Write<BroadPhaseCollisions> collisions)
+CollisionType getCollisionType(bool box, bool capsule, bool plane, bool simplex)
 {
-    (void)collisions;
+    if (box && capsule)
+        return CollisionType::BoxCapsule;
+    if (box && plane)
+        return CollisionType::BoxPlane;
+    if (box && simplex)
+        return CollisionType::BoxSimplex;
+    if (box)
+        return CollisionType::BoxBox;
+    if (capsule && plane)
+        return CollisionType::CapsulePlane;
+    if (capsule && simplex)
+        return CollisionType::CapsuleSimplex;
+    if (capsule)
+        return CollisionType::CapsuleCapsule;
+    if (plane && simplex)
+        return CollisionType::PlaneSimplex;
+    if (plane)
+        return CollisionType::PlanePlane;
+    return CollisionType::SimplexSimplex;
+}
+
+void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, OptRead<PlaneCollider>, OptRead<SimplexCollider>,
+                     Read<ColliderAABB>>
+                   query,
+               Write<BroadPhaseCollisions> collisions)
+{
+    for (glm::length_t axis = 0; axis < 3; axis++)
+    {
+        for (auto& [entity, overlaps] : collisions->sweepOverlapMaps[axis])
+        {
+            auto [box, capsule, plane, simplex, aabb] = query[entity].value();
+            for (auto& other : overlaps)
+            {
+                auto [otherBox, otherCapsule, otherPlane, otherSimplex, otherAabb] = query[other].value();
+
+                // TODO: Should this be inside the if statement?
+                auto type = getCollisionType(box || otherBox, capsule || otherCapsule, plane || otherPlane,
+                                             simplex || otherSimplex);
+
+                switch (axis)
+                {
+                case 0: // X
+                    if (aabb->overlapsY(*otherAabb) && aabb->overlapsZ(*otherAabb))
+                        collisions->addCandidate(type, {entity, other});
+                    break;
+                case 1: // Y
+                    if (aabb->overlapsX(*otherAabb) && aabb->overlapsZ(*otherAabb))
+                        collisions->addCandidate(type, {entity, other});
+                    break;
+                case 2: // Z
+                    if (aabb->overlapsX(*otherAabb) && aabb->overlapsY(*otherAabb))
+                        collisions->addCandidate(type, {entity, other});
+                    break;
+                }
+            }
+        }
+    }
 }
