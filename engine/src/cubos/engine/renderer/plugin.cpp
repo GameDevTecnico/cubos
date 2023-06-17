@@ -99,12 +99,12 @@ static void framePointLights(Write<RendererFrame> frame, Query<Read<PointLight>,
     }
 }
 
-static void draw(Write<Renderer> renderer, Read<ActiveCamera> activeCamera, Write<RendererFrame> frame,
+static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Write<RendererFrame> frame,
                  Query<Read<LocalToWorld>, Read<Camera>> query)
 {
     cubos::core::gl::Camera glCamera;
 
-    if (auto components = query[activeCamera->entity])
+    if (auto components = query[activeCameras->entities[0]])
     {
         auto [localToWorld, camera] = *components;
         glCamera.fovY = camera->fovY;
@@ -125,7 +125,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
 
     cubos.addResource<RendererFrame>();
     cubos.addResource<Renderer>();
-    cubos.addResource<ActiveCamera>();
+    cubos.addResource<ActiveCameras>();
 
     cubos.addComponent<RenderableGrid>();
     cubos.addComponent<Camera>();

@@ -19,7 +19,7 @@ static void settings(Write<Settings> settings)
     settings->setBool("assets.io.enabled", false);
 }
 
-static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCamera> camera, Write<Renderer> renderer)
+static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCameras> camera, Write<Renderer> renderer)
 {
     using cubos::core::gl::Grid;
     using cubos::core::gl::Palette;
