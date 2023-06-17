@@ -32,7 +32,7 @@ static void settings(Write<Settings> settings)
     settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
-static void setup(Commands cmds, Write<Assets> assets, Write<Renderer> renderer, Write<ActiveCamera> activeCamera)
+static void setup(Commands cmds, Write<Assets> assets, Write<Renderer> renderer, Write<ActiveCameras> activeCameras)
 {
     // Load the palette asset and add two colors to it.
     auto palette = assets->write(PaletteAsset);
@@ -61,7 +61,7 @@ static void setup(Commands cmds, Write<Assets> assets, Write<Renderer> renderer,
     cmds.create(RenderableGrid{floorAsset, floorOffset}, LocalToWorld{}, Scale{4.0F});
 
     // Spawn the camera entity.
-    activeCamera->entity =
+    activeCameras->entities[0] =
         cmds.create(Camera{60.0F, 0.1F, 1000.0F}, LocalToWorld{})
             .add(Position{{0.0F, 120.0F, -200.0F}})
             .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{0.0F, -1.0F, 1.0F}), glm::vec3{0.0F, 1.0F, 0.0F})})

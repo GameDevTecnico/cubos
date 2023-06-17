@@ -25,11 +25,12 @@ namespace cubos::engine
         float zFar;  ///< The far clipping plane.
     };
 
-    /// Resource which identifies the entity which is the current active camera.
-    /// The entity referenced by this resource must have a `Camera` component.
-    struct ActiveCamera
+    /// @brief Resource which identifies the camera entities to be used by the renderer.
+    struct ActiveCameras
     {
-        core::ecs::Entity entity; ///< The entity which is the active camera.
+        /// @brief Entities which represent the current active cameras. If more than one is set,
+        /// the renderer automatically splits the screen.
+        core::ecs::Entity entities[2];
     };
 
     /// Plugin to create and handle the lifecycle of a renderer. It renders all entities with a
@@ -46,11 +47,11 @@ namespace cubos::engine
     /// Resources:
     /// - `Renderer`: handle to the renderer.
     /// - `RendererFrame`: holds the current frame information.
-    /// - `ActiveCamera`: the entity which represents the active camera.
+    /// - `ActiveCameras`: the entity which represents the active camera.
     ///
     /// Components:
     /// - `RenderableGrid`: a grid to be rendered. Must be used with `LocalToWorld`.
-    /// - `Camera`: holds camera information. The entity pointed to by `ActiveCamera` must have
+    /// - `Camera`: holds camera information. The entity pointed to by `ActiveCameras` must have
     ///   this component.
     /// - `SpotLight`: the entity emits a spot light.
     /// - `DirectionalLight`: the entity emits a directional light.
