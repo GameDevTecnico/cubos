@@ -592,10 +592,12 @@ void Assets::loader()
     }
 }
 
-std::vector<AnyAsset> Assets::listAll() const {
+std::vector<AnyAsset> Assets::listAll() const
+{
     std::vector<AnyAsset> out;
-    for (auto const& [entry,_] : mEntries) {
+    for (auto const& [entry, _] : mEntries)
+    {
         out.emplace_back(entry);
     }
     return out;
-} 
+}
