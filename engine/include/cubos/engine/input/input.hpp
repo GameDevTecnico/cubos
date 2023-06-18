@@ -39,6 +39,16 @@ namespace cubos::engine
         /// @param player Player whose bindings will be set.
         void bind(const InputBindings& bindings, int player = 0);
 
+        /// @brief Sets the gamepad for a specific player.
+        /// @param player Player whose gamepad will be set.
+        /// @param gamepad Gamepad to set.
+        void gamepad(int player, int gamepad);
+
+        /// @brief Gets the gamepad for a specific player.
+        /// @param player Player whose gamepad will be retrieved.
+        /// @return Gamepad if it exists, -1 otherwise.
+        int gamepad(int player) const;
+
         /// @brief Gets an action state for a specific player.
         /// @param actionName Name of the action.
         /// @param player Player whose action state will be retrieved.
@@ -86,6 +96,7 @@ namespace cubos::engine
         void handleAxes(const core::io::Window& window, const std::vector<BindingIndex>& boundAxes);
 
         std::unordered_map<int, InputBindings> mBindings;
+        std::unordered_map<int, int> mGamepads;
 
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundActions;
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundAxes;
