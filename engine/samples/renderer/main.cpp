@@ -50,6 +50,7 @@ static void setupScene(Commands commands, Write<Assets> assets, Write<ActiveCame
 
     // Split the screen but use the same camera.
     camera->entities[1] = camera->entities[0];
+    camera->entities[2] = camera->entities[0];
 
     // Spawn a point light.
     commands.create()

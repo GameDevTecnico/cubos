@@ -106,14 +106,47 @@ static void frameEnvironment(Write<RendererFrame> frame, Read<RendererEnvironmen
     frame->skyGradient(env->skyGradient[0], env->skyGradient[1]);
 }
 
+/// @brief Splits the viewport recursively for the given cameras.
+/// @param position Viewport position.
+/// @param size Viewport size.
+/// @param count How many cameras need to be fitted in to the given viewport.
+/// @param cameras Output array where the viewports will be set.
+static void splitViewport(glm::ivec2 position, glm::ivec2 size, int count, cubos::core::gl::Camera* cameras)
+{
+    if (count == 1)
+    {
+        cameras[0].viewportPosition = position;
+        cameras[0].viewportSize = size;
+    }
+    else if (count >= 2)
+    {
+        glm::ivec2 splitSize;
+        glm::ivec2 splitOffset;
+
+        // Split along the largest axis.
+        if (size.x > size.y)
+        {
+            splitSize = {size.x / 2, size.y};
+            splitOffset = {size.x / 2, 0};
+        }
+        else
+        {
+            splitSize = {size.x, size.y / 2};
+            splitOffset = {0, size.y / 2};
+        }
+
+        splitViewport(position, splitSize, count / 2, cameras);
+        splitViewport(position + splitOffset, splitSize, (count + 1) / 2, &cameras[count / 2]);
+    }
+}
+
 static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Write<RendererFrame> frame,
                  Query<Read<LocalToWorld>, Read<Camera>> query)
 {
-    cubos::core::gl::Camera cameras[2]{};
+    cubos::core::gl::Camera cameras[4]{};
     int cameraCount = 0;
-    glm::ivec2 size = (*renderer)->size();
 
-    for (int i = 0; i < 2; ++i)
+    for (int i = 0; i < 4; ++i)
     {
         if (activeCameras->entities[i].isNull())
         {
@@ -131,21 +164,11 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
         }
     }
 
+    splitViewport({0, 0}, (*renderer)->size(), cameraCount, cameras);
+
     if (cameraCount == 0)
     {
         CUBOS_WARN("No active camera set - renderer skipping frame");
-    }
-    else if (cameraCount == 1)
-    {
-        cameras[0].viewportPosition = {0, 0};
-        cameras[0].viewportSize = size;
-    }
-    else if (cameraCount == 2)
-    {
-        cameras[0].viewportPosition = {0, 0};
-        cameras[0].viewportSize = {size.x / 2, size.y};
-        cameras[1].viewportPosition = {size.x / 2, 0};
-        cameras[1].viewportSize = {size.x / 2, size.y};
     }
 
     for (int i = 0; i < cameraCount; ++i)
