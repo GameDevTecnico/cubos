@@ -1,5 +1,4 @@
 <map id="core/include/cubos/core/geom/capsule.hpp" name="core/include/cubos/core/geom/capsule.hpp">
-<area shape="rect" id="node1" title="Contains the class for the Capsule shape." alt="" coords="20,5,197,47"/>
-<area shape="rect" id="node2" href="$engine_2include_2cubos_2engine_2collisions_2colliders_2capsule_8hpp.html" title="Contains the class for the Capsule Collier component." alt="" coords="11,95,206,151"/>
-<area shape="rect" id="node3" href="$collisions_2plugin_8hpp.html" title="Collision plugin entry point." alt="" coords="5,199,212,240"/>
+<area shape="rect" id="node1" title="Contains the class for the Capsule shape." alt="" coords="14,5,191,47"/>
+<area shape="rect" id="node2" href="$engine_2include_2cubos_2engine_2collisions_2colliders_2capsule_8hpp.html" title="Contains the class for the Capsule Collier component." alt="" coords="5,95,200,151"/>
 </map>

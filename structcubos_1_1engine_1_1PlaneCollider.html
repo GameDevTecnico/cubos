@@ -118,13 +118,35 @@ glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <a class="el" href="structcubos_1_1core_1_1geom_1_1Plane.html">cubos::core::geom::Plane</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1engine_1_1PlaneCollider.html#ace124e09d6cb9619418fe32fe3aabd9a">shape</a></td></tr>
 <tr class="memdesc:ace124e09d6cb9619418fe32fe3aabd9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The plane shape of the collider. <br /></td></tr>
 <tr class="separator:ace124e09d6cb9619418fe32fe3aabd9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea1419deaadb54e70abae7fe5aada09e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcubos_1_1engine_1_1PlaneCollider.html#aea1419deaadb54e70abae7fe5aada09e">margin</a> = 0.04f</td></tr>
+<tr class="memdesc:aea1419deaadb54e70abae7fe5aada09e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The margin of the collider. Needed for creating the AABB.  <a href="structcubos_1_1engine_1_1PlaneCollider.html#aea1419deaadb54e70abae7fe5aada09e">More...</a><br /></td></tr>
+<tr class="separator:aea1419deaadb54e70abae7fe5aada09e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Plane Collider. </p>
 <ul>
-<li>Zero thickness: Not suitable for dynamic objects, but can be used for static objects. </li>
+<li>Zero thickness: Not suitable for dynamic objects, but can be used for static objects.</li>
+<li>Positive margin: Requires a positive margin. Defined in physics-space units. </li>
 </ul>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="aea1419deaadb54e70abae7fe5aada09e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea1419deaadb54e70abae7fe5aada09e">&#9670;&nbsp;</a></span>margin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float margin = 0.04f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The margin of the collider. Needed for creating the AABB. </p>
+<p>The collision margin is absolute so the collider's transform won't affect it. Shouldn't be changed without good reason. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>engine/include/cubos/engine/collisions/colliders/<a class="el" href="engine_2include_2cubos_2engine_2collisions_2colliders_2plane_8hpp_source.html">plane.hpp</a></li>
 </ul>
 </div><!-- contents -->

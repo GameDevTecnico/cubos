@@ -232,6 +232,10 @@ Functions</h2></td></tr>
 <tr class="separator:adb8cafb39417f95a63ca4c6d264b5c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65ac97ec94c250cc0eb77c6a4ce6ef1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#a65ac97ec94c250cc0eb77c6a4ce6ef1b">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;deserializer, <a class="el" href="structcubos_1_1core_1_1gl_1_1Vertex.html">gl::Vertex</a> &amp;vertex)</td></tr>
 <tr class="separator:a65ac97ec94c250cc0eb77c6a4ce6ef1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac649c5ea71ac85a7eaf0212e86995a19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#ac649c5ea71ac85a7eaf0212e86995a19">serialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;ser, const <a class="el" href="structcubos_1_1engine_1_1ColliderAABB.html">engine::ColliderAABB</a> &amp;aabb, const char *name)</td></tr>
+<tr class="separator:ac649c5ea71ac85a7eaf0212e86995a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace1493390c4a4b0e49b5352e908a5225"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecubos_1_1core_1_1data.html#ace1493390c4a4b0e49b5352e908a5225">deserialize</a> (<a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;des, <a class="el" href="structcubos_1_1engine_1_1ColliderAABB.html">engine::ColliderAABB</a> &amp;aabb)</td></tr>
+<tr class="separator:ace1493390c4a4b0e49b5352e908a5225"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -247,11 +251,57 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains the virtual file and serialization systems, and other data related utilities. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ac2655eaaa112a0f0db7799df342fd0ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2655eaaa112a0f0db7799df342fd0ea">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[1/14]</span></h2>
+<a id="ace1493390c4a4b0e49b5352e908a5225"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace1493390c4a4b0e49b5352e908a5225">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[1/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::data::deserialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Deserializer.html">Deserializer</a> &amp;&#160;</td>
+          <td class="paramname"><em>des</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcubos_1_1engine_1_1ColliderAABB.html">engine::ColliderAABB</a> &amp;&#160;</td>
+          <td class="paramname"><em>aabb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Deserializes a AABB. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">des</td><td>The deserializer to use. </td></tr>
+    <tr><td class="paramname">aabb</td><td>The AABB to deserialize. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac2655eaaa112a0f0db7799df342fd0ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2655eaaa112a0f0db7799df342fd0ea">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[2/15]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void cubos::core::data::deserialize </td>
@@ -271,6 +321,11 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Deserializes a box. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -283,10 +338,13 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="ab0d93cfbd89e8f934d6540861f9308c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0d93cfbd89e8f934d6540861f9308c4">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[2/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0d93cfbd89e8f934d6540861f9308c4">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[3/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void cubos::core::data::deserialize </td>
@@ -306,6 +364,11 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Deserializes a capsule. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -318,10 +381,13 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="aa78953a7a127fea5aeb6a5bcddf33852"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa78953a7a127fea5aeb6a5bcddf33852">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[3/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa78953a7a127fea5aeb6a5bcddf33852">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[4/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void cubos::core::data::deserialize </td>
@@ -341,6 +407,11 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Deserializes a plane. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -353,10 +424,13 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="ab77b4c7520ecbe1a151d266725e27ac4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab77b4c7520ecbe1a151d266725e27ac4">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[4/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab77b4c7520ecbe1a151d266725e27ac4">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[5/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void cubos::core::data::deserialize </td>
@@ -376,6 +450,11 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Deserializes a simplex. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -388,7 +467,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="afdda2d9390811dba793d751df03c580d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afdda2d9390811dba793d751df03c580d">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[5/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afdda2d9390811dba793d751df03c580d">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[6/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -438,7 +517,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a7f695d4a7b19355ac746e141f2059f75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f695d4a7b19355ac746e141f2059f75">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[6/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f695d4a7b19355ac746e141f2059f75">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[7/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -488,7 +567,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="afda58c117b12b006216c201aa3134547"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afda58c117b12b006216c201aa3134547">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[7/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afda58c117b12b006216c201aa3134547">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[8/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -523,7 +602,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="af48a3ff32a66ba7598a527aa1c913835"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af48a3ff32a66ba7598a527aa1c913835">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[8/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af48a3ff32a66ba7598a527aa1c913835">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[9/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -572,7 +651,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a2786b82b9c750a9c74aff52855b60558"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2786b82b9c750a9c74aff52855b60558">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[9/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2786b82b9c750a9c74aff52855b60558">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[10/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -624,7 +703,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="ada7e8d38319f85fac98a78445d5c7b81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada7e8d38319f85fac98a78445d5c7b81">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[10/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ada7e8d38319f85fac98a78445d5c7b81">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[11/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -676,7 +755,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a9135006950d4bd8826c8babe6c027f2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9135006950d4bd8826c8babe6c027f2f">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[11/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9135006950d4bd8826c8babe6c027f2f">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[12/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -711,7 +790,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a0c5e3540e2d531a1498c885183d14e68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c5e3540e2d531a1498c885183d14e68">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[12/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c5e3540e2d531a1498c885183d14e68">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[13/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -746,7 +825,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a2dc080f6aab288573be5d4259f9717e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dc080f6aab288573be5d4259f9717e0">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[13/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc080f6aab288573be5d4259f9717e0">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[14/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -781,7 +860,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a65ac97ec94c250cc0eb77c6a4ce6ef1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65ac97ec94c250cc0eb77c6a4ce6ef1b">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[14/14]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a65ac97ec94c250cc0eb77c6a4ce6ef1b">&#9670;&nbsp;</a></span>deserialize() <span class="overload">[15/15]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -852,7 +931,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="af3e457a60d8144ec7f8574f1afb4276d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3e457a60d8144ec7f8574f1afb4276d">&#9670;&nbsp;</a></span>serialize() <span class="overload">[1/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af3e457a60d8144ec7f8574f1afb4276d">&#9670;&nbsp;</a></span>serialize() <span class="overload">[1/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -901,11 +980,64 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a86fb3c808d153be3f1194980abf1bb57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86fb3c808d153be3f1194980abf1bb57">&#9670;&nbsp;</a></span>serialize() <span class="overload">[2/15]</span></h2>
+<a id="ac649c5ea71ac85a7eaf0212e86995a19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac649c5ea71ac85a7eaf0212e86995a19">&#9670;&nbsp;</a></span>serialize() <span class="overload">[2/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cubos::core::data::serialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcubos_1_1core_1_1data_1_1Serializer.html">Serializer</a> &amp;&#160;</td>
+          <td class="paramname"><em>ser</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structcubos_1_1engine_1_1ColliderAABB.html">engine::ColliderAABB</a> &amp;&#160;</td>
+          <td class="paramname"><em>aabb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Serializes an AABB. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ser</td><td>The serializer to use. </td></tr>
+    <tr><td class="paramname">aabb</td><td>The AABB to serialize. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the AABB. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a86fb3c808d153be3f1194980abf1bb57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86fb3c808d153be3f1194980abf1bb57">&#9670;&nbsp;</a></span>serialize() <span class="overload">[3/16]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void cubos::core::data::serialize </td>
@@ -931,6 +1063,11 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Serializes a box. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -944,10 +1081,13 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a9e30906fec8839a99868223d09d6ef9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e30906fec8839a99868223d09d6ef9f">&#9670;&nbsp;</a></span>serialize() <span class="overload">[3/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e30906fec8839a99868223d09d6ef9f">&#9670;&nbsp;</a></span>serialize() <span class="overload">[4/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void cubos::core::data::serialize </td>
@@ -973,6 +1113,11 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Serializes a capsule. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -986,10 +1131,13 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a8e3c67a5e912de7c68e1478cd25399c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e3c67a5e912de7c68e1478cd25399c6">&#9670;&nbsp;</a></span>serialize() <span class="overload">[4/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e3c67a5e912de7c68e1478cd25399c6">&#9670;&nbsp;</a></span>serialize() <span class="overload">[5/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void cubos::core::data::serialize </td>
@@ -1015,6 +1163,11 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Serializes a plane. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1028,10 +1181,13 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a6a84d5caec06f3667dd891b60e235754"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a84d5caec06f3667dd891b60e235754">&#9670;&nbsp;</a></span>serialize() <span class="overload">[5/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a84d5caec06f3667dd891b60e235754">&#9670;&nbsp;</a></span>serialize() <span class="overload">[6/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void cubos::core::data::serialize </td>
@@ -1057,6 +1213,11 @@ Variables</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Serializes a simplex. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -1070,7 +1231,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="abbeb826efc5eb88997660a1fa104a3e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbeb826efc5eb88997660a1fa104a3e5">&#9670;&nbsp;</a></span>serialize() <span class="overload">[6/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abbeb826efc5eb88997660a1fa104a3e5">&#9670;&nbsp;</a></span>serialize() <span class="overload">[7/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1127,7 +1288,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a04a633e22e5cb55ebb9364e3b3e85e71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04a633e22e5cb55ebb9364e3b3e85e71">&#9670;&nbsp;</a></span>serialize() <span class="overload">[7/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a04a633e22e5cb55ebb9364e3b3e85e71">&#9670;&nbsp;</a></span>serialize() <span class="overload">[8/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1184,7 +1345,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a7f4f366f44c5a6ce9eeef04cae2f6361"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f4f366f44c5a6ce9eeef04cae2f6361">&#9670;&nbsp;</a></span>serialize() <span class="overload">[8/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f4f366f44c5a6ce9eeef04cae2f6361">&#9670;&nbsp;</a></span>serialize() <span class="overload">[9/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1240,7 +1401,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a9adc8a44a1124cfbf965caef44d4982c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9adc8a44a1124cfbf965caef44d4982c">&#9670;&nbsp;</a></span>serialize() <span class="overload">[9/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9adc8a44a1124cfbf965caef44d4982c">&#9670;&nbsp;</a></span>serialize() <span class="overload">[10/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1299,7 +1460,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="aed7a06cb7739016e50e8661dc0a592c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed7a06cb7739016e50e8661dc0a592c4">&#9670;&nbsp;</a></span>serialize() <span class="overload">[10/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aed7a06cb7739016e50e8661dc0a592c4">&#9670;&nbsp;</a></span>serialize() <span class="overload">[11/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1358,7 +1519,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="aa29e4630d9d6443693c840941ef41104"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa29e4630d9d6443693c840941ef41104">&#9670;&nbsp;</a></span>serialize() <span class="overload">[11/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa29e4630d9d6443693c840941ef41104">&#9670;&nbsp;</a></span>serialize() <span class="overload">[12/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1400,7 +1561,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a827286054d3615075443c1cd3941ea7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a827286054d3615075443c1cd3941ea7f">&#9670;&nbsp;</a></span>serialize() <span class="overload">[12/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a827286054d3615075443c1cd3941ea7f">&#9670;&nbsp;</a></span>serialize() <span class="overload">[13/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1442,7 +1603,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a24bcb0612242d6f862c0673496fbe3cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24bcb0612242d6f862c0673496fbe3cd">&#9670;&nbsp;</a></span>serialize() <span class="overload">[13/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24bcb0612242d6f862c0673496fbe3cd">&#9670;&nbsp;</a></span>serialize() <span class="overload">[14/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1484,7 +1645,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="a3e50c0d181734038683dfed8a6c1ad47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e50c0d181734038683dfed8a6c1ad47">&#9670;&nbsp;</a></span>serialize() <span class="overload">[14/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e50c0d181734038683dfed8a6c1ad47">&#9670;&nbsp;</a></span>serialize() <span class="overload">[15/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1526,7 +1687,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a id="adb8cafb39417f95a63ca4c6d264b5c44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb8cafb39417f95a63ca4c6d264b5c44">&#9670;&nbsp;</a></span>serialize() <span class="overload">[15/15]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adb8cafb39417f95a63ca4c6d264b5c44">&#9670;&nbsp;</a></span>serialize() <span class="overload">[16/16]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

@@ -5,7 +5,9 @@ var namespaces_dup =
       [ "engine", null, [
         [ "impl", "namespacecubos_1_1engine_1_1impl.html", "namespacecubos_1_1engine_1_1impl" ],
         [ "tools", null, [
+          [ "AssetSelectedEvent", "structcubos_1_1engine_1_1tools_1_1AssetSelectedEvent.html", "structcubos_1_1engine_1_1tools_1_1AssetSelectedEvent" ],
           [ "EntitySelector", "structcubos_1_1engine_1_1tools_1_1EntitySelector.html", "structcubos_1_1engine_1_1tools_1_1EntitySelector" ],
+          [ "assetExplorerPlugin", "tools_2asset__explorer_2plugin_8hpp.html#a7e431dd51bd634c35e143b51b0174351", null ],
           [ "entityInspectorPlugin", "tools_2entity__inspector_2plugin_8hpp.html#a4232eae931be7b56053b6fd93942c452", null ],
           [ "entitySelectorPlugin", "tools_2entity__selector_2plugin_8hpp.html#a8d0e939c1429f71037837ff0f77f553d", null ],
           [ "settingsInspectorPlugin", "tools_2settings__inspector_2plugin_8hpp.html#abba894a153623862e85c2e57363da78b", null ],
@@ -19,6 +21,8 @@ var namespaces_dup =
         [ "FileBridge", "classcubos_1_1engine_1_1FileBridge.html", "classcubos_1_1engine_1_1FileBridge" ],
         [ "JSONBridge", "classcubos_1_1engine_1_1JSONBridge.html", "classcubos_1_1engine_1_1JSONBridge" ],
         [ "AssetMeta", "classcubos_1_1engine_1_1AssetMeta.html", "classcubos_1_1engine_1_1AssetMeta" ],
+        [ "ColliderAABB", "structcubos_1_1engine_1_1ColliderAABB.html", "structcubos_1_1engine_1_1ColliderAABB" ],
+        [ "BroadPhaseCollisions", "structcubos_1_1engine_1_1BroadPhaseCollisions.html", "structcubos_1_1engine_1_1BroadPhaseCollisions" ],
         [ "BoxCollider", "structcubos_1_1engine_1_1BoxCollider.html", "structcubos_1_1engine_1_1BoxCollider" ],
         [ "CapsuleCollider", "structcubos_1_1engine_1_1CapsuleCollider.html", "structcubos_1_1engine_1_1CapsuleCollider" ],
         [ "PlaneCollider", "structcubos_1_1engine_1_1PlaneCollider.html", "structcubos_1_1engine_1_1PlaneCollider" ],

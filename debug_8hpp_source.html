@@ -98,76 +98,77 @@ $(document).ready(function(){initNavTree('debug_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;glm/gtc/quaternion.hpp&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;cubos/core/gl/render_device.hpp&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1gl.html">cubos::core::gl</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html">   15</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html">Debug</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a6b6586609941c46a9d473c1a3a1093fe">   19</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a6b6586609941c46a9d473c1a3a1093fe">init</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a>&amp; renderDevice);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a93734986026d2c2af743fa2eb10b0c11">   27</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a93734986026d2c2af743fa2eb10b0c11">drawCube</a>(glm::vec3 center, glm::vec3 size, <span class="keywordtype">float</span> time, glm::quat rotation = glm::quat(),</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                             glm::vec3 color = glm::vec3(1));</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a5fb80a02aa53a8a86cc7285bb1c749ae">   36</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a5fb80a02aa53a8a86cc7285bb1c749ae">drawWireCube</a>(glm::vec3 center, glm::vec3 size, <span class="keywordtype">float</span> time, glm::quat rotation = glm::quat(),</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                 glm::vec3 color = glm::vec3(1));</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a2d0f308677491961ffac1b5c19b1ba29">   44</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a2d0f308677491961ffac1b5c19b1ba29">drawSphere</a>(glm::vec3 center, <span class="keywordtype">float</span> radius, <span class="keywordtype">float</span> time, glm::vec3 color = glm::vec3(1));</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a79932d8925d36453eeebc3c8713e78a2">   51</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a79932d8925d36453eeebc3c8713e78a2">drawWireSphere</a>(glm::vec3 center, <span class="keywordtype">float</span> radius, <span class="keywordtype">float</span> time, glm::vec3 color = glm::vec3(1));</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a7379420be3028003e888b9d9f4f7916d">   57</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a7379420be3028003e888b9d9f4f7916d">flush</a>(glm::mat4 vp, <span class="keywordtype">double</span> deltaT);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="core_2include_2cubos_2core_2geom_2box_8hpp.html">cubos/core/geom/box.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;cubos/core/gl/render_device.hpp&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacecubos_1_1core_1_1gl.html">cubos::core::gl</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html">   16</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html">Debug</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a6b6586609941c46a9d473c1a3a1093fe">   20</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a6b6586609941c46a9d473c1a3a1093fe">init</a>(<a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a>&amp; renderDevice);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#aaab6f924647951bb21ce70801965360c">   27</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#aaab6f924647951bb21ce70801965360c">drawBox</a>(<a class="code" href="structcubos_1_1core_1_1geom_1_1Box.html">geom::Box</a> box, glm::mat4 transform, glm::vec3 color = glm::vec3(1), <span class="keywordtype">float</span> time = 0);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a6d9fb82485a20b1968dfcbfe1f2ebe62">   34</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a6d9fb82485a20b1968dfcbfe1f2ebe62">drawWireBox</a>(<a class="code" href="structcubos_1_1core_1_1geom_1_1Box.html">geom::Box</a> box, glm::mat4 transform, glm::vec3 color = glm::vec3(1), <span class="keywordtype">float</span> time = 0);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a2d0f308677491961ffac1b5c19b1ba29">   41</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a2d0f308677491961ffac1b5c19b1ba29">drawSphere</a>(glm::vec3 center, <span class="keywordtype">float</span> radius, <span class="keywordtype">float</span> time, glm::vec3 color = glm::vec3(1));</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a79932d8925d36453eeebc3c8713e78a2">   48</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a79932d8925d36453eeebc3c8713e78a2">drawWireSphere</a>(glm::vec3 center, <span class="keywordtype">float</span> radius, <span class="keywordtype">float</span> time, glm::vec3 color = glm::vec3(1));</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a7379420be3028003e888b9d9f4f7916d">   54</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a7379420be3028003e888b9d9f4f7916d">flush</a>(glm::mat4 vp, <span class="keywordtype">double</span> deltaT);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a31c3116122615d09816db09913050b46">   57</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a31c3116122615d09816db09913050b46">terminate</a>();</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classcubos_1_1core_1_1gl_1_1Debug.html#a31c3116122615d09816db09913050b46">   60</a></span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1Debug.html#a31c3116122615d09816db09913050b46">terminate</a>();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keyword">struct </span>DebugDrawObject</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            gl::VertexArray va = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            gl::IndexBuffer ib = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numIndices;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">struct </span>DebugDrawObject</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            gl::VertexArray va = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            gl::IndexBuffer ib = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numIndices;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordtype">void</span> clear();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        };</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordtype">void</span> clear();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        };</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">struct </span>DebugDrawRequest</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            DebugDrawObject&amp; obj;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            gl::RasterState rasterState;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            glm::mat4 modelMatrix;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordtype">double</span> timeLeft;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            glm::vec3 color;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        };</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keyword">struct </span>DebugDrawRequest</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            DebugDrawObject&amp; obj;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            gl::RasterState rasterState;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            glm::mat4 modelMatrix;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordtype">double</span> timeLeft;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            glm::vec3 color;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        };</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> initCube();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> initSphere();</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> initCube();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> initSphere();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">static</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">gl::RenderDevice</a>* renderDevice;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keyword">static</span> gl::ConstantBuffer mvpBuffer;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">static</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">gl::ShaderBindingPoint</a> mvpBindingPoint, colorBindingPoint;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">static</span> gl::ShaderPipeline pipeline;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keyword">static</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">gl::RenderDevice</a>* renderDevice;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keyword">static</span> gl::ConstantBuffer mvpBuffer;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">static</span> <a class="code" href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">gl::ShaderBindingPoint</a> mvpBindingPoint, colorBindingPoint;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">static</span> gl::ShaderPipeline pipeline;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">static</span> gl::RasterState fillRasterState, wireframeRasterState;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">static</span> DebugDrawObject objCube, objSphere;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">static</span> gl::RasterState fillRasterState, wireframeRasterState;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">static</span> DebugDrawObject objCube, objSphere;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">static</span> std::list&lt;DebugDrawRequest&gt; requests;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">static</span> std::mutex debugDrawMutex;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    };</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html">cubos::core::gl::Debug</a></div><div class="ttdoc">This class includes static methods to draw basic objects on screen for debugging purposes.</div><div class="ttdef"><b>Definition:</b> debug.hpp:16</div></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">static</span> std::list&lt;DebugDrawRequest&gt; requests;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keyword">static</span> std::mutex debugDrawMutex;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    };</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;} <span class="comment">// namespace cubos::core::gl</span></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html">cubos::core::gl::Debug</a></div><div class="ttdoc">This class includes static methods to draw basic objects on screen for debugging purposes.</div><div class="ttdef"><b>Definition:</b> debug.hpp:17</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html_a2d0f308677491961ffac1b5c19b1ba29"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html#a2d0f308677491961ffac1b5c19b1ba29">cubos::core::gl::Debug::drawSphere</a></div><div class="ttdeci">static void drawSphere(glm::vec3 center, float radius, float time, glm::vec3 color=glm::vec3(1))</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html_a31c3116122615d09816db09913050b46"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html#a31c3116122615d09816db09913050b46">cubos::core::gl::Debug::terminate</a></div><div class="ttdeci">static void terminate()</div><div class="ttdoc">Clean up the debug rendering system's resources.</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html_a5fb80a02aa53a8a86cc7285bb1c749ae"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html#a5fb80a02aa53a8a86cc7285bb1c749ae">cubos::core::gl::Debug::drawWireCube</a></div><div class="ttdeci">static void drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation=glm::quat(), glm::vec3 color=glm::vec3(1))</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html_a6b6586609941c46a9d473c1a3a1093fe"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html#a6b6586609941c46a9d473c1a3a1093fe">cubos::core::gl::Debug::init</a></div><div class="ttdeci">static void init(RenderDevice &amp;renderDevice)</div><div class="ttdoc">Initialize the debug rendering system.</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html_a6d9fb82485a20b1968dfcbfe1f2ebe62"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html#a6d9fb82485a20b1968dfcbfe1f2ebe62">cubos::core::gl::Debug::drawWireBox</a></div><div class="ttdeci">static void drawWireBox(geom::Box box, glm::mat4 transform, glm::vec3 color=glm::vec3(1), float time=0)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html_a7379420be3028003e888b9d9f4f7916d"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html#a7379420be3028003e888b9d9f4f7916d">cubos::core::gl::Debug::flush</a></div><div class="ttdeci">static void flush(glm::mat4 vp, double deltaT)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html_a79932d8925d36453eeebc3c8713e78a2"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html#a79932d8925d36453eeebc3c8713e78a2">cubos::core::gl::Debug::drawWireSphere</a></div><div class="ttdeci">static void drawWireSphere(glm::vec3 center, float radius, float time, glm::vec3 color=glm::vec3(1))</div></div>
-<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html_a93734986026d2c2af743fa2eb10b0c11"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html#a93734986026d2c2af743fa2eb10b0c11">cubos::core::gl::Debug::drawCube</a></div><div class="ttdeci">static void drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation=glm::quat(), glm::vec3 color=glm::vec3(1))</div></div>
+<div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1Debug_html_aaab6f924647951bb21ce70801965360c"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1Debug.html#aaab6f924647951bb21ce70801965360c">cubos::core::gl::Debug::drawBox</a></div><div class="ttdeci">static void drawBox(geom::Box box, glm::mat4 transform, glm::vec3 color=glm::vec3(1), float time=0)</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1RenderDevice_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">cubos::core::gl::RenderDevice</a></div><div class="ttdef"><b>Definition:</b> render_device.hpp:571</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint_html"><div class="ttname"><a href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html">cubos::core::gl::impl::ShaderBindingPoint</a></div><div class="ttdoc">Abstract shader binding point, should not be used directly.</div><div class="ttdef"><b>Definition:</b> render_device.hpp:1051</div></div>
+<div class="ttc" id="acore_2include_2cubos_2core_2geom_2box_8hpp_html"><div class="ttname"><a href="core_2include_2cubos_2core_2geom_2box_8hpp.html">box.hpp</a></div><div class="ttdoc">Contains the class for the Box shape.</div></div>
 <div class="ttc" id="anamespacecubos_1_1core_1_1gl_html"><div class="ttname"><a href="namespacecubos_1_1core_1_1gl.html">cubos::core::gl</a></div><div class="ttdoc">Contains the low-level graphics API used by the engine (RenderDevice). Also contains voxel related ut...</div><div class="ttdef"><b>Definition:</b> camera.hpp:8</div></div>
+<div class="ttc" id="astructcubos_1_1core_1_1geom_1_1Box_html"><div class="ttname"><a href="structcubos_1_1core_1_1geom_1_1Box.html">cubos::core::geom::Box</a></div><div class="ttdoc">Box shape.</div><div class="ttdef"><b>Definition:</b> box.hpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->

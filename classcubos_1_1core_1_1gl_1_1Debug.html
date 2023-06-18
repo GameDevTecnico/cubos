@@ -106,10 +106,10 @@ Static Public Member Functions</h2></td></tr>
 static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a6b6586609941c46a9d473c1a3a1093fe">init</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">RenderDevice</a> &amp;renderDevice)</td></tr>
 <tr class="memdesc:a6b6586609941c46a9d473c1a3a1093fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the debug rendering system. <br /></td></tr>
 <tr class="separator:a6b6586609941c46a9d473c1a3a1093fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93734986026d2c2af743fa2eb10b0c11"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a93734986026d2c2af743fa2eb10b0c11">drawCube</a> (glm::vec3 center, glm::vec3 size, float time, glm::quat rotation=glm::quat(), glm::vec3 color=glm::vec3(1))</td></tr>
-<tr class="separator:a93734986026d2c2af743fa2eb10b0c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fb80a02aa53a8a86cc7285bb1c749ae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a5fb80a02aa53a8a86cc7285bb1c749ae">drawWireCube</a> (glm::vec3 center, glm::vec3 size, float time, glm::quat rotation=glm::quat(), glm::vec3 color=glm::vec3(1))</td></tr>
-<tr class="separator:a5fb80a02aa53a8a86cc7285bb1c749ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaab6f924647951bb21ce70801965360c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#aaab6f924647951bb21ce70801965360c">drawBox</a> (<a class="el" href="structcubos_1_1core_1_1geom_1_1Box.html">geom::Box</a> box, glm::mat4 transform, glm::vec3 color=glm::vec3(1), float time=0)</td></tr>
+<tr class="separator:aaab6f924647951bb21ce70801965360c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d9fb82485a20b1968dfcbfe1f2ebe62"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a6d9fb82485a20b1968dfcbfe1f2ebe62">drawWireBox</a> (<a class="el" href="structcubos_1_1core_1_1geom_1_1Box.html">geom::Box</a> box, glm::mat4 transform, glm::vec3 color=glm::vec3(1), float time=0)</td></tr>
+<tr class="separator:a6d9fb82485a20b1968dfcbfe1f2ebe62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d0f308677491961ffac1b5c19b1ba29"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a2d0f308677491961ffac1b5c19b1ba29">drawSphere</a> (glm::vec3 center, float radius, float time, glm::vec3 color=glm::vec3(1))</td></tr>
 <tr class="separator:a2d0f308677491961ffac1b5c19b1ba29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79932d8925d36453eeebc3c8713e78a2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1core_1_1gl_1_1Debug.html#a79932d8925d36453eeebc3c8713e78a2">drawWireSphere</a> (glm::vec3 center, float radius, float time, glm::vec3 color=glm::vec3(1))</td></tr>
@@ -124,8 +124,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class includes static methods to draw basic objects on screen for debugging purposes. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a93734986026d2c2af743fa2eb10b0c11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93734986026d2c2af743fa2eb10b0c11">&#9670;&nbsp;</a></span>drawCube()</h2>
+<a id="aaab6f924647951bb21ce70801965360c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaab6f924647951bb21ce70801965360c">&#9670;&nbsp;</a></span>drawBox()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,34 +134,28 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void drawCube </td>
+          <td class="memname">static void drawBox </td>
           <td>(</td>
-          <td class="paramtype">glm::vec3&#160;</td>
-          <td class="paramname"><em>center</em>, </td>
+          <td class="paramtype"><a class="el" href="structcubos_1_1core_1_1geom_1_1Box.html">geom::Box</a>&#160;</td>
+          <td class="paramname"><em>box</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">glm::mat4&#160;</td>
+          <td class="paramname"><em>transform</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">glm::vec3&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
+          <td class="paramname"><em>color</em> = <code>glm::vec3(1)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>time</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">glm::quat&#160;</td>
-          <td class="paramname"><em>rotation</em> = <code>glm::quat()</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">glm::vec3&#160;</td>
-          <td class="paramname"><em>color</em> = <code>glm::vec3(1)</code>&#160;</td>
+          <td class="paramname"><em>time</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -175,13 +169,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Draw a filled cube that will stay visible for a specified amount of time. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Draw a filled box that will stay visible for a specified amount of time. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">center</td><td>Position of the cube's center in world space. </td></tr>
-    <tr><td class="paramname">size</td><td>Size of the cube in the x, y and z dimensions in world space. </td></tr>
-    <tr><td class="paramname">time</td><td>How long should the cube be visible for? </td></tr>
-    <tr><td class="paramname">rotation</td><td>Rotation of the cube in world space. </td></tr>
+    <tr><td class="paramname">box</td><td>Box to draw. </td></tr>
+    <tr><td class="paramname">transform</td><td>Transformation matrix to apply to the box. </td></tr>
     <tr><td class="paramname">color</td><td>Color of the drawn cube. </td></tr>
+    <tr><td class="paramname">time</td><td>How long should the cube be visible for? </td></tr>
   </table>
   </dd>
 </dl>
@@ -245,8 +238,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 </div>
 </div>
-<a id="a5fb80a02aa53a8a86cc7285bb1c749ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fb80a02aa53a8a86cc7285bb1c749ae">&#9670;&nbsp;</a></span>drawWireCube()</h2>
+<a id="a6d9fb82485a20b1968dfcbfe1f2ebe62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d9fb82485a20b1968dfcbfe1f2ebe62">&#9670;&nbsp;</a></span>drawWireBox()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,34 +248,28 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void drawWireCube </td>
+          <td class="memname">static void drawWireBox </td>
           <td>(</td>
-          <td class="paramtype">glm::vec3&#160;</td>
-          <td class="paramname"><em>center</em>, </td>
+          <td class="paramtype"><a class="el" href="structcubos_1_1core_1_1geom_1_1Box.html">geom::Box</a>&#160;</td>
+          <td class="paramname"><em>box</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">glm::mat4&#160;</td>
+          <td class="paramname"><em>transform</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">glm::vec3&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
+          <td class="paramname"><em>color</em> = <code>glm::vec3(1)</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>time</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">glm::quat&#160;</td>
-          <td class="paramname"><em>rotation</em> = <code>glm::quat()</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">glm::vec3&#160;</td>
-          <td class="paramname"><em>color</em> = <code>glm::vec3(1)</code>&#160;</td>
+          <td class="paramname"><em>time</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -296,13 +283,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Draw a wireframe cube that will stay visible for a specified amount of time. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Draw a wireframe box that will stay visible for a specified amount of time. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">center</td><td>Position of the cube's center in world space. </td></tr>
-    <tr><td class="paramname">size</td><td>Size of the cube in the x, y and z dimensions in world space. </td></tr>
-    <tr><td class="paramname">time</td><td>How long should the cube be visible for? </td></tr>
-    <tr><td class="paramname">rotation</td><td>Rotation of the cube in world space. </td></tr>
+    <tr><td class="paramname">box</td><td>Box to draw. </td></tr>
+    <tr><td class="paramname">transform</td><td>Transformation matrix to apply to the box. </td></tr>
     <tr><td class="paramname">color</td><td>Color of the drawn cube. </td></tr>
+    <tr><td class="paramname">time</td><td>How long should the cube be visible for? </td></tr>
   </table>
   </dd>
 </dl>

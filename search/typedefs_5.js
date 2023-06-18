@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['window_1567',['Window',['../namespacecubos_1_1core_1_1io.html#a373938cb890b16a010475e7a68557737',1,'cubos::core::io']]],
-  ['windowevent_1568',['WindowEvent',['../namespacecubos_1_1core_1_1io.html#a17a64c7d8c1e2b747322f79bf21b3934',1,'cubos::core::io']]]
+  ['iterator_1622',['Iterator',['../classcubos_1_1core_1_1ecs_1_1World.html#a6ae6b2f3107538ada39d2717b3173d7d',1,'cubos::core::ecs::World']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['data_1561',['Data',['../classcubos_1_1core_1_1data_1_1Package.html#acb57915a47c3e2f4c83b11800c471109',1,'cubos::core::data::Package']]],
-  ['dictionary_1562',['Dictionary',['../classcubos_1_1core_1_1data_1_1Package.html#a906035fe329428069bcfbbdb82cf0f56',1,'cubos::core::data::Package']]]
+  ['candidate_1616',['Candidate',['../structcubos_1_1engine_1_1BroadPhaseCollisions.html#ab0d4ba84b4dab82121b7915e2dfb2bf3',1,'cubos::engine::BroadPhaseCollisions']]]
 ];

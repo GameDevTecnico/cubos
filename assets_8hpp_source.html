@@ -188,69 +188,72 @@ $(document).ready(function(){initNavTree('assets_8hpp_source.html',''); initResi
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                               [](<span class="keywordtype">void</span>* data) { <span class="keyword">delete</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(data); });</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        }</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keyword">struct </span>Entry</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        {</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            Entry();</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <a class="code" href="classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70b">Status</a> <a class="code" href="classcubos_1_1engine_1_1Assets.html#ad9afe67ec81cf4963a7a08d409d24a1c">status</a>{<a class="code" href="classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70baa5ae20aa7fda5bd38bf0dce98e65bd2d">Status::Unloaded</a>}; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            AssetMeta meta;                  </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            std::atomic&lt;int&gt; refCount;        </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            <span class="keywordtype">int</span> version{0};                   </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            std::shared_mutex mutex;          </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            std::condition_variable_any cond; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <span class="keywordtype">void</span>* data{<span class="keyword">nullptr</span>};       </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            std::type_index type;      </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            void (*destructor)(<span class="keywordtype">void</span>*); </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        };</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keyword">struct </span>Task</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            AnyAsset handle;                     </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            std::shared_ptr&lt;AssetBridge&gt; bridge; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        };</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        AnyAsset <a class="code" href="classcubos_1_1engine_1_1Assets.html#a15ec95ca9dd397c2f3d3034d2a64874f">create</a>(std::type_index type, <span class="keywordtype">void</span>* data, <span class="keywordtype">void</span> (*destructor)(<span class="keywordtype">void</span>*));</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        AnyAsset <a class="code" href="classcubos_1_1engine_1_1Assets.html#a4cc6d4ebebfe0f91743cd23e016d48d4">store</a>(AnyAsset handle, std::type_index type, <span class="keywordtype">void</span>* data, <span class="keywordtype">void</span> (*destructor)(<span class="keywordtype">void</span>*));</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Lock&gt;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="keywordtype">void</span>* access(<span class="keyword">const</span> AnyAsset&amp; handle, std::type_index type, Lock&amp; lock, <span class="keywordtype">bool</span> incVersion) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        std::shared_lock&lt;std::shared_mutex&gt; lockRead(<span class="keyword">const</span> AnyAsset&amp; handle) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        std::unique_lock&lt;std::shared_mutex&gt; lockWrite(<span class="keyword">const</span> AnyAsset&amp; handle) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        std::shared_ptr&lt;Entry&gt; entry(<span class="keyword">const</span> AnyAsset&amp; handle) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classcubos_1_1engine_1_1Assets.html#a9bc49a522870416c67197fa3ec68e55f">  177</a></span>&#160;        std::vector&lt;AnyAsset&gt; <a class="code" href="classcubos_1_1engine_1_1Assets.html#a9bc49a522870416c67197fa3ec68e55f">listAll</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keyword">struct </span>Entry</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            Entry();</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            <a class="code" href="classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70b">Status</a> <a class="code" href="classcubos_1_1engine_1_1Assets.html#ad9afe67ec81cf4963a7a08d409d24a1c">status</a>{<a class="code" href="classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70baa5ae20aa7fda5bd38bf0dce98e65bd2d">Status::Unloaded</a>}; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <a class="code" href="classcubos_1_1engine_1_1AssetMeta.html">AssetMeta</a> meta;                  </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            std::atomic&lt;int&gt; refCount;        </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <span class="keywordtype">int</span> version{0};                   </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            std::shared_mutex mutex;          </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            std::condition_variable_any cond; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordtype">void</span>* data{<span class="keyword">nullptr</span>};       </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            std::type_index type;      </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            void (*destructor)(<span class="keywordtype">void</span>*); </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        };</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keyword">struct </span>Task</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        {</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            AnyAsset handle;                     </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            std::shared_ptr&lt;AssetBridge&gt; bridge; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        };</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        AnyAsset <a class="code" href="classcubos_1_1engine_1_1Assets.html#a15ec95ca9dd397c2f3d3034d2a64874f">create</a>(std::type_index type, <span class="keywordtype">void</span>* data, <span class="keywordtype">void</span> (*destructor)(<span class="keywordtype">void</span>*));</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        AnyAsset <a class="code" href="classcubos_1_1engine_1_1Assets.html#a4cc6d4ebebfe0f91743cd23e016d48d4">store</a>(AnyAsset handle, std::type_index type, <span class="keywordtype">void</span>* data, <span class="keywordtype">void</span> (*destructor)(<span class="keywordtype">void</span>*));</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Lock&gt;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keywordtype">void</span>* access(<span class="keyword">const</span> AnyAsset&amp; handle, std::type_index type, Lock&amp; lock, <span class="keywordtype">bool</span> incVersion) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        std::shared_lock&lt;std::shared_mutex&gt; lockRead(<span class="keyword">const</span> AnyAsset&amp; handle) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        std::unique_lock&lt;std::shared_mutex&gt; lockWrite(<span class="keyword">const</span> AnyAsset&amp; handle) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        std::shared_ptr&lt;Entry&gt; entry(<span class="keyword">const</span> AnyAsset&amp; handle, <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1engine_1_1Assets.html#a15ec95ca9dd397c2f3d3034d2a64874f">create</a>);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        std::shared_ptr&lt;AssetBridge&gt; bridge(<span class="keyword">const</span> AnyAsset&amp; handle) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        std::shared_ptr&lt;Entry&gt; entry(<span class="keyword">const</span> AnyAsset&amp; handle) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        std::shared_ptr&lt;Entry&gt; entry(<span class="keyword">const</span> AnyAsset&amp; handle, <span class="keywordtype">bool</span> <a class="code" href="classcubos_1_1engine_1_1Assets.html#a15ec95ca9dd397c2f3d3034d2a64874f">create</a>);</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1Assets.html#a067dd0ad370c0c21951b7dbcd7675689">invalidate</a>(<span class="keyword">const</span> AnyAsset&amp; handle, <span class="keywordtype">bool</span> shouldLock);</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keywordtype">void</span> loader();</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        std::unordered_map&lt;std::string, std::shared_ptr&lt;AssetBridge&gt;&gt; mBridges;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        std::unordered_map&lt;uuids::uuid, std::shared_ptr&lt;Entry&gt;&gt; mEntries;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        std::optional&lt;std::mt19937&gt; mRandom;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="keyword">mutable</span> std::shared_mutex mMutex;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        std::thread mLoaderThread;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="keyword">mutable</span> std::deque&lt;Task&gt; mLoaderQueue;       </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="keyword">mutable</span> std::mutex mLoaderMutex;             </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <span class="keyword">mutable</span> std::condition_variable mLoaderCond; </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordtype">bool</span> mLoaderShouldExit;                      </div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    };</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;} <span class="comment">// namespace cubos::engine</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        std::shared_ptr&lt;AssetBridge&gt; bridge(<span class="keyword">const</span> AnyAsset&amp; handle) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcubos_1_1engine_1_1Assets.html#a067dd0ad370c0c21951b7dbcd7675689">invalidate</a>(<span class="keyword">const</span> AnyAsset&amp; handle, <span class="keywordtype">bool</span> shouldLock);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="keywordtype">void</span> loader();</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        std::unordered_map&lt;std::string, std::shared_ptr&lt;AssetBridge&gt;&gt; mBridges;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        std::unordered_map&lt;uuids::uuid, std::shared_ptr&lt;Entry&gt;&gt; mEntries;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        std::optional&lt;std::mt19937&gt; mRandom;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="keyword">mutable</span> std::shared_mutex mMutex;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        std::thread mLoaderThread;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <span class="keyword">mutable</span> std::deque&lt;Task&gt; mLoaderQueue;       </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keyword">mutable</span> std::mutex mLoaderMutex;             </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keyword">mutable</span> std::condition_variable mLoaderCond; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordtype">bool</span> mLoaderShouldExit;                      </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    };</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;} <span class="comment">// namespace cubos::engine</span></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1ReadGuard_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html">cubos::core::memory::ReadGuard</a></div><div class="ttdef"><b>Definition:</b> guards.hpp:17</div></div>
 <div class="ttc" id="aclasscubos_1_1core_1_1memory_1_1WriteGuard_html"><div class="ttname"><a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html">cubos::core::memory::WriteGuard</a></div><div class="ttdef"><b>Definition:</b> guards.hpp:69</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1AnyAsset_html"><div class="ttname"><a href="classcubos_1_1engine_1_1AnyAsset.html">cubos::engine::AnyAsset</a></div><div class="ttdef"><b>Definition:</b> asset.hpp:27</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1AssetMeta_html"><div class="ttname"><a href="classcubos_1_1engine_1_1AssetMeta.html">cubos::engine::AssetMeta</a></div><div class="ttdef"><b>Definition:</b> meta.hpp:18</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1Asset_html"><div class="ttname"><a href="classcubos_1_1engine_1_1Asset.html">cubos::engine::Asset</a></div><div class="ttdef"><b>Definition:</b> asset.hpp:100</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1Assets_html"><div class="ttname"><a href="classcubos_1_1engine_1_1Assets.html">cubos::engine::Assets</a></div><div class="ttdef"><b>Definition:</b> assets.hpp:39</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1Assets_html_a067dd0ad370c0c21951b7dbcd7675689"><div class="ttname"><a href="classcubos_1_1engine_1_1Assets.html#a067dd0ad370c0c21951b7dbcd7675689">cubos::engine::Assets::invalidate</a></div><div class="ttdeci">void invalidate(const AnyAsset &amp;handle)</div></div>
@@ -268,6 +271,7 @@ $(document).ready(function(){initNavTree('assets_8hpp_source.html',''); initResi
 <div class="ttc" id="aclasscubos_1_1engine_1_1Assets_html_a67a0db04d321a74b7e7fcfd3f1a3f70ba88183b946cc5f0e8c96b2e66e1c74a7e"><div class="ttname"><a href="classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70ba88183b946cc5f0e8c96b2e66e1c74a7e">cubos::engine::Assets::Status::Unknown</a></div><div class="ttdeci">@ Unknown</div><div class="ttdoc">No metadata is associated with the asset.</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1Assets_html_a67a0db04d321a74b7e7fcfd3f1a3f70baa5ae20aa7fda5bd38bf0dce98e65bd2d"><div class="ttname"><a href="classcubos_1_1engine_1_1Assets.html#a67a0db04d321a74b7e7fcfd3f1a3f70baa5ae20aa7fda5bd38bf0dce98e65bd2d">cubos::engine::Assets::Status::Unloaded</a></div><div class="ttdeci">@ Unloaded</div><div class="ttdoc">The asset is not loaded.</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1Assets_html_a8cf5f6f5671effbeb9239bc756bc7df4"><div class="ttname"><a href="classcubos_1_1engine_1_1Assets.html#a8cf5f6f5671effbeb9239bc756bc7df4">cubos::engine::Assets::save</a></div><div class="ttdeci">bool save(const AnyAsset &amp;handle) const</div></div>
+<div class="ttc" id="aclasscubos_1_1engine_1_1Assets_html_a9bc49a522870416c67197fa3ec68e55f"><div class="ttname"><a href="classcubos_1_1engine_1_1Assets.html#a9bc49a522870416c67197fa3ec68e55f">cubos::engine::Assets::listAll</a></div><div class="ttdeci">std::vector&lt; AnyAsset &gt; listAll() const</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1Assets_html_aaadc707c66b4bfa97280186cd80b9481"><div class="ttname"><a href="classcubos_1_1engine_1_1Assets.html#aaadc707c66b4bfa97280186cd80b9481">cubos::engine::Assets::saveMeta</a></div><div class="ttdeci">bool saveMeta(const AnyAsset &amp;handle) const</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1Assets_html_ac0d83ea6eaa7a70a3efc7a775c4ed7b0"><div class="ttname"><a href="classcubos_1_1engine_1_1Assets.html#ac0d83ea6eaa7a70a3efc7a775c4ed7b0">cubos::engine::Assets::readMeta</a></div><div class="ttdeci">AssetMetaRead readMeta(const AnyAsset &amp;handle) const</div></div>
 <div class="ttc" id="aclasscubos_1_1engine_1_1Assets_html_ad9afe67ec81cf4963a7a08d409d24a1c"><div class="ttname"><a href="classcubos_1_1engine_1_1Assets.html#ad9afe67ec81cf4963a7a08d409d24a1c">cubos::engine::Assets::status</a></div><div class="ttdeci">Status status(const AnyAsset &amp;handle) const</div></div>

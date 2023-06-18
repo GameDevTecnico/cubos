@@ -1,5 +1,5 @@
 <map id="engine/include/cubos/engine/collisions/colliders/box.hpp" name="engine/include/cubos/engine/collisions/colliders/box.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="152,5,347,61"/>
+<area shape="rect" id="node1" title="Contains the class for the Box Collider component." alt="" coords="152,5,347,61"/>
 <area shape="rect" id="node2" href="$core_2include_2cubos_2core_2geom_2box_8hpp.html" title="Contains the class for the Box shape." alt="" coords="155,109,344,136"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,184,109,211"/>
 <area shape="rect" id="node4" href="$deserializer_8hpp_source.html" title=" " alt="" coords="133,184,365,211"/>

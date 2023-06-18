@@ -1,5 +1,11 @@
 var NAVTREEINDEX1 =
 {
+"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a2c85237843ed460ab1aa3b67c7f9011a":[4,0,0,0,1,13,12],
+"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a35de07b8d8386c1432be44cec222b17a":[4,0,0,0,1,13,0],
+"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a3a1f05c411448cace664894d89399afb":[4,0,0,0,1,13,18],
+"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a586b79eba00da04d0f15d495a754590f":[4,0,0,0,1,13,17],
+"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a5bc7518dcc82974f2ce3fa9db924e72c":[4,0,0,0,1,13,8],
+"classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a5d803a0d65a6613df7fcdaa6b490de83":[4,0,0,0,1,13,10],
 "classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a6be372ff49bb7cbdd067d47ece8608de":[4,0,0,0,1,13,15],
 "classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a75a9a0a16b8aa90555e4f58c3bcdf85a":[4,0,0,0,1,13,3],
 "classcubos_1_1core_1_1data_1_1JSONDeserializer.html#a7862064828fec1b2914d66604e7999b8":[4,0,0,0,1,13,1],
@@ -243,11 +249,5 @@ var NAVTREEINDEX1 =
 "classcubos_1_1core_1_1ecs_1_1Dispatcher.html#aee8c76874a0851870b7ee8d9e10ef742":[4,0,0,0,2,13,7],
 "classcubos_1_1core_1_1ecs_1_1Entity.html":[4,0,0,0,2,14],
 "classcubos_1_1core_1_1ecs_1_1Entity.html#a23bb9b5d5c72ea760c7295cf621e5d2e":[4,0,0,0,2,14,3],
-"classcubos_1_1core_1_1ecs_1_1Entity.html#a240945185669680bcfcd13289bd5376a":[4,0,0,0,2,14,8],
-"classcubos_1_1core_1_1ecs_1_1Entity.html#a27c8e66fd1c779e56d7443a0a98eefde":[4,0,0,0,2,14,7],
-"classcubos_1_1core_1_1ecs_1_1Entity.html#a3ff57b8db0f60e04656e9bed582e6477":[4,0,0,0,2,14,5],
-"classcubos_1_1core_1_1ecs_1_1Entity.html#a57c94725007227a0b6a88935564673f0":[4,0,0,0,2,14,0],
-"classcubos_1_1core_1_1ecs_1_1Entity.html#a8e9b6ef72fc636afcd940dbf3e9c1e8a":[4,0,0,0,2,14,6],
-"classcubos_1_1core_1_1ecs_1_1Entity.html#aafd95f8c7a99b9189ede7cdf0871ebe8":[4,0,0,0,2,14,9],
-"classcubos_1_1core_1_1ecs_1_1Entity.html#abada6dfb33f4cbafe1e443a5cf8dc8d0":[4,0,0,0,2,14,4]
+"classcubos_1_1core_1_1ecs_1_1Entity.html#a240945185669680bcfcd13289bd5376a":[4,0,0,0,2,14,8]
 };
