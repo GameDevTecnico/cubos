@@ -7,6 +7,7 @@ add_executable(
     cubos-core-tests
     main.cpp
 
+    reflection/external/glm.cpp
     reflection/external/primitives_and_string.cpp
     reflection/external/variant.cpp
     reflection/external/vector.cpp

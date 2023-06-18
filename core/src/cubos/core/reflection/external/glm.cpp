@@ -15,7 +15,6 @@
 AUTO_VEC2(glm::ivec2);
 AUTO_VEC2(glm::uvec2);
 AUTO_VEC2(glm::vec2);
-AUTO_VEC2(glm::dvec2);
 
 #define AUTO_VEC3(type)                                                                                                \
     CUBOS_REFLECT_EXTERNAL_IMPL(type)                                                                                  \
@@ -31,7 +30,6 @@ AUTO_VEC2(glm::dvec2);
 AUTO_VEC3(glm::ivec3);
 AUTO_VEC3(glm::uvec3);
 AUTO_VEC3(glm::vec3);
-AUTO_VEC3(glm::dvec3);
 
 #define AUTO_VEC4(type)                                                                                                \
     CUBOS_REFLECT_EXTERNAL_IMPL(type)                                                                                  \
@@ -48,7 +46,6 @@ AUTO_VEC3(glm::dvec3);
 AUTO_VEC4(glm::ivec4);
 AUTO_VEC4(glm::uvec4);
 AUTO_VEC4(glm::vec4);
-AUTO_VEC4(glm::dvec4);
 
 #define ACCESS_MAT(type, x, y)                                                                                         \
     [](const void* mat) -> uintptr_t { return reinterpret_cast<uintptr_t>(&(*static_cast<const type*>(mat))[x][y]); }
@@ -68,7 +65,6 @@ AUTO_VEC4(glm::dvec4);
     }
 
 AUTO_MAT2(glm::mat2);
-AUTO_MAT2(glm::dmat2);
 
 #define AUTO_MAT3(type)                                                                                                \
     CUBOS_REFLECT_EXTERNAL_IMPL(type)                                                                                  \
@@ -89,7 +85,6 @@ AUTO_MAT2(glm::dmat2);
     }
 
 AUTO_MAT3(glm::mat3);
-AUTO_MAT3(glm::dmat3);
 
 #define AUTO_MAT4(type)                                                                                                \
     CUBOS_REFLECT_EXTERNAL_IMPL(type)                                                                                  \
@@ -117,8 +112,6 @@ AUTO_MAT3(glm::dmat3);
     }
 
 AUTO_MAT4(glm::mat4);
-AUTO_MAT4(glm::dmat4);
 
 // Reuse the vec4 macro for quaternions.
 AUTO_VEC4(glm::quat);
-AUTO_VEC4(glm::dquat);
