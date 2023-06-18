@@ -52,7 +52,6 @@ static void spawnLightSystem(Commands commands)
     // Spawn a point light.
     commands.create()
         .add(PointLight{.color = {1.0F, 1.0F, 1.0F}, .intensity = 1.0F, .range = 10.0F})
-        .add(LocalToWorld{})
         .add(Position{{1.0F, 3.0F, -2.0F}});
 }
 /// [Spawning a point light]
@@ -73,7 +72,6 @@ static void spawnCamerasSystem(Commands commands, Write<ActiveCameras> camera)
     camera->entities[0] =
         commands.create()
             .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
-            .add(LocalToWorld{})
             .add(Position{{-3.0, 1.0F, -3.0F}})
             .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{1.0F, 0.0F, 1.0F}), glm::vec3{0.0F, 1.0F, 0.0F})})
             .entity();
