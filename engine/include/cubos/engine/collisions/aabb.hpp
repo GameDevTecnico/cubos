@@ -7,8 +7,6 @@
 
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serializer.hpp>
-
-#include <cubos/core/geom/simplex.hpp>
 #include <cubos/core/log.hpp>
 
 namespace cubos::engine
@@ -17,57 +15,28 @@ namespace cubos::engine
     struct [[cubos::component("cubos/aabb", VecStorage)]] ColliderAABB
     {
         /// The diagonal of the AABB.
-        core::geom::Simplex diag = core::geom::Simplex::line(glm::vec3{-INFINITY}, glm::vec3{INFINITY});
-
-        /// Sets the minimum point of the AABB.
-        /// @param min The new minimum point.
-        void min(const glm::vec3& min)
-        {
-            CUBOS_ASSERT(min.x < diag.points[1].x && min.y < diag.points[1].y && min.z < diag.points[1].z,
-                         "AABB minimum point must be less than maximum point");
-            diag.points[0] = min;
-        }
-
-        /// @return The minimum point of the AABB.
-        const glm::vec3& min() const
-        {
-            return diag.points[0];
-        }
-
-        /// Sets the maximum point of the AABB.
-        /// @param max The new maximum point.
-        void max(const glm::vec3& max)
-        {
-            CUBOS_ASSERT(max.x > diag.points[0].x && max.y > diag.points[0].y && max.z > diag.points[0].z,
-                         "AABB maximum point must be greater than minimum point");
-            diag.points[1] = max;
-        }
-
-        /// @return The maximum point of the AABB.
-        const glm::vec3& max() const
-        {
-            return diag.points[1];
-        }
+        glm::vec3 min = glm::vec3{-INFINITY};
+        glm::vec3 max = glm::vec3{INFINITY};
 
         /// @return Whether the AABB overlaps with another AABB on the X axis.
         /// @param other The other AABB.
         bool overlapsX(const ColliderAABB& other) const
         {
-            return diag.points[0].x <= other.diag.points[1].x && diag.points[1].x >= other.diag.points[0].x;
+            return min.x <= other.max.x && max.x >= other.min.x;
         }
 
         /// @return Whether the AABB overlaps with another AABB on the Y axis.
         /// @param other The other AABB.
         bool overlapsY(const ColliderAABB& other) const
         {
-            return diag.points[0].y <= other.diag.points[1].y && diag.points[1].y >= other.diag.points[0].y;
+            return min.y <= other.max.y && max.y >= other.min.y;
         }
 
         /// @return Whether the AABB overlaps with another AABB on the Z axis.
         /// @param other The other AABB.
         bool overlapsZ(const ColliderAABB& other) const
         {
-            return diag.points[0].z <= other.diag.points[1].z && diag.points[1].z >= other.diag.points[0].z;
+            return min.z <= other.max.z && max.z >= other.min.z;
         }
 
         /// @return Whether the AABB overlaps with another AABB.
@@ -88,7 +57,10 @@ namespace cubos::core::data
     /// @param name The name of the AABB.
     inline void serialize(Serializer& ser, const engine::ColliderAABB& aabb, const char* name)
     {
-        ser.write(aabb.diag, name);
+        ser.beginObject(name);
+        ser.write(aabb.min, "min");
+        ser.write(aabb.max, "max");
+        ser.endObject();
     }
 
     /// Deserializes a AABB.
@@ -96,6 +68,9 @@ namespace cubos::core::data
     /// @param aabb The AABB to deserialize.
     inline void deserialize(Deserializer& des, engine::ColliderAABB& aabb)
     {
-        des.read(aabb.diag);
+        des.beginObject();
+        des.read(aabb.min);
+        des.read(aabb.max);
+        des.endObject();
     }
 } // namespace cubos::core::data
