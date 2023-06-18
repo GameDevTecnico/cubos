@@ -29,8 +29,8 @@ namespace cubos::engine
     struct ActiveCameras
     {
         /// @brief Entities which represent the current active cameras. If more than one is set,
-        /// the renderer automatically splits the screen.
-        core::ecs::Entity entities[2];
+        /// the screen is split. At most, 4 cameras are supported at the same time.
+        core::ecs::Entity entities[4];
     };
 
     /// Plugin to create and handle the lifecycle of a renderer. It renders all entities with a
@@ -48,7 +48,7 @@ namespace cubos::engine
     /// - `Renderer`: handle to the renderer.
     /// - `RendererFrame`: holds the current frame information.
     /// - `RendererEnvironment`: holds the environment information (ambient light, sky gradient).
-    /// - `ActiveCameras`: the entity which represents the active camera.
+    /// - `ActiveCameras`: the entities which represents the active cameras.
     ///
     /// Components:
     /// - `RenderableGrid`: a grid to be rendered. Must be used with `LocalToWorld`.
