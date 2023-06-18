@@ -62,7 +62,6 @@ namespace cubos::engine
     };
 } // namespace cubos::engine
 
-
 namespace cubos::core::data
 {
     /// Serializes an AABB.
