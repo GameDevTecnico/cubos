@@ -193,19 +193,19 @@ void Debug::init(RenderDevice& renderDevice)
     wireframeRasterState = renderDevice.createRasterState(rsDesc);
 }
 
-void Debug::drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation, glm::vec3 color)
+void Debug::drawBox(geom::Box box, glm::mat4 transform, glm::vec3 color, float time)
 {
     debugDrawMutex.lock();
-    requests.push_back(DebugDrawRequest{
-        objCube, fillRasterState, glm::translate(center) * glm::toMat4(rotation) * glm::scale(size), time, color});
+    requests.push_back(
+        DebugDrawRequest{objCube, fillRasterState, transform * glm::scale(2.0F * box.halfSize), time, color});
     debugDrawMutex.unlock();
 }
 
-void Debug::drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation, glm::vec3 color)
+void Debug::drawWireBox(geom::Box box, glm::mat4 transform, glm::vec3 color, float time)
 {
     debugDrawMutex.lock();
-    requests.push_back(DebugDrawRequest{
-        objCube, wireframeRasterState, glm::translate(center) * glm::toMat4(rotation) * glm::scale(size), time, color});
+    requests.push_back(
+        DebugDrawRequest{objCube, wireframeRasterState, transform * glm::scale(2.0F * box.halfSize), time, color});
     debugDrawMutex.unlock();
 }
 

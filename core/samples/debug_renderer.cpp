@@ -34,7 +34,7 @@ int main()
                   glm::lookAt(glm::vec3{3 * sinf((float)t), 3, 3 * cosf((float)t)}, glm::vec3{0.0F, 0.0F, 0.0F},
                               glm::vec3{0.0F, 1.0F, 0.0F});
 
-        gl::Debug::drawWireCube({0.0, 0.0, 0.0}, {1.0, 1.0, 1.0}, 0.0);
+        gl::Debug::drawWireBox(geom::Box{}, glm::mat4{1.0});
         gl::Debug::flush(vp, deltaT);
         window->swapBuffers();
         while (auto event = window->pollEvent())
@@ -44,7 +44,7 @@ int main()
                 auto keyEvent = std::get<io::KeyEvent>(event.value());
                 if (keyEvent.key == io::Key::C && keyEvent.pressed)
                 {
-                    gl::Debug::drawWireCube(glm::vec3(0, 0, 0), glm::vec3(1), 1);
+                    gl::Debug::drawWireBox(geom::Box{}, glm::mat4{1.0}, glm::vec3{1.0}, 1);
                 }
                 else if (keyEvent.key == io::Key::S && keyEvent.pressed)
                 {
