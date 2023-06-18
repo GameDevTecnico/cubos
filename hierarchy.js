@@ -24,7 +24,6 @@ var hierarchy =
     ] ],
     [ "AssetMeta", "classcubos_1_1engine_1_1AssetMeta.html", null ],
     [ "Assets", "classcubos_1_1engine_1_1Assets.html", null ],
-    [ "AssetSelectedEvent", "structcubos_1_1engine_1_1tools_1_1AssetSelectedEvent.html", null ],
     [ "AudioDevice", "classcubos_1_1core_1_1al_1_1AudioDevice.html", null ],
     [ "BaseRenderer", "classcubos_1_1engine_1_1BaseRenderer.html", [
       [ "DeferredRenderer", "classcubos_1_1engine_1_1DeferredRenderer.html", null ]

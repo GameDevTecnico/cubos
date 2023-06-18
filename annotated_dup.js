@@ -172,7 +172,6 @@ var annotated_dup =
           [ "RendererGrid", "classcubos_1_1engine_1_1impl_1_1RendererGrid.html", "classcubos_1_1engine_1_1impl_1_1RendererGrid" ]
         ] ],
         [ "tools", null, [
-          [ "AssetSelectedEvent", "structcubos_1_1engine_1_1tools_1_1AssetSelectedEvent.html", "structcubos_1_1engine_1_1tools_1_1AssetSelectedEvent" ],
           [ "EntitySelector", "structcubos_1_1engine_1_1tools_1_1EntitySelector.html", "structcubos_1_1engine_1_1tools_1_1EntitySelector" ]
         ] ],
         [ "Asset", "classcubos_1_1engine_1_1Asset.html", "classcubos_1_1engine_1_1Asset" ],

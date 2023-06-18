@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcubos_1_1core_1_1data_1_1SerializationMap.html" title=" " alt="" coords="5,5,188,32"/>
+<area shape="rect" id="node1" href="$classcubos_1_1core_1_1data_1_1Serializer.html" title=" " alt="" coords="5,81,88,108"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1data_1_1BinarySerializer.html" title=" " alt="" coords="136,5,261,32"/>
+<area shape="rect" id="node3" href="$classcubos_1_1core_1_1data_1_1DebugSerializer.html" title=" " alt="" coords="136,56,261,83"/>
+<area shape="rect" id="node4" href="$classcubos_1_1core_1_1data_1_1JSONSerializer.html" title=" " alt="" coords="141,107,256,133"/>
+<area shape="rect" id="node5" href="$classcubos_1_1core_1_1data_1_1impl_1_1Packager.html" title=" " alt="" coords="159,157,239,184"/>
 </map>

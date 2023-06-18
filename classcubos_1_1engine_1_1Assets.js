@@ -13,7 +13,6 @@ var classcubos_1_1engine_1_1Assets =
     [ "cleanup", "classcubos_1_1engine_1_1Assets.html#a4b66d5e31b5dc18b314c8a68163263bd", null ],
     [ "create", "classcubos_1_1engine_1_1Assets.html#a15ec95ca9dd397c2f3d3034d2a64874f", null ],
     [ "invalidate", "classcubos_1_1engine_1_1Assets.html#a067dd0ad370c0c21951b7dbcd7675689", null ],
-    [ "listAll", "classcubos_1_1engine_1_1Assets.html#a9bc49a522870416c67197fa3ec68e55f", null ],
     [ "load", "classcubos_1_1engine_1_1Assets.html#a15808931afcd2b36803f6301f7dd7b3c", null ],
     [ "loadMeta", "classcubos_1_1engine_1_1Assets.html#a0eea5b0e273e16c84da97a401dd55291", null ],
     [ "read", "classcubos_1_1engine_1_1Assets.html#a12ecc0e9e56a426dff5996844ea4060c", null ],
