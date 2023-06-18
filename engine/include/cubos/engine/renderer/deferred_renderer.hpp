@@ -27,7 +27,7 @@ namespace cubos::engine
         /// @param size The size of the window.
         /// @param settings The settings to use.
         DeferredRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings);
-        ~DeferredRenderer() override = default;
+        ~DeferredRenderer() override;
 
         // Implement interface methods.
 
