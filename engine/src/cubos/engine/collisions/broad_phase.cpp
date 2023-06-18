@@ -1,7 +1,5 @@
 #include "broad_phase.hpp"
 
-#include <cubos/core/log.hpp>
-
 using CollisionType = BroadPhaseCollisions::CollisionType;
 
 void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderAABB>> query)
