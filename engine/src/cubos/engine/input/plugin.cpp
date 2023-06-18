@@ -23,6 +23,8 @@ static void update(Read<Window> window, Write<Input> input, EventReader<WindowEv
     {
         std::visit([window, &input](auto e) { input->handle(*window, e); }, event);
     }
+
+    input->pollGamepads(*window);
 }
 
 void cubos::engine::inputPlugin(Cubos& cubos)

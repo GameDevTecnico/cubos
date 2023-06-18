@@ -4,23 +4,27 @@
 
 #pragma once
 
+#include <string>
+
 namespace cubos::core::io
 {
     /// @brief Gamepad buttons.
     /// @ingroup core-io
     enum class GamepadButton
     {
-        A = 0,
+        Invalid = -1,
+
+        A,
         B,
         X,
         Y,
-        LeftBumper,
-        RightBumper,
+        LBumper,
+        RBumper,
         Back,
         Start,
         Guide,
-        LeftThumb,
-        RightThumb,
+        LThumb,
+        RThumb,
         Up,
         Right,
         Down,
@@ -33,7 +37,9 @@ namespace cubos::core::io
     /// @ingroup core-io
     enum class GamepadAxis
     {
-        LX = 0,
+        Invalid = -1,
+
+        LX,
         LY,
         RX,
         RY,
@@ -56,7 +62,7 @@ namespace cubos::core::io
         /// @brief Checks if a button is pressed.
         /// @param button Button to check.
         /// @return Whether it is pressed or not.
-        bool pressed(GamepadButton button)
+        bool pressed(GamepadButton button) const
         {
             return buttons[static_cast<int>(button)];
         }
@@ -64,9 +70,33 @@ namespace cubos::core::io
         /// @brief Gets the value of an axis.
         /// @param axis Axis to get the value of.
         /// @return Value of the axis.
-        float axis(GamepadAxis axis)
+        float axis(GamepadAxis axis) const
         {
             return axes[static_cast<int>(axis)];
         }
     };
+
+    /// @brief Converts a @ref GamepadButton enum to a string.
+    /// @param button Button to convert.
+    /// @return String representation.
+    /// @ingroup core-io
+    std::string gamepadButtonToString(GamepadButton button);
+
+    /// @brief Converts a string to a @ref GamepadButton.
+    /// @param str String to convert.
+    /// @return Button.
+    /// @ingroup core-io
+    GamepadButton stringToGamepadButton(const std::string& str);
+
+    /// @brief Convert a @ref GamepadAxis to a string.
+    /// @param axis Axis to convert.
+    /// @return String representation.
+    /// @ingroup core-io
+    std::string gamepadAxisToString(GamepadAxis axis);
+
+    /// @brief Convert a string to a @ref GamepadAxis.
+    /// @param str String to convert.
+    /// @return Axis.
+    /// @ingroup core-io
+    GamepadAxis stringToGamepadAxis(const std::string& str);
 } // namespace cubos::core::io

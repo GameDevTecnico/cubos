@@ -39,7 +39,10 @@ void cubos::core::data::serialize<InputBindings>(Serializer& ser, const InputBin
     for (const auto& [actionName, action] : obj.actions())
     {
         ser.write(actionName, nullptr);
-        ser.write(action.keys(), nullptr);
+        ser.beginObject(nullptr);
+        ser.write(action.keys(), "keys");
+        ser.write(action.gamepadButtons(), "gamepad");
+        ser.endObject();
     }
     ser.endDictionary();
     ser.beginDictionary(obj.axes().size(), "axes");
@@ -49,6 +52,7 @@ void cubos::core::data::serialize<InputBindings>(Serializer& ser, const InputBin
         ser.beginObject(nullptr);
         ser.write(axis.positive(), "pos");
         ser.write(axis.negative(), "neg");
+        ser.write(axis.gamepadAxes(), "gamepad");
         ser.endObject();
     }
     ser.endDictionary();
@@ -65,7 +69,10 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
     {
         std::string action;
         des.read(action);
+        des.beginObject();
         des.read(obj.actions()[action].keys());
+        des.read(obj.actions()[action].gamepadButtons());
+        des.endObject();
     }
     des.endDictionary();
 
@@ -77,6 +84,7 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
         des.beginObject();
         des.read(obj.axes()[axis].positive());
         des.read(obj.axes()[axis].negative());
+        des.read(obj.axes()[axis].gamepadAxes());
         des.endObject();
     }
     des.endDictionary();

@@ -52,6 +52,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/io/glfw_window.hpp"
     "src/cubos/core/io/glfw_window.cpp"
     "src/cubos/core/io/keyboard.cpp"
+    "src/cubos/core/io/gamepad.cpp"
 
     "src/cubos/core/gl/debug.cpp"
     "src/cubos/core/gl/render_device.cpp"
@@ -115,6 +116,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/io/window.hpp"
     "include/cubos/core/io/keyboard.hpp"
     "include/cubos/core/io/cursor.hpp"
+    "include/cubos/core/io/gamepad.hpp"
 
     "include/cubos/core/geom/box.hpp"
     "include/cubos/core/geom/capsule.hpp"

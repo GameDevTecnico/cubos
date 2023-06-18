@@ -84,6 +84,14 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
     glfwSetCharCallback(mHandle, charCallback);
     glfwSetJoystickCallback(joystickCallback);
     currentWindow = this;
+
+    for (int i = GLFW_JOYSTICK_1; i < GLFW_JOYSTICK_LAST; ++i)
+    {
+        if (glfwJoystickIsGamepad(i))
+        {
+            this->pushEvent(GamepadConnectionEvent{.gamepad = i, .connected = true});
+        }
+    }
 #else
     UNSUPPORTED();
 #endif
@@ -322,13 +330,13 @@ bool GLFWWindow::gamepadState(int gamepad, GamepadState& state) const
     SET_BUTTON(B, GLFW_GAMEPAD_BUTTON_B);
     SET_BUTTON(X, GLFW_GAMEPAD_BUTTON_X);
     SET_BUTTON(Y, GLFW_GAMEPAD_BUTTON_Y);
-    SET_BUTTON(LeftBumper, GLFW_GAMEPAD_BUTTON_LEFT_BUMPER);
-    SET_BUTTON(RightBumper, GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER);
+    SET_BUTTON(LBumper, GLFW_GAMEPAD_BUTTON_LEFT_BUMPER);
+    SET_BUTTON(RBumper, GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER);
     SET_BUTTON(Back, GLFW_GAMEPAD_BUTTON_BACK);
     SET_BUTTON(Start, GLFW_GAMEPAD_BUTTON_START);
     SET_BUTTON(Guide, GLFW_GAMEPAD_BUTTON_GUIDE);
-    SET_BUTTON(LeftThumb, GLFW_GAMEPAD_BUTTON_LEFT_THUMB);
-    SET_BUTTON(RightThumb, GLFW_GAMEPAD_BUTTON_RIGHT_THUMB);
+    SET_BUTTON(LThumb, GLFW_GAMEPAD_BUTTON_LEFT_THUMB);
+    SET_BUTTON(RThumb, GLFW_GAMEPAD_BUTTON_RIGHT_THUMB);
     SET_BUTTON(Up, GLFW_GAMEPAD_BUTTON_DPAD_UP);
     SET_BUTTON(Right, GLFW_GAMEPAD_BUTTON_DPAD_RIGHT);
     SET_BUTTON(Down, GLFW_GAMEPAD_BUTTON_DPAD_DOWN);

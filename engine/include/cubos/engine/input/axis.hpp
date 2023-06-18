@@ -6,6 +6,7 @@
 
 #include <vector>
 
+#include <cubos/core/io/gamepad.hpp>
 #include <cubos/core/io/keyboard.hpp>
 
 namespace cubos::engine

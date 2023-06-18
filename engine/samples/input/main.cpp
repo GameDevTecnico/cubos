@@ -163,7 +163,7 @@ static void showcaseUnbound(const Window& window, bool& explained)
 static void update(Read<Input> input, Read<Window> window, Write<State> state, Write<ShouldQuit> shouldQuit)
 {
     // FIXME: This is an hack to have one-shot actions while we don't have input events.
-    if (input->pressed("next_showcase"))
+    if (input->pressed("next-showcase"))
     {
         state->nextPressed = true;
     }

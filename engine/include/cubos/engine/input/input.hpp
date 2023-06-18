@@ -24,6 +24,12 @@ namespace cubos::engine
         /// @brief Alias for @ref core::io::Modifiers.
         using Modifiers = core::io::Modifiers;
 
+        /// @brief Alias for @ref core::io::GamepadButton.
+        using GamepadButton = core::io::GamepadButton;
+
+        /// @brief Alias for @ref core::io::GamepadAxis.
+        using GamepadAxis = core::io::GamepadAxis;
+
         Input() = default;
         ~Input() = default;
 
@@ -66,6 +72,11 @@ namespace cubos::engine
         /// @param event Key event.
         void handle(const core::io::Window& window, const core::io::KeyEvent& event);
 
+        /// @brief Handle a gamepad connection event.
+        /// @param window Window that received the event.
+        /// @param event Gamepad connection event.
+        void handle(const core::io::Window& window, const core::io::GamepadConnectionEvent& event);
+
         /// @brief Handle all other events - discards them.
         ///
         /// This is method exists so that `std::visit` can be used with @ref core::io::WindowEvent
@@ -78,6 +89,10 @@ namespace cubos::engine
             (void)window;
             (void)event;
         }
+
+        /// @brief Polls the input state of the gamepads.
+        /// @param window Window to poll the gamepad state from.
+        void pollGamepads(const core::io::Window& window);
 
         /// @brief Gets the bindings for each player.
         /// @return Bindings for each player.
@@ -92,13 +107,17 @@ namespace cubos::engine
         };
 
         bool anyPressed(const core::io::Window& window, const std::vector<std::pair<Key, Modifiers>>& keys) const;
+        bool anyPressed(int player, const std::vector<GamepadButton>& buttons) const;
         void handleActions(const core::io::Window& window, const std::vector<BindingIndex>& boundActions);
         void handleAxes(const core::io::Window& window, const std::vector<BindingIndex>& boundAxes);
 
-        std::unordered_map<int, InputBindings> mBindings;
-        std::unordered_map<int, int> mGamepads;
+        std::unordered_map<int, InputBindings> mPlayerBindings;
+        std::unordered_map<int, int> mPlayerGamepads;
+        std::unordered_map<int, core::io::GamepadState> mGamepadStates;
 
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundActions;
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundAxes;
+        std::unordered_map<GamepadButton, std::vector<BindingIndex>> mBoundGamepadActions;
+        std::unordered_map<GamepadAxis, std::vector<BindingIndex>> mBoundGamepadAxes;
     };
 } // namespace cubos::engine
