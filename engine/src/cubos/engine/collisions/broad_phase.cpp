@@ -65,8 +65,8 @@ void updateMarkers(Query<Read<ColliderAABB>> query, Write<BroadPhaseCollisions> 
             [axis, &query](const BroadPhaseCollisions::SweepMarker& a, const BroadPhaseCollisions::SweepMarker& b) {
                 auto [aAABB] = query[a.entity].value();
                 auto [bAABB] = query[b.entity].value();
-                auto aPos = a.isMin ? aAABB->min() : aAABB->max();
-                auto bPos = b.isMin ? bAABB->min() : bAABB->max();
+                auto aPos = a.isMin ? aAABB->min : aAABB->max;
+                auto bPos = b.isMin ? bAABB->min : bAABB->max;
                 return aPos[axis] < bPos[axis];
             });
     }
