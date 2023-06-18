@@ -7,11 +7,10 @@
 using cubos::core::Settings;
 using cubos::core::data::FileSystem;
 using cubos::core::data::StandardArchive;
-using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
-static void init(Write<Assets> assets, Read<Settings> settings)
+static void init(Write<Assets> assets, Write<Settings> settings)
 {
     // Get the relevant settings.
     if (settings->getBool("assets.io.enabled", true))

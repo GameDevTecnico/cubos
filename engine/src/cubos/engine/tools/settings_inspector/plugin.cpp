@@ -7,10 +7,10 @@
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
 
 using cubos::core::Settings;
-using cubos::core::ecs::Read;
+using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
-static void inspector(Read<Settings> settings)
+static void inspector(Write<Settings> settings)
 {
     ImGui::Begin("Settings Inspector");
 

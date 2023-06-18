@@ -11,7 +11,7 @@ using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 using namespace cubos::engine;
 
-static void init(Write<Window> window, Write<ShouldQuit> quit, Read<Settings> settings)
+static void init(Write<Window> window, Write<ShouldQuit> quit, Write<Settings> settings)
 {
     quit->value = false;
     *window = openWindow(settings->getString("window.title", "CUBOS."),
