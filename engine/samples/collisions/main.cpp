@@ -64,7 +64,7 @@ static void init(Commands commands, Write<Input> input, Write<ActiveCameras> cam
             .entity();
 }
 
-static void addColliders(Write<State> state, Write<BroadPhaseCollisions> collisions, Commands commands)
+static void addColliders(Write<State> state, Commands commands)
 {
     state->a = commands.create()
                    .add(BoxCollider{})
@@ -73,7 +73,6 @@ static void addColliders(Write<State> state, Write<BroadPhaseCollisions> collisi
                    .add(Rotation{})
                    .entity();
     state->aRotationAxis = glm::sphericalRand(1.0F);
-    collisions->addEntity(state->a);
 
     state->b = commands.create()
                    .add(BoxCollider{})
@@ -82,7 +81,6 @@ static void addColliders(Write<State> state, Write<BroadPhaseCollisions> collisi
                    .add(Rotation{})
                    .entity();
     state->bRotationAxis = glm::sphericalRand(1.0F);
-    collisions->addEntity(state->b);
 }
 
 static void updateTransform(Write<State> state, Read<Input> input, Query<Write<Position>, Write<Rotation>> query)

@@ -27,9 +27,10 @@ using cubos::engine::LocalToWorld;
 using cubos::engine::PlaneCollider;
 using cubos::engine::SimplexCollider;
 
-/// @brief Adds missing AABBs to all colliders.
+/// @brief Adds collision tracking to all new entities with colliders.
 template <typename C>
-void addMissingAABBs(Query<Read<C>, OptRead<ColliderAABB>> query, Commands commands)
+void trackNewEntities(Query<Read<C>, OptRead<ColliderAABB>> query, Write<BroadPhaseCollisions> collisions,
+                      Commands commands)
 {
     // TODO: This query should eventually be replaced by Query<With<C>, Without<ColliderAABB>>
 
@@ -38,6 +39,7 @@ void addMissingAABBs(Query<Read<C>, OptRead<ColliderAABB>> query, Commands comma
         if (!aabb)
         {
             commands.add(entity, ColliderAABB{});
+            collisions->addEntity(entity);
         }
     }
 }
