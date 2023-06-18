@@ -4,6 +4,7 @@
 #include <glm/gtx/compatibility.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+#include <cubos/core/gl/debug.hpp>
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/log.hpp>
@@ -491,6 +492,15 @@ DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, 
         createSSAOTextures();
         generateSSAONoise();
     }
+
+    /// FIXME: This should not be on production code.
+    core::gl::Debug::init(mRenderDevice);
+}
+
+DeferredRenderer::~DeferredRenderer()
+{
+    /// FIXME: This should not be on production code.
+    core::gl::Debug::terminate();
 }
 
 cubos::engine::RendererGrid DeferredRenderer::upload(const Grid& grid)
@@ -788,6 +798,9 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     // 6.3. Draw the screen quad.
     mRenderDevice.setVertexArray(mScreenQuadVa);
     mRenderDevice.drawTriangles(0, 6);
+
+    /// FIXME: This should not be on production code.
+    core::gl::Debug::flush(mvp.p * mvp.v, 1 / 60.0F);
 
     // Provide custom inputs to the PPS manager.
     this->pps().provideInput(PostProcessingInput::Position, mPositionTex);
