@@ -14,7 +14,7 @@ static void inspector(Write<Settings> settings)
 {
     ImGui::Begin("Settings Inspector");
 
-    const auto& map = settings->getValues();
+    auto& map = settings->getValues();
     if (map.empty())
     {
         ImGui::Text("No settings found.");
@@ -22,9 +22,9 @@ static void inspector(Write<Settings> settings)
     else
     {
         ImGui::BeginTable("split", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
-        for (const auto& setting : map)
+        for (auto& setting : map)
         {
-            cubos::core::ui::show(setting.second, setting.first);
+            cubos::core::ui::edit(setting.second, setting.first);
         }
         ImGui::EndTable();
     }
