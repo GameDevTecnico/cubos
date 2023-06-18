@@ -127,7 +127,7 @@ void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, OptRead<Pla
                Write<BroadPhaseCollisions> collisions)
 {
     collisions->clearCandidates();
-    
+
     for (glm::length_t axis = 0; axis < 3; axis++)
     {
         for (auto& [entity, overlaps] : collisions->sweepOverlapMaps[axis])
