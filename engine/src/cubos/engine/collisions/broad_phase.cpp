@@ -8,13 +8,13 @@ void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderA
 {
     for (auto [entity, localToWorld, collider, aabb] : query)
     {
-        // Get the 3 points of the collider.
-        glm::vec3 corners[3];
-        collider->shape.corners3(corners);
+        // Get the 4 points of the collider.
+        glm::vec3 corners[4];
+        collider->shape.corners4(corners);
 
         // Pack the 3 points of the collider into a matrix.
-        auto points =
-            glm::mat3x4{glm::vec4{corners[0], 0.0f}, glm::vec4{corners[1], 0.0f}, glm::vec4{corners[2], 0.0f}};
+        auto points = glm::mat4{glm::vec4{corners[0], 1.0F}, glm::vec4{corners[1], 1.0F}, glm::vec4{corners[2], 1.0F},
+                                glm::vec4{corners[3], 1.0F}};
 
         // Transforms collider space to world space.
         auto transform = localToWorld->mat * collider->transform;
@@ -24,26 +24,19 @@ void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderA
         transform[3] = glm::vec4{0.0f, 0.0f, 0.0f, 1.0f};
 
         // Rotate and scale corners.
-        auto rotatedCorners = glm::mat3{transform * points};
+        auto rotatedCorners = glm::mat4x3{transform * points};
 
-        // Get the extents of the rotated corners.
-        auto max = glm::abs(rotatedCorners[0]);
-        max = glm::max(max, glm::abs(rotatedCorners[1]));
+        // Get the max of the rotated corners.
+        auto max = glm::max(glm::abs(rotatedCorners[0]), glm::abs(rotatedCorners[1]));
         max = glm::max(max, glm::abs(rotatedCorners[2]));
-        auto min = -max;
-
-        // Add translation back in.
-        max += translation;
-        min += translation;
+        max = glm::max(max, glm::abs(rotatedCorners[3]));
 
         // Add the collider's margin.
-        auto margin = glm::vec3{collider->margin};
-        max += margin;
-        min -= margin;
+        max += glm::vec3{collider->margin};
 
         // Set the AABB.
-        aabb->max(max);
-        aabb->min(min);
+        aabb->max = translation + max;
+        aabb->min = translation - max;
     }
 }
 

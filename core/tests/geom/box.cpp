@@ -21,13 +21,14 @@ TEST_CASE("geom::Box")
         CHECK_VEC3_EQ(corners[1], glm::vec3{x, y, z});
     }
 
-    SUBCASE("three corners")
+    SUBCASE("four corners")
     {
-        glm::vec3 corners[3];
-        box.corners3(corners);
+        glm::vec3 corners[4];
+        box.corners4(corners);
         CHECK_VEC3_EQ(corners[0], glm::vec3{x, -y, -z});
         CHECK_VEC3_EQ(corners[1], glm::vec3{-x, y, -z});
         CHECK_VEC3_EQ(corners[2], glm::vec3{-x, -y, z});
+        CHECK_VEC3_EQ(corners[3], glm::vec3{x, y, z});
     }
 
     SUBCASE("eight corners")
