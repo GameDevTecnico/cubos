@@ -13,6 +13,7 @@
 #include <glm/glm.hpp>
 
 #include <cubos/core/io/cursor.hpp>
+#include <cubos/core/io/gamepad.hpp>
 #include <cubos/core/io/keyboard.hpp>
 
 namespace cubos::core::gl
@@ -113,10 +114,18 @@ namespace cubos::core::io
         char32_t codepoint; ///< Unicode character that was input.
     };
 
+    /// @brief Event sent when a gamepad is connected or disconnected.
+    /// @ingroup core-io
+    struct GamepadConnectionEvent
+    {
+        int gamepad;    ///< Id of the gamepad.
+        bool connected; ///< Whether the gamepad was connected.
+    };
+
     /// @brief Variant that can hold any of the window events.
     /// @ingroup core-io
     using WindowEvent = std::variant<KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent,
-                                     ResizeEvent, TextEvent>;
+                                     ResizeEvent, TextEvent, GamepadConnectionEvent>;
 
     /// @brief Handle to a window.
     /// @see @ref BaseWindow @copybrief BaseWindow
@@ -209,6 +218,12 @@ namespace cubos::core::io
         /// @param modifiers Modifiers to check.
         /// @return Whether the key and modifiers (or a superset of) are currently pressed.
         virtual bool pressed(Key key, Modifiers modifiers = Modifiers::None) const = 0;
+
+        /// @brief Gets the state of the specified gamepad.
+        /// @param gamepad Gamepad to get the state of.
+        /// @param state State to fill with the gamepad state.
+        /// @return Whether the gamepad was found.
+        virtual bool gamepadState(int gamepad, GamepadState& state) const = 0;
 
     protected:
         /// @brief Asks the implementation to fill the event queue with new events.
