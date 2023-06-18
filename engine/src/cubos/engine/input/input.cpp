@@ -70,6 +70,22 @@ void Input::bind(const InputBindings& bindings, int player)
     CUBOS_DEBUG("Input bindings set for player {}", player);
 }
 
+void Input::gamepad(int player, int gamepad)
+{
+    mGamepads[player] = gamepad;
+    CUBOS_DEBUG("Gamepad {} assigned to player {}", gamepad, player);
+}
+
+int Input::gamepad(int player) const
+{
+    if (auto it = mGamepads.find(player); it != mGamepads.end())
+    {
+        return it->second;
+    }
+
+    return -1;
+}
+
 bool Input::pressed(const char* actionName, int player) const
 {
     auto pIt = mBindings.find(player);
