@@ -10,6 +10,7 @@
 #include <cubos/engine/renderer/frame.hpp>
 #include <cubos/engine/renderer/light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/renderer/pps/bloom.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -27,6 +28,7 @@ static void init(Write<Renderer> renderer, Read<Window> window, Read<Settings> s
 {
     auto& renderDevice = (*window)->renderDevice();
     *renderer = std::make_shared<DeferredRenderer>(renderDevice, (*window)->framebufferSize(), *settings);
+    (*renderer)->pps().addPass<PostProcessingBloom>();
 }
 
 static void resize(Write<Renderer> renderer, EventReader<WindowEvent> evs)
