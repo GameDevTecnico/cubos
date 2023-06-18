@@ -5,7 +5,8 @@
 namespace cubos::engine::tools
 {
     /// @brief Event sent when an asset is selected.
-    struct AssetSelectedEvent {
+    struct AssetSelectedEvent
+    {
         AnyAsset asset;
     };
 

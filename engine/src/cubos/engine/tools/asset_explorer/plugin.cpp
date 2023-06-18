@@ -6,8 +6,8 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/asset_explorer/plugin.hpp>
 
-using cubos::core::ecs::Read;
 using cubos::core::ecs::EventWriter;
+using cubos::core::ecs::Read;
 
 using namespace cubos::engine;
 
@@ -54,8 +54,9 @@ static void showAsset(Assets const& assets, AnyAsset const& asset, EventWriter<t
 }
 
 static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::string const& folder,
-                                           std::vector<AnyAsset>::iterator iter, std::vector<AnyAsset>::iterator end,
-                                           EventWriter<tools::AssetSelectedEvent> events)
+                                                  std::vector<AnyAsset>::iterator iter,
+                                                  std::vector<AnyAsset>::iterator end,
+                                                  EventWriter<tools::AssetSelectedEvent> events)
 {
     std::string displayName = folder;
     displayName.erase(0, displayName.rfind("/"));
@@ -122,7 +123,7 @@ static void showAssets(Read<Assets> assets, Read<cubos::core::Settings> settings
         }
     }
     std::sort(assetsVector.begin(), assetsVector.end(),
-                      [assets](AnyAsset const& a, AnyAsset const& b) { return assetsCompare(a, b, *assets); });
+              [assets](AnyAsset const& a, AnyAsset const& b) { return assetsCompare(a, b, *assets); });
 
     showFolder((*assets), folder, assetsVector.begin(), assetsVector.end(), events);
 
