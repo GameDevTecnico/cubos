@@ -103,7 +103,7 @@ std::size_t BinaryDeserializer::beginArray()
 {
     uint64_t size;
     this->readU64(size);
-    return size;
+    return (std::size_t)size;
 }
 
 void BinaryDeserializer::endArray()
@@ -115,7 +115,7 @@ std::size_t BinaryDeserializer::beginDictionary()
 {
     uint64_t size;
     this->readU64(size);
-    return size;
+    return (std::size_t)size;
 }
 
 void BinaryDeserializer::endDictionary()
