@@ -97,31 +97,37 @@ $(document).ready(function(){initNavTree('engine_2include_2cubos_2engine_2render
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>cubos::engine</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1SpotLight.html">   10</a></span>&#160;    <span class="keyword">struct </span>[[cubos::component(&quot;cubos/spot_light&quot;, VecStorage)]] <a class="code" href="structcubos_1_1engine_1_1SpotLight.html">SpotLight</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        glm::vec3 color;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keywordtype">float</span> intensity;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordtype">float</span> range;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordtype">float</span> spotAngle;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordtype">float</span> innerSpotAngle;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    };</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1DirectionalLight.html">   21</a></span>&#160;    <span class="keyword">struct </span>[[cubos::component(&quot;cubos/directional_light&quot;, VecStorage)]] <a class="code" href="structcubos_1_1engine_1_1DirectionalLight.html">DirectionalLight</a></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        glm::vec3 color;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">float</span> intensity;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    };</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1PointLight.html">   29</a></span>&#160;    <span class="keyword">struct </span>[[cubos::component(&quot;cubos/point_light&quot;, VecStorage)]] <a class="code" href="structcubos_1_1engine_1_1PointLight.html">PointLight</a></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        glm::vec3 color;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">float</span> intensity;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">float</span> range;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    };</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;} <span class="comment">// namespace cubos::engine</span></div>
-<div class="ttc" id="astructcubos_1_1engine_1_1DirectionalLight_html"><div class="ttname"><a href="structcubos_1_1engine_1_1DirectionalLight.html">cubos::engine::DirectionalLight</a></div><div class="ttdef"><b>Definition:</b> light.hpp:22</div></div>
-<div class="ttc" id="astructcubos_1_1engine_1_1PointLight_html"><div class="ttname"><a href="structcubos_1_1engine_1_1PointLight.html">cubos::engine::PointLight</a></div><div class="ttdef"><b>Definition:</b> light.hpp:30</div></div>
-<div class="ttc" id="astructcubos_1_1engine_1_1SpotLight_html"><div class="ttname"><a href="structcubos_1_1engine_1_1SpotLight.html">cubos::engine::SpotLight</a></div><div class="ttdef"><b>Definition:</b> light.hpp:11</div></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1AmbientLight.html">    9</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structcubos_1_1engine_1_1AmbientLight.html">AmbientLight</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        glm::vec3 color;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    };</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1SpotLight.html">   16</a></span>&#160;    <span class="keyword">struct </span>[[cubos::component(&quot;cubos/spot_light&quot;, VecStorage)]] <a class="code" href="structcubos_1_1engine_1_1SpotLight.html">SpotLight</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        glm::vec3 color;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordtype">float</span> intensity;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordtype">float</span> range;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">float</span> spotAngle;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">float</span> innerSpotAngle;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    };</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1DirectionalLight.html">   27</a></span>&#160;    <span class="keyword">struct </span>[[cubos::component(&quot;cubos/directional_light&quot;, VecStorage)]] <a class="code" href="structcubos_1_1engine_1_1DirectionalLight.html">DirectionalLight</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        glm::vec3 color;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">float</span> intensity;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    };</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structcubos_1_1engine_1_1PointLight.html">   35</a></span>&#160;    <span class="keyword">struct </span>[[cubos::component(&quot;cubos/point_light&quot;, VecStorage)]] <a class="code" href="structcubos_1_1engine_1_1PointLight.html">PointLight</a></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        glm::vec3 color;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">float</span> intensity;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">float</span> range;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    };</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;} <span class="comment">// namespace cubos::engine</span></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1AmbientLight_html"><div class="ttname"><a href="structcubos_1_1engine_1_1AmbientLight.html">cubos::engine::AmbientLight</a></div><div class="ttdoc">Resource which stores the ambient light.</div><div class="ttdef"><b>Definition:</b> light.hpp:10</div></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1DirectionalLight_html"><div class="ttname"><a href="structcubos_1_1engine_1_1DirectionalLight.html">cubos::engine::DirectionalLight</a></div><div class="ttdef"><b>Definition:</b> light.hpp:28</div></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1PointLight_html"><div class="ttname"><a href="structcubos_1_1engine_1_1PointLight.html">cubos::engine::PointLight</a></div><div class="ttdef"><b>Definition:</b> light.hpp:36</div></div>
+<div class="ttc" id="astructcubos_1_1engine_1_1SpotLight_html"><div class="ttname"><a href="structcubos_1_1engine_1_1SpotLight.html">cubos::engine::SpotLight</a></div><div class="ttdef"><b>Definition:</b> light.hpp:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->

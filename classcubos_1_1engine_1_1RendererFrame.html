@@ -109,6 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acaeef62a8c9d61c0c74a9bf2bab23afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab52d5adbd45b002614745dd4e75575a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#ab52d5adbd45b002614745dd4e75575a1">ambient</a> (const glm::vec3 &amp;color)</td></tr>
 <tr class="separator:ab52d5adbd45b002614745dd4e75575a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa71cccf1830ea46731b083035c9e37ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#aa71cccf1830ea46731b083035c9e37ca">skyGradient</a> (glm::vec3 bottom, glm::vec3 top)</td></tr>
+<tr class="separator:aa71cccf1830ea46731b083035c9e37ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad39aad770a2e498f7cd8cf4da8417deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#ad39aad770a2e498f7cd8cf4da8417deb">light</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1SpotLight.html">core::gl::SpotLight</a> &amp;light)</td></tr>
 <tr class="separator:ad39aad770a2e498f7cd8cf4da8417deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4fe64e8adf9e186df853ae77364cd17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#ad4fe64e8adf9e186df853ae77364cd17">light</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html">core::gl::DirectionalLight</a> &amp;light)</td></tr>
@@ -119,22 +121,42 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the frame, removing all draw calls and lights. <br /></td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb2be2d0100a3a2fa634a778ac648b45"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structcubos_1_1engine_1_1RendererFrame_1_1DrawCmd.html">DrawCmd</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#abb2be2d0100a3a2fa634a778ac648b45">getDrawCmds</a> () const</td></tr>
-<tr class="separator:abb2be2d0100a3a2fa634a778ac648b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20b69e31ff181f30320553b8f5fa057b"><td class="memItemLeft" align="right" valign="top">const glm::vec3 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#a20b69e31ff181f30320553b8f5fa057b">getAmbient</a> () const</td></tr>
-<tr class="separator:a20b69e31ff181f30320553b8f5fa057b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3b41245843a11c68c2394f1ebe32adc"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structcubos_1_1core_1_1gl_1_1SpotLight.html">core::gl::SpotLight</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#ae3b41245843a11c68c2394f1ebe32adc">getSpotLights</a> () const</td></tr>
-<tr class="separator:ae3b41245843a11c68c2394f1ebe32adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a67ee7e031c344d2cc3267e0d0410d1"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html">core::gl::DirectionalLight</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#a6a67ee7e031c344d2cc3267e0d0410d1">getDirectionalLights</a> () const</td></tr>
-<tr class="separator:a6a67ee7e031c344d2cc3267e0d0410d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bc67e0d5d21218f4f8986ec863596c8"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structcubos_1_1core_1_1gl_1_1PointLight.html">core::gl::PointLight</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#a5bc67e0d5d21218f4f8986ec863596c8">getPointLights</a> () const</td></tr>
-<tr class="separator:a5bc67e0d5d21218f4f8986ec863596c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dfe9abc39edc04c72e8a5884e82ceaa"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structcubos_1_1engine_1_1RendererFrame_1_1DrawCmd.html">DrawCmd</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#a2dfe9abc39edc04c72e8a5884e82ceaa">drawCmds</a> () const</td></tr>
+<tr class="separator:a2dfe9abc39edc04c72e8a5884e82ceaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a222270a93ff45f00f3e9f423156c25ac"><td class="memItemLeft" align="right" valign="top">const glm::vec3 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#a222270a93ff45f00f3e9f423156c25ac">ambient</a> () const</td></tr>
+<tr class="separator:a222270a93ff45f00f3e9f423156c25ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80d399fc5c1d43bb00c183f3cb6c7b7"><td class="memItemLeft" align="right" valign="top">const glm::vec3 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#af80d399fc5c1d43bb00c183f3cb6c7b7">skyGradient</a> (int i) const</td></tr>
+<tr class="separator:af80d399fc5c1d43bb00c183f3cb6c7b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a831a6286bea49c0738057c9de2d65f"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structcubos_1_1core_1_1gl_1_1SpotLight.html">core::gl::SpotLight</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#a9a831a6286bea49c0738057c9de2d65f">spotLights</a> () const</td></tr>
+<tr class="separator:a9a831a6286bea49c0738057c9de2d65f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a505b4558db77ae2d375ac0669f674a30"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html">core::gl::DirectionalLight</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#a505b4558db77ae2d375ac0669f674a30">directionalLights</a> () const</td></tr>
+<tr class="separator:a505b4558db77ae2d375ac0669f674a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fec5b77617dbbc07bcb24f80e977bca"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structcubos_1_1core_1_1gl_1_1PointLight.html">core::gl::PointLight</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1RendererFrame.html#a6fec5b77617dbbc07bcb24f80e977bca">pointLights</a> () const</td></tr>
+<tr class="separator:a6fec5b77617dbbc07bcb24f80e977bca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains all scene data needed to draw a frame. For each frame, the engine will generate a frame object with data fetched from the scene, and then, provide it to the renderer. The renderer is responsible for showing this data on the screen. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a222270a93ff45f00f3e9f423156c25ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a222270a93ff45f00f3e9f423156c25ac">&#9670;&nbsp;</a></span>ambient() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const glm::vec3&amp; ambient </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the ambient light of the scene. </p><dl class="section return"><dt>Returns</dt><dd>The ambient light. </dd></dl>
+
+</div>
+</div>
 <a id="ab52d5adbd45b002614745dd4e75575a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab52d5adbd45b002614745dd4e75575a1">&#9670;&nbsp;</a></span>ambient()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab52d5adbd45b002614745dd4e75575a1">&#9670;&nbsp;</a></span>ambient() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,6 +176,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a505b4558db77ae2d375ac0669f674a30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a505b4558db77ae2d375ac0669f674a30">&#9670;&nbsp;</a></span>directionalLights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;<a class="el" href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html">core::gl::DirectionalLight</a>&gt;&amp; directionalLights </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the directional lights of the frame. </p><dl class="section return"><dt>Returns</dt><dd>The directional lights. </dd></dl>
 
 </div>
 </div>
@@ -192,50 +232,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a20b69e31ff181f30320553b8f5fa057b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20b69e31ff181f30320553b8f5fa057b">&#9670;&nbsp;</a></span>getAmbient()</h2>
+<a id="a2dfe9abc39edc04c72e8a5884e82ceaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dfe9abc39edc04c72e8a5884e82ceaa">&#9670;&nbsp;</a></span>drawCmds()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const glm::vec3&amp; getAmbient </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Gets the ambient light of the scene. </p><dl class="section return"><dt>Returns</dt><dd>The ambient light. </dd></dl>
-
-</div>
-</div>
-<a id="a6a67ee7e031c344d2cc3267e0d0410d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a67ee7e031c344d2cc3267e0d0410d1">&#9670;&nbsp;</a></span>getDirectionalLights()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt;<a class="el" href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html">core::gl::DirectionalLight</a>&gt;&amp; getDirectionalLights </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Gets the directional lights of the frame. </p><dl class="section return"><dt>Returns</dt><dd>The directional lights. </dd></dl>
-
-</div>
-</div>
-<a id="abb2be2d0100a3a2fa634a778ac648b45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb2be2d0100a3a2fa634a778ac648b45">&#9670;&nbsp;</a></span>getDrawCmds()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt;<a class="el" href="structcubos_1_1engine_1_1RendererFrame_1_1DrawCmd.html">DrawCmd</a>&gt;&amp; getDrawCmds </td>
+          <td class="memname">const std::vector&lt;<a class="el" href="structcubos_1_1engine_1_1RendererFrame_1_1DrawCmd.html">DrawCmd</a>&gt;&amp; drawCmds </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -243,42 +247,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
       </table>
 </div><div class="memdoc">
 <p>Gets all of the draw commands stored in the frame. </p><dl class="section return"><dt>Returns</dt><dd>The draw commands. </dd></dl>
-
-</div>
-</div>
-<a id="a5bc67e0d5d21218f4f8986ec863596c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5bc67e0d5d21218f4f8986ec863596c8">&#9670;&nbsp;</a></span>getPointLights()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt;<a class="el" href="structcubos_1_1core_1_1gl_1_1PointLight.html">core::gl::PointLight</a>&gt;&amp; getPointLights </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Gets the point lights of the frame. </p><dl class="section return"><dt>Returns</dt><dd>The point lights. </dd></dl>
-
-</div>
-</div>
-<a id="ae3b41245843a11c68c2394f1ebe32adc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3b41245843a11c68c2394f1ebe32adc">&#9670;&nbsp;</a></span>getSpotLights()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt;<a class="el" href="structcubos_1_1core_1_1gl_1_1SpotLight.html">core::gl::SpotLight</a>&gt;&amp; getSpotLights </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Gets the spot lights of the frame. </p><dl class="section return"><dt>Returns</dt><dd>The spot lights. </dd></dl>
 
 </div>
 </div>
@@ -351,6 +319,102 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a6fec5b77617dbbc07bcb24f80e977bca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fec5b77617dbbc07bcb24f80e977bca">&#9670;&nbsp;</a></span>pointLights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;<a class="el" href="structcubos_1_1core_1_1gl_1_1PointLight.html">core::gl::PointLight</a>&gt;&amp; pointLights </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the point lights of the frame. </p><dl class="section return"><dt>Returns</dt><dd>The point lights. </dd></dl>
+
+</div>
+</div>
+<a id="aa71cccf1830ea46731b083035c9e37ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa71cccf1830ea46731b083035c9e37ca">&#9670;&nbsp;</a></span>skyGradient() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void skyGradient </td>
+          <td>(</td>
+          <td class="paramtype">glm::vec3&#160;</td>
+          <td class="paramname"><em>bottom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">glm::vec3&#160;</td>
+          <td class="paramname"><em>top</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the sky gradient of the scene. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bottom</td><td>Bottom sky color. </td></tr>
+    <tr><td class="paramname">top</td><td>Top sky color. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af80d399fc5c1d43bb00c183f3cb6c7b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af80d399fc5c1d43bb00c183f3cb6c7b7">&#9670;&nbsp;</a></span>skyGradient() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const glm::vec3&amp; skyGradient </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the sky gradient of the scene. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Index of the color (0 = bottom, 1 = top). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The ambient light. </dd></dl>
+
+</div>
+</div>
+<a id="a9a831a6286bea49c0738057c9de2d65f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a831a6286bea49c0738057c9de2d65f">&#9670;&nbsp;</a></span>spotLights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;<a class="el" href="structcubos_1_1core_1_1gl_1_1SpotLight.html">core::gl::SpotLight</a>&gt;&amp; spotLights </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gets the spot lights of the frame. </p><dl class="section return"><dt>Returns</dt><dd>The spot lights. </dd></dl>
 
 </div>
 </div>

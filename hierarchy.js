@@ -1,6 +1,7 @@
 var hierarchy =
 [
-    [ "ActiveCamera", "structcubos_1_1engine_1_1ActiveCamera.html", null ],
+    [ "ActiveCameras", "structcubos_1_1engine_1_1ActiveCameras.html", null ],
+    [ "AmbientLight", "structcubos_1_1engine_1_1AmbientLight.html", null ],
     [ "AnyAsset", "classcubos_1_1engine_1_1AnyAsset.html", [
       [ "Asset< cubos::core::gl::Grid >", "classcubos_1_1engine_1_1Asset.html", null ],
       [ "Asset< T >", "classcubos_1_1engine_1_1Asset.html", null ]
@@ -145,6 +146,7 @@ var hierarchy =
     [ "Registry", "classcubos_1_1core_1_1ecs_1_1Registry.html", null ],
     [ "RenderableGrid", "structcubos_1_1engine_1_1RenderableGrid.html", null ],
     [ "RenderDevice", "classcubos_1_1core_1_1gl_1_1RenderDevice.html", null ],
+    [ "RendererEnvironment", "structcubos_1_1engine_1_1RendererEnvironment.html", null ],
     [ "RendererFrame", "classcubos_1_1engine_1_1RendererFrame.html", null ],
     [ "RendererGrid", "classcubos_1_1engine_1_1impl_1_1RendererGrid.html", null ],
     [ "ResizeEvent", "structcubos_1_1core_1_1io_1_1ResizeEvent.html", null ],

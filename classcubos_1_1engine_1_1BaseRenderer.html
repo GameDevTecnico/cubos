@@ -118,7 +118,7 @@ Collaboration diagram for BaseRenderer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad698d865f546df076fcd7557f8fd7f8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#ad698d865f546df076fcd7557f8fd7f8a">BaseRenderer</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;renderDevice, glm::uvec2 size)</td></tr>
+<tr class="memitem:ad698d865f546df076fcd7557f8fd7f8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#ad698d865f546df076fcd7557f8fd7f8a">BaseRenderer</a> (<a class="el" href="classcubos_1_1core_1_1gl_1_1RenderDevice.html">core::gl::RenderDevice</a> &amp;renderDevice, glm::uvec2 <a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#a7933f1a10373ea0ed4f9cee3ed64ca31">size</a>)</td></tr>
 <tr class="separator:ad698d865f546df076fcd7557f8fd7f8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bf5504582833a84a0e095d9906a288c"><td class="memItemLeft" align="right" valign="top"><a id="a8bf5504582833a84a0e095d9906a288c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>BaseRenderer</b> (const <a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html">BaseRenderer</a> &amp;)=delete</td></tr>
@@ -127,8 +127,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae0bae44201e9a1e8bbd566cd0418b731"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adba2df0c8afc09884ecae830486f9f88"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#adba2df0c8afc09884ecae830486f9f88">setPalette</a> (const <a class="el" href="classcubos_1_1core_1_1gl_1_1Palette.html">core::gl::Palette</a> &amp;palette)=0</td></tr>
 <tr class="separator:adba2df0c8afc09884ecae830486f9f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecbcb8ca208d69d6e4be496a7924415e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#aecbcb8ca208d69d6e4be496a7924415e">resize</a> (glm::uvec2 size)</td></tr>
+<tr class="memitem:aecbcb8ca208d69d6e4be496a7924415e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#aecbcb8ca208d69d6e4be496a7924415e">resize</a> (glm::uvec2 <a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#a7933f1a10373ea0ed4f9cee3ed64ca31">size</a>)</td></tr>
 <tr class="separator:aecbcb8ca208d69d6e4be496a7924415e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7933f1a10373ea0ed4f9cee3ed64ca31"><td class="memItemLeft" align="right" valign="top">glm::uvec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#a7933f1a10373ea0ed4f9cee3ed64ca31">size</a> () const</td></tr>
+<tr class="memdesc:a7933f1a10373ea0ed4f9cee3ed64ca31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current size of the renderer's framebuffers.  <a href="classcubos_1_1engine_1_1BaseRenderer.html#a7933f1a10373ea0ed4f9cee3ed64ca31">More...</a><br /></td></tr>
+<tr class="separator:a7933f1a10373ea0ed4f9cee3ed64ca31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab98cdcb454244799cce4ff4637f0b0c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#ab98cdcb454244799cce4ff4637f0b0c3">render</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a> &amp;camera, const <a class="el" href="classcubos_1_1engine_1_1RendererFrame.html">RendererFrame</a> &amp;frame, bool usePostProcessing=true, const core::gl::Framebuffer &amp;target=nullptr)</td></tr>
 <tr class="separator:ab98cdcb454244799cce4ff4637f0b0c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41c8bc79c2b3c0e69ec8e884bba810d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcubos_1_1engine_1_1PostProcessingManager.html">PostProcessingManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#a41c8bc79c2b3c0e69ec8e884bba810d9">pps</a> ()</td></tr>
@@ -136,7 +139,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a503c765005360d94c570cfc8d9377581"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#a503c765005360d94c570cfc8d9377581">onResize</a> (glm::uvec2 size)=0</td></tr>
+<tr class="memitem:a503c765005360d94c570cfc8d9377581"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#a503c765005360d94c570cfc8d9377581">onResize</a> (glm::uvec2 <a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#a7933f1a10373ea0ed4f9cee3ed64ca31">size</a>)=0</td></tr>
 <tr class="separator:a503c765005360d94c570cfc8d9377581"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16094713d8ace8f9a9aaeae7c6a1802d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcubos_1_1engine_1_1BaseRenderer.html#a16094713d8ace8f9a9aaeae7c6a1802d">onRender</a> (const <a class="el" href="structcubos_1_1core_1_1gl_1_1Camera.html">core::gl::Camera</a> &amp;camera, const <a class="el" href="classcubos_1_1engine_1_1RendererFrame.html">RendererFrame</a> &amp;frame, core::gl::Framebuffer target)=0</td></tr>
 <tr class="separator:a16094713d8ace8f9a9aaeae7c6a1802d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -391,6 +394,26 @@ Protected Attributes</h2></td></tr>
 </dl>
 
 <p>Implemented in <a class="el" href="classcubos_1_1engine_1_1DeferredRenderer.html#a1ed8acc3c29501eb563385335d82bf93">DeferredRenderer</a>.</p>
+
+</div>
+</div>
+<a id="a7933f1a10373ea0ed4f9cee3ed64ca31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7933f1a10373ea0ed4f9cee3ed64ca31">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::uvec2 size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the current size of the renderer's framebuffers. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current size of the renderer's framebuffer. </dd></dl>
 
 </div>
 </div>

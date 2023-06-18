@@ -9,6 +9,7 @@ var classcubos_1_1engine_1_1BaseRenderer =
     [ "render", "classcubos_1_1engine_1_1BaseRenderer.html#ab98cdcb454244799cce4ff4637f0b0c3", null ],
     [ "resize", "classcubos_1_1engine_1_1BaseRenderer.html#aecbcb8ca208d69d6e4be496a7924415e", null ],
     [ "setPalette", "classcubos_1_1engine_1_1BaseRenderer.html#adba2df0c8afc09884ecae830486f9f88", null ],
+    [ "size", "classcubos_1_1engine_1_1BaseRenderer.html#a7933f1a10373ea0ed4f9cee3ed64ca31", null ],
     [ "upload", "classcubos_1_1engine_1_1BaseRenderer.html#ae0bae44201e9a1e8bbd566cd0418b731", null ],
     [ "mRenderDevice", "classcubos_1_1engine_1_1BaseRenderer.html#acf114eb1cd1aa8b1aad7494d74aeafbb", null ]
 ];

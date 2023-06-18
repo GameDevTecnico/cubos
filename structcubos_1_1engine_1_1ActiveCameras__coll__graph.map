@@ -1,0 +1,4 @@
+<map id="ActiveCameras" name="ActiveCameras">
+<area shape="rect" id="node1" title="Resource which identifies the camera entities to be used by the renderer." alt="" coords="5,95,127,121"/>
+<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Entity.html" title=" " alt="" coords="36,5,96,32"/>
+</map>
