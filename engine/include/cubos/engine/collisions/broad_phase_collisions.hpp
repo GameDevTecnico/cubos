@@ -13,11 +13,12 @@ using cubos::core::ecs::Entity;
 
 namespace cubos::engine
 {
-    /// Used to store data used in broad phase collision detection.
+    /// @brief Used to store data used in broad phase collision detection.
     struct BroadPhaseCollisions
     {
         using Candidate = std::pair<Entity, Entity>; ///< A pair of entities that may collide.
 
+        /// @brief Hash function to allow Candidates to be used as keys in an unordered_set.
         struct CandidateHash
         {
             std::size_t operator()(const Candidate& candidate) const
@@ -50,32 +51,34 @@ namespace cubos::engine
             bool isMin;    ///< Whether the marker is a min or max marker.
         };
 
-        /// List of ordered sweep markers for each axis. Stores the index of the marker in mMarkers.
+        /// @brief List of ordered sweep markers for each axis. Stores the index of the marker in mMarkers.
         std::vector<SweepMarker> markersPerAxis[3];
 
-        /// Maps of overlapping entities for each axis calculated by sweep and prune.
+        /// @brief Maps of overlapping entities for each axis calculated by sweep and prune.
+        ///
+        /// @details
         /// For each each map, the key is an entity and the value is a list of entities that overlap with the key.
         /// Symmetrical pairs are not stored.
         std::unordered_map<Entity, std::vector<Entity>> sweepOverlapMaps[3];
 
-        /// Set of active entities during sweep for each axis.
+        /// @brief Set of active entities during sweep for each axis.
         std::unordered_set<Entity> activePerAxis[3];
 
-        /// Sets of collision candidates for each collision type. The index of the array is the collision type.
+        /// @brief Sets of collision candidates for each collision type. The index of the array is the collision type.
         std::unordered_set<Candidate, CandidateHash> candidatesPerType[static_cast<std::size_t>(CollisionType::Count)];
 
-        /// Adds an entity to the list of entities tracked by sweep and prune.
+        /// @brief Adds an entity to the list of entities tracked by sweep and prune.
         /// @param entity The entity to add.
         void addEntity(Entity entity);
 
-        /// Removes an entity from the list of entities tracked by sweep and prune.
+        /// @brief Removes an entity from the list of entities tracked by sweep and prune.
         /// @param entity The entity to remove.
         void removeEntity(Entity entity);
 
-        /// Clears the list of entities tracked by sweep and prune.
+        /// @brief Clears the list of entities tracked by sweep and prune.
         void clearEntities();
 
-        /// Adds a collision candidate to the list of candidates for a specific collision type.
+        /// @brief Adds a collision candidate to the list of candidates for a specific collision type.
         /// @param type The collision type.
         /// @param candidate The collision candidate.
         void addCandidate(CollisionType type, Candidate candidate);
@@ -85,7 +88,7 @@ namespace cubos::engine
         /// @param type The collision type.
         const std::unordered_set<Candidate, CandidateHash>& candidates(CollisionType type) const;
 
-        /// Clears the list of collision candidates.
+        /// @brief Clears the list of collision candidates.
         void clearCandidates();
     };
 } // namespace cubos::engine

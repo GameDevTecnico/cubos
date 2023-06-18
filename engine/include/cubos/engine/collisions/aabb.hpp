@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains the AABB resource.
+/// @brief Contains the ColliderAABB component.
 
 #pragma once
 
