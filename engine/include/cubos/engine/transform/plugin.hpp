@@ -24,6 +24,9 @@ namespace cubos::engine
     /// entity which doesn't need rotation, but has a position and a scale, you do not need to add
     /// the @ref Rotation component, and its transform will still be updated.
     ///
+    /// @note Any entity with either a @ref Position, @ref Rotation or @ref Scale component
+    /// automatically gets a @ref LocalToWorld component.
+    ///
     /// ## Components
     /// - @ref LocalToWorld - holds the local to world transform matrix.
     /// - @ref Position - holds the position of an entity.
