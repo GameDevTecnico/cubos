@@ -39,6 +39,7 @@ namespace cubos::core::io
         const char* clipboard() const override;
         Modifiers modifiers() const override;
         bool pressed(Key key, Modifiers modifiers = Modifiers::None) const override;
+        bool gamepadState(int gamepad, GamepadState& state) const override;
 
         void modifiers(Modifiers modifiers);
 
