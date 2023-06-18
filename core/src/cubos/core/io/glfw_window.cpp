@@ -15,10 +15,13 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 static void charCallback(GLFWwindow* window, unsigned int codepoint);
+static void joystickCallback(int jid, int event);
 static void updateMods(GLFWWindow* handler, int glfwMods);
 static MouseButton glfwToCubosMouseButton(int button);
 static Key glfwToCubosKey(int key);
 static int cubosToGlfwKey(Key key);
+
+static GLFWWindow* currentWindow = nullptr;
 
 #endif // WITH_GLFW
 
@@ -37,6 +40,8 @@ static void errorCallback(int errorCode, const char* description)
 GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 {
 #ifdef WITH_GLFW
+    CUBOS_ASSERT(currentWindow == nullptr, "Only one window is supported at the moment");
+
     glfwSetErrorCallback(errorCallback);
 
     if (glfwInit() == 0)
@@ -77,6 +82,8 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
     glfwSetScrollCallback(mHandle, scrollCallback);
     glfwSetFramebufferSizeCallback(mHandle, framebufferSizeCallback);
     glfwSetCharCallback(mHandle, charCallback);
+    glfwSetJoystickCallback(joystickCallback);
+    currentWindow = this;
 #else
     UNSUPPORTED();
 #endif
@@ -300,6 +307,49 @@ void GLFWWindow::modifiers(Modifiers mods)
     mModifiers = mods;
 }
 
+bool GLFWWindow::gamepadState(int gamepad, GamepadState& state) const
+{
+#ifdef WITH_GLFW
+    GLFWgamepadstate glfwState;
+    if (glfwGetGamepadState(gamepad, &glfwState) == GLFW_FALSE)
+    {
+        return false;
+    }
+
+#define SET_BUTTON(cubos, glfw)                                                                                        \
+    state.buttons[static_cast<int>(GamepadButton::cubos)] = glfwState.buttons[glfw] == GLFW_PRESS;
+    SET_BUTTON(A, GLFW_GAMEPAD_BUTTON_A);
+    SET_BUTTON(B, GLFW_GAMEPAD_BUTTON_B);
+    SET_BUTTON(X, GLFW_GAMEPAD_BUTTON_X);
+    SET_BUTTON(Y, GLFW_GAMEPAD_BUTTON_Y);
+    SET_BUTTON(LeftBumper, GLFW_GAMEPAD_BUTTON_LEFT_BUMPER);
+    SET_BUTTON(RightBumper, GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER);
+    SET_BUTTON(Back, GLFW_GAMEPAD_BUTTON_BACK);
+    SET_BUTTON(Start, GLFW_GAMEPAD_BUTTON_START);
+    SET_BUTTON(Guide, GLFW_GAMEPAD_BUTTON_GUIDE);
+    SET_BUTTON(LeftThumb, GLFW_GAMEPAD_BUTTON_LEFT_THUMB);
+    SET_BUTTON(RightThumb, GLFW_GAMEPAD_BUTTON_RIGHT_THUMB);
+    SET_BUTTON(Up, GLFW_GAMEPAD_BUTTON_DPAD_UP);
+    SET_BUTTON(Right, GLFW_GAMEPAD_BUTTON_DPAD_RIGHT);
+    SET_BUTTON(Down, GLFW_GAMEPAD_BUTTON_DPAD_DOWN);
+    SET_BUTTON(Left, GLFW_GAMEPAD_BUTTON_DPAD_LEFT);
+#undef SET_BUTTON
+
+#define SET_AXIS(cubos, glfw) state.axes[static_cast<int>(GamepadAxis::cubos)] = glfwState.axes[glfw];
+    SET_AXIS(LX, GLFW_GAMEPAD_AXIS_LEFT_X);
+    SET_AXIS(LY, GLFW_GAMEPAD_AXIS_LEFT_Y);
+    SET_AXIS(RX, GLFW_GAMEPAD_AXIS_RIGHT_X);
+    SET_AXIS(RY, GLFW_GAMEPAD_AXIS_RIGHT_Y);
+    SET_AXIS(LTrigger, GLFW_GAMEPAD_AXIS_LEFT_TRIGGER);
+    SET_AXIS(RTrigger, GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER);
+#undef SET_AXIS
+
+    return true;
+#else
+    UNSUPPORTED();
+#endif
+}
+
 #ifdef WITH_GLFW
 
 static void keyCallback(GLFWwindow* window, int key, int /*unused*/, int action, int mods)
@@ -346,6 +396,15 @@ static void charCallback(GLFWwindow* window, unsigned int codepoint)
 {
     auto* handler = (GLFWWindow*)glfwGetWindowUserPointer(window);
     handler->pushEvent(TextEvent{.codepoint = static_cast<char32_t>(codepoint)});
+}
+
+static void joystickCallback(int id, int event)
+{
+    CUBOS_ASSERT(currentWindow != nullptr);
+    currentWindow->pushEvent(GamepadConnectionEvent{
+        .gamepad = id,
+        .connected = event == GLFW_CONNECTED,
+    });
 }
 
 static void updateMods(GLFWWindow* handler, int glfwMods)

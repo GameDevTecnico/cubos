@@ -21,10 +21,10 @@ namespace cubos::core::io
         Guide,
         LeftThumb,
         RightThumb,
-        DPadUp,
-        DPadRight,
-        DPadDown,
-        DPadLeft,
+        Up,
+        Right,
+        Down,
+        Left,
 
         Count
     };
