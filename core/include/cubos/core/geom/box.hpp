@@ -23,13 +23,14 @@ namespace cubos::core::geom
             corners[1] = {halfSize.x, halfSize.y, halfSize.z};
         }
 
-        /// @brief Computes three corners of the box, one for each non-major diagonal.
+        /// @brief Computes four corners of the box, one for each diagonal.
         /// @param corners The array to store the three corners in.
-        void corners3(glm::vec3 corners[6]) const
+        void corners4(glm::vec3 corners[4]) const
         {
             corners[0] = {halfSize.x, -halfSize.y, -halfSize.z};
             corners[1] = {-halfSize.x, halfSize.y, -halfSize.z};
             corners[2] = {-halfSize.x, -halfSize.y, halfSize.z};
+            corners[3] = {halfSize.x, halfSize.y, halfSize.z};
         }
 
         /// @brief Computes the eight corners of the box, opposite corners are adjacent in the array.
