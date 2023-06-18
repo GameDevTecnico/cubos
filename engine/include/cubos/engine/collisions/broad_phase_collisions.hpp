@@ -18,6 +18,14 @@ namespace cubos::engine
     {
         using Candidate = std::pair<Entity, Entity>; ///< A pair of entities that may collide.
 
+        struct CandidateHash
+        {
+            std::size_t operator()(const Candidate& candidate) const
+            {
+                return std::hash<Entity>()(candidate.first) ^ std::hash<Entity>()(candidate.second);
+            }
+        };
+
         /// @brief Collision type for each pair of colliders.
         enum class CollisionType
         {
@@ -53,8 +61,8 @@ namespace cubos::engine
         /// Set of active entities during sweep for each axis.
         std::unordered_set<Entity> activePerAxis[3];
 
-        /// List of collision candidates for each collision type. The index of the vector is the collision type.
-        std::vector<std::vector<Candidate>> candidatesPerType{static_cast<std::size_t>(CollisionType::Count)};
+        /// Sets of collision candidates for each collision type. The index of the array is the collision type.
+        std::unordered_set<Candidate, CandidateHash> candidatesPerType[static_cast<std::size_t>(CollisionType::Count)];
 
         /// Adds an entity to the list of entities tracked by sweep and prune.
         /// @param entity The entity to add.
@@ -75,6 +83,9 @@ namespace cubos::engine
         /// @return The collision candidates for a specific collision type.
         /// @param resource The BroadPhaseCollisions resource.
         /// @param type The collision type.
-        const std::vector<Candidate>& getCandidates(CollisionType type);
+        const std::unordered_set<Candidate, CandidateHash>& candidates(CollisionType type) const;
+
+        /// Clears the list of collision candidates.
+        void clearCandidates();
     };
 } // namespace cubos::engine
