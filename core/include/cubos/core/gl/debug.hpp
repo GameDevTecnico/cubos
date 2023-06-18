@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 
+#include <cubos/core/geom/box.hpp>
 #include <cubos/core/gl/render_device.hpp>
 
 namespace cubos::core::gl
@@ -18,23 +19,19 @@ namespace cubos::core::gl
         /// Initialize the debug rendering system.
         static void init(RenderDevice& renderDevice);
 
-        /// Draw a filled cube that will stay visible for a specified amount of time.
-        /// @param center Position of the cube's center in world space.
-        /// @param size Size of the cube in the x, y and z dimensions in world space.
-        /// @param time How long should the cube be visible for?
-        /// @param rotation Rotation of the cube in world space.
+        /// Draw a filled box that will stay visible for a specified amount of time.
+        /// @param box Box to draw.
+        /// @param transform Transformation matrix to apply to the box.
         /// @param color Color of the drawn cube.
-        static void drawCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation = glm::quat(),
-                             glm::vec3 color = glm::vec3(1));
+        /// @param time How long should the cube be visible for?
+        static void drawBox(geom::Box box, glm::mat4 transform, glm::vec3 color = glm::vec3(1), float time = 0);
 
-        /// Draw a wireframe cube that will stay visible for a specified amount of time.
-        /// @param center Position of the cube's center in world space.
-        /// @param size Size of the cube in the x, y and z dimensions in world space.
-        /// @param time How long should the cube be visible for?
-        /// @param rotation Rotation of the cube in world space.
+        /// Draw a wireframe box that will stay visible for a specified amount of time.
+        /// @param box Box to draw.
+        /// @param transform Transformation matrix to apply to the box.
         /// @param color Color of the drawn cube.
-        static void drawWireCube(glm::vec3 center, glm::vec3 size, float time, glm::quat rotation = glm::quat(),
-                                 glm::vec3 color = glm::vec3(1));
+        /// @param time How long should the cube be visible for?
+        static void drawWireBox(geom::Box box, glm::mat4 transform, glm::vec3 color = glm::vec3(1), float time = 0);
 
         /// Draw a filled sphere that will stay visible for a specified amount of time.
         /// @param center Position of the sphere's center in world space.
