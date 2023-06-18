@@ -21,16 +21,16 @@ void Settings::clear()
     mValues.clear();
 }
 
-void Settings::setBool(const std::string& key, const bool& value)
+void Settings::setBool(const std::string& key, bool value)
 {
     mValues[key] = value ? "true" : "false";
 }
 
-bool Settings::getBool(const std::string& key, const bool& defaultValue) const
+bool Settings::getBool(const std::string& key, bool defaultValue)
 {
     if (!mValues.contains(key))
     {
-        return defaultValue;
+        mValues.insert({key, defaultValue ? "true" : "false"});
     }
 
     return mValues.at(key) == "true";
@@ -41,26 +41,26 @@ void Settings::setString(const std::string& key, const std::string& value)
     mValues[key] = value;
 }
 
-std::string Settings::getString(const std::string& key, const std::string& defaultValue) const
+std::string Settings::getString(const std::string& key, const std::string& defaultValue)
 {
     if (!mValues.contains(key))
     {
-        return defaultValue;
+        mValues.insert({key, defaultValue});
     }
 
     return mValues.at(key);
 }
 
-void Settings::setInteger(const std::string& key, const int value)
+void Settings::setInteger(const std::string& key, int value)
 {
     mValues[key] = std::to_string(value);
 }
 
-int Settings::getInteger(const std::string& key, const int defaultValue) const
+int Settings::getInteger(const std::string& key, int defaultValue)
 {
     if (!mValues.contains(key))
     {
-        return defaultValue;
+        mValues.insert({key, std::to_string(defaultValue)});
     }
 
     try
@@ -73,16 +73,16 @@ int Settings::getInteger(const std::string& key, const int defaultValue) const
     }
 }
 
-void Settings::setDouble(const std::string& key, const double value)
+void Settings::setDouble(const std::string& key, double value)
 {
     mValues[key] = std::to_string(value);
 }
 
-double Settings::getDouble(const std::string& key, const double defaultValue) const
+double Settings::getDouble(const std::string& key, double defaultValue)
 {
     if (!mValues.contains(key))
     {
-        return defaultValue;
+        mValues.insert({key, std::to_string(defaultValue)});
     }
 
     try

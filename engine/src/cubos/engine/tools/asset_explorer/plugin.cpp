@@ -8,6 +8,7 @@
 
 using cubos::core::ecs::EventWriter;
 using cubos::core::ecs::Read;
+using cubos::core::ecs::Write;
 
 using namespace cubos::engine;
 
@@ -105,7 +106,7 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
     return iter;
 }
 
-static void showAssets(Read<Assets> assets, Read<cubos::core::Settings> settings,
+static void showAssets(Read<Assets> assets, Write<cubos::core::Settings> settings,
                        EventWriter<tools::AssetSelectedEvent> events)
 {
     ImGui::Begin("Asset Explorer");

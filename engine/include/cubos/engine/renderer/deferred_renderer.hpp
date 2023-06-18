@@ -36,7 +36,7 @@ namespace cubos::engine
         /// @param renderDevice Render device to use.
         /// @param size Size of the window.
         /// @param settings Settings to use.
-        DeferredRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings);
+        DeferredRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, core::Settings& settings);
 
         // Implement interface methods.
 

@@ -27,17 +27,17 @@ namespace cubos::core
         ///
         /// @param key Key.
         /// @param value Value.
-        void setBool(const std::string& key, const bool& value);
+        void setBool(const std::string& key, bool value);
 
         /// @brief Retrieves the bool setting with the given @p key.
         ///
-        /// If no setting exists with such key, returns @p defaultValue.
+        /// If no setting exists with such key, sets it to @p defaultValue and returns it.
         /// If the setting exists but its value is not "true", returns false.
         ///
         /// @param key Key.
         /// @param defaultValue Default value.
         /// @return Current value.
-        bool getBool(const std::string& key, const bool& defaultValue) const;
+        bool getBool(const std::string& key, bool defaultValue);
 
         /// @brief Defines a new string setting.
         ///
@@ -49,12 +49,12 @@ namespace cubos::core
 
         /// @brief Retrieves the string setting with the given @p key.
         ///
-        /// If no setting exists with such key, returns @p defaultValue.
+        /// If no setting exists with such key, sets it to @p defaultValue and returns it.
         ///
         /// @param key Key.
         /// @param defaultValue Default value.
         /// @return Current value.
-        std::string getString(const std::string& key, const std::string& defaultValue) const;
+        std::string getString(const std::string& key, const std::string& defaultValue);
 
         /// @brief Defines a new integer setting.
         ///
@@ -67,13 +67,13 @@ namespace cubos::core
 
         /// @brief Retrieves the integer setting with the given @p key.
         ///
-        /// If no setting exists with such key, returns @p defaultValue.
+        /// If no setting exists with such key, sets it to @p defaultValue and returns it.
         /// If the setting exists but its value is not a valid integer, returns @p defaultValue.
         ///
         /// @param key Key.
         /// @param defaultValue Default value.
         /// @return Current value.
-        int getInteger(const std::string& key, int defaultValue) const;
+        int getInteger(const std::string& key, int defaultValue);
 
         /// @brief Defines a new double setting.
         ///
@@ -85,13 +85,13 @@ namespace cubos::core
 
         /// @brief Retrieves the double setting with the given @p key.
         ///
-        /// If no setting exists with such key, returns the default value.
+        /// If no setting exists with such key, sets it to @p defaultValue and returns it.
         /// If the setting exists but its value is not a valid double, returns the default value.
         ///
         /// @param key Key.
         /// @param defaultValue Default value.
         /// @return Current value.
-        double getDouble(const std::string& key, double defaultValue) const;
+        double getDouble(const std::string& key, double defaultValue);
 
         /// @brief Merges the settings from @p settingsToMerge.
         ///

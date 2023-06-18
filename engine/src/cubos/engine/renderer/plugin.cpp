@@ -24,7 +24,7 @@ using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 using namespace cubos::engine;
 
-static void init(Write<Renderer> renderer, Read<Window> window, Read<Settings> settings)
+static void init(Write<Renderer> renderer, Read<Window> window, Write<Settings> settings)
 {
     auto& renderDevice = (*window)->renderDevice();
     *renderer = std::make_shared<DeferredRenderer>(renderDevice, (*window)->framebufferSize(), *settings);
