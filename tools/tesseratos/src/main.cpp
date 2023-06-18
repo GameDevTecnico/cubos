@@ -5,6 +5,7 @@
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/tools/asset_explorer/plugin.hpp>
+#include <cubos/engine/tools/settings_inspector/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
 using namespace cubos::engine;
@@ -32,6 +33,7 @@ int main(int argc, char** argv)
     cubos.addPlugin(imguiPlugin);
     cubos.addPlugin(rendererPlugin);
     cubos.addPlugin(tools::assetExplorerPlugin);
+    cubos.addPlugin(tools::settingsInspectorPlugin);
 
     cubos.startupSystem(mockCamera).tagged("setup");
     cubos.startupSystem(mockSettings).tagged("setup");
