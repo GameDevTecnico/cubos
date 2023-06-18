@@ -18,6 +18,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/file_settings/plugin.cpp"
     "src/cubos/engine/imgui/plugin.cpp"
 
+    "src/cubos/engine/tools/asset_explorer/plugin.cpp"
     "src/cubos/engine/tools/settings_inspector/plugin.cpp"
     "src/cubos/engine/tools/entity_selector/plugin.cpp"
     "src/cubos/engine/tools/world_inspector/plugin.cpp"
@@ -62,6 +63,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/file_settings/plugin.hpp"
     "include/cubos/engine/imgui/plugin.hpp"
 
+    "include/cubos/engine/tools/asset_explorer/plugin.hpp"
     "include/cubos/engine/tools/settings_inspector/plugin.hpp"
     "include/cubos/engine/tools/entity_selector/plugin.hpp"
     "include/cubos/engine/tools/world_inspector/plugin.hpp"

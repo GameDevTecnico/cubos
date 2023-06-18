@@ -172,6 +172,10 @@ namespace cubos::engine
                                [](void* data) { delete static_cast<T*>(data); });
         }
 
+        /// Gets all assets that have been registered
+        /// @returns a vector with all registered assets.
+        std::vector<AnyAsset> listAll() const;
+
     private:
         /// Represents a known asset - may or may not be loaded.
         struct Entry
