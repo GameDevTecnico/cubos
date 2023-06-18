@@ -7,6 +7,7 @@
 
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serializer.hpp>
+#include <cubos/core/geom/box.hpp>
 #include <cubos/core/log.hpp>
 
 namespace cubos::engine
@@ -17,6 +18,19 @@ namespace cubos::engine
         /// The diagonal of the AABB.
         glm::vec3 min = glm::vec3{-INFINITY};
         glm::vec3 max = glm::vec3{INFINITY};
+
+        /// @return The Box representation of the AABB.
+        core::geom::Box box() const
+        {
+            auto size = max - min;
+            return core::geom::Box{size / 2.0F};
+        }
+
+        /// @return The center of the AABB.
+        glm::vec3 center() const
+        {
+            return (min + max) / 2.0F;
+        }
 
         /// @return Whether the AABB overlaps with another AABB on the X axis.
         /// @param other The other AABB.
