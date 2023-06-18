@@ -13,22 +13,23 @@ using namespace cubos::engine;
 static void inspector(Write<Settings> settings)
 {
     ImGui::Begin("Settings Inspector");
-
-    auto& map = settings->getValues();
-    if (map.empty())
+    if (!ImGui::IsWindowCollapsed())
     {
-        ImGui::Text("No settings found.");
-    }
-    else
-    {
-        ImGui::BeginTable("split", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
-        for (auto& setting : map)
+        auto& map = settings->getValues();
+        if (map.empty())
         {
-            cubos::core::ui::edit(setting.second, setting.first);
+            ImGui::Text("No settings found.");
         }
-        ImGui::EndTable();
+        else
+        {
+            ImGui::BeginTable("split", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
+            for (auto& setting : map)
+            {
+                cubos::core::ui::edit(setting.second, setting.first);
+            }
+            ImGui::EndTable();
+        }
     }
-
     ImGui::End();
 }
 
