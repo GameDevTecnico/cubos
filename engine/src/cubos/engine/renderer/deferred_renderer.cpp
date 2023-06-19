@@ -654,7 +654,6 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
         lightData.spotLights[lightData.numSpotLights].intensity = light.intensity;
         lightData.spotLights[lightData.numSpotLights].range = light.range;
         lightData.spotLights[lightData.numSpotLights].spotCutoff = glm::cos(light.spotAngle);
-        lightData.spotLights[lightData.numSpotLights].spotCutoff = glm::cos(light.innerSpotAngle);
         lightData.numSpotLights += 1;
     }
 

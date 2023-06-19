@@ -71,7 +71,6 @@ static void frameSpotLights(Write<RendererFrame> frame, Query<Read<SpotLight>, R
             light->intensity,
             light->range,
             light->spotAngle,
-            light->innerSpotAngle,
         });
     }
 }
