@@ -20,10 +20,9 @@ namespace cubos::core::gl
         float intensity;
         float range;
         float spotAngle;
-        float innerSpotAngle;
 
         SpotLight(const glm::vec3& position, const glm::quat& rotation, const glm::vec3& color, float intensity,
-                  float range, float spotAngle, float innerSpotAngle);
+                  float range, float spotAngle);
     };
 
     /// @brief Describes a directional light.

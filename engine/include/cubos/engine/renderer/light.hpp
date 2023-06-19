@@ -27,7 +27,6 @@ namespace cubos::engine
         float intensity;
         float range;
         float spotAngle;
-        float innerSpotAngle;
     };
 
     /// @brief Component which makes an entity behave like a directional light.
