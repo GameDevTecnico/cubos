@@ -250,6 +250,10 @@ void Input::handle(const Window&, const GamepadConnectionEvent& event)
         {
             this->gamepad(0, event.gamepad);
         }
+        else if (!mPlayerGamepads.contains(1))
+        {
+            this->gamepad(1, event.gamepad);
+        }
         CUBOS_DEBUG("Gamepad {} connected", event.gamepad);
     }
     else
