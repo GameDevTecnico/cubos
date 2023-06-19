@@ -4,6 +4,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtx/transform.hpp>
 
 #include <cubos/core/gl/debug.hpp>
@@ -191,6 +192,20 @@ void Debug::init(RenderDevice& renderDevice)
     fillRasterState = renderDevice.createRasterState(rsDesc);
     rsDesc.rasterMode = RasterMode::Wireframe;
     wireframeRasterState = renderDevice.createRasterState(rsDesc);
+}
+
+void Debug::drawLine(glm::vec3 start, glm::vec3 end, bool relative, glm::vec3 color, float time)
+{
+    if (!relative)
+        end -= start;
+
+    debugDrawMutex.lock();
+    requests.push_back(DebugDrawRequest{objCube, fillRasterState,
+                                        glm::translate(start) * glm::orientation(glm::vec3(0.0F, 0.0F, 1.0F), end) *
+                                            glm::translate(glm::vec3(0.0F, 0.0F, glm::length(end) / 2.0F)) *
+                                            glm::scale(glm::vec3(0.1F, 0.1F, glm::length(end))),
+                                        time, color});
+    debugDrawMutex.unlock();
 }
 
 void Debug::drawBox(geom::Box box, glm::mat4 transform, glm::vec3 color, float time)
