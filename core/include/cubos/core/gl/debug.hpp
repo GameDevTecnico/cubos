@@ -25,6 +25,15 @@ namespace cubos::core::gl
         /// @param renderDevice Render device to use.
         static void init(RenderDevice& renderDevice);
 
+        /// @brief Draws a line that will stay visible for a specified amount of time.
+        /// @param start Starting point of the line.
+        /// @param end Ending point of the line.
+        /// @param relative Whether the ending point is relative to the starting point.
+        /// @param color Color of the drawn line.
+        /// @param time How long will it be visible for? If 0, for a single frame.
+        static void drawLine(glm::vec3 start, glm::vec3 end, bool relative = false, glm::vec3 color = glm::vec3(1),
+                             float time = 0);
+
         /// @brief Draws a filled box that will stay visible for a specified amount of time.
         /// @param box Box to draw.
         /// @param transform Transformation matrix to apply to the box.
