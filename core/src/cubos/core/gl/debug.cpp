@@ -196,15 +196,12 @@ void Debug::init(RenderDevice& renderDevice)
 
 void Debug::drawLine(glm::vec3 start, glm::vec3 end, bool relative, glm::vec3 color, float time)
 {
-    if (!relative)
-        end -= start;
-
+    auto vec = relative ? end : end - start;
+    auto transform = glm::translate(start) * glm::translate(vec / 2.0F) *
+                     glm::orientation(glm::normalize(vec), glm::vec3{0.0F, 1.0F, 0.0F}) *
+                     glm::scale(glm::vec3{0.1F, glm::length(vec), 0.1F});
     debugDrawMutex.lock();
-    requests.push_back(DebugDrawRequest{objCube, fillRasterState,
-                                        glm::translate(start) * glm::orientation(glm::vec3(0.0F, 0.0F, 1.0F), end) *
-                                            glm::translate(glm::vec3(0.0F, 0.0F, glm::length(end) / 2.0F)) *
-                                            glm::scale(glm::vec3(0.1F, 0.1F, glm::length(end))),
-                                        time, color});
+    requests.push_back(DebugDrawRequest{objCube, fillRasterState, transform, time, color});
     debugDrawMutex.unlock();
 }
 
