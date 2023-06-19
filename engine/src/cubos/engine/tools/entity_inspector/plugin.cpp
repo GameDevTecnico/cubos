@@ -11,7 +11,7 @@ using cubos::core::data::SerializationMap;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
 using cubos::core::ecs::Write;
-using cubos::core::ui::showPackage;
+using cubos::core::ui::editPackage;
 using namespace cubos::engine;
 
 static void inspectEntity(Write<World> world)
@@ -26,7 +26,10 @@ static void inspectEntity(Write<World> world)
         if (!selection.isNull())
         {
             auto pkg = world->pack(selection);
-            showPackage(pkg, std::to_string(selection.index));
+            if (editPackage(pkg, std::to_string(selection.index)))
+            {
+                world->unpack(selection, pkg);
+            }
         }
         ImGui::EndTable();
     }
