@@ -34,7 +34,11 @@ int main()
                   glm::lookAt(glm::vec3{3 * sinf((float)t), 3, 3 * cosf((float)t)}, glm::vec3{0.0F, 0.0F, 0.0F},
                               glm::vec3{0.0F, 1.0F, 0.0F});
 
-        gl::Debug::drawWireBox(geom::Box{}, glm::mat4{1.0});
+        // Gizmo
+        gl::Debug::drawLine(glm::vec3{0.0F}, glm::vec3{1.0F, 0.0F, 0.0F}, true, glm::vec3{1.0F, 0.0F, 0.0F});
+        gl::Debug::drawLine(glm::vec3{0.0F}, glm::vec3{0.0F, 1.0F, 0.0F}, true, glm::vec3{0.0F, 1.0F, 0.0F});
+        gl::Debug::drawLine(glm::vec3{0.0F}, glm::vec3{0.0F, 0.0F, 1.0F}, true, glm::vec3{0.0F, 0.0F, 1.0F});
+
         gl::Debug::flush(vp, deltaT);
         window->swapBuffers();
         while (auto event = window->pollEvent())
