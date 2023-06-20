@@ -44,7 +44,7 @@ static void testVec(glm::vec<L, T, Q>, const char* name)
     for (glm::length_t i = 0; i < L; ++i)
     {
         Vec vec{};
-        to.fields()[i]->template get<T>(&vec) = static_cast<T>(1);
+        to.fields()[static_cast<std::size_t>(i)]->template get<T>(&vec) = static_cast<T>(1);
         CHECK(vec[i] == static_cast<T>(1));
     }
 }
@@ -64,8 +64,8 @@ static void testMat(glm::mat<C, R, T, Q>, const char* name)
         for (glm::length_t r = 0; r < R; ++r)
         {
             std::string expected = std::to_string(c) + std::to_string(r);
-            CHECK(to.fields()[c * R + r]->name() == expected);
-            REQUIRE(to.fields()[c * R + r]->type().template is<T>());
+            CHECK(to.fields()[static_cast<std::size_t>(c * R + r)]->name() == expected);
+            REQUIRE(to.fields()[static_cast<std::size_t>(c * R + r)]->type().template is<T>());
         }
     }
 
@@ -75,7 +75,7 @@ static void testMat(glm::mat<C, R, T, Q>, const char* name)
         for (glm::length_t r = 0; r < R; ++r)
         {
             Mat mat{};
-            to.fields()[c * R + r]->template get<T>(&mat) = static_cast<T>(1);
+            to.fields()[static_cast<std::size_t>(c * R + r)]->template get<T>(&mat) = static_cast<T>(1);
             CHECK(mat[c][r] == static_cast<T>(1));
         }
     }
@@ -106,7 +106,7 @@ static void testQuat(glm::qua<T, Q>, const char* name)
     for (glm::length_t i = 0; i < 4; ++i)
     {
         Quat qua{};
-        to.fields()[i]->template get<T>(&qua) = static_cast<T>(1);
+        to.fields()[static_cast<std::size_t>(i)]->template get<T>(&qua) = static_cast<T>(1);
         CHECK(qua[i] == static_cast<T>(1));
     }
 }
