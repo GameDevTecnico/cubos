@@ -56,6 +56,10 @@ TEST_CASE("reflection::reflect<std::unordered_map>()")
         // Removing a non-existing key returns false.
         CHECK(t.remove<int32_t>(&map, 1) == false);
         CHECK(t.length(&map) == 2);
+
+        // Clearing the map removes all elements.
+        t.clear(&map);
+        CHECK(t.length(&map) == 0);
     }
 
     SUBCASE("iterate over an unordered map")

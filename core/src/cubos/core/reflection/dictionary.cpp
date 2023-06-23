@@ -86,6 +86,12 @@ DictionaryType::Builder& DictionaryType::Builder::remove(Remove remove)
     return *this;
 }
 
+DictionaryType::Builder& DictionaryType::Builder::clear(Clear clear)
+{
+    mType.mClear = clear;
+    return *this;
+}
+
 DictionaryType::Builder& DictionaryType::Builder::iteratorNew(IteratorNew iteratorNew)
 {
     mType.mIteratorNew = iteratorNew;
@@ -151,6 +157,11 @@ DictionaryType::Remove DictionaryType::remove() const
     return mRemove;
 }
 
+DictionaryType::Clear DictionaryType::clear() const
+{
+    return mClear;
+}
+
 bool DictionaryType::hasIterator() const
 {
     return mIteratorNew != nullptr && mIteratorKey != nullptr && mIteratorValue != nullptr &&
@@ -201,6 +212,12 @@ bool DictionaryType::remove(void* dictionary, const void* key) const
 {
     CUBOS_ASSERT(mRemove, "No remove function set");
     return mRemove(dictionary, key);
+}
+
+void DictionaryType::clear(void* dictionary) const
+{
+    CUBOS_ASSERT(mClear, "No clear function set");
+    mClear(dictionary);
 }
 
 DictionaryType::Iterator DictionaryType::iterator(const void* dictionary) const
