@@ -37,6 +37,7 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::unordered_map<K,
             auto& map = *static_cast<std::unordered_map<K, V>*>(dictionary);
             return map.erase(*static_cast<const K*>(key)) == 1;
         })
+        .clear([](void* dictionary) { static_cast<std::unordered_map<K, V>*>(dictionary)->clear(); })
         .iteratorNew([](const void* dictionary) -> void* {
             auto& map = *static_cast<std::unordered_map<K, V>*>(const_cast<void*>(dictionary));
             if (map.empty())

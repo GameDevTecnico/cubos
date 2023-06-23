@@ -28,6 +28,9 @@ namespace cubos::core::reflection
         /// if the value was removed, and `false` if the key did not exist.
         using Remove = bool (*)(void*, const void*);
 
+        /// @brief Function type for clearing the dictionary.
+        using Clear = void (*)(void*);
+
         /// @brief Function type for creating an iterator for the dictionary. Returns `nullptr`
         /// if the dictionary is empty.
         using IteratorNew = void* (*)(const void*);
@@ -142,6 +145,10 @@ namespace cubos::core::reflection
             /// @param remove Remove function.
             Builder& remove(Remove remove);
 
+            /// @brief Sets the clear function.
+            /// @param clear Clear function.
+            Builder& clear(Clear clear);
+
             /// @brief Sets the iterator creation function.
             /// @param iterator Iterator creation function.
             Builder& iteratorNew(IteratorNew iterator);
@@ -197,6 +204,10 @@ namespace cubos::core::reflection
         /// @brief Gets the remove function, or `nullptr` if not set.
         /// @return Remove function.
         Remove remove() const;
+
+        /// @brief Gets the clear function, or `nullptr` if not set.
+        /// @return Clear function.
+        Clear clear() const;
 
         /// @brief Checks if the type supports iteration.
         /// @return `true` if the type supports iteration, `false` otherwise.
@@ -292,6 +303,12 @@ namespace cubos::core::reflection
             return this->remove(dictionary, static_cast<const void*>(&key));
         }
 
+        /// @brief Clears the dictionary.
+        /// Aborts if the clear function is not set. The given dictionary must be a valid instance
+        /// of this type, otherwise, undefined behavior occurs.
+        /// @param dictionary Pointer to the dictionary.
+        void clear(void* dictionary) const;
+
         /// @brief Creates an iterator for the given dictionary.
         /// Aborts if hasIterator() returns `false`. The given dictionary must be a valid instance
         /// of this type, otherwise, undefined behavior occurs.
@@ -310,6 +327,7 @@ namespace cubos::core::reflection
         Value mValue;
         Insert mInsert;
         Remove mRemove;
+        Clear mClear;
         IteratorNew mIteratorNew;
         IteratorKey mIteratorKey;
         IteratorValue mIteratorValue;
