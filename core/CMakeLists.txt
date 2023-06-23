@@ -39,6 +39,11 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/reflection/external/string.cpp"
     "src/cubos/core/reflection/external/glm.cpp"
 
+    "src/cubos/core/data/ser/serializer.cpp"
+    "src/cubos/core/data/ser/debug.cpp"
+
+    "src/cubos/core/data/des/deserializer.cpp"
+
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/standard_stream.cpp"
     "src/cubos/core/memory/buffer_stream.cpp"
@@ -114,6 +119,11 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/reflection/external/vector.hpp"
     "include/cubos/core/reflection/external/unordered_map.hpp"
     "include/cubos/core/reflection/external/glm.hpp"
+
+    "include/cubos/core/data/ser/serializer.hpp"
+    "include/cubos/core/data/ser/debug.hpp"
+
+    "include/cubos/core/data/des/deserializer.hpp"
 
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/standard_stream.hpp"
