@@ -9,19 +9,19 @@ bool Deserializer::read(const reflection::Type& type, void* data)
     {
         return hook->second(data);
     }
-    else
+
+    // Visit the type to call the appropriate read* function.
+    auto prevInstance = mInstance;
+    mInstance = data;
+    type.accept(*this);
+    if (mInstance == nullptr)
     {
-        // Visit the type to call the appropriate read* function.
-        auto prevInstance = mInstance;
-        mInstance = data;
-        type.accept(*this);
-        if (mInstance == nullptr)
-        {
-            CUBOS_ERROR("Failed to deserialize data of type '{}'", type.name());
-            return false;
-        }
-        mInstance = prevInstance;
+        CUBOS_ERROR("Failed to deserialize data of type '{}'", type.name());
+        return false;
     }
+    mInstance = prevInstance;
+
+    return true;
 }
 
 void Deserializer::visit(const reflection::PrimitiveType& type)
