@@ -7,7 +7,7 @@
 #include <cubos/core/data/serializer.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Used to wrap a value to be printed using the debug serializer.
     /// Can be pretty-printed using the `p` option. Types can be printed using the `t` option.
@@ -89,13 +89,13 @@ namespace cubos::core::data
         bool mPretty;             ///< Whether to pretty-print the output.
         bool mTypeNames;          ///< Whether to print the type names.
     };
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data
 
 // Add a formatter for Debug<T>.
 
 /// @cond
 template <typename T>
-struct fmt::formatter<cubos::core::data::Debug<T>> : formatter<string_view>
+struct fmt::formatter<cubos::core::old::data::Debug<T>> : formatter<string_view>
 {
     bool pretty = false; ///< Whether to pretty print the data.
     bool types = false;  ///< Whether to print the type name.
@@ -128,10 +128,10 @@ struct fmt::formatter<cubos::core::data::Debug<T>> : formatter<string_view>
     }
 
     template <typename FormatContext>
-    inline auto format(const cubos::core::data::Debug<T>& dbg, FormatContext& ctx) -> decltype(ctx.out())
+    inline auto format(const cubos::core::old::data::Debug<T>& dbg, FormatContext& ctx) -> decltype(ctx.out())
     {
         auto stream = cubos::core::memory::BufferStream(32);
-        cubos::core::data::DebugSerializer serializer(stream, this->pretty, this->types);
+        cubos::core::old::data::DebugSerializer serializer(stream, this->pretty, this->types);
         serializer.write(dbg.value, nullptr);
         stream.put('\0');
         // Skip the '?: ' prefix.

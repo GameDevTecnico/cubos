@@ -24,7 +24,7 @@ namespace cubos::core::gl
     void triangulate(const Grid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
 } // namespace cubos::core::gl
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Serializes a voxel vertex.
     /// @param serializer The serializer to use.
@@ -36,4 +36,4 @@ namespace cubos::core::data
     /// @param deserializer The deserializer to use.
     /// @param vertex The vertex to deserialize.
     void deserialize(Deserializer& deserializer, gl::Vertex& vertex);
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data

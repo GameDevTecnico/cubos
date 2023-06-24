@@ -15,7 +15,7 @@ float Material::similarity(const Material& other) const
     return colorSimilarity(this->color, other.color);
 }
 
-void cubos::core::data::serialize(Serializer& serializer, const Material& mat, const char* name)
+void cubos::core::old::data::serialize(Serializer& serializer, const Material& mat, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(mat.color.r, "r");
@@ -25,7 +25,7 @@ void cubos::core::data::serialize(Serializer& serializer, const Material& mat, c
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, Material& mat)
+void cubos::core::old::data::deserialize(Deserializer& deserializer, Material& mat)
 {
     deserializer.beginObject();
     deserializer.read(mat.color.r);

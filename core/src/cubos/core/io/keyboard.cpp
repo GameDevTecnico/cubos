@@ -2,8 +2,8 @@
 #include <cubos/core/data/serializer.hpp>
 #include <cubos/core/io/keyboard.hpp>
 
-using cubos::core::data::Deserializer;
-using cubos::core::data::Serializer;
+using cubos::core::old::data::Deserializer;
+using cubos::core::old::data::Serializer;
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;
 using namespace cubos::core;
@@ -25,7 +25,7 @@ std::string io::modifiersToString(Modifiers modifiers)
 }
 
 template <>
-void data::serialize<Modifiers>(Serializer& ser, const Modifiers& obj, const char* name)
+void old::data::serialize<Modifiers>(Serializer& ser, const Modifiers& obj, const char* name)
 {
     ser.write(io::modifiersToString(obj), name);
 }
@@ -47,7 +47,7 @@ Modifiers io::stringToModifiers(const std::string& str)
 }
 
 template <>
-void data::deserialize<Modifiers>(Deserializer& des, Modifiers& obj)
+void old::data::deserialize<Modifiers>(Deserializer& des, Modifiers& obj)
 {
     std::string str;
     des.read(str);
@@ -166,7 +166,7 @@ std::string io::keyToString(Key key)
 }
 
 template <>
-void data::serialize<Key>(Serializer& ser, const Key& obj, const char* name)
+void old::data::serialize<Key>(Serializer& ser, const Key& obj, const char* name)
 {
     ser.write(io::keyToString(obj), name);
 }
@@ -281,7 +281,7 @@ Key io::stringToKey(const std::string& str)
 }
 
 template <>
-void data::deserialize<Key>(Deserializer& des, Key& obj)
+void old::data::deserialize<Key>(Deserializer& des, Key& obj)
 {
     std::string str;
     des.read(str);

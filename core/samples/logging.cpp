@@ -5,7 +5,7 @@
 #include <cubos/core/memory/buffer_stream.hpp>
 
 using namespace cubos::core;
-using data::Debug;
+using old::data::Debug;
 
 int main()
 {

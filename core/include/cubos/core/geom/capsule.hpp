@@ -30,7 +30,7 @@ namespace cubos::core::geom
     };
 } // namespace cubos::core::geom
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Serializes a capsule.
     /// @param ser The serializer to use.
@@ -54,4 +54,4 @@ namespace cubos::core::data
         des.read(capsule.length);
         des.endObject();
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data

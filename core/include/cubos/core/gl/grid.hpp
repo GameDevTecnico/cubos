@@ -13,7 +13,7 @@ namespace cubos::core::gl
     class Grid;
 } // namespace cubos::core::gl
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Serializes a voxel grid.
     /// @param serializer The serializer to use.
@@ -25,7 +25,7 @@ namespace cubos::core::data
     /// @param deserializer The deserializer to use.
     /// @param grid The voxel grid to deserialize.
     void deserialize(Deserializer& deserializer, gl::Grid& grid);
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data
 
 namespace cubos::core::gl
 {
@@ -78,8 +78,8 @@ namespace cubos::core::gl
         bool convert(const Palette& src, const Palette& dst, float minSimilarity);
 
     private:
-        friend void data::serialize(data::Serializer& /*serializer*/, const Grid& /*grid*/, const char* /*name*/);
-        friend void data::deserialize(data::Deserializer& /*deserializer*/, Grid& /*grid*/);
+        friend void old::data::serialize(old::data::Serializer& /*serializer*/, const Grid& /*grid*/, const char* /*name*/);
+        friend void old::data::deserialize(old::data::Deserializer& /*deserializer*/, Grid& /*grid*/);
 
         glm::uvec3 mSize;               ///< The size of the grid.
         std::vector<uint16_t> mIndices; ///< The indices of the grid.

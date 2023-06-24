@@ -7,11 +7,11 @@
 using namespace cubos::core;
 using namespace cubos::core::ui;
 
-using Type = data::Package::Type;
+using Type = old::data::Package::Type;
 
 // Converts a scalar (must not be an Object, Array or Dictionary) value to a
 // string.
-static std::string valueToString(const data::Package& pkg)
+static std::string valueToString(const old::data::Package& pkg)
 {
     switch (pkg.type())
     {
@@ -47,9 +47,9 @@ static std::string valueToString(const data::Package& pkg)
     }
 }
 
-static void showInternal(const data::Package& pkg, const std::string& name);
+static void showInternal(const old::data::Package& pkg, const std::string& name);
 
-static void showScalar(const data::Package& pkg, const std::string& name)
+static void showScalar(const old::data::Package& pkg, const std::string& name)
 {
     ImGui::TableSetColumnIndex(0);
     ImGui::AlignTextToFramePadding();
@@ -103,7 +103,7 @@ static void showScalar(const data::Package& pkg, const std::string& name)
     }
 }
 
-static void showStructured(const data::Package& pkg, const std::string& name)
+static void showStructured(const old::data::Package& pkg, const std::string& name)
 {
     const char* elements;
     switch (pkg.type())
@@ -153,20 +153,20 @@ static void showStructured(const data::Package& pkg, const std::string& name)
     }
 }
 
-static void showInternal(const data::Package& pkg, const std::string& name)
+static void showInternal(const old::data::Package& pkg, const std::string& name)
 {
     pkg.isStructured() ? showStructured(pkg, name) : showScalar(pkg, name);
 }
 
-void cubos::core::ui::showPackage(const data::Package& pkg, const std::string& name)
+void cubos::core::ui::showPackage(const old::data::Package& pkg, const std::string& name)
 {
     ImGui::TableNextRow();
     showInternal(pkg, name);
 }
 
-static bool editInternal(data::Package& pkg, const std::string& name);
+static bool editInternal(old::data::Package& pkg, const std::string& name);
 
-static bool pickScalar(data::Package& pkg, const std::string& name)
+static bool pickScalar(old::data::Package& pkg, const std::string& name)
 {
     switch (pkg.type())
     {
@@ -290,7 +290,7 @@ static bool pickScalar(data::Package& pkg, const std::string& name)
     return false;
 }
 
-static bool editScalar(data::Package& pkg, const std::string& name)
+static bool editScalar(old::data::Package& pkg, const std::string& name)
 {
     ImGui::TableSetColumnIndex(0);
     ImGui::AlignTextToFramePadding();
@@ -303,7 +303,7 @@ static bool editScalar(data::Package& pkg, const std::string& name)
     return ret;
 }
 
-static bool editStructured(data::Package& pkg, const std::string& name)
+static bool editStructured(old::data::Package& pkg, const std::string& name)
 {
     bool changed = false;
 
@@ -408,12 +408,12 @@ static bool editStructured(data::Package& pkg, const std::string& name)
     return changed;
 }
 
-static bool editInternal(data::Package& pkg, const std::string& name)
+static bool editInternal(old::data::Package& pkg, const std::string& name)
 {
     return pkg.isStructured() ? editStructured(pkg, name) : editScalar(pkg, name);
 }
 
-bool cubos::core::ui::editPackage(data::Package& pkg, const std::string& name)
+bool cubos::core::ui::editPackage(old::data::Package& pkg, const std::string& name)
 {
     ImGui::TableNextRow();
     return editInternal(pkg, name);

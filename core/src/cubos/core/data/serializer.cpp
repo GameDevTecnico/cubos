@@ -7,7 +7,7 @@
 
 #include <cubos/core/data/serializer.hpp>
 
-using namespace cubos::core::data;
+using namespace cubos::core::old::data;
 
 Serializer::Serializer()
 {
@@ -27,84 +27,84 @@ bool Serializer::failed() const
 // Implementation of serialize() for primitive types.
 
 template <>
-void cubos::core::data::serialize<int8_t>(Serializer& ser, const int8_t& obj, const char* name)
+void cubos::core::old::data::serialize<int8_t>(Serializer& ser, const int8_t& obj, const char* name)
 {
     ser.writeI8(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<int16_t>(Serializer& ser, const int16_t& obj, const char* name)
+void cubos::core::old::data::serialize<int16_t>(Serializer& ser, const int16_t& obj, const char* name)
 {
     ser.writeI16(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<int32_t>(Serializer& ser, const int32_t& obj, const char* name)
+void cubos::core::old::data::serialize<int32_t>(Serializer& ser, const int32_t& obj, const char* name)
 {
     ser.writeI32(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<int64_t>(Serializer& ser, const int64_t& obj, const char* name)
+void cubos::core::old::data::serialize<int64_t>(Serializer& ser, const int64_t& obj, const char* name)
 {
     ser.writeI64(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<uint8_t>(Serializer& ser, const uint8_t& obj, const char* name)
+void cubos::core::old::data::serialize<uint8_t>(Serializer& ser, const uint8_t& obj, const char* name)
 {
     ser.writeU8(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<uint16_t>(Serializer& ser, const uint16_t& obj, const char* name)
+void cubos::core::old::data::serialize<uint16_t>(Serializer& ser, const uint16_t& obj, const char* name)
 {
     ser.writeU16(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<uint32_t>(Serializer& ser, const uint32_t& obj, const char* name)
+void cubos::core::old::data::serialize<uint32_t>(Serializer& ser, const uint32_t& obj, const char* name)
 {
     ser.writeU32(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<uint64_t>(Serializer& ser, const uint64_t& obj, const char* name)
+void cubos::core::old::data::serialize<uint64_t>(Serializer& ser, const uint64_t& obj, const char* name)
 {
     ser.writeU64(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<float>(Serializer& ser, const float& obj, const char* name)
+void cubos::core::old::data::serialize<float>(Serializer& ser, const float& obj, const char* name)
 {
     ser.writeF32(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<double>(Serializer& ser, const double& obj, const char* name)
+void cubos::core::old::data::serialize<double>(Serializer& ser, const double& obj, const char* name)
 {
     ser.writeF64(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<bool>(Serializer& ser, const bool& obj, const char* name)
+void cubos::core::old::data::serialize<bool>(Serializer& ser, const bool& obj, const char* name)
 {
     ser.writeBool(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<const char*>(Serializer& ser, const char* const& obj, const char* name)
+void cubos::core::old::data::serialize<const char*>(Serializer& ser, const char* const& obj, const char* name)
 {
     ser.writeString(obj, name);
 }
 
 template <>
-void cubos::core::data::serialize<std::string>(Serializer& ser, const std::string& obj, const char* name)
+void cubos::core::old::data::serialize<std::string>(Serializer& ser, const std::string& obj, const char* name)
 {
     ser.writeString(obj.c_str(), name);
 }
 
-void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_reference val, const char* name)
+void cubos::core::old::data::serialize(Serializer& ser, std::vector<bool>::const_reference val, const char* name)
 {
     ser.writeBool(val, name);
 }
@@ -114,7 +114,7 @@ void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_refe
 // NOLINTBEGIN(bugprone-macro-parentheses)
 #define IMPL_SERIALIZE_GLM(T)                                                                                          \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tvec2<T>>(Serializer & ser, const glm::tvec2<T>& obj, const char* name)     \
+    void cubos::core::old::data::serialize<glm::tvec2<T>>(Serializer & ser, const glm::tvec2<T>& obj, const char* name)     \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
         ser.write(obj.x, "x");                                                                                         \
@@ -123,7 +123,7 @@ void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_refe
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tvec3<T>>(Serializer & ser, const glm::tvec3<T>& obj, const char* name)     \
+    void cubos::core::old::data::serialize<glm::tvec3<T>>(Serializer & ser, const glm::tvec3<T>& obj, const char* name)     \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
         ser.write(obj.x, "x");                                                                                         \
@@ -133,7 +133,7 @@ void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_refe
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tvec4<T>>(Serializer & ser, const glm::tvec4<T>& obj, const char* name)     \
+    void cubos::core::old::data::serialize<glm::tvec4<T>>(Serializer & ser, const glm::tvec4<T>& obj, const char* name)     \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
         ser.write(obj.x, "x");                                                                                         \
@@ -144,7 +144,7 @@ void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_refe
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tquat<T>>(Serializer & ser, const glm::tquat<T>& obj, const char* name)     \
+    void cubos::core::old::data::serialize<glm::tquat<T>>(Serializer & ser, const glm::tquat<T>& obj, const char* name)     \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
         ser.write(obj.w, "w");                                                                                         \
@@ -155,7 +155,7 @@ void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_refe
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::serialize<glm::tmat4x4<T>>(Serializer & ser, const glm::tmat4x4<T>& obj, const char* name) \
+    void cubos::core::old::data::serialize<glm::tmat4x4<T>>(Serializer & ser, const glm::tmat4x4<T>& obj, const char* name) \
     {                                                                                                                  \
         ser.beginObject(name);                                                                                         \
         ser.write(obj[0], "0");                                                                                        \

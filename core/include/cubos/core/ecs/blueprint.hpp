@@ -37,7 +37,7 @@ namespace cubos::core::ecs
         /// @param entity The entity to add the component to.
         /// @param name The name of the component type.
         /// @param deserializer The deserializer to deserialize from.
-        bool addFromDeserializer(Entity entity, const std::string& name, data::Deserializer& deserializer);
+        bool addFromDeserializer(Entity entity, const std::string& name, old::data::Deserializer& deserializer);
 
         /// Returns an entity from its name.
         /// @param name The name of the entity.
@@ -69,13 +69,13 @@ namespace cubos::core::ecs
             /// Adds all of the components stored in the buffer to the specified commands object.
             /// @param commands The commands object to add the components to.
             /// @param context The context to use when deserializing the components.
-            virtual void addAll(CommandBuffer& commands, data::Context& context) = 0;
+            virtual void addAll(CommandBuffer& commands, old::data::Context& context) = 0;
 
             /// Merges the data of another buffer of the same type into this one.
             /// @param other The buffer to merge from.
             /// @param src The context to use when serializing the components from the other buffer.
             /// @param dst The context to use when deserializing the components to this buffer.
-            virtual void merge(IBuffer* other, const std::string& prefix, data::Context& src, data::Context& dst) = 0;
+            virtual void merge(IBuffer* other, const std::string& prefix, old::data::Context& src, old::data::Context& dst) = 0;
 
             /// Creates a new buffer of the same type as this one.
             virtual IBuffer* create() = 0;
@@ -87,15 +87,15 @@ namespace cubos::core::ecs
         struct Buffer : IBuffer
         {
             // Interface methods implementation.
-            inline void addAll(CommandBuffer& commands, data::Context& context) override
+            inline void addAll(CommandBuffer& commands, old::data::Context& context) override
             {
                 this->mutex.lock();
                 auto pos = this->stream.tell();
                 this->stream.seek(0, memory::SeekOrigin::Begin);
-                auto des = data::BinaryDeserializer(this->stream);
+                auto des = old::data::BinaryDeserializer(this->stream);
                 des.context().pushSubContext(context);
 
-                auto& map = des.context().get<data::SerializationMap<Entity, std::string>>();
+                auto& map = des.context().get<old::data::SerializationMap<Entity, std::string>>();
                 for (const auto& name : this->names)
                 {
                     ComponentType type;
@@ -112,16 +112,16 @@ namespace cubos::core::ecs
                 }
             }
 
-            inline void merge(IBuffer* other, const std::string& prefix, data::Context& src,
-                              data::Context& dst) override
+            inline void merge(IBuffer* other, const std::string& prefix, old::data::Context& src,
+                              old::data::Context& dst) override
             {
                 auto buffer = static_cast<Buffer<ComponentType>*>(other);
 
                 buffer->mutex.lock();
                 auto pos = buffer->stream.tell();
                 buffer->stream.seek(0, memory::SeekOrigin::Begin);
-                auto ser = data::BinarySerializer(this->stream);
-                auto des = data::BinaryDeserializer(buffer->stream);
+                auto ser = old::data::BinarySerializer(this->stream);
+                auto des = old::data::BinaryDeserializer(buffer->stream);
                 ser.context().pushSubContext(dst);
                 des.context().pushSubContext(src);
                 for (const auto& name : buffer->names)
@@ -145,7 +145,7 @@ namespace cubos::core::ecs
         };
 
         /// Stores the entity handles and the associated names.
-        data::SerializationMap<Entity, std::string> mMap;
+        old::data::SerializationMap<Entity, std::string> mMap;
 
         /// Buffers which store the serialized components of each type in this blueprint.
         memory::TypeMap<IBuffer*> mBuffers;
@@ -182,7 +182,7 @@ namespace cubos::core::ecs
                     buf = *ptr;
                 }
 
-                auto ser = data::BinarySerializer(buf->stream);
+                auto ser = old::data::BinarySerializer(buf->stream);
                 ser.context().push(mMap);
                 ser.write(components, "data");
                 buf->names.push_back(mMap.getId(entity));

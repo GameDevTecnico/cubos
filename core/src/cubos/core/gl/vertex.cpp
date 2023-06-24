@@ -6,7 +6,7 @@
 using namespace cubos;
 using namespace cubos::core::gl;
 
-void cubos::core::data::serialize(Serializer& serializer, const gl::Vertex& vertex, const char* name)
+void cubos::core::old::data::serialize(Serializer& serializer, const gl::Vertex& vertex, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(vertex.position, "position");
@@ -15,7 +15,7 @@ void cubos::core::data::serialize(Serializer& serializer, const gl::Vertex& vert
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, gl::Vertex& vertex)
+void cubos::core::old::data::deserialize(Deserializer& deserializer, gl::Vertex& vertex)
 {
     deserializer.beginObject();
     deserializer.read(vertex.position);

@@ -6,7 +6,7 @@
 
 #include <cubos/core/data/deserializer.hpp>
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Implementation of the abstract Deserializer class for deserializing from JSON.
     class JSONDeserializer : public Deserializer
@@ -56,4 +56,4 @@ namespace cubos::core::data
         std::stack<Frame> mFrame;     ///< The current frame of the deserializer.
         nlohmann::ordered_json mJson; ///< The current JSON value being read.
     };
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data

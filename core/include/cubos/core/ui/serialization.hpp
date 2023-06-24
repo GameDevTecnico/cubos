@@ -10,7 +10,7 @@ namespace cubos::core::ui
     /// The first column displays the name of the package and the second column displays the value of the package
     /// @param pkg The packaged object to show.
     /// @param name The name of the object.
-    void showPackage(const data::Package& pkg, const std::string& name);
+    void showPackage(const old::data::Package& pkg, const std::string& name);
 
     /// Shows a packaged object's properties in the UI, allowing the user to
     /// edit the object. Should be called inside a
@@ -21,7 +21,7 @@ namespace cubos::core::ui
     /// @param pkg The packaged object to edit.
     /// @param name The name of the object.
     /// @returns True if the object was edited, false otherwise.
-    bool editPackage(data::Package& pkg, const std::string& name);
+    bool editPackage(old::data::Package& pkg, const std::string& name);
 
     /// Shows a serializable object's properties in the UI. Should be called
     /// inside a ImGui::BeginTable(2)/ImGui::EndTable() block.
@@ -31,7 +31,7 @@ namespace cubos::core::ui
     template <typename T>
     inline void show(const T& object, const std::string& name)
     {
-        auto pkg = data::Package::from(object);
+        auto pkg = old::data::Package::from(object);
         showPackage(pkg, name);
     }
 
@@ -46,7 +46,7 @@ namespace cubos::core::ui
     template <typename T>
     inline bool edit(T& object, const std::string& name)
     {
-        auto pkg = data::Package::from(object);
+        auto pkg = old::data::Package::from(object);
         if (editPackage(pkg, name))
         {
             pkg.into(object);

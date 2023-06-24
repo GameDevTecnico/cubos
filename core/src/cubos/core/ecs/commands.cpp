@@ -15,7 +15,7 @@ Entity EntityBuilder::entity() const
     return mEntity;
 }
 
-BlueprintBuilder::BlueprintBuilder(data::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands)
+BlueprintBuilder::BlueprintBuilder(old::data::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands)
     : mMap(std::move(map))
     , mCommands(commands)
 {
@@ -69,13 +69,13 @@ void CommandBuffer::destroy(Entity entity)
 
 BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
 {
-    data::SerializationMap<Entity, std::string> map;
+    old::data::SerializationMap<Entity, std::string> map;
     for (uint32_t i = 0; i < static_cast<uint32_t>(blueprint.mMap.size()); ++i)
     {
         map.add(this->create().entity(), blueprint.mMap.getId(Entity(i, 0)));
     }
 
-    data::Context context;
+    old::data::Context context;
     context.push(map);
     for (const auto& buf : blueprint.mBuffers)
     {

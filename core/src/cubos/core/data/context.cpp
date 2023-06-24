@@ -1,7 +1,7 @@
 #include <cubos/core/data/context.hpp>
 #include <cubos/core/log.hpp>
 
-using namespace cubos::core::data;
+using namespace cubos::core::old::data;
 
 Context::~Context()
 {

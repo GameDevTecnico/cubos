@@ -2,11 +2,11 @@
 
 #include <uuid.h>
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     class Serializer;
     class Deserializer;
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data
 
 namespace cubos::engine
 {
@@ -73,10 +73,10 @@ namespace cubos::engine
 
         /// @param ser The serializer to use.
         /// @param name The name of the object.
-        void serialize(core::data::Serializer& ser, const char* name) const;
+        void serialize(core::old::data::Serializer& ser, const char* name) const;
 
         /// @param des The deserializer to use.
-        void deserialize(core::data::Deserializer& des);
+        void deserialize(core::old::data::Deserializer& des);
 
     private:
         friend class Assets;

@@ -23,13 +23,13 @@ bool World::isAlive(Entity entity) const
     return mEntityManager.isAlive(entity);
 }
 
-data::Package World::pack(Entity entity, data::Context* context) const
+old::data::Package World::pack(Entity entity, old::data::Context* context) const
 {
     CUBOS_ASSERT(this->isAlive(entity), "Entity is not alive");
 
     Entity::Mask mask = mEntityManager.getMask(entity);
 
-    auto pkg = data::Package(data::Package::Type::Object);
+    auto pkg = old::data::Package(old::data::Package::Type::Object);
     for (std::size_t i = 1; i < mask.size(); ++i)
     {
         if (mask.test(i))
@@ -42,9 +42,9 @@ data::Package World::pack(Entity entity, data::Context* context) const
     return pkg;
 }
 
-bool World::unpack(Entity entity, const data::Package& package, data::Context* context)
+bool World::unpack(Entity entity, const old::data::Package& package, old::data::Context* context)
 {
-    if (package.type() != data::Package::Type::Object)
+    if (package.type() != old::data::Package::Type::Object)
     {
         CUBOS_ERROR("Entities must be packaged as objects");
         return false;

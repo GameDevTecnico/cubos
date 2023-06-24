@@ -5,13 +5,13 @@
 using namespace cubos::core;
 
 template <>
-void data::serialize<Settings>(Serializer& ser, const Settings& obj, const char* name)
+void old::data::serialize<Settings>(Serializer& ser, const Settings& obj, const char* name)
 {
     ser.write(obj.getValues(), name);
 }
 
 template <>
-void data::deserialize<Settings>(Deserializer& des, Settings& obj)
+void old::data::deserialize<Settings>(Deserializer& des, Settings& obj)
 {
     des.read(obj.getValues());
 }

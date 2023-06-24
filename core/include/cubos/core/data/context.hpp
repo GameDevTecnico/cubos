@@ -3,7 +3,7 @@
 #include <typeindex>
 #include <vector>
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Stores the context necessary to serialize or deserialize data.
     /// This is done through a type map, which stores an instance for each type added (akin to the
@@ -83,4 +83,4 @@ namespace cubos::core::data
 
         std::vector<Entry> mEntries; ///< Entries in the context.
     };
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data

@@ -8,7 +8,7 @@
 #include <cubos/core/data/serializer.hpp>
 #include <cubos/core/log.hpp>
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     namespace impl
     {
@@ -382,4 +382,4 @@ namespace cubos::core::data
         return !unpackager.failed();
     }
 
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data

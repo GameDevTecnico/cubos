@@ -32,7 +32,7 @@ namespace cubos::engine
             // Dump the file stream into a string and initialize a JSON deserializer with it.
             std::string json{};
             stream.readUntil(json, nullptr);
-            core::data::JSONDeserializer deserializer{json};
+            core::old::data::JSONDeserializer deserializer{json};
 
             // Deserialize the asset and store it in the asset manager.
             T data{};
@@ -50,7 +50,7 @@ namespace cubos::engine
         bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override
         {
             // Initialize a JSON serializer with the file stream.
-            core::data::JSONSerializer serializer{stream, mIndentation};
+            core::old::data::JSONSerializer serializer{stream, mIndentation};
 
             // Read the asset from the asset manager and serialize it to the file stream.
             auto data = assets.read<T>(handle);

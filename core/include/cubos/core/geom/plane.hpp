@@ -17,7 +17,7 @@ namespace cubos::core::geom
     };
 } // namespace cubos::core::geom
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Serializes a plane.
     /// @param ser The serializer to use.
@@ -39,4 +39,4 @@ namespace cubos::core::data
         des.read(plane.normal);
         des.endObject();
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data

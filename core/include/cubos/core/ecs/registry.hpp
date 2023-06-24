@@ -22,7 +22,7 @@ namespace cubos::core::ecs
         /// @param blueprint The blueprint to instantiate the component into.
         /// @param id The id of the entity the component belongs to.
         /// @returns True if the component type was found and successfully instantiated, false otherwise.
-        static bool create(std::string_view name, data::Deserializer& des, Blueprint& blueprint, Entity id);
+        static bool create(std::string_view name, old::data::Deserializer& des, Blueprint& blueprint, Entity id);
 
         /// Instantiates a component storage for the given component type.
         /// @param type The type index of the component.
@@ -54,7 +54,7 @@ namespace cubos::core::ecs
             std::string name;     ///< Name of the component.
 
             /// Function for creating the component from a deserializer.
-            bool (*componentCreator)(data::Deserializer&, Blueprint&, Entity);
+            bool (*componentCreator)(old::data::Deserializer&, Blueprint&, Entity);
 
             /// Function for creating the storage for the component.
             std::unique_ptr<IStorage> (*storageCreator)();
@@ -82,7 +82,7 @@ namespace cubos::core::ecs
             .type = typeid(T),
             .name = std::string(name),
             .componentCreator =
-                [](data::Deserializer& des, Blueprint& blueprint, Entity id) {
+                [](old::data::Deserializer& des, Blueprint& blueprint, Entity id) {
                     T comp;
                     des.read(comp);
                     if (des.failed())

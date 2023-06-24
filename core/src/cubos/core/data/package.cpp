@@ -2,7 +2,7 @@
 
 #include <cubos/core/data/package.hpp>
 
-using namespace cubos::core::data;
+using namespace cubos::core::old::data;
 
 Package::Package(Type type)
 {

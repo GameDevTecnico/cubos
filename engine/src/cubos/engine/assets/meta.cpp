@@ -6,7 +6,7 @@
 using namespace cubos::engine;
 
 template <>
-void cubos::core::data::serialize<AssetMeta>(Serializer& ser, const AssetMeta& obj, const char* name)
+void cubos::core::old::data::serialize<AssetMeta>(Serializer& ser, const AssetMeta& obj, const char* name)
 {
     // Create a copy of the parameters, so we can remove the excluded ones.
     std::unordered_map<std::string, std::string> params = obj.params();
@@ -23,7 +23,7 @@ void cubos::core::data::serialize<AssetMeta>(Serializer& ser, const AssetMeta& o
 }
 
 template <>
-void cubos::core::data::deserialize<AssetMeta>(Deserializer& des, AssetMeta& obj)
+void cubos::core::old::data::deserialize<AssetMeta>(Deserializer& des, AssetMeta& obj)
 {
     des.read(obj.params());
 }
