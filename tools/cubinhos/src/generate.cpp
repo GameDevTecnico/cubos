@@ -824,7 +824,7 @@ static bool generate(const GenerateOptions& options)
 
         file << std::endl;
         file << "template <>" << std::endl;
-        file << "void cubos::core::data::serialize<" << id << ">(Serializer& ser, const " << id << "& obj,"
+        file << "void cubos::core::old::data::serialize<" << id << ">(Serializer& ser, const " << id << "& obj,"
              << std::endl;
         file << "                                         const char* name)" << std::endl;
         file << "{" << std::endl;
@@ -851,7 +851,7 @@ static bool generate(const GenerateOptions& options)
         file << "}" << std::endl;
         file << std::endl;
         file << "template <>" << std::endl;
-        file << "void cubos::core::data::deserialize<" << id << ">(Deserializer& des, " << id << "& obj)" << std::endl;
+        file << "void cubos::core::old::data::deserialize<" << id << ">(Deserializer& des, " << id << "& obj)" << std::endl;
         file << "{" << std::endl;
         if (component.fields.size() == 1)
         {

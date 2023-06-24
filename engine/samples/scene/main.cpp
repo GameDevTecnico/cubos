@@ -30,9 +30,9 @@ static void spawnScene(Commands commands, Read<Assets> assets)
 
 static void printStuff(Read<World> world)
 {
-    using cubos::core::data::Context;
-    using cubos::core::data::DebugSerializer;
-    using cubos::core::data::SerializationMap;
+    using cubos::core::old::data::Context;
+    using cubos::core::old::data::DebugSerializer;
+    using cubos::core::old::data::SerializationMap;
     using cubos::core::memory::Stream;
 
     for (auto entity : *world)

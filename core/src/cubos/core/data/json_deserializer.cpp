@@ -2,7 +2,7 @@
 #include <cubos/core/log.hpp>
 
 using namespace cubos::core;
-using namespace cubos::core::data;
+using namespace cubos::core::old::data;
 
 #define CHECK_ERROR(exp)                                                                                               \
     do                                                                                                                 \

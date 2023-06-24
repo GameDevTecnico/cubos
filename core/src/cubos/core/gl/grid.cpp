@@ -142,7 +142,7 @@ bool Grid::convert(const Palette& src, const Palette& dst, float minSimilarity)
     return true;
 }
 
-void cubos::core::data::serialize(Serializer& serializer, const gl::Grid& grid, const char* name)
+void cubos::core::old::data::serialize(Serializer& serializer, const gl::Grid& grid, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(grid.mSize, "size");
@@ -150,7 +150,7 @@ void cubos::core::data::serialize(Serializer& serializer, const gl::Grid& grid, 
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, gl::Grid& grid)
+void cubos::core::old::data::deserialize(Deserializer& deserializer, gl::Grid& grid)
 {
     deserializer.beginObject();
     deserializer.read(grid.mSize);

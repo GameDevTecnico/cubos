@@ -23,7 +23,7 @@ namespace cubos::core::gl
     };
 } // namespace cubos::core::gl
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Serializes a material.
     /// @param serializer The serializer to use.
@@ -35,4 +35,4 @@ namespace cubos::core::data
     /// @param deserializer The deserializer to use.
     /// @param mat The material to deserialize.
     void deserialize(Deserializer& deserializer, gl::Material& mat);
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data

@@ -31,7 +31,7 @@ struct Parent
     ecs::Entity entity;
 };
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     void serialize(Serializer& /*unused*/, const Player& /*unused*/, const char* /*unused*/)
     {
@@ -88,7 +88,7 @@ namespace cubos::core::data
     {
         des.read(parent.entity);
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data
 
 CUBOS_REGISTER_COMPONENT(Player, ecs::NullStorage<Player>, "Player")
 CUBOS_REGISTER_COMPONENT(Position, ecs::VecStorage<Position>, "Position")

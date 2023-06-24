@@ -2,7 +2,7 @@
 #include <cubos/core/memory/endianness.hpp>
 
 using namespace cubos::core;
-using namespace cubos::core::data;
+using namespace cubos::core::old::data;
 
 template <typename T>
 static inline T fromEndianness(T val, bool fromLittleEndian)

@@ -67,7 +67,7 @@ namespace cubos::core::geom
     };
 } // namespace cubos::core::geom
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Serializes a simplex.
     /// @param ser The serializer to use.
@@ -85,4 +85,4 @@ namespace cubos::core::data
     {
         des.read(simplex.points);
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data

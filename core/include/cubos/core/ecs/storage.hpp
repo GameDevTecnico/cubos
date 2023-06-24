@@ -20,14 +20,14 @@ namespace cubos::core::ecs
         /// @param index The index of the value to package.
         /// @param context Optional context used for serialization.
         /// @returns The packaged value.
-        virtual data::Package pack(uint32_t index, data::Context* context) const = 0;
+        virtual old::data::Package pack(uint32_t index, old::data::Context* context) const = 0;
 
         /// @brief Unpackages a value.
         /// @param index The index of the value to unpackage.
         /// @param package The package to unpackage.
         /// @param context Optional context used for deserialization.
         /// @returns True if the value was unpackaged successfully, false otherwise.
-        virtual bool unpack(uint32_t index, const data::Package& package, data::Context* context) = 0;
+        virtual bool unpack(uint32_t index, const old::data::Package& package, old::data::Context* context) = 0;
 
         /// @brief Gets the type the components being stored here.
         virtual std::type_index type() const = 0;
@@ -57,12 +57,12 @@ namespace cubos::core::ecs
 
         // Implementation.
 
-        inline data::Package pack(uint32_t index, data::Context* context) const override
+        inline old::data::Package pack(uint32_t index, old::data::Context* context) const override
         {
-            return data::Package::from(*this->get(index), context);
+            return old::data::Package::from(*this->get(index), context);
         }
 
-        inline bool unpack(uint32_t index, const data::Package& package, data::Context* context) override
+        inline bool unpack(uint32_t index, const old::data::Package& package, old::data::Context* context) override
         {
             T value;
             if (package.into(value, context))

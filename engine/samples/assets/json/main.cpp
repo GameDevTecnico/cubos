@@ -17,9 +17,9 @@
 #include <cubos/engine/assets/plugin.hpp>
 
 using cubos::core::Settings;
-using cubos::core::data::Deserializer;
+using cubos::core::old::data::Deserializer;
 using cubos::core::data::FileSystem;
-using cubos::core::data::Serializer;
+using cubos::core::old::data::Serializer;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::memory::Stream;
@@ -32,10 +32,10 @@ struct MyAsset
     std::vector<std::string> some_strings;
 };
 
-// We must implement the cubos::core::data::serialize function for our type, so that it can be
+// We must implement the cubos::core::old::data::serialize function for our type, so that it can be
 // serialized by the JSONBridge.
 template <>
-void cubos::core::data::serialize<MyAsset>(Serializer& ser, const MyAsset& obj, const char* name)
+void cubos::core::old::data::serialize<MyAsset>(Serializer& ser, const MyAsset& obj, const char* name)
 {
     ser.beginObject(name);
     ser.write(obj.an_integer, "an_integer");
@@ -43,10 +43,10 @@ void cubos::core::data::serialize<MyAsset>(Serializer& ser, const MyAsset& obj, 
     ser.endObject();
 }
 
-// We must also implement the cubos::core::data::deserialize function for our type, so that it can
+// We must also implement the cubos::core::old::data::deserialize function for our type, so that it can
 // be deserialized by the JSONBridge.
 template <>
-void cubos::core::data::deserialize<MyAsset>(Deserializer& des, MyAsset& obj)
+void cubos::core::old::data::deserialize<MyAsset>(Deserializer& des, MyAsset& obj)
 {
     des.beginObject();
     des.read(obj.an_integer);

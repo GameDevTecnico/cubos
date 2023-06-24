@@ -49,7 +49,7 @@ namespace cubos::core::geom
     };
 } // namespace cubos::core::geom
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Serializes a box.
     /// @param ser The serializer to use.
@@ -71,4 +71,4 @@ namespace cubos::core::data
         des.read(box.halfSize);
         des.endObject();
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data

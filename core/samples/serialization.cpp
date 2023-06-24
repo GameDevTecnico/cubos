@@ -3,7 +3,7 @@
 #include <cubos/core/data/serializer.hpp>
 
 using namespace cubos::core::memory;
-using namespace cubos::core::data;
+using namespace cubos::core::old::data;
 
 // Simple serializable type.
 struct Fruit
@@ -22,7 +22,7 @@ struct Human
 };
 
 template <>
-void cubos::core::data::serialize<Fruit>(Serializer& ser, const Fruit& obj, const char* name)
+void cubos::core::old::data::serialize<Fruit>(Serializer& ser, const Fruit& obj, const char* name)
 {
     ser.beginObject(name);
     ser.write(obj.name, "name");
@@ -31,7 +31,7 @@ void cubos::core::data::serialize<Fruit>(Serializer& ser, const Fruit& obj, cons
 }
 
 template <>
-void cubos::core::data::serialize<Human>(Serializer& ser, const Human& obj, const char* name)
+void cubos::core::old::data::serialize<Human>(Serializer& ser, const Human& obj, const char* name)
 {
     // Get necessary context from the serializer.
     auto& map = ser.context().get<SerializationMap<Human*, int>>();

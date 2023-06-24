@@ -62,7 +62,7 @@ namespace cubos::engine
     };
 } // namespace cubos::engine
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Serializes an AABB.
     /// @param ser The serializer to use.

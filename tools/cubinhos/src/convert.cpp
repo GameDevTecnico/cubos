@@ -166,7 +166,7 @@ static bool loadPalette(const fs::path& path, gl::Palette& palette)
     }
 
     auto stream = memory::StandardStream(file, true);
-    auto deserializer = data::BinaryDeserializer(stream);
+    auto deserializer = old::data::BinaryDeserializer(stream);
     deserializer.read(palette);
     if (deserializer.failed())
     {
@@ -204,7 +204,7 @@ static bool savePalette(const fs::path& path, const gl::Palette& palette)
     }
 
     auto stream = memory::StandardStream(file, true);
-    auto serializer = data::BinarySerializer(stream);
+    auto serializer = old::data::BinarySerializer(stream);
     serializer.write(palette, nullptr);
     if (serializer.failed())
     {
@@ -227,7 +227,7 @@ static bool saveGrid(const fs::path& path, const gl::Grid& grid)
     }
 
     auto stream = memory::StandardStream(file, true);
-    auto serializer = data::BinarySerializer(stream);
+    auto serializer = old::data::BinarySerializer(stream);
     serializer.write(grid, nullptr);
     if (serializer.failed())
     {

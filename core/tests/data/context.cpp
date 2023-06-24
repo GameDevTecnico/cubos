@@ -4,7 +4,7 @@
 
 #include "utils.hpp"
 
-using cubos::core::data::Context;
+using cubos::core::old::data::Context;
 
 TEST_CASE("data::Context")
 {

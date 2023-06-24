@@ -9,7 +9,7 @@ namespace cubos::core::gl
     class Palette;
 }
 
-namespace cubos::core::data
+namespace cubos::core::old::data
 {
     /// Serializes a material palette.
     /// @param serializer The serializer to use.
@@ -21,7 +21,7 @@ namespace cubos::core::data
     /// @param deserializer The deserializer to use.
     /// @param palette The palette to deserialize.
     void deserialize(Deserializer& deserializer, gl::Palette& palette);
-} // namespace cubos::core::data
+} // namespace cubos::core::old::data
 
 namespace cubos::core::gl
 {
@@ -68,8 +68,8 @@ namespace cubos::core::gl
         void merge(const Palette& palette, float similarity = 1.0F);
 
     private:
-        friend void data::serialize(data::Serializer& /*serializer*/, const Palette& /*palette*/, const char* /*name*/);
-        friend void data::deserialize(data::Deserializer& /*deserializer*/, Palette& /*palette*/);
+        friend void old::data::serialize(old::data::Serializer& /*serializer*/, const Palette& /*palette*/, const char* /*name*/);
+        friend void old::data::deserialize(old::data::Deserializer& /*deserializer*/, Palette& /*palette*/);
 
         std::vector<Material> mMaterials; ///< The materials in the palette.
     };

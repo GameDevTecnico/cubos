@@ -8,7 +8,7 @@
 using cubos::core::Settings;
 using cubos::core::data::File;
 using cubos::core::data::FileSystem;
-using cubos::core::data::JSONDeserializer;
+using cubos::core::old::data::JSONDeserializer;
 using cubos::core::data::StandardArchive;
 using cubos::core::ecs::Write;
 

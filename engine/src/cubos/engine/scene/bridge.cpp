@@ -8,7 +8,7 @@
 using namespace cubos::engine;
 using namespace cubos::core;
 
-using cubos::core::data::SerializationMap;
+using cubos::core::old::data::SerializationMap;
 using cubos::core::ecs::Entity;
 
 bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
@@ -28,7 +28,7 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
     stream.reset(); // Close the file.
 
     // Deserialize the scene file.
-    auto deserializer = data::JSONDeserializer(contents);
+    auto deserializer = old::data::JSONDeserializer(contents);
     if (deserializer.failed())
     {
         CUBOS_ERROR("Could not parse scene file '{}' as JSON", path);
