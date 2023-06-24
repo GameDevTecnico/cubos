@@ -26,10 +26,13 @@ namespace cubos::core::data
 
         Serializer() = default;
 
-        /// @name Forbid copy and move constructors.
+        /// @name Forbid copying and moving.
+        /// @brief Necessary since hooks may capture a pointer to the serializer.
         /// @{
         Serializer(const Serializer&) = delete;
         Serializer(Serializer&&) = delete;
+        Serializer& operator=(const Serializer&) = delete;
+        Serializer& operator=(Serializer&&) = delete;
         /// @}
 
         /// @brief Serialize the given data.

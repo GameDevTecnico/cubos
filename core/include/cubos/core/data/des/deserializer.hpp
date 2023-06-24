@@ -24,6 +24,17 @@ namespace cubos::core::data
         /// @brief Function type for deserialization hooks.
         using Hook = std::function<bool(void*)>;
 
+        Deserializer() = default;
+
+        /// @name Forbid copying and moving.
+        /// @brief Necessary since hooks may capture a pointer to the deserializer.
+        /// @{
+        Deserializer(const Deserializer&) = delete;
+        Deserializer(Deserializer&&) = delete;
+        Deserializer& operator=(const Deserializer&) = delete;
+        Deserializer& operator=(Deserializer&&) = delete;
+        /// @}
+
         /// @brief Deserialize the given data.
         /// @param type Type of the data to deserialize.
         /// @param data Pointer to an instance of the given type.
