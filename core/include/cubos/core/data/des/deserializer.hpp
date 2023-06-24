@@ -41,6 +41,16 @@ namespace cubos::core::data
         /// @returns Whether the data was successfully deserialized.
         bool read(const reflection::Type& type, void* data);
 
+        /// @brief Deserialize the given data.
+        /// @tparam T Type of the data to deserialize.
+        /// @param data Pointer to an instance of the given type.
+        /// @returns Whether the data was successfully deserialized.
+        template <typename T>
+        bool read(T& data)
+        {
+            return this->read(reflection::reflect<T>(), &data);
+        }
+
         /// @brief Sets the hook to be called on deserialization of the given type.
         /// @param type Type to set the hook for.
         /// @param hook Hook to call.
