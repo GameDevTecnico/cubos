@@ -24,6 +24,11 @@ bool Deserializer::read(const reflection::Type& type, void* data)
     return true;
 }
 
+void Deserializer::hook(const reflection::Type& type, Hook hook)
+{
+    mHooks[&type] = hook;
+}
+
 void Deserializer::visit(const reflection::PrimitiveType& type)
 {
     CUBOS_FAIL("Missing deserialization hook for primitive type '{}'", type.name());
