@@ -43,6 +43,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/ser/debug.cpp"
 
     "src/cubos/core/data/des/deserializer.cpp"
+    "src/cubos/core/data/des/json.cpp"
 
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/standard_stream.cpp"
@@ -124,6 +125,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/data/ser/debug.hpp"
 
     "include/cubos/core/data/des/deserializer.hpp"
+    "include/cubos/core/data/des/json.hpp"
 
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/standard_stream.hpp"
