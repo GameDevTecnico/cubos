@@ -16,6 +16,9 @@ add_executable(
     data/fs/embedded_archive.cpp
     data/fs/standard_archive.cpp
     data/fs/file_system.cpp
+
+    data/des/json.cpp
+
     data/context.cpp
 
     ecs/registry.cpp
