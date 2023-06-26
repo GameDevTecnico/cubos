@@ -41,6 +41,7 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/data/ser/serializer.cpp"
     "src/cubos/core/data/ser/debug.cpp"
+    "src/cubos/core/data/ser/json.cpp"
 
     "src/cubos/core/data/des/deserializer.cpp"
     "src/cubos/core/data/des/json.cpp"
@@ -123,6 +124,7 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/data/ser/serializer.hpp"
     "include/cubos/core/data/ser/debug.hpp"
+    "include/cubos/core/data/ser/json.hpp"
 
     "include/cubos/core/data/des/deserializer.hpp"
     "include/cubos/core/data/des/json.hpp"
