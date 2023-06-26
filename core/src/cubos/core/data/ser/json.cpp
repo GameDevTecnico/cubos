@@ -9,14 +9,14 @@
 using cubos::core::data::JSONSerializer;
 
 #define AUTO_HOOK(type, toString)                                                                                      \
-    this->hook<type>([this](const void* data) {                                                                        \
+    this->hook<type>([this](const type& data) {                                                                        \
         if (mKey == nullptr)                                                                                           \
         {                                                                                                              \
-            *mValue = *static_cast<const type*>(data);                                                                 \
+            *mValue = data;                                                                                            \
         }                                                                                                              \
         else                                                                                                           \
         {                                                                                                              \
-            *mKey = toString(*static_cast<const type*>(data));                                                         \
+            *mKey = toString(data);                                                                                    \
         }                                                                                                              \
     })
 

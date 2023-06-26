@@ -19,20 +19,20 @@ using cubos::core::reflection::reflect;
     }
 
 #define AUTO_HOOK(type, condition, expected)                                                                           \
-    this->hook<type>([this](void* data) {                                                                              \
+    this->hook<type>([this](type& data) {                                                                              \
         if (mKey == nullptr)                                                                                           \
         {                                                                                                              \
-            EXPECT_OR_RETURN((condition), expected, mValue->type_name());                                            \
-            mValue->get_to<type>(*static_cast<type*>(data));                                                         \
+            EXPECT_OR_RETURN((condition), expected, mValue->type_name());                                              \
+            mValue->get_to(data);                                                                                      \
         }                                                                                                              \
         else if (&reflect<type>() == &reflect<std::string>())                                                          \
         {                                                                                                              \
-            *static_cast<std::string*>(data) = *mKey;                                                                  \
+            *reinterpret_cast<std::string*>(&data) = *mKey;                                                            \
         }                                                                                                              \
         else                                                                                                           \
         {                                                                                                              \
             std::stringstream ss(*mKey);                                                                               \
-            ss >> std::boolalpha >> *static_cast<type*>(data);                                                         \
+            ss >> std::boolalpha >> data;                                                                              \
             if (ss.fail())                                                                                             \
             {                                                                                                          \
                 CUBOS_ERROR("Failed to parse key '{}' as {}", *mKey, reflect<type>().name());                          \

@@ -22,7 +22,12 @@ namespace cubos::core::data
     {
     public:
         /// @brief Function type for serialization hooks.
-        using Hook = std::function<void(const void*)>;
+        using AnyHook = std::function<void(const void*)>;
+
+        /// @brief Function type for serialization hooks.
+        /// @tparam T Type of the data to serialize.
+        template <typename T>
+        using Hook = std::function<void(const T&)>;
 
         Serializer() = default;
 
@@ -52,15 +57,15 @@ namespace cubos::core::data
         /// @brief Sets the hook to be called on serialization of the given type.
         /// @param type Type to set the hook for.
         /// @param hook Hook to call.
-        void hook(const reflection::Type& type, Hook hook);
+        void hook(const reflection::Type& type, AnyHook hook);
 
         /// @brief Sets the hook to be called on serialization of the given type.
         /// @tparam T Type to set the hook for.
         /// @param hook Hook to call.
         template <typename T>
-        void hook(Hook hook)
+        void hook(Hook<T> hook)
         {
-            this->hook(reflection::reflect<T>(), hook);
+            this->hook(reflection::reflect<T>(), [hook](const void* data) { hook(*static_cast<const T*>(data)); });
         }
 
     protected:
@@ -91,7 +96,7 @@ namespace cubos::core::data
         void visit(const reflection::ArrayType& type) override;
         void visit(const reflection::DictionaryType& type) override;
 
-        std::unordered_map<const reflection::Type*, Hook> mHooks;
+        std::unordered_map<const reflection::Type*, AnyHook> mHooks;
         const void* mInstance;
     };
 } // namespace cubos::core::data

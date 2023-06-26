@@ -10,9 +10,9 @@
 using cubos::core::data::DebugSerializer;
 
 #define AUTO_HOOK(T, fmt)                                                                                              \
-    this->hook<T>([this](const void* data) {                                                                           \
+    this->hook<T>([this](const T& data) {                                                                           \
         typeName(reflection::reflect<T>(), false);                                                                     \
-        mStream.printf((fmt), *static_cast<const T*>(data));                                                           \
+        mStream.printf((fmt), data);                                                           \
     })
 
 DebugSerializer::DebugSerializer(memory::Stream& stream, bool pretty, bool typeNames)

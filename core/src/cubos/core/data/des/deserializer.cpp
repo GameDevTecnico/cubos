@@ -24,7 +24,7 @@ bool Deserializer::read(const reflection::Type& type, void* data)
     return true;
 }
 
-void Deserializer::hook(const reflection::Type& type, Hook hook)
+void Deserializer::hook(const reflection::Type& type, AnyHook hook)
 {
     mHooks[&type] = hook;
 }

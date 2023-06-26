@@ -19,7 +19,7 @@ void Serializer::write(const reflection::Type& type, const void* data)
     }
 }
 
-void Serializer::hook(const reflection::Type& type, Hook hook)
+void Serializer::hook(const reflection::Type& type, AnyHook hook)
 {
     mHooks[&type] = hook;
 }
