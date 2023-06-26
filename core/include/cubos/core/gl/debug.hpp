@@ -32,7 +32,7 @@ namespace cubos::core::gl
         /// @param color Color of the drawn line.
         /// @param time How long will it be visible for? If 0, for a single frame.
         static void drawLine(glm::vec3 start, glm::vec3 end, bool relative = false, glm::vec3 color = glm::vec3(1),
-                             float time = 0);
+                             float time = 0.0F);
 
         /// @brief Draws a filled box that will stay visible for a specified amount of time.
         /// @param box Box to draw.
