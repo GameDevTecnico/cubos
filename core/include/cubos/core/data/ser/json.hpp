@@ -11,8 +11,13 @@ namespace cubos::core::data
 {
     /// @brief Serializer implementation which outputs JSON data.
     ///
-    /// @details This serializer uses the nlohmann::json library to manage JSON data.
+    /// @details This serializer uses the nlohmann::json library to handle JSON data.
     /// Non-primitive types cannot be used as keys in dictionaries, since JSON keys must be strings.
+    ///
+    /// By default, this serializer sets hooks for booleans, integer types, floating-point types
+    /// and for std::string. Hooks for other primitive types must be set manually.
+    ///
+    /// @see JSONDeserializer
     class JSONSerializer : public Serializer
     {
     public:

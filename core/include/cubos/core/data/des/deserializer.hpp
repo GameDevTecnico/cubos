@@ -18,6 +18,16 @@ namespace cubos::core::data
 {
     /// @brief Base class for deserializers, which defines the interface for deserializing
     /// arbitrary data using its reflection metadata.
+    ///
+    /// @details Deserializers are type visitors which allow overriding the default behavior for
+    /// deserializing each type using hooks. Hooks are functions which are called when the
+    /// deserializer encounters a type, and can be used to customize the deserialization process.
+    ///
+    /// If a primitive type is encountered for which no hook is defined, the deserializer will
+    /// abort with an error. Usually, implementations should set default hooks for the most common
+    /// primitive types.
+    ///
+    /// @see JSONDeserializer
     class Deserializer : private reflection::TypeVisitor
     {
     public:
@@ -40,13 +50,15 @@ namespace cubos::core::data
         Deserializer& operator=(Deserializer&&) = delete;
         /// @}
 
-        /// @brief Deserialize the given data.
+        /// @brief Deserialize the given data. If the operation fails, the data is left on an
+        /// unspecified state - it may be partially deserialized, or not deserialized at all.
         /// @param type Type of the data to deserialize.
         /// @param data Pointer to an instance of the given type.
         /// @returns Whether the data was successfully deserialized.
         bool read(const reflection::Type& type, void* data);
 
-        /// @brief Deserialize the given data.
+        /// @brief Deserialize the given data. If the operation fails, the data is left on an
+        /// unspecified state - it may be partially deserialized, or not deserialized at all.
         /// @tparam T Type of the data to deserialize.
         /// @param data Pointer to an instance of the given type.
         /// @returns Whether the data was successfully deserialized.

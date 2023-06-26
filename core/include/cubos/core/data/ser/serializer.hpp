@@ -18,6 +18,16 @@ namespace cubos::core::data
 {
     /// @brief Base class for serializers, which defines the interface for serializing arbitrary
     /// data using its reflection metadata.
+    ///
+    /// @details Serializers are type visitors which allow overriding the default behavior for
+    /// serializing each type using hooks. Hooks are functions which are called when the serializer
+    /// encounters a type, and can be used to customize the serialization process.
+    ///
+    /// If a primitive type is encountered for which no hook is defined, the serializer will abort
+    /// with an error. Usually, implementations should set default hooks for the most common
+    /// primitive types.
+    ///
+    /// @see JSONSerializer
     class Serializer : private reflection::TypeVisitor
     {
     public:

@@ -13,7 +13,11 @@ namespace cubos::core::memory
 namespace cubos::core::data
 {
     /// @brief Serializer implementation that prints the serialized data to a stream in a human
-    /// readable format.
+    /// readable format, not intended for machine parsing.
+    ///
+    /// @details By default, this serializer sets hooks for booleans, chars, integer types,
+    /// floating-point types and for std::string. Hooks for other primitive types must be set
+    /// manually.
     class DebugSerializer : public Serializer
     {
     public:
