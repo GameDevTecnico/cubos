@@ -39,7 +39,7 @@ TEST_CASE("data::JSONSerializer")
         CHECK(toJSON<uint8_t>(0) == "0");
         CHECK(toJSON<uint16_t>(42328) == "42328");
         CHECK(toJSON<uint32_t>(2432824243) == "2432824243");
-        CHECK(toJSON<uint64_t>(18446744073709551615) == "18446744073709551615");
+        CHECK(toJSON<uint64_t>(18446744073709551615UL) == "18446744073709551615");
         CHECK(toJSON<float>(1.0F) == "1.0");
         CHECK(toJSON<double>(2.0) == "2.0");
     }
