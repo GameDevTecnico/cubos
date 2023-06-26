@@ -18,47 +18,51 @@ using cubos::core::reflection::reflect;
         return false;                                                                                                  \
     }
 
-#define AUTO_HOOK(type, condition, expected)                                                                           \
-    this->hook<type>([this](type& data) {                                                                              \
+#define AUTO_HOOK(T, condition, expected, fromKey)                                                                  \
+    this->hook<T>([this](T& data) {                                                                              \
         if (mKey == nullptr)                                                                                           \
         {                                                                                                              \
             EXPECT_OR_RETURN((condition), expected, mValue->type_name());                                              \
             mValue->get_to(data);                                                                                      \
         }                                                                                                              \
-        else if (&reflect<type>() == &reflect<std::string>())                                                          \
-        {                                                                                                              \
-            *reinterpret_cast<std::string*>(&data) = *mKey;                                                            \
-        }                                                                                                              \
         else                                                                                                           \
         {                                                                                                              \
-            std::stringstream ss(*mKey);                                                                               \
-            ss >> std::boolalpha >> data;                                                                              \
-            if (ss.fail())                                                                                             \
+            if (!fromKey(*mKey, data))                                                                                 \
             {                                                                                                          \
-                CUBOS_ERROR("Failed to parse key '{}' as {}", *mKey, reflect<type>().name());                          \
+                CUBOS_ERROR("Failed to parse key '{}' as {}", *mKey, reflect<T>().name());                          \
                 return false;                                                                                          \
             }                                                                                                          \
         }                                                                                                              \
         return true;                                                                                                   \
     })
 
+#define STRING_STREAM                                                                                                  \
+    [](const std::string& key, auto& data) {                                                                           \
+        std::stringstream ss(key);                                                                                     \
+        ss >> std::boolalpha >> data;                                                                                  \
+        return !ss.fail();                                                                                             \
+    }
+
 JSONDeserializer::JSONDeserializer()
     : mAllowsMissingFields(false)
     , mKey(nullptr)
     , mValue(&mJSON)
 {
-    AUTO_HOOK(bool, mValue->is_boolean(), "JSON boolean");
-    AUTO_HOOK(int8_t, mValue->is_number_integer(), "JSON number (integer)");
-    AUTO_HOOK(int16_t, mValue->is_number_integer(), "JSON number (integer)");
-    AUTO_HOOK(int32_t, mValue->is_number_integer(), "JSON number (integer)");
-    AUTO_HOOK(int64_t, mValue->is_number_integer(), "JSON number (integer)");
-    AUTO_HOOK(uint8_t, mValue->is_number_unsigned(), "JSON number (unsigned)");
-    AUTO_HOOK(uint16_t, mValue->is_number_unsigned(), "JSON number (unsigned)");
-    AUTO_HOOK(uint32_t, mValue->is_number_unsigned(), "JSON number (unsigned)");
-    AUTO_HOOK(uint64_t, mValue->is_number_unsigned(), "JSON number (unsigned)");
-    AUTO_HOOK(float, mValue->is_number_float(), "JSON number (float)");
-    AUTO_HOOK(double, mValue->is_number_float(), "JSON number (float)");
-    AUTO_HOOK(std::string, mValue->is_string(), "JSON string");
+    AUTO_HOOK(bool, mValue->is_boolean(), "JSON boolean", STRING_STREAM);
+    AUTO_HOOK(int8_t, mValue->is_number_integer(), "JSON number (integer)", STRING_STREAM);
+    AUTO_HOOK(int16_t, mValue->is_number_integer(), "JSON number (integer)", STRING_STREAM);
+    AUTO_HOOK(int32_t, mValue->is_number_integer(), "JSON number (integer)", STRING_STREAM);
+    AUTO_HOOK(int64_t, mValue->is_number_integer(), "JSON number (integer)", STRING_STREAM);
+    AUTO_HOOK(uint8_t, mValue->is_number_unsigned(), "JSON number (unsigned)", STRING_STREAM);
+    AUTO_HOOK(uint16_t, mValue->is_number_unsigned(), "JSON number (unsigned)", STRING_STREAM);
+    AUTO_HOOK(uint32_t, mValue->is_number_unsigned(), "JSON number (unsigned)", STRING_STREAM);
+    AUTO_HOOK(uint64_t, mValue->is_number_unsigned(), "JSON number (unsigned)", STRING_STREAM);
+    AUTO_HOOK(float, mValue->is_number_float(), "JSON number (float)", STRING_STREAM);
+    AUTO_HOOK(double, mValue->is_number_float(), "JSON number (float)", STRING_STREAM);
+    AUTO_HOOK(std::string, mValue->is_string(), "JSON string", [](const std::string& key, std::string& data) {
+        data = key;
+        return true;
+    });
 }
 
 bool JSONDeserializer::parse(std::string&& json)

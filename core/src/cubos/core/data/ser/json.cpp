@@ -8,8 +8,8 @@
 
 using cubos::core::data::JSONSerializer;
 
-#define AUTO_HOOK(type, toString)                                                                                      \
-    this->hook<type>([this](const type& data) {                                                                        \
+#define AUTO_HOOK(T, toString)                                                                                      \
+    this->hook<T>([this](const T& data) {                                                                        \
         if (mKey == nullptr)                                                                                           \
         {                                                                                                              \
             *mValue = data;                                                                                            \
