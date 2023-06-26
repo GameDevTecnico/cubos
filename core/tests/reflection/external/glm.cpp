@@ -24,12 +24,12 @@ static void testVec(glm::vec<L, T, Q>, const char* name)
     CHECK(to.fields()[0]->name() == "x");
     CHECK(to.fields()[1]->name() == "y");
 
-    if (L >= 3)
+    if constexpr (L >= 3)
     {
         CHECK(to.fields()[2]->name() == "z");
     }
 
-    if (L >= 4)
+    if constexpr (L >= 4)
     {
         CHECK(to.fields()[3]->name() == "w");
     }
@@ -103,12 +103,15 @@ static void testQuat(glm::qua<T, Q>, const char* name)
     }
 
     // Check if the fields are set correctly.
-    for (glm::length_t i = 0; i < 4; ++i)
-    {
-        Quat qua{};
-        to.fields()[static_cast<std::size_t>(i)]->template get<T>(&qua) = static_cast<T>(1);
-        CHECK(qua[i] == static_cast<T>(1));
-    }
+    Quat qua;
+    to.fields()[0]->template get<T>(&qua) = static_cast<T>(1);
+    to.fields()[1]->template get<T>(&qua) = static_cast<T>(2);
+    to.fields()[2]->template get<T>(&qua) = static_cast<T>(3);
+    to.fields()[3]->template get<T>(&qua) = static_cast<T>(4);
+    CHECK(qua.x == static_cast<T>(1));
+    CHECK(qua.y == static_cast<T>(2));
+    CHECK(qua.z == static_cast<T>(3));
+    CHECK(qua.w == static_cast<T>(4));
 }
 
 TEST_CASE("reflection::reflect<(external/glm)>()")
