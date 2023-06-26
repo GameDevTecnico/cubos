@@ -1,5 +1,4 @@
 #include <limits>
-#include <type_traits>
 
 #include <doctest/doctest.h>
 #include <glm/vec2.hpp>
