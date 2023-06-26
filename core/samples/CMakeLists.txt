@@ -42,6 +42,7 @@ make_sample(DIR "reflection" SOURCES "fruit.cpp" "printer.cpp")
 make_sample(DIR "data/fs/embedded_archive" SOURCES "embed.cpp")
 make_sample(DIR "data/fs/standard_archive")
 make_sample(DIR "data/ser")
+make_sample(DIR "data/des")
 
 # For each sample file, create a target named after the file but without the
 # file extension
