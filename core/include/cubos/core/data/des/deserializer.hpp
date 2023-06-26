@@ -6,13 +6,8 @@
 #include <functional>
 #include <unordered_map>
 
-#include <cubos/core/reflection/type.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 #include <cubos/core/reflection/visitor.hpp>
-
-namespace cubos::core::reflection
-{
-    class Type;
-} // namespace cubos::core::reflection
 
 namespace cubos::core::data
 {
