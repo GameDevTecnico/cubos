@@ -16,6 +16,7 @@ static void testVec(glm::vec<L, T, Q>, const char* name)
     using Vec = glm::vec<L, T, Q>;
     testTypeGetters<Vec, ObjectType>(name, name);
     testTypeDefaultConstructor<Vec>();
+    testTypeMoveConstructor<Vec>();
 
     // The fields of vector must be named x, y, z, w, in that order.
     auto& to = reflect<Vec>().template asKind<ObjectType>();

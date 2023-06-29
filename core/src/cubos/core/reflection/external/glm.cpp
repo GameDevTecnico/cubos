@@ -9,7 +9,7 @@
 #define AUTO_VEC2(type)                                                                                                \
     CUBOS_REFLECT_EXTERNAL_IMPL(type)                                                                                  \
     {                                                                                                                  \
-        return ObjectType::build(#type).field("x", &type::x).field("y", &type::y).defaultConstructible<type>().get();  \
+        return ObjectType::build(#type).field("x", &type::x).field("y", &type::y).typed<type>().get();  \
     }
 
 AUTO_VEC2(glm::ivec2);
@@ -23,7 +23,7 @@ AUTO_VEC2(glm::vec2);
             .field("x", &type::x)                                                                                      \
             .field("y", &type::y)                                                                                      \
             .field("z", &type::z)                                                                                      \
-            .defaultConstructible<type>()                                                                              \
+            .typed<type>()                                                                              \
             .get();                                                                                                    \
     }
 
@@ -39,7 +39,7 @@ AUTO_VEC3(glm::vec3);
             .field("y", &type::y)                                                                                      \
             .field("z", &type::z)                                                                                      \
             .field("w", &type::w)                                                                                      \
-            .defaultConstructible<type>()                                                                              \
+            .typed<type>()                                                                              \
             .get();                                                                                                    \
     }
 
@@ -60,7 +60,7 @@ AUTO_VEC4(glm::vec4);
             .AUTO_MAT_FIELD(type, 0, 1)                                                                                \
             .AUTO_MAT_FIELD(type, 1, 0)                                                                                \
             .AUTO_MAT_FIELD(type, 1, 1)                                                                                \
-            .defaultConstructible<type>()                                                                              \
+            .typed<type>()                                                                              \
             .get();                                                                                                    \
     }
 
@@ -80,7 +80,7 @@ AUTO_MAT2(glm::mat2);
             .AUTO_MAT_FIELD(type, 2, 0)                                                                                \
             .AUTO_MAT_FIELD(type, 2, 1)                                                                                \
             .AUTO_MAT_FIELD(type, 2, 2)                                                                                \
-            .defaultConstructible<type>()                                                                              \
+            .typed<type>()                                                                              \
             .get();                                                                                                    \
     }
 
@@ -107,7 +107,7 @@ AUTO_MAT3(glm::mat3);
             .AUTO_MAT_FIELD(type, 3, 1)                                                                                \
             .AUTO_MAT_FIELD(type, 3, 2)                                                                                \
             .AUTO_MAT_FIELD(type, 3, 3)                                                                                \
-            .defaultConstructible<type>()                                                                              \
+            .typed<type>()                                                                              \
             .get();                                                                                                    \
     }
 

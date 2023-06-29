@@ -31,5 +31,5 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename... Types), (std::variant<Types...>))
           .template variant<Types>()),
      ...);
 
-    return builder.defaultConstructible<Var>().get();
+    return builder.typed<Var>().get();
 }

@@ -4,7 +4,7 @@
 #define AUTO_IMPL(type, name)                                                                                          \
     CUBOS_REFLECT_EXTERNAL_IMPL(type)                                                                                  \
     {                                                                                                                  \
-        return PrimitiveType::build(name).defaultConstructible<type>().get();                                          \
+        return PrimitiveType::build(name).typed<type>().get();                                          \
     }
 
 AUTO_IMPL(bool, "bool")

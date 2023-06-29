@@ -12,6 +12,7 @@ static void test(const char* name)
 {
     testTypeGetters<T, PrimitiveType>(name, name);
     testTypeDefaultConstructor<T>();
+    testTypeMoveConstructor<T>();
 }
 
 TEST_CASE("reflection::reflect<(external/primitives)>()")

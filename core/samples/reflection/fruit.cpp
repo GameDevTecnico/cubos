@@ -13,6 +13,6 @@ CUBOS_REFLECT_IMPL(Fruit)
     return ObjectType::build("Fruit")
         .field("name", &Fruit::name)
         .field("weight", &Fruit::weight)
-        .defaultConstructible<Fruit>()
+        .typed<Fruit>()
         .get();
 }

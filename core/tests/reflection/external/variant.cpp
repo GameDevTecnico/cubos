@@ -11,6 +11,7 @@ static void testStaticInfo(const char* name)
 {
     testTypeGetters<std::variant<TArgs...>, VariantType>(name, "std::variant");
     testTypeDefaultConstructor<std::variant<TArgs...>>();
+    testTypeMoveConstructor<std::variant<TArgs...>>();
 
     // Check if it holds the correct number of variants.
     auto& tv = reflect<std::variant<TArgs...>>().template asKind<VariantType>();

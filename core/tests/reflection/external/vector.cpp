@@ -11,6 +11,7 @@ static void testStaticInfo(const char* name)
 {
     testTypeGetters<std::vector<T>, ArrayType>(name, "std::vector");
     testTypeDefaultConstructor<std::vector<T>>();
+    testTypeMoveConstructor<std::vector<T>>();
 
     // Check if it holds the correct element type.
     auto& ta = reflect<std::vector<T>>().template asKind<ArrayType>();

@@ -16,6 +16,6 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename T), (std::vector<T>))
             return reinterpret_cast<uintptr_t>(&(*reinterpret_cast<const std::vector<T>*>(array))[index]);
         })
         .resize([](void* array, std::size_t size) { reinterpret_cast<std::vector<T>*>(array)->resize(size); })
-        .template defaultConstructible<std::vector<T>>()
+        .template typed<std::vector<T>>()
         .get();
 }

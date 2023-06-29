@@ -24,7 +24,27 @@ static void testTypeDefaultConstructor()
     auto& t = cubos::core::reflection::reflect<T>();
 
     // Check if the default constructor really creates a default instance of the type.
-    auto* instance = t.defaultConstruct();
+    auto* instance = operator new (t.size(), std::align_val_t{t.alignment()});
+    t.defaultConstruct(instance);
+
     CHECK(*static_cast<T*>(instance) == T{});
     t.destroy(instance);
+    operator delete(instance);
+}
+
+/// @brief Tests if the given type move constructor works as expected.
+/// @tparam T Type to test.
+template <typename T>
+static void testTypeMoveConstructor()
+{
+    auto& t = cubos::core::reflection::reflect<T>();
+
+    // Check if the move constructor really moves the given instance.
+    auto moved = T{};
+    auto* instance = operator new (t.size(), std::align_val_t{t.alignment()});
+    t.moveConstruct(instance, &moved);
+
+    CHECK(*static_cast<T*>(instance) == moved);
+    t.destroy(instance);
+    operator delete(instance);
 }

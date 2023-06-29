@@ -8,9 +8,24 @@ Type::Builder::Builder(Type& type)
 {
 }
 
+Type::Builder& Type::Builder::layout(std::size_t size, std::size_t alignment)
+{
+    mType.mSize = size;
+    mType.mAlignment = alignment;
+    return *this;
+}
+
 Type::Builder& Type::Builder::defaultConstructor(DefaultConstructor constructor)
 {
+    CUBOS_ASSERT(mType.mAlignment > 0, "Type alignment must be greater than 0, did you forget to call layout()?");
     mType.mDefaultConstructor = constructor;
+    return *this;
+}
+
+Type::Builder& Type::Builder::moveConstructor(MoveConstructor constructor)
+{
+    CUBOS_ASSERT(mType.mAlignment > 0, "Type alignment must be greater than 0, did you forget to call layout()?");
+    mType.mMoveConstructor = constructor;
     return *this;
 }
 
@@ -27,6 +42,8 @@ Type* Type::Builder::get()
 
 Type::Type(std::string name)
     : mName(std::move(name))
+    , mSize(0)
+    , mAlignment(0)
     , mDefaultConstructor(nullptr)
     , mDestructor(nullptr)
 {
@@ -53,10 +70,26 @@ const std::string& Type::shortName() const
     return mShortName;
 }
 
-void* Type::defaultConstruct() const
+std::size_t Type::size() const
+{
+    return mSize;
+}
+
+std::size_t Type::alignment() const
+{
+    return mAlignment;
+}
+
+void Type::defaultConstruct(void* ptr) const
 {
     CUBOS_ASSERT(mDefaultConstructor, "No default constructor set");
-    return mDefaultConstructor();
+    mDefaultConstructor(ptr);
+}
+
+void Type::moveConstruct(void* ptr, void* source) const
+{
+    CUBOS_ASSERT(mMoveConstructor, "No move constructor set");
+    mMoveConstructor(ptr, source);
 }
 
 void Type::destroy(void* object) const

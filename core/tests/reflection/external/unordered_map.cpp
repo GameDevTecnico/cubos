@@ -11,6 +11,7 @@ static void testStaticInfo(const char* name)
 {
     testTypeGetters<std::unordered_map<K, V>, DictionaryType>(name, "std::unordered_map");
     testTypeDefaultConstructor<std::unordered_map<K, V>>();
+    testTypeMoveConstructor<std::unordered_map<K, V>>();
 
     // Check if it holds the correct element type.
     auto& td = reflect<std::unordered_map<K, V>>().template asKind<DictionaryType>();

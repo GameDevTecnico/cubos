@@ -3,5 +3,5 @@
 
 CUBOS_REFLECT_EXTERNAL_IMPL(std::string)
 {
-    return PrimitiveType::build("std::string").defaultConstructible<std::string>().get();
+    return PrimitiveType::build("std::string").typed<std::string>().get();
 }
