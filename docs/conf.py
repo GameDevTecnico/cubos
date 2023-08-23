@@ -3,6 +3,7 @@ DOXYFILE = 'Doxyfile'
 LINKS_NAVBAR1 = [
     (None, 'pages', []),
     (None, 'namespaces', []),
+    (None, 'modules', []),
 ]
 
 # Add your own navbar links using the code below.
