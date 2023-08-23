@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <glm/mat4x4.hpp>
+
 #include <cubos/core/geom/capsule.hpp>
 
 namespace cubos::engine
