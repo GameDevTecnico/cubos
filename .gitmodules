@@ -22,3 +22,6 @@
 [submodule "core/lib/doctest"]
 	path = core/lib/doctest
 	url = https://github.com/doctest/doctest
+[submodule "docs/css/m.css"]
+	path = docs/css/m.css
+	url = https://github.com/mosra/m.css
