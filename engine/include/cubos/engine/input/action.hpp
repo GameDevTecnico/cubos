@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains the InputAction class.
+/// @brief Class @ref cubos::engine::InputAction.
 
 #pragma once
 
@@ -9,36 +9,45 @@
 
 namespace cubos::engine
 {
-    /// Used to represent a single input action, such as "jump" or "attack".
-    /// It can be bound to multiple keys, and will be considered "pressed" if any of them are pressed.
+    /// @brief Stores the state of a single input action, such as "jump" or "attack".
+    ///
+    /// Can be bound to multiple keys, and will be considered "pressed" if any of them are pressed.
+    ///
+    /// @ingroup input-plugin
     class InputAction final
     {
     public:
+        ~InputAction() = default;
+
+        /// @brief Constructs without any bindings.
         InputAction() = default;
+
+        /// @brief Constructs with existing bindings.
+        /// @param key Key bindings.
         InputAction(std::vector<std::pair<core::io::Key, core::io::Modifiers>> keys)
             : mKeys(keys)
         {
         }
 
-        ~InputAction() = default;
-
-        /// @return The vector of keys.
+        /// @brief Gets the key bindings.
+        /// @return Vector of keys.
         const std::vector<std::pair<core::io::Key, core::io::Modifiers>>& keys() const;
 
-        /// @return The vector of keys.
+        /// @brief Gets the key bindings.
+        /// @return Vector of keys.
         std::vector<std::pair<core::io::Key, core::io::Modifiers>>& keys();
 
+        /// @brief Checks if this action is pressed.
         /// @return Whether this action is pressed.
         bool pressed() const;
 
-        /// Sets whether this action is pressed.
+        /// @brief Sets whether this action is pressed.
         /// @param pressed The new pressed state.
         void pressed(bool pressed);
 
     private:
         std::vector<std::pair<core::io::Key, core::io::Modifiers>> mKeys;
 
-        /// Not serialized.
-        bool mPressed;
+        bool mPressed; //< Not serialized.
     };
 } // namespace cubos::engine

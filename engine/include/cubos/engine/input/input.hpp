@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains the Input class.
+/// @brief Resource @ref cubos::engine::Input.
 
 #pragma once
 
@@ -9,55 +9,67 @@
 
 namespace cubos::engine
 {
-    /// Used to store the input bindings for multiple players and update its state accordingly as events are received.
+    /// @brief Resource which stores the input bindings for multiple players.
+    ///
+    /// Its state is updated accordingly as events are received by the @ref input-plugin.
+    ///
+    /// @ingroup input-plugin
     class Input final
     {
     public:
+        /// @brief Alias for @ref core::io::Key.
         using Key = core::io::Key;
+
+        /// @brief Alias for @ref core::io::Modifiers.
         using Modifiers = core::io::Modifiers;
 
         Input() = default;
         ~Input() = default;
 
-        /// Clears all bindings.
+        /// @brief Clears all bindings.
         void clear();
 
-        /// Clears all bindings for a specific player.
-        /// @param player The player whose bindings will be cleared.
+        /// @brief Clears all bindings for a specific player.
+        /// @param player Player whose bindings will be cleared.
         void clear(int player);
 
-        /// Sets the bindings for a specific player.
-        /// @param bindings The bindings to set.
-        /// @param player The player whose bindings will be set.
+        /// @brief Sets the bindings for a specific player.
+        /// @param bindings Bindings to set.
+        /// @param player Player whose bindings will be set.
         void bind(const InputBindings& bindings, int player = 0);
 
-        /// Gets an action state for a specific player.
-        /// @param actionName The name of the action.
-        /// @param player The player whose action state will be retrieved.
-        /// @return True if the action exists and is pressed, false otherwise.
+        /// @brief Gets an action state for a specific player.
+        /// @param actionName Name of the action.
+        /// @param player Player whose action state will be retrieved.
+        /// @return Whether the action exists and is pressed.
         bool pressed(const char* actionName, int player = 0) const;
 
-        /// Gets an axis value for a specific player.
-        /// @param axisName The name of the axis.
-        /// @param player The player whose axis value will be retrieved.
-        /// @return The axis value if the axis exists, 0.0 otherwise.
+        /// @brief Gets an axis value for a specific player.
+        /// @param axisName Name of the axis.
+        /// @param player Player whose axis value will be retrieved.
+        /// @return Axis value if the axis exists, 0.0 otherwise.
         float axis(const char* axisName, int player = 0) const;
 
-        /// Handle a key event.
-        /// @param window The window that received the event.
-        /// @param event The key event.
+        /// @brief Handle a key event.
+        /// @param window Window that received the event.
+        /// @param event Key event.
         void handle(const core::io::Window& window, const core::io::KeyEvent& event);
 
-        /// Discard remaining events.
-        /// @param window The window that received the event.
-        /// @param event The event to discard.
+        /// @brief Handle all other events - discards them.
+        ///
+        /// This is method exists so that `std::visit` can be used with @ref core::io::WindowEvent
+        /// on @ref handle().
+        ///
+        /// @param window Window that received the event.
+        /// @param event Event to discard.
         inline void handle(const core::io::Window& window, const core::io::WindowEvent& event)
         {
             (void)window;
             (void)event;
         }
 
-        /// @return The bindings for each player.
+        /// @brief Gets the bindings for each player.
+        /// @return Bindings for each player.
         const std::unordered_map<int, InputBindings>& bindings() const;
 
     private:
