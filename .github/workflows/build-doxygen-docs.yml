@@ -20,18 +20,27 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install xorg-dev libglu1-mesa-dev graphviz doxygen
+        sudo apt-get install xorg-dev libglu1-mesa-dev doxygen
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install jinja2 pygments
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_DOCUMENTATION=ON
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target doxygen
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target generate-docs
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{github.workspace}}/build/html
-      
