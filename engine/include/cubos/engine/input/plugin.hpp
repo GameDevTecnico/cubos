@@ -15,19 +15,19 @@ namespace cubos::engine
     /// @ingroup plugins
     /// @brief Adds input handling to CUBOS.
     ///
-    /// Bridges:
+    /// ## Bridges
     /// - `JSONBridge<InputBindings>` - registered with the `.bind` extension.
     ///
-    /// Events:
+    /// ## Events
     /// - `InputEvent` - (TODO) emitted when an input event occurs.
     ///
-    /// Resources:
+    /// ## Resources
     /// - `Input` - stateful input manager, used to query the input state.
     ///
-    /// Tags:
+    /// ## Tags
     /// - `cubos.input.update` - updates the input state.
     ///
-    /// Dependencies:
+    /// ## Dependencies
     /// - @ref assets-plugin
     /// - @ref window-plugin
 

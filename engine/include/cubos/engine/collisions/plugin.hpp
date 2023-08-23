@@ -17,20 +17,20 @@ namespace cubos::engine
     /// @ingroup plugins
     /// @brief Adds collision detection to CUBOS.
     ///
-    /// Components:
+    /// ## Components
     /// - `BoxCollider` - holds the box collider data.
     /// - `CapsuleCollider` - holds the capsule collider data.
     /// - `PlaneCollider` - holds the plane collider data.
     /// - `SimplexCollider` - holds the simplex collider data.
     ///
-    /// Events:
+    /// ## Events
     /// - `CollisionEvent` - emitted when a collision occurs.
     /// - `TriggerEvent` - (TODO) emitted when a trigger is entered or exited.
     ///
-    /// Resources:
+    /// ## Resources
     /// - `BroadPhaseCollisions` - stores broad phase collision data.
     ///
-    /// Tags:
+    /// ## Tags
     /// - `cubos.collisions.aabb.missing` - missing aabb colliders are added.
     /// - `cubos.collisions.aabb` - collider aabbs are updated.
     /// - `cubos.collisions.broad.markers` - sweep markers are updated.
@@ -38,7 +38,7 @@ namespace cubos::engine
     /// - `cubos.collisions.broad` - broad phase collision detection.
     /// - `cubos.collisions` - collisions are resolved.
     ///
-    /// Dependencies:
+    /// ## Dependencies
     /// - @ref transform-plugin
 
     /// @brief Plugin entry function.
