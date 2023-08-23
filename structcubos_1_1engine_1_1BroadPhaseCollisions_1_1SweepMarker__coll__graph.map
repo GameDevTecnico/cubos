@@ -1,4 +1,0 @@
-<map id="BroadPhaseCollisions::SweepMarker" name="BroadPhaseCollisions::SweepMarker">
-<area shape="rect" id="node1" title="Marker used for sweep and prune." alt="" coords="5,95,168,136"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Entity.html" title=" " alt="" coords="57,5,117,32"/>
-</map>

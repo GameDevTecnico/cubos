@@ -1,4 +1,0 @@
-<map id="File" name="File">
-<area shape="rect" id="node1" title="Represents a file in the virtual file system of the engine. Should always be held through a File::Han..." alt="" coords="60,95,105,121"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,160,47"/>
-</map>

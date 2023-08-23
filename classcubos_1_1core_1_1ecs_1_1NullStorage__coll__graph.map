@@ -1,5 +1,0 @@
-<map id="NullStorage&lt; T &gt;" name="NullStorage&lt; T &gt;">
-<area shape="rect" id="node1" title="NullStorage is a Storage implementation that doesn&#39;t keep any data, made for components that don&#39;t ho..." alt="" coords="5,155,141,181"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Storage.html" title="Storage is an abstract container for a certain type with common operations, such as,..." alt="" coords="18,80,129,107"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1ecs_1_1IStorage.html" title="IStorage is an abstract parent class for all storages." alt="" coords="35,5,111,32"/>
-</map>

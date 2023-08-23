@@ -1,4 +1,0 @@
-<map id="SimplexCollider" name="SimplexCollider">
-<area shape="rect" id="node1" title="Simplex Collider." alt="" coords="5,95,131,121"/>
-<area shape="rect" id="node2" href="$structcubos_1_1core_1_1geom_1_1Simplex.html" title="A simplex shape &#45; may either be empty, a point, a line, a triangle or a tetrahedron." alt="" coords="31,5,105,32"/>
-</map>

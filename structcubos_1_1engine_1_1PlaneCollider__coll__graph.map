@@ -1,4 +1,0 @@
-<map id="PlaneCollider" name="PlaneCollider">
-<area shape="rect" id="node1" title="Plane Collider." alt="" coords="5,95,113,121"/>
-<area shape="rect" id="node2" href="$structcubos_1_1core_1_1geom_1_1Plane.html" title="Plane shape." alt="" coords="30,5,89,32"/>
-</map>

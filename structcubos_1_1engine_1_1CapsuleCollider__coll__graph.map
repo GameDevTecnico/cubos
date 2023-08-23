@@ -1,4 +1,0 @@
-<map id="CapsuleCollider" name="CapsuleCollider">
-<area shape="rect" id="node1" title="Capsule Collider." alt="" coords="5,95,129,121"/>
-<area shape="rect" id="node2" href="$structcubos_1_1core_1_1geom_1_1Capsule.html" title="Capsule shape, which can also represent a sphere." alt="" coords="30,5,105,32"/>
-</map>

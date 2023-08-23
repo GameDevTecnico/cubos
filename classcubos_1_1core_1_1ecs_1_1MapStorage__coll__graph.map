@@ -1,5 +1,0 @@
-<map id="MapStorage&lt; T &gt;" name="MapStorage&lt; T &gt;">
-<area shape="rect" id="node1" title="MapStorage is a Storage implementation that uses a STL unordered_map, this is best for components tha..." alt="" coords="5,155,144,181"/>
-<area shape="rect" id="node2" href="$classcubos_1_1core_1_1ecs_1_1Storage.html" title="Storage is an abstract container for a certain type with common operations, such as,..." alt="" coords="19,80,130,107"/>
-<area shape="rect" id="node3" href="$classcubos_1_1core_1_1ecs_1_1IStorage.html" title="IStorage is an abstract parent class for all storages." alt="" coords="37,5,113,32"/>
-</map>

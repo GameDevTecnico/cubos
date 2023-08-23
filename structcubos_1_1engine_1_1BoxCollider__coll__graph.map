@@ -1,4 +1,0 @@
-<map id="BoxCollider" name="BoxCollider">
-<area shape="rect" id="node1" title="Box Collider." alt="" coords="5,95,103,121"/>
-<area shape="rect" id="node2" href="$structcubos_1_1core_1_1geom_1_1Box.html" title="Box shape." alt="" coords="31,5,77,32"/>
-</map>

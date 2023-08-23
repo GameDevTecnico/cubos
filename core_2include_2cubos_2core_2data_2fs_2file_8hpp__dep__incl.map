@@ -1,8 +1,0 @@
-<map id="core/include/cubos/core/data/fs/file.hpp" name="core/include/cubos/core/data/fs/file.hpp">
-<area shape="rect" id="node1" title="Defines the File class." alt="" coords="333,5,488,47"/>
-<area shape="rect" id="node2" href="$archive_8hpp.html" title="Defines the Archive interface class." alt="" coords="99,95,282,136"/>
-<area shape="rect" id="node5" href="$file__stream_8hpp.html" title="Defines the FileStream implementation of the Stream interface class." alt="" coords="307,95,515,136"/>
-<area shape="rect" id="node6" href="$file__system_8hpp.html" title="Defines the FileSystem singleton class." alt="" coords="539,95,749,136"/>
-<area shape="rect" id="node3" href="$embedded__archive_8hpp.html" title="Defines the EmbeddedArchive class, which implements the Archive interface class." alt="" coords="5,184,181,240"/>
-<area shape="rect" id="node4" href="$standard__archive_8hpp.html" title="Defines the StandardArchive class, which implements the Archive interface class." alt="" coords="206,184,370,240"/>
-</map>
