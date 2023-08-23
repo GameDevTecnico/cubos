@@ -1,5 +1,8 @@
+/// @dir
+/// @brief Input plugin directory.
+
 /// @file
-/// @brief Input plugin entry point.
+/// @brief Plugin entry point.
 
 #pragma once
 
@@ -8,26 +11,28 @@
 
 namespace cubos::engine
 {
-    /// Plugin which adds input handling to CUBOS.
-    ///
-    /// @details
+    /// @defgroup input-plugin Input
+    /// @ingroup plugins
+    /// @brief Adds input handling to CUBOS.
     ///
     /// Bridges:
-    /// - `JSONBridge<InputBindings>`: registered with the `.bind` extension.
+    /// - `JSONBridge<InputBindings>` - registered with the `.bind` extension.
     ///
     /// Events:
-    /// - `InputEvent`: emitted when an input event occurs. (TODO)
+    /// - `InputEvent` - (TODO) emitted when an input event occurs.
     ///
     /// Resources:
-    /// - `Input`: stateful input manager, used to query the input state.
+    /// - `Input` - stateful input manager, used to query the input state.
     ///
     /// Tags:
-    /// - `cubos.input.update`: updates the input state.
+    /// - `cubos.input.update` - updates the input state.
     ///
     /// Dependencies:
-    /// - `assetsPlugin`
-    /// - `windowPlugin`
-    ///
+    /// - @ref assets-plugin
+    /// - @ref window-plugin
+
+    /// @brief Plugin entry function.
     /// @param cubos CUBOS. main class.
+    /// @ingroup input-plugin
     void inputPlugin(Cubos& cubos);
 } // namespace cubos::engine

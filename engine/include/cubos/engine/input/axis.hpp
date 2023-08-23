@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains the InputAxis class.
+/// @brief Class @ref cubos::engine::InputAxis.
 
 #pragma once
 
@@ -9,12 +9,23 @@
 
 namespace cubos::engine
 {
-    /// Used to represent a single input axis, such as "move forward" or "move right".
-    /// It can be bound to multiple keys, and will return a value in the range [-1, 1] based on which keys are pressed.
+    /// @brief Stores the state of a single input axis, such as "move forward" or "move right".
+    ///
+    /// Can be bound to multiple keys, and will have a value in the range [-1, 1] based on the the
+    /// state of its bindings.
+    ///
+    /// @ingroup input-plugin
     class InputAxis final
     {
     public:
+        ~InputAxis() = default;
+
+        /// @brief Constructs without any bindings.
         InputAxis() = default;
+
+        /// @brief Constructs with existing bindings.
+        /// @param positive Positive key bindings.
+        /// @param negative Negative key bindings.
         InputAxis(std::vector<std::pair<core::io::Key, core::io::Modifiers>> positive,
                   std::vector<std::pair<core::io::Key, core::io::Modifiers>> negative)
             : mPositive(positive)
@@ -22,32 +33,34 @@ namespace cubos::engine
         {
         }
 
-        ~InputAxis() = default;
-
-        /// @return The vector of positive keys.
+        /// @brief Gets the positive key bindings.
+        /// @return Vector of positive keys.
         const std::vector<std::pair<core::io::Key, core::io::Modifiers>>& positive() const;
 
-        /// @return The vector of negative keys.
+        /// @brief Gets the negative key bindings.
+        /// @return Vector of negative keys.
         const std::vector<std::pair<core::io::Key, core::io::Modifiers>>& negative() const;
 
-        /// @return The vector of positive keys.
+        /// @brief Gets the positive key bindings.
+        /// @return Vector of positive keys.
         std::vector<std::pair<core::io::Key, core::io::Modifiers>>& positive();
 
-        /// @return The vector of negative keys.
+        /// @brief Gets the negative key bindings.
+        /// @return Vector of negative keys.
         std::vector<std::pair<core::io::Key, core::io::Modifiers>>& negative();
 
-        /// @return The value of this axis.
+        /// @brief Gets the value.
+        /// @return Value.
         float value() const;
 
-        /// Sets the value of this axis.
-        /// @param value The new value of this axis.
+        /// @brief Sets the value.
+        /// @param value New value.
         void value(float value);
 
     private:
         std::vector<std::pair<core::io::Key, core::io::Modifiers>> mPositive;
         std::vector<std::pair<core::io::Key, core::io::Modifiers>> mNegative;
 
-        /// Not serialized.
-        float mValue;
+        float mValue; //< Not serialized.
     };
 } // namespace cubos::engine
