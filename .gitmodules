@@ -10,9 +10,6 @@
 [submodule "core/lib/imgui"]
 	path = core/lib/imgui
 	url = https://github.com/ocornut/imgui.git
-[submodule "docs/doxygen-awesome-css"]
-	path = docs/css/doxygen-awesome-css
-	url = https://github.com/jothepro/doxygen-awesome-css.git
 [submodule "core/lib/fmt"]
 	path = core/lib/fmt
 	url = https://github.com/fmtlib/fmt.git
