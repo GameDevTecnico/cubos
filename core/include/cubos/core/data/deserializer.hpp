@@ -173,7 +173,6 @@ namespace cubos::core::data
         Context mContext; ///< The context of the serializer.
     };
 
-    /// Concept for deserializable objects which define a deserialize method.
     template <typename T>
     concept HasDeserializeMethod = requires(Deserializer& des, T& obj)
     {

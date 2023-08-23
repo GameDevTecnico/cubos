@@ -172,7 +172,6 @@ namespace cubos::core::data
         Context mContext; ///< The context of the serializer.
     };
 
-    /// Concept for serializable objects which define a serialize method.
     template <typename T>
     concept HasSerializeMethod = requires(Serializer& ser, const T& obj, const char* name)
     {
