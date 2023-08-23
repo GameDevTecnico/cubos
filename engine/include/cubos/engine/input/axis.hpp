@@ -61,6 +61,6 @@ namespace cubos::engine
         std::vector<std::pair<core::io::Key, core::io::Modifiers>> mPositive;
         std::vector<std::pair<core::io::Key, core::io::Modifiers>> mNegative;
 
-        float mValue; //< Not serialized.
+        float mValue;///< Not serialized.
     };
 } // namespace cubos::engine

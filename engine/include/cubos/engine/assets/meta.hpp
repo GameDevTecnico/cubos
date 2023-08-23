@@ -65,6 +65,6 @@ namespace cubos::engine
         }
 
     private:
-        std::unordered_map<std::string, std::string> mParams; //< Parameters of the asset.
+        std::unordered_map<std::string, std::string> mParams;///< Parameters of the asset.
     };
 } // namespace cubos::engine
