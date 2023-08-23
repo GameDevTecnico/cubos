@@ -48,6 +48,6 @@ namespace cubos::engine
     private:
         std::vector<std::pair<core::io::Key, core::io::Modifiers>> mKeys;
 
-        bool mPressed; //< Not serialized.
+        bool mPressed;///< Not serialized.
     };
 } // namespace cubos::engine
