@@ -25,6 +25,10 @@
             clang_14
             doctest
             lcov
+            (python3.withPackages (ps: with ps; [
+              jinja2
+              pygments
+            ])) 
           ];
         };
       });
