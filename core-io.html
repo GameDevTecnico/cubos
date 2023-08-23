@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Structure &raquo; Core &raquo; Input Output | CUBOS.</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">CUBOS.</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="structure.html">Structure</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="core.html">Core</a> &raquo;</span>
+          Input Output
+        </h1>
+<p><a name="md_docs_pages_1_structure_1_core_4_io"></a> The namespace <a href="namespacecubos_1_1core_1_1io.html" class="m-doc">cubos::<wbr />core::<wbr />io</a> provides input output related utilities, such as a platform independent <a href="namespacecubos_1_1core_1_1io.html#abbf049b16e4957c4db19bbe8699da719" class="m-doc">Window</a> and the InputManager.</p><section id="autotoc_md4"><h2><a href="#autotoc_md4">Window</a></h2><p>The <a href="namespacecubos_1_1core_1_1io.html#abbf049b16e4957c4db19bbe8699da719" class="m-doc">Window</a> class is a handle to a platform independent window, which can be used to render graphics and receive input events. It is created by the <a href="namespacecubos_1_1core_1_1io.html#a79a5c02b2ce9bb5815f8c93dcef87c0b" class="m-doc">openWindow</a> function.</p><p>It provides the method Window::pollEvents, which receives an EventWriter of <a href="namespacecubos_1_1core_1_1io.html#ac246d098dc508ff511ed8919c61a6a40" class="m-doc">WindowEvent</a>s, polls the window for events, and writes them to the writer.</p></section><section id="autotoc_md5"><h2><a href="#autotoc_md5">Input Manager</a></h2><p>The input manager acts as an abstraction layer between raw input events and higher level input actions. For example, the game may define an input action called <code>&quot;Jump&quot;</code>, but not care about the actual key that is pressed to trigger the action. This is where the input manager comes in.</p><p>It provides the method InputManager::update, which receives an EventReader of <a href="namespacecubos_1_1core_1_1io.html#ac246d098dc508ff511ed8919c61a6a40" class="m-doc">WindowEvent</a>s and an EventWriter of InputEvents.</p><section id="autotoc_md6"><h3><a href="#autotoc_md6">Actions</a></h3><p>Actions represent possible high level events that can be triggered by the user. They are identified by a string, and have an assigned layer. When the action is triggered and generates an event, the event will have the layer that the action was assigned to. This allows the game to read only events related to a specific mask of layers.</p><p>Actions thus have two states: <em>triggered</em> and <em>released</em>. Events are generated when the state changes, and the event will have the new state.</p></section><section id="autotoc_md7"><h3><a href="#autotoc_md7">Axes</a></h3><p>Axes represent a continuous value input. They are identified by a string, and also have an assigned layer. One example of an axis would be the movement of the player character. The axis can be positive or negative, and the value represents the speed of the movement.</p><p>Events are generated when the value changes, and the event will have the new value.</p></section><section id="autotoc_md8"><h3><a href="#autotoc_md8">Bindings</a></h3><p>Bindings are what actually trigger actions. There are multiple types of bindings, such as keyboard key presses, mouse button presses, mouse wheel scrolls, other actions, axes falling within a range, sequences of other bindings, etc.</p><p>Bindings may also be assigned to axes, in which case they will change the value of the axis. For example, a binding for the <code>W</code> key may be assigned to the <code>MoveForward</code> axis, and when the <code>W</code> key is pressed, the axis will have a positive value.</p><p>While actions and axes are defined by the game developer, bindings can be overridden by the player.</p></section></section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS.. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
