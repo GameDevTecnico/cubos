@@ -11,7 +11,7 @@ IMAGE_PATH = @DOXYGEN_PROJECT_ROOT@/docs/images
 
 # Use relative include paths
 FULL_PATH_NAMES = YES
-STRIP_FROM_PATH = @DOXYGEN_PROJECT_ROOT@/core/include @DOXYGEN_PROJECT_ROOT@/engine/include @DOXYGEN_PROJECT_ROOT@
+STRIP_FROM_PATH = @DOXYGEN_PROJECT_ROOT@/core/include/cubos @DOXYGEN_PROJECT_ROOT@/engine/include/cubos @DOXYGEN_PROJECT_ROOT@
 
 # We use m.css to generate the html documentation, so we only need XML output
 GENERATE_XML = YES
