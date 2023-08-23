@@ -16,6 +16,9 @@
 
 namespace cubos::engine
 {
+    /// @defgroup plugins
+    /// @brief Engine plugins.
+
     /// @brief Resource which stores the time since the last iteration of the main loop started.
     ///
     /// This resource is added and updated by the @ref Cubos class.
