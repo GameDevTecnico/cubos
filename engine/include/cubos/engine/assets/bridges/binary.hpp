@@ -1,3 +1,6 @@
+/// @file
+/// @brief Class @ref cubos::engine::BinaryBridge.
+
 #pragma once
 
 #include <cubos/core/data/binary_deserializer.hpp>
@@ -8,17 +11,19 @@
 
 namespace cubos::engine
 {
-    /// A bridge for loading and saving assets which are serialized to and from a binary file.
+    /// @brief Bridge for loading and saving assets which are serialized to and from a binary file.
     ///
-    /// @details This bridge automatically serializes and deserializes assets of type `T` to and
-    /// from a binary file. Thus, `T` must be serializable and deserializable. No additional
-    /// context is given to the serializer or deserializer.
+    /// This bridge automatically serializes and deserializes assets of type `T` to from a binary
+    /// file. Thus, `T` must be serializable and deserializable. No additional context is given to
+    /// the serializer or deserializer.
     ///
-    /// @tparam T The type of asset to load and save. Must be default constructible.
+    /// @tparam T Type of asset to load and save. Must be default constructible.
+    /// @ingroup assets-plugin
     template <typename T>
     class BinaryBridge : public FileBridge
     {
     public:
+        /// @brief Constructs a bridge.
         /// @param littleEndian Whether to use little endian byte order.
         BinaryBridge(bool littleEndian = true)
             : mLittleEndian{littleEndian}

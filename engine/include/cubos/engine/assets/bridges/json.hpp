@@ -1,3 +1,6 @@
+/// @file
+/// @brief Class @ref cubos::engine::JSONBridge.
+
 #pragma once
 
 #include <cubos/core/data/json_deserializer.hpp>
@@ -8,19 +11,23 @@
 
 namespace cubos::engine
 {
-    /// A bridge for loading and saving assets which are serialized to and from a JSON file.
+    /// @brief Bridge for loading and saving assets which are serialized to and from a JSON file.
     ///
-    /// @details This bridge automatically serializes and deserializes assets of type `T` to and
-    /// from a JSON file. Thus, `T` must be serializable and deserializable. No additional context
-    /// is given to the serializer or deserializer.
+    /// This bridge automatically serializes and deserializes assets of type `T` to and from a JSON
+    /// file. Thus, `T` must be serializable and deserializable. No additional context is given to
+    /// the serializer or deserializer.
     ///
-    /// @tparam T The type of asset to load and save. Must be default constructible.
+    /// @tparam T Type of asset to load and save. Must be default constructible.
+    /// @ingroup assets-plugin
     template <typename T>
     class JSONBridge : public FileBridge
     {
     public:
-        /// @param indentation The indentation level to use when saving the JSON file. Set to -1 to
-        /// remove all whitespace.
+        /// @brief Constructs a bridge.
+        ///
+        /// If the indentation level is set to -1, all whitespace is removed.
+        ///
+        /// @param indentation Indentation level to use when saving the JSON file.
         JSONBridge(int indentation = 4)
             : mIndentation{indentation}
         {
