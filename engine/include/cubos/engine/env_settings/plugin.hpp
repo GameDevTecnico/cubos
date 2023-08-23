@@ -1,19 +1,28 @@
+/// @dir
+/// @brief Environment settings plugin directory.
+
+/// @file
+/// @brief Plugin entry point.
+
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
 
 namespace cubos::engine
 {
-    /// Plugin to load environment settings, provided via command line.
-    /// Any duplicated setting will be overwritten.
+    /// @defgroup env-settings-plugin Environment settings
+    /// @ingroup plugins
+    /// @brief Loads settings from the command line arguments.
     ///
-    /// @details This plugin needs the Arguments resource to be defined. The resouce is defined
-    /// when the command line arguments (argc and argv) are provided to the Cubos constructor.
+    /// This plugin needs the Arguments resource, and thus, the constructor @ref Cubos::Cubos(int, char**) must be
+    /// used to construct the application. Any previous setting will be overwritten if its set on the arguments.
     ///
-    /// Startup tags:
-    /// - `cubos.settings`: the settings are loaded with this tag.
-    /// - `cubos.settings.env`: the settings are loaded with this tag.
-    ///
+    /// ## Startup tags
+    /// - `cubos.settings`: the settings are loaded.
+    /// - `cubos.settings.env`: the settings are loaded.
+
+    /// @brief Plugin entry function.
     /// @param cubos CUBOS. main class
+    /// @ingroup env-settings-plugin
     void envSettingsPlugin(Cubos& cubos);
 } // namespace cubos::engine
