@@ -17,14 +17,14 @@ namespace cubos::engine
     ///
     /// ## Settings
     /// - `assets.io.enabled` - whether asset I/O should be done (default: `true`).
-    /// - `assets.io.path` - path to the assets directory - will be mounted to `/assets/` (default: `assets/`)
-    /// - `assets.io.readOnly` - if true, the assets directory will be mounted as read-only (default: `true`)
+    /// - `assets.io.path` - path to the assets directory - will be mounted to `/assets/` (default: `assets/`).
+    /// - `assets.io.readOnly` - if true, the assets directory will be mounted as read-only (default: `true`).
     ///
     /// ## Events
-    /// - `AssetEvent` - (TODO) emitted when an asset is either loaded, modified or unloaded.
+    /// - @ref AssetEvent - (TODO) emitted when an asset is either loaded, modified or unloaded.
     ///
     /// ## Resources
-    /// - `Assets` - the asset manager, used to access asset data.
+    /// - @ref Assets - the asset manager, used to access asset data.
     ///
     /// ## Startup tags
     /// - `cubos.assets.init` - initializes the assets manager and loads the meta files (after `cubos.settings`).

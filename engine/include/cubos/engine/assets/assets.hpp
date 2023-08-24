@@ -41,7 +41,7 @@ namespace cubos::engine
     /// @brief Resource which manages all assets. Responsible for loading and unloading assets,
     /// storing them in memory, and providing access to them.
     ///
-    /// Assets are all identified through `Asset` handles.
+    /// Assets are all identified through @ref Asset handles.
     /// @ingroup assets-plugin
     class Assets final
     {
@@ -87,8 +87,8 @@ namespace cubos::engine
         ///
         /// This method doesn't block, thus the asset may have not yet been loaded when it returns.
         /// If the manager is unable to find the asset or a bridge for loading it, a null handle
-        /// is returned. If an error occurs while loading the asset, it will only fail in `get` or
-        /// be visible through `status`.
+        /// is returned. If an error occurs while loading the asset, it will only fail in @ref
+        /// read() or be visible through @ref status().
         ///
         /// @param handle Handle to load the asset for.
         /// @return Strong handle to the asset, or a null handle if an error occurred.
@@ -236,14 +236,14 @@ namespace cubos::engine
             std::shared_ptr<AssetBridge> bridge; ///< The bridge to use to load the asset.
         };
 
-        /// @brief Untyped version of `create`.
+        /// @brief Untyped version of @ref create().
         /// @param type Type of the asset data.
         /// @param data Asset data to store.
         /// @param destructor Destructor for the asset data.
         /// @return Strong handle to the asset.
         AnyAsset create(std::type_index type, void* data, void (*destructor)(void*));
 
-        /// @brief Untyped version of `store`.
+        /// @brief Untyped version of @ref store().
         /// @param handle Handle to associate the asset with.
         /// @param type Type of the asset data.
         /// @param data Asset data to store.

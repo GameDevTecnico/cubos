@@ -15,7 +15,7 @@ namespace cubos::engine
     ///
     /// Serialization:
     /// - can be serialized and deserialized without context.
-    /// - when serialized with the type `AssetMeta::Exclude` in the context, the specified keys are
+    /// - when serialized with the type @ref AssetMeta::Exclude in the context, the specified keys are
     ///   excluded from the serialization.
     ///
     /// @ingroup assets-plugin

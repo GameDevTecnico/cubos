@@ -13,8 +13,8 @@ namespace cubos::engine
 {
     /// @brief Bridge for loading and saving assets which are serialized to and from a binary file.
     ///
-    /// This bridge automatically serializes and deserializes assets of type `T` to from a binary
-    /// file. Thus, `T` must be serializable and deserializable. No additional context is given to
+    /// This bridge automatically serializes and deserializes assets of type @p T to from a binary
+    /// file. Thus, @p T must be serializable and deserializable. No additional context is given to
     /// the serializer or deserializer.
     ///
     /// @tparam T Type of asset to load and save. Must be default constructible.
