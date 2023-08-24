@@ -1,5 +1,6 @@
 /// @file
-/// @brief Defines the StandardArchive class, which implements the Archive interface class.
+/// @brief Class @ref cubos::core::data::StandardArchive.
+/// @ingroup core-data-fs
 
 #pragma once
 
@@ -10,24 +11,29 @@
 
 namespace cubos::core::data
 {
-    /// @brief Archive implementation which allows reading and writing into a file in the OS file
-    /// system, using the standard library.
+    /// @brief Archive implementation which reads and writes from/into the OS file system using
+    /// the standard library.
     ///
-    /// @details Can interface with both regular and directory files. If the archive is not
-    /// read-only and the target file is not found on the OS file system, then it is created.
+    /// Can represent both regular files and directories.
     ///
-    /// This implementation does not detect changes in the file system made without the
-    /// File and FileSystem classes (see #263).
+    /// @todo This implementation does not detect changes in the file system made outside the File
+    /// and FileSystem classes (#263).
     ///
-    /// @see Archive
+    /// @ingroup core-data-fs
     class StandardArchive : public Archive
     {
     public:
+        ~StandardArchive() override = default;
+
+        /// @brief Constructs pointing to the regular file or directory with the given @p osPath.
+        ///
+        /// If @p readOnly is false and there's no file or directory at @p osPath, then it is
+        /// created.
+        ///
         /// @param osPath The path to the file/directory in the real file system.
         /// @param isDirectory Whether the path is a directory or a file.
         /// @param readOnly True if the archive is read-only, false otherwise.
         StandardArchive(const std::filesystem::path& osPath, bool isDirectory, bool readOnly);
-        ~StandardArchive() override = default;
 
         std::size_t create(std::size_t parent, std::string_view name, bool directory = false) override;
         bool destroy(std::size_t id) override;
@@ -40,22 +46,23 @@ namespace cubos::core::data
         std::unique_ptr<memory::Stream> open(std::size_t id, File::Handle handle, File::OpenMode mode) override;
 
     private:
-        /// Information about a file in the directory.
+        /// @brief Information about a file in the directory.
         struct FileInfo
         {
-            std::filesystem::path osPath; ///< The path to the file in the real file system.
-            std::size_t parent;           ///< The identifier of the parent file.
-            std::size_t sibling;          ///< The identifier of the next sibling file.
-            std::size_t child;            ///< The identifier of the first child file.
+            std::filesystem::path osPath; ///< Path to the file in the real file system.
+            std::size_t parent;           ///< Identifier of the parent file.
+            std::size_t sibling;          ///< Identifier of the next sibling file.
+            std::size_t child;            ///< Identifier of the first child file.
             bool directory;               ///< True if the file is a directory, false otherwise.
         };
 
-        /// Recursively adds all files in the directory to the archive.
+        /// @brief Recursively adds all files in the directory to the archive.
+        /// @param Id of the directory.
         void generate(std::size_t parent);
 
-        std::filesystem::path mOsPath;                    ///< The path to the directory in the real file system.
+        std::filesystem::path mOsPath;                    ///< Path to the directory in the real file system.
         bool mReadOnly;                                   ///< True if the archive is read-only, false otherwise.
         std::unordered_map<std::size_t, FileInfo> mFiles; ///< Maps file identifiers to file info.
-        std::size_t mNextId;                              ///< The next identifier to assign to a file.
+        std::size_t mNextId;                              ///< Next identifier to assign to a file.
     };
 } // namespace cubos::core::data

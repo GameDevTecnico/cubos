@@ -1,0 +1,15 @@
+/// @dir
+/// @brief @ref cubos::core::data namespace.
+
+#pragma once
+
+/// @namespace cubos::core::data
+/// @brief Data namespace.
+/// @ingroup core
+
+namespace cubos::core::data
+{
+    /// @defgroup core-data Data
+    /// @ingroup core
+    /// @brief Provides filesystem and serialization utilities.
+}

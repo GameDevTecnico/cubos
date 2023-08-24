@@ -1,0 +1,11 @@
+/// @dir
+/// @brief @ref Filesystem utilities directory.
+
+#pragma once
+
+namespace cubos::core::data
+{
+    /// @defgroup core-data-fs Filesystem
+    /// @ingroup core-data
+    /// @brief Provides filesystem utilities.
+}

@@ -1,5 +1,6 @@
 /// @file
-/// @brief Defines the FileStream implementation of the Stream interface class.
+/// @brief Class @ref cubos::core::data::FileStream.
+/// @ingroup core-data-fs
 
 #pragma once
 
@@ -11,17 +12,25 @@
 
 namespace cubos::core::data
 {
-    /// @brief Wrapper around a specific file stream which maintains a reference to the file,
-    /// preventing it from being destroyed while the stream is still in use. Should not be used
-    /// directly - it is meant to be created by Archive implementations and then accessed by the
-    /// user through an abstract Stream interface.
+    /// @brief Wrapper around an implementation-specific file stream which keeps the file alive and
+    /// does some sanity checks.
     ///
-    /// @see File Archive memory::Stream
-    /// @tparam T Inner stream type.
+    /// @note This is not mean to be used by the user directly. It is meant to be created
+    /// internally by @ref Archive implementations and returned as a pointer to a @ref
+    /// memory::Stream.
+    ///
+    /// The file is kept alive by storing a handle to it, which prevents it from being destroyed
+    /// as long as the stream is alive.
+    ///
+    /// @see File
+    /// @see Archive
+    /// @tparam T Inner implementation-specific stream type.
+    /// @ingroup core-data-fs
     template <typename T>
     class FileStream final : public memory::Stream
     {
     public:
+        /// @brief Constructs.
         /// @param file File which the stream is reading/writing from/to.
         /// @param mode Mode to open the file in.
         /// @param stream Stream to read/write from/to.
