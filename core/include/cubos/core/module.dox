@@ -3,7 +3,9 @@
 
 #pragma once
 
+/// @namespace cubos::core
 /// @brief CUBOS. core namespace.
+
 namespace cubos::core
 {
     /// @defgroup core
