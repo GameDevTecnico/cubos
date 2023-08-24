@@ -1,0 +1,11 @@
+/// @dir
+/// @brief Tool plugins directory.
+
+#pragma once
+
+namespace cubos::engine
+{
+    /// @defgroup tool-plugins Tools
+    /// @ingroup plugins
+    /// @brief Plugins which add debug and development tooling to CUBOS.
+}

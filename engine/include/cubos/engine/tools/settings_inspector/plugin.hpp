@@ -1,16 +1,24 @@
+/// @dir
+/// @brief Settings inspector plugin directory.
+
+/// @file
+/// @brief Plugin entry point.
+
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
 
 namespace cubos::engine::tools
 {
-    /// Plugin that allows inspecting the current settings through a ImGui window.
+    /// @defgroup settings-inspector-tool-plugin Settings inspector
+    /// @ingroup tool-plugins
+    /// @brief Allows inspecting the current setting values through a ImGui window.
     ///
-    /// @details This plugin adds one system, which adds a ImGui window with the current settings.
-    ///
-    /// Dependencies:
-    /// - `imguiPlugin`
-    //
+    /// ## Dependencies
+    /// - @ref imgui-plugin
+
+    /// @brief Plugin entry function.
     /// @param cubos CUBOS. main class
+    /// @ingroup settings-inspector-tool-plugin
     void settingsInspectorPlugin(Cubos& cubos);
 } // namespace cubos::engine::tools
