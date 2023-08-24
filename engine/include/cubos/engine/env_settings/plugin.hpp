@@ -18,8 +18,8 @@ namespace cubos::engine
     /// used to construct the application. Any previous setting will be overwritten if its set on the arguments.
     ///
     /// ## Startup tags
-    /// - `cubos.settings`: the settings are loaded.
-    /// - `cubos.settings.env`: the settings are loaded.
+    /// - `cubos.settings` - the settings are loaded.
+    /// - `cubos.settings.env` - the settings are loaded.
 
     /// @brief Plugin entry function.
     /// @param cubos CUBOS. main class

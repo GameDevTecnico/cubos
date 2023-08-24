@@ -13,8 +13,8 @@ namespace cubos::engine
     /// which open a single file to load and save assets.
     ///
     /// This bridge should be used as a base class for bridges which load and save assets. Child
-    /// classes must implement the `loadFromFile` and `saveToFile` methods, which are called with a
-    /// file stream to load and save the asset from and to, respectively.
+    /// classes must implement the @ref loadFromFile() and @ref saveToFile() methods, which are
+    /// called with a file stream to load and save the asset from and to, respectively.
     ///
     /// @ingroup assets-plugin
     class FileBridge : public AssetBridge

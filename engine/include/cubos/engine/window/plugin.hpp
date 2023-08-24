@@ -20,9 +20,9 @@ namespace cubos::engine
     /// closed.
     ///
     /// ## Settings
-    /// - `window.title` - the window's title.
-    /// - `window.width` - the window's width.
-    /// - `window.height` - the window's height.
+    /// - `window.title` - the window's title (default: `CUBOS.`).
+    /// - `window.width` - the window's width (default: `800`).
+    /// - `window.height` - the window's height (default: `600`).
     ///
     /// ## Events
     /// - @ref core::io::WindowEvent - event polled from the window.

@@ -18,17 +18,17 @@ namespace cubos::engine
     /// @brief Adds collision detection to CUBOS.
     ///
     /// ## Components
-    /// - `BoxCollider` - holds the box collider data.
-    /// - `CapsuleCollider` - holds the capsule collider data.
-    /// - `PlaneCollider` - holds the plane collider data.
-    /// - `SimplexCollider` - holds the simplex collider data.
+    /// - @ref BoxCollider - holds the box collider data.
+    /// - @ref CapsuleCollider - holds the capsule collider data.
+    /// - @ref PlaneCollider - holds the plane collider data.
+    /// - @ref SimplexCollider - holds the simplex collider data.
     ///
     /// ## Events
-    /// - `CollisionEvent` - emitted when a collision occurs.
-    /// - `TriggerEvent` - (TODO) emitted when a trigger is entered or exited.
+    /// - @ref CollisionEvent - emitted when a collision occurs.
+    /// - @ref TriggerEvent - (TODO) emitted when a trigger is entered or exited.
     ///
     /// ## Resources
-    /// - `BroadPhaseCollisions` - stores broad phase collision data.
+    /// - @ref BroadPhaseCollisions - stores broad phase collision data.
     ///
     /// ## Tags
     /// - `cubos.collisions.aabb.missing` - missing aabb colliders are added.
