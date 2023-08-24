@@ -1,5 +1,6 @@
 /// @file
 /// @brief Component @ref cubos::engine::Scale.
+/// @ingroup transform-plugin
 
 #pragma once
 

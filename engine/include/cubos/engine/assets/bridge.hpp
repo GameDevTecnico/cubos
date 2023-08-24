@@ -1,5 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::engine::AssetBridge.
+/// @ingroup assets-plugin
 
 /// @dir ./bridges
 /// @brief @ref cubos::engine::AssetBridge implementations directory.

@@ -3,6 +3,7 @@
 
 /// @file
 /// @brief Plugin entry point.
+/// @ingroup collisions-plugin
 
 /// @dir ./colliders
 /// @brief Collider components directory.

@@ -3,6 +3,7 @@
 
 /// @file
 /// @brief Plugin entry point.
+/// @ingroup entity-selector-tool-plugin
 
 #pragma once
 

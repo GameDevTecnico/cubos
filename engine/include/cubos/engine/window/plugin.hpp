@@ -3,6 +3,7 @@
 
 /// @file
 /// @brief Plugin entry point.
+/// @ingroup window-plugin
 
 #pragma once
 

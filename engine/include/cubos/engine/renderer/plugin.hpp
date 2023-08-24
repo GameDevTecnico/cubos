@@ -4,6 +4,7 @@
 /// @file
 /// @brief Plugin entry point, resource @ref cubos::engine::ActiveCameras and components @ref
 /// cubos::engine::RenderableGrid and @ref cubos::engine::Camera.
+/// @ingroup renderer-plugin
 /// @todo Move resources and components to their own files.
 
 #pragma once

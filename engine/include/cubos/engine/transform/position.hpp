@@ -1,5 +1,6 @@
 /// @file
 /// @brief Component @ref cubos::engine::Position.
+/// @ingroup transform-plugin
 
 #pragma once
 

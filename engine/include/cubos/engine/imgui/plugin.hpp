@@ -3,6 +3,7 @@
 
 /// @file
 /// @brief Plugin entry point.
+/// @ingroup imgui-plugin
 
 #pragma once
 

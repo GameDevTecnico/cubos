@@ -1,5 +1,6 @@
 /// @file
 /// @brief Resource @ref cubos::engine::BroadPhaseCollisions.
+/// @ingroup collisions-plugin
 
 #pragma once
 

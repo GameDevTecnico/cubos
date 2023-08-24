@@ -1,5 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::engine::InputAxis.
+/// @ingroup input-plugin
 
 #pragma once
 

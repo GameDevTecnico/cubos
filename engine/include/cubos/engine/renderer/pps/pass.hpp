@@ -1,5 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::engine::PostProcessingPass.
+/// @ingroup renderer-plugin
 
 #pragma once
 

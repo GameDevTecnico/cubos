@@ -1,5 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::engine::BaseRenderer and resource @ref cubos::engine::Renderer.
+/// @ingroup renderer-plugin
 
 /// @dir ./pps
 /// @brief Post processing directory.

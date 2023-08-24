@@ -1,5 +1,6 @@
 /// @file
 /// @brief Post processing pass implementation @ref cubos::engine::PostProcessingBloom.
+/// @ingroup renderer-plugin
 
 #pragma once
 

@@ -1,5 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::engine::Scene.
+/// @ingroup scene-plugin
 
 #pragma once
 

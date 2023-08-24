@@ -1,5 +1,6 @@
 /// @file
 /// @brief Resource @ref cubos::engine::Input.
+/// @ingroup input-plugin
 
 #pragma once
 

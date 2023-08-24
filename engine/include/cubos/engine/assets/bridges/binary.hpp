@@ -1,5 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::engine::BinaryBridge.
+/// @ingroup assets-plugin
 
 #pragma once
 

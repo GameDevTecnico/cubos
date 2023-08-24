@@ -3,6 +3,7 @@
 
 /// @file
 /// @brief Plugin entry point.
+/// @ingroup settings-inspector-tool-plugin
 
 #pragma once
 
