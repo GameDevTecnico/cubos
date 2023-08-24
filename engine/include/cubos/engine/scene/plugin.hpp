@@ -1,3 +1,9 @@
+/// @dir
+/// @brief Scene plugin directory.
+
+/// @file
+/// @brief Plugin entry point.
+
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
@@ -5,14 +11,18 @@
 
 namespace cubos::engine
 {
-    /// Plugin which adds scenes to CUBOS. Scenes are the asset equivalent to ECS blueprints.
+    /// @defgroup scene-plugin Scene
+    /// @ingroup plugins
+    /// @brief Adds scenes to CUBOS.
     ///
-    /// @details Registers the `SceneBridge` asset bridge with the `.cubos` extension. Loads assets
-    /// of the `Scene` type.
+    /// ## Bridges
+    /// - @ref SceneBridge - registered with the `.cubos` extension, loads @ref Scene assets.
     ///
-    /// Dependencies:
-    /// - `assetsPlugin`
-    ///
+    /// ## Dependencies
+    /// - @ref assets-plugin
+
+    /// @brief Plugin entry function.
     /// @param cubos CUBOS. main class.
+    /// @ingroup scene-plugin
     void scenePlugin(Cubos& cubos);
 } // namespace cubos::engine
