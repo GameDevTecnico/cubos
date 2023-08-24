@@ -77,7 +77,7 @@ namespace cubos::engine
         void resize(glm::uvec2 size);
 
         /// @brief Gets the current size of the renderer's framebuffers.
-        /// @returns Current size.
+        /// @return Current size.
         glm::uvec2 size() const;
 
         /// @brief Draws a frame.
