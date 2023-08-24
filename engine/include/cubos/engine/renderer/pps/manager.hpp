@@ -1,3 +1,5 @@
+/// @file
+/// @brief Class @ref cubos::engine::PostProcessingManager.
 
 #pragma once
 
@@ -12,7 +14,8 @@ namespace cubos::engine
 {
     class PostProcessingPass;
 
-    /// Possible renderer outputs which can then be used as input for a post processing pass.
+    /// @brief Possible renderer outputs which can then be used as input for a post processing pass.
+    /// @ingroup renderer-plugin
     enum class PostProcessingInput
     {
         Lighting, ///< Renderer output with lighting applied.
@@ -20,46 +23,53 @@ namespace cubos::engine
         Normal,   ///< GBuffer texture with the world normal of the pixels.
     };
 
-    /// Class responsible for managing the post processing passes.
-    /// This class is renderer agnostic, which means that it can be used with any renderer.
+    /// @brief Responsible for managing the post processing passes.
     ///
-    /// Passes are executed in the order they are added, and take as input the output of the previous pass and the
-    /// outputs of the renderer.
-    /// @see Pass
+    /// This class is renderer agnostic. It can be used with any renderer implementation.
+    /// Passes are executed in the order they are added, and take as input the output of the
+    /// previous pass and the outputs of the renderer.
+    ///
+    /// @see PostProcessingPass
+    /// @ingroup renderer-plugin
     class PostProcessingManager final
     {
     public:
-        /// @param renderDevice The render device to use.
-        /// @param size The size of the window.
+        /// @brief Constructs.
+        /// @param renderDevice Render device to use.
+        /// @param size Size of the window.
         PostProcessingManager(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
         ~PostProcessingManager();
 
-        /// Called when the window framebuffer size changes.
-        /// @param size The new size of the window.
+        /// @brief Called when the window framebuffer size changes.
+        /// @param size New size of the window.
         void resize(glm::uvec2 size);
 
-        /// Provides a texture input to be used by the passes.
-        /// @param input The input identifier.
-        /// @param texture The texture to provide.
+        /// @brief Provides a texture input to be used by the passes.
+        /// @param input Input identifier.
+        /// @param texture Texture to provide.
         void provideInput(PostProcessingInput input, core::gl::Texture2D texture);
 
-        /// Adds a pass to the manager.
-        /// @tparam T The type of the pass to add.
-        /// @return The ID of the pass.
+        /// @brief Adds a pass to the manager.
+        /// @tparam T Type of the pass to add.
+        /// @return ID of the pass.
         template <typename T>
         std::size_t addPass();
 
-        /// Removes a pass from the manager.
-        /// @param id The ID of the pass.
+        /// @brief Removes a pass from the manager.
+        /// @param id ID of the pass.
         void removePass(std::size_t id);
 
-        /// Applies all post processing passes sequentially, and outputs the result to the screen.
+        /// @brief Applies all post processing passes sequentially, and outputs the result to the
+        /// given framebuffer.
+        ///
         /// The lighting input must have been provided before calling this function, since it acts as the input for the
         /// first pass.
+        ///
+        /// @param out Framebuffer to output to.
         void execute(const core::gl::Framebuffer& out);
 
-        /// Gets the number of passes in the manager.
-        /// @return The number of passes.
+        /// @brief Gets the number of passes in the manager.
+        /// @return Number of passes.
         std::size_t passCount() const;
 
     private:

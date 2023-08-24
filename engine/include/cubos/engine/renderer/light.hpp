@@ -1,3 +1,7 @@
+/// @file
+/// @brief Resource @ref cubos::engine::AmbientLight and components @ref cubos::engine::SpotLight,
+/// @ref cubos::engine::DirectionalLight and @ref cubos::engine::PointLight.
+/// @todo Replace this file a directory with a file for each light type.
 
 #pragma once
 
@@ -6,13 +10,16 @@
 namespace cubos::engine
 {
     /// @brief Resource which stores the ambient light.
+    /// @ingroup renderer-plugin
     struct AmbientLight
     {
         glm::vec3 color;
     };
 
-    /// Component which makes an entity behave like a spot light.
-    /// Should be used with `LocalToWorld`.
+    /// @brief Component which makes an entity emit a spot light.
+    /// @note Should be used with @ref LocalToWorld.
+    /// @todo In what direction does the spot light point for an identity transform?
+    /// @ingroup renderer-plugin
     struct [[cubos::component("cubos/spot_light", VecStorage)]] SpotLight
     {
         glm::vec3 color;
@@ -22,16 +29,18 @@ namespace cubos::engine
         float innerSpotAngle;
     };
 
-    /// Component which makes an entity behave like a directional light.
-    /// Should be used with `LocalToWorld`.
+    /// @brief Component which makes an entity behave like a directional light.
+    /// @note Should be used with @ref LocalToWorld.
+    /// @ingroup renderer-plugin
     struct [[cubos::component("cubos/directional_light", VecStorage)]] DirectionalLight
     {
         glm::vec3 color;
         float intensity;
     };
 
-    /// Component which makes an entity behave like a point light.
-    /// Should be used with `LocalToWorld`.
+    /// @brief Component which makes an entity behave like a point light.
+    /// @note Should be used with @ref LocalToWorld.
+    /// @ingroup renderer-plugin
     struct [[cubos::component("cubos/point_light", VecStorage)]] PointLight
     {
         glm::vec3 color;

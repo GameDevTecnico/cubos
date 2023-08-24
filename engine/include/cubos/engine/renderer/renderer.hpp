@@ -1,3 +1,9 @@
+/// @file
+/// @brief Class @ref cubos::engine::BaseRenderer and resource @ref cubos::engine::Renderer.
+
+/// @dir ./pps
+/// @brief Post processing directory.
+
 #pragma once
 
 #include <glm/glm.hpp>
@@ -23,85 +29,105 @@ namespace cubos::engine
         class RendererGrid;
     }
 
-    /// Handle to a grid uploaded to the GPU, to be used for rendering.
+    /// @brief Handle to a grid uploaded to the GPU, to be used for rendering.
+    /// @ingroup renderer-plugin
     using RendererGrid = std::shared_ptr<impl::RendererGrid>;
 
-    /// Handle to a generic renderer.
+    /// @brief Resource which is an handle to a generic renderer.
+    /// @ingroup renderer-plugin
     using Renderer = std::shared_ptr<BaseRenderer>;
 
-    /// Interface class which abstracts different rendering methods.
-    /// @details This abstraction allows us to, for example, switch between a
-    /// raytracing and a deferred rendering method as we need to, without
-    /// changing the API. This is useful since not all computers support
-    /// realtime raytracing.
+    /// @brief Interface which abstracts different rendering methods.
+    ///
+    /// This abstraction allows us to, for example, switch between a raytracing and a deferred
+    /// rendering method as we need to, without changing the API. This is useful since not all
+    /// computers support realtime raytracing.
+    ///
+    /// @note This code was written previously to the development of the @ref Cubos class, and
+    /// thats why it is structured this way. In the future it would be better to simply abstract
+    /// away renderer implementations using different plugins which would just switch the systems
+    /// being run, keeping the same components which are effectively its API.
+    ///
+    /// @see PostProcessingManager
+    /// @ingroup renderer-plugin
     class BaseRenderer
     {
     public:
+        virtual ~BaseRenderer() = default;
+
+        /// @brief Constructs.
         /// @param renderDevice The render device to use.
         /// @param size The size of the window.
         BaseRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
-        BaseRenderer(const BaseRenderer&) = delete;
-        virtual ~BaseRenderer() = default;
 
-        /// Uploads a grid to the GPU and returns an handle, which can be used to draw it.
-        /// @param grid The grid to upload.
-        /// @return The handle of the grid.
+        /// @brief Deleted copy constructor.
+        BaseRenderer(const BaseRenderer&) = delete;
+
+        /// @brief Uploads a grid to the GPU and returns an handle which can be used to draw it.
+        /// @param grid Grid to upload.
+        /// @return Handle of the grid.
         virtual RendererGrid upload(const core::gl::Grid& grid) = 0;
 
-        /// Sets the current palette of the renderer.
-        /// @param palette The palette to set.
+        /// @brief Sets the current palette of the renderer.
+        /// @param palette Palette to set.
         virtual void setPalette(const core::gl::Palette& palette) = 0;
 
-        /// Resizes the renderer's framebuffers.
-        /// @param size The new size of the window.
+        /// @brief Resizes the renderer's framebuffers.
+        /// @param size New size of the window.
         void resize(glm::uvec2 size);
 
         /// @brief Gets the current size of the renderer's framebuffers.
-        /// @returns The current size of the renderer's framebuffer.
+        /// @returns Current size.
         glm::uvec2 size() const;
 
-        /// Draws a frame, with post processing.
-        /// @param camera The camera to use.
-        /// @param frame The frame to draw.
+        /// @brief Draws a frame.
+        /// @param camera Camera to use.
+        /// @param frame Frame to draw.
         /// @param usePostProcessing Whether to use post processing.
-        /// @param target The target framebuffer to draw to.
+        /// @param target Target framebuffer to draw to.
         void render(const core::gl::Camera& camera, const RendererFrame& frame, bool usePostProcessing = true,
                     const core::gl::Framebuffer& target = nullptr);
 
-        /// Gets a reference to the post processing manager.
-        /// @return The post processing manager.
+        /// @brief Gets a reference to the post processing manager.
+        /// @return Post processing manager.
         PostProcessingManager& pps();
 
     protected:
-        core::gl::RenderDevice& mRenderDevice; ///< The render device being used.
+        core::gl::RenderDevice& mRenderDevice; ///< Render device being used.
 
-        /// Called when resizze() is called.
+        /// @brief Called when resize() is called.
+        ///
         /// Renderer implementations should override this function to resize their framebuffers.
+        ///
+        /// @param size New size of the framebuffer.
         virtual void onResize(glm::uvec2 size) = 0;
 
-        /// Called when render() is called, before applying post processing effects.
+        /// @brief Called when render() is called, before applying post processing effects.
+        ///
         /// Renderer implementations should implement this function to draw the frame.
-        /// @param camera The camera to use.
-        /// @param frame The frame to draw.
-        /// @param target The target framebuffer. If postprocessing is enabled, it won't be the camera's target.
+        /// When post processing is enabled, the target framebuffer will be the internal texture
+        /// which will be used for post processing.
+        ///
+        /// @param camera Camera to use.
+        /// @param frame Frame to draw.
+        /// @param target Target framebuffer.
         virtual void onRender(const core::gl::Camera& camera, const RendererFrame& frame,
                               core::gl::Framebuffer target) = 0;
 
     private:
-        /// Called when the internal texture used for post processing needs to be resized.
+        /// @brief Called when the internal texture used for post processing needs to be resized.
         void resizeTex(glm::uvec2 size);
 
-        PostProcessingManager mPpsManager;  ///< The post processing manager.
-        core::gl::Framebuffer mFramebuffer; ///< The framebuffer where the frame is drawn.
-        core::gl::Texture2D mTexture;       ///< The texture where the frame is drawn.
+        PostProcessingManager mPpsManager;  ///< Post processing manager.
+        core::gl::Framebuffer mFramebuffer; ///< Framebuffer where the frame is drawn.
+        core::gl::Texture2D mTexture;       ///< Texture where the frame is drawn.
         glm::uvec2 mSize;
     };
 
-    /// Abstract types are defined inside this namespace, they should be used (derived) only in renderer
-    /// implementations.
+    /// @brief Namespace to store the abstract types implemented by the renderer implementations.
     namespace impl
     {
-        /// Represents a grid which was uploaded to the GPU.
+        /// @brief Represents a grid which was uploaded to the GPU.
         class RendererGrid
         {
         public:

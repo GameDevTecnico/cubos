@@ -1,3 +1,6 @@
+/// @file
+/// @brief Renderer implementation @ref cubos::engine::DeferredRenderer.
+
 #pragma once
 
 #include <vector>
@@ -8,26 +11,31 @@
 
 #include <cubos/engine/renderer/renderer.hpp>
 
+// TODO: make these defines proper constants (we're using C++!)
 #define CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT 128
 #define CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT 128
 
 namespace cubos::engine
 {
-    /// Renderer implementation which uses deferred rendering.
+    /// @brief Renderer implementation which uses deferred rendering.
     ///
     /// Voxel grids are first triangulated, and then the triangles are uploaded to the GPU.
     /// The rendering is done in two passes:
     /// - The first pass renders the scene to the GBuffer textures: position, normal and material.
     /// - The second pass takes the GBuffer textures and calculates the color of the pixels with the lighting applied.
+    ///
+    /// @ingroup renderer-plugin
     class DeferredRenderer : public BaseRenderer
     {
     public:
-        /// @param renderDevice The render device to use.
-        /// @param size The size of the window.
-        /// @param settings The settings to use.
-        DeferredRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings);
         ~DeferredRenderer() override;
+
+        /// @brief Constructs.
+        /// @param renderDevice Render device to use.
+        /// @param size Size of the window.
+        /// @param settings Settings to use.
+        DeferredRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, const core::Settings& settings);
 
         // Implement interface methods.
 

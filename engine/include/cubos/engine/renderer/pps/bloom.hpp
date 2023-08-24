@@ -1,3 +1,6 @@
+/// @file
+/// @brief Post processing pass implementation @ref cubos::engine::PostProcessingBloom.
+
 #pragma once
 
 #include <vector>
@@ -10,51 +13,55 @@
 
 namespace cubos::engine
 {
-    /// A post processing pass that adds a "bloom" effect to any bright objects
-    /// in the scene.
+    /// @brief A post processing pass that adds a "bloom" effect to any bright objects in the scene.
     ///
-    /// Source: https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom
+    /// Implementation based on the following
+    /// [tutorial](https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom).
+    ///
+    /// @ingroup renderer-plugin
     class PostProcessingBloom : public PostProcessingPass
     {
     public:
-        /// @param renderDevice The render device to use.
-        /// @param size The size of the window.
+        /// @brief Constructs with default arguments.
+        /// @param renderDevice Render device to use.
+        /// @param size Size of the window.
         PostProcessingBloom(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
 
-        /// @param renderDevice The render device to use.
-        /// @param size The size of the window.
+        /// @brief Constructs with custom settings.
+        /// @param renderDevice Render device to use.
+        /// @param size Size of the window.
         /// @param iterations Number of iterations for downsample/upsample step
         /// @param threshold Pixel brightness threshold to be considered for bloom effect
         /// @param softThreshold Ratio for including pixels that don't pass the threshold test
-        /// @param intensity The intensity of the bloom effect.
+        /// @param intensity Intensity of the bloom effect.
         PostProcessingBloom(core::gl::RenderDevice& renderDevice, glm::uvec2 size, unsigned int iterations,
                             float threshold, float softThreshold, float intensity);
 
-        /// Gets the threshold for the bloom effect.
-        /// @return The threshold for the bloom effect.
+        /// @brief Gets the threshold for the bloom effect.
+        /// @return Threshold for the bloom effect.
         float getThreshold() const;
 
-        /// Gets the soft threshold ratio.
-        /// @return The soft threshold ratio.
+        /// @brief Gets the soft threshold ratio.
+        /// @return Soft threshold ratio.
         float getSoftThreshold() const;
 
-        /// Gets the intensity of the bloom effect.
-        /// @return The intensity of the bloom effect.
+        /// @brief Gets the intensity of the bloom effect.
+        /// @return Intensity of the bloom effect.
         float getIntensity() const;
 
-        /// Sets the threshold for the bloom effect.
-        /// @param threshold The new threshold.
+        /// @brief Sets the threshold for the bloom effect.
+        /// @param threshold New threshold.
         void setThreshold(float threshold);
 
-        /// Sets the soft threshold ratio.
+        /// @brief Sets the soft threshold ratio.
         /// @param softThreshold Ratio for including pixels that don't pass the threshold test.
         void setSoftThreshold(float softThreshold);
 
-        /// Sets the intensity of the bloom effect.
-        /// @param intensity The intensity of the bloom effect.
+        /// @brief Sets the intensity of the bloom effect.
+        /// @param intensity Intensity of the bloom effect.
         void setIntensity(float intensity);
 
-        /// Generates the textures used by the pass.
+        /// @brief Generates the textures used by the pass.
         void generateTextures();
 
         // Interface methods implementation.
@@ -88,7 +95,7 @@ namespace cubos::engine
         core::gl::ShaderBindingPoint mBloomScalingBp;     ///< Texture scaling binding point.
         core::gl::ShaderBindingPoint mBloomCurrPassBp;    ///< Current pass binding point.
         core::gl::ShaderBindingPoint mBloomIntensityBp;   ///< Bloom intensity binding point.
-        std::vector<core::gl::Texture2D> mBloomTexBuffer; ///< The texture buffer of the bloom effect.
-        std::vector<core::gl::Framebuffer> mBloomFBs;     ///< The framebuffers of the bloom effect.
+        std::vector<core::gl::Texture2D> mBloomTexBuffer; ///< Texture buffer of the bloom effect.
+        std::vector<core::gl::Framebuffer> mBloomFBs;     ///< Framebuffers of the bloom effect.
     };
 } // namespace cubos::engine

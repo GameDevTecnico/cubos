@@ -1,3 +1,6 @@
+/// @file
+/// @brief Post processing pass implementation @ref cubos::engine::PostProcessingCopy.
+
 #pragma once
 
 #include <glm/glm.hpp>
@@ -8,13 +11,17 @@
 
 namespace cubos::engine
 {
-    /// A simple post processing pass that copies the input texture to the output.
-    /// This pass is thus useless and is only used as an example and for testing.
+    /// @brief A simple post processing pass that copies the input texture to the output.
+    ///
+    /// This pass is useless and is only used as an example and for testing.
+    ///
+    /// @ingroup renderer-plugin
     class PostProcessingCopy : public PostProcessingPass
     {
     public:
-        /// @param renderDevice The render device to use.
-        /// @param size The size of the window.
+        /// @brief Constructs.
+        /// @param renderDevice Render device to use.
+        /// @param size Size of the window.
         PostProcessingCopy(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
 
         // Interface methods implementation.
@@ -24,10 +31,10 @@ namespace cubos::engine
                      core::gl::Framebuffer out) const override;
 
     private:
-        glm::uvec2 mSize;                         ///< The size of the window.
-        core::gl::ShaderPipeline mPipeline;       ///< The shader pipeline to use.
-        core::gl::ShaderBindingPoint mInputTexBp; ///< The binding point for the input texture.
-        core::gl::Sampler mInputTexSampler;       ///< The sampler to use for the input texture.
-        core::gl::VertexArray mScreenQuadVa;      ///< The screen quad VA used to render the output.
+        glm::uvec2 mSize;                         ///< Size of the window.
+        core::gl::ShaderPipeline mPipeline;       ///< Shader pipeline to use.
+        core::gl::ShaderBindingPoint mInputTexBp; ///< Binding point for the input texture.
+        core::gl::Sampler mInputTexSampler;       ///< Sampler to use for the input texture.
+        core::gl::VertexArray mScreenQuadVa;      ///< Screen quad VA used to render the output.
     };
 } // namespace cubos::engine
