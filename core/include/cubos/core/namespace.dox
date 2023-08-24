@@ -1,0 +1,14 @@
+/// @dir
+/// @brief @ref cubos::core namespace.
+
+#pragma once
+
+/// @brief CUBOS. core namespace.
+namespace cubos::core
+{
+    /// @defgroup core
+    /// @brief CUBOS. core library.
+    ///
+    /// The core library contains loose utilities and functionality on which the rest of the CUBOS.
+    /// libraries are built on.
+}
