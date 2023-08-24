@@ -1,14 +1,26 @@
+/// @file
+/// @brief Component @ref cubos::engine::LocalToWorld.
+
 #pragma once
 
 #include <glm/glm.hpp>
 
 namespace cubos::engine
 {
-    /// A matrix calculated from the position, rotation and scale of an entity.
-    /// This matrix should
+    /// @brief Component which stores the transformation matrix of an entity, from local to world
+    /// space.
+    ///
+    /// @note This component is written to by the @ref transform-plugin "transform plugin", and
+    /// it only makes sense to modify it manually if its not accompanied by the other transform
+    /// components.
+    ///
+    /// @sa Position Applies a translation to this matrix.
+    /// @sa Rotation Applies a rotation to this matrix.
+    /// @sa Scale Applies a scaling to this matrix.
+    /// @ingroup transform-plugin
     struct [[cubos::component("cubos/local_to_world", VecStorage)]] LocalToWorld
     {
-        glm::mat4 mat = glm::mat4(1.0F); ///< The local to world matrix.
+        glm::mat4 mat = glm::mat4(1.0F); ///< Local to world space matrix.
     };
 
 } // namespace cubos::engine
