@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ThreadPool.
+/// @ingroup core
+
 #pragma once
 
 #include <condition_variable>
@@ -9,21 +13,29 @@
 
 namespace cubos::core
 {
-    /// Manages a pool of threads, to which tasks can be submitted.
-    /// The pool waits for all tasks to finish before being destroyed.
+    /// @brief Manages a pool of threads, to which tasks can be submitted.
+    /// @note Blocks on tasks to finish on destruction.
+    /// @ingroup core
     class ThreadPool final
     {
     public:
-        /// @param numThreads Number of threads to create.
-        ThreadPool(std::size_t numThreads);
-        ThreadPool(const ThreadPool&) = delete;
-        ThreadPool(ThreadPool&&) = delete;
         ~ThreadPool();
 
-        /// Adds a task to the thread pool. The task starts executing as soon as a thread is available.
+        /// @brief Constructs a pool with @p numThreads, starting them immediately.
+        /// @param numThreads Number of threads to create.
+        ThreadPool(std::size_t numThreads);
+
+        /// @brief Forbid copy construction.
+        ThreadPool(const ThreadPool&) = delete;
+
+        /// @brief Forbid move construction.
+        ThreadPool(ThreadPool&&) = delete;
+
+        /// @brief Adds a task to the thread pool. Starts when a thread becomes available.
+        /// @param task Task to add.
         void addTask(std::function<void()> task);
 
-        /// Waits for all tasks to finish.
+        /// @brief Blocks until all tasks finish.
         void wait();
 
     private:
