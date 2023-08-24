@@ -1,5 +1,6 @@
 /// @file
 /// @brief Renderer implementation @ref cubos::engine::DeferredRenderer.
+/// @ingroup renderer-plugin
 
 #pragma once
 

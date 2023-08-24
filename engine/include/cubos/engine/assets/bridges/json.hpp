@@ -1,5 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::engine::JSONBridge.
+/// @ingroup assets-plugin
 
 #pragma once
 

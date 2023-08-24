@@ -1,5 +1,6 @@
 /// @file
 /// @brief Component @ref cubos::engine::Rotation.
+/// @ingroup transform-plugin
 
 #pragma once
 

@@ -3,6 +3,7 @@
 
 /// @file
 /// @brief Plugin entry point.
+/// @ingroup asset-explorer-tool-plugin
 
 #pragma once
 

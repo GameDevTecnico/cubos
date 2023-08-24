@@ -3,6 +3,7 @@
 
 /// @file
 /// @brief Plugin entry point.
+/// @ingroup world-inspector-tool-plugin
 
 #pragma once
 

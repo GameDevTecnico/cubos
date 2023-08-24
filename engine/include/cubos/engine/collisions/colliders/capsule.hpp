@@ -1,5 +1,6 @@
 /// @file
 /// @brief Component @ref cubos::engine::CapsuleCollider.
+/// @ingroup collisions-plugin
 
 #pragma once
 

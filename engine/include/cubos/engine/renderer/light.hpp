@@ -1,6 +1,7 @@
 /// @file
 /// @brief Resource @ref cubos::engine::AmbientLight and components @ref cubos::engine::SpotLight,
 /// @ref cubos::engine::DirectionalLight and @ref cubos::engine::PointLight.
+/// @ingroup renderer-plugin
 /// @todo Replace this file a directory with a file for each light type.
 
 #pragma once

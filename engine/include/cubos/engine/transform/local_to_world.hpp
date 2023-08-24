@@ -1,5 +1,6 @@
 /// @file
 /// @brief Component @ref cubos::engine::LocalToWorld.
+/// @ingroup transform-plugin
 
 #pragma once
 

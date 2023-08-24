@@ -1,5 +1,6 @@
 /// @file
 /// @brief Resource @ref cubos::engine::RendererFrame.
+/// @ingroup renderer-plugin
 
 #pragma once
 

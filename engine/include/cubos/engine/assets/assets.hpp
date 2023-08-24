@@ -1,5 +1,6 @@
 /// @file
 /// @brief Resource @ref cubos::engine::Assets.
+/// @ingroup assets-plugin
 
 #pragma once
 
