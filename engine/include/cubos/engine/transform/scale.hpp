@@ -1,12 +1,17 @@
+/// @file
+/// @brief Component @ref cubos::engine::Scale.
+
 #pragma once
 
 #include <glm/glm.hpp>
 
 namespace cubos::engine
 {
-    /// Assigns a uniform scale to an entity.
+    /// @brief Component which assigns a uniform scale to an entity.
+    /// @sa LocalToWorld Holds the resulting transform matrix.
+    /// @ingroup transform-plugin
     struct [[cubos::component("cubos/scale", VecStorage)]] Scale
     {
-        float factor; ///< The scale factor of the entity.
+        float factor; ///< Uniform scale factor of the entity.
     };
 } // namespace cubos::engine
