@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::Settings.
+/// @ingroup core
+
 #pragma once
 
 #include <string>
@@ -5,77 +9,102 @@
 
 namespace cubos::core
 {
-    /// Object used to manage settings.
+    /// @brief Stores settings as key-value pairs and provides methods to retrieve them.
+    /// @todo Should be moved to the engine.
+    /// @ingroup core
     class Settings final
     {
     public:
         Settings() = default;
         ~Settings() = default;
 
-        /// Clears all the settings.
+        /// @brief Clears all the settings.
         void clear();
 
-        /// Defines a new bool setting.
-        /// If the setting already exists, overrides its value with the new value.
-        /// @param key The setting's key.
-        /// @param value The setting's value.
+        /// @brief Defines a new boolean setting.
+        ///
+        /// If the setting already exists, overwrites its value.
+        ///
+        /// @param key Key.
+        /// @param value Value.
         void setBool(const std::string& key, const bool& value);
 
-        /// Retrieves the bool settings with a specific key.
-        /// If no setting exists with such key, returns the default value.
-        /// @param key The setting's key.
-        /// @param defaultValue The value returned when not setting with the provided key exists.
-        /// @return The setting's value.
+        /// @brief Retrieves the bool setting with the given @p key.
+        ///
+        /// If no setting exists with such key, returns @p defaultValue.
+        /// If the setting exists but its value is not "true", returns false.
+        ///
+        /// @param key Key.
+        /// @param defaultValue Default value.
+        /// @return Current value.
         bool getBool(const std::string& key, const bool& defaultValue) const;
 
-        /// Defines a new string setting.
-        /// If the setting already exists, overrides its value with the new value.
-        /// @param key The setting's key.
-        /// @param value The setting's value.
+        /// @brief Defines a new string setting.
+        ///
+        /// If the setting already exists, overwrites its value.
+        ///
+        /// @param key Key.
+        /// @param value Value.
         void setString(const std::string& key, const std::string& value);
 
-        /// Retrieves the string settings with a specific key.
-        /// If no setting exists with such key, returns the default value.
-        /// @param key The setting's key.
-        /// @param defaultValue The value returned when not setting with the provided key exists.
-        /// @return The setting's value.
+        /// @brief Retrieves the string setting with the given @p key.
+        ///
+        /// If no setting exists with such key, returns @p defaultValue.
+        ///
+        /// @param key Key.
+        /// @param defaultValue Default value.
+        /// @return Current value.
         std::string getString(const std::string& key, const std::string& defaultValue) const;
 
-        /// Defines a new integer setting.
-        /// If the setting already exists, overrides its value with the new value.
-        /// @param key The setting's key.
-        /// @param value The setting's value.
+        /// @brief Defines a new integer setting.
+        ///
+        /// If the setting already exists, overwrites its value.
+        ///
+        /// @param key Key.
+        /// @param value Value.
+        /// @return Current value.
         void setInteger(const std::string& key, int value);
 
-        /// Retrieves the integer settings with a specific key.
-        /// If no setting exists with such key, returns the default value.
-        /// @param key The setting's key.
-        /// @param defaultValue The value returned when not setting with the provided key exists.
-        /// @return The setting's value.
+        /// @brief Retrieves the integer setting with the given @p key.
+        ///
+        /// If no setting exists with such key, returns @p defaultValue.
+        /// If the setting exists but its value is not a valid integer, returns @p defaultValue.
+        ///
+        /// @param key Key.
+        /// @param defaultValue Default value.
+        /// @return Current value.
         int getInteger(const std::string& key, int defaultValue) const;
 
-        /// Defines a new double setting.
-        /// If the setting already exists, overrides its value with the new value.
-        /// @param key The setting's key.
-        /// @param value The setting's value.
+        /// @brief Defines a new double setting.
+        ///
+        /// If the setting already exists, overwrites its value.
+        ///
+        /// @param key Key.
+        /// @param value Value.
         void setDouble(const std::string& key, double value);
 
-        /// Retrieves the double settings with a specific key.
+        /// @brief Retrieves the double setting with the given @p key.
+        ///
         /// If no setting exists with such key, returns the default value.
-        /// @param key The setting's key.
-        /// @param defaultValue The value returned when not setting with the provided key exists.
-        /// @return The setting's value.
+        /// If the setting exists but its value is not a valid double, returns the default value.
+        ///
+        /// @param key Key.
+        /// @param defaultValue Default value.
+        /// @return Current value.
         double getDouble(const std::string& key, double defaultValue) const;
 
-        /// Merges the settings from settingsToMerge.
-        /// If a setting from settingsToMerge already exists, overrides its value. @see setString.
-        /// @param settingsToMerge The settings to be merged to this instance.
+        /// @brief Merges the settings from @p settingsToMerge.
+        ///
+        /// If a setting from @p settingsToMerge is already defined in this instance, its value is
+        /// overwritten.
+        ///
+        /// @param settingsToMerge Settings to be merged to this instance.
         void merge(const Settings& settingsToMerge);
 
-        /// @returns The underlying unordered_map with the settings.
+        /// @return Underlying `std::unordered_map` with the settings.
         const std::unordered_map<std::string, std::string>& getValues() const;
 
-        /// @returns The underlying unordered_map with the settings.
+        /// @return Underlying `std::unordered_map` with the settings.
         std::unordered_map<std::string, std::string>& getValues();
 
     private:

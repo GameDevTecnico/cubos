@@ -63,7 +63,14 @@ int Settings::getInteger(const std::string& key, const int defaultValue) const
         return defaultValue;
     }
 
-    return std::stoi(mValues.at(key));
+    try
+    {
+        return std::stoi(mValues.at(key));
+    }
+    catch (...)
+    {
+        return defaultValue;
+    }
 }
 
 void Settings::setDouble(const std::string& key, const double value)
@@ -78,7 +85,14 @@ double Settings::getDouble(const std::string& key, const double defaultValue) co
         return defaultValue;
     }
 
-    return std::stod(mValues.at(key));
+    try
+    {
+        return std::stod(mValues.at(key));
+    }
+    catch (...)
+    {
+        return defaultValue;
+    }
 }
 
 void Settings::merge(const Settings& settingsToMerge)
