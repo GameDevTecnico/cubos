@@ -1,0 +1,15 @@
+/// @dir
+/// @brief @ref cubos::core::al namespace.
+
+#pragma once
+
+/// @namespace cubos::core::al
+/// @brief Audio namespace.
+/// @ingroup core
+
+namespace cubos::core::al
+{
+    /// @defgroup core-audio Audio
+    /// @ingroup core
+    /// @brief Provides audio functionality.
+}
