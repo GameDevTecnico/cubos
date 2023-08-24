@@ -1,3 +1,9 @@
+/// @dir
+/// @brief Voxels plugin directory.
+
+/// @file
+/// @brief Plugin entry point.
+
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
@@ -5,15 +11,21 @@
 
 namespace cubos::engine
 {
-    /// Plugin which adds grid and palette asset bridges to CUBOS.
+    /// @defgroup voxels-plugin Voxels
+    /// @ingroup plugins
+    /// @brief Adds grid and palette assets to CUBOS.
     ///
-    /// @details Registers asset bridges for files with `.grd` and `.pal` extensions, which load
-    /// assets of the `Grid` and `Palette` types, respectively. Both assets are stored as binary
-    /// serialized files.
+    /// ## Bridges
+    /// - @ref BinaryBridge - registered with the `.grd` extension, loads @ref
+    ///   cubos::core::gl::Grid assets.
+    /// - @ref BinaryBridge - registered with the `.pal` extension, loads @ref
+    ///   cubos::core::gl::Palette assets.
     ///
-    /// Dependencies:
-    /// - `assetsPlugin`
-    ///
+    /// ## Dependencies
+    /// - @ref assets-plugin
+
+    /// @brief Plugin entry function.
     /// @param cubos CUBOS. main class.
+    /// @ingroup voxels-plugin
     void voxelsPlugin(Cubos& cubos);
 } // namespace cubos::engine
