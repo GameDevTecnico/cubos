@@ -14,7 +14,7 @@ using namespace cubos::engine;
 static void init(Write<Window> window, Write<ShouldQuit> quit, Read<Settings> settings)
 {
     quit->value = false;
-    *window = openWindow(settings->getString("window.title", "Cubos"),
+    *window = openWindow(settings->getString("window.title", "CUBOS."),
                          {settings->getInteger("window.width", 800), settings->getInteger("window.height", 600)});
 }
 
