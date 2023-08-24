@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::al::AudioDevice and related types.
+/// @ingroup core-audio
+
 #pragma once
 
 #include <memory>
@@ -14,10 +18,19 @@ namespace cubos::core::al
         class Source;
     } // namespace impl
 
+    /// @brief Handle to an audio buffer.
+    /// @see impl::Buffer Audio buffer interface.
+    /// @see AudioDevice::createBuffer()
+    /// @ingroup core-audio
     using Buffer = std::shared_ptr<impl::Buffer>;
+
+    /// @brief Handle to an audio source.
+    /// @see impl::Source Audio source interface.
+    /// @see AudioDevice::createSource()
+    /// @ingroup core-audio
     using Source = std::shared_ptr<impl::Source>;
 
-    /// Possible audio formats.
+    /// @brief Possible audio formats.
     enum class Format
     {
         Mono8,
@@ -26,123 +39,128 @@ namespace cubos::core::al
         Stereo16,
     };
 
-    /// Abstract audio device type, used to wrap low-level audio rendering APIs such as OpenAL.
-    /// @see al::OALRenderDevice.
+    /// @brief Audio device interface used to wrap low-level audio rendering APIs.
     class AudioDevice
     {
     public:
         AudioDevice() = default;
         virtual ~AudioDevice() = default;
+
+        /// @brief Forbid copy construction.
         AudioDevice(const AudioDevice&) = delete;
 
-        /// Creates an audio device from a given device specifier.
+        /// @brief Creates an audio device from a given device @p specifier.
+        /// @see enumerateDevices()
         /// @param specifier The device specifier (empty for default).
-        /// @returns The audio device.
+        /// @return Audio device, or nullptr on failure.
         static std::shared_ptr<AudioDevice> create(const std::string& specifier = "");
 
-        /// Enumerates the available devices.
+        /// @brief Enumerates the available devices.
         /// @param devices The vector to fill with the available devices.
         static void enumerateDevices(std::vector<std::string>& devices);
 
-        /// Creates a new audio buffer
-        /// @return The handle of the new buffer.
+        /// @brief Creates a new audio buffer
+        /// @return Handle of the new buffer.
         virtual Buffer createBuffer() = 0;
 
-        /// Creates a new audio source.
-        /// @return The handle of the new source.
+        /// @brief Creates a new audio source.
+        /// @return Handle of the new source.
         virtual Source createSource() = 0;
 
-        /// Sets the position of the listener.
-        /// @param position The position of the listener.
+        /// @brief Sets the position of the listener.
+        /// @param position Position.
         virtual void setListenerPosition(const glm::vec3& position) = 0;
 
-        /// Sets the orientation of the listener.
-        /// @param forward The forward direction of the listener.
-        /// @param up The up direction of the listener.
+        /// @brief Sets the orientation of the listener.
+        /// @param forward Forward direction of the listener.
+        /// @param up Up direction of the listener.
         virtual void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up) = 0;
 
-        /// @param velocity The velocity of the listener.
+        /// @brief Sets the velocity of the listener. Used to implement the doppler effect.
         /// @param velocity The velocity of the listener.
         virtual void setListenerVelocity(const glm::vec3& velocity) = 0;
     };
 
-    /// Abstract al types are defined inside this namespace, they should be used (derived) only in audio device
-    /// implementations.
+    /// @brief Namespace to store the abstract types implemented by the audio device implementations.
     namespace impl
     {
-        /// Abstract audio buffer, should not be used directly.
+        /// @brief Abstract audio buffer.
         class Buffer
         {
         public:
             virtual ~Buffer() = default;
 
-            /// Fills the buffer with data.
-            /// @param format The audio format.
-            /// @param size The size of the buffer in bytes.
-            /// @param data The buffer data.
-            /// @param frequency The audio frequency.
+            /// @brief Fills the buffer with data.
+            /// @param format Audio format of the data.
+            /// @param size Size of the buffer in bytes.
+            /// @param data Buffer data.
+            /// @param frequency Audio frequency.
             virtual void fill(Format format, std::size_t size, const void* data, std::size_t frequency) = 0;
 
         protected:
             Buffer() = default;
         };
 
-        /// Abstract audio source, should not be used directly.
+        /// @brief Abstract audio source.
         class Source
         {
         public:
             virtual ~Source() = default;
 
-            /// Sets the buffer to be played.
-            /// @param buffer The buffer to be played.
+            /// @brief Sets the buffer to be played by the source.
+            /// @param buffer Buffer.
             virtual void setBuffer(std::shared_ptr<Buffer> buffer) = 0;
 
-            /// Sets the position of the source.
-            /// @param position The position of the source.
+            /// @brief Sets the position of the source, by default, in the world space.
+            /// @see setRelative() to change this behavior.
+            /// @param position Position.
             virtual void setPosition(const glm::vec3& position) = 0;
 
-            /// Sets the velocity of the source.
-            /// @param velocity The velocity of the source.
+            /// @brief Sets the velocity of the source, by default, in the world space.
+            /// @param velocity Velocity.
             virtual void setVelocity(const glm::vec3& velocity) = 0;
 
-            /// Sets the gain of the source.
-            /// @param gain The gain of the source.
+            /// @brief Sets the gain of the source.
+            /// @param gain Gain.
             virtual void setGain(float gain) = 0;
 
-            /// Sets the pitch of the source.
-            /// @param pitch The pitch of the source.
+            /// @brief Sets the pitch of the source.
+            /// @param pitch Pitch.
             virtual void setPitch(float pitch) = 0;
 
-            /// Sets the looping of the source.
-            /// @param looping The looping of the source.
+            /// @brief Sets whether the source plays in a loop.
+            /// @param looping Looping flag.
             virtual void setLooping(bool looping) = 0;
 
-            /// Sets the relative flag of the source.
-            /// @param relative The relative flag of the source.
+            /// @brief Sets whether the source position and velocity is relative to the listener or
+            /// not.
+            /// @param relative Relative flag.
             virtual void setRelative(bool relative) = 0;
 
-            /// Sets the min and max distance of the source.
-            /// @param minDistance The min distance of the source.
-            /// @param maxDistance The max distance of the source.
+            /// @brief Sets the minimum and maximum distance at which the source is audible.
+            /// @param minDistance Minimum distance.
+            /// @param maxDistance Maximum distance.
             virtual void setDistance(float maxDistance) = 0;
 
-            /// Sets the cone angle of the source.
-            /// @param coneAngle The cone angle of the source.
+            /// @brief Sets the cone angle of the source, in degrees. By default, 360.
+            /// @param coneAngle Angle, in degrees.
             virtual void setConeAngle(float coneAngle) = 0;
 
-            /// Sets the cone gain of the source.
-            /// @param coneGain The cone gain of the source.
+            /// @brief Sets the cone gain of the source.
+            /// @todo Find out what this is.
+            /// @param coneGain Gain.
             virtual void setConeGain(float coneGain) = 0;
 
-            /// Sets the cone direction of the source.
-            /// @param direction The cone direction of the source.
+            /// @brief Sets the cone direction of the source.
+            /// @param direction Direction.
             virtual void setConeDirection(const glm::vec3& direction) = 0;
 
-            /// Sets the reference distance of the source.
-            /// @param referenceDistance The reference distance of the source.
+            /// @brief Sets the distance under which the volume for the source would normally drop
+            /// by half.
+            /// @param referenceDistance Distance.
             virtual void setReferenceDistance(float referenceDistance) = 0;
 
-            /// Plays the source.
+            /// @brief Plays the source.
             virtual void play() = 0;
 
         protected:
