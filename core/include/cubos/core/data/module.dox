@@ -5,7 +5,7 @@
 
 /// @namespace cubos::core::data
 /// @brief Data namespace.
-/// @ingroup core
+/// @ingroup core-data
 
 namespace cubos::core::data
 {
