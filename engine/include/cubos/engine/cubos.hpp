@@ -2,7 +2,7 @@
 /// @brief @ref cubos::engine namespace.
 
 /// @file
-/// @brief @ref Class cubos::engine::Cubos.
+/// @brief Class @ref cubos::engine::Cubos.
 
 #pragma once
 
@@ -148,7 +148,7 @@ namespace cubos::engine
         /// @brief Adds a new plugin to the engine. If the plugin had already been added, nothing
         /// happens. A plugin is just a function that operates on the Cubos object, further
         /// configuring it. It is useful for separating the code into modules.
-        /// @param plugin Plugin to add.
+        /// @param func Entry point of the plugin to add.
         /// @return Reference to this object, for chaining.
         Cubos& addPlugin(void (*func)(Cubos&));
 

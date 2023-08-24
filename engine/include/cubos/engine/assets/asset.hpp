@@ -101,7 +101,7 @@ namespace cubos::engine
         void decRef() const;
 
         uuids::uuid mId; ///< UUID of the asset.
-        void* mRefCount; ///< Void pointer to avoid including <atomic> in the header.
+        void* mRefCount; ///< Void pointer to avoid including `<atomic>` in the header.
         int mVersion;    ///< Last known version of the asset.
     };
 
