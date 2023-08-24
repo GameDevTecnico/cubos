@@ -1,5 +1,5 @@
 /// @file
-/// @brief Defines the RendererEnvironment resource.
+/// @brief Resource @ref cubos::engine::RendererEnvironment.
 
 #pragma once
 
@@ -8,6 +8,7 @@
 namespace cubos::engine
 {
     /// @brief Resource which stores the renderer's ambient light and sky colors.
+    /// @ingroup renderer-plugin
     struct RendererEnvironment
     {
         /// @brief Ambient light color.

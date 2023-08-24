@@ -1,3 +1,6 @@
+/// @file
+/// @brief Class @ref cubos::engine::PostProcessingPass.
+
 #pragma once
 
 #include <map>
@@ -10,28 +13,39 @@
 
 namespace cubos::engine
 {
-    /// A generic post processing pass.
-    /// All passes must have the same constructor arguments: the render device and the size of the window.
-    /// They should never be constructed directly, and instead should be created using the PostProcessingManager.
+    /// @brief A generic post processing pass.
+    ///
+    /// All passes must have the same constructor arguments: the render device and the size of the
+    /// window. They should never be constructed directly, and instead should be created using the
+    /// PostProcessingManager.
     ///
     /// @see PostProcessingManager
+    /// @ingroup renderer-plugin
     class PostProcessingPass
     {
     public:
-        /// @param renderDevice The render device to use.
-        PostProcessingPass(core::gl::RenderDevice& renderDevice);
-        PostProcessingPass(const PostProcessingPass&) = delete;
         virtual ~PostProcessingPass() = default;
 
-        /// Called when the window framebuffer size changes.
-        /// @param size The new size of the window.
+        /// @brief Constructs.
+        /// @param renderDevice The render device to use.
+        PostProcessingPass(core::gl::RenderDevice& renderDevice);
+
+        /// @brief Deleted copy constructor.
+        PostProcessingPass(const PostProcessingPass&) = delete;
+
+        /// @brief Called when the window framebuffer size changes.
+        /// @param size New size of the window.
         virtual void resize(glm::uvec2 size) = 0;
 
-        /// Called each frame.
-        /// @param inputs The available extra input textures. The reference is mutable so that a pass can provide its
-        /// own inputs.
-        /// @param prev The resulting texture of the previous pass.
-        /// @param out The framebuffer where the pass will render to.
+        /// @brief Called each frame.
+        ///
+        /// The inputs argument is mutable to allow passes to their own inputs for future passes.
+        /// This argument is used, for example, to pass the extra outputs of the deferred renderer
+        /// to the post processing passes which might need them.
+        ///
+        /// @param inputs Available extra input textures.
+        /// @param prev Resulting texture of the previous pass.
+        /// @param out Framebuffer where the pass will render to.
         virtual void execute(std::map<PostProcessingInput, core::gl::Texture2D>& inputs, core::gl::Texture2D prev,
                              core::gl::Framebuffer out) const = 0;
 
