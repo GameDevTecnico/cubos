@@ -1,26 +1,34 @@
+/// @dir
+/// @brief Asset explorer plugin directory.
+
+/// @file
+/// @brief Plugin entry point.
+
 #pragma once
 
 #include <cubos/engine/assets/plugin.hpp>
 
 namespace cubos::engine::tools
 {
+    /// @defgroup asset-explorer-tool-plugin Asset explorer
+    /// @ingroup tool-plugins
+    /// @brief Allows viewing and selecting assets through a ImGui window.
+    ///
+    /// ## Events
+    /// - @ref AssetSelectedEvent - sent when an asset is selected in the explorer.
+    ///
+    /// ## Dependencies
+    /// - @ref imgui-plugin
+    /// - @ref assets-plugin
+
     /// @brief Event sent when an asset is selected.
     struct AssetSelectedEvent
     {
-        AnyAsset asset;
+        AnyAsset asset; ///< Handle to the selected asset.
     };
 
-    /// Plugin that allows exploring and selecting assets through a ImGui window.
-    ///
-    /// @details This plugin adds one system, which adds a ImGui window with the assets folder.
-    ///
-    /// Dependencies:
-    /// - `imguiPlugin`
-    /// - `assetsPlugin`
-    ///
-    /// Events:
-    /// - `AssetSelectedEvent`: sent when an asset is selected in the explorer.
-    ///
+    /// @brief Plugin entry function.
     /// @param cubos CUBOS. main class
+    /// @ingroup asset-explorer-tool-plugin
     void assetExplorerPlugin(Cubos& cubos);
 } // namespace cubos::engine::tools

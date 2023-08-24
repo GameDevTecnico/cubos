@@ -1,3 +1,9 @@
+/// @dir
+/// @brief Entity selector plugin directory.
+
+/// @file
+/// @brief Plugin entry point.
+
 #pragma once
 
 #include <cubos/core/ecs/entity_manager.hpp>
@@ -6,21 +12,26 @@
 
 namespace cubos::engine::tools
 {
-    /// Resource used to identify the currently selected entity. Used by multiple editor plugins.
+    /// @defgroup entity-selector-tool-plugin Entity selector
+    /// @ingroup tool-plugins
+    /// @brief Adds a resource used to select an entity.
+    ///
+    /// This plugins exists to reduce coupling between plugins. For example, a plugin which allows
+    /// selecting entities through a ImGui window only needs to depend on this plugin, instead of
+    /// having to know about all the plugins which care about it. The same applies in the other
+    /// direction.
+    ///
+    /// ## Resources
+    /// - @ref EntitySelector - identifies the currently selected entity.
+
+    /// @brief Resource which identifies the currently selected entity.
     struct EntitySelector
     {
-        cubos::core::ecs::Entity selection;
+        cubos::core::ecs::Entity selection; ///< Selected entity, or `null` if none.
     };
 
-    /// Plugin that provides a resource used to identify the currently selected entity in the
-    /// editor or other tools.
-    ///
-    /// @details This plugin only provides the resource. It is used just to avoid duplicating
-    /// the resource definition in multiple plugins.
-    ///
-    /// Resources:
-    /// - `EntitySelector`: the currently selected entity.
-    ///
+    /// @brief Plugin entry function.
     /// @param cubos CUBOS. main class
+    /// @ingroup entity-selector-tool-plugin
     void entitySelectorPlugin(Cubos& cubos);
 } // namespace cubos::engine::tools
