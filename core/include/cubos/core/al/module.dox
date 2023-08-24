@@ -5,7 +5,7 @@
 
 /// @namespace cubos::core::al
 /// @brief Audio namespace.
-/// @ingroup core
+/// @ingroup core-audio
 
 namespace cubos::core::al
 {
