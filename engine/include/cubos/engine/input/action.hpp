@@ -24,7 +24,7 @@ namespace cubos::engine
         InputAction() = default;
 
         /// @brief Constructs with existing bindings.
-        /// @param key Key bindings.
+        /// @param keys Key bindings.
         InputAction(std::vector<std::pair<core::io::Key, core::io::Modifiers>> keys)
             : mKeys(keys)
         {

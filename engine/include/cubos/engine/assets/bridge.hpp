@@ -44,7 +44,6 @@ namespace cubos::engine
         ///
         /// @param assets Manager to read from.
         /// @param handle Handle of the asset being saved.
-        /// @param stream File stream.
         /// @return Whether the asset was successfully saved.
         virtual bool save(const Assets& assets, const AnyAsset& handle);
     };

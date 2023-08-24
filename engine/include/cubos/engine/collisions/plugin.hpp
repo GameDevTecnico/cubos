@@ -25,7 +25,7 @@ namespace cubos::engine
     /// - @ref SimplexCollider - holds the simplex collider data.
     ///
     /// ## Events
-    /// - @ref CollisionEvent - emitted when a collision occurs.
+    /// - @ref CollisionEvent - (TODO) emitted when a collision occurs.
     /// - @ref TriggerEvent - (TODO) emitted when a trigger is entered or exited.
     ///
     /// ## Resources
