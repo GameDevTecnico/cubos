@@ -1,3 +1,9 @@
+/// @dir
+/// @brief Window plugin directory.
+
+/// @file
+/// @brief Plugin entry point.
+
 #pragma once
 
 #include <cubos/core/io/window.hpp>
@@ -6,29 +12,33 @@
 
 namespace cubos::engine
 {
-    /// Plugin to create and handle the lifecycle of a window. This is required for showing any
-    /// visual output to the user.
+    /// @defgroup window-plugin Window
+    /// @ingroup plugins
+    /// @brief Creates and handles the lifecycle of a window.
     ///
-    /// @details This plugin adds three systems: one to open the window, one to poll the window
-    /// for events, and one to swap the window's back buffers. Polled events are written to the
-    /// event pipe as `core::io::WindowEvent`s.
+    /// Initially sets @ref ShouldQuit to `false`, and sets it to `true` only when the window is
+    /// closed.
     ///
-    /// Sets `ShouldQuit` to `true` if the window is closed. The window is created with the
-    /// settings `window.width`, `window.height` and `window.title`.
+    /// ## Settings
+    /// - `window.title` - the window's title.
+    /// - `window.width` - the window's width.
+    /// - `window.height` - the window's height.
     ///
-    /// Events:
-    /// - `core::io::WindowEvent`: events polled from the window.
+    /// ## Events
+    /// - @ref core::io::WindowEvent - event polled from the window.
     ///
-    /// Resources:
-    /// - `core::io::Window`: the window's handle.
+    /// ## Resources
+    /// - @ref core::io::Window - handle to the window.
     ///
-    /// Startup tags:
-    /// - `cubos.window.init`: initializes and opens the window, runs after `cubos.settings`.
+    /// ## Startup tags
+    /// - `cubos.window.init` - window is opened, runs after `cubos.settings`.
     ///
-    /// Tags:
-    /// - `cubos.window.poll`: polls the window for events.
-    /// - `cubos.window.render`: swaps the window's back buffers.
-    ///
+    /// ## Tags
+    /// - `cubos.window.poll` - the window is polled for events, sending @ref core::io::WindowEvent's.
+    /// - `cubos.window.render` - the window's back buffers are swapped.
+
+    /// @brief Plugin entry function.
     /// @param cubos CUBOS. main class
+    /// @ingroup window-plugin
     void windowPlugin(Cubos& cubos);
 } // namespace cubos::engine
