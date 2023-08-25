@@ -80,7 +80,7 @@ namespace cubos::engine
         const std::vector<core::gl::DirectionalLight>& directionalLights() const;
 
         /// @brief Gets the point lights of the frame.
-        /// @return The point lights.
+        /// @return Point lights.
         const std::vector<core::gl::PointLight>& pointLights() const;
 
     private:

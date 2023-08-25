@@ -23,8 +23,8 @@ namespace cubos::engine
     ///
     /// Voxel grids are first triangulated, and then the triangles are uploaded to the GPU.
     /// The rendering is done in two passes:
-    /// - The first pass renders the scene to the GBuffer textures: position, normal and material.
-    /// - The second pass takes the GBuffer textures and calculates the color of the pixels with the lighting applied.
+    /// 1. Render the scene to the GBuffer textures: position, normal and material.
+    /// 2. Take the GBuffer textures and calculate the color of the pixels with the lighting applied.
     ///
     /// @ingroup renderer-plugin
     class DeferredRenderer : public BaseRenderer

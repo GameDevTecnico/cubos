@@ -51,12 +51,12 @@ namespace cubos::core::al
 
         /// @brief Creates an audio device from a given device @p specifier.
         /// @see enumerateDevices()
-        /// @param specifier The device specifier (empty for default).
+        /// @param specifier Device specifier (empty for default).
         /// @return Audio device, or nullptr on failure.
         static std::shared_ptr<AudioDevice> create(const std::string& specifier = "");
 
         /// @brief Enumerates the available devices.
-        /// @param devices The vector to fill with the available devices.
+        /// @param[out] devices Vector to fill with the available devices.
         static void enumerateDevices(std::vector<std::string>& devices);
 
         /// @brief Creates a new audio buffer
@@ -77,7 +77,7 @@ namespace cubos::core::al
         virtual void setListenerOrientation(const glm::vec3& forward, const glm::vec3& up) = 0;
 
         /// @brief Sets the velocity of the listener. Used to implement the doppler effect.
-        /// @param velocity The velocity of the listener.
+        /// @param velocity Velocity of the listener.
         virtual void setListenerVelocity(const glm::vec3& velocity) = 0;
     };
 
