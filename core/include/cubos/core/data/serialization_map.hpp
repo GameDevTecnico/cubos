@@ -74,7 +74,7 @@ namespace cubos::core::data
 
         /// Gets the reference of a serialized identifier.
         /// @param id Serialized identifier to get the reference of.
-        /// @returns Reference of the serialized identifier.
+        /// @return Reference of the serialized identifier.
         inline R getRef(const I& id) const
         {
             if (mUsingFunctions)
@@ -90,7 +90,7 @@ namespace cubos::core::data
 
         /// Gets the serialized identifier of a reference.
         /// @param reference Reference to get the serialized identifier of.
-        /// @returns Serialized identifier of the reference.
+        /// @return Serialized identifier of the reference.
         inline I getId(const R& reference) const
         {
             if (mUsingFunctions)
@@ -113,7 +113,7 @@ namespace cubos::core::data
         }
 
         /// Gets the number of mapped references.
-        /// @returns Number of mapped references.
+        /// @return Number of mapped references.
         inline std::size_t size() const
         {
             return mRefToId.size();

@@ -159,7 +159,7 @@ namespace cubos::core::data
         /// Checks if the serializer has failed.
         bool failed() const;
 
-        /// @returns The context of the serializer.
+        /// @return The context of the serializer.
         inline Context& context()
         {
             return mContext;
