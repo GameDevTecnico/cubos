@@ -1,10 +1,10 @@
 /// @dir
-/// @brief @ref cubos::core::ecs namespace.
+/// @brief @ref core-ecs module.
 
 #pragma once
 
 /// @namespace cubos::core::ecs
-/// @brief ECS namespace.
+/// @brief @ref core-ecs module.
 /// @ingroup core-ecs
 
 /// @namespace cubos::core::ecs::impl

@@ -1,10 +1,10 @@
 /// @dir
-/// @brief @ref cubos::core::data namespace.
+/// @brief @ref core-data module.
 
 #pragma once
 
 /// @namespace cubos::core::data
-/// @brief Data namespace.
+/// @brief @ref core-data module.
 /// @ingroup core-data
 
 namespace cubos::core::data

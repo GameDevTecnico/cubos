@@ -1,6 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::core::al::AudioDevice and related types.
-/// @ingroup core-audio
+/// @ingroup core-al
 
 #pragma once
 
@@ -21,13 +21,13 @@ namespace cubos::core::al
     /// @brief Handle to an audio buffer.
     /// @see impl::Buffer - audio buffer interface.
     /// @see AudioDevice::createBuffer()
-    /// @ingroup core-audio
+    /// @ingroup core-al
     using Buffer = std::shared_ptr<impl::Buffer>;
 
     /// @brief Handle to an audio source.
     /// @see impl::Source - audio source interface.
     /// @see AudioDevice::createSource()
-    /// @ingroup core-audio
+    /// @ingroup core-al
     using Source = std::shared_ptr<impl::Source>;
 
     /// @brief Possible audio formats.
