@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Entity inspector plugin directory.
+/// @brief @ref entity-inspector-tool-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -24,7 +24,7 @@ namespace cubos::engine::tools
     /// - @ref entity-selector-tool-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup entity-inspector-tool-plugin
     void entityInspectorPlugin(Cubos& cubos);
 } // namespace cubos::engine::tools

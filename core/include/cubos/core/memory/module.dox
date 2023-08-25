@@ -11,5 +11,5 @@ namespace cubos::core::memory
 {
     /// @defgroup core-memory Memory
     /// @ingroup core
-    /// @brief Provides memory utilities.
+    /// @brief Provides a stream library and memory utilities.
 } // namespace cubos::core::memory

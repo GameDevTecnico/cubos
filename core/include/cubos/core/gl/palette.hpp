@@ -22,6 +22,15 @@ namespace cubos::core::data
 namespace cubos::core::gl
 {
     /// @brief Holds a palette of materials. Supports up to 65535 materials.
+    ///
+    /// Instead of storing the materials themselves in voxel data, @b CUBOS.
+    /// uses palettes, and stores the index of the material in the palette
+    /// instead.
+    ///
+    /// This allows for more efficient storage of voxel data, since now instead
+    /// of storing the whole material per each voxel, we just store a 16-bit
+    /// integer.
+    ///
     /// @ingroup core-gl
     class Palette final
     {

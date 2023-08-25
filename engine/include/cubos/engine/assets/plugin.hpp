@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Assets plugin directory.
+/// @brief @ref assets-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -13,8 +13,8 @@
 namespace cubos::engine
 {
     /// @defgroup assets-plugin Assets
-    /// @ingroup plugins
-    /// @brief Adds asset management to CUBOS.
+    /// @ingroup engine
+    /// @brief Adds asset management to @b CUBOS.
     ///
     /// ## Settings
     /// - `assets.io.enabled` - whether asset I/O should be done (default: `true`).
@@ -36,7 +36,7 @@ namespace cubos::engine
     /// - `cubos.assets.cleanup` - frees any assets no longer in use.
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class.
+    /// @param cubos @b CUBOS. main class.
     /// @ingroup assets-plugin
     void assetsPlugin(Cubos& cubos);
 } // namespace cubos::engine

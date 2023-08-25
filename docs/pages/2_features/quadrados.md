@@ -1,13 +1,21 @@
-# Quadrados {#quadrados}
+# Quadrados {#features-quadrados}
 
-*Quadrados* is the CLI tool used to work with *CUBOS.* At the moment, it contains
-the following commands:
-- `quadrados help`: shows the help message;
-- `quadrados convert`: converts a `.qb` voxel file into the internal format used
-  by CUBOS., `.grd` and `.pal`.
-- `quadrados embed`: utility used to embed files directly into an executable for
-  use with the `EmbeddedArchive`.
-- `quadrados generate`: generates component definition boilerplate code.
+@brief How to use the *Quadrados* CLI tool.
+
+@m_footernavigation
+
+@note This guide won't be very useful unless you're planning on developing a
+game with **CUBOS.** and need to convert voxel models into the internal format
+used by the engine, or embed files into an executable.
+
+*Quadrados* is the CLI tool used to work with **CUBOS.** At the moment, it
+contains the following commands:
+- `quadrados help` - shows the help message;
+- `quadrados convert` - converts a `.qb` voxel file into the internal format
+  used by CUBOS., `.grd` and `.pal`.
+- `quadrados embed` - utility used to embed files directly into an executable
+  for use with the `EmbeddedArchive`.
+- `quadrados generate` - generates component definition boilerplate code.
 
 ## Convert
 
@@ -118,22 +126,24 @@ that it uses `10` different materials.
 
 ## Embed
 
-The `quadrados embed` tool is used to embed files directly into an executable for
-use with the `EmbeddedArchive`. This is useful for example when you want to ship
-a game with a set of assets, but don't want to have to distribute them as
-separate files. This way, you are able to ship a single executable file.
+The `quadrados embed` tool is used to embed files directly into an executable
+for use with the @ref cubos::core::data::EmbeddedArchive. This is useful for
+example when you want to ship a game with a set of assets, but don't want to
+have to distribute them as separate files. This way, you are able to ship a
+single executable file.
 
 ### Usage
 
-This tool takes a file and generates a C++ source file which registers a new
-`EmbeddedArchive`, outputting it to the standard output. This source file can
-then be compiled and linked with your executable.
+This tool takes a file and generates a C++ source file which registers data to
+be used with @ref cubos::core::data::EmbeddedArchive, outputting the code to
+the standard output. This source file can then be compiled and linked with your
+executable.
 
-If no name for the archive is specified, the name of the file will be used. For
-example, if you run `quadrados embed logo.png > logo.cpp`, the name of the
-archive will be `logo.png`.
+If no name is specified, the name of the file will be used. For example, if you
+run `quadrados embed logo.png > logo.cpp`, the name of the registered data will
+be `logo.png`.
 
-The resulting archive can then be mounted like this:
+The data can then be mounted like this:
 
 ```cpp
 #include <cubos/core/data/fs/file_system.hpp>

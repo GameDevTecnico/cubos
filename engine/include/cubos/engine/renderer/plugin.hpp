@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Renderer plugin directory.
+/// @brief @ref renderer-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point, resource @ref cubos::engine::ActiveCameras and components @ref
@@ -18,7 +18,7 @@
 namespace cubos::engine
 {
     /// @defgroup renderer-plugin Renderer
-    /// @ingroup plugins
+    /// @ingroup engine
     /// @brief Creates and handles the lifecycle of a renderer.
     ///
     /// Renders all entities with the @ref RenderableGrid component, using as cameras entities with
@@ -91,7 +91,7 @@ namespace cubos::engine
     };
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup renderer-plugin
     void rendererPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -1,8 +1,0 @@
-/// \brief Namespace of the **CUBOS.** libraries.
-namespace cubos
-{
-    /// \brief Namespace of the **CUBOS.** engine library.
-    namespace engine
-    {
-    } // namespace engine
-} // namespace cubos

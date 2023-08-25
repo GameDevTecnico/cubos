@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Window plugin directory.
+/// @brief @ref window-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -14,7 +14,7 @@
 namespace cubos::engine
 {
     /// @defgroup window-plugin Window
-    /// @ingroup plugins
+    /// @ingroup engine
     /// @brief Creates and handles the lifecycle of a window.
     ///
     /// Initially sets @ref ShouldQuit to `false`, and sets it to `true` only when the window is
@@ -39,7 +39,7 @@ namespace cubos::engine
     /// - `cubos.window.render` - the window's back buffers are swapped.
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup window-plugin
     void windowPlugin(Cubos& cubos);
 } // namespace cubos::engine

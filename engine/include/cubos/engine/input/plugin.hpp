@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Input plugin directory.
+/// @brief @ref input-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -13,8 +13,8 @@
 namespace cubos::engine
 {
     /// @defgroup input-plugin Input
-    /// @ingroup plugins
-    /// @brief Adds input handling to CUBOS.
+    /// @ingroup engine
+    /// @brief Adds input handling to @b CUBOS.
     ///
     /// ## Bridges
     /// - @ref JSONBridge - registered with the `.bind` extension, loads @ref InputBindings assets.
@@ -33,7 +33,7 @@ namespace cubos::engine
     /// - @ref window-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class.
+    /// @param cubos @b CUBOS. main class.
     /// @ingroup input-plugin
     void inputPlugin(Cubos& cubos);
 } // namespace cubos::engine

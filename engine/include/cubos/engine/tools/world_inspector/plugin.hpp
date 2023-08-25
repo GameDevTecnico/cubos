@@ -1,5 +1,5 @@
 /// @dir
-/// @brief World inspector plugin directory.
+/// @brief @ref world-inspector-tool-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -23,7 +23,7 @@ namespace cubos::engine::tools
     /// - @ref entity-selector-tool-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup world-inspector-tool-plugin
     void worldInspectorPlugin(Cubos& cubos);
 } // namespace cubos::engine::tools

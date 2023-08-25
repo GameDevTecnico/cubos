@@ -1,16 +1,20 @@
 /// @dir
-/// @brief @ref cubos::core namespace.
+/// @brief @ref core module.
 
 #pragma once
 
 /// @namespace cubos::core
-/// @brief CUBOS. core namespace.
+/// @brief @ref core namespace.
 
 namespace cubos::core
 {
     /// @defgroup core Core
-    /// @brief CUBOS. core library.
+    /// @brief @b CUBOS. core library.
     ///
-    /// The core library contains loose utilities and functionality on which the rest of the CUBOS.
-    /// libraries are built on.
-}
+    /// The core library contains loose utilities and functionality on which the rest of the
+    /// @b CUBOS. libraries and applications are built on. Lives in the @ref cubos::core namespace.
+    ///
+    /// This library can be further divided into modules, which are documented in their respective
+    /// module pages. Each of these modules has its own namespace and directory in the source tree.
+    /// For example, the @ref core-ecs module lives in the @ref cubos::core::ecs namespace.
+} // namespace cubos::core

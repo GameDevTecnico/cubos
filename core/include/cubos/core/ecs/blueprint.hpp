@@ -14,7 +14,7 @@
 namespace cubos::core::ecs
 {
     /// @brief Stores a bundle of entities and their respective components, which can be easily
-    /// spawned into a world. This is in a way the 'Prefab' of CUBOS., but lower level.
+    /// spawned into a world. This is in a way the 'Prefab' of @b CUBOS., but lower level.
     class Blueprint final
     {
     public:

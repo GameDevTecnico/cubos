@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Scene plugin directory.
+/// @brief @ref scene-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -13,8 +13,8 @@
 namespace cubos::engine
 {
     /// @defgroup scene-plugin Scene
-    /// @ingroup plugins
-    /// @brief Adds scenes to CUBOS.
+    /// @ingroup engine
+    /// @brief Adds scenes to @b CUBOS.
     ///
     /// ## Bridges
     /// - @ref SceneBridge - registered with the `.cubos` extension, loads @ref Scene assets.
@@ -23,7 +23,7 @@ namespace cubos::engine
     /// - @ref assets-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class.
+    /// @param cubos @b CUBOS. main class.
     /// @ingroup scene-plugin
     void scenePlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -26,6 +26,7 @@ namespace cubos::core::data
 namespace cubos::core::gl
 {
     /// @brief Represents a voxel object using a 3D grid.
+    /// @see Each voxel stores a material index to be used with a @ref Palette.
     /// @ingroup core-gl
     class Grid final
     {

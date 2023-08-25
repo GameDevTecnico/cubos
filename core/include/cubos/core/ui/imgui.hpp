@@ -21,7 +21,8 @@ namespace cubos::core::ui
     /// @ingroup core-ui
     void terminate();
 
-    /// @brief Begins a new ImGui frame.
+    /// @brief Begins a new ImGui frame. ImGui calls should be made between this and @ref
+    /// endFrame().
     /// @ingroup core-ui
     void beginFrame();
 

@@ -106,6 +106,32 @@ namespace cubos::core::ecs
         {
             // This should never be instantiated.
             static_assert(!std::is_same_v<T, T>, "Unknown system argument type.");
+
+            // Placeholders for documentation.
+
+            using Type = void; ///< Type of the fetched data.
+            using State = void;
+
+            /// @brief Adds the argument @p T to the given @p info.
+            /// @param[out] info System information.
+            static void add(SystemInfo& info);
+
+            /// @brief Prepares the argument for being executed on the given @p world.
+            /// @param world World to prepare the argument for.
+            /// @return State of the argument.
+            static State prepare(World& world);
+
+            /// @brief Fetches the data from the given @p world.
+            /// @param world World to fetch the data from.
+            /// @param commands Buffer where commands can be submitted to.
+            /// @param state State of the argument.
+            /// @return Fetched data.
+            static Type fetch(World& world, CommandBuffer& commands, State& state);
+
+            /// @brief Converts the fetched data into the actual desired argument.
+            /// @param fetched Fetched data.
+            /// @return Actual argument.
+            static T arg(Type&& fetched);
         };
 
         template <typename R>

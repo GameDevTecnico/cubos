@@ -1,8 +1,6 @@
-/// @dir engine
-/// @brief @ref cubos::engine namespace.
-
 /// @file
 /// @brief Class @ref cubos::engine::Cubos.
+/// @ingroup engine
 
 #pragma once
 
@@ -16,12 +14,11 @@
 
 namespace cubos::engine
 {
-    /// @defgroup plugins
-    /// @brief Engine plugins.
-
     /// @brief Resource which stores the time since the last iteration of the main loop started.
     ///
     /// This resource is added and updated by the @ref Cubos class.
+    ///
+    /// @ingroup engine
     struct DeltaTime
     {
         DeltaTime(float value);
@@ -31,6 +28,8 @@ namespace cubos::engine
     /// @brief Resource used as a flag to indicate whether the main loop should stop running.
     ///
     /// This resource is added by the @ref Cubos class, initially set to true.
+    ///
+    /// @ingroup engine
     struct ShouldQuit
     {
         ShouldQuit(bool value);
@@ -40,6 +39,8 @@ namespace cubos::engine
     /// @brief Resource used for storing program arguments.
     ///
     /// This resource is added by the @ref Cubos class when constructed with arguments.
+    ///
+    /// @ingroup engine
     struct Arguments
     {
         Arguments(std::vector<std::string> value);
@@ -47,6 +48,7 @@ namespace cubos::engine
     };
 
     /// @brief Used to chain configurations related to tags.
+    /// @ingroup engine
     class TagBuilder
     {
     public:
@@ -80,6 +82,7 @@ namespace cubos::engine
     };
 
     /// @brief Used to chain configurations related to systems
+    /// @ingroup engine
     class SystemBuilder
     {
     public:
@@ -132,6 +135,7 @@ namespace cubos::engine
 
     /// @brief Represents the engine itself, and exposes the interface with which the game
     /// developer interacts with. Ties up all the different parts of the engine together.
+    /// @ingroup engine
     class Cubos final
     {
     public:

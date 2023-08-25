@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Transform plugin directory.
+/// @brief @ref transform-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -16,7 +16,7 @@
 namespace cubos::engine
 {
     /// @defgroup transform-plugin Transform
-    /// @ingroup plugins
+    /// @ingroup engine
     /// @brief Adds transform components which assign positions, rotations and scaling to entities.
     ///
     /// This plugin operates on entities with a @ref LocalToWorld component and any combination of
@@ -35,7 +35,7 @@ namespace cubos::engine
     ///    information from the @ref Position, @ref Rotation and @ref Scale components.
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup transform-plugin
     void transformPlugin(Cubos& cubos);
 } // namespace cubos::engine

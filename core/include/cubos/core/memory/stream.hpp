@@ -20,6 +20,14 @@ namespace cubos::core::memory
     };
 
     /// @brief Interface class for memory streams. Abstracts away sources or destinations of data.
+    ///
+    /// ## Motivation
+    ///
+    /// Why do we have our own streams? Well, the standard library streams are hard to use and
+    /// extend, and very template heavy. Using our own streams allows us to abstract away more
+    /// easily where the data is coming from, or going to, allowing us, for example, to embed
+    /// files into the executable and not have to worry about the code that reads them.
+    ///
     /// @ingroup core-memory
     class Stream
     {

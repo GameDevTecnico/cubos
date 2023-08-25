@@ -1,5 +1,5 @@
 /// @dir
-/// @brief ImGui plugin directory.
+/// @brief @ref imgui-plugin ImGui plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -12,8 +12,8 @@
 namespace cubos::engine
 {
     /// @defgroup imgui-plugin ImGui integration
-    /// @ingroup plugins
-    /// @brief Initializes and configures ImGui for CUBOS.
+    /// @ingroup engine
+    /// @brief Initializes and configures ImGui for @b CUBOS.
     ///
     /// @note Systems using `ImGui` **must be** tagged with `cubos.imgui`.
     ///
@@ -29,7 +29,7 @@ namespace cubos::engine
     /// - @ref window-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup imgui-plugin
     void imguiPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -1,7 +1,7 @@
 /// @file
 /// @brief Sample which showcases how the EmbeddedArchive class can be used.
 ///
-/// @details The `assets` directory on the same directory as this file was embedded into
+/// The `assets` directory on the same directory as this file was embedded into
 /// `embed.cpp` using the command `quadrados embed -r assets > embed.cpp`. Since no further options
 /// were specified, `quadrados` registered the data with the name of the embedded file - `assets`.
 
