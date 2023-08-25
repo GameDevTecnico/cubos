@@ -109,7 +109,7 @@ namespace cubos::core::data
         /// 256 would not.
         /// @see Package::set
         /// @param data The data to package.
-        /// @returns True on success, false on failure.
+        /// @return True on success, false on failure.
         bool change(int64_t data);
 
         /// Packages the specified uint64_t into this package, without changing
@@ -118,7 +118,7 @@ namespace cubos::core::data
         /// would not.
         /// @see Package::set
         /// @param data The data to package.
-        /// @returns True on success, false on failure.
+        /// @return True on success, false on failure.
         bool change(uint64_t data);
 
         /// Packages the specified double into this package, without changing
@@ -127,7 +127,7 @@ namespace cubos::core::data
         /// lowered.
         /// @see Package::set
         /// @param data The data to package.
-        /// @returns True on success, false on failure.
+        /// @return True on success, false on failure.
         bool change(double data);
 
         /// Packages the specified bool into this package, without changing
@@ -135,7 +135,7 @@ namespace cubos::core::data
         /// fail.
         /// @see Package::set
         /// @param data The data to package.
-        /// @returns True on success, false on failure.
+        /// @return True on success, false on failure.
         bool change(bool data);
 
         /// Packages the specified string into this package, without changing
@@ -143,7 +143,7 @@ namespace cubos::core::data
         /// this will fail.
         /// @see Package::set
         /// @param data The data to package.
-        /// @returns True on success, false on failure.
+        /// @return True on success, false on failure.
         bool change(const std::string& data);
 
         /// Unpackages the package into data.
@@ -153,7 +153,7 @@ namespace cubos::core::data
         /// @tparam T The type of the data to unpackage.
         /// @param data The data to write to.
         /// @param context Optional context to use when unpackaging the data.
-        /// @returns True if the unpackaging succeeded, false otherwise.
+        /// @return True if the unpackaging succeeded, false otherwise.
         template <typename T>
         inline bool into(T& data, Context* context = nullptr) const;
 
@@ -163,7 +163,7 @@ namespace cubos::core::data
         /// you're sure the type is correct.
         /// @tparam T The type of the data to unpackage.
         /// @param context Optional context to use when unpackaging the data.
-        /// @returns The data.
+        /// @return The data.
         template <typename T>
         requires std::default_initializable<T>
         inline T get(Context* context = nullptr) const
@@ -177,7 +177,7 @@ namespace cubos::core::data
             return data;
         }
 
-        /// @returns The type of the packaged data.
+        /// @return The type of the packaged data.
         Type type() const;
 
         /// Gets the size of the package.
@@ -185,50 +185,50 @@ namespace cubos::core::data
         /// 0, or 1, respectively.
         /// For objects, arrays and dictionaries, this is, respectively, the
         /// field count, the element count and the key-value pair count.
-        /// @returns The size of the packaged
+        /// @return The size of the packaged
         std::size_t size() const;
 
         /// Checks if the package is storing a structured data type (object, array or dictionary).
-        /// @returns True if the package is storing a structured data type, false otherwise.
+        /// @return True if the package is storing a structured data type, false otherwise.
         bool isStructured() const;
 
         /// Gets a reference to a field of this package.
         /// If the package isn't storing an object or if the field doesn't exist, this method will abort.
         /// @param name The name of the field.
-        /// @returns A reference to the field.
+        /// @return A reference to the field.
         Package& field(const std::string& name);
 
         /// Gets all of the fields in this package.
         /// If the package isn't storing an object, this method will abort.
-        /// @returns A map associating the field name to the field package.
+        /// @return A map associating the field name to the field package.
         Fields& fields();
 
         /// Gets all of the fields in this package.
         /// If the package isn't storing an object, this method will abort.
-        /// @returns A map associating the field name to the field package.
+        /// @return A map associating the field name to the field package.
         const Fields& fields() const;
 
         /// Removes a field from this package.
         /// If the package isn't storing an object, this method will abort.
         /// @param name The name of the field.
-        /// @returns The removed field, or an empty package if the field didn't exist.
+        /// @return The removed field, or an empty package if the field didn't exist.
         Package removeField(std::string_view name);
 
         /// Gets an element of the array stored in this package.
         /// If the package isn't an array, this method will abort.
         /// If the index is out of bounds, this method will abort.
         /// @param index The index of the element in the array.
-        /// @returns A reference to the element.
+        /// @return A reference to the element.
         Package& element(std::size_t index);
 
         /// Gets the array stored in this package.
         /// If the package isn't an array, this method will abort.
-        /// @returns A vector of the packaged elements.
+        /// @return A vector of the packaged elements.
         Elements& elements();
 
         /// Gets the array stored in this package.
         /// If the package isn't an array, this method will abort.
-        /// @returns A vector of the packaged elements.
+        /// @return A vector of the packaged elements.
         const Elements& elements() const;
 
         /// Gets the dictionary stored in this package.
@@ -245,7 +245,7 @@ namespace cubos::core::data
 
         /// Converts a package type into its string representation.
         /// @param type The type to convert.
-        /// @returns The string representation of the type.
+        /// @return The string representation of the type.
         static const char* typeToString(Type type);
 
         void serialize(Serializer& ser, const char* name) const;
@@ -290,7 +290,7 @@ namespace cubos::core::data
         friend Package;
 
         /// Pops data from the current package.
-        /// @returns Pointer to the popped data.
+        /// @return Pointer to the popped data.
         const Package* pop();
 
         /// Stack used to keep the state of the package.
@@ -342,7 +342,7 @@ namespace cubos::core::data
             /// Pushes data to the current package.
             /// @param data The data to push.
             /// @param name The name of the field, if any.
-            /// @returns Pointer to the pushed data.
+            /// @return Pointer to the pushed data.
             Package* push(Package::Data&& data, const char* name);
 
             /// Stack used to keep the state of the package.

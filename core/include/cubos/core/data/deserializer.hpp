@@ -138,7 +138,7 @@ namespace cubos::core::data
 
         /// Indicates that an array is currently being deserialized.
         /// The fail bit is set on failure.
-        /// @returns The length of the array.
+        /// @return The length of the array.
         virtual std::size_t beginArray() = 0;
 
         /// Indicates that an array is no longer being deserialized.
@@ -147,7 +147,7 @@ namespace cubos::core::data
 
         /// Indicates that a dictionary is being deserialized.
         /// The fail bit is set on failure.
-        /// @returns The length of the dictionary (always 0 on failure).
+        /// @return The length of the dictionary (always 0 on failure).
         virtual std::size_t beginDictionary() = 0;
 
         /// Indicates that a dictionary is no longer being deserialized.
@@ -160,7 +160,7 @@ namespace cubos::core::data
         /// Sets the fail bit.
         void fail();
 
-        /// @returns The context of the serializer.
+        /// @return The context of the serializer.
         inline Context& context()
         {
             return mContext;

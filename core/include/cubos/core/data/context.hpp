@@ -39,7 +39,7 @@ namespace cubos::core::data
         /// If the type is present multiple times, the topmost one is returned.
         /// Aborts if the data is not present.
         /// @tparam T The type of the data.
-        /// @returns the data associated with the given type.
+        /// @return the data associated with the given type.
         template <typename T>
         inline T& get()
         {
@@ -48,7 +48,7 @@ namespace cubos::core::data
 
         /// Checks if there is data associated with the given type.
         /// @tparam T The type of the data.
-        /// @returns True if the data is present, false otherwise.
+        /// @return True if the data is present, false otherwise.
         template <typename T>
         inline bool has() const
         {
@@ -72,12 +72,12 @@ namespace cubos::core::data
 
         /// Aborts if the data is not present.
         /// @param type The type of the data.
-        /// @returns A pointer to the data associated with the given type.
+        /// @return A pointer to the data associated with the given type.
         void* getAny(std::type_index type) const;
 
         /// Tries to get the data associated with the given type.
         /// @param type The type of the data.
-        /// @returns A pointer to the data associated with the given type, or nullptr if it's not
+        /// @return A pointer to the data associated with the given type, or nullptr if it's not
         /// present.
         void* tryGetAny(std::type_index type) const;
 
