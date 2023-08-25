@@ -57,7 +57,7 @@ namespace cubos::core::data
         };
 
         /// @brief Recursively adds all files in the directory to the archive.
-        /// @param Id of the directory.
+        /// @param parent Id of the directory.
         void generate(std::size_t parent);
 
         std::filesystem::path mOsPath;                    ///< Path to the directory in the real file system.

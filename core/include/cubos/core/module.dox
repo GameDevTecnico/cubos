@@ -8,7 +8,7 @@
 
 namespace cubos::core
 {
-    /// @defgroup core
+    /// @defgroup core Core
     /// @brief CUBOS. core library.
     ///
     /// The core library contains loose utilities and functionality on which the rest of the CUBOS.

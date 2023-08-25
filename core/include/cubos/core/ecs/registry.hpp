@@ -115,7 +115,7 @@ namespace cubos::core::ecs
 } // namespace cubos::core::ecs
 
 /// @brief Macro used to register a component type as an alternative to calling
-/// @ref Registry::add() manually.
+/// @ref cubos::core::ecs::Registry::add() manually.
 /// @warning Care must be taken to ensure that this macro is included from at least one translation
 /// unit (think of it as a .cpp file) in the executable, otherwise the component type may not be
 /// registered. E.g.: keeping it hidden in a .cpp file on a library may not work.
