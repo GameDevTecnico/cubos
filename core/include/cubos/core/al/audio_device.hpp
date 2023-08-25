@@ -137,8 +137,7 @@ namespace cubos::core::al
             /// @param relative Relative flag.
             virtual void setRelative(bool relative) = 0;
 
-            /// @brief Sets the minimum and maximum distance at which the source is audible.
-            /// @param minDistance Minimum distance.
+            /// @brief Sets the maximum distance at which the source is audible.
             /// @param maxDistance Maximum distance.
             virtual void setDistance(float maxDistance) = 0;
 

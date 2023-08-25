@@ -45,7 +45,7 @@ namespace cubos::core::ecs
         static void add(std::string_view name);
 
         /// @brief Gets the name of a component type.
-        /// @param index Type index of the component.
+        /// @param type Type index of the component.
         /// @return Name of the component, or std::nullopt if the component type was not found.
         static std::optional<std::string_view> name(std::type_index type);
 
