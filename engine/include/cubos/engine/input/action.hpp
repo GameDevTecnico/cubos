@@ -43,7 +43,7 @@ namespace cubos::engine
         bool pressed() const;
 
         /// @brief Sets whether this action is pressed.
-        /// @param pressed The new pressed state.
+        /// @param pressed New pressed state.
         void pressed(bool pressed);
 
     private:

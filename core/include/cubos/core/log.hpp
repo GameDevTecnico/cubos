@@ -10,7 +10,7 @@
 /// @{
 
 /// @def CUBOS_LOG_LEVEL
-/// @brief The log level to compile in.
+/// @brief Log level to compile in.
 ///
 /// This macro essentially controls the minimum log level that will be compiled into the binary.
 ///

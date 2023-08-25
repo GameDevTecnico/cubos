@@ -12,7 +12,7 @@
 
 namespace cubos::engine
 {
-    /// @brief The asset equivalent to ECS blueprints - a bundle of entities and their components.
+    /// @brief Asset equivalent to ECS blueprints - a bundle of entities and their components.
     ///
     /// Scene assets produce a blueprint when loaded which can be used to spawn them. Entity names
     /// in the resulting blueprint follow the format "foo", "import1.bar", "import1.import2.baz",

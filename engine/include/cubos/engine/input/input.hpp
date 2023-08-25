@@ -76,8 +76,8 @@ namespace cubos::engine
     private:
         struct BindingIndex
         {
-            std::string name;      ///< The name of the action or axis.
-            int player;            ///< The player index.
+            std::string name;      ///< Name of the action or axis.
+            int player;            ///< Player index.
             bool negative = false; ///< Whether the pressed key is a negative axis key.
         };
 

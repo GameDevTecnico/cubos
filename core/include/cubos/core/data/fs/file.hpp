@@ -99,7 +99,7 @@ namespace cubos::core::data
         /// - a parent directory in the path already exists as a regular file.
         /// - a file of a different type already exists at the destination.
         ///
-        /// @param path The relative path to the file.
+        /// @param path Relative path to the file.
         /// @param directory Whether the new file should be a directory.
         /// @return Handle to the file, or nullptr on failure.
         Handle create(std::string_view path, bool directory = false);

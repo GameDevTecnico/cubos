@@ -28,7 +28,7 @@ namespace cubos::engine
         virtual ~PostProcessingPass() = default;
 
         /// @brief Constructs.
-        /// @param renderDevice The render device to use.
+        /// @param renderDevice Render device to use.
         PostProcessingPass(core::gl::RenderDevice& renderDevice);
 
         /// @brief Deleted copy constructor.
@@ -51,6 +51,6 @@ namespace cubos::engine
                              core::gl::Framebuffer out) const = 0;
 
     protected:
-        core::gl::RenderDevice& mRenderDevice; ///< The render device to use.
+        core::gl::RenderDevice& mRenderDevice; ///< Render device to use.
     };
 } // namespace cubos::engine

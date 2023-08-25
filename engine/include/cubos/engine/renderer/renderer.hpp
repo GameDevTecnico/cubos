@@ -57,8 +57,9 @@ namespace cubos::engine
         virtual ~BaseRenderer() = default;
 
         /// @brief Constructs.
-        /// @param renderDevice The render device to use.
-        /// @param size The size of the window.
+        /// @warning @p renderDevice must be valid during the lifetime of the renderer.
+        /// @param renderDevice Render device to use.
+        /// @param size Size of the window.
         BaseRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size);
 
         /// @brief Deleted copy constructor.
