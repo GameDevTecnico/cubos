@@ -1,0 +1,15 @@
+/// @dir
+/// @brief @ref core-ui module.
+
+#pragma once
+
+/// @namespace cubos::core::ui
+/// @brief @ref core-ui module.
+/// @ingroup core-ui
+
+namespace cubos::core::ui
+{
+    /// @defgroup core-ui User Interface
+    /// @ingroup core
+    /// @brief Provides `ImGui` integration and general UI utilities.
+} // namespace cubos::core::ui
