@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::io::Window and related types.
+/// @ingroup core-io
+
 #pragma once
 
 #include <deque>
@@ -20,7 +24,8 @@ namespace cubos::core::io
 {
     class BaseWindow;
 
-    /// Mouse button codes enum.
+    /// @brief Mouse buttons enum.
+    /// @ingroup core-io
     enum class MouseButton
     {
         Invalid = -1, ///< Used for unknown mouse buttons.
@@ -32,7 +37,8 @@ namespace cubos::core::io
         Extra2,
     };
 
-    /// IDs of mouse axes.
+    /// @brief Mouse axes enums.
+    /// @ingroup core-io
     enum class MouseAxis
     {
         X,
@@ -40,141 +46,170 @@ namespace cubos::core::io
         Scroll,
     };
 
-    /// Possible mouse states.
+    /// @brief Possible mouse states.
+    /// @ingroup core-io
     enum class MouseState
     {
-        Default, ///< Default mouse state, mouse will function as is specified by the OS.
-        Locked,  ///< Mouse cursor will be hidden and locked to the center of the window,
-                 ///< useful for control schemes that require infinite mouse movement.
-        Hidden   ///< Mouse cursor will be hidden when over the window, otherwise functioning in the same way as
-                 ///< MouseState::Default
+        /// @brief Default mouse state, mouse will function as is specified by the OS.
+        Default,
+
+        /// @brief Mouse cursor will be hidden and locked to the center of the window, useful for
+        /// control schemes that require infinite mouse movement.
+        Locked,
+
+        /// @brief Mouse cursor will be hidden when over the window, otherwise functioning in the
+        /// same way as MouseState::Default
+        Hidden
     };
 
-    /// Event sent when a key is pressed or released.
+    /// @brief Event sent when a key is pressed or released.
+    /// @ingroup core-io
     struct KeyEvent
     {
         Key key;      ///< Key that was pressed or released.
-        bool pressed; ///< True if the key was pressed, false if it was released.
+        bool pressed; ///< Whether the key was pressed or released.
     };
 
-    /// Event sent when the modifiers change.
+    /// @brief Event sent when the modifiers change.
+    /// @ingroup core-io
     struct ModifiersEvent
     {
         Modifiers modifiers; ///< New modifiers.
     };
 
-    /// Event sent when a mouse button state changes.
+    /// @brief Event sent when a mouse button state changes.
+    /// @ingroup core-io
     struct MouseButtonEvent
     {
         MouseButton button; ///< Button that was pressed or released.
-        bool pressed;       ///< True if the button was pressed, false if it was released.
+        bool pressed;       ///< Whether the button was pressed or released.
     };
 
-    /// Event sent when the mouse cursor moves.
+    /// @brief Event sent when the mouse cursor moves.
+    /// @ingroup core-io
     struct MouseMoveEvent
     {
         glm::ivec2 position; ///< New position of the mouse cursor.
     };
 
-    /// Event sent when the mouse wheel is scrolled.
+    /// @brief Event sent when the mouse wheel is scrolled.
+    /// @ingroup core-io
     struct MouseScrollEvent
     {
         glm::ivec2 offset; ///< Offset of the scroll.
     };
 
-    /// Event sent when the window framebuffer is resized.
+    /// @brief Event sent when the window framebuffer is resized.
+    /// @ingroup core-io
     struct ResizeEvent
     {
         glm::ivec2 size; ///< New size of the framebuffer.
     };
 
-    /// Event sent when a unicode character is input.
+    /// @brief Event sent when a unicode character is input.
+    /// @ingroup core-io
     struct TextEvent
     {
         char32_t codepoint; ///< Unicode character that was input.
     };
 
-    /// Variant that can hold any of the window events.
+    /// @brief Variant that can hold any of the window events.
+    /// @ingroup core-io
     using WindowEvent = std::variant<KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent,
                                      ResizeEvent, TextEvent>;
 
-    /// Handle to a generic window.
+    /// @brief Handle to a window.
+    /// @ingroup core-io
     using Window = std::shared_ptr<BaseWindow>;
 
-    /// Opens a new window.
+    /// @brief Opens a new window.
     /// @param title Window title.
     /// @param size Window size, in screen coordinates.
-    /// @return New window, or nullptr if creation failed.
-    Window openWindow(const std::string& title = "Cubos", const glm::ivec2& size = {800, 600});
+    /// @return New window, or nullptr on failure.
+    /// @ingroup core-io
+    Window openWindow(const std::string& title = "CUBOS.", const glm::ivec2& size = {800, 600});
 
-    /// The base class for all window implementations.
-    /// Handles input events and creates the render device.
+    /// @brief Interface used to wrap low-level window API implementations.
+    ///
+    /// Handles input events and creates a @ref gl::RenderDevice.
+    ///
+    /// @ingroup core-io
     class BaseWindow
     {
     public:
         BaseWindow();
         virtual ~BaseWindow() = default;
 
-        /// Pushes an event to the event queue.
+        /// @brief Pushes an event to the event queue.
         /// @param event Event to push.
         void pushEvent(WindowEvent&& event);
 
-        /// Polls the window for events.
-        /// @return The next event, or std::nullopt if there are no more events.
+        /// @brief Polls the window for events.
+        /// @return Next event, or std::nullopt if there are no more events.
         std::optional<WindowEvent> pollEvent();
 
-        /// Swaps the window buffers.
+        /// @brief Swaps the window buffers.
         virtual void swapBuffers() = 0;
 
-        /// @return The render device associated with this window.
+        /// @brief Gets the render device associated with this window.
+        /// @return Render device associated with this window.
         virtual gl::RenderDevice& renderDevice() const = 0;
 
-        /// @return The window size, in screen coordinates. May differ from the framebuffer size.
+        /// @brief Gets the window size, which may differ from the framebuffer size.
+        /// @return Window size, in screen coordinates.
         virtual glm::ivec2 size() const = 0;
 
-        /// @return The window framebuffer size, in pixels.
+        /// @brief Gets the window framebuffer size, which may differ from the window size.
+        /// @return Window framebuffer size, in pixels.
         virtual glm::ivec2 framebufferSize() const = 0;
 
+        /// @brief Checks whether the window should close.
         /// @return Whether the window should close.
         virtual bool shouldClose() const = 0;
 
-        /// @return The time since the window was created, in seconds.
+        /// @brief Gets the time since the window was created.
+        /// @return Time since the window was created, in seconds.
         virtual double time() const = 0;
 
-        /// Set the mouse state when the window is focused.
-        /// @param state The new mouse state.
+        /// @brief Sets the mouse state when the window is focused.
+        /// @param state Mouse state.
         virtual void mouseState(MouseState state) = 0;
 
-        /// @return The mouse state when the window is focused.
+        /// @brief Gets the mouse state when the window is focused.
+        /// @return Mouse state when the window is focused.
         virtual MouseState mouseState() const = 0;
 
-        /// Creates a new cursor with a standard shape.
-        /// In the future custom cursors should also be supported.
+        /// @brief Creates a new cursor with a standard shape.
+        /// @todo Custom cursors should also be supported.
         /// @param standard Standard cursor to use.
         /// @return New cursor, or nullptr if creation failed.
         virtual std::shared_ptr<Cursor> createCursor(Cursor::Standard standard) = 0;
 
-        /// Sets the current cursor. If the cursor is nullptr, the default cursor will be used.
-        /// @param cursor The new cursor.
+        /// @brief Sets the current cursor. Pass nullptr to use the default cursor.
+        /// @param cursor New cursor.
         virtual void cursor(std::shared_ptr<Cursor> cursor) = 0;
 
-        /// Sets the content of the clipboard.
-        /// @param text The new clipboard text.
+        /// @brief Sets the content of the clipboard.
+        /// @param text New clipboard text.
         virtual void clipboard(const std::string& text) = 0;
 
+        /// @brief Gets the content of the clipboard.
+        /// @warning This function is not thread-safe, check #451 for more information.
         /// @return Text from the clipboard. Guaranteed to be valid until the next call.
         virtual const char* clipboard() const = 0;
 
-        /// @return The active keyboard modifiers.
+        /// @brief Gets the last used keyboard modifiers.
+        /// @return Active keyboard modifiers.
         virtual Modifiers modifiers() const = 0;
 
+        /// @brief Checks if a key is currently pressed with (at least) the given modifiers.
         /// @param key Key to check.
         /// @param modifiers Modifiers to check.
         /// @return Whether the key and modifiers (or a superset of) are currently pressed.
         virtual bool pressed(Key key, Modifiers modifiers = Modifiers::None) const = 0;
 
     protected:
-        /// Asks the implementation to fill the event queue with new events.
+        /// @brief Asks the implementation to fill the event queue with new events.
         virtual void pollEvents() = 0;
 
     private:
