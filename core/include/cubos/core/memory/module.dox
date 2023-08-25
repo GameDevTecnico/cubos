@@ -1,0 +1,15 @@
+/// @dir
+/// @brief @ref core-memory module.
+
+#pragma once
+
+/// @namespace cubos::core::memory
+/// @brief @ref core-memory module.
+/// @ingroup core-memory
+
+namespace cubos::core::memory
+{
+    /// @defgroup core-memory Memory
+    /// @ingroup core
+    /// @brief Provides memory utilities.
+} // namespace cubos::core::memory

@@ -1,43 +1,53 @@
+/// @file
+/// @brief Endianness utility functions.
+/// @ingroup core-memory
+
 #pragma once
 
 namespace cubos::core::memory
 {
-    /// Swaps the bytes of a value, changing the endianness.
-    /// @tparam T The type of the value.
-    /// @param value The value to swap.
-    /// @return The swapped value.
+    /// @brief Swaps the bytes of a value, changing its endianness.
+    /// @tparam T Value type.
+    /// @param value Value to swap.
+    /// @return Swapped value.
+    /// @ingroup core-memory
     template <typename T>
     T swapBytes(T value);
 
-    /// Checks if the current platform is little endian.
-    /// @return True if the current platform is little endian, false otherwise.
+    /// @brief Checks if the current platform is little endian.
+    /// @return Whether its little endian.
+    /// @ingroup core-memory
     bool isLittleEndian();
 
-    /// Converts a value from little endianness to local endianness.
-    /// @tparam T The type of the value.
-    /// @param value The value to convert.
-    /// @return The converted value.
+    /// @brief Converts a value from little endianness to local endianness.
+    /// @tparam T Value type.
+    /// @param value Value to convert.
+    /// @return Converted value.
+    /// @ingroup core-memory
     template <typename T>
     T fromLittleEndian(T value);
 
-    /// Converts a value from local endianness to little endianness.
-    /// @tparam T The type of the value.
-    /// @param value The value to convert.
-    /// @return The converted value.
+    /// @brief Converts a value from local endianness to little endianness.
+    /// @tparam T Value type.
+    /// @param value Value to convert.
+    /// @return Converted value.
+    /// @ingroup core-memory
     template <typename T>
     T toLittleEndian(T value);
 
-    /// Converts a value from big endianness to local endianness.
-    /// @tparam T The type of the value.
-    /// @param value The value to convert.
-    /// @return The converted value.
+    /// @brief Converts a value from big endianness to local endianness.
+    /// @tparam T Value type.
+    /// @param value Value to convert.
+    /// @return Converted value.
+    /// @ingroup core-memory
     template <typename T>
     T fromBigEndian(T value);
 
-    /// Converts a value from local endianness to big endianness.
-    /// @tparam T The type of the value.
-    /// @param value The value to convert.
-    /// @return The converted value.
+    /// @brief Converts a value from local endianness to big endianness.
+    /// @tparam T Value type.
+    /// @param value Value to convert.
+    /// @return Converted value.
+    /// @ingroup core-memory
     template <typename T>
     T toBigEndian(T value);
 
