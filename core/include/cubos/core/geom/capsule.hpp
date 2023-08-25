@@ -1,5 +1,6 @@
 /// @file
-/// @brief Contains the class for the Capsule shape.
+/// @brief Class @ref cubos::core::geom::Capsule.
+/// @ingroup core-geom
 
 #pragma once
 
@@ -8,21 +9,23 @@
 
 namespace cubos::core::geom
 {
-    /// @brief Capsule shape, which can also represent a sphere.
+    /// @brief Represents a capsule or sphere shape.
+    /// @ingroup core-geom
     struct Capsule
     {
-        float radius = 1.0f; ///< The radius of the capsule.
-        float length = 0.0f; ///< The length of the capsule.
+        float radius = 1.0f; ///< Radius of the capsule.
+        float length = 0.0f; ///< Length of the capsule.
 
         /// @brief Constructs a sphere.
-        /// @param radius The radius of the sphere.
-        /// @returns The sphere.
+        /// @param radius Sphere radius.
+        /// @return Sphere shape.
         static Capsule sphere(float radius)
         {
             return {radius, 0.0f};
         }
 
-        /// @return The height of the capsule.
+        /// @brief Gets the height of the capsule.
+        /// @return Height of the capsule.
         float height() const
         {
             return length + 2.0f * radius;
@@ -32,10 +35,6 @@ namespace cubos::core::geom
 
 namespace cubos::core::data
 {
-    /// Serializes a capsule.
-    /// @param ser The serializer to use.
-    /// @param capsule The capsule to serialize.
-    /// @param name The name of the capsule.
     inline void serialize(Serializer& ser, const geom::Capsule& capsule, const char* name)
     {
         ser.beginObject(name);
@@ -44,9 +43,6 @@ namespace cubos::core::data
         ser.endObject();
     }
 
-    /// Deserializes a capsule.
-    /// @param des The deserializer to use.
-    /// @param capsule The capsule to deserialize.
     inline void deserialize(Deserializer& des, geom::Capsule& capsule)
     {
         des.beginObject();

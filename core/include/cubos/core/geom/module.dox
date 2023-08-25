@@ -1,0 +1,15 @@
+/// @dir
+/// @brief @ref cubos::core::geom namespace.
+
+#pragma once
+
+/// @namespace cubos::core::geom
+/// @brief Geometry namespace.
+/// @ingroup core-geom
+
+namespace cubos::core::geom
+{
+    /// @defgroup core-geom Geometry
+    /// @ingroup core
+    /// @brief Provides geometry utilities.
+}

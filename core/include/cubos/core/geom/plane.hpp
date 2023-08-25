@@ -1,5 +1,6 @@
 /// @file
-/// @brief Contains the class for the Plane shape.
+/// @brief Class @ref cubos::core::geom::Plane.
+/// @ingroup core-geom
 
 #pragma once
 
@@ -10,19 +11,16 @@
 
 namespace cubos::core::geom
 {
-    /// @brief Plane shape.
+    /// @brief Represents a plane shape.
+    /// @ingroup core-geom
     struct Plane
     {
-        glm::vec3 normal{0.0f, 1.0f, 0.0f}; ///< The normal of the plane.
+        glm::vec3 normal{0.0f, 1.0f, 0.0f}; ///< Normal of the plane.
     };
 } // namespace cubos::core::geom
 
 namespace cubos::core::data
 {
-    /// Serializes a plane.
-    /// @param ser The serializer to use.
-    /// @param plane The plane to serialize.
-    /// @param name The name of the plane.
     inline void serialize(Serializer& ser, const geom::Plane& plane, const char* name)
     {
         ser.beginObject(name);
@@ -30,9 +28,6 @@ namespace cubos::core::data
         ser.endObject();
     }
 
-    /// Deserializes a plane.
-    /// @param des The deserializer to use.
-    /// @param plane The plane to deserialize.
     inline void deserialize(Deserializer& des, geom::Plane& plane)
     {
         des.beginObject();
