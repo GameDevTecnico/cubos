@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::Dispatcher.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <map>
@@ -46,84 +50,78 @@
 
 namespace cubos::core::ecs
 {
-    /// @brief Dispatcher is a class that is used to register systems and call them all at once, where they will be
-    /// executed in order of the stages they are in.
+    /// @brief Used to add systems and relations between them and then dispatch them all at once.
+    /// @ingroup core-ecs
     class Dispatcher
     {
     public:
         ~Dispatcher();
 
-        /// Adds a tag, and sets it as the current tag for further
-        /// settings.
+        /// @brief Adds a tag, and sets it as the current tag for further settings.
         /// @param tag Tag to add.
         void addTag(const std::string& tag);
 
-        /// Makes the current tag inherit the settings of another tag.
+        /// @brief Makes the current tag inherit the settings of another tag.
         /// @param tag Tag to inherit from.
         void tagInheritTag(const std::string& tag);
 
-        /// Makes the current tag run after the given tag.
-        /// If the specified tag doesn't exist, it is internally created.
+        /// @brief Makes the current tag run after the given tag.
         /// @param tag Tag to run after.
         void tagSetAfterTag(const std::string& tag);
 
-        /// Makes the current tag run before the given tag.
-        /// If the specified tag doesn't exist, it is internally created.
+        /// @brief Makes the current tag run before the given tag.
         /// @param tag Tag to run before.
         void tagSetBeforeTag(const std::string& tag);
 
-        /// Adds a condition to the current tag.
-        /// If the specified tag doesn't exist, it is internally created.
-        /// @param func The condition.
+        /// @brief Adds a condition to the current tag.
+        /// @tparam F Condition type.
+        /// @param func Condition to add.
         template <typename F>
         void tagAddCondition(F func);
 
-        /// Adds a system, and sets it as the current system for further
-        /// settings.
+        /// @brief Adds a system, and sets it as the current system for further configuration.
+        /// @tparam F System type.
         /// @param func System to add.
         template <typename F>
         void addSystem(F func);
 
-        /// Sets the tag for the current system.
-        /// @param tag The tag to run under.
+        /// @brief Sets the tag for the current system.
+        /// @param tag Tag to run under.
         void systemAddTag(const std::string& tag);
 
-        /// Sets the current system to run after the tag.
-        /// If the specified tag doesn't exist, it is internally created.
-        /// @param tag The tag to run after.
+        /// @brief Sets the current system to run after the tag.
+        /// @param tag Tag to run after.
         void systemSetAfterTag(const std::string& tag);
 
-        /// Sets the current system to run after a given system.
-        /// The specified system must exist.
-        /// @param func The system to run after.
+        /// @brief Sets the current system to run after a given system.
+        /// @tparam F System type.
+        /// @param func System to run after.
         template <typename F>
         void systemSetAfterSystem(F func);
 
-        /// Sets the current system to run before the tag.
-        /// If the specified tag doesn't exist, it is internally created.
-        /// @param tag The tag to run before.
+        /// @brief Sets the current system to run before the tag.
+        /// @param tag Tag to run before.
         void systemSetBeforeTag(const std::string& tag);
 
-        /// Sets the current system to run before the system.
-        /// The specified system must exist.
-        /// @param func The system to run before.
+        /// @brief Sets the current system to run before the system.
+        /// @tparam F System type.
+        /// @param func System to run before.
         template <typename F>
         void systemSetBeforeSystem(F func);
 
-        /// Adds a condition to the current system.
-        /// The specified system must exist.
-        /// @param func The condition.
+        /// @brief Adds a condition to the current system.
+        /// @tparam F Condition type.
+        /// @param func Condition.
         template <typename F>
         void systemAddCondition(F func);
 
-        /// Compiles a call chain. This takes all pending systems and
-        /// determines their execution order. This is required before
-        /// systems can be run.
+        /// @brief Compiles the call chain. Required before @ref callSystems() can be called.
+        ///
+        /// Takes all pending systems and determines their execution order.
         void compileChain();
 
-        /// Calls all systems in order of the stages they are in.
-        /// The call chain must be compiled successfully prior, otherwise
-        /// this function won't run anything.
+        /// @brief Calls all systems in the compiled call chain. @ref compileChain() must be called
+        /// prior to this.
         /// @param world World to call the systems in.
         /// @param cmds Command buffer.
         void callSystems(World& world, CommandBuffer& cmds);
@@ -133,25 +131,25 @@ namespace cubos::core::ecs
         struct SystemSettings;
         struct System;
 
-        /// Internal class to specify system dependencies
+        /// @brief Internal class to specify system dependencies
         struct Dependency
         {
             std::vector<std::string> tag;
             std::vector<System*> system;
         };
 
-        /// Internal class with settings pertaining to system/tag execution
+        /// @brief Internal class with settings pertaining to system/tag execution
         struct SystemSettings
         {
             void copyFrom(const SystemSettings* other);
 
             Dependency before, after;
             std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> conditions;
-            // TODO: Add run conditions, threading modes, etc...
+            // TODO: Add threading modes, etc...
             std::vector<std::string> inherits;
         };
 
-        /// Internal class to handle tag settings
+        /// @brief Internal class to handle tag settings
         struct System
         {
             std::shared_ptr<SystemSettings> settings;
@@ -159,7 +157,7 @@ namespace cubos::core::ecs
             std::unordered_set<std::string> tags;
         };
 
-        /// Internal class used to implement a DFS algorithm for call chain compilation
+        /// @brief Internal class used to implement a DFS algorithm for call chain compilation
         struct DFSNode
         {
             enum
@@ -173,26 +171,26 @@ namespace cubos::core::ecs
             std::shared_ptr<SystemSettings> settings;
         };
 
-        /// Visits a DFSNode to create a topological order.
-        /// This is used internally during call chain compilation.
-        /// @param node The node to visit.
+        /// @brief Visits a DFSNode to create a topological order.
+        /// @param node Node to visit.
         /// @param nodes Array of DFSNodes.
         /// @return True if a cycle was detected, false if otherwise.
         bool dfsVisit(DFSNode& node, std::vector<DFSNode>& nodes);
 
-        /// Copies settings from inherited tags to this system, recursively
-        /// solving nested inheritance.
+        /// @brief Copies settings from inherited tags to this system, recursively solving nested
+        /// inheritance.
         /// @param settings Settings to handle inheritance for.
         void handleTagInheritance(std::shared_ptr<SystemSettings>& settings);
 
-        /// Assign a condition a bit in the condition bitset,
-        /// and returns that assigned bit.
+        /// @brief Assign a condition a bit in the condition bitset, and returns that assigned bit.
+        /// @ŧparam F Condition type.
         /// @param func Condition to assign a bit for.
-        /// @return The assigned bit.
+        /// @return Assigned bit.
         template <typename F>
         std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> assignConditionBit(F func);
 
-        /// Variables for holding information before call chain is compiled.
+        // Variables for holding information before call chain is compiled.
+
         std::vector<System*> mPendingSystems;                                ///< All systems.
         std::map<std::string, std::shared_ptr<SystemSettings>> mTagSettings; ///< All tags.
         std::vector<std::shared_ptr<AnySystemWrapper<bool>>> mConditions;    ///< All conditions.
@@ -202,7 +200,8 @@ namespace cubos::core::ecs
         System* mCurrSystem;                                              ///< Last set system, for changing settings.
         std::string mCurrTag;                                             ///< Last set tag, for changing settings.
 
-        /// Variables for holding information after call chain is compiled.
+        // Variables for holding information after call chain is compiled.
+
         std::vector<System*> mSystems; ///< Compiled order of running systems.
         bool mPrepared = false;        ///< Whether the systems are prepared for execution.
     };
@@ -307,7 +306,7 @@ namespace cubos::core::ecs
         // If we already reached the condition limit, exit
         if (mConditions.size() >= CUBOS_CORE_DISPATCHER_MAX_CONDITIONS)
         {
-            CUBOS_ERROR("The condition limit ({}) was reached!", CUBOS_CORE_DISPATCHER_MAX_CONDITIONS);
+            CUBOS_ERROR("Condition limit ({}) was reached!", CUBOS_CORE_DISPATCHER_MAX_CONDITIONS);
             abort();
         }
         // Otherwise, add it to the conditions list

@@ -1,3 +1,11 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::Query and related types.
+///
+/// This file is a bit scary, but it's not as bad as it looks. It's mostly template specializations
+/// to handle the different types of arguments a query can take.
+///
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <optional>
@@ -10,185 +18,150 @@
 
 namespace cubos::core::ecs
 {
-    /// Contains information about a query.
+    /// @brief Describes a query.
+    /// @ingroup core-ecs
     struct QueryInfo
     {
-        std::unordered_set<std::type_index> read;    ///< The type set of components the query reads.
-        std::unordered_set<std::type_index> written; ///< The type set of components the query writes.
+        std::unordered_set<std::type_index> read;    ///< Componenst read.
+        std::unordered_set<std::type_index> written; ///< Components written.
     };
 
-    /// This namespace contains functions used internally by the implementation
-    /// of the ECS.
     namespace impl
     {
-        /// Fetches the requested type from a world.
+        /// @brief Fetches the requested data from a world.
+        ///
+        /// Each possible accessor type is specialized to provide the correct data.
+        ///
+        /// @tparam T Query argument type.
         template <typename T>
         struct QueryFetcher
         {
             // This should never be instantiated.
-            static_assert(!std::is_same_v<T, T>,
-                          "Unknown query argument type (must be either a reference or a pointer).");
+            static_assert(!std::is_same_v<T, T>, "Unknown query argument type.");
         };
 
-        /// @tparam Component The type of the component to fetch.
         template <typename Component>
         struct QueryFetcher<Write<Component>>
         {
             using Type = WriteStorage<Component>;
             using InnerType = Component;
 
-            /// Whether the component is optional
             constexpr static bool IsOptional = false;
-
-            /// Adds the component to the query info structure.
-            /// @param info The query info structure to add to.
             static void add(QueryInfo& info);
-
-            /// @param world The world to fetch from.
-            /// @returns The requested component write lock.
             static Type fetch(const World& world);
-
-            /// @param lock The component lock to get the reference from.
-            /// @param entity The entity to get the component from.
-            /// @returns The requested component reference.
             static Write<Component> arg(const World& world, Type& lock, Entity entity);
         };
 
-        /// @tparam Component The type of the component to fetch.
         template <typename Component>
         struct QueryFetcher<Read<Component>>
         {
             using Type = ReadStorage<Component>;
             using InnerType = Component;
 
-            /// Whether the component is optional
             constexpr static bool IsOptional = false;
-
-            /// Adds the component to the query info structure.
-            /// @param info The query info structure to add to.
             static void add(QueryInfo& info);
-
-            /// @param world The world to fetch from.
-            /// @returns The requested component read lock.
             static Type fetch(const World& world);
-
-            /// @param lock The component lock to get the reference from.
-            /// @param entity The entity to get the component from.
-            /// @returns The requested component reference.
             static Read<Component> arg(const World& world, Type& lock, Entity entity);
         };
 
-        /// @tparam Component The type of the component to fetch.
         template <typename Component>
         struct QueryFetcher<OptWrite<Component>>
         {
             using Type = WriteStorage<Component>;
             using InnerType = Component;
 
-            /// Whether the component is optional
             constexpr static bool IsOptional = true;
-
-            /// Adds the component to the query info structure.
-            /// @param info The query info structure to add to.
             static void add(QueryInfo& info);
-
-            /// @param world The world to fetch from.
-            /// @returns The requested component write lock.
             static Type fetch(const World& world);
-
-            /// @param lock The component lock to get the pointer from.
-            /// @param entity The entity to get the component from.
-            /// @returns The requested component pointer.
             static OptWrite<Component> arg(const World& world, Type& lock, Entity entity);
         };
 
-        /// @tparam Component The type of the component to fetch.
         template <typename Component>
         struct QueryFetcher<OptRead<Component>>
         {
             using Type = ReadStorage<Component>;
             using InnerType = Component;
 
-            /// Whether the component is optional
             constexpr static bool IsOptional = true;
-
-            /// Adds the component to the query info structure.
-            /// @param info The query info structure to add to.
             static void add(QueryInfo& info);
-
-            /// @param world The world to fetch from.
-            /// @returns The requested component read lock.
             static Type fetch(const World& world);
-
-            /// @param lock The component lock to get the pointer from.
-            /// @param entity The entity to get the component from.
-            /// @returns The requested component pointer.
             static OptRead<Component> arg(const World& world, Type& lock, Entity entity);
         };
     } // namespace impl
 
-    /// Contains the result of a query over all entities with some given components.
+    /// @brief Holds the result of a query over all entities in world which match the given
+    /// arguments.
     ///
     /// An example of a valid query is:
     ///
+    /// @code{.cpp}
     ///     Query<Write<Position>, Read<Velocity>, OptWrite<Rotation>, OptRead<Scale>>
+    /// @endcode
     ///
-    /// This query will return all entities with a Position and Velocity component. Accessors to Rotation and Scale
-    /// components are also passed but may be null, if the component is not present in the entity. Whenever mutability
-    /// is not needed, Read/OptRead should be used.
+    /// This query will return all entities with a `Position` and `Velocity` component. Accessors
+    /// to `Rotation` and `Scale` components are also passed but may be null if the component is
+    /// not present in the entity. Whenever mutability is not needed, Read/OptRead should be used.
     ///
-    /// @tparam ComponentTypes The types of the component accessors to be queried.
+    /// @tparam ComponentTypes Component accessor types to be queried.
+    /// @ingroup core-ecs
     template <typename... ComponentTypes>
     class Query
     {
     public:
         using Fetched = std::tuple<typename impl::QueryFetcher<ComponentTypes>::Type...>;
 
-        /// Used to iterate over the results of a query.
+        /// @brief Used to iterate over the results of a query.
         class Iterator
         {
         public:
+            /// @brief Dereferences to a tuple containing the queried entity and its components.
+            /// @return Tuple containing the entity and its components.
             std::tuple<Entity, ComponentTypes...> operator*() const;
-            bool operator==(const Iterator& /*other*/) const;
-            bool operator!=(const Iterator& /*other*/) const;
+
+            bool operator==(const Iterator& other) const;
+            bool operator!=(const Iterator& other) const;
             Iterator& operator++();
 
         private:
             friend Query<ComponentTypes...>;
 
-            const World& mWorld;         ///< The world to query from.
-            Fetched& mFetched;           ///< The fetched data.
-            EntityManager::Iterator mIt; ///< The internal entity iterator.
+            const World& mWorld;         ///< World to query from.
+            Fetched& mFetched;           ///< Fetched data.
+            EntityManager::Iterator mIt; ///< Internal entity iterator.
 
-            /// @param world The world to query from.
-            /// @param fetched The fetched data.
-            /// @param it The internal entity iterator.
+            /// @param world World to query from.
+            /// @param fetched Fetched data.
+            /// @param it Internal entity iterator.
             Iterator(const World& world, Fetched& fetched, EntityManager::Iterator it);
         };
 
-        /// @param world The world to query.
+        /// @brief Constructs a query over the given world.
+        /// @param world World to query.
         Query(const World& world);
 
-        /// @return The iterator to the first entity with the given components.
+        /// @brief Gets an iterator to the first entity which matches the query.
+        /// @return Iterator.
         Iterator begin();
 
-        /// @return The iterator to the end of the entity list.
+        /// @brief Gets an iterator to the end of the query.
+        /// @return Iterator.
         Iterator end();
 
-        /// @param entity The entity to get the components from.
-        /// @returns The requested components, or std::nullopt if the entity does not match the query.
+        /// @brief Accesses an entity's components directly, without iterating over the query.
+        /// @param entity Entity to access.
+        /// @return Requested components, or std::nullopt if the entity does not match the query.
         std::optional<std::tuple<ComponentTypes...>> operator[](Entity entity);
 
-        /// Gets information about the query.
-        /// @returns The query information.
+        /// @brief Gets information about the query.
+        /// @return Query information.
         static QueryInfo info();
 
     private:
         friend World;
 
-        const World& mWorld; ///< The world to query.
-        Fetched mFetched;    ///< The fetched data.
-        Entity::Mask mMask;  ///< The mask of the components to query.
+        const World& mWorld; ///< World to query.
+        Fetched mFetched;    ///< Fetched data.
+        Entity::Mask mMask;  ///< Mask of the components to query.
     };
 
     // Implementation.

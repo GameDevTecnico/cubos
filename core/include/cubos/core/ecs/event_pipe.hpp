@@ -1,3 +1,7 @@
+/// @file
+/// @brief Resource @ref cubos::core::ecs::EventPipe.
+/// @ingroup core-ecs
+
 #pragma once
 
 #define DEFAULT_FILTER_MASK ~0u
@@ -8,44 +12,54 @@
 
 namespace cubos::core::ecs
 {
-    /// Event pipe implementation.
+    /// @brief Resource which stores events of type @p T.
+    /// @note This resource is meant to be used through @ref EventReader and @ref EventWriter.
     /// @tparam T Event type.
+    /// @ingroup core-ecs
     template <typename T>
     class EventPipe
     {
     public:
-        /// Pushes event to event pipe, with its mask type.
-        /// In case mask is not provided, the default mask will be 0.
-        /// @param event Event which will be inserted into event pipe.
-        /// @param mask Event mask.
+        /// @brief Pushes an event into the event pipe.
+        /// @param event Event.
+        /// @param mask Mask.
         void push(T event, unsigned int mask = DEFAULT_PUSH_MASK);
 
-        /// Returns the event mask from event pipe at index.
+        /// @brief Returns the event mask from event pipe at the given @p index.
         /// @param index Event index.
+        /// @return Event mask.
         unsigned int getEventMask(std::size_t index) const;
 
-        /// Returns the event from event pipe at index (with read/write permissions) and its mask.
+        /// @brief Returns the event and mask with the given @p index.
         /// @param index Event index.
+        /// @return Event and mask.
         std::pair<const T&, unsigned int> get(std::size_t index) const;
 
-        /// Clears pipe event list.
-        /// Only events that got read by all readers are deleted!
+        /// @brief Clears events that have been read by all readers.
         void clear();
 
-        /// Returns the number of events that already were sent.
+        /// @brief Returns the number of events that already were sent.
+        /// @return Number of events that already were sent.
         std::size_t sentEvents() const;
 
-        /// Returns the number of events that are present on the pipe.
+        /// @brief Returns the number of events that are present on the pipe.
+        /// @return Number of events that are present on the pipe.
         std::size_t size() const;
 
-        /// Adds a new reader to reader count.
+        /// @brief Adds a new reader to reader count.
+        ///
+        /// This is necessary to keep track of when its okay to delete events on @ref clear().
+        ///
+        /// @note This is called on @ref SystemFetcher::prepare().
+        /// @see EventReader
         void addReader();
 
-        /// Removes a reader from reader count.
+        /// @brief Removes a reader from reader count.
+        /// @see EventReader
         void removeReader();
 
     private:
-        /// Represents an Event, with its custom type, its mask and its read count.
+        /// @brief Stores an event, its mask and its read count.
         struct Event
         {
             T event;
@@ -57,10 +71,12 @@ namespace cubos::core::ecs
                 , mask(m)
             {
             }
+
             Event(const Event& other)
             {
                 *this = other;
             }
+
             Event& operator=(const Event& other)
             {
                 this->event = other.event;
@@ -70,13 +86,13 @@ namespace cubos::core::ecs
             }
         };
 
-        /// List of events that are in the pipe.
+        /// @brief List of events that are in the pipe.
         std::deque<Event> mEvents;
 
-        /// Keeps track of how many readers the event pipe currently has.
+        /// @brief How many readers the event pipe currently has.
         std::size_t mReaderCount;
 
-        /// Keeps track of how many events were deleted.
+        /// @brief How many events were deleted.
         std::size_t mDeletedEvents{0};
     };
 

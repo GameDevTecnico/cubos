@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::Storage and related types.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <cubos/core/data/package.hpp>
@@ -6,53 +10,62 @@
 
 namespace cubos::core::ecs
 {
-    /// IStorage is an abstract parent class for all storages.
+    /// @brief Abstract parent class for all storages.
+    ///
+    /// Necessary to provide a type-erased interface for erasing and packaging/unpackaging
+    /// components.
+    ///
+    /// @ingroup core-ecs
     class IStorage
     {
     public:
         virtual ~IStorage() = default;
 
         /// @brief Remove a value from the storage.
-        /// @param index The index of the value to be removed.
+        /// @param index Index of the value to be removed.
         virtual void erase(uint32_t index) = 0;
 
         /// @brief Packages a value. If the value doesn't exist, undefined behavior will occur.
-        /// @param index The index of the value to package.
+        /// @param index Index of the value to package.
         /// @param context Optional context used for serialization.
-        /// @returns The packaged value.
+        /// @return Packaged value.
         virtual data::Package pack(uint32_t index, data::Context* context) const = 0;
 
         /// @brief Unpackages a value.
-        /// @param index The index of the value to unpackage.
-        /// @param package The package to unpackage.
+        /// @param index Index of the value to unpackage.
+        /// @param package Package to unpackage.
         /// @param context Optional context used for deserialization.
-        /// @returns True if the value was unpackaged successfully, false otherwise.
+        /// @return Whether the unpackaging was successful.
         virtual bool unpack(uint32_t index, const data::Package& package, data::Context* context) = 0;
 
         /// @brief Gets the type the components being stored here.
+        /// @return Component type.
         virtual std::type_index type() const = 0;
     };
 
-    /// @brief Storage is an abstract container for a certain type with common operations, such as,
-    /// insert, get and erase.
-    /// @tparam T The type to be stored in the storage.
+    /// @brief Abstract container for a component type @p T.
+    /// @tparam T Component type.
+    /// @ingroup core-ecs
     template <typename T>
     class Storage : public IStorage
     {
     public:
+        /// @brief Component type.
         using Type = T;
 
         /// @brief Inserts a value into the storage.
-        /// @param index The index where to insert the value.
-        /// @param value The value to be inserted.
+        /// @param index Index where to insert the value.
+        /// @param value Value to be inserted.
         virtual T* insert(uint32_t index, T value) = 0;
 
         /// @brief Gets a value from the storage.
-        /// @param index The index of the value to be retrieved.
+        /// @param index Index of the value to be retrieved.
+        /// @return Pointer to the value.
         virtual T* get(uint32_t index) = 0;
 
         /// @brief Gets a value from the storage.
-        /// @param index The index of the value to be retrieved.
+        /// @param index Index of the value to be retrieved.
+        /// @return Pointer to the value.
         virtual const T* get(uint32_t index) const = 0;
 
         // Implementation.

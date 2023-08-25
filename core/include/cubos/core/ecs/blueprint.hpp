@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::Blueprint.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <cubos/core/data/binary_deserializer.hpp>
@@ -9,84 +13,91 @@
 
 namespace cubos::core::ecs
 {
-    /// Stores a bundle of entities and their respective components, which can be easily spawned into a world.
-    /// This is in a way the 'Prefab' of CUBOS., but lower level.
+    /// @brief Stores a bundle of entities and their respective components, which can be easily
+    /// spawned into a world. This is in a way the 'Prefab' of CUBOS., but lower level.
     class Blueprint final
     {
     public:
-        Blueprint() = default;
-        Blueprint(Blueprint&&) = default;
         ~Blueprint();
 
-        /// Creates a new entity and returns its identifier.
-        /// @tparam ComponentTypes The types of components to add to the entity.
-        /// @param name The name of the entity.
-        /// @param components The components to add to the entity.
-        /// @returns The new entity.
+        /// @brief Constructs an empty blueprint.
+        Blueprint() = default;
+
+        /// @brief Move constructs.
+        Blueprint(Blueprint&&) = default;
+
+        /// @brief Creates a new entity and returns its identifier.
+        /// @tparam ComponentTypes Component types.
+        /// @param name Entity name.
+        /// @param components Components to add.
+        /// @return Entity identifier.
         template <typename... ComponentTypes>
         Entity create(const std::string& name, const ComponentTypes&... components);
 
-        /// Adds components to an entity.
-        /// @tparam ComponentTypes The types of the components.
-        /// @param entity The entity to add the components to.
-        /// @param components The components to add.
+        /// @brief Adds components to an entity.
+        /// @tparam ComponentTypes Component types.
+        /// @param entity Entity identifier.
+        /// @param components Components to add.
         template <typename... ComponentTypes>
         void add(Entity entity, const ComponentTypes&... components);
 
-        /// Deserializes a component and adds it to an entity.
-        /// @param entity The entity to add the component to.
-        /// @param name The name of the component type.
-        /// @param deserializer The deserializer to deserialize from.
+        /// @brief Deserializes a component and adds it to an entity.
+        /// @param entity Entity identifier.
+        /// @param name Component type name.
+        /// @param deserializer Ddeserializer to deserialize from.
         bool addFromDeserializer(Entity entity, const std::string& name, data::Deserializer& deserializer);
 
-        /// Returns an entity from its name.
-        /// @param name The name of the entity.
-        /// @returns The entity, which may be 'none' if the entity doesn't exist (validate with entity.isNone).
+        /// @brief Returns an entity from its name.
+        /// @param name Entity name.
+        /// @return Entity identifier, or null entity if not found.
         Entity entity(const std::string& name) const;
 
-        /// Merges another blueprint into this one.
-        /// All of the names of the other blueprint will be prefixed with the specified string.
-        /// @param prefix The name to prefix with the merged blueprint.
-        /// @param other The other blueprint to merge.
+        /// @brief Merges another blueprint into this one.
+        /// @note All of the entity names of the other blueprint will be prefixed with the
+        /// specified string.
+        /// @param prefix Name to prefix with the merged blueprint.
+        /// @param other Other blueprint to merge.
         void merge(const std::string& prefix, const Blueprint& other);
 
-        /// Clears the blueprint, removing any added entities and components.
+        /// @brief Clears the blueprint, removing any added entities and components.
         void clear();
 
     private:
         friend class CommandBuffer;
 
-        /// Stores all component data of a certain type.
+        /// @brief Stores all component data of a certain type.
         struct IBuffer
         {
-            /// The names of the entities of the components present in the stream, in the same order.
+            /// @brief Names of the entities of the components present in the stream, in the same order.
             std::vector<std::string> names;
             memory::BufferStream stream; ///< Self growing buffer stream where the component data is stored.
             std::mutex mutex;            ///< Protect the stream.
 
             virtual ~IBuffer() = default;
 
-            /// Adds all of the components stored in the buffer to the specified commands object.
-            /// @param commands The commands object to add the components to.
-            /// @param context The context to use when deserializing the components.
+            /// @brief Adds all of the components stored in the buffer to the specified commands object.
+            /// @param commands Commands object to add the components to.
+            /// @param context Context to use when deserializing the components.
             virtual void addAll(CommandBuffer& commands, data::Context& context) = 0;
 
-            /// Merges the data of another buffer of the same type into this one.
-            /// @param other The buffer to merge from.
-            /// @param src The context to use when serializing the components from the other buffer.
-            /// @param dst The context to use when deserializing the components to this buffer.
+            /// @brief Merges the data of another buffer of the same type into this one.
+            /// @param other Buffer to merge from.
+            /// @param src Context to use when serializing the components from the other buffer.
+            /// @param dst Context to use when deserializing the components to this buffer.
             virtual void merge(IBuffer* other, const std::string& prefix, data::Context& src, data::Context& dst) = 0;
 
-            /// Creates a new buffer of the same type as this one.
+            /// @brief Creates a new buffer of the same type as this one.
+            /// @return New buffer.
             virtual IBuffer* create() = 0;
         };
 
-        /// Implementation of the IBuffer interface for a single component type.
-        /// @tparam ComponentType The type of the component.
+        /// @brief Implementation of the IBuffer interface for the component type @p ComponentType.
+        /// @tparam ComponentType Component type.
         template <typename ComponentType>
         struct Buffer : IBuffer
         {
             // Interface methods implementation.
+
             inline void addAll(CommandBuffer& commands, data::Context& context) override
             {
                 this->mutex.lock();
@@ -144,10 +155,10 @@ namespace cubos::core::ecs
             }
         };
 
-        /// Stores the entity handles and the associated names.
+        /// @brief Stores the entity handles and the associated names.
         data::SerializationMap<Entity, std::string> mMap;
 
-        /// Buffers which store the serialized components of each type in this blueprint.
+        /// @brief Buffers which store the serialized components of each type in this blueprint.
         memory::TypeMap<IBuffer*> mBuffers;
     };
 

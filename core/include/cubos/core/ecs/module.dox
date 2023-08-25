@@ -1,0 +1,50 @@
+/// @dir
+/// @brief @ref cubos::core::ecs namespace.
+
+#pragma once
+
+/// @namespace cubos::core::ecs
+/// @brief ECS namespace.
+/// @ingroup core-ecs
+
+/// @namespace cubos::core::ecs::impl
+/// @brief Contains functions used internally by the implementation of the ECS.
+///
+/// Used to avoid cluttering the public namespace with implementation details.
+///
+/// @ingroup core-ecs
+
+namespace cubos::core::ecs
+{
+    /// @defgroup core-ecs ECS
+    /// @ingroup core
+    /// @brief %Entity Component System library.
+    ///
+    /// This module is arguably the heart of the engine, as it provides a means to organize and
+    /// manage the data and logic of both the engine and games built with it. It is, as of now, a
+    /// bit of a mess. Most of the exposed types are internal to the documentation, and thus it can
+    /// get hard to navigate (TODO #377).
+    ///
+    /// @note Check out the @ref guide-ecs "ECS guide" for a more in-depth explanation of this
+    /// module.
+    ///
+    /// ## Data types
+    /// - @ref World - stores entities, components and resources, can be queried.
+    /// - @ref Dispatcher - stores and dispatches systems in the right order.
+    /// - @ref Blueprint - bundle of entities and components which can be spawned using @ref
+    ///   Commands.
+    ///
+    /// ## System argument types
+    /// - @ref Read - used to read resource data.
+    /// - @ref Write - used to write resource data.
+    /// - @ref Commands - used to queue entities to be created, destroyed and other operations.
+    /// - @ref EventReader - used to read events sent from other systems.
+    /// - @ref EventWriter - used to send events to other systems.
+    /// - @ref Query - used to query the world for entities with certain components.
+    ///
+    /// ## Query argument types
+    /// - @ref Read - matches entities with the specified component, read-only access.
+    /// - @ref Write - matches entities with the specified component, write access.
+    /// - @ref OptRead - matches all entities, read-only access when the component is present.
+    /// - @ref OptWrite - matches all entities, write access when the component is present.
+}

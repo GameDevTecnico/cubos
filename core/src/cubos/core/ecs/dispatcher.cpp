@@ -144,8 +144,8 @@ void Dispatcher::compileChain()
         }
     }
 
-    // The algorithm expects nodes to be added to the head of a list, instead of the back. To save on
-    // move operations, just reverse the final list for the same effect.
+    // The algorithm expects nodes to be added to the head of a list, instead of the back. To save
+    // on move operations, just reverse the final list for the same effect.
     std::reverse(mSystems.begin(), mSystems.end());
 
     CUBOS_INFO("Call chain completed successfully!");
