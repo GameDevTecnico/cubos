@@ -214,7 +214,7 @@ namespace cubos::core::ecs
             virtual void move(Entity entity, ComponentManager& manager) = 0;
         };
 
-        /// @brief Implementation of the @ref IBuffer interface for a component type
+        /// @brief Implementation of the above interface for a component type
         /// @p ComponentType.
         /// @tparam ComponentType Component type.
         template <typename ComponentType>

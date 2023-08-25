@@ -7,6 +7,8 @@
 namespace cubos::core::memory
 {
     /// @brief Provides safe read-only access to an object using a lock.
+    /// @tparam T Guarded object type.
+    /// @tparam Lock Held lock type.
     ///
     /// This class was created because there are multiple parts of the code that need to provide
     /// access to objects in a thread-safe manner.
@@ -17,8 +19,6 @@ namespace cubos::core::memory
     ///     using AssetMetaRead = core::memory::ReadGuard<AssetMeta, std::shared_lock<std::shared_mutex>>;
     /// @endcode
     ///
-    /// @tparam T Guarded object type.
-    /// @tparam Lock Held lock type.
     /// @ingroup core-memory
     template <typename T, typename Lock>
     class ReadGuard
@@ -68,6 +68,8 @@ namespace cubos::core::memory
     };
 
     /// @brief Provides safe read-write access to an object using a lock.
+    /// @tparam T Guarded object type.
+    /// @tparam Lock Held lock type.
     ///
     /// This class was created because there are multiple parts of the code that need to provide
     /// access to objects in a thread-safe manner.
@@ -78,8 +80,6 @@ namespace cubos::core::memory
     ///     using AssetMetaWrite = core::memory::WriteGuard<AssetMeta, std::unique_lock<std::shared_mutex>>;
     /// @endcode
     ///
-    /// @tparam T Guarded object type.
-    /// @tparam Lock Held lock type.
     /// @ingroup core-memory
     template <typename T, typename Lock>
     class WriteGuard

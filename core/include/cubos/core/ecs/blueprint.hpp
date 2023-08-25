@@ -82,6 +82,7 @@ namespace cubos::core::ecs
 
             /// @brief Merges the data of another buffer of the same type into this one.
             /// @param other Buffer to merge from.
+            /// @param prefix Prefix to add to the names of the components of the other buffer.
             /// @param src Context to use when serializing the components from the other buffer.
             /// @param dst Context to use when deserializing the components to this buffer.
             virtual void merge(IBuffer* other, const std::string& prefix, data::Context& src, data::Context& dst) = 0;

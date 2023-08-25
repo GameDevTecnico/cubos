@@ -50,7 +50,7 @@ namespace cubos::core::ecs
         ///
         /// This is necessary to keep track of when its okay to delete events on @ref clear().
         ///
-        /// @note This is called on @ref SystemFetcher::prepare().
+        /// @note This is called on @ref impl::SystemFetcher::prepare().
         /// @see EventReader
         void addReader();
 
