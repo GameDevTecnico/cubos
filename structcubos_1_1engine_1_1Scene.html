@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,7 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Scene <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="scene_8hpp.html">&lt;engine/scene/scene.hpp&gt;</a></div>
         </h1>
+        <p>The asset equivalent to ECS blueprints - a bundle of entities and their components.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -57,34 +60,19 @@
             </li>
           </ul>
         </nav>
-<p>Stores the data of a scene. Entity names in the blueprint follow the format &quot;importName.entityName&quot;. If the entity is in the root of the scene, then there is no importName nor the dot, so the entity name is just &quot;entityName&quot;.</p>
+<p><a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> assets produce a blueprint when loaded which can be used to spawn them. Entity names in the resulting blueprint follow the format &quot;foo&quot;, &quot;import1.bar&quot;, &quot;import1.import2.baz&quot;, etc.</p>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">core::<wbr />ecs::<wbr />Blueprint</a> <a href="#ad64009a7afd9738b8dd5b3b480f416f8" class="m-doc">blueprint</a>
+            <dt id="ad64009a7afd9738b8dd5b3b480f416f8">
+              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">core::<wbr />ecs::<wbr />Blueprint</a> <a href="#ad64009a7afd9738b8dd5b3b480f416f8" class="m-doc-self">blueprint</a>
             </dt>
-            <dd></dd>
-            <dt>
-              std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&gt;&gt; <a href="#a86a5c69ec15669e23d7ccad2d656fa10" class="m-doc">imports</a>
+            <dd>Resulting blueprint which contains all the entities of the scene and its imported scenes. If you want to spawn the scene, use this blueprint.</dd>
+            <dt id="a86a5c69ec15669e23d7ccad2d656fa10">
+              std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&gt;&gt; <a href="#a86a5c69ec15669e23d7ccad2d656fa10" class="m-doc-self">imports</a>
             </dt>
-            <dd></dd>
+            <dd>Handles to other scenes that are imported by this scene, mapped by their import names. Imports of imports ar not included in this map.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="ad64009a7afd9738b8dd5b3b480f416f8"><div>
-            <h3>
-              <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">core::<wbr />ecs::<wbr />Blueprint</a> cubos::<wbr />engine::<wbr />Scene::<wbr /><a href="#ad64009a7afd9738b8dd5b3b480f416f8" class="m-doc-self">blueprint</a>
-            </h3>
-<p>The blueprint which contains all the entities of the scene and its imported scenes. If you want to spawn the scene, use this blueprint.</p>
-          </div></section>
-          <section class="m-doc-details" id="a86a5c69ec15669e23d7ccad2d656fa10"><div>
-            <h3>
-              std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a>&gt;&gt; cubos::<wbr />engine::<wbr />Scene::<wbr /><a href="#a86a5c69ec15669e23d7ccad2d656fa10" class="m-doc-self">imports</a>
-            </h3>
-<p>Handles to other scenes that are imported by this scene, mapped by their names in the scene. Scenes imported by scenes imported by this scene are not included.</p>
-          </div></section>
         </section>
       </div>
     </div>

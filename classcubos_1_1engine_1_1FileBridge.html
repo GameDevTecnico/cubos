@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,7 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>FileBridge <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2assets_2bridges_2file_8hpp.html">&lt;engine/assets/bridges/file.hpp&gt;</a></div>
         </h1>
+        <p>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -60,14 +63,14 @@
             </li>
           </ul>
         </nav>
-<p>An abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</p><p>This bridge should be used as a base class for bridges which load and save assets. Child classes must implement the <code>loadFromFile</code> and <code>saveToFile</code> methods, which are called with a file stream to load and save the asset from and to, respectively.</p>
+<p>This bridge should be used as a base class for bridges which load and save assets. Child classes must implement the <a href="classcubos_1_1engine_1_1FileBridge.html#a73789375b2400a1b04016ba82ac09e82" class="m-doc">loadFromFile()</a> and <a href="classcubos_1_1engine_1_1FileBridge.html#a3af5cebad5da00ed7f2ec3b5c991d0de" class="m-doc">saveToFile()</a> methods, which are called with a file stream to load and save the asset from and to, respectively.</p>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">AssetBridge</a>
             </dt>
-            <dd></dd>
+            <dd>Bridges are the objects responsible for loading and saving assets from/to disk. They form the bridge between the asset manager and the virtual file system.</dd>
           </dl>
         </section>
         <section id="derived-classes">
@@ -77,12 +80,12 @@
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1engine_1_1BinaryBridge.html" class="m-doc">BinaryBridge</a>
             </dt>
-            <dd></dd>
+            <dd>Bridge for loading and saving assets which are serialized to and from a binary file.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">JSONBridge</a>
             </dt>
-            <dd></dd>
+            <dd>Bridge for loading and saving assets which are serialized to and from a JSON file.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -92,29 +95,29 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a16c6da54dda7f8a1e78d89422db926ff" class="m-doc">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
             </dt>
-            <dd></dd>
+            <dd>Loads an asset.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#afa3edb97ffe50c90331ef64ca4ac3d1f" class="m-doc">save</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) -&gt; bool <span class="m-label m-flat m-warning">final</span></span>
             </dt>
-            <dd></dd>
+            <dd>Saves an asset.</dd>
           </dl>
         </section>
         <section id="pro-methods">
           <h2><a href="#pro-methods">Protected functions</a></h2>
           <dl class="m-doc">
-            <dt id="a73789375b2400a1b04016ba82ac09e82">
-              <span class="m-doc-wrap-bumper">auto <a href="#a73789375b2400a1b04016ba82ac09e82" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a73789375b2400a1b04016ba82ac09e82" class="m-doc">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
               <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Called with the file stream to load the asset from.</dd>
-            <dt id="a3af5cebad5da00ed7f2ec3b5c991d0de">
-              <span class="m-doc-wrap-bumper">auto <a href="#a3af5cebad5da00ed7f2ec3b5c991d0de" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+            <dd>Loads an asset from a file stream.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3af5cebad5da00ed7f2ec3b5c991d0de" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
               <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Called with the file stream to save the asset to.</dd>
+            <dd>Saves an asset to a file stream.</dd>
           </dl>
         </section>
         <section>
@@ -124,30 +127,124 @@
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FileBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a16c6da54dda7f8a1e78d89422db926ff" class="m-doc-self">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) <span class="m-label m-warning">final</span></span></span>
             </h3>
+            <p>Loads an asset.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to write into.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being loaded.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
+                  <th>Returns</th>
                   <td>Whether the asset was successfully loaded.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Loads an asset into the given asset manager, identified by the given handle. When called, the meta data of the given asset should be already present in the asset manager.</p>
+<p>The metadata of the given asset should already be present in the asset manager.</p>
           </div></section>
           <section class="m-doc-details" id="afa3edb97ffe50c90331ef64ca4ac3d1f"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FileBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afa3edb97ffe50c90331ef64ca4ac3d1f" class="m-doc-self">save</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) <span class="m-label m-warning">final</span></span></span>
             </h3>
+            <p>Saves an asset.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to read from.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being saved.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
+                  <th>Returns</th>
                   <td>Whether the asset was successfully saved.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Saves an asset from the given asset manager, identified by the given handle.</p>
+<p>The asset should be loaded in the asset manager.</p>
+          </div></section>
+          <section class="m-doc-details" id="a73789375b2400a1b04016ba82ac09e82"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FileBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a73789375b2400a1b04016ba82ac09e82" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Loads an asset from a file stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to write into.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being loaded.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the asset was successfully loaded.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3af5cebad5da00ed7f2ec3b5c991d0de"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />FileBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3af5cebad5da00ed7f2ec3b5c991d0de" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Saves an asset to a file stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to read from.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being saved.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the asset was successfully saved.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
         </section>
       </div>

@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,8 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>InputBindings <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="bindings_8hpp.html">&lt;cubos/engine/input/bindings.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="bindings_8hpp.html">&lt;engine/input/bindings.hpp&gt;</a></div>
         </h1>
+        <p>Stores the input bindings for a single player.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -58,26 +60,26 @@
             </li>
           </ul>
         </nav>
-<p>Used to store the input bindings for a single player. It contains a map of input actions and a map of input axes.</p>
+<p>It contains a map of input actions and a map of input axes.</p>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2782a9012ac53109d5dbcd62a3cdf90f" class="m-doc">actions</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1InputAction.html" class="m-doc">InputAction</a>&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the input actions map.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a9f89dbe65371ffd2efc5c8db8d675692" class="m-doc">axes</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1InputAxis.html" class="m-doc">InputAxis</a>&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the input axes map.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#acdfdcd41c2311124b5414d542033d503" class="m-doc">actions</a>(</span><span class="m-doc-wrap">) -&gt; std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1InputAction.html" class="m-doc">InputAction</a>&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the input actions map.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a36ed022946979cf9e93b565db74c6c80" class="m-doc">axes</a>(</span><span class="m-doc-wrap">) -&gt; std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1InputAxis.html" class="m-doc">InputAxis</a>&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the input axes map.</dd>
           </dl>
         </section>
         <section>
@@ -86,11 +88,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">const std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1InputAction.html" class="m-doc">InputAction</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputBindings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2782a9012ac53109d5dbcd62a3cdf90f" class="m-doc-self">actions</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the input actions map.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The input actions map.</td>
+                  <td><a href="classcubos_1_1engine_1_1Input.html" class="m-doc">Input</a> actions map.</td>
                 </tr>
               </tfoot>
             </table>
@@ -99,11 +102,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">const std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1InputAxis.html" class="m-doc">InputAxis</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputBindings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9f89dbe65371ffd2efc5c8db8d675692" class="m-doc-self">axes</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the input axes map.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The input axes map.</td>
+                  <td><a href="classcubos_1_1engine_1_1Input.html" class="m-doc">Input</a> axes map.</td>
                 </tr>
               </tfoot>
             </table>
@@ -112,11 +116,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1InputAction.html" class="m-doc">InputAction</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputBindings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acdfdcd41c2311124b5414d542033d503" class="m-doc-self">actions</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets the input actions map.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The input actions map.</td>
+                  <td><a href="classcubos_1_1engine_1_1Input.html" class="m-doc">Input</a> actions map.</td>
                 </tr>
               </tfoot>
             </table>
@@ -125,11 +130,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::unordered_map&lt;std::string, <a href="classcubos_1_1engine_1_1InputAxis.html" class="m-doc">InputAxis</a>&gt;&amp; cubos::<wbr />engine::<wbr />InputBindings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a36ed022946979cf9e93b565db74c6c80" class="m-doc-self">axes</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets the input axes map.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The input axes map.</td>
+                  <td><a href="classcubos_1_1engine_1_1Input.html" class="m-doc">Input</a> axes map.</td>
                 </tr>
               </tfoot>
             </table>

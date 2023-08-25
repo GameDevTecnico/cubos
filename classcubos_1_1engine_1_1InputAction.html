@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,52 +46,85 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>InputAction <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="action_8hpp.html">&lt;cubos/engine/input/action.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="action_8hpp.html">&lt;engine/input/action.hpp&gt;</a></div>
         </h1>
+        <p>Stores the state of a single input action, such as &quot;jump&quot; or &quot;attack&quot;.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Used to represent a single input action, such as &quot;jump&quot; or &quot;attack&quot;. It can be bound to multiple keys, and will be considered &quot;pressed&quot; if any of them are pressed.</p>
+<p>Can be bound to multiple keys, and will be considered &quot;pressed&quot; if any of them are pressed.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a92dce6b9760770ba1529c67595041f05">
+              <span class="m-doc-wrap-bumper"><a href="#a92dce6b9760770ba1529c67595041f05" class="m-doc-self">InputAction</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs without any bindings.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a65f2362ec439a2d24dd449ef8118f013" class="m-doc">InputAction</a>(</span><span class="m-doc-wrap">std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt; keys)</span>
+            </dt>
+            <dd>Constructs with existing bindings.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a3b243c1c75e9ebc253c1315eb8e93af5" class="m-doc">keys</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the key bindings.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac94231b7e78f4513a19150123a1de372" class="m-doc">keys</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the key bindings.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1a8c5585eac3f94e129c6ec1e496f228" class="m-doc">pressed</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if this action is pressed.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ae415a2fdc42a78fb9cc081084a95f400" class="m-doc">pressed</a>(</span><span class="m-doc-wrap">bool pressed)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets whether this action is pressed.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a65f2362ec439a2d24dd449ef8118f013"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a65f2362ec439a2d24dd449ef8118f013" class="m-doc-self">InputAction</a>(</span><span class="m-doc-wrap">std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt; keys)</span></span>
+            </h3>
+            <p>Constructs with existing bindings.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">keys</td>
+                  <td>Key bindings.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a3b243c1c75e9ebc253c1315eb8e93af5"><div>
             <h3>
               <span class="m-doc-wrap-bumper">const std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b243c1c75e9ebc253c1315eb8e93af5" class="m-doc-self">keys</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the key bindings.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The vector of keys.</td>
+                  <td>Vector of keys.</td>
                 </tr>
               </tfoot>
             </table>
@@ -99,11 +133,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac94231b7e78f4513a19150123a1de372" class="m-doc-self">keys</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets the key bindings.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The vector of keys.</td>
+                  <td>Vector of keys.</td>
                 </tr>
               </tfoot>
             </table>
@@ -112,6 +147,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1a8c5585eac3f94e129c6ec1e496f228" class="m-doc-self">pressed</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Checks if this action is pressed.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -125,6 +161,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />InputAction::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae415a2fdc42a78fb9cc081084a95f400" class="m-doc-self">pressed</a>(</span><span class="m-doc-wrap">bool pressed)</span></span>
             </h3>
+            <p>Sets whether this action is pressed.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -136,7 +173,6 @@
                 </tr>
               </tbody>
             </table>
-<p>Sets whether this action is pressed.</p>
           </div></section>
         </section>
       </div>

@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -44,9 +45,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="asset_8hpp.html">&lt;engine/assets/asset.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Asset <span class="m-thin">class</span>
         </h1>
+        <p>Handle to an asset of a specific type.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -71,14 +74,14 @@
             </li>
           </ul>
         </nav>
-<p>Handle to an asset of a specific type.</p><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a></p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a></p></aside>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>
             </dt>
-            <dd></dd>
+            <dd>Handle to an asset of any type. May either be weak or strong. Weak handles do not guarantee the asset is loaded, while strong handles do.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -87,23 +90,23 @@
             <dt id="af59666985f7f450d370e039e9762dc4c">
               <span class="m-doc-wrap-bumper"><a href="#af59666985f7f450d370e039e9762dc4c" class="m-doc-self">AnyAsset</a>(</span><span class="m-doc-wrap">std::nullptr_t ptr = nullptr)</span>
             </dt>
-            <dd>Creates a null handle.</dd>
+            <dd>Constructs a null handle.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#afe193643c7fd2c1ad1230f391ed79d98" class="m-doc">AnyAsset</a>(</span><span class="m-doc-wrap">uuids::uuid id)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs a weak handle.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#acb1dd743a486e0a71dfeb98e520a21cd" class="m-doc">AnyAsset</a>(</span><span class="m-doc-wrap">std::string_view str)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs a weak handle. If the string is not a valid UUID, the handle will be null.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a12f4addb2c7f377c158f617a24e0107a" class="m-doc">AnyAsset</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; other)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs a copy of the given handle.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#ae1679e0158dff55aa58b4af2131093fc" class="m-doc">AnyAsset</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd></dd>
+            <dd>Constructs a handle from the given handle.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -112,15 +115,15 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0f9efd454fe7ff20c2c425b0659b59e2" class="m-doc">toAny</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a></span>
             </dt>
-            <dd></dd>
+            <dd>Constructs a generic handle version of this handle.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8ee7581ffd8b93b7d6ac312c452469f0" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; other) -&gt; <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Overwrites this handle with a copy of the given handle.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a946d0115f92cff2ea5304e15dd080ccf" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp;&amp; other) -&gt; <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd></dd>
+            <dd>Overwrites this handle with the given handle.</dd>
           </dl>
         </section>
         <section>
@@ -132,6 +135,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />Asset&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afe193643c7fd2c1ad1230f391ed79d98" class="m-doc-self">AnyAsset</a>(</span><span class="m-doc-wrap">uuids::uuid id)</span></span>
             </h3>
+            <p>Constructs a weak handle.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -151,6 +155,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />Asset&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acb1dd743a486e0a71dfeb98e520a21cd" class="m-doc-self">AnyAsset</a>(</span><span class="m-doc-wrap">std::string_view str)</span></span>
             </h3>
+            <p>Constructs a weak handle. If the string is not a valid UUID, the handle will be null.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -162,7 +167,6 @@
                 </tr>
               </tbody>
             </table>
-<p>If the string is not a valid UUID, the handle will be null.</p>
           </div></section>
           <section class="m-doc-details" id="a12f4addb2c7f377c158f617a24e0107a"><div>
             <h3>
@@ -171,6 +175,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />Asset&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a12f4addb2c7f377c158f617a24e0107a" class="m-doc-self">AnyAsset</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; other)</span></span>
             </h3>
+            <p>Constructs a copy of the given handle.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -190,6 +195,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />Asset&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae1679e0158dff55aa58b4af2131093fc" class="m-doc-self">AnyAsset</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
+            <p>Constructs a handle from the given handle.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -209,11 +215,12 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> cubos::<wbr />engine::<wbr />Asset&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f9efd454fe7ff20c2c425b0659b59e2" class="m-doc-self">toAny</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Constructs a generic handle version of this handle.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>A generic handle to the same asset.</td>
+                  <td>Generic handle to the same asset.</td>
                 </tr>
               </tfoot>
             </table>
@@ -225,6 +232,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt;&amp; cubos::<wbr />engine::<wbr />Asset&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8ee7581ffd8b93b7d6ac312c452469f0" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; other)</span></span>
             </h3>
+            <p>Overwrites this handle with a copy of the given handle.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -235,6 +243,12 @@
                   <td>Handle to copy.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a946d0115f92cff2ea5304e15dd080ccf"><div>
@@ -244,6 +258,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt;&amp; cubos::<wbr />engine::<wbr />Asset&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a946d0115f92cff2ea5304e15dd080ccf" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
+            <p>Overwrites this handle with the given handle.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -254,6 +269,12 @@
                   <td>Handle to move.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
         </section>

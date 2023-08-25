@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,7 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>PostProcessingBloom <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="bloom_8hpp.html">&lt;engine/renderer/pps/bloom.hpp&gt;</a></div>
         </h1>
+        <p>A post processing pass that adds a &quot;bloom&quot; effect to any bright objects in the scene.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -59,14 +62,14 @@
             </li>
           </ul>
         </nav>
-<p>A post processing pass that adds a &quot;bloom&quot; effect to any bright objects in the scene.</p><p>Source: <a href="https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom">https:/<wbr />/<wbr />catlikecoding.com/<wbr />unity/<wbr />tutorials/<wbr />advanced-rendering/<wbr />bloom</a></p>
+<p>Implementation based on the following <a href="https://catlikecoding.com/unity/tutorials/advanced-rendering/bloom">tutorial</a>.</p>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1engine_1_1PostProcessingPass.html" class="m-doc">PostProcessingPass</a>
             </dt>
-            <dd></dd>
+            <dd>A generic post processing pass.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -76,7 +79,7 @@
               <span class="m-doc-wrap-bumper"><a href="#ac2bc93e068d3d308caca3b05b1a64d81" class="m-doc">PostProcessingBloom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice,
               glm::uvec2 size)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs with default arguments.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a90432131c7e1d1e9d48d4cfebb4fe2e4" class="m-doc">PostProcessingBloom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice,
               glm::uvec2 size,
@@ -85,7 +88,7 @@
               float softThreshold,
               float intensity)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs with custom settings.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -94,27 +97,27 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a45fb53bf31cec3f95ed9e54478a94ee3" class="m-doc">getThreshold</a>(</span><span class="m-doc-wrap">) const -&gt; float</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the threshold for the bloom effect.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8ee79382d28944c3b7fbdf0bd4d687d8" class="m-doc">getSoftThreshold</a>(</span><span class="m-doc-wrap">) const -&gt; float</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the soft threshold ratio.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1af3dc870e63fc797d624a74e3fcdc24" class="m-doc">getIntensity</a>(</span><span class="m-doc-wrap">) const -&gt; float</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the intensity of the bloom effect.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a51ad352949dedd8f05a9ce44043ebdce" class="m-doc">setThreshold</a>(</span><span class="m-doc-wrap">float threshold)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the threshold for the bloom effect.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aa67225275c078199d54c5a161d9a79fe" class="m-doc">setSoftThreshold</a>(</span><span class="m-doc-wrap">float softThreshold)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the soft threshold ratio.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ae52cbf193ceaadc6b915303135fea2eb" class="m-doc">setIntensity</a>(</span><span class="m-doc-wrap">float intensity)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the intensity of the bloom effect.</dd>
             <dt id="ae990a804c7d9f573dab34057b39eae63">
               <span class="m-doc-wrap-bumper">void <a href="#ae990a804c7d9f573dab34057b39eae63" class="m-doc-self">generateTextures</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -122,13 +125,13 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a6d545f64a5dffbd96be799f0299b48d7" class="m-doc">resize</a>(</span><span class="m-doc-wrap">glm::uvec2 size) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Called when the window framebuffer size changes.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af2c7ef257c48e779770bb943eedc45e3" class="m-doc">execute</a>(</span><span class="m-doc-wrap">std::map&lt;<a href="namespacecubos_1_1engine.html#ad9a27e05315b6fa51e4b34deadc5e2e4" class="m-doc">PostProcessingInput</a>, <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a>&gt;&amp; inputs,
+              <span class="m-doc-wrap-bumper">void <a href="#af2c7ef257c48e779770bb943eedc45e3" class="m-doc">execute</a>(</span><span class="m-doc-wrap">std::map&lt;<a href="group__renderer-plugin.html#gad9a27e05315b6fa51e4b34deadc5e2e4" class="m-doc">PostProcessingInput</a>, <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a>&gt;&amp; inputs,
               <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> prev,
               <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> out) const <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Called each frame.</dd>
           </dl>
         </section>
         <section>
@@ -138,6 +141,7 @@
               <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac2bc93e068d3d308caca3b05b1a64d81" class="m-doc-self">PostProcessingBloom</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice,
               glm::uvec2 size)</span></span>
             </h3>
+            <p>Constructs with default arguments.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -145,11 +149,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">renderDevice</td>
-                  <td>The render device to use.</td>
+                  <td>Render device to use.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the window.</td>
+                  <td>Size of the window.</td>
                 </tr>
               </tbody>
             </table>
@@ -163,6 +167,7 @@
               float softThreshold,
               float intensity)</span></span>
             </h3>
+            <p>Constructs with custom settings.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -170,11 +175,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">renderDevice</td>
-                  <td>The render device to use.</td>
+                  <td>Render device to use.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the window.</td>
+                  <td>Size of the window.</td>
                 </tr>
                 <tr>
                   <td>iterations</td>
@@ -190,7 +195,7 @@
                 </tr>
                 <tr>
                   <td>intensity</td>
-                  <td>The intensity of the bloom effect.</td>
+                  <td>Intensity of the bloom effect.</td>
                 </tr>
               </tbody>
             </table>
@@ -199,48 +204,49 @@
             <h3>
               <span class="m-doc-wrap-bumper">float cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a45fb53bf31cec3f95ed9e54478a94ee3" class="m-doc-self">getThreshold</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the threshold for the bloom effect.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The threshold for the bloom effect.</td>
+                  <td>Threshold for the bloom effect.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the threshold for the bloom effect.</p>
           </div></section>
           <section class="m-doc-details" id="a8ee79382d28944c3b7fbdf0bd4d687d8"><div>
             <h3>
               <span class="m-doc-wrap-bumper">float cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8ee79382d28944c3b7fbdf0bd4d687d8" class="m-doc-self">getSoftThreshold</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the soft threshold ratio.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The soft threshold ratio.</td>
+                  <td>Soft threshold ratio.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the soft threshold ratio.</p>
           </div></section>
           <section class="m-doc-details" id="a1af3dc870e63fc797d624a74e3fcdc24"><div>
             <h3>
               <span class="m-doc-wrap-bumper">float cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1af3dc870e63fc797d624a74e3fcdc24" class="m-doc-self">getIntensity</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the intensity of the bloom effect.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The intensity of the bloom effect.</td>
+                  <td>Intensity of the bloom effect.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the intensity of the bloom effect.</p>
           </div></section>
           <section class="m-doc-details" id="a51ad352949dedd8f05a9ce44043ebdce"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a51ad352949dedd8f05a9ce44043ebdce" class="m-doc-self">setThreshold</a>(</span><span class="m-doc-wrap">float threshold)</span></span>
             </h3>
+            <p>Sets the threshold for the bloom effect.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -248,16 +254,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">threshold</td>
-                  <td>The new threshold.</td>
+                  <td>New threshold.</td>
                 </tr>
               </tbody>
             </table>
-<p>Sets the threshold for the bloom effect.</p>
           </div></section>
           <section class="m-doc-details" id="aa67225275c078199d54c5a161d9a79fe"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa67225275c078199d54c5a161d9a79fe" class="m-doc-self">setSoftThreshold</a>(</span><span class="m-doc-wrap">float softThreshold)</span></span>
             </h3>
+            <p>Sets the soft threshold ratio.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -269,12 +275,12 @@
                 </tr>
               </tbody>
             </table>
-<p>Sets the soft threshold ratio.</p>
           </div></section>
           <section class="m-doc-details" id="ae52cbf193ceaadc6b915303135fea2eb"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae52cbf193ceaadc6b915303135fea2eb" class="m-doc-self">setIntensity</a>(</span><span class="m-doc-wrap">float intensity)</span></span>
             </h3>
+            <p>Sets the intensity of the bloom effect.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -282,16 +288,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">intensity</td>
-                  <td>The intensity of the bloom effect.</td>
+                  <td>Intensity of the bloom effect.</td>
                 </tr>
               </tbody>
             </table>
-<p>Sets the intensity of the bloom effect.</p>
           </div></section>
           <section class="m-doc-details" id="a6d545f64a5dffbd96be799f0299b48d7"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6d545f64a5dffbd96be799f0299b48d7" class="m-doc-self">resize</a>(</span><span class="m-doc-wrap">glm::uvec2 size) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Called when the window framebuffer size changes.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -299,18 +305,18 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">size</td>
-                  <td>The new size of the window.</td>
+                  <td>New size of the window.</td>
                 </tr>
               </tbody>
             </table>
-<p>Called when the window framebuffer size changes.</p>
           </div></section>
           <section class="m-doc-details" id="af2c7ef257c48e779770bb943eedc45e3"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af2c7ef257c48e779770bb943eedc45e3" class="m-doc-self">execute</a>(</span><span class="m-doc-wrap">std::map&lt;<a href="namespacecubos_1_1engine.html#ad9a27e05315b6fa51e4b34deadc5e2e4" class="m-doc">PostProcessingInput</a>, <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a>&gt;&amp; inputs,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PostProcessingBloom::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af2c7ef257c48e779770bb943eedc45e3" class="m-doc-self">execute</a>(</span><span class="m-doc-wrap">std::map&lt;<a href="group__renderer-plugin.html#gad9a27e05315b6fa51e4b34deadc5e2e4" class="m-doc">PostProcessingInput</a>, <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a>&gt;&amp; inputs,
               <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> prev,
               <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> out) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Called each frame.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -318,19 +324,19 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">inputs</td>
-                  <td>The available extra input textures. The reference is mutable so that a pass can provide its own inputs.</td>
+                  <td>Available extra input textures.</td>
                 </tr>
                 <tr>
                   <td>prev</td>
-                  <td>The resulting texture of the previous pass.</td>
+                  <td>Resulting texture of the previous pass.</td>
                 </tr>
                 <tr>
                   <td>out</td>
-                  <td>The framebuffer where the pass will render to.</td>
+                  <td>Framebuffer where the pass will render to.</td>
                 </tr>
               </tbody>
             </table>
-<p>Called each frame.</p>
+<p>The inputs argument is mutable to allow passes to their own inputs for future passes. This argument is used, for example, to pass the extra outputs of the deferred renderer to the post processing passes which might need them.</p>
           </div></section>
         </section>
       </div>

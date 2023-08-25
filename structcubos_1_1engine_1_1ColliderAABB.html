@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>ColliderAABB <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="aabb_8hpp.html">&lt;cubos/engine/collisions/aabb.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="aabb_8hpp.html">&lt;engine/collisions/aabb.hpp&gt;</a></div>
         </h1>
-        <p>The AABB of a collider.</p>
+        <p>Component which stores the AABB of an entity with a collider component.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -66,27 +67,27 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a60bb611a853fe08281be3d9b93eaeb8d" class="m-doc">box</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">core::<wbr />geom::<wbr />Box</a></span>
             </dt>
-            <dd></dd>
+            <dd>Gets a <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">core::<wbr />geom::<wbr />Box</a> representation of the AABB.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aba94892c609f753479a1056246025a75" class="m-doc">center</a>(</span><span class="m-doc-wrap">) const -&gt; glm::vec3</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the center of the AABB.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a9cbb53cfeba0b353f2c0fee1f9951644" class="m-doc">overlapsX</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a>&amp; other) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if the AABB overlaps with another AABB on the X axis.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#acc7b07798af51912b5cc43017610862a" class="m-doc">overlapsY</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a>&amp; other) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if the AABB overlaps with another AABB on the Y axis.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a4b3830d0d00a07241cc4ef07c8874e86" class="m-doc">overlapsZ</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a>&amp; other) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if the AABB overlaps with another AABB on the Z axis.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a55c25dd43c1a9a9ff4cb201751520f5e" class="m-doc">overlaps</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a>&amp; other) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if the AABB overlaps with another AABB.</dd>
           </dl>
         </section>
         <section id="pub-attribs">
@@ -95,7 +96,11 @@
             <dt id="a3962db75b92d792fdb54f2bb16fcbe3c">
               glm::vec3 <a href="#a3962db75b92d792fdb54f2bb16fcbe3c" class="m-doc-self">min</a>
             </dt>
-            <dd>The diagonal of the AABB.</dd>
+            <dd>Minimum point of the diagonal of the AABB.</dd>
+            <dt id="aa39b830685d2e06d048a0128ddc7e49c">
+              glm::vec3 <a href="#aa39b830685d2e06d048a0128ddc7e49c" class="m-doc-self">max</a>
+            </dt>
+            <dd>Maximum point of the diagonal of the AABB.</dd>
           </dl>
         </section>
         <section>
@@ -104,11 +109,12 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">core::<wbr />geom::<wbr />Box</a> cubos::<wbr />engine::<wbr />ColliderAABB::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60bb611a853fe08281be3d9b93eaeb8d" class="m-doc-self">box</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets a <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">core::<wbr />geom::<wbr />Box</a> representation of the AABB.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The Box representation of the AABB.</td>
+                  <td><a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">core::<wbr />geom::<wbr />Box</a> representation.</td>
                 </tr>
               </tfoot>
             </table>
@@ -117,11 +123,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">glm::vec3 cubos::<wbr />engine::<wbr />ColliderAABB::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aba94892c609f753479a1056246025a75" class="m-doc-self">center</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the center of the AABB.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The center of the AABB.</td>
+                  <td>Center of the AABB.</td>
                 </tr>
               </tfoot>
             </table>
@@ -130,6 +137,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />ColliderAABB::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9cbb53cfeba0b353f2c0fee1f9951644" class="m-doc-self">overlapsX</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a>&amp; other) const</span></span>
             </h3>
+            <p>Checks if the AABB overlaps with another AABB on the X axis.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -137,13 +145,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">other</td>
-                  <td>The other AABB.</td>
+                  <td>Other AABB.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the AABB overlaps with another AABB on the X axis.</td>
+                  <td>Whether the AABBs overlap.</td>
                 </tr>
               </tfoot>
             </table>
@@ -152,6 +160,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />ColliderAABB::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acc7b07798af51912b5cc43017610862a" class="m-doc-self">overlapsY</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a>&amp; other) const</span></span>
             </h3>
+            <p>Checks if the AABB overlaps with another AABB on the Y axis.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -159,13 +168,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">other</td>
-                  <td>The other AABB.</td>
+                  <td>Other AABB.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the AABB overlaps with another AABB on the Y axis.</td>
+                  <td>Whether the AABBs overlap.</td>
                 </tr>
               </tfoot>
             </table>
@@ -174,6 +183,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />ColliderAABB::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b3830d0d00a07241cc4ef07c8874e86" class="m-doc-self">overlapsZ</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a>&amp; other) const</span></span>
             </h3>
+            <p>Checks if the AABB overlaps with another AABB on the Z axis.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -181,13 +191,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">other</td>
-                  <td>The other AABB.</td>
+                  <td>Other AABB.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the AABB overlaps with another AABB on the Z axis.</td>
+                  <td>Whether the AABBs overlap.</td>
                 </tr>
               </tfoot>
             </table>
@@ -196,6 +206,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />ColliderAABB::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a55c25dd43c1a9a9ff4cb201751520f5e" class="m-doc-self">overlaps</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a>&amp; other) const</span></span>
             </h3>
+            <p>Checks if the AABB overlaps with another AABB.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -203,13 +214,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">other</td>
-                  <td>The other AABB.</td>
+                  <td>Other AABB.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the AABB overlaps with another AABB.</td>
+                  <td>Whether the AABBs overlap.</td>
                 </tr>
               </tfoot>
             </table>

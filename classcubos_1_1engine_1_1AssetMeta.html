@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,7 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>AssetMeta <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="meta_8hpp.html">&lt;engine/assets/meta.hpp&gt;</a></div>
         </h1>
+        <p>Stores metadata about an asset - the data stored in .meta files. Each asset has a corresponding meta object, which contains load or import parameters.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -58,7 +61,7 @@
             </li>
           </ul>
         </nav>
-<p>Stores metadata about an asset - the data stored in .meta files. Each asset has a corresponding meta object, which contains load or import parameters.</p><p>Serialization:</p><ul><li>can be serialized and deserialized without context.</li><li>when serialized with the type <code><a href="structcubos_1_1engine_1_1AssetMeta_1_1Exclude.html" class="m-doc">AssetMeta::<wbr />Exclude</a></code> in the context, the specified keys are excluded from the serialization.</li></ul>
+<p>Serialization:</p><ul><li>can be serialized and deserialized without context.</li><li>when serialized with the type <a href="structcubos_1_1engine_1_1AssetMeta_1_1Exclude.html" class="m-doc">AssetMeta::<wbr />Exclude</a> in the context, the specified keys are excluded from the serialization.</li></ul>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -74,24 +77,24 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ae4785c72d8f5a4e15f176970393a1547" class="m-doc">get</a>(</span><span class="m-doc-wrap">std::string_view key) const -&gt; std::optional&lt;std::string&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the value of a parameter on the asset&#x27;s metadata.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ae0e90a1648ca557020ec10acb4cfa307" class="m-doc">set</a>(</span><span class="m-doc-wrap">std::string_view key,
               std::string_view value)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets a parameter on the asset&#x27;s metadata.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#af9bedcc25a9bd643ec99a834cdaabd7b" class="m-doc">remove</a>(</span><span class="m-doc-wrap">std::string_view key)</span>
             </dt>
-            <dd></dd>
+            <dd>Removes a parameter from the asset&#x27;s metadata.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a08859a5e527676471e8b79b3a00f05a1" class="m-doc">params</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_map&lt;std::string, std::string&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the parameters of the asset&#x27;s metadata.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a330821e36d4da9e26b22461b7071283e" class="m-doc">params</a>(</span><span class="m-doc-wrap">) -&gt; std::unordered_map&lt;std::string, std::string&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the parameters of the asset&#x27;s metadata.</dd>
           </dl>
         </section>
         <section>
@@ -100,6 +103,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::optional&lt;std::string&gt; cubos::<wbr />engine::<wbr />AssetMeta::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae4785c72d8f5a4e15f176970393a1547" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">std::string_view key) const</span></span>
             </h3>
+            <p>Gets the value of a parameter on the asset&#x27;s metadata.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -123,6 +127,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />AssetMeta::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae0e90a1648ca557020ec10acb4cfa307" class="m-doc-self">set</a>(</span><span class="m-doc-wrap">std::string_view key,
               std::string_view value)</span></span>
             </h3>
+            <p>Sets a parameter on the asset&#x27;s metadata.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -138,12 +143,12 @@
                 </tr>
               </tbody>
             </table>
-<p>Sets a parameter for the asset&#x27;s metadata.</p>
           </div></section>
           <section class="m-doc-details" id="af9bedcc25a9bd643ec99a834cdaabd7b"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />AssetMeta::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af9bedcc25a9bd643ec99a834cdaabd7b" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap">std::string_view key)</span></span>
             </h3>
+            <p>Removes a parameter from the asset&#x27;s metadata.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -155,12 +160,12 @@
                 </tr>
               </tbody>
             </table>
-<p>Removes a parameter from the asset&#x27;s metadata.</p>
           </div></section>
           <section class="m-doc-details" id="a08859a5e527676471e8b79b3a00f05a1"><div>
             <h3>
               <span class="m-doc-wrap-bumper">const std::unordered_map&lt;std::string, std::string&gt;&amp; cubos::<wbr />engine::<wbr />AssetMeta::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a08859a5e527676471e8b79b3a00f05a1" class="m-doc-self">params</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the parameters of the asset&#x27;s metadata.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -174,6 +179,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::unordered_map&lt;std::string, std::string&gt;&amp; cubos::<wbr />engine::<wbr />AssetMeta::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a330821e36d4da9e26b22461b7071283e" class="m-doc-self">params</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets the parameters of the asset&#x27;s metadata.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>

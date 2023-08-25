@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -44,9 +45,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="json_8hpp.html">&lt;engine/assets/bridges/json.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>JSONBridge <span class="m-thin">class</span>
         </h1>
+        <p>Bridge for loading and saving assets which are serialized to and from a JSON file.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -54,7 +57,7 @@
           <tbody>
             <tr>
               <td style="width: 1%">T</td>
-              <td>The type of asset to load and save. Must be default constructible.</td>
+              <td>Type of asset to load and save. Must be default constructible.</td>
             </tr>
           </tbody>
         </table>
@@ -71,14 +74,14 @@
             </li>
           </ul>
         </nav>
-<p>A bridge for loading and saving assets which are serialized to and from a JSON file.</p><p>This bridge automatically serializes and deserializes assets of type <code>T</code> to and from a JSON file. Thus, <code>T</code> must be serializable and deserializable. No additional context is given to the serializer or deserializer.</p>
+<p>This bridge automatically serializes and deserializes assets of type <code>T</code> to and from a JSON file. Thus, <code>T</code> must be serializable and deserializable. No additional context is given to the serializer or deserializer.</p>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">FileBridge</a>
             </dt>
-            <dd></dd>
+            <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -87,24 +90,24 @@
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#aac7c359af26acb3866447c56f23e72bb" class="m-doc">JSONBridge</a>(</span><span class="m-doc-wrap">int indentation = 4)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs a bridge.</dd>
           </dl>
         </section>
         <section id="pro-methods">
           <h2><a href="#pro-methods">Protected functions</a></h2>
           <dl class="m-doc">
-            <dt id="a378a4da5b889688f4cc3e54b89ee4784">
-              <span class="m-doc-wrap-bumper">auto <a href="#a378a4da5b889688f4cc3e54b89ee4784" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a378a4da5b889688f4cc3e54b89ee4784" class="m-doc">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
               <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Called with the file stream to load the asset from.</dd>
-            <dt id="abc38c99745e18ee3ff0a5ab64e1bcc05">
-              <span class="m-doc-wrap-bumper">auto <a href="#abc38c99745e18ee3ff0a5ab64e1bcc05" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+            <dd>Loads an asset from a file stream.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abc38c99745e18ee3ff0a5ab64e1bcc05" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
               <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Called with the file stream to save the asset to.</dd>
+            <dd>Saves an asset to a file stream.</dd>
           </dl>
         </section>
         <section>
@@ -116,6 +119,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />JSONBridge&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aac7c359af26acb3866447c56f23e72bb" class="m-doc-self">JSONBridge</a>(</span><span class="m-doc-wrap">int indentation = 4)</span></span>
             </h3>
+            <p>Constructs a bridge.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -123,9 +127,82 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">indentation</td>
-                  <td>The indentation level to use when saving the JSON file. Set to -1 to remove all whitespace.</td>
+                  <td>Indentation level to use when saving the JSON file.</td>
                 </tr>
               </tbody>
+            </table>
+<p>If the <code>indentation</code> level is set to -1, all whitespace is removed.</p>
+          </div></section>
+          <section class="m-doc-details" id="a378a4da5b889688f4cc3e54b89ee4784"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />JSONBridge&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a378a4da5b889688f4cc3e54b89ee4784" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Loads an asset from a file stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to write into.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being loaded.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the asset was successfully loaded.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abc38c99745e18ee3ff0a5ab64e1bcc05"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />JSONBridge&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abc38c99745e18ee3ff0a5ab64e1bcc05" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">core::<wbr />memory::<wbr />Stream</a>&amp; stream) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Saves an asset to a file stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to read from.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being saved.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the asset was successfully saved.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
         </section>

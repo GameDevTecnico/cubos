@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,7 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>LocalToWorld <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="local__to__world_8hpp.html">&lt;engine/transform/local_to_world.hpp&gt;</a></div>
         </h1>
+        <p>Component which stores the transformation matrix of an entity, from local to world space.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -57,14 +60,14 @@
             </li>
           </ul>
         </nav>
-<p>A matrix calculated from the position, rotation and scale of an entity. This matrix should</p>
+<aside class="m-note m-info"><h4>Note</h4><p>This component is written to by the <a href="group__transform-plugin.html" class="m-doc">transform plugin</a>, and it only makes sense to modify it manually if its not accompanied by the other transform components.</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="structcubos_1_1engine_1_1Position.html" class="m-doc">Position</a> Applies a translation to this matrix.</p><p><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> Applies a rotation to this matrix.</p><p><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> Applies a scaling to this matrix.</p></aside>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
             <dt id="a602f03c47b97e79277d9ccd40b7de605">
               glm::mat4 <a href="#a602f03c47b97e79277d9ccd40b7de605" class="m-doc-self">mat</a>
             </dt>
-            <dd>The local to world matrix.</dd>
+            <dd>Local to world space matrix.</dd>
           </dl>
         </section>
       </div>

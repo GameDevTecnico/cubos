@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,60 +46,99 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>InputAxis <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="axis_8hpp.html">&lt;cubos/engine/input/axis.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="axis_8hpp.html">&lt;engine/input/axis.hpp&gt;</a></div>
         </h1>
+        <p>Stores the state of a single input axis, such as &quot;move forward&quot; or &quot;move right&quot;.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Used to represent a single input axis, such as &quot;move forward&quot; or &quot;move right&quot;. It can be bound to multiple keys, and will return a value in the range [-1, 1] based on which keys are pressed.</p>
+<p>Can be bound to multiple keys, and will have a value in the range [-1, 1] based on the the state of its bindings.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a61d58f526f607271d613cb6a7875784a">
+              <span class="m-doc-wrap-bumper"><a href="#a61d58f526f607271d613cb6a7875784a" class="m-doc-self">InputAxis</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs without any bindings.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#acf7c33d2b29368e46b55a84b6fff7ed9" class="m-doc">InputAxis</a>(</span><span class="m-doc-wrap">std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt; positive,
+              std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt; negative)</span>
+            </dt>
+            <dd>Constructs with existing bindings.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#acbaaeaba0ed38a32b4461826048d5c59" class="m-doc">positive</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the positive key bindings.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aa0e8fdaece12f5c7d258b6f5ca1d9149" class="m-doc">negative</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the negative key bindings.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a9cf95edc11a26f5a369502b1a328d538" class="m-doc">positive</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the positive key bindings.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a7f2e0c3436d90795203ef527df802ab0" class="m-doc">negative</a>(</span><span class="m-doc-wrap">) -&gt; std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the negative key bindings.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a4d7fc3d3cf21c94a137d86edc3626285" class="m-doc">value</a>(</span><span class="m-doc-wrap">) const -&gt; float</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the value.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a85b0b6f2a0c7a5eac573597dbcf67005" class="m-doc">value</a>(</span><span class="m-doc-wrap">float value)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the value.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="acf7c33d2b29368e46b55a84b6fff7ed9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf7c33d2b29368e46b55a84b6fff7ed9" class="m-doc-self">InputAxis</a>(</span><span class="m-doc-wrap">std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt; positive,
+              std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt; negative)</span></span>
+            </h3>
+            <p>Constructs with existing bindings.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">positive</td>
+                  <td>Positive key bindings.</td>
+                </tr>
+                <tr>
+                  <td>negative</td>
+                  <td>Negative key bindings.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="acbaaeaba0ed38a32b4461826048d5c59"><div>
             <h3>
               <span class="m-doc-wrap-bumper">const std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acbaaeaba0ed38a32b4461826048d5c59" class="m-doc-self">positive</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the positive key bindings.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The vector of positive keys.</td>
+                  <td>Vector of positive keys.</td>
                 </tr>
               </tfoot>
             </table>
@@ -107,11 +147,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">const std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0e8fdaece12f5c7d258b6f5ca1d9149" class="m-doc-self">negative</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the negative key bindings.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The vector of negative keys.</td>
+                  <td>Vector of negative keys.</td>
                 </tr>
               </tfoot>
             </table>
@@ -120,11 +161,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9cf95edc11a26f5a369502b1a328d538" class="m-doc-self">positive</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets the positive key bindings.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The vector of positive keys.</td>
+                  <td>Vector of positive keys.</td>
                 </tr>
               </tfoot>
             </table>
@@ -133,11 +175,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::vector&lt;std::pair&lt;<a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>, <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f2e0c3436d90795203ef527df802ab0" class="m-doc-self">negative</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets the negative key bindings.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The vector of negative keys.</td>
+                  <td>Vector of negative keys.</td>
                 </tr>
               </tfoot>
             </table>
@@ -146,11 +189,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">float cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4d7fc3d3cf21c94a137d86edc3626285" class="m-doc-self">value</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the value.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The value of this axis.</td>
+                  <td>Value.</td>
                 </tr>
               </tfoot>
             </table>
@@ -159,6 +203,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />InputAxis::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a85b0b6f2a0c7a5eac573597dbcf67005" class="m-doc-self">value</a>(</span><span class="m-doc-wrap">float value)</span></span>
             </h3>
+            <p>Sets the value.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -166,11 +211,10 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">value</td>
-                  <td>The new value of this axis.</td>
+                  <td>New value.</td>
                 </tr>
               </tbody>
             </table>
-<p>Sets the value of this axis.</p>
           </div></section>
         </section>
       </div>

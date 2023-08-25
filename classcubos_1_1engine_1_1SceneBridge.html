@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,7 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>SceneBridge <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="scene_2bridge_8hpp.html">&lt;engine/scene/bridge.hpp&gt;</a></div>
         </h1>
+        <p>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> assets.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -58,31 +61,30 @@
             </li>
           </ul>
         </nav>
-<p>A bridge to load and save <code><a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a></code> assets.</p><p>Scenes are stored as JSON files with two top-level objects:</p><ul><li>&quot;imports&quot; - a dictionary of names to asset IDs of other scenes to import.</li><li>&quot;entities&quot; - a dictionary of names to serialized entities.</li></ul><p>Entities imported from sub-scenes can be overriden by defining them in the current scene. For example:</p><pre>{
-    &quot;imports&quot;: {
-        &quot;foo&quot;: &quot;6f42ae5a-59d1-5df3-8720-83b8df6dd536&quot;
-    },
-    &quot;entities&quot;: {
-        &quot;baz&quot;: {
-            &quot;cubos/position&quot;: {
-                &quot;x&quot;: 1,
-                &quot;y&quot;: 2,
-                &quot;z&quot;: 3
-            }
-        },
-        &quot;foo.bar&quot;: {
-            &quot;cubos/parent&quot;: &quot;baz&quot;,
-        }
-    }
-}
-</pre><p>This scene will import the scene with ID &quot;6f42ae5a-59d1-5df3-8720-83b8df6dd536&quot;, and prefix all of its entities with &quot;foo.&quot;. The entity &quot;foo.bar&quot; will override the entity &quot;bar&quot; from the imported scene, while the entity &quot;baz&quot; will be added to the scene.</p>
+<p>Scenes are stored as JSON files with two top-level objects:</p><ul><li>&quot;imports&quot; - a dictionary of names to asset IDs of other scenes to import.</li><li>&quot;entities&quot; - a dictionary of names to serialized entities.</li></ul><p>Entities imported from sub-scenes can be overriden by defining them in the current scene. For example:</p><pre class="m-code"><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;imports&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;foo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6f42ae5a-59d1-5df3-8720-83b8df6dd536&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;entities&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;baz&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;cubos/position&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;z&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;foo.bar&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;cubos/parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;baz&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></pre><p>This scene will import the subscene with ID <code>6f42ae5a-59d1-5df3-8720-83b8df6dd536</code>, and prefix all of its entities with <code>foo.</code>. The entity <code>foo.bar</code> will override the entity <code>bar</code> from the imported scene, while the entity <code>baz</code> will be added to the scene.</p>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">AssetBridge</a>
             </dt>
-            <dd></dd>
+            <dd>Bridges are the objects responsible for loading and saving assets from/to disk. They form the bridge between the asset manager and the virtual file system.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -92,12 +94,12 @@
               <span class="m-doc-wrap-bumper">auto <a href="#ae9d97c49a22ebfbf1d5e2e188c94da23" class="m-doc">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Loads an asset.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8782765a5ab2840343e1cdadf065f3e5" class="m-doc">save</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Saves an asset.</dd>
           </dl>
         </section>
         <section>
@@ -107,30 +109,58 @@
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />SceneBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae9d97c49a22ebfbf1d5e2e188c94da23" class="m-doc-self">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Loads an asset.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to write into.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being loaded.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
+                  <th>Returns</th>
                   <td>Whether the asset was successfully loaded.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Loads an asset into the given asset manager, identified by the given handle. When called, the meta data of the given asset should be already present in the asset manager.</p>
+<p>The metadata of the given asset should already be present in the asset manager.</p>
           </div></section>
           <section class="m-doc-details" id="a8782765a5ab2840343e1cdadf065f3e5"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />SceneBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8782765a5ab2840343e1cdadf065f3e5" class="m-doc-self">save</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Saves an asset.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to read from.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being saved.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
+                  <th>Returns</th>
                   <td>Whether the asset was successfully saved.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Saves an asset from the given asset manager, identified by the given handle.</p>
+<p>The asset should be loaded in the asset manager.</p>
           </div></section>
         </section>
       </div>

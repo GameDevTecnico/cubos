@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,7 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DeferredRenderer <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="deferred__renderer_8hpp.html">&lt;engine/renderer/deferred_renderer.hpp&gt;</a></div>
         </h1>
+        <p>Renderer implementation which uses deferred rendering.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -60,14 +63,14 @@
             </li>
           </ul>
         </nav>
-<p>Renderer implementation which uses deferred rendering.</p><p>Voxel grids are first triangulated, and then the triangles are uploaded to the GPU. The rendering is done in two passes:</p><ul><li>The first pass renders the scene to the GBuffer textures: position, normal and material.</li><li>The second pass takes the GBuffer textures and calculates the color of the pixels with the lighting applied.</li></ul>
+<p>Voxel grids are first triangulated, and then the triangles are uploaded to the GPU. The rendering is done in two passes:</p><ul><li>The first pass renders the scene to the GBuffer textures: position, normal and material.</li><li>The second pass takes the GBuffer textures and calculates the color of the pixels with the lighting applied.</li></ul>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1engine_1_1BaseRenderer.html" class="m-doc">BaseRenderer</a>
             </dt>
-            <dd></dd>
+            <dd>Interface which abstracts different rendering methods.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -78,20 +81,20 @@
               glm::uvec2 size,
               const <a href="classcubos_1_1core_1_1Settings.html" class="m-doc">core::<wbr />Settings</a>&amp; settings)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae82eb3130ce8600dd620ba0a53ff3a61" class="m-doc">upload</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">core::<wbr />gl::<wbr />Grid</a>&amp; grid) -&gt; <a href="namespacecubos_1_1engine.html#a7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae82eb3130ce8600dd620ba0a53ff3a61" class="m-doc">upload</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">core::<wbr />gl::<wbr />Grid</a>&amp; grid) -&gt; <a href="group__renderer-plugin.html#ga7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Uploads a grid to the GPU and returns an handle which can be used to draw it.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#abf08e3db2d7ba1dbe2b2468556ece70d" class="m-doc">setPalette</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">core::<wbr />gl::<wbr />Palette</a>&amp; palette) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Sets the current palette of the renderer.</dd>
           </dl>
         </section>
         <section id="pro-methods">
@@ -100,13 +103,13 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a127f41fe7c55eb0e88e20dade722afcf" class="m-doc">onResize</a>(</span><span class="m-doc-wrap">glm::uvec2 size) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#ab971efbbea34754a2753e9a2a14a8873" class="m-doc">resize()</a> is called.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a0fe872cf50fd42cc791a075f26d25e97" class="m-doc">onRender</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Camera.html" class="m-doc">core::<wbr />gl::<wbr />Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
               <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a8c66a27db1f596aeb8909c0265753337" class="m-doc">render()</a> is called, before applying post processing effects.</dd>
           </dl>
         </section>
         <section>
@@ -117,6 +120,7 @@
               glm::uvec2 size,
               const <a href="classcubos_1_1core_1_1Settings.html" class="m-doc">core::<wbr />Settings</a>&amp; settings)</span></span>
             </h3>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -124,23 +128,24 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">renderDevice</td>
-                  <td>The render device to use.</td>
+                  <td>Render device to use.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the window.</td>
+                  <td>Size of the window.</td>
                 </tr>
                 <tr>
                   <td>settings</td>
-                  <td>The settings to use.</td>
+                  <td>Settings to use.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
           <section class="m-doc-details" id="ae82eb3130ce8600dd620ba0a53ff3a61"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="namespacecubos_1_1engine.html#a7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> cubos::<wbr />engine::<wbr />DeferredRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae82eb3130ce8600dd620ba0a53ff3a61" class="m-doc-self">upload</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">core::<wbr />gl::<wbr />Grid</a>&amp; grid) <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__renderer-plugin.html#ga7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> cubos::<wbr />engine::<wbr />DeferredRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae82eb3130ce8600dd620ba0a53ff3a61" class="m-doc-self">upload</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">core::<wbr />gl::<wbr />Grid</a>&amp; grid) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Uploads a grid to the GPU and returns an handle which can be used to draw it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -148,22 +153,22 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">grid</td>
-                  <td>The grid to upload.</td>
+                  <td>Grid to upload.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The handle of the grid.</td>
+                  <td>Handle of the grid.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Uploads a grid to the GPU and returns an handle, which can be used to draw it.</p>
           </div></section>
           <section class="m-doc-details" id="abf08e3db2d7ba1dbe2b2468556ece70d"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DeferredRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf08e3db2d7ba1dbe2b2468556ece70d" class="m-doc-self">setPalette</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">core::<wbr />gl::<wbr />Palette</a>&amp; palette) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Sets the current palette of the renderer.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -171,17 +176,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">palette</td>
-                  <td>The palette to set.</td>
+                  <td>Palette to set.</td>
                 </tr>
               </tbody>
             </table>
-<p>Sets the current palette of the renderer.</p>
           </div></section>
           <section class="m-doc-details" id="a127f41fe7c55eb0e88e20dade722afcf"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DeferredRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a127f41fe7c55eb0e88e20dade722afcf" class="m-doc-self">onResize</a>(</span><span class="m-doc-wrap">glm::uvec2 size) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
-<p>Called when resizze() is called. Renderer implementations should override this function to resize their framebuffers.</p>
+            <p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#ab971efbbea34754a2753e9a2a14a8873" class="m-doc">resize()</a> is called.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">size</td>
+                  <td>New size of the framebuffer.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Renderer implementations should override this function to resize their framebuffers.</p>
           </div></section>
           <section class="m-doc-details" id="a0fe872cf50fd42cc791a075f26d25e97"><div>
             <h3>
@@ -189,6 +205,7 @@
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
               <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
+            <p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a8c66a27db1f596aeb8909c0265753337" class="m-doc">render()</a> is called, before applying post processing effects.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -196,19 +213,19 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">camera</td>
-                  <td>The camera to use.</td>
+                  <td><a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> to use.</td>
                 </tr>
                 <tr>
                   <td>frame</td>
-                  <td>The frame to draw.</td>
+                  <td>Frame to draw.</td>
                 </tr>
                 <tr>
                   <td>target</td>
-                  <td>The target framebuffer. If postprocessing is enabled, it won&#x27;t be the camera&#x27;s target.</td>
+                  <td>Target framebuffer.</td>
                 </tr>
               </tbody>
             </table>
-<p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a8c66a27db1f596aeb8909c0265753337" class="m-doc">render()</a> is called, before applying post processing effects. Renderer implementations should implement this function to draw the frame.</p>
+<p>Renderer implementations should implement this function to draw the frame. When post processing is enabled, the target framebuffer will be the internal texture which will be used for post processing.</p>
           </div></section>
         </section>
       </div>

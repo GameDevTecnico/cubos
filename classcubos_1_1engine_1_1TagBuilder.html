@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,6 +46,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>TagBuilder <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="cubos_8hpp.html">&lt;engine/cubos.hpp&gt;</a></div>
         </h1>
         <p>Used to chain configurations related to tags.</p>
         <nav class="m-block m-default">
@@ -53,35 +55,75 @@
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ad4d9dfcf34a1e7e45530c9e21f27449b" class="m-doc">TagBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">core::<wbr />ecs::<wbr />Dispatcher</a>&amp; dispatcher,
+              std::vector&lt;std::string&gt;&amp; tags)</span>
+            </dt>
+            <dd>Construct.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a5fe0d209493b8fdad42579e7338650ac" class="m-doc">beforeTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the current tag to be executed before another tag.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ae7694d3dd5289693acf158378a9b44d1" class="m-doc">afterTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the current tag to be executed after another tag.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename F&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#af3ad8b198d222922b4feb87cb68d6b78" class="m-doc">runIf</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ad4d9dfcf34a1e7e45530c9e21f27449b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad4d9dfcf34a1e7e45530c9e21f27449b" class="m-doc-self">TagBuilder</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">core::<wbr />ecs::<wbr />Dispatcher</a>&amp; dispatcher,
+              std::vector&lt;std::string&gt;&amp; tags)</span></span>
+            </h3>
+            <p>Construct.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">dispatcher</td>
+                  <td>Dispatcher being configured</td>
+                </tr>
+                <tr>
+                  <td>tags</td>
+                  <td>Vector which stores the tags for this dispatcher.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a5fe0d209493b8fdad42579e7338650ac"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />engine::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5fe0d209493b8fdad42579e7338650ac" class="m-doc-self">beforeTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
+            <p>Sets the current tag to be executed before another tag.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -89,16 +131,22 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">tag</td>
-                  <td>The tag to be executed before.</td>
+                  <td>Tag to be executed before.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
             </table>
-<p>Sets the current tag to be executed before another tag.</p>
           </div></section>
           <section class="m-doc-details" id="ae7694d3dd5289693acf158378a9b44d1"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />engine::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae7694d3dd5289693acf158378a9b44d1" class="m-doc-self">afterTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
+            <p>Sets the current tag to be executed after another tag.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -106,11 +154,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">tag</td>
-                  <td>The tag to be executed after.</td>
+                  <td>Tag to be executed after.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
             </table>
-<p>Sets the current tag to be executed after another tag.</p>
           </div></section>
           <section class="m-doc-details" id="af3ad8b198d222922b4feb87cb68d6b78"><div>
             <h3>
@@ -119,6 +172,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a>&amp; cubos::<wbr />engine::<wbr />TagBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3ad8b198d222922b4feb87cb68d6b78" class="m-doc-self">runIf</a>(</span><span class="m-doc-wrap">F func)</span></span>
             </h3>
+            <p>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -126,11 +180,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">func</td>
-                  <td>The condition function.</td>
+                  <td>Condition function.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this object, for chaining.</td>
+                </tr>
+              </tfoot>
             </table>
-<p>Adds a condition to the current tag. If this condition returns false, systems with this tag will not be executed. For the tagged systems to run, all conditions must return true.</p>
           </div></section>
         </section>
       </div>

@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,7 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>BaseRenderer <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="renderer_8hpp.html">&lt;engine/renderer/renderer.hpp&gt;</a></div>
         </h1>
+        <p>Interface which abstracts different rendering methods.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,14 +64,14 @@
             </li>
           </ul>
         </nav>
-<p>Interface class which abstracts different rendering methods.</p><p>This abstraction allows us to, for example, switch between a raytracing and a deferred rendering method as we need to, without changing the API. This is useful since not all computers support realtime raytracing.</p>
+<p>This abstraction allows us to, for example, switch between a raytracing and a deferred rendering method as we need to, without changing the API. This is useful since not all computers support realtime raytracing.</p><aside class="m-note m-info"><h4>Note</h4><p>This code was written previously to the development of the <a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a> class, and thats why it is structured this way. In the future it would be better to simply abstract away renderer implementations using different plugins which would just switch the systems being run, keeping the same components which are effectively its API.</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1engine_1_1PostProcessingManager.html" class="m-doc">PostProcessingManager</a></p></aside>
         <section id="derived-classes">
           <h2><a href="#derived-classes">Derived classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1engine_1_1DeferredRenderer.html" class="m-doc">DeferredRenderer</a>
             </dt>
-            <dd></dd>
+            <dd>Renderer implementation which uses deferred rendering.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -78,24 +81,28 @@
               <span class="m-doc-wrap-bumper"><a href="#ae07f24a1f14264115bd8cc3e0404045c" class="m-doc">BaseRenderer</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice,
               glm::uvec2 size)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs.</dd>
+            <dt id="a1b65ac006b9eea1d7ea608eb0fd189a1">
+              <span class="m-doc-wrap-bumper"><a href="#a1b65ac006b9eea1d7ea608eb0fd189a1" class="m-doc-self">BaseRenderer</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1BaseRenderer.html" class="m-doc">BaseRenderer</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Deleted copy constructor.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab93eac006bbc1492aea5ba2df211f877" class="m-doc">upload</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">core::<wbr />gl::<wbr />Grid</a>&amp; grid) -&gt; <a href="namespacecubos_1_1engine.html#a7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab93eac006bbc1492aea5ba2df211f877" class="m-doc">upload</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">core::<wbr />gl::<wbr />Grid</a>&amp; grid) -&gt; <a href="group__renderer-plugin.html#ga7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Uploads a grid to the GPU and returns an handle which can be used to draw it.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a13262e8888ca9764f7be6488b0ade741" class="m-doc">setPalette</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">core::<wbr />gl::<wbr />Palette</a>&amp; palette) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Sets the current palette of the renderer.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ab971efbbea34754a2753e9a2a14a8873" class="m-doc">resize</a>(</span><span class="m-doc-wrap">glm::uvec2 size)</span>
             </dt>
-            <dd></dd>
+            <dd>Resizes the renderer&#x27;s framebuffers.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a75e37251d01ba5e1cc8ef79e3c1b92c6" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; glm::uvec2</span>
             </dt>
@@ -106,11 +113,11 @@
               bool usePostProcessing = true,
               const <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span>
             </dt>
-            <dd></dd>
+            <dd>Draws a frame.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a41ca3401aec69be8c942869cffe36817" class="m-doc">pps</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1engine_1_1PostProcessingManager.html" class="m-doc">PostProcessingManager</a>&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a reference to the post processing manager.</dd>
           </dl>
         </section>
         <section id="pro-methods">
@@ -119,13 +126,13 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a4f525c6c562d2e539cba90b4dacd4f28" class="m-doc">onResize</a>(</span><span class="m-doc-wrap">glm::uvec2 size) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#ab971efbbea34754a2753e9a2a14a8873" class="m-doc">resize()</a> is called.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aa0bf7b86e6684bcec4abd94981db4e94" class="m-doc">onRender</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Camera.html" class="m-doc">core::<wbr />gl::<wbr />Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
               <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a8c66a27db1f596aeb8909c0265753337" class="m-doc">render()</a> is called, before applying post processing effects.</dd>
           </dl>
         </section>
         <section id="pro-attribs">
@@ -134,7 +141,7 @@
             <dt id="aa8b01e04bff931fcf83fb557096ba2b8">
               <a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; <a href="#aa8b01e04bff931fcf83fb557096ba2b8" class="m-doc-self">mRenderDevice</a>
             </dt>
-            <dd>The render device being used.</dd>
+            <dd>Render device being used.</dd>
           </dl>
         </section>
         <section>
@@ -144,6 +151,7 @@
               <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae07f24a1f14264115bd8cc3e0404045c" class="m-doc-self">BaseRenderer</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice,
               glm::uvec2 size)</span></span>
             </h3>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -162,8 +170,9 @@
           </div></section>
           <section class="m-doc-details" id="ab93eac006bbc1492aea5ba2df211f877"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="namespacecubos_1_1engine.html#a7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab93eac006bbc1492aea5ba2df211f877" class="m-doc-self">upload</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">core::<wbr />gl::<wbr />Grid</a>&amp; grid) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="group__renderer-plugin.html#ga7b3b0e766f2342127673c4a88afabd48" class="m-doc">RendererGrid</a> cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab93eac006bbc1492aea5ba2df211f877" class="m-doc-self">upload</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">core::<wbr />gl::<wbr />Grid</a>&amp; grid) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Uploads a grid to the GPU and returns an handle which can be used to draw it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -171,22 +180,22 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">grid</td>
-                  <td>The grid to upload.</td>
+                  <td>Grid to upload.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The handle of the grid.</td>
+                  <td>Handle of the grid.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Uploads a grid to the GPU and returns an handle, which can be used to draw it.</p>
           </div></section>
           <section class="m-doc-details" id="a13262e8888ca9764f7be6488b0ade741"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13262e8888ca9764f7be6488b0ade741" class="m-doc-self">setPalette</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">core::<wbr />gl::<wbr />Palette</a>&amp; palette) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Sets the current palette of the renderer.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -194,16 +203,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">palette</td>
-                  <td>The palette to set.</td>
+                  <td>Palette to set.</td>
                 </tr>
               </tbody>
             </table>
-<p>Sets the current palette of the renderer.</p>
           </div></section>
           <section class="m-doc-details" id="ab971efbbea34754a2753e9a2a14a8873"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab971efbbea34754a2753e9a2a14a8873" class="m-doc-self">resize</a>(</span><span class="m-doc-wrap">glm::uvec2 size)</span></span>
             </h3>
+            <p>Resizes the renderer&#x27;s framebuffers.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -211,11 +220,10 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">size</td>
-                  <td>The new size of the window.</td>
+                  <td>New size of the window.</td>
                 </tr>
               </tbody>
             </table>
-<p>Resizes the renderer&#x27;s framebuffers.</p>
           </div></section>
           <section class="m-doc-details" id="a75e37251d01ba5e1cc8ef79e3c1b92c6"><div>
             <h3>
@@ -226,7 +234,7 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The current size of the renderer&#x27;s framebuffer.</td>
+                  <td>Current size.</td>
                 </tr>
               </tfoot>
             </table>
@@ -238,6 +246,7 @@
               bool usePostProcessing = true,
               const <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span></span>
             </h3>
+            <p>Draws a frame.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -245,11 +254,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">camera</td>
-                  <td>The camera to use.</td>
+                  <td><a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> to use.</td>
                 </tr>
                 <tr>
                   <td>frame</td>
-                  <td>The frame to draw.</td>
+                  <td>Frame to draw.</td>
                 </tr>
                 <tr>
                   <td>usePostProcessing</td>
@@ -257,31 +266,42 @@
                 </tr>
                 <tr>
                   <td>target</td>
-                  <td>The target framebuffer to draw to.</td>
+                  <td>Target framebuffer to draw to.</td>
                 </tr>
               </tbody>
             </table>
-<p>Draws a frame, with post processing.</p>
           </div></section>
           <section class="m-doc-details" id="a41ca3401aec69be8c942869cffe36817"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1PostProcessingManager.html" class="m-doc">PostProcessingManager</a>&amp; cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a41ca3401aec69be8c942869cffe36817" class="m-doc-self">pps</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets a reference to the post processing manager.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The post processing manager.</td>
+                  <td>Post processing manager.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets a reference to the post processing manager.</p>
           </div></section>
           <section class="m-doc-details" id="a4f525c6c562d2e539cba90b4dacd4f28"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4f525c6c562d2e539cba90b4dacd4f28" class="m-doc-self">onResize</a>(</span><span class="m-doc-wrap">glm::uvec2 size) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
-<p>Called when resizze() is called. Renderer implementations should override this function to resize their framebuffers.</p>
+            <p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#ab971efbbea34754a2753e9a2a14a8873" class="m-doc">resize()</a> is called.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">size</td>
+                  <td>New size of the framebuffer.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Renderer implementations should override this function to resize their framebuffers.</p>
           </div></section>
           <section class="m-doc-details" id="aa0bf7b86e6684bcec4abd94981db4e94"><div>
             <h3>
@@ -289,6 +309,7 @@
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
               <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
+            <p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a8c66a27db1f596aeb8909c0265753337" class="m-doc">render()</a> is called, before applying post processing effects.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -296,19 +317,19 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">camera</td>
-                  <td>The camera to use.</td>
+                  <td><a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> to use.</td>
                 </tr>
                 <tr>
                   <td>frame</td>
-                  <td>The frame to draw.</td>
+                  <td>Frame to draw.</td>
                 </tr>
                 <tr>
                   <td>target</td>
-                  <td>The target framebuffer. If postprocessing is enabled, it won&#x27;t be the camera&#x27;s target.</td>
+                  <td>Target framebuffer.</td>
                 </tr>
               </tbody>
             </table>
-<p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a8c66a27db1f596aeb8909c0265753337" class="m-doc">render()</a> is called, before applying post processing effects. Renderer implementations should implement this function to draw the frame.</p>
+<p>Renderer implementations should implement this function to draw the frame. When post processing is enabled, the target framebuffer will be the internal texture which will be used for post processing.</p>
           </div></section>
         </section>
       </div>

@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>BroadPhaseCollisions <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="broad__phase__collisions_8hpp.html">&lt;cubos/engine/collisions/broad_phase_collisions.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="broad__phase__collisions_8hpp.html">&lt;engine/collisions/broad_phase_collisions.hpp&gt;</a></div>
         </h1>
-        <p>Used to store data used in broad phase collision detection.</p>
+        <p>Resource which stores data used in broad phase collision detection.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -89,7 +90,7 @@
             <dt id="a6f1b1c276940e21d9574ad5cbc8a7c96">
               using <a href="#a6f1b1c276940e21d9574ad5cbc8a7c96" class="m-doc-self">Candidate</a> = std::pair&lt;<a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>&gt;
             </dt>
-            <dd>A pair of entities that may collide.</dd>
+            <dd>Pair of entities that may collide.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -115,7 +116,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1d8143539af8a6d2e0b2186a86e6d6d4" class="m-doc">candidates</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#ac36734dc751d2995fb1fa66429453786" class="m-doc">CollisionType</a> type) const -&gt; const std::unordered_set&lt;<a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a6f1b1c276940e21d9574ad5cbc8a7c96" class="m-doc">Candidate</a>, <a href="structcubos_1_1engine_1_1BroadPhaseCollisions_1_1CandidateHash.html" class="m-doc">CandidateHash</a>&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the collision candidates for a specific collision type.</dd>
             <dt id="a3c4e9bd2bba0fb9aa02ccc25d8835a12">
               <span class="m-doc-wrap-bumper">void <a href="#a3c4e9bd2bba0fb9aa02ccc25d8835a12" class="m-doc-self">clearCandidates</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -206,7 +207,7 @@
                 <tr>
                   <td><a href="#ac36734dc751d2995fb1fa66429453786ae93f994f01c537c4e2f7d8528c3eb5e9" class="m-doc-self" id="ac36734dc751d2995fb1fa66429453786ae93f994f01c537c4e2f7d8528c3eb5e9">Count</a></td>
                   <td>
-                  <p>Used to get the amount of collision types.</p>
+                  <p>Number of collision types.</p>
                   </td>
                 </tr>
               </tbody>
@@ -227,7 +228,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td>The entity to add.</td>
+                  <td>Entity to add.</td>
                 </tr>
               </tbody>
             </table>
@@ -244,7 +245,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td>The entity to remove.</td>
+                  <td>Entity to remove.</td>
                 </tr>
               </tbody>
             </table>
@@ -262,11 +263,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">type</td>
-                  <td>The collision type.</td>
+                  <td>Collision type.</td>
                 </tr>
                 <tr>
                   <td>candidate</td>
-                  <td>The collision candidate.</td>
+                  <td>Collision candidate.</td>
                 </tr>
               </tbody>
             </table>
@@ -275,6 +276,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">const std::unordered_set&lt;<a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a6f1b1c276940e21d9574ad5cbc8a7c96" class="m-doc">Candidate</a>, <a href="structcubos_1_1engine_1_1BroadPhaseCollisions_1_1CandidateHash.html" class="m-doc">CandidateHash</a>&gt;&amp; cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1d8143539af8a6d2e0b2186a86e6d6d4" class="m-doc-self">candidates</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#ac36734dc751d2995fb1fa66429453786" class="m-doc">CollisionType</a> type) const</span></span>
             </h3>
+            <p>Gets the collision candidates for a specific collision type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -282,13 +284,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">type</td>
-                  <td>The collision type.</td>
+                  <td>Collision type.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The collision candidates for a specific collision type.</td>
+                  <td>Collision candidates.</td>
                 </tr>
               </tfoot>
             </table>

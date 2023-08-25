@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>SimplexCollider <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2collisions_2colliders_2simplex_8hpp.html">&lt;cubos/engine/collisions/colliders/simplex.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2collisions_2colliders_2simplex_8hpp.html">&lt;engine/collisions/colliders/simplex.hpp&gt;</a></div>
         </h1>
-        <p>Simplex Collider.</p>
+        <p>Component which adds a simplex collider to an entity.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -66,15 +67,15 @@
             <dt id="a40ecde31287bcbd94e26443edbf8e764">
               glm::vec3 <a href="#a40ecde31287bcbd94e26443edbf8e764" class="m-doc-self">offset</a>
             </dt>
-            <dd>The offset of the collider.</dd>
+            <dd>Offset of the collider.</dd>
             <dt id="af2e52da2344e8531a7d376fa0ee33b99">
               <a href="structcubos_1_1core_1_1geom_1_1Simplex.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Simplex</a> <a href="#af2e52da2344e8531a7d376fa0ee33b99" class="m-doc-self">shape</a>
             </dt>
-            <dd>The simplex shape of the collider.</dd>
+            <dd>Simplex shape of the collider.</dd>
             <dt>
               float <a href="#afc280761db2b2dcd13083a6a0b3cb78e" class="m-doc">margin</a>
             </dt>
-            <dd>The margin of the collider. Needed for collision stability.</dd>
+            <dd>Margin of the collider. Needed for collision stability.</dd>
           </dl>
         </section>
         <section>
@@ -83,7 +84,7 @@
             <h3>
               float cubos::<wbr />engine::<wbr />SimplexCollider::<wbr /><a href="#afc280761db2b2dcd13083a6a0b3cb78e" class="m-doc-self">margin</a>
             </h3>
-            <p>The margin of the collider. Needed for collision stability.</p>
+            <p>Margin of the collider. Needed for collision stability.</p>
 <p>The collider margin avoids collision errors by rounding off sharp corners. Shouldn&#x27;t be changed without good reason, it&#x27;s preferable to move the simplex corners to account for it.</p>
           </div></section>
         </section>

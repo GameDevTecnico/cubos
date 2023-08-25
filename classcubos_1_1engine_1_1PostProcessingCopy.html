@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,7 +46,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>PostProcessingCopy <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="copy__pass_8hpp.html">&lt;engine/renderer/pps/copy_pass.hpp&gt;</a></div>
         </h1>
+        <p>A simple post processing pass that copies the input texture to the output.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -59,14 +62,14 @@
             </li>
           </ul>
         </nav>
-<p>A simple post processing pass that copies the input texture to the output. This pass is thus useless and is only used as an example and for testing.</p>
+<p>This pass is useless and is only used as an example and for testing.</p>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1engine_1_1PostProcessingPass.html" class="m-doc">PostProcessingPass</a>
             </dt>
-            <dd></dd>
+            <dd>A generic post processing pass.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -76,7 +79,7 @@
               <span class="m-doc-wrap-bumper"><a href="#a4d827e87bf8d4f769282f2944880d145" class="m-doc">PostProcessingCopy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice,
               glm::uvec2 size)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -85,13 +88,13 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ad7028b2a37ca655778b728401739ab82" class="m-doc">resize</a>(</span><span class="m-doc-wrap">glm::uvec2 size) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Called when the window framebuffer size changes.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aa3d68ab2023e59604831e32ba64eaf74" class="m-doc">execute</a>(</span><span class="m-doc-wrap">std::map&lt;<a href="namespacecubos_1_1engine.html#ad9a27e05315b6fa51e4b34deadc5e2e4" class="m-doc">PostProcessingInput</a>, <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a>&gt;&amp; inputs,
+              <span class="m-doc-wrap-bumper">void <a href="#aa3d68ab2023e59604831e32ba64eaf74" class="m-doc">execute</a>(</span><span class="m-doc-wrap">std::map&lt;<a href="group__renderer-plugin.html#gad9a27e05315b6fa51e4b34deadc5e2e4" class="m-doc">PostProcessingInput</a>, <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a>&gt;&amp; inputs,
               <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> prev,
               <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> out) const <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Called each frame.</dd>
           </dl>
         </section>
         <section>
@@ -101,6 +104,7 @@
               <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />PostProcessingCopy::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4d827e87bf8d4f769282f2944880d145" class="m-doc-self">PostProcessingCopy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">core::<wbr />gl::<wbr />RenderDevice</a>&amp; renderDevice,
               glm::uvec2 size)</span></span>
             </h3>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -108,11 +112,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">renderDevice</td>
-                  <td>The render device to use.</td>
+                  <td>Render device to use.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the window.</td>
+                  <td>Size of the window.</td>
                 </tr>
               </tbody>
             </table>
@@ -121,6 +125,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PostProcessingCopy::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad7028b2a37ca655778b728401739ab82" class="m-doc-self">resize</a>(</span><span class="m-doc-wrap">glm::uvec2 size) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Called when the window framebuffer size changes.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -128,18 +133,18 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">size</td>
-                  <td>The new size of the window.</td>
+                  <td>New size of the window.</td>
                 </tr>
               </tbody>
             </table>
-<p>Called when the window framebuffer size changes.</p>
           </div></section>
           <section class="m-doc-details" id="aa3d68ab2023e59604831e32ba64eaf74"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PostProcessingCopy::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa3d68ab2023e59604831e32ba64eaf74" class="m-doc-self">execute</a>(</span><span class="m-doc-wrap">std::map&lt;<a href="namespacecubos_1_1engine.html#ad9a27e05315b6fa51e4b34deadc5e2e4" class="m-doc">PostProcessingInput</a>, <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a>&gt;&amp; inputs,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />PostProcessingCopy::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa3d68ab2023e59604831e32ba64eaf74" class="m-doc-self">execute</a>(</span><span class="m-doc-wrap">std::map&lt;<a href="group__renderer-plugin.html#gad9a27e05315b6fa51e4b34deadc5e2e4" class="m-doc">PostProcessingInput</a>, <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a>&gt;&amp; inputs,
               <a href="namespacecubos_1_1core_1_1gl.html#a0ae8900d7cc51e23143dd6c77cff24f7" class="m-doc">core::<wbr />gl::<wbr />Texture2D</a> prev,
               <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> out) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Called each frame.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -147,19 +152,19 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">inputs</td>
-                  <td>The available extra input textures. The reference is mutable so that a pass can provide its own inputs.</td>
+                  <td>Available extra input textures.</td>
                 </tr>
                 <tr>
                   <td>prev</td>
-                  <td>The resulting texture of the previous pass.</td>
+                  <td>Resulting texture of the previous pass.</td>
                 </tr>
                 <tr>
                   <td>out</td>
-                  <td>The framebuffer where the pass will render to.</td>
+                  <td>Framebuffer where the pass will render to.</td>
                 </tr>
               </tbody>
             </table>
-<p>Called each frame.</p>
+<p>The inputs argument is mutable to allow passes to their own inputs for future passes. This argument is used, for example, to pass the extra outputs of the deferred renderer to the post processing passes which might need them.</p>
           </div></section>
         </section>
       </div>

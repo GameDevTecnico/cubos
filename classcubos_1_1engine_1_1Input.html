@@ -26,8 +26,9 @@
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
             <li><a href="namespaces.html">Namespaces</a></li>
+            <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="3">
+          <ol class="m-col-t-6 m-col-m-none" start="4">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,20 +46,35 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Input <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="input_8hpp.html">&lt;cubos/engine/input/input.hpp&gt;</a></div>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="input_8hpp.html">&lt;engine/input/input.hpp&gt;</a></div>
         </h1>
-        <p>Used to store the input bindings for multiple players and update its state accordingly as events are received.</p>
+        <p>Resource which stores the input bindings for multiple players.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+<p>Its state is updated accordingly as events are received by the <a href="group__input-plugin.html" class="m-doc">Input</a>.</p>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="add9b7cb5a7abfb9e77f6812ba64918bc">
+              using <a href="#add9b7cb5a7abfb9e77f6812ba64918bc" class="m-doc-self">Key</a> = <a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>
+            </dt>
+            <dd>Alias for <a href="namespacecubos_1_1core_1_1io.html#a4c20baefc9a6688f17f283b5aa272341" class="m-doc">core::<wbr />io::<wbr />Key</a>.</dd>
+            <dt id="af3179c821d0580b3c528dfad688b0465">
+              using <a href="#af3179c821d0580b3c528dfad688b0465" class="m-doc-self">Modifiers</a> = <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>
+            </dt>
+            <dd>Alias for <a href="namespacecubos_1_1core_1_1io.html#ad9bb6ed019dd984f94ece386e31f4493" class="m-doc">core::<wbr />io::<wbr />Modifiers</a>.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -69,36 +85,36 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a73b247b43a87102142d71315c38fadc7" class="m-doc">clear</a>(</span><span class="m-doc-wrap">int player)</span>
             </dt>
-            <dd></dd>
+            <dd>Clears all bindings for a specific player.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aab59755d98f0b9372fd947531809b81b" class="m-doc">bind</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1InputBindings.html" class="m-doc">InputBindings</a>&amp; bindings,
               int player = 0)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the bindings for a specific player.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a10c7543ffde9d8d2dbac868e266849e6" class="m-doc">pressed</a>(</span><span class="m-doc-wrap">const char* actionName,
               int player = 0) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Gets an action state for a specific player.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a5e2e2aa6f0d63286725de27d3da983a1" class="m-doc">axis</a>(</span><span class="m-doc-wrap">const char* axisName,
               int player = 0) const -&gt; float</span>
             </dt>
-            <dd></dd>
+            <dd>Gets an axis value for a specific player.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#abec1956acab387c191f0ae03a5a94bde" class="m-doc">handle</a>(</span><span class="m-doc-wrap">const <a href="namespacecubos_1_1core_1_1io.html#abbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
               const <a href="structcubos_1_1core_1_1io_1_1KeyEvent.html" class="m-doc">core::<wbr />io::<wbr />KeyEvent</a>&amp; event)</span>
             </dt>
-            <dd></dd>
+            <dd>Handle a key event.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ad35f90682418d3e7b772ece638048f43" class="m-doc">handle</a>(</span><span class="m-doc-wrap">const <a href="namespacecubos_1_1core_1_1io.html#abbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
               const <a href="namespacecubos_1_1core_1_1io.html#ac246d098dc508ff511ed8919c61a6a40" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a>&amp; event)</span>
             </dt>
-            <dd></dd>
+            <dd>Handle all other events - discards them.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2af891e2f27ffc3f97960cf7f68e2703" class="m-doc">bindings</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_map&lt;int, <a href="classcubos_1_1engine_1_1InputBindings.html" class="m-doc">InputBindings</a>&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the bindings for each player.</dd>
           </dl>
         </section>
         <section>
@@ -107,6 +123,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a73b247b43a87102142d71315c38fadc7" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">int player)</span></span>
             </h3>
+            <p>Clears all bindings for a specific player.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -114,17 +131,17 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">player</td>
-                  <td>The player whose bindings will be cleared.</td>
+                  <td>Player whose bindings will be cleared.</td>
                 </tr>
               </tbody>
             </table>
-<p>Clears all bindings for a specific player.</p>
           </div></section>
           <section class="m-doc-details" id="aab59755d98f0b9372fd947531809b81b"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aab59755d98f0b9372fd947531809b81b" class="m-doc-self">bind</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1InputBindings.html" class="m-doc">InputBindings</a>&amp; bindings,
               int player = 0)</span></span>
             </h3>
+            <p>Sets the bindings for a specific player.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -132,21 +149,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">bindings</td>
-                  <td>The bindings to set.</td>
+                  <td>Bindings to set.</td>
                 </tr>
                 <tr>
                   <td>player</td>
-                  <td>The player whose bindings will be set.</td>
+                  <td>Player whose bindings will be set.</td>
                 </tr>
               </tbody>
             </table>
-<p>Sets the bindings for a specific player.</p>
           </div></section>
           <section class="m-doc-details" id="a10c7543ffde9d8d2dbac868e266849e6"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a10c7543ffde9d8d2dbac868e266849e6" class="m-doc-self">pressed</a>(</span><span class="m-doc-wrap">const char* actionName,
               int player = 0) const</span></span>
             </h3>
+            <p>Gets an action state for a specific player.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -154,27 +171,27 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">actionName</td>
-                  <td>The name of the action.</td>
+                  <td>Name of the action.</td>
                 </tr>
                 <tr>
                   <td>player</td>
-                  <td>The player whose action state will be retrieved.</td>
+                  <td>Player whose action state will be retrieved.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if the action exists and is pressed, false otherwise.</td>
+                  <td>Whether the action exists and is pressed.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets an action state for a specific player.</p>
           </div></section>
           <section class="m-doc-details" id="a5e2e2aa6f0d63286725de27d3da983a1"><div>
             <h3>
               <span class="m-doc-wrap-bumper">float cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5e2e2aa6f0d63286725de27d3da983a1" class="m-doc-self">axis</a>(</span><span class="m-doc-wrap">const char* axisName,
               int player = 0) const</span></span>
             </h3>
+            <p>Gets an axis value for a specific player.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -182,27 +199,27 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">axisName</td>
-                  <td>The name of the axis.</td>
+                  <td>Name of the axis.</td>
                 </tr>
                 <tr>
                   <td>player</td>
-                  <td>The player whose axis value will be retrieved.</td>
+                  <td>Player whose axis value will be retrieved.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The axis value if the axis exists, 0.0 otherwise.</td>
+                  <td>Axis value if the axis exists, 0.0 otherwise.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets an axis value for a specific player.</p>
           </div></section>
           <section class="m-doc-details" id="abec1956acab387c191f0ae03a5a94bde"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abec1956acab387c191f0ae03a5a94bde" class="m-doc-self">handle</a>(</span><span class="m-doc-wrap">const <a href="namespacecubos_1_1core_1_1io.html#abbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
               const <a href="structcubos_1_1core_1_1io_1_1KeyEvent.html" class="m-doc">core::<wbr />io::<wbr />KeyEvent</a>&amp; event)</span></span>
             </h3>
+            <p>Handle a key event.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -210,21 +227,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">window</td>
-                  <td>The window that received the event.</td>
+                  <td>Window that received the event.</td>
                 </tr>
                 <tr>
                   <td>event</td>
-                  <td>The key event.</td>
+                  <td>Key event.</td>
                 </tr>
               </tbody>
             </table>
-<p>Handle a key event.</p>
           </div></section>
           <section class="m-doc-details" id="ad35f90682418d3e7b772ece638048f43"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad35f90682418d3e7b772ece638048f43" class="m-doc-self">handle</a>(</span><span class="m-doc-wrap">const <a href="namespacecubos_1_1core_1_1io.html#abbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
               const <a href="namespacecubos_1_1core_1_1io.html#ac246d098dc508ff511ed8919c61a6a40" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a>&amp; event)</span></span>
             </h3>
+            <p>Handle all other events - discards them.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -232,25 +249,26 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">window</td>
-                  <td>The window that received the event.</td>
+                  <td>Window that received the event.</td>
                 </tr>
                 <tr>
                   <td>event</td>
-                  <td>The event to discard.</td>
+                  <td>Event to discard.</td>
                 </tr>
               </tbody>
             </table>
-<p>Discard remaining events.</p>
+<p>This is method exists so that <code>std::visit</code> can be used with <a href="namespacecubos_1_1core_1_1io.html#ac246d098dc508ff511ed8919c61a6a40" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a> on <a href="classcubos_1_1engine_1_1Input.html#abec1956acab387c191f0ae03a5a94bde" class="m-doc">handle()</a>.</p>
           </div></section>
           <section class="m-doc-details" id="a2af891e2f27ffc3f97960cf7f68e2703"><div>
             <h3>
               <span class="m-doc-wrap-bumper">const std::unordered_map&lt;int, <a href="classcubos_1_1engine_1_1InputBindings.html" class="m-doc">InputBindings</a>&gt;&amp; cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2af891e2f27ffc3f97960cf7f68e2703" class="m-doc-self">bindings</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the bindings for each player.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The bindings for each player.</td>
+                  <td>Bindings for each player.</td>
                 </tr>
               </tfoot>
             </table>
