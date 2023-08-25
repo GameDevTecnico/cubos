@@ -1,5 +1,6 @@
 /// @file
-/// @brief Contains the class for the Box shape.
+/// @brief Class @ref cubos::core::geom::Box.
+/// @ingroup core-geom
 
 #pragma once
 
@@ -10,13 +11,14 @@
 
 namespace cubos::core::geom
 {
-    /// @brief Box shape.
+    /// @brief Represents a box shape.
+    /// @ingroup core-geom
     struct Box
     {
-        glm::vec3 halfSize{0.5f}; ///< The half size of the box.
+        glm::vec3 halfSize{0.5f}; ///< Half size of the box.
 
         /// @brief Computes two opposite corners of the box on the major diagonal.
-        /// @param corners The array to store the two corners in.
+        /// @param corners Array to store the two corners in.
         void diag(glm::vec3 corners[2]) const
         {
             corners[0] = {-halfSize.x, -halfSize.y, -halfSize.z};
@@ -24,7 +26,7 @@ namespace cubos::core::geom
         }
 
         /// @brief Computes four corners of the box, one for each diagonal.
-        /// @param corners The array to store the three corners in.
+        /// @param corners Array to store the three corners in.
         void corners4(glm::vec3 corners[4]) const
         {
             corners[0] = {halfSize.x, -halfSize.y, -halfSize.z};
@@ -33,8 +35,9 @@ namespace cubos::core::geom
             corners[3] = {halfSize.x, halfSize.y, halfSize.z};
         }
 
-        /// @brief Computes the eight corners of the box, opposite corners are adjacent in the array.
-        /// @param corners The array to store the eight corners in.
+        /// @brief Computes the eight corners of the box, opposite corners are adjacent in the
+        /// array.
+        /// @param corners Array to store the eight corners in.
         void corners(glm::vec3 corners[8]) const
         {
             corners[0] = {-halfSize.x, -halfSize.y, -halfSize.z};
@@ -51,10 +54,6 @@ namespace cubos::core::geom
 
 namespace cubos::core::data
 {
-    /// Serializes a box.
-    /// @param ser The serializer to use.
-    /// @param box The box to serialize.
-    /// @param name The name of the plane.
     inline void serialize(Serializer& ser, const geom::Box& box, const char* name)
     {
         ser.beginObject(name);
@@ -62,9 +61,6 @@ namespace cubos::core::data
         ser.endObject();
     }
 
-    /// Deserializes a box.
-    /// @param des The deserializer to use.
-    /// @param box The box to deserialize.
     inline void deserialize(Deserializer& des, geom::Box& box)
     {
         des.beginObject();
