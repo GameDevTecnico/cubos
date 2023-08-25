@@ -25,8 +25,8 @@ namespace cubos::core::ecs
     /// bit of a mess. Most of the exposed types are internal to the documentation, and thus it can
     /// get hard to navigate (TODO #377).
     ///
-    /// @note Check out the @ref guide-ecs "ECS guide" for a more in-depth explanation of this
-    /// module.
+    /// @note Check out the @ref features-ecs "ECS feature guide" for an in-depth explanation of
+    /// what an ECS is and how it can be used.
     ///
     /// ## Data types
     /// - @ref World - stores entities, components and resources, can be queried.
@@ -35,16 +35,22 @@ namespace cubos::core::ecs
     ///   Commands.
     ///
     /// ## System argument types
-    /// - @ref Read - used to read resource data.
-    /// - @ref Write - used to write resource data.
+    /// - @ref Read "Read<R>" - used to read resource data of type @p R.
+    /// - @ref Write "Write<R>" - used to write resource data of type @p R.
+    /// - @ref Read "Read<World>" - used to read the world directly (not recommended, ruins
+    ///   parallelism, prefer @ref Commands).
+    /// - @ref Write "Write<World>" - used to write the world directly (not recommended, ruins
+    ///   parallelism, prefer @ref Commands).
     /// - @ref Commands - used to queue entities to be created, destroyed and other operations.
-    /// - @ref EventReader - used to read events sent from other systems.
-    /// - @ref EventWriter - used to send events to other systems.
-    /// - @ref Query - used to query the world for entities with certain components.
+    /// - @ref EventReader "EventReader<E>" - reads events of type @p E sent from other systems.
+    /// - @ref EventWriter "EventWriter<E>" - sends events of type @p E to other systems.
+    /// - @ref Query "Query<Args...>" - queries the world for entities which match its arguments.
     ///
     /// ## Query argument types
-    /// - @ref Read - matches entities with the specified component, read-only access.
-    /// - @ref Write - matches entities with the specified component, write access.
-    /// - @ref OptRead - matches all entities, read-only access when the component is present.
-    /// - @ref OptWrite - matches all entities, write access when the component is present.
+    /// - @ref Read "Read<C>" - matches entities with the component @p C, read-only access.
+    /// - @ref Write "Write<C>" - matches entities with the component @p C, write access.
+    /// - @ref OptRead "OptRead<C>" - matches all entities, read-only access when the component
+    ///   @p C is present.
+    /// - @ref OptWrite "OptWrite<C>" - matches all entities, write access when the component
+    ///   @p C is present.
 }

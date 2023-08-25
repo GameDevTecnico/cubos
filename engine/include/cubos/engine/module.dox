@@ -1,0 +1,24 @@
+/// @dir
+/// @brief @ref engine module.
+
+#pragma once
+
+/// @namespace cubos::engine
+/// @brief @ref engine module.
+
+namespace cubos::engine
+{
+    /// @defgroup engine Engine
+    /// @brief @b CUBOS. engine library.
+    ///
+    /// The engine library is built on top of the @ref core "core library" and contains code
+    /// exclusive to game execution. This includes the main loop, asset management, rendering and
+    /// physics. It is built around the @ref Cubos class and designed to be as modular as possible.
+    /// Each sub-module corresponds to a plugin, or a set of plugins.
+    ///
+    /// The library re-exports some of the @ref core "core library" functionality for convenience
+    /// such that the user doesn't have to use the @ref cubos::core namespace directly very often.
+    ///
+    /// @see Take a look at the @ref features-plugins "plugins" feature guide for more information
+    /// on what are plugins and how they work.
+} // namespace cubos::engine

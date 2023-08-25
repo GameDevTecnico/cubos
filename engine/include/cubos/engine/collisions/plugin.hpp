@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Collisions plugin directory.
+/// @brief @ref collisions-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -15,8 +15,8 @@
 namespace cubos::engine
 {
     /// @defgroup collisions-plugin Collisions
-    /// @ingroup plugins
-    /// @brief Adds collision detection to CUBOS.
+    /// @ingroup engine
+    /// @brief Adds collision detection to @b CUBOS.
     ///
     /// ## Components
     /// - @ref BoxCollider - holds the box collider data.
@@ -43,7 +43,7 @@ namespace cubos::engine
     /// - @ref transform-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class.
+    /// @param cubos @b CUBOS. main class.
     /// @ingroup collisions-plugin
     void collisionsPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -119,6 +119,7 @@ namespace cubos::core::io
                                      ResizeEvent, TextEvent>;
 
     /// @brief Handle to a window.
+    /// @see @ref BaseWindow @copybrief BaseWindow
     /// @ingroup core-io
     using Window = std::shared_ptr<BaseWindow>;
 
@@ -131,7 +132,8 @@ namespace cubos::core::io
 
     /// @brief Interface used to wrap low-level window API implementations.
     ///
-    /// Handles input events and creates a @ref gl::RenderDevice.
+    /// Allows polling of input events and creates a @ref gl::RenderDevice for rendering to the
+    /// window.
     ///
     /// @ingroup core-io
     class BaseWindow

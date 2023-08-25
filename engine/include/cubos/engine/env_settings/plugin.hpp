@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Environment settings plugin directory.
+/// @brief @ref env-settings-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -12,7 +12,7 @@
 namespace cubos::engine
 {
     /// @defgroup env-settings-plugin Environment settings
-    /// @ingroup plugins
+    /// @ingroup engine
     /// @brief Loads settings from the command line arguments.
     ///
     /// This plugin needs the Arguments resource, and thus, the constructor @ref Cubos::Cubos(int, char**) must be
@@ -23,7 +23,7 @@ namespace cubos::engine
     /// - `cubos.settings.env` - the settings are loaded.
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup env-settings-plugin
     void envSettingsPlugin(Cubos& cubos);
 } // namespace cubos::engine

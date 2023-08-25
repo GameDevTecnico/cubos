@@ -12,4 +12,7 @@ namespace cubos::core::ui
     /// @defgroup core-ui User Interface
     /// @ingroup core
     /// @brief Provides `ImGui` integration and general UI utilities.
+    ///
+    /// @note @b CUBOS. UI support is built on top of
+    /// [*Dear ImGui*](https://github.com/ocornut/imgui).
 } // namespace cubos::core::ui

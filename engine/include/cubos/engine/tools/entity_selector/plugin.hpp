@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Entity selector plugin directory.
+/// @brief @ref entity-selector-tool-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -32,7 +32,7 @@ namespace cubos::engine::tools
     };
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup entity-selector-tool-plugin
     void entitySelectorPlugin(Cubos& cubos);
 } // namespace cubos::engine::tools

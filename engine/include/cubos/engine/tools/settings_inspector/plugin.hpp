@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Settings inspector plugin directory.
+/// @brief @ref settings-inspector-tool-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -19,7 +19,7 @@ namespace cubos::engine::tools
     /// - @ref imgui-plugin
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup settings-inspector-tool-plugin
     void settingsInspectorPlugin(Cubos& cubos);
 } // namespace cubos::engine::tools

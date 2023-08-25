@@ -1,5 +1,5 @@
 /// @dir
-/// @brief File settings plugin directory.
+/// @brief @ref file-settings-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -12,7 +12,7 @@
 namespace cubos::engine
 {
     /// @defgroup file-settings-plugin File settings
-    /// @ingroup plugins
+    /// @ingroup engine
     /// @brief Loads settings from a file.
     ///
     /// The settings file must be a JSON file. If the file does not exist or can't be parsed, the
@@ -26,7 +26,7 @@ namespace cubos::engine
     /// - `cubos.settings.file` - the settings are loaded.
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup file-settings-plugin
     void fileSettingsPlugin(Cubos& cubos);
 } // namespace cubos::engine

@@ -1,5 +1,5 @@
 /// @dir
-/// @brief Asset explorer plugin directory.
+/// @brief @ref asset-explorer-tool-plugin plugin directory.
 
 /// @file
 /// @brief Plugin entry point.
@@ -29,7 +29,7 @@ namespace cubos::engine::tools
     };
 
     /// @brief Plugin entry function.
-    /// @param cubos CUBOS. main class
+    /// @param cubos @b CUBOS. main class
     /// @ingroup asset-explorer-tool-plugin
     void assetExplorerPlugin(Cubos& cubos);
 } // namespace cubos::engine::tools

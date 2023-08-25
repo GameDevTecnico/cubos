@@ -706,6 +706,11 @@ namespace cubos::core::gl
     };
 
     /// @brief Interface used to wrap low-level rendering APIs such as OpenGL.
+    ///
+    /// Using this interface, the engine never directly interacts with *OpenGL* or any other
+    /// low-level rendering API. This allows use to use different rendering APIs without having
+    /// to change the engine code, which is useful for porting the engine to different platforms.
+    ///
     /// @see @ref io::Window is responsible for creating a render device for itself.
     /// @ingroup core-gl
     class RenderDevice
