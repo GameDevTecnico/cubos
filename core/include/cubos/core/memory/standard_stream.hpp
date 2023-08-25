@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::memory::StandardStream.
+/// @ingroup core-memory
+
 #pragma once
 
 #include <cstdio>
@@ -6,15 +10,21 @@
 
 namespace cubos::core::memory
 {
-    /// Stream implementation for stdio.
+    /// @brief Stream implementation which wraps a `libc` file pointer.
+    /// @ingroup core-memory
     class StandardStream : public Stream
     {
     public:
-        /// @param file Stdio file to read/write from.
+        ~StandardStream() override;
+
+        /// @brief Constructs.
+        /// @param file File to read/write from.
         /// @param close Should the file be closed when this stream is destructed?
         StandardStream(FILE* file, bool close = false);
-        StandardStream(StandardStream&& /*other*/) noexcept;
-        ~StandardStream() override;
+
+        /// @brief Move constructs.
+        /// @param other Moved stream.
+        StandardStream(StandardStream&& other) noexcept;
 
         std::size_t read(void* data, std::size_t size) override;
         std::size_t write(const void* data, std::size_t size) override;
@@ -24,7 +34,7 @@ namespace cubos::core::memory
         char peek() const override;
 
     private:
-        FILE* mFile; ///< Stdio file to read/write from.
+        FILE* mFile; ///< File to read/write from.
         bool mClose; ///< Should the file be closed when this stream is destructed?
     };
 } // namespace cubos::core::memory

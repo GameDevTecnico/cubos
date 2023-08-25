@@ -1,32 +1,47 @@
+/// @file
+/// @brief Class @ref cubos::core::memory::BufferStream.
+/// @ingroup core-memory
+
 #pragma once
 
 #include <cubos/core/memory/stream.hpp>
 
 namespace cubos::core::memory
 {
-    /// Implements a stream that writes to/reads from a buffer.
+    /// @brief Stream implementation which writes to/reads from a buffer.
+    /// @ingroup core-memory
     class BufferStream : public Stream
     {
     public:
-        /// @param buffer The buffer to read/write from.
-        /// @param size The size of the buffer.
+        ~BufferStream() override;
+
+        /// @brief Constructs using an existing buffer.
+        /// @param buffer Buffer to read/write from.
+        /// @param size Size of the buffer.
+        /// @param readOnly Whether the buffer is read-only.
         BufferStream(void* buffer, std::size_t size, bool readOnly = false);
 
-        /// @param buffer The buffer to read/write from.
-        /// @param size The size of the buffer.
+        /// @brief Constructs using a read-only buffer.
+        /// @param buffer Buffer to read/write from.
+        /// @param size Size of the buffer.
         BufferStream(const void* buffer, std::size_t size);
 
-        /// Initializes a buffer stream with a new buffer, initially of the given size.
-        /// When initialized this way, the buffer stream will own the buffer and will delete it when it is destroyed.
-        /// It will expand the buffer when needed.
-        /// @param size The size of the buffer.
+        /// @brief Constructs using a new buffer, managed internally and which grows as needed.
+        /// @param size Initial size of the buffer.
         BufferStream(std::size_t size = 16);
 
-        ~BufferStream() override;
-        BufferStream(const BufferStream& /*other*/);
-        BufferStream(BufferStream&& /*other*/) noexcept;
+        /// @brief Constructs a copy of another buffer stream. If the given buffer stream owns its
+        /// buffer, the copy will also create its own buffer. Otherwise, it will share the buffer
+        /// with the original.
+        /// @param other Buffer stream to copy.
+        BufferStream(const BufferStream& other);
 
-        /// Gets the buffer of this stream.
+        /// @brief Move constructs.
+        /// @param other Buffer stream to move.
+        BufferStream(BufferStream&& other) noexcept;
+
+        /// @brief Gets the buffer of this stream.
+        /// @return Buffer.
         const void* getBuffer() const;
 
         // Method implementations.

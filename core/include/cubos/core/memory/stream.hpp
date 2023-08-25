@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::memory::Stream.
+/// @ingroup core-memory
+
 #pragma once
 
 #include <cstddef>
@@ -6,7 +10,8 @@
 
 namespace cubos::core::memory
 {
-    /// Seek origin.
+    /// @brief Stream seek origin.
+    /// @ingroup core-memory
     enum class SeekOrigin
     {
         Begin,
@@ -14,184 +19,195 @@ namespace cubos::core::memory
         End
     };
 
-    /// Abstract class for memory streams.
+    /// @brief Interface class for memory streams. Abstracts away sources or destinations of data.
+    /// @ingroup core-memory
     class Stream
     {
     public:
-        Stream() = default;
-        Stream(Stream&&) = default;
-        Stream(const Stream&) = delete;
         virtual ~Stream() = default;
 
-        static Stream& stdIn;  ///< Stream wrapper for stdin.
-        static Stream& stdOut; ///< Stream wrapper for stdout.
-        static Stream& stdErr; ///< Stream wrapper for stderr.
+        /// @brief Constructs.
+        Stream() = default;
 
-        /// Reads data from the stream.
-        /// @param data The buffer to read data into.
-        /// @param size The size of the buffer.
-        /// @return The number of bytes read.
+        /// @brief Move constructs.
+        Stream(Stream&&) = default;
+
+        /// @brief Forbid copy construction.
+        Stream(const Stream&) = delete;
+
+        static Stream& stdIn;  ///< Stream wrapper for `stdin`.
+        static Stream& stdOut; ///< Stream wrapper for `stdout`.
+        static Stream& stdErr; ///< Stream wrapper for `stderr`.
+
+        /// @brief Reads data from the stream.
+        /// @param data Buffer to read data into.
+        /// @param size Size of the buffer.
+        /// @return Number of bytes read.
         virtual std::size_t read(void* data, std::size_t size) = 0;
 
-        /// Writes data to the stream.
-        /// @param data The buffer to write data from.
-        /// @param size The size of the buffer.
-        /// @return The number of bytes written.
+        /// @brief Writes data to the stream.
+        /// @param data Buffer to write data from.
+        /// @param size Size of the buffer.
+        /// @return Number of bytes written.
         virtual std::size_t write(const void* data, std::size_t size) = 0;
 
-        /// Gets the current position in the stream.
-        /// @return The current position in the stream, or SIZE_MAX if the position is unknown.
+        /// @brief Gets the current position in the stream.
+        /// @return Current position in the stream, or SIZE_MAX if the position is unknown.
         virtual std::size_t tell() const = 0;
 
-        /// Seeks to a position in the stream.
-        /// @param offset The offset to seek to.
-        /// @param origin The origin of the offset.
+        /// @brief Seeks to a position in the stream.
+        /// @param offset Offset to seek to.
+        /// @param origin Origin of the offset.
         virtual void seek(ptrdiff_t offset, SeekOrigin origin) = 0;
 
-        /// Checks if the stream still has content to read.
-        /// @return True if the stream has no more content to read, false otherwise.
+        /// @brief Checks if the stream still has content to read.
+        /// @return Whether the stream has reached the end.
         virtual bool eof() const = 0;
 
-        /// Peeks one byte from the stream.
-        /// @return The byte peeked.
+        /// @brief Peeks one byte from the stream.
+        /// @return Peeked byte.
         virtual char peek() const = 0;
 
-        /// Gets one byte from the stream.
-        /// @return The byte read.
+        /// @brief Gets one byte from the stream.
+        /// @return Read byte.
         char get();
 
-        /// Puts one byte into the stream.
-        /// @param c The byte to put.
+        /// @brief Puts one byte into the stream.
+        /// @param c Byte to put.
         void put(char c);
 
-        /// Prints a signed integer to the stream.
-        /// @tparam T The type of the integer.
-        /// @param value The value to print.
-        /// @param base The base to use.
+        /// @brief Prints a signed integer to the stream.
+        /// @tparam T Type of the integer.
+        /// @param value Value to print.
+        /// @param base Base to use.
         template <typename T>
         requires(::std::is_integral_v<T>&& ::std::is_signed_v<T>) void print(T value, std::size_t base = 10);
 
-        /// Prints a signed integer to the stream.
-        /// @tparam T The type of the integer.
-        /// @param value The value to print.
-        /// @param base The base to use.
+        /// @brief Prints a signed integer to the stream.
+        /// @tparam T Integer type.
+        /// @param value Value to print.
+        /// @param base Base to use.
         template <typename T>
         requires(::std::is_integral_v<T> && !::std::is_signed_v<T>) inline void print(T value, std::size_t base = 10);
 
-        /// Prints a 64 bit signed integer to the stream.
-        /// @param value The value to print.
-        /// @param base The base to use.
+        /// @brief Prints a 64 bit signed integer to the stream.
+        /// @param value Value to print.
+        /// @param base Base to use.
         void print(int64_t value, std::size_t base = 10);
 
-        /// Prints a 64 bit unsigned integer to the stream.
-        /// @param value The value to print.
-        /// @param base The base to use.
+        /// @brief Prints a 64 bit unsigned integer to the stream.
+        /// @param value Value to print.
+        /// @param base Base to use.
         void print(uint64_t value, std::size_t base = 10);
 
-        /// Prints a float to the stream.
-        /// @param value The value to print.
-        /// @param decimalPlaces The number of decimal places to print.
+        /// @brief Prints a float to the stream.
+        /// @param value Value to print.
+        /// @param decimalPlaces Number of decimal places to print.
         void print(float value, std::size_t decimalPlaces = 4);
 
-        /// Prints a double to the stream.
-        /// @param value The value to print.
-        /// @param decimalPlaces The number of decimal places to print.
+        /// @brief Prints a double to the stream.
+        /// @param value Value to print.
+        /// @param decimalPlaces Number of decimal places to print.
         void print(double value, std::size_t decimalPlaces = 4);
 
-        /// Prints a string to the stream.
-        /// @param str The value to print.
+        /// @brief Prints a string to the stream.
+        /// @param str String to print.
         void print(const char* str);
 
-        /// Prints a string to the stream.
-        /// @param str The string to print.
-        /// @param size The size of the string.
+        /// @brief Prints a string to the stream.
+        /// @param str String to print.
+        /// @param size Size of the string.
         void print(const char* str, std::size_t size);
 
-        /// Prints a string to the stream.
-        /// @param str The value to print.
+        /// @brief Prints a string to the stream.
+        /// @param str Value to print.
         void print(const ::std::string& str);
 
-        /// Prints a formatted string the stream.
-        /// Example usage:
+        /// @brief Prints a formatted string the stream.
         ///
+        /// ## Usage
+        ///
+        /// @code{.cpp}
         ///     stream.printf("Hello, {}!\n", "world");
         ///     stream.printf("{} + {} = {}\n", 1, 2, 3);
         ///     stream.printf("\\{} {}\n", 1, 2); // This will print "{} 2"
+        /// @endcode
         ///
         /// @tparam T Type of the first argument.
-        /// @tparam TArgs The types of the remaining arguments.
+        /// @tparam TArgs Types of the remaining arguments.
+        /// @param fmt Format string.
         /// @param arg First argument to print.
-        /// @param args The arguments to print.
+        /// @param args Remaining arguments to print.
         template <typename T, typename... TArgs>
         void printf(const char* fmt, T arg, TArgs... args);
 
-        /// Formatted print recursion tail function.
-        /// @param fmt The remainder format string.
+        /// @brief Prints a string to the stream.
+        /// @note This overload is used to terminate the recursion in @ref printf().
+        /// @param fmt Format string.
         void printf(const char* fmt);
 
-        /// Parses a 8 bit signed integer from the stream.
-        /// @param value Parsed value.
-        /// @param base The base to use.
+        /// @brief Parses a 8 bit signed integer from the stream.
+        /// @param[out] value Parsed value.
+        /// @param base Base to use.
         void parse(int8_t& value, std::size_t base = 10);
 
-        /// Parses a 16 bit signed integer from the stream.
-        /// @param value Parsed value.
-        /// @param base The base to use.
+        /// @brief Parses a 16 bit signed integer from the stream.
+        /// @param[out] value Parsed value.
+        /// @param base Base to use.
         void parse(int16_t& value, std::size_t base = 10);
 
-        /// Parses a 32 bit signed integer from the stream.
-        /// @param value Parsed value.
-        /// @param base The base to use.
+        /// @brief Parses a 32 bit signed integer from the stream.
+        /// @param[out] value Parsed value.
+        /// @param base Base to use.
         void parse(int32_t& value, std::size_t base = 10);
 
-        /// Parses a 64 bit signed integer from the stream.
-        /// @param value Parsed value.
-        /// @param base The base to use.
+        /// @brief Parses a 64 bit signed integer from the stream.
+        /// @param[out] value Parsed value.
+        /// @param base Base to use.
         void parse(int64_t& value, std::size_t base = 10);
 
-        /// Parses a 8 bit unsigned integer from the stream.
-        /// @param value Parsed value.
-        /// @param base The base to use.
+        /// @brief Parses a 8 bit unsigned integer from the stream.
+        /// @param[out] value Parsed value.
+        /// @param base Base to use.
         void parse(uint8_t& value, std::size_t base = 10);
 
-        /// Parses a 16 bit unsigned integer from the stream.
-        /// @param value Parsed value.
-        /// @param base The base to use.
+        /// @brief Parses a 16 bit unsigned integer from the stream.
+        /// @param[out] value Parsed value.
+        /// @param base Base to use.
         void parse(uint16_t& value, std::size_t base = 10);
 
-        /// Parses a 32 bit unsigned integer from the stream.
-        /// @param value Parsed value.
-        /// @param base The base to use.
+        /// @brief Parses a 32 bit unsigned integer from the stream.
+        /// @param[out] value Parsed value.
+        /// @param base Base to use.
         void parse(uint32_t& value, std::size_t base = 10);
 
-        /// Parses a 64 bit unsigned integer from the stream.
-        /// @param value Parsed value.
-        /// @param base The base to use.
+        /// @brief Parses a 64 bit unsigned integer from the stream.
+        /// @param[out] value Parsed value.
+        /// @param base Base to use.
         void parse(uint64_t& value, std::size_t base = 10);
 
-        /// Parses a float from the stream.
-        /// @param value Parsed value.
+        /// @brief Parses a float from the stream.
+        /// @param[out] value Parsed value.
         void parse(float& value);
 
-        /// Parses a double from the stream.
-        /// @param value Parsed value.
+        /// @brief Parses a double from the stream.
+        /// @param[out] value Parsed value.
         void parse(double& value);
 
-        /// Reads a string from the stream until the terminator (or '\0') is found.
-        /// If terminator is nullptr reads a string until '\0' is found.
-        /// @param str The string to read.
-        /// @param terminator The terminator to use.
+        /// @brief Reads a string from the stream until the @p terminator (or `\0`) is found.
+        /// @param[out] str Read string.
+        /// @param terminator Optional terminator to use.
         void readUntil(std::string& str, const char* terminator);
 
-        /// Reads from the stream until the terminator (or '\0') is found.
-        /// @param buffer The buffer to read into.
-        /// @param size The size of the buffer.
-        /// @param terminator The terminator to use.
-        /// @return The number of bytes read.
+        /// @brief Reads a string from the stream until the @p terminator (or `\0`) is found.
+        /// @param buffer Buffer to read into.
+        /// @param size Size of the buffer.
+        /// @param terminator Optional terminator to use.
+        /// @return Number of bytes read.
         std::size_t readUntil(char* buffer, std::size_t size, const char* terminator);
 
-        /// Ignores a number of bytes from the stream.
-        /// @param size The number of bytes to ignore.
+        /// @brief Ignores a number of bytes from the stream.
+        /// @param size Number of bytes to ignore.
         void ignore(std::size_t size);
     };
 
