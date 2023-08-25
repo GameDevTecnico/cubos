@@ -1,0 +1,19 @@
+/// @dir
+/// @brief @ref cubos::core::gl namespace.
+
+#pragma once
+
+/// @namespace cubos::core::gl
+/// @brief Graphics namespace.
+/// @ingroup core-gl
+
+/// @namespace cubos::core::gl::impl
+/// @brief Namespace to store the abstract types implemented by the render device implementations.
+/// @ingroup core-gl
+
+namespace cubos::core::gl
+{
+    /// @defgroup core-gl Graphics
+    /// @ingroup core
+    /// @brief Provides a graphics API abstraction and some voxel utilities.
+} // namespace cubos::core::gl

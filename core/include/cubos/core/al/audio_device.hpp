@@ -19,13 +19,13 @@ namespace cubos::core::al
     } // namespace impl
 
     /// @brief Handle to an audio buffer.
-    /// @see impl::Buffer Audio buffer interface.
+    /// @see impl::Buffer - audio buffer interface.
     /// @see AudioDevice::createBuffer()
     /// @ingroup core-audio
     using Buffer = std::shared_ptr<impl::Buffer>;
 
     /// @brief Handle to an audio source.
-    /// @see impl::Source Audio source interface.
+    /// @see impl::Source - audio source interface.
     /// @see AudioDevice::createSource()
     /// @ingroup core-audio
     using Source = std::shared_ptr<impl::Source>;

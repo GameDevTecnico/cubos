@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::gl::Grid.
+/// @ingroup core-gl
+
 #pragma once
 
 #include <vector>
@@ -15,65 +19,71 @@ namespace cubos::core::gl
 
 namespace cubos::core::data
 {
-    /// Serializes a voxel grid.
-    /// @param serializer The serializer to use.
-    /// @param grid The voxel grid to serialize.
-    /// @param name The name of the voxel grid.
     void serialize(Serializer& serializer, const gl::Grid& grid, const char* name);
-
-    /// Deserializes a voxel grid.
-    /// @param deserializer The deserializer to use.
-    /// @param grid The voxel grid to deserialize.
     void deserialize(Deserializer& deserializer, gl::Grid& grid);
 } // namespace cubos::core::data
 
 namespace cubos::core::gl
 {
-    /// Represents a grid of voxels.
-    /// Voxel indices are determined by the following formula: x + y * size.x + z * size.x * size.y
+    /// @brief Represents a voxel object using a 3D grid.
+    /// @ingroup core-gl
     class Grid final
     {
     public:
-        // Default constructor.
-        Grid();
-
-        /// @param size The size of the grid.
-        /// @param width The material index width to use.
-        Grid(const glm::uvec3& size);
-
-        /// @param size The size of the grid.
-        /// @param indices The material indices of the voxels.
-        Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices);
-
-        Grid(Grid&& /*other*/) noexcept;
         ~Grid() = default;
 
+        /// @brief Constructs an empty single-voxel grid.
+        Grid();
+
+        /// @brief Constructs an empty grid with the given size.
+        /// @param size Size of the grid.
+        Grid(const glm::uvec3& size);
+
+        /// @brief Constructs a grid with the given size and initial data.
+        /// @note The voxel data is stored in a flat array. The index of a voxel at position `(x, y, z)` is
+        /// `x + y * size.x + z * size.x * size.y`.
+        /// @param size Size of the grid.
+        /// @param indices Material indices of the voxels.
+        Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices);
+
+        /// @brief Move constructs.
+        /// @param other Other grid.
+        Grid(Grid&& other) noexcept;
+
+        /// @brief Makes this grid a copy of another grid.
+        /// @param rhs Other grid.
+        /// @return This grid, for chaining.
         Grid& operator=(const Grid& rhs);
 
-        /// Resizes the grid.
-        /// @param size The new size of the grid.
+        /// @brief Resizes the grid. New voxels are initialized to 0.
+        /// @param size New size of the grid.
         void setSize(const glm::uvec3& size);
 
-        /// @return The size of the grid.
+        /// @brief Gets the size of the grid.
+        /// @return Size of the grid.
         const glm::uvec3& size() const;
 
-        /// Clears the grid.
+        /// @brief Sets all voxels to 0.
         void clear();
 
-        /// @param position The position of the voxel.
-        /// @param mat The material index to set.
+        /// @brief Sets the material index of a voxel.
+        /// @param position Voxel coordinates.
+        /// @param mat Material index to set.
         void set(const glm::ivec3& position, uint16_t mat);
 
-        /// @param position The position of the voxel.
-        /// @return The material index at a given position.
+        /// @brief Gets the material index of a voxel.
+        /// @param position Voxel coordinates.
+        /// @return Material index of the voxel.
         uint16_t get(const glm::ivec3& position) const;
 
-        /// Converts the material indices of this grid from one palette to another.
-        /// For each index, it will search for another index in the second palette which matches the first palette.
-        /// The conversion fails if no matching index is found.
-        /// @param src The original palette.
-        /// @param dst The new palette.
-        /// @param minSimilarity The minimum similarity between two materials to consider them the same.
+        /// @brief Converts the material indices of this grid from one palette to another.
+        ///
+        /// For each material, it will search for another material in the second palette which is
+        /// similar enough to the original one. The conversion fails if no matching index is found.
+        ///
+        /// @param src Original palette.
+        /// @param dst New palette.
+        /// @param minSimilarity Minimum similarity between two materials to consider them the same.
         /// @return Whether the conversion was successful.
         bool convert(const Palette& src, const Palette& dst, float minSimilarity);
 
@@ -81,7 +91,7 @@ namespace cubos::core::gl
         friend void data::serialize(data::Serializer& /*serializer*/, const Grid& /*grid*/, const char* /*name*/);
         friend void data::deserialize(data::Deserializer& /*deserializer*/, Grid& /*grid*/);
 
-        glm::uvec3 mSize;               ///< The size of the grid.
-        std::vector<uint16_t> mIndices; ///< The indices of the grid.
+        glm::uvec3 mSize;               ///< Size of the grid.
+        std::vector<uint16_t> mIndices; ///< Indices of the grid.
     };
 } // namespace cubos::core::gl

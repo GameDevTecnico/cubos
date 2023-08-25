@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::gl::Debug.
+/// @ingroup core-gl
+
 #pragma once
 
 #include <list>
@@ -11,49 +15,51 @@
 
 namespace cubos::core::gl
 {
-
-    /// This class includes static methods to draw basic objects on screen for debugging purposes.
+    /// @brief Singleton with static methods used to draw primitive objects on screen for debugging
+    /// purposes.
+    /// @ingroup core-gl
     class Debug
     {
     public:
-        /// Initialize the debug rendering system.
+        /// @brief Initializes the debug rendering system.
+        /// @param renderDevice Render device to use.
         static void init(RenderDevice& renderDevice);
 
-        /// Draw a filled box that will stay visible for a specified amount of time.
+        /// @brief Draws a filled box that will stay visible for a specified amount of time.
         /// @param box Box to draw.
         /// @param transform Transformation matrix to apply to the box.
         /// @param color Color of the drawn cube.
-        /// @param time How long should the cube be visible for?
+        /// @param time How long will it be visible for? If 0, for a single frame.
         static void drawBox(geom::Box box, glm::mat4 transform, glm::vec3 color = glm::vec3(1), float time = 0);
 
-        /// Draw a wireframe box that will stay visible for a specified amount of time.
+        /// @brief Draws a wireframe box that will stay visible for a specified amount of time.
         /// @param box Box to draw.
         /// @param transform Transformation matrix to apply to the box.
         /// @param color Color of the drawn cube.
-        /// @param time How long should the cube be visible for?
+        /// @param time How long will it be visible for? If 0, for a single frame.
         static void drawWireBox(geom::Box box, glm::mat4 transform, glm::vec3 color = glm::vec3(1), float time = 0);
 
-        /// Draw a filled sphere that will stay visible for a specified amount of time.
+        /// @brief Draws a filled sphere that will stay visible for a specified amount of time.
         /// @param center Position of the sphere's center in world space.
         /// @param radius Radius of the sphere.
-        /// @param time How long should the sphere be visible?
+        /// @param time How long will it be visible for? If 0, for a single frame.
         /// @param color Color of the drawn sphere.
         static void drawSphere(glm::vec3 center, float radius, float time, glm::vec3 color = glm::vec3(1));
 
-        /// Draw a wireframe sphere that will stay visible for a specified amount of time.
+        /// @brief Draws a wireframe sphere that will stay visible for a specified amount of time.
         /// @param center Position of the sphere's center in world space.
         /// @param radius Radius of the sphere.
-        /// @param time How long should the sphere be visible?
+        /// @param time How long will it be visible for? If 0, for a single frame.
         /// @param color Color of the drawn sphere.
         static void drawWireSphere(glm::vec3 center, float radius, float time, glm::vec3 color = glm::vec3(1));
 
-        /// Render all objects in the debug renderer's buffer and update said buffer, removing all objects that have
-        /// exhausted their requested time.
+        /// @brief Renders all objects in the debug renderer's buffer and removes all objects that
+        /// have exhausted their requested time.
         /// @param vp View-Projection matrix that the objects should be drawn with.
         /// @param deltaT Time that has passed since the last call to flush.
         static void flush(glm::mat4 vp, double deltaT);
 
-        /// Clean up the debug rendering system's resources.
+        /// @brief Cleans up the debug rendering system's resources.
         static void terminate();
 
     private:
