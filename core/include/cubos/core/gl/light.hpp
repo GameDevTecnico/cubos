@@ -1,3 +1,7 @@
+/// @file
+/// @brief Classes @ref cubos::core::gl::SpotLight, @ref cubos::core::gl::DirectionalLight and @ref
+/// cubos::core::gl::PointLight.
+/// @ingroup core-gl
 
 #pragma once
 
@@ -6,6 +10,8 @@
 
 namespace cubos::core::gl
 {
+    /// @brief Describes a spot light.
+    /// @ingroup core-gl
     struct SpotLight
     {
         glm::vec3 position;
@@ -20,6 +26,8 @@ namespace cubos::core::gl
                   float range, float spotAngle, float innerSpotAngle);
     };
 
+    /// @brief Describes a directional light.
+    /// @ingroup core-gl
     struct DirectionalLight
     {
         glm::quat rotation;
@@ -29,6 +37,8 @@ namespace cubos::core::gl
         DirectionalLight(const glm::quat& rotation, const glm::vec3& color, float intensity);
     };
 
+    /// @brief Describes a point light.
+    /// @ingroup core-gl
     struct PointLight
     {
         glm::vec3 position;
