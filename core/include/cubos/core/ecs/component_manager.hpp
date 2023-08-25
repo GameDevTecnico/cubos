@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::ComponentManager and related types.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <cstddef>
@@ -12,134 +16,165 @@
 
 namespace cubos::core::ecs
 {
-    /// Gets the registered name of a component type.
+    /// @brief Gets the registered name of a component type.
+    ///
     /// If the component type is not registered, aborts the program.
+    ///
     /// @tparam T Component type.
-    /// @returns The registered name of the component type.
+    /// @return Registered name of the component type.
+    /// @ingroup core-ecs
     template <typename T>
     std::optional<std::string_view> getComponentName();
 
-    /// Gets the registered name of a component type.
+    /// @brief Gets the registered name of a component type.
+    ///
     /// If the component type is not registered, aborts the program.
+    ///
     /// @param type Component type.
-    /// @returns The registered name of the component type.
+    /// @return Registered name of the component type.
+    /// @ingroup core-ecs
     std::optional<std::string_view> getComponentName(std::type_index type);
 
-    /// Utility struct used to reference component storages for reading.
+    /// @brief Utility struct used to reference a storage of component type @p T for reading.
+    /// @tparam T Component type.
+    /// @ingroup core-ecs
     template <typename T>
     class ReadStorage
     {
     public:
-        ReadStorage(ReadStorage&& /*other*/) noexcept;
+        /// @brief Move constructor.
+        /// @param other Other instance to move from.
+        ReadStorage(ReadStorage&& other) noexcept;
 
-        /// Gets the underlying storage reference.
+        /// @brief Gets the underlying storage reference.
+        /// @return Underlying storage reference.
         const Storage<T>& get() const;
 
     private:
         friend class ComponentManager;
 
+        /// @brief Constructs.
+        /// @param storage  Storage to reference.
+        /// @param lock Read lock to hold.
         ReadStorage(const Storage<T>& storage, std::shared_lock<std::shared_mutex>&& lock);
 
         const Storage<T>& mStorage;
         std::shared_lock<std::shared_mutex> mLock;
     };
 
-    /// Utility struct used to reference component storages for writing.
+    /// @brief Utility struct used to reference a storage of component type @p T for writing.
+    /// @tparam T Component type.
+    /// @ingroup core-ecs
     template <typename T>
     class WriteStorage
     {
     public:
-        WriteStorage(WriteStorage&& /*other*/) noexcept;
+        /// @brief Move constructor.
+        /// @param other Other instance to move from.
+        WriteStorage(WriteStorage&& other) noexcept;
 
-        /// Gets the underlying storage reference.
+        /// @brief Gets the underlying storage reference.
+        /// @return Underlying storage reference.
         Storage<T>& get() const;
 
     private:
         friend class ComponentManager;
 
+        /// @brief Constructs.
+        /// @param storage Storage to reference.
+        /// @param lock Write lock to hold.
         WriteStorage(Storage<T>& storage, std::unique_lock<std::shared_mutex>&& lock);
 
         Storage<T>& mStorage;
         std::unique_lock<std::shared_mutex> mLock;
     };
 
+    /// @brief Holds and manages components.
+    ///
+    /// Used internally by @ref World.
+    ///
+    /// @ingroup core-ecs
     class ComponentManager final
     {
     public:
-        /// Registers a new component type with the component manager.
+        /// @brief Registers a new component type with the component manager.
+        ///
         /// Must be called before any component of this type is used in any way.
-        /// @tparam T The type of the component.
+        ///
+        /// @tparam T Type of the component.
         template <typename T>
         void registerComponent();
 
-        /// Registers a new component type with the component manager.
+        /// @brief Registers a new component type with the component manager.
+        ///
         /// Must be called before any component of this type is used in any way.
-        /// @param type The type of the component.
+        ///
+        /// @param type Type of the component.
         void registerComponent(std::type_index type);
 
-        /// Gets the ID of the component type.
-        /// @param type The type of the component.
-        /// @returns The ID of the component type.
+        /// @brief Gets the identifier of a registered component type.
+        /// @param type Component type.
+        /// @return Component identifier.
         std::size_t getIDFromIndex(std::type_index type) const;
 
-        /// Gets the ID of the component type.
-        /// @tparam T The type of the component.
-        /// @returns The ID of the component type.
+        /// @brief Gets the identifier of a registered component type.
+        /// @tparam T Component type.
+        /// @return Component identifier.
         template <typename T>
         std::size_t getID() const;
 
-        /// Gets the type of the component.
-        /// @param id The ID of the component type.
-        /// @returns The type of the component.
+        /// @brief Gets the type of a component from its identifier.
+        /// @param id Component identifier.
+        /// @return Component type index.
         std::type_index getType(std::size_t id) const;
 
-        /// Gets the storage of the component type.
-        /// @tparam T The type of the component.
-        /// @returns The storage guard of the component type.
+        //// @brief Locks a storage for reading and returns it.
+        /// @tparam T Component type.
+        /// @return Storage lock.
         template <typename T>
         ReadStorage<T> read() const;
 
-        /// Gets the storage of the component type.
-        /// @tparam T The type of the component.
-        /// @returns The storage guard of the component type.
+        //// @brief Locks a storage for writing and returns it.
+        /// @tparam T Component type.
+        /// @return Storage lock.
         template <typename T>
         WriteStorage<T> write() const;
 
-        /// Adds a component to an entity.
-        /// @tparam T The type of the component.
-        /// @param id The ID of the entity.
-        /// @param value The initial value of the component.
+        /// @brief Adds a component to an entity.
+        /// @tparam T Component type.
+        /// @param id Entity index.
+        /// @param value Initial component value.
         template <typename T>
         void add(uint32_t id, T value);
 
-        /// Removes a component from an entity.
-        /// @tparam T The type of the component.
-        /// @param id The ID of the entity.
+        /// @brief Removes a component from an entity.
+        /// @tparam T Component type.
+        /// @param id Entity index.
         template <typename T>
         void remove(uint32_t id);
 
-        /// Removes a component from an entity.
-        /// @param id The ID of the entity.
-        /// @param componentId The ID of the component.
+        /// @brief Removes a component from an entity.
+        /// @param id Entity index.
+        /// @param componentId Component identifier.
         void remove(uint32_t id, std::size_t componentId);
 
-        /// Removes all components from an entity.
-        /// @param id The ID of the entity.
+        /// @brief Removes all components from an entity.
+        /// @param id Entity index.
         void removeAll(uint32_t id);
 
         /// @brief Creates a package from a component of an entity.
-        /// @param id Entity ID.
-        /// @param componentId Component ID.
+        /// @param id Entity index.
+        /// @param componentId Component identifier.
         /// @param context Optional context to use for serialization.
-        /// @returns A package containing the component entity.
+        /// @return Package containing the component.
         data::Package pack(uint32_t id, std::size_t componentId, data::Context* context) const;
 
         /// @brief Inserts a component into an entity, by unpacking a package.
-        /// @param id Entity ID.
-        /// @param componentId Component ID.
+        /// @param id Entity index.
+        /// @param componentId Component identifier.
         /// @param package Package to unpack.
         /// @param context Optional context to use for deserialization.
-        /// @returns True if the package was unpacked successfully, false otherwise.
+        /// @return Whether the unpacking was successful.
         bool unpack(uint32_t id, std::size_t componentId, const data::Package& package, data::Context* context);
 
     private:
@@ -147,14 +182,14 @@ namespace cubos::core::ecs
         {
             Entry(std::unique_ptr<IStorage> storage);
 
-            std::unique_ptr<IStorage> storage;        ///< The generic component storage.
+            std::unique_ptr<IStorage> storage;        ///< Generic component storage.
             std::unique_ptr<std::shared_mutex> mutex; ///< Read/write lock for the storage.
         };
 
-        /// Maps component types to component IDs.
+        /// @brief Maps component types to component IDs.
         std::unordered_map<std::type_index, std::size_t> mTypeToIds;
 
-        std::vector<Entry> mEntries; ///< The registered component storages.
+        std::vector<Entry> mEntries; ///< Registered component storages.
     };
 
     // Implementation.

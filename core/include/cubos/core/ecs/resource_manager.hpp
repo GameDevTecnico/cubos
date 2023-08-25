@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::ResourceManager and related types.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <shared_mutex>
@@ -9,84 +13,105 @@
 
 namespace cubos::core::ecs
 {
-    /// Utility struct used to reference resources for reading.
+    /// @brief Utility struct used to reference a resource of type @p T for reading.
+    /// @tparam T Resource type.
+    /// @ingroup core-ecs
     template <typename T>
     class ReadResource
     {
     public:
-        ReadResource(ReadResource&& /*other*/) noexcept;
+        /// @brief Move construct.
+        /// @param other Other resource to move from.
+        ReadResource(ReadResource&& other) noexcept;
 
-        /// Gets the underlying resource reference.
+        /// @brief Gets the underlying resource reference.
+        /// @return Resource reference.
         const T& get() const;
 
     private:
         friend class ResourceManager;
 
+        /// @brief Constructs.
+        /// @param resource Resource to reference.
+        /// @param lock Read lock to hold.
         ReadResource(const T& resource, std::shared_lock<std::shared_mutex>&& lock);
 
         const T& mResource;
         std::shared_lock<std::shared_mutex> mLock;
     };
 
-    /// Utility struct used to reference resources for writing.
+    /// @brief Utility struct used to reference a resource of type @p T for writing.
+    /// @tparam T Resource type.
+    /// @ingroup core-ecs
     template <typename T>
     class WriteResource
     {
     public:
-        WriteResource(WriteResource&& /*other*/) noexcept;
+        /// @brief Move construct.
+        /// @param other Other resource to move from.
+        WriteResource(WriteResource&& other) noexcept;
 
-        /// Gets the underlying resource reference.
+        /// @brief Gets the underlying resource reference.
+        /// @return Resource reference.
         T& get() const;
 
     private:
         friend class ResourceManager;
 
+        /// @brief Constructs.
+        /// @param resource Resource to reference.
+        /// @param lock Write lock to hold.
         WriteResource(T& resource, std::unique_lock<std::shared_mutex>&& lock);
 
         T& mResource;
         std::unique_lock<std::shared_mutex> mLock;
     };
 
-    /// Object which manages the resources of the ECS world.
-    /// Used internally by the ECS world.
+    /// @brief Holds and manages resources.
+    ///
+    /// Used internally by @ref World.
+    ///
+    /// @ingroup core-ecs
     class ResourceManager final
     {
     public:
         ResourceManager() = default;
         ~ResourceManager();
 
-        /// Registers a new resource type in the resource manager.
-        /// Unsafe to call during any reads or writes, should be called at the start of the program.
-        /// @tparam T The type of the resource.
-        /// @tparam TArgs The types of the arguments of the constructor of the resource.
-        /// @param args The arguments of the constructor of the resource.
+        /// @brief Registers a new resource type in the resource manager.
+        ///
+        /// This function is not thread-safe and should be called before any other function.
+        ///
+        /// @tparam T Resource type.
+        /// @tparam TArgs Types of the arguments of the constructor of the resource.
+        /// @param args Arguments of the constructor of the resource.
         template <typename T, typename... TArgs>
         void add(TArgs... args);
 
-        /// Reads a resource from the resource manager, locking it for reading.
-        /// @tparam T The type of the resource.
-        /// @returns A lock referring to the resource.
+        /// @brief Locks a resource for reading and returns it.
+        /// @tparam T Resource type.
+        /// @return Resource lock.
         template <typename T>
         ReadResource<T> read() const;
 
-        /// Writes a resource to the resource manager, locking it for writing.
-        /// @tparam T The type of the resource.
-        /// @returns A lock referring to the resource.
+        /// @brief Locks a resource for writing and returns it.
+        /// @tparam T Resource type.
+        /// @return Resource lock.
         template <typename T>
         WriteResource<T> write() const;
 
     private:
-        /// Data specific to a resource.
+        /// @brief Data specific to a resource.
         struct Resource
         {
-            mutable std::shared_mutex mutex;      ///> RW lock for the resource.
-            void* data;                           ///< The data of the resource.
+            mutable std::shared_mutex mutex;      ///< RW lock for the resource.
+            void* data;                           ///< Resource resource data.
             std::function<void(void*)> destroyer; ///< Necessary since the type is unknown.
 
             Resource(void* data, std::function<void(void*)> destroyer);
         };
 
-        /// Associates resource types to their data.
+        /// @brief Associates resource types to their data.
         std::unordered_map<std::type_index, Resource> mResources;
     };
 

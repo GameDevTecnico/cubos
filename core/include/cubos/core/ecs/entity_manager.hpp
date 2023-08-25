@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::EntityManager and related types.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <bitset>
@@ -9,21 +13,25 @@
 
 namespace cubos::core::ecs
 {
-    /// Identifies an entity.
+    /// @brief Identifies an entity.
     ///
-    /// When serializing/deserializing, if there's a SerializationMap<Entity, std::string> in the
-    /// context, it will be used to (de)serialize strings representing the entities. Otherwise,
-    /// the identifiers will be (de)serialized as objects with two fields: their index and their
-    /// generation.
+    /// When serializing/deserializing, if there's a @ref
+    /// data::SerializationMap<Entity, std::string> in the context, it will be used to
+    /// (de)serialize strings representing the entities. Otherwise, the identifiers will be
+    /// (de)serialized as objects with two fields: their index and their generation.
+    ///
+    /// @ingroup core-ecs
     class Entity
     {
     public:
+        /// @brief Type used to store which components an entity has.
         using Mask = std::bitset<CUBOS_CORE_ECS_MAX_COMPONENTS + 1>;
 
         Entity();
 
-        /// @param index The index of the entity.
-        /// @param generation The generation of the entity.
+        /// @brief Constructs an entity from an index and a generation.
+        /// @param index Entity index.
+        /// @param generation Entity generation.
         Entity(uint32_t index, uint32_t generation);
 
         Entity(const Entity&) = default;
@@ -31,19 +39,23 @@ namespace cubos::core::ecs
         bool operator==(const Entity& /*entity*/) const;
         bool operator!=(const Entity& /*entity*/) const;
 
-        /// Checks if the entity is 'none' (special value returned on errors).
+        /// @brief Checks if the entity is null, a special value returned on errors.
+        /// @return Whether the entity is null.
         bool isNull() const;
 
-        uint32_t index;      ///< Used as index in storages.
-        uint32_t generation; ///< Used to detect if the entity has been removed.
+        uint32_t index;      ///< Index in storages.
+        uint32_t generation; ///< Allows us to detect if the entity has been removed.
     };
 
-    /// Object which manages the entities of the ECS world and their masks.
-    /// Used internally by the ECS world.
+    /// @brief Holds and manages entities and their component masks.
+    ///
+    /// Used internally by @ref World.
+    ///
+    /// @ingroup core-ecs
     class EntityManager final
     {
     public:
-        /// Used to iterate over all entities of a world with a certain set of components.
+        /// @brief Used to iterate over all entities in a manager with a certain component mask.
         class Iterator
         {
         public:
@@ -55,75 +67,79 @@ namespace cubos::core::ecs
         private:
             friend EntityManager;
 
-            const EntityManager& mManager; ///< The entity manager being iterated.
-            const Entity::Mask mMask;      ///< The mask of the components to be iterated.
+            const EntityManager& mManager; ///< Entity manager being iterated.
+            const Entity::Mask mMask;      ///< Mask of the components to be iterated.
 
-            /// @param e The entity manager being iterated.
-            /// @param m The mask of the components to be iterated.
+            /// @param e Entity manager being iterated.
+            /// @param m Mask of the components to be iterated.
             Iterator(const EntityManager& e, Entity::Mask m);
             Iterator(const EntityManager& e);
 
             std::unordered_map<Entity::Mask, std::set<uint32_t>>::const_iterator
-                mArchetypeIt;                             ///< The current archetype iterator.
-            std::set<uint32_t>::const_iterator mEntityIt; ///< The current entity iterator.
+                mArchetypeIt;                             ///< Current archetype iterator.
+            std::set<uint32_t>::const_iterator mEntityIt; ///< Current entity iterator.
         };
 
-        /// @param initialCapacity The initial capacity of the entity manager.
+        /// @brief Constructs with a certain initial entity capacity.
+        /// @param initialCapacity Initial capacity of the entity manager.
         EntityManager(std::size_t initialCapacity);
         ~EntityManager() = default;
 
-        /// Creates a new entity with a certain component mask.
-        /// @param mask The component mask of the entity.
-        /// @returns The entity handle.
+        /// @brief Creates a new entity with a certain component mask.
+        /// @param mask Component mask of the entity.
+        /// @return Entity handle.
         Entity create(Entity::Mask mask);
 
-        /// Removes an entity from the world.
-        /// @param entity The entity to remove.
+        /// @brief Removes an entity from the world.
+        /// @param entity Entity to remove.
         void destroy(Entity entity);
 
-        /// Sets the component mask of an entity.
-        /// @param entity The entity to set the mask of.
-        /// @param mask The mask to set.
+        /// @brief Sets the component mask of an entity.
+        /// @param entity Entity to set the mask of.
+        /// @param mask Mask to set.
         void setMask(Entity entity, Entity::Mask mask);
 
-        /// Gets the component mask of an entity.
-        /// @param entity The entity to get the mask of.
-        /// @returns The component mask of the entity.
+        /// @brief Gets the component mask of an entity.
+        /// @param entity Entity to get the mask of.
+        /// @return Component mask of the entity.
         const Entity::Mask& getMask(Entity entity) const;
 
-        /// Checks if an entity is still valid. Different from isAlive, as it will return true for
-        /// entities which still have not been commited.
-        /// @param entity The entity to check.
-        /// @returns True if the entity is still valid, false otherwise.
+        /// @brief Checks if an entity is still valid.
+        ///
+        /// Different from isAlive, as it will return true for entities which still have not been
+        /// commited.
+        ///
+        /// @param entity Entity to check.
+        /// @return Whether the entity is valid.
         bool isValid(Entity entity) const;
 
-        /// Checks if an entity is alive.
-        /// @param entity The entity to check.
-        /// @returns True if the entity is alive, false otherwise.
+        /// @brief Checks if an entity is alive.
+        /// @param entity Entity to check.
+        /// @return Whether the entity is alive.
         bool isAlive(Entity entity) const;
 
-        /// Returns an iterator over all entities.
-        /// @returns An iterator over all entities.
+        /// @brief Returns an iterator over all entities.
+        /// @return Iterator over all entities.
         Iterator begin() const;
 
-        /// Returns an iterator over all entities with a certain set of components.
-        /// @param mask The mask of the components to be iterated.
-        /// @returns An iterator over all entities with the given components.
+        /// @brief Returns an iterator over all entities with a certain mask of components.
+        /// @param mask Mask of the components to be iterated.
+        /// @return Iterator over all entities with the given component mask.
         Iterator withMask(Entity::Mask mask) const;
 
-        /// Returns an iterator which points to the end of the entity manager.
-        /// @returns An iterator which points to the end of the entity manager.
+        /// @brief Returns an iterator which points to the end of the entity manager.
+        /// @return Iterator which points to the end of the entity manager.
         Iterator end() const;
 
     private:
-        /// Internal data struct containing the state of an entity.
+        /// @brief Internal data struct containing the state of an entity.
         struct EntityData
         {
             uint32_t generation; ///< Used to detect if the entity has been removed.
-            Entity::Mask mask;   ///< The component mask of the entity.
+            Entity::Mask mask;   ///< Component mask of the entity.
         };
 
-        std::vector<EntityData> mEntities;                                ///< The pool of entities.
+        std::vector<EntityData> mEntities;                                ///< Pool of entities.
         std::queue<uint32_t> mAvailableEntities;                          ///< Queue with available entity indices.
         std::unordered_map<Entity::Mask, std::set<uint32_t>> mArchetypes; ///< Cache archetype entity indices.
     };
@@ -131,8 +147,8 @@ namespace cubos::core::ecs
 
 namespace std
 {
-    /// Add hash function for Entity, so that it can be used as a key in an unordered_map.
-    /// @cond
+    // Add hash function for Entity, so that it can be used as a key in an unordered_map.
+
     template <>
     struct hash<cubos::core::ecs::Entity>
     {
@@ -141,5 +157,4 @@ namespace std
             return hash<uint32_t>()(k.index);
         }
     };
-    /// @endcond
 } // namespace std

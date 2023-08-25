@@ -1,19 +1,29 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::EventWriter.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <cubos/core/ecs/event_pipe.hpp>
 
 namespace cubos::core::ecs
 {
+    /// @brief System argument which allows the system to send events of type @p T to other
+    /// systems.
+    /// @see Systems can read sent events using @ref EventReader.
+    /// @tparam T
+    /// @ingroup core-ecs
     template <typename T>
     class EventWriter
     {
     public:
+        /// @brief Constructs.
+        /// @param pipe Event pipe to write events to.
         EventWriter(EventPipe<T>& pipe);
 
-        /// Pushes event to event pipe, with its mask type.
-        /// In case mask is not provided, the default mask will be 0. (no filtering possible)
-        /// @param event Event which will be inserted into event pipe.
-        /// @param mask Event mask.
+        /// @brief Sends the given @p event to the event pipe with the given @p mask.
+        /// @param event Event.
+        /// @param mask Mask.
         void push(T event, unsigned int mask = DEFAULT_PUSH_MASK);
 
     private:

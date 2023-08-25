@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::EventReader.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <optional>
@@ -6,21 +10,33 @@
 
 namespace cubos::core::ecs
 {
-    /// Used to read events, filtering is also possible via M parameter.
-    /// In case M template parameter is not provided, it will read all events (no filtering).
+    /// @brief System arguments used to read events of type @p T.
+    ///
+    /// Filtering the received events by their mask is also possible via the parameter @p M.
+    /// By default, the reader will read all events sent.
+    ///
+    /// @see Systems can send events using @ref EventWriter.
     /// @tparam T Event.
-    /// @tparam M Event mask.
+    /// @tparam M Filter mask.
+    /// @ingroup core-ecs
     template <typename T, unsigned int M = DEFAULT_FILTER_MASK>
     class EventReader
     {
     public:
+        /// @brief Constructs.
+        ///
+        /// Uses the given @p index to know which events it has already read. Increments it
+        /// whenever it reads an event.
+        ///
+        /// @param pipe Event pipe to read events from.
+        /// @param index Reference to the reader's index.
         EventReader(const EventPipe<T>& pipe, std::size_t& index);
 
-        /// Returns a reference to current event, and advances.
-        /// It returns nullopt if there are no more events to read!
+        /// @brief Returns a reference to current event, and advances.
+        /// @return Reference to current event, or `std::nullopt` if there are no more events.
         std::optional<std::reference_wrapper<const T>> read();
 
-        /// EventReader custom iterator.
+        /// @brief Used to iterate over events received by a reader.
         class Iterator
         {
         public:
@@ -37,14 +53,19 @@ namespace cubos::core::ecs
             bool mEnd;
         };
 
+        /// @brief Returns an iterator to the first event.
+        /// @return Iterator.
         Iterator begin();
+
+        /// @brief Returns an iterator to the end.
+        /// @return Iterator.
         Iterator end();
 
     private:
         const EventPipe<T>& mPipe;
         std::size_t& mIndex;
 
-        /// Checks if given mask is valid to reader's one.
+        /// @brief Checks if given mask is valid to reader's one.
         /// @return True if mask is valid.
         bool matchesMask(decltype(M) mask) const;
     };

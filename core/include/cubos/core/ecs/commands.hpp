@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::Commands and related types.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <mutex>
@@ -12,62 +16,75 @@ namespace cubos::core::ecs
     class CommandBuffer;
     class Dispatcher;
 
-    /// Used to edit an entity created by the Commands object.
+    /// @brief Allows editing an entity created by a @ref Commands object.
+    /// @ingroup core-ecs
     class EntityBuilder final
     {
     public:
         ~EntityBuilder() = default;
 
-        /// Gets the entity this builder is editing.
-        /// @returns The entity.
+        /// @brief Gets the entity this builder is editing.
+        /// @return Entity identifier.
         Entity entity() const;
 
-        /// Gets a reference to a component of the entity.
-        /// @tparam ComponentType The type of the component.
-        /// @returns A reference to the component.
+        /// @brief Gets a reference to a component of the entity.
+        /// @tparam ComponentType Component type.
+        /// @return Reference to the component.
         template <typename ComponentType>
         ComponentType& get();
 
-        /// Adds component to the entity.
-        /// @tparam ComponentTypes The types of the components.
-        /// @param components The components to add.
+        /// @brief Adds components to the entity.
+        /// @tparam ComponentTypes Component types.
+        /// @param components Components to add.
+        /// @return Reference to this builder, for chaining.
         template <typename... ComponentTypes>
         EntityBuilder& add(ComponentTypes&&... components);
 
     private:
         friend CommandBuffer;
 
-        /// @param entity The entity being edited.
-        /// @param commands The commands object that created this entity.
+        /// @brief Constructs.
+        /// @param entity Entity being edited.
+        /// @param commands Commands object that created this entity.
         EntityBuilder(Entity entity, CommandBuffer& commands);
 
-        Entity mEntity;           ///< The entity being edited.
-        CommandBuffer& mCommands; ///< The commands object that created this entity.
+        Entity mEntity;           ///< Entity being edited.
+        CommandBuffer& mCommands; ///< Commands object that created this entity.
     };
 
-    /// Used to edit an instance of a blueprint spawned by the Commands object.
+    /// @brief Used to edit a blueprint spawned by a @ref Commands object.
+    /// @ingroup core-ecs
     class BlueprintBuilder final
     {
     public:
         ~BlueprintBuilder() = default;
 
-        /// Gets the entity of the instance this builder is editing.
-        /// Aborts if the name is not found.
-        /// @param name The name of the entity.
-        /// @returns The entity.
+        /// @brief Gets an entity of the spawned blueprint.
+        ///
+        /// Aborts if the name does not match any entity of the blueprint.
+        ///
+        /// @param name Entity name.
+        /// @return Entity identifier.
         Entity entity(const std::string& name) const;
 
-        /// Gets a reference to a component of the blueprint.
-        /// Aborts if the name is not found.
-        /// @tparam ComponentType The type of the component.
-        /// @returns A reference to the component.
+        /// @brief Gets a reference to a component of an entity of the spawned blueprint.
+        ///
+        /// Aborts if @p name does not match any entity of the blueprint.
+        ///
+        /// @tparam ComponentType Component type.
+        /// @param name Entity name.
+        /// @return Reference to the component.
         template <typename ComponentType>
         ComponentType& get(const std::string& name);
 
-        /// Adds component to the blueprint.
-        /// Aborts if the name is not found.
-        /// @tparam ComponentTypes The types of the components.
-        /// @param components The components to add.
+        /// @brief Adds components to the blueprint.
+        ///
+        /// Aborts if @p name does not match any entity of the blueprint.
+        ///
+        /// @tparam ComponentTypes Component types.
+        /// @param name Entity name.
+        /// @param components Components to add.
+        /// @return Reference to this builder, for chaining.
         template <typename... ComponentTypes>
         BlueprintBuilder& add(const std::string& name, ComponentTypes&&... components);
 
@@ -75,96 +92,105 @@ namespace cubos::core::ecs
         friend CommandBuffer;
 
         data::SerializationMap<Entity, std::string> mMap; ///< Maps entity names to the instantiated entities.
-        CommandBuffer& mCommands;                         ///< The commands object that created this entity.
+        CommandBuffer& mCommands;                         ///< Commands object that created this entity.
 
-        /// @param map The map of entity names to the instantiated entities.
-        /// @param commands The commands object that created this entity.
+        /// @brief Constructs.
+        /// @param map Map of entity names to the instantiated entities.
+        /// @param commands Commands object that created this entity.
         BlueprintBuilder(data::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands);
     };
 
-    /// Used to write ECS commands and execute them at a later time.
-    /// Just wraps a reference to a CommandBuffer object.
+    /// @brief Used to write ECS commands and execute them at a later time.
+    ///
+    /// Internally wraps a reference to a CommandBuffer object.
+    ///
+    /// @ingroup core-ecs
     class Commands final
     {
     public:
-        /// @param buffer The command buffer to write to.
+        /// @brief Constructs.
+        /// @param buffer Command buffer to write to.
         Commands(CommandBuffer& buffer);
+
+        /// @brief Move constructor.
         Commands(Commands&&) = default;
 
-        /// Adds components to an entity.
-        /// @tparam ComponentTypes The types of the components to be added.
-        /// @param entity The entity to which the components will be added.
-        /// @param components The components to add.
+        /// @brief Adds components to an entity.
+        /// @tparam ComponentTypes Component types.
+        /// @param entity Entity identifier.
+        /// @param components Components to add.
         template <typename... ComponentTypes>
         void add(Entity entity, ComponentTypes&&... components);
 
-        /// Removes components from an entity.
-        /// @tparam ComponentTypes The types of the components to be removed.
-        /// @param entity The entity from which the components will be removed.
+        /// @brief Removes components from an entity.
+        /// @tparam ComponentTypes Component types.
+        /// @param entity Entity identifier.
         template <typename... ComponentTypes>
         void remove(Entity entity);
 
-        /// Creates a new entity with the given components.
-        /// @tparam ComponentTypes The types of the components to be added.
-        /// @param components The components to add.
-        /// @returns The new entity.
+        /// @brief Creates a new entity with the given components.
+        /// @tparam ComponentTypes Component types.
+        /// @param components Components to create with.
+        /// @return Entity identifier.
         template <typename... ComponentTypes>
         EntityBuilder create(ComponentTypes&&... components);
 
-        /// Destroys an entity.
-        /// @param entity The entity to destroy.
+        /// @brief Destroys an entity.
+        /// @param entity Entity identifier.
         void destroy(Entity entity);
 
-        /// Spawns an instance of a blueprint into the world.
-        /// @param blueprint The blueprint to spawn.
-        /// @returns Blueprint builder which allows components to be overridden.
+        /// @brief Spawns a blueprint into the world.
+        /// @param blueprint Blueprint to spawn.
+        /// @return Blueprint builder.
         BlueprintBuilder spawn(const Blueprint& blueprint);
 
     private:
-        CommandBuffer& mBuffer; ///< The command buffer to write to.
+        CommandBuffer& mBuffer; ///< Command buffer to write to.
     };
 
-    /// Object responsible for storing ECS commands to execute them later.
+    /// @brief Stores commands to execute them later.
+    /// @ingroup core-ecs
     class CommandBuffer final
     {
     public:
-        /// @param world The world to which the commands will be applied.
+        /// @brief Constructs.
+        /// @param world World to which the commands will be applied.
         CommandBuffer(World& world);
         ~CommandBuffer();
 
-        /// Adds components to an entity.
-        /// @tparam ComponentTypes The types of the components to be added.
-        /// @param entity The entity to which the components will be added.
-        /// @param components The components to add.
+        /// @brief Adds components to an entity.
+        /// @tparam ComponentTypes Component types.
+        /// @param entity Entity identifier.
+        /// @param components Components to add.
         template <typename... ComponentTypes>
         void add(Entity entity, ComponentTypes&&... components);
 
-        /// Removes components from an entity.
-        /// @tparam ComponentTypes The types of the components to be removed.
-        /// @param entity The entity from which the components will be removed.
+        /// @brief Removes components from an entity.
+        /// @tparam ComponentTypes Component types.
+        /// @param entity Entity identifier.
         template <typename... ComponentTypes>
         void remove(Entity entity);
 
-        /// Creates a new entity with the given components.
-        /// @tparam ComponentTypes The types of the components to be added.
-        /// @param components The components to add.
-        /// @returns The new entity.
+        /// @brief Creates a new entity with the given components.
+        /// @tparam ComponentTypes Component types.
+        /// @param components Components to create with.
+        /// @return Entity identifier.
         template <typename... ComponentTypes>
         EntityBuilder create(ComponentTypes&&... components);
 
-        /// Destroys an entity.
-        /// @param entity The entity to destroy.
+        /// @brief Destroys an entity.
+        /// @param entity Entity identifier.
         void destroy(Entity entity);
 
-        /// Spawns an instance of a blueprint into the world.
-        /// @param blueprint The blueprint to spawn.
-        /// @returns Blueprint builder which allows components to be overridden.
+        /// @brief Spawns a blueprint into the world.
+        /// @param blueprint Blueprint to spawn.
+        /// @return Blueprint builder.
         BlueprintBuilder spawn(const Blueprint& blueprint);
 
-        /// Aborts the commands, rolling back any changes made.
+        /// @brief Aborts the commands, rolling back any changes made.
         void abort();
 
-        /// Commits the commands to the world.
+        /// @brief Commits the commands to the world.
         void commit();
 
     private:
@@ -172,24 +198,25 @@ namespace cubos::core::ecs
         friend BlueprintBuilder;
         friend Dispatcher;
 
-        /// Object used internally which stores components of a specific type, queued for addition to the component
+        /// @brief Stores components of a specific type, queued for addition to the component
         /// manager.
         struct IBuffer
         {
             virtual ~IBuffer() = default;
 
-            /// Clears every component in the buffer.
+            /// @brief Clears every component in the buffer.
             virtual void clear() = 0;
 
-            /// Moves the specified component from the buffer to the component manager.
-            /// If the component doesn't exist, nothing happens.
-            /// @param entity The entity whose component will be moved.
-            /// @param manager The component manager to which the component will be moved.
+            /// @brief Moves the specified component from the buffer to the component manager. If
+            /// the component doesn't exist, nothing happens.
+            /// @param entity Entity identifier.
+            /// @param manager Component manager.
             virtual void move(Entity entity, ComponentManager& manager) = 0;
         };
 
-        /// Implementation of the IBuffer interface for a specific component type.
-        /// @tparam ComponentType The type of the component.
+        /// @brief Implementation of the @ref IBuffer interface for a component type
+        /// @p ComponentType.
+        /// @tparam ComponentType Component type.
         template <typename ComponentType>
         struct Buffer : IBuffer
         {
@@ -198,20 +225,20 @@ namespace cubos::core::ecs
             void clear() override;
             void move(Entity entity, ComponentManager& manager) override;
 
-            std::unordered_map<Entity, ComponentType> components; ///< The components in the buffer.
+            std::unordered_map<Entity, ComponentType> components; ///< Components in the buffer.
         };
 
-        /// Clears the commands.
+        /// @brief Clears the commands.
         void clear();
 
         std::mutex mMutex; ///< Make this thread-safe.
-        World& mWorld;     ///< The world to which the commands will be applied.
+        World& mWorld;     ///< World to which the commands will be applied.
 
         std::unordered_map<std::type_index, IBuffer*> mBuffers; ///< Component buffers per component type.
-        std::unordered_set<Entity> mCreated;                    ///< The uncommitted created entities.
-        std::unordered_set<Entity> mDestroyed;                  ///< The uncommitted destroyed entities.
-        std::unordered_map<Entity, Entity::Mask> mAdded;        ///< The mask of the uncommitted added components.
-        std::unordered_map<Entity, Entity::Mask> mRemoved;      ///< The mask of the uncommitted removed components.
+        std::unordered_set<Entity> mCreated;                    ///< Uncommitted created entities.
+        std::unordered_set<Entity> mDestroyed;                  ///< Uncommitted destroyed entities.
+        std::unordered_map<Entity, Entity::Mask> mAdded;        ///< Mask of the uncommitted added components.
+        std::unordered_map<Entity, Entity::Mask> mRemoved;      ///< Mask of the uncommitted removed components.
         std::unordered_set<Entity> mChanged;                    ///< Entities whose mask has changed.
     };
 

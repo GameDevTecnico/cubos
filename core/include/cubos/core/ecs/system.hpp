@@ -1,3 +1,11 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::SystemWrapper and related types.
+///
+/// This file is a bit scary, but it's not as bad as it looks. It's mostly template specializations
+/// to handle the different types of arguments a system can take.
+///
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <functional>
@@ -13,69 +21,86 @@
 
 namespace cubos::core::ecs
 {
-    /// Contains information about a system.
+    /// @brief Describes a system.
+    /// @ingroup core-ecs
     struct SystemInfo
     {
-        /// Whether the system uses commands or not.
+        /// @brief Whether the system uses commands or not.
         bool usesCommands;
 
-        /// Whether the system uses the world directly.
+        /// @brief Whether the system uses the world directly.
         bool usesWorld;
 
-        /// The type set of resources the system reads.
+        /// @brief Set of resources the system reads.
         std::unordered_set<std::type_index> resourcesRead;
 
-        /// The type set of resources the system writes.
+        /// @brief Set of resources the system writes.
         std::unordered_set<std::type_index> resourcesWritten;
 
-        /// The type set of components the system reads.
+        /// @brief Set of components the system reads.
         std::unordered_set<std::type_index> componentsRead;
 
-        /// The type set of components the system writes.
+        /// @brief Set of components the system writes.
         std::unordered_set<std::type_index> componentsWritten;
 
-        /// Checks if this system is valid.
+        /// @brief Checks if this system is valid.
+        ///
         /// A system may be invalid, if, for example, it both reads and writes the same resource.
-        /// @returns True if the system is valid, false otherwise.
+        ///
+        /// @return Whether the system is valid.
         bool valid() const;
 
-        /// Checks if this system is compatible with another system.
-        /// @param other The other system info to check compatibility with.
-        /// @returns True if the systems are compatible, false otherwise.
+        /// @brief Checks if this system is compatible with another system.
+        ///
+        /// Two systems are compatible if they can be executed in parallel.
+        /// This means that they must not, for example, write to the same resource or component.
+        ///
+        /// @param other Other system.
+        /// @return Whether the systems are compatible.
         bool compatible(const SystemInfo& other) const;
     };
 
-    /// Base class for system wrappers.
+    /// @brief Base class for system wrappers.
+    /// @tparam R Return type of the wrapped system.
+    /// @ingroup core-ecs
     template <typename R>
     class AnySystemWrapper
     {
     public:
-        AnySystemWrapper(SystemInfo&& info);
         virtual ~AnySystemWrapper() = default;
 
-        /// Prepares the system for being executed on the given world.
-        /// Requires exclusive access to the world, must be called before calling the system.
-        /// @param world The world to prepare the system for.
+        /// @brief Constructs.
+        /// @param info Information about the wrapped system.
+        AnySystemWrapper(SystemInfo&& info);
+
+        /// @brief Prepares the system for being executed on the given world.
+        ///
+        /// Requires exclusive access to the world and must be called before calling the system.
+        ///
+        /// @param world World to prepare the system for.
         virtual void prepare(World& world) = 0;
 
-        /// Calls the wrapped system with parameters taken from the given world.
-        /// @param world The world used by the system.
-        /// @param commands The commands object used by the system.
-        /// @returns The return value of the system.
+        /// @brief Calls the wrapped system with parameters taken from the given @p world.
+        ///
+        /// Can only be called after calling @ref prepare() on the same @p world.
+        ///
+        /// @param world World used by the system.
+        /// @param commands Buffer where commands can be submitted to.
+        /// @return Return value of the system.
         virtual R call(World& world, CommandBuffer& commands) = 0;
 
-        /// Gets information about the requirements of the system.
+        /// @brief Gets information about the requirements of the system.
+        /// @return Information about the system.
         const SystemInfo& info() const;
 
     private:
         SystemInfo mInfo; ///< Information about the wrapped system.
     };
 
-    /// This namespace contains functions used internally by the implementation
-    /// of the ECS.
     namespace impl
     {
-        /// Fetches the requested type from a world.
+        /// @brief Fetches the requested data from a world.
+        /// @tparam T System argument type.
         template <typename T>
         struct SystemFetcher
         {
@@ -191,11 +216,12 @@ namespace cubos::core::ecs
             static std::tuple<Args...> arg(Type&& fetched);
         };
 
-        /// Template magic used to inspect the arguments of a system.
+        /// @brief Template magic used to inspect the arguments of a system.
         template <typename F>
         struct SystemTraits;
 
-        /// Specialization for function pointers.
+        // Specialization for function pointers.
+
         template <typename R, typename... Args>
         struct SystemTraits<R (*)(Args...)>
         {
@@ -203,31 +229,37 @@ namespace cubos::core::ecs
             using Arguments = std::tuple<Args...>;
             using State = std::tuple<typename SystemFetcher<Args>::State...>;
 
-            /// Gets information about the system.
             static SystemInfo info();
         };
 
-        /// Specialization for member functions.
+        // Specialization for member functions.
+
         template <typename R, typename T, typename... Args>
         struct SystemTraits<R (T::*)(Args...)> : SystemTraits<R (*)(Args...)>
         {
         };
 
-        /// Specialization for const member functions.
+        // Specialization for const member functions.
+
         template <typename R, typename T, typename... Args>
         struct SystemTraits<R (T::*)(Args...) const> : SystemTraits<R (*)(Args...)>
         {
         };
 
-        /// Specialization for lambdas and functors, like std::function.
+        // Specialization for lambdas and functors, like std::function.
+
         template <typename F>
         struct SystemTraits : SystemTraits<decltype(&std::remove_reference<F>::type::operator())>
         {
         };
 
-        /// Used to get the index of a type in a tuple.
+        /// @brief Used to get the index of a type in a tuple.
+        ///
         /// Had to use this instead of std::apply due to a bug in MSVC :(
         /// Taken from https://stackoverflow.com/questions/18063451.
+        ///
+        /// @tparam T Type to get the index of.
+        /// @tparam Tuple Tuple to search in.
         template <class T, class Tuple>
         struct Index;
 
@@ -244,25 +276,27 @@ namespace cubos::core::ecs
         };
     } // namespace impl
 
-    /// A system wrapper for a system which takes some arguments.
-    /// @tparam F The type of the system function/method/lambda.
+    /// @brief Wrapper for a system of type @p F.
+    /// @tparam F Type of the system function/method/lambda.
+    /// @ingroup core-ecs
     template <typename F>
     class SystemWrapper final : public AnySystemWrapper<typename impl::SystemTraits<F>::Return>
     {
     public:
-        friend class Dispatcher;
-        /// @param system The system to wrap.
-        SystemWrapper(F system);
         ~SystemWrapper() override = default;
 
-        /// @see AnySystemWrapper::prepare
+        /// @brief Constructs.
+        /// @param system System to wrap.
+        SystemWrapper(F system);
+
         void prepare(World& world) override;
-        /// @see AnySystemWrapper::call
         typename impl::SystemTraits<F>::Return call(World& world, CommandBuffer& commands) override;
 
     private:
-        F mSystem;                                                   ///< The wrapped system.
-        std::optional<typename impl::SystemTraits<F>::State> mState; ///< The state of the system.
+        friend class Dispatcher;
+
+        F mSystem;                                                   ///< Wrapped system.
+        std::optional<typename impl::SystemTraits<F>::State> mState; ///< State of the system.
     };
 
     // Implementation.

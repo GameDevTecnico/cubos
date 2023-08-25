@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::ecs::World.
+/// @ingroup core-ecs
+
 #pragma once
 
 #include <cassert>
@@ -17,97 +21,109 @@ namespace cubos::core::ecs
         struct QueryFetcher;
     }
 
-    /// @brief World is used as a container for all of the entity and component data.
-    /// Components are stored in abstract containers called storages.
-    /// @see Storage
+    /// @brief Holds entities, their components and resources.
+    /// @see Internally, components are stored in abstract containers called @ref Storage's.
+    /// @ingroup core-ecs
     class World
     {
     public:
-        /// Used to iterate over all entities of a world.
+        /// @brief Used to iterate over all entities in a world.
         using Iterator = EntityManager::Iterator;
 
-        /// @param initialCapacity The initial capacity of the world.
+        /// @brief Constructs with the given @p initialCapacity.
+        /// @param initialCapacity How many entities to reserve space for.
         World(std::size_t initialCapacity = 1024);
 
-        /// Registers a new resource type.
-        /// Unsafe to call during any reads or writes, should be called at the start of the program.
-        /// @tparam T The type of the resource.
-        /// @tparam TArgs The types of the arguments of the constructor of the resource.
-        /// @param args The arguments of the constructor of the resource.
+        /// @brief Registers and inserts a new resource type.
+        /// @note Should be called before other operations, aside from @ref registerComponent().
+        /// @tparam T Resource type.
+        /// @tparam TArgs Types of the arguments of the constructor of the resource.
+        /// @param args Arguments of the constructor of the resource.
         template <typename T, typename... TArgs>
         void registerResource(TArgs... args);
 
         /// @brief Registers a component type.
+        /// @note Should be called before other operations, aside from @ref registerResource().
         /// @tparam T Component type.
-        /// @param storage Storage for the component type.
         template <typename T>
         void registerComponent();
 
-        /// Reads a resource, locking it for reading.
-        /// @tparam T The type of the resource.
-        /// @returns A lock referring to the resource.
+        /// @brief Locks a resource for reading and returns it.
+        /// @tparam T Resource type.
+        /// @return Resource lock.
         template <typename T>
         ReadResource<T> read() const;
 
-        /// Writes a resource, locking it for writing.
-        /// @tparam T The type of the resource.
-        /// @returns A lock referring to the resource.
+        /// @brief Locks a resource for writing and returns it.
+        /// @tparam T Resource type.
+        /// @return Resource lock.
         template <typename T>
         WriteResource<T> write() const;
 
-        /// @brief Creates a new entity.
-        /// @tparam ComponentTypes The types of the components to be added when the entity is created.
-        /// @param components The initial values for the components.
+        /// @brief Creates a new entity with the given components.
+        /// @tparam ComponentTypes Types of the components.
+        /// @param components Initial values for the components.
         template <typename... ComponentTypes>
         Entity create(ComponentTypes... components);
 
-        /// @brief Removes an entity.
-        /// @param entity Entity ID.
+        /// @brief Destroys an entity and its components.
+        /// @todo Whats the behavior when we pass an entity that has already been destroyed?
+        /// @param entity Entity identifier.
         void destroy(Entity entity);
 
         /// @brief Checks if an entity is still alive.
         /// @param entity Entity identifier.
-        /// @returns True if the entity is alive, false otherwise.
+        /// @return Whether the entity is alive.
         bool isAlive(Entity entity) const;
 
         /// @brief Adds components to an entity.
-        /// @tparam ComponentTypes The types of the components to be added.
-        /// @param components The initial values for the components.
+        ///
+        /// If the entity already has one of the components, it is overwritten.
+        ///
+        /// @tparam ComponentTypes Types of the components.
+        /// @param entity Entity identifier.
+        /// @param components Initial values for the components.
         template <typename... ComponentTypes>
         void add(Entity entity, ComponentTypes&&... components);
 
         /// @brief Removes components from an entity.
-        /// @tparam ComponentTypes Component types to be removed.
-        /// @param entity Entity ID.
+        ///
+        /// If the entity doesn't have one of the components, nothing happens.
+        ///
+        /// @tparam ComponentTypes Types of the components.
+        /// @param entity Entity identifier.
         template <typename... ComponentTypes>
         void remove(Entity entity);
 
         /// @brief Checks if an entity has a component.
         /// @tparam T Component type.
-        /// @param entity Entity ID.
+        /// @param entity Entity identifier.
+        /// @return Whether the entity has the component.
         template <typename T>
         bool has(Entity entity) const;
 
         /// @brief Creates a package from the components of an entity.
-        /// @param entity Entity ID.
+        /// @param entity Entity identifier.
         /// @param context Optional context for serializing the components.
-        /// @returns A package containing the components of the entity.
+        /// @return Package containing the components of the entity.
         data::Package pack(Entity entity, data::Context* context = nullptr) const;
 
         /// @brief Unpacks components specified in a package into an entity.
+        ///
         /// Removes any components that are already present in the entity.
-        /// @param entity Entity ID.
+        ///
+        /// @param entity Entity identifier.
         /// @param package Package to unpack.
         /// @param context Optional context for deserializing the components.
-        /// @returns True if the package was unpacked successfully, false otherwise.
+        /// @return Whether the package was unpacked successfully.
         bool unpack(Entity entity, const data::Package& package, data::Context* context = nullptr);
 
-        /// Returns an iterator which points to the first entity of the world.
-        /// @return An iterator.
+        /// @brief Returns an iterator which points to the first entity of the world.
+        /// @return Iterator.
         Iterator begin() const;
 
-        /// Returns an iterator which points to the end of the world.
-        /// @return An iterator.
+        /// @brief Returns an iterator which points to the end of the world.
+        /// @return Iterator.
         Iterator end() const;
 
     private:
