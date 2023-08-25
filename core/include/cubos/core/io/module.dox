@@ -1,10 +1,10 @@
 /// @dir
-/// @brief @ref cubos::core::io namespace.
+/// @brief @ref core-io module.
 
 #pragma once
 
 /// @namespace cubos::core::io
-/// @brief Input and output namespace.
+/// @brief @ref core-io module.
 /// @ingroup core-io
 
 namespace cubos::core::io

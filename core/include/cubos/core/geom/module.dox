@@ -1,10 +1,10 @@
 /// @dir
-/// @brief @ref cubos::core::geom namespace.
+/// @brief @ref core-geom module.
 
 #pragma once
 
 /// @namespace cubos::core::geom
-/// @brief Geometry namespace.
+/// @brief @ref core-geom module.
 /// @ingroup core-geom
 
 namespace cubos::core::geom

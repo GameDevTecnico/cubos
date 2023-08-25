@@ -1,10 +1,10 @@
 /// @dir
-/// @brief @ref cubos::core::gl namespace.
+/// @brief @ref core-gl module.
 
 #pragma once
 
 /// @namespace cubos::core::gl
-/// @brief Graphics namespace.
+/// @brief @ref core-gl module.
 /// @ingroup core-gl
 
 /// @namespace cubos::core::gl::impl
