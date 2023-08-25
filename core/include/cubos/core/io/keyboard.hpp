@@ -1,10 +1,15 @@
+/// @file
+/// @brief Enums @ref cubos::core::io::Key and @ref cubos::core::io::Modifiers.
+/// @ingroup core-io
+
 #pragma once
 
 #include <string>
 
 namespace cubos::core::io
 {
-    /// Keyboard key codes enum.
+    /// @brief Keyboard key codes enum.
+    /// @ingroup core-io
     enum class Key
     {
         Invalid = -1,
@@ -111,7 +116,8 @@ namespace cubos::core::io
         Count
     };
 
-    /// Keyboard modifier flags enum.
+    /// @brief Keyboard modifier flags enum.
+    /// @ingroup core-io
     enum class Modifiers
     {
         None = 0,
@@ -143,23 +149,27 @@ namespace cubos::core::io
         return lhs;
     }
 
-    /// Convert a Modifiers enum to a string.
-    /// @param modifiers The Modifiers enum to convert.
-    /// @return The string representation of the Modifiers enum.
+    /// @brief Converts a @ref Modifiers enum to a string.
+    /// @param modifiers Modifiers.
+    /// @return String representation.
+    /// @ingroup core-io
     std::string modifiersToString(Modifiers modifiers);
 
-    /// Convert a string to a Modifiers enum.
-    /// @param str The string to convert.
-    /// @return The Modifiers enum represented by the string.
+    /// @brief Converts a string to a @ref Modifiers enum.
+    /// @param str String to convert.
+    /// @return Modifiers.
+    /// @ingroup core-io
     Modifiers stringToModifiers(const std::string& str);
 
-    /// Convert a Key enum to a string.
-    /// @param key The Key enum to convert.
-    /// @return The string representation of the Key enum.
+    /// @brief Converts a @ref Key enum to a string.
+    /// @param key Key to convert.
+    /// @return String representation.
+    /// @ingroup core-io
     std::string keyToString(Key key);
 
-    /// Convert a string to a Key enum.
+    /// @brief Convert a string to a @ref Key enum.
     /// @param str The string to convert.
-    /// @return The Key enum represented by the string.
+    /// @return Key.
+    /// @ingroup core-io
     Key stringToKey(const std::string& str);
 } // namespace cubos::core::io

@@ -1,0 +1,15 @@
+/// @dir
+/// @brief @ref cubos::core::io namespace.
+
+#pragma once
+
+/// @namespace cubos::core::io
+/// @brief Input and output namespace.
+/// @ingroup core-io
+
+namespace cubos::core::io
+{
+    /// @defgroup core-io Input and output
+    /// @ingroup core
+    /// @brief Provides a window API abstraction.
+}

@@ -1,3 +1,7 @@
+/// @file
+/// @brief Class @ref cubos::core::io::Cursor.
+/// @ingroup core-io
+
 #pragma once
 
 #ifdef WITH_GLFW
@@ -7,11 +11,12 @@
 
 namespace cubos::core::io
 {
-    /// Handle for a custom mouse cursor.
+    /// @brief Handle for a custom mouse cursor.
+    /// @ingroup core-io
     class Cursor
     {
     public:
-        /// Identifiers for the different standard cursors.
+        /// @brief Identifiers for the different standard cursors.
         enum class Standard
         {
             Arrow,      ///< Standard arrow cursor.
