@@ -109,8 +109,8 @@ namespace cubos::core::ecs
 
             // Placeholders for documentation.
 
-            using Type = void; ///< Type of the fetched data.
-            using State = void;
+            using Type = char; ///< Type of the fetched data.
+            using State = char;
 
             /// @brief Adds the argument @p T to the given @p info.
             /// @param[out] info System information.
