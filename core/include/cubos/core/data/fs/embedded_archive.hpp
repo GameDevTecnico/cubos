@@ -12,7 +12,7 @@
 namespace cubos::core::data
 {
     /// @brief Archive implementation which reads data embedded in the application. Meant to be
-    /// used with the `cubinhos embed` tool.
+    /// used with the `quadrados embed` tool.
     ///
     /// Can be used to create single-file applications, where all the data is embedded in the
     /// executable.

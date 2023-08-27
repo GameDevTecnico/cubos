@@ -1,5 +1,5 @@
 # tools/CMakeLists.txt
 # Cubos tools build configuration
 
-add_subdirectory(cubinhos)
-add_subdirectory(tesserato)
+add_subdirectory(quadrados)
+add_subdirectory(tesseratos)

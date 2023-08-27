@@ -31,7 +31,7 @@ struct ConvertOptions
 /// Prints the help message of the program.
 static void printHelp()
 {
-    std::cerr << "Usage: cubinhos convert <INPUT> -p <PALETTE-PATH> [OPTIONS]" << std::endl;
+    std::cerr << "Usage: quadrados convert <INPUT> -p <PALETTE-PATH> [OPTIONS]" << std::endl;
     std::cerr << "Options:" << std::endl;
     std::cerr << "  -g<N> <PATH> Sets the output path of the grid <N>." << std::endl;
     std::cerr << "  -p <PATH>    Specifies the path of the palette being used." << std::endl;
