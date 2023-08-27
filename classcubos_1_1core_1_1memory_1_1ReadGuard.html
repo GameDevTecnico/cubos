@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +44,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="guards_8hpp.html">&lt;core/memory/guards.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1memory.html">memory</a>::<wbr/></span>ReadGuard <span class="m-thin">class</span>
         </h1>
+        <p>Provides safe read-only access to an object using a lock.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -55,17 +56,18 @@
           <tbody>
             <tr>
               <td style="width: 1%">T</td>
-              <td>The type of the object to guard.</td>
+              <td>Guarded object type.</td>
             </tr>
             <tr>
               <td>Lock</td>
-              <td>The type of the lock to use.</td>
+              <td>Held lock type.</td>
             </tr>
           </tbody>
         </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
+            <li><a href="#autotoc_md43">Usage example</a></li>
             <li>
               Reference
               <ul>
@@ -75,7 +77,7 @@
             </li>
           </ul>
         </nav>
-<p>Utility class to provide safe read-only access to an object using a lock.</p><p>This class was created because there are multiple parts of the code that need to provide access to objects in a thread-safe manner.</p><p>Usage example: using AssetMetaRead = <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">core::<wbr />memory::<wbr />ReadGuard</a>&lt;AssetMeta, std::shared_lock&lt;std::shared_mutex&gt;&gt;;</p>
+<p>This class was created because there are multiple parts of the code that need to provide access to objects in a thread-safe manner.</p><section id="autotoc_md43"><h3><a href="#autotoc_md43">Usage example</a></h3><pre class="m-code"><span class="k">using</span><span class="w"> </span><span class="n">AssetMetaRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">memory</span><span class="o">::</span><span class="n">ReadGuard</span><span class="o">&lt;</span><span class="n">AssetMeta</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_mutex</span><span class="o">&gt;&gt;</span><span class="p">;</span></pre></section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -83,11 +85,11 @@
               <span class="m-doc-wrap-bumper"><a href="#a27ce52c775bd0824221b8e6c91d721de" class="m-doc">ReadGuard</a>(</span><span class="m-doc-wrap">const T&amp; object,
               Lock&amp;&amp; lock)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructor.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#aea716ebcee5f0a6dde3c910e26f2d2ee" class="m-doc">ReadGuard</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">ReadGuard</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd></dd>
+            <dd>Move constructor.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -96,15 +98,15 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a71ba225b6fee06b360affbe080acd577" class="m-doc">get</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a reference to the underlying object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a9d62630b79a951fafbec04b8ae77154d" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a reference to the underlying object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a51756c0f042f988d84f679b1130a38b0" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const T*</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a pointer to the underlying object.</dd>
           </dl>
         </section>
         <section>
@@ -117,6 +119,7 @@
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a27ce52c775bd0824221b8e6c91d721de" class="m-doc-self">ReadGuard</a>(</span><span class="m-doc-wrap">const T&amp; object,
               Lock&amp;&amp; lock)</span></span>
             </h3>
+            <p>Constructor.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -124,11 +127,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">object</td>
-                  <td>The object to guard.</td>
+                  <td>Object to guard.</td>
                 </tr>
                 <tr>
                   <td>lock</td>
-                  <td>The lock to use.</td>
+                  <td>Lock to hold.</td>
                 </tr>
               </tbody>
             </table>
@@ -140,6 +143,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aea716ebcee5f0a6dde3c910e26f2d2ee" class="m-doc-self">ReadGuard</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">ReadGuard</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
+            <p>Move constructor.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -147,7 +151,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">other</td>
-                  <td>The other guard to move from.</td>
+                  <td>Guard to move from.</td>
                 </tr>
               </tbody>
             </table>
@@ -159,11 +163,12 @@
               </div>
               <span class="m-doc-wrap-bumper">const T&amp; cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71ba225b6fee06b360affbe080acd577" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets a reference to the underlying object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying object.</td>
+                  <td>Underlying object.</td>
                 </tr>
               </tfoot>
             </table>
@@ -175,11 +180,12 @@
               </div>
               <span class="m-doc-wrap-bumper">const T&amp; cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d62630b79a951fafbec04b8ae77154d" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets a reference to the underlying object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying object.</td>
+                  <td>Underlying object.</td>
                 </tr>
               </tfoot>
             </table>
@@ -191,11 +197,12 @@
               </div>
               <span class="m-doc-wrap-bumper">const T* cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a51756c0f042f988d84f679b1130a38b0" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets a pointer to the underlying object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying object.</td>
+                  <td>Underlying object.</td>
                 </tr>
               </tfoot>
             </table>

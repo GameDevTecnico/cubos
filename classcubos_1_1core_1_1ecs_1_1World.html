@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>World <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="world_8hpp.html">&lt;core/ecs/world.hpp&gt;</a></div>
         </h1>
-        <p><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> is used as a container for all of the entity and component data. Components are stored in abstract containers called storages.</p>
+        <p>Holds entities, their components and resources.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,14 +61,14 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a></p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p>Internally, components are stored in abstract containers called <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>&#x27;s.</p></aside>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt id="abee128f126b1ed6d66fe78399185a0f3">
               using <a href="#abee128f126b1ed6d66fe78399185a0f3" class="m-doc-self">Iterator</a> = <a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">EntityManager::<wbr />Iterator</a>
             </dt>
-            <dd>Used to iterate over all entities of a world.</dd>
+            <dd>Used to iterate over all entities in a world.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -77,7 +77,7 @@
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a83965d035f8c09f9b5ea59a4d4155c7c" class="m-doc">World</a>(</span><span class="m-doc-wrap">std::size_t initialCapacity = 1024)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs with the given <code>initialCapacity</code>.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -87,7 +87,7 @@
               <div class="m-doc-template">template&lt;typename T, typename... TArgs&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#a9dfa30af4b1d6efd94790c62683ec5de" class="m-doc">registerResource</a>(</span><span class="m-doc-wrap">TArgs... args)</span>
             </dt>
-            <dd></dd>
+            <dd>Registers and inserts a new resource type.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#a2d4eb893c802cd8f7145cb9c2de3ac89" class="m-doc">registerComponent</a>(</span><span class="m-doc-wrap">)</span>
@@ -97,21 +97,21 @@
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a3e519642d0c3862bf07bdfe9111a4656" class="m-doc">read</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&lt;T&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Locks a resource for reading and returns it.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a6b9e5c57e0a8e8abff6cd74d88f18038" class="m-doc">write</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>&lt;T&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Locks a resource for writing and returns it.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a350711bfda5ca74a1b98eccb8dc4136b" class="m-doc">create</a>(</span><span class="m-doc-wrap">ComponentTypes... components) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
             </dt>
-            <dd>Creates a new entity.</dd>
+            <dd>Creates a new entity with the given components.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a37a304f4a486f692e862b8585b79fa61" class="m-doc">destroy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
             </dt>
-            <dd>Removes an entity.</dd>
+            <dd>Destroys an entity and its components.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8df2e215fe9c352958a41542c371df27" class="m-doc">isAlive</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
             </dt>
@@ -142,15 +142,15 @@
               const <a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">data::<wbr />Package</a>&amp; package,
               <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">data::<wbr />Context</a>* context = nullptr) -&gt; bool</span>
             </dt>
-            <dd>Unpacks components specified in a package into an entity. Removes any components that are already present in the entity.</dd>
+            <dd>Unpacks components specified in a package into an entity.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac4761becf40ee204c210d8243a7ac1a8" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World.html#abee128f126b1ed6d66fe78399185a0f3" class="m-doc">Iterator</a></span>
             </dt>
-            <dd></dd>
+            <dd>Returns an iterator which points to the first entity of the world.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab96c7b5a7966043fd88d9e1f795fcba4" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1World.html#abee128f126b1ed6d66fe78399185a0f3" class="m-doc">Iterator</a></span>
             </dt>
-            <dd></dd>
+            <dd>Returns an iterator which points to the end of the world.</dd>
           </dl>
         </section>
         <section>
@@ -159,6 +159,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a83965d035f8c09f9b5ea59a4d4155c7c" class="m-doc-self">World</a>(</span><span class="m-doc-wrap">std::size_t initialCapacity = 1024)</span></span>
             </h3>
+            <p>Constructs with the given <code>initialCapacity</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -166,7 +167,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">initialCapacity</td>
-                  <td>The initial capacity of the world.</td>
+                  <td>How many entities to reserve space for.</td>
                 </tr>
               </tbody>
             </table>
@@ -178,6 +179,7 @@
               </div>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9dfa30af4b1d6efd94790c62683ec5de" class="m-doc-self">registerResource</a>(</span><span class="m-doc-wrap">TArgs... args)</span></span>
             </h3>
+            <p>Registers and inserts a new resource type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -185,11 +187,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the resource.</td>
+                  <td>Resource type.</td>
                 </tr>
                 <tr>
                   <td>TArgs</td>
-                  <td>The types of the arguments of the constructor of the resource.</td>
+                  <td>Types of the arguments of the constructor of the resource.</td>
                 </tr>
               </tbody>
               <thead>
@@ -198,11 +200,11 @@
               <tbody>
                 <tr>
                   <td>args</td>
-                  <td>The arguments of the constructor of the resource.</td>
+                  <td>Arguments of the constructor of the resource.</td>
                 </tr>
               </tbody>
             </table>
-<p>Registers a new resource type. Unsafe to call during any reads or writes, should be called at the start of the program.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>Should be called before other operations, aside from <a href="classcubos_1_1core_1_1ecs_1_1World.html#a2d4eb893c802cd8f7145cb9c2de3ac89" class="m-doc">registerComponent()</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a2d4eb893c802cd8f7145cb9c2de3ac89"><div>
             <h3>
@@ -223,6 +225,7 @@
                 </tr>
               </tbody>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Should be called before other operations, aside from <a href="classcubos_1_1core_1_1ecs_1_1World.html#a9dfa30af4b1d6efd94790c62683ec5de" class="m-doc">registerResource()</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a3e519642d0c3862bf07bdfe9111a4656"><div>
             <h3>
@@ -231,6 +234,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&lt;T&gt; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3e519642d0c3862bf07bdfe9111a4656" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Locks a resource for reading and returns it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -238,17 +242,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the resource.</td>
+                  <td>Resource type.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A lock referring to the resource.</td>
+                  <td>Resource lock.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Reads a resource, locking it for reading.</p>
           </div></section>
           <section class="m-doc-details" id="a6b9e5c57e0a8e8abff6cd74d88f18038"><div>
             <h3>
@@ -257,6 +260,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>&lt;T&gt; cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b9e5c57e0a8e8abff6cd74d88f18038" class="m-doc-self">write</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Locks a resource for writing and returns it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -264,17 +268,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the resource.</td>
+                  <td>Resource type.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A lock referring to the resource.</td>
+                  <td>Resource lock.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Writes a resource, locking it for writing.</p>
           </div></section>
           <section class="m-doc-details" id="a350711bfda5ca74a1b98eccb8dc4136b"><div>
             <h3>
@@ -283,7 +286,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a350711bfda5ca74a1b98eccb8dc4136b" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">ComponentTypes... components)</span></span>
             </h3>
-            <p>Creates a new entity.</p>
+            <p>Creates a new entity with the given components.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -291,7 +294,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ComponentTypes</td>
-                  <td>The types of the components to be added when the entity is created.</td>
+                  <td>Types of the components.</td>
                 </tr>
               </tbody>
               <thead>
@@ -300,7 +303,7 @@
               <tbody>
                 <tr>
                   <td>components</td>
-                  <td>The initial values for the components.</td>
+                  <td>Initial values for the components.</td>
                 </tr>
               </tbody>
             </table>
@@ -309,7 +312,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a37a304f4a486f692e862b8585b79fa61" class="m-doc-self">destroy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
             </h3>
-            <p>Removes an entity.</p>
+            <p>Destroys an entity and its components.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -317,10 +320,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> ID.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tbody>
             </table>
+<aside class="m-note m-dim"><h4><a href="todo.html#_todo000003" class="m-doc">Todo</a></h4><p>Whats the behavior when we pass an entity that has already been destroyed?</p></aside>
           </div></section>
           <section class="m-doc-details" id="a8df2e215fe9c352958a41542c371df27"><div>
             <h3>
@@ -340,7 +344,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if the entity is alive, false otherwise.</td>
+                  <td>Whether the entity is alive.</td>
                 </tr>
               </tfoot>
             </table>
@@ -361,7 +365,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ComponentTypes</td>
-                  <td>The types of the components to be added.</td>
+                  <td>Types of the components.</td>
                 </tr>
               </tbody>
               <thead>
@@ -370,14 +374,15 @@
               <tbody>
                 <tr>
                   <td>entity</td>
-                  <td></td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
                 <tr>
                   <td>components</td>
-                  <td>The initial values for the components.</td>
+                  <td>Initial values for the components.</td>
                 </tr>
               </tbody>
             </table>
+<p>If the entity already has one of the components, it is overwritten.</p>
           </div></section>
           <section class="m-doc-details" id="ab71c54cee050a09efe87eeaa1d0fe389"><div>
             <h3>
@@ -394,7 +399,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ComponentTypes</td>
-                  <td>Component types to be removed.</td>
+                  <td>Types of the components.</td>
                 </tr>
               </tbody>
               <thead>
@@ -403,10 +408,11 @@
               <tbody>
                 <tr>
                   <td>entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> ID.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tbody>
             </table>
+<p>If the entity doesn&#x27;t have one of the components, nothing happens.</p>
           </div></section>
           <section class="m-doc-details" id="a6a3810602a346f07a2d0e23103b14db1"><div>
             <h3>
@@ -432,9 +438,15 @@
               <tbody>
                 <tr>
                   <td>entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> ID.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the entity has the component.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="ac15c05bb49f8742ad080d9e74b3dbf95"><div>
@@ -450,7 +462,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> ID.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
                 <tr>
                   <td>context</td>
@@ -460,7 +472,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A package containing the components of the entity.</td>
+                  <td>Package containing the components of the entity.</td>
                 </tr>
               </tfoot>
             </table>
@@ -471,7 +483,7 @@
               const <a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">data::<wbr />Package</a>&amp; package,
               <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">data::<wbr />Context</a>* context = nullptr)</span></span>
             </h3>
-            <p>Unpacks components specified in a package into an entity. Removes any components that are already present in the entity.</p>
+            <p>Unpacks components specified in a package into an entity.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -479,7 +491,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> ID.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
                 <tr>
                   <td>package</td>
@@ -493,38 +505,39 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if the package was unpacked successfully, false otherwise.</td>
+                  <td>Whether the package was unpacked successfully.</td>
                 </tr>
               </tfoot>
             </table>
+<p>Removes any components that are already present in the entity.</p>
           </div></section>
           <section class="m-doc-details" id="ac4761becf40ee204c210d8243a7ac1a8"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1World.html#abee128f126b1ed6d66fe78399185a0f3" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac4761becf40ee204c210d8243a7ac1a8" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Returns an iterator which points to the first entity of the world.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>An iterator.</td>
+                  <td>Iterator.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Returns an iterator which points to the first entity of the world.</p>
           </div></section>
           <section class="m-doc-details" id="ab96c7b5a7966043fd88d9e1f795fcba4"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1World.html#abee128f126b1ed6d66fe78399185a0f3" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab96c7b5a7966043fd88d9e1f795fcba4" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Returns an iterator which points to the end of the world.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>An iterator.</td>
+                  <td>Iterator.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Returns an iterator which points to the end of the world.</p>
           </div></section>
         </section>
       </div>

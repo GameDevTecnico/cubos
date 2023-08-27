@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,19 +45,34 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Blueprint <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="blueprint_8hpp.html">&lt;core/ecs/blueprint.hpp&gt;</a></div>
         </h1>
+        <p>Stores a bundle of entities and their respective components, which can be easily spawned into a world. This is in a way the &#x27;Prefab&#x27; of CUBOS., but lower level.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Stores a bundle of entities and their respective components, which can be easily spawned into a world. This is in a way the &#x27;Prefab&#x27; of CUBOS., but lower level.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a11bc89b341e795f961b7e050995fee66">
+              <span class="m-doc-wrap-bumper"><a href="#a11bc89b341e795f961b7e050995fee66" class="m-doc-self">Blueprint</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs an empty blueprint.</dd>
+            <dt id="a49a4462bafaf6225ea7e439e2d34edb4">
+              <span class="m-doc-wrap-bumper"><a href="#a49a4462bafaf6225ea7e439e2d34edb4" class="m-doc-self">Blueprint</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -67,28 +81,28 @@
               <span class="m-doc-wrap-bumper">auto <a href="#affb909df49894d7753add06f944c8519" class="m-doc">create</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const ComponentTypes&amp;... components) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
             </dt>
-            <dd></dd>
+            <dd>Creates a new entity and returns its identifier.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#a1eeb218f59c07599dfb1773c1a59836c" class="m-doc">add</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               const ComponentTypes&amp;... components)</span>
             </dt>
-            <dd></dd>
+            <dd>Adds components to an entity.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ad926c62ae63fe18ac200b1a87ec96133" class="m-doc">addFromDeserializer</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               const std::string&amp; name,
               <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">data::<wbr />Deserializer</a>&amp; deserializer) -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Deserializes a component and adds it to an entity.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1d76f2ac2267c64fda966707e0c9489f" class="m-doc">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
             </dt>
-            <dd></dd>
+            <dd>Returns an entity from its name.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ae30d4f27b1469007d621cc339e379c2b" class="m-doc">merge</a>(</span><span class="m-doc-wrap">const std::string&amp; prefix,
               const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; other)</span>
             </dt>
-            <dd></dd>
+            <dd>Merges another blueprint into this one.</dd>
             <dt id="a98b440b50553018db544d6ce8c7bea6a">
               <span class="m-doc-wrap-bumper">void <a href="#a98b440b50553018db544d6ce8c7bea6a" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -105,6 +119,7 @@
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#affb909df49894d7753add06f944c8519" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const ComponentTypes&amp;... components)</span></span>
             </h3>
+            <p>Creates a new entity and returns its identifier.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -112,7 +127,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ComponentTypes</td>
-                  <td>The types of components to add to the entity.</td>
+                  <td>Component types.</td>
                 </tr>
               </tbody>
               <thead>
@@ -121,21 +136,20 @@
               <tbody>
                 <tr>
                   <td>name</td>
-                  <td>The name of the entity.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
                 </tr>
                 <tr>
                   <td>components</td>
-                  <td>The components to add to the entity.</td>
+                  <td>Components to add.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The new entity.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Creates a new entity and returns its identifier.</p>
           </div></section>
           <section class="m-doc-details" id="a1eeb218f59c07599dfb1773c1a59836c"><div>
             <h3>
@@ -145,6 +159,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1eeb218f59c07599dfb1773c1a59836c" class="m-doc-self">add</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               const ComponentTypes&amp;... components)</span></span>
             </h3>
+            <p>Adds components to an entity.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -152,7 +167,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ComponentTypes</td>
-                  <td>The types of the components.</td>
+                  <td>Component types.</td>
                 </tr>
               </tbody>
               <thead>
@@ -161,15 +176,14 @@
               <tbody>
                 <tr>
                   <td>entity</td>
-                  <td>The entity to add the components to.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
                 <tr>
                   <td>components</td>
-                  <td>The components to add.</td>
+                  <td>Components to add.</td>
                 </tr>
               </tbody>
             </table>
-<p>Adds components to an entity.</p>
           </div></section>
           <section class="m-doc-details" id="ad926c62ae63fe18ac200b1a87ec96133"><div>
             <h3>
@@ -177,6 +191,7 @@
               const std::string&amp; name,
               <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">data::<wbr />Deserializer</a>&amp; deserializer)</span></span>
             </h3>
+            <p>Deserializes a component and adds it to an entity.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -184,24 +199,24 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td>The entity to add the component to.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
                 <tr>
                   <td>name</td>
-                  <td>The name of the component type.</td>
+                  <td>Component type name.</td>
                 </tr>
                 <tr>
                   <td>deserializer</td>
-                  <td>The deserializer to deserialize from.</td>
+                  <td>Ddeserializer to deserialize from.</td>
                 </tr>
               </tbody>
             </table>
-<p>Deserializes a component and adds it to an entity.</p>
           </div></section>
           <section class="m-doc-details" id="a1d76f2ac2267c64fda966707e0c9489f"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1d76f2ac2267c64fda966707e0c9489f" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
             </h3>
+            <p>Returns an entity from its name.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -209,23 +224,23 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">name</td>
-                  <td>The name of the entity.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The entity, which may be &#x27;none&#x27; if the entity doesn&#x27;t exist (validate with entity.isNone).</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier, or null entity if not found.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Returns an entity from its name.</p>
           </div></section>
           <section class="m-doc-details" id="ae30d4f27b1469007d621cc339e379c2b"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />Blueprint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae30d4f27b1469007d621cc339e379c2b" class="m-doc-self">merge</a>(</span><span class="m-doc-wrap">const std::string&amp; prefix,
               const <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; other)</span></span>
             </h3>
+            <p>Merges another blueprint into this one.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -233,15 +248,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">prefix</td>
-                  <td>The name to prefix with the merged blueprint.</td>
+                  <td>Name to prefix with the merged blueprint.</td>
                 </tr>
                 <tr>
                   <td>other</td>
-                  <td>The other blueprint to merge.</td>
+                  <td>Other blueprint to merge.</td>
                 </tr>
               </tbody>
             </table>
-<p>Merges another blueprint into this one. All of the names of the other blueprint will be prefixed with the specified string.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>All of the entity names of the other blueprint will be prefixed with the specified string.</p></aside>
           </div></section>
         </section>
       </div>

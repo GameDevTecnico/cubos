@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1memory.html">memory</a>::<wbr/></span>BufferStream <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="buffer__stream_8hpp.html">&lt;core/memory/buffer_stream.hpp&gt;</a></div>
         </h1>
-        <p>Implements a stream that writes to/reads from a buffer.</p>
+        <p><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which writes to/reads from a buffer.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -67,7 +67,7 @@
             <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>
             </dt>
-            <dd>Abstract class for memory streams.</dd>
+            <dd>Interface class for memory streams. Abstracts away sources or destinations of data.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -78,52 +78,60 @@
               std::size_t size,
               bool readOnly = false)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs using an existing buffer.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a9d57ad24172b7a16971b5ce5620bc98c" class="m-doc">BufferStream</a>(</span><span class="m-doc-wrap">const void* buffer,
               std::size_t size)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs using a read-only buffer.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#ab6f995eba9480a463e485c418fe34274" class="m-doc">BufferStream</a>(</span><span class="m-doc-wrap">std::size_t size = 16)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs using a new buffer, managed internally and which grows as needed.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a814ffb576848ed56f5f37a9419fab223" class="m-doc">BufferStream</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">BufferStream</a>&amp; other)</span>
+            </dt>
+            <dd>Constructs a copy of another buffer stream. If the given buffer stream owns its buffer, the copy will also create its own buffer. Otherwise, it will share the buffer with the original.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a7301a1e2a2b8efc76b2ed1d674feb301" class="m-doc">BufferStream</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">BufferStream</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a2eb4f956f6f193782c922d7a31f9e16e">
-              <span class="m-doc-wrap-bumper">auto <a href="#a2eb4f956f6f193782c922d7a31f9e16e" class="m-doc-self">getBuffer</a>(</span><span class="m-doc-wrap">) const -&gt; const void*</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2eb4f956f6f193782c922d7a31f9e16e" class="m-doc">getBuffer</a>(</span><span class="m-doc-wrap">) const -&gt; const void*</span>
             </dt>
             <dd>Gets the buffer of this stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a028f602e23b3187aa267beaec1271017" class="m-doc">read</a>(</span><span class="m-doc-wrap">void* data,
               std::size_t size) -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Reads data from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1ce01e492473531819d0518b45c1f0dc" class="m-doc">write</a>(</span><span class="m-doc-wrap">const void* data,
               std::size_t size) -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Writes data to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a6591fee67d608275c358dc85ac38b368" class="m-doc">tell</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the current position in the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aba9b82f0682defa44e4f6bc25f9e7b61" class="m-doc">seek</a>(</span><span class="m-doc-wrap">ptrdiff_t offset,
-              <a href="namespacecubos_1_1core_1_1memory.html#a3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> origin) <span class="m-label m-flat m-warning">override</span></span>
+              <a href="group__core-memory.html#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> origin) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Seeks to a position in the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a52b64617659d548f4e69e99b9e1ebcbd" class="m-doc">eof</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Checks if the stream still has content to read.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#afe3b74e076d82366156b8bc1b4efffe0" class="m-doc">peek</a>(</span><span class="m-doc-wrap">) const -&gt; char <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Peeks one byte from the stream.</dd>
           </dl>
         </section>
         <section>
@@ -134,6 +142,7 @@
               std::size_t size,
               bool readOnly = false)</span></span>
             </h3>
+            <p>Constructs using an existing buffer.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -141,15 +150,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">buffer</td>
-                  <td>The buffer to read/write from.</td>
+                  <td>Buffer to read/write from.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Size of the buffer.</td>
                 </tr>
                 <tr>
                   <td>readOnly</td>
-                  <td></td>
+                  <td>Whether the buffer is read-only.</td>
                 </tr>
               </tbody>
             </table>
@@ -159,6 +168,7 @@
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d57ad24172b7a16971b5ce5620bc98c" class="m-doc-self">BufferStream</a>(</span><span class="m-doc-wrap">const void* buffer,
               std::size_t size)</span></span>
             </h3>
+            <p>Constructs using a read-only buffer.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -166,11 +176,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">buffer</td>
-                  <td>The buffer to read/write from.</td>
+                  <td>Buffer to read/write from.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Size of the buffer.</td>
                 </tr>
               </tbody>
             </table>
@@ -179,6 +189,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab6f995eba9480a463e485c418fe34274" class="m-doc-self">BufferStream</a>(</span><span class="m-doc-wrap">std::size_t size = 16)</span></span>
             </h3>
+            <p>Constructs using a new buffer, managed internally and which grows as needed.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -186,17 +197,65 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Initial size of the buffer.</td>
                 </tr>
               </tbody>
             </table>
-<p>Initializes a buffer stream with a new buffer, initially of the given size. When initialized this way, the buffer stream will own the buffer and will delete it when it is destroyed. It will expand the buffer when needed.</p>
+          </div></section>
+          <section class="m-doc-details" id="a814ffb576848ed56f5f37a9419fab223"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a814ffb576848ed56f5f37a9419fab223" class="m-doc-self">BufferStream</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">BufferStream</a>&amp; other)</span></span>
+            </h3>
+            <p>Constructs a copy of another buffer stream. If the given buffer stream owns its buffer, the copy will also create its own buffer. Otherwise, it will share the buffer with the original.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Buffer stream to copy.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7301a1e2a2b8efc76b2ed1d674feb301"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7301a1e2a2b8efc76b2ed1d674feb301" class="m-doc-self">BufferStream</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">BufferStream</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Buffer stream to move.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2eb4f956f6f193782c922d7a31f9e16e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2eb4f956f6f193782c922d7a31f9e16e" class="m-doc-self">getBuffer</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the buffer of this stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Buffer.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
           <section class="m-doc-details" id="a028f602e23b3187aa267beaec1271017"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a028f602e23b3187aa267beaec1271017" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">void* data,
               std::size_t size) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Reads data from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -204,27 +263,27 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">data</td>
-                  <td>The buffer to read data into.</td>
+                  <td>Buffer to read data into.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Size of the buffer.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The number of bytes read.</td>
+                  <td>Number of bytes read.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Reads data from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a1ce01e492473531819d0518b45c1f0dc"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ce01e492473531819d0518b45c1f0dc" class="m-doc-self">write</a>(</span><span class="m-doc-wrap">const void* data,
               std::size_t size) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Writes data to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -232,41 +291,41 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">data</td>
-                  <td>The buffer to write data from.</td>
+                  <td>Buffer to write data from.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Size of the buffer.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The number of bytes written.</td>
+                  <td>Number of bytes written.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Writes data to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a6591fee67d608275c358dc85ac38b368"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6591fee67d608275c358dc85ac38b368" class="m-doc-self">tell</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Gets the current position in the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The current position in the stream, or SIZE_MAX if the position is unknown.</td>
+                  <td>Current position in the stream, or SIZE_MAX if the position is unknown.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the current position in the stream.</p>
           </div></section>
           <section class="m-doc-details" id="aba9b82f0682defa44e4f6bc25f9e7b61"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aba9b82f0682defa44e4f6bc25f9e7b61" class="m-doc-self">seek</a>(</span><span class="m-doc-wrap">ptrdiff_t offset,
-              <a href="namespacecubos_1_1core_1_1memory.html#a3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> origin) <span class="m-label m-warning">override</span></span></span>
+              <a href="group__core-memory.html#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> origin) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Seeks to a position in the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -274,43 +333,42 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">offset</td>
-                  <td>The offset to seek to.</td>
+                  <td>Offset to seek to.</td>
                 </tr>
                 <tr>
                   <td>origin</td>
-                  <td>The origin of the offset.</td>
+                  <td>Origin of the offset.</td>
                 </tr>
               </tbody>
             </table>
-<p>Seeks to a position in the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a52b64617659d548f4e69e99b9e1ebcbd"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a52b64617659d548f4e69e99b9e1ebcbd" class="m-doc-self">eof</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Checks if the stream still has content to read.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>True if the stream has no more content to read, false otherwise.</td>
+                  <td>Whether the stream has reached the end.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Checks if the stream still has content to read.</p>
           </div></section>
           <section class="m-doc-details" id="afe3b74e076d82366156b8bc1b4efffe0"><div>
             <h3>
               <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />memory::<wbr />BufferStream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afe3b74e076d82366156b8bc1b4efffe0" class="m-doc-self">peek</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Peeks one byte from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The byte peeked.</td>
+                  <td>Peeked byte.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Peeks one byte from the stream.</p>
           </div></section>
         </section>
       </div>

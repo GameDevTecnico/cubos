@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +44,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="event__reader_8hpp.html">&lt;core/ecs/event_reader.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="event__pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>EventReader <span class="m-thin">class</span>
         </h1>
+        <p>System arguments used to read events of type <code>T</code>.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -59,7 +60,7 @@
             </tr>
             <tr>
               <td>M</td>
-              <td>Event mask.</td>
+              <td>Filter mask.</td>
             </tr>
           </tbody>
         </table>
@@ -70,19 +71,30 @@
               Reference
               <ul>
                 <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Used to read events, filtering is also possible via M parameter. In case M template parameter is not provided, it will read all events (no filtering).</p>
+<p>Filtering the received events by their mask is also possible via the parameter <code>M</code>. By default, the reader will read all events sent.</p><aside class="m-note m-default"><h4>See also</h4><p>Systems can send events using <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a>.</p></aside>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1EventReader_1_1Iterator.html" class="m-doc">Iterator</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a> custom iterator.</dd>
+            <dd>Used to iterate over events received by a reader.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#adea2c508240ad00508509ebcdf4f3bf4" class="m-doc">EventReader</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">EventPipe</a>&lt;T&gt;&amp; pipe,
+              std::size_t&amp; index)</span>
+            </dt>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -91,11 +103,45 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ad88aae794edea0cc3067484ce03e3190" class="m-doc">read</a>(</span><span class="m-doc-wrap">) -&gt; std::optional&lt;std::reference_wrapper&lt;const T&gt;&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Returns a reference to current event, and advances.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae6cdc4c93800e07580b67efdf6ef4804" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1EventReader_1_1Iterator.html" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an iterator to the first event.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad656df179f95e3b9f687da1e7a7ceb03" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1EventReader_1_1Iterator.html" class="m-doc">Iterator</a></span>
+            </dt>
+            <dd>Returns an iterator to the end.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="adea2c508240ad00508509ebcdf4f3bf4"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, unsigned int M&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />EventReader&lt;T, M&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adea2c508240ad00508509ebcdf4f3bf4" class="m-doc-self">EventReader</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">EventPipe</a>&lt;T&gt;&amp; pipe,
+              std::size_t&amp; index)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pipe</td>
+                  <td>Event pipe to read events from.</td>
+                </tr>
+                <tr>
+                  <td>index</td>
+                  <td>Reference to the reader&#x27;s index.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Uses the given <code>index</code> to know which events it has already read. Increments it whenever it reads an event.</p>
+          </div></section>
           <section class="m-doc-details" id="ad88aae794edea0cc3067484ce03e3190"><div>
             <h3>
               <div class="m-doc-template">
@@ -103,7 +149,49 @@
               </div>
               <span class="m-doc-wrap-bumper">std::optional&lt;std::reference_wrapper&lt;const T&gt;&gt; cubos::<wbr />core::<wbr />ecs::<wbr />EventReader&lt;T, M&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad88aae794edea0cc3067484ce03e3190" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-<p>Returns a reference to current event, and advances. It returns nullopt if there are no more events to read!</p>
+            <p>Returns a reference to current event, and advances.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Reference to current event, or <code>std::nullopt</code> if there are no more events.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae6cdc4c93800e07580b67efdf6ef4804"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, unsigned int M&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1EventReader_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />EventReader&lt;T, M&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae6cdc4c93800e07580b67efdf6ef4804" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns an iterator to the first event.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1EventReader_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad656df179f95e3b9f687da1e7a7ceb03"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T, unsigned int M&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1EventReader_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />EventReader&lt;T, M&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad656df179f95e3b9f687da1e7a7ceb03" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns an iterator to the end.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1EventReader_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
         </section>
       </div>

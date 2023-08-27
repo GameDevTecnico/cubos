@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>Settings <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="settings_8hpp.html">&lt;core/settings.hpp&gt;</a></div>
         </h1>
-        <p>Object used to manage settings.</p>
+        <p>Stores settings as key-value pairs and provides methods to retrieve them.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -59,6 +59,7 @@
             </li>
           </ul>
         </nav>
+<aside class="m-note m-dim"><h4><a href="todo.html#_todo000017" class="m-doc">Todo</a></h4><p>Should be moved to the engine.</p></aside>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -70,46 +71,46 @@
               <span class="m-doc-wrap-bumper">void <a href="#a8f1c966921ac73f35c3128b6a671b42c" class="m-doc">setBool</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               const bool&amp; value)</span>
             </dt>
-            <dd></dd>
+            <dd>Defines a new boolean setting.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac63af799da1b5f765ca8c463bed6e2de" class="m-doc">getBool</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               const bool&amp; defaultValue) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Retrieves the bool setting with the given <code>key</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aba398a53536c67bf040030c5a2f98fc9" class="m-doc">setString</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               const std::string&amp; value)</span>
             </dt>
-            <dd></dd>
+            <dd>Defines a new string setting.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aed639b9b2f48b6f7fd97badf9f1563f9" class="m-doc">getString</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               const std::string&amp; defaultValue) const -&gt; std::string</span>
             </dt>
-            <dd></dd>
+            <dd>Retrieves the string setting with the given <code>key</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aa9c7637075dd346e2c152a67bb0ac257" class="m-doc">setInteger</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               int value)</span>
             </dt>
-            <dd></dd>
+            <dd>Defines a new integer setting.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aba144de351f0cb9f1b06d1d14449ed28" class="m-doc">getInteger</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               int defaultValue) const -&gt; int</span>
             </dt>
-            <dd></dd>
+            <dd>Retrieves the integer setting with the given <code>key</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aea7c7a61efcf0d05ae9d8611bca75e29" class="m-doc">setDouble</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               double value)</span>
             </dt>
-            <dd></dd>
+            <dd>Defines a new double setting.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a89387356ec3fa68c6168929ff35c9cd7" class="m-doc">getDouble</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               double defaultValue) const -&gt; double</span>
             </dt>
-            <dd></dd>
+            <dd>Retrieves the double setting with the given <code>key</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a359f07610a3baa7bc1d12d5691a172be" class="m-doc">merge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1Settings.html" class="m-doc">Settings</a>&amp; settingsToMerge)</span>
             </dt>
-            <dd></dd>
+            <dd>Merges the settings from <code>settingsToMerge</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a5cb83992ec86a95883dae3784ae62a00" class="m-doc">getValues</a>(</span><span class="m-doc-wrap">) const -&gt; const std::unordered_map&lt;std::string, std::string&gt;&amp;</span>
             </dt>
@@ -127,6 +128,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f1c966921ac73f35c3128b6a671b42c" class="m-doc-self">setBool</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               const bool&amp; value)</span></span>
             </h3>
+            <p>Defines a new boolean setting.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -134,21 +136,22 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The setting&#x27;s key.</td>
+                  <td>Key.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>The setting&#x27;s value.</td>
+                  <td>Value.</td>
                 </tr>
               </tbody>
             </table>
-<p>Defines a new bool setting. If the setting already exists, overrides its value with the new value.</p>
+<p>If the setting already exists, overwrites its value.</p>
           </div></section>
           <section class="m-doc-details" id="ac63af799da1b5f765ca8c463bed6e2de"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac63af799da1b5f765ca8c463bed6e2de" class="m-doc-self">getBool</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               const bool&amp; defaultValue) const</span></span>
             </h3>
+            <p>Retrieves the bool setting with the given <code>key</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -156,27 +159,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The setting&#x27;s key.</td>
+                  <td>Key.</td>
                 </tr>
                 <tr>
                   <td>defaultValue</td>
-                  <td>The value returned when not setting with the provided key exists.</td>
+                  <td>Default value.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The setting&#x27;s value.</td>
+                  <td>Current value.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Retrieves the bool settings with a specific key. If no setting exists with such key, returns the default value.</p>
+<p>If no setting exists with such key, returns <code>defaultValue</code>. If the setting exists but its value is not &quot;true&quot;, returns false.</p>
           </div></section>
           <section class="m-doc-details" id="aba398a53536c67bf040030c5a2f98fc9"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aba398a53536c67bf040030c5a2f98fc9" class="m-doc-self">setString</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               const std::string&amp; value)</span></span>
             </h3>
+            <p>Defines a new string setting.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -184,21 +188,22 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The setting&#x27;s key.</td>
+                  <td>Key.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>The setting&#x27;s value.</td>
+                  <td>Value.</td>
                 </tr>
               </tbody>
             </table>
-<p>Defines a new string setting. If the setting already exists, overrides its value with the new value.</p>
+<p>If the setting already exists, overwrites its value.</p>
           </div></section>
           <section class="m-doc-details" id="aed639b9b2f48b6f7fd97badf9f1563f9"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aed639b9b2f48b6f7fd97badf9f1563f9" class="m-doc-self">getString</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               const std::string&amp; defaultValue) const</span></span>
             </h3>
+            <p>Retrieves the string setting with the given <code>key</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -206,27 +211,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The setting&#x27;s key.</td>
+                  <td>Key.</td>
                 </tr>
                 <tr>
                   <td>defaultValue</td>
-                  <td>The value returned when not setting with the provided key exists.</td>
+                  <td>Default value.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The setting&#x27;s value.</td>
+                  <td>Current value.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Retrieves the string settings with a specific key. If no setting exists with such key, returns the default value.</p>
+<p>If no setting exists with such key, returns <code>defaultValue</code>.</p>
           </div></section>
           <section class="m-doc-details" id="aa9c7637075dd346e2c152a67bb0ac257"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa9c7637075dd346e2c152a67bb0ac257" class="m-doc-self">setInteger</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               int value)</span></span>
             </h3>
+            <p>Defines a new integer setting.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -234,21 +240,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The setting&#x27;s key.</td>
+                  <td>Key.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>The setting&#x27;s value.</td>
+                  <td>Value.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Current value.</td>
+                </tr>
+              </tfoot>
             </table>
-<p>Defines a new integer setting. If the setting already exists, overrides its value with the new value.</p>
+<p>If the setting already exists, overwrites its value.</p>
           </div></section>
           <section class="m-doc-details" id="aba144de351f0cb9f1b06d1d14449ed28"><div>
             <h3>
               <span class="m-doc-wrap-bumper">int cubos::<wbr />core::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aba144de351f0cb9f1b06d1d14449ed28" class="m-doc-self">getInteger</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               int defaultValue) const</span></span>
             </h3>
+            <p>Retrieves the integer setting with the given <code>key</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -256,27 +269,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The setting&#x27;s key.</td>
+                  <td>Key.</td>
                 </tr>
                 <tr>
                   <td>defaultValue</td>
-                  <td>The value returned when not setting with the provided key exists.</td>
+                  <td>Default value.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The setting&#x27;s value.</td>
+                  <td>Current value.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Retrieves the integer settings with a specific key. If no setting exists with such key, returns the default value.</p>
+<p>If no setting exists with such key, returns <code>defaultValue</code>. If the setting exists but its value is not a valid integer, returns <code>defaultValue</code>.</p>
           </div></section>
           <section class="m-doc-details" id="aea7c7a61efcf0d05ae9d8611bca75e29"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aea7c7a61efcf0d05ae9d8611bca75e29" class="m-doc-self">setDouble</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               double value)</span></span>
             </h3>
+            <p>Defines a new double setting.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -284,21 +298,22 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The setting&#x27;s key.</td>
+                  <td>Key.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>The setting&#x27;s value.</td>
+                  <td>Value.</td>
                 </tr>
               </tbody>
             </table>
-<p>Defines a new double setting. If the setting already exists, overrides its value with the new value.</p>
+<p>If the setting already exists, overwrites its value.</p>
           </div></section>
           <section class="m-doc-details" id="a89387356ec3fa68c6168929ff35c9cd7"><div>
             <h3>
               <span class="m-doc-wrap-bumper">double cubos::<wbr />core::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a89387356ec3fa68c6168929ff35c9cd7" class="m-doc-self">getDouble</a>(</span><span class="m-doc-wrap">const std::string&amp; key,
               double defaultValue) const</span></span>
             </h3>
+            <p>Retrieves the double setting with the given <code>key</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -306,26 +321,27 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The setting&#x27;s key.</td>
+                  <td>Key.</td>
                 </tr>
                 <tr>
                   <td>defaultValue</td>
-                  <td>The value returned when not setting with the provided key exists.</td>
+                  <td>Default value.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The setting&#x27;s value.</td>
+                  <td>Current value.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Retrieves the double settings with a specific key. If no setting exists with such key, returns the default value.</p>
+<p>If no setting exists with such key, returns the default value. If the setting exists but its value is not a valid double, returns the default value.</p>
           </div></section>
           <section class="m-doc-details" id="a359f07610a3baa7bc1d12d5691a172be"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />Settings::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a359f07610a3baa7bc1d12d5691a172be" class="m-doc-self">merge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1Settings.html" class="m-doc">Settings</a>&amp; settingsToMerge)</span></span>
             </h3>
+            <p>Merges the settings from <code>settingsToMerge</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -333,11 +349,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">settingsToMerge</td>
-                  <td>The settings to be merged to this instance.</td>
+                  <td><a href="classcubos_1_1core_1_1Settings.html" class="m-doc">Settings</a> to be merged to this instance.</td>
                 </tr>
               </tbody>
             </table>
-<p>Merges the settings from settingsToMerge. If a setting from settingsToMerge already exists, overrides its value.</p><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1Settings.html#aba398a53536c67bf040030c5a2f98fc9" class="m-doc">setString</a>.</p></aside>
+<p>If a setting from <code>settingsToMerge</code> is already defined in this instance, its value is overwritten.</p>
           </div></section>
           <section class="m-doc-details" id="a5cb83992ec86a95883dae3784ae62a00"><div>
             <h3>
@@ -347,7 +363,7 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying unordered_map with the settings.</td>
+                  <td>Underlying <code>std::unordered_map</code> with the settings.</td>
                 </tr>
               </tfoot>
             </table>
@@ -360,7 +376,7 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying unordered_map with the settings.</td>
+                  <td>Underlying <code>std::unordered_map</code> with the settings.</td>
                 </tr>
               </tfoot>
             </table>

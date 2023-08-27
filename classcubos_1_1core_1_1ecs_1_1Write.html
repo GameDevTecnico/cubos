@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +44,22 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="accessors_8hpp.html">&lt;core/ecs/accessors.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Write <span class="m-thin">class</span>
         </h1>
+        <p>System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">T</td>
+              <td>Resource or component type.</td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -60,14 +72,14 @@
             </li>
           </ul>
         </nav>
-<p>System argument which provides write access to the given resource or component. Can be used as a pointer with both the <code>-&gt;</code> and <code>.</code> operators.</p>
+<p>Can be used as a pointer with both the <code>-&gt;</code> and <code>*</code> operators.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#aff8846e5d9e835838a68c4c2f06146fb" class="m-doc">Write</a>(</span><span class="m-doc-wrap">T&amp; ref)</span>
             </dt>
-            <dd></dd>
+            <dd>Creates a new write argument.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -76,11 +88,11 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#acce20ad90089be53a4c69e5e18c89fd9" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) -&gt; T*</span>
             </dt>
-            <dd></dd>
+            <dd>Accesses the resource or component.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1252b015c27a3e18e5d299ed0c046356" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) -&gt; T&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Accesses the resource or component.</dd>
           </dl>
         </section>
         <section>
@@ -92,6 +104,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Write&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff8846e5d9e835838a68c4c2f06146fb" class="m-doc-self">Write</a>(</span><span class="m-doc-wrap">T&amp; ref)</span></span>
             </h3>
+            <p>Creates a new write argument.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -103,7 +116,6 @@
                 </tr>
               </tbody>
             </table>
-<p>Creates a new write argument.</p>
           </div></section>
           <section class="m-doc-details" id="acce20ad90089be53a4c69e5e18c89fd9"><div>
             <h3>
@@ -112,11 +124,12 @@
               </div>
               <span class="m-doc-wrap-bumper">T* cubos::<wbr />core::<wbr />ecs::<wbr />Write&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acce20ad90089be53a4c69e5e18c89fd9" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Accesses the resource or component.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>A pointer to the resource or component.</td>
+                  <td>Pointer to the resource or component.</td>
                 </tr>
               </tfoot>
             </table>
@@ -128,11 +141,12 @@
               </div>
               <span class="m-doc-wrap-bumper">T&amp; cubos::<wbr />core::<wbr />ecs::<wbr />Write&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1252b015c27a3e18e5d299ed0c046356" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Accesses the resource or component.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>A reference to the resource or component.</td>
+                  <td>Reference to the resource or component.</td>
                 </tr>
               </tfoot>
             </table>

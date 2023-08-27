@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -48,7 +47,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>EmbeddedArchive <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="embedded__archive_8hpp.html">&lt;core/data/fs/embedded_archive.hpp&gt;</a></div>
         </h1>
-        <p><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which allows reading from data embedded in the application as if it was a regular file or directory. Meant to be used with the <code>cubinhos embed</code> tool.</p>
+        <p><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads data embedded in the application. Meant to be used with the <code>cubinhos embed</code> tool.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -64,14 +63,14 @@
             </li>
           </ul>
         </nav>
-<p>This archive works by provide a global map of data, where embedded data can be registered with a given name. Then, to access that data, an instance of this archive should be created with the same name, and then mounted anywhere on the file system.</p><p>The embed tool works by by generating source files which define and register that data. By linking those files into your application, your making the data available to be accessed through an instance of this archive.</p><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a></p></aside>
+<p>Can be used to create single-file applications, where all the data is embedded in the executable.</p><p>This archive accesses a global map of data, where embedded data can be registered with a given name. Then, to access that data, an instance of this archive is created pointing to that name.</p><p>The <code>embed</code> tool generates source files which define and register that data. By linking those files into your application, you&#x27;re making the data available to be accessed through an instance of this archive.</p>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>
             </dt>
-            <dd>Acts as a bridge between the virtual file system and some place where data is actually stored, such as a file on disk or a network connection. Should never be used directly by the user - instead, use the <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> and <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> classes.</dd>
+            <dd>Interface for a bridge between the CUBOS. virtual file system and the real world.</dd>
           </dl>
         </section>
         <section id="pub-types">
@@ -90,7 +89,7 @@
               <span class="m-doc-wrap-bumper">static void <a href="#aee2398b92971c333b0cff2fca7f79a8e" class="m-doc">registerData</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const <a href="structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html" class="m-doc">Data</a>&amp; data)</span>
             </dt>
-            <dd></dd>
+            <dd>Registers embedded archive data, which must remain valid for the lifetime of the application.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -99,7 +98,7 @@
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a67487b227147664374511d8b7ff7bd67" class="m-doc">EmbeddedArchive</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs pointing to the data with the given <code>name</code>.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -110,41 +109,41 @@
               std::string_view name,
               bool directory = false) -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Creates a new file in the archive.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af03648c632cb9881f0f5dd6e2b6bc3b2" class="m-doc">destroy</a>(</span><span class="m-doc-wrap">std::size_t id) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Destroys a regular file or empty directory in the archive.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a3d11ca25a5b4272a8902caab5922a5a5" class="m-doc">name</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; std::string <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the name of the file with the given <code>id</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#add51e0403c3231f87d86f3e7da1abacb" class="m-doc">directory</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Checks whether the file with the given <code>id</code> is a directory.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a636474e803b936b9a60eeeb1e49d9366" class="m-doc">readOnly</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Checks whether the archive is read-only.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a632d7a9983a44332291981624836c6e2" class="m-doc">parent</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the identifier of the parent file of the file with the given <code>id</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8fb17098025c13319b5fc9af75ab3294" class="m-doc">sibling</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the identifier of the sibling of the file with the given <code>id</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8d1f46dbbad0c6ccd7cb88baa3a542bc" class="m-doc">child</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the identifier of the first child of the file with the given <code>id</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a55c73dd6e6910163147dd7639be1d74b" class="m-doc">open</a>(</span><span class="m-doc-wrap">std::size_t id,
               <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a> handle,
               <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">File::<wbr />OpenMode</a> mode) -&gt; std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt; <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Opens a file in the archive.</dd>
           </dl>
         </section>
         <section>
@@ -154,6 +153,7 @@
               <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee2398b92971c333b0cff2fca7f79a8e" class="m-doc-self">registerData</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const <a href="structcubos_1_1core_1_1data_1_1EmbeddedArchive_1_1Data.html" class="m-doc">Data</a>&amp; data)</span></span>
             </h3>
+            <p>Registers embedded archive data, which must remain valid for the lifetime of the application.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -161,20 +161,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">name</td>
-                  <td>The name of the embedded archive data.</td>
+                  <td>Name of the embedded archive data.</td>
                 </tr>
                 <tr>
                   <td>data</td>
-                  <td>The embedded archive data.</td>
+                  <td>Embedded archive data.</td>
                 </tr>
               </tbody>
             </table>
-<p>Registers a embedded archive data.</p>
+<p>This function is called by the code generated by the <code>embed</code> tool.</p>
           </div></section>
           <section class="m-doc-details" id="a67487b227147664374511d8b7ff7bd67"><div>
             <h3>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a67487b227147664374511d8b7ff7bd67" class="m-doc-self">EmbeddedArchive</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
             </h3>
+            <p>Constructs pointing to the data with the given <code>name</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -182,10 +183,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">name</td>
-                  <td>Name of the data the embedded archive represents. Must match a registered data instance - aborts otherwise.</td>
+                  <td>Name of the data the embedded archive is going to access.</td>
                 </tr>
               </tbody>
             </table>
+<p>Aborts if no data with the given <code>name</code> was registered.</p>
           </div></section>
           <section class="m-doc-details" id="a8028054165ff3aa389832efeb96a4d2a"><div>
             <h3>
@@ -193,6 +195,7 @@
               std::string_view name,
               bool directory = false) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Creates a new file in the archive.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -208,7 +211,7 @@
                 </tr>
                 <tr>
                   <td>directory</td>
-                  <td></td>
+                  <td>Whether the new file is a directory or not.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -218,12 +221,13 @@
                 </tr>
               </tfoot>
             </table>
-<p>Creates a new file in the archive. The first child of the parent will have its sibling set to the new file and then be replaced by the new file.</p>
+<p>The first child of the <code>parent</code> will have its sibling set to the new file and then be replaced by the new file.</p>
           </div></section>
           <section class="m-doc-details" id="af03648c632cb9881f0f5dd6e2b6bc3b2"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af03648c632cb9881f0f5dd6e2b6bc3b2" class="m-doc-self">destroy</a>(</span><span class="m-doc-wrap">std::size_t id) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Destroys a regular file or empty directory in the archive.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -241,12 +245,13 @@
                 </tr>
               </tfoot>
             </table>
-<p>Destroys a regular file or empty directory in the archive. Will be replaced in the tree its next sibling.</p>
+<p>Will be replaced in the tree by its sibling.</p>
           </div></section>
           <section class="m-doc-details" id="a3d11ca25a5b4272a8902caab5922a5a5"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3d11ca25a5b4272a8902caab5922a5a5" class="m-doc-self">name</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Gets the name of the file with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -269,6 +274,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#add51e0403c3231f87d86f3e7da1abacb" class="m-doc-self">directory</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Checks whether the file with the given <code>id</code> is a directory.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -291,6 +297,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a636474e803b936b9a60eeeb1e49d9366" class="m-doc-self">readOnly</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Checks whether the archive is read-only.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -304,6 +311,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a632d7a9983a44332291981624836c6e2" class="m-doc-self">parent</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Gets the identifier of the parent file of the file with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -326,6 +334,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8fb17098025c13319b5fc9af75ab3294" class="m-doc-self">sibling</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Gets the identifier of the sibling of the file with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -339,7 +348,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Identifier of the next sibling, or 0 if there are no more files in the parent.</td>
+                  <td>Identifier of the sibling, or 0 if there are no more files in the parent.</td>
                 </tr>
               </tfoot>
             </table>
@@ -348,6 +357,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />EmbeddedArchive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d1f46dbbad0c6ccd7cb88baa3a542bc" class="m-doc-self">child</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Gets the identifier of the first child of the file with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -372,6 +382,7 @@
               <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a> handle,
               <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">File::<wbr />OpenMode</a> mode) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Opens a file in the archive.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -383,7 +394,7 @@
                 </tr>
                 <tr>
                   <td>handle</td>
-                  <td>Handle to increase the reference count of the file, preventing it from being destroyed while the stream is open.</td>
+                  <td>Handle to the file.</td>
                 </tr>
                 <tr>
                   <td>mode</td>
@@ -393,11 +404,11 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A file stream, or nullptr if the file could not be opened.</td>
+                  <td><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> stream, or nullptr if the file could not be opened.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Opens a file in the archive.</p>
+<p>Although a bit hacky, the <code>handle</code> parameter is used to keep a reference to the respective <code><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a></code> alive, preventing the file from being destroyed while the stream is open.</p>
           </div></section>
         </section>
       </div>

@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,7 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>EntityManager <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="entity__manager_8hpp.html">&lt;core/ecs/entity_manager.hpp&gt;</a></div>
         </h1>
+        <p>Holds and manages entities and their component masks.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -60,14 +61,14 @@
             </li>
           </ul>
         </nav>
-<p>Object which manages the entities of the ECS world and their masks. Used internally by the ECS world.</p>
+<p>Used internally by <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>.</p>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a>
             </dt>
-            <dd>Used to iterate over all entities of a world with a certain set of components.</dd>
+            <dd>Used to iterate over all entities in a manager with a certain component mask.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -76,7 +77,7 @@
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#ab9e0de8732be13eca75b090be7371755" class="m-doc">EntityManager</a>(</span><span class="m-doc-wrap">std::size_t initialCapacity)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs with a certain initial entity capacity.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -85,40 +86,40 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac84b30b7c07f4186448a695fad0793f0" class="m-doc">create</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc">Entity::<wbr />Mask</a> mask) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
             </dt>
-            <dd></dd>
+            <dd>Creates a new entity with a certain component mask.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ad6f137572fd4ca2f82b0ef9144829ca6" class="m-doc">destroy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
             </dt>
-            <dd></dd>
+            <dd>Removes an entity from the world.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a9eed7b0c4227eb52b8348288983c5222" class="m-doc">setMask</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               <a href="classcubos_1_1core_1_1ecs_1_1Entity.html#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc">Entity::<wbr />Mask</a> mask)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the component mask of an entity.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af6e62afa406867a5ecd7243c9a150b3d" class="m-doc">getMask</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1Entity.html#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc">Entity::<wbr />Mask</a>&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the component mask of an entity.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a75096d58c97d64e35c7eb139fd0c254c" class="m-doc">isValid</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if an entity is still valid.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a6d6b6102f61d87cc65a6f8d6c9b9d24b" class="m-doc">isAlive</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if an entity is alive.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab435604718adcc1792be625ecfc3a80d" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a></span>
             </dt>
-            <dd></dd>
+            <dd>Returns an iterator over all entities.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aebc3e4632f2b67c0f50e7e9a74f63d0f" class="m-doc">withMask</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc">Entity::<wbr />Mask</a> mask) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a></span>
             </dt>
-            <dd></dd>
+            <dd>Returns an iterator over all entities with a certain mask of components.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a95b174d238e799d5e3912521c4a2554a" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a></span>
             </dt>
-            <dd></dd>
+            <dd>Returns an iterator which points to the end of the entity manager.</dd>
           </dl>
         </section>
         <section>
@@ -127,6 +128,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab9e0de8732be13eca75b090be7371755" class="m-doc-self">EntityManager</a>(</span><span class="m-doc-wrap">std::size_t initialCapacity)</span></span>
             </h3>
+            <p>Constructs with a certain initial entity capacity.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -134,7 +136,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">initialCapacity</td>
-                  <td>The initial capacity of the entity manager.</td>
+                  <td>Initial capacity of the entity manager.</td>
                 </tr>
               </tbody>
             </table>
@@ -143,6 +145,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac84b30b7c07f4186448a695fad0793f0" class="m-doc-self">create</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc">Entity::<wbr />Mask</a> mask)</span></span>
             </h3>
+            <p>Creates a new entity with a certain component mask.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -150,22 +153,22 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">mask</td>
-                  <td>The component mask of the entity.</td>
+                  <td>Component mask of the entity.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The entity handle.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> handle.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Creates a new entity with a certain component mask.</p>
           </div></section>
           <section class="m-doc-details" id="ad6f137572fd4ca2f82b0ef9144829ca6"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad6f137572fd4ca2f82b0ef9144829ca6" class="m-doc-self">destroy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
             </h3>
+            <p>Removes an entity from the world.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -173,17 +176,17 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td>The entity to remove.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to remove.</td>
                 </tr>
               </tbody>
             </table>
-<p>Removes an entity from the world.</p>
           </div></section>
           <section class="m-doc-details" id="a9eed7b0c4227eb52b8348288983c5222"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9eed7b0c4227eb52b8348288983c5222" class="m-doc-self">setMask</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               <a href="classcubos_1_1core_1_1ecs_1_1Entity.html#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc">Entity::<wbr />Mask</a> mask)</span></span>
             </h3>
+            <p>Sets the component mask of an entity.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -191,20 +194,20 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td>The entity to set the mask of.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to set the mask of.</td>
                 </tr>
                 <tr>
                   <td>mask</td>
-                  <td>The mask to set.</td>
+                  <td>Mask to set.</td>
                 </tr>
               </tbody>
             </table>
-<p>Sets the component mask of an entity.</p>
           </div></section>
           <section class="m-doc-details" id="af6e62afa406867a5ecd7243c9a150b3d"><div>
             <h3>
               <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1Entity.html#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc">Entity::<wbr />Mask</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af6e62afa406867a5ecd7243c9a150b3d" class="m-doc-self">getMask</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
             </h3>
+            <p>Gets the component mask of an entity.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -212,22 +215,22 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td>The entity to get the mask of.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to get the mask of.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The component mask of the entity.</td>
+                  <td>Component mask of the entity.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the component mask of an entity.</p>
           </div></section>
           <section class="m-doc-details" id="a75096d58c97d64e35c7eb139fd0c254c"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a75096d58c97d64e35c7eb139fd0c254c" class="m-doc-self">isValid</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
             </h3>
+            <p>Checks if an entity is still valid.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -235,22 +238,23 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td>The entity to check.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to check.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if the entity is still valid, false otherwise.</td>
+                  <td>Whether the entity is valid.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Checks if an entity is still valid. Different from isAlive, as it will return true for entities which still have not been commited.</p>
+<p>Different from isAlive, as it will return true for entities which still have not been commited.</p>
           </div></section>
           <section class="m-doc-details" id="a6d6b6102f61d87cc65a6f8d6c9b9d24b"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6d6b6102f61d87cc65a6f8d6c9b9d24b" class="m-doc-self">isAlive</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
             </h3>
+            <p>Checks if an entity is alive.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -258,36 +262,36 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td>The entity to check.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> to check.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if the entity is alive, false otherwise.</td>
+                  <td>Whether the entity is alive.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Checks if an entity is alive.</p>
           </div></section>
           <section class="m-doc-details" id="ab435604718adcc1792be625ecfc3a80d"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab435604718adcc1792be625ecfc3a80d" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Returns an iterator over all entities.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>An iterator over all entities.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a> over all entities.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Returns an iterator over all entities.</p>
           </div></section>
           <section class="m-doc-details" id="aebc3e4632f2b67c0f50e7e9a74f63d0f"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aebc3e4632f2b67c0f50e7e9a74f63d0f" class="m-doc-self">withMask</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc">Entity::<wbr />Mask</a> mask) const</span></span>
             </h3>
+            <p>Returns an iterator over all entities with a certain mask of components.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -295,31 +299,30 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">mask</td>
-                  <td>The mask of the components to be iterated.</td>
+                  <td>Mask of the components to be iterated.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>An iterator over all entities with the given components.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a> over all entities with the given component mask.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Returns an iterator over all entities with a certain set of components.</p>
           </div></section>
           <section class="m-doc-details" id="a95b174d238e799d5e3912521c4a2554a"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />ecs::<wbr />EntityManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a95b174d238e799d5e3912521c4a2554a" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Returns an iterator which points to the end of the entity manager.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>An iterator which points to the end of the entity manager.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1EntityManager_1_1Iterator.html" class="m-doc">Iterator</a> which points to the end of the entity manager.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Returns an iterator which points to the end of the entity manager.</p>
           </div></section>
         </section>
       </div>

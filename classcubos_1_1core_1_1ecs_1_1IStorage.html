@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>IStorage <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="storage_8hpp.html">&lt;core/ecs/storage.hpp&gt;</a></div>
         </h1>
-        <p><a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a> is an abstract parent class for all storages.</p>
+        <p>Abstract parent class for all storages.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -60,6 +60,7 @@
             </li>
           </ul>
         </nav>
+<p>Necessary to provide a type-erased interface for erasing and packaging/unpackaging components.</p>
         <section id="derived-classes">
           <h2><a href="#derived-classes">Derived classes</a></h2>
           <dl class="m-doc">
@@ -67,7 +68,7 @@
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> is an abstract container for a certain type with common operations, such as, insert, get and erase.</dd>
+            <dd>Abstract container for a component type <code>T</code>.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -88,8 +89,8 @@
               <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">data::<wbr />Context</a>* context) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Unpackages a value.</dd>
-            <dt id="a1b77d027db08f177e3fd6c127a88fd8d">
-              <span class="m-doc-wrap-bumper">auto <a href="#a1b77d027db08f177e3fd6c127a88fd8d" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">) const -&gt; std::type_index <span class="m-label m-flat m-warning">pure virtual</span></span>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1b77d027db08f177e3fd6c127a88fd8d" class="m-doc">type</a>(</span><span class="m-doc-wrap">) const -&gt; std::type_index <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Gets the type the components being stored here.</dd>
           </dl>
@@ -108,7 +109,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index of the value to be removed.</td>
+                  <td>Index of the value to be removed.</td>
                 </tr>
               </tbody>
             </table>
@@ -126,7 +127,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index of the value to package.</td>
+                  <td>Index of the value to package.</td>
                 </tr>
                 <tr>
                   <td>context</td>
@@ -136,7 +137,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The packaged value.</td>
+                  <td>Packaged value.</td>
                 </tr>
               </tfoot>
             </table>
@@ -155,11 +156,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index of the value to unpackage.</td>
+                  <td>Index of the value to unpackage.</td>
                 </tr>
                 <tr>
                   <td>package</td>
-                  <td>The package to unpackage.</td>
+                  <td>Package to unpackage.</td>
                 </tr>
                 <tr>
                   <td>context</td>
@@ -169,7 +170,21 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if the value was unpackaged successfully, false otherwise.</td>
+                  <td>Whether the unpackaging was successful.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1b77d027db08f177e3fd6c127a88fd8d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::type_index cubos::<wbr />core::<wbr />ecs::<wbr />IStorage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b77d027db08f177e3fd6c127a88fd8d" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the type the components being stored here.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Component type.</td>
                 </tr>
               </tfoot>
             </table>

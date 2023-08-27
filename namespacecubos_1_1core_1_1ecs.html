@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -47,19 +46,27 @@
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>ecs <span class="m-thin">namespace</span>
         </h1>
-        <p>Contains the Entity-Component-System framework.</p>
+        <p><a href="core-ecs.html" class="m-doc">ECS</a> module.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs_1_1impl.html" class="m-doc">impl</a></dt>
+            <dd>Contains functions used internally by the implementation of the ECS.</dd>
+          </dl>
+        </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
@@ -67,124 +74,133 @@
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read</a>
             </dt>
-            <dd></dd>
+            <dd>System argument which provides read access to the resource <code>T</code>, or query argument which provides read access to the component <code>T</code>.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write</a>
             </dt>
-            <dd></dd>
+            <dd>System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">OptRead</a>
             </dt>
-            <dd></dd>
+            <dd>System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">OptWrite</a>
             </dt>
-            <dd></dd>
+            <dd>System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>
             </dt>
-            <dd></dd>
+            <dd>Stores a bundle of entities and their respective components, which can be easily spawned into a world. This is in a way the &#x27;Prefab&#x27; of CUBOS., but lower level.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>
             </dt>
-            <dd>Used to edit an entity created by the <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
+            <dd>Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>
             </dt>
-            <dd>Used to edit an instance of a blueprint spawned by the <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
+            <dd>Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>
             </dt>
-            <dd></dd>
+            <dd>Used to write ECS commands and execute them at a later time.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>
             </dt>
-            <dd>Object responsible for storing ECS commands to execute them later.</dd>
+            <dd>Stores commands to execute them later.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1ReadStorage.html" class="m-doc">ReadStorage</a>
             </dt>
-            <dd>Utility struct used to reference component storages for reading.</dd>
+            <dd>Utility struct used to reference a storage of component type <code>T</code> for reading.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1WriteStorage.html" class="m-doc">WriteStorage</a>
             </dt>
-            <dd>Utility struct used to reference component storages for writing.</dd>
+            <dd>Utility struct used to reference a storage of component type <code>T</code> for writing.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html" class="m-doc">ComponentManager</a>
+            </dt>
+            <dd>Holds and manages components.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a> is a class that is used to register systems and call them all at once, where they will be executed in order of the stages they are in.</dd>
+            <dd>Used to add systems and relations between them and then dispatch them all at once.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>
             </dt>
-            <dd></dd>
+            <dd>Identifies an entity.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1EntityManager.html" class="m-doc">EntityManager</a>
             </dt>
-            <dd></dd>
+            <dd>Holds and manages entities and their component masks.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">EventPipe</a>
             </dt>
-            <dd></dd>
+            <dd>Resource which stores events of type <code>T</code>.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="event__pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a>
             </dt>
-            <dd></dd>
+            <dd>System arguments used to read events of type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a>
+            </dt>
+            <dd>System argument which allows the system to send events of type <code>T</code> to other systems.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1MapStorage.html" class="m-doc">MapStorage</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1MapStorage.html" class="m-doc">MapStorage</a> is a <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a STL unordered_map, this is best for components that aren&#x27;t used that often so the data is stored in a more compact way.</dd>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses an <code>std::unordered_map</code>.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1NullStorage.html" class="m-doc">NullStorage</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1NullStorage.html" class="m-doc">NullStorage</a> is a <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that doesn&#x27;t keep any data, made for components that don&#x27;t hold any data and just work as tags.</dd>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that doesn&#x27;t keep any data, made for zero-sized components.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1QueryInfo.html" class="m-doc">QueryInfo</a>
             </dt>
-            <dd>Contains information about a query.</dd>
+            <dd>Describes a query.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>
             </dt>
-            <dd></dd>
+            <dd>Holds the result of a query over all entities in world which match the given arguments.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Registry.html" class="m-doc">Registry</a>
             </dt>
-            <dd></dd>
+            <dd>Singleton which holds a global registry for all component types.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>
             </dt>
-            <dd>Utility struct used to reference resources for reading.</dd>
+            <dd>Utility struct used to reference a resource of type <code>T</code> for reading.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>
             </dt>
-            <dd>Utility struct used to reference resources for writing.</dd>
+            <dd>Utility struct used to reference a resource of type <code>T</code> for writing.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">ResourceManager</a>
             </dt>
-            <dd></dd>
+            <dd>Holds and manages resources.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a> is an abstract parent class for all storages.</dd>
+            <dd>Abstract parent class for all storages.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> is an abstract container for a certain type with common operations, such as, insert, get and erase.</dd>
+            <dd>Abstract container for a component type <code>T</code>.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>
             </dt>
-            <dd>Contains information about a system.</dd>
+            <dd>Describes a system.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename R&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html" class="m-doc">AnySystemWrapper</a>
@@ -194,16 +210,16 @@
               <div class="m-doc-template">template&lt;typename F&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html" class="m-doc">SystemWrapper</a>
             </dt>
-            <dd></dd>
+            <dd>Wrapper for a system of type <code>F</code>.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html" class="m-doc">VecStorage</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html" class="m-doc">VecStorage</a> is a <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a STL vector, this is best for components that are used very often, in order to be the most efficient memory wise.</dd>
+            <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a <code>std::vector</code>.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> is used as a container for all of the entity and component data. Components are stored in abstract containers called storages.</dd>
+            <dd>Holds entities, their components and resources.</dd>
           </dl>
         </section>
         <section id="func-members">
@@ -211,66 +227,14 @@
           <dl class="m-doc">
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a93f9d5a14d6a474ffc9d4a13bd519988" class="m-doc">getComponentName</a>(</span><span class="m-doc-wrap">) -&gt; std::optional&lt;std::string_view&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-ecs.html#ga93f9d5a14d6a474ffc9d4a13bd519988" class="m-doc">getComponentName</a>(</span><span class="m-doc-wrap">) -&gt; std::optional&lt;std::string_view&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the registered name of a component type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8c0b7f1425b4566c283cb721bea3862a" class="m-doc">getComponentName</a>(</span><span class="m-doc-wrap">std::type_index type) -&gt; std::optional&lt;std::string_view&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-ecs.html#ga8c0b7f1425b4566c283cb721bea3862a" class="m-doc">getComponentName</a>(</span><span class="m-doc-wrap">std::type_index type) -&gt; std::optional&lt;std::string_view&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the registered name of a component type.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a93f9d5a14d6a474ffc9d4a13bd519988"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">std::optional&lt;std::string_view&gt; cubos::<wbr />core::<wbr />ecs::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a93f9d5a14d6a474ffc9d4a13bd519988" class="m-doc-self">getComponentName</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>The registered name of the component type.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Gets the registered name of a component type. If the component type is not registered, aborts the program.</p>
-          </div></section>
-          <section class="m-doc-details" id="a8c0b7f1425b4566c283cb721bea3862a"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::optional&lt;std::string_view&gt; cubos::<wbr />core::<wbr />ecs::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8c0b7f1425b4566c283cb721bea3862a" class="m-doc-self">getComponentName</a>(</span><span class="m-doc-wrap">std::type_index type)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">type</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>The registered name of the component type.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Gets the registered name of a component type. If the component type is not registered, aborts the program.</p>
-          </div></section>
         </section>
       </div>
     </div>

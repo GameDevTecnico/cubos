@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1gl.html">gl</a>::<wbr/></span>Palette <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="palette_8hpp.html">&lt;core/gl/palette.hpp&gt;</a></div>
         </h1>
-        <p>Represents a palette of materials. Supports up to 65535 materials.</p>
+        <p>Holds a palette of materials. Supports up to 65535 materials.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -66,7 +66,11 @@
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#aacf7590ec8378191fc789e357a6b07e7" class="m-doc">Palette</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&gt;&amp;&amp; materials)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs a palette with the given materials.</dd>
+            <dt id="a4d22164d8ea3cebf615c6f15109f70a2">
+              <span class="m-doc-wrap-bumper"><a href="#a4d22164d8ea3cebf615c6f15109f70a2" class="m-doc-self">Palette</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs an empty palette.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -75,34 +79,34 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a591ad62de7c93a6de11bdbc1a7e1d4de" class="m-doc">data</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>*</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a pointer to the array of materials on the palette.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab200bd34f6b857dd7ea345741d1828c6" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; uint16_t</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the number of materials in the palette, excluding the empty material.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#abd53bf4f8cfe26b5bbb37fc03a7819b2" class="m-doc">get</a>(</span><span class="m-doc-wrap">uint16_t index) const -&gt; const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the material with the given index.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a0cde9e9005b5e61b7233a11576e80f6b" class="m-doc">set</a>(</span><span class="m-doc-wrap">uint16_t index,
               const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&amp; material)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the material at the given index.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a627b852ff3b414d1e07639fc7b7af355" class="m-doc">find</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&amp; material) const -&gt; uint16_t</span>
             </dt>
-            <dd></dd>
+            <dd>Searches for the index of the material most similar with the given material.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8cd8f0aeba753d9eb6d756e10e9c2f2c" class="m-doc">add</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&amp; material,
               float similarity = 1.0F) -&gt; uint16_t</span>
             </dt>
-            <dd></dd>
+            <dd>Adds a material to the palette, if one not similar enough already exists.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a3ab30542c3e1c9a775279319075d9075" class="m-doc">merge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">Palette</a>&amp; palette,
               float similarity = 1.0F)</span>
             </dt>
-            <dd></dd>
+            <dd>Merges another palette into this one.</dd>
           </dl>
         </section>
         <section>
@@ -111,6 +115,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />gl::<wbr />Palette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aacf7590ec8378191fc789e357a6b07e7" class="m-doc-self">Palette</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&gt;&amp;&amp; materials)</span></span>
             </h3>
+            <p>Constructs a palette with the given materials.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -118,7 +123,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">materials</td>
-                  <td>The materials to add to the palette.</td>
+                  <td>Materials to add to the palette.</td>
                 </tr>
               </tbody>
             </table>
@@ -127,6 +132,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>* cubos::<wbr />core::<wbr />gl::<wbr />Palette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a591ad62de7c93a6de11bdbc1a7e1d4de" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets a pointer to the array of materials on the palette.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -135,16 +141,18 @@
                 </tr>
               </tfoot>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>The first element in the array corresponds to index 1, as index 0 is reserved.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ab200bd34f6b857dd7ea345741d1828c6"><div>
             <h3>
               <span class="m-doc-wrap-bumper">uint16_t cubos::<wbr />core::<wbr />gl::<wbr />Palette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab200bd34f6b857dd7ea345741d1828c6" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the number of materials in the palette, excluding the empty material.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The number of materials in the palette.</td>
+                  <td>Number of materials in the palette.</td>
                 </tr>
               </tfoot>
             </table>
@@ -153,6 +161,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&amp; cubos::<wbr />core::<wbr />gl::<wbr />Palette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abd53bf4f8cfe26b5bbb37fc03a7819b2" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">uint16_t index) const</span></span>
             </h3>
+            <p>Gets the material with the given index.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -160,13 +169,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index of the material to get (1-based, 0 is empty).</td>
+                  <td>Index of the material to get (1-based, 0 is empty).</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The material at the given index.</td>
+                  <td><a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a> at the given index.</td>
                 </tr>
               </tfoot>
             </table>
@@ -176,6 +185,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />Palette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0cde9e9005b5e61b7233a11576e80f6b" class="m-doc-self">set</a>(</span><span class="m-doc-wrap">uint16_t index,
               const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&amp; material)</span></span>
             </h3>
+            <p>Sets the material at the given index.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -183,11 +193,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index of the material to set (1-based, 0 is empty).</td>
+                  <td>Index of the material to set (1-based, 0 is empty).</td>
                 </tr>
                 <tr>
                   <td>material</td>
-                  <td>The material to set.</td>
+                  <td><a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a> to set.</td>
                 </tr>
               </tbody>
             </table>
@@ -196,6 +206,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">uint16_t cubos::<wbr />core::<wbr />gl::<wbr />Palette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a627b852ff3b414d1e07639fc7b7af355" class="m-doc-self">find</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&amp; material) const</span></span>
             </h3>
+            <p>Searches for the index of the material most similar with the given material.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -203,23 +214,23 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">material</td>
-                  <td>The material to search for.</td>
+                  <td><a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a> to compare with.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The index of the material.</td>
+                  <td>Index of the material.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Searches for the index of the material most similar to the given material.</p>
           </div></section>
           <section class="m-doc-details" id="a8cd8f0aeba753d9eb6d756e10e9c2f2c"><div>
             <h3>
               <span class="m-doc-wrap-bumper">uint16_t cubos::<wbr />core::<wbr />gl::<wbr />Palette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8cd8f0aeba753d9eb6d756e10e9c2f2c" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a>&amp; material,
               float similarity = 1.0F)</span></span>
             </h3>
+            <p>Adds a material to the palette, if one not similar enough already exists.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -227,27 +238,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">material</td>
-                  <td>The material to add.</td>
+                  <td><a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a> to add.</td>
                 </tr>
                 <tr>
                   <td>similarity</td>
-                  <td>The minimum similarity for a material to be considered similar enough.</td>
+                  <td>Minimum similarity for a material to be considered similar enough.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The index of the material in the palette.</td>
+                  <td>Index of the material in the palette (1-based, 0 is empty).</td>
                 </tr>
               </tfoot>
             </table>
-<p>Adds a material to the palette, if one not similar enough already exists. Materials equal to <a href="structcubos_1_1core_1_1gl_1_1Material.html#a35243a106c5c7fe339cc78b6b8d554c3" class="m-doc">Material::<wbr />Empty</a> will be considered empty and may be replaced by the new material.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>Materials equal to <a href="structcubos_1_1core_1_1gl_1_1Material.html#a35243a106c5c7fe339cc78b6b8d554c3" class="m-doc">Material::<wbr />Empty</a> will be considered empty and may be replaced by the new material.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a3ab30542c3e1c9a775279319075d9075"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />Palette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3ab30542c3e1c9a775279319075d9075" class="m-doc-self">merge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">Palette</a>&amp; palette,
               float similarity = 1.0F)</span></span>
             </h3>
+            <p>Merges another palette into this one.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -255,15 +267,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">palette</td>
-                  <td>The palette to merge.</td>
+                  <td><a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">Palette</a> to merge.</td>
                 </tr>
                 <tr>
                   <td>similarity</td>
-                  <td>The minimum similarity for two materials to be merged.</td>
+                  <td>Minimum similarity for two materials to be merged.</td>
                 </tr>
               </tbody>
             </table>
-<p>Merges another palette into this one. All materials equal to <a href="structcubos_1_1core_1_1gl_1_1Material.html#a35243a106c5c7fe339cc78b6b8d554c3" class="m-doc">Material::<wbr />Empty</a> will be considered empty and may be overwritten.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>All materials equal to <a href="structcubos_1_1core_1_1gl_1_1Material.html#a35243a106c5c7fe339cc78b6b8d554c3" class="m-doc">Material::<wbr />Empty</a> will be considered empty and may be overwritten.</p></aside>
           </div></section>
         </section>
       </div>

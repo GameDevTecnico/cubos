@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +44,22 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="accessors_8hpp.html">&lt;core/ecs/accessors.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>OptRead <span class="m-thin">class</span>
         </h1>
+        <p>System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">T</td>
+              <td>Resource or component type.</td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -60,18 +72,18 @@
             </li>
           </ul>
         </nav>
-<p>System argument which provides optional read access to the given resource or component, if it exists. Can be used as a pointer with both the <code>-&gt;</code> and <code>.</code> operators.</p>
+<p>While the <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read</a> demands that the resource or component exists, this argument does not. Can be used as a pointer with both the <code>-&gt;</code> and <code>*</code> operators.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#ad763c7f82c4adcb6a00532913f41505e" class="m-doc">OptRead</a>(</span><span class="m-doc-wrap">const T* ptr)</span>
             </dt>
-            <dd></dd>
+            <dd>Creates a new optional read argument. <code>ptr</code> should be null if the resource or component does not exist.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a41c380cfb18e3ad74620e6f850783741" class="m-doc">operator bool</a>(</span><span class="m-doc-wrap">) const</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if the resource or component exists.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -80,7 +92,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a56b22eb42a6813849522d9960ab00d30" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const T*</span>
             </dt>
-            <dd></dd>
+            <dd>Accesses the resource or component, aborting if it does not exist.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a4bcb1e1b32b84fc8d661139f9b3d5d04" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp;</span>
             </dt>
@@ -96,6 +108,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />OptRead&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad763c7f82c4adcb6a00532913f41505e" class="m-doc-self">OptRead</a>(</span><span class="m-doc-wrap">const T* ptr)</span></span>
             </h3>
+            <p>Creates a new optional read argument. <code>ptr</code> should be null if the resource or component does not exist.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -107,7 +120,6 @@
                 </tr>
               </tbody>
             </table>
-<p>Creates a new optional read argument.</p>
           </div></section>
           <section class="m-doc-details" id="a41c380cfb18e3ad74620e6f850783741"><div>
             <h3>
@@ -116,15 +128,15 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />OptRead&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a41c380cfb18e3ad74620e6f850783741" class="m-doc-self">operator bool</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Checks if the resource or component exists.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>True if the resource or component exists, false otherwise.</td>
+                  <td>Whether the resource or component exists.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Checks if the resource or component exists.</p>
           </div></section>
           <section class="m-doc-details" id="a56b22eb42a6813849522d9960ab00d30"><div>
             <h3>
@@ -133,11 +145,12 @@
               </div>
               <span class="m-doc-wrap-bumper">const T* cubos::<wbr />core::<wbr />ecs::<wbr />OptRead&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a56b22eb42a6813849522d9960ab00d30" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Accesses the resource or component, aborting if it does not exist.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>A reference to the resource or component.</td>
+                  <td>Reference to the resource or component.</td>
                 </tr>
               </tfoot>
             </table>
@@ -153,7 +166,7 @@
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>A reference to the resource or component.</td>
+                  <td>Reference to the resource or component, aborting if it does not exist.</td>
                 </tr>
               </tfoot>
             </table>

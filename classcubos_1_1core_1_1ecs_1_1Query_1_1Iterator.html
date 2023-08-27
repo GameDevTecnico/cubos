@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,46 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1ecs_1_1Query.html">Query</a>::<wbr/></span>Iterator <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="query_8hpp.html">&lt;core/ecs/query.hpp&gt;</a></div>
         </h1>
         <p>Used to iterate over the results of a query.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af9b0391a1033d238fab2e58159a64695" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; std::tuple&lt;<a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, ComponentTypes...&gt;</span>
+            </dt>
+            <dd>Dereferences to a tuple containing the queried entity and its components.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="af9b0391a1033d238fab2e58159a64695"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::tuple&lt;<a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, ComponentTypes...&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Query::<wbr />Iterator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af9b0391a1033d238fab2e58159a64695" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Dereferences to a tuple containing the queried entity and its components.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Tuple containing the entity and its components.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
       </div>
     </div>
   </div>

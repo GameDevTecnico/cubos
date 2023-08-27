@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -48,7 +47,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>Archive <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="archive_8hpp.html">&lt;core/data/fs/archive.hpp&gt;</a></div>
         </h1>
-        <p>Acts as a bridge between the virtual file system and some place where data is actually stored, such as a file on disk or a network connection. Should never be used directly by the user - instead, use the <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> and <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> classes.</p>
+        <p>Interface for a bridge between the CUBOS. virtual file system and the real world.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,18 +60,18 @@
             </li>
           </ul>
         </nav>
-<p>The archive is responsible for creating and destroying files, supplying streams for reading and writing, and retrieving information about existing files.</p><p>Each file in an archive is represented by a unique integer identifier. The identifier 0 is reserved for errors, and the identifier 1 is reserved for the root file of the archive.</p><p>The root file may be a directory or a regular file - if its a directory, when mounted, the archive will take the form of a directory, with the root file being placed on the mount point. If the root file is a regular file, then the mount point will be a regular file.</p><p>This class is not meant to be thread-safe - it is the responsibility of the <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> class to ensure that the same file is not accessed or modified by multiple threads at the same time.</p><p>Implementations should crash when called with invalid arguments - since they&#x27;re only called by <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a>, its okay to assume they&#x27;re correct.</p><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a></p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p>Should never be used directly by the user - instead, use the <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> and <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> classes.</p></aside><p>By real world, we mean something such as a file on the OS file system or a network connection. The archive is responsible for creating and destroying files, supplying streams for reading and writing, and retrieving information about existing files.</p><p>Each file in an archive is represented by a unique integer identifier. The identifier 0 is reserved for errors, and the identifier 1 is reserved for the root file of the archive.</p><p>The root file may be a directory or a regular file. If its a directory, when mounted, the archive will take the form of a directory, with the root file being placed on the mount point. If the root file is a regular file, then the mount point will be a regular file.</p><p>This class is not meant to be thread-safe - it is the responsibility of the <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> class to ensure that the same file is not accessed or modified by multiple threads at the same time.</p><p>Implementations should crash when called with invalid arguments - since they&#x27;re only called by <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a>, its okay to assume the arguments are correct (please do use asserts though).</p><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a></p><p><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a></p></aside>
         <section id="derived-classes">
           <h2><a href="#derived-classes">Derived classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" class="m-doc">EmbeddedArchive</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which allows reading from data embedded in the application as if it was a regular file or directory. Meant to be used with the <code>cubinhos embed</code> tool.</dd>
+            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads data embedded in the application. Meant to be used with the <code>cubinhos embed</code> tool.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1StandardArchive.html" class="m-doc">StandardArchive</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which allows reading and writing into a file in the OS file system, using the standard library.</dd>
+            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads and writes from/into the OS file system using the standard library.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -83,41 +82,41 @@
               std::string_view name,
               bool directory = false) -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Creates a new file in the archive.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a92f5142629d8f6cba487692d656fa868" class="m-doc">destroy</a>(</span><span class="m-doc-wrap">std::size_t id) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Destroys a regular file or empty directory in the archive.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a593431c38bc5610c9ddcee02629085a9" class="m-doc">name</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; std::string <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the name of the file with the given <code>id</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af1c869ef63b867062c7b60d6026b741c" class="m-doc">directory</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Checks whether the file with the given <code>id</code> is a directory.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a04aad13d5ebddcafc14a7f556aca2e0a" class="m-doc">readOnly</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Checks whether the archive is read-only.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#adc90279e090bc0742502c352ca4f46ca" class="m-doc">parent</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the identifier of the parent file of the file with the given <code>id</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0317006a1886c6644241188be2065366" class="m-doc">sibling</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the identifier of the sibling of the file with the given <code>id</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#abc84c59a03d7d0edb991b82c9adacdf4" class="m-doc">child</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the identifier of the first child of the file with the given <code>id</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#abf12af29bc700faf5d1de9cd1830c264" class="m-doc">open</a>(</span><span class="m-doc-wrap">std::size_t id,
               <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a> handle,
               <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">File::<wbr />OpenMode</a> mode) -&gt; std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt; <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Opens a file in the archive.</dd>
           </dl>
         </section>
         <section>
@@ -128,6 +127,7 @@
               std::string_view name,
               bool directory = false) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Creates a new file in the archive.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -143,7 +143,7 @@
                 </tr>
                 <tr>
                   <td>directory</td>
-                  <td></td>
+                  <td>Whether the new file is a directory or not.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -153,12 +153,13 @@
                 </tr>
               </tfoot>
             </table>
-<p>Creates a new file in the archive. The first child of the parent will have its sibling set to the new file and then be replaced by the new file.</p>
+<p>The first child of the <code>parent</code> will have its sibling set to the new file and then be replaced by the new file.</p>
           </div></section>
           <section class="m-doc-details" id="a92f5142629d8f6cba487692d656fa868"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />Archive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92f5142629d8f6cba487692d656fa868" class="m-doc-self">destroy</a>(</span><span class="m-doc-wrap">std::size_t id) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Destroys a regular file or empty directory in the archive.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -176,12 +177,13 @@
                 </tr>
               </tfoot>
             </table>
-<p>Destroys a regular file or empty directory in the archive. Will be replaced in the tree its next sibling.</p>
+<p>Will be replaced in the tree by its sibling.</p>
           </div></section>
           <section class="m-doc-details" id="a593431c38bc5610c9ddcee02629085a9"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::string cubos::<wbr />core::<wbr />data::<wbr />Archive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a593431c38bc5610c9ddcee02629085a9" class="m-doc-self">name</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Gets the name of the file with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -204,6 +206,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />Archive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af1c869ef63b867062c7b60d6026b741c" class="m-doc-self">directory</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Checks whether the file with the given <code>id</code> is a directory.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -226,6 +229,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />Archive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a04aad13d5ebddcafc14a7f556aca2e0a" class="m-doc-self">readOnly</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Checks whether the archive is read-only.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -239,6 +243,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />Archive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adc90279e090bc0742502c352ca4f46ca" class="m-doc-self">parent</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Gets the identifier of the parent file of the file with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -261,6 +266,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />Archive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0317006a1886c6644241188be2065366" class="m-doc-self">sibling</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Gets the identifier of the sibling of the file with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -274,7 +280,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Identifier of the next sibling, or 0 if there are no more files in the parent.</td>
+                  <td>Identifier of the sibling, or 0 if there are no more files in the parent.</td>
                 </tr>
               </tfoot>
             </table>
@@ -283,6 +289,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />Archive::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abc84c59a03d7d0edb991b82c9adacdf4" class="m-doc-self">child</a>(</span><span class="m-doc-wrap">std::size_t id) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Gets the identifier of the first child of the file with the given <code>id</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -307,6 +314,7 @@
               <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a> handle,
               <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">File::<wbr />OpenMode</a> mode) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Opens a file in the archive.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -318,7 +326,7 @@
                 </tr>
                 <tr>
                   <td>handle</td>
-                  <td>Handle to increase the reference count of the file, preventing it from being destroyed while the stream is open.</td>
+                  <td>Handle to the file.</td>
                 </tr>
                 <tr>
                   <td>mode</td>
@@ -328,11 +336,11 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A file stream, or nullptr if the file could not be opened.</td>
+                  <td><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> stream, or nullptr if the file could not be opened.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Opens a file in the archive.</p>
+<p>Although a bit hacky, the <code>handle</code> parameter is used to keep a reference to the respective <code><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a></code> alive, preventing the file from being destroyed while the stream is open.</p>
           </div></section>
         </section>
       </div>

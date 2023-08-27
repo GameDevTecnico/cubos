@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +44,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="guards_8hpp.html">&lt;core/memory/guards.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1memory.html">memory</a>::<wbr/></span>WriteGuard <span class="m-thin">class</span>
         </h1>
+        <p>Provides safe read-write access to an object using a lock.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -55,17 +56,18 @@
           <tbody>
             <tr>
               <td style="width: 1%">T</td>
-              <td>The type of the object to guard.</td>
+              <td>Guarded object type.</td>
             </tr>
             <tr>
               <td>Lock</td>
-              <td>The type of the lock to use.</td>
+              <td>Held lock type.</td>
             </tr>
           </tbody>
         </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
+            <li><a href="#autotoc_md44">Usage example</a></li>
             <li>
               Reference
               <ul>
@@ -75,7 +77,7 @@
             </li>
           </ul>
         </nav>
-<p>Utility class to provide safe read-write access to an object using a lock.</p><p>This class was created because there are multiple parts of the code that need to provide access to objects in a thread-safe manner.</p><p>Usage example: using AssetMetaWrite = <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">core::<wbr />memory::<wbr />WriteGuard</a>&lt;AssetMeta, std::unique_lock&lt;std::shared_mutex&gt;&gt;;</p>
+<p>This class was created because there are multiple parts of the code that need to provide access to objects in a thread-safe manner.</p><section id="autotoc_md44"><h3><a href="#autotoc_md44">Usage example</a></h3><pre class="m-code"><span class="k">using</span><span class="w"> </span><span class="n">AssetMetaWrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">core</span><span class="o">::</span><span class="n">memory</span><span class="o">::</span><span class="n">WriteGuard</span><span class="o">&lt;</span><span class="n">AssetMeta</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_mutex</span><span class="o">&gt;&gt;</span><span class="p">;</span></pre></section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -83,11 +85,11 @@
               <span class="m-doc-wrap-bumper"><a href="#ac842149964a11f8795557befe625e941" class="m-doc">WriteGuard</a>(</span><span class="m-doc-wrap">T&amp; object,
               Lock&amp;&amp; lock)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructor.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a13f98901cbb2835ff9d0433c2c1fd76d" class="m-doc">WriteGuard</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">WriteGuard</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd></dd>
+            <dd>Move constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -96,27 +98,27 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af9380ac0df2e84ecdd3c27cfb9907b59" class="m-doc">get</a>(</span><span class="m-doc-wrap">) -&gt; T&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a reference to the underlying object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a88b146bb6a953c12eb144ebabb074b91" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) -&gt; T&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a reference to the underlying object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ae65b1f1a8c78a3e4bdbe7ef0a79f58a5" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) -&gt; T*</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a pointer to the underlying object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0e1e09e9fe1f5c43f145f85e49aae5cd" class="m-doc">get</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a reference to the underlying object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a3b2d661938af133ebfd30ffca2163fde" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">) const -&gt; const T&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a reference to the underlying object.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ae9fd050167dedf84a027ccaf9bd35624" class="m-doc">operator-&gt;</a>(</span><span class="m-doc-wrap">) const -&gt; const T*</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a pointer to the underlying object.</dd>
           </dl>
         </section>
         <section>
@@ -129,6 +131,7 @@
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac842149964a11f8795557befe625e941" class="m-doc-self">WriteGuard</a>(</span><span class="m-doc-wrap">T&amp; object,
               Lock&amp;&amp; lock)</span></span>
             </h3>
+            <p>Constructor.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -136,11 +139,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">object</td>
-                  <td>The object to guard.</td>
+                  <td>Object to guard.</td>
                 </tr>
                 <tr>
                   <td>lock</td>
-                  <td>The lock to use.</td>
+                  <td>Lock to hold.</td>
                 </tr>
               </tbody>
             </table>
@@ -152,6 +155,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13f98901cbb2835ff9d0433c2c1fd76d" class="m-doc-self">WriteGuard</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">WriteGuard</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
+            <p>Move constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -159,7 +163,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">other</td>
-                  <td>The other guard to move from.</td>
+                  <td>Guard to move from.</td>
                 </tr>
               </tbody>
             </table>
@@ -171,11 +175,12 @@
               </div>
               <span class="m-doc-wrap-bumper">T&amp; cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af9380ac0df2e84ecdd3c27cfb9907b59" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets a reference to the underlying object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying object.</td>
+                  <td>Underlying object.</td>
                 </tr>
               </tfoot>
             </table>
@@ -187,11 +192,12 @@
               </div>
               <span class="m-doc-wrap-bumper">T&amp; cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a88b146bb6a953c12eb144ebabb074b91" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets a reference to the underlying object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying object.</td>
+                  <td>Underlying object.</td>
                 </tr>
               </tfoot>
             </table>
@@ -203,11 +209,12 @@
               </div>
               <span class="m-doc-wrap-bumper">T* cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae65b1f1a8c78a3e4bdbe7ef0a79f58a5" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets a pointer to the underlying object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying object.</td>
+                  <td>Underlying object.</td>
                 </tr>
               </tfoot>
             </table>
@@ -219,11 +226,12 @@
               </div>
               <span class="m-doc-wrap-bumper">const T&amp; cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0e1e09e9fe1f5c43f145f85e49aae5cd" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets a reference to the underlying object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying object.</td>
+                  <td>Underlying object.</td>
                 </tr>
               </tfoot>
             </table>
@@ -235,11 +243,12 @@
               </div>
               <span class="m-doc-wrap-bumper">const T&amp; cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b2d661938af133ebfd30ffca2163fde" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets a reference to the underlying object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying object.</td>
+                  <td>Underlying object.</td>
                 </tr>
               </tfoot>
             </table>
@@ -251,11 +260,12 @@
               </div>
               <span class="m-doc-wrap-bumper">const T* cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard&lt;T, Lock&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae9fd050167dedf84a027ccaf9bd35624" class="m-doc-self">operator-&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets a pointer to the underlying object.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The underlying object.</td>
+                  <td>Underlying object.</td>
                 </tr>
               </tfoot>
             </table>

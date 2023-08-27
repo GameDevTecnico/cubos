@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -47,19 +46,27 @@
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>data <span class="m-thin">namespace</span>
         </h1>
-        <p>Contains the virtual file and serialization systems, and other data related utilities.</p>
+        <p><a href="group__core-data.html" class="m-doc">Data</a> module.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos_1_1core_1_1data_1_1impl.html" class="m-doc">impl</a></dt>
+            <dd></dd>
+          </dl>
+        </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
@@ -91,28 +98,28 @@
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>
             </dt>
-            <dd>Acts as a bridge between the virtual file system and some place where data is actually stored, such as a file on disk or a network connection. Should never be used directly by the user - instead, use the <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> and <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> classes.</dd>
+            <dd>Interface for a bridge between the CUBOS. virtual file system and the real world.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" class="m-doc">EmbeddedArchive</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which allows reading from data embedded in the application as if it was a regular file or directory. Meant to be used with the <code>cubinhos embed</code> tool.</dd>
+            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads data embedded in the application. Meant to be used with the <code>cubinhos embed</code> tool.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a>
             </dt>
-            <dd>Represents a file in the virtual file system of the engine. Should always be held through a <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a>, which is just a smart shared pointer. All operations on files through this class are done with relative paths, and are equivalent to the same operations on <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a>, with absolute paths.</dd>
+            <dd>Represents a file in the virtual file system of the engine.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1data_1_1FileStream.html" class="m-doc">FileStream</a>
             </dt>
-            <dd>Wrapper around a specific file stream which maintains a reference to the file, preventing it from being destroyed while the stream is still in use. Should not be used directly - it is meant to be created by <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementations and then accessed by the user through an abstract Stream interface.</dd>
+            <dd>Wrapper around an implementation-specific file stream which keeps the file alive and does some sanity checks.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a>
             </dt>
-            <dd>Singleton class which represents the virtual file system of the engine. All operations on files through this class are done with absolute paths, and are equivalent to the same operations on the root file, with relative paths.</dd>
+            <dd>Singleton which represents the virtual file system of the engine.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1StandardArchive.html" class="m-doc">StandardArchive</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which allows reading and writing into a file in the OS file system, using the standard library.</dd>
+            <dd><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads and writes from/into the OS file system using the standard library.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html" class="m-doc">JSONDeserializer</a>
             </dt>
@@ -233,94 +240,6 @@
               <span class="m-doc-wrap-bumper">void <a href="#abbeb826efc5eb88997660a1fa104a3e5" class="m-doc">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; ser,
               const std::pair&lt;T, U&gt;&amp; pair,
               const char* name)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a86fb3c808d153be3f1194980abf1bb57" class="m-doc">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; ser,
-              const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">geom::<wbr />Box</a>&amp; box,
-              const char* name)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ac2655eaaa112a0f0db7799df342fd0ea" class="m-doc">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; des,
-              <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">geom::<wbr />Box</a>&amp; box)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a9e30906fec8839a99868223d09d6ef9f" class="m-doc">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; ser,
-              const <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">geom::<wbr />Capsule</a>&amp; capsule,
-              const char* name)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ab0d93cfbd89e8f934d6540861f9308c4" class="m-doc">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; des,
-              <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">geom::<wbr />Capsule</a>&amp; capsule)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a8e3c67a5e912de7c68e1478cd25399c6" class="m-doc">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; ser,
-              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">geom::<wbr />Plane</a>&amp; plane,
-              const char* name)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aa78953a7a127fea5aeb6a5bcddf33852" class="m-doc">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; des,
-              <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">geom::<wbr />Plane</a>&amp; plane)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a6a84d5caec06f3667dd891b60e235754" class="m-doc">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; ser,
-              const <a href="structcubos_1_1core_1_1geom_1_1Simplex.html" class="m-doc">geom::<wbr />Simplex</a>&amp; simplex,
-              const char* name)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ab77b4c7520ecbe1a151d266725e27ac4" class="m-doc">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; des,
-              <a href="structcubos_1_1core_1_1geom_1_1Simplex.html" class="m-doc">geom::<wbr />Simplex</a>&amp; simplex)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a827286054d3615075443c1cd3941ea7f" class="m-doc">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; serializer,
-              const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">gl::<wbr />Grid</a>&amp; grid,
-              const char* name)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a9135006950d4bd8826c8babe6c027f2f" class="m-doc">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; deserializer,
-              <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">gl::<wbr />Grid</a>&amp; grid)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a24bcb0612242d6f862c0673496fbe3cd" class="m-doc">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; serializer,
-              const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">gl::<wbr />Material</a>&amp; mat,
-              const char* name)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a0c5e3540e2d531a1498c885183d14e68" class="m-doc">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; deserializer,
-              <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">gl::<wbr />Material</a>&amp; mat)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a3e50c0d181734038683dfed8a6c1ad47" class="m-doc">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; serializer,
-              const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">gl::<wbr />Palette</a>&amp; palette,
-              const char* name)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a2dc080f6aab288573be5d4259f9717e0" class="m-doc">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; deserializer,
-              <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">gl::<wbr />Palette</a>&amp; palette)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#adb8cafb39417f95a63ca4c6d264b5c44" class="m-doc">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; serializer,
-              const <a href="structcubos_1_1core_1_1gl_1_1Vertex.html" class="m-doc">gl::<wbr />Vertex</a>&amp; vertex,
-              const char* name)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a65ac97ec94c250cc0eb77c6a4ce6ef1b" class="m-doc">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; deserializer,
-              <a href="structcubos_1_1core_1_1gl_1_1Vertex.html" class="m-doc">gl::<wbr />Vertex</a>&amp; vertex)</span>
             </dt>
             <dd></dd>
           </dl>
@@ -818,406 +737,6 @@
               </tbody>
             </table>
 <p>Overload for serializing std::pair.</p>
-          </div></section>
-          <section class="m-doc-details" id="a86fb3c808d153be3f1194980abf1bb57"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a86fb3c808d153be3f1194980abf1bb57" class="m-doc-self">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; ser,
-              const <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">geom::<wbr />Box</a>&amp; box,
-              const char* name)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2geom_2box_8hpp.html">&lt;core/geom/box.hpp&gt;</a></div>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ser</td>
-                  <td>The serializer to use.</td>
-                </tr>
-                <tr>
-                  <td>box</td>
-                  <td>The box to serialize.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the plane.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Serializes a box.</p>
-          </div></section>
-          <section class="m-doc-details" id="ac2655eaaa112a0f0db7799df342fd0ea"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac2655eaaa112a0f0db7799df342fd0ea" class="m-doc-self">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; des,
-              <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">geom::<wbr />Box</a>&amp; box)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2geom_2box_8hpp.html">&lt;core/geom/box.hpp&gt;</a></div>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">des</td>
-                  <td>The deserializer to use.</td>
-                </tr>
-                <tr>
-                  <td>box</td>
-                  <td>The box to deserialize.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Deserializes a box.</p>
-          </div></section>
-          <section class="m-doc-details" id="a9e30906fec8839a99868223d09d6ef9f"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9e30906fec8839a99868223d09d6ef9f" class="m-doc-self">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; ser,
-              const <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">geom::<wbr />Capsule</a>&amp; capsule,
-              const char* name)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2geom_2capsule_8hpp.html">&lt;core/geom/capsule.hpp&gt;</a></div>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ser</td>
-                  <td>The serializer to use.</td>
-                </tr>
-                <tr>
-                  <td>capsule</td>
-                  <td>The capsule to serialize.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the capsule.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Serializes a capsule.</p>
-          </div></section>
-          <section class="m-doc-details" id="ab0d93cfbd89e8f934d6540861f9308c4"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab0d93cfbd89e8f934d6540861f9308c4" class="m-doc-self">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; des,
-              <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">geom::<wbr />Capsule</a>&amp; capsule)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2geom_2capsule_8hpp.html">&lt;core/geom/capsule.hpp&gt;</a></div>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">des</td>
-                  <td>The deserializer to use.</td>
-                </tr>
-                <tr>
-                  <td>capsule</td>
-                  <td>The capsule to deserialize.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Deserializes a capsule.</p>
-          </div></section>
-          <section class="m-doc-details" id="a8e3c67a5e912de7c68e1478cd25399c6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e3c67a5e912de7c68e1478cd25399c6" class="m-doc-self">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; ser,
-              const <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">geom::<wbr />Plane</a>&amp; plane,
-              const char* name)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2geom_2plane_8hpp.html">&lt;core/geom/plane.hpp&gt;</a></div>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ser</td>
-                  <td>The serializer to use.</td>
-                </tr>
-                <tr>
-                  <td>plane</td>
-                  <td>The plane to serialize.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the plane.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Serializes a plane.</p>
-          </div></section>
-          <section class="m-doc-details" id="aa78953a7a127fea5aeb6a5bcddf33852"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa78953a7a127fea5aeb6a5bcddf33852" class="m-doc-self">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; des,
-              <a href="structcubos_1_1core_1_1geom_1_1Plane.html" class="m-doc">geom::<wbr />Plane</a>&amp; plane)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2geom_2plane_8hpp.html">&lt;core/geom/plane.hpp&gt;</a></div>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">des</td>
-                  <td>The deserializer to use.</td>
-                </tr>
-                <tr>
-                  <td>plane</td>
-                  <td>The plane to deserialize.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Deserializes a plane.</p>
-          </div></section>
-          <section class="m-doc-details" id="a6a84d5caec06f3667dd891b60e235754"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a84d5caec06f3667dd891b60e235754" class="m-doc-self">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; ser,
-              const <a href="structcubos_1_1core_1_1geom_1_1Simplex.html" class="m-doc">geom::<wbr />Simplex</a>&amp; simplex,
-              const char* name)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2geom_2simplex_8hpp.html">&lt;core/geom/simplex.hpp&gt;</a></div>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">ser</td>
-                  <td>The serializer to use.</td>
-                </tr>
-                <tr>
-                  <td>simplex</td>
-                  <td>The simplex to serialize.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the simplex.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Serializes a simplex.</p>
-          </div></section>
-          <section class="m-doc-details" id="ab77b4c7520ecbe1a151d266725e27ac4"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab77b4c7520ecbe1a151d266725e27ac4" class="m-doc-self">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; des,
-              <a href="structcubos_1_1core_1_1geom_1_1Simplex.html" class="m-doc">geom::<wbr />Simplex</a>&amp; simplex)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2geom_2simplex_8hpp.html">&lt;core/geom/simplex.hpp&gt;</a></div>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">des</td>
-                  <td>The deserializer to use.</td>
-                </tr>
-                <tr>
-                  <td>simplex</td>
-                  <td>The simplex to deserialize.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Deserializes a simplex.</p>
-          </div></section>
-          <section class="m-doc-details" id="a827286054d3615075443c1cd3941ea7f"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a827286054d3615075443c1cd3941ea7f" class="m-doc-self">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; serializer,
-              const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">gl::<wbr />Grid</a>&amp; grid,
-              const char* name)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">serializer</td>
-                  <td>The serializer to use.</td>
-                </tr>
-                <tr>
-                  <td>grid</td>
-                  <td>The voxel grid to serialize.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the voxel grid.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Serializes a voxel grid.</p>
-          </div></section>
-          <section class="m-doc-details" id="a9135006950d4bd8826c8babe6c027f2f"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9135006950d4bd8826c8babe6c027f2f" class="m-doc-self">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; deserializer,
-              <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">gl::<wbr />Grid</a>&amp; grid)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">deserializer</td>
-                  <td>The deserializer to use.</td>
-                </tr>
-                <tr>
-                  <td>grid</td>
-                  <td>The voxel grid to deserialize.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Deserializes a voxel grid.</p>
-          </div></section>
-          <section class="m-doc-details" id="a24bcb0612242d6f862c0673496fbe3cd"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a24bcb0612242d6f862c0673496fbe3cd" class="m-doc-self">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; serializer,
-              const <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">gl::<wbr />Material</a>&amp; mat,
-              const char* name)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">serializer</td>
-                  <td>The serializer to use.</td>
-                </tr>
-                <tr>
-                  <td>mat</td>
-                  <td>The material to serialize.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the material.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Serializes a material.</p>
-          </div></section>
-          <section class="m-doc-details" id="a0c5e3540e2d531a1498c885183d14e68"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c5e3540e2d531a1498c885183d14e68" class="m-doc-self">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; deserializer,
-              <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">gl::<wbr />Material</a>&amp; mat)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">deserializer</td>
-                  <td>The deserializer to use.</td>
-                </tr>
-                <tr>
-                  <td>mat</td>
-                  <td>The material to deserialize.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Deserializes a material.</p>
-          </div></section>
-          <section class="m-doc-details" id="a3e50c0d181734038683dfed8a6c1ad47"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3e50c0d181734038683dfed8a6c1ad47" class="m-doc-self">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; serializer,
-              const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">gl::<wbr />Palette</a>&amp; palette,
-              const char* name)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">serializer</td>
-                  <td>The serializer to use.</td>
-                </tr>
-                <tr>
-                  <td>palette</td>
-                  <td>The palette to serialize.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the palette.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Serializes a material palette.</p>
-          </div></section>
-          <section class="m-doc-details" id="a2dc080f6aab288573be5d4259f9717e0"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2dc080f6aab288573be5d4259f9717e0" class="m-doc-self">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; deserializer,
-              <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">gl::<wbr />Palette</a>&amp; palette)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">deserializer</td>
-                  <td>The deserializer to use.</td>
-                </tr>
-                <tr>
-                  <td>palette</td>
-                  <td>The palette to deserialize.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Deserializes a material palette.</p>
-          </div></section>
-          <section class="m-doc-details" id="adb8cafb39417f95a63ca4c6d264b5c44"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adb8cafb39417f95a63ca4c6d264b5c44" class="m-doc-self">serialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp; serializer,
-              const <a href="structcubos_1_1core_1_1gl_1_1Vertex.html" class="m-doc">gl::<wbr />Vertex</a>&amp; vertex,
-              const char* name)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">serializer</td>
-                  <td>The serializer to use.</td>
-                </tr>
-                <tr>
-                  <td>vertex</td>
-                  <td>The vertex to serialize.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the vertex.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Serializes a voxel vertex.</p>
-          </div></section>
-          <section class="m-doc-details" id="a65ac97ec94c250cc0eb77c6a4ce6ef1b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a65ac97ec94c250cc0eb77c6a4ce6ef1b" class="m-doc-self">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; deserializer,
-              <a href="structcubos_1_1core_1_1gl_1_1Vertex.html" class="m-doc">gl::<wbr />Vertex</a>&amp; vertex)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">deserializer</td>
-                  <td>The deserializer to use.</td>
-                </tr>
-                <tr>
-                  <td>vertex</td>
-                  <td>The vertex to deserialize.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Deserializes a voxel vertex.</p>
           </div></section>
         </section>
       </div>

@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -49,7 +48,7 @@
           <div class="m-doc-template">template&lt;typename T&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>FileStream <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
         </h1>
-        <p>Wrapper around a specific file stream which maintains a reference to the file, preventing it from being destroyed while the stream is still in use. Should not be used directly - it is meant to be created by <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementations and then accessed by the user through an abstract Stream interface.</p>
+        <p>Wrapper around an implementation-specific file stream which keeps the file alive and does some sanity checks.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -57,7 +56,7 @@
           <tbody>
             <tr>
               <td style="width: 1%">T</td>
-              <td>Inner stream type.</td>
+              <td>Inner implementation-specific stream type.</td>
             </tr>
           </tbody>
         </table>
@@ -74,14 +73,14 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a></p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p>This is not mean to be used by the user directly. It is meant to be created internally by <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementations and returned as a pointer to a <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>.</p></aside><p>The file is kept alive by storing a handle to it, which prevents it from being destroyed as long as the stream is alive.</p><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a></p><p><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a></p></aside>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">cubos::core::memory::Stream</a>
             </dt>
-            <dd>Abstract class for memory streams.</dd>
+            <dd>Interface class for memory streams. Abstracts away sources or destinations of data.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -92,7 +91,7 @@
               <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">File::<wbr />OpenMode</a> mode,
               T&amp;&amp; stream)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -102,29 +101,29 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a18d299e95e85ca296b2b4de63f3fb5a6" class="m-doc">read</a>(</span><span class="m-doc-wrap">void* data,
               std::size_t size) -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Reads data from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a5bef011d4718f5601e901eba214446cf" class="m-doc">write</a>(</span><span class="m-doc-wrap">const void* data,
               std::size_t size) -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Writes data to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af7b0ca12d9fd4262b15f6ee6db9b7586" class="m-doc">tell</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the current position in the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ace486088260c9d2a9333e20ebdc90f2c" class="m-doc">seek</a>(</span><span class="m-doc-wrap">ptrdiff_t offset,
-              <a href="namespacecubos_1_1core_1_1memory.html#a3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">memory::<wbr />SeekOrigin</a> origin) <span class="m-label m-flat m-warning">override</span></span>
+              <a href="group__core-memory.html#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">memory::<wbr />SeekOrigin</a> origin) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Seeks to a position in the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a97b383dc7d12e85631aae34b308a1157" class="m-doc">eof</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Checks if the stream still has content to read.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a66d99f90f9a2c74a5616c14abfd8a328" class="m-doc">peek</a>(</span><span class="m-doc-wrap">) const -&gt; char <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Peeks one byte from the stream.</dd>
           </dl>
         </section>
         <section>
@@ -138,6 +137,7 @@
               <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">File::<wbr />OpenMode</a> mode,
               T&amp;&amp; stream)</span></span>
             </h3>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -166,6 +166,7 @@
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />FileStream&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a18d299e95e85ca296b2b4de63f3fb5a6" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">void* data,
               std::size_t size) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Reads data from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -173,21 +174,20 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">data</td>
-                  <td>The buffer to read data into.</td>
+                  <td>Buffer to read data into.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Size of the buffer.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The number of bytes read.</td>
+                  <td>Number of bytes read.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Reads data from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a5bef011d4718f5601e901eba214446cf"><div>
             <h3>
@@ -197,6 +197,7 @@
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />FileStream&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5bef011d4718f5601e901eba214446cf" class="m-doc-self">write</a>(</span><span class="m-doc-wrap">const void* data,
               std::size_t size) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Writes data to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -204,21 +205,20 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">data</td>
-                  <td>The buffer to write data from.</td>
+                  <td>Buffer to write data from.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Size of the buffer.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The number of bytes written.</td>
+                  <td>Number of bytes written.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Writes data to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="af7b0ca12d9fd4262b15f6ee6db9b7586"><div>
             <h3>
@@ -227,15 +227,15 @@
               </div>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />FileStream&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af7b0ca12d9fd4262b15f6ee6db9b7586" class="m-doc-self">tell</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Gets the current position in the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The current position in the stream, or SIZE_MAX if the position is unknown.</td>
+                  <td>Current position in the stream, or SIZE_MAX if the position is unknown.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the current position in the stream.</p>
           </div></section>
           <section class="m-doc-details" id="ace486088260c9d2a9333e20ebdc90f2c"><div>
             <h3>
@@ -243,8 +243,9 @@
                 template&lt;typename T&gt;
               </div>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />FileStream&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ace486088260c9d2a9333e20ebdc90f2c" class="m-doc-self">seek</a>(</span><span class="m-doc-wrap">ptrdiff_t offset,
-              <a href="namespacecubos_1_1core_1_1memory.html#a3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">memory::<wbr />SeekOrigin</a> origin) <span class="m-label m-warning">override</span></span></span>
+              <a href="group__core-memory.html#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">memory::<wbr />SeekOrigin</a> origin) <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Seeks to a position in the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -252,15 +253,14 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">offset</td>
-                  <td>The offset to seek to.</td>
+                  <td>Offset to seek to.</td>
                 </tr>
                 <tr>
                   <td>origin</td>
-                  <td>The origin of the offset.</td>
+                  <td>Origin of the offset.</td>
                 </tr>
               </tbody>
             </table>
-<p>Seeks to a position in the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a97b383dc7d12e85631aae34b308a1157"><div>
             <h3>
@@ -269,15 +269,15 @@
               </div>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />FileStream&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a97b383dc7d12e85631aae34b308a1157" class="m-doc-self">eof</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Checks if the stream still has content to read.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>True if the stream has no more content to read, false otherwise.</td>
+                  <td>Whether the stream has reached the end.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Checks if the stream still has content to read.</p>
           </div></section>
           <section class="m-doc-details" id="a66d99f90f9a2c74a5616c14abfd8a328"><div>
             <h3>
@@ -286,15 +286,15 @@
               </div>
               <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />data::<wbr />FileStream&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a66d99f90f9a2c74a5616c14abfd8a328" class="m-doc-self">peek</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
             </h3>
+            <p>Peeks one byte from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The byte peeked.</td>
+                  <td>Peeked byte.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Peeks one byte from the stream.</p>
           </div></section>
         </section>
       </div>

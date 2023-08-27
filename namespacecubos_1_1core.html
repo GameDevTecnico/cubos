@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -47,7 +46,7 @@
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span>core <span class="m-thin">namespace</span>
         </h1>
-        <p>Namespace of the <strong>CUBOS.</strong> core library.</p>
+        <p>CUBOS. core namespace.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -64,18 +63,22 @@
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos_1_1core_1_1al.html" class="m-doc">al</a></dt>
+            <dd><a href="group__core-al.html" class="m-doc">Audio</a> module.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1data.html" class="m-doc">data</a></dt>
-            <dd>Contains the virtual file and serialization systems, and other data related utilities.</dd>
+            <dd><a href="group__core-data.html" class="m-doc">Data</a> module.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">ecs</a></dt>
-            <dd>Contains the Entity-Component-System framework.</dd>
+            <dd><a href="core-ecs.html" class="m-doc">ECS</a> module.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">geom</a></dt>
+            <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1gl.html" class="m-doc">gl</a></dt>
-            <dd>Contains the low-level graphics API used by the engine (<a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">RenderDevice</a>). Also contains voxel related utilities.</dd>
+            <dd><a href="core-gl.html" class="m-doc">Graphics Library</a> module.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1io.html" class="m-doc">io</a></dt>
-            <dd>Contains input/output related code, such as window management and the input manager.</dd>
+            <dd><a href="core-io.html" class="m-doc">Input Output</a> module.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1memory.html" class="m-doc">memory</a></dt>
-            <dd>Contains streams and other memory related utilities.</dd>
+            <dd><a href="core-memory.html" class="m-doc">Memory</a> module.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1ui.html" class="m-doc">ui</a></dt>
-            <dd>Contains user interface related utilities.</dd>
+            <dd><a href="core-ui.html" class="m-doc">User Interface</a> module.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -84,22 +87,22 @@
             <dt>
               class <a href="classcubos_1_1core_1_1Settings.html" class="m-doc">Settings</a>
             </dt>
-            <dd>Object used to manage settings.</dd>
+            <dd>Stores settings as key-value pairs and provides methods to retrieve them.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">ThreadPool</a>
             </dt>
-            <dd></dd>
+            <dd>Manages a pool of threads, to which tasks can be submitted.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
-            <dt id="ab23801234b8ff1ec70506039c7dc453a">
-              <span class="m-doc-wrap-bumper">void <a href="#ab23801234b8ff1ec70506039c7dc453a" class="m-doc-self">initializeLogger</a>(</span><span class="m-doc-wrap">)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core.html#gab23801234b8ff1ec70506039c7dc453a" class="m-doc">initializeLogger</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Initializes the logger, must be called before any logging is done.</dd>
-            <dt id="a0f297b68d596e1ddbe1d2cfea349197c">
-              <span class="m-doc-wrap-bumper">void <a href="#a0f297b68d596e1ddbe1d2cfea349197c" class="m-doc-self">disableLogging</a>(</span><span class="m-doc-wrap">)</span>
+            <dd>Must be called before any logging is done.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core.html#ga0f297b68d596e1ddbe1d2cfea349197c" class="m-doc">disableLogging</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Disables all logging except for critical errors.</dd>
           </dl>

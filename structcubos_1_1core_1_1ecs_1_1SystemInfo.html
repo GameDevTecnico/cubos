@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemInfo <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_8hpp.html">&lt;core/ecs/system.hpp&gt;</a></div>
         </h1>
-        <p>Contains information about a system.</p>
+        <p>Describes a system.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -66,11 +66,11 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a804c5ac349872cff1c6b58cc5cc49ba3" class="m-doc">valid</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if this system is valid.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a05714b34c0c00bdce62301f97ea831dc" class="m-doc">compatible</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp; other) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks if this system is compatible with another system.</dd>
           </dl>
         </section>
         <section id="pub-attribs">
@@ -87,19 +87,19 @@
             <dt id="a1e9f6205413590bf8f58b5ffa6843634">
               std::unordered_set&lt;std::type_index&gt; <a href="#a1e9f6205413590bf8f58b5ffa6843634" class="m-doc-self">resourcesRead</a>
             </dt>
-            <dd>The type set of resources the system reads.</dd>
+            <dd>Set of resources the system reads.</dd>
             <dt id="a0360aa1a99f951dc4ac5a69a222649a2">
               std::unordered_set&lt;std::type_index&gt; <a href="#a0360aa1a99f951dc4ac5a69a222649a2" class="m-doc-self">resourcesWritten</a>
             </dt>
-            <dd>The type set of resources the system writes.</dd>
+            <dd>Set of resources the system writes.</dd>
             <dt id="a6157a5511699b6dbecc4de59f53a3d28">
               std::unordered_set&lt;std::type_index&gt; <a href="#a6157a5511699b6dbecc4de59f53a3d28" class="m-doc-self">componentsRead</a>
             </dt>
-            <dd>The type set of components the system reads.</dd>
+            <dd>Set of components the system reads.</dd>
             <dt id="ade7e5bf48a1804706818b12f8ae7564e">
               std::unordered_set&lt;std::type_index&gt; <a href="#ade7e5bf48a1804706818b12f8ae7564e" class="m-doc-self">componentsWritten</a>
             </dt>
-            <dd>The type set of components the system writes.</dd>
+            <dd>Set of components the system writes.</dd>
           </dl>
         </section>
         <section>
@@ -108,20 +108,22 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />SystemInfo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a804c5ac349872cff1c6b58cc5cc49ba3" class="m-doc-self">valid</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Checks if this system is valid.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>True if the system is valid, false otherwise.</td>
+                  <td>Whether the system is valid.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Checks if this system is valid. A system may be invalid, if, for example, it both reads and writes the same resource.</p>
+<p>A system may be invalid, if, for example, it both reads and writes the same resource.</p>
           </div></section>
           <section class="m-doc-details" id="a05714b34c0c00bdce62301f97ea831dc"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />SystemInfo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a05714b34c0c00bdce62301f97ea831dc" class="m-doc-self">compatible</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>&amp; other) const</span></span>
             </h3>
+            <p>Checks if this system is compatible with another system.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -129,17 +131,17 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">other</td>
-                  <td>The other system info to check compatibility with.</td>
+                  <td>Other system.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if the systems are compatible, false otherwise.</td>
+                  <td>Whether the systems are compatible.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Checks if this system is compatible with another system.</p>
+<p>Two systems are compatible if they can be executed in parallel. This means that they must not, for example, write to the same resource or component.</p>
           </div></section>
         </section>
       </div>

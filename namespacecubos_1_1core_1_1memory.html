@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -47,7 +46,7 @@
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>memory <span class="m-thin">namespace</span>
         </h1>
-        <p>Contains streams and other memory related utilities.</p>
+        <p><a href="core-memory.html" class="m-doc">Memory</a> module.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -67,41 +66,41 @@
             <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">BufferStream</a>
             </dt>
-            <dd>Implements a stream that writes to/reads from a buffer.</dd>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which writes to/reads from a buffer.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
               class <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">ReadGuard</a>
             </dt>
-            <dd></dd>
+            <dd>Provides safe read-only access to an object using a lock.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
               class <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">WriteGuard</a>
             </dt>
-            <dd></dd>
+            <dd>Provides safe read-write access to an object using a lock.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">StandardStream</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation for stdio.</dd>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which wraps a <code>libc</code> file pointer.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>
             </dt>
-            <dd>Abstract class for memory streams.</dd>
+            <dd>Interface class for memory streams. Abstracts away sources or destinations of data.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename V&gt;</div>
               class <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">TypeMap</a>
             </dt>
-            <dd></dd>
+            <dd>A map that stores values of type <code>V</code>, using types as keys.</dd>
           </dl>
         </section>
         <section id="enum-members">
           <h2><a href="#enum-members">Enums</a></h2>
           <dl class="m-doc">
-            <dt id="a3a9cad9834d027f9ee8194a3ceb9edb0">
-              <span class="m-doc-wrap-bumper">enum class <a href="#a3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc-self">SeekOrigin</a> { </span><span class="m-doc-wrap"><a href="#a3a9cad9834d027f9ee8194a3ceb9edb0a1a06729125544cab7cee73195fc044f0" class="m-doc">Begin</a>,
-              <a href="#a3a9cad9834d027f9ee8194a3ceb9edb0a222a267cc5778206b253be35ee3ddab5" class="m-doc">Current</a>,
-              <a href="#a3a9cad9834d027f9ee8194a3ceb9edb0a87557f11575c0ad78e4e28abedc13b6e" class="m-doc">End</a> }</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="group__core-memory.html#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> { </span><span class="m-doc-wrap"><a href="#gga3a9cad9834d027f9ee8194a3ceb9edb0a1a06729125544cab7cee73195fc044f0" class="m-doc">Begin</a>,
+              <a href="#gga3a9cad9834d027f9ee8194a3ceb9edb0a222a267cc5778206b253be35ee3ddab5" class="m-doc">Current</a>,
+              <a href="#gga3a9cad9834d027f9ee8194a3ceb9edb0a87557f11575c0ad78e4e28abedc13b6e" class="m-doc">End</a> }</span>
             </dt>
-            <dd>Seek origin.</dd>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> seek origin.</dd>
           </dl>
         </section>
         <section id="func-members">
@@ -109,226 +108,34 @@
           <dl class="m-doc">
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae68e6c3d7aafd173d4e828b554df40cf" class="m-doc">swapBytes</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#gae68e6c3d7aafd173d4e828b554df40cf" class="m-doc">swapBytes</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
             </dt>
-            <dd></dd>
+            <dd>Swaps the bytes of a value, changing its endianness.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a78e8f24eb6023b99c232c2c7612963d8" class="m-doc">isLittleEndian</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga78e8f24eb6023b99c232c2c7612963d8" class="m-doc">isLittleEndian</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
             </dt>
-            <dd></dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab3c10b61d10d7b6ea6bd9fbe833db418" class="m-doc">fromLittleEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
-            </dt>
-            <dd></dd>
+            <dd>Checks if the current platform is little endian.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8d48939acb057aaed839810919294142" class="m-doc">toLittleEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#gab3c10b61d10d7b6ea6bd9fbe833db418" class="m-doc">fromLittleEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
             </dt>
-            <dd></dd>
+            <dd>Converts a value from little endianness to local endianness.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4810962c6a13ca18aee18a975eec63cf" class="m-doc">fromBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga8d48939acb057aaed839810919294142" class="m-doc">toLittleEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
             </dt>
-            <dd></dd>
+            <dd>Converts a value from local endianness to little endianness.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a542ca475a4392ceda925fab6d9200b26" class="m-doc">toBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga4810962c6a13ca18aee18a975eec63cf" class="m-doc">fromBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
             </dt>
-            <dd></dd>
+            <dd>Converts a value from big endianness to local endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga542ca475a4392ceda925fab6d9200b26" class="m-doc">toBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
+            </dt>
+            <dd>Converts a value from local endianness to big endianness.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ae68e6c3d7aafd173d4e828b554df40cf"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />memory::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae68e6c3d7aafd173d4e828b554df40cf" class="m-doc-self">swapBytes</a>(</span><span class="m-doc-wrap">T value)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>The type of the value.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>value</td>
-                  <td>The value to swap.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>The swapped value.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Swaps the bytes of a value, changing the endianness.</p>
-          </div></section>
-          <section class="m-doc-details" id="a78e8f24eb6023b99c232c2c7612963d8"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a78e8f24eb6023b99c232c2c7612963d8" class="m-doc-self">isLittleEndian</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>True if the current platform is little endian, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Checks if the current platform is little endian.</p>
-          </div></section>
-          <section class="m-doc-details" id="ab3c10b61d10d7b6ea6bd9fbe833db418"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />memory::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3c10b61d10d7b6ea6bd9fbe833db418" class="m-doc-self">fromLittleEndian</a>(</span><span class="m-doc-wrap">T value)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>The type of the value.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>value</td>
-                  <td>The value to convert.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>The converted value.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Converts a value from little endianness to local endianness.</p>
-          </div></section>
-          <section class="m-doc-details" id="a8d48939acb057aaed839810919294142"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />memory::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d48939acb057aaed839810919294142" class="m-doc-self">toLittleEndian</a>(</span><span class="m-doc-wrap">T value)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>The type of the value.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>value</td>
-                  <td>The value to convert.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>The converted value.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Converts a value from local endianness to little endianness.</p>
-          </div></section>
-          <section class="m-doc-details" id="a4810962c6a13ca18aee18a975eec63cf"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />memory::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4810962c6a13ca18aee18a975eec63cf" class="m-doc-self">fromBigEndian</a>(</span><span class="m-doc-wrap">T value)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>The type of the value.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>value</td>
-                  <td>The value to convert.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>The converted value.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Converts a value from big endianness to local endianness.</p>
-          </div></section>
-          <section class="m-doc-details" id="a542ca475a4392ceda925fab6d9200b26"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">T cubos::<wbr />core::<wbr />memory::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a542ca475a4392ceda925fab6d9200b26" class="m-doc-self">toBigEndian</a>(</span><span class="m-doc-wrap">T value)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>The type of the value.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>value</td>
-                  <td>The value to convert.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>The converted value.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Converts a value from local endianness to big endianness.</p>
-          </div></section>
         </section>
       </div>
     </div>

@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +44,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="event__pipe_8hpp.html">&lt;core/ecs/event_pipe.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>EventPipe <span class="m-thin">class</span>
         </h1>
+        <p>Resource which stores events of type <code>T</code>.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -70,7 +71,7 @@
             </li>
           </ul>
         </nav>
-<p>Event pipe implementation.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>This resource is meant to be used through <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a> and <a href="classcubos_1_1core_1_1ecs_1_1EventWriter.html" class="m-doc">EventWriter</a>.</p></aside>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -78,33 +79,33 @@
               <span class="m-doc-wrap-bumper">void <a href="#a8d70bd3459e6275112d2410417d92897" class="m-doc">push</a>(</span><span class="m-doc-wrap">T event,
               unsigned int mask = <a href="event__pipe_8hpp.html#a97d088b306c6c3922943cd6c37474559" class="m-doc">DEFAULT_<wbr />PUSH_<wbr />MASK</a>)</span>
             </dt>
-            <dd></dd>
+            <dd>Pushes an event into the event pipe.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aeef5c5b78cc2711adffcb92155180995" class="m-doc">getEventMask</a>(</span><span class="m-doc-wrap">std::size_t index) const -&gt; unsigned int</span>
             </dt>
-            <dd></dd>
+            <dd>Returns the event mask from event pipe at the given <code>index</code>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0c701ae6d607b3c41ac61ebb988338b2" class="m-doc">get</a>(</span><span class="m-doc-wrap">std::size_t index) const -&gt; std::pair&lt;const T&amp;, unsigned int&gt;</span>
             </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ae82476c0018a2210416501a71595686f" class="m-doc">clear</a>(</span><span class="m-doc-wrap">)</span>
+            <dd>Returns the event and mask with the given <code>index</code>.</dd>
+            <dt id="ae82476c0018a2210416501a71595686f">
+              <span class="m-doc-wrap-bumper">void <a href="#ae82476c0018a2210416501a71595686f" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd></dd>
-            <dt id="aad5a76f3c7c09fc35c6a1f72da82fbb8">
-              <span class="m-doc-wrap-bumper">auto <a href="#aad5a76f3c7c09fc35c6a1f72da82fbb8" class="m-doc-self">sentEvents</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            <dd>Clears events that have been read by all readers.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aad5a76f3c7c09fc35c6a1f72da82fbb8" class="m-doc">sentEvents</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
             </dt>
             <dd>Returns the number of events that already were sent.</dd>
-            <dt id="ac1c24bfa87c8e72e2f3910835ce2ac2a">
-              <span class="m-doc-wrap-bumper">auto <a href="#ac1c24bfa87c8e72e2f3910835ce2ac2a" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac1c24bfa87c8e72e2f3910835ce2ac2a" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
             </dt>
             <dd>Returns the number of events that are present on the pipe.</dd>
-            <dt id="acee5562537c7d8351d0c9920ba566e5d">
-              <span class="m-doc-wrap-bumper">void <a href="#acee5562537c7d8351d0c9920ba566e5d" class="m-doc-self">addReader</a>(</span><span class="m-doc-wrap">)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#acee5562537c7d8351d0c9920ba566e5d" class="m-doc">addReader</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Adds a new reader to reader count.</dd>
-            <dt id="a722c50376d26063af96b2f5e77b054ed">
-              <span class="m-doc-wrap-bumper">void <a href="#a722c50376d26063af96b2f5e77b054ed" class="m-doc-self">removeReader</a>(</span><span class="m-doc-wrap">)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a722c50376d26063af96b2f5e77b054ed" class="m-doc">removeReader</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Removes a reader from reader count.</dd>
           </dl>
@@ -119,6 +120,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d70bd3459e6275112d2410417d92897" class="m-doc-self">push</a>(</span><span class="m-doc-wrap">T event,
               unsigned int mask = <a href="event__pipe_8hpp.html#a97d088b306c6c3922943cd6c37474559" class="m-doc">DEFAULT_<wbr />PUSH_<wbr />MASK</a>)</span></span>
             </h3>
+            <p>Pushes an event into the event pipe.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -126,15 +128,14 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">event</td>
-                  <td>Event which will be inserted into event pipe.</td>
+                  <td>Event.</td>
                 </tr>
                 <tr>
                   <td>mask</td>
-                  <td>Event mask.</td>
+                  <td>Mask.</td>
                 </tr>
               </tbody>
             </table>
-<p>Pushes event to event pipe, with its mask type. In case mask is not provided, the default mask will be 0.</p>
           </div></section>
           <section class="m-doc-details" id="aeef5c5b78cc2711adffcb92155180995"><div>
             <h3>
@@ -143,6 +144,7 @@
               </div>
               <span class="m-doc-wrap-bumper">unsigned int cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeef5c5b78cc2711adffcb92155180995" class="m-doc-self">getEventMask</a>(</span><span class="m-doc-wrap">std::size_t index) const</span></span>
             </h3>
+            <p>Returns the event mask from event pipe at the given <code>index</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -153,8 +155,13 @@
                   <td>Event index.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Event mask.</td>
+                </tr>
+              </tfoot>
             </table>
-<p>Returns the event mask from event pipe at index.</p>
           </div></section>
           <section class="m-doc-details" id="a0c701ae6d607b3c41ac61ebb988338b2"><div>
             <h3>
@@ -163,6 +170,7 @@
               </div>
               <span class="m-doc-wrap-bumper">std::pair&lt;const T&amp;, unsigned int&gt; cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c701ae6d607b3c41ac61ebb988338b2" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">std::size_t index) const</span></span>
             </h3>
+            <p>Returns the event and mask with the given <code>index</code>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -173,17 +181,67 @@
                   <td>Event index.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Event and mask.</td>
+                </tr>
+              </tfoot>
             </table>
-<p>Returns the event from event pipe at index (with read/write permissions) and its mask.</p>
           </div></section>
-          <section class="m-doc-details" id="ae82476c0018a2210416501a71595686f"><div>
+          <section class="m-doc-details" id="aad5a76f3c7c09fc35c6a1f72da82fbb8"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae82476c0018a2210416501a71595686f" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aad5a76f3c7c09fc35c6a1f72da82fbb8" class="m-doc-self">sentEvents</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
-<p>Clears pipe event list. Only events that got read by all readers are deleted!</p>
+            <p>Returns the number of events that already were sent.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Number of events that already were sent.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac1c24bfa87c8e72e2f3910835ce2ac2a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac1c24bfa87c8e72e2f3910835ce2ac2a" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the number of events that are present on the pipe.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Number of events that are present on the pipe.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="acee5562537c7d8351d0c9920ba566e5d"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acee5562537c7d8351d0c9920ba566e5d" class="m-doc-self">addReader</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Adds a new reader to reader count.</p>
+<p>This is necessary to keep track of when its okay to delete events on <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html#ae82476c0018a2210416501a71595686f" class="m-doc">clear()</a>.</p><aside class="m-note m-info"><h4>Note</h4><p>This is called on impl::SystemFetcher::prepare().</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a722c50376d26063af96b2f5e77b054ed"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />EventPipe&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a722c50376d26063af96b2f5e77b054ed" class="m-doc-self">removeReader</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Removes a reader from reader count.</p>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a></p></aside>
           </div></section>
         </section>
       </div>

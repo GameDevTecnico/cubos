@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -47,7 +46,7 @@
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>ui <span class="m-thin">namespace</span>
         </h1>
-        <p>Contains user interface related utilities.</p>
+        <p><a href="core-ui.html" class="m-doc">User Interface</a> module.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -63,281 +62,59 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#acf0a593e2f7059b016ea0c5134b3026f" class="m-doc">showWorld</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">ecs::<wbr />World</a>&amp; world,
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#gacf0a593e2f7059b016ea0c5134b3026f" class="m-doc">showWorld</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">ecs::<wbr />World</a>&amp; world,
               <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">data::<wbr />Context</a>* context = nullptr)</span>
             </dt>
-            <dd></dd>
+            <dd>Adds a ImGui window which allows the user to inspect the entities and components in a <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">ecs::<wbr />World</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a177513222dee710b3312defacb551f4b" class="m-doc">editWorld</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">ecs::<wbr />World</a>&amp; world,
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga177513222dee710b3312defacb551f4b" class="m-doc">editWorld</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">ecs::<wbr />World</a>&amp; world,
               <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">data::<wbr />Context</a>* serContext = nullptr,
               <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">data::<wbr />Context</a>* desContext = nullptr)</span>
             </dt>
-            <dd></dd>
+            <dd>Adds a ImGui window which allows the user to edit the entities and components in a <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">ecs::<wbr />World</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#abdef4dee46ee75856196dc27a1bad855" class="m-doc">initialize</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1io.html#abbf049b16e4957c4db19bbe8699da719" class="m-doc">io::<wbr />Window</a> window)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#gabdef4dee46ee75856196dc27a1bad855" class="m-doc">initialize</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">io::<wbr />Window</a> window)</span>
             </dt>
-            <dd></dd>
+            <dd>Initializes ImGui for use with the given window.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af8ed978d758b063ff778f65cc761a932" class="m-doc">terminate</a>(</span><span class="m-doc-wrap">)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#gaf8ed978d758b063ff778f65cc761a932" class="m-doc">terminate</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd></dd>
-            <dt id="a00d2e0adc5245a734361b6e5f5fb6fa6">
-              <span class="m-doc-wrap-bumper">void <a href="#a00d2e0adc5245a734361b6e5f5fb6fa6" class="m-doc-self">beginFrame</a>(</span><span class="m-doc-wrap">)</span>
+            <dd>Shuts down ImGui.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga00d2e0adc5245a734361b6e5f5fb6fa6" class="m-doc">beginFrame</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Begins a new ImGui frame.</dd>
-            <dt id="a0cb1cffd1f7ecddba7037c6df8ff2a33">
-              <span class="m-doc-wrap-bumper">void <a href="#a0cb1cffd1f7ecddba7037c6df8ff2a33" class="m-doc-self">endFrame</a>(</span><span class="m-doc-wrap">const <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span>
-            </dt>
-            <dd>Ends the current ImGui frame, and renders the ImGui draw data to the window.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a31fdceab5f801da6c1861e7e9b89f5e7" class="m-doc">handleEvent</a>(</span><span class="m-doc-wrap">const <a href="namespacecubos_1_1core_1_1io.html#ac246d098dc508ff511ed8919c61a6a40" class="m-doc">io::<wbr />WindowEvent</a>&amp; event) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga0cb1cffd1f7ecddba7037c6df8ff2a33" class="m-doc">endFrame</a>(</span><span class="m-doc-wrap">const <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span>
             </dt>
-            <dd></dd>
+            <dd>Ends the current ImGui frame, and renders the ImGui draw data to the <code>target</code> framebuffer, or the default framebuffer if <code>target</code> is null.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a9cc812c329eab0ddf0116d0944df9e16" class="m-doc">showPackage</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">data::<wbr />Package</a>&amp; pkg,
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-ui.html#ga31fdceab5f801da6c1861e7e9b89f5e7" class="m-doc">handleEvent</a>(</span><span class="m-doc-wrap">const <a href="group__core-io.html#gac246d098dc508ff511ed8919c61a6a40" class="m-doc">io::<wbr />WindowEvent</a>&amp; event) -&gt; bool</span>
+            </dt>
+            <dd>Passes a window event to ImGui.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga9cc812c329eab0ddf0116d0944df9e16" class="m-doc">showPackage</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">data::<wbr />Package</a>&amp; pkg,
               const std::string&amp; name)</span>
             </dt>
-            <dd></dd>
+            <dd>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8904bc96ce2ff05ef698f88e0d107290" class="m-doc">editPackage</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">data::<wbr />Package</a>&amp; pkg,
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-ui.html#ga8904bc96ce2ff05ef698f88e0d107290" class="m-doc">editPackage</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">data::<wbr />Package</a>&amp; pkg,
               const std::string&amp; name) -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a71f006c1e0a23b24f6c2a7cc225fc88b" class="m-doc">show</a>(</span><span class="m-doc-wrap">const T&amp; object,
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga71f006c1e0a23b24f6c2a7cc225fc88b" class="m-doc">show</a>(</span><span class="m-doc-wrap">const T&amp; object,
               const std::string&amp; name)</span>
             </dt>
-            <dd></dd>
+            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7dd0b501b4ef70633c7f39098d555de1" class="m-doc">edit</a>(</span><span class="m-doc-wrap">T&amp; object,
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-ui.html#ga7dd0b501b4ef70633c7f39098d555de1" class="m-doc">edit</a>(</span><span class="m-doc-wrap">T&amp; object,
               const std::string&amp; name) -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="acf0a593e2f7059b016ea0c5134b3026f"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ui::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acf0a593e2f7059b016ea0c5134b3026f" class="m-doc-self">showWorld</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">ecs::<wbr />World</a>&amp; world,
-              <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">data::<wbr />Context</a>* context = nullptr)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">world</td>
-                  <td>World to show.</td>
-                </tr>
-                <tr>
-                  <td>context</td>
-                  <td>Optional context for serializing the world.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>ECS system which allows the user to inspect the entities and components in an ECS world.</p>
-          </div></section>
-          <section class="m-doc-details" id="a177513222dee710b3312defacb551f4b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ui::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a177513222dee710b3312defacb551f4b" class="m-doc-self">editWorld</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">ecs::<wbr />World</a>&amp; world,
-              <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">data::<wbr />Context</a>* serContext = nullptr,
-              <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">data::<wbr />Context</a>* desContext = nullptr)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">world</td>
-                  <td>World to edit.</td>
-                </tr>
-                <tr>
-                  <td>serContext</td>
-                  <td>Optional context for serializing the world.</td>
-                </tr>
-                <tr>
-                  <td>desContext</td>
-                  <td>Optional context for deserializing the world.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>ECS system which allows the user to inspect and edit the entities and components in an ECS world.</p>
-          </div></section>
-          <section class="m-doc-details" id="abdef4dee46ee75856196dc27a1bad855"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ui::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abdef4dee46ee75856196dc27a1bad855" class="m-doc-self">initialize</a>(</span><span class="m-doc-wrap"><a href="namespacecubos_1_1core_1_1io.html#abbf049b16e4957c4db19bbe8699da719" class="m-doc">io::<wbr />Window</a> window)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">window</td>
-                  <td>The window to use.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Initializes ImGui for use with the given window. Should only be called once and no ImGui calls should be made before this is called.</p>
-          </div></section>
-          <section class="m-doc-details" id="af8ed978d758b063ff778f65cc761a932"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ui::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8ed978d758b063ff778f65cc761a932" class="m-doc-self">terminate</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-<p>Shuts down ImGui. Should only be called once, after <a href="namespacecubos_1_1core_1_1ui.html#abdef4dee46ee75856196dc27a1bad855" class="m-doc">initialize</a>, and no ImGui calls should be made after this is called.</p>
-          </div></section>
-          <section class="m-doc-details" id="a31fdceab5f801da6c1861e7e9b89f5e7"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ui::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a31fdceab5f801da6c1861e7e9b89f5e7" class="m-doc-self">handleEvent</a>(</span><span class="m-doc-wrap">const <a href="namespacecubos_1_1core_1_1io.html#ac246d098dc508ff511ed8919c61a6a40" class="m-doc">io::<wbr />WindowEvent</a>&amp; event)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">event</td>
-                  <td>The event to pass.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True if the event was consumed by ImGui, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Passes a window event to ImGui.</p>
-          </div></section>
-          <section class="m-doc-details" id="a9cc812c329eab0ddf0116d0944df9e16"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ui::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9cc812c329eab0ddf0116d0944df9e16" class="m-doc-self">showPackage</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">data::<wbr />Package</a>&amp; pkg,
-              const std::string&amp; name)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">pkg</td>
-                  <td>The packaged object to show.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the object.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Shows a packaged object&#x27;s properties in the UI. Should be called inside a ImGui::BeginTable(2)/ImGui::EndTable() block.</p><p>The first column displays the name of the package and the second column displays the value of the package</p>
-          </div></section>
-          <section class="m-doc-details" id="a8904bc96ce2ff05ef698f88e0d107290"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ui::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8904bc96ce2ff05ef698f88e0d107290" class="m-doc-self">editPackage</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">data::<wbr />Package</a>&amp; pkg,
-              const std::string&amp; name)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">pkg</td>
-                  <td>The packaged object to edit.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the object.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True if the object was edited, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a ImGui::BeginTable(3)/ImGui::EndTable() block.</p><p>The first column displays the name of the package, the second column displays the value of the package, and the third column is used for remove buttons in the case of arrays and dictionaries.</p>
-          </div></section>
-          <section class="m-doc-details" id="a71f006c1e0a23b24f6c2a7cc225fc88b"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ui::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71f006c1e0a23b24f6c2a7cc225fc88b" class="m-doc-self">show</a>(</span><span class="m-doc-wrap">const T&amp; object,
-              const std::string&amp; name)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>The type of the serializable object.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>object</td>
-                  <td>The object to show.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the object.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>Shows a serializable object&#x27;s properties in the UI. Should be called inside a ImGui::BeginTable(2)/ImGui::EndTable() block.</p>
-          </div></section>
-          <section class="m-doc-details" id="a7dd0b501b4ef70633c7f39098d555de1"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ui::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7dd0b501b4ef70633c7f39098d555de1" class="m-doc-self">edit</a>(</span><span class="m-doc-wrap">T&amp; object,
-              const std::string&amp; name)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>The type of the serializable object.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>object</td>
-                  <td>The object to edit.</td>
-                </tr>
-                <tr>
-                  <td>name</td>
-                  <td>The name of the object.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True if the object was edited, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Shows a serializable and deserializable object&#x27;s properties in the UI, allowing the user to edit the object. If any of the properties is edited, the object&#x27;s <a href="namespacecubos_1_1core_1_1data.html#a2786b82b9c750a9c74aff52855b60558" class="m-doc">deserialize()</a> method is called. Should be called inside a ImGui::BeginTable(3)/ImGui::EndTable() block.</p>
-          </div></section>
         </section>
       </div>
     </div>

@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +44,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="system_8hpp.html">&lt;core/ecs/system.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename F&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>SystemWrapper <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
         </h1>
+        <p>Wrapper for a system of type <code>F</code>.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -55,7 +56,7 @@
           <tbody>
             <tr>
               <td style="width: 1%">F</td>
-              <td>The type of the system function/method/lambda.</td>
+              <td>Type of the system function/method/lambda.</td>
             </tr>
           </tbody>
         </table>
@@ -72,7 +73,6 @@
             </li>
           </ul>
         </nav>
-<p>A system wrapper for a system which takes some arguments.</p>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
@@ -89,7 +89,7 @@
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a145bbfe89fb748a10b10cde9eca6a9d1" class="m-doc">SystemWrapper</a>(</span><span class="m-doc-wrap">F system)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -98,12 +98,12 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ad97930126935c70bae8c913834063c0f" class="m-doc">prepare</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Prepares the system for being executed on the given world.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac6c8659b55281ef21bfc6e1ca9d23ae1" class="m-doc">call</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
-              <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; commands) -&gt; impl::SystemTraits&lt;F&gt;::Return <span class="m-label m-flat m-warning">override</span></span>
+              <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; commands) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits.html" class="m-doc">impl::<wbr />SystemTraits</a>&lt;F&gt;::Return <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd></dd>
+            <dd>Calls the wrapped system with parameters taken from the given <code>world</code>.</dd>
           </dl>
         </section>
         <section>
@@ -115,6 +115,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />SystemWrapper&lt;F&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a145bbfe89fb748a10b10cde9eca6a9d1" class="m-doc-self">SystemWrapper</a>(</span><span class="m-doc-wrap">F system)</span></span>
             </h3>
+            <p>Constructs.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -122,7 +123,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">system</td>
-                  <td>The system to wrap.</td>
+                  <td>System to wrap.</td>
                 </tr>
               </tbody>
             </table>
@@ -134,17 +135,51 @@
               </div>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />SystemWrapper&lt;F&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad97930126935c70bae8c913834063c0f" class="m-doc-self">prepare</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world) <span class="m-label m-warning">override</span></span></span>
             </h3>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#a5c655c3d2468ad11eeb901aca44efb26" class="m-doc">AnySystemWrapper::<wbr />prepare</a></p></aside>
+            <p>Prepares the system for being executed on the given world.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to prepare the system for.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Requires exclusive access to the world and must be called before calling the system.</p>
           </div></section>
           <section class="m-doc-details" id="ac6c8659b55281ef21bfc6e1ca9d23ae1"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename F&gt;
               </div>
-              <span class="m-doc-wrap-bumper">impl::SystemTraits&lt;F&gt;::Return cubos::<wbr />core::<wbr />ecs::<wbr />SystemWrapper&lt;F&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac6c8659b55281ef21bfc6e1ca9d23ae1" class="m-doc-self">call</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1impl_1_1SystemTraits.html" class="m-doc">impl::<wbr />SystemTraits</a>&lt;F&gt;::Return cubos::<wbr />core::<wbr />ecs::<wbr />SystemWrapper&lt;F&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac6c8659b55281ef21bfc6e1ca9d23ae1" class="m-doc-self">call</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>&amp; world,
               <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>&amp; commands) <span class="m-label m-warning">override</span></span></span>
             </h3>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1ecs_1_1AnySystemWrapper.html#aeefc3c9edb71ac0369e17791c159ac1d" class="m-doc">AnySystemWrapper::<wbr />call</a></p></aside>
+            <p>Calls the wrapped system with parameters taken from the given <code>world</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> used by the system.</td>
+                </tr>
+                <tr>
+                  <td>commands</td>
+                  <td>Buffer where commands can be submitted to.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Return value of the system.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Can only be called after calling <a href="classcubos_1_1core_1_1ecs_1_1SystemWrapper.html#ad97930126935c70bae8c913834063c0f" class="m-doc">prepare()</a> on the same <code>world</code>.</p>
           </div></section>
         </section>
       </div>

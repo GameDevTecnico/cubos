@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,7 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Registry <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="registry_8hpp.html">&lt;core/ecs/registry.hpp&gt;</a></div>
         </h1>
+        <p>Singleton which holds a global registry for all component types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -54,11 +55,12 @@
               Reference
               <ul>
                 <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>Singleton which acts as a global registry for all component types. For each component type, associated to its name, it stores a constructor for its storage type and a function for instantiating the component from a deserializer into a blueprint.</p>
+<p>It stores information regarding the components so that they can be handled in a type-erased manner.</p>
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
@@ -68,24 +70,33 @@
               <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; blueprint,
               <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> id) -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Instantiates a component with the given name from a deserializer into a blueprint.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a3cd8d581e12c9293ec491b7e5f89e214" class="m-doc">createStorage</a>(</span><span class="m-doc-wrap">std::type_index type) -&gt; std::unique_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Instantiates a component storage for the given component type.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T, typename S&gt;</div>
               <span class="m-doc-wrap-bumper">static void <a href="#a7248388cb6c49a540714cd5eff2a40e8" class="m-doc">add</a>(</span><span class="m-doc-wrap">std::string_view name)</span>
             </dt>
-            <dd></dd>
+            <dd>Registers a new component type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a3e32c3d2e0ea456c48283c77d45c00df" class="m-doc">name</a>(</span><span class="m-doc-wrap">std::type_index type) -&gt; std::optional&lt;std::string_view&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the name of a component type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a8250feede2d1f3e252f28471f172e106" class="m-doc">type</a>(</span><span class="m-doc-wrap">std::string_view name) -&gt; std::optional&lt;std::type_index&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the type index of a component type.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a19f73bb5aa93b5730acf85df61600bbd">
+              <span class="m-doc-wrap-bumper"><a href="#a19f73bb5aa93b5730acf85df61600bbd" class="m-doc-self">Registry</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Deleted constructor.</dd>
           </dl>
         </section>
         <section>
@@ -97,6 +108,7 @@
               <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>&amp; blueprint,
               <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> id)</span></span>
             </h3>
+            <p>Instantiates a component with the given name from a deserializer into a blueprint.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -104,34 +116,34 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">name</td>
-                  <td>The name of the component.</td>
+                  <td>Name of the component.</td>
                 </tr>
                 <tr>
                   <td>des</td>
-                  <td>The deserializer to read the component data from.</td>
+                  <td>Deserializer to read the component data from.</td>
                 </tr>
                 <tr>
                   <td>blueprint</td>
-                  <td>The blueprint to instantiate the component into.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a> to instantiate the component into.</td>
                 </tr>
                 <tr>
                   <td>id</td>
-                  <td>The id of the entity the component belongs to.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a> entity to add the component to.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if the component type was found and successfully instantiated, false otherwise.</td>
+                  <td>Whether the instantiation was successful.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Instantiates a component with the given name from a deserializer into a blueprint.</p>
           </div></section>
           <section class="m-doc-details" id="a3cd8d581e12c9293ec491b7e5f89e214"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static std::unique_ptr&lt;<a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3cd8d581e12c9293ec491b7e5f89e214" class="m-doc-self">createStorage</a>(</span><span class="m-doc-wrap">std::type_index type)</span></span>
             </h3>
+            <p>Instantiates a component storage for the given component type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -139,17 +151,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">type</td>
-                  <td>The type index of the component.</td>
+                  <td>Type index of the component.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A pointer to the storage, or nullptr if the component type was not found.</td>
+                  <td>Smart pointer to the storage, or nullptr if the component type was not found.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Instantiates a component storage for the given component type.</p>
           </div></section>
           <section class="m-doc-details" id="a7248388cb6c49a540714cd5eff2a40e8"><div>
             <h3>
@@ -158,6 +169,7 @@
               </div>
               <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7248388cb6c49a540714cd5eff2a40e8" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">std::string_view name)</span></span>
             </h3>
+            <p>Registers a new component type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -165,11 +177,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The component type to register.</td>
+                  <td>Component type to register.</td>
                 </tr>
                 <tr>
                   <td>S</td>
-                  <td>The storage type to use for the component.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> type to use for the component.</td>
                 </tr>
               </tbody>
               <thead>
@@ -178,30 +190,39 @@
               <tbody>
                 <tr>
                   <td>name</td>
-                  <td>The name of the component.</td>
+                  <td>Name of the component.</td>
                 </tr>
               </tbody>
             </table>
-<p>Registers a new component type.</p>
           </div></section>
           <section class="m-doc-details" id="a3e32c3d2e0ea456c48283c77d45c00df"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static std::optional&lt;std::string_view&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3e32c3d2e0ea456c48283c77d45c00df" class="m-doc-self">name</a>(</span><span class="m-doc-wrap">std::type_index type)</span></span>
             </h3>
+            <p>Gets the name of a component type.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Type index of the component.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>The name of the component, or std::nullopt if the component type was not found.</td>
+                  <th>Returns</th>
+                  <td>Name of the component, or std::nullopt if the component type was not found.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the name of a component type.</p>
           </div></section>
           <section class="m-doc-details" id="a8250feede2d1f3e252f28471f172e106"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static std::optional&lt;std::type_index&gt; cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8250feede2d1f3e252f28471f172e106" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">std::string_view name)</span></span>
             </h3>
+            <p>Gets the type index of a component type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -209,17 +230,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">name</td>
-                  <td>The name of the component.</td>
+                  <td>Name of the component.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The type index of the component, or std::nullopt if the component type was not found.</td>
+                  <td>Type index of the component, or std::nullopt if the component type was not found.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the type index of a component type.</p>
           </div></section>
         </section>
       </div>

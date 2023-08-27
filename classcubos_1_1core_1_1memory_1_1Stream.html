@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1memory.html">memory</a>::<wbr/></span>Stream <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="stream_8hpp.html">&lt;core/memory/stream.hpp&gt;</a></div>
         </h1>
-        <p>Abstract class for memory streams.</p>
+        <p>Interface class for memory streams. Abstracts away sources or destinations of data.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -69,15 +69,15 @@
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1data_1_1FileStream.html" class="m-doc">cubos::core::data::FileStream</a> <span class="m-label m-flat m-warning">final</span>
             </dt>
-            <dd>Wrapper around a specific file stream which maintains a reference to the file, preventing it from being destroyed while the stream is still in use. Should not be used directly - it is meant to be created by <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementations and then accessed by the user through an abstract Stream interface.</dd>
+            <dd>Wrapper around an implementation-specific file stream which keeps the file alive and does some sanity checks.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">BufferStream</a>
             </dt>
-            <dd>Implements a stream that writes to/reads from a buffer.</dd>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which writes to/reads from a buffer.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">StandardStream</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation for stdio.</dd>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which wraps a <code>libc</code> file pointer.</dd>
           </dl>
         </section>
         <section id="pub-static-attribs">
@@ -86,30 +86,42 @@
             <dt id="a12aa8dff3c8fc123d8f5bccf63200843">
               static <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp; <a href="#a12aa8dff3c8fc123d8f5bccf63200843" class="m-doc-self">stdIn</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> wrapper for stdin.</dd>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> wrapper for <code>stdin</code>.</dd>
             <dt id="aa12e5ea3b14b35fbab982dc1275d54ea">
               static <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp; <a href="#aa12e5ea3b14b35fbab982dc1275d54ea" class="m-doc-self">stdOut</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> wrapper for stdout.</dd>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> wrapper for <code>stdout</code>.</dd>
             <dt id="ac9830c3566fba9eb086e7f386b3f0db4">
               static <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp; <a href="#ac9830c3566fba9eb086e7f386b3f0db4" class="m-doc-self">stdErr</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> wrapper for stderr.</dd>
+            <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> wrapper for <code>stderr</code>.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
+            <dt id="ac52831dc4f83936728646c3b93539da7">
+              <span class="m-doc-wrap-bumper"><a href="#ac52831dc4f83936728646c3b93539da7" class="m-doc-self">Stream</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs.</dd>
+            <dt id="afcc76e1e97383f75bf24f0656e235c99">
+              <span class="m-doc-wrap-bumper"><a href="#afcc76e1e97383f75bf24f0656e235c99" class="m-doc-self">Stream</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
+            <dt id="a2d15d5258bfcd87715b0f604b9ea142e">
+              <span class="m-doc-wrap-bumper"><a href="#a2d15d5258bfcd87715b0f604b9ea142e" class="m-doc-self">Stream</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd>Forbid copy construction.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper"><a href="#a1c345b2b25de134d6caec571d9de7119" class="m-doc">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; ::std::is_signed_v&lt;T&gt;) void print(T value</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a signed integer to the stream.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper"><a href="#ad64cec749b2e37131e94c5a679e20fab" class="m-doc">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; !::std::is_signed_v&lt;T&gt;) inline void print(T value</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a signed integer to the stream.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -119,144 +131,144 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a8932b836f804b7edffbf144dfa446464" class="m-doc">read</a>(</span><span class="m-doc-wrap">void* data,
               std::size_t size) -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Reads data from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a7865e5ea6bc59b0c87bc12ec9f68a25f" class="m-doc">write</a>(</span><span class="m-doc-wrap">const void* data,
               std::size_t size) -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Writes data to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2d6367c724309042140d6d1f84c5c65e" class="m-doc">tell</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the current position in the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a820067aace45abab18ef4c795d38cae6" class="m-doc">seek</a>(</span><span class="m-doc-wrap">ptrdiff_t offset,
-              <a href="namespacecubos_1_1core_1_1memory.html#a3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> origin) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <a href="group__core-memory.html#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> origin) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Seeks to a position in the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aeb7cc033e4fac6f14b0dbdd2e5a58f24" class="m-doc">eof</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Checks if the stream still has content to read.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#acefff86d37cd9bfd27108412d8e51645" class="m-doc">peek</a>(</span><span class="m-doc-wrap">) const -&gt; char <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd></dd>
+            <dd>Peeks one byte from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a554f3d675d6f8cfbdc2fcad0e0d56113" class="m-doc">get</a>(</span><span class="m-doc-wrap">) -&gt; char</span>
             </dt>
-            <dd></dd>
+            <dd>Gets one byte from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#af1423e4600073d89d24422b17b463d1f" class="m-doc">put</a>(</span><span class="m-doc-wrap">char c)</span>
             </dt>
-            <dd></dd>
+            <dd>Puts one byte into the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a4e091a2ca751bdeb6893f977888989f4" class="m-doc">print</a>(</span><span class="m-doc-wrap">int64_t value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a 64 bit signed integer to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#abd05a2770bf7f0c04633fefc1787bcdc" class="m-doc">print</a>(</span><span class="m-doc-wrap">uint64_t value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a 64 bit unsigned integer to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a808bb5506e754cf02b100e7fbe70b43a" class="m-doc">print</a>(</span><span class="m-doc-wrap">float value,
               std::size_t decimalPlaces = 4)</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a float to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a43898bb8d287dfc3d0384bf4f6627a87" class="m-doc">print</a>(</span><span class="m-doc-wrap">double value,
               std::size_t decimalPlaces = 4)</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a double to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a2aa69cfa0ca02f3eee4fe1783cdf2149" class="m-doc">print</a>(</span><span class="m-doc-wrap">const char* str)</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a string to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a3075d0fd9e1ad548ca20a9c1b895906d" class="m-doc">print</a>(</span><span class="m-doc-wrap">const char* str,
               std::size_t size)</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a string to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a61233fd9a5a86242da058fe6f4508019" class="m-doc">print</a>(</span><span class="m-doc-wrap">const ::std::string&amp; str)</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a string to the stream.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T, typename... TArgs&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#ad6a14e841ba6f89786f189edb4e59586" class="m-doc">printf</a>(</span><span class="m-doc-wrap">const char* fmt,
               T arg,
               TArgs... args)</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a formatted string the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aa0a22412e670d35e93df4684ae8b6971" class="m-doc">printf</a>(</span><span class="m-doc-wrap">const char* fmt)</span>
             </dt>
-            <dd></dd>
+            <dd>Prints a string to the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#abcef0f3e7bf685e944f6881d7b6510e5" class="m-doc">parse</a>(</span><span class="m-doc-wrap">int8_t&amp; value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a 8 bit signed integer from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ae120537adbf31ce2b4dfdab648d5d727" class="m-doc">parse</a>(</span><span class="m-doc-wrap">int16_t&amp; value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a 16 bit signed integer from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aa53f66ace0fffb23055dcf248008e336" class="m-doc">parse</a>(</span><span class="m-doc-wrap">int32_t&amp; value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a 32 bit signed integer from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a7f7dd5dbebb4c7313795513b22012d20" class="m-doc">parse</a>(</span><span class="m-doc-wrap">int64_t&amp; value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a 64 bit signed integer from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a19c99983aa85f99eef5271e5e026d259" class="m-doc">parse</a>(</span><span class="m-doc-wrap">uint8_t&amp; value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a 8 bit unsigned integer from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a23cb479353ba3e90edd276dbca32b657" class="m-doc">parse</a>(</span><span class="m-doc-wrap">uint16_t&amp; value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a 16 bit unsigned integer from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ad199c61781f8727616d4932a8ef6ffa6" class="m-doc">parse</a>(</span><span class="m-doc-wrap">uint32_t&amp; value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a 32 bit unsigned integer from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aad9bc83ff927f9b3fa299e83cc8f0ede" class="m-doc">parse</a>(</span><span class="m-doc-wrap">uint64_t&amp; value,
               std::size_t base = 10)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a 64 bit unsigned integer from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a1ee2b8ab4e131d14dbb4db0f6a029069" class="m-doc">parse</a>(</span><span class="m-doc-wrap">float&amp; value)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a float from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a3d547a5165810dba2fe1dd0ade0a5906" class="m-doc">parse</a>(</span><span class="m-doc-wrap">double&amp; value)</span>
             </dt>
-            <dd></dd>
+            <dd>Parses a double from the stream.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a5324e16075ca254ff8c7abef2755a2ff" class="m-doc">readUntil</a>(</span><span class="m-doc-wrap">std::string&amp; str,
               const char* terminator)</span>
             </dt>
-            <dd></dd>
+            <dd>Reads a string from the stream until the <code>terminator</code> (or <code>\0</code>) is found.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#afd5dc02f6daf0d128756fb9bdf28ad48" class="m-doc">readUntil</a>(</span><span class="m-doc-wrap">char* buffer,
               std::size_t size,
               const char* terminator) -&gt; std::size_t</span>
             </dt>
-            <dd></dd>
+            <dd>Reads a string from the stream until the <code>terminator</code> (or <code>\0</code>) is found.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a471489fe6daeeb5f48cba426cabb3bbe" class="m-doc">ignore</a>(</span><span class="m-doc-wrap">std::size_t size)</span>
             </dt>
-            <dd></dd>
+            <dd>Ignores a number of bytes from the stream.</dd>
           </dl>
         </section>
         <section>
@@ -268,6 +280,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c345b2b25de134d6caec571d9de7119" class="m-doc-self">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; ::std::is_signed_v&lt;T&gt;) void print(T value</span></span>
             </h3>
+            <p>Prints a signed integer to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -275,11 +288,10 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the integer.</td>
+                  <td>Type of the integer.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a signed integer to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="ad64cec749b2e37131e94c5a679e20fab"><div>
             <h3>
@@ -288,6 +300,7 @@
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad64cec749b2e37131e94c5a679e20fab" class="m-doc-self">requires</a>(</span><span class="m-doc-wrap">::std::is_integral_v&lt;T&gt; &amp;&amp; !::std::is_signed_v&lt;T&gt;) inline void print(T value</span></span>
             </h3>
+            <p>Prints a signed integer to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -295,17 +308,17 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the integer.</td>
+                  <td>Integer type.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a signed integer to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a8932b836f804b7edffbf144dfa446464"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8932b836f804b7edffbf144dfa446464" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">void* data,
               std::size_t size) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Reads data from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -313,27 +326,27 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">data</td>
-                  <td>The buffer to read data into.</td>
+                  <td>Buffer to read data into.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Size of the buffer.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The number of bytes read.</td>
+                  <td>Number of bytes read.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Reads data from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a7865e5ea6bc59b0c87bc12ec9f68a25f"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7865e5ea6bc59b0c87bc12ec9f68a25f" class="m-doc-self">write</a>(</span><span class="m-doc-wrap">const void* data,
               std::size_t size) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Writes data to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -341,41 +354,41 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">data</td>
-                  <td>The buffer to write data from.</td>
+                  <td>Buffer to write data from.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Size of the buffer.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The number of bytes written.</td>
+                  <td>Number of bytes written.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Writes data to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a2d6367c724309042140d6d1f84c5c65e"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d6367c724309042140d6d1f84c5c65e" class="m-doc-self">tell</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Gets the current position in the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The current position in the stream, or SIZE_MAX if the position is unknown.</td>
+                  <td>Current position in the stream, or SIZE_MAX if the position is unknown.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the current position in the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a820067aace45abab18ef4c795d38cae6"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a820067aace45abab18ef4c795d38cae6" class="m-doc-self">seek</a>(</span><span class="m-doc-wrap">ptrdiff_t offset,
-              <a href="namespacecubos_1_1core_1_1memory.html#a3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> origin) <span class="m-label m-warning">pure virtual</span></span></span>
+              <a href="group__core-memory.html#ga3a9cad9834d027f9ee8194a3ceb9edb0" class="m-doc">SeekOrigin</a> origin) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Seeks to a position in the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -383,62 +396,62 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">offset</td>
-                  <td>The offset to seek to.</td>
+                  <td>Offset to seek to.</td>
                 </tr>
                 <tr>
                   <td>origin</td>
-                  <td>The origin of the offset.</td>
+                  <td>Origin of the offset.</td>
                 </tr>
               </tbody>
             </table>
-<p>Seeks to a position in the stream.</p>
           </div></section>
           <section class="m-doc-details" id="aeb7cc033e4fac6f14b0dbdd2e5a58f24"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeb7cc033e4fac6f14b0dbdd2e5a58f24" class="m-doc-self">eof</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Checks if the stream still has content to read.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>True if the stream has no more content to read, false otherwise.</td>
+                  <td>Whether the stream has reached the end.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Checks if the stream still has content to read.</p>
           </div></section>
           <section class="m-doc-details" id="acefff86d37cd9bfd27108412d8e51645"><div>
             <h3>
               <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acefff86d37cd9bfd27108412d8e51645" class="m-doc-self">peek</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
+            <p>Peeks one byte from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The byte peeked.</td>
+                  <td>Peeked byte.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Peeks one byte from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a554f3d675d6f8cfbdc2fcad0e0d56113"><div>
             <h3>
               <span class="m-doc-wrap-bumper">char cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a554f3d675d6f8cfbdc2fcad0e0d56113" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets one byte from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The byte read.</td>
+                  <td>Read byte.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets one byte from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="af1423e4600073d89d24422b17b463d1f"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af1423e4600073d89d24422b17b463d1f" class="m-doc-self">put</a>(</span><span class="m-doc-wrap">char c)</span></span>
             </h3>
+            <p>Puts one byte into the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -446,17 +459,17 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">c</td>
-                  <td>The byte to put.</td>
+                  <td>Byte to put.</td>
                 </tr>
               </tbody>
             </table>
-<p>Puts one byte into the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a4e091a2ca751bdeb6893f977888989f4"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4e091a2ca751bdeb6893f977888989f4" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">int64_t value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Prints a 64 bit signed integer to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -464,21 +477,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">value</td>
-                  <td>The value to print.</td>
+                  <td>Value to print.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a 64 bit signed integer to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="abd05a2770bf7f0c04633fefc1787bcdc"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abd05a2770bf7f0c04633fefc1787bcdc" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">uint64_t value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Prints a 64 bit unsigned integer to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -486,21 +499,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">value</td>
-                  <td>The value to print.</td>
+                  <td>Value to print.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a 64 bit unsigned integer to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a808bb5506e754cf02b100e7fbe70b43a"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a808bb5506e754cf02b100e7fbe70b43a" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">float value,
               std::size_t decimalPlaces = 4)</span></span>
             </h3>
+            <p>Prints a float to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -508,21 +521,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">value</td>
-                  <td>The value to print.</td>
+                  <td>Value to print.</td>
                 </tr>
                 <tr>
                   <td>decimalPlaces</td>
-                  <td>The number of decimal places to print.</td>
+                  <td>Number of decimal places to print.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a float to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a43898bb8d287dfc3d0384bf4f6627a87"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a43898bb8d287dfc3d0384bf4f6627a87" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">double value,
               std::size_t decimalPlaces = 4)</span></span>
             </h3>
+            <p>Prints a double to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -530,20 +543,20 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">value</td>
-                  <td>The value to print.</td>
+                  <td>Value to print.</td>
                 </tr>
                 <tr>
                   <td>decimalPlaces</td>
-                  <td>The number of decimal places to print.</td>
+                  <td>Number of decimal places to print.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a double to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a2aa69cfa0ca02f3eee4fe1783cdf2149"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2aa69cfa0ca02f3eee4fe1783cdf2149" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">const char* str)</span></span>
             </h3>
+            <p>Prints a string to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -551,17 +564,17 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">str</td>
-                  <td>The value to print.</td>
+                  <td>String to print.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a string to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a3075d0fd9e1ad548ca20a9c1b895906d"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3075d0fd9e1ad548ca20a9c1b895906d" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">const char* str,
               std::size_t size)</span></span>
             </h3>
+            <p>Prints a string to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -569,20 +582,20 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">str</td>
-                  <td>The string to print.</td>
+                  <td>String to print.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the string.</td>
+                  <td>Size of the string.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a string to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a61233fd9a5a86242da058fe6f4508019"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a61233fd9a5a86242da058fe6f4508019" class="m-doc-self">print</a>(</span><span class="m-doc-wrap">const ::std::string&amp; str)</span></span>
             </h3>
+            <p>Prints a string to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -590,11 +603,10 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">str</td>
-                  <td>The value to print.</td>
+                  <td>Value to print.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a string to the stream.</p>
           </div></section>
           <section class="m-doc-details" id="ad6a14e841ba6f89786f189edb4e59586"><div>
             <h3>
@@ -605,6 +617,7 @@
               T arg,
               TArgs... args)</span></span>
             </h3>
+            <p>Prints a formatted string the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -616,7 +629,7 @@
                 </tr>
                 <tr>
                   <td>TArgs</td>
-                  <td>The types of the remaining arguments.</td>
+                  <td>Types of the remaining arguments.</td>
                 </tr>
               </tbody>
               <thead>
@@ -625,7 +638,7 @@
               <tbody>
                 <tr>
                   <td>fmt</td>
-                  <td></td>
+                  <td>Format string.</td>
                 </tr>
                 <tr>
                   <td>arg</td>
@@ -633,19 +646,19 @@
                 </tr>
                 <tr>
                   <td>args</td>
-                  <td>The arguments to print.</td>
+                  <td>Remaining arguments to print.</td>
                 </tr>
               </tbody>
             </table>
-<p>Prints a formatted string the stream. Example usage:</p><pre>stream.printf(&quot;Hello, {}!\n&quot;, &quot;world&quot;);
-stream.printf(&quot;{} + {} = {}\n&quot;, 1, 2, 3);
-stream.printf(&quot;\\{} {}\n&quot;, 1, 2); // This will print &quot;{} 2&quot;
-</pre>
+<h5 id="autotoc_md45">Usage</h5><pre class="m-code"><span class="n">stream</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello, {}!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;world&quot;</span><span class="p">);</span>
+<span class="n">stream</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;{} + {} = {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="n">stream</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">{} {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// This will print &quot;{} 2&quot;</span></pre>
           </div></section>
           <section class="m-doc-details" id="aa0a22412e670d35e93df4684ae8b6971"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0a22412e670d35e93df4684ae8b6971" class="m-doc-self">printf</a>(</span><span class="m-doc-wrap">const char* fmt)</span></span>
             </h3>
+            <p>Prints a string to the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -653,243 +666,243 @@ stream.printf(&quot;\\{} {}\n&quot;, 1, 2); // This will print &quot;{} 2&quot;
               <tbody>
                 <tr>
                   <td style="width: 1%">fmt</td>
-                  <td>The remainder format string.</td>
+                  <td>Format string.</td>
                 </tr>
               </tbody>
             </table>
-<p>Formatted print recursion tail function.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>This overload is used to terminate the recursion in <a href="classcubos_1_1core_1_1memory_1_1Stream.html#ad6a14e841ba6f89786f189edb4e59586" class="m-doc">printf()</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="abcef0f3e7bf685e944f6881d7b6510e5"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abcef0f3e7bf685e944f6881d7b6510e5" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">int8_t&amp; value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Parses a 8 bit signed integer from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a 8 bit signed integer from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="ae120537adbf31ce2b4dfdab648d5d727"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae120537adbf31ce2b4dfdab648d5d727" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">int16_t&amp; value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Parses a 16 bit signed integer from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a 16 bit signed integer from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="aa53f66ace0fffb23055dcf248008e336"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa53f66ace0fffb23055dcf248008e336" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">int32_t&amp; value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Parses a 32 bit signed integer from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a 32 bit signed integer from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a7f7dd5dbebb4c7313795513b22012d20"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f7dd5dbebb4c7313795513b22012d20" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">int64_t&amp; value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Parses a 64 bit signed integer from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a 64 bit signed integer from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a19c99983aa85f99eef5271e5e026d259"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a19c99983aa85f99eef5271e5e026d259" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">uint8_t&amp; value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Parses a 8 bit unsigned integer from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a 8 bit unsigned integer from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a23cb479353ba3e90edd276dbca32b657"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a23cb479353ba3e90edd276dbca32b657" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">uint16_t&amp; value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Parses a 16 bit unsigned integer from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a 16 bit unsigned integer from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="ad199c61781f8727616d4932a8ef6ffa6"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad199c61781f8727616d4932a8ef6ffa6" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">uint32_t&amp; value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Parses a 32 bit unsigned integer from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a 32 bit unsigned integer from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="aad9bc83ff927f9b3fa299e83cc8f0ede"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aad9bc83ff927f9b3fa299e83cc8f0ede" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">uint64_t&amp; value,
               std::size_t base = 10)</span></span>
             </h3>
+            <p>Parses a 64 bit unsigned integer from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
                 <tr>
                   <td>base</td>
-                  <td>The base to use.</td>
+                  <td>Base to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a 64 bit unsigned integer from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a1ee2b8ab4e131d14dbb4db0f6a029069"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ee2b8ab4e131d14dbb4db0f6a029069" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">float&amp; value)</span></span>
             </h3>
+            <p>Parses a float from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a float from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a3d547a5165810dba2fe1dd0ade0a5906"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3d547a5165810dba2fe1dd0ade0a5906" class="m-doc-self">parse</a>(</span><span class="m-doc-wrap">double&amp; value)</span></span>
             </h3>
+            <p>Parses a double from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-warning">out</span></td>
                   <td>Parsed value.</td>
                 </tr>
               </tbody>
             </table>
-<p>Parses a double from the stream.</p>
           </div></section>
           <section class="m-doc-details" id="a5324e16075ca254ff8c7abef2755a2ff"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5324e16075ca254ff8c7abef2755a2ff" class="m-doc-self">readUntil</a>(</span><span class="m-doc-wrap">std::string&amp; str,
               const char* terminator)</span></span>
             </h3>
+            <p>Reads a string from the stream until the <code>terminator</code> (or <code>\0</code>) is found.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">str</td>
-                  <td>The string to read.</td>
+                  <td style="width: 1%">str&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Read string.</td>
                 </tr>
                 <tr>
                   <td>terminator</td>
-                  <td>The terminator to use.</td>
+                  <td>Optional terminator to use.</td>
                 </tr>
               </tbody>
             </table>
-<p>Reads a string from the stream until the terminator (or &#x27;\0&#x27;) is found. If terminator is nullptr reads a string until &#x27;\0&#x27; is found.</p>
           </div></section>
           <section class="m-doc-details" id="afd5dc02f6daf0d128756fb9bdf28ad48"><div>
             <h3>
@@ -897,6 +910,7 @@ stream.printf(&quot;\\{} {}\n&quot;, 1, 2); // This will print &quot;{} 2&quot;
               std::size_t size,
               const char* terminator)</span></span>
             </h3>
+            <p>Reads a string from the stream until the <code>terminator</code> (or <code>\0</code>) is found.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -904,30 +918,30 @@ stream.printf(&quot;\\{} {}\n&quot;, 1, 2); // This will print &quot;{} 2&quot;
               <tbody>
                 <tr>
                   <td style="width: 1%">buffer</td>
-                  <td>The buffer to read into.</td>
+                  <td>Buffer to read into.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the buffer.</td>
+                  <td>Size of the buffer.</td>
                 </tr>
                 <tr>
                   <td>terminator</td>
-                  <td>The terminator to use.</td>
+                  <td>Optional terminator to use.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The number of bytes read.</td>
+                  <td>Number of bytes read.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Reads from the stream until the terminator (or &#x27;\0&#x27;) is found.</p>
           </div></section>
           <section class="m-doc-details" id="a471489fe6daeeb5f48cba426cabb3bbe"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />Stream::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a471489fe6daeeb5f48cba426cabb3bbe" class="m-doc-self">ignore</a>(</span><span class="m-doc-wrap">std::size_t size)</span></span>
             </h3>
+            <p>Ignores a number of bytes from the stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -935,11 +949,10 @@ stream.printf(&quot;\\{} {}\n&quot;, 1, 2); // This will print &quot;{} 2&quot;
               <tbody>
                 <tr>
                   <td style="width: 1%">size</td>
-                  <td>The number of bytes to ignore.</td>
+                  <td>Number of bytes to ignore.</td>
                 </tr>
               </tbody>
             </table>
-<p>Ignores a number of bytes from the stream.</p>
           </div></section>
         </section>
       </div>

@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,10 +44,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="vec__storage_8hpp.html">&lt;core/ecs/vec_storage.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>VecStorage <span class="m-thin">class</span>
         </h1>
-        <p><a href="classcubos_1_1core_1_1ecs_1_1VecStorage.html" class="m-doc">VecStorage</a> is a <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a STL vector, this is best for components that are used very often, in order to be the most efficient memory wise.</p>
+        <p><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a <code>std::vector</code>.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -56,7 +56,7 @@
           <tbody>
             <tr>
               <td style="width: 1%">T</td>
-              <td>The type to be stored in the storage.</td>
+              <td>Component type.</td>
             </tr>
           </tbody>
         </table>
@@ -79,7 +79,7 @@
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage&lt;T&gt;</a>
             </dt>
-            <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> is an abstract container for a certain type with common operations, such as, insert, get and erase.</dd>
+            <dd>Abstract container for a component type <code>T</code>.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -122,11 +122,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index where to insert the value.</td>
+                  <td>Index where to insert the value.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>The value to be inserted.</td>
+                  <td>Value to be inserted.</td>
                 </tr>
               </tbody>
             </table>
@@ -146,9 +146,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index of the value to be retrieved.</td>
+                  <td>Index of the value to be retrieved.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the value.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a4398143b8d13760a3cf09741ca98fc5f"><div>
@@ -166,9 +172,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index of the value to be retrieved.</td>
+                  <td>Index of the value to be retrieved.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the value.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="af93b4b90264fe3dc5780c9f19c1dd7f4"><div>
@@ -186,7 +198,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index of the value to be removed.</td>
+                  <td>Index of the value to be removed.</td>
                 </tr>
               </tbody>
             </table>

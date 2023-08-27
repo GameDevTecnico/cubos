@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -111,7 +110,7 @@
               <span class="m-doc-wrap-bumper">void <a href="#a8c66a27db1f596aeb8909c0265753337" class="m-doc">render</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Camera.html" class="m-doc">core::<wbr />gl::<wbr />Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
               bool usePostProcessing = true,
-              const <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span>
+              const <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span>
             </dt>
             <dd>Draws a frame.</dd>
             <dt>
@@ -130,7 +129,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aa0bf7b86e6684bcec4abd94981db4e94" class="m-doc">onRender</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Camera.html" class="m-doc">core::<wbr />gl::<wbr />Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
-              <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a8c66a27db1f596aeb8909c0265753337" class="m-doc">render()</a> is called, before applying post processing effects.</dd>
           </dl>
@@ -159,14 +158,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">renderDevice</td>
-                  <td>The render device to use.</td>
+                  <td>Render device to use.</td>
                 </tr>
                 <tr>
                   <td>size</td>
-                  <td>The size of the window.</td>
+                  <td>Size of the window.</td>
                 </tr>
               </tbody>
             </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p><code>renderDevice</code> must be valid during the lifetime of the renderer.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ab93eac006bbc1492aea5ba2df211f877"><div>
             <h3>
@@ -244,7 +244,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8c66a27db1f596aeb8909c0265753337" class="m-doc-self">render</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Camera.html" class="m-doc">core::<wbr />gl::<wbr />Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
               bool usePostProcessing = true,
-              const <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span></span>
+              const <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a>&amp; target = nullptr)</span></span>
             </h3>
             <p>Draws a frame.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -307,7 +307,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BaseRenderer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0bf7b86e6684bcec4abd94981db4e94" class="m-doc-self">onRender</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1Camera.html" class="m-doc">core::<wbr />gl::<wbr />Camera</a>&amp; camera,
               const <a href="classcubos_1_1engine_1_1RendererFrame.html" class="m-doc">RendererFrame</a>&amp; frame,
-              <a href="namespacecubos_1_1core_1_1gl.html#ac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
+              <a href="group__core-gl.html#gac7119bdf28374f4d1b0cf4ac956a73ce" class="m-doc">core::<wbr />gl::<wbr />Framebuffer</a> target) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
             </h3>
             <p>Called when <a href="classcubos_1_1engine_1_1BaseRenderer.html#a8c66a27db1f596aeb8909c0265753337" class="m-doc">render()</a> is called, before applying post processing effects.</p>
             <table class="m-table m-fullwidth m-flat">

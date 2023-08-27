@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -62,7 +61,7 @@
 <span class="k">auto</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memory</span><span class="o">::</span><span class="n">BufferStream</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
 <span class="n">helloWorld</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
 <span class="n">stream</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="sc">&#39;\0&#39;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Add a null terminator.</span>
-<span class="c1">// Now we can use buf as a string.</span></pre><p>One of the common mistakes to be aware of is forgetting to handle different <a href="https://en.wikipedia.org/wiki/Endianness">endianness</a> when writing binary data (e.g.: using <a href="classcubos_1_1core_1_1memory_1_1Stream.html#a7865e5ea6bc59b0c87bc12ec9f68a25f" class="m-doc">Stream::<wbr />write</a> directly). <strong>CUBOS.</strong> provides utility endianness functions in <code><a href="endianness_8hpp.html" class="m-doc">cubos/<wbr />core/<wbr />memory/<wbr />endianness.hpp</a></code>, such as:</p><ul><li><a href="namespacecubos_1_1core_1_1memory.html#a542ca475a4392ceda925fab6d9200b26" class="m-doc">toBigEndian</a> - converts a value from the host endianness to big endian.</li><li><a href="namespacecubos_1_1core_1_1memory.html#a8d48939acb057aaed839810919294142" class="m-doc">toLittleEndian</a> - converts a value from the host endianness to little endian.</li><li>and so on.</li></ul><p>For further details, see the methods of <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>.</p></section></section>
+<span class="c1">// Now we can use buf as a string.</span></pre><p>One of the common mistakes to be aware of is forgetting to handle different <a href="https://en.wikipedia.org/wiki/Endianness">endianness</a> when writing binary data (e.g.: using <a href="classcubos_1_1core_1_1memory_1_1Stream.html#a7865e5ea6bc59b0c87bc12ec9f68a25f" class="m-doc">Stream::<wbr />write</a> directly). <strong>CUBOS.</strong> provides utility endianness functions in <code><a href="endianness_8hpp.html" class="m-doc">cubos/<wbr />core/<wbr />memory/<wbr />endianness.hpp</a></code>, such as:</p><ul><li><a href="group__core-memory.html#ga542ca475a4392ceda925fab6d9200b26" class="m-doc">toBigEndian</a> - converts a value from the host endianness to big endian.</li><li><a href="group__core-memory.html#ga8d48939acb057aaed839810919294142" class="m-doc">toLittleEndian</a> - converts a value from the host endianness to little endian.</li><li>and so on.</li></ul><p>For further details, see the methods of <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>.</p></section></section>
       </div>
     </div>
   </div>

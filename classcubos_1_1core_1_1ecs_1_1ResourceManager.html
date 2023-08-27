@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,7 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>ResourceManager <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="resource__manager_8hpp.html">&lt;core/ecs/resource_manager.hpp&gt;</a></div>
         </h1>
+        <p>Holds and manages resources.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -58,7 +59,7 @@
             </li>
           </ul>
         </nav>
-<p>Object which manages the resources of the ECS world. Used internally by the ECS world.</p>
+<p>Used internally by <a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a>.</p>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -66,17 +67,17 @@
               <div class="m-doc-template">template&lt;typename T, typename... TArgs&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#ac8d506bfe941be786d47c64049151904" class="m-doc">add</a>(</span><span class="m-doc-wrap">TArgs... args)</span>
             </dt>
-            <dd></dd>
+            <dd>Registers a new resource type in the resource manager.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a300de309c4483045c8e4f09bd842635a" class="m-doc">read</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&lt;T&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Locks a resource for reading and returns it.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#ab192004dd34a913f1e6c6e8e883cf1a1" class="m-doc">write</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>&lt;T&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Locks a resource for writing and returns it.</dd>
           </dl>
         </section>
         <section>
@@ -88,6 +89,7 @@
               </div>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ResourceManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac8d506bfe941be786d47c64049151904" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">TArgs... args)</span></span>
             </h3>
+            <p>Registers a new resource type in the resource manager.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -95,11 +97,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the resource.</td>
+                  <td>Resource type.</td>
                 </tr>
                 <tr>
                   <td>TArgs</td>
-                  <td>The types of the arguments of the constructor of the resource.</td>
+                  <td>Types of the arguments of the constructor of the resource.</td>
                 </tr>
               </tbody>
               <thead>
@@ -108,11 +110,11 @@
               <tbody>
                 <tr>
                   <td>args</td>
-                  <td>The arguments of the constructor of the resource.</td>
+                  <td>Arguments of the constructor of the resource.</td>
                 </tr>
               </tbody>
             </table>
-<p>Registers a new resource type in the resource manager. Unsafe to call during any reads or writes, should be called at the start of the program.</p>
+<p>This function is not thread-safe and should be called before any other function.</p>
           </div></section>
           <section class="m-doc-details" id="a300de309c4483045c8e4f09bd842635a"><div>
             <h3>
@@ -121,6 +123,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>&lt;T&gt; cubos::<wbr />core::<wbr />ecs::<wbr />ResourceManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a300de309c4483045c8e4f09bd842635a" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Locks a resource for reading and returns it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -128,17 +131,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the resource.</td>
+                  <td>Resource type.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A lock referring to the resource.</td>
+                  <td>Resource lock.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Reads a resource from the resource manager, locking it for reading.</p>
           </div></section>
           <section class="m-doc-details" id="ab192004dd34a913f1e6c6e8e883cf1a1"><div>
             <h3>
@@ -147,6 +149,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>&lt;T&gt; cubos::<wbr />core::<wbr />ecs::<wbr />ResourceManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab192004dd34a913f1e6c6e8e883cf1a1" class="m-doc-self">write</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Locks a resource for writing and returns it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -154,17 +157,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the resource.</td>
+                  <td>Resource type.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A lock referring to the resource.</td>
+                  <td>Resource lock.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Writes a resource to the resource manager, locking it for writing.</p>
           </div></section>
         </section>
       </div>

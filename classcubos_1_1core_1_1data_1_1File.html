@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -48,7 +47,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>File <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2data_2fs_2file_8hpp.html">&lt;core/data/fs/file.hpp&gt;</a></div>
         </h1>
-        <p>Represents a file in the virtual file system of the engine. Should always be held through a <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a>, which is just a smart shared pointer. All operations on files through this class are done with relative paths, and are equivalent to the same operations on <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a>, with absolute paths.</p>
+        <p>Represents a file in the virtual file system of the engine.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,7 +60,7 @@
             </li>
           </ul>
         </nav>
-<p>Files may be directories, in which case they can have children files, but no data. Regular files are only allowed inside archives, since they must have data associated with them, while the directories are just a way to organize the files.</p><p>Archives are mounted to files, such that the file and all its children are in the archive. Archives can be either single-file archives, in which case their mount point is the file itself, or they can be directories, in which case their mount point is a directory.</p><p>The <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> object should be used to access files from absolute paths - all operations on files are done with relative paths, which must not have leading or trailing slashes. For example, the following paths are valid relative paths: &quot;foo/bar&quot;, &quot;foo&quot;, &quot;&quot;. The following paths are invalid relative paths: &quot;/foo/bar&quot;, &quot;foo/bar/&quot;, &quot;/&quot;.</p><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a></p></aside>
+<p>Instances of this class are always held through a <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a>, which is just a smart shared pointer.</p><p>Files may either be regular files or directories. Directories can have children files, but no data. Regular files are only allowed inside mounted archives, since they must have data associated with them, while the directories are just a way to organize the files.</p><aside class="m-note m-info"><h4>Note</h4><p>All operations on this class expect relative paths without leading or trailing slashes, and are equivalent to the same operations on the <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> with absolute paths. For example, the empty path and the paths <code>foo/bar</code> and <code>foo</code> are valid relative paths, while <code>/foo/bar</code>, <code>foo/bar/</code> and <code>/</code> are not.</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a></p><p><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a></p></aside>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
@@ -71,10 +70,10 @@
               <a href="#a2f796d43a554bc3af6a3fe4747568de6a70a2a84088d405a2e3f1e3accaa16723" class="m-doc">ReadWrite</a> }</span>
             </dt>
             <dd>Possible modes to open files in.</dd>
-            <dt id="ae42aab06139d9f9ff5eced8d8920942d">
-              using <a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc-self">Handle</a> = std::shared_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a>&gt;
+            <dt>
+              using <a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> = std::shared_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a>&gt;
             </dt>
-            <dd>Smart shared pointer, used to prevent files from being deleted while it is still in use.</dd>
+            <dd>Handle to a file in the CUBOS. virtual file system.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -84,60 +83,60 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a2aa5dcee09b74245f7a6d4c57bc38a82" class="m-doc">mount</a>(</span><span class="m-doc-wrap">std::string_view path,
               std::unique_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt; archive) -&gt; bool</span>
             </dt>
-            <dd>Mounts an archive to a path relative to this file. Creates any parent directories that may be necessary, but the mount point itself must not already exist.</dd>
+            <dd>Mounts an archive to a path relative to this file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a98bf5e0e56f0638e9b3092f3516714cf" class="m-doc">unmount</a>(</span><span class="m-doc-wrap">std::string_view path) -&gt; bool</span>
             </dt>
-            <dd>Unmounts an archive from a path relative to this file. Removes all of the archive&#x27;s files from the virtual file system.</dd>
+            <dd>Unmounts an archive from a path relative to this file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a3b6013df9cddc2507d157d8127a120ec" class="m-doc">find</a>(</span><span class="m-doc-wrap">std::string_view path) -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
-            <dd>Gets a handle to a file relative to this file. Fails if the file does not exist or if the path is absolute or invalid.</dd>
+            <dd>Gets a handle to a file relative to this file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#afce44126c19f14913e5342d8741700ba" class="m-doc">create</a>(</span><span class="m-doc-wrap">std::string_view path,
               bool directory = false) -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
-            <dd>Creates a new file on a path relative to this file. The destination location must be writeable - that is, it must be under a mounted writeable archive. If a file at the given path already exists, it is returned instead. Any parent directories that may be necessary are created.</dd>
+            <dd>Creates a new file on a path relative to this file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#afce6b6bc8cdad0d393f1a9c885157023" class="m-doc">destroy</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
             </dt>
-            <dd>Marks this file for destruction. The file will only be deleted when no more references to it exist. The file is immediatelly removed from its parent directory and this method is called recursively on all its children.</dd>
+            <dd>Marks this file for destruction.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2b134893a1eca18512809215bbab87a4" class="m-doc">open</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">OpenMode</a> mode) -&gt; std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt;</span>
             </dt>
-            <dd>Opens this file for reading or writing. If the file is being written to, blocks until the other threads are done with the file.</dd>
+            <dd>Opens this file for reading or writing.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2951ccf946c6d49e5b92ccf6449002ab" class="m-doc">name</a>(</span><span class="m-doc-wrap">) const -&gt; std::string_view</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the name of this file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2fc9f71211c94a8ca64a771c4bff7fda" class="m-doc">path</a>(</span><span class="m-doc-wrap">) const -&gt; std::string_view</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the absolute path of this file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aacdd86cb03bdbc1e4c7e0644c436019b" class="m-doc">directory</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Checks whether this file is a directory.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#abd4a4e71dfa2b6b426d204cd02699710" class="m-doc">archive</a>(</span><span class="m-doc-wrap">) const -&gt; const std::shared_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the archive this file is in.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a5c50035aaafb72fbd773eeec348bb534" class="m-doc">id</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the identifier of this file on its archive.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8f3b4b222dfb314053b291d032981e19" class="m-doc">parent</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the parent directory of this file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a5ae786ac53c59d1934650ee5c83afc84" class="m-doc">sibling</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the next sibling of this file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a937c9996376cf21acb35df8ccfc5f42f" class="m-doc">child</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the first child of this file.</dd>
           </dl>
         </section>
         <section>
@@ -173,13 +172,23 @@
           </div></section>
         </section>
         <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="ae42aab06139d9f9ff5eced8d8920942d"><div>
+            <h3>
+              using cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /><a href="#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc-self">Handle</a> = std::shared_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a>&gt;
+            </h3>
+            <p>Handle to a file in the CUBOS. virtual file system.</p>
+<p>This is a smart shared pointer, so that files are not destroyed while being referenced.</p>
+          </div></section>
+        </section>
+        <section>
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a2aa5dcee09b74245f7a6d4c57bc38a82"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2aa5dcee09b74245f7a6d4c57bc38a82" class="m-doc-self">mount</a>(</span><span class="m-doc-wrap">std::string_view path,
               std::unique_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt; archive)</span></span>
             </h3>
-            <p>Mounts an archive to a path relative to this file. Creates any parent directories that may be necessary, but the mount point itself must not already exist.</p>
+            <p>Mounts an archive to a path relative to this file.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -201,13 +210,13 @@
                 </tr>
               </tfoot>
             </table>
-<p>This method fails on the following conditions:</p><ul><li>path is absolute or invalid.</li><li>a parent file in the path exists and is not a directory.</li><li>a parent directory in the path belongs to an archive.</li><li>a file already exists at the mount point.</li></ul>
+<p>Creates any parent directories that may be necessary, but the mount point itself must not already exist.</p><p>This method fails on the following conditions:</p><ul><li>path is absolute or invalid.</li><li>a parent file in the path exists and is not a directory.</li><li>a parent directory in the path belongs to an archive.</li><li>a file already exists at the mount point.</li></ul>
           </div></section>
           <section class="m-doc-details" id="a98bf5e0e56f0638e9b3092f3516714cf"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a98bf5e0e56f0638e9b3092f3516714cf" class="m-doc-self">unmount</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
             </h3>
-            <p>Unmounts an archive from a path relative to this file. Removes all of the archive&#x27;s files from the virtual file system.</p>
+            <p>Unmounts an archive from a path relative to this file.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -225,13 +234,13 @@
                 </tr>
               </tfoot>
             </table>
-<p>This method fails on the following conditions:</p><ul><li>path is absolute or invalid.</li><li>any of the files in the path do not exist.</li><li>the target path is not the mount point for an archive.</li></ul>
+<p>Removes all of the archive&#x27;s files from the virtual file system.</p><p>This method fails on the following conditions:</p><ul><li>path is absolute or invalid.</li><li>any of the files in the path do not exist.</li><li>the target path is not the mount point for an archive.</li></ul>
           </div></section>
           <section class="m-doc-details" id="a3b6013df9cddc2507d157d8127a120ec"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b6013df9cddc2507d157d8127a120ec" class="m-doc-self">find</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
             </h3>
-            <p>Gets a handle to a file relative to this file. Fails if the file does not exist or if the path is absolute or invalid.</p>
+            <p>Gets a handle to a file relative to this file.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -245,17 +254,18 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A handle to the file, or nullptr if the search failed.</td>
+                  <td>Handle to the file, or nullptr on failure.</td>
                 </tr>
               </tfoot>
             </table>
+<p>Fails if the file does not exist or if the path is absolute or invalid.</p>
           </div></section>
           <section class="m-doc-details" id="afce44126c19f14913e5342d8741700ba"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afce44126c19f14913e5342d8741700ba" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">std::string_view path,
               bool directory = false)</span></span>
             </h3>
-            <p>Creates a new file on a path relative to this file. The destination location must be writeable - that is, it must be under a mounted writeable archive. If a file at the given path already exists, it is returned instead. Any parent directories that may be necessary are created.</p>
+            <p>Creates a new file on a path relative to this file.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -263,7 +273,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">path</td>
-                  <td>The relative path to the file.</td>
+                  <td>Relative path to the file.</td>
                 </tr>
                 <tr>
                   <td>directory</td>
@@ -273,17 +283,17 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A handle to the file, or nullptr if the creation failed.</td>
+                  <td>Handle to the file, or nullptr on failure.</td>
                 </tr>
               </tfoot>
             </table>
-<p>This method fails on the following conditions:</p><ul><li>path is absolute or invalid.</li><li>a parent directory in the path does not exist and cannot be created.</li><li>a parent directory in the path already exists as a regular file.</li><li>a file of a different type already exists at the destination.</li></ul>
+<p>The destination location must be writeable - that is, it must be under a mounted writeable archive. If a file at the given path already exists, it is returned instead. Any parent directories that may be necessary are created.</p><p>This method fails on the following conditions:</p><ul><li>path is absolute or invalid.</li><li>a parent directory in the path does not exist and cannot be created.</li><li>a parent directory in the path already exists as a regular file.</li><li>a file of a different type already exists at the destination.</li></ul>
           </div></section>
           <section class="m-doc-details" id="afce6b6bc8cdad0d393f1a9c885157023"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afce6b6bc8cdad0d393f1a9c885157023" class="m-doc-self">destroy</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
-            <p>Marks this file for destruction. The file will only be deleted when no more references to it exist. The file is immediatelly removed from its parent directory and this method is called recursively on all its children.</p>
+            <p>Marks this file for destruction.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -292,13 +302,13 @@
                 </tr>
               </tfoot>
             </table>
-<p>This method fails on the following conditions:</p><ul><li>this file is the mount point of an archive.</li><li>this file does not belong to an archive.</li><li>this file belongs to a read-only archive.</li></ul><p>The reason this method does not immediately delete the file is to prevent files from being deleted while they are open. Since files are removed from the tree immediately, it is no longer possible to reach them, but there may be other threads operating on them. After every thread is done with the file, it is deleted.</p>
+<p>Although the file will only be deleted when no more references to it exist, it is immediately removed from the virtual file system and this method is called recursively on all its children.</p><p>This method fails on the following conditions:</p><ul><li>this file is the mount point of an archive.</li><li>this file does not belong to an archive.</li><li>this file belongs to a read-only archive.</li></ul>
           </div></section>
           <section class="m-doc-details" id="a2b134893a1eca18512809215bbab87a4"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt; cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b134893a1eca18512809215bbab87a4" class="m-doc-self">open</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">OpenMode</a> mode)</span></span>
             </h3>
-            <p>Opens this file for reading or writing. If the file is being written to, blocks until the other threads are done with the file.</p>
+            <p>Opens this file for reading or writing.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -306,27 +316,28 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">mode</td>
-                  <td>The mode to open the file in.</td>
+                  <td>Mode to open the file in.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A handle to a file stream, or nullptr if the file could not be opened.</td>
+                  <td>Handle to a file stream, or nullptr on failure.</td>
                 </tr>
               </tfoot>
             </table>
-<p>This method fails on the following conditions:</p><ul><li>this file is a directory.</li><li>this file belongs to a read-only archive and the mode is not <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6a7a1a5f3e79fdc91edf2f5ead9d66abb4" class="m-doc">OpenMode::<wbr />Read</a>.</li></ul><p>If the archive where the file is is read-only, or if the file is a directory, nullptr is returned.</p>
+<p>If the file is being written to, blocks until the other threads are done with the file.</p><p>This method fails on the following conditions:</p><ul><li>this file is a directory.</li><li>this file belongs to a read-only archive and the mode is not <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6a7a1a5f3e79fdc91edf2f5ead9d66abb4" class="m-doc">OpenMode::<wbr />Read</a>.</li></ul>
           </div></section>
           <section class="m-doc-details" id="a2951ccf946c6d49e5b92ccf6449002ab"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::string_view cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2951ccf946c6d49e5b92ccf6449002ab" class="m-doc-self">name</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the name of this file.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The name of this file.</td>
+                  <td>Name of this file.</td>
                 </tr>
               </tfoot>
             </table>
@@ -335,11 +346,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::string_view cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2fc9f71211c94a8ca64a771c4bff7fda" class="m-doc-self">path</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the absolute path of this file.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The absolute path of this file.</td>
+                  <td>Absolute path of this file.</td>
                 </tr>
               </tfoot>
             </table>
@@ -348,6 +360,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aacdd86cb03bdbc1e4c7e0644c436019b" class="m-doc-self">directory</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Checks whether this file is a directory.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -361,11 +374,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">const std::shared_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt;&amp; cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abd4a4e71dfa2b6b426d204cd02699710" class="m-doc-self">archive</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the archive this file is in.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The archive this file is in, or nullptr if the file is not in an archive.</td>
+                  <td><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> this file is in, or nullptr if the file is not in an archive.</td>
                 </tr>
               </tfoot>
             </table>
@@ -374,11 +388,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5c50035aaafb72fbd773eeec348bb534" class="m-doc-self">id</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the identifier of this file on its archive.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The identifier of this file on its archive, or 0 if it is not in an archive.</td>
+                  <td>Identifier of this file on its archive, or 0 if it is not in an archive.</td>
                 </tr>
               </tfoot>
             </table>
@@ -387,11 +402,12 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f3b4b222dfb314053b291d032981e19" class="m-doc-self">parent</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the parent directory of this file.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The file&#x27;s parent directory, or nullptr if there isn&#x27;t one.</td>
+                  <td><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a>&#x27;s parent directory, or nullptr if there isn&#x27;t one.</td>
                 </tr>
               </tfoot>
             </table>
@@ -400,11 +416,12 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ae786ac53c59d1934650ee5c83afc84" class="m-doc-self">sibling</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the next sibling of this file.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The next sibling, or nullptr if this file is the last child of its parent.</td>
+                  <td>Next sibling, or nullptr if this file is the last child of its parent.</td>
                 </tr>
               </tfoot>
             </table>
@@ -413,11 +430,12 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">Handle</a> cubos::<wbr />core::<wbr />data::<wbr />File::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a937c9996376cf21acb35df8ccfc5f42f" class="m-doc-self">child</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the first child of this file.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The first child, or nullptr if this file is not a directory or if it is empty.</td>
+                  <td>First child, or nullptr if this file is not a directory or if it is empty.</td>
                 </tr>
               </tfoot>
             </table>

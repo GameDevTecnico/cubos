@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,7 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1gl.html">gl</a>::<wbr/></span>Grid <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="grid_8hpp.html">&lt;core/gl/grid.hpp&gt;</a></div>
         </h1>
+        <p>Represents a voxel object using a 3D grid.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -59,51 +60,62 @@
             </li>
           </ul>
         </nav>
-<p>Represents a grid of voxels. Voxel indices are determined by the following formula: x + y * size.x + z * size.x * size.y</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
+            <dt id="ad38d07b4bc8d2b1564db5956816dce7f">
+              <span class="m-doc-wrap-bumper"><a href="#ad38d07b4bc8d2b1564db5956816dce7f" class="m-doc-self">Grid</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructs an empty single-voxel grid.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#aa4ef0457c1e02e7ef4902181643fcfd7" class="m-doc">Grid</a>(</span><span class="m-doc-wrap">const glm::uvec3&amp; size)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs an empty grid with the given size.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a99c3a038756703f6c892f46e5124dc5e" class="m-doc">Grid</a>(</span><span class="m-doc-wrap">const glm::uvec3&amp; size,
               const std::vector&lt;uint16_t&gt;&amp; indices)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs a grid with the given size and initial data.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a1f5a3a28c431280899d4141ab69bfddd" class="m-doc">Grid</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">Grid</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afc276e14e2a975196f9fc37d9f7b8470" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">Grid</a>&amp; rhs) -&gt; <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">Grid</a>&amp;</span>
+            </dt>
+            <dd>Makes this grid a copy of another grid.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a4be6aa45b55006a782fe2a366a243ef4" class="m-doc">setSize</a>(</span><span class="m-doc-wrap">const glm::uvec3&amp; size)</span>
             </dt>
-            <dd></dd>
+            <dd>Resizes the grid. New voxels are initialized to 0.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a40518de7343fd4de4cabae8acb070fbc" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; const glm::uvec3&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the size of the grid.</dd>
             <dt id="a43865eff4f14ffe47f16f468967ff93e">
               <span class="m-doc-wrap-bumper">void <a href="#a43865eff4f14ffe47f16f468967ff93e" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Clears the grid.</dd>
+            <dd>Sets all voxels to 0.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#acc83d2b66777e77ba2b6a725c2f9004e" class="m-doc">set</a>(</span><span class="m-doc-wrap">const glm::ivec3&amp; position,
               uint16_t mat)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the material index of a voxel.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a4f86c62f435581ec581ea8a9fa001016" class="m-doc">get</a>(</span><span class="m-doc-wrap">const glm::ivec3&amp; position) const -&gt; uint16_t</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the material index of a voxel.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab02c8f5f70d2ed8f8961931a32ad2260" class="m-doc">convert</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">Palette</a>&amp; src,
               const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">Palette</a>&amp; dst,
               float minSimilarity) -&gt; bool</span>
             </dt>
-            <dd></dd>
+            <dd>Converts the material indices of this grid from one palette to another.</dd>
           </dl>
         </section>
         <section>
@@ -112,6 +124,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />gl::<wbr />Grid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa4ef0457c1e02e7ef4902181643fcfd7" class="m-doc-self">Grid</a>(</span><span class="m-doc-wrap">const glm::uvec3&amp; size)</span></span>
             </h3>
+            <p>Constructs an empty grid with the given size.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -119,7 +132,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">size</td>
-                  <td>The size of the grid.</td>
+                  <td>Size of the grid.</td>
                 </tr>
               </tbody>
             </table>
@@ -129,6 +142,7 @@
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />gl::<wbr />Grid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a99c3a038756703f6c892f46e5124dc5e" class="m-doc-self">Grid</a>(</span><span class="m-doc-wrap">const glm::uvec3&amp; size,
               const std::vector&lt;uint16_t&gt;&amp; indices)</span></span>
             </h3>
+            <p>Constructs a grid with the given size and initial data.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -136,19 +150,61 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">size</td>
-                  <td>The size of the grid.</td>
+                  <td>Size of the grid.</td>
                 </tr>
                 <tr>
                   <td>indices</td>
-                  <td>The material indices of the voxels.</td>
+                  <td><a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a> indices of the voxels.</td>
                 </tr>
               </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>The voxel data is stored in a flat array. The index of a voxel at position <code>(x, y, z)</code> is <code>x + y * size.x + z * size.x * size.y</code>.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a1f5a3a28c431280899d4141ab69bfddd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />gl::<wbr />Grid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f5a3a28c431280899d4141ab69bfddd" class="m-doc-self">Grid</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">Grid</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Other grid.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afc276e14e2a975196f9fc37d9f7b8470"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">Grid</a>&amp; cubos::<wbr />core::<wbr />gl::<wbr />Grid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc276e14e2a975196f9fc37d9f7b8470" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">Grid</a>&amp; rhs)</span></span>
+            </h3>
+            <p>Makes this grid a copy of another grid.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rhs</td>
+                  <td>Other grid.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>This grid, for chaining.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a4be6aa45b55006a782fe2a366a243ef4"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />Grid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4be6aa45b55006a782fe2a366a243ef4" class="m-doc-self">setSize</a>(</span><span class="m-doc-wrap">const glm::uvec3&amp; size)</span></span>
             </h3>
+            <p>Resizes the grid. New voxels are initialized to 0.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -156,21 +212,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">size</td>
-                  <td>The new size of the grid.</td>
+                  <td>New size of the grid.</td>
                 </tr>
               </tbody>
             </table>
-<p>Resizes the grid.</p>
           </div></section>
           <section class="m-doc-details" id="a40518de7343fd4de4cabae8acb070fbc"><div>
             <h3>
               <span class="m-doc-wrap-bumper">const glm::uvec3&amp; cubos::<wbr />core::<wbr />gl::<wbr />Grid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a40518de7343fd4de4cabae8acb070fbc" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the size of the grid.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The size of the grid.</td>
+                  <td>Size of the grid.</td>
                 </tr>
               </tfoot>
             </table>
@@ -180,6 +236,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />Grid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acc83d2b66777e77ba2b6a725c2f9004e" class="m-doc-self">set</a>(</span><span class="m-doc-wrap">const glm::ivec3&amp; position,
               uint16_t mat)</span></span>
             </h3>
+            <p>Sets the material index of a voxel.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -187,11 +244,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">position</td>
-                  <td>The position of the voxel.</td>
+                  <td>Voxel coordinates.</td>
                 </tr>
                 <tr>
                   <td>mat</td>
-                  <td>The material index to set.</td>
+                  <td><a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a> index to set.</td>
                 </tr>
               </tbody>
             </table>
@@ -200,6 +257,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">uint16_t cubos::<wbr />core::<wbr />gl::<wbr />Grid::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4f86c62f435581ec581ea8a9fa001016" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">const glm::ivec3&amp; position) const</span></span>
             </h3>
+            <p>Gets the material index of a voxel.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -207,13 +265,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">position</td>
-                  <td>The position of the voxel.</td>
+                  <td>Voxel coordinates.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The material index at a given position.</td>
+                  <td><a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a> index of the voxel.</td>
                 </tr>
               </tfoot>
             </table>
@@ -224,6 +282,7 @@
               const <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">Palette</a>&amp; dst,
               float minSimilarity)</span></span>
             </h3>
+            <p>Converts the material indices of this grid from one palette to another.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -231,15 +290,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">src</td>
-                  <td>The original palette.</td>
+                  <td>Original palette.</td>
                 </tr>
                 <tr>
                   <td>dst</td>
-                  <td>The new palette.</td>
+                  <td>New palette.</td>
                 </tr>
                 <tr>
                   <td>minSimilarity</td>
-                  <td>The minimum similarity between two materials to consider them the same.</td>
+                  <td>Minimum similarity between two materials to consider them the same.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -249,7 +308,7 @@
                 </tr>
               </tfoot>
             </table>
-<p>Converts the material indices of this grid from one palette to another. For each index, it will search for another index in the second palette which matches the first palette. The conversion fails if no matching index is found.</p>
+<p>For each material, it will search for another material in the second palette which is similar enough to the original one. The conversion fails if no matching index is found.</p>
           </div></section>
         </section>
       </div>

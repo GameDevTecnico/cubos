@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,13 +45,16 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>Entity <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="entity__manager_8hpp.html">&lt;core/ecs/entity_manager.hpp&gt;</a></div>
         </h1>
+        <p>Identifies an entity.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pub-attribs">Public variables</a></li>
@@ -60,7 +62,16 @@
             </li>
           </ul>
         </nav>
-<p>Identifies an entity.</p><p>When serializing/deserializing, if there&#x27;s a SerializationMap&lt;Entity, std::string&gt; in the context, it will be used to (de)serialize strings representing the entities. Otherwise, the identifiers will be (de)serialized as objects with two fields: their index and their generation.</p>
+<p>When serializing/deserializing, if there&#x27;s a data::SerializationMap&lt;Entity, std::string&gt; in the context, it will be used to (de)serialize strings representing the entities. Otherwise, the identifiers will be (de)serialized as objects with two fields: their index and their generation.</p>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a3c5e8f1bc346637df9bed0d12aa83c91">
+              using <a href="#a3c5e8f1bc346637df9bed0d12aa83c91" class="m-doc-self">Mask</a> = std::bitset&lt;CUBOS_CORE_ECS_MAX_COMPONENTS+1&gt;
+            </dt>
+            <dd>Type used to store which components an entity has.</dd>
+          </dl>
+        </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -68,16 +79,16 @@
               <span class="m-doc-wrap-bumper"><a href="#a9520ca2a08f01316b77b633e95a6658e" class="m-doc">Entity</a>(</span><span class="m-doc-wrap">uint32_t index,
               uint32_t generation)</span>
             </dt>
-            <dd></dd>
+            <dd>Constructs an entity from an index and a generation.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="aa0f02444b016254b215a2d4e234b5cb1">
-              <span class="m-doc-wrap-bumper">auto <a href="#aa0f02444b016254b215a2d4e234b5cb1" class="m-doc-self">isNull</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa0f02444b016254b215a2d4e234b5cb1" class="m-doc">isNull</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
-            <dd>Checks if the entity is &#x27;none&#x27; (special value returned on errors).</dd>
+            <dd>Checks if the entity is null, a special value returned on errors.</dd>
           </dl>
         </section>
         <section id="pub-attribs">
@@ -86,11 +97,11 @@
             <dt id="aedbc55d4a8cb6dcf055ee5cb533d985b">
               uint32_t <a href="#aedbc55d4a8cb6dcf055ee5cb533d985b" class="m-doc-self">index</a>
             </dt>
-            <dd>Used as index in storages.</dd>
+            <dd>Index in storages.</dd>
             <dt id="a98827b672ce5a0831fc862b9e6e76d1b">
               uint32_t <a href="#a98827b672ce5a0831fc862b9e6e76d1b" class="m-doc-self">generation</a>
             </dt>
-            <dd>Used to detect if the entity has been removed.</dd>
+            <dd>Allows us to detect if the entity has been removed.</dd>
           </dl>
         </section>
         <section>
@@ -100,6 +111,7 @@
               <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />ecs::<wbr />Entity::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9520ca2a08f01316b77b633e95a6658e" class="m-doc-self">Entity</a>(</span><span class="m-doc-wrap">uint32_t index,
               uint32_t generation)</span></span>
             </h3>
+            <p>Constructs an entity from an index and a generation.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -107,13 +119,27 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">index</td>
-                  <td>The index of the entity.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
                 </tr>
                 <tr>
                   <td>generation</td>
-                  <td>The generation of the entity.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> generation.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa0f02444b016254b215a2d4e234b5cb1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />Entity::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0f02444b016254b215a2d4e234b5cb1" class="m-doc-self">isNull</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Checks if the entity is null, a special value returned on errors.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether the entity is null.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
         </section>

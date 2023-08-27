@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1gl.html">gl</a>::<wbr/></span>Debug <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="debug_8hpp.html">&lt;core/gl/debug.hpp&gt;</a></div>
         </h1>
-        <p>This class includes static methods to draw basic objects on screen for debugging purposes.</p>
+        <p>Singleton with static methods used to draw primitive objects on screen for debugging purposes.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -62,51 +62,68 @@
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
-            <dt id="ad4a93e39492b64170d9b05566c026cd2">
-              <span class="m-doc-wrap-bumper">static void <a href="#ad4a93e39492b64170d9b05566c026cd2" class="m-doc-self">init</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">RenderDevice</a>&amp; renderDevice)</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">static void <a href="#ad4a93e39492b64170d9b05566c026cd2" class="m-doc">init</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">RenderDevice</a>&amp; renderDevice)</span>
             </dt>
-            <dd>Initialize the debug rendering system.</dd>
+            <dd>Initializes the debug rendering system.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#aff7dc73f9a3e6b3e5a3b78bc791eeff6" class="m-doc">drawBox</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">geom::<wbr />Box</a> box,
               glm::mat4 transform,
               glm::vec3 color = glm::vec3(1),
               float time = 0)</span>
             </dt>
-            <dd></dd>
+            <dd>Draws a filled box that will stay visible for a specified amount of time.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#ad62cba748785cf33fc0bcf791eef224c" class="m-doc">drawWireBox</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">geom::<wbr />Box</a> box,
               glm::mat4 transform,
               glm::vec3 color = glm::vec3(1),
               float time = 0)</span>
             </dt>
-            <dd></dd>
+            <dd>Draws a wireframe box that will stay visible for a specified amount of time.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#a107639e91411e1935e9c2d4bd8b40fe2" class="m-doc">drawSphere</a>(</span><span class="m-doc-wrap">glm::vec3 center,
               float radius,
               float time,
               glm::vec3 color = glm::vec3(1))</span>
             </dt>
-            <dd></dd>
+            <dd>Draws a filled sphere that will stay visible for a specified amount of time.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#a48297dcfadd0e881edf51d78de7d4363" class="m-doc">drawWireSphere</a>(</span><span class="m-doc-wrap">glm::vec3 center,
               float radius,
               float time,
               glm::vec3 color = glm::vec3(1))</span>
             </dt>
-            <dd></dd>
+            <dd>Draws a wireframe sphere that will stay visible for a specified amount of time.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#af9636a998f5e5508f0eae34ead51276e" class="m-doc">flush</a>(</span><span class="m-doc-wrap">glm::mat4 vp,
               double deltaT)</span>
             </dt>
-            <dd></dd>
+            <dd>Renders all objects in the debug renderer&#x27;s buffer and removes all objects that have exhausted their requested time.</dd>
             <dt id="aaf8e8c85f778aacb41fdc27d8831a520">
               <span class="m-doc-wrap-bumper">static void <a href="#aaf8e8c85f778aacb41fdc27d8831a520" class="m-doc-self">terminate</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Clean up the debug rendering system&#x27;s resources.</dd>
+            <dd>Cleans up the debug rendering system&#x27;s resources.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ad4a93e39492b64170d9b05566c026cd2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />gl::<wbr />Debug::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad4a93e39492b64170d9b05566c026cd2" class="m-doc-self">init</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">RenderDevice</a>&amp; renderDevice)</span></span>
+            </h3>
+            <p>Initializes the debug rendering system.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">renderDevice</td>
+                  <td>Render device to use.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="aff7dc73f9a3e6b3e5a3b78bc791eeff6"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />gl::<wbr />Debug::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aff7dc73f9a3e6b3e5a3b78bc791eeff6" class="m-doc-self">drawBox</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">geom::<wbr />Box</a> box,
@@ -114,6 +131,7 @@
               glm::vec3 color = glm::vec3(1),
               float time = 0)</span></span>
             </h3>
+            <p>Draws a filled box that will stay visible for a specified amount of time.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -133,11 +151,10 @@
                 </tr>
                 <tr>
                   <td>time</td>
-                  <td>How long should the cube be visible for?</td>
+                  <td>How long will it be visible for? If 0, for a single frame.</td>
                 </tr>
               </tbody>
             </table>
-<p>Draw a filled box that will stay visible for a specified amount of time.</p>
           </div></section>
           <section class="m-doc-details" id="ad62cba748785cf33fc0bcf791eef224c"><div>
             <h3>
@@ -146,6 +163,7 @@
               glm::vec3 color = glm::vec3(1),
               float time = 0)</span></span>
             </h3>
+            <p>Draws a wireframe box that will stay visible for a specified amount of time.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -165,11 +183,10 @@
                 </tr>
                 <tr>
                   <td>time</td>
-                  <td>How long should the cube be visible for?</td>
+                  <td>How long will it be visible for? If 0, for a single frame.</td>
                 </tr>
               </tbody>
             </table>
-<p>Draw a wireframe box that will stay visible for a specified amount of time.</p>
           </div></section>
           <section class="m-doc-details" id="a107639e91411e1935e9c2d4bd8b40fe2"><div>
             <h3>
@@ -178,6 +195,7 @@
               float time,
               glm::vec3 color = glm::vec3(1))</span></span>
             </h3>
+            <p>Draws a filled sphere that will stay visible for a specified amount of time.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -193,7 +211,7 @@
                 </tr>
                 <tr>
                   <td>time</td>
-                  <td>How long should the sphere be visible?</td>
+                  <td>How long will it be visible for? If 0, for a single frame.</td>
                 </tr>
                 <tr>
                   <td>color</td>
@@ -201,7 +219,6 @@
                 </tr>
               </tbody>
             </table>
-<p>Draw a filled sphere that will stay visible for a specified amount of time.</p>
           </div></section>
           <section class="m-doc-details" id="a48297dcfadd0e881edf51d78de7d4363"><div>
             <h3>
@@ -210,6 +227,7 @@
               float time,
               glm::vec3 color = glm::vec3(1))</span></span>
             </h3>
+            <p>Draws a wireframe sphere that will stay visible for a specified amount of time.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -225,7 +243,7 @@
                 </tr>
                 <tr>
                   <td>time</td>
-                  <td>How long should the sphere be visible?</td>
+                  <td>How long will it be visible for? If 0, for a single frame.</td>
                 </tr>
                 <tr>
                   <td>color</td>
@@ -233,13 +251,13 @@
                 </tr>
               </tbody>
             </table>
-<p>Draw a wireframe sphere that will stay visible for a specified amount of time.</p>
           </div></section>
           <section class="m-doc-details" id="af9636a998f5e5508f0eae34ead51276e"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />gl::<wbr />Debug::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af9636a998f5e5508f0eae34ead51276e" class="m-doc-self">flush</a>(</span><span class="m-doc-wrap">glm::mat4 vp,
               double deltaT)</span></span>
             </h3>
+            <p>Renders all objects in the debug renderer&#x27;s buffer and removes all objects that have exhausted their requested time.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -255,7 +273,6 @@
                 </tr>
               </tbody>
             </table>
-<p>Render all objects in the debug renderer&#x27;s buffer and update said buffer, removing all objects that have exhausted their requested time.</p>
           </div></section>
         </section>
       </div>

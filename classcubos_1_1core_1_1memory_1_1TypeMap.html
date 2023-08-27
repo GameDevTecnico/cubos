@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -45,9 +44,11 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="type__map_8hpp.html">&lt;core/memory/type_map.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename V&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1memory.html">memory</a>::<wbr/></span>TypeMap <span class="m-thin">class</span>
         </h1>
+        <p>A map that stores values of type <code>V</code>, using types as keys.</p>
         <table class="m-table m-fullwidth m-flat">
           <thead>
             <tr><th colspan="2">Template parameters</th></tr>
@@ -55,7 +56,7 @@
           <tbody>
             <tr>
               <td style="width: 1%">V</td>
-              <td>The type of the values to store.</td>
+              <td>Values type.</td>
             </tr>
           </tbody>
         </table>
@@ -65,12 +66,25 @@
             <li>
               Reference
               <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>A map that stores values of a specific type, using types as keys.</p>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a5cbab4a60ea0de79a7924e3433bcdcba">
+              <span class="m-doc-wrap-bumper"><a href="#a5cbab4a60ea0de79a7924e3433bcdcba" class="m-doc-self">TypeMap</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs an empty map.</dd>
+            <dt id="ae00805df582b3cb3caf40c84754385bd">
+              <span class="m-doc-wrap-bumper"><a href="#ae00805df582b3cb3caf40c84754385bd" class="m-doc-self">TypeMap</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">TypeMap</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move constructs.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -78,55 +92,55 @@
               <span class="m-doc-wrap-bumper">void <a href="#a51f0a87c0f2c3b12bf53445a4e265a29" class="m-doc">set</a>(</span><span class="m-doc-wrap">std::type_index key,
               V value)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the value associated to the given type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ad16123b16267e39f171f681e42ca3ded" class="m-doc">at</a>(</span><span class="m-doc-wrap">std::type_index key) -&gt; V*</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the value associated to the given type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aafd0f8bf4cd4fe9e6a19a2022e9dfbd3" class="m-doc">at</a>(</span><span class="m-doc-wrap">std::type_index key) const -&gt; const V*</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the value associated to the given type.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename K&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#a59d494ed1292be6d14bba969871e7dce" class="m-doc">set</a>(</span><span class="m-doc-wrap">V value)</span>
             </dt>
-            <dd></dd>
+            <dd>Sets the value associated to the given type.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename K&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#ac770e888fdd95567a18de33d8aab00f9" class="m-doc">at</a>(</span><span class="m-doc-wrap">) -&gt; V*</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the value associated to the given type.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename K&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#aed1f504e25bd009ca5707381c88e23f6" class="m-doc">at</a>(</span><span class="m-doc-wrap">) const -&gt; const V*</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the value associated to the given type.</dd>
             <dt id="a038a2a57aad27c9263f4d805e7f2badf">
               <span class="m-doc-wrap-bumper">void <a href="#a038a2a57aad27c9263f4d805e7f2badf" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Removes all elements from the map.</dd>
+            <dd>Removes all values from the map.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ae79691104ad8f2b681051114adc74b3e" class="m-doc">erase</a>(</span><span class="m-doc-wrap">std::type_index key)</span>
             </dt>
-            <dd></dd>
+            <dd>Removes the value with the given key from the map.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename K&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#a28f98d826b6b869c1b10d3668f1c659e" class="m-doc">erase</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd></dd>
+            <dd>Removes the value with the given key from the map.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab868ab13094acdc548b74683d5cf3cd6" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
             </dt>
-            <dd></dd>
+            <dd>Gets the number of values in the map.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a41b9ec80a7c5efb6dff0b612d9fb7fc2" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; auto</span>
             </dt>
-            <dd></dd>
+            <dd>Gets an iterator to the beginning of the map.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac1ff4acf223e800fe7ec1c19cd538b43" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; auto</span>
             </dt>
-            <dd></dd>
+            <dd>Gets an iterator to the end of the map.</dd>
           </dl>
         </section>
         <section>
@@ -139,6 +153,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a51f0a87c0f2c3b12bf53445a4e265a29" class="m-doc-self">set</a>(</span><span class="m-doc-wrap">std::type_index key,
               V value)</span></span>
             </h3>
+            <p>Sets the value associated to the given type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -146,11 +161,11 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The key to identify the value.</td>
+                  <td>Index of the type to use as a key.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>The value to store.</td>
+                  <td>Value to store.</td>
                 </tr>
               </tbody>
             </table>
@@ -162,6 +177,7 @@
               </div>
               <span class="m-doc-wrap-bumper">V* cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad16123b16267e39f171f681e42ca3ded" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">std::type_index key)</span></span>
             </h3>
+            <p>Gets the value associated to the given type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -169,13 +185,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The key to identify the value.</td>
+                  <td>Index of the type to use as a key.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The value stored in the map, or null if no value is stored.</td>
+                  <td>Pointer to the value or null if it isn&#x27;t stored.</td>
                 </tr>
               </tfoot>
             </table>
@@ -187,6 +203,7 @@
               </div>
               <span class="m-doc-wrap-bumper">const V* cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafd0f8bf4cd4fe9e6a19a2022e9dfbd3" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">std::type_index key) const</span></span>
             </h3>
+            <p>Gets the value associated to the given type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -194,13 +211,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The key to identify the value.</td>
+                  <td>Index of the type to use as a key.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The value stored in the map, or null if no value is stored.</td>
+                  <td>Pointer to the value or null if it isn&#x27;t stored.</td>
                 </tr>
               </tfoot>
             </table>
@@ -213,6 +230,7 @@
               </div>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a59d494ed1292be6d14bba969871e7dce" class="m-doc-self">set</a>(</span><span class="m-doc-wrap">V value)</span></span>
             </h3>
+            <p>Sets the value associated to the given type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -220,7 +238,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">K</td>
-                  <td>The type of the key.</td>
+                  <td>Type to use as a key.</td>
                 </tr>
               </tbody>
               <thead>
@@ -229,7 +247,7 @@
               <tbody>
                 <tr>
                   <td>value</td>
-                  <td>The value to store.</td>
+                  <td>Value to store.</td>
                 </tr>
               </tbody>
             </table>
@@ -242,6 +260,7 @@
               </div>
               <span class="m-doc-wrap-bumper">V* cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac770e888fdd95567a18de33d8aab00f9" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets the value associated to the given type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -249,13 +268,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">K</td>
-                  <td>The type of the key.</td>
+                  <td>Type to use as a key.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The value stored in the map, or null if no value is stored.</td>
+                  <td>Pointer to the value or null if it isn&#x27;t stored.</td>
                 </tr>
               </tfoot>
             </table>
@@ -268,6 +287,7 @@
               </div>
               <span class="m-doc-wrap-bumper">const V* cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aed1f504e25bd009ca5707381c88e23f6" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the value associated to the given type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -275,13 +295,13 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">K</td>
-                  <td>The type of the key.</td>
+                  <td>Type to use as a key.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The value stored in the map, or null if no value is stored.</td>
+                  <td>Pointer to the value or null if it isn&#x27;t stored.</td>
                 </tr>
               </tfoot>
             </table>
@@ -293,6 +313,7 @@
               </div>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae79691104ad8f2b681051114adc74b3e" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">std::type_index key)</span></span>
             </h3>
+            <p>Removes the value with the given key from the map.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -300,11 +321,10 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">key</td>
-                  <td>The key to identify the value.</td>
+                  <td>Index of the type to use as a key.</td>
                 </tr>
               </tbody>
             </table>
-<p>Removes the element with the given key from the map.</p>
           </div></section>
           <section class="m-doc-details" id="a28f98d826b6b869c1b10d3668f1c659e"><div>
             <h3>
@@ -314,6 +334,7 @@
               </div>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28f98d826b6b869c1b10d3668f1c659e" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Removes the value with the given key from the map.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -321,11 +342,10 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">K</td>
-                  <td>The key to identify the value.</td>
+                  <td>Type to use as a key.</td>
                 </tr>
               </tbody>
             </table>
-<p>Removes the element with the given key from the map.</p>
           </div></section>
           <section class="m-doc-details" id="ab868ab13094acdc548b74683d5cf3cd6"><div>
             <h3>
@@ -334,11 +354,12 @@
               </div>
               <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab868ab13094acdc548b74683d5cf3cd6" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the number of values in the map.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The number of elements in the map.</td>
+                  <td>Number of values in the map.</td>
                 </tr>
               </tfoot>
             </table>
@@ -350,6 +371,7 @@
               </div>
               <span class="m-doc-wrap-bumper">auto cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a41b9ec80a7c5efb6dff0b612d9fb7fc2" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets an iterator to the beginning of the map.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -366,6 +388,7 @@
               </div>
               <span class="m-doc-wrap-bumper">auto cubos::<wbr />core::<wbr />memory::<wbr />TypeMap&lt;V&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac1ff4acf223e800fe7ec1c19cd538b43" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets an iterator to the end of the map.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>

@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -46,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>BlueprintBuilder <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="commands_8hpp.html">&lt;core/ecs/commands.hpp&gt;</a></div>
         </h1>
-        <p>Used to edit an instance of a blueprint spawned by the <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</p>
+        <p>Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -65,18 +65,18 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ad19b1233944928dd3838dabb99151092" class="m-doc">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
             </dt>
-            <dd></dd>
+            <dd>Gets an entity of the spawned blueprint.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename ComponentType&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a028314b3160c4683cac692dc0d6f11bf" class="m-doc">get</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; ComponentType&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a reference to a component of an entity of the spawned blueprint.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a75522a0d155585e1790926b9586b428c" class="m-doc">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               ComponentTypes &amp;&amp; ... components) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Adds components to the blueprint.</dd>
           </dl>
         </section>
         <section>
@@ -85,6 +85,7 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />BlueprintBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad19b1233944928dd3838dabb99151092" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
             </h3>
+            <p>Gets an entity of the spawned blueprint.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -92,17 +93,17 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">name</td>
-                  <td>The name of the entity.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The entity.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the entity of the instance this builder is editing. Aborts if the name is not found.</p>
+<p>Aborts if the name does not match any entity of the blueprint.</p>
           </div></section>
           <section class="m-doc-details" id="a028314b3160c4683cac692dc0d6f11bf"><div>
             <h3>
@@ -111,6 +112,7 @@
               </div>
               <span class="m-doc-wrap-bumper">ComponentType&amp; cubos::<wbr />core::<wbr />ecs::<wbr />BlueprintBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a028314b3160c4683cac692dc0d6f11bf" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span></span>
             </h3>
+            <p>Gets a reference to a component of an entity of the spawned blueprint.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -118,17 +120,26 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ComponentType</td>
-                  <td>The type of the component.</td>
+                  <td>Component type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A reference to the component.</td>
+                  <td>Reference to the component.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets a reference to a component of the blueprint. Aborts if the name is not found.</p>
+<p>Aborts if <code>name</code> does not match any entity of the blueprint.</p>
           </div></section>
           <section class="m-doc-details" id="a75522a0d155585e1790926b9586b428c"><div>
             <h3>
@@ -138,6 +149,7 @@
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />BlueprintBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a75522a0d155585e1790926b9586b428c" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               ComponentTypes &amp;&amp; ... components)</span></span>
             </h3>
+            <p>Adds components to the blueprint.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -145,7 +157,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ComponentTypes</td>
-                  <td>The types of the components.</td>
+                  <td>Component types.</td>
                 </tr>
               </tbody>
               <thead>
@@ -154,15 +166,21 @@
               <tbody>
                 <tr>
                   <td>name</td>
-                  <td></td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> name.</td>
                 </tr>
                 <tr>
                   <td>components</td>
-                  <td>The components to add.</td>
+                  <td>Components to add.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
             </table>
-<p>Adds component to the blueprint. Aborts if the name is not found.</p>
+<p>Aborts if <code>name</code> does not match any entity of the blueprint.</p>
           </div></section>
         </section>
       </div>

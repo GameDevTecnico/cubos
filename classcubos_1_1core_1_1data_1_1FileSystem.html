@@ -25,10 +25,9 @@
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
             <li><a href="pages.html">Pages</a></li>
-            <li><a href="namespaces.html">Namespaces</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
-          <ol class="m-col-t-6 m-col-m-none" start="4">
+          <ol class="m-col-t-6 m-col-m-none" start="3">
             <li><a href="annotated.html">Classes</a></li>
             <li><a href="files.html">Files</a></li>
             <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
@@ -48,7 +47,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>FileSystem <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="file__system_8hpp.html">&lt;core/data/fs/file_system.hpp&gt;</a></div>
         </h1>
-        <p>Singleton class which represents the virtual file system of the engine. All operations on files through this class are done with absolute paths, and are equivalent to the same operations on the root file, with relative paths.</p>
+        <p>Singleton which represents the virtual file system of the engine.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -60,41 +59,41 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a></p></aside>
+<p>All filesystem operations in the engine should be done through this class or through a <a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> obtained here.</p><aside class="m-note m-info"><h4>Note</h4><p>Operations on this class expect absolute paths and are equivalent to the same operations on the root file with relative paths.</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a></p></aside>
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a844d381b145e952e330e272401c5e773" class="m-doc">root</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the root file of the virtual file system.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a627b224ce3b1ccf2fdc198a9bcd404a9" class="m-doc">mount</a>(</span><span class="m-doc-wrap">std::string_view path,
               std::unique_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt; archive) -&gt; bool</span>
             </dt>
-            <dd>Mounts an archive to an absolute path. Creates any parent directories that may be necessary, but the mount point itself must not already exist.</dd>
+            <dd>Mounts an archive to an absolute path.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#acd970fc3fd1d740c1a6811f7d247cc03" class="m-doc">unmount</a>(</span><span class="m-doc-wrap">std::string_view path) -&gt; bool</span>
             </dt>
-            <dd>Unmounts an archive from an absolute path. Removes all of the archive&#x27;s files from the virtual file system.</dd>
+            <dd>Unmounts an archive from an absolute path.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#ac29156752cd056122cb673018fc51ed4" class="m-doc">find</a>(</span><span class="m-doc-wrap">std::string_view path) -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a></span>
             </dt>
-            <dd>Gets a handle to a file. Fails if the file does not exist or the path is relative or invalid.</dd>
+            <dd>Gets a handle to a file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a4a5c6b0cb8c33de83caa6cdaf4147f87" class="m-doc">create</a>(</span><span class="m-doc-wrap">std::string_view path,
               bool directory = false) -&gt; <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a></span>
             </dt>
-            <dd>Creates a new file at the specified absolute path. The destination location must be writeable - that is, it must be under a mounted writeable archive. If a file at the specified path already exists, it is returned instead. Any parent directories that may be necessary are created.</dd>
+            <dd>Creates a new file at the specified absolute path.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#aa128c3b6d37a3c0b67feee0337fbf5c9" class="m-doc">destroy</a>(</span><span class="m-doc-wrap">std::string_view path) -&gt; bool</span>
             </dt>
-            <dd>Marks a file for destruction. The file will only be deleted when no more references to it exist. The file is immediately removed from its parent directory and any children of the file are also marked for destruction.</dd>
+            <dd>Marks a file for destruction.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#a8ad14295e7ae3b1fea7baf6d026d4d5d" class="m-doc">open</a>(</span><span class="m-doc-wrap">std::string_view path,
               <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">File::<wbr />OpenMode</a> mode) -&gt; std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt;</span>
             </dt>
-            <dd></dd>
+            <dd>Opens a file in the virtual file system.</dd>
           </dl>
         </section>
         <section>
@@ -103,11 +102,12 @@
             <h3>
               <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a> cubos::<wbr />core::<wbr />data::<wbr />FileSystem::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a844d381b145e952e330e272401c5e773" class="m-doc-self">root</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets the root file of the virtual file system.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The root file of the virtual file system.</td>
+                  <td><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> handle.</td>
                 </tr>
               </tfoot>
             </table>
@@ -117,7 +117,7 @@
               <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />data::<wbr />FileSystem::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a627b224ce3b1ccf2fdc198a9bcd404a9" class="m-doc-self">mount</a>(</span><span class="m-doc-wrap">std::string_view path,
               std::unique_ptr&lt;<a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a>&gt; archive)</span></span>
             </h3>
-            <p>Mounts an archive to an absolute path. Creates any parent directories that may be necessary, but the mount point itself must not already exist.</p>
+            <p>Mounts an archive to an absolute path.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -139,13 +139,13 @@
                 </tr>
               </tfoot>
             </table>
-<p>This method fails on the following conditions:</p><ul><li>path is relative or invalid.</li><li>a parent file in the path exists and is not a directory.</li><li>a parent directory in the path belongs to an archive.</li><li>a file already exists at the mount point.</li></ul><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#a2aa5dcee09b74245f7a6d4c57bc38a82" class="m-doc">File::<wbr />mount</a></p></aside>
+<p>Creates any parent directories that may be necessary, but the mount point itself must not already exist.</p><p>This method fails on the following conditions:</p><ul><li>path is relative or invalid.</li><li>a parent file in the path exists and is not a directory.</li><li>a parent directory in the path belongs to an archive.</li><li>a file already exists at the mount point.</li></ul><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#a2aa5dcee09b74245f7a6d4c57bc38a82" class="m-doc">File::<wbr />mount()</a></p></aside>
           </div></section>
           <section class="m-doc-details" id="acd970fc3fd1d740c1a6811f7d247cc03"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />data::<wbr />FileSystem::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acd970fc3fd1d740c1a6811f7d247cc03" class="m-doc-self">unmount</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
             </h3>
-            <p>Unmounts an archive from an absolute path. Removes all of the archive&#x27;s files from the virtual file system.</p>
+            <p>Unmounts an archive from an absolute path.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -163,13 +163,13 @@
                 </tr>
               </tfoot>
             </table>
-<p>This method fails on the following conditions:</p><ul><li>path is relative or invalid.</li><li>any of the files in the path do not exist.</li><li>the target path is not the mount point of an archive.</li></ul><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#a98bf5e0e56f0638e9b3092f3516714cf" class="m-doc">File::<wbr />unmount</a></p></aside>
+<p>Removes all of the archive&#x27;s files from the virtual file system.</p><p>This method fails on the following conditions:</p><ul><li>path is relative or invalid.</li><li>any of the files in the path do not exist.</li><li>the target path is not the mount point of an archive.</li></ul><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#a98bf5e0e56f0638e9b3092f3516714cf" class="m-doc">File::<wbr />unmount()</a></p></aside>
           </div></section>
           <section class="m-doc-details" id="ac29156752cd056122cb673018fc51ed4"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a> cubos::<wbr />core::<wbr />data::<wbr />FileSystem::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac29156752cd056122cb673018fc51ed4" class="m-doc-self">find</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
             </h3>
-            <p>Gets a handle to a file. Fails if the file does not exist or the path is relative or invalid.</p>
+            <p>Gets a handle to a file.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -183,18 +183,18 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The file or nullptr if the search failed.</td>
+                  <td><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> handle or nullptr on failure.</td>
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#a3b6013df9cddc2507d157d8127a120ec" class="m-doc">File::<wbr />find</a></p></aside>
+<p>Fails if the file does not exist or the path is relative or invalid.</p><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#a3b6013df9cddc2507d157d8127a120ec" class="m-doc">File::<wbr />find()</a></p></aside>
           </div></section>
           <section class="m-doc-details" id="a4a5c6b0cb8c33de83caa6cdaf4147f87"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1data_1_1File.html#ae42aab06139d9f9ff5eced8d8920942d" class="m-doc">File::<wbr />Handle</a> cubos::<wbr />core::<wbr />data::<wbr />FileSystem::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4a5c6b0cb8c33de83caa6cdaf4147f87" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">std::string_view path,
               bool directory = false)</span></span>
             </h3>
-            <p>Creates a new file at the specified absolute path. The destination location must be writeable - that is, it must be under a mounted writeable archive. If a file at the specified path already exists, it is returned instead. Any parent directories that may be necessary are created.</p>
+            <p>Creates a new file at the specified absolute path.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -202,7 +202,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">path</td>
-                  <td>The absolute path to the file.</td>
+                  <td>Absolute path to the file.</td>
                 </tr>
                 <tr>
                   <td>directory</td>
@@ -212,17 +212,17 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The file or nullptr if the creation failed.</td>
+                  <td><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> or nullptr on failure.</td>
                 </tr>
               </tfoot>
             </table>
-<p>This method fails on the following conditions:</p><ul><li>path is relative or invalid.</li><li>a parent directory in the path does not exist and cannot be created.</li><li>a parent directory in the path already exists as a regular file.</li><li>a file of a different type already exists at the destination.</li></ul><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#afce44126c19f14913e5342d8741700ba" class="m-doc">File::<wbr />create</a></p></aside>
+<p>The destination location must be writeable - that is, it must be under a mounted writeable archive.</p><p>If a file at the specified path already exists, it is returned instead. Any parent directories that may be necessary are created.</p><p>This method fails on the following conditions:</p><ul><li>path is relative or invalid.</li><li>a parent directory in the path does not exist and cannot be created.</li><li>a parent directory in the path already exists as a regular file.</li><li>a file of a different type already exists at the destination.</li></ul><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#afce44126c19f14913e5342d8741700ba" class="m-doc">File::<wbr />create()</a></p></aside>
           </div></section>
           <section class="m-doc-details" id="aa128c3b6d37a3c0b67feee0337fbf5c9"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />data::<wbr />FileSystem::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa128c3b6d37a3c0b67feee0337fbf5c9" class="m-doc-self">destroy</a>(</span><span class="m-doc-wrap">std::string_view path)</span></span>
             </h3>
-            <p>Marks a file for destruction. The file will only be deleted when no more references to it exist. The file is immediately removed from its parent directory and any children of the file are also marked for destruction.</p>
+            <p>Marks a file for destruction.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -240,13 +240,14 @@
                 </tr>
               </tfoot>
             </table>
-<p>This method fails on the following conditions:</p><ul><li>path is relative or invalid.</li><li>the file does not exist.</li><li>the file is the mount point of an archive.</li><li>the file does not belong to an archive.</li><li>the file belongs to a read-only archive.</li></ul><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#afce6b6bc8cdad0d393f1a9c885157023" class="m-doc">File::<wbr />destroy</a></p></aside>
+<p>Although The file will only be deleted when no more references to it exist, it is immediately removed from the virtual file system.</p><p>All children of the file are also marked for destruction.</p><p>This method fails on the following conditions:</p><ul><li>path is relative or invalid.</li><li>the file does not exist.</li><li>the file is the mount point of an archive.</li><li>the file does not belong to an archive.</li><li>the file belongs to a read-only archive.</li></ul><aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1data_1_1File.html#afce6b6bc8cdad0d393f1a9c885157023" class="m-doc">File::<wbr />destroy()</a></p></aside>
           </div></section>
           <section class="m-doc-details" id="a8ad14295e7ae3b1fea7baf6d026d4d5d"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static std::unique_ptr&lt;<a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&gt; cubos::<wbr />core::<wbr />data::<wbr />FileSystem::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8ad14295e7ae3b1fea7baf6d026d4d5d" class="m-doc-self">open</a>(</span><span class="m-doc-wrap">std::string_view path,
               <a href="classcubos_1_1core_1_1data_1_1File.html#a2f796d43a554bc3af6a3fe4747568de6" class="m-doc">File::<wbr />OpenMode</a> mode)</span></span>
             </h3>
+            <p>Opens a file in the virtual file system.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -264,11 +265,11 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>The file stream, or nullptr if an error occurred.</td>
+                  <td><a href="classcubos_1_1core_1_1data_1_1File.html" class="m-doc">File</a> stream, or nullptr if an error occurred.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Opens a file in the virtual file system.</p><p>This method fails on the following conditions:</p><ul><li>FileSystem::find(path) fails.</li><li>file-&gt;open(mode) fails.</li></ul>
+<p>If the file is being written to, blocks until the other threads are done with the file.</p><p>This method fails on the following conditions:</p><ul><li><code>FileSystem::find(path)</code> fails.</li><li><code>file-&gt;open(mode)</code> fails.</li></ul>
           </div></section>
         </section>
       </div>
