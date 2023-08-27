@@ -1,7 +1,7 @@
 # engine/samples/CMakeLists.txt
 # Engine samples build configuration
 
-include(CubinhosGenerate)
+include(QuadradosGenerate)
 
 # Macro used to reduce the boilerplate code
 macro(make_sample)
@@ -31,7 +31,7 @@ macro(make_sample)
     endif()
 
     if(MAKE_SAMPLE_COMPONENTS)
-        cubinhos_generate(${target} "${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}")
+        quadrados_generate(${target} "${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}")
     endif()
 endmacro()
 

@@ -10,7 +10,7 @@ using cubos::core::data::File;
 using cubos::core::memory::SeekOrigin;
 using cubos::core::memory::Stream;
 
-// Fear not - we aren't supposed do this manually - usually cubinhos would do this for us.
+// Fear not - we aren't supposed do this manually - usually quadrados would do this for us.
 
 // Embedded data with a single regular file which has the data "ab".
 static const EmbeddedArchive::Data::Entry singleEntry{"root", false, 0, 0, 0, "ab", 2};

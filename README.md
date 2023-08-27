@@ -24,10 +24,10 @@ includes some basic functionality like serialization, logging, render devices,
 input handling and others.
 - `engine`: library with code exclusive to the game execution. This includes
 the main loop, the asset manager and systems like the renderer and physics.
-- `cubinhos`: a tool which helps you with the game development and which
-may depend on `core`. One example use case of `cubinhos` is convert from
+- `quadrados`: a tool which helps you with the game development and which
+may depend on `core`. One example use case of `quadrados` is convert from
 external voxel formats to the internal format used by **CUBOS.**.
-- `tesserato`: game editor made on top of multiple plugins, that can also be used individually 
+- `tesseratos`: game editor made on top of multiple plugins, that can also be used individually 
 in your game using **CUBOS.**.
 
 ### Further reading
@@ -54,17 +54,17 @@ on the [releases](https://github.com/GameDevTecnico/cubos/releases) page.-->
 
 The following dependencies are used to compile **CUBOS.**:
 
-| Name                                                | Importance         | Submodule Path      | Installed Separately |
-| --------------------------------------------------- | ------------------ | ------------------- | -------------------- |
-| [CMake](https://cmake.org/)                         | Essential          | -                   | Yes                  |
-| [json](https://github.com/nlohmann/json)            | Essential          | -                   | No                   |
-| [glad](https://github.com/Dav1dde/glad)             | Essential          | -                   | No                   |
-| [glfw](https://github.com/glfw/glfw)                | Essential          | `core/lib/glfw`     | Optionally           |
-| [glm](https://github.com/g-truc/glm)                | Essential          | `core/lib/glm`      | Optionally           |
-| [fmt](https://github.com/fmtlib/fmt)                | Essential          | `core/lib/fmt`      | Optionally           |
-| [spdlog](https://github.com/gabime/spdlog)          | Essential          | `core/lib/spdlog`   | Optionally           |
-| [stduuid](https://github.com/mariusbancila/stduuid) | Essential          | `core/lib/stduuid`  | No                   |
-| [doctest](https://github.com/doctest/doctest)       | Required for tests | `core/lib/doctest`  | Optionally           |
+| Name                                                | Importance         | Submodule Path     | Installed Separately |
+| --------------------------------------------------- | ------------------ | ------------------ | -------------------- |
+| [CMake](https://cmake.org/)                         | Essential          | -                  | Yes                  |
+| [json](https://github.com/nlohmann/json)            | Essential          | -                  | No                   |
+| [glad](https://github.com/Dav1dde/glad)             | Essential          | -                  | No                   |
+| [glfw](https://github.com/glfw/glfw)                | Essential          | `core/lib/glfw`    | Optionally           |
+| [glm](https://github.com/g-truc/glm)                | Essential          | `core/lib/glm`     | Optionally           |
+| [fmt](https://github.com/fmtlib/fmt)                | Essential          | `core/lib/fmt`     | Optionally           |
+| [spdlog](https://github.com/gabime/spdlog)          | Essential          | `core/lib/spdlog`  | Optionally           |
+| [stduuid](https://github.com/mariusbancila/stduuid) | Essential          | `core/lib/stduuid` | No                   |
+| [doctest](https://github.com/doctest/doctest)       | Required for tests | `core/lib/doctest` | Optionally           |
 
 Dependencies marked as *Essential* are required to compile the engine.
 **CUBOS.** uses [CMake](https://cmake.org/) as its build system, so you must
@@ -86,19 +86,19 @@ CMake separetely you would pass the following flags to CMake:
 
 The following is a list of all the options available to configure the engine:
 
-| Name                       | Description                        |
-| -------------------------- | ---------------------------------- |
-| `WITH_GLFW`                | Use GLFW? (Required for now)       |
-| `WITH_OPENGL`              | Use OpenGL? (Required for now)     |
-| `GLFW_USE_SUBMODULE`       | Compile glfw from source?          |
-| `GLM_USE_SUBMODULE`        | Compile glm from source?           |
-| `DOCTEST_USE_SUBMODULE`    | Compile doctest from source?       |
-| `SPDLOG_USE_SUBMODULE`     | Compile spdlog from source?        |
-| `FMT_USE_SUBMODULE`        | Compile fmt from source?           |
-| `BUILD_CORE_SAMPLES`       | Build **CUBOS.** `core` samples?   |
-| `BUILD_CORE_TESTS`         | Build **CUBOS.** `core` tests?     |
-| `BUILD_ENGINE_SAMPLES`     | Build **CUBOS.** `engine` samples? |
-| `BUILD_ENGINE_TESTS`       | Build **CUBOS.** `engine` tests?   |
+| Name                    | Description                        |
+| ----------------------- | ---------------------------------- |
+| `WITH_GLFW`             | Use GLFW? (Required for now)       |
+| `WITH_OPENGL`           | Use OpenGL? (Required for now)     |
+| `GLFW_USE_SUBMODULE`    | Compile glfw from source?          |
+| `GLM_USE_SUBMODULE`     | Compile glm from source?           |
+| `DOCTEST_USE_SUBMODULE` | Compile doctest from source?       |
+| `SPDLOG_USE_SUBMODULE`  | Compile spdlog from source?        |
+| `FMT_USE_SUBMODULE`     | Compile fmt from source?           |
+| `BUILD_CORE_SAMPLES`    | Build **CUBOS.** `core` samples?   |
+| `BUILD_CORE_TESTS`      | Build **CUBOS.** `core` tests?     |
+| `BUILD_ENGINE_SAMPLES`  | Build **CUBOS.** `engine` samples? |
+| `BUILD_ENGINE_TESTS`    | Build **CUBOS.** `engine` tests?   |
 
 ### Samples
 

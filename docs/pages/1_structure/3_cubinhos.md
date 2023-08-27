@@ -1,13 +1,13 @@
-# Cubinhos {#cubinhos}
+# Quadrados {#quadrados}
 
-*Cubinhos* is the CLI tool used to work with *CUBOS.* At the moment, it contains
+*Quadrados* is the CLI tool used to work with *CUBOS.* At the moment, it contains
 the following commands:
-- `cubinhos help`: shows the help message;
-- `cubinhos convert`: converts a `.qb` voxel file into the internal format used
+- `quadrados help`: shows the help message;
+- `quadrados convert`: converts a `.qb` voxel file into the internal format used
   by CUBOS., `.grd` and `.pal`.
-- `cubinhos embed`: utility used to embed files directly into an executable for
+- `quadrados embed`: utility used to embed files directly into an executable for
   use with the `EmbeddedArchive`.
-- `cubinhos generate`: generates component definition boilerplate code.
+- `quadrados generate`: generates component definition boilerplate code.
 
 ## Convert
 
@@ -22,7 +22,7 @@ The issue is, voxel formats like `.qb` and `.vox` are not designed to store
 only the indices of materials, but the whole material definition, per voxel.
 This conflicts with the way **CUBOS.** works, so we need to convert these
 formats into the internal format used by **CUBOS.**. This is where
-`cubinhos convert` comes in. It takes a `.qb` voxel file and splits it into a
+`quadrados convert` comes in. It takes a `.qb` voxel file and splits it into a
 palette (`.pal`), and one or more voxel grids (`.grd`).
 
 ### Usage
@@ -40,7 +40,7 @@ project. There is no palette file yet, so we need to create one. Lets say the
 model we want to convert is a `car.qb`, which contains a single voxel object.
 
 ```bash
-$ cubinhos convert car.qb -p main.pal -g car.grd -w
+$ quadrados convert car.qb -p main.pal -g car.grd -w
 ```
 
 First, we specify the `.qb` file to convert. Then, we specify the name of the
@@ -55,7 +55,7 @@ grids: the first one is a road and the second one is a tree. Since we already
 have a palette, we want to add any new materials to it.
 
 ```bash
-$ cubinhos convert street.qb -p main.pal -g0 road.grd -g1 tree.grd -w
+$ quadrados convert street.qb -p main.pal -g0 road.grd -g1 tree.grd -w
 ```
 
 Once again, we first specify the `.qb` file to convert. Then, we specify the
@@ -73,7 +73,7 @@ will be read, and the most similar materials found will be used. By default,
 this will only succeed if the materials match exactly.
 
 ```bash
-$ cubinhos convert car2.qb -p main.pal -g car2.grd
+$ quadrados convert car2.qb -p main.pal -g car2.grd
 ```
 
 If this fails, you may see the error message:
@@ -104,7 +104,7 @@ It can also be used without any other options, in which case the program will
 just print the contents of the `.qb` file. For example:
 
 ```bash
-$ cubinhos convert car.qb -v
+$ quadrados convert car.qb -v
 Found 1 QB matrices.
 Matrix 0:
 - Position: -7 -5 -16
@@ -118,7 +118,7 @@ that it uses `10` different materials.
 
 ## Embed
 
-The `cubinhos embed` tool is used to embed files directly into an executable for
+The `quadrados embed` tool is used to embed files directly into an executable for
 use with the `EmbeddedArchive`. This is useful for example when you want to ship
 a game with a set of assets, but don't want to have to distribute them as
 separate files. This way, you are able to ship a single executable file.
@@ -130,7 +130,7 @@ This tool takes a file and generates a C++ source file which registers a new
 then be compiled and linked with your executable.
 
 If no name for the archive is specified, the name of the file will be used. For
-example, if you run `cubinhos embed logo.png > logo.cpp`, the name of the
+example, if you run `quadrados embed logo.png > logo.cpp`, the name of the
 archive will be `logo.png`.
 
 The resulting archive can then be mounted like this:
@@ -168,7 +168,7 @@ requirements:
 - it must call the `CUBOS_REGISTER_COMPONENT` macro, passing the ID of the
   component type, which associates the type with a unique ID.
 
-This means that, before `cubinhos generate`, component definitions looked like:
+This means that, before `quadrados generate`, component definitions looked like:
 
 ```cpp
 struct MyComponent
@@ -214,12 +214,12 @@ CUBOS_REGISTER_COMPONENT(MyComponent, "my_component");
 ```
 
 This amount of boilerplate is not acceptable, specially for user-facing code.
-The `cubinhos generate` command makes use of a recent C++ feature called
+The `quadrados generate` command makes use of a recent C++ feature called
 [attributes](https://en.cppreference.com/w/cpp/language/attributes). Attributes
 are usually used to provide hints to the compiler. However, on our case, we're
 using them to mark types as components.
 
-With `cubinhos generate`, the same component definition can be written as:
+With `quadrados generate`, the same component definition can be written as:
 
 ```cpp
 // Must be included in the file where the component is defined.
@@ -249,12 +249,12 @@ different modules. For example, `cubos-engine` names all its components with the
 ### CMake
 
 This tool can be configured to run automatically when building the project. To
-do this, you can include the `CubinhosGenerate` module in your `CMakeLists.txt`
-and call the `cubinhos_generate` function with your target and the directory
+do this, you can include the `QuadradosGenerate` module in your `CMakeLists.txt`
+and call the `quadrados_generate` function with your target and the directory
 where the base component headers are located.
 
 ```cmake
-include(CubinhosGenerate)
+include(QuadradosGenerate)
 
-cubinhos_generate(my_target ${CMAKE_CURRENT_SOURCE_DIR}/components)
+quadrados_generate(my_target ${CMAKE_CURRENT_SOURCE_DIR}/components)
 ```

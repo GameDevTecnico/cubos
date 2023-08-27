@@ -6,7 +6,7 @@
 /// Prints the help message of the program.
 int runHelp(int /*argc*/, char** /*argv*/)
 {
-    std::cerr << "Usage: cubinhos <TOOL>" << std::endl;
+    std::cerr << "Usage: quadrados <TOOL>" << std::endl;
     std::cerr << "Tools:" << std::endl;
     for (const auto& tool : Tools)
     {

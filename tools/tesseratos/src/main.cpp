@@ -23,7 +23,7 @@ static void mockCamera(Write<ActiveCameras> camera, Commands cmds)
 
 static void mockSettings(Write<cubos::core::Settings> settings)
 {
-    settings->setString("assets.io.path", TESSERATO_ASSETS_FOLDER);
+    settings->setString("assets.io.path", TESSERATOS_ASSETS_FOLDER);
 }
 
 int main(int argc, char** argv)
