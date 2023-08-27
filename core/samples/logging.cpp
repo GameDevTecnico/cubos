@@ -7,10 +7,8 @@
 /// [Debug wrapper include]
 #include <cubos/core/data/debug_serializer.hpp>
 
-using data::Debug;
+using namespace cubos::core::data;
 /// [Debug wrapper include]
-
-#include <cubos/core/memory/buffer_stream.hpp>
 
 /// [Logger initialization]
 int main()

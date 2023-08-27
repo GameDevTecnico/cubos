@@ -1,10 +1,9 @@
 # **CUBOS.** Engine
 
 <p align="center">
-  <!-- if we ever get a site, we can put the link here-->
-  <!-- <a href="https://godotengine.org"> -->
+  <a href="https://gamedevtecnico.github.io/cubos"> -->
     <img src="docs/images/CubosLogo.png" alt="cubos. Engine logo">
-  <!-- </a> -->
+  </a>
 </p>
 
 ## Voxel based engine
