@@ -54,6 +54,7 @@
               Reference
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
@@ -62,11 +63,38 @@
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
             <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd>Namespace of the <strong>CUBOS.</strong> libraries.</dd>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
             <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd>CUBOS. core namespace.</dd>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1ui.html" class="m-doc">cubos::core::ui</a></dt>
-            <dd><a href="core-ui.html" class="m-doc">User Interface</a> module.</dd>
+            <dd><a href="group__core-ui.html" class="m-doc">User Interface</a> module.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga9cc812c329eab0ddf0116d0944df9e16" class="m-doc">showPackage</a>(</span><span class="m-doc-wrap">const data::Package&amp; pkg,
+              const std::string&amp; name)</span>
+            </dt>
+            <dd>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-ui.html#ga8904bc96ce2ff05ef698f88e0d107290" class="m-doc">editPackage</a>(</span><span class="m-doc-wrap">data::Package&amp; pkg,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga71f006c1e0a23b24f6c2a7cc225fc88b" class="m-doc">show</a>(</span><span class="m-doc-wrap">const T&amp; object,
+              const std::string&amp; name)</span>
+            </dt>
+            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-ui.html#ga7dd0b501b4ef70633c7f39098d555de1" class="m-doc">edit</a>(</span><span class="m-doc-wrap">T&amp; object,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
           </dl>
         </section>
       </div>

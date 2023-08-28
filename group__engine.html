@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Plugins module | CUBOS.</title>
+  <title>Engine module | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,8 +44,8 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          Plugins <span class="m-thin">module</span></h1>
-        <p>Engine plugins.</p>
+          Engine <span class="m-thin">module</span></h1>
+        <p><strong>CUBOS</strong>. engine library.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -53,37 +53,76 @@
               Reference
               <ul>
                 <li><a href="#groups">Modules</a></li>
+                <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+<p>The engine library is built on top of the <a href="group__core.html" class="m-doc">core library</a> and contains code exclusive to game execution. This includes the main loop, asset management, rendering and physics. It is built around the <a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a> class and designed to be as modular as possible. Each sub-module corresponds to a plugin, or a set of plugins.</p><p>The library re-exports some of the <a href="group__core.html" class="m-doc">core library</a> functionality for convenience such that the user doesn&#x27;t have to use the <a href="namespacecubos_1_1core.html" class="m-doc">cubos::<wbr />core</a> namespace directly very often.</p><aside class="m-note m-default"><h4>See also</h4><p>Take a look at the <a href="features-plugins.html" class="m-doc">plugins</a> feature guide for more information on what are plugins and how they work.</p></aside>
         <section id="groups">
           <h2><a href="#groups">Modules</a></h2>
           <dl class="m-doc">
             <dt>module <a href="group__assets-plugin.html" class="m-doc">Assets</a></dt>
-            <dd>Adds asset management to CUBOS.</dd>
+            <dd>Adds asset management to <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__collisions-plugin.html" class="m-doc">Collisions</a></dt>
-            <dd>Adds collision detection to CUBOS.</dd>
+            <dd>Adds collision detection to <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__env-settings-plugin.html" class="m-doc">Environment settings</a></dt>
             <dd>Loads settings from the command line arguments.</dd>
             <dt>module <a href="group__file-settings-plugin.html" class="m-doc">File settings</a></dt>
             <dd>Loads settings from a file.</dd>
             <dt>module <a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a></dt>
-            <dd>Initializes and configures ImGui for CUBOS.</dd>
+            <dd>Initializes and configures ImGui for <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__input-plugin.html" class="m-doc">Input</a></dt>
-            <dd>Adds input handling to CUBOS.</dd>
+            <dd>Adds input handling to <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__renderer-plugin.html" class="m-doc">Renderer</a></dt>
             <dd>Creates and handles the lifecycle of a renderer.</dd>
             <dt>module <a href="group__scene-plugin.html" class="m-doc">Scene</a></dt>
-            <dd>Adds scenes to CUBOS.</dd>
+            <dd>Adds scenes to <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__tool-plugins.html" class="m-doc">Tools</a></dt>
-            <dd>Plugins which add debug and development tooling to CUBOS.</dd>
+            <dd>Plugins which add debug and development tooling to <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__transform-plugin.html" class="m-doc">Transform</a></dt>
             <dd>Adds transform components which assign positions, rotations and scaling to entities.</dd>
             <dt>module <a href="group__voxels-plugin.html" class="m-doc">Voxels</a></dt>
-            <dd>Adds grid and palette assets to CUBOS.</dd>
+            <dd>Adds grid and palette assets to <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__window-plugin.html" class="m-doc">Window</a></dt>
             <dd>Creates and handles the lifecycle of a window.</dd>
+          </dl>
+        </section>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
+          <dl class="m-doc">
+            <dt>file <a href="cubos_8hpp.html" class="m-doc">cubos.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1DeltaTime.html" class="m-doc">cubos::engine::DeltaTime</a>
+            </dt>
+            <dd>Resource which stores the time since the last iteration of the main loop started.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1ShouldQuit.html" class="m-doc">cubos::engine::ShouldQuit</a>
+            </dt>
+            <dd>Resource used as a flag to indicate whether the main loop should stop running.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Arguments.html" class="m-doc">cubos::engine::Arguments</a>
+            </dt>
+            <dd>Resource used for storing program arguments.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">cubos::engine::TagBuilder</a>
+            </dt>
+            <dd>Used to chain configurations related to tags.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">cubos::engine::SystemBuilder</a>
+            </dt>
+            <dd>Used to chain configurations related to systems.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">cubos::engine::Cubos</a>
+            </dt>
+            <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
           </dl>
         </section>
       </div>

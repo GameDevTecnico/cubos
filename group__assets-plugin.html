@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Plugins &raquo; Assets module | CUBOS.</title>
+  <title>Engine &raquo; Assets module | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,17 +44,17 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__plugins.html">Plugins</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
           Assets <span class="m-thin">module</span></h1>
-        <p>Adds asset management to CUBOS.</p>
+        <p>Adds asset management to <strong>CUBOS</strong>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md46">Settings</a></li>
-            <li><a href="#autotoc_md47">Events</a></li>
-            <li><a href="#autotoc_md48">Resources</a></li>
-            <li><a href="#autotoc_md49">Startup tags</a></li>
-            <li><a href="#autotoc_md50">Tags</a></li>
+            <li><a href="#autotoc_md47">Settings</a></li>
+            <li><a href="#autotoc_md48">Events</a></li>
+            <li><a href="#autotoc_md49">Resources</a></li>
+            <li><a href="#autotoc_md50">Startup tags</a></li>
+            <li><a href="#autotoc_md51">Tags</a></li>
             <li>
               Reference
               <ul>
@@ -66,7 +66,7 @@
             </li>
           </ul>
         </nav>
-<section id="autotoc_md46"><h3><a href="#autotoc_md46">Settings</a></h3><ul><li><code>assets.io.enabled</code> - whether asset I/O should be done (default: <code>true</code>).</li><li><code>assets.io.path</code> - path to the assets directory - will be mounted to <code>/assets/</code> (default: <code>assets/</code>).</li><li><code>assets.io.readOnly</code> - if true, the assets directory will be mounted as read-only (default: <code>true</code>).</li></ul></section><section id="autotoc_md47"><h3><a href="#autotoc_md47">Events</a></h3><ul><li>AssetEvent - (TODO) emitted when an asset is either loaded, modified or unloaded.</li></ul></section><section id="autotoc_md48"><h3><a href="#autotoc_md48">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a> - the asset manager, used to access asset data.</li></ul></section><section id="autotoc_md49"><h3><a href="#autotoc_md49">Startup tags</a></h3><ul><li><code>cubos.assets.init</code> - initializes the assets manager and loads the meta files (after <code>cubos.settings</code>).</li><li><code>cubos.assets.bridge</code> - systes which add bridges to the asset manager should be tagged with this.</li><li><code>cubos.assets</code> - systems which load assets should be tagged with this.</li></ul></section><section id="autotoc_md50"><h3><a href="#autotoc_md50">Tags</a></h3><ul><li><code>cubos.assets.cleanup</code> - frees any assets no longer in use.</li></ul></section>
+<section id="autotoc_md47"><h3><a href="#autotoc_md47">Settings</a></h3><ul><li><code>assets.io.enabled</code> - whether asset I/O should be done (default: <code>true</code>).</li><li><code>assets.io.path</code> - path to the assets directory - will be mounted to <code>/assets/</code> (default: <code>assets/</code>).</li><li><code>assets.io.readOnly</code> - if true, the assets directory will be mounted as read-only (default: <code>true</code>).</li></ul></section><section id="autotoc_md48"><h3><a href="#autotoc_md48">Events</a></h3><ul><li>AssetEvent - (TODO) emitted when an asset is either loaded, modified or unloaded.</li></ul></section><section id="autotoc_md49"><h3><a href="#autotoc_md49">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a> - the asset manager, used to access asset data.</li></ul></section><section id="autotoc_md50"><h3><a href="#autotoc_md50">Startup tags</a></h3><ul><li><code>cubos.assets.init</code> - initializes the assets manager and loads the meta files (after <code>cubos.settings</code>).</li><li><code>cubos.assets.bridge</code> - systes which add bridges to the asset manager should be tagged with this.</li><li><code>cubos.assets</code> - systems which load assets should be tagged with this.</li></ul></section><section id="autotoc_md51"><h3><a href="#autotoc_md51">Tags</a></h3><ul><li><code>cubos.assets.cleanup</code> - frees any assets no longer in use.</li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -234,7 +234,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">cubos</td>
-                  <td>CUBOS. main class.</td>
+                  <td><strong>CUBOS</strong>. main class.</td>
                 </tr>
               </tbody>
             </table>

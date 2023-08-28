@@ -54,6 +54,7 @@
               Reference
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
@@ -62,11 +63,36 @@
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
             <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd>Namespace of the <strong>CUBOS.</strong> libraries.</dd>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
             <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd>CUBOS. core namespace.</dd>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
             <dt>namespace <a href="namespacecubos_1_1core_1_1ui.html" class="m-doc">cubos::core::ui</a></dt>
-            <dd><a href="core-ui.html" class="m-doc">User Interface</a> module.</dd>
+            <dd><a href="group__core-ui.html" class="m-doc">User Interface</a> module.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#gabdef4dee46ee75856196dc27a1bad855" class="m-doc">initialize</a>(</span><span class="m-doc-wrap">io::Window window)</span>
+            </dt>
+            <dd>Initializes ImGui for use with the given window.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#gaf8ed978d758b063ff778f65cc761a932" class="m-doc">terminate</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Shuts down ImGui.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga00d2e0adc5245a734361b6e5f5fb6fa6" class="m-doc">beginFrame</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Begins a new ImGui frame. ImGui calls should be made between this and <a href="group__core-ui.html#ga0cb1cffd1f7ecddba7037c6df8ff2a33" class="m-doc">endFrame()</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga0cb1cffd1f7ecddba7037c6df8ff2a33" class="m-doc">endFrame</a>(</span><span class="m-doc-wrap">const gl::Framebuffer&amp; target = nullptr)</span>
+            </dt>
+            <dd>Ends the current ImGui frame, and renders the ImGui draw data to the <code>target</code> framebuffer, or the default framebuffer if <code>target</code> is null.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-ui.html#ga31fdceab5f801da6c1861e7e9b89f5e7" class="m-doc">handleEvent</a>(</span><span class="m-doc-wrap">const io::WindowEvent&amp; event) -&gt; bool</span>
+            </dt>
+            <dd>Passes a window event to ImGui.</dd>
           </dl>
         </section>
       </div>

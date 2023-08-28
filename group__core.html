@@ -45,7 +45,7 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           Core <span class="m-thin">module</span></h1>
-        <p>CUBOS. core library.</p>
+        <p><strong>CUBOS</strong>. core library.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -61,7 +61,7 @@
             </li>
           </ul>
         </nav>
-<p>The core library contains loose utilities and functionality on which the rest of the CUBOS. libraries are built on.</p>
+<p>The core library contains loose utilities and functionality on which the rest of the <strong>CUBOS</strong>. libraries and applications are built on. Lives in the <a href="namespacecubos_1_1core.html" class="m-doc">cubos::<wbr />core</a> namespace.</p><p>This library can be further divided into modules, which are documented in their respective module pages. Each of these modules has its own namespace and directory in the source tree. For example, the <a href="group__core-ecs.html" class="m-doc">ECS</a> module lives in the <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">cubos::<wbr />core::<wbr />ecs</a> namespace.</p>
         <section id="groups">
           <h2><a href="#groups">Modules</a></h2>
           <dl class="m-doc">
@@ -78,7 +78,7 @@
             <dt>module <a href="group__core-io.html" class="m-doc">Input and output</a></dt>
             <dd>Provides a window API abstraction.</dd>
             <dt>module <a href="group__core-memory.html" class="m-doc">Memory</a></dt>
-            <dd>Provides memory utilities.</dd>
+            <dd>Provides a stream library and memory utilities.</dd>
             <dt>module <a href="group__core-ui.html" class="m-doc">User Interface</a></dt>
             <dd>Provides <code>ImGui</code> integration and general UI utilities.</dd>
           </dl>
@@ -224,7 +224,7 @@
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="log_8hpp.html">&lt;core/log.hpp&gt;</a></div>
             </h3>
             <p>Log level to compile in.</p>
-<p>This macro essentially controls the minimum log level that will be compiled into the binary.</p><aside class="m-note m-dim"><h4><a href="todo.html#_todo000015" class="m-doc">Todo</a></h4><p>The log level should be modifiable at runtime.</p></aside><p>Should be set to one of the following:</p><ul><li><a href="group__core.html#ga2a7abf5148c7e9b2ee89f6abd095df6e" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />TRACE</a></li><li><a href="group__core.html#ga4114acc5174f2e647521d523af9dc765" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />DEBUG</a></li><li><a href="group__core.html#ga1bd654ee38cf123e6679dac057c39a3d" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />INFO</a></li><li><a href="group__core.html#gaca1a964d151305f9ae25b3be3cc91481" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />WARN</a></li><li><a href="group__core.html#ga7f1a472ae2de8c9f5af1e8fbcad6b8ff" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />ERROR</a></li><li><a href="group__core.html#ga092bceb964835e9a2f1d08e62a847cee" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />CRITICAL</a></li><li><a href="group__core.html#ga684c1d8f866203995006823ec5a75a4e" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />OFF</a></li></ul><p>By default, on debug builds, this is set to <a href="group__core.html#ga2a7abf5148c7e9b2ee89f6abd095df6e" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />TRACE</a>. On release builds, this is set to <a href="group__core.html#ga1bd654ee38cf123e6679dac057c39a3d" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />INFO</a>.</p>
+<p>This macro essentially controls the minimum log level that will be compiled into the binary.</p><p>Should be set to one of the following:</p><ul><li><a href="group__core.html#ga2a7abf5148c7e9b2ee89f6abd095df6e" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />TRACE</a></li><li><a href="group__core.html#ga4114acc5174f2e647521d523af9dc765" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />DEBUG</a></li><li><a href="group__core.html#ga1bd654ee38cf123e6679dac057c39a3d" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />INFO</a></li><li><a href="group__core.html#gaca1a964d151305f9ae25b3be3cc91481" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />WARN</a></li><li><a href="group__core.html#ga7f1a472ae2de8c9f5af1e8fbcad6b8ff" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />ERROR</a></li><li><a href="group__core.html#ga092bceb964835e9a2f1d08e62a847cee" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />CRITICAL</a></li><li><a href="group__core.html#ga684c1d8f866203995006823ec5a75a4e" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />OFF</a></li></ul><p>By default, on debug builds, this is set to <a href="group__core.html#ga2a7abf5148c7e9b2ee89f6abd095df6e" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />TRACE</a>. On release builds, this is set to <a href="group__core.html#ga1bd654ee38cf123e6679dac057c39a3d" class="m-doc">CUBOS_<wbr />LOG_<wbr />LEVEL_<wbr />INFO</a>.</p>
           </div></section>
           <section class="m-doc-details" id="ga2a7abf5148c7e9b2ee89f6abd095df6e"><div>
             <h3>
@@ -477,7 +477,6 @@
                 </tr>
               </tbody>
             </table>
-<aside class="m-note m-dim"><h4><a href="todo.html#_todo000016" class="m-doc">Todo</a></h4><p>This should be compiled out when some option is set to false.</p></aside>
           </div></section>
         </section>
       </div>
