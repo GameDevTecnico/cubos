@@ -8,123 +8,26 @@
 
 ## Voxel based engine
 
-**CUBOS. aims to be a simple, but powerful engine for PC, where everything is**
-**made out of voxels.**
+**CUBOS. aims to be a simple, but powerful game engine for PC, where**
+**everything is made out of voxels.**
 
-It aims to support vast render distances and destructibility, which sets it
-apart from other engines. Written in *C++*, built with *OpenGL*, it's a
-high-performance engine.
+It is open source and free to use for any purpose. Written in *C++* and with
+data-oriented design in mind, its goal is to be both performant and highly
+flexible.
 
-## Structure
+### Learn more
 
-The source code is divided into four main parts:
-- `core`: library which is shared between the tools and the games. This
-includes some basic functionality like serialization, logging, render devices,
-input handling and others.
-- `engine`: library with code exclusive to the game execution. This includes
-the main loop, the asset manager and systems like the renderer and physics.
-- `quadrados`: a tool which helps you with the game development and which
-may depend on `core`. One example use case of `quadrados` is convert from
-external voxel formats to the internal format used by **CUBOS.**.
-- `tesseratos`: game editor made on top of multiple plugins, that can also be used individually 
-in your game using **CUBOS.**.
+Check out the project's [website](https://gamedevtecnico.github.io/cubos) which
+contains the documentation, guides and examples on how to use the engine.
 
-### Further reading
+### Who is making this engine
 
-You can find more information about how the engine is structured in the
-[documentation](https://gamedevtecnico.github.io/cubos/).
+**CUBOS.** is developed by a small team at
+[GameDev Técnico](https://www.instagram.com/gamedevtecnico/), a student group
+at [Instituto Superior Técnico](https://tecnico.ulisboa.pt/) who make games.
+Our goal is to build a game engine from the ground up and have fun doing it.
 
-## Contributing
+### Join us
 
-Check out the [contribution guidelines](CONTRIBUTE.md) for more information.
-
-## Getting the engine
-
-### Executables
-
-There are no releases of **CUBOS.** so far. We will update this section once
-we release official binaries.
-<!--Official binaries for **CUBOS.** can be found
-on the [releases](https://github.com/GameDevTecnico/cubos/releases) page.-->
-
-### Building from the source code
-
-#### Dependencies
-
-The following dependencies are used to compile **CUBOS.**:
-
-| Name                                                | Importance         | Submodule Path     | Installed Separately |
-| --------------------------------------------------- | ------------------ | ------------------ | -------------------- |
-| [CMake](https://cmake.org/)                         | Essential          | -                  | Yes                  |
-| [json](https://github.com/nlohmann/json)            | Essential          | -                  | No                   |
-| [glad](https://github.com/Dav1dde/glad)             | Essential          | -                  | No                   |
-| [glfw](https://github.com/glfw/glfw)                | Essential          | `core/lib/glfw`    | Optionally           |
-| [glm](https://github.com/g-truc/glm)                | Essential          | `core/lib/glm`     | Optionally           |
-| [fmt](https://github.com/fmtlib/fmt)                | Essential          | `core/lib/fmt`     | Optionally           |
-| [spdlog](https://github.com/gabime/spdlog)          | Essential          | `core/lib/spdlog`  | Optionally           |
-| [stduuid](https://github.com/mariusbancila/stduuid) | Essential          | `core/lib/stduuid` | No                   |
-| [doctest](https://github.com/doctest/doctest)       | Required for tests | `core/lib/doctest` | Optionally           |
-
-Dependencies marked as *Essential* are required to compile the engine.
-**CUBOS.** uses [CMake](https://cmake.org/) as its build system, so you must
-install it to compile the engine.
-
-Most dependencies come as submodules, so, you may choose whether to install
-them separately or not. If you choose to install some or all of them
-separately, you can do so easily by using the package manager of your choice.
-If you use Windows, it should be easier to simply install all of them with the
-engine by cloning the whole repository with the `--recursive` flag.
-
-#### Compiling
-
-If you chose to install some dependencies separately, you must pass the
-corresponding `-D` flag to CMake. For example, if you installed GLFW, GLM and
-CMake separetely you would pass the following flags to CMake:
-
-`cmake -H. -Bbuild -DGLFW_USE_SUBMODULE=OFF -DGLM_USE_SUBMODULE=OFF`
-
-The following is a list of all the options available to configure the engine:
-
-| Name                    | Description                        |
-| ----------------------- | ---------------------------------- |
-| `WITH_GLFW`             | Use GLFW? (Required for now)       |
-| `WITH_OPENGL`           | Use OpenGL? (Required for now)     |
-| `GLFW_USE_SUBMODULE`    | Compile glfw from source?          |
-| `GLM_USE_SUBMODULE`     | Compile glm from source?           |
-| `DOCTEST_USE_SUBMODULE` | Compile doctest from source?       |
-| `SPDLOG_USE_SUBMODULE`  | Compile spdlog from source?        |
-| `FMT_USE_SUBMODULE`     | Compile fmt from source?           |
-| `BUILD_CORE_SAMPLES`    | Build **CUBOS.** `core` samples?   |
-| `BUILD_CORE_TESTS`      | Build **CUBOS.** `core` tests?     |
-| `BUILD_ENGINE_SAMPLES`  | Build **CUBOS.** `engine` samples? |
-| `BUILD_ENGINE_TESTS`    | Build **CUBOS.** `engine` tests?   |
-
-### Samples
-
-Both the `core` and the `engine` contain samples that you can run to get an
-idea of how the engine works.
-
-### Testing
-
-**CUBOS.** uses *doctest* for unit testing the engine.
-To test the engine's core you can use the following
-command: `cd build/core && ctest`.
-
-## Who is making this engine
-
-We are  [GameDev Técnico](https://www.instagram.com/gamedevtecnico/), a student
-group from [Instituto Superior Técnico](https://tecnico.ulisboa.pt/en/) who
-makes games. Our goal is to build a game engine from the ground up. 
-
-Find us at:
-
-[Twitter](https://twitter.com/GameDevTecnico)
-
-[Facebook](https://www.facebook.com/Game-Dev-T%C3%A9cnico-107405047487324/)
-
-[Instagram](https://www.instagram.com/gamedevtecnico/)
-
-[Youtube](https://www.youtube.com/channel/UCpJf5Ih7SE9wAgaZ_OF9qYA)
-
-[itch.io](https://gamedevtecnico.itch.io/)
-
+If you're a student and interested in joining us, please fill out
+[this form](https://forms.gle/A7ChMqC2qN9tHo6j8).
