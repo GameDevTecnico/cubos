@@ -1,25 +1,40 @@
-# Feature guide {#features}
+# Feature Guide {#features}
 
-@brief High-level introduction to design of the **CUBOS.** engine and its
-features.
-
-Before you continue further, here's a quick overview of the engine's design.
+This is a brief introduction to the **CUBOS.** engine and its features. Before
+diving into the documentation of each class and function, it's recommended to
+read through this guide.
 
 ## Overview
 
-The **CUBOS.** engine is split into two libraries: @ref core and @ref engine.
-Each is on their own namespace, which corresponds to a sub-folder in the
+The **CUBOS.** engine is divided into two libraries: @ref core and @ref engine.
+Each library has its own namespace, which corresponds to a sub-folder in the
 include path.
 
-@ref core provides platform abstraction, containers and utilities, as well as
-the @ref core-ecs "ECS" module. @ref engine builds on top of @ref core and
-provides higher-level features, such as rendering and collisions.
+@ref core provides platform abstraction, containers, utilities, and the
+@ref core-ecs "ECS" module. @ref engine builds on top of @ref core and provides
+higher-level features such as rendering and collisions.
+
+The core library is divided into modules, each of which covers a specific area
+of functionality. For example, graphics-related functionality is on the
+@ref cubos::core::gl namespace, under the include path `cubos/core/gl`.
+
+The engine library is divided into plugins, each of which extends the engine's
+functionality in some way. You'll learn more about plugins below. For each
+plugin, there is a corresponding directory in the include path. Categories of
+plugins are also divided into sub-folders, with their own namespaces.
+
+### Tooling
+
+Other than the core and engine libraries, the project also contains *Quadrados*
+and *Tesseratos*. *Quadrados* is a CLI tool which contains utilities used
+during game development. *Tesseratos* is our in-house editor, which is still
+in its early stages of development.
 
 ## Learn more
 
-Each of the following pages provides a high-level description of a feature of
-the engine. It's recommended to read through these first before diving into
-documentation of each class and function.
+The following guides explain basic concepts of the engine. Its recommend to
+read through these first to understand the overall principles and only then
+dive into the documentation of each class and function.
 
 - @subpage features-ecs - @copybrief features-ecs
 - @subpage features-plugins - @copybrief features-plugins
