@@ -1,7 +1,7 @@
 # **CUBOS.** Engine
 
 <p align="center">
-  <a href="https://gamedevtecnico.github.io/cubos"> -->
+  <a href="https://gamedevtecnico.github.io/cubos">
     <img src="docs/images/CubosLogo.png" alt="cubos. Engine logo">
   </a>
 </p>
