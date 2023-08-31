@@ -149,15 +149,15 @@
                           <li>struct <a href="structcubos_1_1core_1_1ecs_1_1Blueprint_1_1IBuffer.html" class="m-doc">IBuffer</a> <span class="m-doc">Stores all component data of a certain type.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Used to edit an instance of a blueprint spawned by the <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</span></li>
                       <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Object responsible for storing ECS commands to execute them later.</span>
+                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Stores commands to execute them later.</span>
                         <ul class="m-doc">
-                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1CommandBuffer_1_1Buffer.html" class="m-doc">Buffer</a> <span class="m-doc"></span></li>
-                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1CommandBuffer_1_1IBuffer.html" class="m-doc">IBuffer</a> <span class="m-doc"></span></li>
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1CommandBuffer_1_1Buffer.html" class="m-doc">Buffer</a> <span class="m-doc">Implementation of the above interface for a component type <code>ComponentType</code>.</span></li>
+                          <li>struct <a href="structcubos_1_1core_1_1ecs_1_1CommandBuffer_1_1IBuffer.html" class="m-doc">IBuffer</a> <span class="m-doc">Stores components of a specific type, queued for addition to the component manager.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc"></span></li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Used to write ECS commands and execute them at a later time.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1ComponentManager.html" class="m-doc">ComponentManager</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Holds and manages components.</span></li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a> <span class="m-doc">Used to add systems and relations between them and then dispatch them all at once.</span>
@@ -169,7 +169,7 @@
                         </ul>
                       </li>
                       <li>class <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> <span class="m-doc">Identifies an entity.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Used to edit an entity created by the <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</span></li>
+                      <li>class <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</span></li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1ecs_1_1EntityManager.html" class="m-doc">EntityManager</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Holds and manages entities and their component masks.</span>
                         <ul class="m-doc">
@@ -353,7 +353,6 @@
                     <ul class="m-doc">
                       <li>struct <a href="structcubos_1_1engine_1_1tools_1_1AssetSelectedEvent.html" class="m-doc">AssetSelectedEvent</a> <span class="m-doc">Event sent when an asset is selected.</span></li>
                       <li>struct <a href="structcubos_1_1engine_1_1tools_1_1EntitySelector.html" class="m-doc">EntitySelector</a> <span class="m-doc">Resource which identifies the currently selected entity.</span></li>
-                      <li>struct <a href="structcubos_1_1engine_1_1tools_1_1SceneInfo.html" class="m-doc">SceneInfo</a> <span class="m-doc">Resource used to store Scene(s) information.</span></li>
                     </ul>
                   </li>
                   <li>struct <a href="structcubos_1_1engine_1_1ActiveCameras.html" class="m-doc">ActiveCameras</a> <span class="m-doc">Resource which identifies the camera entities to be used by the renderer.</span></li>

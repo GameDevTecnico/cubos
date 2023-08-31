@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Tools module | CUBOS.</title>
+  <title>Engine &raquo; Tools &raquo; Scene editor module | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -45,34 +45,27 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Tools <span class="m-thin">module</span></h1>
-        <p>Plugins which add debug and development tooling to <strong>CUBOS</strong>.</p>
+          <span class="m-breadcrumb"><a href="group__tool-plugins.html">Tools</a> &raquo;</span>
+          Scene editor <span class="m-thin">module</span></h1>
+        <p>Adds a window to edit scenes, and select entities in them.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
+            <li><a href="#autotoc_md89">Dependencies</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#groups">Modules</a></li>
+                <li><a href="#files">Files</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="groups">
-          <h2><a href="#groups">Modules</a></h2>
+<aside class="m-note m-info"><h4>Note</h4><p>Selected entities are registered in the <a href="structcubos_1_1engine_1_1tools_1_1EntitySelector.html" class="m-doc">EntitySelector</a> resource.</p><p>The opened scene is identified by the <a href="structcubos_1_1engine_1_1tools_1_1AssetSelectedEvent.html" class="m-doc">AssetSelectedEvent</a> event.</p></aside><section id="autotoc_md89"><h3><a href="#autotoc_md89">Dependencies</a></h3><ul><li><a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a></li><li><a href="group__assets-plugin.html" class="m-doc">Assets</a></li><li><a href="group__scene-plugin.html" class="m-doc">Scene</a></li><li><a href="group__asset-explorer-tool-plugin.html" class="m-doc">Asset explorer</a></li><li><a href="group__entity-selector-tool-plugin.html" class="m-doc">Entity selector</a></li></ul><p>Plugin entry function.</p></section>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>module <a href="group__asset-explorer-tool-plugin.html" class="m-doc">Asset explorer</a></dt>
-            <dd>Allows viewing and selecting assets through a ImGui window.</dd>
-            <dt>module <a href="group__entity-inspector-tool-plugin.html" class="m-doc">Entity inspector</a></dt>
-            <dd>Allows inspecting and modifying the components of the selected entity through a ImGui window.</dd>
-            <dt>module <a href="group__entity-selector-tool-plugin.html" class="m-doc">Entity selector</a></dt>
-            <dd>Adds a resource used to select an entity.</dd>
-            <dt>module <a href="group__scene-editor-tool-plugin.html" class="m-doc">Scene editor</a></dt>
-            <dd>Adds a window to edit scenes, and select entities in them.</dd>
-            <dt>module <a href="group__settings-inspector-tool-plugin.html" class="m-doc">Settings inspector</a></dt>
-            <dd>Allows inspecting the current setting values through a ImGui window.</dd>
-            <dt>module <a href="group__world-inspector-tool-plugin.html" class="m-doc">World inspector</a></dt>
-            <dd>Shows all of the entities in the world through a ImGui window, and allows selecting them.</dd>
+            <dt>file <a href="tools_2scene__editor_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dd>Plugin entry point.</dd>
           </dl>
         </section>
       </div>

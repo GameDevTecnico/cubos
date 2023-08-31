@@ -45,8 +45,9 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>EntityBuilder <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="commands_8hpp.html">&lt;core/ecs/commands.hpp&gt;</a></div>
         </h1>
-        <p>Used to edit an entity created by the <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</p>
+        <p>Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -64,17 +65,17 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af1fc68488cf14b02551faf2b5a92718b" class="m-doc">entity</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
             </dt>
-            <dd></dd>
+            <dd>Gets the entity this builder is editing.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename ComponentType&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#af52f2363762456e827731085a080f4b9" class="m-doc">get</a>(</span><span class="m-doc-wrap">) -&gt; ComponentType&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Gets a reference to a component of the entity.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#ad548efe8ef32fc8f6f95c0c7c8b51ad8" class="m-doc">add</a>(</span><span class="m-doc-wrap">ComponentTypes &amp;&amp; ... components) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Adds components to the entity.</dd>
           </dl>
         </section>
         <section>
@@ -83,15 +84,15 @@
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />EntityBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af1fc68488cf14b02551faf2b5a92718b" class="m-doc-self">entity</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
+            <p>Gets the entity this builder is editing.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>The entity.</td>
+                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets the entity this builder is editing.</p>
           </div></section>
           <section class="m-doc-details" id="af52f2363762456e827731085a080f4b9"><div>
             <h3>
@@ -100,6 +101,7 @@
               </div>
               <span class="m-doc-wrap-bumper">ComponentType&amp; cubos::<wbr />core::<wbr />ecs::<wbr />EntityBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af52f2363762456e827731085a080f4b9" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
+            <p>Gets a reference to a component of the entity.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -107,17 +109,16 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ComponentType</td>
-                  <td>The type of the component.</td>
+                  <td>Component type.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>A reference to the component.</td>
+                  <td>Reference to the component.</td>
                 </tr>
               </tfoot>
             </table>
-<p>Gets a reference to a component of the entity.</p>
           </div></section>
           <section class="m-doc-details" id="ad548efe8ef32fc8f6f95c0c7c8b51ad8"><div>
             <h3>
@@ -126,6 +127,7 @@
               </div>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />EntityBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad548efe8ef32fc8f6f95c0c7c8b51ad8" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">ComponentTypes &amp;&amp; ... components)</span></span>
             </h3>
+            <p>Adds components to the entity.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -133,7 +135,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">ComponentTypes</td>
-                  <td>The types of the components.</td>
+                  <td>Component types.</td>
                 </tr>
               </tbody>
               <thead>
@@ -142,11 +144,16 @@
               <tbody>
                 <tr>
                   <td>components</td>
-                  <td>The components to add.</td>
+                  <td>Components to add.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to this builder, for chaining.</td>
+                </tr>
+              </tfoot>
             </table>
-<p>Adds component to the entity.</p>
           </div></section>
         </section>
       </div>
