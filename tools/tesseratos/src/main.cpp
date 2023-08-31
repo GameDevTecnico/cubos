@@ -1,11 +1,11 @@
-#include <imgui.h>
-
 #include <cubos/core/settings.hpp>
 
-#include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/tools/asset_explorer/plugin.hpp>
+#include <cubos/engine/tools/entity_inspector/plugin.hpp>
+#include <cubos/engine/tools/scene_editor/plugin.hpp>
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
+#include <cubos/engine/tools/world_inspector/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
 using namespace cubos::engine;
@@ -30,10 +30,11 @@ static void mockSettings(Write<cubos::core::Settings> settings)
 int main(int argc, char** argv)
 {
     Cubos cubos(argc, argv);
-    cubos.addPlugin(imguiPlugin);
     cubos.addPlugin(rendererPlugin);
+    cubos.addPlugin(tools::sceneEditorPlugin);
+    cubos.addPlugin(tools::entityInspectorPlugin);
+    cubos.addPlugin(tools::worldInspectorPlugin);
     cubos.addPlugin(tools::assetExplorerPlugin);
-    cubos.addPlugin(tools::settingsInspectorPlugin);
 
     cubos.startupSystem(mockCamera).tagged("setup");
     cubos.startupSystem(mockSettings).tagged("setup");

@@ -62,6 +62,13 @@ namespace cubos::core::ecs
         /// @brief Clears the blueprint, removing any added entities and components.
         void clear();
 
+        /// @brief Returns the internal map that maps entities to their names
+        /// @return Map of entities and names.
+        inline std::unordered_map<Entity, std::string> getMap() const {
+            return mMap.getMap();
+        }
+
+
     private:
         friend class CommandBuffer;
 
