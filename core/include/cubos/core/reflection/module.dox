@@ -1,0 +1,15 @@
+/// @dir
+/// @brief @ref core-reflection module.
+
+#pragma once
+
+/// @namespace cubos::core::reflection
+/// @brief @ref core-reflection module.
+/// @ingroup core-reflection
+
+namespace cubos::core::reflection
+{
+    /// @defgroup core-reflection Reflection
+    /// @ingroup core
+    /// @brief Provides utilities useful for handling type-erased data.
+} // namespace cubos::core::reflection
