@@ -27,7 +27,8 @@ namespace cubos::engine
         /// @brief Constructs a bridge.
         /// @param littleEndian Whether to use little endian byte order.
         BinaryBridge(bool littleEndian = true)
-            : mLittleEndian{littleEndian}
+            : FileBridge(typeid(T))
+            , mLittleEndian{littleEndian}
         {
         }
 

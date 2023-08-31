@@ -5,6 +5,7 @@
 #pragma once
 
 #include <cubos/engine/assets/bridge.hpp>
+#include <cubos/engine/scene/scene.hpp>
 
 namespace cubos::engine
 {
@@ -45,6 +46,13 @@ namespace cubos::engine
     class SceneBridge : public AssetBridge
     {
     public:
+        /// @brief Constructs a bridge.
+        ///
+        SceneBridge()
+            : AssetBridge(typeid(Scene))
+        {
+        }
+
         bool load(Assets& assets, const AnyAsset& handle) override;
         bool save(const Assets& assets, const AnyAsset& handle) override;
     };

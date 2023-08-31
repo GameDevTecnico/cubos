@@ -589,6 +589,12 @@ void Assets::loader()
             assetEntry->status = Assets::Status::Unloaded;
             assetEntry->cond.notify_all();
         }
+        else
+        {
+            auto assetEntry = this->entry(task.handle);
+            CUBOS_ASSERT(assetEntry != nullptr);
+            CUBOS_ASSERT(assetEntry->type == task.bridge->assetType());
+        }
     }
 }
 
@@ -600,4 +606,18 @@ std::vector<AnyAsset> Assets::listAll() const
         out.emplace_back(entry);
     }
     return out;
+}
+
+std::type_index Assets::type(const AnyAsset& handle) const
+{
+    auto assetEntry = this->entry(handle);
+    CUBOS_ASSERT(assetEntry != nullptr, "Could not find asset's type");
+    if (assetEntry->status == Status::Loaded)
+    {
+        return assetEntry->type;
+    }
+
+    auto bridge = this->bridge(handle);
+    CUBOS_ASSERT(bridge != nullptr, "Could not find asset's type");
+    return bridge->assetType();
 }

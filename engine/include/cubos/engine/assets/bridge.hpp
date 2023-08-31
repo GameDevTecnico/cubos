@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <typeindex>
+
 #include <cubos/engine/assets/asset.hpp>
 
 namespace cubos::engine
@@ -26,7 +28,14 @@ namespace cubos::engine
     class AssetBridge
     {
     public:
-        AssetBridge() = default;
+        /// @brief Constructs a bridge.
+        ///
+        /// @param index Type of assets loaded by the bridge.
+        explicit AssetBridge(std::type_index index)
+            : mIndex(index)
+        {
+        }
+
         virtual ~AssetBridge() = default;
 
         /// @brief Loads an asset.
@@ -46,5 +55,15 @@ namespace cubos::engine
         /// @param handle Handle of the asset being saved.
         /// @return Whether the asset was successfully saved.
         virtual bool save(const Assets& assets, const AnyAsset& handle);
+
+        /// @brief Gets the type of the assets the bridge loads.
+        /// @return Type of the asset.
+        inline std::type_index assetType() const
+        {
+            return mIndex;
+        }
+
+    private:
+        std::type_index mIndex; ///< Type of assets loaded by the bridge
     };
 } // namespace cubos::engine

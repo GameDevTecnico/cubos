@@ -211,6 +211,16 @@ namespace cubos::engine
         /// @return Vector with all registered assets.
         std::vector<AnyAsset> listAll() const;
 
+        /// @brief Gets the type of an asset.
+        ///
+        /// If the asset is not loaded, its type is deduced from its bridge.
+        /// If there's also no associated bridge, aborts.
+        /// If the asset does not exist, aborts.
+        ///
+        /// @param handle Handle to check the type for.
+        /// @return Asset type.
+        std::type_index type(const AnyAsset& handle) const;
+
     private:
         /// @brief Represents a known asset - may or may not be loaded.
         struct Entry
