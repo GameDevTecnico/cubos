@@ -21,6 +21,14 @@ namespace cubos::engine
     class FileBridge : public AssetBridge
     {
     public:
+        /// @brief Constructs a bridge.
+        ///
+        /// @param index Type of assets loaded by the bridge.
+        explicit FileBridge(std::type_index index)
+            : AssetBridge(index)
+        {
+        }
+
         bool load(Assets& assets, const AnyAsset& handle) final;
         bool save(const Assets& assets, const AnyAsset& handle) final;
 

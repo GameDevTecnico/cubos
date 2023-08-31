@@ -30,7 +30,8 @@ namespace cubos::engine
         ///
         /// @param indentation Indentation level to use when saving the JSON file.
         JSONBridge(int indentation = 4)
-            : mIndentation{indentation}
+            : FileBridge(typeid(T))
+            , mIndentation{indentation}
         {
         }
 

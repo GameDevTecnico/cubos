@@ -21,6 +21,11 @@ using namespace cubos::engine;
 class TextBridge : public FileBridge
 {
 public:
+    TextBridge()
+        : FileBridge(typeid(std::string))
+    {
+    }
+
     bool loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream) override
     {
         // Dump the file's contents into a string.
