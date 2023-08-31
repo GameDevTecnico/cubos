@@ -30,7 +30,7 @@ namespace cubos::engine
     /// ## Startup tags
     /// - `cubos.assets.init` - initializes the assets manager and loads the meta files (after `cubos.settings`).
     /// - `cubos.assets.bridge` - systes which add bridges to the asset manager should be tagged with this.
-    /// - `cubos.assets` - systems which load assets should be tagged with this.
+    /// - `cubos.assets` - startup systems which load assets should be tagged with this.
     ///
     /// ## Tags
     /// - `cubos.assets.cleanup` - frees any assets no longer in use.

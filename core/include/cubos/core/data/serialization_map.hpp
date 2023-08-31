@@ -119,6 +119,12 @@ namespace cubos::core::data
             return mRefToId.size();
         }
 
+        /// @brief Returns the internal map that maps references to IDs
+        /// @return Map of references and Ids.
+        inline std::unordered_map<R, I> getMap() const {
+            return mRefToId;
+        }
+
     private:
         bool mUsingFunctions;                         ///< True if the map is using functions instead of keeping a map.
         std::function<bool(const R&, I&)> mSerialize; ///< Function used to serialize references.

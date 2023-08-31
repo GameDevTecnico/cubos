@@ -25,6 +25,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/tools/entity_selector/plugin.cpp"
     "src/cubos/engine/tools/world_inspector/plugin.cpp"
     "src/cubos/engine/tools/entity_inspector/plugin.cpp"
+    "src/cubos/engine/tools/scene_editor/plugin.cpp"
 
     "src/cubos/engine/assets/plugin.cpp"
     "src/cubos/engine/assets/assets.cpp"
@@ -72,6 +73,7 @@ set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/tools/entity_selector/plugin.hpp"
     "include/cubos/engine/tools/world_inspector/plugin.hpp"
     "include/cubos/engine/tools/entity_inspector/plugin.hpp"
+    "include/cubos/engine/tools/scene_editor/plugin.hpp"
 
     "include/cubos/engine/transform/position.hpp"
     "include/cubos/engine/transform/rotation.hpp"

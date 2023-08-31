@@ -239,9 +239,10 @@ add_library(imgui STATIC
     "lib/imgui/imgui_tables.cpp"
     "lib/imgui/imgui_widgets.cpp"
     "lib/imgui/imgui_demo.cpp"
+    "lib/imgui/misc/cpp/imgui_stdlib.cpp"
 )
 
-target_include_directories(imgui PUBLIC "lib/imgui")
+target_include_directories(imgui PUBLIC "lib/imgui" "lib/imgui/misc/cpp/imgui_stdlib.hpp")
 
 add_subdirectory(lib/stduuid)
 target_link_libraries(cubos-core PUBLIC stduuid)

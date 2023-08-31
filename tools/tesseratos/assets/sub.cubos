@@ -1,0 +1,14 @@
+{
+	"imports": {
+	},
+	"entities": {
+	  "sub_main": {
+		"cubos/position": {
+		  "x": 2,
+		  "y": 2,
+		  "z": 2
+		}
+	  }
+	}
+  }
+  
