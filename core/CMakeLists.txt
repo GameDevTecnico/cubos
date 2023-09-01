@@ -32,6 +32,8 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/memory/standard_stream.cpp"
     "src/cubos/core/memory/buffer_stream.cpp"
 
+    "src/cubos/core/reflection/type.cpp"
+
     "src/cubos/core/data/serializer.cpp"
     "src/cubos/core/data/deserializer.cpp"
     "src/cubos/core/data/debug_serializer.cpp"
@@ -95,6 +97,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/memory/guards.hpp"
 
     "include/cubos/core/reflection/reflect.hpp"
+    "include/cubos/core/reflection/type.hpp"
 
     "include/cubos/core/data/serializer.hpp"
     "include/cubos/core/data/deserializer.hpp"
