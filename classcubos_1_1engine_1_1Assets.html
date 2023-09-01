@@ -164,6 +164,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a899c4d0979fad20766d8a00e543649c4" class="m-doc">listAll</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;<a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&gt;</span>
             </dt>
             <dd>Gets all assets that have been registered.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a93aa968b2ad0a638be6d828d00c80817" class="m-doc">type</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const -&gt; std::type_index</span>
+            </dt>
+            <dd>Gets the type of an asset.</dd>
           </dl>
         </section>
         <section>
@@ -591,6 +595,30 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a93aa968b2ad0a638be6d828d00c80817"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::type_index cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a93aa968b2ad0a638be6d828d00c80817" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Gets the type of an asset.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to check the type for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> type.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the asset is not loaded, its type is deduced from its bridge. If there&#x27;s also no associated bridge, aborts. If the asset does not exist, aborts.</p>
           </div></section>
         </section>
       </div>
