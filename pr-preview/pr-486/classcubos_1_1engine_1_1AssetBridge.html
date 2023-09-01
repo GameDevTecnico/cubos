@@ -55,6 +55,7 @@
               Reference
               <ul>
                 <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
@@ -74,6 +75,15 @@
             <dd>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> assets.</dd>
           </dl>
         </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aba7a1af6ec1444525537fa3ba671d522" class="m-doc">AssetBridge</a>(</span><span class="m-doc-wrap">std::type_index index) <span class="m-label m-flat m-info">explicit</span> </span>
+            </dt>
+            <dd>Constructs a bridge.</dd>
+          </dl>
+        </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
@@ -87,10 +97,31 @@
               const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Saves an asset.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adb25b958acf1c36b895af0d4d5c5e6ae" class="m-doc">getAssetType</a>(</span><span class="m-doc-wrap">) const -&gt; std::type_index</span>
+            </dt>
+            <dd>Gets the type of the assets the bridge loads.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aba7a1af6ec1444525537fa3ba671d522"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />AssetBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aba7a1af6ec1444525537fa3ba671d522" class="m-doc-self">AssetBridge</a>(</span><span class="m-doc-wrap">std::type_index index) <span class="m-label m-info">explicit</span> </span></span>
+            </h3>
+            <p>Constructs a bridge.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>The type index of assets loaded by the bridge.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a13d7f1a050642da7e9663f50b859d054"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />AssetBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13d7f1a050642da7e9663f50b859d054" class="m-doc-self">load</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
@@ -148,6 +179,20 @@
               </tfoot>
             </table>
 <p>The asset should be loaded in the asset manager.</p>
+          </div></section>
+          <section class="m-doc-details" id="adb25b958acf1c36b895af0d4d5c5e6ae"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::type_index cubos::<wbr />engine::<wbr />AssetBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adb25b958acf1c36b895af0d4d5c5e6ae" class="m-doc-self">getAssetType</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Gets the type of the assets the bridge loads.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The type_index of the asset.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
         </section>
       </div>
