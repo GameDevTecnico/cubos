@@ -7,6 +7,7 @@ add_executable(
     cubos-core-tests
     main.cpp
 
+    reflection/reflect.cpp
     reflection/type.cpp
 
     data/fs/embedded_archive.cpp
