@@ -8,9 +8,11 @@ in your header, like this:
 
 @snippet reflection/basic/main.cpp Person definition
 
-The @ref core/reflection/reflect.hpp is a very lightweight header, and thus you
-should avoid including any other reflection headers in your headers whenever
-possible, in order to reduce compile times.
+The file @ref core/reflection/reflect.hpp is a very lightweight header which
+you should include when declaring types as reflectable. It only defines the
+reflection macros and the reflection function. Avoid including other
+unnecessary reflection headers, which might be heavier, in order to reduce
+compile times.
 
 In your source file, you must define the reflection data for your type. This is
 done through the @ref CUBOS_REFLECT_IMPL macro:
