@@ -316,7 +316,7 @@
 <pre class="m-code"><span class="c1">// templated_type_reflection.hpp</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
 
-<span class="n">CUBOS_REFLECT_EXTERNAL_TEMPLATE</span><span class="p">((</span><span class="n">T</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">TemplatedType</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">))</span>
+<span class="n">CUBOS_REFLECT_EXTERNAL_TEMPLATE</span><span class="p">((</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">TemplatedType</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">))</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="cm">/* create your type here */</span><span class="p">;</span>
 <span class="p">}</span></pre>
