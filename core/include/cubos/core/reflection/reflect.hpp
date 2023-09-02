@@ -190,7 +190,7 @@ namespace cubos::core::reflection
 /// // templated_type_reflection.hpp
 /// #include <cubos/core/reflection/reflect.hpp>
 ///
-/// CUBOS_REFLECT_EXTERNAL_TEMPLATE((T), (TemplatedType<T>))
+/// CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename T), (TemplatedType<T>))
 /// {
 ///     return /* create your type here */;
 /// }
