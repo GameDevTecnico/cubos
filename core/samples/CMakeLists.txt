@@ -27,6 +27,7 @@ macro(make_sample)
 endmacro()
 
 make_sample(DIR "logging")
+make_sample(DIR "reflection/basic")
 make_sample(DIR "data/fs/embedded_archive" SOURCES "embed.cpp")
 make_sample(DIR "data/fs/standard_archive")
 make_sample(DIR "data/serialization")

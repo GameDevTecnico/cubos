@@ -10,6 +10,7 @@ will need to use some of the features of the @ref core library directly.
 
 The following examples have fully documented tutorials:
 - @subpage examples-core-logging - @copybrief examples-core-logging
+- @subpage examples-core-reflection-basic - @copybrief examples-core-reflection-basic
 
 ## Undocumented examples
 
