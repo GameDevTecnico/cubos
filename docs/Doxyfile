@@ -5,7 +5,9 @@ PROJECT_NUMBER = @DOXYGEN_PROJECT_VERSION@
 # Add sources
 INPUT = @DOXYGEN_PROJECT_ROOT@/docs/pages \
         @DOXYGEN_PROJECT_ROOT@/core/include \
-        @DOXYGEN_PROJECT_ROOT@/engine/include
+        @DOXYGEN_PROJECT_ROOT@/core/samples \
+        @DOXYGEN_PROJECT_ROOT@/engine/include \
+        @DOXYGEN_PROJECT_ROOT@/engine/samples
 EXAMPLE_PATH = @DOXYGEN_PROJECT_ROOT@/core/samples \
                @DOXYGEN_PROJECT_ROOT@/engine/samples
 EXTRACT_ALL = YES
@@ -13,7 +15,9 @@ EXTRACT_PRIVATE = YES
 EXTRACT_PRIV_VIRTUAL = YES
 RECURSIVE = YES
 OUTPUT_DIRECTORY = @DOXYGEN_OUTPUT_DIRECTORY@
-IMAGE_PATH = @DOXYGEN_PROJECT_ROOT@/docs/images
+IMAGE_PATH = @DOXYGEN_PROJECT_ROOT@/docs/images \
+             @DOXYGEN_PROJECT_ROOT@/core/samples \
+             @DOXYGEN_PROJECT_ROOT@/engine/samples
 
 # Use relative include paths
 FULL_PATH_NAMES = YES
