@@ -20,6 +20,8 @@ namespace cubos::engine
     /// @defgroup renderer-plugin Renderer
     /// @ingroup engine
     /// @brief Creates and handles the lifecycle of a renderer.
+    /// @see Take a look at the @ref examples-engine-renderer example for a demonstration of this
+    /// plugin.
     ///
     /// Renders all entities with the @ref RenderableGrid component, using as cameras entities with
     /// the @ref Camera component selected by the @ref ActiveCameras resource. Lights are rendered
