@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Examples &raquo; Core | CUBOS.</title>
+  <title>assets/json/main.cpp file | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,11 +44,30 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="examples.html">Examples</a> &raquo;</span>
-          Core
+          <span class="m-breadcrumb"><a href="dir_b6bb679ae137702dc529968ce60cbdd2.html">assets</a>/</span><span class="m-breadcrumb"><a href="dir_36096ed7d65bc173f47f3057055f3064.html">json</a>/</span>main.cpp <span class="m-thin">file</span>
         </h1>
-        <p>Showcases features of the <a href="group__core.html" class="m-doc">Core</a> library.</p>
-<p><a name="md_docs_pages_3_examples_1_core_main"></a></p><aside class="m-note m-info"><h4>Note</h4><p>This is not the right place to learn how to use the engine. However, if you plan to work on the engine itself, it&#x27;s possible, if not probable, that you will need to use some of the features of the <a href="group__core.html" class="m-doc">Core</a> library directly.</p></aside><section id="autotoc_md34"><h2><a href="#autotoc_md34">Fully documented examples</a></h2><p>The following examples have fully documented tutorials:</p><ul><li><a href="examples-core-logging.html" class="m-doc">Logging</a> - Using the logging system.</li><li><a href="examples-core-reflection-basic.html" class="m-doc">Reflection</a> - Using the reflection system.</li></ul></section><section id="autotoc_md35"><h2><a href="#autotoc_md35">Undocumented examples</a></h2><p>The following examples are not yet documented, but may still be useful to learn some of the features:</p><aside class="m-note m-info"><h4>Note</h4><p>Under construction.</p></aside></section>
+        <p>A sample demonstrating how to save and load JSON assets.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#nested-classes">Classes</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>This sample demonstrates how we can use the JSONBridge to easily save and load serializable assets as JSON files. If we had a serializable asset and we wanted to store it as binary, we could simply replace the JSONBridge with a BinaryBridge and the sample would work the same way.</p><p>In this sample, we will be creating an asset of type <a href="structMyAsset.html" class="m-doc">MyAsset</a>, saving it to a JSON file, and then loading it back from the file.</p>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="structMyAsset.html" class="m-doc">MyAsset</a>
+            </dt>
+            <dd>A simple serializable type which we will be saving and loading.</dd>
+          </dl>
+        </section>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Transform module | CUBOS.</title>
+  <title>TextBridge class | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,88 +44,114 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Transform <span class="m-thin">module</span></h1>
-        <p>Adds transform components which assign positions, rotations and scaling to entities.</p>
+          TextBridge <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2samples_2assets_2bridge_2main_8cpp.html">&lt;assets/bridge/main.cpp&gt;</a></div>
+        </h1>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md91">Components</a></li>
-            <li><a href="#autotoc_md92">Tags</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>This plugin operates on entities with a <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> component and any combination of the <a href="structPosition.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> and <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components. For example, if you have an entity which doesn&#x27;t need rotation, but has a position and a scale, you do not need to add the <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> component, and its transform will still be updated.</p><section id="autotoc_md91"><h3><a href="#autotoc_md91">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> - holds the local to world transform matrix.</li><li><a href="structPosition.html" class="m-doc">Position</a> - holds the position of an entity.</li><li><a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> - holds the rotation of an entity.</li><li><a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> - holds the scaling of an entity.</li></ul></section><section id="autotoc_md92"><h3><a href="#autotoc_md92">Tags</a></h3><ul><li><code>cubos.transform.update</code> - the <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a> components are updated with the information from the <a href="structPosition.html" class="m-doc">Position</a>, <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">Rotation</a> and <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a> components.</li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+<p>This bridge inherits from the FileBridge, since it will be loading/saving assets from/to single files.</p>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="local__to__world_8hpp.html" class="m-doc">local_to_world.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">cubos::<wbr />engine::<wbr />LocalToWorld</a>.</dd>
-            <dt>file <a href="transform_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-            <dt>file <a href="position_8hpp.html" class="m-doc">position.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">cubos::<wbr />engine::<wbr />Position</a>.</dd>
-            <dt>file <a href="rotation_8hpp.html" class="m-doc">rotation.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">cubos::<wbr />engine::<wbr />Rotation</a>.</dd>
-            <dt>file <a href="scale_8hpp.html" class="m-doc">scale.hpp</a></dt>
-            <dd>Component <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">cubos::<wbr />engine::<wbr />Scale</a>.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">cubos::engine::FileBridge</a>
+            </dt>
+            <dd>Abstract bridge type defined to reduce boilerplate code in bridge implementations which open a single file to load and save assets.</dd>
           </dl>
         </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">cubos::engine::LocalToWorld</a>
+              <span class="m-doc-wrap-bumper">auto <a href="#a52a874d22ac0452ce9b43df8732d624a" class="m-doc">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Component which stores the transformation matrix of an entity, from local to world space.</dd>
+            <dd>Loads an asset from a file stream.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1Position.html" class="m-doc">cubos::engine::Position</a>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab47df805a79332ae10e53a6a84671373" class="m-doc">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp; stream) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
             </dt>
-            <dd>Component which assigns a position to an entity.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1Rotation.html" class="m-doc">cubos::engine::Rotation</a>
-            </dt>
-            <dd>Component which assigns a rotation to an entity.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">cubos::engine::Scale</a>
-            </dt>
-            <dd>Component which assigns a uniform scale to an entity.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Saves an asset to a file stream.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga2c61d596bb784b0791e87d0fc8197f54"><div>
+          <section class="m-doc-details" id="a52a874d22ac0452ce9b43df8732d624a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc-self">transformPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="transform_2plugin_8hpp.html">&lt;engine/transform/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper">bool TextBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a52a874d22ac0452ce9b43df8732d624a" class="m-doc-self">loadFromFile</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp; stream) <span class="m-label m-warning">override</span></span></span>
             </h3>
-            <p>Plugin entry function.</p>
+            <p>Loads an asset from a file stream.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to write into.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being loaded.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the asset was successfully loaded.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab47df805a79332ae10e53a6a84671373"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool TextBridge::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab47df805a79332ae10e53a6a84671373" class="m-doc-self">saveToFile</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">Assets</a>&amp; assets,
+              const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle,
+              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a>&amp; stream) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Saves an asset to a file stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">assets</td>
+                  <td>Manager to read from.</td>
+                </tr>
+                <tr>
+                  <td>handle</td>
+                  <td>Handle of the asset being saved.</td>
+                </tr>
+                <tr>
+                  <td>stream</td>
+                  <td>File stream.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the asset was successfully saved.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
         </section>
