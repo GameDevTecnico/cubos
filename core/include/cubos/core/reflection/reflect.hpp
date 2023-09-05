@@ -18,7 +18,7 @@ namespace cubos::core::reflection
     ///
     /// To implement reflection for your type, you should either:
     /// - Define a static member function `reflect` with return type `const Type&` on your type.
-    /// - Specialize this class for your type.
+    /// - Specialize this struct for your type.
     ///
     /// The first option is preferred, as it is less verbose. However, when handling external
     /// types, to which member functions cannot be added, the second option is necessary.
