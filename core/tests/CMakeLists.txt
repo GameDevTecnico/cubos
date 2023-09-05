@@ -9,6 +9,7 @@ add_executable(
 
     reflection/reflect.cpp
     reflection/type.cpp
+    reflection/traits/constructible.cpp
 
     data/fs/embedded_archive.cpp
     data/fs/standard_archive.cpp
