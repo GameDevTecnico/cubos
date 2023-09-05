@@ -39,8 +39,7 @@ namespace cubos::core::reflection
 
         /// @brief Adds the given trait to the type.
         ///
-        /// Aborts if the trait is already present in the type, or if its not move or copy
-        /// constructible. Fails to compile if the trait's type is not reflectable.
+        /// Aborts if the trait is already present in the type.
         ///
         /// @tparam T %Trait type.
         /// @param trait %Trait value.
@@ -52,9 +51,6 @@ namespace cubos::core::reflection
         }
 
         /// @brief Returns whether the type has the given trait.
-        ///
-        /// Fails to compile if the trait's type is not reflectable.
-        ///
         /// @tparam T %Trait type.
         /// @return Whether the type has the given trait.
         template <typename T>
@@ -66,7 +62,6 @@ namespace cubos::core::reflection
         /// @brief Returns the given trait of the type.
         ///
         /// Aborts if the type does not have the given trait.
-        /// Fails to compile if the trait's type is not reflectable.
         ///
         /// @tparam T %Trait type.
         /// @return Reference to the trait.
@@ -85,7 +80,7 @@ namespace cubos::core::reflection
 
         /// @brief Adds the given trait to the type.
         /// @param id Identifies the type of the trait.
-        /// @param trait %Trait value to be moved into the type.
+        /// @param trait Allocated trait value.
         /// @param deleter Used to delete the trait when the type is destroyed.
         /// @return Reference to this type, for chaining.
         Type& with(uintptr_t id, void* trait, void (*deleter)(void*));
