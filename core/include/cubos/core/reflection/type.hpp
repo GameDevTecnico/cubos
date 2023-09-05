@@ -98,11 +98,11 @@ namespace cubos::core::reflection
         /// @return Pointer to the trait.
         const void* get(uintptr_t id) const;
 
-        /// @brief Gets an unique identifier for the given type.
+        /// @brief Gets an unique identifier for the given trait type.
         /// @note This function is used as an alternative to `std::type_index`, which would require
         /// including the `<typeindex>` header.
         /// @tparam T %Trait type.
-        /// @return Unique identifier for the given type.
+        /// @return Unique identifier for the given trait type.
         template <typename T>
         static uintptr_t id()
         {
