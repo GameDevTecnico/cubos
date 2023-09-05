@@ -26,34 +26,13 @@ macro(make_sample)
     cubos_common_target_options(${target})
 endmacro()
 
-# Set sample source files
-set(CORE_SAMPLES_SOURCES
-    "logging.cpp"
-    "render_device.cpp"
-    "render_device_compute.cpp"
-    "debug_renderer.cpp"
-    "serialization.cpp"
-    "ecs.cpp"
-    "ui.cpp"
-    "event_system.cpp"
-)
-
+make_sample(DIR "logging")
 make_sample(DIR "data/fs/embedded_archive" SOURCES "embed.cpp")
 make_sample(DIR "data/fs/standard_archive")
-
-# For each sample file, create a target named after the file but without the
-# file extension
-foreach(file ${CORE_SAMPLES_SOURCES})
-    # Remove file extension
-    string(REGEX MATCH "^(.*)\\.[^.]*$" _ ${file})
-    set(target "core-sample." ${CMAKE_MATCH_1})
-    # Replace every _ with -
-    string(REPLACE "_" "-" target ${target})
-    # Replace every / with .
-    string(REPLACE "/" "." target ${target})
-
-    # Add sample target
-    add_executable(${target} ${file})
-    target_link_libraries(${target} cubos-core)
-    cubos_common_target_options(${target})
-endforeach()
+make_sample(DIR "data/serialization")
+make_sample(DIR "ecs/events")
+make_sample(DIR "ecs/general")
+make_sample(DIR "gl/compute")
+make_sample(DIR "gl/debug_renderer")
+make_sample(DIR "gl/quad")
+make_sample(DIR "ui")
