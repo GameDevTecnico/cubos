@@ -1,8 +1,6 @@
 /// @dir
 /// @brief @ref core-geom module.
 
-#pragma once
-
 /// @namespace cubos::core::geom
 /// @brief @ref core-geom module.
 /// @ingroup core-geom
