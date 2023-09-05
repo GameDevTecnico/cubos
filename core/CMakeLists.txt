@@ -33,6 +33,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/memory/buffer_stream.cpp"
 
     "src/cubos/core/reflection/type.cpp"
+    "src/cubos/core/reflection/traits/constructible.cpp"
 
     "src/cubos/core/data/serializer.cpp"
     "src/cubos/core/data/deserializer.cpp"
@@ -99,6 +100,7 @@ set(CUBOS_CORE_INCLUDE
 
     "include/cubos/core/reflection/reflect.hpp"
     "include/cubos/core/reflection/type.hpp"
+    "include/cubos/core/reflection/traits/constructible.hpp"
 
     "include/cubos/core/data/serializer.hpp"
     "include/cubos/core/data/deserializer.hpp"
