@@ -1,6 +1,6 @@
-# Reflection {#examples-core-reflection-basic}
+# Basic Usage {#examples-core-reflection-basic}
 
-@brief Using the reflection system.
+@brief Defining and using reflectable types.
 
 Lets say you have a type `Person`, which you want to be able to reflect. You
 can declare it as reflectable using the macro @ref CUBOS_REFLECT, for example,
