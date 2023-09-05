@@ -1,8 +1,6 @@
 /// @dir
 /// @brief @ref core-gl module.
 
-#pragma once
-
 /// @namespace cubos::core::gl
 /// @brief @ref core-gl module.
 /// @ingroup core-gl

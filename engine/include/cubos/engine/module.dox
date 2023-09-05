@@ -1,8 +1,6 @@
 /// @dir
 /// @brief @ref engine module.
 
-#pragma once
-
 /// @namespace cubos::engine
 /// @brief @ref engine module.
 

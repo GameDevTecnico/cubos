@@ -1,8 +1,6 @@
 /// @dir
 /// @brief @ref core-reflection module.
 
-#pragma once
-
 /// @namespace cubos::core::reflection
 /// @brief @ref core-reflection module.
 /// @ingroup core-reflection

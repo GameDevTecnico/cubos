@@ -1,8 +1,6 @@
 /// @dir
 /// @brief @ref core-ecs module.
 
-#pragma once
-
 /// @namespace cubos::core::ecs
 /// @brief @ref core-ecs module.
 /// @ingroup core-ecs

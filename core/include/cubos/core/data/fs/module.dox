@@ -1,8 +1,6 @@
 /// @dir
 /// @brief Filesystem utilities directory.
 
-#pragma once
-
 namespace cubos::core::data
 {
     /// @defgroup core-data-fs Filesystem

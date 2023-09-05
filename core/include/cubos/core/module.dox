@@ -1,8 +1,6 @@
 /// @dir
 /// @brief @ref core module.
 
-#pragma once
-
 /// @namespace cubos::core
 /// @brief @ref core namespace.
 
