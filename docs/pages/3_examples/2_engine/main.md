@@ -10,3 +10,4 @@ multiple plugins of the engine:
 - @subpage examples-engine-scene - @copybrief examples-engine-scene
 - @subpage examples-engine-assets - @copybrief examples-engine-assets
 - @subpage examples-engine-events - @copybrief examples-engine-events
+- @subpage examples-engine-cars - @copybrief examples-engine-cars
