@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Examples &raquo; Engine &raquo; Cars | CUBOS.</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">CUBOS.</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="examples.html">Examples</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-engine.html">Engine</a> &raquo;</span>
+          Cars
+        </h1>
+        <p>Sample that spawns multiple assets and updates them every frame.</p>
+<p><a name="md_cars_page"></a></p><p>This example shows how the <a href="group__renderer-plugin.html" class="m-doc">Renderer</a> plugin, <a href="group__voxels-plugin.html" class="m-doc">Voxels</a> plugin and <a href="group__env-settings-plugin.html" class="m-doc">Environment settings</a>, can be used in a scene to spawn and move assets.</p><p>The first thing we&#x27;re going to worry about is setting up the path for the assets we&#x27;re going to use in our settings resource. In this example, the path is set in a macro defined in a CMakeLists.txt file but you can give it the path directly as a string.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">settingsSystem</span><span class="p">(</span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Settings</span><span class="o">&gt;</span><span class="w"> </span><span class="n">settings</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">settings</span><span class="o">-&gt;</span><span class="n">setString</span><span class="p">(</span><span class="s">&quot;assets.io.path&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SAMPLE_ASSETS_FOLDER</span><span class="p">);</span>
+<span class="p">}</span></pre><p>Alternatively, the path can be set from the command line arguments given when starting cubos. For this we need the <a href="group__env-settings-plugin.html" class="m-doc">Environment settings</a>, included from the <a href="env__settings_2plugin_8hpp.html" class="m-doc">engine/env_<wbr />settings/plugin.hpp</a> header.</p><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">addPlugin</span><span class="p">(</span><span class="n">envSettingsPlugin</span><span class="p">);</span></pre><p>Each asset has an id through which we can get a handle to it. This id is specified in the .meta file associated to the asset.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Asset</span><span class="o">&lt;</span><span class="n">Grid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CarAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AnyAsset</span><span class="p">(</span><span class="s">&quot;059c16e7-a439-44c7-9bdc-6e069dba0c75&quot;</span><span class="p">);</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Asset</span><span class="o">&lt;</span><span class="n">Palette</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PaletteAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AnyAsset</span><span class="p">(</span><span class="s">&quot;1aa5e234-28cb-4386-99b4-39386b0fc215&quot;</span><span class="p">);</span></pre><p>Next, we are going to set up the scene.</p><p>We&#x27;ll need to render and load assets.</p><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">addPlugin</span><span class="p">(</span><span class="n">rendererPlugin</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">addPlugin</span><span class="p">(</span><span class="n">voxelsPlugin</span><span class="p">);</span></pre><p>In our assets folder we already have a palette, let&#x27;s load it and give it some more colors.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setPalleteSystem</span><span class="p">(</span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Assets</span><span class="o">&gt;</span><span class="w"> </span><span class="n">assets</span><span class="p">,</span><span class="w"> </span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Renderer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">renderer</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Load the palette asset and add two colors to it.</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assets</span><span class="o">-&gt;</span><span class="n">write</span><span class="p">(</span><span class="n">PaletteAsset</span><span class="p">);</span>
+<span class="w">    </span><span class="n">palette</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">({{</span><span class="mf">0.1F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1F</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">}});</span>
+<span class="w">    </span><span class="n">palette</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">({{</span><span class="mf">0.9F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9F</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">}});</span>
+
+<span class="w">    </span><span class="c1">// Set the renderer&#39;s palette to the one we just modified.</span>
+<span class="w">    </span><span class="p">(</span><span class="o">*</span><span class="n">renderer</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setPalette</span><span class="p">(</span><span class="o">*</span><span class="n">palette</span><span class="p">);</span>
+<span class="p">}</span></pre><p>Now, let&#x27;s give our scene a floor. To achieve this, we&#x27;ll create a grid, assign one of the materials we added to the pallete to each voxel of that grid and then spawn it.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">spawnFloorSystem</span><span class="p">(</span><span class="n">Commands</span><span class="w"> </span><span class="n">cmds</span><span class="p">,</span><span class="w"> </span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Assets</span><span class="o">&gt;</span><span class="w"> </span><span class="n">assets</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Get the materials previously added to the palette</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assets</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="n">PaletteAsset</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">black</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">palette</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">({{</span><span class="mf">0.1F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1F</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">}});</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">white</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">palette</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">({{</span><span class="mf">0.9F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9F</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">}});</span>
+
+<span class="w">    </span><span class="c1">// Generate a new grid asset for the floor.</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">floorGrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Grid</span><span class="p">({</span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">});</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">z</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">floorGrid</span><span class="p">.</span><span class="n">set</span><span class="p">({</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">},</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">black</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">white</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">floorOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="n">floorGrid</span><span class="p">.</span><span class="n">size</span><span class="p">().</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="n">floorGrid</span><span class="p">.</span><span class="n">size</span><span class="p">().</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">-2.0F</span><span class="p">;</span>
+<span class="w">    </span><span class="n">floorOffset</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1.0F</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">floorAsset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assets</span><span class="o">-&gt;</span><span class="n">create</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">floorGrid</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Spawn the floor entity.</span>
+<span class="w">    </span><span class="n">cmds</span><span class="p">.</span><span class="n">create</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">RenderableGrid</span><span class="p">{</span><span class="n">floorAsset</span><span class="p">,</span><span class="w"> </span><span class="n">floorOffset</span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">LocalToWorld</span><span class="p">{})</span>
+<span class="w">        </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Scale</span><span class="p">{</span><span class="mf">4.0F</span><span class="p">});</span>
+<span class="p">}</span></pre><p>To finish the setup, we need to spawn a camera and a light. On this sample we use a directional light. For more info on how to configure the <a href="group__renderer-plugin.html" class="m-doc">Renderer</a> plugin, refer to the examples-renderer-sample sample.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">spawnCameraSystem</span><span class="p">(</span><span class="n">Commands</span><span class="w"> </span><span class="n">cmds</span><span class="p">,</span><span class="w"> </span><span class="n">Write</span><span class="o">&lt;</span><span class="n">ActiveCameras</span><span class="o">&gt;</span><span class="w"> </span><span class="n">activeCameras</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Spawn the camera entity.</span>
+<span class="w">    </span><span class="n">activeCameras</span><span class="o">-&gt;</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">cmds</span><span class="p">.</span><span class="n">create</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Camera</span><span class="p">{.</span><span class="n">fovY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">60.0F</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">zNear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1F</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">zFar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1000.0F</span><span class="p">})</span>
+<span class="w">            </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">LocalToWorld</span><span class="p">{})</span>
+<span class="w">            </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Position</span><span class="p">{{</span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">120.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">-200.0F</span><span class="p">}})</span>
+<span class="w">            </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rotation</span><span class="p">{</span><span class="n">glm</span><span class="o">::</span><span class="n">quatLookAt</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">normalize</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">{</span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">}),</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">{</span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">})})</span>
+<span class="w">            </span><span class="p">.</span><span class="n">entity</span><span class="p">();</span>
+<span class="p">}</span></pre><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">spawnLightSystem</span><span class="p">(</span><span class="n">Commands</span><span class="w"> </span><span class="n">cmds</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Spawn the sun.</span>
+<span class="w">    </span><span class="n">cmds</span><span class="p">.</span><span class="n">create</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">DirectionalLight</span><span class="p">{</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">1.0F</span><span class="p">),</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">})</span>
+<span class="w">        </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">LocalToWorld</span><span class="p">{})</span>
+<span class="w">        </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rotation</span><span class="p">{</span><span class="n">glm</span><span class="o">::</span><span class="n">quat</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="n">glm</span><span class="o">::</span><span class="n">radians</span><span class="p">(</span><span class="mf">45.0F</span><span class="p">),</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">radians</span><span class="p">(</span><span class="mf">45.0F</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">))});</span>
+<span class="p">}</span></pre><p>In this sample we want to spawn a car every second and move every car in the scene at a constant speed. To do this, we&#x27;ll use 2 systems. One will spawn the cars and the other will move them.</p><p>Let&#x27;s start with the spawn system. In this system, we&#x27;ll need to load the asset and spawn the car at a given position, when it&#x27;s time to do so.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">spawnSystem</span><span class="p">(</span><span class="n">Commands</span><span class="w"> </span><span class="n">cmds</span><span class="p">,</span><span class="w"> </span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Spawner</span><span class="o">&gt;</span><span class="w"> </span><span class="n">spawner</span><span class="p">,</span><span class="w"> </span><span class="n">Read</span><span class="o">&lt;</span><span class="n">DeltaTime</span><span class="o">&gt;</span><span class="w"> </span><span class="n">deltaTime</span><span class="p">,</span><span class="w"> </span><span class="n">Read</span><span class="o">&lt;</span><span class="n">Assets</span><span class="o">&gt;</span><span class="w"> </span><span class="n">assets</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">spawner</span><span class="o">-&gt;</span><span class="n">timer</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">deltaTime</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">spawner</span><span class="o">-&gt;</span><span class="n">timer</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">1.0F</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">spawner</span><span class="o">-&gt;</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assets</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="n">CarAsset</span><span class="p">);</span>
+<span class="w">        </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="n">car</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">().</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="n">car</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">().</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">-2.0F</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">cmds</span><span class="p">.</span><span class="n">create</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Car</span><span class="p">{})</span>
+<span class="w">            </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">RenderableGrid</span><span class="p">{</span><span class="n">CarAsset</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">})</span>
+<span class="w">            </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">LocalToWorld</span><span class="p">{})</span>
+<span class="w">            </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Position</span><span class="p">{{</span><span class="mf">80.0F</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spawner</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">80.0F</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spawner</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">)}})</span>
+<span class="w">            </span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Rotation</span><span class="p">{});</span>
+
+<span class="w">        </span><span class="n">spawner</span><span class="o">-&gt;</span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></pre><p>For this to work, we&#x27;ll need 2 more things, the <a href="structCar.html" class="m-doc">Car</a> component, which contains the car velocity and angular velocity, and the <a href="structSpawner.html" class="m-doc">Spawner</a> resource, used to keep track of the time and the position to spawn the car.</p><pre class="m-code"><span class="k">struct</span><span class="w"> </span><span class="p">[[</span><span class="n">cubos</span><span class="o">::</span><span class="n">component</span><span class="p">(</span><span class="s">&quot;car&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">VecStorage</span><span class="p">)]]</span><span class="w"> </span><span class="n">Car</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="w"> </span><span class="n">vel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">};</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">angVel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
+<span class="p">};</span></pre><pre class="m-code"><span class="k">struct</span><span class="w"> </span><span class="nc">Spawner</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="p">};</span></pre><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">addComponent</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">addResource</span><span class="o">&lt;</span><span class="n">Spawner</span><span class="o">&gt;</span><span class="p">();</span></pre><p>Lastly, the move system will simply query through all the cars and change the values of their components. Note how we also use the Delta Time resource to make the speed independent from the frame rate.</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">moveSystem</span><span class="p">(</span><span class="n">Query</span><span class="o">&lt;</span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Rotation</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="n">Read</span><span class="o">&lt;</span><span class="n">DeltaTime</span><span class="o">&gt;</span><span class="w"> </span><span class="n">deltaTime</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="n">car</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="n">rotation</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">query</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">car</span><span class="o">-&gt;</span><span class="n">vel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rotation</span><span class="o">-&gt;</span><span class="n">quat</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">50.0F</span><span class="p">);</span>
+<span class="w">        </span><span class="n">car</span><span class="o">-&gt;</span><span class="n">angVel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0F</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">position</span><span class="o">-&gt;</span><span class="n">vec</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">deltaTime</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">car</span><span class="o">-&gt;</span><span class="n">vel</span><span class="p">;</span>
+<span class="w">        </span><span class="n">rotation</span><span class="o">-&gt;</span><span class="n">quat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">angleAxis</span><span class="p">(</span><span class="n">deltaTime</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">car</span><span class="o">-&gt;</span><span class="n">angVel</span><span class="p">,</span><span class="w"> </span><span class="n">glm</span><span class="o">::</span><span class="n">vec3</span><span class="p">(</span><span class="mf">0.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0F</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0F</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rotation</span><span class="o">-&gt;</span><span class="n">quat</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span></pre><p>Now, to make everything come to life, we just add all of these systems.</p><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="n">settingsSystem</span><span class="p">).</span><span class="n">tagged</span><span class="p">(</span><span class="s">&quot;cubos.settings&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="n">setPalleteSystem</span><span class="p">).</span><span class="n">tagged</span><span class="p">(</span><span class="s">&quot;palette.set&quot;</span><span class="p">).</span><span class="n">afterTag</span><span class="p">(</span><span class="s">&quot;cubos.renderer.init&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="n">spawnFloorSystem</span><span class="p">).</span><span class="n">afterTag</span><span class="p">(</span><span class="s">&quot;palette.set&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="n">spawnCameraSystem</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="n">spawnLightSystem</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="n">spawnSystem</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="n">moveSystem</span><span class="p">);</span></pre><p>And voilá, you now have a screen full of cars doing ballet!</p>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS.. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
