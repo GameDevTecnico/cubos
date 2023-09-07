@@ -28,7 +28,11 @@ static void init(Write<Renderer> renderer, Read<Window> window, Write<Settings> 
 {
     auto& renderDevice = (*window)->renderDevice();
     *renderer = std::make_shared<DeferredRenderer>(renderDevice, (*window)->framebufferSize(), *settings);
-    (*renderer)->pps().addPass<PostProcessingBloom>();
+
+    if (settings->getBool("cubos.renderer.bloom.enabled", false))
+    {
+        (*renderer)->pps().addPass<PostProcessingBloom>();
+    }
 }
 
 static void resize(Write<Renderer> renderer, EventReader<WindowEvent> evs)

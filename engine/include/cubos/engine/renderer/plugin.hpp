@@ -35,6 +35,7 @@ namespace cubos::engine
     ///
     /// ## Settings
     /// - `cubos.renderer.ssao.enabled` - whether SSAO is enabled.
+    /// - `cubos.renderer.bloom.enabled` - whether bloom is enabled.
     ///
     /// ## Resources
     /// - @ref Renderer - handle to the renderer.
