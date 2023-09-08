@@ -78,23 +78,13 @@
             </dt>
             <dd>Sets the current system&#x27;s tag.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac3b673dde286dfe27e54d4d1192251e2" class="m-doc">beforeTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4de12c9b322acd5e3843c80ebbb20545" class="m-doc">before</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
             </dt>
             <dd>Sets the current system to be executed before another tag.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab718cb913757dbad6294d7a062e68d38" class="m-doc">afterTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#abf84e4e7c80b3d2644cf61cde901378b" class="m-doc">after</a>(</span><span class="m-doc-wrap">const std::string&amp; tag) -&gt; <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
             </dt>
             <dd>Sets the current system to be executed after another tag.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename F&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9857790c4839269cbe7af6bc27e0ae75" class="m-doc">beforeSystem</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
-            </dt>
-            <dd>Sets the current system to be executed before another system.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename F&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a445531a21dd5c41dba46a4672824f467" class="m-doc">afterSystem</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
-            </dt>
-            <dd>Sets the current system to be executed after another system.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename F&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a3f415f4cd6630e22ca31286946605269" class="m-doc">runIf</a>(</span><span class="m-doc-wrap">F func) -&gt; <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp;</span>
@@ -149,9 +139,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac3b673dde286dfe27e54d4d1192251e2"><div>
+          <section class="m-doc-details" id="a4de12c9b322acd5e3843c80ebbb20545"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />engine::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac3b673dde286dfe27e54d4d1192251e2" class="m-doc-self">beforeTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />engine::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4de12c9b322acd5e3843c80ebbb20545" class="m-doc-self">before</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
             <p>Sets the current system to be executed before another tag.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -172,9 +162,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ab718cb913757dbad6294d7a062e68d38"><div>
+          <section class="m-doc-details" id="abf84e4e7c80b3d2644cf61cde901378b"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />engine::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab718cb913757dbad6294d7a062e68d38" class="m-doc-self">afterTag</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />engine::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf84e4e7c80b3d2644cf61cde901378b" class="m-doc-self">after</a>(</span><span class="m-doc-wrap">const std::string&amp; tag)</span></span>
             </h3>
             <p>Sets the current system to be executed after another tag.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -185,76 +175,6 @@
                 <tr>
                   <td style="width: 1%">tag</td>
                   <td>Tag to be executed after.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Reference to this object, for chaining.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a9857790c4839269cbe7af6bc27e0ae75"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename F&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />engine::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9857790c4839269cbe7af6bc27e0ae75" class="m-doc-self">beforeSystem</a>(</span><span class="m-doc-wrap">F func)</span></span>
-            </h3>
-            <p>Sets the current system to be executed before another system.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">F</td>
-                  <td>System type.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>func</td>
-                  <td>System to be executed before.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Reference to this object, for chaining.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a445531a21dd5c41dba46a4672824f467"><div>
-            <h3>
-              <div class="m-doc-template">
-                template&lt;typename F&gt;
-              </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a>&amp; cubos::<wbr />engine::<wbr />SystemBuilder::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a445531a21dd5c41dba46a4672824f467" class="m-doc-self">afterSystem</a>(</span><span class="m-doc-wrap">F func)</span></span>
-            </h3>
-            <p>Sets the current system to be executed after another system.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">F</td>
-                  <td>System type.</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>func</td>
-                  <td>System to be executed after.</td>
                 </tr>
               </tbody>
               <tfoot>
