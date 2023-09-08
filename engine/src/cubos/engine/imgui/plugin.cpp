@@ -38,10 +38,10 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::windowPlugin);
 
-    cubos.startupTag("cubos.imgui.init").afterTag("cubos.window.init");
-    cubos.tag("cubos.imgui.begin").afterTag("cubos.window.poll");
-    cubos.tag("cubos.imgui.end").beforeTag("cubos.window.render").afterTag("cubos.imgui.begin");
-    cubos.tag("cubos.imgui").afterTag("cubos.imgui.begin").beforeTag("cubos.imgui.end");
+    cubos.startupTag("cubos.imgui.init").after("cubos.window.init");
+    cubos.tag("cubos.imgui.begin").after("cubos.window.poll");
+    cubos.tag("cubos.imgui.end").before("cubos.window.render").after("cubos.imgui.begin");
+    cubos.tag("cubos.imgui").after("cubos.imgui.begin").before("cubos.imgui.end");
 
     cubos.startupSystem(init).tagged("cubos.imgui.init");
     cubos.system(begin).tagged("cubos.imgui.begin");

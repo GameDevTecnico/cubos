@@ -29,7 +29,7 @@ int main()
             }
         })
         .tagged("A")
-        .beforeTag("B");
+        .before("B");
     cubos
         .system(
             [](ecs::EventWriter<MyEvent> writer, ecs::Write<State> state, ecs::Write<cubos::engine::ShouldQuit> quit) {
@@ -59,7 +59,7 @@ int main()
             }
         })
         .tagged("C")
-        .afterTag("B");
+        .after("B");
     cubos
         .system([](ecs::EventReader<MyEvent> reader) {
             for (const auto& event : reader)
@@ -68,7 +68,7 @@ int main()
             }
         })
         .tagged("D")
-        .afterTag("C");
+        .after("C");
 
     // Should print:
     // B wrote 1 2 3

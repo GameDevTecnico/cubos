@@ -154,9 +154,9 @@ int main()
 
     cubos.startupSystem(addColliders);
 
-    cubos.system(updateTransform).beforeTag("cubos.transform.update");
-    cubos.system(updateCollided).tagged("updated").afterTag("cubos.collisions");
-    cubos.system(render).afterTag("updated");
+    cubos.system(updateTransform).before("cubos.transform.update");
+    cubos.system(updateCollided).tagged("updated").after("cubos.collisions");
+    cubos.system(render).after("updated");
 
     cubos.run();
     return 0;

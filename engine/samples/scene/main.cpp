@@ -56,6 +56,6 @@ int main(int argc, char** argv)
 
     cubos.startupSystem(settings).tagged("cubos.settings");
     cubos.startupSystem(spawnScene).tagged("spawn").tagged("cubos.assets");
-    cubos.startupSystem(printStuff).afterTag("spawn");
+    cubos.startupSystem(printStuff).after("spawn");
     cubos.run();
 }

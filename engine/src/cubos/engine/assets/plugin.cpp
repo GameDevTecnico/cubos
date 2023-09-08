@@ -37,8 +37,8 @@ void cubos::engine::assetsPlugin(Cubos& cubos)
 {
     cubos.addResource<Assets>();
 
-    cubos.startupTag("cubos.assets.init").afterTag("cubos.settings");
-    cubos.startupTag("cubos.assets.bridge").afterTag("cubos.assets.init").beforeTag("cubos.assets");
+    cubos.startupTag("cubos.assets.init").after("cubos.settings");
+    cubos.startupTag("cubos.assets.bridge").after("cubos.assets.init").before("cubos.assets");
 
     cubos.startupSystem(init).tagged("cubos.assets.init");
     cubos.system(cleanup).tagged("cubos.assets.cleanup");

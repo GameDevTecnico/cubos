@@ -116,7 +116,7 @@ int main(int argc, char** argv)
     cubos.addResource<Spawner>();
 
     cubos.startupSystem(settings).tagged("cubos.settings");
-    cubos.startupSystem(setup).tagged("cubos.assets").afterTag("cubos.renderer.init");
+    cubos.startupSystem(setup).tagged("cubos.assets").after("cubos.renderer.init");
     cubos.system(spawn);
     cubos.system(move);
 

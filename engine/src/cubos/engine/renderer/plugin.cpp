@@ -196,9 +196,9 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.addComponent<DirectionalLight>();
     cubos.addComponent<PointLight>();
 
-    cubos.startupTag("cubos.renderer.init").afterTag("cubos.window.init");
-    cubos.tag("cubos.renderer.frame").afterTag("cubos.transform.update");
-    cubos.tag("cubos.renderer.render").afterTag("cubos.renderer.frame").beforeTag("cubos.window.render");
+    cubos.startupTag("cubos.renderer.init").after("cubos.window.init");
+    cubos.tag("cubos.renderer.frame").after("cubos.transform.update");
+    cubos.tag("cubos.renderer.render").after("cubos.renderer.frame").before("cubos.window.render");
 
     cubos.startupSystem(init).tagged("cubos.renderer.init");
     cubos.system(frameGrids).tagged("cubos.renderer.frame");
@@ -207,5 +207,5 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.system(framePointLights).tagged("cubos.renderer.frame");
     cubos.system(frameEnvironment).tagged("cubos.renderer.frame");
     cubos.system(draw).tagged("cubos.renderer.draw");
-    cubos.system(resize).afterTag("cubos.window.poll").beforeTag("cubos.renderer.draw");
+    cubos.system(resize).after("cubos.window.poll").before("cubos.renderer.draw");
 }
