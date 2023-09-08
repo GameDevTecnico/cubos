@@ -29,14 +29,14 @@ TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::strin
 {
 }
 
-TagBuilder& TagBuilder::beforeTag(const std::string& tag)
+TagBuilder& TagBuilder::before(const std::string& tag)
 {
     mTags.push_back(tag);
     mDispatcher.tagSetBeforeTag(tag);
     return *this;
 }
 
-TagBuilder& TagBuilder::afterTag(const std::string& tag)
+TagBuilder& TagBuilder::after(const std::string& tag)
 {
     mTags.push_back(tag);
     mDispatcher.tagSetAfterTag(tag);
@@ -60,7 +60,7 @@ SystemBuilder& SystemBuilder::tagged(const std::string& tag)
     return *this;
 }
 
-SystemBuilder& SystemBuilder::beforeTag(const std::string& tag)
+SystemBuilder& SystemBuilder::before(const std::string& tag)
 {
     if (std::find(mTags.begin(), mTags.end(), tag) != mTags.end())
     {
@@ -71,7 +71,7 @@ SystemBuilder& SystemBuilder::beforeTag(const std::string& tag)
     return *this;
 }
 
-SystemBuilder& SystemBuilder::afterTag(const std::string& tag)
+SystemBuilder& SystemBuilder::after(const std::string& tag)
 {
     if (std::find(mTags.begin(), mTags.end(), tag) != mTags.end())
     {

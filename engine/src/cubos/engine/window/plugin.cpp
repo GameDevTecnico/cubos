@@ -42,8 +42,8 @@ void cubos::engine::windowPlugin(Cubos& cubos)
     cubos.addResource<Window>();
     cubos.addEvent<WindowEvent>();
 
-    cubos.startupTag("cubos.window.init").afterTag("cubos.settings");
-    cubos.tag("cubos.window.poll").beforeTag("cubos.window.render");
+    cubos.startupTag("cubos.window.init").after("cubos.settings");
+    cubos.tag("cubos.window.poll").before("cubos.window.render");
 
     cubos.startupSystem(init).tagged("cubos.window.init");
     cubos.system(poll).tagged("cubos.window.poll");

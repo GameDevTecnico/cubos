@@ -40,8 +40,8 @@ int main()
 {
     cubos::engine::Cubos cubos;
 
-    cubos.startupTag("B").beforeTag("C");
-    cubos.startupTag("C").afterTag("A");
+    cubos.startupTag("B").before("C");
+    cubos.startupTag("C").after("A");
     cubos.startupTag("A");
 
     // Order using tags
@@ -49,21 +49,8 @@ int main()
     cubos.startupSystem(tagC).tagged("C");
     cubos.startupSystem(tagA).tagged("A");
 
-    // Order using systems
-    cubos.startupSystem(systemC);
-    cubos.startupSystem(systemA).beforeSystem(systemC).afterTag("C");
-    cubos.startupSystem(systemB).afterSystem(systemA);
-
-    // Lambda between systems and tags
-    auto lambda = []() { CUBOS_INFO("--- INTERMISSION ---"); };
-    cubos.startupSystem(lambda).afterTag("C").beforeSystem(systemA);
-
-    // System inheritance
-    cubos.startupSystem(systemInherit1).tagged("A");
-    cubos.startupSystem(systemInherit2).afterTag("B").beforeSystem(systemInherit1);
-
     // Closed loop. This will prevent chain compilation!
-    // cubos.startupTag("A").afterTag("C");
+    // cubos.startupTag("A").after("C");
 
     // Conditions, determining system execution
     auto lambdaCondYes = []() { CUBOS_INFO("System ran with condition true!"); };

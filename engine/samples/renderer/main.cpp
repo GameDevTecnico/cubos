@@ -95,7 +95,7 @@ int main()
     cubos.startupSystem(settingsSystem).tagged("cubos.settings");
 
     /// [Adding the systems]
-    cubos.startupSystem(setPaletteSystem).afterTag("cubos.renderer.init");
+    cubos.startupSystem(setPaletteSystem).after("cubos.renderer.init");
     cubos.startupSystem(spawnVoxelGridSystem);
     cubos.startupSystem(spawnLightSystem);
     cubos.startupSystem(setEnvironmentSystem);

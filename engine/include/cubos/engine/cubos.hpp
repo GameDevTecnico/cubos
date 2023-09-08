@@ -61,12 +61,12 @@ namespace cubos::engine
         /// @brief Sets the current tag to be executed before another tag.
         /// @param tag Tag to be executed before.
         /// @return Reference to this object, for chaining.
-        TagBuilder& beforeTag(const std::string& tag);
+        TagBuilder& before(const std::string& tag);
 
         /// @brief Sets the current tag to be executed after another tag.
         /// @param tag Tag to be executed after.
         /// @return Reference to this object, for chaining.
-        TagBuilder& afterTag(const std::string& tag);
+        TagBuilder& after(const std::string& tag);
 
         /// @brief Adds a condition to the current tag. If this condition returns false, systems
         /// with this tag will not be executed. For the tagged systems to run, all conditions must
@@ -99,26 +99,12 @@ namespace cubos::engine
         /// @brief Sets the current system to be executed before another tag.
         /// @param tag Tag to be executed before.
         /// @return Reference to this object, for chaining.
-        SystemBuilder& beforeTag(const std::string& tag);
+        SystemBuilder& before(const std::string& tag);
 
         /// @brief Sets the current system to be executed after another tag.
         /// @param tag Tag to be executed after.
         /// @return Reference to this object, for chaining.
-        SystemBuilder& afterTag(const std::string& tag);
-
-        /// @brief Sets the current system to be executed before another system.
-        /// @tparam F System type.
-        /// @param func System to be executed before.
-        /// @return Reference to this object, for chaining.
-        template <typename F>
-        SystemBuilder& beforeSystem(F func);
-
-        /// @brief Sets the current system to be executed after another system.
-        /// @param func System to be executed after.
-        /// @tparam F System type.
-        /// @return Reference to this object, for chaining.
-        template <typename F>
-        SystemBuilder& afterSystem(F func);
+        SystemBuilder& after(const std::string& tag);
 
         /// @brief Adds a condition to the current system. If this condition returns false, the
         /// system will not be executed. For a system to run, all conditions must return true.
@@ -223,20 +209,6 @@ namespace cubos::engine
     TagBuilder& TagBuilder::runIf(F func)
     {
         mDispatcher.tagAddCondition(func);
-        return *this;
-    }
-
-    template <typename F>
-    SystemBuilder& SystemBuilder::beforeSystem(F func)
-    {
-        mDispatcher.systemSetBeforeSystem(func);
-        return *this;
-    }
-
-    template <typename F>
-    SystemBuilder& SystemBuilder::afterSystem(F func)
-    {
-        mDispatcher.systemSetAfterSystem(func);
         return *this;
     }
 

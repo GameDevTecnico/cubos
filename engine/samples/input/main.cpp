@@ -220,7 +220,7 @@ int main()
     cubos.startupSystem(config).tagged("cubos.settings");
     cubos.startupSystem(init).tagged("cubos.assets");
 
-    cubos.system(update).afterTag("cubos.input.update");
+    cubos.system(update).after("cubos.input.update");
 
     cubos.run();
     return 0;
