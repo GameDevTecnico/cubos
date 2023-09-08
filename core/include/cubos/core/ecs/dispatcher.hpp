@@ -93,21 +93,9 @@ namespace cubos::core::ecs
         /// @param tag Tag to run after.
         void systemSetAfterTag(const std::string& tag);
 
-        /// @brief Sets the current system to run after a given system.
-        /// @tparam F System type.
-        /// @param func System to run after.
-        template <typename F>
-        void systemSetAfterSystem(F func);
-
         /// @brief Sets the current system to run before the tag.
         /// @param tag Tag to run before.
         void systemSetBeforeTag(const std::string& tag);
-
-        /// @brief Sets the current system to run before the system.
-        /// @tparam F System type.
-        /// @param func System to run before.
-        template <typename F>
-        void systemSetBeforeSystem(F func);
 
         /// @brief Adds a condition to the current system.
         /// @tparam F Condition type.
@@ -221,58 +209,6 @@ namespace cubos::core::ecs
         auto* system = new System{nullptr, std::make_shared<SystemWrapper<F>>(func), {}};
         mPendingSystems.push_back(system);
         mCurrSystem = mPendingSystems.back();
-    }
-
-    template <typename F>
-    void Dispatcher::systemSetAfterSystem(F func)
-    {
-        auto it = std::find_if(mPendingSystems.begin(), mPendingSystems.end(), [&func](const System* system) {
-            auto* wrapper = dynamic_cast<SystemWrapper<F>*>(system->system.get());
-            if (!wrapper)
-            {
-                return false;
-            }
-            return wrapper->mSystem == func;
-        });
-        if (it == mPendingSystems.end())
-        {
-            CUBOS_ERROR("Tried to set system after a non-existing system!");
-            return;
-        }
-        ENSURE_CURR_SYSTEM();
-        ENSURE_SYSTEM_SETTINGS(mCurrSystem);
-        System* system = *it;
-        ENSURE_SYSTEM_SETTINGS(system);
-        // Set curr to run after this system
-        mCurrSystem->settings->after.system.push_back(system);
-        // And this system to run before curr
-        system->settings->before.system.push_back(mCurrSystem);
-    }
-
-    template <typename F>
-    void Dispatcher::systemSetBeforeSystem(F func)
-    {
-        auto it = std::find_if(mPendingSystems.begin(), mPendingSystems.end(), [&func](const System* system) {
-            auto* wrapper = dynamic_cast<SystemWrapper<F>*>(system->system.get());
-            if (!wrapper)
-            {
-                return false;
-            }
-            return wrapper->mSystem == func;
-        });
-        if (it == mPendingSystems.end())
-        {
-            CUBOS_ERROR("Tried to set system before a non-existing system!");
-            return;
-        }
-        ENSURE_CURR_SYSTEM();
-        ENSURE_SYSTEM_SETTINGS(mCurrSystem);
-        System* system = *it;
-        ENSURE_SYSTEM_SETTINGS(system);
-        // Set curr to run before this system
-        mCurrSystem->settings->before.system.push_back(system);
-        // And this system to run after curr
-        system->settings->after.system.push_back(mCurrSystem);
     }
 
     template <typename F>
