@@ -1,18 +1,12 @@
 # Cars {#examples-engine-cars}
 
-@brief Sample that spawns multiple assets and updates them every frame.
+@brief Loading voxel grids and rendering them.
 
-This example shows how the @ref renderer-plugin plugin, @ref voxels-plugin plugin and @ref env-settings-plugin, can be used in a scene to spawn and move assets.
+This example shows how the @ref renderer-plugin plugin and @ref voxels-plugin plugin, can be used to load and render voxel objects.
 
-The first thing we're going to worry about is setting up the path for the assets we're going to use in our settings resource. In this example, the path is set in a macro defined in a CMakeLists.txt file but you can give it the path directly as a string.
+![](cars/output.png)
 
-@snippet cars/main.cpp Set settings
-
-Alternatively, the path can be set from the command line arguments given when starting cubos. For this we need the @ref env-settings-plugin, included from the @ref engine/env_settings/plugin.hpp header.
-
-@snippet cars/main.cpp Adding the env settings plugin
-
-Each asset has an id through which we can get a handle to it. This id is specified in the .meta file associated to the asset.
+Lets start by getting the assets we want to use. Each asset has an id through which we can get a handle to it. This id is specified in the .meta file associated to the asset.
 
 @snippet cars/main.cpp Get handles to assets
 
@@ -24,7 +18,7 @@ We'll need to render and load assets.
 
 In our assets folder we already have a palette, let's load it and give it some more colors.
 
-@snippet cars/main.cpp Load, add materials and set pallete
+@snippet cars/main.cpp Load, add materials and set palette
 
 Now, let's give our scene a floor. To achieve this, we'll create a grid, assign one of the materials we added to the pallete to each voxel of that grid and then spawn it.
 
