@@ -30,34 +30,24 @@ struct Spawner
 };
 /// [Spawner resource]
 
-/// [Set settings]
 static void settingsSystem(Write<Settings> settings)
 {
     settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
-/// [Set settings]
 
-/// [Load, add materials and set pallete]
-static void setPalleteSystem(Write<Assets> assets, Write<Renderer> renderer)
+static void setPaletteAndCreateFloorSystem(Commands cmds, Write<Assets> assets, Write<Renderer> renderer)
 {
+    /// [Load, add materials and set palette]
     // Load the palette asset and add two colors to it.
     auto palette = assets->write(PaletteAsset);
-    palette->add({{0.1F, 0.1F, 0.1F, 1.0F}});
-    palette->add({{0.9F, 0.9F, 0.9F, 1.0F}});
+    auto black = palette->add({{0.1F, 0.1F, 0.1F, 1.0F}});
+    auto white = palette->add({{0.9F, 0.9F, 0.9F, 1.0F}});
 
     // Set the renderer's palette to the one we just modified.
     (*renderer)->setPalette(*palette);
-}
-/// [Load, add materials and set pallete]
+    /// [Load, add materials and set palette]
 
-/// [Create and spawn floor]
-static void spawnFloorSystem(Commands cmds, Write<Assets> assets)
-{
-    // Get the materials previously added to the palette
-    auto palette = assets->read(PaletteAsset);
-    auto black = palette->find({{0.1F, 0.1F, 0.1F, 1.0F}});
-    auto white = palette->find({{0.9F, 0.9F, 0.9F, 1.0F}});
-
+    /// [Create and spawn floor]
     // Generate a new grid asset for the floor.
     auto floorGrid = Grid({256, 1, 256});
     for (int x = 0; x < 256; ++x)
@@ -77,8 +67,8 @@ static void spawnFloorSystem(Commands cmds, Write<Assets> assets)
         .add(RenderableGrid{floorAsset, floorOffset})
         .add(LocalToWorld{})
         .add(Scale{4.0F});
+    /// [Create and spawn floor]
 }
-/// [Create and spawn floor]
 
 /// [Spawn camera]
 static void spawnCameraSystem(Commands cmds, Write<ActiveCameras> activeCameras)
@@ -105,8 +95,8 @@ static void spawnLightSystem(Commands cmds)
 }
 /// [Spawn light]
 
-/// [Spawn system]
-static void spawnSystem(Commands cmds, Write<Spawner> spawner, Read<DeltaTime> deltaTime, Read<Assets> assets)
+/// [Spawn cars system]
+static void spawnCarsSystem(Commands cmds, Write<Spawner> spawner, Read<DeltaTime> deltaTime, Read<Assets> assets)
 {
     spawner->timer += deltaTime->value;
     if (spawner->timer >= 1.0F && spawner->y < 2)
@@ -122,7 +112,7 @@ static void spawnSystem(Commands cmds, Write<Spawner> spawner, Read<DeltaTime> d
             .add(Rotation{});
 
         spawner->timer = 0;
-        /// [Spawn system]
+        /// [Spawn cars system]
         spawner->x += 1;
         if (spawner->x == 2)
         {
@@ -132,8 +122,8 @@ static void spawnSystem(Commands cmds, Write<Spawner> spawner, Read<DeltaTime> d
     }
 }
 
-/// [Move system]
-static void moveSystem(Query<Write<Car>, Write<Position>, Write<Rotation>> query, Read<DeltaTime> deltaTime)
+/// [Move cars system]
+static void moveCarsSystem(Query<Write<Car>, Write<Position>, Write<Rotation>> query, Read<DeltaTime> deltaTime)
 {
     for (auto [entity, car, position, rotation] : query)
     {
@@ -144,7 +134,7 @@ static void moveSystem(Query<Write<Car>, Write<Position>, Write<Rotation>> query
         rotation->quat = glm::angleAxis(deltaTime->value * car->angVel, glm::vec3(0.0F, 1.0F, 0.0F)) * rotation->quat;
     }
 }
-/// [Move system]
+/// [Move cars system]
 
 int main(int argc, char** argv)
 {
@@ -159,14 +149,13 @@ int main(int argc, char** argv)
     cubos.addResource<Spawner>();
     /// [Adding component and resource]
 
-    /// [Adding systems]
     cubos.startupSystem(settingsSystem).tagged("cubos.settings");
-    cubos.startupSystem(setPalleteSystem).tagged("palette.set").after("cubos.renderer.init");
-    cubos.startupSystem(spawnFloorSystem).after("palette.set");
+    /// [Adding systems]
+    cubos.startupSystem(setPaletteAndCreateFloorSystem).after("cubos.renderer.init");
     cubos.startupSystem(spawnCameraSystem);
     cubos.startupSystem(spawnLightSystem);
-    cubos.system(spawnSystem);
-    cubos.system(moveSystem);
+    cubos.system(spawnCarsSystem);
+    cubos.system(moveCarsSystem);
     /// [Adding systems]
 
     cubos.run();
