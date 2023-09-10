@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <vector>
+#include <cstddef>
 
 namespace cubos::core::reflection
 {
@@ -123,7 +123,7 @@ namespace cubos::core::reflection
         /// @return Constructed trait.
         ConstructibleTrait build() &&
         {
-            return std::move(mTrait);
+            return mTrait;
         }
 
         /// @brief Sets the copy constructor of the type.
@@ -131,7 +131,7 @@ namespace cubos::core::reflection
         Builder&& withDefaultConstructor() &&
         {
             mTrait.withDefaultConstructor([](void* instance) { new (instance) T(); });
-            return std::move(*this);
+            return static_cast<Builder&&>(*this);
         }
 
         /// @brief Sets the copy constructor of the type.
@@ -140,7 +140,7 @@ namespace cubos::core::reflection
         {
             mTrait.withCopyConstructor(
                 [](void* instance, const void* other) { new (instance) T(*static_cast<const T*>(other)); });
-            return std::move(*this);
+            return static_cast<Builder&&>(*this);
         }
 
         /// @brief Sets the move constructor of the type.
@@ -148,8 +148,8 @@ namespace cubos::core::reflection
         Builder&& withMoveConstructor() &&
         {
             mTrait.withMoveConstructor(
-                [](void* instance, void* other) { new (instance) T(std::move(*static_cast<T*>(other))); });
-            return std::move(*this);
+                [](void* instance, void* other) { new (instance) T(static_cast<T&&>(*static_cast<T*>(other))); });
+            return static_cast<Builder&&>(*this);
         }
 
     private:
