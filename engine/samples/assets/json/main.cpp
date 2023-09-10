@@ -25,79 +25,80 @@ using cubos::core::memory::Stream;
 
 using namespace cubos::engine;
 
+/// [Asset type]
 /// A simple serializable type which we will be saving and loading.
 struct MyAsset
 {
-    int an_integer;
-    std::vector<std::string> some_strings;
+    int anInteger;
+    std::vector<std::string> someStrings;
 };
+/// [Asset type]
 
-// We must implement the cubos::core::data::serialize function for our type, so that it can be
-// serialized by the JSONBridge.
+/// [Serialization definition]
 template <>
 void cubos::core::data::serialize<MyAsset>(Serializer& ser, const MyAsset& obj, const char* name)
 {
     ser.beginObject(name);
-    ser.write(obj.an_integer, "an_integer");
-    ser.write(obj.some_strings, "some_strings");
+    ser.write(obj.anInteger, "anInteger");
+    ser.write(obj.someStrings, "someStrings");
     ser.endObject();
 }
 
-// We must also implement the cubos::core::data::deserialize function for our type, so that it can
-// be deserialized by the JSONBridge.
 template <>
 void cubos::core::data::deserialize<MyAsset>(Deserializer& des, MyAsset& obj)
 {
     des.beginObject();
-    des.read(obj.an_integer);
-    des.read(obj.some_strings);
+    des.read(obj.anInteger);
+    des.read(obj.someStrings);
     des.endObject();
 }
+/// [Serialization definition]
 
-static void config(Write<Settings> settings)
+/// [Setting]
+static void configSystem(Write<Settings> settings)
 {
-    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
-
     // If we want to save assets, we must set this to false.
     settings->setBool("assets.io.readOnly", false);
+    /// [Setting]
+
+    settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
 }
 
-static void bridge(Write<Assets> assets)
+/// [Register bridge]
+static void bridgeSystem(Write<Assets> assets)
 {
-    // Add the a JSONBridge for the .my extension.
     assets->registerBridge(".my", std::make_unique<JSONBridge<MyAsset>>());
 }
+/// [Register bridge]
 
-static void save_and_load(Write<Assets> assets)
+/// [Create a new asset]
+static void saveAndLoadSystem(Write<Assets> assets)
 {
     // Create a new asset (with a random UUID).
     auto handle = assets->create(MyAsset{
-        .an_integer = 42,
-        .some_strings = {"Hello", "World"},
+        .anInteger = 42,
+        .someStrings = {"Hello", "World"},
     });
+    /// [Create a new asset]
 
-    // Set a path for the asset - necessary for the JSONBridge to know where to save the asset.
-    // It is important to set the correct extension, so that the asset manager knows which bridge
-    // to use.
+    /// [Save the asset]
     assets->writeMeta(handle)->set("path", "/assets/sample/asset.my");
-
-    // Save the asset.
     assets->save(handle);
+    /// [Save the asset]
 
-    // After making the handle weak, the asset won't have any more strong references.
-    handle.makeWeak();
+    /// [Force reload]
+    assets->invalidate(handle);
+    /// [Force reload]
 
-    // By calling cleanup, we can remove the asset from memory, forcing it to be reloaded from disk
-    // the next time it is accessed.
-    assets->cleanup();
-
+    /// [Read the asset]
     // Access the asset - will be loaded automatically.
     auto read = assets->read(handle);
-    Stream::stdOut.printf("Integer: {}\n", read->an_integer);
-    for (const auto& str : read->some_strings)
+    Stream::stdOut.printf("Integer: {}\n", read->anInteger);
+    for (const auto& str : read->someStrings)
     {
         Stream::stdOut.printf("String: {}\n", str);
     }
+    /// [Read the asset]
 
     // Wait for input before exiting.
     Stream::stdOut.print("You can now check the contents of the file!\nPress enter to exit...");
@@ -107,13 +108,14 @@ static void save_and_load(Write<Assets> assets)
     FileSystem::destroy("/assets/sample");
 }
 
+/// [Run]
 int main()
 {
-    auto cubos = Cubos();
+    Cubos cubos{};
     cubos.addPlugin(assetsPlugin);
-    cubos.startupSystem(config).tagged("cubos.settings");
-    cubos.startupSystem(bridge).tagged("cubos.assets.bridge");
-    cubos.startupSystem(save_and_load).tagged("cubos.assets");
+    cubos.startupSystem(configSystem).tagged("cubos.settings");
+    cubos.startupSystem(bridgeSystem).tagged("cubos.assets.bridge");
+    cubos.startupSystem(saveAndLoadSystem).tagged("cubos.assets");
     cubos.run();
-    return 0;
 }
+/// [Run]

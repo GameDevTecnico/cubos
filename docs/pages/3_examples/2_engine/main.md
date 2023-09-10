@@ -9,3 +9,4 @@ multiple plugins of the engine:
 - @subpage examples-engine-renderer - @copybrief examples-engine-renderer
 - @subpage examples-engine-scene - @copybrief examples-engine-scene
 - @subpage examples-engine-assets-bridge - @copybrief examples-engine-assets-bridge
+- @subpage examples-engine-assets-json - @copybrief examples-engine-assets-json
