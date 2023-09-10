@@ -43,6 +43,12 @@ namespace cubos::core::reflection
         /// @param destructor Function pointer to the destructor of the type.
         ConstructibleTrait(std::size_t size, std::size_t alignment, void (*destructor)(void*));
 
+        /// @brief Returns a trait builder for the given type.
+        /// @tparam T Type to build a trait for.
+        /// @return Trait builder.
+        template <typename T>
+        static Builder<T> builder();
+
         /// @brief Sets the default constructor of the type.
         ///
         /// Aborts if the default constructor has already been set.
@@ -66,12 +72,6 @@ namespace cubos::core::reflection
         /// @param moveConstructor Function pointer to the move constructor of the type.
         /// @return Reference to this object.
         ConstructibleTrait& withMoveConstructor(MoveConstructor moveConstructor);
-
-        /// @brief Returns a trait builder for the given type.
-        /// @tparam T Type to build a trait for.
-        /// @return Trait builder.
-        template <typename T>
-        static Builder<T> builder();
 
         /// @brief Returns the size of the type in bytes.
         /// @return Size of the type in bytes.
