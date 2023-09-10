@@ -9,6 +9,8 @@
 namespace cubos::core::reflection
 {
     /// @brief Describes how a reflected type may be constructed and destructed.
+    /// @see See @ref examples-core-reflection-traits-constructible for an example of using this
+    /// trait.
     /// @ingroup core-reflection
     class ConstructibleTrait
     {
