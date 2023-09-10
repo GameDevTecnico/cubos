@@ -49,6 +49,6 @@ void cubos::engine::transformPlugin(Cubos& cubos)
     cubos.addComponent<Scale>();
     cubos.addComponent<LocalToWorld>();
 
-    cubos.system(autoLocalToWorld).beforeTag("cubos.transform.update");
+    cubos.system(autoLocalToWorld).before("cubos.transform.update");
     cubos.system(applyTransform).tagged("cubos.transform.update");
 }
