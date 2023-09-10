@@ -127,7 +127,7 @@ namespace cubos::core::reflection
         }
 
         /// @brief Sets the copy constructor of the type.
-        /// @return Reference to this object.
+        /// @return Builder.
         Builder&& withDefaultConstructor() &&
         {
             mTrait.withDefaultConstructor([](void* instance) { new (instance) T(); });
@@ -135,7 +135,7 @@ namespace cubos::core::reflection
         }
 
         /// @brief Sets the copy constructor of the type.
-        /// @return Reference to this object.
+        /// @return Builder.
         Builder&& withCopyConstructor() &&
         {
             mTrait.withCopyConstructor(
@@ -144,7 +144,7 @@ namespace cubos::core::reflection
         }
 
         /// @brief Sets the move constructor of the type.
-        /// @return Reference to this object.
+        /// @return Builder.
         Builder&& withMoveConstructor() &&
         {
             mTrait.withMoveConstructor(
