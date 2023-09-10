@@ -41,7 +41,12 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename T), (Templated<T>))
 TEST_CASE("reflection::reflect")
 {
     CHECK(reflect<Internal>().name() == "Internal");
+    CHECK(reflect<Internal>().is<Internal>());
+
     CHECK(reflect<External>().name() == "External");
+    CHECK(reflect<External>().is<External>());
+    CHECK_FALSE(reflect<External>().is<Internal>());
+
     CHECK(reflect<Templated<Internal>>().name() == "Templated<Internal>");
     CHECK(reflect<Templated<External>>().name() == "Templated<External>");
     CHECK(reflect<Templated<Templated<Internal>>>().name() == "Templated<Templated<Internal>>");
