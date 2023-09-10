@@ -37,6 +37,15 @@ namespace cubos::core::reflection
         /// @return Name of the type.
         const std::string& name() const;
 
+        /// @brief Checks if this type represents the type @p T.
+        /// @tparam T Type to check.
+        /// @return Whether this type represents the type @p T.
+        template <typename T>
+        bool is() const
+        {
+            return this == &reflect<T>();
+        }
+
         /// @brief Adds the given trait to the type.
         ///
         /// Aborts if the trait is already present in the type.
