@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/io/ directory | CUBOS.</title>
+  <title>cubos::core::io::GamepadState struct | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,32 +44,96 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span>io<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1io.html">io</a>::<wbr/></span>GamepadState <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
         </h1>
-        <p><a href="group__core-io.html" class="m-doc">Input and output</a> module.</p>
+        <p>Holds the state of a gamepad.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="cursor_8hpp.html" class="m-doc">cursor.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Cursor</a>.</dd>
-            <dt>file <a href="gamepad_8hpp.html" class="m-doc">gamepad.hpp</a></dt>
-            <dd>Struct Gref <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />GamepadState</a> and related enums.</dd>
-            <dt>file <a href="keyboard_8hpp.html" class="m-doc">keyboard.hpp</a></dt>
-            <dd>Enums <a href="group__core-io.html#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Key</a> and <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Modifiers</a>.</dd>
-            <dt>file <a href="window_8hpp.html" class="m-doc">window.hpp</a></dt>
-            <dd>Class <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Window</a> and related types.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a236038063456520833946101e980049e" class="m-doc">pressed</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a> button) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if a button is pressed.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a31e6203e8b68613699a208ab5dd6ded9" class="m-doc">axis</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a> axis) const -&gt; float</span>
+            </dt>
+            <dd>Gets the value of an axis.</dd>
           </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="abb5fe1f73b32c2c540552e9698cb2569">
+              bool <a href="#abb5fe1f73b32c2c540552e9698cb2569" class="m-doc-self">buttons</a>
+            </dt>
+            <dd>Which buttons are pressed, indexed by <a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a>.</dd>
+            <dt id="a11aed9300e16cd53d7b7e87b6571ab4e">
+              float <a href="#a11aed9300e16cd53d7b7e87b6571ab4e" class="m-doc-self">axes</a>
+            </dt>
+            <dd>Values of the axes, indexed by <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a>.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a236038063456520833946101e980049e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />io::<wbr />GamepadState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a236038063456520833946101e980049e" class="m-doc-self">pressed</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a> button) const</span></span>
+            </h3>
+            <p>Checks if a button is pressed.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">button</td>
+                  <td>Button to check.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether it is pressed or not.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a31e6203e8b68613699a208ab5dd6ded9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">float cubos::<wbr />core::<wbr />io::<wbr />GamepadState::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a31e6203e8b68613699a208ab5dd6ded9" class="m-doc-self">axis</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a> axis) const</span></span>
+            </h3>
+            <p>Gets the value of an axis.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">axis</td>
+                  <td>Axis to get the value of.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Value of the axis.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

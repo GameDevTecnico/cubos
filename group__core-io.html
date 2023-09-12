@@ -67,6 +67,8 @@
           <dl class="m-doc">
             <dt>file <a href="cursor_8hpp.html" class="m-doc">cursor.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Cursor</a>.</dd>
+            <dt>file <a href="gamepad_8hpp.html" class="m-doc">gamepad.hpp</a></dt>
+            <dd>Struct Gref <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />GamepadState</a> and related enums.</dd>
             <dt>file <a href="keyboard_8hpp.html" class="m-doc">keyboard.hpp</a></dt>
             <dd>Enums <a href="group__core-io.html#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Key</a> and <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">cubos::<wbr />core::<wbr />io::<wbr />Modifiers</a>.</dd>
             <dt>file <a href="window_8hpp.html" class="m-doc">window.hpp</a></dt>
@@ -80,6 +82,10 @@
               class <a href="classcubos_1_1core_1_1io_1_1Cursor.html" class="m-doc">cubos::core::io::Cursor</a>
             </dt>
             <dd>Handle for a custom mouse cursor.</dd>
+            <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">cubos::core::io::GamepadState</a>
+            </dt>
+            <dd>Holds the state of a gamepad.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1io_1_1KeyEvent.html" class="m-doc">cubos::core::io::KeyEvent</a>
             </dt>
@@ -109,6 +115,10 @@
             </dt>
             <dd>Event sent when a unicode character is input.</dd>
             <dt>
+              struct <a href="structcubos_1_1core_1_1io_1_1GamepadConnectionEvent.html" class="m-doc">cubos::core::io::GamepadConnectionEvent</a>
+            </dt>
+            <dd>Event sent when a gamepad is connected or disconnected.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1io_1_1BaseWindow.html" class="m-doc">cubos::core::io::BaseWindow</a>
             </dt>
             <dd>Interface used to wrap low-level window API implementations.</dd>
@@ -117,6 +127,37 @@
         <section id="enum-members">
           <h2><a href="#enum-members">Enums</a></h2>
           <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a> { </span><span class="m-doc-wrap"><a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a4bbb8f967da6d1a610596d7257179c2b" class="m-doc">Invalid</a> = -1,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a7fc56270e7a70fa81a5935b72eacbe29" class="m-doc">A</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a9d5ed678fe57bcca610140957afab571" class="m-doc">B</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a02129bb861061d1a052c592e2dc6b383" class="m-doc">X</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a57cec4137b614c87cb4e24a3d003a3e0" class="m-doc">Y</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4ac7717d90a009a154865cd2c748b90184" class="m-doc">LBumper</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a953ec0564bc475afbcc3263efa42b708" class="m-doc">RBumper</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a0557fa923dcee4d0f86b1409f5c2167f" class="m-doc">Back</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4aa6122a65eaa676f700ae68d393054a37" class="m-doc">Start</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a6602bbeb2956c035fb4cb5e844a4861b" class="m-doc">Guide</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4aa459ba7fb2f974adf6eba980f35f8d14" class="m-doc">LThumb</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a787cce7d516ae441abe97ffff79b08c8" class="m-doc">RThumb</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a258f49887ef8d14ac268c92b02503aaa" class="m-doc">Up</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a92b09c7c48c520c3c55e497875da437c" class="m-doc">Right</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a08a38277b0309070706f6652eeae9a53" class="m-doc">Down</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4a945d5e233cf7d6240f6b783b36a374ff" class="m-doc">Left</a>,
+              <a href="#gga9a6ec8108e1db5d1fd30d85dc39e4be4ae93f994f01c537c4e2f7d8528c3eb5e9" class="m-doc">Count</a> }</span>
+            </dt>
+            <dd>Gamepad buttons.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum class <a href="#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a> { </span><span class="m-doc-wrap"><a href="#ggaf04965ccbc878e3989398001644ca510a4bbb8f967da6d1a610596d7257179c2b" class="m-doc">Invalid</a> = -1,
+              <a href="#ggaf04965ccbc878e3989398001644ca510ab4b6e894569917b9ca2210bae107c888" class="m-doc">LX</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510ac2d75724334cab079503451aab65ba04" class="m-doc">LY</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510af9c24782c24c237d16e79f18e2fa9046" class="m-doc">RX</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510accb21680cb44cbc3715ed8acc0145efe" class="m-doc">RY</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510ac3b28f14adda15541f23ae21582f5e71" class="m-doc">LTrigger</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510a7a1c91b1da9e7c5a1d3b9321e853005a" class="m-doc">RTrigger</a>,
+              <a href="#ggaf04965ccbc878e3989398001644ca510ae93f994f01c537c4e2f7d8528c3eb5e9" class="m-doc">Count</a> }</span>
+            </dt>
+            <dd>Gamepad axes.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">enum class <a href="#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc">Key</a> { </span><span class="m-doc-wrap"><a href="#gga4c20baefc9a6688f17f283b5aa272341a4bbb8f967da6d1a610596d7257179c2b" class="m-doc">Invalid</a> = -1,
               <a href="#gga4c20baefc9a6688f17f283b5aa272341a7fc56270e7a70fa81a5935b72eacbe29" class="m-doc">A</a>,
@@ -255,7 +296,7 @@
           <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
             <dt>
-              using <a href="#gac246d098dc508ff511ed8919c61a6a40" class="m-doc">WindowEvent</a> = std::variant&lt;KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent, ResizeEvent, TextEvent&gt;
+              using <a href="#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a> = std::variant&lt;KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent, ResizeEvent, TextEvent, GamepadConnectionEvent&gt;
             </dt>
             <dd>Variant that can hold any of the window events.</dd>
             <dt>
@@ -267,6 +308,22 @@
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga3635b2f364affa70b826fd221d07abe3" class="m-doc">gamepadButtonToString</a>(</span><span class="m-doc-wrap">GamepadButton button) -&gt; std::string</span>
+            </dt>
+            <dd>Converts a <a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a> enum to a string.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#gadad228339d3b619bdbcf34ae33570f22" class="m-doc">stringToGamepadButton</a>(</span><span class="m-doc-wrap">const std::string&amp; str) -&gt; GamepadButton</span>
+            </dt>
+            <dd>Converts a string to a <a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga221548ec7bb07ba722314c646a311aad" class="m-doc">gamepadAxisToString</a>(</span><span class="m-doc-wrap">GamepadAxis axis) -&gt; std::string</span>
+            </dt>
+            <dd>Convert a <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a> to a string.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga8ec4e60e5078e9f1980484b712a72e9b" class="m-doc">stringToGamepadAxis</a>(</span><span class="m-doc-wrap">const std::string&amp; str) -&gt; GamepadAxis</span>
+            </dt>
+            <dd>Convert a string to a <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#gaba975a725a92abf473fef4a82277fd90" class="m-doc">modifiersToString</a>(</span><span class="m-doc-wrap">Modifiers modifiers) -&gt; std::string</span>
             </dt>
@@ -292,6 +349,20 @@
         </section>
         <section>
           <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="ga9a6ec8108e1db5d1fd30d85dc39e4be4"><div>
+            <h3>
+              enum class <a href="#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc-self">GamepadButton</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Gamepad buttons.</p>
+          </div></section>
+          <section class="m-doc-details" id="gaf04965ccbc878e3989398001644ca510"><div>
+            <h3>
+              enum class <a href="#gaf04965ccbc878e3989398001644ca510" class="m-doc-self">GamepadAxis</a>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Gamepad axes.</p>
+          </div></section>
           <section class="m-doc-details" id="ga4c20baefc9a6688f17f283b5aa272341"><div>
             <h3>
               enum class <a href="#ga4c20baefc9a6688f17f283b5aa272341" class="m-doc-self">Key</a>
@@ -389,9 +460,9 @@
         </section>
         <section>
           <h2>Typedef documentation</h2>
-          <section class="m-doc-details" id="gac246d098dc508ff511ed8919c61a6a40"><div>
+          <section class="m-doc-details" id="ga95a66bffef72bc872aa3bff8d9e5d56c"><div>
             <h3>
-              using <a href="#gac246d098dc508ff511ed8919c61a6a40" class="m-doc-self">WindowEvent</a> = std::variant&lt;KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent, ResizeEvent, TextEvent&gt;
+              using <a href="#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc-self">WindowEvent</a> = std::variant&lt;KeyEvent, ModifiersEvent, MouseButtonEvent, MouseMoveEvent, MouseScrollEvent, ResizeEvent, TextEvent, GamepadConnectionEvent&gt;
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="window_8hpp.html">&lt;core/io/window.hpp&gt;</a></div>
             </h3>
             <p>Variant that can hold any of the window events.</p>
@@ -407,6 +478,102 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ga3635b2f364affa70b826fd221d07abe3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga3635b2f364affa70b826fd221d07abe3" class="m-doc-self">gamepadButtonToString</a>(</span><span class="m-doc-wrap">GamepadButton button)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Converts a <a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a> enum to a string.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">button</td>
+                  <td>Button to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String representation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gadad228339d3b619bdbcf34ae33570f22"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">GamepadButton </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gadad228339d3b619bdbcf34ae33570f22" class="m-doc-self">stringToGamepadButton</a>(</span><span class="m-doc-wrap">const std::string&amp; str)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Converts a string to a <a href="group__core-io.html#ga9a6ec8108e1db5d1fd30d85dc39e4be4" class="m-doc">GamepadButton</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">str</td>
+                  <td>String to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Button.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga221548ec7bb07ba722314c646a311aad"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga221548ec7bb07ba722314c646a311aad" class="m-doc-self">gamepadAxisToString</a>(</span><span class="m-doc-wrap">GamepadAxis axis)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Convert a <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a> to a string.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">axis</td>
+                  <td>Axis to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String representation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ga8ec4e60e5078e9f1980484b712a72e9b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">GamepadAxis </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga8ec4e60e5078e9f1980484b712a72e9b" class="m-doc-self">stringToGamepadAxis</a>(</span><span class="m-doc-wrap">const std::string&amp; str)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gamepad_8hpp.html">&lt;core/io/gamepad.hpp&gt;</a></div>
+            </h3>
+            <p>Convert a string to a <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">GamepadAxis</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">str</td>
+                  <td>String to convert.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Axis.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="gaba975a725a92abf473fef4a82277fd90"><div>
             <h3>
               <span class="m-doc-wrap-bumper">std::string </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaba975a725a92abf473fef4a82277fd90" class="m-doc-self">modifiersToString</a>(</span><span class="m-doc-wrap">Modifiers modifiers)</span></span>

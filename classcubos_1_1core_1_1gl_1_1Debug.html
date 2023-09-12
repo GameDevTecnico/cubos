@@ -67,6 +67,14 @@
             </dt>
             <dd>Initializes the debug rendering system.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">static void <a href="#a23b5ef10e87adb99629b863179d1f173" class="m-doc">drawLine</a>(</span><span class="m-doc-wrap">glm::vec3 start,
+              glm::vec3 end,
+              bool relative = false,
+              glm::vec3 color = glm::vec3(1),
+              float time = 0.0F)</span>
+            </dt>
+            <dd>Draws a line that will stay visible for a specified amount of time.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">static void <a href="#aff7dc73f9a3e6b3e5a3b78bc791eeff6" class="m-doc">drawBox</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">geom::<wbr />Box</a> box,
               glm::mat4 transform,
               glm::vec3 color = glm::vec3(1),
@@ -120,6 +128,43 @@
                 <tr>
                   <td style="width: 1%">renderDevice</td>
                   <td>Render device to use.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a23b5ef10e87adb99629b863179d1f173"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />core::<wbr />gl::<wbr />Debug::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a23b5ef10e87adb99629b863179d1f173" class="m-doc-self">drawLine</a>(</span><span class="m-doc-wrap">glm::vec3 start,
+              glm::vec3 end,
+              bool relative = false,
+              glm::vec3 color = glm::vec3(1),
+              float time = 0.0F)</span></span>
+            </h3>
+            <p>Draws a line that will stay visible for a specified amount of time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">start</td>
+                  <td>Starting point of the line.</td>
+                </tr>
+                <tr>
+                  <td>end</td>
+                  <td>Ending point of the line.</td>
+                </tr>
+                <tr>
+                  <td>relative</td>
+                  <td>Whether the ending point is relative to the starting point.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>Color of the drawn line.</td>
+                </tr>
+                <tr>
+                  <td>time</td>
+                  <td>How long will it be visible for? If 0, for a single frame.</td>
                 </tr>
               </tbody>
             </table>

@@ -65,11 +65,11 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a57bbad4140153d361376bf488c981749" class="m-doc">pushEvent</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#gac246d098dc508ff511ed8919c61a6a40" class="m-doc">WindowEvent</a>&amp;&amp; event)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a57bbad4140153d361376bf488c981749" class="m-doc">pushEvent</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a>&amp;&amp; event)</span>
             </dt>
             <dd>Pushes an event to the event queue.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae3b031461afa25aec64fe7ffa077bd5e" class="m-doc">pollEvent</a>(</span><span class="m-doc-wrap">) -&gt; std::optional&lt;<a href="group__core-io.html#gac246d098dc508ff511ed8919c61a6a40" class="m-doc">WindowEvent</a>&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae3b031461afa25aec64fe7ffa077bd5e" class="m-doc">pollEvent</a>(</span><span class="m-doc-wrap">) -&gt; std::optional&lt;<a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a>&gt;</span>
             </dt>
             <dd>Polls the window for events.</dd>
             <dt id="a4a592436f7f4c8e1947b2de9e32688a0">
@@ -129,6 +129,11 @@
               <a href="group__core-io.html#gad9bb6ed019dd984f94ece386e31f4493" class="m-doc">Modifiers</a> modifiers = <a href="group__core-io.html#ggad9bb6ed019dd984f94ece386e31f4493a6adf97f83acf6453d4a6a4b1070f3754" class="m-doc">Modifiers::<wbr />None</a>) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Checks if a key is currently pressed with (at least) the given modifiers.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac1137b9cdcdd244996623097f948bb35" class="m-doc">gamepadState</a>(</span><span class="m-doc-wrap">int gamepad,
+              <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">GamepadState</a>&amp; state) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets the state of the specified gamepad.</dd>
           </dl>
         </section>
         <section id="pro-methods">
@@ -144,7 +149,7 @@
           <h2>Function documentation</h2>
           <section class="m-doc-details" id="a57bbad4140153d361376bf488c981749"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a57bbad4140153d361376bf488c981749" class="m-doc-self">pushEvent</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#gac246d098dc508ff511ed8919c61a6a40" class="m-doc">WindowEvent</a>&amp;&amp; event)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a57bbad4140153d361376bf488c981749" class="m-doc-self">pushEvent</a>(</span><span class="m-doc-wrap"><a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a>&amp;&amp; event)</span></span>
             </h3>
             <p>Pushes an event to the event queue.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -161,7 +166,7 @@
           </div></section>
           <section class="m-doc-details" id="ae3b031461afa25aec64fe7ffa077bd5e"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::optional&lt;<a href="group__core-io.html#gac246d098dc508ff511ed8919c61a6a40" class="m-doc">WindowEvent</a>&gt; cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae3b031461afa25aec64fe7ffa077bd5e" class="m-doc-self">pollEvent</a>(</span><span class="m-doc-wrap">)</span></span>
+              <span class="m-doc-wrap-bumper">std::optional&lt;<a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">WindowEvent</a>&gt; cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae3b031461afa25aec64fe7ffa077bd5e" class="m-doc-self">pollEvent</a>(</span><span class="m-doc-wrap">)</span></span>
             </h3>
             <p>Polls the window for events.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -384,6 +389,34 @@
                 <tr>
                   <th>Returns</th>
                   <td>Whether the key and modifiers (or a superset of) are currently pressed.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac1137b9cdcdd244996623097f948bb35"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />io::<wbr />BaseWindow::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac1137b9cdcdd244996623097f948bb35" class="m-doc-self">gamepadState</a>(</span><span class="m-doc-wrap">int gamepad,
+              <a href="structcubos_1_1core_1_1io_1_1GamepadState.html" class="m-doc">GamepadState</a>&amp; state) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets the state of the specified gamepad.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">gamepad</td>
+                  <td>Gamepad to get the state of.</td>
+                </tr>
+                <tr>
+                  <td>state</td>
+                  <td><a href="structState.html" class="m-doc">State</a> to fill with the gamepad state.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the gamepad was found.</td>
                 </tr>
               </tfoot>
             </table>
