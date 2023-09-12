@@ -17,25 +17,25 @@ ConstructibleTrait::ConstructibleTrait(std::size_t size, std::size_t alignment, 
     CUBOS_ASSERT(mDestructor, "Destructor must be non-null");
 }
 
-ConstructibleTrait& ConstructibleTrait::withDefaultConstructor(DefaultConstructor defaultConstructor)
+ConstructibleTrait&& ConstructibleTrait::withDefaultConstructor(DefaultConstructor defaultConstructor) &&
 {
     CUBOS_ASSERT(!mDefaultConstructor, "Default constructor already set");
     mDefaultConstructor = defaultConstructor;
-    return *this;
+    return static_cast<ConstructibleTrait&&>(*this);
 }
 
-ConstructibleTrait& ConstructibleTrait::withCopyConstructor(CopyConstructor copyConstructor)
+ConstructibleTrait&& ConstructibleTrait::withCopyConstructor(CopyConstructor copyConstructor) &&
 {
     CUBOS_ASSERT(!mCopyConstructor, "Copy constructor already set");
     mCopyConstructor = copyConstructor;
-    return *this;
+    return static_cast<ConstructibleTrait&&>(*this);
 }
 
-ConstructibleTrait& ConstructibleTrait::withMoveConstructor(MoveConstructor moveConstructor)
+ConstructibleTrait&& ConstructibleTrait::withMoveConstructor(MoveConstructor moveConstructor) &&
 {
     CUBOS_ASSERT(!mMoveConstructor, "Move constructor already set");
     mMoveConstructor = moveConstructor;
-    return *this;
+    return static_cast<ConstructibleTrait&&>(*this);
 }
 
 std::size_t ConstructibleTrait::size() const

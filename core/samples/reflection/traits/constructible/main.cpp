@@ -19,7 +19,7 @@ using cubos::core::reflection::Type;
 
 CUBOS_REFLECT_IMPL(Scale)
 {
-    return Type::create("Scale").with(ConstructibleTrait::builder<Scale>().withDefaultConstructor().build());
+    return Type::create("Scale").with(ConstructibleTrait::typed<Scale>().withDefaultConstructor().build());
 }
 /// [Scale definition]
 
