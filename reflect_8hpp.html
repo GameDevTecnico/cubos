@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core namespace | CUBOS.</title>
+  <title>core/reflection/reflect.hpp file | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,9 +44,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span>core <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_f4414684a5bb1e1b8e9ba236e8bdb594.html">reflection</a>/</span>reflect.hpp <span class="m-thin">file</span>
         </h1>
-        <p><a href="group__core.html" class="m-doc">Core</a> namespace.</p>
+        <p>Function <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />reflect</a> and related macros.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -56,57 +56,75 @@
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+<p>Meant to be as minimal as possible in order to keep compile times low.</p>
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos_1_1core_1_1al.html" class="m-doc">al</a></dt>
-            <dd><a href="group__core-al.html" class="m-doc">Audio</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1data.html" class="m-doc">data</a></dt>
-            <dd><a href="group__core-data.html" class="m-doc">Data</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ecs.html" class="m-doc">ecs</a></dt>
-            <dd><a href="group__core-ecs.html" class="m-doc">ECS</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">geom</a></dt>
-            <dd><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1gl.html" class="m-doc">gl</a></dt>
-            <dd><a href="group__core-gl.html" class="m-doc">Graphics</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1io.html" class="m-doc">io</a></dt>
-            <dd><a href="group__core-io.html" class="m-doc">Input and output</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1memory.html" class="m-doc">memory</a></dt>
-            <dd><a href="group__core-memory.html" class="m-doc">Memory</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1reflection.html" class="m-doc">reflection</a></dt>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1reflection.html" class="m-doc">cubos::core::reflection</a></dt>
             <dd><a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ui.html" class="m-doc">ui</a></dt>
-            <dd><a href="group__core-ui.html" class="m-doc">User Interface</a> module.</dd>
           </dl>
         </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classcubos_1_1core_1_1Settings.html" class="m-doc">Settings</a>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::core::reflection::Reflect</a>
             </dt>
-            <dd>Stores settings as key-value pairs and provides methods to retrieve them.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">ThreadPool</a>
-            </dt>
-            <dd>Manages a pool of threads, to which tasks can be submitted.</dd>
+            <dd>Defines the reflection function for the given type <code>T</code>.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core.html#gab23801234b8ff1ec70506039c7dc453a" class="m-doc">initializeLogger</a>(</span><span class="m-doc-wrap">)</span>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const Type&amp;</span>
             </dt>
-            <dd>Must be called before any logging is done.</dd>
+            <dd>Reflects the given type <code>T</code>.</dd>
+          </dl>
+        </section>
+        <section id="define-members">
+          <h2><a href="#define-members">Defines</a></h2>
+          <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core.html#ga0f297b68d596e1ddbe1d2cfea349197c" class="m-doc">disableLogging</a>(</span><span class="m-doc-wrap">)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gacf5ab7d1a0215259c832827a40d13b17" class="m-doc">CUBOS_PACK</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
-            <dd>Disables all logging except for critical errors.</dd>
+            <dd>Helper macro used to pass arguments with commas to other macros, wrapped in parentheses.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gac3d484b311cc3e471620653b289977ac" class="m-doc">CUBOS_REFLECT</a></span>
+            </dt>
+            <dd>Declares a reflection method.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#gabe4c61ca9774781ef107e74f89494663" class="m-doc">CUBOS_REFLECT_IMPL</a>(</span><span class="m-doc-wrap">T)</span>
+            </dt>
+            <dd>Defines a reflection method.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga80fc11ac1cde574a17ae424c106737b9" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL_TEMPLATE</a>(</span><span class="m-doc-wrap">T)</span>
+            </dt>
+            <dd>Declares a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a templated type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga8754fb03da700e485bbddcd3cfe5990d" class="m-doc">CUBOS_REFLECT_EXTERNAL_DECL</a>(</span><span class="m-doc-wrap">T)</span>
+            </dt>
+            <dd>Declares a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga1825cb321439299e6f528a5b34ebf0e6" class="m-doc">CUBOS_REFLECT_EXTERNAL_IMPL</a>(</span><span class="m-doc-wrap">T)</span>
+            </dt>
+            <dd>Implements a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">#define <a href="group__core-reflection.html#ga72591a0e4a14f0daab6ffa71f666b757" class="m-doc">CUBOS_REFLECT_EXTERNAL_TEMPLATE</a>(</span><span class="m-doc-wrap">args,
+              T)</span>
+            </dt>
+            <dd>Both declares and implements a specialization of <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Reflect</a> for a type.</dd>
           </dl>
         </section>
       </div>
