@@ -47,31 +47,31 @@ namespace cubos::core::reflection
         /// @tparam T Type to build a trait for.
         /// @return Trait builder.
         template <typename T>
-        static Builder<T> builder();
+        static Builder<T> typed();
 
         /// @brief Sets the default constructor of the type.
         ///
         /// Aborts if the default constructor has already been set.
         ///
         /// @param defaultConstructor Function pointer to the default constructor of the type.
-        /// @return Reference to this object.
-        ConstructibleTrait& withDefaultConstructor(DefaultConstructor defaultConstructor);
+        /// @return Trait.
+        ConstructibleTrait&& withDefaultConstructor(DefaultConstructor defaultConstructor) &&;
 
         /// @brief Sets the copy constructor of the type.
         ///
         /// Aborts if the copy constructor has already been set.
         ///
         /// @param copyConstructor Function pointer to the copy constructor of the type.
-        /// @return Reference to this object.
-        ConstructibleTrait& withCopyConstructor(CopyConstructor copyConstructor);
+        /// @return Trait.
+        ConstructibleTrait&& withCopyConstructor(CopyConstructor copyConstructor) &&;
 
         /// @brief Sets the move constructor of the type.
         ///
         /// Aborts if the copy constructor has already been set.
         ///
         /// @param moveConstructor Function pointer to the move constructor of the type.
-        /// @return Reference to this object.
-        ConstructibleTrait& withMoveConstructor(MoveConstructor moveConstructor);
+        /// @return Trait.
+        ConstructibleTrait&& withMoveConstructor(MoveConstructor moveConstructor) &&;
 
         /// @brief Returns the size of the type in bytes.
         /// @return Size of the type in bytes.
@@ -132,7 +132,8 @@ namespace cubos::core::reflection
         /// @return Builder.
         Builder&& withDefaultConstructor() &&
         {
-            mTrait.withDefaultConstructor([](void* instance) { new (instance) T(); });
+            mTrait = static_cast<ConstructibleTrait&&>(mTrait).withDefaultConstructor(
+                [](void* instance) { new (instance) T(); });
             return static_cast<Builder&&>(*this);
         }
 
@@ -140,7 +141,7 @@ namespace cubos::core::reflection
         /// @return Builder.
         Builder&& withCopyConstructor() &&
         {
-            mTrait.withCopyConstructor(
+            mTrait = static_cast<ConstructibleTrait&&>(mTrait).withCopyConstructor(
                 [](void* instance, const void* other) { new (instance) T(*static_cast<const T*>(other)); });
             return static_cast<Builder&&>(*this);
         }
@@ -149,7 +150,7 @@ namespace cubos::core::reflection
         /// @return Builder.
         Builder&& withMoveConstructor() &&
         {
-            mTrait.withMoveConstructor(
+            mTrait = static_cast<ConstructibleTrait&&>(mTrait).withMoveConstructor(
                 [](void* instance, void* other) { new (instance) T(static_cast<T&&>(*static_cast<T*>(other))); });
             return static_cast<Builder&&>(*this);
         }
@@ -159,7 +160,7 @@ namespace cubos::core::reflection
     };
 
     template <typename T>
-    ConstructibleTrait::Builder<T> ConstructibleTrait::builder()
+    ConstructibleTrait::Builder<T> ConstructibleTrait::typed()
     {
         return Builder<T>();
     }
