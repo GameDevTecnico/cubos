@@ -64,6 +64,6 @@ TEST_CASE("reflection::FieldsTrait")
         CHECK(fooField->pointerTo(&object) == &object.foo);
         CHECK(barField->name() == "bar");
         CHECK(barField->type().is<SimpleType>());
-        CHECK(barField->pointerTo(&object) == &object.bar);
+        CHECK(barField->pointerTo(static_cast<const ObjectType*>(&object)) == &object.bar);
     }
 }
