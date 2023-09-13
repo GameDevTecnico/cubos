@@ -1,6 +1,6 @@
-# Custom Asset Bridges {#examples-engine-assets-bridge}
+# Introducion and Custom Bridges {#examples-engine-assets-bridge}
 
-@brief Creating your own bridges for the @ref assets-plugin plugin.
+@brief Basic @ref assets-plugin plugin features and creating your own bridges.
 
 This example demonstrates how we can create a custom asset bridge to load
 assets of a given type. More specifically, we'll go through how we can create a

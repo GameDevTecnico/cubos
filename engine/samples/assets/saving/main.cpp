@@ -1,10 +1,9 @@
 #include <cubos/core/data/fs/file_system.hpp>
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/assets/bridges/json.hpp>
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/settings/settings.hpp>
 
-using cubos::core::Settings;
 using cubos::core::data::Deserializer;
 using cubos::core::data::FileSystem;
 using cubos::core::data::Serializer;
