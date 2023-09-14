@@ -23,7 +23,7 @@ static void inspectEntity(Write<World> world)
     {
         ImGui::BeginTable("showEntity", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
 
-        if (!selection.isNull())
+        if (!selection.isNull() && world->isAlive(selection))
         {
             auto pkg = world->pack(selection);
             if (editPackage(pkg, std::to_string(selection.index)))
