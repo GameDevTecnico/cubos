@@ -1,6 +1,3 @@
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/matrix_decompose.hpp>
-
 #include <cubos/core/ecs/query.hpp>
 #include <cubos/core/gl/camera.hpp>
 
@@ -69,15 +66,7 @@ static void frameSpotLights(Write<RendererFrame> frame, Query<Read<SpotLight>, R
 {
     for (auto [entity, light, localToWorld] : query)
     {
-        auto position = localToWorld->mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-        frame->light(cubos::core::gl::SpotLight{
-            {position.x, position.y, position.z},
-            glm::quat_cast(localToWorld->mat),
-            light->color,
-            light->intensity,
-            light->range,
-            light->spotAngle,
-        });
+        frame->light(localToWorld->mat, *light);
     }
 }
 
@@ -85,11 +74,7 @@ static void frameDirectionalLights(Write<RendererFrame> frame, Query<Read<Direct
 {
     for (auto [entity, light, localToWorld] : query)
     {
-        frame->light(cubos::core::gl::DirectionalLight{
-            glm::quat_cast(localToWorld->mat),
-            light->color,
-            light->intensity,
-        });
+        frame->light(localToWorld->mat, *light);
     }
 }
 
@@ -97,13 +82,7 @@ static void framePointLights(Write<RendererFrame> frame, Query<Read<PointLight>,
 {
     for (auto [entity, light, localToWorld] : query)
     {
-        auto position = localToWorld->mat * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-        frame->light(cubos::core::gl::PointLight{
-            {position.x, position.y, position.z},
-            light->color,
-            light->intensity,
-            light->range,
-        });
+        frame->light(localToWorld->mat, *light);
     }
 }
 

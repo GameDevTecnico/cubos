@@ -11,7 +11,6 @@
 
 #include <cubos/core/gl/camera.hpp>
 #include <cubos/core/gl/grid.hpp>
-#include <cubos/core/gl/light.hpp>
 #include <cubos/core/gl/palette.hpp>
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/gl/vertex.hpp>
