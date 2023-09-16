@@ -1,3 +1,5 @@
+#pragma once
+
 #include <concepts>
 
 #include <cubos/core/reflection/external/primitives.hpp>
