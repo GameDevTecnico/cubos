@@ -12,6 +12,7 @@ add_executable(
     reflection/traits/constructible.cpp
     reflection/traits/fields.cpp
     reflection/external/primitives.cpp
+    reflection/external/vector.cpp
 
     data/fs/embedded_archive.cpp
     data/fs/standard_archive.cpp
