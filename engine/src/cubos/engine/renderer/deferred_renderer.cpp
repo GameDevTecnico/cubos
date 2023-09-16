@@ -2,6 +2,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/compatibility.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
 #include <glm/gtx/quaternion.hpp>
 
 #include <cubos/core/gl/debug.hpp>
@@ -638,7 +639,7 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     lightData.ambientLight = glm::vec4(frame.ambient(), 1.0F);
 
     // Spotlights.
-    for (const auto& light : frame.spotLights())
+    for (const auto& [transform, light] : frame.spotLights())
     {
         if (lightData.numSpotLights >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
         {
@@ -648,8 +649,8 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
             break;
         }
 
-        lightData.spotLights[lightData.numSpotLights].position = glm::vec4(light.position, 1.0F);
-        lightData.spotLights[lightData.numSpotLights].rotation = glm::toMat4(light.rotation);
+        lightData.spotLights[lightData.numSpotLights].position = transform * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
+        lightData.spotLights[lightData.numSpotLights].rotation = glm::toMat4(glm::quat_cast(transform));
         lightData.spotLights[lightData.numSpotLights].color = glm::vec4(light.color, 1.0F);
         lightData.spotLights[lightData.numSpotLights].intensity = light.intensity;
         lightData.spotLights[lightData.numSpotLights].range = light.range;
@@ -658,7 +659,7 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     }
 
     // Directional lights.
-    for (const auto& light : frame.directionalLights())
+    for (const auto& [transform, light] : frame.directionalLights())
     {
         if (lightData.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
         {
@@ -668,14 +669,14 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
             break;
         }
 
-        lightData.directionalLights[lightData.numDirectionalLights].rotation = glm::toMat4(light.rotation);
+        lightData.directionalLights[lightData.numDirectionalLights].rotation = glm::toMat4(glm::quat_cast(transform));
         lightData.directionalLights[lightData.numDirectionalLights].color = glm::vec4(light.color, 1.0F);
         lightData.directionalLights[lightData.numDirectionalLights].intensity = light.intensity;
         lightData.numDirectionalLights += 1;
     }
 
     // Point lights.
-    for (const auto& light : frame.pointLights())
+    for (const auto& [transform, light] : frame.pointLights())
     {
         if (lightData.numPointLights >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
         {
@@ -684,7 +685,7 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
                        CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT);
             break;
         }
-        lightData.pointLights[lightData.numPointLights].position = glm::vec4(light.position, 1.0F);
+        lightData.pointLights[lightData.numPointLights].position = transform * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
         lightData.pointLights[lightData.numPointLights].color = glm::vec4(light.color, 1.0F);
         lightData.pointLights[lightData.numPointLights].intensity = light.intensity;
         lightData.pointLights[lightData.numPointLights].range = light.range;

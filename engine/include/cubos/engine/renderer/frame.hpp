@@ -6,7 +6,10 @@
 
 #include <vector>
 
+#include <cubos/engine/renderer/directional_light.hpp>
+#include <cubos/engine/renderer/point_light.hpp>
 #include <cubos/engine/renderer/renderer.hpp>
+#include <cubos/engine/renderer/spot_light.hpp>
 
 namespace cubos::engine
 {
@@ -44,16 +47,19 @@ namespace cubos::engine
         void skyGradient(glm::vec3 bottom, glm::vec3 top);
 
         /// @brief Adds a spot light to the frame.
+        /// @param transform Light transform matrix.
         /// @param light Spot light to add.
-        void light(const core::gl::SpotLight& light);
+        void light(glm::mat4 transform, const SpotLight& light);
 
         /// @brief Adds a directional light to the frame.
+        /// @param transform Light transform matrix.
         /// @param light Directional light to add.
-        void light(const core::gl::DirectionalLight& light);
+        void light(glm::mat4 transform, const DirectionalLight& light);
 
         /// @brief Adds a point light to the frame.
+        /// @param transform Light transform matrix.
         /// @param light Point light to add.
-        void light(const core::gl::PointLight& light);
+        void light(glm::mat4 transform, const PointLight& light);
 
         /// @brief Clears the frame, removing all draw calls and lights.
         void clear();
@@ -73,22 +79,22 @@ namespace cubos::engine
 
         /// @brief Gets the spot lights of the frame.
         /// @return Spot lights.
-        const std::vector<core::gl::SpotLight>& spotLights() const;
+        const std::vector<std::pair<glm::mat4, SpotLight>>& spotLights() const;
 
         /// @brief Gets the directional lights of the frame.
         /// @return Directional lights.
-        const std::vector<core::gl::DirectionalLight>& directionalLights() const;
+        const std::vector<std::pair<glm::mat4, DirectionalLight>>& directionalLights() const;
 
         /// @brief Gets the point lights of the frame.
         /// @return Point lights.
-        const std::vector<core::gl::PointLight>& pointLights() const;
+        const std::vector<std::pair<glm::mat4, PointLight>>& pointLights() const;
 
     private:
         glm::vec3 mAmbientColor;
         glm::vec3 mSkyGradient[2];
         std::vector<DrawCmd> mDrawCmds;
-        std::vector<core::gl::SpotLight> mSpotLights;
-        std::vector<core::gl::DirectionalLight> mDirectionalLights;
-        std::vector<core::gl::PointLight> mPointLights;
+        std::vector<std::pair<glm::mat4, SpotLight>> mSpotLights;
+        std::vector<std::pair<glm::mat4, DirectionalLight>> mDirectionalLights;
+        std::vector<std::pair<glm::mat4, PointLight>> mPointLights;
     };
 } // namespace cubos::engine
