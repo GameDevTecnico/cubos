@@ -5,12 +5,14 @@
 #include <cubos/core/gl/camera.hpp>
 
 #include <cubos/engine/renderer/deferred_renderer.hpp>
+#include <cubos/engine/renderer/directional_light.hpp>
 #include <cubos/engine/renderer/environment.hpp>
 #include <cubos/engine/renderer/frame.hpp>
-#include <cubos/engine/renderer/light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/renderer/point_light.hpp>
 #include <cubos/engine/renderer/pps/bloom.hpp>
 #include <cubos/engine/settings/plugin.hpp>
+#include <cubos/engine/renderer/spot_light.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
