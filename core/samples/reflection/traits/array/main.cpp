@@ -1,0 +1,52 @@
+#include <cubos/core/log.hpp>
+
+/// [Printing any array]
+#include <cubos/core/reflection/traits/array.hpp>
+#include <cubos/core/reflection/type.hpp>
+
+using cubos::core::reflection::ArrayTrait;
+using cubos::core::reflection::Type;
+
+void printArray(const Type& type, const void* instance)
+{
+    const auto& arrayTrait = type.get<ArrayTrait>();
+    /// [Printing any array]
+
+    /// [Getting array length and type]
+    CUBOS_INFO("Array with {} elements of type {}", arrayTrait.length(instance), arrayTrait.elementType().name());
+    /// [Getting array length and type]
+
+    /// [Getting array elements]
+    if (!arrayTrait.elementType().is<int>())
+    {
+        CUBOS_INFO("This function does not support printing arrays of types other than int");
+        return;
+    }
+
+    for (std::size_t i = 0; i < arrayTrait.length(instance); ++i)
+    {
+        CUBOS_INFO("Element {}: {}", i, *static_cast<const int*>(arrayTrait.get(instance, i)));
+    }
+}
+/// [Getting array elements]
+
+/// [Typed wrapper]
+template <typename T>
+void printArray(const T& array)
+{
+    using cubos::core::reflection::reflect;
+
+    printArray(reflect<T>(), &array);
+}
+/// [Typed wrapper]
+
+/// [Usage]
+#include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/vector.hpp>
+
+int main()
+{
+    std::vector<int> vec = {1, 1, 2, 3, 5, 8, 13};
+    printArray(vec);
+}
+/// [Usage]
