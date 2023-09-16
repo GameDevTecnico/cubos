@@ -100,6 +100,11 @@
               <span class="m-doc-wrap-bumper">auto <a href="#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const Type&amp;</span>
             </dt>
             <dd>Reflects the given type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#gaecd81749630d84a2baa8afb81568bb94" class="m-doc">autoConstructibleTrait</a>(</span><span class="m-doc-wrap">) -&gt; ConstructibleTrait</span>
+            </dt>
+            <dd>Returns a <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a> with the default, copy and move constructors, set only if the type has them.</dd>
           </dl>
         </section>
         <section id="define-members">
@@ -165,6 +170,34 @@
               </tfoot>
             </table>
 <p>Fails to compile if the type does not implement reflection, or, in the case of external types, if its reflection specialization has not been included.</p><p>Internally, this function stores a static instance of the reflection data for the given type. Thus the reflection data is only initialized once, the first time this function is called, which means that the returned reference can be safely used as an identifier for the type.</p><p>The reflection data is obtained by calling the <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html#ac73716e7a51f89587ee57df043ca3886" class="m-doc">Reflect&lt;T&gt;::<wbr />type()</a> function.</p>
+          </div></section>
+          <section class="m-doc-details" id="gaecd81749630d84a2baa8afb81568bb94"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="constructible__utils_8hpp.html">&lt;core/reflection/traits/constructible_utils.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">ConstructibleTrait </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaecd81749630d84a2baa8afb81568bb94" class="m-doc-self">autoConstructibleTrait</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns a <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a> with the default, copy and move constructors, set only if the type has them.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>Avoid using this function as its header includes <code>&lt;type_traits&gt;</code>.</p></aside>
           </div></section>
         </section>
         <section>
