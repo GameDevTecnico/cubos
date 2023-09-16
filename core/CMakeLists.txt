@@ -64,7 +64,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/material.cpp"
     "src/cubos/core/gl/palette.cpp"
     "src/cubos/core/gl/grid.cpp"
-    "src/cubos/core/gl/light.cpp"
     "src/cubos/core/gl/util.cpp"
     "src/cubos/core/gl/vertex.cpp"
 
@@ -138,7 +137,6 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/gl/grid.hpp"
     "include/cubos/core/gl/vertex.hpp"
     "include/cubos/core/gl/camera.hpp"
-    "include/cubos/core/gl/light.hpp"
     "include/cubos/core/gl/util.hpp"
 
     "include/cubos/core/al/audio_device.hpp"
