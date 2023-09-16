@@ -1,6 +1,6 @@
 /// @file
-/// @brief Resource @ref cubos::engine::AmbientLight and components @ref cubos::engine::SpotLight,
-/// @ref cubos::engine::DirectionalLight and @ref cubos::engine::PointLight.
+/// @brief Components @ref cubos::engine::SpotLight, @ref cubos::engine::DirectionalLight and @ref
+/// cubos::engine::PointLight.
 /// @ingroup renderer-plugin
 /// @todo Replace this file a directory with a file for each light type.
 
@@ -10,13 +10,6 @@
 
 namespace cubos::engine
 {
-    /// @brief Resource which stores the ambient light.
-    /// @ingroup renderer-plugin
-    struct AmbientLight
-    {
-        glm::vec3 color;
-    };
-
     /// @brief Component which makes an entity emit a spot light.
     /// @note Should be used with @ref LocalToWorld.
     /// @todo In what direction does the spot light point for an identity transform?
