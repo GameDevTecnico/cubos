@@ -70,20 +70,18 @@ int main()
     cubos::engine::Cubos cubos;
     cubos.addResource<State>(State{.step = 0});
 
-    /// [Add Event]
+    /// [Adding event]
     cubos.addEvent<MyEvent>();
-    /// [Add Event]
+    /// [Adding event]
 
-    /// [Set ShouldQuit resource]
     cubos.startupSystem([](ecs::Write<cubos::engine::ShouldQuit> quit) { quit->value = false; });
-    /// [Set ShouldQuit resource]
 
-    /// [Add systems]
+    /// [Adding systems]
     cubos.system(firstSystem).tagged("A").before("B");
     cubos.system(secondSystem).tagged("B");
     cubos.system(thirdSystem).tagged("C").after("B");
     cubos.system(fourthSystem).tagged("D").after("C");
-    /// [Add systems]
+    /// [Adding systems]
 
     /// [Expected results]
     // Should print:
