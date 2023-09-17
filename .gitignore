@@ -400,6 +400,7 @@ build
 .ccls-cache
 
 imgui.ini
+/settings.json
 
 # direnv - maybe .envrc is ok if 'use flake' doesn't break non nixos machines
 /.envrc

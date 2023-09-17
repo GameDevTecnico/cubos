@@ -1,8 +1,8 @@
 #include <cubos/core/settings.hpp>
 
-#include <cubos/engine/env_settings/plugin.hpp>
 #include <cubos/engine/renderer/light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
@@ -109,7 +109,7 @@ static void move(Query<Write<Car>, Write<Position>, Write<Rotation>> query, Read
 int main(int argc, char** argv)
 {
     Cubos cubos{argc, argv};
-    cubos.addPlugin(envSettingsPlugin);
+    cubos.addPlugin(settingsPlugin);
     cubos.addPlugin(rendererPlugin);
     cubos.addPlugin(voxelsPlugin);
     cubos.addComponent<Car>();
