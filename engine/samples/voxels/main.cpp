@@ -61,7 +61,8 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
 
     // Create the car entity
     cmds.create()
-        .add(RenderableGrid{CarAsset, offset});
+        .add(RenderableGrid{CarAsset, offset})
+        .add(LocalToWorld{});
 }
 /// [Spawn car system]
 
