@@ -34,6 +34,9 @@ namespace cubos::engine
     ///
     /// ## Tags
     /// - `cubos.assets.cleanup` - frees any assets no longer in use.
+    ///
+    /// ## Dependencies
+    /// - @ref settings-plugin
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.

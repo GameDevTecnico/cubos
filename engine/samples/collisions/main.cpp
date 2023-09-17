@@ -3,7 +3,6 @@
 #include <cubos/core/geom/box.hpp>
 #include <cubos/core/gl/debug.hpp>
 #include <cubos/core/log.hpp>
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/collisions/aabb.hpp>
 #include <cubos/engine/collisions/broad_phase_collisions.hpp>
@@ -11,9 +10,9 @@
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
-using cubos::core::Settings;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::Query;
@@ -22,12 +21,6 @@ using cubos::core::ecs::Write;
 using cubos::core::geom::Box;
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;
-
-using cubos::engine::BoxCollider;
-using cubos::engine::BroadPhaseCollisions;
-using cubos::engine::ColliderAABB;
-using cubos::engine::InputAction;
-using cubos::engine::InputBindings;
 
 using namespace cubos::engine;
 

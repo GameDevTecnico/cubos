@@ -1,11 +1,9 @@
-#include <cubos/core/settings.hpp>
-
 #include <cubos/engine/renderer/environment.hpp>
 #include <cubos/engine/renderer/light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
-using cubos::core::Settings;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::Write;

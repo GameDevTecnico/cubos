@@ -1,14 +1,13 @@
-#include <cubos/core/settings.hpp>
-
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
-using cubos::core::Settings;
 using cubos::core::ecs::EventWriter;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::io::openWindow;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
+
 using namespace cubos::engine;
 
 static void init(Write<Window> window, Write<ShouldQuit> quit, Write<Settings> settings)
@@ -39,6 +38,8 @@ static void render(Read<Window> window)
 
 void cubos::engine::windowPlugin(Cubos& cubos)
 {
+    cubos.addPlugin(settingsPlugin);
+
     cubos.addResource<Window>();
     cubos.addEvent<WindowEvent>();
 

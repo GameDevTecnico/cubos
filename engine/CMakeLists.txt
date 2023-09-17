@@ -14,6 +14,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
 
     "src/cubos/engine/settings/plugin.cpp"
+    "src/cubos/engine/settings/settings.cpp"
 
     "src/cubos/engine/window/plugin.cpp"
 

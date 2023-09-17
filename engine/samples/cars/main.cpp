@@ -1,4 +1,3 @@
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/renderer/light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
@@ -8,13 +7,13 @@
 
 #include "components.hpp"
 
-using cubos::core::Settings;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Query;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::gl::Grid;
 using cubos::core::gl::Palette;
+
 using namespace cubos::engine;
 
 static const Asset<Grid> CarAsset = AnyAsset("059c16e7-a439-44c7-9bdc-6e069dba0c75");

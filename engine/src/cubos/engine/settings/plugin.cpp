@@ -1,11 +1,9 @@
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
 #include <cubos/core/data/json_deserializer.hpp>
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/settings/plugin.hpp>
 
-using cubos::core::Settings;
 using cubos::core::data::File;
 using cubos::core::data::FileSystem;
 using cubos::core::data::JSONDeserializer;
@@ -81,5 +79,7 @@ static void startup(Read<Arguments> args, Write<Settings> settings)
 
 void cubos::engine::settingsPlugin(Cubos& cubos)
 {
+    cubos.addResource<Settings>();
+
     cubos.startupSystem(startup).tagged("cubos.settings");
 }

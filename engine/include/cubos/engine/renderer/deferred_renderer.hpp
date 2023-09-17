@@ -8,9 +8,9 @@
 
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/gl/vertex.hpp>
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/renderer/renderer.hpp>
+#include <cubos/engine/settings/settings.hpp>
 
 // TODO: make these defines proper constants (we're using C++!)
 #define CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT 128
@@ -36,7 +36,7 @@ namespace cubos::engine
         /// @param renderDevice Render device to use.
         /// @param size Size of the window.
         /// @param settings Settings to use.
-        DeferredRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, core::Settings& settings);
+        DeferredRenderer(core::gl::RenderDevice& renderDevice, glm::uvec2 size, Settings& settings);
 
         // Implement interface methods.
 

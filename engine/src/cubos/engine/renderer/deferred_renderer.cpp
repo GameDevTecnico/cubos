@@ -394,7 +394,7 @@ void main() {
 }
 )glsl";
 
-DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, core::Settings& settings)
+DeferredRenderer::DeferredRenderer(RenderDevice& renderDevice, glm::uvec2 size, Settings& settings)
     : BaseRenderer(renderDevice, size)
 {
     // Create the states.

@@ -5,15 +5,14 @@
 /// type. In this case, a bridge is created to load text files (.txt) as strings. The bridge is
 /// registered with the asset manager, and then a text file is loaded and printed to the console.
 
-#include <cubos/core/settings.hpp>
-
 #include <cubos/engine/assets/bridges/file.hpp>
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/settings/settings.hpp>
 
-using cubos::core::Settings;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::memory::Stream;
+
 using namespace cubos::engine;
 
 /// This bridge inherits from the FileBridge, since it will be loading/saving assets from/to single

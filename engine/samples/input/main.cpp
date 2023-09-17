@@ -1,15 +1,15 @@
 #include <cubos/core/data/debug_serializer.hpp>
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/input/bindings.hpp>
 #include <cubos/engine/input/plugin.hpp>
+#include <cubos/engine/settings/settings.hpp>
 
-using cubos::core::Settings;
 using cubos::core::data::Debug;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::io::Window;
+
 using namespace cubos::engine;
 
 static const Asset<InputBindings> bindingsAsset = AnyAsset("bf49ba61-5103-41bc-92e0-8a442d7842c3");

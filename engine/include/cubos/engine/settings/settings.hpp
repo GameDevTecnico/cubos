@@ -1,17 +1,16 @@
 /// @file
-/// @brief Class @ref cubos::core::Settings.
-/// @ingroup core
+/// @brief Class @ref cubos::engine::Settings.
+/// @ingroup engine
 
 #pragma once
 
 #include <string>
 #include <unordered_map>
 
-namespace cubos::core
+namespace cubos::engine
 {
     /// @brief Stores settings as key-value pairs and provides methods to retrieve them.
-    /// @todo Should be moved to the engine.
-    /// @ingroup core
+    /// @ingroup engine
     class Settings final
     {
     public:
@@ -110,4 +109,4 @@ namespace cubos::core
     private:
         std::unordered_map<std::string, std::string> mValues;
     };
-} // namespace cubos::core
+} // namespace cubos::engine

@@ -1,17 +1,18 @@
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serializer.hpp>
-#include <cubos/core/settings.hpp>
 
-using namespace cubos::core;
+#include <cubos/engine/settings/settings.hpp>
+
+using namespace cubos::engine;
 
 template <>
-void data::serialize<Settings>(Serializer& ser, const Settings& obj, const char* name)
+void cubos::core::data::serialize<Settings>(Serializer& ser, const Settings& obj, const char* name)
 {
     ser.write(obj.getValues(), name);
 }
 
 template <>
-void data::deserialize<Settings>(Deserializer& des, Settings& obj)
+void cubos::core::data::deserialize<Settings>(Deserializer& des, Settings& obj)
 {
     des.read(obj.getValues());
 }
