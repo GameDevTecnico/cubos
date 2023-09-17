@@ -36,9 +36,9 @@ namespace cubos::engine
         bool value;
     };
 
-    /// @brief Resource used for storing program arguments.
+    /// @brief Resource which stores the command-line arguments.
     ///
-    /// This resource is added by the @ref Cubos class when constructed with arguments.
+    /// This resource is added by the @ref Cubos class.
     ///
     /// @ingroup engine
     struct Arguments

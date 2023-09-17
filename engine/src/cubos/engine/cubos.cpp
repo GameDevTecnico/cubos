@@ -2,7 +2,6 @@
 
 #include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/log.hpp>
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/cubos.hpp>
 
@@ -113,18 +112,18 @@ TagBuilder Cubos::startupTag(const std::string& tag)
 }
 
 Cubos::Cubos()
+    : Cubos(1, nullptr)
 {
+}
+
+Cubos::Cubos(int argc, char** argv)
+{
+    std::vector<std::string> arguments(argv + 1, argv + argc);
+
     core::initializeLogger();
 
     this->addResource<DeltaTime>(0.0F);
     this->addResource<ShouldQuit>(true);
-    this->addResource<cubos::core::Settings>();
-}
-
-Cubos::Cubos(int argc, char** argv)
-    : Cubos()
-{
-    std::vector<std::string> arguments(argv + 1, argv + argc);
     this->addResource<Arguments>(arguments);
 }
 
