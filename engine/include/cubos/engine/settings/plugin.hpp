@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
+#include <cubos/engine/settings/settings.hpp>
 
 namespace cubos::engine
 {

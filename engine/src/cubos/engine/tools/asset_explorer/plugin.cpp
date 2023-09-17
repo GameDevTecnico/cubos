@@ -1,9 +1,8 @@
 #include <imgui.h>
 
-#include <cubos/core/settings.hpp>
-
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/tools/asset_explorer/plugin.hpp>
 
 using cubos::core::ecs::EventWriter;
@@ -106,8 +105,7 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
     return iter;
 }
 
-static void showAssets(Read<Assets> assets, Write<cubos::core::Settings> settings,
-                       EventWriter<tools::AssetSelectedEvent> events)
+static void showAssets(Read<Assets> assets, Write<Settings> settings, EventWriter<tools::AssetSelectedEvent> events)
 {
     ImGui::Begin("Asset Explorer");
 

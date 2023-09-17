@@ -1,13 +1,13 @@
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/fs/standard_archive.hpp>
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 
-using cubos::core::Settings;
 using cubos::core::data::FileSystem;
 using cubos::core::data::StandardArchive;
 using cubos::core::ecs::Write;
+
 using namespace cubos::engine;
 
 static void init(Write<Assets> assets, Write<Settings> settings)
@@ -34,6 +34,8 @@ static void cleanup(Write<Assets> assets)
 
 void cubos::engine::assetsPlugin(Cubos& cubos)
 {
+    cubos.addPlugin(settingsPlugin);
+
     cubos.addResource<Assets>();
 
     cubos.startupTag("cubos.assets.init").after("cubos.settings");

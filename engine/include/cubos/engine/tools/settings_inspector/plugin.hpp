@@ -16,6 +16,7 @@ namespace cubos::engine::tools
     /// @brief Allows inspecting the current setting values through a ImGui window.
     ///
     /// ## Dependencies
+    /// - @ref settings-plugin
     /// - @ref imgui-plugin
 
     /// @brief Plugin entry function.

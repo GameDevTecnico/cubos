@@ -1,6 +1,5 @@
-#include <cubos/core/settings.hpp>
-
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/tools/asset_explorer/plugin.hpp>
 #include <cubos/engine/tools/entity_inspector/plugin.hpp>
 #include <cubos/engine/tools/scene_editor/plugin.hpp>
@@ -8,9 +7,10 @@
 #include <cubos/engine/tools/world_inspector/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
-using namespace cubos::engine;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Write;
+
+using namespace cubos::engine;
 
 static void mockCamera(Write<ActiveCameras> camera, Commands cmds)
 {
@@ -22,7 +22,7 @@ static void mockCamera(Write<ActiveCameras> camera, Commands cmds)
                               .entity();
 }
 
-static void mockSettings(Write<cubos::core::Settings> settings)
+static void mockSettings(Write<Settings> settings)
 {
     settings->setString("assets.io.path", TESSERATOS_ASSETS_FOLDER);
 }

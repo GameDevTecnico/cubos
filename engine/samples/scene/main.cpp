@@ -1,18 +1,18 @@
 #include <cubos/core/data/debug_serializer.hpp>
 #include <cubos/core/memory/stream.hpp>
-#include <cubos/core/settings.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/scene/plugin.hpp>
+#include <cubos/engine/settings/settings.hpp>
 
 #include "components.hpp"
 
-using cubos::core::Settings;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::World;
 using cubos::core::ecs::Write;
+
 using namespace cubos::engine;
 
 static const Asset<Scene> SceneAsset = AnyAsset("f0d86ba8-5f34-440f-a180-d9d12c8e8b91");

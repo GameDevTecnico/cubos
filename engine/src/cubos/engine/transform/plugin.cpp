@@ -1,5 +1,3 @@
-#include <cubos/core/settings.hpp>
-
 #include <cubos/engine/transform/plugin.hpp>
 
 using cubos::core::ecs::Commands;

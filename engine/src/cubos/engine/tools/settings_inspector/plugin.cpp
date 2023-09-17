@@ -1,13 +1,13 @@
 #include <imgui.h>
 
-#include <cubos/core/settings.hpp>
 #include <cubos/core/ui/serialization.hpp>
 
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
 
-using cubos::core::Settings;
 using cubos::core::ecs::Write;
+
 using namespace cubos::engine;
 
 static void inspector(Write<Settings> settings)
@@ -35,7 +35,8 @@ static void inspector(Write<Settings> settings)
 
 void cubos::engine::tools::settingsInspectorPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::imguiPlugin);
+    cubos.addPlugin(settingsPlugin);
+    cubos.addPlugin(imguiPlugin);
 
     cubos.system(inspector).tagged("cubos.imgui");
 }
