@@ -13,11 +13,10 @@ message("# Building engine tests: " ${BUILD_ENGINE_TESTS})
 set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/cubos.cpp"
 
-    "src/cubos/engine/window/plugin.cpp"
-    "src/cubos/engine/transform/plugin.cpp"
-    "src/cubos/engine/env_settings/plugin.cpp"
+    "src/cubos/engine/settings/plugin.cpp"
 
-    "src/cubos/engine/file_settings/plugin.cpp"
+    "src/cubos/engine/window/plugin.cpp"
+
     "src/cubos/engine/imgui/plugin.cpp"
 
     "src/cubos/engine/tools/asset_explorer/plugin.cpp"
@@ -26,6 +25,8 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/tools/world_inspector/plugin.cpp"
     "src/cubos/engine/tools/entity_inspector/plugin.cpp"
     "src/cubos/engine/tools/scene_editor/plugin.cpp"
+
+    "src/cubos/engine/transform/plugin.cpp"
 
     "src/cubos/engine/assets/plugin.cpp"
     "src/cubos/engine/assets/assets.cpp"
@@ -62,10 +63,10 @@ set(CUBOS_ENGINE_SOURCE
 set(CUBOS_ENGINE_INCLUDE
     "include/cubos/engine/cubos.hpp"
 
-    "include/cubos/engine/window/plugin.hpp"
-    "include/cubos/engine/env_settings/plugin.hpp"
+    "include/cubos/engine/settings/plugin.hpp"
 
-    "include/cubos/engine/file_settings/plugin.hpp"
+    "include/cubos/engine/window/plugin.hpp"
+
     "include/cubos/engine/imgui/plugin.hpp"
 
     "include/cubos/engine/tools/asset_explorer/plugin.hpp"
