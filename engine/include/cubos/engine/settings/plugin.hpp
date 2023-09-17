@@ -16,10 +16,10 @@ namespace cubos::engine
     /// @ingroup engine
     /// @brief Adds and manages settings.
     ///
-    /// Initially, if the @ref Arguments resource is present, settings will be loaded from those
-    /// arguments. Then, the file at `settings.path` is loaded, as a JSON file. If the file does
-    /// not exist, it is created. If it can't be parsed, the plugin aborts. Previously set settings
-    /// will be overriden, and file settings will be overriden by command line arguments.
+    /// Initially, parses settings from the @ref Arguments resource. Then, the file at
+    /// `settings.path` is loaded, as a JSON file. If the file does not exist, it is created. If it
+    /// can't be parsed, the plugin aborts. Previously set settings will be overriden, and file
+    /// settings will be overriden by command line arguments.
     ///
     /// ## Settings
     /// - `settings.path` - path of the settings file (default: `./settings.json`).
