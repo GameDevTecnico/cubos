@@ -27,10 +27,8 @@ static void settingsSystem(Write<Settings> settings)
 /// [Load and set palette]
 static void setPaletteSystem(Read<Assets> assets, Write<Renderer> renderer)
 {
-    // Get a handle to the palette asset.
+    // Read the palette's data and pass it to the renderer.
     auto palette = assets->read(PaletteAsset);
-
-    // Set the renderer's palette.
     (*renderer)->setPalette(*palette);
 }
 /// [Load and set palette]
@@ -41,9 +39,8 @@ static void spawnCameraSystem(Commands cmds, Write<ActiveCameras> activeCameras)
     activeCameras->entities[0] =
         cmds.create()
             .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 1000.0F})
-            .add(LocalToWorld{})
-            .add(Position{{0.0F, 120.0F, -200.0F}})
-            .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{0.0F, -1.0F, 1.0F}), glm::vec3{0.0F, 1.0F, 0.0F})})
+            .add(Position{{50.0F, 50.0F, 50.0F}})
+            .add(Rotation{glm::quatLookAt(glm::normalize(glm::vec3{-1.0F, -1.0F, -1.0F}), glm::vec3{0.0F, 1.0F, 0.0F})})
             .entity();
 }
 
@@ -52,22 +49,19 @@ static void spawnLightSystem(Commands cmds)
     // Spawn the sun.
     cmds.create()
         .add(DirectionalLight{glm::vec3(1.0F), 1.0F})
-        .add(LocalToWorld{})
         .add(Rotation{glm::quat(glm::vec3(glm::radians(45.0F), glm::radians(45.0F), 0))});
 }
 
 /// [Spawn car system]
 static void spawnCarSystem(Commands cmds, Read<Assets> assets)
 {
+    // Calculate the necessary offset to center the model on (0, 0, 0).
     auto car = assets->read(CarAsset);
     glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;
 
     // Create the car entity
     cmds.create()
-        .add(RenderableGrid{CarAsset, offset})
-        .add(LocalToWorld{})
-        .add(Position{{0.0F, 0.0F, -60.0F}})
-        .add(Rotation{glm::quat(glm::vec3(0, glm::radians(90.0F), 0))});
+        .add(RenderableGrid{CarAsset, offset});
 }
 /// [Spawn car system]
 
