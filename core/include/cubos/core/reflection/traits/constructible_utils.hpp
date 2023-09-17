@@ -22,17 +22,17 @@ namespace cubos::core::reflection
     {
         auto builder = ConstructibleTrait::typed<T>();
 
-        if (std::is_default_constructible<T>::value)
+        if constexpr (std::is_default_constructible<T>::value)
         {
             builder = static_cast<ConstructibleTrait::Builder<T>&&>(builder).withDefaultConstructor();
         }
 
-        if (std::is_copy_constructible<T>::value)
+        if constexpr (std::is_copy_constructible<T>::value)
         {
             builder = static_cast<ConstructibleTrait::Builder<T>&&>(builder).withCopyConstructor();
         }
 
-        if (std::is_move_constructible<T>::value)
+        if constexpr (std::is_move_constructible<T>::value)
         {
             builder = static_cast<ConstructibleTrait::Builder<T>&&>(builder).withMoveConstructor();
         }
