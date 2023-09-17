@@ -19,7 +19,7 @@ Now, to emit these events, we will use the @ref cubos::core::ecs::EventWriter. T
 
 Lastly, let's set the order we want these system to execute in.
 
-@snippet events/main.cpp Adding the systems
+@snippet events/main.cpp Adding systems
 
 These are the expected results with this order.
 
