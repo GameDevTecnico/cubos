@@ -121,7 +121,8 @@ namespace cubos::core::data
 
         /// @brief Returns the internal map that maps references to IDs
         /// @return Map of references and Ids.
-        inline std::unordered_map<R, I> getMap() const {
+        inline std::unordered_map<R, I> getMap() const
+        {
             return mRefToId;
         }
 
