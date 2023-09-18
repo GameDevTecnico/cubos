@@ -64,10 +64,10 @@ namespace cubos::core::ecs
 
         /// @brief Returns the internal map that maps entities to their names
         /// @return Map of entities and names.
-        inline std::unordered_map<Entity, std::string> getMap() const {
+        inline std::unordered_map<Entity, std::string> getMap() const
+        {
             return mMap.getMap();
         }
-
 
     private:
         friend class CommandBuffer;
