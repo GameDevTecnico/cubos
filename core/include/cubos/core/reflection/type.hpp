@@ -56,7 +56,7 @@ namespace cubos::core::reflection
         template <typename T>
         Type& with(T trait)
         {
-            return this->with(Type::id<T>(), new T(static_cast<T&&>(trait)),
+            return this->with(Type::id<T>(), new T(std::move(trait)),
                               [](void* trait) { delete static_cast<T*>(trait); });
         }
 
