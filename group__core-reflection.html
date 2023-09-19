@@ -61,11 +61,16 @@
             </li>
           </ul>
         </nav>
+<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the <a href="examples-core-reflection.html" class="m-doc">Reflection</a> examples for demonstrations of this module.</p></aside><aside class="m-note m-info"><h4>Note</h4><p>By type-erased data, we mean that data is stored in a generic container, for example, through a void pointer, such that its type is not known at compile-time. This could be useful, for example, to integrate scripts into the engine, since types defined there are only know when the application is running.</p></aside>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
             <dt>file <a href="reflect_8hpp.html" class="m-doc">reflect.hpp</a></dt>
             <dd>Function <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />reflect</a> and related macros.</dd>
+            <dt>file <a href="constructible_8hpp.html" class="m-doc">constructible.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait</a>.</dd>
+            <dt>file <a href="constructible__utils_8hpp.html" class="m-doc">constructible_utils.hpp</a></dt>
+            <dd>Utilities for <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait</a>.</dd>
             <dt>file <a href="type_8hpp.html" class="m-doc">type.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Type</a>.</dd>
           </dl>
@@ -78,6 +83,10 @@
               struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">cubos::core::reflection::Reflect</a>
             </dt>
             <dd>Defines the reflection function for the given type <code>T</code>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">cubos::core::reflection::ConstructibleTrait</a>
+            </dt>
+            <dd>Describes how a reflected type may be constructed and destructed.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">cubos::core::reflection::Type</a>
             </dt>
@@ -92,6 +101,11 @@
               <span class="m-doc-wrap-bumper">auto <a href="#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const Type&amp;</span>
             </dt>
             <dd>Reflects the given type <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#gaecd81749630d84a2baa8afb81568bb94" class="m-doc">autoConstructibleTrait</a>(</span><span class="m-doc-wrap">) -&gt; ConstructibleTrait</span>
+            </dt>
+            <dd>Returns a <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a> with the default, copy and move constructors, set only if the type has them.</dd>
           </dl>
         </section>
         <section id="define-members">
@@ -158,6 +172,34 @@
             </table>
 <p>Fails to compile if the type does not implement reflection, or, in the case of external types, if its reflection specialization has not been included.</p><p>Internally, this function stores a static instance of the reflection data for the given type. Thus the reflection data is only initialized once, the first time this function is called, which means that the returned reference can be safely used as an identifier for the type.</p><p>The reflection data is obtained by calling the <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html#ac73716e7a51f89587ee57df043ca3886" class="m-doc">Reflect&lt;T&gt;::<wbr />type()</a> function.</p>
           </div></section>
+          <section class="m-doc-details" id="gaecd81749630d84a2baa8afb81568bb94"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="constructible__utils_8hpp.html">&lt;core/reflection/traits/constructible_utils.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">ConstructibleTrait </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaecd81749630d84a2baa8afb81568bb94" class="m-doc-self">autoConstructibleTrait</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns a <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a> with the default, copy and move constructors, set only if the type has them.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>Avoid using this function as its header includes <code>&lt;type_traits&gt;</code>.</p></aside>
+          </div></section>
         </section>
         <section>
           <h2>Define documentation</h2>
@@ -189,7 +231,7 @@
 <span class="k">struct</span><span class="w"> </span><span class="nc">MyType</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span><span class="w"> </span><span class="c1">// declares `static const Type&amp; reflect()`</span>
-<span class="p">};</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="core_2samples_2reflection_2basic_2main_8cpp.html#a9d30a937e2ad48db6e0d423350e7ba2c" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a>.</p></aside>
+<span class="p">};</span></pre><aside class="m-note m-default"><h4>See also</h4><p>Meant to be used with <a href="core_2samples_2reflection_2traits_2constructible_2main_8cpp.html#a10f43a57c1589b5fa2978e2daef0f03e" class="m-doc">CUBOS_<wbr />REFLECT_<wbr />IMPL</a>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="gabe4c61ca9774781ef107e74f89494663"><div>
             <h3>
