@@ -24,19 +24,19 @@ namespace cubos::core::reflection
 
         if constexpr (std::is_default_constructible<T>::value)
         {
-            builder = static_cast<ConstructibleTrait::Builder<T>&&>(builder).withDefaultConstructor();
+            builder = memory::move(builder).withDefaultConstructor();
         }
 
         if constexpr (std::is_copy_constructible<T>::value)
         {
-            builder = static_cast<ConstructibleTrait::Builder<T>&&>(builder).withCopyConstructor();
+            builder = memory::move(builder).withCopyConstructor();
         }
 
         if constexpr (std::is_move_constructible<T>::value)
         {
-            builder = static_cast<ConstructibleTrait::Builder<T>&&>(builder).withMoveConstructor();
+            builder = memory::move(builder).withMoveConstructor();
         }
 
-        return static_cast<ConstructibleTrait::Builder<T>&&>(builder).build();
+        return memory::move(builder).build();
     }
 } // namespace cubos::core::reflection
