@@ -70,6 +70,8 @@
             <dd>Endianness utility functions.</dd>
             <dt>file <a href="guards_8hpp.html" class="m-doc">guards.hpp</a></dt>
             <dd>Classes <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard</a> and <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard</a>.</dd>
+            <dt>file <a href="move_8hpp.html" class="m-doc">move.hpp</a></dt>
+            <dd>Function <a href="group__core-memory.html#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />move</a>.</dd>
             <dt>file <a href="standard__stream_8hpp.html" class="m-doc">standard_stream.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />StandardStream</a>.</dd>
             <dt>file <a href="stream_8hpp.html" class="m-doc">stream.hpp</a></dt>
@@ -153,6 +155,11 @@
               <span class="m-doc-wrap-bumper">auto <a href="#ga542ca475a4392ceda925fab6d9200b26" class="m-doc">toBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
             </dt>
             <dd>Converts a value from local endianness to big endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; RemoveReference&lt;T&gt;::Type&amp;&amp;</span>
+            </dt>
+            <dd>Returns an R-value reference to the given value.</dd>
           </dl>
         </section>
         <section>
@@ -361,6 +368,43 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="gaa42ad365d019d9e72fbc216a84e36572"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="move_8hpp.html">&lt;core/memory/move.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">RemoveReference&lt;T&gt;::Type&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc-self">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value)</span></span>
+            </h3>
+            <p>Returns an R-value reference to the given value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Value type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>value</td>
+                  <td>Value to move.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Moved value.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This is a replacement for <code>std::move</code>, which allows us to avoid including the entire <code>&lt;utility&gt;</code> header.</p></aside>
           </div></section>
         </section>
       </div>
