@@ -127,9 +127,9 @@ namespace cubos::core::reflection
         /// @param pointer Field pointer.
         /// @return Trait.
         template <typename O, typename F>
-        FieldsTrait&& withField(const std::string& field, F O::*pointer)
+        FieldsTrait&& withField(const std::string& field, F O::*pointer) &&
         {
-            return static_cast<FieldsTrait&&>(*this).withField(reflect<F>(), field, new AddressOfImpl<O, F>(pointer));
+            return std::move(*this).withField(reflect<F>(), field, new AddressOfImpl<O, F>(pointer));
         }
 
         /// @brief Gets the field with the given type.

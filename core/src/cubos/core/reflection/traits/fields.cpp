@@ -89,7 +89,8 @@ FieldsTrait&& FieldsTrait::withField(const Type& type, std::string name, Address
         mFirstField = field;
         mLastField = field;
     }
-    return static_cast<FieldsTrait&&>(*this);
+
+    return std::move(*this);
 }
 
 const FieldsTrait::Field* FieldsTrait::field(const std::string& name) const
