@@ -10,4 +10,11 @@ namespace cubos::core::reflection
     /// @defgroup core-reflection Reflection
     /// @ingroup core
     /// @brief Provides utilities useful for handling type-erased data.
+    /// @see Take a look at the @ref examples-core-reflection examples for demonstrations of this
+    /// module.
+    ///
+    /// @note By type-erased data, we mean that data is stored in a generic container, for example,
+    /// through a void pointer, such that its type is not known at compile-time. This could be
+    /// useful, for example, to integrate scripts into the engine, since types defined there are
+    /// only know when the application is running.
 } // namespace cubos::core::reflection
