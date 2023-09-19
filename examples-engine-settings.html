@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CUBOS.</title>
+  <title>Examples &raquo; Engine &raquo; Settings | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -24,7 +24,7 @@
       <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html" id="m-navbar-current">Pages</a></li>
+            <li><a href="pages.html">Pages</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
           <ol class="m-col-t-6 m-col-m-none" start="3">
@@ -43,60 +43,22 @@
   <div class="m-container m-container-inflatable">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <h1>Pages</h1>
-        <ul class="m-doc">
-          <li><a href="getting-started.html" class="m-doc">Getting started</a> <span class="m-doc">How to download, build and run the engine and where to go from there.</span></li>
-          <li class="m-doc-collapsible">
-            <a href="#" onclick="return toggle(this)"></a><a href="features.html" class="m-doc">Feature Guide</a> <span class="m-doc"></span>
-            <ul class="m-doc">
-              <li><a href="features-ecs.html" class="m-doc">ECS</a> <span class="m-doc">What is an ECS and how it&#x27;s used in <strong>CUBOS.</strong></span></li>
-              <li><a href="features-plugins.html" class="m-doc">Plugins</a> <span class="m-doc">What are plugins and how they can be used to organize your code.</span></li>
-              <li><a href="features-quadrados.html" class="m-doc">Quadrados</a> <span class="m-doc">How to use the <em>Quadrados</em> CLI tool.</span></li>
-            </ul>
-          </li>
-          <li class="m-doc-collapsible">
-            <a href="#" onclick="return toggle(this)"></a><a href="examples.html" class="m-doc">Examples</a> <span class="m-doc">Contains examples of specific features of the libraries.</span>
-            <ul class="m-doc">
-              <li class="m-doc-collapsible">
-                <a href="#" onclick="return toggle(this)"></a><a href="examples-core.html" class="m-doc">Core</a> <span class="m-doc">Showcases features of the <a href="group__core.html" class="m-doc">Core</a> library.</span>
-                <ul class="m-doc">
-                  <li><a href="examples-core-logging.html" class="m-doc">Logging</a> <span class="m-doc">Using the logging system.</span></li>
-                  <li class="m-doc-collapsible">
-                    <a href="#" onclick="return toggle(this)"></a><a href="examples-core-reflection.html" class="m-doc">Reflection</a> <span class="m-doc">Using the <a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</span>
-                    <ul class="m-doc">
-                      <li><a href="examples-core-reflection-basic.html" class="m-doc">Basic Usage</a> <span class="m-doc">Defining and using reflectable types.</span></li>
-                      <li><a href="examples-core-reflection-traits-constructible.html" class="m-doc">Constructible Trait</a> <span class="m-doc">Exposing the destructor and constructors of a type.</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li class="m-doc-collapsible">
-                <a href="#" onclick="return toggle(this)"></a><a href="examples-engine.html" class="m-doc">Engine</a> <span class="m-doc">Showcases features of the <a href="group__engine.html" class="m-doc">Engine</a> library.</span>
-                <ul class="m-doc">
-                  <li><a href="examples-engine-settings.html" class="m-doc">Settings</a> <span class="m-doc">Using the <a href="group__settings-plugin.html" class="m-doc">Settings</a> plugin.</span></li>
-                  <li><a href="examples-engine-renderer.html" class="m-doc">Renderer</a> <span class="m-doc">Using the <a href="group__renderer-plugin.html" class="m-doc">Renderer</a> plugin.</span></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a href="contribution.html" class="m-doc">Contribution guidelines</a> <span class="m-doc">Guide on the project&#x27;s conventions and code style.</span></li>
-        </ul>
-        <script>
-        function toggle(e) {
-            e.parentElement.className = e.parentElement.className == 'm-doc-collapsible' ?
-                'm-doc-expansible' : 'm-doc-collapsible';
-            return false;
-        }
-        /* Collapse all nodes marked as such. Doing it via JS instead of
-           directly in markup so disabling it doesn't harm usability. The list
-           is somehow regenerated on every iteration and shrinks as I change
-           the classes. It's not documented anywhere and I'm not sure if this
-           is the same across browsers, so I am going backwards in that list to
-           be sure. */
-        var collapsed = document.getElementsByClassName("collapsed");
-        for(var i = collapsed.length - 1; i >= 0; --i)
-            collapsed[i].className = 'm-doc-expansible';
-        </script>
+        <h1>
+          <span class="m-breadcrumb"><a href="examples.html">Examples</a> &raquo;</span>
+          <span class="m-breadcrumb"><a href="examples-engine.html">Engine</a> &raquo;</span>
+          Settings
+        </h1>
+        <p>Using the <a href="group__settings-plugin.html" class="m-doc">Settings</a> plugin.</p>
+<p><a name="md_settings_page"></a></p><p>This example shows how the <a href="group__settings-plugin.html" class="m-doc">Settings</a> plugin can be used to load settings from a file and command-line arguments.</p><p>Accesing the settings is straightforward:</p><pre class="m-code"><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkSettings</span><span class="p">(</span><span class="n">Write</span><span class="o">&lt;</span><span class="n">Settings</span><span class="o">&gt;</span><span class="w"> </span><span class="n">settings</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">CUBOS_INFO</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">settings</span><span class="o">-&gt;</span><span class="n">getString</span><span class="p">(</span><span class="s">&quot;greeting&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello!&quot;</span><span class="p">));</span>
+<span class="p">}</span></pre><p>If the setting <code>greetings</code> has been set on the <code>settings.json</code> file next to the sample&#x27;s executable, or if it has been passed as a command-line argument (e.g. <code>./engine-sample.settings --greetings &quot;Hello, world!&quot;</code>), the sample will output that value. Otherwise, it will output <code>Hello!</code>, which we set as a default.</p><p>We want this system to run after the settings have been loaded, so we run it after the tag <code>cubos.settings</code>. Notice that if we want the command-line arguments to be loaded as settings, we need to pass <code>argc</code> and <code>argv</code> to the <a href="classcubos_1_1engine_1_1Cubos.html#a5441a8dcc181b3845ee2133951d95ed1" class="m-doc">Cubos::<wbr />Cubos(int, char**)</a> constructor.</p><pre class="m-code"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Cubos</span><span class="w"> </span><span class="n">cubos</span><span class="p">{</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">};</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">addPlugin</span><span class="p">(</span><span class="n">settingsPlugin</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="n">checkSettings</span><span class="p">).</span><span class="n">after</span><span class="p">(</span><span class="s">&quot;cubos.settings&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span></pre>
       </div>
     </div>
   </div>

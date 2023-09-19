@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CUBOS.</title>
+  <title>engine/settings/plugin.hpp file | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -24,7 +24,7 @@
       <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
         <div class="m-row">
           <ol class="m-col-t-6 m-col-m-none">
-            <li><a href="pages.html" id="m-navbar-current">Pages</a></li>
+            <li><a href="pages.html">Pages</a></li>
             <li><a href="modules.html">Modules</a></li>
           </ol>
           <ol class="m-col-t-6 m-col-m-none" start="3">
@@ -43,60 +43,40 @@
   <div class="m-container m-container-inflatable">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <h1>Pages</h1>
-        <ul class="m-doc">
-          <li><a href="getting-started.html" class="m-doc">Getting started</a> <span class="m-doc">How to download, build and run the engine and where to go from there.</span></li>
-          <li class="m-doc-collapsible">
-            <a href="#" onclick="return toggle(this)"></a><a href="features.html" class="m-doc">Feature Guide</a> <span class="m-doc"></span>
-            <ul class="m-doc">
-              <li><a href="features-ecs.html" class="m-doc">ECS</a> <span class="m-doc">What is an ECS and how it&#x27;s used in <strong>CUBOS.</strong></span></li>
-              <li><a href="features-plugins.html" class="m-doc">Plugins</a> <span class="m-doc">What are plugins and how they can be used to organize your code.</span></li>
-              <li><a href="features-quadrados.html" class="m-doc">Quadrados</a> <span class="m-doc">How to use the <em>Quadrados</em> CLI tool.</span></li>
-            </ul>
-          </li>
-          <li class="m-doc-collapsible">
-            <a href="#" onclick="return toggle(this)"></a><a href="examples.html" class="m-doc">Examples</a> <span class="m-doc">Contains examples of specific features of the libraries.</span>
-            <ul class="m-doc">
-              <li class="m-doc-collapsible">
-                <a href="#" onclick="return toggle(this)"></a><a href="examples-core.html" class="m-doc">Core</a> <span class="m-doc">Showcases features of the <a href="group__core.html" class="m-doc">Core</a> library.</span>
-                <ul class="m-doc">
-                  <li><a href="examples-core-logging.html" class="m-doc">Logging</a> <span class="m-doc">Using the logging system.</span></li>
-                  <li class="m-doc-collapsible">
-                    <a href="#" onclick="return toggle(this)"></a><a href="examples-core-reflection.html" class="m-doc">Reflection</a> <span class="m-doc">Using the <a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</span>
-                    <ul class="m-doc">
-                      <li><a href="examples-core-reflection-basic.html" class="m-doc">Basic Usage</a> <span class="m-doc">Defining and using reflectable types.</span></li>
-                      <li><a href="examples-core-reflection-traits-constructible.html" class="m-doc">Constructible Trait</a> <span class="m-doc">Exposing the destructor and constructors of a type.</span></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li class="m-doc-collapsible">
-                <a href="#" onclick="return toggle(this)"></a><a href="examples-engine.html" class="m-doc">Engine</a> <span class="m-doc">Showcases features of the <a href="group__engine.html" class="m-doc">Engine</a> library.</span>
-                <ul class="m-doc">
-                  <li><a href="examples-engine-settings.html" class="m-doc">Settings</a> <span class="m-doc">Using the <a href="group__settings-plugin.html" class="m-doc">Settings</a> plugin.</span></li>
-                  <li><a href="examples-engine-renderer.html" class="m-doc">Renderer</a> <span class="m-doc">Using the <a href="group__renderer-plugin.html" class="m-doc">Renderer</a> plugin.</span></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a href="contribution.html" class="m-doc">Contribution guidelines</a> <span class="m-doc">Guide on the project&#x27;s conventions and code style.</span></li>
-        </ul>
-        <script>
-        function toggle(e) {
-            e.parentElement.className = e.parentElement.className == 'm-doc-collapsible' ?
-                'm-doc-expansible' : 'm-doc-collapsible';
-            return false;
-        }
-        /* Collapse all nodes marked as such. Doing it via JS instead of
-           directly in markup so disabling it doesn't harm usability. The list
-           is somehow regenerated on every iteration and shrinks as I change
-           the classes. It's not documented anywhere and I'm not sure if this
-           is the same across browsers, so I am going backwards in that list to
-           be sure. */
-        var collapsed = document.getElementsByClassName("collapsed");
-        for(var i = collapsed.length - 1; i >= 0; --i)
-            collapsed[i].className = 'm-doc-expansible';
-        </script>
+        <h1>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_8711f680e2d25dedddc79c2be2b1fda2.html">settings</a>/</span>plugin.hpp <span class="m-thin">file</span>
+        </h1>
+        <p>Plugin entry point.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#func-members">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__settings-plugin.html#gaa142415680fcc11723573d9d91315ff8" class="m-doc">settingsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+          </dl>
+        </section>
       </div>
     </div>
   </div>

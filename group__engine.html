@@ -67,10 +67,6 @@
             <dd>Adds asset management to <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__collisions-plugin.html" class="m-doc">Collisions</a></dt>
             <dd>Adds collision detection to <strong>CUBOS</strong>.</dd>
-            <dt>module <a href="group__env-settings-plugin.html" class="m-doc">Environment settings</a></dt>
-            <dd>Loads settings from the command line arguments.</dd>
-            <dt>module <a href="group__file-settings-plugin.html" class="m-doc">File settings</a></dt>
-            <dd>Loads settings from a file.</dd>
             <dt>module <a href="group__imgui-plugin.html" class="m-doc">ImGui integration</a></dt>
             <dd>Initializes and configures ImGui for <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__input-plugin.html" class="m-doc">Input</a></dt>
@@ -79,6 +75,8 @@
             <dd>Creates and handles the lifecycle of a renderer.</dd>
             <dt>module <a href="group__scene-plugin.html" class="m-doc">Scene</a></dt>
             <dd>Adds scenes to <strong>CUBOS</strong>.</dd>
+            <dt>module <a href="group__settings-plugin.html" class="m-doc">Settings</a></dt>
+            <dd>Adds and manages settings.</dd>
             <dt>module <a href="group__tool-plugins.html" class="m-doc">Tools</a></dt>
             <dd>Plugins which add debug and development tooling to <strong>CUBOS</strong>.</dd>
             <dt>module <a href="group__transform-plugin.html" class="m-doc">Transform</a></dt>
@@ -94,6 +92,8 @@
           <dl class="m-doc">
             <dt>file <a href="cubos_8hpp.html" class="m-doc">cubos.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">cubos::<wbr />engine::<wbr />Cubos</a>.</dd>
+            <dt>file <a href="settings_8hpp.html" class="m-doc">settings.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">cubos::<wbr />engine::<wbr />Settings</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -110,7 +110,7 @@
             <dt>
               struct <a href="structcubos_1_1engine_1_1Arguments.html" class="m-doc">cubos::engine::Arguments</a>
             </dt>
-            <dd>Resource used for storing program arguments.</dd>
+            <dd>Resource which stores the command-line arguments.</dd>
             <dt>
               class <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">cubos::engine::TagBuilder</a>
             </dt>
@@ -123,6 +123,10 @@
               class <a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">cubos::engine::Cubos</a>
             </dt>
             <dd>Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">cubos::engine::Settings</a>
+            </dt>
+            <dd>Stores settings as key-value pairs and provides methods to retrieve them.</dd>
           </dl>
         </section>
       </div>
