@@ -10,8 +10,6 @@
 
 namespace cubos::core::reflection
 {
-    class Type;
-
     /// @brief Describes the fields of a reflected type.
     /// @see See @ref examples-core-reflection-traits-fields for an example of using this trait.
     /// @ingroup core-reflection
