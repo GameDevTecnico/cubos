@@ -91,6 +91,7 @@ set(CUBOS_CORE_INCLUDE
     "include/cubos/core/settings.hpp"
     "include/cubos/core/thread_pool.hpp"
 
+    "include/cubos/core/memory/move.hpp"
     "include/cubos/core/memory/stream.hpp"
     "include/cubos/core/memory/standard_stream.hpp"
     "include/cubos/core/memory/buffer_stream.hpp"
