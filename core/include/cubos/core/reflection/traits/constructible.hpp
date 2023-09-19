@@ -6,6 +6,8 @@
 
 #include <cstddef>
 
+#include <cubos/core/memory/move.hpp>
+
 namespace cubos::core::reflection
 {
     /// @brief Describes how a reflected type may be constructed and destructed.
@@ -132,27 +134,26 @@ namespace cubos::core::reflection
         /// @return Builder.
         Builder&& withDefaultConstructor() &&
         {
-            mTrait = static_cast<ConstructibleTrait&&>(mTrait).withDefaultConstructor(
-                [](void* instance) { new (instance) T(); });
-            return static_cast<Builder&&>(*this);
+            mTrait = memory::move(mTrait).withDefaultConstructor([](void* instance) { new (instance) T(); });
+            return memory::move(*this);
         }
 
         /// @brief Sets the copy constructor of the type.
         /// @return Builder.
         Builder&& withCopyConstructor() &&
         {
-            mTrait = static_cast<ConstructibleTrait&&>(mTrait).withCopyConstructor(
+            mTrait = memory::move(mTrait).withCopyConstructor(
                 [](void* instance, const void* other) { new (instance) T(*static_cast<const T*>(other)); });
-            return static_cast<Builder&&>(*this);
+            return memory::move(*this);
         }
 
         /// @brief Sets the move constructor of the type.
         /// @return Builder.
         Builder&& withMoveConstructor() &&
         {
-            mTrait = static_cast<ConstructibleTrait&&>(mTrait).withMoveConstructor(
-                [](void* instance, void* other) { new (instance) T(static_cast<T&&>(*static_cast<T*>(other))); });
-            return static_cast<Builder&&>(*this);
+            mTrait = memory::move(mTrait).withMoveConstructor(
+                [](void* instance, void* other) { new (instance) T(memory::move(*static_cast<T*>(other))); });
+            return memory::move(*this);
         }
 
     private:

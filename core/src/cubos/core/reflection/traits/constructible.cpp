@@ -21,21 +21,21 @@ ConstructibleTrait&& ConstructibleTrait::withDefaultConstructor(DefaultConstruct
 {
     CUBOS_ASSERT(!mDefaultConstructor, "Default constructor already set");
     mDefaultConstructor = defaultConstructor;
-    return static_cast<ConstructibleTrait&&>(*this);
+    return memory::move(*this);
 }
 
 ConstructibleTrait&& ConstructibleTrait::withCopyConstructor(CopyConstructor copyConstructor) &&
 {
     CUBOS_ASSERT(!mCopyConstructor, "Copy constructor already set");
     mCopyConstructor = copyConstructor;
-    return static_cast<ConstructibleTrait&&>(*this);
+    return memory::move(*this);
 }
 
 ConstructibleTrait&& ConstructibleTrait::withMoveConstructor(MoveConstructor moveConstructor) &&
 {
     CUBOS_ASSERT(!mMoveConstructor, "Move constructor already set");
     mMoveConstructor = moveConstructor;
-    return static_cast<ConstructibleTrait&&>(*this);
+    return memory::move(*this);
 }
 
 std::size_t ConstructibleTrait::size() const
