@@ -36,6 +36,7 @@ macro(make_sample)
 endmacro()
 
 # Add samples
+make_sample(DIR "settings")
 make_sample(DIR "events")
 make_sample(DIR "systems")
 make_sample(DIR "input" ASSETS)
