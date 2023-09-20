@@ -22,7 +22,7 @@ namespace cubos::engine::tools
     /// - @ref scene-plugin
     /// - @ref asset-explorer-tool-plugin
     /// - @ref entity-selector-tool-plugin
-    ///
+
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
     /// @ingroup scene-editor-tool-plugin
