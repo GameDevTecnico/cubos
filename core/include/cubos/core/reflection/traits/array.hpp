@@ -89,14 +89,12 @@ namespace cubos::core::reflection
         const void* get(const void* instance, std::size_t index) const;
 
         /// @brief Inserts a default-constructed element into the array.
-        /// @note Aborts if @ref hasInsertDefault() returns false.
         /// @param instance Pointer to the array instance.
         /// @param index Element index.
         /// @return Whether the operation is supported.
         bool insertDefault(void* instance, std::size_t index) const;
 
         /// @brief Inserts a copy-constructed element into the array.
-        /// @note Aborts if @ref hasInsertCopy() returns false.
         /// @param instance Pointer to the array instance.
         /// @param index Element index.
         /// @param value Value.
@@ -104,7 +102,6 @@ namespace cubos::core::reflection
         bool insertCopy(void* instance, std::size_t index, const void* value) const;
 
         /// @brief Inserts a move-constructed element into the array.
-        /// @note Aborts if @ref hasInsertMove() returns false.
         /// @param instance Pointer to the array instance.
         /// @param index Element index.
         /// @param value Value.
@@ -112,7 +109,6 @@ namespace cubos::core::reflection
         bool insertMove(void* instance, std::size_t index, void* value) const;
 
         /// @brief Removes an element of the array.
-        /// @note Aborts if @ref hasErase() returns false.
         /// @param instance Pointer to the array instance.
         /// @param index Element index.
         /// @return Whether the operation is supported.
