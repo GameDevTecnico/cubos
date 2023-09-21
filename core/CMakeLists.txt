@@ -35,6 +35,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/reflection/traits/constructible.cpp"
     "src/cubos/core/reflection/traits/fields.cpp"
     "src/cubos/core/reflection/traits/array.cpp"
+    "src/cubos/core/reflection/traits/dictionary.cpp"
     "src/cubos/core/reflection/external/primitives.cpp"
 
     "src/cubos/core/data/serializer.cpp"
