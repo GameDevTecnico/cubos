@@ -15,6 +15,8 @@ namespace cubos::engine
     /// @defgroup scene-plugin Scene
     /// @ingroup engine
     /// @brief Adds scenes to @b CUBOS.
+    /// @see Take a look at the @ref examples-engine-scene example for a demonstration of this
+    /// plugin.
     ///
     /// ## Bridges
     /// - @ref SceneBridge - registered with the `.cubos` extension, loads @ref Scene assets.
