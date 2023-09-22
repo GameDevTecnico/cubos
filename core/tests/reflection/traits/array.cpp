@@ -39,7 +39,7 @@ TEST_CASE("reflection::ArrayTrait")
 
     SUBCASE("with default-constructing inserts")
     {
-        trait.insertDefault([](void* array, std::size_t index) { static_cast<int*>(array)[index] = 42; });
+        trait.setInsertDefault([](void* array, std::size_t index) { static_cast<int*>(array)[index] = 42; });
 
         int instance[2] = {1, 2};
         CHECK(trait.hasInsertDefault());
@@ -50,7 +50,7 @@ TEST_CASE("reflection::ArrayTrait")
 
     SUBCASE("with copy-constructing inserts")
     {
-        trait.insertCopy([](void* array, std::size_t index, const void* value) {
+        trait.setInsertCopy([](void* array, std::size_t index, const void* value) {
             static_cast<int*>(array)[index] = *static_cast<const int*>(value);
         });
 
@@ -63,7 +63,7 @@ TEST_CASE("reflection::ArrayTrait")
 
     SUBCASE("with move-constructing inserts")
     {
-        trait.insertMove([](void* array, std::size_t index, void* value) {
+        trait.setInsertMove([](void* array, std::size_t index, void* value) {
             static_cast<int*>(array)[index] = *static_cast<int*>(value);
         });
 
@@ -76,7 +76,7 @@ TEST_CASE("reflection::ArrayTrait")
 
     SUBCASE("with erases")
     {
-        trait.erase([](void* array, std::size_t index) { static_cast<int*>(array)[index] = 0; });
+        trait.setErase([](void* array, std::size_t index) { static_cast<int*>(array)[index] = 0; });
 
         int instance[2] = {1, 2};
         CHECK(trait.hasErase());

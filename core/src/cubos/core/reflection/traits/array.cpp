@@ -15,25 +15,25 @@ ArrayTrait::ArrayTrait(const Type& elementType, Length length, AddressOf address
 {
 }
 
-void ArrayTrait::insertDefault(InsertDefault insertDefault)
+void ArrayTrait::setInsertDefault(InsertDefault insertDefault)
 {
     CUBOS_ASSERT(!mInsertDefault, "Insert default already set");
     mInsertDefault = insertDefault;
 }
 
-void ArrayTrait::insertCopy(InsertCopy insertCopy)
+void ArrayTrait::setInsertCopy(InsertCopy insertCopy)
 {
     CUBOS_ASSERT(!mInsertCopy, "Insert copy already set");
     mInsertCopy = insertCopy;
 }
 
-void ArrayTrait::insertMove(InsertMove insertMove)
+void ArrayTrait::setInsertMove(InsertMove insertMove)
 {
     CUBOS_ASSERT(!mInsertMove, "Insert move already set");
     mInsertMove = insertMove;
 }
 
-void ArrayTrait::erase(Erase erase)
+void ArrayTrait::setErase(Erase erase)
 {
     CUBOS_ASSERT(!mErase, "Erase already set");
     mErase = erase;

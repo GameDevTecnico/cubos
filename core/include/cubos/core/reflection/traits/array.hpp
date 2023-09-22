@@ -56,19 +56,19 @@ namespace cubos::core::reflection
 
         /// @brief Sets the default-construct insert operation to the trait.
         /// @param insertDefault Function pointer.
-        void insertDefault(InsertDefault insertDefault);
+        void setInsertDefault(InsertDefault insertDefault);
 
         /// @brief Sets the copy-construct insert operation to the trait.
         /// @param insertCopy Function pointer.
-        void insertCopy(InsertCopy insertCopy);
+        void setInsertCopy(InsertCopy insertCopy);
 
         /// @brief Sets the move-construct insert operation to the trait.
         /// @param insertMove Function pointer.
-        void insertMove(InsertMove insertMove);
+        void setInsertMove(InsertMove insertMove);
 
         /// @brief Sets the erase operation to the trait.
         /// @param erase Function pointer.
-        void erase(Erase erase);
+        void setErase(Erase erase);
 
         /// @brief Returns the element type of the array.
         /// @return Element type.
