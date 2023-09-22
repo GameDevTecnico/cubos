@@ -27,7 +27,7 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename T), (std::vector<T>))
 
     if constexpr (std::is_default_constructible<T>::value)
     {
-        arrayTrait.insertDefault([](void* instance, std::size_t index) {
+        arrayTrait.setInsertDefault([](void* instance, std::size_t index) {
             auto* vec = static_cast<std::vector<T>*>(instance);
             vec->emplace(vec->begin() + static_cast<std::ptrdiff_t>(index));
         });
@@ -35,7 +35,7 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename T), (std::vector<T>))
 
     if constexpr (std::is_copy_constructible<T>::value)
     {
-        arrayTrait.insertCopy([](void* instance, std::size_t index, const void* value) {
+        arrayTrait.setInsertCopy([](void* instance, std::size_t index, const void* value) {
             auto* vec = static_cast<std::vector<T>*>(instance);
             vec->emplace(vec->begin() + static_cast<std::ptrdiff_t>(index), *static_cast<const T*>(value));
         });
@@ -43,7 +43,7 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename T), (std::vector<T>))
 
     if constexpr (std::is_move_constructible<T>::value)
     {
-        arrayTrait.insertMove([](void* instance, std::size_t index, void* value) {
+        arrayTrait.setInsertMove([](void* instance, std::size_t index, void* value) {
             auto* vec = static_cast<std::vector<T>*>(instance);
             vec->emplace(vec->begin() + static_cast<std::ptrdiff_t>(index), std::move(*static_cast<T*>(value)));
         });
@@ -51,7 +51,7 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename T), (std::vector<T>))
 
     // We supply the erase function always, as it is always possible to erase an element of a vector.
 
-    arrayTrait.erase([](void* instance, std::size_t index) {
+    arrayTrait.setErase([](void* instance, std::size_t index) {
         auto* vec = static_cast<std::vector<T>*>(instance);
         vec->erase(vec->begin() + static_cast<std::ptrdiff_t>(index));
     });
