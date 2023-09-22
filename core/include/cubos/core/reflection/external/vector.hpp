@@ -41,16 +41,13 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename T), (std::vector<T>))
         });
     }
 
-    if constexpr (std::is_move_constructible<T>::value)
-    {
-        arrayTrait.setInsertMove([](void* instance, std::size_t index, void* value) {
-            auto* vec = static_cast<std::vector<T>*>(instance);
-            vec->emplace(vec->begin() + static_cast<std::ptrdiff_t>(index), std::move(*static_cast<T*>(value)));
-        });
-    }
+    // Since T must be moveable for all std::vector<T>, we always supply this function.
+    arrayTrait.setInsertMove([](void* instance, std::size_t index, void* value) {
+        auto* vec = static_cast<std::vector<T>*>(instance);
+        vec->emplace(vec->begin() + static_cast<std::ptrdiff_t>(index), std::move(*static_cast<T*>(value)));
+    });
 
     // We supply the erase function always, as it is always possible to erase an element of a vector.
-
     arrayTrait.setErase([](void* instance, std::size_t index) {
         auto* vec = static_cast<std::vector<T>*>(instance);
         vec->erase(vec->begin() + static_cast<std::ptrdiff_t>(index));
