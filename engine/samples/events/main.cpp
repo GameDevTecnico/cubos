@@ -3,7 +3,13 @@
 
 #include <cubos/engine/cubos.hpp>
 
-using namespace cubos::core;
+/// [Using type for aesthetic sake]
+using cubos::core::ecs::EventReader;
+using cubos::core::ecs::EventWriter;
+/// [Using type for aesthetic sake]
+using cubos::core::ecs::Write;
+
+using namespace cubos::engine;
 
 /// [Event struct]
 struct MyEvent
@@ -18,7 +24,7 @@ struct State
 };
 
 /// [Event reader system]
-static void firstSystem(ecs::EventReader<MyEvent> reader) 
+static void firstSystem(EventReader<MyEvent> reader) 
 {
     for (const auto& event : reader)
     {
@@ -28,7 +34,7 @@ static void firstSystem(ecs::EventReader<MyEvent> reader)
 /// [Event reader system]
 
 /// [Event writer system]
-static void secondSystem(ecs::EventWriter<MyEvent> writer, ecs::Write<State> state, ecs::Write<cubos::engine::ShouldQuit> quit)
+static void secondSystem(EventWriter<MyEvent> writer, Write<State> state, Write<ShouldQuit> quit)
 {
     state->step += 1;
     if (state->step == 1) // Write 1 2 3 on first run.
@@ -49,7 +55,7 @@ static void secondSystem(ecs::EventWriter<MyEvent> writer, ecs::Write<State> sta
 }
 /// [Event writer system]
 
-static void thirdSystem(ecs::EventReader<MyEvent> reader)
+static void thirdSystem(EventReader<MyEvent> reader)
 {
     for (const auto& event : reader)
     {
@@ -57,7 +63,7 @@ static void thirdSystem(ecs::EventReader<MyEvent> reader)
     }
 }
 
-static void fourthSystem(ecs::EventReader<MyEvent> reader)
+static void fourthSystem(EventReader<MyEvent> reader)
 {
     for (const auto& event : reader)
     {
@@ -74,7 +80,7 @@ int main()
     cubos.addEvent<MyEvent>();
     /// [Adding event]
 
-    cubos.startupSystem([](ecs::Write<cubos::engine::ShouldQuit> quit) { quit->value = false; });
+    cubos.startupSystem([](Write<ShouldQuit> quit) { quit->value = false; });
 
     /// [Adding systems]
     cubos.system(firstSystem).tagged("A").before("B");

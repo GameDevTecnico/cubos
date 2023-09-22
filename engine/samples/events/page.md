@@ -1,19 +1,23 @@
 # Events {#examples-engine-events}
 
-@brief Using the @ref cubos::core::ecs::EventReader and @ref cubos::core::ecs::EventWriter
+@brief Using the @ref cubos::core::ecs::EventReader "EventReader" and @ref cubos::core::ecs::EventWriter "EventWriter".
 
-This example shows how the @ref cubos::core::ecs::EventReader and the @ref cubos::core::ecs::EventWriter can be used and configured, in a simple scene, to emit and read events. These are in the core, meaning, you don't need to add them to cubos.
+This example shows how the @ref cubos::core::ecs::EventReader "EventReader" and the @ref cubos::core::ecs::EventWriter "EventWriter" system arguments can be used to communicate from one system to another.
 
-Firstly, we need to create and register the event we want to emit. Here, our event has one variable, however, you can give it any number of variables of any type you want.
+For convinience, we introduce these names in our scope with using-declarations.
+
+@snippet events/main.cpp Using type for aesthetic sake
+
+Firstly, we need to create and register the event we want to emit. Here, our event is a simple struct with a single field, however, you can use any type you want.
 
 @snippet events/main.cpp Event struct
 @snippet events/main.cpp Adding event
 
-To receive these events, we can make a simple system, using the @ref cubos::core::ecs::EventReader and iterating through all the events it has. This will be the layout of all our reader systems (A, C, D).
+To receive these events, we can make a simple system which takes the @ref cubos::core::ecs::EventReader "EventReader" system argument and iterates through all the events it has. This will be the layout of all our reader systems (A, C, D).
 
 @snippet events/main.cpp Event reader system
 
-Now, to emit these events, we will use the @ref cubos::core::ecs::EventWriter. This system will emit 3 events on the first frame and another 3 on the second frame. By setting the value of the ShouldQuit resource to true on the second frame, the engine stops before reaching the third frame. 
+Now, to emit these events, we will use the @ref cubos::core::ecs::EventWriter "EventWriter" system argument. This system will emit 3 events on the first frame and another 3 on the second frame. By setting the value of the @ref cubos::engine::ShouldQuit "ShouldQuit" resource to true on the second frame, the engine stops before reaching the third frame. 
 
 @snippet events/main.cpp Event writer system
 
