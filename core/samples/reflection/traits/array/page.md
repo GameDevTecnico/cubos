@@ -30,3 +30,7 @@ Using this function is now as simple as:
 
 Its important to note that both the includes above are necessary, as we're
 reflecting the type `std::vector<int>`, which also means reflecting `int`.
+
+Executing the sample should output:
+
+@snippet reflection/traits/array/main.cpp Expected output

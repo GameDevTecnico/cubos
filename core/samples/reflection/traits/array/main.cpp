@@ -46,7 +46,18 @@ void printArray(const T& array)
 
 int main()
 {
-    std::vector<int> vec = {1, 1, 2, 3, 5, 8, 13};
+    std::vector<int32_t> vec = {1, 1, 2, 3, 5, 8, 13};
     printArray(vec);
+
+    /// [Expected output]
+    // Array with 7 elements of type int32_t
+    // Element 0: 1
+    // Element 1: 1
+    // Element 2: 2
+    // Element 3: 3
+    // Element 4: 5
+    // Element 5: 8
+    // Element 6: 13
+    /// [Expected output]
 }
 /// [Usage]
