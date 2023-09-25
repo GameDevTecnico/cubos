@@ -9,13 +9,13 @@
 
 #include <glm/glm.hpp>
 
-#include <cubos/core/gl/camera.hpp>
 #include <cubos/core/gl/grid.hpp>
 #include <cubos/core/gl/palette.hpp>
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/io/window.hpp>
 
+#include <cubos/engine/renderer/camera.hpp>
 #include <cubos/engine/renderer/pps/manager.hpp>
 
 namespace cubos::engine
@@ -36,6 +36,14 @@ namespace cubos::engine
     /// @brief Resource which is an handle to a generic renderer.
     /// @ingroup renderer-plugin
     using Renderer = std::shared_ptr<BaseRenderer>;
+
+    /// @brief Struct which holds the viewport information for a camera, to be used for drawing.
+    /// @ingroup renderer-plugin
+    struct Viewport
+    {
+        glm::ivec2 position;
+        glm::ivec2 size;
+    };
 
     /// @brief Interface which abstracts different rendering methods.
     ///
@@ -82,11 +90,13 @@ namespace cubos::engine
         glm::uvec2 size() const;
 
         /// @brief Draws a frame.
+        /// @param view Camera view transform.
+        /// @param viewport Camera viewport.
         /// @param camera Camera to use.
         /// @param frame Frame to draw.
         /// @param usePostProcessing Whether to use post processing.
         /// @param target Target framebuffer to draw to.
-        void render(const core::gl::Camera& camera, const RendererFrame& frame, bool usePostProcessing = true,
+        void render(const glm::mat4& view, const Viewport& viewport, const engine::Camera& camera, const RendererFrame& frame, bool usePostProcessing = true,
                     const core::gl::Framebuffer& target = nullptr);
 
         /// @brief Gets a reference to the post processing manager.
@@ -109,10 +119,12 @@ namespace cubos::engine
         /// When post processing is enabled, the target framebuffer will be the internal texture
         /// which will be used for post processing.
         ///
+        /// @param view Camera view transform.
+        /// @param viewport Camera viewport.
         /// @param camera Camera to use.
         /// @param frame Frame to draw.
         /// @param target Target framebuffer.
-        virtual void onRender(const core::gl::Camera& camera, const RendererFrame& frame,
+        virtual void onRender(const glm::mat4& view, const Viewport& viewport, const engine::Camera& camera, const RendererFrame& frame,
                               core::gl::Framebuffer target) = 0;
 
     private:

@@ -47,7 +47,7 @@ namespace cubos::engine
         // Implement interface methods.
 
         void onResize(glm::uvec2 size) override;
-        void onRender(const core::gl::Camera& camera, const RendererFrame& frame,
+        void onRender(const glm::mat4& view, const Viewport& viewport, const engine::Camera& camera, const RendererFrame& frame,
                       core::gl::Framebuffer target) override;
 
     private:

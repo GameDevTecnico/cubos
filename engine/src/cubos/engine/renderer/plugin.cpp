@@ -1,5 +1,4 @@
 #include <cubos/core/ecs/query.hpp>
-#include <cubos/core/gl/camera.hpp>
 
 #include <cubos/engine/renderer/deferred_renderer.hpp>
 #include <cubos/engine/renderer/directional_light.hpp>
@@ -96,13 +95,13 @@ static void frameEnvironment(Write<RendererFrame> frame, Read<RendererEnvironmen
 /// @param position Viewport position.
 /// @param size Viewport size.
 /// @param count How many cameras need to be fitted in to the given viewport.
-/// @param cameras Output array where the viewports will be set.
-static void splitViewport(glm::ivec2 position, glm::ivec2 size, int count, cubos::core::gl::Camera* cameras)
+/// @param viewport Output array where the viewports will be set.
+static void splitViewport(glm::ivec2 position, glm::ivec2 size, int count, Viewport* viewports)
 {
     if (count == 1)
     {
-        cameras[0].viewportPosition = position;
-        cameras[0].viewportSize = size;
+        viewports[0].position = position;
+        viewports[0].size = size;
     }
     else if (count >= 2)
     {
@@ -121,15 +120,18 @@ static void splitViewport(glm::ivec2 position, glm::ivec2 size, int count, cubos
             splitOffset = {0, size.y / 2};
         }
 
-        splitViewport(position, splitSize, count / 2, cameras);
-        splitViewport(position + splitOffset, splitSize, (count + 1) / 2, &cameras[count / 2]);
+        splitViewport(position, splitSize, count / 2, viewports);
+        splitViewport(position + splitOffset, splitSize, (count + 1) / 2, &viewports[count / 2]);
     }
 }
 
 static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Write<RendererFrame> frame,
                  Query<Read<LocalToWorld>, Read<Camera>> query)
 {
-    cubos::core::gl::Camera cameras[4]{};
+    cubos::engine::Camera cameras[4]{};
+    glm::mat4 views[4]{};
+    Viewport viewports[4]{};
+    
     int cameraCount = 0;
 
     for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
@@ -145,12 +147,12 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
             cameras[cameraCount].fovY = camera->fovY;
             cameras[cameraCount].zNear = camera->zNear;
             cameras[cameraCount].zFar = camera->zFar;
-            cameras[cameraCount].view = glm::inverse(localToWorld->mat);
+            views[cameraCount] = glm::inverse(localToWorld->mat);
             cameraCount += 1;
         }
     }
 
-    splitViewport({0, 0}, (*renderer)->size(), cameraCount, cameras);
+    splitViewport({0, 0}, (*renderer)->size(), cameraCount, viewports);
 
     if (cameraCount == 0)
     {
@@ -159,7 +161,7 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
 
     for (int i = 0; i < cameraCount; ++i)
     {
-        (*renderer)->render(cameras[i], *frame);
+        (*renderer)->render(views[i], viewports[i], cameras[i], *frame);
     }
 
     frame->clear();

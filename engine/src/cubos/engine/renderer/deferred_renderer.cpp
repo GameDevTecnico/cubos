@@ -606,7 +606,7 @@ void DeferredRenderer::onResize(glm::uvec2 size)
     }
 }
 
-void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame, Framebuffer target)
+void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport, const Camera& camera, const RendererFrame& frame, Framebuffer target)
 {
     // Steps:
     // 1. Prepare the MVP matrix.
@@ -624,8 +624,8 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
 
     // 1. Prepare the MVP matrix.
     MVP mvp;
-    mvp.v = camera.view;
-    mvp.p = glm::perspective(glm::radians(camera.fovY), float(camera.viewportSize.x) / float(camera.viewportSize.y),
+    mvp.v = view;
+    mvp.p = glm::perspective(glm::radians(camera.fovY), float(viewport.size.x) / float(viewport.size.y),
                              camera.zNear, camera.zFar);
 
     // 2. Fill the light buffer with the light data.
@@ -696,8 +696,8 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
     mLightsBuffer->unmap();
 
     // 3. Set the renderer state.
-    mRenderDevice.setViewport(camera.viewportPosition.x, camera.viewportPosition.y, camera.viewportSize.x,
-                              camera.viewportSize.y);
+    mRenderDevice.setViewport(viewport.position.x, viewport.position.y, viewport.size.x,
+                              viewport.size.y);
 
     // 4. Geometry pass.
     // 4.1. Set the geometry pass state.
@@ -787,9 +787,9 @@ void DeferredRenderer::onRender(const Camera& camera, const RendererFrame& frame
         mSsaoTexBp->bind(mSampler);
     }
     mUVScaleBp->setConstant(
-        glm::vec2((float)camera.viewportSize.x / (float)mSize.x, (float)camera.viewportSize.y / (float)mSize.y));
-    mUVOffsetBp->setConstant(glm::vec2((float)camera.viewportPosition.x / (float)mSize.x,
-                                       (float)camera.viewportPosition.y / (float)mSize.y));
+        glm::vec2((float)viewport.size.x / (float)mSize.x, (float)viewport.size.y / (float)mSize.y));
+    mUVOffsetBp->setConstant(glm::vec2((float)viewport.position.x / (float)mSize.x,
+                                       (float)viewport.position.y / (float)mSize.y));
     mSkyGradientBottomBp->setConstant(frame.skyGradient(0));
     mSkyGradientTopBp->setConstant(frame.skyGradient(1));
     mInvVBp->setConstant(glm::inverse(mvp.v));

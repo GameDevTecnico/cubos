@@ -24,18 +24,18 @@ glm::uvec2 BaseRenderer::size() const
     return mSize;
 }
 
-void BaseRenderer::render(const core::gl::Camera& camera, const RendererFrame& frame, bool usePostProcessing,
+void BaseRenderer::render(const glm::mat4& view, const Viewport& viewport, const engine::Camera& camera, const RendererFrame& frame, bool usePostProcessing,
                           const core::gl::Framebuffer& target)
 {
     if (usePostProcessing && mPpsManager.passCount() > 0)
     {
-        this->onRender(camera, frame, mFramebuffer);
+        this->onRender(view, viewport, camera, frame, mFramebuffer);
         mPpsManager.provideInput(PostProcessingInput::Lighting, mTexture);
         mPpsManager.execute(target);
     }
     else
     {
-        this->onRender(camera, frame, target);
+        this->onRender(view, viewport, camera, frame, target);
     }
 }
 
