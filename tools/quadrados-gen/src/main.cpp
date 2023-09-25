@@ -29,7 +29,7 @@ struct Component
 /// Prints the help message of the program.
 static void printHelp()
 {
-    std::cerr << "Usage: quadrados <INPUT> <OUTPUT>" << std::endl;
+    std::cerr << "Usage: quadrados-gen <INPUT> <OUTPUT>" << std::endl;
     std::cerr << "Options:" << std::endl;
     std::cerr << "  -h Prints this help message." << std::endl;
 }
