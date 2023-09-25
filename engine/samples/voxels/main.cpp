@@ -1,12 +1,9 @@
-#include <cubos/core/settings.hpp>
-
-#include <cubos/engine/env_settings/plugin.hpp>
-#include <cubos/engine/renderer/light.hpp>
+#include <cubos/engine/settings/settings.hpp>
+#include <cubos/engine/renderer/directional_light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
-using cubos::core::Settings;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
@@ -69,7 +66,6 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
 int main(int argc, char** argv)
 {
     Cubos cubos{argc, argv};
-    cubos.addPlugin(envSettingsPlugin);
 
     cubos.addPlugin(rendererPlugin);
     /// [Adding the plugin]
