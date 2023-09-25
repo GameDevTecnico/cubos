@@ -78,6 +78,11 @@
             </dt>
             <dd>Provides safe read-write access to an object using a lock.</dd>
             <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              struct <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>
+            </dt>
+            <dd>Provides a type which is the same as the given type, but without any references.</dd>
+            <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">StandardStream</a>
             </dt>
             <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which wraps a <code>libc</code> file pointer.</dd>
@@ -135,6 +140,11 @@
               <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga542ca475a4392ceda925fab6d9200b26" class="m-doc">toBigEndian</a>(</span><span class="m-doc-wrap">T value) -&gt; T</span>
             </dt>
             <dd>Converts a value from local endianness to big endianness.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp;&amp;</span>
+            </dt>
+            <dd>Returns an R-value reference to the given value.</dd>
           </dl>
         </section>
       </div>

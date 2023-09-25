@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Environment settings module | CUBOS.</title>
+  <title>core/memory/move.hpp file | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,59 +44,52 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Environment settings <span class="m-thin">module</span></h1>
-        <p>Loads settings from the command line arguments.</p>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_9bdaf8f561be1ffd03f616379797b70b.html">memory</a>/</span>move.hpp <span class="m-thin">file</span>
+        </h1>
+        <p>Function <a href="group__core-memory.html#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />move</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md66">Startup tags</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>This plugin needs the <a href="structcubos_1_1engine_1_1Arguments.html" class="m-doc">Arguments</a> resource, and thus, the constructor <a href="classcubos_1_1engine_1_1Cubos.html#a5441a8dcc181b3845ee2133951d95ed1" class="m-doc">Cubos::<wbr />Cubos(int, char**)</a> must be used to construct the application. Any previous setting will be overwritten if its set on the arguments.</p><section id="autotoc_md66"><h3><a href="#autotoc_md66">Startup tags</a></h3><ul><li><code>cubos.settings</code> - the settings are loaded.</li><li><code>cubos.settings.env</code> - the settings are loaded.</li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="env__settings_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1memory.html" class="m-doc">cubos::core::memory</a></dt>
+            <dd><a href="group__core-memory.html" class="m-doc">Memory</a> module.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              struct <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">cubos::core::memory::RemoveReference</a>
+            </dt>
+            <dd>Provides a type which is the same as the given type, but without any references.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga5b186de8c0e9389e9b8ef6f0d8c91b13" class="m-doc">envSettingsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; RemoveReference&lt;T&gt;::Type&amp;&amp;</span>
             </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Returns an R-value reference to the given value.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga5b186de8c0e9389e9b8ef6f0d8c91b13"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga5b186de8c0e9389e9b8ef6f0d8c91b13" class="m-doc-self">envSettingsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="env__settings_2plugin_8hpp.html">&lt;engine/env_settings/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>

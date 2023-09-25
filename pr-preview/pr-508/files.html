@@ -131,6 +131,7 @@
                   <li>file <a href="buffer__stream_8hpp.html" class="m-doc">buffer_stream.hpp</a> <span class="m-doc">Class <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />BufferStream</a>.</span></li>
                   <li>file <a href="endianness_8hpp.html" class="m-doc">endianness.hpp</a> <span class="m-doc">Endianness utility functions.</span></li>
                   <li>file <a href="guards_8hpp.html" class="m-doc">guards.hpp</a> <span class="m-doc">Classes <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard</a> and <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard</a>.</span></li>
+                  <li>file <a href="move_8hpp.html" class="m-doc">move.hpp</a> <span class="m-doc">Function <a href="group__core-memory.html#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />move</a>.</span></li>
                   <li>file <a href="standard__stream_8hpp.html" class="m-doc">standard_stream.hpp</a> <span class="m-doc">Class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />StandardStream</a>.</span></li>
                   <li>file <a href="stream_8hpp.html" class="m-doc">stream.hpp</a> <span class="m-doc">Class <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />Stream</a>.</span></li>
                   <li>file <a href="type__map_8hpp.html" class="m-doc">type_map.hpp</a> <span class="m-doc">Class <a href="classcubos_1_1core_1_1memory_1_1TypeMap.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />TypeMap</a>.</span></li>
@@ -139,6 +140,19 @@
               <li class="m-doc-collapsible collapsed">
                 <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_f4414684a5bb1e1b8e9ba236e8bdb594.html" class="m-doc">reflection</a> <span class="m-doc"><a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</span>
                 <ul class="m-doc">
+                  <li class="m-doc-collapsible collapsed">
+                    <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_73cd920be1d9b25db5feb4d2a202c641.html" class="m-doc">external</a> <span class="m-doc">Reflection declarations for external types.</span>
+                    <ul class="m-doc">
+                      <li>file <a href="primitives_8hpp.html" class="m-doc">primitives.hpp</a> <span class="m-doc">Reflection declarations for primitive types.</span></li>
+                    </ul>
+                  </li>
+                  <li class="m-doc-collapsible collapsed">
+                    <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_85f1b5bc6fb8e602e74068211760bfae.html" class="m-doc">traits</a> <span class="m-doc"><a href="group__core-reflection.html" class="m-doc">Reflection</a> module built-in traits.</span>
+                    <ul class="m-doc">
+                      <li>file <a href="constructible_8hpp.html" class="m-doc">constructible.hpp</a> <span class="m-doc">Class <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait</a>.</span></li>
+                      <li>file <a href="constructible__utils_8hpp.html" class="m-doc">constructible_utils.hpp</a> <span class="m-doc">Utilities for <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />ConstructibleTrait</a>.</span></li>
+                    </ul>
+                  </li>
                   <li>file <a href="reflect_8hpp.html" class="m-doc">reflect.hpp</a> <span class="m-doc">Function <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />reflect</a> and related macros.</span></li>
                   <li>file <a href="type_8hpp.html" class="m-doc">type.hpp</a> <span class="m-doc">Class <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Type</a>.</span></li>
                 </ul>
@@ -152,7 +166,6 @@
                 </ul>
               </li>
               <li>file <a href="log_8hpp.html" class="m-doc">log.hpp</a> <span class="m-doc">Logging and assertion macros.</span></li>
-              <li>file <a href="settings_8hpp.html" class="m-doc">settings.hpp</a> <span class="m-doc">Class <a href="classcubos_1_1core_1_1Settings.html" class="m-doc">cubos::<wbr />core::<wbr />Settings</a>.</span></li>
               <li>file <a href="thread__pool_8hpp.html" class="m-doc">thread_pool.hpp</a> <span class="m-doc">Class <a href="classcubos_1_1core_1_1ThreadPool.html" class="m-doc">cubos::<wbr />core::<wbr />ThreadPool</a>.</span></li>
             </ul>
           </li>
@@ -192,18 +205,6 @@
                   <li>file <a href="collisions_2plugin_8hpp.html" class="m-doc">plugin.hpp</a> <span class="m-doc">Plugin entry point.</span></li>
                   <li>file <a href="aabb_8hpp.html" class="m-doc">aabb.hpp</a> <span class="m-doc">Component <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">cubos::<wbr />engine::<wbr />ColliderAABB</a>.</span></li>
                   <li>file <a href="broad__phase__collisions_8hpp.html" class="m-doc">broad_phase_collisions.hpp</a> <span class="m-doc">Resource <a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html" class="m-doc">cubos::<wbr />engine::<wbr />BroadPhaseCollisions</a>.</span></li>
-                </ul>
-              </li>
-              <li class="m-doc-collapsible collapsed">
-                <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_6c35851ea5afe98a2e16bb1923c0c18a.html" class="m-doc">env_settings</a> <span class="m-doc"><a href="group__env-settings-plugin.html" class="m-doc">Environment settings</a> plugin directory.</span>
-                <ul class="m-doc">
-                  <li>file <a href="env__settings_2plugin_8hpp.html" class="m-doc">plugin.hpp</a> <span class="m-doc">Plugin entry point.</span></li>
-                </ul>
-              </li>
-              <li class="m-doc-collapsible collapsed">
-                <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_e3da6a0d695fa4fab64ff7a1dec1a4bb.html" class="m-doc">file_settings</a> <span class="m-doc"><a href="group__file-settings-plugin.html" class="m-doc">File settings</a> plugin directory.</span>
-                <ul class="m-doc">
-                  <li>file <a href="file__settings_2plugin_8hpp.html" class="m-doc">plugin.hpp</a> <span class="m-doc">Plugin entry point.</span></li>
                 </ul>
               </li>
               <li class="m-doc-collapsible collapsed">
@@ -251,6 +252,13 @@
                 </ul>
               </li>
               <li class="m-doc-collapsible collapsed">
+                <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_8711f680e2d25dedddc79c2be2b1fda2.html" class="m-doc">settings</a> <span class="m-doc"><a href="group__settings-plugin.html" class="m-doc">Settings</a> plugin directory.</span>
+                <ul class="m-doc">
+                  <li>file <a href="settings_2plugin_8hpp.html" class="m-doc">plugin.hpp</a> <span class="m-doc">Plugin entry point.</span></li>
+                  <li>file <a href="settings_8hpp.html" class="m-doc">settings.hpp</a> <span class="m-doc">Class <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">cubos::<wbr />engine::<wbr />Settings</a>.</span></li>
+                </ul>
+              </li>
+              <li class="m-doc-collapsible collapsed">
                 <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_c185369e92e3603c6d00fa8343148da7.html" class="m-doc">tools</a> <span class="m-doc"><a href="group__tool-plugins.html" class="m-doc">Tools</a> plugins directory.</span>
                 <ul class="m-doc">
                   <li class="m-doc-collapsible collapsed">
@@ -269,6 +277,12 @@
                     <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_3733897ca737f1fa8773f329655abd67.html" class="m-doc">entity_selector</a> <span class="m-doc"><a href="group__entity-selector-tool-plugin.html" class="m-doc">Entity selector</a> plugin directory.</span>
                     <ul class="m-doc">
                       <li>file <a href="tools_2entity__selector_2plugin_8hpp.html" class="m-doc">plugin.hpp</a> <span class="m-doc">Plugin entry point.</span></li>
+                    </ul>
+                  </li>
+                  <li class="m-doc-collapsible collapsed">
+                    <a href="#" onclick="return toggle(this)">dir</a> <a href="dir_8b12085945cef5a7cea7b856ed1ac7f6.html" class="m-doc">scene_editor</a> <span class="m-doc"><a href="group__scene-editor-tool-plugin.html" class="m-doc">Scene editor</a> plugin directory.</span>
+                    <ul class="m-doc">
+                      <li>file <a href="tools_2scene__editor_2plugin_8hpp.html" class="m-doc">plugin.hpp</a> <span class="m-doc">Plugin entry point.</span></li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
