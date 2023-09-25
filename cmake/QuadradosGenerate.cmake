@@ -4,8 +4,8 @@ function(quadrados_generate target source_dir)
 
     add_custom_command(
         OUTPUT ${binary_dir}/${target}-components.cpp
-        COMMAND $<TARGET_FILE:quadrados> generate ${source_dir} ${binary_dir}/${target}-components.cpp
-        DEPENDS $<TARGET_FILE:quadrados> ${source_dir}
+        COMMAND $<TARGET_FILE:quadrados-gen> ${source_dir} ${binary_dir}/${target}-components.cpp
+        DEPENDS $<TARGET_FILE:quadrados-gen> ${source_dir}
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     )
 

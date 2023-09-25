@@ -6,11 +6,8 @@ set(QUADRADOS_SOURCE
     "src/entry.cpp"
     "src/embed.cpp"
     "src/convert.cpp"
-    "src/generate.cpp"
 )
 
 add_executable(quadrados ${QUADRADOS_SOURCE})
-set_property(TARGET quadrados PROPERTY CXX_STANDARD 20)
-target_compile_features(quadrados PUBLIC cxx_std_20)
-target_link_libraries(quadrados PUBLIC cubos-core)
+target_link_libraries(quadrados PUBLIC cubos-engine)
 cubos_common_target_options(quadrados)
