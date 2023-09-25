@@ -40,9 +40,9 @@ int main()
     /// [Accessing the trait]
 
     /// [Iterating over fields]
-    for (auto field = fields.firstField(); field != nullptr; field = field->next())
+    for (auto& field : fields)
     {
-        CUBOS_INFO("Field '{}' of type '{}'", field->name(), field->type().name());
+        CUBOS_INFO("Field '{}' of type '{}'", field.name(), field.type().name());
     }
     /// [Iterating over fields]
 

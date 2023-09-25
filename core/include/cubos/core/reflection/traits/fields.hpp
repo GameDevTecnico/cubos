@@ -101,6 +101,41 @@ namespace cubos::core::reflection
             Field* mNext;
         };
 
+        /// @brief Used to iterate over the fields on a fields trait.
+        class Iterator final
+        {
+        public:
+            /// @brief Constructs.
+            /// @param field Field.
+            Iterator(const Field* field);
+
+            /// @brief Copy constructs.
+            /// @param iterator Iterator.
+            Iterator(const Iterator& iterator) = default;
+
+            Iterator& operator=(const Iterator&) = default;
+            bool operator==(const Iterator&) const = default;
+            bool operator!=(const Iterator&) const = default;
+
+            /// @brief Accesses the field referenced by this iterator.
+            /// @note Aborts if there's no field.
+            /// @return Reference to the field.
+            const Field& operator*() const;
+
+            /// @brief Accesses the field referenced by this iterator.
+            /// @note Aborts if there's no field.
+            /// @return Pointer to the field.
+            const Field* operator->() const;
+
+            /// @brief Advances the iterator.
+            /// @note Aborts if there's no field.
+            /// @return Reference to this.
+            Iterator& operator++();
+
+        private:
+            const Field* mField;
+        };
+
         ~FieldsTrait();
 
         /// @brief Constructs.
@@ -130,14 +165,18 @@ namespace cubos::core::reflection
             return std::move(*this).withField(reflect<F>(), field, new AddressOfImpl<O, F>(pointer));
         }
 
-        /// @brief Gets the field with the given type.
+        /// @brief Gets the field with the given name.
         /// @param name Field name.
         /// @return Field with the given name, or null if no such field exists.
         const Field* field(const std::string& name) const;
 
-        /// @brief Gets the first field of the type.
-        /// @return Pointer to the first field of the type, or null if there are no fields.
-        const Field* firstField() const;
+        /// @brief Gets an iterator to the first field of the type.
+        /// @return Iterator.
+        Iterator begin() const;
+
+        /// @brief Gets an iterator which represents the end of the field list of a type.
+        /// @return Iterator.
+        Iterator end() const;
 
     private:
         Field* mFirstField;

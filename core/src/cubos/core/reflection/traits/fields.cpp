@@ -47,6 +47,30 @@ const FieldsTrait::Field* FieldsTrait::Field::next() const
     return mNext;
 }
 
+FieldsTrait::Iterator::Iterator(const Field* field)
+    : mField{field}
+{
+}
+
+const FieldsTrait::Field& FieldsTrait::Iterator::operator*() const
+{
+    CUBOS_ASSERT(mField, "Iterator does not point to a field");
+    return *mField;
+}
+
+const FieldsTrait::Field* FieldsTrait::Iterator::operator->() const
+{
+    CUBOS_ASSERT(mField, "Iterator does not point to a field");
+    return mField;
+}
+
+FieldsTrait::Iterator& FieldsTrait::Iterator::operator++()
+{
+    CUBOS_ASSERT(mField, "Iterator does not point to a field");
+    mField = mField->next();
+    return *this;
+}
+
 FieldsTrait::FieldsTrait()
     : mFirstField(nullptr)
     , mLastField(nullptr)
@@ -107,7 +131,12 @@ const FieldsTrait::Field* FieldsTrait::field(const std::string& name) const
     return nullptr;
 }
 
-const FieldsTrait::Field* FieldsTrait::firstField() const
+FieldsTrait::Iterator FieldsTrait::begin() const
 {
-    return mFirstField;
+    return Iterator{mFirstField};
+}
+
+FieldsTrait::Iterator FieldsTrait::end() const
+{
+    return Iterator{nullptr};
 }
