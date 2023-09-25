@@ -88,15 +88,18 @@
             </dt>
             <dd>Sets the sky gradient of the scene.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a7b8124b8866c3760442a3157cda68fca" class="m-doc">light</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1SpotLight.html" class="m-doc">core::<wbr />gl::<wbr />SpotLight</a>&amp; light)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a2b8c5cc9cada61f04c0cecb036ef6782" class="m-doc">light</a>(</span><span class="m-doc-wrap">glm::mat4 transform,
+              const <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a>&amp; light)</span>
             </dt>
             <dd>Adds a spot light to the frame.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a0f72f76b4759d66538fa75efa9bffeea" class="m-doc">light</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html" class="m-doc">core::<wbr />gl::<wbr />DirectionalLight</a>&amp; light)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#af2ebd9fd3193d0d019bcffcaba8cec55" class="m-doc">light</a>(</span><span class="m-doc-wrap">glm::mat4 transform,
+              const <a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a>&amp; light)</span>
             </dt>
             <dd>Adds a directional light to the frame.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ad9a7b4a3e11717eed7995bcc1da00cd7" class="m-doc">light</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1PointLight.html" class="m-doc">core::<wbr />gl::<wbr />PointLight</a>&amp; light)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ae54a0150c91d785c2b1cf5f4381d4e78" class="m-doc">light</a>(</span><span class="m-doc-wrap">glm::mat4 transform,
+              const <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a>&amp; light)</span>
             </dt>
             <dd>Adds a point light to the frame.</dd>
             <dt id="ae297e24028ccc5ad891687b83cb65a4a">
@@ -116,15 +119,15 @@
             </dt>
             <dd>Gets the sky gradient of the scene.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a92ebf7d588aac948d11745bd2a7f9465" class="m-doc">spotLights</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;<a href="structcubos_1_1core_1_1gl_1_1SpotLight.html" class="m-doc">core::<wbr />gl::<wbr />SpotLight</a>&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac71543f2b70f07df4cd785f136fe754c" class="m-doc">spotLights</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;std::pair&lt;glm::mat4, <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a>&gt;&gt;&amp;</span>
             </dt>
             <dd>Gets the spot lights of the frame.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1267e5ac7148bc88afbd7906c3e48376" class="m-doc">directionalLights</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;<a href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html" class="m-doc">core::<wbr />gl::<wbr />DirectionalLight</a>&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a884e07bfa9717c830737e28862406cf4" class="m-doc">directionalLights</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;std::pair&lt;glm::mat4, <a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a>&gt;&gt;&amp;</span>
             </dt>
             <dd>Gets the directional lights of the frame.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a45982a4fbf4856c14d531fe28234c698" class="m-doc">pointLights</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;<a href="structcubos_1_1core_1_1gl_1_1PointLight.html" class="m-doc">core::<wbr />gl::<wbr />PointLight</a>&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a94fe4a56578631b9cf712ae6c71ed3e0" class="m-doc">pointLights</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;std::pair&lt;glm::mat4, <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a>&gt;&gt;&amp;</span>
             </dt>
             <dd>Gets the point lights of the frame.</dd>
           </dl>
@@ -192,9 +195,10 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a7b8124b8866c3760442a3157cda68fca"><div>
+          <section class="m-doc-details" id="a2b8c5cc9cada61f04c0cecb036ef6782"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7b8124b8866c3760442a3157cda68fca" class="m-doc-self">light</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1SpotLight.html" class="m-doc">core::<wbr />gl::<wbr />SpotLight</a>&amp; light)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b8c5cc9cada61f04c0cecb036ef6782" class="m-doc-self">light</a>(</span><span class="m-doc-wrap">glm::mat4 transform,
+              const <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a>&amp; light)</span></span>
             </h3>
             <p>Adds a spot light to the frame.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -203,15 +207,20 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">light</td>
+                  <td style="width: 1%">transform</td>
+                  <td>Light transform matrix.</td>
+                </tr>
+                <tr>
+                  <td>light</td>
                   <td>Spot light to add.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a0f72f76b4759d66538fa75efa9bffeea"><div>
+          <section class="m-doc-details" id="af2ebd9fd3193d0d019bcffcaba8cec55"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f72f76b4759d66538fa75efa9bffeea" class="m-doc-self">light</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html" class="m-doc">core::<wbr />gl::<wbr />DirectionalLight</a>&amp; light)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af2ebd9fd3193d0d019bcffcaba8cec55" class="m-doc-self">light</a>(</span><span class="m-doc-wrap">glm::mat4 transform,
+              const <a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a>&amp; light)</span></span>
             </h3>
             <p>Adds a directional light to the frame.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -220,15 +229,20 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">light</td>
+                  <td style="width: 1%">transform</td>
+                  <td>Light transform matrix.</td>
+                </tr>
+                <tr>
+                  <td>light</td>
                   <td>Directional light to add.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad9a7b4a3e11717eed7995bcc1da00cd7"><div>
+          <section class="m-doc-details" id="ae54a0150c91d785c2b1cf5f4381d4e78"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad9a7b4a3e11717eed7995bcc1da00cd7" class="m-doc-self">light</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1core_1_1gl_1_1PointLight.html" class="m-doc">core::<wbr />gl::<wbr />PointLight</a>&amp; light)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae54a0150c91d785c2b1cf5f4381d4e78" class="m-doc-self">light</a>(</span><span class="m-doc-wrap">glm::mat4 transform,
+              const <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a>&amp; light)</span></span>
             </h3>
             <p>Adds a point light to the frame.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -237,7 +251,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">light</td>
+                  <td style="width: 1%">transform</td>
+                  <td>Light transform matrix.</td>
+                </tr>
+                <tr>
+                  <td>light</td>
                   <td>Point light to add.</td>
                 </tr>
               </tbody>
@@ -294,9 +312,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a92ebf7d588aac948d11745bd2a7f9465"><div>
+          <section class="m-doc-details" id="ac71543f2b70f07df4cd785f136fe754c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const std::vector&lt;<a href="structcubos_1_1core_1_1gl_1_1SpotLight.html" class="m-doc">core::<wbr />gl::<wbr />SpotLight</a>&gt;&amp; cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92ebf7d588aac948d11745bd2a7f9465" class="m-doc-self">spotLights</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const std::vector&lt;std::pair&lt;glm::mat4, <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac71543f2b70f07df4cd785f136fe754c" class="m-doc-self">spotLights</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the spot lights of the frame.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -308,9 +326,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a1267e5ac7148bc88afbd7906c3e48376"><div>
+          <section class="m-doc-details" id="a884e07bfa9717c830737e28862406cf4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const std::vector&lt;<a href="structcubos_1_1core_1_1gl_1_1DirectionalLight.html" class="m-doc">core::<wbr />gl::<wbr />DirectionalLight</a>&gt;&amp; cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1267e5ac7148bc88afbd7906c3e48376" class="m-doc-self">directionalLights</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const std::vector&lt;std::pair&lt;glm::mat4, <a href="structcubos_1_1engine_1_1DirectionalLight.html" class="m-doc">DirectionalLight</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a884e07bfa9717c830737e28862406cf4" class="m-doc-self">directionalLights</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the directional lights of the frame.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -322,9 +340,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a45982a4fbf4856c14d531fe28234c698"><div>
+          <section class="m-doc-details" id="a94fe4a56578631b9cf712ae6c71ed3e0"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const std::vector&lt;<a href="structcubos_1_1core_1_1gl_1_1PointLight.html" class="m-doc">core::<wbr />gl::<wbr />PointLight</a>&gt;&amp; cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a45982a4fbf4856c14d531fe28234c698" class="m-doc-self">pointLights</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">const std::vector&lt;std::pair&lt;glm::mat4, <a href="structcubos_1_1engine_1_1PointLight.html" class="m-doc">PointLight</a>&gt;&gt;&amp; cubos::<wbr />engine::<wbr />RendererFrame::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a94fe4a56578631b9cf712ae6c71ed3e0" class="m-doc-self">pointLights</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Gets the point lights of the frame.</p>
             <table class="m-table m-fullwidth m-flat">
