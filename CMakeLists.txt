@@ -54,7 +54,7 @@ function(cubos_common_target_options target)
     # Enable clang-tidy
     find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
     if(CLANG_TIDY_EXE)
-        option(USE_CLANG_TIDY ON)
+        option(USE_CLANG_TIDY "Enable clang-tidy" ON)
         if(USE_CLANG_TIDY)
             set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}")
             if(FIX_CLANG_TIDY_ERRORS)
