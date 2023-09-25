@@ -84,7 +84,7 @@ namespace cubos::engine
         ///
         /// @param window Window that received the event.
         /// @param event Event to discard.
-        inline void handle(const core::io::Window& window, const core::io::WindowEvent& event)
+        static void handle(const core::io::Window& window, const core::io::WindowEvent& event)
         {
             (void)window;
             (void)event;
@@ -106,7 +106,8 @@ namespace cubos::engine
             bool negative = false; ///< Whether the pressed key is a negative axis key.
         };
 
-        bool anyPressed(const core::io::Window& window, const std::vector<std::pair<Key, Modifiers>>& keys) const;
+        static bool anyPressed(const core::io::Window& window,
+                               const std::vector<std::pair<Key, Modifiers>>& keys);
         bool anyPressed(int player, const std::vector<GamepadButton>& buttons) const;
         void handleActions(const core::io::Window& window, const std::vector<BindingIndex>& boundActions);
         void handleAxes(const core::io::Window& window, const std::vector<BindingIndex>& boundAxes);

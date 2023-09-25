@@ -833,7 +833,7 @@ static bool generate(const GenerateOptions& options)
         else
         {
             file << "    ser.beginObject(name);" << std::endl;
-            if (component.fields.size() == 0)
+            if (component.fields.empty())
             {
                 file << "    (void)obj;" << std::endl;
             }
@@ -858,7 +858,7 @@ static bool generate(const GenerateOptions& options)
         else
         {
             file << "    des.beginObject();" << std::endl;
-            if (component.fields.size() == 0)
+            if (component.fields.empty())
             {
                 file << "    (void)obj;" << std::endl;
             }

@@ -19,7 +19,7 @@ void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderA
 
         // Only want scale and rotation, extract translation and remove it.
         auto translation = glm::vec3{transform[3]};
-        transform[3] = glm::vec4{0.0f, 0.0f, 0.0f, 1.0f};
+        transform[3] = glm::vec4{0.0F, 0.0F, 0.0F, 1.0F};
 
         // Rotate and scale corners.
         auto rotatedCorners = glm::mat4x3{transform * points};
@@ -83,7 +83,7 @@ void sweep(Write<BroadPhaseCollisions> collisions)
         {
             if (marker.isMin)
             {
-                for (auto& other : collisions->activePerAxis[axis])
+                for (const auto& other : collisions->activePerAxis[axis])
                 {
                     collisions->sweepOverlapMaps[axis][marker.entity].push_back(other);
                 }
@@ -101,23 +101,50 @@ void sweep(Write<BroadPhaseCollisions> collisions)
 CollisionType getCollisionType(bool box, bool capsule, bool plane, bool simplex)
 {
     if (box && capsule)
+    {
         return CollisionType::BoxCapsule;
+    }
+
     if (box && plane)
+    {
         return CollisionType::BoxPlane;
+    }
+
     if (box && simplex)
+    {
         return CollisionType::BoxSimplex;
+    }
+
     if (box)
+    {
         return CollisionType::BoxBox;
+    }
+
     if (capsule && plane)
+    {
         return CollisionType::CapsulePlane;
+    }
+
     if (capsule && simplex)
+    {
         return CollisionType::CapsuleSimplex;
+    }
+
     if (capsule)
+    {
         return CollisionType::CapsuleCapsule;
+    }
+
     if (plane && simplex)
+    {
         return CollisionType::PlaneSimplex;
+    }
+
     if (plane)
+    {
         return CollisionType::PlanePlane;
+    }
+
     return CollisionType::SimplexSimplex;
 }
 
@@ -145,15 +172,21 @@ void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, OptRead<Pla
                 {
                 case 0: // X
                     if (aabb->overlapsY(*otherAabb) && aabb->overlapsZ(*otherAabb))
+                    {
                         collisions->addCandidate(type, {entity, other});
+                    }
                     break;
                 case 1: // Y
                     if (aabb->overlapsX(*otherAabb) && aabb->overlapsZ(*otherAabb))
+                    {
                         collisions->addCandidate(type, {entity, other});
+                    }
                     break;
                 case 2: // Z
                     if (aabb->overlapsX(*otherAabb) && aabb->overlapsY(*otherAabb))
+                    {
                         collisions->addCandidate(type, {entity, other});
+                    }
                     break;
                 }
             }

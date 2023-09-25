@@ -104,9 +104,9 @@ void cubos::core::data::serialize<std::string>(Serializer& ser, const std::strin
     ser.writeString(obj.c_str(), name);
 }
 
-void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_reference val, const char* name)
+void cubos::core::data::serialize(Serializer& ser, std::vector<bool>::const_reference obj, const char* name)
 {
-    ser.writeBool(val, name);
+    ser.writeBool(obj, name);
 }
 
 // Implementation of serialize() for GLM types.

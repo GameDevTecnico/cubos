@@ -43,7 +43,7 @@ namespace cubos::core::data
         std::size_t parent(std::size_t id) const override;
         std::size_t sibling(std::size_t id) const override;
         std::size_t child(std::size_t id) const override;
-        std::unique_ptr<memory::Stream> open(std::size_t id, File::Handle handle, File::OpenMode mode) override;
+        std::unique_ptr<memory::Stream> open(std::size_t id, File::Handle file, File::OpenMode mode) override;
 
     private:
         /// @brief Information about a file in the directory.

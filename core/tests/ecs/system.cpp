@@ -197,23 +197,23 @@ static void accessNothing()
 {
 }
 
-static void accessResources(Read<int>, Write<double>, Read<float>)
+static void accessResources(Read<int> /*unused*/, Write<double> /*unused*/, Read<float> /*unused*/)
 {
 }
 
-static void accessComponents(Query<Read<int>, Write<double>>, Query<Read<int>, Read<float>>)
+static void accessComponents(Query<Read<int>, Write<double>> /*unused*/, Query<Read<int>, Read<float>> /*unused*/)
 {
 }
 
-static void accessCommands(Commands)
+static void accessCommands(Commands /*unused*/)
 {
 }
 
-static void accessWriteWorld(Write<World>)
+static void accessWriteWorld(Write<World> /*unused*/)
 {
 }
 
-static void accessReadWorld(Read<World>)
+static void accessReadWorld(Read<World> /*unused*/)
 {
 }
 

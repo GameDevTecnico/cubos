@@ -18,7 +18,7 @@ namespace cubos::engine
     /// @ingroup collisions-plugin
     struct [[cubos::component("cubos/box_collider", VecStorage)]] BoxCollider
     {
-        glm::mat4 transform{1.0f};    ///< Transform of the collider.
+        glm::mat4 transform{1.0F};    ///< Transform of the collider.
         cubos::core::geom::Box shape; ///< Box shape of the collider.
 
         /// @brief Margin of the collider. Needed for collision stability.
@@ -26,6 +26,6 @@ namespace cubos::engine
         /// The collider margin avoids collision errors by rounding off sharp corners. It is
         /// absolute so the collider's transform won't affect it. Shouldn't be changed without good
         /// reason, as it's preferable to scale down the collider to account for it.
-        float margin = 0.04f;
+        float margin = 0.04F;
     };
 } // namespace cubos::engine

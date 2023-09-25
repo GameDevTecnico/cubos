@@ -13,22 +13,22 @@ namespace cubos::core::geom
     /// @ingroup core-geom
     struct Capsule
     {
-        float radius = 1.0f; ///< Radius of the capsule.
-        float length = 0.0f; ///< Length of the capsule.
+        float radius = 1.0F; ///< Radius of the capsule.
+        float length = 0.0F; ///< Length of the capsule.
 
         /// @brief Constructs a sphere.
         /// @param radius Sphere radius.
         /// @return Sphere shape.
         static Capsule sphere(float radius)
         {
-            return {radius, 0.0f};
+            return {radius, 0.0F};
         }
 
         /// @brief Gets the height of the capsule.
         /// @return Height of the capsule.
         float height() const
         {
-            return length + 2.0f * radius;
+            return length + 2.0F * radius;
         }
     };
 } // namespace cubos::core::geom

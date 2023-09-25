@@ -142,22 +142,22 @@ float Input::axis(const char* axisName, int player) const
     if (pIt == mPlayerBindings.end())
     {
         CUBOS_WARN("Player {} does not have any associated input bindings", player);
-        return 0.0f;
+        return 0.0F;
     }
 
     auto aIt = pIt->second.axes().find(axisName);
     if (aIt == pIt->second.axes().end())
     {
         CUBOS_WARN("Axis {} is not bound to any input for player {}", axisName, player);
-        return 0.0f;
+        return 0.0F;
     }
 
     return aIt->second.value();
 }
 
-bool Input::anyPressed(const Window& window, const std::vector<std::pair<Key, Modifiers>>& keys) const
+bool Input::anyPressed(const Window& window, const std::vector<std::pair<Key, Modifiers>>& keys)
 {
-    for (auto& key : keys)
+    for (const auto& key : keys)
     {
         // window->pressed() returns true when more modifiers than the specified are active, so we need to check that
         // the modifiers are exactly the same as the ones specified in the binding.
@@ -177,9 +177,9 @@ bool Input::anyPressed(int player, const std::vector<GamepadButton>& buttons) co
     {
         return false;
     }
-    auto& state = mGamepadStates.at(it->second);
+    const auto& state = mGamepadStates.at(it->second);
 
-    for (auto& button : buttons)
+    for (const auto& button : buttons)
     {
         if (state.pressed(button))
         {
@@ -210,14 +210,14 @@ void Input::handleAxes(const Window& window, const std::vector<BindingIndex>& bo
     {
         auto& axis = mPlayerBindings[boundAxis.player].axes()[boundAxis.name];
 
-        float value = 0.0f;
+        float value = 0.0F;
         if (anyPressed(window, axis.negative()))
         {
-            value -= 1.0f;
+            value -= 1.0F;
         }
         if (anyPressed(window, axis.positive()))
         {
-            value += 1.0f;
+            value += 1.0F;
         }
         if (auto it = mPlayerGamepads.find(boundAxis.player); it != mPlayerGamepads.end())
         {
@@ -241,7 +241,7 @@ void Input::handle(const Window& window, const KeyEvent& event)
     this->handleAxes(window, mBoundAxes[event.key]);
 }
 
-void Input::handle(const Window&, const GamepadConnectionEvent& event)
+void Input::handle(const Window& /*unused*/, const GamepadConnectionEvent& event)
 {
     if (event.connected)
     {
@@ -259,11 +259,11 @@ void Input::handle(const Window&, const GamepadConnectionEvent& event)
     else
     {
         mGamepadStates.erase(event.gamepad);
-        for (auto it = mPlayerGamepads.begin(); it != mPlayerGamepads.end(); ++it)
+        for (const auto& playerGamepad : mPlayerGamepads)
         {
-            if (it->second == event.gamepad)
+            if (playerGamepad.second == event.gamepad)
             {
-                this->gamepad(it->first, -1);
+                this->gamepad(playerGamepad.first, -1);
                 break;
             }
         }

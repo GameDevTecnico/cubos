@@ -193,21 +193,21 @@ namespace cubos::core::data
     /// This is a special case because std::vector<bool> are stored as arrays of bits, and therefore
     /// need special handling.
     /// @param des The deserializer.
-    /// @param val The value to deserialize.
-    void deserialize(Deserializer& des, std::vector<bool>::reference val);
+    /// @param obj The value to deserialize.
+    void deserialize(Deserializer& des, std::vector<bool>::reference obj);
 
     /// Overload for deserializing std::vector.
     /// @tparam T The type of the vector.
     /// @param des The deserializer.
-    /// @param vec The vector to deserialize.
+    /// @param obj The vector to deserialize.
     template <typename T>
-    inline void deserialize(Deserializer& des, std::vector<T>& vec)
+    inline void deserialize(Deserializer& des, std::vector<T>& obj)
     {
         std::size_t length = des.beginArray();
-        vec.resize(length);
+        obj.resize(length);
         for (std::size_t i = 0; i < length; ++i)
         {
-            deserialize(des, vec[i]);
+            deserialize(des, obj[i]);
         }
         des.endArray();
     }
@@ -216,20 +216,20 @@ namespace cubos::core::data
     /// @tparam K The key type of the map.
     /// @tparam V The value type of the map.
     /// @param des The deserializer.
-    /// @param map The map to deserialize.
+    /// @param obj The map to deserialize.
     template <typename K, typename V>
-    inline void deserialize(Deserializer& des, std::unordered_map<K, V>& map)
+    inline void deserialize(Deserializer& des, std::unordered_map<K, V>& obj)
     {
         std::size_t length = des.beginDictionary();
-        map.clear();
-        map.reserve(length);
+        obj.clear();
+        obj.reserve(length);
         for (std::size_t i = 0; i < length; ++i)
         {
             K key;
             V value;
             des.read(key);
             des.read(value);
-            map.emplace(std::move(key), std::move(value));
+            obj.emplace(std::move(key), std::move(value));
         }
         des.endDictionary();
     }
@@ -238,13 +238,13 @@ namespace cubos::core::data
     /// @tparam T The type of the first value.
     /// @tparam U The type of the second value.
     /// @param des The deserializer.
-    /// @param pair The pair to deserialize.
+    /// @param obj The pair to deserialize.
     template <typename T, typename U>
-    inline void deserialize(Deserializer& des, std::pair<T, U>& pair)
+    inline void deserialize(Deserializer& des, std::pair<T, U>& obj)
     {
         des.beginObject();
-        des.read(pair.first);
-        des.read(pair.second);
+        des.read(obj.first);
+        des.read(obj.second);
         des.endObject();
     }
 } // namespace cubos::core::data

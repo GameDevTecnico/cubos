@@ -29,11 +29,11 @@ TEST_CASE("reflection::ConstructibleTrait")
 
     SUBCASE("destructor works")
     {
-        auto ptr = operator new(sizeof(DetectDestructor));
+        auto* ptr = operator new(sizeof(DetectDestructor));
 
         auto trait = ConstructibleTrait::typed<DetectDestructor>().build();
         bool destroyed = false;
-        auto detector = new (ptr) DetectDestructor(&destroyed);
+        auto* detector = new (ptr) DetectDestructor(&destroyed);
 
         REQUIRE_FALSE(destroyed);
         trait.destruct(detector);
@@ -44,7 +44,7 @@ TEST_CASE("reflection::ConstructibleTrait")
 
     SUBCASE("non-assigned constructors work as expected")
     {
-        auto ptr = operator new(sizeof(DetectDestructor));
+        auto* ptr = operator new(sizeof(DetectDestructor));
 
         auto trait = ConstructibleTrait::typed<DetectDestructor>().build();
         DetectDestructor detector{};
@@ -58,12 +58,12 @@ TEST_CASE("reflection::ConstructibleTrait")
 
     SUBCASE("default constructor works")
     {
-        auto ptr = operator new(sizeof(SimpleConstructible));
+        auto* ptr = operator new(sizeof(SimpleConstructible));
 
         auto trait = ConstructibleTrait::typed<SimpleConstructible>().withDefaultConstructor().build();
         REQUIRE(trait.defaultConstruct(ptr));
 
-        auto simple = static_cast<SimpleConstructible*>(ptr);
+        auto* simple = static_cast<SimpleConstructible*>(ptr);
         CHECK(simple->value == SimpleConstructible::DEFAULT);
         trait.destruct(ptr);
 
@@ -72,14 +72,14 @@ TEST_CASE("reflection::ConstructibleTrait")
 
     SUBCASE("copy constructor works")
     {
-        auto ptr = operator new(sizeof(SimpleConstructible));
+        auto* ptr = operator new(sizeof(SimpleConstructible));
 
         auto trait = ConstructibleTrait::typed<SimpleConstructible>().withCopyConstructor().build();
         SimpleConstructible copied{};
         copied.value = 1;
         REQUIRE(trait.copyConstruct(ptr, &copied));
 
-        auto simple = static_cast<SimpleConstructible*>(ptr);
+        auto* simple = static_cast<SimpleConstructible*>(ptr);
         CHECK(simple->value == copied.value);
         trait.destruct(ptr);
 
@@ -88,7 +88,7 @@ TEST_CASE("reflection::ConstructibleTrait")
 
     SUBCASE("move constructor works")
     {
-        auto ptr = operator new(sizeof(DetectDestructor));
+        auto* ptr = operator new(sizeof(DetectDestructor));
 
         auto trait = ConstructibleTrait::typed<DetectDestructor>().withMoveConstructor().build();
         bool destroyed = false;

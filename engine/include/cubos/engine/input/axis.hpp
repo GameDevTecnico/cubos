@@ -32,9 +32,9 @@ namespace cubos::engine
         InputAxis(std::vector<std::pair<core::io::Key, core::io::Modifiers>> positive,
                   std::vector<std::pair<core::io::Key, core::io::Modifiers>> negative,
                   std::vector<core::io::GamepadAxis> gamepadAxes)
-            : mPositive(positive)
-            , mNegative(negative)
-            , mGamepadAxes(gamepadAxes)
+            : mPositive(std::move(positive))
+            , mNegative(std::move(negative))
+            , mGamepadAxes(std::move(gamepadAxes))
         {
         }
 

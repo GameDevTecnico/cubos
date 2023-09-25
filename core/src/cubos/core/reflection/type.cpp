@@ -5,7 +5,7 @@ using namespace cubos::core::reflection;
 
 Type& Type::create(std::string name)
 {
-    return *(new Type(name));
+    return *(new Type(std::move(name)));
 }
 
 void Type::destroy(Type& type)

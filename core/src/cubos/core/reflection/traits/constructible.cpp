@@ -8,9 +8,6 @@ ConstructibleTrait::ConstructibleTrait(std::size_t size, std::size_t alignment, 
     : mSize(size)
     , mAlignment(alignment)
     , mDestructor(destructor)
-    , mDefaultConstructor(nullptr)
-    , mCopyConstructor(nullptr)
-    , mMoveConstructor(nullptr)
 {
     CUBOS_ASSERT(mAlignment > 0, "Alignment must be positive");
     CUBOS_ASSERT((mAlignment & (mAlignment - 1)) == 0, "Alignment must be a power of two");
@@ -55,7 +52,7 @@ void ConstructibleTrait::destruct(void* instance) const
 
 bool ConstructibleTrait::defaultConstruct(void* instance) const
 {
-    if (mDefaultConstructor)
+    if (mDefaultConstructor != nullptr)
     {
         mDefaultConstructor(instance);
         return true;
@@ -66,7 +63,7 @@ bool ConstructibleTrait::defaultConstruct(void* instance) const
 
 bool ConstructibleTrait::copyConstruct(void* instance, const void* other) const
 {
-    if (mCopyConstructor)
+    if (mCopyConstructor != nullptr)
     {
         mCopyConstructor(instance, other);
         return true;
@@ -77,7 +74,7 @@ bool ConstructibleTrait::copyConstruct(void* instance, const void* other) const
 
 bool ConstructibleTrait::moveConstruct(void* instance, void* other) const
 {
-    if (mMoveConstructor)
+    if (mMoveConstructor != nullptr)
     {
         mMoveConstructor(instance, other);
         return true;

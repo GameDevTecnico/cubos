@@ -12,7 +12,7 @@ using cubos::core::io::Window;
 
 using namespace cubos::engine;
 
-static const Asset<InputBindings> bindingsAsset = AnyAsset("bf49ba61-5103-41bc-92e0-8a442d7842c3");
+static const Asset<InputBindings> BindingsAsset = AnyAsset("bf49ba61-5103-41bc-92e0-8a442d7842c3");
 
 struct State
 {
@@ -122,7 +122,7 @@ static void showcaseAxis(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.axis("horizontal") != 0.0f || input.axis("vertical") != 0.0f)
+    if (input.axis("horizontal") != 0.0F || input.axis("vertical") != 0.0F)
     {
         CUBOS_INFO("horizontal: {}, vertical: {}", input.axis("horizontal"), input.axis("vertical"));
     }
@@ -138,7 +138,7 @@ static void showcaseModifierAxis(const Input& input, bool& explained)
         explained = true;
     }
 
-    if (input.axis("shift-vertical") != 0.0f)
+    if (input.axis("shift-vertical") != 0.0F)
     {
         CUBOS_INFO("shift-vertical: {}", input.axis("shift-vertical"));
     }
@@ -204,7 +204,7 @@ static void config(Write<Settings> settings)
 
 static void init(Read<Assets> assets, Write<Input> input)
 {
-    auto bindings = assets->read<InputBindings>(bindingsAsset);
+    auto bindings = assets->read<InputBindings>(BindingsAsset);
     input->bind(*bindings);
     CUBOS_INFO("Loaded bindings: {}", Debug(input->bindings().at(0)));
 }

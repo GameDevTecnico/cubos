@@ -4,7 +4,7 @@ using namespace cubos::engine;
 
 void RendererFrame::draw(RendererGrid grid, glm::mat4 modelMat)
 {
-    mDrawCmds.push_back(DrawCmd{grid, modelMat});
+    mDrawCmds.push_back(DrawCmd{std::move(grid), modelMat});
 }
 
 void RendererFrame::ambient(const glm::vec3& color)

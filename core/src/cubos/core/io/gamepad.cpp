@@ -45,7 +45,7 @@ void data::serialize<GamepadButton>(Serializer& ser, const GamepadButton& obj, c
 GamepadButton io::stringToGamepadButton(const std::string& str)
 {
 #define MAP_STRING_TO_BUTTON(string, button)                                                                           \
-    if (str == string)                                                                                                 \
+    if (str == (string))                                                                                               \
         return GamepadButton::button;
     MAP_STRING_TO_BUTTON("A", A)
     MAP_STRING_TO_BUTTON("B", B)
@@ -103,7 +103,7 @@ void data::serialize<GamepadAxis>(Serializer& ser, const GamepadAxis& obj, const
 GamepadAxis io::stringToGamepadAxis(const std::string& str)
 {
 #define MAP_STRING_TO_AXIS(string, axis)                                                                               \
-    if (str == string)                                                                                                 \
+    if (str == (string))                                                                                               \
         return GamepadAxis::axis;
     MAP_STRING_TO_AXIS("LX", LX)
     MAP_STRING_TO_AXIS("LY", LY)

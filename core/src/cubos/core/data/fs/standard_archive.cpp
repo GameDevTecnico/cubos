@@ -28,32 +28,30 @@ StandardArchive::StandardArchive(const std::filesystem::path& osPath, bool isDir
             CUBOS_ERROR("File/directory '{}' does not exist on the host file system", osPath.string());
             return;
         }
+
+        // Create the file/directory.
+        if (isDirectory)
+        {
+            std::error_code err;
+            if (!std::filesystem::create_directory(osPath, err))
+            {
+                CUBOS_ERROR("std::filesystem::create_directory() failed: {}", err.message());
+                CUBOS_ERROR("Could not create root directory '{}' on the host file system", osPath.string());
+                return;
+            }
+        }
         else
         {
-            // Create the file/directory.
-            if (isDirectory)
+            // Write an empty file.
+            std::string path = osPath.string();
+            FILE* file = fopen(path.c_str(), "w");
+            if (file == nullptr)
             {
-                std::error_code err;
-                if (!std::filesystem::create_directory(osPath, err))
-                {
-                    CUBOS_ERROR("std::filesystem::create_directory() failed: {}", err.message());
-                    CUBOS_ERROR("Could not create root directory '{}' on the host file system", osPath.string());
-                    return;
-                }
+                CUBOS_ERROR("fopen() failed: {}", strerror(errno));
+                CUBOS_ERROR("Could not create root file '{}' on the host file system", path);
+                return;
             }
-            else
-            {
-                // Write an empty file.
-                std::string path = osPath.string();
-                FILE* file = fopen(path.c_str(), "w");
-                if (file == nullptr)
-                {
-                    CUBOS_ERROR("fopen() failed: {}", strerror(errno));
-                    CUBOS_ERROR("Could not create root file '{}' on the host file system", path);
-                    return;
-                }
-                fclose(file);
-            }
+            fclose(file);
         }
     }
 
@@ -264,7 +262,7 @@ std::unique_ptr<Stream> StandardArchive::open(std::size_t id, File::Handle file,
     }
 
     std::string path = it->second.osPath.string();
-    auto fd = fopen(path.c_str(), stdMode);
+    auto* fd = fopen(path.c_str(), stdMode);
     if (fd == nullptr)
     {
         CUBOS_ERROR("fopen() failed: {}", strerror(errno));

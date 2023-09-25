@@ -15,7 +15,7 @@ static void mouseButtonCallback(GLFWwindow* window, int button, int action, int 
 static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 static void charCallback(GLFWwindow* window, unsigned int codepoint);
-static void joystickCallback(int jid, int event);
+static void joystickCallback(int id, int event);
 static void updateMods(GLFWWindow* handler, int glfwMods);
 static MouseButton glfwToCubosMouseButton(int button);
 static Key glfwToCubosKey(int key);
@@ -87,7 +87,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 
     for (int i = GLFW_JOYSTICK_1; i < GLFW_JOYSTICK_LAST; ++i)
     {
-        if (glfwJoystickIsGamepad(i))
+        if (glfwJoystickIsGamepad(i) != GLFW_FALSE)
         {
             this->pushEvent(GamepadConnectionEvent{.gamepad = i, .connected = true});
         }
@@ -310,9 +310,9 @@ Modifiers GLFWWindow::modifiers() const
 #endif
 }
 
-void GLFWWindow::modifiers(Modifiers mods)
+void GLFWWindow::modifiers(Modifiers modifiers)
 {
-    mModifiers = mods;
+    mModifiers = modifiers;
 }
 
 bool GLFWWindow::gamepadState(int gamepad, GamepadState& state) const

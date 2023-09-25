@@ -67,7 +67,7 @@ namespace cubos::core::ecs
             mutable std::atomic_size_t readCount{0};
 
             Event(T e, unsigned int m)
-                : event(e)
+                : event(std::move(e))
                 , mask(m)
             {
             }

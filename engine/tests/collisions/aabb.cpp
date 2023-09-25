@@ -21,10 +21,10 @@ using namespace cubos::engine;
 
 static void setup(Commands commands)
 {
-    commands.create(BoxCollider{glm::mat4{1.0f}, Box{glm::vec3{1.0f}}});
-    commands.create(CapsuleCollider{glm::mat4{1.0f}, Capsule{1.0f, 1.0f}});
-    commands.create(SimplexCollider{glm::vec3{0.0f}, Simplex{{glm::vec3{1.0f}, glm::vec3{2.0f}, glm::vec3{3.0f}}}});
-    commands.create(PlaneCollider{glm::vec3{0.0f}, Plane{glm::vec3{1.0f}}});
+    commands.create(BoxCollider{glm::mat4{1.0F}, Box{glm::vec3{1.0F}}});
+    commands.create(CapsuleCollider{glm::mat4{1.0F}, Capsule{1.0F, 1.0F}});
+    commands.create(SimplexCollider{glm::vec3{0.0F}, Simplex{{glm::vec3{1.0F}, glm::vec3{2.0F}, glm::vec3{3.0F}}}});
+    commands.create(PlaneCollider{glm::vec3{0.0F}, Plane{glm::vec3{1.0F}}});
 }
 
 template <typename C>
@@ -41,14 +41,14 @@ TEST_CASE("collisions.aabb")
     auto cubos = Cubos{};
 
     cubos.addPlugin(collisionsPlugin);
-    cubos.system(setup).beforeTag("cubos.collisions.aabb.missing");
+    cubos.system(setup).before("cubos.collisions.aabb.missing");
 
     SUBCASE("collisions.aabb.missing: missing aabbs were added")
     {
-        cubos.system(testAddMissingAABBs<BoxCollider>).afterTag("cubos.collisions.aabb.missing");
-        cubos.system(testAddMissingAABBs<CapsuleCollider>).afterTag("cubos.collisions.aabb.missing");
-        cubos.system(testAddMissingAABBs<SimplexCollider>).afterTag("cubos.collisions.aabb.missing");
-        cubos.system(testAddMissingAABBs<PlaneCollider>).afterTag("cubos.collisions.aabb.missing");
+        cubos.system(testAddMissingAABBs<BoxCollider>).after("cubos.collisions.aabb.missing");
+        cubos.system(testAddMissingAABBs<CapsuleCollider>).after("cubos.collisions.aabb.missing");
+        cubos.system(testAddMissingAABBs<SimplexCollider>).after("cubos.collisions.aabb.missing");
+        cubos.system(testAddMissingAABBs<PlaneCollider>).after("cubos.collisions.aabb.missing");
     }
 
     cubos.run();

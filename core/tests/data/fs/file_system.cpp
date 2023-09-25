@@ -44,7 +44,7 @@ inline auto mockArchive(bool readOnly)
 }
 
 /// Resets the file system to its initial state.
-inline void unmountAll(File::Handle handle)
+inline void unmountAll(const File::Handle& handle)
 {
     while (handle->child() != nullptr)
     {
@@ -59,7 +59,7 @@ inline void unmountAll(File::Handle handle)
     }
 }
 
-TEST_CASE("data::FileSystem")
+TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
 {
     cubos::core::disableLogging();
     unmountAll(FileSystem::root());
