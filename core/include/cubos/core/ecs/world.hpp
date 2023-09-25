@@ -185,11 +185,11 @@ namespace cubos::core::ecs
 
 #if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
         // Get the number of components being added.
-        constexpr std::size_t componentCount = sizeof...(ComponentTypes);
+        constexpr std::size_t ComponentCount = sizeof...(ComponentTypes);
 
         std::string componentNames[] = {"", "'" + std::string{getComponentName<ComponentTypes>().value()} + "'" ...};
         CUBOS_DEBUG("Created entity {} with components {}", entity.index,
-                    fmt::join(componentNames + 1, componentNames + componentCount + 1, ", "));
+                    fmt::join(componentNames + 1, componentNames + ComponentCount + 1, ", "));
 #endif
         return entity;
     }

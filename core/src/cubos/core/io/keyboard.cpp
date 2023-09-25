@@ -13,13 +13,24 @@ std::string io::modifiersToString(Modifiers modifiers)
     std::string result;
 
     if ((modifiers & Modifiers::Control) != Modifiers::None)
+    {
         result += "C-";
+    }
+
     if ((modifiers & Modifiers::Shift) != Modifiers::None)
+    {
         result += "S-";
+    }
+
     if ((modifiers & Modifiers::Alt) != Modifiers::None)
+    {
         result += "M-";
+    }
+
     if ((modifiers & Modifiers::System) != Modifiers::None)
+    {
         result += "D-";
+    }
 
     return result;
 }
@@ -35,13 +46,24 @@ Modifiers io::stringToModifiers(const std::string& str)
     Modifiers result = Modifiers::None;
 
     if (str.find("C-") != std::string::npos)
+    {
         result |= Modifiers::Control;
+    }
+
     if (str.find("S-") != std::string::npos)
+    {
         result |= Modifiers::Shift;
+    }
+
     if (str.find("M-") != std::string::npos)
+    {
         result |= Modifiers::Alt;
+    }
+
     if (str.find("D-") != std::string::npos)
+    {
         result |= Modifiers::System;
+    }
 
     return result;
 }
@@ -58,7 +80,7 @@ std::string io::keyToString(Key key)
 {
 #define MAP_KEY_TO_STRING(key, string)                                                                                 \
     case Key::key:                                                                                                     \
-        return string;
+        return (string);
     switch (key)
     {
         MAP_KEY_TO_STRING(A, "a")
@@ -174,9 +196,8 @@ void data::serialize<Key>(Serializer& ser, const Key& obj, const char* name)
 Key io::stringToKey(const std::string& str)
 {
 #define MAP_STRING_TO_KEY(string, key)                                                                                 \
-    if (str == string)                                                                                                 \
-        return Key::key;                                                                                               \
-    else
+    if (str == (string))                                                                                               \
+        return Key::key;
     MAP_STRING_TO_KEY("a", A)
     MAP_STRING_TO_KEY("b", B)
     MAP_STRING_TO_KEY("c", C)

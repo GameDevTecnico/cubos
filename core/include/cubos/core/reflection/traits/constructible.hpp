@@ -108,9 +108,9 @@ namespace cubos::core::reflection
         std::size_t mSize;
         std::size_t mAlignment;
         Destructor mDestructor;
-        DefaultConstructor mDefaultConstructor;
-        CopyConstructor mCopyConstructor;
-        MoveConstructor mMoveConstructor;
+        DefaultConstructor mDefaultConstructor{nullptr};
+        CopyConstructor mCopyConstructor{nullptr};
+        MoveConstructor mMoveConstructor{nullptr};
     };
 
     template <typename T>

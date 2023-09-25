@@ -117,8 +117,8 @@ namespace cubos::core::reflection
         {
             // This variable is unused, but since there is one for each type, its address is
             // guaranteed to be unique for each type.
-            static const bool var = false;
-            return reinterpret_cast<uintptr_t>(&var);
+            static const bool Var = false;
+            return reinterpret_cast<uintptr_t>(&Var);
         }
 
         /// @brief %Trait entry in the type.

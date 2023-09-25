@@ -45,9 +45,9 @@ float InputAxis::value() const
 
 void InputAxis::value(float value)
 {
-    if (std::abs(value) > 1.0f)
+    if (std::abs(value) > 1.0F)
     {
         CUBOS_WARN("Axis value out of range: {}", value);
     }
-    mValue = std::clamp(value, -1.0f, 1.0f);
+    mValue = std::clamp(value, -1.0F, 1.0F);
 }

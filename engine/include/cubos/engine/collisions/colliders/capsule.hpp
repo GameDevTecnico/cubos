@@ -19,7 +19,7 @@ namespace cubos::engine
     /// @ingroup collisions-plugin
     struct [[cubos::component("cubos/capsule_collider", VecStorage)]] CapsuleCollider
     {
-        glm::mat4 transform{1.0f};        ///< Transform of the collider.
+        glm::mat4 transform{1.0F};        ///< Transform of the collider.
         cubos::core::geom::Capsule shape; ///< Capsule shape of the collider.
     };
 } // namespace cubos::engine

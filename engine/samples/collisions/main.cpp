@@ -44,7 +44,7 @@ static void init(Commands commands, Write<Input> input, Write<ActiveCameras> cam
 {
     // Add procedural asset for detecting a reset action on a space key press.
     auto bindings = InputBindings{};
-    bindings.actions()["reset"].keys().push_back({Key::Space, Modifiers::None});
+    bindings.actions()["reset"].keys().emplace_back(Key::Space, Modifiers::None);
     input->bind(bindings);
 
     // Spawn the camera.
@@ -109,7 +109,7 @@ static void updateCollided(Query<Read<BoxCollider>> query, Write<State> state, R
 {
     for (auto [entity, collider] : query)
     {
-        for (auto& [collider1, collider2] : collisions->candidates(BroadPhaseCollisions::CollisionType::BoxBox))
+        for (const auto& [collider1, collider2] : collisions->candidates(BroadPhaseCollisions::CollisionType::BoxBox))
         {
             if (collider1 == entity || collider2 == entity)
             {

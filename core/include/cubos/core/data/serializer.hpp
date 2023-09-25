@@ -192,34 +192,34 @@ namespace cubos::core::data
     /// This is a special case because std::vector<bool> are stored as arrays of bits, and therefore
     /// need special handling.
     /// @param ser The serializer.
-    /// @param val The value to serialize.
+    /// @param obj The value to serialize.
     /// @param name The name of the value (optional).
-    void serialize(Serializer& ser, std::vector<bool>::const_reference val, const char* name);
+    void serialize(Serializer& ser, std::vector<bool>::const_reference obj, const char* name);
 
     /// Overload for serializing char arrays.
     /// Necessary because literal strings are treated as char arrays by the compiler.
     /// Without this overload, the linker would fail.
     /// @param ser The serializer.
-    /// @param str The string to serialize.
+    /// @param obj The string to serialize.
     /// @param name The name of the string (optional).
     template <std::size_t N>
-    inline void serialize(Serializer& ser, char const (&str)[N], const char* name)
+    inline void serialize(Serializer& ser, char const (&obj)[N], const char* name)
     {
-        ser.writeString(str, name);
+        ser.writeString(obj, name);
     }
 
     /// Overload for serializing std::vector.
     /// @tparam T The type of the vector.
     /// @param ser The serializer.
-    /// @param vec The vector to serialize.
+    /// @param obj The vector to serialize.
     /// @param name The name of the vector (optional).
     template <typename T>
-    inline void serialize(Serializer& ser, const std::vector<T>& vec, const char* name)
+    inline void serialize(Serializer& ser, const std::vector<T>& obj, const char* name)
     {
-        ser.beginArray(vec.size(), name);
-        for (const auto& obj : vec)
+        ser.beginArray(obj.size(), name);
+        for (const auto& element : obj)
         {
-            ser.write(obj, nullptr);
+            ser.write(element, nullptr);
         }
         ser.endArray();
     }
@@ -228,13 +228,13 @@ namespace cubos::core::data
     /// @tparam K The type of the key.
     /// @tparam V The type of the value.
     /// @param ser The serializer.
-    /// @param map The map to serialize.
+    /// @param obj The map to serialize.
     /// @param name The name of the map (optional).
     template <typename K, typename V>
-    inline void serialize(Serializer& ser, const std::unordered_map<K, V>& map, const char* name)
+    inline void serialize(Serializer& ser, const std::unordered_map<K, V>& obj, const char* name)
     {
-        ser.beginDictionary(map.size(), name);
-        for (const auto& pair : map)
+        ser.beginDictionary(obj.size(), name);
+        for (const auto& pair : obj)
         {
             ser.write(pair.first, nullptr);
             ser.write(pair.second, nullptr);
@@ -246,14 +246,14 @@ namespace cubos::core::data
     /// @tparam T The type of the first value.
     /// @tparam U The type of the second value.
     /// @param ser The serializer.
-    /// @param pair The pair to serialize.
+    /// @param obj The pair to serialize.
     /// @param name The name of the pair (optional).
     template <typename T, typename U>
-    inline void serialize(Serializer& ser, const std::pair<T, U>& pair, const char* name)
+    inline void serialize(Serializer& ser, const std::pair<T, U>& obj, const char* name)
     {
         ser.beginObject(name);
-        ser.write(pair.first, "first");
-        ser.write(pair.second, "second");
+        ser.write(obj.first, "first");
+        ser.write(obj.second, "second");
         ser.endObject();
     }
 } // namespace cubos::core::data

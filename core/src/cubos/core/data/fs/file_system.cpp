@@ -99,14 +99,12 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
         CUBOS_ERROR("Could not open file for reading at path '{}': the file does not exist", path);
         return nullptr;
     }
-    else
-    {
-        if (auto file = FileSystem::root()->create(path))
-        {
-            return file->open(mode);
-        }
 
-        CUBOS_ERROR("Could not open file for writing at path '{}': the file could not be created", path);
-        return nullptr;
+    if (auto file = FileSystem::root()->create(path))
+    {
+        return file->open(mode);
     }
+
+    CUBOS_ERROR("Could not open file for writing at path '{}': the file could not be created", path);
+    return nullptr;
 }

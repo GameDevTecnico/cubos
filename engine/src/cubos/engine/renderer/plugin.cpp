@@ -8,8 +8,8 @@
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/renderer/point_light.hpp>
 #include <cubos/engine/renderer/pps/bloom.hpp>
-#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/renderer/spot_light.hpp>
+#include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -132,7 +132,7 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
     cubos::core::gl::Camera cameras[4]{};
     int cameraCount = 0;
 
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)
     {
         if (activeCameras->entities[i].isNull())
         {

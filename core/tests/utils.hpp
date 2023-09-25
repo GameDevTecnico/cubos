@@ -22,6 +22,7 @@
 
 /// Turns a list of argument types into a list of argument declarations.
 /// For example, DEFINE_MOCK_IMPL_DECL(int, float) becomes int _0, float _1.
+// NOLINTBEGIN(readability-identifier-naming)
 #define MAKE_DECLARATIONS(...) __VA_OPT__(MAKE_DECLARATIONS_N(COUNT_ARGS(__VA_ARGS__), __VA_ARGS__))
 #define MAKE_DECLARATIONS_N(n, ...) MAKE_DECLARATIONS_N_IMPL(n, __VA_ARGS__)
 #define MAKE_DECLARATIONS_N_IMPL(n, ...) MAKE_DECLARATIONS_##n(__VA_ARGS__)
@@ -29,6 +30,7 @@
 #define MAKE_DECLARATIONS_2(a, b) a _0, b _1
 #define MAKE_DECLARATIONS_3(a, b, c) a _0, b _1, c _2
 #define MAKE_DECLARATIONS_4(a, b, c, d) a _0, b _1, c _2, d _3
+// NOLINTEND(readability-identifier-naming)
 
 /// Turns a list of argument types into a list of argument names.
 /// For example, DEFINE_MOCK_IMPL_NAME(int, float) becomes _0, _1.

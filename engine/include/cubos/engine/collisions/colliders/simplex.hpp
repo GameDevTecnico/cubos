@@ -20,7 +20,7 @@ namespace cubos::engine
     /// @ingroup collisions-plugin
     struct [[cubos::component("cubos/simplex", VecStorage)]] SimplexCollider
     {
-        glm::vec3 offset{0.0f};           ///< Offset of the collider.
+        glm::vec3 offset{0.0F};           ///< Offset of the collider.
         cubos::core::geom::Simplex shape; ///< Simplex shape of the collider.
 
         /// @brief Margin of the collider. Needed for collision stability.
@@ -28,6 +28,6 @@ namespace cubos::engine
         /// The collider margin avoids collision errors by rounding off sharp corners. Shouldn't be
         /// changed without good reason, it's preferable to move the simplex corners to account for
         /// it.
-        float margin = 0.04f;
+        float margin = 0.04F;
     };
 } // namespace cubos::engine

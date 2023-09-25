@@ -6,10 +6,10 @@ using cubos::core::geom::Simplex;
 
 TEST_CASE("geom::Simplex")
 {
-    auto p1 = glm::vec3{1.0f};
-    auto p2 = glm::vec3{2.0f};
-    auto p3 = glm::vec3{3.0f};
-    auto p4 = glm::vec3{4.0f};
+    auto p1 = glm::vec3{1.0F};
+    auto p2 = glm::vec3{2.0F};
+    auto p3 = glm::vec3{3.0F};
+    auto p4 = glm::vec3{4.0F};
 
     SUBCASE("empty")
     {

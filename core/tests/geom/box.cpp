@@ -8,9 +8,9 @@ using cubos::core::geom::Box;
 
 TEST_CASE("geom::Box")
 {
-    auto x = 1.0f;
-    auto y = 2.0f;
-    auto z = 3.0f;
+    auto x = 1.0F;
+    auto y = 2.0F;
+    auto z = 3.0F;
     Box box{{x, y, z}};
 
     SUBCASE("diagonal")

@@ -64,8 +64,8 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
 {
     des.beginObject();
 
-    std::size_t actions_sz = des.beginDictionary();
-    for (std::size_t i = 0; i < actions_sz; ++i)
+    std::size_t actionsSz = des.beginDictionary();
+    for (std::size_t i = 0; i < actionsSz; ++i)
     {
         std::string action;
         des.read(action);
@@ -76,8 +76,8 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
     }
     des.endDictionary();
 
-    std::size_t axes_sz = des.beginDictionary();
-    for (std::size_t i = 0; i < axes_sz; ++i)
+    std::size_t axesSz = des.beginDictionary();
+    for (std::size_t i = 0; i < axesSz; ++i)
     {
         std::string axis;
         des.read(axis);

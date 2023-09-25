@@ -22,8 +22,8 @@ static bool assetsCompare(AnyAsset const& a, AnyAsset const& b, Assets const& as
     std::string aDir = aPath;
     std::string bDir = bPath;
 
-    aDir.erase(aDir.rfind("/"));
-    bDir.erase(bDir.rfind("/"));
+    aDir.erase(aDir.rfind('/'));
+    bDir.erase(bDir.rfind('/'));
 
     if (aCount != bCount)
     {
@@ -31,7 +31,8 @@ static bool assetsCompare(AnyAsset const& a, AnyAsset const& b, Assets const& as
         {
             return true;
         }
-        else if (bDir.find(aDir + "/") != std::string::npos)
+
+        if (bDir.find(aDir + "/") != std::string::npos)
         {
             return false;
         }
@@ -44,7 +45,7 @@ static void showAsset(Assets const& assets, AnyAsset const& asset, EventWriter<t
 {
     std::string path = assets.readMeta(asset)->get("path").value();
     ImGui::PushID(path.c_str());
-    ImGui::BulletText("%s", path.erase(0, path.rfind("/") + 1).c_str());
+    ImGui::BulletText("%s", path.erase(0, path.rfind('/') + 1).c_str());
     ImGui::SameLine();
     if (ImGui::Button("Select"))
     {
@@ -59,7 +60,7 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
                                                   EventWriter<tools::AssetSelectedEvent> events)
 {
     std::string displayName = folder;
-    displayName.erase(0, displayName.rfind("/"));
+    displayName.erase(0, displayName.rfind('/'));
 
     ImGui::PushStyleColor(ImGuiCol_Text, (ImVec4)ImColor(149, 252, 75));
     if (ImGui::TreeNode(displayName.c_str()))
@@ -111,7 +112,7 @@ static void showAssets(Read<Assets> assets, Write<Settings> settings, EventWrite
 
     std::string folder = settings->getString("assets.io.path", "");
 
-    folder.erase(0, folder.rfind("/"));
+    folder.erase(0, folder.rfind('/'));
 
     std::vector<AnyAsset> assetsVector;
     for (auto const& a : assets->listAll())

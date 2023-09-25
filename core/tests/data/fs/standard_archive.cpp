@@ -22,7 +22,7 @@ static void assertInitializationFailed(StandardArchive& archive)
     REQUIRE(archive.open(1, nullptr, File::OpenMode::Read) == nullptr);
 }
 
-TEST_CASE("data::StandardArchive")
+TEST_CASE("data::StandardArchive") // NOLINT(readability-function-size)
 {
     auto path = genTempPath();
 
@@ -214,6 +214,7 @@ TEST_CASE("data::StandardArchive")
             std::filesystem::create_directory(path);
             std::filesystem::create_directory(path / "bar");
             std::ofstream{path / "foo"} << "foo";
+            // NOLINTNEXTLINE(bugprone-unused-raii)
             std::ofstream{path / "bar" / "baz"}; // Don't write anything to "baz", but create it.
 
             // Create a read-only archive on the generated directory.

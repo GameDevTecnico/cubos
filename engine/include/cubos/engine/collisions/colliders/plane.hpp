@@ -16,13 +16,13 @@ namespace cubos::engine
     /// @ingroup collisions-plugin
     struct [[cubos::component("cubos/plane_collider", VecStorage)]] PlaneCollider
     {
-        glm::vec3 offset{0.0f};         ///< Offset of the collider.
+        glm::vec3 offset{0.0F};         ///< Offset of the collider.
         cubos::core::geom::Plane shape; ///< Plane shape of the collider.
 
         /// @brief Margin of the collider. Needed for creating the AABB.
         ///
         /// The collider margin is absolute so the collider's transform won't affect it. Shouldn't
         /// be changed without good reason.
-        float margin = 0.04f;
+        float margin = 0.04F;
     };
 } // namespace cubos::engine

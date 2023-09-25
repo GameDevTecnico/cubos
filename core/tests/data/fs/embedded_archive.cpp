@@ -13,22 +13,22 @@ using cubos::core::memory::Stream;
 // Fear not - we aren't supposed do this manually - usually quadrados would do this for us.
 
 // Embedded data with a single regular file which has the data "ab".
-static const EmbeddedArchive::Data::Entry singleEntry{"root", false, 0, 0, 0, "ab", 2};
-static const EmbeddedArchive::Data singleData = {&singleEntry, 1};
+static const EmbeddedArchive::Data::Entry SingleEntry{"root", false, 0, 0, 0, "ab", 2};
+static const EmbeddedArchive::Data SingleData = {&SingleEntry, 1};
 
 // Embedded data with four files:
 // - root directory
 //   - foo "foo"
 //   - bar directory
 //     - baz "" (empty file)
-static const EmbeddedArchive::Data::Entry multipleEntries[] = {
+static const EmbeddedArchive::Data::Entry MultipleEntries[] = {
     {"root", true, 0, 0, 2, nullptr, 0},
     {"foo", false, 1, 3, 0, "foo", 3},
     {"bar", true, 1, 0, 4, nullptr, 0},
     {"baz", false, 3, 0, 0, nullptr, 0},
 };
-static const EmbeddedArchive::Data multipleData = {multipleEntries,
-                                                   sizeof(multipleEntries) / sizeof(multipleEntries[0])};
+static const EmbeddedArchive::Data MultipleData = {MultipleEntries,
+                                                   sizeof(MultipleEntries) / sizeof(MultipleEntries[0])};
 
 TEST_CASE("data::EmbeddedArchive")
 {
@@ -40,8 +40,8 @@ TEST_CASE("data::EmbeddedArchive")
     {
         // Register embedded data so that we can mount it later.
         registered = true;
-        EmbeddedArchive::registerData("single", singleData);
-        EmbeddedArchive::registerData("multiple", multipleData);
+        EmbeddedArchive::registerData("single", SingleData);
+        EmbeddedArchive::registerData("multiple", MultipleData);
     }
 
     SUBCASE("single file")

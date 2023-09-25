@@ -11,18 +11,17 @@ using SweepMarker = BroadPhaseCollisions::SweepMarker;
 
 void BroadPhaseCollisions::addEntity(Entity entity)
 {
-    for (std::size_t axis = 0; axis < 3; axis++)
+    for (auto& markers : markersPerAxis)
     {
-        markersPerAxis[axis].push_back({entity, true});
-        markersPerAxis[axis].push_back({entity, false});
+        markers.push_back({entity, true});
+        markers.push_back({entity, false});
     }
 }
 
 void BroadPhaseCollisions::removeEntity(Entity entity)
 {
-    for (std::size_t axis = 0; axis < 3; axis++)
+    for (auto& markers : markersPerAxis)
     {
-        auto& markers = markersPerAxis[axis];
         markers.erase(std::remove_if(markers.begin(), markers.end(),
                                      [entity](const SweepMarker& m) { return m.entity == entity; }),
                       markers.end());
@@ -31,9 +30,9 @@ void BroadPhaseCollisions::removeEntity(Entity entity)
 
 void BroadPhaseCollisions::clearEntities()
 {
-    for (std::size_t axis = 0; axis < 3; axis++)
+    for (auto& markers : markersPerAxis)
     {
-        markersPerAxis[axis].clear();
+        markers.clear();
     }
 }
 
@@ -49,8 +48,8 @@ const std::unordered_set<Candidate, CandidateHash>& BroadPhaseCollisions::candid
 
 void BroadPhaseCollisions::clearCandidates()
 {
-    for (std::size_t i = 0; i < static_cast<std::size_t>(CollisionType::Count); i++)
+    for (auto& candidates : candidatesPerType)
     {
-        candidatesPerType[i].clear();
+        candidates.clear();
     }
 }

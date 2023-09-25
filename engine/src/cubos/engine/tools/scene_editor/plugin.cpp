@@ -48,9 +48,9 @@ static void closeScene(Commands& commands, SceneInfo& scene)
     scene.scenes.clear();
 }
 
-static void placeEntity(std::string name, Entity handle, SceneInfo& scene)
+static void placeEntity(const std::string& name, Entity handle, SceneInfo& scene)
 {
-    auto split = name.find(".");
+    auto split = name.find('.');
     if (split == std::string::npos)
     {
         scene.entities.emplace_back(name, handle);
@@ -60,7 +60,7 @@ static void placeEntity(std::string name, Entity handle, SceneInfo& scene)
         auto subsceneName = name.substr(0, split - 1);
         for (auto& [sname, subscene] : scene.scenes)
         {
-            if (sname.compare(subsceneName) == 0)
+            if (sname == subsceneName)
             {
                 placeEntity(name.substr(split + 1), handle, subscene);
                 return;
@@ -101,7 +101,9 @@ static void checkAssetEventSystem(cubos::core::ecs::EventReader<AssetSelectedEve
 static int entityNameFilter(ImGuiInputTextCallbackData* data)
 {
     if (data->EventChar == '.')
+    {
         return 1;
+    }
     return 0;
 }
 
@@ -130,7 +132,7 @@ static void showSceneEntities(std::vector<std::pair<std::string, Entity>>& entit
 
             ImGui::InputText("", &name, ImGuiInputTextFlags_CallbackCharFilter, entityNameFilter);
 
-            if (name.compare(buff))
+            if (name != buff)
             {
                 entities[i].first = buff;
             }
@@ -197,7 +199,7 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, cubos::engine::
             ImGui::InputText("", &buff, ImGuiInputTextFlags_CallbackCharFilter, entityNameFilter);
             ImGui::PopID();
 
-            if (scene.name.compare(buff))
+            if (scene.name != buff)
             {
                 scene.name = buff;
             }

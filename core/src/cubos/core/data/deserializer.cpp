@@ -96,11 +96,11 @@ void cubos::core::data::deserialize<std::string>(Deserializer& des, std::string&
     des.readString(obj);
 }
 
-void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::reference val)
+void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::reference obj)
 {
     bool boolean;
     des.readBool(boolean);
-    val = boolean;
+    obj = boolean;
 }
 
 // Implementation of deserialize() for GLM types.

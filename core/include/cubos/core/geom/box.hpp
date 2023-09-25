@@ -15,7 +15,7 @@ namespace cubos::core::geom
     /// @ingroup core-geom
     struct Box
     {
-        glm::vec3 halfSize{0.5f}; ///< Half size of the box.
+        glm::vec3 halfSize{0.5F}; ///< Half size of the box.
 
         /// @brief Computes two opposite corners of the box on the major diagonal.
         /// @param corners Array to store the two corners in.

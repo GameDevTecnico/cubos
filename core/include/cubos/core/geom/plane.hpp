@@ -15,7 +15,7 @@ namespace cubos::core::geom
     /// @ingroup core-geom
     struct Plane
     {
-        glm::vec3 normal{0.0f, 1.0f, 0.0f}; ///< Normal of the plane.
+        glm::vec3 normal{0.0F, 1.0F, 0.0F}; ///< Normal of the plane.
     };
 } // namespace cubos::core::geom
 

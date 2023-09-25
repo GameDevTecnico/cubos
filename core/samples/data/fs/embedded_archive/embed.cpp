@@ -10,27 +10,27 @@
 
 using cubos::core::data::EmbeddedArchive;
 
-static const uint8_t fileData3[] = {
+static const uint8_t FileData3[] = {
     0x62,
     0x61,
     0x7a,
 };
-static const uint8_t fileData4[] = {
+static const uint8_t FileData4[] = {
     0x66,
     0x6f,
     0x6f,
 };
 
-static const EmbeddedArchive::Data::Entry entries[] = {
+static const EmbeddedArchive::Data::Entry Entries[] = {
     {"", true, 0, 0, 2, nullptr, 0},
     {"bar", true, 1, 4, 3, nullptr, 0},
-    {"baz.txt", false, 2, 0, 0, fileData3, sizeof(fileData3)},
-    {"foo.txt", false, 1, 0, 0, fileData4, sizeof(fileData4)},
+    {"baz.txt", false, 2, 0, 0, FileData3, sizeof(FileData3)},
+    {"foo.txt", false, 1, 0, 0, FileData4, sizeof(FileData4)},
 };
 
-static const EmbeddedArchive::Data embeddedArchiveData = {
-    entries,
-    sizeof(entries) / sizeof(entries[0]),
+static const EmbeddedArchive::Data EmbeddedArchiveData = {
+    Entries,
+    sizeof(Entries) / sizeof(Entries[0]),
 };
 
 class DataRegister
@@ -38,7 +38,7 @@ class DataRegister
 public:
     DataRegister()
     {
-        EmbeddedArchive::registerData("assets", embeddedArchiveData);
+        EmbeddedArchive::registerData("assets", EmbeddedArchiveData);
     }
 };
 

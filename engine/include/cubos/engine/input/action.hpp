@@ -29,8 +29,8 @@ namespace cubos::engine
         /// @param gamepadButtons Gamepad button bindings.
         InputAction(std::vector<std::pair<core::io::Key, core::io::Modifiers>> keys,
                     std::vector<core::io::GamepadButton> gamepadButtons)
-            : mKeys(keys)
-            , mGamepadButtons(gamepadButtons)
+            : mKeys(std::move(keys))
+            , mGamepadButtons(std::move(gamepadButtons))
         {
         }
 
