@@ -12,7 +12,9 @@ using cubos::core::io::Window;
 
 using namespace cubos::engine;
 
+/// [Setting the Bindings]
 static const Asset<InputBindings> BindingsAsset = AnyAsset("bf49ba61-5103-41bc-92e0-8a442d7842c3");
+/// [Setting the Bindings]
 
 struct State
 {
@@ -31,6 +33,7 @@ static void explain(bool& explained)
     }
 }
 
+/// [Showcase Action Press]
 static void showcaseXZ(const Input& input, bool& explained)
 {
     if (!explained)
@@ -45,13 +48,14 @@ static void showcaseXZ(const Input& input, bool& explained)
         CUBOS_INFO("X or Z");
     }
 }
+/// [Showcase Action Press]
 
+/// [Showcase Modifier]
 static void showcaseModifiers(const Input& input, bool& explained)
 {
     if (!explained)
     {
-        CUBOS_WARN("Modifiers are supported. This showcase will print `Shift` when Shift+Space is pressed, `Alt` when "
-                   "Alt+Space is pressed, `Ctrl` when Ctrl+Space is pressed and `System` when System+Space is pressed. "
+        CUBOS_WARN("Modifiers are supported. This showcase will print `Shift` when Shift+Space is pressed. "
                    "Press Enter to advance to the next showcase.");
         explained = true;
     }
@@ -60,23 +64,10 @@ static void showcaseModifiers(const Input& input, bool& explained)
     {
         CUBOS_INFO("Shift");
     }
-
-    if (input.pressed("alt-space"))
-    {
-        CUBOS_INFO("Alt");
-    }
-
-    if (input.pressed("ctrl-space"))
-    {
-        CUBOS_INFO("Ctrl");
-    }
-
-    if (input.pressed("system-space"))
-    {
-        CUBOS_INFO("System");
-    }
 }
+/// [Showcase Modifier]
 
+/// [Showcase Multi Modifier]
 static void showcaseMultipleModifiers(const Input& input, bool& explained)
 {
     if (!explained)
@@ -91,27 +82,9 @@ static void showcaseMultipleModifiers(const Input& input, bool& explained)
         CUBOS_INFO("Ctrl Shift");
     }
 }
+/// [Showcase Multi Modifier]
 
-static void showcaseModifierKeys(const Input& input, bool& explained)
-{
-    if (!explained)
-    {
-        CUBOS_WARN("Modifier keys are supported. This showcase will print `Ctrl` when Ctrl is pressed and `Ctrl Shift` "
-                   "when Ctrl+Shift is pressed. Press Enter to advance to the next showcase.");
-        explained = true;
-    }
-
-    if (input.pressed("ctrl"))
-    {
-        CUBOS_INFO("Ctrl");
-    }
-
-    if (input.pressed("ctrl-shift"))
-    {
-        CUBOS_INFO("Ctrl Shift");
-    }
-}
-
+/// [Showcase Axis]
 static void showcaseAxis(const Input& input, bool& explained)
 {
     if (!explained)
@@ -127,7 +100,9 @@ static void showcaseAxis(const Input& input, bool& explained)
         CUBOS_INFO("horizontal: {}, vertical: {}", input.axis("horizontal"), input.axis("vertical"));
     }
 }
+/// [Showcase Axis]
 
+/// [Showcase Modifier Axis]
 static void showcaseModifierAxis(const Input& input, bool& explained)
 {
     if (!explained)
@@ -143,7 +118,9 @@ static void showcaseModifierAxis(const Input& input, bool& explained)
         CUBOS_INFO("shift-vertical: {}", input.axis("shift-vertical"));
     }
 }
+/// [Showcase Modifier Axis]
 
+/// [Showcase Unbound]
 static void showcaseUnbound(const Window& window, bool& explained)
 {
     if (!explained)
@@ -159,7 +136,9 @@ static void showcaseUnbound(const Window& window, bool& explained)
         CUBOS_INFO("Unbound");
     }
 }
+/// [Showcase Unbound]
 
+/// [Checking Type of Press]
 static void update(Read<Input> input, Read<Window> window, Write<State> state, Write<ShouldQuit> shouldQuit)
 {
     // FIXME: This is an hack to have one-shot actions while we don't have input events.
@@ -173,6 +152,7 @@ static void update(Read<Input> input, Read<Window> window, Write<State> state, W
         state->explained = false;
         state->showcase++;
     }
+    /// [Checking Type of Press]
 
     switch (state->showcase)
     {
@@ -185,12 +165,10 @@ static void update(Read<Input> input, Read<Window> window, Write<State> state, W
     case 3:
         return showcaseMultipleModifiers(*input, state->explained);
     case 4:
-        return showcaseModifierKeys(*input, state->explained);
-    case 5:
         return showcaseAxis(*input, state->explained);
-    case 6:
+    case 5:
         return showcaseModifierAxis(*input, state->explained);
-    case 7:
+    case 6:
         return showcaseUnbound(*window, state->explained);
     default:
         shouldQuit->value = true;
@@ -213,7 +191,9 @@ int main()
 {
     auto cubos = Cubos();
 
+    /// [Adding the plugin]
     cubos.addPlugin(inputPlugin);
+    /// [Adding the plugin]
 
     cubos.addResource<State>();
 

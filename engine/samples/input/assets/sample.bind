@@ -21,43 +21,9 @@
             ],
             "gamepad": []
         },
-        "alt-space": {
-            "keys": [
-                "M-Space"
-            ],
-            "gamepad": []
-        },
-        "ctrl-space": {
-            "keys": [
-                "C-Space"
-            ],
-            "gamepad": []
-        },
-        "system-space": {
-            "keys": [
-                "D-Space"
-            ],
-            "gamepad": []
-        },
         "ctrl-shift-space": {
             "keys": [
                 "C-S-Space"
-            ],
-            "gamepad": []
-        },
-        "ctrl": {
-            "keys": [
-                "LControl",
-                "RControl"
-            ],
-            "gamepad": []
-        },
-        "ctrl-shift": {
-            "keys": [
-                "C-LShift",
-                "C-RShift",
-                "S-LControl",
-                "S-RControl"
             ],
             "gamepad": []
         }
