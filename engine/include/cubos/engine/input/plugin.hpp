@@ -15,6 +15,8 @@ namespace cubos::engine
     /// @defgroup input-plugin Input
     /// @ingroup engine
     /// @brief Adds input handling to @b CUBOS.
+    /// @see Take a look at the @ref examples-engine-input example for a demonstration of this
+    /// plugin.
     ///
     /// ## Bridges
     /// - @ref JSONBridge - registered with the `.bind` extension, loads @ref InputBindings assets.
