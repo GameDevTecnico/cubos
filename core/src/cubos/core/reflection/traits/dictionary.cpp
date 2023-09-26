@@ -83,7 +83,7 @@ DictionaryTrait::ConstIterator DictionaryTrait::find(const void* instance, const
 
 bool DictionaryTrait::insertDefault(void* instance, const void* key) const
 {
-    if (mInsertDefault)
+    if (mInsertDefault != nullptr)
     {
         mInsertDefault(instance, key);
         return true;
@@ -94,7 +94,7 @@ bool DictionaryTrait::insertDefault(void* instance, const void* key) const
 
 bool DictionaryTrait::insertCopy(void* instance, const void* key, const void* value) const
 {
-    if (mInsertCopy)
+    if (mInsertCopy != nullptr)
     {
         mInsertCopy(instance, key, value);
         return true;
@@ -105,7 +105,7 @@ bool DictionaryTrait::insertCopy(void* instance, const void* key, const void* va
 
 bool DictionaryTrait::insertMove(void* instance, const void* key, void* value) const
 {
-    if (mInsertMove)
+    if (mInsertMove != nullptr)
     {
         mInsertMove(instance, key, value);
         return true;
@@ -118,7 +118,7 @@ bool DictionaryTrait::erase(void* instance, Iterator& iterator) const
 {
     CUBOS_ASSERT(!iterator.isNull(), "Cannot erase null iterator");
 
-    if (mErase)
+    if (mErase != nullptr)
     {
         mErase(instance, iterator.mInner, true);
         mStop(iterator.mInner, true);
@@ -133,7 +133,7 @@ bool DictionaryTrait::erase(void* instance, ConstIterator& iterator) const
 {
     CUBOS_ASSERT(!iterator.isNull(), "Cannot erase null iterator");
 
-    if (mErase)
+    if (mErase != nullptr)
     {
         mErase(instance, iterator.mInner, false);
         mStop(iterator.mInner, false);
@@ -146,34 +146,34 @@ bool DictionaryTrait::erase(void* instance, ConstIterator& iterator) const
 
 bool DictionaryTrait::hasInsertDefault() const
 {
-    return mInsertDefault;
+    return mInsertDefault != nullptr;
 }
 
 bool DictionaryTrait::hasInsertCopy() const
 {
-    return mInsertCopy;
+    return mInsertCopy != nullptr;
 }
 
 bool DictionaryTrait::hasInsertMove() const
 {
-    return mInsertMove;
+    return mInsertMove != nullptr;
 }
 
 bool DictionaryTrait::hasErase() const
 {
-    return mErase;
+    return mErase != nullptr;
 }
 
 DictionaryTrait::Iterator::~Iterator()
 {
-    if (mInner)
+    if (mInner != nullptr)
     {
         mTrait.mStop(mInner, true);
     }
 }
 
-DictionaryTrait::Iterator::Iterator(void* iterator, void* instance, const DictionaryTrait& trait)
-    : mInner(iterator)
+DictionaryTrait::Iterator::Iterator(void* inner, void* instance, const DictionaryTrait& trait)
+    : mInner(inner)
     , mInstance(instance)
     , mTrait(trait)
 {
@@ -191,7 +191,7 @@ DictionaryTrait::Iterator::Iterator(const Iterator& other)
 }
 
 DictionaryTrait::Iterator::Iterator(Iterator&& other)
-    : mInner(other.mInner)
+ noexcept     : mInner(other.mInner)
     , mInstance(other.mInstance)
     , mTrait(other.mTrait)
 {
@@ -230,14 +230,14 @@ bool DictionaryTrait::Iterator::isNull() const
 
 DictionaryTrait::ConstIterator::~ConstIterator()
 {
-    if (mInner)
+    if (mInner != nullptr)
     {
         mTrait.mStop(mInner, false);
     }
 }
 
-DictionaryTrait::ConstIterator::ConstIterator(void* iterator, const void* instance, const DictionaryTrait& trait)
-    : mInner(iterator)
+DictionaryTrait::ConstIterator::ConstIterator(void* inner, const void* instance, const DictionaryTrait& trait)
+    : mInner(inner)
     , mInstance(instance)
     , mTrait(trait)
 {
@@ -255,7 +255,7 @@ DictionaryTrait::ConstIterator::ConstIterator(const ConstIterator& other)
 }
 
 DictionaryTrait::ConstIterator::ConstIterator(ConstIterator&& other)
-    : mInner(other.mInner)
+ noexcept     : mInner(other.mInner)
     , mInstance(other.mInstance)
     , mTrait(other.mTrait)
 {
