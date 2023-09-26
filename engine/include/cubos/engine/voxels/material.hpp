@@ -1,6 +1,6 @@
 /// @file
-/// @brief Class @ref cubos::core::gl::Material.
-/// @ingroup core-gl
+/// @brief Class @ref cubos::engine::Material.
+/// @ingroup voxels-plugin
 
 #pragma once
 
@@ -9,10 +9,10 @@
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serializer.hpp>
 
-namespace cubos::core::gl
+namespace cubos::engine
 {
     /// @brief Describes a voxel material.
-    /// @ingroup core-gl
+    /// @ingroup voxels-plugin
     struct Material
     {
         static const Material Empty; ///< Empty material, used for voxels with index 0.
@@ -29,10 +29,10 @@ namespace cubos::core::gl
         /// @return Similarity between the two materials.
         float similarity(const Material& other) const;
     };
-} // namespace cubos::core::gl
+} // namespace cubos::engine
 
 namespace cubos::core::data
 {
-    void serialize(Serializer& serializer, const gl::Material& mat, const char* name);
-    void deserialize(Deserializer& deserializer, gl::Material& mat);
+    void serialize(Serializer& serializer, const engine::Material& mat, const char* name);
+    void deserialize(Deserializer& deserializer, engine::Material& mat);
 } // namespace cubos::core::data

@@ -13,5 +13,5 @@ namespace cubos::core::gl
 {
     /// @defgroup core-gl Graphics
     /// @ingroup core
-    /// @brief Provides a graphics API abstraction and some voxel utilities.
+    /// @brief Provides a graphics API abstraction.
 } // namespace cubos::core::gl

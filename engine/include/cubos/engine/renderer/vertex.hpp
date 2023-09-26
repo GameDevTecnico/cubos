@@ -1,6 +1,6 @@
 /// @file
-/// @brief Class @ref cubos::core::gl::Vertex and function @ref cubos::core::gl::triangulate.
-/// @ingroup core-gl
+/// @brief Class @ref cubos::engine::Vertex and function @ref cubos::engine::triangulate.
+/// @ingroup renderer-plugin
 
 #pragma once
 
@@ -9,12 +9,12 @@
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serializer.hpp>
 
-namespace cubos::core::gl
+namespace cubos::engine
 {
     class Grid;
 
     /// @brief Represents a voxel vertex.
-    /// @ingroup core-gl
+    /// @ingroup renderer-plugin
     struct Vertex
     {
         glm::uvec3 position; ///< Position of the vertex.
@@ -26,12 +26,12 @@ namespace cubos::core::gl
     /// @param grid Grid to triangulate.
     /// @param vertices Vertices of the mesh.
     /// @param indices Indices of the mesh.
-    /// @ingroup core-gl
+    /// @ingroup renderer-plugin
     void triangulate(const Grid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
-} // namespace cubos::core::gl
+} // namespace cubos::engine
 
 namespace cubos::core::data
 {
-    void serialize(Serializer& serializer, const gl::Vertex& vertex, const char* name);
-    void deserialize(Deserializer& deserializer, gl::Vertex& vertex);
+    void serialize(Serializer& serializer, const engine::Vertex& vertex, const char* name);
+    void deserialize(Deserializer& deserializer, engine::Vertex& vertex);
 } // namespace cubos::core::data

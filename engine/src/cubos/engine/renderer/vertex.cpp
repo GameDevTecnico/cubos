@@ -1,12 +1,11 @@
 #include <vector>
 
-#include <cubos/core/gl/grid.hpp>
-#include <cubos/core/gl/vertex.hpp>
+#include <cubos/engine/renderer/vertex.hpp>
+#include <cubos/engine/voxels/grid.hpp>
 
-using namespace cubos;
-using namespace cubos::core::gl;
+using namespace cubos::engine;
 
-void cubos::core::data::serialize(Serializer& serializer, const gl::Vertex& vertex, const char* name)
+void cubos::core::data::serialize(Serializer& serializer, const Vertex& vertex, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(vertex.position, "position");
@@ -15,7 +14,7 @@ void cubos::core::data::serialize(Serializer& serializer, const gl::Vertex& vert
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, gl::Vertex& vertex)
+void cubos::core::data::deserialize(Deserializer& deserializer, Vertex& vertex)
 {
     deserializer.beginObject();
     deserializer.read(vertex.position);
@@ -24,7 +23,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, gl::Vertex& vert
     deserializer.endObject();
 }
 
-void cubos::core::gl::triangulate(const Grid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
+void cubos::engine::triangulate(const Grid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
 {
     std::vector<uint16_t> mask;
 

@@ -9,14 +9,14 @@
 
 #include <glm/glm.hpp>
 
-#include <cubos/core/gl/grid.hpp>
-#include <cubos/core/gl/palette.hpp>
 #include <cubos/core/gl/render_device.hpp>
-#include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/renderer/camera.hpp>
 #include <cubos/engine/renderer/pps/manager.hpp>
+#include <cubos/engine/renderer/vertex.hpp>
+#include <cubos/engine/voxels/grid.hpp>
+#include <cubos/engine/voxels/palette.hpp>
 
 namespace cubos::engine
 {
@@ -74,11 +74,11 @@ namespace cubos::engine
         /// @brief Uploads a grid to the GPU and returns an handle which can be used to draw it.
         /// @param grid Grid to upload.
         /// @return Handle of the grid.
-        virtual RendererGrid upload(const core::gl::Grid& grid) = 0;
+        virtual RendererGrid upload(const Grid& grid) = 0;
 
         /// @brief Sets the current palette of the renderer.
         /// @param palette Palette to set.
-        virtual void setPalette(const core::gl::Palette& palette) = 0;
+        virtual void setPalette(const Palette& palette) = 0;
 
         /// @brief Resizes the renderer's framebuffers.
         /// @param size New size of the window.

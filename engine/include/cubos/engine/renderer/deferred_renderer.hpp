@@ -7,9 +7,9 @@
 #include <vector>
 
 #include <cubos/core/gl/render_device.hpp>
-#include <cubos/core/gl/vertex.hpp>
 
 #include <cubos/engine/renderer/renderer.hpp>
+#include <cubos/engine/renderer/vertex.hpp>
 #include <cubos/engine/settings/settings.hpp>
 
 // TODO: make these defines proper constants (we're using C++!)
@@ -40,8 +40,8 @@ namespace cubos::engine
 
         // Implement interface methods.
 
-        RendererGrid upload(const core::gl::Grid& grid) override;
-        void setPalette(const core::gl::Palette& palette) override;
+        RendererGrid upload(const Grid& grid) override;
+        void setPalette(const Palette& palette) override;
 
     protected:
         // Implement interface methods.
