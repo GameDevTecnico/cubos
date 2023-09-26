@@ -71,8 +71,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/al/oal_audio_device.cpp"
     "src/cubos/core/al/oal_audio_device.hpp"
 
-    "src/cubos/core/ui/imgui.cpp"
-
     "src/cubos/core/ecs/entity_manager.cpp"
     "src/cubos/core/ecs/component_manager.cpp"
     "src/cubos/core/ecs/commands.cpp"
@@ -152,17 +150,6 @@ endif ()
 
 add_subdirectory(lib/json)
 
-add_library(imgui STATIC
-    "lib/imgui/imgui.cpp"
-    "lib/imgui/imgui_draw.cpp"
-    "lib/imgui/imgui_tables.cpp"
-    "lib/imgui/imgui_widgets.cpp"
-    "lib/imgui/imgui_demo.cpp"
-    "lib/imgui/misc/cpp/imgui_stdlib.cpp"
-)
-
-target_include_directories(imgui PUBLIC "lib/imgui" "lib/imgui/misc/cpp/imgui_stdlib.hpp")
-
 add_subdirectory(lib/stduuid)
 target_link_libraries(cubos-core PUBLIC stduuid)
 
@@ -170,7 +157,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 target_compile_definitions(cubos-core PUBLIC GLM_FORCE_SILENT_WARNINGS) # Needed for compilation to succeed on MSVC
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog imgui fmt::fmt json ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog fmt::fmt json ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
 
 # Add core tests

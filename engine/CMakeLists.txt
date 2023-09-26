@@ -19,6 +19,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/window/plugin.cpp"
 
     "src/cubos/engine/imgui/plugin.cpp"
+    "src/cubos/engine/imgui/imgui.cpp"
 
     "src/cubos/engine/tools/utils/serialization.cpp"
     "src/cubos/engine/tools/asset_explorer/plugin.cpp"
@@ -67,6 +68,18 @@ add_library(cubos-engine ${CUBOS_ENGINE_SOURCE})
 target_include_directories(cubos-engine PUBLIC "include" PRIVATE "src")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
 cubos_common_target_options(cubos-engine)
+
+add_library(imgui STATIC
+    "lib/imgui/imgui.cpp"
+    "lib/imgui/imgui_draw.cpp"
+    "lib/imgui/imgui_tables.cpp"
+    "lib/imgui/imgui_widgets.cpp"
+    "lib/imgui/imgui_demo.cpp"
+    "lib/imgui/misc/cpp/imgui_stdlib.cpp"
+)
+
+target_include_directories(imgui PUBLIC "lib/imgui" "lib/imgui/misc/cpp/imgui_stdlib.hpp")
+target_link_libraries(cubos-engine PUBLIC imgui)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(cubos-engine PUBLIC -Wno-attributes)

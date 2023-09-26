@@ -6,9 +6,11 @@
 
 #include <cubos/core/io/cursor.hpp>
 #include <cubos/core/log.hpp>
-#include <cubos/core/ui/imgui.hpp>
 
-using namespace cubos::core;
+#include <cubos/engine/imgui/imgui.hpp>
+
+namespace gl = cubos::core::gl;
+namespace io = cubos::core::io;
 
 struct ImGuiData
 {
@@ -48,7 +50,7 @@ static int buttonToImGuiButton(io::MouseButton button)
     }
 }
 
-static int keyToImGuiKey(io::Key key)
+static ImGuiKey keyToImGuiKey(io::Key key)
 {
 #define MAP_KEY(cubos, imgui)                                                                                          \
     case io::Key::cubos:                                                                                               \
@@ -272,7 +274,7 @@ void main()
     bd->ibSize = 0;
 }
 
-void ui::initialize(io::Window window)
+void cubos::engine::initialize(io::Window window)
 {
     // Initialize ImGui
     IMGUI_CHECKVERSION();
@@ -324,7 +326,7 @@ void ui::initialize(io::Window window)
     CUBOS_INFO("Initialized UI");
 }
 
-void ui::terminate()
+void cubos::engine::terminate()
 {
     auto& io = ImGui::GetIO();
     IM_ASSERT(io.BackendPlatformUserData != nullptr);
@@ -353,7 +355,7 @@ void ui::terminate()
     ImGui::DestroyContext();
 }
 
-void ui::beginFrame()
+void cubos::engine::beginFrame()
 {
     ImGuiIO& io = ImGui::GetIO();
     auto* bd = (ImGuiData*)io.BackendPlatformUserData;
@@ -397,7 +399,7 @@ static void setupRenderState(ImGuiData* bd, gl::Framebuffer target)
     rd.setFramebuffer(std::move(target));
 }
 
-void ui::endFrame(const gl::Framebuffer& target)
+void cubos::engine::endFrame(const gl::Framebuffer& target)
 {
     auto* bd = (ImGuiData*)ImGui::GetIO().BackendPlatformUserData;
     auto& rd = bd->window->renderDevice();
@@ -541,7 +543,7 @@ static bool handle(const io::MouseScrollEvent& event)
 static bool handle(const io::KeyEvent& event)
 {
     ImGuiIO& io = ImGui::GetIO();
-    int key = keyToImGuiKey(event.key);
+    ImGuiKey key = keyToImGuiKey(event.key);
     if (key != -1)
     {
         io.AddKeyEvent(key, event.pressed);
@@ -571,7 +573,7 @@ static bool handle(auto&& /*unused*/)
     return false;
 }
 
-bool ui::handleEvent(const io::WindowEvent& event)
+bool cubos::engine::handleEvent(const io::WindowEvent& event)
 {
     return std::visit([&](const auto& e) { return handle(e); }, event);
 }
