@@ -61,7 +61,7 @@ const void* ArrayTrait::get(const void* instance, std::size_t index) const
 
 bool ArrayTrait::insertDefault(void* instance, std::size_t index) const
 {
-    if (mInsertDefault)
+    if (mInsertDefault != nullptr)
     {
         mInsertDefault(instance, index);
         return true;
@@ -72,7 +72,7 @@ bool ArrayTrait::insertDefault(void* instance, std::size_t index) const
 
 bool ArrayTrait::insertCopy(void* instance, std::size_t index, const void* value) const
 {
-    if (mInsertCopy)
+    if (mInsertCopy != nullptr)
     {
         mInsertCopy(instance, index, value);
         return true;
@@ -83,7 +83,7 @@ bool ArrayTrait::insertCopy(void* instance, std::size_t index, const void* value
 
 bool ArrayTrait::insertMove(void* instance, std::size_t index, void* value) const
 {
-    if (mInsertMove)
+    if (mInsertMove != nullptr)
     {
         mInsertMove(instance, index, value);
         return true;
@@ -94,7 +94,7 @@ bool ArrayTrait::insertMove(void* instance, std::size_t index, void* value) cons
 
 bool ArrayTrait::erase(void* instance, std::size_t index) const
 {
-    if (mErase)
+    if (mErase != nullptr)
     {
         mErase(instance, index);
         return true;
