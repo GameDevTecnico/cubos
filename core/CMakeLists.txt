@@ -73,7 +73,6 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/ui/imgui.cpp"
     "src/cubos/core/ui/serialization.cpp"
-    "src/cubos/core/ui/ecs.cpp"
 
     "src/cubos/core/ecs/entity_manager.cpp"
     "src/cubos/core/ecs/component_manager.cpp"
