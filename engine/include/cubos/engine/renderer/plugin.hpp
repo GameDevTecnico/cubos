@@ -9,11 +9,10 @@
 
 #pragma once
 
-#include <cubos/core/gl/grid.hpp>
-#include <cubos/core/gl/palette.hpp>
-
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/renderer/renderer.hpp>
+#include <cubos/engine/voxels/grid.hpp>
+#include <cubos/engine/voxels/palette.hpp>
 
 namespace cubos::engine
 {
@@ -68,7 +67,7 @@ namespace cubos::engine
     /// @ingroup renderer-plugin
     struct [[cubos::component("cubos/renderable_grid", VecStorage)]] RenderableGrid
     {
-        Asset<core::gl::Grid> asset;                     ///< Handle to the grid asset to be rendered.
+        Asset<Grid> asset;                               ///< Handle to the grid asset to be rendered.
         glm::vec3 offset = {0.0F, 0.0F, 0.0F};           ///< Translation applied to the voxel grid before any other.
         [[cubos::ignore]] RendererGrid handle = nullptr; ///< Handle to the uploaded grid - set automatically.
     };

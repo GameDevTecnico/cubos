@@ -49,7 +49,6 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/fs/file_system.cpp"
     "src/cubos/core/data/fs/standard_archive.cpp"
     "src/cubos/core/data/fs/embedded_archive.cpp"
-    "src/cubos/core/data/qb_parser.cpp"
     "src/cubos/core/data/context.cpp"
 
     "src/cubos/core/io/window.cpp"
@@ -63,11 +62,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/gl/render_device.cpp"
     "src/cubos/core/gl/ogl_render_device.hpp"
     "src/cubos/core/gl/ogl_render_device.cpp"
-    "src/cubos/core/gl/material.cpp"
-    "src/cubos/core/gl/palette.cpp"
-    "src/cubos/core/gl/grid.cpp"
     "src/cubos/core/gl/util.cpp"
-    "src/cubos/core/gl/vertex.cpp"
 
     "src/cubos/core/al/audio_device.cpp"
     "src/cubos/core/al/oal_audio_device.cpp"

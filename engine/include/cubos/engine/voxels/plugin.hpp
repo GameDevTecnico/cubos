@@ -8,7 +8,6 @@
 #pragma once
 
 #include <cubos/engine/cubos.hpp>
-#include <cubos/engine/scene/scene.hpp>
 
 namespace cubos::engine
 {
@@ -17,10 +16,8 @@ namespace cubos::engine
     /// @brief Adds grid and palette assets to @b CUBOS.
     ///
     /// ## Bridges
-    /// - @ref BinaryBridge - registered with the `.grd` extension, loads @ref
-    ///   cubos::core::gl::Grid assets.
-    /// - @ref BinaryBridge - registered with the `.pal` extension, loads @ref
-    ///   cubos::core::gl::Palette assets.
+    /// - @ref BinaryBridge - registered with the `.grd` extension, loads @ref Grid assets.
+    /// - @ref BinaryBridge - registered with the `.pal` extension, loads @ref Palette assets.
     ///
     /// ## Dependencies
     /// - @ref assets-plugin

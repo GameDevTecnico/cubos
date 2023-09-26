@@ -7,11 +7,11 @@
 
 #include <cubos/core/gl/debug.hpp>
 #include <cubos/core/gl/util.hpp>
-#include <cubos/core/gl/vertex.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/renderer/deferred_renderer.hpp>
 #include <cubos/engine/renderer/frame.hpp>
+#include <cubos/engine/renderer/vertex.hpp>
 
 using namespace cubos::core::gl;
 using cubos::engine::DeferredRenderer;
@@ -547,7 +547,7 @@ cubos::engine::RendererGrid DeferredRenderer::upload(const Grid& grid)
     return deferredGrid;
 }
 
-void DeferredRenderer::setPalette(const core::gl::Palette& palette)
+void DeferredRenderer::setPalette(const Palette& palette)
 {
     // Get the colors from the palette.
     // Magenta is used for non-existent materials in order to easily identify errors.

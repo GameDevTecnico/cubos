@@ -20,8 +20,6 @@ static void settingsSystem(Write<Settings> settings)
 /// [Setting the palette]
 static void setPaletteSystem(Write<Renderer> renderer)
 {
-    using cubos::core::gl::Palette;
-
     // Create a simple palette with 3 materials (red, green and blue).
     (*renderer)->setPalette(Palette{{
         {{1, 0, 0, 1}},
@@ -34,8 +32,6 @@ static void setPaletteSystem(Write<Renderer> renderer)
 /// [Spawning a voxel grid]
 static void spawnVoxelGridSystem(Commands commands, Write<Assets> assets)
 {
-    using cubos::core::gl::Grid;
-
     // Create a 2x2x2 grid whose voxels alternate between the materials defined in the palette.
     auto gridAsset = assets->create(Grid{{2, 2, 2}, {1, 2, 3, 1, 2, 3, 1, 2}});
 

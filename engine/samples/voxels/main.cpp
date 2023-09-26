@@ -7,8 +7,7 @@
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
-using cubos::core::gl::Grid;
-using cubos::core::gl::Palette;
+
 using namespace cubos::engine;
 
 /// [Get handles to assets]

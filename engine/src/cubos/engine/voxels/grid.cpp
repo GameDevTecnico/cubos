@@ -1,10 +1,11 @@
 #include <unordered_map>
 
-#include <cubos/core/gl/grid.hpp>
-#include <cubos/core/gl/palette.hpp>
 #include <cubos/core/log.hpp>
 
-using namespace cubos::core::gl;
+#include <cubos/engine/voxels/grid.hpp>
+#include <cubos/engine/voxels/palette.hpp>
+
+using namespace cubos::engine;
 
 Grid::Grid(const glm::uvec3& size)
 {
@@ -142,7 +143,7 @@ bool Grid::convert(const Palette& src, const Palette& dst, float minSimilarity)
     return true;
 }
 
-void cubos::core::data::serialize(Serializer& serializer, const gl::Grid& grid, const char* name)
+void cubos::core::data::serialize(Serializer& serializer, const Grid& grid, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(grid.mSize, "size");
@@ -150,7 +151,7 @@ void cubos::core::data::serialize(Serializer& serializer, const gl::Grid& grid, 
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, gl::Grid& grid)
+void cubos::core::data::deserialize(Deserializer& deserializer, Grid& grid)
 {
     deserializer.beginObject();
     deserializer.read(grid.mSize);

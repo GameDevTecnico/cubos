@@ -1,6 +1,6 @@
-#include <cubos/core/gl/material.hpp>
+#include <cubos/engine/voxels/material.hpp>
 
-using namespace cubos::core::gl;
+using namespace cubos::engine;
 
 const Material Material::Empty = {{0, 0, 0, 0}};
 

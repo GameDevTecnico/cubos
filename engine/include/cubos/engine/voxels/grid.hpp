@@ -1,6 +1,6 @@
 /// @file
-/// @brief Class @ref cubos::core::gl::Grid.
-/// @ingroup core-gl
+/// @brief Class @ref cubos::engine::Grid.
+/// @ingroup voxels-plugin
 
 #pragma once
 
@@ -11,23 +11,23 @@
 #include <cubos/core/data/deserializer.hpp>
 #include <cubos/core/data/serializer.hpp>
 
-namespace cubos::core::gl
+namespace cubos::engine
 {
     class Palette;
     class Grid;
-} // namespace cubos::core::gl
+} // namespace cubos::engine
 
 namespace cubos::core::data
 {
-    void serialize(Serializer& serializer, const gl::Grid& grid, const char* name);
-    void deserialize(Deserializer& deserializer, gl::Grid& grid);
+    void serialize(Serializer& serializer, const engine::Grid& grid, const char* name);
+    void deserialize(Deserializer& deserializer, engine::Grid& grid);
 } // namespace cubos::core::data
 
-namespace cubos::core::gl
+namespace cubos::engine
 {
     /// @brief Represents a voxel object using a 3D grid.
     /// @see Each voxel stores a material index to be used with a @ref Palette.
-    /// @ingroup core-gl
+    /// @ingroup voxels-plugin
     class Grid final
     {
     public:
@@ -89,10 +89,11 @@ namespace cubos::core::gl
         bool convert(const Palette& src, const Palette& dst, float minSimilarity);
 
     private:
-        friend void data::serialize(data::Serializer& /*serializer*/, const Grid& /*grid*/, const char* /*name*/);
-        friend void data::deserialize(data::Deserializer& /*deserializer*/, Grid& /*grid*/);
+        friend void core::data::serialize(core::data::Serializer& /*serializer*/, const Grid& /*grid*/,
+                                          const char* /*name*/);
+        friend void core::data::deserialize(core::data::Deserializer& /*deserializer*/, Grid& /*grid*/);
 
         glm::uvec3 mSize;               ///< Size of the grid.
         std::vector<uint16_t> mIndices; ///< Indices of the grid.
     };
-} // namespace cubos::core::gl
+} // namespace cubos::engine

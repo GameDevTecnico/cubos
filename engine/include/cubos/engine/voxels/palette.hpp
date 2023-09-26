@@ -1,25 +1,25 @@
 /// @file
-/// @brief Class @ref cubos::core::gl::Palette.
-/// @ingroup core-gl
+/// @brief Class @ref cubos::engine::Palette.
+/// @ingroup voxels-plugin
 
 #pragma once
 
 #include <vector>
 
-#include <cubos/core/gl/material.hpp>
+#include <cubos/engine/voxels/material.hpp>
 
-namespace cubos::core::gl
+namespace cubos::engine
 {
     class Palette;
 }
 
 namespace cubos::core::data
 {
-    void serialize(Serializer& serializer, const gl::Palette& palette, const char* name);
-    void deserialize(Deserializer& deserializer, gl::Palette& palette);
+    void serialize(Serializer& serializer, const engine::Palette& palette, const char* name);
+    void deserialize(Deserializer& deserializer, engine::Palette& palette);
 } // namespace cubos::core::data
 
-namespace cubos::core::gl
+namespace cubos::engine
 {
     /// @brief Holds a palette of materials. Supports up to 65535 materials.
     ///
@@ -31,7 +31,7 @@ namespace cubos::core::gl
     /// of storing the whole material per each voxel, we just store a 16-bit
     /// integer.
     ///
-    /// @ingroup core-gl
+    /// @ingroup voxels-plugin
     class Palette final
     {
     public:
@@ -84,9 +84,10 @@ namespace cubos::core::gl
         void merge(const Palette& palette, float similarity = 1.0F);
 
     private:
-        friend void data::serialize(data::Serializer& /*serializer*/, const Palette& /*palette*/, const char* /*name*/);
-        friend void data::deserialize(data::Deserializer& /*deserializer*/, Palette& /*palette*/);
+        friend void core::data::serialize(core::data::Serializer& /*serializer*/, const Palette& /*palette*/,
+                                          const char* /*name*/);
+        friend void core::data::deserialize(core::data::Deserializer& /*deserializer*/, Palette& /*palette*/);
 
         std::vector<Material> mMaterials; ///< Materials in the palette.
     };
-} // namespace cubos::core::gl
+} // namespace cubos::engine

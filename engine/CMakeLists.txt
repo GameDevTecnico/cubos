@@ -42,6 +42,9 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/scene/bridge.cpp"
 
     "src/cubos/engine/voxels/plugin.cpp"
+    "src/cubos/engine/voxels/grid.cpp"
+    "src/cubos/engine/voxels/material.cpp"
+    "src/cubos/engine/voxels/palette.cpp"
 
     "src/cubos/engine/collisions/plugin.cpp"
     "src/cubos/engine/collisions/broad_phase.cpp"
@@ -54,6 +57,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/input/axis.cpp"
 
     "src/cubos/engine/renderer/plugin.cpp"
+    "src/cubos/engine/renderer/vertex.cpp"
     "src/cubos/engine/renderer/frame.cpp"
     "src/cubos/engine/renderer/renderer.cpp"
     "src/cubos/engine/renderer/deferred_renderer.cpp"
