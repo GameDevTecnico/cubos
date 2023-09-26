@@ -128,7 +128,7 @@ static void splitViewport(glm::ivec2 position, glm::ivec2 size, int count, Viewp
 static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Write<RendererFrame> frame,
                  Query<Read<LocalToWorld>, Read<Camera>> query)
 {
-    cubos::engine::Camera cameras[4]{};
+    Camera cameras[4]{};
     glm::mat4 views[4]{};
     Viewport viewports[4]{};
     
