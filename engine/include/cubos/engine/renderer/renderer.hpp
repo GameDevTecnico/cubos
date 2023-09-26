@@ -37,14 +37,6 @@ namespace cubos::engine
     /// @ingroup renderer-plugin
     using Renderer = std::shared_ptr<BaseRenderer>;
 
-    /// @brief Struct which holds the viewport information for a camera, to be used for drawing.
-    /// @ingroup renderer-plugin
-    struct Viewport
-    {
-        glm::ivec2 position;
-        glm::ivec2 size;
-    };
-
     /// @brief Interface which abstracts different rendering methods.
     ///
     /// This abstraction allows us to, for example, switch between a raytracing and a deferred
@@ -61,6 +53,13 @@ namespace cubos::engine
     class BaseRenderer
     {
     public:
+        /// @brief Struct which holds the viewport information for a camera, to be used for drawing.
+        struct Viewport
+        {
+            glm::ivec2 position;
+            glm::ivec2 size;
+        };
+
         virtual ~BaseRenderer() = default;
 
         /// @brief Constructs.

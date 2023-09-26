@@ -96,7 +96,7 @@ static void frameEnvironment(Write<RendererFrame> frame, Read<RendererEnvironmen
 /// @param size Viewport size.
 /// @param count How many cameras need to be fitted in to the given viewport.
 /// @param viewport Output array where the viewports will be set.
-static void splitViewport(glm::ivec2 position, glm::ivec2 size, int count, Viewport* viewports)
+static void splitViewport(glm::ivec2 position, glm::ivec2 size, int count, BaseRenderer::Viewport* viewports)
 {
     if (count == 1)
     {
@@ -130,7 +130,7 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
 {
     Camera cameras[4]{};
     glm::mat4 views[4]{};
-    Viewport viewports[4]{};
+    BaseRenderer::Viewport viewports[4]{};
     
     int cameraCount = 0;
 
