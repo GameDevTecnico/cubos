@@ -207,10 +207,10 @@ namespace cubos::core::reflection
         Stop mStop;
         Key mKey;
         Value mValue;
-        InsertDefault mInsertDefault;
-        InsertCopy mInsertCopy;
-        InsertMove mInsertMove;
-        Erase mErase;
+        InsertDefault mInsertDefault{nullptr};
+        InsertCopy mInsertCopy{nullptr};
+        InsertMove mInsertMove{nullptr};
+        Erase mErase{nullptr};
     };
 
     class DictionaryTrait::Iterator
@@ -254,7 +254,7 @@ namespace cubos::core::reflection
         /// @param trait Dictionary trait.
         Iterator(void* inner, void* instance, const DictionaryTrait& trait);
 
-        void* mInner;
+        void* mInner{nullptr};
         void* mInstance;
         const DictionaryTrait& mTrait;
     };
@@ -300,7 +300,7 @@ namespace cubos::core::reflection
         /// @param trait Dictionary trait.
         ConstIterator(void* inner, const void* instance, const DictionaryTrait& trait);
 
-        void* mInner;
+        void* mInner{nullptr};
         const void* mInstance;
         const DictionaryTrait& mTrait;
     };

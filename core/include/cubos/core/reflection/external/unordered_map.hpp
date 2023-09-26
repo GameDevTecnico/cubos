@@ -22,9 +22,8 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::unordered_map<K,
             {
                 return new typename Map::iterator(reinterpret_cast<Map*>(instance)->begin());
             }
-            
-                            return new typename Map::const_iterator(reinterpret_cast<const Map*>(instance)->cbegin());
-           
+
+            return new typename Map::const_iterator(reinterpret_cast<const Map*>(instance)->cbegin());
         } /*begin*/,
         [](uintptr_t instance, const void* key, bool writeable) -> void* {
             if (writeable)
@@ -36,14 +35,13 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::unordered_map<K,
                 }
                 return new typename Map::iterator(it);
             }
-            
-                            auto it = reinterpret_cast<const Map*>(instance)->find(*reinterpret_cast<const K*>(key));
-                if (it == reinterpret_cast<const Map*>(instance)->end())
-                {
-                    return nullptr;
-                }
-                return new typename Map::const_iterator(it);
-           
+
+            auto it = reinterpret_cast<const Map*>(instance)->find(*reinterpret_cast<const K*>(key));
+            if (it == reinterpret_cast<const Map*>(instance)->end())
+            {
+                return nullptr;
+            }
+            return new typename Map::const_iterator(it);
         } /*find*/,
         [](uintptr_t instance, void* iterator, bool writeable) {
             if (writeable)
@@ -51,10 +49,10 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::unordered_map<K,
                 ++*static_cast<typename Map::iterator*>(iterator);
                 return *static_cast<typename Map::iterator*>(iterator) != reinterpret_cast<Map*>(instance)->end();
             }
-            
-                            ++*static_cast<typename Map::const_iterator*>(iterator);
-                return *static_cast<typename Map::const_iterator*>(iterator) != reinterpret_cast<const Map*>(instance)->cend();
-           
+
+            ++*static_cast<typename Map::const_iterator*>(iterator);
+            return *static_cast<typename Map::const_iterator*>(iterator) !=
+                   reinterpret_cast<const Map*>(instance)->cend();
         } /*advance*/,
         [](void* iterator, bool writeable) {
             if (writeable)
@@ -71,18 +69,16 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::unordered_map<K,
             {
                 return &(*static_cast<const typename Map::iterator*>(iterator))->first;
             }
-            
-                            return &(*static_cast<const typename Map::const_iterator*>(iterator))->first;
-           
+
+            return &(*static_cast<const typename Map::const_iterator*>(iterator))->first;
         } /*key*/,
         [](const void* iterator, bool writeable) -> uintptr_t {
             if (writeable)
             {
                 return reinterpret_cast<uintptr_t>(&(*static_cast<const typename Map::iterator*>(iterator))->second);
             }
-            
-                            return reinterpret_cast<uintptr_t>(&(*static_cast<const typename Map::const_iterator*>(iterator))->second);
-           
+
+            return reinterpret_cast<uintptr_t>(&(*static_cast<const typename Map::const_iterator*>(iterator))->second);
         } /*value*/);
 
     // We supply the insert functions depending on the constructibility of the value type.
