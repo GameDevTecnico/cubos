@@ -13,6 +13,7 @@ add_executable(
     reflection/traits/fields.cpp
     reflection/external/primitives.cpp
     reflection/external/vector.cpp
+    reflection/external/map.cpp
 
     data/fs/embedded_archive.cpp
     data/fs/standard_archive.cpp
