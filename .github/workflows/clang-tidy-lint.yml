@@ -1,0 +1,46 @@
+name: 🔍 Static Analysis
+
+on:
+  pull_request:
+    branches: [ main ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+  
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 2
+        
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11 clang-tidy
+  
+    - name: Prepare compile_commands.json
+      run: cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON -DBUILD_ENGINE_SAMPLES=ON -DUSE_CLANG_TIDY=ON
+      shell: bash
+      env:
+        CC:   gcc-11
+        CXX:  g++-11
+
+    - name: Create results directory
+      run: |
+        mkdir clang-tidy-result
+
+    - name: Analyze
+      run: |
+        git diff -U0 HEAD^ | clang-tidy-diff -p1 -path build -export-fixes clang-tidy-result/fixes.yml
+
+    - name: Run clang-tidy-pr-comments action
+      uses: platisd/clang-tidy-pr-comments@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        clang_tidy_fixes: clang-tidy-result/fixes.yml
+        request_changes: true
+        suggestions_per_comment: 10
