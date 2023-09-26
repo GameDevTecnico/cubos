@@ -32,8 +32,13 @@ if(CCACHE_EXE)
     option(USE_CCACHE "Enable CCache" ON)
     if(USE_CCACHE)
         if (CMAKE_HOST_WIN32)
+            option(CCACHE_VERSION "Pinned CCache Version")
+
+            # find_program only finds Chocolatey's shim which is unable to be used with another name, the original executable must be used.
+            set(CCACHE_PATH C:/ProgramData/chocolatey/lib/ccache/tools/ccache-${CCACHE_VERSION}-windows-x86_64/ccache.exe)
+
             file(COPY_FILE
-                "C:/ProgramData/chocolatey/lib/ccache/tools/ccache-4.8.3-windows-x86_64/ccache.exe" ${CMAKE_BINARY_DIR}/cl.exe
+                ${CCACHE_PATH} ${CMAKE_BINARY_DIR}/cl.exe
                 ONLY_IF_DIFFERENT)
 
             set(CMAKE_VS_GLOBALS
