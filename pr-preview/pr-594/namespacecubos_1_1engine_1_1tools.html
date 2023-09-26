@@ -96,10 +96,167 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad19591568b671a1e6298e2a5464e76b7" class="m-doc">showPackage</a>(</span><span class="m-doc-wrap">const <a href="serialization_8hpp.html#aeaa0c0459bfcd10c289800fcc63f3e4f" class="m-doc">Package</a>&amp; pkg,
+              const std::string&amp; name)</span>
+            </dt>
+            <dd>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a91360129c59080537966b076279af72c" class="m-doc">editPackage</a>(</span><span class="m-doc-wrap"><a href="serialization_8hpp.html#aeaa0c0459bfcd10c289800fcc63f3e4f" class="m-doc">Package</a>&amp; pkg,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#aebb18c411f0ca5f7e0325800fd67c1d1" class="m-doc">show</a>(</span><span class="m-doc-wrap">const T&amp; object,
+              const std::string&amp; name)</span>
+            </dt>
+            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aaad5908fce55066bc684f5b4c98434c7" class="m-doc">edit</a>(</span><span class="m-doc-wrap">T&amp; object,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__world-inspector-tool-plugin.html#gac8b9b3aa35b07c7af5974747c6529ffb" class="m-doc">worldInspectorPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ad19591568b671a1e6298e2a5464e76b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />tools::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad19591568b671a1e6298e2a5464e76b7" class="m-doc-self">showPackage</a>(</span><span class="m-doc-wrap">const <a href="serialization_8hpp.html#aeaa0c0459bfcd10c289800fcc63f3e4f" class="m-doc">Package</a>&amp; pkg,
+              const std::string&amp; name)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="serialization_8hpp.html">&lt;engine/tools/utils/serialization.hpp&gt;</a></div>
+            </h3>
+            <p>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pkg</td>
+                  <td>Packaged object to show.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Name of the object.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>The first column displays the name of the package and the second column displays the value of the package.</p>
+          </div></section>
+          <section class="m-doc-details" id="a91360129c59080537966b076279af72c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />tools::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a91360129c59080537966b076279af72c" class="m-doc-self">editPackage</a>(</span><span class="m-doc-wrap"><a href="serialization_8hpp.html#aeaa0c0459bfcd10c289800fcc63f3e4f" class="m-doc">Package</a>&amp; pkg,
+              const std::string&amp; name)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="serialization_8hpp.html">&lt;engine/tools/utils/serialization.hpp&gt;</a></div>
+            </h3>
+            <p>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pkg</td>
+                  <td>Packaged object to edit.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Name of the object.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the object was modified, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The first column displays the name of the package, the second column displays the value of the package and the third column is used for remove buttons in the case of arrays and dictionaries.</p>
+          </div></section>
+          <section class="m-doc-details" id="aebb18c411f0ca5f7e0325800fd67c1d1"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="serialization_8hpp.html">&lt;engine/tools/utils/serialization.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />tools::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aebb18c411f0ca5f7e0325800fd67c1d1" class="m-doc-self">show</a>(</span><span class="m-doc-wrap">const T&amp; object,
+              const std::string&amp; name)</span></span>
+            </h3>
+            <p>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type of the serializable object.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>object</td>
+                  <td>Object to show.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Name of the object.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Internally packages the object and calls <a href="namespacecubos_1_1engine_1_1tools.html#ad19591568b671a1e6298e2a5464e76b7" class="m-doc">showPackage()</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="aaad5908fce55066bc684f5b4c98434c7"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="serialization_8hpp.html">&lt;engine/tools/utils/serialization.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />tools::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaad5908fce55066bc684f5b4c98434c7" class="m-doc-self">edit</a>(</span><span class="m-doc-wrap">T&amp; object,
+              const std::string&amp; name)</span></span>
+            </h3>
+            <p>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type of the serializable object.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>object</td>
+                  <td>Object to edit.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>Name of the object.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the object was edited, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Internally packages the object, calls <a href="namespacecubos_1_1engine_1_1tools.html#a91360129c59080537966b076279af72c" class="m-doc">editPackage()</a> and then unpackages the object, if it was modified.</p>
+          </div></section>
         </section>
       </div>
     </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ui/serialization.hpp file | CUBOS.</title>
+  <title>engine/tools/utils/serialization.hpp file | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,7 +44,7 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_f556bbe30cd07922836d0e9d7f5fa0a5.html">ui</a>/</span>serialization.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_c185369e92e3603c6d00fa8343148da7.html">tools</a>/</span><span class="m-breadcrumb"><a href="dir_326e44d196e5308e965441089f998c32.html">utils</a>/</span>serialization.hpp <span class="m-thin">file</span>
         </h1>
         <p>Functions for showing and editing serializable objects in the UI.</p>
         <nav class="m-block m-default">
@@ -64,34 +64,34 @@
           <dl class="m-doc">
             <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
             <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ui.html" class="m-doc">cubos::core::ui</a></dt>
-            <dd><a href="group__core-ui.html" class="m-doc">User Interface</a> module.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine_1_1tools.html" class="m-doc">cubos::engine::tools</a></dt>
+            <dd>Namespace for <a href="group__tool-plugins.html" class="m-doc">tool plugins</a>.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga9cc812c329eab0ddf0116d0944df9e16" class="m-doc">showPackage</a>(</span><span class="m-doc-wrap">const data::Package&amp; pkg,
+              <span class="m-doc-wrap-bumper">void <a href="namespacecubos_1_1engine_1_1tools.html#ad19591568b671a1e6298e2a5464e76b7" class="m-doc">showPackage</a>(</span><span class="m-doc-wrap">const <a href="serialization_8hpp.html#aeaa0c0459bfcd10c289800fcc63f3e4f" class="m-doc">Package</a>&amp; pkg,
               const std::string&amp; name)</span>
             </dt>
             <dd>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-ui.html#ga8904bc96ce2ff05ef698f88e0d107290" class="m-doc">editPackage</a>(</span><span class="m-doc-wrap">data::Package&amp; pkg,
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1engine_1_1tools.html#a91360129c59080537966b076279af72c" class="m-doc">editPackage</a>(</span><span class="m-doc-wrap"><a href="serialization_8hpp.html#aeaa0c0459bfcd10c289800fcc63f3e4f" class="m-doc">Package</a>&amp; pkg,
               const std::string&amp; name) -&gt; bool</span>
             </dt>
             <dd>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga71f006c1e0a23b24f6c2a7cc225fc88b" class="m-doc">show</a>(</span><span class="m-doc-wrap">const T&amp; object,
+              <span class="m-doc-wrap-bumper">void <a href="namespacecubos_1_1engine_1_1tools.html#aebb18c411f0ca5f7e0325800fd67c1d1" class="m-doc">show</a>(</span><span class="m-doc-wrap">const T&amp; object,
               const std::string&amp; name)</span>
             </dt>
             <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-ui.html#ga7dd0b501b4ef70633c7f39098d555de1" class="m-doc">edit</a>(</span><span class="m-doc-wrap">T&amp; object,
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1engine_1_1tools.html#aaad5908fce55066bc684f5b4c98434c7" class="m-doc">edit</a>(</span><span class="m-doc-wrap">T&amp; object,
               const std::string&amp; name) -&gt; bool</span>
             </dt>
             <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
