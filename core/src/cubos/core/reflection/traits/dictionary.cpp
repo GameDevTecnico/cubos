@@ -219,6 +219,7 @@ bool DictionaryTrait::Iterator::advance()
         return true;
     }
 
+    mTrait.mStop(mInner, true);
     mInner = nullptr;
     return false;
 }
@@ -283,6 +284,7 @@ bool DictionaryTrait::ConstIterator::advance()
         return true;
     }
 
+    mTrait.mStop(mInner, false);
     mInner = nullptr;
     return false;
 }
