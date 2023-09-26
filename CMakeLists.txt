@@ -31,7 +31,21 @@ find_program(CCACHE_EXE NAMES "ccache")
 if(CCACHE_EXE)
     option(USE_CCACHE "Enable CCache" ON)
     if(USE_CCACHE)
-        set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_EXE}")
+        if (CMAKE_HOST_WIN32)
+            file(COPY_FILE
+                "C:/ProgramData/chocolatey/lib/ccache/tools/ccache-4.8.3-windows-x86_64/ccache.exe" ${CMAKE_BINARY_DIR}/cl.exe
+                ONLY_IF_DIFFERENT)
+
+            set(CMAKE_VS_GLOBALS
+                "CLToolExe=cl.exe"
+                "CLToolPath=${CMAKE_BINARY_DIR}"
+                "TrackFileAccess=false"
+                "UseMultiToolTask=true"
+                "DebugInformationFormat=OldStyle"
+            )
+        else ()
+            set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_EXE}")
+        endif()
     endif()
 endif()
 
