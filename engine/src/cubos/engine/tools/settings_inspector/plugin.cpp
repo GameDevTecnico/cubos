@@ -1,10 +1,9 @@
 #include <imgui.h>
 
-#include <cubos/core/ui/serialization.hpp>
-
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
+#include <cubos/engine/tools/utils/serialization.hpp>
 
 using cubos::core::ecs::Write;
 
@@ -25,7 +24,7 @@ static void inspector(Write<Settings> settings)
             ImGui::BeginTable("split", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
             for (auto& setting : map)
             {
-                cubos::core::ui::edit(setting.second, setting.first);
+                tools::edit(setting.second, setting.first);
             }
             ImGui::EndTable();
         }
