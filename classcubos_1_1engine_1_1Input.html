@@ -55,6 +55,7 @@
               Reference
               <ul>
                 <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
@@ -80,6 +81,16 @@
               using <a href="#ab73ff2a63d8abbdbf8c0fb6f7e0aab4f" class="m-doc-self">GamepadAxis</a> = <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">core::<wbr />io::<wbr />GamepadAxis</a>
             </dt>
             <dd>Alias for <a href="group__core-io.html#gaf04965ccbc878e3989398001644ca510" class="m-doc">core::<wbr />io::<wbr />GamepadAxis</a>.</dd>
+          </dl>
+        </section>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static void <a href="#ac24201f08ccb4670cb5fdc18a0266f26" class="m-doc">handle</a>(</span><span class="m-doc-wrap">const <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
+              const <a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a>&amp; event)</span>
+            </dt>
+            <dd>Handle all other events - discards them.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -128,11 +139,6 @@
             </dt>
             <dd>Handle a gamepad connection event.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ad35f90682418d3e7b772ece638048f43" class="m-doc">handle</a>(</span><span class="m-doc-wrap">const <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
-              const <a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a>&amp; event)</span>
-            </dt>
-            <dd>Handle all other events - discards them.</dd>
-            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a5610ffedd14c53803167b97f3f016eb4" class="m-doc">pollGamepads</a>(</span><span class="m-doc-wrap">const <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window)</span>
             </dt>
             <dd>Polls the input state of the gamepads.</dd>
@@ -144,6 +150,29 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ac24201f08ccb4670cb5fdc18a0266f26"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static void cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac24201f08ccb4670cb5fdc18a0266f26" class="m-doc-self">handle</a>(</span><span class="m-doc-wrap">const <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
+              const <a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a>&amp; event)</span></span>
+            </h3>
+            <p>Handle all other events - discards them.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">window</td>
+                  <td>Window that received the event.</td>
+                </tr>
+                <tr>
+                  <td>event</td>
+                  <td>Event to discard.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>This is method exists so that <code>std::visit</code> can be used with <a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a> on <a href="classcubos_1_1engine_1_1Input.html#abec1956acab387c191f0ae03a5a94bde" class="m-doc">handle()</a>.</p>
+          </div></section>
           <section class="m-doc-details" id="a73b247b43a87102142d71315c38fadc7"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a73b247b43a87102142d71315c38fadc7" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">int player)</span></span>
@@ -327,29 +356,6 @@
                 </tr>
               </tbody>
             </table>
-          </div></section>
-          <section class="m-doc-details" id="ad35f90682418d3e7b772ece638048f43"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Input::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad35f90682418d3e7b772ece638048f43" class="m-doc-self">handle</a>(</span><span class="m-doc-wrap">const <a href="group__core-io.html#gabbf049b16e4957c4db19bbe8699da719" class="m-doc">core::<wbr />io::<wbr />Window</a>&amp; window,
-              const <a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a>&amp; event)</span></span>
-            </h3>
-            <p>Handle all other events - discards them.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">window</td>
-                  <td>Window that received the event.</td>
-                </tr>
-                <tr>
-                  <td>event</td>
-                  <td>Event to discard.</td>
-                </tr>
-              </tbody>
-            </table>
-<p>This is method exists so that <code>std::visit</code> can be used with <a href="group__core-io.html#ga95a66bffef72bc872aa3bff8d9e5d56c" class="m-doc">core::<wbr />io::<wbr />WindowEvent</a> on <a href="classcubos_1_1engine_1_1Input.html#abec1956acab387c191f0ae03a5a94bde" class="m-doc">handle()</a>.</p>
           </div></section>
           <section class="m-doc-details" id="a5610ffedd14c53803167b97f3f016eb4"><div>
             <h3>
