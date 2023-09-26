@@ -78,7 +78,7 @@ FieldsTrait::FieldsTrait()
 }
 
 FieldsTrait::FieldsTrait(FieldsTrait&& other)
-    : mFirstField(other.mFirstField)
+ noexcept     : mFirstField(other.mFirstField)
     , mLastField(other.mLastField)
 {
     other.mFirstField = nullptr;
@@ -87,9 +87,9 @@ FieldsTrait::FieldsTrait(FieldsTrait&& other)
 
 FieldsTrait::~FieldsTrait()
 {
-    while (mFirstField)
+    while (mFirstField != nullptr)
     {
-        auto next = mFirstField->mNext;
+        auto *next = mFirstField->mNext;
         delete mFirstField;
         mFirstField = next;
     }
@@ -97,13 +97,13 @@ FieldsTrait::~FieldsTrait()
 
 FieldsTrait&& FieldsTrait::withField(const Type& type, std::string name, AddressOf* addressOf) &&
 {
-    for (auto field = mFirstField; field; field = field->mNext)
+    for (auto *field = mFirstField; field != nullptr; field = field->mNext)
     {
         CUBOS_ASSERT(field->mName != name, "Field '{}' already exists", name);
     }
 
-    auto field = new Field(type, std::move(name), addressOf);
-    if (mFirstField)
+    auto *field = new Field(type, std::move(name), addressOf);
+    if (mFirstField != nullptr)
     {
         mLastField->mNext = field;
         mLastField = field;
@@ -119,7 +119,7 @@ FieldsTrait&& FieldsTrait::withField(const Type& type, std::string name, Address
 
 const FieldsTrait::Field* FieldsTrait::field(const std::string& name) const
 {
-    for (auto field = mFirstField; field; field = field->mNext)
+    for (auto *field = mFirstField; field != nullptr; field = field->mNext)
     {
         if (field->mName == name)
         {
@@ -136,7 +136,7 @@ FieldsTrait::Iterator FieldsTrait::begin() const
     return Iterator{mFirstField};
 }
 
-FieldsTrait::Iterator FieldsTrait::end() const
+FieldsTrait::Iterator FieldsTrait::end() 
 {
     return Iterator{nullptr};
 }

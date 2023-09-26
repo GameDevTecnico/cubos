@@ -143,7 +143,7 @@ namespace cubos::core::reflection
 
         /// @brief Move constructs.
         /// @param other Other trait.
-        FieldsTrait(FieldsTrait&& other);
+        FieldsTrait(FieldsTrait&& other) noexcept ;
 
         /// @brief Adds a field to the type. The getter will be deleted using `delete` and thus
         /// must be allocated using `new`.
@@ -176,7 +176,7 @@ namespace cubos::core::reflection
 
         /// @brief Gets an iterator which represents the end of the field list of a type.
         /// @return Iterator.
-        Iterator end() const;
+        static Iterator end();
 
     private:
         Field* mFirstField;

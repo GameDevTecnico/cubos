@@ -40,7 +40,7 @@ int main()
     /// [Accessing the trait]
 
     /// [Iterating over fields]
-    for (auto& field : fields)
+    for (const auto& field : fields)
     {
         CUBOS_INFO("Field '{}' of type '{}'", field.name(), field.type().name());
     }
