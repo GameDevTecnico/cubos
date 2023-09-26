@@ -1,19 +1,23 @@
 /// @file
 /// @brief Functions for initializing and using ImGui.
-/// @ingroup core-ui
+/// @ingroup imgui-plugin
 
 #pragma once
 
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/window.hpp>
 
-namespace cubos::core::ui
+using Framebuffer = cubos::core::gl::Framebuffer;
+using Window = cubos::core::io::Window;
+using WindowEvent = cubos::core::io::WindowEvent;
+
+namespace cubos::engine
 {
     /// @brief Initializes ImGui for use with the given window.
     /// @note Should only be called once and no ImGui calls should be made before this is called.
     /// @param window The window to use.
     /// @ingroup core-ui
-    void initialize(io::Window window);
+    void initialize(Window window);
 
     /// @brief Shuts down ImGui.
     /// @note Should only be called once, after @ref initialize(), and no ImGui calls should be
@@ -30,11 +34,11 @@ namespace cubos::core::ui
     /// framebuffer, or the default framebuffer if @p target is null.
     /// @param target Framebuffer to render to.
     /// @ingroup core-ui
-    void endFrame(const gl::Framebuffer& target = nullptr);
+    void endFrame(const Framebuffer& target = nullptr);
 
     /// @brief Passes a window event to ImGui.
     /// @param event Event to pass.
     /// @return True if the event was handled by ImGui, false otherwise.
     /// @ingroup core-ui
-    bool handleEvent(const io::WindowEvent& event);
-} // namespace cubos::core::ui
+    bool handleEvent(const WindowEvent& event);
+} // namespace cubos::engine

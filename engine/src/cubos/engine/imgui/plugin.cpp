@@ -1,5 +1,4 @@
-#include <cubos/core/ui/imgui.hpp>
-
+#include <cubos/engine/imgui/imgui.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
@@ -7,11 +6,12 @@ using cubos::core::ecs::EventReader;
 using cubos::core::ecs::Read;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
-namespace ui = cubos::core::ui;
+
+using namespace cubos::engine;
 
 static void init(Read<Window> window)
 {
-    ui::initialize(*window);
+    initialize(*window);
 }
 
 static void begin(EventReader<WindowEvent> events)
@@ -23,20 +23,20 @@ static void begin(EventReader<WindowEvent> events)
     //       Not sure how we will propagate that information to other systems yet.
     for (auto event : events)
     {
-        ui::handleEvent(event);
+        handleEvent(event);
     }
 
-    ui::beginFrame();
+    beginFrame();
 }
 
 static void end()
 {
-    ui::endFrame();
+    endFrame();
 }
 
 void cubos::engine::imguiPlugin(Cubos& cubos)
 {
-    cubos.addPlugin(cubos::engine::windowPlugin);
+    cubos.addPlugin(windowPlugin);
 
     cubos.startupTag("cubos.imgui.init").after("cubos.window.init");
     cubos.tag("cubos.imgui.begin").after("cubos.window.poll");

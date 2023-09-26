@@ -7,9 +7,6 @@
 [submodule "core/lib/spdlog"]
 	path = core/lib/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "core/lib/imgui"]
-	path = core/lib/imgui
-	url = https://github.com/ocornut/imgui.git
 [submodule "core/lib/fmt"]
 	path = core/lib/fmt
 	url = https://github.com/fmtlib/fmt.git
@@ -25,3 +22,6 @@
 [submodule "docs/css/m.css"]
 	path = docs/css
 	url = https://github.com/mosra/m.css
+[submodule "engine/lib/imgui"]
+	path = engine/lib/imgui
+	url = https://github.com/ocornut/imgui.git
