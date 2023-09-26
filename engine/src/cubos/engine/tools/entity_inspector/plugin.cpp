@@ -1,17 +1,15 @@
 #include <imgui.h>
 
-#include <cubos/core/ui/serialization.hpp>
-
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/tools/entity_inspector/plugin.hpp>
 #include <cubos/engine/tools/entity_selector/plugin.hpp>
+#include <cubos/engine/tools/utils/serialization.hpp>
 
 using cubos::core::data::Context;
 using cubos::core::data::SerializationMap;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
 using cubos::core::ecs::Write;
-using cubos::core::ui::editPackage;
 using namespace cubos::engine;
 
 static void inspectEntity(Write<World> world)
@@ -26,7 +24,7 @@ static void inspectEntity(Write<World> world)
         if (!selection.isNull() && world->isAlive(selection))
         {
             auto pkg = world->pack(selection);
-            if (editPackage(pkg, std::to_string(selection.index)))
+            if (tools::editPackage(pkg, std::to_string(selection.index)))
             {
                 world->unpack(selection, pkg);
             }

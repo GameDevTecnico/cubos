@@ -1,12 +1,17 @@
+/// @dir
+/// @brief @ref utils-tool-plugin plugin directory.
+
 /// @file
 /// @brief Functions for showing and editing serializable objects in the UI.
-/// @ingroup core-ui
+/// @ingroup utils-tool-plugin
 
 #pragma once
 
 #include <cubos/core/data/package.hpp>
 
-namespace cubos::core::ui
+using Package = cubos::core::data::Package;
+
+namespace cubos::engine::tools
 {
     /// @brief Shows a packaged object's properties in the UI. Should be called inside a
     /// `ImGui::BeginTable(2)` and `ImGui::EndTable()` block.
@@ -16,8 +21,8 @@ namespace cubos::core::ui
     ///
     /// @param pkg Packaged object to show.
     /// @param name Name of the object.
-    /// @ingroup core-ui
-    void showPackage(const data::Package& pkg, const std::string& name);
+    /// @ingroup utils-tool-plugin
+    void showPackage(const Package& pkg, const std::string& name);
 
     /// @brief Shows a packaged object's properties in the UI, allowing the user to edit the
     /// object. Should be called inside a `ImGui::BeginTable(3)` and `ImGui::EndTable()` block.
@@ -29,8 +34,8 @@ namespace cubos::core::ui
     /// @param pkg Packaged object to edit.
     /// @param name Name of the object.
     /// @return True if the object was modified, false otherwise.
-    /// @ingroup core-ui
-    bool editPackage(data::Package& pkg, const std::string& name);
+    /// @ingroup utils-tool-plugin
+    bool editPackage(Package& pkg, const std::string& name);
 
     /// @brief Shows a serializable object's properties in the UI. Should be called inside a
     /// `ImGui::BeginTable(2)` and `ImGui::EndTable()` block.
@@ -40,11 +45,11 @@ namespace cubos::core::ui
     /// @tparam T Type of the serializable object.
     /// @param object Object to show.
     /// @param name Name of the object.
-    /// @ingroup core-ui
+    /// @ingroup utils-tool-plugin
     template <typename T>
     inline void show(const T& object, const std::string& name)
     {
-        auto pkg = data::Package::from(object);
+        auto pkg = Package::from(object);
         showPackage(pkg, name);
     }
 
@@ -58,11 +63,11 @@ namespace cubos::core::ui
     /// @param object Object to edit.
     /// @param name Name of the object.
     /// @return True if the object was edited, false otherwise.
-    /// @ingroup core-ui
+    /// @ingroup utils-tool-plugin
     template <typename T>
     inline bool edit(T& object, const std::string& name)
     {
-        auto pkg = data::Package::from(object);
+        auto pkg = Package::from(object);
         if (editPackage(pkg, name))
         {
             pkg.into(object);
@@ -71,4 +76,4 @@ namespace cubos::core::ui
 
         return false;
     }
-} // namespace cubos::core::ui
+} // namespace cubos::engine::tools
