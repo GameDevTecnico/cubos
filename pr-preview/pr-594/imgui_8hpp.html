@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>core/ui/imgui.hpp file | CUBOS.</title>
+  <title>engine/imgui/imgui.hpp file | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,7 +44,7 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_f556bbe30cd07922836d0e9d7f5fa0a5.html">ui</a>/</span>imgui.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_459dda10180a6131eb62bc74e02d0b6e.html">imgui</a>/</span>imgui.hpp <span class="m-thin">file</span>
         </h1>
         <p>Functions for initializing and using ImGui.</p>
         <nav class="m-block m-default">
@@ -64,33 +64,31 @@
           <dl class="m-doc">
             <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
             <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
-            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1core_1_1ui.html" class="m-doc">cubos::core::ui</a></dt>
-            <dd><a href="group__core-ui.html" class="m-doc">User Interface</a> module.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#gabdef4dee46ee75856196dc27a1bad855" class="m-doc">initialize</a>(</span><span class="m-doc-wrap">io::Window window)</span>
+              <span class="m-doc-wrap-bumper">void <a href="namespacecubos_1_1engine.html#a7df6958b5fbdbb42ba4a31afe6014f82" class="m-doc">initialize</a>(</span><span class="m-doc-wrap"><a href="imgui_8hpp.html#a2fe238e21ab925ed9d48f10bb72be946" class="m-doc">Window</a> window)</span>
             </dt>
             <dd>Initializes ImGui for use with the given window.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#gaf8ed978d758b063ff778f65cc761a932" class="m-doc">terminate</a>(</span><span class="m-doc-wrap">)</span>
+              <span class="m-doc-wrap-bumper">void <a href="namespacecubos_1_1engine.html#a0681f5da09f08b939d4f949c3039d59b" class="m-doc">terminate</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Shuts down ImGui.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga00d2e0adc5245a734361b6e5f5fb6fa6" class="m-doc">beginFrame</a>(</span><span class="m-doc-wrap">)</span>
+              <span class="m-doc-wrap-bumper">void <a href="namespacecubos_1_1engine.html#a024b9deec161c0ae1e124b14337ff17e" class="m-doc">beginFrame</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Begins a new ImGui frame. ImGui calls should be made between this and <a href="group__core-ui.html#ga0cb1cffd1f7ecddba7037c6df8ff2a33" class="m-doc">endFrame()</a>.</dd>
+            <dd>Begins a new ImGui frame. ImGui calls should be made between this and <a href="namespacecubos_1_1engine.html#ad2a841a8cb4616628a9491582bfa21b5" class="m-doc">endFrame()</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__core-ui.html#ga0cb1cffd1f7ecddba7037c6df8ff2a33" class="m-doc">endFrame</a>(</span><span class="m-doc-wrap">const gl::Framebuffer&amp; target = nullptr)</span>
+              <span class="m-doc-wrap-bumper">void <a href="namespacecubos_1_1engine.html#ad2a841a8cb4616628a9491582bfa21b5" class="m-doc">endFrame</a>(</span><span class="m-doc-wrap">const <a href="imgui_8hpp.html#aa558e68c205411fc4d46e6b38c958c20" class="m-doc">Framebuffer</a>&amp; target = nullptr)</span>
             </dt>
             <dd>Ends the current ImGui frame, and renders the ImGui draw data to the <code>target</code> framebuffer, or the default framebuffer if <code>target</code> is null.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-ui.html#ga31fdceab5f801da6c1861e7e9b89f5e7" class="m-doc">handleEvent</a>(</span><span class="m-doc-wrap">const io::WindowEvent&amp; event) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacecubos_1_1engine.html#a98f832518848a349a5b03213bbddc723" class="m-doc">handleEvent</a>(</span><span class="m-doc-wrap">const <a href="imgui_8hpp.html#a5badd9160ac305d9efef693498d0d7de" class="m-doc">WindowEvent</a>&amp; event) -&gt; bool</span>
             </dt>
             <dd>Passes a window event to ImGui.</dd>
           </dl>

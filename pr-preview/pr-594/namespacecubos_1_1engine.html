@@ -313,6 +313,26 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7df6958b5fbdbb42ba4a31afe6014f82" class="m-doc">initialize</a>(</span><span class="m-doc-wrap"><a href="imgui_8hpp.html#a2fe238e21ab925ed9d48f10bb72be946" class="m-doc">Window</a> window)</span>
+            </dt>
+            <dd>Initializes ImGui for use with the given window.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0681f5da09f08b939d4f949c3039d59b" class="m-doc">terminate</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Shuts down ImGui.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a024b9deec161c0ae1e124b14337ff17e" class="m-doc">beginFrame</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Begins a new ImGui frame. ImGui calls should be made between this and <a href="namespacecubos_1_1engine.html#ad2a841a8cb4616628a9491582bfa21b5" class="m-doc">endFrame()</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad2a841a8cb4616628a9491582bfa21b5" class="m-doc">endFrame</a>(</span><span class="m-doc-wrap">const <a href="imgui_8hpp.html#aa558e68c205411fc4d46e6b38c958c20" class="m-doc">Framebuffer</a>&amp; target = nullptr)</span>
+            </dt>
+            <dd>Ends the current ImGui frame, and renders the ImGui draw data to the <code>target</code> framebuffer, or the default framebuffer if <code>target</code> is null.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a98f832518848a349a5b03213bbddc723" class="m-doc">handleEvent</a>(</span><span class="m-doc-wrap">const <a href="imgui_8hpp.html#a5badd9160ac305d9efef693498d0d7de" class="m-doc">WindowEvent</a>&amp; event) -&gt; bool</span>
+            </dt>
+            <dd>Passes a window event to ImGui.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#gae657719db6afb7e3b4afd5484789b194" class="m-doc">imguiPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -345,6 +365,85 @@
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a7df6958b5fbdbb42ba4a31afe6014f82"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7df6958b5fbdbb42ba4a31afe6014f82" class="m-doc-self">initialize</a>(</span><span class="m-doc-wrap"><a href="imgui_8hpp.html#a2fe238e21ab925ed9d48f10bb72be946" class="m-doc">Window</a> window)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="imgui_8hpp.html">&lt;engine/imgui/imgui.hpp&gt;</a></div>
+            </h3>
+            <p>Initializes ImGui for use with the given window.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">window</td>
+                  <td>The window to use.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Should only be called once and no ImGui calls should be made before this is called.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a0681f5da09f08b939d4f949c3039d59b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0681f5da09f08b939d4f949c3039d59b" class="m-doc-self">terminate</a>(</span><span class="m-doc-wrap">)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="imgui_8hpp.html">&lt;engine/imgui/imgui.hpp&gt;</a></div>
+            </h3>
+            <p>Shuts down ImGui.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>Should only be called once, after <a href="namespacecubos_1_1engine.html#a7df6958b5fbdbb42ba4a31afe6014f82" class="m-doc">initialize()</a>, and no ImGui calls should be made after this is called.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a024b9deec161c0ae1e124b14337ff17e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a024b9deec161c0ae1e124b14337ff17e" class="m-doc-self">beginFrame</a>(</span><span class="m-doc-wrap">)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="imgui_8hpp.html">&lt;engine/imgui/imgui.hpp&gt;</a></div>
+            </h3>
+            <p>Begins a new ImGui frame. ImGui calls should be made between this and <a href="namespacecubos_1_1engine.html#ad2a841a8cb4616628a9491582bfa21b5" class="m-doc">endFrame()</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad2a841a8cb4616628a9491582bfa21b5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad2a841a8cb4616628a9491582bfa21b5" class="m-doc-self">endFrame</a>(</span><span class="m-doc-wrap">const <a href="imgui_8hpp.html#aa558e68c205411fc4d46e6b38c958c20" class="m-doc">Framebuffer</a>&amp; target = nullptr)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="imgui_8hpp.html">&lt;engine/imgui/imgui.hpp&gt;</a></div>
+            </h3>
+            <p>Ends the current ImGui frame, and renders the ImGui draw data to the <code>target</code> framebuffer, or the default framebuffer if <code>target</code> is null.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">target</td>
+                  <td>Framebuffer to render to.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a98f832518848a349a5b03213bbddc723"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a98f832518848a349a5b03213bbddc723" class="m-doc-self">handleEvent</a>(</span><span class="m-doc-wrap">const <a href="imgui_8hpp.html#a5badd9160ac305d9efef693498d0d7de" class="m-doc">WindowEvent</a>&amp; event)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="imgui_8hpp.html">&lt;engine/imgui/imgui.hpp&gt;</a></div>
+            </h3>
+            <p>Passes a window event to ImGui.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">event</td>
+                  <td>Event to pass.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the event was handled by ImGui, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
