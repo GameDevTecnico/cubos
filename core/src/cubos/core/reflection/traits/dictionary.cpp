@@ -15,10 +15,6 @@ DictionaryTrait::DictionaryTrait(const Type& keyType, const Type& valueType, Len
     , mStop(stop)
     , mKey(key)
     , mValue(value)
-    , mInsertDefault(nullptr)
-    , mInsertCopy(nullptr)
-    , mInsertMove(nullptr)
-    , mErase(nullptr)
 {
 }
 
@@ -180,8 +176,7 @@ DictionaryTrait::Iterator::Iterator(void* inner, void* instance, const Dictionar
 }
 
 DictionaryTrait::Iterator::Iterator(const Iterator& other)
-    : mInner(nullptr)
-    , mInstance(other.mInstance)
+    : mInstance(other.mInstance)
     , mTrait(other.mTrait)
 {
     if (!other.isNull())
@@ -190,8 +185,8 @@ DictionaryTrait::Iterator::Iterator(const Iterator& other)
     }
 }
 
-DictionaryTrait::Iterator::Iterator(Iterator&& other)
- noexcept     : mInner(other.mInner)
+DictionaryTrait::Iterator::Iterator(Iterator&& other) noexcept
+    : mInner(other.mInner)
     , mInstance(other.mInstance)
     , mTrait(other.mTrait)
 {
@@ -245,8 +240,7 @@ DictionaryTrait::ConstIterator::ConstIterator(void* inner, const void* instance,
 }
 
 DictionaryTrait::ConstIterator::ConstIterator(const ConstIterator& other)
-    : mInner(nullptr)
-    , mInstance(other.mInstance)
+    : mInstance(other.mInstance)
     , mTrait(other.mTrait)
 {
     if (!other.isNull())
@@ -255,8 +249,8 @@ DictionaryTrait::ConstIterator::ConstIterator(const ConstIterator& other)
     }
 }
 
-DictionaryTrait::ConstIterator::ConstIterator(ConstIterator&& other)
- noexcept     : mInner(other.mInner)
+DictionaryTrait::ConstIterator::ConstIterator(ConstIterator&& other) noexcept
+    : mInner(other.mInner)
     , mInstance(other.mInstance)
     , mTrait(other.mTrait)
 {
