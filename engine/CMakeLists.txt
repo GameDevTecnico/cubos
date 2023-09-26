@@ -61,73 +61,8 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/renderer/pps/pass.cpp"
 )
 
-set(CUBOS_ENGINE_INCLUDE
-    "include/cubos/engine/cubos.hpp"
-
-    "include/cubos/engine/settings/plugin.hpp"
-
-    "include/cubos/engine/window/plugin.hpp"
-
-    "include/cubos/engine/imgui/plugin.hpp"
-
-    "include/cubos/engine/tools/asset_explorer/plugin.hpp"
-    "include/cubos/engine/tools/settings_inspector/plugin.hpp"
-    "include/cubos/engine/tools/entity_selector/plugin.hpp"
-    "include/cubos/engine/tools/world_inspector/plugin.hpp"
-    "include/cubos/engine/tools/entity_inspector/plugin.hpp"
-    "include/cubos/engine/tools/scene_editor/plugin.hpp"
-
-    "include/cubos/engine/transform/position.hpp"
-    "include/cubos/engine/transform/rotation.hpp"
-    "include/cubos/engine/transform/scale.hpp"
-    "include/cubos/engine/transform/local_to_world.hpp"
-    "include/cubos/engine/transform/plugin.hpp"
-
-    "include/cubos/engine/assets/plugin.hpp"
-    "include/cubos/engine/assets/assets.hpp"
-    "include/cubos/engine/assets/bridge.hpp"
-    "include/cubos/engine/assets/asset.hpp"
-    "include/cubos/engine/assets/meta.hpp"
-    "include/cubos/engine/assets/bridges/file.hpp"
-    "include/cubos/engine/assets/bridges/json.hpp"
-    "include/cubos/engine/assets/bridges/binary.hpp"
-
-    "include/cubos/engine/scene/plugin.hpp"
-    "include/cubos/engine/scene/scene.hpp"
-    "include/cubos/engine/scene/bridge.hpp"
-
-    "include/cubos/engine/voxels/plugin.hpp"
-
-    "include/cubos/engine/collisions/plugin.hpp"
-    "include/cubos/engine/collisions/broad_phase_collisions.hpp"
-    "include/cubos/engine/collisions/aabb.hpp"
-    "include/cubos/engine/collisions/colliders/box.hpp"
-    "include/cubos/engine/collisions/colliders/capsule.hpp"
-    "include/cubos/engine/collisions/colliders/plane.hpp"
-    "include/cubos/engine/collisions/colliders/simplex.hpp"
-
-    "include/cubos/engine/input/plugin.hpp"
-    "include/cubos/engine/input/input.hpp"
-    "include/cubos/engine/input/bindings.hpp"
-    "include/cubos/engine/input/action.hpp"
-    "include/cubos/engine/input/axis.hpp"
-
-    "include/cubos/engine/renderer/plugin.hpp"
-    "include/cubos/engine/renderer/frame.hpp"
-    "include/cubos/engine/renderer/renderer.hpp"
-    "include/cubos/engine/renderer/deferred_renderer.hpp"
-    "include/cubos/engine/renderer/environment.hpp"
-    "include/cubos/engine/renderer/spot_light.hpp"
-    "include/cubos/engine/renderer/directional_light.hpp"
-    "include/cubos/engine/renderer/point_light.hpp"
-    "include/cubos/engine/renderer/pps/bloom.hpp"
-    "include/cubos/engine/renderer/pps/copy_pass.hpp"
-    "include/cubos/engine/renderer/pps/manager.hpp"
-    "include/cubos/engine/renderer/pps/pass.hpp"
-)
-
 # Create cubos engine
-add_library(cubos-engine ${CUBOS_ENGINE_SOURCE} ${CUBOS_ENGINE_INCLUDE})
+add_library(cubos-engine ${CUBOS_ENGINE_SOURCE})
 target_include_directories(cubos-engine PUBLIC "include" PRIVATE "src")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
 cubos_common_target_options(cubos-engine)
