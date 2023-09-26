@@ -1,9 +1,9 @@
 #include <imgui.h>
 
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/imgui/serialization.hpp>
 #include <cubos/engine/tools/entity_inspector/plugin.hpp>
 #include <cubos/engine/tools/entity_selector/plugin.hpp>
-#include <cubos/engine/tools/utils/serialization.hpp>
 
 using cubos::core::data::Context;
 using cubos::core::data::SerializationMap;

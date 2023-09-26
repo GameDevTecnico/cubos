@@ -20,8 +20,8 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/imgui/plugin.cpp"
     "src/cubos/engine/imgui/imgui.cpp"
+    "src/cubos/engine/imgui/serialization.cpp"
 
-    "src/cubos/engine/tools/utils/serialization.cpp"
     "src/cubos/engine/tools/asset_explorer/plugin.cpp"
     "src/cubos/engine/tools/settings_inspector/plugin.cpp"
     "src/cubos/engine/tools/entity_selector/plugin.cpp"

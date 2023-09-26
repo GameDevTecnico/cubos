@@ -2,7 +2,7 @@
 
 #include <imgui.h>
 
-#include <cubos/engine/tools/utils/serialization.hpp>
+#include <cubos/engine/imgui/serialization.hpp>
 
 using namespace cubos::engine;
 

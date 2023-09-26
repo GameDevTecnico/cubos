@@ -1,9 +1,6 @@
-/// @dir
-/// @brief @ref utils-tool-plugin plugin directory.
-
 /// @file
 /// @brief Functions for showing and editing serializable objects in the UI.
-/// @ingroup utils-tool-plugin
+/// @ingroup imgui-plugin
 
 #pragma once
 
