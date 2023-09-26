@@ -48,7 +48,7 @@ void testDictionary(T& value, std::size_t length, const K* insertedKey, V* inser
     {
         REQUIRE(trait.find(&value, insertedKey).isNull());
         REQUIRE(trait.insertDefault(&value, insertedKey));
-        auto it = trait.find(&value, insertedKey);
+        auto it = trait.find(static_cast<const void*>(&value), insertedKey);
         REQUIRE(!it.isNull());
 
         if constexpr (std::equality_comparable<K>)
@@ -94,7 +94,7 @@ void testDictionary(T& value, std::size_t length, const K* insertedKey, V* inser
     {
         REQUIRE(trait.find(&value, insertedKey).isNull());
         REQUIRE(trait.insertMove(&value, insertedKey, insertedValue));
-        auto it = trait.find(&value, insertedKey);
+        auto it = trait.find(static_cast<const void*>(&value), insertedKey);
         REQUIRE(!it.isNull());
 
         if constexpr (std::equality_comparable<K>)
