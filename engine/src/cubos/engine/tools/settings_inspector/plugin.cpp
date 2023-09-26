@@ -1,9 +1,9 @@
 #include <imgui.h>
 
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/imgui/serialization.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
-#include <cubos/engine/tools/utils/serialization.hpp>
 
 using cubos::core::ecs::Write;
 
