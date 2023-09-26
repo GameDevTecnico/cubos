@@ -19,6 +19,10 @@ IMAGE_PATH = @DOXYGEN_PROJECT_ROOT@/docs/images \
              @DOXYGEN_PROJECT_ROOT@/core/samples \
              @DOXYGEN_PROJECT_ROOT@/engine/samples
 
+# Ignore sample source files
+EXCLUDE_PATTERNS = */samples/*.hpp \
+                   */samples/*.cpp
+
 # Use relative include paths
 FULL_PATH_NAMES = YES
 STRIP_FROM_PATH = @DOXYGEN_PROJECT_ROOT@/core/include/cubos \
