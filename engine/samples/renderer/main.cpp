@@ -1,7 +1,7 @@
 #include <cubos/engine/renderer/environment.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
-#include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/renderer/point_light.hpp>
+#include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
 using cubos::core::ecs::Commands;
