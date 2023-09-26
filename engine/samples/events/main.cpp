@@ -24,7 +24,7 @@ struct State
 };
 
 /// [Event reader system]
-static void firstSystem(EventReader<MyEvent> reader) 
+static void firstSystem(EventReader<MyEvent> reader)
 {
     for (const auto& event : reader)
     {
