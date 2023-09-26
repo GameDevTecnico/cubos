@@ -224,7 +224,7 @@ namespace cubos::core::reflection
 
         /// @brief Move constructs.
         /// @param other Other iterator.
-        Iterator(Iterator&& other);
+        Iterator(Iterator&& other) noexcept ;
 
         /// @brief Gets a pointer to the current key.
         /// @note Aborts if @ref isNull() returns true.
@@ -270,7 +270,7 @@ namespace cubos::core::reflection
 
         /// @brief Move constructs.
         /// @param other Other iterator.
-        ConstIterator(ConstIterator&& other);
+        ConstIterator(ConstIterator&& other) noexcept ;
 
         /// @brief Gets a pointer to the current key.
         /// @note Aborts if @ref isNull() returns true.
