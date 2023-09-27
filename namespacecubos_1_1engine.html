@@ -317,6 +317,28 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#gaa641ea2743053f24753a797957eb3ac7" class="m-doc">imguiShowPackage</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">core::<wbr />data::<wbr />Package</a>&amp; pkg,
+              const std::string&amp; name)</span>
+            </dt>
+            <dd>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga508a596be20724bfb0656fc2ad0e2d47" class="m-doc">imguiEditPackage</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">core::<wbr />data::<wbr />Package</a>&amp; pkg,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#ga83b794c814a456d3783f3500d4995362" class="m-doc">imguiShow</a>(</span><span class="m-doc-wrap">const T&amp; object,
+              const std::string&amp; name)</span>
+            </dt>
+            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga8ae098030e5492587b5e53e49194ec75" class="m-doc">imguiEdit</a>(</span><span class="m-doc-wrap">T&amp; object,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__input-plugin.html#gaee09a9325400e0d7d9b5034779b672e9" class="m-doc">inputPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
