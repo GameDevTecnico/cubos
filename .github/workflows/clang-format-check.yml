@@ -1,0 +1,26 @@
+name: 🧼 Formatting Check
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+  
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 2
+        
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install clang-format
+
+    - name: Check
+      run: |
+        for file in $(git diff -U0 --name-only HEAD^ | grep -E '.*\.(c|cpp|h|hpp)$'); do
+          clang-format --dry-run -Werror $file || exit 1
+        done
