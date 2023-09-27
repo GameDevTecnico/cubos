@@ -84,7 +84,7 @@ set(CUBOS_CORE_SOURCE
 # Create core library
 
 add_library(cubos-core ${CUBOS_CORE_SOURCE})
-target_include_directories(cubos-core PUBLIC "include" PRIVATE "src")
+target_include_directories(cubos-core PUBLIC "include")
 target_compile_definitions(cubos-core PUBLIC
     -DCUBOS_CORE_ECS_MAX_COMPONENTS=${CUBOS_CORE_ECS_MAX_COMPONENTS}
     -DCUBOS_CORE_DISPATCHER_MAX_CONDITIONS=${CUBOS_CORE_DISPATCHER_MAX_CONDITIONS}

@@ -6,8 +6,9 @@
 
 #include <glad/glad.h>
 
-#include <cubos/core/gl/ogl_render_device.hpp>
 #include <cubos/core/log.hpp>
+
+#include "ogl_render_device.hpp"
 
 using namespace cubos::core;
 using namespace cubos::core::gl;

@@ -8,7 +8,7 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
-#include <cubos/core/gl/ogl_render_device.hpp>
+#include "../gl/ogl_render_device.hpp"
 #endif
 
 #include <cubos/core/io/window.hpp>
