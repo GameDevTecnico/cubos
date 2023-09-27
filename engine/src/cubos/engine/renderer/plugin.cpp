@@ -131,7 +131,7 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
     Camera cameras[4]{};
     glm::mat4 views[4]{};
     BaseRenderer::Viewport viewports[4]{};
-    
+
     int cameraCount = 0;
 
     for (int i = 0; i < 4; ++i) // NOLINT(modernize-loop-convert)

@@ -24,8 +24,8 @@ glm::uvec2 BaseRenderer::size() const
     return mSize;
 }
 
-void BaseRenderer::render(const glm::mat4& view, const Viewport& viewport, const engine::Camera& camera, const RendererFrame& frame, bool usePostProcessing,
-                          const core::gl::Framebuffer& target)
+void BaseRenderer::render(const glm::mat4& view, const Viewport& viewport, const engine::Camera& camera,
+                          const RendererFrame& frame, bool usePostProcessing, const core::gl::Framebuffer& target)
 {
     if (usePostProcessing && mPpsManager.passCount() > 0)
     {
