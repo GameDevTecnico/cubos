@@ -1,0 +1,5 @@
+for file in $(git diff --cached --name-only | grep -E '.*\.(c|cpp|h|hpp)$')
+do
+        clang-format -i $file
+        git add $file
+done
