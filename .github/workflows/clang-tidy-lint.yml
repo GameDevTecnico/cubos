@@ -21,6 +21,17 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11 clang-tidy
+
+    - name: Make all changed headers reachable
+      run: |
+        git diff -U0 --name-only HEAD^ | grep -oP 'core/include/\K.*.hpp' | awk '{ $0= "#include <" $0 ">"; print }' > core/src/extra.cpp
+        git diff -U0 --name-only HEAD^ | grep -oP 'core/src/\K.*.hpp' | awk '{ $0= "#include \"" $0 "\""; print }' >> core/src/extra.cpp
+        sed -i '/set(CUBOS_CORE_SOURCE/a "src/extra.cpp"' core/CMakeLists.txt
+        git add core/src/extra.cpp
+        git diff -U0 --name-only HEAD^ | grep -oP 'engine/include/\K.*.hpp' | awk '{ $0= "#include <" $0 ">"; print }' > engine/src/extra.cpp
+        git diff -U0 --name-only HEAD^ | grep -oP 'engine/src/\K.*.hpp' | awk '{ $0= "#include \"" $0 "\""; print }' >> engine/src/extra.cpp
+        sed -i '/set(CUBOS_ENGINE_SOURCE/a "src/extra.cpp"' engine/CMakeLists.txt
+        git add engine/src/extra.cpp
   
     - name: Prepare compile_commands.json
       run: cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON -DBUILD_ENGINE_SAMPLES=ON -DUSE_CLANG_TIDY=ON
@@ -29,18 +40,17 @@ jobs:
         CC:   gcc-11
         CXX:  g++-11
 
-    - name: Create results directory
-      run: |
-        mkdir clang-tidy-result
-
     - name: Analyze
       run: |
-        git diff -U0 HEAD^ | clang-tidy-diff -p1 -path build -export-fixes clang-tidy-result/fixes.yml
+        run-clang-tidy -j$(nproc) -p=build \
+          -header-filter="(core|engine)/(src|include)/.*" \
+          files "($(git diff -U0 --name-only HEAD^ | paste -s -d\|))" \
+          -export-fixes clang-tidy-fixes.yaml || true
 
     - name: Run clang-tidy-pr-comments action
       uses: platisd/clang-tidy-pr-comments@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        clang_tidy_fixes: clang-tidy-result/fixes.yml
+        clang_tidy_fixes: clang-tidy-fixes.yaml
         request_changes: true
         suggestions_per_comment: 10
