@@ -7,10 +7,10 @@ project(cubos VERSION 0.1.0)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 # Should clang-tidy errors be automatically fixed?
-option(FIX_CLANG_TIDY_ERRORS OFF)
+option(FIX_CLANG_TIDY_ERRORS "Automatically fix clang-tidy errors" OFF)
 
 # Enable coverage reports
-option(ENABLE_COVERAGE OFF)
+option(ENABLE_COVERAGE "Generate coverage report" OFF)
 if(ENABLE_COVERAGE)
     include(CodeCoverage)
     append_coverage_compiler_flags()
@@ -99,7 +99,7 @@ add_subdirectory(engine)
 
 # Add doxygen documentation
 
-option(BUILD_DOCUMENTATION OFF)
+option(BUILD_DOCUMENTATION "Build docs" OFF)
 if(BUILD_DOCUMENTATION)
     add_subdirectory(docs)
 endif()
