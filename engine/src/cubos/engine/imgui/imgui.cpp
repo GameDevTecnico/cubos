@@ -7,7 +7,7 @@
 #include <cubos/core/io/cursor.hpp>
 #include <cubos/core/log.hpp>
 
-#include <cubos/engine/imgui/imgui.hpp>
+#include "imgui.hpp"
 
 namespace gl = cubos::core::gl;
 namespace io = cubos::core::io;
