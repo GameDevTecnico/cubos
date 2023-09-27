@@ -42,7 +42,8 @@ git submodule update --init --recursive
 ### Formatting
 
 To contribute you must ensure your code is correctly formatted. Install
-`clang-format` and run the following command to enable the pre-commit hook:
+`clang-format` and run the following command to enable a pre-commit hook
+which formats your changes automatically:
 
 ```bash
 git config --local include.path ../.gitconfig
