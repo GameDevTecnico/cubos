@@ -65,7 +65,7 @@ set(CUBOS_ENGINE_SOURCE
 
 # Create cubos engine
 add_library(cubos-engine ${CUBOS_ENGINE_SOURCE})
-target_include_directories(cubos-engine PUBLIC "include" PRIVATE "src")
+target_include_directories(cubos-engine PUBLIC "include")
 target_link_libraries(cubos-engine PUBLIC cubos-core)
 cubos_common_target_options(cubos-engine)
 

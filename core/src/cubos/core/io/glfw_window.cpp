@@ -1,8 +1,10 @@
+#include "glfw_window.hpp"
+
 #include <glad/glad.h>
 
-#include <cubos/core/gl/ogl_render_device.hpp>
-#include <cubos/core/io/glfw_window.hpp>
 #include <cubos/core/log.hpp>
+
+#include "../gl/ogl_render_device.hpp"
 
 using namespace cubos::core;
 using namespace cubos::core::io;

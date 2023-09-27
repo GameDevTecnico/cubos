@@ -1,4 +1,4 @@
-#include <cubos/core/al/oal_audio_device.hpp>
+#include "oal_audio_device.hpp"
 
 using namespace cubos::core::al;
 

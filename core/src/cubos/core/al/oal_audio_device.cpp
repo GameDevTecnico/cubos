@@ -1,4 +1,5 @@
-#include <cubos/core/al/oal_audio_device.hpp>
+#include "oal_audio_device.hpp"
+
 #include <cubos/core/log.hpp>
 
 #ifdef WITH_OPENAL
