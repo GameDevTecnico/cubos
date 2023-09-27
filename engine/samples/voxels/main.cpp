@@ -1,6 +1,6 @@
-#include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/renderer/directional_light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
+#include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
@@ -57,9 +57,7 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
     glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;
 
     // Create the car entity
-    cmds.create()
-        .add(RenderableGrid{CarAsset, offset})
-        .add(LocalToWorld{});
+    cmds.create().add(RenderableGrid{CarAsset, offset}).add(LocalToWorld{});
 }
 /// [Spawn car system]
 
