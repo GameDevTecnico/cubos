@@ -34,7 +34,7 @@ TEST_CASE("reflection::FieldsTrait")
     {
         auto fields = FieldsTrait().withField("foo", &ObjectType::foo);
 
-        const auto *field = fields.field("foo");
+        const auto* field = fields.field("foo");
         REQUIRE(field != nullptr);
         CHECK(field == &*fields.begin());
         CHECK(++fields.begin() == fields.end());
@@ -49,11 +49,11 @@ TEST_CASE("reflection::FieldsTrait")
     {
         auto fields = FieldsTrait().withField("foo", &ObjectType::foo).withField("bar", &ObjectType::bar);
 
-        const auto *fooField = fields.field("foo");
+        const auto* fooField = fields.field("foo");
         REQUIRE(fooField != nullptr);
         CHECK(fooField == &*fields.begin());
 
-        const auto *barField = fields.field("bar");
+        const auto* barField = fields.field("bar");
         REQUIRE(barField != nullptr);
         CHECK(barField == &*(++fields.begin()));
         CHECK(++(++fields.begin()) == fields.end());
