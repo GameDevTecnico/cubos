@@ -6,9 +6,7 @@
 
 #include <cubos/core/data/package.hpp>
 
-using Package = cubos::core::data::Package;
-
-namespace cubos::engine::tools
+namespace cubos::engine
 {
     /// @brief Shows a packaged object's properties in the UI. Should be called inside a
     /// `ImGui::BeginTable(2)` and `ImGui::EndTable()` block.
@@ -18,8 +16,8 @@ namespace cubos::engine::tools
     ///
     /// @param pkg Packaged object to show.
     /// @param name Name of the object.
-    /// @ingroup utils-tool-plugin
-    void showPackage(const Package& pkg, const std::string& name);
+    /// @ingroup imgui-plugin
+    void imguiShowPackage(const core::data::Package& pkg, const std::string& name);
 
     /// @brief Shows a packaged object's properties in the UI, allowing the user to edit the
     /// object. Should be called inside a `ImGui::BeginTable(3)` and `ImGui::EndTable()` block.
@@ -31,8 +29,8 @@ namespace cubos::engine::tools
     /// @param pkg Packaged object to edit.
     /// @param name Name of the object.
     /// @return True if the object was modified, false otherwise.
-    /// @ingroup utils-tool-plugin
-    bool editPackage(Package& pkg, const std::string& name);
+    /// @ingroup imgui-plugin
+    bool imguiEditPackage(core::data::Package& pkg, const std::string& name);
 
     /// @brief Shows a serializable object's properties in the UI. Should be called inside a
     /// `ImGui::BeginTable(2)` and `ImGui::EndTable()` block.
@@ -42,12 +40,12 @@ namespace cubos::engine::tools
     /// @tparam T Type of the serializable object.
     /// @param object Object to show.
     /// @param name Name of the object.
-    /// @ingroup utils-tool-plugin
+    /// @ingroup imgui-plugin
     template <typename T>
-    inline void show(const T& object, const std::string& name)
+    inline void imguiShow(const T& object, const std::string& name)
     {
-        auto pkg = Package::from(object);
-        showPackage(pkg, name);
+        auto pkg = core::data::Package::from(object);
+        imguiShowPackage(pkg, name);
     }
 
     /// @brief Shows a serializable object's properties in the UI. Should be called inside a
@@ -60,12 +58,12 @@ namespace cubos::engine::tools
     /// @param object Object to edit.
     /// @param name Name of the object.
     /// @return True if the object was edited, false otherwise.
-    /// @ingroup utils-tool-plugin
+    /// @ingroup imgui-plugin
     template <typename T>
-    inline bool edit(T& object, const std::string& name)
+    inline bool imguiEdit(T& object, const std::string& name)
     {
-        auto pkg = Package::from(object);
-        if (editPackage(pkg, name))
+        auto pkg = core::data::Package::from(object);
+        if (imguiEditPackage(pkg, name))
         {
             pkg.into(object);
             return true;
@@ -73,4 +71,4 @@ namespace cubos::engine::tools
 
         return false;
     }
-} // namespace cubos::engine::tools
+} // namespace cubos::engine

@@ -24,7 +24,7 @@ static void inspector(Write<Settings> settings)
             ImGui::BeginTable("split", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
             for (auto& setting : map)
             {
-                tools::edit(setting.second, setting.first);
+                imguiEdit(setting.second, setting.first);
             }
             ImGui::EndTable();
         }

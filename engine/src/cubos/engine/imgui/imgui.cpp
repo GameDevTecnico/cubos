@@ -274,7 +274,7 @@ void main()
     bd->ibSize = 0;
 }
 
-void cubos::engine::initialize(io::Window window)
+void cubos::engine::imguiInitialize(io::Window window)
 {
     // Initialize ImGui
     IMGUI_CHECKVERSION();
@@ -326,7 +326,7 @@ void cubos::engine::initialize(io::Window window)
     CUBOS_INFO("Initialized UI");
 }
 
-void cubos::engine::terminate()
+void cubos::engine::imguiTerminate()
 {
     auto& io = ImGui::GetIO();
     IM_ASSERT(io.BackendPlatformUserData != nullptr);
@@ -355,7 +355,7 @@ void cubos::engine::terminate()
     ImGui::DestroyContext();
 }
 
-void cubos::engine::beginFrame()
+void cubos::engine::imguiBeginFrame()
 {
     ImGuiIO& io = ImGui::GetIO();
     auto* bd = (ImGuiData*)io.BackendPlatformUserData;
@@ -399,7 +399,7 @@ static void setupRenderState(ImGuiData* bd, gl::Framebuffer target)
     rd.setFramebuffer(std::move(target));
 }
 
-void cubos::engine::endFrame(const gl::Framebuffer& target)
+void cubos::engine::imguiEndFrame(const gl::Framebuffer& target)
 {
     auto* bd = (ImGuiData*)ImGui::GetIO().BackendPlatformUserData;
     auto& rd = bd->window->renderDevice();
@@ -573,7 +573,7 @@ static bool handle(auto&& /*unused*/)
     return false;
 }
 
-bool cubos::engine::handleEvent(const io::WindowEvent& event)
+bool cubos::engine::imguiHandleEvent(const io::WindowEvent& event)
 {
     return std::visit([&](const auto& e) { return handle(e); }, event);
 }

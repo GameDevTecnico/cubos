@@ -12,7 +12,7 @@ using namespace cubos::engine;
 
 static void init(Read<Window> window)
 {
-    initialize(*window);
+    imguiInitialize(*window);
 }
 
 static void begin(EventReader<WindowEvent> events)
@@ -24,15 +24,15 @@ static void begin(EventReader<WindowEvent> events)
     //       Not sure how we will propagate that information to other systems yet.
     for (auto event : events)
     {
-        handleEvent(event);
+        imguiHandleEvent(event);
     }
 
-    beginFrame();
+    imguiBeginFrame();
 }
 
 static void end()
 {
-    endFrame();
+    imguiEndFrame();
 }
 
 void cubos::engine::imguiPlugin(Cubos& cubos)

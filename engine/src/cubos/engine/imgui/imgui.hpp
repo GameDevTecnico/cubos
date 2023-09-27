@@ -7,38 +7,34 @@
 #include <cubos/core/gl/render_device.hpp>
 #include <cubos/core/io/window.hpp>
 
-using Framebuffer = cubos::core::gl::Framebuffer;
-using Window = cubos::core::io::Window;
-using WindowEvent = cubos::core::io::WindowEvent;
-
 namespace cubos::engine
 {
     /// @brief Initializes ImGui for use with the given window.
     /// @note Should only be called once and no ImGui calls should be made before this is called.
     /// @param window The window to use.
-    /// @ingroup core-ui
-    void initialize(Window window);
+    /// @ingroup imgui-plugin
+    void imguiInitialize(core::io::Window window);
 
     /// @brief Shuts down ImGui.
     /// @note Should only be called once, after @ref initialize(), and no ImGui calls should be
     /// made after this is called.
-    /// @ingroup core-ui
-    void terminate();
+    /// @ingroup imgui-plugin
+    void imguiTerminate();
 
     /// @brief Begins a new ImGui frame. ImGui calls should be made between this and @ref
     /// endFrame().
-    /// @ingroup core-ui
-    void beginFrame();
+    /// @ingroup imgui-plugin
+    void imguiBeginFrame();
 
     /// @brief Ends the current ImGui frame, and renders the ImGui draw data to the @p target
     /// framebuffer, or the default framebuffer if @p target is null.
     /// @param target Framebuffer to render to.
-    /// @ingroup core-ui
-    void endFrame(const Framebuffer& target = nullptr);
+    /// @ingroup imgui-plugin
+    void imguiEndFrame(const core::gl::Framebuffer& target = nullptr);
 
     /// @brief Passes a window event to ImGui.
     /// @param event Event to pass.
     /// @return True if the event was handled by ImGui, false otherwise.
-    /// @ingroup core-ui
-    bool handleEvent(const WindowEvent& event);
+    /// @ingroup imgui-plugin
+    bool imguiHandleEvent(const core::io::WindowEvent& event);
 } // namespace cubos::engine
