@@ -17,6 +17,7 @@ macro(make_sample)
 
     # Get the source files
     set(sources "${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}/main.cpp")
+
     foreach(source IN LISTS MAKE_SAMPLE_SOURCES)
         list(APPEND sources "${CMAKE_CURRENT_SOURCE_DIR}/${MAKE_SAMPLE_DIR}/${source}")
     endforeach()
@@ -36,9 +37,9 @@ macro(make_sample)
 endmacro()
 
 # Add samples
+make_sample(DIR "hello-cubos" COMPONENTS)
 make_sample(DIR "settings")
 make_sample(DIR "events")
-make_sample(DIR "systems")
 make_sample(DIR "input" ASSETS)
 make_sample(DIR "assets/bridge" ASSETS)
 make_sample(DIR "assets/json" ASSETS)

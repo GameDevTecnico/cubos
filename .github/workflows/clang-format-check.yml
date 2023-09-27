@@ -22,5 +22,8 @@ jobs:
     - name: Check
       run: |
         for file in $(git diff -U0 --name-only HEAD^ | grep -E '.*\.(c|cpp|h|hpp)$'); do
+          if [ ! -f $file ]; then
+            continue
+          fi
           clang-format --dry-run -Werror $file || exit 1
         done
