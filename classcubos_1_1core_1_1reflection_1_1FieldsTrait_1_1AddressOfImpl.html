@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::reflection namespace | CUBOS.</title>
+  <title>cubos::core::reflection::FieldsTrait::AddressOfImpl class | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,57 +44,114 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>reflection <span class="m-thin">namespace</span>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="fields_8hpp.html">&lt;core/reflection/traits/fields.hpp&gt;</a></div>
+          <div class="m-doc-template">template&lt;typename O, typename F&gt;</div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html">FieldsTrait</a>::<wbr/></span>AddressOfImpl <span class="m-thin">class</span>
         </h1>
-        <p><a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</p>
+        <p>Implementation of <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a> for a pointer to member.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">O</td>
+              <td>Object type.</td>
+            </tr>
+            <tr>
+              <td>F</td>
+              <td><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a> type.</td>
+            </tr>
+          </tbody>
+        </table>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">Reflect</a>
+              class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a>
             </dt>
-            <dd>Defines the reflection function for the given type <code>T</code>.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>
-            </dt>
-            <dd>Describes how a reflected type may be constructed and destructed.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>
-            </dt>
-            <dd>Describes the fields of a reflected type.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>
-            </dt>
-            <dd>Describes a reflected type.</dd>
+            <dd>Interface for obtaining the address of a field on a given instance.</dd>
           </dl>
         </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
+              <span class="m-doc-wrap-bumper"><a href="#a969f5dff6503ea8cbe08fe85c82e8a04" class="m-doc">AddressOfImpl</a>(</span><span class="m-doc-wrap">F O::* pointer)</span>
             </dt>
-            <dd>Reflects the given type <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#gaecd81749630d84a2baa8afb81568bb94" class="m-doc">autoConstructibleTrait</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a></span>
-            </dt>
-            <dd>Returns a <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a> with the default, copy and move constructors, set only if the type has them.</dd>
+            <dd>Constructs.</dd>
           </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0b27863a3f402f44b8233970b35fb37c" class="m-doc">get</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; uintptr_t <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Gets the address of the field on a given instance.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a969f5dff6503ea8cbe08fe85c82e8a04"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename O, typename F&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr />AddressOfImpl&lt;O, F&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a969f5dff6503ea8cbe08fe85c82e8a04" class="m-doc-self">AddressOfImpl</a>(</span><span class="m-doc-wrap">F O::* pointer)</span></span>
+            </h3>
+            <p>Constructs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pointer</td>
+                  <td>Pointer to member.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0b27863a3f402f44b8233970b35fb37c"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename O, typename F&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">uintptr_t cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr />AddressOfImpl&lt;O, F&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b27863a3f402f44b8233970b35fb37c" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">const void* instance) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Gets the address of the field on a given instance.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">instance</td>
+                  <td>Pointer to the instance.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Address of the field on the given instance.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
