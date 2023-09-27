@@ -1,6 +1,7 @@
-#include <cubos/engine/imgui/imgui.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
+
+#include "imgui.hpp"
 
 using cubos::core::ecs::EventReader;
 using cubos::core::ecs::Read;
