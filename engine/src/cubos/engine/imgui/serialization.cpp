@@ -6,6 +6,8 @@
 
 using namespace cubos::engine;
 
+using Package = cubos::core::data::Package;
+
 // Converts a scalar (must not be an Object, Array or Dictionary) value to a
 // string.
 static std::string valueToString(const Package& pkg)
@@ -155,7 +157,7 @@ static void showInternal(const Package& pkg, const std::string& name)
     pkg.isStructured() ? showStructured(pkg, name) : showScalar(pkg, name);
 }
 
-void cubos::engine::tools::showPackage(const Package& pkg, const std::string& name)
+void cubos::engine::imguiShowPackage(const Package& pkg, const std::string& name)
 {
     ImGui::TableNextRow();
     showInternal(pkg, name);
@@ -410,7 +412,7 @@ static bool editInternal(Package& pkg, const std::string& name)
     return pkg.isStructured() ? editStructured(pkg, name) : editScalar(pkg, name);
 }
 
-bool cubos::engine::tools::editPackage(Package& pkg, const std::string& name)
+bool cubos::engine::imguiEditPackage(Package& pkg, const std::string& name)
 {
     ImGui::TableNextRow();
     return editInternal(pkg, name);

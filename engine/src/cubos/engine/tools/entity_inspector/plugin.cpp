@@ -24,7 +24,7 @@ static void inspectEntity(Write<World> world)
         if (!selection.isNull() && world->isAlive(selection))
         {
             auto pkg = world->pack(selection);
-            if (tools::editPackage(pkg, std::to_string(selection.index)))
+            if (imguiEditPackage(pkg, std::to_string(selection.index)))
             {
                 world->unpack(selection, pkg);
             }
