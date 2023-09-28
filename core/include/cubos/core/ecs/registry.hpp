@@ -6,7 +6,7 @@
 
 #include <optional>
 
-#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/memory/type_map.hpp>
 

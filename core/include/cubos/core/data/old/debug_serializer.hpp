@@ -4,7 +4,7 @@
 
 #include <fmt/format.h>
 
-#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
 
 namespace cubos::core::data

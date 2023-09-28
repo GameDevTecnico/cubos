@@ -1,6 +1,6 @@
-#include <cubos/core/data/json_serializer.hpp>
-#include <cubos/core/data/serialization_map.hpp>
-#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/old/json_serializer.hpp>
+#include <cubos/core/data/old/serialization_map.hpp>
+#include <cubos/core/data/old/serializer.hpp>
 
 using namespace cubos::core::memory;
 using namespace cubos::core::data;

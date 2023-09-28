@@ -1,6 +1,6 @@
 #include <cassert>
 
-#include <cubos/core/data/binary_serializer.hpp>
+#include <cubos/core/data/old/binary_serializer.hpp>
 #include <cubos/core/memory/endianness.hpp>
 
 using namespace cubos::core;

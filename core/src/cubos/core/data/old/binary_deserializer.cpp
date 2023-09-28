@@ -1,4 +1,4 @@
-#include <cubos/core/data/binary_deserializer.hpp>
+#include <cubos/core/data/old/binary_deserializer.hpp>
 #include <cubos/core/memory/endianness.hpp>
 
 using namespace cubos::core;

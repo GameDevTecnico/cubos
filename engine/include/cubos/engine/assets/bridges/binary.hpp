@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <cubos/core/data/binary_deserializer.hpp>
-#include <cubos/core/data/binary_serializer.hpp>
+#include <cubos/core/data/old/binary_deserializer.hpp>
+#include <cubos/core/data/old/binary_serializer.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>

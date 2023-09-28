@@ -4,7 +4,7 @@
 
 #include <nlohmann/json.hpp>
 
-#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/old/deserializer.hpp>
 
 namespace cubos::core::data
 {

@@ -1,6 +1,6 @@
-#include <cubos/core/data/deserializer.hpp>
-#include <cubos/core/data/serialization_map.hpp>
-#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/old/deserializer.hpp>
+#include <cubos/core/data/old/serialization_map.hpp>
+#include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/ecs/entity_manager.hpp>
 
 using namespace cubos::core::ecs;

@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <cubos/core/data/json_deserializer.hpp>
-#include <cubos/core/data/json_serializer.hpp>
+#include <cubos/core/data/old/json_deserializer.hpp>
+#include <cubos/core/data/old/json_serializer.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>
