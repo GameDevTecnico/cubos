@@ -13,7 +13,7 @@ You may need to include other headers, depending on what you want to access.
 @snippet renderer/main.cpp Adding the plugin
 
 The first thing we're going to worry about is setting the
-@ref cubos::engine::Palette "Palette" the renderer will use. This palette
+@ref cubos::engine::VoxelPalette "VoxelPalette" the renderer will use. This palette
 would usually be loaded from a file, but for this example we'll just create it
 manually.
 

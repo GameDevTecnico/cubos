@@ -547,7 +547,7 @@ cubos::engine::RendererGrid DeferredRenderer::upload(const VoxelGrid& grid)
     return deferredGrid;
 }
 
-void DeferredRenderer::setPalette(const Palette& palette)
+void DeferredRenderer::setPalette(const VoxelPalette& palette)
 {
     // Get the colors from the palette.
     // Magenta is used for non-existent materials in order to easily identify errors.

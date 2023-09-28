@@ -112,7 +112,7 @@ void VoxelGrid::set(const glm::ivec3& position, uint16_t mat)
     mIndices[static_cast<std::size_t>(index)] = mat;
 }
 
-bool VoxelGrid::convert(const Palette& src, const Palette& dst, float minSimilarity)
+bool VoxelGrid::convert(const VoxelPalette& src, const VoxelPalette& dst, float minSimilarity)
 {
     // Find the mappings for every material in the source palette.
     std::unordered_map<uint16_t, uint16_t> mappings;

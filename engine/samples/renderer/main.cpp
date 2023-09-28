@@ -21,7 +21,7 @@ static void settingsSystem(Write<Settings> settings)
 static void setPaletteSystem(Write<Renderer> renderer)
 {
     // Create a simple palette with 3 materials (red, green and blue).
-    (*renderer)->setPalette(Palette{{
+    (*renderer)->setPalette(VoxelPalette{{
         {{1, 0, 0, 1}},
         {{0, 1, 0, 1}},
         {{0, 0, 1, 1}},

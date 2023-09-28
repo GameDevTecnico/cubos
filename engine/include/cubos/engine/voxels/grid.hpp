@@ -13,7 +13,7 @@
 
 namespace cubos::engine
 {
-    class Palette;
+    class VoxelPalette;
     class VoxelGrid;
 } // namespace cubos::engine
 
@@ -26,7 +26,7 @@ namespace cubos::core::data
 namespace cubos::engine
 {
     /// @brief Represents a voxel object using a 3D grid.
-    /// @see Each voxel stores a material index to be used with a @ref Palette.
+    /// @see Each voxel stores a material index to be used with a @ref VoxelPalette.
     /// @ingroup voxels-plugin
     class VoxelGrid final
     {
@@ -86,7 +86,7 @@ namespace cubos::engine
         /// @param dst New palette.
         /// @param minSimilarity Minimum similarity between two materials to consider them the same.
         /// @return Whether the conversion was successful.
-        bool convert(const Palette& src, const Palette& dst, float minSimilarity);
+        bool convert(const VoxelPalette& src, const VoxelPalette& dst, float minSimilarity);
 
     private:
         friend void core::data::serialize(core::data::Serializer& /*serializer*/, const VoxelGrid& /*grid*/,
