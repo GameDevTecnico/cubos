@@ -26,12 +26,12 @@ static void testMat(const char* name, glm::mat<C, R, T, Q> mat, glm::vec<R, T, Q
     CHECK(&*fields.begin() == fields.field("a"));
     CHECK(&*++fields.begin() == fields.field("b"));
 
-    if (C >= 3)
+    if constexpr (C >= 3)
     {
         CHECK(&*++(++fields.begin()) == fields.field("c"));
     }
 
-    if (C >= 4)
+    if constexpr (C >= 4)
     {
         CHECK(&*++(++(++fields.begin())) == fields.field("d"));
     }
@@ -71,12 +71,12 @@ static void testVec(const char* name, glm::vec<L, T, Q> vec)
     CHECK(&*fields.begin() == fields.field("x"));
     CHECK(&*++fields.begin() == fields.field("y"));
 
-    if (L >= 3)
+    if constexpr (L >= 3)
     {
         CHECK(&*++(++fields.begin()) == fields.field("z"));
     }
 
-    if (L >= 4)
+    if constexpr (L >= 4)
     {
         CHECK(&*++(++(++fields.begin())) == fields.field("w"));
     }
