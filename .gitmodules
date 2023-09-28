@@ -25,3 +25,9 @@
 [submodule "engine/lib/imgui"]
 	path = engine/lib/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "core/lib/json"]
+	path = core/lib/json
+	url = https://github.com/nlohmann/json.git
+[submodule "core/lib/glad"]
+	path = core/lib/glad
+	url = git@github.com:Dav1dde/glad.git

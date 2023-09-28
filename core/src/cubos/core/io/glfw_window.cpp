@@ -1,6 +1,6 @@
 #include "glfw_window.hpp"
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 
 #include <cubos/core/log.hpp>
 
@@ -69,7 +69,7 @@ GLFWWindow::GLFWWindow(const std::string& title, const glm::ivec2& size)
 
     // Create OpenGL render device
     glfwMakeContextCurrent(mHandle);
-    if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) == 0)
+    if (gladLoadGL(glfwGetProcAddress) == 0)
     {
         CUBOS_CRITICAL("OpenGL loader failed");
         abort();

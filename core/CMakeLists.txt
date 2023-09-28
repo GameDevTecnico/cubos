@@ -93,8 +93,10 @@ cubos_common_target_options(cubos-core)
 # Link dependencies
 
 if (WITH_OPENGL)
-    add_subdirectory(lib/glad)
-    target_link_libraries(cubos-core PRIVATE glad)
+    set(GLAD_SOUURCES_DIR "lib/glad")
+    add_subdirectory("${GLAD_SOUURCES_DIR}/cmake" glad_cmake)
+    glad_add_library(glad REPRODUCIBLE API gl:core=3.3)
+    target_link_libraries(cubos-core PUBLIC glad)
     target_compile_definitions(cubos-core PRIVATE WITH_OPENGL)
 endif ()
 
@@ -147,6 +149,7 @@ else ()
     find_package(spdlog REQUIRED)
 endif ()
 
+set(JSON_BuildTests OFF CACHE INTERNAL "")
 add_subdirectory(lib/json)
 
 add_subdirectory(lib/stduuid)
@@ -156,8 +159,8 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 target_compile_definitions(cubos-core PUBLIC GLM_FORCE_SILENT_WARNINGS) # Needed for compilation to succeed on MSVC
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog fmt::fmt json ${CMAKE_DL_LIBS})
-target_link_libraries(cubos-core PRIVATE glad Threads::Threads)
+target_link_libraries(cubos-core PUBLIC glm::glm spdlog nlohmann_json::nlohmann_json fmt::fmt ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PRIVATE Threads::Threads)
 
 # Add core tests
 
