@@ -17,6 +17,12 @@ namespace cubos::core::reflection
     class DictionaryTrait final
     {
     public:
+        /// @brief Provides mutable access to a dictionary.
+        class View;
+
+        /// @brief Provides immutable access to a dictionary.
+        class ConstView;
+
         /// @brief Points to a key-value pair in a dictionary, allowing modification of the value.
         class Iterator;
 
@@ -87,9 +93,8 @@ namespace cubos::core::reflection
 
         /// @brief Function pointer to remove a key-value pair of a dictionary instance.
         /// @param instance Dictionary instance.
-        /// @param iterator Iterator to the key-value pair.
-        /// @param writeable Whether the iterator provides write access.
-        using Erase = void (*)(void* instance, const void* iterator, bool writeable);
+        /// @param iterator Iterator to the key-value pair with write access.
+        using Erase = void (*)(void* instance, const void* iterator);
 
         /// @brief Constructs.
         /// @param keyType Key type of the dictionary.
@@ -120,65 +125,6 @@ namespace cubos::core::reflection
         /// @param erase Function pointer.
         void setErase(Erase erase);
 
-        /// @brief Returns the key type of the dictionary.
-        /// @return Key type.
-        const Type& keyType() const;
-
-        /// @brief Returns the value type of the dictionary.
-        /// @return Value type.
-        const Type& valueType() const;
-
-        /// @brief Returns the length of the given dictionary.
-        /// @param instance Dictionary instance.
-        /// @return Dictionary length.
-        std::size_t length(const void* instance) const;
-
-        /// @brief Returns an iterator to the beginning of the given dictionary.
-        /// @param instance Dictionary instance.
-        /// @return Iterator.
-        Iterator begin(void* instance) const;
-
-        /// @copydoc begin(void*) const
-        ConstIterator begin(const void* instance) const;
-
-        /// @brief Returns an iterator to the element of the given dictionary with the given key.
-        /// @param instance Dictionary instance.
-        /// @param key Key.
-        /// @return Iterator to the found key-value pair, or null if not found.
-        Iterator find(void* instance, const void* key) const;
-
-        /// @copydoc find(void*, const void*) const
-        ConstIterator find(const void* instance, const void* key) const;
-
-        /// @brief Inserts a default-constructed value into the dicitonary.
-        /// @param instance Dictionary instance.
-        /// @param key Key.
-        /// @return Whether the operation is supported.
-        bool insertDefault(void* instance, const void* key) const;
-
-        /// @brief Inserts a copy-constructed value into the dictionary.
-        /// @param instance Dictionary instance.
-        /// @param key Key.
-        /// @param value Value.
-        /// @return Whether the operation is supported.
-        bool insertCopy(void* instance, const void* key, const void* value) const;
-
-        /// @brief Inserts a move-constructed value into the dictionary.
-        /// @param instance Dictionary instance.
-        /// @param key Key.
-        /// @param value Value.
-        /// @return Whether the operation is supported.
-        bool insertMove(void* instance, const void* key, void* value) const;
-
-        /// @brief Removes a key-value pair of the dictionary.
-        /// @param instance Dictionary instance.
-        /// @param key Iterator.
-        /// @return Whether the operation is supported.
-        bool erase(void* instance, Iterator& iterator) const;
-
-        /// @copydoc erase(void*, Iterator&) const
-        bool erase(void* instance, ConstIterator& iterator) const;
-
         /// @brief Checks if default-construct insert is supported.
         /// @return Whether the operation is supported.
         bool hasInsertDefault() const;
@@ -195,8 +141,25 @@ namespace cubos::core::reflection
         /// @return Whether the operation is supported.
         bool hasErase() const;
 
+        /// @brief Returns the key type of the dictionary.
+        /// @return Key type.
+        const Type& keyType() const;
+
+        /// @brief Returns the value type of the dictionary.
+        /// @return Value type.
+        const Type& valueType() const;
+
+        /// @brief Returns a view of the given dictionary instance.
+        /// @param instance Dictionary instance.
+        /// @return Dictionary view.
+        View view(void* instance) const;
+
+        /// @copydoc view(void*) const
+        ConstView view(const void* instance) const;
+
     private:
-        friend Iterator;
+        friend View;
+        friend ConstView;
 
         const Type& mKeyType;
         const Type& mValueType;
@@ -213,9 +176,106 @@ namespace cubos::core::reflection
         Erase mErase{nullptr};
     };
 
-    class DictionaryTrait::Iterator
+    class DictionaryTrait::View
     {
     public:
+        /// @brief Used to iterate over the entries of a dictionary.
+        class Iterator;
+
+        /// @brief Constructs.
+        /// @param trait Trait.
+        /// @param instance Instance.
+        View(const DictionaryTrait& trait, void* instance);
+
+        /// @brief Returns the length of the dictionary.
+        /// @return Dictionary length.
+        std::size_t length() const;
+
+        /// @brief Returns an iterator to the first entry.
+        /// @return Iterator.
+        Iterator begin() const;
+
+        /// @brief Returns an iterator to the entry after the last entry.
+        /// @return Iterator.
+        Iterator end() const;
+
+        /// @brief Returns an iterator to the entry with the given key.
+        /// @note If no entry with the given key exists, @ref end() is returned.
+        /// @param key Key.
+        /// @return Iterator.
+        Iterator find(const void* key) const;
+
+        /// @brief Inserts a default-constructed value with the given key.
+        /// @note Aborts if @ref DictionaryTrait::hasInsertDefault() returns false.
+        /// @param key Key.
+        void insertDefault(const void* key) const;
+
+        /// @brief Inserts a copy-constructed value with the given key.
+        /// @note Aborts if @ref DictionaryTrait::hasInsertCopy() returns false.
+        /// @param key Key.
+        /// @param value Value.
+        void insertCopy(const void* key, const void* value) const;
+
+        /// @brief Inserts a move-constructed value with the given key.
+        /// @note Aborts if @ref DictionaryTrait::hasInsertMove() returns false.
+        /// @param key Key.
+        /// @param value Value.
+        void insertMove(const void* key, void* value) const;
+
+        /// @brief Removes an entry.
+        /// @note Aborts if @ref DictionaryTrait::hasErase() returns false.
+        /// @param iterator Iterator.
+        void erase(Iterator& iterator) const;
+
+    private:
+        const DictionaryTrait& mTrait;
+        void* mInstance;
+    };
+
+    class DictionaryTrait::ConstView
+    {
+    public:
+        /// @brief Used to iterate over the entries of a dictionary.
+        class Iterator;
+
+        /// @brief Constructs.
+        /// @param trait Trait.
+        /// @param instance Instance.
+        ConstView(const DictionaryTrait& trait, const void* instance);
+
+        /// @brief Returns the length of the dictionary.
+        /// @return Dictionary length.
+        std::size_t length() const;
+
+        /// @brief Returns an iterator to the first entry.
+        /// @return Iterator.
+        Iterator begin() const;
+
+        /// @brief Returns an iterator to the entry after the last entry.
+        /// @return Iterator.
+        Iterator end() const;
+
+        /// @brief Returns an iterator to the entry with the given key.
+        /// @note If no entry with the given key exists, @ref end() is returned.
+        /// @param key Key.
+        /// @return Iterator.
+        Iterator find(const void* key) const;
+
+    private:
+        const DictionaryTrait& mTrait;
+        const void* mInstance;
+    };
+
+    class DictionaryTrait::View::Iterator
+    {
+    public:
+        /// @brief Output structure for the iterator.
+        struct Entry
+        {
+            const void* key; ///< Key.
+            void* value;     ///< Value.
+        };
+
         ~Iterator();
 
         /// @brief Copy constructs.
@@ -224,84 +284,101 @@ namespace cubos::core::reflection
 
         /// @brief Move constructs.
         /// @param other Other iterator.
-        Iterator(Iterator&& other) noexcept ;
+        Iterator(Iterator&& other) noexcept;
 
-        /// @brief Gets a pointer to the current key.
-        /// @note Aborts if @ref isNull() returns true.
-        /// @return Key.
-        const void* key() const;
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to the same entry.
+        bool operator==(const Iterator& other) const;
 
-        /// @brief Gets a pointer to the current value.
-        /// @note Aborts if @ref isNull() returns true.
-        /// @return Value.
-        void* value() const;
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to different entries.
+        bool operator!=(const Iterator&) const;
+
+        /// @brief Accesses the entry referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Entry& operator*() const;
+
+        /// @brief Accesses the entry referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Entry* operator->() const;
 
         /// @brief Advances the iterator.
-        /// @note Aborts if @ref isNull() returns true.
-        /// @return Whether the iterator is still valid.
-        bool advance();
-
-        /// @brief Checks if the iterator is null.
-        /// @return Whether the iterator is null.
-        bool isNull() const;
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
 
     private:
         friend DictionaryTrait;
 
         /// @brief Constructs.
+        /// @param view View.
         /// @param inner Inner iterator.
-        /// @param instance Dictionary instance.
-        /// @param trait Dictionary trait.
-        Iterator(void* inner, void* instance, const DictionaryTrait& trait);
+        Iterator(const View& view, void* inner);
 
+        const View& mView;
         void* mInner{nullptr};
-        void* mInstance;
-        const DictionaryTrait& mTrait;
+        mutable Entry mEntry;
     };
 
-    class DictionaryTrait::ConstIterator
+    class DictionaryTrait::ConstView::Iterator
     {
     public:
-        ~ConstIterator();
+        /// @brief Output structure for the iterator.
+        struct Entry
+        {
+            const void* key;   ///< Key.
+            const void* value; ///< Value.
+        };
+
+        ~Iterator();
 
         /// @brief Copy constructs.
         /// @param other Other iterator.
-        ConstIterator(const ConstIterator& other);
+        Iterator(const Iterator& other);
 
         /// @brief Move constructs.
         /// @param other Other iterator.
-        ConstIterator(ConstIterator&& other) noexcept ;
+        Iterator(Iterator&& other) noexcept;
 
-        /// @brief Gets a pointer to the current key.
-        /// @note Aborts if @ref isNull() returns true.
-        /// @return Key.
-        const void* key() const;
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to the same entry.
+        bool operator==(const Iterator& other) const;
 
-        /// @brief Gets a pointer to the current value.
-        /// @note Aborts if @ref isNull() returns true.
-        /// @return Value.
-        const void* value() const;
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to different entries.
+        bool operator!=(const Iterator&) const;
+
+        /// @brief Accesses the entry referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Entry& operator*() const;
+
+        /// @brief Accesses the entry referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Entry* operator->() const;
 
         /// @brief Advances the iterator.
-        /// @note Aborts if @ref isNull() returns true.
-        /// @return Whether the iterator is still valid.
-        bool advance();
-
-        /// @brief Checks if the iterator is null.
-        /// @return Whether the iterator is null.
-        bool isNull() const;
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
 
     private:
         friend DictionaryTrait;
 
         /// @brief Constructs.
+        /// @param view View.
         /// @param inner Inner iterator.
-        /// @param instance Dictionary instance.
-        /// @param trait Dictionary trait.
-        ConstIterator(void* inner, const void* instance, const DictionaryTrait& trait);
+        Iterator(const ConstView& view, void* inner);
 
+        const ConstView& mView;
         void* mInner{nullptr};
-        const void* mInstance;
-        const DictionaryTrait& mTrait;
+        mutable Entry mEntry;
     };
 } // namespace cubos::core::reflection

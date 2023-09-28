@@ -42,104 +42,6 @@ void DictionaryTrait::setErase(Erase erase)
     mErase = erase;
 }
 
-const Type& DictionaryTrait::keyType() const
-{
-    return mKeyType;
-}
-
-const Type& DictionaryTrait::valueType() const
-{
-    return mValueType;
-}
-
-std::size_t DictionaryTrait::length(const void* instance) const
-{
-    return mLength(instance);
-}
-
-DictionaryTrait::Iterator DictionaryTrait::begin(void* instance) const
-{
-    return Iterator{mBegin(reinterpret_cast<uintptr_t>(instance), true), instance, *this};
-}
-
-DictionaryTrait::ConstIterator DictionaryTrait::begin(const void* instance) const
-{
-    return ConstIterator{mBegin(reinterpret_cast<uintptr_t>(instance), false), instance, *this};
-}
-
-DictionaryTrait::Iterator DictionaryTrait::find(void* instance, const void* key) const
-{
-    return Iterator{mFind(reinterpret_cast<uintptr_t>(instance), key, true), instance, *this};
-}
-
-DictionaryTrait::ConstIterator DictionaryTrait::find(const void* instance, const void* key) const
-{
-    return ConstIterator{mFind(reinterpret_cast<uintptr_t>(instance), key, false), instance, *this};
-}
-
-bool DictionaryTrait::insertDefault(void* instance, const void* key) const
-{
-    if (mInsertDefault != nullptr)
-    {
-        mInsertDefault(instance, key);
-        return true;
-    }
-
-    return false;
-}
-
-bool DictionaryTrait::insertCopy(void* instance, const void* key, const void* value) const
-{
-    if (mInsertCopy != nullptr)
-    {
-        mInsertCopy(instance, key, value);
-        return true;
-    }
-
-    return false;
-}
-
-bool DictionaryTrait::insertMove(void* instance, const void* key, void* value) const
-{
-    if (mInsertMove != nullptr)
-    {
-        mInsertMove(instance, key, value);
-        return true;
-    }
-
-    return false;
-}
-
-bool DictionaryTrait::erase(void* instance, Iterator& iterator) const
-{
-    CUBOS_ASSERT(!iterator.isNull(), "Cannot erase null iterator");
-
-    if (mErase != nullptr)
-    {
-        mErase(instance, iterator.mInner, true);
-        mStop(iterator.mInner, true);
-        iterator.mInner = nullptr;
-        return true;
-    }
-
-    return false;
-}
-
-bool DictionaryTrait::erase(void* instance, ConstIterator& iterator) const
-{
-    CUBOS_ASSERT(!iterator.isNull(), "Cannot erase null iterator");
-
-    if (mErase != nullptr)
-    {
-        mErase(instance, iterator.mInner, false);
-        mStop(iterator.mInner, false);
-        iterator.mInner = nullptr;
-        return true;
-    }
-
-    return false;
-}
-
 bool DictionaryTrait::hasInsertDefault() const
 {
     return mInsertDefault != nullptr;
@@ -160,130 +62,232 @@ bool DictionaryTrait::hasErase() const
     return mErase != nullptr;
 }
 
-DictionaryTrait::Iterator::~Iterator()
+const Type& DictionaryTrait::keyType() const
+{
+    return mKeyType;
+}
+
+const Type& DictionaryTrait::valueType() const
+{
+    return mValueType;
+}
+
+DictionaryTrait::View DictionaryTrait::view(void* instance) const
+{
+    return View{*this, instance};
+}
+
+DictionaryTrait::ConstView DictionaryTrait::view(const void* instance) const
+{
+    return ConstView{*this, instance};
+}
+
+DictionaryTrait::View::View(const DictionaryTrait& trait, void* instance)
+    : mTrait(trait)
+    , mInstance(instance)
+{
+}
+
+std::size_t DictionaryTrait::View::length() const
+{
+    return mTrait.mLength(mInstance);
+}
+
+DictionaryTrait::View::Iterator DictionaryTrait::View::begin() const
+{
+    return Iterator{*this, mTrait.mBegin(reinterpret_cast<uintptr_t>(mInstance), true)};
+}
+
+DictionaryTrait::View::Iterator DictionaryTrait::View::end() const
+{
+    return Iterator{*this, nullptr};
+}
+
+DictionaryTrait::View::Iterator DictionaryTrait::View::find(const void* key) const
+{
+    return Iterator{*this, mTrait.mFind(reinterpret_cast<uintptr_t>(mInstance), key, true)};
+}
+
+void DictionaryTrait::View::insertDefault(const void* key) const
+{
+    CUBOS_ASSERT(mTrait.hasInsertDefault(), "Insert default not supported");
+    mTrait.mInsertDefault(mInstance, key);
+}
+
+void DictionaryTrait::View::insertCopy(const void* key, const void* value) const
+{
+    CUBOS_ASSERT(mTrait.hasInsertCopy(), "Insert copy not supported");
+    mTrait.mInsertCopy(mInstance, key, value);
+}
+
+void DictionaryTrait::View::insertMove(const void* key, void* value) const
+{
+    CUBOS_ASSERT(mTrait.hasInsertMove(), "Insert move not supported");
+    mTrait.mInsertMove(mInstance, key, value);
+}
+
+void DictionaryTrait::View::erase(Iterator& iterator) const
+{
+    CUBOS_ASSERT(mTrait.hasErase(), "Erase not supported");
+    mTrait.mErase(mInstance, iterator.mInner);
+    mTrait.mStop(iterator.mInner, true);
+    iterator.mInner = nullptr;
+}
+
+DictionaryTrait::ConstView::ConstView(const DictionaryTrait& trait, const void* instance)
+    : mTrait(trait)
+    , mInstance(instance)
+{
+}
+
+std::size_t DictionaryTrait::ConstView::length() const
+{
+    return mTrait.mLength(mInstance);
+}
+
+DictionaryTrait::ConstView::Iterator DictionaryTrait::ConstView::begin() const
+{
+    return Iterator{*this, mTrait.mBegin(reinterpret_cast<uintptr_t>(mInstance), false)};
+}
+
+DictionaryTrait::ConstView::Iterator DictionaryTrait::ConstView::end() const
+{
+    return Iterator{*this, nullptr};
+}
+
+DictionaryTrait::ConstView::Iterator DictionaryTrait::ConstView::find(const void* key) const
+{
+    return Iterator{*this, mTrait.mFind(reinterpret_cast<uintptr_t>(mInstance), key, false)};
+}
+
+DictionaryTrait::View::Iterator::~Iterator()
 {
     if (mInner != nullptr)
     {
-        mTrait.mStop(mInner, true);
+        mView.mTrait.mStop(mInner, true);
     }
 }
 
-DictionaryTrait::Iterator::Iterator(void* inner, void* instance, const DictionaryTrait& trait)
-    : mInner(inner)
-    , mInstance(instance)
-    , mTrait(trait)
+DictionaryTrait::View::Iterator::Iterator(const View& view, void* inner)
+    : mView(view)
+    , mInner(inner)
 {
 }
 
-DictionaryTrait::Iterator::Iterator(const Iterator& other)
-    : mInstance(other.mInstance)
-    , mTrait(other.mTrait)
+DictionaryTrait::View::Iterator::Iterator(const Iterator& other)
+    : mView(other.mView)
 {
-    if (!other.isNull())
+    if (other.mInner != nullptr)
     {
-        mInner = mTrait.mFind(reinterpret_cast<uintptr_t>(mInstance), other.key(), true);
+        mInner = mView.mTrait.mFind(reinterpret_cast<uintptr_t>(mView.mInstance), other->key, true);
     }
 }
 
-DictionaryTrait::Iterator::Iterator(Iterator&& other) noexcept
-    : mInner(other.mInner)
-    , mInstance(other.mInstance)
-    , mTrait(other.mTrait)
+DictionaryTrait::View::Iterator::Iterator(Iterator&& other) noexcept
+    : mView(other.mView)
+    , mInner(other.mInner)
 {
     other.mInner = nullptr;
 }
 
-const void* DictionaryTrait::Iterator::key() const
+bool DictionaryTrait::View::Iterator::operator==(const Iterator& other) const
 {
-    CUBOS_ASSERT(mInner != nullptr, "Cannot get key from null iterator");
-    return mTrait.mKey(mInner, true);
+    return mInner == other.mInner || (mInner != nullptr && other.mInner != nullptr && (*this)->value == other->value);
 }
 
-void* DictionaryTrait::Iterator::value() const
+bool DictionaryTrait::View::Iterator::operator!=(const Iterator& other) const
 {
-    CUBOS_ASSERT(mInner != nullptr, "Cannot get value from null iterator");
-    return reinterpret_cast<void*>(mTrait.mValue(mInner, true));
+    return !(*this == other);
 }
 
-bool DictionaryTrait::Iterator::advance()
+const DictionaryTrait::View::Iterator::Entry& DictionaryTrait::View::Iterator::operator*() const
 {
-    CUBOS_ASSERT(mInner != nullptr, "Cannot advance null iterator");
+    CUBOS_ASSERT(mInner != nullptr, "Iterator out of bounds");
+    mEntry.key = mView.mTrait.mKey(mInner, true);
+    mEntry.value = reinterpret_cast<void*>(mView.mTrait.mValue(mInner, true));
+    return mEntry;
+}
 
-    if (mTrait.mAdvance(reinterpret_cast<uintptr_t>(mInstance), mInner, true))
+const DictionaryTrait::View::Iterator::Entry* DictionaryTrait::View::Iterator::operator->() const
+{
+    return &this->operator*();
+}
+
+DictionaryTrait::View::Iterator& DictionaryTrait::View::Iterator::operator++()
+{
+    CUBOS_ASSERT(mInner != nullptr, "Iterator out of bounds");
+
+    if (!mView.mTrait.mAdvance(reinterpret_cast<uintptr_t>(mView.mInstance), mInner, true))
     {
-        return true;
+        mView.mTrait.mStop(mInner, true);
+        mInner = nullptr;
     }
 
-    mTrait.mStop(mInner, true);
-    mInner = nullptr;
-    return false;
+    return *this;
 }
 
-bool DictionaryTrait::Iterator::isNull() const
-{
-    return mInner == nullptr;
-}
-
-DictionaryTrait::ConstIterator::~ConstIterator()
+DictionaryTrait::ConstView::Iterator::~Iterator()
 {
     if (mInner != nullptr)
     {
-        mTrait.mStop(mInner, false);
+        mView.mTrait.mStop(mInner, false);
     }
 }
 
-DictionaryTrait::ConstIterator::ConstIterator(void* inner, const void* instance, const DictionaryTrait& trait)
-    : mInner(inner)
-    , mInstance(instance)
-    , mTrait(trait)
+DictionaryTrait::ConstView::Iterator::Iterator(const ConstView& view, void* inner)
+    : mView(view)
+    , mInner(inner)
 {
 }
 
-DictionaryTrait::ConstIterator::ConstIterator(const ConstIterator& other)
-    : mInstance(other.mInstance)
-    , mTrait(other.mTrait)
+DictionaryTrait::ConstView::Iterator::Iterator(const Iterator& other)
+    : mView(other.mView)
 {
-    if (!other.isNull())
+    if (other.mInner != nullptr)
     {
-        mInner = mTrait.mFind(reinterpret_cast<uintptr_t>(mInstance), other.key(), false);
+        mInner = mView.mTrait.mFind(reinterpret_cast<uintptr_t>(mView.mInstance), other->key, false);
     }
 }
 
-DictionaryTrait::ConstIterator::ConstIterator(ConstIterator&& other) noexcept
-    : mInner(other.mInner)
-    , mInstance(other.mInstance)
-    , mTrait(other.mTrait)
+DictionaryTrait::ConstView::Iterator::Iterator(Iterator&& other) noexcept
+    : mView(other.mView)
+    , mInner(other.mInner)
 {
     other.mInner = nullptr;
 }
 
-const void* DictionaryTrait::ConstIterator::key() const
+bool DictionaryTrait::ConstView::Iterator::operator==(const Iterator& other) const
 {
-    CUBOS_ASSERT(mInner != nullptr, "Cannot get key from null iterator");
-    return mTrait.mKey(mInner, false);
+    return mInner == other.mInner || (mInner != nullptr && other.mInner != nullptr && (*this)->value == other->value);
 }
 
-const void* DictionaryTrait::ConstIterator::value() const
+bool DictionaryTrait::ConstView::Iterator::operator!=(const Iterator& other) const
 {
-    CUBOS_ASSERT(mInner != nullptr, "Cannot get value from null iterator");
-    return reinterpret_cast<void*>(mTrait.mValue(mInner, false));
+    return !(*this == other);
 }
 
-bool DictionaryTrait::ConstIterator::advance()
+const DictionaryTrait::ConstView::Iterator::Entry& DictionaryTrait::ConstView::Iterator::operator*() const
 {
-    CUBOS_ASSERT(mInner != nullptr, "Cannot advance null iterator");
+    CUBOS_ASSERT(mInner != nullptr, "Iterator out of bounds");
+    mEntry.key = mView.mTrait.mKey(mInner, false);
+    mEntry.value = reinterpret_cast<void*>(mView.mTrait.mValue(mInner, false));
+    return mEntry;
+}
 
-    if (mTrait.mAdvance(reinterpret_cast<uintptr_t>(mInstance), mInner, false))
+const DictionaryTrait::ConstView::Iterator::Entry* DictionaryTrait::ConstView::Iterator::operator->() const
+{
+    return &this->operator*();
+}
+
+DictionaryTrait::ConstView::Iterator& DictionaryTrait::ConstView::Iterator::operator++()
+{
+    CUBOS_ASSERT(mInner != nullptr, "Iterator out of bounds");
+
+    if (!mView.mTrait.mAdvance(reinterpret_cast<uintptr_t>(mView.mInstance), mInner, true))
     {
-        return true;
+        mView.mTrait.mStop(mInner, true);
+        mInner = nullptr;
     }
 
-    mTrait.mStop(mInner, false);
-    mInner = nullptr;
-    return false;
-}
-
-bool DictionaryTrait::ConstIterator::isNull() const
-{
-    return mInner == nullptr;
+    return *this;
 }
