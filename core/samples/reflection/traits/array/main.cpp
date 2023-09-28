@@ -24,7 +24,7 @@ void printArray(const Type& type, const void* instance)
         return;
     }
 
-    for (auto* element : arrayView)
+    for (const auto* element : arrayView)
     {
         CUBOS_INFO("{}", *static_cast<const int32_t*>(element));
     }
