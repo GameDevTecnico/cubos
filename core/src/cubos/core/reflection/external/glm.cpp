@@ -73,6 +73,7 @@ AUTO_IMPL_MAT(glm::mat4x3, "glm::mat4x3", glm::vec3, AUTO_MAT4);
 AUTO_IMPL_MAT(glm::dmat4x3, "glm::dmat4x3", glm::dvec3, AUTO_MAT4);
 AUTO_IMPL_MAT(glm::mat4, "glm::mat4", glm::vec4, AUTO_MAT4);
 AUTO_IMPL_MAT(glm::dmat4, "glm::dmat4", glm::dvec4, AUTO_MAT4);
+
 AUTO_IMPL_VEC(glm::vec2, "glm::vec2", AUTO_VEC2);
 AUTO_IMPL_VEC(glm::bvec2, "glm::bvec2", AUTO_VEC2);
 AUTO_IMPL_VEC(glm::dvec2, "glm::dvec2", AUTO_VEC2);
@@ -88,5 +89,6 @@ AUTO_IMPL_VEC(glm::dvec4, "glm::dvec4", AUTO_VEC4);
 AUTO_IMPL_VEC(glm::bvec4, "glm::bvec4", AUTO_VEC4);
 AUTO_IMPL_VEC(glm::ivec4, "glm::ivec4", AUTO_VEC4);
 AUTO_IMPL_VEC(glm::uvec4, "glm::uvec4", AUTO_VEC4);
+
 AUTO_IMPL_VEC(glm::quat, "glm::quat", AUTO_VEC4);
 AUTO_IMPL_VEC(glm::dquat, "glm::dquat", AUTO_VEC4);
