@@ -8,10 +8,6 @@ ArrayTrait::ArrayTrait(const Type& elementType, Length length, AddressOf address
     : mElementType(elementType)
     , mLength(length)
     , mAddressOf(addressOf)
-    , mInsertDefault(nullptr)
-    , mInsertCopy(nullptr)
-    , mInsertMove(nullptr)
-    , mErase(nullptr)
 {
 }
 

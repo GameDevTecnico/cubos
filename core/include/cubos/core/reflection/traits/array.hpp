@@ -134,9 +134,9 @@ namespace cubos::core::reflection
         const Type& mElementType;
         Length mLength;
         AddressOf mAddressOf;
-        InsertDefault mInsertDefault;
-        InsertCopy mInsertCopy;
-        InsertMove mInsertMove;
-        Erase mErase;
+        InsertDefault mInsertDefault{nullptr};
+        InsertCopy mInsertCopy{nullptr};
+        InsertMove mInsertMove{nullptr};
+        Erase mErase{nullptr};
     };
 } // namespace cubos::core::reflection
