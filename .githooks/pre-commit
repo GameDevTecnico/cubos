@@ -1,6 +1,12 @@
 #!/bin/sh
-for file in $(git diff --cached --name-only | grep -E '.*\.(c|cpp|h|hpp)$')
+for file in $(git diff --cached --name-only --diff-filter=ACMR | grep -E '.*\.(c|cpp|h|hpp)$')
 do
+        PARTIAL_STAGED=$(git diff --name-only $file | wc -l)
+
         clang-format -i $file
-        git add $file
+
+        # Add unless the file was partially staged
+        if [ $PARTIAL_STAGED -eq 0 ]; then
+                git add $file
+        fi
 done
