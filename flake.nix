@@ -1,7 +1,7 @@
 # Flake used for development with nix
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -13,6 +13,14 @@
       {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
+            xorg.libX11
+            xorg.libXrandr
+            xorg.libXinerama
+            xorg.libXcursor
+            xorg.libXi
+            libxkbcommon
+            libGL
+            libglvnd
             pkg-config
             cmake
             gcc
@@ -24,13 +32,15 @@
             graphviz
             clang_14
             doctest
-	    ccache
+            ccache
             lcov
             (python3.withPackages (ps: with ps; [
               jinja2
               pygments
-            ])) 
+            ]))
           ];
+
+          LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
         };
       });
 }

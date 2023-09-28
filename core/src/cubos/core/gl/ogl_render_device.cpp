@@ -4,7 +4,7 @@
 #include <string>
 #include <utility>
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 
 #include <cubos/core/log.hpp>
 
