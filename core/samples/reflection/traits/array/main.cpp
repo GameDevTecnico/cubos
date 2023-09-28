@@ -18,9 +18,9 @@ void printArray(const Type& type, const void* instance)
     /// [Getting array length and type]
 
     /// [Getting array elements]
-    if (!arrayTrait.elementType().is<int>())
+    if (!arrayTrait.elementType().is<int32_t>())
     {
-        CUBOS_INFO("This function does not support printing arrays of types other than int");
+        CUBOS_INFO("This function does not support printing arrays of types other than int32_t");
         return;
     }
 
@@ -49,16 +49,16 @@ int main()
 {
     std::vector<int32_t> vec = {1, 1, 2, 3, 5, 8, 13};
     printArray(vec);
-
-    /// [Expected output]
-    // Array with 7 elements of type int32_t
-    // Element 0: 1
-    // Element 1: 1
-    // Element 2: 2
-    // Element 3: 3
-    // Element 4: 5
-    // Element 5: 8
-    // Element 6: 13
-    /// [Expected output]
 }
 /// [Usage]
+
+/// [Expected output]
+// Array with 7 elements of type int32_t
+// 1
+// 1
+// 2
+// 3
+// 5
+// 8
+// 13
+/// [Expected output]

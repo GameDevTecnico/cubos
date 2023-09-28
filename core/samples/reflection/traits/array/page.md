@@ -17,7 +17,7 @@ We can also get pointers to the elements of the array and iterate over them:
 
 @snippet reflection/traits/array/main.cpp Getting array elements
 
-In this example, we're only supporting arrays of `int`s, but we could for
+In this example, we're only supporting arrays of `int32_t`s, but we could for
 example implement a printing function which supports all primitive types.
 
 To make calling our function easier, we can add a convenience typed wrapper:
@@ -29,7 +29,8 @@ Using this function is now as simple as:
 @snippet reflection/traits/array/main.cpp Usage
 
 Its important to note that both the includes above are necessary, as we're
-reflecting the type `std::vector<int>`, which also means reflecting `int`.
+reflecting the type `std::vector<int32_t>`, which also means reflecting
+`int32_t`.
 
 Executing the sample should output:
 
