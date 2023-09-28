@@ -105,16 +105,8 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::map<K, V>))
         map->emplace(*static_cast<const K*>(key), std::move(*static_cast<V*>(value)));
     });
 
-    dictionaryTrait.setErase([](void* instance, const void* iterator, bool writeable) {
-        auto* map = static_cast<Map*>(instance);
-        if (writeable)
-        {
-            map->erase(*static_cast<const typename Map::iterator*>(iterator));
-        }
-        else
-        {
-            map->erase(*static_cast<const typename Map::const_iterator*>(iterator));
-        }
+    dictionaryTrait.setErase([](void* instance, const void* iterator) {
+        static_cast<Map*>(instance)->erase(*static_cast<const typename Map::iterator*>(iterator));
     });
 
     return Type::create("std::map<" + reflect<K>().name() + ", " + reflect<V>().name() + ">")

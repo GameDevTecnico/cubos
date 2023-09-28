@@ -24,87 +24,94 @@ void testDictionary(T& value, std::size_t length, const K* insertedKey, V* inser
     REQUIRE(type.has<DictionaryTrait>());
     const DictionaryTrait& trait = type.get<DictionaryTrait>();
 
-    REQUIRE(trait.length(&value) == length);
     REQUIRE(trait.keyType().is<K>());
     REQUIRE(trait.valueType().is<V>());
+
+    auto view = trait.view(&value);
+    auto constView = trait.view(static_cast<const void*>(&value));
+    REQUIRE(view.length() == length);
+    REQUIRE(constView.length() == length);
 
     // Check that both the normal and const iterators count the expected number of elements.
 
     std::size_t i = 0;
-    for (auto it = trait.begin(&value); !it.isNull(); it.advance())
+    for (auto entry : view)
     {
+        (void)entry;
         i += 1;
     }
     REQUIRE(i == length);
 
     i = 0;
-    for (auto it = trait.begin(static_cast<const void*>(&value)); !it.isNull(); it.advance())
+    for (auto entry : constView)
     {
+        (void)entry;
         i += 1;
     }
     REQUIRE(i == length);
 
     if (trait.hasInsertDefault())
     {
-        REQUIRE(trait.find(&value, insertedKey).isNull());
-        REQUIRE(trait.insertDefault(&value, insertedKey));
-        auto it = trait.find(static_cast<const void*>(&value), insertedKey);
-        REQUIRE(!it.isNull());
+
+        REQUIRE(constView.find(insertedKey) == constView.end());
+        view.insertDefault(insertedKey);
+        auto it = view.find(insertedKey);
+        REQUIRE(it != view.end());
 
         if constexpr (std::equality_comparable<K>)
         {
-            CHECK(*static_cast<const K*>(it.key()) == *insertedKey);
+            CHECK(*static_cast<const K*>(it->key) == *insertedKey);
         }
 
         if constexpr (std::equality_comparable<V> && std::default_initializable<V>)
         {
-            CHECK(*static_cast<const V*>(it.value()) == V{});
+            CHECK(*static_cast<const V*>(it->value) == V{});
         }
 
-        REQUIRE(trait.length(&value) == length + 1);
-        REQUIRE(trait.erase(&value, it));
-        REQUIRE(trait.length(&value) == length);
-        REQUIRE(trait.find(&value, insertedKey).isNull());
+        REQUIRE(view.length() == length + 1);
+        view.erase(it);
+        REQUIRE(view.length() == length);
+        REQUIRE(view.find(insertedKey) == view.end());
     }
 
     if (trait.hasInsertCopy())
     {
-        REQUIRE(trait.find(&value, insertedKey).isNull());
-        REQUIRE(trait.insertCopy(&value, insertedKey, insertedValue));
-        auto it = trait.find(&value, insertedKey);
-        REQUIRE(!it.isNull());
+        REQUIRE(view.find(insertedKey) == view.end());
+        view.insertCopy(insertedKey, insertedValue);
+        auto it = view.find(insertedKey);
+        REQUIRE(it != view.end());
 
         if constexpr (std::equality_comparable<K>)
         {
-            CHECK(*static_cast<const K*>(it.key()) == *insertedKey);
+            CHECK(*static_cast<const K*>(it->key) == *insertedKey);
         }
 
         if constexpr (std::equality_comparable<V>)
         {
-            CHECK(*static_cast<const V*>(it.value()) == *static_cast<const V*>(insertedValue));
+            CHECK(*static_cast<const V*>(it->value) == *static_cast<const V*>(insertedValue));
         }
 
-        REQUIRE(trait.length(&value) == length + 1);
-        REQUIRE(trait.erase(&value, it));
-        REQUIRE(trait.length(&value) == length);
-        REQUIRE(trait.find(&value, insertedKey).isNull());
+        REQUIRE(view.length() == length + 1);
+        view.erase(it);
+        REQUIRE(view.length() == length);
+        REQUIRE(view.find(insertedKey) == view.end());
     }
 
     if (trait.hasInsertMove())
     {
-        REQUIRE(trait.find(&value, insertedKey).isNull());
-        REQUIRE(trait.insertMove(&value, insertedKey, insertedValue));
-        auto it = trait.find(static_cast<const void*>(&value), insertedKey);
-        REQUIRE(!it.isNull());
+        REQUIRE(view.find(insertedKey) == view.end());
+        view.insertMove(insertedKey, insertedValue);
+        auto it = view.find(insertedKey);
+        REQUIRE(it != view.end());
 
         if constexpr (std::equality_comparable<K>)
         {
-            CHECK(*static_cast<const K*>(it.key()) == *insertedKey);
+            CHECK(*static_cast<const K*>(it->key) == *insertedKey);
         }
 
-        REQUIRE(trait.length(&value) == length + 1);
-        REQUIRE(trait.erase(&value, it));
-        REQUIRE(trait.length(&value) == length);
-        REQUIRE(trait.find(&value, insertedKey).isNull());
+        REQUIRE(view.length() == length + 1);
+        view.erase(it);
+        REQUIRE(view.length() == length);
+        REQUIRE(view.find(insertedKey) == view.end());
     }
 }

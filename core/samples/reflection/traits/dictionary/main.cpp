@@ -13,20 +13,21 @@ void printDictionary(const Type& type, const void* instance)
     /// [Printing any dictionary]
 
     /// [Getting dictionary length and types]
-    CUBOS_INFO("Dictionary with {} entries of key type {} and value type {}", dictionaryTrait.length(instance),
+    auto dictionaryView = dictionaryTrait.view(instance);
+    CUBOS_INFO("Dictionary with {} entries of key type {} and value type {}", dictionaryView.length(),
                dictionaryTrait.keyType().name(), dictionaryTrait.valueType().name());
     /// [Getting dictionary length and types]
 
     /// [Getting dictionary entries]
     if (!dictionaryTrait.keyType().is<int32_t>() || !dictionaryTrait.valueType().is<int32_t>())
     {
-        CUBOS_INFO("This function does not support printing dictionary with key and value types other than int");
+        CUBOS_INFO("This function does not support printing dictionary with key and value types other than int32_t");
         return;
     }
 
-    for (auto it = dictionaryTrait.begin(instance); !it.isNull(); it.advance())
+    for (auto [key, value] : dictionaryView)
     {
-        CUBOS_INFO("{} -> {}", *static_cast<const int32_t*>(it.key()), *static_cast<const int32_t*>(it.value()));
+        CUBOS_INFO("{} -> {}", *static_cast<const int32_t*>(key), *static_cast<const int32_t*>(value));
     }
 }
 /// [Getting dictionary entries]

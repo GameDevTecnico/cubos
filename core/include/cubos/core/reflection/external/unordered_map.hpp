@@ -99,22 +99,14 @@ CUBOS_REFLECT_EXTERNAL_TEMPLATE((typename K, typename V), (std::unordered_map<K,
         });
     }
 
-    // Since V must be moveable for all std::map<K, V>, we always supply this function.
+    // Since V must be moveable for all std::unordered_map<K, V>, we always supply this function.
     dictionaryTrait.setInsertMove([](void* instance, const void* key, void* value) {
         auto* map = static_cast<Map*>(instance);
         map->emplace(*static_cast<const K*>(key), std::move(*static_cast<V*>(value)));
     });
 
-    dictionaryTrait.setErase([](void* instance, const void* iterator, bool writeable) {
-        auto* map = static_cast<Map*>(instance);
-        if (writeable)
-        {
-            map->erase(*static_cast<const typename Map::iterator*>(iterator));
-        }
-        else
-        {
-            map->erase(*static_cast<const typename Map::const_iterator*>(iterator));
-        }
+    dictionaryTrait.setErase([](void* instance, const void* iterator) {
+        static_cast<Map*>(instance)->erase(*static_cast<const typename Map::iterator*>(iterator));
     });
 
     return Type::create("std::unordered_map<" + reflect<K>().name() + ", " + reflect<V>().name() + ">")
