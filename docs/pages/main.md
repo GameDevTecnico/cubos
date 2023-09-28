@@ -8,8 +8,8 @@
 **everything is made out of voxels.**
 
 It is [open source](https://github.com/GameDevTecnico/cubos) and free to use
-for any purpose. Written in *C++* and with data-oriented design in mind, its
-goal is to be both performant and highly flexible.
+for any purpose. Written in modern *C++* (20) and with data-oriented design in
+mind, its goal is to be both performant and highly flexible.
 
 ### Getting started
 

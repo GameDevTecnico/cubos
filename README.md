@@ -11,9 +11,9 @@
 **CUBOS. aims to be a simple, but powerful game engine for PC, where**
 **everything is made out of voxels.**
 
-It is open source and free to use for any purpose. Written in *C++* and with
-data-oriented design in mind, its goal is to be both performant and highly
-flexible.
+It is open source and free to use for any purpose. Written in modern *C++* (20)
+and with data-oriented design in mind, its goal is to be both performant and
+highly flexible.
 
 ### Learn more
 
