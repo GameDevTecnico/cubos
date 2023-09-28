@@ -34,6 +34,12 @@ namespace cubos::core::reflection
         /// @brief Used to iterate over the fields on a fields trait.
         class Iterator;
 
+        /// @brief Provides mutable access to an object.
+        class View;
+
+        /// @brief Provides immutable access to an object.
+        class ConstView;
+
         ~FieldsTrait();
 
         /// @brief Constructs.
@@ -75,6 +81,14 @@ namespace cubos::core::reflection
         /// @brief Gets an iterator which represents the end of the field list of a type.
         /// @return Iterator.
         static Iterator end();
+
+        /// @brief Returns a view of the given object instance.
+        /// @param instance Object instance.
+        /// @return Object view.
+        View view(void* instance) const;
+
+        /// @copydoc view(void*) const
+        ConstView view(const void* instance) const;
 
     private:
         Field* mFirstField{nullptr};
@@ -132,6 +146,15 @@ namespace cubos::core::reflection
         /// @return Name of the field.
         const std::string& name() const;
 
+        /// @brief Returns the next field in the linked list.
+        /// @return Pointer to next field or null if this is the last field.
+        const Field* next() const;
+
+    private:
+        friend FieldsTrait;
+        friend View;
+        friend ConstView;
+
         /// @brief Returns the address of the field on a given instance.
         /// @param instance Pointer to the instance.
         /// @return Address of the field on the given instance.
@@ -144,13 +167,6 @@ namespace cubos::core::reflection
 
         /// @copydoc pointerTo(void*)
         const void* pointerTo(const void* instance) const;
-
-        /// @brief Returns the next field in the linked list.
-        /// @return Pointer to next field or null if this is the last field.
-        const Field* next() const;
-
-    private:
-        friend FieldsTrait;
 
         const Type& mType;
         std::string mName;
@@ -190,5 +206,163 @@ namespace cubos::core::reflection
 
     private:
         const Field* mField;
+    };
+
+    class FieldsTrait::View
+    {
+    public:
+        /// @brief Used to iterate over the fields of an object.
+        class Iterator;
+
+        /// @brief Constructs.
+        /// @param trait Trait.
+        /// @param instance Instance.
+        View(const FieldsTrait& trait, void* instance);
+
+        /// @brief Gets a pointer to the value of the given field on the object.
+        /// @param field Field.
+        /// @return Field value.
+        void* get(const Field& field) const;
+
+        /// @brief Gets an iterator to the first field.
+        /// @return Iterator.
+        Iterator begin() const;
+
+        /// @brief Gets an iterator to the field after the last field.
+        /// @return Iterator.
+        Iterator end() const;
+
+    private:
+        const FieldsTrait& mTrait;
+        void* mInstance;
+    };
+
+    class FieldsTrait::ConstView
+    {
+    public:
+        /// @brief Used to iterate over the fields of an object.
+        class Iterator;
+
+        /// @brief Constructs.
+        /// @param trait Trait.
+        /// @param instance Instance.
+        ConstView(const FieldsTrait& trait, const void* instance);
+
+        /// @brief Gets a pointer to the value of the given field on the object.
+        /// @param field Field.
+        /// @return Field value.
+        const void* get(const Field& field) const;
+
+        /// @brief Gets an iterator to the first field.
+        /// @return Iterator.
+        Iterator begin() const;
+
+        /// @brief Gets an iterator to the field after the last field.
+        /// @return Iterator.
+        Iterator end() const;
+
+    private:
+        const FieldsTrait& mTrait;
+        const void* mInstance;
+    };
+
+    class FieldsTrait::View::Iterator
+    {
+    public:
+        /// @brief Output structure for the iterator.
+        struct Output
+        {
+            const Field* field; ///< Field.
+            void* value;        ///< Value.
+        };
+
+        /// @brief Constructs.
+        /// @param view View.
+        /// @param field Field.
+        Iterator(const View& view, const Field* field);
+
+        /// @brief Copy constructs.
+        /// @param other Other iterator.
+        Iterator(const Iterator& other) = default;
+
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to the same field.
+        bool operator==(const Iterator& other) const;
+
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to different fields.
+        bool operator!=(const Iterator& /*other*/) const;
+
+        /// @brief Accesses the field referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Output.
+        const Output& operator*() const;
+
+        /// @brief Accesses the field referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Output.
+        const Output* operator->() const;
+
+        /// @brief Advances the iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
+
+    private:
+        void* mInstance;
+        const Field* mField;
+        mutable Output mOutput;
+    };
+
+    class FieldsTrait::ConstView::Iterator
+    {
+    public:
+        /// @brief Output structure for the iterator.
+        struct Output
+        {
+            const Field* field; ///< Field.
+            const void* value;  ///< Value.
+        };
+
+        /// @brief Constructs.
+        /// @param view View.
+        /// @param field Field.
+        Iterator(const ConstView& view, const Field* field);
+
+        /// @brief Copy constructs.
+        /// @param other Other iterator.
+        Iterator(const Iterator& other) = default;
+
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to the same field.
+        bool operator==(const Iterator& other) const;
+
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to different fields.
+        bool operator!=(const Iterator& /*other*/) const;
+
+        /// @brief Accesses the field referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Output.
+        const Output& operator*() const;
+
+        /// @brief Accesses the field referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Output.
+        const Output* operator->() const;
+
+        /// @brief Advances the iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
+
+    private:
+        const void* mInstance;
+        const Field* mField;
+        mutable Output mOutput;
     };
 } // namespace cubos::core::reflection

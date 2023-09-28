@@ -37,12 +37,13 @@ TEST_CASE("reflection::FieldsTrait")
         const auto* field = fields.field("foo");
         REQUIRE(field != nullptr);
         CHECK(field == &*fields.begin());
+        CHECK(fields.begin() != fields.end());
         CHECK(++fields.begin() == fields.end());
 
         ObjectType object{};
         CHECK(field->name() == "foo");
         CHECK(field->type().is<SimpleType>());
-        CHECK(field->pointerTo(&object) == &object.foo);
+        CHECK(fields.view(&object).get(*field) == &object.foo);
     }
 
     SUBCASE("two fields")
@@ -61,9 +62,9 @@ TEST_CASE("reflection::FieldsTrait")
         ObjectType object{};
         CHECK(fooField->name() == "foo");
         CHECK(fooField->type().is<SimpleType>());
-        CHECK(fooField->pointerTo(&object) == &object.foo);
+        CHECK(fields.view(&object).get(*fooField) == &object.foo);
         CHECK(barField->name() == "bar");
         CHECK(barField->type().is<SimpleType>());
-        CHECK(barField->pointerTo(static_cast<const ObjectType*>(&object)) == &object.bar);
+        CHECK(fields.view(static_cast<const ObjectType*>(&object)).get(*barField) == &object.bar);
     }
 }
