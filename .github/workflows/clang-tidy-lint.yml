@@ -42,7 +42,10 @@ jobs:
 
     - name: Analyze
       run: |
-        run-clang-tidy -j$(nproc) -p=build \
+        run-clang-tidy \
+          -j$(nproc) \
+          -p=build \
+          -format \
           -header-filter="(core|engine)/(src|include)/.*" \
           files "($(git diff -U0 --name-only HEAD^ | paste -s -d\|))" \
           -export-fixes clang-tidy-fixes.yaml || true
