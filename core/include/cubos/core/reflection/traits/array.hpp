@@ -120,6 +120,9 @@ namespace cubos::core::reflection
     class ArrayTrait::View final
     {
     public:
+        /// @brief Used to iterate over the elements of an array.
+        class Iterator;
+
         /// @brief Constructs.
         /// @param trait Trait.
         /// @param instance Instance.
@@ -156,6 +159,14 @@ namespace cubos::core::reflection
         /// @param index Element index.
         void erase(std::size_t index) const;
 
+        /// @brief Gets an iterator to the first element.
+        /// @return Iterator.
+        Iterator begin() const;
+
+        /// @brief Gets an iterator to the element after the last element.
+        /// @return Iterator.
+        Iterator end() const;
+
     private:
         const ArrayTrait& mTrait;
         void* mInstance;
@@ -164,6 +175,9 @@ namespace cubos::core::reflection
     class ArrayTrait::ConstView final
     {
     public:
+        /// @brief Used to iterate over the elements of an array.
+        class Iterator;
+
         /// @brief Constructs.
         /// @param trait Trait.
         /// @param instance Instance.
@@ -178,8 +192,88 @@ namespace cubos::core::reflection
         /// @return Pointer to the element.
         const void* get(std::size_t index) const;
 
+        /// @brief Gets an iterator to the first element.
+        /// @return Iterator.
+        Iterator begin() const;
+
+        /// @brief Gets an iterator to the element after the last element.
+        /// @return Iterator.
+        Iterator end() const;
+
     private:
         const ArrayTrait& mTrait;
         const void* mInstance;
+    };
+
+    class ArrayTrait::View::Iterator final
+    {
+    public:
+        /// @brief Constructs.
+        /// @param view Array view.
+        /// @param index Element index.
+        Iterator(const View& view, std::size_t index);
+
+        /// @brief Copy constructs.
+        /// @param iterator Iterator.
+        Iterator(const Iterator& iterator) = default;
+
+        Iterator& operator=(const Iterator&) = default;
+        bool operator==(const Iterator&) const = default;
+        bool operator!=(const Iterator&) const = default;
+
+        /// @brief Accesses the element referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Element.
+        void* operator*() const;
+
+        /// @brief Accesses the element referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Element.
+        void* operator->() const;
+
+        /// @brief Advances the iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
+
+    private:
+        const View* mView;
+        std::size_t mIndex;
+    };
+
+    class ArrayTrait::ConstView::Iterator final
+    {
+    public:
+        /// @brief Constructs.
+        /// @param view Array view.
+        /// @param index Element index.
+        Iterator(const ConstView& view, std::size_t index);
+
+        /// @brief Copy constructs.
+        /// @param iterator Iterator.
+        Iterator(const Iterator& iterator) = default;
+
+        Iterator& operator=(const Iterator&) = default;
+        bool operator==(const Iterator&) const = default;
+        bool operator!=(const Iterator&) const = default;
+
+        /// @brief Accesses the element referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Element.
+        const void* operator*() const;
+
+        /// @brief Accesses the element referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Element.
+        const void* operator->() const;
+
+        /// @brief Advances the iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
+
+    private:
+        const ConstView* mView;
+        std::size_t mIndex;
     };
 } // namespace cubos::core::reflection

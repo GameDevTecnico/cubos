@@ -111,6 +111,16 @@ void ArrayTrait::View::erase(std::size_t index) const
     mTrait.mErase(mInstance, index);
 }
 
+ArrayTrait::View::Iterator ArrayTrait::View::begin() const
+{
+    return Iterator{*this, 0};
+}
+
+ArrayTrait::View::Iterator ArrayTrait::View::end() const
+{
+    return Iterator{*this, this->length()};
+}
+
 ArrayTrait::ConstView::ConstView(const ArrayTrait& trait, const void* instance)
     : mTrait(trait)
     , mInstance(instance)
@@ -126,4 +136,62 @@ std::size_t ArrayTrait::ConstView::length() const
 const void* ArrayTrait::ConstView::get(std::size_t index) const
 {
     return reinterpret_cast<const void*>(mTrait.mAddressOf(mInstance, index));
+}
+
+ArrayTrait::ConstView::Iterator ArrayTrait::ConstView::begin() const
+{
+    return Iterator{*this, 0};
+}
+
+ArrayTrait::ConstView::Iterator ArrayTrait::ConstView::end() const
+{
+    return Iterator{*this, this->length()};
+}
+
+ArrayTrait::View::Iterator::Iterator(const View& view, std::size_t index)
+    : mView(&view)
+    , mIndex(index)
+{
+}
+
+void* ArrayTrait::View::Iterator::operator*() const
+{
+    CUBOS_ASSERT(mIndex < mView->length(), "Iterator out of bounds");
+    return mView->get(mIndex);
+}
+
+void* ArrayTrait::View::Iterator::operator->() const
+{
+    return this->operator*();
+}
+
+ArrayTrait::View::Iterator& ArrayTrait::View::Iterator::operator++()
+{
+    CUBOS_ASSERT(mIndex < mView->length(), "Iterator out of bounds");
+    ++mIndex;
+    return *this;
+}
+
+ArrayTrait::ConstView::Iterator::Iterator(const ConstView& view, std::size_t index)
+    : mView(&view)
+    , mIndex(index)
+{
+}
+
+const void* ArrayTrait::ConstView::Iterator::operator*() const
+{
+    CUBOS_ASSERT(mIndex < mView->length(), "Iterator out of bounds");
+    return mView->get(mIndex);
+}
+
+const void* ArrayTrait::ConstView::Iterator::operator->() const
+{
+    return this->operator*();
+}
+
+ArrayTrait::ConstView::Iterator& ArrayTrait::ConstView::Iterator::operator++()
+{
+    CUBOS_ASSERT(mIndex < mView->length(), "Iterator out of bounds");
+    ++mIndex;
+    return *this;
 }
