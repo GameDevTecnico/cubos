@@ -20,126 +20,24 @@ namespace cubos::core::reflection
         /// @note We could use std::function and a capturing lambda instead of this interface, but
         /// that would require including the bloated `<functional>` header here, which we want to
         /// avoid.
-        class AddressOf
-        {
-        public:
-            virtual ~AddressOf() = default;
-
-            /// @brief Gets the address of the field on a given instance.
-            /// @param instance Pointer to the instance.
-            /// @return Address of the field on the given instance.
-            virtual uintptr_t get(const void* instance) const = 0;
-        };
+        class AddressOf;
 
         /// @brief Implementation of @ref AddressOf for a pointer to member.
         /// @tparam O Object type.
         /// @tparam F Field type.
         template <typename O, typename F>
-        class AddressOfImpl : public AddressOf
-        {
-        public:
-            /// @brief Constructs.
-            /// @param pointer Pointer to member.
-            AddressOfImpl(F O::*pointer)
-                : mPointer(pointer)
-            {
-            }
-
-            uintptr_t get(const void* instance) const override
-            {
-                return reinterpret_cast<uintptr_t>(&(static_cast<const O*>(instance)->*mPointer));
-            }
-
-        private:
-            F O::*mPointer;
-        };
+        class AddressOfImpl;
 
         /// @brief Describes a field of a reflected type.
-        class Field
-        {
-        public:
-            ~Field();
-
-            /// @brief Constructs using the given address of getter. Will be deleted using
-            /// `delete` and thus must be allocated using `new`.
-            /// @param type Field type.
-            /// @param name Field name.
-            /// @param addressOf Getter for the address of the field on a given instance.
-            Field(const Type& type, std::string name, AddressOf* addressOf);
-
-            /// @brief Returns the type of the field.
-            /// @return Type of the field.
-            const Type& type() const;
-
-            /// @brief Returns the name of the field.
-            /// @return Name of the field.
-            const std::string& name() const;
-
-            /// @brief Returns the address of the field on a given instance.
-            /// @param instance Pointer to the instance.
-            /// @return Address of the field on the given instance.
-            uintptr_t addressOf(const void* instance) const;
-
-            /// @brief Returns a pointer to the field on a given instance.
-            /// @param instance Pointer to the instance.
-            /// @return Pointer to the field on the given instance.
-            void* pointerTo(void* instance) const;
-
-            /// @copydoc pointerTo(void*)
-            const void* pointerTo(const void* instance) const;
-
-            /// @brief Returns the next field in the linked list.
-            /// @return Pointer to next field or null if this is the last field.
-            const Field* next() const;
-
-        private:
-            friend FieldsTrait;
-
-            const Type& mType;
-            std::string mName;
-            AddressOf* mAddressOf;
-            Field* mNext;
-        };
+        class Field;
 
         /// @brief Used to iterate over the fields on a fields trait.
-        class Iterator final
-        {
-        public:
-            /// @brief Constructs.
-            /// @param field Field.
-            Iterator(const Field* field);
-
-            /// @brief Copy constructs.
-            /// @param iterator Iterator.
-            Iterator(const Iterator& iterator) = default;
-
-            Iterator& operator=(const Iterator&) = default;
-            bool operator==(const Iterator&) const = default;
-            bool operator!=(const Iterator&) const = default;
-
-            /// @brief Accesses the field referenced by this iterator.
-            /// @note Aborts if there's no field.
-            /// @return Reference to the field.
-            const Field& operator*() const;
-
-            /// @brief Accesses the field referenced by this iterator.
-            /// @note Aborts if there's no field.
-            /// @return Pointer to the field.
-            const Field* operator->() const;
-
-            /// @brief Advances the iterator.
-            /// @note Aborts if there's no field.
-            /// @return Reference to this.
-            Iterator& operator++();
-
-        private:
-            const Field* mField;
-        };
+        class Iterator;
 
         ~FieldsTrait();
 
         /// @brief Constructs.
-        FieldsTrait();
+        FieldsTrait() = default;
 
         /// @brief Move constructs.
         /// @param other Other trait.
@@ -179,7 +77,118 @@ namespace cubos::core::reflection
         static Iterator end();
 
     private:
-        Field* mFirstField;
-        Field* mLastField;
+        Field* mFirstField{nullptr};
+        Field* mLastField{nullptr};
+    };
+
+    class FieldsTrait::AddressOf
+    {
+    public:
+        virtual ~AddressOf() = default;
+
+        /// @brief Gets the address of the field on a given instance.
+        /// @param instance Pointer to the instance.
+        /// @return Address of the field on the given instance.
+        virtual uintptr_t get(const void* instance) const = 0;
+    };
+
+    template <typename O, typename F>
+    class FieldsTrait::AddressOfImpl final : public AddressOf
+    {
+    public:
+        /// @brief Constructs.
+        /// @param pointer Pointer to member.
+        AddressOfImpl(F O::*pointer)
+            : mPointer(pointer)
+        {
+        }
+
+        uintptr_t get(const void* instance) const override
+        {
+            return reinterpret_cast<uintptr_t>(&(static_cast<const O*>(instance)->*mPointer));
+        }
+
+    private:
+        F O::*mPointer;
+    };
+
+    class FieldsTrait::Field final
+    {
+    public:
+        ~Field();
+
+        /// @brief Constructs using the given address of getter. Will be deleted using
+        /// `delete` and thus must be allocated using `new`.
+        /// @param type Field type.
+        /// @param name Field name.
+        /// @param addressOf Getter for the address of the field on a given instance.
+        Field(const Type& type, std::string name, AddressOf* addressOf);
+
+        /// @brief Returns the type of the field.
+        /// @return Type of the field.
+        const Type& type() const;
+
+        /// @brief Returns the name of the field.
+        /// @return Name of the field.
+        const std::string& name() const;
+
+        /// @brief Returns the address of the field on a given instance.
+        /// @param instance Pointer to the instance.
+        /// @return Address of the field on the given instance.
+        uintptr_t addressOf(const void* instance) const;
+
+        /// @brief Returns a pointer to the field on a given instance.
+        /// @param instance Pointer to the instance.
+        /// @return Pointer to the field on the given instance.
+        void* pointerTo(void* instance) const;
+
+        /// @copydoc pointerTo(void*)
+        const void* pointerTo(const void* instance) const;
+
+        /// @brief Returns the next field in the linked list.
+        /// @return Pointer to next field or null if this is the last field.
+        const Field* next() const;
+
+    private:
+        friend FieldsTrait;
+
+        const Type& mType;
+        std::string mName;
+        AddressOf* mAddressOf;
+        Field* mNext{nullptr};
+    };
+
+    class FieldsTrait::Iterator final
+    {
+    public:
+        /// @brief Constructs.
+        /// @param field Field.
+        Iterator(const Field* field);
+
+        /// @brief Copy constructs.
+        /// @param iterator Iterator.
+        Iterator(const Iterator& iterator) = default;
+
+        Iterator& operator=(const Iterator&) = default;
+        bool operator==(const Iterator&) const = default;
+        bool operator!=(const Iterator&) const = default;
+
+        /// @brief Accesses the field referenced by this iterator.
+        /// @note Aborts if there's no field.
+        /// @return Reference to the field.
+        const Field& operator*() const;
+
+        /// @brief Accesses the field referenced by this iterator.
+        /// @note Aborts if there's no field.
+        /// @return Pointer to the field.
+        const Field* operator->() const;
+
+        /// @brief Advances the iterator.
+        /// @note Aborts if there's no field.
+        /// @return Reference to this.
+        Iterator& operator++();
+
+    private:
+        const Field* mField;
     };
 } // namespace cubos::core::reflection

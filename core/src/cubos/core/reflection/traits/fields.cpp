@@ -12,7 +12,6 @@ FieldsTrait::Field::Field(const Type& type, std::string name, AddressOf* address
     : mType(type)
     , mName(std::move(name))
     , mAddressOf(addressOf)
-    , mNext(nullptr)
 {
     CUBOS_ASSERT(mAddressOf, "addressOf must not be null");
 }
@@ -69,12 +68,6 @@ FieldsTrait::Iterator& FieldsTrait::Iterator::operator++()
     CUBOS_ASSERT(mField, "Iterator does not point to a field");
     mField = mField->next();
     return *this;
-}
-
-FieldsTrait::FieldsTrait()
-    : mFirstField(nullptr)
-    , mLastField(nullptr)
-{
 }
 
 FieldsTrait::FieldsTrait(FieldsTrait&& other) noexcept
