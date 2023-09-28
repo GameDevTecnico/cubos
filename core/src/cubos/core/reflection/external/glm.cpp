@@ -33,22 +33,22 @@ private:
 #define AUTO_CONSTRUCTIBLE(type)                                                                                       \
     ConstructibleTrait::typed<type>().withDefaultConstructor().withCopyConstructor().withMoveConstructor().build()
 
-#define AUTO_VEC2(type) FieldsTrait().withField("0", &type::x).withField("1", &type::y)
+#define AUTO_VEC2(type) FieldsTrait().withField("x", &type::x).withField("y", &type::y)
 
-#define AUTO_VEC3(type) AUTO_VEC2(type).withField("2", &type::z)
+#define AUTO_VEC3(type) AUTO_VEC2(type).withField("z", &type::z)
 
-#define AUTO_VEC4(type) AUTO_VEC3(type).withField("3", &type::w)
+#define AUTO_VEC4(type) AUTO_VEC3(type).withField("w", &type::w)
 
 #define AUTO_MAT2(type, column_type)                                                                                   \
     FieldsTrait()                                                                                                      \
-        .withField(reflect<column_type>(), "0", new AddressOfImpl<type>(0))                                            \
-        .withField(reflect<column_type>(), "1", new AddressOfImpl<type>(1))
+        .withField(reflect<column_type>(), "a", new AddressOfImpl<type>(0))                                            \
+        .withField(reflect<column_type>(), "b", new AddressOfImpl<type>(1))
 
 #define AUTO_MAT3(type, column_type)                                                                                   \
-    AUTO_MAT2(type, column_type).withField(reflect<column_type>(), "2", new AddressOfImpl<type>(2))
+    AUTO_MAT2(type, column_type).withField(reflect<column_type>(), "c", new AddressOfImpl<type>(2))
 
 #define AUTO_MAT4(type, column_type)                                                                                   \
-    AUTO_MAT3(type, column_type).withField(reflect<column_type>(), "3", new AddressOfImpl<type>(3))
+    AUTO_MAT3(type, column_type).withField(reflect<column_type>(), "d", new AddressOfImpl<type>(3))
 
 #define AUTO_IMPL(type, name, auto_trait)                                                                              \
     CUBOS_REFLECT_EXTERNAL_IMPL(type)                                                                                  \
