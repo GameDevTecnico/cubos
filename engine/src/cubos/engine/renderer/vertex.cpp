@@ -5,7 +5,7 @@
 
 using namespace cubos::engine;
 
-void cubos::core::data::serialize(Serializer& serializer, const Vertex& vertex, const char* name)
+void cubos::core::data::serialize(Serializer& serializer, const VoxelVertex& vertex, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(vertex.position, "position");
@@ -14,7 +14,7 @@ void cubos::core::data::serialize(Serializer& serializer, const Vertex& vertex, 
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, Vertex& vertex)
+void cubos::core::data::deserialize(Deserializer& deserializer, VoxelVertex& vertex)
 {
     deserializer.beginObject();
     deserializer.read(vertex.position);
@@ -23,7 +23,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, Vertex& vertex)
     deserializer.endObject();
 }
 
-void cubos::engine::triangulate(const VoxelGrid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
+void cubos::engine::triangulate(const VoxelGrid& grid, std::vector<VoxelVertex>& vertices, std::vector<uint32_t>& indices)
 {
     std::vector<uint16_t> mask;
 

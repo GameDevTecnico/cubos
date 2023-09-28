@@ -511,7 +511,7 @@ cubos::engine::RendererGrid DeferredRenderer::upload(const VoxelGrid& grid)
     // First, triangulate the grid.
     // This may be improved in the future by doing it in a separate thread and only blocking on it when the grid needs
     // to be drawn.
-    std::vector<Vertex> vertices;
+    std::vector<VoxelVertex> vertices;
     std::vector<uint32_t> indices;
     triangulate(grid, vertices, indices);
 
@@ -522,22 +522,22 @@ cubos::engine::RendererGrid DeferredRenderer::upload(const VoxelGrid& grid)
     vaDesc.elements[0].type = Type::UInt;
     vaDesc.elements[0].size = 3;
     vaDesc.elements[0].buffer.index = 0;
-    vaDesc.elements[0].buffer.offset = offsetof(Vertex, position);
-    vaDesc.elements[0].buffer.stride = sizeof(Vertex);
+    vaDesc.elements[0].buffer.offset = offsetof(VoxelVertexertexertex, position);
+    vaDesc.elements[0].buffer.stride = sizeof(VoxelVertexertex);
     vaDesc.elements[1].name = "normal";
     vaDesc.elements[1].type = Type::Float;
     vaDesc.elements[1].size = 3;
     vaDesc.elements[1].buffer.index = 0;
-    vaDesc.elements[1].buffer.offset = offsetof(Vertex, normal);
-    vaDesc.elements[1].buffer.stride = sizeof(Vertex);
+    vaDesc.elements[1].buffer.offset = offsetof(VoxelVertex, normal);
+    vaDesc.elements[1].buffer.stride = sizeof(VoxelVertex);
     vaDesc.elements[2].name = "material";
     vaDesc.elements[2].type = Type::UShort;
     vaDesc.elements[2].size = 1;
     vaDesc.elements[2].buffer.index = 0;
-    vaDesc.elements[2].buffer.offset = offsetof(Vertex, material);
-    vaDesc.elements[2].buffer.stride = sizeof(Vertex);
+    vaDesc.elements[2].buffer.offset = offsetof(VoxelVertex, material);
+    vaDesc.elements[2].buffer.stride = sizeof(VoxelVertex);
     vaDesc.buffers[0] =
-        mRenderDevice.createVertexBuffer(vertices.size() * sizeof(Vertex), vertices.data(), Usage::Static);
+        mRenderDevice.createVertexBuffer(vertices.size() * sizeof(VoxelVertex), vertices.data(), Usage::Static);
     vaDesc.shaderPipeline = mGeometryPipeline;
     deferredGrid->va = mRenderDevice.createVertexArray(vaDesc);
     deferredGrid->ib = mRenderDevice.createIndexBuffer(indices.size() * sizeof(uint32_t), indices.data(),
