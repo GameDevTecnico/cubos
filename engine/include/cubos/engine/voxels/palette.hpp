@@ -1,5 +1,5 @@
 /// @file
-/// @brief Class @ref cubos::engine::Palette.
+/// @brief Class @ref cubos::engine::VoxelPalette.
 /// @ingroup voxels-plugin
 
 #pragma once
@@ -10,13 +10,13 @@
 
 namespace cubos::engine
 {
-    class Palette;
+    class VoxelPalette;
 }
 
 namespace cubos::core::data
 {
-    void serialize(Serializer& serializer, const engine::Palette& palette, const char* name);
-    void deserialize(Deserializer& deserializer, engine::Palette& palette);
+    void serialize(Serializer& serializer, const engine::VoxelPalette& palette, const char* name);
+    void deserialize(Deserializer& deserializer, engine::VoxelPalette& palette);
 } // namespace cubos::core::data
 
 namespace cubos::engine
@@ -32,17 +32,17 @@ namespace cubos::engine
     /// integer.
     ///
     /// @ingroup voxels-plugin
-    class Palette final
+    class VoxelPalette final
     {
     public:
-        ~Palette() = default;
+        ~VoxelPalette() = default;
 
         /// @brief Constructs a palette with the given materials.
         /// @param materials Materials to add to the palette.
-        Palette(std::vector<Material>&& materials);
+        VoxelPalette(std::vector<Material>&& materials);
 
         /// @brief Constructs an empty palette.
-        Palette() = default;
+        VoxelPalette() = default;
 
         /// @brief Gets a pointer to the array of materials on the palette.
         /// @note The first element in the array corresponds to index 1, as index 0 is reserved.
@@ -81,12 +81,12 @@ namespace cubos::engine
         /// overwritten.
         /// @param palette Palette to merge.
         /// @param similarity Minimum similarity for two materials to be merged.
-        void merge(const Palette& palette, float similarity = 1.0F);
+        void merge(const VoxelPalette& palette, float similarity = 1.0F);
 
     private:
-        friend void core::data::serialize(core::data::Serializer& /*serializer*/, const Palette& /*palette*/,
+        friend void core::data::serialize(core::data::Serializer& /*serializer*/, const VoxelPalette& /*palette*/,
                                           const char* /*name*/);
-        friend void core::data::deserialize(core::data::Deserializer& /*deserializer*/, Palette& /*palette*/);
+        friend void core::data::deserialize(core::data::Deserializer& /*deserializer*/, VoxelPalette& /*palette*/);
 
         std::vector<Material> mMaterials; ///< Materials in the palette.
     };

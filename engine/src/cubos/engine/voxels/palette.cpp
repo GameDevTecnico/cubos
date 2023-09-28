@@ -6,22 +6,22 @@
 
 using namespace cubos::engine;
 
-Palette::Palette(std::vector<Material>&& materials)
+VoxelPalette::VoxelPalette(std::vector<Material>&& materials)
     : mMaterials(std::move(materials))
 {
 }
 
-const Material* Palette::data() const
+const Material* VoxelPalette::data() const
 {
     return mMaterials.data();
 }
 
-uint16_t Palette::size() const
+uint16_t VoxelPalette::size() const
 {
     return static_cast<uint16_t>(mMaterials.size());
 }
 
-const Material& Palette::get(uint16_t index) const
+const Material& VoxelPalette::get(uint16_t index) const
 {
     if (index == 0 || index > static_cast<uint16_t>(mMaterials.size()))
     {
@@ -30,7 +30,7 @@ const Material& Palette::get(uint16_t index) const
     return mMaterials[index - 1];
 }
 
-void Palette::set(uint16_t index, const Material& material)
+void VoxelPalette::set(uint16_t index, const Material& material)
 {
     if (index == 0)
     {
@@ -45,7 +45,7 @@ void Palette::set(uint16_t index, const Material& material)
     mMaterials[index - 1] = material;
 }
 
-uint16_t Palette::find(const Material& material) const
+uint16_t VoxelPalette::find(const Material& material) const
 {
     uint16_t bestI = 0;
     float bestS = material.similarity(Material::Empty);
@@ -63,7 +63,7 @@ uint16_t Palette::find(const Material& material) const
     return bestI;
 }
 
-uint16_t Palette::add(const Material& material, float similarity)
+uint16_t VoxelPalette::add(const Material& material, float similarity)
 {
     auto i = this->find(material);
     if (this->get(i).similarity(material) >= similarity)
@@ -90,7 +90,7 @@ uint16_t Palette::add(const Material& material, float similarity)
     return this->size();
 }
 
-void Palette::merge(const Palette& palette, float similarity)
+void VoxelPalette::merge(const VoxelPalette& palette, float similarity)
 {
     for (uint16_t i = 0; i < palette.size(); ++i)
     {
@@ -98,7 +98,7 @@ void Palette::merge(const Palette& palette, float similarity)
     }
 }
 
-void cubos::core::data::serialize(Serializer& serializer, const Palette& palette, const char* name)
+void cubos::core::data::serialize(Serializer& serializer, const VoxelPalette& palette, const char* name)
 {
     // Count non-empty materials.
     std::size_t count = 0;
@@ -122,7 +122,7 @@ void cubos::core::data::serialize(Serializer& serializer, const Palette& palette
     serializer.endDictionary();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, Palette& palette)
+void cubos::core::data::deserialize(Deserializer& deserializer, VoxelPalette& palette)
 {
     palette.mMaterials.clear();
 

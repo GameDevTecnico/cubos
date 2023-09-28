@@ -78,7 +78,7 @@ namespace cubos::engine
 
         /// @brief Sets the current palette of the renderer.
         /// @param palette Palette to set.
-        virtual void setPalette(const Palette& palette) = 0;
+        virtual void setPalette(const VoxelPalette& palette) = 0;
 
         /// @brief Resizes the renderer's framebuffers.
         /// @param size New size of the window.

@@ -12,7 +12,7 @@ using namespace cubos::engine;
 
 /// [Get handles to assets]
 static const Asset<VoxelGrid> CarAsset = AnyAsset("059c16e7-a439-44c7-9bdc-6e069dba0c75");
-static const Asset<Palette> PaletteAsset = AnyAsset("1aa5e234-28cb-4386-99b4-39386b0fc215");
+static const Asset<VoxelPalette> PaletteAsset = AnyAsset("1aa5e234-28cb-4386-99b4-39386b0fc215");
 /// [Get handles to assets]
 
 static void settingsSystem(Write<Settings> settings)

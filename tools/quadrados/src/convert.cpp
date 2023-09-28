@@ -37,7 +37,7 @@ struct ConvertOptions
 struct QBMatrix
 {
     VoxelGrid grid;           ///< Grid of the matrix.
-    Palette palette;     ///< Palette of the matrix.
+    VoxelPalette palette;     ///< VoxelPalette of the matrix.
     glm::ivec3 position; ///< Position of the matrix.
 };
 
@@ -320,7 +320,7 @@ bool parseQB(std::vector<QBMatrix>& matrices, memory::Stream& stream)
 /// Tries to load the palette from the given path.
 /// @param path The path of the palette.
 /// @param palette The palette to fill.
-static bool loadPalette(const fs::path& path, Palette& palette)
+static bool loadPalette(const fs::path& path, VoxelPalette& palette)
 {
     auto* file = fopen(path.string().c_str(), "rb");
     if (file == nullptr)
@@ -358,7 +358,7 @@ static bool loadQB(const fs::path& path, std::vector<QBMatrix>& model)
 /// Saves the given palette to the given path.
 /// @param path The path of the palette.
 /// @param palette The palette to save.
-static bool savePalette(const fs::path& path, const Palette& palette)
+static bool savePalette(const fs::path& path, const VoxelPalette& palette)
 {
     auto* file = fopen(path.string().c_str(), "wb");
     if (file == nullptr)
@@ -407,7 +407,7 @@ static bool saveGrid(const fs::path& path, const VoxelGrid& grid)
 static bool convert(const ConvertOptions& options)
 {
     // First, load the palette.
-    Palette palette;
+    VoxelPalette palette;
     if (!options.palette.empty())
     {
         if (!loadPalette(options.palette, palette))

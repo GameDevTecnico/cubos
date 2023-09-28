@@ -17,7 +17,7 @@ namespace cubos::engine
     ///
     /// ## Bridges
     /// - @ref BinaryBridge - registered with the `.grd` extension, loads @ref VoxelGrid assets.
-    /// - @ref BinaryBridge - registered with the `.pal` extension, loads @ref Palette assets.
+    /// - @ref BinaryBridge - registered with the `.pal` extension, loads @ref VoxelPalette assets.
     ///
     /// ## Dependencies
     /// - @ref assets-plugin
