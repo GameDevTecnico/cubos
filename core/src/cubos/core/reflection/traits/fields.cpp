@@ -190,7 +190,7 @@ const void* FieldsTrait::ConstView::get(const Field& field) const
 
 const void* FieldsTrait::ConstView::get(const std::string& name) const
 {
-    const auto* field = mTrait.field(name);
+    auto field = mTrait.field(name);
 
     if (field == nullptr)
     {
