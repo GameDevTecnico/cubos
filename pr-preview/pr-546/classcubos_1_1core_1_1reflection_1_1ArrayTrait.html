@@ -122,50 +122,6 @@
             </dt>
             <dd>Sets the erase operation to the trait.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#afe2c753d70fc445f2242b381b431a5b5" class="m-doc">elementType</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
-            </dt>
-            <dd>Returns the element type of the array.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9d5941fdf712c14c30035460d0e46d23" class="m-doc">view</a>(</span><span class="m-doc-wrap">void* instance) const -&gt; View</span>
-            </dt>
-            <dd>Returns a view of the given array instance.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3f28f5344cba809e1f75a6eb47725ae2" class="m-doc">length</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; std::size_t</span>
-            </dt>
-            <dd>Returns the length of the given array.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a62354078bef98e9cd90e2f4e245c2587" class="m-doc">get</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index) const -&gt; void*</span>
-            </dt>
-            <dd>Gets a pointer to the element with the given index on the given array.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aca5ef0bc404c6f590c4a4e4964bfc62b" class="m-doc">get</a>(</span><span class="m-doc-wrap">const void* instance,
-              std::size_t index) const -&gt; const void*</span>
-            </dt>
-            <dd>Gets a pointer to the element with the given index on the given array.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a710425d90ed962eadce5cbd167ff5b8d" class="m-doc">insertDefault</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index) const -&gt; bool</span>
-            </dt>
-            <dd>Inserts a default-constructed element into the array.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4cde3fe580dcaf8670ee947ef7d5d3c3" class="m-doc">insertCopy</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index,
-              const void* value) const -&gt; bool</span>
-            </dt>
-            <dd>Inserts a copy-constructed element into the array.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad4e214c9f3345036ed20673d75f99472" class="m-doc">insertMove</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index,
-              void* value) const -&gt; bool</span>
-            </dt>
-            <dd>Inserts a move-constructed element into the array.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aeea03b9860a783bbcfd0ca44d40321e6" class="m-doc">erase</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index) const -&gt; bool</span>
-            </dt>
-            <dd>Removes an element of the array.</dd>
-            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a3a50682a0490483af8a22229599df9f8" class="m-doc">hasInsertDefault</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Checks if default-construct insert is supported.</dd>
@@ -181,6 +137,18 @@
               <span class="m-doc-wrap-bumper">auto <a href="#ab5a00f300110912cd1395bad6bdb1c16" class="m-doc">hasErase</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Checks if erase is supported.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afe2c753d70fc445f2242b381b431a5b5" class="m-doc">elementType</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
+            </dt>
+            <dd>Returns the element type of the array.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9d5941fdf712c14c30035460d0e46d23" class="m-doc">view</a>(</span><span class="m-doc-wrap">void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait_1_1View.html" class="m-doc">View</a></span>
+            </dt>
+            <dd>Returns a view of the given array instance.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7f99dbe43ac7ea704697b9b7e2b61c4d" class="m-doc">view</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait_1_1ConstView.html" class="m-doc">ConstView</a></span>
+            </dt>
+            <dd>Returns a view of the given array instance.</dd>
           </dl>
         </section>
         <section>
@@ -280,244 +248,6 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="afe2c753d70fc445f2242b381b431a5b5"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afe2c753d70fc445f2242b381b431a5b5" class="m-doc-self">elementType</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Returns the element type of the array.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Element type.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a9d5941fdf712c14c30035460d0e46d23"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">View cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d5941fdf712c14c30035460d0e46d23" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
-            </h3>
-            <p>Returns a view of the given array instance.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Array instance.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Array view.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a3f28f5344cba809e1f75a6eb47725ae2"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3f28f5344cba809e1f75a6eb47725ae2" class="m-doc-self">length</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
-            </h3>
-            <p>Returns the length of the given array.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Pointer to the array instance.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Array length.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a62354078bef98e9cd90e2f4e245c2587"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a62354078bef98e9cd90e2f4e245c2587" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index) const</span></span>
-            </h3>
-            <p>Gets a pointer to the element with the given index on the given array.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Pointer to the array instance.</td>
-                </tr>
-                <tr>
-                  <td>index</td>
-                  <td>Element index.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Pointer to the element.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aca5ef0bc404c6f590c4a4e4964bfc62b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aca5ef0bc404c6f590c4a4e4964bfc62b" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">const void* instance,
-              std::size_t index) const</span></span>
-            </h3>
-            <p>Gets a pointer to the element with the given index on the given array.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Pointer to the array instance.</td>
-                </tr>
-                <tr>
-                  <td>index</td>
-                  <td>Element index.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Pointer to the element.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a710425d90ed962eadce5cbd167ff5b8d"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a710425d90ed962eadce5cbd167ff5b8d" class="m-doc-self">insertDefault</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index) const</span></span>
-            </h3>
-            <p>Inserts a default-constructed element into the array.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Pointer to the array instance.</td>
-                </tr>
-                <tr>
-                  <td>index</td>
-                  <td>Element index.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether the operation is supported.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a4cde3fe580dcaf8670ee947ef7d5d3c3"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4cde3fe580dcaf8670ee947ef7d5d3c3" class="m-doc-self">insertCopy</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index,
-              const void* value) const</span></span>
-            </h3>
-            <p>Inserts a copy-constructed element into the array.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Pointer to the array instance.</td>
-                </tr>
-                <tr>
-                  <td>index</td>
-                  <td>Element index.</td>
-                </tr>
-                <tr>
-                  <td>value</td>
-                  <td>Value.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether the operation is supported.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ad4e214c9f3345036ed20673d75f99472"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad4e214c9f3345036ed20673d75f99472" class="m-doc-self">insertMove</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index,
-              void* value) const</span></span>
-            </h3>
-            <p>Inserts a move-constructed element into the array.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Pointer to the array instance.</td>
-                </tr>
-                <tr>
-                  <td>index</td>
-                  <td>Element index.</td>
-                </tr>
-                <tr>
-                  <td>value</td>
-                  <td>Value.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether the operation is supported.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="aeea03b9860a783bbcfd0ca44d40321e6"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeea03b9860a783bbcfd0ca44d40321e6" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">void* instance,
-              std::size_t index) const</span></span>
-            </h3>
-            <p>Removes an element of the array.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Pointer to the array instance.</td>
-                </tr>
-                <tr>
-                  <td>index</td>
-                  <td>Element index.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Whether the operation is supported.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
           <section class="m-doc-details" id="a3a50682a0490483af8a22229599df9f8"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3a50682a0490483af8a22229599df9f8" class="m-doc-self">hasInsertDefault</a>(</span><span class="m-doc-wrap">) const</span></span>
@@ -570,6 +300,66 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Whether the operation is supported.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afe2c753d70fc445f2242b381b431a5b5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afe2c753d70fc445f2242b381b431a5b5" class="m-doc-self">elementType</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the element type of the array.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Element type.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9d5941fdf712c14c30035460d0e46d23"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait_1_1View.html" class="m-doc">View</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d5941fdf712c14c30035460d0e46d23" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
+            </h3>
+            <p>Returns a view of the given array instance.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">instance</td>
+                  <td>Array instance.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Array view.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7f99dbe43ac7ea704697b9b7e2b61c4d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait_1_1ConstView.html" class="m-doc">ConstView</a> cubos::<wbr />core::<wbr />reflection::<wbr />ArrayTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f99dbe43ac7ea704697b9b7e2b61c4d" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
+            </h3>
+            <p>Returns a view of the given array instance.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">instance</td>
+                  <td>Array instance.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Array view.</td>
                 </tr>
               </tfoot>
             </table>
