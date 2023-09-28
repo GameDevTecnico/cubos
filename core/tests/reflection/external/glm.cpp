@@ -118,24 +118,34 @@ static void testQuat(const char* name, glm::tquat<T, Q> quat)
     CHECK(&*++(++fields.begin()) == fields.field("z"));
     CHECK(&*++(++(++fields.begin())) == fields.field("w"));
 
+    auto view = fields.view(&quat);
+
     // Check if the fields have the correct type.
-    glm::length_t i = 0;
-    for (auto [field, data] : fields.view(&quat))
+    for (const auto& field : fields)
     {
-        REQUIRE(field->type().template is<T>());
-        CHECK(*static_cast<T*>(data) == quat[i]);
-        i += 1;
+        REQUIRE(field.type().template is<T>());
     }
 
-    // Check if the fields are set correctly.
-    i = 0;
-    for (auto [field, data] : fields.view(&quat))
-    {
-        quat = {};
-        *static_cast<T*>(data) = static_cast<T>(1);
-        CHECK(quat[i] == static_cast<T>(1));
-        i += 1;
-    }
+    CHECK(*static_cast<T*>(view.get(*fields.field("x"))) == quat.x);
+    CHECK(*static_cast<T*>(view.get(*fields.field("y"))) == quat.y);
+    CHECK(*static_cast<T*>(view.get(*fields.field("z"))) == quat.z);
+    CHECK(*static_cast<T*>(view.get(*fields.field("w"))) == quat.w);
+
+    quat = {};
+    *static_cast<T*>(view.get(*fields.field("x"))) = static_cast<T>(1);
+    CHECK(quat.x == static_cast<T>(1));
+
+    quat = {};
+    *static_cast<T*>(view.get(*fields.field("y"))) = static_cast<T>(1);
+    CHECK(quat.y == static_cast<T>(1));
+
+    quat = {};
+    *static_cast<T*>(view.get(*fields.field("z"))) = static_cast<T>(1);
+    CHECK(quat.z == static_cast<T>(1));
+
+    quat = {};
+    *static_cast<T*>(view.get(*fields.field("w"))) = static_cast<T>(1);
+    CHECK(quat.w == static_cast<T>(1));
 }
 
 TEST_CASE("reflection::reflect<(glm)>()")
@@ -168,6 +178,6 @@ TEST_CASE("reflection::reflect<(glm)>()")
     testVec("glm::dvec4", glm::dvec4{1.2, 3.4, 5.6, 7.8});
     testVec("glm::ivec4", glm::ivec4{4, 3, 2, 1});
 
-    testQuat("glm::quat", glm::quat{0.1F, 0.05F, 0.025F, 0.0125F});
-    testQuat("glm::dquat", glm::dquat{1.0, 0.5, 0.25, 0.125});
+    testQuat("glm::quat", glm::quat(0.1F, 0.05F, 0.025F, 0.0125F));
+    testQuat("glm::dquat", glm::dquat(1.0, 0.5, 0.25, 0.125));
 }
