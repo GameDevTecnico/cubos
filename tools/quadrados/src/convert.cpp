@@ -295,7 +295,7 @@ bool parseQB(std::vector<QBMatrix>& matrices, memory::Stream& stream)
                             }
 
                             // Add the material to the palette.
-                            Material desc;
+                            VoxelMaterial desc;
                             desc.color = colorVec;
                             matrices[i].palette.set(static_cast<uint16_t>(mat), desc);
                             nextMat += 1;

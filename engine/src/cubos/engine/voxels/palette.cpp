@@ -6,12 +6,12 @@
 
 using namespace cubos::engine;
 
-VoxelPalette::VoxelPalette(std::vector<Material>&& materials)
+VoxelPalette::VoxelPalette(std::vector<VoxelMaterial>&& materials)
     : mMaterials(std::move(materials))
 {
 }
 
-const Material* VoxelPalette::data() const
+const VoxelMaterial* VoxelPalette::data() const
 {
     return mMaterials.data();
 }
@@ -21,16 +21,16 @@ uint16_t VoxelPalette::size() const
     return static_cast<uint16_t>(mMaterials.size());
 }
 
-const Material& VoxelPalette::get(uint16_t index) const
+const VoxelMaterial& VoxelPalette::get(uint16_t index) const
 {
     if (index == 0 || index > static_cast<uint16_t>(mMaterials.size()))
     {
-        return Material::Empty;
+        return VoxelMaterial::Empty;
     }
     return mMaterials[index - 1];
 }
 
-void VoxelPalette::set(uint16_t index, const Material& material)
+void VoxelPalette::set(uint16_t index, const VoxelMaterial& material)
 {
     if (index == 0)
     {
@@ -39,16 +39,16 @@ void VoxelPalette::set(uint16_t index, const Material& material)
     }
     if (index > static_cast<uint16_t>(mMaterials.size()))
     {
-        mMaterials.resize(index, Material::Empty);
+        mMaterials.resize(index, VoxelMaterial::Empty);
     }
 
     mMaterials[index - 1] = material;
 }
 
-uint16_t VoxelPalette::find(const Material& material) const
+uint16_t VoxelPalette::find(const VoxelMaterial& material) const
 {
     uint16_t bestI = 0;
-    float bestS = material.similarity(Material::Empty);
+    float bestS = material.similarity(VoxelMaterial::Empty);
 
     for (uint16_t i = 0; i < this->size(); ++i)
     {
@@ -63,7 +63,7 @@ uint16_t VoxelPalette::find(const Material& material) const
     return bestI;
 }
 
-uint16_t VoxelPalette::add(const Material& material, float similarity)
+uint16_t VoxelPalette::add(const VoxelMaterial& material, float similarity)
 {
     auto i = this->find(material);
     if (this->get(i).similarity(material) >= similarity)
@@ -73,7 +73,7 @@ uint16_t VoxelPalette::add(const Material& material, float similarity)
 
     for (uint16_t i = 0; i < this->size(); ++i)
     {
-        if (this->get(i + 1).similarity(Material::Empty) >= 1.0F)
+        if (this->get(i + 1).similarity(VoxelMaterial::Empty) >= 1.0F)
         {
             this->set(i + 1, material);
             return i + 1;
@@ -104,7 +104,7 @@ void cubos::core::data::serialize(Serializer& serializer, const VoxelPalette& pa
     std::size_t count = 0;
     for (const auto& material : palette.mMaterials)
     {
-        if (material.similarity(Material::Empty) < 1.0F)
+        if (material.similarity(VoxelMaterial::Empty) < 1.0F)
         {
             count++;
         }
@@ -113,7 +113,7 @@ void cubos::core::data::serialize(Serializer& serializer, const VoxelPalette& pa
     serializer.beginDictionary(count, name);
     for (uint16_t i = 0; i < static_cast<uint16_t>(palette.mMaterials.size()); i++)
     {
-        if (palette.mMaterials[i].similarity(Material::Empty) < 1.0F)
+        if (palette.mMaterials[i].similarity(VoxelMaterial::Empty) < 1.0F)
         {
             serializer.write<uint16_t>(i + 1, nullptr);
             serializer.write(palette.mMaterials[i], nullptr);
@@ -126,7 +126,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, VoxelPalette& pa
 {
     palette.mMaterials.clear();
 
-    Material mat;
+    VoxelMaterial mat;
     uint16_t index;
 
     std::size_t count = deserializer.beginDictionary();
@@ -142,7 +142,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, VoxelPalette& pa
         }
         if (index > palette.mMaterials.size())
         {
-            palette.mMaterials.resize(index, Material::Empty);
+            palette.mMaterials.resize(index, VoxelMaterial::Empty);
         }
         palette.mMaterials[index - 1] = mat;
     }

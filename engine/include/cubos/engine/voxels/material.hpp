@@ -1,5 +1,5 @@
 /// @file
-/// @brief Class @ref cubos::engine::Material.
+/// @brief Class @ref cubos::engine::VoxelMaterial.
 /// @ingroup voxels-plugin
 
 #pragma once
@@ -13,9 +13,9 @@ namespace cubos::engine
 {
     /// @brief Describes a voxel material.
     /// @ingroup voxels-plugin
-    struct Material
+    struct VoxelMaterial
     {
-        static const Material Empty; ///< Empty material, used for voxels with index 0.
+        static const VoxelMaterial Empty; ///< Empty material, used for voxels with index 0.
 
         glm::vec4 color; ///< Color of the material.
 
@@ -27,12 +27,12 @@ namespace cubos::engine
         ///
         /// @param other Other material to compare with.
         /// @return Similarity between the two materials.
-        float similarity(const Material& other) const;
+        float similarity(const VoxelMaterial& other) const;
     };
 } // namespace cubos::engine
 
 namespace cubos::core::data
 {
-    void serialize(Serializer& serializer, const engine::Material& mat, const char* name);
-    void deserialize(Deserializer& deserializer, engine::Material& mat);
+    void serialize(Serializer& serializer, const engine::VoxelMaterial& mat, const char* name);
+    void deserialize(Deserializer& deserializer, engine::VoxelMaterial& mat);
 } // namespace cubos::core::data
