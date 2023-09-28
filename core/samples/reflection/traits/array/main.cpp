@@ -13,7 +13,8 @@ void printArray(const Type& type, const void* instance)
     /// [Printing any array]
 
     /// [Getting array length and type]
-    CUBOS_INFO("Array with {} elements of type {}", arrayTrait.length(instance), arrayTrait.elementType().name());
+    auto arrayView = arrayTrait.view(instance);
+    CUBOS_INFO("Array with {} elements of type {}", arrayView.length(), arrayTrait.elementType().name());
     /// [Getting array length and type]
 
     /// [Getting array elements]
@@ -23,9 +24,9 @@ void printArray(const Type& type, const void* instance)
         return;
     }
 
-    for (std::size_t i = 0; i < arrayTrait.length(instance); ++i)
+    for (std::size_t i = 0; i < arrayView.length(); ++i)
     {
-        CUBOS_INFO("Element {}: {}", i, *static_cast<const int*>(arrayTrait.get(instance, i)));
+        CUBOS_INFO("Element {}: {}", i, *static_cast<const int*>(arrayView.get(i)));
     }
 }
 /// [Getting array elements]
