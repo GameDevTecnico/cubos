@@ -11,7 +11,7 @@
 
 namespace cubos::engine
 {
-    class Grid;
+    class VoxelGrid;
 
     /// @brief Represents a voxel vertex.
     /// @ingroup renderer-plugin
@@ -27,7 +27,7 @@ namespace cubos::engine
     /// @param vertices Vertices of the mesh.
     /// @param indices Indices of the mesh.
     /// @ingroup renderer-plugin
-    void triangulate(const Grid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
+    void triangulate(const VoxelGrid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
 } // namespace cubos::engine
 
 namespace cubos::core::data

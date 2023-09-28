@@ -1,5 +1,5 @@
 /// @file
-/// @brief Class @ref cubos::engine::Grid.
+/// @brief Class @ref cubos::engine::VoxelGrid.
 /// @ingroup voxels-plugin
 
 #pragma once
@@ -14,13 +14,13 @@
 namespace cubos::engine
 {
     class Palette;
-    class Grid;
+    class VoxelGrid;
 } // namespace cubos::engine
 
 namespace cubos::core::data
 {
-    void serialize(Serializer& serializer, const engine::Grid& grid, const char* name);
-    void deserialize(Deserializer& deserializer, engine::Grid& grid);
+    void serialize(Serializer& serializer, const engine::VoxelGrid& grid, const char* name);
+    void deserialize(Deserializer& deserializer, engine::VoxelGrid& grid);
 } // namespace cubos::core::data
 
 namespace cubos::engine
@@ -28,33 +28,33 @@ namespace cubos::engine
     /// @brief Represents a voxel object using a 3D grid.
     /// @see Each voxel stores a material index to be used with a @ref Palette.
     /// @ingroup voxels-plugin
-    class Grid final
+    class VoxelGrid final
     {
     public:
-        ~Grid() = default;
+        ~VoxelGrid() = default;
 
         /// @brief Constructs an empty single-voxel grid.
-        Grid();
+        VoxelGrid();
 
         /// @brief Constructs an empty grid with the given size.
         /// @param size Size of the grid.
-        Grid(const glm::uvec3& size);
+        VoxelGrid(const glm::uvec3& size);
 
         /// @brief Constructs a grid with the given size and initial data.
         /// @note The voxel data is stored in a flat array. The index of a voxel at position `(x, y, z)` is
         /// `x + y * size.x + z * size.x * size.y`.
         /// @param size Size of the grid.
         /// @param indices Material indices of the voxels.
-        Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices);
+        VoxelGrid(const glm::uvec3& size, const std::vector<uint16_t>& indices);
 
         /// @brief Move constructs.
         /// @param other Other grid.
-        Grid(Grid&& other) noexcept;
+        VoxelGrid(VoxelGrid&& other) noexcept;
 
         /// @brief Makes this grid a copy of another grid.
         /// @param rhs Other grid.
         /// @return This grid, for chaining.
-        Grid& operator=(const Grid& rhs);
+        VoxelGrid& operator=(const VoxelGrid& rhs);
 
         /// @brief Resizes the grid. New voxels are initialized to 0.
         /// @param size New size of the grid.
@@ -89,9 +89,9 @@ namespace cubos::engine
         bool convert(const Palette& src, const Palette& dst, float minSimilarity);
 
     private:
-        friend void core::data::serialize(core::data::Serializer& /*serializer*/, const Grid& /*grid*/,
+        friend void core::data::serialize(core::data::Serializer& /*serializer*/, const VoxelGrid& /*grid*/,
                                           const char* /*name*/);
-        friend void core::data::deserialize(core::data::Deserializer& /*deserializer*/, Grid& /*grid*/);
+        friend void core::data::deserialize(core::data::Deserializer& /*deserializer*/, VoxelGrid& /*grid*/);
 
         glm::uvec3 mSize;               ///< Size of the grid.
         std::vector<uint16_t> mIndices; ///< Indices of the grid.

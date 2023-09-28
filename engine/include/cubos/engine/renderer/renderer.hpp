@@ -74,7 +74,7 @@ namespace cubos::engine
         /// @brief Uploads a grid to the GPU and returns an handle which can be used to draw it.
         /// @param grid Grid to upload.
         /// @return Handle of the grid.
-        virtual RendererGrid upload(const Grid& grid) = 0;
+        virtual RendererGrid upload(const VoxelGrid& grid) = 0;
 
         /// @brief Sets the current palette of the renderer.
         /// @param palette Palette to set.

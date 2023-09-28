@@ -19,7 +19,7 @@ manually.
 
 @snippet renderer/main.cpp Setting the palette
 
-We should also spawn a @ref cubos::engine::Grid "voxel grid", so we have
+We should also spawn a @ref cubos::engine::VoxelGrid "voxel grid", so we have
 something to render.
 
 @snippet renderer/main.cpp Spawning a voxel grid
