@@ -294,7 +294,7 @@ namespace cubos::core::reflection
         /// @brief Compares two iterators.
         /// @param other Other iterator.
         /// @return Whether the iterators point to different entries.
-        bool operator!=(const Iterator&) const;
+        bool operator!=(const Iterator& /*other*/) const;
 
         /// @brief Accesses the entry referenced by this iterator.
         /// @note Aborts if out of bounds.
@@ -352,7 +352,7 @@ namespace cubos::core::reflection
         /// @brief Compares two iterators.
         /// @param other Other iterator.
         /// @return Whether the iterators point to different entries.
-        bool operator!=(const Iterator&) const;
+        bool operator!=(const Iterator& /*other*/) const;
 
         /// @brief Accesses the entry referenced by this iterator.
         /// @note Aborts if out of bounds.
