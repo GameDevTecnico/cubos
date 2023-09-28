@@ -22,21 +22,21 @@ void testArray(T& value, std::size_t length, E* inserted = nullptr)
     REQUIRE(type.has<ArrayTrait>());
     const ArrayTrait& trait = type.get<ArrayTrait>();
 
-    REQUIRE(trait.length(&value) == length);
+    REQUIRE(trait.view(&value).length() == length);
     REQUIRE(trait.elementType().is<E>());
 
     if (trait.hasInsertDefault())
     {
-        trait.insertDefault(&value, length);
-        CHECK(trait.length(&value) == length + 1);
-        trait.insertDefault(&value, 0);
-        CHECK(trait.length(&value) == length + 2);
+        trait.view(&value).insertDefault(length);
+        CHECK(trait.view(&value).length() == length + 1);
+        trait.view(&value).insertDefault(0);
+        CHECK(trait.view(static_cast<const void*>(&value)).length() == length + 2);
         length += 2;
 
         if constexpr (std::equality_comparable<E> && std::default_initializable<E>)
         {
-            CHECK(*reinterpret_cast<E*>(trait.get(&value, 0)) == E{});
-            CHECK(*reinterpret_cast<const E*>(trait.get(static_cast<const void*>(&value), length - 1)) == E{});
+            CHECK(*reinterpret_cast<E*>(trait.view(&value).get(0)) == E{});
+            CHECK(*reinterpret_cast<const E*>(trait.view(static_cast<const void*>(&value)).get(length - 1)) == E{});
         }
     }
 
@@ -44,8 +44,8 @@ void testArray(T& value, std::size_t length, E* inserted = nullptr)
     {
         for (; length > 0; --length)
         {
-            trait.erase(&value, length - 1);
-            CHECK(trait.length(&value) == length - 1);
+            trait.view(&value).erase(length - 1);
+            CHECK(trait.view(&value).length() == length - 1);
         }
     }
 
@@ -53,20 +53,20 @@ void testArray(T& value, std::size_t length, E* inserted = nullptr)
     {
         if (trait.hasInsertCopy())
         {
-            trait.insertCopy(&value, 0, inserted);
-            CHECK(trait.length(&value) == length + 1);
+            trait.view(&value).insertCopy(0, inserted);
+            CHECK(trait.view(&value).length() == length + 1);
             length += 1;
 
             if constexpr (std::equality_comparable<E>)
             {
-                CHECK(*reinterpret_cast<E*>(trait.get(&value, 0)) == *inserted);
+                CHECK(*reinterpret_cast<E*>(trait.view(&value).get(0)) == *inserted);
             }
         }
 
         if (trait.hasInsertMove())
         {
-            trait.insertMove(&value, (length + 1) / 2, inserted);
-            CHECK(trait.length(&value) == length + 1);
+            trait.view(&value).insertMove((length + 1) / 2, inserted);
+            CHECK(trait.view(&value).length() == length + 1);
             length += 1;
         }
     }

@@ -17,6 +17,12 @@ namespace cubos::core::reflection
     class ArrayTrait final
     {
     public:
+        /// @brief Provides mutable access to an array.
+        class View;
+
+        /// @brief Provides immutable access to an array.
+        class ConstView;
+
         /// @brief Function pointer to get the length of an array instance.
         /// @param instance Pointer to the instance.
         using Length = std::size_t (*)(const void* instance);
@@ -70,50 +76,6 @@ namespace cubos::core::reflection
         /// @param erase Function pointer.
         void setErase(Erase erase);
 
-        /// @brief Returns the element type of the array.
-        /// @return Element type.
-        const Type& elementType() const;
-
-        /// @brief Returns the length of the given array.
-        /// @param instance Pointer to the array instance.
-        /// @return Array length.
-        std::size_t length(const void* instance) const;
-
-        /// @brief Gets a pointer to the element with the given index on the given array.
-        /// @param instance Pointer to the array instance.
-        /// @param index Element index.
-        /// @return Pointer to the element.
-        void* get(void* instance, std::size_t index) const;
-
-        /// @copydoc get(void*, std::size_t) const
-        const void* get(const void* instance, std::size_t index) const;
-
-        /// @brief Inserts a default-constructed element into the array.
-        /// @param instance Pointer to the array instance.
-        /// @param index Element index.
-        /// @return Whether the operation is supported.
-        bool insertDefault(void* instance, std::size_t index) const;
-
-        /// @brief Inserts a copy-constructed element into the array.
-        /// @param instance Pointer to the array instance.
-        /// @param index Element index.
-        /// @param value Value.
-        /// @return Whether the operation is supported.
-        bool insertCopy(void* instance, std::size_t index, const void* value) const;
-
-        /// @brief Inserts a move-constructed element into the array.
-        /// @param instance Pointer to the array instance.
-        /// @param index Element index.
-        /// @param value Value.
-        /// @return Whether the operation is supported.
-        bool insertMove(void* instance, std::size_t index, void* value) const;
-
-        /// @brief Removes an element of the array.
-        /// @param instance Pointer to the array instance.
-        /// @param index Element index.
-        /// @return Whether the operation is supported.
-        bool erase(void* instance, std::size_t index) const;
-
         /// @brief Checks if default-construct insert is supported.
         /// @return Whether the operation is supported.
         bool hasInsertDefault() const;
@@ -130,7 +92,22 @@ namespace cubos::core::reflection
         /// @return Whether the operation is supported.
         bool hasErase() const;
 
+        /// @brief Returns the element type of the array.
+        /// @return Element type.
+        const Type& elementType() const;
+
+        /// @brief Returns a view of the given array instance.
+        /// @param instance Array instance.
+        /// @return Array view.
+        View view(void* instance) const;
+
+        /// @copydoc view(void*) const
+        ConstView view(const void* instance) const;
+
     private:
+        friend View;
+        friend ConstView;
+
         const Type& mElementType;
         Length mLength;
         AddressOf mAddressOf;
@@ -138,5 +115,71 @@ namespace cubos::core::reflection
         InsertCopy mInsertCopy{nullptr};
         InsertMove mInsertMove{nullptr};
         Erase mErase{nullptr};
+    };
+
+    class ArrayTrait::View final
+    {
+    public:
+        /// @brief Constructs.
+        /// @param trait Trait.
+        /// @param instance Instance.
+        View(const ArrayTrait& trait, void* instance);
+
+        /// @brief Returns the length of the array.
+        /// @return Array length.
+        std::size_t length() const;
+
+        /// @brief Gets a pointer to the element with the given index.
+        /// @param index Element index.
+        /// @return Pointer to the element.
+        void* get(std::size_t index) const;
+
+        /// @brief Inserts a default-constructed element.
+        /// @note Aborts if @ref ArrayTrait::hasInsertDefault() returns false.
+        /// @param index Element index.
+        void insertDefault(std::size_t index) const;
+
+        /// @brief Inserts a copy-constructed element.
+        /// @note Aborts if @ref ArrayTrait::hasInsertCopy() returns false.
+        /// @param index Element index.
+        /// @param value Value.
+        void insertCopy(std::size_t index, const void* value) const;
+
+        /// @brief Inserts a move-constructed element.
+        /// @note Aborts if @ref ArrayTrait::hasInsertMove() returns false.
+        /// @param index Element index.
+        /// @param value Value.
+        void insertMove(std::size_t index, void* value) const;
+
+        /// @brief Removes an element.
+        /// @note Aborts if @ref ArrayTrait::hasErase() returns false.
+        /// @param index Element index.
+        void erase(std::size_t index) const;
+
+    private:
+        const ArrayTrait& mTrait;
+        void* mInstance;
+    };
+
+    class ArrayTrait::ConstView final
+    {
+    public:
+        /// @brief Constructs.
+        /// @param trait Trait.
+        /// @param instance Instance.
+        ConstView(const ArrayTrait& trait, const void* instance);
+
+        /// @brief Returns the length of the array.
+        /// @return Array length.
+        std::size_t length() const;
+
+        /// @brief Gets a pointer to the element with the given index.
+        /// @param index Element index.
+        /// @return Pointer to the element.
+        const void* get(std::size_t index) const;
+
+    private:
+        const ArrayTrait& mTrait;
+        const void* mInstance;
     };
 } // namespace cubos::core::reflection

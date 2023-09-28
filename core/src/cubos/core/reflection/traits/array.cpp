@@ -35,70 +35,6 @@ void ArrayTrait::setErase(Erase erase)
     mErase = erase;
 }
 
-const Type& ArrayTrait::elementType() const
-{
-    return mElementType;
-}
-
-std::size_t ArrayTrait::length(const void* instance) const
-{
-    return mLength(instance);
-}
-
-void* ArrayTrait::get(void* instance, std::size_t index) const
-{
-    return reinterpret_cast<void*>(mAddressOf(instance, index));
-}
-
-const void* ArrayTrait::get(const void* instance, std::size_t index) const
-{
-    return reinterpret_cast<const void*>(mAddressOf(instance, index));
-}
-
-bool ArrayTrait::insertDefault(void* instance, std::size_t index) const
-{
-    if (mInsertDefault != nullptr)
-    {
-        mInsertDefault(instance, index);
-        return true;
-    }
-
-    return false;
-}
-
-bool ArrayTrait::insertCopy(void* instance, std::size_t index, const void* value) const
-{
-    if (mInsertCopy != nullptr)
-    {
-        mInsertCopy(instance, index, value);
-        return true;
-    }
-
-    return false;
-}
-
-bool ArrayTrait::insertMove(void* instance, std::size_t index, void* value) const
-{
-    if (mInsertMove != nullptr)
-    {
-        mInsertMove(instance, index, value);
-        return true;
-    }
-
-    return false;
-}
-
-bool ArrayTrait::erase(void* instance, std::size_t index) const
-{
-    if (mErase != nullptr)
-    {
-        mErase(instance, index);
-        return true;
-    }
-
-    return false;
-}
-
 bool ArrayTrait::hasInsertDefault() const
 {
     return mInsertDefault != nullptr;
@@ -117,4 +53,77 @@ bool ArrayTrait::hasInsertMove() const
 bool ArrayTrait::hasErase() const
 {
     return mErase != nullptr;
+}
+
+const Type& ArrayTrait::elementType() const
+{
+    return mElementType;
+}
+
+ArrayTrait::View ArrayTrait::view(void* instance) const
+{
+    return View{*this, instance};
+}
+
+ArrayTrait::ConstView ArrayTrait::view(const void* instance) const
+{
+    return ConstView{*this, instance};
+}
+
+ArrayTrait::View::View(const ArrayTrait& trait, void* instance)
+    : mTrait(trait)
+    , mInstance(instance)
+{
+    CUBOS_ASSERT(mInstance != nullptr, "Instance must not be null");
+}
+
+std::size_t ArrayTrait::View::length() const
+{
+    return mTrait.mLength(mInstance);
+}
+
+void* ArrayTrait::View::get(std::size_t index) const
+{
+    return reinterpret_cast<void*>(mTrait.mAddressOf(mInstance, index));
+}
+
+void ArrayTrait::View::insertDefault(std::size_t index) const
+{
+    CUBOS_ASSERT(mTrait.hasInsertDefault(), "Insert default not supported");
+    mTrait.mInsertDefault(mInstance, index);
+}
+
+void ArrayTrait::View::insertCopy(std::size_t index, const void* value) const
+{
+    CUBOS_ASSERT(mTrait.hasInsertCopy(), "Insert copy not supported");
+    mTrait.mInsertCopy(mInstance, index, value);
+}
+
+void ArrayTrait::View::insertMove(std::size_t index, void* value) const
+{
+    CUBOS_ASSERT(mTrait.hasInsertMove(), "Insert move not supported");
+    mTrait.mInsertMove(mInstance, index, value);
+}
+
+void ArrayTrait::View::erase(std::size_t index) const
+{
+    CUBOS_ASSERT(mTrait.hasErase(), "Erase not supported");
+    mTrait.mErase(mInstance, index);
+}
+
+ArrayTrait::ConstView::ConstView(const ArrayTrait& trait, const void* instance)
+    : mTrait(trait)
+    , mInstance(instance)
+{
+    CUBOS_ASSERT(mInstance != nullptr, "Instance must not be null");
+}
+
+std::size_t ArrayTrait::ConstView::length() const
+{
+    return mTrait.mLength(mInstance);
+}
+
+const void* ArrayTrait::ConstView::get(std::size_t index) const
+{
+    return reinterpret_cast<const void*>(mTrait.mAddressOf(mInstance, index));
 }
