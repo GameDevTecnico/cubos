@@ -133,3 +133,127 @@ FieldsTrait::Iterator FieldsTrait::end()
 {
     return Iterator{nullptr};
 }
+
+FieldsTrait::View FieldsTrait::view(void* instance) const
+{
+    return View{*this, instance};
+}
+
+FieldsTrait::ConstView FieldsTrait::view(const void* instance) const
+{
+    return ConstView{*this, instance};
+}
+
+FieldsTrait::View::View(const FieldsTrait& trait, void* instance)
+    : mTrait{trait}
+    , mInstance{instance}
+{
+}
+
+void* FieldsTrait::View::get(const Field& field) const
+{
+    return field.pointerTo(mInstance);
+}
+
+FieldsTrait::View::Iterator FieldsTrait::View::begin() const
+{
+    return Iterator{*this, mTrait.mFirstField};
+}
+
+FieldsTrait::View::Iterator FieldsTrait::View::end() const
+{
+    return Iterator{*this, nullptr};
+}
+
+FieldsTrait::ConstView::ConstView(const FieldsTrait& trait, const void* instance)
+    : mTrait{trait}
+    , mInstance{instance}
+{
+}
+
+const void* FieldsTrait::ConstView::get(const Field& field) const
+{
+    return field.pointerTo(mInstance);
+}
+
+FieldsTrait::ConstView::Iterator FieldsTrait::ConstView::begin() const
+{
+    return Iterator{*this, mTrait.mFirstField};
+}
+
+FieldsTrait::ConstView::Iterator FieldsTrait::ConstView::end() const
+{
+    return Iterator{*this, nullptr};
+}
+
+FieldsTrait::View::Iterator::Iterator(const View& view, const Field* field)
+    : mInstance{view.mInstance}
+    , mField{field}
+{
+}
+
+bool FieldsTrait::View::Iterator::operator==(const Iterator& other) const
+{
+    return mInstance == other.mInstance && mField == other.mField;
+}
+
+bool FieldsTrait::View::Iterator::operator!=(const Iterator& other) const
+{
+    return !(*this == other);
+}
+
+const FieldsTrait::View::Iterator::Output& FieldsTrait::View::Iterator::operator*() const
+{
+    CUBOS_ASSERT(mField != nullptr, "Iterator out of bounds");
+    mOutput.field = mField;
+    mOutput.value = mField->pointerTo(mInstance);
+    return mOutput;
+}
+
+const FieldsTrait::View::Iterator::Output* FieldsTrait::View::Iterator::operator->() const
+{
+    return &this->operator*();
+}
+
+FieldsTrait::View::Iterator& FieldsTrait::View::Iterator::operator++()
+{
+    CUBOS_ASSERT(mField != nullptr, "Iterator out of bounds");
+    mField = mField->next();
+    return *this;
+}
+
+FieldsTrait::ConstView::Iterator::Iterator(const ConstView& view, const Field* field)
+    : mInstance{view.mInstance}
+    , mField{field}
+{
+}
+
+bool FieldsTrait::ConstView::Iterator::operator==(const Iterator& other) const
+{
+    return mInstance == other.mInstance && mField == other.mField;
+}
+
+bool FieldsTrait::ConstView::Iterator::operator!=(const Iterator& other) const
+{
+    return !(*this == other);
+}
+
+const FieldsTrait::ConstView::Iterator::Output& FieldsTrait::ConstView::Iterator::operator*() const
+{
+    CUBOS_ASSERT(mField != nullptr, "Iterator out of bounds");
+    mOutput.field = mField;
+    mOutput.value = mField->pointerTo(mInstance);
+    return mOutput;
+}
+
+const FieldsTrait::ConstView::Iterator::Output* FieldsTrait::ConstView::Iterator::operator->() const
+{
+    return &this->operator*();
+}
+
+FieldsTrait::ConstView::Iterator& FieldsTrait::ConstView::Iterator::operator++()
+{
+    CUBOS_ASSERT(mField != nullptr, "Iterator out of bounds");
+    mField = mField->next();
+    return *this;
+}

@@ -48,7 +48,7 @@ int main()
 
     /// [Accessing fields by name]
     Person person{.age = 21, .weight = 68.4F};
-    *static_cast<float*>(fields.field("weight")->pointerTo(&person)) += 20.0F;
+    *static_cast<float*>(fields.view(&person).get(*fields.field("weight"))) += 20.0F;
     CUBOS_INFO("New weight: {}", person.weight); // 88.4
 }
 /// [Accessing fields by name]
