@@ -24,9 +24,9 @@ void printArray(const Type& type, const void* instance)
         return;
     }
 
-    for (std::size_t i = 0; i < arrayView.length(); ++i)
+    for (auto* element : arrayView)
     {
-        CUBOS_INFO("Element {}: {}", i, *static_cast<const int*>(arrayView.get(i)));
+        CUBOS_INFO("{}", *static_cast<const int32_t*>(element));
     }
 }
 /// [Getting array elements]

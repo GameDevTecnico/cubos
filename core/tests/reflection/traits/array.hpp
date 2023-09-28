@@ -25,6 +25,21 @@ void testArray(T& value, std::size_t length, E* inserted = nullptr)
     REQUIRE(trait.view(&value).length() == length);
     REQUIRE(trait.elementType().is<E>());
 
+    std::size_t i = 0;
+    for (auto* el : trait.view(&value))
+    {
+        CHECK(el == trait.view(&value).get(i));
+        i += 1;
+    }
+
+    CHECK(i == length);
+    i = 0;
+    for (auto* el : trait.view(static_cast<const void*>(&value)))
+    {
+        CHECK(el == trait.view(static_cast<const void*>(&value)).get(i));
+        i += 1;
+    }
+
     if (trait.hasInsertDefault())
     {
         trait.view(&value).insertDefault(length);
