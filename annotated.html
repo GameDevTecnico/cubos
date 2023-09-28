@@ -117,7 +117,6 @@
                         </ul>
                       </li>
                       <li>class <a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">Package</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">A utility object which is capable of storing the data of any trivially serializable object. One way to understand this class is to think of it as if it were a JSON representation of an object.</span></li>
-                      <li>struct <a href="structcubos_1_1core_1_1data_1_1QBMatrix.html" class="m-doc">QBMatrix</a> <span class="m-doc">Represents the data read from a matrix in a QB file.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1data_1_1SerializationMap.html" class="m-doc">SerializationMap</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc"></span></li>
                       <li>class <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> <span class="m-doc"></span></li>
                       <li class="m-doc-collapsible collapsed">
@@ -290,9 +289,6 @@
                           <li>struct <a href="structcubos_1_1core_1_1gl_1_1FramebufferDesc_1_1Texture2DTarget.html" class="m-doc">Texture2DTarget</a> <span class="m-doc">Describes a 2D texture target.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">Grid</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Represents a voxel object using a 3D grid.</span></li>
-                      <li>struct <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">Material</a> <span class="m-doc">Describes a voxel material.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">Palette</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Holds a palette of materials. Supports up to 65535 materials.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1gl_1_1RasterStateDesc.html" class="m-doc">RasterStateDesc</a> <span class="m-doc">Decribes a rasterizer state.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">RenderDevice</a> <span class="m-doc">Interface used to wrap low-level rendering APIs such as OpenGL.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1gl_1_1SamplerDesc.html" class="m-doc">SamplerDesc</a> <span class="m-doc">Describes a sampler.</span></li>
@@ -300,7 +296,6 @@
                       <li>struct <a href="structcubos_1_1core_1_1gl_1_1Texture2DArrayDesc.html" class="m-doc">Texture2DArrayDesc</a> <span class="m-doc">Describes a 2D texture array.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1gl_1_1Texture2DDesc.html" class="m-doc">Texture2DDesc</a> <span class="m-doc">Describes a 2D texture.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1gl_1_1Texture3DDesc.html" class="m-doc">Texture3DDesc</a> <span class="m-doc">Describes a 3D texture.</span></li>
-                      <li>struct <a href="structcubos_1_1core_1_1gl_1_1Vertex.html" class="m-doc">Vertex</a> <span class="m-doc">Represents a voxel vertex.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1gl_1_1VertexArrayDesc.html" class="m-doc">VertexArrayDesc</a> <span class="m-doc">Describes a vertex array.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1gl_1_1VertexElement.html" class="m-doc">VertexElement</a> <span class="m-doc">Describes a vertex element.</span></li>
                     </ul>
@@ -347,10 +342,7 @@
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a> <span class="m-doc">Describes the fields of a reflected type.</span>
                         <ul class="m-doc">
-                          <li>class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a> <span class="m-doc">Interface for obtaining the address of a field on a given instance.</span></li>
                           <li>class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOfImpl.html" class="m-doc">AddressOfImpl</a> <span class="m-doc">Implementation of <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a> for a pointer to member.</span></li>
-                          <li>class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a> <span class="m-doc">Describes a field of a reflected type.</span></li>
-                          <li>class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Iterator.html" class="m-doc">Iterator</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Used to iterate over the fields on a fields trait.</span></li>
                         </ul>
                       </li>
                       <li>struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">Reflect</a> <span class="m-doc">Defines the reflection function for the given type <code>T</code>.</span></li>
@@ -453,6 +445,10 @@
                   <li>struct <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">SpotLight</a> <span class="m-doc">Component which makes an entity emit a spot light.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1SystemBuilder.html" class="m-doc">SystemBuilder</a> <span class="m-doc">Used to chain configurations related to systems.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1TagBuilder.html" class="m-doc">TagBuilder</a> <span class="m-doc">Used to chain configurations related to tags.</span></li>
+                  <li>class <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Represents a voxel object using a 3D grid.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1VoxelMaterial.html" class="m-doc">VoxelMaterial</a> <span class="m-doc">Describes a voxel material.</span></li>
+                  <li>class <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Holds a palette of materials. Supports up to 65535 materials.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1VoxelVertex.html" class="m-doc">VoxelVertex</a> <span class="m-doc">Represents a voxel vertex.</span></li>
                 </ul>
               </li>
             </ul>

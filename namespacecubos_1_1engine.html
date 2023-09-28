@@ -230,6 +230,10 @@
             </dt>
             <dd>Component which makes an entity emit a spot light.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1VoxelVertex.html" class="m-doc">VoxelVertex</a>
+            </dt>
+            <dd>Represents a voxel vertex.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1SceneBridge.html" class="m-doc">SceneBridge</a>
             </dt>
             <dd>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> assets.</dd>
@@ -257,6 +261,18 @@
               struct <a href="structcubos_1_1engine_1_1Scale.html" class="m-doc">Scale</a>
             </dt>
             <dd>Component which assigns a uniform scale to an entity.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>
+            </dt>
+            <dd>Represents a voxel object using a 3D grid.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1VoxelMaterial.html" class="m-doc">VoxelMaterial</a>
+            </dt>
+            <dd>Describes a voxel material.</dd>
+            <dt>
+              class <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>
+            </dt>
+            <dd>Holds a palette of materials. Supports up to 65535 materials.</dd>
           </dl>
         </section>
         <section id="enum-members">
@@ -346,6 +362,12 @@
               <span class="m-doc-wrap-bumper">void <a href="group__renderer-plugin.html#ga5e2f1e278c0da877790b407a535d665b" class="m-doc">rendererPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__renderer-plugin.html#gaade2fe044b251ab590be6680a3558cea" class="m-doc">triangulate</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelGrid.html" class="m-doc">VoxelGrid</a>&amp; grid,
+              std::vector&lt;<a href="structcubos_1_1engine_1_1VoxelVertex.html" class="m-doc">VoxelVertex</a>&gt;&amp; vertices,
+              std::vector&lt;uint32_t&gt;&amp; indices)</span>
+            </dt>
+            <dd>Triangulates a grid of voxels into an indexed mesh.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__scene-plugin.html#gab02d0813f14d8d47fdfb623243e88624" class="m-doc">scenePlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>

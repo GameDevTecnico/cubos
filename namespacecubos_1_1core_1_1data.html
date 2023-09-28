@@ -137,10 +137,6 @@
             </dt>
             <dd>Responsible for deserializing packages into types.</dd>
             <dt>
-              struct <a href="structcubos_1_1core_1_1data_1_1QBMatrix.html" class="m-doc">QBMatrix</a>
-            </dt>
-            <dd>Represents the data read from a matrix in a QB file.</dd>
-            <dt>
               <div class="m-doc-template">template&lt;typename R, typename I&gt;</div>
               class <a href="classcubos_1_1core_1_1data_1_1SerializationMap.html" class="m-doc">SerializationMap</a>
             </dt>
@@ -187,11 +183,6 @@
               <div class="m-doc-template">template&lt;typename T, typename U&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#a8a6df945bf74bf7fd21236b6bb2fe5fd" class="m-doc">deserialize</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp; des,
               std::pair&lt;T, U&gt;&amp; obj)</span>
-            </dt>
-            <dd></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab433d1a4ac859ebbdfb7c64f97348368" class="m-doc">parseQB</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="structcubos_1_1core_1_1data_1_1QBMatrix.html" class="m-doc">QBMatrix</a>&gt;&amp; matrices,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream) -&gt; bool</span>
             </dt>
             <dd></dd>
             <dt>
@@ -447,34 +438,6 @@
               </tbody>
             </table>
 <p>Overload for serializing std::pair.</p>
-          </div></section>
-          <section class="m-doc-details" id="ab433d1a4ac859ebbdfb7c64f97348368"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab433d1a4ac859ebbdfb7c64f97348368" class="m-doc-self">parseQB</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="structcubos_1_1core_1_1data_1_1QBMatrix.html" class="m-doc">QBMatrix</a>&gt;&amp; matrices,
-              <a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream)</span></span>
-            </h3>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">matrices</td>
-                  <td>The matrices to output.</td>
-                </tr>
-                <tr>
-                  <td>stream</td>
-                  <td>The stream to read from.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>True if the file was parsed successfully, otherwise false.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>Parses a Qubicle file (.qb), pushing every matrix found in the file to the passed vector.</p>
           </div></section>
           <section class="m-doc-details" id="a9adc8a44a1124cfbf965caef44d4982c"><div>
             <h3>

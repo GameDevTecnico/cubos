@@ -46,7 +46,7 @@
         <h1>
           <span class="m-breadcrumb"><a href="group__core.html">Core</a> &raquo;</span>
           Graphics <span class="m-thin">module</span></h1>
-        <p>Provides a graphics API abstraction and some voxel utilities.</p>
+        <p>Provides a graphics API abstraction.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -57,7 +57,6 @@
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#enum-members">Enums</a></li>
                 <li><a href="#typedef-members">Typedefs</a></li>
-                <li><a href="#func-members">Functions</a></li>
                 <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
@@ -68,18 +67,10 @@
           <dl class="m-doc">
             <dt>file <a href="debug_8hpp.html" class="m-doc">debug.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1gl_1_1Debug.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Debug</a>.</dd>
-            <dt>file <a href="grid_8hpp.html" class="m-doc">grid.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Grid</a>.</dd>
-            <dt>file <a href="material_8hpp.html" class="m-doc">material.hpp</a></dt>
-            <dd>Class <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Material</a>.</dd>
-            <dt>file <a href="palette_8hpp.html" class="m-doc">palette.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Palette</a>.</dd>
             <dt>file <a href="render__device_8hpp.html" class="m-doc">render_device.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice</a> and related types.</dd>
             <dt>file <a href="util_8hpp.html" class="m-doc">util.hpp</a></dt>
             <dd>Function <a href="namespacecubos_1_1core_1_1gl.html#afe8cfc6527c53b5ed688e88796077a4f" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />generateScreenQuad</a>.</dd>
-            <dt>file <a href="vertex_8hpp.html" class="m-doc">vertex.hpp</a></dt>
-            <dd>Class <a href="structcubos_1_1core_1_1gl_1_1Vertex.html" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />Vertex</a> and function <a href="group__core-gl.html#gac94c861bd62e269ba559c304673245b0" class="m-doc">cubos::<wbr />core::<wbr />gl::<wbr />triangulate</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -89,18 +80,6 @@
               class <a href="classcubos_1_1core_1_1gl_1_1Debug.html" class="m-doc">cubos::core::gl::Debug</a>
             </dt>
             <dd>Singleton with static methods used to draw primitive objects on screen for debugging purposes.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">cubos::core::gl::Grid</a>
-            </dt>
-            <dd>Represents a voxel object using a 3D grid.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1gl_1_1Material.html" class="m-doc">cubos::core::gl::Material</a>
-            </dt>
-            <dd>Describes a voxel material.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1gl_1_1Palette.html" class="m-doc">cubos::core::gl::Palette</a>
-            </dt>
-            <dd>Holds a palette of materials. Supports up to 65535 materials.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1gl_1_1FramebufferDesc.html" class="m-doc">cubos::core::gl::FramebufferDesc</a>
             </dt>
@@ -165,10 +144,6 @@
               class <a href="classcubos_1_1core_1_1gl_1_1RenderDevice.html" class="m-doc">cubos::core::gl::RenderDevice</a>
             </dt>
             <dd>Interface used to wrap low-level rendering APIs such as OpenGL.</dd>
-            <dt>
-              struct <a href="structcubos_1_1core_1_1gl_1_1Vertex.html" class="m-doc">cubos::core::gl::Vertex</a>
-            </dt>
-            <dd>Represents a voxel vertex.</dd>
           </dl>
         </section>
         <section id="enum-members">
@@ -425,17 +400,6 @@
               using <a href="#ga5c8dcfae059d8834b7a3b6ccb6ba3f62" class="m-doc">ShaderBindingPoint</a> = impl::ShaderBindingPoint*
             </dt>
             <dd>Handle to a shader binding point.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#gac94c861bd62e269ba559c304673245b0" class="m-doc">triangulate</a>(</span><span class="m-doc-wrap">const Grid&amp; grid,
-              std::vector&lt;Vertex&gt;&amp; vertices,
-              std::vector&lt;uint32_t&gt;&amp; indices)</span>
-            </dt>
-            <dd>Triangulates a grid of voxels into an indexed mesh.</dd>
           </dl>
         </section>
         <section id="define-members">
@@ -1169,37 +1133,6 @@
             </h3>
             <p>Handle to a shader binding point.</p>
 <aside class="m-note m-default"><h4>See also</h4><p><a href="classcubos_1_1core_1_1gl_1_1impl_1_1ShaderBindingPoint.html" class="m-doc">impl::<wbr />ShaderBindingPoint</a> - shader binding point interface.</p></aside>
-          </div></section>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="gac94c861bd62e269ba559c304673245b0"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gac94c861bd62e269ba559c304673245b0" class="m-doc-self">triangulate</a>(</span><span class="m-doc-wrap">const Grid&amp; grid,
-              std::vector&lt;Vertex&gt;&amp; vertices,
-              std::vector&lt;uint32_t&gt;&amp; indices)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="vertex_8hpp.html">&lt;core/gl/vertex.hpp&gt;</a></div>
-            </h3>
-            <p>Triangulates a grid of voxels into an indexed mesh.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">grid</td>
-                  <td><a href="classcubos_1_1core_1_1gl_1_1Grid.html" class="m-doc">Grid</a> to triangulate.</td>
-                </tr>
-                <tr>
-                  <td>vertices</td>
-                  <td>Vertices of the mesh.</td>
-                </tr>
-                <tr>
-                  <td>indices</td>
-                  <td>Indices of the mesh.</td>
-                </tr>
-              </tbody>
-            </table>
           </div></section>
         </section>
         <section>

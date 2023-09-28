@@ -98,6 +98,8 @@
             <dd>Class <a href="classcubos_1_1engine_1_1BaseRenderer.html" class="m-doc">cubos::<wbr />engine::<wbr />BaseRenderer</a> and resource <a href="group__renderer-plugin.html#ga645909e0b9c643b6887ed83a0d0859dc" class="m-doc">cubos::<wbr />engine::<wbr />Renderer</a>.</dd>
             <dt>file <a href="spot__light_8hpp.html" class="m-doc">spot_light.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">cubos::<wbr />engine::<wbr />SpotLight</a>.</dd>
+            <dt>file <a href="vertex_8hpp.html" class="m-doc">vertex.hpp</a></dt>
+            <dd>Class <a href="structcubos_1_1engine_1_1VoxelVertex.html" class="m-doc">cubos::<wbr />engine::<wbr />VoxelVertex</a> and function <a href="group__renderer-plugin.html#gaade2fe044b251ab590be6680a3558cea" class="m-doc">cubos::<wbr />engine::<wbr />triangulate</a>.</dd>
           </dl>
         </section>
         <section id="nested-classes">
@@ -159,6 +161,10 @@
               struct <a href="structcubos_1_1engine_1_1SpotLight.html" class="m-doc">cubos::engine::SpotLight</a>
             </dt>
             <dd>Component which makes an entity emit a spot light.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1VoxelVertex.html" class="m-doc">cubos::engine::VoxelVertex</a>
+            </dt>
+            <dd>Represents a voxel vertex.</dd>
           </dl>
         </section>
         <section id="enum-members">
@@ -192,6 +198,12 @@
               <span class="m-doc-wrap-bumper">void <a href="#ga5e2f1e278c0da877790b407a535d665b" class="m-doc">rendererPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#gaade2fe044b251ab590be6680a3558cea" class="m-doc">triangulate</a>(</span><span class="m-doc-wrap">const VoxelGrid&amp; grid,
+              std::vector&lt;VoxelVertex&gt;&amp; vertices,
+              std::vector&lt;uint32_t&gt;&amp; indices)</span>
+            </dt>
+            <dd>Triangulates a grid of voxels into an indexed mesh.</dd>
           </dl>
         </section>
         <section>
@@ -260,6 +272,34 @@
                 <tr>
                   <td style="width: 1%">cubos</td>
                   <td><strong>CUBOS</strong>. main class</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="gaade2fe044b251ab590be6680a3558cea"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaade2fe044b251ab590be6680a3558cea" class="m-doc-self">triangulate</a>(</span><span class="m-doc-wrap">const VoxelGrid&amp; grid,
+              std::vector&lt;VoxelVertex&gt;&amp; vertices,
+              std::vector&lt;uint32_t&gt;&amp; indices)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="vertex_8hpp.html">&lt;engine/renderer/vertex.hpp&gt;</a></div>
+            </h3>
+            <p>Triangulates a grid of voxels into an indexed mesh.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">grid</td>
+                  <td>Grid to triangulate.</td>
+                </tr>
+                <tr>
+                  <td>vertices</td>
+                  <td>Vertices of the mesh.</td>
+                </tr>
+                <tr>
+                  <td>indices</td>
+                  <td>Indices of the mesh.</td>
                 </tr>
               </tbody>
             </table>
