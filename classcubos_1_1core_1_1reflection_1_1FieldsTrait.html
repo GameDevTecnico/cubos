@@ -67,10 +67,22 @@
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
             <dt>
+              class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a>
+            </dt>
+            <dd>Interface for obtaining the address of a field on a given instance.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename O, typename F&gt;</div>
               class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOfImpl.html" class="m-doc">AddressOfImpl</a>
             </dt>
             <dd>Implementation of <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a> for a pointer to member.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a>
+            </dt>
+            <dd>Describes a field of a reflected type.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Iterator.html" class="m-doc">Iterator</a>
+            </dt>
+            <dd>Used to iterate over the fields on a fields trait.</dd>
           </dl>
         </section>
         <section id="pub-static-methods">
@@ -85,8 +97,8 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="af8a55319f88665903f9ecf746f950795">
-              <span class="m-doc-wrap-bumper"><a href="#af8a55319f88665903f9ecf746f950795" class="m-doc-self">FieldsTrait</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            <dt id="a7b3c9b42605de3acd670d93bc6848868">
+              <span class="m-doc-wrap-bumper"><a href="#a7b3c9b42605de3acd670d93bc6848868" class="m-doc-self">FieldsTrait</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Constructs.</dd>
             <dt>
@@ -118,14 +130,6 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a9f5a8ef9602bcf732826ae1a8041bd9e" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Iterator.html" class="m-doc">Iterator</a></span>
             </dt>
             <dd>Gets an iterator to the first field of the type.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a124ead4b2ad5ed4d2c5c3d7d2d4143db" class="m-doc">view</a>(</span><span class="m-doc-wrap">void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1View.html" class="m-doc">View</a></span>
-            </dt>
-            <dd>Returns a view of the given object instance.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a00e9fc0b21aae6449b3208ff93f5a477" class="m-doc">view</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1ConstView.html" class="m-doc">ConstView</a></span>
-            </dt>
-            <dd>Returns a view of the given object instance.</dd>
           </dl>
         </section>
         <section>
@@ -271,52 +275,6 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Iterator.html" class="m-doc">Iterator</a>.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a124ead4b2ad5ed4d2c5c3d7d2d4143db"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1View.html" class="m-doc">View</a> cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a124ead4b2ad5ed4d2c5c3d7d2d4143db" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
-            </h3>
-            <p>Returns a view of the given object instance.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Object instance.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Object view.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a00e9fc0b21aae6449b3208ff93f5a477"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1ConstView.html" class="m-doc">ConstView</a> cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a00e9fc0b21aae6449b3208ff93f5a477" class="m-doc-self">view</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
-            </h3>
-            <p>Returns a view of the given object instance.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">instance</td>
-                  <td>Object instance.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Object view.</td>
                 </tr>
               </tfoot>
             </table>
