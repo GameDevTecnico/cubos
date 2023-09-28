@@ -5,7 +5,7 @@
 
 #include <cubos/core/data/old/deserializer.hpp>
 
-using namespace cubos::core::data;
+using namespace cubos::core::data::old;
 
 Deserializer::Deserializer()
 {
@@ -25,78 +25,78 @@ void Deserializer::fail()
 // Implementation of deserialize() for primitive types.
 
 template <>
-void cubos::core::data::deserialize<int8_t>(Deserializer& des, int8_t& obj)
+void cubos::core::data::old::deserialize<int8_t>(Deserializer& des, int8_t& obj)
 {
     des.readI8(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<int16_t>(Deserializer& des, int16_t& obj)
+void cubos::core::data::old::deserialize<int16_t>(Deserializer& des, int16_t& obj)
 {
     des.readI16(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<int32_t>(Deserializer& des, int32_t& obj)
+void cubos::core::data::old::deserialize<int32_t>(Deserializer& des, int32_t& obj)
 {
     des.readI32(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<int64_t>(Deserializer& des, int64_t& obj)
+void cubos::core::data::old::deserialize<int64_t>(Deserializer& des, int64_t& obj)
 {
     des.readI64(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<uint8_t>(Deserializer& des, uint8_t& obj)
+void cubos::core::data::old::deserialize<uint8_t>(Deserializer& des, uint8_t& obj)
 {
     des.readU8(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<uint16_t>(Deserializer& des, uint16_t& obj)
+void cubos::core::data::old::deserialize<uint16_t>(Deserializer& des, uint16_t& obj)
 {
     des.readU16(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<uint32_t>(Deserializer& des, uint32_t& obj)
+void cubos::core::data::old::deserialize<uint32_t>(Deserializer& des, uint32_t& obj)
 {
     des.readU32(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<uint64_t>(Deserializer& des, uint64_t& obj)
+void cubos::core::data::old::deserialize<uint64_t>(Deserializer& des, uint64_t& obj)
 {
     des.readU64(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<float>(Deserializer& des, float& obj)
+void cubos::core::data::old::deserialize<float>(Deserializer& des, float& obj)
 {
     des.readF32(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<double>(Deserializer& des, double& obj)
+void cubos::core::data::old::deserialize<double>(Deserializer& des, double& obj)
 {
     des.readF64(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<bool>(Deserializer& des, bool& obj)
+void cubos::core::data::old::deserialize<bool>(Deserializer& des, bool& obj)
 {
     des.readBool(obj);
 }
 
 template <>
-void cubos::core::data::deserialize<std::string>(Deserializer& des, std::string& obj)
+void cubos::core::data::old::deserialize<std::string>(Deserializer& des, std::string& obj)
 {
     des.readString(obj);
 }
 
-void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::reference obj)
+void cubos::core::data::old::deserialize(Deserializer& des, std::vector<bool>::reference obj)
 {
     bool boolean;
     des.readBool(boolean);
@@ -108,7 +108,7 @@ void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::refere
 // NOLINTBEGIN(bugprone-macro-parentheses)
 #define IMPL_DESERIALIZE_GLM(T)                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tvec2<T>>(Deserializer & des, glm::tvec2<T> & obj)                        \
+    void cubos::core::data::old::deserialize<glm::tvec2<T>>(Deserializer & des, glm::tvec2<T> & obj)                   \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
         des.read(obj.x);                                                                                               \
@@ -117,7 +117,7 @@ void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::refere
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tvec3<T>>(Deserializer & des, glm::tvec3<T> & obj)                        \
+    void cubos::core::data::old::deserialize<glm::tvec3<T>>(Deserializer & des, glm::tvec3<T> & obj)                   \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
         des.read(obj.x);                                                                                               \
@@ -127,7 +127,7 @@ void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::refere
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tvec4<T>>(Deserializer & des, glm::tvec4<T> & obj)                        \
+    void cubos::core::data::old::deserialize<glm::tvec4<T>>(Deserializer & des, glm::tvec4<T> & obj)                   \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
         des.read(obj.x);                                                                                               \
@@ -138,7 +138,7 @@ void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::refere
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tquat<T>>(Deserializer & des, glm::tquat<T> & obj)                        \
+    void cubos::core::data::old::deserialize<glm::tquat<T>>(Deserializer & des, glm::tquat<T> & obj)                   \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
         des.read(obj.w);                                                                                               \
@@ -149,7 +149,7 @@ void cubos::core::data::deserialize(Deserializer& des, std::vector<bool>::refere
     }                                                                                                                  \
                                                                                                                        \
     template <>                                                                                                        \
-    void cubos::core::data::deserialize<glm::tmat4x4<T>>(Deserializer & des, glm::tmat4x4<T> & obj)                    \
+    void cubos::core::data::old::deserialize<glm::tmat4x4<T>>(Deserializer & des, glm::tmat4x4<T> & obj)               \
     {                                                                                                                  \
         des.beginObject();                                                                                             \
         des.read(obj[0]);                                                                                              \

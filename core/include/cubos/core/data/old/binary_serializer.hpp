@@ -3,7 +3,7 @@
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/memory/stream.hpp>
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     /// Implementation of the abstract Serializer class for serializing to binary data.
     /// This class allows data to be serialized in both little and big endian formats.
@@ -40,4 +40,4 @@ namespace cubos::core::data
         memory::Stream& mStream; ///< The stream to serialize to.
         bool mWriteLittleEndian; ///< Whether to write in little endian or big endian format.
     };
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

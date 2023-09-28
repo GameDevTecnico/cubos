@@ -98,7 +98,7 @@ void VoxelPalette::merge(const VoxelPalette& palette, float similarity)
     }
 }
 
-void cubos::core::data::serialize(Serializer& serializer, const VoxelPalette& palette, const char* name)
+void cubos::core::data::old::serialize(Serializer& serializer, const VoxelPalette& palette, const char* name)
 {
     // Count non-empty materials.
     std::size_t count = 0;
@@ -122,7 +122,7 @@ void cubos::core::data::serialize(Serializer& serializer, const VoxelPalette& pa
     serializer.endDictionary();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, VoxelPalette& palette)
+void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelPalette& palette)
 {
     palette.mMaterials.clear();
 

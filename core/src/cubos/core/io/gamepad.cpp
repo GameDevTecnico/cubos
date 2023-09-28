@@ -2,8 +2,8 @@
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/io/gamepad.hpp>
 
-using cubos::core::data::Deserializer;
-using cubos::core::data::Serializer;
+using cubos::core::data::old::Deserializer;
+using cubos::core::data::old::Serializer;
 using cubos::core::io::GamepadAxis;
 using cubos::core::io::GamepadButton;
 using namespace cubos::core;
@@ -37,7 +37,7 @@ std::string io::gamepadButtonToString(GamepadButton button)
 }
 
 template <>
-void data::serialize<GamepadButton>(Serializer& ser, const GamepadButton& obj, const char* name)
+void data::old::serialize<GamepadButton>(Serializer& ser, const GamepadButton& obj, const char* name)
 {
     ser.write(io::gamepadButtonToString(obj), name);
 }
@@ -68,7 +68,7 @@ GamepadButton io::stringToGamepadButton(const std::string& str)
 }
 
 template <>
-void data::deserialize<GamepadButton>(Deserializer& des, GamepadButton& obj)
+void data::old::deserialize<GamepadButton>(Deserializer& des, GamepadButton& obj)
 {
     std::string axis;
     des.read(axis);
@@ -95,7 +95,7 @@ std::string io::gamepadAxisToString(GamepadAxis axis)
 }
 
 template <>
-void data::serialize<GamepadAxis>(Serializer& ser, const GamepadAxis& obj, const char* name)
+void data::old::serialize<GamepadAxis>(Serializer& ser, const GamepadAxis& obj, const char* name)
 {
     ser.write(io::gamepadAxisToString(obj), name);
 }
@@ -117,7 +117,7 @@ GamepadAxis io::stringToGamepadAxis(const std::string& str)
 }
 
 template <>
-void data::deserialize<GamepadAxis>(Deserializer& des, GamepadAxis& obj)
+void data::old::deserialize<GamepadAxis>(Deserializer& des, GamepadAxis& obj)
 {
     std::string axis;
     des.read(axis);

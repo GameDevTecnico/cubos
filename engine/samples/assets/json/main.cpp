@@ -6,9 +6,9 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 
-using cubos::core::data::Deserializer;
 using cubos::core::data::FileSystem;
-using cubos::core::data::Serializer;
+using cubos::core::data::old::Deserializer;
+using cubos::core::data::old::Serializer;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::memory::Stream;
@@ -25,7 +25,7 @@ struct Strings
 
 /// [Serialization definition]
 template <>
-void cubos::core::data::serialize<Strings>(Serializer& ser, const Strings& obj, const char* name)
+void cubos::core::data::old::serialize<Strings>(Serializer& ser, const Strings& obj, const char* name)
 {
     ser.beginObject(name);
     ser.write(obj.strings, "strings");
@@ -33,7 +33,7 @@ void cubos::core::data::serialize<Strings>(Serializer& ser, const Strings& obj, 
 }
 
 template <>
-void cubos::core::data::deserialize<Strings>(Deserializer& des, Strings& obj)
+void cubos::core::data::old::deserialize<Strings>(Deserializer& des, Strings& obj)
 {
     des.beginObject();
     des.read(obj.strings);

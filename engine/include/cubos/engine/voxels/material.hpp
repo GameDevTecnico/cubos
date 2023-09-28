@@ -31,8 +31,8 @@ namespace cubos::engine
     };
 } // namespace cubos::engine
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     void serialize(Serializer& serializer, const engine::VoxelMaterial& mat, const char* name);
     void deserialize(Deserializer& deserializer, engine::VoxelMaterial& mat);
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

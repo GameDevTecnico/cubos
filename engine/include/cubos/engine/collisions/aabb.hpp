@@ -72,7 +72,7 @@ namespace cubos::engine
     };
 } // namespace cubos::engine
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     inline void serialize(Serializer& ser, const engine::ColliderAABB& aabb, const char* name)
     {
@@ -89,4 +89,4 @@ namespace cubos::core::data
         des.read(aabb.max);
         des.endObject();
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

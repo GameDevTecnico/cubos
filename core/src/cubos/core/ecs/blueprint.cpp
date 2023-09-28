@@ -11,7 +11,7 @@ Blueprint::~Blueprint()
     }
 }
 
-bool Blueprint::addFromDeserializer(Entity entity, const std::string& name, data::Deserializer& deserializer)
+bool Blueprint::addFromDeserializer(Entity entity, const std::string& name, data::old::Deserializer& deserializer)
 {
     assert(entity.generation == 0);
     return Registry::create(name, deserializer, *this, entity);
@@ -30,7 +30,7 @@ Entity Blueprint::entity(const std::string& name) const
 void Blueprint::merge(const std::string& prefix, const Blueprint& other)
 {
     // First, merge the maps.
-    data::SerializationMap<Entity, std::string> srcMap;
+    data::old::SerializationMap<Entity, std::string> srcMap;
     for (uint32_t i = 0; i < static_cast<uint32_t>(other.mMap.size()); ++i)
     {
         // Deserialize from the source buffer using the original entity names.
@@ -44,8 +44,8 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
         mMap.add(Entity(static_cast<uint32_t>(mMap.size()), 0), dstName);
     }
 
-    data::Context src;
-    data::Context dst;
+    data::old::Context src;
+    data::old::Context dst;
     src.push(srcMap);
     dst.push(mMap);
 

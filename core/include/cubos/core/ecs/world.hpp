@@ -106,7 +106,7 @@ namespace cubos::core::ecs
         /// @param entity Entity identifier.
         /// @param context Optional context for serializing the components.
         /// @return Package containing the components of the entity.
-        data::Package pack(Entity entity, data::Context* context = nullptr) const;
+        data::old::Package pack(Entity entity, data::old::Context* context = nullptr) const;
 
         /// @brief Unpacks components specified in a package into an entity.
         ///
@@ -116,7 +116,7 @@ namespace cubos::core::ecs
         /// @param package Package to unpack.
         /// @param context Optional context for deserializing the components.
         /// @return Whether the package was unpacked successfully.
-        bool unpack(Entity entity, const data::Package& package, data::Context* context = nullptr);
+        bool unpack(Entity entity, const data::old::Package& package, data::old::Context* context = nullptr);
 
         /// @brief Returns an iterator which points to the first entity of the world.
         /// @return Iterator.

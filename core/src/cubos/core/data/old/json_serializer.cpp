@@ -1,7 +1,7 @@
 #include <cubos/core/data/old/json_serializer.hpp>
 #include <cubos/core/log.hpp>
 
-using namespace cubos::core::data;
+using namespace cubos::core::data::old;
 
 JSONSerializer::JSONSerializer(memory::Stream& stream, int indent)
     : mStream(stream)

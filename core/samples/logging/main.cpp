@@ -7,7 +7,7 @@
 /// [Debug wrapper include]
 #include <cubos/core/data/old/debug_serializer.hpp>
 
-using namespace cubos::core::data;
+using cubos::core::data::old::Debug;
 /// [Debug wrapper include]
 
 /// [Logger initialization]

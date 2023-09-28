@@ -5,8 +5,8 @@
 #include <cubos/engine/tools/entity_inspector/plugin.hpp>
 #include <cubos/engine/tools/entity_selector/plugin.hpp>
 
-using cubos::core::data::Context;
-using cubos::core::data::SerializationMap;
+using cubos::core::data::old::Context;
+using cubos::core::data::old::SerializationMap;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
 using cubos::core::ecs::Write;

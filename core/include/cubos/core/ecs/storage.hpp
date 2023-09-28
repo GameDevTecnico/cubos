@@ -29,14 +29,14 @@ namespace cubos::core::ecs
         /// @param index Index of the value to package.
         /// @param context Optional context used for serialization.
         /// @return Packaged value.
-        virtual data::Package pack(uint32_t index, data::Context* context) const = 0;
+        virtual data::old::Package pack(uint32_t index, data::old::Context* context) const = 0;
 
         /// @brief Unpackages a value.
         /// @param index Index of the value to unpackage.
         /// @param package Package to unpackage.
         /// @param context Optional context used for deserialization.
         /// @return Whether the unpackaging was successful.
-        virtual bool unpack(uint32_t index, const data::Package& package, data::Context* context) = 0;
+        virtual bool unpack(uint32_t index, const data::old::Package& package, data::old::Context* context) = 0;
 
         /// @brief Gets the type the components being stored here.
         /// @return Component type.
@@ -70,12 +70,12 @@ namespace cubos::core::ecs
 
         // Implementation.
 
-        inline data::Package pack(uint32_t index, data::Context* context) const override
+        inline data::old::Package pack(uint32_t index, data::old::Context* context) const override
         {
-            return data::Package::from(*this->get(index), context);
+            return data::old::Package::from(*this->get(index), context);
         }
 
-        inline bool unpack(uint32_t index, const data::Package& package, data::Context* context) override
+        inline bool unpack(uint32_t index, const data::old::Package& package, data::old::Context* context) override
         {
             T value;
             if (package.into(value, context))

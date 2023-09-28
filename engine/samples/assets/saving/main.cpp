@@ -4,9 +4,9 @@
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 
-using cubos::core::data::Deserializer;
 using cubos::core::data::FileSystem;
-using cubos::core::data::Serializer;
+using cubos::core::data::old::Deserializer;
+using cubos::core::data::old::Serializer;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::memory::Stream;
@@ -20,7 +20,7 @@ struct IntegerAsset
 /// [Asset type]
 
 template <>
-void cubos::core::data::serialize<IntegerAsset>(Serializer& ser, const IntegerAsset& obj, const char* name)
+void cubos::core::data::old::serialize<IntegerAsset>(Serializer& ser, const IntegerAsset& obj, const char* name)
 {
     ser.beginObject(name);
     ser.write(obj.value, "value");
@@ -28,7 +28,7 @@ void cubos::core::data::serialize<IntegerAsset>(Serializer& ser, const IntegerAs
 }
 
 template <>
-void cubos::core::data::deserialize<IntegerAsset>(Deserializer& des, IntegerAsset& obj)
+void cubos::core::data::old::deserialize<IntegerAsset>(Deserializer& des, IntegerAsset& obj)
 {
     des.beginObject();
     des.read(obj.value);

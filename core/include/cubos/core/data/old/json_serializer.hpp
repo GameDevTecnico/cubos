@@ -7,7 +7,7 @@
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/memory/stream.hpp>
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     /// Implementation of the abstract Serializer class for serializing to JSON.
     /// Each time a top-level primitive/object/array/dictionary is written, its JSON output is written to the underlying
@@ -64,4 +64,4 @@ namespace cubos::core::data
         std::stack<Frame> mFrames; ///< The stack of frames.
         int mIndent;               ///< The indentation of the JSON output.
     };
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

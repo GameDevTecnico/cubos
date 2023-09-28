@@ -33,7 +33,7 @@ namespace cubos::core::geom
     };
 } // namespace cubos::core::geom
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     inline void serialize(Serializer& ser, const geom::Capsule& capsule, const char* name)
     {
@@ -50,4 +50,4 @@ namespace cubos::core::data
         des.read(capsule.length);
         des.endObject();
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

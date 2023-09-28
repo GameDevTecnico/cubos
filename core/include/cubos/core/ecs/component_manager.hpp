@@ -167,7 +167,7 @@ namespace cubos::core::ecs
         /// @param componentId Component identifier.
         /// @param context Optional context to use for serialization.
         /// @return Package containing the component.
-        data::Package pack(uint32_t id, std::size_t componentId, data::Context* context) const;
+        data::old::Package pack(uint32_t id, std::size_t componentId, data::old::Context* context) const;
 
         /// @brief Inserts a component into an entity, by unpacking a package.
         /// @param id Entity index.
@@ -175,7 +175,8 @@ namespace cubos::core::ecs
         /// @param package Package to unpack.
         /// @param context Optional context to use for deserialization.
         /// @return Whether the unpacking was successful.
-        bool unpack(uint32_t id, std::size_t componentId, const data::Package& package, data::Context* context);
+        bool unpack(uint32_t id, std::size_t componentId, const data::old::Package& package,
+                    data::old::Context* context);
 
     private:
         struct Entry

@@ -74,7 +74,7 @@ void Assets::cleanup()
             entry.second->status = Status::Unloaded;
             entry.second->destructor(entry.second->data);
             entry.second->data = nullptr;
-            CUBOS_DEBUG("Unloaded asset {}", core::data::Debug(AnyAsset(entry.first)));
+            CUBOS_DEBUG("Unloaded asset {}", core::data::old::Debug(AnyAsset(entry.first)));
         }
     }
 }
@@ -110,7 +110,7 @@ void Assets::loadMeta(std::string_view path)
 
         // Deserialize the asset metadata from the JSON string.
         auto meta = AssetMeta();
-        auto des = core::data::JSONDeserializer(contents);
+        auto des = core::data::old::JSONDeserializer(contents);
         des.read(meta);
         if (des.failed())
         {
@@ -157,7 +157,7 @@ void Assets::loadMeta(std::string_view path)
             this->invalidate(handle, false);
         }
 
-        CUBOS_DEBUG("Loaded asset {} metadata from '{}'", core::data::Debug(handle), path);
+        CUBOS_DEBUG("Loaded asset {} metadata from '{}'", core::data::old::Debug(handle), path);
     }
 }
 
@@ -186,7 +186,7 @@ AnyAsset Assets::load(AnyAsset handle) const
         std::unique_lock lock(mLoaderMutex);
         if (assetEntry->status == Assets::Status::Unloaded && std::this_thread::get_id() != mLoaderThread.get_id())
         {
-            CUBOS_TRACE("Queuing asset {} for loading", core::data::Debug(handle));
+            CUBOS_TRACE("Queuing asset {} for loading", core::data::old::Debug(handle));
             assetEntry->status = Assets::Status::Loading;
             mLoaderQueue.push_back(Task{handle, bridge});
             mLoaderCond.notify_one();
@@ -206,7 +206,7 @@ bool Assets::saveMeta(const AnyAsset& handle) const
     auto meta = this->readMeta(handle);
     if (auto path = meta->get("path"))
     {
-        CUBOS_DEBUG("Saving metadata for asset {}", core::data::Debug(handle));
+        CUBOS_DEBUG("Saving metadata for asset {}", core::data::old::Debug(handle));
 
         auto file = core::data::FileSystem::create(*path + ".meta");
         if (file == nullptr)
@@ -222,7 +222,7 @@ bool Assets::saveMeta(const AnyAsset& handle) const
             return false;
         }
 
-        auto serializer = core::data::JSONSerializer(*stream, 4);
+        auto serializer = core::data::old::JSONSerializer(*stream, 4);
         serializer.context().push(AssetMeta::Exclude{{"path"}}); // Don't save the path field.
         serializer.write(*meta, nullptr);
         return true;
@@ -249,7 +249,7 @@ bool Assets::save(const AnyAsset& handle) const
     }
 
     // Call the bridge's save method.
-    CUBOS_DEBUG("Saving data for asset {}", core::data::Debug(handle));
+    CUBOS_DEBUG("Saving data for asset {}", core::data::old::Debug(handle));
     return bridge->save(*this, handle);
 }
 
@@ -312,7 +312,7 @@ void Assets::invalidate(const AnyAsset& handle, bool shouldLock)
         assetEntry->status = Status::Unloaded;
         assetEntry->version++;
 
-        CUBOS_DEBUG("Invalidated asset {}", core::data::Debug(handle));
+        CUBOS_DEBUG("Invalidated asset {}", core::data::old::Debug(handle));
     }
 }
 
@@ -376,7 +376,7 @@ AnyAsset Assets::store(AnyAsset handle, std::type_index type, void* data, void (
     assetEntry->destructor = destructor;
     assetEntry->cond.notify_all();
 
-    CUBOS_DEBUG("Stored data of type {} for asset {}", type.name(), core::data::Debug(handle));
+    CUBOS_DEBUG("Stored data of type {} for asset {}", type.name(), core::data::old::Debug(handle));
 
     // Return a strong handle to the asset.
     assetEntry->refCount.fetch_add(1);
@@ -397,7 +397,7 @@ void* Assets::access(const AnyAsset& handle, std::type_index type, Lock& lock, b
     // If this is being called from the loader thread, we should load the asset synchronously.
     if (std::this_thread::get_id() == mLoaderThread.get_id() && assetEntry->status != Status::Loaded)
     {
-        CUBOS_DEBUG("Loading asset {} as a dependency", core::data::Debug(handle));
+        CUBOS_DEBUG("Loading asset {} as a dependency", core::data::old::Debug(handle));
 
         auto bridge = this->bridge(handle);
         CUBOS_ASSERT(bridge != nullptr, "Could not access asset");
@@ -408,7 +408,7 @@ void* Assets::access(const AnyAsset& handle, std::type_index type, Lock& lock, b
         lock.unlock();
         if (!bridge->load(const_cast<Assets&>(*this), handle))
         {
-            CUBOS_CRITICAL("Could not load asset {}", core::data::Debug(handle));
+            CUBOS_CRITICAL("Could not load asset {}", core::data::old::Debug(handle));
             abort();
         }
         lock.lock();
@@ -426,7 +426,7 @@ void* Assets::access(const AnyAsset& handle, std::type_index type, Lock& lock, b
     if (incVersion)
     {
         assetEntry->version++;
-        CUBOS_DEBUG("Incremented version of asset {}", core::data::Debug(handle));
+        CUBOS_DEBUG("Incremented version of asset {}", core::data::old::Debug(handle));
     }
 
     return assetEntry->data;
@@ -478,7 +478,7 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle) const
     auto it = mEntries.find(handle.getId());
     if (it == mEntries.end())
     {
-        CUBOS_ERROR("No such asset {}", core::data::Debug(handle));
+        CUBOS_ERROR("No such asset {}", core::data::old::Debug(handle));
         return nullptr;
     }
 
@@ -518,11 +518,11 @@ std::shared_ptr<Assets::Entry> Assets::entry(const AnyAsset& handle, bool create
             auto entry = std::make_shared<Entry>();
             entry->meta.set("id", uuids::to_string(handle.getId()));
             it = mEntries.emplace(handle.getId(), std::move(entry)).first;
-            CUBOS_TRACE("Created new asset entry for {}", core::data::Debug(handle));
+            CUBOS_TRACE("Created new asset entry for {}", core::data::old::Debug(handle));
         }
         else
         {
-            CUBOS_ERROR("No such asset {}", core::data::Debug(handle));
+            CUBOS_ERROR("No such asset {}", core::data::old::Debug(handle));
             return nullptr;
         }
     }
@@ -557,7 +557,7 @@ std::shared_ptr<AssetBridge> Assets::bridge(const AnyAsset& handle) const
         return best;
     }
 
-    CUBOS_ERROR("Cannot find a bridge for asset {}: asset does not have a path", core::data::Debug(handle));
+    CUBOS_ERROR("Cannot find a bridge for asset {}: asset does not have a path", core::data::old::Debug(handle));
     return nullptr;
 }
 
@@ -582,7 +582,7 @@ void Assets::loader()
 
         if (!task.bridge->load(*this, task.handle))
         {
-            CUBOS_ERROR("Failed to load asset '{}'", core::data::Debug(task.handle));
+            CUBOS_ERROR("Failed to load asset '{}'", core::data::old::Debug(task.handle));
 
             auto assetEntry = this->entry(task.handle);
             CUBOS_ASSERT(assetEntry != nullptr, "This should never happen");

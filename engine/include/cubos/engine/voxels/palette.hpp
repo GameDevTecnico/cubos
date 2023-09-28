@@ -13,11 +13,11 @@ namespace cubos::engine
     class VoxelPalette;
 }
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     void serialize(Serializer& serializer, const engine::VoxelPalette& palette, const char* name);
     void deserialize(Deserializer& deserializer, engine::VoxelPalette& palette);
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old
 
 namespace cubos::engine
 {
@@ -84,9 +84,10 @@ namespace cubos::engine
         void merge(const VoxelPalette& palette, float similarity = 1.0F);
 
     private:
-        friend void core::data::serialize(core::data::Serializer& /*serializer*/, const VoxelPalette& /*palette*/,
-                                          const char* /*name*/);
-        friend void core::data::deserialize(core::data::Deserializer& /*deserializer*/, VoxelPalette& /*palette*/);
+        friend void core::data::old::serialize(core::data::old::Serializer& /*serializer*/,
+                                               const VoxelPalette& /*palette*/, const char* /*name*/);
+        friend void core::data::old::deserialize(core::data::old::Deserializer& /*deserializer*/,
+                                                 VoxelPalette& /*palette*/);
 
         std::vector<VoxelMaterial> mMaterials; ///< Materials in the palette.
     };

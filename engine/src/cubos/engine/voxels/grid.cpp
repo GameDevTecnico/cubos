@@ -143,7 +143,7 @@ bool VoxelGrid::convert(const VoxelPalette& src, const VoxelPalette& dst, float 
     return true;
 }
 
-void cubos::core::data::serialize(Serializer& serializer, const VoxelGrid& grid, const char* name)
+void cubos::core::data::old::serialize(Serializer& serializer, const VoxelGrid& grid, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(grid.mSize, "size");
@@ -151,7 +151,7 @@ void cubos::core::data::serialize(Serializer& serializer, const VoxelGrid& grid,
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, VoxelGrid& grid)
+void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelGrid& grid)
 {
     deserializer.beginObject();
     deserializer.read(grid.mSize);

@@ -1,7 +1,7 @@
 #include <cubos/core/data/old/debug_serializer.hpp>
 
 using namespace cubos::core;
-using namespace cubos::core::data;
+using namespace cubos::core::data::old;
 
 DebugSerializer::DebugSerializer(memory::Stream& stream, bool pretty, bool typeNames)
     : mStream(stream)

@@ -5,7 +5,7 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 
-using cubos::core::data::Debug;
+using cubos::core::data::old::Debug;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::io::Window;

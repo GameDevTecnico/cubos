@@ -116,12 +116,12 @@ void AnyAsset::decRef() const
     }
 }
 
-void AnyAsset::serialize(core::data::Serializer& ser, const char* name) const
+void AnyAsset::serialize(core::data::old::Serializer& ser, const char* name) const
 {
     ser.write(uuids::to_string(this->getId()), name);
 }
 
-void AnyAsset::deserialize(core::data::Deserializer& des)
+void AnyAsset::deserialize(core::data::old::Deserializer& des)
 {
     std::string str;
     des.read(str);

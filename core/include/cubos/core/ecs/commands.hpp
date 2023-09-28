@@ -91,13 +91,13 @@ namespace cubos::core::ecs
     private:
         friend CommandBuffer;
 
-        data::SerializationMap<Entity, std::string> mMap; ///< Maps entity names to the instantiated entities.
-        CommandBuffer& mCommands;                         ///< Commands object that created this entity.
+        data::old::SerializationMap<Entity, std::string> mMap; ///< Maps entity names to the instantiated entities.
+        CommandBuffer& mCommands;                              ///< Commands object that created this entity.
 
         /// @brief Constructs.
         /// @param map Map of entity names to the instantiated entities.
         /// @param commands Commands object that created this entity.
-        BlueprintBuilder(data::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands);
+        BlueprintBuilder(data::old::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands);
     };
 
     /// @brief Used to write ECS commands and execute them at a later time.

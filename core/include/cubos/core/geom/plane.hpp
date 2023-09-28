@@ -19,7 +19,7 @@ namespace cubos::core::geom
     };
 } // namespace cubos::core::geom
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     inline void serialize(Serializer& ser, const geom::Plane& plane, const char* name)
     {
@@ -34,4 +34,4 @@ namespace cubos::core::data
         des.read(plane.normal);
         des.endObject();
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

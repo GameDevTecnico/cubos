@@ -30,8 +30,8 @@ namespace cubos::engine
     void triangulate(const VoxelGrid& grid, std::vector<VoxelVertex>& vertices, std::vector<uint32_t>& indices);
 } // namespace cubos::engine
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     void serialize(Serializer& serializer, const engine::VoxelVertex& vertex, const char* name);
     void deserialize(Deserializer& deserializer, engine::VoxelVertex& vertex);
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old
