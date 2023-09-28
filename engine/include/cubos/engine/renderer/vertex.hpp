@@ -1,5 +1,5 @@
 /// @file
-/// @brief Class @ref cubos::engine::Vertex and function @ref cubos::engine::triangulate.
+/// @brief Class @ref cubos::engine::VoxelVertex and function @ref cubos::engine::triangulate.
 /// @ingroup renderer-plugin
 
 #pragma once
@@ -15,7 +15,7 @@ namespace cubos::engine
 
     /// @brief Represents a voxel vertex.
     /// @ingroup renderer-plugin
-    struct Vertex
+    struct VoxelVertex
     {
         glm::uvec3 position; ///< Position of the vertex.
         glm::vec3 normal;    ///< Normal of the vertex.
@@ -27,11 +27,11 @@ namespace cubos::engine
     /// @param vertices Vertices of the mesh.
     /// @param indices Indices of the mesh.
     /// @ingroup renderer-plugin
-    void triangulate(const VoxelGrid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
+    void triangulate(const VoxelGrid& grid, std::vector<VoxelVertex>& vertices, std::vector<uint32_t>& indices);
 } // namespace cubos::engine
 
 namespace cubos::core::data
 {
-    void serialize(Serializer& serializer, const engine::Vertex& vertex, const char* name);
-    void deserialize(Deserializer& deserializer, engine::Vertex& vertex);
+    void serialize(Serializer& serializer, const engine::VoxelVertex& vertex, const char* name);
+    void deserialize(Deserializer& deserializer, engine::VoxelVertex& vertex);
 } // namespace cubos::core::data
