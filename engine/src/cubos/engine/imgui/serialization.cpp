@@ -6,7 +6,7 @@
 
 using namespace cubos::engine;
 
-using Package = cubos::core::data::Package;
+using Package = cubos::core::data::old::Package;
 
 // Converts a scalar (must not be an Object, Array or Dictionary) value to a
 // string.

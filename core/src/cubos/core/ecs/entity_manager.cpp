@@ -7,7 +7,7 @@ using namespace cubos::core::ecs;
 using namespace cubos::core::data;
 
 template <>
-void cubos::core::data::serialize<Entity>(Serializer& ser, const Entity& obj, const char* name)
+void cubos::core::data::old::serialize<Entity>(Serializer& ser, const Entity& obj, const char* name)
 {
     if (ser.context().has<SerializationMap<Entity, std::string>>())
     {
@@ -30,7 +30,7 @@ void cubos::core::data::serialize<Entity>(Serializer& ser, const Entity& obj, co
 }
 
 template <>
-void cubos::core::data::deserialize<Entity>(Deserializer& des, Entity& obj)
+void cubos::core::data::old::deserialize<Entity>(Deserializer& des, Entity& obj)
 {
     if (des.context().has<SerializationMap<Entity, std::string>>())
     {

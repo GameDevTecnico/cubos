@@ -6,7 +6,7 @@
 
 #include <cubos/core/data/old/context.hpp>
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     class Serializer;
 
@@ -26,7 +26,7 @@ namespace cubos::core::data
     /// serialization methods: `writeI8`, `writeString`, etc.
     ///
     /// @details More complex types can be serialized by implementing a specialization of the
-    /// `cubos::core::data::serialize` function:
+    /// `cubos::core::data::old::serialize` function:
     ///
     ///     struct MyType
     ///     {
@@ -34,7 +34,7 @@ namespace cubos::core::data
     ///     };
     ///
     ///     // In the corresponding .cpp file.
-    ///     void cubos::core::data::serialize<MyType>(Serializer& s, const MyType& obj, const char* name)
+    ///     void cubos::core::data::old::serialize<MyType>(Serializer& s, const MyType& obj, const char* name)
     ///     {
     ///         s.write(obj.a, "a");
     ///     }
@@ -123,7 +123,7 @@ namespace cubos::core::data
         virtual void writeString(const char* str, const char* name) = 0;
 
         /// Serializes an object.
-        /// The `cubos::core::data::serialize` function must be implemented for the given type.
+        /// The `cubos::core::data::old::serialize` function must be implemented for the given type.
         /// @tparam T The type of the object.
         /// @param obj The object to serialize.
         /// @param name The name of the object (optional).
@@ -256,4 +256,4 @@ namespace cubos::core::data
         ser.write(obj.second, "second");
         ser.endObject();
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

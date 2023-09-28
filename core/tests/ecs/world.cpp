@@ -4,7 +4,7 @@
 
 #include "utils.hpp"
 
-using cubos::core::data::Package;
+using cubos::core::data::old::Package;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
 

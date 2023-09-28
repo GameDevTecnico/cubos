@@ -5,7 +5,7 @@
 
 #include <cubos/core/log.hpp>
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     /// Class used to map between references and their serialized identifiers.
     /// @tparam R Reference type.
@@ -133,4 +133,4 @@ namespace cubos::core::data
         std::unordered_map<R, I> mRefToId;              ///< Map of references to serialized IDs.
         std::unordered_map<I, R> mIdToRef;              ///< Map of serialized IDs to references.
     };
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

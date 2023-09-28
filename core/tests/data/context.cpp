@@ -4,9 +4,9 @@
 
 #include "utils.hpp"
 
-using cubos::core::data::Context;
+using cubos::core::data::old::Context;
 
-TEST_CASE("data::Context")
+TEST_CASE("data::old::Context")
 {
     SUBCASE("empty does not have int")
     {

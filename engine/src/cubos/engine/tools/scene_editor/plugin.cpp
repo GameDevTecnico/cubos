@@ -11,7 +11,7 @@
 #include <cubos/engine/tools/entity_selector/plugin.hpp>
 #include <cubos/engine/tools/scene_editor/plugin.hpp>
 
-using cubos::core::data::Debug;
+using cubos::core::data::old::Debug;
 
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;

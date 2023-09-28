@@ -36,7 +36,7 @@ namespace cubos::engine
         bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override
         {
             // Initialize a binary deserializer with the file stream.
-            core::data::BinaryDeserializer deserializer{stream, mLittleEndian};
+            core::data::old::BinaryDeserializer deserializer{stream, mLittleEndian};
 
             // Deserialize the asset and store it in the asset manager.
             T data{};
@@ -54,7 +54,7 @@ namespace cubos::engine
         bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override
         {
             // Initialize a binary serializer with the file stream.
-            core::data::BinarySerializer serializer{stream, mLittleEndian};
+            core::data::old::BinarySerializer serializer{stream, mLittleEndian};
 
             // Read the asset from the asset manager and serialize it to the file stream.
             auto data = assets.read<T>(handle);

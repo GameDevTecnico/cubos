@@ -6,13 +6,13 @@
 using namespace cubos::engine;
 
 template <>
-void cubos::core::data::serialize<Settings>(Serializer& ser, const Settings& obj, const char* name)
+void cubos::core::data::old::serialize<Settings>(Serializer& ser, const Settings& obj, const char* name)
 {
     ser.write(obj.getValues(), name);
 }
 
 template <>
-void cubos::core::data::deserialize<Settings>(Deserializer& des, Settings& obj)
+void cubos::core::data::old::deserialize<Settings>(Deserializer& des, Settings& obj)
 {
     des.read(obj.getValues());
 }

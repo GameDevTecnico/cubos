@@ -6,11 +6,11 @@
 
 #include <uuid.h>
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     class Serializer;
     class Deserializer;
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old
 
 namespace cubos::engine
 {
@@ -88,8 +88,8 @@ namespace cubos::engine
         template <typename T>
         inline operator Asset<T>() const;
 
-        void serialize(core::data::Serializer& ser, const char* name) const;
-        void deserialize(core::data::Deserializer& des);
+        void serialize(core::data::old::Serializer& ser, const char* name) const;
+        void deserialize(core::data::old::Deserializer& des);
 
     private:
         friend class Assets;

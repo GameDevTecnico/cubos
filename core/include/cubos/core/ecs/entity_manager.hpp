@@ -16,7 +16,7 @@ namespace cubos::core::ecs
     /// @brief Identifies an entity.
     ///
     /// When serializing/deserializing, if there's a
-    /// data::SerializationMap<Entity, std::string> in the context, it will be used to
+    /// data::old::SerializationMap<Entity, std::string> in the context, it will be used to
     /// (de)serialize strings representing the entities. Otherwise, the identifiers will be
     /// (de)serialized as objects with two fields: their index and their generation.
     ///

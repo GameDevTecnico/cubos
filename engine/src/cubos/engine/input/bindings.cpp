@@ -32,7 +32,7 @@ std::unordered_map<std::string, InputAxis>& InputBindings::axes()
 }
 
 template <>
-void cubos::core::data::serialize<InputBindings>(Serializer& ser, const InputBindings& obj, const char* name)
+void cubos::core::data::old::serialize<InputBindings>(Serializer& ser, const InputBindings& obj, const char* name)
 {
     ser.beginObject(name);
     ser.beginDictionary(obj.actions().size(), "actions");
@@ -60,7 +60,7 @@ void cubos::core::data::serialize<InputBindings>(Serializer& ser, const InputBin
 }
 
 template <>
-void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindings& obj)
+void cubos::core::data::old::deserialize<InputBindings>(Deserializer& des, InputBindings& obj)
 {
     des.beginObject();
 
@@ -96,14 +96,14 @@ void cubos::core::data::deserialize<InputBindings>(Deserializer& des, InputBindi
 // Overloading these functions allows for human-readable serialization of the keybindings.
 
 template <>
-void cubos::core::data::serialize<Key, Modifiers>(Serializer& ser, const std::pair<Key, Modifiers>& obj,
-                                                  const char* name)
+void cubos::core::data::old::serialize<Key, Modifiers>(Serializer& ser, const std::pair<Key, Modifiers>& obj,
+                                                       const char* name)
 {
     ser.write(modifiersToString(obj.second) + keyToString(obj.first), name);
 }
 
 template <>
-void cubos::core::data::deserialize<Key, Modifiers>(Deserializer& des, std::pair<Key, Modifiers>& obj)
+void cubos::core::data::old::deserialize<Key, Modifiers>(Deserializer& des, std::pair<Key, Modifiers>& obj)
 {
     std::string str;
     des.readString(str);

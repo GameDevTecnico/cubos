@@ -329,7 +329,7 @@ static bool loadPalette(const fs::path& path, VoxelPalette& palette)
     }
 
     auto stream = memory::StandardStream(file, true);
-    auto deserializer = data::BinaryDeserializer(stream);
+    auto deserializer = data::old::BinaryDeserializer(stream);
     deserializer.read(palette);
     if (deserializer.failed())
     {
@@ -367,7 +367,7 @@ static bool savePalette(const fs::path& path, const VoxelPalette& palette)
     }
 
     auto stream = memory::StandardStream(file, true);
-    auto serializer = data::BinarySerializer(stream);
+    auto serializer = data::old::BinarySerializer(stream);
     serializer.write(palette, nullptr);
     if (serializer.failed())
     {
@@ -390,7 +390,7 @@ static bool saveGrid(const fs::path& path, const VoxelGrid& grid)
     }
 
     auto stream = memory::StandardStream(file, true);
-    auto serializer = data::BinarySerializer(stream);
+    auto serializer = data::old::BinarySerializer(stream);
     serializer.write(grid, nullptr);
     if (serializer.failed())
     {

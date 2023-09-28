@@ -5,7 +5,7 @@
 
 using namespace cubos::engine;
 
-void cubos::core::data::serialize(Serializer& serializer, const VoxelVertex& vertex, const char* name)
+void cubos::core::data::old::serialize(Serializer& serializer, const VoxelVertex& vertex, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(vertex.position, "position");
@@ -14,7 +14,7 @@ void cubos::core::data::serialize(Serializer& serializer, const VoxelVertex& ver
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, VoxelVertex& vertex)
+void cubos::core::data::old::deserialize(Deserializer& deserializer, VoxelVertex& vertex)
 {
     deserializer.beginObject();
     deserializer.read(vertex.position);

@@ -5,8 +5,8 @@
 
 #include "utils.hpp"
 
-using cubos::core::data::Package;
-using cubos::core::data::Unpackager;
+using cubos::core::data::old::Package;
+using cubos::core::data::old::Unpackager;
 using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Commands;

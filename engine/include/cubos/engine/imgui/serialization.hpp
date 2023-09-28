@@ -17,7 +17,7 @@ namespace cubos::engine
     /// @param pkg Packaged object to show.
     /// @param name Name of the object.
     /// @ingroup imgui-plugin
-    void imguiShowPackage(const core::data::Package& pkg, const std::string& name);
+    void imguiShowPackage(const core::data::old::Package& pkg, const std::string& name);
 
     /// @brief Shows a packaged object's properties in the UI, allowing the user to edit the
     /// object. Should be called inside a `ImGui::BeginTable(3)` and `ImGui::EndTable()` block.
@@ -30,7 +30,7 @@ namespace cubos::engine
     /// @param name Name of the object.
     /// @return True if the object was modified, false otherwise.
     /// @ingroup imgui-plugin
-    bool imguiEditPackage(core::data::Package& pkg, const std::string& name);
+    bool imguiEditPackage(core::data::old::Package& pkg, const std::string& name);
 
     /// @brief Shows a serializable object's properties in the UI. Should be called inside a
     /// `ImGui::BeginTable(2)` and `ImGui::EndTable()` block.
@@ -44,7 +44,7 @@ namespace cubos::engine
     template <typename T>
     inline void imguiShow(const T& object, const std::string& name)
     {
-        auto pkg = core::data::Package::from(object);
+        auto pkg = core::data::old::Package::from(object);
         imguiShowPackage(pkg, name);
     }
 
@@ -62,7 +62,7 @@ namespace cubos::engine
     template <typename T>
     inline bool imguiEdit(T& object, const std::string& name)
     {
-        auto pkg = core::data::Package::from(object);
+        auto pkg = core::data::old::Package::from(object);
         if (imguiEditPackage(pkg, name))
         {
             pkg.into(object);

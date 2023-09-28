@@ -52,7 +52,7 @@ namespace cubos::core::geom
     };
 } // namespace cubos::core::geom
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     inline void serialize(Serializer& ser, const geom::Box& box, const char* name)
     {
@@ -67,4 +67,4 @@ namespace cubos::core::data
         des.read(box.halfSize);
         des.endObject();
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

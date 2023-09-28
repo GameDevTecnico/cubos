@@ -68,7 +68,7 @@ namespace cubos::core::geom
     };
 } // namespace cubos::core::geom
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     inline void serialize(Serializer& ser, const geom::Simplex& simplex, const char* name)
     {
@@ -79,4 +79,4 @@ namespace cubos::core::data
     {
         des.read(simplex.points);
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

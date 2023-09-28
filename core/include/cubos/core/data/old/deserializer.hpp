@@ -6,7 +6,7 @@
 
 #include <cubos/core/data/old/context.hpp>
 
-namespace cubos::core::data
+namespace cubos::core::data::old
 {
     class Deserializer;
 
@@ -25,7 +25,7 @@ namespace cubos::core::data
     /// deserialization methods: `readI8`, `readString`, etc.
     ///
     /// @details More complex types can be deserialized by implementing a specialization of the
-    /// `cubos::core::data::deserialize` function:
+    /// `cubos::core::data::old::deserialize` function:
     ///
     ///     struct MyType
     ///     {
@@ -33,7 +33,7 @@ namespace cubos::core::data
     ///     };
     ///
     ///     // In the corresponding .cpp file.
-    ///     void cubos::core::data::deserialize<MyType>(Deserializer& d, MyType& obj)
+    ///     void cubos::core::data::old::deserialize<MyType>(Deserializer& d, MyType& obj)
     ///     {
     ///         d.read(obj.a, "a");
     ///     }
@@ -118,7 +118,7 @@ namespace cubos::core::data
         virtual void readString(std::string& value) = 0;
 
         /// Deserializes an object.
-        /// The `cubos::core::data::deserialize` function must be implemented for the given type.
+        /// The `cubos::core::data::old::deserialize` function must be implemented for the given type.
         /// The fail bit is set if the deserialization fails.
         /// @tparam T The type of the object.
         /// @param obj The object to deserialize.
@@ -247,4 +247,4 @@ namespace cubos::core::data
         des.read(obj.second);
         des.endObject();
     }
-} // namespace cubos::core::data
+} // namespace cubos::core::data::old

@@ -3,7 +3,7 @@
 using namespace cubos::core;
 using namespace cubos::core::ecs;
 
-bool Registry::create(std::string_view name, data::Deserializer& des, Blueprint& blueprint, Entity id)
+bool Registry::create(std::string_view name, data::old::Deserializer& des, Blueprint& blueprint, Entity id)
 {
     auto& creators = Registry::entriesByName();
     if (auto it = creators.find(std::string(name)); it != creators.end())

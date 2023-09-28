@@ -24,11 +24,11 @@ These macros can also take arguments:
 severity level @ref CUBOS_LOG_LEVEL_INFO or higher are logged. This can be changed by defining
 @ref CUBOS_LOG_LEVEL to the desired level.
 
-Serializable types can also be logged, using @ref cubos::core::data::Debug.
+Serializable types can also be logged, using @ref cubos::core::data::old::Debug.
 
 @snippet logging/main.cpp Debug wrapper include
 
-By wrapping the value in @ref cubos::core::data::Debug, the type is serialized using the
-@ref cubos::core::data::DebugSerializer, and the result is logged.
+By wrapping the value in @ref cubos::core::data::old::Debug, the type is serialized using the
+@ref cubos::core::data::old::DebugSerializer, and the result is logged.
 
 @snippet logging/main.cpp Debug wrapper usage
