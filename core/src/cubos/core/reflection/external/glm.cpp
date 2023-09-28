@@ -1,3 +1,5 @@
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #include <cubos/core/reflection/external/glm.hpp>
