@@ -522,8 +522,8 @@ cubos::engine::RendererGrid DeferredRenderer::upload(const VoxelGrid& grid)
     vaDesc.elements[0].type = Type::UInt;
     vaDesc.elements[0].size = 3;
     vaDesc.elements[0].buffer.index = 0;
-    vaDesc.elements[0].buffer.offset = offsetof(VoxelVertexertexertex, position);
-    vaDesc.elements[0].buffer.stride = sizeof(VoxelVertexertex);
+    vaDesc.elements[0].buffer.offset = offsetof(VoxelVertex, position);
+    vaDesc.elements[0].buffer.stride = sizeof(VoxelVertex);
     vaDesc.elements[1].name = "normal";
     vaDesc.elements[1].type = Type::Float;
     vaDesc.elements[1].size = 3;

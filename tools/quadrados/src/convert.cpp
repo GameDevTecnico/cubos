@@ -36,9 +36,9 @@ struct ConvertOptions
 /// @brief Represents the data read from a matrix in a QB file.
 struct QBMatrix
 {
-    VoxelGrid grid;           ///< Grid of the matrix.
-    VoxelPalette palette;     ///< VoxelPalette of the matrix.
-    glm::ivec3 position; ///< Position of the matrix.
+    VoxelGrid grid;       ///< Grid of the matrix.
+    VoxelPalette palette; ///< VoxelPalette of the matrix.
+    glm::ivec3 position;  ///< Position of the matrix.
 };
 
 /// Prints the help message of the program.
