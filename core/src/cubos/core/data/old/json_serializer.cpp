@@ -1,4 +1,4 @@
-#include <cubos/core/data/json_serializer.hpp>
+#include <cubos/core/data/old/json_serializer.hpp>
 #include <cubos/core/log.hpp>
 
 using namespace cubos::core::data;

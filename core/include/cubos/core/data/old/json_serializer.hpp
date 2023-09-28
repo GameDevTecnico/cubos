@@ -1,19 +1,23 @@
 #pragma once
 
-#include <cubos/core/data/serializer.hpp>
+#include <stack>
+
+#include <nlohmann/json.hpp>
+
+#include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/memory/stream.hpp>
 
 namespace cubos::core::data
 {
-    /// Implementation of the abstract Serializer class for serializing to binary data.
-    /// This class allows data to be serialized in both little and big endian formats.
-    class BinarySerializer : public Serializer
+    /// Implementation of the abstract Serializer class for serializing to JSON.
+    /// Each time a top-level primitive/object/array/dictionary is written, its JSON output is written to the underlying
+    /// stream.
+    class JSONSerializer : public Serializer
     {
     public:
         /// @param stream The stream to serialize to.
-        /// @param writeLittleEndian If true, the data will be written in little endian format (big endian otherwise).
-        BinarySerializer(memory::Stream& stream, bool writeLittleEndian = true);
-        ~BinarySerializer() override = default;
+        /// @param indent The JSON output indentantion (-1 means no indentation).
+        JSONSerializer(memory::Stream& stream, int indent = -1);
 
         // Implement interface methods.
 
@@ -37,7 +41,27 @@ namespace cubos::core::data
         void endDictionary() override;
 
     private:
-        memory::Stream& mStream; ///< The stream to serialize to.
-        bool mWriteLittleEndian; ///< Whether to write in little endian or big endian format.
+        void writeJSON(nlohmann::ordered_json&& json, const char* name);
+
+        /// The possible state modes of serialization.
+        enum class Mode
+        {
+            Object,
+            Array,
+            Dictionary
+        };
+
+        /// Holds the whole state of serialization.
+        struct Frame
+        {
+            Mode mode;                   ///< The mode of the frame.
+            nlohmann::ordered_json json; ///< The JSON object to serialize to.
+            nlohmann::ordered_json key;  ///< The JSON key value.
+            std::string name;            ///< The name of the value being serialized.
+        };
+
+        memory::Stream& mStream;   ///< The stream to serialize to.
+        std::stack<Frame> mFrames; ///< The stack of frames.
+        int mIndent;               ///< The indentation of the JSON output.
     };
 } // namespace cubos::core::data

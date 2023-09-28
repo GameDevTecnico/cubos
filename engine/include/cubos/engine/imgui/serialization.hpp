@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <cubos/core/data/package.hpp>
+#include <cubos/core/data/old/package.hpp>
 
 namespace cubos::engine
 {

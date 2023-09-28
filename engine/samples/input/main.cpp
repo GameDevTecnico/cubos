@@ -1,4 +1,4 @@
-#include <cubos/core/data/debug_serializer.hpp>
+#include <cubos/core/data/old/debug_serializer.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/input/bindings.hpp>

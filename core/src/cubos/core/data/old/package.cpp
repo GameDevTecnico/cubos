@@ -1,6 +1,6 @@
 #include <iterator>
 
-#include <cubos/core/data/package.hpp>
+#include <cubos/core/data/old/package.hpp>
 
 using namespace cubos::core::data;
 

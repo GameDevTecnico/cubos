@@ -1,5 +1,5 @@
 #include <cubos/core/data/fs/file_system.hpp>
-#include <cubos/core/data/json_deserializer.hpp>
+#include <cubos/core/data/old/json_deserializer.hpp>
 
 #include <cubos/engine/assets/assets.hpp>
 #include <cubos/engine/scene/bridge.hpp>

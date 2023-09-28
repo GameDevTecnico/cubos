@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <cubos/core/data/package.hpp>
-#include <cubos/core/data/serialization_map.hpp>
+#include <cubos/core/data/old/package.hpp>
+#include <cubos/core/data/old/serialization_map.hpp>
 #include <cubos/core/ecs/entity_manager.hpp>
 
 namespace cubos::core::ecs

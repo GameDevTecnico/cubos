@@ -6,8 +6,8 @@
 
 #include <glm/glm.hpp>
 
-#include <cubos/core/data/deserializer.hpp>
-#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/old/deserializer.hpp>
+#include <cubos/core/data/old/serializer.hpp>
 
 namespace cubos::engine
 {

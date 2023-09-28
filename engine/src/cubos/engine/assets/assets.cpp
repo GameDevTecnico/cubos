@@ -1,9 +1,9 @@
 #include <utility>
 
-#include <cubos/core/data/debug_serializer.hpp>
 #include <cubos/core/data/fs/file_system.hpp>
-#include <cubos/core/data/json_deserializer.hpp>
-#include <cubos/core/data/json_serializer.hpp>
+#include <cubos/core/data/old/debug_serializer.hpp>
+#include <cubos/core/data/old/json_deserializer.hpp>
+#include <cubos/core/data/old/json_serializer.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/assets/assets.hpp>

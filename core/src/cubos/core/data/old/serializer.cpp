@@ -5,7 +5,7 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 
-#include <cubos/core/data/serializer.hpp>
+#include <cubos/core/data/old/serializer.hpp>
 
 using namespace cubos::core::data;
 

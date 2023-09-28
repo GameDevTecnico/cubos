@@ -3,7 +3,7 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 
-#include <cubos/core/data/deserializer.hpp>
+#include <cubos/core/data/old/deserializer.hpp>
 
 using namespace cubos::core::data;
 

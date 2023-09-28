@@ -1,4 +1,4 @@
-#include <cubos/core/data/debug_serializer.hpp>
+#include <cubos/core/data/old/debug_serializer.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::data;
