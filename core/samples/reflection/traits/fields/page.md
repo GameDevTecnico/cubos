@@ -26,6 +26,18 @@ We can iterate over the fields of the type with it:
 
 @snippet reflection/traits/fields/main.cpp Iterating over fields
 
+This should output:
+
+@snippet reflection/traits/fields/main.cpp Iterating over fields output
+
+Its also possible to access the fields of an instance of the type, and iterate
+over them:
+
+@snippet reflection/traits/fields/main.cpp Iterating over fields with data
+@snippet reflection/traits/fields/main.cpp Iterating over fields with data output
+
 Its also possible to access the fields by name:
 
 @snippet reflection/traits/fields/main.cpp Accessing fields by name
+@snippet reflection/traits/fields/main.cpp Accessing fields by name output
+
