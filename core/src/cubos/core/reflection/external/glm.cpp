@@ -16,18 +16,18 @@ class AddressOfImpl final : public FieldsTrait::AddressOf
 public:
     /// @brief Constructs.
     /// @param column Column index.
-    AddressOfImpl(size_t column)
+    AddressOfImpl(glm::length_t column)
         : mColumn(column)
     {
     }
 
     uintptr_t get(const void* instance) const override
     {
-        return reinterpret_cast<uintptr_t>(&(static_cast<const T*>(instance)[mColumn]));
+        return reinterpret_cast<uintptr_t>(&((*static_cast<const T*>(instance))[mColumn]));
     }
 
 private:
-    size_t mColumn;
+    glm::length_t mColumn;
 };
 
 #define AUTO_CONSTRUCTIBLE(type)                                                                                       \
