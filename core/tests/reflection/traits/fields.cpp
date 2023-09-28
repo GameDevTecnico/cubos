@@ -43,7 +43,18 @@ TEST_CASE("reflection::FieldsTrait")
         ObjectType object{};
         CHECK(field->name() == "foo");
         CHECK(field->type().is<SimpleType>());
-        CHECK(fields.view(&object).get(*field) == &object.foo);
+
+        auto view = fields.view(&object);
+        CHECK(view.get(*field) == &object.foo);
+        CHECK(view.begin() != view.end());
+        CHECK(view.begin()->field == field);
+        CHECK(++view.begin() == view.end());
+
+        auto constView = fields.view(static_cast<const ObjectType*>(&object));
+        CHECK(constView.get(*field) == &object.foo);
+        CHECK(constView.begin() != constView.end());
+        CHECK(constView.begin()->field == field);
+        CHECK(++constView.begin() == constView.end());
     }
 
     SUBCASE("two fields")
@@ -66,5 +77,19 @@ TEST_CASE("reflection::FieldsTrait")
         CHECK(barField->name() == "bar");
         CHECK(barField->type().is<SimpleType>());
         CHECK(fields.view(static_cast<const ObjectType*>(&object)).get(*barField) == &object.bar);
+
+        auto view = fields.view(&object);
+        CHECK(view.get(*fooField) == &object.foo);
+        CHECK(view.begin() != view.end());
+        CHECK(view.begin()->field == fooField);
+        CHECK((++view.begin())->field == barField);
+        CHECK(++(++view.begin()) == view.end());
+
+        auto constView = fields.view(static_cast<const ObjectType*>(&object));
+        CHECK(constView.get(*fooField) == &object.foo);
+        CHECK(constView.begin() != constView.end());
+        CHECK(constView.begin()->field == fooField);
+        CHECK((++constView.begin())->field == barField);
+        CHECK(++(++constView.begin()) == constView.end());
     }
 }
