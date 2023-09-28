@@ -224,6 +224,12 @@ namespace cubos::core::reflection
         /// @return Field value.
         void* get(const Field& field) const;
 
+        /// @brief Gets a pointer to the value of the field with the given name on the object.
+        /// @note Returns null if field doesn't exist.
+        /// @param name Field name.
+        /// @return Field value.
+        void* get(const std::string& name) const;
+
         /// @brief Gets an iterator to the first field.
         /// @return Iterator.
         Iterator begin() const;
@@ -252,6 +258,12 @@ namespace cubos::core::reflection
         /// @param field Field.
         /// @return Field value.
         const void* get(const Field& field) const;
+
+        /// @brief Gets a pointer to the value of the field with the given name on the object.
+        /// @note Returns null if field doesn't exist.
+        /// @param name Field name.
+        /// @return Field value.
+        const void* get(const std::string& name) const;
 
         /// @brief Gets an iterator to the first field.
         /// @return Iterator.

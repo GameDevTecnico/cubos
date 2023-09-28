@@ -126,25 +126,25 @@ static void testQuat(const char* name, glm::tquat<T, Q> quat)
         REQUIRE(field.type().template is<T>());
     }
 
-    CHECK(*static_cast<T*>(view.get(*fields.field("x"))) == quat.x);
-    CHECK(*static_cast<T*>(view.get(*fields.field("y"))) == quat.y);
-    CHECK(*static_cast<T*>(view.get(*fields.field("z"))) == quat.z);
-    CHECK(*static_cast<T*>(view.get(*fields.field("w"))) == quat.w);
+    CHECK(*static_cast<T*>(view.get("x")) == quat.x);
+    CHECK(*static_cast<T*>(view.get("y")) == quat.y);
+    CHECK(*static_cast<T*>(view.get("z")) == quat.z);
+    CHECK(*static_cast<T*>(view.get("w")) == quat.w);
 
     quat = {};
-    *static_cast<T*>(view.get(*fields.field("x"))) = static_cast<T>(1);
+    *static_cast<T*>(view.get("x")) = static_cast<T>(1);
     CHECK(quat.x == static_cast<T>(1));
 
     quat = {};
-    *static_cast<T*>(view.get(*fields.field("y"))) = static_cast<T>(1);
+    *static_cast<T*>(view.get("y")) = static_cast<T>(1);
     CHECK(quat.y == static_cast<T>(1));
 
     quat = {};
-    *static_cast<T*>(view.get(*fields.field("z"))) = static_cast<T>(1);
+    *static_cast<T*>(view.get("z")) = static_cast<T>(1);
     CHECK(quat.z == static_cast<T>(1));
 
     quat = {};
-    *static_cast<T*>(view.get(*fields.field("w"))) = static_cast<T>(1);
+    *static_cast<T*>(view.get("w")) = static_cast<T>(1);
     CHECK(quat.w == static_cast<T>(1));
 }
 
