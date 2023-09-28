@@ -155,6 +155,18 @@ void* FieldsTrait::View::get(const Field& field) const
     return field.pointerTo(mInstance);
 }
 
+void* FieldsTrait::View::get(const std::string& name) const
+{
+    auto field = mTrait.field(name);
+
+    if (field == nullptr)
+    {
+        return nullptr;
+    }
+
+    return this->get(*field);
+}
+
 FieldsTrait::View::Iterator FieldsTrait::View::begin() const
 {
     return Iterator{*this, mTrait.mFirstField};
@@ -174,6 +186,18 @@ FieldsTrait::ConstView::ConstView(const FieldsTrait& trait, const void* instance
 const void* FieldsTrait::ConstView::get(const Field& field) const
 {
     return field.pointerTo(mInstance);
+}
+
+const void* FieldsTrait::ConstView::get(const std::string& name) const
+{
+    auto field = mTrait.field(name);
+
+    if (field == nullptr)
+    {
+        return nullptr;
+    }
+
+    return this->get(*field);
 }
 
 FieldsTrait::ConstView::Iterator FieldsTrait::ConstView::begin() const

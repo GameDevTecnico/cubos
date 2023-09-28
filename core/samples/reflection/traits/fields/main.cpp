@@ -86,7 +86,7 @@ int main()
 
     CUBOS_INFO("--- Accessing a specific field of an instance ---");
     /// [Accessing fields by name]
-    *static_cast<float*>(view.get(*fields.field("weight"))) += 20.0F;
+    *static_cast<float*>(view.get("weight")) += 20.0F;
     CUBOS_INFO("New weight: {}", person.weight); // 88.4
 }
 /// [Accessing fields by name]
