@@ -2,7 +2,7 @@
 
 using namespace cubos::engine;
 
-const Material Material::Empty = {{0, 0, 0, 0}};
+const VoxelMaterial VoxelMaterial::Empty = {{0, 0, 0, 0}};
 
 /// Returns the similarity between two colors.
 static float colorSimilarity(const glm::vec4& a, const glm::vec4& b)
@@ -10,12 +10,12 @@ static float colorSimilarity(const glm::vec4& a, const glm::vec4& b)
     return 1.0F - (glm::abs(a.r - b.r) + glm::abs(a.g - b.g) + glm::abs(a.b - b.b) + glm::abs(a.a - b.a)) / 4.0F;
 }
 
-float Material::similarity(const Material& other) const
+float VoxelMaterial::similarity(const VoxelMaterial& other) const
 {
     return colorSimilarity(this->color, other.color);
 }
 
-void cubos::core::data::serialize(Serializer& serializer, const Material& mat, const char* name)
+void cubos::core::data::serialize(Serializer& serializer, const VoxelMaterial& mat, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(mat.color.r, "r");
@@ -25,7 +25,7 @@ void cubos::core::data::serialize(Serializer& serializer, const Material& mat, c
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, Material& mat)
+void cubos::core::data::deserialize(Deserializer& deserializer, VoxelMaterial& mat)
 {
     deserializer.beginObject();
     deserializer.read(mat.color.r);

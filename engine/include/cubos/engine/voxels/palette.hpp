@@ -39,7 +39,7 @@ namespace cubos::engine
 
         /// @brief Constructs a palette with the given materials.
         /// @param materials Materials to add to the palette.
-        VoxelPalette(std::vector<Material>&& materials);
+        VoxelPalette(std::vector<VoxelMaterial>&& materials);
 
         /// @brief Constructs an empty palette.
         VoxelPalette() = default;
@@ -47,7 +47,7 @@ namespace cubos::engine
         /// @brief Gets a pointer to the array of materials on the palette.
         /// @note The first element in the array corresponds to index 1, as index 0 is reserved.
         /// @return Pointer to the array of materials on the palette.
-        const Material* data() const;
+        const VoxelMaterial* data() const;
 
         /// @brief Gets the number of materials in the palette, excluding the empty material.
         /// @return Number of materials in the palette.
@@ -56,28 +56,28 @@ namespace cubos::engine
         /// @brief Gets the material with the given index.
         /// @param index Index of the material to get (1-based, 0 is empty).
         /// @return Material at the given index.
-        const Material& get(uint16_t index) const;
+        const VoxelMaterial& get(uint16_t index) const;
 
         /// @brief Sets the material at the given index.
         /// @param index Index of the material to set (1-based, 0 is empty).
         /// @param material Material to set.
-        void set(uint16_t index, const Material& material);
+        void set(uint16_t index, const VoxelMaterial& material);
 
         /// @brief Searches for the index of the material most similar with the given material.
         /// @param material Material to compare with.
         /// @return Index of the material.
-        uint16_t find(const Material& material) const;
+        uint16_t find(const VoxelMaterial& material) const;
 
         /// @brief Adds a material to the palette, if one not similar enough already exists.
-        /// @note Materials equal to Material::Empty will be considered empty and may be replaced
-        /// by the new material.
+        /// @note Materials equal to @ref VoxelMaterial::Empty will be considered empty and may be
+        /// replaced by the new material.
         /// @param material Material to add.
         /// @param similarity Minimum similarity for a material to be considered similar enough.
         /// @return Index of the material in the palette (1-based, 0 is empty).
-        uint16_t add(const Material& material, float similarity = 1.0F);
+        uint16_t add(const VoxelMaterial& material, float similarity = 1.0F);
 
         /// @brief Merges another palette into this one.
-        /// @note All materials equal to Material::Empty will be considered empty and may be
+        /// @note All materials equal to @ref VoxelMaterial::Empty will be considered empty and may be
         /// overwritten.
         /// @param palette Palette to merge.
         /// @param similarity Minimum similarity for two materials to be merged.
@@ -88,6 +88,6 @@ namespace cubos::engine
                                           const char* /*name*/);
         friend void core::data::deserialize(core::data::Deserializer& /*deserializer*/, VoxelPalette& /*palette*/);
 
-        std::vector<Material> mMaterials; ///< Materials in the palette.
+        std::vector<VoxelMaterial> mMaterials; ///< Materials in the palette.
     };
 } // namespace cubos::engine

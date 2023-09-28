@@ -554,7 +554,7 @@ void DeferredRenderer::setPalette(const VoxelPalette& palette)
     std::vector<glm::vec4> data(65536, {1.0F, 0.0F, 1.0F, 1.0F});
     for (std::size_t i = 0; i < palette.size(); ++i)
     {
-        if (palette.data()[i].similarity(Material::Empty) < 1.0F)
+        if (palette.data()[i].similarity(VoxelMaterial::Empty) < 1.0F)
         {
             data[i + 1] = palette.data()[i].color;
         }
