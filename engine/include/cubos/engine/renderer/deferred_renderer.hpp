@@ -40,7 +40,7 @@ namespace cubos::engine
 
         // Implement interface methods.
 
-        RendererGrid upload(const Grid& grid) override;
+        RendererGrid upload(const VoxelGrid& grid) override;
         void setPalette(const Palette& palette) override;
 
     protected:

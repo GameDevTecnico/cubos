@@ -504,7 +504,7 @@ DeferredRenderer::~DeferredRenderer()
     core::gl::Debug::terminate();
 }
 
-cubos::engine::RendererGrid DeferredRenderer::upload(const Grid& grid)
+cubos::engine::RendererGrid DeferredRenderer::upload(const VoxelGrid& grid)
 {
     auto deferredGrid = std::make_shared<DeferredGrid>();
 

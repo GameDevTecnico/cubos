@@ -36,7 +36,7 @@ struct ConvertOptions
 /// @brief Represents the data read from a matrix in a QB file.
 struct QBMatrix
 {
-    Grid grid;           ///< Grid of the matrix.
+    VoxelGrid grid;           ///< Grid of the matrix.
     Palette palette;     ///< Palette of the matrix.
     glm::ivec3 position; ///< Position of the matrix.
 };
@@ -381,7 +381,7 @@ static bool savePalette(const fs::path& path, const Palette& palette)
 /// Saves the given grid to the given path.
 /// @param path The path of the grid.
 /// @param grid The grid to export.
-static bool saveGrid(const fs::path& path, const Grid& grid)
+static bool saveGrid(const fs::path& path, const VoxelGrid& grid)
 {
     auto* file = fopen(path.string().c_str(), "wb");
     if (file == nullptr)

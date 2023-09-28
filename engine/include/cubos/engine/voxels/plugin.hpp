@@ -16,7 +16,7 @@ namespace cubos::engine
     /// @brief Adds grid and palette assets to @b CUBOS.
     ///
     /// ## Bridges
-    /// - @ref BinaryBridge - registered with the `.grd` extension, loads @ref Grid assets.
+    /// - @ref BinaryBridge - registered with the `.grd` extension, loads @ref VoxelGrid assets.
     /// - @ref BinaryBridge - registered with the `.pal` extension, loads @ref Palette assets.
     ///
     /// ## Dependencies

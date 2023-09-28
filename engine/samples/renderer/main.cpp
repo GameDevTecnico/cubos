@@ -33,7 +33,7 @@ static void setPaletteSystem(Write<Renderer> renderer)
 static void spawnVoxelGridSystem(Commands commands, Write<Assets> assets)
 {
     // Create a 2x2x2 grid whose voxels alternate between the materials defined in the palette.
-    auto gridAsset = assets->create(Grid{{2, 2, 2}, {1, 2, 3, 1, 2, 3, 1, 2}});
+    auto gridAsset = assets->create(VoxelGrid{{2, 2, 2}, {1, 2, 3, 1, 2, 3, 1, 2}});
 
     // Spawn an entity with a renderable grid component and a identity transform.
     commands.create(RenderableGrid{gridAsset, {-1.0F, 0.0F, -1.0F}}, LocalToWorld{});

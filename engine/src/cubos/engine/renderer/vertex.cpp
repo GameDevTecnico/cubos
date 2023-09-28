@@ -23,7 +23,7 @@ void cubos::core::data::deserialize(Deserializer& deserializer, Vertex& vertex)
     deserializer.endObject();
 }
 
-void cubos::engine::triangulate(const Grid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
+void cubos::engine::triangulate(const VoxelGrid& grid, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
 {
     std::vector<uint16_t> mask;
 

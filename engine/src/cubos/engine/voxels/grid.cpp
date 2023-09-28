@@ -7,7 +7,7 @@
 
 using namespace cubos::engine;
 
-Grid::Grid(const glm::uvec3& size)
+VoxelGrid::VoxelGrid(const glm::uvec3& size)
 {
     if (size.x < 1 || size.y < 1 || size.z < 1)
     {
@@ -24,7 +24,7 @@ Grid::Grid(const glm::uvec3& size)
         static_cast<std::size_t>(mSize.x) * static_cast<std::size_t>(mSize.y) * static_cast<std::size_t>(mSize.z), 0);
 }
 
-Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
+VoxelGrid::VoxelGrid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
 {
     if (size.x < 1 || size.y < 1 || size.z < 1)
     {
@@ -47,21 +47,21 @@ Grid::Grid(const glm::uvec3& size, const std::vector<uint16_t>& indices)
     mIndices = indices;
 }
 
-Grid::Grid(Grid&& other) noexcept
+VoxelGrid::VoxelGrid(VoxelGrid&& other) noexcept
     : mSize(other.mSize)
 {
     new (&mIndices) std::vector<uint16_t>(std::move(other.mIndices));
 }
 
-Grid::Grid()
+VoxelGrid::VoxelGrid()
 {
     mSize = {1, 1, 1};
     mIndices.resize(1, 0);
 }
 
-Grid& Grid::operator=(const Grid& rhs) = default;
+VoxelGrid& VoxelGrid::operator=(const VoxelGrid& rhs) = default;
 
-void Grid::setSize(const glm::uvec3& size)
+void VoxelGrid::setSize(const glm::uvec3& size)
 {
     if (size == mSize)
     {
@@ -81,12 +81,12 @@ void Grid::setSize(const glm::uvec3& size)
         static_cast<std::size_t>(mSize.x) * static_cast<std::size_t>(mSize.y) * static_cast<std::size_t>(mSize.z), 0);
 }
 
-const glm::uvec3& Grid::size() const
+const glm::uvec3& VoxelGrid::size() const
 {
     return mSize;
 }
 
-void Grid::clear()
+void VoxelGrid::clear()
 {
     for (auto& i : mIndices)
     {
@@ -94,7 +94,7 @@ void Grid::clear()
     }
 }
 
-uint16_t Grid::get(const glm::ivec3& position) const
+uint16_t VoxelGrid::get(const glm::ivec3& position) const
 {
     assert(position.x >= 0 && position.x < static_cast<int>(mSize.x));
     assert(position.y >= 0 && position.y < static_cast<int>(mSize.y));
@@ -103,7 +103,7 @@ uint16_t Grid::get(const glm::ivec3& position) const
     return mIndices[static_cast<std::size_t>(index)];
 }
 
-void Grid::set(const glm::ivec3& position, uint16_t mat)
+void VoxelGrid::set(const glm::ivec3& position, uint16_t mat)
 {
     assert(position.x >= 0 && position.x < static_cast<int>(mSize.x));
     assert(position.y >= 0 && position.y < static_cast<int>(mSize.y));
@@ -112,7 +112,7 @@ void Grid::set(const glm::ivec3& position, uint16_t mat)
     mIndices[static_cast<std::size_t>(index)] = mat;
 }
 
-bool Grid::convert(const Palette& src, const Palette& dst, float minSimilarity)
+bool VoxelGrid::convert(const Palette& src, const Palette& dst, float minSimilarity)
 {
     // Find the mappings for every material in the source palette.
     std::unordered_map<uint16_t, uint16_t> mappings;
@@ -143,7 +143,7 @@ bool Grid::convert(const Palette& src, const Palette& dst, float minSimilarity)
     return true;
 }
 
-void cubos::core::data::serialize(Serializer& serializer, const Grid& grid, const char* name)
+void cubos::core::data::serialize(Serializer& serializer, const VoxelGrid& grid, const char* name)
 {
     serializer.beginObject(name);
     serializer.write(grid.mSize, "size");
@@ -151,7 +151,7 @@ void cubos::core::data::serialize(Serializer& serializer, const Grid& grid, cons
     serializer.endObject();
 }
 
-void cubos::core::data::deserialize(Deserializer& deserializer, Grid& grid)
+void cubos::core::data::deserialize(Deserializer& deserializer, VoxelGrid& grid)
 {
     deserializer.beginObject();
     deserializer.read(grid.mSize);
