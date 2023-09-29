@@ -26,6 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         choco install ccache --version ${{ env.CCACHE_VERSION }}
+        python -m pip install jinja2
 
     - name: Get timestamp
       shell: bash
