@@ -40,6 +40,9 @@ jobs:
         CC:   gcc-11
         CXX:  g++-11
 
+    - name: Build glad
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target glad
+
     - name: Analyze
       run: |
         run-clang-tidy -j$(nproc) -p=build \
