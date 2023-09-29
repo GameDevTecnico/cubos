@@ -67,29 +67,7 @@
                   <li class="m-doc-collapsible collapsed">
                     <a href="#" onclick="return toggle(this)">namespace</a> <a href="namespacecubos_1_1core_1_1data.html" class="m-doc">data</a> <span class="m-doc"><a href="group__core-data.html" class="m-doc">Data</a> module.</span>
                     <ul class="m-doc">
-                      <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">namespace</a> <a href="namespacecubos_1_1core_1_1data_1_1impl.html" class="m-doc">impl</a> <span class="m-doc"></span>
-                        <ul class="m-doc">
-                          <li>class <a href="classcubos_1_1core_1_1data_1_1impl_1_1Packager.html" class="m-doc">Packager</a> <span class="m-doc"></span></li>
-                        </ul>
-                      </li>
                       <li>class <a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> <span class="m-doc">Interface for a bridge between the CUBOS. virtual file system and the real world.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1data_1_1BinaryDeserializer.html" class="m-doc">BinaryDeserializer</a> <span class="m-doc"></span></li>
-                      <li>class <a href="classcubos_1_1core_1_1data_1_1BinarySerializer.html" class="m-doc">BinarySerializer</a> <span class="m-doc"></span></li>
-                      <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1data_1_1Context.html" class="m-doc">Context</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc"></span>
-                        <ul class="m-doc">
-                          <li>struct <a href="structcubos_1_1core_1_1data_1_1Context_1_1Entry.html" class="m-doc">Entry</a> <span class="m-doc">Data associated with either a stored value, or a sub-context.</span></li>
-                        </ul>
-                      </li>
-                      <li>struct <a href="structcubos_1_1core_1_1data_1_1Debug.html" class="m-doc">Debug</a> <span class="m-doc"></span></li>
-                      <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1data_1_1DebugSerializer.html" class="m-doc">DebugSerializer</a> <span class="m-doc"></span>
-                        <ul class="m-doc">
-                          <li>struct <a href="structcubos_1_1core_1_1data_1_1DebugSerializer_1_1State.html" class="m-doc">State</a> <span class="m-doc">Data of a serialization state.</span></li>
-                        </ul>
-                      </li>
-                      <li>class <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> <span class="m-doc"></span></li>
                       <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1data_1_1EmbeddedArchive.html" class="m-doc">EmbeddedArchive</a> <span class="m-doc"><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads data embedded in the application. Meant to be used with the <code>quadrados embed</code> tool.</span>
                         <ul class="m-doc">
@@ -105,27 +83,11 @@
                       <li>class <a href="classcubos_1_1core_1_1data_1_1FileStream.html" class="m-doc">FileStream</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Wrapper around an implementation-specific file stream which keeps the file alive and does some sanity checks.</span></li>
                       <li>class <a href="classcubos_1_1core_1_1data_1_1FileSystem.html" class="m-doc">FileSystem</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Singleton which represents the virtual file system of the engine.</span></li>
                       <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1data_1_1JSONDeserializer.html" class="m-doc">JSONDeserializer</a> <span class="m-doc">Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a> class for deserializing from JSON.</span>
-                        <ul class="m-doc">
-                          <li>struct <a href="structcubos_1_1core_1_1data_1_1JSONDeserializer_1_1Frame.html" class="m-doc">Frame</a> <span class="m-doc">The current frame of deserialization.</span></li>
-                        </ul>
-                      </li>
-                      <li class="m-doc-collapsible collapsed">
-                        <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html" class="m-doc">JSONSerializer</a> <span class="m-doc"></span>
-                        <ul class="m-doc">
-                          <li>struct <a href="structcubos_1_1core_1_1data_1_1JSONSerializer_1_1Frame.html" class="m-doc">Frame</a> <span class="m-doc">Holds the whole state of serialization.</span></li>
-                        </ul>
-                      </li>
-                      <li>class <a href="classcubos_1_1core_1_1data_1_1Package.html" class="m-doc">Package</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">A utility object which is capable of storing the data of any trivially serializable object. One way to understand this class is to think of it as if it were a JSON representation of an object.</span></li>
-                      <li>class <a href="classcubos_1_1core_1_1data_1_1SerializationMap.html" class="m-doc">SerializationMap</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc"></span></li>
-                      <li>class <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> <span class="m-doc"></span></li>
-                      <li class="m-doc-collapsible collapsed">
                         <a href="#" onclick="return toggle(this)">class</a> <a href="classcubos_1_1core_1_1data_1_1StandardArchive.html" class="m-doc">StandardArchive</a> <span class="m-doc"><a href="classcubos_1_1core_1_1data_1_1Archive.html" class="m-doc">Archive</a> implementation which reads and writes from/into the OS file system using the standard library.</span>
                         <ul class="m-doc">
                           <li>struct <a href="structcubos_1_1core_1_1data_1_1StandardArchive_1_1FileInfo.html" class="m-doc">FileInfo</a> <span class="m-doc">Information about a file in the directory.</span></li>
                         </ul>
                       </li>
-                      <li>class <a href="classcubos_1_1core_1_1data_1_1Unpackager.html" class="m-doc">Unpackager</a> <span class="m-doc">Responsible for deserializing packages into types.</span></li>
                     </ul>
                   </li>
                   <li class="m-doc-collapsible collapsed">
