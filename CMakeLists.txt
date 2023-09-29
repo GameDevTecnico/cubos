@@ -67,6 +67,7 @@ function(cubos_common_target_options target)
             /wd4996  # Disable warning about deprecated functions
             /wd4458  # Disable warning about shadowing member variables
             /wd4456  # Disable warning about shadowing local variables
+            /wd4335  # Disable warning about Mac file format
             /wd5030> # Introduces false positives for [[cubos::component]]
             
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
