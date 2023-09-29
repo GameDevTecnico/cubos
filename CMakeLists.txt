@@ -6,6 +6,8 @@ project(cubos VERSION 0.1.0)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
+set(CMAKE_CXX_STANDARD 20)
+
 # Should clang-tidy errors be automatically fixed?
 option(FIX_CLANG_TIDY_ERRORS "Automatically fix clang-tidy errors" OFF)
 
@@ -56,8 +58,6 @@ endif()
 
 # Function which configures a target with the options common to all CUBOS. targets.
 function(cubos_common_target_options target)
-    target_compile_features(${target} PRIVATE cxx_std_20)
-
     # Enable all warnings and treat them as errors
     target_compile_options(${target} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
