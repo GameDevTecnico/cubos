@@ -1,1 +1,2 @@
-core/lib/** linguist-vendored
+core/lib/** linguist-vendored -diff
+engine/lib/** linguist-vendored -diff

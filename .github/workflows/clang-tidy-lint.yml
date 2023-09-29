@@ -44,7 +44,7 @@ jobs:
       run: |
         run-clang-tidy -j$(nproc) -p=build \
           -header-filter="(core|engine)/(src|include)/.*" \
-          files "($(git diff -U0 --name-only HEAD^ | paste -s -d\|))" \
+          files "($(git diff -U0 --name-only HEAD^ | grep -vP '.*/lib/.*' | paste -s -d\|))" \
           -export-fixes clang-tidy-fixes.yaml || true
 
     - name: Run clang-tidy-pr-comments action
