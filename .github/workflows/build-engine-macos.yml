@@ -25,6 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         brew install glfw llvm@14 ccache
+        python -m pip install jinja2
 
     - name: Get timestamp
       shell: bash
