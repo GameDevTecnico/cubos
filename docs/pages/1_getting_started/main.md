@@ -16,17 +16,20 @@ repository with git.
 
 The following dependencies are used to compile **CUBOS.**:
 
-| Name                                                | Importance         | Submodule Path     | Installed Separately |
-| --------------------------------------------------- | ------------------ | ------------------ | -------------------- |
-| [CMake](https://cmake.org/)                         | Essential          | -                  | Yes                  |
-| [json](https://github.com/nlohmann/json)            | Essential          | -                  | No                   |
-| [glad](https://github.com/Dav1dde/glad)             | Essential          | -                  | No                   |
-| [glfw](https://github.com/glfw/glfw)                | Essential          | `core/lib/glfw`    | Optionally           |
-| [glm](https://github.com/g-truc/glm)                | Essential          | `core/lib/glm`     | Optionally           |
-| [fmt](https://github.com/fmtlib/fmt)                | Essential          | `core/lib/fmt`     | Optionally           |
-| [spdlog](https://github.com/gabime/spdlog)          | Essential          | `core/lib/spdlog`  | Optionally           |
-| [stduuid](https://github.com/mariusbancila/stduuid) | Essential          | `core/lib/stduuid` | No                   |
-| [doctest](https://github.com/doctest/doctest)       | Required for tests | `core/lib/doctest` | Optionally           |
+| Name                                                | Importance                | Submodule Path     | Installed Separately | Version* |
+| --------------------------------------------------- | ------------------------- | ------------------ | -------------------- | -------- |
+| [CMake](https://cmake.org/)                         | Essential                 | -                  | Yes                  | -        |
+| [glad](https://github.com/Dav1dde/glad)             | Essential                 | `core/lib/glad`    | No                   | 2.0.4    |
+| [glfw](https://github.com/glfw/glfw)                | Essential                 | `core/lib/glfw`    | Optionally           | 3.3.8    |
+| [glm](https://github.com/g-truc/glm)                | Essential                 | `core/lib/glm`     | Optionally           | 0.9.9.8  |
+| [spdlog](https://github.com/gabime/spdlog)          | Essential                 | `core/lib/spdlog`  | Optionally (broken)  | 1.9.1    |
+| [fmt](https://github.com/fmtlib/fmt)                | Essential                 | `core/lib/fmt`     | Optionally (broken)  | 8.0.1    |
+| [stduuid](https://github.com/mariusbancila/stduuid) | Essential                 | `core/lib/stduuid` | No                   | 1.2.3    |
+| [doctest](https://github.com/doctest/doctest)       | Required for tests        | `core/lib/doctest` | Optionally           | 2.4.11   |
+| [imgui](https://github.com/ocornut/imgui)           | Required for imgui plugin | `engine/lib/imgui` | No                   | 1.89.9   |
+| [json](https://github.com/nlohmann/json)            | Essential                 | `core/lib/json`    | No                   | 3.11.2   |
+
+*versions tested in CI and installed by submodules, others might work
 
 Dependencies marked as *Essential* are required to compile the engine. If they
 are installed separately, you must first install them manually. If they're not,
