@@ -17,7 +17,13 @@
             cmake
             ccache
             pkg-config
-            (python3.withPackages (ps: [ ps.jinja2 ]))
+
+            # = docs =
+            doxygen
+            (python3.withPackages (ps: [
+              ps.jinja2
+              ps.pygments
+            ]))
 
             # = libs =
             glfw
