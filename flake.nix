@@ -18,6 +18,9 @@
             ccache
             pkg-config
 
+            # = formatting =
+            clang-tools
+
             # = docs =
             doxygen
             (python3.withPackages (ps: [
