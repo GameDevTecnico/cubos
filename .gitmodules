@@ -30,4 +30,4 @@
 	url = https://github.com/nlohmann/json.git
 [submodule "core/lib/glad"]
 	path = core/lib/glad
-	url = git@github.com:Dav1dde/glad.git
+	url = https://github.com/Dav1dde/glad.git
