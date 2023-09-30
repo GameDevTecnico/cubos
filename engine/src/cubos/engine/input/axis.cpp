@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include <cubos/core/io/keyboard.hpp>
 #include <cubos/core/log.hpp>
 
@@ -45,9 +47,11 @@ float InputAxis::value() const
 
 void InputAxis::value(float value)
 {
-    if (std::abs(value) > 1.0F)
+    mValue = value;
+
+    if (std::abs(mValue) > 1.0F)
     {
-        CUBOS_WARN("Axis value out of range: {}", value);
+        CUBOS_WARN("Axis value out of range: {}", mValue);
+        mValue = mValue > 1.0F ? 1.0F : -1.0F;
     }
-    mValue = std::clamp(value, -1.0F, 1.0F);
 }
