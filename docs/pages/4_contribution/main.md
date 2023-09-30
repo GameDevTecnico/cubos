@@ -10,9 +10,11 @@ or something similar to force yourself to review the changes you are
 commiting, and to avoid accidentally commiting unrelated changes.
 
 Commits should follow [Conventional Commits](https://www.conventionalcommits.org/)
-and be written in imperative mood. We use the scopes `core`, `engine` and
-`tools`. When making a commit which affects more than one of these scopes,
-you can ommit the scope.
+and be written in imperative mood. As scopes, we use the names of the labels
+that start by `B-` in the [label list](https://github.com/GameDevTecnico/cubos/labels)
+(e.g.: `assets`, `audio`). If the commit affects multiple of those areas, then
+pick one of the labels that start by `A-` (e.g.: `core`, `engine`, `tesseratos`).
+If a commit affects more than one of those, then you can ommit the scope.
 
 If your description is too long, you can add a body to the commit message.
 The body should be separated from the description by a blank line.
