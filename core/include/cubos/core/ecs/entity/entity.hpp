@@ -1,6 +1,6 @@
 /// @file
 /// @brief Struct @ref cubos::core::ecs::Entity.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-entity
 
 #pragma once
 
@@ -16,7 +16,7 @@ namespace cubos::core::ecs
     /// (de)serialize strings representing the entities. Otherwise, the identifiers will be
     /// (de)serialized as objects with two fields: their index and their generation.
     ///
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-entity
     struct Entity
     {
         /// @brief Type used to store which components an entity has.

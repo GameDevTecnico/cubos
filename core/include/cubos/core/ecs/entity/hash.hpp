@@ -1,6 +1,6 @@
 /// @file
 /// @brief Struct @ref cubos::core::ecs::EntityHash.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-entity
 
 #pragma once
 
@@ -14,7 +14,7 @@ namespace cubos::core::ecs
     ///
     /// Can be used to allow @ref Entity objects to be used as keys in an `std::unordered_map`.
     ///
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-entity
     struct EntityHash
     {
         std::size_t operator()(const Entity& entity) const noexcept;

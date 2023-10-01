@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref core-ecs-entity directory.
+
+namespace cubos::core::ecs
+{
+    /// @defgroup core-ecs-entity Entity
+    /// @ingroup core-ecs
+    /// @brief Entity part of the ECS.
+}

@@ -1,6 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::EntityManager.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-entity
 
 #pragma once
 
@@ -14,11 +14,11 @@
 
 namespace cubos::core::ecs
 {
-    /// @brief Holds and manages entities and their component masks.
+    /// @brief Internal type which holds and manages entities and their component masks.
     ///
     /// Used internally by @ref World.
     ///
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-entity
     class EntityManager final
     {
     public:
