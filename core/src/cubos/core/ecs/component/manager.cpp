@@ -1,4 +1,4 @@
-#include <cubos/core/ecs/component_manager.hpp>
+#include <cubos/core/ecs/component/manager.hpp>
 #include <cubos/core/ecs/registry.hpp>
 
 using namespace cubos::core;
