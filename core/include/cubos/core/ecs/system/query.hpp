@@ -4,7 +4,7 @@
 /// This file is a bit scary, but it's not as bad as it looks. It's mostly template specializations
 /// to handle the different types of arguments a query can take.
 ///
-/// @ingroup core-ecs
+/// @ingroup core-ecs-system
 
 #pragma once
 
@@ -19,7 +19,7 @@
 namespace cubos::core::ecs
 {
     /// @brief Describes a query.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     struct QueryInfo
     {
         std::unordered_set<std::type_index> read;    ///< Componenst read.
@@ -89,8 +89,8 @@ namespace cubos::core::ecs
         };
     } // namespace impl
 
-    /// @brief Holds the result of a query over all entities in world which match the given
-    /// arguments.
+    /// @brief System argument which holds the result of a query over all entities in world which
+    /// match the given arguments.
     ///
     /// An example of a valid query is:
     ///
@@ -103,7 +103,7 @@ namespace cubos::core::ecs
     /// not present in the entity. Whenever mutability is not needed, Read/OptRead should be used.
     ///
     /// @tparam ComponentTypes Component accessor types to be queried.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     template <typename... ComponentTypes>
     class Query
     {

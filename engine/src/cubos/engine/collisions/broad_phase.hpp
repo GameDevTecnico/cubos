@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <cubos/core/ecs/query.hpp>
+#include <cubos/core/ecs/system/query.hpp>
 
 #include <cubos/engine/collisions/aabb.hpp>
 #include <cubos/engine/collisions/broad_phase_collisions.hpp>

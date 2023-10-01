@@ -1,4 +1,4 @@
-#include <cubos/core/ecs/query.hpp>
+#include <cubos/core/ecs/system/query.hpp>
 
 #include <cubos/engine/renderer/deferred_renderer.hpp>
 #include <cubos/engine/renderer/directional_light.hpp>
