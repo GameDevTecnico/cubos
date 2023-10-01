@@ -1,6 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::Dispatcher.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-system
 
 #pragma once
 
@@ -51,7 +51,7 @@
 namespace cubos::core::ecs
 {
     /// @brief Used to add systems and relations between them and then dispatch them all at once.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     class Dispatcher
     {
     public:
