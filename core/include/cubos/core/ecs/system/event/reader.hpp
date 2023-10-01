@@ -1,12 +1,12 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::EventReader.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-system
 
 #pragma once
 
 #include <optional>
 
-#include <cubos/core/ecs/event_pipe.hpp>
+#include <cubos/core/ecs/system/event/pipe.hpp>
 
 namespace cubos::core::ecs
 {
@@ -18,7 +18,7 @@ namespace cubos::core::ecs
     /// @see Systems can send events using @ref EventWriter.
     /// @tparam T Event.
     /// @tparam M Filter mask.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     template <typename T, unsigned int M = DEFAULT_FILTER_MASK>
     class EventReader
     {

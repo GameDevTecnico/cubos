@@ -7,8 +7,8 @@
 #include <set>
 #include <string>
 
-#include <cubos/core/ecs/event_pipe.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
+#include <cubos/core/ecs/system/event/pipe.hpp>
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/world.hpp>
 
