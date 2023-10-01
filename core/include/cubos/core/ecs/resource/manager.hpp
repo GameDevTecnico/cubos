@@ -1,6 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::ResourceManager and related types.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-resource
 
 #pragma once
 
@@ -15,7 +15,7 @@ namespace cubos::core::ecs
 {
     /// @brief Utility struct used to reference a resource of type @p T for reading.
     /// @tparam T Resource type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-resource
     template <typename T>
     class ReadResource
     {
@@ -42,7 +42,7 @@ namespace cubos::core::ecs
 
     /// @brief Utility struct used to reference a resource of type @p T for writing.
     /// @tparam T Resource type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-resource
     template <typename T>
     class WriteResource
     {
@@ -71,7 +71,7 @@ namespace cubos::core::ecs
     ///
     /// Used internally by @ref World.
     ///
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-resource
     class ResourceManager final
     {
     public:

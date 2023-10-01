@@ -10,7 +10,7 @@
 
 #include <cubos/core/ecs/component/manager.hpp>
 #include <cubos/core/ecs/entity/manager.hpp>
-#include <cubos/core/ecs/resource_manager.hpp>
+#include <cubos/core/ecs/resource/manager.hpp>
 #include <cubos/core/log.hpp>
 
 namespace cubos::core::ecs
