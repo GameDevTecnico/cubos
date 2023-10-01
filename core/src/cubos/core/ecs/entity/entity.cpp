@@ -2,13 +2,15 @@
 #include <cubos/core/data/old/serialization_map.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/ecs/entity/entity.hpp>
+#include <cubos/core/ecs/entity/hash.hpp>
 
 using cubos::core::ecs::Entity;
+using cubos::core::ecs::EntityHash;
 
 template <>
 void cubos::core::data::old::serialize<Entity>(Serializer& ser, const Entity& obj, const char* name)
 {
-    if (ser.context().has<SerializationMap<Entity, std::string>>())
+    if (ser.context().has<SerializationMap<Entity, std::string, EntityHash>>())
     {
         if (obj.isNull())
         {
@@ -16,7 +18,7 @@ void cubos::core::data::old::serialize<Entity>(Serializer& ser, const Entity& ob
             return;
         }
 
-        auto& map = ser.context().get<SerializationMap<Entity, std::string>>();
+        auto& map = ser.context().get<SerializationMap<Entity, std::string, EntityHash>>();
         ser.write(map.getId(obj), name);
     }
     else
@@ -31,7 +33,7 @@ void cubos::core::data::old::serialize<Entity>(Serializer& ser, const Entity& ob
 template <>
 void cubos::core::data::old::deserialize<Entity>(Deserializer& des, Entity& obj)
 {
-    if (des.context().has<SerializationMap<Entity, std::string>>())
+    if (des.context().has<SerializationMap<Entity, std::string, EntityHash>>())
     {
         std::string name;
         des.read(name);
@@ -41,7 +43,7 @@ void cubos::core::data::old::deserialize<Entity>(Deserializer& des, Entity& obj)
             return;
         }
 
-        auto& map = des.context().get<SerializationMap<Entity, std::string>>();
+        auto& map = des.context().get<SerializationMap<Entity, std::string, EntityHash>>();
         if (map.hasId(name))
         {
             obj = map.getRef(name);

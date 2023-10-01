@@ -8,6 +8,7 @@
 #include <cubos/core/data/old/binary_serializer.hpp>
 #include <cubos/core/data/old/serialization_map.hpp>
 #include <cubos/core/ecs/commands.hpp>
+#include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
 #include <cubos/core/memory/type_map.hpp>
 
@@ -64,7 +65,7 @@ namespace cubos::core::ecs
 
         /// @brief Returns the internal map that maps entities to their names
         /// @return Map of entities and names.
-        inline std::unordered_map<Entity, std::string> getMap() const
+        inline std::unordered_map<Entity, std::string, EntityHash> getMap() const
         {
             return mMap.getMap();
         }
@@ -115,7 +116,7 @@ namespace cubos::core::ecs
                 auto des = data::old::BinaryDeserializer(this->stream);
                 des.context().pushSubContext(context);
 
-                auto& map = des.context().get<data::old::SerializationMap<Entity, std::string>>();
+                auto& map = des.context().get<data::old::SerializationMap<Entity, std::string, EntityHash>>();
                 for (const auto& name : this->names)
                 {
                     ComponentType type;
@@ -165,7 +166,7 @@ namespace cubos::core::ecs
         };
 
         /// @brief Stores the entity handles and the associated names.
-        data::old::SerializationMap<Entity, std::string> mMap;
+        data::old::SerializationMap<Entity, std::string, EntityHash> mMap;
 
         /// @brief Buffers which store the serialized components of each type in this blueprint.
         memory::TypeMap<IBuffer*> mBuffers;

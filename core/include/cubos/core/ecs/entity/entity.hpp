@@ -6,14 +6,13 @@
 
 #include <bitset>
 #include <cstdint>
-#include <functional>
 
 namespace cubos::core::ecs
 {
     /// @brief Identifies an entity.
     ///
     /// When serializing/deserializing, if there's a
-    /// data::old::SerializationMap<Entity, std::string> in the context, it will be used to
+    /// data::old::SerializationMap<Entity, std::string, EntityHash> in the context, it will be used to
     /// (de)serialize strings representing the entities. Otherwise, the identifiers will be
     /// (de)serialized as objects with two fields: their index and their generation.
     ///
@@ -65,17 +64,3 @@ namespace cubos::core::ecs
         uint32_t generation;
     };
 } // namespace cubos::core::ecs
-
-namespace std
-{
-    // Add hash function for Entity, so that it can be used as a key in an unordered_map.
-
-    template <>
-    struct hash<cubos::core::ecs::Entity>
-    {
-        inline std::size_t operator()(const cubos::core::ecs::Entity& k) const
-        {
-            return hash<uint32_t>()(k.index);
-        }
-    };
-} // namespace std

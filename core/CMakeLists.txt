@@ -71,6 +71,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/al/oal_audio_device.hpp"
 
     "src/cubos/core/ecs/entity/entity.cpp"
+    "src/cubos/core/ecs/entity/hash.cpp"
     "src/cubos/core/ecs/entity/manager.cpp"
     "src/cubos/core/ecs/component_manager.cpp"
     "src/cubos/core/ecs/commands.cpp"

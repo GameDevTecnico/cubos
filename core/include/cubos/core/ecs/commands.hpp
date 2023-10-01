@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs
@@ -91,13 +92,14 @@ namespace cubos::core::ecs
     private:
         friend CommandBuffer;
 
-        data::old::SerializationMap<Entity, std::string> mMap; ///< Maps entity names to the instantiated entities.
-        CommandBuffer& mCommands;                              ///< Commands object that created this entity.
+        data::old::SerializationMap<Entity, std::string, EntityHash>
+            mMap;                 ///< Maps entity names to the instantiated entities.
+        CommandBuffer& mCommands; ///< Commands object that created this entity.
 
         /// @brief Constructs.
         /// @param map Map of entity names to the instantiated entities.
         /// @param commands Commands object that created this entity.
-        BlueprintBuilder(data::old::SerializationMap<Entity, std::string>&& map, CommandBuffer& commands);
+        BlueprintBuilder(data::old::SerializationMap<Entity, std::string, EntityHash>&& map, CommandBuffer& commands);
     };
 
     /// @brief Used to write ECS commands and execute them at a later time.
@@ -225,7 +227,7 @@ namespace cubos::core::ecs
             void clear() override;
             void move(Entity entity, ComponentManager& manager) override;
 
-            std::unordered_map<Entity, ComponentType> components; ///< Components in the buffer.
+            std::unordered_map<Entity, ComponentType, EntityHash> components; ///< Components in the buffer.
         };
 
         /// @brief Clears the commands.
@@ -234,12 +236,12 @@ namespace cubos::core::ecs
         std::mutex mMutex; ///< Make this thread-safe.
         World& mWorld;     ///< World to which the commands will be applied.
 
-        std::unordered_map<std::type_index, IBuffer*> mBuffers; ///< Component buffers per component type.
-        std::unordered_set<Entity> mCreated;                    ///< Uncommitted created entities.
-        std::unordered_set<Entity> mDestroyed;                  ///< Uncommitted destroyed entities.
-        std::unordered_map<Entity, Entity::Mask> mAdded;        ///< Mask of the uncommitted added components.
-        std::unordered_map<Entity, Entity::Mask> mRemoved;      ///< Mask of the uncommitted removed components.
-        std::unordered_set<Entity> mChanged;                    ///< Entities whose mask has changed.
+        std::unordered_map<std::type_index, IBuffer*> mBuffers;        ///< Component buffers per component type.
+        std::unordered_set<Entity, EntityHash> mCreated;               ///< Uncommitted created entities.
+        std::unordered_set<Entity, EntityHash> mDestroyed;             ///< Uncommitted destroyed entities.
+        std::unordered_map<Entity, Entity::Mask, EntityHash> mAdded;   ///< Mask of the uncommitted added components.
+        std::unordered_map<Entity, Entity::Mask, EntityHash> mRemoved; ///< Mask of the uncommitted removed components.
+        std::unordered_set<Entity, EntityHash> mChanged;               ///< Entities whose mask has changed.
     };
 
     // Implementation.
