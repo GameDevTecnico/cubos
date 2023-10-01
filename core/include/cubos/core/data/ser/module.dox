@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref core-data-ser directory.
+
+namespace cubos::core::data
+{
+    /// @defgroup core-data-ser Serialization
+    /// @ingroup core-data
+    /// @brief Provides serialization utilities.
+}
