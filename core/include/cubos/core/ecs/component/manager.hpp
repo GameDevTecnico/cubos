@@ -1,6 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::ComponentManager and related types.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-component
 
 #pragma once
 
@@ -22,7 +22,7 @@ namespace cubos::core::ecs
     ///
     /// @tparam T Component type.
     /// @return Registered name of the component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     template <typename T>
     std::optional<std::string_view> getComponentName();
 
@@ -32,12 +32,12 @@ namespace cubos::core::ecs
     ///
     /// @param type Component type.
     /// @return Registered name of the component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     std::optional<std::string_view> getComponentName(std::type_index type);
 
     /// @brief Utility struct used to reference a storage of component type @p T for reading.
     /// @tparam T Component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     template <typename T>
     class ReadStorage
     {
@@ -64,7 +64,7 @@ namespace cubos::core::ecs
 
     /// @brief Utility struct used to reference a storage of component type @p T for writing.
     /// @tparam T Component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     template <typename T>
     class WriteStorage
     {
@@ -93,7 +93,7 @@ namespace cubos::core::ecs
     ///
     /// Used internally by @ref World.
     ///
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     class ComponentManager final
     {
     public:
