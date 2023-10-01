@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/blueprint.hpp>
-#include <cubos/core/ecs/registry.hpp>
+#include <cubos/core/ecs/component/registry.hpp>
 
 using namespace cubos::core::ecs;
 

@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/component/manager.hpp>
-#include <cubos/core/ecs/registry.hpp>
+#include <cubos/core/ecs/component/registry.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::ecs;

@@ -1,4 +1,4 @@
-#include <cubos/core/ecs/registry.hpp>
+#include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 using namespace cubos::core;

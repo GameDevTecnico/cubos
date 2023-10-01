@@ -1,6 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::Registry and registration macro.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-component
 
 #pragma once
 
@@ -17,7 +17,7 @@ namespace cubos::core::ecs
     /// It stores information regarding the components so that they can be handled in a type-erased
     /// manner.
     ///
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     class Registry final
     {
     public:
@@ -119,7 +119,7 @@ namespace cubos::core::ecs
 /// @warning Care must be taken to ensure that this macro is included from at least one translation
 /// unit (think of it as a .cpp file) in the executable, otherwise the component type may not be
 /// registered. E.g.: keeping it hidden in a .cpp file on a library may not work.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-component
 #define CUBOS_REGISTER_COMPONENT(type, storageType, name)                                                              \
     namespace cubos::core::ecs::impl                                                                                   \
     {                                                                                                                  \

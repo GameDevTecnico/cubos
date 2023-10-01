@@ -73,13 +73,13 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/entity/entity.cpp"
     "src/cubos/core/ecs/entity/hash.cpp"
     "src/cubos/core/ecs/entity/manager.cpp"
+    "src/cubos/core/ecs/component/registry.cpp"
     "src/cubos/core/ecs/component/manager.cpp"
     "src/cubos/core/ecs/commands.cpp"
     "src/cubos/core/ecs/blueprint.cpp"
     "src/cubos/core/ecs/world.cpp"
     "src/cubos/core/ecs/system.cpp"
     "src/cubos/core/ecs/dispatcher.cpp"
-    "src/cubos/core/ecs/registry.cpp"
 )
 
 # Create core library
