@@ -1,21 +1,25 @@
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/old/json_deserializer.hpp>
+#include <cubos/core/ecs/entity/hash.hpp>
 
 #include <cubos/engine/assets/assets.hpp>
 #include <cubos/engine/scene/bridge.hpp>
 #include <cubos/engine/scene/scene.hpp>
 
-using namespace cubos::engine;
-using namespace cubos::core;
-
+using cubos::core::data::File;
+using cubos::core::data::FileSystem;
+using cubos::core::data::old::JSONDeserializer;
 using cubos::core::data::old::SerializationMap;
 using cubos::core::ecs::Entity;
+using cubos::core::ecs::EntityHash;
+
+using namespace cubos::engine;
 
 bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
 {
     // Open the scene file.
     auto path = assets.readMeta(handle)->get("path").value();
-    auto stream = data::FileSystem::open(path, data::File::OpenMode::Read);
+    auto stream = FileSystem::open(path, File::OpenMode::Read);
     if (stream == nullptr)
     {
         CUBOS_ERROR("Could not open scene file '{}'", path);
@@ -28,7 +32,7 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
     stream.reset(); // Close the file.
 
     // Deserialize the scene file.
-    auto deserializer = data::old::JSONDeserializer(contents);
+    auto deserializer = JSONDeserializer(contents);
     if (deserializer.failed())
     {
         CUBOS_ERROR("Could not parse scene file '{}' as JSON", path);
@@ -38,13 +42,14 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
     auto scene = Scene();
 
     // Add a SerializationMap for entity handle deserialization.
-    deserializer.context().push(SerializationMap<Entity, std::string>{[&](const Entity&, std::string&) {
-                                                                          return false; // Serialization not needed.
-                                                                      },
-                                                                      [&](Entity& entity, const std::string& string) {
-                                                                          entity = scene.blueprint.entity(string);
-                                                                          return !entity.isNull();
-                                                                      }});
+    deserializer.context().push(
+        SerializationMap<Entity, std::string, EntityHash>{[&](const Entity&, std::string&) {
+                                                              return false; // Serialization not needed.
+                                                          },
+                                                          [&](Entity& entity, const std::string& string) {
+                                                              entity = scene.blueprint.entity(string);
+                                                              return !entity.isNull();
+                                                          }});
 
     deserializer.beginObject();
 

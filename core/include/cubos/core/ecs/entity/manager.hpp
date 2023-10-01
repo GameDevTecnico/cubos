@@ -10,6 +10,7 @@
 #include <vector>
 
 #include <cubos/core/ecs/entity/entity.hpp>
+#include <cubos/core/ecs/entity/hash.hpp>
 
 namespace cubos::core::ecs
 {

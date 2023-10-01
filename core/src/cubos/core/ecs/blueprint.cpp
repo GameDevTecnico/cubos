@@ -30,7 +30,7 @@ Entity Blueprint::entity(const std::string& name) const
 void Blueprint::merge(const std::string& prefix, const Blueprint& other)
 {
     // First, merge the maps.
-    data::old::SerializationMap<Entity, std::string> srcMap;
+    data::old::SerializationMap<Entity, std::string, EntityHash> srcMap;
     for (uint32_t i = 0; i < static_cast<uint32_t>(other.mMap.size()); ++i)
     {
         // Deserialize from the source buffer using the original entity names.

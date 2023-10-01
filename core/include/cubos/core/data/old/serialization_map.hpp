@@ -10,7 +10,9 @@ namespace cubos::core::data::old
     /// Class used to map between references and their serialized identifiers.
     /// @tparam R Reference type.
     /// @tparam I Serialized identifier type.
-    template <typename R, typename I>
+    /// @tparam RH Reference hash type.
+    /// @tparam IH Identifier hash type.
+    template <typename R, typename I, typename RH = std::hash<R>, typename IH = std::hash<I>>
     class SerializationMap final
     {
     public:
@@ -121,7 +123,7 @@ namespace cubos::core::data::old
 
         /// @brief Returns the internal map that maps references to IDs
         /// @return Map of references and Ids.
-        inline std::unordered_map<R, I> getMap() const
+        inline std::unordered_map<R, I, RH> getMap() const
         {
             return mRefToId;
         }
@@ -130,7 +132,7 @@ namespace cubos::core::data::old
         bool mUsingFunctions;                         ///< True if the map is using functions instead of keeping a map.
         std::function<bool(const R&, I&)> mSerialize; ///< Function used to serialize references.
         std::function<bool(R&, const I&)> mDeserialize; ///< Function used to deserialize references.
-        std::unordered_map<R, I> mRefToId;              ///< Map of references to serialized IDs.
-        std::unordered_map<I, R> mIdToRef;              ///< Map of serialized IDs to references.
+        std::unordered_map<R, I, RH> mRefToId;          ///< Map of references to serialized IDs.
+        std::unordered_map<I, R, IH> mIdToRef;          ///< Map of serialized IDs to references.
     };
 } // namespace cubos::core::data::old

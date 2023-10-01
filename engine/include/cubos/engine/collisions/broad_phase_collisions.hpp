@@ -8,9 +8,8 @@
 #include <unordered_set>
 #include <vector>
 
+#include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/ecs/entity/manager.hpp>
-
-using cubos::core::ecs::Entity;
 
 namespace cubos::engine
 {
@@ -19,14 +18,14 @@ namespace cubos::engine
     struct BroadPhaseCollisions
     {
         /// @brief Pair of entities that may collide.
-        using Candidate = std::pair<Entity, Entity>;
+        using Candidate = std::pair<core::ecs::Entity, core::ecs::Entity>;
 
         /// @brief Hash function to allow Candidates to be used as keys in an unordered_set.
         struct CandidateHash
         {
             std::size_t operator()(const Candidate& candidate) const
             {
-                return std::hash<Entity>()(candidate.first) ^ std::hash<Entity>()(candidate.second);
+                return core::ecs::EntityHash()(candidate.first) ^ core::ecs::EntityHash()(candidate.second);
             }
         };
 
@@ -50,8 +49,8 @@ namespace cubos::engine
         /// @brief Marker used for sweep and prune.
         struct SweepMarker
         {
-            Entity entity; ///< Entity referenced by the marker.
-            bool isMin;    ///< Whether the marker is a min or max marker.
+            core::ecs::Entity entity; ///< Entity referenced by the marker.
+            bool isMin;               ///< Whether the marker is a min or max marker.
         };
 
         /// @brief List of ordered sweep markers for each axis. Stores the index of the marker in mMarkers.
@@ -61,10 +60,11 @@ namespace cubos::engine
         ///
         /// For each each map, the key is an entity and the value is a list of entities that
         /// overlap with the key. Symmetrical pairs are not stored.
-        std::unordered_map<Entity, std::vector<Entity>> sweepOverlapMaps[3];
+        std::unordered_map<core::ecs::Entity, std::vector<core::ecs::Entity>, core::ecs::EntityHash>
+            sweepOverlapMaps[3];
 
         /// @brief Set of active entities during sweep for each axis.
-        std::unordered_set<Entity> activePerAxis[3];
+        std::unordered_set<core::ecs::Entity, core::ecs::EntityHash> activePerAxis[3];
 
         /// @brief Sets of collision candidates for each collision type. The index of the array is
         /// the collision type.
@@ -72,11 +72,11 @@ namespace cubos::engine
 
         /// @brief Adds an entity to the list of entities tracked by sweep and prune.
         /// @param entity Entity to add.
-        void addEntity(Entity entity);
+        void addEntity(core::ecs::Entity entity);
 
         /// @brief Removes an entity from the list of entities tracked by sweep and prune.
         /// @param entity Entity to remove.
-        void removeEntity(Entity entity);
+        void removeEntity(core::ecs::Entity entity);
 
         /// @brief Clears the list of entities tracked by sweep and prune.
         void clearEntities();

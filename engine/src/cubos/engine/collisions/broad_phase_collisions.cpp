@@ -2,12 +2,9 @@
 
 #include <cubos/engine/collisions/broad_phase_collisions.hpp>
 
-using cubos::engine::BroadPhaseCollisions;
+using cubos::core::ecs::Entity;
 
-using Candidate = BroadPhaseCollisions::Candidate;
-using CandidateHash = BroadPhaseCollisions::CandidateHash;
-using CollisionType = BroadPhaseCollisions::CollisionType;
-using SweepMarker = BroadPhaseCollisions::SweepMarker;
+using cubos::engine::BroadPhaseCollisions;
 
 void BroadPhaseCollisions::addEntity(Entity entity)
 {
@@ -41,7 +38,7 @@ void BroadPhaseCollisions::addCandidate(CollisionType type, Candidate candidate)
     candidatesPerType[static_cast<std::size_t>(type)].insert(candidate);
 }
 
-const std::unordered_set<Candidate, CandidateHash>& BroadPhaseCollisions::candidates(CollisionType type) const
+auto BroadPhaseCollisions::candidates(CollisionType type) const -> const std::unordered_set<Candidate, CandidateHash>&
 {
     return candidatesPerType[static_cast<std::size_t>(type)];
 }
