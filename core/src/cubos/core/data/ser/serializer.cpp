@@ -1,0 +1,34 @@
+#include <cubos/core/data/ser/serializer.hpp>
+#include <cubos/core/log.hpp>
+#include <cubos/core/reflection/type.hpp>
+
+using cubos::core::data::Serializer;
+
+bool Serializer::write(const reflection::Type& type, const void* value)
+{
+    if (auto it = mHooks.find(&type); it != mHooks.end())
+    {
+        if (!it->second(*this, type, value))
+        {
+            CUBOS_WARN("Serialization hook for type '{}' failed", type.name());
+            return false;
+        }
+    }
+    else if (!this->decompose(type, value))
+    {
+        CUBOS_WARN("Serialization decomposition for type '{}' failed", type.name());
+        return false;
+    }
+
+    return true;
+}
+
+void Serializer::hook(const reflection::Type& type, Hook hook)
+{
+    if (auto it = mHooks.find(&type); it != mHooks.end())
+    {
+        CUBOS_WARN("Hook for type '{}' already exists, overwriting", type.name());
+    }
+
+    mHooks.emplace(&type, hook);
+}
