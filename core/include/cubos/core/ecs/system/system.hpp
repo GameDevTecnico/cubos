@@ -4,7 +4,7 @@
 /// This file is a bit scary, but it's not as bad as it looks. It's mostly template specializations
 /// to handle the different types of arguments a system can take.
 ///
-/// @ingroup core-ecs
+/// @ingroup core-ecs-system
 
 #pragma once
 
@@ -22,7 +22,7 @@
 namespace cubos::core::ecs
 {
     /// @brief Describes a system.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     struct SystemInfo
     {
         /// @brief Whether the system uses commands or not.
@@ -62,7 +62,7 @@ namespace cubos::core::ecs
 
     /// @brief Base class for system wrappers.
     /// @tparam R Return type of the wrapped system.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     template <typename R>
     class AnySystemWrapper
     {
@@ -304,7 +304,7 @@ namespace cubos::core::ecs
 
     /// @brief Wrapper for a system of type @p F.
     /// @tparam F Type of the system function/method/lambda.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     template <typename F>
     class SystemWrapper final : public AnySystemWrapper<typename impl::SystemTraits<F>::Return>
     {

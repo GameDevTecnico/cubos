@@ -10,7 +10,7 @@
 #include <utility>
 #include <vector>
 
-#include <cubos/core/ecs/system.hpp>
+#include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/log.hpp>
 
 #define ENSURE_CURR_SYSTEM()                                                                                           \
