@@ -15,8 +15,8 @@
 #include <cubos/core/ecs/accessors.hpp>
 #include <cubos/core/ecs/event_reader.hpp>
 #include <cubos/core/ecs/event_writer.hpp>
-#include <cubos/core/ecs/query.hpp>
 #include <cubos/core/ecs/system/commands.hpp>
+#include <cubos/core/ecs/system/query.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs
