@@ -1,6 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::Commands and related types.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-system
 
 #pragma once
 
@@ -18,7 +18,7 @@ namespace cubos::core::ecs
     class Dispatcher;
 
     /// @brief Allows editing an entity created by a @ref Commands object.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     class EntityBuilder final
     {
     public:
@@ -54,7 +54,7 @@ namespace cubos::core::ecs
     };
 
     /// @brief Used to edit a blueprint spawned by a @ref Commands object.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     class BlueprintBuilder final
     {
     public:
@@ -102,11 +102,11 @@ namespace cubos::core::ecs
         BlueprintBuilder(data::old::SerializationMap<Entity, std::string, EntityHash>&& map, CommandBuffer& commands);
     };
 
-    /// @brief Used to write ECS commands and execute them at a later time.
+    /// @brief System argument used to write ECS commands and execute them at a later time.
     ///
     /// Internally wraps a reference to a CommandBuffer object.
     ///
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     class Commands final
     {
     public:
@@ -151,7 +151,7 @@ namespace cubos::core::ecs
     };
 
     /// @brief Stores commands to execute them later.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     class CommandBuffer final
     {
     public:

@@ -1,6 +1,6 @@
 #include <utility>
 
-#include <cubos/core/ecs/commands.hpp>
+#include <cubos/core/ecs/system/commands.hpp>
 #include <cubos/core/log.hpp>
 
 #include <cubos/engine/cubos.hpp>
