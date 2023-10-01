@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref core-ecs-component directory.
+
+namespace cubos::core::ecs
+{
+    /// @defgroup core-ecs-component Component
+    /// @ingroup core-ecs
+    /// @brief Component part of the ECS.
+}
