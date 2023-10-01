@@ -47,11 +47,13 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/data/old/binary_serializer.cpp"
     "src/cubos/core/data/old/binary_deserializer.cpp"
     "src/cubos/core/data/old/package.cpp"
+    "src/cubos/core/data/old/context.cpp"
+
     "src/cubos/core/data/fs/file.cpp"
     "src/cubos/core/data/fs/file_system.cpp"
     "src/cubos/core/data/fs/standard_archive.cpp"
     "src/cubos/core/data/fs/embedded_archive.cpp"
-    "src/cubos/core/data/old/context.cpp"
+    "src/cubos/core/data/ser/serializer.cpp"
 
     "src/cubos/core/io/window.cpp"
     "src/cubos/core/io/cursor.cpp"
