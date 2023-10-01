@@ -1,3 +1,6 @@
+#include <memory>
+#include <vector>
+
 #include <imgui.h>
 #include <misc/cpp/imgui_stdlib.h>
 
@@ -30,7 +33,7 @@ struct SceneInfo
     bool shouldBeRemoved{false};
     std::string name;
     std::vector<std::pair<std::string, Entity>> entities;
-    std::vector<std::pair<std::string, SceneInfo>> scenes;
+    std::vector<std::pair<std::string, std::unique_ptr<SceneInfo>>> scenes;
 };
 
 static void closeScene(Commands& commands, SceneInfo& scene)
@@ -43,7 +46,7 @@ static void closeScene(Commands& commands, SceneInfo& scene)
 
     for (auto& [name, subscene] : scene.scenes)
     {
-        closeScene(commands, subscene);
+        closeScene(commands, *subscene);
     }
     scene.scenes.clear();
 }
@@ -62,14 +65,14 @@ static void placeEntity(const std::string& name, Entity handle, SceneInfo& scene
         {
             if (sname == subsceneName)
             {
-                placeEntity(name.substr(split + 1), handle, subscene);
+                placeEntity(name.substr(split + 1), handle, *subscene);
                 return;
             }
         }
-        SceneInfo subScene;
-        subScene.name = subsceneName;
-        auto& [_, subSceneHandle] = scene.scenes.emplace_back(subsceneName, subScene);
-        placeEntity(name.substr(split + 1), handle, subSceneHandle);
+        auto subScene = std::make_unique<SceneInfo>();
+        subScene->name = subsceneName;
+        auto& subSceneHandle = scene.scenes.emplace_back(subsceneName, std::move(subScene)).second;
+        placeEntity(name.substr(split + 1), handle, *subSceneHandle);
     }
 }
 
@@ -211,9 +214,9 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, cubos::engine::
             if (ImGui::Button("Add Scene"))
             {
                 std::string sceneName = scene.name + "_scene_" + std::to_string(scene.scenes.size() + 1);
-                SceneInfo newSubscene;
-                newSubscene.name = sceneName;
-                scene.scenes.emplace_back(sceneName, newSubscene);
+                auto newSubscene = std::make_unique<SceneInfo>();
+                newSubscene->name = sceneName;
+                scene.scenes.emplace_back(sceneName, std::move(newSubscene));
             }
             ImGui::SameLine();
         }
@@ -222,13 +225,13 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, cubos::engine::
         std::vector<std::size_t> sceneToRemove;
         for (std::size_t i = 0; i < scene.scenes.size(); i++)
         {
-            if (scene.scenes[i].second.shouldBeRemoved)
+            if (scene.scenes[i].second->shouldBeRemoved)
             {
                 sceneToRemove.push_back(i);
             }
             else
             {
-                showSceneHierarchy(scene.scenes[i].second, cmds, selector, hierarchyDepth + 1);
+                showSceneHierarchy(*scene.scenes[i].second, cmds, selector, hierarchyDepth + 1);
             }
         }
         for (const auto& i : sceneToRemove)
