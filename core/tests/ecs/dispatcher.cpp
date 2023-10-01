@@ -2,7 +2,7 @@
 
 #include <doctest/doctest.h>
 
-#include <cubos/core/ecs/dispatcher.hpp>
+#include <cubos/core/ecs/system/dispatcher.hpp>
 
 #include "utils.hpp"
 
