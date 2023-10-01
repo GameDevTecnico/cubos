@@ -1,11 +1,11 @@
 #include <iostream>
 
 #include <cubos/core/ecs/blueprint.hpp>
-#include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/ecs/component/map_storage.hpp>
 #include <cubos/core/ecs/component/null_storage.hpp>
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/component/vec_storage.hpp>
+#include <cubos/core/ecs/system/commands.hpp>
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/world.hpp>

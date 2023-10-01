@@ -5,7 +5,7 @@
 #include <misc/cpp/imgui_stdlib.h>
 
 #include <cubos/core/data/old/debug_serializer.hpp>
-#include <cubos/core/ecs/commands.hpp>
+#include <cubos/core/ecs/system/commands.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>

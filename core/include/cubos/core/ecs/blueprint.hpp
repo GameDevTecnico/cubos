@@ -7,8 +7,8 @@
 #include <cubos/core/data/old/binary_deserializer.hpp>
 #include <cubos/core/data/old/binary_serializer.hpp>
 #include <cubos/core/data/old/serialization_map.hpp>
-#include <cubos/core/ecs/commands.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
+#include <cubos/core/ecs/system/commands.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
 #include <cubos/core/memory/type_map.hpp>
 

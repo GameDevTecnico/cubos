@@ -1,5 +1,5 @@
 #include <cubos/core/ecs/blueprint.hpp>
-#include <cubos/core/ecs/commands.hpp>
+#include <cubos/core/ecs/system/commands.hpp>
 
 using namespace cubos::core::ecs;
 
