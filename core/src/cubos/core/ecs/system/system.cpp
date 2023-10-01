@@ -1,4 +1,4 @@
-#include <cubos/core/ecs/system.hpp>
+#include <cubos/core/ecs/system/system.hpp>
 
 using namespace cubos::core::ecs;
 

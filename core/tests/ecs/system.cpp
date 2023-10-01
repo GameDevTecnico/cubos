@@ -3,7 +3,7 @@
 
 #include <doctest/doctest.h>
 
-#include <cubos/core/ecs/system.hpp>
+#include <cubos/core/ecs/system/system.hpp>
 
 #include "utils.hpp"
 

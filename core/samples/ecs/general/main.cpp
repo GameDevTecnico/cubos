@@ -7,7 +7,7 @@
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/component/vec_storage.hpp>
 #include <cubos/core/ecs/dispatcher.hpp>
-#include <cubos/core/ecs/system.hpp>
+#include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 using namespace cubos::core;
