@@ -1,0 +1,13 @@
+* @RiscadoA
+
+.githooks/ @luishfonseca
+.github/workflows/ @luishfonseca
+
+core/geom/ @luishfonseca
+
+engine/collisions/ @luishfonseca
+engine/input/ @luishfonseca
+engine/physics/ @luishfonseca @fallenatlas
+engine/tools/ @DiogoMendonc-a
+
+tesseratos/ @DiogoMendonc-a
