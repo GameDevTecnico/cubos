@@ -1,5 +1,5 @@
-#include <cubos/core/ecs/event_reader.hpp>
-#include <cubos/core/ecs/event_writer.hpp>
+#include <cubos/core/ecs/system/event/reader.hpp>
+#include <cubos/core/ecs/system/event/writer.hpp>
 
 #include <cubos/engine/cubos.hpp>
 
