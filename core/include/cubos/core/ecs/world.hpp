@@ -9,7 +9,7 @@
 #include <unordered_map>
 
 #include <cubos/core/ecs/component_manager.hpp>
-#include <cubos/core/ecs/entity_manager.hpp>
+#include <cubos/core/ecs/entity/manager.hpp>
 #include <cubos/core/ecs/resource_manager.hpp>
 #include <cubos/core/log.hpp>
 
