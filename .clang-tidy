@@ -17,6 +17,9 @@ Checks: "\
   performance-*,\
   -performance-no-int-to-ptr,\
   misc-redundant-expression,\
+  misc-include-cleaner,\
+  misc-header-include-cycle,\
+  misc-definitions-in-headers,\
   cppcoreguidelines-virtual-class-destructor"
 WarningsAsErrors: '*'
 FormatStyle: file
