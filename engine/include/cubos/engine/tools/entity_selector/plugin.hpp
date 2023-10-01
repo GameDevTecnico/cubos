@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <cubos/core/ecs/entity_manager.hpp>
+#include <cubos/core/ecs/entity/manager.hpp>
 
 #include <cubos/engine/cubos.hpp>
 
