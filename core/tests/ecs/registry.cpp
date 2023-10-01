@@ -1,6 +1,6 @@
 #include <doctest/doctest.h>
 
-#include <cubos/core/ecs/registry.hpp>
+#include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/vec_storage.hpp>
 
 #include "utils.hpp"
