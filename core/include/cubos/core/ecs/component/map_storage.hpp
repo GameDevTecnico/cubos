@@ -1,17 +1,17 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::MapStorage.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-component
 
 #pragma once
 
-#include <cubos/core/ecs/storage.hpp>
+#include <cubos/core/ecs/component/storage.hpp>
 
 namespace cubos::core::ecs
 {
 
     /// @brief Storage implementation that uses an `std::unordered_map`.
     /// @tparam T Component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     template <typename T>
     class MapStorage : public Storage<T>
     {

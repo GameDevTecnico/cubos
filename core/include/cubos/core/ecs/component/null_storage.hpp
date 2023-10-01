@@ -1,10 +1,10 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::NullStorage.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-component
 
 #pragma once
 
-#include <cubos/core/ecs/storage.hpp>
+#include <cubos/core/ecs/component/storage.hpp>
 
 namespace cubos::core::ecs
 {
@@ -12,7 +12,7 @@ namespace cubos::core::ecs
     /// @brief Storage implementation that doesn't keep any data, made for
     /// zero-sized components.
     /// @tparam T Component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     template <typename T>
     class NullStorage : public Storage<T>
     {
