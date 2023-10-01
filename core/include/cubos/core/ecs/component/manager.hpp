@@ -12,7 +12,7 @@
 #include <shared_mutex>
 #include <typeindex>
 
-#include <cubos/core/ecs/storage.hpp>
+#include <cubos/core/ecs/component/storage.hpp>
 
 namespace cubos::core::ecs
 {

@@ -1,16 +1,16 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::VecStorage.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-component
 
 #pragma once
 
-#include <cubos/core/ecs/storage.hpp>
+#include <cubos/core/ecs/component/storage.hpp>
 
 namespace cubos::core::ecs
 {
     /// @brief Storage implementation that uses a `std::vector`.
     /// @tparam T Component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     template <typename T>
     class VecStorage : public Storage<T>
     {

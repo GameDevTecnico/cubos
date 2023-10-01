@@ -1,6 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::Storage and related types.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-component
 
 #pragma once
 
@@ -15,7 +15,7 @@ namespace cubos::core::ecs
     /// Necessary to provide a type-erased interface for erasing and packaging/unpackaging
     /// components.
     ///
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     class IStorage
     {
     public:
@@ -45,7 +45,7 @@ namespace cubos::core::ecs
 
     /// @brief Abstract container for a component type @p T.
     /// @tparam T Component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-component
     template <typename T>
     class Storage : public IStorage
     {

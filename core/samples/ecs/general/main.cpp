@@ -2,12 +2,12 @@
 
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/commands.hpp>
+#include <cubos/core/ecs/component/map_storage.hpp>
+#include <cubos/core/ecs/component/null_storage.hpp>
 #include <cubos/core/ecs/component/registry.hpp>
+#include <cubos/core/ecs/component/vec_storage.hpp>
 #include <cubos/core/ecs/dispatcher.hpp>
-#include <cubos/core/ecs/map_storage.hpp>
-#include <cubos/core/ecs/null_storage.hpp>
 #include <cubos/core/ecs/system.hpp>
-#include <cubos/core/ecs/vec_storage.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 using namespace cubos::core;

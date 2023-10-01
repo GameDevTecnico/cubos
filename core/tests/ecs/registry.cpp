@@ -1,7 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/component/registry.hpp>
-#include <cubos/core/ecs/vec_storage.hpp>
+#include <cubos/core/ecs/component/vec_storage.hpp>
 
 #include "utils.hpp"
 
