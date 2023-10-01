@@ -13,7 +13,7 @@
 #include <unordered_set>
 #include <utility>
 
-#include <cubos/core/ecs/accessors.hpp>
+#include <cubos/core/ecs/system/accessors.hpp>
 #include <cubos/core/ecs/world.hpp>
 
 namespace cubos::core::ecs

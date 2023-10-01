@@ -1,6 +1,6 @@
 /// @file
 /// @brief Class @ref cubos::core::ecs::Read and related types.
-/// @ingroup core-ecs
+/// @ingroup core-ecs-system
 
 #pragma once
 
@@ -14,7 +14,7 @@ namespace cubos::core::ecs
     /// Can be used as a pointer with both the `->` and `*` operators.
     ///
     /// @tparam T Resource or component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     template <typename T>
     class Read
     {
@@ -50,7 +50,7 @@ namespace cubos::core::ecs
     /// Can be used as a pointer with both the `->` and `*` operators.
     ///
     /// @tparam T Resource or component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     template <typename T>
     class Write
     {
@@ -87,7 +87,7 @@ namespace cubos::core::ecs
     /// Can be used as a pointer with both the `->` and `*` operators.
     ///
     /// @tparam T Resource or component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     template <typename T>
     class OptRead
     {
@@ -139,7 +139,7 @@ namespace cubos::core::ecs
     /// Can be used as a pointer with both the `->` and `*` operators.
     ///
     /// @tparam T Resource or component type.
-    /// @ingroup core-ecs
+    /// @ingroup core-ecs-system
     template <typename T>
     class OptWrite
     {
