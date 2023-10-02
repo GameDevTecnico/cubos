@@ -8,7 +8,7 @@ the following aliases:
 
 @snippet data/ser/custom/main.cpp Include
 
-We'll define a serializer that will print the data to the standard  output.
+We'll define a serializer that will print the data to the standard output.
 
 @snippet data/ser/custom/main.cpp Your own serializer
 
