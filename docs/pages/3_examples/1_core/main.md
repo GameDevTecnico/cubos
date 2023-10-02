@@ -10,3 +10,4 @@ The following examples have fully documented tutorials:
 
 - @subpage examples-core-logging - @copybrief examples-core-logging
 - @subpage examples-core-reflection - @copybrief examples-core-reflection
+- @subpage examples-core-data - @copybrief examples-core-data
