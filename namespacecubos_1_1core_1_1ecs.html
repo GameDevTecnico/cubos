@@ -71,45 +71,9 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read</a>
-            </dt>
-            <dd>System argument which provides read access to the resource <code>T</code>, or query argument which provides read access to the component <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write</a>
-            </dt>
-            <dd>System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">OptRead</a>
-            </dt>
-            <dd>System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">OptWrite</a>
-            </dt>
-            <dd>System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</dd>
-            <dt>
               class <a href="classcubos_1_1core_1_1ecs_1_1Blueprint.html" class="m-doc">Blueprint</a>
             </dt>
             <dd>Stores a bundle of entities and their respective components, which can be easily spawned into a world. This is in a way the &#x27;Prefab&#x27; of <strong>CUBOS</strong>., but lower level.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>
-            </dt>
-            <dd>Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>
-            </dt>
-            <dd>Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>
-            </dt>
-            <dd>Used to write ECS commands and execute them at a later time.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>
-            </dt>
-            <dd>Stores commands to execute them later.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1ReadStorage.html" class="m-doc">ReadStorage</a>
@@ -153,10 +117,6 @@
             </dt>
             <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a <code>std::vector</code>.</dd>
             <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a>
-            </dt>
-            <dd>Used to add systems and relations between them and then dispatch them all at once.</dd>
-            <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>
             </dt>
             <dd>Identifies an entity.</dd>
@@ -170,11 +130,65 @@
             <dd>Internal type which holds and manages entities and their component masks.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>
+            </dt>
+            <dd>Utility struct used to reference a resource of type <code>T</code> for reading.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>
+            </dt>
+            <dd>Utility struct used to reference a resource of type <code>T</code> for writing.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">ResourceManager</a>
+            </dt>
+            <dd>Holds and manages resources.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">Read</a>
+            </dt>
+            <dd>System argument which provides read access to the resource <code>T</code>, or query argument which provides read access to the component <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Write.html" class="m-doc">Write</a>
+            </dt>
+            <dd>System argument which provides write access to the resource <code>T</code>, or query argument which provides write access to the component <code>T</code>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1OptRead.html" class="m-doc">OptRead</a>
+            </dt>
+            <dd>System argument which provides read access to the resource <code>T</code> if it exists, or query argument which provides read access to the component <code>T</code> if it exists.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classcubos_1_1core_1_1ecs_1_1OptWrite.html" class="m-doc">OptWrite</a>
+            </dt>
+            <dd>System argument which provides write access to the resource <code>T</code> if it exists, or query argument which provides write access to the component <code>T</code> if it exists.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1EntityBuilder.html" class="m-doc">EntityBuilder</a>
+            </dt>
+            <dd>Allows editing an entity created by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1BlueprintBuilder.html" class="m-doc">BlueprintBuilder</a>
+            </dt>
+            <dd>Used to edit a blueprint spawned by a <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a> object.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Commands.html" class="m-doc">Commands</a>
+            </dt>
+            <dd>System argument used to write ECS commands and execute them at a later time.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1CommandBuffer.html" class="m-doc">CommandBuffer</a>
+            </dt>
+            <dd>Stores commands to execute them later.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1ecs_1_1Dispatcher.html" class="m-doc">Dispatcher</a>
+            </dt>
+            <dd>Used to add systems and relations between them and then dispatch them all at once.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1EventPipe.html" class="m-doc">EventPipe</a>
             </dt>
             <dd>Resource which stores events of type <code>T</code>.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="event__pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
+              <div class="m-doc-template">template&lt;typename T, unsigned int M = <a href="pipe_8hpp.html#a0aa8044fa00b34b9cfbee9b2154bf3a9" class="m-doc">DEFAULT_<wbr />FILTER_<wbr />MASK</a>&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1EventReader.html" class="m-doc">EventReader</a>
             </dt>
             <dd>System arguments used to read events of type <code>T</code>.</dd>
@@ -191,21 +205,7 @@
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
               class <a href="classcubos_1_1core_1_1ecs_1_1Query.html" class="m-doc">Query</a>
             </dt>
-            <dd>Holds the result of a query over all entities in world which match the given arguments.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ReadResource.html" class="m-doc">ReadResource</a>
-            </dt>
-            <dd>Utility struct used to reference a resource of type <code>T</code> for reading.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              class <a href="classcubos_1_1core_1_1ecs_1_1WriteResource.html" class="m-doc">WriteResource</a>
-            </dt>
-            <dd>Utility struct used to reference a resource of type <code>T</code> for writing.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1ecs_1_1ResourceManager.html" class="m-doc">ResourceManager</a>
-            </dt>
-            <dd>Holds and manages resources.</dd>
+            <dd>System argument which holds the result of a query over all entities in world which match the given arguments.</dd>
             <dt>
               struct <a href="structcubos_1_1core_1_1ecs_1_1SystemInfo.html" class="m-doc">SystemInfo</a>
             </dt>
