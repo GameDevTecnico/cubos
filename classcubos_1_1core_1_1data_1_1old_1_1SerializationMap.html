@@ -44,7 +44,7 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <div class="m-doc-template">template&lt;typename R, typename I&gt;</div>
+          <div class="m-doc-template">template&lt;typename R, typename I, typename RH = std::hash&lt;R&gt;, typename IH = std::hash&lt;I&gt;&gt;</div>
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data_1_1old.html">old</a>::<wbr/></span>SerializationMap <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
         </h1>
         <table class="m-table m-fullwidth m-flat">
@@ -59,6 +59,14 @@
             <tr>
               <td>I</td>
               <td>Serialized identifier type.</td>
+            </tr>
+            <tr>
+              <td>RH</td>
+              <td>Reference hash type.</td>
+            </tr>
+            <tr>
+              <td>IH</td>
+              <td>Identifier hash type.</td>
             </tr>
           </tbody>
         </table>
@@ -79,7 +87,7 @@
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ab3a026c3170e7e5455764cc78df76769" class="m-doc">SerializationMap</a>(</span><span class="m-doc-wrap">std::function&lt;bool(const R&amp;, I&amp;)&gt; serialize,
+              <span class="m-doc-wrap-bumper"><a href="#ae854b795018d0d2037fcb4f6ccbecd5a" class="m-doc">SerializationMap</a>(</span><span class="m-doc-wrap">std::function&lt;bool(const R&amp;, I&amp;)&gt; serialize,
               std::function&lt;bool(R&amp;, const I&amp;)&gt; deserialize)</span>
             </dt>
             <dd></dd>
@@ -89,48 +97,48 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a15672de57eadcf11a5a28737c101d8bf" class="m-doc">add</a>(</span><span class="m-doc-wrap">const R&amp; reference,
+              <span class="m-doc-wrap-bumper">void <a href="#aeadcd103a476d2ad787c2eb73033dada" class="m-doc">add</a>(</span><span class="m-doc-wrap">const R&amp; reference,
               const I&amp; id)</span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a51a17513638ed074ea0c1045a3bf2b80" class="m-doc">hasRef</a>(</span><span class="m-doc-wrap">const R&amp; reference) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aada7d52a019fe3b280465b29acf53ffa" class="m-doc">hasRef</a>(</span><span class="m-doc-wrap">const R&amp; reference) const -&gt; bool</span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac6c11693bd03f3156361fc4d34fb1db2" class="m-doc">hasId</a>(</span><span class="m-doc-wrap">const I&amp; id) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ade58a18f752766c52878b6d9dedd40a9" class="m-doc">hasId</a>(</span><span class="m-doc-wrap">const I&amp; id) const -&gt; bool</span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0c3effea0fb96c30276db8ad398ba865" class="m-doc">getRef</a>(</span><span class="m-doc-wrap">const I&amp; id) const -&gt; R</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a68341867d4658f3a05294cf177e6ca63" class="m-doc">getRef</a>(</span><span class="m-doc-wrap">const I&amp; id) const -&gt; R</span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1fb5f9ee8bb0593efa9603eb3e4f48ae" class="m-doc">getId</a>(</span><span class="m-doc-wrap">const R&amp; reference) const -&gt; I</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8797cb75639d13432bee0ffe5d56b681" class="m-doc">getId</a>(</span><span class="m-doc-wrap">const R&amp; reference) const -&gt; I</span>
             </dt>
             <dd></dd>
-            <dt id="a0ab2397ad442ea00370ff587385e74ba">
-              <span class="m-doc-wrap-bumper">void <a href="#a0ab2397ad442ea00370ff587385e74ba" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
+            <dt id="a8160360a24a789b7e91f0c434130416e">
+              <span class="m-doc-wrap-bumper">void <a href="#a8160360a24a789b7e91f0c434130416e" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Clears the map.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a50df951522084b96eea21b1e3974f947" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a491e77c57dd4b2a000f51e8cecf5a739" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a46c12933a9595fc7b3e4cceee16810a6" class="m-doc">getMap</a>(</span><span class="m-doc-wrap">) const -&gt; std::unordered_map&lt;R, I&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#abaf947ea6f8264c840eee79e5e85e73a" class="m-doc">getMap</a>(</span><span class="m-doc-wrap">) const -&gt; std::unordered_map&lt;R, I, RH&gt;</span>
             </dt>
             <dd>Returns the internal map that maps references to IDs.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ab3a026c3170e7e5455764cc78df76769"><div>
+          <section class="m-doc-details" id="ae854b795018d0d2037fcb4f6ccbecd5a"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R, typename I&gt;
+                template&lt;typename R, typename I, typename RH, typename IH&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3a026c3170e7e5455764cc78df76769" class="m-doc-self">SerializationMap</a>(</span><span class="m-doc-wrap">std::function&lt;bool(const R&amp;, I&amp;)&gt; serialize,
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I, RH, IH&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae854b795018d0d2037fcb4f6ccbecd5a" class="m-doc-self">SerializationMap</a>(</span><span class="m-doc-wrap">std::function&lt;bool(const R&amp;, I&amp;)&gt; serialize,
               std::function&lt;bool(R&amp;, const I&amp;)&gt; deserialize)</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
@@ -150,12 +158,12 @@
             </table>
 <p>Makes the serialization map use functions instead of keeping a map.</p>
           </div></section>
-          <section class="m-doc-details" id="a15672de57eadcf11a5a28737c101d8bf"><div>
+          <section class="m-doc-details" id="aeadcd103a476d2ad787c2eb73033dada"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R, typename I&gt;
+                template&lt;typename R, typename I, typename RH, typename IH&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15672de57eadcf11a5a28737c101d8bf" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const R&amp; reference,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I, RH, IH&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeadcd103a476d2ad787c2eb73033dada" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">const R&amp; reference,
               const I&amp; id)</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
@@ -175,12 +183,12 @@
             </table>
 <p>Adds a reference &lt;-&gt; serialized identifier pair.</p>
           </div></section>
-          <section class="m-doc-details" id="a51a17513638ed074ea0c1045a3bf2b80"><div>
+          <section class="m-doc-details" id="aada7d52a019fe3b280465b29acf53ffa"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R, typename I&gt;
+                template&lt;typename R, typename I, typename RH, typename IH&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a51a17513638ed074ea0c1045a3bf2b80" class="m-doc-self">hasRef</a>(</span><span class="m-doc-wrap">const R&amp; reference) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I, RH, IH&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aada7d52a019fe3b280465b29acf53ffa" class="m-doc-self">hasRef</a>(</span><span class="m-doc-wrap">const R&amp; reference) const</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -201,12 +209,12 @@
             </table>
 <p>Checks if a reference is in the map.</p>
           </div></section>
-          <section class="m-doc-details" id="ac6c11693bd03f3156361fc4d34fb1db2"><div>
+          <section class="m-doc-details" id="ade58a18f752766c52878b6d9dedd40a9"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R, typename I&gt;
+                template&lt;typename R, typename I, typename RH, typename IH&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac6c11693bd03f3156361fc4d34fb1db2" class="m-doc-self">hasId</a>(</span><span class="m-doc-wrap">const I&amp; id) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I, RH, IH&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ade58a18f752766c52878b6d9dedd40a9" class="m-doc-self">hasId</a>(</span><span class="m-doc-wrap">const I&amp; id) const</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -227,12 +235,12 @@
             </table>
 <p>Checks if a serialized identifier is in the map.</p>
           </div></section>
-          <section class="m-doc-details" id="a0c3effea0fb96c30276db8ad398ba865"><div>
+          <section class="m-doc-details" id="a68341867d4658f3a05294cf177e6ca63"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R, typename I&gt;
+                template&lt;typename R, typename I, typename RH, typename IH&gt;
               </div>
-              <span class="m-doc-wrap-bumper">R cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c3effea0fb96c30276db8ad398ba865" class="m-doc-self">getRef</a>(</span><span class="m-doc-wrap">const I&amp; id) const</span></span>
+              <span class="m-doc-wrap-bumper">R cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I, RH, IH&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68341867d4658f3a05294cf177e6ca63" class="m-doc-self">getRef</a>(</span><span class="m-doc-wrap">const I&amp; id) const</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -253,12 +261,12 @@
             </table>
 <p>Gets the reference of a serialized identifier.</p>
           </div></section>
-          <section class="m-doc-details" id="a1fb5f9ee8bb0593efa9603eb3e4f48ae"><div>
+          <section class="m-doc-details" id="a8797cb75639d13432bee0ffe5d56b681"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R, typename I&gt;
+                template&lt;typename R, typename I, typename RH, typename IH&gt;
               </div>
-              <span class="m-doc-wrap-bumper">I cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1fb5f9ee8bb0593efa9603eb3e4f48ae" class="m-doc-self">getId</a>(</span><span class="m-doc-wrap">const R&amp; reference) const</span></span>
+              <span class="m-doc-wrap-bumper">I cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I, RH, IH&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8797cb75639d13432bee0ffe5d56b681" class="m-doc-self">getId</a>(</span><span class="m-doc-wrap">const R&amp; reference) const</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -279,12 +287,12 @@
             </table>
 <p>Gets the serialized identifier of a reference.</p>
           </div></section>
-          <section class="m-doc-details" id="a50df951522084b96eea21b1e3974f947"><div>
+          <section class="m-doc-details" id="a491e77c57dd4b2a000f51e8cecf5a739"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R, typename I&gt;
+                template&lt;typename R, typename I, typename RH, typename IH&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a50df951522084b96eea21b1e3974f947" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I, RH, IH&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a491e77c57dd4b2a000f51e8cecf5a739" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
@@ -296,12 +304,12 @@
             </table>
 <p>Gets the number of mapped references.</p>
           </div></section>
-          <section class="m-doc-details" id="a46c12933a9595fc7b3e4cceee16810a6"><div>
+          <section class="m-doc-details" id="abaf947ea6f8264c840eee79e5e85e73a"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename R, typename I&gt;
+                template&lt;typename R, typename I, typename RH, typename IH&gt;
               </div>
-              <span class="m-doc-wrap-bumper">std::unordered_map&lt;R, I&gt; cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a46c12933a9595fc7b3e4cceee16810a6" class="m-doc-self">getMap</a>(</span><span class="m-doc-wrap">) const</span></span>
+              <span class="m-doc-wrap-bumper">std::unordered_map&lt;R, I, RH&gt; cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />SerializationMap&lt;R, I, RH, IH&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abaf947ea6f8264c840eee79e5e85e73a" class="m-doc-self">getMap</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Returns the internal map that maps references to IDs.</p>
             <table class="m-table m-fullwidth m-flat">

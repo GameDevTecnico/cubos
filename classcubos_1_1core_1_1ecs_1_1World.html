@@ -105,40 +105,40 @@
             <dd>Locks a resource for writing and returns it.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a350711bfda5ca74a1b98eccb8dc4136b" class="m-doc">create</a>(</span><span class="m-doc-wrap">ComponentTypes... components) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a350711bfda5ca74a1b98eccb8dc4136b" class="m-doc">create</a>(</span><span class="m-doc-wrap">ComponentTypes... components) -&gt; <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a></span>
             </dt>
             <dd>Creates a new entity with the given components.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a37a304f4a486f692e862b8585b79fa61" class="m-doc">destroy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a37a304f4a486f692e862b8585b79fa61" class="m-doc">destroy</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
             </dt>
             <dd>Destroys an entity and its components.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8df2e215fe9c352958a41542c371df27" class="m-doc">isAlive</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8df2e215fe9c352958a41542c371df27" class="m-doc">isAlive</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
             </dt>
             <dd>Checks if an entity is still alive.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a5b6811bfcd5ade3a4d808814de3813f7" class="m-doc">add</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              <span class="m-doc-wrap-bumper">void <a href="#a5b6811bfcd5ade3a4d808814de3813f7" class="m-doc">add</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               ComponentTypes &amp;&amp; ... components)</span>
             </dt>
             <dd>Adds components to an entity.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#ab71c54cee050a09efe87eeaa1d0fe389" class="m-doc">remove</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ab71c54cee050a09efe87eeaa1d0fe389" class="m-doc">remove</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
             </dt>
             <dd>Removes components from an entity.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a6a3810602a346f07a2d0e23103b14db1" class="m-doc">has</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a3810602a346f07a2d0e23103b14db1" class="m-doc">has</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const -&gt; bool</span>
             </dt>
             <dd>Checks if an entity has a component.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a667f99a521ce4c7953fc515029176e8a" class="m-doc">pack</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              <span class="m-doc-wrap-bumper">auto <a href="#a667f99a521ce4c7953fc515029176e8a" class="m-doc">pack</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context = nullptr) const -&gt; <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a></span>
             </dt>
             <dd>Creates a package from the components of an entity.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a91fb6419eeb0ce56f0e0a0e8adf82688" class="m-doc">unpack</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              <span class="m-doc-wrap-bumper">auto <a href="#a91fb6419eeb0ce56f0e0a0e8adf82688" class="m-doc">unpack</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               const <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a>&amp; package,
               <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context = nullptr) -&gt; bool</span>
             </dt>
@@ -284,7 +284,7 @@
               <div class="m-doc-template">
                 template&lt;typename... ComponentTypes&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a350711bfda5ca74a1b98eccb8dc4136b" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">ComponentTypes... components)</span></span>
+              <span class="m-doc-wrap-bumper"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a350711bfda5ca74a1b98eccb8dc4136b" class="m-doc-self">create</a>(</span><span class="m-doc-wrap">ComponentTypes... components)</span></span>
             </h3>
             <p>Creates a new entity with the given components.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -310,7 +310,7 @@
           </div></section>
           <section class="m-doc-details" id="a37a304f4a486f692e862b8585b79fa61"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a37a304f4a486f692e862b8585b79fa61" class="m-doc-self">destroy</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a37a304f4a486f692e862b8585b79fa61" class="m-doc-self">destroy</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
             </h3>
             <p>Destroys an entity and its components.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -320,14 +320,14 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tbody>
             </table>
           </div></section>
           <section class="m-doc-details" id="a8df2e215fe9c352958a41542c371df27"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8df2e215fe9c352958a41542c371df27" class="m-doc-self">isAlive</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8df2e215fe9c352958a41542c371df27" class="m-doc-self">isAlive</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
             </h3>
             <p>Checks if an entity is still alive.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -337,7 +337,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -353,7 +353,7 @@
               <div class="m-doc-template">
                 template&lt;typename... ComponentTypes&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5b6811bfcd5ade3a4d808814de3813f7" class="m-doc-self">add</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5b6811bfcd5ade3a4d808814de3813f7" class="m-doc-self">add</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               ComponentTypes &amp;&amp; ... components)</span></span>
             </h3>
             <p>Adds components to an entity.</p>
@@ -373,7 +373,7 @@
               <tbody>
                 <tr>
                   <td>entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
                 <tr>
                   <td>components</td>
@@ -388,7 +388,7 @@
               <div class="m-doc-template">
                 template&lt;typename... ComponentTypes&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab71c54cee050a09efe87eeaa1d0fe389" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab71c54cee050a09efe87eeaa1d0fe389" class="m-doc-self">remove</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
             </h3>
             <p>Removes components from an entity.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -407,7 +407,7 @@
               <tbody>
                 <tr>
                   <td>entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tbody>
             </table>
@@ -418,7 +418,7 @@
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a3810602a346f07a2d0e23103b14db1" class="m-doc-self">has</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a3810602a346f07a2d0e23103b14db1" class="m-doc-self">has</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity) const</span></span>
             </h3>
             <p>Checks if an entity has a component.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -437,7 +437,7 @@
               <tbody>
                 <tr>
                   <td>entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -450,7 +450,7 @@
           </div></section>
           <section class="m-doc-details" id="a667f99a521ce4c7953fc515029176e8a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a667f99a521ce4c7953fc515029176e8a" class="m-doc-self">pack</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a> cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a667f99a521ce4c7953fc515029176e8a" class="m-doc-self">pack</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context = nullptr) const</span></span>
             </h3>
             <p>Creates a package from the components of an entity.</p>
@@ -461,7 +461,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
                 <tr>
                   <td>context</td>
@@ -478,7 +478,7 @@
           </div></section>
           <section class="m-doc-details" id="a91fb6419eeb0ce56f0e0a0e8adf82688"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a91fb6419eeb0ce56f0e0a0e8adf82688" class="m-doc-self">unpack</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />ecs::<wbr />World::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a91fb6419eeb0ce56f0e0a0e8adf82688" class="m-doc-self">unpack</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               const <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a>&amp; package,
               <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context = nullptr)</span></span>
             </h3>
@@ -490,7 +490,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">entity</td>
-                  <td><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> identifier.</td>
                 </tr>
                 <tr>
                   <td>package</td>

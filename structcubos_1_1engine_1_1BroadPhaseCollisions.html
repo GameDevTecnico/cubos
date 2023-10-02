@@ -86,8 +86,8 @@
               <a href="#ac36734dc751d2995fb1fa66429453786ae93f994f01c537c4e2f7d8528c3eb5e9" class="m-doc">Count</a> }</span>
             </dt>
             <dd>Collision type for each pair of colliders.</dd>
-            <dt id="a6f1b1c276940e21d9574ad5cbc8a7c96">
-              using <a href="#a6f1b1c276940e21d9574ad5cbc8a7c96" class="m-doc-self">Candidate</a> = std::pair&lt;<a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, <a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>&gt;
+            <dt id="a031948e0232026d514ff805a6e72353e">
+              using <a href="#a031948e0232026d514ff805a6e72353e" class="m-doc-self">Candidate</a> = std::pair&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;
             </dt>
             <dd>Pair of entities that may collide.</dd>
           </dl>
@@ -96,11 +96,11 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a2af9ba99d8fb1f2a5112b5baf57b91fd" class="m-doc">addEntity</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#adb6e2057ab70563bee30565724da51e7" class="m-doc">addEntity</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a> entity)</span>
             </dt>
             <dd>Adds an entity to the list of entities tracked by sweep and prune.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a6ad5329b9532662b351e725e40f8511b" class="m-doc">removeEntity</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a71b076c264094bd8cf02ec4126068abd" class="m-doc">removeEntity</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a> entity)</span>
             </dt>
             <dd>Removes an entity from the list of entities tracked by sweep and prune.</dd>
             <dt id="a913127505ae195ffe54036bb714869a8">
@@ -109,11 +109,11 @@
             <dd>Clears the list of entities tracked by sweep and prune.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a3c705c50d1c56f6347a2c7e46808bcd9" class="m-doc">addCandidate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#ac36734dc751d2995fb1fa66429453786" class="m-doc">CollisionType</a> type,
-              <a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a6f1b1c276940e21d9574ad5cbc8a7c96" class="m-doc">Candidate</a> candidate)</span>
+              <a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a031948e0232026d514ff805a6e72353e" class="m-doc">Candidate</a> candidate)</span>
             </dt>
             <dd>Adds a collision candidate to the list of candidates for a specific collision type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1d8143539af8a6d2e0b2186a86e6d6d4" class="m-doc">candidates</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#ac36734dc751d2995fb1fa66429453786" class="m-doc">CollisionType</a> type) const -&gt; const std::unordered_set&lt;<a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a6f1b1c276940e21d9574ad5cbc8a7c96" class="m-doc">Candidate</a>, <a href="structcubos_1_1engine_1_1BroadPhaseCollisions_1_1CandidateHash.html" class="m-doc">CandidateHash</a>&gt;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1d8143539af8a6d2e0b2186a86e6d6d4" class="m-doc">candidates</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#ac36734dc751d2995fb1fa66429453786" class="m-doc">CollisionType</a> type) const -&gt; const std::unordered_set&lt;<a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a031948e0232026d514ff805a6e72353e" class="m-doc">Candidate</a>, <a href="structcubos_1_1engine_1_1BroadPhaseCollisions_1_1CandidateHash.html" class="m-doc">CandidateHash</a>&gt;&amp;</span>
             </dt>
             <dd>Gets the collision candidates for a specific collision type.</dd>
             <dt id="a3c4e9bd2bba0fb9aa02ccc25d8835a12">
@@ -130,15 +130,15 @@
             </dt>
             <dd>List of ordered sweep markers for each axis. Stores the index of the marker in mMarkers.</dd>
             <dt>
-              std::unordered_map&lt;<a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, std::vector&lt;<a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>&gt;&gt; <a href="#a64135a3cd97885fd47e43512a4671dd1" class="m-doc">sweepOverlapMaps</a>
+              std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>, std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">core::<wbr />ecs::<wbr />EntityHash</a>&gt; <a href="#ab85f881769e68126d35ac866f38ecff0" class="m-doc">sweepOverlapMaps</a>
             </dt>
             <dd>Maps of overlapping entities for each axis calculated by sweep and prune.</dd>
-            <dt id="a0d8ab2e618419bf407be0a030c00702d">
-              std::unordered_set&lt;<a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>&gt; <a href="#a0d8ab2e618419bf407be0a030c00702d" class="m-doc-self">activePerAxis</a>
+            <dt id="a5289b3509391f11b53d1b5a9ea3b7d6a">
+              std::unordered_set&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">core::<wbr />ecs::<wbr />EntityHash</a>&gt; <a href="#a5289b3509391f11b53d1b5a9ea3b7d6a" class="m-doc-self">activePerAxis</a>
             </dt>
             <dd>Set of active entities during sweep for each axis.</dd>
             <dt id="a987bc8edbc9f6bd525b399dc7da30ae4">
-              std::unordered_set&lt;<a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a6f1b1c276940e21d9574ad5cbc8a7c96" class="m-doc">Candidate</a>, <a href="structcubos_1_1engine_1_1BroadPhaseCollisions_1_1CandidateHash.html" class="m-doc">CandidateHash</a>&gt; <a href="#a987bc8edbc9f6bd525b399dc7da30ae4" class="m-doc-self">candidatesPerType</a>
+              std::unordered_set&lt;<a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a031948e0232026d514ff805a6e72353e" class="m-doc">Candidate</a>, <a href="structcubos_1_1engine_1_1BroadPhaseCollisions_1_1CandidateHash.html" class="m-doc">CandidateHash</a>&gt; <a href="#a987bc8edbc9f6bd525b399dc7da30ae4" class="m-doc-self">candidatesPerType</a>
             </dt>
             <dd>Sets of collision candidates for each collision type. The index of the array is the collision type.</dd>
           </dl>
@@ -215,9 +215,9 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a2af9ba99d8fb1f2a5112b5baf57b91fd"><div>
+          <section class="m-doc-details" id="adb6e2057ab70563bee30565724da51e7"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2af9ba99d8fb1f2a5112b5baf57b91fd" class="m-doc-self">addEntity</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adb6e2057ab70563bee30565724da51e7" class="m-doc-self">addEntity</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a> entity)</span></span>
             </h3>
             <p>Adds an entity to the list of entities tracked by sweep and prune.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -232,9 +232,9 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a6ad5329b9532662b351e725e40f8511b"><div>
+          <section class="m-doc-details" id="a71b076c264094bd8cf02ec4126068abd"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6ad5329b9532662b351e725e40f8511b" class="m-doc-self">removeEntity</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a71b076c264094bd8cf02ec4126068abd" class="m-doc-self">removeEntity</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a> entity)</span></span>
             </h3>
             <p>Removes an entity from the list of entities tracked by sweep and prune.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -252,7 +252,7 @@
           <section class="m-doc-details" id="a3c705c50d1c56f6347a2c7e46808bcd9"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3c705c50d1c56f6347a2c7e46808bcd9" class="m-doc-self">addCandidate</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#ac36734dc751d2995fb1fa66429453786" class="m-doc">CollisionType</a> type,
-              <a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a6f1b1c276940e21d9574ad5cbc8a7c96" class="m-doc">Candidate</a> candidate)</span></span>
+              <a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a031948e0232026d514ff805a6e72353e" class="m-doc">Candidate</a> candidate)</span></span>
             </h3>
             <p>Adds a collision candidate to the list of candidates for a specific collision type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -273,7 +273,7 @@
           </div></section>
           <section class="m-doc-details" id="a1d8143539af8a6d2e0b2186a86e6d6d4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">const std::unordered_set&lt;<a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a6f1b1c276940e21d9574ad5cbc8a7c96" class="m-doc">Candidate</a>, <a href="structcubos_1_1engine_1_1BroadPhaseCollisions_1_1CandidateHash.html" class="m-doc">CandidateHash</a>&gt;&amp; cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1d8143539af8a6d2e0b2186a86e6d6d4" class="m-doc-self">candidates</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#ac36734dc751d2995fb1fa66429453786" class="m-doc">CollisionType</a> type) const</span></span>
+              <span class="m-doc-wrap-bumper">const std::unordered_set&lt;<a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#a031948e0232026d514ff805a6e72353e" class="m-doc">Candidate</a>, <a href="structcubos_1_1engine_1_1BroadPhaseCollisions_1_1CandidateHash.html" class="m-doc">CandidateHash</a>&gt;&amp; cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1d8143539af8a6d2e0b2186a86e6d6d4" class="m-doc-self">candidates</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html#ac36734dc751d2995fb1fa66429453786" class="m-doc">CollisionType</a> type) const</span></span>
             </h3>
             <p>Gets the collision candidates for a specific collision type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -297,9 +297,9 @@
         </section>
         <section>
           <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="a64135a3cd97885fd47e43512a4671dd1"><div>
+          <section class="m-doc-details" id="ab85f881769e68126d35ac866f38ecff0"><div>
             <h3>
-              std::unordered_map&lt;<a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>, std::vector&lt;<a href="classcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>&gt;&gt; cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /><a href="#a64135a3cd97885fd47e43512a4671dd1" class="m-doc-self">sweepOverlapMaps</a>
+              std::unordered_map&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>, std::vector&lt;<a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">core::<wbr />ecs::<wbr />Entity</a>&gt;, <a href="structcubos_1_1core_1_1ecs_1_1EntityHash.html" class="m-doc">core::<wbr />ecs::<wbr />EntityHash</a>&gt; cubos::<wbr />engine::<wbr />BroadPhaseCollisions::<wbr /><a href="#ab85f881769e68126d35ac866f38ecff0" class="m-doc-self">sweepOverlapMaps</a>
             </h3>
             <p>Maps of overlapping entities for each axis calculated by sweep and prune.</p>
 <p>For each each map, the key is an entity and the value is a list of entities that overlap with the key. Symmetrical pairs are not stored.</p>
