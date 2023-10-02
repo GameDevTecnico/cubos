@@ -642,9 +642,10 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
     lightData.ambientLight = glm::vec4(frame.ambient(), 1.0F);
 
     // Spotlights.
+    uint32_t lightI = 0;
     for (const auto& [transform, light] : frame.spotLights())
     {
-        if (lightData.numSpotLights >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
+        if (lightI >= CUBOS_DEFERRED_RENDERER_MAX_SPOT_LIGHT_COUNT)
         {
             CUBOS_WARN("Number of spot lights to be drawn "
                        "this frame exceeds the maximum allowed ({}).",
@@ -652,19 +653,21 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
             break;
         }
 
-        lightData.spotLights[lightData.numSpotLights].position = transform * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-        lightData.spotLights[lightData.numSpotLights].rotation = glm::toMat4(glm::quat_cast(transform));
-        lightData.spotLights[lightData.numSpotLights].color = glm::vec4(light.color, 1.0F);
-        lightData.spotLights[lightData.numSpotLights].intensity = light.intensity;
-        lightData.spotLights[lightData.numSpotLights].range = light.range;
-        lightData.spotLights[lightData.numSpotLights].spotCutoff = glm::cos(light.spotAngle);
-        lightData.numSpotLights += 1;
+        lightData.spotLights[lightI].position = transform * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
+        lightData.spotLights[lightI].rotation = glm::toMat4(glm::quat_cast(transform));
+        lightData.spotLights[lightI].color = glm::vec4(light.color, 1.0F);
+        lightData.spotLights[lightI].intensity = light.intensity;
+        lightData.spotLights[lightI].range = light.range;
+        lightData.spotLights[lightI].spotCutoff = glm::cos(light.spotAngle);
+        lightI += 1;
     }
+    lightData.numSpotLights = lightI;
 
     // Directional lights.
+    lightI = 0;
     for (const auto& [transform, light] : frame.directionalLights())
     {
-        if (lightData.numDirectionalLights >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
+        if (lightI >= CUBOS_DEFERRED_RENDERER_MAX_DIRECTIONAL_LIGHT_COUNT)
         {
             CUBOS_WARN("Number of directional lights to be drawn "
                        "this frame exceeds the maximum allowed ({}).",
@@ -672,28 +675,31 @@ void DeferredRenderer::onRender(const glm::mat4& view, const Viewport& viewport,
             break;
         }
 
-        lightData.directionalLights[lightData.numDirectionalLights].rotation = glm::toMat4(glm::quat_cast(transform));
-        lightData.directionalLights[lightData.numDirectionalLights].color = glm::vec4(light.color, 1.0F);
-        lightData.directionalLights[lightData.numDirectionalLights].intensity = light.intensity;
-        lightData.numDirectionalLights += 1;
+        lightData.directionalLights[lightI].rotation = glm::toMat4(glm::quat_cast(transform));
+        lightData.directionalLights[lightI].color = glm::vec4(light.color, 1.0F);
+        lightData.directionalLights[lightI].intensity = light.intensity;
+        lightI += 1;
     }
+    lightData.numDirectionalLights = lightI;
 
     // Point lights.
+    lightI = 0;
     for (const auto& [transform, light] : frame.pointLights())
     {
-        if (lightData.numPointLights >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
+        if (lightI >= CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT)
         {
             CUBOS_WARN("Number of point lights to be drawn "
                        "this frame exceeds the maximum allowed ({}).",
                        CUBOS_DEFERRED_RENDERER_MAX_POINT_LIGHT_COUNT);
             break;
         }
-        lightData.pointLights[lightData.numPointLights].position = transform * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
-        lightData.pointLights[lightData.numPointLights].color = glm::vec4(light.color, 1.0F);
-        lightData.pointLights[lightData.numPointLights].intensity = light.intensity;
-        lightData.pointLights[lightData.numPointLights].range = light.range;
-        lightData.numPointLights += 1;
+        lightData.pointLights[lightI].position = transform * glm::vec4(0.0F, 0.0F, 0.0F, 1.0F);
+        lightData.pointLights[lightI].color = glm::vec4(light.color, 1.0F);
+        lightData.pointLights[lightI].intensity = light.intensity;
+        lightData.pointLights[lightI].range = light.range;
+        lightI += 1;
     }
+    lightData.numPointLights = lightI;
 
     // Unmap the buffer.
     mLightsBuffer->unmap();
