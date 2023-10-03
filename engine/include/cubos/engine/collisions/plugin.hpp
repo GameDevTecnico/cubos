@@ -21,8 +21,6 @@ namespace cubos::engine
     /// ## Components
     /// - @ref BoxCollider - holds the box collider data.
     /// - @ref CapsuleCollider - holds the capsule collider data.
-    /// - @ref PlaneCollider - holds the plane collider data.
-    /// - @ref SimplexCollider - holds the simplex collider data.
     ///
     /// ## Events
     /// - @ref CollisionEvent - (TODO) emitted when a collision occurs.

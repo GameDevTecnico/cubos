@@ -34,14 +34,7 @@ namespace cubos::engine
         {
             BoxBox = 0,
             BoxCapsule,
-            BoxPlane,
-            BoxSimplex,
             CapsuleCapsule,
-            CapsulePlane,
-            CapsuleSimplex,
-            PlanePlane,
-            PlaneSimplex,
-            SimplexSimplex,
 
             Count ///< Number of collision types.
         };
