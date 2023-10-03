@@ -45,13 +45,6 @@ void updateCapsuleAABBs(Query<Read<LocalToWorld>, Read<CapsuleCollider>, Write<C
     (void)collisions;
 }
 
-void updateSimplexAABBs(Query<Read<LocalToWorld>, Read<SimplexCollider>, Write<ColliderAABB>> query,
-                        Write<BroadPhaseCollisions> collisions)
-{
-    (void)query;
-    (void)collisions;
-}
-
 void updateMarkers(Query<Read<ColliderAABB>> query, Write<BroadPhaseCollisions> collisions)
 {
     // TODO: This is parallelizable.
@@ -98,21 +91,11 @@ void sweep(Write<BroadPhaseCollisions> collisions)
     }
 }
 
-CollisionType getCollisionType(bool box, bool capsule, bool plane, bool simplex)
+CollisionType getCollisionType(bool box, bool capsule)
 {
     if (box && capsule)
     {
         return CollisionType::BoxCapsule;
-    }
-
-    if (box && plane)
-    {
-        return CollisionType::BoxPlane;
-    }
-
-    if (box && simplex)
-    {
-        return CollisionType::BoxSimplex;
     }
 
     if (box)
@@ -120,37 +103,10 @@ CollisionType getCollisionType(bool box, bool capsule, bool plane, bool simplex)
         return CollisionType::BoxBox;
     }
 
-    if (capsule && plane)
-    {
-        return CollisionType::CapsulePlane;
-    }
-
-    if (capsule && simplex)
-    {
-        return CollisionType::CapsuleSimplex;
-    }
-
-    if (capsule)
-    {
-        return CollisionType::CapsuleCapsule;
-    }
-
-    if (plane && simplex)
-    {
-        return CollisionType::PlaneSimplex;
-    }
-
-    if (plane)
-    {
-        return CollisionType::PlanePlane;
-    }
-
-    return CollisionType::SimplexSimplex;
+    return CollisionType::CapsuleCapsule;
 }
 
-void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, OptRead<PlaneCollider>, OptRead<SimplexCollider>,
-                     Read<ColliderAABB>>
-                   query,
+void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, Read<ColliderAABB>> query,
                Write<BroadPhaseCollisions> collisions)
 {
     collisions->clearCandidates();
@@ -159,14 +115,13 @@ void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, OptRead<Pla
     {
         for (auto& [entity, overlaps] : collisions->sweepOverlapMaps[axis])
         {
-            auto [box, capsule, plane, simplex, aabb] = query[entity].value();
+            auto [box, capsule, aabb] = query[entity].value();
             for (auto& other : overlaps)
             {
-                auto [otherBox, otherCapsule, otherPlane, otherSimplex, otherAabb] = query[other].value();
+                auto [otherBox, otherCapsule, otherAabb] = query[other].value();
 
                 // TODO: Should this be inside the if statement?
-                auto type = getCollisionType(box || otherBox, capsule || otherCapsule, plane || otherPlane,
-                                             simplex || otherSimplex);
+                auto type = getCollisionType(box || otherBox, capsule || otherCapsule);
 
                 switch (axis)
                 {

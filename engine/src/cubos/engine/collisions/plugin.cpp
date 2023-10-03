@@ -12,19 +12,14 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
 
     cubos.addComponent<ColliderAABB>();
     cubos.addComponent<BoxCollider>();
-    cubos.addComponent<SimplexCollider>();
     cubos.addComponent<CapsuleCollider>();
-    cubos.addComponent<PlaneCollider>();
 
     cubos.system(trackNewEntities<BoxCollider>).tagged("cubos.collisions.aabb.missing");
-    cubos.system(trackNewEntities<SimplexCollider>).tagged("cubos.collisions.aabb.missing");
     cubos.system(trackNewEntities<CapsuleCollider>).tagged("cubos.collisions.aabb.missing");
-    cubos.system(trackNewEntities<PlaneCollider>).tagged("cubos.collisions.aabb.missing");
     cubos.tag("cubos.collisions.aabb.missing").before("cubos.collisions.aabb");
 
     cubos.system(updateBoxAABBs).tagged("cubos.collisions.aabb");
     cubos.system(updateCapsuleAABBs).tagged("cubos.collisions.aabb");
-    cubos.system(updateSimplexAABBs).tagged("cubos.collisions.aabb");
     cubos.tag("cubos.collisions.aabb").after("cubos.transform.update");
 
     cubos.system(updateMarkers).tagged("cubos.collisions.broad.markers").after("cubos.collisions.aabb");

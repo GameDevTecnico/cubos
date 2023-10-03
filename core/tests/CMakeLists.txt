@@ -32,7 +32,6 @@ add_executable(
 
     geom/box.cpp
     geom/capsule.cpp
-    geom/simplex.cpp
 )
 
 target_link_libraries(cubos-core-tests cubos-core doctest::doctest)
