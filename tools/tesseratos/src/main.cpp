@@ -5,6 +5,7 @@
 #include <cubos/engine/tools/entity_inspector/plugin.hpp>
 #include <cubos/engine/tools/scene_editor/plugin.hpp>
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
+#include <cubos/engine/tools/voxel_palette_editor/plugin.hpp>
 #include <cubos/engine/tools/world_inspector/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
@@ -23,8 +24,9 @@ static void mockCamera(Write<ActiveCameras> camera, Commands cmds)
                               .entity();
 }
 
-static void mockSettings(Write<Settings> settings)
+static void setSettingsSystem(Write<Settings> settings)
 {
+    settings->setBool("assets.io.readOnly", false);
     settings->setString("assets.io.path", TESSERATOS_ASSETS_FOLDER);
 }
 
@@ -35,11 +37,12 @@ int main(int argc, char** argv)
     cubos.addPlugin(tools::sceneEditorPlugin);
     cubos.addPlugin(tools::entityInspectorPlugin);
     cubos.addPlugin(tools::worldInspectorPlugin);
+    cubos.addPlugin(tools::voxelPaletteEditorPlugin);
     cubos.addPlugin(tools::assetExplorerPlugin);
     cubos.addPlugin(tools::debugCameraPlugin);
 
     cubos.startupSystem(mockCamera).tagged("setup");
-    cubos.startupSystem(mockSettings).tagged("setup");
+    cubos.startupSystem(setSettingsSystem).tagged("setup");
 
     cubos.run();
 }
