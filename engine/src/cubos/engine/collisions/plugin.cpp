@@ -13,14 +13,10 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
     cubos.addComponent<BoxCollisionShape>();
     cubos.addComponent<CapsuleCollisionShape>();
 
-    cubos.system(trackNewEntities<BoxCollisionShape>).tagged("cubos.collisions.missing");
-    cubos.system(trackNewEntities<CapsuleCollisionShape>).tagged("cubos.collisions.missing");
-    cubos.tag("cubos.collisions.missing").before("cubos.collisions.aabb.setup");
-
-    cubos.system(setupBoxAABBs).tagged("cubos.collisions.aabb.setup");
-    cubos.system(setupCapsuleAABBs).tagged("cubos.collisions.aabb.setup");
+    cubos.system(setupNewBoxes).tagged("cubos.collisions.setup");
+    cubos.system(setupNewCapsules).tagged("cubos.collisions.setup");
     cubos.system(updateAABBs)
-        .after("cubos.collisions.aabb.setup")
+        .after("cubos.collisions.setup")
         .after("cubos.transform.update")
         .before("cubos.collisions.broad.markers");
 

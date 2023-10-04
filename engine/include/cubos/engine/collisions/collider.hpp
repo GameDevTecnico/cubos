@@ -16,13 +16,14 @@ namespace cubos::engine
     {
         glm::mat4 transform{1.0F}; ///< Transform of the collider.
 
-        bool fresh = true;      ///< Whether the collider is fresh. This is an hack and should be done in ECS.
         ColliderAABB localAABB; ///< Local space AABB of the collider.
         ColliderAABB worldAABB; ///< World space AABB of the collider.
 
         /// @brief Margin of the collider.
         ///
         /// When the collider shape has sharp edges, a margin is needed.
-        float margin = 0.0F;
+        float margin;
+
+        bool fresh = true; ///< Whether the collider is fresh. This is an hack and should be done in ECS.
     };
 } // namespace cubos::engine

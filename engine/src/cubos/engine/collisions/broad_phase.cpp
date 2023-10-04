@@ -4,23 +4,29 @@ using cubos::engine::ColliderAABB;
 
 using CollisionType = BroadPhaseCollisions::CollisionType;
 
-void setupBoxAABBs(Query<Read<BoxCollisionShape>, Write<Collider>> query)
+void setupNewBoxes(Query<Read<BoxCollisionShape>, Write<Collider>> query, Write<BroadPhaseCollisions> collisions)
 {
     for (auto [entity, shape, collider] : query)
     {
         if (collider->fresh)
         {
+            collisions->addEntity(entity);
+
             glm::vec3 diag[2];
             shape->shape.diag(diag);
             collider->localAABB = ColliderAABB{diag[0], diag[1]};
+
+            collider->margin = 0.04F;
+
             collider->fresh = false;
         }
     }
 }
 
-void setupCapsuleAABBs(Query<Read<CapsuleCollisionShape>, Write<Collider>> query)
+void setupNewCapsules(Query<Read<CapsuleCollisionShape>, Write<Collider>> query, Write<BroadPhaseCollisions> collisions)
 {
     (void)query;
+    (void)collisions;
 }
 
 void updateAABBs(Query<Read<LocalToWorld>, Write<Collider>> query)

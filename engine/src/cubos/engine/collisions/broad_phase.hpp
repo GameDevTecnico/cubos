@@ -23,28 +23,12 @@ using cubos::engine::CapsuleCollisionShape;
 using cubos::engine::Collider;
 using cubos::engine::LocalToWorld;
 
-/// @brief Adds collider to all new entities with collision shape.
-template <typename S>
-void trackNewEntities(Query<Read<S>, OptRead<Collider>> query, Write<BroadPhaseCollisions> collisions,
-                      Commands commands)
-{
-    // TODO: This is a bit of a hack. We should detect newly added colliders instead of using them as a marker.
+/// @brief Setups new box colliders.
+void setupNewBoxes(Query<Read<BoxCollisionShape>, Write<Collider>> query, Write<BroadPhaseCollisions> collisions);
 
-    for (auto [entity, shape, collider] : query)
-    {
-        if (!collider)
-        {
-            commands.add(entity, Collider{});
-            collisions->addEntity(entity);
-        }
-    }
-}
-
-/// @brief Setups the AABBs of all box colliders.
-void setupBoxAABBs(Query<Read<BoxCollisionShape>, Write<Collider>> query);
-
-/// @brief Setups the AABBs of all capsule colliders.
-void setupCapsuleAABBs(Query<Read<CapsuleCollisionShape>, Write<Collider>> query);
+/// @brief Setups new capsule colliders.
+void setupNewCapsules(Query<Read<CapsuleCollisionShape>, Write<Collider>> query,
+                      Write<BroadPhaseCollisions> collisions);
 
 /// @brief Updates the AABBs of all colliders.
 void updateAABBs(Query<Read<LocalToWorld>, Write<Collider>> query);

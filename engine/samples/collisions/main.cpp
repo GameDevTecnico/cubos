@@ -61,6 +61,7 @@ static void init(Commands commands, Write<Input> input, Write<ActiveCameras> cam
 static void addColliders(Write<State> state, Commands commands)
 {
     state->a = commands.create()
+                   .add(Collider{})
                    .add(BoxCollisionShape{})
                    .add(LocalToWorld{})
                    .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
@@ -69,6 +70,7 @@ static void addColliders(Write<State> state, Commands commands)
     state->aRotationAxis = glm::sphericalRand(1.0F);
 
     state->b = commands.create()
+                   .add(Collider{})
                    .add(BoxCollisionShape{})
                    .add(LocalToWorld{})
                    .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
@@ -114,7 +116,6 @@ static void updateCollided(Query<Read<Collider>> query, Write<State> state, Read
         {
             if (collider1 == entity || collider2 == entity)
             {
-                CUBOS_WARN("Collision detected!");
                 state->collided = true;
                 break;
             }
