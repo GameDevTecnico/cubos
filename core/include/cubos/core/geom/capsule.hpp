@@ -6,6 +6,7 @@
 
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
+#include <cubos/core/geom/aabb.hpp>
 
 namespace cubos::core::geom
 {
@@ -29,6 +30,16 @@ namespace cubos::core::geom
         float height() const
         {
             return length + 2.0F * radius;
+        }
+
+        /// @brief Computes the local AABB of the capsule.
+        /// @return Local AABB of the capsule.
+        AABB aabb() const
+        {
+            AABB aabb;
+            aabb.min({-radius, -radius, -radius});
+            aabb.max({radius, radius + length, radius});
+            return aabb;
         }
     };
 } // namespace cubos::core::geom

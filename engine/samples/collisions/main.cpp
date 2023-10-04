@@ -4,7 +4,6 @@
 #include <cubos/core/gl/debug.hpp>
 #include <cubos/core/log.hpp>
 
-#include <cubos/engine/collisions/aabb.hpp>
 #include <cubos/engine/collisions/broad_phase_collisions.hpp>
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
@@ -127,7 +126,7 @@ static void render(Query<Read<LocalToWorld>, Read<Collider>, Read<BoxCollisionSh
 {
     for (auto [entity, localToWorld, collider, shape] : query)
     {
-        cubos::core::gl::Debug::drawWireBox(shape->shape, localToWorld->mat * collider->transform);
+        cubos::core::gl::Debug::drawWireBox(shape->box, localToWorld->mat * collider->transform);
         cubos::core::gl::Debug::drawWireBox(collider->worldAABB.box(),
                                             glm::translate(glm::mat4{1.0}, collider->worldAABB.center()),
                                             glm::vec3{1.0, 0.0, 0.0});

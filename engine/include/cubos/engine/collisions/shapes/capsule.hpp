@@ -8,10 +8,10 @@
 
 namespace cubos::engine
 {
-    /// @brief Component which adds a capsule collision shape to an entity, used with a collider component.
+    /// @brief Component which adds a capsule collision shape to an entity, used with a @ref Collider component.
     /// @ingroup collisions-plugin
     struct [[cubos::component("cubos/capsule_collision_shape", VecStorage)]] CapsuleCollisionShape
     {
-        cubos::core::geom::Capsule shape; ///< Capsule shape.
+        cubos::core::geom::Capsule capsule; ///< Capsule shape.
     };
 } // namespace cubos::engine

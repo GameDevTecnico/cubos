@@ -1,7 +1,5 @@
 #include "broad_phase.hpp"
 
-using cubos::engine::ColliderAABB;
-
 using CollisionType = BroadPhaseCollisions::CollisionType;
 
 void setupNewBoxes(Query<Read<BoxCollisionShape>, Write<Collider>> query, Write<BroadPhaseCollisions> collisions)
@@ -12,9 +10,7 @@ void setupNewBoxes(Query<Read<BoxCollisionShape>, Write<Collider>> query, Write<
         {
             collisions->addEntity(entity);
 
-            glm::vec3 diag[2];
-            shape->shape.diag(diag);
-            collider->localAABB = ColliderAABB{diag[0], diag[1]};
+            shape->box.diag(collider->localAABB.diag);
 
             collider->margin = 0.04F;
 
@@ -60,8 +56,9 @@ void updateAABBs(Query<Read<LocalToWorld>, Write<Collider>> query)
         max += glm::vec3{collider->margin};
 
         // Set the AABB.
-        collider->worldAABB = ColliderAABB{translation - max, translation + max};
-    }
+        collider->worldAABB.min(translation - max);
+        collider->worldAABB.max(translation + max);
+    };
 }
 
 void updateMarkers(Query<Read<Collider>> query, Write<BroadPhaseCollisions> collisions)
@@ -75,8 +72,8 @@ void updateMarkers(Query<Read<Collider>> query, Write<BroadPhaseCollisions> coll
             [axis, &query](const BroadPhaseCollisions::SweepMarker& a, const BroadPhaseCollisions::SweepMarker& b) {
                 auto [aCollider] = query[a.entity].value();
                 auto [bCollider] = query[b.entity].value();
-                auto aPos = a.isMin ? aCollider->worldAABB.min : aCollider->worldAABB.max;
-                auto bPos = b.isMin ? bCollider->worldAABB.min : bCollider->worldAABB.max;
+                auto aPos = a.isMin ? aCollider->worldAABB.min() : aCollider->worldAABB.max();
+                auto bPos = b.isMin ? bCollider->worldAABB.min() : bCollider->worldAABB.max();
                 return aPos[axis] < bPos[axis];
             });
     }

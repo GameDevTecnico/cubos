@@ -6,7 +6,7 @@
 
 #include <glm/mat4x4.hpp>
 
-#include <cubos/engine/collisions/aabb.hpp>
+#include <cubos/core/geom/aabb.hpp>
 
 namespace cubos::engine
 {
@@ -16,8 +16,8 @@ namespace cubos::engine
     {
         glm::mat4 transform{1.0F}; ///< Transform of the collider.
 
-        ColliderAABB localAABB; ///< Local space AABB of the collider.
-        ColliderAABB worldAABB; ///< World space AABB of the collider.
+        core::geom::AABB localAABB{}; ///< Local space AABB of the collider.
+        core::geom::AABB worldAABB{}; ///< World space AABB of the collider.
 
         /// @brief Margin of the collider.
         ///
