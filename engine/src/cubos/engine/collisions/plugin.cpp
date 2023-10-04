@@ -1,4 +1,3 @@
-#include <cubos/engine/collisions/aabb.hpp>
 #include <cubos/engine/collisions/broad_phase_collisions.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 
@@ -10,13 +9,13 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
 
     cubos.addResource<BroadPhaseCollisions>();
 
-    cubos.addComponent<ColliderAABB>();
-    cubos.addComponent<BoxCollider>();
-    cubos.addComponent<CapsuleCollider>();
+    cubos.addComponent<Collider>();
+    cubos.addComponent<BoxCollisionShape>();
+    cubos.addComponent<CapsuleCollisionShape>();
 
-    cubos.system(trackNewEntities<BoxCollider>).tagged("cubos.collisions.aabb.missing");
-    cubos.system(trackNewEntities<CapsuleCollider>).tagged("cubos.collisions.aabb.missing");
-    cubos.tag("cubos.collisions.aabb.missing").before("cubos.collisions.aabb");
+    cubos.system(trackNewEntities<BoxCollisionShape>).tagged("cubos.collisions.missing");
+    cubos.system(trackNewEntities<CapsuleCollisionShape>).tagged("cubos.collisions.missing");
+    cubos.tag("cubos.collisions.missing").before("cubos.collisions.aabb");
 
     cubos.system(updateBoxAABBs).tagged("cubos.collisions.aabb");
     cubos.system(updateCapsuleAABBs).tagged("cubos.collisions.aabb");

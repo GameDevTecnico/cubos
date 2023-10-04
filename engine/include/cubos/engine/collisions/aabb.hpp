@@ -13,9 +13,9 @@
 
 namespace cubos::engine
 {
-    /// @brief Component which stores the AABB of an entity with a collider component.
+    /// @brief AABB of a collider.
     /// @ingroup collisions-plugin
-    struct [[cubos::component("cubos/aabb", VecStorage)]] ColliderAABB
+    struct ColliderAABB
     {
         /// @brief Minimum point of the diagonal of the AABB.
         glm::vec3 min = glm::vec3{-INFINITY};
