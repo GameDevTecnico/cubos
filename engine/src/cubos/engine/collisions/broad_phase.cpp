@@ -4,9 +4,9 @@ using cubos::engine::ColliderAABB;
 
 using CollisionType = BroadPhaseCollisions::CollisionType;
 
-void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollisionShape>, Write<Collider>> query)
+void setupBoxAABBs(Query<Read<BoxCollisionShape>, Write<Collider>> query)
 {
-    for (auto [entity, localToWorld, shape, collider] : query)
+    for (auto [entity, shape, collider] : query)
     {
         if (collider->fresh)
         {
@@ -15,7 +15,18 @@ void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollisionShape>, Write<Col
             collider->localAABB = ColliderAABB{diag[0], diag[1]};
             collider->fresh = false;
         }
+    }
+}
 
+void setupCapsuleAABBs(Query<Read<CapsuleCollisionShape>, Write<Collider>> query)
+{
+    (void)query;
+}
+
+void updateAABBs(Query<Read<LocalToWorld>, Write<Collider>> query)
+{
+    for (auto [entity, localToWorld, collider] : query)
+    {
         // Get the 4 points of the collider.
         glm::vec3 corners[4];
         collider->localAABB.box().corners4(corners);
@@ -40,18 +51,11 @@ void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollisionShape>, Write<Col
         max = glm::max(max, glm::abs(rotatedCorners[3]));
 
         // Add the collider's margin.
-        max += glm::vec3{shape->margin};
+        max += glm::vec3{collider->margin};
 
         // Set the AABB.
         collider->worldAABB = ColliderAABB{translation - max, translation + max};
     }
-}
-
-void updateCapsuleAABBs(Query<Read<LocalToWorld>, Read<CapsuleCollisionShape>, Read<Collider>> query,
-                        Write<BroadPhaseCollisions> collisions)
-{
-    (void)query;
-    (void)collisions;
 }
 
 void updateMarkers(Query<Read<Collider>> query, Write<BroadPhaseCollisions> collisions)
