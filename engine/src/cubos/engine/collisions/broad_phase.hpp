@@ -30,9 +30,9 @@ void trackNewEntities(Query<Read<S>, OptRead<Collider>> query, Write<BroadPhaseC
 {
     // TODO: This is a bit of a hack. We should detect newly added colliders instead of using them as a marker.
 
-    for (auto [entity, shape, aabb] : query)
+    for (auto [entity, shape, collider] : query)
     {
-        if (!aabb)
+        if (!collider)
         {
             commands.add(entity, Collider{});
             collisions->addEntity(entity);
@@ -40,12 +40,14 @@ void trackNewEntities(Query<Read<S>, OptRead<Collider>> query, Write<BroadPhaseC
     }
 }
 
-/// @brief Updates the AABBs of all box colliders.
-void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollisionShape>, Write<Collider>> query);
+/// @brief Setups the AABBs of all box colliders.
+void setupBoxAABBs(Query<Read<BoxCollisionShape>, Write<Collider>> query);
 
-/// @brief Updates the AABBs of all capsule colliders.
-void updateCapsuleAABBs(Query<Read<LocalToWorld>, Read<CapsuleCollisionShape>, Read<Collider>> query,
-                        Write<BroadPhaseCollisions> collisions);
+/// @brief Setups the AABBs of all capsule colliders.
+void setupCapsuleAABBs(Query<Read<CapsuleCollisionShape>, Write<Collider>> query);
+
+/// @brief Updates the AABBs of all colliders.
+void updateAABBs(Query<Read<LocalToWorld>, Write<Collider>> query);
 
 /// @brief Updates the sweep markers of all colliders.
 void updateMarkers(Query<Read<Collider>> query, Write<BroadPhaseCollisions> collisions);

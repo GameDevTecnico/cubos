@@ -114,6 +114,7 @@ static void updateCollided(Query<Read<Collider>> query, Write<State> state, Read
         {
             if (collider1 == entity || collider2 == entity)
             {
+                CUBOS_WARN("Collision detected!");
                 state->collided = true;
                 break;
             }
@@ -148,7 +149,7 @@ int main()
     cubos.startupSystem(addColliders);
 
     cubos.system(updateTransform).before("cubos.transform.update");
-    cubos.system(updateCollided).tagged("updated").after("cubos.collisions");
+    cubos.system(updateCollided).tagged("updated").after("cubos.collisions.broad");
     cubos.system(render).after("updated");
 
     cubos.run();
