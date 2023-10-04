@@ -6,8 +6,9 @@
 
 #include <cubos/engine/collisions/aabb.hpp>
 #include <cubos/engine/collisions/broad_phase_collisions.hpp>
-#include <cubos/engine/collisions/colliders/box.hpp>
+#include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
+#include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
@@ -60,7 +61,7 @@ static void init(Commands commands, Write<Input> input, Write<ActiveCameras> cam
 static void addColliders(Write<State> state, Commands commands)
 {
     state->a = commands.create()
-                   .add(BoxCollider{})
+                   .add(BoxCollisionShape{})
                    .add(LocalToWorld{})
                    .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                    .add(Rotation{})
@@ -68,7 +69,7 @@ static void addColliders(Write<State> state, Commands commands)
     state->aRotationAxis = glm::sphericalRand(1.0F);
 
     state->b = commands.create()
-                   .add(BoxCollider{})
+                   .add(BoxCollisionShape{})
                    .add(LocalToWorld{})
                    .add(Position{glm::vec3{0.0F, 0.0F, 2.0F}})
                    .add(Rotation{})
@@ -105,7 +106,7 @@ static void updateTransform(Write<State> state, Read<Input> input, Query<Write<P
     bPos->vec += glm::vec3{0.0F, 0.0F, -0.01F};
 }
 
-static void updateCollided(Query<Read<BoxCollider>> query, Write<State> state, Read<BroadPhaseCollisions> collisions)
+static void updateCollided(Query<Read<Collider>> query, Write<State> state, Read<BroadPhaseCollisions> collisions)
 {
     for (auto [entity, collider] : query)
     {
@@ -120,12 +121,13 @@ static void updateCollided(Query<Read<BoxCollider>> query, Write<State> state, R
     }
 }
 
-static void render(Query<Read<LocalToWorld>, Read<BoxCollider>, Read<ColliderAABB>> query)
+static void render(Query<Read<LocalToWorld>, Read<Collider>, Read<BoxCollisionShape>> query)
 {
-    for (auto [entity, localToWorld, collider, aabb] : query)
+    for (auto [entity, localToWorld, collider, shape] : query)
     {
-        cubos::core::gl::Debug::drawWireBox(collider->shape, localToWorld->mat * collider->transform);
-        cubos::core::gl::Debug::drawWireBox(aabb->box(), glm::translate(glm::mat4{1.0}, aabb->center()),
+        cubos::core::gl::Debug::drawWireBox(shape->shape, localToWorld->mat * collider->transform);
+        cubos::core::gl::Debug::drawWireBox(collider->worldAABB.box(),
+                                            glm::translate(glm::mat4{1.0}, collider->worldAABB.center()),
                                             glm::vec3{1.0, 0.0, 0.0});
     }
 }

@@ -1,14 +1,24 @@
 #include "broad_phase.hpp"
 
+using cubos::engine::ColliderAABB;
+
 using CollisionType = BroadPhaseCollisions::CollisionType;
 
-void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderAABB>> query)
+void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollisionShape>, Write<Collider>> query)
 {
-    for (auto [entity, localToWorld, collider, aabb] : query)
+    for (auto [entity, localToWorld, shape, collider] : query)
     {
+        if (collider->fresh)
+        {
+            glm::vec3 diag[2];
+            shape->shape.diag(diag);
+            collider->localAABB = ColliderAABB{diag[0], diag[1]};
+            collider->fresh = false;
+        }
+
         // Get the 4 points of the collider.
         glm::vec3 corners[4];
-        collider->shape.corners4(corners);
+        collider->localAABB.box().corners4(corners);
 
         // Pack the 3 points of the collider into a matrix.
         auto points = glm::mat4{glm::vec4{corners[0], 1.0F}, glm::vec4{corners[1], 1.0F}, glm::vec4{corners[2], 1.0F},
@@ -30,22 +40,21 @@ void updateBoxAABBs(Query<Read<LocalToWorld>, Read<BoxCollider>, Write<ColliderA
         max = glm::max(max, glm::abs(rotatedCorners[3]));
 
         // Add the collider's margin.
-        max += glm::vec3{collider->margin};
+        max += glm::vec3{shape->margin};
 
         // Set the AABB.
-        aabb->max = translation + max;
-        aabb->min = translation - max;
+        collider->worldAABB = ColliderAABB{translation - max, translation + max};
     }
 }
 
-void updateCapsuleAABBs(Query<Read<LocalToWorld>, Read<CapsuleCollider>, Write<ColliderAABB>> query,
+void updateCapsuleAABBs(Query<Read<LocalToWorld>, Read<CapsuleCollisionShape>, Read<Collider>> query,
                         Write<BroadPhaseCollisions> collisions)
 {
     (void)query;
     (void)collisions;
 }
 
-void updateMarkers(Query<Read<ColliderAABB>> query, Write<BroadPhaseCollisions> collisions)
+void updateMarkers(Query<Read<Collider>> query, Write<BroadPhaseCollisions> collisions)
 {
     // TODO: This is parallelizable.
     for (glm::length_t axis = 0; axis < 3; axis++)
@@ -54,10 +63,10 @@ void updateMarkers(Query<Read<ColliderAABB>> query, Write<BroadPhaseCollisions> 
         std::sort(
             collisions->markersPerAxis[axis].begin(), collisions->markersPerAxis[axis].end(),
             [axis, &query](const BroadPhaseCollisions::SweepMarker& a, const BroadPhaseCollisions::SweepMarker& b) {
-                auto [aAABB] = query[a.entity].value();
-                auto [bAABB] = query[b.entity].value();
-                auto aPos = a.isMin ? aAABB->min : aAABB->max;
-                auto bPos = b.isMin ? bAABB->min : bAABB->max;
+                auto [aCollider] = query[a.entity].value();
+                auto [bCollider] = query[b.entity].value();
+                auto aPos = a.isMin ? aCollider->worldAABB.min : aCollider->worldAABB.max;
+                auto bPos = b.isMin ? bCollider->worldAABB.min : bCollider->worldAABB.max;
                 return aPos[axis] < bPos[axis];
             });
     }
@@ -106,7 +115,7 @@ CollisionType getCollisionType(bool box, bool capsule)
     return CollisionType::CapsuleCapsule;
 }
 
-void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, Read<ColliderAABB>> query,
+void findPairs(Query<OptRead<BoxCollisionShape>, OptRead<CapsuleCollisionShape>, Read<Collider>> query,
                Write<BroadPhaseCollisions> collisions)
 {
     collisions->clearCandidates();
@@ -115,10 +124,10 @@ void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, Read<Collid
     {
         for (auto& [entity, overlaps] : collisions->sweepOverlapMaps[axis])
         {
-            auto [box, capsule, aabb] = query[entity].value();
+            auto [box, capsule, collider] = query[entity].value();
             for (auto& other : overlaps)
             {
-                auto [otherBox, otherCapsule, otherAabb] = query[other].value();
+                auto [otherBox, otherCapsule, otherCollider] = query[other].value();
 
                 // TODO: Should this be inside the if statement?
                 auto type = getCollisionType(box || otherBox, capsule || otherCapsule);
@@ -126,19 +135,22 @@ void findPairs(Query<OptRead<BoxCollider>, OptRead<CapsuleCollider>, Read<Collid
                 switch (axis)
                 {
                 case 0: // X
-                    if (aabb->overlapsY(*otherAabb) && aabb->overlapsZ(*otherAabb))
+                    if (collider->worldAABB.overlapsY(otherCollider->worldAABB) &&
+                        collider->worldAABB.overlapsZ(otherCollider->worldAABB))
                     {
                         collisions->addCandidate(type, {entity, other});
                     }
                     break;
                 case 1: // Y
-                    if (aabb->overlapsX(*otherAabb) && aabb->overlapsZ(*otherAabb))
+                    if (collider->worldAABB.overlapsX(otherCollider->worldAABB) &&
+                        collider->worldAABB.overlapsZ(otherCollider->worldAABB))
                     {
                         collisions->addCandidate(type, {entity, other});
                     }
                     break;
                 case 2: // Z
-                    if (aabb->overlapsX(*otherAabb) && aabb->overlapsY(*otherAabb))
+                    if (collider->worldAABB.overlapsX(otherCollider->worldAABB) &&
+                        collider->worldAABB.overlapsY(otherCollider->worldAABB))
                     {
                         collisions->addCandidate(type, {entity, other});
                     }
