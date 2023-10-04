@@ -22,6 +22,7 @@ namespace cubos::engine
         /// @brief Margin of the collider.
         ///
         /// When the collider shape has sharp edges, a margin is needed.
+        /// The plugin will set it based on the shape associated with the collider.
         float margin;
 
         bool fresh = true; ///< Whether the collider is fresh. This is an hack and should be done in ECS.
