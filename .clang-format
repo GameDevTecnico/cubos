@@ -1,7 +1,6 @@
 ---
 BasedOnStyle: Microsoft
 NamespaceIndentation: All
-SortIncludes: 'false'
 IndentWidth: 4
 AccessModifierOffset: -4
 DerivePointerAlignment: false
