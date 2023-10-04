@@ -29,6 +29,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/tools/entity_inspector/plugin.cpp"
     "src/cubos/engine/tools/scene_editor/plugin.cpp"
     "src/cubos/engine/tools/debug_camera/plugin.cpp"
+    "src/cubos/engine/tools/voxel_palette_editor/plugin.cpp"
 
     "src/cubos/engine/transform/plugin.cpp"
     "src/cubos/engine/transform/local_to_world.cpp"
