@@ -2447,6 +2447,11 @@ void OGLRenderDevice::drawTriangles(std::size_t offset, std::size_t count)
     glDrawArrays(GL_TRIANGLES, static_cast<GLint>(offset), static_cast<GLsizei>(count));
 }
 
+void OGLRenderDevice::drawLines(std::size_t offset, std::size_t count)
+{
+    glDrawArrays(GL_LINES, static_cast<GLint>(offset), static_cast<GLsizei>(count));
+}
+
 void OGLRenderDevice::drawTrianglesIndexed(std::size_t offset, std::size_t count)
 {
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count), static_cast<GLenum>(mCurrentIndexFormat),

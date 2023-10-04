@@ -213,7 +213,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
 
     cubos.startupTag("cubos.renderer.init").after("cubos.window.init");
     cubos.tag("cubos.renderer.frame").after("cubos.transform.update");
-    cubos.tag("cubos.renderer.render").after("cubos.renderer.frame").before("cubos.window.render");
+    cubos.tag("cubos.renderer.draw").after("cubos.renderer.frame").before("cubos.window.render");
 
     cubos.startupSystem(init).tagged("cubos.renderer.init");
     cubos.system(frameGrids).tagged("cubos.renderer.frame");

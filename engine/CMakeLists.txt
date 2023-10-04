@@ -44,6 +44,9 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/assets/meta.cpp"
     "src/cubos/engine/assets/bridges/file.cpp"
 
+    "src/cubos/engine/gizmos/plugin.cpp"
+    "src/cubos/engine/gizmos/gizmos.cpp"
+
     "src/cubos/engine/scene/plugin.cpp"
     "src/cubos/engine/scene/bridge.cpp"
 

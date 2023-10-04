@@ -41,6 +41,7 @@ namespace cubos::core::gl
         void clearTargetColor(std::size_t target, float r, float g, float b, float a) override;
         void clearDepth(float depth) override;
         void clearStencil(int stencil) override;
+        void drawLines(std::size_t offset, std::size_t count) override;
         void drawTriangles(std::size_t offset, std::size_t count) override;
         void drawTrianglesIndexed(std::size_t offset, std::size_t count) override;
         void drawTrianglesInstanced(std::size_t offset, std::size_t count, std::size_t instanceCount) override;
