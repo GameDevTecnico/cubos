@@ -8,6 +8,7 @@
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
+#include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
@@ -61,7 +62,7 @@ static void addColliders(Write<State> state, Commands commands)
 {
     state->a = commands.create()
                    .add(Collider{})
-                   .add(BoxCollisionShape{})
+                   .add(CapsuleCollisionShape{{0.5F, 1.0F}})
                    .add(LocalToWorld{})
                    .add(Position{glm::vec3{0.0F, 0.0F, -2.0F}})
                    .add(Rotation{})
@@ -111,7 +112,8 @@ static void updateCollided(Query<Read<Collider>> query, Write<State> state, Read
 {
     for (auto [entity, collider] : query)
     {
-        for (const auto& [collider1, collider2] : collisions->candidates(BroadPhaseCollisions::CollisionType::BoxBox))
+        for (const auto& [collider1, collider2] :
+             collisions->candidates(BroadPhaseCollisions::CollisionType::BoxCapsule))
         {
             if (collider1 == entity || collider2 == entity)
             {
@@ -122,11 +124,11 @@ static void updateCollided(Query<Read<Collider>> query, Write<State> state, Read
     }
 }
 
-static void render(Query<Read<LocalToWorld>, Read<Collider>, Read<BoxCollisionShape>> query)
+static void render(Query<Read<LocalToWorld>, Read<Collider>> query)
 {
-    for (auto [entity, localToWorld, collider, shape] : query)
+    for (auto [entity, localToWorld, collider] : query)
     {
-        cubos::core::gl::Debug::drawWireBox(shape->box, localToWorld->mat * collider->transform);
+        cubos::core::gl::Debug::drawWireBox(collider->localAABB.box(), localToWorld->mat * collider->transform);
         cubos::core::gl::Debug::drawWireBox(collider->worldAABB.box(),
                                             glm::translate(glm::mat4{1.0}, collider->worldAABB.center()),
                                             glm::vec3{1.0, 0.0, 0.0});
