@@ -128,7 +128,9 @@ static void render(Query<Read<LocalToWorld>, Read<Collider>> query)
 {
     for (auto [entity, localToWorld, collider] : query)
     {
-        cubos::core::gl::Debug::drawWireBox(collider->localAABB.box(), localToWorld->mat * collider->transform);
+        cubos::core::gl::Debug::drawWireBox(
+            collider->localAABB.box(),
+            glm::translate(localToWorld->mat * collider->transform, collider->localAABB.center()));
         cubos::core::gl::Debug::drawWireBox(collider->worldAABB.box(),
                                             glm::translate(glm::mat4{1.0}, collider->worldAABB.center()),
                                             glm::vec3{1.0, 0.0, 0.0});
