@@ -21,8 +21,19 @@ void setupNewBoxes(Query<Read<BoxCollisionShape>, Write<Collider>> query, Write<
 
 void setupNewCapsules(Query<Read<CapsuleCollisionShape>, Write<Collider>> query, Write<BroadPhaseCollisions> collisions)
 {
-    (void)query;
-    (void)collisions;
+    for (auto [entity, shape, collider] : query)
+    {
+        if (collider->fresh)
+        {
+            collisions->addEntity(entity);
+
+            collider->localAABB = shape->capsule.aabb();
+
+            collider->margin = 0.0F;
+
+            collider->fresh = false;
+        }
+    }
 }
 
 void updateAABBs(Query<Read<LocalToWorld>, Write<Collider>> query)
