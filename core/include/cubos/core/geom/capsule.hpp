@@ -37,8 +37,8 @@ namespace cubos::core::geom
         AABB aabb() const
         {
             AABB aabb;
-            aabb.min({-radius, -radius, -radius});
-            aabb.max({radius, radius + length, radius});
+            aabb.min({-radius, -radius - (length / 2.0F), -radius});
+            aabb.max({radius, radius + (length / 2.0F), radius});
             return aabb;
         }
     };
