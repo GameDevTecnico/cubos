@@ -10,11 +10,11 @@ std::size_t EntityHash::operator()(const Entity& entity) const noexcept
     // for entities with the same index but different generations. That shouldn't be a problem
     // though, since that use case is very unlikely.
 
-    if constexpr (sizeof(std::size_t) < sizeof(uint32_t) * 2)
-    {
-        return static_cast<std::size_t>(entity.index);
-    }
-
+#if SIZE_MAX <= UINT32_MAX
+    return static_cast<std::size_t>(entity.index);
+#else
+    static_assert(sizeof(std::size_t) >= sizeof(uint32_t) * 2);
     return static_cast<std::size_t>(entity.index) |
            (static_cast<std::size_t>(entity.generation) << (sizeof(uint32_t) * 8));
+#endif
 }
