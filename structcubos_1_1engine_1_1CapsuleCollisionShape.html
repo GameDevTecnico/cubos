@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::CapsuleCollider struct | CUBOS.</title>
+  <title>cubos::engine::CapsuleCollisionShape struct | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,10 +44,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>CapsuleCollider <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2collisions_2colliders_2capsule_8hpp.html">&lt;engine/collisions/colliders/capsule.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>CapsuleCollisionShape <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2collisions_2shapes_2capsule_8hpp.html">&lt;engine/collisions/shapes/capsule.hpp&gt;</a></div>
         </h1>
-        <p>Component which adds a capsule collider to an entity.</p>
+        <p>Component which adds a capsule collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -59,18 +59,13 @@
             </li>
           </ul>
         </nav>
-<ul><li>Convex: For any 2 points inside the shape, the line segment connecting those points lies inside the shape.</li><li>Zero margin: No margin is needed, since the shape has no sharp corners.</li></ul>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="a11f3c7cb5a1d752b2b63ffb79dd4f804">
-              glm::mat4 <a href="#a11f3c7cb5a1d752b2b63ffb79dd4f804" class="m-doc-self">transform</a>
+            <dt id="a708e3fbd9396316563c6eedf97386b05">
+              <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Capsule</a> <a href="#a708e3fbd9396316563c6eedf97386b05" class="m-doc-self">capsule</a>
             </dt>
-            <dd>Transform of the collider.</dd>
-            <dt id="a6f7f6ef1295c177b50af1bfe9efdf40d">
-              <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Capsule</a> <a href="#a6f7f6ef1295c177b50af1bfe9efdf40d" class="m-doc-self">shape</a>
-            </dt>
-            <dd>Capsule shape of the collider.</dd>
+            <dd>Capsule shape.</dd>
           </dl>
         </section>
       </div>

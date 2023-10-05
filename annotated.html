@@ -193,6 +193,7 @@
                   <li class="m-doc-collapsible collapsed">
                     <a href="#" onclick="return toggle(this)">namespace</a> <a href="namespacecubos_1_1core_1_1geom.html" class="m-doc">geom</a> <span class="m-doc"><a href="group__core-geom.html" class="m-doc">Geometry</a> module.</span>
                     <ul class="m-doc">
+                      <li>struct <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">AABB</a> <span class="m-doc">Represents an axis-aligned bounding box.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">Box</a> <span class="m-doc">Represents a box shape.</span></li>
                       <li>struct <a href="structcubos_1_1core_1_1geom_1_1Capsule.html" class="m-doc">Capsule</a> <span class="m-doc">Represents a capsule or sphere shape.</span></li>
                     </ul>
@@ -360,7 +361,7 @@
                     </ul>
                   </li>
                   <li>class <a href="classcubos_1_1engine_1_1BinaryBridge.html" class="m-doc">BinaryBridge</a> <span class="m-doc">Bridge for loading and saving assets which are serialized to and from a binary file.</span></li>
-                  <li>struct <a href="structcubos_1_1engine_1_1BoxCollider.html" class="m-doc">BoxCollider</a> <span class="m-doc">Component which adds a box collider to an entity.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a> <span class="m-doc">Component which adds a box collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span></li>
                   <li class="m-doc-collapsible collapsed">
                     <a href="#" onclick="return toggle(this)">struct</a> <a href="structcubos_1_1engine_1_1BroadPhaseCollisions.html" class="m-doc">BroadPhaseCollisions</a> <span class="m-doc">Resource which stores data used in broad phase collision detection.</span>
                     <ul class="m-doc">
@@ -369,8 +370,8 @@
                     </ul>
                   </li>
                   <li>struct <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a> <span class="m-doc">Component which defines parameters of a camera used to render the world.</span></li>
-                  <li>struct <a href="structcubos_1_1engine_1_1CapsuleCollider.html" class="m-doc">CapsuleCollider</a> <span class="m-doc">Component which adds a capsule collider to an entity.</span></li>
-                  <li>struct <a href="structcubos_1_1engine_1_1ColliderAABB.html" class="m-doc">ColliderAABB</a> <span class="m-doc">Component which stores the AABB of an entity with a collider component.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">CapsuleCollisionShape</a> <span class="m-doc">Component which adds a capsule collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</span></li>
+                  <li>struct <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> <span class="m-doc">Component which adds a collider to an entity.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a> <span class="m-label m-flat m-warning">final</span> <span class="m-doc">Represents the engine itself, and exposes the interface with which the game developer interacts with. Ties up all the different parts of the engine together.</span></li>
                   <li>class <a href="classcubos_1_1engine_1_1DeferredRenderer.html" class="m-doc">DeferredRenderer</a> <span class="m-doc">Renderer implementation which uses deferred rendering.</span></li>
                   <li>struct <a href="structcubos_1_1engine_1_1DeltaTime.html" class="m-doc">DeltaTime</a> <span class="m-doc">Resource which stores the time since the last iteration of the main loop started.</span></li>

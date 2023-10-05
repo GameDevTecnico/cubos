@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::BoxCollider struct | CUBOS.</title>
+  <title>cubos::engine::Collider struct | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,10 +44,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>BoxCollider <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2collisions_2colliders_2box_8hpp.html">&lt;engine/collisions/colliders/box.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Collider <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="collider_8hpp.html">&lt;engine/collisions/collider.hpp&gt;</a></div>
         </h1>
-        <p>Component which adds a box collider to an entity.</p>
+        <p>Component which adds a collider to an entity.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -59,32 +59,39 @@
             </li>
           </ul>
         </nav>
-<ul><li>Convex: For any 2 points inside the shape, the line segment connecting those points lies inside the shape.</li><li>Positive margin: Requires a positive margin to round off sharp corners. Defined in physics-space units.</li></ul>
         <section id="pub-attribs">
           <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt id="aed9270b2ce51ea7163c5796cb0d97920">
-              glm::mat4 <a href="#aed9270b2ce51ea7163c5796cb0d97920" class="m-doc-self">transform</a>
+            <dt id="a8ce8472f65ba76e8ec3b8597983883ae">
+              glm::mat4 <a href="#a8ce8472f65ba76e8ec3b8597983883ae" class="m-doc-self">transform</a>
             </dt>
             <dd>Transform of the collider.</dd>
-            <dt id="a6ad1c9c775e549b9ce31f441c3141cd3">
-              <a href="structcubos_1_1core_1_1geom_1_1Box.html" class="m-doc">cubos::<wbr />core::<wbr />geom::<wbr />Box</a> <a href="#a6ad1c9c775e549b9ce31f441c3141cd3" class="m-doc-self">shape</a>
+            <dt id="a2d3bcc8e442d89dab249819b05bafe61">
+              <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">core::<wbr />geom::<wbr />AABB</a> <a href="#a2d3bcc8e442d89dab249819b05bafe61" class="m-doc-self">localAABB</a>
             </dt>
-            <dd>Box shape of the collider.</dd>
+            <dd>Local space AABB of the collider.</dd>
+            <dt id="a5a0506323be1be6fd35cdaee81ffce10">
+              <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">core::<wbr />geom::<wbr />AABB</a> <a href="#a5a0506323be1be6fd35cdaee81ffce10" class="m-doc-self">worldAABB</a>
+            </dt>
+            <dd>World space AABB of the collider.</dd>
             <dt>
-              float <a href="#adf922fcc81e15af860936cb1497bb985" class="m-doc">margin</a>
+              float <a href="#af0706098c7b2102f8d36e48c48a2130c" class="m-doc">margin</a>
             </dt>
-            <dd>Margin of the collider. Needed for collision stability.</dd>
+            <dd>Margin of the collider.</dd>
+            <dt id="a5b0ff362093908ad4e29898c7bff2526">
+              bool <a href="#a5b0ff362093908ad4e29898c7bff2526" class="m-doc-self">fresh</a>
+            </dt>
+            <dd>Whether the collider is fresh. This is an hack and should be done in ECS.</dd>
           </dl>
         </section>
         <section>
           <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="adf922fcc81e15af860936cb1497bb985"><div>
+          <section class="m-doc-details" id="af0706098c7b2102f8d36e48c48a2130c"><div>
             <h3>
-              float cubos::<wbr />engine::<wbr />BoxCollider::<wbr /><a href="#adf922fcc81e15af860936cb1497bb985" class="m-doc-self">margin</a>
+              float cubos::<wbr />engine::<wbr />Collider::<wbr /><a href="#af0706098c7b2102f8d36e48c48a2130c" class="m-doc-self">margin</a>
             </h3>
-            <p>Margin of the collider. Needed for collision stability.</p>
-<p>The collider margin avoids collision errors by rounding off sharp corners. It is absolute so the collider&#x27;s transform won&#x27;t affect it. Shouldn&#x27;t be changed without good reason, as it&#x27;s preferable to scale down the collider to account for it.</p>
+            <p>Margin of the collider.</p>
+<p>When the collider shape has sharp edges, a margin is needed. The plugin will set it based on the shape associated with the collider.</p>
           </div></section>
         </section>
       </div>
