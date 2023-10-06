@@ -1,10 +1,13 @@
+
+#include "plugin.hpp"
+
 #include <cubos/engine/collisions/broad_phase/candidates.hpp>
-#include <cubos/engine/collisions/broad_phase/plugin.hpp>
-#include <cubos/engine/collisions/broad_phase/sweep_and_prune.hpp>
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/transform/local_to_world.hpp>
+
+#include "sweep_and_prune.hpp"
 
 using cubos::core::ecs::OptRead;
 using cubos::core::ecs::Query;

@@ -2,6 +2,8 @@
 /// @brief Resource @ref cubos::engine::Candidates.
 /// @ingroup broad-phase-collisions-plugin
 
+// FIXME: This should be private, but it's used in the sample.
+
 #pragma once
 
 #include <unordered_map>

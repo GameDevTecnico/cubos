@@ -1,6 +1,6 @@
 #include <algorithm>
 
-#include <cubos/engine/collisions/broad_phase/sweep_and_prune.hpp>
+#include "sweep_and_prune.hpp"
 
 using cubos::core::ecs::Entity;
 using namespace cubos::engine;
