@@ -14,7 +14,7 @@ using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 /// @brief Setups new box colliders.
-void setupNewBoxes(Query<Read<BoxCollisionShape>, Write<Collider>> query)
+static void setupNewBoxesSystem(Query<Read<BoxCollisionShape>, Write<Collider>> query)
 {
     for (auto [entity, shape, collider] : query)
     {
@@ -33,7 +33,7 @@ void setupNewBoxes(Query<Read<BoxCollisionShape>, Write<Collider>> query)
 }
 
 /// @brief Setups new capsule colliders.
-void setupNewCapsules(Query<Read<CapsuleCollisionShape>, Write<Collider>> query)
+static void setupNewCapsulesSystem(Query<Read<CapsuleCollisionShape>, Write<Collider>> query)
 {
     for (auto [entity, shape, collider] : query)
     {
@@ -61,6 +61,6 @@ void cubos::engine::collisionsPlugin(Cubos& cubos)
     cubos.addComponent<BoxCollisionShape>();
     cubos.addComponent<CapsuleCollisionShape>();
 
-    cubos.system(setupNewBoxes).tagged("cubos.collisions.setup");
-    cubos.system(setupNewCapsules).tagged("cubos.collisions.setup");
+    cubos.system(setupNewBoxesSystem).tagged("cubos.collisions.setup");
+    cubos.system(setupNewCapsulesSystem).tagged("cubos.collisions.setup");
 }

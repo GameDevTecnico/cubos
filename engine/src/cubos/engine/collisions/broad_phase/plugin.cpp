@@ -16,7 +16,7 @@ using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 /// @brief Tracks all new colliders.
-void trackNewColliders(Query<Read<Collider>> query, Write<BroadPhaseSweepAndPrune> sweepAndPrune)
+static void trackNewCollidersSystem(Query<Read<Collider>> query, Write<BroadPhaseSweepAndPrune> sweepAndPrune)
 {
     for (auto [entity, collider] : query)
     {
@@ -28,7 +28,7 @@ void trackNewColliders(Query<Read<Collider>> query, Write<BroadPhaseSweepAndPrun
 }
 
 /// @brief Updates the AABBs of all colliders.
-void updateAABBs(Query<Read<LocalToWorld>, Write<Collider>> query)
+static void updateAABBsSystem(Query<Read<LocalToWorld>, Write<Collider>> query)
 {
     for (auto [entity, localToWorld, collider] : query)
     {
@@ -65,7 +65,7 @@ void updateAABBs(Query<Read<LocalToWorld>, Write<Collider>> query)
 }
 
 /// @brief Updates the sweep markers of all colliders.
-void updateMarkers(Query<Read<Collider>> query, Write<BroadPhaseSweepAndPrune> sweepAndPrune)
+static void updateMarkersSystem(Query<Read<Collider>> query, Write<BroadPhaseSweepAndPrune> sweepAndPrune)
 {
     // TODO: This is parallelizable.
     for (glm::length_t axis = 0; axis < 3; axis++)
@@ -84,7 +84,7 @@ void updateMarkers(Query<Read<Collider>> query, Write<BroadPhaseSweepAndPrune> s
 }
 
 /// @brief Performs a sweep of all colliders.
-void sweep(Write<BroadPhaseSweepAndPrune> sweepAndPrune)
+static void sweepSystem(Write<BroadPhaseSweepAndPrune> sweepAndPrune)
 {
     // TODO: This is parallelizable.
     for (glm::length_t axis = 0; axis < 3; axis++)
@@ -131,9 +131,8 @@ BroadPhaseCandidates::CollisionType getCollisionType(bool box, bool capsule)
 ///
 /// @details
 /// TODO: This query is disgusting. We need a way to find if a component is present without reading it.
-/// Maybe something like Commands but for reads?
-void findPairs(Query<OptRead<BoxCollisionShape>, OptRead<CapsuleCollisionShape>, Read<Collider>> query,
-               Read<BroadPhaseSweepAndPrune> sweepAndPrune, Write<BroadPhaseCandidates> candidates)
+static void findPairsSystem(Query<OptRead<BoxCollisionShape>, OptRead<CapsuleCollisionShape>, Read<Collider>> query,
+                            Read<BroadPhaseSweepAndPrune> sweepAndPrune, Write<BroadPhaseCandidates> candidates)
 {
     candidates->clearCandidates();
 
@@ -180,20 +179,18 @@ void findPairs(Query<OptRead<BoxCollisionShape>, OptRead<CapsuleCollisionShape>,
 
 void cubos::engine::broadPhaseCollisionsPlugin(Cubos& cubos)
 {
-    // FIXME: Is it ok not to add resources from the general plugin?
-
     cubos.addResource<BroadPhaseCandidates>();
     cubos.addResource<BroadPhaseSweepAndPrune>();
 
-    cubos.system(trackNewColliders).tagged("cubos.collisions.aabb.setup");
+    cubos.system(trackNewCollidersSystem).tagged("cubos.collisions.aabb.setup");
 
-    cubos.system(updateAABBs)
+    cubos.system(updateAABBsSystem)
         .tagged("cubos.collisions.aabb.update")
         .after("cubos.collisions.setup")
         .after("cubos.collisions.aabb.setup")
         .after("cubos.transform.update");
 
-    cubos.system(updateMarkers).tagged("cubos.collisions.broad.markers").after("cubos.collisions.aabb.update");
-    cubos.system(sweep).tagged("cubos.collisions.broad.sweep").after("cubos.collisions.broad.markers");
-    cubos.system(findPairs).tagged("cubos.collisions.broad").after("cubos.collisions.broad.sweep");
+    cubos.system(updateMarkersSystem).tagged("cubos.collisions.broad.markers").after("cubos.collisions.aabb.update");
+    cubos.system(sweepSystem).tagged("cubos.collisions.broad.sweep").after("cubos.collisions.broad.markers");
+    cubos.system(findPairsSystem).tagged("cubos.collisions.broad").after("cubos.collisions.broad.sweep");
 }
