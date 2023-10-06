@@ -5,8 +5,11 @@
 /// @brief Plugin entry point.
 /// @ingroup collisions-plugin
 
-/// @dir ./colliders
-/// @brief Collider components directory.
+/// @dir ./shapes
+/// @brief Collision shapes components directory.
+
+/// @dir ./broad_phase
+/// @brief Broad phase collision sub-plugin directory.
 
 #pragma once
 
@@ -19,23 +22,17 @@ namespace cubos::engine
     /// @brief Adds collision detection to @b CUBOS.
     ///
     /// ## Components
-    /// - @ref BoxCollider - holds the box collider data.
-    /// - @ref CapsuleCollider - holds the capsule collider data.
+    /// - @ref BoxCollisionShape - holds the box collision shape.
+    /// - @ref CapsuleCollisionShape - holds the capsule collision shape.
+    /// - @ref Collider - holds collider data.
     ///
     /// ## Events
     /// - @ref CollisionEvent - (TODO) emitted when a collision occurs.
     /// - @ref TriggerEvent - (TODO) emitted when a trigger is entered or exited.
     ///
-    /// ## Resources
-    /// - @ref BroadPhaseCollisions - stores broad phase collision data.
-    ///
     /// ## Tags
-    /// - `cubos.collisions.aabb.missing` - missing aabb colliders are added.
-    /// - `cubos.collisions.aabb` - collider aabbs are updated.
-    /// - `cubos.collisions.broad.markers` - sweep markers are updated.
-    /// - `cubos.collisions.broad.sweep` - sweep is performed.
-    /// - `cubos.collisions.broad` - broad phase collision detection.
-    /// - `cubos.collisions` - collisions are resolved.
+    /// - `cubos.collisions.setup` - new colliders are setup.
+    /// - `cubos.collisions.broad` - broad phase candidate pairs are generated.
     ///
     /// ## Dependencies
     /// - @ref transform-plugin
