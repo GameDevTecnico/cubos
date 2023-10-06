@@ -36,7 +36,7 @@ int main()
     /// [Creating a default instance]
     // Allocate memory for the instance and default-construct it.
     void* instance = operator new(constructible.size());
-    CUBOS_ASSERT(constructible.defaultConstruct(instance));
+    constructible.defaultConstruct(instance);
     CUBOS_ASSERT(static_cast<Scale*>(instance)->value == 1.0F);
     /// [Creating a default instance]
 

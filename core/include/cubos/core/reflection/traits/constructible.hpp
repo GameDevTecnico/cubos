@@ -83,26 +83,38 @@ namespace cubos::core::reflection
         /// @return Alignment of the type in bytes.
         std::size_t alignment() const;
 
+        /// @brief Checks if default construction is supported.
+        /// @return Whether the operation is supported.
+        bool hasDefaultConstruct() const;
+
+        /// @brief Checks if copy construction is supported.
+        /// @return Whether the operation is supported.
+        bool hasCopyConstruct() const;
+
+        /// @brief Checks if move construction is supported.
+        /// @return Whether the operation is supported.
+        bool hasMoveConstruct() const;
+
         /// @brief Destructs an instance of the type.
         /// @param instance Pointer to the instance to destruct.
         void destruct(void* instance) const;
 
         /// @brief Default constructs an instance of the type.
+        /// @note Aborts if @ref hasDefaultConstruct() returns false.
         /// @param instance Pointer to the location to construct the instance at.
-        /// @return Whether default construction is supported.
-        bool defaultConstruct(void* instance) const;
+        void defaultConstruct(void* instance) const;
 
         /// @brief Copy constructs an instance of the type.
+        /// @note Aborts if @ref hasCopyConstruct() returns false.
         /// @param instance Pointer to the location to construct the instance at.
         /// @param other Pointer to the instance to copy construct from.
-        /// @return Whether copy construction is supported.
-        bool copyConstruct(void* instance, const void* other) const;
+        void copyConstruct(void* instance, const void* other) const;
 
         /// @brief Move constructs an instance of the type.
+        /// @note Aborts if @ref hasMoveConstruct() returns false.
         /// @param instance Pointer to the location to construct the instance at.
         /// @param other Pointer to the instance to move construct from.
-        /// @return Whether move construction is supported.
-        bool moveConstruct(void* instance, void* other) const;
+        void moveConstruct(void* instance, void* other) const;
 
     private:
         std::size_t mSize;

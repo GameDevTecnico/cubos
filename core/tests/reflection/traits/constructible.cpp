@@ -49,9 +49,9 @@ TEST_CASE("reflection::ConstructibleTrait")
         auto trait = ConstructibleTrait::typed<DetectDestructor>().build();
         DetectDestructor detector{};
 
-        CHECK_FALSE(trait.defaultConstruct(ptr));
-        CHECK_FALSE(trait.copyConstruct(ptr, &detector));
-        CHECK_FALSE(trait.moveConstruct(ptr, &detector));
+        CHECK_FALSE(trait.hasDefaultConstruct());
+        CHECK_FALSE(trait.hasCopyConstruct());
+        CHECK_FALSE(trait.hasMoveConstruct());
 
         operator delete(ptr);
     }
@@ -61,7 +61,8 @@ TEST_CASE("reflection::ConstructibleTrait")
         auto* ptr = operator new(sizeof(SimpleConstructible));
 
         auto trait = ConstructibleTrait::typed<SimpleConstructible>().withDefaultConstructor().build();
-        REQUIRE(trait.defaultConstruct(ptr));
+        REQUIRE(trait.hasDefaultConstruct());
+        trait.defaultConstruct(ptr);
 
         auto* simple = static_cast<SimpleConstructible*>(ptr);
         CHECK(simple->value == SimpleConstructible::DEFAULT);
@@ -77,7 +78,8 @@ TEST_CASE("reflection::ConstructibleTrait")
         auto trait = ConstructibleTrait::typed<SimpleConstructible>().withCopyConstructor().build();
         SimpleConstructible copied{};
         copied.value = 1;
-        REQUIRE(trait.copyConstruct(ptr, &copied));
+        REQUIRE(trait.hasCopyConstruct());
+        trait.copyConstruct(ptr, &copied);
 
         auto* simple = static_cast<SimpleConstructible*>(ptr);
         CHECK(simple->value == copied.value);
@@ -97,7 +99,8 @@ TEST_CASE("reflection::ConstructibleTrait")
         // the flag is not set when 'moved' is destructed.
         {
             DetectDestructor moved{&destroyed};
-            REQUIRE(trait.moveConstruct(ptr, &moved));
+            REQUIRE(trait.hasMoveConstruct());
+            trait.moveConstruct(ptr, &moved);
             REQUIRE_FALSE(destroyed);
         }
 

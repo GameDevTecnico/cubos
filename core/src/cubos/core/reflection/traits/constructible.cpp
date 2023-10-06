@@ -45,40 +45,40 @@ std::size_t ConstructibleTrait::alignment() const
     return mAlignment;
 }
 
+bool ConstructibleTrait::hasDefaultConstruct() const
+{
+    return mDefaultConstructor != nullptr;
+}
+
+bool ConstructibleTrait::hasCopyConstruct() const
+{
+    return mCopyConstructor != nullptr;
+}
+
+bool ConstructibleTrait::hasMoveConstruct() const
+{
+    return mMoveConstructor != nullptr;
+}
+
 void ConstructibleTrait::destruct(void* instance) const
 {
     mDestructor(instance);
 }
 
-bool ConstructibleTrait::defaultConstruct(void* instance) const
+void ConstructibleTrait::defaultConstruct(void* instance) const
 {
-    if (mDefaultConstructor != nullptr)
-    {
-        mDefaultConstructor(instance);
-        return true;
-    }
-
-    return false;
+    CUBOS_ASSERT(this->hasDefaultConstruct());
+    mDefaultConstructor(instance);
 }
 
-bool ConstructibleTrait::copyConstruct(void* instance, const void* other) const
+void ConstructibleTrait::copyConstruct(void* instance, const void* other) const
 {
-    if (mCopyConstructor != nullptr)
-    {
-        mCopyConstructor(instance, other);
-        return true;
-    }
-
-    return false;
+    CUBOS_ASSERT(this->hasCopyConstruct());
+    mCopyConstructor(instance, other);
 }
 
-bool ConstructibleTrait::moveConstruct(void* instance, void* other) const
+void ConstructibleTrait::moveConstruct(void* instance, void* other) const
 {
-    if (mMoveConstructor != nullptr)
-    {
-        mMoveConstructor(instance, other);
-        return true;
-    }
-
-    return false;
+    CUBOS_ASSERT(this->hasMoveConstruct());
+    mMoveConstructor(instance, other);
 }
