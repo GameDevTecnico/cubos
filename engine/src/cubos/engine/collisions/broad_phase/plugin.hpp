@@ -18,7 +18,6 @@ namespace cubos::engine
     /// ## Resources
     /// - @ref BroadPhaseCandidates - stores broad phase collision data.
     /// - @ref BroadPhaseSweepAndPrune - stores sweep and prune markers.
-    ///
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
