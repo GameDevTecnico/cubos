@@ -4,7 +4,7 @@
 #include <cubos/core/gl/debug.hpp>
 #include <cubos/core/log.hpp>
 
-#include <cubos/engine/collisions/broad_phase_collisions.hpp>
+#include <cubos/engine/collisions/broad_phase/candidates.hpp>
 #include <cubos/engine/collisions/collider.hpp>
 #include <cubos/engine/collisions/plugin.hpp>
 #include <cubos/engine/collisions/shapes/box.hpp>
@@ -108,12 +108,12 @@ static void updateTransform(Write<State> state, Read<Input> input, Query<Write<P
     bPos->vec += glm::vec3{0.0F, 0.0F, -0.01F};
 }
 
-static void updateCollided(Query<Read<Collider>> query, Write<State> state, Read<BroadPhaseCollisions> collisions)
+static void updateCollided(Query<Read<Collider>> query, Write<State> state, Read<BroadPhaseCandidates> candidates)
 {
     for (auto [entity, collider] : query)
     {
         for (const auto& [collider1, collider2] :
-             collisions->candidates(BroadPhaseCollisions::CollisionType::BoxCapsule))
+             candidates->candidates(BroadPhaseCandidates::CollisionType::BoxCapsule))
         {
             if (collider1 == entity || collider2 == entity)
             {

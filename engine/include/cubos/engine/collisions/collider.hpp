@@ -25,6 +25,6 @@ namespace cubos::engine
         /// The plugin will set it based on the shape associated with the collider.
         float margin;
 
-        bool fresh = true; ///< Whether the collider is fresh. This is an hack and should be done in ECS.
+        int fresh = -1; ///< This is an hack and should be done in ECS.
     };
 } // namespace cubos::engine
