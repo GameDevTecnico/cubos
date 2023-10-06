@@ -35,7 +35,8 @@ static void testDefaultConstructible()
     auto& constructible = type.get<ConstructibleTrait>();
 
     auto* instance = operator new(constructible.size());
-    REQUIRE(constructible.defaultConstruct(instance));
+    REQUIRE(constructible.hasDefaultConstruct());
+    constructible.defaultConstruct(instance);
 
     if constexpr (std::equality_comparable<T>)
     {
@@ -57,7 +58,8 @@ static void testCopyConstructible(const T& valueToCopy)
     auto& constructible = type.get<ConstructibleTrait>();
 
     auto* instance = operator new(constructible.size());
-    REQUIRE(constructible.copyConstruct(instance, &valueToCopy));
+    REQUIRE(constructible.hasCopyConstruct());
+    constructible.copyConstruct(instance, &valueToCopy);
 
     if constexpr (std::equality_comparable<T>)
     {
@@ -79,7 +81,8 @@ static void testMoveConstructible(T& valueToMove)
     auto& constructible = type.get<ConstructibleTrait>();
 
     auto* instance = operator new(constructible.size());
-    REQUIRE(constructible.moveConstruct(instance, &valueToMove));
+    REQUIRE(constructible.hasMoveConstruct());
+    constructible.moveConstruct(instance, &valueToMove);
 
     constructible.destruct(instance);
     operator delete(instance);

@@ -29,14 +29,6 @@ constructor stored in the trait:
 
 @snippet reflection/traits/constructible/main.cpp Creating a default instance
 
-The @ref cubos::core::reflection::ConstructibleTrait::defaultConstruct
-"defaultConstruct" method returns a boolean which indicates if the type has a
-default constructor or not. In this case, since we added the default
-constructor to the trait, it will return `true`.
-
-This could be useful, for example, to fallback from using `moveConstruct` to
-`copyConstruct`, if the first isn't available.
-
 Don't forget to destroy the instance manually when you're done with it:
 
 @snippet reflection/traits/constructible/main.cpp Destroying the instance
