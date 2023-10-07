@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::engine::Collider struct | CUBOS.</title>
+  <title>engine/collisions/shapes/ directory | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,55 +44,28 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>Collider <span class="m-thin">struct</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="collider_8hpp.html">&lt;engine/collisions/collider.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_db86702e1371d7558db3699dd3786a14.html">collisions</a>/</span>shapes<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
         </h1>
-        <p>Component which adds a collider to an entity.</p>
+        <p>Collision shapes components directory.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#files">Files</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        <section id="files">
+          <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt id="a8ce8472f65ba76e8ec3b8597983883ae">
-              glm::mat4 <a href="#a8ce8472f65ba76e8ec3b8597983883ae" class="m-doc-self">transform</a>
-            </dt>
-            <dd>Transform of the collider.</dd>
-            <dt id="a2d3bcc8e442d89dab249819b05bafe61">
-              <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">core::<wbr />geom::<wbr />AABB</a> <a href="#a2d3bcc8e442d89dab249819b05bafe61" class="m-doc-self">localAABB</a>
-            </dt>
-            <dd>Local space AABB of the collider.</dd>
-            <dt id="a5a0506323be1be6fd35cdaee81ffce10">
-              <a href="structcubos_1_1core_1_1geom_1_1AABB.html" class="m-doc">core::<wbr />geom::<wbr />AABB</a> <a href="#a5a0506323be1be6fd35cdaee81ffce10" class="m-doc-self">worldAABB</a>
-            </dt>
-            <dd>World space AABB of the collider.</dd>
-            <dt>
-              float <a href="#af0706098c7b2102f8d36e48c48a2130c" class="m-doc">margin</a>
-            </dt>
-            <dd>Margin of the collider.</dd>
-            <dt id="a134c2ba7e07f291e30fb236b8ebaf24f">
-              int <a href="#a134c2ba7e07f291e30fb236b8ebaf24f" class="m-doc-self">fresh</a>
-            </dt>
-            <dd>This is an hack and should be done in ECS.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2collisions_2shapes_2box_8hpp.html" class="m-doc">box.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">cubos::<wbr />engine::<wbr />BoxCollisionShape</a>.</dd>
+            <dt>file <a href="engine_2include_2cubos_2engine_2collisions_2shapes_2capsule_8hpp.html" class="m-doc">capsule.hpp</a></dt>
+            <dd>Component <a href="structcubos_1_1engine_1_1CapsuleCollisionShape.html" class="m-doc">cubos::<wbr />engine::<wbr />CapsuleCollisionShape</a>.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="af0706098c7b2102f8d36e48c48a2130c"><div>
-            <h3>
-              float cubos::<wbr />engine::<wbr />Collider::<wbr /><a href="#af0706098c7b2102f8d36e48c48a2130c" class="m-doc-self">margin</a>
-            </h3>
-            <p>Margin of the collider.</p>
-<p>When the collider shape has sharp edges, a margin is needed. The plugin will set it based on the shape associated with the collider.</p>
-          </div></section>
         </section>
       </div>
     </div>
