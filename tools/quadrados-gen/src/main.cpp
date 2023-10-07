@@ -515,7 +515,7 @@ bool parseComponent(Parser& parser, Component& component)
             consumed = false;
         }
 
-        // Parse statements within the componnet's scope.
+        // Parse statements within the component's scope.
         if (scope == 1 && !ignoreUntilOpenBrace)
         {
             if (!consumed && parser.acceptKeywords({"struct", "class"}))
@@ -525,7 +525,8 @@ bool parseComponent(Parser& parser, Component& component)
             }
 
             // Skip some non-field statements.
-            if (!consumed && parser.acceptKeywords({"static", "const", "constexpr", "using", "[[cubos::ignore]]"}))
+            if (!consumed &&
+                parser.acceptKeywords({"static", "const", "constexpr", "using", "[[cubos::ignore]]", "CUBOS_REFLECT"}))
             {
                 while (!parser.acceptPunctuation(";"))
                 {
