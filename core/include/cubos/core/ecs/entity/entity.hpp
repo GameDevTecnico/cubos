@@ -7,6 +7,8 @@
 #include <bitset>
 #include <cstdint>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 namespace cubos::core::ecs
 {
     /// @brief Identifies an entity.
@@ -19,6 +21,8 @@ namespace cubos::core::ecs
     /// @ingroup core-ecs-entity
     struct Entity
     {
+        CUBOS_REFLECT;
+
         /// @brief Type used to store which components an entity has.
         using Mask = std::bitset<CUBOS_CORE_ECS_MAX_COMPONENTS + 1>;
 
