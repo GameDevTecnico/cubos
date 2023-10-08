@@ -142,7 +142,7 @@ namespace cubos::core::reflection
             return mTrait;
         }
 
-        /// @brief Sets the copy constructor of the type.
+        /// @brief Sets the default constructor of the type.
         /// @return Builder.
         Builder&& withDefaultConstructor() &&
         {
@@ -166,6 +166,13 @@ namespace cubos::core::reflection
             mTrait = memory::move(mTrait).withMoveConstructor(
                 [](void* instance, void* other) { new (instance) T(memory::move(*static_cast<T*>(other))); });
             return memory::move(*this);
+        }
+
+        /// @brief Sets the default, copy and move constructors of the type.
+        /// @return Builder.
+        Builder&& withBasicConstructors() &&
+        {
+            return memory::move(*this).withDefaultConstructor().withCopyConstructor().withMoveConstructor();
         }
 
     private:
