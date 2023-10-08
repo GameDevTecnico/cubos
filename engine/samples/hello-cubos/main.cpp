@@ -15,6 +15,16 @@ using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 /// [Include Entity Stuff]
 
+/// [Component Refl]
+#include <cubos/core/ecs/component/reflection.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+
+CUBOS_REFLECT_IMPL(Num)
+{
+    return cubos::core::ecs::ComponentTypeBuilder<Num>("Num").withField("value", &Num::value).build();
+}
+/// [Component Refl]
+
 /// [Resource Decl]
 struct Pop
 {
