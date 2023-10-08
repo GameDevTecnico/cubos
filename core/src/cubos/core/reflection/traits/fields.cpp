@@ -88,7 +88,7 @@ FieldsTrait::~FieldsTrait()
     }
 }
 
-FieldsTrait&& FieldsTrait::withField(const Type& type, std::string name, AddressOf* addressOf) &&
+void FieldsTrait::addField(const Type& type, std::string name, AddressOf* addressOf)
 {
     for (auto* field = mFirstField; field != nullptr; field = field->mNext)
     {
@@ -106,7 +106,11 @@ FieldsTrait&& FieldsTrait::withField(const Type& type, std::string name, Address
         mFirstField = field;
         mLastField = field;
     }
+}
 
+FieldsTrait&& FieldsTrait::withField(const Type& type, std::string name, AddressOf* addressOf) &&
+{
+    this->addField(type, std::move(name), addressOf);
     return std::move(*this);
 }
 
