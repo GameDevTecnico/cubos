@@ -15,6 +15,21 @@ using cubos::core::ecs::Write;
 
 using namespace cubos::engine;
 
+/// [Component Refl]
+#include <cubos/core/ecs/component/reflection.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+
+CUBOS_REFLECT_IMPL(Num)
+{
+    return cubos::core::ecs::ComponentTypeBuilder<Num>("Num").withField("value", &Num::value).build();
+}
+
+CUBOS_REFLECT_IMPL(Parent)
+{
+    return cubos::core::ecs::ComponentTypeBuilder<Parent>("Parent").withField("entity", &Parent::entity).build();
+}
+/// [Component Refl]
+
 /// [Setting the asset]
 static const Asset<Scene> SceneAsset = AnyAsset("f0d86ba8-5f34-440f-a180-d9d12c8e8b91");
 /// [Setting the asset]
