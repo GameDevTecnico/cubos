@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -13,8 +13,10 @@ namespace cubos::engine
     /// @ingroup renderer-plugin
     struct [[cubos::component("cubos/camera", VecStorage)]] Camera
     {
-        float fovY;  ///< Vertical field of view in degrees.
-        float zNear; ///< Near clipping plane.
-        float zFar;  ///< Far clipping plane.
+        CUBOS_REFLECT;
+
+        float fovY = 60.0F;   ///< Vertical field of view in degrees.
+        float zNear = 0.1F;   ///< Near clipping plane.
+        float zFar = 1000.0F; ///< Far clipping plane.
     };
 } // namespace cubos::engine

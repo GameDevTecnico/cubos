@@ -6,6 +6,8 @@
 
 #include <glm/vec3.hpp>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which makes an entity behave like a directional light.
@@ -14,7 +16,9 @@ namespace cubos::engine
     /// @ingroup renderer-plugin
     struct [[cubos::component("cubos/directional_light", VecStorage)]] DirectionalLight
     {
-        glm::vec3 color;
-        float intensity;
+        CUBOS_REFLECT;
+
+        glm::vec3 color = {1.0F, 1.0F, 1.0F}; ///< Color of the light.
+        float intensity = 1.0F;               ///< Intensity of the light.
     };
 } // namespace cubos::engine

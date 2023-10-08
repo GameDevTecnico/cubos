@@ -6,6 +6,8 @@
 
 #include <glm/vec3.hpp>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 namespace cubos::engine
 {
     /// @brief Component which makes an entity behave like a point light.
@@ -13,8 +15,10 @@ namespace cubos::engine
     /// @ingroup renderer-plugin
     struct [[cubos::component("cubos/point_light", VecStorage)]] PointLight
     {
-        glm::vec3 color;
-        float intensity;
-        float range;
+        CUBOS_REFLECT;
+
+        glm::vec3 color = {1.0F, 1.0F, 1.0F}; ///< Color of the light.
+        float intensity = 1.0F;               ///< Intensity of the light.
+        float range = 5.0F;                   ///< Range of the light.
     };
 } // namespace cubos::engine

@@ -1,4 +1,6 @@
+#include <cubos/core/ecs/component/reflection.hpp>
 #include <cubos/core/ecs/system/query.hpp>
+#include <cubos/core/reflection/external/glm.hpp>
 
 #include <cubos/engine/renderer/deferred_renderer.hpp>
 #include <cubos/engine/renderer/directional_light.hpp>
@@ -21,6 +23,14 @@ using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(RenderableGrid)
+{
+    return core::ecs::ComponentTypeBuilder<RenderableGrid>("cubos::engine::RenderableGrid")
+        .withField("asset", &RenderableGrid::asset)
+        .withField("offset", &RenderableGrid::offset)
+        .build();
+}
 
 static void init(Write<Renderer> renderer, Read<Window> window, Write<Settings> settings)
 {
