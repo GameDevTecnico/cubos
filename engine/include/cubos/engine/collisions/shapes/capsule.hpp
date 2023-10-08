@@ -5,6 +5,7 @@
 #pragma once
 
 #include <cubos/core/geom/capsule.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -12,6 +13,8 @@ namespace cubos::engine
     /// @ingroup collisions-plugin
     struct [[cubos::component("cubos/capsule_collision_shape", VecStorage)]] CapsuleCollisionShape
     {
+        CUBOS_REFLECT;
+
         cubos::core::geom::Capsule capsule; ///< Capsule shape.
     };
 } // namespace cubos::engine
