@@ -7,6 +7,7 @@
 #include <glm/mat4x4.hpp>
 
 #include <cubos/core/geom/aabb.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -14,6 +15,8 @@ namespace cubos::engine
     /// @ingroup collisions-plugin
     struct [[cubos::component("cubos/collider", VecStorage)]] Collider
     {
+        CUBOS_REFLECT;
+
         glm::mat4 transform{1.0F}; ///< Transform of the collider.
 
         core::geom::AABB localAABB{}; ///< Local space AABB of the collider.
