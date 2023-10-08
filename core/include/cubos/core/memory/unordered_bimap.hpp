@@ -24,7 +24,7 @@ namespace cubos::core::memory
         /// @note If any of the values already exists, the old entries with them are removed.
         /// @param left Left value.
         /// @param right Right value.
-        void add(L left, R right)
+        void insert(L left, R right)
         {
             auto leftIt = mLeftToRight.find(left);
             if (leftIt != mLeftToRight.end())
@@ -45,7 +45,7 @@ namespace cubos::core::memory
         /// @brief Removes the entry associated to the given left value.
         /// @param left Left value.
         /// @return Whether the entry was removed.
-        bool removeLeft(const L& left)
+        bool eraseLeft(const L& left)
         {
             auto it = mLeftToRight.find(left);
             if (it == mLeftToRight.end())
@@ -61,7 +61,7 @@ namespace cubos::core::memory
         /// @brief Removes the entry associated to the given right value.
         /// @param right Right value.
         /// @return Whether the entry was removed.
-        bool removeRight(const R& right)
+        bool eraseRight(const R& right)
         {
             auto it = mRightToLeft.find(right);
             if (it == mRightToLeft.end())
@@ -78,7 +78,7 @@ namespace cubos::core::memory
         /// @param left Left value.
         /// @param right Right value.
         /// @return Whether the map has the entry.
-        bool has(const L& left, const R& right) const
+        bool contains(const L& left, const R& right) const
         {
             auto it = mLeftToRight.find(left);
             if (it == mLeftToRight.end())
@@ -91,24 +91,24 @@ namespace cubos::core::memory
         /// @brief Checks if the map contains the given left value.
         /// @param left Left value.
         /// @return Whether the map contains the value.
-        bool hasLeft(const L& left) const
+        bool containsLeft(const L& left) const
         {
-            return mLeftToRight.find(left) != mLeftToRight.end();
+            return mLeftToRight.contains(left);
         }
 
         /// @brief Checks if the map contains the given right value.
         /// @param right Right value.
         /// @return Whether the map contains the value.
-        bool hasRight(const R& right) const
+        bool containsRight(const R& right) const
         {
-            return mRightToLeft.find(right) != mRightToLeft.end();
+            return mRightToLeft.contains(right);
         }
 
         /// @brief Gets the right value associated to the given left value.
         /// @note Aborts if the left value isn't stored.
         /// @param left Left value.
         /// @return Right value.
-        const R& getRight(const L& left) const
+        const R& atRight(const L& left) const
         {
             return mLeftToRight.at(left);
         }
@@ -117,7 +117,7 @@ namespace cubos::core::memory
         /// @note Aborts if the right value isn't stored.
         /// @param right Right value.
         /// @return Left value.
-        const L& getLeft(const R& right) const
+        const L& atLeft(const R& right) const
         {
             return mRightToLeft.at(right);
         }
