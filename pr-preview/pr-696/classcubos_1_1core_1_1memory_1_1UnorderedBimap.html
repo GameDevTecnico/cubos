@@ -87,37 +87,37 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#abf888a996996ebfde94b0ab230ea657f" class="m-doc">add</a>(</span><span class="m-doc-wrap">L left,
+              <span class="m-doc-wrap-bumper">void <a href="#aa3e2b0dd497f83c929bd2ebc13e7de05" class="m-doc">insert</a>(</span><span class="m-doc-wrap">L left,
               R right)</span>
             </dt>
             <dd>Adds a new entry to the map.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4126560c1388b43d325c81dd6d01494a" class="m-doc">removeLeft</a>(</span><span class="m-doc-wrap">const L&amp; left) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#af06e9e878cfea4dfd7e3f14c132a3798" class="m-doc">eraseLeft</a>(</span><span class="m-doc-wrap">const L&amp; left) -&gt; bool</span>
             </dt>
             <dd>Removes the entry associated to the given left value.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a92c98dff082e16ba0b2b20110a31d0cd" class="m-doc">removeRight</a>(</span><span class="m-doc-wrap">const R&amp; right) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8403fb748cec77ce19724f5933127705" class="m-doc">eraseRight</a>(</span><span class="m-doc-wrap">const R&amp; right) -&gt; bool</span>
             </dt>
             <dd>Removes the entry associated to the given right value.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af96faf3bc7c25f36fd366f5b6bf8c8af" class="m-doc">has</a>(</span><span class="m-doc-wrap">const L&amp; left,
+              <span class="m-doc-wrap-bumper">auto <a href="#a1ec8d81e5de9028f6b9e63ef939c3464" class="m-doc">contains</a>(</span><span class="m-doc-wrap">const L&amp; left,
               const R&amp; right) const -&gt; bool</span>
             </dt>
             <dd>Checks if the map has the given entry.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a83e18a319c6e7d7fef50cbf46ce3392e" class="m-doc">hasLeft</a>(</span><span class="m-doc-wrap">const L&amp; left) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae690d83d5d937c780ee337967619756d" class="m-doc">containsLeft</a>(</span><span class="m-doc-wrap">const L&amp; left) const -&gt; bool</span>
             </dt>
             <dd>Checks if the map contains the given left value.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a94ef0f442460d0b519602c4cea92737c" class="m-doc">hasRight</a>(</span><span class="m-doc-wrap">const R&amp; right) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae97fc7ef4d1f29702c98509b8fe039bf" class="m-doc">containsRight</a>(</span><span class="m-doc-wrap">const R&amp; right) const -&gt; bool</span>
             </dt>
             <dd>Checks if the map contains the given right value.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a934a6a3fe093970c6df5de3bb426ad0f" class="m-doc">getRight</a>(</span><span class="m-doc-wrap">const L&amp; left) const -&gt; const R&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad20f5eed77b28f09131a3bcf6836c996" class="m-doc">atRight</a>(</span><span class="m-doc-wrap">const L&amp; left) const -&gt; const R&amp;</span>
             </dt>
             <dd>Gets the right value associated to the given left value.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4b420d053e7eb9bff5f6fc9c8720bba5" class="m-doc">getLeft</a>(</span><span class="m-doc-wrap">const R&amp; right) const -&gt; const L&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#addef2da17d45ffcaa155f4398aec4b76" class="m-doc">atLeft</a>(</span><span class="m-doc-wrap">const R&amp; right) const -&gt; const L&amp;</span>
             </dt>
             <dd>Gets the left value associated to the given right value.</dd>
             <dt id="a760f5204ffb261d0165f78f6dd411452">
@@ -144,12 +144,12 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="abf888a996996ebfde94b0ab230ea657f"><div>
+          <section class="m-doc-details" id="aa3e2b0dd497f83c929bd2ebc13e7de05"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename L, typename R, typename LHash, typename RHash&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf888a996996ebfde94b0ab230ea657f" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">L left,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa3e2b0dd497f83c929bd2ebc13e7de05" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap">L left,
               R right)</span></span>
             </h3>
             <p>Adds a new entry to the map.</p>
@@ -170,12 +170,12 @@
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>If any of the values already exists, the old entries with them are removed.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a4126560c1388b43d325c81dd6d01494a"><div>
+          <section class="m-doc-details" id="af06e9e878cfea4dfd7e3f14c132a3798"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename L, typename R, typename LHash, typename RHash&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4126560c1388b43d325c81dd6d01494a" class="m-doc-self">removeLeft</a>(</span><span class="m-doc-wrap">const L&amp; left)</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af06e9e878cfea4dfd7e3f14c132a3798" class="m-doc-self">eraseLeft</a>(</span><span class="m-doc-wrap">const L&amp; left)</span></span>
             </h3>
             <p>Removes the entry associated to the given left value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -196,12 +196,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a92c98dff082e16ba0b2b20110a31d0cd"><div>
+          <section class="m-doc-details" id="a8403fb748cec77ce19724f5933127705"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename L, typename R, typename LHash, typename RHash&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92c98dff082e16ba0b2b20110a31d0cd" class="m-doc-self">removeRight</a>(</span><span class="m-doc-wrap">const R&amp; right)</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8403fb748cec77ce19724f5933127705" class="m-doc-self">eraseRight</a>(</span><span class="m-doc-wrap">const R&amp; right)</span></span>
             </h3>
             <p>Removes the entry associated to the given right value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -222,12 +222,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af96faf3bc7c25f36fd366f5b6bf8c8af"><div>
+          <section class="m-doc-details" id="a1ec8d81e5de9028f6b9e63ef939c3464"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename L, typename R, typename LHash, typename RHash&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af96faf3bc7c25f36fd366f5b6bf8c8af" class="m-doc-self">has</a>(</span><span class="m-doc-wrap">const L&amp; left,
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ec8d81e5de9028f6b9e63ef939c3464" class="m-doc-self">contains</a>(</span><span class="m-doc-wrap">const L&amp; left,
               const R&amp; right) const</span></span>
             </h3>
             <p>Checks if the map has the given entry.</p>
@@ -253,12 +253,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a83e18a319c6e7d7fef50cbf46ce3392e"><div>
+          <section class="m-doc-details" id="ae690d83d5d937c780ee337967619756d"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename L, typename R, typename LHash, typename RHash&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a83e18a319c6e7d7fef50cbf46ce3392e" class="m-doc-self">hasLeft</a>(</span><span class="m-doc-wrap">const L&amp; left) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae690d83d5d937c780ee337967619756d" class="m-doc-self">containsLeft</a>(</span><span class="m-doc-wrap">const L&amp; left) const</span></span>
             </h3>
             <p>Checks if the map contains the given left value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -279,12 +279,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a94ef0f442460d0b519602c4cea92737c"><div>
+          <section class="m-doc-details" id="ae97fc7ef4d1f29702c98509b8fe039bf"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename L, typename R, typename LHash, typename RHash&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a94ef0f442460d0b519602c4cea92737c" class="m-doc-self">hasRight</a>(</span><span class="m-doc-wrap">const R&amp; right) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae97fc7ef4d1f29702c98509b8fe039bf" class="m-doc-self">containsRight</a>(</span><span class="m-doc-wrap">const R&amp; right) const</span></span>
             </h3>
             <p>Checks if the map contains the given right value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -305,12 +305,12 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a934a6a3fe093970c6df5de3bb426ad0f"><div>
+          <section class="m-doc-details" id="ad20f5eed77b28f09131a3bcf6836c996"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename L, typename R, typename LHash, typename RHash&gt;
               </div>
-              <span class="m-doc-wrap-bumper">const R&amp; cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a934a6a3fe093970c6df5de3bb426ad0f" class="m-doc-self">getRight</a>(</span><span class="m-doc-wrap">const L&amp; left) const</span></span>
+              <span class="m-doc-wrap-bumper">const R&amp; cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad20f5eed77b28f09131a3bcf6836c996" class="m-doc-self">atRight</a>(</span><span class="m-doc-wrap">const L&amp; left) const</span></span>
             </h3>
             <p>Gets the right value associated to the given left value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -332,12 +332,12 @@
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>Aborts if the left value isn&#x27;t stored.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a4b420d053e7eb9bff5f6fc9c8720bba5"><div>
+          <section class="m-doc-details" id="addef2da17d45ffcaa155f4398aec4b76"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename L, typename R, typename LHash, typename RHash&gt;
               </div>
-              <span class="m-doc-wrap-bumper">const L&amp; cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4b420d053e7eb9bff5f6fc9c8720bba5" class="m-doc-self">getLeft</a>(</span><span class="m-doc-wrap">const R&amp; right) const</span></span>
+              <span class="m-doc-wrap-bumper">const L&amp; cubos::<wbr />core::<wbr />memory::<wbr />UnorderedBimap&lt;L, R, LHash, RHash&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#addef2da17d45ffcaa155f4398aec4b76" class="m-doc-self">atLeft</a>(</span><span class="m-doc-wrap">const R&amp; right) const</span></span>
             </h3>
             <p>Gets the left value associated to the given right value.</p>
             <table class="m-table m-fullwidth m-flat">
