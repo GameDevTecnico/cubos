@@ -1,11 +1,21 @@
 #include <unordered_map>
 
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/traits/constructible.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/voxels/grid.hpp>
 #include <cubos/engine/voxels/palette.hpp>
 
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(VoxelGrid)
+{
+    using namespace cubos::core::reflection;
+
+    return Type::create("cubos::engine::VoxelGrid")
+        .with(ConstructibleTrait::typed<VoxelGrid>().withDefaultConstructor().withMoveConstructor().build());
+}
 
 VoxelGrid::VoxelGrid(const glm::uvec3& size)
 {

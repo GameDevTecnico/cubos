@@ -10,6 +10,7 @@
 
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -31,6 +32,8 @@ namespace cubos::engine
     class VoxelGrid final
     {
     public:
+        CUBOS_REFLECT;
+
         ~VoxelGrid() = default;
 
         /// @brief Constructs an empty single-voxel grid.
