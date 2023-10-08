@@ -25,6 +25,7 @@ add_executable(
     data/context.cpp
 
     memory/any_vector.cpp
+    memory/type_map.cpp
     memory/unordered_bimap.cpp
 
     ecs/utils.cpp
