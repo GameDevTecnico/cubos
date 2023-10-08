@@ -7,6 +7,7 @@
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/geom/aabb.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::geom
 {
@@ -14,6 +15,8 @@ namespace cubos::core::geom
     /// @ingroup core-geom
     struct Capsule
     {
+        CUBOS_REFLECT;
+
         float radius = 1.0F; ///< Radius of the capsule.
         float length = 0.0F; ///< Length of the capsule.
 
