@@ -120,11 +120,7 @@ cubos::core::reflection::Type& AnyAsset::makeType(std::string name)
     using namespace cubos::core::reflection;
 
     return Type::create(std::move(name))
-        .with(ConstructibleTrait::typed<AnyAsset>()
-                  .withDefaultConstructor()
-                  .withCopyConstructor()
-                  .withMoveConstructor()
-                  .build())
+        .with(ConstructibleTrait::typed<AnyAsset>().withBasicConstructors().build())
         .with(FieldsTrait().withField("id", &AnyAsset::reflectedId));
 }
 

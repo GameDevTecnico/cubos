@@ -30,8 +30,7 @@ private:
     glm::length_t mColumn;
 };
 
-#define AUTO_CONSTRUCTIBLE(type)                                                                                       \
-    ConstructibleTrait::typed<type>().withDefaultConstructor().withCopyConstructor().withMoveConstructor().build()
+#define AUTO_CONSTRUCTIBLE(type) ConstructibleTrait::typed<type>().withBasicConstructors().build()
 
 #define AUTO_VEC1(type) FieldsTrait().withField("x", &type::x)
 #define AUTO_VEC2(type) AUTO_VEC1(type).withField("y", &type::y)

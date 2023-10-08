@@ -17,11 +17,7 @@ using cubos::core::reflection::Type;
 CUBOS_REFLECT_IMPL(Entity)
 {
     return Type::create("cubos::core::ecs::Entity")
-        .with(ConstructibleTrait::typed<Entity>()
-                  .withCopyConstructor()
-                  .withMoveConstructor()
-                  .withDefaultConstructor()
-                  .build())
+        .with(ConstructibleTrait::typed<Entity>().withBasicConstructors().build())
         .with(FieldsTrait().withField("index", &Entity::index).withField("generation", &Entity::generation));
 }
 

@@ -26,11 +26,7 @@ namespace cubos::core::ecs
         ComponentTypeBuilder(std::string name)
             : mType(reflection::Type::create(std::move(name)))
         {
-            mType.with(reflection::ConstructibleTrait::typed<T>()
-                           .withDefaultConstructor()
-                           .withCopyConstructor()
-                           .withMoveConstructor()
-                           .build());
+            mType.with(reflection::ConstructibleTrait::typed<T>().withBasicConstructors().build());
         }
 
         /// @brief Adds a field to the component type.
