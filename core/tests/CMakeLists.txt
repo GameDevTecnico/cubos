@@ -6,6 +6,7 @@ include(QuadradosGenerate)
 add_executable(
     cubos-core-tests
     main.cpp
+    utils.cpp
 
     reflection/reflect.cpp
     reflection/type.cpp
@@ -23,6 +24,7 @@ add_executable(
     data/fs/file_system.cpp
     data/context.cpp
 
+    ecs/utils.cpp
     ecs/registry.cpp
     ecs/world.cpp
     ecs/query.cpp

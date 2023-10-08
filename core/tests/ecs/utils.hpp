@@ -4,24 +4,31 @@
 #pragma once
 
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 #include "../utils.hpp"
 
 /// A component which stores a single integer.
 struct [[cubos::component("integer")]] IntegerComponent
 {
+    CUBOS_REFLECT;
+
     int value;
 };
 
 /// A component which references another entity.
 struct [[cubos::component("parent")]] ParentComponent
 {
+    CUBOS_REFLECT;
+
     cubos::core::ecs::Entity id;
 };
 
 /// A component used to test if components are destructed properly.
 struct [[cubos::component("detect_destructor")]] DetectDestructorComponent
 {
+    CUBOS_REFLECT;
+
     [[cubos::ignore]] DetectDestructor detect;
 };
 

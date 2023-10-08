@@ -2,6 +2,8 @@
 
 #include <functional>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 /// Utility macro which adds two subcases to the current test case, one for true and one for false.
 #define PARAMETRIZE_TRUE_OR_FALSE(what, var)                                                                           \
     do                                                                                                                 \
@@ -67,6 +69,8 @@
 class DetectDestructor
 {
 public:
+    CUBOS_REFLECT;
+
     DetectDestructor(bool* destructed = nullptr)
         : mDestructed(destructed)
     {
