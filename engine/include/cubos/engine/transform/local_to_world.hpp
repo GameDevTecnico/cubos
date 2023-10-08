@@ -4,7 +4,9 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
+#include <glm/mat4x4.hpp>
+
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -21,6 +23,8 @@ namespace cubos::engine
     /// @ingroup transform-plugin
     struct [[cubos::component("cubos/local_to_world", VecStorage)]] LocalToWorld
     {
+        CUBOS_REFLECT;
+
         glm::mat4 mat = glm::mat4(1.0F); ///< Local to world space matrix.
     };
 
