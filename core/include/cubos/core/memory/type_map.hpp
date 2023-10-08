@@ -4,131 +4,139 @@
 
 #pragma once
 
-#include <optional>
-#include <typeindex>
 #include <unordered_map>
+
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::memory
 {
-    /// @brief A map that stores values of type @p V, using types as keys.
+    /// @brief A map that stores values of type @p V, using reflection types as keys.
     /// @tparam V Values type.
     /// @ingroup core-memory
     template <typename V>
     class TypeMap
     {
     public:
-        ~TypeMap() = default;
-
-        /// @brief Constructs an empty map.
-        TypeMap() = default;
-
-        /// @brief Move constructs.
-        TypeMap(TypeMap&&) noexcept = default;
-
         /// @brief Sets the value associated to the given type.
-        /// @param key Index of the type to use as a key.
-        /// @param value Value to store.
-        inline void set(std::type_index key, V value)
+        /// @note If an entry already exists, it is replaced.
+        /// @param type Type.
+        /// @param value Value.
+        void insert(const reflection::Type& type, V value)
         {
-            mMap.emplace(key, std::move(value));
-        }
-
-        /// @brief Gets the value associated to the given type.
-        /// @param key Index of the type to use as a key.
-        /// @return Pointer to the value or null if it isn't stored.
-        inline V* at(std::type_index key)
-        {
-            auto it = mMap.find(key);
-            if (it == mMap.end())
-            {
-                return nullptr;
-            }
-            return &it->second;
-        }
-
-        /// @brief Gets the value associated to the given type.
-        /// @param key Index of the type to use as a key.
-        /// @return Pointer to the value or null if it isn't stored.
-        inline const V* at(std::type_index key) const
-        {
-            auto it = mMap.find(key);
-            if (it == mMap.end())
-            {
-                return nullptr;
-            }
-            return &it->second;
+            mMap.emplace(&type, std::move(value));
         }
 
         /// @brief Sets the value associated to the given type.
-        /// @tparam K Type to use as a key.
-        /// @param value Value to store.
-        template <typename K>
-        inline void set(V value)
+        /// @note If an entry already exists, it is replaced.
+        /// @tparam K Type.
+        /// @param value Value.
+        template <reflection::Reflectable K>
+        void insert(V value)
         {
-            this->set(std::type_index(typeid(K)), std::move(value));
+            this->insert(reflection::reflect<K>(), std::move(value));
+        }
+
+        /// @brief Removes the entry associated to the given type.
+        /// @param type Type.
+        /// @return Whether the entry was removed.
+        bool erase(const reflection::Type& type)
+        {
+            return mMap.erase(&type) > 0;
+        }
+
+        /// @brief Removes the entry associated to the given type.
+        /// @tparam K Type.
+        /// @return Whether the entry was removed.
+        template <reflection::Reflectable K>
+        bool erase()
+        {
+            return this->erase(reflection::reflect<K>());
+        }
+
+        /// @brief Checks if there's a an entry with the given type.
+        /// @param type Type.
+        /// @return Whether there's an entry with the given type.
+        bool contains(const reflection::Type& type) const
+        {
+            return mMap.contains(&type);
+        }
+
+        /// @brief Checks if there's a an entry with the given type.
+        /// @tparam K Type.
+        /// @return Whether there's an entry with the given type.
+        template <reflection::Reflectable K>
+        bool contains() const
+        {
+            return this->contains(reflection::reflect<K>());
         }
 
         /// @brief Gets the value associated to the given type.
-        /// @tparam K Type to use as a key.
-        /// @return Pointer to the value or null if it isn't stored.
-        template <typename K>
-        inline V* at()
+        /// @note Aborts if @ref contains returns false.
+        /// @param type Type.
+        /// @return Reference to the value.
+        V& at(const reflection::Type& type)
         {
-            return this->at(std::type_index(typeid(K)));
+            return mMap.at(&type);
         }
 
         /// @brief Gets the value associated to the given type.
-        /// @tparam K Type to use as a key.
-        /// @return Pointer to the value or null if it isn't stored.
-        template <typename K>
-        inline const V* at() const
+        /// @note Aborts if @ref contains returns false.
+        /// @tparam K Type.
+        /// @return Reference to the value.
+        template <reflection::Reflectable K>
+        V& at()
         {
-            return this->at(std::type_index(typeid(K)));
+            return this->at(reflection::reflect<K>());
         }
 
-        /// @brief Removes all values from the map.
-        inline void clear()
+        /// @copydoc at(const reflection::Type&)
+        const V& at(const reflection::Type& type) const
+        {
+            return mMap.at(&type);
+        }
+
+        /// @copydoc at()
+        template <reflection::Reflectable K>
+        const V& at() const
+        {
+            return this->at(reflection::reflect<K>());
+        }
+
+        /// @brief Removes all entries from the map.
+        void clear()
         {
             mMap.clear();
         }
 
-        /// @brief Removes the value with the given key from the map.
-        /// @param key Index of the type to use as a key.
-        inline void erase(std::type_index key)
-        {
-            mMap.erase(key);
-        }
-
-        /// @brief Removes the value with the given key from the map.
-        /// @tparam K Type to use as a key.
-        template <typename K>
-        inline void erase()
-        {
-            this->erase(std::type_index(typeid(K)));
-        }
-
-        /// @brief Gets the number of values in the map.
-        /// @return Number of values in the map.
-        inline std::size_t size() const
+        /// @brief Gets the number of entries in the map.
+        /// @return Values count.
+        std::size_t size() const
         {
             return mMap.size();
         }
 
+        /// @brief Checks if the map is empty.
+        /// @return Whether the map is empty.
+        bool empty() const
+        {
+            return mMap.empty();
+        }
+
         /// @brief Gets an iterator to the beginning of the map.
-        /// @return Iterator to the beginning of the map.
-        inline auto begin() const
+        /// @return Iterator.
+        auto begin() const
         {
             return mMap.begin();
         }
 
         /// @brief Gets an iterator to the end of the map.
-        /// @return Iterator to the end of the map.
-        inline auto end() const
+        /// @return Iterator.
+        auto end() const
         {
             return mMap.end();
         }
 
     private:
-        std::unordered_map<std::type_index, V> mMap; ///< Map of values indexed by type index.
+        std::unordered_map<const reflection::Type*, V> mMap; ///< Map of values indexed by type.
     };
 } // namespace cubos::core::memory
