@@ -6,6 +6,8 @@
 
 #include <uuid.h>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 namespace cubos::core::data::old
 {
     class Serializer;
@@ -14,7 +16,7 @@ namespace cubos::core::data::old
 
 namespace cubos::engine
 {
-    template <typename T>
+    template <core::reflection::Reflectable T>
     class Asset;
 
     /// @brief Handle to an asset of any type. May either be weak or strong.
@@ -32,6 +34,12 @@ namespace cubos::engine
     class AnyAsset
     {
     public:
+        CUBOS_REFLECT;
+
+        /// @brief Avoid using this field, use @ref getId() instead.
+        /// @todo This was added as a dirty fix for #692, should be removed once the issue is fixed.
+        uuids::uuid reflectedId;
+
         ~AnyAsset();
 
         /// @brief Constructs a null handle.
@@ -85,11 +93,20 @@ namespace cubos::engine
         /// @brief Converts this handle to a handle of a specific type.
         /// @tparam T Type of the asset.
         /// @return Handle to the same asset, but of the specified type.
-        template <typename T>
+        template <core::reflection::Reflectable T>
         inline operator Asset<T>() const;
 
         void serialize(core::data::old::Serializer& ser, const char* name) const;
         void deserialize(core::data::old::Deserializer& des);
+
+    protected:
+        /// @brief Constructs a type with the given name, constructible trait and UUID field.
+        ///
+        /// Added so that typed asset handles don't duplicate the existing reflection code of the
+        /// base class.
+        ///
+        /// @param name Type name.
+        static core::reflection::Type& makeType(std::string name);
 
     private:
         friend class Assets;
@@ -109,10 +126,15 @@ namespace cubos::engine
     /// @see AnyAsset
     /// @tparam T Type of the asset.
     /// @ingroup assets-plugin
-    template <typename T>
+    template <core::reflection::Reflectable T>
     class Asset : public AnyAsset
     {
     public:
+        CUBOS_REFLECT
+        {
+            return AnyAsset::makeType("cubos::engine::Asset<" + core::reflection::reflect<T>().name() + ">");
+        }
+
         using AnyAsset::AnyAsset;
 
         /// @brief Constructs a generic handle version of this handle.
@@ -143,7 +165,7 @@ namespace cubos::engine
 
     // Implementation.
 
-    template <typename T>
+    template <core::reflection::Reflectable T>
     inline AnyAsset::operator Asset<T>() const
     {
         Asset<T> asset;

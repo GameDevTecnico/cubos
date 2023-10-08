@@ -1,10 +1,19 @@
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/uuid.hpp>
+#include <cubos/core/reflection/traits/constructible.hpp>
+#include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/assets/asset.hpp>
 
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(AnyAsset)
+{
+    return AnyAsset::makeType("cubos::engine::AnyAsset");
+}
 
 AnyAsset::~AnyAsset()
 {
@@ -18,7 +27,8 @@ AnyAsset::AnyAsset(std::nullptr_t)
 }
 
 AnyAsset::AnyAsset(uuids::uuid id)
-    : mId(id)
+    : reflectedId(id)
+    , mId(id)
     , mRefCount(nullptr)
     , mVersion(-1)
 {
@@ -30,6 +40,7 @@ AnyAsset::AnyAsset(std::string_view str)
 {
     if (auto id = uuids::uuid::from_string(str))
     {
+        reflectedId = id.value();
         mId = id.value();
     }
     else
@@ -39,7 +50,8 @@ AnyAsset::AnyAsset(std::string_view str)
 }
 
 AnyAsset::AnyAsset(const AnyAsset& other)
-    : mId(other.mId)
+    : reflectedId(other.reflectedId)
+    , mId(other.mId)
     , mRefCount(other.mRefCount)
     , mVersion(other.mVersion)
 {
@@ -47,7 +59,8 @@ AnyAsset::AnyAsset(const AnyAsset& other)
 }
 
 AnyAsset::AnyAsset(AnyAsset&& other) noexcept
-    : mId(other.mId)
+    : reflectedId(other.reflectedId)
+    , mId(other.mId)
     , mRefCount(other.mRefCount)
     , mVersion(other.mVersion)
 {
@@ -57,6 +70,7 @@ AnyAsset::AnyAsset(AnyAsset&& other) noexcept
 AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 {
     this->decRef();
+    reflectedId = other.reflectedId;
     mId = other.mId;
     mRefCount = other.mRefCount;
     mVersion = other.mVersion;
@@ -67,6 +81,7 @@ AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 AnyAsset& AnyAsset::operator=(AnyAsset&& other) noexcept
 {
     this->decRef();
+    reflectedId = other.mId;
     mId = other.mId;
     mRefCount = other.mRefCount;
     mVersion = other.mVersion;
@@ -76,22 +91,22 @@ AnyAsset& AnyAsset::operator=(AnyAsset&& other) noexcept
 
 int AnyAsset::getVersion() const
 {
-    return mVersion;
+    return reflectedId == mId ? mVersion : 0;
 }
 
 uuids::uuid AnyAsset::getId() const
 {
-    return mId;
+    return reflectedId;
 }
 
 bool AnyAsset::isNull() const
 {
-    return mId.is_nil();
+    return reflectedId.is_nil();
 }
 
 bool AnyAsset::isStrong() const
 {
-    return mRefCount != nullptr;
+    return reflectedId == mId && mRefCount != nullptr;
 }
 
 void AnyAsset::makeWeak()
@@ -100,9 +115,22 @@ void AnyAsset::makeWeak()
     mRefCount = nullptr;
 }
 
+cubos::core::reflection::Type& AnyAsset::makeType(std::string name)
+{
+    using namespace cubos::core::reflection;
+
+    return Type::create(std::move(name))
+        .with(ConstructibleTrait::typed<AnyAsset>()
+                  .withDefaultConstructor()
+                  .withCopyConstructor()
+                  .withMoveConstructor()
+                  .build())
+        .with(FieldsTrait().withField("id", &AnyAsset::reflectedId));
+}
+
 void AnyAsset::incRef() const
 {
-    if (mRefCount != nullptr)
+    if (reflectedId == mId && mRefCount != nullptr)
     {
         static_cast<std::atomic<int>*>(mRefCount)->fetch_add(1);
     }
@@ -110,7 +138,7 @@ void AnyAsset::incRef() const
 
 void AnyAsset::decRef() const
 {
-    if (mRefCount != nullptr)
+    if (reflectedId == mId && mRefCount != nullptr)
     {
         static_cast<std::atomic<int>*>(mRefCount)->fetch_sub(1);
     }
@@ -128,6 +156,7 @@ void AnyAsset::deserialize(core::data::old::Deserializer& des)
     if (auto id = uuids::uuid::from_string(str))
     {
         this->decRef();
+        reflectedId = id.value();
         mId = id.value();
         mRefCount = nullptr;
         mVersion = -1;
