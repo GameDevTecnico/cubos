@@ -23,7 +23,7 @@ namespace cubos::core::memory
         /// @param value Value.
         void insert(const reflection::Type& type, V value)
         {
-            mMap.emplace(&type, std::move(value));
+            mMap.insert_or_assign(&type, std::move(value));
         }
 
         /// @brief Sets the value associated to the given type.

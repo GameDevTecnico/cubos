@@ -52,16 +52,15 @@ void Blueprint::merge(const std::string& prefix, const Blueprint& other)
     /// Then, merge the buffers.
     for (const auto& buffer : other.mBuffers)
     {
-        auto* ptr = mBuffers.at(buffer.first);
         IBuffer* buf;
-        if (ptr == nullptr)
+        if (mBuffers.contains(*buffer.first))
         {
-            buf = buffer.second->create();
-            mBuffers.set(buffer.first, buf);
+            buf = mBuffers.at(*buffer.first);
         }
         else
         {
-            buf = *ptr;
+            buf = buffer.second->create();
+            mBuffers.insert(*buffer.first, buf);
         }
 
         buf->merge(buffer.second, prefix, src, dst);

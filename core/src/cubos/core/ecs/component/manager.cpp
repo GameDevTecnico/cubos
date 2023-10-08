@@ -1,53 +1,45 @@
 #include <cubos/core/ecs/component/manager.hpp>
 #include <cubos/core/ecs/component/registry.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::ecs;
 
-std::optional<std::string_view> cubos::core::ecs::getComponentName(std::type_index type)
+std::optional<std::string_view> cubos::core::ecs::getComponentName(const reflection::Type& type)
 {
     return Registry::name(type);
 }
 
-void ComponentManager::registerComponent(std::type_index type)
+void ComponentManager::registerComponent(const reflection::Type& type)
 {
-    if (mTypeToIds.find(type) == mTypeToIds.end())
+    if (!mTypeToIds.contains(type))
     {
         auto storage = Registry::createStorage(type);
-        if (storage == nullptr)
-        {
-            CUBOS_CRITICAL("Component type '{}' is not registered in the global registry", type.name());
-            abort();
-        }
+        CUBOS_ASSERT(storage != nullptr, "Component type '{}' is not registered in the global registry", type.name());
 
-        mTypeToIds[type] = mEntries.size() + 1; // Component ids start at 1.
+        mTypeToIds.insert(type, mEntries.size() + 1); // Component ids start at 1.
         mEntries.emplace_back(std::move(storage));
     }
 }
 
-std::size_t ComponentManager::getIDFromIndex(std::type_index type) const
+std::size_t ComponentManager::getID(const reflection::Type& type) const
 {
-    if (auto it = mTypeToIds.find(type); it != mTypeToIds.end())
-    {
-        return it->second;
-    }
-
-    CUBOS_CRITICAL("Component type '{}' is not registered in the component manager", type.name());
-    abort();
+    CUBOS_ASSERT(mTypeToIds.contains(type), "Component type '{}' is not registered in the component manager",
+                 type.name());
+    return mTypeToIds.at(type);
 }
 
-std::type_index ComponentManager::getType(std::size_t id) const
+const reflection::Type& ComponentManager::getType(std::size_t id) const
 {
     for (const auto& pair : mTypeToIds)
     {
         if (pair.second == id)
         {
-            return pair.first;
+            return *pair.first;
         }
     }
 
-    CUBOS_CRITICAL("No component found with ID {}", id);
-    abort();
+    CUBOS_FAIL("No component found with ID {}", id);
 }
 
 void ComponentManager::remove(uint32_t id, std::size_t componentId)

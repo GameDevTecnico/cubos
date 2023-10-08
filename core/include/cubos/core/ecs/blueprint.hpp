@@ -191,16 +191,15 @@ namespace cubos::core::ecs
 
         (
             [&]() {
-                auto ptr = mBuffers.at<ComponentTypes>();
                 IBuffer* buf;
-                if (ptr == nullptr)
+                if (mBuffers.contains<ComponentTypes>())
                 {
-                    buf = new Buffer<ComponentTypes>();
-                    mBuffers.set<ComponentTypes>(buf);
+                    buf = mBuffers.at<ComponentTypes>();
                 }
                 else
                 {
-                    buf = *ptr;
+                    buf = new Buffer<ComponentTypes>();
+                    mBuffers.insert<ComponentTypes>(buf);
                 }
 
                 auto ser = data::old::BinarySerializer(buf->stream);

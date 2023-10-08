@@ -58,15 +58,15 @@ bool World::unpack(Entity entity, const data::old::Package& package, data::old::
 
     for (const auto& field : package.fields())
     {
-        auto type = Registry::type(field.first);
-        if (!type.has_value())
+        const auto* type = Registry::type(field.first);
+        if (type == nullptr)
         {
             CUBOS_ERROR("Unknown component type '{}'", field.first);
             success = false;
             continue;
         }
 
-        auto id = mComponentManager.getIDFromIndex(*type);
+        auto id = mComponentManager.getID(*type);
         if (mComponentManager.unpack(entity.index, id, field.second, context))
         {
             mask.set(id);

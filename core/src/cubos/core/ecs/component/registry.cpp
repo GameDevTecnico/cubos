@@ -14,29 +14,29 @@ bool Registry::create(std::string_view name, data::old::Deserializer& des, Bluep
     return false;
 }
 
-std::unique_ptr<IStorage> Registry::createStorage(std::type_index type)
+std::unique_ptr<IStorage> Registry::createStorage(const reflection::Type& type)
 {
     auto& creators = Registry::entriesByType();
-    if (auto* it = creators.at(type))
+    if (creators.contains(type))
     {
-        return (*it)->storageCreator();
+        return creators.at(type)->storageCreator();
     }
 
     return nullptr;
 }
 
-std::optional<std::string_view> Registry::name(std::type_index type)
+std::optional<std::string_view> Registry::name(const reflection::Type& type)
 {
     auto& entries = Registry::entriesByType();
-    if (auto* it = entries.at(type))
+    if (entries.contains(type))
     {
-        return (*it)->name;
+        return entries.at(type)->name;
     }
 
     return std::nullopt;
 }
 
-std::optional<std::type_index> Registry::type(std::string_view name)
+const reflection::Type* Registry::type(std::string_view name)
 {
     auto& entries = Registry::entriesByName();
     if (auto it = entries.find(std::string(name)); it != entries.end())
@@ -44,7 +44,7 @@ std::optional<std::type_index> Registry::type(std::string_view name)
         return it->second->type;
     }
 
-    return std::nullopt;
+    return nullptr;
 }
 
 memory::TypeMap<std::shared_ptr<Registry::Entry>>& Registry::entriesByType()
