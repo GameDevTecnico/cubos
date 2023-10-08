@@ -9,27 +9,59 @@
 #include <cubos/core/ecs/system/dispatcher.hpp>
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/reflection/traits/constructible.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using namespace cubos::core;
 
+using reflection::ConstructibleTrait;
+using reflection::Type;
+
 struct Player
 {
+    CUBOS_REFLECT;
 };
 
 struct Position
 {
+    CUBOS_REFLECT;
+
     float x, y, z;
 };
 
 struct Velocity
 {
+    CUBOS_REFLECT;
+
     float x, y, z;
 };
 
 struct Parent
 {
+    CUBOS_REFLECT;
+
     ecs::Entity entity;
 };
+
+CUBOS_REFLECT_IMPL(Player)
+{
+    return Type::create("Player").with(ConstructibleTrait::typed<Player>().withMoveConstructor().build());
+}
+
+CUBOS_REFLECT_IMPL(Position)
+{
+    return Type::create("Position").with(ConstructibleTrait::typed<Position>().withMoveConstructor().build());
+}
+
+CUBOS_REFLECT_IMPL(Velocity)
+{
+    return Type::create("Velocity").with(ConstructibleTrait::typed<Velocity>().withMoveConstructor().build());
+}
+
+CUBOS_REFLECT_IMPL(Parent)
+{
+    return Type::create("Parent").with(ConstructibleTrait::typed<Parent>().withMoveConstructor().build());
+}
 
 namespace cubos::core::data::old
 {
