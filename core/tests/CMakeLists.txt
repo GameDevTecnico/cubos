@@ -24,6 +24,7 @@ add_executable(
     data/fs/file_system.cpp
     data/context.cpp
 
+    memory/any_vector.cpp
     memory/unordered_bimap.cpp
 
     ecs/utils.cpp
