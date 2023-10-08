@@ -54,19 +54,30 @@ namespace cubos::core::reflection
         /// @param type Field type.
         /// @param name Field name.
         /// @param addressOf Getter for the address of the field on a given instance.
+        void addField(const Type& type, std::string name, AddressOf* addressOf);
+
+        /// @copydoc addField(const Type&, std::string, AddressOf*)
         /// @return Trait.
         FieldsTrait&& withField(const Type& type, std::string name, AddressOf* addressOf) &&;
 
-        /// @brief Sets the copy constructor of the type.
+        /// @brief Adds a field to the type.
         /// @tparam O Object type.
         /// @tparam F Field type.
-        /// @param field Field name.
+        /// @param name Field name.
         /// @param pointer Field pointer.
+        template <typename O, typename F>
+        void addField(std::string name, F O::*pointer)
+        {
+            this->addField(reflect<F>(), std::move(name), new AddressOfImpl<O, F>(pointer));
+        }
+
+        /// @copydoc addField(std::string, F O::*)
         /// @return Trait.
         template <typename O, typename F>
-        FieldsTrait&& withField(const std::string& field, F O::*pointer) &&
+        FieldsTrait&& withField(std::string name, F O::*pointer) &&
         {
-            return std::move(*this).withField(reflect<F>(), field, new AddressOfImpl<O, F>(pointer));
+            this->addField(std::move(name), pointer);
+            return std::move(*this);
         }
 
         /// @brief Gets the field with the given name.
