@@ -90,6 +90,11 @@ public:
         }
     }
 
+    void set(bool* destructed)
+    {
+        mDestructed = destructed;
+    }
+
 private:
     bool* mDestructed;
 };
