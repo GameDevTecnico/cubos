@@ -8,6 +8,7 @@
 
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::geom
 {
@@ -15,6 +16,8 @@ namespace cubos::core::geom
     /// @ingroup core-geom
     struct Box
     {
+        CUBOS_REFLECT;
+
         glm::vec3 halfSize{0.5F}; ///< Half size of the box.
 
         /// @brief Computes two opposite corners of the box on the major diagonal.

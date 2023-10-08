@@ -83,6 +83,9 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/system/commands.cpp"
     "src/cubos/core/ecs/blueprint.cpp"
     "src/cubos/core/ecs/world.cpp"
+
+    "src/cubos/core/geom/box.cpp"
+    "src/cubos/core/geom/capsule.cpp"
 )
 
 # Create core library
