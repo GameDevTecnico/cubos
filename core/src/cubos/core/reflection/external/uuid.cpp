@@ -6,10 +6,5 @@ CUBOS_REFLECT_EXTERNAL_IMPL(uuids::uuid)
 {
     using namespace cubos::core::reflection;
 
-    return Type::create("uuids::uuid")
-        .with(ConstructibleTrait::typed<uuids::uuid>()
-                  .withDefaultConstructor()
-                  .withCopyConstructor()
-                  .withMoveConstructor()
-                  .build());
+    return Type::create("uuids::uuid").with(ConstructibleTrait::typed<uuids::uuid>().withBasicConstructors().build());
 }

@@ -9,10 +9,6 @@ CUBOS_REFLECT_IMPL(cubos::core::geom::Capsule)
     using namespace core::reflection;
 
     return Type::create("cubos::core::geom::Capsule")
-        .with(ConstructibleTrait::typed<Capsule>()
-                  .withDefaultConstructor()
-                  .withCopyConstructor()
-                  .withMoveConstructor()
-                  .build())
+        .with(ConstructibleTrait::typed<Capsule>().withBasicConstructors().build())
         .with(FieldsTrait().withField("radius", &Capsule::radius).withField("length", &Capsule::length));
 }

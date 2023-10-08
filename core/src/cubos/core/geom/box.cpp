@@ -9,10 +9,6 @@ CUBOS_REFLECT_IMPL(cubos::core::geom::Box)
     using namespace core::reflection;
 
     return Type::create("cubos::core::geom::Box")
-        .with(ConstructibleTrait::typed<Box>()
-                  .withDefaultConstructor()
-                  .withCopyConstructor()
-                  .withMoveConstructor()
-                  .build())
+        .with(ConstructibleTrait::typed<Box>().withBasicConstructors().build())
         .with(FieldsTrait().withField("halfSize", &Box::halfSize));
 }
