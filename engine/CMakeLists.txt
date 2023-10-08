@@ -30,6 +30,10 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/tools/scene_editor/plugin.cpp"
 
     "src/cubos/engine/transform/plugin.cpp"
+    "src/cubos/engine/transform/local_to_world.cpp"
+    "src/cubos/engine/transform/position.cpp"
+    "src/cubos/engine/transform/rotation.cpp"
+    "src/cubos/engine/transform/scale.cpp"
 
     "src/cubos/engine/assets/plugin.cpp"
     "src/cubos/engine/assets/assets.cpp"

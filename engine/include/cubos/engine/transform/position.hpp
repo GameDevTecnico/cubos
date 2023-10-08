@@ -4,7 +4,9 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
+#include <glm/vec3.hpp>
+
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -13,6 +15,8 @@ namespace cubos::engine
     /// @ingroup transform-plugin
     struct [[cubos::component("cubos/position", VecStorage)]] Position
     {
+        CUBOS_REFLECT;
+
         glm::vec3 vec = {0.0F, 0.0F, 0.0F}; ///< Position of the entity.
     };
 } // namespace cubos::engine

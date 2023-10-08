@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <glm/glm.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -13,6 +13,8 @@ namespace cubos::engine
     /// @ingroup transform-plugin
     struct [[cubos::component("cubos/scale", VecStorage)]] Scale
     {
+        CUBOS_REFLECT;
+
         float factor; ///< Uniform scale factor of the entity.
     };
 } // namespace cubos::engine
