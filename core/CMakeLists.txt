@@ -86,6 +86,7 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/geom/box.cpp"
     "src/cubos/core/geom/capsule.cpp"
+    "src/cubos/core/geom/decomposition.cpp"
 )
 
 # Create core library
