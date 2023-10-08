@@ -6,6 +6,8 @@
 
 #include <vector>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 #include <cubos/engine/voxels/material.hpp>
 
 namespace cubos::engine
@@ -35,6 +37,8 @@ namespace cubos::engine
     class VoxelPalette final
     {
     public:
+        CUBOS_REFLECT;
+
         ~VoxelPalette() = default;
 
         /// @brief Constructs a palette with the given materials.

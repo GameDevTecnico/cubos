@@ -1,10 +1,20 @@
 #include <cstring>
 
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/traits/constructible.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/voxels/palette.hpp>
 
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(VoxelPalette)
+{
+    using namespace cubos::core::reflection;
+
+    return Type::create("cubos::engine::VoxelPalette")
+        .with(ConstructibleTrait::typed<VoxelPalette>().withDefaultConstructor().withMoveConstructor().build());
+}
 
 VoxelPalette::VoxelPalette(std::vector<VoxelMaterial>&& materials)
     : mMaterials(std::move(materials))
