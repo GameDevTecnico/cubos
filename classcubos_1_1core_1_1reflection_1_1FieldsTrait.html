@@ -99,6 +99,12 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2b9aecc7d4a05d4497ce0b311ff571a1" class="m-doc">addField</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
+              std::string name,
+              <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a>* addressOf)</span>
+            </dt>
+            <dd>Adds a field to the type. The getter will be deleted using <code>delete</code> and thus must be allocated using <code>new</code>.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a7f3b99b3858bfd8b038f0cff6bd54085" class="m-doc">withField</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
               std::string name,
               <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a>* addressOf) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>&amp;&amp;</span>
@@ -106,10 +112,16 @@
             <dd>Adds a field to the type. The getter will be deleted using <code>delete</code> and thus must be allocated using <code>new</code>.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename O, typename F&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a8d0dba0467c0407f57adf4d6131678ec" class="m-doc">withField</a>(</span><span class="m-doc-wrap">const std::string&amp; field,
+              <span class="m-doc-wrap-bumper">void <a href="#a7c836835868b6cabd3d5976e049727f0" class="m-doc">addField</a>(</span><span class="m-doc-wrap">std::string name,
+              F O::* pointer)</span>
+            </dt>
+            <dd>Adds a field to the type.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename O, typename F&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a51e891277018f3e52bf2c79ee2c492a7" class="m-doc">withField</a>(</span><span class="m-doc-wrap">std::string name,
               F O::* pointer) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>&amp;&amp;</span>
             </dt>
-            <dd>Sets the copy constructor of the type.</dd>
+            <dd>Adds a field to the type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a7442f1d9bb6673b6ad97871adff3fdec" class="m-doc">field</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a>*</span>
             </dt>
@@ -161,6 +173,33 @@
               </tbody>
             </table>
           </div></section>
+          <section class="m-doc-details" id="a2b9aecc7d4a05d4497ce0b311ff571a1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b9aecc7d4a05d4497ce0b311ff571a1" class="m-doc-self">addField</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
+              std::string name,
+              <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1AddressOf.html" class="m-doc">AddressOf</a>* addressOf)</span></span>
+            </h3>
+            <p>Adds a field to the type. The getter will be deleted using <code>delete</code> and thus must be allocated using <code>new</code>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a> type.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a> name.</td>
+                </tr>
+                <tr>
+                  <td>addressOf</td>
+                  <td>Getter for the address of the field on a given instance.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a7f3b99b3858bfd8b038f0cff6bd54085"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f3b99b3858bfd8b038f0cff6bd54085" class="m-doc-self">withField</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
@@ -194,15 +233,15 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a8d0dba0467c0407f57adf4d6131678ec"><div>
+          <section class="m-doc-details" id="a7c836835868b6cabd3d5976e049727f0"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename O, typename F&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d0dba0467c0407f57adf4d6131678ec" class="m-doc-self">withField</a>(</span><span class="m-doc-wrap">const std::string&amp; field,
-              F O::* pointer) &amp;&amp;</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7c836835868b6cabd3d5976e049727f0" class="m-doc-self">addField</a>(</span><span class="m-doc-wrap">std::string name,
+              F O::* pointer)</span></span>
             </h3>
-            <p>Sets the copy constructor of the type.</p>
+            <p>Adds a field to the type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -222,7 +261,45 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>field</td>
+                  <td>name</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a> name.</td>
+                </tr>
+                <tr>
+                  <td>pointer</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a> pointer.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a51e891277018f3e52bf2c79ee2c492a7"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename O, typename F&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />FieldsTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a51e891277018f3e52bf2c79ee2c492a7" class="m-doc-self">withField</a>(</span><span class="m-doc-wrap">std::string name,
+              F O::* pointer) &amp;&amp;</span></span>
+            </h3>
+            <p>Adds a field to the type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">O</td>
+                  <td>Object type.</td>
+                </tr>
+                <tr>
+                  <td>F</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a> type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
                   <td><a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait_1_1Field.html" class="m-doc">Field</a> name.</td>
                 </tr>
                 <tr>

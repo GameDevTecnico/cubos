@@ -57,6 +57,8 @@
                 <li><a href="#derived-classes">Derived classes</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#pro-static-methods">Protected static functions</a></li>
               </ul>
             </li>
           </ul>
@@ -66,12 +68,12 @@
           <h2><a href="#derived-classes">Derived classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">core::<wbr />reflection::<wbr />Reflectable</a> T&gt;</div>
               class <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>
             </dt>
             <dd>Handle to an asset of a specific type.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">core::<wbr />reflection::<wbr />Reflectable</a> T&gt;</div>
               class <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>
             </dt>
             <dd>Handle to an asset of a specific type.</dd>
@@ -101,7 +103,7 @@
             </dt>
             <dd>Constructs a handle from the given handle.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">core::<wbr />reflection::<wbr />Reflectable</a> T&gt;</div>
               <span class="m-doc-wrap-bumper"><a href="#aa98cd6cca4debc1786ff00d7bfe70a21" class="m-doc">operator Asset&lt;T&gt;</a>(</span><span class="m-doc-wrap">) const</span>
             </dt>
             <dd>Converts this handle to a handle of a specific type.</dd>
@@ -138,6 +140,24 @@
               <span class="m-doc-wrap-bumper">void <a href="#a330f9e99167ef1ab9dbd231eda22cd55" class="m-doc-self">makeWeak</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Makes this handle a weak handle, decreasing the asset&#x27;s reference count if it was strong.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a54deb5d54d93771b55493890d40dc061">
+              uuids::uuid <a href="#a54deb5d54d93771b55493890d40dc061" class="m-doc-self">reflectedId</a>
+            </dt>
+            <dd>Avoid using this field, use <a href="classcubos_1_1engine_1_1AnyAsset.html#a71d67a1ee37c73927a94e1f2a88aee24" class="m-doc">getId()</a> instead.</dd>
+          </dl>
+        </section>
+        <section id="pro-static-methods">
+          <h2><a href="#pro-static-methods">Protected static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a601ed33e55617c3275443f63355623fa" class="m-doc">makeType</a>(</span><span class="m-doc-wrap">std::string name) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp;</span>
+            </dt>
+            <dd>Constructs a type with the given name, constructible trait and UUID field.</dd>
           </dl>
         </section>
         <section>
@@ -213,7 +233,7 @@
           <section class="m-doc-details" id="aa98cd6cca4debc1786ff00d7bfe70a21"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename T&gt;
+                template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">core::<wbr />reflection::<wbr />Reflectable</a> T&gt;
               </div>
               <span class="m-doc-wrap-bumper"> cubos::<wbr />engine::<wbr />AnyAsset::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa98cd6cca4debc1786ff00d7bfe70a21" class="m-doc-self">operator Asset&lt;T&gt;</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
@@ -325,6 +345,24 @@
                 </tr>
               </tfoot>
             </table>
+          </div></section>
+          <section class="m-doc-details" id="a601ed33e55617c3275443f63355623fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; cubos::<wbr />engine::<wbr />AnyAsset::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a601ed33e55617c3275443f63355623fa" class="m-doc-self">makeType</a>(</span><span class="m-doc-wrap">std::string name) <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Constructs a type with the given name, constructible trait and UUID field.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Type name.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Added so that typed asset handles don&#x27;t duplicate the existing reflection code of the base class.</p>
           </div></section>
         </section>
       </div>

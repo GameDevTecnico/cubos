@@ -71,9 +71,12 @@
 <span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">ecs</span><span class="o">::</span><span class="n">Write</span><span class="p">;</span></pre><p>Entities have components, so let&#x27;s create one to give our entities. Because of how the engine works, we cannot declare a component on our <code>main.cpp</code> file. We&#x27;ll need to create a <code>components.hpp</code> for that.</p><pre class="m-code"><span class="cp">#pragma once</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/ecs/world.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/reflect.hpp&gt;</span>
 
 <span class="k">struct</span><span class="w"> </span><span class="p">[[</span><span class="n">cubos</span><span class="o">::</span><span class="n">component</span><span class="p">(</span><span class="s">&quot;num&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">VecStorage</span><span class="p">)]]</span><span class="w"> </span><span class="n">Num</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span>
+
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
 <span class="p">};</span></pre><p>Here we create a component called &quot;num&quot; that stores a single integer. We&#x27;ll use it as the id of the entity it is attached to. Back on our <code>main.cpp</code> file we&#x27;ll need to include our new file.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;components.hpp&quot;</span></pre><p>And the component needs to be registered.</p><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">addComponent</span><span class="o">&lt;</span><span class="n">Num</span><span class="o">&gt;</span><span class="p">();</span></pre><p>Let&#x27;s create a resource now. Unlike components, resources can be declared on the <code>main.cpp</code> file, so let&#x27;s do that.</p><pre class="m-code"><span class="k">struct</span><span class="w"> </span><span class="nc">Pop</span>
 <span class="p">{</span>
