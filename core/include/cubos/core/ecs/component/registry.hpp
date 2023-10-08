@@ -33,9 +33,9 @@ namespace cubos::core::ecs
         static bool create(std::string_view name, data::old::Deserializer& des, Blueprint& blueprint, Entity id);
 
         /// @brief Instantiates a component storage for the given component type.
-        /// @param type Type index of the component.
+        /// @param type Type of the component.
         /// @return Smart pointer to the storage, or nullptr if the component type was not found.
-        static std::unique_ptr<IStorage> createStorage(std::type_index type);
+        static std::unique_ptr<IStorage> createStorage(const reflection::Type& type);
 
         /// @brief Registers a new component type.
         /// @tparam T Component type to register.
@@ -45,22 +45,21 @@ namespace cubos::core::ecs
         static void add(std::string_view name);
 
         /// @brief Gets the name of a component type.
-        /// @param type Type index of the component.
+        /// @param type Type of the component.
         /// @return Name of the component, or std::nullopt if the component type was not found.
-        static std::optional<std::string_view> name(std::type_index type);
+        static std::optional<std::string_view> name(const reflection::Type& type);
 
         /// @brief Gets the type index of a component type.
         /// @param name Name of the component.
-        /// @return Type index of the component, or std::nullopt if the component type was not
-        /// found.
-        static std::optional<std::type_index> type(std::string_view name);
+        /// @return Type of the component, or nullptr if the component type was not found.
+        static const reflection::Type* type(std::string_view name);
 
     private:
         /// @brief Entry in the component registry.
         struct Entry
         {
-            std::type_index type; ///< Type index of the component.
-            std::string name;     ///< Name of the component.
+            const reflection::Type* type; ///< Type of the component.
+            std::string name;             ///< Name of the component.
 
             /// Function for creating the component from a deserializer.
             bool (*componentCreator)(data::old::Deserializer&, Blueprint&, Entity);
@@ -88,7 +87,7 @@ namespace cubos::core::ecs
         assert(byNames.find(std::string(name)) == byNames.end());
 
         auto entry = std::make_shared<Entry>(Entry{
-            .type = typeid(T),
+            .type = &reflection::reflect<T>(),
             .name = std::string(name),
             .componentCreator =
                 [](data::old::Deserializer& des, Blueprint& blueprint, Entity id) {
@@ -109,7 +108,7 @@ namespace cubos::core::ecs
                 },
         });
 
-        byType.set<T>(entry);
+        byType.insert<T>(entry);
         byNames[std::string(name)] = entry;
     }
 } // namespace cubos::core::ecs

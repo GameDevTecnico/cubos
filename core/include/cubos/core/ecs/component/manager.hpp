@@ -13,6 +13,7 @@
 #include <typeindex>
 
 #include <cubos/core/ecs/component/storage.hpp>
+#include <cubos/core/memory/type_map.hpp>
 
 namespace cubos::core::ecs
 {
@@ -33,7 +34,7 @@ namespace cubos::core::ecs
     /// @param type Component type.
     /// @return Registered name of the component type.
     /// @ingroup core-ecs-component
-    std::optional<std::string_view> getComponentName(std::type_index type);
+    std::optional<std::string_view> getComponentName(const reflection::Type& type);
 
     /// @brief Utility struct used to reference a storage of component type @p T for reading.
     /// @tparam T Component type.
@@ -110,12 +111,12 @@ namespace cubos::core::ecs
         /// Must be called before any component of this type is used in any way.
         ///
         /// @param type Type of the component.
-        void registerComponent(std::type_index type);
+        void registerComponent(const reflection::Type& type);
 
         /// @brief Gets the identifier of a registered component type.
         /// @param type Component type.
         /// @return Component identifier.
-        std::size_t getIDFromIndex(std::type_index type) const;
+        std::size_t getID(const reflection::Type& type) const;
 
         /// @brief Gets the identifier of a registered component type.
         /// @tparam T Component type.
@@ -126,7 +127,7 @@ namespace cubos::core::ecs
         /// @brief Gets the type of a component from its identifier.
         /// @param id Component identifier.
         /// @return Component type index.
-        std::type_index getType(std::size_t id) const;
+        const reflection::Type& getType(std::size_t id) const;
 
         //// @brief Locks a storage for reading and returns it.
         /// @tparam T Component type.
@@ -187,10 +188,8 @@ namespace cubos::core::ecs
             std::unique_ptr<std::shared_mutex> mutex; ///< Read/write lock for the storage.
         };
 
-        /// @brief Maps component types to component IDs.
-        std::unordered_map<std::type_index, std::size_t> mTypeToIds;
-
-        std::vector<Entry> mEntries; ///< Registered component storages.
+        memory::TypeMap<std::size_t> mTypeToIds; ///< Maps component types to component IDs.
+        std::vector<Entry> mEntries;             ///< Registered component storages.
     };
 
     // Implementation.
@@ -198,7 +197,7 @@ namespace cubos::core::ecs
     template <typename T>
     std::optional<std::string_view> getComponentName()
     {
-        return getComponentName(typeid(T));
+        return getComponentName(reflection::reflect<T>());
     }
 
     template <typename T>
@@ -248,13 +247,13 @@ namespace cubos::core::ecs
     template <typename T>
     void ComponentManager::registerComponent()
     {
-        this->registerComponent(typeid(T));
+        this->registerComponent(reflection::reflect<T>());
     }
 
     template <typename T>
     std::size_t ComponentManager::getID() const
     {
-        return this->getIDFromIndex(typeid(T));
+        return this->getID(reflection::reflect<T>());
     }
 
     template <typename T>

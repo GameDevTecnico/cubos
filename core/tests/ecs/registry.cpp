@@ -2,6 +2,7 @@
 
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/component/vec_storage.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 #include "utils.hpp"
 
@@ -13,6 +14,7 @@ using cubos::core::ecs::Commands;
 using cubos::core::ecs::Registry;
 using cubos::core::ecs::VecStorage;
 using cubos::core::ecs::World;
+using cubos::core::reflection::reflect;
 
 TEST_CASE("ecs::Registry")
 {
@@ -23,18 +25,18 @@ TEST_CASE("ecs::Registry")
     auto entity = blueprint.create("entity");
 
     // Initially "foo" of type int isn't registered.
-    CHECK_FALSE(Registry::type("foo").has_value());
-    CHECK_FALSE(Registry::name(typeid(int)).has_value());
+    CHECK(Registry::type("foo") == nullptr);
+    CHECK_FALSE(Registry::name(reflect<int>()).has_value());
 
     // After registering, it can now be found.
     Registry::add<int, VecStorage<int>>("foo");
-    REQUIRE(Registry::type("foo").has_value());
-    CHECK(*Registry::type("foo") == typeid(int));
-    REQUIRE(Registry::name(typeid(int)).has_value());
-    CHECK(*Registry::name(typeid(int)) == "foo");
+    REQUIRE(Registry::type("foo") != nullptr);
+    CHECK(Registry::type("foo") == &reflect<int>());
+    REQUIRE(Registry::name(reflect<int>()).has_value());
+    CHECK(*Registry::name(reflect<int>()) == "foo");
 
     // Create a storage for it and check if its of the correct type.
-    auto storage = Registry::createStorage(typeid(int));
+    auto storage = Registry::createStorage(reflect<int>());
     CHECK(dynamic_cast<VecStorage<int>*>(storage.get()) != nullptr);
 
     // Instantiate the component into a blueprint, from a package.
