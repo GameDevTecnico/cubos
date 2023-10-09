@@ -69,11 +69,11 @@
             </dt>
             <dd>Registers a new component type with the component manager.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#afbb65e90f0feb767d0f10d42eb4a5d8a" class="m-doc">registerComponent</a>(</span><span class="m-doc-wrap">std::type_index type)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a0a632f68e5a1ea98b6327859aaa40a0c" class="m-doc">registerComponent</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span>
             </dt>
             <dd>Registers a new component type with the component manager.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac4955a366a71ac921bb47a715bf81b4f" class="m-doc">getIDFromIndex</a>(</span><span class="m-doc-wrap">std::type_index type) const -&gt; std::size_t</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6c7f418fe50e1b9e84ce38b5a53481fd" class="m-doc">getID</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const -&gt; std::size_t</span>
             </dt>
             <dd>Gets the identifier of a registered component type.</dd>
             <dt>
@@ -82,7 +82,7 @@
             </dt>
             <dd>Gets the identifier of a registered component type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab5372317b9fadab204b23fff909587b3" class="m-doc">getType</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; std::type_index</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a401d4e2c498dea038c4707d7224cf12a" class="m-doc">getType</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
             </dt>
             <dd>Gets the type of a component from its identifier.</dd>
             <dt>
@@ -153,9 +153,9 @@
             </table>
 <p>Must be called before any component of this type is used in any way.</p>
           </div></section>
-          <section class="m-doc-details" id="afbb65e90f0feb767d0f10d42eb4a5d8a"><div>
+          <section class="m-doc-details" id="a0a632f68e5a1ea98b6327859aaa40a0c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afbb65e90f0feb767d0f10d42eb4a5d8a" class="m-doc-self">registerComponent</a>(</span><span class="m-doc-wrap">std::type_index type)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a632f68e5a1ea98b6327859aaa40a0c" class="m-doc-self">registerComponent</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type)</span></span>
             </h3>
             <p>Registers a new component type with the component manager.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -171,9 +171,9 @@
             </table>
 <p>Must be called before any component of this type is used in any way.</p>
           </div></section>
-          <section class="m-doc-details" id="ac4955a366a71ac921bb47a715bf81b4f"><div>
+          <section class="m-doc-details" id="a6c7f418fe50e1b9e84ce38b5a53481fd"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac4955a366a71ac921bb47a715bf81b4f" class="m-doc-self">getIDFromIndex</a>(</span><span class="m-doc-wrap">std::type_index type) const</span></span>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6c7f418fe50e1b9e84ce38b5a53481fd" class="m-doc-self">getID</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type) const</span></span>
             </h3>
             <p>Gets the identifier of a registered component type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -220,9 +220,9 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ab5372317b9fadab204b23fff909587b3"><div>
+          <section class="m-doc-details" id="a401d4e2c498dea038c4707d7224cf12a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::type_index cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab5372317b9fadab204b23fff909587b3" class="m-doc-self">getType</a>(</span><span class="m-doc-wrap">std::size_t id) const</span></span>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a401d4e2c498dea038c4707d7224cf12a" class="m-doc-self">getType</a>(</span><span class="m-doc-wrap">std::size_t id) const</span></span>
             </h3>
             <p>Gets the type of a component from its identifier.</p>
             <table class="m-table m-fullwidth m-flat">
