@@ -1,4 +1,4 @@
-#include <cstdlib>
+#include <new>
 
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_vector.hpp>
@@ -11,7 +11,7 @@ using cubos::core::reflection::Type;
 
 AnyVector::~AnyVector()
 {
-    std::free(mData);
+    operator delete(mData, static_cast<std::align_val_t>(mConstructibleTrait->alignment()));
 }
 
 AnyVector::AnyVector(const Type& elementType)
@@ -19,6 +19,7 @@ AnyVector::AnyVector(const Type& elementType)
 {
     CUBOS_ASSERT(mElementType.has<ConstructibleTrait>(), "Type must be constructible");
     mConstructibleTrait = &mElementType.get<ConstructibleTrait>();
+    CUBOS_ASSERT(mConstructibleTrait->hasMoveConstruct(), "Type must be move constructible");
 
     CUBOS_ASSERT(mConstructibleTrait->size() % mConstructibleTrait->alignment() == 0,
                  "Size must be a multiple of alignment");
@@ -52,9 +53,19 @@ void AnyVector::reserve(std::size_t capacity)
         return;
     }
 
+    // Allocate a new buffer, move the values there and then free the old one.
+    void* data = operator new(capacity* mStride, static_cast<std::align_val_t>(mConstructibleTrait->alignment()),
+                              std::nothrow);
+    CUBOS_ASSERT(data != nullptr, "Vector memory allocation failed");
+    for (std::size_t i = 0; i < mSize; ++i)
+    {
+        mConstructibleTrait->moveConstruct(static_cast<char*>(data) + i * mStride,
+                                           static_cast<char*>(mData) + i * mStride);
+    }
+    operator delete(mData, static_cast<std::align_val_t>(mConstructibleTrait->alignment()));
+
+    mData = data;
     mCapacity = capacity;
-    mData = std::realloc(mData, mStride * mCapacity);
-    CUBOS_ASSERT(mData != nullptr, "Vector memory reallocation failed");
 }
 
 void AnyVector::pushDefault()

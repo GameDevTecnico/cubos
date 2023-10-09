@@ -22,7 +22,8 @@ namespace cubos::core::memory
         ~AnyVector();
 
         /// @brief Constructs with the given element type.
-        /// @note @p elementType must have @ref reflection::ConstructibleTrait.
+        /// @note @p elementType must have @ref reflection::ConstructibleTrait and be
+        /// move constructible.
         /// @param elementType Element type.
         AnyVector(const reflection::Type& elementType);
 
@@ -49,7 +50,6 @@ namespace cubos::core::memory
         void pushCopy(const void* value);
 
         /// @brief Pushes a new move-constructed element to the back of the vector.
-        /// @note Aborts if @ref elementType() is not move-constructible.
         /// @param element Element to move.
         void pushMove(void* value);
 
