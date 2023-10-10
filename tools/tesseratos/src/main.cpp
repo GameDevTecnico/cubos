@@ -1,6 +1,7 @@
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/tools/asset_explorer/plugin.hpp>
+#include <cubos/engine/tools/debug_camera/plugin.hpp>
 #include <cubos/engine/tools/entity_inspector/plugin.hpp>
 #include <cubos/engine/tools/scene_editor/plugin.hpp>
 #include <cubos/engine/tools/settings_inspector/plugin.hpp>
@@ -35,6 +36,7 @@ int main(int argc, char** argv)
     cubos.addPlugin(tools::entityInspectorPlugin);
     cubos.addPlugin(tools::worldInspectorPlugin);
     cubos.addPlugin(tools::assetExplorerPlugin);
+    cubos.addPlugin(tools::debugCameraPlugin);
 
     cubos.startupSystem(mockCamera).tagged("setup");
     cubos.startupSystem(mockSettings).tagged("setup");
