@@ -1,5 +1,5 @@
 /// @file
-/// @brief Class @ref cubos::core::memory::UnorderedBimap.
+/// @brief Class @ref cubos::core::memory::AnyVector.
 /// @ingroup core-memory
 
 #pragma once
