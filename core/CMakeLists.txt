@@ -30,6 +30,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/memory/stream.cpp"
     "src/cubos/core/memory/standard_stream.cpp"
     "src/cubos/core/memory/buffer_stream.cpp"
+    "src/cubos/core/memory/any_value.cpp"
     "src/cubos/core/memory/any_vector.cpp"
 
     "src/cubos/core/reflection/type.cpp"
