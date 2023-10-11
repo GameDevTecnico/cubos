@@ -21,10 +21,16 @@ static void mockCamera(Write<ActiveCameras> camera, Commands cmds)
 }
 
 /// [System]
-static void drawLineSystem(Write<Gizmos> gizmos)
+static void drawSystem(Write<Gizmos> gizmos)
 {
     gizmos->color({0, 0, 1});
     gizmos->drawLine("test line", {0, 0, 0}, {1, 1, 1}, 0);
+
+    gizmos->color({0, 1, 1});
+    gizmos->drawBox("test box", {0.4, 0.4, 0}, {0.6, 0.6, 1}, 0);
+
+    gizmos->color({1, 0, 1});
+    gizmos->drawBox("test box", {0.2, 0.7, 0}, {0.3, 0.1, 0}, 0);
 }
 /// [System]
 
@@ -44,7 +50,7 @@ int main(int argc, char** argv)
     cubos.addPlugin(rendererPlugin);
     cubos.startupSystem(mockCamera);
     cubos.startupSystem(drawStartingLineSystem).tagged("sample.init").after("cubos.gizmos.init");
-    cubos.system(drawLineSystem);
+    cubos.system(drawSystem);
     cubos.run();
 }
 /// [Run]

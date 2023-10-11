@@ -20,6 +20,7 @@ namespace cubos::engine
 
         void color(const glm::vec3& color);
         void drawLine(std::string id, glm::vec3 from, glm::vec3 to, float lifespan = 0);
+        void drawBox(std::string id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0);
 
         void drawQueuedGizmos(DeltaTime deltaTime);
 
@@ -29,6 +30,7 @@ namespace cubos::engine
         glm::vec3 mColor;
         class GizmoBase;
         class LineGizmo;
+        class BoxGizmo;
         std::vector<std::shared_ptr<GizmoBase>> mGizmosVector;
     };
 
