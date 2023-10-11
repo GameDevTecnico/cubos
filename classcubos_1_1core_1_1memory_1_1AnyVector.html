@@ -92,8 +92,8 @@
               <span class="m-doc-wrap-bumper">void <a href="#a8658c20373a33c05f6dc0b9b34576399" class="m-doc">pushCopy</a>(</span><span class="m-doc-wrap">const void* value)</span>
             </dt>
             <dd>Pushes a new copy-constructed element to the back of the vector.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span>
+            <dt id="aafd49aade109794b17c533a93bbb99a1">
+              <span class="m-doc-wrap-bumper">void <a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc-self">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span>
             </dt>
             <dd>Pushes a new move-constructed element to the back of the vector.</dd>
             <dt>
@@ -144,7 +144,7 @@
                 </tr>
               </tbody>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p><code>elementType</code> must have <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">reflection::<wbr />ConstructibleTrait</a>.</p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p><code>elementType</code> must have <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">reflection::<wbr />ConstructibleTrait</a> and be move constructible.</p></aside>
           </div></section>
           <section class="m-doc-details" id="ae4126504a6f7edd8d5189c7d677d87be"><div>
             <h3>
@@ -208,13 +208,6 @@
             </h3>
             <p>Pushes a new copy-constructed element to the back of the vector.</p>
 <aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not copy-constructible.</p></aside>
-          </div></section>
-          <section class="m-doc-details" id="aafd49aade109794b17c533a93bbb99a1"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />memory::<wbr />AnyVector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafd49aade109794b17c533a93bbb99a1" class="m-doc-self">pushMove</a>(</span><span class="m-doc-wrap">void* value)</span></span>
-            </h3>
-            <p>Pushes a new move-constructed element to the back of the vector.</p>
-<aside class="m-note m-info"><h4>Note</h4><p>Aborts if <a href="classcubos_1_1core_1_1memory_1_1AnyVector.html#ae60ce81d1aaa522672d5a248d8585e55" class="m-doc">elementType()</a> is not move-constructible.</p></aside>
           </div></section>
           <section class="m-doc-details" id="aab7d751cc75d24e9d545cc86cef85646"><div>
             <h3>
