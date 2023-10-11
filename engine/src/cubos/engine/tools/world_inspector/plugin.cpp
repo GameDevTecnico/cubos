@@ -20,7 +20,7 @@ static void inspectWorld(Write<World> world)
         {
             ImGui::PushID(n);
 
-            ImGui::BulletText("%s", std::to_string(n).c_str());
+            ImGui::BulletText("%s", std::to_string(entity.index).c_str());
 
             ImGui::SameLine();
             if (ImGui::Button("Select"))
