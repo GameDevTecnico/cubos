@@ -30,7 +30,7 @@ static void drawSystem(Write<Gizmos> gizmos)
     gizmos->drawBox("test box", {0.4, 0.4, 0}, {0.6, 0.6, 1}, 0);
 
     gizmos->color({1, 0, 1});
-    gizmos->drawBox("test box", {0.2, 0.7, 0}, {0.3, 0.1, 0}, 0);
+    gizmos->drawWireBox("test box", {0.2, 0.7, 0}, {0.3, 0.1, 0}, 0);
 }
 /// [System]
 

@@ -21,6 +21,7 @@ namespace cubos::engine
         void color(const glm::vec3& color);
         void drawLine(std::string id, glm::vec3 from, glm::vec3 to, float lifespan = 0);
         void drawBox(std::string id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0);
+        void drawWireBox(std::string id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0);
 
         void drawQueuedGizmos(DeltaTime deltaTime);
 
