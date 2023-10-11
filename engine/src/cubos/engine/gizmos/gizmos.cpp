@@ -76,6 +76,52 @@ private:
     glm::vec3 mPointA;
     glm::vec3 mPointB;
 };
+class Gizmos::BoxGizmo : public Gizmos::GizmoBase
+{
+public:
+    BoxGizmo(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, const glm::vec3& color, float lifespan,
+             RenderDevice& renderDevice, const ShaderPipeline& shaderPipeline)
+        : Gizmos::GizmoBase(id, color, lifespan)
+        , mPointA(corner)
+        , mPointB(oppositeCorner)
+    {
+        vaDesc.elementCount = 1;
+        vaDesc.elements[0].name = "position";
+        vaDesc.elements[0].type = Type::Float;
+        vaDesc.elements[0].size = 3;
+        vaDesc.elements[0].buffer.index = 0;
+        vaDesc.elements[0].buffer.offset = 0;
+        vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
+        vaDesc.shaderPipeline = shaderPipeline;
+
+        float verts[] = {mPointA[0], mPointA[1], mPointA[2], mPointB[0], mPointA[1], mPointA[2],
+                         mPointB[0], mPointA[1], mPointB[2], mPointA[0], mPointA[1], mPointB[2],
+                         mPointA[0], mPointB[1], mPointB[2], mPointA[0], mPointB[1], mPointA[2],
+                         mPointB[0], mPointB[1], mPointA[2], mPointB[0], mPointB[1], mPointB[2]};
+        renderDevice.setShaderPipeline(shaderPipeline);
+        vaDesc.buffers[0] = renderDevice.createVertexBuffer(sizeof(verts), verts, Usage::Static);
+        va = renderDevice.createVertexArray(vaDesc);
+
+        unsigned int indices[] = {// front
+                                  0, 6, 1, 0, 5, 6,
+                                  // right
+                                  1, 7, 2, 1, 6, 7,
+                                  // back
+                                  2, 7, 3, 3, 7, 4,
+                                  // left
+                                  3, 5, 0, 3, 4, 5,
+                                  // bottom
+                                  3, 1, 2, 3, 0, 1,
+                                  // top
+                                  5, 7, 6, 5, 4, 7};
+        ib = renderDevice.createIndexBuffer(sizeof(indices), indices, IndexFormat::UInt, Usage::Static);
+    }
+    void draw(RenderDevice& renderDevice, const ShaderPipeline& shaderPipeline) override;
+
+private:
+    glm::vec3 mPointA;
+    glm::vec3 mPointB;
+};
 
 void Gizmos::init(RenderDevice& renderDevice)
 {
@@ -122,6 +168,12 @@ void Gizmos::drawLine(std::string id, glm::vec3 from, glm::vec3 to, float lifesp
     mGizmosVector.push_back(std::make_shared<LineGizmo>(id, from, to, mColor, lifespan, *mRenderDevice, mPipeline));
 }
 
+void Gizmos::drawBox(std::string id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan)
+{
+    mGizmosVector.push_back(
+        std::make_shared<BoxGizmo>(id, corner, oppositeCorner, mColor, lifespan, *mRenderDevice, mPipeline));
+}
+
 void Gizmos::drawQueuedGizmos(DeltaTime deltaTime)
 {
     std::vector<std::size_t> toRemove;
@@ -145,7 +197,6 @@ void Gizmos::drawQueuedGizmos(DeltaTime deltaTime)
 
 void Gizmos::LineGizmo::draw(RenderDevice& renderDevice, const ShaderPipeline& shaderPipeline)
 {
-
     renderDevice.setVertexArray(va);
 
     auto v = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0.0f));
@@ -157,4 +208,20 @@ void Gizmos::LineGizmo::draw(RenderDevice& renderDevice, const ShaderPipeline& s
     shaderPipeline->getBindingPoint("objColor")->setConstant(mColor);
     renderDevice.setRasterState(renderDevice.createRasterState(RasterStateDesc{}));
     renderDevice.drawLines(0, 2);
+}
+
+void Gizmos::BoxGizmo::draw(RenderDevice& renderDevice, const ShaderPipeline& shaderPipeline)
+{
+    renderDevice.setVertexArray(va);
+    renderDevice.setIndexBuffer(ib);
+
+    auto v = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0.0f));
+    auto p = glm::ortho(-0.5f, 0.5f, -0.5f, 0.5f);
+    auto vp = v * p;
+    auto mvpBuffer = renderDevice.createConstantBuffer(sizeof(glm::mat4), &vp, Usage::Static);
+    shaderPipeline->getBindingPoint("MVP")->bind(mvpBuffer);
+
+    shaderPipeline->getBindingPoint("objColor")->setConstant(mColor);
+    renderDevice.setRasterState(renderDevice.createRasterState(RasterStateDesc{}));
+    renderDevice.drawTrianglesIndexed(0, 36);
 }
