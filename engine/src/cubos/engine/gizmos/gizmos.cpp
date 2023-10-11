@@ -174,6 +174,47 @@ void Gizmos::drawBox(std::string id, glm::vec3 corner, glm::vec3 oppositeCorner,
         std::make_shared<BoxGizmo>(id, corner, oppositeCorner, mColor, lifespan, *mRenderDevice, mPipeline));
 }
 
+void Gizmos::drawWireBox(std::string id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan)
+{
+    // Front
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, corner, glm::vec3{oppositeCorner[0], corner[1], corner[2]},
+                                                        mColor, lifespan, *mRenderDevice, mPipeline));
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, corner, glm::vec3{corner[0], oppositeCorner[1], corner[2]},
+                                                        mColor, lifespan, *mRenderDevice, mPipeline));
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, glm::vec3{oppositeCorner[0], oppositeCorner[1], corner[2]},
+                                                        glm::vec3{corner[0], oppositeCorner[1], corner[2]}, mColor,
+                                                        lifespan, *mRenderDevice, mPipeline));
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, glm::vec3{oppositeCorner[0], oppositeCorner[1], corner[2]},
+                                                        glm::vec3{oppositeCorner[0], corner[1], corner[2]}, mColor,
+                                                        lifespan, *mRenderDevice, mPipeline));
+
+    // Back
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, oppositeCorner,
+                                                        glm::vec3{corner[0], oppositeCorner[1], oppositeCorner[2]},
+                                                        mColor, lifespan, *mRenderDevice, mPipeline));
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, oppositeCorner,
+                                                        glm::vec3{oppositeCorner[0], corner[1], oppositeCorner[2]},
+                                                        mColor, lifespan, *mRenderDevice, mPipeline));
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, glm::vec3{corner[0], corner[1], oppositeCorner[2]},
+                                                        glm::vec3{corner[0], oppositeCorner[1], oppositeCorner[2]},
+                                                        mColor, lifespan, *mRenderDevice, mPipeline));
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, glm::vec3{corner[0], corner[1], oppositeCorner[2]},
+                                                        glm::vec3{oppositeCorner[0], corner[1], oppositeCorner[2]},
+                                                        mColor, lifespan, *mRenderDevice, mPipeline));
+
+    // Sides
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, corner, glm::vec3{corner[0], corner[1], oppositeCorner[2]},
+                                                        mColor, lifespan, *mRenderDevice, mPipeline));
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, glm::vec3{corner[0], oppositeCorner[1], corner[2]},
+                                                        glm::vec3{corner[0], oppositeCorner[1], oppositeCorner[2]},
+                                                        mColor, lifespan, *mRenderDevice, mPipeline));
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, glm::vec3{oppositeCorner[0], corner[1], corner[2]},
+                                                        glm::vec3{oppositeCorner[0], corner[1], oppositeCorner[2]},
+                                                        mColor, lifespan, *mRenderDevice, mPipeline));
+    mGizmosVector.push_back(std::make_shared<LineGizmo>(id, glm::vec3{oppositeCorner[0], oppositeCorner[1], corner[2]},
+                                                        oppositeCorner, mColor, lifespan, *mRenderDevice, mPipeline));
+}
+
 void Gizmos::drawQueuedGizmos(DeltaTime deltaTime)
 {
     std::vector<std::size_t> toRemove;
