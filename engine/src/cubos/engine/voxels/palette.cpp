@@ -100,6 +100,17 @@ uint16_t VoxelPalette::add(const VoxelMaterial& material, float similarity)
     return this->size();
 }
 
+uint16_t VoxelPalette::push(const VoxelMaterial& material)
+{
+    if (this->size() == UINT16_MAX)
+    {
+        CUBOS_FAIL("Cannot add new material: palette is full");
+    }
+
+    mMaterials.push_back(material);
+    return this->size();
+}
+
 void VoxelPalette::merge(const VoxelPalette& palette, float similarity)
 {
     for (uint16_t i = 0; i < palette.size(); ++i)
