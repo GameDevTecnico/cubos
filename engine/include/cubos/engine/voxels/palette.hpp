@@ -80,6 +80,12 @@ namespace cubos::engine
         /// @return Index of the material in the palette (1-based, 0 is empty).
         uint16_t add(const VoxelMaterial& material, float similarity = 1.0F);
 
+        /// @brief Pushes a material to the palette without checking for uniqueness.
+        /// @note If the palette is already at its maximum capacity, this function will abort.
+        /// @param material Material to push.
+        /// @return Size of the palette.
+        uint16_t push(const VoxelMaterial& material);
+
         /// @brief Merges another palette into this one.
         /// @note All materials equal to @ref VoxelMaterial::Empty will be considered empty and may be
         /// overwritten.
