@@ -18,15 +18,16 @@ using cubos::core::gl::VertexArrayDesc;
 using cubos::engine::DeltaTime;
 using cubos::engine::Gizmos;
 
+/// @brief A gizmo to be drawn
 class Gizmos::GizmoBase
 {
 protected:
     const std::string& mId;
     glm::vec3 mColor;
     float mLifespan;
-    VertexArray va;
-    IndexBuffer ib;
-    VertexArrayDesc vaDesc;
+    VertexArray mVa;
+    IndexBuffer mIb;
+    VertexArrayDesc mVaDesc;
 
 public:
     GizmoBase(const std::string& id, glm::vec3 color, float lifespan)
@@ -47,6 +48,7 @@ public:
     virtual ~GizmoBase() = default;
 };
 
+/// @brief A line gizmo to be drawn
 class Gizmos::LineGizmo : public Gizmos::GizmoBase
 {
 public:
@@ -56,19 +58,19 @@ public:
         , mPointA(from)
         , mPointB(to)
     {
-        vaDesc.elementCount = 1;
-        vaDesc.elements[0].name = "position";
-        vaDesc.elements[0].type = Type::Float;
-        vaDesc.elements[0].size = 3;
-        vaDesc.elements[0].buffer.index = 0;
-        vaDesc.elements[0].buffer.offset = 0;
-        vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
-        vaDesc.shaderPipeline = shaderPipeline;
+        mVaDesc.elementCount = 1;
+        mVaDesc.elements[0].name = "position";
+        mVaDesc.elements[0].type = Type::Float;
+        mVaDesc.elements[0].size = 3;
+        mVaDesc.elements[0].buffer.index = 0;
+        mVaDesc.elements[0].buffer.offset = 0;
+        mVaDesc.elements[0].buffer.stride = 3 * sizeof(float);
+        mVaDesc.shaderPipeline = shaderPipeline;
 
         float verts[] = {mPointA[0], mPointA[1], mPointA[2], mPointB[0], mPointB[1], mPointB[2]};
         renderDevice.setShaderPipeline(shaderPipeline);
-        vaDesc.buffers[0] = renderDevice.createVertexBuffer(sizeof(verts), verts, Usage::Static);
-        va = renderDevice.createVertexArray(vaDesc);
+        mVaDesc.buffers[0] = renderDevice.createVertexBuffer(sizeof(verts), verts, Usage::Static);
+        mVa = renderDevice.createVertexArray(mVaDesc);
     }
     void draw(RenderDevice& renderDevice, const ShaderPipeline& shaderPipeline) override;
 
@@ -76,6 +78,8 @@ private:
     glm::vec3 mPointA;
     glm::vec3 mPointB;
 };
+
+/// @brief A box gizmo to be drawn
 class Gizmos::BoxGizmo : public Gizmos::GizmoBase
 {
 public:
@@ -85,22 +89,22 @@ public:
         , mPointA(corner)
         , mPointB(oppositeCorner)
     {
-        vaDesc.elementCount = 1;
-        vaDesc.elements[0].name = "position";
-        vaDesc.elements[0].type = Type::Float;
-        vaDesc.elements[0].size = 3;
-        vaDesc.elements[0].buffer.index = 0;
-        vaDesc.elements[0].buffer.offset = 0;
-        vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
-        vaDesc.shaderPipeline = shaderPipeline;
+        mVaDesc.elementCount = 1;
+        mVaDesc.elements[0].name = "position";
+        mVaDesc.elements[0].type = Type::Float;
+        mVaDesc.elements[0].size = 3;
+        mVaDesc.elements[0].buffer.index = 0;
+        mVaDesc.elements[0].buffer.offset = 0;
+        mVaDesc.elements[0].buffer.stride = 3 * sizeof(float);
+        mVaDesc.shaderPipeline = shaderPipeline;
 
         float verts[] = {mPointA[0], mPointA[1], mPointA[2], mPointB[0], mPointA[1], mPointA[2],
                          mPointB[0], mPointA[1], mPointB[2], mPointA[0], mPointA[1], mPointB[2],
                          mPointA[0], mPointB[1], mPointB[2], mPointA[0], mPointB[1], mPointA[2],
                          mPointB[0], mPointB[1], mPointA[2], mPointB[0], mPointB[1], mPointB[2]};
         renderDevice.setShaderPipeline(shaderPipeline);
-        vaDesc.buffers[0] = renderDevice.createVertexBuffer(sizeof(verts), verts, Usage::Static);
-        va = renderDevice.createVertexArray(vaDesc);
+        mVaDesc.buffers[0] = renderDevice.createVertexBuffer(sizeof(verts), verts, Usage::Static);
+        mVa = renderDevice.createVertexArray(mVaDesc);
 
         unsigned int indices[] = {// front
                                   0, 6, 1, 0, 5, 6,
@@ -114,7 +118,7 @@ public:
                                   3, 1, 2, 3, 0, 1,
                                   // top
                                   5, 7, 6, 5, 4, 7};
-        ib = renderDevice.createIndexBuffer(sizeof(indices), indices, IndexFormat::UInt, Usage::Static);
+        mIb = renderDevice.createIndexBuffer(sizeof(indices), indices, IndexFormat::UInt, Usage::Static);
     }
     void draw(RenderDevice& renderDevice, const ShaderPipeline& shaderPipeline) override;
 
@@ -163,18 +167,18 @@ void Gizmos::color(const glm::vec3& color)
     mColor = color;
 }
 
-void Gizmos::drawLine(std::string id, glm::vec3 from, glm::vec3 to, float lifespan)
+void Gizmos::drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float lifespan)
 {
     mGizmosVector.push_back(std::make_shared<LineGizmo>(id, from, to, mColor, lifespan, *mRenderDevice, mPipeline));
 }
 
-void Gizmos::drawBox(std::string id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan)
+void Gizmos::drawBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan)
 {
     mGizmosVector.push_back(
         std::make_shared<BoxGizmo>(id, corner, oppositeCorner, mColor, lifespan, *mRenderDevice, mPipeline));
 }
 
-void Gizmos::drawWireBox(std::string id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan)
+void Gizmos::drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan)
 {
     // Front
     mGizmosVector.push_back(std::make_shared<LineGizmo>(id, corner, glm::vec3{oppositeCorner[0], corner[1], corner[2]},
@@ -238,10 +242,10 @@ void Gizmos::drawQueuedGizmos(DeltaTime deltaTime)
 
 void Gizmos::LineGizmo::draw(RenderDevice& renderDevice, const ShaderPipeline& shaderPipeline)
 {
-    renderDevice.setVertexArray(va);
+    renderDevice.setVertexArray(mVa);
 
-    auto v = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0.0f));
-    auto p = glm::ortho(-0.5f, 0.5f, -0.5f, 0.5f);
+    auto v = glm::translate(glm::mat4(1.0F), glm::vec3(-1.0F, -1.0F, 0.0F));
+    auto p = glm::ortho(-0.5F, 0.5F, -0.5F, 0.5F);
     auto vp = v * p;
     auto mvpBuffer = renderDevice.createConstantBuffer(sizeof(glm::mat4), &vp, Usage::Static);
     shaderPipeline->getBindingPoint("MVP")->bind(mvpBuffer);
@@ -253,11 +257,11 @@ void Gizmos::LineGizmo::draw(RenderDevice& renderDevice, const ShaderPipeline& s
 
 void Gizmos::BoxGizmo::draw(RenderDevice& renderDevice, const ShaderPipeline& shaderPipeline)
 {
-    renderDevice.setVertexArray(va);
-    renderDevice.setIndexBuffer(ib);
+    renderDevice.setVertexArray(mVa);
+    renderDevice.setIndexBuffer(mIb);
 
-    auto v = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0.0f));
-    auto p = glm::ortho(-0.5f, 0.5f, -0.5f, 0.5f);
+    auto v = glm::translate(glm::mat4(1.0F), glm::vec3(-1.0F, -1.0F, 0.0F));
+    auto p = glm::ortho(-0.5F, 0.5F, -0.5F, 0.5F);
     auto vp = v * p;
     auto mvpBuffer = renderDevice.createConstantBuffer(sizeof(glm::mat4), &vp, Usage::Static);
     shaderPipeline->getBindingPoint("MVP")->bind(mvpBuffer);
