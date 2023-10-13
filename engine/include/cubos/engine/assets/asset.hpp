@@ -169,6 +169,7 @@ namespace cubos::engine
     inline AnyAsset::operator Asset<T>() const
     {
         Asset<T> asset;
+        asset.reflectedId = reflectedId;
         asset.mId = mId;
         asset.mRefCount = mRefCount;
         asset.mVersion = mVersion;
