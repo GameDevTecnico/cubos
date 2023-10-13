@@ -104,6 +104,10 @@
             </dt>
             <dd>Adds a material to the palette, if one not similar enough already exists.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4809595e2241014d8777a2b232475873" class="m-doc">push</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1VoxelMaterial.html" class="m-doc">VoxelMaterial</a>&amp; material) -&gt; uint16_t</span>
+            </dt>
+            <dd>Pushes a material to the palette without checking for uniqueness.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a3ae8b566d36205554e0aa7461729791c" class="m-doc">merge</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>&amp; palette,
               float similarity = 1.0F)</span>
             </dt>
@@ -254,6 +258,30 @@
               </tfoot>
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>Materials equal to <a href="structcubos_1_1engine_1_1VoxelMaterial.html#ab64f094d4018c7341c7612aee61e365f" class="m-doc">VoxelMaterial::<wbr />Empty</a> will be considered empty and may be replaced by the new material.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a4809595e2241014d8777a2b232475873"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint16_t cubos::<wbr />engine::<wbr />VoxelPalette::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4809595e2241014d8777a2b232475873" class="m-doc-self">push</a>(</span><span class="m-doc-wrap">const <a href="structcubos_1_1engine_1_1VoxelMaterial.html" class="m-doc">VoxelMaterial</a>&amp; material)</span></span>
+            </h3>
+            <p>Pushes a material to the palette without checking for uniqueness.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">material</td>
+                  <td>Material to push.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Size of the palette.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>If the palette is already at its maximum capacity, this function will abort.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a3ae8b566d36205554e0aa7461729791c"><div>
             <h3>
