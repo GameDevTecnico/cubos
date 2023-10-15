@@ -884,7 +884,7 @@ namespace cubos::core::gl
         /// @param stencil Stencil value.
         virtual void clearStencil(int stencil) = 0;
 
-        /// @brief Draws Lines.
+        /// @brief Draws lines.
         /// @param offset Index of the first vertex to be drawn.
         /// @param count Number of vertices that will be drawn.
         virtual void drawLines(std::size_t offset, std::size_t count) = 0;

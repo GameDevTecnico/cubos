@@ -8,6 +8,7 @@ multiple plugins of the engine:
 - @subpage examples-engine-hello-cubos - @copybrief examples-engine-hello-cubos
 - @subpage examples-engine-settings - @copybrief examples-engine-settings
 - @subpage examples-engine-renderer - @copybrief examples-engine-renderer
+- @subpage examples-engine-gizmos - @copybrief examples-engine-gizmos
 - @subpage examples-engine-scene - @copybrief examples-engine-scene
 - @subpage examples-engine-input - @copybrief examples-engine-input
 - @subpage examples-engine-assets - @copybrief examples-engine-assets

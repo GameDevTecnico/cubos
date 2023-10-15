@@ -3,30 +3,25 @@
 /// @ingroup gizmos-plugin
 
 #pragma once
+
 #include <vector>
 
-#include <glm/glm.hpp>
+#include <glm/vec3.hpp>
 
 #include <cubos/core/gl/render_device.hpp>
 
 #include <cubos/engine/cubos.hpp>
 
-using cubos::core::gl::RenderDevice;
-using cubos::core::gl::ShaderPipeline;
-using cubos::engine::DeltaTime;
-
 namespace cubos::engine
 {
-    /// @brief Resource which draws gizmos.
+    class GizmosRenderer;
+
+    /// @brief Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.
     ///
     /// @ingroup gizmos-plugin
     class Gizmos final
     {
     public:
-        /// @brief Initiates the Gizmos resource.
-        /// @param renderDevice Active render device.
-        void init(RenderDevice& renderDevice);
-
         /// @brief Sets the color to be used when drawing any subsequent gizmos.
         /// @param color Color to be used.
         void color(const glm::vec3& color);
@@ -37,7 +32,7 @@ namespace cubos::engine
         /// @param to The other end of the line to be drawn.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
-        void drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float lifespan = 0);
+        void drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float lifespan = 0.0F);
 
         /// @brief Draws a filled box gizmo.
         /// @param id Identifier of the gizmo.
@@ -45,7 +40,7 @@ namespace cubos::engine
         /// @param oppositeCorner The opposite corner of the box to be drawn.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
-        void drawBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0);
+        void drawBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0.0F);
 
         /// @brief Draws a wireframe box gizmo.
         /// @param id Identifier of the gizmo.
@@ -53,20 +48,34 @@ namespace cubos::engine
         /// @param oppositeCorner The opposite corner of the box to be drawn.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
-        void drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0);
+        void drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0.0F);
 
-        /// @brief Draws all the gizmos that were called to be drawn.
-        /// @param deltaTime Resource holding the time since the previous frame.
-        void drawQueuedGizmos(DeltaTime deltaTime);
+        /// @brief Class that describes a type of gizmo
+        class Gizmo
+        {
+        public:
+            virtual ~Gizmo() = default;
+
+            Gizmo(const std::string& id, glm::vec3 color, float lifespan);
+
+            /// @brief Draws the gizmo to screen.
+            /// @param renderer Renderer.
+            virtual void draw(GizmosRenderer& renderer) = 0;
+
+            /// @brief Decreases the time the gizmo has left before it is destroyed.
+            /// @param delta Seconds since the last frame.
+            bool decreaseLifespan(float delta);
+
+        protected:
+            const std::string& mId; ///< Gizmo identifier
+            glm::vec3 mColor;       ///< Color of the gizmo
+            float mLifespan;        ///< Time in seconds the gizmo has left to live
+        };
+
+        std::vector<std::shared_ptr<Gizmo>> gizmos; ///< Queued gizmos to be drawn.
 
     private:
-        ShaderPipeline mPipeline;    ///< Shader pipeline to be used when drawing gizmos
-        RenderDevice* mRenderDevice; ///< Active render device
-        glm::vec3 mColor;            ///< Currently set color
-        class GizmoBase;
-        class LineGizmo;
-        class BoxGizmo;
-        std::vector<std::shared_ptr<GizmoBase>> mGizmosVector; ///< Queued gizmos to be drawn.
+        glm::vec3 mColor; ///< Currently set color
     };
 
 } // namespace cubos::engine

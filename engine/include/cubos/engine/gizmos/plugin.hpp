@@ -14,11 +14,20 @@ namespace cubos::engine
 {
     /// @defgroup gizmos-plugin Gizmos
     /// @ingroup engine
-    /// @brief Allows gizmos to be drawn.
+    /// @brief Used to draw gizmos helpful for debugging and tools.
     ///
     /// ## Resources
-    /// - @ref Gizmos - stores gizmos information.
+    /// - @ref Gizmos - used to queue gizmo draw commands.
     ///
+    /// ## Startup tags
+    /// - `cubos.gizmos.init` - the gizmos renderer is initialized, after `cubos.window.init`
+    ///
+    /// ## Tags
+    /// - `cubos.gizmos.draw` - queued gizmos are rendered to the window, after `cubos.renderer.draw` and
+    ///   before `cubos.window.render`.
+    ///
+    /// ## Dependencies
+    /// - @ref window-plugin
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class.
