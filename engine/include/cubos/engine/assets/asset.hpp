@@ -70,6 +70,11 @@ namespace cubos::engine
         /// @param other Handle to move.
         AnyAsset& operator=(AnyAsset&& other) noexcept;
 
+        /// @brief Equality operator for comparing two AnyAsset objects.
+        /// @param other The other AnyAsset to compare.
+        /// @return True if the two AnyAsset objects have the same UUID , otherwise false.
+        bool operator==(const AnyAsset& other) const;
+
         /// @brief Gets the version of the asset last seen by this handle.
         /// @return Asset version.
         int getVersion() const;

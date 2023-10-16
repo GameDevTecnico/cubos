@@ -89,6 +89,11 @@ AnyAsset& AnyAsset::operator=(AnyAsset&& other) noexcept
     return *this;
 }
 
+bool AnyAsset::operator==(const AnyAsset& other) const
+{
+    return this->getId() == other.getId();
+}
+
 int AnyAsset::getVersion() const
 {
     return reflectedId == mId ? mVersion : 0;
