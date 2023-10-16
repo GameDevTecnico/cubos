@@ -37,6 +37,9 @@ namespace cubos::engine
     class VoxelPalette final
     {
     public:
+        /// @brief Used to iterate over materials on the palette.
+        class Iterator;
+
         CUBOS_REFLECT;
 
         ~VoxelPalette() = default;
@@ -93,6 +96,14 @@ namespace cubos::engine
         /// @param similarity Minimum similarity for two materials to be merged.
         void merge(const VoxelPalette& palette, float similarity = 1.0F);
 
+        /// @brief Returns an iterator to the first material.
+        /// @return Iterator.
+        Iterator begin();
+
+        /// @brief Returns an iterator to the last material.
+        /// @return Iterator.
+        Iterator end();
+
     private:
         friend void core::data::old::serialize(core::data::old::Serializer& /*serializer*/,
                                                const VoxelPalette& /*palette*/, const char* /*name*/);
@@ -100,5 +111,18 @@ namespace cubos::engine
                                                  VoxelPalette& /*palette*/);
 
         std::vector<VoxelMaterial> mMaterials; ///< Materials in the palette.
+    };
+
+    /// @brief Used to iterate over materials on the palette.
+    class VoxelPalette::Iterator
+    {
+    public:
+        Iterator(std::vector<VoxelMaterial>::iterator it);
+        Iterator& operator++();
+        VoxelMaterial& operator*();
+        bool operator==(const Iterator& other) const;
+
+    private:
+        std::vector<VoxelMaterial>::iterator mIter;
     };
 } // namespace cubos::engine
