@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/renderer/plugin.hpp file | CUBOS.</title>
+  <title>cubos::engine::ActiveVoxelPalette struct | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,55 +44,32 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_87a7847ee77970235330560d79c37ce0.html">renderer</a>/</span>plugin.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>ActiveVoxelPalette <span class="m-thin">struct</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="renderer_2plugin_8hpp.html">&lt;engine/renderer/plugin.hpp&gt;</a></div>
         </h1>
-        <p>Plugin entry point, resource <a href="structcubos_1_1engine_1_1ActiveCameras.html" class="m-doc">cubos::<wbr />engine::<wbr />ActiveCameras</a> and components <a href="structcubos_1_1engine_1_1RenderableGrid.html" class="m-doc">cubos::<wbr />engine::<wbr />RenderableGrid</a> and <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">cubos::<wbr />engine::<wbr />Camera</a>.</p>
+        <p>Resource which holds an asset handle to the currently active palette.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
-            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1RenderableGrid.html" class="m-doc">cubos::engine::RenderableGrid</a>
+            <dt id="ad056da89093ed1cdc67d3571ae67fc1b">
+              <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>&gt; <a href="#ad056da89093ed1cdc67d3571ae67fc1b" class="m-doc-self">asset</a>
             </dt>
-            <dd>Component which makes a voxel grid be rendered by the renderer plugin.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1ActiveCameras.html" class="m-doc">cubos::engine::ActiveCameras</a>
+            <dd><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a> handle to the currently active palette.</dd>
+            <dt id="a3570a55c289958480a3296bbd5e0429e">
+              <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;<a href="classcubos_1_1engine_1_1VoxelPalette.html" class="m-doc">VoxelPalette</a>&gt; <a href="#a3570a55c289958480a3296bbd5e0429e" class="m-doc-self">prev</a>
             </dt>
-            <dd>Resource which identifies the camera entities to be used by the renderer.</dd>
-            <dt>
-              struct <a href="structcubos_1_1engine_1_1ActiveVoxelPalette.html" class="m-doc">cubos::engine::ActiveVoxelPalette</a>
-            </dt>
-            <dd>Resource which holds an asset handle to the currently active palette.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__renderer-plugin.html#ga5e2f1e278c0da877790b407a535d665b" class="m-doc">rendererPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Previous asset handle save in order to check if asset changed later. TODO: ECS should have a .changed function to make this process easier (#273).</dd>
           </dl>
         </section>
       </div>
