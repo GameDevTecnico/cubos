@@ -77,6 +77,11 @@
               class <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>
             </dt>
             <dd>Handle to an asset of a specific type.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;<a href="namespacecubos_1_1core_1_1reflection.html#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">core::<wbr />reflection::<wbr />Reflectable</a> T&gt;</div>
+              class <a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>
+            </dt>
+            <dd>Handle to an asset of a specific type.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -120,6 +125,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a901402a29fe1cedb054dbddba41b9f9e" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp;&amp; other) -&gt; <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Overwrites this handle with the given handle.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3274531b8cde1bfc38ad28c01f830987" class="m-doc">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; other) const -&gt; bool</span>
+            </dt>
+            <dd>Equality operator for comparing two <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> objects.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a6c5649d00c1699fe9f32e89e3378bf83" class="m-doc">getVersion</a>(</span><span class="m-doc-wrap">) const -&gt; int</span>
             </dt>
@@ -288,6 +297,29 @@
                   <td>Handle to move.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3274531b8cde1bfc38ad28c01f830987"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />AnyAsset::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3274531b8cde1bfc38ad28c01f830987" class="m-doc-self">operator==</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; other) const</span></span>
+            </h3>
+            <p>Equality operator for comparing two <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> objects.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>The other <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> to compare.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the two <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a> objects have the same UUID , otherwise false.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="a6c5649d00c1699fe9f32e89e3378bf83"><div>
