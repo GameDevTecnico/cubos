@@ -119,6 +119,38 @@ void VoxelPalette::merge(const VoxelPalette& palette, float similarity)
     }
 }
 
+VoxelPalette::Iterator::Iterator(std::vector<VoxelMaterial>::iterator it)
+    : mIter(it)
+{
+}
+
+// Define the iterator operations
+VoxelPalette::Iterator& VoxelPalette::Iterator::operator++()
+{
+    ++mIter;
+    return *this;
+}
+
+VoxelMaterial& VoxelPalette::Iterator::operator*()
+{
+    return *mIter;
+}
+
+bool VoxelPalette::Iterator::operator==(const Iterator& other) const
+{
+    return mIter == other.mIter;
+}
+
+VoxelPalette::Iterator VoxelPalette::begin()
+{
+    return {mMaterials.begin()};
+}
+
+VoxelPalette::Iterator VoxelPalette::end()
+{
+    return {mMaterials.end()};
+}
+
 void cubos::core::data::old::serialize(Serializer& serializer, const VoxelPalette& palette, const char* name)
 {
     // Count non-empty materials.
