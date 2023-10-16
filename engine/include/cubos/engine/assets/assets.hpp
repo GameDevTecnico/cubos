@@ -176,6 +176,18 @@ namespace cubos::engine
         /// @return Whether the version was updated.
         bool update(AnyAsset& handle) const;
 
+        /// @brief Updates the given handle to the latest version of the asset.
+        ///
+        /// Can be used to implement hot-reloading.
+        ///
+        /// @param handle Handle to update.
+        /// @return Whether the version was updated.
+        template <typename T>
+        bool update(Asset<T>& handle) const
+        {
+            return update(static_cast<AnyAsset&>(handle));
+        }
+
         /// @brief Unloads the given asset. Can be used to force assets to be reloaded.
         /// @param handle Handle to unload.
         void invalidate(const AnyAsset& handle);

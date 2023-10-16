@@ -101,6 +101,22 @@ static void frameEnvironment(Write<RendererFrame> frame, Read<RendererEnvironmen
     frame->skyGradient(env->skyGradient[0], env->skyGradient[1]);
 }
 
+static void checkPaletteUpdateSystem(Write<Assets> assets, Write<Renderer> renderer,
+                                     Write<ActiveVoxelPalette> activePalette)
+{
+    if (activePalette->asset.isNull())
+    {
+        return;
+    }
+
+    if (assets->update(activePalette->asset) || activePalette->prev != activePalette->asset)
+    {
+        auto paletteRead = assets->read(activePalette->asset);
+        (*renderer)->setPalette(*paletteRead);
+        activePalette->prev = activePalette->asset;
+    }
+}
+
 /// @brief Splits the viewport recursively for the given cameras.
 /// @param position Viewport position.
 /// @param size Viewport size.
@@ -187,6 +203,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.addResource<Renderer>();
     cubos.addResource<ActiveCameras>();
     cubos.addResource<RendererEnvironment>();
+    cubos.addResource<ActiveVoxelPalette>();
 
     cubos.addComponent<RenderableGrid>();
     cubos.addComponent<Camera>();
@@ -204,6 +221,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.system(frameDirectionalLights).tagged("cubos.renderer.frame");
     cubos.system(framePointLights).tagged("cubos.renderer.frame");
     cubos.system(frameEnvironment).tagged("cubos.renderer.frame");
+    cubos.system(checkPaletteUpdateSystem).tagged("cubos.renderer.frame");
     cubos.system(draw).tagged("cubos.renderer.draw");
     cubos.system(resize).after("cubos.window.poll").before("cubos.renderer.draw");
 }

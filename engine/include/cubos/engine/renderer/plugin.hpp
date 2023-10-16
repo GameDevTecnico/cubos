@@ -43,6 +43,7 @@ namespace cubos::engine
     /// - @ref RendererFrame - holds the current frame information.
     /// - @ref RendererEnvironment - holds the environment information (ambient light, sky gradient).
     /// - @ref ActiveCameras - holds the entities which represents the active cameras.
+    /// - @ref ActiveVoxelPalette - holds an asset handle to the currently active palette.
     ///
     /// ## Components
     /// - @ref RenderableGrid - a grid to be rendered.
@@ -84,6 +85,18 @@ namespace cubos::engine
         /// the screen is split. At most, 4 cameras are supported at the same time.
         /// @note These entities must have @ref Camera @ref LocalToWorld components.
         core::ecs::Entity entities[4];
+    };
+
+    /// @brief Resource which holds an asset handle to the currently active palette.
+    /// @ingroup renderer-plugin
+    struct ActiveVoxelPalette
+    {
+        /// @brief Asset handle to the currently active palette.
+        Asset<VoxelPalette> asset;
+
+        /// @brief Previous asset handle save in order to check if asset changed later.
+        /// @todo ECS should have a .changed function to make this process easier (#273).
+        Asset<VoxelPalette> prev;
     };
 
     /// @brief Plugin entry function.
