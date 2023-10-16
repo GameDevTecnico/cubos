@@ -146,6 +146,11 @@
             </dt>
             <dd>Updates the given handle to the latest version of the asset.</dd>
             <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa39fdd2b7a46f2405d0c744a01813e1a" class="m-doc">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt;&amp; handle) const -&gt; bool</span>
+            </dt>
+            <dd>Updates the given handle to the latest version of the asset.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ab7dcff382baac0d80a3d69239277501a" class="m-doc">invalidate</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle)</span>
             </dt>
             <dd>Unloads the given asset. Can be used to force assets to be reloaded.</dd>
@@ -468,6 +473,33 @@
           <section class="m-doc-details" id="a28a7adfb0a711ec3cc5a309b597030ba"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28a7adfb0a711ec3cc5a309b597030ba" class="m-doc-self">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">AnyAsset</a>&amp; handle) const</span></span>
+            </h3>
+            <p>Updates the given handle to the latest version of the asset.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">handle</td>
+                  <td>Handle to update.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the version was updated.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Can be used to implement hot-reloading.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa39fdd2b7a46f2405d0c744a01813e1a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Assets::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa39fdd2b7a46f2405d0c744a01813e1a" class="m-doc-self">update</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Asset.html" class="m-doc">Asset</a>&lt;T&gt;&amp; handle) const</span></span>
             </h3>
             <p>Updates the given handle to the latest version of the asset.</p>
             <table class="m-table m-fullwidth m-flat">
