@@ -152,14 +152,15 @@ namespace cubos::engine
         ///
         /// @tparam T Type of the asset data.
         /// @param handle Handle to get the asset data for.
+        /// @param incVersion Whether to increase the asset's version.
         /// @return Reference to the asset data.
         template <typename T>
-        inline AssetWrite<T> write(Asset<T> handle)
+        inline AssetWrite<T> write(Asset<T> handle, bool incVersion = true)
         {
             // Create a strong handle to the asset, so that the asset starts loading if it isn't already.
             auto strong = this->load(handle);
             auto lock = this->lockWrite(strong);
-            auto data = static_cast<T*>(this->access(strong, typeid(T), lock, true));
+            auto data = static_cast<T*>(this->access(strong, typeid(T), lock, incVersion));
             return AssetWrite<T>(*data, std::move(lock));
         }
 
