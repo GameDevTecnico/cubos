@@ -33,6 +33,12 @@ For the purposes of this sample we can simply use an hardcoded reference to the 
 
 @snippet input/main.cpp Setting the Bindings
 
+To utilize the bindings, loading them is essential. This can be accomplished by establishing two startup systems: one to configure the `assets.io.path` path and the other to read from the asset and establish the required bindings.
+
+@snippet input/main.cpp Systems to load bindings
+
+@snippet input/main.cpp Loading the bindings
+
 Getting the input is done through the @ref cubos::engine::Input resource.
 What this sample does is show in order, a series of prompt to showcase the different functionalities of the Input plugin.
 For this, it keeps a `state` integer that indicates the current prompt.

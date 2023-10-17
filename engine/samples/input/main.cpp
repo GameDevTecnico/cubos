@@ -175,6 +175,7 @@ static void update(Read<Input> input, Read<Window> window, Write<State> state, W
     }
 }
 
+/// [Loading the bindings]
 static void config(Write<Settings> settings)
 {
     settings->setString("assets.io.path", SAMPLE_ASSETS_FOLDER);
@@ -186,6 +187,7 @@ static void init(Read<Assets> assets, Write<Input> input)
     input->bind(*bindings);
     CUBOS_INFO("Loaded bindings: {}", Debug(input->bindings().at(0)));
 }
+/// [Loading the bindings]
 
 int main()
 {
@@ -197,8 +199,10 @@ int main()
 
     cubos.addResource<State>();
 
+    /// [Systems to load bindings]
     cubos.startupSystem(config).tagged("cubos.settings");
     cubos.startupSystem(init).tagged("cubos.assets");
+    /// [Systems to load bindings]
 
     cubos.system(update).after("cubos.input.update");
 
