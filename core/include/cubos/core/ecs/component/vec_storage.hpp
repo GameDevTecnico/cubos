@@ -16,8 +16,8 @@ namespace cubos::core::ecs
     {
     public:
         void insert(uint32_t index, void* value) override;
-        T* get(uint32_t index) override;
-        const T* get(uint32_t index) const override;
+        void* get(uint32_t index) override;
+        const void* get(uint32_t index) const override;
         void erase(uint32_t index) override;
 
     private:
@@ -40,13 +40,13 @@ namespace cubos::core::ecs
     }
 
     template <typename T>
-    T* VecStorage<T>::get(uint32_t index)
+    void* VecStorage<T>::get(uint32_t index)
     {
         return &mData[index];
     }
 
     template <typename T>
-    const T* VecStorage<T>::get(uint32_t index) const
+    const void* VecStorage<T>::get(uint32_t index) const
     {
         return &mData[index];
     }

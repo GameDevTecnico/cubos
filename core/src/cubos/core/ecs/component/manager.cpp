@@ -62,6 +62,16 @@ void ComponentManager::removeAll(uint32_t id)
     }
 }
 
+IStorage* ComponentManager::storage(std::size_t id)
+{
+    return mEntries.at(id).storage.get();
+}
+
+const IStorage* ComponentManager::storage(std::size_t id) const
+{
+    return mEntries.at(id).storage.get();
+}
+
 ComponentManager::Entry::Entry(std::unique_ptr<IStorage> storage)
     : storage(std::move(storage))
 {
