@@ -17,7 +17,7 @@ namespace cubos::core::ecs
 {
     /// @brief Collection of entities and their respective components.
     ///
-    /// Blueprints are in a way the 'Prefab' of @b CUBOS. They act as tiny @ref World which can
+    /// Blueprints are in a way the 'Prefab' of @b CUBOS. They act as a tiny @ref World which can
     /// then be spawned into an actual @ref World, as many times as needed.
     ///
     /// When a blueprint is spawned, all of its components are scanned using the @ref
@@ -47,7 +47,7 @@ namespace cubos::core::ecs
 
         /// @brief Move constructs.
         /// @param other Blueprint to move from.
-        Blueprint(Blueprint&& other);
+        Blueprint(Blueprint&& other) noexcept;
 
         /// @brief Creates a new entity in the blueprint and returns it.
         ///

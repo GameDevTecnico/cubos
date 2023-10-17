@@ -17,7 +17,7 @@ using cubos::core::reflection::Type;
 
 Blueprint::Blueprint() = default;
 
-Blueprint::Blueprint(Blueprint&& other) = default;
+Blueprint::Blueprint(Blueprint&& other) noexcept = default;
 
 Entity Blueprint::create(std::string name)
 {
