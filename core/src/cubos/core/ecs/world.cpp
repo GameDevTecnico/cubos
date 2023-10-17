@@ -23,6 +23,16 @@ bool World::isAlive(Entity entity) const
     return mEntityManager.isAlive(entity);
 }
 
+World::Components World::components(Entity entity)
+{
+    return Components{*this, entity};
+}
+
+World::ConstComponents World::components(Entity entity) const
+{
+    return ConstComponents{*this, entity};
+}
+
 data::old::Package World::pack(Entity entity, data::old::Context* context) const
 {
     CUBOS_ASSERT(this->isAlive(entity), "Entity is not alive");
@@ -90,4 +100,44 @@ World::Iterator World::begin() const
 World::Iterator World::end() const
 {
     return mEntityManager.end();
+}
+
+World::Components::Components(World& world, Entity entity)
+    : mWorld{world}
+    , mEntity{entity}
+{
+    CUBOS_ASSERT(world.isAlive(entity));
+}
+
+bool World::Components::has(const reflection::Type& type) const
+{
+    std::size_t componentId = mWorld.mComponentManager.getID(type);
+    return mWorld.mEntityManager.getMask(mEntity).test(componentId);
+}
+
+void* World::Components::get(const reflection::Type& type)
+{
+    CUBOS_ASSERT(this->has(type));
+    std::size_t componentId = mWorld.mComponentManager.getID(type);
+    return mWorld.mComponentManager.storage(componentId)->get(mEntity.index);
+}
+
+World::ConstComponents::ConstComponents(const World& world, Entity entity)
+    : mWorld{world}
+    , mEntity{entity}
+{
+    CUBOS_ASSERT(world.isAlive(entity));
+}
+
+bool World::ConstComponents::has(const reflection::Type& type) const
+{
+    std::size_t componentId = mWorld.mComponentManager.getID(type);
+    return mWorld.mEntityManager.getMask(mEntity).test(componentId);
+}
+
+const void* World::ConstComponents::get(const reflection::Type& type) const
+{
+    CUBOS_ASSERT(this->has(type));
+    std::size_t componentId = mWorld.mComponentManager.getID(type);
+    return mWorld.mComponentManager.storage(componentId)->get(mEntity.index);
 }

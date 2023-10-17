@@ -12,6 +12,7 @@
 #include <cubos/core/ecs/entity/manager.hpp>
 #include <cubos/core/ecs/resource/manager.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::ecs
 {
@@ -29,6 +30,12 @@ namespace cubos::core::ecs
     public:
         /// @brief Used to iterate over all entities in a world.
         using Iterator = EntityManager::Iterator;
+
+        /// @brief Used to access the components in an entity.
+        class Components;
+
+        /// @brief Used to immutably access the components in an entity.
+        class ConstComponents;
 
         /// @brief Constructs with the given @p initialCapacity.
         /// @param initialCapacity How many entities to reserve space for.
@@ -95,12 +102,16 @@ namespace cubos::core::ecs
         template <typename... ComponentTypes>
         void remove(Entity entity);
 
-        /// @brief Checks if an entity has a component.
-        /// @tparam T Component type.
-        /// @param entity Entity identifier.
-        /// @return Whether the entity has the component.
-        template <typename T>
-        bool has(Entity entity) const;
+        /// @brief Creates a components view for the given entity.
+        ///
+        /// The given @p entity must be @ref isAlive "alive".
+        ///
+        /// @param entity Entity.
+        /// @return Components view.
+        Components components(Entity entity);
+
+        /// @copydoc components(Entity)
+        ConstComponents components(Entity entity) const;
 
         /// @brief Creates a package from the components of an entity.
         /// @param entity Entity identifier.
@@ -136,6 +147,102 @@ namespace cubos::core::ecs
         ResourceManager mResourceManager;
         EntityManager mEntityManager;
         ComponentManager mComponentManager;
+    };
+
+    class World::Components
+    {
+    public:
+        /// @brief Constructs.
+        /// @param world World.
+        /// @param entity Entity.
+        Components(World& world, Entity entity);
+
+        /// @brief Checks if the given component is present.
+        /// @param type Component type.
+        /// @return Whether the component is present.
+        bool has(const reflection::Type& type) const;
+
+        /// @brief Checks if the given component is present.
+        /// @tparam T Component type.
+        /// @return Whether the component is present.
+        template <reflection::Reflectable T>
+        bool has() const
+        {
+            return this->has(reflection::reflect<T>());
+        }
+
+        /// @brief Returns a pointer to the component with the given type.
+        ///
+        /// The entity must @ref has(const reflection::Type&) "have" a component with the given
+        /// @p type.
+        ///
+        /// @param type Component type.
+        /// @return Pointer to component.
+        void* get(const reflection::Type& type);
+
+        /// @brief Returns a pointer to the component with the given type.
+        ///
+        /// The entity must @ref has() "have" a component of the type @p T.
+        ///
+        /// @tparam T Component type.
+        /// @return Reference to component.
+        template <reflection::Reflectable T>
+        T& get()
+        {
+            return *static_cast<T*>(this->get(reflection::reflect<T>()));
+        }
+
+    private:
+        World& mWorld;
+        Entity mEntity;
+    };
+
+    class World::ConstComponents
+    {
+    public:
+        /// @brief Constructs.
+        /// @param world World.
+        /// @param entity Entity.
+        ConstComponents(const World& world, Entity entity);
+
+        /// @brief Checks if the given component is present.
+        /// @param type Component type.
+        /// @return Whether the component is present.
+        bool has(const reflection::Type& type) const;
+
+        /// @brief Checks if the given component is present.
+        /// @tparam T Component type.
+        /// @return Whether the component is present.
+        template <reflection::Reflectable T>
+        bool has() const
+        {
+            return this->has(reflection::reflect<T>());
+        }
+
+        /// @brief Returns a pointer to the component with the given type.
+        ///
+        /// The entity must @ref has(const reflection::Type&) "have" a component with the given
+        /// @p type.
+        ///
+        /// @param type Component type.
+        /// @return Pointer to component.
+        const void* get(const reflection::Type& type) const;
+
+        /// @brief Returns a pointer to the component with the given type.
+        ///
+        /// The entity must @ref has() "have" a component of the type @p T.
+        ///
+        /// @tparam T Component type.
+        /// @return Reference to component.
+        template <reflection::Reflectable T>
+        const T& get() const
+        {
+            return *static_cast<const T*>(this->get(reflection::reflect<T>()));
+        }
+
+    private:
+        const World& mWorld;
+        Entity mEntity;
     };
 
     // Implementation.
@@ -246,18 +353,5 @@ namespace cubos::core::ecs
         std::string componentNames[] = {"'" + std::string{getComponentName<ComponentTypes>().value()} + "'" ...};
         CUBOS_DEBUG("Removed components {} from entity {}", fmt::join(componentNames, ", "), entity.index);
 #endif
-    }
-
-    template <typename T>
-    bool World::has(Entity entity) const
-    {
-        if (!mEntityManager.isValid(entity))
-        {
-            CUBOS_ERROR("Entity {} doesn't exist!", entity.index);
-            return false;
-        }
-
-        std::size_t componentId = mComponentManager.getID<T>();
-        return mEntityManager.getMask(entity).test(componentId);
     }
 } // namespace cubos::core::ecs

@@ -30,6 +30,16 @@ namespace cubos::core::ecs
         /// @param index Index of the value to be removed.
         virtual void erase(uint32_t index) = 0;
 
+        /// @brief Gets a value from the storage.
+        /// @param index Index of the value to be retrieved.
+        /// @return Pointer to the value.
+        virtual void* get(uint32_t index) = 0;
+
+        /// @brief Gets a value from the storage.
+        /// @param index Index of the value to be retrieved.
+        /// @return Pointer to the value.
+        virtual const void* get(uint32_t index) const = 0;
+
         /// @brief Packages a value. If the value doesn't exist, undefined behavior will occur.
         /// @param index Index of the value to package.
         /// @param context Optional context used for serialization.
@@ -58,21 +68,11 @@ namespace cubos::core::ecs
         /// @brief Component type.
         using Type = T;
 
-        /// @brief Gets a value from the storage.
-        /// @param index Index of the value to be retrieved.
-        /// @return Pointer to the value.
-        virtual T* get(uint32_t index) = 0;
-
-        /// @brief Gets a value from the storage.
-        /// @param index Index of the value to be retrieved.
-        /// @return Pointer to the value.
-        virtual const T* get(uint32_t index) const = 0;
-
         // Implementation.
 
         inline data::old::Package pack(uint32_t index, data::old::Context* context) const override
         {
-            return data::old::Package::from(*this->get(index), context);
+            return data::old::Package::from(*static_cast<const T*>(this->get(index)), context);
         }
 
         inline bool unpack(uint32_t index, const data::old::Package& package, data::old::Context* context) override
