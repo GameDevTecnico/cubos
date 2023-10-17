@@ -135,9 +135,11 @@ void spawner(ecs::Commands cmds)
     cmds.create(Position{0, 15, 7}, Velocity{0, 4, 1});
     cmds.create(Position{0, 12, 7}, Velocity{0, 5, 1});
 
-    ecs::Blueprint epicBlueprint;
-    ecs::Entity main = epicBlueprint.create("main", Position{0, 0, 0}, Velocity{0, 0, 0});
-    epicBlueprint.create("sub", Parent{main});
+    ecs::Blueprint epicBlueprint{};
+    auto main = epicBlueprint.create("main");
+    epicBlueprint.add(main, Position{0, 0, 0}, Velocity{0, 0, 0});
+    auto sub = epicBlueprint.create("sub");
+    epicBlueprint.add(sub, Parent{main});
 
     cmds.spawn(epicBlueprint).add("main", Position{1, 1, 1});
     cmds.spawn(epicBlueprint).add("main", Position{2, 2, 2});

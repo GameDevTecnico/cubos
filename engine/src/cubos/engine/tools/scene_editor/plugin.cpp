@@ -81,7 +81,7 @@ static void openScene(const Asset<Scene>& sceneToSpawn, Commands& commands, cons
     closeScene(commands, scene);
     auto sceneRead = assets.read(sceneToSpawn);
     auto builder = commands.spawn(sceneRead->blueprint);
-    for (const auto& [entity, name] : sceneRead->blueprint.getMap())
+    for (const auto& [entity, name] : sceneRead->blueprint.bimap())
     {
         placeEntity(name, builder.entity(name), scene);
     }

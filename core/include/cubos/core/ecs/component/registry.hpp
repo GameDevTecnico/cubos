@@ -8,6 +8,7 @@
 
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/ecs/blueprint.hpp>
+#include <cubos/core/ecs/component/storage.hpp>
 #include <cubos/core/memory/type_map.hpp>
 
 namespace cubos::core::ecs
@@ -98,7 +99,7 @@ namespace cubos::core::ecs
                         return false;
                     }
 
-                    blueprint.add(id, comp);
+                    blueprint.add(id, std::move(comp));
                     return true;
                 },
             .storageCreator =

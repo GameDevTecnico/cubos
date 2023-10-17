@@ -61,6 +61,24 @@ CommandBuffer::~CommandBuffer()
     this->abort();
 }
 
+void CommandBuffer::add(Entity entity, const reflection::Type& type, void* component)
+{
+    std::lock_guard<std::mutex> lock(mMutex);
+
+    Entity::Mask& mask = mAdded[entity];
+    mChanged.insert(entity);
+
+    if (!mBuffers.contains(type))
+    {
+        mBuffers.insert(type, {});
+    }
+
+    std::size_t componentID = mWorld.mComponentManager.getID(type);
+    mask.set(componentID);
+    mBuffers.at(type).components.erase(entity);
+    mBuffers.at(type).components.emplace(entity, memory::AnyValue::moveConstruct(type, component));
+}
+
 void CommandBuffer::destroy(Entity entity)
 {
     std::lock_guard<std::mutex> lock(mMutex);
@@ -70,19 +88,14 @@ void CommandBuffer::destroy(Entity entity)
 
 BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
 {
-    data::old::SerializationMap<Entity, std::string, EntityHash> map;
-    for (uint32_t i = 0; i < static_cast<uint32_t>(blueprint.mMap.size()); ++i)
-    {
-        map.add(this->create().entity(), blueprint.mMap.getId(Entity(i, 0)));
-    }
-
-    data::old::Context context;
-    context.push(map);
-    for (const auto& buf : blueprint.mBuffers)
-    {
-        buf.second->addAll(*this, context);
-    }
-
+    data::old::SerializationMap<Entity, std::string, EntityHash> map{};
+    blueprint.instantiate(
+        [&](std::string name) -> Entity {
+            auto entity = this->create().entity();
+            map.add(entity, name);
+            return entity;
+        },
+        [&](Entity entity, memory::AnyValue component) { this->add(entity, component.type(), component.get()); });
     return {std::move(map), *this};
 }
 
@@ -114,7 +127,7 @@ void CommandBuffer::commit()
     {
         for (auto& buf : mBuffers)
         {
-            buf.second->move(entity, mWorld.mComponentManager);
+            buf.second.move(entity, mWorld.mComponentManager);
         }
     }
 
@@ -163,13 +176,18 @@ void CommandBuffer::abort()
     this->clear();
 }
 
+void CommandBuffer::Buffer::move(Entity entity, ComponentManager& manager)
+{
+    auto it = this->components.find(entity);
+    if (it != this->components.end())
+    {
+        manager.add(entity.index, it->second.type(), it->second.get());
+        this->components.erase(it);
+    }
+}
+
 void CommandBuffer::clear()
 {
-    for (auto& buffer : mBuffers)
-    {
-        delete buffer.second;
-    }
-
     mBuffers.clear();
     mCreated.clear();
     mDestroyed.clear();

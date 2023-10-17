@@ -1,7 +1,9 @@
 #include <doctest/doctest.h>
 
+#include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/component/vec_storage.hpp>
+#include <cubos/core/ecs/system/commands.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 
 #include "utils.hpp"
