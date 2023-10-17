@@ -42,6 +42,13 @@ const reflection::Type& ComponentManager::getType(std::size_t id) const
     CUBOS_FAIL("No component found with ID {}", id);
 }
 
+void ComponentManager::add(uint32_t id, const reflection::Type& type, void* value)
+{
+    const std::size_t componentId = this->getID(type);
+    auto storage = static_cast<IStorage*>(mEntries[componentId - 1].storage.get());
+    storage->insert(id, value);
+}
+
 void ComponentManager::remove(uint32_t id, std::size_t componentId)
 {
     mEntries[componentId - 1].storage->erase(id);
