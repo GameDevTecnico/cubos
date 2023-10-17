@@ -23,6 +23,13 @@ TEST_CASE("ecs::Blueprint")
     Commands cmds{cmdBuffer};
     setupWorld(world);
 
+    // Check if entity name validity is correct
+    CHECK(blueprint.validEntityName("foo"));
+    CHECK(blueprint.validEntityName("foo-bar"));
+    CHECK_FALSE(blueprint.validEntityName("Foo"));
+    CHECK_FALSE(blueprint.validEntityName("foo bar"));
+    CHECK_FALSE(blueprint.validEntityName("foo.bar"));
+
     SUBCASE("create an entity and clear the blueprint immediately")
     {
         // If an entity is created, then the returned identifier must not be null
@@ -119,5 +126,43 @@ TEST_CASE("ecs::Blueprint")
         CHECK(bazPkg.fields().size() == 2);
         CHECK(bazPkg.field("parent").get<Entity>() == spawnedBar);
         CHECK(bazPkg.field("integer").get<int>() == 2);
+    }
+
+    SUBCASE("check if arrays of entities are converted correctly when spawned")
+    {
+        Blueprint blueprint{};
+        auto entity0 = blueprint.create("0");
+        auto entity1 = blueprint.create("1");
+        blueprint.add(entity0, EntityArrayComponent{{entity0, entity1}});
+
+        // Spawn the blueprint into the world and get the identifiers of the spawned entities.
+        auto spawned = cmds.spawn(blueprint);
+        auto spawned0 = spawned.entity("0");
+        auto spawned1 = spawned.entity("1");
+        auto& array = spawned.get<EntityArrayComponent>("0");
+
+        CHECK(array.vec.size() == 2);
+        CHECK(array.vec[0] == spawned0);
+        CHECK(array.vec[1] == spawned1);
+    }
+
+    SUBCASE("check if dictionaries of entities are converted correctly when spawned")
+    {
+        Blueprint blueprint{};
+        auto entity0 = blueprint.create("0");
+        auto entity1 = blueprint.create("1");
+        blueprint.add(entity0, EntityDictionaryComponent{{{'0', entity0}, {'1', entity1}}});
+
+        // Spawn the blueprint into the world and get the identifiers of the spawned entities.
+        auto spawned = cmds.spawn(blueprint);
+        auto spawned0 = spawned.entity("0");
+        auto spawned1 = spawned.entity("1");
+        auto& dict = spawned.get<EntityDictionaryComponent>("0");
+
+        CHECK(dict.map.size() == 2);
+        REQUIRE(dict.map.contains('0'));
+        REQUIRE(dict.map.contains('1'));
+        CHECK(dict.map.at('0') == spawned0);
+        CHECK(dict.map.at('1') == spawned1);
     }
 }
