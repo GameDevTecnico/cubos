@@ -260,7 +260,7 @@ namespace cubos::core::ecs
     template <typename Component>
     Write<Component> impl::QueryFetcher<Write<Component>>::arg(const World& /*unused*/, Type& lock, Entity entity)
     {
-        return {*lock.get().get(entity.index)};
+        return {*static_cast<Component*>(lock.get().get(entity.index))};
     }
 
     template <typename Component>
@@ -278,7 +278,7 @@ namespace cubos::core::ecs
     template <typename Component>
     Read<Component> impl::QueryFetcher<Read<Component>>::arg(const World& /*unused*/, Type& lock, Entity entity)
     {
-        return {*lock.get().get(entity.index)};
+        return {*static_cast<const Component*>(lock.get().get(entity.index))};
     }
 
     template <typename Component>
@@ -297,9 +297,9 @@ namespace cubos::core::ecs
     template <typename Component>
     OptWrite<Component> impl::QueryFetcher<OptWrite<Component>>::arg(const World& world, Type& lock, Entity entity)
     {
-        if (world.has<Component>(entity))
+        if (world.components(entity).has<Component>())
         {
-            return {lock.get().get(entity.index)};
+            return {static_cast<Component*>(lock.get().get(entity.index))};
         }
 
         return {nullptr};
@@ -321,9 +321,9 @@ namespace cubos::core::ecs
     template <typename Component>
     OptRead<Component> impl::QueryFetcher<OptRead<Component>>::arg(const World& world, Type& lock, Entity entity)
     {
-        if (world.has<Component>(entity))
+        if (world.components(entity).has<Component>())
         {
-            return {lock.get().get(entity.index)};
+            return {static_cast<const Component*>(lock.get().get(entity.index))};
         }
 
         return {nullptr};

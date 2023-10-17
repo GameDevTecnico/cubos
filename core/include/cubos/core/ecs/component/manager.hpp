@@ -169,6 +169,14 @@ namespace cubos::core::ecs
         /// @param id Entity index.
         void removeAll(uint32_t id);
 
+        /// @brief Gets the storage of the given component type.
+        /// @param id Component type identifier.
+        /// @return Component storage.
+        IStorage* storage(std::size_t id);
+
+        /// @copydoc storage(std::size_t)
+        const IStorage* storage(std::size_t id) const;
+
         /// @brief Creates a package from a component of an entity.
         /// @param id Entity index.
         /// @param componentId Component identifier.

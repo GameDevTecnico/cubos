@@ -18,8 +18,8 @@ namespace cubos::core::ecs
     {
     public:
         void insert(uint32_t index, void* value) override;
-        T* get(uint32_t index) override;
-        const T* get(uint32_t index) const override;
+        void* get(uint32_t index) override;
+        const void* get(uint32_t index) const override;
         void erase(uint32_t index) override;
 
     private:
@@ -32,13 +32,13 @@ namespace cubos::core::ecs
     }
 
     template <typename T>
-    T* NullStorage<T>::get(uint32_t /*unused*/)
+    void* NullStorage<T>::get(uint32_t /*unused*/)
     {
         return &mData;
     }
 
     template <typename T>
-    const T* NullStorage<T>::get(uint32_t /*unused*/) const
+    const void* NullStorage<T>::get(uint32_t /*unused*/) const
     {
         return &mData;
     }

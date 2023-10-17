@@ -44,20 +44,20 @@ TEST_CASE("ecs::World")
 
         // Create an entity with an detect destructor component.
         auto foo = world.create(DetectDestructorComponent{{&destroyed}});
-        CHECK(world.has<DetectDestructorComponent>(foo));
-        CHECK_FALSE(world.has<ParentComponent>(foo));
+        CHECK(world.components(foo).has<DetectDestructorComponent>());
+        CHECK_FALSE(world.components(foo).has<ParentComponent>());
         CHECK_FALSE(destroyed);
 
         // Add a parent component.
         world.add(foo, ParentComponent{});
-        CHECK(world.has<DetectDestructorComponent>(foo));
-        CHECK(world.has<ParentComponent>(foo));
+        CHECK(world.components(foo).has<DetectDestructorComponent>());
+        CHECK(world.components(foo).has<ParentComponent>());
         CHECK_FALSE(destroyed);
 
         // Remove the detect destructor component.
         world.remove<DetectDestructorComponent>(foo);
-        CHECK_FALSE(world.has<DetectDestructorComponent>(foo));
-        CHECK(world.has<ParentComponent>(foo));
+        CHECK_FALSE(world.components(foo).has<DetectDestructorComponent>());
+        CHECK(static_cast<const World&>(world).components(foo).has<ParentComponent>());
         CHECK(destroyed);
     }
 
@@ -70,8 +70,8 @@ TEST_CASE("ecs::World")
         auto pkg = world.pack(foo);
         pkg.fields().emplace_back("integer", Package::from(1));
         CHECK(world.unpack(foo, pkg));
-        CHECK(world.has<IntegerComponent>(foo));
-        CHECK_FALSE(world.has<ParentComponent>(foo));
+        CHECK(world.components(foo).has<IntegerComponent>());
+        CHECK_FALSE(world.components(foo).has<ParentComponent>());
 
         // Check if the component was added.
         pkg = world.pack(foo);
@@ -82,8 +82,8 @@ TEST_CASE("ecs::World")
         pkg.removeField("integer");
         pkg.fields().emplace_back("parent", Package::from(Entity{}));
         CHECK(world.unpack(foo, pkg));
-        CHECK_FALSE(world.has<IntegerComponent>(foo));
-        CHECK(world.has<ParentComponent>(foo));
+        CHECK_FALSE(world.components(foo).has<IntegerComponent>());
+        CHECK(world.components(foo).has<ParentComponent>());
 
         // Check if the component was added.
         pkg = world.pack(foo);
@@ -96,15 +96,15 @@ TEST_CASE("ecs::World")
         // Create an entity which has an integer component and a parent component.
         auto bar = world.create();
         auto foo = world.create(IntegerComponent{0}, ParentComponent{bar});
-        CHECK(world.has<IntegerComponent>(foo));
-        CHECK(world.has<ParentComponent>(foo));
+        CHECK(world.components(foo).has<IntegerComponent>());
+        CHECK(world.components(foo).has<ParentComponent>());
 
         // Change the value of the integer component.
         auto pkg = world.pack(foo);
         pkg.field("integer").set<int>(1);
         CHECK(world.unpack(foo, pkg));
-        CHECK(world.has<IntegerComponent>(foo));
-        CHECK(world.has<ParentComponent>(foo));
+        CHECK(world.components(foo).has<IntegerComponent>());
+        CHECK(world.components(foo).has<ParentComponent>());
 
         // Check if the value was changed.
         pkg = world.pack(foo);
