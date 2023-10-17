@@ -29,23 +29,39 @@ bool FileBridge::load(Assets& assets, const AnyAsset& handle)
 bool FileBridge::save(const Assets& assets, const AnyAsset& handle)
 {
     auto path = assets.readMeta(handle)->get("path").value();
-    auto file = FileSystem::create(path);
-    if (file == nullptr)
+
+    auto swpPath = path + ".swp";
+    auto swpFile = FileSystem::create(swpPath);
+
+    if (swpFile == nullptr)
     {
-        CUBOS_ERROR("Could not create file '{}'", path);
+        CUBOS_ERROR("Could not create swap file '{}'", swpPath);
         return false;
     }
 
-    auto stream = file->open(File::OpenMode::Write);
+    auto stream = swpFile->open(File::OpenMode::Write);
     if (stream == nullptr)
     {
-        CUBOS_ERROR("Could not open file '{}'", path);
+        CUBOS_ERROR("Could not open swap file '{}'", swpPath);
         return false;
     }
 
     if (!this->saveToFile(assets, handle, *stream))
     {
-        CUBOS_ERROR("Could not save asset to file '{}'", path);
+        CUBOS_ERROR("Could not save asset to swap file");
+        return false;
+    }
+
+    /// @todo This can be done simpler with #737.
+    if (!FileSystem::copy(swpPath, path))
+    {
+        CUBOS_ERROR("Could not overwrite asset {} with swap file", path);
+        return false;
+    }
+
+    if (!swpFile->destroy())
+    {
+        CUBOS_ERROR("Could not destroy swap asset file");
         return false;
     }
 
