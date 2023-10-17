@@ -32,10 +32,26 @@ struct [[cubos::component("detect_destructor")]] DetectDestructorComponent
     [[cubos::ignore]] DetectDestructor detect;
 };
 
+struct [[cubos::component("entity_array")]] EntityArrayComponent
+{
+    CUBOS_REFLECT;
+
+    std::vector<cubos::core::ecs::Entity> vec;
+};
+
+struct [[cubos::component("entity_dictionary")]] EntityDictionaryComponent
+{
+    CUBOS_REFLECT;
+
+    std::unordered_map<int, cubos::core::ecs::Entity> map;
+};
+
 /// Adds the utility components to a world.
 inline void setupWorld(cubos::core::ecs::World& world)
 {
     world.registerComponent<IntegerComponent>();
     world.registerComponent<ParentComponent>();
     world.registerComponent<DetectDestructorComponent>();
+    world.registerComponent<EntityArrayComponent>();
+    world.registerComponent<EntityDictionaryComponent>();
 }
