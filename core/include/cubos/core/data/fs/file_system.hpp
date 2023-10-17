@@ -119,5 +119,17 @@ namespace cubos::core::data
         /// @param mode Mode to open the file in.
         /// @return File stream, or nullptr if an error occurred.
         static std::unique_ptr<memory::Stream> open(std::string_view path, File::OpenMode mode);
+
+        /// @brief Copies a file from the source path to the destination path.
+        ///
+        /// This method opens the source file in binary mode, reads its contents, and writes them to
+        /// the destination file. If the destination file already exists, it will be overwritten.
+        ///
+        /// @note The source file needs to exist.
+        ///
+        /// @param sourcePath Absolute path of the source file.
+        /// @param destinationPath Absolute path of the destination file.
+        /// @return Whether the file was successfully copied.
+        static bool copy(std::string_view sourcePath, std::string_view destinationPath);
     };
 } // namespace cubos::core::data
