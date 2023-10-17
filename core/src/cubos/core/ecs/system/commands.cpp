@@ -90,7 +90,7 @@ BlueprintBuilder CommandBuffer::spawn(const Blueprint& blueprint)
 {
     data::old::SerializationMap<Entity, std::string, EntityHash> map{};
     blueprint.instantiate(
-        [&](std::string name) -> Entity {
+        [&](const std::string& name) -> Entity {
             auto entity = this->create().entity();
             map.add(entity, name);
             return entity;
