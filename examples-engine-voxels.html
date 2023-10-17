@@ -64,7 +64,7 @@
 <span class="w">    </span><span class="c1">// Create the car entity</span>
 <span class="w">    </span><span class="n">cmds</span><span class="p">.</span><span class="n">create</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">RenderableGrid</span><span class="p">{</span><span class="n">CarAsset</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">}).</span><span class="n">add</span><span class="p">(</span><span class="n">LocalToWorld</span><span class="p">{});</span>
 <span class="p">}</span></pre><p>Finally, we just add these systems.</p><pre class="m-code"><span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="n">setPaletteSystem</span><span class="p">).</span><span class="n">after</span><span class="p">(</span><span class="s">&quot;cubos.renderer.init&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="n">spawnCarSystem</span><span class="p">);</span></pre><p>And voilá, you now have a car floating in space.</p>
+<span class="w">    </span><span class="n">cubos</span><span class="p">.</span><span class="n">startupSystem</span><span class="p">(</span><span class="n">spawnCarSystem</span><span class="p">).</span><span class="n">tagged</span><span class="p">(</span><span class="s">&quot;cubos.assets&quot;</span><span class="p">);</span></pre><p>And voilá, you now have a car floating in space.</p>
       </div>
     </div>
   </div>
