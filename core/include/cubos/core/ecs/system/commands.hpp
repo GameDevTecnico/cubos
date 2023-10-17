@@ -263,9 +263,9 @@ namespace cubos::core::ecs
                      "Entity does not have the requested component");
 
         auto& buf = mCommands.mBuffers.at<ComponentType>();
-        auto it = buf->components.find(this->entity(name));
-        CUBOS_ASSERT(it != buf->components.end(), "Entity does not have the requested component");
-        return it->second;
+        auto it = buf.components.find(this->entity(name));
+        CUBOS_ASSERT(it != buf.components.end(), "Entity does not have the requested component");
+        return *static_cast<ComponentType*>(it->second.get());
     }
 
     template <typename... ComponentTypes>
