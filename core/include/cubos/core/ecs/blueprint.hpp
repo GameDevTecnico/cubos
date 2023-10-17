@@ -4,210 +4,135 @@
 
 #pragma once
 
-#include <cubos/core/data/old/binary_deserializer.hpp>
-#include <cubos/core/data/old/binary_serializer.hpp>
-#include <cubos/core/data/old/serialization_map.hpp>
+#include <string>
+#include <unordered_map>
+
+#include <cubos/core/ecs/entity/entity.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
-#include <cubos/core/ecs/system/commands.hpp>
-#include <cubos/core/memory/buffer_stream.hpp>
+#include <cubos/core/memory/any_value.hpp>
 #include <cubos/core/memory/type_map.hpp>
+#include <cubos/core/memory/unordered_bimap.hpp>
 
 namespace cubos::core::ecs
 {
-    /// @brief Stores a bundle of entities and their respective components, which can be easily
-    /// spawned into a world. This is in a way the 'Prefab' of @b CUBOS., but lower level.
+    /// @brief Collection of entities and their respective components.
+    ///
+    /// Blueprints are in a way the 'Prefab' of @b CUBOS. They act as tiny @ref World which can
+    /// then be spawned into an actual @ref World, as many times as needed.
+    ///
+    /// When a blueprint is spawned, all of its components are scanned using the @ref
+    /// core-reflection system for any references to other entities in the blueprint. These
+    /// references are then replaced with the actual spawned entities. This has the side effect
+    /// that if you do not expose an @ref Entity field to the @ref core-reflection system, it will
+    /// not be replaced and thus continue referencing the original entity in the blueprint.
+    ///
+    /// @ingroup core-ecs
     class Blueprint final
     {
     public:
-        ~Blueprint();
+        /// @brief Function used by @ref instantiate to create entities.
+        /// @param userData User data passed into @ref instantiate.
+        /// @param name Entity name.
+        /// @return Instantiated entity.
+        using Create = Entity (*)(void* userData, std::string name);
 
-        /// @brief Constructs an empty blueprint.
-        Blueprint() = default;
+        /// @brief Function used by @ref instantiate to add components to entities.
+        /// @param userData User data passed into @ref instantiate.
+        /// @param entity Entity.
+        /// @param component Component.
+        using Add = void (*)(void* userData, Entity entity, memory::AnyValue component);
+
+        /// @brief Constructs.
+        Blueprint();
 
         /// @brief Move constructs.
-        Blueprint(Blueprint&&) = default;
+        /// @param other Blueprint to move from.
+        Blueprint(Blueprint&& other);
 
-        /// @brief Creates a new entity and returns its identifier.
-        /// @tparam ComponentTypes Component types.
+        /// @brief Creates a new entity in the blueprint and returns it.
+        ///
+        /// An entity with the same name must not exist. The name must be @ref validEntityName
+        /// "valid".
+        ///
+        /// @warning The returned entity is only valid inside the blueprint itself.
         /// @param name Entity name.
-        /// @param components Components to add.
-        /// @return Entity identifier.
-        template <typename... ComponentTypes>
-        Entity create(const std::string& name, const ComponentTypes&... components);
+        /// @return Entity.
+        Entity create(std::string name);
 
-        /// @brief Adds components to an entity.
-        /// @tparam ComponentTypes Component types.
-        /// @param entity Entity identifier.
-        /// @param components Components to add.
-        template <typename... ComponentTypes>
-        void add(Entity entity, const ComponentTypes&... components);
+        /// @brief Adds a component to an entity. Overwrites the existing component, if there's any.
+        /// @param entity Entity.
+        /// @param component Component to move.
+        void add(Entity entity, memory::AnyValue component);
 
-        /// @brief Deserializes a component and adds it to an entity.
-        /// @param entity Entity identifier.
-        /// @param name Component type name.
-        /// @param deserializer Ddeserializer to deserialize from.
-        bool addFromDeserializer(Entity entity, const std::string& name, data::old::Deserializer& deserializer);
-
-        /// @brief Returns an entity from its name.
-        /// @param name Entity name.
-        /// @return Entity identifier, or null entity if not found.
-        Entity entity(const std::string& name) const;
-
-        /// @brief Merges another blueprint into this one.
-        /// @note All of the entity names of the other blueprint will be prefixed with the
-        /// specified string.
-        /// @param prefix Name to prefix with the merged blueprint.
-        /// @param other Other blueprint to merge.
-        void merge(const std::string& prefix, const Blueprint& other);
-
-        /// @brief Clears the blueprint, removing any added entities and components.
-        void clear();
-
-        /// @brief Returns the internal map that maps entities to their names
-        /// @return Map of entities and names.
-        inline std::unordered_map<Entity, std::string, EntityHash> getMap() const
+        /// @brief Adds components to an entity. Overwrites the existing components, if there's any.
+        /// @tparam Ts Component types.
+        /// @param entity Entity.
+        /// @param components Components to move.
+        template <reflection::Reflectable... Ts>
+        void add(Entity entity, Ts... components)
         {
-            return mMap.getMap();
+            ([&]() { this->add(entity, memory::AnyValue::moveConstruct(reflection::reflect<Ts>(), &components)); }(),
+             ...);
         }
 
+        /// @brief Merges another blueprint into this one.
+        ///
+        /// Entities in the other blueprint will have their names prefixed with the specified
+        /// string.
+        ///
+        /// @param prefix Name to prefix with the merged blueprint.
+        /// @param other Blueprint to merge.
+        void merge(const std::string& prefix, const Blueprint& other);
+
+        /// @brief Clears the blueprint.
+        void clear();
+
+        /// @brief Returns a bimap which maps entities to their names.
+        /// @return Bimap of entities to names.
+        const memory::UnorderedBimap<Entity, std::string, EntityHash>& bimap() const;
+
+        /// @brief Instantiates the blueprint by calling the given functions.
+        /// @param userData User data to pass into the functions.
+        /// @param create Function used to create entities.
+        /// @param add Function used to add components to entities.
+        void instantiate(void* userData, Create create, Add add) const;
+
+        /// @brief Instantiates the blueprint by calling the given functors.
+        /// @tparam C Create functor type.
+        /// @tparam A Add functor type.
+        /// @param create Functor used to create entities.
+        /// @param add Functor used to add components to entities.
+        template <typename C, typename A>
+        void instantiate(C create, A add) const
+        {
+            auto functors = std::make_pair(create, add);
+
+            Create createFunc = [](void* userData, std::string name) -> Entity {
+                return static_cast<decltype(functors)*>(userData)->first(name);
+            };
+
+            Add addFunc = [](void* userData, Entity entity, memory::AnyValue component) {
+                return static_cast<decltype(functors)*>(userData)->second(entity, std::move(component));
+            };
+
+            // We pass the functors pair using the userData argument. We could use std::function
+            // here and pass them directly, but that would mean unnecessary heap allocations and an
+            // extra large include on the header.
+            this->instantiate(&functors, createFunc, addFunc);
+        }
+
+        /// @brief Checks if the given name is a valid entity name.
+        ///
+        /// Entity names must contain only lowercase alphanumerical characters and hyphens.
+        ///
+        /// @return Whether the name is valid.
+        static bool validEntityName(const std::string& name);
+
     private:
-        friend class CommandBuffer;
+        /// @brief Maps entities to their names.
+        memory::UnorderedBimap<Entity, std::string, EntityHash> mBimap;
 
-        /// @brief Stores all component data of a certain type.
-        struct IBuffer
-        {
-            /// @brief Names of the entities of the components present in the stream, in the same order.
-            std::vector<std::string> names;
-            memory::BufferStream stream; ///< Self growing buffer stream where the component data is stored.
-            std::mutex mutex;            ///< Protect the stream.
-
-            virtual ~IBuffer() = default;
-
-            /// @brief Adds all of the components stored in the buffer to the specified commands object.
-            /// @param commands Commands object to add the components to.
-            /// @param context Context to use when deserializing the components.
-            virtual void addAll(CommandBuffer& commands, data::old::Context& context) = 0;
-
-            /// @brief Merges the data of another buffer of the same type into this one.
-            /// @param other Buffer to merge from.
-            /// @param prefix Prefix to add to the names of the components of the other buffer.
-            /// @param src Context to use when serializing the components from the other buffer.
-            /// @param dst Context to use when deserializing the components to this buffer.
-            virtual void merge(IBuffer* other, const std::string& prefix, data::old::Context& src,
-                               data::old::Context& dst) = 0;
-
-            /// @brief Creates a new buffer of the same type as this one.
-            /// @return New buffer.
-            virtual IBuffer* create() = 0;
-        };
-
-        /// @brief Implementation of the IBuffer interface for the component type @p ComponentType.
-        /// @tparam ComponentType Component type.
-        template <typename ComponentType>
-        struct Buffer : IBuffer
-        {
-            // Interface methods implementation.
-
-            inline void addAll(CommandBuffer& commands, data::old::Context& context) override
-            {
-                this->mutex.lock();
-                auto pos = this->stream.tell();
-                this->stream.seek(0, memory::SeekOrigin::Begin);
-                auto des = data::old::BinaryDeserializer(this->stream);
-                des.context().pushSubContext(context);
-
-                auto& map = des.context().get<data::old::SerializationMap<Entity, std::string, EntityHash>>();
-                for (const auto& name : this->names)
-                {
-                    ComponentType type;
-                    des.read(type);
-                    commands.add(map.getRef(name), std::move(type));
-                }
-                this->stream.seek(static_cast<ptrdiff_t>(pos), memory::SeekOrigin::Begin);
-                this->mutex.unlock();
-
-                if (des.failed())
-                {
-                    CUBOS_CRITICAL("Could not deserialize component of type '{}'", typeid(ComponentType).name());
-                    abort();
-                }
-            }
-
-            inline void merge(IBuffer* other, const std::string& prefix, data::old::Context& src,
-                              data::old::Context& dst) override
-            {
-                auto buffer = static_cast<Buffer<ComponentType>*>(other);
-
-                buffer->mutex.lock();
-                auto pos = buffer->stream.tell();
-                buffer->stream.seek(0, memory::SeekOrigin::Begin);
-                auto ser = data::old::BinarySerializer(this->stream);
-                auto des = data::old::BinaryDeserializer(buffer->stream);
-                ser.context().pushSubContext(dst);
-                des.context().pushSubContext(src);
-                for (const auto& name : buffer->names)
-                {
-                    std::string path = prefix;
-                    path += '.';
-                    path += name;
-                    this->names.push_back(path);
-                    ComponentType type;
-                    des.read(type);
-                    ser.write(type, "data");
-                }
-                buffer->stream.seek(static_cast<ptrdiff_t>(pos), memory::SeekOrigin::Begin);
-                buffer->mutex.unlock();
-            }
-
-            inline IBuffer* create() override
-            {
-                return new Buffer<ComponentType>();
-            }
-        };
-
-        /// @brief Stores the entity handles and the associated names.
-        data::old::SerializationMap<Entity, std::string, EntityHash> mMap;
-
-        /// @brief Buffers which store the serialized components of each type in this blueprint.
-        memory::TypeMap<IBuffer*> mBuffers;
+        /// @brief Maps component types to maps of entities to the component values.
+        memory::TypeMap<std::unordered_map<Entity, memory::AnyValue, EntityHash>> mComponents;
     };
-
-    // Implementation.
-
-    template <typename... ComponentTypes>
-    Entity Blueprint::create(const std::string& name, const ComponentTypes&... components)
-    {
-        auto entity = Entity(static_cast<uint32_t>(mMap.size()), 0);
-        mMap.add(entity, name);
-        this->add(entity, components...);
-        return entity;
-    }
-
-    template <typename... ComponentTypes>
-    void Blueprint::add(Entity entity, const ComponentTypes&... components)
-    {
-        (void)entity;
-        CUBOS_ASSERT(entity.generation == 0 && mMap.hasRef(entity), "Entity does not belong to blueprint");
-
-        (
-            [&]() {
-                IBuffer* buf;
-                if (mBuffers.contains<ComponentTypes>())
-                {
-                    buf = mBuffers.at<ComponentTypes>();
-                }
-                else
-                {
-                    buf = new Buffer<ComponentTypes>();
-                    mBuffers.insert<ComponentTypes>(buf);
-                }
-
-                auto ser = data::old::BinarySerializer(buf->stream);
-                ser.context().push(mMap);
-                ser.write(components, "data");
-                buf->names.push_back(mMap.getId(entity));
-            }(),
-
-            ...);
-    }
 } // namespace cubos::core::ecs
