@@ -124,6 +124,20 @@ namespace cubos::core::memory
 
         /// @brief Gets an iterator to the beginning of the map.
         /// @return Iterator.
+        auto begin()
+        {
+            return mMap.begin();
+        }
+
+        /// @brief Gets an iterator to the end of the map.
+        /// @return Iterator.
+        auto end()
+        {
+            return mMap.end();
+        }
+
+        /// @brief Gets an iterator to the beginning of the map.
+        /// @return Iterator.
         auto begin() const
         {
             return mMap.begin();
