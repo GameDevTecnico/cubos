@@ -108,3 +108,50 @@ std::unique_ptr<memory::Stream> FileSystem::open(std::string_view path, File::Op
     CUBOS_ERROR("Could not open file for writing at path '{}': the file could not be created", path);
     return nullptr;
 }
+
+bool FileSystem::copy(std::string_view sourcePath, std::string_view destinationPath)
+{
+    auto srcStream = FileSystem::open(sourcePath, File::OpenMode::Read);
+
+    if (!srcStream)
+    {
+        CUBOS_ERROR("Failed to open source stream");
+        return false;
+    }
+
+    auto dstFile = FileSystem::create(destinationPath);
+
+    if (!dstFile)
+    {
+        CUBOS_ERROR("Failed to create destination file '{}'", destinationPath);
+        return false;
+    }
+
+    auto dstStream = dstFile->open(File::OpenMode::Write);
+
+    if (!dstStream)
+    {
+        CUBOS_ERROR("Failed to open destination stream");
+        return false;
+    }
+
+    constexpr std::size_t ChunkSize = 4096;
+    char buffer[ChunkSize];
+
+    while (!srcStream->eof())
+    {
+        std::size_t bytesRead = srcStream->read(buffer, ChunkSize);
+
+        if (bytesRead > 0)
+        {
+            dstStream->write(buffer, bytesRead);
+        }
+
+        if (bytesRead < ChunkSize)
+        {
+            break;
+        }
+    }
+
+    return true;
+}
