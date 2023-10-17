@@ -74,7 +74,7 @@ int main(int argc, char** argv)
     cubos.startupSystem(spawnLightSystem);
     /// [Adding systems]
     cubos.startupSystem(setPaletteSystem).after("cubos.renderer.init");
-    cubos.system(spawnCarSystem);
+    cubos.startupSystem(spawnCarSystem).tagged("cubos.assets");
     /// [Adding systems]
 
     cubos.run();
