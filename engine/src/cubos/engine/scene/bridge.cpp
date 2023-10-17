@@ -1,6 +1,9 @@
 #include <cubos/core/data/fs/file_system.hpp>
 #include <cubos/core/data/old/json_deserializer.hpp>
+#include <cubos/core/data/old/serialization_map.hpp>
+#include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
+#include <cubos/core/log.hpp>
 
 #include <cubos/engine/assets/assets.hpp>
 #include <cubos/engine/scene/bridge.hpp>
@@ -12,6 +15,7 @@ using cubos::core::data::old::JSONDeserializer;
 using cubos::core::data::old::SerializationMap;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::EntityHash;
+using cubos::core::ecs::Registry;
 
 using namespace cubos::engine;
 
@@ -47,8 +51,13 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
                                                               return false; // Serialization not needed.
                                                           },
                                                           [&](Entity& entity, const std::string& string) {
-                                                              entity = scene.blueprint.entity(string);
-                                                              return !entity.isNull();
+                                                              if (!scene.blueprint.bimap().containsRight(string))
+                                                              {
+                                                                  return false;
+                                                              }
+
+                                                              entity = scene.blueprint.bimap().atLeft(string);
+                                                              return true;
                                                           }});
 
     deserializer.beginObject();
@@ -93,7 +102,12 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
         // Get the name of the entity and check if its valid or already in the blueprint.
         std::string name;
         deserializer.read(name);
-        auto entity = scene.blueprint.entity(name);
+
+        Entity entity{};
+        if (scene.blueprint.bimap().containsRight(name))
+        {
+            entity = scene.blueprint.bimap().atLeft(name);
+        }
 
         if (entity.isNull())
         {
@@ -114,9 +128,10 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
         std::size_t componentsLen = deserializer.beginDictionary();
         for (std::size_t j = 0; j < componentsLen; ++j)
         {
-            std::string componentName;
+            std::string componentName{};
             deserializer.read(componentName);
-            if (!scene.blueprint.addFromDeserializer(entity, componentName, deserializer))
+
+            if (!Registry::create(componentName, deserializer, scene.blueprint, entity))
             {
                 CUBOS_ERROR("Could not deserialize component '{}' into entity '{}' in scene '{}'", componentName, name,
                             path);

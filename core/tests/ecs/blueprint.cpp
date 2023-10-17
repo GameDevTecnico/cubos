@@ -1,6 +1,8 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/blueprint.hpp>
+#include <cubos/core/ecs/component/registry.hpp>
+#include <cubos/core/ecs/system/commands.hpp>
 
 #include "utils.hpp"
 
@@ -10,6 +12,7 @@ using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
+using cubos::core::ecs::Registry;
 using cubos::core::ecs::World;
 
 TEST_CASE("ecs::Blueprint")
@@ -23,22 +26,24 @@ TEST_CASE("ecs::Blueprint")
     SUBCASE("create an entity and clear the blueprint immediately")
     {
         // If an entity is created, then the returned identifier must not be null
-        auto foo = blueprint.create("foo", IntegerComponent{0});
+        auto foo = blueprint.create("foo");
         CHECK_FALSE(foo.isNull());
+        blueprint.add(foo, IntegerComponent{0});
 
         // Searching for an entity with the same name should return the same identifier
-        CHECK(blueprint.entity("foo") == foo);
+        CHECK(blueprint.bimap().atLeft("foo") == foo);
 
         blueprint.clear();
     }
 
     // If the blueprint is empty/has been initialized then searching for an entity should always
     // return a null identifier.
-    CHECK(blueprint.entity("foo").isNull());
+    CHECK_FALSE(blueprint.bimap().containsRight("foo"));
 
     // Create two entities on the blueprint.
     auto bar = blueprint.create("bar");
-    auto baz = blueprint.create("baz", IntegerComponent{2});
+    auto baz = blueprint.create("baz");
+    blueprint.add(baz, IntegerComponent{2});
 
     // Add a ParentComponent to "baz" with id = "bar", using a deserializer.
     {
@@ -47,7 +52,7 @@ TEST_CASE("ecs::Blueprint")
 
         // Unpack the identifier of "bar" into a ParentComponent.
         Unpackager unpackager{barPkg};
-        blueprint.addFromDeserializer(baz, "parent", unpackager);
+        Registry::create("parent", unpackager, blueprint, baz);
     }
 
     SUBCASE("spawn the blueprint")
@@ -77,15 +82,16 @@ TEST_CASE("ecs::Blueprint")
     {
         // Create another blueprint with one entity.
         Blueprint merged{};
-        auto foo = merged.create("foo", IntegerComponent{1});
+        auto foo = merged.create("foo");
+        merged.add(foo, IntegerComponent{1});
 
         // Merge the original blueprint into the new one.
         merged.merge("sub", blueprint);
 
         // Then the new blueprint has the correct entities.
-        CHECK(merged.entity("foo") == foo);
-        CHECK_FALSE(merged.entity("sub.bar").isNull());
-        CHECK_FALSE(merged.entity("sub.baz").isNull());
+        CHECK(merged.bimap().atLeft("foo") == foo);
+        CHECK(merged.bimap().containsRight("sub.bar"));
+        CHECK(merged.bimap().containsRight("sub.baz"));
 
         // Spawn the blueprint into the world and get the identifiers of the spawned entities.
         auto spawned = cmds.spawn(merged);

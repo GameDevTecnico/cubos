@@ -10,6 +10,8 @@
 
 #include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/memory/any_value.hpp>
+#include <cubos/core/memory/type_map.hpp>
 
 namespace cubos::core::ecs
 {
@@ -160,6 +162,12 @@ namespace cubos::core::ecs
         CommandBuffer(World& world);
         ~CommandBuffer();
 
+        /// @brief Adds a component to an entity.
+        /// @param entity Entity.
+        /// @param type Component type.
+        /// @param component Component value to be moved.
+        void add(Entity entity, const reflection::Type& type, void* component);
+
         /// @brief Adds components to an entity.
         /// @tparam ComponentTypes Component types.
         /// @param entity Entity identifier.
@@ -202,32 +210,15 @@ namespace cubos::core::ecs
 
         /// @brief Stores components of a specific type, queued for addition to the component
         /// manager.
-        struct IBuffer
+        struct Buffer final
         {
-            virtual ~IBuffer() = default;
-
-            /// @brief Clears every component in the buffer.
-            virtual void clear() = 0;
-
             /// @brief Moves the specified component from the buffer to the component manager. If
             /// the component doesn't exist, nothing happens.
             /// @param entity Entity identifier.
             /// @param manager Component manager.
-            virtual void move(Entity entity, ComponentManager& manager) = 0;
-        };
+            void move(Entity entity, ComponentManager& manager);
 
-        /// @brief Implementation of the above interface for a component type
-        /// @p ComponentType.
-        /// @tparam ComponentType Component type.
-        template <typename ComponentType>
-        struct Buffer : IBuffer
-        {
-            // Interface methods implementation.
-
-            void clear() override;
-            void move(Entity entity, ComponentManager& manager) override;
-
-            std::unordered_map<Entity, ComponentType, EntityHash> components; ///< Components in the buffer.
+            std::unordered_map<Entity, memory::AnyValue, EntityHash> components; ///< Components in the buffer.
         };
 
         /// @brief Clears the commands.
@@ -236,7 +227,7 @@ namespace cubos::core::ecs
         std::mutex mMutex; ///< Make this thread-safe.
         World& mWorld;     ///< World to which the commands will be applied.
 
-        std::unordered_map<std::type_index, IBuffer*> mBuffers;        ///< Component buffers per component type.
+        memory::TypeMap<Buffer> mBuffers;                              ///< Component buffers per component type.
         std::unordered_set<Entity, EntityHash> mCreated;               ///< Uncommitted created entities.
         std::unordered_set<Entity, EntityHash> mDestroyed;             ///< Uncommitted destroyed entities.
         std::unordered_map<Entity, Entity::Mask, EntityHash> mAdded;   ///< Mask of the uncommitted added components.
@@ -249,19 +240,13 @@ namespace cubos::core::ecs
     template <typename ComponentType>
     ComponentType& EntityBuilder::get()
     {
-        auto it = mCommands.mBuffers.find(typeid(ComponentType));
-        if (it != mCommands.mBuffers.end())
-        {
-            auto buf = static_cast<CommandBuffer::Buffer<ComponentType>*>(it->second);
-            auto it = buf->components.find(mEntity);
-            if (it != buf->components.end())
-            {
-                return it->second;
-            }
-        }
+        CUBOS_ASSERT(mCommands.mBuffers.template contains<ComponentType>(),
+                     "Entity does not have the requested component");
 
-        CUBOS_CRITICAL("Entity does not have the requested component");
-        abort();
+        auto& buf = mCommands.mBuffers.at<ComponentType>();
+        auto it = buf->components.find(mEntity);
+        CUBOS_ASSERT(it != buf->components.end(), "Entity does not have the requested component");
+        return it->second;
     }
 
     template <typename... ComponentTypes>
@@ -274,19 +259,13 @@ namespace cubos::core::ecs
     template <typename ComponentType>
     ComponentType& BlueprintBuilder::get(const std::string& name)
     {
-        auto it = mCommands.mBuffers.find(typeid(ComponentType));
-        if (it != mCommands.mBuffers.end())
-        {
-            auto buf = static_cast<CommandBuffer::Buffer<ComponentType>*>(it->second);
-            auto it = buf->components.find(this->entity(name));
-            if (it != buf->components.end())
-            {
-                return it->second;
-            }
-        }
+        CUBOS_ASSERT(mCommands.mBuffers.template contains<ComponentType>(),
+                     "Entity does not have the requested component");
 
-        CUBOS_CRITICAL("Entity does not have the requested component");
-        abort();
+        auto& buf = mCommands.mBuffers.at<ComponentType>();
+        auto it = buf->components.find(this->entity(name));
+        CUBOS_ASSERT(it != buf->components.end(), "Entity does not have the requested component");
+        return it->second;
     }
 
     template <typename... ComponentTypes>
@@ -323,16 +302,16 @@ namespace cubos::core::ecs
 
         (
             [&]() {
-                auto it = mBuffers.find(typeid(ComponentTypes));
-                if (it == mBuffers.end())
+                if (!mBuffers.contains<ComponentTypes>())
                 {
-                    it = mBuffers.emplace(typeid(ComponentTypes), new Buffer<ComponentTypes>()).first;
+                    mBuffers.insert<ComponentTypes>({});
                 }
 
                 std::size_t componentID = mWorld.mComponentManager.getID<ComponentTypes>();
                 mask.set(componentID);
-                static_cast<Buffer<ComponentTypes>*>(it->second)->components.erase(entity);
-                static_cast<Buffer<ComponentTypes>*>(it->second)->components.emplace(entity, std::move(components));
+                mBuffers.at<ComponentTypes>().components.erase(entity);
+                mBuffers.at<ComponentTypes>().components.emplace(
+                    entity, memory::AnyValue::moveConstruct(reflection::reflect<ComponentTypes>(), &components));
             }(),
             ...);
     }
@@ -364,36 +343,19 @@ namespace cubos::core::ecs
 
         (
             [&]() {
-                auto it = mBuffers.find(typeid(ComponentTypes));
-                if (it == mBuffers.end())
+                if (!mBuffers.contains<ComponentTypes>())
                 {
-                    it = mBuffers.emplace(typeid(ComponentTypes), new Buffer<ComponentTypes>()).first;
+                    mBuffers.insert<ComponentTypes>({});
                 }
 
                 std::size_t componentID = mWorld.mComponentManager.getID<ComponentTypes>();
                 mask.set(componentID);
-                static_cast<Buffer<ComponentTypes>*>(it->second)->components.erase(entity);
-                static_cast<Buffer<ComponentTypes>*>(it->second)->components.emplace(entity, components);
+                mBuffers.at<ComponentTypes>().components.erase(entity);
+                mBuffers.at<ComponentTypes>().components.emplace(
+                    entity, memory::AnyValue::moveConstruct(reflection::reflect<ComponentTypes>(), &components));
             }(),
             ...);
 
         return {entity, *this};
-    }
-
-    template <typename ComponentType>
-    void CommandBuffer::Buffer<ComponentType>::clear()
-    {
-        this->components.clear();
-    }
-
-    template <typename ComponentType>
-    void CommandBuffer::Buffer<ComponentType>::move(Entity entity, ComponentManager& manager)
-    {
-        auto it = this->components.find(entity);
-        if (it != this->components.end())
-        {
-            manager.add(entity.index, std::move(it->second));
-            this->components.erase(it);
-        }
     }
 } // namespace cubos::core::ecs
