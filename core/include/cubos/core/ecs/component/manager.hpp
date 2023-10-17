@@ -142,6 +142,12 @@ namespace cubos::core::ecs
         WriteStorage<T> write() const;
 
         /// @brief Adds a component to an entity.
+        /// @param id Entity index.
+        /// @param type Component type.
+        /// @param value Component value to move.
+        void add(uint32_t id, const reflection::Type& type, void* value);
+
+        /// @brief Adds a component to an entity.
         /// @tparam T Component type.
         /// @param id Entity index.
         /// @param value Initial component value.
@@ -275,9 +281,7 @@ namespace cubos::core::ecs
     template <typename T>
     void ComponentManager::add(uint32_t id, T value)
     {
-        const std::size_t componentId = this->getID<T>();
-        auto storage = static_cast<Storage<T>*>(mEntries[componentId - 1].storage.get());
-        storage->insert(id, std::move(value));
+        this->add(id, reflection::reflect<T>(), &value);
     }
 
     template <typename T>

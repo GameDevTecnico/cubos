@@ -15,7 +15,7 @@ namespace cubos::core::ecs
     class VecStorage : public Storage<T>
     {
     public:
-        T* insert(uint32_t index, T value) override;
+        void insert(uint32_t index, void* value) override;
         T* get(uint32_t index) override;
         const T* get(uint32_t index) const override;
         void erase(uint32_t index) override;
@@ -25,20 +25,18 @@ namespace cubos::core::ecs
     };
 
     template <typename T>
-    T* VecStorage<T>::insert(uint32_t index, T value)
+    void VecStorage<T>::insert(uint32_t index, void* value)
     {
         if (mData.size() <= index)
         {
             mData.resize(index);
-            mData.emplace_back(std::move(value));
+            mData.emplace_back(std::move(*static_cast<T*>(value)));
         }
         else
         {
             mData[index].~T();
-            new (&mData[index]) T(std::move(value));
+            new (&mData[index]) T(std::move(*static_cast<T*>(value)));
         }
-
-        return &mData[index];
     }
 
     template <typename T>

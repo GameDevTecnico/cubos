@@ -21,6 +21,11 @@ namespace cubos::core::ecs
     public:
         virtual ~IStorage() = default;
 
+        /// @brief Inserts a value into the storage.
+        /// @param index Index where to insert the value.
+        /// @param value Value to be moved.
+        virtual void insert(uint32_t index, void* value) = 0;
+
         /// @brief Remove a value from the storage.
         /// @param index Index of the value to be removed.
         virtual void erase(uint32_t index) = 0;
@@ -53,11 +58,6 @@ namespace cubos::core::ecs
         /// @brief Component type.
         using Type = T;
 
-        /// @brief Inserts a value into the storage.
-        /// @param index Index where to insert the value.
-        /// @param value Value to be inserted.
-        virtual T* insert(uint32_t index, T value) = 0;
-
         /// @brief Gets a value from the storage.
         /// @param index Index of the value to be retrieved.
         /// @return Pointer to the value.
@@ -80,7 +80,7 @@ namespace cubos::core::ecs
             T value;
             if (package.into(value, context))
             {
-                this->insert(index, std::move(value));
+                this->insert(index, &value);
                 return true;
             }
 
