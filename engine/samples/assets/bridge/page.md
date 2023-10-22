@@ -2,6 +2,8 @@
 
 @brief Basic @ref assets-plugin plugin features and creating your own bridges.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/assets/bridge).
+
 This example demonstrates how we can create a custom asset bridge to load
 assets of a given type. More specifically, we'll go through how we can create a
 bridge which loads `std::string`s from text files.

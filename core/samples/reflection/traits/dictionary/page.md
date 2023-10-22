@@ -2,6 +2,8 @@
 
 @brief Exposing and using dictionary functionality of a type.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/reflection/traits/dictionary).
+
 The @ref cubos::core::reflection::DictionaryTrait "DictionaryTrait" trait is
 used to expose the dictionary functionality of a type. In this example, we will
 write a function which takes a type and an instance of that type, and prints

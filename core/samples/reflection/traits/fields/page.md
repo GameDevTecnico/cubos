@@ -2,6 +2,8 @@
 
 @brief Exposing the fields of a type.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/reflection/traits/fields).
+
 For structured types, like classes and structs, you might want to expose its
 public fields using the @ref cubos::core::reflection::FieldsTrait "FieldsTrait"
 trait. In this example, we'll expose the fields of the following type:

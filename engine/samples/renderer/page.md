@@ -2,6 +2,8 @@
 
 @brief Using the @ref renderer-plugin plugin.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/renderer).
+
 This example shows how the @ref renderer-plugin plugin can be used and
 configured with a simple scene, lighting and split-screen rendering.
 

@@ -2,6 +2,8 @@
 
 @brief Loading serializable assets from JSON.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/assets/json).
+
 We'll use the following type as an example:
 
 @snippet assets/json/main.cpp Asset type

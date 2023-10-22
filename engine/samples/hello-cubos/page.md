@@ -2,6 +2,9 @@
 
 @brief Using @ref cubos::engine::Cubos "Cubos" to create a simple program.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/hello-cubos).
+
+
 This example shows the basics of how @ref cubos::engine::Cubos is used, by making a simple "Hello World" program.
 
 @snippet hello-cubos/main.cpp Include

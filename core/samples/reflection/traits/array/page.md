@@ -2,6 +2,8 @@
 
 @brief Exposing and using array functionality of a type.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/reflection/traits/array).
+
 The @ref cubos::core::reflection::ArrayTrait "ArrayTrait" trait is used to
 expose the array functionality of a type. In this example, we will write a
 function which takes a type and an instance of that type, and prints its
