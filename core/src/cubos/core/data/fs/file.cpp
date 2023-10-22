@@ -148,10 +148,11 @@ bool File::unmount(std::string_view path)
     }
 
     // Lock the file mutex.
-    std::lock_guard<std::mutex> lock(file->mMutex);
+    file->mMutex.lock();
 
     if (file->mArchive == nullptr)
     {
+        file->mMutex.unlock();
         CUBOS_ERROR("Could not unmount archive at '{}/{}': file does not belong to an archive", mPath, path);
         return false;
     }
@@ -159,6 +160,7 @@ bool File::unmount(std::string_view path)
     // Is the file really the root of the archive?
     if (file->mId != 1)
     {
+        file->mMutex.unlock();
         CUBOS_ERROR("Could not unmount archive at '{}/{}': file is not the root of its archive", mPath, path);
         return false;
     }
@@ -176,11 +178,14 @@ bool File::unmount(std::string_view path)
         auto next = file->mParent;
 
         // Remove the file from its parent directory.
-        std::lock_guard<std::mutex> dirLock(file->mParent->mMutex);
-        file->mParent->removeChild(file);
+        next->mMutex.lock();
+        next->removeChild(file);
         file->mParent = nullptr;
+        file->mMutex.unlock();
         file = next;
     }
+
+    file->mMutex.unlock();
 
     CUBOS_INFO("Unmounted archive at '{}/{}'", mPath, path);
     return true;
