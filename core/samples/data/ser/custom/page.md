@@ -2,6 +2,8 @@
 
 @brief Implementing your own @ref cubos::core::data::Serializer "Serializer".
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/data/ser/custom).
+
 To define your own serializer type, you'll need to include
 @ref core/data/ser/serializer.hpp. For simplicity, in this sample we'll use
 the following aliases:

@@ -2,6 +2,8 @@
 
 @brief Using the @ref input-plugin plugin.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/input).
+
 This example shows how the @ref scene-input plugin can be used to handle user input.
 
 The plugin function is included from the @ref engine/input/plugin.hpp header.

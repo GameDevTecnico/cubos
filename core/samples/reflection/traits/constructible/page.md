@@ -2,6 +2,8 @@
 
 @brief Exposing the destructor and constructors of a type.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/reflection/traits/constructible).
+
 You may find it useful while working with type-erased data to be able to create
 copies of the data, destroy it, or move it around. The
 @ref cubos::core::reflection::ConstructibleTrait "ConstructibleTrait" trait

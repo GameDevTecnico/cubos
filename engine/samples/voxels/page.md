@@ -2,6 +2,8 @@
 
 @brief Using the @ref voxels-plugin plugin.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/voxels).
+
 This example shows the @ref voxels-plugin plugin, which registers asset bridges used to load voxel grids (`.grid`) and palettes (`.pal`). Check out the @ref examples-engine-assets-bridge sample for an introduction on the @ref assets-plugin plugin.
 
 It is very similar to the @ref examples-engine-renderer, differing only in the fact that in this sample the grid and palette are loaded from files.

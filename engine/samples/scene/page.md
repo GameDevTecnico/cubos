@@ -2,6 +2,8 @@
 
 @brief Using the @ref scene-plugin plugin.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/scene).
+
 This example shows how the @ref scene-plugin plugin can be used to create
 scene assets and spawn them on the world.
 

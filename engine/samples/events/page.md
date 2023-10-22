@@ -2,6 +2,8 @@
 
 @brief Using the @ref cubos::core::ecs::EventReader "EventReader" and @ref cubos::core::ecs::EventWriter "EventWriter".
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/events).
+
 This example shows how the @ref cubos::core::ecs::EventReader "EventReader" and the @ref cubos::core::ecs::EventWriter "EventWriter" system arguments can be used to communicate from one system to another.
 
 For convinience, we introduce these names in our scope with using-declarations.

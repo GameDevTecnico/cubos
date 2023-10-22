@@ -2,6 +2,8 @@
 
 @brief Defining and using reflectable types.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/core/samples/reflection/basic/).
+
 Lets say you have a type `Person`, which you want to be able to reflect. You
 can declare it as reflectable using the macro @ref CUBOS_REFLECT, for example,
 in your header, like this:

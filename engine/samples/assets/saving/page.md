@@ -2,6 +2,8 @@
 
 @brief Creating and saving assets.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/assets/saving).
+
 This example demonstrates how a new asset be created programatically and how it
 can be saved to the assets directory, which is useful while working on tools
 such as **TESSERATOS.**

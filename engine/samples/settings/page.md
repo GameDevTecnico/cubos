@@ -2,6 +2,8 @@
 
 @brief Using the @ref settings-plugin plugin.
 
+@see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/settings).
+
 This example shows how the @ref settings-plugin plugin can be used to load
 settings from a file and command-line arguments.
 
