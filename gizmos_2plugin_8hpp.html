@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Settings module | CUBOS.</title>
+  <title>engine/gizmos/plugin.hpp file | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,61 +44,38 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Settings <span class="m-thin">module</span></h1>
-        <p>Adds and manages settings.</p>
+          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_ce4a27e99b2102cfb79fc5b09181f4e6.html">gizmos</a>/</span>plugin.hpp <span class="m-thin">file</span>
+        </h1>
+        <p>Plugin entry point.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md83">Settings</a></li>
-            <li><a href="#autotoc_md84">Resources</a></li>
-            <li><a href="#autotoc_md85">Startup tags</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the <a href="examples-engine-settings.html" class="m-doc">Settings</a> example for a demonstration of this plugin.</p></aside><p>Initially, parses settings from the <a href="structcubos_1_1engine_1_1Arguments.html" class="m-doc">Arguments</a> resource. Then, the file at <code>settings.path</code> is loaded, as a JSON file. If the file does not exist, it is created. If it can&#x27;t be parsed, the plugin aborts. Previously set settings will be overriden, and file settings will be overriden by command line arguments.</p><section id="autotoc_md83"><h3><a href="#autotoc_md83">Settings</a></h3><ul><li><code>settings.path</code> - path of the settings file (default: <code>./settings.json</code>).</li></ul></section><section id="autotoc_md84"><h3><a href="#autotoc_md84">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a> - holds the settings.</li></ul></section><section id="autotoc_md85"><h3><a href="#autotoc_md85">Startup tags</a></h3><ul><li><code>cubos.settings</code> - the settings are loaded, overriding values set previously.</li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="settings_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
+            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#gaa142415680fcc11723573d9d91315ff8" class="m-doc">settingsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="group__gizmos-plugin.html#ga43aa8cb4de4e0a7c28172f737a3f45e7" class="m-doc">gizmosPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="gaa142415680fcc11723573d9d91315ff8"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaa142415680fcc11723573d9d91315ff8" class="m-doc-self">settingsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="settings_2plugin_8hpp.html">&lt;engine/settings/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>

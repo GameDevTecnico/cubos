@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Settings module | CUBOS.</title>
+  <title>Engine &raquo; Gizmos module | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -45,46 +45,59 @@
       <div class="m-col-l-10 m-push-l-1">
         <h1>
           <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Settings <span class="m-thin">module</span></h1>
-        <p>Adds and manages settings.</p>
+          Gizmos <span class="m-thin">module</span></h1>
+        <p>Used to draw gizmos helpful for debugging and tools.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md83">Settings</a></li>
-            <li><a href="#autotoc_md84">Resources</a></li>
-            <li><a href="#autotoc_md85">Startup tags</a></li>
+            <li><a href="#autotoc_md63">Resources</a></li>
+            <li><a href="#autotoc_md64">Startup tags</a></li>
+            <li><a href="#autotoc_md65">Tags</a></li>
+            <li><a href="#autotoc_md66">Dependencies</a></li>
             <li>
               Reference
               <ul>
                 <li><a href="#files">Files</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the <a href="examples-engine-settings.html" class="m-doc">Settings</a> example for a demonstration of this plugin.</p></aside><p>Initially, parses settings from the <a href="structcubos_1_1engine_1_1Arguments.html" class="m-doc">Arguments</a> resource. Then, the file at <code>settings.path</code> is loaded, as a JSON file. If the file does not exist, it is created. If it can&#x27;t be parsed, the plugin aborts. Previously set settings will be overriden, and file settings will be overriden by command line arguments.</p><section id="autotoc_md83"><h3><a href="#autotoc_md83">Settings</a></h3><ul><li><code>settings.path</code> - path of the settings file (default: <code>./settings.json</code>).</li></ul></section><section id="autotoc_md84"><h3><a href="#autotoc_md84">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a> - holds the settings.</li></ul></section><section id="autotoc_md85"><h3><a href="#autotoc_md85">Startup tags</a></h3><ul><li><code>cubos.settings</code> - the settings are loaded, overriding values set previously.</li></ul></section>
+<section id="autotoc_md63"><h3><a href="#autotoc_md63">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">Gizmos</a> - used to queue gizmo draw commands.</li></ul></section><section id="autotoc_md64"><h3><a href="#autotoc_md64">Startup tags</a></h3><ul><li><code>cubos.gizmos.init</code> - the gizmos renderer is initialized, after <code>cubos.window.init</code></li></ul></section><section id="autotoc_md65"><h3><a href="#autotoc_md65">Tags</a></h3><ul><li><code>cubos.gizmos.draw</code> - queued gizmos are rendered to the window, after <code>cubos.renderer.draw</code> and before <code>cubos.window.render</code>.</li></ul></section><section id="autotoc_md66"><h3><a href="#autotoc_md66">Dependencies</a></h3><ul><li><a href="group__window-plugin.html" class="m-doc">Window</a></li></ul></section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="settings_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
+            <dt>file <a href="gizmos_8hpp.html" class="m-doc">gizmos.hpp</a></dt>
+            <dd>Resource <a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">cubos::<wbr />engine::<wbr />Gizmos</a>.</dd>
+            <dt>file <a href="gizmos_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
             <dd>Plugin entry point.</dd>
+          </dl>
+        </section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1engine_1_1Gizmos.html" class="m-doc">cubos::engine::Gizmos</a>
+            </dt>
+            <dd>Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#gaa142415680fcc11723573d9d91315ff8" class="m-doc">settingsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ga43aa8cb4de4e0a7c28172f737a3f45e7" class="m-doc">gizmosPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="gaa142415680fcc11723573d9d91315ff8"><div>
+          <section class="m-doc-details" id="ga43aa8cb4de4e0a7c28172f737a3f45e7"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaa142415680fcc11723573d9d91315ff8" class="m-doc-self">settingsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="settings_2plugin_8hpp.html">&lt;engine/settings/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga43aa8cb4de4e0a7c28172f737a3f45e7" class="m-doc-self">gizmosPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gizmos_2plugin_8hpp.html">&lt;engine/gizmos/plugin.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -94,7 +107,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
+                  <td><strong>CUBOS</strong>. main class.</td>
                 </tr>
               </tbody>
             </table>

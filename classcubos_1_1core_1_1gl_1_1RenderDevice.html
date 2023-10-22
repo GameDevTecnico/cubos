@@ -212,6 +212,11 @@
             </dt>
             <dd>Clears the stencil buffer bit on the current framebuffer to a specific value.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5067f92576a0b993b3497481b8ad3424" class="m-doc">drawLines</a>(</span><span class="m-doc-wrap">std::size_t offset,
+              std::size_t count) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Draws lines.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a4c87806613447638c1bcd7250fa27b44" class="m-doc">drawTriangles</a>(</span><span class="m-doc-wrap">std::size_t offset,
               std::size_t count) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -977,6 +982,28 @@
                 <tr>
                   <td style="width: 1%">stencil</td>
                   <td>Stencil value.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5067f92576a0b993b3497481b8ad3424"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />RenderDevice::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5067f92576a0b993b3497481b8ad3424" class="m-doc-self">drawLines</a>(</span><span class="m-doc-wrap">std::size_t offset,
+              std::size_t count) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Draws lines.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">offset</td>
+                  <td>Index of the first vertex to be drawn.</td>
+                </tr>
+                <tr>
+                  <td>count</td>
+                  <td>Number of vertices that will be drawn.</td>
                 </tr>
               </tbody>
             </table>

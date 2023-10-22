@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Settings module | CUBOS.</title>
+  <title>cubos::engine::Gizmos::Gizmo class | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,57 +44,84 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          Settings <span class="m-thin">module</span></h1>
-        <p>Adds and manages settings.</p>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span><span class="m-breadcrumb"><a href="classcubos_1_1engine_1_1Gizmos.html">Gizmos</a>::<wbr/></span>Gizmo <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="gizmos_8hpp.html">&lt;engine/gizmos/gizmos.hpp&gt;</a></div>
+        </h1>
+        <p>Class that describes a type of gizmo.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md83">Settings</a></li>
-            <li><a href="#autotoc_md84">Resources</a></li>
-            <li><a href="#autotoc_md85">Startup tags</a></li>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the <a href="examples-engine-settings.html" class="m-doc">Settings</a> example for a demonstration of this plugin.</p></aside><p>Initially, parses settings from the <a href="structcubos_1_1engine_1_1Arguments.html" class="m-doc">Arguments</a> resource. Then, the file at <code>settings.path</code> is loaded, as a JSON file. If the file does not exist, it is created. If it can&#x27;t be parsed, the plugin aborts. Previously set settings will be overriden, and file settings will be overriden by command line arguments.</p><section id="autotoc_md83"><h3><a href="#autotoc_md83">Settings</a></h3><ul><li><code>settings.path</code> - path of the settings file (default: <code>./settings.json</code>).</li></ul></section><section id="autotoc_md84"><h3><a href="#autotoc_md84">Resources</a></h3><ul><li><a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a> - holds the settings.</li></ul></section><section id="autotoc_md85"><h3><a href="#autotoc_md85">Startup tags</a></h3><ul><li><code>cubos.settings</code> - the settings are loaded, overriding values set previously.</li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="settings_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#gaa142415680fcc11723573d9d91315ff8" class="m-doc">settingsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#af3422887bf70269511306c09f80475cd" class="m-doc">draw</a>(</span><span class="m-doc-wrap">GizmosRenderer&amp; renderer) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Plugin entry function.</dd>
+            <dd>Draws the gizmo to screen.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adb3c7a261e9e5d1ee4fff78cb6a8fef9" class="m-doc">decreaseLifespan</a>(</span><span class="m-doc-wrap">float delta) -&gt; bool</span>
+            </dt>
+            <dd>Decreases the time the gizmo has left before it is destroyed.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a62cb103b1c273c1e37c9c85000382b75">
+              const std::string&amp; <a href="#a62cb103b1c273c1e37c9c85000382b75" class="m-doc-self">mId</a>
+            </dt>
+            <dd><a href="classcubos_1_1engine_1_1Gizmos_1_1Gizmo.html" class="m-doc">Gizmo</a> identifier.</dd>
+            <dt id="a9c057b5f5457f979e2e0bbd595dc6fc5">
+              glm::vec3 <a href="#a9c057b5f5457f979e2e0bbd595dc6fc5" class="m-doc-self">mColor</a>
+            </dt>
+            <dd>Color of the gizmo.</dd>
+            <dt id="a6828dbc86821ef96b353f7a964a0865e">
+              float <a href="#a6828dbc86821ef96b353f7a964a0865e" class="m-doc-self">mLifespan</a>
+            </dt>
+            <dd>Time in seconds the gizmo has left to live.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="gaa142415680fcc11723573d9d91315ff8"><div>
+          <section class="m-doc-details" id="af3422887bf70269511306c09f80475cd"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaa142415680fcc11723573d9d91315ff8" class="m-doc-self">settingsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="settings_2plugin_8hpp.html">&lt;engine/settings/plugin.hpp&gt;</a></div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr />Gizmo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3422887bf70269511306c09f80475cd" class="m-doc-self">draw</a>(</span><span class="m-doc-wrap">GizmosRenderer&amp; renderer) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
-            <p>Plugin entry function.</p>
+            <p>Draws the gizmo to screen.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
+                  <td style="width: 1%">renderer</td>
+                  <td>Renderer.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adb3c7a261e9e5d1ee4fff78cb6a8fef9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Gizmos::<wbr />Gizmo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adb3c7a261e9e5d1ee4fff78cb6a8fef9" class="m-doc-self">decreaseLifespan</a>(</span><span class="m-doc-wrap">float delta)</span></span>
+            </h3>
+            <p>Decreases the time the gizmo has left before it is destroyed.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">delta</td>
+                  <td>Seconds since the last frame.</td>
                 </tr>
               </tbody>
             </table>
