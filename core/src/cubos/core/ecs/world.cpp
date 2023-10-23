@@ -1,5 +1,6 @@
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/log.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::ecs;
@@ -122,6 +123,16 @@ void* World::Components::get(const reflection::Type& type)
     return mWorld.mComponentManager.storage(componentId)->get(mEntity.index);
 }
 
+auto World::Components::begin() -> Iterator
+{
+    return Iterator{*this, false};
+}
+
+auto World::Components::end() -> Iterator
+{
+    return Iterator{*this, true};
+}
+
 World::ConstComponents::ConstComponents(const World& world, Entity entity)
     : mWorld{world}
     , mEntity{entity}
@@ -140,4 +151,108 @@ const void* World::ConstComponents::get(const reflection::Type& type) const
     CUBOS_ASSERT(this->has(type));
     std::size_t componentId = mWorld.mComponentManager.getID(type);
     return mWorld.mComponentManager.storage(componentId)->get(mEntity.index);
+}
+
+auto World::ConstComponents::begin() const -> Iterator
+{
+    return Iterator{*this, false};
+}
+
+auto World::ConstComponents::end() const -> Iterator
+{
+    return Iterator{*this, true};
+}
+
+World::Components::Iterator::Iterator(Components& components, bool end)
+    : mComponents{components}
+{
+    const auto& mask = mComponents.mWorld.mEntityManager.getMask(mComponents.mEntity);
+
+    if (end)
+    {
+        mId = mask.size();
+    }
+
+    while (mId < mask.size() && !mask.test(mId))
+    {
+        mId += 1;
+    }
+}
+
+bool World::Components::Iterator::operator==(const Iterator& other) const
+{
+    return mId == other.mId && mComponents.mEntity == other.mComponents.mEntity;
+}
+
+auto World::Components::Iterator::operator*() const -> const Component&
+{
+    const auto& mask = mComponents.mWorld.mEntityManager.getMask(mComponents.mEntity);
+    CUBOS_ASSERT(mId < mask.size(), "Iterator is out of bounds");
+    mComponent.type = &mComponents.mWorld.mComponentManager.getType(mId);
+    mComponent.value = mComponents.get(*mComponent.type);
+    return mComponent;
+}
+
+auto World::Components::Iterator::operator->() const -> const Component*
+{
+    return &this->operator*();
+}
+
+auto World::Components::Iterator::operator++() -> Iterator&
+{
+    const auto& mask = mComponents.mWorld.mEntityManager.getMask(mComponents.mEntity);
+    CUBOS_ASSERT(mId < mask.size(), "Iterator is out of bounds");
+    do
+    {
+        mId += 1;
+    } while (mId < mask.size() && !mask.test(mId));
+
+    return *this;
+}
+
+World::ConstComponents::Iterator::Iterator(const ConstComponents& components, bool end)
+    : mComponents{components}
+{
+    const auto& mask = mComponents.mWorld.mEntityManager.getMask(mComponents.mEntity);
+
+    if (end)
+    {
+        mId = mask.size();
+    }
+
+    while (mId < mask.size() && !mask.test(mId))
+    {
+        mId += 1;
+    }
+}
+
+bool World::ConstComponents::Iterator::operator==(const Iterator& other) const
+{
+    return mId == other.mId && mComponents.mEntity == other.mComponents.mEntity;
+}
+
+auto World::ConstComponents::Iterator::operator*() const -> const Component&
+{
+    const auto& mask = mComponents.mWorld.mEntityManager.getMask(mComponents.mEntity);
+    CUBOS_ASSERT(mId < mask.size(), "Iterator is out of bounds");
+    mComponent.type = &mComponents.mWorld.mComponentManager.getType(mId);
+    mComponent.value = mComponents.get(*mComponent.type);
+    return mComponent;
+}
+
+auto World::ConstComponents::Iterator::operator->() const -> const Component*
+{
+    return &this->operator*();
+}
+
+auto World::ConstComponents::Iterator::operator++() -> Iterator&
+{
+    const auto& mask = mComponents.mWorld.mEntityManager.getMask(mComponents.mEntity);
+    CUBOS_ASSERT(mId < mask.size(), "Iterator is out of bounds");
+    do
+    {
+        mId += 1;
+    } while (mId < mask.size() && !mask.test(mId));
+
+    return *this;
 }
