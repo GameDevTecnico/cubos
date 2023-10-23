@@ -70,19 +70,18 @@ TEST_CASE("ecs::Blueprint")
         auto spawnedBaz = spawned.entity("baz");
         cmdBuffer.commit();
 
-        // Package the entities to make sure they were properly spawned.
-        auto barPkg = world.pack(spawnedBar);
-        auto bazPkg = world.pack(spawnedBaz);
+        // Check if the spawned entities have the right components.
+        auto barComponents = world.components(spawnedBar);
+        auto bazComponents = world.components(spawnedBaz);
 
         // "bar" has no components.
-        CHECK(barPkg.type() == Package::Type::Object);
-        CHECK(barPkg.fields().size() == 0);
+        CHECK(barComponents.begin() == barComponents.end());
 
         // "baz" has a ParentComponent with parent = "bar" and an IntegerComponent with integer = 2.
-        CHECK(bazPkg.type() == Package::Type::Object);
-        CHECK(bazPkg.fields().size() == 2);
-        CHECK(bazPkg.field("parent").get<Entity>() == spawnedBar);
-        CHECK(bazPkg.field("integer").get<int>() == 2);
+        REQUIRE(bazComponents.has<ParentComponent>());
+        REQUIRE(bazComponents.has<IntegerComponent>());
+        CHECK(bazComponents.get<ParentComponent>().id == spawnedBar);
+        CHECK(bazComponents.get<IntegerComponent>().value == 2);
     }
 
     SUBCASE("merge one blueprint into another blueprint and then spawn it")
@@ -107,25 +106,23 @@ TEST_CASE("ecs::Blueprint")
         auto spawnedBaz = spawned.entity("sub.baz");
         cmdBuffer.commit();
 
-        // Package the entities to make sure they were properly spawned.
-        auto fooPkg = world.pack(spawnedFoo);
-        auto barPkg = world.pack(spawnedBar);
-        auto bazPkg = world.pack(spawnedBaz);
+        // Check if the spawned entities have the right components.
+        auto fooComponents = world.components(spawnedFoo);
+        auto barComponents = world.components(spawnedBar);
+        auto bazComponents = world.components(spawnedBaz);
 
         // "foo" has an IntegerComponent with value = 1.
-        CHECK(fooPkg.type() == Package::Type::Object);
-        CHECK(fooPkg.fields().size() == 1);
-        CHECK(fooPkg.field("integer").get<int>() == 1);
+        REQUIRE(fooComponents.has<IntegerComponent>());
+        CHECK(fooComponents.get<IntegerComponent>().value == 1);
 
         // "bar" has no components.
-        CHECK(barPkg.type() == Package::Type::Object);
-        CHECK(barPkg.fields().size() == 0);
+        CHECK(barComponents.begin() == barComponents.end());
 
         // "baz" has a ParentComponent with parent = "bar" and an IntegerComponent with value = 2.
-        CHECK(bazPkg.type() == Package::Type::Object);
-        CHECK(bazPkg.fields().size() == 2);
-        CHECK(bazPkg.field("parent").get<Entity>() == spawnedBar);
-        CHECK(bazPkg.field("integer").get<int>() == 2);
+        REQUIRE(bazComponents.has<ParentComponent>());
+        REQUIRE(bazComponents.has<IntegerComponent>());
+        CHECK(bazComponents.get<ParentComponent>().id == spawnedBar);
+        CHECK(bazComponents.get<IntegerComponent>().value == 2);
     }
 
     SUBCASE("check if arrays of entities are converted correctly when spawned")
