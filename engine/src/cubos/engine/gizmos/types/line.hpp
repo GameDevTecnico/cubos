@@ -4,6 +4,8 @@
 
 #include <cubos/engine/gizmos/gizmos.hpp>
 
+#include "../renderer.hpp"
+
 namespace cubos::engine
 {
     /// @brief A gizmo that is a line connecting two points
@@ -28,7 +30,7 @@ namespace cubos::engine
 
         /// @brief draws the gizmo to screen
         /// @param renderer the GizmosRenderer in use
-        void draw(cubos::engine::GizmosRenderer& renderer) override
+        void draw(cubos::engine::GizmosRenderer& renderer, const glm::mat<4, 4, float, glm::packed_highp>& mvp) override
         {
             auto* verts = static_cast<glm::vec3*>(renderer.linePrimitive.vb->map());
             verts[0] = {mPointA[0], mPointA[1], mPointA[2]};
@@ -38,11 +40,8 @@ namespace cubos::engine
 
             renderer.renderDevice->setVertexArray(renderer.linePrimitive.va);
 
-            auto v = glm::translate(glm::mat4(1.0F), glm::vec3(-1.0F, -1.0F, 0.0F));
-            auto p = glm::ortho(-0.5F, 0.5F, -0.5F, 0.5F);
-            auto vp = v * p;
             auto mvpBuffer =
-                renderer.renderDevice->createConstantBuffer(sizeof(glm::mat4), &vp, cubos::core::gl::Usage::Dynamic);
+                renderer.renderDevice->createConstantBuffer(sizeof(glm::mat4), &mvp, cubos::core::gl::Usage::Dynamic);
             renderer.pipeline->getBindingPoint("MVP")->bind(mvpBuffer);
 
             renderer.pipeline->getBindingPoint("objColor")->setConstant(mColor);

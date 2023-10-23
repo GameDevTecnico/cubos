@@ -14,6 +14,20 @@ To draw a gizmo, all you need to do is to get a reference to the @ref cubos::eng
 
 This code will draw a red line from the top-left of the screen to the bottom right, and it will stay there for 10 seconds.
 
-In this other example, we draw a line, a box, and a wire box. Unlike the one in the previous example, this system is not a start-up system, so the draw functions get called every single frame. When this happensl, you should set the lifetime of a gizmo to 0, which means it will be drawn for a single frame only. This way we avoid drawing gizmos on top of identical ones that were already there, or in the case of moving gizmos, leaving a trail of old version behind them.
+In this other example, we draw lines, a box, and a wire box. Unlike the one in the previous example, this system is not a start-up system, so the draw functions get called every single frame. When this happens, you should set the lifetime of a gizmo to 0, which means it will be drawn for a single frame only. This way we avoid drawing gizmos on top of identical ones that were already there, or in the case of moving gizmos, leaving a trail of old version behind them.
+
+Let's start with the lines. We are using four cameras in our scene, so let's add two lines to separate each camera. These lines will be in Screen space, as we want them to be just drawn once, indepently of the number of cameras; and we want them to use screen coordinates, as they should be drawn in the middle of the screen.
+
+@snippet gizmos/main.cpp Lines
+
+Let's now add a wireboxe. We want to know were exactly is the centre of each camera, so let's add a reticule. This box will be in View space, as we want it to be drawn once per camera and we want it to use view coordinates, as it should be drawn in the middle of each viewport.
+
+@snippet gizmos/main.cpp WireBox
+
+Finally, let's add a box. This box will be in World space, as it's the last space left to cover. It will be drawn by any camera that is looking at it, much like if it was an object in the world.
+
+@snippet gizmos/main.cpp Box
+
+The whole system looks like this:
 
 @snippet gizmos/main.cpp System
