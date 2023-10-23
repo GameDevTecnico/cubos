@@ -149,9 +149,12 @@ namespace cubos::core::ecs
         ComponentManager mComponentManager;
     };
 
-    class World::Components
+    class World::Components final
     {
     public:
+        /// @brief Used to iterate over the the components.
+        class Iterator;
+
         /// @brief Constructs.
         /// @param world World.
         /// @param entity Entity.
@@ -192,14 +195,25 @@ namespace cubos::core::ecs
             return *static_cast<T*>(this->get(reflection::reflect<T>()));
         }
 
+        /// @brief Returns an iterator to the first component.
+        /// @return Iterator.
+        Iterator begin();
+
+        /// @brief Returns an iterator to the entry after the last component.
+        /// @return Iterator.
+        Iterator end();
+
     private:
         World& mWorld;
         Entity mEntity;
     };
 
-    class World::ConstComponents
+    class World::ConstComponents final
     {
     public:
+        /// @brief Used to iterate over the the components.
+        class Iterator;
+
         /// @brief Constructs.
         /// @param world World.
         /// @param entity Entity.
@@ -240,9 +254,107 @@ namespace cubos::core::ecs
             return *static_cast<const T*>(this->get(reflection::reflect<T>()));
         }
 
+        /// @brief Returns an iterator to the first component.
+        /// @return Iterator.
+        Iterator begin() const;
+
+        /// @brief Returns an iterator to the entry after the last component.
+        /// @return Iterator.
+        Iterator end() const;
+
     private:
         const World& mWorld;
         Entity mEntity;
+    };
+
+    class World::Components::Iterator final
+    {
+    public:
+        /// @brief Output structure for the iterator.
+        struct Component
+        {
+            const reflection::Type* type; ///< Component type.
+            void* value;                  ///< Component value.
+        };
+
+        /// @brief Constructs.
+        /// @param components Components view.
+        /// @param end Whether the iterator represents the end or the beginning.
+        Iterator(Components& components, bool end);
+
+        /// @brief Copy constructs.
+        /// @param other Other iterator.
+        Iterator(const Iterator& other) = default;
+
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to the same component.
+        bool operator==(const Iterator& other) const;
+
+        /// @brief Accesses the component referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Component& operator*() const;
+
+        /// @brief Accesses the component referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Component* operator->() const;
+
+        /// @brief Advances the iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
+
+    private:
+        World::Components& mComponents;
+        std::size_t mId{1};
+        mutable Component mComponent;
+    };
+
+    class World::ConstComponents::Iterator final
+    {
+    public:
+        /// @brief Output structure for the iterator.
+        struct Component
+        {
+            const reflection::Type* type; ///< Component type.
+            const void* value;            ///< Component value.
+        };
+
+        /// @brief Constructs.
+        /// @param components Components view.
+        /// @param end Whether the iterator represents the end or the beginning.
+        Iterator(const ConstComponents& components, bool end);
+
+        /// @brief Copy constructs.
+        /// @param other Other iterator.
+        Iterator(const Iterator& other) = default;
+
+        /// @brief Compares two iterators.
+        /// @param other Other iterator.
+        /// @return Whether the iterators point to the same component.
+        bool operator==(const Iterator& other) const;
+
+        /// @brief Accesses the component referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Component& operator*() const;
+
+        /// @brief Accesses the component referenced by this iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Entry.
+        const Component* operator->() const;
+
+        /// @brief Advances the iterator.
+        /// @note Aborts if out of bounds.
+        /// @return Reference to this.
+        Iterator& operator++();
+
+    private:
+        const World::ConstComponents& mComponents;
+        std::size_t mId{1};
+        mutable Component mComponent;
     };
 
     // Implementation.

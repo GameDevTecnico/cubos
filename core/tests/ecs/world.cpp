@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include "utils.hpp"
 
@@ -11,6 +12,8 @@ using cubos::core::ecs::World;
 TEST_CASE("ecs::World")
 {
     World world{};
+    const World& constWorld = world;
+
     setupWorld(world);
 
     SUBCASE("create an entity and then destroy it")
@@ -30,6 +33,12 @@ TEST_CASE("ecs::World")
         CHECK(*world.begin() == foo);
         CHECK(++world.begin() == world.end());
 
+        // It shouldn't have any components.
+        auto components = world.components(foo);
+        CHECK(components.begin() == components.end());
+        auto constComponents = constWorld.components(foo);
+        CHECK(constComponents.begin() == constComponents.end());
+
         // Remove the entity.
         world.destroy(foo);
         CHECK_FALSE(world.isAlive(foo));
@@ -48,6 +57,17 @@ TEST_CASE("ecs::World")
         CHECK_FALSE(world.components(foo).has<ParentComponent>());
         CHECK_FALSE(destroyed);
 
+        // Iterating gives us a single component
+        auto components = world.components(foo);
+        CHECK(components.begin() != components.end());
+        CHECK(++components.begin() == components.end());
+        CHECK(components.begin()->type->is<DetectDestructorComponent>());
+
+        auto constComponents = constWorld.components(foo);
+        CHECK(constComponents.begin() != constComponents.end());
+        CHECK(++constComponents.begin() == constComponents.end());
+        CHECK(constComponents.begin()->type->is<DetectDestructorComponent>());
+
         // Add a parent component.
         world.add(foo, ParentComponent{});
         CHECK(world.components(foo).has<DetectDestructorComponent>());
@@ -57,7 +77,7 @@ TEST_CASE("ecs::World")
         // Remove the detect destructor component.
         world.remove<DetectDestructorComponent>(foo);
         CHECK_FALSE(world.components(foo).has<DetectDestructorComponent>());
-        CHECK(static_cast<const World&>(world).components(foo).has<ParentComponent>());
+        CHECK(constWorld.components(foo).has<ParentComponent>());
         CHECK(destroyed);
     }
 
