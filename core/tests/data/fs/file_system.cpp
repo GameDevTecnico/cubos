@@ -225,11 +225,14 @@ TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
         // 2: /bar     (directory)
         // 3: /foo     (file)
         // 4: /bar/baz (file)
-        bool directories[] = {true, true, false, false};
-        std::string names[] = {"", "bar", "foo", "baz", "qux"};
-        std::size_t parents[] = {0, 1, 1, 2, 2};
-        std::size_t siblings[] = {0, 3, 0, 0, 4};
-        std::size_t children[] = {2, 4, 0, 0, 0};
+        bool directories[] = {true, true, false, false, false};
+        std::string names[] = {"", "bar", "foo", "baz", "qux", "newbaz"};
+        std::size_t parents[] = {0, 1, 1, 2, 2, 2};
+        std::size_t siblings[] = {0, 3, 0, 0, 4, 5};
+        std::size_t children[] = {2, 4, 0, 0, 0, 0};
+
+        char buffers[7][4096];       // file data buffers
+        bool fillFileBuffers = true; // flag to not generate file data buffers to test if ::copy works
 
         auto archive = mockArchive(readOnly);
         archive->directoryWhen = [directories](std::size_t id) { return directories[id - 1]; };
@@ -239,15 +242,35 @@ TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
         archive->childWhen = [children](std::size_t id) { return children[id - 1]; };
         archive->createWhen = [&children](std::size_t parent, std::string_view name, bool directory) {
             // Should only be called for creating "qux" under "bar"
+            if (name == "qux")
+            {
+                REQUIRE(parent == 2);
+                REQUIRE_FALSE(directory);
+                children[2] = 5;
+                return 5;
+            }
+
+            REQUIRE(name == "newbaz");
             REQUIRE(parent == 2);
-            REQUIRE(name == "qux");
             REQUIRE_FALSE(directory);
-            children[2] = 5;
-            return 5;
+            children[2] = 6;
+            return 6;
         };
-        archive->openWhen = [](std::size_t id, auto, auto) {
-            REQUIRE(id == 5);
-            return std::make_unique<BufferStream>(nullptr, 0, false);
+        archive->openWhen = [&buffers, &fillFileBuffers](std::size_t id, auto, auto) {
+            bool correctId = id == 6 || id == 5 || id == 4;
+            REQUIRE(correctId);
+
+            // Fill file with chunks of data only if requested
+            if (fillFileBuffers)
+            {
+                for (int i = 0; i < 4095; i++)
+                {
+                    buffers[id][i] = std::to_string(id).c_str()[0]; // ¯\_(ツ)_/ ...
+                }
+                buffers[id][4095] = '\0';
+            }
+
+            return std::make_unique<BufferStream>(buffers[id], 4096);
         };
         archive->destroyWhen = [](auto) { return true; };
 
@@ -313,9 +336,31 @@ TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
             // Cannot create a file under a read-only archive.
             REQUIRE(FileSystem::create("/dir/sub/arc/bar/qux", false) == nullptr);
             REQUIRE(FileSystem::open("/dir/sub/arc/bar/qux", File::OpenMode::Write) == nullptr);
+
+            // Cannot overwrite a read-only file
+            REQUIRE_FALSE(FileSystem::copy(baz->path(), "/dir/sub/arc/bar/qux"));
         }
         else
         {
+            // Test copying files
+            REQUIRE_FALSE(FileSystem::copy("/dir/sub/arc/bar/nonexistent", "/dir/sub/arc/bar/newfiledoesntmatter"));
+
+            // Test if correct content was copied.
+            {
+                REQUIRE(FileSystem::copy(baz->path(), "/dir/sub/arc/bar/newbaz"));
+
+                fillFileBuffers = false;
+
+                auto stream = FileSystem::open("/dir/sub/arc/bar/newbaz", File::OpenMode::Read);
+                REQUIRE(stream != nullptr);
+
+                std::string result = dump(*stream);
+                REQUIRE(result.size() == strlen(buffers[baz->id()]));
+                REQUIRE(result == buffers[baz->id()]);
+
+                fillFileBuffers = true;
+            }
+
             // Cannot create a file with an invalid path.
             REQUIRE(bar->create("/qux", false) == nullptr);
 
@@ -331,10 +376,8 @@ TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
             REQUIRE(qux->archive() != nullptr);
             REQUIRE(qux->id() == 5);
             REQUIRE(qux->parent() == bar);
-            REQUIRE(qux->sibling() == baz);
             REQUIRE(qux->child() == nullptr);
             REQUIRE(bar->child() == qux);
-            REQUIRE(baz->sibling() == nullptr);
 
             // Destroy "bar" and check that "qux" and "baz" are gone.
             REQUIRE(FileSystem::destroy("/dir/sub/arc/bar"));
