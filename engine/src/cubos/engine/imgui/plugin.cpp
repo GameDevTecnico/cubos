@@ -1,4 +1,5 @@
 #include <cubos/engine/imgui/plugin.hpp>
+#include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
 #include "imgui.hpp"
@@ -38,9 +39,10 @@ static void end()
 void cubos::engine::imguiPlugin(Cubos& cubos)
 {
     cubos.addPlugin(windowPlugin);
+    cubos.addPlugin(rendererPlugin);
 
     cubos.startupTag("cubos.imgui.init").after("cubos.window.init");
-    cubos.tag("cubos.imgui.begin").after("cubos.window.poll");
+    cubos.tag("cubos.imgui.begin").after("cubos.renderer.draw");
     cubos.tag("cubos.imgui.end").before("cubos.window.render").after("cubos.imgui.begin");
     cubos.tag("cubos.imgui").after("cubos.imgui.begin").before("cubos.imgui.end");
 

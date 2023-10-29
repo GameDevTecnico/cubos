@@ -21,11 +21,12 @@ namespace cubos::engine
     /// - `cubos.imgui.init` - `ImGui` is initialized, after `cubos.window.init`.
     ///
     /// ## Tags
-    /// - `cubos.imgui.begin` - the ImGui frame begins (after `cubos.window.poll`).
+    /// - `cubos.imgui.begin` - the ImGui frame begins (after `cubos.renderer.draw`).
     /// - `cubos.imgui.end` - the ImGui frame ends (before `cubos.window.render`).
     /// - `cubos.imgui` - runs between the previous two tags.
     ///
     /// ## Dependencies
+    /// - @ref renderer-plugin
     /// - @ref window-plugin
 
     /// @brief Plugin entry function.
