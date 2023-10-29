@@ -113,25 +113,25 @@ bool FileSystem::copy(std::string_view sourcePath, std::string_view destinationP
 {
     auto srcStream = FileSystem::open(sourcePath, File::OpenMode::Read);
 
-    if (!srcStream)
+    if (srcStream == nullptr)
     {
-        CUBOS_ERROR("Failed to open source stream");
+        CUBOS_ERROR("Could not open source file '{}' for copying", sourcePath);
         return false;
     }
 
     auto dstFile = FileSystem::create(destinationPath);
 
-    if (!dstFile)
+    if (dstFile == nullptr)
     {
-        CUBOS_ERROR("Failed to create destination file '{}'", destinationPath);
+        CUBOS_ERROR("Could not create destination file '{}' for copying", destinationPath);
         return false;
     }
 
     auto dstStream = dstFile->open(File::OpenMode::Write);
 
-    if (!dstStream)
+    if (dstStream == nullptr)
     {
-        CUBOS_ERROR("Failed to open destination stream");
+        CUBOS_ERROR("Could not open destination file '{}' for copying", destinationPath);
         return false;
     }
 
@@ -145,11 +145,6 @@ bool FileSystem::copy(std::string_view sourcePath, std::string_view destinationP
         if (bytesRead > 0)
         {
             dstStream->write(buffer, bytesRead);
-        }
-
-        if (bytesRead < ChunkSize)
-        {
-            break;
         }
     }
 
