@@ -64,7 +64,8 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#af3422887bf70269511306c09f80475cd" class="m-doc">draw</a>(</span><span class="m-doc-wrap">GizmosRenderer&amp; renderer) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a788a08a2d266fe4b68952c5bf4a006d4" class="m-doc">draw</a>(</span><span class="m-doc-wrap">GizmosRenderer&amp; renderer,
+              const glm::mat&lt;4, 4, float, glm::packed_highp&gt;&amp; mvp) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Draws the gizmo to screen.</dd>
             <dt>
@@ -92,9 +93,10 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="af3422887bf70269511306c09f80475cd"><div>
+          <section class="m-doc-details" id="a788a08a2d266fe4b68952c5bf4a006d4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr />Gizmo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af3422887bf70269511306c09f80475cd" class="m-doc-self">draw</a>(</span><span class="m-doc-wrap">GizmosRenderer&amp; renderer) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr />Gizmo::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a788a08a2d266fe4b68952c5bf4a006d4" class="m-doc-self">draw</a>(</span><span class="m-doc-wrap">GizmosRenderer&amp; renderer,
+              const glm::mat&lt;4, 4, float, glm::packed_highp&gt;&amp; mvp) <span class="m-label m-warning">pure virtual</span></span></span>
             </h3>
             <p>Draws the gizmo to screen.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -105,6 +107,10 @@
                 <tr>
                   <td style="width: 1%">renderer</td>
                   <td>Renderer.</td>
+                </tr>
+                <tr>
+                  <td>mvp</td>
+                  <td>The view projection matrix to use for drawing the gizmo.</td>
                 </tr>
               </tbody>
             </table>
