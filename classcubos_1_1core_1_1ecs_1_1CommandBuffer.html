@@ -73,6 +73,12 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a26fd37719e1940ef436ad745147169af" class="m-doc">add</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* component)</span>
+            </dt>
+            <dd>Adds a component to an entity.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename... ComponentTypes&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#ad63a6fb260e44836bfe19441b6f9bb33" class="m-doc">add</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
               ComponentTypes &amp;&amp; ... components)</span>
@@ -121,6 +127,33 @@
                 <tr>
                   <td style="width: 1%">world</td>
                   <td><a href="classcubos_1_1core_1_1ecs_1_1World.html" class="m-doc">World</a> to which the commands will be applied.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a26fd37719e1940ef436ad745147169af"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />CommandBuffer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a26fd37719e1940ef436ad745147169af" class="m-doc-self">add</a>(</span><span class="m-doc-wrap"><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> entity,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* component)</span></span>
+            </h3>
+            <p>Adds a component to an entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">entity</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a>.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>component</td>
+                  <td>Component value to be moved.</td>
                 </tr>
               </tbody>
             </table>

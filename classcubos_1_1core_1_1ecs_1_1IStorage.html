@@ -75,6 +75,11 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa9135ec3c57f0a6fb5a0cda8a2105e5f" class="m-doc">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
+              void* value) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Inserts a value into the storage.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a60384081976ed3bd34b3170b2980d116" class="m-doc">erase</a>(</span><span class="m-doc-wrap">uint32_t index) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Remove a value from the storage.</dd>
@@ -97,6 +102,28 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aa9135ec3c57f0a6fb5a0cda8a2105e5f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />IStorage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa9135ec3c57f0a6fb5a0cda8a2105e5f" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
+              void* value) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Inserts a value into the storage.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index where to insert the value.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value to be moved.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a60384081976ed3bd34b3170b2980d116"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />IStorage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60384081976ed3bd34b3170b2980d116" class="m-doc-self">erase</a>(</span><span class="m-doc-wrap">uint32_t index) <span class="m-label m-warning">pure virtual</span></span></span>

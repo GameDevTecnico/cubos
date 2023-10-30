@@ -86,8 +86,8 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a514649406572f8220972c2d1d56ee2e2" class="m-doc">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
-              T value) -&gt; T* <span class="m-label m-flat m-warning">override</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#a28bc4302392e7cd7104caa159c66ff22" class="m-doc">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
+              void* value) <span class="m-label m-flat m-warning">override</span></span>
             </dt>
             <dd>Inserts a value into the storage.</dd>
             <dt>
@@ -106,13 +106,13 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a514649406572f8220972c2d1d56ee2e2"><div>
+          <section class="m-doc-details" id="a28bc4302392e7cd7104caa159c66ff22"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">T* cubos::<wbr />core::<wbr />ecs::<wbr />MapStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a514649406572f8220972c2d1d56ee2e2" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
-              T value) <span class="m-label m-warning">override</span></span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />MapStorage&lt;T&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28bc4302392e7cd7104caa159c66ff22" class="m-doc-self">insert</a>(</span><span class="m-doc-wrap">uint32_t index,
+              void* value) <span class="m-label m-warning">override</span></span></span>
             </h3>
             <p>Inserts a value into the storage.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -126,7 +126,7 @@
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>Value to be inserted.</td>
+                  <td>Value to be moved.</td>
                 </tr>
               </tbody>
             </table>

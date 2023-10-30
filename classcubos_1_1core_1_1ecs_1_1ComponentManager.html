@@ -96,6 +96,12 @@
             </dt>
             <dd>Locks a storage for writing and returns it.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad16a84402411d69e8c83109ee73a3769" class="m-doc">add</a>(</span><span class="m-doc-wrap">uint32_t id,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span>
+            </dt>
+            <dd>Adds a component to an entity.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#a946ee2092dd29f7764044089c4bd0fa5" class="m-doc">add</a>(</span><span class="m-doc-wrap">uint32_t id,
               T value)</span>
@@ -293,6 +299,33 @@
                   <td><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> lock.</td>
                 </tr>
               </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad16a84402411d69e8c83109ee73a3769"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad16a84402411d69e8c83109ee73a3769" class="m-doc-self">add</a>(</span><span class="m-doc-wrap">uint32_t id,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              void* value)</span></span>
+            </h3>
+            <p>Adds a component to an entity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>Component type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Component value to move.</td>
+                </tr>
+              </tbody>
             </table>
           </div></section>
           <section class="m-doc-details" id="a946ee2092dd29f7764044089c4bd0fa5"><div>
