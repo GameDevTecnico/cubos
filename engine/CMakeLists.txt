@@ -77,6 +77,9 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/renderer/pps/copy_pass.cpp"
     "src/cubos/engine/renderer/pps/manager.cpp"
     "src/cubos/engine/renderer/pps/pass.cpp"
+    "src/cubos/engine/renderer/viewport.cpp"
+
+    "src/cubos/engine/splitscreen/plugin.cpp"
 )
 
 # Create cubos engine

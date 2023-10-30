@@ -48,6 +48,7 @@ namespace cubos::engine
     /// ## Components
     /// - @ref RenderableGrid - a grid to be rendered.
     /// - @ref Camera - holds camera information.
+    /// - @ref Viewport - holds viewport information.
     /// - @ref SpotLight - emits a spot light.
     /// - @ref DirectionalLight - emits a directional light.
     /// - @ref PointLight - emits a point light.
