@@ -3,7 +3,7 @@
 
 /// @file
 /// @brief Plugin entry point.
-/// @ingroup asset-explorer-plugin
+/// @ingroup tesseratos-asset-explorer-plugin
 
 #pragma once
 
