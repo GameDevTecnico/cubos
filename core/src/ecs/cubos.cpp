@@ -55,17 +55,25 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 TagBuilder Cubos::tag(const std::string& tag)
 {
     mMainDispatcher.addTag(tag);
-    TagBuilder builder(mWorld, mMainDispatcher, mMainTags);
-
-    return builder;
+    return TagBuilder{mWorld, mMainDispatcher, mMainTags};
 }
 
 TagBuilder Cubos::startupTag(const std::string& tag)
 {
     mStartupDispatcher.addTag(tag);
-    TagBuilder builder(mWorld, mStartupDispatcher, mStartupTags);
+    return TagBuilder{mWorld, mStartupDispatcher, mStartupTags};
+}
 
-    return builder;
+TagBuilder Cubos::noTag(const std::string& tag)
+{
+    mMainDispatcher.addNegativeTag(tag);
+    return TagBuilder{mWorld, mMainDispatcher, mMainTags};
+}
+
+TagBuilder Cubos::noStartupTag(const std::string& tag)
+{
+    mStartupDispatcher.addNegativeTag(tag);
+    return TagBuilder{mWorld, mStartupDispatcher, mStartupTags};
 }
 
 auto Cubos::system(std::string name) -> SystemBuilder
