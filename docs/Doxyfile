@@ -7,9 +7,12 @@ INPUT = @DOXYGEN_PROJECT_ROOT@/docs/pages \
         @DOXYGEN_PROJECT_ROOT@/core/include \
         @DOXYGEN_PROJECT_ROOT@/core/samples \
         @DOXYGEN_PROJECT_ROOT@/engine/include \
-        @DOXYGEN_PROJECT_ROOT@/engine/samples
+        @DOXYGEN_PROJECT_ROOT@/engine/samples \
+        @DOXYGEN_PROJECT_ROOT@/tools/tesseratos/include \
+        @DOXYGEN_PROJECT_ROOT@/tools/tesseratos/samples
 EXAMPLE_PATH = @DOXYGEN_PROJECT_ROOT@/core/samples \
-               @DOXYGEN_PROJECT_ROOT@/engine/samples
+               @DOXYGEN_PROJECT_ROOT@/engine/samples \
+               @DOXYGEN_PROJECT_ROOT@/tools/tesseratos/samples
 EXTRACT_ALL = YES
 EXTRACT_PRIVATE = YES
 EXTRACT_PRIV_VIRTUAL = YES
@@ -17,7 +20,8 @@ RECURSIVE = YES
 OUTPUT_DIRECTORY = @DOXYGEN_OUTPUT_DIRECTORY@
 IMAGE_PATH = @DOXYGEN_PROJECT_ROOT@/docs/images \
              @DOXYGEN_PROJECT_ROOT@/core/samples \
-             @DOXYGEN_PROJECT_ROOT@/engine/samples
+             @DOXYGEN_PROJECT_ROOT@/engine/samples \
+             @DOXYGEN_PROJECT_ROOT@/tools/tesseratos/samples
 
 # Ignore sample source files
 EXCLUDE_PATTERNS = */samples/*.hpp \
@@ -29,6 +33,8 @@ STRIP_FROM_PATH = @DOXYGEN_PROJECT_ROOT@/core/include/cubos \
                   @DOXYGEN_PROJECT_ROOT@/core/samples \
                   @DOXYGEN_PROJECT_ROOT@/engine/include/cubos \
                   @DOXYGEN_PROJECT_ROOT@/engine/samples \
+                  @DOXYGEN_PROJECT_ROOT@/tools/tesseratos/include \
+                  @DOXYGEN_PROJECT_ROOT@/tools/tesseratos/samples \
                   @DOXYGEN_PROJECT_ROOT@
 
 # We use m.css to generate the html documentation, so we only need XML output
