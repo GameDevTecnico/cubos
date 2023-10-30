@@ -24,9 +24,13 @@ Let's now add a wireboxe. We want to know were exactly is the centre of each cam
 
 @snippet gizmos/main.cpp WireBox
 
-Finally, let's add a box. This box will be in World space, as it's the last space left to cover. It will be drawn by any camera that is looking at it, much like if it was an object in the world.
+Let's add a box. This box will be in World space, as it's the last space left to cover. It will be drawn by any camera that is looking at it, much like if it was an object in the world.
 
 @snippet gizmos/main.cpp Box
+
+Finally let's add a cut cone. A cut cone is cylinder with faces that can have different radiuses. If you set one of the bases to have a radius of 0, you'll have a simple cone. If you set them both to have the same radius, you'll have a cylinder. Our cut cone will have different radiuses:
+
+@snippet gizmos/main.cpp Cut Cone
 
 The whole system looks like this:
 
