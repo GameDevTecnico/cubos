@@ -67,40 +67,21 @@ namespace cubos::core::ecs
         template <typename T>
         WriteResource<T> write() const;
 
-        /// @brief Creates a new entity with the given components.
-        /// @tparam ComponentTypes Types of the components.
-        /// @param components Initial values for the components.
-        template <typename... ComponentTypes>
-        Entity create(ComponentTypes... components);
+        /// @brief Creates a new entity.
+        /// @return Entity.
+        Entity create();
 
-        /// @brief Destroys an entity and its components.
-        /// @todo Whats the behavior when we pass an entity that has already been destroyed?
+        /// @brief Destroys an entity.
+        ///
+        /// If an entity has already been destroyed, this function does nothing.
+        ///
         /// @param entity Entity identifier.
         void destroy(Entity entity);
 
         /// @brief Checks if an entity is still alive.
-        /// @param entity Entity identifier.
+        /// @param entity Entity.
         /// @return Whether the entity is alive.
         bool isAlive(Entity entity) const;
-
-        /// @brief Adds components to an entity.
-        ///
-        /// If the entity already has one of the components, it is overwritten.
-        ///
-        /// @tparam ComponentTypes Types of the components.
-        /// @param entity Entity identifier.
-        /// @param components Initial values for the components.
-        template <typename... ComponentTypes>
-        void add(Entity entity, ComponentTypes&&... components);
-
-        /// @brief Removes components from an entity.
-        ///
-        /// If the entity doesn't have one of the components, nothing happens.
-        ///
-        /// @tparam ComponentTypes Types of the components.
-        /// @param entity Entity identifier.
-        template <typename... ComponentTypes>
-        void remove(Entity entity);
 
         /// @brief Creates a components view for the given entity.
         ///
@@ -202,6 +183,48 @@ namespace cubos::core::ecs
         /// @brief Returns an iterator to the entry after the last component.
         /// @return Iterator.
         Iterator end();
+
+        /// @brief Adds a component to the entity.
+        ///
+        /// If the entity already has the component, its value is overwritten.
+        ///
+        /// @param type Component type.
+        /// @param value Component value to move.
+        /// @return Reference to this.
+        Components& add(const reflection::Type& type, void* value);
+
+        /// @brief Adds a component to the entity.
+        ///
+        /// If the entity already has the component, its value is overwritten.
+        ///
+        /// @tparam T Component type.
+        /// @param value Component value to move.
+        /// @return Reference to this.
+        template <reflection::Reflectable T>
+        Components& add(T&& value)
+        {
+            return this->add(reflection::reflect<T>(), &value);
+        }
+
+        /// @brief Removes a component from the entity.
+        ///
+        /// If the entity doesn't have the component, nothing happens.
+        ///
+        /// @param type Component type.
+        /// @return Reference to this.
+        Components& remove(const reflection::Type& type);
+
+        /// @brief Removes a component from the entity.
+        ///
+        /// If the entity doesn't have the component, nothing happens.
+        ///
+        /// @tparam T Component type.
+        /// @return Reference to this.
+        template <reflection::Reflectable T>
+        Components& remove()
+        {
+            return this->remove(reflection::reflect<T>());
+        }
 
     private:
         World& mWorld;
@@ -383,87 +406,5 @@ namespace cubos::core::ecs
     WriteResource<T> World::write() const
     {
         return mResourceManager.write<T>();
-    }
-
-    template <typename... ComponentTypes>
-    Entity World::create(ComponentTypes... components)
-    {
-        std::size_t ids[] = {
-            0, (mComponentManager
-                    .getID<std::remove_const_t<std::remove_reference_t<std::remove_pointer_t<ComponentTypes>>>>())...};
-
-        Entity::Mask mask{};
-        for (auto id : ids)
-        {
-            mask.set(id);
-        }
-
-        auto entity = mEntityManager.create(mask);
-        ([&](auto component) { mComponentManager.add(entity.index, std::move(component)); }(std::move(components)),
-         ...);
-
-#if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
-        // Get the number of components being added.
-        constexpr std::size_t ComponentCount = sizeof...(ComponentTypes);
-
-        std::string componentNames[] = {"", "'" + std::string{getComponentName<ComponentTypes>().value()} + "'" ...};
-        CUBOS_DEBUG("Created entity {} with components {}", entity.index,
-                    fmt::join(componentNames + 1, componentNames + ComponentCount + 1, ", "));
-#endif
-        return entity;
-    }
-
-    template <typename... ComponentTypes>
-    void World::add(Entity entity, ComponentTypes&&... components)
-    {
-        if (!mEntityManager.isValid(entity))
-        {
-            CUBOS_ERROR("Entity {} doesn't exist!", entity.index);
-            return;
-        }
-
-        auto mask = mEntityManager.getMask(entity);
-
-        (
-            [&]() {
-                std::size_t componentId = mComponentManager.getID<ComponentTypes>();
-                mask.set(componentId);
-                mComponentManager.add(entity.index, std::move(components));
-            }(),
-            ...);
-
-        mEntityManager.setMask(entity, mask);
-
-#if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
-        std::string componentNames[] = {"'" + std::string{getComponentName<ComponentTypes>().value()} + "'" ...};
-        CUBOS_DEBUG("Added components {} to entity {}", fmt::join(componentNames, ", "), entity.index);
-#endif
-    }
-
-    template <typename... ComponentTypes>
-    void World::remove(Entity entity)
-    {
-        if (!mEntityManager.isValid(entity))
-        {
-            CUBOS_ERROR("Entity {} doesn't exist!", entity.index);
-            return;
-        }
-
-        auto mask = mEntityManager.getMask(entity);
-
-        (
-            [&]() {
-                std::size_t componentId = mComponentManager.getID<ComponentTypes>();
-                mask.set(componentId, false);
-                mComponentManager.remove<ComponentTypes>(entity.index);
-            }(),
-            ...);
-
-        mEntityManager.setMask(entity, mask);
-
-#if CUBOS_LOG_LEVEL <= CUBOS_LOG_LEVEL_DEBUG
-        std::string componentNames[] = {"'" + std::string{getComponentName<ComponentTypes>().value()} + "'" ...};
-        CUBOS_DEBUG("Removed components {} from entity {}", fmt::join(componentNames, ", "), entity.index);
-#endif
     }
 } // namespace cubos::core::ecs

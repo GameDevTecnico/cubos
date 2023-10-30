@@ -46,11 +46,17 @@ TEST_CASE("ecs::Query")
 
     // Create a few entities.
     auto empty = world.create();
-    auto int0 = world.create(IntegerComponent{0});
-    auto int1 = world.create(IntegerComponent{1}, ParentComponent{});
-    world.create(ParentComponent{});
-    world.create(IntegerComponent{2});
-    world.create(IntegerComponent{3}, ParentComponent{});
+    auto int0 = world.create();
+    auto int1 = world.create();
+    auto int2 = world.create();
+    auto int3 = world.create();
+    auto foo = world.create();
+
+    world.components(int0).add(IntegerComponent{0});
+    world.components(int1).add(IntegerComponent{1}).add(ParentComponent{});
+    world.components(int2).add(IntegerComponent{2});
+    world.components(int3).add(IntegerComponent{3}).add(ParentComponent{});
+    world.components(foo).add(ParentComponent{});
 
     // Check if direct access to entities works.
     CHECK(Query<>(world)[empty].has_value());

@@ -1,6 +1,7 @@
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::ecs;
@@ -12,11 +13,20 @@ World::World(std::size_t initialCapacity)
     // Edu: BAH!
 }
 
+Entity World::create()
+{
+    Entity::Mask mask{};
+    mask.set(0);
+    auto entity = mEntityManager.create(mask);
+    CUBOS_DEBUG("Created entity {}#{}", entity.index, entity.generation);
+    return entity;
+}
+
 void World::destroy(Entity entity)
 {
     mEntityManager.destroy(entity);
     mComponentManager.removeAll(entity.index);
-    CUBOS_DEBUG("Destroyed entity {}", entity.index);
+    CUBOS_DEBUG("Destroyed entity {}#{}", entity.index, entity.generation);
 }
 
 bool World::isAlive(Entity entity) const
@@ -131,6 +141,30 @@ auto World::Components::begin() -> Iterator
 auto World::Components::end() -> Iterator
 {
     return Iterator{*this, true};
+}
+
+auto World::Components::add(const reflection::Type& type, void* value) -> Components&
+{
+    std::size_t componentId = mWorld.mComponentManager.getID(type);
+    auto mask = mWorld.mEntityManager.getMask(mEntity);
+    mask.set(componentId);
+    mWorld.mEntityManager.setMask(mEntity, mask);
+    mWorld.mComponentManager.add(mEntity.index, type, value);
+
+    CUBOS_DEBUG("Added component {} to entity {}#{}", type.name(), mEntity.index, mEntity.generation);
+    return *this;
+}
+
+auto World::Components::remove(const reflection::Type& type) -> Components&
+{
+    std::size_t componentId = mWorld.mComponentManager.getID(type);
+    auto mask = mWorld.mEntityManager.getMask(mEntity);
+    mask.set(componentId, false);
+    mWorld.mEntityManager.setMask(mEntity, mask);
+    mWorld.mComponentManager.remove(mEntity.index, componentId);
+
+    CUBOS_DEBUG("Removed component {} from entity {}#{}", type.name(), mEntity.index, mEntity.generation);
+    return *this;
 }
 
 World::ConstComponents::ConstComponents(const World& world, Entity entity)
