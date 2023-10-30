@@ -27,4 +27,4 @@ namespace tesseratos
     /// @param cubos @b CUBOS. main class
     /// @ingroup tesseratos-scene-editor-plugin
     void sceneEditorPlugin(cubos::engine::Cubos& cubos);
-}; // namespace tesseratos
+} // namespace tesseratos
