@@ -7,6 +7,7 @@
 
 #include "renderer.hpp"
 #include "types/box.hpp"
+#include "types/cut_cone.hpp"
 #include "types/line.hpp"
 
 using cubos::engine::DeltaTime;
@@ -33,9 +34,8 @@ void Gizmos::color(const glm::vec3& color)
     mColor = color;
 }
 
-void Gizmos::drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float lifespan, Space space)
+void Gizmos::push(const std::shared_ptr<Gizmo>& gizmo, const Space& space)
 {
-    auto gizmo = std::make_shared<LineGizmo>(id, from, to, mColor, lifespan);
     if (space == Space::World)
     {
         worldGizmos.push_back(gizmo);
@@ -50,21 +50,14 @@ void Gizmos::drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float
     }
 }
 
+void Gizmos::drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float lifespan, Space space)
+{
+    push(std::make_shared<LineGizmo>(id, from, to, mColor, lifespan), space);
+}
+
 void Gizmos::drawBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan, Space space)
 {
-    auto gizmo = std::make_shared<BoxGizmo>(id, corner, oppositeCorner, mColor, lifespan);
-    if (space == Space::World)
-    {
-        worldGizmos.push_back(gizmo);
-    }
-    else if (space == Space::View)
-    {
-        viewGizmos.push_back(gizmo);
-    }
-    else if (space == Space::Screen)
-    {
-        screenGizmos.push_back(gizmo);
-    }
+    push(std::make_shared<BoxGizmo>(id, corner, oppositeCorner, mColor, lifespan), space);
 }
 
 void Gizmos::drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan, Space space)
@@ -92,4 +85,12 @@ void Gizmos::drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppo
     drawLine(id, glm::vec3{oppositeCorner[0], corner[1], corner[2]},
              glm::vec3{oppositeCorner[0], corner[1], oppositeCorner[2]}, lifespan, space);
     drawLine(id, glm::vec3{oppositeCorner[0], oppositeCorner[1], corner[2]}, oppositeCorner, lifespan, space);
+}
+
+void Gizmos::drawCutCone(const std::string& id, glm::vec3 firstBaseCenter, float firstBaseRadius,
+                         glm::vec3 secondBaseCenter, float secondBaseRadius, float lifespan, Space space)
+{
+    push(std::make_shared<CutConeGizmo>(id, firstBaseCenter, firstBaseRadius, secondBaseCenter, secondBaseRadius,
+                                        mColor, lifespan),
+         space);
 }

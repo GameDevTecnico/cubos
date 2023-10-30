@@ -8,19 +8,19 @@
 
 namespace cubos::engine
 {
-    /// @brief A gizmo that is a filled box
+    /// @brief A gizmo that is a filled box.
     class BoxGizmo : public cubos::engine::Gizmos::Gizmo
     {
         glm::vec3 mPointA;
         glm::vec3 mPointB;
 
     public:
-        /// @brief BoxGizmo constructor
-        /// @param id identifier of the gizmo
-        /// @param corner point at one of the corners of the box
-        /// @param oppositeCorner point at the opposite corner of the box
-        /// @param color color for the gizmo to be drawn in
-        /// @param lifespan time the gizmo will remain on screen, in seconds
+        /// @brief Constructs.
+        /// @param id Identifier of the gizmo.
+        /// @param corner Point at one of the corners of the box.
+        /// @param oppositeCorner Point at the opposite corner of the box.
+        /// @param color Color for the gizmo to be drawn in.
+        /// @param lifespan Time the gizmo will remain on screen, in seconds.
         BoxGizmo(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, const glm::vec3& color,
                  float lifespan)
             : cubos::engine::Gizmos::Gizmo(id, color, lifespan)
@@ -29,8 +29,9 @@ namespace cubos::engine
         {
         }
 
-        /// @brief draws the gizmo to screen
-        /// @param renderer the GizmosRenderer in use
+        /// @brief Draws the gizmo to the screen.
+        /// @param renderer GizmosRenderer in use.
+        /// @param mvp Matrix containing projection and viewpoint transformations.
         void draw(cubos::engine::GizmosRenderer& renderer, const glm::mat<4, 4, float, glm::packed_highp>& mvp) override
         {
             auto* verts = static_cast<glm::vec3*>(renderer.boxPrimitive.vb->map());

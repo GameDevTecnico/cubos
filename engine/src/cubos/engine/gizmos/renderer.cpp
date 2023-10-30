@@ -38,6 +38,7 @@ void GizmosRenderer::init(RenderDevice* currentRenderDevice)
     pipeline = renderDevice->createShaderPipeline(vs, ps);
     initLinePrimitive();
     initBoxPrimitive();
+    initCutConePrimitive();
 }
 
 void GizmosRenderer::initLinePrimitive()
@@ -89,4 +90,63 @@ void GizmosRenderer::initBoxPrimitive()
                               // top
                               5, 7, 6, 5, 4, 7};
     boxPrimitive.ib = renderDevice->createIndexBuffer(sizeof(indices), indices, IndexFormat::UInt, Usage::Static);
+}
+
+void GizmosRenderer::initCutConePrimitive()
+{
+    cutConePrimitive.vaDesc.elementCount = 1;
+    cutConePrimitive.vaDesc.elements[0].name = "position";
+    cutConePrimitive.vaDesc.elements[0].type = Type::Float;
+    cutConePrimitive.vaDesc.elements[0].size = 3;
+    cutConePrimitive.vaDesc.elements[0].buffer.index = 0;
+    cutConePrimitive.vaDesc.elements[0].buffer.offset = 0;
+    cutConePrimitive.vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
+    cutConePrimitive.vaDesc.shaderPipeline = pipeline;
+
+    float verts[CutConeVertsPerBase * 6];
+
+    renderDevice->setShaderPipeline(pipeline);
+    cutConePrimitive.vb = renderDevice->createVertexBuffer(sizeof(verts), verts, Usage::Dynamic);
+    cutConePrimitive.vaDesc.buffers[0] = cutConePrimitive.vb;
+    cutConePrimitive.va = renderDevice->createVertexArray(cutConePrimitive.vaDesc);
+
+    unsigned int indices[12 * CutConeVertsPerBase - 12];
+
+    int iIndex = 0;
+    // Sides
+    for (unsigned int i = 0; i < CutConeVertsPerBase - 1; i += 1)
+    {
+        indices[iIndex++] = i;
+        indices[iIndex++] = i + 1;
+        indices[iIndex++] = i + CutConeVertsPerBase;
+        indices[iIndex++] = i + 1;
+        indices[iIndex++] = i + CutConeVertsPerBase + 1;
+        indices[iIndex++] = i + CutConeVertsPerBase;
+    }
+
+    // Last Side Faces
+    indices[iIndex++] = CutConeVertsPerBase - 1;
+    indices[iIndex++] = CutConeVertsPerBase;
+    indices[iIndex++] = (CutConeVertsPerBase * 2) - 1;
+    indices[iIndex++] = 0;
+    indices[iIndex++] = CutConeVertsPerBase;
+    indices[iIndex++] = CutConeVertsPerBase - 1;
+
+    // Base A
+    for (unsigned int i = 0; i < CutConeVertsPerBase - 2; i += 1)
+    {
+        indices[iIndex++] = 0;
+        indices[iIndex++] = i + 1;
+        indices[iIndex++] = i + 2;
+    }
+
+    // Base B
+    for (unsigned int i = CutConeVertsPerBase; i < (2 * CutConeVertsPerBase) - 2; i += 1)
+    {
+        indices[iIndex++] = CutConeVertsPerBase;
+        indices[iIndex++] = i + 1;
+        indices[iIndex++] = i + 2;
+    }
+
+    cutConePrimitive.ib = renderDevice->createIndexBuffer(sizeof(indices), indices, IndexFormat::UInt, Usage::Static);
 }

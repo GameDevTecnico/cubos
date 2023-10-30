@@ -39,8 +39,8 @@ namespace cubos::engine
         /// @param from One of the ends of the line to be drawn.
         /// @param to The other end of the line to be drawn.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
-        /// @param space Space to draw the gizmo in
         /// frame.
+        /// @param space Space to draw the gizmo in.
         void drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float lifespan = 0.0F,
                       Space space = Space::World);
 
@@ -50,9 +50,22 @@ namespace cubos::engine
         /// @param oppositeCorner The opposite corner of the box to be drawn.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
-        /// @param space Space to draw the gizmo in
+        /// @param space Space to draw the gizmo in.
         void drawBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0.0F,
                      Space space = Space::World);
+
+        /// @brief Draws a cut cone gizmo.
+        /// @param id Identifier of the gizmo.
+        /// @param firstBaseCenter Center of one of the bases.
+        /// @param firstBaseRadius Radius of one of the bases.
+        /// @param secondBaseCenter Center of the second base.
+        /// @param secondBaseRadius Radius of the second base.
+        /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
+        /// frame.
+        /// @param space Space to draw the gizmo in.
+        void drawCutCone(const std::string& id, glm::vec3 firstBaseCenter, float firstBaseRadius,
+                         glm::vec3 secondBaseCenter, float secondBaseRadius, float lifespan = 0.0F,
+                         Space space = Space::World);
 
         /// @brief Draws a wireframe box gizmo.
         /// @param id Identifier of the gizmo.
@@ -60,7 +73,7 @@ namespace cubos::engine
         /// @param oppositeCorner The opposite corner of the box to be drawn.
         /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
         /// frame.
-        /// @param space Space to draw the gizmo in
+        /// @param space Space to draw the gizmo in.
         void drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0.0F,
                          Space space = Space::World);
 
@@ -82,9 +95,9 @@ namespace cubos::engine
             bool decreaseLifespan(float delta);
 
         protected:
-            const std::string& mId; ///< Gizmo identifier
-            glm::vec3 mColor;       ///< Color of the gizmo
-            float mLifespan;        ///< Time in seconds the gizmo has left to live
+            const std::string& mId; ///< Gizmo identifier.
+            glm::vec3 mColor;       ///< Color of the gizmo.
+            float mLifespan;        ///< Time in seconds the gizmo has left to live.
         };
 
         std::vector<std::shared_ptr<Gizmo>> worldGizmos;  ///< Queued gizmos to be drawn in world space.
@@ -92,7 +105,12 @@ namespace cubos::engine
         std::vector<std::shared_ptr<Gizmo>> screenGizmos; ///< Queued gizmos to be drawn in screen space.
 
     private:
-        glm::vec3 mColor; ///< Currently set color
+        /// @brief Adds a gizmo into the corresponding vector.
+        /// @param gizmo Gizmo to be added.
+        /// @param space Space in which the gizmo will be drawn.
+        void push(const std::shared_ptr<Gizmo>& gizmo, const Space& space);
+
+        glm::vec3 mColor; ///< Currently set color.
     };
 
 } // namespace cubos::engine
