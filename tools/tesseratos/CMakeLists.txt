@@ -2,11 +2,18 @@
 # Tesseratos build configuration
 
 set(TESSERATOS_SOURCE
-    "src/main.cpp"
+    "src/tesseratos/plugin.cpp"
+    "src/tesseratos/asset_explorer/plugin.cpp"
+    "src/tesseratos/settings_inspector/plugin.cpp"
+    "src/tesseratos/entity_selector/plugin.cpp"
+    "src/tesseratos/world_inspector/plugin.cpp"
+    "src/tesseratos/entity_inspector/plugin.cpp"
+    "src/tesseratos/scene_editor/plugin.cpp"
+    "src/tesseratos/debug_camera/plugin.cpp"
+    "src/tesseratos/voxel_palette_editor/plugin.cpp"
 )
 
-add_executable(tesseratos ${TESSERATOS_SOURCE})
+add_library(tesseratos ${TESSERATOS_SOURCE})
+target_include_directories(tesseratos PUBLIC "include")
 target_link_libraries(tesseratos PUBLIC cubos-core cubos-engine)
 cubos_common_target_options(tesseratos)
-
-target_compile_definitions(tesseratos PUBLIC TESSERATOS_ASSETS_FOLDER="${CMAKE_CURRENT_SOURCE_DIR}/assets")
