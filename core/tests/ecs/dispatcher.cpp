@@ -119,6 +119,21 @@ TEST_CASE("ecs::Dispatcher")
             dispatcher.tagSetBeforeTag("2"); // "3" runs before "2"
         }
 
+        SUBCASE("with constraints on negative tags")
+        {
+            dispatcher.addSystem("1", wrapSystem(pushToOrder<1>));
+            dispatcher.systemAddTag("1");
+            dispatcher.addSystem("2", wrapSystem(pushToOrder<2>));
+            dispatcher.systemAddTag("2");
+            dispatcher.addSystem("3", wrapSystem(pushToOrder<3>));
+            dispatcher.systemAddTag("3");
+
+            dispatcher.addNegativeTag("1");
+            dispatcher.tagSetBeforeTag("1"); // anything without "1" runs before "1"
+            dispatcher.addNegativeTag("3");
+            dispatcher.tagSetAfterTag("3"); // anything without "3" runs after "3"
+        }
+
         singleDispatch(dispatcher, cmdBuffer);
         assertOrder(world, {3, 2, 1});
     }
@@ -154,6 +169,14 @@ TEST_CASE("ecs::Dispatcher")
             dispatcher.tagSetAfterTag("1");  // "3" runs after "1" - redundant
             dispatcher.tagSetAfterTag("1");  // Repeat
             dispatcher.tagSetBeforeTag("2"); // "3" runs before "2" - redundant
+            dispatcher.tagSetBeforeTag("2"); // Repeat
+
+            dispatcher.addNegativeTag("1");
+            dispatcher.tagSetAfterTag("1"); // "2" and "3" run after "1" - redundant
+            dispatcher.tagSetAfterTag("1"); // Repeat
+
+            dispatcher.addNegativeTag("2");
+            dispatcher.tagSetBeforeTag("2"); // "1" and "3" run before "2" - redundant
             dispatcher.tagSetBeforeTag("2"); // Repeat
         }
 

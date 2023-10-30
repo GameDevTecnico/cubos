@@ -26,9 +26,17 @@ Dispatcher::~Dispatcher()
 
 void Dispatcher::addTag(const std::string& tag)
 {
+    CUBOS_ASSERT(!tag.starts_with('!'), "Tags starting with '!' are reserved for internal use");
     ENSURE_TAG_SETTINGS(tag);
     mCurrTag = tag;
     mCurrGroup = mMainStep;
+}
+
+void Dispatcher::addNegativeTag(const std::string& tag)
+{
+    CUBOS_ASSERT(!tag.starts_with('!'), "Tags starting with '!' are reserved for internal use");
+    ENSURE_TAG_SETTINGS('!' + tag);
+    mCurrTag = '!' + tag;
 }
 
 void Dispatcher::tagInheritTag(const std::string& tag)
@@ -138,6 +146,15 @@ void Dispatcher::compileChain()
     // Implement system tag settings with custom settings
     for (System* system : mPendingSystems)
     {
+        // Add negative tags when the system doesn't have the respective positive tags
+        for (auto& [tag, settings] : mTagSettings)
+        {
+            if (tag.starts_with('!') && !system->tags.contains(tag.substr(1)))
+            {
+                system->tags.insert(tag);
+            }
+        }
+
         for (const auto& tag : system->tags)
         {
             if (!system->settings)
