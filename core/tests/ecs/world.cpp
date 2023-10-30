@@ -51,8 +51,9 @@ TEST_CASE("ecs::World")
     {
         bool destroyed = false;
 
-        // Create an entity with an detect destructor component.
-        auto foo = world.create(DetectDestructorComponent{{&destroyed}});
+        // Create an entity with a detect destructor component.
+        auto foo = world.create();
+        world.components(foo).add(DetectDestructorComponent{{&destroyed}});
         CHECK(world.components(foo).has<DetectDestructorComponent>());
         CHECK_FALSE(world.components(foo).has<ParentComponent>());
         CHECK_FALSE(destroyed);
@@ -69,13 +70,13 @@ TEST_CASE("ecs::World")
         CHECK(constComponents.begin()->type->is<DetectDestructorComponent>());
 
         // Add a parent component.
-        world.add(foo, ParentComponent{});
+        world.components(foo).add(ParentComponent{});
         CHECK(world.components(foo).has<DetectDestructorComponent>());
         CHECK(world.components(foo).has<ParentComponent>());
         CHECK_FALSE(destroyed);
 
         // Remove the detect destructor component.
-        world.remove<DetectDestructorComponent>(foo);
+        world.components(foo).remove<DetectDestructorComponent>();
         CHECK_FALSE(world.components(foo).has<DetectDestructorComponent>());
         CHECK(constWorld.components(foo).has<ParentComponent>());
         CHECK(destroyed);
@@ -115,7 +116,8 @@ TEST_CASE("ecs::World")
     {
         // Create an entity which has an integer component and a parent component.
         auto bar = world.create();
-        auto foo = world.create(IntegerComponent{0}, ParentComponent{bar});
+        auto foo = world.create();
+        world.components(foo).add(IntegerComponent{0}).add(ParentComponent{bar});
         CHECK(world.components(foo).has<IntegerComponent>());
         CHECK(world.components(foo).has<ParentComponent>());
 
@@ -139,7 +141,7 @@ TEST_CASE("ecs::World")
 
         // Create an entity and add a detect destructor component.
         auto foo = world.create();
-        world.add(foo, DetectDestructorComponent{{&destroyed}});
+        world.components(foo).add(DetectDestructorComponent{{&destroyed}});
         CHECK_FALSE(destroyed);
 
         // Destroy the entity.
@@ -155,7 +157,8 @@ TEST_CASE("ecs::World")
         {
             World world{};
             setupWorld(world);
-            world.create(DetectDestructorComponent{{&destroyed}});
+            auto foo = world.create();
+            world.components(foo).add(DetectDestructorComponent{{&destroyed}});
             CHECK_FALSE(destroyed);
         }
 
