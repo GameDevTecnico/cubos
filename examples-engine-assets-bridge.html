@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Examples &raquo; Engine &raquo; Assets &raquo; Introducion and Custom Bridges | CUBOS.</title>
+  <title>Examples &raquo; Engine &raquo; Assets &raquo; Introduction and Custom Bridges | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -47,7 +47,7 @@
           <span class="m-breadcrumb"><a href="examples.html">Examples</a> &raquo;</span>
           <span class="m-breadcrumb"><a href="examples-engine.html">Engine</a> &raquo;</span>
           <span class="m-breadcrumb"><a href="examples-engine-assets.html">Assets</a> &raquo;</span>
-          Introducion and Custom Bridges
+          Introduction and Custom Bridges
         </h1>
         <p>Basic <a href="group__assets-plugin.html" class="m-doc">Assets</a> plugin features and creating your own bridges.</p>
 <p><a name="md_assets_bridge_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/assets/bridge">here</a>.</p></aside><p>This example demonstrates how we can create a custom asset bridge to load assets of a given type. More specifically, we&#x27;ll go through how we can create a bridge which loads <code>std::string</code>s from text files.</p><p>We define our bridge class by inheriting from <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />FileBridge</a>, which offers a simple interface for loading and saving assets from files.</p><pre class="m-code"><span class="k">class</span><span class="w"> </span><span class="nc">TextBridge</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">FileBridge</span>
