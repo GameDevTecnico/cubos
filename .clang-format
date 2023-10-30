@@ -15,10 +15,12 @@ IncludeCategories:
     Priority: 2
   - Regex: '^<cubos/engine/.*>'
     Priority: 3
+  - Regex: '^<tesseratos/.*>'
+    Priority: 4
   - Regex: '^<.+\.h(pp)?>'
     Priority: 1
   - Regex: '.*'
-    Priority: 4
+    Priority: 5
 BreakConstructorInitializersBeforeComma: true
 BreakConstructorInitializers: BeforeComma
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
