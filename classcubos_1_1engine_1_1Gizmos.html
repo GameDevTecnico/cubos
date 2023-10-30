@@ -100,6 +100,16 @@
             </dt>
             <dd>Draws a filled box gizmo.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a03a812de0d4c1e9f5948ea710a7f46c7" class="m-doc">drawCutCone</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 firstBaseCenter,
+              float firstBaseRadius,
+              glm::vec3 secondBaseCenter,
+              float secondBaseRadius,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws a cut cone gizmo.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a2b7a537716c68f405c250c652d9126ae" class="m-doc">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 corner,
               glm::vec3 oppositeCorner,
@@ -205,11 +215,11 @@
                 </tr>
                 <tr>
                   <td>lifespan</td>
-                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
                 </tr>
                 <tr>
                   <td>space</td>
-                  <td>Space to draw the gizmo in frame.</td>
+                  <td>Space to draw the gizmo in.</td>
                 </tr>
               </tbody>
             </table>
@@ -246,7 +256,54 @@
                 </tr>
                 <tr>
                   <td>space</td>
-                  <td>Space to draw the gizmo in</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a03a812de0d4c1e9f5948ea710a7f46c7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a03a812de0d4c1e9f5948ea710a7f46c7" class="m-doc-self">drawCutCone</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 firstBaseCenter,
+              float firstBaseRadius,
+              glm::vec3 secondBaseCenter,
+              float secondBaseRadius,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws a cut cone gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>firstBaseCenter</td>
+                  <td>Center of one of the bases.</td>
+                </tr>
+                <tr>
+                  <td>firstBaseRadius</td>
+                  <td>Radius of one of the bases.</td>
+                </tr>
+                <tr>
+                  <td>secondBaseCenter</td>
+                  <td>Center of the second base.</td>
+                </tr>
+                <tr>
+                  <td>secondBaseRadius</td>
+                  <td>Radius of the second base.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
                 </tr>
               </tbody>
             </table>
@@ -283,7 +340,7 @@
                 </tr>
                 <tr>
                   <td>space</td>
-                  <td>Space to draw the gizmo in</td>
+                  <td>Space to draw the gizmo in.</td>
                 </tr>
               </tbody>
             </table>
