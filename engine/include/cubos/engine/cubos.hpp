@@ -165,15 +165,25 @@ namespace cubos::engine
         template <typename E>
         Cubos& addEvent();
 
-        /// @brief Returns a @ref TagBuilder to configure the given tag.
-        /// @param tag Tag to configure.
-        /// @return @ref TagBuilder used to configure the tag.
+        /// @brief Returns a @ref TagBuilder to configure the systems with the given tag.
+        /// @param tag Tag.
+        /// @return @ref TagBuilder.
         TagBuilder tag(const std::string& tag);
 
-        /// @brief Returns a @ref TagBuilder to configure the given startup tag.
-        /// @param tag Tag to configure.
-        /// @return @ref TagBuilder used to configure the tag.
+        /// @brief Returns a @ref TagBuilder to configure the systems with the given startup tag.
+        /// @param tag Tag.
+        /// @return @ref TagBuilder.
         TagBuilder startupTag(const std::string& tag);
+
+        /// @brief Returns a @ref TagBuilder to configure the systems without the given tag.
+        /// @param tag Tag.
+        /// @return @ref TagBuilder.
+        TagBuilder noTag(const std::string& tag);
+
+        /// @brief Returns a @ref TagBuilder to configure the systems without the given startup tag.
+        /// @param tag Tag.
+        /// @return @ref TagBuilder.
+        TagBuilder noStartupTag(const std::string& tag);
 
         /// @brief Adds a new system to the engine, which will be executed at every iteration of
         /// the main loop.

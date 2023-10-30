@@ -61,6 +61,10 @@ namespace cubos::core::ecs
         /// @param tag Tag to add.
         void addTag(const std::string& tag);
 
+        /// @brief Adds a tag, and sets it as the current negative tag for further settings.
+        /// @param tag Tag to add.
+        void addNegativeTag(const std::string& tag);
+
         /// @brief Makes the current tag inherit the settings of another tag.
         /// @param tag Tag to inherit from.
         void tagInheritTag(const std::string& tag);
