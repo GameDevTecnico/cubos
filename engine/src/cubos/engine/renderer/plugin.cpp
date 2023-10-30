@@ -10,6 +10,7 @@
 #include <cubos/engine/renderer/point_light.hpp>
 #include <cubos/engine/renderer/pps/bloom.hpp>
 #include <cubos/engine/renderer/spot_light.hpp>
+#include <cubos/engine/renderer/viewport.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
@@ -113,42 +114,8 @@ static void checkPaletteUpdateSystem(Write<Assets> assets, Write<Renderer> rende
     }
 }
 
-/// @brief Splits the viewport recursively for the given cameras.
-/// @param position Viewport position.
-/// @param size Viewport size.
-/// @param count How many cameras need to be fitted in to the given viewport.
-/// @param viewport Output array where the viewports will be set.
-static void splitViewport(glm::ivec2 position, glm::ivec2 size, int count, BaseRenderer::Viewport* viewports)
-{
-    if (count == 1)
-    {
-        viewports[0].position = position;
-        viewports[0].size = size;
-    }
-    else if (count >= 2)
-    {
-        glm::ivec2 splitSize;
-        glm::ivec2 splitOffset;
-
-        // Split along the largest axis.
-        if (size.x > size.y)
-        {
-            splitSize = {size.x / 2, size.y};
-            splitOffset = {size.x / 2, 0};
-        }
-        else
-        {
-            splitSize = {size.x, size.y / 2};
-            splitOffset = {0, size.y / 2};
-        }
-
-        splitViewport(position, splitSize, count / 2, viewports);
-        splitViewport(position + splitOffset, splitSize, (count + 1) / 2, &viewports[count / 2]);
-    }
-}
-
 static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Write<RendererFrame> frame,
-                 Query<Read<LocalToWorld>, Read<Camera>> query)
+                 Query<Read<LocalToWorld>, Read<Camera>, OptRead<Viewport>> query)
 {
     Camera cameras[4]{};
     glm::mat4 views[4]{};
@@ -165,16 +132,24 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
 
         if (auto components = query[activeCameras->entities[i]])
         {
-            auto [localToWorld, camera] = *components;
+            auto [localToWorld, camera, viewport] = *components;
             cameras[cameraCount].fovY = camera->fovY;
             cameras[cameraCount].zNear = camera->zNear;
             cameras[cameraCount].zFar = camera->zFar;
+            if (viewport)
+            {
+                viewports[i].position = viewport->position;
+                viewports[i].size = viewport->size;
+            }
+            else
+            {
+                viewports[i].position = {0, 0};
+                viewports[i].size = (*renderer)->size();
+            }
             views[cameraCount] = glm::inverse(localToWorld->mat);
             cameraCount += 1;
         }
     }
-
-    splitViewport({0, 0}, (*renderer)->size(), cameraCount, viewports);
 
     if (cameraCount == 0)
     {
@@ -206,6 +181,7 @@ void cubos::engine::rendererPlugin(Cubos& cubos)
     cubos.addComponent<SpotLight>();
     cubos.addComponent<DirectionalLight>();
     cubos.addComponent<PointLight>();
+    cubos.addComponent<Viewport>();
 
     cubos.startupTag("cubos.renderer.init").after("cubos.window.init");
     cubos.tag("cubos.renderer.frame").after("cubos.transform.update");
