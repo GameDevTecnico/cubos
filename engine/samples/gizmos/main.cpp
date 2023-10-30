@@ -18,29 +18,30 @@ static void settingsSystem(Write<Settings> settings)
 
 static void setCameraSystem(Write<ActiveCameras> camera, Commands cmds)
 {
-    camera->entities[0] = cmds.create()
-                              .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
-                              .add(LocalToWorld{})
-                              .add(Position{{5.0F, 5.0F, -10.0F}})
-                              .add(Rotation{glm::quatLookAt(glm::vec3{0.0F, 0.0F, 1.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
-                              .entity();
+    camera->entities[0] =
+        cmds.create()
+            .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
+            .add(LocalToWorld{})
+            .add(Position{{5.0F, 5.0F, 0.0F}})
+            .add(Rotation{glm::quatLookAt(glm::vec3{-1.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
+            .entity();
     camera->entities[1] = cmds.create()
                               .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
                               .add(LocalToWorld{})
-                              .add(Position{{-5.0F, 5.0F, -10.0F}})
-                              .add(Rotation{glm::quatLookAt(glm::vec3{0.0F, 0.0F, 1.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
+                              .add(Position{{-25.0F, 25.0F, 0.0F}})
+                              .add(Rotation{glm::quatLookAt(glm::vec3{1.0F, -1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
                               .entity();
     camera->entities[2] = cmds.create()
                               .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
                               .add(LocalToWorld{})
-                              .add(Position{{-5.0F, -5.0F, -10.0F}})
-                              .add(Rotation{glm::quatLookAt(glm::vec3{0.5F, 0.5F, 0.5F}, glm::vec3{0.0F, 1.0F, 0.0F})})
+                              .add(Position{{-25.0F, -25.0F, 0.0F}})
+                              .add(Rotation{glm::quatLookAt(glm::vec3{1.0F, 1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
                               .entity();
     camera->entities[3] = cmds.create()
                               .add(Camera{.fovY = 60.0F, .zNear = 0.1F, .zFar = 100.0F})
                               .add(LocalToWorld{})
-                              .add(Position{{5.0F, -5.0F, -10.0F}})
-                              .add(Rotation{glm::quatLookAt(glm::vec3{0.5F, 0.5F, 0.5F}, glm::vec3{0.0F, 1.0F, 0.0F})})
+                              .add(Position{{25.0F, -25.0F, 0.0F}})
+                              .add(Rotation{glm::quatLookAt(glm::vec3{-1.0F, 1.0F, 0.0F}, glm::vec3{0.0F, 1.0F, 0.0F})})
                               .entity();
 }
 
@@ -62,6 +63,11 @@ static void drawSystem(Write<Gizmos> gizmos)
     gizmos->color({0.5F, 1, 1});
     gizmos->drawWireBox("test box", {0.5F, 0.5F, 0.5F}, {-1, -1, -1}, 0, Gizmos::Space::World);
     /// [Box]
+
+    ///[Cut Cone]
+    gizmos->color({0.5F, 0.3F, 1});
+    gizmos->drawCutCone("test cut cone", {0.7F, 0.7F, 0.7F}, 5.0F, {-3, -3, -3}, 3.0F, 0, Gizmos::Space::World);
+    ///[Cut Cone]
 }
 /// [System]
 
