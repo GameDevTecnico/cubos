@@ -44,7 +44,19 @@ namespace cubos::engine
             auto* verts = static_cast<glm::vec3*>(renderer.cutConePrimitive.vb->map());
 
             glm::vec3 n = glm::normalize(mPointB - mPointA);
-            glm::vec3 p = {n[1], -n[0], n[2]};
+            glm::vec3 p;
+            if (n[0] != n[1])
+            {
+                p = {n[1], -n[0], n[2]};
+            }
+            else if (n[0] != n[2])
+            {
+                p = {-n[2], n[1], n[0]};
+            }
+            else
+            {
+                p = {n[0], -n[2], n[1]};
+            }
 
             glm::vec3 pA = p * mRadiusA;
 

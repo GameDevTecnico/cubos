@@ -67,6 +67,19 @@ namespace cubos::engine
                          glm::vec3 secondBaseCenter, float secondBaseRadius, float lifespan = 0.0F,
                          Space space = Space::World);
 
+        /// @brief Draws an arrow gizmo.
+        /// @param id Identifier of the gizmo.
+        /// @param origin Point from which the arrow starts.
+        /// @param direction Direction of the arrow.
+        /// @param girth Width of the cylinder part of the arrow.
+        /// @param width Width of the base of the cone at the tip of the arrow.
+        /// @param ratio Point of the arrow at which the cylinder ends and the cone begins.
+        /// @param lifespan How long the line will be on screen for, in seconds. Defaults to 0, which means a single
+        /// frame.
+        /// @param space Space to draw the gizmo in.
+        void drawArrow(const std::string& id, glm::vec3 origin, glm::vec3 direction, float girth, float width,
+                       float ratio = 0.F, float lifespan = 0.0F, Space space = Space::World);
+
         /// @brief Draws a wireframe box gizmo.
         /// @param id Identifier of the gizmo.
         /// @param corner One of the corners of the box to be drawn.
