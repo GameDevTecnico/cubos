@@ -8,9 +8,9 @@
 
 using cubos::core::ecs::Write;
 
-using cubos::engine::Settings;
 using cubos::engine::Cubos;
 using cubos::engine::imguiEdit;
+using cubos::engine::Settings;
 
 using namespace tesseratos;
 

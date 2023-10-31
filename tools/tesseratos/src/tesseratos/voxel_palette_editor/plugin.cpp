@@ -15,12 +15,12 @@ using cubos::core::ecs::EventReader;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 
+using cubos::engine::ActiveVoxelPalette;
 using cubos::engine::Asset;
 using cubos::engine::Assets;
-using cubos::engine::ActiveVoxelPalette;
+using cubos::engine::Cubos;
 using cubos::engine::VoxelMaterial;
 using cubos::engine::VoxelPalette;
-using cubos::engine::Cubos;
 
 using namespace tesseratos;
 
