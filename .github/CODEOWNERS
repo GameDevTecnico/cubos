@@ -8,6 +8,5 @@
 **/engine/collisions/ @luishfonseca
 **/engine/input/ @luishfonseca
 **/engine/physics/ @luishfonseca @fallenatlas
-**/engine/tools/ @DiogoMendonc-a
 
-**/tesseratos/ @DiogoMendonc-a
+**/tesseratos/ @DiogoMendonc-a @roby2014
