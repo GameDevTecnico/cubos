@@ -61,7 +61,7 @@ static void drawSystem(Write<Gizmos> gizmos)
 
     /// [Box]
     gizmos->color({0.5F, 1, 1});
-    gizmos->drawWireBox("test box", {0.5F, 0.5F, 0.5F}, {-1, -1, -1}, 0, Gizmos::Space::World);
+    gizmos->drawWireBox("test box", {-5, -5, -5}, {-7, -7, -7}, 0, Gizmos::Space::World);
     /// [Box]
 
     ///[Cut Cone]
@@ -74,8 +74,9 @@ static void drawSystem(Write<Gizmos> gizmos)
 /// [Start Up System]
 static void drawStartingLineSystem(Write<Gizmos> gizmos)
 {
-    gizmos->color({1, 0, 0});
-    gizmos->drawLine("test line", {0, 1, 0}, {1, 0, 1}, 10, Gizmos::Space::Screen);
+    gizmos->color({1, 0, 1});
+    gizmos->drawArrow("test arrow", {0.6F, 0.6F, 0.0F}, {-0.1F, -0.1F, 0.0F}, 0.003F, 0.009F, 0.7F, 10.0F,
+                      Gizmos::Space::Screen);
 }
 /// [Start Up System]
 

@@ -94,3 +94,11 @@ void Gizmos::drawCutCone(const std::string& id, glm::vec3 firstBaseCenter, float
                                         mColor, lifespan),
          space);
 }
+
+void Gizmos::drawArrow(const std::string& id, glm::vec3 origin, glm::vec3 direction, float girth, float width,
+                       float ratio, float lifespan, Space space)
+{
+    auto p = direction * ratio;
+    drawCutCone(id, origin, girth, origin + p, girth, lifespan, space);
+    drawCutCone(id, origin + p, width, origin + direction, 0.0F, lifespan, space);
+}
