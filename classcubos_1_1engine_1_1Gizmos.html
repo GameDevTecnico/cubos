@@ -110,6 +110,17 @@
             </dt>
             <dd>Draws a cut cone gizmo.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5ef3589cc7ba835a23edaba6205f4724" class="m-doc">drawArrow</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 origin,
+              glm::vec3 direction,
+              float girth,
+              float width,
+              float ratio = 0.F,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span>
+            </dt>
+            <dd>Draws an arrow gizmo.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a2b7a537716c68f405c250c652d9126ae" class="m-doc">drawWireBox</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
               glm::vec3 corner,
               glm::vec3 oppositeCorner,
@@ -296,6 +307,58 @@
                 <tr>
                   <td>secondBaseRadius</td>
                   <td>Radius of the second base.</td>
+                </tr>
+                <tr>
+                  <td>lifespan</td>
+                  <td>How long the line will be on screen for, in seconds. Defaults to 0, which means a single frame.</td>
+                </tr>
+                <tr>
+                  <td>space</td>
+                  <td>Space to draw the gizmo in.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5ef3589cc7ba835a23edaba6205f4724"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ef3589cc7ba835a23edaba6205f4724" class="m-doc-self">drawArrow</a>(</span><span class="m-doc-wrap">const std::string&amp; id,
+              glm::vec3 origin,
+              glm::vec3 direction,
+              float girth,
+              float width,
+              float ratio = 0.F,
+              float lifespan = 0.0F,
+              <a href="classcubos_1_1engine_1_1Gizmos.html#a8f819feb4924675391190173bd5a8926" class="m-doc">Space</a> space = Space::World)</span></span>
+            </h3>
+            <p>Draws an arrow gizmo.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Identifier of the gizmo.</td>
+                </tr>
+                <tr>
+                  <td>origin</td>
+                  <td>Point from which the arrow starts.</td>
+                </tr>
+                <tr>
+                  <td>direction</td>
+                  <td>Direction of the arrow.</td>
+                </tr>
+                <tr>
+                  <td>girth</td>
+                  <td>Width of the cylinder part of the arrow.</td>
+                </tr>
+                <tr>
+                  <td>width</td>
+                  <td>Width of the base of the cone at the tip of the arrow.</td>
+                </tr>
+                <tr>
+                  <td>ratio</td>
+                  <td>Point of the arrow at which the cylinder ends and the cone begins.</td>
                 </tr>
                 <tr>
                   <td>lifespan</td>
