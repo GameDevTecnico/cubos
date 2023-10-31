@@ -30,5 +30,5 @@ void Serializer::hook(const reflection::Type& type, Hook hook)
         CUBOS_WARN("Hook for type '{}' already exists, overwriting", type.name());
     }
 
-    mHooks.emplace(&type, hook);
+    mHooks.insert_or_assign(&type, hook);
 }
