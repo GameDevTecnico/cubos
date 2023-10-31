@@ -23,6 +23,7 @@ add_executable(
     data/fs/embedded_archive.cpp
     data/fs/standard_archive.cpp
     data/fs/file_system.cpp
+    data/ser/debug.cpp
     data/context.cpp
 
     memory/any_value.cpp
