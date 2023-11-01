@@ -122,6 +122,14 @@
             </dt>
             <dd>Removes all components from an entity.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a86ef74de8b61d5c9925369e17c922e7e" class="m-doc">storage</a>(</span><span class="m-doc-wrap">std::size_t id) -&gt; <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>*</span>
+            </dt>
+            <dd>Gets the storage of the given component type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a68d399123342e8118e7dfdf17d3983ae" class="m-doc">storage</a>(</span><span class="m-doc-wrap">std::size_t id) const -&gt; const <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>*</span>
+            </dt>
+            <dd>Gets the storage of the given component type.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aec76669ca8023a902cad70274225182a" class="m-doc">pack</a>(</span><span class="m-doc-wrap">uint32_t id,
               std::size_t componentId,
               <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context) const -&gt; <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a></span>
@@ -428,6 +436,52 @@
                   <td><a href="structcubos_1_1core_1_1ecs_1_1Entity.html" class="m-doc">Entity</a> index.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a86ef74de8b61d5c9925369e17c922e7e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>* cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a86ef74de8b61d5c9925369e17c922e7e" class="m-doc-self">storage</a>(</span><span class="m-doc-wrap">std::size_t id)</span></span>
+            </h3>
+            <p>Gets the storage of the given component type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Component type identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Component storage.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a68d399123342e8118e7dfdf17d3983ae"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1ecs_1_1IStorage.html" class="m-doc">IStorage</a>* cubos::<wbr />core::<wbr />ecs::<wbr />ComponentManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68d399123342e8118e7dfdf17d3983ae" class="m-doc-self">storage</a>(</span><span class="m-doc-wrap">std::size_t id) const</span></span>
+            </h3>
+            <p>Gets the storage of the given component type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">id</td>
+                  <td>Component type identifier.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Component storage.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="aec76669ca8023a902cad70274225182a"><div>

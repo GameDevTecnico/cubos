@@ -84,6 +84,14 @@
             </dt>
             <dd>Remove a value from the storage.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab41b90cf7173285e2c0328b9a218f021" class="m-doc">get</a>(</span><span class="m-doc-wrap">uint32_t index) -&gt; void* <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets a value from the storage.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aca580f9119f84f99c4b6ce029f2baca5" class="m-doc">get</a>(</span><span class="m-doc-wrap">uint32_t index) const -&gt; const void* <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Gets a value from the storage.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ae732aee9a795d2a1b2c62384b0968586" class="m-doc">pack</a>(</span><span class="m-doc-wrap">uint32_t index,
               <a href="classcubos_1_1core_1_1data_1_1old_1_1Context.html" class="m-doc">data::<wbr />old::<wbr />Context</a>* context) const -&gt; <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">data::<wbr />old::<wbr />Package</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -139,6 +147,52 @@
                   <td>Index of the value to be removed.</td>
                 </tr>
               </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab41b90cf7173285e2c0328b9a218f021"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void* cubos::<wbr />core::<wbr />ecs::<wbr />IStorage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab41b90cf7173285e2c0328b9a218f021" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">uint32_t index) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets a value from the storage.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the value to be retrieved.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aca580f9119f84f99c4b6ce029f2baca5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const void* cubos::<wbr />core::<wbr />ecs::<wbr />IStorage::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aca580f9119f84f99c4b6ce029f2baca5" class="m-doc-self">get</a>(</span><span class="m-doc-wrap">uint32_t index) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Gets a value from the storage.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index</td>
+                  <td>Index of the value to be retrieved.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Pointer to the value.</td>
+                </tr>
+              </tfoot>
             </table>
           </div></section>
           <section class="m-doc-details" id="ae732aee9a795d2a1b2c62384b0968586"><div>
