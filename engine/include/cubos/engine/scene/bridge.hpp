@@ -6,7 +6,7 @@
 
 #include <cubos/core/reflection/reflect.hpp>
 
-#include <cubos/engine/assets/bridge.hpp>
+#include <cubos/engine/assets/bridges/file.hpp>
 #include <cubos/engine/scene/scene.hpp>
 
 namespace cubos::engine
@@ -27,35 +27,34 @@ namespace cubos::engine
     ///     },
     ///     "entities": {
     ///         "baz": {
-    ///             "cubos/position": {
-    ///                 "x": 1,
-    ///                 "y": 2,
-    ///                 "z": 3
+    ///             "cubos::engine::Position": {
+    ///                 "x": 10
     ///             }
     ///         },
     ///         "foo.bar": {
-    ///             "cubos/parent": "baz",
+    ///             "Parent": "baz",
     ///         }
     ///     }
     /// }
     /// @endcode
     ///
-    /// This scene will import the subscene with ID `6f42ae5a-59d1-5df3-8720-83b8df6dd536`, and
+    /// This scene will import the sub-scene with ID `6f42ae5a-59d1-5df3-8720-83b8df6dd536`, and
     /// prefix all of its entities with `foo.`. The entity `foo.bar` will override the entity `bar`
     /// from the imported scene, while the entity `baz` will be added to the scene.
     ///
     /// @ingroup scene-plugin
-    class SceneBridge : public AssetBridge
+    class SceneBridge : public FileBridge
     {
     public:
         /// @brief Constructs a bridge.
         ///
         SceneBridge()
-            : AssetBridge(core::reflection::reflect<Scene>())
+            : FileBridge(core::reflection::reflect<Scene>())
         {
         }
 
-        bool load(Assets& assets, const AnyAsset& handle) override;
-        bool save(const Assets& assets, const AnyAsset& handle) override;
+    protected:
+        bool loadFromFile(Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
+        bool saveToFile(const Assets& assets, const AnyAsset& handle, core::memory::Stream& stream) override;
     };
 } // namespace cubos::engine
