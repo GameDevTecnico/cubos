@@ -16,30 +16,21 @@ using cubos::core::data::old::SerializationMap;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::EntityHash;
 using cubos::core::ecs::Registry;
+using cubos::core::memory::Stream;
 
 using namespace cubos::engine;
 
-bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
+bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
 {
-    // Open the scene file.
-    auto path = assets.readMeta(handle)->get("path").value();
-    auto stream = FileSystem::open(path, File::OpenMode::Read);
-    if (stream == nullptr)
-    {
-        CUBOS_ERROR("Could not open scene file '{}'", path);
-        return false;
-    }
-
     // Dump the file contents into a string.
     std::string contents;
-    stream->readUntil(contents, nullptr);
-    stream.reset(); // Close the file.
+    stream.readUntil(contents, nullptr);
 
     // Deserialize the scene file.
     auto deserializer = JSONDeserializer(contents);
     if (deserializer.failed())
     {
-        CUBOS_ERROR("Could not parse scene file '{}' as JSON", path);
+        CUBOS_ERROR("Could not parse scene file as JSON");
         return false;
     }
 
@@ -119,7 +110,7 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
             }
             else
             {
-                CUBOS_ERROR("Entity '{}' not found in scene '{}'", name, path);
+                CUBOS_ERROR("Entity '{}' not found in scene", name);
                 return false;
             }
         }
@@ -133,8 +124,7 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
 
             if (!Registry::create(componentName, deserializer, scene.blueprint, entity))
             {
-                CUBOS_ERROR("Could not deserialize component '{}' into entity '{}' in scene '{}'", componentName, name,
-                            path);
+                CUBOS_ERROR("Could not deserialize component '{}' into entity '{}' in scene", componentName, name);
                 return false;
             }
         }
@@ -149,7 +139,7 @@ bool SceneBridge::load(Assets& assets, const AnyAsset& handle)
     return true;
 }
 
-bool SceneBridge::save(const Assets& /*assets*/, const AnyAsset& /*handle*/)
+bool SceneBridge::saveToFile(const Assets& /*assets*/, const AnyAsset& /*handle*/, Stream& /*stream*/)
 {
     // TODO: figure out how to do this.
     // One of the problems is finding out exactly what was overriden in sub-scenes.
