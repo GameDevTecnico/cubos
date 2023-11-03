@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref core-data-des directory.
+
+namespace cubos::core::data
+{
+    /// @defgroup core-data-des Deserialization
+    /// @ingroup core-data
+    /// @brief Provides deserialization utilities.
+}
