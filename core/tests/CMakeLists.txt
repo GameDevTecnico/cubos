@@ -28,6 +28,7 @@ add_executable(
 
     memory/any_value.cpp
     memory/any_vector.cpp
+    memory/function.cpp
     memory/type_map.cpp
     memory/unordered_bimap.cpp
 
