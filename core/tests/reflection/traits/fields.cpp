@@ -28,6 +28,7 @@ TEST_CASE("reflection::FieldsTrait")
         auto fields = FieldsTrait();
         CHECK(fields.field("foo") == nullptr);
         CHECK(fields.begin() == fields.end());
+        CHECK(fields.size() == 0);
     }
 
     SUBCASE("single field")
@@ -39,6 +40,7 @@ TEST_CASE("reflection::FieldsTrait")
         CHECK(field == &*fields.begin());
         CHECK(fields.begin() != fields.end());
         CHECK(++fields.begin() == fields.end());
+        CHECK(fields.size() == 1);
 
         ObjectType object{};
         CHECK(field->name() == "foo");
@@ -69,6 +71,7 @@ TEST_CASE("reflection::FieldsTrait")
         REQUIRE(barField != nullptr);
         CHECK(barField == &*(++fields.begin()));
         CHECK(++(++fields.begin()) == fields.end());
+        CHECK(fields.size() == 2);
 
         ObjectType object{};
         CHECK(fooField->name() == "foo");

@@ -138,6 +138,17 @@ FieldsTrait::Iterator FieldsTrait::end()
     return Iterator{nullptr};
 }
 
+std::size_t FieldsTrait::size() const
+{
+    std::size_t i = 0;
+    for (const auto& field : *this)
+    {
+        (void)field;
+        i += 1;
+    }
+    return i;
+}
+
 FieldsTrait::View FieldsTrait::view(void* instance) const
 {
     return View{*this, instance};
