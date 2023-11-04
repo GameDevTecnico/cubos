@@ -24,6 +24,7 @@ add_executable(
     data/fs/standard_archive.cpp
     data/fs/file_system.cpp
     data/ser/debug.cpp
+    data/des/json.cpp
     data/context.cpp
 
     memory/any_value.cpp
