@@ -5,13 +5,13 @@
   },
   "entities": {
     "main": {
-      "num": 0
+      "Num": 0
     },
     "sub1.root": {
-      "parent": "main"
+      "Parent": "main"
     },
     "sub2.root": {
-      "parent": "main"
+      "Parent": "main"
     }
   }
 }

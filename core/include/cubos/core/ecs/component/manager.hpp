@@ -17,25 +17,6 @@
 
 namespace cubos::core::ecs
 {
-    /// @brief Gets the registered name of a component type.
-    ///
-    /// If the component type is not registered, aborts the program.
-    ///
-    /// @tparam T Component type.
-    /// @return Registered name of the component type.
-    /// @ingroup core-ecs-component
-    template <typename T>
-    std::optional<std::string_view> getComponentName();
-
-    /// @brief Gets the registered name of a component type.
-    ///
-    /// If the component type is not registered, aborts the program.
-    ///
-    /// @param type Component type.
-    /// @return Registered name of the component type.
-    /// @ingroup core-ecs-component
-    std::optional<std::string_view> getComponentName(const reflection::Type& type);
-
     /// @brief Utility struct used to reference a storage of component type @p T for reading.
     /// @tparam T Component type.
     /// @ingroup core-ecs-component
@@ -207,12 +188,6 @@ namespace cubos::core::ecs
     };
 
     // Implementation.
-
-    template <typename T>
-    std::optional<std::string_view> getComponentName()
-    {
-        return getComponentName(reflection::reflect<T>());
-    }
 
     template <typename T>
     ReadStorage<T>::ReadStorage(ReadStorage&& other) noexcept

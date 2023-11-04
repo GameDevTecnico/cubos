@@ -25,17 +25,6 @@ std::unique_ptr<IStorage> Registry::createStorage(const reflection::Type& type)
     return nullptr;
 }
 
-std::optional<std::string_view> Registry::name(const reflection::Type& type)
-{
-    auto& entries = Registry::entriesByType();
-    if (entries.contains(type))
-    {
-        return entries.at(type)->name;
-    }
-
-    return std::nullopt;
-}
-
 const reflection::Type* Registry::type(std::string_view name)
 {
     auto& entries = Registry::entriesByName();

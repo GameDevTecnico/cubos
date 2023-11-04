@@ -2,11 +2,11 @@
   "imports": {},
   "entities": {
     "root": {
-      "num": 1
+      "Num": 1
     },
     "child": {
-      "num": 2,
-      "parent": "root"
+      "Num": 2,
+      "Parent": "root"
     }
   }
 }
