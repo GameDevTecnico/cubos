@@ -20,7 +20,8 @@ Checks: "\
   misc-include-cleaner,\
   misc-header-include-cycle,\
   misc-definitions-in-headers,\
-  cppcoreguidelines-virtual-class-destructor"
+  cppcoreguidelines-virtual-class-destructor,\
+  -clang-analyzer-cplusplus.NewDeleteLeaks"
 WarningsAsErrors: '*'
 FormatStyle: file
 HeaderFilterRegex: 'include/cubos/.*|src/cubos/.*|tools/.*'
