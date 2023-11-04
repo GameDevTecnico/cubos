@@ -92,6 +92,10 @@ namespace cubos::core::reflection
         /// @return Whether the operation is supported.
         bool hasErase() const;
 
+        /// @brief Checks if resize is supported.
+        /// @return Whether the operation is supported.
+        bool hasResize() const;
+
         /// @brief Returns the element type of the array.
         /// @return Element type.
         const Type& elementType() const;
@@ -158,6 +162,16 @@ namespace cubos::core::reflection
         /// @note Aborts if @ref ArrayTrait::hasErase() returns false.
         /// @param index Element index.
         void erase(std::size_t index) const;
+
+        /// @brief Clears the array.
+        /// @note Aborts if @ref ArrayTrait::hasErase() returns false.
+        void clear() const;
+
+        /// @brief Resizes the array. If this increases the size of the array, @ref insertDefault
+        /// is used to insert the remaining elements.
+        /// @note Aborts if @ref ArrayTrait::hasResize() returns false.
+        /// @param size Array size.
+        void resize(std::size_t size) const;
 
         /// @brief Gets an iterator to the first element.
         /// @return Iterator.

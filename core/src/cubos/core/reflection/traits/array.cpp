@@ -55,6 +55,11 @@ bool ArrayTrait::hasErase() const
     return mErase != nullptr;
 }
 
+bool ArrayTrait::hasResize() const
+{
+    return this->hasErase() && this->hasInsertDefault();
+}
+
 const Type& ArrayTrait::elementType() const
 {
     return mElementType;
@@ -109,6 +114,35 @@ void ArrayTrait::View::erase(std::size_t index) const
 {
     CUBOS_ASSERT(mTrait.hasErase(), "Erase not supported");
     mTrait.mErase(mInstance, index);
+}
+
+void ArrayTrait::View::clear() const
+{
+    CUBOS_ASSERT(mTrait.hasErase(), "Clear not supported");
+
+    // This really inefficient, but if it ever becomes a problem its easy to improve, we could just
+    // add yet another function pointer to the trait, which each array type sets.
+    while (this->length() > 0)
+    {
+        this->erase(this->length() - 1);
+    }
+}
+
+void ArrayTrait::View::resize(std::size_t size) const
+{
+    CUBOS_ASSERT(mTrait.hasResize(), "Resize not supported");
+
+    // This really inefficient, but if it ever becomes a problem its easy to improve, we could just
+    // add yet another function pointer to the trait, which each array type sets.
+    while (this->length() > size)
+    {
+        this->erase(this->length() - 1);
+    }
+
+    while (this->length() < size)
+    {
+        this->insertDefault(this->length());
+    }
 }
 
 ArrayTrait::View::Iterator ArrayTrait::View::begin() const
