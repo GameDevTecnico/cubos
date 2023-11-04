@@ -134,6 +134,21 @@ void DictionaryTrait::View::erase(Iterator& iterator) const
     iterator.mInner = nullptr;
 }
 
+void DictionaryTrait::View::erase(Iterator&& iterator) const
+{
+    this->erase(iterator);
+}
+
+void DictionaryTrait::View::clear() const
+{
+    // This really inefficient, but if it ever becomes a problem its easy to improve, we could just
+    // add yet another function pointer to the trait, which each dictionary type sets.
+    while (this->length() > 0)
+    {
+        this->erase(this->begin());
+    }
+}
+
 DictionaryTrait::ConstView::ConstView(const DictionaryTrait& trait, const void* instance)
     : mTrait(trait)
     , mInstance(instance)
