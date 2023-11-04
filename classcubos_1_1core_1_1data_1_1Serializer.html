@@ -54,6 +54,7 @@
             <li>
               Reference
               <ul>
+                <li><a href="#derived-classes">Derived classes</a></li>
                 <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#pro-methods">Protected functions</a></li>
@@ -62,6 +63,15 @@
           </ul>
         </nav>
 <p>Serializers are type visitors which allow overriding the default serialization behaviour for each type using hooks. Hooks are functions which are called when the serializer encounters a type, and can be used to customize the serialization process.</p><p>If a type which can&#x27;t be further decomposed is encountered for which no hook is defined, the serializer will emit a warning and fail. Implementations should set default hooks for at least the primitive types.</p>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1data_1_1DebugSerializer.html" class="m-doc">DebugSerializer</a>
+            </dt>
+            <dd><a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> implementation which prints the given data to a stream in a human-readable format not meant to be parsed.</dd>
+          </dl>
+        </section>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
