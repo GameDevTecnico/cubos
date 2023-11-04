@@ -94,6 +94,10 @@ namespace cubos::core::reflection
         /// @return Iterator.
         static Iterator end();
 
+        /// @brief Returns how many fields there are in the trait.
+        /// @return Field count.
+        std::size_t size() const;
+
         /// @brief Returns a view of the given object instance.
         /// @param instance Object instance.
         /// @return Object view.
