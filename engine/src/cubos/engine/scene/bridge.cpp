@@ -1,21 +1,20 @@
+#include <cubos/core/data/des/json.hpp>
 #include <cubos/core/data/fs/file_system.hpp>
-#include <cubos/core/data/old/json_deserializer.hpp>
-#include <cubos/core/data/old/serialization_map.hpp>
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/external/unordered_map.hpp>
 
 #include <cubos/engine/assets/assets.hpp>
 #include <cubos/engine/scene/bridge.hpp>
 #include <cubos/engine/scene/scene.hpp>
 
-using cubos::core::data::File;
-using cubos::core::data::FileSystem;
-using cubos::core::data::old::JSONDeserializer;
-using cubos::core::data::old::SerializationMap;
+using cubos::core::data::JSONDeserializer;
+using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::Entity;
-using cubos::core::ecs::EntityHash;
 using cubos::core::ecs::Registry;
+using cubos::core::memory::AnyValue;
 using cubos::core::memory::Stream;
 
 using namespace cubos::engine;
@@ -23,116 +22,139 @@ using namespace cubos::engine;
 bool SceneBridge::loadFromFile(Assets& assets, const AnyAsset& handle, Stream& stream)
 {
     // Dump the file contents into a string.
-    std::string contents;
+    std::string contents{};
     stream.readUntil(contents, nullptr);
 
-    // Deserialize the scene file.
-    auto deserializer = JSONDeserializer(contents);
-    if (deserializer.failed())
+    // Parse the file contents as JSON.
+    nlohmann::json json{};
+
+    try
     {
-        CUBOS_ERROR("Could not parse scene file as JSON");
+        json = nlohmann::json::parse(contents);
+    }
+    catch (nlohmann::json::parse_error& e)
+    {
+        CUBOS_ERROR("{}", e.what());
         return false;
     }
 
-    auto scene = Scene();
-
-    // Add a SerializationMap for entity handle deserialization.
-    deserializer.context().push(
-        SerializationMap<Entity, std::string, EntityHash>{[&](const Entity&, std::string&) {
-                                                              return false; // Serialization not needed.
-                                                          },
-                                                          [&](Entity& entity, const std::string& string) {
-                                                              if (!scene.blueprint.bimap().containsRight(string))
-                                                              {
-                                                                  return false;
-                                                              }
-
-                                                              entity = scene.blueprint.bimap().atLeft(string);
-                                                              return true;
-                                                          }});
-
-    deserializer.beginObject();
-
-    // First, read the imports section.
-    std::size_t len = deserializer.beginDictionary();
-    for (std::size_t i = 0; i < len; ++i)
+    // Check if the parsed JSON follows the expected scene structure
+    if (!json.is_object())
     {
-        // Read the import name and asset ID.
-        std::string name;
-        std::string id;
-        deserializer.read(name);
-        deserializer.read(id);
+        CUBOS_ERROR("Expected root to be a JSON object, found {}", json.type_name());
+        return false;
+    }
 
-        // Check if there's already an import with that name.
-        if (scene.imports.find(name) != scene.imports.end())
+    for (const auto& [name, item] : json.items())
+    {
+        if (name != "imports" && name != "entities")
         {
-            CUBOS_ERROR("Scenes cannot have two imports with the same name");
+            CUBOS_ERROR("Expected 'imports' or 'entities', found '{}'", name);
+            return false;
+        }
+    }
+
+    Scene scene{};
+    JSONDeserializer des{};
+    des.hook<Entity>([&des, &scene](Entity& entity) {
+        std::string name{};
+        if (!des.read(name))
+        {
             return false;
         }
 
-        // Load the imported scene.
-        auto importedHandle = Asset<Scene>(id);
-        if (importedHandle.getId() == handle.getId())
+        if (!scene.blueprint.bimap().containsRight(name))
         {
-            CUBOS_ERROR("Scenes cannot import themselves");
+            CUBOS_ERROR("Could not deserialize entity from name, no such entity '{}' in scene", name);
             return false;
         }
-        auto imported = assets.read(importedHandle);
 
-        // Add the imported scene to the scene.
-        scene.imports[name] = importedHandle;
-        scene.blueprint.merge(name, imported->blueprint);
-    }
-    deserializer.endDictionary();
+        entity = scene.blueprint.bimap().atLeft(name);
+        return true;
+    });
 
-    // Then, read the entities section. Here, we may find entities that have already been added
-    // by the imports section, in which case we'll just update them.
-    len = deserializer.beginDictionary();
-    for (std::size_t i = 0; i < len; ++i)
+    if (json.contains("imports"))
     {
-        // Get the name of the entity and check if its valid or already in the blueprint.
-        std::string name;
-        deserializer.read(name);
-
-        Entity entity{};
-        if (scene.blueprint.bimap().containsRight(name))
+        des.feed(json.at("imports"));
+        if (!des.read(scene.imports))
         {
-            entity = scene.blueprint.bimap().atLeft(name);
+            CUBOS_ERROR("Could not deserialize scene imports");
+            return false;
         }
 
-        if (entity.isNull())
+        for (const auto& [name, asset] : scene.imports)
         {
-            // Then, either the entity must be created, or, if the entity name has a dot, an error
-            // should be printed since the entity was not found.
-            if (name.find('.') == std::string::npos)
-            {
-                entity = scene.blueprint.create(name);
-            }
-            else
-            {
-                CUBOS_ERROR("Entity '{}' not found in scene", name);
-                return false;
-            }
+            scene.blueprint.merge(name, assets.read(asset)->blueprint);
         }
-
-        // Read the components of the entity.
-        std::size_t componentsLen = deserializer.beginDictionary();
-        for (std::size_t j = 0; j < componentsLen; ++j)
-        {
-            std::string componentName{};
-            deserializer.read(componentName);
-
-            if (!Registry::create(componentName, deserializer, scene.blueprint, entity))
-            {
-                CUBOS_ERROR("Could not deserialize component '{}' into entity '{}' in scene", componentName, name);
-                return false;
-            }
-        }
-        deserializer.endDictionary();
     }
-    deserializer.endDictionary();
 
-    deserializer.endObject();
+    if (json.contains("entities"))
+    {
+        const auto& entitiesJSON = json.at("entities");
+        if (!entitiesJSON.is_object())
+        {
+            CUBOS_ERROR("Expected 'entities' to be a JSON object, found {}", entitiesJSON.type_name());
+            return false;
+        }
+
+        // Create all entities first.
+        for (const auto& [entityName, entityJSON] : entitiesJSON.items())
+        {
+            // If we didn't find an entity with the given name, then we must create one.
+            if (!scene.blueprint.bimap().containsRight(entityName))
+            {
+                // If the entity name contains a dot, then it must have been imported. If we didn't
+                // find it, the user did something wrong.
+                if (entityName.find('.') != std::string::npos)
+                {
+                    CUBOS_ERROR("No such entity '{}' was imported", entityName);
+                    return false;
+                }
+
+                if (!Blueprint::validEntityName(entityName))
+                {
+                    CUBOS_ERROR("Invalid entity name '{}'", entityName);
+                    return false;
+                }
+
+                scene.blueprint.create(entityName);
+            }
+        }
+
+        // Then add their components. This way the Entity hook will be able to handle entities which
+        // are declared after it in the scene file.
+        for (const auto& [entityName, entityJSON] : entitiesJSON.items())
+        {
+            if (!entityJSON.is_object())
+            {
+                CUBOS_ERROR("Expected entity '{}' to be a JSON object, found {}", entityName, entitiesJSON.type_name());
+                return false;
+            }
+
+            auto entity = scene.blueprint.bimap().atLeft(entityName);
+
+            for (const auto& [componentName, componentJSON] : entityJSON.items())
+            {
+                const auto* type = Registry::type(componentName);
+                if (type == nullptr)
+                {
+                    CUBOS_ERROR("No such component type '{}'", componentName);
+                    return false;
+                }
+
+                auto component = AnyValue::defaultConstruct(*type);
+                des.feed(componentJSON);
+                if (!des.read(component.type(), component.get()))
+                {
+                    CUBOS_ERROR("Could not deserialize component of type '{}' of entity '{}'", componentName,
+                                entityName);
+                    return false;
+                }
+
+                scene.blueprint.add(entity, core::memory::move(component));
+            }
+        }
+    }
 
     // Finally, write the scene to the asset.
     assets.store(handle, std::move(scene));
