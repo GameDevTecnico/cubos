@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>cubos::core::reflection namespace | CUBOS.</title>
+  <title>core/reflection/traits/string_conversion.hpp file | CUBOS.</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -44,104 +44,40 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span>reflection <span class="m-thin">namespace</span>
+          <span class="m-breadcrumb"><a href="dir_6c897dd97bedf3914ee8a4d9f7f6549c.html">core</a>/</span><span class="m-breadcrumb"><a href="dir_f4414684a5bb1e1b8e9ba236e8bdb594.html">reflection</a>/</span><span class="m-breadcrumb"><a href="dir_85f1b5bc6fb8e602e74068211760bfae.html">traits</a>/</span>string_conversion.hpp <span class="m-thin">file</span>
         </h1>
-        <p><a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</p>
+        <p>Class <a href="classcubos_1_1core_1_1reflection_1_1StringConversionTrait.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />StringConversionTrait</a>.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
+                <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
-                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
+          <dl class="m-doc">
+            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
+            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core.html" class="m-doc">cubos::core</a></dt>
+            <dd><a href="group__core.html" class="m-doc">Core</a> namespace.</dd>
+            <dt>namespace <a href="namespacecubos_1_1core_1_1reflection.html" class="m-doc">cubos::core::reflection</a></dt>
+            <dd><a href="group__core-reflection.html" class="m-doc">Reflection</a> module.</dd>
+          </dl>
+        </section>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              struct <a href="structcubos_1_1core_1_1reflection_1_1Reflect.html" class="m-doc">Reflect</a>
-            </dt>
-            <dd>Defines the reflection function for the given type <code>T</code>.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1reflection_1_1ArrayTrait.html" class="m-doc">ArrayTrait</a>
-            </dt>
-            <dd>Exposes array-like functionality of a type.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a>
-            </dt>
-            <dd>Describes how a reflected type may be constructed and destructed.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1reflection_1_1DictionaryTrait.html" class="m-doc">DictionaryTrait</a>
-            </dt>
-            <dd>Exposes dictionary-like functionality of a type.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1reflection_1_1FieldsTrait.html" class="m-doc">FieldsTrait</a>
-            </dt>
-            <dd>Describes the fields of a reflected type.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1reflection_1_1StringConversionTrait.html" class="m-doc">StringConversionTrait</a>
+              class <a href="classcubos_1_1core_1_1reflection_1_1StringConversionTrait.html" class="m-doc">cubos::core::reflection::StringConversionTrait</a>
             </dt>
             <dd>Stores functions for converting a type to and from a string.</dd>
-            <dt>
-              class <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>
-            </dt>
-            <dd>Describes a reflected type.</dd>
           </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#ga8eacce93bfd11e459da56437199fe36f" class="m-doc">reflect</a>(</span><span class="m-doc-wrap">) -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp;</span>
-            </dt>
-            <dd>Reflects the given type <code>T</code>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-reflection.html#gaecd81749630d84a2baa8afb81568bb94" class="m-doc">autoConstructibleTrait</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a></span>
-            </dt>
-            <dd>Returns a <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">ConstructibleTrait</a> with the default, copy and move constructors, set only if the type has them.</dd>
-          </dl>
-        </section>
-        <section id="var-members">
-          <h2><a href="#var-members">Variables</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              concept <a href="#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc">Reflectable</a>
-            </dt>
-            <dd>Checks whether the given type <code>T</code> is reflectable.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Variable documentation</h2>
-          <section class="m-doc-details" id="a579d9ef56949d96a84a1a2c647d16b32"><div>
-            <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="reflect_8hpp.html">&lt;core/reflection/reflect.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              concept cubos::<wbr />core::<wbr />reflection::<wbr /><a href="#a579d9ef56949d96a84a1a2c647d16b32" class="m-doc-self">Reflectable</a>
-            </h3>
-            <p>Checks whether the given type <code>T</code> is reflectable.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Type to check.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
