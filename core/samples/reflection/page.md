@@ -7,3 +7,4 @@
 - @subpage examples-core-reflection-traits-fields - @copybrief examples-core-reflection-traits-fields
 - @subpage examples-core-reflection-traits-array - @copybrief examples-core-reflection-traits-array
 - @subpage examples-core-reflection-traits-dictionary - @copybrief examples-core-reflection-traits-dictionary
+- @subpage examples-core-reflection-traits-string-conversion - @copybrief examples-core-reflection-traits-string-conversion
