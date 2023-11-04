@@ -89,7 +89,7 @@ TEST_CASE("ecs::World")
 
         // Add an integer component.
         auto pkg = world.pack(foo);
-        pkg.fields().emplace_back("integer", Package::from(1));
+        pkg.fields().emplace_back("IntegerComponent", Package::from(1));
         CHECK(world.unpack(foo, pkg));
         CHECK(world.components(foo).has<IntegerComponent>());
         CHECK_FALSE(world.components(foo).has<ParentComponent>());
@@ -97,11 +97,11 @@ TEST_CASE("ecs::World")
         // Check if the component was added.
         pkg = world.pack(foo);
         CHECK(pkg.fields().size() == 1);
-        CHECK(pkg.field("integer").get<int>() == 1);
+        CHECK(pkg.field("IntegerComponent").get<int>() == 1);
 
         // Remove the integer component and add a parent component.
-        pkg.removeField("integer");
-        pkg.fields().emplace_back("parent", Package::from(Entity{}));
+        pkg.removeField("IntegerComponent");
+        pkg.fields().emplace_back("ParentComponent", Package::from(Entity{}));
         CHECK(world.unpack(foo, pkg));
         CHECK_FALSE(world.components(foo).has<IntegerComponent>());
         CHECK(world.components(foo).has<ParentComponent>());
@@ -109,7 +109,7 @@ TEST_CASE("ecs::World")
         // Check if the component was added.
         pkg = world.pack(foo);
         CHECK(pkg.fields().size() == 1);
-        CHECK(pkg.field("parent").get<Entity>().isNull());
+        CHECK(pkg.field("ParentComponent").get<Entity>().isNull());
     }
 
     SUBCASE("change a component through pack and unpack")
@@ -123,7 +123,7 @@ TEST_CASE("ecs::World")
 
         // Change the value of the integer component.
         auto pkg = world.pack(foo);
-        pkg.field("integer").set<int>(1);
+        pkg.field("IntegerComponent").set<int>(1);
         CHECK(world.unpack(foo, pkg));
         CHECK(world.components(foo).has<IntegerComponent>());
         CHECK(world.components(foo).has<ParentComponent>());
@@ -131,8 +131,8 @@ TEST_CASE("ecs::World")
         // Check if the value was changed.
         pkg = world.pack(foo);
         CHECK(pkg.fields().size() == 2);
-        CHECK(pkg.field("integer").get<int>() == 1);
-        CHECK(pkg.field("parent").get<Entity>() == bar);
+        CHECK(pkg.field("IntegerComponent").get<int>() == 1);
+        CHECK(pkg.field("ParentComponent").get<Entity>() == bar);
     }
 
     SUBCASE("components are correctly destructed when their entity is destroyed")

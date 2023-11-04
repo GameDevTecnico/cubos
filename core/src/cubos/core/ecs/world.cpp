@@ -55,8 +55,8 @@ data::old::Package World::pack(Entity entity, data::old::Context* context) const
     {
         if (mask.test(i))
         {
-            auto name = Registry::name(mComponentManager.getType(i));
-            pkg.fields().push_back({std::string(name.value()), mComponentManager.pack(entity.index, i, context)});
+            auto name = mComponentManager.getType(i).name();
+            pkg.fields().push_back({name, mComponentManager.pack(entity.index, i, context)});
         }
     }
 

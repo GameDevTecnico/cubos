@@ -12,7 +12,7 @@
 #include <cubos/core/ecs/entity/manager.hpp>
 #include <cubos/core/ecs/resource/manager.hpp>
 #include <cubos/core/log.hpp>
-#include <cubos/core/reflection/reflect.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 namespace cubos::core::ecs
 {
@@ -392,7 +392,7 @@ namespace cubos::core::ecs
     template <typename T>
     void World::registerComponent()
     {
-        CUBOS_TRACE("Registered component '{}'", getComponentName<T>().value());
+        CUBOS_TRACE("Registered component '{}'", reflection::reflect<T>().name());
         mComponentManager.registerComponent<T>();
     }
 

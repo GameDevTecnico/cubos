@@ -5,11 +5,6 @@
 using namespace cubos::core;
 using namespace cubos::core::ecs;
 
-std::optional<std::string_view> cubos::core::ecs::getComponentName(const reflection::Type& type)
-{
-    return Registry::name(type);
-}
-
 void ComponentManager::registerComponent(const reflection::Type& type)
 {
     if (!mTypeToIds.contains(type))

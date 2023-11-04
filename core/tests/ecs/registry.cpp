@@ -26,33 +26,30 @@ TEST_CASE("ecs::Registry")
     Blueprint blueprint{};
     auto entity = blueprint.create("entity");
 
-    // Initially "foo" of type int isn't registered.
-    CHECK(Registry::type("foo") == nullptr);
-    CHECK_FALSE(Registry::name(reflect<int>()).has_value());
+    // Initially type int32_t isn't registered.
+    CHECK(Registry::type("int32_t") == nullptr);
 
     // After registering, it can now be found.
-    Registry::add<int, VecStorage<int>>("foo");
-    REQUIRE(Registry::type("foo") != nullptr);
-    CHECK(Registry::type("foo") == &reflect<int>());
-    REQUIRE(Registry::name(reflect<int>()).has_value());
-    CHECK(*Registry::name(reflect<int>()) == "foo");
+    Registry::add<int32_t, VecStorage<int32_t>>();
+    REQUIRE(Registry::type("int32_t") != nullptr);
+    CHECK(Registry::type("int32_t") == &reflect<int32_t>());
 
     // Create a storage for it and check if its of the correct type.
-    auto storage = Registry::createStorage(reflect<int>());
-    CHECK(dynamic_cast<VecStorage<int>*>(storage.get()) != nullptr);
+    auto storage = Registry::createStorage(reflect<int32_t>());
+    CHECK(dynamic_cast<VecStorage<int32_t>*>(storage.get()) != nullptr);
 
     // Instantiate the component into a blueprint, from a package.
-    auto pkg = Package::from<int>(42);
+    auto pkg = Package::from<int32_t>(42);
     Unpackager unpackager{pkg};
-    REQUIRE(Registry::create("foo", unpackager, blueprint, entity));
+    REQUIRE(Registry::create("int32_t", unpackager, blueprint, entity));
 
     // Spawn the blueprint into the world.
-    world.registerComponent<int>();
+    world.registerComponent<int32_t>();
     entity = cmds.spawn(blueprint).entity("entity");
     cmdBuffer.commit();
 
     // Package the entity and check if the component was correctly instantiated.
     pkg = world.pack(entity);
     REQUIRE(pkg.fields().size() == 1);
-    CHECK(pkg.field("foo").get<int>() == 42);
+    CHECK(pkg.field("int32_t").get<int32_t>() == 42);
 }

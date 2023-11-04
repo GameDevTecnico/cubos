@@ -59,7 +59,7 @@ TEST_CASE("ecs::Blueprint")
 
         // Unpack the identifier of "bar" into a ParentComponent.
         Unpackager unpackager{barPkg};
-        Registry::create("parent", unpackager, blueprint, baz);
+        Registry::create("ParentComponent", unpackager, blueprint, baz);
     }
 
     SUBCASE("spawn the blueprint")
