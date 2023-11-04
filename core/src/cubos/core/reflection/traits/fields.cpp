@@ -124,7 +124,7 @@ const FieldsTrait::Field* FieldsTrait::field(const std::string& name) const
         }
     }
 
-    CUBOS_ERROR("No such field '{}'", name);
+    CUBOS_DEBUG("No such field '{}'", name);
     return nullptr;
 }
 
