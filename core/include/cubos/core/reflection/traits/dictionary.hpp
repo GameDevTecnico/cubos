@@ -227,6 +227,13 @@ namespace cubos::core::reflection
         /// @param iterator Iterator.
         void erase(Iterator& iterator) const;
 
+        /// @copydoc erase(Iterator&) const
+        void erase(Iterator&& iterator) const;
+
+        /// @brief Clears the dictionary.
+        /// @note Aborts if @ref DictionaryTrait::hasErase() returns false.
+        void clear() const;
+
     private:
         const DictionaryTrait& mTrait;
         void* mInstance;
