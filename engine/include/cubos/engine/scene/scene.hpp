@@ -7,6 +7,7 @@
 #include <unordered_map>
 
 #include <cubos/core/ecs/blueprint.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/assets/asset.hpp>
 
@@ -21,6 +22,8 @@ namespace cubos::engine
     /// @ingroup scene-plugin
     struct Scene
     {
+        CUBOS_REFLECT;
+
         /// @brief Resulting blueprint which contains all the entities of the scene and its
         /// imported scenes. If you want to spawn the scene, use this blueprint.
         core::ecs::Blueprint blueprint;
