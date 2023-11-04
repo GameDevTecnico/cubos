@@ -75,8 +75,13 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="ae8fc95175948b5f14462970fabe6ee79">
-              using <a href="#ae8fc95175948b5f14462970fabe6ee79" class="m-doc-self">Hook</a> = bool(*)(<a href="classcubos_1_1core_1_1data_1_1Deserializer.html" class="m-doc">Deserializer</a>&amp;des, const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;type, void*value)
+            <dt id="a16c782136ca839610564331b1f143424">
+              using <a href="#a16c782136ca839610564331b1f143424" class="m-doc-self">Hook</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(void*)&gt;
+            </dt>
+            <dd>Function type for deserialization hooks.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="#aa27198b7fc719c44d5cf3f2620fe243c" class="m-doc">TypedHook</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(T&amp;)&gt;
             </dt>
             <dd>Function type for deserialization hooks.</dd>
           </dl>
@@ -96,12 +101,12 @@
             <dd>Deserialize the given value.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#aeeea3b1e07a66f50cdf483f128bb61b0" class="m-doc">hook</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
-              <a href="classcubos_1_1core_1_1data_1_1Deserializer.html#ae8fc95175948b5f14462970fabe6ee79" class="m-doc">Hook</a> hook)</span>
+              <a href="classcubos_1_1core_1_1data_1_1Deserializer.html#a16c782136ca839610564331b1f143424" class="m-doc">Hook</a> hook)</span>
             </dt>
             <dd>Sets the hook to be called on deserialization of the given type.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#ab8d51e3197dc20751b1d60d6f840c267" class="m-doc">hook</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html#ae8fc95175948b5f14462970fabe6ee79" class="m-doc">Hook</a> hook)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#aaa507d1201f138e90911bb00c9392824" class="m-doc">hook</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html#aa27198b7fc719c44d5cf3f2620fe243c" class="m-doc">TypedHook</a>&lt;T&gt; hook)</span>
             </dt>
             <dd>Sets the hook to be called on deserialization of the given type.</dd>
           </dl>
@@ -115,6 +120,29 @@
             </dt>
             <dd>Called for each type with no hook defined.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="aa27198b7fc719c44d5cf3f2620fe243c"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              using cubos::<wbr />core::<wbr />data::<wbr />Deserializer::<wbr /><a href="#aa27198b7fc719c44d5cf3f2620fe243c" class="m-doc-self">TypedHook</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(T&amp;)&gt;
+            </h3>
+            <p>Function type for deserialization hooks.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
         <section>
           <h2>Function documentation</h2>
@@ -184,7 +212,7 @@
           <section class="m-doc-details" id="aeeea3b1e07a66f50cdf483f128bb61b0"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />Deserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeeea3b1e07a66f50cdf483f128bb61b0" class="m-doc-self">hook</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
-              <a href="classcubos_1_1core_1_1data_1_1Deserializer.html#ae8fc95175948b5f14462970fabe6ee79" class="m-doc">Hook</a> hook)</span></span>
+              <a href="classcubos_1_1core_1_1data_1_1Deserializer.html#a16c782136ca839610564331b1f143424" class="m-doc">Hook</a> hook)</span></span>
             </h3>
             <p>Sets the hook to be called on deserialization of the given type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -203,12 +231,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ab8d51e3197dc20751b1d60d6f840c267"><div>
+          <section class="m-doc-details" id="aaa507d1201f138e90911bb00c9392824"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />Deserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab8d51e3197dc20751b1d60d6f840c267" class="m-doc-self">hook</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html#ae8fc95175948b5f14462970fabe6ee79" class="m-doc">Hook</a> hook)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />Deserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaa507d1201f138e90911bb00c9392824" class="m-doc-self">hook</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Deserializer.html#aa27198b7fc719c44d5cf3f2620fe243c" class="m-doc">TypedHook</a>&lt;T&gt; hook)</span></span>
             </h3>
             <p>Sets the hook to be called on deserialization of the given type.</p>
             <table class="m-table m-fullwidth m-flat">

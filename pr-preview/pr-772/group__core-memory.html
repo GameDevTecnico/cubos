@@ -72,10 +72,12 @@
             <dd>Class <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />BufferStream</a>.</dd>
             <dt>file <a href="endianness_8hpp.html" class="m-doc">endianness.hpp</a></dt>
             <dd>Endianness utility functions.</dd>
+            <dt>file <a href="function_8hpp.html" class="m-doc">function.hpp</a></dt>
+            <dd>Class <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />Function</a>.</dd>
             <dt>file <a href="guards_8hpp.html" class="m-doc">guards.hpp</a></dt>
             <dd>Classes <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />ReadGuard</a> and <a href="classcubos_1_1core_1_1memory_1_1WriteGuard.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />WriteGuard</a>.</dd>
             <dt>file <a href="move_8hpp.html" class="m-doc">move.hpp</a></dt>
-            <dd>Function <a href="group__core-memory.html#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />move</a>.</dd>
+            <dd>Functions <a href="group__core-memory.html#ga3cd36ad26aeaf837279dade433600b38" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />move</a> and <a href="group__core-memory.html#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />forward</a>.</dd>
             <dt>file <a href="standard__stream_8hpp.html" class="m-doc">standard_stream.hpp</a></dt>
             <dd>Class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">cubos::<wbr />core::<wbr />memory::<wbr />StandardStream</a>.</dd>
             <dt>file <a href="stream_8hpp.html" class="m-doc">stream.hpp</a></dt>
@@ -101,6 +103,11 @@
               class <a href="classcubos_1_1core_1_1memory_1_1BufferStream.html" class="m-doc">cubos::core::memory::BufferStream</a>
             </dt>
             <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which writes to/reads from a buffer.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename R, typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1Function_3_01R_07Ts_8_8_8_08_4.html" class="m-doc">cubos::core::memory::Function&lt;R(Ts...)&gt;</a>
+            </dt>
+            <dd>Generic function pointer which can also store capturing lambda functions.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
               class <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">cubos::core::memory::ReadGuard</a>
@@ -176,9 +183,14 @@
             <dd>Converts a value from local endianness to big endianness.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; RemoveReference&lt;T&gt;::Type&amp;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga3cd36ad26aeaf837279dade433600b38" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; RemoveReference&lt;T&gt;::Type&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Returns an R-value reference to the given value.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc">forward</a>(</span><span class="m-doc-wrap">typename RemoveReference&lt;T&gt;::Type&amp; argument) -&gt; T&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</dd>
           </dl>
         </section>
         <section>
@@ -388,13 +400,13 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="gaa42ad365d019d9e72fbc216a84e36572"><div>
+          <section class="m-doc-details" id="ga3cd36ad26aeaf837279dade433600b38"><div>
             <h3>
               <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="move_8hpp.html">&lt;core/memory/move.hpp&gt;</a></div>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">RemoveReference&lt;T&gt;::Type&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc-self">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value)</span></span>
+              <span class="m-doc-wrap-bumper">RemoveReference&lt;T&gt;::Type&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga3cd36ad26aeaf837279dade433600b38" class="m-doc-self">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) <span class="m-label m-success">noexcept</span></span></span>
             </h3>
             <p>Returns an R-value reference to the given value.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -424,6 +436,43 @@
               </tfoot>
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>This is a replacement for <code>std::move</code>, which allows us to avoid including the entire <code>&lt;utility&gt;</code> header.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ga9c4df9a5d6d81c87f0bc17ca34a14a3a"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="move_8hpp.html">&lt;core/memory/move.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T&amp;&amp; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc-self">forward</a>(</span><span class="m-doc-wrap">typename RemoveReference&lt;T&gt;::Type&amp; argument) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Argument type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>argument</td>
+                  <td>Argument to forward.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Forwarded argument.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This is a replacement for <code>std::forward</code>, which allows us to avoid including the entire <code>&lt;utility&gt;</code> header.</p></aside>
           </div></section>
         </section>
       </div>
