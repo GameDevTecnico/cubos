@@ -26,7 +26,7 @@ namespace cubos::engine
         /// @param secondBaseRadius Radius of the second base.
         /// @param color Color for the gizmo to be drawn in.
         /// @param lifespan Time the gizmo will remain on screen, in seconds.
-        CutConeGizmo(unsigned int id, glm::vec3 firstBaseCenter, float firstBaseRadius, glm::vec3 secondBaseCenter,
+        CutConeGizmo(uint32_t id, glm::vec3 firstBaseCenter, float firstBaseRadius, glm::vec3 secondBaseCenter,
                      float secondBaseRadius, const glm::vec3& color, float lifespan)
             : Gizmos::Gizmo(id, color, lifespan)
             , mPointA(firstBaseCenter)

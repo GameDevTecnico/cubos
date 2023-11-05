@@ -55,7 +55,7 @@ static void iterateGizmos(std::vector<std::shared_ptr<Gizmos::Gizmo>>& gizmosVec
 
             // Id
             gizmosRenderer.renderDevice->setShaderPipeline(gizmosRenderer.idPipeline);
-            gizmosRenderer.renderDevice->setFramebuffer(gizmosRenderer.framebuffer);
+            gizmosRenderer.renderDevice->setFramebuffer(gizmosRenderer.idFramebuffer);
 
             gizmosRenderer.idPipeline->getBindingPoint("gizmo")->setConstant(gizmo.id);
 
@@ -203,7 +203,7 @@ static void drawGizmosSystem(Write<Gizmos> gizmos, Write<GizmosRenderer> gizmosR
 {
     auto screenSize = (*window)->framebufferSize();
 
-    gizmosRenderer->renderDevice->setFramebuffer(gizmosRenderer->framebuffer);
+    gizmosRenderer->renderDevice->setFramebuffer(gizmosRenderer->idFramebuffer);
     gizmosRenderer->renderDevice->clearColor(0, 0, 0, 0);
 
     auto worldInfo = getWorldInfo(query, *activeCameras, screenSize);
@@ -238,19 +238,20 @@ static void processInput(Write<GizmosRenderer> gizmosRenderer, Write<Gizmos> giz
         }
     }
 
-    auto* texBuffer = new unsigned short[gizmosRenderer->textureSize.x * gizmosRenderer->textureSize.y * 2];
+    auto* texBuffer =
+        new uint16_t[(std::size_t)gizmosRenderer->textureSize.x * (std::size_t)gizmosRenderer->textureSize.y * 2U];
 
-    gizmosRenderer->idTexture->data(texBuffer);
+    gizmosRenderer->idTexture->read(texBuffer);
 
     int mouseX = gizmosRenderer->lastMousePosition.x;
     int mouseY = gizmosRenderer->textureSize.y - gizmosRenderer->lastMousePosition.y - 1;
 
-    unsigned short r = texBuffer[(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2];
-    unsigned short g = texBuffer[(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2 + 1];
+    uint16_t r = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2U];
+    uint16_t g = texBuffer[(ptrdiff_t)(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2U + 1U];
 
-    unsigned int id = (r << 16) | g;
+    uint32_t id = (static_cast<uint32_t>(r) << 16U) | g;
 
-    gizmos->registerInputGizmo(id, gizmosRenderer->mousePressed);
+    gizmos->handleInput(id, gizmosRenderer->mousePressed);
 
     delete[] texBuffer;
 }

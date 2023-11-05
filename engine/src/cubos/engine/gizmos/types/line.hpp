@@ -21,7 +21,7 @@ namespace cubos::engine
         /// @param to Point at the other end of the line.
         /// @param color Color for the gizmo to be drawn in.
         /// @param lifespan Time the gizmo will remain on screen, in seconds.
-        LineGizmo(unsigned int id, glm::vec3 from, glm::vec3 to, const glm::vec3& color, float lifespan)
+        LineGizmo(uint32_t id, glm::vec3 from, glm::vec3 to, const glm::vec3& color, float lifespan)
             : cubos::engine::Gizmos::Gizmo(id, color, lifespan)
             , mPointA(from)
             , mPointB(to)
