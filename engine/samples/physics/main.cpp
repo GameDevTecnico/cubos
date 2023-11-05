@@ -60,24 +60,24 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
     auto car = assets->read(CarAsset);
     glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;
 
+    //Position position = Position{{0.0F, 0.0F, 0.0F}};
+
     // Create the car entity
     cmds.create().add(RenderableGrid{CarAsset, offset})
                  .add(Position{{0.0F, 0.0F, 0.0F}})
+                 .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
                  .add(PhysicsVelocity{.velocity = {0.0F, 0.0F, 0.0F},
-                                      .acceleration = {0.0F, -10.0F, 0.0F},
-                                      .totalForce = {0.0F, 0.0F, 0.0F},
-                                      .gravity = {0.0f, 0.0f, 0.0f},
-                                      .damping = 0.5F,
+                                      .force = {0.0F, 0.0F, 0.0F},
                                       .added = false})
-                 .add(PhysicsMass{.mass = 1000.0F, .inverseMass = 1.0F/1000.0F})
+                 .add(PhysicsMass{.mass = 1.0F, .inverseMass = 1.0F/1.0F})
+                 .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
                  .add(LocalToWorld{});
 }
 
 static void pushCarSystem(Query<Write<PhysicsVelocity>> query, Write<MaxTime> time, Read<DeltaTime> deltaTime) {
     for (auto [entity, velocity] : query) {
-        if (!velocity->added && time->current < time->max) {
-            velocity->totalForce = velocity->totalForce + glm::vec3(0.0F, 0.0F, -10000.0F);
-            velocity->added = true;
+        if (time->current < time->max) {
+            velocity->force = velocity->force + glm::vec3(0.0F, 0.0F, -10.0F);
             time->current = time->current + deltaTime->value;
         }
     }
@@ -99,7 +99,7 @@ int main(int argc, char** argv)
     cubos.startupSystem(setPaletteSystem).after("cubos.renderer.init");
     cubos.startupSystem(spawnCarSystem).after("cubos.settings").after("cubos.assets.bridge");
     
-    cubos.system(pushCarSystem);
+    cubos.system(pushCarSystem).before("cubos.physics.prepare");
 
     cubos.run();
 }
