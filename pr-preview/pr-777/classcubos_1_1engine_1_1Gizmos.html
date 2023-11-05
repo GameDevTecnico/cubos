@@ -131,11 +131,16 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a54bad0deb0994ee564a076c78decc9aa" class="m-doc">pressed</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const -&gt; bool</span>
             </dt>
-            <dd>Gets whether the left mouse button was pressed over a gizmo.</dd>
+            <dd>Checks whether the left mouse button was pressed over a gizmo.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad159762a8846f8e399caee7b70cadf60" class="m-doc">hover</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a68a21cd9b1a49069dd7458ba17e89b97" class="m-doc">hovered</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const -&gt; bool</span>
             </dt>
-            <dd>Gets whether the mouse button is over a gizmo.</dd>
+            <dd>Checks whether the mouse button is over a gizmo.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2543e1a6bcdbf2f76c3ac30b8835945e" class="m-doc">handleInput</a>(</span><span class="m-doc-wrap">uint32_t hovered,
+              bool pressed)</span>
+            </dt>
+            <dd>Registers gizmo interaction. Called automatically by an internal system.</dd>
           </dl>
         </section>
         <section id="pub-attribs">
@@ -420,7 +425,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a54bad0deb0994ee564a076c78decc9aa" class="m-doc-self">pressed</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const</span></span>
             </h3>
-            <p>Gets whether the left mouse button was pressed over a gizmo.</p>
+            <p>Checks whether the left mouse button was pressed over a gizmo.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -439,11 +444,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad159762a8846f8e399caee7b70cadf60"><div>
+          <section class="m-doc-details" id="a68a21cd9b1a49069dd7458ba17e89b97"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad159762a8846f8e399caee7b70cadf60" class="m-doc-self">hover</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68a21cd9b1a49069dd7458ba17e89b97" class="m-doc-self">hovered</a>(</span><span class="m-doc-wrap">const std::string&amp; id) const</span></span>
             </h3>
-            <p>Gets whether the mouse button is over a gizmo.</p>
+            <p>Checks whether the mouse button is over a gizmo.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -460,6 +465,28 @@
                   <td>Whether the mouse button is over a gizmo.</td>
                 </tr>
               </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2543e1a6bcdbf2f76c3ac30b8835945e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />Gizmos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2543e1a6bcdbf2f76c3ac30b8835945e" class="m-doc-self">handleInput</a>(</span><span class="m-doc-wrap">uint32_t hovered,
+              bool pressed)</span></span>
+            </h3>
+            <p>Registers gizmo interaction. Called automatically by an internal system.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">hovered</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>pressed</td>
+                  <td>Wether the mouse left button is pressed.</td>
+                </tr>
+              </tbody>
             </table>
           </div></section>
         </section>
