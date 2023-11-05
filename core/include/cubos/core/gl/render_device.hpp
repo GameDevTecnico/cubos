@@ -1036,6 +1036,11 @@ namespace cubos::core::gl
             virtual void update(std::size_t x, std::size_t y, std::size_t width, std::size_t height, const void* data,
                                 std::size_t level = 0) = 0;
 
+            /// @brief Reads texture data into a buffer.
+            /// @param outputBuffer Buffer to write the data to.
+            /// @param level Mip level to read.
+            virtual void data(void* outputBuffer, std::size_t level = 0) = 0;
+
             /// @brief Generates mipmaps on this texture.
             virtual void generateMipmaps() = 0;
 
