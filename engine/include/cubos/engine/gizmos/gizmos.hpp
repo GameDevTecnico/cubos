@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <functional>
 #include <vector>
 
 #include <glm/vec3.hpp>
@@ -90,27 +91,47 @@ namespace cubos::engine
         void drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0.0F,
                          Space space = Space::World);
 
+        /// @brief Gets whether the left mouse button was pressed over a gizmo.
+        /// @param id Identifier of the gizmo.
+        /// @return Whether the gizmo was pressed.
+        bool pressed(const std::string& id) const;
+
+        /// @brief Gets whether the mouse button is over a gizmo.
+        /// @param id Identifier of the gizmo.
+        /// @return Whether the mouse button is over a gizmo.
+        bool hover(const std::string& id) const;
+
+        void registerInputGizmo(unsigned int id, bool pressed);
+
         /// @brief Class that describes a type of gizmo
         class Gizmo
         {
         public:
+            enum class DrawPhase
+            {
+                Color,
+                Id
+            };
+
             virtual ~Gizmo() = default;
 
-            Gizmo(const std::string& id, glm::vec3 color, float lifespan);
+            Gizmo(unsigned int id, glm::vec3 color, float lifespan);
 
             /// @brief Draws the gizmo to screen.
             /// @param renderer Renderer.
             /// @param mvp The view projection matrix to use for drawing the gizmo.
-            virtual void draw(GizmosRenderer& renderer, const glm::mat<4, 4, float, glm::packed_highp>& mvp) = 0;
+            virtual void draw(GizmosRenderer& renderer, DrawPhase phase,
+                              const glm::mat<4, 4, float, glm::packed_highp>& mvp) = 0;
 
             /// @brief Decreases the time the gizmo has left before it is destroyed.
             /// @param delta Seconds since the last frame.
             bool decreaseLifespan(float delta);
 
+            unsigned int id; ///< Gizmo identifier.
+
         protected:
-            const std::string& mId; ///< Gizmo identifier.
-            glm::vec3 mColor;       ///< Color of the gizmo.
-            float mLifespan;        ///< Time in seconds the gizmo has left to live.
+            glm::vec3 mColor; ///< Color of the gizmo.
+            float mLifespan;  ///< Time in seconds the gizmo has left to live.
         };
 
         std::vector<std::shared_ptr<Gizmo>> worldGizmos;  ///< Queued gizmos to be drawn in world space.
@@ -123,7 +144,12 @@ namespace cubos::engine
         /// @param space Space in which the gizmo will be drawn.
         void push(const std::shared_ptr<Gizmo>& gizmo, const Space& space);
 
+        std::hash<std::string> mHasher; ///< Hash function to convert string ids into integers.
+
         glm::vec3 mColor; ///< Currently set color.
+
+        unsigned int mIdInteraction; ///< Interaction target gizmo.
+        bool mPressed;               ///< Whether the mouse has been pressed.
     };
 
 } // namespace cubos::engine
