@@ -1,12 +1,35 @@
 #include "renderer.hpp"
+#include <string>
 
 using cubos::engine::GizmosRenderer;
 
 using namespace cubos::core::gl;
 
-void GizmosRenderer::init(RenderDevice* currentRenderDevice)
+void GizmosRenderer::initIdTexture(glm::ivec2 size)
 {
-    renderDevice = currentRenderDevice;
+    cubos::core::gl::Texture2DDesc texDesc;
+    texDesc.width = size.x;
+    texDesc.height = size.y;
+    texDesc.usage = cubos::core::gl::Usage::Dynamic;
+    texDesc.format = cubos::core::gl::TextureFormat::RG16UInt;
+
+    idTexture = renderDevice->createTexture2D(texDesc);
+
+    cubos::core::gl::FramebufferDesc frameDesc;
+    frameDesc.targetCount = 1;
+
+    cubos::core::gl::FramebufferDesc::FramebufferTarget target;
+    target.setTexture2DTarget(idTexture);
+
+    frameDesc.targets[0] = target;
+
+    framebuffer = renderDevice->createFramebuffer(frameDesc);
+
+    textureSize = size;
+}
+
+void GizmosRenderer::initDrawPipeline()
+{
     auto vs = renderDevice->createShaderStage(Stage::Vertex, R"(
             #version 330 core
 
@@ -27,7 +50,7 @@ void GizmosRenderer::init(RenderDevice* currentRenderDevice)
             #version 330 core
 
             out vec4 color;
-
+            
             uniform vec3 objColor;
 
             void main()
@@ -35,7 +58,54 @@ void GizmosRenderer::init(RenderDevice* currentRenderDevice)
                 color = vec4(objColor, 1.0f);
             }
         )");
-    pipeline = renderDevice->createShaderPipeline(vs, ps);
+
+    drawPipeline = renderDevice->createShaderPipeline(vs, ps);
+}
+
+void GizmosRenderer::initIdPipeline()
+{
+    auto vs = renderDevice->createShaderStage(Stage::Vertex, R"(
+            #version 330 core
+
+            in vec3 position;
+
+            uniform MVP
+            {
+                mat4 mvp;
+            };
+
+            void main()
+            {
+                gl_Position = mvp * vec4(position, 1.0f);
+            }
+        )");
+
+    auto ps = renderDevice->createShaderStage(Stage::Pixel, R"(
+            #version 330 core
+
+            uniform uint gizmo;
+            
+            out uvec2 output;
+
+            void main()
+            {
+                output.r = (gizmo >> 16U);
+                output.g = (gizmo & 65535U);
+            }
+        )");
+
+    idPipeline = renderDevice->createShaderPipeline(vs, ps);
+}
+
+void GizmosRenderer::init(RenderDevice* currentRenderDevice, glm::ivec2 size)
+{
+    renderDevice = currentRenderDevice;
+
+    initIdTexture(size);
+
+    initDrawPipeline();
+    initIdPipeline();
+
     initLinePrimitive();
     initBoxPrimitive();
     initCutConePrimitive();
@@ -50,13 +120,18 @@ void GizmosRenderer::initLinePrimitive()
     linePrimitive.vaDesc.elements[0].buffer.index = 0;
     linePrimitive.vaDesc.elements[0].buffer.offset = 0;
     linePrimitive.vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
-    linePrimitive.vaDesc.shaderPipeline = pipeline;
+    linePrimitive.vaDesc.shaderPipeline = drawPipeline;
 
     float verts[] = {0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F};
-    renderDevice->setShaderPipeline(pipeline);
+    renderDevice->setShaderPipeline(drawPipeline);
     linePrimitive.vb = renderDevice->createVertexBuffer(sizeof(verts), verts, Usage::Dynamic);
     linePrimitive.vaDesc.buffers[0] = linePrimitive.vb;
     linePrimitive.va = renderDevice->createVertexArray(linePrimitive.vaDesc);
+}
+
+void GizmosRenderer::resizeTexture(glm::ivec2 size)
+{
+    initIdTexture(size);
 }
 
 void GizmosRenderer::initBoxPrimitive()
@@ -68,11 +143,11 @@ void GizmosRenderer::initBoxPrimitive()
     boxPrimitive.vaDesc.elements[0].buffer.index = 0;
     boxPrimitive.vaDesc.elements[0].buffer.offset = 0;
     boxPrimitive.vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
-    boxPrimitive.vaDesc.shaderPipeline = pipeline;
+    boxPrimitive.vaDesc.shaderPipeline = drawPipeline;
 
     float verts[] = {0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 0.0F, 0.0F, 1.0F,
                      0.0F, 1.0F, 1.0F, 0.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, 1.0F, 1.0F, 1.0F};
-    renderDevice->setShaderPipeline(pipeline);
+    renderDevice->setShaderPipeline(drawPipeline);
     boxPrimitive.vb = renderDevice->createVertexBuffer(sizeof(verts), verts, Usage::Dynamic);
     boxPrimitive.vaDesc.buffers[0] = boxPrimitive.vb;
     boxPrimitive.va = renderDevice->createVertexArray(boxPrimitive.vaDesc);
@@ -101,11 +176,11 @@ void GizmosRenderer::initCutConePrimitive()
     cutConePrimitive.vaDesc.elements[0].buffer.index = 0;
     cutConePrimitive.vaDesc.elements[0].buffer.offset = 0;
     cutConePrimitive.vaDesc.elements[0].buffer.stride = 3 * sizeof(float);
-    cutConePrimitive.vaDesc.shaderPipeline = pipeline;
+    cutConePrimitive.vaDesc.shaderPipeline = drawPipeline;
 
     float verts[CutConeVertsPerBase * 6];
 
-    renderDevice->setShaderPipeline(pipeline);
+    renderDevice->setShaderPipeline(drawPipeline);
     cutConePrimitive.vb = renderDevice->createVertexBuffer(sizeof(verts), verts, Usage::Dynamic);
     cutConePrimitive.vaDesc.buffers[0] = cutConePrimitive.vb;
     cutConePrimitive.va = renderDevice->createVertexArray(cutConePrimitive.vaDesc);

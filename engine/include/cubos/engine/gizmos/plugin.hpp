@@ -23,6 +23,8 @@ namespace cubos::engine
     /// - `cubos.gizmos.init` - the gizmos renderer is initialized, after `cubos.window.init`
     ///
     /// ## Tags
+    /// - `cubos.gizmos.input` - gizmos interaction is handled, after `cubos.window.poll` and
+    ///   before `cubos.gizmos.draw`.
     /// - `cubos.gizmos.draw` - queued gizmos are rendered to the window, after `cubos.renderer.draw` and
     ///   before `cubos.window.render`.
     ///
