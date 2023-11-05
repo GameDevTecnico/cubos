@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>CUBOS.</title><link href="https://gamedevtecnico.github.io/cubos-blog/" rel="alternate"></link><link href="https://gamedevtecnico.github.io/cubos-blog/feeds/all.atom.xml" rel="self"></link><id>https://gamedevtecnico.github.io/cubos-blog/</id><updated>2023-11-04T20:06:00+00:00</updated><entry><title>Sample Post</title><link href="https://gamedevtecnico.github.io/cubos-blog/sample-post.html" rel="alternate"></link><published>2023-11-04T20:06:00+00:00</published><updated>2023-11-04T20:06:00+00:00</updated><author><name>CUBOS. Team</name></author><id>tag:gamedevtecnico.github.io,2023-11-04:/cubos-blog/sample-post.html</id><summary type="html">&lt;p&gt;Our first blog post!&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;This article has not only cool summary, but also has cool contents. Lorem?
+&lt;em&gt;Ipsum.&lt;/em&gt; &lt;a href="https://google.com"&gt;Hi, google!&lt;/a&gt;&lt;/p&gt;
+</content><category term="Meta"></category></entry></feed>
