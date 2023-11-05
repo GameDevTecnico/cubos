@@ -72,7 +72,7 @@ static bool simulatePhysicsStep(Write<Accumulator> accumulator, Read<FixedDeltaT
     return false;
 }
 
-static void integratePositionSystem(Query<Write<Position>, Write<PreviousPosition>, Write<PhysicsVelocity>, Read<PhysicsMass>> query, Read<Gravity> gravity, Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
+static void integratePositionSystem(Query<Write<Position>, Write<PreviousPosition>, Write<PhysicsVelocity>, Read<PhysicsMass>> query, Read<Damping> damping, Read<Gravity> gravity, Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
 {
     // Possible components
     // prev position
@@ -86,6 +86,7 @@ static void integratePositionSystem(Query<Write<Position>, Write<PreviousPositio
         if (mass->inverseMass <= 0.0f) return;
 
         // Apply damping, gravity and other external forces
+        velocity->velocity *= glm::pow(damping->value, subDeltaTime);
 
         // Apply forces
         glm::vec3 gravitationForce =
@@ -154,9 +155,9 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     
     // integrate position for a substep
     //cubos.tag("cubos.physics.simulation.substeps.integrate").during("cubos.physics.simulation.substeps");
-    cubos.system(integratePositionSystem).tagged("cubos.physics.simulation.substeps.integrate");
-    cubos.system(applyCorrectionSystem).tagged("cubos.physics.simulation.substeps.correct_position");
-    cubos.system(updateVelocitySystem).tagged("cubos.physics.simulation.substeps.update_velociy");
+    //cubos.system(integratePositionSystem).tagged("cubos.physics.simulation.substeps.integrate");
+    //cubos.system(applyCorrectionSystem).tagged("cubos.physics.simulation.substeps.correct_position");
+    //cubos.system(updateVelocitySystem).tagged("cubos.physics.simulation.substeps.update_velociy");
 
     // solve all constraints for a substep
     //cubos.tag("cubos.physics.simulation.substeps.constraints").during("cubos.physics.simulation.substeps");
