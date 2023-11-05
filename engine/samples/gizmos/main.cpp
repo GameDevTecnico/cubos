@@ -49,24 +49,36 @@ static void setCameraSystem(Write<ActiveCameras> camera, Commands cmds)
 static void drawSystem(Write<Gizmos> gizmos)
 {
     /// [Lines]
-    gizmos->color({1, 1, 1});
+    gizmos->color({1.0F, 1.0F, 1.0F});
     gizmos->drawLine("separator line", {1.0F, 0.5F, 0.5F}, {0.0F, 0.5F, 0.5F}, 0, Gizmos::Space::Screen);
     gizmos->drawLine("separator line", {0.5F, 1.0F, 0.5F}, {0.5F, 0.0F, 0.5F}, 0, Gizmos::Space::Screen);
     /// [Lines]
 
     /// [WireBox]
-    gizmos->color({1, 0.5, 1});
-    gizmos->drawBox("test box", {0.4, 0.4, 0}, {0.55, 0.55, 0}, 0, Gizmos::Space::View);
+    gizmos->color({1.0F, 0.5F, 1.0F});
+    gizmos->drawBox("box", {0.4, 0.4, 0}, {0.55, 0.55, 0}, 0, Gizmos::Space::View);
     /// [WireBox]
 
     /// [Box]
-    gizmos->color({0.5F, 1, 1});
-    gizmos->drawWireBox("test box", {-5, -5, -5}, {-7, -7, -7}, 0, Gizmos::Space::World);
+    gizmos->color({0.2F, 0.2F, 1.0F});
+    gizmos->drawWireBox("wire box", {-5, -5, -5}, {-7, -7, -7}, 0, Gizmos::Space::World);
     /// [Box]
 
     ///[Cut Cone]
-    gizmos->color({0.5F, 0.3F, 1});
-    gizmos->drawCutCone("test cut cone", {0.7F, 0.7F, 0.7F}, 5.0F, {-3, -3, -3}, 3.0F, 0, Gizmos::Space::World);
+    if (gizmos->hover("cut cone"))
+    {
+        gizmos->color({0.25F, 0.15F, 0.5F});
+    }
+    else if (gizmos->pressed("cut cone"))
+    {
+        gizmos->color({0.5F, 0.3F, 1});
+    }
+    else
+    {
+        gizmos->color({0.1F, 0.05F, 0.25F});
+    }
+
+    gizmos->drawCutCone("cut cone", {0.7F, 0.7F, 0.7F}, 5.0F, {-3, -3, -3}, 3.0F, 0, Gizmos::Space::World);
     ///[Cut Cone]
 }
 /// [System]
@@ -75,7 +87,7 @@ static void drawSystem(Write<Gizmos> gizmos)
 static void drawStartingLineSystem(Write<Gizmos> gizmos)
 {
     gizmos->color({1, 0, 1});
-    gizmos->drawArrow("test arrow", {0.6F, 0.6F, 0.0F}, {-0.1F, -0.1F, 0.0F}, 0.003F, 0.009F, 0.7F, 10.0F,
+    gizmos->drawArrow("arrow", {0.6F, 0.6F, 0.0F}, {-0.1F, -0.1F, 0.0F}, 0.003F, 0.009F, 0.7F, 10.0F,
                       Gizmos::Space::Screen);
 }
 /// [Start Up System]
