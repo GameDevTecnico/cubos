@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include <cubos/core/gl/render_device.hpp>
 
 namespace cubos::engine
@@ -10,8 +12,9 @@ namespace cubos::engine
     public:
         static constexpr int CutConeVertsPerBase = 16; ///< Number of vertexes in each face of a cut cone gizmo.
 
-        cubos::core::gl::ShaderPipeline pipeline;    ///< Shader pipeline to be used when drawing gizmos.
-        cubos::core::gl::RenderDevice* renderDevice; ///< Active render device.
+        cubos::core::gl::ShaderPipeline drawPipeline; ///< Shader pipeline to be used when drawing gizmos.
+        cubos::core::gl::ShaderPipeline idPipeline;   ///< Shader pipeline to be used when drawing gizmos.
+        cubos::core::gl::RenderDevice* renderDevice;  ///< Active render device.
 
         /// @brief Set of buffers and structs that hold te information needed to draw a specific type of mesh.
         struct Primitive
@@ -26,11 +29,27 @@ namespace cubos::engine
         Primitive boxPrimitive;     ///< GL box information.
         Primitive cutConePrimitive; ///< GL cut cone information.
 
+        glm::ivec2 textureSize;               ///< Size of the id texture.
+        cubos::core::gl::Texture2D idTexture; ///< Texture holding the ids of the gizmo that was drawn to each pixel.
+        cubos::core::gl::Framebuffer framebuffer; ///< Buffer holding the id texture.
+
         /// @brief Sets up the render device to be used.
         /// @param renderDevice the current Render device being used.
-        void init(cubos::core::gl::RenderDevice* currentRenderDevice);
+        void init(cubos::core::gl::RenderDevice* currentRenderDevice, glm::ivec2 size);
+
+        /// @brief Resizes the id texture.
+        /// @param size New size of the texture.
+        void resizeTexture(glm::ivec2 size);
+
+        glm::ivec2 lastMousePosition; ///< Cursor position.
+        bool mousePressed;            ///< Whether or not the mouse left button is pressed.
 
     private:
+        void initIdTexture(glm::ivec2 size);
+
+        void initIdPipeline();
+        void initDrawPipeline();
+
         void initLinePrimitive();
         void initBoxPrimitive();
         void initCutConePrimitive();

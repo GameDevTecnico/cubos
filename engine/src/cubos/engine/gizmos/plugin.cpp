@@ -2,6 +2,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <cubos/core/ecs/system/event/reader.hpp>
 #include <cubos/core/io/window.hpp>
 
 #include <cubos/engine/gizmos/plugin.hpp>
@@ -12,11 +13,18 @@
 #include "renderer.hpp"
 
 using cubos::core::ecs::Entity;
+using cubos::core::ecs::EventReader;
 using cubos::core::ecs::Query;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 
+using cubos::core::gl::Texture2D;
+
+using cubos::core::io::MouseButtonEvent;
+using cubos::core::io::MouseMoveEvent;
+using cubos::core::io::ResizeEvent;
 using cubos::core::io::Window;
+using cubos::core::io::WindowEvent;
 
 using cubos::engine::ActiveCameras;
 using cubos::engine::BaseRenderer;
@@ -31,6 +39,7 @@ static void iterateGizmos(std::vector<std::shared_ptr<Gizmos::Gizmo>>& gizmosVec
                           GizmosRenderer& gizmosRenderer, const DeltaTime& deltaTime)
 {
     std::vector<std::size_t> toRemove;
+
     for (std::size_t i = 0; i < gizmosVector.size(); i++)
     {
         auto& gizmo = *(gizmosVector[i]);
@@ -38,7 +47,19 @@ static void iterateGizmos(std::vector<std::shared_ptr<Gizmos::Gizmo>>& gizmosVec
         {
             gizmosRenderer.renderDevice->setViewport(viewport.position.x, viewport.position.y, viewport.size.x,
                                                      viewport.size.y);
-            gizmo.draw(gizmosRenderer, mvp);
+
+            // Color
+            gizmosRenderer.renderDevice->setShaderPipeline(gizmosRenderer.drawPipeline);
+            gizmosRenderer.renderDevice->setFramebuffer(nullptr);
+            gizmo.draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Color, mvp);
+
+            // Id
+            gizmosRenderer.renderDevice->setShaderPipeline(gizmosRenderer.idPipeline);
+            gizmosRenderer.renderDevice->setFramebuffer(gizmosRenderer.framebuffer);
+
+            gizmosRenderer.idPipeline->getBindingPoint("gizmo")->setConstant(gizmo.id);
+
+            gizmo.draw(gizmosRenderer, Gizmos::Gizmo::DrawPhase::Id, mvp);
         }
 
         if (gizmo.decreaseLifespan(deltaTime.value))
@@ -46,7 +67,6 @@ static void iterateGizmos(std::vector<std::shared_ptr<Gizmos::Gizmo>>& gizmosVec
             toRemove.push_back(i);
         }
     }
-
     while (!toRemove.empty())
     {
         std::size_t i = toRemove.back();
@@ -183,6 +203,9 @@ static void drawGizmosSystem(Write<Gizmos> gizmos, Write<GizmosRenderer> gizmosR
 {
     auto screenSize = (*window)->framebufferSize();
 
+    gizmosRenderer->renderDevice->setFramebuffer(gizmosRenderer->framebuffer);
+    gizmosRenderer->renderDevice->clearColor(0, 0, 0, 0);
+
     auto worldInfo = getWorldInfo(query, *activeCameras, screenSize);
     iterateGizmos(gizmos->worldGizmos, worldInfo, *gizmosRenderer, *deltaTime);
 
@@ -193,9 +216,48 @@ static void drawGizmosSystem(Write<Gizmos> gizmos, Write<GizmosRenderer> gizmosR
     iterateGizmos(gizmos->screenGizmos, screenInfo, *gizmosRenderer, *deltaTime);
 }
 
+static void processInput(Write<GizmosRenderer> gizmosRenderer, Write<Gizmos> gizmos,
+                         EventReader<WindowEvent> windowEvent)
+{
+    for (const auto& event : windowEvent)
+    {
+        if (std::holds_alternative<MouseMoveEvent>(event))
+        {
+            gizmosRenderer->lastMousePosition = std::get<MouseMoveEvent>(event).position;
+        }
+        else if (std::holds_alternative<MouseButtonEvent>(event))
+        {
+            if (std::get<MouseButtonEvent>(event).button == cubos::core::io::MouseButton::Left)
+            {
+                gizmosRenderer->mousePressed = std::get<MouseButtonEvent>(event).pressed;
+            }
+        }
+        else if (std::holds_alternative<ResizeEvent>(event))
+        {
+            gizmosRenderer->resizeTexture(std::get<ResizeEvent>(event).size);
+        }
+    }
+
+    auto* texBuffer = new unsigned short[gizmosRenderer->textureSize.x * gizmosRenderer->textureSize.y * 2];
+
+    gizmosRenderer->idTexture->data(texBuffer);
+
+    int mouseX = gizmosRenderer->lastMousePosition.x;
+    int mouseY = gizmosRenderer->textureSize.y - gizmosRenderer->lastMousePosition.y - 1;
+
+    unsigned short r = texBuffer[(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2];
+    unsigned short g = texBuffer[(mouseY * gizmosRenderer->textureSize.x + mouseX) * 2 + 1];
+
+    unsigned int id = (r << 16) | g;
+
+    gizmos->registerInputGizmo(id, gizmosRenderer->mousePressed);
+
+    delete[] texBuffer;
+}
+
 static void initGizmosSystem(Write<GizmosRenderer> gizmosRenderer, Read<Window> window)
 {
-    gizmosRenderer->init(&(*window)->renderDevice());
+    gizmosRenderer->init(&(*window)->renderDevice(), (*window)->framebufferSize());
 }
 
 void cubos::engine::gizmosPlugin(Cubos& cubos)
@@ -206,6 +268,8 @@ void cubos::engine::gizmosPlugin(Cubos& cubos)
     cubos.addResource<GizmosRenderer>();
 
     cubos.startupSystem(initGizmosSystem).tagged("cubos.gizmos.init").after("cubos.window.init");
+
+    cubos.system(processInput).tagged("cubos.gizmos.input").after("cubos.window.poll").before("cubos.gizmos.draw");
     cubos.system(drawGizmosSystem)
         .tagged("cubos.gizmos.draw")
         .after("cubos.renderer.draw")
