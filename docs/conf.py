@@ -1,5 +1,7 @@
 DOXYFILE = 'Doxyfile'
 
+MAIN_PROJECT_URL = 'https://gamedevtecnico.github.io/cubos/'
+
 LINKS_NAVBAR1 = [
     (None, 'pages', []),
     (None, 'modules', []),
