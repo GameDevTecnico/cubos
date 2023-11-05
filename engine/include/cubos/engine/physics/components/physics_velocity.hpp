@@ -14,11 +14,6 @@ namespace cubos::engine
     struct [[cubos::component("cubos/physics_velocity", VecStorage)]] PhysicsVelocity
     {
         glm::vec3 velocity;
-        glm::vec3 acceleration;
-        glm::vec3 totalForce;
-        glm::vec3 gravity;
-        float damping;
-
-        bool added;
+        glm::vec3 force;
     };
 } // namespace cubos::engine
