@@ -17,6 +17,9 @@ namespace cubos::engine
     ///
     /// @note Systems using `ImGui` **must be** tagged with `cubos.imgui`.
     ///
+    /// ## Resources
+    /// - @ref DataInspector - used to inspect/modify objects via UI.
+    ///
     /// ## Startup tags
     /// - `cubos.imgui.init` - `ImGui` is initialized, after `cubos.window.init`.
     ///
