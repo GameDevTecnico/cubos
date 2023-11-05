@@ -10,6 +10,6 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     struct Damping
     {
-        float value = 0.99F;
+        float value = 0.999F;
     };
 } // namespace cubos::engine

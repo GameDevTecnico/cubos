@@ -67,8 +67,7 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
                  .add(Position{{0.0F, 0.0F, 0.0F}})
                  .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
                  .add(PhysicsVelocity{.velocity = {0.0F, 0.0F, 0.0F},
-                                      .force = {0.0F, 0.0F, 0.0F},
-                                      .added = false})
+                                      .force = {0.0F, 0.0F, 0.0F}})
                  .add(PhysicsMass{.mass = 1.0F, .inverseMass = 1.0F/1.0F})
                  .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
                  .add(LocalToWorld{});
