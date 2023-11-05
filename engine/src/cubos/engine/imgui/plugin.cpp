@@ -1,3 +1,4 @@
+#include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
@@ -40,6 +41,8 @@ void cubos::engine::imguiPlugin(Cubos& cubos)
 {
     cubos.addPlugin(windowPlugin);
     cubos.addPlugin(rendererPlugin);
+
+    cubos.addResource<DataInspector>();
 
     cubos.startupTag("cubos.imgui.init").after("cubos.window.init");
     cubos.tag("cubos.imgui.begin").after("cubos.renderer.draw");
