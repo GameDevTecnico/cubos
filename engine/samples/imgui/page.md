@@ -1,6 +1,6 @@
 # ImGui {#examples-engine-imgui}
 
-@brief Using the @ref imgui-plugin plugin.
+@brief Using the @ref imgui-plugin plugin and @ref cubos::engine::DataInspector resource.
 
 @see Full source code [here](https://github.com/GameDevTecnico/cubos/tree/main/engine/samples/imgui).
 
@@ -25,5 +25,21 @@ Ensure that you add your system with the `cubos.imgui` tag; otherwise, the ImGui
 @snippet imgui/main.cpp Adding the system
 
 Pretty simple right? You're now equipped to craft and utilize ImGui's functions to design your cool user interface.
+
+Now, we'll also show you how you can use the @ref cubos::engine::DataInspector resource in combination with @ref imgui-plugin plugin to inspect/modify data in real time.
+
+To start off, we'll need to have some sort of dummy data shared across our application, so we can inspect/modify later. Let's create a `DummyResource` with some fields and fill it with random data.
+
+@note In case you did not read about @ref core-reflection yet, you should take a look at that first, since we'll use some of it's concepts here.
+
+@snippet imgui/main.cpp Creating a dummy resource
+
+@snippet imgui/main.cpp Filling the dummy resource 1
+
+Well now, using the @ref cubos::engine::DataInspector is pretty easy, all you have to do is, obviously, access the resource on your system, and use the functions `DataInspector::edit` and `DataInspector::edit`.
+
+@snippet imgui/main.cpp DataInspector window example
+
+![](imgui/img2.png)
 
 You can find more about how to use [Dear ImGui](https://github.com/ocornut/imgui) stuff [here](https://github.com/ocornut/imgui/tree/master/docs).
