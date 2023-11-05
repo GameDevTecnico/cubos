@@ -91,17 +91,20 @@ namespace cubos::engine
         void drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan = 0.0F,
                          Space space = Space::World);
 
-        /// @brief Gets whether the left mouse button was pressed over a gizmo.
+        /// @brief Checks whether the left mouse button was pressed over a gizmo.
         /// @param id Identifier of the gizmo.
         /// @return Whether the gizmo was pressed.
         bool pressed(const std::string& id) const;
 
-        /// @brief Gets whether the mouse button is over a gizmo.
+        /// @brief Checks whether the mouse cursor is over a gizmo.
         /// @param id Identifier of the gizmo.
         /// @return Whether the mouse button is over a gizmo.
-        bool hover(const std::string& id) const;
+        bool hovered(const std::string& id) const;
 
-        void registerInputGizmo(unsigned int id, bool pressed);
+        /// @brief Registers gizmo interaction. Called automatically by an internal system.
+        /// @param id Gizmo being interacted with.
+        /// @param pressed Whether the mouse left button is pressed.
+        void handleInput(uint32_t hovered, bool pressed);
 
         /// @brief Class that describes a type of gizmo
         class Gizmo
@@ -115,7 +118,7 @@ namespace cubos::engine
 
             virtual ~Gizmo() = default;
 
-            Gizmo(unsigned int id, glm::vec3 color, float lifespan);
+            Gizmo(uint32_t id, glm::vec3 color, float lifespan);
 
             /// @brief Draws the gizmo to screen.
             /// @param renderer Renderer.
@@ -127,7 +130,7 @@ namespace cubos::engine
             /// @param delta Seconds since the last frame.
             bool decreaseLifespan(float delta);
 
-            unsigned int id; ///< Gizmo identifier.
+            const uint32_t id; ///< Gizmo identifier.
 
         protected:
             glm::vec3 mColor; ///< Color of the gizmo.
@@ -148,8 +151,8 @@ namespace cubos::engine
 
         glm::vec3 mColor; ///< Currently set color.
 
-        unsigned int mIdInteraction; ///< Interaction target gizmo.
-        bool mPressed;               ///< Whether the mouse has been pressed.
+        uint32_t mIdInteraction; ///< Interaction target gizmo.
+        bool mPressed;           ///< Whether the mouse has been pressed.
     };
 
 } // namespace cubos::engine

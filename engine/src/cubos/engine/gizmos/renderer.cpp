@@ -7,23 +7,23 @@ using namespace cubos::core::gl;
 
 void GizmosRenderer::initIdTexture(glm::ivec2 size)
 {
-    cubos::core::gl::Texture2DDesc texDesc;
-    texDesc.width = size.x;
-    texDesc.height = size.y;
-    texDesc.usage = cubos::core::gl::Usage::Dynamic;
-    texDesc.format = cubos::core::gl::TextureFormat::RG16UInt;
+    Texture2DDesc texDesc;
+    texDesc.width = (std::size_t)size.x;
+    texDesc.height = (std::size_t)size.y;
+    texDesc.usage = Usage::Dynamic;
+    texDesc.format = TextureFormat::RG16UInt;
 
     idTexture = renderDevice->createTexture2D(texDesc);
 
-    cubos::core::gl::FramebufferDesc frameDesc;
+    FramebufferDesc frameDesc;
     frameDesc.targetCount = 1;
 
-    cubos::core::gl::FramebufferDesc::FramebufferTarget target;
+    FramebufferDesc::FramebufferTarget target;
     target.setTexture2DTarget(idTexture);
 
     frameDesc.targets[0] = target;
 
-    framebuffer = renderDevice->createFramebuffer(frameDesc);
+    idFramebuffer = renderDevice->createFramebuffer(frameDesc);
 
     textureSize = size;
 }

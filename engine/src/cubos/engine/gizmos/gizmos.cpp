@@ -16,16 +16,16 @@ using cubos::engine::GizmosRenderer;
 
 using namespace cubos::core::gl;
 
-Gizmos::Gizmo::Gizmo(unsigned int id, glm::vec3 color, float lifespan)
+Gizmos::Gizmo::Gizmo(uint32_t id, glm::vec3 color, float lifespan)
     : id(id)
     , mColor(color)
     , mLifespan(lifespan)
 {
 }
 
-void Gizmos::registerInputGizmo(unsigned int id, bool pressed)
+void Gizmos::handleInput(uint32_t hovered, bool pressed)
 {
-    mIdInteraction = id;
+    mIdInteraction = hovered;
     mPressed = pressed;
 }
 
@@ -34,7 +34,7 @@ bool Gizmos::pressed(const std::string& id) const
     return mPressed && mHasher(id) == mIdInteraction && mIdInteraction != 0;
 }
 
-bool Gizmos::hover(const std::string& id) const
+bool Gizmos::hovered(const std::string& id) const
 {
     return !mPressed && mHasher(id) == mIdInteraction && mIdInteraction != 0;
 }
@@ -68,12 +68,12 @@ void Gizmos::push(const std::shared_ptr<Gizmo>& gizmo, const Space& space)
 
 void Gizmos::drawLine(const std::string& id, glm::vec3 from, glm::vec3 to, float lifespan, Space space)
 {
-    push(std::make_shared<LineGizmo>(mHasher(id), from, to, mColor, lifespan), space);
+    push(std::make_shared<LineGizmo>((uint32_t)mHasher(id), from, to, mColor, lifespan), space);
 }
 
 void Gizmos::drawBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan, Space space)
 {
-    push(std::make_shared<BoxGizmo>(mHasher(id), corner, oppositeCorner, mColor, lifespan), space);
+    push(std::make_shared<BoxGizmo>((uint32_t)mHasher(id), corner, oppositeCorner, mColor, lifespan), space);
 }
 
 void Gizmos::drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppositeCorner, float lifespan, Space space)
@@ -106,7 +106,7 @@ void Gizmos::drawWireBox(const std::string& id, glm::vec3 corner, glm::vec3 oppo
 void Gizmos::drawCutCone(const std::string& id, glm::vec3 firstBaseCenter, float firstBaseRadius,
                          glm::vec3 secondBaseCenter, float secondBaseRadius, float lifespan, Space space)
 {
-    push(std::make_shared<CutConeGizmo>(mHasher(id), firstBaseCenter, firstBaseRadius, secondBaseCenter,
+    push(std::make_shared<CutConeGizmo>((uint32_t)mHasher(id), firstBaseCenter, firstBaseRadius, secondBaseCenter,
                                         secondBaseRadius, mColor, lifespan),
          space);
 }
