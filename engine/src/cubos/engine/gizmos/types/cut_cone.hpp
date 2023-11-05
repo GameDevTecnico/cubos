@@ -26,8 +26,8 @@ namespace cubos::engine
         /// @param secondBaseRadius Radius of the second base.
         /// @param color Color for the gizmo to be drawn in.
         /// @param lifespan Time the gizmo will remain on screen, in seconds.
-        CutConeGizmo(const std::string& id, glm::vec3 firstBaseCenter, float firstBaseRadius,
-                     glm::vec3 secondBaseCenter, float secondBaseRadius, const glm::vec3& color, float lifespan)
+        CutConeGizmo(unsigned int id, glm::vec3 firstBaseCenter, float firstBaseRadius, glm::vec3 secondBaseCenter,
+                     float secondBaseRadius, const glm::vec3& color, float lifespan)
             : Gizmos::Gizmo(id, color, lifespan)
             , mPointA(firstBaseCenter)
             , mRadiusA(firstBaseRadius)
@@ -38,8 +38,10 @@ namespace cubos::engine
 
         /// @brief Draws the gizmo to screen.
         /// @param renderer GizmosRenderer in use.
+        /// @param phase Current draw phase.
         /// @param mvp Matrix containing projection and viewpoint transformations.
-        void draw(GizmosRenderer& renderer, const glm::mat<4, 4, float, glm::packed_highp>& mvp) override
+        void draw(GizmosRenderer& renderer, DrawPhase phase,
+                  const glm::mat<4, 4, float, glm::packed_highp>& mvp) override
         {
             auto* verts = static_cast<glm::vec3*>(renderer.cutConePrimitive.vb->map());
 
@@ -85,9 +87,18 @@ namespace cubos::engine
 
             auto mvpBuffer =
                 renderer.renderDevice->createConstantBuffer(sizeof(glm::mat4), &mvp, cubos::core::gl::Usage::Static);
-            renderer.pipeline->getBindingPoint("MVP")->bind(mvpBuffer);
 
-            renderer.pipeline->getBindingPoint("objColor")->setConstant(mColor);
+            if (phase == DrawPhase::Color)
+            {
+                renderer.drawPipeline->getBindingPoint("MVP")->bind(mvpBuffer);
+
+                renderer.drawPipeline->getBindingPoint("objColor")->setConstant(mColor);
+            }
+            else
+            {
+                renderer.idPipeline->getBindingPoint("MVP")->bind(mvpBuffer);
+            }
+
             renderer.renderDevice->setRasterState(
                 renderer.renderDevice->createRasterState(cubos::core::gl::RasterStateDesc{}));
             renderer.renderDevice->drawTrianglesIndexed(0,
