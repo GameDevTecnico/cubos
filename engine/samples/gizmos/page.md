@@ -32,6 +32,8 @@ Finally let's add a cut cone. A cut cone is cylinder with faces that can have di
 
 @snippet gizmos/main.cpp Cut Cone
 
+For the cut cone, we'll set the color a bit differently: We'll make it so the color of the cone changes depending on whether you are pressing the cone, or have your mouse over it. We'll make it a bit darker while the mouse is not over the cone, a bit lighter when it is, and even lighter when the cone is pressed.
+
 The whole system looks like this:
 
 @snippet gizmos/main.cpp System
