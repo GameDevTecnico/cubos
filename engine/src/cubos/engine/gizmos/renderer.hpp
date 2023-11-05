@@ -31,7 +31,7 @@ namespace cubos::engine
 
         glm::ivec2 textureSize;               ///< Size of the id texture.
         cubos::core::gl::Texture2D idTexture; ///< Texture holding the ids of the gizmo that was drawn to each pixel.
-        cubos::core::gl::Framebuffer framebuffer; ///< Buffer holding the id texture.
+        cubos::core::gl::Framebuffer idFramebuffer; ///< Buffer holding the id texture.
 
         /// @brief Sets up the render device to be used.
         /// @param renderDevice the current Render device being used.

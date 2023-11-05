@@ -607,7 +607,7 @@ public:
                         static_cast<GLsizei>(width), static_cast<GLsizei>(height), this->format, this->type, data);
     }
 
-    void data(void* outputBuffer, std::size_t level) override
+    void read(void* outputBuffer, std::size_t level) override
     {
         glBindTexture(GL_TEXTURE_2D, this->id);
         glGetTexImage(GL_TEXTURE_2D, static_cast<GLint>(level), this->format, this->type, outputBuffer);

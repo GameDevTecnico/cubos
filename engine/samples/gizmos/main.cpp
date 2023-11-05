@@ -65,7 +65,7 @@ static void drawSystem(Write<Gizmos> gizmos)
     /// [Box]
 
     ///[Cut Cone]
-    if (gizmos->hover("cut cone"))
+    if (gizmos->hovered("cut cone"))
     {
         gizmos->color({0.25F, 0.15F, 0.5F});
     }
