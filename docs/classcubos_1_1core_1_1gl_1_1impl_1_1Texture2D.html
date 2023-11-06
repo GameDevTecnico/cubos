@@ -73,6 +73,11 @@
               std::size_t level = 0) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Updates the texture with new data, which must have the same format used when the texture was created.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a617ffd494a7ec923559cd322774a2ec4" class="m-doc">read</a>(</span><span class="m-doc-wrap">void* outputBuffer,
+              std::size_t level = 0) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Reads texture data into a buffer, which must have the same format used when the texture was created.</dd>
             <dt id="a7a5fdbc797550dd87a47d615ff93bdf7">
               <span class="m-doc-wrap-bumper">void <a href="#a7a5fdbc797550dd87a47d615ff93bdf7" class="m-doc-self">generateMipmaps</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -119,6 +124,28 @@
                 <tr>
                   <td>level</td>
                   <td>Mip level to update.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a617ffd494a7ec923559cd322774a2ec4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />gl::<wbr />impl::<wbr />Texture2D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a617ffd494a7ec923559cd322774a2ec4" class="m-doc-self">read</a>(</span><span class="m-doc-wrap">void* outputBuffer,
+              std::size_t level = 0) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Reads texture data into a buffer, which must have the same format used when the texture was created.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">outputBuffer</td>
+                  <td>Buffer to write the data to.</td>
+                </tr>
+                <tr>
+                  <td>level</td>
+                  <td>Mip level to read.</td>
                 </tr>
               </tbody>
             </table>
