@@ -1,6 +1,7 @@
 # Get project name and version from CMake
 PROJECT_NAME = @DOXYGEN_PROJECT_NAME@
 PROJECT_NUMBER = @DOXYGEN_PROJECT_VERSION@
+PROJECT_BRIEF = Docs
 
 # Add sources
 INPUT = @DOXYGEN_PROJECT_ROOT@/docs/pages \
