@@ -30,6 +30,9 @@ namespace cubos::engine
         /// @brief Alias for @ref core::io::GamepadAxis.
         using GamepadAxis = core::io::GamepadAxis;
 
+        /// @brief Alias for @ref core::io::MouseButton.
+        using MouseButton = core::io::MouseButton;
+
         Input() = default;
         ~Input() = default;
 
@@ -77,6 +80,11 @@ namespace cubos::engine
         /// @param event Gamepad connection event.
         void handle(const core::io::Window& window, const core::io::GamepadConnectionEvent& event);
 
+        /// @brief Handle a mouse button event.
+        /// @param window Window that received the event.
+        /// @param event Mouse button event.
+        void handle(const core::io::Window& window, const core::io::MouseButtonEvent& event);
+
         /// @brief Handle all other events - discards them.
         ///
         /// This is method exists so that `std::visit` can be used with @ref core::io::WindowEvent
@@ -108,16 +116,19 @@ namespace cubos::engine
 
         static bool anyPressed(const core::io::Window& window, const std::vector<std::pair<Key, Modifiers>>& keys);
         bool anyPressed(int player, const std::vector<GamepadButton>& buttons) const;
+        bool anyPressed(const std::vector<MouseButton>& buttons);
         void handleActions(const core::io::Window& window, const std::vector<BindingIndex>& boundActions);
         void handleAxes(const core::io::Window& window, const std::vector<BindingIndex>& boundAxes);
 
         std::unordered_map<int, InputBindings> mPlayerBindings;
         std::unordered_map<int, int> mPlayerGamepads;
         std::unordered_map<int, core::io::GamepadState> mGamepadStates;
+        std::unordered_map<MouseButton, bool> mPressedMouseButtons;
 
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundActions;
         std::unordered_map<Key, std::vector<BindingIndex>> mBoundAxes;
         std::unordered_map<GamepadButton, std::vector<BindingIndex>> mBoundGamepadActions;
         std::unordered_map<GamepadAxis, std::vector<BindingIndex>> mBoundGamepadAxes;
+        std::unordered_map<MouseButton, std::vector<BindingIndex>> mBoundMouseActions;
     };
 } // namespace cubos::engine

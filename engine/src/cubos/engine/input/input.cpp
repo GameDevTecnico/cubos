@@ -5,7 +5,9 @@
 using cubos::core::io::GamepadButton;
 using cubos::core::io::GamepadConnectionEvent;
 using cubos::core::io::GamepadState;
+using cubos::core::io::MouseButton;
 using cubos::core::io::KeyEvent;
+using cubos::core::io::MouseButtonEvent;
 using cubos::core::io::Window;
 using namespace cubos::engine;
 
@@ -13,6 +15,7 @@ void Input::clear()
 {
     mBoundActions.clear();
     mBoundAxes.clear();
+    mBoundMouseActions.clear();
     mPlayerBindings.clear();
     CUBOS_DEBUG("Input bindings cleared");
 }
@@ -29,6 +32,11 @@ void Input::clear(int player)
         for (const auto& button : action.second.gamepadButtons())
         {
             std::erase_if(mBoundGamepadActions[button], [player](const auto& idx) { return idx.player == player; });
+        }
+
+        for (const auto& button : action.second.mouseButtons())
+        {
+            std::erase_if(mBoundMouseActions[button], [player](const auto& idx) { return idx.player == player; });
         }
     }
 
@@ -68,6 +76,11 @@ void Input::bind(const InputBindings& bindings, int player)
         for (const auto& button : action.second.gamepadButtons())
         {
             mBoundGamepadActions[button].push_back(BindingIndex{action.first, player});
+        }
+
+        for (const auto& button : action.second.mouseButtons())
+        {
+            mBoundMouseActions[button].push_back(BindingIndex{action.first, player});
         }
     }
 
@@ -189,12 +202,25 @@ bool Input::anyPressed(int player, const std::vector<GamepadButton>& buttons) co
     return false;
 }
 
+bool Input::anyPressed(const std::vector<MouseButton>& buttons)
+{
+    for (const auto& button : buttons)
+    {
+        if (mPressedMouseButtons[button])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Input::handleActions(const Window& window, const std::vector<BindingIndex>& boundActions)
 {
     for (const auto& boundAction : boundActions)
     {
         auto& action = mPlayerBindings[boundAction.player].actions()[boundAction.name];
-        auto pressed = anyPressed(window, action.keys()) || anyPressed(boundAction.player, action.gamepadButtons());
+        auto pressed = anyPressed(window, action.keys()) || anyPressed(boundAction.player, action.gamepadButtons())
+                        || anyPressed(action.mouseButtons());
 
         if (action.pressed() != pressed)
         {
@@ -269,6 +295,12 @@ void Input::handle(const Window& /*unused*/, const GamepadConnectionEvent& event
         }
         CUBOS_DEBUG("Gamepad {} disconnected", event.gamepad);
     }
+}
+
+void Input::handle(const Window& window, const MouseButtonEvent& event)
+{
+    mPressedMouseButtons[event.button] = event.pressed;
+    this->handleActions(window, mBoundMouseActions[event.button]);
 }
 
 void Input::pollGamepads(const Window& window)

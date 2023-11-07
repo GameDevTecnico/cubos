@@ -8,6 +8,7 @@
 
 #include <cubos/core/io/gamepad.hpp>
 #include <cubos/core/io/keyboard.hpp>
+#include <cubos/core/io/window.hpp>
 
 namespace cubos::engine
 {
@@ -27,10 +28,13 @@ namespace cubos::engine
         /// @brief Constructs with existing bindings.
         /// @param keys Key bindings.
         /// @param gamepadButtons Gamepad button bindings.
+        /// @param mouseButtons Mouse button bindings.
         InputAction(std::vector<std::pair<core::io::Key, core::io::Modifiers>> keys,
-                    std::vector<core::io::GamepadButton> gamepadButtons)
+                    std::vector<core::io::GamepadButton> gamepadButtons,
+                    std::vector<core::io::MouseButton> mouseButtons)
             : mKeys(std::move(keys))
             , mGamepadButtons(std::move(gamepadButtons))
+            , mMouseButtons(std::move(mouseButtons))
         {
         }
 
@@ -50,6 +54,14 @@ namespace cubos::engine
         /// @return Vector of buttons.
         std::vector<core::io::GamepadButton>& gamepadButtons();
 
+        /// @brief Gets the mouse button bindings.
+        /// @return Vector of buttons.
+        const std::vector<core::io::MouseButton>& mouseButtons() const;
+
+        /// @brief Gets the mouse button bindings.
+        /// @return Vector of buttons.
+        std::vector<core::io::MouseButton>& mouseButtons();
+
         /// @brief Checks if this action is pressed.
         /// @return Whether this action is pressed.
         bool pressed() const;
@@ -61,6 +73,7 @@ namespace cubos::engine
     private:
         std::vector<std::pair<core::io::Key, core::io::Modifiers>> mKeys;
         std::vector<core::io::GamepadButton> mGamepadButtons;
+        std::vector<core::io::MouseButton> mMouseButtons;
 
         bool mPressed; ///< Not serialized.
     };
