@@ -9,6 +9,7 @@
 #include <cubos/engine/settings/plugin.hpp>
 
 #include <tesseratos/settings_inspector/plugin.hpp>
+#include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
@@ -20,8 +21,13 @@ using cubos::engine::Settings;
 
 using namespace tesseratos;
 
-static void inspector(Write<Settings> settings, Write<DataInspector> inspector)
+static void inspector(Write<Settings> settings, Write<DataInspector> inspector, Write<Toolbox> toolbox)
 {
+    if (!toolbox->isOpen("Settings Inspector"))
+    {
+        return;
+    }
+
     ImGui::Begin("Settings Inspector");
     if (!ImGui::IsWindowCollapsed())
     {
@@ -44,6 +50,7 @@ void tesseratos::settingsInspectorPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::settingsPlugin);
     cubos.addPlugin(cubos::engine::imguiPlugin);
+    cubos.addPlugin(toolboxPlugin);
 
     cubos.system(inspector).tagged("cubos.imgui");
 }

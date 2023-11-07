@@ -8,6 +8,7 @@
 #include <cubos/engine/voxels/plugin.hpp>
 
 #include <tesseratos/asset_explorer/plugin.hpp>
+#include <tesseratos/toolbox/plugin.hpp>
 #include <tesseratos/voxel_palette_editor/plugin.hpp>
 
 using cubos::core::ecs::EventReader;
@@ -113,8 +114,13 @@ static void checkAssetEventSystem(EventReader<AssetSelectedEvent> reader, Write<
 }
 
 static void voxelPaletteEditorSystem(Write<Assets> assets, Write<SelectedPaletteInfo> selectedPalette,
-                                     Write<ActiveVoxelPalette> activePalette)
+                                     Write<ActiveVoxelPalette> activePalette, Write<Toolbox> toolbox)
 {
+    if (!toolbox->isOpen("Palette Editor"))
+    {
+        return;
+    }
+
     if (assets->status(selectedPalette->asset) != Assets::Status::Loaded)
     {
         return;
@@ -186,6 +192,7 @@ void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
     cubos.addPlugin(cubos::engine::voxelsPlugin);
 
     cubos.addPlugin(assetExplorerPlugin);
+    cubos.addPlugin(toolboxPlugin);
 
     cubos.addResource<SelectedPaletteInfo>();
 
