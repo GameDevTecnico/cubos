@@ -1,6 +1,7 @@
 #include <cubos/engine/input/action.hpp>
 
 using cubos::core::io::GamepadButton;
+using cubos::core::io::MouseButton;
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;
 using namespace cubos::engine;
@@ -15,6 +16,11 @@ const std::vector<GamepadButton>& InputAction::gamepadButtons() const
     return mGamepadButtons;
 }
 
+const std::vector<MouseButton>& InputAction::mouseButtons() const
+{
+    return mMouseButtons;
+}
+
 std::vector<std::pair<Key, Modifiers>>& InputAction::keys()
 {
     return mKeys;
@@ -23,6 +29,11 @@ std::vector<std::pair<Key, Modifiers>>& InputAction::keys()
 std::vector<GamepadButton>& InputAction::gamepadButtons()
 {
     return mGamepadButtons;
+}
+
+std::vector<MouseButton>& InputAction::mouseButtons()
+{
+    return mMouseButtons;
 }
 
 bool InputAction::pressed() const
