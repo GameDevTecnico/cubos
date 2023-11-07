@@ -16,6 +16,7 @@
 #include <tesseratos/asset_explorer/plugin.hpp>
 #include <tesseratos/entity_selector/plugin.hpp>
 #include <tesseratos/scene_editor/plugin.hpp>
+#include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
@@ -247,8 +248,14 @@ static void showSceneHierarchy(SceneInfo& scene, Commands& cmds, EntitySelector&
     ImGui::PopID();
 }
 
-static void sceneEditorSystem(Commands cmds, Write<SceneInfo> scene, Write<EntitySelector> selector)
+static void sceneEditorSystem(Commands cmds, Write<SceneInfo> scene, Write<EntitySelector> selector,
+                              Write<Toolbox> toolbox)
 {
+    if (!toolbox->isOpen("Scene Editor"))
+    {
+        return;
+    }
+
     ImGui::Begin("Scene Editor");
     showSceneHierarchy(*scene, cmds, *selector, 0);
     ImGui::End();
@@ -260,6 +267,7 @@ void tesseratos::sceneEditorPlugin(Cubos& cubos)
 
     cubos.addPlugin(entitySelectorPlugin);
     cubos.addPlugin(assetExplorerPlugin);
+    cubos.addPlugin(toolboxPlugin);
 
     cubos.addResource<SceneInfo>();
 

@@ -8,8 +8,10 @@
 
 #include <tesseratos/entity_inspector/plugin.hpp>
 #include <tesseratos/entity_selector/plugin.hpp>
+#include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::Entity;
+using cubos::core::ecs::Read;
 using cubos::core::ecs::World;
 using cubos::core::ecs::Write;
 using cubos::core::reflection::reflect;
@@ -22,6 +24,13 @@ using namespace tesseratos;
 
 static void inspectEntity(Write<World> world)
 {
+    if (!world->write<Toolbox>().get().isOpen("Entity Inspector"))
+    {
+        return;
+    }
+
+    auto selection = world->read<EntitySelector>().get().selection;
+
     ImGui::Begin("Entity Inspector");
     if (!ImGui::IsWindowCollapsed())
     {
@@ -56,6 +65,7 @@ void tesseratos::entityInspectorPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::imguiPlugin);
     cubos.addPlugin(entitySelectorPlugin);
+    cubos.addPlugin(toolboxPlugin);
 
     cubos.system(inspectEntity).tagged("cubos.imgui");
 }

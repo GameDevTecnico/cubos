@@ -7,6 +7,7 @@
 #include <cubos/engine/transform/plugin.hpp>
 
 #include <tesseratos/debug_camera/plugin.hpp>
+#include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::Commands;
 using cubos::core::ecs::Entity;
@@ -31,8 +32,14 @@ static void createDebugCameraSystem(Commands commands, Write<DebugCameraInfo> de
     debugCamera->ent = commands.create().add(Camera{}).add(Position{{}}).entity();
 }
 
-static void changeToDebugCameraSystem(Write<ActiveCameras> camera, Write<DebugCameraInfo> debugCamera)
+static void changeToDebugCameraSystem(Write<ActiveCameras> camera, Write<Toolbox> toolbox,
+                                      Write<DebugCameraInfo> debugCamera)
 {
+    if (!toolbox->isOpen("Debug Camera"))
+    {
+        return;
+    }
+
     ImGui::Begin("Debug Camera");
 
     ImGui::Text("Current camera: %s", debugCamera->ent == camera->entities[0] ? "Debug" : "Game");
@@ -61,7 +68,7 @@ static void changeToDebugCameraSystem(Write<ActiveCameras> camera, Write<DebugCa
 void tesseratos::debugCameraPlugin(Cubos& cubos)
 {
     cubos.addPlugin(cubos::engine::imguiPlugin);
-
+    cubos.addPlugin(toolboxPlugin);
     cubos.startupSystem(createDebugCameraSystem);
     cubos.system(changeToDebugCameraSystem).tagged("cubos.imgui");
 

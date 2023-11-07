@@ -5,6 +5,7 @@
 #include <cubos/engine/settings/plugin.hpp>
 
 #include <tesseratos/asset_explorer/plugin.hpp>
+#include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::EventWriter;
 using cubos::core::ecs::Read;
@@ -112,8 +113,14 @@ static std::vector<AnyAsset>::iterator showFolder(Assets const& assets, std::str
     return iter;
 }
 
-static void showAssets(Read<Assets> assets, Write<Settings> settings, EventWriter<AssetSelectedEvent> events)
+static void showAssets(Read<Assets> assets, Write<Settings> settings, Write<Toolbox> toolbox,
+                       EventWriter<AssetSelectedEvent> events)
 {
+    if (!toolbox->isOpen("Asset Explorer"))
+    {
+        return;
+    }
+
     ImGui::Begin("Asset Explorer");
 
     std::string folder = settings->getString("assets.io.path", "");
@@ -142,6 +149,6 @@ void tesseratos::assetExplorerPlugin(Cubos& cubos)
 
     cubos.addPlugin(cubos::engine::imguiPlugin);
     cubos.addPlugin(cubos::engine::assetsPlugin);
-
+    cubos.addPlugin(toolboxPlugin);
     cubos.system(showAssets).tagged("cubos.imgui");
 }
