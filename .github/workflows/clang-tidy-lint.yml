@@ -20,7 +20,13 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11 clang-tidy
+        sudo apt-get install xorg-dev libglu1-mesa-dev gcc-11 g++-11
+
+    - name: Install newer Clang
+      run: |
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x ./llvm.sh
+        sudo ./llvm.sh 17
 
     - name: Make all changed headers reachable
       run: |
