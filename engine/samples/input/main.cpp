@@ -136,6 +136,35 @@ static void showcaseUnbound(const Window& window, bool& explained)
 }
 /// [Showcase Unbound]
 
+/// [Showcase Mouse Buttons]
+static void showcaseMouseButtons(const Input& input, bool& explained)
+{
+    if (!explained)
+    {
+        CUBOS_WARN("This showcase will print the name of a mouse button when it is pressed. Press Enter to advance to "
+                   "the next showcase.");
+        explained = true;
+    }
+
+    if (input.pressed("left-mb"))
+    {
+        CUBOS_INFO("Left");
+    }
+    if (input.pressed("right-mb"))
+    {
+        CUBOS_INFO("Right");
+    }
+    if (input.pressed("middle-mb"))
+    {
+        CUBOS_INFO("Middle");
+    }
+    if (input.pressed("extra-mb"))
+    {
+        CUBOS_INFO("Extra1 or Extra2");
+    }
+}
+/// [Showcase Mouse Buttons]
+
 /// [Checking Type of Press]
 static void update(Read<Input> input, Read<Window> window, Write<State> state, Write<ShouldQuit> shouldQuit)
 {
@@ -168,6 +197,8 @@ static void update(Read<Input> input, Read<Window> window, Write<State> state, W
         return showcaseModifierAxis(*input, state->explained);
     case 6:
         return showcaseUnbound(*window, state->explained);
+    case 7:
+        return showcaseMouseButtons(*input, state->explained);
     default:
         shouldQuit->value = true;
     }
