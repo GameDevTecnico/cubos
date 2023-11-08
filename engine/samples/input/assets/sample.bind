@@ -6,26 +6,30 @@
             ],
             "gamepad": [
                 "RBumper"
-            ]
+            ],
+            "mouse": []
         },
         "x-or-z": {
             "keys": [
                 "x",
                 "z"
             ],
-            "gamepad": []
+            "gamepad": [],
+            "mouse": []
         },
         "shift-space": {
             "keys": [
                 "S-Space"
             ],
-            "gamepad": []
+            "gamepad": [],
+            "mouse": []
         },
         "ctrl-shift-space": {
             "keys": [
                 "C-S-Space"
             ],
-            "gamepad": []
+            "gamepad": [],
+            "mouse": []
         }
     },
     "axes": {
