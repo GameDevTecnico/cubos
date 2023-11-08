@@ -139,6 +139,18 @@ namespace cubos::core::io
     /// @ingroup core-io
     Window openWindow(const std::string& title = "CUBOS.", const glm::ivec2& size = {800, 600});
 
+    /// @brief Converts a @ref MouseButton enum to a string.
+    /// @param button MouseButton to convert.
+    /// @return String representation.
+    /// @ingroup core-io
+    std::string mouseButtonToString(MouseButton button);
+
+    /// @brief Convert a string to a @ref MouseButton enum.
+    /// @param str The string to convert.
+    /// @return MouseButton.
+    /// @ingroup core-io
+    MouseButton stringToMouseButton(const std::string& str);
+
     /// @brief Interface used to wrap low-level window API implementations.
     ///
     /// Allows polling of input events and creates a @ref gl::RenderDevice for rendering to the

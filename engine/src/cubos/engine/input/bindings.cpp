@@ -48,6 +48,7 @@ void cubos::core::data::old::serialize<InputBindings>(Serializer& ser, const Inp
         ser.beginObject(nullptr);
         ser.write(action.keys(), "keys");
         ser.write(action.gamepadButtons(), "gamepad");
+        ser.write(action.mouseButtons(), "mouse");
         ser.endObject();
     }
     ser.endDictionary();
@@ -78,6 +79,7 @@ void cubos::core::data::old::deserialize<InputBindings>(Deserializer& des, Input
         des.beginObject();
         des.read(obj.actions()[action].keys());
         des.read(obj.actions()[action].gamepadButtons());
+        des.read(obj.actions()[action].mouseButtons());
         des.endObject();
     }
     des.endDictionary();
