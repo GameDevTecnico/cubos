@@ -18,13 +18,19 @@ namespace cubos::core::memory
     public:
         ~AnyValue();
 
+        /// @brief Constructs an empty AnyValue.
+        AnyValue();
+
         /// @brief Move constructs.
         /// @param other Value.
         AnyValue(AnyValue&& other) noexcept;
 
+        /// @brief Move assignment.
+        /// @param other Value.
+        AnyValue& operator=(AnyValue&& other) noexcept;
+
         /// @brief Default constructs a value with the given type.
-        /// @note @p type must have @ref reflection::ConstructibleTrait and be default
-        /// constructible.
+        /// @note @p type must have @ref reflection::ConstructibleTrait and be default constructible.
         /// @param type Value type.
         /// @return Value.
         static AnyValue defaultConstruct(const reflection::Type& type) noexcept;
@@ -44,6 +50,7 @@ namespace cubos::core::memory
         static AnyValue moveConstruct(const reflection::Type& type, void* value) noexcept;
 
         /// @brief Get the type of the elements stored in the vector.
+        /// @note @ref valid() must return true.
         /// @return Element type.
         const reflection::Type& type() const;
 
@@ -54,6 +61,10 @@ namespace cubos::core::memory
         /// @copydoc get()
         const void* get() const;
 
+        /// @brief Checks whether value is valid or not (holds a value).
+        /// @return True is valid.
+        bool valid() const;
+
     private:
         /// @brief Constructs with allocated uninitialized memory.
         /// @warning The constructor must be called immediately after this. Will cause UB if the
@@ -61,7 +72,7 @@ namespace cubos::core::memory
         /// @param type Value type.
         AnyValue(const reflection::Type& type) noexcept;
 
-        const reflection::Type& mType;
+        const reflection::Type* mType;
         void* mValue;
     };
 } // namespace cubos::core::memory
