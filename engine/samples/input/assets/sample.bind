@@ -7,7 +7,9 @@
             "gamepad": [
                 "RBumper"
             ],
-            "mouse": []
+            "mouse": [
+                "Left"
+            ]
         },
         "x-or-z": {
             "keys": [
@@ -30,6 +32,35 @@
             ],
             "gamepad": [],
             "mouse": []
+        },
+        "left-mb": {
+            "keys": [],
+            "gamepad": [],
+            "mouse": [
+                "Left"
+            ]
+        },
+        "right-mb": {
+            "keys": [],
+            "gamepad": [],
+            "mouse": [
+                "Right"
+            ]
+        },
+        "middle-mb": {
+            "keys": [],
+            "gamepad": [],
+            "mouse": [
+                "Middle"
+            ]
+        },
+        "extra-mb": {
+            "keys": [],
+            "gamepad": [],
+            "mouse": [
+                "Extra1",
+                "Extra2"
+            ]
         }
     },
     "axes": {
