@@ -15,16 +15,33 @@ AnyValue::~AnyValue()
     // Might have been moved, we must check it here.
     if (mValue != nullptr)
     {
-        const auto& trait = mType.get<ConstructibleTrait>();
+        CUBOS_ASSERT(mType != nullptr, "Type must not be null");
+        const auto& trait = mType->get<ConstructibleTrait>();
         trait.destruct(mValue);
         operator delete(mValue, static_cast<std::align_val_t>(trait.alignment()));
     }
+}
+
+AnyValue::AnyValue()
+    : mType(nullptr)
+    , mValue(nullptr)
+{
+}
+
+AnyValue& AnyValue::operator=(AnyValue&& other) noexcept
+{
+    mType = other.mType;
+    mValue = other.mValue;
+    other.mType = nullptr;
+    other.mValue = nullptr;
+    return *this;
 }
 
 AnyValue::AnyValue(AnyValue&& other) noexcept
     : mType(other.mType)
     , mValue(other.mValue)
 {
+    other.mType = nullptr;
     other.mValue = nullptr;
 }
 
@@ -63,21 +80,29 @@ AnyValue AnyValue::moveConstruct(const Type& type, void* value) noexcept
 
 const Type& AnyValue::type() const
 {
-    return mType;
+    CUBOS_ASSERT(this->valid(), "This must hold a value");
+    return *mType;
 }
 
 void* AnyValue::get()
 {
+    CUBOS_ASSERT(this->valid(), "This must hold a value");
     return mValue;
 }
 
 const void* AnyValue::get() const
 {
+    CUBOS_ASSERT(this->valid(), "This must hold a value");
     return mValue;
 }
 
+bool AnyValue::valid() const
+{
+    return mType != nullptr;
+}
+
 AnyValue::AnyValue(const Type& type) noexcept
-    : mType(type)
+    : mType(&type)
 {
     const auto& trait = type.get<ConstructibleTrait>();
     mValue = operator new(trait.size(), static_cast<std::align_val_t>(trait.alignment()), std::nothrow);
