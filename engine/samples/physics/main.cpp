@@ -19,7 +19,7 @@ static const Asset<VoxelPalette> PaletteAsset = AnyAsset("1aa5e234-28cb-4386-99b
 
 struct MaxTime
 {
-    float max = 2.0F;
+    float max = 1.0F;
     float current = 0.0F;
 };
 
@@ -68,7 +68,7 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
                  .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
                  .add(PhysicsVelocity{.velocity = {0.0F, 0.0F, 0.0F},
                                       .force = {0.0F, 0.0F, 0.0F}})
-                 .add(PhysicsMass{.mass = 1.0F, .inverseMass = 1.0F/1.0F})
+                 .add(PhysicsMass{.mass = 500.0F, .inverseMass = 1.0F/500.0F})
                  .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
                  .add(LocalToWorld{});
 }
@@ -76,7 +76,7 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
 static void pushCarSystem(Query<Write<PhysicsVelocity>> query, Write<MaxTime> time, Read<DeltaTime> deltaTime) {
     for (auto [entity, velocity] : query) {
         if (time->current < time->max) {
-            velocity->force = velocity->force + glm::vec3(0.0F, 0.0F, -10.0F);
+            velocity->force = velocity->force + glm::vec3(0.0F, 0.0F, -5000.0F);
             time->current = time->current + deltaTime->value;
         }
     }
@@ -98,7 +98,7 @@ int main(int argc, char** argv)
     cubos.startupSystem(setPaletteSystem).after("cubos.renderer.init");
     cubos.startupSystem(spawnCarSystem).after("cubos.settings").after("cubos.assets.bridge");
     
-    cubos.system(pushCarSystem).before("cubos.physics.prepare");
+    cubos.system(pushCarSystem).before("cubos.physics.apply_forces");
 
     cubos.run();
 }

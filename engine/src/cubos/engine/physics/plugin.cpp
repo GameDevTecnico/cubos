@@ -72,7 +72,7 @@ static bool simulatePhysicsStep(Write<Accumulator> accumulator, Read<FixedDeltaT
     return false;
 }
 
-static void integratePositionSystem(Query<Write<Position>, Write<PreviousPosition>, Write<PhysicsVelocity>, Read<PhysicsMass>> query, Read<Damping> damping, Read<Gravity> gravity, Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
+static void integratePositionSystem(Query<Write<Position>, Write<PreviousPosition>, Write<PhysicsVelocity>, Read<PhysicsMass>> query, Read<Damping> damping, Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
 {
     // Possible components
     // prev position
@@ -89,13 +89,10 @@ static void integratePositionSystem(Query<Write<Position>, Write<PreviousPositio
         velocity->velocity *= glm::pow(damping->value, subDeltaTime);
 
         // Apply forces
-        glm::vec3 gravitationForce =
-            mass->mass * gravity->value;
-        glm::vec3 totalForce = gravitationForce + velocity->force;
-        glm::vec3 deltaLinearVelocity = subDeltaTime * totalForce * mass->inverseMass;
+        glm::vec3 deltaLinearVelocity = velocity->force * mass->inverseMass * subDeltaTime;
 
         velocity->velocity += deltaLinearVelocity;
-        position->vec += subDeltaTime * deltaLinearVelocity;
+        position->vec += velocity->velocity * subDeltaTime;
         //translation->vec = fixedDeltaTime->subDeltaTime * delta_lin_vel;
     }
 }
@@ -119,15 +116,24 @@ static void updateVelocitySystem(Query<Read<Position>, Read<PreviousPosition>, W
     }
 }
 
+static void clearForcesSystem(Query<Write<PhysicsVelocity>> query)
+{
+    for (auto [entity, velocity] : query)
+    {
+        //velocity->force = velocity->force;
+        velocity->force = glm::vec3(0,0,0);
+    }
+}
+
 void cubos::engine::physicsPlugin(Cubos& cubos)
 {
     //int substeps = 5;
+    cubos.addPlugin(gravityPlugin);
 
     cubos.addResource<FixedDeltaTime>();
     cubos.addResource<Substeps>();
     cubos.addResource<Accumulator>();
     cubos.addResource<Damping>();
-    cubos.addResource<Gravity>();
 
     cubos.addComponent<PhysicsVelocity>();
     cubos.addComponent<PhysicsMass>();
@@ -139,13 +145,18 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     // executed every frame
     cubos.system(increaseAccumulator).tagged("cubos.physics.prepare");
 
+    cubos.tag("cubos.physics.apply_forces").after("cubos.physics.prepare")
+                                           .before("cubos.physics.simulation.substeps.integrate")
+                                           .runIf(simulatePhysicsStep);
+
     // tag that encapsulates a simulation step
     //cubos.tag("cubos.physics.simulation").after("cubos.physics.prepare");
     //cubos.tag("cubos.physics.simulation").runIf(simulatePhysicsStep); //.repeat();
     cubos.system(integratePositionSystem).tagged("cubos.physics.simulation.substeps.integrate").after("cubos.physics.prepare").runIf(simulatePhysicsStep);
     cubos.system(applyCorrectionSystem).tagged("cubos.physics.simulation.substeps.correct_position").after("cubos.physics.simulation.substeps.integrate").runIf(simulatePhysicsStep);
     cubos.system(updateVelocitySystem).tagged("cubos.physics.simulation.substeps.update_velocity").after("cubos.physics.simulation.substeps.correct_position").runIf(simulatePhysicsStep);
-    cubos.system(decreaseAccumulator).tagged("cubos.physics.simulation.decrease_accumulator").after("cubos.physics.simulation.substeps.update_velocity").runIf(simulatePhysicsStep); // at the end of the step
+    cubos.system(clearForcesSystem).tagged("cubos.physics.clear_forces").after("cubos.physics.simulation.substeps.update_velocity").runIf(simulatePhysicsStep);
+    cubos.system(decreaseAccumulator).tagged("cubos.physics.simulation.decrease_accumulator").after("cubos.physics.clear_forces").runIf(simulatePhysicsStep); // at the end of the step
 
     // tag for when user systems should apply force?
     
