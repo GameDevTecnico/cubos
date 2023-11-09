@@ -20,7 +20,6 @@ set(CUBOS_ENGINE_SOURCE
 
     "src/cubos/engine/imgui/plugin.cpp"
     "src/cubos/engine/imgui/imgui.cpp"
-    "src/cubos/engine/imgui/serialization.cpp"
     "src/cubos/engine/imgui/data_inspector.cpp"
 
     "src/cubos/engine/transform/plugin.cpp"
