@@ -27,12 +27,17 @@ jobs:
 
     - name: Make all changed headers reachable
       run: |
-        git diff -U0 --name-only HEAD^ | grep -oP 'core/include/\K.*.hpp' | awk '{ $0= "#include <" $0 ">"; print }' > core/src/extra.cpp
+        echo '// NOLINTBEGIN(misc-include-cleaner)' > core/src/extra.cpp
+        git diff -U0 --name-only HEAD^ | grep -oP 'core/include/\K.*.hpp' | awk '{ $0= "#include <" $0 ">"; print }' >> core/src/extra.cpp
         git diff -U0 --name-only HEAD^ | grep -oP 'core/src/\K.*.hpp' | awk '{ $0= "#include \"" $0 "\""; print }' >> core/src/extra.cpp
+        echo '// NOLINTEND(misc-include-cleaner)' >> core/src/extra.cpp
         sed -i '/set(CUBOS_CORE_SOURCE/a "src/extra.cpp"' core/CMakeLists.txt
         git add core/src/extra.cpp
-        git diff -U0 --name-only HEAD^ | grep -oP 'engine/include/\K.*.hpp' | awk '{ $0= "#include <" $0 ">"; print }' > engine/src/extra.cpp
+
+        echo '// NOLINTBEGIN(misc-include-cleaner)' > engine/src/extra.cpp
+        git diff -U0 --name-only HEAD^ | grep -oP 'engine/include/\K.*.hpp' | awk '{ $0= "#include <" $0 ">"; print }' >> engine/src/extra.cpp
         git diff -U0 --name-only HEAD^ | grep -oP 'engine/src/\K.*.hpp' | awk '{ $0= "#include \"" $0 "\""; print }' >> engine/src/extra.cpp
+        echo '// NOLINTEND(misc-include-cleaner)' >> engine/src/extra.cpp
         sed -i '/set(CUBOS_ENGINE_SOURCE/a "src/extra.cpp"' engine/CMakeLists.txt
         git add engine/src/extra.cpp
   
