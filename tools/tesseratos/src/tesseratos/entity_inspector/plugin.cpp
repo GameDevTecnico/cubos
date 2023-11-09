@@ -1,40 +1,53 @@
 #include <imgui.h>
 
+#include <cubos/core/ecs/entity/entity.hpp>
+#include <cubos/core/reflection/reflect.hpp>
+
+#include <cubos/engine/imgui/data_inspector.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
-#include <cubos/engine/imgui/serialization.hpp>
 
 #include <tesseratos/entity_inspector/plugin.hpp>
 #include <tesseratos/entity_selector/plugin.hpp>
 
-using cubos::core::data::old::Context;
-using cubos::core::data::old::SerializationMap;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
 using cubos::core::ecs::Write;
+using cubos::core::reflection::reflect;
+using cubos::core::reflection::Type;
 
 using cubos::engine::Cubos;
-using cubos::engine::imguiEditPackage;
+using cubos::engine::DataInspector;
 
 using namespace tesseratos;
 
 static void inspectEntity(Write<World> world)
 {
-    auto selection = world->read<EntitySelector>().get().selection;
-
     ImGui::Begin("Entity Inspector");
     if (!ImGui::IsWindowCollapsed())
     {
-        ImGui::BeginTable("showEntity", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
+        auto selection = world->read<EntitySelector>().get().selection;
 
         if (!selection.isNull() && world->isAlive(selection))
         {
-            auto pkg = world->pack(selection);
-            if (imguiEditPackage(pkg, std::to_string(selection.index)))
+            ImGui::Text("Entity %d selected", selection.index);
+            ImGui::BeginTable("showEntity", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable);
+            auto dataInspector = world->write<DataInspector>();
+
+            ImGui::TableNextRow();
+
+            for (auto [type, value] : world->components(selection))
             {
-                world->unpack(selection, pkg);
+                if (dataInspector.get().edit(type->name(), *type, value))
+                {
+                    // ...
+                }
             }
+            ImGui::EndTable();
         }
-        ImGui::EndTable();
+        else
+        {
+            ImGui::Text("No entity selected");
+        }
     }
     ImGui::End();
 }
