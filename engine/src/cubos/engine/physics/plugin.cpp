@@ -116,12 +116,20 @@ static void updateVelocitySystem(Query<Read<Position>, Read<PreviousPosition>, W
     }
 }
 
+static void applyImpulseSystem(Query<Write<PhysicsVelocity>, Read<PhysicsMass>> query)
+{
+    for (auto [entity, velocity, mass] : query)
+    {
+        velocity->velocity += velocity->impulse * mass->inverseMass;
+    }
+}
+
 static void clearForcesSystem(Query<Write<PhysicsVelocity>> query)
 {
     for (auto [entity, velocity] : query)
     {
-        //velocity->force = velocity->force;
         velocity->force = glm::vec3(0,0,0);
+        velocity->impulse = glm::vec3(0,0,0);
     }
 }
 
@@ -152,6 +160,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     // tag that encapsulates a simulation step
     //cubos.tag("cubos.physics.simulation").after("cubos.physics.prepare");
     //cubos.tag("cubos.physics.simulation").runIf(simulatePhysicsStep); //.repeat();
+    cubos.system(applyImpulseSystem).tagged("cubos.physics.apply_impulses").after("cubo.physics.prepare").before("cubos.physics.simulation.substeps.integrate").runIf(simulatePhysicsStep);
     cubos.system(integratePositionSystem).tagged("cubos.physics.simulation.substeps.integrate").after("cubos.physics.prepare").runIf(simulatePhysicsStep);
     cubos.system(applyCorrectionSystem).tagged("cubos.physics.simulation.substeps.correct_position").after("cubos.physics.simulation.substeps.integrate").runIf(simulatePhysicsStep);
     cubos.system(updateVelocitySystem).tagged("cubos.physics.simulation.substeps.update_velocity").after("cubos.physics.simulation.substeps.correct_position").runIf(simulatePhysicsStep);

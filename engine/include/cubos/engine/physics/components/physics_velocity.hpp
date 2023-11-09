@@ -15,5 +15,6 @@ namespace cubos::engine
     {
         glm::vec3 velocity;
         glm::vec3 force;
+        glm::vec3 impulse;
     };
 } // namespace cubos::engine

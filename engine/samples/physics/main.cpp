@@ -67,7 +67,8 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
                  .add(Position{{0.0F, 0.0F, 0.0F}})
                  .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
                  .add(PhysicsVelocity{.velocity = {0.0F, 0.0F, 0.0F},
-                                      .force = {0.0F, 0.0F, 0.0F}})
+                                      .force = {0.0F, 0.0F, 0.0F},
+                                      .impulse = {0.0F, 0.0F, 0.0F}})
                  .add(PhysicsMass{.mass = 500.0F, .inverseMass = 1.0F/500.0F})
                  .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
                  .add(LocalToWorld{});
@@ -76,6 +77,10 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
 static void pushCarSystem(Query<Write<PhysicsVelocity>> query, Write<MaxTime> time, Read<DeltaTime> deltaTime) {
     for (auto [entity, velocity] : query) {
         if (time->current < time->max) {
+            if (time->current == 0.0F)
+            {
+                velocity->impulse += glm::vec3(0.0F, 5000.0F, 0.0F);
+            }
             velocity->force = velocity->force + glm::vec3(0.0F, 0.0F, -5000.0F);
             time->current = time->current + deltaTime->value;
         }
