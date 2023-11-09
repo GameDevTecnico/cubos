@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/assets/bridges/ directory | CUBOS. Docs</title>
+  <title>cubos::core::data::JSONSerializer class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,30 +46,92 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_0835e003fa277f66ce5cf543d578f6a2.html">assets</a>/</span>bridges<span class="m-breadcrumb">/</span> <span class="m-thin">directory</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span>JSONSerializer <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2data_2ser_2json_8hpp.html">&lt;core/data/ser/json.hpp&gt;</a></div>
         </h1>
-        <p><a href="classcubos_1_1engine_1_1AssetBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />AssetBridge</a> implementations directory.</p>
+        <p>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a> class for serializing to JSON.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#files">Files</a></li>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
-            <dt>file <a href="binary_8hpp.html" class="m-doc">binary.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1BinaryBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />BinaryBridge</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2assets_2bridges_2file_8hpp.html" class="m-doc">file.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1FileBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />FileBridge</a>.</dd>
-            <dt>file <a href="engine_2include_2cubos_2engine_2assets_2bridges_2json_8hpp.html" class="m-doc">json.hpp</a></dt>
-            <dd>Class <a href="classcubos_1_1engine_1_1JSONBridge.html" class="m-doc">cubos::<wbr />engine::<wbr />JSONBridge</a>.</dd>
+            <dt>
+              class <a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>
+            </dt>
+            <dd>Base class for serializers, which defines the interface for serializing arbitrary data using its reflection metadata.</dd>
           </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="aa6bb829fcf8a2d74d68127f8fdeca562">
+              <span class="m-doc-wrap-bumper"><a href="#aa6bb829fcf8a2d74d68127f8fdeca562" class="m-doc-self">JSONSerializer</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructs.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="afeee0d1ebce5d54c042d20d7f593b216">
+              <span class="m-doc-wrap-bumper">auto <a href="#afeee0d1ebce5d54c042d20d7f593b216" class="m-doc-self">output</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd>Outputs the serialized JSON.</dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afde65c88c3b73f2dbd92b76eab78d0c2" class="m-doc">decompose</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              const void* value) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Called for each type with no hook defined.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="afde65c88c3b73f2dbd92b76eab78d0c2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />data::<wbr />JSONSerializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afde65c88c3b73f2dbd92b76eab78d0c2" class="m-doc-self">decompose</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
+              const void* value) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Called for each type with no hook defined.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type</td>
+                  <td>Type.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the value was successfully serialized.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Should recurse by calling <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a4baab0fc3ce1b9c40bd33a4e9081c43e" class="m-doc">write()</a> again as appropriate.</p>
+          </div></section>
         </section>
       </div>
     </div>
