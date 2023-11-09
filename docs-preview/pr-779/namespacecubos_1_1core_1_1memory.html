@@ -78,6 +78,11 @@
             </dt>
             <dd><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">Stream</a> implementation which writes to/reads from a buffer.</dd>
             <dt>
+              <div class="m-doc-template">template&lt;typename R, typename... Ts&gt;</div>
+              class <a href="classcubos_1_1core_1_1memory_1_1Function_3_01R_07Ts_8_8_8_08_4.html" class="m-doc">Function&lt;R(Ts...)&gt;</a>
+            </dt>
+            <dd>Generic function pointer which can also store capturing lambda functions.</dd>
+            <dt>
               <div class="m-doc-template">template&lt;typename T, typename Lock&gt;</div>
               class <a href="classcubos_1_1core_1_1memory_1_1ReadGuard.html" class="m-doc">ReadGuard</a>
             </dt>
@@ -92,6 +97,11 @@
               struct <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>
             </dt>
             <dd>Provides a type which is the same as the given type, but without any references.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              struct <a href="structcubos_1_1core_1_1memory_1_1IsLValueReference.html" class="m-doc">IsLValueReference</a>
+            </dt>
+            <dd>Used to check if a type is an rvalue reference.</dd>
             <dt>
               class <a href="classcubos_1_1core_1_1memory_1_1StandardStream.html" class="m-doc">StandardStream</a>
             </dt>
@@ -157,10 +167,60 @@
             <dd>Converts a value from local endianness to big endianness.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#gaa42ad365d019d9e72fbc216a84e36572" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga3cd36ad26aeaf837279dade433600b38" class="m-doc">move</a>(</span><span class="m-doc-wrap">T&amp;&amp; value) -&gt; <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
             <dd>Returns an R-value reference to the given value.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__core-memory.html#ga9c4df9a5d6d81c87f0bc17ca34a14a3a" class="m-doc">forward</a>(</span><span class="m-doc-wrap">typename <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp; argument) -&gt; T&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9c86bb075e5298ab61c9dc547b40dfa7" class="m-doc">forward</a>(</span><span class="m-doc-wrap">typename <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp;&amp; argument) -&gt; T&amp;&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9c86bb075e5298ab61c9dc547b40dfa7"><div>
+            <h3>
+              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="move_8hpp.html">&lt;core/memory/move.hpp&gt;</a></div>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T&amp;&amp; cubos::<wbr />core::<wbr />memory::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9c86bb075e5298ab61c9dc547b40dfa7" class="m-doc-self">forward</a>(</span><span class="m-doc-wrap">typename <a href="structcubos_1_1core_1_1memory_1_1RemoveReference.html" class="m-doc">RemoveReference</a>&lt;T&gt;::Type&amp;&amp; argument) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Used to cast a templated function parameter to the value category the caller used to pass it, which allows rvalues to be passed as rvalues and lvalues as lvalues.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Argument type.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>argument</td>
+                  <td>Argument to forward.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Forwarded argument.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This is a replacement for <code>std::forward</code>, which allows us to avoid including the entire <code>&lt;utility&gt;</code> header.</p></aside>
+          </div></section>
         </section>
       </div>
     </div>
