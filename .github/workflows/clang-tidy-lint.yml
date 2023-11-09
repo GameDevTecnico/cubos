@@ -37,9 +37,16 @@ jobs:
         echo '// NOLINTEND(misc-include-cleaner)' >> engine/src/extra.cpp
         sed -i '/set(CUBOS_ENGINE_SOURCE/a "src/extra.cpp"' engine/CMakeLists.txt
         git add engine/src/extra.cpp
+
+        echo '// NOLINTBEGIN(misc-include-cleaner)' > tools/tesseratos/src/extra.cpp
+        git diff -U0 --name-only HEAD^ | grep -oP 'tools/tesseratos/include/\K.*.hpp' | awk '{ $0= "#include <" $0 ">"; print }' >> tools/tesseratos/src/extra.cpp
+        git diff -U0 --name-only HEAD^ | grep -oP 'tools/tesseratos/src/\K.*.hpp' | awk '{ $0= "#include \"" $0 "\""; print }' >> tools/tesseratos/src/extra.cpp
+        echo '// NOLINTEND(misc-include-cleaner)' >> tools/tesseratos/src/extra.cpp
+        sed -i '/set(TESSERATOS_SOURCE/a "src/extra.cpp"' tools/tesseratos/CMakeLists.txt
+        git add tools/tesseratos/src/extra.cpp
   
     - name: Prepare compile_commands.json
-      run: cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON -DBUILD_ENGINE_SAMPLES=ON -DUSE_CLANG_TIDY=ON
+      run: cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DBUILD_CORE_SAMPLES=ON -DBUILD_CORE_TESTS=ON -DBUILD_ENGINE_SAMPLES=ON -DBUILD_TESSERATOS_SAMPLES=ON -DUSE_CLANG_TIDY=ON
       shell: bash
       env:
         CC:   clang-14
@@ -51,7 +58,7 @@ jobs:
     - name: Analyze
       run: |
         run-clang-tidy -j$(nproc) -p=build \
-          -header-filter="(core|engine)/(src|include)/.*" \
+          -header-filter="(core|engine|tools/tesseratos)/(src|include)/.*" \
           files "($(git diff -U0 --name-only HEAD^ | grep -vP '.*/lib/.*' | paste -s -d\|))" \
           -export-fixes clang-tidy-fixes.yaml || true
 
