@@ -56,6 +56,7 @@ set(CUBOS_ENGINE_SOURCE
     "src/cubos/engine/collisions/broad_phase/candidates.cpp"
 
     "src/cubos/engine/physics/plugin.cpp"
+    "src/cubos/engine/physics/gravity.cpp"
 
     "src/cubos/engine/input/plugin.cpp"
     "src/cubos/engine/input/input.cpp"
