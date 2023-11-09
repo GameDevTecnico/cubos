@@ -15,4 +15,5 @@ void tesseratos::plugin(cubos::engine::Cubos& cubos)
     cubos.addPlugin(voxelPaletteEditorPlugin);
     cubos.addPlugin(assetExplorerPlugin);
     cubos.addPlugin(debugCameraPlugin);
+    cubos.addPlugin(settingsInspectorPlugin);
 }
