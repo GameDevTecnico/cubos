@@ -1,9 +1,9 @@
 #include <cubos/engine/input/action.hpp>
 
 using cubos::core::io::GamepadButton;
-using cubos::core::io::MouseButton;
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;
+using cubos::core::io::MouseButton;
 using namespace cubos::engine;
 
 const std::vector<std::pair<Key, Modifiers>>& InputAction::keys() const

@@ -5,8 +5,8 @@
 using cubos::core::io::GamepadButton;
 using cubos::core::io::GamepadConnectionEvent;
 using cubos::core::io::GamepadState;
-using cubos::core::io::MouseButton;
 using cubos::core::io::KeyEvent;
+using cubos::core::io::MouseButton;
 using cubos::core::io::MouseButtonEvent;
 using cubos::core::io::Window;
 using namespace cubos::engine;
@@ -219,8 +219,8 @@ void Input::handleActions(const Window& window, const std::vector<BindingIndex>&
     for (const auto& boundAction : boundActions)
     {
         auto& action = mPlayerBindings[boundAction.player].actions()[boundAction.name];
-        auto pressed = anyPressed(window, action.keys()) || anyPressed(boundAction.player, action.gamepadButtons())
-                        || anyPressed(action.mouseButtons());
+        auto pressed = anyPressed(window, action.keys()) || anyPressed(boundAction.player, action.gamepadButtons()) ||
+                       anyPressed(action.mouseButtons());
 
         if (action.pressed() != pressed)
         {
