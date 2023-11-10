@@ -13,22 +13,50 @@ using cubos::engine::Cubos;
 
 using namespace tesseratos;
 
+bool Toolbox::isOpen(std::string toolName)
+{
+    if (mToolsMap.contains(toolName))
+    {
+        return mToolsMap[toolName];
+    }
+    mToolsMap[toolName] = false;
+    return false;
+}
+
+void Toolbox::open(std::string toolName)
+{
+    mToolsMap[toolName] = true;
+}
+
+void Toolbox::close(std::string toolName)
+{
+    mToolsMap[toolName] = false;
+}
+
+void Toolbox::doClick(std::string toolName)
+{
+    mToolsMap[toolName] = !mToolsMap[toolName];
+}
+
+auto Toolbox::begin()
+{
+    return mToolsMap.begin();
+}
+
+auto Toolbox::end()
+{
+    return mToolsMap.end();
+}
+
 static void showToolbox(Write<Toolbox> toolbox)
 {
     ImGui::Begin("Toolbox");
 
-    for (auto& [key, val] : toolbox->toolsMap)
+    for (auto it = toolbox->begin(); it != toolbox->end(); ++it)
     {
-        if (ImGui::Button(data(key)))
+        if (ImGui::Button(data(it->first)))
         {
-            if (!val)
-            {
-                toolbox->open(key);
-            }
-            else
-            {
-                toolbox->close(key);
-            }
+            toolbox->doClick(it->first);
         }
     }
 

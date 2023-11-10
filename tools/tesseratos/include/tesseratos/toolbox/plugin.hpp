@@ -1,5 +1,3 @@
-
-
 /// @dir
 /// @brief @ref toolbox-plugin plugin directory.
 
@@ -25,27 +23,20 @@ namespace tesseratos
     class Toolbox final
     {
     public:
-        std::unordered_map<std::string, bool> toolsMap;
+        bool isOpen(std::string toolName);
 
-        bool isOpen(std::string toolname)
-        {
-            if (toolsMap.contains(toolname))
-            {
-                return toolsMap[toolname];
-            }
-            toolsMap[toolname] = false;
-            return false;
-        }
+        void open(std::string toolName);
 
-        void open(std::string toolname)
-        {
-            toolsMap[toolname] = true;
-        }
+        void close(std::string toolName);
 
-        void close(std::string toolname)
-        {
-            toolsMap[toolname] = false;
-        }
+        void doClick(std::string toolName);
+
+        auto begin();
+
+        auto end();
+
+    private:
+        std::unordered_map<std::string, bool> mToolsMap;
     };
 
     /// @brief Plugin entry function.
