@@ -1,6 +1,6 @@
-#include <cubos/core/io/window.hpp>
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
+#include <cubos/core/io/window.hpp>
 
 #include "glfw_window.hpp"
 
@@ -16,7 +16,7 @@ Window cubos::core::io::openWindow(const std::string& title, const glm::ivec2& s
 std::string cubos::core::io::mouseButtonToString(MouseButton button)
 {
 #define MAP_BUTTON_TO_STRING(button, string)                                                                           \
-    case MouseButton::button:                                                                                        \
+    case MouseButton::button:                                                                                          \
         return string;
     switch (button)
     {
