@@ -81,3 +81,7 @@ Modifier keys work with axis too.
 
 If, for any reason, you want to read an input that is not defined in the Bindings asset, you cannot use the Input plugin for it.
 Instead, you will have to call the @ref cubos::core::io::Window::pressed "Window::pressed" function.
+
+@snippet input/main.cpp Showcase Mouse Buttons
+
+Reading mouse buttons is also supported, just bind them to an action, and then call @ref cubos::engine::Input::pressed "Input::pressed" as usual. To check which strings map to which buttons, you check the `mouseButtonToString` function implementation on [this file](https://github.com/GameDevTecnico/cubos/blob/main/core/src/cubos/core/io/window.cpp).
