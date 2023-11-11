@@ -1,0 +1,9 @@
+/// @dir
+/// @brief @ref core-ecs-relation directory.
+
+namespace cubos::core::ecs
+{
+    /// @defgroup core-ecs-relation Relation
+    /// @ingroup core-ecs
+    /// @brief Relation part of the ECS.
+}
