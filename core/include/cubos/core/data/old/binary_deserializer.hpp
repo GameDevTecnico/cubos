@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/memory/stream.hpp>
 
