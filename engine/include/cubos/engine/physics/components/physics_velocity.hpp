@@ -8,7 +8,7 @@
 
 namespace cubos::engine
 {
-    /// @brief Component which defines parameters of a particle.
+    /// @brief Component which holds velocity and forces applied on a particle.
     /// @note Should be used with @ref PhysicsMass and @ref Position.
     /// @ingroup physics-plugin
     struct [[cubos::component("cubos/physics_velocity", VecStorage)]] PhysicsVelocity

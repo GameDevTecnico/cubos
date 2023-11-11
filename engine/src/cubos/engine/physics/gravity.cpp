@@ -29,4 +29,3 @@ void cubos::engine::gravityPlugin(Cubos& cubos)
 
     cubos.system(applyGravitySystem).tagged("cubos.physics.apply_forces");
 }
-//reset forces??
