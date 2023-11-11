@@ -82,9 +82,9 @@ TEST_CASE("data::DebugSerializer")
     glm::tvec3<int> vec3{1, 2, 3};
     AUTO_TEST_SPLIT(decltype(vec3), vec3, "(x: 1, y: 2, z: 3)", "(\n  x: 1,\n  y: 2,\n  z: 3\n)", true);
 
-    ser.hook<std::string>([](Serializer&, const Type&, const void*) { return false; });
-    ser.hook<bool>([](Serializer&, const Type&, const void*) { return false; });
-    ser.hook<int>([](Serializer&, const Type&, const void*) { return false; });
+    ser.hook<std::string>([](auto) { return false; });
+    ser.hook<bool>([](auto) { return false; });
+    ser.hook<int>([](auto) { return false; });
     AUTO_TEST_SPLIT(decltype(map), map, "{?: ?, ?: ?}", "{\n  ?: ?,\n  ?: ?\n}", false);
     AUTO_TEST_SPLIT(decltype(vector), vector, "[?, ?, ?]", "[\n  ?,\n  ?,\n  ?\n]", false);
     AUTO_TEST_SPLIT(decltype(vec3), vec3, "(x: ?, y: ?, z: ?)", "(\n  x: ?,\n  y: ?,\n  z: ?\n)", false);

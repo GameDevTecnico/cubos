@@ -28,8 +28,8 @@ using cubos::core::reflection::reflect;
 
 MySerializer::MySerializer()
 {
-    this->hook<int32_t>([](Serializer&, const Type&, const void* value) {
-        Stream::stdOut.print(*static_cast<const int32_t*>(value));
+    this->hook<int32_t>([](const int32_t& value) {
+        Stream::stdOut.print(value);
         return true;
     });
 }

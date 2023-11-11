@@ -16,9 +16,7 @@ using cubos::core::reflection::StringConversionTrait;
 using cubos::core::reflection::Type;
 
 #define AUTO_HOOK(type, ...)                                                                                           \
-    this->hook<type>([](Serializer& ser, const Type&, const void* value) {                                             \
-        auto& debug = static_cast<DebugSerializer&>(ser);                                                              \
-        const auto& typed = *static_cast<const type*>(value);                                                          \
+    this->hook<type>([this](const type& value) {                                                                       \
         __VA_ARGS__;                                                                                                   \
         return true;                                                                                                   \
     })
@@ -26,23 +24,23 @@ using cubos::core::reflection::Type;
 DebugSerializer::DebugSerializer(memory::Stream& stream)
     : mStream(stream)
 {
-    AUTO_HOOK(bool, debug.mStream.print(typed ? "true" : "false"));
+    AUTO_HOOK(bool, mStream.print(value ? "true" : "false"));
     AUTO_HOOK(char, {
-        debug.mStream.put('\'');
-        debug.mStream.put(typed);
-        debug.mStream.put('\'');
+        mStream.put('\'');
+        mStream.put(value);
+        mStream.put('\'');
     });
-    AUTO_HOOK(int8_t, debug.mStream.print(typed));
-    AUTO_HOOK(int16_t, debug.mStream.print(typed));
-    AUTO_HOOK(int32_t, debug.mStream.print(typed));
-    AUTO_HOOK(int64_t, debug.mStream.print(typed));
-    AUTO_HOOK(uint8_t, debug.mStream.print(typed));
-    AUTO_HOOK(uint16_t, debug.mStream.print(typed));
-    AUTO_HOOK(uint32_t, debug.mStream.print(typed));
-    AUTO_HOOK(uint64_t, debug.mStream.print(typed));
-    AUTO_HOOK(float, debug.mStream.print(typed));
-    AUTO_HOOK(double, debug.mStream.print(typed));
-    AUTO_HOOK(std::string, debug.mStream.printf("\"{}\"", typed));
+    AUTO_HOOK(int8_t, mStream.print(value));
+    AUTO_HOOK(int16_t, mStream.print(value));
+    AUTO_HOOK(int32_t, mStream.print(value));
+    AUTO_HOOK(int64_t, mStream.print(value));
+    AUTO_HOOK(uint8_t, mStream.print(value));
+    AUTO_HOOK(uint16_t, mStream.print(value));
+    AUTO_HOOK(uint32_t, mStream.print(value));
+    AUTO_HOOK(uint64_t, mStream.print(value));
+    AUTO_HOOK(float, mStream.print(value));
+    AUTO_HOOK(double, mStream.print(value));
+    AUTO_HOOK(std::string, mStream.printf("\"{}\"", value));
 }
 
 void DebugSerializer::pretty(bool pretty)

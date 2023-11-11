@@ -8,7 +8,7 @@ bool Serializer::write(const reflection::Type& type, const void* value)
 {
     if (auto it = mHooks.find(&type); it != mHooks.end())
     {
-        if (!it->second(*this, type, value))
+        if (!it->second(value))
         {
             CUBOS_WARN("Serialization hook for type '{}' failed", type.name());
             return false;
@@ -28,7 +28,8 @@ void Serializer::hook(const reflection::Type& type, Hook hook)
     if (auto it = mHooks.find(&type); it != mHooks.end())
     {
         CUBOS_WARN("Hook for type '{}' already exists, overwriting", type.name());
+        mHooks.erase(it);
     }
 
-    mHooks.insert_or_assign(&type, hook);
+    mHooks.emplace(&type, memory::move(hook));
 }
