@@ -6,6 +6,7 @@
 
 #include <unordered_map>
 
+#include <cubos/core/memory/function.hpp>
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::core::data
@@ -28,11 +29,12 @@ namespace cubos::core::data
         virtual ~Serializer() = default;
 
         /// @brief Function type for serialization hooks.
-        /// @param ser Serializer.
-        /// @param type Type.
-        /// @param value Value.
-        /// @return Whether the value was successfully serialized.
-        using Hook = bool (*)(Serializer& ser, const reflection::Type& type, const void* value);
+        using Hook = memory::Function<bool(const void*)>;
+
+        /// @brief Function type for serialization hooks.
+        /// @tparam T Type.
+        template <typename T>
+        using TypedHook = memory::Function<bool(const T&)>;
 
         /// @brief Serialize the given value.
         /// @param type Type.
@@ -59,9 +61,11 @@ namespace cubos::core::data
         /// @tparam T Type.
         /// @param hook Hook.
         template <typename T>
-        void hook(Hook hook)
+        void hook(TypedHook<T> hook)
         {
-            this->hook(reflection::reflect<T>(), hook);
+            this->hook(reflection::reflect<T>(), [hook = memory::move(hook)](const void* value) mutable {
+                return hook(*static_cast<const T*>(value));
+            });
         }
 
     protected:
