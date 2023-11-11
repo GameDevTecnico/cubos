@@ -5,6 +5,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -12,6 +13,8 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     struct [[cubos::component("cubos/accumulated_correction", VecStorage)]] AccumulatedCorrection
     {
+        CUBOS_REFLECT;
+
         glm::vec3 vec = {0.0F, 0.0F, 0.0F}; ///< Accumulated correction.
     };
 } // namespace cubos::engine
