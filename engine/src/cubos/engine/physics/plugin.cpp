@@ -4,6 +4,8 @@
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
+#include "physics_accumulator.hpp"
+
 #include <glm/glm.hpp>
 
 using cubos::core::ecs::Query;
