@@ -1,8 +1,8 @@
+#include <glm/glm.hpp>
+
 #include <cubos/core/ecs/system/query.hpp>
 
 #include <cubos/engine/physics/plugins/gravity.hpp>
-
-#include <glm/glm.hpp>
 
 using cubos::core::ecs::Query;
 using cubos::core::ecs::Read;
@@ -14,12 +14,15 @@ static void applyGravitySystem(Query<Write<PhysicsVelocity>, Read<PhysicsMass>> 
 {
     for (auto [entity, velocity, mass] : query)
     {
-        if (mass->inverseMass <= 0.0f) return;
+        if (mass->inverseMass <= 0.0F)
+        {
+            return;
+        }
 
         // Apply gravity force
         glm::vec3 gravitationForce = mass->mass * gravity->value;
 
-        velocity->force = velocity->force + gravitationForce;
+        velocity->force += gravitationForce;
     }
 }
 

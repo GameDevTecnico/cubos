@@ -5,6 +5,7 @@
 #pragma once
 
 #include <glm/vec3.hpp>
+
 #include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine

@@ -10,6 +10,6 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     struct FixedDeltaTime
     {
-        float value = 1.0f/100.0F;
+        float value = 1.0F / 100.0F;
     };
 } // namespace cubos::engine
