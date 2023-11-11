@@ -11,7 +11,7 @@
 
 namespace cubos::engine
 {
-    /// @defgroup physics-gravity-plugin Physics
+    /// @defgroup physics-gravity-plugin Gravity
     /// @ingroup physics-plugin
     /// @brief Adds gravity to particles.
     ///
