@@ -2,12 +2,15 @@
 
 using namespace cubos::engine;
 
+using Candidate = BroadPhaseCandidates::Candidate;
+using CandidateHash = BroadPhaseCandidates::CandidateHash;
+
 void BroadPhaseCandidates::addCandidate(CollisionType type, Candidate candidate)
 {
     candidatesPerType[static_cast<std::size_t>(type)].insert(candidate);
 }
 
-auto BroadPhaseCandidates::candidates(CollisionType type) const -> const std::unordered_set<Candidate, CandidateHash>&
+const std::unordered_set<Candidate, CandidateHash>& BroadPhaseCandidates::candidates(CollisionType type) const
 {
     return candidatesPerType[static_cast<std::size_t>(type)];
 }
