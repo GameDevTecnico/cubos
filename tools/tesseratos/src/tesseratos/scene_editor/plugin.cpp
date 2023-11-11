@@ -6,6 +6,8 @@
 
 #include <cubos/core/data/old/debug_serializer.hpp>
 #include <cubos/core/ecs/system/commands.hpp>
+#include <cubos/core/reflection/reflect.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/imgui/plugin.hpp>
@@ -96,7 +98,7 @@ static void checkAssetEventSystem(cubos::core::ecs::EventReader<AssetSelectedEve
 {
     for (const auto& event : reader)
     {
-        if (assets->type(event.asset) == typeid(Scene))
+        if (assets->type(event.asset).is<Scene>())
         {
             CUBOS_INFO("Opening scene {}", Debug(event.asset));
             openScene(event.asset, commands, *assets, *scene);

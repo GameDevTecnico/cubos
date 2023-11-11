@@ -2,6 +2,7 @@
 
 #include <cubos/core/data/old/debug_serializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/imgui/plugin.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
@@ -92,7 +93,7 @@ static void checkAssetEventSystem(EventReader<AssetSelectedEvent> reader, Write<
 {
     for (const auto& event : reader)
     {
-        if (assets->type(event.asset) == typeid(VoxelPalette))
+        if (assets->type(event.asset).is<VoxelPalette>())
         {
             CUBOS_INFO("Opening palette asset {}", Debug(event.asset));
             if (!selectedPalette->asset.isNull() && selectedPalette->modified)
