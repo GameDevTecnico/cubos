@@ -12,6 +12,6 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     struct Gravity
     {
-        glm::vec3 value = {0.0f, -9.81f, 0.0f};
+        glm::vec3 value = {0.0F, -9.81F, 0.0F};
     };
 } // namespace cubos::engine

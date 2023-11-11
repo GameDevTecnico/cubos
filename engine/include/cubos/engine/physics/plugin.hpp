@@ -2,29 +2,25 @@
 /// @brief @ref physics-plugin plugin directory.
 
 /// @file
-/// @brief Plugin entry point, resources @ref cubos::engine::FixedDeltaTime and @ref cubos::engine::Accumulator and components @ref
-/// cubos::engine::PhysicsVelocity and @ref cubos::engine::PhysicsMass.
+/// @brief Plugin entry point.
 /// @ingroup physics-plugin
 
 #pragma once
-
-#include <cubos/engine/cubos.hpp>
-
-#include <cubos/engine/physics/plugins/gravity.hpp>
-
-#include <cubos/engine/physics/resources/damping.hpp>
-#include <cubos/engine/physics/resources/fixed_delta_time.hpp>
-#include <cubos/engine/physics/resources/substeps.hpp>
-
-#include <cubos/engine/physics/components/physics_velocity.hpp>
-#include <cubos/engine/physics/components/physics_mass.hpp>
-#include <cubos/engine/physics/components/previous_position.hpp>
-#include <cubos/engine/physics/components/accumulated_correction.hpp>
 
 /// [Component Refl]
 #include <cubos/core/ecs/component/reflection.hpp>
 #include <cubos/core/reflection/external/glm.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
+
+#include <cubos/engine/cubos.hpp>
+#include <cubos/engine/physics/components/accumulated_correction.hpp>
+#include <cubos/engine/physics/components/physics_mass.hpp>
+#include <cubos/engine/physics/components/physics_velocity.hpp>
+#include <cubos/engine/physics/components/previous_position.hpp>
+#include <cubos/engine/physics/plugins/gravity.hpp>
+#include <cubos/engine/physics/resources/damping.hpp>
+#include <cubos/engine/physics/resources/fixed_delta_time.hpp>
+#include <cubos/engine/physics/resources/substeps.hpp>
 
 namespace cubos::engine
 {
@@ -46,19 +42,7 @@ namespace cubos::engine
     /// - @ref PreviousPosition - holds the previous position of the entity in a substep.
     /// - @ref AccumulatedCorrection - holds the corrections accumulated from the constraints solving.
     ///
-    /// ## Startup tags
-    /// - do we need any?
-    ///
-    /// ## Internal Simulation Tags
-    /// - `cubos.physics.simulation.prepare`
-    /// - `cubos.physics.simulation.apply_impulses`
-    /// - `cubos.physics.simulation.substeps.integrate`
-    /// - `cubos.physics.simulation.substeps.correct_position`
-    /// - `cubos.physics.simulation.substeps.update_velocity`
-    /// - `cubos.physics.simulation.clear_forces`
-    /// - `cubos.physics.simulation.decrease_accumulator`
-    ///
-    /// ## User Tags
+    /// ## Tags
     /// - `cubos.physics.apply_forces`
 
     /// @brief Plugin entry function.

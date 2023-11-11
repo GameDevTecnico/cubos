@@ -1,3 +1,5 @@
+#include <glm/glm.hpp>
+
 #include <cubos/core/ecs/system/query.hpp>
 
 #include <cubos/engine/physics/plugin.hpp>
@@ -5,8 +7,6 @@
 #include <cubos/engine/transform/plugin.hpp>
 
 #include "physics_accumulator.hpp"
-
-#include <glm/glm.hpp>
 
 using cubos::core::ecs::Query;
 using cubos::core::ecs::Read;
@@ -16,22 +16,33 @@ using namespace cubos::engine;
 
 CUBOS_REFLECT_IMPL(AccumulatedCorrection)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<AccumulatedCorrection>("AccumulatedCorrection").withField("vec", &AccumulatedCorrection::vec).build();
+    return cubos::core::ecs::ComponentTypeBuilder<AccumulatedCorrection>("AccumulatedCorrection")
+        .withField("vec", &AccumulatedCorrection::vec)
+        .build();
 }
 
 CUBOS_REFLECT_IMPL(PhysicsMass)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<PhysicsMass>("PhysicsMass").withField("mass", &PhysicsMass::mass).withField("inverseMass", &PhysicsMass::inverseMass).build();
+    return cubos::core::ecs::ComponentTypeBuilder<PhysicsMass>("PhysicsMass")
+        .withField("mass", &PhysicsMass::mass)
+        .withField("inverseMass", &PhysicsMass::inverseMass)
+        .build();
 }
 
 CUBOS_REFLECT_IMPL(PhysicsVelocity)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<PhysicsVelocity>("PhysicsVelocity").withField("velocity", &PhysicsVelocity::velocity).withField("force", &PhysicsVelocity::force).withField("impulse", &PhysicsVelocity::impulse).build();
+    return cubos::core::ecs::ComponentTypeBuilder<PhysicsVelocity>("PhysicsVelocity")
+        .withField("velocity", &PhysicsVelocity::velocity)
+        .withField("force", &PhysicsVelocity::force)
+        .withField("impulse", &PhysicsVelocity::impulse)
+        .build();
 }
 
 CUBOS_REFLECT_IMPL(PreviousPosition)
 {
-    return cubos::core::ecs::ComponentTypeBuilder<PreviousPosition>("PreviousPosition").withField("vec", &PreviousPosition::vec).build();
+    return cubos::core::ecs::ComponentTypeBuilder<PreviousPosition>("PreviousPosition")
+        .withField("vec", &PreviousPosition::vec)
+        .build();
 }
 
 static void increaseAccumulator(Write<PhysicsAccumulator> accumulator, Read<DeltaTime> deltaTime)
@@ -46,22 +57,23 @@ static void decreaseAccumulator(Write<PhysicsAccumulator> accumulator, Read<Fixe
 
 static bool simulatePhysicsStep(Write<PhysicsAccumulator> accumulator, Read<FixedDeltaTime> fixedDeltaTime)
 {
-    if (accumulator->value >= fixedDeltaTime->value)
-    {
-        return true;
-    }
-    return false;
+    return accumulator->value >= fixedDeltaTime->value;
 }
 
-static void integratePositionSystem(Query<Write<Position>, Write<PreviousPosition>, Write<PhysicsVelocity>, Read<PhysicsMass>> query, Read<Damping> damping, Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
+static void integratePositionSystem(
+    Query<Write<Position>, Write<PreviousPosition>, Write<PhysicsVelocity>, Read<PhysicsMass>> query,
+    Read<Damping> damping, Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
 {
-    float subDeltaTime = fixedDeltaTime->value/(float)substeps->value;
+    float subDeltaTime = fixedDeltaTime->value / (float)substeps->value;
 
     for (auto [entity, position, prevPosition, velocity, mass] : query)
     {
         prevPosition->vec = position->vec;
 
-        if (mass->inverseMass <= 0.0f) return;
+        if (mass->inverseMass <= 0.0F)
+        {
+            return;
+        }
 
         // Apply damping
         velocity->velocity *= glm::pow(damping->value, subDeltaTime);
@@ -79,13 +91,14 @@ static void applyCorrectionSystem(Query<Write<Position>, Write<AccumulatedCorrec
     for (auto [entity, position, correction] : query)
     {
         position->vec += correction->vec;
-        correction->vec = glm::vec3(0,0,0);
+        correction->vec = glm::vec3(0, 0, 0);
     }
 }
 
-static void updateVelocitySystem(Query<Read<Position>, Read<PreviousPosition>, Write<PhysicsVelocity>> query, Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
+static void updateVelocitySystem(Query<Read<Position>, Read<PreviousPosition>, Write<PhysicsVelocity>> query,
+                                 Read<FixedDeltaTime> fixedDeltaTime, Read<Substeps> substeps)
 {
-    float subDeltaTime = fixedDeltaTime->value/(float)substeps->value;
+    float subDeltaTime = fixedDeltaTime->value / (float)substeps->value;
 
     for (auto [entity, position, prevPosition, velocity] : query)
     {
@@ -105,8 +118,8 @@ static void clearForcesSystem(Query<Write<PhysicsVelocity>> query)
 {
     for (auto [entity, velocity] : query)
     {
-        velocity->force = glm::vec3(0,0,0);
-        velocity->impulse = glm::vec3(0,0,0);
+        velocity->force = glm::vec3(0, 0, 0);
+        velocity->impulse = glm::vec3(0, 0, 0);
     }
 }
 
@@ -127,14 +140,34 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
     // executed every frame
     cubos.system(increaseAccumulator).tagged("cubos.physics.simulation.prepare");
 
-    cubos.tag("cubos.physics.apply_forces").after("cubos.physics.simulation.prepare")
-                                           .before("cubos.physics.simulation.substeps.integrate")
-                                           .runIf(simulatePhysicsStep);
+    cubos.tag("cubos.physics.apply_forces")
+        .after("cubos.physics.simulation.prepare")
+        .before("cubos.physics.simulation.substeps.integrate")
+        .runIf(simulatePhysicsStep);
 
-    cubos.system(applyImpulseSystem).tagged("cubos.physics.simulation.apply_impulses").after("cubos.physics.apply_forces").before("cubos.physics.simulation.substeps.integrate").runIf(simulatePhysicsStep);
-    cubos.system(integratePositionSystem).tagged("cubos.physics.simulation.substeps.integrate").after("cubos.physics.simulation.prepare").runIf(simulatePhysicsStep);
-    cubos.system(applyCorrectionSystem).tagged("cubos.physics.simulation.substeps.correct_position").after("cubos.physics.simulation.substeps.integrate").runIf(simulatePhysicsStep);
-    cubos.system(updateVelocitySystem).tagged("cubos.physics.simulation.substeps.update_velocity").after("cubos.physics.simulation.substeps.correct_position").runIf(simulatePhysicsStep);
-    cubos.system(clearForcesSystem).tagged("cubos.physics.simulation.clear_forces").after("cubos.physics.simulation.substeps.update_velocity").runIf(simulatePhysicsStep);
-    cubos.system(decreaseAccumulator).tagged("cubos.physics.simulation.decrease_accumulator").after("cubos.physics.simulation.clear_forces").runIf(simulatePhysicsStep); // at the end of the step
+    cubos.system(applyImpulseSystem)
+        .tagged("cubos.physics.simulation.apply_impulses")
+        .after("cubos.physics.apply_forces")
+        .before("cubos.physics.simulation.substeps.integrate")
+        .runIf(simulatePhysicsStep);
+    cubos.system(integratePositionSystem)
+        .tagged("cubos.physics.simulation.substeps.integrate")
+        .after("cubos.physics.simulation.prepare")
+        .runIf(simulatePhysicsStep);
+    cubos.system(applyCorrectionSystem)
+        .tagged("cubos.physics.simulation.substeps.correct_position")
+        .after("cubos.physics.simulation.substeps.integrate")
+        .runIf(simulatePhysicsStep);
+    cubos.system(updateVelocitySystem)
+        .tagged("cubos.physics.simulation.substeps.update_velocity")
+        .after("cubos.physics.simulation.substeps.correct_position")
+        .runIf(simulatePhysicsStep);
+    cubos.system(clearForcesSystem)
+        .tagged("cubos.physics.simulation.clear_forces")
+        .after("cubos.physics.simulation.substeps.update_velocity")
+        .runIf(simulatePhysicsStep);
+    cubos.system(decreaseAccumulator)
+        .tagged("cubos.physics.simulation.decrease_accumulator")
+        .after("cubos.physics.simulation.clear_forces")
+        .runIf(simulatePhysicsStep); // at the end of the step
 }
