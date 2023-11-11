@@ -41,6 +41,8 @@ add_executable(
     ecs/commands.cpp
     ecs/system.cpp
     ecs/dispatcher.cpp
+    ecs/relation/utils.cpp
+    ecs/relation/table.cpp
 
     geom/box.cpp
     geom/capsule.cpp
