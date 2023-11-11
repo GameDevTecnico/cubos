@@ -30,9 +30,6 @@ namespace cubos::engine
     /// @see Take a look at the @ref examples-engine-physics example for a demonstration of this
     /// plugin.
     ///
-    /// ## Settings
-    /// -
-    ///
     /// ## Resources
     /// - @ref FixedDeltaTime - holds the value of the fixed delta for the physics update.
     /// - @ref Accumulator - holds the progress to the next integration.
@@ -48,8 +45,17 @@ namespace cubos::engine
     /// ## Startup tags
     /// - do we need any?
     ///
-    /// ## Tags
-    /// - `cubos.physics.integrate`
+    /// ## Internal Simulation Tags
+    /// - `cubos.physics.simulation.prepare`
+    /// - `cubos.physics.simulation.apply_impulses`
+    /// - `cubos.physics.simulation.substeps.integrate`
+    /// - `cubos.physics.simulation.substeps.correct_position`
+    /// - `cubos.physics.simulation.substeps.update_velocity`
+    /// - `cubos.physics.simulation.clear_forces`
+    /// - `cubos.physics.simulation.decrease_accumulator`
+    ///
+    /// ## User Tags
+    /// - `cubos.physics.apply_forces`
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class

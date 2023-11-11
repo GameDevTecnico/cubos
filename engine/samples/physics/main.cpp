@@ -60,8 +60,6 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
     auto car = assets->read(CarAsset);
     glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;
 
-    //Position position = Position{{0.0F, 0.0F, 0.0F}};
-
     // Create the car entity
     cmds.create().add(RenderableGrid{CarAsset, offset})
                  .add(Position{{0.0F, 0.0F, 0.0F}})
@@ -103,7 +101,7 @@ int main(int argc, char** argv)
     cubos.startupSystem(setPaletteSystem).after("cubos.renderer.init");
     cubos.startupSystem(spawnCarSystem).after("cubos.settings").after("cubos.assets.bridge");
     
-    cubos.system(pushCarSystem).before("cubos.physics.apply_forces");
+    cubos.system(pushCarSystem).tagged("cubos.physics.apply_forces");
 
     cubos.run();
 }
