@@ -12,17 +12,37 @@ using cubos::core::ecs::Write;
 
 using namespace cubos::engine;
 
-static void increaseAccumulator(Write<Accumulator> accumulator, Read<DeltaTime> deltaTime)
+CUBOS_REFLECT_IMPL(AccumulatedCorrection)
+{
+    return cubos::core::ecs::ComponentTypeBuilder<AccumulatedCorrection>("AccumulatedCorrection").withField("vec", &AccumulatedCorrection::vec).build();
+}
+
+CUBOS_REFLECT_IMPL(PhysicsMass)
+{
+    return cubos::core::ecs::ComponentTypeBuilder<PhysicsMass>("PhysicsMass").withField("mass", &PhysicsMass::mass).withField("inverseMass", &PhysicsMass::inverseMass).build();
+}
+
+CUBOS_REFLECT_IMPL(PhysicsVelocity)
+{
+    return cubos::core::ecs::ComponentTypeBuilder<PhysicsVelocity>("PhysicsVelocity").withField("velocity", &PhysicsVelocity::velocity).withField("force", &PhysicsVelocity::force).withField("impulse", &PhysicsVelocity::impulse).build();
+}
+
+CUBOS_REFLECT_IMPL(PreviousPosition)
+{
+    return cubos::core::ecs::ComponentTypeBuilder<PreviousPosition>("PreviousPosition").withField("vec", &PreviousPosition::vec).build();
+}
+
+static void increaseAccumulator(Write<PhysicsAccumulator> accumulator, Read<DeltaTime> deltaTime)
 {
     accumulator->value += deltaTime->value;
 }
 
-static void decreaseAccumulator(Write<Accumulator> accumulator, Read<FixedDeltaTime> fixedDeltaTime)
+static void decreaseAccumulator(Write<PhysicsAccumulator> accumulator, Read<FixedDeltaTime> fixedDeltaTime)
 {
     accumulator->value -= fixedDeltaTime->value;
 }
 
-static bool simulatePhysicsStep(Write<Accumulator> accumulator, Read<FixedDeltaTime> fixedDeltaTime)
+static bool simulatePhysicsStep(Write<PhysicsAccumulator> accumulator, Read<FixedDeltaTime> fixedDeltaTime)
 {
     if (accumulator->value >= fixedDeltaTime->value)
     {
@@ -94,7 +114,7 @@ void cubos::engine::physicsPlugin(Cubos& cubos)
 
     cubos.addResource<FixedDeltaTime>();
     cubos.addResource<Substeps>();
-    cubos.addResource<Accumulator>();
+    cubos.addResource<PhysicsAccumulator>();
     cubos.addResource<Damping>();
 
     cubos.addComponent<PhysicsVelocity>();

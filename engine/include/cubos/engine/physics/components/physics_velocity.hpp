@@ -5,6 +5,7 @@
 #pragma once
 
 #include <glm/vec3.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -13,6 +14,8 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     struct [[cubos::component("cubos/physics_velocity", VecStorage)]] PhysicsVelocity
     {
+        CUBOS_REFLECT;
+        
         glm::vec3 velocity;
         glm::vec3 force;
         glm::vec3 impulse;

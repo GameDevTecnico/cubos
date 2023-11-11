@@ -5,6 +5,7 @@
 #pragma once
 
 #include <glm/vec3.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 namespace cubos::engine
 {
@@ -12,6 +13,8 @@ namespace cubos::engine
     /// @ingroup physics-plugin
     struct [[cubos::component("cubos/physics_mass", VecStorage)]] PhysicsMass
     {
+        CUBOS_REFLECT;
+
         float mass;
         float inverseMass;
     };
