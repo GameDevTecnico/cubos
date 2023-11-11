@@ -6,6 +6,8 @@
 
 #include <unordered_map>
 
+#include <cubos/core/reflection/reflect.hpp>
+
 #include <cubos/engine/input/action.hpp>
 #include <cubos/engine/input/axis.hpp>
 
@@ -19,6 +21,8 @@ namespace cubos::engine
     class InputBindings final
     {
     public:
+        CUBOS_REFLECT;
+
         InputBindings() = default;
         ~InputBindings() = default;
 

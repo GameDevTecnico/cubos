@@ -1,5 +1,6 @@
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/input/bindings.hpp>
 
@@ -10,6 +11,11 @@ using cubos::core::io::modifiersToString;
 using cubos::core::io::stringToKey;
 using cubos::core::io::stringToModifiers;
 using namespace cubos::engine;
+
+CUBOS_REFLECT_IMPL(cubos::engine::InputBindings)
+{
+    return core::reflection::Type::create("cubos::engine::InputBindings");
+}
 
 const std::unordered_map<std::string, InputAction>& InputBindings::actions() const
 {
