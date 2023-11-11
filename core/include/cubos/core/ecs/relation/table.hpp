@@ -31,7 +31,8 @@ namespace cubos::core::ecs
         /// @param from From index.
         /// @param to To index.
         /// @param value Relation value to move from.
-        void insert(uint32_t from, uint32_t to, const void* value);
+        /// @return Whether the relation already existed.
+        bool insert(uint32_t from, uint32_t to, void* value);
 
         /// @brief Removes a relation between the given indices. If it didn't exist, does nothing.
         /// @param from From index.
@@ -41,11 +42,13 @@ namespace cubos::core::ecs
 
         /// @brief Removes all relations from the given index.
         /// @param from From index.
-        void eraseFrom(uint32_t from);
+        /// @return How many relations were erased.
+        std::size_t eraseFrom(uint32_t from);
 
         /// @brief Removes all relations to the given index.
         /// @param to To index.
-        void eraseTo(uint32_t to);
+        /// @return How many relations were erased.
+        std::size_t eraseTo(uint32_t to);
 
         /// @brief Checks whether the given relation exists between the given indices.
         /// @param from From index.
@@ -105,7 +108,20 @@ namespace cubos::core::ecs
             Link toLink;
         };
 
+        /// @brief Appends the row with the given index to the end of both linked lists.
+        /// @param index Row index.
+        void appendLink(uint32_t index);
+
+        /// @brief Removes references to the row with the given index in both linked lists.
+        /// @param index Row index.
+        void eraseLink(uint32_t index);
+
+        /// @brief Updates the links of the given row such that its neighbors point to it correctly.
+        /// @param index Row index.
+        void updateLink(uint32_t index);
+
         memory::AnyVector mRelations;
+        const reflection::ConstructibleTrait* mConstructibleTrait{nullptr};
         std::vector<Row> mRows;
         std::unordered_map<uint32_t, List> mFromRows;
         std::unordered_map<uint32_t, List> mToRows;
@@ -153,7 +169,7 @@ namespace cubos::core::ecs
         Iterator& operator++();
 
     private:
-        RelationTable& mTable;
+        const RelationTable& mTable;
         uint32_t mRow;
         mutable Output mOutput;
     };
@@ -164,6 +180,11 @@ namespace cubos::core::ecs
         /// @brief Used to iterate over the relations in a view.
         class Iterator;
 
+        /// @brief Constructs.
+        /// @param index Index being iterated over.
+        /// @param isFrom Is the index a from index? If false, its a to index.
+        View(const RelationTable& table, uint32_t index, bool isFrom);
+
         /// @brief Gets an iterator to the first relation of the view.
         /// @return Iterator.
         Iterator begin() const;
@@ -171,6 +192,11 @@ namespace cubos::core::ecs
         /// @brief Gets an iterator which represents the end of the view.
         /// @return Iterator.
         Iterator end() const;
+
+    private:
+        const RelationTable& mTable;
+        uint32_t mIndex;
+        bool mIsFrom;
     };
 
     class RelationTable::View::Iterator final
@@ -215,7 +241,7 @@ namespace cubos::core::ecs
         Iterator& operator++();
 
     private:
-        RelationTable& mTable;
+        const RelationTable& mTable;
         uint32_t mRow;
         bool mIsFrom;
         mutable Output mOutput;
