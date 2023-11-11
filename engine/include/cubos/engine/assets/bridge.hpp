@@ -7,7 +7,8 @@
 
 #pragma once
 
-#include <typeindex>
+#include <cubos/core/reflection/reflect.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/assets/asset.hpp>
 
@@ -30,9 +31,9 @@ namespace cubos::engine
     public:
         /// @brief Constructs a bridge.
         ///
-        /// @param index Type of assets loaded by the bridge.
-        explicit AssetBridge(std::type_index index)
-            : mIndex(index)
+        /// @param type Type of assets loaded by the bridge.
+        explicit AssetBridge(const core::reflection::Type& type)
+            : mType(type)
         {
         }
 
@@ -58,12 +59,12 @@ namespace cubos::engine
 
         /// @brief Gets the type of the assets the bridge loads.
         /// @return Type of the asset.
-        inline std::type_index assetType() const
+        inline const core::reflection::Type& assetType() const
         {
-            return mIndex;
+            return mType;
         }
 
     private:
-        std::type_index mIndex; ///< Type of assets loaded by the bridge
+        const core::reflection::Type& mType; ///< Type of assets loaded by the bridge
     };
 } // namespace cubos::engine

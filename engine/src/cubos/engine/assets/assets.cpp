@@ -5,8 +5,11 @@
 #include <cubos/core/data/old/json_deserializer.hpp>
 #include <cubos/core/data/old/json_serializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/assets/assets.hpp>
+
+using cubos::core::reflection::Type;
 
 using namespace cubos::engine;
 
@@ -306,7 +309,7 @@ void Assets::invalidate(const AnyAsset& handle, bool shouldLock)
     if (assetEntry->data != nullptr)
     {
         CUBOS_ASSERT(assetEntry->destructor != nullptr, "No destructor registered for asset type {}",
-                     assetEntry->type.name());
+                     assetEntry->type->name());
         assetEntry->destructor(assetEntry->data);
         assetEntry->data = nullptr;
         assetEntry->status = Status::Unloaded;
@@ -336,18 +339,17 @@ AssetMetaWrite Assets::writeMeta(const AnyAsset& handle)
 
 Assets::Entry::Entry()
     : refCount(0)
-    , type(typeid(void)) // NOLINT(modernize-redundant-void-arg)
 {
 }
 
-AnyAsset Assets::create(std::type_index type, void* data, void (*destructor)(void*))
+AnyAsset Assets::create(const Type& type, void* data, void (*destructor)(void*))
 {
     // Generate a new UUID and store the asset.
     auto id = uuids::uuid_random_generator(mRandom.value())();
     return this->store(AnyAsset(id), type, data, destructor);
 }
 
-AnyAsset Assets::store(AnyAsset handle, std::type_index type, void* data, void (*destructor)(void*))
+AnyAsset Assets::store(AnyAsset handle, const Type& type, void* data, void (*destructor)(void*))
 {
     // Get or create a new entry for the asset.
     auto assetEntry = this->entry(handle, true);
@@ -364,7 +366,7 @@ AnyAsset Assets::store(AnyAsset handle, std::type_index type, void* data, void (
     if (assetEntry->data != nullptr)
     {
         CUBOS_ASSERT(assetEntry->destructor != nullptr, "No destructor registered for asset type {}",
-                     assetEntry->type.name());
+                     assetEntry->type->name());
         assetEntry->destructor(assetEntry->data);
     }
 
@@ -372,7 +374,7 @@ AnyAsset Assets::store(AnyAsset handle, std::type_index type, void* data, void (
     assetEntry->status = Status::Loaded;
     assetEntry->version++;
     assetEntry->data = data;
-    assetEntry->type = type;
+    assetEntry->type = &type;
     assetEntry->destructor = destructor;
     assetEntry->cond.notify_all();
 
@@ -386,7 +388,7 @@ AnyAsset Assets::store(AnyAsset handle, std::type_index type, void* data, void (
 }
 
 template <typename Lock>
-void* Assets::access(const AnyAsset& handle, std::type_index type, Lock& lock, bool incVersion) const
+void* Assets::access(const AnyAsset& handle, const Type& type, Lock& lock, bool incVersion) const
 {
     CUBOS_ASSERT(!handle.isNull(), "Could not access asset");
 
@@ -421,7 +423,8 @@ void* Assets::access(const AnyAsset& handle, std::type_index type, Lock& lock, b
     }
 
     CUBOS_ASSERT(assetEntry->status == Status::Loaded && assetEntry->data != nullptr, "Could not access asset");
-    CUBOS_ASSERT(assetEntry->type == type, "Type mismatch, expected {}, got {}", type.name(), assetEntry->type.name());
+    CUBOS_ASSERT(assetEntry->type == &type, "Type mismatch, expected {}, got {}", type.name(),
+                 assetEntry->type->name());
 
     if (incVersion)
     {
@@ -435,9 +438,9 @@ void* Assets::access(const AnyAsset& handle, std::type_index type, Lock& lock, b
 // Define the explicit instantiations of the access() function, one for each lock type.
 // Necessary because the function is template - would otherwise cause linker errors.
 
-template void* Assets::access<std::shared_lock<std::shared_mutex>>(const AnyAsset&, std::type_index,
+template void* Assets::access<std::shared_lock<std::shared_mutex>>(const AnyAsset&, const Type&,
                                                                    std::shared_lock<std::shared_mutex>&, bool) const;
-template void* Assets::access<std::unique_lock<std::shared_mutex>>(const AnyAsset&, std::type_index,
+template void* Assets::access<std::unique_lock<std::shared_mutex>>(const AnyAsset&, const Type&,
                                                                    std::unique_lock<std::shared_mutex>&, bool) const;
 
 std::shared_lock<std::shared_mutex> Assets::lockRead(const AnyAsset& handle) const
@@ -593,7 +596,7 @@ void Assets::loader()
         {
             auto assetEntry = this->entry(task.handle);
             CUBOS_ASSERT(assetEntry != nullptr);
-            CUBOS_ASSERT(assetEntry->type == task.bridge->assetType());
+            CUBOS_ASSERT(assetEntry->type == &task.bridge->assetType());
         }
     }
 }
@@ -608,13 +611,13 @@ std::vector<AnyAsset> Assets::listAll() const
     return out;
 }
 
-std::type_index Assets::type(const AnyAsset& handle) const
+const Type& Assets::type(const AnyAsset& handle) const
 {
     auto assetEntry = this->entry(handle);
     CUBOS_ASSERT(assetEntry != nullptr, "Could not find asset's type");
     if (assetEntry->status == Status::Loaded)
     {
-        return assetEntry->type;
+        return *assetEntry->type;
     }
 
     auto bridge = this->bridge(handle);

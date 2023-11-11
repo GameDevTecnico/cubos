@@ -5,6 +5,7 @@
 #pragma once
 
 #include <cubos/core/memory/stream.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/assets/assets.hpp>
 
@@ -23,9 +24,9 @@ namespace cubos::engine
     public:
         /// @brief Constructs a bridge.
         ///
-        /// @param index Type of assets loaded by the bridge.
-        explicit FileBridge(std::type_index index)
-            : AssetBridge(index)
+        /// @param type Type of assets loaded by the bridge.
+        explicit FileBridge(const core::reflection::Type& type)
+            : AssetBridge(type)
         {
         }
 
