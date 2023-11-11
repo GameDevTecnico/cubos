@@ -32,7 +32,7 @@ namespace cubos::engine
     ///
     /// ## Resources
     /// - @ref FixedDeltaTime - holds the value of the fixed delta for the physics update.
-    /// - @ref Accumulator - holds the progress to the next integration.
+    /// - @ref PhysicsAccumulator - holds the progress to the next integration.
     /// - @ref Damping - holds the damping value for integration.
     /// - @ref Substeps - holds the amount of substeps for the physics update.
     ///
@@ -44,6 +44,9 @@ namespace cubos::engine
     ///
     /// ## Tags
     /// - `cubos.physics.apply_forces`
+    ///
+    /// ## Dependencies
+    /// - @ref physics-gravity-plugin
 
     /// @brief Plugin entry function.
     /// @param cubos @b CUBOS. main class
