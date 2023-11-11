@@ -2,7 +2,7 @@
 	"imports": {
 	},
 	"entities": {
-	  "sub_main": {
+	  "main": {
 		"cubos/position": {
 		  "x": 2,
 		  "y": 2,
