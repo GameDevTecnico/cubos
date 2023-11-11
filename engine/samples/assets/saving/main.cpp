@@ -1,4 +1,8 @@
 #include <cubos/core/data/fs/file_system.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/reflect.hpp>
+#include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/assets/bridges/json.hpp>
 #include <cubos/engine/assets/plugin.hpp>
@@ -10,13 +14,22 @@ using cubos::core::data::old::Serializer;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::memory::Stream;
+using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::Type;
+
 using namespace cubos::engine;
 
 /// [Asset type]
 struct IntegerAsset
 {
+    CUBOS_REFLECT;
     int value;
 };
+
+CUBOS_REFLECT_IMPL(IntegerAsset)
+{
+    return Type::create("IntegerAsset").with(FieldsTrait{}.withField("value", &IntegerAsset::value));
+}
 /// [Asset type]
 
 template <>

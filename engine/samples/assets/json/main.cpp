@@ -1,6 +1,11 @@
 #include <vector>
 
 #include <cubos/core/data/fs/file_system.hpp>
+#include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/external/vector.hpp>
+#include <cubos/core/reflection/reflect.hpp>
+#include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/type.hpp>
 
 #include <cubos/engine/assets/bridges/json.hpp>
 #include <cubos/engine/assets/plugin.hpp>
@@ -12,6 +17,8 @@ using cubos::core::data::old::Serializer;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 using cubos::core::memory::Stream;
+using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::Type;
 
 using namespace cubos::engine;
 
@@ -19,8 +26,14 @@ using namespace cubos::engine;
 /// A simple serializable type which we will be saving and loading.
 struct Strings
 {
+    CUBOS_REFLECT;
     std::vector<std::string> strings;
 };
+
+CUBOS_REFLECT_IMPL(Strings)
+{
+    return Type::create("Strings").with(FieldsTrait{}.withField("strings", &Strings::strings));
+}
 /// [Asset type]
 
 /// [Serialization definition]
