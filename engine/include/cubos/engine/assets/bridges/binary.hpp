@@ -7,6 +7,7 @@
 #include <cubos/core/data/old/binary_deserializer.hpp>
 #include <cubos/core/data/old/binary_serializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>
 
@@ -27,7 +28,7 @@ namespace cubos::engine
         /// @brief Constructs a bridge.
         /// @param littleEndian Whether to use little endian byte order.
         BinaryBridge(bool littleEndian = true)
-            : FileBridge(typeid(T))
+            : FileBridge(core::reflection::reflect<T>())
             , mLittleEndian{littleEndian}
         {
         }

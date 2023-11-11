@@ -7,6 +7,7 @@
 #include <cubos/core/data/old/json_deserializer.hpp>
 #include <cubos/core/data/old/json_serializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/assets/bridges/file.hpp>
 
@@ -30,7 +31,7 @@ namespace cubos::engine
         ///
         /// @param indentation Indentation level to use when saving the JSON file.
         JSONBridge(int indentation = 4)
-            : FileBridge(typeid(T))
+            : FileBridge(core::reflection::reflect<T>())
             , mIndentation{indentation}
         {
         }

@@ -13,6 +13,7 @@
 
 #include <cubos/core/memory/guards.hpp>
 #include <cubos/core/memory/type_map.hpp>
+#include <cubos/core/reflection/reflect.hpp>
 
 #include <cubos/engine/assets/bridge.hpp>
 #include <cubos/engine/assets/meta.hpp>
@@ -141,7 +142,7 @@ namespace cubos::engine
             // Create a strong handle to the asset, so that the asset starts loading if it isn't already.
             auto strong = this->load(handle);
             auto lock = this->lockRead(strong);
-            auto data = static_cast<const T*>(this->access(strong, typeid(T), lock, false));
+            auto data = static_cast<const T*>(this->access(strong, core::reflection::reflect<T>(), lock, false));
             return AssetRead<T>(*data, std::move(lock));
         }
 
@@ -199,7 +200,8 @@ namespace cubos::engine
         template <typename T>
         inline Asset<T> create(T data)
         {
-            return this->create(typeid(T), new T(std::move(data)), [](void* data) { delete static_cast<T*>(data); });
+            return this->create(core::reflection::reflect<T>(), new T(std::move(data)),
+                                [](void* data) { delete static_cast<T*>(data); });
         }
 
         /// @brief Stores the given asset data in memory, associated with the given handle.
@@ -215,7 +217,7 @@ namespace cubos::engine
         template <typename T>
         inline AnyAsset store(AnyAsset handle, T data)
         {
-            return this->store(handle, typeid(T), new T(std::move(data)),
+            return this->store(handle, core::reflection::reflect<T>(), new T(std::move(data)),
                                [](void* data) { delete static_cast<T*>(data); });
         }
 
@@ -231,7 +233,7 @@ namespace cubos::engine
         ///
         /// @param handle Handle to check the type for.
         /// @return Asset type.
-        std::type_index type(const AnyAsset& handle) const;
+        const core::reflection::Type& type(const AnyAsset& handle) const;
 
     private:
         /// @brief Represents a known asset - may or may not be loaded.
@@ -247,9 +249,9 @@ namespace cubos::engine
             std::shared_mutex mutex;          ///< Mutex for the asset data.
             std::condition_variable_any cond; ///< Triggered when the asset is loaded.
 
-            void* data{nullptr};       ///< Pointer to the asset data, if loaded. Otherwise, nullptr.
-            std::type_index type;      ///< The type of the asset data - initially typeid(void).
-            void (*destructor)(void*); ///< The destructor for the asset data - initially nullptr.
+            void* data{nullptr};                         ///< Pointer to the asset data, if loaded. Otherwise, nullptr.
+            const core::reflection::Type* type{nullptr}; ///< Type of the asset data.
+            void (*destructor)(void*);                   ///< Destructor for the asset data - initially nullptr.
         };
 
         /// @brief Stores all data necessary to load an asset.
@@ -264,7 +266,7 @@ namespace cubos::engine
         /// @param data Asset data to store.
         /// @param destructor Destructor for the asset data.
         /// @return Strong handle to the asset.
-        AnyAsset create(std::type_index type, void* data, void (*destructor)(void*));
+        AnyAsset create(const core::reflection::Type& type, void* data, void (*destructor)(void*));
 
         /// @brief Untyped version of @ref store().
         /// @param handle Handle to associate the asset with.
@@ -272,7 +274,7 @@ namespace cubos::engine
         /// @param data Asset data to store.
         /// @param destructor Destructor for the asset data.
         /// @return Strong handle to the asset.
-        AnyAsset store(AnyAsset handle, std::type_index type, void* data, void (*destructor)(void*));
+        AnyAsset store(AnyAsset handle, const core::reflection::Type& type, void* data, void (*destructor)(void*));
 
         /// @brief Gets a pointer to the asset data associated with the given handle.
         ///
@@ -287,7 +289,7 @@ namespace cubos::engine
         /// @param incVersion Whether to increase the asset's version.
         /// @return Pointer to the asset's data.
         template <typename Lock>
-        void* access(const AnyAsset& handle, std::type_index type, Lock& lock, bool incVersion) const;
+        void* access(const AnyAsset& handle, const core::reflection::Type& type, Lock& lock, bool incVersion) const;
 
         /// @brief Locks the given asset for reading.
         /// @param handle Handle to lock.

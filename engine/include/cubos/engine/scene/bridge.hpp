@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <cubos/core/reflection/reflect.hpp>
+
 #include <cubos/engine/assets/bridge.hpp>
 #include <cubos/engine/scene/scene.hpp>
 
@@ -49,7 +51,7 @@ namespace cubos::engine
         /// @brief Constructs a bridge.
         ///
         SceneBridge()
-            : AssetBridge(typeid(Scene))
+            : AssetBridge(core::reflection::reflect<Scene>())
         {
         }
 
