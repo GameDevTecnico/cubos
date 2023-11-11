@@ -28,6 +28,7 @@ void Deserializer::hook(const reflection::Type& type, Hook hook)
     if (auto it = mHooks.find(&type); it != mHooks.end())
     {
         CUBOS_WARN("Hook for type '{}' already exists, overwriting", type.name());
+        mHooks.erase(it);
     }
 
     mHooks.emplace(&type, memory::move(hook));
