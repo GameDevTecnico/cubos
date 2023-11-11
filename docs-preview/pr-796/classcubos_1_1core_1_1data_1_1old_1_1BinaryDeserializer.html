@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cubos::core::data::old::BinaryDeserializer class | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data.html">data</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1data_1_1old.html">old</a>::<wbr/></span>BinaryDeserializer <span class="m-thin">class</span>
+        </h1>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<p>Implementation of the abstract <a href="classcubos_1_1core_1_1data_1_1old_1_1Deserializer.html" class="m-doc">Deserializer</a> class for deserializing from raw binary data. This class allows data to be deserialized from both little and big endian formats.</p>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classcubos_1_1core_1_1data_1_1old_1_1Deserializer.html" class="m-doc">Deserializer</a>
+            </dt>
+            <dd></dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a9349670b88e8c24114a16e6a4953de86" class="m-doc">BinaryDeserializer</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream,
+              bool readLittleEndian = true)</span>
+            </dt>
+            <dd></dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae52d7140057d51d2a8a1cd6e32078afa" class="m-doc">readI8</a>(</span><span class="m-doc-wrap">int8_t&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0ba34397130fa17aa821975248c938b0" class="m-doc">readI16</a>(</span><span class="m-doc-wrap">int16_t&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a78fc0aa2ec42f5f179982a8cdba0f041" class="m-doc">readI32</a>(</span><span class="m-doc-wrap">int32_t&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a19399bfde0b3aae1b5e512591a598542" class="m-doc">readI64</a>(</span><span class="m-doc-wrap">int64_t&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0ad28321317e259b0d91bf5207e776cf" class="m-doc">readU8</a>(</span><span class="m-doc-wrap">uint8_t&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#add4b5b866e97c0918464da7f8047d9ce" class="m-doc">readU16</a>(</span><span class="m-doc-wrap">uint16_t&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8bc935ee83c0651d5db73adecf4d1a08" class="m-doc">readU32</a>(</span><span class="m-doc-wrap">uint32_t&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a543c6ce98281d97b199a7e21304cdae8" class="m-doc">readU64</a>(</span><span class="m-doc-wrap">uint64_t&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a36429120230f5fdc3f006ac28ab6f667" class="m-doc">readF32</a>(</span><span class="m-doc-wrap">float&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8189e8aded4e28cdb581d548297ddcb7" class="m-doc">readF64</a>(</span><span class="m-doc-wrap">double&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af162281ae927b0246285a3df6a7d7a96" class="m-doc">readBool</a>(</span><span class="m-doc-wrap">bool&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5edb26b045b983dfe80d1c920f690900" class="m-doc">readString</a>(</span><span class="m-doc-wrap">std::string&amp; value) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad2c6bf3f8bdd810ce7930cc0bd58a447" class="m-doc">beginObject</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#adc23d897a5246cd72194e61c2521f3d6" class="m-doc">endObject</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac7bf914269dc64e004dbe778ba3dc149" class="m-doc">beginArray</a>(</span><span class="m-doc-wrap">) -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa8c63a81164eccd9d4807a6897430236" class="m-doc">endArray</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa496cb9008fb699f72d508309b70405b" class="m-doc">beginDictionary</a>(</span><span class="m-doc-wrap">) -&gt; std::size_t <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8c29e24f847bdfbafca82a7dee810c42" class="m-doc">endDictionary</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9349670b88e8c24114a16e6a4953de86"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9349670b88e8c24114a16e6a4953de86" class="m-doc-self">BinaryDeserializer</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1Stream.html" class="m-doc">memory::<wbr />Stream</a>&amp; stream,
+              bool readLittleEndian = true)</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">stream</td>
+                  <td>The stream to deserialize from.</td>
+                </tr>
+                <tr>
+                  <td>readLittleEndian</td>
+                  <td>If true, the data will be read in little endian format (big endian otherwise).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae52d7140057d51d2a8a1cd6e32078afa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae52d7140057d51d2a8a1cd6e32078afa" class="m-doc-self">readI8</a>(</span><span class="m-doc-wrap">int8_t&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes a signed 8 bit integer. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0ba34397130fa17aa821975248c938b0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ba34397130fa17aa821975248c938b0" class="m-doc-self">readI16</a>(</span><span class="m-doc-wrap">int16_t&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes a signed 16 bit integer. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="a78fc0aa2ec42f5f179982a8cdba0f041"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a78fc0aa2ec42f5f179982a8cdba0f041" class="m-doc-self">readI32</a>(</span><span class="m-doc-wrap">int32_t&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes a signed 32 bit integer. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="a19399bfde0b3aae1b5e512591a598542"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a19399bfde0b3aae1b5e512591a598542" class="m-doc-self">readI64</a>(</span><span class="m-doc-wrap">int64_t&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes a signed 64 bit integer. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0ad28321317e259b0d91bf5207e776cf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ad28321317e259b0d91bf5207e776cf" class="m-doc-self">readU8</a>(</span><span class="m-doc-wrap">uint8_t&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes an unsigned 8 bit integer. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="add4b5b866e97c0918464da7f8047d9ce"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#add4b5b866e97c0918464da7f8047d9ce" class="m-doc-self">readU16</a>(</span><span class="m-doc-wrap">uint16_t&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes an unsigned 16 bit integer. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="a8bc935ee83c0651d5db73adecf4d1a08"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8bc935ee83c0651d5db73adecf4d1a08" class="m-doc-self">readU32</a>(</span><span class="m-doc-wrap">uint32_t&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes an unsigned 32 bit integer. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="a543c6ce98281d97b199a7e21304cdae8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a543c6ce98281d97b199a7e21304cdae8" class="m-doc-self">readU64</a>(</span><span class="m-doc-wrap">uint64_t&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes an unsigned 64 bit integer. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="a36429120230f5fdc3f006ac28ab6f667"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a36429120230f5fdc3f006ac28ab6f667" class="m-doc-self">readF32</a>(</span><span class="m-doc-wrap">float&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes a float. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="a8189e8aded4e28cdb581d548297ddcb7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8189e8aded4e28cdb581d548297ddcb7" class="m-doc-self">readF64</a>(</span><span class="m-doc-wrap">double&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes a double. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="af162281ae927b0246285a3df6a7d7a96"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af162281ae927b0246285a3df6a7d7a96" class="m-doc-self">readBool</a>(</span><span class="m-doc-wrap">bool&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes a boolean. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="a5edb26b045b983dfe80d1c920f690900"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5edb26b045b983dfe80d1c920f690900" class="m-doc-self">readString</a>(</span><span class="m-doc-wrap">std::string&amp; value) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>The value to deserialize.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Deserializes a string. The fail bit is set if the deserialization fails.</p>
+          </div></section>
+          <section class="m-doc-details" id="ad2c6bf3f8bdd810ce7930cc0bd58a447"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad2c6bf3f8bdd810ce7930cc0bd58a447" class="m-doc-self">beginObject</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+<p>Indicates that a object is currently being deserialized. The fail bit is set on failure.</p>
+          </div></section>
+          <section class="m-doc-details" id="adc23d897a5246cd72194e61c2521f3d6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adc23d897a5246cd72194e61c2521f3d6" class="m-doc-self">endObject</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+<p>Indicates that a object is no longer being deserialized. The fail bit is set on failure.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac7bf914269dc64e004dbe778ba3dc149"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac7bf914269dc64e004dbe778ba3dc149" class="m-doc-self">beginArray</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The length of the array.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Indicates that an array is currently being deserialized. The fail bit is set on failure.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa8c63a81164eccd9d4807a6897430236"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa8c63a81164eccd9d4807a6897430236" class="m-doc-self">endArray</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+<p>Indicates that an array is no longer being deserialized. The fail bit is set on failure.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa496cb9008fb699f72d508309b70405b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa496cb9008fb699f72d508309b70405b" class="m-doc-self">beginDictionary</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The length of the dictionary (always 0 on failure).</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Indicates that a dictionary is being deserialized. The fail bit is set on failure.</p>
+          </div></section>
+          <section class="m-doc-details" id="a8c29e24f847bdfbafca82a7dee810c42"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />old::<wbr />BinaryDeserializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8c29e24f847bdfbafca82a7dee810c42" class="m-doc-self">endDictionary</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+<p>Indicates that a dictionary is no longer being deserialized. The fail bit is set on failure.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
