@@ -1,3 +1,6 @@
+#include <cubos/core/reflection/external/string.hpp>
+#include <cubos/core/reflection/reflect.hpp>
+
 #include <cubos/engine/assets/bridges/file.hpp>
 #include <cubos/engine/assets/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
@@ -15,7 +18,7 @@ class TextBridge : public FileBridge
 {
 public:
     TextBridge()
-        : FileBridge(typeid(std::string))
+        : FileBridge(cubos::core::reflection::reflect<std::string>())
     {
     }
     /// [TextBridge]
