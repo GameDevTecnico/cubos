@@ -89,6 +89,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/ecs/system/dispatcher.cpp"
     "src/cubos/core/ecs/system/commands.cpp"
     "src/cubos/core/ecs/relation/reflection.cpp"
+    "src/cubos/core/ecs/relation/table.cpp"
     "src/cubos/core/ecs/blueprint.cpp"
     "src/cubos/core/ecs/world.cpp"
 
