@@ -12,15 +12,20 @@
 
 #include <cubos/engine/physics/plugins/gravity.hpp>
 
-#include <cubos/engine/physics/resources/accumulator.hpp>
 #include <cubos/engine/physics/resources/damping.hpp>
 #include <cubos/engine/physics/resources/fixed_delta_time.hpp>
 #include <cubos/engine/physics/resources/substeps.hpp>
+#include <cubos/engine/physics/resources/accumulator.hpp>
 
 #include <cubos/engine/physics/components/physics_velocity.hpp>
 #include <cubos/engine/physics/components/physics_mass.hpp>
 #include <cubos/engine/physics/components/previous_position.hpp>
 #include <cubos/engine/physics/components/accumulated_correction.hpp>
+
+/// [Component Refl]
+#include <cubos/core/ecs/component/reflection.hpp>
+#include <cubos/core/reflection/external/glm.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 namespace cubos::engine
 {
