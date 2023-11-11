@@ -1,16 +1,17 @@
+#include <cubos/core/ecs/system/query.hpp>
+
+#include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/renderer/directional_light.hpp>
 #include <cubos/engine/renderer/plugin.hpp>
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
-#include <cubos/engine/voxels/plugin.hpp>
-#include <cubos/engine/physics/plugin.hpp>
 #include <cubos/engine/transform/position.hpp>
-#include <cubos/core/ecs/system/query.hpp>
+#include <cubos/engine/voxels/plugin.hpp>
 
 using cubos::core::ecs::Commands;
+using cubos::core::ecs::Query;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
-using cubos::core::ecs::Query;
 
 using namespace cubos::engine;
 
@@ -61,26 +62,29 @@ static void spawnCarSystem(Commands cmds, Read<Assets> assets)
     glm::vec3 offset = glm::vec3(car->size().x, 0.0F, car->size().z) / -2.0F;
 
     // Create the car entity
-    cmds.create().add(RenderableGrid{CarAsset, offset})
-                 .add(Position{{0.0F, 0.0F, 0.0F}})
-                 .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
-                 .add(PhysicsVelocity{.velocity = {0.0F, 0.0F, 0.0F},
-                                      .force = {0.0F, 0.0F, 0.0F},
-                                      .impulse = {0.0F, 0.0F, 0.0F}})
-                 .add(PhysicsMass{.mass = 500.0F, .inverseMass = 1.0F/500.0F})
-                 .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
-                 .add(LocalToWorld{});
+    cmds.create()
+        .add(RenderableGrid{CarAsset, offset})
+        .add(Position{{0.0F, 0.0F, 0.0F}})
+        .add(PreviousPosition{{0.0F, 0.0F, 0.0F}})
+        .add(
+            PhysicsVelocity{.velocity = {0.0F, 0.0F, 0.0F}, .force = {0.0F, 0.0F, 0.0F}, .impulse = {0.0F, 0.0F, 0.0F}})
+        .add(PhysicsMass{.mass = 500.0F, .inverseMass = 1.0F / 500.0F})
+        .add(AccumulatedCorrection{{0.0F, 0.0F, 0.0F}})
+        .add(LocalToWorld{});
 }
 
-static void pushCarSystem(Query<Write<PhysicsVelocity>> query, Write<MaxTime> time, Read<DeltaTime> deltaTime) {
-    for (auto [entity, velocity] : query) {
-        if (time->current < time->max) {
+static void pushCarSystem(Query<Write<PhysicsVelocity>> query, Write<MaxTime> time, Read<DeltaTime> deltaTime)
+{
+    for (auto [entity, velocity] : query)
+    {
+        if (time->current < time->max)
+        {
             if (time->current == 0.0F)
             {
                 velocity->impulse += glm::vec3(0.0F, 5000.0F, 0.0F);
             }
-            velocity->force = velocity->force + glm::vec3(0.0F, 0.0F, -5000.0F);
-            time->current = time->current + deltaTime->value;
+            velocity->force += glm::vec3(0.0F, 0.0F, -5000.0F);
+            time->current += deltaTime->value;
         }
     }
 }
@@ -100,7 +104,7 @@ int main(int argc, char** argv)
     cubos.startupSystem(spawnLightSystem);
     cubos.startupSystem(setPaletteSystem).after("cubos.renderer.init");
     cubos.startupSystem(spawnCarSystem).after("cubos.settings").after("cubos.assets.bridge");
-    
+
     cubos.system(pushCarSystem).tagged("cubos.physics.apply_forces");
 
     cubos.run();
