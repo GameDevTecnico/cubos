@@ -54,13 +54,11 @@
           <ul>
             <li><a href="#autotoc_md75">Resources</a></li>
             <li><a href="#autotoc_md76">Components</a></li>
-            <li><a href="#autotoc_md77">Startup tags</a></li>
-            <li><a href="#autotoc_md78">Internal Simulation Tags</a></li>
-            <li><a href="#autotoc_md79">User Tags</a></li>
-            <li><a href="#autotoc_md80">Resources</a></li>
+            <li><a href="#autotoc_md77">Tags</a></li>
             <li>
               Reference
               <ul>
+                <li><a href="#groups">Modules</a></li>
                 <li><a href="#files">Files</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
                 <li><a href="#func-members">Functions</a></li>
@@ -68,7 +66,14 @@
             </li>
           </ul>
         </nav>
-<p>Adds gravity to particles.</p><aside class="m-note m-default"><h4>See also</h4><p>Take a look at the examples-engine-physics example for a demonstration of this plugin.</p></aside><section id="autotoc_md75"><h3><a href="#autotoc_md75">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li><li><a href="structcubos_1_1engine_1_1Accumulator.html" class="m-doc">Accumulator</a> - holds the progress to the next integration.</li><li><a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> - holds the damping value for integration.</li><li><a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">Substeps</a> - holds the amount of substeps for the physics update.</li></ul></section><section id="autotoc_md76"><h3><a href="#autotoc_md76">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1PhysicsVelocity.html" class="m-doc">PhysicsVelocity</a> - holds the information for moving an object straight.</li><li><a href="structcubos_1_1engine_1_1PhysicsMass.html" class="m-doc">PhysicsMass</a> - holds the mass of an object.</li><li><a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">PreviousPosition</a> - holds the previous position of the entity in a substep.</li><li><a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a> - holds the corrections accumulated from the constraints solving.</li></ul></section><section id="autotoc_md77"><h3><a href="#autotoc_md77">Startup tags</a></h3><ul><li>do we need any?</li></ul></section><section id="autotoc_md78"><h3><a href="#autotoc_md78">Internal Simulation Tags</a></h3><ul><li><code>cubos.physics.simulation.prepare</code></li><li><code>cubos.physics.simulation.apply_impulses</code></li><li><code>cubos.physics.simulation.substeps.integrate</code></li><li><code>cubos.physics.simulation.substeps.correct_position</code></li><li><code>cubos.physics.simulation.substeps.update_velocity</code></li><li><code>cubos.physics.simulation.clear_forces</code></li><li><code>cubos.physics.simulation.decrease_accumulator</code></li></ul></section><section id="autotoc_md79"><h3><a href="#autotoc_md79">User Tags</a></h3><ul><li><code>cubos.physics.apply_forces</code></li></ul></section><section id="autotoc_md80"><h3><a href="#autotoc_md80">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">Gravity</a> - holds the global value of gravity.</li></ul></section>
+<aside class="m-note m-default"><h4>See also</h4><p>Take a look at the examples-engine-physics example for a demonstration of this plugin.</p></aside><section id="autotoc_md75"><h3><a href="#autotoc_md75">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a> - holds the value of the fixed delta for the physics update.</li><li><a href="structcubos_1_1engine_1_1Accumulator.html" class="m-doc">Accumulator</a> - holds the progress to the next integration.</li><li><a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a> - holds the damping value for integration.</li><li><a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">Substeps</a> - holds the amount of substeps for the physics update.</li></ul></section><section id="autotoc_md76"><h3><a href="#autotoc_md76">Components</a></h3><ul><li><a href="structcubos_1_1engine_1_1PhysicsVelocity.html" class="m-doc">PhysicsVelocity</a> - holds the information for moving an object straight.</li><li><a href="structcubos_1_1engine_1_1PhysicsMass.html" class="m-doc">PhysicsMass</a> - holds the mass of an object.</li><li><a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">PreviousPosition</a> - holds the previous position of the entity in a substep.</li><li><a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a> - holds the corrections accumulated from the constraints solving.</li></ul></section><section id="autotoc_md77"><h3><a href="#autotoc_md77">Tags</a></h3><ul><li><code>cubos.physics.apply_forces</code></li></ul></section>
+        <section id="groups">
+          <h2><a href="#groups">Modules</a></h2>
+          <dl class="m-doc">
+            <dt>module <a href="group__physics-gravity-plugin.html" class="m-doc">Physics</a></dt>
+            <dd>Adds gravity to particles.</dd>
+          </dl>
+        </section>
         <section id="files">
           <h2><a href="#files">Files</a></h2>
           <dl class="m-doc">
@@ -81,9 +86,7 @@
             <dt>file <a href="previous__position_8hpp.html" class="m-doc">previous_position.hpp</a></dt>
             <dd>Component <a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">cubos::<wbr />engine::<wbr />PreviousPosition</a>.</dd>
             <dt>file <a href="engine_2include_2cubos_2engine_2physics_2plugin_8hpp.html" class="m-doc">plugin.hpp</a></dt>
-            <dd>Plugin entry point, resources <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">cubos::<wbr />engine::<wbr />FixedDeltaTime</a> and <a href="structcubos_1_1engine_1_1Accumulator.html" class="m-doc">cubos::<wbr />engine::<wbr />Accumulator</a> and components <a href="structcubos_1_1engine_1_1PhysicsVelocity.html" class="m-doc">cubos::<wbr />engine::<wbr />PhysicsVelocity</a> and <a href="structcubos_1_1engine_1_1PhysicsMass.html" class="m-doc">cubos::<wbr />engine::<wbr />PhysicsMass</a>.</dd>
-            <dt>file <a href="plugins_2gravity_8hpp.html" class="m-doc">gravity.hpp</a></dt>
-            <dd>Gravity plugin, resource <a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">cubos::<wbr />engine::<wbr />Gravity</a>.</dd>
+            <dd>Plugin entry point.</dd>
             <dt>file <a href="accumulator_8hpp.html" class="m-doc">accumulator.hpp</a></dt>
             <dd>Resource <a href="structcubos_1_1engine_1_1Accumulator.html" class="m-doc">cubos::<wbr />engine::<wbr />Accumulator</a>.</dd>
             <dt>file <a href="damping_8hpp.html" class="m-doc">damping.hpp</a></dt>
@@ -144,10 +147,6 @@
               <span class="m-doc-wrap-bumper">void <a href="#ga007d2fbda4c9e539aa45f5f888163b4f" class="m-doc">physicsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga3b5a6fa98c210f215a8edebfb7a7b330" class="m-doc">gravityPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
           </dl>
         </section>
         <section>
@@ -156,24 +155,6 @@
             <h3>
               <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga007d2fbda4c9e539aa45f5f888163b4f" class="m-doc-self">physicsPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="engine_2include_2cubos_2engine_2physics_2plugin_8hpp.html">&lt;engine/physics/plugin.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ga3b5a6fa98c210f215a8edebfb7a7b330"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga3b5a6fa98c210f215a8edebfb7a7b330" class="m-doc-self">gravityPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="plugins_2gravity_8hpp.html">&lt;engine/physics/plugins/gravity.hpp&gt;</a></div>
             </h3>
             <p>Plugin entry function.</p>
             <table class="m-table m-fullwidth m-flat">
