@@ -11,6 +11,7 @@ using cubos::core::reflection::Type;
 
 AnyVector::~AnyVector()
 {
+    this->clear();
     operator delete(mData, static_cast<std::align_val_t>(mConstructibleTrait->alignment()));
 }
 
