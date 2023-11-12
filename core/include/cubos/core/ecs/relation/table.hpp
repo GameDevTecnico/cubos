@@ -11,7 +11,26 @@
 
 namespace cubos::core::ecs
 {
-    /// @brief A table which stores relations.
+    /// @brief A table which stores relations. Allows for quick insertion, deletion and iteration.
+    ///
+    /// Internally, the table is stored simply as a vector of relations and their data. Each row in
+    /// this table stores:
+    /// - the 'from' entity index;
+    /// - the 'to' entity index;
+    /// - the previous and next rows with the same 'from' index;
+    /// - the previous and next rows with the same 'to' index;
+    /// - the relation data itself.
+    ///
+    /// To make random accesses more efficient, we also store an hashtable which maps entity index
+    /// pairs to rows. This way, we can quickly check if a relation exists or where it's stored.
+    ///
+    /// Additionally, we store two other hashtables, one which associate 'from' and 'to' indices to
+    /// rows in the table which represent the first and last nodes of linked lists, where each node
+    /// is a row with the same 'from' or 'to' index, depending on the list.
+    ///
+    /// These linked lists are essential to provide fast query times, as instead of having to
+    /// iterate over the entire table and filter for entity, we only need to follow the linked
+    /// list chain.
     class RelationTable final
     {
     public:
