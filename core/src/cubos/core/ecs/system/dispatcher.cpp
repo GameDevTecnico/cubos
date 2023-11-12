@@ -10,6 +10,7 @@ void Dispatcher::SystemSettings::copyFrom(const SystemSettings* other)
     std::unique_copy(other->after.tag.begin(), other->after.tag.end(), std::back_inserter(this->after.tag));
     std::unique_copy(other->before.system.begin(), other->before.system.end(), std::back_inserter(this->before.system));
     std::unique_copy(other->after.system.begin(), other->after.system.end(), std::back_inserter(this->after.system));
+    std::unique_copy(other->inherits.begin(), other->inherits.end(), std::back_inserter(this->inherits));
     this->conditions |= other->conditions;
 }
 
@@ -98,13 +99,18 @@ void Dispatcher::systemSetBeforeTag(const std::string& tag)
 
 void Dispatcher::handleTagInheritance(std::shared_ptr<SystemSettings>& settings)
 {
+    if (settings->collapsed)
+    {
+        return;
+    }
+    settings->collapsed = true;
+
     for (auto& parentTag : settings->inherits)
     {
         auto& parentSettings = mTagSettings[parentTag];
         handleTagInheritance(parentSettings);
         settings->copyFrom(parentSettings.get());
     }
-    settings->inherits.clear();
 }
 
 void Dispatcher::compileChain()
@@ -118,6 +124,20 @@ void Dispatcher::compileChain()
     // Implement system tag settings with custom settings
     for (System* system : mPendingSystems)
     {
+        // Add inherited tags to systems
+        std::unordered_set<std::string> inherited{};
+        for (const auto& tag : system->tags)
+        {
+            for (const auto& inheritedTag : mTagSettings[tag]->inherits)
+            {
+                inherited.emplace(inheritedTag);
+            }
+        }
+        for (auto& tag : inherited)
+        {
+            system->tags.emplace(std::move(tag));
+        }
+
         // Add negative tags when the system doesn't have the respective positive tags
         for (auto& [tag, settings] : mTagSettings)
         {
@@ -272,11 +292,9 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
 
         if (system->settings != nullptr)
         {
-            auto conditionsMask = system->settings->conditions;
-            std::size_t i = 0;
-            while (conditionsMask.any())
+            for (std::size_t i = 0; i < system->settings->conditions.size(); ++i)
             {
-                if (conditionsMask.test(0))
+                if (system->settings->conditions.test(i))
                 {
                     // We have a condition, check if it has run already
                     if (!mRunConditions.test(i))
@@ -294,9 +312,6 @@ void Dispatcher::callSystems(World& world, CommandBuffer& cmds)
                         break;
                     }
                 }
-
-                i += 1;
-                conditionsMask >>= 1;
             }
         }
 

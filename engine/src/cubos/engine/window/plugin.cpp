@@ -38,6 +38,8 @@ static void render(Read<Window> window)
 
 void cubos::engine::windowPlugin(Cubos& cubos)
 {
+    cubos.named("cubos::engine::windowPlugin");
+
     cubos.addPlugin(settingsPlugin);
 
     cubos.addResource<Window>();

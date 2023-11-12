@@ -42,6 +42,8 @@ static void applyTransform(Query<Write<LocalToWorld>, OptRead<Position>, OptRead
 
 void cubos::engine::transformPlugin(Cubos& cubos)
 {
+    cubos.named("cubos::engine::transformPlugin");
+
     cubos.addComponent<Position>();
     cubos.addComponent<Rotation>();
     cubos.addComponent<Scale>();

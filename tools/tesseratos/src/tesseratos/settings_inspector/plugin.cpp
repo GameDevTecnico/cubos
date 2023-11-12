@@ -39,6 +39,8 @@ static void inspector(Write<Settings> settings)
 
 void tesseratos::settingsInspectorPlugin(Cubos& cubos)
 {
+    cubos.named("tesseratos::settingsInspectorPlugin");
+
     cubos.addPlugin(cubos::engine::settingsPlugin);
     cubos.addPlugin(cubos::engine::imguiPlugin);
 

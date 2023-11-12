@@ -8,6 +8,7 @@ set(TESSERATOS_SOURCE
     "src/tesseratos/asset_explorer/plugin.cpp"
     "src/tesseratos/settings_inspector/plugin.cpp"
     "src/tesseratos/entity_selector/plugin.cpp"
+    "src/tesseratos/pause/plugin.cpp"
     "src/tesseratos/world_inspector/plugin.cpp"
     "src/tesseratos/entity_inspector/plugin.cpp"
     "src/tesseratos/scene_editor/plugin.cpp"

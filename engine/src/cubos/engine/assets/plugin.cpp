@@ -34,6 +34,8 @@ static void cleanup(Write<Assets> assets)
 
 void cubos::engine::assetsPlugin(Cubos& cubos)
 {
+    cubos.named("cubos::engine::assetsPlugin");
+
     cubos.addPlugin(settingsPlugin);
 
     cubos.addResource<Assets>();

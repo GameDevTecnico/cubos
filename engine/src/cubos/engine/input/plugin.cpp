@@ -29,6 +29,8 @@ static void update(Read<Window> window, Write<Input> input, EventReader<WindowEv
 
 void cubos::engine::inputPlugin(Cubos& cubos)
 {
+    cubos.named("cubos::engine::inputPlugin");
+
     cubos.addPlugin(assetsPlugin);
     cubos.addPlugin(windowPlugin);
 

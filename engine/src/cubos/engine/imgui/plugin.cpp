@@ -38,6 +38,8 @@ static void end()
 
 void cubos::engine::imguiPlugin(Cubos& cubos)
 {
+    cubos.named("cubos::engine::imguiPlugin");
+
     cubos.addPlugin(windowPlugin);
     cubos.addPlugin(rendererPlugin);
 

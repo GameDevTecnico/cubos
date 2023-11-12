@@ -256,6 +256,8 @@ static void sceneEditorSystem(Commands cmds, Write<SceneInfo> scene, Write<Entit
 
 void tesseratos::sceneEditorPlugin(Cubos& cubos)
 {
+    cubos.named("tesseratos::sceneEditorPlugin");
+
     cubos.addPlugin(cubos::engine::scenePlugin);
 
     cubos.addPlugin(entitySelectorPlugin);

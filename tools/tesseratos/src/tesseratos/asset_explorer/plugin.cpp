@@ -138,6 +138,8 @@ static void showAssets(Read<Assets> assets, Write<Settings> settings, EventWrite
 
 void tesseratos::assetExplorerPlugin(Cubos& cubos)
 {
+    cubos.named("tesseratos::assetExplorerPlugin");
+
     cubos.addEvent<AssetSelectedEvent>();
 
     cubos.addPlugin(cubos::engine::imguiPlugin);

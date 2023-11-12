@@ -61,6 +61,11 @@ namespace cubos::engine
         /// @return Reference to this object, for chaining.
         TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::string>& tags);
 
+        /// @brief Tags all systems with this tag with the given tag.
+        /// @param tag Tag to be added.
+        /// @return Reference to this object, for chaining.
+        TagBuilder& tagged(const std::string& tag);
+
         /// @brief Sets the current tag to be executed before another tag.
         /// @param tag Tag to be executed before.
         /// @return Reference to this object, for chaining.
@@ -165,6 +170,10 @@ namespace cubos::engine
         template <typename E>
         Cubos& addEvent();
 
+        /// @brief Gives a name to the current plugin. All systems added will be tagged with it.
+        /// @param name Plugin name.
+        Cubos& named(std::string name);
+
         /// @brief Returns a @ref TagBuilder to configure the systems with the given tag.
         /// @param tag Tag.
         /// @return @ref TagBuilder.
@@ -208,12 +217,16 @@ namespace cubos::engine
         void run();
 
     private:
+        void addNameTags();
+
         core::ecs::Dispatcher mMainDispatcher;
         core::ecs::Dispatcher mStartupDispatcher;
         core::ecs::World mWorld;
         std::set<void (*)(Cubos&)> mPlugins;
         std::vector<std::string> mMainTags;
         std::vector<std::string> mStartupTags;
+
+        std::string mPluginName;
     };
 
     // Implementation.
@@ -258,6 +271,11 @@ namespace cubos::engine
     SystemBuilder Cubos::system(F func)
     {
         mMainDispatcher.addSystem(func);
+        this->addNameTags();
+        if (!mPluginName.empty())
+        {
+            mMainDispatcher.systemAddTag(mPluginName);
+        }
         return {mMainDispatcher, mStartupTags};
     }
 

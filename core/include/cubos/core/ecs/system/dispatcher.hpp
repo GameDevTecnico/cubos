@@ -139,6 +139,7 @@ namespace cubos::core::ecs
             std::bitset<CUBOS_CORE_DISPATCHER_MAX_CONDITIONS> conditions;
             // TODO: Add threading modes, etc...
             std::vector<std::string> inherits;
+            bool collapsed = false;
         };
 
         /// @brief Internal class to handle tag settings

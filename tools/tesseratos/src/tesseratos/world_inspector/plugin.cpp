@@ -41,6 +41,8 @@ static void inspectWorld(Write<World> world)
 
 void tesseratos::worldInspectorPlugin(Cubos& cubos)
 {
+    cubos.named("tesseratos::worldInspectorPlugin");
+
     cubos.addPlugin(cubos::engine::imguiPlugin);
 
     cubos.addPlugin(entitySelectorPlugin);

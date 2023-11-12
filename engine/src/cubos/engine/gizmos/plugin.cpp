@@ -263,6 +263,8 @@ static void initGizmosSystem(Write<GizmosRenderer> gizmosRenderer, Read<Window> 
 
 void cubos::engine::gizmosPlugin(Cubos& cubos)
 {
+    cubos.named("cubos::engine::gizmosPlugin");
+
     cubos.addPlugin(cubos::engine::windowPlugin);
 
     cubos.addResource<Gizmos>();

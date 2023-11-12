@@ -28,6 +28,13 @@ TagBuilder::TagBuilder(core::ecs::Dispatcher& dispatcher, std::vector<std::strin
 {
 }
 
+TagBuilder& TagBuilder::tagged(const std::string& tag)
+{
+    mTags.push_back(tag);
+    mDispatcher.tagInheritTag(tag);
+    return *this;
+}
+
 TagBuilder& TagBuilder::before(const std::string& tag)
 {
     mTags.push_back(tag);
@@ -85,13 +92,22 @@ Cubos& Cubos::addPlugin(void (*func)(Cubos&))
 {
     if (!mPlugins.contains(func))
     {
+        auto name = mPluginName;
+        mPluginName.clear();
         func(*this);
+        mPluginName = name;
         mPlugins.insert(func);
     }
     else
     {
         CUBOS_TRACE("Plugin was already registered!");
     }
+    return *this;
+}
+
+Cubos& Cubos::named(std::string name)
+{
+    mPluginName = std::move(name);
     return *this;
 }
 
@@ -158,4 +174,16 @@ void Cubos::run()
         mWorld.write<DeltaTime>().get().value = std::chrono::duration<float>(currentTime - previousTime).count();
         previousTime = currentTime;
     } while (!mWorld.read<ShouldQuit>().get().value);
+}
+
+void Cubos::addNameTags()
+{
+    auto name = mPluginName;
+    std::size_t pos = std::string::npos;
+    do
+    {
+        name = name.substr(0, pos);
+        mMainDispatcher.systemAddTag(name);
+        pos = name.find_last_of("::");
+    } while (pos != std::string::npos);
 }

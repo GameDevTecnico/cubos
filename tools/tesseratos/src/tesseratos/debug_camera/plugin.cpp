@@ -60,6 +60,8 @@ static void changeToDebugCameraSystem(Write<ActiveCameras> camera, Write<DebugCa
 
 void tesseratos::debugCameraPlugin(Cubos& cubos)
 {
+    cubos.named("tesseratos::debugCameraPlugin");
+
     cubos.addPlugin(cubos::engine::imguiPlugin);
 
     cubos.startupSystem(createDebugCameraSystem);

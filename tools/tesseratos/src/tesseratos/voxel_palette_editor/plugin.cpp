@@ -182,6 +182,8 @@ static void voxelPaletteEditorSystem(Write<Assets> assets, Write<SelectedPalette
 
 void tesseratos::voxelPaletteEditorPlugin(Cubos& cubos)
 {
+    cubos.named("tesseratos::voxelPaletteEditorPlugin");
+
     cubos.addPlugin(cubos::engine::rendererPlugin);
     cubos.addPlugin(cubos::engine::imguiPlugin);
     cubos.addPlugin(cubos::engine::voxelsPlugin);

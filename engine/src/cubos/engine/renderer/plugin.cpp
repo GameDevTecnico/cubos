@@ -195,6 +195,8 @@ static void draw(Write<Renderer> renderer, Read<ActiveCameras> activeCameras, Wr
 
 void cubos::engine::rendererPlugin(Cubos& cubos)
 {
+    cubos.named("cubos::engine::rendererPlugin");
+
     cubos.addPlugin(transformPlugin);
     cubos.addPlugin(windowPlugin);
     cubos.addPlugin(assetsPlugin);
