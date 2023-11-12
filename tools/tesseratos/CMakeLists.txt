@@ -6,6 +6,7 @@ option(BUILD_TESSERATOS_SAMPLES "Build tesseratos samples" OFF)
 set(TESSERATOS_SOURCE
     "src/tesseratos/plugin.cpp"
     "src/tesseratos/asset_explorer/plugin.cpp"
+    "src/tesseratos/asset_explorer/popup.cpp"
     "src/tesseratos/settings_inspector/plugin.cpp"
     "src/tesseratos/entity_selector/plugin.cpp"
     "src/tesseratos/world_inspector/plugin.cpp"
