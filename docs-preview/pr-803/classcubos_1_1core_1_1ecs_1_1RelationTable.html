@@ -49,7 +49,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1ecs.html">ecs</a>::<wbr/></span>RelationTable <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="table_8hpp.html">&lt;core/ecs/relation/table.hpp&gt;</a></div>
         </h1>
-        <p>A table which stores relations.</p>
+        <p>A table which stores relations. Allows for quick insertion, deletion and iteration.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -62,6 +62,7 @@
             </li>
           </ul>
         </nav>
+<p>Internally, the table is stored simply as a vector of relations and their data. Each row in this table stores:</p><ul><li>the &#x27;from&#x27; entity index;</li><li>the &#x27;to&#x27; entity index;</li><li>the previous and next rows with the same &#x27;from&#x27; index;</li><li>the previous and next rows with the same &#x27;to&#x27; index;</li><li>the relation data itself.</li></ul><p>To make random accesses more efficient, we also store an hashtable which maps entity index pairs to rows. This way, we can quickly check if a relation exists or where it&#x27;s stored.</p><p>Additionally, we store two other hashtables, one which associate &#x27;from&#x27; and &#x27;to&#x27; indices to rows in the table which represent the first and last nodes of linked lists, where each node is a row with the same &#x27;from&#x27; or &#x27;to&#x27; index, depending on the list.</p><p>These linked lists are essential to provide fast query times, as instead of having to iterate over the entire table and filter for entity, we only need to follow the linked list chain.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
