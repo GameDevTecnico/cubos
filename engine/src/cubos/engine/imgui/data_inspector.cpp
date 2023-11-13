@@ -352,10 +352,12 @@ bool DataInspector::editKnown(const std::string& name, const Type& type, void* v
     if (type.is<bool>())
     {
         supported = true;
-        if (ImGui::Checkbox(name.c_str(), static_cast<bool*>(value)))
+        ImGui::PushID(name.c_str());
+        if (ImGui::Checkbox("", static_cast<bool*>(value)))
         {
             modified = true;
         }
+        ImGui::PopID();
     }
     if (type.is<std::string>())
     {
