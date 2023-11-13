@@ -114,6 +114,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#aac30eb37d91b1d9ef86bb3a3b5282dd7" class="m-doc">get</a>(</span><span class="m-doc-wrap">) const -&gt; const void*</span>
             </dt>
             <dd>Gets a pointer to the underlying value.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a91529d9827f34c6b7edffec253b24d86" class="m-doc">valid</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Checks whether value is valid or not (holds a value).</dd>
           </dl>
         </section>
         <section>
@@ -140,7 +144,7 @@
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p><code>type</code> must have <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">reflection::<wbr />ConstructibleTrait</a> and be default.</p><p>mType member must not be null. constructible.</p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p><code>type</code> must have <a href="classcubos_1_1core_1_1reflection_1_1ConstructibleTrait.html" class="m-doc">reflection::<wbr />ConstructibleTrait</a> and be default constructible.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a06356f1e50e63416aeb082bab57755ba"><div>
             <h3>
@@ -247,7 +251,7 @@
                 </tr>
               </tfoot>
             </table>
-<aside class="m-note m-info"><h4>Note</h4><p>mType member must not be null.</p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html#a91529d9827f34c6b7edffec253b24d86" class="m-doc">valid()</a> must return true.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a98bf958b10fb2e0a2a7aa69ed486f4f3"><div>
             <h3>
@@ -273,6 +277,20 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a91529d9827f34c6b7edffec253b24d86"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />AnyValue::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a91529d9827f34c6b7edffec253b24d86" class="m-doc-self">valid</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Checks whether value is valid or not (holds a value).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True is valid.</td>
                 </tr>
               </tfoot>
             </table>
