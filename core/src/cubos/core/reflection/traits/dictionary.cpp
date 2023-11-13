@@ -205,6 +205,22 @@ DictionaryTrait::View::Iterator::Iterator(Iterator&& other) noexcept
     other.mInner = nullptr;
 }
 
+DictionaryTrait::View::Iterator& DictionaryTrait::View::Iterator::operator=(const Iterator& other)
+{
+    if (mInner != nullptr)
+    {
+        mView.mTrait.mStop(mInner, true);
+        mInner = nullptr;
+    }
+
+    if (other.mInner != nullptr)
+    {
+        mInner = mView.mTrait.mFind(reinterpret_cast<uintptr_t>(mView.mInstance), other->key, true);
+    }
+
+    return *this;
+}
+
 bool DictionaryTrait::View::Iterator::operator==(const Iterator& other) const
 {
     return mInner == other.mInner || (mInner != nullptr && other.mInner != nullptr && (*this)->value == other->value);
@@ -269,6 +285,22 @@ DictionaryTrait::ConstView::Iterator::Iterator(Iterator&& other) noexcept
     , mInner(other.mInner)
 {
     other.mInner = nullptr;
+}
+
+DictionaryTrait::ConstView::Iterator& DictionaryTrait::ConstView::Iterator::operator=(const Iterator& other)
+{
+    if (mInner != nullptr)
+    {
+        mView.mTrait.mStop(mInner, false);
+        mInner = nullptr;
+    }
+
+    if (other.mInner != nullptr)
+    {
+        mInner = mView.mTrait.mFind(reinterpret_cast<uintptr_t>(mView.mInstance), other->key, false);
+    }
+
+    return *this;
 }
 
 bool DictionaryTrait::ConstView::Iterator::operator==(const Iterator& other) const
