@@ -94,7 +94,13 @@ static void emitCollisionEventSystem(Query<const Collider&> query, const BroadPh
             pos.z = c1.z + (b1.halfSize.z * s.z);
         }
 
-        events.push(CollisionEvent{ent1, ent2, penetration, normal, pos});
+        events.push(CollisionEvent{
+            .entity = ent1,
+            .other = ent2,
+            .penetration = penetration,
+            .position = pos,
+            .normal = normal,
+        });
     }
 }
 
