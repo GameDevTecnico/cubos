@@ -66,24 +66,40 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aba341ee78ed984702d2070a05a1ce8ef" class="m-doc">inspect</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <span class="m-doc-wrap-bumper">void <a href="#ad6864e88a320cdcd2bc14efb72c477f1" class="m-doc">show</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
-              void* value,
-              bool readOnly = true) -&gt; bool</span>
+              const void* value)</span>
             </dt>
-            <dd>Inspect a reflective object.</dd>
+            <dd>Displays a reflective object, with read permissions.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa53f84bbc1eeb36c282f8bfbdfdd127c" class="m-doc">edit</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              void* value) -&gt; bool</span>
+            </dt>
+            <dd>Displays a reflective object, with read &amp; write permissions.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="#ae8e40918e0aa774f9ffc356e141f6623" class="m-doc">show</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              const T&amp; value)</span>
+            </dt>
+            <dd>Displays a reflective object, with read permissions.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0b322d88948c9cfeb1adff79aa7de11c" class="m-doc">edit</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              T&amp; value) -&gt; bool</span>
+            </dt>
+            <dd>Displays a reflective object, with read &amp; write permissions.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="aba341ee78ed984702d2070a05a1ce8ef"><div>
+          <section class="m-doc-details" id="ad6864e88a320cdcd2bc14efb72c477f1"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aba341ee78ed984702d2070a05a1ce8ef" class="m-doc-self">inspect</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad6864e88a320cdcd2bc14efb72c477f1" class="m-doc-self">show</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
-              void* value,
-              bool readOnly = true)</span></span>
+              const void* value)</span></span>
             </h3>
-            <p>Inspect a reflective object.</p>
+            <p>Displays a reflective object, with read permissions.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -101,9 +117,109 @@
                   <td>value</td>
                   <td>A pointer to the object&#x27;s value.</td>
                 </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This should always be called inside a <code>ImGui::BeginTable(..., 2)</code> and <code>ImGui::EndTable()</code>.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aa53f84bbc1eeb36c282f8bfbdfdd127c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa53f84bbc1eeb36c282f8bfbdfdd127c" class="m-doc-self">edit</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              void* value)</span></span>
+            </h3>
+            <p>Displays a reflective object, with read &amp; write permissions.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
                 <tr>
-                  <td>readOnly</td>
-                  <td>A flag that indicates wether this field can be modified.</td>
+                  <td style="width: 1%">name</td>
+                  <td>The name of the object.</td>
+                </tr>
+                <tr>
+                  <td>type</td>
+                  <td>The reflection type of the object.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>A pointer to the object&#x27;s value.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if object was modified.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This should always be called inside a <code>ImGui::BeginTable(..., 2)</code> and <code>ImGui::EndTable()</code>.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ae8e40918e0aa774f9ffc356e141f6623"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8e40918e0aa774f9ffc356e141f6623" class="m-doc-self">show</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              const T&amp; value)</span></span>
+            </h3>
+            <p>Displays a reflective object, with read permissions.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>The type of the object.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td>The name of the object.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>A pointer to the object&#x27;s value.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This should always be called inside a <code>ImGui::BeginTable(..., 2)</code> and <code>ImGui::EndTable()</code>.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a0b322d88948c9cfeb1adff79aa7de11c"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b322d88948c9cfeb1adff79aa7de11c" class="m-doc-self">edit</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              T&amp; value)</span></span>
+            </h3>
+            <p>Displays a reflective object, with read &amp; write permissions.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>The type of the object.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td>The name of the object.</td>
+                </tr>
+                <tr>
+                  <td>value</td>
+                  <td>A pointer to the object&#x27;s value.</td>
                 </tr>
               </tbody>
               <tfoot>
