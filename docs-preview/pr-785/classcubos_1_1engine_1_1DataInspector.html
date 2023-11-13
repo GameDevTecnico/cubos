@@ -49,7 +49,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1engine.html">engine</a>::<wbr/></span>DataInspector <span class="m-thin">class</span> <span class="m-label m-flat m-warning">final</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="data__inspector_8hpp.html">&lt;engine/imgui/data_inspector.hpp&gt;</a></div>
         </h1>
-        <p>Resource which allows the user to inspect or modify any reflectable value in the UI.</p>
+        <p>Resource which allows the user to inspect or modify any reflectable value on the UI.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -70,25 +70,25 @@
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
               const void* value)</span>
             </dt>
-            <dd>Displays a reflective object, with read permissions.</dd>
+            <dd>Displays a reflectable value on the UI.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aa53f84bbc1eeb36c282f8bfbdfdd127c" class="m-doc">edit</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
               void* value) -&gt; bool</span>
             </dt>
-            <dd>Displays a reflective object, with read &amp; write permissions.</dd>
+            <dd>Displays a reflectable value on the UI and allows modifying it.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#ae8e40918e0aa774f9ffc356e141f6623" class="m-doc">show</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const T&amp; value)</span>
             </dt>
-            <dd>Displays a reflective object, with read permissions.</dd>
+            <dd>Displays a reflectable value on the UI.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#a0b322d88948c9cfeb1adff79aa7de11c" class="m-doc">edit</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               T&amp; value) -&gt; bool</span>
             </dt>
-            <dd>Displays a reflective object, with read &amp; write permissions.</dd>
+            <dd>Displays a reflectable value on the UI and allows modifying it.</dd>
           </dl>
         </section>
         <section>
@@ -99,7 +99,7 @@
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
               const void* value)</span></span>
             </h3>
-            <p>Displays a reflective object, with read permissions.</p>
+            <p>Displays a reflectable value on the UI.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -107,15 +107,15 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">name</td>
-                  <td>The name of the object.</td>
+                  <td>Value name.</td>
                 </tr>
                 <tr>
                   <td>type</td>
-                  <td>The reflection type of the object.</td>
+                  <td>Value type.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>A pointer to the object&#x27;s value.</td>
+                  <td>Pointer to value.</td>
                 </tr>
               </tbody>
             </table>
@@ -127,7 +127,7 @@
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">core::<wbr />reflection::<wbr />Type</a>&amp; type,
               void* value)</span></span>
             </h3>
-            <p>Displays a reflective object, with read &amp; write permissions.</p>
+            <p>Displays a reflectable value on the UI and allows modifying it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -135,21 +135,21 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">name</td>
-                  <td>The name of the object.</td>
+                  <td>Value name.</td>
                 </tr>
                 <tr>
                   <td>type</td>
-                  <td>The reflection type of the object.</td>
+                  <td>Value type.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>A pointer to the object&#x27;s value.</td>
+                  <td>Pointer to value.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if object was modified.</td>
+                  <td>Whether the object was modified.</td>
                 </tr>
               </tfoot>
             </table>
@@ -163,7 +163,7 @@
               <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8e40918e0aa774f9ffc356e141f6623" class="m-doc-self">show</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               const T&amp; value)</span></span>
             </h3>
-            <p>Displays a reflective object, with read permissions.</p>
+            <p>Displays a reflectable value on the UI.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -171,7 +171,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the object.</td>
+                  <td>Value type.</td>
                 </tr>
               </tbody>
               <thead>
@@ -180,11 +180,11 @@
               <tbody>
                 <tr>
                   <td>name</td>
-                  <td>The name of the object.</td>
+                  <td>Value name.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>A pointer to the object&#x27;s value.</td>
+                  <td>Pointer to value.</td>
                 </tr>
               </tbody>
             </table>
@@ -198,7 +198,7 @@
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />engine::<wbr />DataInspector::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b322d88948c9cfeb1adff79aa7de11c" class="m-doc-self">edit</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
               T&amp; value)</span></span>
             </h3>
-            <p>Displays a reflective object, with read &amp; write permissions.</p>
+            <p>Displays a reflectable value on the UI and allows modifying it.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -206,7 +206,7 @@
               <tbody>
                 <tr>
                   <td style="width: 1%">T</td>
-                  <td>The type of the object.</td>
+                  <td>Value type.</td>
                 </tr>
               </tbody>
               <thead>
@@ -215,17 +215,17 @@
               <tbody>
                 <tr>
                   <td>name</td>
-                  <td>The name of the object.</td>
+                  <td>Value name.</td>
                 </tr>
                 <tr>
                   <td>value</td>
-                  <td>A pointer to the object&#x27;s value.</td>
+                  <td>Pointer to value.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if object was modified.</td>
+                  <td>Whether the object was modified.</td>
                 </tr>
               </tfoot>
             </table>
