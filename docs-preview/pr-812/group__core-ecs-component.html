@@ -58,7 +58,6 @@
               <ul>
                 <li><a href="#files">Files</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
                 <li><a href="#define-members">Defines</a></li>
               </ul>
             </li>
@@ -130,97 +129,25 @@
             <dd><a href="classcubos_1_1core_1_1ecs_1_1Storage.html" class="m-doc">Storage</a> implementation that uses a <code>std::vector</code>.</dd>
           </dl>
         </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ga93f9d5a14d6a474ffc9d4a13bd519988" class="m-doc">getComponentName</a>(</span><span class="m-doc-wrap">) -&gt; std::optional&lt;std::string_view&gt;</span>
-            </dt>
-            <dd>Gets the registered name of a component type.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#gab37efb9cb0f658b74c920bd7748a63e4" class="m-doc">getComponentName</a>(</span><span class="m-doc-wrap">const reflection::Type&amp; type) -&gt; std::optional&lt;std::string_view&gt;</span>
-            </dt>
-            <dd>Gets the registered name of a component type.</dd>
-          </dl>
-        </section>
         <section id="define-members">
           <h2><a href="#define-members">Defines</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">#define <a href="#ga151d8a86189699bd9cb2cf264c35bd55" class="m-doc">CUBOS_REGISTER_COMPONENT</a>(</span><span class="m-doc-wrap">type,
-              storageType,
-              name)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="#gae6a5a3abcb5ce8c9b1ee84187fea9cf4" class="m-doc">CUBOS_REGISTER_COMPONENT</a>(</span><span class="m-doc-wrap">type,
+              storageType)</span>
             </dt>
-            <dd>Macro used to register a component type as an alternative to calling <a href="classcubos_1_1core_1_1ecs_1_1Registry.html#a7248388cb6c49a540714cd5eff2a40e8" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr />add()</a> manually.</dd>
+            <dd>Macro used to register a component type as an alternative to calling <a href="classcubos_1_1core_1_1ecs_1_1Registry.html#ac48847a026d412e2d866737c57721ad9" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr />add()</a> manually.</dd>
           </dl>
         </section>
         <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga93f9d5a14d6a474ffc9d4a13bd519988"><div>
-            <h3>
-              <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2ecs_2component_2manager_8hpp.html">&lt;core/ecs/component/manager.hpp&gt;</a></div>
-              <div class="m-doc-template">
-                template&lt;typename T&gt;
-              </div>
-              <span class="m-doc-wrap-bumper">std::optional&lt;std::string_view&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga93f9d5a14d6a474ffc9d4a13bd519988" class="m-doc-self">getComponentName</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Gets the registered name of a component type.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Template parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">T</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Registered name of the component type.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>If the component type is not registered, aborts the program.</p>
-          </div></section>
-          <section class="m-doc-details" id="gab37efb9cb0f658b74c920bd7748a63e4"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">std::optional&lt;std::string_view&gt; </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gab37efb9cb0f658b74c920bd7748a63e4" class="m-doc-self">getComponentName</a>(</span><span class="m-doc-wrap">const reflection::Type&amp; type)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="core_2include_2cubos_2core_2ecs_2component_2manager_8hpp.html">&lt;core/ecs/component/manager.hpp&gt;</a></div>
-            </h3>
-            <p>Gets the registered name of a component type.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">type</td>
-                  <td>Component type.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>Registered name of the component type.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>If the component type is not registered, aborts the program.</p>
-          </div></section>
-        </section>
-        <section>
           <h2>Define documentation</h2>
-          <section class="m-doc-details" id="ga151d8a86189699bd9cb2cf264c35bd55"><div>
+          <section class="m-doc-details" id="gae6a5a3abcb5ce8c9b1ee84187fea9cf4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">#define <a href="#ga151d8a86189699bd9cb2cf264c35bd55" class="m-doc-self">CUBOS_REGISTER_COMPONENT</a>(</span><span class="m-doc-wrap">type,
-              storageType,
-              name)</span>
+              <span class="m-doc-wrap-bumper">#define <a href="#gae6a5a3abcb5ce8c9b1ee84187fea9cf4" class="m-doc-self">CUBOS_REGISTER_COMPONENT</a>(</span><span class="m-doc-wrap">type,
+              storageType)</span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="registry_8hpp.html">&lt;core/ecs/component/registry.hpp&gt;</a></div>
             </h3>
-            <p>Macro used to register a component type as an alternative to calling <a href="classcubos_1_1core_1_1ecs_1_1Registry.html#a7248388cb6c49a540714cd5eff2a40e8" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr />add()</a> manually.</p>
+            <p>Macro used to register a component type as an alternative to calling <a href="classcubos_1_1core_1_1ecs_1_1Registry.html#ac48847a026d412e2d866737c57721ad9" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Registry::<wbr />add()</a> manually.</p>
 <aside class="m-note m-danger"><h4>Warning</h4><p>Care must be taken to ensure that this macro is included from at least one translation unit (think of it as a .cpp file) in the executable, otherwise the component type may not be registered. E.g.: keeping it hidden in a .cpp file on a library may not work.</p></aside>
           </div></section>
         </section>
