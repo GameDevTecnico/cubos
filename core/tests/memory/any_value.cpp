@@ -35,6 +35,17 @@ TEST_CASE("memory::AnyValue")
             CHECK(any.type().is<int>());
             CHECK(*static_cast<int*>(any.get()) == value);
         }
+
+        SUBCASE("move assignment")
+        {
+            int value = 1337;
+            AnyValue any{};
+            REQUIRE_FALSE(any.valid());
+            any = AnyValue::moveConstruct(reflect<int>(), &value);
+            REQUIRE(any.valid());
+            CHECK(any.type().is<int>());
+            CHECK(*static_cast<int*>(any.get()) == value);
+        }
     }
 
     SUBCASE("detect destructor")
