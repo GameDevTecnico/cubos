@@ -77,8 +77,13 @@
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="a74fb0f38a010ead89cff260353bb8253">
-              using <a href="#a74fb0f38a010ead89cff260353bb8253" class="m-doc-self">Hook</a> = bool(*)(<a href="classcubos_1_1core_1_1data_1_1Serializer.html" class="m-doc">Serializer</a>&amp;ser, const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;type, const void*value)
+            <dt id="ad1af71b36468fd55651795ece522061e">
+              using <a href="#ad1af71b36468fd55651795ece522061e" class="m-doc-self">Hook</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(const void*)&gt;
+            </dt>
+            <dd>Function type for serialization hooks.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              using <a href="#ab063f7016f2cf1d779128e31d02563fe" class="m-doc">TypedHook</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(const T&amp;)&gt;
             </dt>
             <dd>Function type for serialization hooks.</dd>
           </dl>
@@ -98,12 +103,12 @@
             <dd>Serialize the given value.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#ad0b67002c71e4aeac40c5e793bf55490" class="m-doc">hook</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
-              <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a74fb0f38a010ead89cff260353bb8253" class="m-doc">Hook</a> hook)</span>
+              <a href="classcubos_1_1core_1_1data_1_1Serializer.html#ad1af71b36468fd55651795ece522061e" class="m-doc">Hook</a> hook)</span>
             </dt>
             <dd>Sets the hook to be called on serialization of the given type.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="#a14615389e585f45dff474a6948e0e48e" class="m-doc">hook</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html#a74fb0f38a010ead89cff260353bb8253" class="m-doc">Hook</a> hook)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#afed41415b3022bb9130ddb32be2753e0" class="m-doc">hook</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html#ab063f7016f2cf1d779128e31d02563fe" class="m-doc">TypedHook</a>&lt;T&gt; hook)</span>
             </dt>
             <dd>Sets the hook to be called on serialization of the given type.</dd>
           </dl>
@@ -117,6 +122,29 @@
             </dt>
             <dd>Called for each type with no hook defined.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Typedef documentation</h2>
+          <section class="m-doc-details" id="ab063f7016f2cf1d779128e31d02563fe"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              using cubos::<wbr />core::<wbr />data::<wbr />Serializer::<wbr /><a href="#ab063f7016f2cf1d779128e31d02563fe" class="m-doc-self">TypedHook</a> = <a href="classcubos_1_1core_1_1memory_1_1Function.html" class="m-doc">memory::<wbr />Function</a>&lt;bool(const T&amp;)&gt;
+            </h3>
+            <p>Function type for serialization hooks.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
         <section>
           <h2>Function documentation</h2>
@@ -186,7 +214,7 @@
           <section class="m-doc-details" id="ad0b67002c71e4aeac40c5e793bf55490"><div>
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />Serializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0b67002c71e4aeac40c5e793bf55490" class="m-doc-self">hook</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; type,
-              <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a74fb0f38a010ead89cff260353bb8253" class="m-doc">Hook</a> hook)</span></span>
+              <a href="classcubos_1_1core_1_1data_1_1Serializer.html#ad1af71b36468fd55651795ece522061e" class="m-doc">Hook</a> hook)</span></span>
             </h3>
             <p>Sets the hook to be called on serialization of the given type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -205,12 +233,12 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a14615389e585f45dff474a6948e0e48e"><div>
+          <section class="m-doc-details" id="afed41415b3022bb9130ddb32be2753e0"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />Serializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a14615389e585f45dff474a6948e0e48e" class="m-doc-self">hook</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html#a74fb0f38a010ead89cff260353bb8253" class="m-doc">Hook</a> hook)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />data::<wbr />Serializer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afed41415b3022bb9130ddb32be2753e0" class="m-doc-self">hook</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1Serializer.html#ab063f7016f2cf1d779128e31d02563fe" class="m-doc">TypedHook</a>&lt;T&gt; hook)</span></span>
             </h3>
             <p>Sets the hook to be called on serialization of the given type.</p>
             <table class="m-table m-fullwidth m-flat">

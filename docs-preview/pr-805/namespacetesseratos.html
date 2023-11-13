@@ -82,17 +82,17 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aedf66022dd90c113653dd56d4d5e5fa6" class="m-doc">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
-              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>* selectedAssetBuffer,
+              <span class="m-doc-wrap-bumper">auto <a href="#a35e8918ab93d0b2e3098c18ba4c923b8" class="m-doc">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
+              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>&amp; selectedAsset,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Type</a>&amp; type,
-              const <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Read</a>&lt;<a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&gt;&amp; assets) -&gt; bool</span>
+              const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&amp; assets) -&gt; bool</span>
             </dt>
             <dd>Displays a modal popup to select an asset of a specified type.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac9fc556889a29533f5943cef7f498062" class="m-doc">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
-              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>* selectedAssetBuffer,
-              const <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Read</a>&lt;<a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&gt;&amp; assets) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0becf5f97e0bb1f761d4df74b01697ff" class="m-doc">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
+              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>&amp; selectedAsset,
+              const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&amp; assets) -&gt; bool</span>
             </dt>
             <dd>Displays a modal popup to select an asset of a specified type.</dd>
             <dt>
@@ -131,12 +131,12 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="aedf66022dd90c113653dd56d4d5e5fa6"><div>
+          <section class="m-doc-details" id="a35e8918ab93d0b2e3098c18ba4c923b8"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool tesseratos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aedf66022dd90c113653dd56d4d5e5fa6" class="m-doc-self">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
-              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>* selectedAssetBuffer,
+              <span class="m-doc-wrap-bumper">bool tesseratos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a35e8918ab93d0b2e3098c18ba4c923b8" class="m-doc-self">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
+              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>&amp; selectedAsset,
               const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Type</a>&amp; type,
-              const <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Read</a>&lt;<a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&gt;&amp; assets)</span></span>
+              const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&amp; assets)</span></span>
               <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="popup_8hpp.html">&lt;tesseratos/asset_explorer/popup.hpp&gt;</a></div>
             </h3>
             <p>Displays a modal popup to select an asset of a specified type.</p>
@@ -150,8 +150,8 @@
                   <td>The title of the popup.</td>
                 </tr>
                 <tr>
-                  <td>selectedAssetBuffer</td>
-                  <td>Pointer to store the selected asset.</td>
+                  <td>selectedAsset</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>type</td>
@@ -170,15 +170,15 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac9fc556889a29533f5943cef7f498062"><div>
+          <section class="m-doc-details" id="a0becf5f97e0bb1f761d4df74b01697ff"><div>
             <h3>
               <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="popup_8hpp.html">&lt;tesseratos/asset_explorer/popup.hpp&gt;</a></div>
               <div class="m-doc-template">
                 template&lt;typename T&gt;
               </div>
-              <span class="m-doc-wrap-bumper">bool tesseratos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac9fc556889a29533f5943cef7f498062" class="m-doc-self">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
-              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>* selectedAssetBuffer,
-              const <a href="classcubos_1_1core_1_1ecs_1_1Read.html" class="m-doc">cubos::<wbr />core::<wbr />ecs::<wbr />Read</a>&lt;<a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&gt;&amp; assets)</span></span>
+              <span class="m-doc-wrap-bumper">bool tesseratos::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0becf5f97e0bb1f761d4df74b01697ff" class="m-doc-self">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
+              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>&amp; selectedAsset,
+              const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&amp; assets)</span></span>
             </h3>
             <p>Displays a modal popup to select an asset of a specified type.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -200,8 +200,8 @@
                   <td>The title of the popup.</td>
                 </tr>
                 <tr>
-                  <td>selectedAssetBuffer</td>
-                  <td>Pointer to store the selected asset.</td>
+                  <td>selectedAsset</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>assets</td>
