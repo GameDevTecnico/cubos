@@ -293,6 +293,11 @@ namespace cubos::core::reflection
         /// @param other Other iterator.
         Iterator(Iterator&& other) noexcept;
 
+        /// @brief Assigns an iterator.
+        /// @param other Other iterator.
+        /// @return Iterator.
+        Iterator& operator=(const Iterator& other);
+
         /// @brief Compares two iterators.
         /// @param other Other iterator.
         /// @return Whether the iterators point to the same entry.
@@ -350,6 +355,11 @@ namespace cubos::core::reflection
         /// @brief Move constructs.
         /// @param other Other iterator.
         Iterator(Iterator&& other) noexcept;
+
+        /// @brief Assigns an iterator.
+        /// @param other Other iterator.
+        /// @return Iterator.
+        Iterator& operator=(const Iterator& other);
 
         /// @brief Compares two iterators.
         /// @param other Other iterator.
