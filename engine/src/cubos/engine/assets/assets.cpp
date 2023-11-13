@@ -280,7 +280,13 @@ bool Assets::update(AnyAsset& handle) const
         return false;
     }
 
-    if (assetEntry->version > handle.getVersion())
+    if (handle.mId != handle.reflectedId)
+    {
+        handle = AnyAsset{handle.reflectedId};
+        handle.mVersion = assetEntry->version;
+        return true;
+    }
+    else if (assetEntry->version > handle.getVersion())
     {
         handle.mVersion = assetEntry->version;
         return true;

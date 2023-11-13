@@ -83,7 +83,7 @@ AnyAsset& AnyAsset::operator=(const AnyAsset& other)
 AnyAsset& AnyAsset::operator=(AnyAsset&& other) noexcept
 {
     this->decRef();
-    reflectedId = other.mId;
+    reflectedId = other.reflectedId;
     mId = other.mId;
     mRefCount = other.mRefCount;
     mVersion = other.mVersion;
