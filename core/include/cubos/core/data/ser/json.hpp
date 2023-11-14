@@ -18,12 +18,14 @@ namespace cubos::core::data
         JSONSerializer();
 
         /// @brief Outputs the serialized JSON.
+        /// @ref write must be called before this.
+        /// @return JSON.
         nlohmann::json output();
 
     protected:
         bool decompose(const reflection::Type& type, const void* value) override;
 
     private:
-        nlohmann::json mJSON = nlohmann::json::object(); ///< The JSON object that holds the serialized data.
+        nlohmann::json mJSON = nlohmann::json::object(); ///< Resulting JSON object.
     };
 } // namespace cubos::core::data
