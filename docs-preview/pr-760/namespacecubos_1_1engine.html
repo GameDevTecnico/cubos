@@ -64,6 +64,7 @@
             </li>
           </ul>
         </nav>
+<p>[Component Refl]</p>
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
@@ -118,6 +119,10 @@
             </dt>
             <dd>Component which adds a collider to an entity.</dd>
             <dt>
+              struct <a href="structcubos_1_1engine_1_1CollisionEvent.html" class="m-doc">CollisionEvent</a>
+            </dt>
+            <dd>Represents a collision event.</dd>
+            <dt>
               struct <a href="structcubos_1_1engine_1_1BoxCollisionShape.html" class="m-doc">BoxCollisionShape</a>
             </dt>
             <dd>Component which adds a box collision shape to an entity, used with a <a href="structcubos_1_1engine_1_1Collider.html" class="m-doc">Collider</a> component.</dd>
@@ -154,6 +159,10 @@
             </dt>
             <dd>Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.</dd>
             <dt>
+              class <a href="classcubos_1_1engine_1_1DataInspector.html" class="m-doc">DataInspector</a>
+            </dt>
+            <dd>Resource which allows the user to inspect or modify any reflectable value on the UI.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1InputAction.html" class="m-doc">InputAction</a>
             </dt>
             <dd>Stores the state of a single input action, such as &quot;jump&quot; or &quot;attack&quot;.</dd>
@@ -169,6 +178,38 @@
               class <a href="classcubos_1_1engine_1_1Input.html" class="m-doc">Input</a>
             </dt>
             <dd>Resource which stores the input bindings for multiple players.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1AccumulatedCorrection.html" class="m-doc">AccumulatedCorrection</a>
+            </dt>
+            <dd>Component which holds the corrections accumulated from the constraints solving.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1PhysicsMass.html" class="m-doc">PhysicsMass</a>
+            </dt>
+            <dd>Component which defines the mass of a particle.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1PhysicsVelocity.html" class="m-doc">PhysicsVelocity</a>
+            </dt>
+            <dd>Component which holds velocity and forces applied on a particle.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1PreviousPosition.html" class="m-doc">PreviousPosition</a>
+            </dt>
+            <dd>Component which holds the previous position of the entity. Used for the integrator on the update velocity step.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Damping.html" class="m-doc">Damping</a>
+            </dt>
+            <dd>Resource which holds the damping value for integration.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1FixedDeltaTime.html" class="m-doc">FixedDeltaTime</a>
+            </dt>
+            <dd>Resouce which holds the value of the fixed delta for the physics update.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">Gravity</a>
+            </dt>
+            <dd>Resouce which holds the global value of gravity.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Substeps.html" class="m-doc">Substeps</a>
+            </dt>
+            <dd>Resouce which holds the amount of substeps for the physics update.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1Camera.html" class="m-doc">Camera</a>
             </dt>
@@ -234,10 +275,6 @@
             </dt>
             <dd>Represents a voxel vertex.</dd>
             <dt>
-              struct <a href="structcubos_1_1engine_1_1Viewport.html" class="m-doc">Viewport</a>
-            </dt>
-            <dd>Component which defines parameters of a viewport.</dd>
-            <dt>
               class <a href="classcubos_1_1engine_1_1SceneBridge.html" class="m-doc">SceneBridge</a>
             </dt>
             <dd>Bridge which loads and saves <a href="structcubos_1_1engine_1_1Scene.html" class="m-doc">Scene</a> assets.</dd>
@@ -249,6 +286,10 @@
               class <a href="classcubos_1_1engine_1_1Settings.html" class="m-doc">Settings</a>
             </dt>
             <dd>Stores settings as key-value pairs and provides methods to retrieve them.</dd>
+            <dt>
+              struct <a href="structcubos_1_1engine_1_1Viewport.html" class="m-doc">Viewport</a>
+            </dt>
+            <dd>Component which defines parameters of a viewport, the actual screen space that will be used by the camera it is attached to. Useful for having multiple camera views shown on screen.</dd>
             <dt>
               struct <a href="structcubos_1_1engine_1_1LocalToWorld.html" class="m-doc">LocalToWorld</a>
             </dt>
@@ -367,6 +408,14 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__physics-plugin.html#ga007d2fbda4c9e539aa45f5f888163b4f" class="m-doc">physicsPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="group__physics-gravity-plugin.html#ga3b5a6fa98c210f215a8edebfb7a7b330" class="m-doc">gravityPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
+            </dt>
+            <dd>Plugin entry function.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__renderer-plugin.html#ga5e2f1e278c0da877790b407a535d665b" class="m-doc">rendererPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -389,14 +438,6 @@
             </dt>
             <dd>Plugin entry function.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a23129ecbaa3f85f2eaabc295255878d5" class="m-doc">setViewportCameras</a>(</span><span class="m-doc-wrap">glm::ivec2 position,
-              glm::ivec2 size,
-              int count,
-              glm::ivec2* positions,
-              glm::ivec2* sizes)</span>
-            </dt>
-            <dd>Splits the viewport recursively for the given cameras.</dd>
-            <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__transform-plugin.html#ga2c61d596bb784b0791e87d0fc8197f54" class="m-doc">transformPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
@@ -409,46 +450,6 @@
             </dt>
             <dd>Plugin entry function.</dd>
           </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a23129ecbaa3f85f2eaabc295255878d5"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />engine::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a23129ecbaa3f85f2eaabc295255878d5" class="m-doc-self">setViewportCameras</a>(</span><span class="m-doc-wrap">glm::ivec2 position,
-              glm::ivec2 size,
-              int count,
-              glm::ivec2* positions,
-              glm::ivec2* sizes)</span></span>
-            </h3>
-            <p>Splits the viewport recursively for the given cameras.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">position</td>
-                  <td><a href="structcubos_1_1engine_1_1Viewport.html" class="m-doc">Viewport</a> position.</td>
-                </tr>
-                <tr>
-                  <td>size</td>
-                  <td><a href="structcubos_1_1engine_1_1Viewport.html" class="m-doc">Viewport</a> size.</td>
-                </tr>
-                <tr>
-                  <td>count</td>
-                  <td>How many cameras need to be fitted in to the given viewport.</td>
-                </tr>
-                <tr>
-                  <td>positions</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>sizes</td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
         </section>
       </div>
     </div>
