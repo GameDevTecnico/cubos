@@ -6,7 +6,7 @@
 using cubos::core::data::JSONSerializer;
 using cubos::core::reflection::Type;
 
-auto jsonVal = nlohmann::json::object(); ///< The current JSON value that is being serialized.
+auto jsonVal = nlohmann::json::object();
 
 /// [MACRO to add hooks for primitive types]
 #define AUTO_HOOK(type, ...)                                                                                           \
@@ -46,17 +46,21 @@ nlohmann::json JSONSerializer::output()
 
 /// [Decomposing types]
 #include <cubos/core/reflection/traits/array.hpp>
+#include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
+#include <cubos/core/reflection/traits/string_conversion.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using cubos::core::reflection::ArrayTrait;
+using cubos::core::reflection::DictionaryTrait;
 using cubos::core::reflection::FieldsTrait;
+using cubos::core::reflection::StringConversionTrait;
 
 bool JSONSerializer::decompose(const Type& type, const void* value)
 {
     if (type.has<ArrayTrait>())
     {
-        nlohmann::json jsonArr; ///< Hold current JSON array
+        auto jsonArr = nlohmann::json::array();
 
         const auto& arrayTrait = type.get<ArrayTrait>();
 
@@ -64,6 +68,7 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
         {
             if (!this->write(arrayTrait.elementType(), element))
             {
+                CUBOS_WARN("Could not deserialize array element");
                 return false;
             }
             jsonArr.push_back(mJSON);
@@ -72,12 +77,16 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
         mJSON = jsonArr;
         return true;
     }
-    /// [Decomposing types]
 
-    /// [Decomposing types with fields]
+    if (type.has<StringConversionTrait>())
+    {
+        const auto& trait = type.get<StringConversionTrait>();
+        mJSON = trait.into(value);
+    }
+
     if (type.has<FieldsTrait>())
     {
-        nlohmann::json jsonObj; ///< Hold current JSON object
+        auto jsonObj = nlohmann::json::object();
 
         for (const auto& [field, fieldValue] : type.get<FieldsTrait>().view(value))
         {
@@ -91,7 +100,28 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
         return true;
     }
 
+    if (type.has<DictionaryTrait>())
+    {
+        const auto& trait = type.get<DictionaryTrait>();
+
+        auto jsonObj = nlohmann::json::object();
+
+        for (auto [entryKey, entryValue] : trait.view(value))
+        {
+            if (!this->write(trait.keyType(), entryKey))
+            {
+                CUBOS_WARN("Could not write dictionary key");
+            }
+            auto keyVal = jsonVal;
+
+            if (!this->write(trait.valueType(), entryValue))
+            {
+                CUBOS_WARN("Could not write dictionary value");
+            }
+            jsonObj[keyVal] = jsonVal;
+        }
+    }
+
     CUBOS_WARN("Cannot decompose '{}'", type.name());
     return false;
 }
-/// [Decomposing types with fields]
