@@ -1,0 +1,40 @@
+{
+    "actions": {},
+    "axes": {
+        "free-horizontal-x": {
+            "pos": [
+                "w",
+                "Up"
+            ],
+            "neg": [
+                "s",
+                "Down"
+            ],
+            "gamepad": [
+                "LY"
+            ]
+        },
+        "free-horizontal-y": {
+            "pos": [
+                "d",
+                "Right"
+            ],
+            "neg": [
+                "a",
+                "Left"
+            ],
+            "gamepad": [
+                "LX"
+            ]
+        },
+        "free-vertical": {
+            "pos": [
+                "Space"
+            ],
+            "neg": [
+                "shift"
+            ],
+            "gamepad": []
+        }
+    }
+}
