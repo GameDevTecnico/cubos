@@ -1,9 +1,13 @@
-#include <cubos/core/data/ser/json.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/stream.hpp>
 
-using cubos::core::data::JSONSerializer;
 using cubos::core::memory::Stream;
+
+/// [Include]
+#include <cubos/core/data/ser/json.hpp>
+
+using cubos::core::data::JSONSerializer;
+/// [Include]
 
 /// [Usage]
 #include <glm/vec3.hpp>
