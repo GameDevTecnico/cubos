@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Engine &raquo; Physics &raquo; Gravity module | CUBOS. Docs</title>
+  <title>JSON Serializer | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,61 +46,24 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="group__engine.html">Engine</a> &raquo;</span>
-          <span class="m-breadcrumb"><a href="group__physics-plugin.html">Physics</a> &raquo;</span>
-          Gravity <span class="m-thin">module</span></h1>
-        <p>Adds gravity to particles.</p>
-        <nav class="m-block m-default">
-          <h3>Contents</h3>
-          <ul>
-            <li><a href="#autotoc_md82">Resources</a></li>
-            <li>
-              Reference
-              <ul>
-                <li><a href="#files">Files</a></li>
-                <li><a href="#func-members">Functions</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-<section id="autotoc_md82"><h3><a href="#autotoc_md82">Resources</a></h3><ul><li><a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">Gravity</a> - holds the global value of gravity.</li></ul></section>
-        <section id="files">
-          <h2><a href="#files">Files</a></h2>
-          <dl class="m-doc">
-            <dt>file <a href="plugins_2gravity_8hpp.html" class="m-doc">gravity.hpp</a></dt>
-            <dd>Gravity plugin, resource <a href="structcubos_1_1engine_1_1Gravity.html" class="m-doc">cubos::<wbr />engine::<wbr />Gravity</a>.</dd>
-          </dl>
-        </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ga3b5a6fa98c210f215a8edebfb7a7b330" class="m-doc">gravityPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span>
-            </dt>
-            <dd>Plugin entry function.</dd>
-          </dl>
-        </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ga3b5a6fa98c210f215a8edebfb7a7b330"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga3b5a6fa98c210f215a8edebfb7a7b330" class="m-doc-self">gravityPlugin</a>(</span><span class="m-doc-wrap">Cubos&amp; cubos)</span></span>
-              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="plugins_2gravity_8hpp.html">&lt;engine/physics/plugins/gravity.hpp&gt;</a></div>
-            </h3>
-            <p>Plugin entry function.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">cubos</td>
-                  <td><strong>CUBOS</strong>. main class</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-        </section>
+          JSON Serializer
+        </h1>
+        <p>Implementing <a href="classcubos_1_1core_1_1data_1_1JSONSerializer.html" class="m-doc">JSONSerializer</a>.</p>
+<p><a name="md_data_ser_json_page"></a></p><aside class="m-note m-default"><h4>See also</h4><p>Full source code <a href="https://github.com/GameDevTecnico/cubos/tree/main/core/samples/data/ser/json">here</a>.</p></aside><p>You&#x27;ll need to include <a href="core_2include_2cubos_2core_2data_2ser_2json_8hpp.html" class="m-doc">core/<wbr />data/<wbr />ser/<wbr />json.hpp</a>. For simplicity, in this sample we&#x27;ll use the following aliases:</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/data/ser/serializer.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">data</span><span class="o">::</span><span class="n">Serializer</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">cubos</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">reflection</span><span class="o">::</span><span class="n">Type</span><span class="p">;</span></pre><p>Using the json serializer is as simple as calling <a href="classcubos_1_1core_1_1data_1_1Serializer.html#a4baab0fc3ce1b9c40bd33a4e9081c43e" class="m-doc">JSONSerializer::<wbr />write</a> on the data we want to serialize.</p><section id="autotoc_md53"><h2><a href="#autotoc_md53">Update this section with final sample version</a></h2><p>In this case, we&#x27;ll be serializing a <code>std::vector&lt;glm::ivec3&gt;</code>, which is an array of objects with three <code>int32_t</code> fields.</p></section><section id="autotoc_md54"><h2><a href="#autotoc_md54">Update this section with final sample version</a></h2><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;glm/vec3.hpp&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/external/glm.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/external/vector.hpp&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">glm</span><span class="o">::</span><span class="n">ivec3</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec</span><span class="p">{{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">}};</span>
+
+<span class="w">    </span><span class="n">MySerializer</span><span class="w"> </span><span class="n">ser</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">ser</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span>
+<span class="p">}</span></pre><p>This should output:</p><pre class="m-code"><span class="c1">// [{x: 1, y: 2, z: 3, }, {x: 4, y: 5, z: 6, }, ]</span></pre></section>
       </div>
     </div>
   </div>
