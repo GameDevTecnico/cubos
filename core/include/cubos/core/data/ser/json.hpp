@@ -26,6 +26,8 @@ namespace cubos::core::data
         bool decompose(const reflection::Type& type, const void* value) override;
 
     private:
-        nlohmann::json mJSON = nlohmann::json::object(); ///< Resulting JSON object.
+        /// @brief The resulting JSON object.
+        /// @note It's also used to store the value of a variable on an AUTO_HOOK call.
+        nlohmann::json mJSON = nlohmann::json::object();
     };
 } // namespace cubos::core::data
