@@ -6,12 +6,10 @@
 using cubos::core::data::JSONSerializer;
 using cubos::core::reflection::Type;
 
-auto jsonVal = nlohmann::json::object();
-
 /// [MACRO to add hooks for primitive types]
 #define AUTO_HOOK(type, ...)                                                                                           \
-    this->hook<type>([](const type& value) {                                                                           \
-        jsonVal = value;                                                                                               \
+    this->hook<type>([this](const type& value) {                                                                       \
+        mJSON = value;                                                                                                 \
         return true;                                                                                                   \
     })
 
@@ -94,7 +92,7 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
             {
                 return false;
             }
-            jsonObj[field->name()] = jsonVal;
+            jsonObj[field->name()] = mJSON;
         }
         mJSON = jsonObj;
         return true;
@@ -112,13 +110,13 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
             {
                 CUBOS_WARN("Could not write dictionary key");
             }
-            auto keyVal = jsonVal;
+            auto keyVal = mJSON;
 
             if (!this->write(trait.valueType(), entryValue))
             {
                 CUBOS_WARN("Could not write dictionary value");
             }
-            jsonObj[keyVal] = jsonVal;
+            jsonObj[keyVal] = mJSON;
         }
     }
 
