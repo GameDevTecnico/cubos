@@ -6,7 +6,7 @@
 
 namespace cubos::engine
 {
-    /// @brief Resouce which holds the value of the fixed delta for the physics update.
+    /// @brief Resource which holds the value of the fixed delta for the physics update.
     /// @ingroup physics-plugin
     struct FixedDeltaTime
     {
