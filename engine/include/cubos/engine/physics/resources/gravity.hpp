@@ -8,7 +8,7 @@
 
 namespace cubos::engine
 {
-    /// @brief Resouce which holds the global value of gravity.
+    /// @brief Resource which holds the global value of gravity.
     /// @ingroup physics-plugin
     struct Gravity
     {
