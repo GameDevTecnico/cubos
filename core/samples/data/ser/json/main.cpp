@@ -1,4 +1,3 @@
-#include <cubos/core/log.hpp>
 #include <cubos/core/memory/stream.hpp>
 
 using cubos::core::memory::Stream;
@@ -13,6 +12,9 @@ using cubos::core::data::JSONSerializer;
 #include <glm/vec3.hpp>
 
 #include <cubos/core/reflection/external/glm.hpp>
+#include <cubos/core/reflection/external/map.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/vector.hpp>
 
 int main()
