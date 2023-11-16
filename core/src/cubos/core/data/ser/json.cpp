@@ -101,7 +101,6 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
     if (type.has<DictionaryTrait>())
     {
         const auto& trait = type.get<DictionaryTrait>();
-
         auto jsonObj = nlohmann::json::object();
 
         for (auto [entryKey, entryValue] : trait.view(value))
@@ -109,15 +108,19 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
             if (!this->write(trait.keyType(), entryKey))
             {
                 CUBOS_WARN("Could not write dictionary key");
+                return false;
             }
             auto keyVal = mJSON;
 
             if (!this->write(trait.valueType(), entryValue))
             {
                 CUBOS_WARN("Could not write dictionary value");
+                return false;
             }
             jsonObj[keyVal] = mJSON;
         }
+        mJSON = jsonObj;
+        return true;
     }
 
     CUBOS_WARN("Cannot decompose '{}'", type.name());
