@@ -49,7 +49,7 @@
           <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span>NullableTrait <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="nullable_8hpp.html">&lt;core/reflection/traits/nullable.hpp&gt;</a></div>
         </h1>
-        <p>Stores the null representation of a type&#x27;.</p>
+        <p>Used to manipulate values of null-representable types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -70,11 +70,11 @@
             <dt id="ab76d0f60b84dd11f3502f4fb18038842">
               using <a href="#ab76d0f60b84dd11f3502f4fb18038842" class="m-doc-self">IsNull</a> = bool(*)(const void*instance)
             </dt>
-            <dd>Function pointer to check if object is null.</dd>
+            <dd>Function pointer to check if a value represents null.</dd>
             <dt id="a0947b4098172aea31d8d606cb9ce51e3">
               using <a href="#a0947b4098172aea31d8d606cb9ce51e3" class="m-doc-self">SetToNull</a> = void(*)(void*instance)
             </dt>
-            <dd>Function pointer to set an object to it&#x27;s null representation.</dd>
+            <dd>Function pointer to set a value to its null representation.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
@@ -93,11 +93,11 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc">isNull</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; bool</span>
             </dt>
-            <dd>Checks if object is null.</dd>
+            <dd>Checks if the given value represents null.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc">setToNull</a>(</span><span class="m-doc-wrap">void* instance) const</span>
             </dt>
-            <dd>Sets an object to it&#x27;s null representation.</dd>
+            <dd>Sets a value to its null representation.</dd>
           </dl>
         </section>
         <section>
@@ -106,7 +106,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc-self">isNull</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
             </h3>
-            <p>Checks if object is null.</p>
+            <p>Checks if the given value represents null.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -120,7 +120,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>Whether the object is null.</td>
+                  <td>Whether the value represents null.</td>
                 </tr>
               </tfoot>
             </table>
@@ -129,7 +129,7 @@
             <h3>
               <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc-self">setToNull</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
             </h3>
-            <p>Sets an object to it&#x27;s null representation.</p>
+            <p>Sets a value to its null representation.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
