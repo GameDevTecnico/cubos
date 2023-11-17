@@ -34,5 +34,17 @@ TEST_CASE("reflection::Type")
         CHECK(type.get<int>() == 42);
     }
 
+    SUBCASE("equality")
+    {
+        auto& anotherType = type;
+        REQUIRE(anotherType == type);
+    }
+
+    SUBCASE("inequality")
+    {
+        auto& anotherType = Type::create("Bar");
+        REQUIRE(anotherType != type);
+    }
+
     Type::destroy(type);
 }
