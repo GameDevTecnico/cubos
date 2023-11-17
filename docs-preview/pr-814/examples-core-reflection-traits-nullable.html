@@ -54,12 +54,12 @@
 <span class="k">struct</span><span class="w"> </span><span class="nc">MyEntity</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">CUBOS_REFLECT</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">idx</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">generation</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">idx</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">generation</span><span class="p">;</span>
 <span class="p">};</span></pre><p>In the reflection definition, we use the <code>NullableTrait</code> to define the conditions under which an instance of <code>MyEntity</code> is considered null, and also another to set it to null.</p><pre class="m-code"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/traits/nullable.hpp&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/type.hpp&gt;</span>
 
-<span class="c1">// Since we&#39;re exposing fields of primitive types (int32_t), its important to</span>
+<span class="c1">// Since we&#39;re exposing fields of primitive types (uint32_t), its important to</span>
 <span class="c1">// include the header which defines their reflection.</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cubos/core/reflection/external/primitives.hpp&gt;</span>
 
@@ -70,11 +70,11 @@
 <span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;MyEntity&quot;</span><span class="p">)</span>
 <span class="w">        </span><span class="p">.</span><span class="n">with</span><span class="p">(</span><span class="n">NullableTrait</span><span class="p">{[](</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">instance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                                </span><span class="k">auto</span><span class="w"> </span><span class="n">ent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">MyEntity</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span>
+<span class="w">                                </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">ent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">MyEntity</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span>
 <span class="w">                                </span><span class="k">return</span><span class="w"> </span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">idx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">generation</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="p">;</span>
 <span class="w">                            </span><span class="p">},</span>
 <span class="w">                            </span><span class="p">[](</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">instance</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                                </span><span class="k">auto</span><span class="w"> </span><span class="n">ent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">MyEntity</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span>
+<span class="w">                                </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">ent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">MyEntity</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span>
 <span class="w">                                </span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="p">;</span>
 <span class="w">                                </span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">generation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UINT32_MAX</span><span class="p">;</span>
 <span class="w">                            </span><span class="p">}});</span>
