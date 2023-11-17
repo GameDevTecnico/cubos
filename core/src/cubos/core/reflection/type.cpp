@@ -57,6 +57,17 @@ const void* Type::get(uintptr_t id) const
     CUBOS_FAIL("No such trait in type \"{}\"", this->name());
 }
 
+bool Type::operator==(const Type& other) const
+{
+    if (this == &other)
+    {
+        return true;
+    }
+
+    CUBOS_ASSERT(this->mName != other.mName, "Two types cannot be created with the same");
+    return false;
+}
+
 Type::~Type()
 {
     for (auto& trait : mTraits)

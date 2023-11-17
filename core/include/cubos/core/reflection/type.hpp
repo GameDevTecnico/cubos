@@ -82,6 +82,11 @@ namespace cubos::core::reflection
             return *static_cast<const T*>(this->get(Type::id<T>()));
         }
 
+        /// @brief Equality operator.
+        /// @param other Type object to compare.
+        /// @return Whether the objects have the same address, which indicates equality.
+        bool operator==(const Type& other) const;
+
     private:
         ~Type();
 
