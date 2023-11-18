@@ -6,7 +6,6 @@
 
 using cubos::core::data::FileSystem;
 using cubos::core::data::StandardArchive;
-using cubos::core::ecs::Write;
 
 using namespace cubos::engine;
 

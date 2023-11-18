@@ -2,7 +2,6 @@
 
 #include "sweep_and_prune.hpp"
 
-using cubos::core::ecs::Entity;
 using namespace cubos::engine;
 
 void BroadPhaseSweepAndPrune::addEntity(Entity entity)

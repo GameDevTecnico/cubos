@@ -17,8 +17,6 @@
 
 /// [Including plugin headers]
 
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 using cubos::core::reflection::FieldsTrait;
 using cubos::core::reflection::reflect;
 using cubos::core::reflection::Type;

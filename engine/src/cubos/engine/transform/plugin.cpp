@@ -1,9 +1,5 @@
 #include <cubos/engine/transform/plugin.hpp>
 
-using cubos::core::ecs::Commands;
-using cubos::core::ecs::OptRead;
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 static void autoLocalToWorld(Commands cmds,

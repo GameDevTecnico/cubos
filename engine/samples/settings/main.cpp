@@ -1,8 +1,6 @@
 #include <cubos/engine/cubos.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 
-using cubos::core::ecs::Write;
-
 using namespace cubos::engine;
 
 /// [System]

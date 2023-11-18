@@ -5,11 +5,9 @@
 #include <cubos/engine/input/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
-using cubos::core::ecs::EventReader;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
+
 using namespace cubos::engine;
 
 static void bridge(Write<Assets> assets)

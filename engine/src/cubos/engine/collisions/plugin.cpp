@@ -11,10 +11,6 @@
 #include <cubos/engine/collisions/shapes/capsule.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
-using cubos::core::ecs::EventWriter;
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 /// @brief Setups new box colliders.

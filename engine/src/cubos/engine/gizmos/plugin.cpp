@@ -12,12 +12,6 @@
 
 #include "renderer.hpp"
 
-using cubos::core::ecs::Entity;
-using cubos::core::ecs::EventReader;
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
-
 using cubos::core::gl::Texture2D;
 
 using cubos::core::io::MouseButtonEvent;
@@ -26,13 +20,7 @@ using cubos::core::io::ResizeEvent;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 
-using cubos::engine::ActiveCameras;
-using cubos::engine::BaseRenderer;
-using cubos::engine::Camera;
-using cubos::engine::DeltaTime;
-using cubos::engine::Gizmos;
-using cubos::engine::GizmosRenderer;
-using cubos::engine::LocalToWorld;
+using namespace cubos::engine;
 
 static void iterateGizmos(std::vector<std::shared_ptr<Gizmos::Gizmo>>& gizmosVector,
                           const std::vector<std::pair<glm::mat4, BaseRenderer::Viewport>>& cameras,

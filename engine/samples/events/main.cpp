@@ -3,12 +3,6 @@
 
 #include <cubos/engine/cubos.hpp>
 
-/// [Using type for aesthetic sake]
-using cubos::core::ecs::EventReader;
-using cubos::core::ecs::EventWriter;
-/// [Using type for aesthetic sake]
-using cubos::core::ecs::Write;
-
 using namespace cubos::engine;
 
 /// [Event struct]

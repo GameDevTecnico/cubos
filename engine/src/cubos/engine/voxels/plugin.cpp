@@ -4,7 +4,6 @@
 #include <cubos/engine/voxels/palette.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
-using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 static void bridges(Write<Assets> assets)

@@ -8,12 +8,7 @@
 using cubos::engine::Cubos;
 /// [Include]
 
-/// [Include Entity Stuff]
-using cubos::core::ecs::Commands;
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
-/// [Include Entity Stuff]
+using namespace cubos::engine;
 
 /// [Component Refl]
 #include <cubos/core/ecs/component/reflection.hpp>
