@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/imgui/serialization.hpp file | CUBOS. Docs</title>
+  <title>cubos::core::reflection::NullableTrait class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,56 +46,102 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_459dda10180a6131eb62bc74e02d0b6e.html">imgui</a>/</span>serialization.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span>NullableTrait <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="nullable_8hpp.html">&lt;core/reflection/traits/nullable.hpp&gt;</a></div>
         </h1>
-        <p>Functions for showing and editing serializable objects in the UI.</p>
+        <p>Used to manipulate values of null-representable types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
+<aside class="m-note m-default"><h4>See also</h4><p>See <a href="examples-core-reflection-traits-nullable.html" class="m-doc">Nullable Trait</a> for an example of using this trait.</p></aside>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
-            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+            <dt id="ab76d0f60b84dd11f3502f4fb18038842">
+              using <a href="#ab76d0f60b84dd11f3502f4fb18038842" class="m-doc-self">IsNull</a> = bool(*)(const void*instance)
+            </dt>
+            <dd>Function pointer to check if a value represents null.</dd>
+            <dt id="a0947b4098172aea31d8d606cb9ce51e3">
+              using <a href="#a0947b4098172aea31d8d606cb9ce51e3" class="m-doc-self">SetToNull</a> = void(*)(void*instance)
+            </dt>
+            <dd>Function pointer to set a value to its null representation.</dd>
           </dl>
         </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a26ebab93eb33650d8c5c8b2aa64b95eb">
+              <span class="m-doc-wrap-bumper"><a href="#a26ebab93eb33650d8c5c8b2aa64b95eb" class="m-doc-self">NullableTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1NullableTrait.html#ab76d0f60b84dd11f3502f4fb18038842" class="m-doc">IsNull</a> isNull,
+              <a href="classcubos_1_1core_1_1reflection_1_1NullableTrait.html#a0947b4098172aea31d8d606cb9ce51e3" class="m-doc">SetToNull</a> setToNull)</span>
+            </dt>
+            <dd>Constructs.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#gaad8284c8ccc70830a282436f748249ce" class="m-doc">imguiShowPackage</a>(</span><span class="m-doc-wrap">const core::data::old::Package&amp; pkg,
-              const std::string&amp; name)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc">isNull</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; bool</span>
             </dt>
-            <dd>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dd>Checks if the given value represents null.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga87aecc746c1b4f20e517d7c133164e46" class="m-doc">imguiEditPackage</a>(</span><span class="m-doc-wrap">core::data::old::Package&amp; pkg,
-              const std::string&amp; name) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc">setToNull</a>(</span><span class="m-doc-wrap">void* instance) const</span>
             </dt>
-            <dd>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#ga83b794c814a456d3783f3500d4995362" class="m-doc">imguiShow</a>(</span><span class="m-doc-wrap">const T&amp; object,
-              const std::string&amp; name)</span>
-            </dt>
-            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga8ae098030e5492587b5e53e49194ec75" class="m-doc">imguiEdit</a>(</span><span class="m-doc-wrap">T&amp; object,
-              const std::string&amp; name) -&gt; bool</span>
-            </dt>
-            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dd>Sets a value to its null representation.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a0ab1c6d1f804bfaabaaf8df308567545"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc-self">isNull</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
+            </h3>
+            <p>Checks if the given value represents null.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">instance</td>
+                  <td>Instance.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the value represents null.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a38635a82e1a7c7b0282afaaccd19e797"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc-self">setToNull</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
+            </h3>
+            <p>Sets a value to its null representation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">instance</td>
+                  <td>Instance.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

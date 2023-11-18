@@ -159,6 +159,10 @@
             </dt>
             <dd>Resource which queues commands for drawing gizmos, basic primitives useful for debugging and tools.</dd>
             <dt>
+              class <a href="classcubos_1_1engine_1_1DataInspector.html" class="m-doc">DataInspector</a>
+            </dt>
+            <dd>Resource which allows the user to inspect or modify any reflectable value on the UI.</dd>
+            <dt>
               class <a href="classcubos_1_1engine_1_1InputAction.html" class="m-doc">InputAction</a>
             </dt>
             <dd>Stores the state of a single input action, such as &quot;jump&quot; or &quot;attack&quot;.</dd>
@@ -373,28 +377,6 @@
               <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#gae657719db6afb7e3b4afd5484789b194" class="m-doc">imguiPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
             <dd>Plugin entry function.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#gaad8284c8ccc70830a282436f748249ce" class="m-doc">imguiShowPackage</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">core::<wbr />data::<wbr />old::<wbr />Package</a>&amp; pkg,
-              const std::string&amp; name)</span>
-            </dt>
-            <dd>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga87aecc746c1b4f20e517d7c133164e46" class="m-doc">imguiEditPackage</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1data_1_1old_1_1Package.html" class="m-doc">core::<wbr />data::<wbr />old::<wbr />Package</a>&amp; pkg,
-              const std::string&amp; name) -&gt; bool</span>
-            </dt>
-            <dd>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#ga83b794c814a456d3783f3500d4995362" class="m-doc">imguiShow</a>(</span><span class="m-doc-wrap">const T&amp; object,
-              const std::string&amp; name)</span>
-            </dt>
-            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga8ae098030e5492587b5e53e49194ec75" class="m-doc">imguiEdit</a>(</span><span class="m-doc-wrap">T&amp; object,
-              const std::string&amp; name) -&gt; bool</span>
-            </dt>
-            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">void <a href="group__input-plugin.html#gaee09a9325400e0d7d9b5034779b672e9" class="m-doc">inputPlugin</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1engine_1_1Cubos.html" class="m-doc">Cubos</a>&amp; cubos)</span>
             </dt>
