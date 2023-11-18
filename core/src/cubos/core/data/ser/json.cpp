@@ -1,19 +1,16 @@
-#include <cubos/core/log.hpp>
-
-/// [JSON serializer]
 #include <cubos/core/data/ser/json.hpp>
+#include <cubos/core/log.hpp>
 
 using cubos::core::data::JSONSerializer;
 using cubos::core::reflection::Type;
 
-/// [MACRO to add hooks for primitive types]
+// Macro used to reduce code duplication for primitive type hooks.
 #define AUTO_HOOK(type, ...)                                                                                           \
     this->hook<type>([this](const type& value) {                                                                       \
         mJSON = value;                                                                                                 \
         return true;                                                                                                   \
     })
 
-/// [Setting up hooks]
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 
@@ -35,14 +32,12 @@ JSONSerializer::JSONSerializer()
     AUTO_HOOK(double);
     AUTO_HOOK(std::string);
 }
-/// [Setting up hooks]
 
 nlohmann::json JSONSerializer::output()
 {
     return mJSON;
 }
 
-/// [Decomposing types]
 #include <cubos/core/reflection/traits/array.hpp>
 #include <cubos/core/reflection/traits/dictionary.hpp>
 #include <cubos/core/reflection/traits/fields.hpp>
@@ -66,7 +61,7 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
         {
             if (!this->write(arrayTrait.elementType(), element))
             {
-                CUBOS_WARN("Could not deserialize array element");
+                CUBOS_WARN("Could not serialize array element");
                 return false;
             }
             jsonArr.push_back(mJSON);
@@ -80,6 +75,7 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
     {
         const auto& trait = type.get<StringConversionTrait>();
         mJSON = trait.into(value);
+        return true;
     }
 
     if (type.has<FieldsTrait>())
@@ -90,6 +86,7 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
         {
             if (!this->write(field->type(), fieldValue))
             {
+                CUBOS_WARN("Could not serialize field '{}'", field->name());
                 return false;
             }
             jsonObj[field->name()] = mJSON;
@@ -116,6 +113,12 @@ bool JSONSerializer::decompose(const Type& type, const void* value)
             {
                 CUBOS_WARN("Could not write dictionary value");
                 return false;
+            }
+            // need to transform the key into a string (except if it already is)
+            // nlohmann::json::object() only accepts strings as keys
+            if (!keyVal.is_string())
+            {
+                keyVal = keyVal.dump();
             }
             jsonObj[keyVal] = mJSON;
         }
