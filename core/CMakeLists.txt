@@ -40,6 +40,7 @@ set(CUBOS_CORE_SOURCE
     "src/cubos/core/reflection/traits/dictionary.cpp"
     "src/cubos/core/reflection/traits/string_conversion.cpp"
     "src/cubos/core/reflection/traits/nullable.cpp"
+    "src/cubos/core/reflection/traits/enum.cpp"
     "src/cubos/core/reflection/external/primitives.cpp"
     "src/cubos/core/reflection/external/string.cpp"
     "src/cubos/core/reflection/external/uuid.cpp"
