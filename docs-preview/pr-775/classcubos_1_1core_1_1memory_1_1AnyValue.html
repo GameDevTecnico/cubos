@@ -85,6 +85,10 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
+            <dt id="ac41ee71f3d6d4a36f0598c876249c507">
+              <span class="m-doc-wrap-bumper"><a href="#ac41ee71f3d6d4a36f0598c876249c507" class="m-doc-self">AnyValue</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructs an empty <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#acbe724a5fe4976952e5866de0c6666ab" class="m-doc">AnyValue</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
@@ -94,6 +98,10 @@
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af0e9609e503950717d55453568e1192f" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>&amp;&amp; other) -&gt; <a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>&amp; <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Move assignment.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a8f22e438d6996c7d4c3b99d3ab54bfad" class="m-doc">type</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp;</span>
             </dt>
@@ -106,6 +114,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#aac30eb37d91b1d9ef86bb3a3b5282dd7" class="m-doc">get</a>(</span><span class="m-doc-wrap">) const -&gt; const void*</span>
             </dt>
             <dd>Gets a pointer to the underlying value.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a91529d9827f34c6b7edffec253b24d86" class="m-doc">valid</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Checks whether value is valid or not (holds a value).</dd>
           </dl>
         </section>
         <section>
@@ -209,6 +221,23 @@
               </tbody>
             </table>
           </div></section>
+          <section class="m-doc-details" id="af0e9609e503950717d55453568e1192f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>&amp; cubos::<wbr />core::<wbr />memory::<wbr />AnyValue::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af0e9609e503950717d55453568e1192f" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html" class="m-doc">AnyValue</a>&amp;&amp; other) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Move assignment.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>Value.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a8f22e438d6996c7d4c3b99d3ab54bfad"><div>
             <h3>
               <span class="m-doc-wrap-bumper">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">reflection::<wbr />Type</a>&amp; cubos::<wbr />core::<wbr />memory::<wbr />AnyValue::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f22e438d6996c7d4c3b99d3ab54bfad" class="m-doc-self">type</a>(</span><span class="m-doc-wrap">) const</span></span>
@@ -222,6 +251,7 @@
                 </tr>
               </tfoot>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p><a href="classcubos_1_1core_1_1memory_1_1AnyValue.html#a91529d9827f34c6b7edffec253b24d86" class="m-doc">valid()</a> must return true.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a98bf958b10fb2e0a2a7aa69ed486f4f3"><div>
             <h3>
@@ -247,6 +277,20 @@
                 <tr>
                   <th style="width: 1%">Returns</th>
                   <td>Value.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a91529d9827f34c6b7edffec253b24d86"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />memory::<wbr />AnyValue::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a91529d9827f34c6b7edffec253b24d86" class="m-doc-self">valid</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Checks whether value is valid or not (holds a value).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True is valid.</td>
                 </tr>
               </tfoot>
             </table>
