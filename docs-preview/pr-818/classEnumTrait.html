@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EnumTrait class | CUBOS. Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="https://gamedevtecnico.github.io/cubos/">CUBOS.</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">Docs</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="modules.html">Modules</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          EnumTrait <span class="m-thin">class</span>
+        </h1>
+        <p>Represents a trait for an enumerated type.</p>
+        <nav class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+<aside class="m-note m-default"><h4>See also</h4><p>See examples-core-reflection-traits-enum for an example of using this trait.</p></aside>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              class <a href="classEnumTrait_1_1Builder.html" class="m-doc">Builder</a>
+            </dt>
+            <dd><a href="classEnumTrait_1_1Builder.html" class="m-doc">Builder</a> for <a href="classEnumTrait.html" class="m-doc">EnumTrait</a>.</dd>
+            <dt>
+              class <a href="classEnumTrait_1_1Variant.html" class="m-doc">Variant</a>
+            </dt>
+            <dd><a href="classEnumTrait_1_1Variant.html" class="m-doc">EnumTrait::<wbr />Variant</a> class represents an individual variant within the enumerated type.</dd>
+          </dl>
+        </section>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">static auto <a href="#ae389202aa8c7d903a06d95a3b1a0ff46" class="m-doc">typed</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classEnumTrait_1_1Builder.html" class="m-doc">Builder</a>&lt;T&gt;</span>
+            </dt>
+            <dd>Returns a trait builder for the given type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#ab73472d0792a08c4f50329e99528073f" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; auto</span>
+            </dt>
+            <dd>Returns an iterator pointing to the end of the variants.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af59c668137ab80856c5ffe74c456a520" class="m-doc">contains</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; bool</span>
+            </dt>
+            <dd>Checks if a variant with the given name exists.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aadd917945fa59e5df50d7854100b7044" class="m-doc">at</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; const <a href="classEnumTrait_1_1Variant.html" class="m-doc">Variant</a>&amp;</span>
+            </dt>
+            <dd>Returns the variant with the specified name. Aborts if the variant does not exist.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2f7d86d7f9572e386f89ee40c9af094f" class="m-doc">variant</a>(</span><span class="m-doc-wrap">const void* value) const -&gt; const <a href="classEnumTrait_1_1Variant.html" class="m-doc">Variant</a>&amp;</span>
+            </dt>
+            <dd>Returns the variant associated with the given value.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae079378049033494aa03d7bd8f2e3d1e" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; auto</span>
+            </dt>
+            <dd>Returns an iterator pointing to the beginning of the variants.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a937d9432d53e5b1230c26a2913f63158" class="m-doc">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Returns how many enum types there are in the trait.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ae389202aa8c7d903a06d95a3b1a0ff46"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">static <a href="classEnumTrait_1_1Builder.html" class="m-doc">Builder</a>&lt;T&gt; EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae389202aa8c7d903a06d95a3b1a0ff46" class="m-doc-self">typed</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns a trait builder for the given type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">T</td>
+                  <td>Type to build a trait for.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Trait builder.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab73472d0792a08c4f50329e99528073f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static auto EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab73472d0792a08c4f50329e99528073f" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Returns an iterator pointing to the end of the variants.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af59c668137ab80856c5ffe74c456a520"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af59c668137ab80856c5ffe74c456a520" class="m-doc-self">contains</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
+            </h3>
+            <p>Checks if a variant with the given name exists.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Name of the variant to check.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if the variant exists, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aadd917945fa59e5df50d7854100b7044"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classEnumTrait_1_1Variant.html" class="m-doc">Variant</a>&amp; EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aadd917945fa59e5df50d7854100b7044" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const</span></span>
+            </h3>
+            <p>Returns the variant with the specified name. Aborts if the variant does not exist.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td>Name of the variant to retrieve.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the variant.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2f7d86d7f9572e386f89ee40c9af094f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classEnumTrait_1_1Variant.html" class="m-doc">Variant</a>&amp; EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2f7d86d7f9572e386f89ee40c9af094f" class="m-doc-self">variant</a>(</span><span class="m-doc-wrap">const void* value) const</span></span>
+            </h3>
+            <p>Returns the variant associated with the given value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Pointer to the value for which to retrieve the variant.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to the variant.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae079378049033494aa03d7bd8f2e3d1e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae079378049033494aa03d7bd8f2e3d1e" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns an iterator pointing to the beginning of the variants.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Iterator.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a937d9432d53e5b1230c26a2913f63158"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a937d9432d53e5b1230c26a2913f63158" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns how many enum types there are in the trait.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Field count.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>CUBOS. Docs. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
