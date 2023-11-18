@@ -10,16 +10,12 @@ the following aliases:
 
 @snippet data/ser/custom/main.cpp Include
 
-Using the json serializer is as simple as calling @ref
+Using the JSON serializer is as simple as calling @ref
 cubos::core::data::JSONSerializer::write "JSONSerializer::write" on the data we want to
 serialize.
 
-# Update this section with final sample version
-
-In this case, we'll be serializing a `std::vector<glm::ivec3>`, which is
-an array of objects with three `int32_t` fields.
-
-# Update this section with final sample version
+In this case, we'll be serializing a `std::vector<std::vector<std::vector<glm::ivec3>>>`, which is
+a nested array of objects with three `int32_t` fields.
 
 @snippet data/ser/custom/main.cpp Usage
 
