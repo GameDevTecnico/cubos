@@ -24,7 +24,7 @@ static std::map<std::pair<uint32_t, uint32_t>, uintptr_t> collectRelations(const
     return map;
 }
 
-TEST_CASE("ecs::RelationTable")
+TEST_CASE("ecs::RelationTable") // NOLINT(readability-function-size)
 {
     SUBCASE("zero-sized relation type")
     {
