@@ -12,6 +12,8 @@
 #include <cubos/core/ecs/system/system.hpp>
 #include <cubos/core/ecs/world.hpp>
 
+#include <cubos/engine/prelude.hpp>
+
 namespace cubos::engine
 {
     /// @brief Resource which stores the time since the last iteration of the main loop started.
