@@ -2,7 +2,6 @@
 #include <cubos/engine/scene/bridge.hpp>
 #include <cubos/engine/scene/plugin.hpp>
 
-using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 static void bridge(Write<Assets> assets)

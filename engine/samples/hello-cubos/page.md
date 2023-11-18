@@ -56,8 +56,6 @@ Now let's see a bit about entities, components and resources.
 First we are going to need to use a few more things.
 We'll go over what each does as it comes up.
 
-@snippet hello-cubos/main.cpp Include Entity Stuff
-
 Entities have components, so let's create one to give our entities.
 Because of how the engine works, we cannot declare a component on our `main.cpp` file.
 We'll need to create a `components.hpp` for that.

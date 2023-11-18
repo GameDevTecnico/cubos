@@ -8,11 +8,6 @@
 #include <cubos/engine/transform/position.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
-using cubos::core::ecs::Commands;
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
-
 using namespace cubos::engine;
 
 static const Asset<VoxelGrid> CarAsset = AnyAsset("059c16e7-a439-44c7-9bdc-6e069dba0c80");

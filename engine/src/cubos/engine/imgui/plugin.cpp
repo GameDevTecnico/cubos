@@ -5,8 +5,6 @@
 
 #include "imgui.hpp"
 
-using cubos::core::ecs::EventReader;
-using cubos::core::ecs::Read;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;
 

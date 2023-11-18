@@ -3,9 +3,10 @@
 
 #include <cubos/engine/assets/bridges/file.hpp>
 
-using namespace cubos::engine;
 using cubos::core::data::File;
 using cubos::core::data::FileSystem;
+
+using namespace cubos::engine;
 
 bool FileBridge::load(Assets& assets, const AnyAsset& handle)
 {

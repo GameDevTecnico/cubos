@@ -1,9 +1,6 @@
 #include <cubos/engine/settings/plugin.hpp>
 #include <cubos/engine/window/plugin.hpp>
 
-using cubos::core::ecs::EventWriter;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 using cubos::core::io::openWindow;
 using cubos::core::io::Window;
 using cubos::core::io::WindowEvent;

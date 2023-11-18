@@ -14,11 +14,6 @@
 #include <cubos/engine/settings/settings.hpp>
 #include <cubos/engine/transform/plugin.hpp>
 
-using cubos::core::ecs::Commands;
-using cubos::core::ecs::Entity;
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 using cubos::core::geom::Box;
 using cubos::core::io::Key;
 using cubos::core::io::Modifiers;

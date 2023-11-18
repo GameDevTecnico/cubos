@@ -6,10 +6,6 @@
 
 This example shows how the @ref cubos::core::ecs::EventReader "EventReader" and the @ref cubos::core::ecs::EventWriter "EventWriter" system arguments can be used to communicate from one system to another.
 
-For convinience, we introduce these names in our scope with using-declarations.
-
-@snippet events/main.cpp Using type for aesthetic sake
-
 Firstly, we need to create and register the event we want to emit. Here, our event is a simple struct with a single field, however, you can use any type you want.
 
 @snippet events/main.cpp Event struct

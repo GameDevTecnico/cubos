@@ -4,10 +4,6 @@
 
 #include <cubos/engine/physics/plugins/gravity.hpp>
 
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
-
 using namespace cubos::engine;
 
 static void applyGravitySystem(Query<Write<PhysicsVelocity>, Read<PhysicsMass>> query, Read<Gravity> gravity)

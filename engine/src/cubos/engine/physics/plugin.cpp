@@ -8,10 +8,6 @@
 
 #include "physics_accumulator.hpp"
 
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
-
 using namespace cubos::engine;
 
 CUBOS_REFLECT_IMPL(AccumulatedCorrection)

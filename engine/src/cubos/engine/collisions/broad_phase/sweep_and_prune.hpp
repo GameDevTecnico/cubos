@@ -11,6 +11,8 @@
 #include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/ecs/entity/manager.hpp>
 
+#include <cubos/engine/prelude.hpp>
+
 namespace cubos::engine
 {
     /// @brief Resource which stores sweep and prune data.
@@ -20,8 +22,8 @@ namespace cubos::engine
         /// @brief Marker used for sweep and prune.
         struct SweepMarker
         {
-            core::ecs::Entity entity; ///< Entity referenced by the marker.
-            bool isMin;               ///< Whether the marker is a min or max marker.
+            Entity entity; ///< Entity referenced by the marker.
+            bool isMin;    ///< Whether the marker is a min or max marker.
         };
 
         /// @brief List of ordered sweep markers for each axis. Stores the index of the marker in mMarkers.
@@ -31,19 +33,18 @@ namespace cubos::engine
         ///
         /// For each each map, the key is an entity and the value is a list of entities that
         /// overlap with the key. Symmetrical pairs are not stored.
-        std::unordered_map<core::ecs::Entity, std::vector<core::ecs::Entity>, core::ecs::EntityHash>
-            sweepOverlapMaps[3];
+        std::unordered_map<Entity, std::vector<Entity>, cubos::core::ecs::EntityHash> sweepOverlapMaps[3];
 
         /// @brief Set of active entities during sweep for each axis.
-        std::unordered_set<core::ecs::Entity, core::ecs::EntityHash> activePerAxis[3];
+        std::unordered_set<Entity, cubos::core::ecs::EntityHash> activePerAxis[3];
 
         /// @brief Adds an entity to the list of entities tracked by sweep and prune.
         /// @param entity Entity to add.
-        void addEntity(core::ecs::Entity entity);
+        void addEntity(Entity entity);
 
         /// @brief Removes an entity from the list of entities tracked by sweep and prune.
         /// @param entity Entity to remove.
-        void removeEntity(core::ecs::Entity entity);
+        void removeEntity(Entity entity);
 
         /// @brief Clears the list of entities tracked by sweep and prune.
         void clearEntities();

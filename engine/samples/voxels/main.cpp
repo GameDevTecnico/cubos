@@ -4,10 +4,6 @@
 #include <cubos/engine/transform/plugin.hpp>
 #include <cubos/engine/voxels/plugin.hpp>
 
-using cubos::core::ecs::Commands;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
-
 using namespace cubos::engine;
 
 /// [Get handles to assets]

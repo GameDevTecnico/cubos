@@ -9,10 +9,6 @@
 
 #include "sweep_and_prune.hpp"
 
-using cubos::core::ecs::OptRead;
-using cubos::core::ecs::Query;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 using namespace cubos::engine;
 
 /// @brief Tracks all new colliders.

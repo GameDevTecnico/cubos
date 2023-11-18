@@ -8,8 +8,6 @@ using cubos::core::data::File;
 using cubos::core::data::FileSystem;
 using cubos::core::data::StandardArchive;
 using cubos::core::data::old::JSONDeserializer;
-using cubos::core::ecs::Read;
-using cubos::core::ecs::Write;
 
 using namespace cubos::engine;
 
