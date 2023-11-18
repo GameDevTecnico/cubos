@@ -13,6 +13,7 @@ add_executable(
     reflection/traits/constructible.cpp
     reflection/traits/fields.cpp
     reflection/traits/nullable.cpp
+    reflection/traits/enum.cpp
     reflection/external/primitives.cpp
     reflection/external/string.cpp
     reflection/external/uuid.cpp
