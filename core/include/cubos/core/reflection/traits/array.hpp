@@ -24,38 +24,24 @@ namespace cubos::core::reflection
         class ConstView;
 
         /// @brief Function pointer to get the length of an array instance.
-        /// @param instance Pointer to the instance.
         using Length = std::size_t (*)(const void* instance);
 
         /// @brief Function pointer to get the address of an element in an array instance.
-        /// @param instance Pointer to the instance.
-        /// @param index Element index.
         using AddressOf = uintptr_t (*)(const void* instance, std::size_t index);
 
         /// @brief Function pointer to insert a default value into the array.
-        /// @param instance Pointer to the instance.
-        /// @param index Element index.
         using InsertDefault = void (*)(void* instance, std::size_t index);
 
         /// @brief Function pointer to insert a copy of the given value into the array.
-        /// @param instance Pointer to the instance.
-        /// @param index Element index.
-        /// @param value Value.
         using InsertCopy = void (*)(void* instance, std::size_t index, const void* value);
 
         /// @brief Function pointer to move the given value into the array.
-        /// @param instance Pointer to the instance.
-        /// @param index Element index.
-        /// @param value Value.
         using InsertMove = void (*)(void* instance, std::size_t index, void* value);
 
         /// @brief Function pointer to remove an element of the array.
-        /// @param instance Pointer to the instance.
-        /// @param index Element index.
         using Erase = void (*)(void* instance, std::size_t index);
 
         /// @brief Constructs.
-        /// @param elementType Element type of the array.
         /// @param length Function used to get the length of an array.
         /// @param addressOf Function used to address an element in an array.
         ArrayTrait(const Type& elementType, Length length, AddressOf addressOf);

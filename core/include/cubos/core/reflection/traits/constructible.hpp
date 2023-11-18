@@ -18,21 +18,15 @@ namespace cubos::core::reflection
     {
     public:
         /// @brief Function pointer to the destructor of a type.
-        /// @param instance Pointer to the instance to destruct.
         using Destructor = void (*)(void* instance);
 
         /// @brief Function pointer to the default constructor of a type.
-        /// @param instance Pointer to the location to construct the instance at.
         using DefaultConstructor = void (*)(void* instance);
 
         /// @brief Function pointer to the copy constructor of a type.
-        /// @param instance Pointer to the location to construct the instance at.
-        /// @param other Pointer to the instance to copy construct from.
         using CopyConstructor = void (*)(void* instance, const void* other);
 
         /// @brief Function pointer to the move constructor of a type.
-        /// @param instance Pointer to the location to construct the instance at.
-        /// @param other Pointer to the instance to move construct from.
         using MoveConstructor = void (*)(void* instance, void* other);
 
         /// @brief Builder for @ref ConstructibleTrait.

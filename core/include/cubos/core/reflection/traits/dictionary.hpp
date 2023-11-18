@@ -30,70 +30,37 @@ namespace cubos::core::reflection
         class ConstIterator;
 
         /// @brief Function pointer to get the length of a dictionary instance.
-        /// @param instance Dictionary instance.
-        /// @return Length.
         using Length = std::size_t (*)(const void* instance);
 
         /// @brief Function pointer to get an iterator to the first key-value pair of a dictionary
         /// instance.
-        /// @note @ref Stop should be called on the returned iterator when it is no longer needed.
-        /// @param instance Dictionary instance.
-        /// @param writeable Whether the iterator should provide write access.
-        /// @return Iterator.
         using Begin = void* (*)(uintptr_t instance, bool writeable);
 
         /// @brief Function pointer to get an iterator to a value in an dictionary instance.
-        /// @note @ref Stop should be called on the returned iterator when it is no longer needed.
-        /// @param instance Dictionary instance.
-        /// @param key Key.
-        /// @param writeable Whether the iterator should provide write access.
-        /// @return Iterator to the found key-value pair, or null if not found.
         using Find = void* (*)(uintptr_t instance, const void* key, bool writeable);
 
         /// @brief Function pointer to advance an iterator.
-        /// @param instance Dictionary instance.
-        /// @param iterator Iterator.
-        /// @param writeable Whether the iterator provides write access.
-        /// @return Whether the iterator is still valid.
         using Advance = bool (*)(uintptr_t instance, void* iterator, bool writeable);
 
         /// @brief Function pointer to destroy an iterator instance.
-        /// @param iterator Iterator to the key-value pair.
-        /// @param writeable Whether the iterator provides write access.
         using Stop = void (*)(void* iterator, bool writeable);
 
         /// @brief Function pointer to get the address of the key pointed to by an iterator.
-        /// @param iterator Iterator.
-        /// @param writeable Whether the iterator provides write access.
-        /// @return Key address.
         using Key = const void* (*)(const void* iterator, bool writeable);
 
         /// @brief Function pointer to get the address of the value pointed to by an iterator.
-        /// @param iterator Iterator.
-        /// @param writeable Whether the iterator provides write access.
-        /// @return Value address.
         using Value = uintptr_t (*)(const void* iterator, bool writeable);
 
         /// @brief Function pointer to insert a default value into a dictionary instance.
-        /// @param instance Dictionary instance.
-        /// @param key Key.
         using InsertDefault = void (*)(void* instance, const void* key);
 
         /// @brief Function pointer to insert a copy of the given value into a dictionary instance.
-        /// @param instance Dictionary instance.
-        /// @param key Key.
-        /// @param value Value.
         using InsertCopy = void (*)(void* instance, const void* key, const void* value);
 
         /// @brief Function pointer to move the given value into a dictionary instance.
-        /// @param instance Dictionary instance.
-        /// @param key Key.
-        /// @param value Value.
         using InsertMove = void (*)(void* instance, const void* key, void* value);
 
         /// @brief Function pointer to remove a key-value pair of a dictionary instance.
-        /// @param instance Dictionary instance.
-        /// @param iterator Iterator to the key-value pair with write access.
         using Erase = void (*)(void* instance, const void* iterator);
 
         /// @brief Constructs.
