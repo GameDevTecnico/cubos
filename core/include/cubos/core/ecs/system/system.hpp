@@ -11,6 +11,7 @@
 #include <functional>
 #include <typeindex>
 #include <unordered_set>
+#include <variant>
 
 #include <cubos/core/ecs/system/accessors.hpp>
 #include <cubos/core/ecs/system/commands.hpp>

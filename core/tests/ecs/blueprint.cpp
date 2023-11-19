@@ -6,8 +6,6 @@
 
 #include "utils.hpp"
 
-using cubos::core::data::old::Package;
-using cubos::core::data::old::Unpackager;
 using cubos::core::ecs::Blueprint;
 using cubos::core::ecs::CommandBuffer;
 using cubos::core::ecs::Commands;
@@ -51,16 +49,7 @@ TEST_CASE("ecs::Blueprint")
     auto bar = blueprint.create("bar");
     auto baz = blueprint.create("baz");
     blueprint.add(baz, IntegerComponent{2});
-
-    // Add a ParentComponent to "baz" with id = "bar", using a deserializer.
-    {
-        // Pack the identifier of "bar".
-        auto barPkg = Package::from(bar);
-
-        // Unpack the identifier of "bar" into a ParentComponent.
-        Unpackager unpackager{barPkg};
-        Registry::create("ParentComponent", unpackager, blueprint, baz);
-    }
+    blueprint.add(baz, ParentComponent{bar});
 
     SUBCASE("spawn the blueprint")
     {

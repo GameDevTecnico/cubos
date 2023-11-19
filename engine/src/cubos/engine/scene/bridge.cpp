@@ -3,6 +3,7 @@
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/unordered_map.hpp>
 

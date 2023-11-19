@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <cubos/core/data/old/serialization_map.hpp>
 #include <cubos/core/ecs/entity/hash.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/memory/any_value.hpp>

@@ -5,7 +5,6 @@
 
 #include "utils.hpp"
 
-using cubos::core::data::old::Package;
 using cubos::core::ecs::Entity;
 using cubos::core::ecs::World;
 
@@ -80,59 +79,6 @@ TEST_CASE("ecs::World")
         CHECK_FALSE(world.components(foo).has<DetectDestructorComponent>());
         CHECK(constWorld.components(foo).has<ParentComponent>());
         CHECK(destroyed);
-    }
-
-    SUBCASE("add and remove components through pack and unpack")
-    {
-        // Create an entity.
-        auto foo = world.create();
-
-        // Add an integer component.
-        auto pkg = world.pack(foo);
-        pkg.fields().emplace_back("IntegerComponent", Package::from(1));
-        CHECK(world.unpack(foo, pkg));
-        CHECK(world.components(foo).has<IntegerComponent>());
-        CHECK_FALSE(world.components(foo).has<ParentComponent>());
-
-        // Check if the component was added.
-        pkg = world.pack(foo);
-        CHECK(pkg.fields().size() == 1);
-        CHECK(pkg.field("IntegerComponent").get<int>() == 1);
-
-        // Remove the integer component and add a parent component.
-        pkg.removeField("IntegerComponent");
-        pkg.fields().emplace_back("ParentComponent", Package::from(Entity{}));
-        CHECK(world.unpack(foo, pkg));
-        CHECK_FALSE(world.components(foo).has<IntegerComponent>());
-        CHECK(world.components(foo).has<ParentComponent>());
-
-        // Check if the component was added.
-        pkg = world.pack(foo);
-        CHECK(pkg.fields().size() == 1);
-        CHECK(pkg.field("ParentComponent").get<Entity>().isNull());
-    }
-
-    SUBCASE("change a component through pack and unpack")
-    {
-        // Create an entity which has an integer component and a parent component.
-        auto bar = world.create();
-        auto foo = world.create();
-        world.components(foo).add(IntegerComponent{0}).add(ParentComponent{bar});
-        CHECK(world.components(foo).has<IntegerComponent>());
-        CHECK(world.components(foo).has<ParentComponent>());
-
-        // Change the value of the integer component.
-        auto pkg = world.pack(foo);
-        pkg.field("IntegerComponent").set<int>(1);
-        CHECK(world.unpack(foo, pkg));
-        CHECK(world.components(foo).has<IntegerComponent>());
-        CHECK(world.components(foo).has<ParentComponent>());
-
-        // Check if the value was changed.
-        pkg = world.pack(foo);
-        CHECK(pkg.fields().size() == 2);
-        CHECK(pkg.field("IntegerComponent").get<int>() == 1);
-        CHECK(pkg.field("ParentComponent").get<Entity>() == bar);
     }
 
     SUBCASE("components are correctly destructed when their entity is destroyed")

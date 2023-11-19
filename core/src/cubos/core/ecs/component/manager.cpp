@@ -1,5 +1,6 @@
 #include <cubos/core/ecs/component/manager.hpp>
 #include <cubos/core/ecs/component/registry.hpp>
+#include <cubos/core/log.hpp>
 #include <cubos/core/reflection/external/primitives.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/type.hpp>
@@ -73,15 +74,4 @@ ComponentManager::Entry::Entry(std::unique_ptr<IStorage> storage)
     : storage(std::move(storage))
 {
     this->mutex = std::make_unique<std::shared_mutex>();
-}
-
-data::old::Package ComponentManager::pack(uint32_t id, std::size_t componentId, data::old::Context* context) const
-{
-    return mEntries[componentId - 1].storage->pack(id, context);
-}
-
-bool ComponentManager::unpack(uint32_t id, std::size_t componentId, const data::old::Package& package,
-                              data::old::Context* context)
-{
-    return mEntries[componentId - 1].storage->unpack(id, package, context);
 }

@@ -8,6 +8,7 @@
 #include <optional>
 
 #include <cubos/core/data/old/deserializer.hpp>
+#include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/component/storage.hpp>
 #include <cubos/core/memory/type_map.hpp>

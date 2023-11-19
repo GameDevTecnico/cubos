@@ -12,6 +12,7 @@
 #include <cubos/core/ecs/entity/manager.hpp>
 #include <cubos/core/ecs/resource/manager.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
 #include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/external/string_view.hpp>
 #include <cubos/core/reflection/type.hpp>
@@ -95,22 +96,6 @@ namespace cubos::core::ecs
 
         /// @copydoc components(Entity)
         ConstComponents components(Entity entity) const;
-
-        /// @brief Creates a package from the components of an entity.
-        /// @param entity Entity identifier.
-        /// @param context Optional context for serializing the components.
-        /// @return Package containing the components of the entity.
-        data::old::Package pack(Entity entity, data::old::Context* context = nullptr) const;
-
-        /// @brief Unpacks components specified in a package into an entity.
-        ///
-        /// Removes any components that are already present in the entity.
-        ///
-        /// @param entity Entity identifier.
-        /// @param package Package to unpack.
-        /// @param context Optional context for deserializing the components.
-        /// @return Whether the package was unpacked successfully.
-        bool unpack(Entity entity, const data::old::Package& package, data::old::Context* context = nullptr);
 
         /// @brief Returns an iterator which points to the first entity of the world.
         /// @return Iterator.
