@@ -81,6 +81,17 @@
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">static auto <a href="#afa887520ae911ec807d8ed3cba769421" class="m-doc">toString</a>(</span><span class="m-doc-wrap">const T&amp; value) -&gt; const std::string&amp;</span>
+            </dt>
+            <dd>Converts an enumeration value to its string representation.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a21f8cc23d8ad3118eb8fcf692791a297" class="m-doc">fromString</a>(</span><span class="m-doc-wrap">T&amp; value,
+              const std::string&amp; str) -&gt; bool</span>
+            </dt>
+            <dd>Converts a string to a value of a specified type.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">static auto <a href="#ab3c921ec34bcdeb2fbe77968b590ab18" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait_1_1Iterator.html" class="m-doc">Iterator</a></span>
             </dt>
             <dd>Gets an iterator to the last variant of the type.</dd>
@@ -143,6 +154,63 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="afa887520ae911ec807d8ed3cba769421"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">static const std::string&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afa887520ae911ec807d8ed3cba769421" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">const T&amp; value)</span></span>
+            </h3>
+            <p>Converts an enumeration value to its string representation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value</td>
+                  <td>Enumeration value to be converted.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String representation.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a21f8cc23d8ad3118eb8fcf692791a297"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">static bool cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a21f8cc23d8ad3118eb8fcf692791a297" class="m-doc-self">fromString</a>(</span><span class="m-doc-wrap">T&amp; value,
+              const std::string&amp; str)</span></span>
+            </h3>
+            <p>Converts a string to a value of a specified type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">value&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>Variable to store the converted value.</td>
+                </tr>
+                <tr>
+                  <td>str</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether the conversion was successful, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="ab3c921ec34bcdeb2fbe77968b590ab18"><div>
             <h3>
               <span class="m-doc-wrap-bumper">static <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait_1_1Iterator.html" class="m-doc">Iterator</a> cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab3c921ec34bcdeb2fbe77968b590ab18" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">)</span></span>
