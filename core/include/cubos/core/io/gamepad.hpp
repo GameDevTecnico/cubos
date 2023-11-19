@@ -1,5 +1,5 @@
 /// @file
-/// @brief Struct Gref cubos::core::io::GamepadState and related enums.
+/// @brief Struct @ref cubos::core::io::GamepadState and related enums.
 /// @ingroup core-io
 
 #pragma once
