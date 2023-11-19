@@ -15,7 +15,9 @@ add_executable(
     reflection/traits/nullable.cpp
     reflection/traits/enum.cpp
     reflection/external/primitives.cpp
+    reflection/external/cstring.cpp
     reflection/external/string.cpp
+    reflection/external/string_view.cpp
     reflection/external/uuid.cpp
     reflection/external/glm.cpp
     reflection/external/vector.cpp
@@ -40,6 +42,7 @@ add_executable(
     ecs/world.cpp
     ecs/query.cpp
     ecs/blueprint.cpp
+
     ecs/commands.cpp
     ecs/system.cpp
     ecs/dispatcher.cpp
