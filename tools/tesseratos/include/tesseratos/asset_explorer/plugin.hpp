@@ -21,6 +21,7 @@ namespace tesseratos
     /// ## Dependencies
     /// - @ref imgui-plugin
     /// - @ref assets-plugin
+    /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Event sent when an asset is selected.
     struct AssetSelectedEvent

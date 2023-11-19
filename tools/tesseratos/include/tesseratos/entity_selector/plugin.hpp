@@ -24,6 +24,9 @@ namespace tesseratos
     ///
     /// ## Resources
     /// - @ref EntitySelector - identifies the currently selected entity.
+    ///
+    /// ## Dependencies
+    /// - @ref tesseratos-toolbox-plugin
 
     /// @brief Resource which identifies the currently selected entity.
     struct EntitySelector

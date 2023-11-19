@@ -29,8 +29,6 @@ static void inspectEntity(Write<World> world)
         return;
     }
 
-    auto selection = world->read<EntitySelector>().get().selection;
-
     ImGui::Begin("Entity Inspector");
     if (!ImGui::IsWindowCollapsed())
     {

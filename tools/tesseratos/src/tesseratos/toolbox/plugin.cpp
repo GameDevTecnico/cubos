@@ -5,7 +5,6 @@
 #include <tesseratos/toolbox/plugin.hpp>
 
 using cubos::core::ecs::EventWriter;
-using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
 
 using cubos::core::ecs::Write;
@@ -38,25 +37,16 @@ void Toolbox::doClick(std::string toolName)
     mToolsMap[toolName] = !mToolsMap[toolName];
 }
 
-auto Toolbox::begin()
-{
-    return mToolsMap.begin();
-}
-
-auto Toolbox::end()
-{
-    return mToolsMap.end();
-}
-
 static void showToolbox(Write<Toolbox> toolbox)
 {
     ImGui::Begin("Toolbox");
 
-    for (auto it = toolbox->begin(); it != toolbox->end(); ++it)
+    for (const auto& [tool, open] : *toolbox)
     {
-        if (ImGui::Button(data(it->first)))
+        bool check = open;
+        if (ImGui::Checkbox(data(tool), &check))
         {
-            toolbox->doClick(it->first);
+            toolbox->doClick(tool);
         }
     }
 
