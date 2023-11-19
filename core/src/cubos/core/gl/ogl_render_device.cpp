@@ -28,11 +28,11 @@ static void GLAPIENTRY messageCallback(GLenum source, GLenum type, GLuint id, GL
 
     if (severity == GL_DEBUG_SEVERITY_HIGH)
     {
-        CUBOS_ERROR("OpenGL error (source = 0x{:x}, type = 0x{:x}): {}", source, type, message);
+        CUBOS_ERROR("OpenGL error (source = {}, type = {}): {}", source, type, message);
     }
     else if (severity == GL_DEBUG_SEVERITY_MEDIUM)
     {
-        CUBOS_WARN("OpenGL warning (source = 0x{:x}, type = 0x{:x}): {}", source, type, message);
+        CUBOS_WARN("OpenGL warning (source = {}, type = {}): {}", source, type, message);
     }
 }
 
