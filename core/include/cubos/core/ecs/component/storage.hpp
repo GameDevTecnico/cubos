@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <cubos/core/data/old/package.hpp>
-#include <cubos/core/data/old/serialization_map.hpp>
 #include <cubos/core/ecs/entity/manager.hpp>
 
 namespace cubos::core::ecs
@@ -39,23 +37,6 @@ namespace cubos::core::ecs
         /// @param index Index of the value to be retrieved.
         /// @return Pointer to the value.
         virtual const void* get(uint32_t index) const = 0;
-
-        /// @brief Packages a value. If the value doesn't exist, undefined behavior will occur.
-        /// @param index Index of the value to package.
-        /// @param context Optional context used for serialization.
-        /// @return Packaged value.
-        virtual data::old::Package pack(uint32_t index, data::old::Context* context) const = 0;
-
-        /// @brief Unpackages a value.
-        /// @param index Index of the value to unpackage.
-        /// @param package Package to unpackage.
-        /// @param context Optional context used for deserialization.
-        /// @return Whether the unpackaging was successful.
-        virtual bool unpack(uint32_t index, const data::old::Package& package, data::old::Context* context) = 0;
-
-        /// @brief Gets the type the components being stored here.
-        /// @return Component type.
-        virtual std::type_index type() const = 0;
     };
 
     /// @brief Abstract container for a component type @p T.
@@ -67,29 +48,5 @@ namespace cubos::core::ecs
     public:
         /// @brief Component type.
         using Type = T;
-
-        // Implementation.
-
-        inline data::old::Package pack(uint32_t index, data::old::Context* context) const override
-        {
-            return data::old::Package::from(*static_cast<const T*>(this->get(index)), context);
-        }
-
-        inline bool unpack(uint32_t index, const data::old::Package& package, data::old::Context* context) override
-        {
-            T value;
-            if (package.into(value, context))
-            {
-                this->insert(index, &value);
-                return true;
-            }
-
-            return false;
-        }
-
-        inline std::type_index type() const override
-        {
-            return std::type_index(typeid(T));
-        }
     };
 } // namespace cubos::core::ecs

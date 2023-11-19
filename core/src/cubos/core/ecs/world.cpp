@@ -45,65 +45,6 @@ World::ConstComponents World::components(Entity entity) const
     return ConstComponents{*this, entity};
 }
 
-data::old::Package World::pack(Entity entity, data::old::Context* context) const
-{
-    CUBOS_ASSERT(this->isAlive(entity), "Entity is not alive");
-
-    Entity::Mask mask = mEntityManager.getMask(entity);
-
-    auto pkg = data::old::Package(data::old::Package::Type::Object);
-    for (std::size_t i = 1; i < mask.size(); ++i)
-    {
-        if (mask.test(i))
-        {
-            auto name = mComponentManager.getType(i).name();
-            pkg.fields().push_back({name, mComponentManager.pack(entity.index, i, context)});
-        }
-    }
-
-    return pkg;
-}
-
-bool World::unpack(Entity entity, const data::old::Package& package, data::old::Context* context)
-{
-    if (package.type() != data::old::Package::Type::Object)
-    {
-        CUBOS_ERROR("Entities must be packaged as objects");
-        return false;
-    }
-
-    // Remove all existing components.
-    mComponentManager.removeAll(entity.index);
-
-    Entity::Mask mask{1};
-    bool success = true;
-
-    for (const auto& field : package.fields())
-    {
-        const auto* type = Registry::type(field.first);
-        if (type == nullptr)
-        {
-            CUBOS_ERROR("Unknown component type '{}'", field.first);
-            success = false;
-            continue;
-        }
-
-        auto id = mComponentManager.getID(*type);
-        if (mComponentManager.unpack(entity.index, id, field.second, context))
-        {
-            mask.set(id);
-        }
-        else
-        {
-            CUBOS_ERROR("Could not unpack component '{}'", field.first);
-            success = false;
-        }
-    }
-
-    mEntityManager.setMask(entity, mask);
-    return success;
-}
-
 World::Iterator World::begin() const
 {
     return mEntityManager.begin();

@@ -4,12 +4,14 @@
 
 #pragma once
 
+#include <functional>
 #include <shared_mutex>
 #include <typeindex>
 #include <unordered_map>
 #include <utility>
 
 #include <cubos/core/ecs/world.hpp>
+#include <cubos/core/log.hpp>
 
 namespace cubos::core::ecs
 {
