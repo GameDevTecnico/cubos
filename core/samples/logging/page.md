@@ -8,29 +8,28 @@ Logging in **CUBOS.** is done through the logging macros defined in @ref core/lo
 
 @snippet logging/main.cpp Logging include
 
-Before any logging is done, the logger must be initialized.
-This usually happens right at the beginning of the program.
-
-@snippet logging/main.cpp Logger initialization
-
 There are six logging levels, each with its own macro.
 In order of increasing severity, they are:
 
 @snippet logging/main.cpp Logging macros
 
-These macros can also take arguments:
+The minimum registered log level is set with @ref cubos::core::Logger::level "Logger::level". On
+this sample, to demonstrate @ref CUBOS_TRACE, we set it to @ref cubos::core::Logger::Level::Trace
+"Trace":
+
+@snippet logging/main.cpp Set logging level
+
+@note By default, on debug builds all logging calls are compiled, while on release builds only
+messages with severity level @ref CUBOS_LOG_LEVEL_INFO or higher are compiled. This can be changed
+by defining @ref CUBOS_LOG_LEVEL to the desired level.
+
+These macros can also take arguments, which can be of any reflectable type.
 
 @snippet logging/main.cpp Logging macros with arguments
 
-@note By default, on debug builds all messages are logged, while on release builds only messages with
-severity level @ref CUBOS_LOG_LEVEL_INFO or higher are logged. This can be changed by defining
-@ref CUBOS_LOG_LEVEL to the desired level.
+To print external types, such as `glm` math types, `STL` types (`std::string`, ...) or primitives
+(`int`, ...), you'll have to include their respective headers in the @ref core/reflection/external
+directory. Notice that although we aren't printing C-strings directly, we must still include them
+as our `std::unordered_map` contains `const char*`s.
 
-Serializable types can also be logged, using @ref cubos::core::data::old::Debug.
-
-@snippet logging/main.cpp Debug wrapper include
-
-By wrapping the value in @ref cubos::core::data::old::Debug, the type is serialized using the
-@ref cubos::core::data::old::DebugSerializer, and the result is logged.
-
-@snippet logging/main.cpp Debug wrapper usage
+@snippet logging/main.cpp External reflection includes

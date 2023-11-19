@@ -4,17 +4,18 @@
 #include <cubos/core/log.hpp>
 /// [Logging include]
 
-/// [Debug wrapper include]
-#include <cubos/core/data/old/debug_serializer.hpp>
+/// [External reflection includes]
+#include <cubos/core/reflection/external/cstring.hpp>
+#include <cubos/core/reflection/external/glm.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
+#include <cubos/core/reflection/external/unordered_map.hpp>
+/// [External reflection includes]
 
-using cubos::core::data::old::Debug;
-/// [Debug wrapper include]
-
-/// [Logger initialization]
 int main()
 {
-    cubos::core::initializeLogger();
-    /// [Logger initialization]
+    /// [Set logging level]
+    cubos::core::Logger::level(cubos::core::Logger::Level::Trace);
+    /// [Set logging level]
 
     /// [Logging macros]
     CUBOS_TRACE("Trace message");
@@ -26,13 +27,8 @@ int main()
     /// [Logging macros]
 
     /// [Logging macros with arguments]
-    CUBOS_ERROR("Error message with {} argument", 1);
-    /// [Logging macros with arguments]
-
-    /// [Debug wrapper usage]
-    CUBOS_INFO("Serializable type: {}", Debug(glm::vec3(0.0F, 1.0F, 2.0F)));
-    CUBOS_INFO("Again, but with type information: {:t}", Debug(glm::vec3(0.0F, 1.0F, 2.0F)));
-    CUBOS_INFO("Since unordered maps are serializable, we can do this: {}",
-               Debug((std::unordered_map<int, const char*>{{1, "one"}, {2, "two"}})));
+    CUBOS_INFO("An integer: {}", 1);
+    CUBOS_INFO("A glm::vec3: {}", glm::vec3(0.0F, 1.0F, 2.0F));
+    CUBOS_INFO("An std::unordered_map: {}", std::unordered_map<int, const char*>{{1, "one"}, {2, "two"}});
 }
-/// [Debug wrapper usage]
+/// [Logging macros with arguments]
