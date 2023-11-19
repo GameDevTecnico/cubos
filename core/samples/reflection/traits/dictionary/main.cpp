@@ -1,4 +1,5 @@
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 /// [Printing any dictionary]
 #include <cubos/core/reflection/traits/dictionary.hpp>

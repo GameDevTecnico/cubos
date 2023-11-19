@@ -1,6 +1,7 @@
 #include <cubos/core/ecs/component/registry.hpp>
 #include <cubos/core/ecs/world.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using namespace cubos::core;
@@ -18,7 +19,7 @@ Entity World::create()
     Entity::Mask mask{};
     mask.set(0);
     auto entity = mEntityManager.create(mask);
-    CUBOS_DEBUG("Created entity {}#{}", entity.index, entity.generation);
+    CUBOS_DEBUG("Created entity {}", entity);
     return entity;
 }
 
@@ -26,7 +27,7 @@ void World::destroy(Entity entity)
 {
     mEntityManager.destroy(entity);
     mComponentManager.removeAll(entity.index);
-    CUBOS_DEBUG("Destroyed entity {}#{}", entity.index, entity.generation);
+    CUBOS_DEBUG("Destroyed entity {}", entity);
 }
 
 bool World::isAlive(Entity entity) const
@@ -151,7 +152,7 @@ auto World::Components::add(const reflection::Type& type, void* value) -> Compon
     mWorld.mEntityManager.setMask(mEntity, mask);
     mWorld.mComponentManager.add(mEntity.index, type, value);
 
-    CUBOS_DEBUG("Added component {} to entity {}#{}", type.name(), mEntity.index, mEntity.generation);
+    CUBOS_DEBUG("Added component {} to entity {}", type.name(), mEntity, mEntity);
     return *this;
 }
 
@@ -163,7 +164,7 @@ auto World::Components::remove(const reflection::Type& type) -> Components&
     mWorld.mEntityManager.setMask(mEntity, mask);
     mWorld.mComponentManager.remove(mEntity.index, componentId);
 
-    CUBOS_DEBUG("Removed component {} from entity {}#{}", type.name(), mEntity.index, mEntity.generation);
+    CUBOS_DEBUG("Removed component {} from entity {}", type.name(), mEntity);
     return *this;
 }
 

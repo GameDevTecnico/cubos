@@ -2,6 +2,7 @@
 #include <cubos/core/data/fs/file_stream.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/buffer_stream.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::data;

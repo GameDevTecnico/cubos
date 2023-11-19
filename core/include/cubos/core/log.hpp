@@ -329,7 +329,7 @@ namespace cubos::core
             {
                 ([&]() { format = Logger::streamFormat(stream, format, reflection::reflect<TArgs>(), &args); }(), ...);
             }
-            Logger::write(level, location, stream.string());
+            Logger::write(level, std::move(location), stream.string());
         }
 
         /// @brief Reads a log entry, if there's a new one.

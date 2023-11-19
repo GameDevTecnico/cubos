@@ -14,6 +14,7 @@
 
 #include "../utils.hpp"
 
+using cubos::core::Logger;
 using cubos::core::data::JSONDeserializer;
 using cubos::core::reflection::autoConstructibleTrait;
 using cubos::core::reflection::FieldsTrait;
@@ -88,7 +89,7 @@ TEST_CASE("data::JSONDeserializer")
 {
     using Json = nlohmann::json;
 
-    cubos::core::disableLogging();
+    Logger::level(Logger::Level::Critical);
 
     JSONDeserializer des{};
 

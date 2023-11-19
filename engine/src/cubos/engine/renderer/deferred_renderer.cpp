@@ -1,3 +1,4 @@
+#include <cstring>
 #include <random>
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -8,6 +9,7 @@
 #include <cubos/core/gl/debug.hpp>
 #include <cubos/core/gl/util.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/primitives.hpp>
 
 #include <cubos/engine/renderer/deferred_renderer.hpp>
 #include <cubos/engine/renderer/frame.hpp>

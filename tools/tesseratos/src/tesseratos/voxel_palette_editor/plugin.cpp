@@ -1,6 +1,5 @@
 #include <imgui.h>
 
-#include <cubos/core/data/old/debug_serializer.hpp>
 #include <cubos/core/log.hpp>
 #include <cubos/core/reflection/type.hpp>
 
@@ -11,7 +10,6 @@
 #include <tesseratos/asset_explorer/plugin.hpp>
 #include <tesseratos/voxel_palette_editor/plugin.hpp>
 
-using cubos::core::data::old::Debug;
 using cubos::core::ecs::EventReader;
 using cubos::core::ecs::Read;
 using cubos::core::ecs::Write;
@@ -54,7 +52,7 @@ static void savePaletteUiGuard(Write<Assets> assets, Write<SelectedPaletteInfo> 
 
         if (ImGui::Button("Yes", ImVec2(80, 0)))
         {
-            CUBOS_INFO("Saving palette asset {} modificaations", Debug(selectedPalette->next));
+            CUBOS_INFO("Saving palette asset {} modificaations", selectedPalette->next);
             assets->store(selectedPalette->asset, selectedPalette->paletteCopy);
             assets->save(selectedPalette->asset);
             optionSelected = true;
@@ -65,7 +63,7 @@ static void savePaletteUiGuard(Write<Assets> assets, Write<SelectedPaletteInfo> 
 
         if (ImGui::Button("No", ImVec2(80, 0)))
         {
-            CUBOS_DEBUG("Discarding palette asset {} modifications", Debug(selectedPalette->next));
+            CUBOS_DEBUG("Discarding palette asset {} modifications", selectedPalette->next);
             optionSelected = true;
         }
 
@@ -95,7 +93,7 @@ static void checkAssetEventSystem(EventReader<AssetSelectedEvent> reader, Write<
     {
         if (assets->type(event.asset).is<VoxelPalette>())
         {
-            CUBOS_INFO("Opening palette asset {}", Debug(event.asset));
+            CUBOS_INFO("Opening palette asset {}", event.asset);
             if (!selectedPalette->asset.isNull() && selectedPalette->modified)
             {
                 CUBOS_DEBUG("Opening save palette UI guard");

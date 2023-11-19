@@ -160,7 +160,9 @@ bool DebugSerializer::decompose(const Type& type, const void* value)
     else if (type.has<StringConversionTrait>())
     {
         const auto& trait = type.get<StringConversionTrait>();
+        mStream.put('"');
         mStream.print(trait.into(value));
+        mStream.put('"');
     }
     else
     {

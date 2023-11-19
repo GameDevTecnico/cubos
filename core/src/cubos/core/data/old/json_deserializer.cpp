@@ -1,5 +1,6 @@
 #include <cubos/core/data/old/json_deserializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
 
 using namespace cubos::core;
 using namespace cubos::core::data::old;

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <memory>
 #include <optional>
 
 #include <cubos/core/data/old/deserializer.hpp>

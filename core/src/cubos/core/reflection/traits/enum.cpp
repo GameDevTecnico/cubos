@@ -1,4 +1,5 @@
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/enum.hpp>
 
 using cubos::core::reflection::EnumTrait;

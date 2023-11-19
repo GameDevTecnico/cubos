@@ -3,6 +3,7 @@
 #include <cubos/core/log.hpp>
 #include <cubos/core/memory/any_value.hpp>
 #include <cubos/core/memory/move.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/traits/constructible.hpp>
 #include <cubos/core/reflection/type.hpp>
 

@@ -1,3 +1,5 @@
+#include <cubos/core/reflection/external/string.hpp>
+
 #include <cubos/engine/cubos.hpp>
 #include <cubos/engine/settings/plugin.hpp>
 

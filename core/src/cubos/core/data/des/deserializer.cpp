@@ -1,5 +1,6 @@
 #include <cubos/core/data/des/deserializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 #include <cubos/core/reflection/type.hpp>
 
 using cubos::core::data::Deserializer;

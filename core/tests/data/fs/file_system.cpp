@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include <doctest/doctest.h>
 
 #include <cubos/core/data/fs/archive.hpp>
@@ -7,6 +9,7 @@
 
 #include "../utils.hpp"
 
+using cubos::core::Logger;
 using cubos::core::data::Archive;
 using cubos::core::data::File;
 using cubos::core::data::FileSystem;
@@ -61,7 +64,7 @@ inline void unmountAll(const File::Handle& handle)
 
 TEST_CASE("data::FileSystem") // NOLINT(readability-function-size)
 {
-    cubos::core::disableLogging();
+    Logger::level(Logger::Level::Critical);
     unmountAll(FileSystem::root());
 
     SUBCASE("without anything mounted")

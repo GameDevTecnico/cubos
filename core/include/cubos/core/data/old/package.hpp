@@ -7,6 +7,7 @@
 #include <cubos/core/data/old/deserializer.hpp>
 #include <cubos/core/data/old/serializer.hpp>
 #include <cubos/core/log.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
 
 namespace cubos::core::data::old
 {

@@ -1,6 +1,8 @@
 #include <iterator>
 
 #include <cubos/core/data/old/package.hpp>
+#include <cubos/core/reflection/external/cstring.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 using namespace cubos::core::data::old;
 
@@ -502,7 +504,7 @@ void impl::Packager::beginObject(const char* name)
 
 void impl::Packager::endObject()
 {
-    assert(!mStack.empty());
+    CUBOS_ASSERT(!mStack.empty());
     mStack.pop();
 }
 
@@ -513,7 +515,7 @@ void impl::Packager::beginArray(std::size_t /*length*/, const char* name)
 
 void impl::Packager::endArray()
 {
-    assert(!mStack.empty());
+    CUBOS_ASSERT(!mStack.empty());
     mStack.pop();
 }
 
@@ -524,7 +526,7 @@ void impl::Packager::beginDictionary(std::size_t /*length*/, const char* name)
 
 void impl::Packager::endDictionary()
 {
-    assert(!mStack.empty());
+    CUBOS_ASSERT(!mStack.empty());
     mStack.pop();
 }
 
@@ -540,7 +542,7 @@ Package* impl::Packager::push(Package::Data&& data, const char* name)
     switch (pkg->type())
     {
     case Package::Type::Object:
-        assert(name != nullptr);
+        CUBOS_ASSERT(name != nullptr);
         pkg->fields().emplace_back(name, Package());
         pkg->fields().back().second.mData = std::move(data);
         return &pkg->fields().back().second;
@@ -753,7 +755,7 @@ void Unpackager::beginObject()
 
 void Unpackager::endObject()
 {
-    assert(!mStack.empty());
+    CUBOS_ASSERT(!mStack.empty());
     mStack.pop();
 }
 
@@ -772,7 +774,7 @@ std::size_t Unpackager::beginArray()
 
 void Unpackager::endArray()
 {
-    assert(!mStack.empty());
+    CUBOS_ASSERT(!mStack.empty());
     mStack.pop();
 }
 
@@ -791,7 +793,7 @@ std::size_t Unpackager::beginDictionary()
 
 void Unpackager::endDictionary()
 {
-    assert(!mStack.empty());
+    CUBOS_ASSERT(!mStack.empty());
     mStack.pop();
 }
 

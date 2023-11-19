@@ -1,5 +1,6 @@
 #include <cubos/core/ecs/blueprint.hpp>
 #include <cubos/core/ecs/system/commands.hpp>
+#include <cubos/core/reflection/external/string.hpp>
 
 using namespace cubos::core::ecs;
 
