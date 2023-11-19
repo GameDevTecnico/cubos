@@ -1,14 +1,12 @@
 {
-	"imports": {
-	},
-	"entities": {
-	  "main": {
-		"cubos/position": {
-		  "x": 2,
-		  "y": 2,
-		  "z": 2
-		}
-	  }
-	}
+  "imports": {},
+  "entities": {
+    "main": {
+      "cubos::engine::Position": {
+        "x": 2,
+        "y": 2,
+        "z": 2
+      }
+    }
   }
-  
+}
