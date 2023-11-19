@@ -43,7 +43,7 @@ int main()
         {
             break;
         }
-        Stream::stdOut.printf(" {} , ", it->get().data);
+        Stream::stdOut.printf(" {} , ", it->data);
     }
 
     // range based
