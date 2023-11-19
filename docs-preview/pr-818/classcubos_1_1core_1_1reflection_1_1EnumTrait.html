@@ -55,6 +55,7 @@
             <li>
               Reference
               <ul>
+                <li><a href="#pub-types">Public types</a></li>
                 <li><a href="#pub-static-methods">Public static functions</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
@@ -62,7 +63,20 @@
             </li>
           </ul>
         </nav>
-<aside class="m-note m-default"><h4>See also</h4><p>See examples-core-reflection-traits-enum for an example of using this trait.</p></aside>
+<aside class="m-note m-default"><h4>See also</h4><p>See <a href="examples-core-reflection-traits-enum.html" class="m-doc">Enum Trait</a> for an example of using this trait.</p></aside>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a3cecdaa4171940801e067cc91ba3e279">
+              using <a href="#a3cecdaa4171940801e067cc91ba3e279" class="m-doc-self">Tester</a> = bool(*)(const void*instance)
+            </dt>
+            <dd>Function pointer to test if a value matches the variant.</dd>
+            <dt id="a3c5b2ff96ac0e7be3844c1e491aa546c">
+              using <a href="#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc-self">Setter</a> = void(*)(void*instance)
+            </dt>
+            <dd>Function pointer to set the value of the variant.</dd>
+          </dl>
+        </section>
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
@@ -75,6 +89,10 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
+            <dt id="aad7f635cb554dd492caeb13313cbd11a">
+              <span class="m-doc-wrap-bumper"><a href="#aad7f635cb554dd492caeb13313cbd11a" class="m-doc-self">EnumTrait</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Constructs.</dd>
             <dt>
               <span class="m-doc-wrap-bumper"><a href="#a4de8cf2bc7951ab7804eb9ab5b3d11c1" class="m-doc">EnumTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp; other) <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
@@ -85,21 +103,22 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a33b102794147bdf7df5a7df8f1faaf57" class="m-doc">addVariant</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
-              std::string name)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#ac0cebb961a32feab109fcca1533630d1" class="m-doc">addVariant</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span>
             </dt>
-            <dd>Adds a variant to the type. The getter will be deleted using <code>delete</code> and thus must be allocated using <code>new</code>.</dd>
+            <dd>Adds a variant to the type.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a82ae1c7dfdcff91a02c94aa526ce701b" class="m-doc">withVariant</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
-              std::string name) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad832e7e4b79fe21a7e8059ac50de45fb" class="m-doc">withVariant</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Adds a variant to the type.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename O, typename F&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0261b8e4b518e07156c1c4978745da34" class="m-doc">withVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              F O::* enumerator) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp;</span>
+              <div class="m-doc-template">template&lt;auto V&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9212a8903d2db94cc4c5a8cca4699d24" class="m-doc">withVariant</a>(</span><span class="m-doc-wrap">std::string name) &amp;&amp; -&gt; <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp;</span>
             </dt>
-            <dd></dd>
+            <dd>Adds a variant to the type.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a09e4a68bd71030bd96ef9190691a5326" class="m-doc">contains</a>(</span><span class="m-doc-wrap">const std::string&amp; name) const -&gt; bool</span>
             </dt>
@@ -155,54 +174,96 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a33b102794147bdf7df5a7df8f1faaf57"><div>
+          <section class="m-doc-details" id="ac0cebb961a32feab109fcca1533630d1"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a33b102794147bdf7df5a7df8f1faaf57" class="m-doc-self">addVariant</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
-              std::string name)</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac0cebb961a32feab109fcca1533630d1" class="m-doc-self">addVariant</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter)</span></span>
             </h3>
-            <p>Adds a variant to the type. The getter will be deleted using <code>delete</code> and thus must be allocated using <code>new</code>.</p>
+            <p>Adds a variant to the type.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">type</td>
-                  <td><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait_1_1Variant.html" class="m-doc">Variant</a> type.</td>
+                  <td style="width: 1%">name</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait_1_1Variant.html" class="m-doc">Variant</a> name.</td>
                 </tr>
                 <tr>
-                  <td>name</td>
-                  <td><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait_1_1Variant.html" class="m-doc">Variant</a> name.</td>
+                  <td>tester</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>setter</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a82ae1c7dfdcff91a02c94aa526ce701b"><div>
+          <section class="m-doc-details" id="ad832e7e4b79fe21a7e8059ac50de45fb"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a82ae1c7dfdcff91a02c94aa526ce701b" class="m-doc-self">withVariant</a>(</span><span class="m-doc-wrap">const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">Type</a>&amp; type,
-              std::string name) &amp;&amp;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad832e7e4b79fe21a7e8059ac50de45fb" class="m-doc-self">withVariant</a>(</span><span class="m-doc-wrap">std::string name,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3cecdaa4171940801e067cc91ba3e279" class="m-doc">Tester</a> tester,
+              <a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html#a3c5b2ff96ac0e7be3844c1e491aa546c" class="m-doc">Setter</a> setter) &amp;&amp;</span></span>
             </h3>
+            <p>Adds a variant to the type.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">name</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait_1_1Variant.html" class="m-doc">Variant</a> name.</td>
+                </tr>
+                <tr>
+                  <td>tester</td>
+                  <td>Function to test if a value matches the variant.</td>
+                </tr>
+                <tr>
+                  <td>setter</td>
+                  <td>Function to set the value of the variant.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
+                  <th>Returns</th>
                   <td>Trait.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a0261b8e4b518e07156c1c4978745da34"><div>
+          <section class="m-doc-details" id="a9212a8903d2db94cc4c5a8cca4699d24"><div>
             <h3>
               <div class="m-doc-template">
-                template&lt;typename O, typename F&gt;
+                template&lt;auto V&gt;
               </div>
-              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0261b8e4b518e07156c1c4978745da34" class="m-doc-self">withVariant</a>(</span><span class="m-doc-wrap">std::string name,
-              F O::* enumerator) &amp;&amp;</span></span>
+              <span class="m-doc-wrap-bumper"><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait.html" class="m-doc">EnumTrait</a>&amp;&amp; cubos::<wbr />core::<wbr />reflection::<wbr />EnumTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9212a8903d2db94cc4c5a8cca4699d24" class="m-doc-self">withVariant</a>(</span><span class="m-doc-wrap">std::string name) &amp;&amp;</span></span>
             </h3>
+            <p>Adds a variant to the type.</p>
             <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">V</td>
+                  <td>Enumerator.</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td><a href="classcubos_1_1core_1_1reflection_1_1EnumTrait_1_1Variant.html" class="m-doc">Variant</a> name.</td>
+                </tr>
+              </tbody>
               <tfoot>
                 <tr>
-                  <th style="width: 1%">Returns</th>
+                  <th>Returns</th>
                   <td>Trait.</td>
                 </tr>
               </tfoot>
