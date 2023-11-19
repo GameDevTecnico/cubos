@@ -48,7 +48,6 @@ set(CUBOS_CORE_SOURCE
 
     "src/cubos/core/data/old/serializer.cpp"
     "src/cubos/core/data/old/deserializer.cpp"
-    "src/cubos/core/data/old/debug_serializer.cpp"
     "src/cubos/core/data/old/json_serializer.cpp"
     "src/cubos/core/data/old/json_deserializer.cpp"
     "src/cubos/core/data/old/binary_serializer.cpp"
