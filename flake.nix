@@ -31,7 +31,6 @@
             # = libs =
             glfw
             glm
-            # spdlog
             # fmt
             doctest
 

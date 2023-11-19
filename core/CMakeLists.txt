@@ -9,7 +9,6 @@ endif ()
 option(WITH_OPENAL "With OpenAL?" ON)
 option(GLM_USE_SUBMODULE "Compile GLM from source?" ON)
 option(DOCTEST_USE_SUBMODULE "Compile doctest from source?" ON)
-option(SPDLOG_USE_SUBMODULE "Compile SPDLOG from source?" ON)
 option(FMT_USE_SUBMODULE "Compile FMT from source?" ON)
 
 set(CUBOS_CORE_ECS_MAX_COMPONENTS "63" CACHE STRING "The maximum number of components registered in an ECS world.")
@@ -161,13 +160,6 @@ else ()
     find_package(fmt REQUIRED)
 endif ()
 
-if (SPDLOG_USE_SUBMODULE)
-    add_subdirectory(lib/spdlog SYSTEM)
-else ()
-    set(SPDLOG_FMT_EXTERNAL ON CACHE BOOL "" FORCE)
-    find_package(spdlog REQUIRED)
-endif ()
-
 set(JSON_BuildTests OFF CACHE INTERNAL "")
 add_subdirectory(lib/json)
 
@@ -178,7 +170,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 target_compile_definitions(cubos-core PUBLIC GLM_FORCE_SILENT_WARNINGS) # Needed for compilation to succeed on MSVC
-target_link_libraries(cubos-core PUBLIC glm::glm spdlog nlohmann_json::nlohmann_json fmt::fmt ${CMAKE_DL_LIBS})
+target_link_libraries(cubos-core PUBLIC glm::glm nlohmann_json::nlohmann_json fmt::fmt ${CMAKE_DL_LIBS})
 target_link_libraries(cubos-core PRIVATE Threads::Threads)
 
 # Add core tests
