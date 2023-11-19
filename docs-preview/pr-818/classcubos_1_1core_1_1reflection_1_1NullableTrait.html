@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EnumTrait::Variant class | CUBOS. Docs</title>
+  <title>cubos::core::reflection::NullableTrait class | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,9 +46,10 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="classEnumTrait.html">EnumTrait</a>::<wbr/></span>Variant <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacecubos.html">cubos</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core.html">core</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespacecubos_1_1core_1_1reflection.html">reflection</a>::<wbr/></span>NullableTrait <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="nullable_8hpp.html">&lt;core/reflection/traits/nullable.hpp&gt;</a></div>
         </h1>
-        <p><a href="classEnumTrait_1_1Variant.html" class="m-doc">EnumTrait::<wbr />Variant</a> class represents an individual variant within the enumerated type.</p>
+        <p>Used to manipulate values of null-representable types.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -62,128 +63,83 @@
             </li>
           </ul>
         </nav>
+<aside class="m-note m-default"><h4>See also</h4><p>See <a href="examples-core-reflection-traits-nullable.html" class="m-doc">Nullable Trait</a> for an example of using this trait.</p></aside>
         <section id="pub-types">
           <h2><a href="#pub-types">Public types</a></h2>
           <dl class="m-doc">
-            <dt id="a861b6405b465565aefe338ddae2887f3">
-              using <a href="#a861b6405b465565aefe338ddae2887f3" class="m-doc-self">Tester</a> = bool(*)(const void*instance)
+            <dt id="ab76d0f60b84dd11f3502f4fb18038842">
+              using <a href="#ab76d0f60b84dd11f3502f4fb18038842" class="m-doc-self">IsNull</a> = bool(*)(const void*instance)
             </dt>
-            <dd>Function pointer to test if a value matches the variant.</dd>
-            <dt id="a8e1958246ae0dd5685a5f61d2947decb">
-              using <a href="#a8e1958246ae0dd5685a5f61d2947decb" class="m-doc-self">Setter</a> = void(*)(void*instance)
+            <dd>Function pointer to check if a value represents null.</dd>
+            <dt id="a0947b4098172aea31d8d606cb9ce51e3">
+              using <a href="#a0947b4098172aea31d8d606cb9ce51e3" class="m-doc-self">SetToNull</a> = void(*)(void*instance)
             </dt>
-            <dd>Function pointer to set the value of the variant.</dd>
+            <dd>Function pointer to set a value to its null representation.</dd>
           </dl>
         </section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ad6f1b9849b2553b1378a4043f83721f3" class="m-doc">Variant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classEnumTrait_1_1Variant.html#a861b6405b465565aefe338ddae2887f3" class="m-doc">Tester</a> tester,
-              <a href="classEnumTrait_1_1Variant.html#a8e1958246ae0dd5685a5f61d2947decb" class="m-doc">Setter</a> setter)</span>
+            <dt id="a26ebab93eb33650d8c5c8b2aa64b95eb">
+              <span class="m-doc-wrap-bumper"><a href="#a26ebab93eb33650d8c5c8b2aa64b95eb" class="m-doc-self">NullableTrait</a>(</span><span class="m-doc-wrap"><a href="classcubos_1_1core_1_1reflection_1_1NullableTrait.html#ab76d0f60b84dd11f3502f4fb18038842" class="m-doc">IsNull</a> isNull,
+              <a href="classcubos_1_1core_1_1reflection_1_1NullableTrait.html#a0947b4098172aea31d8d606cb9ce51e3" class="m-doc">SetToNull</a> setToNull)</span>
             </dt>
-            <dd>Constructs a variant with a given name, tester function, and setter function.</dd>
+            <dd>Constructs.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5aae13a1f2ac7b747c90786a49dfee29" class="m-doc">test</a>(</span><span class="m-doc-wrap">const void* value) const -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc">isNull</a>(</span><span class="m-doc-wrap">const void* instance) const -&gt; bool</span>
             </dt>
-            <dd>Tests if the given value matches the variant.</dd>
+            <dd>Checks if the given value represents null.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#ad7253c58e2e9af7747f30ab3e2b37d08" class="m-doc">set</a>(</span><span class="m-doc-wrap">void* value) const</span>
+              <span class="m-doc-wrap-bumper">void <a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc">setToNull</a>(</span><span class="m-doc-wrap">void* instance) const</span>
             </dt>
-            <dd>Sets the value of the variant in the provided memory location.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab6389b99eaf28848f044f49faa241ddd" class="m-doc">name</a>(</span><span class="m-doc-wrap">) const -&gt; const std::string&amp;</span>
-            </dt>
-            <dd>Returns the name of the variant.</dd>
+            <dd>Sets a value to its null representation.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad6f1b9849b2553b1378a4043f83721f3"><div>
+          <section class="m-doc-details" id="a0ab1c6d1f804bfaabaaf8df308567545"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"> EnumTrait::<wbr />Variant::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad6f1b9849b2553b1378a4043f83721f3" class="m-doc-self">Variant</a>(</span><span class="m-doc-wrap">std::string name,
-              <a href="classEnumTrait_1_1Variant.html#a861b6405b465565aefe338ddae2887f3" class="m-doc">Tester</a> tester,
-              <a href="classEnumTrait_1_1Variant.html#a8e1958246ae0dd5685a5f61d2947decb" class="m-doc">Setter</a> setter)</span></span>
+              <span class="m-doc-wrap-bumper">bool cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0ab1c6d1f804bfaabaaf8df308567545" class="m-doc-self">isNull</a>(</span><span class="m-doc-wrap">const void* instance) const</span></span>
             </h3>
-            <p>Constructs a variant with a given name, tester function, and setter function.</p>
+            <p>Checks if the given value represents null.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">name</td>
-                  <td>Name of the variant.</td>
-                </tr>
-                <tr>
-                  <td>tester</td>
-                  <td>Function to test if a value matches the variant.</td>
-                </tr>
-                <tr>
-                  <td>setter</td>
-                  <td>Function to set the value of the variant.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="a5aae13a1f2ac7b747c90786a49dfee29"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool EnumTrait::<wbr />Variant::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5aae13a1f2ac7b747c90786a49dfee29" class="m-doc-self">test</a>(</span><span class="m-doc-wrap">const void* value) const</span></span>
-            </h3>
-            <p>Tests if the given value matches the variant.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">value</td>
-                  <td>Pointer to the value to test.</td>
+                  <td style="width: 1%">instance</td>
+                  <td>Instance.</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>True if the value matches the variant, false otherwise.</td>
+                  <td>Whether the value represents null.</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad7253c58e2e9af7747f30ab3e2b37d08"><div>
+          <section class="m-doc-details" id="a38635a82e1a7c7b0282afaaccd19e797"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void EnumTrait::<wbr />Variant::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad7253c58e2e9af7747f30ab3e2b37d08" class="m-doc-self">set</a>(</span><span class="m-doc-wrap">void* value) const</span></span>
+              <span class="m-doc-wrap-bumper">void cubos::<wbr />core::<wbr />reflection::<wbr />NullableTrait::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38635a82e1a7c7b0282afaaccd19e797" class="m-doc-self">setToNull</a>(</span><span class="m-doc-wrap">void* instance) const</span></span>
             </h3>
-            <p>Sets the value of the variant in the provided memory location.</p>
+            <p>Sets a value to its null representation.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">value</td>
-                  <td>Pointer to the memory location to set.</td>
+                  <td style="width: 1%">instance</td>
+                  <td>Instance.</td>
                 </tr>
               </tbody>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ab6389b99eaf28848f044f49faa241ddd"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">const std::string&amp; EnumTrait::<wbr />Variant::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab6389b99eaf28848f044f49faa241ddd" class="m-doc-self">name</a>(</span><span class="m-doc-wrap">) const</span></span>
-            </h3>
-            <p>Returns the name of the variant.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>Name of the variant.</td>
-                </tr>
-              </tfoot>
             </table>
           </div></section>
         </section>
