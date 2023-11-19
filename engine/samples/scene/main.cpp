@@ -1,4 +1,4 @@
-#include <cubos/core/data/old/debug_serializer.hpp>
+#include <cubos/core/data/ser/debug.hpp>
 #include <cubos/core/memory/stream.hpp>
 
 #include <cubos/engine/assets/plugin.hpp>
@@ -46,17 +46,22 @@ static void spawnScene(Commands commands, Read<Assets> assets)
 /// [Displaying the scene]
 static void printStuff(Read<World> world)
 {
-    using cubos::core::data::old::Context;
-    using cubos::core::data::old::DebugSerializer;
-    using cubos::core::data::old::SerializationMap;
+    using cubos::core::data::DebugSerializer;
     using cubos::core::memory::Stream;
+
+    DebugSerializer ser{Stream::stdOut};
 
     for (auto entity : *world)
     {
-        auto name = std::to_string(entity.index);
-        auto ser = DebugSerializer(Stream::stdOut);
-        auto pkg = world->pack(entity);
-        ser.write(pkg, name.c_str());
+        Stream::stdOut.printf("Entity ");
+        ser.write(entity);
+        Stream::stdOut.put('\n');
+        for (auto [type, value] : world->components(entity))
+        {
+            Stream::stdOut.printf("- {}: ", type->name());
+            ser.write(*type, value);
+            Stream::stdOut.put('\n');
+        }
         Stream::stdOut.put('\n');
     }
 }
