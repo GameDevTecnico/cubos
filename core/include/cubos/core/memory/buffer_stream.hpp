@@ -44,6 +44,10 @@ namespace cubos::core::memory
         /// @return Buffer.
         const void* getBuffer() const;
 
+        /// @brief Creates a string from the buffer of this stream.
+        /// @return String.
+        std::string string() const;
+
         // Method implementations.
 
         std::size_t read(void* data, std::size_t size) override;
