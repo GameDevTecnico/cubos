@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>engine/imgui/serialization.hpp file | CUBOS. Docs</title>
+  <title>tesseratos/asset_explorer/popup.hpp file | CUBOS. Docs</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -46,9 +46,9 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_bafb7af0e03e95b24a45ff63060ab57b.html">engine</a>/</span><span class="m-breadcrumb"><a href="dir_459dda10180a6131eb62bc74e02d0b6e.html">imgui</a>/</span>serialization.hpp <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="dir_2a25e2bce65ce0f842dba5b7b3a0e22d.html">tesseratos</a>/</span><span class="m-breadcrumb"><a href="dir_4149d46e02eca8eae23b140f2d5369cf.html">asset_explorer</a>/</span>popup.hpp <span class="m-thin">file</span>
         </h1>
-        <p>Functions for showing and editing serializable objects in the UI.</p>
+        <p>Utility function to show up a popup containing assets with given type.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -64,37 +64,27 @@
         <section id="namespaces">
           <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>namespace <a href="namespacecubos.html" class="m-doc">cubos</a></dt>
-            <dd><strong>CUBOS</strong>. libraries namespace.</dd>
-            <dt>namespace <a href="namespacecubos_1_1engine.html" class="m-doc">cubos::engine</a></dt>
-            <dd><a href="group__engine.html" class="m-doc">Engine</a> module.</dd>
+            <dt>namespace <a href="namespacetesseratos.html" class="m-doc">tesseratos</a></dt>
+            <dd><a href="group__tesseratos.html" class="m-doc">Tesseratos</a> module.</dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#gaad8284c8ccc70830a282436f748249ce" class="m-doc">imguiShowPackage</a>(</span><span class="m-doc-wrap">const core::data::old::Package&amp; pkg,
-              const std::string&amp; name)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacetesseratos.html#a35e8918ab93d0b2e3098c18ba4c923b8" class="m-doc">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
+              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>&amp; selectedAsset,
+              const <a href="classcubos_1_1core_1_1reflection_1_1Type.html" class="m-doc">cubos::<wbr />core::<wbr />reflection::<wbr />Type</a>&amp; type,
+              const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&amp; assets) -&gt; bool</span>
             </dt>
-            <dd>Shows a packaged object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga87aecc746c1b4f20e517d7c133164e46" class="m-doc">imguiEditPackage</a>(</span><span class="m-doc-wrap">core::data::old::Package&amp; pkg,
-              const std::string&amp; name) -&gt; bool</span>
-            </dt>
-            <dd>Shows a packaged object&#x27;s properties in the UI, allowing the user to edit the object. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dd>Displays a modal popup to select an asset of a specified type.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="group__imgui-plugin.html#ga83b794c814a456d3783f3500d4995362" class="m-doc">imguiShow</a>(</span><span class="m-doc-wrap">const T&amp; object,
-              const std::string&amp; name)</span>
+              <span class="m-doc-wrap-bumper">auto <a href="namespacetesseratos.html#a0becf5f97e0bb1f761d4df74b01697ff" class="m-doc">assetSelectionPopup</a>(</span><span class="m-doc-wrap">const std::string&amp; title,
+              <a href="classcubos_1_1engine_1_1AnyAsset.html" class="m-doc">cubos::<wbr />engine::<wbr />AnyAsset</a>&amp; selectedAsset,
+              const <a href="classcubos_1_1engine_1_1Assets.html" class="m-doc">cubos::<wbr />engine::<wbr />Assets</a>&amp; assets) -&gt; bool</span>
             </dt>
-            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(2)</code> and <code>ImGui::EndTable()</code> block.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename T&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__imgui-plugin.html#ga8ae098030e5492587b5e53e49194ec75" class="m-doc">imguiEdit</a>(</span><span class="m-doc-wrap">T&amp; object,
-              const std::string&amp; name) -&gt; bool</span>
-            </dt>
-            <dd>Shows a serializable object&#x27;s properties in the UI. Should be called inside a <code>ImGui::BeginTable(3)</code> and <code>ImGui::EndTable()</code> block.</dd>
+            <dd>Displays a modal popup to select an asset of a specified type.</dd>
           </dl>
         </section>
       </div>
