@@ -22,7 +22,6 @@ The following dependencies are used to compile **CUBOS.**:
 | [glad](https://github.com/Dav1dde/glad)             | Essential                 | `core/lib/glad`    | No                   | 2.0.4    |
 | [glfw](https://github.com/glfw/glfw)                | Essential                 | `core/lib/glfw`    | Optionally           | 3.3.8    |
 | [glm](https://github.com/g-truc/glm)                | Essential                 | `core/lib/glm`     | Optionally           | 0.9.9.8  |
-| [spdlog](https://github.com/gabime/spdlog)          | Essential                 | `core/lib/spdlog`  | Optionally (broken)  | 1.9.1    |
 | [fmt](https://github.com/fmtlib/fmt)                | Essential                 | `core/lib/fmt`     | Optionally (broken)  | 8.0.1    |
 | [stduuid](https://github.com/mariusbancila/stduuid) | Essential                 | `core/lib/stduuid` | No                   | 1.2.3    |
 | [doctest](https://github.com/doctest/doctest)       | Required for tests        | `core/lib/doctest` | Optionally           | 2.4.11   |
@@ -78,7 +77,6 @@ The following is a list of all the options available to configure the engine:
 | `GLFW_USE_SUBMODULE`    | Compile glfw from source?            |
 | `GLM_USE_SUBMODULE`     | Compile glm from source?             |
 | `DOCTEST_USE_SUBMODULE` | Compile doctest from source?         |
-| `SPDLOG_USE_SUBMODULE`  | Compile spdlog from source?          |
 | `FMT_USE_SUBMODULE`     | Compile fmt from source?             |
 | `BUILD_CORE_SAMPLES`    | Build **CUBOS.** `core` samples?     |
 | `BUILD_CORE_TESTS`      | Build **CUBOS.** `core` tests?       |

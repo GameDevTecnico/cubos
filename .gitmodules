@@ -4,9 +4,6 @@
 [submodule "core/lib/glm"]
 	path = core/lib/glm
 	url = https://github.com/g-truc/glm.git
-[submodule "core/lib/spdlog"]
-	path = core/lib/spdlog
-	url = https://github.com/gabime/spdlog
 [submodule "core/lib/fmt"]
 	path = core/lib/fmt
 	url = https://github.com/fmtlib/fmt.git
