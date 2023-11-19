@@ -31,7 +31,6 @@
             # = libs =
             glfw
             glm
-            # fmt
             doctest
 
             # = system libs =
